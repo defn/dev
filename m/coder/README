@@ -1,26 +1,29 @@
+name=district
+
 python -mvenv venv
 source venv/bin/activate
 pip install certbot certbot-dns-cloudflare
-cp cloudflare.ini.example cloudflare.init
-certbot certonly --dns-cloudflare --dns-cloudflare-credentials cloudflare.ini -d '*.kowloon.defn.run' --config-dir . --work-dir . --logs-dir .
+cp cloudflare.ini.example cloudflare.ini
+chmod 0600 cloudflare.ini
+# put cloudflare token in cloudflare.ini
+certbot certonly --dns-cloudflare --dns-cloudflare-credentials cloudflare.ini -d "*.${name}.defn.run" --config-dir . --work-dir . --logs-dir .
 
-select a name, i.e. kowloon
 create github app at https://github.com/organizations/defn/settings/applications
-use homepage https://coder.school.amanibhavam.defn.run
-callback https://coder.school.amanibhavam.defn.run/api/v2/users/oauth2/github/callback
+use homepage https://coder.${name}.defn.run
+callback https://coder.${name}.defn.run/api/v2/users/oauth2/github/callback
 
-create *.kowloon.defn.run to server Tailscale IP
-
+~/.envrc:
 export coder_oauth2_github_allowed_orgs=defn
 export coder_oauth2_github_allowed_teams=defn/dev
-export coder_oauth2_github_client_id_kowloon=
-export coder_oauth2_github_client_secret_kowloon=
+export coder_oauth2_github_client_id_${name}=
+export coder_oauth2_github_client_secret_${name}=
+
+create cloudflare tunnel to handle *.${name}.defn.run
+https://one.dash.cloudflare.com/b79aab534a3aa420f993ca0c14fe0523/networks/tunnels/new
+proxy to http://localhost:3000
+create proxied CNAME from *.${name} to tunnelID.cfargotunnel.com
 
 cd
-make chrome-dev-coder name=kowloon
-
-https://coder.kowloon.defn.run/api/v2/users/oauth2/github/callback
-
-
-sudo apt install -y socat
-make chrome-dev-socat
+sudo chmod 1777 /tmp/uscreens
+screen -DRR coder
+make chrome-dev-coder name=${name}
