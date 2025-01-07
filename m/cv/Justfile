@@ -33,7 +33,7 @@ user uname stage1="yes" stage2="no":
 
 process file stage1="yes" stage2="no" fast="":
     just index {{ file }} {{ stage1 }} {{ stage2 }}
-    cat {{ file }}.input | bash etc/cols.sh yes thumbs 6 /thumbs > {{ file }}.html.2
+    cat {{ file }}.input | bash etc/cols.sh yes thumbs /thumbs > {{ file }}.html.2
     mv {{ file }}.html.2 {{ file }}.$$.big.html
     cat {{ file }}.input | wc -l
 
