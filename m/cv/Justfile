@@ -6,7 +6,7 @@ eod:
     mkdir -p no
     rm -rf replicate/js
     mkdir -p replicate/js
-    find thumbs t2 img -type f -size +100c | runmany 64 'echo $1; truncate $1 --size 0'
+    find thumbs t2 img yodayo/dl -type f -size +100c | runmany 64 'echo $1; truncate $1 --size 0'
 
 
 json file="js.json":
