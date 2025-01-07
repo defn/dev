@@ -15,7 +15,15 @@ if [[ ${WORKDIR} == '${workspaceFolder}' ]]; then
 fi
 
 export workdir="${WORKDIR}"
-export TMOUT=3600
+case "$(declare -p TMOUT | grep ^declare | awk '{print $2}')" in
+	*r*)
+		true
+		;;
+	*)
+		export TMOUT=3600
+		;;
+esac
+export HISTSIZE=100000
 
 if test -f ~/.bash_profile; then
 	source ~/.bash_profile
