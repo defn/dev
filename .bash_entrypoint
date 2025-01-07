@@ -15,7 +15,7 @@ if [[ ${WORKDIR} == '${workspaceFolder}' ]]; then
 fi
 
 export workdir="${WORKDIR}"
-case "$(declare -p TMOUT | grep ^declare | awk '{print $2}')" in
+case "$(declare -p TMOUT 2>/dev/null | grep ^declare | awk '{print $2}')" in
 	*r*)
 		true
 		;;
