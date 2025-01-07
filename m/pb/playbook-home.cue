@@ -21,6 +21,10 @@ role: home_flakes: tasks: [{
 	name:  "Install home nix flakes"
 	shell: "(pkill -f -9 baze[l] || true) && cd && source .bash_profile && git pull && make nix home && mise trust && mise install"
 	args: executable: "/bin/bash"
+	register: "home_flakes"
+	until:    "home_flakes is success"
+	retries:  1
+	delay:    1
 }]
 
 role: home_cache: tasks: [{
