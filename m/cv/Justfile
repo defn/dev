@@ -117,7 +117,7 @@ reset-inner:
     rm -f js-* js.json.* js.json || true
 
 ersgan n="32":
-    just t2
+    just t2 || true
     rm -f .something
     cat <(find t2 -name '*.png' | cut -d/ -f2 | cut -d. -f1) <(find replicate/img/ -name '*.png' | cut -d/ -f3 | cut -d. -f1) | sort | uniq -c | grep -v ' 2 ' | awk '{print $NF}' | sort | runmany 'touch .something'
     cat <(find replicate/img -name '*.png' | cut -d/ -f3 | cut -d. -f1) <(find replicate/t2 -name '*.png' | cut -d/ -f3 | cut -d. -f1) <(find replicate/t2 -name '*.png' | cut -d/ -f3 | cut -d. -f1) | sort | uniq -c | grep ' 1 ' | awk '{print $NF}' | runmany 'touch .something'
@@ -140,7 +140,7 @@ ersgan-inner n:
     sudo tailscale serve status
     just db-img
     just db-size
-    for a in yes replicate/*/; do echo "$a $(find $a -type f | wc -l)"; done
+    for a in yes replicate/{img,t2}; do echo "$a $(find $a -type f | wc -l)"; done
     echo "sqlite $(echo 'select count(*) from img' | sqlite3 cv.db)"
 
 fm-start:
