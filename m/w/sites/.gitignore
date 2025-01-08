@@ -1,5 +1,6 @@
 # build output
-dist/
+*/dist
+!amanibhav.am/dist
 # generated types
 .astro/
 
