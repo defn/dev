@@ -365,9 +365,6 @@ Content-Disposition: attachment; filename="userdata.txt"
 
 set -x
 
-nohup cat /zfs/nix.zfs >/dev/null &
-nohup cat /zfs/work.zfs >/dev/null &
-
 echo 'net.ipv4.ip_forward = 1' | sudo tee -a /etc/sysctl.d/99-dfd.conf
 echo 'net.ipv6.conf.all.forwarding = 1' | sudo tee -a /etc/sysctl.d/99-dfd.conf
 echo 'fs.inotify.max_user_instances = 10000' | sudo tee -a /etc/sysctl.d/99-dfd.conf
