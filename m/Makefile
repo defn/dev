@@ -16,6 +16,9 @@ proxy ?= proxy3
 install:
 	npm -q --no-update-notifier --no-audit install
 
+home:
+	cd && $(MAKE) home
+
 work ?=
 dev-macos:
 # keep this for the folder-uri opening technique
