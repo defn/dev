@@ -388,17 +388,26 @@ else
   zfs_disk=nvme0n1
 fi
 
+# TODO support arm64
+curl -sSL -O https://github.com/peak/s5cmd/releases/download/v2.3.0/s5cmd_2.3.0_linux_amd64.deb
+dpkg -i s5cmd_2.3.0_linux_amd64.deb 
+rm -f s5cmd_2.3.0_linux_amd64.deb 
+
 zpool create nix "/dev/$zfs_disk"
 zfs set mountpoint=/nix nix
 zfs set atime=off nix
-zfs set compression=on nix
+zfs set compression=off nix
+zfs set dedup=on nix
 
-cat /zfs/nix.zfs | pigz -d | zfs receive -F nix
+s5cmd cat s3://dfn-defn-global-defn-org/zfs/nix.zfs | zfs receive -F nix
 
 zfs create nix/work
 zfs set mountpoint=/home/ubuntu/work nix/work
 zfs set atime=off nix/work
-zfs set compression=on nix/work
+zfs set compression=off nix/work
+zfs set dedup=on nix/work
+
+s5cmd cat s3://dfn-defn-global-defn-org/zfs/work.zfs | zfs receive -F nix/work
 
 systemctl stop docker || true
 zfs create nix/docker
@@ -416,7 +425,7 @@ nohup sudo -H -u ${data.coder_parameter.username.value} env \
   CODER_INIT_SCRIPT_BASE64=${base64encode(coder_agent.main.init_script)} \
   CODER_AGENT_URL="${data.coder_workspace.me.access_url}" \
   CODER_NAME="coder-${data.coder_workspace_owner.me.name}-${data.coder_workspace.me.name}" \
-    bash -c 'cd && git pull && source .bash_profile && bin/persist-cache && cd m && make home && exec just coder::coder-agent' >>/tmp/user-data.log 2>&1 &
+    bash -c 'cd && git pull && source .bash_profile && bin/persist-cache && (s5cmd cat s3://dfn-defn-global-defn-org/zfs/nix.tar.gz | tar xfz -) && cd m && (cd m/cache/docker && make init registry k3d) && exec just coder::coder-agent' >>/tmp/user-data.log 2>&1 &
 disown
 
 --//--
