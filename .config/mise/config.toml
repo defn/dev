@@ -1,2 +1,5 @@
 [settings]
 experimental = true
+
+[tools]
+"ubi:peak/s5cmd" = "latest"
