@@ -5,7 +5,6 @@ set -e
 function main {
 	cd
 	source .bash_profile
-	bin/persist-cache
 
 	git config lfs.https://github.com/defn/dev.git/info/lfs.locksverify false
 
@@ -20,13 +19,18 @@ function main {
 	esac
 
 	git pull
-
 	(
 		mise trust
 		mise install
+	)
+	(
 		cd m
 		mise trust
 		mise install
+	)
+	(
+		cd m/cache/docker
+		make init registry k3d
 	)
 
 	(

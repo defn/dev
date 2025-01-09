@@ -365,9 +365,6 @@ Content-Disposition: attachment; filename="userdata.txt"
 
 set -x
 
-nohup cat /zfs/nix.zfs >/dev/null &
-nohup cat /zfs/work.zfs >/dev/null &
-
 echo 'net.ipv4.ip_forward = 1' | sudo tee -a /etc/sysctl.d/99-dfd.conf
 echo 'net.ipv6.conf.all.forwarding = 1' | sudo tee -a /etc/sysctl.d/99-dfd.conf
 echo 'fs.inotify.max_user_instances = 10000' | sudo tee -a /etc/sysctl.d/99-dfd.conf
@@ -388,17 +385,26 @@ else
   zfs_disk=nvme0n1
 fi
 
+# TODO support arm64
+curl -sSL -O https://github.com/peak/s5cmd/releases/download/v2.3.0/s5cmd_2.3.0_linux_amd64.deb
+dpkg -i s5cmd_2.3.0_linux_amd64.deb 
+rm -f s5cmd_2.3.0_linux_amd64.deb 
+
 zpool create nix "/dev/$zfs_disk"
 zfs set mountpoint=/nix nix
 zfs set atime=off nix
-zfs set compression=on nix
+zfs set compression=off nix
+zfs set dedup=on nix
 
-cat /zfs/nix.zfs | pigz -d | zfs receive -F nix
+s5cmd cat s3://dfn-defn-global-defn-org/zfs/nix.zfs | zfs receive -F nix
 
 zfs create nix/work
 zfs set mountpoint=/home/ubuntu/work nix/work
 zfs set atime=off nix/work
-zfs set compression=on nix/work
+zfs set compression=off nix/work
+zfs set dedup=on nix/work
+
+s5cmd cat s3://dfn-defn-global-defn-org/zfs/work.zfs | zfs receive -F nix/work
 
 systemctl stop docker || true
 zfs create nix/docker
@@ -408,15 +414,15 @@ zfs set compression=on nix/docker
 systemctl start docker || true
 usermod -G docker ubuntu
 
-install -d -m 0755 -o ubuntu -g ubuntu /run/user/1000 /run/user/1000/gnupg
-install -d -m 0755 -o ubuntu -g ubuntu /nix /nix
-install -d -m 1777 -o ubuntu -g ubuntu /tmp/uscreens
+install -d -m 0754 -o ubuntu -g ubuntu /run/user/1000 /run/user/1000/gnupg
+install -d -m 0754 -o ubuntu -g ubuntu /nix /nix
+install -d -m 1776 -o ubuntu -g ubuntu /tmp/uscreens
 
 nohup sudo -H -u ${data.coder_parameter.username.value} env \
   CODER_INIT_SCRIPT_BASE64=${base64encode(coder_agent.main.init_script)} \
   CODER_AGENT_URL="${data.coder_workspace.me.access_url}" \
   CODER_NAME="coder-${data.coder_workspace_owner.me.name}-${data.coder_workspace.me.name}" \
-    bash -c 'cd && git pull && source .bash_profile && bin/persist-cache && cd m && make home && exec just coder::coder-agent' >>/tmp/user-data.log 2>&1 &
+    bash -c 'cd && git pull && source .bash_profile && bin/persist-cache && (s5cmd cat s3://dfn-defn-global-defn-org/zfs/nix.tar.gz | tar xfz -) && cd m && exec just coder::coder-agent' >>/tmp/user-data.log 2>&1 &
 disown
 
 --//--
@@ -438,11 +444,11 @@ EOF
     volume_size           = data.coder_parameter.nix_volume_size.value
     volume_type           = "gp3"
   }
-  lifecycle {
-    ignore_changes = [
-      ami,
-    ]
-  }
+  #lifecycle {
+  #  ignore_changes = [
+  #    ami,
+  #  ]
+  #}
 }
 
 resource "coder_metadata" "dev_metadata" {
