@@ -6,6 +6,9 @@ steps: [{
 }, {
 	label:   "bazel build"
 	command: "./.buildkite/bin/bazel-build.sh"
+}, {
+	label:   "home build"
+	command: "./.buildkite/bin/home-build.sh"
 }]
 
 #RunAsUbuntu: securityContext: {
