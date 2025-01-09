@@ -16,6 +16,7 @@ spec:
       containers:
         - name: demo
           image: 169.254.32.1:5000/defn/dev:latest
+          imagePullPolicy: Always
           ports:
             - containerPort: 2345
 ---

@@ -27,4 +27,4 @@ RUN sudo apt-get update && sudo apt-get install -y xz-utils curl sudo git make d
 RUN echo "ubuntu ALL=(ALL) NOPASSWD:ALL" | sudo tee -a /etc/sudoers
 
 ENTRYPOINT [ "bash", "-c" ]
-CMD [ "git reset --hard && git pull && source .bash_profile && bin/persist-cache; exec /home/ubuntu/bin/nix/coder server" ]
+CMD [ "git reset --hard && git pull && source .bash_profile && bin/persist-cache && mise trust; exec sleep infinity" ]
