@@ -13,3 +13,12 @@ services:
       - ./certs:/certs
       - ./images:/var/lib/registry
     restart: unless-stopped
+    labels:
+      "app": "k3d"
+      "k3d.cluster": ""
+      "k3d.registry.host": ""
+      "k3d.registry.hostIP": "0.0.0.0"
+      "k3d.role": "registry"
+      "k3d.version": "v5.7.5"
+      "k3s.registry.port.external": "5000"
+      "k3s.registry.port.internal": "5000"

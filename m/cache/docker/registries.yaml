@@ -1,0 +1,9 @@
+mirrors:
+  "169.254.32.1:5000":
+    endpoint:
+      - https://169.254.32.1:5000"
+
+configs:
+  "169.254.32.1:5000":
+    tls:
+      ca_file: "/etc/ssl/certs/registry.crt"
