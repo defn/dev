@@ -19,6 +19,18 @@ function main {
 		;;
 	esac
 
+	git pull
+
+	(
+		mise trust
+		mise install
+		cd m
+		mise trust
+		mise install
+	)
+
+	make home
+
 	(
 		set +x
 		cd m

@@ -416,7 +416,7 @@ nohup sudo -H -u ${data.coder_parameter.username.value} env \
   CODER_INIT_SCRIPT_BASE64=${base64encode(coder_agent.main.init_script)} \
   CODER_AGENT_URL="${data.coder_workspace.me.access_url}" \
   CODER_NAME="coder-${data.coder_workspace_owner.me.name}-${data.coder_workspace.me.name}" \
-    bash -c 'cd && source .bash_profile && cd m && mise trust && exec just coder::coder-agent' >>/tmp/user-data.log 2>&1 &
+    bash -c 'cd && git pull && source .bash_profile && bin/persist-cache && cd m && make home && exec just coder::coder-agent' >>/tmp/user-data.log 2>&1 &
 disown
 
 --//--
