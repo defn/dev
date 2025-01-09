@@ -422,7 +422,7 @@ nohup sudo -H -u ${data.coder_parameter.username.value} env \
   CODER_INIT_SCRIPT_BASE64=${base64encode(coder_agent.main.init_script)} \
   CODER_AGENT_URL="${data.coder_workspace.me.access_url}" \
   CODER_NAME="coder-${data.coder_workspace_owner.me.name}-${data.coder_workspace.me.name}" \
-    bash -c 'cd && git pull && source .bash_profile && bin/persist-cache && (s5cmd cat s3://dfn-defn-global-defn-org/zfs/nix.tar.gz | tar xfz -) && cd m && (cd m/cache/docker && make init registry k3d) && exec just coder::coder-agent' >>/tmp/user-data.log 2>&1 &
+    bash -c 'cd && git pull && source .bash_profile && bin/persist-cache && (s5cmd cat s3://dfn-defn-global-defn-org/zfs/nix.tar.gz | tar xfz -) && cd m && (cd cache/docker && make init registry k3d) && exec just coder::coder-agent' >>/tmp/user-data.log 2>&1 &
 disown
 
 --//--
@@ -444,11 +444,11 @@ EOF
     volume_size           = data.coder_parameter.nix_volume_size.value
     volume_type           = "gp3"
   }
-  lifecycle {
-    ignore_changes = [
-      ami,
-    ]
-  }
+  #lifecycle {
+  #  ignore_changes = [
+  #    ami,
+  #  ]
+  #}
 }
 
 resource "coder_metadata" "dev_metadata" {
