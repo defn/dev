@@ -11,7 +11,6 @@ registry:
 	docker compose up -d --remove-orphans
 
 k3d:
-	$(MAKE) up
 	docker pull nginx		
 	docker tag nginx:latest 169.254.32.1:5000/nginx:latest
 	docker push 169.254.32.1:5000/nginx:latest
@@ -20,4 +19,3 @@ k3d:
 		--volume "$(PWD)/certs/registry.crt:/etc/ssl/certs/registry.crt"
 	kubectl create ns demo || true
 	kubectl apply -f nginx.yaml
-	kubectl get events -w
