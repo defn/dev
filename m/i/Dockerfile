@@ -23,5 +23,7 @@ RUN bash -c 'source .bash_profile && git reset --hard && git pull'
 RUN bash -c 'source .bash_profile && bin/persist-cache && make nix'
 RUN bash -c 'source .bash_profile && bin/persist-cache && make install'
 
-ENTRYPOINT [ "bash", "-c" ]
+RUN sud apt-get update && sud apt-get install -y tini
+
+ENTRYPOINT [ "/bin/tini", "bash", "--", "-c" ]
 CMD [ "git reset --hard && git pull && source .bash_profile && bin/persist-cache && mise trust && mise install && cd m && mise trust && mise install; exec sleep infinity" ]
