@@ -1,6 +1,6 @@
 FROM ubuntu:24.04 AS nix
 
-RUN apt-get update && apt-get install -y xz-utils curl sudo git make direnv gpg rsync
+RUN apt-get update && apt-get install -y xz-utils curl sudo git make direnv gpg rsync ca-certificates bc
 
 RUN echo "ubuntu ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 
@@ -23,8 +23,5 @@ RUN bash -c 'source .bash_profile && git reset --hard && git pull'
 RUN bash -c 'source .bash_profile && bin/persist-cache && make nix'
 RUN bash -c 'source .bash_profile && bin/persist-cache && make install'
 
-RUN sudo apt-get update && sudo apt-get install -y xz-utils curl sudo git make direnv gpg rsync ca-certificates bc
-RUN echo "ubuntu ALL=(ALL) NOPASSWD:ALL" | sudo tee -a /etc/sudoers
-
 ENTRYPOINT [ "bash", "-c" ]
-CMD [ "git reset --hard && git pull && source .bash_profile && bin/persist-cache && mise trust; exec sleep infinity" ]
+CMD [ "git reset --hard && git pull && source .bash_profile && bin/persist-cache && mise trust && mise install && cd m && mise trust && mise install; exec sleep infinity" ]
