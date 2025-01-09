@@ -49,7 +49,8 @@ ci:
 	$(MAKE) ci_inner
 
 ci_inner:
-	env BUILDKITE_AGENT_DISCONNECT_AFTER_IDLE_TIMEOUT=$(timeout) buildkite-agent start --build-path ~/work/buildkite-agent --plugins-path ~/work/buildkite-plugins --token "$$(pass BUILDKITE_AGENT_TOKEN)"
+	mkdir -p ~/work/buildkite-{agent,plugins}
+	env BUILDKITE_AGENT_DISCONNECT_AFTER_IDLE_TIMEOUT=$(timeout) buildkite-agent start --build-path ~/work/buildkite-agent --plugins-path ~/work/buildkite-plugins --token "$(BUILDKITE_AGENT_TOKEN)"
 
 ci_web:
 	cd defn/dev/www && $(MAKE) build

@@ -3,4 +3,5 @@
 set -e
 
 source .bash_profile
-trunk check --ci || true
+cd m/i
+make latest

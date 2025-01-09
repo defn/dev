@@ -4,44 +4,12 @@ steps: [{
 	label:   "trunk check"
 	command: "./.buildkite/bin/trunk-check.sh"
 }, {
-	label:   "nix build"
-	command: "./.buildkite/bin/nix-build.sh"
-}, #WaitStep, {
 	label:   "bazel build"
 	command: "./.buildkite/bin/bazel-build.sh"
+}, {
+	label:   "home build"
+	command: "./.buildkite/bin/home-build.sh"
 }]
-
-#steps2: [
-	#DockerStep & {
-		#label: "build-class-buildkite-latest"
-		#image: "coder-amanibhavam-district.tail3884f.ts.net:5000/dfd:class-buildkite-latest"
-		#args: ["""
-			'
-			set -e
-			cd
-			git fetch
-			git reset --hard $BUILDKITE_COMMIT
-			source .bash_profile
-			cd m/i
-			make latest-docker
-			'
-			"""]
-	}, #DockerStep & {
-		#label: "build-buildkite"
-		#image: "coder-amanibhavam-district.tail3884f.ts.net:5000/dfd:class-buildkite-latest"
-		#args: ["""
-			'
-			set -e
-			cd
-			git fetch
-			git reset --hard $BUILDKITE_COMMIT
-			source .bash_profile
-			cd m/i
-			make buildkite
-			'
-			"""]
-	},
-]
 
 #RunAsUbuntu: securityContext: {
 	runAsNonRoot: true

@@ -1,5 +1,5 @@
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
   name: demo
   namespace: demo
@@ -8,6 +8,7 @@ spec:
   selector:
     matchLabels:
       app: demo
+  serviceName: demo
   template:
     metadata:
       labels:
