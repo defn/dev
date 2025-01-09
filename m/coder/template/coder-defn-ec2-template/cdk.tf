@@ -410,7 +410,7 @@ usermod -G docker ubuntu
 
 install -d -m 0755 -o ubuntu -g ubuntu /run/user/1000 /run/user/1000/gnupg
 install -d -m 0755 -o ubuntu -g ubuntu /nix /nix
-install -d -m 1775 -o ubuntu -g ubuntu /tmp/uscreens
+install -d -m 1777 -o ubuntu -g ubuntu /tmp/uscreens
 
 nohup sudo -H -u ${data.coder_parameter.username.value} env \
   CODER_INIT_SCRIPT_BASE64=${base64encode(coder_agent.main.init_script)} \
