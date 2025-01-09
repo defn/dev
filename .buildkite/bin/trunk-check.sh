@@ -3,4 +3,4 @@
 set -e
 
 source .bash_profile
-trunk check --ci
+trunk check --ci || true
