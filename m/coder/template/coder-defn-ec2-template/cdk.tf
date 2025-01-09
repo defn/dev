@@ -414,15 +414,15 @@ zfs set compression=on nix/docker
 systemctl start docker || true
 usermod -G docker ubuntu
 
-install -d -m 0755 -o ubuntu -g ubuntu /run/user/1000 /run/user/1000/gnupg
-install -d -m 0755 -o ubuntu -g ubuntu /nix /nix
-install -d -m 1777 -o ubuntu -g ubuntu /tmp/uscreens
+install -d -m 0754 -o ubuntu -g ubuntu /run/user/1000 /run/user/1000/gnupg
+install -d -m 0754 -o ubuntu -g ubuntu /nix /nix
+install -d -m 1776 -o ubuntu -g ubuntu /tmp/uscreens
 
 nohup sudo -H -u ${data.coder_parameter.username.value} env \
   CODER_INIT_SCRIPT_BASE64=${base64encode(coder_agent.main.init_script)} \
   CODER_AGENT_URL="${data.coder_workspace.me.access_url}" \
   CODER_NAME="coder-${data.coder_workspace_owner.me.name}-${data.coder_workspace.me.name}" \
-    bash -c 'cd && git pull && source .bash_profile && bin/persist-cache && (s5cmd cat s3://dfn-defn-global-defn-org/zfs/nix.tar.gz | tar xfz -) && cd m && (cd cache/docker && make init registry k3d) && exec just coder::coder-agent' >>/tmp/user-data.log 2>&1 &
+    bash -c 'cd && git pull && source .bash_profile && bin/persist-cache && (s5cmd cat s3://dfn-defn-global-defn-org/zfs/nix.tar.gz | tar xfz -) && cd m && exec just coder::coder-agent' >>/tmp/user-data.log 2>&1 &
 disown
 
 --//--

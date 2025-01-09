@@ -19,8 +19,16 @@ function main {
 	esac
 
 	git pull
-	mise trust
-	(cd m; mise trust)
+	(
+		mise trust
+		mise install
+	)
+	(
+		cd m
+		mise trust
+		mise install
+	)
+	(cd m/cache/docker && make init registry k3d)
 
 	(
 		set +x
