@@ -25,5 +25,9 @@ clean-snapshot:
 	packer build -color=true -timestamp-ui=true $@.pkr.hcl
 
 home:
-	docker build -t 169.254.32.1:5000/defn/dev:latest . 
-	docker push 169.254.32.1:5000/defn/dev:latest  
+	docker build -t 169.254.32.1:5000/defn/dev:base . 
+	docker push 169.254.32.1:5000/defn/dev:base
+
+latest:
+	docker build --no-cache -t 169.254.32.1:5000/defn/dev:latest -f Dockerfile.latest . 
+	docker push 169.254.32.1:5000/defn/dev:latest
