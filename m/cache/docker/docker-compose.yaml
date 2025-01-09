@@ -1,0 +1,15 @@
+version: "3"
+
+services:
+  k3d-registry:
+    image: registry:2
+    container_name: k3d-registry
+    ports:
+      - "169.254.32.1:5000:5000"
+    environment:
+      - REGISTRY_HTTP_TLS_CERTIFICATE=/certs/registry.crt
+      - REGISTRY_HTTP_TLS_KEY=/certs/registry.key
+    volumes:
+      - ./certs:/certs
+      - ./images:/var/lib/registry
+    restart: unless-stopped
