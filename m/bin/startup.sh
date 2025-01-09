@@ -19,6 +19,8 @@ function main {
 	esac
 
 	git pull
+	mise trust
+	(cd m; mise trust)
 
 	(
 		set +x
