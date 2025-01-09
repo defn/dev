@@ -29,8 +29,6 @@ function main {
 		mise install
 	)
 
-	make home
-
 	(
 		set +x
 		cd m
