@@ -6,6 +6,7 @@ services:
     container_name: k3d-registry
     ports:
       - "169.254.32.1:5000:5000"
+      - "127.0.0.1:5000:5000"
     environment:
       - REGISTRY_HTTP_TLS_CERTIFICATE=/certs/registry.crt
       - REGISTRY_HTTP_TLS_KEY=/certs/registry.key
