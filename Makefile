@@ -363,7 +363,7 @@ zfs:
 	sudo zfs snapshot nix/work@latest
 	sudo zfs send nix@latest | pv | s5cmd pipe s3://dfn-defn-global-defn-org/zfs/nix.zfs
 	sudo zfs send nix/work@latest | pv | s5cmd pipe s3://dfn-defn-global-defn-org/zfs/work.zfs
-	tar cfz - bin/nix .nix*  | pv | s5cmd pipe s3://dfn-defn-global-defn-org/zfs/nix.tar.gz
+	tar cfz - bin/nix .nix* .local/state/nix | pv | s5cmd pipe s3://dfn-defn-global-defn-org/zfs/nix.tar.gz
 
 build-site-default:
 
