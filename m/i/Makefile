@@ -37,3 +37,6 @@ pull:
 	docker pull district.tail3884f.ts.net/defn/dev
 	docker tag district.tail3884f.ts.net/defn/dev 169.254.32.1:5000/defn/dev
 	docker push 169.254.32.1:5000/defn/dev
+
+sync:
+	regsync once -c regsync.yaml
