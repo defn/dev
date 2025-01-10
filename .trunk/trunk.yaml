@@ -30,7 +30,7 @@ lint:
     - rustfmt@1.65.0
     - dotenv-linter@3.3.0
     - black@24.10.0
-    - buildifier@7.3.1
+    - buildifier@8.0.0
     - cue-fmt@0.9.0
     - git-diff-check
     - gofmt@1.22.5
