@@ -32,7 +32,8 @@
 set -efu -o pipefail
 
 function main {
-  local identity="$1"; shift
+	local identity="$1"
+	shift
 
 	GNUPGHOME="$(mktemp -d -t "gnupg_$(date +%Y%m%d%H%M || true)_XXX")"
 	GNUPASS="$(mktemp -t "gnupg_$(date +%Y%m%d%H%M || true)_XXX)")"
@@ -58,4 +59,3 @@ function main {
 }
 
 main "$@"
-

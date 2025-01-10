@@ -120,7 +120,7 @@ fi
 
 # aliases
 function m {
-	if [[ "$#" -gt 0 ]]; then
+	if [[ $# -gt 0 ]]; then
 		mise run "$@"
 	else
 		mise task ls
@@ -152,11 +152,11 @@ function vi {
 
 function alogin {
 	(
-		if [[ -n "${1:-}" ]]; then
+		if [[ -n ${1-} ]]; then
 			aprofile "$1"
 			shift
 		fi
-		if [[ -n "${1:-}" ]]; then
+		if [[ -n ${1-} ]]; then
 			aregion "$1"
 			shift
 		fi
@@ -174,7 +174,7 @@ function aprofile {
 	export AWS_PROFILE="${1}"
 	shift
 
-	if [[ -n "${1:-}" ]]; then
+	if [[ -n ${1-} ]]; then
 		aregion="$1"
 	fi
 }

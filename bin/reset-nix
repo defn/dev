@@ -7,4 +7,3 @@ apt update
 apt install -y make sudo direnv gpg
 echo 'ubuntu ALL=(ALL:ALL) NOPASSWD: ALL' | tee /etc/sudoers.d/ubuntu
 sudo -u ubuntu -H make nix-reset-inner
-

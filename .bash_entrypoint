@@ -16,12 +16,12 @@ fi
 
 export workdir="${WORKDIR}"
 case "$(declare -p TMOUT 2>/dev/null | grep ^declare | awk '{print $2}')" in
-	*r*)
-		true
-		;;
-	*)
-		export TMOUT=3600
-		;;
+*r*)
+	true
+	;;
+*)
+	export TMOUT=3600
+	;;
 esac
 export HISTSIZE=100000
 
