@@ -15,3 +15,5 @@ kubectl port-forward -n argocd svc/argocd-server 6666:80 &
 open http://localhost:6655
 open http://localhost:6666
 kubectl create token headlamp-admin -n kube-system
+
+kubectl rollout restart deployment argocd-server -n argocd
