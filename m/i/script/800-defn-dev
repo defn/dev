@@ -13,7 +13,6 @@ function main {
 		mv dev/.git .
 		rm -rf dev
 		git reset --hard
-	else
 	fi
 }
 
