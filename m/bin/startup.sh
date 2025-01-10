@@ -19,19 +19,8 @@ function main {
 	esac
 
 	git pull
-	(
-		mise trust
-		mise install
-	)
-	(
-		cd m
-		mise trust
-		mise install
-	)
-	(
-		cd m/cache/docker
-		make init registry k3d
-	)
+	make sync
+	k3d get k3s-default > ~/.kube/config
 
 	(
 		set +x
