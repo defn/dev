@@ -21,8 +21,8 @@ clean-snapshot:
 coder:
 	mise trust
 	mise install
-	packer init $@.pkr.hcl
-	packer build -color=true -timestamp-ui=true $@.pkr.hcl
+	mise exec packer init $@.pkr.hcl
+	mise exec packer build -color=true -timestamp-ui=true $@.pkr.hcl
 
 # docker
 home:
