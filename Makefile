@@ -365,6 +365,10 @@ zfs:
 	sudo zfs send nix/work@latest | pv | s5cmd pipe s3://dfn-defn-global-defn-org/zfs/work.zfs
 	tar cfz - bin/nix .nix* .local/state/nix | pv | s5cmd pipe s3://dfn-defn-global-defn-org/zfs/nix.tar.gz
 
+sync:
+	git pull
+	cd m/i && $(MAKE) sync
+
 build-site-default:
 
 install-site-default:
