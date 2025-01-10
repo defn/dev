@@ -378,9 +378,9 @@ zfs:
 sync:
 	git pull
 	$(MAKE) home
-	git ls-files | grep /mise.toml | runmany 'echo $$1 && cd $${1%/mise.toml} && mise trust && mise install'
-	mise trust
+	git ls-files | grep 'mise.toml$$' | runmany 'mise trust $$1'
 	mise install
+	(cd m && mise install)
 	cd m/i && $(MAKE) sync
 
 build-site-default:
