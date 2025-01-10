@@ -123,3 +123,22 @@ resource "coder_app" "code-server" {
   }
 }
 
+resource "coder_app" "headlamp" {
+  agent_id     = coder_agent.main.id
+  display_name = "headlamp"
+  icon         = "/icon/code.svg"
+  share        = "owner"
+  slug         = "headlamp"
+  subdomain    = true
+  url          = "http://localhost:6655"
+}
+
+resource "coder_app" "argocd" {
+  agent_id     = coder_agent.main.id
+  display_name = "argocd"
+  icon         = "/icon/code.svg"
+  share        = "owner"
+  slug         = "argocd"
+  subdomain    = true
+  url          = "http://localhost:6666"
+}

@@ -298,11 +298,6 @@ resource "coder_app" "headlamp" {
   slug         = "headlamp"
   subdomain    = true
   url          = "http://localhost:6655"
-  healthcheck {
-    interval  = 5
-    threshold = 6
-    url       = "http://localhost:6655"
-  }
 }
 
 resource "coder_app" "argocd" {
@@ -313,11 +308,6 @@ resource "coder_app" "argocd" {
   slug         = "argocd"
   subdomain    = true
   url          = "http://localhost:6666"
-  healthcheck {
-    interval  = 5
-    threshold = 6
-    url       = "http://localhost:6666"
-  }
 }
 
 provider "aws" {
@@ -415,27 +405,25 @@ else
   zfs_disk=nvme0n1
 fi
 
-zpool create nix "/dev/$zfs_disk"
-zfs set mountpoint=/nix nix
-zfs set atime=off nix
-zfs set compression=off nix
-zfs set dedup=on nix
+zpool create defn "/dev/$zfs_disk"
 
-s5cmd cat s3://dfn-defn-global-defn-org/zfs/nix.zfs | zfs receive -F nix
-
-zfs create nix/work
-zfs set mountpoint=/home/ubuntu/work nix/work
-zfs set atime=off nix/work
-zfs set compression=off nix/work
-zfs set dedup=on nix/work
-
-s5cmd cat s3://dfn-defn-global-defn-org/zfs/work.zfs | zfs receive -F nix/work
+for z in nix work docker; do
+  zfs create defn/$z
+  zfs set atime=off defn/$z
+  zfs set compression=off defn/$z
+  zfs set dedup=on defn/$z
+done
 
 systemctl stop docker || true
-zfs create nix/docker
-zfs set mountpoint=/var/lib/docker nix/docker
-zfs set atime=off nix/docker
-zfs set compression=on nix/docker
+
+zfs set mountpoint=/nix defn/nix
+zfs set mountpoint=/home/ubuntu/work defn/work
+zfs set mountpoint=/var/lib/docker defn/docker
+
+s5cmd cat s3://dfn-defn-global-defn-org/zfs/nix.zfs | zfs receive -F defn/nix &
+s5cmd cat s3://dfn-defn-global-defn-org/zfs/work.zfs | zfs receive -F defn/work &
+wait
+
 systemctl start docker || true
 
 install -d -m 0754 -o ubuntu -g ubuntu /run/user/1000 /run/user/1000/gnupg
