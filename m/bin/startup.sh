@@ -19,7 +19,6 @@ function main {
 	esac
 
 	git pull
-	make sync
 	k3d cluster start k3s-default
 	k3d kubeconfig get k3s-default > ~/.kube/config
 
