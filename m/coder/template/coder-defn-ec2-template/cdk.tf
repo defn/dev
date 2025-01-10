@@ -385,11 +385,6 @@ else
   zfs_disk=nvme0n1
 fi
 
-# TODO support arm64
-curl -sSL -O https://github.com/peak/s5cmd/releases/download/v2.3.0/s5cmd_2.3.0_linux_amd64.deb
-dpkg -i s5cmd_2.3.0_linux_amd64.deb 
-rm -f s5cmd_2.3.0_linux_amd64.deb 
-
 zpool create nix "/dev/$zfs_disk"
 zfs set mountpoint=/nix nix
 zfs set atime=off nix
@@ -412,7 +407,6 @@ zfs set mountpoint=/var/lib/docker nix/docker
 zfs set atime=off nix/docker
 zfs set compression=on nix/docker
 systemctl start docker || true
-usermod -G docker ubuntu
 
 install -d -m 0754 -o ubuntu -g ubuntu /run/user/1000 /run/user/1000/gnupg
 install -d -m 0754 -o ubuntu -g ubuntu /nix /nix
