@@ -20,7 +20,7 @@ function main {
 
 	git pull
 	make sync
-	k3d get k3s-default > ~/.kube/config
+	k3d kubeconfig get k3s-default > ~/.kube/config
 
 	(
 		set +x
