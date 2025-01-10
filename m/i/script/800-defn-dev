@@ -9,94 +9,11 @@ function main {
 	if [[ "$(whoami || true)" == "ubuntu" ]]; then
 		cd
 
-		local ssd="/dev/$( (
-			lsblk | grep 'part /$' | awk '{print $1}' | sed 's#p1$##; s#^..##'
-			lsblk | grep ^nvme | awk '{print $1}'
-		) | sort | uniq -c | grep ' 1 ' | awk '{print $2}')"
-
-		# root stuff
-		sudo "$0" "$@"
-
 		git clone https://github.com/defn/dev
 		mv dev/.git .
 		rm -rf dev
 		git reset --hard
-
-		make vpn-install
-		sudo apt install -y docker.io
-		sudo usermod -aG docker ubuntu
-
-		sudo zpool create nix "$ssd"
-		sudo zfs set mountpoint=/nix nix
-		sudo zfs set atime=off nix
-		sudo zfs set compression=on nix
-		sudo chown ubuntu:ubuntu /nix
-
-		sudo zfs create nix/work
-		sudo zfs set mountpoint=/home/ubuntu/work nix/work
-		sudo zfs set atime=off nix/work
-		sudo zfs set compression=off nix/work
-		sudo chown ubuntu:ubuntu /home/ubuntu/work
-
-		set +xu
-		source .bash_profile
-		set -xu
-
-		git config --global user.email "you@example.com"
-		git config --global user.name "Your Name"
-		touch m/.bazelrc.user
-		make install
-
-		sudo zfs snapshot nix@install
-		sudo zfs snapshot nix/work@install
-		sudo install -d -o ubuntu -g ubuntu /zfs
-		sudo zfs send nix@install | pigz >/zfs/nix.zfs
-		sudo zfs send nix/work@install | pigz >/zfs/work.zfs
-
-		find /zfs -ls
 	else
-		apt update || true
-		apt update
-		apt install -y make
-
-		if test -f /tmp/tailscale-install.sh; then
-			bash -x /tmp/tailscale-install.sh
-		else
-			curl -v -fsSL https://tailscale.com/install.sh | bash -x
-		fi
-		rm -rf /var/lib/tailscale
-
-		install -d -m 0755 /etc/docker
-		echo '{ "insecure-registries" : ["169.254.32.1:4999"] }' | tee /etc/docker/daemon.json
-
-		(
-			echo net.ipv4.ip_forward=1
-			echo net.ipv6.conf.all.forwarding=1
-			echo fs.inotify.max_user_instances=10000
-			echo fs.inotify.max_user_watches=524288
-		) | tee /etc/sysctl.d/99-dfd.conf
-
-		mkdir -p /etc/systemd/network
-		pushd /etc/systemd/network
-
-		local a
-		a=1
-
-		(
-			echo "[NetDev]"
-			echo Name=dummy"$a"
-			echo Kind=dummy
-		) | sudo tee dummy"$a".netdev
-
-		(
-			echo "[Match]"
-			echo Name=dummy"$a"
-			echo
-			echo "[Network]"
-			echo Address=169.254.32."$a"/32
-		) | sudo tee dummy"$a".network
-
-		popd
 	fi
 }
 
