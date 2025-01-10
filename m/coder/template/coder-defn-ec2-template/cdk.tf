@@ -405,6 +405,9 @@ else
   zfs_disk=nvme0n1
 fi
 
+systemctl stop docker.socket || true
+systemctl stop docker || true
+
 zpool create defn "/dev/$zfs_disk"
 
 for z in nix work docker; do
@@ -414,7 +417,6 @@ for z in nix work docker; do
   zfs set dedup=on defn/$z
 done
 
-systemctl stop docker || true
 
 zfs set mountpoint=/nix defn/nix
 zfs set mountpoint=/home/ubuntu/work defn/work
@@ -422,8 +424,10 @@ zfs set mountpoint=/var/lib/docker defn/docker
 
 s5cmd cat s3://dfn-defn-global-defn-org/zfs/nix.zfs | zfs receive -F defn/nix &
 s5cmd cat s3://dfn-defn-global-defn-org/zfs/work.zfs | zfs receive -F defn/work &
+s5cmd cat s3://dfn-defn-global-defn-org/zfs/docker.zfs | zfs receive -F defn/docker &
 wait
 
+systemctl start docker.socket || true
 systemctl start docker || true
 
 install -d -m 0755 -o ubuntu -g ubuntu /run/user/1000 /run/user/1000/gnupg
