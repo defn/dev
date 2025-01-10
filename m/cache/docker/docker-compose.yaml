@@ -23,3 +23,5 @@ services:
       "k3d.version": "v5.7.5"
       "k3s.registry.port.external": "5000"
       "k3s.registry.port.internal": "5000"
+volumes:
+  images:
