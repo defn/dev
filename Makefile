@@ -359,11 +359,21 @@ zfs:
 	$(MAKE) install
 	sudo zfs destroy nix@latest || true
 	sudo zfs destroy nix/work@latest || true
+	sudo zfs destroy nix/docker@latest || true
+	k3d cluster stop k3s-default
+	docker system prune -a -f
+	sudo systemctl stop docker.socket
+	sudo systemctl stop docker
 	sudo zfs snapshot nix@latest
 	sudo zfs snapshot nix/work@latest
+	sudo zfs snapshot nix/docker@latest
 	sudo zfs send nix@latest | pv | s5cmd pipe s3://dfn-defn-global-defn-org/zfs/nix.zfs
-	sudo zfs send nix/work@latest | pv | s5cmd pipe s3://dfn-defn-global-defn-org/zfs/work.zfs
 	tar cfz - bin/nix .nix* .local/state/nix | pv | s5cmd pipe s3://dfn-defn-global-defn-org/zfs/nix.tar.gz
+	sudo zfs send nix/work@latest | pv | s5cmd pipe s3://dfn-defn-global-defn-org/zfs/work.zfs
+	sudo zfs send nix/docker@latest | pv | s5cmd pipe s3://dfn-defn-global-defn-org/zfs/docker.zfs
+	sudo systemctl start docker.socket
+	sudo systemctl start docker
+	k3d cluster start k3s-default
 
 sync:
 	git pull
