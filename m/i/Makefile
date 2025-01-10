@@ -18,12 +18,13 @@ clean-snapshot:
 	comm -23 <(aws ec2 describe-snapshots --owner-ids self --query 'Snapshots[*].SnapshotId' --filters "Name=description,Values=Created by CreateImage*" | jq -r '.[]' | sort) <(aws ec2 describe-images --owners self --query 'Images[*].BlockDeviceMappings[*].Ebs.SnapshotId' --output text | sort) | runmany 'set -x; aws ec2 delete-snapshot --snapshot-id $$1'
 
 # ami
-%:
+coder:
 	mise trust
 	mise install
 	packer init $@.pkr.hcl
 	packer build -color=true -timestamp-ui=true $@.pkr.hcl
 
+# docker
 home:
 	docker build -t 169.254.32.1:5000/defn/dev:base . 
 	docker push 169.254.32.1:5000/defn/dev:base
