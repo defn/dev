@@ -6,7 +6,6 @@ init:
 	sudo systemctl restart docker
 
 registry:
-	mkdir -p images
 	docker compose down || true
 	docker compose up -d --remove-orphans
 

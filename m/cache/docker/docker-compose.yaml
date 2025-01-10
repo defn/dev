@@ -12,7 +12,7 @@ services:
       - REGISTRY_HTTP_TLS_KEY=/certs/registry.key
     volumes:
       - ./certs:/certs
-      - ./images:/var/lib/registry
+      - images:/var/lib/registry
     restart: unless-stopped
     labels:
       "app": "k3d"
