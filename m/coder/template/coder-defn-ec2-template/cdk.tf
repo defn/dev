@@ -177,6 +177,7 @@ resource "coder_agent" "main" {
   }
   os             = "linux"
   startup_script = "exec >>/tmp/coder-agent.log; exec 2>&1; cd && ssh -o StrictHostKeyChecking=no git@github.com true || true && git fetch origin && git reset --hard origin/main && cd ~/m && bin/startup.sh"
+  connection_timeout = 3
   display_apps {
     ssh_helper      = false
     vscode          = false
