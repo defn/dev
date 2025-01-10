@@ -5,5 +5,5 @@
 
 cd "${MISE_ORIGINAL_CWD}"
 if ! k3d cluster list; then
-    k3d cluster create "$@"
+	k3d cluster create "$@"
 fi
