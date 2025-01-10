@@ -355,6 +355,16 @@ coder-ssh-chromebook:
 	@pkill -9 -f code-serve[r] || true
 	@export STARSHIP_NO=1 && source ~/.bash_profile && echo $(CODER_INIT_SCRIPT_BASE64) | base64 -d | exec bash -x -
 
+zfs:
+	$(MAKE) install
+	sudo zfs destroy nix@latest || true
+	sudo zfs destroy nix/work@latest || true
+	sudo zfs snapshot nix@latest
+	sudo zfs snapshot nix/work@latest
+	sudo zfs send nix@latest | pv | s5cmd pipe s3://dfn-defn-global-defn-org/zfs/nix.zfs
+	sudo zfs send nix/work@latest | pv | s5cmd pipe s3://dfn-defn-global-defn-org/zfs/work.zfs
+	tar cfz - bin/nix .nix*  | pv | s5cmd pipe s3://dfn-defn-global-defn-org/zfs/nix.tar.gz
+
 build-site-default:
 
 install-site-default:
