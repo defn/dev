@@ -1,0 +1,17 @@
+curl -sSL -o headlamp.yaml https://raw.githubusercontent.com/headlamp-k8s/headlamp/main/kubernetes-headlamp.yaml
+curl -sSL -o argocd.yaml https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
+
+trunk fmt
+
+kubectl create namespace argocd
+kubectl apply -n argocd -f argocd.yaml
+
+kubectl apply -f headlamp.yaml
+kubectl -n kube-system create serviceaccount headlamp-admin
+kubectl create clusterrolebinding headlamp-admin --serviceaccount=kube-system:headlamp-admin --clusterrole=cluster-admin
+
+kubectl port-forward -n kube-system svc/headlamp 6655:80 &
+kubectl port-forward -n argocd svc/argocd-server 6666:80 &
+open http://localhost:6655
+open http://localhost:6666
+kubectl create token headlamp-admin -n kube-system
