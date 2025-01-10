@@ -13,8 +13,7 @@ kubectl create clusterrolebinding headlamp-admin --serviceaccount=kube-system:he
 kubectl port-forward -n kube-system svc/headlamp 6655:80 &
 kubectl port-forward -n argocd svc/argocd-server 6666:80 &
 open http://localhost:6655
-open http://localhost:6666
-kubectl create token headlamp-admin -n kube-system
+kubectl create token headlamp-admin -n kube-system | code -c
 
 kubectl rollout restart deployment argocd-server -n argocd
 kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d

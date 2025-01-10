@@ -360,8 +360,9 @@ zfs:
 	sudo zfs destroy nix@latest || true
 	sudo zfs destroy nix/work@latest || true
 	sudo zfs destroy nix/docker@latest || true
-	k3d cluster stop k3s-default
+	sudo systemctl daemon-reload
 	docker system prune -a -f
+	k3d cluster stop k3s-default
 	sudo systemctl stop docker.socket
 	sudo systemctl stop docker
 	sudo zfs snapshot nix@latest
