@@ -396,8 +396,8 @@ if ! tailscale ip -4 | grep ^100; then
   sudo tailscale up --accept-dns --accept-routes --authkey="${data.coder_parameter.tsauthkey.value}" --operator=ubuntu --ssh --timeout 60s
 fi
 
-local root_disk
-local zfs_disk
+root_disk=
+zfs_disk=
 if [[ "$(lsblk /dev/nvme0n1p1 | tail -1 | awk '{print $NF}')" == "/" ]]; then
   root_disk=nvme0n1
   zfs_disk=nvme1n1
@@ -417,7 +417,6 @@ for z in nix work docker; do
   zfs set compression=off defn/$z
   zfs set dedup=on defn/$z
 done
-
 
 zfs set mountpoint=/nix defn/nix
 zfs set mountpoint=/home/ubuntu/work defn/work
