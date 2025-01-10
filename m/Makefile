@@ -16,8 +16,8 @@ proxy ?= proxy3
 install:
 	npm -q --no-update-notifier --no-audit install
 
-home:
-	cd && $(MAKE) home
+sync:
+	cd && $(MAKE) sync
 
 work ?=
 dev-macos:
