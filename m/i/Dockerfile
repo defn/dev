@@ -41,7 +41,7 @@ RUN bash -c 'source .bash_profile && bin/persist-cache && make install'
 
 RUN sudo apt-get update && sudo apt-get install -y tini
 
-RUN bash -c 'git pull && source .bash_profile && make install sync && rm -f /tmp/.bash_entrypoint*'
+RUN bash -c 'git pull && source .bash_profile && make install sync'
 
 ENTRYPOINT [ "/bin/tini", "bash", "--", "-c" ]
 CMD [ "git reset --hard && git pull && exec sleep infinity" ]
