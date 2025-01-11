@@ -16,7 +16,7 @@ create-coder-agent:
 
 	set -x
 	cd m
-	just coder::coder-agent "${CODER_NAME}" #2>/dev/null 1>/dev/null &
+	just coder::coder-agent "${CODER_NAME}"
 
 destroy-coder-agent:
 	#!/usr/bin/env bash
