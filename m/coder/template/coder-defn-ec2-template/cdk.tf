@@ -10,28 +10,7 @@ terraform {
     }
   }
   backend "local" {
-
   }
-
-}
-
-data "coder_parameter" "homedir" {
-  default      = "/home/ubuntu/m"
-  description  = "home directory"
-  display_name = "HOME dir"
-  icon         = "https://raw.githubusercontent.com/matifali/logos/main/cpu-3.svg"
-  mutable      = true
-  name         = "homedir"
-  type         = "string"
-}
-
-data "coder_parameter" "username" {
-  default      = "ubuntu"
-  description  = "Linux account name"
-  display_name = "Username"
-  icon         = "https://raw.githubusercontent.com/matifali/logos/main/cpu-3.svg"
-  name         = "username"
-  type         = "string"
 }
 
 data "coder_parameter" "region" {
@@ -123,6 +102,34 @@ data "coder_parameter" "instance_type" {
   }
 }
 
+data "coder_parameter" "tsauthkey" {
+  description  = "Tailscale node authorization key"
+  display_name = "Tailscale auth key"
+  icon         = "https://raw.githubusercontent.com/matifali/logos/main/cpu-3.svg"
+  mutable      = true
+  name         = "tsauthkey"
+  type         = "string"
+}
+
+data "coder_parameter" "homedir" {
+  default      = "/home/ubuntu/m"
+  description  = "home directory"
+  display_name = "HOME dir"
+  icon         = "https://raw.githubusercontent.com/matifali/logos/main/cpu-3.svg"
+  mutable      = true
+  name         = "homedir"
+  type         = "string"
+}
+
+data "coder_parameter" "username" {
+  default      = "ubuntu"
+  description  = "Linux account name"
+  display_name = "Username"
+  icon         = "https://raw.githubusercontent.com/matifali/logos/main/cpu-3.svg"
+  name         = "username"
+  type         = "string"
+}
+
 data "coder_parameter" "nix_volume_size" {
   default      = "25"
   description  = "The size of the nix volume to create for the workspace in GB"
@@ -147,15 +154,6 @@ data "coder_parameter" "provider" {
     name  = "Amazon Web Services VM"
     value = "aws-ec2"
   }
-}
-
-data "coder_parameter" "tsauthkey" {
-  description  = "Tailscale node authorization key"
-  display_name = "Tailscale auth key"
-  icon         = "https://raw.githubusercontent.com/matifali/logos/main/cpu-3.svg"
-  mutable      = true
-  name         = "tsauthkey"
-  type         = "string"
 }
 
 // coder

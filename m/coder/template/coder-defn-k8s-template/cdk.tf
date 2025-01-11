@@ -44,7 +44,6 @@ data "coder_parameter" "memory" {
   }
 }
 
-
 data "coder_parameter" "homedir" {
   default      = "/home/ubuntu/m"
   description  = "home directory"
@@ -111,8 +110,7 @@ resource "coder_agent" "main" {
     git reset --hard origin/main
 
     cd ~/m
-    curl -fsSL https://code-server.dev/install.sh | sh -s -- --method=standalone --prefix=/tmp/code-server
-    /tmp/code-server/bin/code-server --auth none --port 8080 >/tmp/code-server.log 2>&1 &
+    bin/startup.sh
   EOT
   env = {
     GIT_AUTHOR_EMAIL    = "${data.coder_workspace_owner.me.email}"

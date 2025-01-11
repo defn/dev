@@ -19,8 +19,11 @@ function main {
 	esac
 
 	git pull
-	k3d cluster start k3s-default
-	k3d kubeconfig get k3s-default > ~/.kube/config
+
+	if [[ -z "${KUBERNETES_PORT_443_TCP:-}" ]]; then
+		k3d cluster start k3s-default
+		k3d kubeconfig get k3s-default > ~/.kube/config
+	fi
 
 	(
 		set +x
