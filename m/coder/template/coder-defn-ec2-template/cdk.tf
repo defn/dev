@@ -158,15 +158,30 @@ data "coder_parameter" "tsauthkey" {
   type         = "string"
 }
 
-data "coder_workspace" "me" {
-}
-
+// coder
 data "coder_workspace_owner" "me" {
 }
 
+data "coder_workspace" "me" {
+}
+
+
 resource "coder_agent" "main" {
   arch = "amd64"
+  os = "linux"
   auth = "aws-instance-identity"
+  startup_script = <<-EOT
+    set -e
+    exec >>/tmp/coder-agent.log
+    exec 2>&1
+    cd
+    ssh -o StrictHostKeyChecking=no git@github.com true || true
+    git fetch origin
+    git reset --hard origin/main
+
+    cd ~/m
+    bin/startup.sh
+  EOT
   env = {
     GIT_AUTHOR_EMAIL    = "${data.coder_workspace_owner.me.email}"
     GIT_AUTHOR_NAME     = "${data.coder_workspace_owner.me.name}"
@@ -175,8 +190,6 @@ resource "coder_agent" "main" {
     LC_ALL              = "C.UTF-8"
     LOCAL_ARCHIVE       = "/usr/lib/locale/locale-archive"
   }
-  os             = "linux"
-  startup_script = "exec >>/tmp/coder-agent.log; exec 2>&1; cd && ssh -o StrictHostKeyChecking=no git@github.com true || true && git fetch origin && git reset --hard origin/main && cd ~/m && bin/startup.sh"
   connection_timeout = 200
   display_apps {
     ssh_helper      = false
@@ -184,6 +197,51 @@ resource "coder_agent" "main" {
     vscode_insiders = false
   }
 }
+
+// apps
+
+resource "coder_app" "code-server" {
+  agent_id     = coder_agent.main.id
+  display_name = "code-server"
+  icon         = "/icon/code.svg"
+  share        = "owner"
+  slug         = "cs"
+  subdomain    = true
+  url          = "http://localhost:8080/?folder=${data.coder_parameter.homedir.value}"
+  healthcheck {
+    interval  = 5
+    threshold = 6
+    url       = "http://localhost:8080/healthz"
+  }
+}
+
+resource "coder_app" "headlamp" {
+  agent_id     = coder_agent.main.id
+  display_name = "headlamp"
+  icon         = "/icon/code.svg"
+  share        = "owner"
+  slug         = "headlamp"
+  subdomain    = true
+  url          = "http://localhost:6655"
+}
+
+resource "coder_app" "argocd" {
+  agent_id     = coder_agent.main.id
+  display_name = "argocd"
+  icon         = "/icon/code.svg"
+  share        = "owner"
+  slug         = "argocd"
+  subdomain    = true
+  url          = "http://localhost:6666"
+}
+
+
+// provider
+
+provider "aws" {
+  region = data.coder_parameter.region.value
+}
+
 
 resource "aws_default_vpc" "default" {
 }
@@ -274,48 +332,6 @@ resource "aws_security_group" "dev_security_group" {
   }
   name = "coder-${data.coder_workspace_owner.me.name}-${data.coder_workspace.me.name}"
   vpc_id = aws_default_vpc.default.id
-}
-
-resource "coder_app" "code-server" {
-  agent_id     = coder_agent.main.id
-  display_name = "code-server"
-  icon         = "/icon/code.svg"
-  share        = "owner"
-  slug         = "cs"
-  subdomain    = true
-  url          = "http://localhost:8080/?folder=${data.coder_parameter.homedir.value}"
-  healthcheck {
-    interval  = 5
-    threshold = 6
-    url       = "http://localhost:8080/healthz"
-  }
-}
-
-resource "coder_app" "headlamp" {
-  agent_id     = coder_agent.main.id
-  display_name = "headlamp"
-  icon         = "/icon/code.svg"
-  share        = "owner"
-  slug         = "headlamp"
-  subdomain    = true
-  url          = "http://localhost:6655"
-}
-
-resource "coder_app" "argocd" {
-  agent_id     = coder_agent.main.id
-  display_name = "argocd"
-  icon         = "/icon/code.svg"
-  share        = "owner"
-  slug         = "argocd"
-  subdomain    = true
-  url          = "http://localhost:6666"
-}
-
-provider "aws" {
-  region = data.coder_parameter.region.value
-}
-
-provider "coder" {
 }
 
 module "dev_oidc_cdn" {
