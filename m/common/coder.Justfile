@@ -181,7 +181,7 @@ coder-agent *host:
 		> /tmp/coder-init-script-${CODER_NAME}-$$
 	exec 1>/dev/null
 	exec 2>/dev/null
-	exec /tmp/coder-init-script-${CODER_NAME}-$$
+	exec bash -x /tmp/coder-init-script-${CODER_NAME}-$$
 
 # Run code-server in a loop
 [no-cd, private]
