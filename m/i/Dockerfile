@@ -1,8 +1,24 @@
 FROM ubuntu:24.04 AS nix
 
-RUN apt-get update && apt-get install -y xz-utils curl sudo git make direnv gpg rsync ca-certificates bc
+ENV DEBIAN_FRONTEND=noninteractive
 
-RUN echo "ubuntu ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
+RUN apt update \
+    && apt install -y ca-certificates \
+	&& apt install -y tzdata locales sudo \
+	&& apt install -y git direnv make rsync bc pipx pigz \
+	&& apt install -y socat pcscd scdaemon gpg gpg-agent wireguard-tools qemu-system libvirt-clients libvirt-daemon-system openvpn easy-rsa expect tpm2-tools \
+	&& apt install -y curl xz-utils git-lfs pv \
+	&& apt install -y zfsutils-linux ubuntu-drivers-common \
+	&& apt install -y build-essential \
+	&& apt install -y docker.io 
+	
+RUN curl -sSL -O https://github.com/peak/s5cmd/releases/download/v2.3.0/s5cmd_2.3.0_linux_amd64.deb \
+	&& dpkg -i s5cmd_2.3.0_linux_amd64.deb \
+	&& rm -f s5cmd_2.3.0_linux_amd64.deb
+
+RUN usermod -aG docker ubuntu
+
+RUN echo "ubuntu ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers.d/ubuntu
 
 RUN rm -rf /home/ubuntu && install -d -o ubuntu -g ubuntu -m 0755 /home/ubuntu
 
