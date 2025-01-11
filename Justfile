@@ -14,6 +14,7 @@ chromebook-openvpn:
 create-coder-agent:
 	#!/usr/bin/env bash
 
+	set -x
 	cd m
 	just coder::coder-agent "${CODER_NAME}" 2>/dev/null 1>/dev/null &
 
