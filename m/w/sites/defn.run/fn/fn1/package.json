@@ -12,10 +12,10 @@
   },
   "dependencies": {
     "@astrojs/cloudflare": "^12.1.0",
-    "@astrojs/svelte": "^7.0.2",
+    "@astrojs/svelte": "^7.0.3",
     "@astrojs/tailwind": "^5.1.4",
     "@sveltejs/vite-plugin-svelte": "^5.0.3",
-    "astro": "^5.1.1",
+    "astro": "^5.1.5",
     "fn1": "link:",
     "hono": "^4.6.16",
     "tailwindcss": "^3.4.17",
