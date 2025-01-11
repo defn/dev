@@ -98,8 +98,8 @@ data "coder_workspace" "me" {
 
 
 resource "coder_agent" "main" {
-  arch = "amd64"
-  os = "linux"
+  arch           = "amd64"
+  os             = "linux"
   startup_script = <<-EOT
     set -e
     exec >>/tmp/coder-agent.log
@@ -153,7 +153,7 @@ provider "kubernetes" {
 
 resource "kubernetes_namespace" "main" {
   metadata {
-    name      = "coder-${data.coder_workspace_owner.me.name}-${data.coder_workspace.me.name}"
+    name = "coder-${data.coder_workspace_owner.me.name}-${data.coder_workspace.me.name}"
   }
 }
 
@@ -163,16 +163,16 @@ resource "kubernetes_persistent_volume_claim" "work" {
   ]
   metadata {
     name      = "coder-${data.coder_workspace_owner.me.name}-${data.coder_workspace.me.name}"
-    namespace      = "coder-${data.coder_workspace_owner.me.name}-${data.coder_workspace.me.name}"
+    namespace = "coder-${data.coder_workspace_owner.me.name}-${data.coder_workspace.me.name}"
     labels = {
       "app.kubernetes.io/name"     = "coder-pvc"
       "app.kubernetes.io/instance" = "coder-pcv-${data.coder_workspace_owner.me.name}-${data.coder_workspace.me.name}"
       "app.kubernetes.io/part-of"  = "coder"
-      "com.coder.resource"       = "true"
-      "com.coder.workspace.id"   = data.coder_workspace.me.id
-      "com.coder.workspace.name" = data.coder_workspace.me.name
-      "com.coder.user.id"        = data.coder_workspace_owner.me.id
-      "com.coder.user.username"  = data.coder_workspace_owner.me.name
+      "com.coder.resource"         = "true"
+      "com.coder.workspace.id"     = data.coder_workspace.me.id
+      "com.coder.workspace.name"   = data.coder_workspace.me.name
+      "com.coder.user.id"          = data.coder_workspace_owner.me.id
+      "com.coder.user.username"    = data.coder_workspace_owner.me.name
     }
     annotations = {
       "com.coder.user.email" = data.coder_workspace_owner.me.email
@@ -255,7 +255,7 @@ resource "kubernetes_deployment" "main" {
           name              = "dev"
           image             = "169.254.32.1:5000/defn/dev:latest"
           image_pull_policy = "Always"
-          command           = ["sh", "-c", coder_agent.main.init_script]
+          command           = ["bash", "-c", "~/home/ubuntu/bin/with-env j create-coder-agent"]
           security_context {
             run_as_user = "1000"
           }
@@ -263,6 +263,23 @@ resource "kubernetes_deployment" "main" {
             name  = "CODER_AGENT_TOKEN"
             value = coder_agent.main.token
           }
+          env {
+            name = "CODER_AGENT_URL"
+            vaue = data.coder_workspace.me.access_url
+          }
+          env {
+            name  = "CODER_NAME"
+            value = data.coder_workspace.me.name
+          }
+          env {
+            name  = "CODER_HOMEDIR"
+            value = data.coder_parameter.homedir.value
+          }
+          env {
+            name  = "CODER_INIT_SCRIPT_BASE64"
+            value = base64encode(coder_agent.main.init_script)
+          }
+
           volume_mount {
             mount_path = "/home/ubuntu/.local"
             name       = "work"
