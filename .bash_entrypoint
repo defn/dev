@@ -30,7 +30,6 @@ if test -f ~/.bash_profile; then
 	source ~/.bash_profile
 fi
 
-if [[ -n ${first_workdir} ]]; then
 	lockfile="/tmp/.bash_entrypoint.lock"
 
 	# Attempt to acquire the lock without blocking
@@ -40,11 +39,11 @@ if [[ -n ${first_workdir} ]]; then
 				cd "${WORKDIR}"
 				mise trust -a
 				mise install
-				screen -dmS up m up
+				screen -dmS up bash -c "cd; source .bash_profile; cd \"${WORKDIR}\"; m up; sleep infinity"
 			)
+			screen -list
 			touch /tmp/.bash_entrypoint.done
 		fi
 	fi 200>$lockfile
 
 	unset lockfile
-fi
