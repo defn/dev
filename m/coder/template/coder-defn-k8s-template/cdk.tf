@@ -253,7 +253,7 @@ resource "kubernetes_deployment" "main" {
 
         container {
           name              = "dev"
-          image             = "169.254.32.1:5000/defn/dev:latest"
+          image             = "district.tail3884f.ts.net/defn/dev:latest"
           image_pull_policy = "Always"
           command           = ["/bin/tini", "--", "bash", "-c", "cd; source .bash_profile; git pull; exec j create-coder-agent-sync"]
           security_context {
