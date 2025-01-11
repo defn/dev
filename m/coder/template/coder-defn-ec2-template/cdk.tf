@@ -81,6 +81,10 @@ data "coder_parameter" "instance_type" {
     value = "m6idn.large"
   }
   option {
+    name  = "2r"
+    value = "r6id.large"
+  }
+  option {
     name  = "4"
     value = "m6id.xlarge"
   }
