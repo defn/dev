@@ -385,7 +385,9 @@ sync_inner:
 	mise install
 	(cd m && mise install)
 	(cd m && mise exec -- npm install && mise exec -- npm install -g npm@latest)
-	if [[ -z "$${KUBERNETES_PORT_443_TCP:-}" ]]; then cd m/i && $(MAKE) sync; fi
+
+release:
+	cd m/i && $(MAKE) sync
 
 build-site-default:
 
