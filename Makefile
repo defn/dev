@@ -384,7 +384,7 @@ sync_inner:
 	git ls-files | grep 'mise.toml$$' | runmany 'mise trust $$1'
 	mise install
 	(cd m && mise install)
-	(cd m && npm install && npm install -g npm@latest)
+	(cd m && mise exec -- npm install && mise exec -- npm install -g npm@latest)
 	if [[ -z "$${KUBERNETES_PORT_443_TCP:-}" ]]; then cd m/i && $(MAKE) sync; fi
 
 build-site-default:
