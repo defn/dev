@@ -1,5 +1,6 @@
 default:
-	$(MAKE) build
+	mise install
+	mise exec -- $(MAKE) build
 
 -include ../common/Makefile.coder
 
