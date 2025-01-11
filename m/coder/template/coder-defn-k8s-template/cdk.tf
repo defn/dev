@@ -103,8 +103,16 @@ resource "coder_agent" "main" {
   os = "linux"
   startup_script = <<-EOT
     set -e
+    exec >>/tmp/coder-agent.log
+    exec 2>&1
+    cd
+    ssh -o StrictHostKeyChecking=no git@github.com true || true
+    git fetch origin
+    git reset --hard origin/main
+
+    cd ~/m
     curl -fsSL https://code-server.dev/install.sh | sh -s -- --method=standalone --prefix=/tmp/code-server
-    /tmp/code-server/bin/code-server --auth none --port 13337 >/tmp/code-server.log 2>&1 &
+    /tmp/code-server/bin/code-server --auth none --port 8080 >/tmp/code-server.log 2>&1 &
   EOT
   env = {
     GIT_AUTHOR_EMAIL    = "${data.coder_workspace_owner.me.email}"
@@ -135,7 +143,7 @@ resource "coder_app" "code-server" {
   healthcheck {
     interval  = 5
     threshold = 6
-    url       = "http://localhost:13337/healthz"
+    url       = "http://localhost:8080/healthz"
   }
 }
 
@@ -145,15 +153,15 @@ provider "kubernetes" {
   config_path = var.use_kubeconfig == true ? "~/.kube/config" : null
 }
 
-resource "kubernetes_namespace" "home" {
+resource "kubernetes_namespace" "main" {
   metadata {
     name      = "coder-${data.coder_workspace_owner.me.name}-${data.coder_workspace.me.name}"
   }
 }
 
-resource "kubernetes_persistent_volume_claim" "home" {
+resource "kubernetes_persistent_volume_claim" "work" {
   depends_on = [
-    kubernetes_namespace.home
+    kubernetes_namespace.main
   ]
   metadata {
     name      = "coder-${data.coder_workspace_owner.me.name}-${data.coder_workspace.me.name}"
@@ -186,8 +194,8 @@ resource "kubernetes_persistent_volume_claim" "home" {
 resource "kubernetes_deployment" "main" {
   count = data.coder_workspace.me.start_count
   depends_on = [
-    kubernetes_persistent_volume_claim.home,
-    kubernetes_namespace.home
+    kubernetes_persistent_volume_claim.work,
+    kubernetes_namespace.main
   ]
   wait_for_rollout = false
   metadata {
@@ -264,16 +272,16 @@ resource "kubernetes_deployment" "main" {
             }
           }
           volume_mount {
-            mount_path = "/home/ubuntu"
-            name       = "home"
+            mount_path = "/work"
+            name       = "work"
             read_only  = false
           }
         }
 
         volume {
-          name = "home"
+          name = "work"
           persistent_volume_claim {
-            claim_name = kubernetes_persistent_volume_claim.home.metadata.0.name
+            claim_name = kubernetes_persistent_volume_claim.work.metadata.0.name
             read_only  = false
           }
         }
