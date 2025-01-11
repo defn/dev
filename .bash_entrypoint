@@ -30,6 +30,7 @@ if test -f ~/.bash_profile; then
 	source ~/.bash_profile
 fi
 
+if [[ "${WORKDIR}" != "${HOME}" ]]; then
 	lockfile="/tmp/.bash_entrypoint.lock"
 
 	# Attempt to acquire the lock without blocking
@@ -47,3 +48,4 @@ fi
 	fi 200>$lockfile
 
 	unset lockfile
+fi
