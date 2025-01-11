@@ -377,10 +377,14 @@ zfs:
 
 sync:
 	git pull
+	$(MAKE) sync_inner
+
+sync_inner:
+	$(MAKE) nix
 	git ls-files | grep 'mise.toml$$' | runmany 'mise trust $$1'
 	mise install
 	(cd m && mise install)
-	$(MAKE) nix
+	(cd m && mise exec -- npm install && mise exec -- npm install -g npm@latest)
 	if [[ -z "$${KUBERNETES_PORT_443_TCP:-}" ]]; then cd m/i && $(MAKE) sync; fi
 
 build-site-default:
