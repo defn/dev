@@ -7,9 +7,8 @@ function main {
 	source .bash_profile
 
 	if [[ -n "${KUBERNETES_PORT_443_TCP:-}" ]]; then
-		pushd ~/m
-		nohup j coder::code-server "${CODER_NAME}" >>/tmp/code-server.log 2>&1 &
-		popd
+		(cd ~/m && nohup j coder::code-server "${CODER_NAME}" >>/tmp/code-server.log 2>&1 &)
+		sudo chown ubuntu:ubuntu ~/.local
 	else
 		k3d cluster start k3s-default
 		k3d kubeconfig get k3s-default > ~/.kube/config

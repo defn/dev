@@ -263,14 +263,8 @@ resource "kubernetes_deployment" "main" {
             name  = "CODER_AGENT_TOKEN"
             value = coder_agent.main.token
           }
-          resources {
-            requests = {
-              "cpu"    = "${data.coder_parameter.cpu.value}"
-              "memory" = "${data.coder_parameter.memory.value}Gi"
-            }
-          }
           volume_mount {
-            mount_path = "/work"
+            mount_path = "/home/ubuntu/.local"
             name       = "work"
             read_only  = false
           }
