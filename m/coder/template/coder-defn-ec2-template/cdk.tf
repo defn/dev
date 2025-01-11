@@ -425,21 +425,25 @@ systemctl stop docker || true
 
 zpool create defn "/dev/$zfs_disk"
 
-for z in nix work docker; do
+for z in nix work; do
   zfs create defn/$z
   zfs set atime=off defn/$z
   zfs set compression=off defn/$z
   zfs set dedup=on defn/$z
 done
 
+zfs create -s -V 100G defn/docker
+
 zfs set mountpoint=/nix defn/nix
 zfs set mountpoint=/home/ubuntu/work defn/work
-zfs set mountpoint=/var/lib/docker defn/docker
+mkfs.ext4 /dev/zvol/defn/docker
 
 s5cmd cat s3://dfn-defn-global-defn-org/zfs/nix.zfs | zfs receive -F defn/nix &
 s5cmd cat s3://dfn-defn-global-defn-org/zfs/work.zfs | zfs receive -F defn/work &
 s5cmd cat s3://dfn-defn-global-defn-org/zfs/docker.zfs | zfs receive -F defn/docker &
 wait
+
+mount /dev/zvol/defn/docker /var/lib/docker
 
 systemctl start docker.socket || true
 systemctl start docker || true

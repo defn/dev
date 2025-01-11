@@ -10,6 +10,10 @@ function main {
 		(cd ~/m && nohup j coder::code-server "${CODER_NAME}" >>/tmp/code-server.log 2>&1 &)
 		sudo chown ubuntu:ubuntu ~/.local
 	else
+		(
+			cd ~/m/cache/docker
+			make init
+		)
 		k3d cluster start k3s-default
 		k3d kubeconfig get k3s-default > ~/.kube/config
 		(
