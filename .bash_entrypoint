@@ -39,7 +39,7 @@ fi
 				cd "${WORKDIR}"
 				mise trust -a
 				mise install
-				screen -dmS up bash -c "cd; source .bash_profile; cd \"${WORKDIR}\"; m up"
+				screen -dmS up bash -c "cd; source .bash_profile; cd \"${WORKDIR}\"; m up; sleep infinity"
 			)
 			screen -list
 			touch /tmp/.bash_entrypoint.done
