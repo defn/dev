@@ -1,4 +1,4 @@
 FROM 169.254.32.1:5000/defn/dev:base
 
 RUN sudo apt-get update && sudo apt-get upgrade -y
-RUN bash -c 'git pull && source .bash_profile && make home && mise trust && mise install && cd m && mise trust && mise install'
+RUN bash -c 'git pull && source .bash_profile && make install sync'
