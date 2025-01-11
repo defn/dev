@@ -145,11 +145,19 @@ provider "kubernetes" {
   config_path = var.use_kubeconfig == true ? "~/.kube/config" : null
 }
 
-
-resource "kubernetes_persistent_volume_claim" "home" {
+resource "kubernetes_namespace" "home" {
   metadata {
     name      = "coder-${data.coder_workspace_owner.me.name}-${data.coder_workspace.me.name}"
-    namespace = "coder-${data.coder_workspace_owner.me.name}-${data.coder_workspace.me.name}"
+  }
+}
+
+resource "kubernetes_persistent_volume_claim" "home" {
+  depends_on = [
+    kubernetes_namespace.home
+  ]
+  metadata {
+    name      = "coder-${data.coder_workspace_owner.me.name}-${data.coder_workspace.me.name}"
+    namespace      = "coder-${data.coder_workspace_owner.me.name}-${data.coder_workspace.me.name}"
     labels = {
       "app.kubernetes.io/name"     = "coder-pvc"
       "app.kubernetes.io/instance" = "coder-pcv-${data.coder_workspace_owner.me.name}-${data.coder_workspace.me.name}"
@@ -178,7 +186,8 @@ resource "kubernetes_persistent_volume_claim" "home" {
 resource "kubernetes_deployment" "main" {
   count = data.coder_workspace.me.start_count
   depends_on = [
-    kubernetes_persistent_volume_claim.home
+    kubernetes_persistent_volume_claim.home,
+    kubernetes_namespace.home
   ]
   wait_for_rollout = false
   metadata {
