@@ -9,30 +9,13 @@ terraform {
     }
   }
   backend "local" {
-
   }
-
 }
 
 variable "use_kubeconfig" {
   type        = bool
   description = ""
   default     = true
-}
-
-variable "namespace" {
-  type        = string
-  description = "The Kubernetes namespace to create workspaces in (must exist prior to creating workspaces). If the Coder host is itself running as a Pod on the same Kubernetes cluster as you are deploying workspaces to, set this to the same namespace."
-}
-
-data "coder_parameter" "homedir" {
-  default      = "/home/ubuntu/m"
-  description  = "home directory"
-  display_name = "HOME dir"
-  icon         = "https://raw.githubusercontent.com/matifali/logos/main/cpu-3.svg"
-  mutable      = true
-  name         = "homedir"
-  type         = "string"
 }
 
 data "coder_parameter" "cpu" {
@@ -166,7 +149,7 @@ provider "kubernetes" {
 resource "kubernetes_persistent_volume_claim" "home" {
   metadata {
     name      = "coder-${data.coder_workspace.me.id}-home"
-    namespace = var.namespace
+    namespace = "coder-${data.coder_workspace.me.id}-home"
     labels = {
       "app.kubernetes.io/name"     = "coder-pvc"
       "app.kubernetes.io/instance" = "coder-pvc-${data.coder_workspace.me.id}"
