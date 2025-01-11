@@ -3,9 +3,9 @@ init:
 	sudo update-ca-certificates
 	sudo systemctl restart docker
 
-certs:
+certz:
 	mkdir -p certs
-	cd certs && step certificate create --subtle --insecure --no-password --force --profile self-signed --san 169.254.32.1 k3d-registry registry.crt registry.key
+	cd certs && step certificate create --not-after=8760h --subtle --insecure --no-password --force --profile self-signed --san 169.254.32.1 k3d-registry registry.crt registry.key
 
 registry:
 	docker compose down || true
