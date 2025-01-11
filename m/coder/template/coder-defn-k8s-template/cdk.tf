@@ -255,7 +255,7 @@ resource "kubernetes_deployment" "main" {
           name              = "dev"
           image             = "169.254.32.1:5000/defn/dev:latest"
           image_pull_policy = "Always"
-          command           = ["bash", "-c", "cd; source .bash_profile; set -x; j create-coder-agent"]
+          command           = ["bash", "-c", "cd; source .bash_profile; set -x; git pull; j create-coder-agent"]
           security_context {
             run_as_user = "1000"
           }
