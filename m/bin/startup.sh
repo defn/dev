@@ -7,7 +7,7 @@ function main {
 	source .bash_profile
 
 	if [[ -n "${KUBERNETES_PORT_443_TCP:-}" ]]; then
-		(cd ~/m && setsid j coder::code-server "${CODER_NAME}" >>/tmp/code-server.log 2>&1 &)
+		(cd ~/m && setsid j coder::code-server "${CODER_NAME}" >>/tmp/code-server.log 2>&1 &) &
 		sudo chown ubuntu:ubuntu ~/.local
 	else
 		(
