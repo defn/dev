@@ -1,6 +1,6 @@
 terraform {
   required_providers {
-    aws = {
+    kubernetes = {
       source = "hashicorp/kubernetes"
     }
     coder = {
@@ -148,11 +148,11 @@ provider "kubernetes" {
 
 resource "kubernetes_persistent_volume_claim" "home" {
   metadata {
-    name      = "coder-${data.coder_workspace.me.id}-home"
-    namespace = "coder-${data.coder_workspace.me.id}-home"
+    name      = "coder-${data.coder_workspace_owner.me.name}-${data.coder_workspace.me.name}"
+    namespace = "coder-${data.coder_workspace_owner.me.name}-${data.coder_workspace.me.name}"
     labels = {
       "app.kubernetes.io/name"     = "coder-pvc"
-      "app.kubernetes.io/instance" = "coder-pvc-${data.coder_workspace.me.id}"
+      "app.kubernetes.io/instance" = "coder-pcv-${data.coder_workspace_owner.me.name}-${data.coder_workspace.me.name}"
       "app.kubernetes.io/part-of"  = "coder"
       "com.coder.resource"       = "true"
       "com.coder.workspace.id"   = data.coder_workspace.me.id
@@ -182,11 +182,11 @@ resource "kubernetes_deployment" "main" {
   ]
   wait_for_rollout = false
   metadata {
-    name      = "coder-${data.coder_workspace.me.id}"
-    namespace = var.namespace
+    name      = "coder-${data.coder_workspace_owner.me.name}-${data.coder_workspace.me.name}"
+    namespace = "coder-${data.coder_workspace_owner.me.name}-${data.coder_workspace.me.name}"
     labels = {
       "app.kubernetes.io/name"     = "coder-workspace"
-      "app.kubernetes.io/instance" = "coder-workspace-${data.coder_workspace.me.id}"
+      "app.kubernetes.io/instance" = "coder-${data.coder_workspace_owner.me.name}-${data.coder_workspace.me.name}"
       "app.kubernetes.io/part-of"  = "coder"
       "com.coder.resource"         = "true"
       "com.coder.workspace.id"     = data.coder_workspace.me.id
@@ -204,7 +204,7 @@ resource "kubernetes_deployment" "main" {
     selector {
       match_labels = {
         "app.kubernetes.io/name"     = "coder-workspace"
-        "app.kubernetes.io/instance" = "coder-workspace-${data.coder_workspace.me.id}"
+        "app.kubernetes.io/instance" = "coder-${data.coder_workspace_owner.me.name}-${data.coder_workspace.me.name}"
         "app.kubernetes.io/part-of"  = "coder"
         "com.coder.resource"         = "true"
         "com.coder.workspace.id"     = data.coder_workspace.me.id
@@ -221,7 +221,7 @@ resource "kubernetes_deployment" "main" {
       metadata {
         labels = {
           "app.kubernetes.io/name"     = "coder-workspace"
-          "app.kubernetes.io/instance" = "coder-workspace-${data.coder_workspace.me.id}"
+          "app.kubernetes.io/instance" = "coder-${data.coder_workspace_owner.me.name}-${data.coder_workspace.me.name}"
           "app.kubernetes.io/part-of"  = "coder"
           "com.coder.resource"         = "true"
           "com.coder.workspace.id"     = data.coder_workspace.me.id
