@@ -7,8 +7,8 @@ function main {
 	source .bash_profile
 
 	if [[ -n "${KUBERNETES_PORT_443_TCP:-}" ]]; then
-		(cd ~/m && setsid j coder::code-server "${CODER_NAME}" >>/tmp/code-server.log 2>&1 &) &
 		sudo chown ubuntu:ubuntu ~/.local
+		(cd ~/m && setsid j coder::code-server "${CODER_NAME}" >>/tmp/code-server.log 2>&1 &) &
 	else
 		(
 			cd ~/m/cache/docker
@@ -43,6 +43,11 @@ function main {
 	esac
 
 	git pull
+
+	if [[ -n "${KUBERNETES_PORT_443_TCP:-}" ]]; then
+		(sleep 10; pkill -f bin/startup.sh || true) &
+		exit 0
+	fi
 }
 
 time main "$@"
