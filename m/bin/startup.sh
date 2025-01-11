@@ -23,20 +23,22 @@ function main {
 	if [[ -z "${KUBERNETES_PORT_443_TCP:-}" ]]; then
 		k3d cluster start k3s-default
 		k3d kubeconfig get k3s-default > ~/.kube/config
+		(
+			set +x
+			cd m
+			while true; do
+				cd
+				source .bash_profile
+				cd ~/m
+				j coder::code-server "${CODER_NAME}" || true &
+				sleep 5
+			done >>/tmp/code-server.log 2>&1
+		) &
+		disown
+	else
+		cd ~/m
+		nohup j coder::code-server "${CODER_NAME}" >>/tmp/code-server.log 2>&1 &
 	fi
-
-	(
-		set +x
-		cd m
-		while true; do
-			cd
-			source .bash_profile
-			cd ~/m
-			j coder::code-server "${CODER_NAME}" || true &
-			sleep 5
-		done >>/tmp/code-server.log 2>&1
-	) &
-	disown
 }
 
 time main "$@"
