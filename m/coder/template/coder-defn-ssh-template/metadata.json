@@ -3,15 +3,12 @@
     "metadata": {
       "backend": "local",
       "overrides": {
-        "null_resource": [
-          "provisioner"
-        ]
+        "null_resource": ["provisioner"]
       },
       "stackName": "coder-defn-ssh-template",
       "version": "0.20.10"
     },
-    "outputs": {
-    }
+    "outputs": {}
   },
   "data": {
     "coder_parameter": {

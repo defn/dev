@@ -265,7 +265,7 @@ resource "kubernetes_deployment" "main" {
           }
           env {
             name = "CODER_AGENT_URL"
-            vaue = data.coder_workspace.me.access_url
+            value = data.coder_workspace.me.access_url
           }
           env {
             name  = "CODER_NAME"
