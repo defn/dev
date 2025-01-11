@@ -44,6 +44,7 @@ if [[ "${WORKDIR}" != "${HOME}" ]]; then
 			)
 			screen -list
 			touch /tmp/.bash_entrypoint.done
+			screen -DRR up
 		fi
 	fi 200>$lockfile
 
