@@ -3,7 +3,7 @@ name=district
 python -mvenv venv
 source venv/bin/activate
 pip install certbot certbot-dns-cloudflare
-cp cloudflare.ini.example cloudflare.ini
+if ! test -f cloudflare.init; then cp cloudflare.ini.example cloudflare.ini; fi
 chmod 0600 cloudflare.ini
 # put cloudflare token in cloudflare.ini
 certbot certonly --dns-cloudflare --dns-cloudflare-credentials cloudflare.ini -d "*.${name}.defn.run" --config-dir . --work-dir . --logs-dir .
@@ -25,6 +25,5 @@ proxy to http://localhost:3000
 create proxied CNAME from *.${name} to tunnelID.cfargotunnel.com
 
 cd
-sudo chmod 1777 /tmp/uscreens
 screen -DRR coder
 make chrome-dev-coder name=${name}
