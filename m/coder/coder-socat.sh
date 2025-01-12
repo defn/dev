@@ -6,4 +6,7 @@
 
 cd
 source .bash_profile
-exec socat TCP-LISTEN:3000,bind=169.254.32.1,fork TCP:127.0.0.1:3000
+while true; do
+    socat TCP-LISTEN:3000,bind=169.254.32.1,fork TCP:127.0.0.1:3000
+    sleep 1
+done
