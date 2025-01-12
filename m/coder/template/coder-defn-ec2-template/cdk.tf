@@ -93,6 +93,10 @@ data "coder_parameter" "instance_type" {
     value = "m6idn.xlarge"
   }
   option {
+    name  = "4r"
+    value = "r6idn.xlarge"
+  }
+  option {
     name  = "4gpu"
     value = "g4dn.xlarge"
   }
