@@ -29,19 +29,19 @@ function main {
 		disown
 	fi
 
-	git config lfs.https://github.com/defn/dev.git/info/lfs.locksverify false
+	(
+		git config lfs.https://github.com/defn/dev.git/info/lfs.locksverify false
 
-	case "$(git remote get-url origin)" in
-	http*)
-		git remote rm origin
-		git remote add origin https://github.com/defn/dev
-		git fetch origin
-		git branch --set-upstream-to=origin/main main
-		git reset --hard origin/main
-		;;
-	esac
-
-	git pull
+		case "$(git remote get-url origin)" in
+		http*)
+			git remote rm origin
+			git remote add origin https://github.com/defn/dev
+			git fetch origin
+			git branch --set-upstream-to=origin/main main
+			git reset --hard origin/main
+			;;
+		esac
+	) &
 
 	if [[ -n "${KUBERNETES_PORT_443_TCP:-}" ]]; then
 		(sleep 10; pkill -f bin/startup.sh || true) &
