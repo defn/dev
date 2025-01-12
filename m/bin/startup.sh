@@ -8,7 +8,6 @@ function main {
 
 	if [[ -n "${KUBERNETES_PORT_443_TCP:-}" ]]; then
 		sudo chown ubuntu:ubuntu ~/.local
-		(cd ~/m && setsid j coder::code-server "${CODER_NAME}" >>/tmp/code-server.log 2>&1 &) &
 	else
 		(
 			cd ~/m/cache/docker

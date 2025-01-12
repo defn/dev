@@ -20,13 +20,19 @@ create-coder-agent:
 create-coder-agent-sync workdir:
 	#!/usr/bin/env bash
 
-	cd m
+	(
+		cd ~/m
+		setsid j coder::code-server "${CODER_NAME}" >>/tmp/code-server.log 2>&1 &
+	) &
+
 	(
 		cd "{{workdir}}"
 		mise trust -a
 		mise install
 		setsid screen -dmS up bash -c "cd; source .bash_profile; cd \"{{workdir}}\"; m up; sleep infinity"
 	) &
+
+	cd m
 	exec just coder::coder-agent "${CODER_NAME}"
 
 destroy-coder-agent:

@@ -255,7 +255,7 @@ resource "kubernetes_deployment" "main" {
           name              = "dev"
           image             = "169.254.32.1:5000/defn/dev:latest"
           image_pull_policy = "Always"
-          command           = ["/bin/tini", "--", "bash", "-c", "cd; source .bash_profile; git pull; bash -x j create-coder-agent-sync ${data.coder_parameter.homedir.value}"]
+          command           = ["/bin/tini", "--", "bash", "-c", "cd; source .bash_profile; git pull; exec j create-coder-agent-sync ${data.coder_parameter.homedir.value}"]
           security_context {
             run_as_user = "1000"
           }
@@ -265,7 +265,11 @@ resource "kubernetes_deployment" "main" {
           }
           env {
             name = "CODER_AGENT_URL"
-            value = "http://169.254.32.1:3000" // data.coder_workspace.me.access_url
+            value = "http://169.254.32.1:3000"
+          }
+          env {
+            name = "CODER_AGENT_URL_ORIGINAL"
+            value = data.coder_workspace.me.access_url
           }
           env {
             name  = "CODER_NAME"
