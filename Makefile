@@ -360,19 +360,34 @@ zfs:
 	sudo zfs destroy defn/nix@latest || true
 	sudo zfs destroy defn/work@latest || true
 	sudo zfs destroy defn/docker@latest || true
-	sudo systemctl daemon-reload
-	k3d cluster delete k3s-default || true
-	k3d cluster create k3s-default
-	sudo docker system prune -f
-	sudo systemctl stop docker.socket
-	sudo systemctl stop docker
 	sudo zfs snapshot defn/nix@latest
 	sudo zfs snapshot defn/work@latest
-	sudo zfs snapshot defn/docker@latest
 	sudo zfs send defn/nix@latest | pv | s5cmd pipe s3://dfn-defn-global-defn-org/zfs/nix.zfs
 	tar cfz - bin/nix .nix* .local/state/nix | pv | s5cmd pipe s3://dfn-defn-global-defn-org/zfs/nix.tar.gz
 	sudo zfs send defn/work@latest | pv | s5cmd pipe s3://dfn-defn-global-defn-org/zfs/work.zfs
+
+	sudo systemctl daemon-reload
+
+	sudo systemctl stop docker.socket
+	sudo systemctl stop docker
+	sudo umount /var/lib/docker
+
+	sudo zfs destroy defn/docker@latest || true
+	sudo zfs destroy defn/docker || true
+
+	sudo zfs create -s -V 100G defn/docker
+	sudo mkfs.ext4 /dev/zvol/defn/docker
+	sudo mount /dev/zvol/defn/docker /var/lib/docker
+
+	sudo systemctl start docker.socket
+	sudo systemctl start docker
+	cd m/cache/docker && $(MAKE) init registry k3d
+	sudo systemctl stop docker.socket
+	sudo systemctl stop docker
+
+	sudo zfs snapshot defn/docker@latest
 	sudo zfs send defn/docker@latest | pv | s5cmd pipe s3://dfn-defn-global-defn-org/zfs/docker.zfs
+
 	sudo systemctl start docker.socket
 	sudo systemctl start docker
 	k3d cluster start k3s-default
