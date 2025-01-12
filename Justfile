@@ -28,6 +28,7 @@ create-coder-agent-sync workdir:
 	(
 		cd "{{workdir}}"
 		mise trust -a
+		sleep 10
 		mise install
 		setsid screen -dmS up bash -c "cd; source .bash_profile; cd \"{{workdir}}\"; m up; sleep infinity"
 	) &
