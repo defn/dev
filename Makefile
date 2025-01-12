@@ -139,7 +139,7 @@ dotfiles:
 	if test -n "$${GIT_AUTHOR_NAME:-}"; then \
 		if ! test -d ~/dotfiles/.git/.; then \
 			rm -rf ~/dotfiles; \
-			t git_clone_dotfiles git clone git@github.com:$${GIT_AUTHOR_NAME}/dotfiles ~/dotfiles; \
+			t git_clone_dotfiles git clone https://github.com/$${GIT_AUTHOR_NAME}/dotfiles ~/dotfiles; \
 		fi; \
 		t dotfiles_bootstrap ./dotfiles/bootstrap; \
 	fi
@@ -150,7 +150,7 @@ password-store:
 		if ! test -d ~/work/password-store/.git/.; then \
 			rm -rf ~/work/pssword-store; \
 			mkdir -p ~/work/password-store; \
-			t git_clone_password_store git clone git@github.com:$${GIT_AUTHOR_NAME}/password-store ~/work/password-store; \
+			t git_clone_password_store git clone https://github.com/$${GIT_AUTHOR_NAME}/password-store ~/work/password-store; \
 		fi; \
 	fi
 
