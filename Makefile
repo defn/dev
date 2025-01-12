@@ -361,7 +361,9 @@ zfs:
 	sudo zfs destroy defn/work@latest || true
 	sudo zfs destroy defn/docker@latest || true
 	sudo systemctl daemon-reload
-	k3d cluster stop k3s-default
+	k3d cluster delete k3s-default || true
+	k3d cluster create k3s-default
+	sudo dockr system prune -f
 	sudo systemctl stop docker.socket
 	sudo systemctl stop docker
 	sudo zfs snapshot defn/nix@latest
