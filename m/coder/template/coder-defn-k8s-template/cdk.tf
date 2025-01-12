@@ -279,6 +279,22 @@ resource "kubernetes_deployment" "main" {
             name  = "CODER_HOMEDIR"
             value = data.coder_parameter.homedir.value
           }
+    env {
+      name="GIT_AUTHOR_EMAIL"
+      value    = data.coder_workspace_owner.me.email
+    }
+    env {
+    name = "GIT_AUTHOR_NAME"
+    value      = data.coder_workspace_owner.me.name
+    }
+    env {
+    name = "GIT_COMMITTER_EMAIL"
+    value = data.coder_workspace_owner.me.email
+    }
+    env {
+    name = "GIT_COMMITTER_NAME"
+    value= data.coder_workspace_owner.me.name
+    }
 
           volume_mount {
             mount_path = "/home/ubuntu/.local"
