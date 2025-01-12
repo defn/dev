@@ -157,11 +157,9 @@ coder-agent *host:
 
 	export STARSHIP_NO=1 LOCAL_ARCHIVE=/usr/lib/locale/locale-archive
 
-	set +x
 	cd
 	source ~/.bash_profile
 
-	set -x
 	cd ~/m
 	exec 1>/dev/null
 	exec 2>/dev/null
