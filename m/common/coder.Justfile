@@ -163,25 +163,29 @@ open*name:
 coder-agent *host:
 	#!/usr/bin/env bash
 
-	set -x
-
 	case "$(uname -s)" in
 		Darwin) export LC_ALL=C LANG=C ;;
 	esac
 
 	export STARSHIP_NO=1 LOCAL_ARCHIVE=/usr/lib/locale/locale-archive
 
-	cd
 	set +x
+	cd
 	source ~/.bash_profile
+
 	set -x
 	cd ~/m
-	echo ${CODER_INIT_SCRIPT_BASE64} | base64 -d \
-		| sed 's#agent$#agent '"${CODER_NAME}"'#; s#^while.*#while ! test -x ${BINARY_NAME}; do#; s#^BINARY_NAME.*#BINARY_NAME='"$HOME"'/bin/nix/coder#; s#exec ./#exec #; s#exit 1#echo exit 1#; s#output=$(./#output=$(#' \
-		> /tmp/coder-init-script-${CODER_NAME}-$$
 	exec 1>/dev/null
 	exec 2>/dev/null
-	exec bash -x /tmp/coder-init-script-${CODER_NAME}-$$
+
+	if [[ -n "${CODER_INIT_SCRIPT_BASE64:-}" ]]; then
+		echo ${CODER_INIT_SCRIPT_BASE64} | base64 -d \
+			| sed 's#agent$#agent '"${CODER_NAME}"'#; s#^while.*#while ! test -x ${BINARY_NAME}; do#; s#^BINARY_NAME.*#BINARY_NAME='"$HOME"'/bin/nix/coder#; s#exec ./#exec #; s#exit 1#echo exit 1#; s#output=$(./#output=$(#' \
+			> /tmp/coder-init-script-${CODER_NAME}-$$
+		exec bash -x /tmp/coder-init-script-${CODER_NAME}-$$
+	else
+		exec coder agent
+	fi
 
 # Run code-server in a loop
 [no-cd, private]
