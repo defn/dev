@@ -10,11 +10,11 @@ certz:
 registry:
 	docker compose down || true
 	docker compose up -d --remove-orphans
-
-k3d:
 	docker pull nginx		
 	docker tag nginx:latest 169.254.32.1:5000/nginx:latest
 	docker push 169.254.32.1:5000/nginx:latest
+
+k3d:
 	k3d cluster create \
 		--volume "$(PWD)/registries.yaml:/etc/rancher/k3s/registries.yaml" \
 		--volume "$(PWD)/certs/registry.crt:/etc/ssl/certs/registry.crt"
