@@ -25,7 +25,7 @@ create-coder-agent-sync workdir:
 		cd "{{workdir}}"
 		mise trust -a
 		mise install
-		screen -dmS up bash -c "cd; source .bash_profile; cd \"{{workdir}}\"; m up; sleep infinity"
+		setsid screen -dmS up bash -c "cd; source .bash_profile; cd \"{{workdir}}\"; m up; sleep infinity"
 	) &
 	exec just coder::coder-agent "${CODER_NAME}"
 

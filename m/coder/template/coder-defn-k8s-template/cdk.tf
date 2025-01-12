@@ -275,10 +275,6 @@ resource "kubernetes_deployment" "main" {
             name  = "CODER_HOMEDIR"
             value = data.coder_parameter.homedir.value
           }
-          env {
-            name  = "CODER_INIT_SCRIPT_BASE64"
-            value = base64encode(coder_agent.main.init_script)
-          }
 
           volume_mount {
             mount_path = "/home/ubuntu/.local"
