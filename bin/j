@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 
-set -x
-
 export JUST_UNSTABLE=1
 
 if [[ $# == 0 ]]; then

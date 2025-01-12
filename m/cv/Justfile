@@ -48,7 +48,7 @@ thumbs:
 t2:
     cat <(find yes -type f | cut -d/ -f2 | cut -d. -f1) <(find yes -type f | cut -d/ -f2 | cut -d. -f1) <(find t2 -name '*.png' | cut -d/ -f2 | cut -d. -f1) | sort | uniq -c | grep ' 2 ' | awk '{print $NF}' | sort | runmany 32 1 'echo "img/$1.jpeg -> t2/$1.png"; mogrify -path t2 -resize 400x -format png img/$1.jpeg'
 
-gallery dir="thumbs" output="thumbs" max="1000":
+gallery dir="thumbs" output="thumbs" max="10000":
     time etc/proc-thumbs {{dir}} {{output}} {{max}}
     
 big prefix="replicate/":
