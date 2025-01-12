@@ -356,7 +356,7 @@ coder-ssh-chromebook:
 	@export STARSHIP_NO=1 && source ~/.bash_profile && echo $(CODER_INIT_SCRIPT_BASE64) | base64 -d | exec bash -x -
 
 zfs:
-	$(MAKE) sync
+	$(MAKE) install release
 	sudo zfs destroy defn/nix@latest || true
 	sudo zfs destroy defn/work@latest || true
 	sudo zfs destroy defn/docker@latest || true
