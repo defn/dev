@@ -25,7 +25,7 @@ coder:
 	mise exec -- packer build -color=true -timestamp-ui=true $@.pkr.hcl
 
 # docker
-home:
+base:
 	docker build -t 169.254.32.1:5000/defn/dev:base . 
 	docker push 169.254.32.1:5000/defn/dev:base
 
