@@ -182,7 +182,7 @@ code-server *host:
 	source ~/.bash_profile
 
 	if [[ -n "${CODER_AGENT_URL_ORIGINAL:-}" ]]; then
-		export VSCODE_PROXY_URI="https://{{{{port}}--main--${CODER_NAME##*-}--$(echo $CODER_NAME | cut -d- -f2).${CODER_AGENT_URL_ORIGINAL#https://coder.}/"
+		export VSCODE_PROXY_URI="https://{{{{port}}--main--$(echo $CODER_NAME | cut -d- -f3-5)--$(echo $CODER_NAME | cut -d- -f2).${CODER_AGENT_URL_ORIGINAL#https://coder.}/"
 	fi
 
 	exec code-server --auth none
