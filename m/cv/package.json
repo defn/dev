@@ -1,9 +1,8 @@
 {
   "dependencies": {
-    "@types/node": "^22.5.0",
+    "@types/node": "^22.10.5",
     "cv": "link:",
     "node-fetch": "^3.3.2",
-    "replicate": "^0.32.0",
-    "wrangler": "^3.100.0"
+    "replicate": "^1.0.1"
   }
 }
