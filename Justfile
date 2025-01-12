@@ -17,10 +17,16 @@ create-coder-agent:
 	cd m
 	just coder::coder-agent "${CODER_NAME}" 2>/dev/null 1>/dev/null &
 
-create-coder-agent-sync:
+create-coder-agent-sync workdir:
 	#!/usr/bin/env bash
 
 	cd m
+	(
+		cd "{{workdir}}"
+		mise trust -a
+		mise install
+		screen -dmS up bash -c "cd; source .bash_profile; cd \"{{workdir}}\"; m up; sleep infinity"
+	) &
 	exec just coder::coder-agent "${CODER_NAME}"
 
 destroy-coder-agent:

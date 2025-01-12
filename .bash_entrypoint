@@ -36,15 +36,8 @@ if [[ "${WORKDIR}" != "${HOME}" ]]; then
 	# Attempt to acquire the lock without blocking
 	if flock -n 200; then
 		if ! test -r /tmp/.bash_entrypoint.done; then
-			(
-				cd "${WORKDIR}"
-				mise trust -a
-				mise install
-				screen -dmS up bash -c "cd; source .bash_profile; cd \"${WORKDIR}\"; m up; sleep infinity"
-			)
-			screen -list
+			true
 			touch /tmp/.bash_entrypoint.done
-			screen -DRR up
 		fi
 	fi 200>$lockfile
 
