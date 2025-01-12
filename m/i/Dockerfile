@@ -43,5 +43,7 @@ RUN sudo apt-get update && sudo apt-get install -y tini
 
 RUN bash -c 'git pull && source .bash_profile && make install sync'
 
+RUN bash -c 'source .bash_profiles && for a in vscodevim.vim cuelang.cue kokakiwi.vscode-just svelte.svelte-vscode astro-build.astro-vscode unifiedjs.vscode-mdx; do code-server serve-local --force --install-extension "$a"; done'
+
 ENTRYPOINT [ "/bin/tini", "bash", "--", "-c" ]
 CMD [ "git reset --hard && git pull && exec sleep infinity" ]
