@@ -136,12 +136,6 @@ provider "kubernetes" {
   config_path = var.use_kubeconfig == true ? "~/.kube/config" : null
 }
 
-resource "kubernetes_namespace" "main" {
-  metadata {
-    name = "coder-${data.coder_workspace_owner.me.name}"
-  }
-}
-
 resource "kubernetes_persistent_volume_claim" "user" {
   metadata {
     name      = "coder-${data.coder_workspace_owner.me.name}-${data.coder_workspace.me.name}"
@@ -173,9 +167,6 @@ resource "kubernetes_persistent_volume_claim" "user" {
 
 resource "kubernetes_deployment" "main" {
   count = data.coder_workspace.me.start_count
-  depends_on = [
-    kubernetes_namespace.main
-  ]
   wait_for_rollout = false
   metadata {
     name      = "coder-${data.coder_workspace_owner.me.name}-${data.coder_workspace.me.name}"
