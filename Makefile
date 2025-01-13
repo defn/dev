@@ -361,7 +361,8 @@ zfs:
 	sudo zfs destroy defn/docker@latest || true
 
 	(cd ~/m && b clean)
-	(cd ~/m/pkg/coder && nix develop -c bash -c "cd && make rehome")
+	(cd ~/m/pkg/coder && nix develop -c bash -c "cd && make rehome" || true) 
+	make home
 
 	sudo zfs snapshot defn/nix@latest
 	sudo zfs snapshot defn/work@latest
