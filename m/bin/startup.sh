@@ -6,7 +6,7 @@ function main {
 	cd
 	source .bash_profile
 
-	if [[ -n "${KUBERNETES_PORT_443_TCP:-}" ]]; then
+	if [[ -n ${KUBERNETES_PORT_443_TCP-} ]]; then
 		true
 	else
 		(
@@ -14,7 +14,7 @@ function main {
 			make init
 		)
 		k3d cluster start k3s-default
-		k3d kubeconfig get k3s-default > ~/.kube/config
+		k3d kubeconfig get k3s-default >~/.kube/config
 		(
 			set +x
 			cd m
@@ -43,8 +43,11 @@ function main {
 		esac
 	) &
 
-	if [[ -n "${KUBERNETES_PORT_443_TCP:-}" ]]; then
-		(sleep 10; pkill -f bin/startup.sh || true) &
+	if [[ -n ${KUBERNETES_PORT_443_TCP-} ]]; then
+		(
+			sleep 10
+			pkill -f bin/startup.sh || true
+		) &
 		exit 0
 	fi
 }
