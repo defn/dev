@@ -17,12 +17,3 @@ polkit.addRule(function(action, subject) {
 });
 
 systemctl mask sleep.target suspend.target hibernate.target hybrid-sleep.target
-
-container coder on macos:
-home/ubuntu/bin/with-env j create-coder-agent
-ssh defn@immanent docker exec -i dev-home-1
-
-
-m/.bazelrc.user.example m/.bazelrc.user
-make install
-make sync
