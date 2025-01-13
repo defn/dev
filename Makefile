@@ -359,10 +359,15 @@ zfs:
 	sudo zfs destroy defn/nix@latest || true
 	sudo zfs destroy defn/work@latest || true
 	sudo zfs destroy defn/docker@latest || true
+
+	(cd ~/m && b clean)
+	(cd ~/m/pkg/coder && nix develop -c bash -c "cd && make rehome")
+
 	sudo zfs snapshot defn/nix@latest
 	sudo zfs snapshot defn/work@latest
-	sudo zfs send defn/nix@latest | pv | s5cmd pipe s3://dfn-defn-global-defn-org/zfs/nix.zfs
+
 	tar cfz - bin/nix .nix* .local/state/nix | pv | s5cmd pipe s3://dfn-defn-global-defn-org/zfs/nix.tar.gz
+	sudo zfs send defn/nix@latest | pv | s5cmd pipe s3://dfn-defn-global-defn-org/zfs/nix.zfs
 	sudo zfs send defn/work@latest | pv | s5cmd pipe s3://dfn-defn-global-defn-org/zfs/work.zfs
 
 	sudo systemctl daemon-reload
