@@ -12,13 +12,13 @@
   "dependencies": {
     "@astrojs/cloudflare": "^12.1.0",
     "@astrojs/sitemap": "^3.2.1",
-    "@astrojs/starlight": "^0.30.3",
+    "@astrojs/starlight": "^0.30.6",
     "@astrojs/starlight-tailwind": "^3.0.0",
     "@astrojs/tailwind": "^5.1.4",
-    "astro": "^5.1.1",
+    "astro": "^5.1.5",
     "amanibhav.am": "link:",
     "sharp": "^0.33.5",
     "tailwindcss": "^3.4.17",
-    "wrangler": "^3.99.0"
+    "wrangler": "^3.101.0"
   }
 }
