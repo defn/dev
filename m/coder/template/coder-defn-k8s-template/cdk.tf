@@ -63,20 +63,6 @@ data "coder_parameter" "username" {
   type         = "string"
 }
 
-data "coder_parameter" "nix_volume_size" {
-  default      = "25"
-  description  = "The size of the nix volume to create for the workspace in GB"
-  display_name = "nix volume size"
-  icon         = "https://raw.githubusercontent.com/matifali/logos/main/database.svg"
-  mutable      = true
-  name         = "nix_volume_size"
-  type         = "number"
-  validation {
-    max = 300
-    min = 25
-  }
-}
-
 data "coder_parameter" "provider" {
   default      = "k8s-pod"
   description  = "The service provider to deploy the workspace in"
@@ -157,42 +143,9 @@ resource "kubernetes_namespace" "main" {
   }
 }
 
-resource "kubernetes_persistent_volume_claim" "work" {
-  depends_on = [
-    kubernetes_namespace.main
-  ]
-  metadata {
-    name      = "coder-${data.coder_workspace_owner.me.name}-${data.coder_workspace.me.name}"
-    namespace = "coder-${data.coder_workspace_owner.me.name}-${data.coder_workspace.me.name}"
-    labels = {
-      "app.kubernetes.io/name"     = "coder-pvc"
-      "app.kubernetes.io/instance" = "coder-pcv-${data.coder_workspace_owner.me.name}-${data.coder_workspace.me.name}"
-      "app.kubernetes.io/part-of"  = "coder"
-      "com.coder.resource"         = "true"
-      "com.coder.workspace.id"     = data.coder_workspace.me.id
-      "com.coder.workspace.name"   = data.coder_workspace.me.name
-      "com.coder.user.id"          = data.coder_workspace_owner.me.id
-      "com.coder.user.username"    = data.coder_workspace_owner.me.name
-    }
-    annotations = {
-      "com.coder.user.email" = data.coder_workspace_owner.me.email
-    }
-  }
-  wait_until_bound = false
-  spec {
-    access_modes = ["ReadWriteOnce"]
-    resources {
-      requests = {
-        storage = "${data.coder_parameter.nix_volume_size.value}Gi"
-      }
-    }
-  }
-}
-
 resource "kubernetes_deployment" "main" {
   count = data.coder_workspace.me.start_count
   depends_on = [
-    kubernetes_persistent_volume_claim.work,
     kubernetes_namespace.main
   ]
   wait_for_rollout = false
@@ -255,7 +208,7 @@ resource "kubernetes_deployment" "main" {
           name              = "dev"
           image             = "169.254.32.1:5000/defn/dev:latest"
           image_pull_policy = "Always"
-          command           = ["/bin/tini", "--", "bash", "-c", "cd; source .bash_profile; git pull; exec j create-coder-agent-sync ${data.coder_parameter.homedir.value}"]
+          command           = ["/bin/tini", "--", "bash", "-c", "cd; source .bash_profile; exec j create-coder-agent-sync ${data.coder_parameter.homedir.value}"]
           security_context {
             run_as_user = "1000"
           }
@@ -264,7 +217,11 @@ resource "kubernetes_deployment" "main" {
             value = coder_agent.main.token
           }
           env {
-            name = "CODER_AGENT_URL"
+            name  = "CODER_AGENT_URL"
+            value = "http://169.254.32.1:3000"
+          }
+          env {
+            name  = "CODER_AGENT_URL_ORIGINAL"
             value = data.coder_workspace.me.access_url
           }
           env {
@@ -276,22 +233,20 @@ resource "kubernetes_deployment" "main" {
             value = data.coder_parameter.homedir.value
           }
           env {
-            name  = "CODER_INIT_SCRIPT_BASE64"
-            value = base64encode(coder_agent.main.init_script)
+            name  = "GIT_AUTHOR_EMAIL"
+            value = data.coder_workspace_owner.me.email
           }
-
-          volume_mount {
-            mount_path = "/home/ubuntu/.local"
-            name       = "work"
-            read_only  = false
+          env {
+            name  = "GIT_AUTHOR_NAME"
+            value = data.coder_workspace_owner.me.name
           }
-        }
-
-        volume {
-          name = "work"
-          persistent_volume_claim {
-            claim_name = kubernetes_persistent_volume_claim.work.metadata.0.name
-            read_only  = false
+          env {
+            name  = "GIT_COMMITTER_EMAIL"
+            value = data.coder_workspace_owner.me.email
+          }
+          env {
+            name  = "GIT_COMMITTER_NAME"
+            value = data.coder_workspace_owner.me.name
           }
         }
       }

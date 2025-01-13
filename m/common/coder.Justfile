@@ -45,15 +45,7 @@ up *name:
 	command="make coder-ssh-envbuilder"
 	template=coder-defn-ssh-template
 
-	case "$(uname -s)" in
-		Darwin)
-			export SUDO_ASKPASS=$HOME/bin/askpass
-			sudo="sudo -A"
-			;;
-		*)
-			sudo=sudo
-			;;
-	esac
+	sudo=sudo
 
 	$sudo ln -nfs ubuntu /home/dev
 	$sudo chown $(id -un) /var/run/docker.sock 2>/dev/null || true
@@ -163,51 +155,37 @@ open*name:
 coder-agent *host:
 	#!/usr/bin/env bash
 
-	set -x
-
-	case "$(uname -s)" in
-		Darwin) export LC_ALL=C LANG=C ;;
-	esac
-
 	export STARSHIP_NO=1 LOCAL_ARCHIVE=/usr/lib/locale/locale-archive
 
 	cd
-	set +x
 	source ~/.bash_profile
-	set -x
+
 	cd ~/m
-	echo ${CODER_INIT_SCRIPT_BASE64} | base64 -d \
-		| sed 's#agent$#agent '"${CODER_NAME}"'#; s#^while.*#while ! test -x ${BINARY_NAME}; do#; s#^BINARY_NAME.*#BINARY_NAME='"$HOME"'/bin/nix/coder#; s#exec ./#exec #; s#exit 1#echo exit 1#; s#output=$(./#output=$(#' \
-		> /tmp/coder-init-script-${CODER_NAME}-$$
 	exec 1>/dev/null
 	exec 2>/dev/null
-	exec bash -x /tmp/coder-init-script-${CODER_NAME}-$$
+
+	if [[ -n "${CODER_INIT_SCRIPT_BASE64:-}" ]]; then
+		echo ${CODER_INIT_SCRIPT_BASE64} | base64 -d \
+			| sed 's#agent$#agent '"${CODER_NAME}"'#; s#^while.*#while ! test -x ${BINARY_NAME}; do#; s#^BINARY_NAME.*#BINARY_NAME='"$HOME"'/bin/nix/coder#; s#exec ./#exec #; s#exit 1#echo exit 1#; s#output=$(./#output=$(#' \
+			> /tmp/coder-init-script-${CODER_NAME}-$$
+		exec bash -x /tmp/coder-init-script-${CODER_NAME}-$$
+	else
+		exec coder agent
+	fi
 
 # Run code-server in a loop
 [no-cd, private]
 code-server *host:
 	#!/usr/bin/env bash
 
-	case "$(uname -s)" in
-		Darwin) export LC_ALL=C LANG=C ;;
-	esac
-
-	pkill -9 trunk || true
 	export STARSHIP_NO=
 	source ~/.bash_profile
 
-	#export VSCODE_PROXY_URI="https://{{{{port}}--main--${CODER_NAME##*-}--$(echo $CODER_NAME | cut -d- -f2).${CODER_AGENT_URL#https://coder.}/"
+	if [[ -n "${CODER_AGENT_URL_ORIGINAL:-}" ]]; then
+		export VSCODE_PROXY_URI="https://{{{{port}}--main--${CODER_NAME}--${GIT_AUTHOR_NAME}.${CODER_AGENT_URL_ORIGINAL#https://coder.}/"
+	fi
 
-	while true; do 
-		case "$(uname -s)" in
-			Linux)
-				exec code-server --auth none
-				;;
-			*)
-				code-server --auth none || true
-				;;
-		esac
-	done
+	exec code-server --auth none
 
 # update all Coder workspace templates
 [no-cd, private]

@@ -139,7 +139,7 @@ dotfiles:
 	if test -n "$${GIT_AUTHOR_NAME:-}"; then \
 		if ! test -d ~/dotfiles/.git/.; then \
 			rm -rf ~/dotfiles; \
-			t git_clone_dotfiles git clone git@github.com:$${GIT_AUTHOR_NAME}/dotfiles ~/dotfiles; \
+			t git_clone_dotfiles git clone https://github.com/$${GIT_AUTHOR_NAME}/dotfiles ~/dotfiles; \
 		fi; \
 		t dotfiles_bootstrap ./dotfiles/bootstrap; \
 	fi
@@ -150,7 +150,7 @@ password-store:
 		if ! test -d ~/work/password-store/.git/.; then \
 			rm -rf ~/work/pssword-store; \
 			mkdir -p ~/work/password-store; \
-			t git_clone_password_store git clone git@github.com:$${GIT_AUTHOR_NAME}/password-store ~/work/password-store; \
+			t git_clone_password_store git clone https://github.com/$${GIT_AUTHOR_NAME}/password-store ~/work/password-store; \
 		fi; \
 	fi
 
@@ -356,21 +356,43 @@ coder-ssh-chromebook:
 	@export STARSHIP_NO=1 && source ~/.bash_profile && echo $(CODER_INIT_SCRIPT_BASE64) | base64 -d | exec bash -x -
 
 zfs:
-	$(MAKE) sync
-	sudo zfs destroy nix@latest || true
-	sudo zfs destroy nix/work@latest || true
-	sudo zfs destroy nix/docker@latest || true
+	sudo zfs destroy defn/nix@latest || true
+	sudo zfs destroy defn/work@latest || true
+	sudo zfs destroy defn/docker@latest || true
+
+	(cd ~/m && b clean)
+	(cd ~/m/pkg/coder && nix develop -c bash -c "cd && make rehome" || true) 
+	make home
+
+	sudo zfs snapshot defn/nix@latest
+	sudo zfs snapshot defn/work@latest
+
+	tar cfz - bin/nix .nix* .local/state/nix | pv | s5cmd pipe s3://dfn-defn-global-defn-org/zfs/nix.tar.gz
+	sudo zfs send defn/nix@latest | pv | s5cmd pipe s3://dfn-defn-global-defn-org/zfs/nix.zfs
+	sudo zfs send defn/work@latest | pv | s5cmd pipe s3://dfn-defn-global-defn-org/zfs/work.zfs
+
 	sudo systemctl daemon-reload
-	k3d cluster stop k3s-default
+
 	sudo systemctl stop docker.socket
 	sudo systemctl stop docker
-	sudo zfs snapshot nix@latest
-	sudo zfs snapshot nix/work@latest
-	sudo zfs snapshot nix/docker@latest
-	sudo zfs send nix@latest | pv | s5cmd pipe s3://dfn-defn-global-defn-org/zfs/nix.zfs
-	tar cfz - bin/nix .nix* .local/state/nix | pv | s5cmd pipe s3://dfn-defn-global-defn-org/zfs/nix.tar.gz
-	sudo zfs send nix/work@latest | pv | s5cmd pipe s3://dfn-defn-global-defn-org/zfs/work.zfs
-	sudo zfs send nix/docker@latest | pv | s5cmd pipe s3://dfn-defn-global-defn-org/zfs/docker.zfs
+	sudo umount /var/lib/docker
+
+	sudo zfs destroy defn/docker@latest || true
+	sudo zfs destroy defn/docker || true
+
+	sudo zfs create -s -V 100G defn/docker
+	sudo mkfs.ext4 /dev/zvol/defn/docker
+	sudo mount /dev/zvol/defn/docker /var/lib/docker
+
+	sudo systemctl start docker.socket
+	sudo systemctl start docker
+	cd m/cache/docker && $(MAKE) init registry k3d
+	sudo systemctl stop docker.socket
+	sudo systemctl stop docker
+
+	sudo zfs snapshot defn/docker@latest
+	sudo zfs send defn/docker@latest | pv | s5cmd pipe s3://dfn-defn-global-defn-org/zfs/docker.zfs
+
 	sudo systemctl start docker.socket
 	sudo systemctl start docker
 	k3d cluster start k3s-default

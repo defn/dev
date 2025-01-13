@@ -93,6 +93,10 @@ data "coder_parameter" "instance_type" {
     value = "m6idn.xlarge"
   }
   option {
+    name  = "4r"
+    value = "r6idn.xlarge"
+  }
+  option {
     name  = "4gpu"
     value = "g4dn.xlarge"
   }
@@ -427,6 +431,9 @@ fi
 systemctl stop docker.socket || true
 systemctl stop docker || true
 
+nohup sudo -H -u ${data.coder_parameter.username.value} env \
+    bash -c 'cd && git fetch origin && git reset --hard origin/main && sudo chown -R ubuntu:ubuntu m/cache/docker/certs'
+
 zpool create defn "/dev/$zfs_disk"
 
 for z in nix work; do
@@ -460,7 +467,7 @@ nohup sudo -H -u ${data.coder_parameter.username.value} env \
   CODER_INIT_SCRIPT_BASE64=${base64encode(coder_agent.main.init_script)} \
   CODER_AGENT_URL="${data.coder_workspace.me.access_url}" \
   CODER_NAME="coder-${data.coder_workspace_owner.me.name}-${data.coder_workspace.me.name}" \
-    bash -c 'cd && git pull && source .bash_profile && bin/persist-cache && (s5cmd cat s3://dfn-defn-global-defn-org/zfs/nix.tar.gz | tar xfz -) && cd m && exec just coder::coder-agent' >>/tmp/user-data.log 2>&1 &
+    bash -c 'cd && git pull && source .bash_profile && bin/persist-cache && (s5cmd cat s3://dfn-defn-global-defn-org/zfs/nix.tar.gz | tar xfz -) && (cd m/cache/docker && make init) && cd m && exec just coder::coder-agent' >>/tmp/user-data.log 2>&1 &
 disown
 
 --//--

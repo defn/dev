@@ -1,0 +1,13 @@
+[Unit]
+Description=Coder server image sync
+After=network.target
+
+[Service]
+User=ubuntu
+WorkingDirectory=/home/ubuntu
+ExecStart=/home/ubuntu/m/coder/coder-sync.sh
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
+
