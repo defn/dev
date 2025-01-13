@@ -192,6 +192,11 @@ function w {
 	cd "${workdir}"
 }
 
+# coder ssh helper
+if [[ -z "${GIT_SSH_COMMAND:-}" ]]; then
+	export GIT_SSH_COMMAND="$(which coder) gitssh --"
+fi
+
 # vscode browser
 export BROWSER="$(type -P browser || true)"
 
