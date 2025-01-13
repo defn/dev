@@ -68,7 +68,7 @@ following:
     ls -ltrhd js*.html | awk '{print $NF}' | while read -r a; do if grep filename: "$a" >/dev/null; then echo "<a href=\"$a\">$a</a><br>"; fi; done > following.html.1
     mv -f following.html.1 following.html
 
-daily file="following.txt" n="6":
+daily file="following.txt" n="8":
     screen -dmS daily j daily-inner {{ file }} {{ n }}
     screen -DRR daily
 
