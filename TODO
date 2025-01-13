@@ -23,12 +23,6 @@ home/ubuntu/bin/with-env j create-coder-agent
 ssh defn@immanent docker exec -i dev-home-1
 
 
-docker stop k3d-registry
-sudo chown -R ubuntu:ubuntu m/cache/docker/certs
-
-git fetch origin
-git reset --hard origin/main
-
 m/.bazelrc.user.example m/.bazelrc.user
 make install
 make sync

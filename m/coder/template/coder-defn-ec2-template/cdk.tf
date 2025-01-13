@@ -431,6 +431,9 @@ fi
 systemctl stop docker.socket || true
 systemctl stop docker || true
 
+nohup sudo -H -u ${data.coder_parameter.username.value} env \
+    bash -c 'cd && git fetch origin && git reset --hard origin/main && sudo chown -R ubuntu:ubuntu m/cache/docker/certs'
+
 zpool create defn "/dev/$zfs_disk"
 
 for z in nix work; do
