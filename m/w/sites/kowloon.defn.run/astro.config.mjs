@@ -13,7 +13,7 @@ export default defineConfig({
   integrations: [
     sitemap(),
     starlight({
-      title: "Docs with Tailwind",
+      title: "Kowloon School",
       sidebar: [
         {
           label: "Guides",
