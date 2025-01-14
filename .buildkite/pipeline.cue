@@ -9,6 +9,17 @@ steps: [{
 }, {
 	label:   "home build"
 	command: "./.buildkite/bin/home-build.sh"
+}, {
+	label: "Website deploys"
+	plugins: [{
+		"monorepo-diff#v1.2.0": {
+			diff: "git diff --name-only HEAD~1"
+			watch: [{
+				path: "m/w/sites/amanibhav.am/"
+				config: command: "~/bin/invoke m install && ~/bin/invoke m package"
+			}]
+		}
+	}]
 }]
 
 #RunAsUbuntu: securityContext: {
