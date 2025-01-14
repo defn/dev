@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-set -efu pipefail
+set -efu -o pipefail
 
 website="$1"
 
