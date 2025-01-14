@@ -201,6 +201,8 @@ if [[ -n "${CODER_NAME:-}" ]]; then
 	CODER_AGENT_PID="$(pgrep -f nix/coder.agent.${CODER_NAME})"
 	if [[ -n "${CODER_AGENT_PID}" ]]; then
 		eval "$(cat /proc/${CODER_AGENT_PID}/environ | tr '\0' '\n' | grep '^CODER_AGENT')"
+		export CODER_AGENT_URL
+		export CODER_AGENT_TOKEN
 	fi
 fi
 
