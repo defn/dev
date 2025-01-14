@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-set -exu pipefail
+set -efu pipefail
 
 env | grep BUILDKITE | sort
 
