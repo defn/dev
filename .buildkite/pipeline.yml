@@ -12,4 +12,4 @@ steps:
           watch:
             - path: m/w/sites/amanibhav.am/
               config:
-                command: ~/bin/invoke m install && ~/bin/invoke m package
+                command: shome=$(pwd); $shome/bin/invoke m install && $shome/bin/invoke m package

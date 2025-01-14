@@ -16,7 +16,7 @@ steps: [{
 			diff: "git diff --name-only HEAD~1"
 			watch: [{
 				path: "m/w/sites/amanibhav.am/"
-				config: command: "~/bin/invoke m install && ~/bin/invoke m package"
+				config: command: "shome=$(pwd); $shome/bin/invoke m install && $shome/bin/invoke m package"
 			}]
 		}
 	}]
