@@ -16,7 +16,7 @@ steps: [{
 			diff: "git diff --name-only main"
 			watch: [{
 				path: "m/w/sites/amanibhav.am/"
-				config: command: "./.buildkite/deploy-cf-pages.sh"
+				config: command: "./.buildkite/deploy-cf-pages.sh m/w/sites/amanibhav.am"
 			}]
 		}
 	}]
