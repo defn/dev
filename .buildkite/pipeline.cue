@@ -13,7 +13,7 @@ steps: [{
 	label: "Website deploys"
 	plugins: [{
 		"monorepo-diff#v1.2.0": {
-			diff: "git diff --name-only HEAD~1"
+			diff: "git diff --name-only main"
 			watch: [{
 				path: "m/w/sites/amanibhav.am/"
 				config: command: "./.buildkite/deploy-cf-pages.sh"
