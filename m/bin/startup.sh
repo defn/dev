@@ -50,13 +50,7 @@ function main {
 		esac
 	) &
 
-	if [[ -n ${KUBERNETES_PORT_443_TCP-} ]]; then
-		(
-			sleep 10
-			pkill -f bin/startup.sh || true
-		) &
-		exit 0
-	fi
+	exit 0
 }
 
 time main "$@"
