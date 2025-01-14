@@ -199,7 +199,7 @@ fi
 
 CODER_AGENT_PID="$(pgrep -f nix/coder.agent.${CODER_NAME})"
 if [[ -n "${CODER_AGENT_PID}" ]]; then
-	eval "$(tr '\0' '\n' < /proc/${CODER_AGENT_PID}/environ | grep '^CODER_AGENT')"
+	eval "$(cat /proc/${CODER_AGENT_PID}/environ | tr '\0' '\n' | grep '^CODER_AGENT')"
 fi
 
 # vscode browser
