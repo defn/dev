@@ -95,7 +95,7 @@ resource "coder_agent" "main" {
     git reset --hard origin/main
 
     cd ~/m
-    bin/startup.sh
+    bin/startup.sh || true
   EOT
   env = {
     GIT_AUTHOR_EMAIL    = "${data.coder_workspace_owner.me.email}"
