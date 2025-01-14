@@ -136,35 +136,6 @@ provider "kubernetes" {
   config_path = var.use_kubeconfig == true ? "~/.kube/config" : null
 }
 
-resource "kubernetes_persistent_volume_claim" "user" {
-  metadata {
-    name      = "coder-${data.coder_workspace_owner.me.name}-${data.coder_workspace.me.name}"
-    namespace = "coder-${data.coder_workspace_owner.me.name}"
-    labels = {
-      "app.kubernetes.io/name"     = "coder-pvc"
-      "app.kubernetes.io/instance" = "coder-${data.coder_workspace.me.name}"
-      "app.kubernetes.io/part-of"  = "coder"
-      "com.coder.resource"         = "true"
-      "com.coder.workspace.id"     = data.coder_workspace.me.id
-      "com.coder.workspace.name"   = data.coder_workspace.me.name
-      "com.coder.user.id"          = data.coder_workspace_owner.me.id
-      "com.coder.user.username"    = data.coder_workspace_owner.me.name
-    }
-    annotations = {
-      "com.coder.user.email" = data.coder_workspace_owner.me.email
-    }
-  }
-  wait_until_bound = false
-  spec {
-    access_modes = ["ReadWriteOnce"]
-    resources {
-      requests = {
-        storage = "10Gi"
-      }
-    }
-  }
-}
-
 resource "kubernetes_deployment" "main" {
   count = data.coder_workspace.me.start_count
   wait_for_rollout = false
@@ -226,7 +197,7 @@ resource "kubernetes_deployment" "main" {
         volume {
           name = "user"
           persistent_volume_claim {
-            claim_name = kubernetes_persistent_volume_claim.user.metadata.0.name
+            claim_name = "coder-${data.coder_workspace_owner.me.name}"
             read_only  = false
           }
         }
