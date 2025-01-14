@@ -197,7 +197,7 @@ if [[ -z "${GIT_SSH_COMMAND:-}" ]]; then
 	export GIT_SSH_COMMAND="$(which coder) gitssh --"
 fi
 
-if [[ -n "${CODER_AGENT_URL:-}" ]]; then
+if [[ -z "${CODER_AGENT_URL:-}" ]]; then
 	if [[ -n "${CODER_NAME:-}" ]]; then
 		CODER_AGENT_PID="$(pgrep -f nix/coder.agent.${CODER_NAME})"
 		if [[ -n "${CODER_AGENT_PID}" ]]; then
