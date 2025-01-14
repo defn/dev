@@ -82,7 +82,6 @@ data "coder_workspace_owner" "me" {
 data "coder_workspace" "me" {
 }
 
-
 resource "coder_agent" "main" {
   arch           = "amd64"
   os             = "linux"
@@ -137,21 +136,12 @@ provider "kubernetes" {
   config_path = var.use_kubeconfig == true ? "~/.kube/config" : null
 }
 
-resource "kubernetes_namespace" "main" {
-  metadata {
-    name = "coder-${data.coder_workspace_owner.me.name}-${data.coder_workspace.me.name}"
-  }
-}
-
 resource "kubernetes_deployment" "main" {
   count = data.coder_workspace.me.start_count
-  depends_on = [
-    kubernetes_namespace.main
-  ]
   wait_for_rollout = false
   metadata {
     name      = "coder-${data.coder_workspace_owner.me.name}-${data.coder_workspace.me.name}"
-    namespace = "coder-${data.coder_workspace_owner.me.name}-${data.coder_workspace.me.name}"
+    namespace = "coder-${data.coder_workspace_owner.me.name}"
     labels = {
       "app.kubernetes.io/name"     = "coder-workspace"
       "app.kubernetes.io/instance" = "coder-${data.coder_workspace_owner.me.name}-${data.coder_workspace.me.name}"
@@ -204,11 +194,31 @@ resource "kubernetes_deployment" "main" {
           fs_group    = 1000
         }
 
+        volume {
+          name = "user"
+          persistent_volume_claim {
+            claim_name = "coder-${data.coder_workspace_owner.me.name}"
+            read_only  = false
+          }
+        }
+
         container {
           name              = "dev"
           image             = "169.254.32.1:5000/defn/dev:latest"
           image_pull_policy = "Always"
           command           = ["/bin/tini", "--", "bash", "-c", "cd; source .bash_profile; exec j create-coder-agent-sync ${data.coder_parameter.homedir.value}"]
+          volume_mount {
+            mount_path = "/home/ubuntu/.local/share/code-server"
+            name       = "user"
+            read_only  = false
+            sub_path   = "local-share-code-server"
+          }
+          volume_mount {
+            mount_path = "/home/ubuntu/dotfiles"
+            name       = "user"
+            read_only  = false
+            sub_path   = "dotfiles"
+          }
           security_context {
             run_as_user = "1000"
           }

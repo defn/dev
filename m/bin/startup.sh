@@ -7,7 +7,8 @@ function main {
 	source .bash_profile
 
 	if [[ -n ${KUBERNETES_PORT_443_TCP-} ]]; then
-		true
+		sudo chown ubuntu:ubuntu ~/dotfiles
+		sudo chown ubuntu:ubuntu ~/.local/share/code-server
 	else
 		(
 			cd ~/m/cache/docker
