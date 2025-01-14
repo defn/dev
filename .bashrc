@@ -197,9 +197,11 @@ if [[ -z "${GIT_SSH_COMMAND:-}" ]]; then
 	export GIT_SSH_COMMAND="$(which coder) gitssh --"
 fi
 
-CODER_AGENT_PID="$(pgrep -f nix/coder.agent.${CODER_NAME})"
-if [[ -n "${CODER_AGENT_PID}" ]]; then
-	eval "$(cat /proc/${CODER_AGENT_PID}/environ | tr '\0' '\n' | grep '^CODER_AGENT')"
+if [[ -n "${CODER_NAME:-}" ]]; then
+	CODER_AGENT_PID="$(pgrep -f nix/coder.agent.${CODER_NAME})"
+	if [[ -n "${CODER_AGENT_PID}" ]]; then
+		eval "$(cat /proc/${CODER_AGENT_PID}/environ | tr '\0' '\n' | grep '^CODER_AGENT')"
+	fi
 fi
 
 # vscode browser
