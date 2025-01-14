@@ -3,8 +3,12 @@
 set -e
 
 function main {
+	set -x
+
 	cd
+	set +x
 	source .bash_profile
+	set -x
 
 	if [[ -n ${KUBERNETES_PORT_443_TCP-} ]]; then
 		sudo chown ubuntu:ubuntu ~/dotfiles
@@ -21,7 +25,9 @@ function main {
 			cd m
 			while true; do
 				cd
+				set +x
 				source .bash_profile
+				set -x
 				cd ~/m
 				j coder::code-server "${CODER_NAME}" || true &
 				sleep 5
