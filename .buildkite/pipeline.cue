@@ -20,7 +20,7 @@ steps: [{
 			diff: "git diff --name-only main"
 			watch: [
 				for d in infra.domains {
-					path: "m/w/sites/\(d)/"
+					path: "m/w/sites/\(d)/**"
 					config: command: "./.buildkite/deploy-cf-pages.sh m/w/sites/\(d)"
 				},
 			]

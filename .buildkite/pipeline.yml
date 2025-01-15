@@ -10,54 +10,54 @@ steps:
       - monorepo-diff#v1.2.0:
           diff: git diff --name-only main
           watch:
-            - path: m/w/sites/amanibhav.am/
+            - path: m/w/sites/amanibhav.am/**
               config:
                 command: ./.buildkite/deploy-cf-pages.sh m/w/sites/amanibhav.am
-            - path: m/w/sites/d3fn.app/
+            - path: m/w/sites/d3fn.app/**
               config:
                 command: ./.buildkite/deploy-cf-pages.sh m/w/sites/d3fn.app
-            - path: m/w/sites/defn.co/
+            - path: m/w/sites/defn.co/**
               config:
                 command: ./.buildkite/deploy-cf-pages.sh m/w/sites/defn.co
-            - path: m/w/sites/defn.red/
+            - path: m/w/sites/defn.red/**
               config:
                 command: ./.buildkite/deploy-cf-pages.sh m/w/sites/defn.red
-            - path: m/w/sites/defn.blue/
+            - path: m/w/sites/defn.blue/**
               config:
                 command: ./.buildkite/deploy-cf-pages.sh m/w/sites/defn.blue
-            - path: m/w/sites/defn.app/
+            - path: m/w/sites/defn.app/**
               config:
                 command: ./.buildkite/deploy-cf-pages.sh m/w/sites/defn.app
-            - path: m/w/sites/defn.cloud/
+            - path: m/w/sites/defn.cloud/**
               config:
                 command: ./.buildkite/deploy-cf-pages.sh m/w/sites/defn.cloud
-            - path: m/w/sites/defn.co.in/
+            - path: m/w/sites/defn.co.in/**
               config:
                 command: ./.buildkite/deploy-cf-pages.sh m/w/sites/defn.co.in
-            - path: m/w/sites/defn.dev/
+            - path: m/w/sites/defn.dev/**
               config:
                 command: ./.buildkite/deploy-cf-pages.sh m/w/sites/defn.dev
-            - path: m/w/sites/defn.net/
+            - path: m/w/sites/defn.net/**
               config:
                 command: ./.buildkite/deploy-cf-pages.sh m/w/sites/defn.net
-            - path: m/w/sites/defn.org/
+            - path: m/w/sites/defn.org/**
               config:
                 command: ./.buildkite/deploy-cf-pages.sh m/w/sites/defn.org
-            - path: m/w/sites/defn.sh/
+            - path: m/w/sites/defn.sh/**
               config:
                 command: ./.buildkite/deploy-cf-pages.sh m/w/sites/defn.sh
-            - path: m/w/sites/destructuring.org/
+            - path: m/w/sites/destructuring.org/**
               config:
                 command: ./.buildkite/deploy-cf-pages.sh m/w/sites/destructuring.org
-            - path: m/w/sites/devopsfor.us/
+            - path: m/w/sites/devopsfor.us/**
               config:
                 command: ./.buildkite/deploy-cf-pages.sh m/w/sites/devopsfor.us
-            - path: m/w/sites/fam.fan/
+            - path: m/w/sites/fam.fan/**
               config:
                 command: ./.buildkite/deploy-cf-pages.sh m/w/sites/fam.fan
-            - path: m/w/sites/gorillama.com/
+            - path: m/w/sites/gorillama.com/**
               config:
                 command: ./.buildkite/deploy-cf-pages.sh m/w/sites/gorillama.com
-            - path: m/w/sites/hana.studio/
+            - path: m/w/sites/hana.studio/**
               config:
                 command: ./.buildkite/deploy-cf-pages.sh m/w/sites/hana.studio
