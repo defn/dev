@@ -15,26 +15,26 @@ importers:
   amanibhav.am:
     dependencies:
       '@astrojs/cloudflare':
-        specifier: ^12.1.0
-        version: 12.1.0(@types/node@22.10.5)(astro@5.1.5(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))(jiti@1.21.7)(yaml@2.7.0)
+        specifier: ^12.2.0
+        version: 12.2.0(@types/node@22.10.5)(astro@5.1.6(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))(jiti@1.21.7)(yaml@2.7.0)
       '@astrojs/sitemap':
         specifier: ^3.2.1
         version: 3.2.1
       '@astrojs/starlight':
-        specifier: ^0.30.6
-        version: 0.30.6(astro@5.1.5(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))
+        specifier: ^0.31.0
+        version: 0.31.0(astro@5.1.6(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))
       '@astrojs/starlight-tailwind':
         specifier: ^3.0.0
-        version: 3.0.0(@astrojs/starlight@0.30.6(astro@5.1.5(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0)))(@astrojs/tailwind@5.1.4(astro@5.1.5(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))(tailwindcss@3.4.17))(tailwindcss@3.4.17)
+        version: 3.0.0(@astrojs/starlight@0.31.0(astro@5.1.6(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0)))(@astrojs/tailwind@5.1.4(astro@5.1.6(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))(tailwindcss@3.4.17))(tailwindcss@3.4.17)
       '@astrojs/tailwind':
         specifier: ^5.1.4
-        version: 5.1.4(astro@5.1.5(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))(tailwindcss@3.4.17)
+        version: 5.1.4(astro@5.1.6(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))(tailwindcss@3.4.17)
       amanibhav.am:
         specifier: 'link:'
         version: 'link:'
       astro:
-        specifier: ^5.1.5
-        version: 5.1.5(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0)
+        specifier: ^5.1.6
+        version: 5.1.6(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0)
       sharp:
         specifier: ^0.33.5
         version: 0.33.5
@@ -42,29 +42,29 @@ importers:
         specifier: ^3.4.17
         version: 3.4.17
       wrangler:
-        specifier: ^3.101.0
-        version: 3.101.0(@cloudflare/workers-types@4.20250109.0)
+        specifier: ^3.102.0
+        version: 3.102.0(@cloudflare/workers-types@4.20250109.0)
 
   d3fn.com:
     dependencies:
       '@astrojs/cloudflare':
-        specifier: ^12.1.0
-        version: 12.1.0(@types/node@22.10.5)(astro@5.1.5(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))(jiti@1.21.7)(yaml@2.7.0)
+        specifier: ^12.2.0
+        version: 12.2.0(@types/node@22.10.5)(astro@5.1.6(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))(jiti@1.21.7)(yaml@2.7.0)
       '@astrojs/sitemap':
         specifier: ^3.2.1
         version: 3.2.1
       '@astrojs/starlight':
-        specifier: ^0.30.6
-        version: 0.30.6(astro@5.1.5(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))
+        specifier: ^0.31.0
+        version: 0.31.0(astro@5.1.6(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))
       '@astrojs/starlight-tailwind':
         specifier: ^3.0.0
-        version: 3.0.0(@astrojs/starlight@0.30.6(astro@5.1.5(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0)))(@astrojs/tailwind@5.1.4(astro@5.1.5(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))(tailwindcss@3.4.17))(tailwindcss@3.4.17)
+        version: 3.0.0(@astrojs/starlight@0.31.0(astro@5.1.6(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0)))(@astrojs/tailwind@5.1.4(astro@5.1.6(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))(tailwindcss@3.4.17))(tailwindcss@3.4.17)
       '@astrojs/tailwind':
         specifier: ^5.1.4
-        version: 5.1.4(astro@5.1.5(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))(tailwindcss@3.4.17)
+        version: 5.1.4(astro@5.1.6(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))(tailwindcss@3.4.17)
       astro:
-        specifier: ^5.1.5
-        version: 5.1.5(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0)
+        specifier: ^5.1.6
+        version: 5.1.6(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0)
       d3fn.com:
         specifier: 'link:'
         version: 'link:'
@@ -75,29 +75,29 @@ importers:
         specifier: ^3.4.17
         version: 3.4.17
       wrangler:
-        specifier: ^3.101.0
-        version: 3.101.0(@cloudflare/workers-types@4.20250109.0)
+        specifier: ^3.102.0
+        version: 3.102.0(@cloudflare/workers-types@4.20250109.0)
 
   defn.app:
     dependencies:
       '@astrojs/cloudflare':
-        specifier: ^12.1.0
-        version: 12.1.0(@types/node@22.10.5)(astro@5.1.5(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))(jiti@1.21.7)(yaml@2.7.0)
+        specifier: ^12.2.0
+        version: 12.2.0(@types/node@22.10.5)(astro@5.1.6(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))(jiti@1.21.7)(yaml@2.7.0)
       '@astrojs/sitemap':
         specifier: ^3.2.1
         version: 3.2.1
       '@astrojs/starlight':
-        specifier: ^0.30.6
-        version: 0.30.6(astro@5.1.5(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))
+        specifier: ^0.31.0
+        version: 0.31.0(astro@5.1.6(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))
       '@astrojs/starlight-tailwind':
         specifier: ^3.0.0
-        version: 3.0.0(@astrojs/starlight@0.30.6(astro@5.1.5(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0)))(@astrojs/tailwind@5.1.4(astro@5.1.5(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))(tailwindcss@3.4.17))(tailwindcss@3.4.17)
+        version: 3.0.0(@astrojs/starlight@0.31.0(astro@5.1.6(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0)))(@astrojs/tailwind@5.1.4(astro@5.1.6(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))(tailwindcss@3.4.17))(tailwindcss@3.4.17)
       '@astrojs/tailwind':
         specifier: ^5.1.4
-        version: 5.1.4(astro@5.1.5(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))(tailwindcss@3.4.17)
+        version: 5.1.4(astro@5.1.6(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))(tailwindcss@3.4.17)
       astro:
-        specifier: ^5.1.5
-        version: 5.1.5(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0)
+        specifier: ^5.1.6
+        version: 5.1.6(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0)
       defn.app:
         specifier: 'link:'
         version: 'link:'
@@ -108,29 +108,29 @@ importers:
         specifier: ^3.4.17
         version: 3.4.17
       wrangler:
-        specifier: ^3.101.0
-        version: 3.101.0(@cloudflare/workers-types@4.20250109.0)
+        specifier: ^3.102.0
+        version: 3.102.0(@cloudflare/workers-types@4.20250109.0)
 
   defn.blue:
     dependencies:
       '@astrojs/cloudflare':
-        specifier: ^12.1.0
-        version: 12.1.0(@types/node@22.10.5)(astro@5.1.5(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))(jiti@1.21.7)(yaml@2.7.0)
+        specifier: ^12.2.0
+        version: 12.2.0(@types/node@22.10.5)(astro@5.1.6(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))(jiti@1.21.7)(yaml@2.7.0)
       '@astrojs/sitemap':
         specifier: ^3.2.1
         version: 3.2.1
       '@astrojs/starlight':
-        specifier: ^0.30.6
-        version: 0.30.6(astro@5.1.5(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))
+        specifier: ^0.31.0
+        version: 0.31.0(astro@5.1.6(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))
       '@astrojs/starlight-tailwind':
         specifier: ^3.0.0
-        version: 3.0.0(@astrojs/starlight@0.30.6(astro@5.1.5(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0)))(@astrojs/tailwind@5.1.4(astro@5.1.5(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))(tailwindcss@3.4.17))(tailwindcss@3.4.17)
+        version: 3.0.0(@astrojs/starlight@0.31.0(astro@5.1.6(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0)))(@astrojs/tailwind@5.1.4(astro@5.1.6(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))(tailwindcss@3.4.17))(tailwindcss@3.4.17)
       '@astrojs/tailwind':
         specifier: ^5.1.4
-        version: 5.1.4(astro@5.1.5(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))(tailwindcss@3.4.17)
+        version: 5.1.4(astro@5.1.6(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))(tailwindcss@3.4.17)
       astro:
-        specifier: ^5.1.5
-        version: 5.1.5(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0)
+        specifier: ^5.1.6
+        version: 5.1.6(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0)
       defn.blue:
         specifier: 'link:'
         version: 'link:'
@@ -141,29 +141,29 @@ importers:
         specifier: ^3.4.17
         version: 3.4.17
       wrangler:
-        specifier: ^3.101.0
-        version: 3.101.0(@cloudflare/workers-types@4.20250109.0)
+        specifier: ^3.102.0
+        version: 3.102.0(@cloudflare/workers-types@4.20250109.0)
 
   defn.cloud:
     dependencies:
       '@astrojs/cloudflare':
-        specifier: ^12.1.0
-        version: 12.1.0(@types/node@22.10.5)(astro@5.1.5(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))(jiti@1.21.7)(yaml@2.7.0)
+        specifier: ^12.2.0
+        version: 12.2.0(@types/node@22.10.5)(astro@5.1.6(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))(jiti@1.21.7)(yaml@2.7.0)
       '@astrojs/sitemap':
         specifier: ^3.2.1
         version: 3.2.1
       '@astrojs/starlight':
-        specifier: ^0.30.6
-        version: 0.30.6(astro@5.1.5(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))
+        specifier: ^0.31.0
+        version: 0.31.0(astro@5.1.6(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))
       '@astrojs/starlight-tailwind':
         specifier: ^3.0.0
-        version: 3.0.0(@astrojs/starlight@0.30.6(astro@5.1.5(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0)))(@astrojs/tailwind@5.1.4(astro@5.1.5(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))(tailwindcss@3.4.17))(tailwindcss@3.4.17)
+        version: 3.0.0(@astrojs/starlight@0.31.0(astro@5.1.6(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0)))(@astrojs/tailwind@5.1.4(astro@5.1.6(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))(tailwindcss@3.4.17))(tailwindcss@3.4.17)
       '@astrojs/tailwind':
         specifier: ^5.1.4
-        version: 5.1.4(astro@5.1.5(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))(tailwindcss@3.4.17)
+        version: 5.1.4(astro@5.1.6(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))(tailwindcss@3.4.17)
       astro:
-        specifier: ^5.1.5
-        version: 5.1.5(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0)
+        specifier: ^5.1.6
+        version: 5.1.6(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0)
       defn.cloud:
         specifier: 'link:'
         version: 'link:'
@@ -174,29 +174,29 @@ importers:
         specifier: ^3.4.17
         version: 3.4.17
       wrangler:
-        specifier: ^3.101.0
-        version: 3.101.0(@cloudflare/workers-types@4.20250109.0)
+        specifier: ^3.102.0
+        version: 3.102.0(@cloudflare/workers-types@4.20250109.0)
 
   defn.co:
     dependencies:
       '@astrojs/cloudflare':
-        specifier: ^12.1.0
-        version: 12.1.0(@types/node@22.10.5)(astro@5.1.5(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))(jiti@1.21.7)(yaml@2.7.0)
+        specifier: ^12.2.0
+        version: 12.2.0(@types/node@22.10.5)(astro@5.1.6(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))(jiti@1.21.7)(yaml@2.7.0)
       '@astrojs/sitemap':
         specifier: ^3.2.1
         version: 3.2.1
       '@astrojs/starlight':
-        specifier: ^0.30.6
-        version: 0.30.6(astro@5.1.5(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))
+        specifier: ^0.31.0
+        version: 0.31.0(astro@5.1.6(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))
       '@astrojs/starlight-tailwind':
         specifier: ^3.0.0
-        version: 3.0.0(@astrojs/starlight@0.30.6(astro@5.1.5(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0)))(@astrojs/tailwind@5.1.4(astro@5.1.5(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))(tailwindcss@3.4.17))(tailwindcss@3.4.17)
+        version: 3.0.0(@astrojs/starlight@0.31.0(astro@5.1.6(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0)))(@astrojs/tailwind@5.1.4(astro@5.1.6(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))(tailwindcss@3.4.17))(tailwindcss@3.4.17)
       '@astrojs/tailwind':
         specifier: ^5.1.4
-        version: 5.1.4(astro@5.1.5(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))(tailwindcss@3.4.17)
+        version: 5.1.4(astro@5.1.6(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))(tailwindcss@3.4.17)
       astro:
-        specifier: ^5.1.5
-        version: 5.1.5(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0)
+        specifier: ^5.1.6
+        version: 5.1.6(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0)
       defn.co:
         specifier: 'link:'
         version: 'link:'
@@ -207,29 +207,29 @@ importers:
         specifier: ^3.4.17
         version: 3.4.17
       wrangler:
-        specifier: ^3.101.0
-        version: 3.101.0(@cloudflare/workers-types@4.20250109.0)
+        specifier: ^3.102.0
+        version: 3.102.0(@cloudflare/workers-types@4.20250109.0)
 
   defn.co.in:
     dependencies:
       '@astrojs/cloudflare':
-        specifier: ^12.1.0
-        version: 12.1.0(@types/node@22.10.5)(astro@5.1.5(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))(jiti@1.21.7)(yaml@2.7.0)
+        specifier: ^12.2.0
+        version: 12.2.0(@types/node@22.10.5)(astro@5.1.6(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))(jiti@1.21.7)(yaml@2.7.0)
       '@astrojs/sitemap':
         specifier: ^3.2.1
         version: 3.2.1
       '@astrojs/starlight':
-        specifier: ^0.30.6
-        version: 0.30.6(astro@5.1.5(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))
+        specifier: ^0.31.0
+        version: 0.31.0(astro@5.1.6(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))
       '@astrojs/starlight-tailwind':
         specifier: ^3.0.0
-        version: 3.0.0(@astrojs/starlight@0.30.6(astro@5.1.5(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0)))(@astrojs/tailwind@5.1.4(astro@5.1.5(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))(tailwindcss@3.4.17))(tailwindcss@3.4.17)
+        version: 3.0.0(@astrojs/starlight@0.31.0(astro@5.1.6(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0)))(@astrojs/tailwind@5.1.4(astro@5.1.6(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))(tailwindcss@3.4.17))(tailwindcss@3.4.17)
       '@astrojs/tailwind':
         specifier: ^5.1.4
-        version: 5.1.4(astro@5.1.5(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))(tailwindcss@3.4.17)
+        version: 5.1.4(astro@5.1.6(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))(tailwindcss@3.4.17)
       astro:
-        specifier: ^5.1.5
-        version: 5.1.5(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0)
+        specifier: ^5.1.6
+        version: 5.1.6(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0)
       defn.co.in:
         specifier: 'link:'
         version: 'link:'
@@ -240,29 +240,29 @@ importers:
         specifier: ^3.4.17
         version: 3.4.17
       wrangler:
-        specifier: ^3.101.0
-        version: 3.101.0(@cloudflare/workers-types@4.20250109.0)
+        specifier: ^3.102.0
+        version: 3.102.0(@cloudflare/workers-types@4.20250109.0)
 
   defn.dev:
     dependencies:
       '@astrojs/cloudflare':
-        specifier: ^12.1.0
-        version: 12.1.0(@types/node@22.10.5)(astro@5.1.5(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))(jiti@1.21.7)(yaml@2.7.0)
+        specifier: ^12.2.0
+        version: 12.2.0(@types/node@22.10.5)(astro@5.1.6(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))(jiti@1.21.7)(yaml@2.7.0)
       '@astrojs/sitemap':
         specifier: ^3.2.1
         version: 3.2.1
       '@astrojs/starlight':
-        specifier: ^0.30.6
-        version: 0.30.6(astro@5.1.5(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))
+        specifier: ^0.31.0
+        version: 0.31.0(astro@5.1.6(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))
       '@astrojs/starlight-tailwind':
         specifier: ^3.0.0
-        version: 3.0.0(@astrojs/starlight@0.30.6(astro@5.1.5(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0)))(@astrojs/tailwind@5.1.4(astro@5.1.5(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))(tailwindcss@3.4.17))(tailwindcss@3.4.17)
+        version: 3.0.0(@astrojs/starlight@0.31.0(astro@5.1.6(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0)))(@astrojs/tailwind@5.1.4(astro@5.1.6(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))(tailwindcss@3.4.17))(tailwindcss@3.4.17)
       '@astrojs/tailwind':
         specifier: ^5.1.4
-        version: 5.1.4(astro@5.1.5(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))(tailwindcss@3.4.17)
+        version: 5.1.4(astro@5.1.6(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))(tailwindcss@3.4.17)
       astro:
-        specifier: ^5.1.5
-        version: 5.1.5(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0)
+        specifier: ^5.1.6
+        version: 5.1.6(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0)
       defn.dev:
         specifier: 'link:'
         version: 'link:'
@@ -273,29 +273,29 @@ importers:
         specifier: ^3.4.17
         version: 3.4.17
       wrangler:
-        specifier: ^3.101.0
-        version: 3.101.0(@cloudflare/workers-types@4.20250109.0)
+        specifier: ^3.102.0
+        version: 3.102.0(@cloudflare/workers-types@4.20250109.0)
 
   defn.net:
     dependencies:
       '@astrojs/cloudflare':
-        specifier: ^12.1.0
-        version: 12.1.0(@types/node@22.10.5)(astro@5.1.5(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))(jiti@1.21.7)(yaml@2.7.0)
+        specifier: ^12.2.0
+        version: 12.2.0(@types/node@22.10.5)(astro@5.1.6(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))(jiti@1.21.7)(yaml@2.7.0)
       '@astrojs/sitemap':
         specifier: ^3.2.1
         version: 3.2.1
       '@astrojs/starlight':
-        specifier: ^0.30.6
-        version: 0.30.6(astro@5.1.5(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))
+        specifier: ^0.31.0
+        version: 0.31.0(astro@5.1.6(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))
       '@astrojs/starlight-tailwind':
         specifier: ^3.0.0
-        version: 3.0.0(@astrojs/starlight@0.30.6(astro@5.1.5(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0)))(@astrojs/tailwind@5.1.4(astro@5.1.5(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))(tailwindcss@3.4.17))(tailwindcss@3.4.17)
+        version: 3.0.0(@astrojs/starlight@0.31.0(astro@5.1.6(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0)))(@astrojs/tailwind@5.1.4(astro@5.1.6(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))(tailwindcss@3.4.17))(tailwindcss@3.4.17)
       '@astrojs/tailwind':
         specifier: ^5.1.4
-        version: 5.1.4(astro@5.1.5(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))(tailwindcss@3.4.17)
+        version: 5.1.4(astro@5.1.6(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))(tailwindcss@3.4.17)
       astro:
-        specifier: ^5.1.5
-        version: 5.1.5(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0)
+        specifier: ^5.1.6
+        version: 5.1.6(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0)
       defn.net:
         specifier: 'link:'
         version: 'link:'
@@ -306,29 +306,29 @@ importers:
         specifier: ^3.4.17
         version: 3.4.17
       wrangler:
-        specifier: ^3.101.0
-        version: 3.101.0(@cloudflare/workers-types@4.20250109.0)
+        specifier: ^3.102.0
+        version: 3.102.0(@cloudflare/workers-types@4.20250109.0)
 
   defn.org:
     dependencies:
       '@astrojs/cloudflare':
-        specifier: ^12.1.0
-        version: 12.1.0(@types/node@22.10.5)(astro@5.1.5(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))(jiti@1.21.7)(yaml@2.7.0)
+        specifier: ^12.2.0
+        version: 12.2.0(@types/node@22.10.5)(astro@5.1.6(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))(jiti@1.21.7)(yaml@2.7.0)
       '@astrojs/sitemap':
         specifier: ^3.2.1
         version: 3.2.1
       '@astrojs/starlight':
-        specifier: ^0.30.6
-        version: 0.30.6(astro@5.1.5(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))
+        specifier: ^0.31.0
+        version: 0.31.0(astro@5.1.6(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))
       '@astrojs/starlight-tailwind':
         specifier: ^3.0.0
-        version: 3.0.0(@astrojs/starlight@0.30.6(astro@5.1.5(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0)))(@astrojs/tailwind@5.1.4(astro@5.1.5(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))(tailwindcss@3.4.17))(tailwindcss@3.4.17)
+        version: 3.0.0(@astrojs/starlight@0.31.0(astro@5.1.6(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0)))(@astrojs/tailwind@5.1.4(astro@5.1.6(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))(tailwindcss@3.4.17))(tailwindcss@3.4.17)
       '@astrojs/tailwind':
         specifier: ^5.1.4
-        version: 5.1.4(astro@5.1.5(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))(tailwindcss@3.4.17)
+        version: 5.1.4(astro@5.1.6(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))(tailwindcss@3.4.17)
       astro:
-        specifier: ^5.1.5
-        version: 5.1.5(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0)
+        specifier: ^5.1.6
+        version: 5.1.6(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0)
       defn.org:
         specifier: 'link:'
         version: 'link:'
@@ -339,29 +339,29 @@ importers:
         specifier: ^3.4.17
         version: 3.4.17
       wrangler:
-        specifier: ^3.101.0
-        version: 3.101.0(@cloudflare/workers-types@4.20250109.0)
+        specifier: ^3.102.0
+        version: 3.102.0(@cloudflare/workers-types@4.20250109.0)
 
   defn.red:
     dependencies:
       '@astrojs/cloudflare':
-        specifier: ^12.1.0
-        version: 12.1.0(@types/node@22.10.5)(astro@5.1.5(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))(jiti@1.21.7)(yaml@2.7.0)
+        specifier: ^12.2.0
+        version: 12.2.0(@types/node@22.10.5)(astro@5.1.6(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))(jiti@1.21.7)(yaml@2.7.0)
       '@astrojs/sitemap':
         specifier: ^3.2.1
         version: 3.2.1
       '@astrojs/starlight':
-        specifier: ^0.30.6
-        version: 0.30.6(astro@5.1.5(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))
+        specifier: ^0.31.0
+        version: 0.31.0(astro@5.1.6(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))
       '@astrojs/starlight-tailwind':
         specifier: ^3.0.0
-        version: 3.0.0(@astrojs/starlight@0.30.6(astro@5.1.5(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0)))(@astrojs/tailwind@5.1.4(astro@5.1.5(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))(tailwindcss@3.4.17))(tailwindcss@3.4.17)
+        version: 3.0.0(@astrojs/starlight@0.31.0(astro@5.1.6(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0)))(@astrojs/tailwind@5.1.4(astro@5.1.6(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))(tailwindcss@3.4.17))(tailwindcss@3.4.17)
       '@astrojs/tailwind':
         specifier: ^5.1.4
-        version: 5.1.4(astro@5.1.5(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))(tailwindcss@3.4.17)
+        version: 5.1.4(astro@5.1.6(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))(tailwindcss@3.4.17)
       astro:
-        specifier: ^5.1.5
-        version: 5.1.5(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0)
+        specifier: ^5.1.6
+        version: 5.1.6(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0)
       defn.red:
         specifier: 'link:'
         version: 'link:'
@@ -372,29 +372,29 @@ importers:
         specifier: ^3.4.17
         version: 3.4.17
       wrangler:
-        specifier: ^3.101.0
-        version: 3.101.0(@cloudflare/workers-types@4.20250109.0)
+        specifier: ^3.102.0
+        version: 3.102.0(@cloudflare/workers-types@4.20250109.0)
 
   defn.run:
     dependencies:
       '@astrojs/cloudflare':
-        specifier: ^12.1.0
-        version: 12.1.0(@types/node@22.10.5)(astro@5.1.5(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))(jiti@1.21.7)(yaml@2.7.0)
+        specifier: ^12.2.0
+        version: 12.2.0(@types/node@22.10.5)(astro@5.1.6(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))(jiti@1.21.7)(yaml@2.7.0)
       '@astrojs/sitemap':
         specifier: ^3.2.1
         version: 3.2.1
       '@astrojs/starlight':
-        specifier: ^0.30.6
-        version: 0.30.6(astro@5.1.5(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))
+        specifier: ^0.31.0
+        version: 0.31.0(astro@5.1.6(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))
       '@astrojs/starlight-tailwind':
         specifier: ^3.0.0
-        version: 3.0.0(@astrojs/starlight@0.30.6(astro@5.1.5(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0)))(@astrojs/tailwind@5.1.4(astro@5.1.5(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))(tailwindcss@3.4.17))(tailwindcss@3.4.17)
+        version: 3.0.0(@astrojs/starlight@0.31.0(astro@5.1.6(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0)))(@astrojs/tailwind@5.1.4(astro@5.1.6(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))(tailwindcss@3.4.17))(tailwindcss@3.4.17)
       '@astrojs/tailwind':
         specifier: ^5.1.4
-        version: 5.1.4(astro@5.1.5(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))(tailwindcss@3.4.17)
+        version: 5.1.4(astro@5.1.6(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))(tailwindcss@3.4.17)
       astro:
-        specifier: ^5.1.5
-        version: 5.1.5(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0)
+        specifier: ^5.1.6
+        version: 5.1.6(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0)
       defn.run:
         specifier: 'link:'
         version: 'link:'
@@ -405,8 +405,8 @@ importers:
         specifier: ^3.4.17
         version: 3.4.17
       wrangler:
-        specifier: ^3.101.0
-        version: 3.101.0(@cloudflare/workers-types@4.20250109.0)
+        specifier: ^3.102.0
+        version: 3.102.0(@cloudflare/workers-types@4.20250109.0)
 
   defn.run/fn/fn1:
     dependencies:
@@ -415,13 +415,13 @@ importers:
         version: 12.1.0(@types/node@22.10.5)(astro@5.1.5(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))(jiti@1.21.7)(yaml@2.7.0)
       '@astrojs/svelte':
         specifier: ^7.0.3
-        version: 7.0.3(@types/node@22.10.5)(astro@5.1.5(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))(jiti@1.21.7)(svelte@5.16.1)(typescript@5.7.2)(yaml@2.7.0)
+        version: 7.0.3(@types/node@22.10.5)(astro@5.1.5(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))(jiti@1.21.7)(svelte@5.18.0)(typescript@5.7.2)(yaml@2.7.0)
       '@astrojs/tailwind':
         specifier: ^5.1.4
         version: 5.1.4(astro@5.1.5(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))(tailwindcss@3.4.17)
       '@sveltejs/vite-plugin-svelte':
         specifier: ^5.0.3
-        version: 5.0.3(svelte@5.16.1)(vite@6.0.7(@types/node@22.10.5)(jiti@1.21.7)(yaml@2.7.0))
+        version: 5.0.3(svelte@5.18.0)(vite@6.0.7(@types/node@22.10.5)(jiti@1.21.7)(yaml@2.7.0))
       astro:
         specifier: ^5.1.4
         version: 5.1.5(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0)
@@ -431,6 +431,9 @@ importers:
       hono:
         specifier: ^4.6.16
         version: 4.6.16
+      svelte:
+        specifier: ^5.18.0
+        version: 5.18.0
       tailwindcss:
         specifier: ^3.4.17
         version: 3.4.17
@@ -456,6 +459,9 @@ importers:
       fn2:
         specifier: 'link:'
         version: 'link:'
+      svelte:
+        specifier: ^5.18.0
+        version: 5.18.0
     devDependencies:
       '@cloudflare/workers-types':
         specifier: ^4.20250109.0
@@ -467,23 +473,23 @@ importers:
   defn.sh:
     dependencies:
       '@astrojs/cloudflare':
-        specifier: ^12.1.0
-        version: 12.1.0(@types/node@22.10.5)(astro@5.1.5(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))(jiti@1.21.7)(yaml@2.7.0)
+        specifier: ^12.2.0
+        version: 12.2.0(@types/node@22.10.5)(astro@5.1.6(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))(jiti@1.21.7)(yaml@2.7.0)
       '@astrojs/sitemap':
         specifier: ^3.2.1
         version: 3.2.1
       '@astrojs/starlight':
-        specifier: ^0.30.6
-        version: 0.30.6(astro@5.1.5(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))
+        specifier: ^0.31.0
+        version: 0.31.0(astro@5.1.6(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))
       '@astrojs/starlight-tailwind':
         specifier: ^3.0.0
-        version: 3.0.0(@astrojs/starlight@0.30.6(astro@5.1.5(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0)))(@astrojs/tailwind@5.1.4(astro@5.1.5(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))(tailwindcss@3.4.17))(tailwindcss@3.4.17)
+        version: 3.0.0(@astrojs/starlight@0.31.0(astro@5.1.6(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0)))(@astrojs/tailwind@5.1.4(astro@5.1.6(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))(tailwindcss@3.4.17))(tailwindcss@3.4.17)
       '@astrojs/tailwind':
         specifier: ^5.1.4
-        version: 5.1.4(astro@5.1.5(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))(tailwindcss@3.4.17)
+        version: 5.1.4(astro@5.1.6(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))(tailwindcss@3.4.17)
       astro:
-        specifier: ^5.1.5
-        version: 5.1.5(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0)
+        specifier: ^5.1.6
+        version: 5.1.6(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0)
       defn.sh:
         specifier: 'link:'
         version: 'link:'
@@ -494,29 +500,29 @@ importers:
         specifier: ^3.4.17
         version: 3.4.17
       wrangler:
-        specifier: ^3.101.0
-        version: 3.101.0(@cloudflare/workers-types@4.20250109.0)
+        specifier: ^3.102.0
+        version: 3.102.0(@cloudflare/workers-types@4.20250109.0)
 
   defn.us:
     dependencies:
       '@astrojs/cloudflare':
-        specifier: ^12.1.0
-        version: 12.1.0(@types/node@22.10.5)(astro@5.1.5(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))(jiti@1.21.7)(yaml@2.7.0)
+        specifier: ^12.2.0
+        version: 12.2.0(@types/node@22.10.5)(astro@5.1.6(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))(jiti@1.21.7)(yaml@2.7.0)
       '@astrojs/sitemap':
         specifier: ^3.2.1
         version: 3.2.1
       '@astrojs/starlight':
-        specifier: ^0.30.6
-        version: 0.30.6(astro@5.1.5(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))
+        specifier: ^0.31.0
+        version: 0.31.0(astro@5.1.6(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))
       '@astrojs/starlight-tailwind':
         specifier: ^3.0.0
-        version: 3.0.0(@astrojs/starlight@0.30.6(astro@5.1.5(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0)))(@astrojs/tailwind@5.1.4(astro@5.1.5(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))(tailwindcss@3.4.17))(tailwindcss@3.4.17)
+        version: 3.0.0(@astrojs/starlight@0.31.0(astro@5.1.6(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0)))(@astrojs/tailwind@5.1.4(astro@5.1.6(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))(tailwindcss@3.4.17))(tailwindcss@3.4.17)
       '@astrojs/tailwind':
         specifier: ^5.1.4
-        version: 5.1.4(astro@5.1.5(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))(tailwindcss@3.4.17)
+        version: 5.1.4(astro@5.1.6(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))(tailwindcss@3.4.17)
       astro:
-        specifier: ^5.1.5
-        version: 5.1.5(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0)
+        specifier: ^5.1.6
+        version: 5.1.6(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0)
       package.json:
         specifier: 'link:'
         version: 'link:'
@@ -527,29 +533,29 @@ importers:
         specifier: ^3.4.17
         version: 3.4.17
       wrangler:
-        specifier: ^3.101.0
-        version: 3.101.0(@cloudflare/workers-types@4.20250109.0)
+        specifier: ^3.102.0
+        version: 3.102.0(@cloudflare/workers-types@4.20250109.0)
 
   destructuring.org:
     dependencies:
       '@astrojs/cloudflare':
-        specifier: ^12.1.0
-        version: 12.1.0(@types/node@22.10.5)(astro@5.1.5(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))(jiti@1.21.7)(yaml@2.7.0)
+        specifier: ^12.2.0
+        version: 12.2.0(@types/node@22.10.5)(astro@5.1.6(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))(jiti@1.21.7)(yaml@2.7.0)
       '@astrojs/sitemap':
         specifier: ^3.2.1
         version: 3.2.1
       '@astrojs/starlight':
-        specifier: ^0.30.6
-        version: 0.30.6(astro@5.1.5(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))
+        specifier: ^0.31.0
+        version: 0.31.0(astro@5.1.6(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))
       '@astrojs/starlight-tailwind':
         specifier: ^3.0.0
-        version: 3.0.0(@astrojs/starlight@0.30.6(astro@5.1.5(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0)))(@astrojs/tailwind@5.1.4(astro@5.1.5(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))(tailwindcss@3.4.17))(tailwindcss@3.4.17)
+        version: 3.0.0(@astrojs/starlight@0.31.0(astro@5.1.6(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0)))(@astrojs/tailwind@5.1.4(astro@5.1.6(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))(tailwindcss@3.4.17))(tailwindcss@3.4.17)
       '@astrojs/tailwind':
         specifier: ^5.1.4
-        version: 5.1.4(astro@5.1.5(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))(tailwindcss@3.4.17)
+        version: 5.1.4(astro@5.1.6(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))(tailwindcss@3.4.17)
       astro:
-        specifier: ^5.1.5
-        version: 5.1.5(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0)
+        specifier: ^5.1.6
+        version: 5.1.6(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0)
       destructuring.org:
         specifier: 'link:'
         version: 'link:'
@@ -560,29 +566,29 @@ importers:
         specifier: ^3.4.17
         version: 3.4.17
       wrangler:
-        specifier: ^3.101.0
-        version: 3.101.0(@cloudflare/workers-types@4.20250109.0)
+        specifier: ^3.102.0
+        version: 3.102.0(@cloudflare/workers-types@4.20250109.0)
 
   devopsfor.us:
     dependencies:
       '@astrojs/cloudflare':
-        specifier: ^12.1.0
-        version: 12.1.0(@types/node@22.10.5)(astro@5.1.5(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))(jiti@1.21.7)(yaml@2.7.0)
+        specifier: ^12.2.0
+        version: 12.2.0(@types/node@22.10.5)(astro@5.1.6(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))(jiti@1.21.7)(yaml@2.7.0)
       '@astrojs/sitemap':
         specifier: ^3.2.1
         version: 3.2.1
       '@astrojs/starlight':
-        specifier: ^0.30.6
-        version: 0.30.6(astro@5.1.5(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))
+        specifier: ^0.31.0
+        version: 0.31.0(astro@5.1.6(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))
       '@astrojs/starlight-tailwind':
         specifier: ^3.0.0
-        version: 3.0.0(@astrojs/starlight@0.30.6(astro@5.1.5(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0)))(@astrojs/tailwind@5.1.4(astro@5.1.5(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))(tailwindcss@3.4.17))(tailwindcss@3.4.17)
+        version: 3.0.0(@astrojs/starlight@0.31.0(astro@5.1.6(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0)))(@astrojs/tailwind@5.1.4(astro@5.1.6(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))(tailwindcss@3.4.17))(tailwindcss@3.4.17)
       '@astrojs/tailwind':
         specifier: ^5.1.4
-        version: 5.1.4(astro@5.1.5(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))(tailwindcss@3.4.17)
+        version: 5.1.4(astro@5.1.6(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))(tailwindcss@3.4.17)
       astro:
-        specifier: ^5.1.5
-        version: 5.1.5(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0)
+        specifier: ^5.1.6
+        version: 5.1.6(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0)
       devopsfor.us:
         specifier: 'link:'
         version: 'link:'
@@ -593,29 +599,29 @@ importers:
         specifier: ^3.4.17
         version: 3.4.17
       wrangler:
-        specifier: ^3.101.0
-        version: 3.101.0(@cloudflare/workers-types@4.20250109.0)
+        specifier: ^3.102.0
+        version: 3.102.0(@cloudflare/workers-types@4.20250109.0)
 
   fam.fan:
     dependencies:
       '@astrojs/cloudflare':
-        specifier: ^12.1.0
-        version: 12.1.0(@types/node@22.10.5)(astro@5.1.5(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))(jiti@1.21.7)(yaml@2.7.0)
+        specifier: ^12.2.0
+        version: 12.2.0(@types/node@22.10.5)(astro@5.1.6(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))(jiti@1.21.7)(yaml@2.7.0)
       '@astrojs/sitemap':
         specifier: ^3.2.1
         version: 3.2.1
       '@astrojs/starlight':
-        specifier: ^0.30.6
-        version: 0.30.6(astro@5.1.5(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))
+        specifier: ^0.31.0
+        version: 0.31.0(astro@5.1.6(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))
       '@astrojs/starlight-tailwind':
         specifier: ^3.0.0
-        version: 3.0.0(@astrojs/starlight@0.30.6(astro@5.1.5(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0)))(@astrojs/tailwind@5.1.4(astro@5.1.5(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))(tailwindcss@3.4.17))(tailwindcss@3.4.17)
+        version: 3.0.0(@astrojs/starlight@0.31.0(astro@5.1.6(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0)))(@astrojs/tailwind@5.1.4(astro@5.1.6(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))(tailwindcss@3.4.17))(tailwindcss@3.4.17)
       '@astrojs/tailwind':
         specifier: ^5.1.4
-        version: 5.1.4(astro@5.1.5(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))(tailwindcss@3.4.17)
+        version: 5.1.4(astro@5.1.6(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))(tailwindcss@3.4.17)
       astro:
-        specifier: ^5.1.5
-        version: 5.1.5(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0)
+        specifier: ^5.1.6
+        version: 5.1.6(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0)
       fam.fan:
         specifier: 'link:'
         version: 'link:'
@@ -626,29 +632,29 @@ importers:
         specifier: ^3.4.17
         version: 3.4.17
       wrangler:
-        specifier: ^3.101.0
-        version: 3.101.0(@cloudflare/workers-types@4.20250109.0)
+        specifier: ^3.102.0
+        version: 3.102.0(@cloudflare/workers-types@4.20250109.0)
 
   gorillama.com:
     dependencies:
       '@astrojs/cloudflare':
-        specifier: ^12.1.0
-        version: 12.1.0(@types/node@22.10.5)(astro@5.1.5(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))(jiti@1.21.7)(yaml@2.7.0)
+        specifier: ^12.2.0
+        version: 12.2.0(@types/node@22.10.5)(astro@5.1.6(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))(jiti@1.21.7)(yaml@2.7.0)
       '@astrojs/sitemap':
         specifier: ^3.2.1
         version: 3.2.1
       '@astrojs/starlight':
-        specifier: ^0.30.6
-        version: 0.30.6(astro@5.1.5(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))
+        specifier: ^0.31.0
+        version: 0.31.0(astro@5.1.6(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))
       '@astrojs/starlight-tailwind':
         specifier: ^3.0.0
-        version: 3.0.0(@astrojs/starlight@0.30.6(astro@5.1.5(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0)))(@astrojs/tailwind@5.1.4(astro@5.1.5(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))(tailwindcss@3.4.17))(tailwindcss@3.4.17)
+        version: 3.0.0(@astrojs/starlight@0.31.0(astro@5.1.6(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0)))(@astrojs/tailwind@5.1.4(astro@5.1.6(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))(tailwindcss@3.4.17))(tailwindcss@3.4.17)
       '@astrojs/tailwind':
         specifier: ^5.1.4
-        version: 5.1.4(astro@5.1.5(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))(tailwindcss@3.4.17)
+        version: 5.1.4(astro@5.1.6(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))(tailwindcss@3.4.17)
       astro:
-        specifier: ^5.1.5
-        version: 5.1.5(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0)
+        specifier: ^5.1.6
+        version: 5.1.6(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0)
       gorillama.com:
         specifier: 'link:'
         version: 'link:'
@@ -659,29 +665,29 @@ importers:
         specifier: ^3.4.17
         version: 3.4.17
       wrangler:
-        specifier: ^3.101.0
-        version: 3.101.0(@cloudflare/workers-types@4.20250109.0)
+        specifier: ^3.102.0
+        version: 3.102.0(@cloudflare/workers-types@4.20250109.0)
 
   hana.studio:
     dependencies:
       '@astrojs/cloudflare':
-        specifier: ^12.1.0
-        version: 12.1.0(@types/node@22.10.5)(astro@5.1.5(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))(jiti@1.21.7)(yaml@2.7.0)
+        specifier: ^12.2.0
+        version: 12.2.0(@types/node@22.10.5)(astro@5.1.6(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))(jiti@1.21.7)(yaml@2.7.0)
       '@astrojs/sitemap':
         specifier: ^3.2.1
         version: 3.2.1
       '@astrojs/starlight':
-        specifier: ^0.30.6
-        version: 0.30.6(astro@5.1.5(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))
+        specifier: ^0.31.0
+        version: 0.31.0(astro@5.1.6(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))
       '@astrojs/starlight-tailwind':
         specifier: ^3.0.0
-        version: 3.0.0(@astrojs/starlight@0.30.6(astro@5.1.5(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0)))(@astrojs/tailwind@5.1.4(astro@5.1.5(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))(tailwindcss@3.4.17))(tailwindcss@3.4.17)
+        version: 3.0.0(@astrojs/starlight@0.31.0(astro@5.1.6(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0)))(@astrojs/tailwind@5.1.4(astro@5.1.6(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))(tailwindcss@3.4.17))(tailwindcss@3.4.17)
       '@astrojs/tailwind':
         specifier: ^5.1.4
-        version: 5.1.4(astro@5.1.5(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))(tailwindcss@3.4.17)
+        version: 5.1.4(astro@5.1.6(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))(tailwindcss@3.4.17)
       astro:
-        specifier: ^5.1.5
-        version: 5.1.5(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0)
+        specifier: ^5.1.6
+        version: 5.1.6(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0)
       hana.studio:
         specifier: 'link:'
         version: 'link:'
@@ -692,29 +698,29 @@ importers:
         specifier: ^3.4.17
         version: 3.4.17
       wrangler:
-        specifier: ^3.101.0
-        version: 3.101.0(@cloudflare/workers-types@4.20250109.0)
+        specifier: ^3.102.0
+        version: 3.102.0(@cloudflare/workers-types@4.20250109.0)
 
   hanafina.com:
     dependencies:
       '@astrojs/cloudflare':
-        specifier: ^12.1.0
-        version: 12.1.0(@types/node@22.10.5)(astro@5.1.5(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))(jiti@1.21.7)(yaml@2.7.0)
+        specifier: ^12.2.0
+        version: 12.2.0(@types/node@22.10.5)(astro@5.1.6(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))(jiti@1.21.7)(yaml@2.7.0)
       '@astrojs/sitemap':
         specifier: ^3.2.1
         version: 3.2.1
       '@astrojs/starlight':
-        specifier: ^0.30.6
-        version: 0.30.6(astro@5.1.5(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))
+        specifier: ^0.31.0
+        version: 0.31.0(astro@5.1.6(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))
       '@astrojs/starlight-tailwind':
         specifier: ^3.0.0
-        version: 3.0.0(@astrojs/starlight@0.30.6(astro@5.1.5(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0)))(@astrojs/tailwind@5.1.4(astro@5.1.5(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))(tailwindcss@3.4.17))(tailwindcss@3.4.17)
+        version: 3.0.0(@astrojs/starlight@0.31.0(astro@5.1.6(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0)))(@astrojs/tailwind@5.1.4(astro@5.1.6(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))(tailwindcss@3.4.17))(tailwindcss@3.4.17)
       '@astrojs/tailwind':
         specifier: ^5.1.4
-        version: 5.1.4(astro@5.1.5(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))(tailwindcss@3.4.17)
+        version: 5.1.4(astro@5.1.6(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))(tailwindcss@3.4.17)
       astro:
-        specifier: ^5.1.5
-        version: 5.1.5(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0)
+        specifier: ^5.1.6
+        version: 5.1.6(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0)
       hanafina.com:
         specifier: 'link:'
         version: 'link:'
@@ -725,29 +731,29 @@ importers:
         specifier: ^3.4.17
         version: 3.4.17
       wrangler:
-        specifier: ^3.101.0
-        version: 3.101.0(@cloudflare/workers-types@4.20250109.0)
+        specifier: ^3.102.0
+        version: 3.102.0(@cloudflare/workers-types@4.20250109.0)
 
   imma.io:
     dependencies:
       '@astrojs/cloudflare':
-        specifier: ^12.1.0
-        version: 12.1.0(@types/node@22.10.5)(astro@5.1.5(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))(jiti@1.21.7)(yaml@2.7.0)
+        specifier: ^12.2.0
+        version: 12.2.0(@types/node@22.10.5)(astro@5.1.6(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))(jiti@1.21.7)(yaml@2.7.0)
       '@astrojs/sitemap':
         specifier: ^3.2.1
         version: 3.2.1
       '@astrojs/starlight':
-        specifier: ^0.30.6
-        version: 0.30.6(astro@5.1.5(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))
+        specifier: ^0.31.0
+        version: 0.31.0(astro@5.1.6(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))
       '@astrojs/starlight-tailwind':
         specifier: ^3.0.0
-        version: 3.0.0(@astrojs/starlight@0.30.6(astro@5.1.5(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0)))(@astrojs/tailwind@5.1.4(astro@5.1.5(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))(tailwindcss@3.4.17))(tailwindcss@3.4.17)
+        version: 3.0.0(@astrojs/starlight@0.31.0(astro@5.1.6(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0)))(@astrojs/tailwind@5.1.4(astro@5.1.6(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))(tailwindcss@3.4.17))(tailwindcss@3.4.17)
       '@astrojs/tailwind':
         specifier: ^5.1.4
-        version: 5.1.4(astro@5.1.5(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))(tailwindcss@3.4.17)
+        version: 5.1.4(astro@5.1.6(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))(tailwindcss@3.4.17)
       astro:
-        specifier: ^5.1.5
-        version: 5.1.5(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0)
+        specifier: ^5.1.6
+        version: 5.1.6(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0)
       imma.io:
         specifier: 'link:'
         version: 'link:'
@@ -758,29 +764,29 @@ importers:
         specifier: ^3.4.17
         version: 3.4.17
       wrangler:
-        specifier: ^3.101.0
-        version: 3.101.0(@cloudflare/workers-types@4.20250109.0)
+        specifier: ^3.102.0
+        version: 3.102.0(@cloudflare/workers-types@4.20250109.0)
 
   kowloon.defn.run:
     dependencies:
       '@astrojs/cloudflare':
-        specifier: ^12.1.0
-        version: 12.1.0(@types/node@22.10.5)(astro@5.1.5(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))(jiti@1.21.7)(yaml@2.7.0)
+        specifier: ^12.2.0
+        version: 12.2.0(@types/node@22.10.5)(astro@5.1.6(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))(jiti@1.21.7)(yaml@2.7.0)
       '@astrojs/sitemap':
         specifier: ^3.2.1
         version: 3.2.1
       '@astrojs/starlight':
-        specifier: ^0.30.6
-        version: 0.30.6(astro@5.1.5(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))
+        specifier: ^0.31.0
+        version: 0.31.0(astro@5.1.6(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))
       '@astrojs/starlight-tailwind':
         specifier: ^3.0.0
-        version: 3.0.0(@astrojs/starlight@0.30.6(astro@5.1.5(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0)))(@astrojs/tailwind@5.1.4(astro@5.1.5(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))(tailwindcss@3.4.17))(tailwindcss@3.4.17)
+        version: 3.0.0(@astrojs/starlight@0.31.0(astro@5.1.6(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0)))(@astrojs/tailwind@5.1.4(astro@5.1.6(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))(tailwindcss@3.4.17))(tailwindcss@3.4.17)
       '@astrojs/tailwind':
         specifier: ^5.1.4
-        version: 5.1.4(astro@5.1.5(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))(tailwindcss@3.4.17)
+        version: 5.1.4(astro@5.1.6(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))(tailwindcss@3.4.17)
       astro:
-        specifier: ^5.1.5
-        version: 5.1.5(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0)
+        specifier: ^5.1.6
+        version: 5.1.6(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0)
       kowloon.defn.run:
         specifier: 'link:'
         version: 'link:'
@@ -791,29 +797,29 @@ importers:
         specifier: ^3.4.17
         version: 3.4.17
       wrangler:
-        specifier: ^3.101.0
-        version: 3.101.0(@cloudflare/workers-types@4.20250109.0)
+        specifier: ^3.102.0
+        version: 3.102.0(@cloudflare/workers-types@4.20250109.0)
 
   kowloonwalled.city:
     dependencies:
       '@astrojs/cloudflare':
-        specifier: ^12.1.0
-        version: 12.1.0(@types/node@22.10.5)(astro@5.1.5(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))(jiti@1.21.7)(yaml@2.7.0)
+        specifier: ^12.2.0
+        version: 12.2.0(@types/node@22.10.5)(astro@5.1.6(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))(jiti@1.21.7)(yaml@2.7.0)
       '@astrojs/sitemap':
         specifier: ^3.2.1
         version: 3.2.1
       '@astrojs/starlight':
-        specifier: ^0.30.6
-        version: 0.30.6(astro@5.1.5(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))
+        specifier: ^0.31.0
+        version: 0.31.0(astro@5.1.6(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))
       '@astrojs/starlight-tailwind':
         specifier: ^3.0.0
-        version: 3.0.0(@astrojs/starlight@0.30.6(astro@5.1.5(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0)))(@astrojs/tailwind@5.1.4(astro@5.1.5(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))(tailwindcss@3.4.17))(tailwindcss@3.4.17)
+        version: 3.0.0(@astrojs/starlight@0.31.0(astro@5.1.6(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0)))(@astrojs/tailwind@5.1.4(astro@5.1.6(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))(tailwindcss@3.4.17))(tailwindcss@3.4.17)
       '@astrojs/tailwind':
         specifier: ^5.1.4
-        version: 5.1.4(astro@5.1.5(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))(tailwindcss@3.4.17)
+        version: 5.1.4(astro@5.1.6(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))(tailwindcss@3.4.17)
       astro:
-        specifier: ^5.1.5
-        version: 5.1.5(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0)
+        specifier: ^5.1.6
+        version: 5.1.6(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0)
       kowloonwalled.city:
         specifier: 'link:'
         version: 'link:'
@@ -824,29 +830,29 @@ importers:
         specifier: ^3.4.17
         version: 3.4.17
       wrangler:
-        specifier: ^3.101.0
-        version: 3.101.0(@cloudflare/workers-types@4.20250109.0)
+        specifier: ^3.102.0
+        version: 3.102.0(@cloudflare/workers-types@4.20250109.0)
 
   nghiem.io:
     dependencies:
       '@astrojs/cloudflare':
-        specifier: ^12.1.0
-        version: 12.1.0(@types/node@22.10.5)(astro@5.1.5(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))(jiti@1.21.7)(yaml@2.7.0)
+        specifier: ^12.2.0
+        version: 12.2.0(@types/node@22.10.5)(astro@5.1.6(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))(jiti@1.21.7)(yaml@2.7.0)
       '@astrojs/sitemap':
         specifier: ^3.2.1
         version: 3.2.1
       '@astrojs/starlight':
-        specifier: ^0.30.6
-        version: 0.30.6(astro@5.1.5(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))
+        specifier: ^0.31.0
+        version: 0.31.0(astro@5.1.6(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))
       '@astrojs/starlight-tailwind':
         specifier: ^3.0.0
-        version: 3.0.0(@astrojs/starlight@0.30.6(astro@5.1.5(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0)))(@astrojs/tailwind@5.1.4(astro@5.1.5(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))(tailwindcss@3.4.17))(tailwindcss@3.4.17)
+        version: 3.0.0(@astrojs/starlight@0.31.0(astro@5.1.6(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0)))(@astrojs/tailwind@5.1.4(astro@5.1.6(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))(tailwindcss@3.4.17))(tailwindcss@3.4.17)
       '@astrojs/tailwind':
         specifier: ^5.1.4
-        version: 5.1.4(astro@5.1.5(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))(tailwindcss@3.4.17)
+        version: 5.1.4(astro@5.1.6(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))(tailwindcss@3.4.17)
       astro:
-        specifier: ^5.1.5
-        version: 5.1.5(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0)
+        specifier: ^5.1.6
+        version: 5.1.6(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0)
       nghiem.io:
         specifier: 'link:'
         version: 'link:'
@@ -857,8 +863,8 @@ importers:
         specifier: ^3.4.17
         version: 3.4.17
       wrangler:
-        specifier: ^3.101.0
-        version: 3.101.0(@cloudflare/workers-types@4.20250109.0)
+        specifier: ^3.102.0
+        version: 3.102.0(@cloudflare/workers-types@4.20250109.0)
 
 packages:
 
@@ -872,6 +878,11 @@ packages:
 
   '@astrojs/cloudflare@12.1.0':
     resolution: {integrity: sha512-tx2HrZclERHI9MV/Jx/+cUVbQ0UGWlVCxV7ozRgnwCNG3fgBtpk1Qf60eTMnCLDQTKXy6C5b3nE+c9+dMpW6Hg==}
+    peerDependencies:
+      astro: ^5.0.0
+
+  '@astrojs/cloudflare@12.2.0':
+    resolution: {integrity: sha512-Aw64u+POcu8T+V8YqXQm6ZqBuuZwMRSW9AApHVIbVoOj43+7lcmIZxQ8TSTfO2a4OR0Q8Sf2WD3j3I9sQdlsbQ==}
     peerDependencies:
       astro: ^5.0.0
 
@@ -907,10 +918,10 @@ packages:
       '@astrojs/tailwind': ^5.1.3
       tailwindcss: ^3.3.3
 
-  '@astrojs/starlight@0.30.6':
-    resolution: {integrity: sha512-/AoLXjPPD1MqixkTd2Lp3qahSzfCejePWHZQ3+fDjj1CuXI7Gjrr5bR3zNV0b9tynloPAIBM0HOyBNEGAo9uAQ==}
+  '@astrojs/starlight@0.31.0':
+    resolution: {integrity: sha512-O70j7m42wp0EcX26Vsm8i37KSlcoHNFY6VLMbJKWKel6XRHS+IVG6AePcpBNS1I+FKkkcagTFJfy3X3n2dDo4Q==}
     peerDependencies:
-      astro: ^5.0.0
+      astro: ^5.1.5
 
   '@astrojs/svelte@7.0.3':
     resolution: {integrity: sha512-cUR9lQ7p3LPZnWpGb7uWBHVzF6wbRbCkyGgEG20EQTx4Am2OyACM/xqZ3KuDKZJQd3HcqKbjkWX/nTJePpNDRw==}
@@ -932,6 +943,9 @@ packages:
 
   '@astrojs/underscore-redirects@0.4.0':
     resolution: {integrity: sha512-Urt32++4ql0IFTTNejnRIN7LPJ6YzU9QXLcc4RXm5or1RLPnQBKVrLvmDxKx3eT72l7ZAi6W4L5E7pcbWbYDRA==}
+
+  '@astrojs/underscore-redirects@0.6.0':
+    resolution: {integrity: sha512-dnJgFpaM955IFNIkEEmMaaIdWXRdeZs1ID6mlGBqdjh6NiCXfKmOdq7L4fd9Dd/tr18fkLrOJ25IUJSxRAEhjQ==}
 
   '@aws-crypto/crc32@5.2.0':
     resolution: {integrity: sha512-nLbCWqQNgUiwwtFsen1AdzAtvuLRsQS8rYgMuxCrdKf9kOssamGLuPwyTY9wyYblNr9+1XM8v6zoDTPPSIeANg==}
@@ -1625,17 +1639,17 @@ packages:
     cpu: [x64]
     os: [win32]
 
-  '@expressive-code/core@0.38.3':
-    resolution: {integrity: sha512-s0/OtdRpBONwcn23O8nVwDNQqpBGKscysejkeBkwlIeHRLZWgiTVrusT5Idrdz1d8cW5wRk9iGsAIQmwDPXgJg==}
+  '@expressive-code/core@0.40.0':
+    resolution: {integrity: sha512-vKRxKaDVhSozGPETcPOB7NF8sn1ICZoO/UfUWs/4o+XmDIOSX7cBQX8BVukenvSksdv5Aaf/teuGzjxX0a7Ibw==}
 
-  '@expressive-code/plugin-frames@0.38.3':
-    resolution: {integrity: sha512-qL2oC6FplmHNQfZ8ZkTR64/wKo9x0c8uP2WDftR/ydwN/yhe1ed7ZWYb8r3dezxsls+tDokCnN4zYR594jbpvg==}
+  '@expressive-code/plugin-frames@0.40.0':
+    resolution: {integrity: sha512-lIbGPFy29Oaf0zV9BNLH6wRPqINz69KUz7PHCUqT3/Mptgp942CzNynbuaZeNPU10quNV072EsOMim569NmSyA==}
 
-  '@expressive-code/plugin-shiki@0.38.3':
-    resolution: {integrity: sha512-kqHnglZeesqG3UKrb6e9Fq5W36AZ05Y9tCREmSN2lw8LVTqENIeCIkLDdWtQ5VoHlKqwUEQFTVlRehdwoY7Gmw==}
+  '@expressive-code/plugin-shiki@0.40.0':
+    resolution: {integrity: sha512-1sb7S/FL1Oqr+MX4Up/LLTFmmlLfd2NyQA+I5TL1PKHHZKptCohmuyekvnPUmMLMnDlm0u2iuR2qxBpjElhf5g==}
 
-  '@expressive-code/plugin-text-markers@0.38.3':
-    resolution: {integrity: sha512-dPK3+BVGTbTmGQGU3Fkj3jZ3OltWUAlxetMHI6limUGCWBCucZiwoZeFM/WmqQa71GyKRzhBT+iEov6kkz2xVA==}
+  '@expressive-code/plugin-text-markers@0.40.0':
+    resolution: {integrity: sha512-NvorTEKWHfSE8yg9aUJn6Kb2zUah8VxvCg4HwnHq62AMW8Yu1WwtjLgqCiLIA17EcWlWKsq5dfs4q0K/hVe0mQ==}
 
   '@fastify/busboy@2.1.1':
     resolution: {integrity: sha512-vBZP4NlzfOlerQTnba4aqZoMhE/a9HY7HRqoOPaETQcSQuWEIyZMHGfVu6w9wGtGK5fED5qRs2DteVCjOH60sA==}
@@ -2028,20 +2042,38 @@ packages:
   '@shikijs/core@1.26.1':
     resolution: {integrity: sha512-yeo7sG+WZQblKPclUOKRPwkv1PyoHYkJ4gP9DzhFJbTdueKR7wYTI1vfF/bFi1NTgc545yG/DzvVhZgueVOXMA==}
 
+  '@shikijs/core@1.27.2':
+    resolution: {integrity: sha512-ns1dokDr0KE1lQ9mWd4rqaBkhSApk0qGCK1+lOqwnkQSkVZ08UGqXj1Ef8dAcTMZNFkN6PSNjkL5TYNX7pyPbQ==}
+
   '@shikijs/engine-javascript@1.26.1':
     resolution: {integrity: sha512-CRhA0b8CaSLxS0E9A4Bzcb3LKBNpykfo9F85ozlNyArxjo2NkijtiwrJZ6eHa+NT5I9Kox2IXVdjUsP4dilsmw==}
+
+  '@shikijs/engine-javascript@1.27.2':
+    resolution: {integrity: sha512-0JB7U5vJc16NShBdxv9hSSJYSKX79+32O7F4oXIxJLdYfomyFvx4B982ackUI9ftO9T3WwagkiiD3nOxOOLiGA==}
 
   '@shikijs/engine-oniguruma@1.26.1':
     resolution: {integrity: sha512-F5XuxN1HljLuvfXv7d+mlTkV7XukC1cawdtOo+7pKgPD83CAB1Sf8uHqP3PK0u7njFH0ZhoXE1r+0JzEgAQ+kg==}
 
+  '@shikijs/engine-oniguruma@1.27.2':
+    resolution: {integrity: sha512-FZYKD1KN7srvpkz4lbGLOYWlyDU4Rd+2RtuKfABTkafAPOFr+J6umfIwY/TzOQqfNtWjL7SAwPAO0dcOraRLaQ==}
+
   '@shikijs/langs@1.26.1':
     resolution: {integrity: sha512-oz/TQiIqZejEIZbGtn68hbJijAOTtYH4TMMSWkWYozwqdpKR3EXgILneQy26WItmJjp3xVspHdiUxUCws4gtuw==}
+
+  '@shikijs/langs@1.27.2':
+    resolution: {integrity: sha512-MSrknKL0DbeXvhtSigMLIzjPOOQfvK7fsbcRv2NUUB0EvuTTomY8/U+lAkczYrXY2+dygKOapJKk8ScFYbtoNw==}
 
   '@shikijs/themes@1.26.1':
     resolution: {integrity: sha512-JDxVn+z+wgLCiUhBGx2OQrLCkKZQGzNH3nAxFir4PjUcYiyD8Jdms9izyxIogYmSwmoPTatFTdzyrRKbKlSfPA==}
 
+  '@shikijs/themes@1.27.2':
+    resolution: {integrity: sha512-Yw/uV7EijjWavIIZLoWneTAohcbBqEKj6XMX1bfMqO3llqTKsyXukPp1evf8qPqzUHY7ibauqEaQchhfi857mg==}
+
   '@shikijs/types@1.26.1':
     resolution: {integrity: sha512-d4B00TKKAMaHuFYgRf3L0gwtvqpW4hVdVwKcZYbBfAAQXspgkbWqnFfuFl3MDH6gLbsubOcr+prcnsqah3ny7Q==}
+
+  '@shikijs/types@1.27.2':
+    resolution: {integrity: sha512-DM9OWUyjmdYdnKDpaGB/GEn9XkToyK1tqxuqbmc5PV+5K8WjjwfygL3+cIvbkSw2v1ySwHDgqATq/+98pJ4Kyg==}
 
   '@shikijs/vscode-textmate@10.0.1':
     resolution: {integrity: sha512-fTIQwLF+Qhuws31iw7Ncl1R3HUDtGwIipiJ9iU+UsDUwMhegFcQKQHd51nZjb7CArq0MvON8rbgCGQYWHUKAdg==}
@@ -2399,8 +2431,8 @@ packages:
     resolution: {integrity: sha512-LElXdjswlqjWrPpJFg1Fx4wpkOCxj1TDHlSV4PlaRxHGWko024xICaa97ZkMfs6DRKlCguiAI+rbXv5GWwXIkg==}
     hasBin: true
 
-  astro-expressive-code@0.38.3:
-    resolution: {integrity: sha512-Tvdc7RV0G92BbtyEOsfJtXU35w41CkM94fOAzxbQP67Wj5jArfserJ321FO4XA7WG9QMV0GIBmQq77NBIRDzpQ==}
+  astro-expressive-code@0.40.0:
+    resolution: {integrity: sha512-dsnUTXAOwiRLnIjqTcb4dhpsa7BDNImaXlkN0fFrJx2CumZe0tW+pgwTWqxv3haejo9KKih2j6UTMVRq1cTpig==}
     peerDependencies:
       astro: ^4.0.0-beta || ^5.0.0-beta || ^3.3.0
 
@@ -2411,6 +2443,11 @@ packages:
 
   astro@5.1.5:
     resolution: {integrity: sha512-Q9TE4aNlczxVoPDoXR3UcjLezL+70z0KbTRXovE4ybpx0mgNL1jsmSWtF3UFXB5+GTf9JK7om5fbIaaMReKcUg==}
+    engines: {node: ^18.17.1 || ^20.3.0 || >=22.0.0, npm: '>=9.6.5', pnpm: '>=7.1.0'}
+    hasBin: true
+
+  astro@5.1.6:
+    resolution: {integrity: sha512-LpTazCIW6syxFePi65gg2ptqqC2kR+PDRym3V23hEQj5yCf+T0t5v9qtp3fW0/+6G+JvP0EprCfCRTt7h/hexg==}
     engines: {node: ^18.17.1 || ^20.3.0 || >=22.0.0, npm: '>=9.6.5', pnpm: '>=7.1.0'}
     hasBin: true
 
@@ -2711,8 +2748,8 @@ packages:
     engines: {node: '>=4'}
     hasBin: true
 
-  esrap@1.4.2:
-    resolution: {integrity: sha512-FhVlJzvTw7ZLxYZ7RyHwQCFE64dkkpzGNNnphaGCLwjqGk1SQcqzbgdx9FowPCktx6NOSHkzvcZ3vsvdH54YXA==}
+  esrap@1.4.3:
+    resolution: {integrity: sha512-Xddc1RsoFJ4z9nR7W7BFaEPIp4UXoeQ0+077UdWLxbafMQFyU79sQJMk7kxNgRwQ9/aVgaKacCHC2pUACGwmYw==}
 
   estree-util-attach-comments@3.0.0:
     resolution: {integrity: sha512-cKUwm/HUcTDsYh/9FgnuFqpfquUbwIqwKM26BVCGDPVgvaCl/nDCCjUfiLlx6lsEZ3Z4RFxNbOQ60pkaEwFxGw==}
@@ -2748,8 +2785,8 @@ packages:
     resolution: {integrity: sha512-eNTPlAD67BmP31LDINZ3U7HSF8l57TxOY2PmBJ1shpCvpnxBF93mWCE8YHBnXs8qiUZJc9WDcWIeC3a2HIAMfw==}
     engines: {node: '>=6'}
 
-  expressive-code@0.38.3:
-    resolution: {integrity: sha512-COM04AiUotHCKJgWdn7NtW2lqu8OW8owAidMpkXt1qxrZ9Q2iC7+tok/1qIn2ocGnczvr9paIySgGnEwFeEQ8Q==}
+  expressive-code@0.40.0:
+    resolution: {integrity: sha512-yBauWlZ6/G4S7WMfQdENbxpwr0qKHabu5w/uFLoTb3xvg2eo4ttk0aAy0IJTm/0+v12YaCG+Gt5Va0AEnTEXng==}
 
   extend@3.0.2:
     resolution: {integrity: sha512-fjquC59cD7CyW6urNXK0FBufkZcoiGG80wTuPujX590cB5Ttln20E2UB4S/WARVqhXffZl2LNgS+gQdPIIim/g==}
@@ -3252,6 +3289,11 @@ packages:
     engines: {node: '>=16.13'}
     hasBin: true
 
+  miniflare@3.20241230.2:
+    resolution: {integrity: sha512-gFC3IaUKrLGdtA6y6PLpC/QE5YAjB5ITCfBZHkosRyFZ9ApaCHKcHRvrEFMc/R19QxxtHD+G3tExEHp7MmtsYQ==}
+    engines: {node: '>=16.13'}
+    hasBin: true
+
   minimatch@9.0.5:
     resolution: {integrity: sha512-G6T0ZX48xgozx7587koeX9Ys2NYy6Gmv//P89sEte9V9whIapMNF4idKxnW2QtCcLiTWlb/wfCabAtAFWhhBow==}
     engines: {node: '>=16 || 14 >=14.17'}
@@ -3329,6 +3371,9 @@ packages:
 
   oniguruma-to-es@0.10.0:
     resolution: {integrity: sha512-zapyOUOCJxt+xhiNRPPMtfJkHGsZ98HHB9qJEkdT8BGytO/+kpe4m1Ngf0MzbzTmhacn11w9yGeDP6tzDhnCdg==}
+
+  oniguruma-to-es@2.0.0:
+    resolution: {integrity: sha512-pE7+9jQgomy10aK6BJKRNHj1Nth0YLOzb3iRuhlz4gRzNSBSd7hga6U8BE6o0SoSuSkqv+PPtt511Msd1Hkl0w==}
 
   p-limit@2.3.0:
     resolution: {integrity: sha512-//88mFWSJx8lxCzwdAABTJL2MyWB12+eIY7MDL2SqLmAkeKU9qxRvWuSyTjm3FUmpBEMuFfckAIqEaVGUDxb6w==}
@@ -3424,8 +3469,8 @@ packages:
     resolution: {integrity: sha512-HRDzbaKjC+AOWVXxAU/x54COGeIv9eb+6CkDSQoNTt4XyWoIJvuPsXizxu/Fr23EiekbtZwmh1IcIG/l/a10GQ==}
     engines: {node: '>=8'}
 
-  pkg-types@1.3.0:
-    resolution: {integrity: sha512-kS7yWjVFCkIw9hqdJBoMxDdzEngmkr5FXeWZZfQ6GoYacjVnsW6l2CcYW/0ThD0vF4LPJgVYnrg4d0uuhwYQbg==}
+  pkg-types@1.3.1:
+    resolution: {integrity: sha512-/Jm5M4RvtBFVkKWRu2BLUTNP8/M2a+UwuAX+ae4770q1qVGtfjG+WTCupoZixokjmHiry8uI+dlY8KXYV5HVVQ==}
 
   postcss-import@15.1.0:
     resolution: {integrity: sha512-hpr+J05B2FVYUAXHeK1YyI267J/dDDhMU6B6civm8hSY1jYJnBXxzKDKDswzJmtLHryrjhnDjqqp/49t8FALew==}
@@ -3466,6 +3511,10 @@ packages:
 
   postcss@8.4.49:
     resolution: {integrity: sha512-OCVPnIObs4N29kxTjzLfUryOkvZEq+pf8jTF0lg8E7uETuWHA+v7j3c/xJmiqpX450191LlmZfUKkXxkTry7nA==}
+    engines: {node: ^10 || ^12 || >=14}
+
+  postcss@8.5.1:
+    resolution: {integrity: sha512-6oz2beyjc5VMn/KV1pPw8fliQkhBXrVn1Z3TVyqZxU8kZpzEKhBdmCFqI6ZbmGtamQvQGuU1sgPTk8ZrXDD7jQ==}
     engines: {node: ^10 || ^12 || >=14}
 
   preferred-pm@4.0.0:
@@ -3531,8 +3580,8 @@ packages:
   regex@5.1.1:
     resolution: {integrity: sha512-dN5I359AVGPnwzJm2jN1k0W9LPZ+ePvoOeVMMfqIMFz53sSwXkxaJoxr50ptnsC771lK95BnTrVSZxq0b9yCGw==}
 
-  rehype-expressive-code@0.38.3:
-    resolution: {integrity: sha512-RYSSDkMBikoTbycZPkcWp6ELneANT4eTpND1DSRJ6nI2eVFUwTBDCvE2vO6jOOTaavwnPiydi4i/87NRyjpdOA==}
+  rehype-expressive-code@0.40.0:
+    resolution: {integrity: sha512-nxZYcFYD3ceqX0VkFIWwJ6gcWasJ+af50MoLqXOg08stgYhgvyWkjqaVCVBpZoBmAQDu9Jkl3xzqUcse8DUfaA==}
 
   rehype-format@5.0.1:
     resolution: {integrity: sha512-zvmVru9uB0josBVpr946OR8ui7nJEdzZobwLOOqHb/OOD88W0Vk2SqLwoVOj0fM6IPCCO6TaV9CvQvJMWwukFQ==}
@@ -3645,6 +3694,9 @@ packages:
   shiki@1.26.1:
     resolution: {integrity: sha512-Gqg6DSTk3wYqaZ5OaYtzjcdxcBvX5kCy24yvRJEgjT5U+WHlmqCThLuBUx0juyxQBi+6ug53IGeuQS07DWwpcw==}
 
+  shiki@1.27.2:
+    resolution: {integrity: sha512-QtA1C41oEVixKog+V8I3ia7jjGls7oCZ8Yul8vdHrVBga5uPoyTtMvFF4lMMXIyAZo5A5QbXq91bot2vA6Q+eQ==}
+
   signal-exit@4.1.0:
     resolution: {integrity: sha512-bzyZ1e88w9O1iNJbKnOlvYTrWPDl46O1bG0D3XInv+9tkPrxrN8jUUTiFlDkkmKWgn1M6CfIA13SuGqOa9Korw==}
     engines: {node: '>=14'}
@@ -3743,8 +3795,8 @@ packages:
       svelte: ^3.55 || ^4.0.0-next.0 || ^4.0 || ^5.0.0-next.0
       typescript: ^4.9.4 || ^5.0.0
 
-  svelte@5.16.1:
-    resolution: {integrity: sha512-FsA1OjAKMAFSDob6j/Tv2ZV9rY4SeqPd1WXQlQkFkePAozSHLp6tbkU9qa1xJ+uTRzMSM2Vx3USdsYZBXd3H3g==}
+  svelte@5.18.0:
+    resolution: {integrity: sha512-/Eb81lB8bVUxQPmkPVNBYrU9cZ544+9hE91ZUUXTMf7eWcGW84N1hS3gvv/XsUNOWLLg3IicXP2qa8W3KpTUHA==}
     engines: {node: '>=18'}
 
   tailwindcss@3.4.17:
@@ -3852,9 +3904,6 @@ packages:
   undici@5.28.4:
     resolution: {integrity: sha512-72RFADWFqKmUb2hmmvNODKL3p9hcB6Gt2DOQMis1SEBaV6a4MH8soBvzg+95CYhCKPFedut2JY9bMfrDl9D23g==}
     engines: {node: '>=14.0'}
-
-  unenv-nightly@2.0.0-20241204-140205-a5d5190:
-    resolution: {integrity: sha512-jpmAytLeiiW01pl5bhVn9wYJ4vtiLdhGe10oXlJBuQEX8mxjxO8BlEXGHU4vr4yEikjFP1wsomTHt/CLU8kUwg==}
 
   unenv-nightly@2.0.0-20241218-183400-5d6aec3:
     resolution: {integrity: sha512-7Xpi29CJRbOV1/IrC03DawMJ0hloklDLq/cigSe+J2jkcC+iDres2Cy0r4ltj5f0x7DqsaGaB4/dLuCPPFZnZA==}
@@ -4107,12 +4156,12 @@ packages:
       '@cloudflare/workers-types':
         optional: true
 
-  wrangler@3.99.0:
-    resolution: {integrity: sha512-k0x4rT3G/QCbxcoZY7CHRVlAIS8WMmKdga6lf4d2c3gXFqssh44vwlTDuARA9QANBxKJTcA7JPTJRfUDhd9QBA==}
+  wrangler@3.102.0:
+    resolution: {integrity: sha512-Za4DstbS3+/hu+///K/4dFFeV6XbPBAGp7NCnVajchxRTwEPTdbO5eezH0HLJPMHK6G/0yIzyhlEMnyg4YzHAA==}
     engines: {node: '>=16.17.0'}
     hasBin: true
     peerDependencies:
-      '@cloudflare/workers-types': ^4.20241218.0
+      '@cloudflare/workers-types': ^4.20241230.0
     peerDependenciesMeta:
       '@cloudflare/workers-types':
         optional: true
@@ -4210,7 +4259,37 @@ snapshots:
       miniflare: 3.20241218.0
       tiny-glob: 0.2.9
       vite: 6.0.6(@types/node@22.10.5)(jiti@1.21.7)(yaml@2.7.0)
-      wrangler: 3.99.0(@cloudflare/workers-types@4.20250109.0)
+      wrangler: 3.101.0(@cloudflare/workers-types@4.20250109.0)
+    transitivePeerDependencies:
+      - '@types/node'
+      - aws-crt
+      - bufferutil
+      - jiti
+      - less
+      - lightningcss
+      - sass
+      - sass-embedded
+      - stylus
+      - sugarss
+      - supports-color
+      - terser
+      - tsx
+      - utf-8-validate
+      - yaml
+
+  '@astrojs/cloudflare@12.2.0(@types/node@22.10.5)(astro@5.1.6(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))(jiti@1.21.7)(yaml@2.7.0)':
+    dependencies:
+      '@astrojs/internal-helpers': 0.4.2
+      '@astrojs/underscore-redirects': 0.6.0
+      '@cloudflare/workers-types': 4.20250109.0
+      astro: 5.1.6(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0)
+      esbuild: 0.24.2
+      estree-walker: 3.0.3
+      magic-string: 0.30.17
+      miniflare: 3.20241230.2
+      tiny-glob: 0.2.9
+      vite: 6.0.7(@types/node@22.10.5)(jiti@1.21.7)(yaml@2.7.0)
+      wrangler: 3.102.0(@cloudflare/workers-types@4.20250109.0)
     transitivePeerDependencies:
       - '@types/node'
       - bufferutil
@@ -4248,7 +4327,7 @@ snapshots:
       remark-parse: 11.0.0
       remark-rehype: 11.1.1
       remark-smartypants: 3.0.2
-      shiki: 1.26.1
+      shiki: 1.27.2
       unified: 11.0.5
       unist-util-remove-position: 5.0.0
       unist-util-visit: 5.0.0
@@ -4257,12 +4336,12 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@astrojs/mdx@4.0.5(astro@5.1.5(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))':
+  '@astrojs/mdx@4.0.5(astro@5.1.6(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))':
     dependencies:
       '@astrojs/markdown-remark': 6.0.1
       '@mdx-js/mdx': 3.1.0(acorn@8.14.0)
       acorn: 8.14.0
-      astro: 5.1.5(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0)
+      astro: 5.1.6(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0)
       es-module-lexer: 1.6.0
       estree-util-visit: 2.0.0
       hast-util-to-html: 9.0.4
@@ -4286,22 +4365,22 @@ snapshots:
       stream-replace-string: 2.0.0
       zod: 3.24.1
 
-  '@astrojs/starlight-tailwind@3.0.0(@astrojs/starlight@0.30.6(astro@5.1.5(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0)))(@astrojs/tailwind@5.1.4(astro@5.1.5(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))(tailwindcss@3.4.17))(tailwindcss@3.4.17)':
+  '@astrojs/starlight-tailwind@3.0.0(@astrojs/starlight@0.31.0(astro@5.1.6(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0)))(@astrojs/tailwind@5.1.4(astro@5.1.6(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))(tailwindcss@3.4.17))(tailwindcss@3.4.17)':
     dependencies:
-      '@astrojs/starlight': 0.30.6(astro@5.1.5(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))
-      '@astrojs/tailwind': 5.1.4(astro@5.1.5(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))(tailwindcss@3.4.17)
+      '@astrojs/starlight': 0.31.0(astro@5.1.6(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))
+      '@astrojs/tailwind': 5.1.4(astro@5.1.6(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))(tailwindcss@3.4.17)
       tailwindcss: 3.4.17
 
-  '@astrojs/starlight@0.30.6(astro@5.1.5(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))':
+  '@astrojs/starlight@0.31.0(astro@5.1.6(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))':
     dependencies:
-      '@astrojs/mdx': 4.0.5(astro@5.1.5(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))
+      '@astrojs/mdx': 4.0.5(astro@5.1.6(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))
       '@astrojs/sitemap': 3.2.1
       '@pagefind/default-ui': 1.3.0
       '@types/hast': 3.0.4
       '@types/js-yaml': 4.0.9
       '@types/mdast': 4.0.4
-      astro: 5.1.5(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0)
-      astro-expressive-code: 0.38.3(astro@5.1.5(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))
+      astro: 5.1.6(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0)
+      astro-expressive-code: 0.40.0(astro@5.1.6(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))
       bcp-47: 2.1.0
       hast-util-from-html: 2.0.3
       hast-util-select: 6.0.3
@@ -4322,12 +4401,12 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@astrojs/svelte@7.0.3(@types/node@22.10.5)(astro@5.1.5(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))(jiti@1.21.7)(svelte@5.16.1)(typescript@5.7.2)(yaml@2.7.0)':
+  '@astrojs/svelte@7.0.3(@types/node@22.10.5)(astro@5.1.5(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))(jiti@1.21.7)(svelte@5.18.0)(typescript@5.7.2)(yaml@2.7.0)':
     dependencies:
-      '@sveltejs/vite-plugin-svelte': 5.0.3(svelte@5.16.1)(vite@6.0.7(@types/node@22.10.5)(jiti@1.21.7)(yaml@2.7.0))
+      '@sveltejs/vite-plugin-svelte': 5.0.3(svelte@5.18.0)(vite@6.0.7(@types/node@22.10.5)(jiti@1.21.7)(yaml@2.7.0))
       astro: 5.1.5(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0)
-      svelte: 5.16.1
-      svelte2tsx: 0.7.34(svelte@5.16.1)(typescript@5.7.2)
+      svelte: 5.18.0
+      svelte2tsx: 0.7.34(svelte@5.18.0)(typescript@5.7.2)
       typescript: 5.7.2
       vite: 6.0.7(@types/node@22.10.5)(jiti@1.21.7)(yaml@2.7.0)
     transitivePeerDependencies:
@@ -4354,6 +4433,16 @@ snapshots:
     transitivePeerDependencies:
       - ts-node
 
+  '@astrojs/tailwind@5.1.4(astro@5.1.6(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0))(tailwindcss@3.4.17)':
+    dependencies:
+      astro: 5.1.6(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0)
+      autoprefixer: 10.4.20(postcss@8.4.49)
+      postcss: 8.4.49
+      postcss-load-config: 4.0.2(postcss@8.4.49)
+      tailwindcss: 3.4.17
+    transitivePeerDependencies:
+      - ts-node
+
   '@astrojs/telemetry@3.2.0':
     dependencies:
       ci-info: 4.1.0
@@ -4367,6 +4456,8 @@ snapshots:
       - supports-color
 
   '@astrojs/underscore-redirects@0.4.0': {}
+
+  '@astrojs/underscore-redirects@0.6.0': {}
 
   '@aws-crypto/crc32@5.2.0':
     dependencies:
@@ -5159,30 +5250,30 @@ snapshots:
   '@esbuild/win32-x64@0.24.2':
     optional: true
 
-  '@expressive-code/core@0.38.3':
+  '@expressive-code/core@0.40.0':
     dependencies:
       '@ctrl/tinycolor': 4.1.0
       hast-util-select: 6.0.3
       hast-util-to-html: 9.0.4
       hast-util-to-text: 4.0.2
       hastscript: 9.0.0
-      postcss: 8.4.49
-      postcss-nested: 6.2.0(postcss@8.4.49)
+      postcss: 8.5.1
+      postcss-nested: 6.2.0(postcss@8.5.1)
       unist-util-visit: 5.0.0
       unist-util-visit-parents: 6.0.1
 
-  '@expressive-code/plugin-frames@0.38.3':
+  '@expressive-code/plugin-frames@0.40.0':
     dependencies:
-      '@expressive-code/core': 0.38.3
+      '@expressive-code/core': 0.40.0
 
-  '@expressive-code/plugin-shiki@0.38.3':
+  '@expressive-code/plugin-shiki@0.40.0':
     dependencies:
-      '@expressive-code/core': 0.38.3
-      shiki: 1.26.1
+      '@expressive-code/core': 0.40.0
+      shiki: 1.27.2
 
-  '@expressive-code/plugin-text-markers@0.38.3':
+  '@expressive-code/plugin-text-markers@0.40.0':
     dependencies:
-      '@expressive-code/core': 0.38.3
+      '@expressive-code/core': 0.40.0
 
   '@fastify/busboy@2.1.1': {}
 
@@ -5495,26 +5586,59 @@ snapshots:
       '@types/hast': 3.0.4
       hast-util-to-html: 9.0.4
 
+  '@shikijs/core@1.27.2':
+    dependencies:
+      '@shikijs/engine-javascript': 1.27.2
+      '@shikijs/engine-oniguruma': 1.27.2
+      '@shikijs/types': 1.27.2
+      '@shikijs/vscode-textmate': 10.0.1
+      '@types/hast': 3.0.4
+      hast-util-to-html: 9.0.4
+
   '@shikijs/engine-javascript@1.26.1':
     dependencies:
       '@shikijs/types': 1.26.1
       '@shikijs/vscode-textmate': 10.0.1
       oniguruma-to-es: 0.10.0
 
+  '@shikijs/engine-javascript@1.27.2':
+    dependencies:
+      '@shikijs/types': 1.27.2
+      '@shikijs/vscode-textmate': 10.0.1
+      oniguruma-to-es: 2.0.0
+
   '@shikijs/engine-oniguruma@1.26.1':
     dependencies:
       '@shikijs/types': 1.26.1
+      '@shikijs/vscode-textmate': 10.0.1
+
+  '@shikijs/engine-oniguruma@1.27.2':
+    dependencies:
+      '@shikijs/types': 1.27.2
       '@shikijs/vscode-textmate': 10.0.1
 
   '@shikijs/langs@1.26.1':
     dependencies:
       '@shikijs/types': 1.26.1
 
+  '@shikijs/langs@1.27.2':
+    dependencies:
+      '@shikijs/types': 1.27.2
+
   '@shikijs/themes@1.26.1':
     dependencies:
       '@shikijs/types': 1.26.1
 
+  '@shikijs/themes@1.27.2':
+    dependencies:
+      '@shikijs/types': 1.27.2
+
   '@shikijs/types@1.26.1':
+    dependencies:
+      '@shikijs/vscode-textmate': 10.0.1
+      '@types/hast': 3.0.4
+
+  '@shikijs/types@1.27.2':
     dependencies:
       '@shikijs/vscode-textmate': 10.0.1
       '@types/hast': 3.0.4
@@ -5852,23 +5976,23 @@ snapshots:
       '@smithy/types': 4.1.0
       tslib: 2.8.1
 
-  '@sveltejs/vite-plugin-svelte-inspector@4.0.1(@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.16.1)(vite@6.0.7(@types/node@22.10.5)(jiti@1.21.7)(yaml@2.7.0)))(svelte@5.16.1)(vite@6.0.7(@types/node@22.10.5)(jiti@1.21.7)(yaml@2.7.0))':
+  '@sveltejs/vite-plugin-svelte-inspector@4.0.1(@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.18.0)(vite@6.0.7(@types/node@22.10.5)(jiti@1.21.7)(yaml@2.7.0)))(svelte@5.18.0)(vite@6.0.7(@types/node@22.10.5)(jiti@1.21.7)(yaml@2.7.0))':
     dependencies:
-      '@sveltejs/vite-plugin-svelte': 5.0.3(svelte@5.16.1)(vite@6.0.7(@types/node@22.10.5)(jiti@1.21.7)(yaml@2.7.0))
+      '@sveltejs/vite-plugin-svelte': 5.0.3(svelte@5.18.0)(vite@6.0.7(@types/node@22.10.5)(jiti@1.21.7)(yaml@2.7.0))
       debug: 4.4.0
-      svelte: 5.16.1
+      svelte: 5.18.0
       vite: 6.0.7(@types/node@22.10.5)(jiti@1.21.7)(yaml@2.7.0)
     transitivePeerDependencies:
       - supports-color
 
-  '@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.16.1)(vite@6.0.7(@types/node@22.10.5)(jiti@1.21.7)(yaml@2.7.0))':
+  '@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.18.0)(vite@6.0.7(@types/node@22.10.5)(jiti@1.21.7)(yaml@2.7.0))':
     dependencies:
-      '@sveltejs/vite-plugin-svelte-inspector': 4.0.1(@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.16.1)(vite@6.0.7(@types/node@22.10.5)(jiti@1.21.7)(yaml@2.7.0)))(svelte@5.16.1)(vite@6.0.7(@types/node@22.10.5)(jiti@1.21.7)(yaml@2.7.0))
+      '@sveltejs/vite-plugin-svelte-inspector': 4.0.1(@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.18.0)(vite@6.0.7(@types/node@22.10.5)(jiti@1.21.7)(yaml@2.7.0)))(svelte@5.18.0)(vite@6.0.7(@types/node@22.10.5)(jiti@1.21.7)(yaml@2.7.0))
       debug: 4.4.0
       deepmerge: 4.3.1
       kleur: 4.1.5
       magic-string: 0.30.17
-      svelte: 5.16.1
+      svelte: 5.18.0
       vite: 6.0.7(@types/node@22.10.5)(jiti@1.21.7)(yaml@2.7.0)
       vitefu: 1.0.5(vite@6.0.7(@types/node@22.10.5)(jiti@1.21.7)(yaml@2.7.0))
     transitivePeerDependencies:
@@ -5985,10 +6109,10 @@ snapshots:
 
   astring@1.9.0: {}
 
-  astro-expressive-code@0.38.3(astro@5.1.5(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0)):
+  astro-expressive-code@0.40.0(astro@5.1.6(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0)):
     dependencies:
-      astro: 5.1.5(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0)
-      rehype-expressive-code: 0.38.3
+      astro: 5.1.6(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0)
+      rehype-expressive-code: 0.40.0
 
   astro-integration-kit@0.17.0(astro@5.1.5(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0)):
     dependencies:
@@ -6042,6 +6166,103 @@ snapshots:
       rehype: 13.0.2
       semver: 7.6.3
       shiki: 1.26.1
+      tinyexec: 0.3.2
+      tsconfck: 3.1.4(typescript@5.7.2)
+      ultrahtml: 1.5.3
+      unist-util-visit: 5.0.0
+      unstorage: 1.14.4
+      vfile: 6.0.3
+      vite: 6.0.7(@types/node@22.10.5)(jiti@1.21.7)(yaml@2.7.0)
+      vitefu: 1.0.5(vite@6.0.7(@types/node@22.10.5)(jiti@1.21.7)(yaml@2.7.0))
+      which-pm: 3.0.0
+      xxhash-wasm: 1.1.0
+      yargs-parser: 21.1.1
+      yocto-spinner: 0.1.2
+      zod: 3.24.1
+      zod-to-json-schema: 3.24.1(zod@3.24.1)
+      zod-to-ts: 1.2.0(typescript@5.7.2)(zod@3.24.1)
+    optionalDependencies:
+      sharp: 0.33.5
+    transitivePeerDependencies:
+      - '@azure/app-configuration'
+      - '@azure/cosmos'
+      - '@azure/data-tables'
+      - '@azure/identity'
+      - '@azure/keyvault-secrets'
+      - '@azure/storage-blob'
+      - '@capacitor/preferences'
+      - '@deno/kv'
+      - '@netlify/blobs'
+      - '@planetscale/database'
+      - '@types/node'
+      - '@upstash/redis'
+      - '@vercel/blob'
+      - '@vercel/kv'
+      - aws4fetch
+      - db0
+      - idb-keyval
+      - ioredis
+      - jiti
+      - less
+      - lightningcss
+      - rollup
+      - sass
+      - sass-embedded
+      - stylus
+      - sugarss
+      - supports-color
+      - terser
+      - tsx
+      - typescript
+      - uploadthing
+      - yaml
+
+  astro@5.1.6(@types/node@22.10.5)(jiti@1.21.7)(rollup@4.30.1)(typescript@5.7.2)(yaml@2.7.0):
+    dependencies:
+      '@astrojs/compiler': 2.10.3
+      '@astrojs/internal-helpers': 0.4.2
+      '@astrojs/markdown-remark': 6.0.1
+      '@astrojs/telemetry': 3.2.0
+      '@oslojs/encoding': 1.1.0
+      '@rollup/pluginutils': 5.1.4(rollup@4.30.1)
+      '@types/cookie': 0.6.0
+      acorn: 8.14.0
+      aria-query: 5.3.2
+      axobject-query: 4.1.0
+      boxen: 8.0.1
+      ci-info: 4.1.0
+      clsx: 2.1.1
+      common-ancestor-path: 1.0.1
+      cookie: 0.7.2
+      cssesc: 3.0.0
+      debug: 4.4.0
+      deterministic-object-hash: 2.0.2
+      devalue: 5.1.1
+      diff: 5.2.0
+      dlv: 1.1.3
+      dset: 3.1.4
+      es-module-lexer: 1.6.0
+      esbuild: 0.21.5
+      estree-walker: 3.0.3
+      fast-glob: 3.3.3
+      flattie: 1.1.1
+      github-slugger: 2.0.0
+      html-escaper: 3.0.3
+      http-cache-semantics: 4.1.1
+      js-yaml: 4.1.0
+      kleur: 4.1.5
+      magic-string: 0.30.17
+      magicast: 0.3.5
+      micromatch: 4.0.8
+      mrmime: 2.0.0
+      neotraverse: 0.6.18
+      p-limit: 6.2.0
+      p-queue: 8.0.1
+      preferred-pm: 4.0.0
+      prompts: 2.4.2
+      rehype: 13.0.2
+      semver: 7.6.3
+      shiki: 1.27.2
       tinyexec: 0.3.2
       tsconfck: 3.1.4(typescript@5.7.2)
       ultrahtml: 1.5.3
@@ -6409,7 +6630,7 @@ snapshots:
 
   esprima@4.0.1: {}
 
-  esrap@1.4.2:
+  esrap@1.4.3:
     dependencies:
       '@jridgewell/sourcemap-codec': 1.5.0
 
@@ -6454,12 +6675,12 @@ snapshots:
 
   exit-hook@2.2.1: {}
 
-  expressive-code@0.38.3:
+  expressive-code@0.40.0:
     dependencies:
-      '@expressive-code/core': 0.38.3
-      '@expressive-code/plugin-frames': 0.38.3
-      '@expressive-code/plugin-shiki': 0.38.3
-      '@expressive-code/plugin-text-markers': 0.38.3
+      '@expressive-code/core': 0.40.0
+      '@expressive-code/plugin-frames': 0.40.0
+      '@expressive-code/plugin-shiki': 0.40.0
+      '@expressive-code/plugin-text-markers': 0.40.0
 
   extend@3.0.2: {}
 
@@ -7399,6 +7620,25 @@ snapshots:
       - supports-color
       - utf-8-validate
 
+  miniflare@3.20241230.2:
+    dependencies:
+      '@cspotcode/source-map-support': 0.8.1
+      acorn: 8.14.0
+      acorn-walk: 8.3.4
+      capnp-ts: 0.7.0
+      exit-hook: 2.2.1
+      glob-to-regexp: 0.4.1
+      stoppable: 1.1.0
+      undici: 5.28.4
+      workerd: 1.20241230.0
+      ws: 8.18.0
+      youch: 3.3.4
+      zod: 3.24.1
+    transitivePeerDependencies:
+      - bufferutil
+      - supports-color
+      - utf-8-validate
+
   minimatch@9.0.5:
     dependencies:
       brace-expansion: 2.0.1
@@ -7409,7 +7649,7 @@ snapshots:
     dependencies:
       acorn: 8.14.0
       pathe: 2.0.1
-      pkg-types: 1.3.0
+      pkg-types: 1.3.1
       ufo: 1.5.4
 
   mrmime@2.0.0: {}
@@ -7464,6 +7704,12 @@ snapshots:
   ohash@1.1.4: {}
 
   oniguruma-to-es@0.10.0:
+    dependencies:
+      emoji-regex-xs: 1.0.0
+      regex: 5.1.1
+      regex-recursion: 5.1.1
+
+  oniguruma-to-es@2.0.0:
     dependencies:
       emoji-regex-xs: 1.0.0
       regex: 5.1.1
@@ -7561,11 +7807,11 @@ snapshots:
     dependencies:
       find-up: 4.1.0
 
-  pkg-types@1.3.0:
+  pkg-types@1.3.1:
     dependencies:
       confbox: 0.1.8
       mlly: 1.7.4
-      pathe: 1.1.2
+      pathe: 2.0.1
 
   postcss-import@15.1.0(postcss@8.4.49):
     dependencies:
@@ -7591,6 +7837,11 @@ snapshots:
       postcss: 8.4.49
       postcss-selector-parser: 6.1.2
 
+  postcss-nested@6.2.0(postcss@8.5.1):
+    dependencies:
+      postcss: 8.5.1
+      postcss-selector-parser: 6.1.2
+
   postcss-selector-parser@6.1.2:
     dependencies:
       cssesc: 3.0.0
@@ -7599,6 +7850,12 @@ snapshots:
   postcss-value-parser@4.2.0: {}
 
   postcss@8.4.49:
+    dependencies:
+      nanoid: 3.3.8
+      picocolors: 1.1.1
+      source-map-js: 1.2.1
+
+  postcss@8.5.1:
     dependencies:
       nanoid: 3.3.8
       picocolors: 1.1.1
@@ -7686,9 +7943,9 @@ snapshots:
     dependencies:
       regex-utilities: 2.3.0
 
-  rehype-expressive-code@0.38.3:
+  rehype-expressive-code@0.40.0:
     dependencies:
-      expressive-code: 0.38.3
+      expressive-code: 0.40.0
 
   rehype-format@5.0.1:
     dependencies:
@@ -7938,6 +8195,17 @@ snapshots:
       '@shikijs/vscode-textmate': 10.0.1
       '@types/hast': 3.0.4
 
+  shiki@1.27.2:
+    dependencies:
+      '@shikijs/core': 1.27.2
+      '@shikijs/engine-javascript': 1.27.2
+      '@shikijs/engine-oniguruma': 1.27.2
+      '@shikijs/langs': 1.27.2
+      '@shikijs/themes': 1.27.2
+      '@shikijs/types': 1.27.2
+      '@shikijs/vscode-textmate': 10.0.1
+      '@types/hast': 3.0.4
+
   signal-exit@4.1.0: {}
 
   simple-swizzle@0.2.2:
@@ -8029,14 +8297,14 @@ snapshots:
 
   supports-preserve-symlinks-flag@1.0.0: {}
 
-  svelte2tsx@0.7.34(svelte@5.16.1)(typescript@5.7.2):
+  svelte2tsx@0.7.34(svelte@5.18.0)(typescript@5.7.2):
     dependencies:
       dedent-js: 1.0.1
       pascal-case: 3.1.2
-      svelte: 5.16.1
+      svelte: 5.18.0
       typescript: 5.7.2
 
-  svelte@5.16.1:
+  svelte@5.18.0:
     dependencies:
       '@ampproject/remapping': 2.3.0
       '@jridgewell/sourcemap-codec': 1.5.0
@@ -8047,7 +8315,7 @@ snapshots:
       axobject-query: 4.1.0
       clsx: 2.1.1
       esm-env: 1.2.2
-      esrap: 1.4.2
+      esrap: 1.4.3
       is-reference: 3.0.3
       locate-character: 3.0.0
       magic-string: 0.30.17
@@ -8155,13 +8423,6 @@ snapshots:
   undici@5.28.4:
     dependencies:
       '@fastify/busboy': 2.1.1
-
-  unenv-nightly@2.0.0-20241204-140205-a5d5190:
-    dependencies:
-      defu: 6.1.4
-      ohash: 1.1.4
-      pathe: 1.1.2
-      ufo: 1.5.4
 
   unenv-nightly@2.0.0-20241218-183400-5d6aec3:
     dependencies:
@@ -8285,7 +8546,7 @@ snapshots:
   vite@6.0.7(@types/node@22.10.5)(jiti@1.21.7)(yaml@2.7.0):
     dependencies:
       esbuild: 0.24.2
-      postcss: 8.4.49
+      postcss: 8.5.1
       rollup: 4.30.1
     optionalDependencies:
       '@types/node': 22.10.5
@@ -8360,25 +8621,17 @@ snapshots:
       - supports-color
       - utf-8-validate
 
-  wrangler@3.99.0(@cloudflare/workers-types@4.20250109.0):
+  wrangler@3.102.0(@cloudflare/workers-types@4.20250109.0):
     dependencies:
       '@cloudflare/kv-asset-handler': 0.3.4
       '@esbuild-plugins/node-globals-polyfill': 0.2.3(esbuild@0.17.19)
       '@esbuild-plugins/node-modules-polyfill': 0.2.2(esbuild@0.17.19)
       blake3-wasm: 2.1.5
-      chokidar: 4.0.3
-      date-fns: 4.1.0
       esbuild: 0.17.19
-      itty-time: 1.0.6
-      miniflare: 3.20241218.0
-      nanoid: 3.3.8
+      miniflare: 3.20241230.2
       path-to-regexp: 6.3.0
-      resolve: 1.22.10
-      selfsigned: 2.4.1
-      source-map: 0.6.1
-      unenv: unenv-nightly@2.0.0-20241204-140205-a5d5190
-      workerd: 1.20241218.0
-      xxhash-wasm: 1.1.0
+      unenv: unenv-nightly@2.0.0-20241218-183400-5d6aec3
+      workerd: 1.20241230.0
     optionalDependencies:
       '@cloudflare/workers-types': 4.20250109.0
       fsevents: 2.3.3

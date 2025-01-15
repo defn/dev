@@ -4,5 +4,3 @@
 
 cd "${MISE_ORIGINAL_CWD}"
 pnpm install .
-rm -rf node_modules
-pnpm install .

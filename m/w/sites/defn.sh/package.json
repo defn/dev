@@ -10,15 +10,15 @@
     "astro": "astro"
   },
   "dependencies": {
-    "@astrojs/cloudflare": "^12.1.0",
+    "@astrojs/cloudflare": "^12.2.0",
     "@astrojs/sitemap": "^3.2.1",
-    "@astrojs/starlight": "^0.30.6",
+    "@astrojs/starlight": "^0.31.0",
     "@astrojs/starlight-tailwind": "^3.0.0",
     "@astrojs/tailwind": "^5.1.4",
-    "astro": "^5.1.5",
+    "astro": "^5.1.6",
     "defn.sh": "link:",
     "sharp": "^0.33.5",
     "tailwindcss": "^3.4.17",
-    "wrangler": "^3.101.0"
+    "wrangler": "^3.102.0"
   }
 }
