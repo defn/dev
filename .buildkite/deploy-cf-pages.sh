@@ -4,6 +4,8 @@ set -efu -o pipefail
 
 website="$1"; shift
 
+mkdir -p work/bazel
+
 docker run --rm \
     -v $(pwd):/home/ubuntu \
     -v bazel-cache-1:/home/ubuntu/work/bazel \
