@@ -13,7 +13,6 @@
   "dependencies": {
     "@astrojs/cloudflare": "^12.1.0",
     "astro": "^5.1.4",
-    "fn2": "link:",
     "svelte": "^5.18.0"
   },
   "devDependencies": {
