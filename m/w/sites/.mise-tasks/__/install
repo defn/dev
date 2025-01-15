@@ -3,4 +3,4 @@
 #MISE description="Install Astro and dependencies"
 
 cd "${MISE_ORIGINAL_CWD}"
-pnpm install .
+pnpm install -w .

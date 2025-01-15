@@ -15,7 +15,6 @@
     "@astrojs/starlight": "^0.31.0",
     "@astrojs/starlight-tailwind": "^3.0.0",
     "@astrojs/tailwind": "^5.1.4",
-    "amanibhav.am": "link:",
     "astro": "^5.1.6",
     "sharp": "^0.33.5",
     "tailwindcss": "^3.4.17",
