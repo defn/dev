@@ -5,6 +5,11 @@ package infra
 domains: [...#DomainName]
 
 domains: [
+	"amanibhav.am",
+	"d3fn.app",
+	"defn.co",
+	"defn.red",
+	"defn.blue",
 	"defn.app",
 	"defn.cloud",
 	"defn.co.in",

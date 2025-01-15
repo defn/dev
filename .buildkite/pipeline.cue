@@ -1,5 +1,9 @@
 package bk
 
+import (
+	"github.com/defn/dev/m/c/infra"
+)
+
 steps: [{
 	label:   "trunk check"
 	command: "./.buildkite/bin/trunk-check.sh"
@@ -13,11 +17,13 @@ steps: [{
 	label: "Website deploys"
 	plugins: [{
 		"monorepo-diff#v1.2.0": {
-			diff: "git diff --name-only HEAD~1"
-			watch: [{
-				path: "m/w/sites/amanibhav.am/"
-				config: command: "~/bin/invoke m install && ~/bin/invoke m package"
-			}]
+			diff: "git diff --name-only main"
+			watch: [
+				for d in infra.domains {
+					path: "m/w/sites/\(d)/"
+					config: command: "./.buildkite/deploy-cf-pages.sh m/w/sites/\(d)"
+				},
+			]
 		}
 	}]
 }]
