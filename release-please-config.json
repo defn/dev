@@ -4,7 +4,12 @@
   "release-type": "simple",
   "packages": {
     ".": {
-      "extra-files": ["version"]
+      "extra-files": [
+        {
+          "type": "generic",
+          "path": "version.yaml"
+        }
+      ]
     }
   }
 }
