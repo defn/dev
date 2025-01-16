@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.4](https://github.com/defn/dev/compare/v1.1.3...v1.1.4) (2025-01-16)
+
+
+### Bug Fixes
+
+* get the release tag ([23ee1bd](https://github.com/defn/dev/commit/23ee1bd863459b3bb00a3b49c5db32f64f7dc6cd))
+
 ## [1.1.3](https://github.com/defn/dev/compare/v1.1.2...v1.1.3) (2025-01-16)
 
 
