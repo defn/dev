@@ -1,5 +1,16 @@
 # Changelog
 
+## [1.1.1](https://github.com/defn/dev/compare/v1.1.0...v1.1.1) (2025-01-16)
+
+
+### Bug Fixes
+
+* accumulating more changes ([adc5530](https://github.com/defn/dev/commit/adc553037d1bda0d5e9c1c61d9034fd9300b9948))
+* bump ([25dfdf2](https://github.com/defn/dev/commit/25dfdf2d7f43ff685a810a47a2eb3e908a90108c))
+* bump bump bump ([761f625](https://github.com/defn/dev/commit/761f625e007aae005e24431d1c4be10b926a78ca))
+* fee fii foo fuum ([d870f68](https://github.com/defn/dev/commit/d870f680f2e9e4503fd733c38736196d57ba85a7))
+* use a pat ([9813e81](https://github.com/defn/dev/commit/9813e81bd42f63c9de926acf710fc6102c69d7e5))
+
 ## [1.1.0](https://github.com/defn/dev/compare/v1.0.2...v1.1.0) (2025-01-16)
 
 
