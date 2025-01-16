@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.2.3](https://github.com/defn/dev/compare/v1.1.5...v1.2.3) (2025-01-16)
+
+
+### Bug Fixes
+
+* wrote some more stuff ([b145d3b](https://github.com/defn/dev/commit/b145d3b659f74b0bfd187a29af1d49b008a80031))
+
+
+### Miscellaneous Chores
+
+* release 1.2.3 ([b3cac68](https://github.com/defn/dev/commit/b3cac68d8e1a595af63f5cb5cda7ffc0cba2e2e0))
+
 ## [1.1.5](https://github.com/defn/dev/compare/v1.1.4...v1.1.5) (2025-01-16)
 
 
