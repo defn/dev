@@ -1,5 +1,15 @@
 # Changelog
 
+## [1.0.2](https://github.com/defn/dev/compare/1.0.1...v1.0.2) (2025-01-16)
+
+
+### Bug Fixes
+
+* bump ([4ee0181](https://github.com/defn/dev/commit/4ee0181d647254e3cecaca6410a174e4d1ee70b7))
+* bump ([11b6453](https://github.com/defn/dev/commit/11b64533733f54a52378f43ab4c3412d365aa801))
+* remove gha outputs ([ac762db](https://github.com/defn/dev/commit/ac762db74ac375b9696708bdb89a0c9128c7bbad))
+* upload a release ([e8dea01](https://github.com/defn/dev/commit/e8dea01c07bdd116d83c19be284758529e2d912b))
+
 ## [1.0.1](https://github.com/defn/dev/compare/1.0.0...v1.0.1) (2025-01-16)
 
 
