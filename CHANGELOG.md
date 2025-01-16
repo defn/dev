@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.5](https://github.com/defn/dev/compare/v1.1.4...v1.1.5) (2025-01-16)
+
+
+### Bug Fixes
+
+* upload amanibhav.am static site ([5c5c481](https://github.com/defn/dev/commit/5c5c481a611bc1d61771652c9aa071c1930c33f2))
+
 ## [1.1.4](https://github.com/defn/dev/compare/v1.1.3...v1.1.4) (2025-01-16)
 
 
