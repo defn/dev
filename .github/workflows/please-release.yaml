@@ -25,4 +25,4 @@ jobs:
         name: Upload Release Artifact
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
-        run: gh release upload ${{ needs.release-please.outputs.tag_name }} README.md
+        run: gh release upload ${{ steps.release.outputs.tag_name }} README.md
