@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.1.3](https://github.com/defn/dev/compare/v1.1.2...v1.1.3) (2025-01-16)
+
+
+### Bug Fixes
+
+* chain release uploads on release created ([81919cd](https://github.com/defn/dev/commit/81919cd51dd7df9a1561faabfb6bbb837156aac1))
+* limit permissions for release-please workflow ([3bd9265](https://github.com/defn/dev/commit/3bd9265be8812fe45897331bfd2347b622ff9391))
+
 ## [1.1.2](https://github.com/defn/dev/compare/v1.1.1...v1.1.2) (2025-01-16)
 
 
