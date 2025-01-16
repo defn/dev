@@ -19,13 +19,10 @@ jobs:
           token: ${{ secrets.GH_TOKEN }}
           config-file: release-please-config.json
           manifest-file: .release-please-manifest.json
-  release-upload:
-    if: ${{needs.release-please.outputs.release_created}}
-    runs-on: ubuntu-latest
-    needs: release-please
-    steps:
-      - uses: actions/checkout@v4
-      - name: Upload Release Artifact
+      - if: ${{ steps.release.outputs['release_created'] }}
+        uses: actions/checkout@v4
+      - if: ${{ steps.release.outputs['release_created'] }}
+        name: Upload Release Artifact
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
         run: gh release upload ${{ needs.release-please.outputs.tag_name }} README.md
