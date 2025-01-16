@@ -1,5 +1,24 @@
 # Changelog
 
+## [1.1.0](https://github.com/defn/dev/compare/v1.0.2...v1.1.0) (2025-01-16)
+
+
+### Features
+
+* configure manifest and configuration for updating version.txt ([#29](https://github.com/defn/dev/issues/29)) ([45caa69](https://github.com/defn/dev/commit/45caa697c6e55b48d5132d873a77f0f2cb06d289))
+* minimum release-please workflow ([#26](https://github.com/defn/dev/issues/26)) ([d0b233b](https://github.com/defn/dev/commit/d0b233b63605edf01dbd507881c68913a38f7abd))
+
+
+### Bug Fixes
+
+* bump ([4ee0181](https://github.com/defn/dev/commit/4ee0181d647254e3cecaca6410a174e4d1ee70b7))
+* bump ([11b6453](https://github.com/defn/dev/commit/11b64533733f54a52378f43ab4c3412d365aa801))
+* bup ([2c34973](https://github.com/defn/dev/commit/2c34973eef060f7ddee222e75626be9c21a6c137))
+* release type is simple, configure extra-files ([#30](https://github.com/defn/dev/issues/30)) ([2960261](https://github.com/defn/dev/commit/2960261623418ee82d5a8bd33b9839f39fdaac60))
+* remove gha outputs ([ac762db](https://github.com/defn/dev/commit/ac762db74ac375b9696708bdb89a0c9128c7bbad))
+* try a simpler template for version ([#33](https://github.com/defn/dev/issues/33)) ([627bd95](https://github.com/defn/dev/commit/627bd952320a94239f4dc7ba8b7773094acf0577))
+* upload a release ([e8dea01](https://github.com/defn/dev/commit/e8dea01c07bdd116d83c19be284758529e2d912b))
+
 ## [1.0.2](https://github.com/defn/dev/compare/1.0.1...v1.0.2) (2025-01-16)
 
 
