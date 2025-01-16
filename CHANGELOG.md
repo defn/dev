@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.1](https://github.com/defn/dev/compare/1.0.0...v1.0.1) (2025-01-16)
+
+
+### Bug Fixes
+
+* try a simpler template for version ([#33](https://github.com/defn/dev/issues/33)) ([627bd95](https://github.com/defn/dev/commit/627bd952320a94239f4dc7ba8b7773094acf0577))
+
 ## [1.1.0](https://github.com/defn/dev/compare/v1.0.0...v1.1.0) (2025-01-16)
 
 
