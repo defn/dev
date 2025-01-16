@@ -1,13 +1,5 @@
 name: release-please
 
-permissions:
-  id-token: write
-  contents: write
-  pull-requests: write
-
-env:
-  RELEASE_PREFIX: "chore: release"
-
 on:
   push:
     branches:
