@@ -1,14 +1,21 @@
+name: release-please
+
+permissions:
+  id-token: write
+  contents: write
+  pull-requests: write
+
+env:
+  RELEASE_PREFIX: "chore: release"
+
 on:
   push:
     branches:
       - main
       - 25-use-release-please-for-releases
+    paths:
+      - "README.md"
 
-permissions:
-  contents: write
-  pull-requests: write
-
-name: release-please
 jobs:
   release-please:
     runs-on: ubuntu-latest
