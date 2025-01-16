@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.1.2](https://github.com/defn/dev/compare/v1.1.1...v1.1.2) (2025-01-16)
+
+
+### Bug Fixes
+
+* dont use comfyui git submodule ([c8682c9](https://github.com/defn/dev/commit/c8682c957ff6e26e7ad2b60ea9a797bfb850346d))
+* release works on any change in main ([dce51a2](https://github.com/defn/dev/commit/dce51a25379b18fc6714055fa05503f1c422ccaf))
+
 ## [1.1.1](https://github.com/defn/dev/compare/v1.1.0...v1.1.1) (2025-01-16)
 
 
