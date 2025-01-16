@@ -2,5 +2,5 @@
   "slug": "pkg-buildifier",
   "ghrepo": "bazelbuild/buildtools",
   "vendor": "8.0.1",
-  "revision": "0"
+  "revision": "1"
 }
