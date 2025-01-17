@@ -236,7 +236,10 @@ install-innermost:
 
 nix:
 	which nix || t make_nix_platform $(MAKE) nix-$(shell uname -s)
-	ln -nfs $$(which bazelisk) $$HOME/bin/$$(uname -s)/bazel
+	if [[ ! -x ~/.local/bin/mise ]]; then curl -sSL https://mise.run | bash; fi
+	~/.local/bin/mise trust
+	~/.local/bin/mise install
+	ln -nfs $$(~/.local/bin/mise exec -- which bazelisk) $$HOME/bin/$$(uname -s)/bazel
 
 nix-reset:
 	sudo rm -rf /nix/new /nix/old
