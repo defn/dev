@@ -2,6 +2,7 @@
 experimental = true
 
 [tools]
-"aqua:nushell/nushell" = "latest"
-bazelisk = "latest"
-"ubi:peak/s5cmd" = "latest"
+"aqua:nushell/nushell" = "0.101.0"
+bazelisk = "1.25.0"
+cue = "0.11.1"
+"ubi:peak/s5cmd" = "2.3.0"
