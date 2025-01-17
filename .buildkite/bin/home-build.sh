@@ -4,5 +4,5 @@ set -e
 
 source .bash_profile
 cd m/i
-export GITHUB_TOKEN="$(buildkite-agent secret get GITHUB_TOKEN)"
+source ~/work/.buildkite/.env
 make latest
