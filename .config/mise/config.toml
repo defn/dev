@@ -2,5 +2,6 @@
 experimental = true
 
 [tools]
+bazelisk = "latest"
 "ubi:nushell/nushell" = { version = "latest", exe = "nu" }
 "ubi:peak/s5cmd" = "latest"
