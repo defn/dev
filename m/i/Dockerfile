@@ -1,4 +1,4 @@
-FROM ubuntu:24.04 AS nix
+FROM ubuntu:24.04
 
 ENV DEBIAN_FRONTEND=noninteractive
 
@@ -12,10 +12,6 @@ RUN apt update \
 	&& apt install -y build-essential \
 	&& apt install -y docker.io 
 	
-RUN curl -sSL -O https://github.com/peak/s5cmd/releases/download/v2.3.0/s5cmd_2.3.0_linux_amd64.deb \
-	&& dpkg -i s5cmd_2.3.0_linux_amd64.deb \
-	&& rm -f s5cmd_2.3.0_linux_amd64.deb
-
 RUN usermod -aG docker ubuntu
 
 RUN echo "ubuntu ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers.d/ubuntu
@@ -29,7 +25,7 @@ ENV LANG=C
 WORKDIR /home/ubuntu
 
 RUN git clone https://github.com/defn/dev /home/ubuntu
-RUN git pull && echo 20250108
+RUN git pull
 
 RUN mkdir -p .config/nix
 COPY nix.conf .config/nix/nix.conf
@@ -44,6 +40,10 @@ RUN sudo apt-get update && sudo apt-get install -y tini
 RUN bash -c 'git pull && source .bash_profile && make install sync'
 
 RUN bash -c 'source .bash_profile && for a in vscodevim.vim cuelang.cue kokakiwi.vscode-just svelte.svelte-vscode astro-build.astro-vscode unifiedjs.vscode-mdx; do code-server serve-local --force --install-extension "$a"; done'
+
+RUN curl -sSL -O https://github.com/peak/s5cmd/releases/download/v2.3.0/s5cmd_2.3.0_linux_amd64.deb \
+	&& sudo dpkg -i s5cmd_2.3.0_linux_amd64.deb \
+	&& rm -f s5cmd_2.3.0_linux_amd64.deb
 
 ENTRYPOINT [ "/bin/tini", "bash", "--", "-c" ]
 CMD [ "git reset --hard && git pull && exec sleep infinity" ]
