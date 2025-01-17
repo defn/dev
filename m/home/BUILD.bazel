@@ -1,5 +1,4 @@
 flake_names = [
-    "cue",
     "az",
     "home",
     "secrets",
@@ -15,9 +14,6 @@ flake_names = [
     "acme",
     "cloud",
     "kubelogin",
-    "coder",
-    "codeserver",
-    "buildkite",
     "buildevents",
     "shell",
 ]
