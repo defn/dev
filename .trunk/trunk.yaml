@@ -2,7 +2,7 @@
 # To learn more about the format of this file, see https://docs.trunk.io/reference/trunk-yaml
 version: 0.1
 cli:
-  version: 1.22.8
+  version: 1.22.9
 plugins:
   sources:
     - id: trunk
@@ -25,12 +25,13 @@ lint:
         - .cache/**
         - .npm/**
   enabled:
+    - actionlint@1.7.6
     - isort@5.13.2
     - clippy@1.65.0
     - rustfmt@1.65.0
     - dotenv-linter@3.3.0
     - black@24.10.0
-    - buildifier@8.0.0
+    - buildifier@8.0.1
     - cue-fmt@0.9.0
     - git-diff-check
     - gofmt@1.22.5
