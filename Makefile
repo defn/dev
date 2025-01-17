@@ -383,6 +383,3 @@ sync_inner:
 
 release:
 	cd m/i && $(MAKE) sync
-
--include ~/.password-store/Makefile
-	
