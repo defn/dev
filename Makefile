@@ -1,7 +1,7 @@
 SHELL := /bin/bash
 
 # https://nixos.org/download
-NIX_VERSION := 2.25.3
+NIX_VERSION := 2.18.2
 
 flakes ?= cue gum dyff az home secrets tailscale utils just buildifier bazelisk ibazel oci regbot regctl regsync development step acme awscli chamber cloud kubectl helm kustomize kubelogin k3d k9s stern coder codeserver devspace gh buildkite buildevents mise shell
 home ?= home
@@ -235,12 +235,8 @@ install-innermost:
 	t make_gpg $(MAKE) gpg
 
 nix:
-	(. ~/.nix-profile/etc/profile.d/nix.sh && which nix) || t make_nix_platform $(MAKE) nix-$(shell uname -s)
-	. ~/.nix-profile/etc/profile.d/nix.sh && (test -f "$$HOME/.nix-profile/share/nix-direnv/direnvrc" || t nix_profile_direnv nix profile install nixpkgs#nix-direnv)
-	. ~/.nix-profile/etc/profile.d/nix.sh && (test -f "$$HOME/.nix-profile/bin/bazelisk" || t nix_profile_bazelisk nix profile install nixpkgs#bazelisk)
-	. ~/.nix-profile/etc/profile.d/nix.sh && (test -f "$$HOME/.nix-profile/bin/nixpkgs-fmt" || t nix_profile_bazelisk nix profile install nixpkgs#nixpkgs-fmt)
+	which nix || t make_nix_platform $(MAKE) nix-$(shell uname -s)
 	ln -nfs $$(which bazelisk) $$HOME/bin/$$(uname -s)/bazel
-	sudo rm -f /usr/local/bin/bazel /usr/local/bin/bazelisk
 
 nix-reset:
 	sudo rm -rf /nix/new /nix/old
@@ -280,7 +276,7 @@ nix-uninstall:
 	-sudo rm -rf /nix/
 
 nix-clean:
-	rm -rf .nix-profile .local/state/nix/profiles/profile
+	rm -rf .nix-profile .local/state/nix
 
 nix-Linux:
 	export LC_ALL=C.UTF-8 && if ! type -P nix; then t make_nix_linux_bootstrap $(MAKE) nix-Linux-bootstrap; fi
