@@ -32,6 +32,8 @@
         pv
         fd
         ripgrep
+        nixpkgs-fmt
+        nix
         bashInteractive
       ];
     };
