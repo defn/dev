@@ -137,20 +137,20 @@ provider "kubernetes" {
 }
 
 resource "kubernetes_deployment" "main" {
-  count = data.coder_workspace.me.start_count
+  count            = data.coder_workspace.me.start_count
   wait_for_rollout = false
   metadata {
-    name      = "coder-${data.coder_workspace_owner.me.name}-${data.coder_workspace.me.name}"
-    namespace = "coder-${data.coder_workspace_owner.me.name}"
+    name      = lower("coder-${data.coder_workspace_owner.me.name}-${data.coder_workspace.me.name}")
+    namespace = lower("coder-${data.coder_workspace_owner.me.name}")
     labels = {
       "app.kubernetes.io/name"     = "coder-workspace"
-      "app.kubernetes.io/instance" = "coder-${data.coder_workspace_owner.me.name}-${data.coder_workspace.me.name}"
+      "app.kubernetes.io/instance" = lower("coder-${data.coder_workspace_owner.me.name}-${data.coder_workspace.me.name}")
       "app.kubernetes.io/part-of"  = "coder"
       "com.coder.resource"         = "true"
-      "com.coder.workspace.id"     = data.coder_workspace.me.id
-      "com.coder.workspace.name"   = data.coder_workspace.me.name
-      "com.coder.user.id"          = data.coder_workspace_owner.me.id
-      "com.coder.user.username"    = data.coder_workspace_owner.me.name
+      "com.coder.workspace.id"     = lower(data.coder_workspace.me.id)
+      "com.coder.workspace.name"   = lower(data.coder_workspace.me.name)
+      "com.coder.user.id"          = lower(data.coder_workspace_owner.me.id)
+      "com.coder.user.username"    = lower(data.coder_workspace_owner.me.name)
     }
     annotations = {
       "com.coder.user.email" = data.coder_workspace_owner.me.email
@@ -162,13 +162,13 @@ resource "kubernetes_deployment" "main" {
     selector {
       match_labels = {
         "app.kubernetes.io/name"     = "coder-workspace"
-        "app.kubernetes.io/instance" = "coder-${data.coder_workspace_owner.me.name}-${data.coder_workspace.me.name}"
+        "app.kubernetes.io/instance" = lower("coder-${data.coder_workspace_owner.me.name}-${data.coder_workspace.me.name}")
         "app.kubernetes.io/part-of"  = "coder"
         "com.coder.resource"         = "true"
-        "com.coder.workspace.id"     = data.coder_workspace.me.id
-        "com.coder.workspace.name"   = data.coder_workspace.me.name
-        "com.coder.user.id"          = data.coder_workspace_owner.me.id
-        "com.coder.user.username"    = data.coder_workspace_owner.me.name
+        "com.coder.workspace.id"     = lower(data.coder_workspace.me.id)
+        "com.coder.workspace.name"   = lower(data.coder_workspace.me.name)
+        "com.coder.user.id"          = lower(data.coder_workspace_owner.me.id)
+        "com.coder.user.username"    = lower(data.coder_workspace_owner.me.name)
       }
     }
     strategy {
@@ -179,13 +179,13 @@ resource "kubernetes_deployment" "main" {
       metadata {
         labels = {
           "app.kubernetes.io/name"     = "coder-workspace"
-          "app.kubernetes.io/instance" = "coder-${data.coder_workspace_owner.me.name}-${data.coder_workspace.me.name}"
+          "app.kubernetes.io/instance" = lower("coder-${data.coder_workspace_owner.me.name}-${data.coder_workspace.me.name}")
           "app.kubernetes.io/part-of"  = "coder"
           "com.coder.resource"         = "true"
-          "com.coder.workspace.id"     = data.coder_workspace.me.id
-          "com.coder.workspace.name"   = data.coder_workspace.me.name
-          "com.coder.user.id"          = data.coder_workspace_owner.me.id
-          "com.coder.user.username"    = data.coder_workspace_owner.me.name
+          "com.coder.workspace.id"     = lower(data.coder_workspace.me.id)
+          "com.coder.workspace.name"   = lower(data.coder_workspace.me.name)
+          "com.coder.user.id"          = lower(data.coder_workspace_owner.me.id)
+          "com.coder.user.username"    = lower(data.coder_workspace_owner.me.name)
         }
       }
       spec {
@@ -197,7 +197,7 @@ resource "kubernetes_deployment" "main" {
         volume {
           name = "user"
           persistent_volume_claim {
-            claim_name = "coder-${data.coder_workspace_owner.me.name}"
+            claim_name = lower("coder-${data.coder_workspace_owner.me.name}")
             read_only  = false
           }
         }
@@ -236,7 +236,7 @@ resource "kubernetes_deployment" "main" {
           }
           env {
             name  = "CODER_NAME"
-            value = data.coder_workspace.me.name
+            value = lower(data.coder_workspace.me.name)
           }
           env {
             name  = "CODER_HOMEDIR"
