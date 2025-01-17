@@ -20,7 +20,7 @@ steps: [{
 			watch: [
 				for d in infra.domains {
 					path: "m/w/sites/\(d)/"
-					config: command: "./.buildkite/deploy-cf-pages.sh m/w/sites/\(d)"
+					config: command: "./.buildkite/bin/deploy-cf-pages.sh m/w/sites/\(d)"
 				},
 			]
 		}

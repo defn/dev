@@ -1,5 +1,7 @@
 FROM ubuntu:24.04
 
+ARG GITHUB_TOKEN
+
 ENV DEBIAN_FRONTEND=noninteractive
 
 RUN apt update \
