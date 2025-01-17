@@ -2,6 +2,6 @@
 experimental = true
 
 [tools]
+"aqua:nushell/nushell" = "latest"
 bazelisk = "latest"
-"ubi:nushell/nushell" = { version = "latest", exe = "nu" }
 "ubi:peak/s5cmd" = "latest"
