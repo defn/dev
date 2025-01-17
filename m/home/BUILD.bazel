@@ -9,7 +9,6 @@ flake_names = [
     "utils",
     "just",
     "buildifier",
-    "bazelisk",
     "ibazel",
     "oci",
     "regbot",
