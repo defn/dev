@@ -242,27 +242,6 @@ nix:
 	ln -nfs $$(~/.local/bin/mise exec -- which bazelisk) $$HOME/bin/$$(uname -s)/bazel
 
 nix-reset:
-	sudo rm -rf /nix/new /nix/old
-	docker run --rm -ti -v /home/ubuntu:/home/ubuntu -v /nix/new:/nix --workdir /home/ubuntu --user root ubuntu:24.04 ./bin/reset-nix
-	sudo rm -rf /nix/old
-	mkdir -p /nix/old
-	mv -v /nix/var /nix/store /nix/old/
-	sudo /bin/mv -v /nix/new/var /nix/new/store /nix/
-	sudo rm -rf /nix/new
-
-nix-reset-inner:
-	. .bash_profile && $(MAKE) nix-reset-inner-inner
-
-nix-reset-inner-inner:
-	sudo apt update
-	sudo apt install -y curl xz-utils git git-lfs rsync
-	sudo chown ubuntu:ubuntu /nix
-	$(MAKE) nix-reinstall
-	$(MAKE) install
-
-nix-reinstall:
-	rm -rf .nix-* .local/state/nix
-	t make_nix $(MAKE) nix
 
 nix-uninstall:
 	-sudo mv /etc/zshrc.backup-before-nix /etc/zshrc
@@ -344,11 +323,6 @@ coder-ssh-devcontainer:
 			https_proxy=http://169.254.32.1:3128 \
 			bash -c "cd ~/m && exec j coder::coder-agent $(CODER_NAME)" &
 
-coder-ssh-darwin:
-	@pkill -9 -f coder.agen[t] || true
-	@pkill -9 -f code-serve[r] || true
-	@export STARSHIP_NO=1 && source ~/.bash_profile && echo $(CODER_INIT_SCRIPT_BASE64) | base64 -d | exec bash -x -
-
 coder-ssh-chromebook:
 	@pkill -9 -f coder.agen[t] || true
 	@pkill -9 -f code-serve[r] || true
@@ -409,19 +383,6 @@ sync_inner:
 
 release:
 	cd m/i && $(MAKE) sync
-
-build-site-default:
-
-install-site-default:
-
-init-gpg-default:
-
-login-site-default:
-
-manage-site-default:
-
-%: %-default
-	@true
 
 -include ~/.password-store/Makefile
 	
