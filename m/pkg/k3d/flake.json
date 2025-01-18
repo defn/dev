@@ -1,6 +1,6 @@
 {
   "slug": "pkg-k3d",
   "ghrepo": "k3d-io/k3d",
-  "vendor": "5.7.5",
-  "revision": "1"
+  "vendor": "5.8.1",
+  "revision": "0"
 }
