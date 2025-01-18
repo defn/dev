@@ -260,6 +260,10 @@ resource "kubernetes_deployment" "main" {
           }
 
           env {
+            name  = "CODER_AGENT_URL_ORIGINAL"
+            value = data.coder_workspace.me.access_url
+          }
+          env {
             name  = "CODER_NAME"
             value = lower(data.coder_workspace.me.name)
           }
