@@ -193,8 +193,8 @@ function w {
 }
 
 # coder ssh helper
-if [[ -z "${GIT_SSH_COMMAND:-}" ]]; then
-	export GIT_SSH_COMMAND="$(which coder) gitssh --"
+if [[ -n "${CODER_NAME:-}" ]]; then
+	export GIT_SSH_COMMAND="$(mise exec -- which coder) gitssh --"
 fi
 
 if [[ -z "${CODER_AGENT_URL:-}" ]]; then
