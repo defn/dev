@@ -29,7 +29,6 @@ inventory: {
 	]
 
 	aws: hosts: [
-		"coder-amanibhavam-district",
 		"coder-amanibhavam-kowloon",
 	]
 
