@@ -20,5 +20,4 @@ kustomize = "5.6.0"
 step = "0.28.2"
 stern = "1.31.0"
 "ubi:buildkite/agent" = { version = "3.39.0", exe = "buildkite-agent" }
-"ubi:coder/code-server" = "4.96.2"
 "ubi:peak/s5cmd" = "2.3.0"

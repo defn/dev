@@ -15,6 +15,7 @@ flake_names = [
     "cloud",
     "kubelogin",
     "buildevents",
+    "codeserver",
     "shell",
 ]
 
