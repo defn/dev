@@ -204,10 +204,37 @@ resource "kubernetes_deployment" "main" {
         }
 
         container {
+          name              = "coder-agent"
+          image             = "169.254.32.1:5000/defn/dev:latest"
+          image_pull_policy = "Always"
+          command           = ["/bin/tini", "--", "bash", "-c", "cd; source .bash_profile; exec j create-coder-agent-sidecar"]
+
+          security_context {
+            run_as_user = "1000"
+          }
+          env {
+            name  = "CODER_AGENT_TOKEN"
+            value = coder_agent.main.token
+          }
+          env {
+            name  = "CODER_AGENT_URL"
+            value = "http://169.254.32.1:3000"
+          }
+          env {
+            name  = "CODER_AGENT_URL_ORIGINAL"
+            value = data.coder_workspace.me.access_url
+          }
+          env {
+            name  = "CODER_NAME"
+            value = lower(data.coder_workspace.me.name)
+          }
+        }
+
+        container {
           name              = "dev"
           image             = "169.254.32.1:5000/defn/dev:latest"
           image_pull_policy = "Always"
-          command           = ["/bin/tini", "--", "bash", "-c", "cd; source .bash_profile; exec j create-coder-agent-sync ${data.coder_parameter.homedir.value}"]
+          command           = ["/bin/tini", "--", "bash", "-c", "cd; source .bash_profile; exec j create-code-server-sidecar"]
 
           // chown these mounts in m/bin/startup.sh
           volume_mount {
@@ -231,18 +258,7 @@ resource "kubernetes_deployment" "main" {
           security_context {
             run_as_user = "1000"
           }
-          env {
-            name  = "CODER_AGENT_TOKEN"
-            value = coder_agent.main.token
-          }
-          env {
-            name  = "CODER_AGENT_URL"
-            value = "http://169.254.32.1:3000"
-          }
-          env {
-            name  = "CODER_AGENT_URL_ORIGINAL"
-            value = data.coder_workspace.me.access_url
-          }
+
           env {
             name  = "CODER_NAME"
             value = lower(data.coder_workspace.me.name)

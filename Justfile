@@ -36,6 +36,26 @@ create-coder-agent-sync workdir:
 	cd m
 	exec just coder::coder-agent "${CODER_NAME}"
 
+create-coder-agent-sidecar:
+	#!/usr/bin/env bash
+
+	cd m
+	exec just coder::coder-agent "${CODER_NAME}"
+
+create-code-server-sidecar:
+	#!/usr/bin/env bash
+
+	(
+		cd "${CODER_HOMEDIR}"
+		mise trust -a
+		sleep 10
+		mise install
+		setsid screen -dmS up bash -c "cd; source .bash_profile; cd \"${CODER_HOMEDIR}\"; m up; sleep infinity"
+	) &
+
+	cd ~/m
+	exec j coder::code-server "${CODER_NAME}"
+
 destroy-coder-agent:
 	#!/usr/bin/env bash
 
