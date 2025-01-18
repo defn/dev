@@ -20,3 +20,11 @@ k3d:
 		--volume "$(PWD)/certs/registry.crt:/etc/ssl/certs/registry.crt"
 	kubectl create ns demo || true
 	kubectl apply -f nginx.yaml
+
+clean:
+	docker exec k3d-registry /bin/registry garbage-collect --delete-untagged /etc/docker/registry/config.yml 
+
+reset:
+	docker compose down || true
+	docker volume rm docker_images || true
+	$(MAKE) registry
