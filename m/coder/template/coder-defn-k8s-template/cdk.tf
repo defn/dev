@@ -175,6 +175,18 @@ resource "kubernetes_deployment" "main" {
       type = "Recreate"
     }
 
+    toleration {
+      key      = "node.kubernetes.io/disk-pressure"
+      operator = "Exists"
+      effect   = "NoSchedule"
+    }
+
+    toleration {
+      key      = "node.kubernetes.io/disk-pressure"
+      operator = "Exists"
+      effect   = "NoExecute"
+    }
+
     template {
       metadata {
         labels = {
