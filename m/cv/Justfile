@@ -224,7 +224,6 @@ open site n="1" chunk="20" file="following.html":
 
 freeze from snap where="~/work/backup/zfs/cv-":
     #!/usr/bin/env bash
-    sudo zfs snapshot fast2/cv@{{snap}}
-    just split fast2/cv {{from}} {{snap}} {{where}}
-    just send fast2/cv {{snap}} backup
-    #runmany 'just send backup/cv {{snap}} $1' disk{1,2,3} fast{2,3,4}
+    sudo zfs snapshot fast/cv@{{snap}}
+    runmany 'just send fast/cv {{snap}} $1' backup slow fast1
+    just split fast/cv {{from}} {{snap}} {{where}}
