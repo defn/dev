@@ -171,20 +171,9 @@ resource "kubernetes_deployment" "main" {
         "com.coder.user.username"    = lower(data.coder_workspace_owner.me.name)
       }
     }
+
     strategy {
       type = "Recreate"
-    }
-
-    toleration {
-      key      = "node.kubernetes.io/disk-pressure"
-      operator = "Exists"
-      effect   = "NoSchedule"
-    }
-
-    toleration {
-      key      = "node.kubernetes.io/disk-pressure"
-      operator = "Exists"
-      effect   = "NoExecute"
     }
 
     template {
@@ -201,6 +190,18 @@ resource "kubernetes_deployment" "main" {
         }
       }
       spec {
+        toleration {
+          key      = "node.kubernetes.io/disk-pressure"
+          operator = "Exists"
+          effect   = "NoSchedule"
+        }
+
+        toleration {
+          key      = "node.kubernetes.io/disk-pressure"
+          operator = "Exists"
+          effect   = "NoExecute"
+        }
+
         security_context {
           run_as_user = 1000
           fs_group    = 1000
