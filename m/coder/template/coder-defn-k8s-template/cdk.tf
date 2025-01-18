@@ -260,6 +260,14 @@ resource "kubernetes_deployment" "main" {
           }
 
           env {
+            name  = "CODER_AGENT_TOKEN"
+            value = coder_agent.main.token
+          }
+          env {
+            name  = "CODER_AGENT_URL"
+            value = "http://169.254.32.1:3000"
+          }
+          env {
             name  = "CODER_AGENT_URL_ORIGINAL"
             value = data.coder_workspace.me.access_url
           }
