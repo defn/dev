@@ -190,18 +190,6 @@ resource "kubernetes_deployment" "main" {
         }
       }
       spec {
-        toleration {
-          key      = "node.kubernetes.io/disk-pressure"
-          operator = "Exists"
-          effect   = "NoSchedule"
-        }
-
-        toleration {
-          key      = "node.kubernetes.io/disk-pressure"
-          operator = "Exists"
-          effect   = "NoExecute"
-        }
-
         security_context {
           run_as_user = 1000
           fs_group    = 1000
@@ -220,11 +208,19 @@ resource "kubernetes_deployment" "main" {
           image             = "169.254.32.1:5000/defn/dev:latest"
           image_pull_policy = "Always"
           command           = ["/bin/tini", "--", "bash", "-c", "cd; source .bash_profile; exec j create-coder-agent-sync ${data.coder_parameter.homedir.value}"]
+
+          // chown these mounts in m/bin/startup.sh
           volume_mount {
             mount_path = "/home/ubuntu/.local/share/code-server"
             name       = "user"
             read_only  = false
             sub_path   = "local-share-code-server"
+          }
+          volume_mount {
+            mount_path = "/home/ubuntu/.config/gh"
+            name       = "user"
+            read_only  = false
+            sub_path   = "config-gh"
           }
           volume_mount {
             mount_path = "/home/ubuntu/dotfiles"

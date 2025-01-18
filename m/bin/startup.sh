@@ -11,8 +11,10 @@ function main {
 	set -x
 
 	if [[ -n ${KUBERNETES_PORT_443_TCP-} ]]; then
+		# add mounts in m/coder/template/coder-defn-k8s-template/cdk.tf
 		sudo chown ubuntu:ubuntu ~/dotfiles
 		sudo chown ubuntu:ubuntu ~/.local/share/code-server
+		sudo chown ubuntu:ubuntu ~/.config/gh
 	else
 		(
 			cd ~/m/cache/docker
