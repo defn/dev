@@ -238,10 +238,10 @@ resource "kubernetes_deployment" "main" {
 
           // chown these mounts in m/bin/startup.sh
           volume_mount {
-            mount_path = "/home/ubuntu/.local/share/code-server"
+            mount_path = "/home/ubuntu/.local/share/code-server/extensions"
             name       = "user"
             read_only  = false
-            sub_path   = "local-share-code-server"
+            sub_path   = "local-share-code-server-extensions"
           }
           volume_mount {
             mount_path = "/home/ubuntu/.config/gh"
