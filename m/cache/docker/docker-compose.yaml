@@ -12,6 +12,7 @@ services:
       - REGISTRY_HTTP_TLS_KEY=/certs/registry.key
     volumes:
       - ./certs:/certs
+      - ./config.yml:/etc/docker/registry/config.yml:ro
       - images:/var/lib/registry
     restart: unless-stopped
     labels:
