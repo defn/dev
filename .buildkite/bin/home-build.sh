@@ -9,6 +9,8 @@ source ~/work/.buildkite/.env
 make latest
 popd
 
+exit 0
+
 mkdir -p /home/ubuntu/work/bazel
 docker run --rm \
 	-v $(pwd)/.git:/home/ubuntu/.git \
