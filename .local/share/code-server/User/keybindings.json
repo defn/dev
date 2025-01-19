@@ -152,7 +152,7 @@
     "when": "inEditorsPicker && inQuickOpen"
   },
   {
-    "key": "ctrl+shift+z ctrl+shift+z",
+    "key": "ctrl+shift+z",
     "command": "workbench.action.toggleZenMode",
     "when": "!isAuxiliaryWindowFocusedContext"
   },
