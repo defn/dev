@@ -3,6 +3,7 @@
 
 (def tutorial_filename "src/content/docs/index.mdx")
 
-(def tutorial_webpage ".joyride/scripts/tutorial.html")
+(def tutorial_webpage "tutorial.html")
+
 
 (tutlib/open-tutorial tutorial_filename tutorial_webpage)
