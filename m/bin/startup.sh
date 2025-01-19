@@ -12,6 +12,7 @@ function main {
 
 	if [[ -n ${KUBERNETES_PORT_443_TCP-} ]]; then
 		# add mounts in m/coder/template/coder-defn-k8s-template/cdk.tf
+		ssh -o StrictHostKeyChecking=no git@github.com true || true &
 		sudo chown ubuntu:ubuntu ~/dotfiles
 		sudo chown ubuntu:ubuntu ~/.local/share/code-server/extensions
 		sudo chown ubuntu:ubuntu ~/.config/gh
