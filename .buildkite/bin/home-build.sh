@@ -4,13 +4,12 @@ set -efu -o pipefail
 
 source .bash_profile
 
-set -x
-cd m/i
+pushd m/i
 source ~/work/.buildkite/.env
 make latest
+popd
 
 mkdir -p /home/ubuntu/work/bazel
-
 docker run --rm \
 	-v $(pwd)/.git:/home/ubuntu/.git \
 	-v bazel-cache-1:/home/ubuntu/work/bazel \
