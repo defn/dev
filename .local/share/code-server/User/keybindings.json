@@ -1,10 +1,15 @@
 [
   {
-    "key": "ctrl+w",
+    "key": "shift+ctrl+l",
+    "command": "joyride.runWorkspaceScript",
+    "args": "tutorial.cljs"
+  },
+  {
+    "key": "ctrl+lw",
     "command": "workbench.action.closeActiveEditor"
   },
   {
-    "key": "shift-ctrl+z",
+    "key": "shift-ctrl+lz",
     "command": "joyride.runWorkspaceScript",
     "args": "dfd.cljs"
   },
@@ -99,60 +104,60 @@
     "when": "editorHasSelection"
   },
   {
-    "key": "ctrl+`",
+    "key": "ctrl+l`",
     "command": "workbench.action.closePanel",
     "when": "terminalFocus"
   },
   {
-    "key": "ctrl+`",
+    "key": "ctrl+l`",
     "command": "workbench.action.toggleMaximizedPanel",
     "when": "!terminalFocus"
   },
   {
-    "key": "ctrl+shift+e",
+    "key": "ctrl+lshift+e",
     "command": "workbench.action.quickOpen"
   },
   {
-    "key": "ctrl+e",
+    "key": "ctrl+le",
     "command": "-workbench.action.quickOpen"
   },
   {
-    "key": "ctrl+shift+e",
+    "key": "ctrl+lshift+e",
     "command": "-workbench.view.explorer",
     "when": "viewContainer.workbench.view.explorer.enabled"
   },
   {
-    "key": "ctrl+shift+e",
+    "key": "ctrl+lshift+e",
     "command": "-workbench.action.quickOpenNavigatePreviousInFilePicker",
     "when": "inFilesPicker && inQuickOpen"
   },
   {
-    "key": "ctrl+tab",
+    "key": "ctrl+ltab",
     "command": "-workbench.action.quickOpenPreviousRecentlyUsedEditorInGroup",
     "when": "!activeEditorGroupEmpty"
   },
   {
-    "key": "ctrl+tab",
+    "key": "ctrl+ltab",
     "command": "-workbench.action.quickOpenNavigateNextInEditorPicker",
     "when": "inEditorsPicker && inQuickOpen"
   },
   {
-    "key": "ctrl+shift+tab",
+    "key": "ctrl+lshift+tab",
     "command": "-workbench.action.quickOpenLeastRecentlyUsedEditorInGroup",
     "when": "!activeEditorGroupEmpty"
   },
   {
-    "key": "ctrl+shift+tab",
+    "key": "ctrl+lshift+tab",
     "command": "-workbench.action.quickOpenNavigatePreviousInEditorPicker",
     "when": "inEditorsPicker && inQuickOpen"
   },
   {
-    "key": "ctrl+z ctrl+z",
+    "key": "ctrl+lz ctrl+lz",
     "command": "workbench.action.toggleZenMode",
     "when": "!isAuxiliaryWindowFocusedContext"
   },
   {
-    "key": "ctrl+k z",
+    "key": "ctrl+lk z",
     "command": "-workbench.action.toggleZenMode",
     "when": "!isAuxiliaryWindowFocusedContext"
   }
