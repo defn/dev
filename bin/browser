@@ -19,8 +19,7 @@ function main {
 		if [[ -x /usr/bin/open ]]; then
 			exec /usr/bin/open "$@"
 		else
-			echo "ERROR: can't find browser.sh script for ${VSCODE_GIT_ASKPASS_MAIN-}" 1>&2
-			return 1
+			exec browser.sh "$@"
 		fi
 		;;
 	esac
