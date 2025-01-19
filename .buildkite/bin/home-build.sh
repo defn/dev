@@ -1,13 +1,15 @@
 #!/usr/bin/env bash
 
-set -e
+set -efu -o pipefail
 
 source .bash_profile
+
+set -x
 cd m/i
 source ~/work/.buildkite/.env
 make latest
 
-mkdir -p work/bazel
+mkdir -p /home/ubuntu/work/bazel
 
 docker run --rm \
 	-v $(pwd)/.git:/home/ubuntu/.git \
