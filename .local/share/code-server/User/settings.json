@@ -7,7 +7,7 @@
   "extensions.ignoreRecommendations": true,
   "git.confirmSync": false,
   "terminal.integrated.copyOnSelection": true,
-  "terminal.integrated.enableMultiLinePasteWarning": false,
+  "terminal.integrated.enableMultiLinePasteWarning": "never",
   "terminal.integrated.localEchoEnabled": "off",
   "terminal.integrated.sendKeybindingsToShell": true,
   "terminal.integrated.showExitAlert": false,
@@ -91,8 +91,12 @@
   "genieai.enableConversationHistory": true,
   "editor.stickyScroll.enabled": false,
   "markdown.marp.exportType": "html",
-  "markdown.marp.enableHtml": true,
-  "genieai.openai.model": "gpt-4",
-  "genieai.openai.apiBaseUrl": "http://localhost:4096",
-  "terminal.integrated.fontFamily": "monospace"
+  "markdown.marp.html": "all",
+  "terminal.integrated.fontFamily": "monospace",
+  "npm.packageManager": "npm",
+  "remote.portsAttributes": {
+    "default": {
+      "onAutoForward": "ignore"
+    }
+  }
 }
