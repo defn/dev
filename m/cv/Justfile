@@ -229,3 +229,12 @@ freeze from snap:
     just split fast/cv {{from}} {{snap}} /slow/backup/zfs/cv-
     rsync -ia /slow/backup/. /backup/backup/.
 
+serve:
+  sudo tailscale serve --bg --set-path=/replicate /remote/cv/replicate
+  sudo tailscale serve --bg --set-path=/all.html /remote/cv/all.html
+  sudo tailscale serve --bg --set-path=/two.html /remote/cv/two.html 
+  sudo tailscale serve --bg --set-path=/one.html /remote/cv/one.html
+  sudo tailscale serve --bg --set-path=/gallery.css /remote/cv/gallery.css
+  sudo tailscale serve --bg --set-path=/gallery.js /remote/cv/gallery.js
+  sudo tailscale serve --bg --set-path=/ https+insecure://127.0.0.1:5000
+
