@@ -238,3 +238,5 @@ serve:
   sudo tailscale serve --bg --set-path=/gallery.js /remote/cv/gallery.js
   sudo tailscale serve --bg --set-path=/ https+insecure://127.0.0.1:5000
 
+link:
+    ln -nvfs ~/m/cv/{Justfile,*.mjs,proxy.conf,package.json,etc,gallery.*,tutorial.html,.joyride} .
