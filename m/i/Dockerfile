@@ -41,11 +41,7 @@ RUN sudo apt-get update && sudo apt-get install -y tini
 
 RUN bash -c 'git pull && source .bash_profile && make install sync'
 
-RUN bash -c 'source .bash_profile && for a in vscodevim.vim cuelang.cue kokakiwi.vscode-just svelte.svelte-vscode astro-build.astro-vscode unifiedjs.vscode-mdx; do code-server serve-local --force --install-extension "$a"; done'
-
-RUN curl -sSL -O https://github.com/peak/s5cmd/releases/download/v2.3.0/s5cmd_2.3.0_linux_amd64.deb \
-	&& sudo dpkg -i s5cmd_2.3.0_linux_amd64.deb \
-	&& rm -f s5cmd_2.3.0_linux_amd64.deb
+RUN bash -c 'source .bash_profile && for a in vscodevim.vim cuelang.cue kokakiwi.vscode-just svelte.svelte-vscode astro-build.astro-vscode unifiedjs.vscode-mdx betterthantomorrow.joyride; do code-server serve-local --force --install-extension "$a"; done'
 
 ENTRYPOINT [ "/bin/tini", "bash", "--", "-c" ]
 CMD [ "git reset --hard && git pull && exec sleep infinity" ]
