@@ -241,10 +241,15 @@ serve:
 link:
     ln -nvfs ~/m/cv/{Justfile,*.mjs,proxy.conf,package.json,etc,gallery.*,tutorial.html,.joyride} .
 
-v name:
+v-split name:
+    cd v/mp4 && mkdir -p ../img/$name && ffmpeg -i "$name.mp4" -vf "fps=1/1" ../img/$name/v-$name-%04d.jpeg
+
+v-thumbs name:
     mkdir -p v/thumbs/{{name}}
     name={{name}}; find v/img/$name -type f | sed 's#^v/img/##; s#.jpeg$##' | runmany 32 'if ! test -r v/thumbs/$1.png; then echo $1; convert v/img/$1.jpeg -resize 400 v/thumbs/$1.png; fi'
+
+v-html mame:
     name={{name}}; find v/img/$name -type f | sed 's#^v/img/##; s#.jpeg$##' | sort | ./etc/cols.sh yes thumbs /thumbs v/ > v/$name.html
 
-v-gen:
-    (cd v/img; ls -d */ | cut -d/ -f1) | runmany 2 'just v $1'
+v-gen-thumbs:
+    (cd v/img; ls -d */ | cut -d/ -f1) | runmany 2 'just v-thumbs $1 && just v-html $1'
