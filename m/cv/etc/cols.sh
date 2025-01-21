@@ -14,6 +14,20 @@ else
 	root=
 fi
 
+if [[ -n "${1:-}" ]]; then
+	thumbsdir=$1
+	shift
+else
+	thumbsdir=thumbs
+fi
+
+if [[ -n "${1:-}" ]]; then
+	thumbsext=$1
+	shift
+else
+	thumbsext=png
+fi
+
 newline=$'\n'
 
 echo '<!DOCTYPE html><head>'
@@ -29,12 +43,14 @@ echo '<table><tbody id="table-body"><tr>'
 echo "<script>"
 echo "const basePath = '$dir';"
 echo "const selectMode = '$kind';"
+echo "const thumbsDir = '$thumbsdir';"
+echo "const thumbsExt= '$thumbsext';"
 
 echo "const images = ["
 # Read filenames from stdin
 while read -r imgid; do
 	if [[ ${kind} == yes ]]; then
-		if ! test -s ${root}thumbs/${imgid}.png; then
+		if ! test -s ${root}${thumbsdir}/${imgid}.${thumbsext}; then
 			continue
 		fi
 		if ! test -s ${root}img/${imgid}.jpeg; then
@@ -47,7 +63,7 @@ while read -r imgid; do
 	height=$(echo "select thumb_height from img where id = '$imgid'" | sqlite3 cv.db)
 	if [[ -z ${height} ]]; then height=300; fi
 
-	echo "{ filename: \"$imgid.png\", width: 400, height: $height},"
+	echo "{ filename: \"$imgid.${thumbsext}\", width: 400, height: $height},"
 
 done
 echo "];"

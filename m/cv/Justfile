@@ -244,12 +244,9 @@ link:
 v-split vid:
      name={{vid}}; cd v/mp4 && mkdir -p ../img/$name && ffmpeg -i "$name.mp4" -vf "fps=1/1" ../img/$name/v-$name-%04d.jpeg
 
-v-thumbs vid:
-    mkdir -p v/thumbs/{{vid}}
-    name={{vid}}; find v/img/$name -type f | sed 's#^v/img/##; s#.jpeg$##' | runmany 32 'if ! test -r v/thumbs/$1.png; then echo $1; convert v/img/$1.jpeg -resize 400 v/thumbs/$1.png; fi'
-
 v-html vid:
-    name={{vid}}; find v/img/$name -type f | sed 's#^v/img/##; s#.jpeg$##' | sort | ./etc/cols.sh yes thumbs /thumbs v/ > v/$name.html
+    mkdir -p v/thumbs/{{vid}}
+    name={{vid}}; find v/img/$name -type f | sed 's#^v/img/##; s#.jpeg$##' | sort | ./etc/cols.sh yes img /thumbs v/ img jpeg > v/$name.html
 
-v-gen type="thumbs":
-    (cd v/img; ls -d */ | cut -d/ -f1) | runmany 2 'just v-{{type}} $1'
+v-gen type="html" n="2":
+    (cd v/img; ls -d */ | cut -d/ -f1) | runmany {{n}} 'just v-{{type}} $1'
