@@ -7,6 +7,13 @@ shift
 base=$1
 shift
 
+if [[ -n "${1:-}" ]]; then
+	root=$1
+	shift
+else
+	root=
+fi
+
 newline=$'\n'
 
 echo '<!DOCTYPE html><head>'
@@ -27,13 +34,13 @@ echo "const images = ["
 # Read filenames from stdin
 while read -r imgid; do
 	if [[ ${kind} == yes ]]; then
-		if ! test -s thumbs/${imgid}.png; then
+		if ! test -s ${root}thumbs/${imgid}.png; then
 			continue
 		fi
-		if ! test -s img/${imgid}.jpeg; then
+		if ! test -s ${root}img/${imgid}.jpeg; then
 			continue
 		fi
-		if test -r yes/${imgid}.jpeg; then
+		if test -r ${root}yes/${imgid}.jpeg; then
 			continue
 		fi
 	fi
