@@ -25,7 +25,7 @@ lint:
         - .cache/**
         - .npm/**
   enabled:
-    - actionlint@1.7.6
+    - actionlint@1.7.7
     - isort@5.13.2
     - clippy@1.65.0
     - rustfmt@1.65.0
