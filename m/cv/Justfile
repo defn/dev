@@ -242,11 +242,11 @@ link:
     ln -nvfs ~/m/cv/{Justfile,*.mjs,proxy.conf,package.json,etc,gallery.*,tutorial.html,.joyride} .
 
 v-split vid:
-     name={{vid}}; cd v/mp4 && mkdir -p ../img/$name && ffmpeg -i "$name.mp4" -vf "fps=1/1" ../img/$name/v-$name-%04d.jpeg
+    mkdir -p v/img/{{vid}}
+    name={{vid}}; cd v/mp4 && ffmpeg -i "$name.mp4" -vf "fps=1/1" ../img/$name/v-$name-%04d.jpeg
 
 v-html vid:
-    mkdir -p v/thumbs/{{vid}}
-    name={{vid}}; find v/img/$name -type f | sed 's#^v/img/##; s#.jpeg$##' | sort | ./etc/cols.sh yes img /thumbs v/ img jpeg > v/$name.html
+    name={{vid}}; find v/img/$name -type f | sed 's#^v/img/##; s#.jpeg$##' | sort | ./etc/cols.sh yes img /thumbs v/ img jpeg > v/html/$name.html
 
 v-gen type="html" n="2":
     (cd v/img; ls -d */ | cut -d/ -f1) | runmany {{n}} 'just v-{{type}} $1'
