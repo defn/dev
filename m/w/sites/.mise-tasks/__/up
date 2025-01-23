@@ -1,6 +1,14 @@
 #!/usr/bin/env bash
 
 #MISE description="Bring up Astro dev server"
+#USAGE flag "-o --open" help="Open the app im browser after server start"
 
 cd "${MISE_ORIGINAL_CWD}"
-exec npm run astro dev -- --port "${APP_PORT}"
+
+set --
+
+if  [[ "$usage_open" == "true" ]]; then
+    set -- "$@" --open
+fi
+
+exec npm run astro dev -- --port "${APP_PORT}" "$@"
