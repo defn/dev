@@ -1,6 +1,6 @@
 {
   "slug": "pkg-hubble",
   "ghrepo": "cilium/hubble",
-  "vendor": "1.16.5",
-  "revision": "1"
+  "vendor": "1.16.6",
+  "revision": "0"
 }
