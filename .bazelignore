@@ -249,6 +249,8 @@ deps.edn
 !.config/mise
 !.config/mise/tasks
 !.config/mise/tasks/*
+.pnpm-store
+
 m
 work
 bin
