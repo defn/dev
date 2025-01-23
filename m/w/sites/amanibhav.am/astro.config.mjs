@@ -10,6 +10,11 @@ export default defineConfig({
   build: {
     assets: "a",
   },
+  vite: {
+    server: {
+      allowedHosts: [".defn.run"]
+    }
+  },
   integrations: [
     sitemap(),
     starlight({
