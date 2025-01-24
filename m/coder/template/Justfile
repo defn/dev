@@ -5,3 +5,4 @@ push template:
 
 	cd {{template}}
 	tar -cvh --exclude .terraform . | coder templates push -y -d - {{template}}
+	coder templates edit --default-ttl 1h {{template}}
