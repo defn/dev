@@ -241,6 +241,9 @@ serve:
 link:
     ln -nvfs ~/m/cv/{Justfile,*.mjs,proxy.conf,package.json,etc,gallery.*,tutorial.html,.joyride} .
 
+v-all type n="1":
+    ls v/mp4/*.mp4 | cut -d/ -f3 | sed 's#.mp4$##' | runmany {{n}} 'just v-{{type}} $1'
+
 v-split vid:
     mkdir -p v/img/{{vid}}
     name={{vid}}; cd v/mp4 && ffmpeg -i "$name.mp4" -vf "fps=1/1" ../img/$name/v-$name-%04d.jpeg
