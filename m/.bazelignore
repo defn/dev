@@ -9,6 +9,7 @@ comfyui
 demo/.direnv
 ./demo/node_modules
 ./node_modules
+./w/sites/amanibhav.am/node_modules
 demo/nix/.direnv
 f/.direnv
 infra/.direnv
@@ -35,13 +36,11 @@ pkg/cloudnuke/.direnv
 pkg/coder/.direnv
 pkg/codeserver/.direnv
 pkg/cosign/.direnv
-pkg/crossplane/.direnv
 pkg/cue/.direnv
 pkg/cuetsy/.direnv
 pkg/dapr/.direnv
 pkg/dev/.direnv
 pkg/development/.direnv
-pkg/devspace/.direnv
 pkg/dyff/.direnv
 pkg/earthly/.direnv
 pkg/flyctl/.direnv
@@ -57,7 +56,6 @@ pkg/honeymarker/.direnv
 pkg/honeytail/.direnv
 pkg/honeyvent/.direnv
 pkg/hubble/.direnv
-pkg/hugo/.direnv
 pkg/ibazel/.direnv
 pkg/iso/.direnv
 pkg/jsdev/.direnv
@@ -65,7 +63,6 @@ pkg/just/.direnv
 pkg/k3d/.direnv
 pkg/k3sup/.direnv
 pkg/k9s/.direnv
-pkg/kn/.direnv
 pkg/kubectl/.direnv
 pkg/kubelogin/.direnv
 pkg/kubeseal/.direnv
@@ -73,7 +70,6 @@ pkg/kubevirt/.direnv
 pkg/kuma/.direnv
 pkg/kustomize/.direnv
 pkg/linkerd/.direnv
-pkg/minikube/.direnv
 pkg/mirrord/.direnv
 pkg/mise/.direnv
 pkg/oci/.direnv
@@ -106,7 +102,6 @@ pkg/vpn/.direnv
 pkg/wireproxy/.direnv
 pkg/workerd/.direnv
 pkg/yaegi/.direnv
-pkg/zellij/.direnv
 prefect/.direnv
 wut/.direnv
 demo/nix/result
@@ -135,13 +130,11 @@ pkg/cloudnuke/result
 pkg/coder/result
 pkg/codeserver/result
 pkg/cosign/result
-pkg/crossplane/result
 pkg/cue/result
 pkg/cuetsy/result
 pkg/dapr/result
 pkg/dev/result
 pkg/development/result
-pkg/devspace/result
 pkg/dyff/result
 pkg/earthly/result
 pkg/flyctl/result
@@ -157,7 +150,6 @@ pkg/honeymarker/result
 pkg/honeytail/result
 pkg/honeyvent/result
 pkg/hubble/result
-pkg/hugo/result
 pkg/ibazel/result
 pkg/iso/result
 pkg/jsdev/result
@@ -165,7 +157,6 @@ pkg/just/result
 pkg/k3d/result
 pkg/k3sup/result
 pkg/k9s/result
-pkg/kn/result
 pkg/kubectl/result
 pkg/kubelogin/result
 pkg/kubeseal/result
@@ -173,7 +164,6 @@ pkg/kubevirt/result
 pkg/kuma/result
 pkg/kustomize/result
 pkg/linkerd/result
-pkg/minikube/result
 pkg/mirrord/result
 pkg/mise/result
 pkg/oci/result
@@ -206,7 +196,6 @@ pkg/vpn/result
 pkg/wireproxy/result
 pkg/workerd/result
 pkg/yaegi/result
-pkg/zellij/result
 prefect/result
 wut/result
 cutout/app/{{cookiecutter.path}}
@@ -516,7 +505,6 @@ l/0001/.direnv
 openvpn/.direnv
 pepr/.direnv
 pkg/.direnv
-pkg/zellij/.direnv
 s/.direnv
 temporal/.direnv
 wut/.direnv
