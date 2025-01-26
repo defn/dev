@@ -11,4 +11,14 @@ if  [[ "$usage_open" == "true" ]]; then
     set -- "$@" --open
 fi
 
+truncate -s 0 .app_up
+
+while true; do
+    if [[ "$(curl -s -o /dev/null -w "%{http_code}" "http://localhost:${APP_PORT}")" == "200" ]]; then
+        echo up > .app_up
+        break
+    fi
+    sleep 1
+done &
+
 exec npm run astro dev -- --port "${APP_PORT}" "$@"
