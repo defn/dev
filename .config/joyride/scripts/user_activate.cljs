@@ -1,7 +1,9 @@
 (ns user-activate
   (:require ["vscode" :as vscode]
             [joyride.core :as joyride]
-            [promesa.core :as p]))
+            [promesa.core :as p]
+            [tutlib :as tutlib]
+            [tutorial :as tutorial]))
 
 ;;; user_activate.cljs skeleton
 
@@ -28,8 +30,11 @@
       (.push disposable)))
 
 (defn- my-main []
-  (clear-disposables!)) ;; Any disposables add with `push-disposable!`
-                        ;; will be cleared now. You can push them anew.
+  (p/let [tutname(vscode/Uri.file (path/join vscode/workspace.rootPath ".app_tutorial"))
+          tutdata (vscode/workspace.fs.readFile tutname)]
+    (if (> (.-length tutdata) 0)
+      (tutlib.open-tutorial tutorial.edit_page tutorial.lesson_page)))
+  (clear-disposables!))
 
 (when (= (joyride/invoked-script) joyride/*file*)
   (my-main))

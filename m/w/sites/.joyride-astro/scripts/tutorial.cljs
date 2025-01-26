@@ -1,4 +1,5 @@
-(ns tutorial
-  (:require [tutlib :as tutlib]))
+(ns tutorial)
 
-(tutlib/open-tutorial "src/pages/index.astro" "tutorial.html")
+(def edit_page "src/pages/index.astro")
+(def lesson_page "tutorial.html")
+
