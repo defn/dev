@@ -42,12 +42,13 @@ create-coder-agent-sidecar:
 	cd m
 	exec just coder::coder-agent "${CODER_NAME}"
 
-create-code-server-sidecar:
+create-code-server-sidecar tutorial="":
 	#!/usr/bin/env bash
 
 	(
 		cd "${CODER_HOMEDIR}"
 		truncate -s 0 .app_up
+		echo -n "{{tutorial}}" > .app_tutorial
 		mise trust -a
 		sleep 10
 		mise install

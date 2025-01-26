@@ -18,6 +18,23 @@ variable "use_kubeconfig" {
   default     = true
 }
 
+data "coder_parameter" "tutorial" {
+  name         = "tutorial"
+  display_name = "Tutorial"
+  description  = "Run the tutorial on workspace start"
+  default      = ""
+  icon         = "/icon/memory.svg"
+  mutable      = true
+  option {
+    name  = "yes"
+    value = "1"
+  }
+  option {
+    name  = "no"
+    value = ""
+  }
+}
+
 data "coder_parameter" "cpu" {
   name         = "cpu"
   display_name = "CPU"
@@ -234,7 +251,7 @@ resource "kubernetes_deployment" "main" {
           name              = "dev"
           image             = "169.254.32.1:5000/defn/dev:latest"
           image_pull_policy = "Always"
-          command           = ["/bin/tini", "--", "bash", "-c", "cd; source .bash_profile; exec j create-code-server-sidecar"]
+          command           = ["/bin/tini", "--", "bash", "-c", "cd; source .bash_profile; exec j create-code-server-sidecar \"${data.coder_parameter.tutorial.value}\""]
 
           // chown these mounts in m/bin/startup.sh
           volume_mount {
