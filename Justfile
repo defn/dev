@@ -47,6 +47,7 @@ create-code-server-sidecar:
 
 	(
 		cd "${CODER_HOMEDIR}"
+		truncate -s 0 .app_up
 		mise trust -a
 		sleep 10
 		mise install
