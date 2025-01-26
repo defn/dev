@@ -1,8 +1,8 @@
 [
   {
     "key": "shift+ctrl+l",
-    "command": "joyride.runWorkspaceScript",
-    "args": "tutorial.cljs"
+    "command": "joyride.runUserScript",
+    "args": "tut.cljs"
   },
   {
     "key": "ctrl+lw",
