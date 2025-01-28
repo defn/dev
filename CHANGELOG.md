@@ -1,5 +1,66 @@
 # Changelog
 
+## [1.4.0](https://github.com/defn/dev/compare/v1.3.0...v1.4.0) (2025-01-28)
+
+
+### Features
+
+* add astro joyride config ([5b805d4](https://github.com/defn/dev/commit/5b805d489ee9b8667115f1b4e60a6f212bb44dd4))
+* awscli/ 2.23.2 -&gt; 2.23.3 [skip ci] ([221350f](https://github.com/defn/dev/commit/221350f82de1d18b01d39763d89da5b6b5313407))
+* awscli/ 2.23.3 -&gt; 2.23.4 [skip ci] ([a264e3c](https://github.com/defn/dev/commit/a264e3c7235a991f3a0c9d21325e78048fa7251b))
+* awscli/ 2.23.4 -&gt; 2.23.5 [skip ci] ([7b0b8bb](https://github.com/defn/dev/commit/7b0b8bb950d31a854859cd11606789f611a49921))
+* awscli/ 2.23.5 -&gt; 2.23.6 [skip ci] ([2255536](https://github.com/defn/dev/commit/2255536dec3ba7cab6d18f4b3b8c4784c3640bbf))
+* awscli/ 2.23.6 -&gt; 2.23.7 [skip ci] ([1d538cc](https://github.com/defn/dev/commit/1d538ccb3473c6194887ddcc7ff037a12c244f28))
+* change me link on every website ([fbf01ac](https://github.com/defn/dev/commit/fbf01ace999d130c3c5b188bdcb266e8cbb7951a))
+* coder k8s template autostops by default after 1h ([0d78aed](https://github.com/defn/dev/commit/0d78aed4b4bb948222fdb7bfc5a755d325ea062c))
+* codeserver/ 4.96.2 -&gt; 4.96.4 [skip ci] ([c0309dc](https://github.com/defn/dev/commit/c0309dcd91196aa644ca5c5b560e7a28cfc13bf2))
+* cue/ 0.11.1 -&gt; 0.11.2 [skip ci] ([aa4da01](https://github.com/defn/dev/commit/aa4da01fee03c0d5cf6672e1c999512f880e50c1))
+* enable tutorial on amanibhav.am workspace ([d6b7eda](https://github.com/defn/dev/commit/d6b7edacb51de059cbf3f731494d9403600fc5d7))
+* flyctl/ 0.3.64 -&gt; 0.3.65 [skip ci] ([037887f](https://github.com/defn/dev/commit/037887f09d7c3d9e04d0ad29afa6456b918829c6))
+* flyctl/ 0.3.65 -&gt; 0.3.66 [skip ci] ([b77e5f6](https://github.com/defn/dev/commit/b77e5f60b4ffe7663fa05c28c462701a619a908f))
+* flyctl/ 0.3.66 -&gt; 0.3.67 [skip ci] ([22c2976](https://github.com/defn/dev/commit/22c2976b498c02d20767eb15ca1f87fd61831ba7))
+* flyctl/ 0.3.67 -&gt; 0.3.68 [skip ci] ([219bb80](https://github.com/defn/dev/commit/219bb80585909188d50c7d6ca53dbb986900716a))
+* flyctl/ 0.3.68 -&gt; 0.3.69 [skip ci] ([88e8e0f](https://github.com/defn/dev/commit/88e8e0f7bc90aabe2562d70e48b3a477a5afee1e))
+* goreleaser/ 2.5.1 -&gt; 2.6.0 [skip ci] ([668644f](https://github.com/defn/dev/commit/668644ffc298181bd0c7fd70c5e7b5dc3916a3d9))
+* goreleaser/ 2.6.0 -&gt; 2.6.1 [skip ci] ([1a07f1a](https://github.com/defn/dev/commit/1a07f1adf12db7df482756d8e977b12e55b68d1c))
+* gum/ 0.15.0 -&gt; 0.15.1 [skip ci] ([e392ead](https://github.com/defn/dev/commit/e392eadeeaaf7ddab76f095ba92a3e5393155631))
+* hubble/ 1.16.5 -&gt; 1.16.6 [skip ci] ([1a06e9a](https://github.com/defn/dev/commit/1a06e9a9631bd2494cb809ffb2fd9d3065cff3f8))
+* joyride runs tutorial ([18bfa13](https://github.com/defn/dev/commit/18bfa130f22e14ae6f07b47aa6f85f06aadfc4ba))
+* just/ 1.38.0 -&gt; 1.39.0 [skip ci] ([b45723b](https://github.com/defn/dev/commit/b45723bed48e7693975705dbf5afbd8a24f85377))
+* k3sup/ 0.13.6 -&gt; 0.13.8 [skip ci] ([7c45bfa](https://github.com/defn/dev/commit/7c45bfae396f1dee5e427c117d57e845773e5856))
+* kn/ 1.16.1 -&gt; 1.17.0 [skip ci] ([7b35cde](https://github.com/defn/dev/commit/7b35cde03a539fad11e8104a6c87cdfb9ffdd100))
+* kubelogin/ 1.32.0 -&gt; 1.32.1 [skip ci] ([045138f](https://github.com/defn/dev/commit/045138ffca46630269976d2eeb91d76099901911))
+* kuma/ 2.9.2 -&gt; 2.9.3 [skip ci] ([357c79f](https://github.com/defn/dev/commit/357c79fb87746ad5c7706a74f3eb479f9354ff10))
+* linkerd/ 25.1.1 -&gt; 25.1.2 [skip ci] ([e1ed142](https://github.com/defn/dev/commit/e1ed1428a31eaf3e76e225400d687ef6bc7c8c03))
+* mirrord/ 3.129.0 -&gt; 3.130.0 [skip ci] ([70af09a](https://github.com/defn/dev/commit/70af09a9cdca83ea5fd09f66d09e675f52ba9f06))
+* mirrord/ 3.130.0 -&gt; 3.131.0 [skip ci] ([7a222d1](https://github.com/defn/dev/commit/7a222d1246305286b70b78b2a137d01d17b86563))
+* mise up for astro takes --open ([6f0a0ad](https://github.com/defn/dev/commit/6f0a0adeebbe06bb99466a89105e5451649053fd))
+* mise/ 2025.1.14 -&gt; 2025.1.15 [skip ci] ([746825d](https://github.com/defn/dev/commit/746825d703efdb5b4d0df4b4c59cdceaa2ee89a5))
+* mise/ 2025.1.9 -&gt; 2025.1.14 [skip ci] ([efa99ef](https://github.com/defn/dev/commit/efa99ef70c0c1cdcf11824f4ef8b83d622953661))
+* openfga/ 0.6.2 -&gt; 0.6.3 [skip ci] ([35ad870](https://github.com/defn/dev/commit/35ad87015a5ea65265109cbd28a98c6ba8e8acb8))
+* optional tutorial mode, create the app_tutorial file ([e788498](https://github.com/defn/dev/commit/e788498a0a5de4728363a41e851156a4ddcdc8a3))
+* packer/ 1.11.2 -&gt; 1.12.0 [skip ci] ([36b42d7](https://github.com/defn/dev/commit/36b42d763f3eda8bf7279eedac26279a09472d0c))
+* stern/ 1.31.0 -&gt; 1.32.0 [skip ci] ([f27a576](https://github.com/defn/dev/commit/f27a57644d982ac59234ed7e8c1c036291903a1c))
+* terraform/ 1.10.4 -&gt; 1.10.5 [skip ci] ([e9f879c](https://github.com/defn/dev/commit/e9f879c75d6be6ef89a96814f888d5712f10120b))
+* workerd/ 1.20241230.0 -&gt; 1.20250121.0 [skip ci] ([ddc9cf8](https://github.com/defn/dev/commit/ddc9cf8ec70f195e3e30c496fc1e4aa82ee6ae2c))
+* workerd/ 1.20250121.0 -&gt; 1.20250124.0 [skip ci] ([20d5f2b](https://github.com/defn/dev/commit/20d5f2bd7538a61ab819e5f7c9186d7777c14c46))
+* workerd/ 1.20250124.0 -&gt; 1.20250124.3 [skip ci] ([a3d28f5](https://github.com/defn/dev/commit/a3d28f5a972f422237ebc78bac4de2c50825670f))
+
+
+### Bug Fixes
+
+* add on-demand tutorial loader ([760f3db](https://github.com/defn/dev/commit/760f3dbd7738bcb7146343330ea5c4735b4caaa8))
+* allowlist .defn.run ([e69553c](https://github.com/defn/dev/commit/e69553c5214065de0036ea912679d02d1a2c5b83))
+* build github pages again ([6ee5f02](https://github.com/defn/dev/commit/6ee5f029b478831dc99f6a2ff3f048944e706160))
+* create the .app_up file asap ([d1de9da](https://github.com/defn/dev/commit/d1de9da78e8779010b31ebd4db6a54a50f699536))
+* docs previwing again ([91f9e7e](https://github.com/defn/dev/commit/91f9e7ef85427e76a9e624a469126d31ecf78134))
+* fix amanibhav.am joyride link ([40d71a1](https://github.com/defn/dev/commit/40d71a1b47aba24cd7feccfaed4bd756eed0b961))
+* m install disables astro telemetry ([c254a18](https://github.com/defn/dev/commit/c254a18bb31b39a56cae04f6c2d807fd3f4c2557))
+* manual tutorial trigger working ([9e683c5](https://github.com/defn/dev/commit/9e683c5547ac73deff8047f0b791721ed2db8ceb))
+* only backup is online at all times ([12e090e](https://github.com/defn/dev/commit/12e090e4d3c542c76d26ea934d908dadcc4cd33a))
+* remove unused flakes: crossplane, devspace, hugo, kn, minikube, zellij ([a32e728](https://github.com/defn/dev/commit/a32e728c745e3f6a3426a6829ad35b20992a11f9))
+* use workspace activate scripts to load tutorial ([3499c0e](https://github.com/defn/dev/commit/3499c0ec7265068fdbcb5f8816f167d54970d94d))
+
 ## [1.3.0](https://github.com/defn/dev/compare/v1.2.3...v1.3.0) (2025-01-20)
 
 
