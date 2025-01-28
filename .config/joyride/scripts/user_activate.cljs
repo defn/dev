@@ -1,11 +1,6 @@
 (ns user-activate
   (:require ["vscode" :as vscode]
-            [joyride.core :as joyride]
-            [promesa.core :as p]
-            [tutlib :as tutlib]
-            [tutorial :as tutorial]))
-
-;;; user_activate.cljs skeleton
+            [joyride.core :as joyride]))
 
 ;; Keep tally on VS Code disposables we register
 (defonce !db (atom {:disposables []}))
@@ -30,10 +25,6 @@
       (.push disposable)))
 
 (defn- my-main []
-  (p/let [tutname(vscode/Uri.file (path/join vscode/workspace.rootPath ".app_tutorial"))
-          tutdata (vscode/workspace.fs.readFile tutname)]
-    (if (> (.-length tutdata) 0)
-      (tutlib.open-tutorial tutorial.edit_page tutorial.lesson_page)))
   (clear-disposables!))
 
 (when (= (joyride/invoked-script) joyride/*file*)

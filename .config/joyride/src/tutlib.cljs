@@ -2,10 +2,9 @@
   (:require ["path" :as path]
             ["vscode" :as vscode]
             [promesa.core :as p]
-            [clojure.string :as s]
-            [tutorial :as tutorial]))
+            [clojure.string :as s]))
 
-(defn- open-tutorial [tutorial_filename tutorial_webpage]
+(defn open-tutorial [tutorial_filename tutorial_webpage]
     (p/let [
             webpage (vscode/Uri.file (path/join vscode/workspace.rootPath tutorial_webpage))
             webdata (vscode/workspace.fs.readFile webpage)
@@ -29,4 +28,8 @@
               (open-tutorial tutorial_filename tutorial_webpage)))
             1000)))))
 
-
+(defn load-tutorial [edit_page lesson_page]
+  (p/let [tutname(vscode/Uri.file (path/join vscode/workspace.rootPath ".app_tutorial"))
+          tutdata (vscode/workspace.fs.readFile tutname)]
+    (if (> (.-length tutdata) 0)
+      (open-tutorial edit_page lesson_page))))
