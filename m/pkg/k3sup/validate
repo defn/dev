@@ -1,3 +1,0 @@
-#!/usr/bin/env bash
-
-k3sup version | grep -v actuated
