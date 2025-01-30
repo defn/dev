@@ -1,3 +1,0 @@
-#!/usr/bin/env bash
-
-kubectl version --client=true --output=json
