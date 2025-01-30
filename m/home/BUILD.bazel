@@ -1,22 +1,20 @@
 flake_names = [
-    "az",
-    "home",
-    "secrets",
     "tailscale",
-    "utils",
     "buildifier",
     "ibazel",
-    "oci",
     "regbot",
     "regctl",
     "regsync",
-    "development",
     "acme",
-    "cloud",
     "kubelogin",
     "buildevents",
     "codeserver",
-    "shell",
+
+    "az",
+    "cloud",
+    "home",
+
+    "base",
 ]
 
 flake_paths = [

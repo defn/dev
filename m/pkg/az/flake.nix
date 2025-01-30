@@ -10,18 +10,6 @@
       inherit src;
 
       propagatedBuildInputs = with ctx.pkgs; [
-        jq
-        yq
-        gron
-        fzf
-        direnv
-        ffmpeg
-        ttyd
-        ncdu
-        nload
-        cookiecutter
-        bat
-        bashInteractive
       ];
 
       installPhase = ''
