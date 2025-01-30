@@ -8,6 +8,7 @@ cd
 source .bash_profile
 while true; do
     (cd ~/m/i && make sync)
+    (cd ~/m/cache/docker && make clean)
     sleep 30
 done
 
