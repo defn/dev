@@ -49,11 +49,14 @@ todo:
 	@(bazel cquery //... --output=files | grep -v ^bazel-; git ls-files .) | sort | uniq -c | grep '^ *1 ' | awk '{print $$2}'
 
 ci: 
-	$(MAKE) ci_inner
+	$(MAKE) ci_inner AGENT=${AGENT}
 
 ci_inner:
-	mkdir -p ~/work/buildkite-{agent,plugins}
-	env BUILDKITE_AGENT_DISCONNECT_AFTER_IDLE_TIMEOUT=$(timeout) buildkite-agent start --build-path ~/work/buildkite-agent --plugins-path ~/work/buildkite-plugins --token "$(BUILDKITE_AGENT_TOKEN)"
+	mkdir -p ~/work/buildkite-{agent,plugins}${AGENT}
+	env BUILDKITE_AGENT_DISCONNECT_AFTER_IDLE_TIMEOUT=$(timeout) buildkite-agent start \
+		--build-path ~/work/buildkite-agent${AGENT} \
+		--plugins-path ~/work/buildkite-plugins${AGENT} \
+		--token "$(BUILDKITE_AGENT_TOKEN)"
 
 ci_web:
 	cd defn/dev/www && $(MAKE) build
