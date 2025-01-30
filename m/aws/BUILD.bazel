@@ -42,13 +42,11 @@ sh_binary(
     srcs = ["aws_cli.sh"],
     args = [
         "$(location //pkg/awscli:flake_aws)",
-        "$(location //pkg/secrets:flake_aws-vault)",
         "$(location aws_config_cfg)",
     ],
     data = [
         "aws_config_cfg",
         "//pkg/awscli:flake_aws",
-        "//pkg/secrets:flake_aws-vault",
     ],
 )
 
