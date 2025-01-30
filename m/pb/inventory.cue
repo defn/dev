@@ -52,7 +52,6 @@ inventory: {
 	]
 
 	chrome: hosts: [
-		"kinko",
 	]
 
 	rpi: {
