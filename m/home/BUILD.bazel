@@ -9,11 +9,9 @@ flake_names = [
     "kubelogin",
     "buildevents",
     "codeserver",
-
     "az",
     "cloud",
     "home",
-
     "base",
 ]
 
