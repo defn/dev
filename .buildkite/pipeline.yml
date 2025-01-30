@@ -1,10 +1,10 @@
 steps:
+  - label: home build
+    command: ./.buildkite/bin/home-build.sh
   - label: trunk check
     command: ./.buildkite/bin/trunk-check.sh
   - label: bazel build
     command: ./.buildkite/bin/bazel-build.sh
-  - label: home build
-    command: ./.buildkite/bin/home-build.sh
   - label: Website deploys
     plugins:
       - monorepo-diff#v1.2.0:
