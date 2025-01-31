@@ -127,6 +127,8 @@ function m {
 	fi
 }
 
+export MISE_PIN=1
+
 function vi {
 	if [[ -n ${VSCODE_GIT_ASKPASS_MAIN-} ]]; then
 		local code
