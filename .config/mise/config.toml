@@ -3,13 +3,13 @@ experimental = true
 
 [tools]
 "aqua:nushell/nushell" = "0.101.0"
-aws = "2.23.10"
+aws = "2.23.11"
 bazelisk = "1.25.0"
 chamber = "3.1.1"
 coder = "2.18.5"
 cue = "0.12.0"
 dyff = "1.9.4"
-gh = "2.66.0"
+gh = "2.66.1"
 gum = "0.15.2"
 helm = "3.17.0"
 just = "1.39.0"
