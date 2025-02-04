@@ -51,8 +51,7 @@ inventory: {
 		// off "mbb",
 	]
 
-	chrome: hosts: [
-	]
+	chrome: hosts: []
 
 	rpi: {
 		children: [
