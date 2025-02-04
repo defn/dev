@@ -7,6 +7,8 @@ function main {
     sudo apt install -y make direnv curl xz-utils dirmngr gpg rsync
     source .bash_profile
     make install
+    make sync
+    make install
 }
 
 main "$@"
