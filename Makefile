@@ -3,7 +3,7 @@ SHELL := /bin/bash
 # https://nixos.org/download
 NIX_VERSION := 2.18.2
 
-flakes ?= tailscale buildifier ibazel regbot regctl regsync acme kubelogin buildevents codeserver az cloud home base
+flakes ?= buildifier acme kubelogin codeserver az cloud home base
 home ?= home
 
 name ?= local
