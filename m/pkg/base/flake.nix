@@ -37,6 +37,11 @@
         git-lfs
         graphviz
 
+        easyrsa
+        openvpn
+        wireguard-tools
+        wireguard-go
+
         xz
         unzip
         rsync
