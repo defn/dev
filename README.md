@@ -39,3 +39,5 @@ Build the monorepo, change directory to `m/` and run Bazel.
 cd m
 b build
 ```
+
+The `main` branch build is [![Build status](https://badge.buildkite.com/879feda30e2616b22929338672877e85dfe82f60eb47df2e6a.svg?branch=main)](https://buildkite.com/defn/dev)
