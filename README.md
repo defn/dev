@@ -1,7 +1,39 @@
----
-marp: true
----
+# defn.dev
 
-55567899
+Monorepo for cloud integrated development environments.
 
-[![Build status](https://badge.buildkite.com/879feda30e2616b22929338672877e85dfe82f60eb47df2e6a.svg)](https://buildkite.com/defn/dev)
+## Features
+
+- **Bazel**: Monorepo build tool
+- **Buildkite**: CI/CD pipeline
+- **CUE**: Monorepo configuration
+- **Coder**: Coder workspaces in the browser for the IDE
+- **Mise**: Tools, environment, and task management
+
+## Installation
+
+Clone the repo to your `/home/ubuntu` directory.  User must be named `ubuntu`.  The process below will overwrite files typically customized by the user.
+```
+cd $HOME
+git clone https://github.com/defn/dev dev
+mv dev/.git .
+rm -rf dev
+git reset --hard
+```
+
+Open a new terminal or run a `bash` sub-shell to load the new `$HOME` configuration.
+
+Then install the basic tools:
+```
+make install
+```
+
+## Usage
+
+### Builds
+
+Build the monorepo, change directory to `m/` and run Bazel.
+```
+cd m
+b build
+```
