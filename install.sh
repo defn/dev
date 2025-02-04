@@ -4,7 +4,7 @@ set -efu -o pipefail
 
 function main {
     sudo apt update
-    sudo apt install -y make direnv curl
+    sudo apt install -y make direnv curl xz
     source .bash_profile
     make install
 }
