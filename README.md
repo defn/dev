@@ -12,7 +12,8 @@ Monorepo for cloud integrated development environments.
 
 ## Installation
 
-Clone the repo to your `/home/ubuntu` directory.  User must be named `ubuntu`.  The process below will overwrite files typically customized by the user.
+Clone the repo to your `/home/ubuntu` directory. User must be named `ubuntu`. The process below will overwrite files typically customized by the user.
+
 ```
 cd $HOME
 git clone https://github.com/defn/dev dev
@@ -24,15 +25,15 @@ git reset --hard
 Open a new terminal or run a `bash` sub-shell to load the new `$HOME` configuration.
 
 Then install the basic tools:
+
 ```
 make install
 ```
 
-## Usage
-
-### Builds
+## Quickstart
 
 Build the monorepo, change directory to `m/` and run Bazel.
+
 ```
 cd m
 b build
