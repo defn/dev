@@ -1,4 +1,4 @@
-# defn.dev
+# defn/dev
 
 Monorepo for cloud integrated development environments.
 
@@ -12,7 +12,9 @@ Monorepo for cloud integrated development environments.
 
 ## Installation
 
-Clone the repo to your `/home/ubuntu` directory. User must be named `ubuntu`. The process below will overwrite files typically customized by the user.
+This repository has been tested and developed on Ubuntu 24.04 with the user `ubuntu` in home directory `/home/ubuntu`.
+
+Clone the repo to your `/home/ubuntu` directory.  The process below will overwrite files typically customized by the user.
 
 ```
 cd $HOME
@@ -22,13 +24,12 @@ rm -rf dev
 git reset --hard
 ```
 
-Open a new terminal or run a `bash` sub-shell to load the new `$HOME` configuration.
-
-Then install the basic tools:
-
+Then install the tool dependencies:
 ```
-make install
+./install.sh
 ```
+
+After install, use new terminal sessions to load the `$HOME` configuration with `defn/dev` configuration and tooling.
 
 ## Quickstart
 
