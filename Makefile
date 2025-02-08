@@ -140,6 +140,8 @@ dotfiles:
 		if ! test -d ~/dotfiles/.git/.; then \
 			rm -rf ~/dotfiles; \
 			t git_clone_dotfiles git clone https://github.com/$${GIT_AUTHOR_NAME}/dotfiles ~/dotfiles; \
+		else \
+			(cd dotfiles && git pull); \
 		fi; \
 		t dotfiles_bootstrap ./dotfiles/bootstrap; \
 	fi
