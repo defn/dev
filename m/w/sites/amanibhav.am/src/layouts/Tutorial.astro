@@ -71,77 +71,33 @@ const { title, topic, short } = Astro.props;
       }
 
       div#content {
-        padding: 3rem 0 18rem 0;
-        margin-left: 12rem;
-        margin-right: 2.5rem;
+        padding: 0;
+        margin: 1.5rem;
       }
 
       .topic {
         display: block;
-        font-size: 2.3rem;
-        text-transform: uppercase;
+        font-size: 125%;
         letter-spacing: 0.02em;
         font-style: normal;
+        font-weight: bolder;
         line-height: 1.1;
         margin-top: 1rem;
-        margin-bottom: 2rem;
-      }
-
-      .title {
-        display: block;
-        float: left;
-        position: absolute;
-        margin-left: 0;
-        left: 2.5rem;
-        width: calc(2.5rem * 3);
-        text-align: right;
-        list-style-type: none;
-        clear: both;
-        margin-bottom: 1rem;
-      }
-
-      .title .topic {
-        font-family: inherit;
-        text-transform: inherit;
-        letter-spacing: inherit;
-        font-size: 125%;
-        line-height: 1.1;
-        margin-top: 0rem;
         margin-bottom: 0.8rem;
-        font-weight: bolder;
       }
 
-      .title .short {
-        display: block;
+      .short {
         line-height: 1.25;
         font-style: italic;
       }
-
-      @media all and (max-width: 520px) {
-        div#content {
-          margin: 1.5rem;
-          padding: 0;
-        }
-
-        .title {
-          float: inherit;
-          position: inherit;
-          width: 100%;
-          text-align: left;
-        }
-      }
-
     </style>
-
   </head>
 
   <body>
     <div id="content">
       <header>
-        <div class="title">
-          <div class="topic">{topic}</div>
-          <div class="short">{short}</div>
-        </div>
+        <div class="topic">{topic}</div>
+        <div class="short">{short}</div>
       </header>
 
       <main>
@@ -154,7 +110,8 @@ const { title, topic, short } = Astro.props;
     window.onload = function () {
       setTimeout(function () {
         var customStyle = document.createElement("style");
-        customStyle.innerHTML = ".hljs-ln-n {padding-right: 1rem} .hljs-ln-line { font-family: pragmatapro; }";
+        customStyle.innerHTML =
+          ".hljs-ln-n {padding-right: 1rem} .hljs-ln-line { font-family: pragmatapro; }";
         document.head.appendChild(customStyle);
       }, 100);
     };
