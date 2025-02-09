@@ -1,0 +1,119 @@
+---
+import RecipeTitle from "../components/RecipeTitle.astro";
+const { title } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>{title}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://f.d3fn.com/webfonts/valkyrie_a.css"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://f.d3fn.com/webfonts/advocate.css"
+    />
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"
+      integrity="sha512-D9gUyxqja7hBtkWpPWGt9wfbfaMGVt9gnyCvYa+jojwwPHLCzUm5i8rpk7vD7wNee9bA35eYIjobYPaQuKS1MQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"></script>
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/stackoverflow-light.min.css"
+      integrity="sha512-RDtnAhiPytLVV3AwzHkGVMVI4szjtSjxxyhDaH3gqdHPIw5qwQld1MVGuMu1EYoof+CaEccrO3zUVb13hQFU/A=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlightjs-line-numbers.js/2.9.0/highlightjs-line-numbers.min.js"
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"></script>
+
+    <script>
+      // @ts-ignore
+      hljs.highlightAll();
+      // @ts-ignore
+      hljs.initLineNumbersOnLoad();
+    </script>
+
+    <style>
+      @font-face {
+        font-family: "pragmatapro";
+        src: url("https://f.d3fn.com/webfonts/PragmataPro0.830W/PragmataPro_Mono_R_liga_0830.woff2")
+          format("woff2");
+        font-weight: normal;
+        font-style: normal;
+      }
+
+      body {
+        font-family: valkyrie_a;
+        line-height: 1.4;
+        font-size: 0.98rem;
+        margin-left: auto;
+        margin-right: auto;
+        width: 100%;
+        max-width: 1000px;
+        min-height: 100%;
+        position: relative;
+      }
+
+      p {
+        margin-bottom: 1em;
+      }
+
+      pre code {
+        font-family: pragmatapro;
+        font-size: 1rem;
+        margin: 0;
+        padding: 1rem;
+        display: block;
+        overflow-x: auto;
+        border-radius: 5px;
+      }
+
+      div#content {
+        padding: 0;
+        margin: 1.5rem;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="content">
+      <header>
+        <RecipeTitle title={title} />
+      </header>
+
+      <main>
+        <slot />
+      </main>
+    </div>
+  </body>
+
+  <script>
+    window.onload = function () {
+      setTimeout(function () {
+        var customStyle = document.createElement("style");
+        customStyle.innerHTML = `
+          .hljs-ln-n {
+            padding-right: 1rem;
+          }
+          
+          .hljs-ln-line {
+            font-family: pragmatapro;
+          }
+          `;
+        document.head.appendChild(customStyle);
+      }, 100);
+    };
+  </script>
+</html>
