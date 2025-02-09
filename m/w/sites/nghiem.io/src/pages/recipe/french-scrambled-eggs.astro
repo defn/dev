@@ -2,13 +2,12 @@
 import Recipe from "../../layouts/Recipe.astro";
 import Ingredients from "../../components/Ingredients.astro";
 import Procedures from "../../components/Procedures.astro";
+import IngredientsFrenchScrambledEggs from "../../components/IngredientsFrenchScrambledEggs.svelte";
 ---
 
 <Recipe title="FRENCH SCRAMBLED EGGS">
   <Ingredients>
-    <li>eggs</li>
-    <li>butter</li>
-    <li>salt</li>
+    <IngredientsFrenchScrambledEggs client:visible/>
   </Ingredients>
 
   <Procedures>
