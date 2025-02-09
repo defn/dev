@@ -5,7 +5,7 @@
     "args": "tut.cljs"
   },
   {
-    "key": "ctrl+lw",
+    "key": "ctrl+w",
     "command": "workbench.action.closeActiveEditor"
   },
   {
