@@ -8,7 +8,11 @@ const { title, topic, short } = Astro.props;
     <meta charset="utf-8" />
     <title>{title}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" type="text/css" href="https://f.d3fn.com/webfonts/valkyrie_a.css" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://f.d3fn.com/webfonts/valkyrie_a.css"
+    />
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"
       integrity="sha512-D9gUyxqja7hBtkWpPWGt9wfbfaMGVt9gnyCvYa+jojwwPHLCzUm5i8rpk7vD7wNee9bA35eYIjobYPaQuKS1MQ=="
@@ -17,8 +21,8 @@ const { title, topic, short } = Astro.props;
 
     <link
       rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/tokyo-night-dark.min.css"
-      integrity="sha512-dSQLLtgaq2iGigmy9xowRshaMzUHeiIUTvJW/SkUpb1J+ImXOPNGAI7ZC8V5/PiN/XN83B8uIk4qET7AMhdC5Q=="
+      href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/stackoverflow-light.min.css"
+      integrity="sha512-RDtnAhiPytLVV3AwzHkGVMVI4szjtSjxxyhDaH3gqdHPIw5qwQld1MVGuMu1EYoof+CaEccrO3zUVb13hQFU/A=="
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     />
@@ -110,8 +114,15 @@ const { title, topic, short } = Astro.props;
     window.onload = function () {
       setTimeout(function () {
         var customStyle = document.createElement("style");
-        customStyle.innerHTML =
-          ".hljs-ln-n {padding-right: 1rem} .hljs-ln-line { font-family: pragmatapro; }";
+        customStyle.innerHTML = `
+          .hljs-ln-n {
+            padding-right: 1rem;
+          }
+          
+          .hljs-ln-line {
+            font-family: pragmatapro;
+          }
+          `;
         document.head.appendChild(customStyle);
       }, 100);
     };
