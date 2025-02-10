@@ -1,5 +1,71 @@
 # Changelog
 
+## [1.5.0](https://github.com/defn/dev/compare/v1.4.0...v1.5.0) (2025-02-10)
+
+
+### Features
+
+* always update dotfiles ([e5ace54](https://github.com/defn/dev/commit/e5ace5434f9c0c0478dda1b426935faa0206cb89))
+* argocd/ 2.13.3 -&gt; 2.13.4 [skip ci] ([e6273a7](https://github.com/defn/dev/commit/e6273a7d7fa92264ceb0082de8497977dd17463b))
+* argocd/ 2.13.4 -&gt; 2.14.1 [skip ci] ([2eaf579](https://github.com/defn/dev/commit/2eaf5792db9fb709140f5cfa7fdc1d5075d1a5db))
+* awscli/ 2.23.10 -&gt; 2.23.11 [skip ci] ([440e692](https://github.com/defn/dev/commit/440e692138724d47215aa2ce0cac191501a84e8a))
+* awscli/ 2.23.11 -&gt; 2.23.12 [skip ci] ([ecf1518](https://github.com/defn/dev/commit/ecf15183696bef785d6a2b1535786003327c3df0))
+* awscli/ 2.23.12 -&gt; 2.23.13 [skip ci] ([4fe67ff](https://github.com/defn/dev/commit/4fe67ff41f866bc2ab1ab7fa0262cc2ee78767d6))
+* awscli/ 2.23.13 -&gt; 2.23.14 [skip ci] ([8bbe371](https://github.com/defn/dev/commit/8bbe371896f167a53b89be20a9c237d81b14e988))
+* awscli/ 2.23.14 -&gt; 2.24.0 [skip ci] ([556b980](https://github.com/defn/dev/commit/556b980c97bd06e04301a8e2269043fd83973814))
+* awscli/ 2.23.7 -&gt; 2.23.8 [skip ci] ([b073d96](https://github.com/defn/dev/commit/b073d96d822e412fe9c387702477073f78463a44))
+* awscli/ 2.23.8 -&gt; 2.23.9 [skip ci] ([38337a3](https://github.com/defn/dev/commit/38337a32e5d86b2976f6658afa7725a938b04ad7))
+* awscli/ 2.23.9 -&gt; 2.23.10 [skip ci] ([7e250a2](https://github.com/defn/dev/commit/7e250a201757b0adc84f10f539cff0edf6e82a10))
+* bazel 7.5.0 ([3c726f3](https://github.com/defn/dev/commit/3c726f33cfc5f552949bf78eab744e2dad5fa79b))
+* buildifier/ 8.0.1 -&gt; 8.0.2 [skip ci] ([d45a578](https://github.com/defn/dev/commit/d45a578821460fa14e43204c9bbd75e5d25e877d))
+* buildifier/ 8.0.2 -&gt; 8.0.3 [skip ci] ([25f71fd](https://github.com/defn/dev/commit/25f71fdb8c3a48232a7b27b4f647e2b6cca4714f))
+* buildkite/ 3.90.0 -&gt; 3.91.0 [skip ci] ([61be195](https://github.com/defn/dev/commit/61be1956766d73a8aa0b90ddc417493057e40cb8))
+* cloudflared/ 2025.1.0 -&gt; 2025.1.1 [skip ci] ([a5057ce](https://github.com/defn/dev/commit/a5057ce8df8e4d0bcbe5cdcc0e8217d6d1a267e0))
+* consolidate utilities flakes into one base flake ([8b810f3](https://github.com/defn/dev/commit/8b810f350025a4d2d8151cad1e4d4f2fbabda88c))
+* cue/ 0.11.2 -&gt; 0.12.0 [skip ci] ([6f1e8ae](https://github.com/defn/dev/commit/6f1e8aed0c000334c2355b04723e8c846525ef9b))
+* feat: coder 2.19.0 [skip ci] ([a60ce81](https://github.com/defn/dev/commit/a60ce81c0c48479cfbddaf93c5024cd5e1d201fd))
+* flyctl/ 0.3.69 -&gt; 0.3.70 [skip ci] ([ca24681](https://github.com/defn/dev/commit/ca246814cdd0fd9a23cc5caa0387fafe7d5f3fb2))
+* gh/ 2.65.0 -&gt; 2.66.0 [skip ci] ([f149e22](https://github.com/defn/dev/commit/f149e22e78c04d19999be694ad411ad72362dabf))
+* gh/ 2.66.0 -&gt; 2.66.1 [skip ci] ([2746f70](https://github.com/defn/dev/commit/2746f702d49f37f2acf8c807b09a0dc25cd83b68))
+* gum/ 0.15.1 -&gt; 0.15.2 [skip ci] ([ee72361](https://github.com/defn/dev/commit/ee72361621879b8e07bd489836d57c709ddfa775))
+* install.sh updates to latest defn/dev, trusts mise ([880fbdb](https://github.com/defn/dev/commit/880fbdb2ec742d551653e5add44aa389727e202d))
+* kubelogin/ 1.32.1 -&gt; 1.32.2 [skip ci] ([1f40ba4](https://github.com/defn/dev/commit/1f40ba4ff2d8cf0e79682f2b9cd7bf1d146d937c))
+* mirrord/ 3.131.0 -&gt; 3.131.2 [skip ci] ([b305666](https://github.com/defn/dev/commit/b305666d2885d27b38ac2b4e8b2e9d1ba3046685))
+* mise/ 2025.1.15 -&gt; 2025.1.16 [skip ci] ([633ca44](https://github.com/defn/dev/commit/633ca44f63e84719f498b94b7fb7ae6b42bef3ae))
+* mise/ 2025.1.16 -&gt; 2025.1.17 [skip ci] ([9905e7b](https://github.com/defn/dev/commit/9905e7b490d9904236050faed328ef5eb7fe59b6))
+* mise/ 2025.1.17 -&gt; 2025.2.0 [skip ci] ([ddbe638](https://github.com/defn/dev/commit/ddbe63841353ee74c3e7a4390264469f9c62db3a))
+* mise/ 2025.2.0 -&gt; 2025.2.1 [skip ci] ([3bf1575](https://github.com/defn/dev/commit/3bf1575af4ec85b37124df4fd62c6720fe650a50))
+* mise/ 2025.2.1 -&gt; 2025.2.3 [skip ci] ([c4f1999](https://github.com/defn/dev/commit/c4f1999f06311e506cad6e3ba33c1f9a3b7aad11))
+* multiple buildkite agents ([f9ac081](https://github.com/defn/dev/commit/f9ac08196e8e24c65acd9dd71a71ae835c124580))
+* nghiem family recipes ([f6aca35](https://github.com/defn/dev/commit/f6aca35946c81acf7190c8175cd1c2c023766e6a))
+* pin mise versions ([df9f3e0](https://github.com/defn/dev/commit/df9f3e085ba7519912914680dd33586d60fb198a))
+* replace more nix flakes with mise ([70dad6a](https://github.com/defn/dev/commit/70dad6a935ddf10eb3b4f328549523d6655b0575))
+* replace nix flakes with mise ([e24abec](https://github.com/defn/dev/commit/e24abec004c48777939174a9c5d7f51a9caf5a8c))
+* replace some nix flakes with mise tools ([35192c9](https://github.com/defn/dev/commit/35192c9fcd50389143f018f7c1107648ceed2322))
+* simple install script ([2c051c6](https://github.com/defn/dev/commit/2c051c6ba3d21789938d8c5420f9e7ab7bfaac11))
+* tailscale/ 1.78.1 -&gt; 1.80.0 [skip ci] ([bf74c40](https://github.com/defn/dev/commit/bf74c40a1619bb4a1b6bd74f5620e44c776ae808))
+* upgrade(cue) mise ([319905d](https://github.com/defn/dev/commit/319905daf7c467b8bd39668278c8e265327829df))
+* workerd/ 1.20250124.3 -&gt; 1.20250129.0 [skip ci] ([e758948](https://github.com/defn/dev/commit/e758948799f42939a5bb20f424f3489005c88aaf))
+
+
+### Bug Fixes
+
+* close window binding ([06e41fa](https://github.com/defn/dev/commit/06e41fa6df8919faf31875c71c495a1c16f07c78))
+* coder uses websockets behind cloudflare ([3d5452b](https://github.com/defn/dev/commit/3d5452b42f27d10f0750f75f9aa4d3e722b4e6e3))
+* configure buildkite agents with credentials ([ca9bbe5](https://github.com/defn/dev/commit/ca9bbe5d8a665559416e9dfcb92755af67a79c2b))
+* correct xz-utils package name ([d9436ff](https://github.com/defn/dev/commit/d9436ffc1ee045951ff200f6f4771e04a01271d5))
+* garbage collect registry images after syncing ([2edaf13](https://github.com/defn/dev/commit/2edaf1336751dd3da222c1ce1a97097cf56b59be))
+* install needs build-essential ([f1f16eb](https://github.com/defn/dev/commit/f1f16eb20f5f112e888bec89cdc9445c20e85028))
+* install needs curl ([94078ef](https://github.com/defn/dev/commit/94078ef0c8c65fe71cdcdc2f9ec96bdb22ac3023))
+* install needs dirmgnr, git ([9dc7f3e](https://github.com/defn/dev/commit/9dc7f3edd546d2ef20a49b4aeaf1a76615d652d3))
+* install needs rsync ([be03edb](https://github.com/defn/dev/commit/be03edb903982e3d9537e40392c9ab870d932f68))
+* install needs xz ([44640ec](https://github.com/defn/dev/commit/44640ecdf3490e16176b304ca55b7548d99807d0))
+* oci needded for bazel builds ([94872df](https://github.com/defn/dev/commit/94872df8071838f6521e86f79a08c64539aa7a1a))
+* remove deleted flkes from home build ([ef60b41](https://github.com/defn/dev/commit/ef60b413b3bde43f8be5ca7b26c727ea29c3757d))
+* remove flakes: buf, cilium, earthly, flyctl, k3sup openfga, teraformdocs, tfo ([5ad9f19](https://github.com/defn/dev/commit/5ad9f19d4d1ea0d2e6b677ac273f8d3c18f4f2c2))
+* source profile to use tools during install ([768e575](https://github.com/defn/dev/commit/768e5750c319ce473010f562557ff9c29c1d5324))
+* use a script to get the github token ([0170f6c](https://github.com/defn/dev/commit/0170f6c0227088e26757eece92fbff0193b21c91))
+
 ## [1.4.0](https://github.com/defn/dev/compare/v1.3.0...v1.4.0) (2025-01-28)
 
 
