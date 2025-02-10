@@ -5,6 +5,6 @@
 set -efu -o pipefail
 
 cd "${MISE_ORIGINAL_CWD}"
-pnpm wrangler deploy -c wrangler-rpc.toml
-pnpm wrangler deploy -c wrangler-do.toml
-pnpm wrangler deploy -c wrangler.toml
+npm wrangler deploy -c wrangler-rpc.toml
+npm wrangler deploy -c wrangler-do.toml
+npm wrangler deploy -c wrangler.toml

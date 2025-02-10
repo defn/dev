@@ -5,4 +5,4 @@
 set -efu -o pipefail
 
 cd "${MISE_ORIGINAL_CWD}"
-pnpm run astro build "$@"
+npm run astro build "$@"

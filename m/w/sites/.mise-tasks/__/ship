@@ -6,7 +6,7 @@ set -efu -o pipefail
 
 cd "${MISE_ORIGINAL_CWD}"
 
-pnpm wrangler pages deploy --commit-dirty
+npm wrangler pages deploy --commit-dirty
 
 function gh {
 	pushd ghpages
