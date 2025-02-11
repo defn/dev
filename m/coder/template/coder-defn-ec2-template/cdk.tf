@@ -272,8 +272,19 @@ data "aws_ami" "ubuntu" {
 }
 
 resource "aws_iam_role" "dev" {
-  assume_role_policy = jsonencode({ "Statement" = [{ "Action" = "sts:AssumeRole", "Effect" = "Allow", "Principal" = { "Service" = "ec2.amazonaws.com" }, "Sid" = "" }], "Version" = "2012-10-17" })
-  name               = "coder-${data.coder_workspace_owner.me.name}-${data.coder_workspace.me.name}"
+  assume_role_policy = jsonencode({ 
+    "Statement" = [{ 
+      "Action" = "sts:AssumeRole", 
+      "Effect" = "Allow", 
+      "Principal" = { 
+        "Service" = "ec2.amazonaws.com" 
+      }, 
+      "Sid" = "" 
+    }], 
+    "Version" = "2012-10-17" 
+  })
+
+  name = "coder-${data.coder_workspace_owner.me.name}-${data.coder_workspace.me.name}"
 }
 
 resource "aws_iam_role_policy_attachment" "admin" {
@@ -436,14 +447,16 @@ nohup sudo -H -u ${data.coder_parameter.username.value} env \
 
 zpool create defn "/dev/$zfs_disk"
 
-for z in nix work; do
-  zfs create defn/$z
+for z in nix work docker; do
+  if [[ "$z" == "docker" ]]; then
+    zfs create -s -V 100G defn/docker
+  else
+    zfs create defn/$z
+  fi
   zfs set atime=off defn/$z
   zfs set compression=off defn/$z
   zfs set dedup=on defn/$z
 done
-
-zfs create -s -V 100G defn/docker
 
 zfs set mountpoint=/nix defn/nix
 zfs set mountpoint=/home/ubuntu/work defn/work
