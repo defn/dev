@@ -49,7 +49,7 @@ todo:
 	@(bazel cquery //... --output=files | grep -v ^bazel-; git ls-files .) | sort | uniq -c | grep '^ *1 ' | awk '{print $$2}'
 
 ci: 
-	$(MAKE) ci_inner AGENT=${AGENT}
+	env -u GIT_ASKPASS -u GIT_SSH_COMMAND $(MAKE) ci_inner AGENT=${AGENT}
 
 ci_inner:
 	mkdir -p ~/work/buildkite-{agent,plugins}${AGENT}
