@@ -41,9 +41,9 @@ linkify-it-py==2.0.3 \
     --hash=sha256:68cda27e162e9215c17d786649d1da0021a451bdc436ef9e0fa0ba5234b9b048 \
     --hash=sha256:6bcbc417b0ac14323382aef5c5192c0075bf8a9d6b41820a2b66371eac6b6d79
     # via markdown-it-py
-marimo==0.11.2 \
-    --hash=sha256:13a9846138a048f8130bda4d7c3a6c21b3816a060e2f9b1cf42a583cc7cdb5f2 \
-    --hash=sha256:3546e50e186e8ef97cbae7466d063452cb8e3fdf027049566cb72e18df7b51e0
+marimo==0.11.1 \
+    --hash=sha256:698de0a2d62419b8ad16fbc6aaf496a1c8e596007cf0d61336157e67d8ea9a98 \
+    --hash=sha256:879de3ba50f2b7d471094d996ba8a740367445e785d045387e43df55ec4a7fea
     # via -r py/lib/requirements.in
 markdown==3.7 \
     --hash=sha256:2ae2471477cfd02dbbf038d5d9bc226d40def84b4fe2986e49b59b6b472bbed2 \

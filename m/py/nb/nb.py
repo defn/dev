@@ -1,3 +1,5 @@
+import subprocess
+
 import marimo
 from marimo._config.settings import GLOBAL_SETTINGS
 from marimo._server.file_router import AppFileRouter
@@ -6,7 +8,6 @@ from marimo._server.start import start
 from marimo._server.tokens import AuthToken
 from marimo._utils.marimo_path import MarimoPath
 
-__generated_with = "0.10.19"
 app = marimo.App()
 
 
@@ -31,6 +32,7 @@ def _():
 
 if __name__ == "__main__":
     GLOBAL_SETTINGS.YES = True
+    GLOBAL_SETTINGS.DEVELOPMENT_MODE = True
     GLOBAL_SETTINGS.QUIET = False
     start(
         file_router=AppFileRouter.from_filename(MarimoPath(__file__)),
@@ -39,14 +41,14 @@ if __name__ == "__main__":
         host="127.0.0.1",
         port=None,
         proxy=None,
-        headless=True,
-        mode=SessionMode.RUN,
+        headless=False,
+        mode=SessionMode.EDIT,
         include_code=True,
         ttl_seconds=None,
         watch=True,
         base_url="",
-        allow_origins=None,
+        allow_origins=["*"],
         auth_token=AuthToken(""),
-        cli_args=None,
-        redirect_console_to_browser=False,
+        cli_args={},
+        redirect_console_to_browser=True,
     )
