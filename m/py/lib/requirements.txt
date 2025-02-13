@@ -41,9 +41,9 @@ linkify-it-py==2.0.3 \
     --hash=sha256:68cda27e162e9215c17d786649d1da0021a451bdc436ef9e0fa0ba5234b9b048 \
     --hash=sha256:6bcbc417b0ac14323382aef5c5192c0075bf8a9d6b41820a2b66371eac6b6d79
     # via markdown-it-py
-marimo==0.11.1 \
-    --hash=sha256:698de0a2d62419b8ad16fbc6aaf496a1c8e596007cf0d61336157e67d8ea9a98 \
-    --hash=sha256:879de3ba50f2b7d471094d996ba8a740367445e785d045387e43df55ec4a7fea
+marimo==0.11.2 \
+    --hash=sha256:13a9846138a048f8130bda4d7c3a6c21b3816a060e2f9b1cf42a583cc7cdb5f2 \
+    --hash=sha256:3546e50e186e8ef97cbae7466d063452cb8e3fdf027049566cb72e18df7b51e0
     # via -r py/lib/requirements.in
 markdown==3.7 \
     --hash=sha256:2ae2471477cfd02dbbf038d5d9bc226d40def84b4fe2986e49b59b6b472bbed2 \
@@ -163,9 +163,9 @@ pycrdt==0.11.1 \
     --hash=sha256:fdb6b0d6620caf1be0b6a829a9eae6ffeec1d9e7d9ec4bcc4c3b3f21922d43c5 \
     --hash=sha256:ff9a28d0097775b1c74475e857bd16be8d6a099c251f60173bba2bb89e6e127a
     # via marimo
-pygments==2.18.0 \
-    --hash=sha256:786ff802f32e91311bff3889f6e9a86e81505fe99f2735bb6d60ae0c5004f199 \
-    --hash=sha256:b8e6aca0523f3ab76fee51799c488e38782ac06eafcf95e7ba832985c8e7b13a
+pygments==2.19.1 \
+    --hash=sha256:61c16d2a8576dc0649d9f39e089b5f02bcd27fba10d8fb4dcc28173f7a45151f \
+    --hash=sha256:9ea1544ad55cecf4b8242fab6dd35a93bbce657034b0611ee383099054ab6d8c
     # via
     #   marimo
     #   rich
@@ -262,9 +262,9 @@ starlette==0.45.3 \
     --hash=sha256:2cbcba2a75806f8a41c722141486f37c28e30a0921c5f6fe4346cb0dcee1302f \
     --hash=sha256:dfb6d332576f136ec740296c7e8bb8c8a7125044e7c6da30744718880cdd059d
     # via marimo
-textual==0.89.1 \
-    --hash=sha256:0a5d214df6e951b4a2c421e13d0b608482882471c1e34ea74a3631adede8054f \
-    --hash=sha256:66befe80e2bca5a8c876cd8ceeaf01752267b6b1dc1d0f73071f1f1e15d90cc8
+textual==1.0.0 \
+    --hash=sha256:2d4a701781c05104925e463ae370c630567c70c2880e92ab838052e3e23c986f \
+    --hash=sha256:bec9fe63547c1c552569d1b75d309038b7d456c03f86dfa3706ddb099b151399
     # via -r py/lib/requirements.in
 tomlkit==0.13.2 \
     --hash=sha256:7a974427f6e119197f670fbbbeae7bef749a6c14e793db934baefc1b5f03efde \
