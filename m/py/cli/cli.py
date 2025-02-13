@@ -1,10 +1,9 @@
 from datetime import datetime
 
-from py.goodbye.goodbye import goodbye
-from py.hello.hello import hello
+from py.goodbye.goodbye import bye
+from py.hello.lib import hi
 from textual.app import App, ComposeResult
 from textual.widgets import Digits
-
 
 class ClockApp(App):
     CSS = """
@@ -27,3 +26,6 @@ class ClockApp(App):
 if __name__ == "__main__":
     app = ClockApp()
     app.run()
+    print(hi("defn"))
+    print(bye("defn"))
+
