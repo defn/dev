@@ -250,6 +250,8 @@ deps.edn
 !.config/mise/tasks
 !.config/mise/tasks/*
 .pnpm-store
+.marimo
+__pycache__
 
 m
 work

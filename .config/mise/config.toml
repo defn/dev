@@ -3,22 +3,22 @@ experimental = true
 
 [tools]
 "aqua:nushell/nushell" = "0.102.0"
-aws = "2.24.0"
+aws = "2.24.3"
 bazelisk = "1.25.0"
 chamber = "3.1.1"
 coder = "2.19.0"
 cue = "0.12.0"
 dyff = "1.9.4"
-gh = "2.66.1"
+gh = "2.67.0"
 gum = "0.15.2"
-helm = "3.17.0"
+helm = "3.17.1"
 just = "1.39.0"
-k3d = "5.8.1"
+k3d = "5.8.2"
 k9s = "0.32.7"
 kubectl = "1.32.1"
 kustomize = "5.6.0"
 python = "latest"
 step = "0.28.2"
 stern = "1.32.0"
-"ubi:buildkite/agent" = { version = "3.91.0", exe = "buildkite-agent" }
+"ubi:buildkite/agent" = { version = "3.92.0", exe = "buildkite-agent" }
 "ubi:peak/s5cmd" = "2.3.0"

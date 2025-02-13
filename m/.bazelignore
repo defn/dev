@@ -10,7 +10,6 @@ demo/.direnv
 ./demo/node_modules
 ./node_modules
 ./w/sites/amanibhav.am/node_modules
-./w/sites/nghiem.io/node_modules
 demo/nix/.direnv
 infra/.direnv
 nix/.direnv
