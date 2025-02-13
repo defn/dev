@@ -6,5 +6,6 @@ py_binary(
     visibility = ["//visibility:public"],
     deps = [
         "@lib//marimo",
+        "@lib//watchdog",
     ],
 )
