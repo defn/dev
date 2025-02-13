@@ -1,0 +1,9 @@
+run +args="Nobody":
+    @b pass run :nb -- {{ args }}
+
+update:
+    b pass run :nb.venv
+    source .py+nb+nb.venv/bin/activate && python nb.py
+
+watch:
+    @b watch
