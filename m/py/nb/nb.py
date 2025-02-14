@@ -1,3 +1,4 @@
+import os
 import marimo
 from marimo._config.settings import GLOBAL_SETTINGS
 from marimo._server.file_router import AppFileRouter
@@ -30,6 +31,9 @@ def _():
 
 
 if __name__ == "__main__":
+    print("Current directory:", os.getcwd())
+    os.chdir("/home/ubuntu/m/py/nb")
+
     GLOBAL_SETTINGS.YES = True
     GLOBAL_SETTINGS.DEVELOPMENT_MODE = True
     GLOBAL_SETTINGS.QUIET = False
@@ -41,12 +45,12 @@ if __name__ == "__main__":
         port=None,
         proxy=None,
         headless=False,
-        mode=SessionMode.EDIT,
+        mode=SessionMode.RUN,
         include_code=True,
         ttl_seconds=None,
-        watch=True,
+        watch=False,
         base_url="",
-        allow_origins=None,
+        allow_origins=["*"],
         auth_token=AuthToken(""),
         cli_args={},
         redirect_console_to_browser=False,
