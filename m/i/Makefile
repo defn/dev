@@ -29,10 +29,11 @@ base:
 	docker build -t 169.254.32.1:5000/defn/dev:base --build-arg GITHUB_TOKEN="$(shell just github::token)" . 
 	docker push 169.254.32.1:5000/defn/dev:base
 
-base-nc:
+reset:
 	cd ../ && just base
 	docker build --no-cache -t 169.254.32.1:5000/defn/dev:base --build-arg GITHUB_TOKEN="$(shell just github::token)" . 
 	docker push 169.254.32.1:5000/defn/dev:base
+	$(MAKE) latest
 
 rebase:
 	docker build --no-cache -t 169.254.32.1:5000/defn/dev:rebase -f Dockerfile.latest --build-arg GITHUB_TOKEN="$(shell just github::token)" .
