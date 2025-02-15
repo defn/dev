@@ -14,27 +14,17 @@ function main {
 
 	export DEBIAN_FRONTEND=noninteractive
 
-	apt update
-	apt install -y tzdata locales sudo
-	apt install -y git direnv make rsync bc pipx pigz
-	apt install -y socat pcscd scdaemon gpg gpg-agent wireguard-tools qemu-system libvirt-clients libvirt-daemon-system openvpn easy-rsa expect tpm2-tools
-	apt install -y curl xz-utils git-lfs pv
-	apt install -y zfsutils-linux ubuntu-drivers-common
-	apt install -y build-essential
-	apt install -y docker.io
+	apt update && apt install -y \
+		make direnv curl xz-utils dirmngr gpg pcscd scdaemon gpg-agent rsync build-essential sudo ca-certificates tzdata locales git git-lfs tini iproute2 iptables bc pv socat docker.io
 
-	curl -sSL -O https://github.com/peak/s5cmd/releases/download/v2.3.0/s5cmd_2.3.0_linux_amd64.deb
-	dpkg -i s5cmd_2.3.0_linux_amd64.deb
-	rm -f s5cmd_2.3.0_linux_amd64.deb
+	apt update && apt install -y \
+		wireguard-tools qemu-system libvirt-clients libvirt-daemon-system openvpn easy-rsa expect tpm2-tools zfsutils-linux ubuntu-drivers-common
 
-	export LANG=en_US.UTF-8
-	export LANGUAGE=en_US:en
-	export LC_ALL=en_US.UTF-8
+	locale-gen C.UTF-8 && update-locale LANG=C.UTF-8
+	export LANG=C.UTF-8
 
 	ln -sf /usr/share/zoneinfo/UTC /etc/localtime
 	dpkg-reconfigure -f noninteractive tzdata
-	locale-gen en_US.UTF-8
-	localedef -i en_US -c -f UTF-8 -A /usr/share/locale/locale.alias en_US.UTF-8
 
 	tee /etc/apt/apt.conf.d/local <<EOF
 DPkg::Lock::Timeout "-1";

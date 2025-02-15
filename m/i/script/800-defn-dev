@@ -13,6 +13,12 @@ function main {
 		mv dev/.git .
 		rm -rf dev
 		git reset --hard
+
+		source .bash_profile
+		make nix sync
+
+		cd m
+		b clean
 	fi
 }
 

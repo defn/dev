@@ -4,8 +4,8 @@ ARG GITHUB_TOKEN
 
 ENV DEBIAN_FRONTEND=noninteractive
 
-# sync with install.sh
-RUN export DEBIAN_FRONTEND=noninteractive && apt update && apt install -y \
+# sync with install.sh, m/i/scripts/001-install-base
+RUN apt update && apt install -y \
     make direnv curl xz-utils dirmngr gpg pcscd scdaemon gpg-agent rsync build-essential sudo ca-certificates tzdata locales git git-lfs tini iproute2 iptables bc pv socat docker.io
 
 RUN locale-gen C.UTF-8 && update-locale LANG=C.UTF-8

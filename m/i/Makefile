@@ -22,7 +22,7 @@ coder:
 	mise trust
 	mise install
 	mise exec -- packer init $@.pkr.hcl
-	mise exec -- packer build -color=true -timestamp-ui=true $@.pkr.hcl
+	env AWS_PROFILE=defn-org mise exec -- packer build -color=true -timestamp-ui=true $@.pkr.hcl
 
 # docker
 base:
@@ -34,6 +34,8 @@ reset:
 	docker build --no-cache -t 169.254.32.1:5000/defn/dev:base --build-arg GITHUB_TOKEN="$(shell just github::token)" . 
 	docker push 169.254.32.1:5000/defn/dev:base
 	$(MAKE) latest
+	docker tag 169.254.32.1:5000/defn/dev:latest quay.io/defn/dev:latest
+	docker push quay.io/defn/dev:latest
 
 rebase:
 	docker build --no-cache -t 169.254.32.1:5000/defn/dev:rebase -f Dockerfile.latest --build-arg GITHUB_TOKEN="$(shell just github::token)" .
