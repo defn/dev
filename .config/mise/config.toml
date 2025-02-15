@@ -3,3 +3,4 @@ experimental = true
 
 [tools]
 bazelisk = "1.25.0"
+coder = "2.19.0"
