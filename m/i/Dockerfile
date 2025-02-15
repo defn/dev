@@ -9,7 +9,7 @@ RUN sudo apt update \
 	&& sudo apt install -y zfsutils-linux ubuntu-drivers-common \
 	&& sudo apt install -y docker.io 
 	
-RUN usermod -aG docker ubuntu
+RUN sudo usermod -aG docker ubuntu
 
 RUN git reset --hard && git pull
 
