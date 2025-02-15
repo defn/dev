@@ -1,30 +1,17 @@
-FROM ubuntu:24.04
+FROM quay.io/defn/dev:base
 
 ARG GITHUB_TOKEN
 
-ENV DEBIAN_FRONTEND=noninteractive
-
-RUN apt update \
-    && apt install -y ca-certificates \
-	&& apt install -y tzdata locales sudo \
-	&& apt install -y git direnv make rsync bc pipx pigz \
-	&& apt install -y socat pcscd scdaemon gpg gpg-agent wireguard-tools qemu-system libvirt-clients libvirt-daemon-system openvpn easy-rsa expect tpm2-tools \
-	&& apt install -y curl xz-utils git-lfs pv \
-	&& apt install -y zfsutils-linux ubuntu-drivers-common \
-	&& apt install -y build-essential \
-	&& apt install -y docker.io 
+RUN sudo apt update \
+	&& sudo apt install -y pipx pigz \
+	&& sudo apt install -y pcscd scdaemon gpg-agent wireguard-tools qemu-system libvirt-clients libvirt-daemon-system openvpn easy-rsa expect tpm2-tools \
+	&& sudo apt install -y git-lfs \
+	&& sudo apt install -y zfsutils-linux ubuntu-drivers-common \
+	&& sudo apt install -y docker.io 
 	
 RUN usermod -aG docker ubuntu
 
-RUN echo "ubuntu ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers.d/ubuntu
-
 RUN rm -rf /home/ubuntu && install -d -o ubuntu -g ubuntu -m 0755 /home/ubuntu
-
-USER ubuntu
-ENV USER=ubuntu
-ENV HOME=/home/ubuntu
-ENV LANG=C
-WORKDIR /home/ubuntu
 
 RUN git clone https://github.com/defn/dev /home/ubuntu
 RUN git pull
