@@ -3,4 +3,3 @@ experimental = true
 
 [tools]
 bazelisk = "1.25.0"
-cue = "0.12.0"
