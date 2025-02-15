@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+function main {
+	set -efu
+
+	if [[ $# == 0 ]]; then
+		n stores | n cache local
+	else
+		n stores | n cache remote "$@"
+	fi
+}
+
+# shellcheck disable=SC1091
+source sub "$0" "$@"

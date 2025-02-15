@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+function main {
+	set -efu
+
+	terraform apply .plan
+	rm -f .plan
+}
+
+# shellcheck disable=SC1091
+source sub "$0" "$@"

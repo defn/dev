@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+function options {
+	DEFINE_string name 'world' "somebody's name" n
+}
+
+function main {
+	set -efu
+
+	echo "v0.0.1"
+	echo "example: ${FLAGS_name-}: $@"
+}
+
+# shellcheck disable=SC1091
+source sub "$0" "$@"

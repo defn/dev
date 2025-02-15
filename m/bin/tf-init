@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+function main {
+	set -efu
+
+	exec terraform init "$@"
+}
+
+# shellcheck disable=SC1091
+source sub "$0" "$@"

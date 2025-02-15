@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+
+function main {
+	set -efu
+
+	local version="$1"
+	shift
+	local url="$1"
+	shift
+
+	local slug
+	slug="$(basename "$(pwd || true)")"
+
+	local ghrepo
+	ghrepo="$(echo "${url}" | cut -d/ -f4-5)"
+
+	(jq -n --arg ghrepo "${ghrepo}" --arg slug "${slug}" '{slug: "pkg-\($slug)", ghrepo: "\($ghrepo)", vendor: "0.0.0", revision: "1"}' || true) | tee flake.json
+
+	n bump "${version}"
+
+	url="$(echo "${url}" | perl -pe 's{linux|macos|darwin}{\${input.os}}ig')"
+	url="$(echo "${url}" | perl -pe 's{arm64|amd64|x86_64|aarch64}{\${input.arch}}ig')"
+	url="$(echo "${url}" | perl -pe 's{\d+\.\d+\.\d+}{\${input.vendor}}ig')"
+
+	sed "s#url_template = input:.*#url_template = input: \"${url}\";#" -i flake.nix
+
+	n reset
+	n sha
+}
+
+# shellcheck disable=SC1091
+source sub "$0" "$@"

@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+function main {
+	set -efu
+
+	cat | xargs -n 500 | while read -r a; do
+		echo "${a}" | nix copy --verbose --to 'file:///home/ubuntu/work/nix-cache?compression-level=0&parallel-compression=true'
+	done
+}
+
+# shellcheck disable=SC1091
+source sub "$0" "$@"

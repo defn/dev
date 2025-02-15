@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+function main {
+	set -efu
+
+	git log --decorate . | grep 'tag: ' | grep ^commit | grep ')$' | head -1 | perl -pe 's{^.*?tag:\s+([^,)]+)[,)].*$}{\1}'
+}
+
+# shellcheck disable=SC1091
+source sub "$0" "$@"

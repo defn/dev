@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+function main {
+	set -efu
+
+	tf fmt
+	tf init
+	tf validate
+}
+
+# shellcheck disable=SC1091
+source sub "$0" "$@"
