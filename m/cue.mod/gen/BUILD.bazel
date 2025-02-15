@@ -31,11 +31,10 @@ genrule(
         "k8s_go_mod",
     ],
     outs = ["cue.mod/gen.tgz"],
-    cmd = "$(location make_k8s_cue_script) config=$(location config) jq=$(location //pkg/az:flake_jq) cue=$(location //pkg/cue:flake_cue) $@",
+    cmd = "$(location make_k8s_cue_script) config=$(location config) cue=$(location //pkg/cue:flake_cue) $@",
     tools = [
         "make_k8s_cue_script",
         "//b/lib:lib_sh",
-        "//pkg/az:flake_jq",
         "//pkg/cue:flake_cue",
     ],
 )
@@ -57,10 +56,9 @@ genrule(
     name = "meh_main",
     srcs = [
         "config",
-        "//pkg/az:flake_jq",
         "//b/lib:lib_sh",
     ],
     outs = ["meh.txt"],
-    cmd = "$(location meh_sh) config=$(location config) jq=$(location //pkg/az:flake_jq) $@",
+    cmd = "$(location meh_sh) config=$(location config) $@",
     tools = ["meh_sh"],
 )

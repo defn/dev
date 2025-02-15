@@ -2,7 +2,6 @@
 
 function main {
 	local config="${shome}/${in[config]}"
-	local jq="${shome}/${in[jq]}"
 	local cue="${shome}/${in[cue]}"
 	local out="${shome}/${out}"
 
@@ -14,7 +13,7 @@ function main {
 
 	export GOMODCACHE="${HOME}/.cache/go-mod"
 
-	for pkg in $("${jq}" -r '.k8s.apis[]' "${config}"); do
+	for pkg in $(jq -r '.k8s.apis[]' "${config}"); do
 		"go" get "${pkg}"
 		"${cue}" get go "${pkg}"
 	done
