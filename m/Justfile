@@ -23,3 +23,6 @@ use *name:
 # Do nothing for Joyride
 up:
 	@true
+
+base:
+	docker build -t quay.io/defn/dev:base --build-arg GITHUB_TOKEN="$(just github::token)" . && docker push quay.io/defn/dev:base 
