@@ -26,7 +26,7 @@ RUN git clone https://github.com/defn/dev dev && \
     mv dev/.git . && \
     git reset --hard && \
     rm -rf dev
-RUN	bash -c "source .bash_profile && make nix sync"
+RUN	bash -c "source .bash_profile && make nix && (make sync || make sync)"
 
 ENTRYPOINT [ "/bin/tini", "bash", "--", "-c" ]
 CMD [ "git reset --hard && git pull && exec sleep infinity" ]
