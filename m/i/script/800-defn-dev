@@ -14,7 +14,9 @@ function main {
 		rm -rf dev
 		git reset --hard
 
+		set +x
 		source .bash_profile
+		set -x
 		make nix sync install
 
 		cd m
