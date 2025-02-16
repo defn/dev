@@ -11,7 +11,6 @@ variable "scripts" {
   type = list(string)
   default = [
     "script/001-install-base",
-    "script/800-defn-dev",
   ]
 }
 
