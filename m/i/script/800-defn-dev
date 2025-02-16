@@ -15,7 +15,7 @@ function main {
 		git reset --hard
 
 		source .bash_profile
-		make nix sync
+		make nix sync install
 
 		cd m
 		b clean

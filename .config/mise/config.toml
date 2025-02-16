@@ -5,6 +5,5 @@ experimental = true
 aws = "2.24.5"
 bazelisk = "1.25.0"
 coder = "2.19.0"
-gcloud = "510.0.0"
 python = "3.13.2"
 "ubi:peak/s5cmd" = "2.3.0"
