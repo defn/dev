@@ -68,6 +68,6 @@ nohup sudo -H -u ${coder_username} env \
   CODER_INIT_SCRIPT_BASE64="${CODER_INIT_SCRIPT_BASE64}" \
   CODER_AGENT_URL="${CODER_AGENT_URL}" \
   CODER_NAME="${CODER_NAME}" \
-    bash -c 'cd && git reset --hard && git pull && source .bash_profile && ./install.sh && bin/persist-cache && cd m && exec just coder::coder-agent' >>/tmp/user-data.log 2>&1 &
+    bash -c 'cd && git reset --hard && git pull && source .bash_profile && ./install.sh && cd m && exec mise exec -- just coder::coder-agent' >>/tmp/user-data.log 2>&1 &
     # (s5cmd cat s3://dfn-defn-global-defn-org/zfs/nix.tar.gz | tar xfz -) && (cd m/cache/docker && make init)
 disown
