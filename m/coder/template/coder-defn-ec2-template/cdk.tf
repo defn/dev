@@ -139,7 +139,7 @@ data "coder_parameter" "username" {
 }
 
 data "coder_parameter" "nix_volume_size" {
-  default      = "25"
+  default      = "20"
   description  = "The size of the nix volume to create for the workspace in GB"
   display_name = "nix volume size"
   icon         = "https://raw.githubusercontent.com/matifali/logos/main/database.svg"
@@ -148,7 +148,7 @@ data "coder_parameter" "nix_volume_size" {
   type         = "number"
   validation {
     max = 300
-    min = 25
+    min = 20
   }
 }
 
@@ -442,9 +442,6 @@ fi
 systemctl stop docker.socket || true
 systemctl stop docker || true
 
-nohup sudo -H -u ${data.coder_parameter.username.value} env \
-    bash -c 'cd && git fetch origin && git reset --hard origin/main && sudo chown -R ubuntu:ubuntu m/cache/docker/certs'
-
 zpool create defn "/dev/$zfs_disk"
 
 for z in nix work docker; do
@@ -459,13 +456,13 @@ for z in nix work docker; do
 done
 
 zfs set mountpoint=/nix defn/nix
-zfs set mountpoint=/home/ubuntu/work defn/work
+zfs set mountpoint=/home/ubuntu defn/work
 mkfs.ext4 /dev/zvol/defn/docker
 
-s5cmd cat s3://dfn-defn-global-defn-org/zfs/nix.zfs | zfs receive -F defn/nix &
-s5cmd cat s3://dfn-defn-global-defn-org/zfs/work.zfs | zfs receive -F defn/work &
-s5cmd cat s3://dfn-defn-global-defn-org/zfs/docker.zfs | zfs receive -F defn/docker &
-wait
+#s5cmd cat s3://dfn-defn-global-defn-org/zfs/nix.zfs | zfs receive -F defn/nix &
+#s5cmd cat s3://dfn-defn-global-defn-org/zfs/work.zfs | zfs receive -F defn/work &
+#s5cmd cat s3://dfn-defn-global-defn-org/zfs/docker.zfs | zfs receive -F defn/docker &
+#wait
 
 mount /dev/zvol/defn/docker /var/lib/docker
 
@@ -476,12 +473,12 @@ install -d -m 0755 -o ubuntu -g ubuntu /run/user/1000 /run/user/1000/gnupg
 install -d -m 0755 -o ubuntu -g ubuntu /nix /nix
 install -d -m 1777 -o ubuntu -g ubuntu /tmp/uscreens
 
-nohup sudo -H -u ${data.coder_parameter.username.value} env \
-  CODER_INIT_SCRIPT_BASE64=${base64encode(coder_agent.main.init_script)} \
-  CODER_AGENT_URL="${data.coder_workspace.me.access_url}" \
-  CODER_NAME="coder-${data.coder_workspace_owner.me.name}-${data.coder_workspace.me.name}" \
-    bash -c 'cd && git pull && source .bash_profile && bin/persist-cache && (s5cmd cat s3://dfn-defn-global-defn-org/zfs/nix.tar.gz | tar xfz -) && (cd m/cache/docker && make init) && cd m && exec just coder::coder-agent' >>/tmp/user-data.log 2>&1 &
-disown
+#nohup sudo -H -u ${data.coder_parameter.username.value} env \
+#  CODER_INIT_SCRIPT_BASE64=${base64encode(coder_agent.main.init_script)} \
+#  CODER_AGENT_URL="${data.coder_workspace.me.access_url}" \
+#  CODER_NAME="coder-${data.coder_workspace_owner.me.name}-${data.coder_workspace.me.name}" \
+#    bash -c 'cd && git pull && source .bash_profile && bin/persist-cache && (s5cmd cat s3://dfn-defn-global-defn-org/zfs/nix.tar.gz | tar xfz -) && (cd m/cache/docker && make init) && cd m && exec just coder::coder-agent' >>/tmp/user-data.log 2>&1 &
+#disown
 
 --//--
 
