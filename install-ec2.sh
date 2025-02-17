@@ -42,10 +42,17 @@ zfs set mountpoint=/nix defn/nix
 zfs set mountpoint=/home/ubuntu defn/work
 mkfs.ext4 /dev/zvol/defn/docker
 
-#s5cmd cat s3://dfn-defn-global-defn-org/zfs/nix.zfs | zfs receive -F defn/nix &
-#s5cmd cat s3://dfn-defn-global-defn-org/zfs/work.zfs | zfs receive -F defn/work &
-#s5cmd cat s3://dfn-defn-global-defn-org/zfs/docker.zfs | zfs receive -F defn/docker &
+if [[ ! -x ~/.local/bin/mise ]]; then curl -sSL https://mise.run | bash; fi
+~/.local/bin/mise use ubi:peak/s5cmd
+
+~/.local/bin/mise exec -- s5cmd cat s3://dfn-defn-global-defn-org/zfs/work.zfs | zfs receive -F defn/work &
+~/.local/bin/mise exec -- s5cmd cat s3://dfn-defn-global-defn-org/zfs/docker.zfs | zfs receive -F defn/docker &
+~/.local/bin/mise exec -- s5cmd cat s3://dfn-defn-global-defn-org/zfs/nix.zfs | zfs receive -F defn/nix &
 wait
+~/.local/bin/mise exec -- s5cmd cat s3://dfn-defn-global-defn-org/zfs/nix.tar.gz | (cd ~ubuntu && tar xvfz -)
+
+# for a in nix work docker; do sudo zfs send defn/$a@latest | pv | s5cmd pipe s3://dfn-defn-global-defn-org/zfs/$a.zfs; done
+# tar cvfz - .nix* .local/state/nix | s5cmd pipe s3://dfn-defn-global-defn-org/zfs/nix.tar.gz 
 
 mount /dev/zvol/defn/docker /var/lib/docker
 
