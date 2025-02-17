@@ -30,13 +30,13 @@ source "amazon-ebs" "this" {
   ssh_username                = "ubuntu"
 
   spot_price    = "auto"
-  instance_type = "m6id.large"
+  instance_type = "r6id.large"
   region        = "us-west-2"
 
   launch_block_device_mappings {
     encrypted             = true
     device_name           = "/dev/sda1"
-    volume_size           = 20
+    volume_size           = 10
     volume_type           = "gp3"
     delete_on_termination = true
   }

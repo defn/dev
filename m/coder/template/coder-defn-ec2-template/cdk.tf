@@ -139,7 +139,7 @@ data "coder_parameter" "username" {
 }
 
 data "coder_parameter" "nix_volume_size" {
-  default      = "20"
+  default      = "10"
   description  = "The size of the nix volume to create for the workspace in GB"
   display_name = "nix volume size"
   icon         = "https://raw.githubusercontent.com/matifali/logos/main/database.svg"
@@ -148,7 +148,7 @@ data "coder_parameter" "nix_volume_size" {
   type         = "number"
   validation {
     max = 300
-    min = 20
+    min = 10
   }
 }
 
