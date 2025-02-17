@@ -42,6 +42,8 @@ zfs set mountpoint=/nix defn/nix
 zfs set mountpoint=/home/ubuntu defn/work
 mkfs.ext4 /dev/zvol/defn/docker
 
+pushd ~
+touch mise.toml
 if [[ ! -x ~/.local/bin/mise ]]; then curl -sSL https://mise.run | bash; fi
 ~/.local/bin/mise use ubi:peak/s5cmd
 
@@ -52,6 +54,7 @@ if [[ ! -x ~/.local/bin/mise ]]; then curl -sSL https://mise.run | bash; fi
   ~/.local/bin/mise exec -- s5cmd cat s3://dfn-defn-global-defn-org/zfs/nix.tar.gz | pv | (cd ~ubuntu && tar xvfz -)
 ) &
 wait
+popd
 
 # for a in nix work docker; do sudo zfs send defn/$a@latest | pv | s5cmd pipe s3://dfn-defn-global-defn-org/zfs/$a.zfs; done
 # tar cvfz - .nix* .local/state/nix | pv | s5cmd pipe s3://dfn-defn-global-defn-org/zfs/nix.tar.gz 
@@ -77,6 +80,6 @@ nohup sudo -H -u ${coder_username} env \
   CODER_INIT_SCRIPT_BASE64="${CODER_INIT_SCRIPT_BASE64}" \
   CODER_AGENT_URL="${CODER_AGENT_URL}" \
   CODER_NAME="${CODER_NAME}" \
-    bash -c 'cd && git reset --hard && git pull && source .bash_profile && ./install.sh && cd m && exec mise exec -- just coder::coder-agent' >>/tmp/user-data.log 2>&1 &
+    bash -c 'cd && git reset --hard && git pull && source .bash_profile && set -x && ./install.sh && cd m && exec mise exec -- just coder::coder-agent' >>/tmp/user-data.log 2>&1 &
     # (s5cmd cat s3://dfn-defn-global-defn-org/zfs/nix.tar.gz | tar xfz -) && (cd m/cache/docker && make init)
 disown
