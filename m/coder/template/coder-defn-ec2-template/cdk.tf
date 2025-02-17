@@ -65,7 +65,7 @@ data "coder_parameter" "spot" {
 }
 
 data "coder_parameter" "instance_type" {
-  default      = "m6id.large"
+  default      = "r6id.large"
   description  = "The number of CPUs to allocate to the workspace"
   display_name = "CPU"
   icon         = "https://raw.githubusercontent.com/matifali/logos/main/cpu-3.svg"
