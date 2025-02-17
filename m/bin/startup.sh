@@ -17,12 +17,12 @@ function main {
 		sudo chown ubuntu:ubuntu ~/.local/share/code-server/extensions
 		sudo chown ubuntu:ubuntu ~/.config/gh
 	else
-		(
-			cd ~/m/cache/docker
-			make init
-		)
-		k3d cluster start k3s-default
-		k3d kubeconfig get k3s-default >~/.kube/config
+		#(
+		#	cd ~/m/cache/docker
+		#	make init
+		#)
+		#k3d cluster start k3s-default
+		#k3d kubeconfig get k3s-default >~/.kube/config
 		(
 			set +x
 			cd m
