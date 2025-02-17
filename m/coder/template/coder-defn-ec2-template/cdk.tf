@@ -462,14 +462,14 @@ mkfs.ext4 /dev/zvol/defn/docker
 #s5cmd cat s3://dfn-defn-global-defn-org/zfs/nix.zfs | zfs receive -F defn/nix &
 #s5cmd cat s3://dfn-defn-global-defn-org/zfs/work.zfs | zfs receive -F defn/work &
 #s5cmd cat s3://dfn-defn-global-defn-org/zfs/docker.zfs | zfs receive -F defn/docker &
-#wait
+wait
 
 mount /dev/zvol/defn/docker /var/lib/docker
 
 systemctl start docker.socket || true
 systemctl start docker || true
 
-install -d -m 0755 -o ubuntu -g ubuntu /run/user/1000 /run/user/1000/gnupg
+install -d -m 0755 -o ubuntu -g ubuntu /home/ubuntu /run/user/1000 /run/user/1000/gnupg
 install -d -m 0755 -o ubuntu -g ubuntu /nix /nix
 install -d -m 1777 -o ubuntu -g ubuntu /tmp/uscreens
 
