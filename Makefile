@@ -233,7 +233,6 @@ install-innermost:
 	git config lfs.https://github.com/defn/dev.git/info/lfs.locksverify false
 	git config diff.lfs.textconv cat
 	t make_dotfiles $(MAKE) dotfiles
-	t make_password_store $(MAKE) password-store
 	t make_gpg $(MAKE) gpg
 
 nix:
