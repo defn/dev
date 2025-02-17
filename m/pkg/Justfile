@@ -30,7 +30,7 @@ list:
 		if grep ghrepo "${a}/flake.json" >/dev/null 2>/dev/null; then
 			(
 				cd "${a}"
-				echo "${a} $(jq -r '.vendor' <flake.json || true) $(../az/bin/n-latest || true)" | while read -r slug current latest real_tag; do
+				echo "${a} $(jq -r '.vendor' <flake.json || true) $(n latest || true)" | while read -r slug current latest real_tag; do
 					echo "${slug} ${current} ${latest} https://github.com/$(jq -r .ghrepo <flake.json || true)/releases/tag/${real_tag}"
 				done
 			)
@@ -57,8 +57,8 @@ update:
 		(
 			mark "${slug}"
 			cd "${slug}"
-			../az/bin/n-bump "${latest}"
-			../az/bin/n-release "${slug} ${current} -> ${latest}"
+			n bump "${latest}"
+			n release "${slug} ${current} -> ${latest}"
 			nix build
 		)
 	done
