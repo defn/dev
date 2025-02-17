@@ -419,66 +419,13 @@ Content-Disposition: attachment; filename="userdata.txt"
 
 set -x
 
-echo 'net.ipv4.ip_forward = 1' | sudo tee -a /etc/sysctl.d/99-dfd.conf
-echo 'net.ipv6.conf.all.forwarding = 1' | sudo tee -a /etc/sysctl.d/99-dfd.conf
-echo 'fs.inotify.max_user_instances = 10000' | sudo tee -a /etc/sysctl.d/99-dfd.conf
-echo 'fs.inotify.max_user_watches = 524288' | sudo tee -a /etc/sysctl.d/99-dfd.conf
-sudo sysctl -p /etc/sysctl.d/99-dfd.conf
+export coder_tsauthkey="${data.coder_parameter.tsauthkey.value}"
+export coder_username="${data.coder_parameter.username.value}"
+export CODER_INIT_SCRIPT_BASE64="${base64encode(coder_agent.main.init_script)}"
+export CODER_AGENT_URL="${data.coder_workspace.me.access_url}"
+export ="coder-${data.coder_workspace_owner.me.name}-${data.coder_workspace.me.name}"
 
-if ! tailscale ip -4 | grep ^100; then
-  sudo tailscale up --accept-dns --accept-routes --authkey="${data.coder_parameter.tsauthkey.value}" --operator=ubuntu --ssh --timeout 60s
-fi
-
-root_disk=
-zfs_disk=
-if [[ "$(lsblk /dev/nvme0n1p1 | tail -1 | awk '{print $NF}')" == "/" ]]; then
-  root_disk=nvme0n1
-  zfs_disk=nvme1n1
-else
-  root_disk=nvme1n1
-  zfs_disk=nvme0n1
-fi
-
-systemctl stop docker.socket || true
-systemctl stop docker || true
-
-zpool create defn "/dev/$zfs_disk"
-
-for z in nix work docker; do
-  if [[ "$z" == "docker" ]]; then
-    zfs create -s -V 100G defn/docker
-  else
-    zfs create defn/$z
-  fi
-  zfs set atime=off defn/$z
-  zfs set compression=off defn/$z
-  zfs set dedup=on defn/$z
-done
-
-zfs set mountpoint=/nix defn/nix
-zfs set mountpoint=/home/ubuntu defn/work
-mkfs.ext4 /dev/zvol/defn/docker
-
-#s5cmd cat s3://dfn-defn-global-defn-org/zfs/nix.zfs | zfs receive -F defn/nix &
-#s5cmd cat s3://dfn-defn-global-defn-org/zfs/work.zfs | zfs receive -F defn/work &
-#s5cmd cat s3://dfn-defn-global-defn-org/zfs/docker.zfs | zfs receive -F defn/docker &
-wait
-
-mount /dev/zvol/defn/docker /var/lib/docker
-
-systemctl start docker.socket || true
-systemctl start docker || true
-
-install -d -m 0755 -o ubuntu -g ubuntu /home/ubuntu /run/user/1000 /run/user/1000/gnupg
-install -d -m 0755 -o ubuntu -g ubuntu /nix /nix
-install -d -m 1777 -o ubuntu -g ubuntu /tmp/uscreens
-
-#nohup sudo -H -u ${data.coder_parameter.username.value} env \
-#  CODER_INIT_SCRIPT_BASE64=${base64encode(coder_agent.main.init_script)} \
-#  CODER_AGENT_URL="${data.coder_workspace.me.access_url}" \
-#  CODER_NAME="coder-${data.coder_workspace_owner.me.name}-${data.coder_workspace.me.name}" \
-#    bash -c 'cd && git pull && source .bash_profile && bin/persist-cache && (s5cmd cat s3://dfn-defn-global-defn-org/zfs/nix.tar.gz | tar xfz -) && (cd m/cache/docker && make init) && cd m && exec just coder::coder-agent' >>/tmp/user-data.log 2>&1 &
-#disown
+curl -sSL https://raw.githubusercontent.com/defn/dev/refs/heads/main/install-ec2.sh | bash -s --
 
 --//--
 
