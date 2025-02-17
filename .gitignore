@@ -252,3 +252,7 @@ deps.edn
 .pnpm-store
 .marimo
 __pycache__
+
+.zshrc
+.zprofile
+.amazon
