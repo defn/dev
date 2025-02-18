@@ -122,6 +122,8 @@ ersgan n="10":
     cat <(find t2 -name '*.png' | cut -d/ -f2 | cut -d. -f1) <(find replicate/img/ -name '*.png' | cut -d/ -f3 | cut -d. -f1) | sort | uniq -c | grep -v ' 2 ' | awk '{print $NF}' | sort | runmany 'touch .something'
     cat <(find replicate/img -name '*.png' | cut -d/ -f3 | cut -d. -f1) <(find replicate/t2 -name '*.png' | cut -d/ -f3 | cut -d. -f1) <(find replicate/t2 -name '*.png' | cut -d/ -f3 | cut -d. -f1) | sort | uniq -c | grep ' 1 ' | awk '{print $NF}' | runmany 'touch .something'
     if [[ -f .something ]]; then just ersgan-inner {{n}}; fi
+    for a in yes replicate/{img,t2}; do echo "$a $(find $a -type f | wc -l)"; done
+    echo "sqlite $(echo 'select count(*) from img' | sqlite3 cv.db)"
 
 ersgan-inner n:
     sudo tailscale serve --https=443 off || true
@@ -140,8 +142,6 @@ ersgan-inner n:
     sudo tailscale serve status
     just db-img
     just db-size
-    for a in yes replicate/{img,t2}; do echo "$a $(find $a -type f | wc -l)"; done
-    echo "sqlite $(echo 'select count(*) from img' | sqlite3 cv.db)"
 
 fm-start:
     sudo tailscale serve --https=443 off || true
