@@ -22,3 +22,10 @@ MODULE.bazel.lock
 .frontmatter
 .app_up
 .app_tutorial
+
+.s6-svscan
+current
+lock
+state
+supervise
+@*.s
