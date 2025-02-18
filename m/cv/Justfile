@@ -116,7 +116,7 @@ reset-inner:
     just eod
     rm -f js-* js.json.* js.json || true
 
-ersgan n="20":
+ersgan n="10":
     just t2 || true
     rm -f .something
     cat <(find t2 -name '*.png' | cut -d/ -f2 | cut -d. -f1) <(find replicate/img/ -name '*.png' | cut -d/ -f3 | cut -d. -f1) | sort | uniq -c | grep -v ' 2 ' | awk '{print $NF}' | sort | runmany 'touch .something'
