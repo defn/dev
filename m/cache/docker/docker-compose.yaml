@@ -1,5 +1,3 @@
-version: "3"
-
 services:
   k3d-registry:
     image: registry:2
