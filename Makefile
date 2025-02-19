@@ -128,6 +128,7 @@ home:
 	cd /tmp/nix-tmp && for a in $(flakes); do (cd $$a && if ! stat -L * 2>/dev/null >/dev/null; then echo $$a; (cd ~/m/pkg/$$a && b build); sudo tar -C / -xf ~/m/$$(cat .bazel-nix-store) || true; fi; rsync -ia . /tmp/nix-bin/. >/dev/null); done
 	rm -f /tmp/nix-bin/.bazel-nix-store /tmp/nix-bin/.nix-flake
 	rm -f /tmp/nix-bin/python*
+	rm -f /tmp/nix-bin/bash
 	mkdir -p bin/nix
 	rsync -ia --delete /tmp/nix-bin/. bin/nix/.
 
