@@ -24,6 +24,7 @@ fi
 
 systemctl stop docker.socket || true
 systemctl stop docker || true
+umount /var/lib/docker || true
 
 zpool create defn "/dev/$zfs_disk"
 
@@ -47,6 +48,7 @@ touch mise.toml
 if [[ ! -x ~/.local/bin/mise ]]; then curl -sSL https://mise.run | bash; fi
 ~/.local/bin/mise use ubi:peak/s5cmd
 
+zfs destroy defn/docker@next || true
 ~/.local/bin/mise exec -- s5cmd cat s3://dfn-defn-global-defn-org/zfs/docker.zfs | pv | zfs receive -F defn/docker 
 ~/.local/bin/mise exec -- s5cmd cat s3://dfn-defn-global-defn-org/zfs/nix.zfs | pv | zfs receive -F defn/nix 
 if ~/.local/bin/mise exec -- s5cmd cat s3://dfn-defn-global-defn-org/zfs/work.zfs | pv | zfs receive -F defn/work; then
@@ -58,7 +60,6 @@ popd
 # tar cvfz - .nix* .local/state/nix | pv | s5cmd pipe s3://dfn-defn-global-defn-org/zfs/nix.tar.gz 
 
 mount /dev/zvol/defn/docker /var/lib/docker
-
 systemctl start docker.socket || true
 systemctl start docker || true
 
