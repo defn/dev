@@ -75,6 +75,6 @@ cache:
 	@cd attic && nix develop --command just cache-inner
 
 cache-inner:
-	@runmany "$(echo "$(nproc)/4" | bc)" 'cd $1 && nix build && n cache result' */
+	@runmany "$(echo "$(nproc)/4" | bc)" 'if test -f $1/flake.nix; then cd $1 && nix build && n cache result; fi' */
 	@b build
 	@cd /nix/store && runmany "$(nproc)" 'attic push hello $1 || true' */
