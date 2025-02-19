@@ -24,6 +24,9 @@ PATH="${HOME}/bin/nix:${HOME}/.nix-profile/bin:${PATH}"
 # os bin
 PATH="${HOME}/bin/$(uname -s):$PATH"
 
+# m bin
+PATH="${HOME}/m/bin:$PATH"
+
 # personal bin
 PATH="${HOME}/bin:$PATH"
 
