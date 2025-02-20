@@ -2,11 +2,11 @@
 experimental = true
 
 [tools]
-aws = "2.24.5"
+aws = "2.24.8"
 bazelisk = "1.25.0"
 coder = "2.19.0"
 cue = "0.12.0"
-gcloud = "510.0.0"
+gcloud = "511.0.0"
 gh = "2.67.0"
 jq = "1.7.1"
 just = "1.39.0"
