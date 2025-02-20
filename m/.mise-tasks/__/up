@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
 
-exec 2>&1
+#MISE description="Example s6 managed service"
+
+cd "${MISE_ORIGINAL_CWD}"
+
 while true; do
     echo "$(date) $(uname -a)"
     sleep 1
