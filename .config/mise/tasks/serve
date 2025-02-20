@@ -4,8 +4,7 @@
 
 cd "${MISE_ORIGINAL_CWD}"
 mkdir -p svc
-s6-svscan $(pwd)/svc 2>/dev/null || true &
+(setsid s6-svscan $(pwd)/svc 2>/dev/null &) || true
 ln -nfs ../svc.d/main svc/
 s6-svscanctl -a svc
-sleep 1
-tail -f svc/*/log/current
+tail -F svc/*/log/current
