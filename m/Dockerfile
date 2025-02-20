@@ -28,5 +28,5 @@ RUN git clone https://github.com/defn/dev dev && \
     rm -rf dev
 RUN	bash -c "source .bash_profile && make nix sync"
 
-ENTRYPOINT [ "/bin/tini", "bash", "--", "-c" ]
-CMD [ "git reset --hard && git pull && exec sleep infinity" ]
+ENTRYPOINT [ "/bin/s6-svscan" ]
+CMD [ "/home/ubuntu/m/svc" ]
