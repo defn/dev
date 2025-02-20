@@ -29,3 +29,4 @@ lock
 state
 supervise
 @*.s
+svc

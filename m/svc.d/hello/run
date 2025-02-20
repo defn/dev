@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+exec 2>&1
+while true; do
+    echo "$(date) $(uname -a)"
+    sleep 1
+done
