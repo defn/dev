@@ -3,7 +3,9 @@
 #MISE description="Run a s6 supervisor"
 
 cd "${MISE_ORIGINAL_CWD}"
+mkdir -p svc
 s6-svscan $(pwd)/svc 2>/dev/null || true &
 ln -nfs ../svc.d/main svc/
 s6-svscanctl -a svc
+sleep 1
 tail -f svc/*/log/current

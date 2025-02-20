@@ -29,4 +29,5 @@ lock
 state
 supervise
 @*.s
+@*.u
 svc
