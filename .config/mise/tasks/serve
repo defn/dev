@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+#MISE description="Run a s6 supervisor"
+
+cd "${MISE_ORIGINAL_CWD}"
+s6-svscan $(pwd)/svc 2>/dev/null || true &
+s6-svscanctl -a svc
+tail -f svc/*/log/current
