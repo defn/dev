@@ -2,7 +2,7 @@
 experimental = true
 
 [tools]
-aws = "2.24.8"
+aws = "2.24.9"
 bazelisk = "1.25.0"
 coder = "2.19.0"
 cue = "0.12.0"

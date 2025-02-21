@@ -383,3 +383,6 @@ sync_inner:
 
 release:
 	cd m/i && $(MAKE) sync
+
+mise-upgrade:
+	@(echo .; git grep [t]ools | grep [m]ise.toml | cut -d: -f1 | perl -pe 's{/mise.toml}{}') | runmany 'cd $$1 && pwd && mise upgrade --bump'
