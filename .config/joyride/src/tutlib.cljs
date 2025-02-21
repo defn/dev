@@ -1,6 +1,8 @@
 (ns tutlib
   (:require ["path" :as path]
             ["vscode" :as vscode]
+            ["child_process" :as child-process]
+            ["util" :as node-util]
             [promesa.core :as p]
             [clojure.string :as s]))
 
@@ -33,3 +35,17 @@
           tutdata (vscode/workspace.fs.readFile tutname)]
     (if (> (.-length tutdata) 0)
       (open-tutorial edit_page lesson_page))))
+
+(def exec!+ (node-util/promisify child-process/exec))
+
+(defn run-s6 []
+  (-> (p/do!
+       (exec!+ "source ~/.bash_profile; setsid mise run serve"
+               #js {:cwd vscode/workspace.rootPath
+                    :shell true}))
+      (p/catch (fn [e]
+                 (js/console.error "Error running s6-svscan:" e)))))
+
+(defn tutorial [edit_page lesson_page]
+  (tutlib.run-s6)
+  (tutlib.load-tutorial edit_page lesson_page))
