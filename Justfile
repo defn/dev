@@ -12,10 +12,16 @@ chromebook-openvpn:
   screen -dmS openvpn make vpn
 
 create-coder-agent:
-	#!/usr/bin/env bash
-
-	cd m
-	just coder::coder-agent "${CODER_NAME}" 2>/dev/null 1>/dev/null &
+  #!/usr/bin/env bash
+  cd ~/m
+  source ~/.bash_profile
+  touch svc.d/coder/down
+  mise run serve
+  s6-svc -k svc/coder || true
+  for a in $(env | grep ^CODER_ | cut -d= -f1); do printf 'export %s=%q\n\n' "$a" "$(echo "${!a}")"; done > svc.d/coder/.env
+  ln -nfs ../svc.d/coder svc/
+  s6-svc -u svc/coder
+  rm -f svc.d/coder/down
 
 create-coder-agent-sync workdir:
 	#!/usr/bin/env bash
@@ -59,13 +65,7 @@ create-code-server-sidecar tutorial="":
 	exec j coder::code-server "${CODER_NAME}"
 
 destroy-coder-agent:
-	#!/usr/bin/env bash
-
-	for p in $(pgrep -f "just.coder::code.serve[r].${CODER_NAME}"'$'); do
-	  ps x -o ppid,pgid | tail -n +2 | sed 's#^  *##g' | grep "^$p " | awk '{print $2}' | while read -r g; do 
-	    kill -9 -$g
-	  done
-	done
+  true
 
 dyff *args:
 	@just github::dyff {{args}}

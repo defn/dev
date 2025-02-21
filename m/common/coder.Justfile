@@ -173,19 +173,23 @@ coder-agent *host:
 		exec coder agent
 	fi
 
-# Run code-server in a loop
+# Run code-server in s6
 [no-cd, private]
 code-server *host:
-	#!/usr/bin/env bash
-
-	export STARSHIP_NO=
-	source ~/.bash_profile
-
-	if [[ -n "${CODER_AGENT_URL_ORIGINAL:-}" ]]; then
-		export VSCODE_PROXY_URI="https://{{{{port}}--main--${CODER_NAME}--${GIT_AUTHOR_NAME}.${CODER_AGENT_URL_ORIGINAL#https://coder.}/"
-	fi
-
-	exec code-server --auth none
+  #!/usr/bin/env bash
+  cd ~/m
+  source ~/.bash_profile
+  set -x
+  exec 2>&1
+  touch svc.d/code-server/down
+  mise run serve
+  s6-svc -k svc/code-server || true
+  for a in $(env | grep ^CODER_ | cut -d= -f1); do printf 'export %s=%q\n\n' "$a" "$(echo "${!a}")"; done > svc.d/code-server/.env
+  for a in $(env | grep ^GIT_ | cut -d= -f1); do printf 'export %s=%q\n\n' "$a" "$(echo "${!a}")"; done >> svc.d/coder-server/.env
+  for a in $(env | grep ^VSCODE__ | cut -d= -f1); do printf 'export %s=%q\n\n' "$a" "$(echo "${!a}")"; done >> svc.d/coder-server/.env
+  ln -nfs ../svc.d/code-server svc/
+  s6-svc -u svc/code-server
+  rm -f svc.d/code-server/down
 
 # update all Coder workspace templates
 [no-cd, private]
