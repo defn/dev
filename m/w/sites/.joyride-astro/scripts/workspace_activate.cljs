@@ -9,11 +9,12 @@
 
 (defn run-s6 []
   (-> (p/do!
-       (exec!+ "s6-svscan"
-               #js {:cwd (str vscode/workspace.rootPath "/svc")
+       (exec!+ "source ~/.bash_profile; setsid mise run serve"
+               #js {:cwd vscode/workspace.rootPath
                     :shell true}))
       (p/catch (fn [e]
                  (js/console.error "Error running s6-svscan:" e)))))
 
-(tutlib.load-tutorial "src/pages/index.astro" "tutorial.html")
 (run-s6)
+(tutlib.load-tutorial "src/pages/index.astro" "tutorial.html")
+
