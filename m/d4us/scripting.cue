@@ -4,6 +4,8 @@ package d4us
 	description: string
 	website:     string
 	project?:    string
+	install:     string
+	demo:        string
 }
 
 scripting: {
@@ -22,6 +24,13 @@ scripting: {
 				    functions and script files.
 				"""
 			website: "https://www.gnu.org/software/bash/"
+			install: """
+				    Ubuntu operating systems usually have bash installed.
+				    Refer to your operation systems for how to install a package.
+
+				    Ubuntu apt package: bash
+				"""
+			demo: "./test.sh"
 		}
 		make: {
 			description: """
@@ -30,6 +39,13 @@ scripting: {
 				    create make targets and Makefiles.
 				"""
 			website: "https://www.gnu.org/software/make/"
+			install: """
+				    Ubuntu operating systems usually don't have make installed.
+				    Refer to your operation systems for how to install a package.
+
+				    Ubuntu apt package: make
+				"""
+			demo: "make test"
 		}
 		just: {
 			description: """
@@ -39,6 +55,10 @@ scripting: {
 				"""
 			website: "https://just.systems/"
 			project: "https://github.com/casey/just"
+			install: """
+				   Install just using mise: `mise use`
+				"""
+			demo: "just test"
 		}
 		mise: {
 			description: """
@@ -49,6 +69,10 @@ scripting: {
 				"""
 			website: "https://mise.jdx.dev/"
 			project: "https://github.com/jdx/mise"
+			install: """
+				   Install mise using these instructions: https://mise.jdx.dev/getting-started.html
+				"""
+			demo: "mise run test"
 		}
 	}
 }

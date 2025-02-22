@@ -1,0 +1,7 @@
+# This is a Justfile
+
+# test is a just target.  Run it with `just test`
+test:
+    # test target runs these commands
+    cue eval
+    cue fmt .
