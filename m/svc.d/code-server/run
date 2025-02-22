@@ -9,8 +9,10 @@ if [[ -f .env ]]; then
 	source .env
 fi
 
-if [[ -n ${CODER_AGENT_URL_ORIGINAL-} ]]; then
+if [[ -n ${CODER_AGENT_URL_ORIGINAL:-} ]]; then
 	export VSCODE_PROXY_URI="https://{{{{port}}--main--${CODER_NAME}--${GIT_AUTHOR_NAME}.${CODER_AGENT_URL_ORIGINAL#https://coder.}/"
+elif [[ -n ${CODER_AGENT_URL:-} ]]; then
+	export VSCODE_PROXY_URI="https://{{{{port}}--main--${CODER_NAME}--${GIT_AUTHOR_NAME}.${CODER_AGENT_URL#https://coder.}/"
 fi
 
 exec code-server --auth none
