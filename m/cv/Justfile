@@ -252,3 +252,6 @@ v-html vid:
 
 v-gen type="html" n="2":
     (cd v/img; ls -d */ | cut -d/ -f1) | runmany {{n}} 'just v-{{type}} $1'
+
+watch:
+    watch -n 10 'ls -ltrhd *.json.js.json | wc -l; echo; ps ax | grep [0-9][0-9].[j]ust.user'
