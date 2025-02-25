@@ -1,0 +1,15 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_binary", "go_library")
+
+go_library(
+    name = "amanibhav_am_lib",
+    srcs = ["main.go"],
+    importpath = "github.com/defn/dev/m/w/sites/amanibhav.am",
+    visibility = ["//visibility:private"],
+    deps = ["@com_github_bitfield_script//:script"],
+)
+
+go_binary(
+    name = "amanibhav.am",
+    embed = [":amanibhav_am_lib"],
+    visibility = ["//visibility:public"],
+)
