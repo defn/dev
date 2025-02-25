@@ -42,7 +42,7 @@ bazel_dep(name = "rules_python", version = "1.1.0")
 # https://registry.bazel.build/modules/aspect_rules_py
 bazel_dep(name = "aspect_rules_py", version = "1.3.1", dev_dependency = True)
 
-# look in work/bazel/_bazel_ubuntu/*/external/rules_python~/python/versions.bzl 
+# look in work/bazel/_bazel_ubuntu/*/external/rules_python~/python/versions.bzl
 python = use_extension("@rules_python//python/extensions:python.bzl", "python")
 python.toolchain(
     configure_coverage_tool = True,
@@ -74,6 +74,7 @@ use_repo(
     go_deps,
     "com_github_aws_constructs_go_constructs_v10",
     "com_github_aws_jsii_runtime_go",
+    "com_github_bitfield_script",
     "com_github_cdktf_cdktf_provider_aws_go_aws_v19",
     "com_github_cdktf_cdktf_provider_null_go_null_v10",
     "com_github_charmbracelet_bubbles",
