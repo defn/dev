@@ -41,12 +41,10 @@ sh_binary(
     name = "aws__cli",
     srcs = ["aws_cli.sh"],
     args = [
-        "$(location //pkg/awscli:flake_aws)",
         "$(location aws_config_cfg)",
     ],
     data = [
         "aws_config_cfg",
-        "//pkg/awscli:flake_aws",
     ],
 )
 

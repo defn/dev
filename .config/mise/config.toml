@@ -2,7 +2,8 @@
 experimental = true
 
 [tools]
-aws = "2.24.11"
+aws = "2.24.13"
+aws-vault = "7.2.0"
 bazelisk = "1.25.0"
 coder = "2.19.0"
 cue = "0.12.0"
