@@ -14,7 +14,7 @@ runtimes:
     - rust@1.82.0
     - python@3.12.2
     - go@1.24.0
-    - node@23.8.0
+    - node@23.9.0
 lint:
   ignore:
     - linters: [ALL]
