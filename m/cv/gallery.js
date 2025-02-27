@@ -275,7 +275,11 @@ document.addEventListener("DOMContentLoaded", () => {
           lazyImageObserver.unobserve(lazyImage);
         }
       });
-    });
+    },
+    {
+    rootMargin: "0px", // No margin, only load when fully inside viewport
+    threshold: 0.25, // 100% of the image must be visible
+  });
 
     lazyloadImages.forEach((lazyImage) => {
       lazyImageObserver.observe(lazyImage);
