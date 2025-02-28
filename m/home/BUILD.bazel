@@ -1,8 +1,4 @@
 flake_names = [
-    "buildifier",
-    "acme",
-    "kubelogin",
-    "codeserver",
     "base",
 ]
 

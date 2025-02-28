@@ -3,7 +3,7 @@ SHELL := /bin/bash
 # https://nixos.org/download
 NIX_VERSION := 2.18.2
 
-flakes ?= buildifier acme kubelogin codeserver base
+flakes ?= base
 home ?= home
 
 name ?= local

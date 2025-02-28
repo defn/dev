@@ -1,3 +1,0 @@
-#!/usr/bin/env bash
-
-acme.sh version
