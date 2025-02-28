@@ -374,12 +374,15 @@ zfs:
 
 sync:
 	git pull
+	direnv allow
+	(cd m && direnv allow)
 	$(MAKE) sync_inner
 
 sync_inner:
 	$(MAKE) nix
 	git ls-files | grep 'mise.toml$$' | runmany 'mise trust $$1'
 	mise install
+	(cd m && mise install)
 
 release:
 	cd m/i && $(MAKE) sync
