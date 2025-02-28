@@ -7,3 +7,5 @@ kustomize = "5.6.0"
 node = "23.9.0"
 "ubi:bazelbuild/buildtools" = { version = "8.0.3", exe = "buildifier" }
 "ubi:int128/kubelogin" = { version = "1.32.2", rename_exe = "kubectl-oidc_login" }
+"ubi:semaphoreci/cli" = { version = "0.31.0", exe = "sem" }
+"ubi:semaphoreci/agent" = { version = "2.3.0" }
