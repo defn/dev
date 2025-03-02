@@ -9,7 +9,7 @@ export _BROWSER="$0"
 
 function main {
 	case "${VSCODE_GIT_ASKPASS_MAIN-}" in
-	*/code-server*)
+	*code-server*)
 		exec "${VSCODE_GIT_ASKPASS_MAIN%%/extensions/*}/bin/helpers/browser.sh" "$@"
 		;;
 	*/.vscode-server/*)
