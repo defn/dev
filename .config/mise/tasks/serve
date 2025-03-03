@@ -4,6 +4,6 @@
 
 cd "${MISE_ORIGINAL_CWD}"
 mkdir -p svc
-(setsid env - HOME=$HOME USER=$USER s6-svscan $(pwd)/svc 2>/dev/null &) || true
 ln -nfs ../svc.d/main svc/
-s6-svscanctl -a svc
+setsid env - HOME=$HOME USER=$USER HOSTNAME=$HOSTNAME s6-svscan $(pwd)/svc &>/dev/null &
+while ! s6-svscanctl -a svc; do date; sleep 1; done
