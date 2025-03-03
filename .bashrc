@@ -1,11 +1,6 @@
 #!/usr/bin/env bash
 
-case "$(uname -s)" in
-Darwin)
-	export LC_ALL=C
-	export LANG=C
-	;;
-esac
+unset LC_ALL
 
 if [[ -n ${VSCODE_RESOLVING_ENVIRONMENT-} ]]; then
 	return
@@ -98,7 +93,6 @@ export AWS_VAULT_PASS_PREFIX=aws-vault
 if [[ "Linux" == "$(uname -s)" ]]; then
 	export USER=ubuntu
 	export LOCAL_ARCHIVE=/usr/lib/locale/locale-archive
-	export LC_ALL=C.UTF-8
 fi
 
 # storybook
