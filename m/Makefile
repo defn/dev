@@ -240,4 +240,4 @@ bazel-ignore:
 	(cat ~/.gitignore && echo && echo m && echo work && echo bin) > ~/.bazelignore.tmp
 	cat .bazelignore >> .bazelignore.tmp
 	cat .bazelignore.tmp | sort -u > .bazelignore
-	rm -f .bazelignore.tmp
+	rm -f .bazelignore.tmp ../.bazelignore.tmp
