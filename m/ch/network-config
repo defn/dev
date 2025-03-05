@@ -1,6 +1,6 @@
 version: 2
 ethernets:
-  ens3:
+  ens4:
     addresses:
       - 192.168.249.2/24
     gateway4: 192.168.249.1
