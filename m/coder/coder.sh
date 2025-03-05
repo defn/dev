@@ -6,5 +6,5 @@
 
 cd
 source .bash_profile
-source .envrc
+source .env.coder
 exec make chrome-dev-coder name=${CODER_SERVER}
