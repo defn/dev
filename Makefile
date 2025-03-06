@@ -115,7 +115,10 @@ macos:
 
 rehome:
 	this-nix-gc
-	rm -rf bin/nix/.head-* bin/nix.tmp*
+	rm -rf bin/nix
+	ln -nfs /usr/local/bin/nix bin/nix
+	sudo install -d -o ubuntu -g ubuntu /usr/local/bin/nix
+	rm -rf /usr/local/bin/nix/.head-* /usr/local/bin/bin/nix.tmp*
 	$(MAKE) install
 
 home:
@@ -129,8 +132,10 @@ home:
 	rm -f /tmp/nix-bin/.bazel-nix-store /tmp/nix-bin/.nix-flake
 	rm -f /tmp/nix-bin/python*
 	rm -f /tmp/nix-bin/bash
-	mkdir -p bin/nix
-	rsync -ia --delete /tmp/nix-bin/. bin/nix/.
+	sudo install -d -o ubuntu -g ubuntu /usr/local/bin/nix
+	rm -rf bin/nix
+	ln -nfs /usr/local/bin/nix bin/nix
+	rsync -ia --delete /tmp/nix-bin/. /usr/local/bin/nix/.
 
 .PHONY: dotfiles
 dotfiles:

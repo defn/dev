@@ -19,7 +19,7 @@ PATH="${HOME}/m/node_modules/.bin:$PATH"
 PATH="${HOME}/.local/bin:$PATH"
 
 # nix bin
-PATH="${HOME}/bin/nix:${HOME}/.nix-profile/bin:${PATH}"
+PATH="/usr/local/bin/nix:${HOME}/bin/nix:${HOME}/.nix-profile/bin:${PATH}"
 
 # os bin
 PATH="${HOME}/bin/$(uname -s):$PATH"
