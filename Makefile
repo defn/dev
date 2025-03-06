@@ -380,8 +380,6 @@ zfs:
 
 sync:
 	git pull
-	direnv allow
-	(cd m && direnv allow)
 	$(MAKE) sync_inner
 
 sync_inner:
