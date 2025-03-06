@@ -13,3 +13,4 @@ just = "1.39.0"
 python = "3.13.2"
 "ubi:coder/code-server" = { version = "4.97.2", extract_all = "true", bin_path = "bin" }
 "ubi:peak/s5cmd" = "2.3.0"
+"ubi:railwayapp/railpack" = "0.0.38"
