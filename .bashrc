@@ -106,9 +106,9 @@ export PRE_COMMIT_ALLOW_NO_CONFIG=1
 
 # prompt
 if test -z "${STARSHIP_NO-}"; then
-	if type -P starship >/dev/null; then
+	if [[ -x "$(mise exec -- which starship)" ]]; then
 		# starship
-		eval "$(starship init bash)"
+		eval "$(mise exec -- starship init bash)"
 	fi
 fi
 
