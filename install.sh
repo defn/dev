@@ -9,7 +9,6 @@ function main {
 	source .bash_profile
 	make sync
 	make install
-	make install
 }
 
 main "$@"
