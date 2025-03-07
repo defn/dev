@@ -3,43 +3,52 @@ import Tutorial from "../layouts/Tutorial.astro";
 import Code from "../components/Code.astro";
 ---
 
-<Tutorial
-  title="tolan"
-  topic="Green Curry"
-  short="first recipe"
->
+<Tutorial title="tolan" topic="Green Curry" short="first recipe">
   <p>with <strong>salmon</strong></p>
-
 
   <p>
     <table>
       <caption>ingredients</caption>
-      <colgroup>
-        <col />
-        <col span="2" class="ingredients" />
-        <col span="2" class ="amount" />
-      </colgroup>
-    <tr></tr>
-      <li>salmon</li>
-      <li>curry paste</li>
-      <li>aromatics</li>
-      <li>curry soup</li>
-      <li>seasoning</li>
-      <li>vegetables</li>
-      <li>garnish</li>
-    </tr>
+      <tr>
+        <th>protein</th>
+        <td>salmon</td>
+      </tr>
+      <tr>
+        <th>curry paste</th>
+        <td>mae ploy</td>
+      </tr>
+      <tr>
+        <th>aromatics</th>
+        <td>ginger</td>
+        <td>garlic</td>
+      </tr>
+      <tr>
+        <th>curry soup</th>
+        <td>chicken broth</td>
+        <td>coconut milk</td>
+      </tr>
+      <tr>
+        <th>seasoning</th>
+        <td>salt</td>
+        <td>sugar</td>
+        <td>fish sauce</td>
+      </tr>
+      <tr>
+        <td>vegetables</td>
+      </tr>
+      <tr>
+        <td>garnish</td>
+      </tr>
     </table>
   </p>
-  <h3>Directions</h3>
-  <ol>
-    <li>cook aromatics</li>
-    <li>add curry paste</li>
-    <li>add curry soup</li>
-    <li>add seasoning</li>
-    <li>add vegetables. cook for 5 minutes</li>
-    <li>add garnish</li>
-  </ol>
-  <p>
-
-  </p>
 </Tutorial>
+<h3>Directions</h3>
+<ol>
+  <li>cook aromatics</li>
+  <li>add curry paste</li>
+  <li>add curry soup</li>
+  <li>add seasoning</li>
+  <li>add vegetables. cook for 5 minutes</li>
+  <li>add garnish</li>
+</ol>
+<p></p>
