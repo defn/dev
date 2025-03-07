@@ -1,6 +1,6 @@
 module github.com/defn/dev/m
 
-go 1.24.0
+go 1.24.1
 
 // pin, otherwise something cue + protobuf breaks
 /// https://github.com/cue-lang/cue/blob/master/go.mod
@@ -21,12 +21,12 @@ require (
 	github.com/noisysockets/noisysockets v0.28.0
 	github.com/spf13/cobra v1.9.1
 	github.com/spf13/viper v1.19.0
-	github.com/urfave/cli/v2 v2.27.5
-	golang.org/x/sys v0.30.0
+	github.com/urfave/cli/v2 v2.27.6
+	golang.org/x/sys v0.31.0
 )
 
 require (
-	cuelabs.dev/go/oci/ociregistry v0.0.0-20250224124241-b27552d3e05c // indirect
+	cuelabs.dev/go/oci/ociregistry v0.0.0-20250304105642-27e071d2c9b1 // indirect
 	dario.cat/mergo v1.0.1 // indirect
 	github.com/Masterminds/semver/v3 v3.3.1 // indirect
 	github.com/atotto/clipboard v0.1.4 // indirect
@@ -80,7 +80,7 @@ require (
 	github.com/noisysockets/resolver v0.14.2 // indirect
 	github.com/noisysockets/util v0.1.0 // indirect
 	github.com/opencontainers/go-digest v1.0.0 // indirect
-	github.com/opencontainers/image-spec v1.1.0 // indirect
+	github.com/opencontainers/image-spec v1.1.1 // indirect
 	github.com/pelletier/go-toml/v2 v2.2.3 // indirect
 	github.com/protocolbuffers/txtpbfmt v0.0.0-20250218085312-1ee4910263ac // indirect
 	github.com/rivo/uniseg v0.4.7 // indirect
@@ -99,19 +99,19 @@ require (
 	github.com/xrash/smetrics v0.0.0-20240521201337-686a1a2994c1 // indirect
 	github.com/yuin/goldmark v1.7.8 // indirect
 	go.uber.org/multierr v1.11.0 // indirect
-	golang.org/x/arch v0.14.0 // indirect
-	golang.org/x/crypto v0.35.0 // indirect
-	golang.org/x/exp v0.0.0-20250228200357-dead58393ab7 // indirect
+	golang.org/x/arch v0.15.0 // indirect
+	golang.org/x/crypto v0.36.0 // indirect
+	golang.org/x/exp v0.0.0-20250305212735-054e65f0b394 // indirect
 	golang.org/x/lint v0.0.0-20241112194109-818c5a804067 // indirect
-	golang.org/x/mod v0.23.0 // indirect
-	golang.org/x/net v0.35.0 // indirect
-	golang.org/x/oauth2 v0.27.0 // indirect
-	golang.org/x/sync v0.11.0 // indirect
-	golang.org/x/text v0.22.0 // indirect
-	golang.org/x/time v0.10.0 // indirect
-	golang.org/x/tools v0.30.0 // indirect
+	golang.org/x/mod v0.24.0 // indirect
+	golang.org/x/net v0.37.0 // indirect
+	golang.org/x/oauth2 v0.28.0 // indirect
+	golang.org/x/sync v0.12.0 // indirect
+	golang.org/x/text v0.23.0 // indirect
+	golang.org/x/time v0.11.0 // indirect
+	golang.org/x/tools v0.31.0 // indirect
 	google.golang.org/protobuf v1.36.5 // indirect
 	gopkg.in/ini.v1 v1.67.0 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
-	mvdan.cc/sh/v3 v3.10.0 // indirect
+	mvdan.cc/sh/v3 v3.11.0 // indirect
 )
