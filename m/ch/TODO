@@ -3,6 +3,8 @@ curl -fsSL https://download.opensuse.org/repositories/home:cloud-hypervisor/xUbu
 sudo apt update
 sudo apt install cloud-hypervisor qemu-system mtools dosfstools
 
+sudo setcap cap_net_admin+ep $(which cloud-hypervisor)
+
 sudo sysctl -w net.ipv4.ip_forward=1
 sudo iptables -t nat -A POSTROUTING -s 192.168.249.0/24 -o eth0 -j MASQUERADE
 sudo iptables -A FORWARD -s 192.168.249.0/24 -o eth0 -j ACCEPT
@@ -16,23 +18,25 @@ mcopy -oi ubuntu-cloudinit.img -s network-config ::
 
 wget https://github.com/cloud-hypervisor/rust-hypervisor-firmware/releases/download/0.4.2/hypervisor-fw
 
-wget https://cloud-images.ubuntu.com/focal/current/focal-server-cloudimg-amd64.img
-qemu-img convert -p -f qcow2 -O raw focal-server-cloudimg-amd64.img focal-server-cloudimg-amd64.raw
-qemu-img resize focal-server-cloudimg-amd64.raw 4G
-
-sudo setcap cap_net_admin+ep $(which cloud-hypervisor)
+wget https://cloud-images.ubuntu.com/jammy/current/jammy-server-cloudimg-amd64.img
+qemu-img resize jammy-server-cloudimg-amd64.img 4G
+qemu-img convert -p -f qcow2 -O raw jammy-server-cloudimg-amd64.img jammy-server-cloudimg-amd64.raw
 
 sudo cloud-hypervisor \
 	--kernel ./hypervisor-fw \
-	--disk path=focal-server-cloudimg-amd64.raw path=ubuntu-cloudinit.img \
+	--disk path=jammy-server-cloudimg-amd64.raw path=ubuntu-cloudinit.img \
 	--cpus boot=1 \
 	--memory size=1024M \
-	--net "tap=,mac=,ip=,mask="
+	--net "tap=,mac=,ip=,mask=" \
+  --console off \
+  --serial tty
 
 cloud-hypervisor \
 	--kernel ./hypervisor-fw \
-	--disk path=focal-server-cloudimg-amd64.raw \
+	--disk path=jammy-server-cloudimg-amd64.raw \
 	--cpus boot=1 \
 	--memory size=1024M \
-	--net "tap=,mac=,ip=,mask="
+	--net "tap=,mac=,ip=,mask=" \
+  --console off \
+  --serial tty
 
