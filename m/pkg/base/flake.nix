@@ -10,6 +10,8 @@
     defaultPackage = ctx: ctx.wrap.nullBuilder {
       propagatedBuildInputs = with (import inputs.latest { system = ctx.system; }); [
         bat
+        bc
+        bind
         coreutils
         curl
         direnv
@@ -25,6 +27,7 @@
         groff
         gron
         htop
+        iputils
         jq
         less
         ncdu
