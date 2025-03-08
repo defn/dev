@@ -25,4 +25,4 @@ up:
 	@true
 
 base:
-	docker build --no-cache -t quay.io/defn/dev:base --build-arg GITHUB_TOKEN="$(just github::token)" . && docker push quay.io/defn/dev:base 
+	docker build --no-cache -t quay.io/defn/dev:base --build-arg GITHUB_TOKEN="$GITHUB_TOKEN" --build-arg NIX_CONFIG="access-tokens = github.com=$GITHUB_TOKEN" . && docker push quay.io/defn/dev:base 

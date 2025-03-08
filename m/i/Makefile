@@ -26,25 +26,25 @@ coder:
 
 # docker
 base:
-	docker build -t 169.254.32.1:5000/defn/dev:base --build-arg GITHUB_TOKEN="$(shell just github::token)" . 
-	docker push 169.254.32.1:5000/defn/dev:base
+	cd .. && just base
+	docker build -t 169.254.32.1:5000/defn/dev:base --build-arg GITHUB_TOKEN="$(GITHUB_TOKEN)" --build-arg NIX_CONFIG="access-tokens = github.com=$(GITHUB_TOKEN)" . 
 
 reset:
 	cd ../ && just base
-	docker build --no-cache -t 169.254.32.1:5000/defn/dev:base --build-arg GITHUB_TOKEN="$(shell just github::token)" . 
+	docker build --no-cache -t 169.254.32.1:5000/defn/dev:base --build-arg GITHUB_TOKEN="$(GITHUB_TOKEN)" --build-arg NIX_CONFIG="access-tokens = github.com=$(GITHUB_TOKEN)" . 
 	docker push 169.254.32.1:5000/defn/dev:base
 	$(MAKE) latest
 	docker tag 169.254.32.1:5000/defn/dev:latest quay.io/defn/dev:latest
 	docker push quay.io/defn/dev:latest
 
 rebase:
-	docker build --no-cache -t 169.254.32.1:5000/defn/dev:rebase -f Dockerfile.latest --build-arg GITHUB_TOKEN="$(shell just github::token)" .
+	docker build --no-cache -t 169.254.32.1:5000/defn/dev:rebase -f Dockerfile.latest --build-arg GITHUB_TOKEN="$(GITHUB_TOKEN)" --build-arg NIX_CONFIG="access-tokens = github.com=$(GITHUB_TOKEN)" .
 	docker tag 169.254.32.1:5000/defn/dev:rebase 169.254.32.1:5000/defn/dev:base
 	docker push 169.254.32.1:5000/defn/dev:base
 	$(MAKE) latest
 
 latest:
-	docker build --no-cache -t 169.254.32.1:5000/defn/dev:latest -f Dockerfile.latest --build-arg GITHUB_TOKEN="$(shell just github::token)" . 
+	docker build --no-cache -t 169.254.32.1:5000/defn/dev:latest -f Dockerfile.latest --build-arg GITHUB_TOKEN="$(GITHUB_TOKEN)" --build-arg NIX_CONFIG="access-tokens = github.com=$(GITHUB_TOKEN)" . 
 	docker push 169.254.32.1:5000/defn/dev:latest
 
 pull:
