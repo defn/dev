@@ -28,6 +28,7 @@ RUN git clone https://github.com/defn/dev dev && \
     git reset --hard && \
     rm -rf dev
 RUN	bash -c "source .bash_profile && ./install.sh && ./install.sh"
+RUN mkdir -p /home/ubuntu/m/svc
 
 ENTRYPOINT [ "/bin/s6-svscan" ]
 CMD [ "/home/ubuntu/m/svc" ]
