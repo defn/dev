@@ -5,10 +5,11 @@ sudo apt install cloud-hypervisor qemu-system mtools dosfstools
 
 sudo setcap cap_net_admin+ep $(which cloud-hypervisor)
 
+gw="$(ip route show default | awk '{print $5}')"
 sudo sysctl -w net.ipv4.ip_forward=1
-sudo iptables -t nat -A POSTROUTING -s 192.168.249.0/24 -o eth0 -j MASQUERADE
-sudo iptables -A FORWARD -s 192.168.249.0/24 -o eth0 -j ACCEPT
-sudo iptables -A FORWARD -d 192.168.249.0/24 -m state --state RELATED,ESTABLISHED -i eth0 -j ACCEPT
+sudo iptables -t nat -A POSTROUTING -s 192.168.249.0/24 -o ${gw} -j MASQUERADE
+sudo iptables -A FORWARD -s 192.168.249.0/24 -o ${gw} -j ACCEPT
+sudo iptables -A FORWARD -d 192.168.249.0/24 -m state --state RELATED,ESTABLISHED -i ${gw} -j ACCEPT
 
 rm -f ubuntu-cloudinit.img
 mkdosfs -n CIDATA -C ubuntu-cloudinit.img 8192
