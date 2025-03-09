@@ -26,9 +26,6 @@ export NO_UPDATE_NOTIFIER=1
 # bash
 export BASH_SILENCE_DEPRECATION_WARNING=1
 
-# sudo
-export SUDO_ASKPASS="$HOME/bin/askpass"
-
 # terraform
 export TF_PLUGIN_CACHE_DIR="$HOME/.terraform.d/plugin-cache"
 export DISABLE_VERSION_CHECK=1
