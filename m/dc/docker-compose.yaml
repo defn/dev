@@ -2,20 +2,11 @@
 name: dev
 services:
   home:
-    env_file: .env
-    build:
-      context: .
-      dockerfile: Dockerfile
-    ports:
-      - "80:8080"
-      - "443:8443"
-      - "8000:8000"
-      - "8085:8085"
-    volumes:
-      - tailscale:/var/lib/tailscale
-      - ./site:/site
-    privileged: true
+    image: quay.io/defn/dev:base
     user: ubuntu
     working_dir: /home/ubuntu
+    privileged: true
+    volumes:
+      - tailscale:/var/lib/tailscale
 volumes:
   tailscale:

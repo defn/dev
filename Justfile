@@ -15,13 +15,11 @@ create-coder-agent:
   #!/usr/bin/env bash
   cd ~/m
   source ~/.bash_profile
-  touch svc.d/coder/down
   mise run serve
-  s6-svc -k svc/coder || true
   for a in $(env | grep ^CODER_ | cut -d= -f1); do printf 'export %s=%q\n\n' "$a" "$(echo "${!a}")"; done > svc.d/coder/.env
   ln -nfs ../svc.d/coder svc/
   s6-svscanctl -a svc
-  s6-svc -u svc/coder
+  s6-svc -r svc/coder
   rm -f svc.d/coder/down
 
 create-coder-agent-sync workdir:

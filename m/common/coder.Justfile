@@ -181,16 +181,13 @@ code-server *host:
   source ~/.bash_profile
   set -x
   exec 2>&1
-  touch svc.d/code-server/down
   mise run serve
-  s6-svc -k svc/code-server || true
   for a in $(env | grep ^CODER_ | cut -d= -f1); do printf 'export %s=%q\n\n' "$a" "$(echo "${!a}")"; done > svc.d/code-server/.env
   for a in $(env | grep ^GIT_ | cut -d= -f1); do printf 'export %s=%q\n\n' "$a" "$(echo "${!a}")"; done >> svc.d/code-server/.env
   for a in $(env | grep ^VSCODE_ | cut -d= -f1); do printf 'export %s=%q\n\n' "$a" "$(echo "${!a}")"; done >> svc.d/code-server/.env
   ln -nfs ../svc.d/code-server svc/
   s6-svscanctl -a svc
-  s6-svc -u svc/code-server
-  rm -f svc.d/code-server/down
+  s6-svc -r svc/code-server
 
 # update all Coder workspace templates
 [no-cd, private]

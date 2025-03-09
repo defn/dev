@@ -1,12 +1,13 @@
 FROM ubuntu:24.04
 
 ARG GITHUB_TOKEN
+ARG NIX_CONFIG
 
 ENV DEBIAN_FRONTEND=noninteractive
 
 # sync with install.sh, m/i/scripts/001-install-base
 RUN apt update && apt install -y \
-    make direnv curl xz-utils dirmngr gpg pcscd scdaemon gpg-agent rsync build-essential sudo ca-certificates tzdata locales git git-lfs tini iproute2 iptables bc pv socat docker.io s6
+    make direnv curl xz-utils dirmngr gpg pcscd scdaemon gpg-agent rsync build-essential sudo ca-certificates tzdata locales git git-lfs tini iproute2 iptables docker.io s6 cpu-checker bind9-dnsutils
 
 RUN locale-gen C.UTF-8 && update-locale LANG=C.UTF-8
 
@@ -26,7 +27,8 @@ RUN git clone https://github.com/defn/dev dev && \
     mv dev/.git . && \
     git reset --hard && \
     rm -rf dev
-RUN	bash -c "source .bash_profile && make nix sync"
+RUN	bash -c "source .bash_profile && ./install.sh && ./install.sh"
+RUN mkdir -p /home/ubuntu/m/svc
 
 ENTRYPOINT [ "/bin/s6-svscan" ]
 CMD [ "/home/ubuntu/m/svc" ]

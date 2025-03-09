@@ -7,80 +7,50 @@
   outputs = inputs: inputs.pkg.main rec {
     src = builtins.path { path = ./.; name = "pkg-base"; };
 
-    packages = ctx: {
-      pass = ctx.pkgs.writeShellScriptBin "pass" ''
-        { ${ctx.pkgs.pass}/bin/pass "$@" 2>&1 1>&3 3>&- | grep -v 'problem with fast path key listing'; } 3>&1 1>&2 | cat
-      '';
-    };
-
     defaultPackage = ctx: ctx.wrap.nullBuilder {
       propagatedBuildInputs = with (import inputs.latest { system = ctx.system; }); [
-        yq
-        gron
-        fzf
-        direnv
-        ffmpeg
-        ttyd
-        ncdu
-        nload
-        cookiecutter
         bat
-
-        docker
-        docker-compose
-        docker-credential-helpers
-        skopeo
-        dive
-
-        gnumake
-        git
-        git-lfs
-        graphviz
-
-        easyrsa
-        openvpn
-        wireguard-tools
-        wireguard-go
-
-        xz
-        unzip
-        rsync
-        dnsutils
-        nettools
-        htop
-        wget
-        curl
-        procps
-
-        (packages ctx).pass
-        pinentry
-        aws-vault
-
-        procps
-        vim
-        openssh
-        screen
-        powerline-go
-        starship
-        less
-        groff
-        jq
+        bc
+        bind
         coreutils
+        curl
+        direnv
+        dive
+        dnsutils
+        docker
+        docker-credential-helpers
         findutils
-        gnumake
+        fzf
         git
         git-lfs
+        gnumake
+        groff
+        gron
+        htop
+        iputils
+        jq
+        less
+        ncdu
         netcat-gnu
-        socat
-        nmap
-        perl
-        pv
-        fd
-        ripgrep
-        nixpkgs-fmt
+        nettools
         nix
-
-        bashInteractive
+        nixpkgs-fmt
+        nmap
+        openssh
+        perl
+        powerline-go
+        procps
+        pv
+        rsync
+        screen
+        skopeo
+        socat
+        starship
+        unzip
+        vim
+        wget
+        xz
+        yq
       ];
     };
   };
