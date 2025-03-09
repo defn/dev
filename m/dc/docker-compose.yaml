@@ -6,6 +6,12 @@ services:
     user: ubuntu
     working_dir: /home/ubuntu
     privileged: true
+    devices:
+      - "/dev/kvm:/dev/kvm"
+    cap_add:
+      - NET_ADMIN
+    security_opt:
+      - seccomp=unconfined
     volumes:
       - tailscale:/var/lib/tailscale
 volumes:
