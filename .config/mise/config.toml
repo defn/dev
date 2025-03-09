@@ -2,7 +2,7 @@
 experimental = true
 
 [tools]
-aws = "2.24.18"
+aws = "2.24.20"
 aws-vault = "7.2.0"
 bazelisk = "1.25.0"
 coder = "2.20.0"
@@ -14,4 +14,4 @@ python = "3.13.2"
 starship = "1.22.1"
 "ubi:coder/code-server" = { version = "4.97.2", extract_all = "true", bin_path = "bin" }
 "ubi:peak/s5cmd" = "2.3.0"
-"ubi:railwayapp/railpack" = "0.0.39"
+"ubi:railwayapp/railpack" = "0.0.48"
