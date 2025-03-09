@@ -104,11 +104,16 @@ export DIRENV_LOG_FORMAT=
 # precommit
 export PRE_COMMIT_ALLOW_NO_CONFIG=1
 
+# mise
+if type -P mise >/dev/null; then
+	eval "$(mise activate bash)"
+fi
+
 # prompt
 if test -z "${STARSHIP_NO-}"; then
-	if [[ -x "$(mise exec -- which starship)" ]]; then
+	if [[ -x "$(which starship)" ]]; then
 		# starship
-		eval "$(mise exec -- starship init bash)"
+		eval "$(starship init bash)"
 	fi
 fi
 
@@ -214,7 +219,3 @@ unset MAKEFLAGS
 
 if test -r ~/.ssh-agent-rc; then source ~/.ssh-agent-rc >/dev/null; fi
 
-# mise
-if type -P mise >/dev/null; then
-	eval "$(mise activate bash)"
-fi
