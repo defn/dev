@@ -1,5 +1,51 @@
 # Changelog
 
+## [1.7.0](https://github.com/defn/dev/compare/v1.6.0...v1.7.0) (2025-03-09)
+
+
+### Features
+
+* cpu-checker to detect virtualization ([ad153b3](https://github.com/defn/dev/commit/ad153b37066824853a6797c43744ee6759b860c9))
+* dev container restarts always ([c2e728f](https://github.com/defn/dev/commit/c2e728f4cf0d70c4d15cef95fd9c760a8261a3d6))
+* docker-compose dev env with kvm privileges ([67ff1b2](https://github.com/defn/dev/commit/67ff1b23980d34a089d91942c329e9a4c54d9bf9))
+* example docker config for containers ([cad47cf](https://github.com/defn/dev/commit/cad47cf03a5bf2890b64ed47e8d074589321aecd))
+* home uses base flake via direnv ([561b588](https://github.com/defn/dev/commit/561b588584ce3586b648ecda3e6c5dfd5980fd73))
+* move nix bin outside of home to /usr/local/bin/nix ([b82b261](https://github.com/defn/dev/commit/b82b261d2807cec11905e635958d55b42f191434))
+* removed base flake from bazel, provide alternative bin/nix generation ([2c7854f](https://github.com/defn/dev/commit/2c7854f7879ffb1037337959658d4fa61ed2bbf1))
+* simpler base with separated os, nix, mise ([3e94b66](https://github.com/defn/dev/commit/3e94b6674e7f3c541d53e41b14d85a250d3da786))
+* smaller base nix flake ([c88807a](https://github.com/defn/dev/commit/c88807abe4b373a912fe42767bf2258df65c794a))
+* starting to split  m/dc into separate docker containers for the fam ([89aaf56](https://github.com/defn/dev/commit/89aaf560dcb0cf8764a95a22443d7012e4bb1869))
+* tailscaled under s6 ([784b6e6](https://github.com/defn/dev/commit/784b6e6559af6370be751b12591703a451b7e151))
+* try out the railway railpack build tool ([573d5ec](https://github.com/defn/dev/commit/573d5ec338ddfba9ab0ce136aaf8d06ecc572464))
+* wrangler as a standalone tool ([a99c211](https://github.com/defn/dev/commit/a99c211cfb9976909ecebc8253dd3da1c86958e8))
+
+
+### Bug Fixes
+
+* browser (open) works with mise code-server ([5a04935](https://github.com/defn/dev/commit/5a049354017b74a602a0acde80f05271b39ed05e))
+* cloud hypervisor working on chromebook linux dev env ([40a2dbf](https://github.com/defn/dev/commit/40a2dbf766d80287295adaad4802129d6006f88a))
+* coder uses a specific .env.coder for secrets ([a29d349](https://github.com/defn/dev/commit/a29d349c01456affbb4cfd0e1086d46210c5ec62))
+* coder, code-server sourcing config corrrectly ([c184685](https://github.com/defn/dev/commit/c184685f539b9faacd6a7c85503d866473cab8a4))
+* detach s6 in m serve ([61f41c7](https://github.com/defn/dev/commit/61f41c710f6bf0f20b87f99a2cfcf6e6371b3ca4))
+* dont activate main s6 service ([fa8f2de](https://github.com/defn/dev/commit/fa8f2de9a766d539d8e0884459bb466bd893a86d))
+* dont build attic in bazel, too long ([4567f39](https://github.com/defn/dev/commit/4567f39f1d9e1a7cf3741dd27cef512e39eccd61))
+* dont hardcode gh to bin/nix ([73be4ca](https://github.com/defn/dev/commit/73be4cac3546413fc0172275a3d20b8a00e55d05))
+* dont install twice ([1bef289](https://github.com/defn/dev/commit/1bef2890093b46ec30f4935ad2e00ae3411ab612))
+* dont need m/.envrc if home is not a direnv flake ([97f52a0](https://github.com/defn/dev/commit/97f52a06defecb5daa3f0ce23253e47aa62e51d5))
+* dont set LC_ALL, nix bash hates it ([58fa5d7](https://github.com/defn/dev/commit/58fa5d7c14c3d9a9efe1d40889a6093295fddf87))
+* dont use SUDO_ASKPASS ([0da8a83](https://github.com/defn/dev/commit/0da8a8308beb2cdaf45bb5c95d39ef49d89582c1))
+* empty .envrc in m to reset ([039f488](https://github.com/defn/dev/commit/039f488b9bdd086e92d765b5bb2a76fde2a9cbe9))
+* install tailscale when running tailscaled ([c90bb7b](https://github.com/defn/dev/commit/c90bb7b299273e446426243a07dd1fb2c0f2ab00))
+* m server waits for s6 to respond ([a936179](https://github.com/defn/dev/commit/a936179f788d389fbc65ffd31ef57ff504e35ffe))
+* missing svc dir in docker image ([877ae0f](https://github.com/defn/dev/commit/877ae0f6ab3857cd78aecce574468c48df5d440d))
+* no more direnv in home or m ([57fe086](https://github.com/defn/dev/commit/57fe086d278c687d4108ddd3c9420ae306936933))
+* no multi-tenant docker-compose ([ef43970](https://github.com/defn/dev/commit/ef43970f1ad03d0b19e6a1c5d76f7ffae70a6abf))
+* prompt on macos, load mise before starship ([2660553](https://github.com/defn/dev/commit/2660553581565ab84bf2190dee6d46898d43fa80))
+* provide dig, host, ping commands ([12701c3](https://github.com/defn/dev/commit/12701c33822616175673a84a388f6a7b3a74ae1d))
+* remove extra bazel ignore tmp file ([7e7fb74](https://github.com/defn/dev/commit/7e7fb7449d68b44b5e41d713a8d02ff47743197f))
+* sync before install to remove mise prompt ([8ddfddf](https://github.com/defn/dev/commit/8ddfddf4afe8d03e9c55c4c809c61d36bbc2cd9e))
+* trust direnv and mise install in m ([346fb51](https://github.com/defn/dev/commit/346fb51e28e06f8b62ffebd585ea5aae681d745e))
+
 ## [1.6.0](https://github.com/defn/dev/compare/v1.5.0...v1.6.0) (2025-02-28)
 
 
