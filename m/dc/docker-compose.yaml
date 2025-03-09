@@ -5,6 +5,7 @@ services:
     image: quay.io/defn/dev:base
     user: ubuntu
     working_dir: /home/ubuntu
+    restart: always
     privileged: true
     devices:
       - "/dev/kvm:/dev/kvm"
