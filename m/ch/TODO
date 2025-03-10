@@ -27,9 +27,8 @@ qemu-img resize jammy-server-cloudimg-amd64.raw 30G
 sudo cloud-hypervisor \
 	--kernel ./hypervisor-fw \
 	--disk path=jammy-server-cloudimg-amd64.raw path=ubuntu-cloudinit.img \
-	--cpus boot=2 \
+	--cpus boot=4 \
 	--memory size=4G \
-	--balloon size=3G,deflate_on_oom=on \
 	--net "tap=,mac=,ip=,mask=" \
 	--console off \
 	--serial tty
@@ -37,9 +36,8 @@ sudo cloud-hypervisor \
 sudo cloud-hypervisor \
 	--kernel ./hypervisor-fw \
 	--disk path=jammy-server-cloudimg-amd64.raw \
-	--cpus boot=2 \
+	--cpus boot=4 \
 	--memory size=4G \
-	--balloon size=3G,deflate_on_oom=on \
 	--net "tap=,mac=,ip=,mask=" \
 	--console off \
 	--serial tty
