@@ -1,5 +1,22 @@
 # Changelog
 
+## [1.8.0](https://github.com/defn/dev/compare/v1.7.0...v1.8.0) (2025-03-10)
+
+
+### Features
+
+* ansible, pipx via mise ([dc4be1e](https://github.com/defn/dev/commit/dc4be1e94ea86fb53b4aa73551b42d11459998f1))
+* example gleam project ([3ea6427](https://github.com/defn/dev/commit/3ea64279a50545cf527d6c600586b720c094d322))
+
+
+### Bug Fixes
+
+* ansible in global ([aadf6f6](https://github.com/defn/dev/commit/aadf6f68c7ddc1d89f90eae1329c310b048b7f82))
+* clh can deflare mem balloon, provide net config for ens2 ([ee6bec3](https://github.com/defn/dev/commit/ee6bec301c64ffb6a56a98a3a54776c74670b4ab))
+* no memory balloon, more cpu, makes nix happy ([6a7a669](https://github.com/defn/dev/commit/6a7a669a0e645cf67745f2cf3e1ce8a64fe702b6))
+* remove semaphore, not ready to use it ([6c2474b](https://github.com/defn/dev/commit/6c2474b6ecc5f54c27b0b76002315f6749eaf6ff))
+* use pipx ([c138770](https://github.com/defn/dev/commit/c138770861b2bb805c13fcaba920d079766dc5a1))
+
 ## [1.7.0](https://github.com/defn/dev/compare/v1.6.0...v1.7.0) (2025-03-09)
 
 
