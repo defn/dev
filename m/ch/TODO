@@ -29,7 +29,7 @@ sudo cloud-hypervisor \
 	--disk path=jammy-server-cloudimg-amd64.raw path=ubuntu-cloudinit.img \
 	--cpus boot=2 \
 	--memory size=4G \
-	--balloon size=3G \
+	--balloon size=3G,deflate_on_oom=on \
 	--net "tap=,mac=,ip=,mask=" \
 	--console off \
 	--serial tty
@@ -39,7 +39,7 @@ sudo cloud-hypervisor \
 	--disk path=jammy-server-cloudimg-amd64.raw \
 	--cpus boot=2 \
 	--memory size=4G \
-	--balloon size=3G \
+	--balloon size=3G,deflate_on_oom=on \
 	--net "tap=,mac=,ip=,mask=" \
 	--console off \
 	--serial tty
