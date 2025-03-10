@@ -20,24 +20,27 @@ mcopy -oi ubuntu-cloudinit.img -s network-config ::
 wget https://github.com/cloud-hypervisor/rust-hypervisor-firmware/releases/download/0.4.2/hypervisor-fw
 
 wget https://cloud-images.ubuntu.com/jammy/current/jammy-server-cloudimg-amd64.img
-qemu-img resize jammy-server-cloudimg-amd64.img 4G
 qemu-img convert -p -f qcow2 -O raw jammy-server-cloudimg-amd64.img jammy-server-cloudimg-amd64.raw
+
+qemu-img resize jammy-server-cloudimg-amd64.raw 30G
 
 sudo cloud-hypervisor \
 	--kernel ./hypervisor-fw \
 	--disk path=jammy-server-cloudimg-amd64.raw path=ubuntu-cloudinit.img \
-	--cpus boot=1 \
-	--memory size=1024M \
+	--cpus boot=2 \
+	--memory size=4G \
+	--balloon size=3G \
 	--net "tap=,mac=,ip=,mask=" \
-  --console off \
-  --serial tty
+	--console off \
+	--serial tty
 
-cloud-hypervisor \
+sudo cloud-hypervisor \
 	--kernel ./hypervisor-fw \
 	--disk path=jammy-server-cloudimg-amd64.raw \
-	--cpus boot=1 \
-	--memory size=1024M \
+	--cpus boot=2 \
+	--memory size=4G \
+	--balloon size=3G \
 	--net "tap=,mac=,ip=,mask=" \
-  --console off \
-  --serial tty
+	--console off \
+	--serial tty
 
