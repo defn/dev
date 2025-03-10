@@ -10,6 +10,7 @@ cue = "0.12.0"
 gh = "2.68.1"
 jq = "1.7.1"
 just = "1.39.0"
+pipx = "1.7.1"
 python = "3.13.2"
 starship = "1.22.1"
 "ubi:coder/code-server" = { version = "4.97.2", extract_all = "true", bin_path = "bin" }
