@@ -3,7 +3,7 @@ experimental = true
 
 [tools]
 ansible = "11.3.0"
-aws = "2.24.20"
+aws = "2.24.21"
 aws-vault = "7.2.0"
 bazelisk = "1.25.0"
 coder = "2.20.0"
