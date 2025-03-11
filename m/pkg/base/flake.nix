@@ -12,20 +12,28 @@
         bat
         bc
         bind
+        bzip2
         coreutils
         curl
+        diffutils
         direnv
         dive
         dnsutils
         docker
         docker-credential-helpers
+        file
         findutils
         fzf
+        gawk
         git
         git-lfs
+        gnugrep
         gnumake
+        gnused
+        gnutar
         groff
         gron
+        gzip
         htop
         iputils
         jq
@@ -37,6 +45,7 @@
         nixpkgs-fmt
         nmap
         openssh
+        patch
         perl
         powerline-go
         procps
