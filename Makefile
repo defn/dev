@@ -114,12 +114,9 @@ macos:
 	defaults write -g ApplePressAndHoldEnabled -bool false
 
 rehome:
-	this-nix-gc
-	rm -rf bin/nix
-	ln -nfs /usr/local/bin/nix bin/nix
-	sudo install -d -o ubuntu -g ubuntu /usr/local/bin/nix
-	rm -rf /usr/local/bin/nix/.head-* /usr/local/bin/bin/nix.tmp*
-	$(MAKE) install
+	rm -rf ~/.direnv/flake* ~/m/pkg/*/result
+	$(MAKE) home
+	nix-store --gc --print-roots | egrep -v '^/proc'
 
 home:
 	bin/persist-cache
