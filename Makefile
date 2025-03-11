@@ -116,7 +116,6 @@ macos:
 rehome:
 	rm -rf ~/.direnv/flake* ~/m/pkg/*/result
 	$(MAKE) home
-	nix-store --gc --print-roots | egrep -v '^/proc'
 
 home:
 	bin/persist-cache
@@ -124,9 +123,9 @@ home:
 	cd m/${home} && b build
 	rm -rf /tmp/nix-tmp /tmp/nix-bin
 	mkdir -p /tmp/nix-tmp /tmp/nix-bin
-	(cd m/${home} && b out something) | (cd /tmp/nix-tmp && tar xfz -)
+	#(cd m/${home} && b out something) | (cd /tmp/nix-tmp && tar xfz -)
+	#cd /tmp/nix-tmp && for a in $(flakes); do (cd $$a && if ! stat -L * 2>/dev/null >/dev/null; then echo $$a; (cd ~/m/pkg/$$a && b build); sudo tar -C / -xf ~/m/$$(cat .bazel-nix-store) || true; fi; rsync -ia . /tmp/nix-bin/. >/dev/null); done
 	(cd ~/m/pkg/base && nix build && nix develop --command bash -c 'echo $$PATH | tr : \\n' | grep /nix/store) | tac | while read -r a; do find $$a/ ! -type d; done | xargs | while read -r a; do if [[ -n "$$a" ]]; then ln -nfs $$a /tmp/nix-bin/; fi; done
-	cd /tmp/nix-tmp && for a in $(flakes); do (cd $$a && if ! stat -L * 2>/dev/null >/dev/null; then echo $$a; (cd ~/m/pkg/$$a && b build); sudo tar -C / -xf ~/m/$$(cat .bazel-nix-store) || true; fi; rsync -ia . /tmp/nix-bin/. >/dev/null); done
 	rm -f /tmp/nix-bin/.bazel-nix-store /tmp/nix-bin/.nix-flake
 	rm -f /tmp/nix-bin/python*
 	rm -f /tmp/nix-bin/bash* /tmp/nix-bin/sh
@@ -135,8 +134,9 @@ home:
 	rm -rf bin/nix
 	ln -nfs /usr/local/bin/nix bin/nix
 	nix-store --gc
-	for a in /tmp/nix-bin/*; do if ! test -e "$(readlink "$a")"; then rm -f "$a"; fi; done 
-	rsync -iaI --delete /tmp/nix-bin/. /usr/local/bin/nix/.
+	for a in /tmp/nix-bin/*; do if ! test -e "$(readlink "$a")"; then rm -vf "$a"; fi; done 
+	rsync -iaI --delete /tmp/nix-bin/. /usr/local/bin/nix/. >/dev/null
+	nix-store --gc --print-roots | egrep -v '^/proc|state/nix/profiles|cache/nix/flake'
 
 .PHONY: dotfiles
 dotfiles:
