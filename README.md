@@ -10,32 +10,58 @@ Monorepo for cloud integrated development environments.
 - **Coder**: Coder workspaces in the browser for the IDE
 - **Mise**: Tools, environment, and task management
 
-## Installation
+## Machine Setup
+This will allow you to create a Linux defn/dev environment. 
 
-This repository has been tested and developed on Ubuntu 24.04 with the user `ubuntu` in home directory `/home/ubuntu`.
-
-Install OS tools.  These instructions assume `sudo` is installed and configured to allow `ubuntu` user to run commands as `root`.
+After updating the home directory, verify that the container provider is running and accessible. This setups uses Docker and Brew on macOS. 
 ```
-sudo apt update
-sudo apt install -y git
-```
-
-Clone the repo to your `/home/ubuntu` directory.  The process below will overwrite files typically customized by the user.
-
-```
-cd $HOME
-git clone https://github.com/defn/dev dev
-mv dev/.git .
-rm -rf dev
-git reset --hard
+git pull
+docker ps
+brew upgrade
 ```
 
-Then install the tool dependencies:
+If Docker is not installed, use `brew install --cask docker` to install. Start Docker, then reverify.
+
+Run the linux container in `m/dc`.
 ```
-./install.sh
+cd m/dc
+j up
 ```
 
-After install, use new terminal sessions to load the `$HOME` configuration with `defn/dev` configuration and tooling.
+Get a shell in the container and update.
+```
+j shell
+git pull
+```
+
+Activate tailscaled with s6
+```
+cd m/svc
+ln -nfs ../svc.d/tailscaled/ .
+s6-svscanctl -a .
+```
+
+Then register the linux container as a tailscale node. It is recommended to name the node after your computer 
+```
+tailscale up --ssh --hostname NAME-dev
+```
+
+In the tailscale console, disable the node's key expiry and add `ansible` and `spiral` ASL tags
+
+ssh into `coder-amanibhavam-kowloon` and accept your container's access request. Then ssh back to the container and accept `kowloon` access request, and exit both. Confirm that you have tailscale ip.
+```
+ssh NAME-dev
+ssh coder-amanibhavam-kowloon
+exit
+exit
+tailscale ip
+```
+
+Finally, go to coder console and create the ssh workspace as `NAME-dev` with username `ubuntu`. Test that everything works by restarting docker and running `j up`.
+```
+docker restart
+j up
+```
 
 ## Quickstart
 
@@ -47,3 +73,16 @@ b build
 ```
 
 The `main` branch build is [![Build status](https://badge.buildkite.com/879feda30e2616b22929338672877e85dfe82f60eb47df2e6a.svg?branch=main)](https://buildkite.com/defn/dev)
+
+## Updates
+These methods assume the latest repo is used.
+
+At every start of a session update your tools with `make sync`. This also updates your home directory git repo.
+
+Daily run `make home` to update the base tools. These tools don't change often
+
+If there's been a long period between your last session, do an end-to-end update:
+```
+git pull
+./install.sh
+```
