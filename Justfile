@@ -72,9 +72,6 @@ dyff *args:
 play pb *lim:
 	#!/usr/bin/env bash
 
-	if ! test -x ~/.local/bin/ansible-playbook; then
-		pipx install --force --include-deps ansible 
-	fi
 	just playbook::playbook {{pb}} {{lim}}
 
 command pattern *args:
