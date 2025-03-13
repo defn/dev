@@ -77,16 +77,11 @@ play pb *lim:
 command pattern *args:
 	just playbook::command {{pattern}} {{args}}
 
-upgrade *args:
+upgrade *args="all:!pc:!rpi4d":
 	just play upgrade {{ args }}
 
-cache *args="cache:!pc":
+cache *args="cache":
 	just play cache {{ args }}
 
-home *args="all:!kinko":
+home *args="all:!rpi":
 	just play home {{ args }}
-
-all *args="all":
-	just cache cache
-	just home cache
-	just home "{{ args }}:!cache"
