@@ -2,7 +2,7 @@
 go = "1.24.1"
 helm = "3.17.1"
 k3d = "5.8.3"
-kubectl = "1.32.2"
+kubectl = "1.32.3"
 kustomize = "5.6.0"
 node = "23.9.0"
 "ubi:bazelbuild/buildtools" = { version = "8.0.3", exe = "buildifier" }
