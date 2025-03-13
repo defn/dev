@@ -42,7 +42,7 @@ inventory: {
 
 	mac: hosts: [
 		"macmini",
-		// nots "mbpro",
+		"mbpro",
 		// off "mbair",
 		// off "mba",
 		// off "mbb",
