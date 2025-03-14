@@ -35,5 +35,7 @@ RUN sudo rm -rf /usr/local/bin/nix/nix /home/ubuntu/.nix-profile/bin/nix \
     .nix-channels .nix-defexpr .nix-profile \
     .local/state/nix
 
+RUN git pull
+
 ENTRYPOINT [ "/bin/s6-svscan" ]
 CMD [ "/home/ubuntu/m/svc" ]
