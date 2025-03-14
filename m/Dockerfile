@@ -31,7 +31,9 @@ RUN	bash -c "source .bash_profile && ./install.sh && ./install.sh"
 
 # nix has mount issues in a restricted container
 # nix should be updated via the image
-RUN sudo rm -f /usr/local/bin/nix/nix /home/ubuntu/.nix-profile/bin/nix
+RUN sudo rm -rf /usr/local/bin/nix/nix /home/ubuntu/.nix-profile/bin/nix \
+    .nix-channels .nix-defexpr .nix-profile \
+    .local/state/nix
 
 ENTRYPOINT [ "/bin/s6-svscan" ]
 CMD [ "/home/ubuntu/m/svc" ]
