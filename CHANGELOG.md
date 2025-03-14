@@ -1,5 +1,37 @@
 # Changelog
 
+## [1.8.0](https://github.com/defn/dev/compare/v1.7.0...v1.8.0) (2025-03-14)
+
+
+### Features
+
+* ansible, pipx via mise ([dc4be1e](https://github.com/defn/dev/commit/dc4be1e94ea86fb53b4aa73551b42d11459998f1))
+* base flake is gc ([6f04db7](https://github.com/defn/dev/commit/6f04db7baef21f8cc057005ee3348867dd9d21a8))
+* build defn/dev with a tag when theres an exact match ([b5a4831](https://github.com/defn/dev/commit/b5a4831bf0bbf194060e0220bc19d2f58ff6c9a2))
+* example gleam project ([3ea6427](https://github.com/defn/dev/commit/3ea64279a50545cf527d6c600586b720c094d322))
+* focal-20250127 in docker image ([d316718](https://github.com/defn/dev/commit/d31671899b9a20611c20407904a99b5b5c5062ea))
+* mise upgrade: aws, helm, wrangler ([eb6169e](https://github.com/defn/dev/commit/eb6169e5cf5b02c9686a52f30e0205da746993e5))
+
+
+### Bug Fixes
+
+* add mbpro back to inventory ([a5fb99e](https://github.com/defn/dev/commit/a5fb99ef59ecf86332f6e392198515493b89a0cf))
+* ansible in global ([aadf6f6](https://github.com/defn/dev/commit/aadf6f68c7ddc1d89f90eae1329c310b048b7f82))
+* clear stats at the end of make home ([19ce2c9](https://github.com/defn/dev/commit/19ce2c9831f4e7b558aa8ad17028972d9d9d389a))
+* clh can deflare mem balloon, provide net config for ens2 ([ee6bec3](https://github.com/defn/dev/commit/ee6bec301c64ffb6a56a98a3a54776c74670b4ab))
+* less noise by skipping formatting ansible playbooks ([69196e8](https://github.com/defn/dev/commit/69196e860742de09420e9da762e104dd2d42c462))
+* make rehome cleans nix correctly ([035b0b2](https://github.com/defn/dev/commit/035b0b2faff43a7d0fddb5473829df559faf565e))
+* no memory balloon, more cpu, makes nix happy ([6a7a669](https://github.com/defn/dev/commit/6a7a669a0e645cf67745f2cf3e1ce8a64fe702b6))
+* no nix in container, doesnt work well ([c246577](https://github.com/defn/dev/commit/c246577cc5d7c21530849ff4ce882f736d336d51))
+* remove all nix dirs in home ([3bc79e8](https://github.com/defn/dev/commit/3bc79e8a5a22b6021b32a769714acf2a9ec0afe3))
+* remove bazel builds from home install ([ab86041](https://github.com/defn/dev/commit/ab860416856e63e7179963e92187167e73d9c1a6))
+* remove hosts that arent up or are slow from default ansible targets ([b4791e1](https://github.com/defn/dev/commit/b4791e16c7d1427c1b4123fff0bd83d3a4c99e06))
+* remove rpi5c as cache server, too slow ([353a70c](https://github.com/defn/dev/commit/353a70cbc45c0256c811a904f7aef6d0025fb92a))
+* remove semaphore, not ready to use it ([6c2474b](https://github.com/defn/dev/commit/6c2474b6ecc5f54c27b0b76002315f6749eaf6ff))
+* sync various install scripts ([8989de2](https://github.com/defn/dev/commit/8989de21ecf10c930a341456eb359ca24f966ac9))
+* update home repo after any docker change ([3a5f50b](https://github.com/defn/dev/commit/3a5f50b88df4e21b691cbcec85d13bf2bc810dab))
+* use pipx ([c138770](https://github.com/defn/dev/commit/c138770861b2bb805c13fcaba920d079766dc5a1))
+
 ## [1.7.0](https://github.com/defn/dev/compare/v1.6.0...v1.7.0) (2025-03-09)
 
 
