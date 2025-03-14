@@ -1,27 +1,26 @@
 #!/usr/bin/env bash
 
-function main {
-	set -exfu
+set -efu -o pipefail
 
+function main {
 	if [[ "$(whoami || true)" == "ubuntu" ]]; then
 		exec sudo "$0" "$@"
 		return $?
 	fi
 
-	unset LANG
-	unset LANGUAGE
-	unset LC_ALL
-
 	export DEBIAN_FRONTEND=noninteractive
 
-	apt update && apt install -y \
-		make direnv curl xz-utils dirmngr gpg pcscd scdaemon gpg-agent rsync build-essential sudo ca-certificates tzdata locales git git-lfs tini iproute2 iptables bc pv socat docker.io s6 cpu-checker
+	apt update
+
+	# sync with install.sh, m/Dockerfile
+	apt install -y \
+		make direnv curl xz-utils dirmngr gpg pcscd scdaemon gpg-agent rsync \
+		build-essential sudo ca-certificates tzdata locales git git-lfs tini \
+		iproute2 iptables bc pv socat docker.io s6 cpu-checker bind9-dnsutils
 
 	apt update && apt install -y \
-		wireguard-tools qemu-system libvirt-clients libvirt-daemon-system openvpn easy-rsa expect tpm2-tools zfsutils-linux ubuntu-drivers-common
-
-	locale-gen C.UTF-8 && update-locale LANG=C.UTF-8
-	export LANG=C.UTF-8
+		wireguard-tools qemu-system libvirt-clients libvirt-daemon-system \
+		openvpn easy-rsa expect tpm2-tools zfsutils-linux ubuntu-drivers-common
 
 	ln -sf /usr/share/zoneinfo/UTC /etc/localtime
 	dpkg-reconfigure -f noninteractive tzdata
