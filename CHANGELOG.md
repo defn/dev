@@ -1,5 +1,23 @@
 # Changelog
 
+## [1.9.0](https://github.com/defn/dev/compare/v1.8.0...v1.9.0) (2025-03-15)
+
+
+### Features
+
+* install tailscale in docker image builds ([#84](https://github.com/defn/dev/issues/84)) ([f9a8ee2](https://github.com/defn/dev/commit/f9a8ee21d90794cde88525b1f1463889157fa582))
+* run tailscaled in docker image ([#88](https://github.com/defn/dev/issues/88)) ([59b1af7](https://github.com/defn/dev/commit/59b1af76cb955f68525062a512ebaf1838df5212)), closes [#86](https://github.com/defn/dev/issues/86)
+* simple make up dev environment ([#89](https://github.com/defn/dev/issues/89)) ([8b91e24](https://github.com/defn/dev/commit/8b91e240b5497858b4f1338c553b9c17a5521552)), closes [#85](https://github.com/defn/dev/issues/85)
+
+
+### Bug Fixes
+
+* install minimal docker config if missing ([#81](https://github.com/defn/dev/issues/81)) ([03b95bc](https://github.com/defn/dev/commit/03b95bcea0fe44028ca8684ddeb3f3ad5e1248ea)), closes [#65](https://github.com/defn/dev/issues/65)
+* install pass to base images ([#79](https://github.com/defn/dev/issues/79)) ([d6d201c](https://github.com/defn/dev/commit/d6d201cb6a281cca7eb2f207c6ae030a3b9d085f)), closes [#78](https://github.com/defn/dev/issues/78)
+* remove docker pass credential store config ([#87](https://github.com/defn/dev/issues/87)) ([8ce9e4c](https://github.com/defn/dev/commit/8ce9e4cc2bade65e506f6beb71a368d629d3f5eb)), closes [#83](https://github.com/defn/dev/issues/83)
+* remove make nix from make sync ([#91](https://github.com/defn/dev/issues/91)) ([5354373](https://github.com/defn/dev/commit/535437379f028f630083e9b49196d403c5140c10)), closes [#90](https://github.com/defn/dev/issues/90)
+* wrapper kubectl-oidc_login for kubelogin ([#82](https://github.com/defn/dev/issues/82)) ([ee2b2d2](https://github.com/defn/dev/commit/ee2b2d2e3ff71420c92f51b2923249af76ef40d9))
+
 ## [1.8.0](https://github.com/defn/dev/compare/v1.7.0...v1.8.0) (2025-03-14)
 
 
