@@ -16,7 +16,7 @@ function main {
 		echo package k
 		"${cue}" export --out json -e images "${app}" k/*.cue | jq -r '.[]' |
 			sort -u |
-			runmany 8 'echo cache: \"$1\": \"$(echo $1 | perl -pe '"'"'s{[:@].*$}{}'"'"')@$(${skopeo} inspect docker://${1%%@sha256*} | jq -r .Digest)\"' |
+			runmany 8 'echo cache: \"$1\": \"$(echo $1 | perl -pe '"'"'s{[:@].*$}{}'"'"')@$(skopeo inspect docker://${1%%@sha256*} | jq -r .Digest)\"' |
 			while read -r l; do
 				echo "$l"
 			done
