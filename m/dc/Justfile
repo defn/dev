@@ -1,12 +1,10 @@
 # get a shell in container
 shell:
-    just up
     docker compose exec home bash
 
 # run container
 up:
+    docker compose pull
     docker compose up -d --remove-orphans
-
-# build containe
-build:
-    docker compose build
+    docker compose exec home sudo tailscale up --ssh --hostname "$(hostname | cut -d . -f1)-dev"
+    docker compose exec home tailscale ip
