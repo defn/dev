@@ -5,11 +5,12 @@ ARG NIX_CONFIG
 
 ENV DEBIAN_FRONTEND=noninteractive
 
-# sync with install.sh, m/i/scripts/001-install-base
+# sync with install.sh, m/i/script/001-install-base
 RUN apt update && apt install -y \
     make direnv curl xz-utils dirmngr gpg pcscd scdaemon gpg-agent rsync \
     build-essential sudo ca-certificates tzdata locales git git-lfs tini \
-    iproute2 iptables docker.io s6 cpu-checker bind9-dnsutils
+    iproute2 iptables bc pv socat docker.io s6 cpu-checker bind9-dnsutils \
+    pass
 
 RUN if [ "$(id -u ubuntu)" != 1000 ]; then groupadd -r --gid 1000 ubuntu && useradd -m -s /bin/bash -g ubuntu --uid 1000 ubuntu; fi
 RUN usermod -aG docker ubuntu
