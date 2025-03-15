@@ -12,6 +12,8 @@ RUN apt update && apt install -y \
     iproute2 iptables bc pv socat docker.io s6 cpu-checker bind9-dnsutils \
     pass
 
+RUN curl -fsSL https://tailscale.com/install.sh | sh
+
 RUN if [ "$(id -u ubuntu)" != 1000 ]; then groupadd -r --gid 1000 ubuntu && useradd -m -s /bin/bash -g ubuntu --uid 1000 ubuntu; fi
 RUN usermod -aG docker ubuntu
 
