@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+exec 2>&1
+
+export STARSHIP_NO=1
+source ~/.bash_profile
+direnv allow
+mise trust
+source .env
+
+export PATH
+
+exec mise exec -- cloudflared tunnel --url localhost:3000
