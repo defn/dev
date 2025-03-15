@@ -13,6 +13,10 @@ function main {
 		build-essential sudo ca-certificates tzdata locales git git-lfs tini \
 		iproute2 iptables bc pv socat docker.io s6 cpu-checker bind9-dnsutils \
 		pass
+	
+	if ! test -e .docker/config.json; then
+		cp .docker/config.json.example .docker/config.json
+	fi
 
 	source .bash_profile
 
