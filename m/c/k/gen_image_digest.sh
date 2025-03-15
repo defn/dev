@@ -4,7 +4,6 @@ function main {
 	local app="${in[app]}"
 
 	local cue="${in[cue]}"
-	export skopeo="${in[skopeo]}"
 
 	mkdir gen
 	rsync -iaL cue.mod/gen/. gen/.
