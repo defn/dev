@@ -383,7 +383,6 @@ sync:
 	$(MAKE) sync_inner
 
 sync_inner:
-	$(MAKE) nix
 	git ls-files | grep 'mise.toml$$' | runmany 'mise trust $$1'
 	mise install
 	(cd m && mise install)
