@@ -20,7 +20,6 @@
         dive
         dnsutils
         docker
-        docker-credential-helpers
         file
         findutils
         fzf
