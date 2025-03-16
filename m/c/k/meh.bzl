@@ -59,12 +59,11 @@ def meh(name, cluster_bundles, by_cluster):
                     ":deploy_cue",
                 ],
                 outs = ["image_digest_{}.cue".format(k)],
-                cmd = "$(location //c/k:gen_image_digest_sh) app=$(location :cue_import_{}) cue=$(location //pkg/cue:flake_cue) skopeo=$(location //pkg/oci:flake_skopeo) $@".format(k),
+                cmd = "$(location //c/k:gen_image_digest_sh) app=$(location :cue_import_{}) cue=$(location //pkg/cue:flake_cue) $@".format(k),
                 tools = [
                     "//c/k:gen_image_digest_sh",
                     "//b/lib:lib_sh",
                     "//pkg/cue:flake_cue",
-                    "//pkg/oci:flake_skopeo",
                 ],
             ),
             native.genrule(
@@ -101,12 +100,11 @@ def meh(name, cluster_bundles, by_cluster):
                     ":deploy_cue",
                 ],
                 outs = ["{}.yaml".format(k)],
-                cmd = "$(location //c/k:gen_deploy_yaml_sh) cue=$(location //pkg/cue:flake_cue) skopeo=$(location //pkg/oci:flake_skopeo) registry=cache.defn.run:4999 _ $(location :cue_import_{}) $(location :image_digest_{}) $@".format(k, k),
+                cmd = "$(location //c/k:gen_deploy_yaml_sh) cue=$(location //pkg/cue:flake_cue) registry=cache.defn.run:4999 _ $(location :cue_import_{}) $(location :image_digest_{}) $@".format(k, k),
                 tools = [
                     "//c/k:gen_deploy_yaml_sh",
                     "//b/lib:lib_sh",
                     "//pkg/cue:flake_cue",
-                    "//pkg/oci:flake_skopeo",
                 ],
             ),
             native.genrule(
