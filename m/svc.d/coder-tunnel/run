@@ -10,4 +10,4 @@ source .env
 
 export PATH
 
-exec mise exec -- cloudflared tunnel --url localhost:3000
+exec mise exec -- cloudflared tunnel --no-autoupdate run --token "${CLOUDFLARED_TUNNEL_TOKEN}"

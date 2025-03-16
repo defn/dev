@@ -1,16 +1,6 @@
 #
-# get certificate for *.example.defn.run
-#
-python -mvenv venv
-source venv/bin/activate
-pip install certbot certbot-dns-cloudflare
-if ! test -f cloudflare.init; then cp cloudflare.ini.example cloudflare.ini; fi
-chmod 0600 cloudflare.ini
-# put cloudflare token in cloudflare.ini
-certbot certonly --dns-cloudflare --dns-cloudflare-credentials cloudflare.ini -d "*.example.defn.run" --config-dir . --work-dir . --logs-dir .
-
-#
 # add github app for authentication
+# not necessary with coder default github auth
 #
 create github app at https://github.com/organizations/defn/settings/applications
 use homepage https://coder.example.defn.run
@@ -19,25 +9,20 @@ callback https://coder.example.defn.run/api/v2/users/oauth2/github/callback
 #
 # record secrets
 #
-~/.env.coder:
-export coder_oauth2_github_allowed_orgs=defn
-export coder_oauth2_github_allowed_teams=defn/dev
-export coder_oauth2_github_client_id_example=
-export coder_oauth2_github_client_secret_example=
-export CODER_SERVER=example
+see .env in s6 service
 
 #
 # create cloudflare tunnel and DNS *.example.defn.run
 #
 create cloudflare tunnel to handle *.example.defn.run
 https://one.dash.cloudflare.com/b79aab534a3aa420f993ca0c14fe0523/networks/tunnels/new
+
 proxy to http://localhost:3000
 create proxied CNAME from *.example to tunnelID.cfargotunnel.com
 
 #
-# run coder server
+# activate s6 services
 #
-cd
-screen -DRR coder
-make chrome-dev-coder name=example
 
+ln -nfs ../svc.d/coder-server ~/m/svc/
+ln -nfs ../svc.d/coder-tunnel ~/m/svc/
