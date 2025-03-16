@@ -1,5 +1,19 @@
 # Changelog
 
+## [1.10.0](https://github.com/defn/dev/compare/v1.9.0...v1.10.0) (2025-03-16)
+
+
+### Features
+
+* coder server default github with allowed teams ([#102](https://github.com/defn/dev/issues/102)) ([6611ec0](https://github.com/defn/dev/commit/6611ec0636e86875e6b16c209638bd792334eab7))
+* coder server running under s6 ([#97](https://github.com/defn/dev/issues/97)) ([9bd1ddd](https://github.com/defn/dev/commit/9bd1ddd37cd6213a571513a840dd8110ae9b1d3e))
+* helm/ 3.17.1 -&gt; 3.17.2 [skip ci] ([72e60d8](https://github.com/defn/dev/commit/72e60d8aa2ddd89f52986c2c8d95c996c8913dc4))
+
+
+### Bug Fixes
+
+* remove redundant oci flake, unused docker credential helpers ([#101](https://github.com/defn/dev/issues/101)) ([b2edf81](https://github.com/defn/dev/commit/b2edf81027073d629a870b1f2c2f890383847d63))
+
 ## [1.9.0](https://github.com/defn/dev/compare/v1.8.0...v1.9.0) (2025-03-15)
 
 
