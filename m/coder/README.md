@@ -65,32 +65,3 @@ coder login servername.defn.run
 ```
 
 Finally, create a workspace with the ssh template with the name `dev`. The server has been created and a workspace available!
-
-# add github app for authentication
-# not necessary with coder default github auth
-#
-create github app at https://github.com/organizations/defn/settings/applications
-use homepage https://coder.example.defn.run
-callback https://coder.example.defn.run/api/v2/users/oauth2/github/callback
-
-#
-# record secrets
-#
-see .env in s6 service
-
-#
-# create cloudflare tunnel and DNS *.example.defn.run
-#
-create cloudflare tunnel to handle *.example.defn.run
-https://one.dash.cloudflare.com/b79aab534a3aa420f993ca0c14fe0523/networks/tunnels/new
-
-proxy to http://localhost:3000
-create proxied CNAME from *.example to tunnelID.cfargotunnel.com
-
-#
-# activate s6 services
-#
-
-ln -nfs ../svc.d/coder-server ~/m/svc/
-ln -nfs ../svc.d/coder-tunnel ~/m/svc/
-
