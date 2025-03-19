@@ -116,6 +116,7 @@ macos:
 rehome:
 	rm -rf ~/.direnv/flake* ~/m/pkg/*/result
 	$(MAKE) home
+	nix-store --gc --print-roots | egrep -v '^/proc|state/nix/profiles|cache/nix/flake'
 
 home:
 	bin/persist-cache
@@ -133,10 +134,8 @@ home:
 	sudo install -d -o ubuntu -g ubuntu /usr/local/bin/nix
 	rm -rf bin/nix
 	ln -nfs /usr/local/bin/nix bin/nix
-	nix-store --gc
 	for a in /tmp/nix-bin/*; do if ! test -e "$(readlink "$a")"; then rm -vf "$a"; fi; done 
 	rsync -iaI --delete /tmp/nix-bin/. /usr/local/bin/nix/. >/dev/null
-	nix-store --gc --print-roots | egrep -v '^/proc|state/nix/profiles|cache/nix/flake'
 
 .PHONY: dotfiles
 dotfiles:
