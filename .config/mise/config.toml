@@ -15,5 +15,6 @@ pipx = "1.7.1"
 python = "3.13.2"
 starship = "1.22.1"
 "ubi:coder/code-server" = { version = "4.98.0", bin_path = "bin", extract_all = "true" }
+"ubi:honeycombio/buildevents" = "0.17.0"
 "ubi:peak/s5cmd" = "2.3.0"
 "ubi:railwayapp/railpack" = "0.0.53"

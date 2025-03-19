@@ -8,7 +8,6 @@ function main {
 
 	case "${1-}" in
 	start)
-		export BUILDEVENT_APIKEY="$(pass BUILDEVENT_APIKEY 2>/dev/null || true)"
 		STARTED="$(date +%s)"
 		shift
 		name="$1"
@@ -56,4 +55,6 @@ function main {
 	esac
 }
 
-main "$@"
+if [[ -n "${BUILDEVENT_APIKEY:-}" ]]; then
+	main "$@"
+fi
