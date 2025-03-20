@@ -114,8 +114,10 @@ macos:
 	defaults write -g ApplePressAndHoldEnabled -bool false
 
 rehome:
-	rm -rf ~/.direnv/flake* ~/m/pkg/*/result
 	$(MAKE) home
+	rm -rf ~/.direnv/flake* ~/m/pkg/*/result
+	nix-store --gc
+	nix-store --gc --print-roots | egrep -v '^/proc|state/nix/profiles|cache/nix/flake'
 
 home:
 	t home $(MAKE) home-inner
