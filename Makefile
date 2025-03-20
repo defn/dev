@@ -138,8 +138,6 @@ home-nix-finalize-bin:
 	rsync -iaI --delete /tmp/nix-bin/. /usr/local/bin/nix/. >/dev/null
 	rm -rf bin/nix
 	ln -nfs /usr/local/bin/nix bin/nix
-	for a in /tmp/nix-bin/*; do if ! test -e "$(readlink "$a")"; then rm -vf "$a"; fi; done 
-	rsync -iaI --delete /tmp/nix-bin/. /usr/local/bin/nix/. >/dev/null
 
 home-nix-base:
 	rm -rf /tmp/nix-tmp /tmp/nix-bin
