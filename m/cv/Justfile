@@ -222,10 +222,10 @@ open site n="1" chunk="10" file="following.html":
         read -p "Press Enter to continue at $((i + chunk_size))..."
     done
 
-freeze from snap backups="backup slow fast1":
+freeze from snap backups="backup slow":
     #!/usr/bin/env bash
-    sudo zfs snapshot fast/cv@{{snap}}
-    runmany 'just send fast/cv {{snap}} $1' backup
+    sudo zfs snapshot fast/cv@{{snap}} || true
+    runmany 'just send fast/cv {{snap}} $1' {{backups}}
     just split fast/cv {{from}} {{snap}} /backup/backup/zfs/cv-
 
 serve:
