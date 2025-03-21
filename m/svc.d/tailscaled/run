@@ -2,6 +2,10 @@
 
 exec 2>&1
 
+if ! test -e /dev/net/tun; then
+    exec sleep infinity
+fi
+
 if ! type -P tailscale; then curl -fsSL https://tailscale.com/install.sh | sh; fi
 
 exec sudo tailscaled
