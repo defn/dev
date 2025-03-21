@@ -13,6 +13,7 @@ brew "util-linux"
 brew "starship"
 brew "flock"
 brew "mise"
+brew "coreutils"
 
 cask "font-fira-code"
 
