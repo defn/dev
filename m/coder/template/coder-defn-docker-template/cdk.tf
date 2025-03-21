@@ -67,11 +67,9 @@ resource "coder_agent" "main" {
     GIT_AUTHOR_NAME     = "${data.coder_workspace_owner.me.name}"
     GIT_COMMITTER_EMAIL = "${data.coder_workspace_owner.me.email}"
     GIT_COMMITTER_NAME  = "${data.coder_workspace_owner.me.name}"
-    LC_ALL              = "C.UTF-8"
-    LOCAL_ARCHIVE       = "/usr/lib/locale/locale-archive"
   }
   os             = data.coder_parameter.os.value
-  startup_script = "set -x; exec >>/tmp/meh.log; exec 2>&1; cd ~ && source .bash_profile && j destroy-coder-agent && cd ~/m && j coder::code-server $${CODER_NAME} &"
+  startup_script = "cd ~ && source .bash_profile && j destroy-coder-agent && cd ~/m && j coder::code-server $${CODER_NAME}"
   display_apps {
     ssh_helper      = false
     vscode          = false
@@ -107,8 +105,9 @@ resource "docker_volume" "home_volume" {
 resource "docker_container" "workspace" {
   count = data.coder_workspace.me.start_count
 
+  name = "coder-${data.coder_workspace_owner.me.name}-${lower(data.coder_workspace.me.name)}"
+
   image    = "quay.io/defn/dev:base"
-  name     = "coder-${data.coder_workspace_owner.me.name}-${lower(data.coder_workspace.me.name)}"
   hostname = data.coder_workspace.me.name
 
   env = [
@@ -129,6 +128,10 @@ resource "docker_container" "workspace" {
     container_path = "/home/coder"
     volume_name    = docker_volume.home_volume.name
     read_only      = false
+  }
+
+  provisioner "local-exec" {
+    command = "docker exec coder-${data.coder_workspace_owner.me.name}-${lower(data.coder_workspace.me.name)} bin/with-env just create-coder-agent"
   }
 
   labels {
