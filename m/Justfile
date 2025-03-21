@@ -32,8 +32,7 @@ base:
 			--build-arg GITHUB_TOKEN="$GITHUB_TOKEN" \
 			--build-arg NIX_CONFIG="access-tokens = github.com=$GITHUB_TOKEN" \
 			. \
-		&& docker build -t quay.io/defn/dev:${BUILD_TAG} -f Dockerfile.latest \
+		&& docker build --no-cache -t quay.io/defn/dev:${BUILD_TAG} -f Dockerfile.latest \
 			--build-arg BUILD_TAG="${BUILD_TAG}-inner" \
-			--build-arg BUILD_SHA="$BUILD_SHA" \
 			. \
 		&& docker push quay.io/defn/dev:${BUILD_TAG} 
