@@ -1,5 +1,25 @@
 # Changelog
 
+## [1.11.0](https://github.com/defn/dev/compare/v1.10.0...v1.11.0) (2025-03-21)
+
+
+### Features
+
+* base docker image will update to the latest HEAD ([5349b73](https://github.com/defn/dev/commit/5349b73b21ad88491cfb2b4949e943ad2f5860fc))
+* create coder server doc and install dependencies in coder tunnel ([#112](https://github.com/defn/dev/issues/112)) ([d2e55e6](https://github.com/defn/dev/commit/d2e55e6ad0bc13b91d02cca30223f8045de32d07)), closes [#106](https://github.com/defn/dev/issues/106)
+* docker workspaces ([#119](https://github.com/defn/dev/issues/119)) ([4e7d25d](https://github.com/defn/dev/commit/4e7d25dc84a224d7119e99044ea667a5b519e18d))
+
+
+### Bug Fixes
+
+* /usr/local/bin/nix chown with correct username ([cbd0d07](https://github.com/defn/dev/commit/cbd0d07c7bcdaecc17ed813280bd049cb3d2f751))
+* always build latest without cache ([36e152b](https://github.com/defn/dev/commit/36e152bbef7519ddab46a7f76e53a21ac24b0bf3))
+* base image syncs in latest build ([46c789b](https://github.com/defn/dev/commit/46c789baa0a99b60ba35c691e784b3c4da348a0a))
+* bin/t working again for honeycomb traces ([#115](https://github.com/defn/dev/issues/115)) ([2bfe475](https://github.com/defn/dev/commit/2bfe4756c11a106c0f07ce7616876b2d89cc46a4))
+* bin/t works without buildevents or api token ([34f0892](https://github.com/defn/dev/commit/34f0892eb488ee5821866ba69aae87e98e417b99))
+* coreutils on macos, was missing tac ([e13d8ff](https://github.com/defn/dev/commit/e13d8ff909166ebe8c69830975a4f934a03d04b8))
+* move nix garbage collection to rehome ([#117](https://github.com/defn/dev/issues/117)) ([59b2d5e](https://github.com/defn/dev/commit/59b2d5e1b8ef010e48a1ba1f911da0b016d363fe))
+
 ## [1.10.0](https://github.com/defn/dev/compare/v1.9.0...v1.10.0) (2025-03-16)
 
 
