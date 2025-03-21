@@ -125,9 +125,7 @@ home:
 home-inner:
 	bin/persist-cache
 	t install-nix-base $(MAKE) home-nix-base
-	t nix-garbage-collect nix-store --gc
 	t nix-finalize-bin $(MAKE) home-nix-finalize-bin
-	nix-store --gc --print-roots | egrep -v '^/proc|state/nix/profiles|cache/nix/flake'
 
 home-nix-finalize-bin:
 	rm -f /tmp/nix-bin/.bazel-nix-store /tmp/nix-bin/.nix-flake
