@@ -25,4 +25,15 @@ up:
 	@true
 
 base:
-	GITHUB_TOKEN="$(just github::token)" && docker build -t quay.io/defn/dev:$(git describe --tags --exact-match 2>&- || echo base) --build-arg GITHUB_TOKEN="$GITHUB_TOKEN" --build-arg NIX_CONFIG="access-tokens = github.com=$GITHUB_TOKEN" . && docker push quay.io/defn/dev:base 
+	GITHUB_TOKEN="$(just github::token)" \
+	BUILD_SHA="$(git rev-parse HEAD)" \
+	BUILD_TAG="$(git describe --tags --exact-match 2>&- || echo base)" \
+		&& docker build -t quay.io/defn/dev:${BUILD_TAG}-inner \
+			--build-arg GITHUB_TOKEN="$GITHUB_TOKEN" \
+			--build-arg NIX_CONFIG="access-tokens = github.com=$GITHUB_TOKEN" \
+			. \
+		&& docker build -t quay.io/defn/dev:${BUILD_TAG} -f Dockerfile.latest \
+			--build-arg BUILD_TAG="${BUILD_TAG}-inner" \
+			--build-arg BUILD_SHA="$BUILD_SHA" \
+			. \
+		&& docker push quay.io/defn/dev:${BUILD_TAG} 

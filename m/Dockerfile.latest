@@ -1,0 +1,6 @@
+ARG BUILD_TAG
+ARG BUILD_SHA
+
+FROM quay.io/defn/dev:${BUILD_TAG}
+
+RUN echo "${BUILD_SHA}" && git pull
