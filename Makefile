@@ -133,7 +133,7 @@ home-nix-finalize-bin:
 	rm -f /tmp/nix-bin/bash* /tmp/nix-bin/sh
 	rm -f /tmp/nix-bin/{gawkbug,patchelf}
 	for a in /tmp/nix-bin/*; do if ! test -e "$(readlink "$a")"; then rm -vf "$a"; fi; done 
-	sudo install -d -o ubuntu -g ubuntu /usr/local/bin/nix
+	sudo install -d -o "$(shell id -un)" -g "$(shell id -gn)" /usr/local/bin/nix
 	rsync -iaI --delete /tmp/nix-bin/. /usr/local/bin/nix/. >/dev/null
 	rm -rf bin/nix
 	ln -nfs /usr/local/bin/nix bin/nix
