@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+
+#MISE description="Create a branch for issue or PR"
+#USAGE arg "thing" help="The issue or PR to work on"
+
+cd "${MISE_ORIGINAL_CWD}"
+
+while ! gh auth token >/dev/null; do
+	gh auth login
+done
+
+branch="$(gh issue view "${usage_thing}" --json number,title | jq -r '"\(.number)-\(.title)" | gsub("[^a-zA-Z0-9]+"; "-") | ascii_downcase')"
+if [[ -z "${branch}" ]]; then
+    echo "ERROR: can't find issue or branch ${thing}" 2>&1
+    exit 1
+fi
+
+if git checkout -b "${branch}"; then
+	git fetch origin
+	git merge origin/main
+	git push -u origin "$(git rev-parse --abbrev-ref HEAD)"
+else
+	git checkout "${branch}"
+	git pull
+fi
