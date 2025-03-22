@@ -22,6 +22,8 @@ function main {
 
 	make sync
 	make install
+
+	./fixup.sh
 }
 
 main "$@"
