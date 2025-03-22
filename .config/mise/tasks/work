@@ -10,9 +10,9 @@ while ! gh auth token >/dev/null; do
 done
 
 branch="$(gh issue view "${usage_thing}" --json number,title | jq -r '"\(.number)-\(.title)" | gsub("[^a-zA-Z0-9]+"; "-") | ascii_downcase')"
-if [[ -z "${branch}" ]]; then
-    echo "ERROR: can't find issue or branch ${thing}" 2>&1
-    exit 1
+if [[ -z ${branch} ]]; then
+	echo "ERROR: can't find issue or branch ${thing}" 2>&1
+	exit 1
 fi
 
 if git checkout -b "${branch}"; then
@@ -21,5 +21,12 @@ if git checkout -b "${branch}"; then
 	git push -u origin "$(git rev-parse --abbrev-ref HEAD)"
 else
 	git checkout "${branch}"
+	git fetch origin
+	git merge origin/main
 	git pull
 fi
+
+(
+	cd
+	make sync
+)

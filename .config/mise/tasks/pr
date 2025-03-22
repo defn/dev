@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+#MISE description="Create a PR"
+
+cd "${MISE_ORIGINAL_CWD}"
+
+while ! gh auth token >/dev/null; do
+	gh auth login
+done
+
+git push -u origin "$(git rev-parse --abbrev-ref HEAD)"
+echo | gh pr create --web
