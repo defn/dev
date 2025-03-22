@@ -21,5 +21,9 @@ if git checkout -b "${branch}"; then
 	git push -u origin "$(git rev-parse --abbrev-ref HEAD)"
 else
 	git checkout "${branch}"
+	git fetch origin
+	git merge origin/main
 	git pull
 fi
+
+(cd; make sync)
