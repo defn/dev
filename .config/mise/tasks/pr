@@ -9,4 +9,4 @@ while ! gh auth token >/dev/null; do
 done
 
 git push -u origin "$(git rev-parse --abbrev-ref HEAD)"
-echo | gh create --web
+echo | gh pr create --web
