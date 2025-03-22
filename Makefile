@@ -395,6 +395,8 @@ sync_inner:
 	git ls-files | grep 'mise.toml$$' | runmany 'mise trust $$1'
 	mise install
 	(cd m && mise install)
+	./fixup.sh
+
 up:
 	cd m/dc && just up
 	
