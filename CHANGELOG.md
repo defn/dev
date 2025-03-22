@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.11.1](https://github.com/defn/dev/compare/v1.11.0...v1.11.1) (2025-03-22)
+
+
+### Bug Fixes
+
+* tailscale service sleeps forever without /dev/net/tun ([4b82b43](https://github.com/defn/dev/commit/4b82b43f59030f6716e0bfd6107f4c6d812349b0))
+
 ## [1.11.0](https://github.com/defn/dev/compare/v1.10.0...v1.11.0) (2025-03-21)
 
 
