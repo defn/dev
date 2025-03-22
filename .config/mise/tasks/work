@@ -15,18 +15,25 @@ if [[ -z ${branch} ]]; then
 	exit 1
 fi
 
-if git checkout -b "${branch}"; then
-	git fetch origin
-	git merge origin/main
-	git push -u origin "$(git rev-parse --abbrev-ref HEAD)"
-else
-	git checkout "${branch}"
-	git fetch origin
-	git merge origin/main
-	git pull
-fi
-
+# always proceed from main branch
 (
 	cd
+	git checkout main
 	make sync
 )
+
+# try creating the branch
+if git checkout -b "${branch}"; then
+	git push -u origin "$(git rev-parse --abbrev-ref HEAD)"
+
+# otherwise, check out the branch
+else
+	git checkout "${branch}"
+fi
+
+# sync again to pick up branch settings
+git merge origin/main
+git pull
+
+cd
+make sync
