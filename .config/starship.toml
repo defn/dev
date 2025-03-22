@@ -49,7 +49,7 @@ disabled = false
 disabled = true
 
 [custom.lockdown]
-command = 'if test "$(defaults read .GlobalPreferences.plist LDMGlobalEnabled)" != "1"; then echo not-locked-down; fi'
+command = 'if test "$(defaults read .GlobalPreferences.plist LDMGlobalEnabled)" == "1"; then echo locked-down; fi'
 when = ''' test "$(uname -s)" == "Darwin" '''
 format = '[$output]($style) '
 
