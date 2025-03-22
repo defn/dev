@@ -212,7 +212,10 @@ split dataset from to where="~/work/backup/zfs/cv-":
     sudo zfs send -i {{dataset}}@{{from}} {{dataset}}@{{to}} | pv | split -b 5G --numeric-suffixes=1 --suffix-length=2 - {{where}}{{to}}.zfs.
     for a in {{where}}{{to}}.zfs.??; do echo "$a"; cat "$a" | sha256sum > "$a.sha256"; done
 
-open site n="1" chunk="10" file="following.html":
+open:
+    just open-inner "${SITE}" "$(cat LAST)"
+
+open-inner site n="1" chunk="10" file="following.html":
     #!/usr/bin/env bash
     lines=$(wc -l < "{{file}}")
     chunk_size={{chunk}}
