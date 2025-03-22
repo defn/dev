@@ -4,6 +4,10 @@
 
 cd "${MISE_ORIGINAL_CWD}"
 
+while ! gh auth token >/dev/null; then
+    gh auth login
+fi
+
 branch="$(gh issue view 122 --json number,title | jq -r '"\(.number)-\(.title)" | gsub("[^a-zA-Z0-9]+"; "-") | ascii_downcase')"
 
 if git checkout -b "${branch}"; then
