@@ -13,19 +13,14 @@ fi
 
 case "$(basename "$(pwd)")" in
 	svc)
-		cd ..
-		mise run serve		
+		echo "ERROR: s6-svscandir restart not implemented" 1>&2
+		exit 1
 		;;
 	*)
-		if ! s6-svstat . >/dev/null 2>&1; then
-			cd $(pwd)/../../svc && mise run activate
-			while ! s6-svstat .; do
-				sleep 1
-			done
-		fi
-		s6-svc -u .
-		while ! s6-svstat . | grep ^up; do
+		s6-svc -d .
+		while ! s6-svstat . | grep ^down; do
 			sleep 1
 		done
+		mise run start
 		;;
 esac

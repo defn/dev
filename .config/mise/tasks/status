@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+
+#MISE description="Get the status of an s6 service"
+#USAGE arg "path" help="Path to a service directory" default=""
+
+set -efu -o pipefail
+
+cd "${MISE_ORIGINAL_CWD}"
+
+if [[ -n "${usage_path}" ]]; then
+	cd "${usage_path}"
+fi
+
+case "$(basename "$(pwd)")" in
+	svc)
+		echo "ERROR: s6-svscan status not implemented" 1>&2
+		exit 1
+		;;
+	*)
+		s6-svstat .
+		;;
+esac

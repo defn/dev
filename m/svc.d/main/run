@@ -2,4 +2,4 @@
 
 exec 2>&1
 
-exec mise run up
+exec sleep infinity
