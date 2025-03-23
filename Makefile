@@ -389,7 +389,7 @@ zfs:
 
 sync:
 	git pull
-	$(MAKE) sync_inner
+	env GITHUB_TOKEN="$$(cd m && just github::token)" $(MAKE) sync_inner
 
 sync_inner:
 	git ls-files | grep 'mise.toml$$' | runmany 'mise trust $$1'
