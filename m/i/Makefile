@@ -34,8 +34,8 @@ reset:
 	docker build --no-cache -t 169.254.32.1:5000/defn/dev:base --build-arg GITHUB_TOKEN="$(GITHUB_TOKEN)" --build-arg NIX_CONFIG="access-tokens = github.com=$(GITHUB_TOKEN)" . 
 	docker push 169.254.32.1:5000/defn/dev:base
 	$(MAKE) latest
-	docker tag 169.254.32.1:5000/defn/dev:latest quay.io/defn/dev:latest
-	docker push quay.io/defn/dev:latest
+	docker tag 169.254.32.1:5000/defn/dev:latest quay.io/defnnn/dev:latest
+	docker push quay.io/defnnn/dev:latest
 
 rebase:
 	docker build --no-cache -t 169.254.32.1:5000/defn/dev:rebase -f Dockerfile.latest --build-arg GITHUB_TOKEN="$(GITHUB_TOKEN)" --build-arg NIX_CONFIG="access-tokens = github.com=$(GITHUB_TOKEN)" .

@@ -2,7 +2,7 @@
 name: dev
 services:
   home:
-    image: quay.io/defn/dev:base
+    image: quay.io/defnnn/dev:base
     user: ubuntu
     working_dir: /home/ubuntu
     restart: always

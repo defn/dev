@@ -1,5 +1,5 @@
 ARG RELEASE
 
-FROM quay.io/defn/dev:${RELEASE}
+FROM quay.io/defnnn/dev:${RELEASE}
 
 RUN bin/with-env make sync

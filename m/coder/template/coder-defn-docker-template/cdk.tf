@@ -107,7 +107,7 @@ resource "docker_container" "workspace" {
 
   name = "coder-${data.coder_workspace_owner.me.name}-${lower(data.coder_workspace.me.name)}"
 
-  image    = "quay.io/defn/dev:base"
+  image    = "quay.io/defnnn/dev:base"
   hostname = data.coder_workspace.me.name
 
   env = [
