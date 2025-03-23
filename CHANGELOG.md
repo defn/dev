@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.13.0](https://github.com/defn/dev/compare/v1.12.1...v1.13.0) (2025-03-23)
+
+
+### Features
+
+* switch to ghcr.io registry ([9cf0e6b](https://github.com/defn/dev/commit/9cf0e6bb31a9e3d88fda3eafd46d1fc2bf142590))
+
+
+### Bug Fixes
+
+* rename quay org to defnnn ([700808d](https://github.com/defn/dev/commit/700808dcc5940c203a25ed9d6de09f4ec3556fe3))
+
 ## [1.12.1](https://github.com/defn/dev/compare/v1.12.0...v1.12.1) (2025-03-23)
 
 
