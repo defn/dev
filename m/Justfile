@@ -25,6 +25,7 @@ up:
 	@true
 
 base:
+  git fetch
 	GITHUB_TOKEN="$(just github::token)" \
 	BUILD_SHA="$(git rev-parse HEAD)" \
 	RELEASE="$(git describe --tags --abbrev=0)" \
