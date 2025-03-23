@@ -15,7 +15,6 @@ RUN apt update && apt install -y \
 RUN curl -fsSL https://tailscale.com/install.sh | sh
 
 RUN if [ "$(id -u ubuntu)" != 1000 ]; then groupadd -r --gid 1000 ubuntu && useradd -m -s /bin/bash -g ubuntu --uid 1000 ubuntu; fi
-RUN usermod -aG docker ubuntu
 
 RUN echo "ubuntu ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 
