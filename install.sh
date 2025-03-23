@@ -13,6 +13,8 @@ function main {
 		build-essential sudo ca-certificates tzdata locales git git-lfs tini \
 		iproute2 iptables bc pv socat docker.io s6 cpu-checker bind9-dnsutils \
 		pass
+
+	if [[ ! -x ~/.local/bin/mise ]]; then curl -sSL https://mise.run | bash; fi
 	
 	source .bash_profile
 
