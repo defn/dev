@@ -37,4 +37,5 @@ base:
 		&& docker build --no-cache -t ghcr.io/defn/dev:base -f Dockerfile.latest \
 			--build-arg RELEASE="${RELEASE}" \
 			. \
+		&& docker push ghcr.io/defn/dev:${RELEASE} \
 		&& docker push ghcr.io/defn/dev:base
