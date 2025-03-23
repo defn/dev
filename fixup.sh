@@ -13,7 +13,9 @@ function main {
 		cp .docker/config.json.example .docker/config.json
 	fi
 
-	sudo chgrp ubuntu /var/run/docker.sock
+	if test -e /var/run/docker.sock; then
+		sudo chgrp ubuntu /var/run/docker.sock
+	fi
 	sudo usermod -aG docker ubuntu
 }
 
