@@ -1,5 +1,40 @@
 # Changelog
 
+## [1.12.0](https://github.com/defn/dev/compare/v1.11.0...v1.12.0) (2025-03-23)
+
+
+### Features
+
+* coder-server env example documents github teams ([#135](https://github.com/defn/dev/issues/135)) ([1fcf96c](https://github.com/defn/dev/commit/1fcf96c96869b6f71faea8f88828118bac6001db))
+* install bat ([#133](https://github.com/defn/dev/issues/133)) ([beff1f1](https://github.com/defn/dev/commit/beff1f1b5e9796bbbbcc1a5113470188d74da6fb))
+* install chamber cli ([#128](https://github.com/defn/dev/issues/128)) ([2d78da0](https://github.com/defn/dev/commit/2d78da0c145c446ecfce335f13b021fb5ccfb4cf))
+* m adhoc task to create an issue and work on it ([#145](https://github.com/defn/dev/issues/145)) ([3a9914b](https://github.com/defn/dev/commit/3a9914b304948b48ce42c7dae9104f87dac87964))
+* m pr task to create a pull-request ([#125](https://github.com/defn/dev/issues/125)) ([cc2715b](https://github.com/defn/dev/commit/cc2715b727c754ba370d3fd9423fe8c8ab84036b))
+* m work task to work on an issue ([#123](https://github.com/defn/dev/issues/123)) ([522e8bb](https://github.com/defn/dev/commit/522e8bbb8cc3252c9dc2c82393196756dd9fc12c))
+* m work will sync main first before creating branch ([eae263b](https://github.com/defn/dev/commit/eae263b888704e383fe278ffcb4c68046ed23926))
+* run fixup at the end of sync ([831c3a5](https://github.com/defn/dev/commit/831c3a5f23b008a0ca79e70c05655b0bf3e47a88))
+* tagged release images ([#156](https://github.com/defn/dev/issues/156)) ([81dd7c8](https://github.com/defn/dev/commit/81dd7c8bd814a7aad9c82795292e0c7edbb95494))
+* upgrade mise managed tools ([#124](https://github.com/defn/dev/issues/124)) ([0006706](https://github.com/defn/dev/commit/00067069f6977d9d5d36cf5b125cad774e42ac9c))
+
+
+### Bug Fixes
+
+* always git pull during docker build ([1f5bb33](https://github.com/defn/dev/commit/1f5bb3374dd05bde5855033f36d78fefc551098e))
+* check if docker socket exists ([6d643cf](https://github.com/defn/dev/commit/6d643cffac86e762fd3f7e32ed122bee06f734c0))
+* comment out GSSAPIAuthentication in ssh client config ([#129](https://github.com/defn/dev/issues/129)) ([bc7b329](https://github.com/defn/dev/commit/bc7b3292eb6c749b2c96edb063ada2942e505780))
+* docker socket accessible by ubuntu user ([#134](https://github.com/defn/dev/issues/134)) ([e9ca154](https://github.com/defn/dev/commit/e9ca154cc71665ea3f13060a5fc8b98498ac1b2c))
+* hide cloudflare tunnel token from command line ([#137](https://github.com/defn/dev/issues/137)) ([1c9b40e](https://github.com/defn/dev/commit/1c9b40e9a1dea410eb0b49fa2c7b1c46fc68a792))
+* install mise if missing ([#147](https://github.com/defn/dev/issues/147)) ([5c4d8bc](https://github.com/defn/dev/commit/5c4d8bcb24169e82d07082921bbbc1e857c67397))
+* mount /dev/net/tun for tailscale in m/dc ([#136](https://github.com/defn/dev/issues/136)) ([daf2a6e](https://github.com/defn/dev/commit/daf2a6e45b8f8b2a12d94dca5daeae00148c1802))
+* only fix ping if it exists ([ea76bf1](https://github.com/defn/dev/commit/ea76bf1c045b41be29f8babcde968462e223aa60))
+* ping capabilities so it can work ([#130](https://github.com/defn/dev/issues/130)) ([5e8f971](https://github.com/defn/dev/commit/5e8f971da61a964858f5cbefa1676fddfa3e71fe))
+* remove acme.sh certs, dont provide any ([#126](https://github.com/defn/dev/issues/126)) ([ea65fea](https://github.com/defn/dev/commit/ea65feaf858b3adbfca016fd9cc98246336d4cf6))
+* remove docker pass, secretservice credential providers ([#131](https://github.com/defn/dev/issues/131)) ([b756efd](https://github.com/defn/dev/commit/b756efd9ab2d2df13e097162f70aca0eb886db0d))
+* tailscale service sleeps forever without /dev/net/tun ([4b82b43](https://github.com/defn/dev/commit/4b82b43f59030f6716e0bfd6107f4c6d812349b0))
+* use updated base image at quay.io ([#150](https://github.com/defn/dev/issues/150)) ([b80898f](https://github.com/defn/dev/commit/b80898fff25ff10dca5db4a6693b652126fb5aa1))
+* warn if locked-down mode is enabled ([#127](https://github.com/defn/dev/issues/127)) ([fb1eea4](https://github.com/defn/dev/commit/fb1eea45731051b3e2675f5a98d6ded9322049d5))
+* wrong path to ping ([15dc9d9](https://github.com/defn/dev/commit/15dc9d90a94fa1f85c9094f61012b9889d4c3a25))
+
 ## [1.11.0](https://github.com/defn/dev/compare/v1.10.0...v1.11.0) (2025-03-21)
 
 
