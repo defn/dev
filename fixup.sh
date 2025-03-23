@@ -6,7 +6,7 @@ function main {
 	sudo perl -pe 's{^\s*GSSAPIAuthentication}{#GSSAPIAuthentication}' -i /etc/ssh/ssh_config
 
 	if test -x /usr/local/bin/nix/ping; then	
-		sudo setcap cap_net_raw+p $(readlink /usr/local/bin/ping)
+		sudo setcap cap_net_raw+p $(readlink /usr/local/bin/nix/ping)
 	fi
 
 	for a in docker-credential-{pass,secretservice}; do rm -vf "$(which "$a")"; done
