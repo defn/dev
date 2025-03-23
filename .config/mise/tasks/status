@@ -13,8 +13,9 @@ fi
 
 case "$(basename "$(pwd)")" in
 	svc)
-		echo "ERROR: s6-svscan status not implemented" 1>&2
-		exit 1
+		set +f
+		runmany 'cd $1 && echo "$(basename $(pwd)) $(mise run status 2>/dev/null)"' */ | sort | talign 2
+		set -f
 		;;
 	*)
 		s6-svstat .
