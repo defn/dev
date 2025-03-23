@@ -16,7 +16,7 @@ gh issue create --assignee '@me' --title "${usage_title}" --body ''
 issue=
 while test -z "${issue}"; do
 	sleep 1
-	issue="$(gh issue ls --search "${usage_title}" --json number | jq -r '.[0].number' )"
+	issue="$(gh issue ls --search "${usage_title}" --json number | jq -r '.[0].number // ""' )"
 done
 
 # let m work check out the issue branch
