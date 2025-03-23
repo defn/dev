@@ -29,12 +29,12 @@ base:
 	GITHUB_TOKEN="$(just github::token)" \
 	BUILD_SHA="$(git rev-parse HEAD)" \
 	RELEASE="$(git describe --tags --abbrev=0)" \
-		&& docker build -t quay.io/defnnn/dev:${RELEASE} \
+		&& docker build -t ghcr.io/defn/dev:${RELEASE} \
 			--build-arg RELEASE="$RELEASE" \
 			--build-arg GITHUB_TOKEN="$GITHUB_TOKEN" \
 			--build-arg NIX_CONFIG="access-tokens = github.com=$GITHUB_TOKEN" \
 			. \
-		&& docker build --no-cache -t quay.io/defnnn/dev:base -f Dockerfile.latest \
+		&& docker build --no-cache -t ghcr.io/defn/dev:base -f Dockerfile.latest \
 			--build-arg RELEASE="${RELEASE}" \
 			. \
-		&& docker push quay.io/defnnn/dev:base
+		&& docker push ghcr.io/defn/dev:base

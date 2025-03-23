@@ -5,7 +5,7 @@ default:
 -include ../../common/Makefile.coder
 -include ../../common/Makefile.build
 
-image ?= quay.io/defnnn/dev:latest-hook-example
+image ?= ghcr.io/defn/dev:latest-hook-example
 
 deploy:
 	$(MAKE) chart
