@@ -392,6 +392,7 @@ sync:
 	$(MAKE) sync_inner
 
 sync_inner:
+	mise self-update --yes
 	git ls-files | grep 'mise.toml$$' | runmany 'mise trust $$1'
 	mise install
 	(cd m && mise install)
