@@ -13,7 +13,11 @@ done
 gh issue create --assignee '@me' --title "${usage_title}" --body ''
 
 # search for the same issue by title to get the issue number
-issue="$(gh issue ls --search "${usage_title}" --json number | jq -r '.[0].number')"
+issue=
+while test -z "${issue}"; do
+	sleep 1
+	issue="$(gh issue ls --search "${usage_title}" --json number | jq -r '.[0].number' )"
+done
 
 # let m work check out the issue branch
 mise run work "$issue"
