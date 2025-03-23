@@ -17,10 +17,7 @@ case "$(basename "$(pwd)")" in
 		exit 1
 		;;
 	*)
-		s6-svc -d .
-		while ! s6-svstat . | grep ^down; do
-			sleep 1
-		done
+		mise run stop
 		mise run start
 		;;
 esac
