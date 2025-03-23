@@ -9,6 +9,7 @@ services:
     privileged: true
     devices:
       - "/dev/kvm:/dev/kvm"
+      - "/dev/net/tun:/dev/net/tun"
     cap_add:
       - NET_ADMIN
     security_opt:
