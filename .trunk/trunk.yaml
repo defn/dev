@@ -2,7 +2,7 @@
 # To learn more about the format of this file, see https://docs.trunk.io/reference/trunk-yaml
 version: 0.1
 cli:
-  version: 1.22.10
+  version: 1.22.11
 plugins:
   sources:
     - id: trunk
@@ -42,7 +42,7 @@ lint:
     - shellcheck@0.10.0
     - shfmt@3.6.0
     - taplo@0.9.3
-    - yamllint@1.35.1
+    - yamllint@1.36.2
   disabled:
     - bandit
     - ruff
