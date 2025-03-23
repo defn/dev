@@ -41,6 +41,7 @@ EOF
 
 	groupadd -g 1000 ubuntu && useradd -u 1000 -d /home/ubuntu -s /bin/bash -g ubuntu -M ubuntu
 
+	# need docker accessible because install.sh won't be run in the AMI
 	usermod -aG docker ubuntu
 
 	echo 'ubuntu ALL=(ALL:ALL) NOPASSWD: ALL' >/etc/sudoers.d/ubuntu
