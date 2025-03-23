@@ -29,7 +29,7 @@ RUN git clone https://github.com/defn/dev dev && \
     mv dev/.git . && \
     git reset --hard && \
     rm -rf dev
-RUN	bash -c "source .bash_profile && ./install.sh && ./install.sh"
+RUN	bash -c "git pull && source .bash_profile && ./install.sh && ./install.sh"
 
 # nix has mount issues in a restricted container
 # nix should be updated via the image
