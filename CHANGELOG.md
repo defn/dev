@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.12.1](https://github.com/defn/dev/compare/v1.12.0...v1.12.1) (2025-03-23)
+
+
+### Bug Fixes
+
+* git fetch to retrieve latest release tags ([accb133](https://github.com/defn/dev/commit/accb133cb0827bf9070370f79a2c719778e9115e))
+* just whitespace ([ccc1ad8](https://github.com/defn/dev/commit/ccc1ad80f216b659266e0eae78a0b2283e2662ba))
+
 ## [1.12.0](https://github.com/defn/dev/compare/v1.11.0...v1.12.0) (2025-03-23)
 
 
