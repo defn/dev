@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+
+#MISE description="Start an s6 service"
+#USAGE arg "path" help="Path to a service directory" default=""
+
+set -efu -o pipefail
+
+cd "${MISE_ORIGINAL_CWD}"
+
+if [[ -n "${usage_path}" ]]; then
+	cd "${usage_path}"
+fi
+
+case "$(basename "$(pwd)")" in
+	svc)
+		cd ..
+		mise run serve		
+		;;
+	*)
+		s6-svc -u .
+		s6-svstat .
+		;;
+esac
