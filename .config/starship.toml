@@ -1,5 +1,9 @@
 command_timeout = 100000
 
+[battery]
+
+disabled = true
+
 [nodejs]
 
 disabled = true
@@ -43,6 +47,8 @@ disabled = true
 [git_branch]
 
 disabled = false
+symbol = ""
+
 
 [git_status]
 
