@@ -1,5 +1,21 @@
 # Changelog
 
+## [1.14.0](https://github.com/defn/dev/compare/v1.13.0...v1.14.0) (2025-03-23)
+
+
+### Features
+
+* m tasks to manage s6 ([#164](https://github.com/defn/dev/issues/164)) ([3df9294](https://github.com/defn/dev/commit/3df9294386c54ab2c54a3564150b1ca19fd03bd7))
+* node lts 22, shuffle mise tools ([99c0b75](https://github.com/defn/dev/commit/99c0b7569ea9057afdc1047c43d04a7b2c410048))
+* trunk: upgrade cli, yamllint ([4f79cc9](https://github.com/defn/dev/commit/4f79cc9407cc9652507cb890399e5b765c285ea6))
+* upgrade mise when running make sync ([#167](https://github.com/defn/dev/issues/167)) ([44fa680](https://github.com/defn/dev/commit/44fa68090040d757f38d475d0b436483609f93a4))
+
+
+### Bug Fixes
+
+* push release-tagged docker images ([#160](https://github.com/defn/dev/issues/160)) ([e998276](https://github.com/defn/dev/commit/e99827664d44427869e65e8fb494311237ebfc54))
+* starship prompt: turn off git icon ([1c7375e](https://github.com/defn/dev/commit/1c7375ee4835b4b236f0436a324c8f7d8d9feaa2))
+
 ## [1.13.0](https://github.com/defn/dev/compare/v1.12.1...v1.13.0) (2025-03-23)
 
 
