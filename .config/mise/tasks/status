@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+
+#MISE description="Get the status of an s6 service"
+#USAGE arg "path" help="Path to a service directory" default=""
+
+set -efu -o pipefail
+
+cd "${MISE_ORIGINAL_CWD}"
+
+if [[ -n "${usage_path}" ]]; then
+	cd "${usage_path}"
+fi
+
+case "$(basename "$(pwd)")" in
+	svc)
+		set +f
+		runmany 'cd $1 && echo "$(basename $(pwd)) $(mise run status 2>/dev/null)"' */ | sort | talign 2
+		set -f
+		;;
+	*)
+		s6-svstat .
+		;;
+esac

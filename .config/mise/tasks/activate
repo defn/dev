@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+#MISE description="Activate new services"
+#USAGE arg "path" help="Path to a service directory" default=""
+
+set -efu -o pipefail
+
+cd "${MISE_ORIGINAL_CWD}"
+
+if [[ -n "${usage_path}" ]]; then
+	cd "${usage_path}"
+fi
+
+s6-svscanctl -a .
