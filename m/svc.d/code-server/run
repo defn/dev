@@ -6,7 +6,9 @@ export STARSHIP_NO=
 source ~/.bash_profile
 direnv allow
 mise trust
+mise install
 source .env
+export PATH
 
 if [[ -n ${CODER_AGENT_URL_ORIGINAL-} ]]; then
 	export VSCODE_PROXY_URI="https://{{port}}--main--${CODER_NAME}--${GIT_AUTHOR_NAME}.${CODER_AGENT_URL_ORIGINAL#https://coder.}"
