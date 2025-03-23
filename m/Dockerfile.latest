@@ -1,5 +1,5 @@
-ARG BUILD_TAG
+ARG RELEASE
 
-FROM quay.io/defn/dev:${BUILD_TAG}
+FROM ghcr.io/defn/dev:${RELEASE}
 
 RUN bin/with-env make sync

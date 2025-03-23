@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+
+#MISE description="Stop an s6 service"
+#USAGE arg "path" help="Path to a service directory" default=""
+
+set -efu -o pipefail
+
+cd "${MISE_ORIGINAL_CWD}"
+
+if [[ -n "${usage_path}" ]]; then
+	cd "${usage_path}"
+fi
+
+case "$(basename "$(pwd)")" in
+	svc)
+		cd ..
+		echo "ERROR: s6-svscandir stop not implemented" 1>&2
+		exit 1
+		;;
+	*)
+		s6-svc -d .
+		while ! s6-svstat . | grep ^down; do
+			sleep 1
+		done
+		;;
+esac

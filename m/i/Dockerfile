@@ -1,4 +1,4 @@
-FROM quay.io/defn/dev:base
+FROM ghcr.io/defn/dev:base
 
 ARG GITHUB_TOKEN
 
