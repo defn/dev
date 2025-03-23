@@ -2,15 +2,20 @@ FROM ubuntu:noble-20250127
 
 ARG GITHUB_TOKEN
 ARG NIX_CONFIG
+ARG RELEASE
+
+RUN echo "$RELEASE"
 
 ENV DEBIAN_FRONTEND=noninteractive
 
 # sync with install.sh, m/i/script/001-install-base
-RUN apt update && apt install -y \
-    make direnv curl xz-utils dirmngr gpg pcscd scdaemon gpg-agent rsync \
-    build-essential sudo ca-certificates tzdata locales git git-lfs tini \
-    iproute2 iptables bc pv socat docker.io s6 cpu-checker bind9-dnsutils \
-    pass
+RUN apt update \
+    && apt upgrade -y \
+    && apt install -y \
+        make direnv curl xz-utils dirmngr gpg pcscd scdaemon gpg-agent rsync \
+        build-essential sudo ca-certificates tzdata locales git git-lfs tini \
+        iproute2 iptables bc pv socat docker.io s6 cpu-checker bind9-dnsutils \
+        pass
 
 RUN curl -fsSL https://tailscale.com/install.sh | sh
 
