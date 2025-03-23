@@ -4,9 +4,9 @@ set -efu -o pipefail
 
 source .bash_profile
 
-pushd m/i
+pushd m
 source ~/work/.buildkite/.env
-make latest
+j base
 popd
 
 exit 0
