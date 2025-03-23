@@ -4,9 +4,9 @@ set -efu -o pipefail
 
 source .bash_profile
 
-pushd m/i
+pushd m
 source ~/work/.buildkite/.env
-make latest
+j base
 popd
 
 exit 0
@@ -16,5 +16,5 @@ docker run --rm \
 	-v $(pwd)/.git:/home/ubuntu/.git \
 	-v /home/ubuntu/work/.buildkite:/.buildkite \
 	-v bazel-cache-1:/home/ubuntu/work/bazel \
-	--entrypoint bash 169.254.32.1:5000/defn/dev -c \
+	--entrypoint bash quay.io/defn/dev:base -c \
 	"sudo chown ubuntu:ubuntu work/bazel; source /.buildkite/.env; git reset --hard && source .bash_profile && cd m && b build"
