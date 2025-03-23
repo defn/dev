@@ -5,6 +5,7 @@ experimental = true
 ansible = "11.3.0"
 aws = "2.25.1"
 aws-vault = "7.2.0"
+bat = "0.25.0"
 bazelisk = "1.25.0"
 chamber = "3.1.1"
 coder = "2.20.2"
