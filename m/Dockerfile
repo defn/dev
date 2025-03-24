@@ -34,15 +34,11 @@ WORKDIR /home/ubuntu
 # bump to rebuild defn/dev from scratch
 RUN echo 3
 
+# initial clone and build
 RUN git clone https://github.com/defn/dev dev && \
     mv dev/.git . && \
     git reset --hard && \
     rm -rf dev
-
-# temporary
-RUN echo 3
-RUN git pull && git checkout 77-build-and-publish-arm64-docker-image && git pull
-
 RUN	bash -c "git pull && source .bash_profile && ./install.sh && ./install.sh"
 
 # sudo doesnt work with qemu arm64 emulation
