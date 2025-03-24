@@ -44,15 +44,15 @@ base:
 	GITHUB_TOKEN="$(just github::token)" \
 	BUILD_SHA="$(git rev-parse HEAD)" \
 	RELEASE="$(git describe --tags --abbrev=0)" \
-		&& docker buildx build -t ghcr.io/defn/dev:${RELEASE} \
+		&& docker buildx build --push -t ghcr.io/defn/dev:${RELEASE} \
 			--platform linux/amd64,linux/arm64 \
 			--build-arg RELEASE="$RELEASE" \
 			--build-arg GITHUB_TOKEN="$GITHUB_TOKEN" \
 			--build-arg NIX_CONFIG="access-tokens = github.com=$GITHUB_TOKEN" \
+			--cache-from type=local,src=$HOME/work/bx \
+			--cache-to type=local,dest=$HOME/work/bx,mode=max \
 			. \
-		&& docker buildx build --no-cache -t ghcr.io/defn/dev:base -f Dockerfile.latest \
+		&& docker tag ghcr.io/defn/dev:${RELEASE} ghcr.io/defn/dev:base-inner \
+		&& docker buildx build --no-cache --push -t ghcr.io/defn/dev:base -f Dockerfile.latest \
 			--platform linux/amd64,linux/arm64 \
-			--build-arg RELEASE="${RELEASE}" \
-			. \
-		&& echo docker push ghcr.io/defn/dev:${RELEASE} \
-		&& echo docker push ghcr.io/defn/dev:base
+			. 

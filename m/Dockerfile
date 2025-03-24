@@ -63,9 +63,11 @@ USER ubuntu
 
 # nix has mount issues in a restricted container
 # nix should be updated via the image
-RUN sudo rm -rf /usr/local/bin/nix/nix /home/ubuntu/.nix-profile/bin/nix \
+USER root
+RUN rm -rf /usr/local/bin/nix/nix /home/ubuntu/.nix-profile/bin/nix \
     .nix-channels .nix-defexpr .nix-profile \
     .local/state/nix
+USER ubuntu
 
 RUN ln -nfs ../svc.d/tailscaled m/svc/
 
