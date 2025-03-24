@@ -7,25 +7,33 @@ set -efu -o pipefail
 
 cd "${MISE_ORIGINAL_CWD}"
 
-if [[ -n "${usage_path}" ]]; then
-	cd "${usage_path}"
+if [[ -n ${usage_path} ]]; then
+	if test -d "svc/${usage_path}/."; then
+		cd "svc/${usage_path}"
+	elif test -d "${usage_path}"; then
+		cd "${usage_path}/."
+	fi
+fi
+
+if test -d svc; then
+	cd svc
 fi
 
 case "$(basename "$(pwd)")" in
-	svc)
-		cd ..
-		mise run serve		
-		;;
-	*)
-		if ! s6-svstat . >/dev/null 2>&1; then
-			(cd ../../svc && mise run activate)
-			while ! s6-svstat . >/dev/null 2>&1; do
-				sleep 1
-			done
-		fi
-		s6-svc -u .
-		while ! s6-svstat . | grep ^up; do
+svc)
+	cd ..
+	mise run serve
+	;;
+*)
+	if ! s6-svstat . >/dev/null 2>&1; then
+		(cd ../../svc && mise run activate)
+		while ! s6-svstat . >/dev/null 2>&1; do
 			sleep 1
 		done
-		;;
+	fi
+	s6-svc -u .
+	while ! s6-svstat . | grep ^up; do
+		sleep 1
+	done
+	;;
 esac
