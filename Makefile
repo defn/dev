@@ -133,7 +133,6 @@ home-nix-finalize-bin:
 	rm -f /tmp/nix-bin/bash* /tmp/nix-bin/sh
 	rm -f /tmp/nix-bin/{gawkbug,patchelf}
 	for a in /tmp/nix-bin/*; do if ! test -e "$(readlink "$a")"; then rm -vf "$a"; fi; done 
-	sudo install -d -o "$(shell id -un)" -g "$(shell id -gn)" /usr/local/bin/nix
 	rsync -iaI --delete /tmp/nix-bin/. /usr/local/bin/nix/. >/dev/null
 	rm -rf bin/nix
 	ln -nfs /usr/local/bin/nix bin/nix
@@ -196,10 +195,6 @@ login:
 	if test -f /run/secrets/kubernetes.io/serviceaccount/ca.crt; then mark kubernetes; this-kubeconfig; this-argocd-login || true; fi
 	this-github-login
 
-symlinks:
-	$(MARK) configure symlinks
-	t persist_cache bin/persist-cache
-
 perms:
 	$(MARK) configure permissions
 	if [[ "Linux" == "$(shell uname -s)" ]]; then if test -S /var/run/docker.sock; then sudo chgrp ubuntu /var/run/docker.sock; sudo chmod 770 /var/run/docker.sock; fi; fi
@@ -233,14 +228,12 @@ install:
 	t make_install $(MAKE) install_t
 
 install_t:
-	sudo true
 	t make_nix $(MAKE) nix
-	t make_trunk $(MAKE) trunk
+	t make_trunk $(MAKE) trunk || true # sudo
 	t install_inner $(MAKE) install-inner
 	@mark finished
 
 install-inner:
-	t make_symlinks $(MAKE) symlinks
 	t make_perms $(MAKE) perms
 	t make_install_innermost bash -c '. ~/.bash_profile && $(MAKE) install-innermost'
 	t make_home $(MAKE) home
@@ -396,7 +389,7 @@ sync_inner:
 	git ls-files | grep 'mise.toml$$' | runmany 'mise trust $$1'
 	mise install
 	(cd m && mise install)
-	./fixup.sh
+	sudo ./fixup.sh || true
 
 up:
 	cd m/dc && just up

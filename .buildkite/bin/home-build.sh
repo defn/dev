@@ -4,6 +4,10 @@ set -efu -o pipefail
 
 source .bash_profile
 
-cd m
-source ~/work/.buildkite/.env
-j base
+case "${BUILDKITE_BRANCH:-}" in
+  main)
+    cd m
+    source ~/work/.buildkite/.env
+    j base
+    ;;
+esac

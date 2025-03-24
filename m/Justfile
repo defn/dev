@@ -40,16 +40,22 @@ base:
 	esac
 
 	git fetch || true
+
 	GITHUB_TOKEN="$(just github::token)" \
 	BUILD_SHA="$(git rev-parse HEAD)" \
-	RELEASE="$(git describe --tags --abbrev=0)" \
-		&& docker build -t ghcr.io/defn/dev:${RELEASE} \
+	RELEASE="$(git describe --tags --abbrev=0)"
+
+	docker build -t ghcr.io/defn/dev:base-inner \
+			--platform linux/amd64 \
 			--build-arg RELEASE="$RELEASE" \
 			--build-arg GITHUB_TOKEN="$GITHUB_TOKEN" \
 			--build-arg NIX_CONFIG="access-tokens = github.com=$GITHUB_TOKEN" \
-			. \
-		&& docker build --no-cache -t ghcr.io/defn/dev:base -f Dockerfile.latest \
-			--build-arg RELEASE="${RELEASE}" \
-			. \
-		&& docker push ghcr.io/defn/dev:${RELEASE} \
-		&& docker push ghcr.io/defn/dev:base
+			.
+
+	docker build --no-cache -t ghcr.io/defn/dev:base -f Dockerfile.latest \
+			--platform linux/amd64 .
+
+	docker tag ghcr.io/defn/dev:base-inner ghcr.io/defn/dev:${RELEASE}
+	docker push ghcr.io/defn/dev:${RELEASE}
+	docker push ghcr.io/defn/dev:base
+
