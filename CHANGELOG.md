@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.15.0](https://github.com/defn/dev/compare/v1.14.0...v1.15.0) (2025-03-24)
+
+
+### Features
+
+* m remove to remove an s6 service ([#169](https://github.com/defn/dev/issues/169)) ([1ba5d3e](https://github.com/defn/dev/commit/1ba5d3e936c6de1a1b7b94044a3209a7beecc40b))
+
 ## [1.14.0](https://github.com/defn/dev/compare/v1.13.0...v1.14.0) (2025-03-23)
 
 
