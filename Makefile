@@ -234,7 +234,7 @@ install:
 
 install_t:
 	t make_nix $(MAKE) nix
-	t make_trunk $(MAKE) trunk
+	t make_trunk $(MAKE) trunk || true # sudo
 	t install_inner $(MAKE) install-inner
 	@mark finished
 
