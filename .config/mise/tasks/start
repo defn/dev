@@ -17,7 +17,7 @@ case "$(basename "$(pwd)")" in
 		mise run serve		
 		;;
 	*)
-		if ! s6-svstat . >/dev/null; then
+		if ! s6-svstat . >/dev/null 2>&1; then
 			(cd ../../svc && mise run activate)
 			while ! s6-svstat . >/dev/null 2>&1; do
 				sleep 1
