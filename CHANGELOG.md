@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.15.2](https://github.com/defn/dev/compare/v1.15.1...v1.15.2) (2025-03-24)
+
+
+### Bug Fixes
+
+* separate sudo from install scripts ([#174](https://github.com/defn/dev/issues/174)) ([a93dce5](https://github.com/defn/dev/commit/a93dce5752ad0a1dc8756800ca90c25206ddb270))
+
 ## [1.15.1](https://github.com/defn/dev/compare/v1.15.0...v1.15.1) (2025-03-24)
 
 
