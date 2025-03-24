@@ -22,6 +22,7 @@ RUN if [ "$(id -u ubuntu)" != 1000 ]; then groupadd -r --gid 1000 ubuntu && user
 RUN echo "ubuntu ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 
 RUN install -d -m 0755 -o ubuntu -g ubuntu /nix
+RUN install -d -m 0755 -o ubuntu -g ubuntu /usr/local/bin/nix
 
 USER ubuntu
 ENV USER=ubuntu
