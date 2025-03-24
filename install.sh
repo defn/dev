@@ -18,8 +18,6 @@ function main {
 	
 	source .bash_profile
 
-  set -x
-
 	make sync
 	make install
   sudo ./fixup.sh || true

@@ -38,7 +38,7 @@ RUN git clone https://github.com/defn/dev dev && \
 
 RUN echo 3
 RUN git pull && git checkout 77-build-and-publish-arm64-docker-image && git pull
-RUN	bash -c "git pull && source .bash_profile && ./install.sh && ./install.sh"
+RUN	bash -c "set -x; git pull && source .bash_profile && bash -x ./install.sh && ./install.sh"
 
 # sudo doesnt work with qemu arm64 emulation
 USER root
