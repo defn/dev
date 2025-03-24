@@ -29,7 +29,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 WORKDIR /home/ubuntu
 
 # bump to rebuild defn/dev from scratch
-RUN echo 1
+RUN echo 2
 
 RUN git clone https://github.com/defn/dev dev && \
     mv dev/.git . && \
@@ -37,9 +37,15 @@ RUN git clone https://github.com/defn/dev dev && \
     rm -rf dev
 RUN	bash -c "git pull && source .bash_profile && ./install.sh && ./install.sh"
 
+# sudo doesnt work with qemu arm64 emulation
+USER root
+RUN ./fixup.sh
+
+USER ubuntu
+
 # release rebuild on top of an old defn/dev
 RUN echo "$RELEASE"
-RUN sudo apt update && sudp apt upgrade -y
+RUN sudo apt update && sudo apt upgrade -y
 RUN	bash -c "git pull && source .bash_profile && ./install.sh"
 
 # nix has mount issues in a restricted container

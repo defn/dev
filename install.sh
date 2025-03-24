@@ -21,7 +21,10 @@ function main {
 	make sync
 	make install
 
-	./fixup.sh
+  if sudo true; then
+	  sudo ./fixup.sh
+  fi
 }
 
 main "$@"
+
