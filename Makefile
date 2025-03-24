@@ -196,10 +196,6 @@ login:
 	if test -f /run/secrets/kubernetes.io/serviceaccount/ca.crt; then mark kubernetes; this-kubeconfig; this-argocd-login || true; fi
 	this-github-login
 
-symlinks:
-	$(MARK) configure symlinks
-	t persist_cache bin/persist-cache
-
 perms:
 	$(MARK) configure permissions
 	if [[ "Linux" == "$(shell uname -s)" ]]; then if test -S /var/run/docker.sock; then sudo chgrp ubuntu /var/run/docker.sock; sudo chmod 770 /var/run/docker.sock; fi; fi
@@ -239,7 +235,6 @@ install_t:
 	@mark finished
 
 install-inner:
-	t make_symlinks $(MAKE) symlinks
 	t make_perms $(MAKE) perms
 	t make_install_innermost bash -c '. ~/.bash_profile && $(MAKE) install-innermost'
 	t make_home $(MAKE) home
