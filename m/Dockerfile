@@ -47,11 +47,11 @@ USER ubuntu
 
 # release rebuild on top of an old defn/dev
 RUN echo "$RELEASE"
-RUN sudo apt update && sudo apt upgrade -y
 RUN	bash -c "git pull && source .bash_profile && ./install.sh"
 
 # sudo doesnt work with qemu arm64 emulation
 USER root
+RUN apt update && sudo apt upgrade -y
 RUN ./fixup.sh
 USER ubuntu
 
