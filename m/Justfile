@@ -25,6 +25,7 @@ up:
 	@true
 
 base:
+	#!/usr/bin/env bash
 	case "${BUILDKITE_BRANCH:-}" in
 		main)
 			case "${BUILDKITE_MESSAGE:-}" in
