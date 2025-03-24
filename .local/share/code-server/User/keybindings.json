@@ -9,6 +9,10 @@
     "command": "workbench.action.closeActiveEditor"
   },
   {
+    "key": "alt+w",
+    "command": "workbench.action.closeActiveEditor"
+  },
+  {
     "key": "shift-ctrl+lz",
     "command": "joyride.runWorkspaceScript",
     "args": "dfd.cljs"
