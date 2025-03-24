@@ -29,19 +29,22 @@ ENV DEBIAN_FRONTEND=noninteractive
 WORKDIR /home/ubuntu
 
 # bump to rebuild defn/dev from scratch
-RUN echo 2
+RUN echo 3
 
 RUN git clone https://github.com/defn/dev dev && \
     mv dev/.git . && \
     git reset --hard && \
     rm -rf dev
 
+# temporary
 RUN echo 3
 RUN git pull && git checkout 77-build-and-publish-arm64-docker-image && git pull
-RUN	bash -c "set -x; git pull && source .bash_profile && bash -x ./install.sh && ./install.sh"
+
+RUN	bash -c "git pull && source .bash_profile && bash -x ./install.sh && ./install.sh"
 
 # sudo doesnt work with qemu arm64 emulation
 USER root
+RUN apt update && sudo apt upgrade -y
 RUN ./fixup.sh
 USER ubuntu
 
@@ -65,3 +68,4 @@ RUN ln -nfs ../svc.d/tailscaled m/svc/
 
 ENTRYPOINT [ "/bin/s6-svscan" ]
 CMD [ "/home/ubuntu/m/svc" ]
+
