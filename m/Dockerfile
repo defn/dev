@@ -4,8 +4,6 @@ ARG GITHUB_TOKEN
 ARG NIX_CONFIG
 ARG RELEASE
 
-RUN echo "$RELEASE"
-
 ENV DEBIAN_FRONTEND=noninteractive
 
 # sync with install.sh, m/i/script/001-install-base
@@ -30,11 +28,19 @@ ENV LANG=C.UTF-8
 ENV DEBIAN_FRONTEND=noninteractive
 WORKDIR /home/ubuntu
 
+# bump to rebuild defn/dev from scratch
+RUN echo 1
+
 RUN git clone https://github.com/defn/dev dev && \
     mv dev/.git . && \
     git reset --hard && \
     rm -rf dev
 RUN	bash -c "git pull && source .bash_profile && ./install.sh && ./install.sh"
+
+# release rebuild on top of an old defn/dev
+RUN echo "$RELEASE"
+RUN sudo apt update && sudp apt upgrade -y
+RUN	bash -c "git pull && source .bash_profile && ./install.sh"
 
 # nix has mount issues in a restricted container
 # nix should be updated via the image
