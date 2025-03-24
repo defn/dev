@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+
+#MISE description="Stop and remove an s6 service"
+#USAGE arg "path" help="Path to a service directory" default=""
+
+set -efu -o pipefail
+
+cd "${MISE_ORIGINAL_CWD}"
+
+if [[ -n "${usage_path}" ]]; then
+	cd "${usage_path}"
+fi
+
+case "$(basename "$(pwd)")" in
+	svc)
+		echo "ERROR: s6-svscandir remove not implemented" 1>&2
+		exit 1
+		;;
+	*)
+		service="$(basename "$(pwd)")"
+		rm -f "../../svc/${service}"
+		mise run stop .
+		mise run stop log
+		s6-svc -x .
+		s6-svc -x log
+		;;
+esac
