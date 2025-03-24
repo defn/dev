@@ -20,8 +20,6 @@ function main {
 
 	make sync
 	make install
-
-	sudo ./fixup.sh || true
 }
 
 main "$@"
