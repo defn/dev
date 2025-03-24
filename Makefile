@@ -233,7 +233,6 @@ install:
 	t make_install $(MAKE) install_t
 
 install_t:
-	sudo true
 	t make_nix $(MAKE) nix
 	t make_trunk $(MAKE) trunk
 	t install_inner $(MAKE) install-inner
