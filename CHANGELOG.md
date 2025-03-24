@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.15.1](https://github.com/defn/dev/compare/v1.15.0...v1.15.1) (2025-03-24)
+
+
+### Bug Fixes
+
+* wait for release-tag to be created ([#172](https://github.com/defn/dev/issues/172)) ([d245d0c](https://github.com/defn/dev/commit/d245d0cff7842dac9b63c990328ae18df6c59c85))
+
 ## [1.15.0](https://github.com/defn/dev/compare/v1.14.0...v1.15.0) (2025-03-24)
 
 
