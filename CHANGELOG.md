@@ -1,5 +1,19 @@
 # Changelog
 
+## [1.16.0](https://github.com/defn/dev/compare/v1.15.2...v1.16.0) (2025-03-25)
+
+
+### Features
+
+* arm64 docker images ([#181](https://github.com/defn/dev/issues/181)) ([c6ea064](https://github.com/defn/dev/commit/c6ea0644501da9e4b9930ba7da9d828adc58a7c9)), closes [#77](https://github.com/defn/dev/issues/77)
+* manage s6 from parent dir of svc ([#177](https://github.com/defn/dev/issues/177)) ([91572c1](https://github.com/defn/dev/commit/91572c132248f6637ecc78b4767865cdf18cab7b)), closes [#176](https://github.com/defn/dev/issues/176)
+
+
+### Bug Fixes
+
+* alt-w on chromeos can close tabs ([566cafb](https://github.com/defn/dev/commit/566cafb2027ed49836df825d7643657b7ae5cd27))
+* better caching by moving build args to incremental layers ([#180](https://github.com/defn/dev/issues/180)) ([9fa3a04](https://github.com/defn/dev/commit/9fa3a0484c52c08e2f6478380f485e83af80722a))
+
 ## [1.15.2](https://github.com/defn/dev/compare/v1.15.1...v1.15.2) (2025-03-24)
 
 
