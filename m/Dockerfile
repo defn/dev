@@ -1,3 +1,5 @@
+# syntax=docker/dockerfile:1.4
+
 FROM ubuntu:noble-20250127
 
 ENV DEBIAN_FRONTEND=noninteractive
@@ -44,8 +46,6 @@ RUN ./fixup.sh
 USER ubuntu
 
 # release rebuild on top of an old defn/dev
-ARG GITHUB_TOKEN
-ARG NIX_CONFIG
 ARG RELEASE
 
 RUN echo "$RELEASE"
