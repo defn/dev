@@ -7,17 +7,25 @@ set -efu -o pipefail
 
 cd "${MISE_ORIGINAL_CWD}"
 
-if [[ -n "${usage_path}" ]]; then
-	cd "${usage_path}"
+if [[ -n ${usage_path} ]]; then
+	if test -d "svc/${usage_path}/."; then
+		cd "svc/${usage_path}"
+	elif test -d "${usage_path}"; then
+		cd "${usage_path}/."
+	fi
+fi
+
+if test -d svc; then
+	cd svc
 fi
 
 case "$(basename "$(pwd)")" in
-	svc)
-		set +f
-		runmany 'cd $1 && echo "$(basename $(pwd)) $(mise run status 2>/dev/null)"' */ | sort | talign 2
-		set -f
-		;;
-	*)
-		s6-svstat .
-		;;
+svc)
+	set +f
+	runmany 'cd $1 && echo "$(basename $(pwd)) $(mise run status 2>/dev/null)"' */ | sort | talign 2
+	set -f
+	;;
+*)
+	s6-svstat .
+	;;
 esac
