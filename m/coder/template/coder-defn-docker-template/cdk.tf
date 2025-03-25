@@ -109,6 +109,7 @@ data "docker_registry_image" "defn_dev" {
 resource "docker_image" "workspace" {
   name          = data.docker_registry_image.defn_dev.name
   pull_triggers = [data.docker_registry_image.defn_dev.sha256_digest]
+  keep_locally = true
 }
 
 resource "docker_container" "workspace" {
