@@ -7,20 +7,24 @@ set -efu -o pipefail
 
 cd "${MISE_ORIGINAL_CWD}"
 
-if [[ -n "${usage_path}" ]]; then
-	cd "${usage_path}"
+if [[ -n ${usage_path} ]]; then
+	if test -d "svc/${usage_path}/."; then
+		cd "svc/${usage_path}"
+	elif test -d "${usage_path}"; then
+		cd "${usage_path}/."
+	fi
 fi
 
 case "$(basename "$(pwd)")" in
-	svc)
-		cd ..
-		echo "ERROR: s6-svscandir stop not implemented" 1>&2
-		exit 1
-		;;
-	*)
-		s6-svc -d .
-		while ! s6-svstat . | grep ^down; do
-			sleep 1
-		done
-		;;
+svc)
+	cd ..
+	echo "ERROR: s6-svscandir stop not implemented" 1>&2
+	exit 1
+	;;
+*)
+	s6-svc -d .
+	while ! s6-svstat . | grep ^down; do
+		sleep 1
+	done
+	;;
 esac
