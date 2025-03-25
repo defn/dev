@@ -9,3 +9,6 @@ ARG GITHUB_TOKEN
 ARG NIX_CONFIG
 
 RUN bin/with-env make sync
+
+ENTRYPOINT ["/home/ubuntu/m/entrypoint.sh"]
+CMD []

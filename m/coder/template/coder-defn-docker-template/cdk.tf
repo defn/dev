@@ -68,8 +68,7 @@ resource "coder_agent" "main" {
     GIT_COMMITTER_EMAIL = "${data.coder_workspace_owner.me.email}"
     GIT_COMMITTER_NAME  = "${data.coder_workspace_owner.me.name}"
   }
-  os             = data.coder_parameter.os.value
-  startup_script = "cd ~ && source .bash_profile && j destroy-coder-agent && cd ~/m && j coder::code-server $${CODER_NAME}"
+  os = data.coder_parameter.os.value
   display_apps {
     ssh_helper      = false
     vscode          = false
@@ -138,10 +137,6 @@ resource "docker_container" "workspace" {
     container_path = "/home/coder"
     volume_name    = docker_volume.home_volume.name
     read_only      = false
-  }
-
-  provisioner "local-exec" {
-    command = "docker exec coder-${data.coder_workspace_owner.me.name}-${lower(data.coder_workspace.me.name)} bin/with-env just create-coder-agent"
   }
 
   labels {
