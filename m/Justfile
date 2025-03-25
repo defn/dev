@@ -66,7 +66,7 @@ base:
 		docker push ghcr.io/defn/dev:latest-${RELEASE}-${BUILD_SHA}-${p}
 	done
 
-	docker manifest create --amend ghcr.io/defn/dev:latest \
+	docker manifest create ghcr.io/defn/dev:latest \
 		ghcr.io/defn/dev:latest-${RELEASE}-${BUILD_SHA}-{amd64,arm64} 
 
 	docker manifest push ghcr.io/defn/dev:latest
