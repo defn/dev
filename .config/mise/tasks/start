@@ -23,6 +23,7 @@ case "$(basename "$(pwd)")" in
 svc)
 	cd ..
 	mise run serve
+  mise run status
 	;;
 *)
 	if ! s6-svstat . >/dev/null 2>&1; then
