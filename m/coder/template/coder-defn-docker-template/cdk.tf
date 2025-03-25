@@ -102,12 +102,18 @@ resource "docker_volume" "home_volume" {
   }
 }
 
+resource "docker_image" "workspace" {
+  name = "ghcr.io/defn/dev:latest"
+
+  force_update = true
+}
+
 resource "docker_container" "workspace" {
   count = data.coder_workspace.me.start_count
 
   name = "coder-${data.coder_workspace_owner.me.name}-${lower(data.coder_workspace.me.name)}"
 
-  image    = "ghcr.io/defn/dev:base"
+  image    = docker_image.workspace.name
   hostname = data.coder_workspace.me.name
 
   env = [

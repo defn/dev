@@ -56,25 +56,22 @@ base:
 	done
 
 	for p in amd64 arm64; do
-		docker build --no-cache -t ghcr.io/defn/dev:base-${RELEASE}-$p -f Dockerfile.latest \
+		docker build --no-cache -t ghcr.io/defn/dev:latest-${RELEASE}-$p -f Dockerfile.latest \
 				--platform linux/$p \
 				--build-arg FROM=ghcr.io/defn/dev:${RELEASE}-${p} \
 				--build-arg GITHUB_TOKEN \
 				--build-arg NIX_CONFIG \
 				.
 
-		docker push ghcr.io/defn/dev:base-${RELEASE}-${p}
-
-		docker tag ghcr.io/defn/dev:base-${RELEASE}-${p} ghcr.io/defn/dev:base-$p 
-		docker push ghcr.io/defn/dev:base-$p
+		docker push ghcr.io/defn/dev:latest-${RELEASE}-${p}
 	done
 
 	docker manifest create --amend ghcr.io/defn/dev:${RELEASE} \
-		ghcr.io/defn/dev:base-${RELEASE}-amd64 \
-		ghcr.io/defn/dev:base-${RELEASE}-arm64
+		ghcr.io/defn/dev:latest-${RELEASE}-amd64 \
+		ghcr.io/defn/dev:latest-${RELEASE}-arm64
 	docker manifest push ghcr.io/defn/dev:${RELEASE}
 
-	docker manifest create --amend ghcr.io/defn/dev:base \
-		ghcr.io/defn/dev:base-${RELEASE}-amd64 \
-		ghcr.io/defn/dev:base-${RELEASE}-arm64
-	docker manifest push ghcr.io/defn/dev:base
+	docker manifest create --amend ghcr.io/defn/dev:latest \
+		ghcr.io/defn/dev:latest-${RELEASE}-amd64 \
+		ghcr.io/defn/dev:latest-${RELEASE}-arm64
+	docker manifest push ghcr.io/defn/dev:latest

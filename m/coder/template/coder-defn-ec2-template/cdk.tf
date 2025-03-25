@@ -173,9 +173,9 @@ data "coder_workspace" "me" {
 
 
 resource "coder_agent" "main" {
-  arch = "amd64"
-  os = "linux"
-  auth = "aws-instance-identity"
+  arch           = "amd64"
+  os             = "linux"
+  auth           = "aws-instance-identity"
   startup_script = <<-EOT
     set -e
     exec >>/tmp/coder-agent.log
@@ -272,16 +272,16 @@ data "aws_ami" "ubuntu" {
 }
 
 resource "aws_iam_role" "dev" {
-  assume_role_policy = jsonencode({ 
-    "Statement" = [{ 
-      "Action" = "sts:AssumeRole", 
-      "Effect" = "Allow", 
-      "Principal" = { 
-        "Service" = "ec2.amazonaws.com" 
-      }, 
-      "Sid" = "" 
-    }], 
-    "Version" = "2012-10-17" 
+  assume_role_policy = jsonencode({
+    "Statement" = [{
+      "Action" = "sts:AssumeRole",
+      "Effect" = "Allow",
+      "Principal" = {
+        "Service" = "ec2.amazonaws.com"
+      },
+      "Sid" = ""
+    }],
+    "Version" = "2012-10-17"
   })
 
   name = "coder-${data.coder_workspace_owner.me.name}-${data.coder_workspace.me.name}"
@@ -347,7 +347,7 @@ resource "aws_security_group" "dev_security_group" {
     self            = null
     to_port         = 41641
   }
-  name = "coder-${data.coder_workspace_owner.me.name}-${data.coder_workspace.me.name}"
+  name   = "coder-${data.coder_workspace_owner.me.name}-${data.coder_workspace.me.name}"
   vpc_id = aws_default_vpc.default.id
 }
 
@@ -385,7 +385,7 @@ resource "aws_instance" "dev_ec2_instance" {
       market_type = "spot"
 
       spot_options {
-        spot_instance_type           = "persistent"
+        spot_instance_type             = "persistent"
         instance_interruption_behavior = "stop"
       }
     }
