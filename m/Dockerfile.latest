@@ -1,4 +1,6 @@
-FROM ghcr.io/defn/dev:base-inner
+ARG FROM
+
+FROM ${FROM}
 
 ARG GITHUB_TOKEN
 ARG NIX_CONFIG

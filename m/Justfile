@@ -41,25 +41,40 @@ base:
 
 	git fetch || true
 
-	GITHUB_TOKEN="$(just github::token)" \
-	BUILD_SHA="$(git rev-parse HEAD)" \
+	GITHUB_TOKEN="$(just github::token)"
+	BUILD_SHA="$(git rev-parse HEAD)"
 	RELEASE="$(git describe --tags --abbrev=0)"
+	NIX_CONFIG="access-tokens = github.com=$GITHUB_TOKEN"
 
-	docker build -t ghcr.io/defn/dev:base-inner \
-			--platform linux/amd64 \
-			--build-arg RELEASE="$RELEASE" \
-			--build-arg GITHUB_TOKEN="$GITHUB_TOKEN" \
-			--build-arg NIX_CONFIG="access-tokens = github.com=$GITHUB_TOKEN" \
-			.
+	for p in amd64 arm64; do
+		docker build -t ghcr.io/defn/dev:${RELEASE}-$p \
+				--platform linux/$p \
+				--build-arg RELEASE \
+				.
 
-	docker build --no-cache -t ghcr.io/defn/dev:base -f Dockerfile.latest \
-			--platform linux/amd64 \
-			--build-arg RELEASE="$RELEASE" \
-			--build-arg GITHUB_TOKEN="$GITHUB_TOKEN" \
-			--build-arg NIX_CONFIG="access-tokens = github.com=$GITHUB_TOKEN" \
-			.
+		docker push ghcr.io/defn/dev:${RELEASE}-$p
+	done
 
-	docker tag ghcr.io/defn/dev:base-inner ghcr.io/defn/dev:${RELEASE}
-	docker push ghcr.io/defn/dev:${RELEASE}
-	docker push ghcr.io/defn/dev:base
+	for p in amd64 arm64; do
+		docker build --no-cache -t ghcr.io/defn/dev:base-${RELEASE}-$p -f Dockerfile.latest \
+				--platform linux/$p \
+				--build-arg FROM=ghcr.io/defn/dev:${RELEASE}-${p} \
+				--build-arg GITHUB_TOKEN \
+				--build-arg NIX_CONFIG \
+				.
 
+		docker push ghcr.io/defn/dev:base-${RELEASE}-${p}
+
+		docker tag ghcr.io/defn/dev:base-${RELEASE}-${p} ghcr.io/defn/dev:base-$p 
+		docker push ghcr.io/defn/dev:base-$p
+	done
+
+	docker manifest create --amend ghcr.io/defn/dev:${RELEASE} \
+		ghcr.io/defn/dev:base-${RELEASE}-amd64 \
+		ghcr.io/defn/dev:base-${RELEASE}-arm64
+	docker manifest push ghcr.io/defn/dev:${RELEASE}
+
+	docker manifest create --amend ghcr.io/defn/dev:base \
+		ghcr.io/defn/dev:base-${RELEASE}-amd64 \
+		ghcr.io/defn/dev:base-${RELEASE}-arm64
+	docker manifest push ghcr.io/defn/dev:base
