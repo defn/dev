@@ -102,10 +102,13 @@ resource "docker_volume" "home_volume" {
   }
 }
 
-resource "docker_image" "workspace" {
+data "docker_registry_image" "defn_dev" {
   name = "ghcr.io/defn/dev:latest"
+}
 
-  force_update = true
+resource "docker_image" "workspace" {
+  name          = data.docker_registry_image.defn_dev.name
+  pull_triggers = [data.docker_registry_image.defn_dev.sha256_digest]
 }
 
 resource "docker_container" "workspace" {
