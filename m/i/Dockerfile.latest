@@ -1,6 +1,0 @@
-FROM 169.254.32.1:5000/defn/dev:base
-
-ARG GITHUB_TOKEN
-
-RUN sudo apt-get update && sudo apt-get upgrade -y
-RUN bash -c 'git pull && source .bash_profile && make install sync && rm -f /tmp/.bash_entrypoint*'
