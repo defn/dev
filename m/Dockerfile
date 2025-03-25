@@ -1,9 +1,5 @@
 FROM ubuntu:noble-20250127
 
-ARG GITHUB_TOKEN
-ARG NIX_CONFIG
-ARG RELEASE
-
 ENV DEBIAN_FRONTEND=noninteractive
 
 # sync with install.sh, m/i/script/001-install-base
@@ -48,6 +44,10 @@ RUN ./fixup.sh
 USER ubuntu
 
 # release rebuild on top of an old defn/dev
+ARG GITHUB_TOKEN
+ARG NIX_CONFIG
+ARG RELEASE
+
 RUN echo "$RELEASE"
 RUN	bash -c "git pull && source .bash_profile && ./install.sh"
 

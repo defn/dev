@@ -7,3 +7,6 @@ dns resolver, search domain
     wifis:
         wlan0:
 ssh host key management
+
+
+docker run --privileged multiarch/qemu-user-static:latest --reset -p yes --credential yes

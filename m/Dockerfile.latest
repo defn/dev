@@ -1,3 +1,6 @@
 FROM ghcr.io/defn/dev:base-inner
 
+ARG GITHUB_TOKEN
+ARG NIX_CONFIG
+
 RUN bin/with-env make sync
