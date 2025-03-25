@@ -41,10 +41,10 @@ base:
 
 	git fetch || true
 
-	GITHUB_TOKEN="$(just github::token)"
-	BUILD_SHA="$(git rev-parse HEAD)"
-	RELEASE="$(git describe --tags --abbrev=0)"
-	NIX_CONFIG="access-tokens = github.com=$GITHUB_TOKEN"
+	export BUILD_SHA="$(git rev-parse HEAD)"
+	export RELEASE="$(git describe --tags --abbrev=0)"
+	export GITHUB_TOKEN="$(just github::token)"
+	export NIX_CONFIG="access-tokens = github.com=$GITHUB_TOKEN"
 
 	for p in amd64 arm64; do
 		docker build -t ghcr.io/defn/dev:${RELEASE}-$p \
