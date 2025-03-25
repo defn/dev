@@ -21,27 +21,27 @@ latest:
 	export NIX_CONFIG="access-tokens = github.com=$GITHUB_TOKEN"
 
 	for p in amd64 arm64; do
-		docker build -t ghcr.io/defn/dev:${RELEASE}-$p \
-				--platform linux/$p \
-				--build-arg RELEASE \
-				.
+		(
+			docker build -t ghcr.io/defn/dev:${RELEASE}-$p \
+					--platform linux/$p \
+					--build-arg RELEASE \
+					.
 
-		docker push ghcr.io/defn/dev:${RELEASE}-$p
+			docker push ghcr.io/defn/dev:${RELEASE}-$p
+
+			docker build --no-cache -t ghcr.io/defn/dev:latest-${RELEASE}-${BUILD_SHA}-${p} -f Dockerfile.latest \
+					--platform linux/$p \
+					--build-arg FROM=ghcr.io/defn/dev:${RELEASE}-${p} \
+					--build-arg GITHUB_TOKEN \
+					--build-arg NIX_CONFIG \
+					.
+
+			docker push ghcr.io/defn/dev:latest-${RELEASE}-${BUILD_SHA}-${p}
+		) &
 	done
 
-	for p in amd64 arm64; do
-		docker build --no-cache -t ghcr.io/defn/dev:latest-${RELEASE}-${BUILD_SHA}-${p} -f Dockerfile.latest \
-				--platform linux/$p \
-				--build-arg FROM=ghcr.io/defn/dev:${RELEASE}-${p} \
-				--build-arg GITHUB_TOKEN \
-				--build-arg NIX_CONFIG \
-				.
-
-		docker push ghcr.io/defn/dev:latest-${RELEASE}-${BUILD_SHA}-${p}
-	done
+	wait
 
 	docker manifest rm ghcr.io/defn/dev:latest || true
-	docker manifest create ghcr.io/defn/dev:latest \
-		ghcr.io/defn/dev:latest-${RELEASE}-${BUILD_SHA}-{amd64,arm64} 
-
+	docker manifest create ghcr.io/defn/dev:latest ghcr.io/defn/dev:latest-${RELEASE}-${BUILD_SHA}-{amd64,arm64} 
 	docker manifest push ghcr.io/defn/dev:latest
