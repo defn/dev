@@ -12,7 +12,7 @@ function main {
 
 	apt update
 
-	# sync with install.sh, m/Dockerfile
+	# sync with install.sh, m/i/Dockerfile
 	apt install -y \
 		make direnv curl xz-utils dirmngr gpg pcscd scdaemon gpg-agent rsync \
 		build-essential sudo ca-certificates tzdata locales git git-lfs tini \

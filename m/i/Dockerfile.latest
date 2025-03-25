@@ -1,6 +1,11 @@
-FROM 169.254.32.1:5000/defn/dev:base
+ARG FROM
+
+FROM ${FROM}
 
 ARG GITHUB_TOKEN
+ARG NIX_CONFIG
 
-RUN sudo apt-get update && sudo apt-get upgrade -y
-RUN bash -c 'git pull && source .bash_profile && make install sync && rm -f /tmp/.bash_entrypoint*'
+RUN bin/with-env make sync
+
+ENTRYPOINT ["/home/ubuntu/m/entrypoint.sh"]
+CMD []
