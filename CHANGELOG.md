@@ -1,5 +1,30 @@
 # Changelog
 
+## [1.17.0](https://github.com/defn/dev/compare/v1.16.0...v1.17.0) (2025-03-26)
+
+
+### Features
+
+* configure and run s6 services in docker entrypoint ([#184](https://github.com/defn/dev/issues/184)) ([966621d](https://github.com/defn/dev/commit/966621d4abd35f21bfec1f52fa8ec9a49cb23c8f))
+* latest images built in m/i ([#186](https://github.com/defn/dev/issues/186)) ([2cd6162](https://github.com/defn/dev/commit/2cd616202c454fbaa695e540822b06763e7c7e62))
+* shut up already npm ([afdc41c](https://github.com/defn/dev/commit/afdc41cc9cee4c9a265169984a935bba0327ba9d))
+* use latest tag for workspaces ([a222759](https://github.com/defn/dev/commit/a222759c1ac8fd599da0afd7b91af5cc9ae7b5e2))
+
+
+### Bug Fixes
+
+* bad manifest argument: no dot ([270392d](https://github.com/defn/dev/commit/270392d9a4687e28fe95b6e897e20646ebfc7a5a))
+* broken manifest generation command ([bb12765](https://github.com/defn/dev/commit/bb12765dbf704292651435b12ce950365d04619d))
+* delete then create manifest ([7675bae](https://github.com/defn/dev/commit/7675bae2f5c41c498b2d9cfe008729eb7a8e58f7))
+* dont ammend floating latest manifest ([cdb271e](https://github.com/defn/dev/commit/cdb271e9d0b5cecedf228ae67f39983151e988f3))
+* dont delete local image on destroy ([91a6635](https://github.com/defn/dev/commit/91a663597a67caaee535f6cb6450781960dd48f3))
+* entrypoint.sh is executable ([914cfdd](https://github.com/defn/dev/commit/914cfddc4867da2e58dcb687e9807db9e13dc215))
+* export vars for docker build ([1e923bb](https://github.com/defn/dev/commit/1e923bba2e0094ed7227d0acbc6a3ea11accc42e))
+* force image replacement using digest ([0d073f8](https://github.com/defn/dev/commit/0d073f8e41c243386ed7f392df8ddaaf95fb5608))
+* force pull with docker_registry to look up sha256 ([e4f975c](https://github.com/defn/dev/commit/e4f975cf6ae150079444c812bfee6254ff6e8501))
+* force update: floating tags point to specific tags ([ff97e06](https://github.com/defn/dev/commit/ff97e063cef6f3373b1e75b93a67c2120522ea86))
+* wrong image digest name ([b88dcf9](https://github.com/defn/dev/commit/b88dcf9814c544eac45d9949ab14baa2f9bc50d1))
+
 ## [1.16.0](https://github.com/defn/dev/compare/v1.15.2...v1.16.0) (2025-03-25)
 
 
