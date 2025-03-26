@@ -3,9 +3,13 @@
 set -efu -o pipefail
 
 function main {
-    cd ~/m
+    cd
     source ~/.bash_profile
+
+    sudo chown ubuntu:ubuntu dotfiles .local/share/code-server/extensions
     
+    cd ~/m
+
     (
         for a in $(env | grep ^CODER_ | cut -d= -f1); do printf 'export %s=%q\n\n' "$a" "$(echo "${!a}")"; done
     ) > svc.d/coder/.env

@@ -70,8 +70,33 @@ resource "coder_agent" "main" {
   }
 }
 
-resource "docker_volume" "home_volume" {
-  name = "coder-${data.coder_workspace.me.id}-home"
+resource "docker_volume" "dotfiles_volume" {
+  name = "coder-${data.coder_workspace.me.id}-dotfiles"
+
+  lifecycle {
+    ignore_changes = all
+  }
+
+  labels {
+    label = "coder.owner"
+    value = data.coder_workspace_owner.me.name
+  }
+  labels {
+    label = "coder.owner_id"
+    value = data.coder_workspace_owner.me.id
+  }
+  labels {
+    label = "coder.workspace_id"
+    value = data.coder_workspace.me.id
+  }
+  labels {
+    label = "coder.workspace_name_at_creation"
+    value = data.coder_workspace.me.name
+  }
+}
+
+resource "docker_volume" "code_server_extensions_volume" {
+  name = "coder-${data.coder_workspace.me.id}-code-server-extensions"
 
   lifecycle {
     ignore_changes = all
@@ -132,8 +157,14 @@ resource "docker_container" "workspace" {
   }
 
   volumes {
-    container_path = "/home/coder"
-    volume_name    = docker_volume.home_volume.name
+    container_path = "/home/ubuntu/.local/share/code-server/extensions"
+    volume_name    = docker_volume.code_server_extensions_volume.name
+    read_only      = false
+  }
+
+  volumes {
+    container_path = "/home/ubuntu/dotfiles"
+    volume_name    = docker_volume.dotfiles_volume.name
     read_only      = false
   }
 
