@@ -42,7 +42,7 @@ lint:
     - shellcheck@0.10.0
     - shfmt@3.6.0
     - taplo@0.9.3
-    - yamllint@1.36.2
+    - yamllint@1.37.0
   disabled:
     - bandit
     - ruff
