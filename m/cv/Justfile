@@ -222,6 +222,7 @@ open-inner site n="1" chunk="10" file="following.html":
 
     for ((i={{n}}; i<=lines; i+=chunk_size)); do
         for u in $(sed -n "${i},$((i + chunk_size - 1))p" "{{file}}" | cut -d'"' -f2); do open "{{site}}/$u"; sleep 0.1; done
+        echo "$((i + chunk_size))" > LAST
         read -p "Press Enter to continue at $((i + chunk_size))..."
     done
 
