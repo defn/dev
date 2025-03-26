@@ -62,12 +62,6 @@ data "coder_parameter" "arch" {
 resource "coder_agent" "main" {
   arch = data.coder_parameter.arch.value
   auth = "token"
-  env = {
-    GIT_AUTHOR_EMAIL    = "${data.coder_workspace_owner.me.email}"
-    GIT_AUTHOR_NAME     = "${data.coder_workspace_owner.me.name}"
-    GIT_COMMITTER_EMAIL = "${data.coder_workspace_owner.me.email}"
-    GIT_COMMITTER_NAME  = "${data.coder_workspace_owner.me.name}"
-  }
   os = data.coder_parameter.os.value
   display_apps {
     ssh_helper      = false
@@ -125,7 +119,11 @@ resource "docker_container" "workspace" {
     "CODER_AGENT_TOKEN=${coder_agent.main.token}",
     "CODER_NAME=${data.coder_workspace.me.name}",
     "CODER_HOMEDIR=${data.coder_parameter.homedir.value}",
-    "CODER_INIT_SCRIPT_BASE64=${base64encode(coder_agent.main.init_script)}"
+    "CODER_INIT_SCRIPT_BASE64=${base64encode(coder_agent.main.init_script)}",
+    "GIT_AUTHOR_EMAIL=${data.coder_workspace_owner.me.email}",
+    "GIT_AUTHOR_NAME=${data.coder_workspace_owner.me.name}",
+    "GIT_COMMITTER_EMAIL=${data.coder_workspace_owner.me.email}",
+    "GIT_COMMITTER_NAME=${data.coder_workspace_owner.me.name}",
   ]
 
   host {
