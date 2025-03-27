@@ -2,8 +2,10 @@
   "name": "defn.dev",
   "image": "ghcr.io/defn/dev:latest",
 
-  "postCreateCommand": "source ~/.bash_profile && make sync && m start m && cd && make sync && git checkout . && sudo ./fixup.sh",
+  "workspaceMount": "source=${localWorkspaceFolder},target=/workspace,type=bind",
+  "workspaceFolder": "/workspace",
 
+  "postCreateCommand": "source ~/.bash_profile && make sync && m start m && cd && make sync && git checkout . && sudo ./fixup.sh",
   "waitFor": "postCreateCommand",
 
   "customizations": {
