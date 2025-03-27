@@ -1,15 +1,13 @@
 {
   "name": "defn.dev",
   "image": "ghcr.io/defn/dev:latest",
+  "workspaceFolder": "/home/ubuntu/work/spaces",
 
   "postCreateCommand": "source ~/.bash_profile && make sync && m start m && cd && make sync && git checkout . && sudo ./fixup.sh",
 
   "waitFor": "postCreateCommand",
 
   "customizations": {
-    "codespaces": {
-      "openFiles": []
-    },
     "vscode": {
       "extensions": [
         "vscodevim.vim",

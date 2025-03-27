@@ -15,9 +15,40 @@ polkit.addRule(function(action, subject) {
 
 systemctl mask sleep.target suspend.target hibernate.target hybrid-sleep.targeto
 
-sudo mv /home/codespace{,.ms}
-sudo ln -nfs /workspace/dev /home/ubuntu
-sudo ln -nfs /workspace/dev /home/codespace
+docker run --sig-proxy=false -a STDOUT -a STDERR 
 
-sudo install -d -m 0700 -u "$(id -un)" -g "$(id -gn)" /nix
-sudo install -d -m 0700 -u "$(id -un)" -g "$(id -gn)" /usr/local/bin/nix
+--mount type=bind,src=/var/lib/docker/codespacemount/workspace,dst=/home/ubuntu/work/space
+
+--mount type=bind,src=/.codespaces/agent/mount/cache,dst=/vscode 
+
+-l ContainerVersion=13
+-l Type=codespaces 
+-l devcontainer.metadata=[{
+    "postCreateCommand":"source ~/.bash_profile && make sync && m start m && cd && make sync && git checkout . && sudo ./fixup.sh",
+    "waitFor":"postCreateCommand",
+    "customizations":{
+        "vscode":{
+            "extensions":[]
+        }
+    },
+    "mounts":[
+        "source=/root/.codespaces/shared,target=/workspaces/.codespaces/shared,type=bind",
+        "source=/var/lib/docker/codespacemount/.persistedshare,target=/workspaces/.codespaces/.persistedshare,type=bind",
+        "source=/.codespaces/agent/mount,target=/.codespaces/bin,type=bind",
+        "source=/mnt/containerTmp,target=/tmp,type=bind"
+    ]
+}]
+
+-e CODESPACES=******** 
+-e ContainerVersion=13 
+-e RepositoryName=dev 
+
+--hostname codespaces-ed2706
+--add-host codespaces-ed2706:127.0.0.1
+
+--cap-add sys_nice
+--network host
+
+--entrypoint /bin/sh 
+ghcr.io/********:latest 
+-c echo Container started
