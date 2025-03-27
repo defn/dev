@@ -1,0 +1,31 @@
+{
+  "name": "defn.dev",
+  "image": "ghcr.io/defn/dev:latest",
+
+  "postCreateCommand": "ps axuf > /tmp/post-create",
+
+  "waitFor": "postCreateCommand",
+
+  "postAttachCommand": {
+    "hello": "uname -a > /tmp/post-attach"
+  },
+
+  "customizations": {
+    "codespaces": {
+      "openFiles": []
+    },
+    "vscode": {
+      "extensions": [
+        "vscodevim.vim",
+        "golang.go",
+        "esbenp.prettier-vscode",
+        "cuelang.cue",
+        "ms-python.python",
+        "kokakiwi.vscode-just",
+        "svelte.svelte-vscode",
+        "astro-build.astro-vscode",
+        "betterthantomorrow.calva"
+      ]
+    }
+  }
+}
