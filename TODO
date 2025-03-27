@@ -13,4 +13,11 @@ polkit.addRule(function(action, subject) {
     }
 });
 
-systemctl mask sleep.target suspend.target hibernate.target hybrid-sleep.target
+systemctl mask sleep.target suspend.target hibernate.target hybrid-sleep.targeto
+
+sudo mv /home/codespace{,.ms}
+sudo ln -nfs /workspace/dev /home/ubuntu
+sudo ln -nfs /workspace/dev /home/codespace
+
+sudo install -d -m 0700 -u "$(id -un)" -g "$(id -gn)" /nix
+sudo install -d -m 0700 -u "$(id -un)" -g "$(id -gn)" /usr/local/bin/nix
