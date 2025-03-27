@@ -2,13 +2,9 @@
   "name": "defn.dev",
   "image": "ghcr.io/defn/dev:latest",
 
-  "postCreateCommand": "ps axuf > /tmp/post-create",
+  "postCreateCommand": "source ~/.bash_profile && make sync && m start m && cd && make sync && git checkout . && sudo ./fixup.sh",
 
   "waitFor": "postCreateCommand",
-
-  "postAttachCommand": {
-    "hello": "uname -a > /tmp/post-attach"
-  },
 
   "customizations": {
     "codespaces": {

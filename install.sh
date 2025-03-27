@@ -21,6 +21,8 @@ function main {
 
 	make sync
 	make install
+
+	git checkout .docker
 	sudo ./fixup.sh || true
 }
 
