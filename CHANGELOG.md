@@ -1,5 +1,32 @@
 # Changelog
 
+## [1.18.0](https://github.com/defn/dev/compare/v1.17.0...v1.18.0) (2025-03-27)
+
+
+### Features
+
+* ./install.sh works on github codespaces ([dfa21a2](https://github.com/defn/dev/commit/dfa21a232fd828a1c35c86ba2bb1e64f55ba8a30))
+* devcontainer ([26726db](https://github.com/defn/dev/commit/26726db7da680620a8a641bae8a45c5dc0762010))
+* github codespaces: post-create-command init ([62ff1ce](https://github.com/defn/dev/commit/62ff1ce88e5bf0d0f9d2cbc7f6970f586809497b))
+* mise prototypes: go, js, py, k8s, k3d, coder-server, ansible ([6c1599e](https://github.com/defn/dev/commit/6c1599edc2ca9c943a647086c811af38088a94ce))
+* persistent dotfiles, coder-extensions in workspaces ([71edc37](https://github.com/defn/dev/commit/71edc37ee7e9c6b371a585d9c7bb51eb1c8d63c1))
+
+
+### Bug Fixes
+
+* bazel needs k8s tools ([a90da6c](https://github.com/defn/dev/commit/a90da6c1ff279515378c3fb72bec3f111d706643))
+* buildkite-agent exe name ([d4aec80](https://github.com/defn/dev/commit/d4aec80f229bb86540b8406d7dd6cacd2af0353e))
+* dont return error during post create ([437746d](https://github.com/defn/dev/commit/437746de0a50905f69114b5ddf65ff54314cbb18))
+* explicit bash shell for just ([f351b06](https://github.com/defn/dev/commit/f351b065a25973e867c4347f953e69ec6ba2be5d))
+* explicit workspaceconfig ([883a8a5](https://github.com/defn/dev/commit/883a8a553bc1ac807e1ed5546718ca9dc217ca65))
+* install buildkite agent ([d0602c4](https://github.com/defn/dev/commit/d0602c4c48302e4b4fb4ffbf943eb59125c92169))
+* revert back to /workspace ([c87ba0d](https://github.com/defn/dev/commit/c87ba0d08d760df52fa6af9d56618c8360ad7a13))
+* set git env vars in docker workspace ([35edcc3](https://github.com/defn/dev/commit/35edcc3d1a50122a708cf787afde5bd2c3bb208e))
+* trust workspace before sourcing profile ([6a3a546](https://github.com/defn/dev/commit/6a3a5466cba32d0f52669de03c0df0f68c7ecf30))
+* typo exec ([73bf7f8](https://github.com/defn/dev/commit/73bf7f8a5097b619e50c71ffeee3789840a3ca72))
+* use bash in post create command ([47c858c](https://github.com/defn/dev/commit/47c858ccd88001910f41f28d3e1d13f132b8354c))
+* workspace is under home ([e255a79](https://github.com/defn/dev/commit/e255a79e2393150cd52676cf8edabc8a7fbe2c09))
+
 ## [1.17.0](https://github.com/defn/dev/compare/v1.16.0...v1.17.0) (2025-03-26)
 
 
