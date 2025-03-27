@@ -5,7 +5,7 @@
   "workspaceMount": "source=${localWorkspaceFolder},target=/workspace,type=bind",
   "workspaceFolder": "/workspace",
 
-  "postCreateCommand": "source ~/.bash_profile && make sync && m start m && cd && make sync && git checkout . && sudo ./fixup.sh",
+  "postCreateCommand": "bash -c 'source ~/.bash_profile && make sync && m start m && cd && make sync && git checkout . && sudo ./fixup.sh'",
   "waitFor": "postCreateCommand",
 
   "customizations": {
