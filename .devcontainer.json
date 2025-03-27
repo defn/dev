@@ -5,7 +5,7 @@
   "workspaceMount": "source=${localWorkspaceFolder},target=/workspace,type=bind",
   "workspaceFolder": "/workspace",
 
-  "postCreateCommand": "bash -c '/home/ubuntu/.local/bin/mise trust . && /home/ubuntu/.local/bin/mise trust ~/ && source ~/.bash_profile && make sync && m start m && cd && make sync && git checkout . && sudo ./fixup.sh'",
+  "postCreateCommand": "bash -c '/home/ubuntu/.local/bin/mise trust . && /home/ubuntu/.local/bin/mise trust ~/ && source ~/.bash_profile && make sync && m start m && cd && make sync && git checkout . && sudo ./fixup.sh' || true",
   "waitFor": "postCreateCommand",
 
   "customizations": {
