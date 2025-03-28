@@ -23,10 +23,10 @@ function main {
     ln -nfs ../svc.d/coder svc/
     ln -nfs ../svc.d/code-server svc/
 
-    case "${$1:-}" in
+    case "${1:-}" in
       setup)
           m start || true
-          s6-svscanctl -a .
+          m activate || true
           m restart coder || true
           m restart code-server || true
           ;;
