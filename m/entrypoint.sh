@@ -6,7 +6,7 @@ function main {
     cd
     source ~/.bash_profile
 
-    sudo chown ubuntu:ubuntu dotfiles .local/share/code-server/extensions
+    sudo install -d -m 0700 -o ubuntu -g ubuntu dotfiles .local/share/code-server/extensions
     
     cd ~/m
 
@@ -23,7 +23,16 @@ function main {
     ln -nfs ../svc.d/coder svc/
     ln -nfs ../svc.d/code-server svc/
 
-    exec /bin/s6-svscan /home/ubuntu/m/svc
+    case "${$1:-}" in
+      setup)
+          m start || true
+          s6-svscanctl -a .
+          m restart coder || true
+          m restart code-server || true
+          ;;
+      *)
+          exec /bin/s6-svscan /home/ubuntu/m/svc
+    esac
 }
 
 main "$@"
