@@ -3,6 +3,8 @@
 set -efu -o pipefail
 
 function main {
+	export SUDO_USER="${SUDO_USER:-1000}"
+
 	perl -pe 's{^\s*GSSAPIAuthentication}{#GSSAPIAuthentication}' -i /etc/ssh/ssh_config
 
 	if test -x /usr/local/bin/nix/ping; then
