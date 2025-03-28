@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.18.1](https://github.com/defn/dev/compare/v1.18.0...v1.18.1) (2025-03-28)
+
+
+### Bug Fixes
+
+* default to 1000 uid if no sudo user ([a8fd3c4](https://github.com/defn/dev/commit/a8fd3c4a114e0748b8c4f8f2aa66a3873826782f))
+
 ## [1.18.0](https://github.com/defn/dev/compare/v1.17.0...v1.18.0) (2025-03-27)
 
 
