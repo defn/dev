@@ -1,28 +1,16 @@
 terraform {
   required_providers {
     coder = {
-      version = "2.1.0"
-      source  = "coder/coder"
+      source = "coder/coder"
     }
     docker = {
       source = "kreuzwerker/docker"
     }
   }
-  backend "local" {
-
-  }
-}
-
-variable "docker_socket" {
-  default = ""
-  type    = string
+  backend "local" {}
 }
 
 provider "coder" {
-}
-
-provider "docker" {
-  host = var.docker_socket != "" ? var.docker_socket : null
 }
 
 data "coder_provisioner" "me" {}
@@ -62,12 +50,44 @@ data "coder_parameter" "arch" {
 resource "coder_agent" "main" {
   arch = data.coder_parameter.arch.value
   auth = "token"
-  os = data.coder_parameter.os.value
+  os   = data.coder_parameter.os.value
   display_apps {
     ssh_helper      = false
     vscode          = false
     vscode_insiders = false
   }
+}
+
+resource "coder_app" "code-server" {
+  agent_id     = coder_agent.main.id
+  display_name = "code-server"
+  icon         = "/icon/code.svg"
+  share        = "owner"
+  slug         = "cs"
+  subdomain    = true
+  url          = "http://localhost:8080/?folder=${data.coder_parameter.homedir.value}"
+  healthcheck {
+    interval  = 5
+    threshold = 6
+    url       = "http://localhost:8080/healthz"
+  }
+}
+
+//
+// params
+//
+
+//
+// custom
+//
+
+variable "docker_socket" {
+  default = ""
+  type    = string
+}
+
+provider "docker" {
+  host = var.docker_socket != "" ? var.docker_socket : null
 }
 
 resource "docker_volume" "dotfiles_volume" {
@@ -186,17 +206,3 @@ resource "docker_container" "workspace" {
   }
 }
 
-resource "coder_app" "code-server" {
-  agent_id     = coder_agent.main.id
-  display_name = "code-server"
-  icon         = "/icon/code.svg"
-  share        = "owner"
-  slug         = "cs"
-  subdomain    = true
-  url          = "http://localhost:8080/?folder=${data.coder_parameter.homedir.value}"
-  healthcheck {
-    interval  = 5
-    threshold = 6
-    url       = "http://localhost:8080/healthz"
-  }
-}
