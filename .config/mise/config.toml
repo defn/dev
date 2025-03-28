@@ -3,12 +3,13 @@ experimental = true
 
 [tools]
 ansible = "11.4.0"
-aws = "2.25.3"
+aws = "2.25.5"
 bat = "0.25.0"
 bazelisk = "1.25.0"
 chamber = "3.1.1"
 coder = "2.20.2"
 cue = "0.12.0"
+dyff = "1.9.4"
 gh = "2.69.0"
 go = "1.24.1"
 jq = "1.7.1"
@@ -17,7 +18,7 @@ node = "22.14.0"
 pipx = "1.7.1"
 python = "3.13.2"
 starship = "1.22.1"
-"ubi:buildkite/agent" = { version = "3.92.0", exe = "buildkite-agent" }
+"ubi:buildkite/agent" = { version = "3.95.1", exe = "buildkite-agent" }
 "ubi:coder/code-server" = { version = "4.98.2", bin_path = "bin", extract_all = "true" }
 "ubi:honeycombio/buildevents" = "0.17.0"
 "ubi:peak/s5cmd" = "2.3.0"
