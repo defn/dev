@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.19.0](https://github.com/defn/dev/compare/v1.18.1...v1.19.0) (2025-03-28)
+
+
+### Features
+
+* mise upgrades: aws, dyff, buildkite-agent, terraform, wrangler, aichat ([79edbd6](https://github.com/defn/dev/commit/79edbd6582ee100e28e022a8d064a18909c09d07))
+
+
+### Bug Fixes
+
+* sync continues if mise self-update fails ([82aa0f1](https://github.com/defn/dev/commit/82aa0f10f536cfc8ad09d7878a7942cfcb016e40))
+
 ## [1.18.1](https://github.com/defn/dev/compare/v1.18.0...v1.18.1) (2025-03-28)
 
 
