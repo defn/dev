@@ -10,7 +10,7 @@ RUN apt update \
     && apt install -y \
         make direnv curl xz-utils dirmngr gpg pcscd scdaemon gpg-agent rsync \
         build-essential sudo ca-certificates tzdata locales git git-lfs tini \
-        iproute2 iptables bc pv socat docker.io s6 cpu-checker bind9-dnsutils \
+        iproute2 iptables bc pv socat s6 cpu-checker bind9-dnsutils \
         pass
 
 RUN curl -fsSL https://tailscale.com/install.sh | sh

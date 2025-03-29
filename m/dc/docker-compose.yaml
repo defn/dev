@@ -2,7 +2,7 @@
 name: dev
 services:
   home:
-    image: ghcr.io/defn/dev:base
+    image: ghcr.io/defn/dev:latest
     user: ubuntu
     working_dir: /home/ubuntu
     restart: always
@@ -16,5 +16,7 @@ services:
       - seccomp=unconfined
     volumes:
       - tailscale:/var/lib/tailscale
+      - coder:/home/ubuntu/.config/coderv2
 volumes:
   tailscale:
+  coder:

@@ -54,7 +54,6 @@
       - ncdu
       - apache2-utils
       - fontconfig
-      - docker.io
       - tzdata
       - avahi-daemon
       - cloud-guest-utils
