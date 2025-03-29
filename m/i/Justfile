@@ -1,5 +1,7 @@
 latest platforms="amd64 arm64":
 	#!/usr/bin/env bash
+	set -efu -o pipefail
+
 	case "${BUILDKITE_BRANCH:-}" in
 		main)
 			case "${BUILDKITE_MESSAGE:-}" in
