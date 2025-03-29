@@ -19,7 +19,6 @@
         direnv
         dive
         dnsutils
-        docker
         file
         findutils
         fzf
