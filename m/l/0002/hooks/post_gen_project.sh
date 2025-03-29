@@ -3,7 +3,6 @@
 for a in *.template; do if test -r "$a"; then mv "${a}" "${a%.template}"; fi; done
 git add .
 git add -f .env
-direnv allow
 j build
 git add tutorial.html
 trunk fmt

@@ -9,7 +9,7 @@ function main {
 
 	# sync with m/i/Dockerfile, m/i/script/001-install-base
 	sudo apt install -y \
-		make direnv curl xz-utils dirmngr gpg pcscd scdaemon gpg-agent rsync \
+		make curl xz-utils dirmngr gpg pcscd scdaemon gpg-agent rsync \
 		build-essential sudo ca-certificates tzdata locales git git-lfs tini \
 		iproute2 iptables bc pv socat s6 cpu-checker bind9-dnsutils \
 		pass ||

@@ -4,7 +4,6 @@ exec 2>&1
 
 export STARSHIP_NO=1
 source ~/.bash_profile
-direnv allow
 mise trust
 mise install
 source .env
