@@ -19,9 +19,6 @@ RUN if [ "$(id -u ubuntu)" != 1000 ]; then groupadd -r --gid 1000 ubuntu && user
 
 RUN echo "ubuntu ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 
-RUN install -d -m 0755 -o ubuntu -g ubuntu /nix
-RUN install -d -m 0755 -o ubuntu -g ubuntu /usr/local/bin/nix
-
 USER ubuntu
 ENV USER=ubuntu
 ENV HOME=/home/ubuntu
@@ -55,14 +52,6 @@ RUN	bash -c "git pull && source .bash_profile && ./install.sh"
 USER root
 RUN apt update && sudo apt upgrade -y
 RUN ./fixup.sh
-USER ubuntu
-
-# nix has mount issues in a restricted container
-# nix should be updated via the image
-USER root
-RUN rm -rf /usr/local/bin/nix/nix /home/ubuntu/.nix-profile/bin/nix \
-    .nix-channels .nix-defexpr .nix-profile \
-    .local/state/nix
 USER ubuntu
 
 RUN ln -nfs ../svc.d/tailscaled m/svc/
