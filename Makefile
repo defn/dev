@@ -26,9 +26,6 @@ rpi-install:
 	sudo apt update
 	sudo apt install -y git direnv make rsync bc pipx
 
-chrome-coder:
-	$(MAKE) -j 2 chrome-dev-socat chrome-dev-coder
-
 vpn:
 	cd m/openvpn && ./service server
 
@@ -59,24 +56,9 @@ chrome-dev-gpg:
 	gpg-agent --daemon --pinentry-program $$(which pinentry)
 	while [[ "$$(pass hello)" != "world" ]]; do sleep 1; done
 
-chrome-dev-socat:
-	while true; do sudo pkill -9 socat || true; sudo socat TCP-LISTEN:443,fork TCP:localhost:3443; done
-
-chrome-dev-coder:
-	while true; do (cd m && $(MAKE) teacher domain=$(domain) name=$(name)); done
-
-chrome-dev-cert-issue:
-	this-acme-issue '*.$(name).$(domain)'
-
-chrome-dev-cert-renew:
-	this-acme-renew '*.$(name).$(domain)'
-
 chrome-dev-dns:
 	touch ~/.config/cloudflare-ddns.toml 
 	cloudflare-ddns --domain $(domain) --record '*.$(name).$(domain)' --ip "$$(ip addr show eth0 | grep 'inet ' | awk '{print $$2}' | cut -d/ -f1)" --token "$$(pass cloudflare_$(domain))" --config ~/.config/cloudflare-ddns.toml 
-
-chrome-minikube:
-	minikube start --driver=kvm2 --auto-update-drivers=false --insecure-registry=cache.$(domain):4999
 
 build:
 	bazel --version
@@ -285,66 +267,12 @@ nix-Linux-bootstrap:
 nix-Darwin-bootstrap:
 	true
 
-coder-ssh-linux:
-	export STARSHIP_NO=1 LOCAL_ARCHIVE=/usr/lib/locale/locale-archive && source ~/.bash_profile && cd $(CODER_HOMEDIR) \
-		&& (echo set -x; echo "exec 1>>/tmp/coder-agent-stdout.log 2>>/tmp/coder-agent-stderr.log"; echo $(CODER_INIT_SCRIPT_BASE64) | base64 -d) | (sed 's#agent$$#agent $${CODER_NAME}#; s#^while.*#while ! test -x $${BINARY_NAME}; do#; s#^BINARY_NAME.*#BINARY_NAME=$$HOME/bin/nix/coder#; s#exec ./#exec #; s#exit 1#echo exit 1#' ) > /tmp/coder-agent-$(CODER_NAME)-$$$$ && exec bash -x /tmp/coder-agent-$(CODER_NAME)-$$$$ >>/tmp/coder-agent-startup-$$$$.log 2>&1
-
-coder-ssh-envbuilder:
-	docker rm -f "$(CODER_NAME)" || true
-	docker run --rm -d --sysctl net.ipv6.conf.all.disable_ipv6=1 \
-		--name "$(CODER_NAME)" \
-		--privileged \
-		--dns 1.1.1.1 \
-		-v envbuilder-image:/image-cache:ro \
-		-v envbuilder-layer:/layer-cache \
-		-v /nix:/nix \
-		-v /dev/net/tun:/dev/net/tun \
-		-v $(shell if test $$(uname -s) == Darwin; then echo $$HOME/.docker/run/docker.sock; else echo /var/run/docker.sock; fi):/var/run/docker.sock \
-		-v $(shell ls -d ~ | cut -d/ -f1-2):/workspaces \
-		-v $(shell ls -d ~ | cut -d/ -f1-2):/home \
-		-e LAYER_CACHE_DIR=/layer-cache \
-		-e BASE_IMAGE_CACHE_DIR=/image-cache \
-		-e GIT_URL=https://$(domain)/defn/dev \
-		-e DOCKERFILE_PATH=$(shell echo "$(CODER_HOMEDIR)" | sed 's#/home/ubuntu/##')/Dockerfile \
-		-e CODER_NAME=$(CODER_NAME) \
-		-e CODER_HOMEDIR=$(CODER_HOMEDIR) \
-		-e ALT_CODER_AGENT_URL=$(ALT_CODER_AGENT_URL) \
-		-e CODER_AGENT_URL=$(CODER_AGENT_URL) \
-		-e CODER_AGENT_TOKEN=$(CODER_AGENT_TOKEN) \
-		-e CODER_INIT_SCRIPT_BASE64=$(CODER_INIT_SCRIPT_BASE64) \
-		-e TS_AUTH_KEY=$(TS_AUTH_KEY) \
-		-e INIT_COMMAND="/bin/bash" \
-		-e INIT_SCRIPT="source ~/.bash_profile && screen -dmS tailscale sudo $$(which tailscaled) && while true; do if sudo $$(which tailscale) up --auth-key $${TS_AUTH_KEY} --hostname $${CODER_NAME} --reset --ssh --advertise-tags tag:junkernetes --accept-routes; then break; fi; sleep 1; done && cd ~/m && source ~/.bash_profile && exec tini ~/bin/j coder::coder-agent" \
-		ghcr.io/coder/envbuilder:0.2.9
-
-coder-ssh-devcontainer:
-	source ~/.bash_profile && cd m && npm install
-	-source ~/.bash_profile && cd $(CODER_HOMEDIR) && docker ps -q -a --filter label=devcontainer.local_folder=$$(pwd) | runmany 'docker rm -f $$1 2>/dev/null'
-	source ~/.bash_profile && cd $(CODER_HOMEDIR) && devcontainer build --workspace-folder . --config ~/m/.devcontainer/devcontainer.json
-	source ~/.bash_profile && cd $(CODER_HOMEDIR) && devcontainer up --workspace-folder . --config ~/m/.devcontainer/devcontainer.json
-	source ~/.bash_profile && cd $(CODER_HOMEDIR) && devcontainer exec --workspace-folder . --config ~/m/.devcontainer/devcontainer.json \
-		env \
-			CODER_NAME=$(CODER_NAME) \
-			CODER_HOMEDIR=$(CODER_HOMEDIR) \
-			CODER_AGENT_URL=$(CODER_AGENT_URL) \
-			CODER_AGENT_TOKEN=$(CODER_AGENT_TOKEN) \
-			CODER_INIT_SCRIPT_BASE64=$(CODER_INIT_SCRIPT_BASE64) \
-			http_proxy=http://169.254.32.1:3128 \
-			https_proxy=http://169.254.32.1:3128 \
-			bash -c "cd ~/m && exec j coder::coder-agent $(CODER_NAME)" &
-
-coder-ssh-chromebook:
-	@pkill -9 -f coder.agen[t] || true
-	@pkill -9 -f code-serve[r] || true
-	@export STARSHIP_NO=1 && source ~/.bash_profile && echo $(CODER_INIT_SCRIPT_BASE64) | base64 -d | exec bash -x -
-
 zfs:
 	sudo zfs destroy defn/nix@latest || true
 	sudo zfs destroy defn/work@latest || true
 	sudo zfs destroy defn/docker@latest || true
 
 	(cd ~/m && b clean)
-	(cd ~/m/pkg/coder && nix develop -c bash -c "cd && make rehome" || true) 
 	make home
 
 	sudo zfs snapshot defn/nix@latest
