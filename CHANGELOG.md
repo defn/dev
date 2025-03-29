@@ -1,5 +1,20 @@
 # Changelog
 
+## [1.20.0](https://github.com/defn/dev/compare/v1.19.0...v1.20.0) (2025-03-29)
+
+
+### Features
+
+* entrypoint.sh setup will start services ([6c7b5b8](https://github.com/defn/dev/commit/6c7b5b89689392e98295aa6880f465546ebd0092))
+* remove ubuntu docker.io, making way for docker-ce ([0750e65](https://github.com/defn/dev/commit/0750e6553ff219f5735d3b828992cfea01c95bb0))
+
+
+### Bug Fixes
+
+* remove docker from base flake ([767ff00](https://github.com/defn/dev/commit/767ff0076a969f192c3fa311e8d8a8945b084693))
+* s6 activate in svc dir ([8ea8f89](https://github.com/defn/dev/commit/8ea8f8936e0c72ba576391286c1b6988c2927908))
+* ssh workspace template uses entrypoint.sh setup ([e2513ed](https://github.com/defn/dev/commit/e2513ed3ec8f1f114499b44889dbfa313c58a38b))
+
 ## [1.19.0](https://github.com/defn/dev/compare/v1.18.1...v1.19.0) (2025-03-28)
 
 
