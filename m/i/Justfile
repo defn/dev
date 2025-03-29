@@ -1,4 +1,4 @@
-latest:
+latest platforms="amd64 arm64":
 	#!/usr/bin/env bash
 	case "${BUILDKITE_BRANCH:-}" in
 		main)
@@ -17,9 +17,9 @@ latest:
 
 	export BUILD_SHA="$(git rev-parse HEAD)"
 	export RELEASE="$(git describe --tags --abbrev=0)"
-	export GITHUB_TOKEN="$(just github::token)"
+	export GITHUB_TOKEN="$(cd .. && just github::token)"
 
-	for p in amd64 arm64; do
+	for p in {{ platforms }}; do
 		(
 			docker build -t ghcr.io/defn/dev:${RELEASE}-$p \
 					--platform linux/$p \
@@ -40,6 +40,6 @@ latest:
 
 	wait
 
-	docker manifest rm ghcr.io/defn/dev:latest || true
+	docker manifest rm ghcr.io/defn/dev:latest 2>/dev/null >/dev/null || true
 	docker manifest create ghcr.io/defn/dev:latest ghcr.io/defn/dev:latest-${RELEASE}-${BUILD_SHA}-{amd64,arm64} 
 	docker manifest push ghcr.io/defn/dev:latest
