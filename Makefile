@@ -171,7 +171,7 @@ install:
 	t make_install $(MAKE) install_t
 
 install_t:
-	t make_nix $(MAKE) nix
+	t make_mise $(MAKE) mise
 	t make_trunk $(MAKE) trunk || true # sudo
 	t install_inner $(MAKE) install-inner
 	@mark finished
@@ -187,14 +187,11 @@ install-innermost:
 	t make_dotfiles $(MAKE) dotfiles
 	t make_gpg $(MAKE) gpg
 
-nix:
-	which nix || t make_nix_platform $(MAKE) nix-$(shell uname -s)
+mise:
 	if [[ ! -x ~/.local/bin/mise ]]; then curl -sSL https://mise.run | bash; fi
 	~/.local/bin/mise trust
 	~/.local/bin/mise install
 	ln -nfs $$(~/.local/bin/mise exec -- which bazelisk) $$HOME/bin/$$(uname -s)/bazel
-
-nix-reset:
 
 nix-uninstall:
 	-sudo mv /etc/zshrc.backup-before-nix /etc/zshrc
@@ -212,21 +209,6 @@ nix-uninstall:
 
 nix-clean:
 	rm -rf .nix-profile .local/state/nix
-
-nix-Linux:
-	export LC_ALL=C.UTF-8 && if ! type -P nix; then t make_nix_linux_bootstrap $(MAKE) nix-Linux-bootstrap; fi
-
-nix-Darwin:
-	true
-
-# https://github.com/NixOS/nixpkgs/blob/9f0d9ad45c4bd998c46ba1cbe0eb0dd28c6288a5/pkgs/tools/package-management/nix/default.nix
-# look for the stable version
-nix-Linux-bootstrap:
-	t curl_bash_nix_install sh <(curl -L https://releases.nixos.org/nix/nix-$(NIX_VERSION)/install) --no-daemon
-	git checkout .bash_profile
-
-nix-Darwin-bootstrap:
-	true
 
 zfs:
 	sudo zfs destroy defn/nix@latest || true
