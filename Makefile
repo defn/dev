@@ -1,11 +1,5 @@
 SHELL := /bin/bash
 
-# https://nixos.org/download
-NIX_VERSION := 2.18.2
-
-flakes ?=
-home ?= home
-
 name ?= local
 domain ?= defn.run
 
@@ -94,39 +88,6 @@ macos:
 	for ip in $(dummy_ip); do if ! ifconfig lo0 | grep "inet $$ip"; then sudo ifconfig lo0 alias "$$ip" netmask 255.255.255.255; fi; done;
 	ifconfig lo0
 	defaults write -g ApplePressAndHoldEnabled -bool false
-
-rehome:
-	$(MAKE) home
-	rm -rf ~/.direnv/flake* ~/m/pkg/*/result
-	nix-store --gc
-	nix-store --gc --print-roots | egrep -v '^/proc|state/nix/profiles|cache/nix/flake'
-
-home:
-	t home $(MAKE) home-inner
-
-home-inner:
-	bin/persist-cache
-	t install-nix-base $(MAKE) home-nix-base
-	t nix-finalize-bin $(MAKE) home-nix-finalize-bin
-
-home-nix-finalize-bin:
-	rm -f /tmp/nix-bin/.bazel-nix-store /tmp/nix-bin/.nix-flake
-	rm -f /tmp/nix-bin/python*
-	rm -f /tmp/nix-bin/bash* /tmp/nix-bin/sh
-	rm -f /tmp/nix-bin/{gawkbug,patchelf}
-	for a in /tmp/nix-bin/*; do if ! test -e "$(readlink "$a")"; then rm -vf "$a"; fi; done 
-	rsync -iaI --delete /tmp/nix-bin/. /usr/local/bin/nix/. >/dev/null
-	rm -rf bin/nix
-	ln -nfs /usr/local/bin/nix bin/nix
-
-home-nix-base:
-	rm -rf /tmp/nix-tmp /tmp/nix-bin
-	mkdir -p /tmp/nix-tmp /tmp/nix-bin
-	(cd ~/m/pkg/base && nix build && nix develop --command bash -c 'echo $$PATH | tr : \\n' | grep /nix/store) | tac | while read -r a; do find $$a/ ! -type d; done | xargs | while read -r a; do if [[ -n "$$a" ]]; then ln -nfs $$a /tmp/nix-bin/; fi; done
-	#cd m && bazel version
-	#cd m/${home} && b build
-	#(cd m/${home} && b out something) | (cd /tmp/nix-tmp && tar xfz -)
-	#cd /tmp/nix-tmp && for a in $(flakes); do (cd $$a && if ! stat -L * 2>/dev/null >/dev/null; then echo $$a; (cd ~/m/pkg/$$a && b build); sudo tar -C / -xf ~/m/$$(cat .bazel-nix-store) || true; fi; rsync -ia . /tmp/nix-bin/. >/dev/null); done
 
 .PHONY: dotfiles
 dotfiles:
