@@ -15,6 +15,9 @@ latest platforms="amd64 arm64":
 
 	git fetch || true
 
+	docker run --rm --privileged tonistiigi/binfmt --install all
+	docker run --rm --privileged multiarch/qemu-user-static:latest --reset -p yes --credential yes
+
 	export BUILD_SHA="$(git rev-parse HEAD)"
 	export RELEASE="$(git describe --tags --abbrev=0)"
 	export GITHUB_TOKEN="$(cd .. && just github::token)"
@@ -24,15 +27,14 @@ latest platforms="amd64 arm64":
 			docker build -t ghcr.io/defn/dev:${RELEASE}-$p \
 					--platform linux/$p \
 					--build-arg RELEASE \
-					.
+					--secret id=GITHUB_TOKEN .
 
 			docker push ghcr.io/defn/dev:${RELEASE}-$p
 
 			docker build --no-cache -t ghcr.io/defn/dev:latest-${RELEASE}-${BUILD_SHA}-${p} -f Dockerfile.latest \
 					--platform linux/$p \
 					--build-arg FROM=ghcr.io/defn/dev:${RELEASE}-${p} \
-					--build-arg GITHUB_TOKEN \
-					.
+					--secret id=GITHUB_TOKEN .
 
 			docker push ghcr.io/defn/dev:latest-${RELEASE}-${BUILD_SHA}-${p}
 		) &
@@ -41,5 +43,5 @@ latest platforms="amd64 arm64":
 	wait
 
 	docker manifest rm ghcr.io/defn/dev:latest 2>/dev/null >/dev/null || true
-	docker manifest create ghcr.io/defn/dev:latest ghcr.io/defn/dev:latest-${RELEASE}-${BUILD_SHA}-{amd64,arm64} 
+	docker manifest create ghcr.io/defn/dev:latest ghcr.io/defn/dev:latest-${RELEASE}-${BUILD_SHA}-{amd64,arm64}
 	docker manifest push ghcr.io/defn/dev:latest

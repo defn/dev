@@ -1,10 +1,8 @@
-ARG FROM
+ARG FROM=ghcr.io/defn/dev:latest
 
 FROM ${FROM}
 
-ARG GITHUB_TOKEN
-
-RUN bin/with-env make sync
+RUN --mount=type=secret,id=GITHUB_TOKEN,env=GITHUB_TOKEN bin/with-env make sync
 
 ENTRYPOINT ["/home/ubuntu/m/entrypoint.sh"]
 CMD []

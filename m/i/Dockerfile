@@ -34,7 +34,7 @@ RUN git clone https://github.com/defn/dev dev && \
     mv dev/.git . && \
     git reset --hard && \
     rm -rf dev
-RUN	bash -c "git pull && source .bash_profile && ./install.sh && ./install.sh"
+RUN	--mount=type=secret,id=GITHUB_TOKEN,env=GITHUB_TOKEN bash -c "git pull && source .bash_profile && ./install.sh && ./install.sh"
 
 # sudo doesnt work with qemu arm64 emulation
 USER root
@@ -46,7 +46,7 @@ USER ubuntu
 ARG RELEASE
 
 RUN echo "$RELEASE"
-RUN	bash -c "git pull && source .bash_profile && ./install.sh"
+RUN	--mount=type=secret,id=GITHUB_TOKEN,env=GITHUB_TOKEN bash -c "git pull && source .bash_profile && ./install.sh"
 
 # sudo doesnt work with qemu arm64 emulation
 USER root
