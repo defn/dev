@@ -21,8 +21,6 @@ function main {
 		chgrp "$(id -gn $SUDO_USER)" /var/run/docker.sock
 	fi
 	usermod -aG docker "$(id -un $SUDO_USER)"
-
-	sudo ln -nfs $(mise exec -- which cue) ~/bin/cue
 }
 
 main "$@"
