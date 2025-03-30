@@ -1,1 +1,5 @@
-run.go
+#!/usr/local/bin/yaegi
+
+func main() {
+    select {} // Blocks forever
+}
