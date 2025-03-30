@@ -2,8 +2,6 @@ default:
 	mise install
 	mise exec -- $(MAKE) build
 
--include ../common/Makefile.coder
-
 build: ../node_modules/.bin/cdktf
 	cue eval -c >/dev/null
 	b build
