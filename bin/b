@@ -7,6 +7,7 @@ bopts=""
 export HOME="${HOME:-/home/ubuntu}"
 
 # TODO remove once cue has a permanent symlink
+sudo mkdir -p /nix
 sudo ln -nfs "$(cd && mise exec -- which cue)" /usr/local/bin/cue
 
 function bazel {
