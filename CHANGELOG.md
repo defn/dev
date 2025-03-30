@@ -1,5 +1,46 @@
 # Changelog
 
+## [1.20.0](https://github.com/defn/dev/compare/v1.19.0...v1.20.0) (2025-03-30)
+
+
+### Features
+
+* defn cli symlink to bazel build ([cad53f2](https://github.com/defn/dev/commit/cad53f2313fd4369e807180df1591f0f207e4d23))
+* Dockerfile syntax at 1.14.0 ([460eb05](https://github.com/defn/dev/commit/460eb050c6ec323dc7b16ad986465e022bc0984c))
+* entrypoint.sh setup will start services ([6c7b5b8](https://github.com/defn/dev/commit/6c7b5b89689392e98295aa6880f465546ebd0092))
+* install docker-ce ([418f632](https://github.com/defn/dev/commit/418f6325a6b108ebc2bb8ea92727f084f180429c))
+* main run script in go ([5c3bd2b](https://github.com/defn/dev/commit/5c3bd2b7244b4974ead0b46ee4fc974d273dbecc))
+* remove direnv ([c6263f4](https://github.com/defn/dev/commit/c6263f43f1d2061f9b5060105ad3ec2b05a743be))
+* remove nix from Docker build ([863f1ea](https://github.com/defn/dev/commit/863f1ea47d7dc15093ca53eb6e78c1505ec8414d))
+* remove ubuntu docker.io, making way for docker-ce ([0750e65](https://github.com/defn/dev/commit/0750e6553ff219f5735d3b828992cfea01c95bb0))
+* trying using ibazel/bazel-watcher again ([6f25bc1](https://github.com/defn/dev/commit/6f25bc12115ce002804868dffbe0632b507c26fd))
+* use latest dockerfile secrets mounts as env ([24497b8](https://github.com/defn/dev/commit/24497b8898ebfd47329e36364a602402a91fd777))
+* use yaegi, keep trying to make it work ([f7d6ab5](https://github.com/defn/dev/commit/f7d6ab5df30e14e5334129a77d14a287d60cd3d6))
+* yaegi, dive ([7a0428e](https://github.com/defn/dev/commit/7a0428e5ab4b91e44debecce4921baa1033d5630))
+
+
+### Bug Fixes
+
+* bazel needs /nix, maybe a cache thing ([f993588](https://github.com/defn/dev/commit/f9935880f04a4aa4fcd59171dfc69a0b2723675b))
+* bazel: install skopeo, make cue symlink ([8a3d329](https://github.com/defn/dev/commit/8a3d329e0da9ca2f833cbb619f4b36fc057e4e50))
+* cue into $HOME/bin, ignore bin/coder ([8dbd29a](https://github.com/defn/dev/commit/8dbd29ac9ef812fec57cb248e139c50049967195))
+* defn points to generic cli ([62c2664](https://github.com/defn/dev/commit/62c2664bc091426926e04080f2e9a6bde6d512fd))
+* dont call make home ([ba1f49c](https://github.com/defn/dev/commit/ba1f49c9a38cec342ace45467bbee66d0b6b4f1a))
+* download coder to /usr/local/bin ([e20d241](https://github.com/defn/dev/commit/e20d2412f1a0d76242fc48998f4a39087efa10d2))
+* mise links in /usr/local/bin ([830b710](https://github.com/defn/dev/commit/830b7109f2e56dbb2f6983be62ee430853aaddf4))
+* no bat, something weird about its github release ([2493cd9](https://github.com/defn/dev/commit/2493cd9d6ebe36b08d14cf7bf3d8155e7689cc0d))
+* remove docker from base flake ([767ff00](https://github.com/defn/dev/commit/767ff0076a969f192c3fa311e8d8a8945b084693))
+* remove nix from bazel builds ([57ae64a](https://github.com/defn/dev/commit/57ae64a27adcdec9d95270b029e1343a06143577))
+* remove nix from make install ([22517b5](https://github.com/defn/dev/commit/22517b55c2067b4fa657a022bd7659b06130074e))
+* remove nix from Makefiles ([e6f3617](https://github.com/defn/dev/commit/e6f36177d5f0da57d8a238f6763f293f27ae8ac9))
+* remove unused coder scripts ([b9541dd](https://github.com/defn/dev/commit/b9541dd7241cb8fff612ede468e959cc4fed1ca5))
+* remove yaegi, going with golang ([407909e](https://github.com/defn/dev/commit/407909e421785775833096c02cee909bf0ad5665))
+* Revert "fix: no bat, something weird about its github release" ([1092e91](https://github.com/defn/dev/commit/1092e918512648b8f835f4aa22c6cc5bd67d7e8f))
+* run yaegi from a well known path ([74a138a](https://github.com/defn/dev/commit/74a138a78f628ea10f6bcc9e4a4e9ee2650e7a45))
+* s6 activate in svc dir ([8ea8f89](https://github.com/defn/dev/commit/8ea8f8936e0c72ba576391286c1b6988c2927908))
+* ssh workspace template uses entrypoint.sh setup ([e2513ed](https://github.com/defn/dev/commit/e2513ed3ec8f1f114499b44889dbfa313c58a38b))
+* symlinks at the end of sync ([62feabd](https://github.com/defn/dev/commit/62feabde4c1807edcd12207987542eaec21d04e8))
+
 ## [1.19.0](https://github.com/defn/dev/compare/v1.18.1...v1.19.0) (2025-03-28)
 
 
