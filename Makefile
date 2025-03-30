@@ -258,6 +258,7 @@ sync_inner:
 	mise install
 	(cd m && mise install)
 	sudo ./fixup.sh || true
+	bin/persist-cache
 
 up:
 	cd m/dc && just up
