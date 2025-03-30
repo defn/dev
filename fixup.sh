@@ -22,7 +22,7 @@ function main {
 	fi
 	usermod -aG docker "$(id -un $SUDO_USER)"
 
-	sudo ln -nfs $(mise exec -- which cue) /usr/local/bin/
+	sudo ln -nfs $(mise exec -- which cue) ~/bin/cue
 }
 
 main "$@"
