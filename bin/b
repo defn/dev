@@ -17,7 +17,7 @@ function bazel {
 	case "${cmd}" in
 	watch)
 		if [[ $# == 0 ]]; then set -- .; fi
-		command ibazel build "$@"
+		command bazel-watcher build "$@"
 		;;
 	build | test | run | query | cquery)
 		# shellcheck disable=SC2065

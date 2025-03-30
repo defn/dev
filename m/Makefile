@@ -118,10 +118,6 @@ regen:
 	go mod tidy
 	b pass run //:gazelle
 
-watch:
-	$(MAKE) build
-	ibazel build //...
-
 coder-login:
 	coder login https://coder.$(env).$(GIT_AUTHOR_NAME).$(domain)
 
