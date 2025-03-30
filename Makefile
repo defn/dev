@@ -258,7 +258,7 @@ sync_inner:
 	mise install
 	(cd m && mise install)
 	sudo ./fixup.sh || true
-	for a in cue yaegi; do sudo ln -nfs $$(mise exec -- which $a) /usr/local/bin/; done
+	for a in cue yaegi; do sudo ln -nfs $$(mise exec -- which $$a) /usr/local/bin/; done
 	bin/persist-cache
 
 up:
