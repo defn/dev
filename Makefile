@@ -56,7 +56,6 @@ chrome-dev-dns:
 
 build:
 	bazel --version
-	$(MAKE) home
 
 ci:
 	@echo "+++ Results"
@@ -179,7 +178,6 @@ install_t:
 install-inner:
 	t make_perms $(MAKE) perms
 	t make_install_innermost bash -c '. ~/.bash_profile && $(MAKE) install-innermost'
-	t make_home $(MAKE) home
 
 install-innermost:
 	git config lfs.https://github.com/defn/dev.git/info/lfs.locksverify false
@@ -216,7 +214,6 @@ zfs:
 	sudo zfs destroy defn/docker@latest || true
 
 	(cd ~/m && b clean)
-	make home
 
 	sudo zfs snapshot defn/nix@latest
 	sudo zfs snapshot defn/work@latest
