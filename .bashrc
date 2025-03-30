@@ -198,7 +198,7 @@ if [[ -z ${BUILDKITE-} ]]; then
 
 	if [[ -z ${CODER_AGENT_URL-} ]]; then
 		if [[ -n ${CODER_NAME-} ]]; then
-			CODER_AGENT_PID="$(pgrep -f nix/coder.agent.${CODER_NAME})"
+			CODER_AGENT_PID="$(pgrep -f bin/coder.agent.${CODER_NAME})"
 			if [[ -n ${CODER_AGENT_PID} ]]; then
 				eval "$(cat /proc/${CODER_AGENT_PID}/environ | tr '\0' '\n' | egrep '^CODER_AGENT_(URL|TOKEN_AUTH)=')"
 				export CODER_AGENT_URL
