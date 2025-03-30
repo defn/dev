@@ -3,8 +3,6 @@
 function main {
 	local app="${in[app]}"
 
-	local cue="${in[cue]}"
-
 	mkdir gen
 	rsync -iaL cue.mod/gen/. gen/.
 	rm -rf cue.mod/gen
@@ -13,7 +11,7 @@ function main {
 	(
 		set +f
 		echo package k
-		"${cue}" export --out json -e images "${app}" k/*.cue | jq -r '.[]' |
+		cue export --out json -e images "${app}" k/*.cue | jq -r '.[]' |
 			sort -u |
 			runmany 8 'echo cache: \"$1\": \"$(echo $1 | perl -pe '"'"'s{[:@].*$}{}'"'"')@$(skopeo inspect docker://${1%%@sha256*} | jq -r .Digest)\"' |
 			while read -r l; do

@@ -5,8 +5,6 @@
 function main {
 	local registry="${in[registry]}"
 
-	local cue="${shome}/${in[cue]}"
-
 	local cue_import="$1"
 	shift
 	local image_digest="$1"
@@ -22,7 +20,7 @@ function main {
 	mv gen cue.mod/
 
 	if false; then
-		"${cue}" export --out json -e image_digests "${cue_import}" "${image_digest}" k/*.cue |
+		cue export --out json -e image_digests "${cue_import}" "${image_digest}" k/*.cue |
 			jq -r '.[]' |
 			while read -r image_original image_digested; do
 				if [[ "$(skopeo inspect --tls-verify=false "docker://${registry}/${image_digested}" | jq -r .Digest)" != "${image_digested##*@}" ]]; then
@@ -34,7 +32,7 @@ function main {
 			done
 	fi
 
-	"${cue}" export --out json -e cached_yaml "${cue_import}" "${image_digest}" k/*.cue |
+	cue export --out json -e cached_yaml "${cue_import}" "${image_digest}" k/*.cue |
 		jq -r 'to_entries[] | .value' \
 			>"${out}"
 }

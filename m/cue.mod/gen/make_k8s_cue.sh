@@ -2,7 +2,6 @@
 
 function main {
 	local config="${shome}/${in[config]}"
-	local cue="${shome}/${in[cue]}"
 	local out="${shome}/${out}"
 
 	# TODO how to guess the workarea, cue.mod/gen
@@ -14,8 +13,8 @@ function main {
 	export GOMODCACHE="${HOME}/.cache/go-mod"
 
 	for pkg in $(jq -r '.k8s.apis[]' "${config}"); do
-		"go" get "${pkg}"
-		"${cue}" get go "${pkg}"
+		go get "${pkg}"
+		cue get go "${pkg}"
 	done
 
 	tar cfz - --numeric-owner --mtime='1970-01-01 00:00:00' -C "${workarea}" "${ns}" >"${out}"

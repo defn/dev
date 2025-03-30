@@ -4,9 +4,6 @@ load("//b/out:out.bzl", "copy_files")
 # config configuration
 cue_export(
     name = "config",
-    srcs = [
-        "//pkg/cue:flake_cue",
-    ],
     cues = glob(["*.cue"]),
     visibility = ["//visibility:public"],
 )
@@ -31,11 +28,10 @@ genrule(
         "k8s_go_mod",
     ],
     outs = ["cue.mod/gen.tgz"],
-    cmd = "$(location make_k8s_cue_script) config=$(location config) cue=$(location //pkg/cue:flake_cue) $@",
+    cmd = "$(location make_k8s_cue_script) config=$(location config) $@",
     tools = [
         "make_k8s_cue_script",
         "//b/lib:lib_sh",
-        "//pkg/cue:flake_cue",
     ],
 )
 

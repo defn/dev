@@ -1,8 +1,6 @@
 #!/usr/bin/env bash
 
 function main {
-	local cue="${shome}/${in[cue]}"
-
 	local cue_import="$1"
 	shift
 	local image_digest="$1"
@@ -43,7 +41,7 @@ function main {
 	done
 
 	set +f
-	"${cue}" export --out json -e cached_yaml k/*.cue "cue_import.cue" "cue_versions.cue" "${image_digest}" |
+	cue export --out json -e cached_yaml k/*.cue "cue_import.cue" "cue_versions.cue" "${image_digest}" |
 		jq -r 'to_entries[] | .value' \
 			>"${out}"
 }

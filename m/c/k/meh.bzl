@@ -32,14 +32,13 @@ def meh(name, cluster_bundles, by_cluster):
                     ":kustomize_bundle_tgz_{}".format(k),
                 ],
                 outs = ["{}-kustomized-build.yaml".format(k)],
-                cmd = "$(location //c/k:gen_kustomize_build_sh) app={} bundle=$(location :kustomize_bundle_tgz_{}) kustomize=$(location //pkg/kustomize:flake_kustomize) $@".format(
+                cmd = "$(location //c/k:gen_kustomize_build_sh) app={} bundle=$(location :kustomize_bundle_tgz_{}) $@".format(
                     k,
                     k,
                 ),
                 tools = [
                     "//c/k:gen_kustomize_build_sh",
                     "//b/lib:lib_sh",
-                    "//pkg/kustomize:flake_kustomize",
                 ],
             ),
             native.genrule(
@@ -59,11 +58,10 @@ def meh(name, cluster_bundles, by_cluster):
                     ":deploy_cue",
                 ],
                 outs = ["image_digest_{}.cue".format(k)],
-                cmd = "$(location //c/k:gen_image_digest_sh) app=$(location :cue_import_{}) cue=$(location //pkg/cue:flake_cue) $@".format(k),
+                cmd = "$(location //c/k:gen_image_digest_sh) app=$(location :cue_import_{}) $@".format(k),
                 tools = [
                     "//c/k:gen_image_digest_sh",
                     "//b/lib:lib_sh",
-                    "//pkg/cue:flake_cue",
                 ],
             ),
             native.genrule(
@@ -78,7 +76,7 @@ def meh(name, cluster_bundles, by_cluster):
                     if not k.endswith("-env")
                 ],
                 outs = ["{}.yaml".format(k)],
-                cmd = "$(location //c/k:gen_env_yaml_sh) cue=$(location //pkg/cue:flake_cue) _ $(location :cue_import_{}) $(location :image_digest_{}) $@ {}".format(
+                cmd = "$(location //c/k:gen_env_yaml_sh) _ $(location :cue_import_{}) $(location :image_digest_{}) $@ {}".format(
                     k,
                     k,
                     " ".join([
@@ -90,7 +88,6 @@ def meh(name, cluster_bundles, by_cluster):
                 tools = [
                     "//c/k:gen_env_yaml_sh",
                     "//b/lib:lib_sh",
-                    "//pkg/cue:flake_cue",
                 ],
             ) if k.endswith("-env") else native.genrule(
                 name = "deploy_yaml_{}".format(k),
@@ -100,11 +97,10 @@ def meh(name, cluster_bundles, by_cluster):
                     ":deploy_cue",
                 ],
                 outs = ["{}.yaml".format(k)],
-                cmd = "$(location //c/k:gen_deploy_yaml_sh) cue=$(location //pkg/cue:flake_cue) registry=cache.defn.run:4999 _ $(location :cue_import_{}) $(location :image_digest_{}) $@".format(k, k),
+                cmd = "$(location //c/k:gen_deploy_yaml_sh) registry=cache.defn.run:4999 _ $(location :cue_import_{}) $(location :image_digest_{}) $@".format(k, k),
                 tools = [
                     "//c/k:gen_deploy_yaml_sh",
                     "//b/lib:lib_sh",
-                    "//pkg/cue:flake_cue",
                 ],
             ),
             native.genrule(
