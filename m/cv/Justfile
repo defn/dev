@@ -227,11 +227,11 @@ open-inner site n="1" chunk="10" file="following.html":
         read -p "Press Enter to continue at $((i + chunk_size))..."
     done
 
-freeze from snap backups="backup slow":
+freeze from snap backups:
     #!/usr/bin/env bash
     sudo zfs snapshot fast/cv@{{snap}} || true
-    runmany 'just send fast/cv {{snap}} $1' {{backups}}
-    just split fast/cv {{from}} {{snap}} /backup/backup/zfs/cv-
+    if test -n "{{backups}}"; then runmany 'just send fast/cv {{snap}} $1' {{backups}}; fi
+    if test -z "{{backups}}"; then just split fast/cv {{from}} {{snap}} /backup/backup/zfs/cv-; fi
 
 serve:
   sudo tailscale serve --bg --set-path=/replicate /remote/cv/replicate
