@@ -1,0 +1,51 @@
+flake_names = [
+    "coder",
+    "codeserver",
+    "terraform",
+    "just",
+    "shell",
+]
+
+flake_paths = [
+    b
+    for f in flake_names
+    for b in [
+        "//pkg/{}:flake_path".format(f),
+    ]
+]
+
+flake_stores = [
+    b
+    for f in flake_names
+    for b in [
+        "//pkg/{}:flake_store".format(f),
+    ]
+]
+
+filegroup(
+    name = "gen_something",
+    srcs = ["gen_something.sh"],
+    visibility = ["//visibility:public"],
+)
+
+genrule(
+    name = "something",
+    srcs = flake_paths + flake_stores,
+    outs = ["something.tar"],
+    cmd = "$(location :gen_something) {} {} $@ {}".format(
+        " ".join([
+            "{}_path=$(location //pkg/{}:flake_path)".format(f, f)
+            for f in flake_names
+        ]),
+        " ".join([
+            "{}_store=$(location //pkg/{}:flake_store)".format(f, f)
+            for f in flake_names
+        ]),
+        " ".join(flake_names),
+    ),
+    tools = [
+        ":gen_something",
+        "//b/lib:lib_sh",
+    ],
+    visibility = ["//visibility:public"],
+)
