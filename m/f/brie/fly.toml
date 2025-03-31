@@ -20,4 +20,4 @@ primary_region = 'sjc'
 
 [mounts]
   source = "brie_data"
-  destination = "/nix"
+  destination = "/data"
