@@ -3,17 +3,17 @@ app = 'brie'
 primary_region = 'sjc'
 
 [http_service]
-  internal_port = 3000
-  force_https = true
-  auto_stop_machines = true
-  auto_start_machines = true
-  min_machines_running = 0
+internal_port = 3000
+force_https = true
+auto_stop_machines = true
+auto_start_machines = true
+min_machines_running = 0
 
 [[vm]]
-  memory = '4gb'
-  cpu_kind = 'shared'
-  cpus = 2
+memory = '4gb'
+cpu_kind = 'shared'
+cpus = 2
 
 [mounts]
-  source = "brie_data"
-  destination = "/data"
+source = "brie_data"
+destination = "/data"

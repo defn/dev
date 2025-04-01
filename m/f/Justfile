@@ -1,0 +1,17 @@
+status:
+    fly machine list
+
+build:
+    fly deploy --local-only --build-only
+
+deploy:
+    fly deploy --local-only
+    
+stop:
+    fly machine stop $(fly machine list --json | jq -r '.[].id')
+
+start:
+    fly machine start $(fly machine list --json | jq -r '.[].id')
+
+restart:
+    fly machine restart $(fly machine list --json | jq -r '.[].id')
