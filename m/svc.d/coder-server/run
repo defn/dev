@@ -9,6 +9,12 @@ mise install
 source .env
 export PATH
 
+if [[ "$(df -klh / | tail -1 | awk '{print $NF}')" == "/data" ]]; then
+	sudo install -d -m 0700 -o ubuntu -g ubuntu /data/coder
+	rm -rf ~/.config/coderv2
+	ln -nfs /data/coder ~/.config/coderv2 
+fi
+
 exec mise exec -- coder server --enable-terraform-debug-mode \
 	--oauth2-github-device-flow=false \
 	--oauth2-github-allow-signups="${CODER_OAUTH2_GITHUB_ALLOW_SIGNUPS}" \
