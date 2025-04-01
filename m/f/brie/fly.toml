@@ -2,9 +2,6 @@ app = 'brie'
 
 primary_region = 'sjc'
 
-[experimental]
-  auto_rollback = true
-
 [http_service]
   internal_port = 3000
   force_https = true

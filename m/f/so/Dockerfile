@@ -1,13 +1,9 @@
-FROM ubuntu:24.04
+FROM ghcr.io/defn/dev
 
-WORKDIR /usr/src/app
+RUN cd m/svc && ln -nfs ../svc.d/tailscaled .
+RUN cd m/svc && ln -nfs ../svc.d/coder-server .
+RUN (echo CODER_EXTRA_ARGS=--telemetry=false; echo CODER_HTTP_ADDRESS=0.0.0.0:3000; echo CODER_ACCESS_URL=https://brie.fly.dev) | sed 's#^#export #'  > m/svc/coder-server/.env
 
-RUN apt update && apt install -y python3
+ENTRYPOINT ["bash", "-c"]
 
-COPY meh meh
-
-COPY main.py ./
-
-EXPOSE 8080
-ENTRYPOINT [ "python3" ]
-CMD [ "main.py" ]
+CMD ["source .bash_profile && cd m && m start && sudo tailscale up --ssh && sleep infinity"]
