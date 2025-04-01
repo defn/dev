@@ -1,5 +1,28 @@
 # Changelog
 
+## [1.21.0](https://github.com/defn/dev/compare/v1.20.0...v1.21.0) (2025-04-01)
+
+
+### Features
+
+* brie, so, the, defn flies are coder servers ([e792560](https://github.com/defn/dev/commit/e7925608d7af75c7fd92107195e84a4b74c4d0b9))
+* brie.fly dot io ([89ec8b2](https://github.com/defn/dev/commit/89ec8b267dfb6a8031928c75122b85f3cecc0d14))
+* coder templates have subdomain option ([24dd30a](https://github.com/defn/dev/commit/24dd30a9d39cdd23a2494897bcdfb9b8b276a185))
+* coder-server config for fly ([91099d4](https://github.com/defn/dev/commit/91099d43c45768e9dc371dccdfad41500d1271ac))
+* prefer and link to /data for state ([4d01cde](https://github.com/defn/dev/commit/4d01cde27f586895f24cc8c338397ddbc15fb3c0))
+* try using fly.io again ([8761cc8](https://github.com/defn/dev/commit/8761cc81287cd88d718224de8b066b2ca14ebc57))
+* Update Coder server docs ([7eebfef](https://github.com/defn/dev/commit/7eebfef85aee4d7f43ce3a731afe6a2bc485e204))
+
+
+### Bug Fixes
+
+* all the flies are the same ([e0b09dd](https://github.com/defn/dev/commit/e0b09dd8665a6fe94ec9352b9813c43b753ac1fc))
+* brie at 2cpu, 4gb, minimum for code-server ([f2d00a4](https://github.com/defn/dev/commit/f2d00a4482d47321291ab40189729adc933ded8a))
+* fix hostnames for so, the flies ([b6c783f](https://github.com/defn/dev/commit/b6c783f19e529bd9fe0cb84c6d5bbfddc07bdeb0))
+* generate locale in fixup ([813ef84](https://github.com/defn/dev/commit/813ef840cb65fc7481fb3fbdffe789574f215de6))
+* start s6 and bring up tailscale client ([d4c9314](https://github.com/defn/dev/commit/d4c93141ae3e9f193f8d413fd68ef4b0655427fd))
+* test for /data ([b37fa30](https://github.com/defn/dev/commit/b37fa306ac9dc3ef46d7c6d2db5b8b1739ec9182))
+
 ## [1.20.0](https://github.com/defn/dev/compare/v1.19.0...v1.20.0) (2025-03-30)
 
 
