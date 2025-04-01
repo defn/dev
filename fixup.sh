@@ -21,6 +21,11 @@ function main {
 		chgrp "$(id -gn $SUDO_USER)" /var/run/docker.sock
 	fi
 	usermod -aG docker "$(id -un $SUDO_USER)"
+
+	if [[ -n "${LANG:-}" ]]; then
+		sudo locale-gen "$LANG"
+		sudo update-locale LANG="$LANG"
+	fi
 }
 
 main "$@"
