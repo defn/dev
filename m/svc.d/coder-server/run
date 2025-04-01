@@ -14,5 +14,6 @@ exec mise exec -- coder server --enable-terraform-debug-mode \
 	--oauth2-github-allow-signups="${CODER_OAUTH2_GITHUB_ALLOW_SIGNUPS}" \
 	--oauth2-github-allowed-orgs="${CODER_OAUTH2_GITHUB_ALLOWED_ORGS}" \
 	--oauth2-github-allowed-teams="${CODER_OAUTH2_GITHUB_ALLOWED_TEAMS}" \
-	--access-url "https://coder.${CODER_SERVER_NAME}.${CODER_SERVER_DOMAIN}" \
-	--wildcard-access-url "*.${CODER_SERVER_NAME}.${CODER_SERVER_DOMAIN}"
+	--http-address "${CODER_HTTP_ADDRESS:-127.0.0.1:3000}" \
+	--access-url "${CODER_ACCESS_URL:-https://coder.${CODER_SERVER_NAME}.${CODER_SERVER_DOMAIN}}" \
+	${CODER_EXTRA_ARGS:---wildcard-access-url "*.${CODER_SERVER_NAME}.${CODER_SERVER_DOMAIN}"}

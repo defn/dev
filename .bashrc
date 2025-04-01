@@ -68,8 +68,10 @@ fi
 # cilium
 export CILIUM_CLI_MODE=classic
 
+# coder
+export CODER_TELEMETRY_ENABLE=false
+
 # editor
-export CODER_TELEMETRY=false
 export EDITOR=vim
 
 # ssh-agent
