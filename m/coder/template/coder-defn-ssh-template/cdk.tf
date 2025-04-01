@@ -64,7 +64,7 @@ resource "coder_app" "code-server" {
   icon         = "/icon/code.svg"
   share        = "owner"
   slug         = "cs"
-  subdomain    = true
+  subdomain    = data.coder_parameter.subdomain.value
   url          = "http://localhost:8080/?folder=${data.coder_parameter.homedir.value}"
   healthcheck {
     interval  = 5
@@ -85,6 +85,16 @@ data "coder_parameter" "remote" {
   mutable      = true
   name         = "remote"
   type         = "string"
+}
+
+data "coder_parameter" "subdomain" {
+  default      = true
+  description  = "Use subdomain"
+  display_name = "Use sudomain"
+  icon         = "https://raw.githubusercontent.com/matifali/logos/main/cpu-3.svg"
+  mutable      = true
+  name         = "subdomain"
+  type         = "bool"
 }
 
 //
