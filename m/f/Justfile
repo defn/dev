@@ -2,9 +2,11 @@ status:
     fly machine list
 
 build:
+    docker pull ghcr.io/defn/dev
     fly deploy --local-only --build-only
 
 deploy:
+    docker pull ghcr.io/defn/dev
     fly deploy --local-only
     
 stop:
