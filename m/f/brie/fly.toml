@@ -13,9 +13,9 @@ primary_region = 'sjc'
   min_machines_running = 0
 
 [[vm]]
-  memory = '8gb'
+  memory = '4gb'
   cpu_kind = 'shared'
-  cpus = 4
+  cpus = 2
 
 [mounts]
   source = "brie_data"
