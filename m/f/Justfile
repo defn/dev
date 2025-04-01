@@ -1,19 +1,19 @@
 status:
-    fly machine list
+    mise exec -- fly machine list
 
 build:
     docker pull ghcr.io/defn/dev
-    fly deploy --local-only --build-only
+    mise exec -- fly deploy --local-only --build-only
 
 deploy:
     docker pull ghcr.io/defn/dev
-    fly deploy --local-only
+    mise exec -- fly deploy --local-only
     
 stop:
-    fly machine stop $(fly machine list --json | jq -r '.[].id')
+    mise exec -- fly machine stop $(fly machine list --json | jq -r '.[].id')
 
 start:
-    fly machine start $(fly machine list --json | jq -r '.[].id')
+    mise exec -- fly machine start $(fly machine list --json | jq -r '.[].id')
 
 restart:
-    fly machine restart $(fly machine list --json | jq -r '.[].id')
+    mise exec -- fly machine restart $(fly machine list --json | jq -r '.[].id')
