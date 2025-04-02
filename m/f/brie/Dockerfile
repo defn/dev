@@ -1,6 +1,6 @@
 FROM ghcr.io/defn/dev
 
-RUN rm -rf /var/lib/tailscale && ln -nfs /data/tailscale /var/lib/tailscale
+RUN sudo rm -rf /var/lib/tailscale && sudo ln -nfs /data/tailscale /var/lib/tailscale
 RUN cd m/svc && ln -nfs ../svc.d/coder-server .
 
 RUN rm -rf ~/.config/coderv2 && ln -nfs /data/coder ~/.config/coderv2
