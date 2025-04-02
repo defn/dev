@@ -6,12 +6,4 @@ if ! test -e /dev/net/tun; then
     exec sleep infinity
 fi
 
-if ! type -P tailscale; then curl -fsSL https://tailscale.com/install.sh | sh; fi
-
-if [[ "$(df -klh /data | tail -1 | awk '{print $NF}')" == "/data" ]]; then
-	sudo install -d -m 0700 -o root -g root /data/tailscale
-	rm -rf /var/lib/tailscale
-	ln -nfs /data/tailscale /var/lib/tailscale
-fi
-
 exec sudo tailscaled
