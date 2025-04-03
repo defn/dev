@@ -4,6 +4,10 @@ command_timeout = 100000
 
 disabled = true
 
+[gcloud]
+
+disabled = true
+
 [ruby]
 
 disabled = true
