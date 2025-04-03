@@ -1,0 +1,32 @@
+---
+- name: Configure s6 service
+  hosts: district
+  gather_facts: no
+  vars:
+    server_name:
+    service_name:
+  tasks:
+    - name: Link service
+      file:
+        src: "../svc.d/{{ service_name }}"
+        dest: "/home/ubuntu/m/svc/{{ service_name }}"
+        state: link
+        force: yes
+
+    - name: Fetch environment variables from AWS Parameter Store
+      delegate_to: localhost
+      shell: |
+        aws ssm get-parameters-by-path --path "/server/{{ server_name }}/svc/{{ service_name }}/" \
+          --with-decryption --query 'Parameters[*].[Name,Value]' --output text
+      register: aws_parameters
+      changed_when: false
+
+    - name: Parse and write .env file
+      copy:
+        dest: "/home/ubuntu/m/svc/{{ service_name }}/.env"
+        content: |
+          {% for line in aws_parameters.stdout_lines %}
+          {% set param = line.split()[0] | basename | upper %}
+          export {{ param }}={{ line.split()[1] }}
+          {% endfor %}
+        mode: "0600"
