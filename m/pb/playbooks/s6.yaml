@@ -1,6 +1,6 @@
 ---
 - name: Configure s6 service
-  hosts: district
+  hosts: all
   gather_facts: no
   vars:
     server_name:
