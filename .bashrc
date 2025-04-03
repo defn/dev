@@ -133,15 +133,19 @@ function profile {
 		shift
 	else
 		unset AWS_PROFILE
+		unset AWS_REGION
+		unset AWS_DEFAULT_REGION
 	fi
 }
 
 function region {
 	if [[ -n "${1:-}" ]]; then
 		export AWS_REGION="$1"
+		unset AWS_DEFAULT_REGION
 		shift
 	else
 		unset AWS_REGION
+		unset AWS_DEFAULT_REGION
 	fi
 }
 
