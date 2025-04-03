@@ -127,6 +127,24 @@ function m {
 
 export MISE_PIN=1
 
+function profile {
+	if [[ -n "${1:-}" ]]; then
+		export AWS_PROFILE="$1"
+		shift
+	else
+		unset AWS_PROFILE
+	fi
+}
+
+function region {
+	if [[ -n "${1:-}" ]]; then
+		export AWS_REGION="$1"
+		shift
+	else
+		unset AWS_REGION
+	fi
+}
+
 function vi {
 	if [[ -n ${VSCODE_GIT_ASKPASS_MAIN-} ]]; then
 		local code
