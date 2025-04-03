@@ -3,4 +3,3 @@ sso_start_url=URL
 sso_role_name=SSO_ROLE
 sso_account_id=ACCOUNT_ID
 sso_region=REGION
-region=REGION

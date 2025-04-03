@@ -131,6 +131,8 @@ function profile {
 	if [[ -n "${1:-}" ]]; then
 		export AWS_PROFILE="$1"
 		shift
+
+		region "$@"
 	else
 		unset AWS_PROFILE
 		unset AWS_REGION
