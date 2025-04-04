@@ -1,0 +1,6 @@
+[env]
+AWS_PROFILE = "defn-org"
+AWS_REGION = "us-west-2"
+
+[hooks]
+enter = "aws sts get-caller-identity || (aws sso login || aws sts get-caller-identity)"
