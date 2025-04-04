@@ -1,5 +1,32 @@
 # Changelog
 
+## [1.22.0](https://github.com/defn/dev/compare/v1.21.0...v1.22.0) (2025-04-04)
+
+
+### Features
+
+* profile, region functions for aws ([f43b866](https://github.com/defn/dev/commit/f43b86651c9a04995d4794569421ccb07d59af37))
+* s6 playbook to symlink and write .env file for s6 service ([8728b3b](https://github.com/defn/dev/commit/8728b3baf5bf2bf593720bccf4220f8de5f77cd6))
+
+
+### Bug Fixes
+
+* aws config is only aws sso profiles ([c730b21](https://github.com/defn/dev/commit/c730b212409e15ec8aa138f60f8dc1301107672e))
+* dont show gcloud in prompt ([82f0624](https://github.com/defn/dev/commit/82f0624ba6943674ba871845416cce7a1535d74e))
+* get parameters in check mode ([47af2fe](https://github.com/defn/dev/commit/47af2fec6fd554dc3b52744d84e4cc8662273c19))
+* let environment setup the links and storage ([2a98a30](https://github.com/defn/dev/commit/2a98a307acea96f1682e63a864bf196fba9a5f9e))
+* mise exec fly ([64a10d0](https://github.com/defn/dev/commit/64a10d0816260ea29ecc5f010940e30e984201d4))
+* mise upgrades ([ddca603](https://github.com/defn/dev/commit/ddca6039834f21c5fac6664a14ad4cc42d531bce))
+* no default region ([be44a0c](https://github.com/defn/dev/commit/be44a0c4769b4d67e8ddb59f8038d9314f8ca1d5))
+* no tailscale on fly ([c40eac7](https://github.com/defn/dev/commit/c40eac7e74495c5f75b3fbd7a922501dec4de961))
+* pull the latest docker image before building flies ([f599813](https://github.com/defn/dev/commit/f59981300a81814334c25ca21a82bb9faad30537))
+* s6 playbook applies to all ([60497ce](https://github.com/defn/dev/commit/60497cedcb85b4d1f7a622b2ea3b45f7ee818786))
+* sudo for tailscale dirs ([9744739](https://github.com/defn/dev/commit/974473999003206c7d67c7d2f37b280f29f9a323))
+* trunk upgrade ([7a3194e](https://github.com/defn/dev/commit/7a3194e08a9451392e3e85b617dfce8b31dce942))
+* unset region with profile ([f024ddb](https://github.com/defn/dev/commit/f024ddbe16f4bb36bca67b750a7329b18fef1205))
+* upgrade aws, flyctl ([dce3b96](https://github.com/defn/dev/commit/dce3b96460c1d365dcc417e570e4c3844fbbbe84))
+* use /app for workspace ([5384cc7](https://github.com/defn/dev/commit/5384cc791ea8dc58fcb37119e23e9b2d70cfa24c))
+
 ## [1.21.0](https://github.com/defn/dev/compare/v1.20.0...v1.21.0) (2025-04-01)
 
 
