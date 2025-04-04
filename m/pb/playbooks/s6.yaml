@@ -20,6 +20,7 @@
           --with-decryption --query 'Parameters[*].[Name,Value]' --output text
       register: aws_parameters
       changed_when: false
+      check_mode: false
 
     - name: Parse and write .env file
       copy:
