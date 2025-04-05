@@ -17,6 +17,6 @@ clean-ami-prefix:
 clean-snapshot:
 	comm -23 <(aws ec2 describe-snapshots --owner-ids self --query 'Snapshots[*].SnapshotId' --filters "Name=description,Values=Created by CreateImage*" | jq -r '.[]' | sort) <(aws ec2 describe-images --owners self --query 'Images[*].BlockDeviceMappings[*].Ebs.SnapshotId' --output text | sort) | runmany 'set -x; aws ec2 delete-snapshot --snapshot-id $$1'
 
-coder:
-	mise exec -- packer init $@.pkr.hcl
-	mise exec -- packer build -color=true -timestamp-ui=true $@.pkr.hcl
+ami:
+	mise exec -- packer init coder.pkr.hcl
+	mise exec -- packer build -color=true -timestamp-ui=true coder.pkr.hcl
