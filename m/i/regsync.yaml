@@ -1,7 +1,0 @@
-creds:
-  - registry: 169.254.32.1:5000/defn/dev:latest
-    tls: insecure
-sync:
-  - source: district.tail3884f.ts.net/defn/dev:latest
-    target: 169.254.32.1:5000/defn/dev:latest
-    type: image

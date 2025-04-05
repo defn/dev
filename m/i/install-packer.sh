@@ -39,16 +39,6 @@ Update-Manager::Never-Include-Phased-Updates;
 APT::Get::Never-Include-Phased-Updates: True;
 EOF
 
-	groupadd -g 1000 ubuntu && useradd -u 1000 -d /home/ubuntu -s /bin/bash -g ubuntu -M ubuntu
-
-	# need docker accessible because install.sh won't be run in the AMI
-	usermod -aG docker ubuntu
-
-	echo 'ubuntu ALL=(ALL:ALL) NOPASSWD: ALL' >/etc/sudoers.d/ubuntu
-
-	install -d -m 0700 -o ubuntu -g ubuntu /home/ubuntu
-	chown -R ubuntu:ubuntu /home/ubuntu && chmod u+s /usr/bin/sudo
-
 	curl -v -fsSL https://tailscale.com/install.sh | bash -x
 	rm -rf /var/lib/tailscale
 
@@ -80,6 +70,19 @@ EOF
 	) | sudo tee dummy"$a".network
 
 	popd
+
+	groupadd -g 1000 ubuntu && useradd -u 1000 -d /home/ubuntu -s /bin/bash -g ubuntu -M ubuntu
+	install -d -m 0700 -o ubuntu -g ubuntu /home/ubuntu
+	chown -R ubuntu:ubuntu /home/ubuntu && chmod u+s /usr/bin/sudo
+	echo 'ubuntu ALL=(ALL:ALL) NOPASSWD: ALL' >/etc/sudoers.d/ubuntu
+
+	install -m 0755 -d /etc/apt/keyrings &&
+		curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc &&
+		chmod a+r /etc/apt/keyrings/docker.asc &&
+		echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu noble stable" | tee /etc/apt/sources.list.d/docker.list &&
+		apt-get update &&
+		apt-get -y install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+	usermod -aG docker ubuntu
 }
 
 main "$@"

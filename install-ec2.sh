@@ -28,7 +28,7 @@ umount /var/lib/docker || true
 
 zpool create defn "/dev/$zfs_disk"
 
-for z in nix work docker; do
+for z in docker; do
   if [[ "$z" == "docker" ]]; then
     zfs create -s -V 100G defn/docker
   else
@@ -39,8 +39,6 @@ for z in nix work docker; do
   zfs set dedup=on defn/$z
 done
 
-zfs set mountpoint=/nix defn/nix
-zfs set mountpoint=/home/ubuntu defn/work
 mkfs.ext4 /dev/zvol/defn/docker
 
 pushd ~
@@ -50,10 +48,6 @@ if [[ ! -x ~/.local/bin/mise ]]; then curl -sSL https://mise.run | bash; fi
 
 zfs destroy defn/docker@next || true
 ~/.local/bin/mise exec -- s5cmd cat s3://dfn-defn-global-defn-org/zfs/docker.zfs | pv | zfs receive -F defn/docker 
-~/.local/bin/mise exec -- s5cmd cat s3://dfn-defn-global-defn-org/zfs/nix.zfs | pv | zfs receive -F defn/nix 
-if ~/.local/bin/mise exec -- s5cmd cat s3://dfn-defn-global-defn-org/zfs/work.zfs | pv | zfs receive -F defn/work; then
-  ~/.local/bin/mise exec -- s5cmd cat s3://dfn-defn-global-defn-org/zfs/nix.tar.gz | pv | (cd ~ubuntu && tar xvfz -)
-fi
 popd
 
 # for a in nix work docker; do sudo zfs send defn/$a@latest | pv | s5cmd pipe s3://dfn-defn-global-defn-org/zfs/$a.zfs; done
@@ -64,7 +58,6 @@ systemctl start docker.socket || true
 systemctl start docker || true
 
 install -d -m 0755 -o ubuntu -g ubuntu /home/ubuntu /run/user/1000 /run/user/1000/gnupg
-install -d -m 0755 -o ubuntu -g ubuntu /nix /nix
 install -d -m 1777 -o ubuntu -g ubuntu /tmp/uscreens
 
 cd /home/ubuntu
@@ -80,5 +73,4 @@ nohup sudo -H -u ${coder_username} env \
   CODER_AGENT_URL="${CODER_AGENT_URL}" \
   CODER_NAME="${CODER_NAME}" \
     bash -c 'cd && git reset --hard && git pull && source .bash_profile && set -x && ./install.sh && cd m && exec mise exec -- just coder::coder-agent' >>/tmp/user-data.log 2>&1 &
-    # (s5cmd cat s3://dfn-defn-global-defn-org/zfs/nix.tar.gz | tar xfz -) && (cd m/cache/docker && make init)
 disown

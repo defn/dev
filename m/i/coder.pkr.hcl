@@ -10,7 +10,7 @@ packer {
 variable "scripts" {
   type = list(string)
   default = [
-    "script/001-install-base",
+    "install-packer.sh",
   ]
 }
 
