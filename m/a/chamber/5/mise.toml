@@ -1,5 +1,5 @@
 [env]
-AWS_PROFILE = "chamber-1"
+AWS_PROFILE = "chamber-5"
 AWS_REGION = "us-west-2"
 AWS_CONFIG_FILE = "/home/ubuntu/m/bazel-bin/aws/aws_config.txt"
 
