@@ -239,5 +239,6 @@ bazel-ignore:
 	rm -f .bazelignore.tmp ../.bazelignore.tmp
 
 inventory:
-	(echo package m; git ls-files | sed "s#^#/#" | perl -pe 's{^}{files: "}; s{$$}{": #file}; s{(\S+)/}{$$1": "}') | cue fmt - > m.cue
+	(echo package m; git ls-files | sed "s#^#/#" | perl -pe 's{^}{files: "}; s{$$}{": #file}; s{(\S+)/}{$$1": "}' | env LANG=C sort) > m.cue
+	cue fmt 
 	cue eval -c >/dev/null
