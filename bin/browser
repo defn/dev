@@ -15,12 +15,11 @@ function main {
 	*/.vscode-server/*)
 		exec "${VSCODE_GIT_ASKPASS_MAIN%%/extensions/*}/bin/helpers/browser.sh" "$@"
 		;;
+	/vscode/*)
+		exec "${VSCODE_GIT_ASKPASS_MAIN%%/extensions/*}/bin/helpers/browser.sh" "$@"
+		;;
 	*)
-		if [[ -x /usr/bin/open ]]; then
-			exec /usr/bin/open "$@"
-		else
-			exec browser.sh "$@"
-		fi
+		exec browser.sh "$@"
 		;;
 	esac
 }
