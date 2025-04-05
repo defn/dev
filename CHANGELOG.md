@@ -1,5 +1,28 @@
 # Changelog
 
+## [1.23.0](https://github.com/defn/dev/compare/v1.22.0...v1.23.0) (2025-04-05)
+
+
+### Features
+
+* all aws accounts ([be9519e](https://github.com/defn/dev/commit/be9519edc4eca7ea269a4c40adc8edb522f71f58))
+* bazel 7.6.1 ([a230549](https://github.com/defn/dev/commit/a23054938efc2a1173537e56de09862c597790fe))
+* chamber aws accounts ([822d711](https://github.com/defn/dev/commit/822d711e8b362142d1b1b82d722aaa73f84af49e))
+* defn-org profile as mise config ([ebbe271](https://github.com/defn/dev/commit/ebbe2715f6146219fd66566a412276cd29999865))
+* git files as cue ([f659b9a](https://github.com/defn/dev/commit/f659b9a2f2f807a08b0b639accbd557c4ecb14ce))
+* reworking ami image ([b86c51f](https://github.com/defn/dev/commit/b86c51fa9c796d4f12ea2f87d8221f50b27ad80b))
+
+
+### Bug Fixes
+
+* everything is a schema for files ([dcb389d](https://github.com/defn/dev/commit/dcb389d2f3092f6a2dc82078f52990fd67e6a016))
+* home is not a bazel config ([1238784](https://github.com/defn/dev/commit/123878407c03dfc600bd5fb5fa26201c0e1d9589))
+* move some utils from Brewfile to mise ([d8e0d98](https://github.com/defn/dev/commit/d8e0d9828416afa2bbb822088fd424ae872019eb))
+* point aws config at bazel build ([d6382de](https://github.com/defn/dev/commit/d6382de91972b25e886f9c3ce1d5cb3a03bfc79f))
+* rename make coder to make ami ([eb465c8](https://github.com/defn/dev/commit/eb465c86675976743e9b6e8294501005fbde9f86))
+* sts on aws sso login ([d6842d3](https://github.com/defn/dev/commit/d6842d38233564fa20a33edae872be0f8aa5a821))
+* support open on github codespace ([47f5a96](https://github.com/defn/dev/commit/47f5a96e297fab901db043a54d335ee8eb968f55))
+
 ## [1.22.0](https://github.com/defn/dev/compare/v1.21.0...v1.22.0) (2025-04-04)
 
 
