@@ -1,12 +1,12 @@
 ---
-- name: Configure s6 service
+- name: Configure {{ service_name }} service
   hosts: all
   gather_facts: no
   vars:
     server_name:
     service_name:
   tasks:
-    - name: Link service
+    - name: Link {{ service_name }} service
       file:
         src: "../svc.d/{{ service_name }}"
         dest: "/home/ubuntu/m/svc/{{ service_name }}"

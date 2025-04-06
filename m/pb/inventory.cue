@@ -103,7 +103,7 @@ inventory: {
 	dc: hosts: [
 		"gori",
 		"penguin-dev",
-		"pc"
+		"pc",
 		"lanpy-dev",
 	]
 }

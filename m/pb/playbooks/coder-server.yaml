@@ -1,0 +1,9 @@
+---
+- name: Setup coder-tunnel
+  import_playbook: s6.yaml
+  vars:
+    service_name: coder-tunnel
+- name: Setup coder-server
+  import_playbook: s6.yaml
+  vars:
+    service_name: coder-server
