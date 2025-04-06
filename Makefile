@@ -139,8 +139,8 @@ login:
 
 perms:
 	$(MARK) configure permissions
-	if [[ "Linux" == "$(shell uname -s)" ]]; then if test -S /var/run/docker.sock; then sudo chgrp "$(id -gn)" /var/run/docker.sock; sudo chmod 770 /var/run/docker.sock; fi; fi
-	if test -S /run/containerd/containerd.sock; then sudo chgrp "$(id -gn)" /run/containerd/containerd.sock; sudo chmod 770 /run/containerd/containerd.sock; fi
+	if [[ "Linux" == "$(shell uname -s)" ]]; then if test -S /var/run/docker.sock; then sudo chgrp "$$(id -gn)" /var/run/docker.sock; sudo chmod 770 /var/run/docker.sock; fi; fi
+	if test -S /run/containerd/containerd.sock; then sudo chgrp "$$(id -gn)" /run/containerd/containerd.sock; sudo chmod 770 /run/containerd/containerd.sock; fi
 	-if ! test -f ~/.kube/config; then mkdir -p ~/.kube; touch ~/.kube/config; fi
 	-chmod 0600 ~/.kube/config
 
