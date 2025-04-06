@@ -25,7 +25,7 @@ inventory: {
 	]
 
 	aws: hosts: [
-		"coder-amanibhavam-kowloon",
+		"kowloon",
 	]
 
 	cloud: children: [
@@ -43,6 +43,7 @@ inventory: {
 	mac: hosts: [
 		"macmini",
 		"mbpro",
+		"immanent",
 		// off "mbair",
 		// off "mba",
 		// off "mbb",
@@ -50,8 +51,8 @@ inventory: {
 
 	chrome: hosts: [
 		"penguin",
-		"penguin-dev",
 		"small",
+		"defn-chromebook",
 	]
 
 	rpi: {
@@ -96,5 +97,13 @@ inventory: {
 		"thinkpad",
 		// dead "gw",
 		"pc",
+	]
+
+	// docker compose
+	dc: hosts: [
+		"gori",
+		"penguin-dev",
+		"pc"
+		"lanpy-dev",
 	]
 }
