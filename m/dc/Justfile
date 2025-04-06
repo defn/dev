@@ -4,11 +4,7 @@ shell:
 
 # run container
 up:
-    docker compose pull
-    docker compose up -d --remove-orphans
+    mise run activate dev
+    mise run start dev
     docker compose exec home sudo tailscale up --ssh --hostname "$(hostname | cut -d . -f1)-dev"
     docker compose exec home tailscale ip
-
-# stop container
-down:
-    docker compose down

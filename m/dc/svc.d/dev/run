@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+docker compose pull
+exec docker compose up --remove-orphans
