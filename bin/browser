@@ -19,7 +19,11 @@ function main {
 		exec "${VSCODE_GIT_ASKPASS_MAIN%%/extensions/*}/bin/helpers/browser.sh" "$@"
 		;;
 	*)
-		exec browser.sh "$@"
+    if type -P browser.sh >/dev/null; then
+		  exec browser.sh "$@"
+    else
+      open "$@"
+    fi
 		;;
 	esac
 }
