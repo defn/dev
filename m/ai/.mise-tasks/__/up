@@ -1,6 +1,0 @@
-#!/usr/bin/env bash
-
-#MISE description="Bring up agent"
-
-cd "${MISE_ORIGINAL_CWD}"
-exec aichat

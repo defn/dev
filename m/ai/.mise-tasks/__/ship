@@ -1,7 +1,0 @@
-#!/usr/bin/env bash
-
-#MISE description="Deploy ..."
-
-set -efu -o pipefail
-
-cd "${MISE_ORIGINAL_CWD}"
