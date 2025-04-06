@@ -11,6 +11,7 @@ function main {
 		git clone https://github.com/defn/dev
 		mv dev/.git .
 		rm -rf dev
+		git reset --hard
 		chown -R ubuntu:ubuntu .
 
 		./install.sh	
