@@ -2,7 +2,7 @@
 experimental = true
 
 [tools]
-aws = "2.25.10"
+aws = "2.25.11"
 bat = "0.25.0"
 bazelisk = "1.25.0"
 chamber = "3.1.1"
@@ -10,7 +10,7 @@ coder = "2.21.0"
 cue = "0.12.1"
 dive = "0.13.1"
 dyff = "1.10.1"
-fzf = "0.61.0"
+fzf = "0.61.1"
 gh = "2.69.0"
 go = "1.24.2"
 gron = "0.7.1"
