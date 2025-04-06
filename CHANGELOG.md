@@ -1,5 +1,44 @@
 # Changelog
 
+## [1.23.0](https://github.com/defn/dev/compare/v1.22.0...v1.23.0) (2025-04-06)
+
+
+### Features
+
+* all aws accounts ([be9519e](https://github.com/defn/dev/commit/be9519edc4eca7ea269a4c40adc8edb522f71f58))
+* bazel 7.6.1 ([a230549](https://github.com/defn/dev/commit/a23054938efc2a1173537e56de09862c597790fe))
+* build ami with full /home/ubuntu ([7d760bc](https://github.com/defn/dev/commit/7d760bcc482277ed360b99eea369cdce3bd05276))
+* chamber aws accounts ([822d711](https://github.com/defn/dev/commit/822d711e8b362142d1b1b82d722aaa73f84af49e))
+* configure tailscale ssh devices to ansible ([d73c292](https://github.com/defn/dev/commit/d73c292c1f088b69dd537731285370414ee02005))
+* defn-org profile as mise config ([ebbe271](https://github.com/defn/dev/commit/ebbe2715f6146219fd66566a412276cd29999865))
+* git files as cue ([f659b9a](https://github.com/defn/dev/commit/f659b9a2f2f807a08b0b639accbd557c4ecb14ce))
+* reworking ami image ([b86c51f](https://github.com/defn/dev/commit/b86c51fa9c796d4f12ea2f87d8221f50b27ad80b))
+
+
+### Bug Fixes
+
+* configure playbooks with defn org aws ([343dc8a](https://github.com/defn/dev/commit/343dc8afac3069032f5900950adf79d68a2b8d73))
+* escape id command in make perms ([ca7661e](https://github.com/defn/dev/commit/ca7661e7e33cda52189aa6b036e9d77a0eb1ff39))
+* everything is a schema for files ([dcb389d](https://github.com/defn/dev/commit/dcb389d2f3092f6a2dc82078f52990fd67e6a016))
+* home is not a bazel config ([1238784](https://github.com/defn/dev/commit/123878407c03dfc600bd5fb5fa26201c0e1d9589))
+* move ansible to m/pb to save 500mb ([fb888d7](https://github.com/defn/dev/commit/fb888d7967a90856d81ff218fb279fecda1d0f14))
+* move some utils from Brewfile to mise ([d8e0d98](https://github.com/defn/dev/commit/d8e0d9828416afa2bbb822088fd424ae872019eb))
+* point aws config at bazel build ([d6382de](https://github.com/defn/dev/commit/d6382de91972b25e886f9c3ce1d5cb3a03bfc79f))
+* prototypes are the wrong model for mise ([12cde8c](https://github.com/defn/dev/commit/12cde8c8d101a076d879ea30774a02864e436054))
+* remove aichat ([c167a3e](https://github.com/defn/dev/commit/c167a3ec7b30f640c1e235ceb636f95cd80cf2ab))
+* remove cookiecutters ([fa59322](https://github.com/defn/dev/commit/fa59322cf938036a8402e72f04e0e692d4274d8b))
+* remove godot-game ([50df931](https://github.com/defn/dev/commit/50df9319b0737653156771e8778b7a494a7a1455))
+* remove home build ([d1bc353](https://github.com/defn/dev/commit/d1bc35316405e131fa9af5f5adf521ebc8b33a4d))
+* remove linkerd demos, local registries ([946b3b4](https://github.com/defn/dev/commit/946b3b449e28b0890f4738e4786ffc9651732c7a))
+* remove m/nix ([7a65182](https://github.com/defn/dev/commit/7a6518268642e65128420eacd4e67cd9af770a32))
+* remove openvpn, tailscale works on chromebooks ([8ca8a46](https://github.com/defn/dev/commit/8ca8a468e498033c3e325c27547b0b98404e483a))
+* remove wut python flake experiment ([06c7de3](https://github.com/defn/dev/commit/06c7de3adf179c74f3079f56ca8cb159a39ababa))
+* rename make coder to make ami ([eb465c8](https://github.com/defn/dev/commit/eb465c86675976743e9b6e8294501005fbde9f86))
+* reset home in ami ([2104392](https://github.com/defn/dev/commit/21043921ee37d7fb93463778e03f784e71dba386))
+* sorting inventory ([a881b08](https://github.com/defn/dev/commit/a881b083368dc7ddb77240234ecbb32204b9f1bf))
+* sts on aws sso login ([d6842d3](https://github.com/defn/dev/commit/d6842d38233564fa20a33edae872be0f8aa5a821))
+* support open on github codespace ([47f5a96](https://github.com/defn/dev/commit/47f5a96e297fab901db043a54d335ee8eb968f55))
+
 ## [1.22.0](https://github.com/defn/dev/compare/v1.21.0...v1.22.0) (2025-04-04)
 
 
