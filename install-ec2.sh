@@ -42,31 +42,13 @@ done
 mkfs.ext4 /dev/zvol/defn/docker
 
 pushd ~
-touch mise.toml
-if [[ ! -x ~/.local/bin/mise ]]; then curl -sSL https://mise.run | bash; fi
-~/.local/bin/mise use ubi:peak/s5cmd
-
 zfs destroy defn/docker@next || true
 ~/.local/bin/mise exec -- s5cmd cat s3://dfn-defn-global-defn-org/zfs/docker.zfs | pv | zfs receive -F defn/docker 
 popd
 
-# for a in nix work docker; do sudo zfs send defn/$a@latest | pv | s5cmd pipe s3://dfn-defn-global-defn-org/zfs/$a.zfs; done
-# tar cvfz - .nix* .local/state/nix | pv | s5cmd pipe s3://dfn-defn-global-defn-org/zfs/nix.tar.gz 
-
 mount /dev/zvol/defn/docker /var/lib/docker
 systemctl start docker.socket || true
 systemctl start docker || true
-
-install -d -m 0755 -o ubuntu -g ubuntu /home/ubuntu /run/user/1000 /run/user/1000/gnupg
-install -d -m 1777 -o ubuntu -g ubuntu /tmp/uscreens
-
-cd /home/ubuntu
-if ! test -d .git; then
-  git clone https://github.com/defn/dev
-  mv dev/.git .
-  rm -rf dev
-  chown -R ubuntu:ubuntu .git
-fi
 
 nohup sudo -H -u ${coder_username} env \
   CODER_INIT_SCRIPT_BASE64="${CODER_INIT_SCRIPT_BASE64}" \

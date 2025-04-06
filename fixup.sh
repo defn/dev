@@ -26,6 +26,9 @@ function main {
 		sudo locale-gen "$LANG"
 		sudo update-locale LANG="$LANG"
 	fi
+
+	sudo install -d -m 0755 -o ubuntu -g ubuntu /home/ubuntu /run/user/1000 /run/user/1000/gnupg
+	sudo install -d -m 1777 -o ubuntu -g ubuntu /tmp/uscreens
 }
 
 main "$@"
