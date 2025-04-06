@@ -48,7 +48,11 @@ inventory: {
 		// off "mbb",
 	]
 
-	chrome: hosts: []
+	chrome: hosts: [
+		"penguin",
+		"penguin-dev",
+		"small",
+	]
 
 	rpi: {
 		children: [
