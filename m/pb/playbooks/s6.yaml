@@ -3,7 +3,6 @@
   hosts: all
   gather_facts: no
   vars:
-    server_name:
     service_name:
   tasks:
     - name: Link {{ service_name }} service
@@ -16,7 +15,7 @@
     - name: Fetch environment variables from AWS Parameter Store
       delegate_to: localhost
       shell: |
-        aws ssm get-parameters-by-path --path "/server/{{ server_name }}/svc/{{ service_name }}/" \
+        aws ssm get-parameters-by-path --path "/server/{{ inventory_hostname }}/svc/{{ service_name }}/" \
           --with-decryption --query 'Parameters[*].[Name,Value]' --output text
       register: aws_parameters
       changed_when: false
