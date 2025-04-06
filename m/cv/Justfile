@@ -70,6 +70,7 @@ following:
     mv -f following.html.1 following.html
 
 daily file="following.txt" n="8":
+    echo 1 > LAST
     screen -dmS daily j daily-inner {{ file }} {{ n }}
     screen -DRR daily
 
