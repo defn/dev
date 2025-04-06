@@ -3,4 +3,4 @@
 #MISE description="Get a shell into workarea"
 
 cd "${MISE_ORIGINAL_CWD}"
-docker compose exec home bash
+docker compose exec "$(docker compose config --services | fzf --select-1)" bash
