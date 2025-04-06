@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-#MISE description="Enter a devspace shell"
+#MISE description="Get a shell into workarea"
 
 cd "${MISE_ORIGINAL_CWD}"
-exec ssh "$(basename "$(pwd)")".dev.devspace
+docker compose exec home bash

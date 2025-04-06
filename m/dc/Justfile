@@ -1,3 +1,0 @@
-# get a shell in container
-shell:
-    docker compose exec home bash
