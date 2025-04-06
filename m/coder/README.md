@@ -24,7 +24,7 @@ m activate
 m log
 ```
 
-The new tunnel provides you with a tunnel ID. In the Cloudflare dashboard, under your domain and then DNS, create a CNAME record with the name `*.name` and the target `tunnelID.cfargrotunnel.com`. Enable proxy status.
+The new tunnel provides you with a tunnel ID. In the Cloudflare dashboard, under your domain and then DNS, create a CNAME record with the name `*.name` and the target `tunnelID.cfargotunnel.com`. Enable proxy status.
 
 Next setup the coder server, connecting the tunnel to it and giving github Oauth priviledges:
 Begin by symlinking the coderserver with the svc definition and creating the `.env` file
