@@ -1,77 +1,53 @@
-# Coder Server setup
 This document will allow you to create a coder server.
+### 1. Configure the Coder tunnel
 
-First, setup the cloudflare tunnel:
-Symlink the `coder tunnel` in `svc` with the svc definition. Then create a `.env` file based on the `.env.example`
+Begin by generating the Coder tunnel token. In the Cloudflare dashboard under Zero Trust create a `cloudflared` tunnel. Name it `*.servername.defn.run`, afterward it will provide you with a connector command containing the token.
 
+Create a key-value pair with Chamber to configure the Coder tunnel `.env` varible.
 ```
-cd m/svc
-ln -nfs ../svc.d/coder-tunnel .
-cd coder-tunnel
-cp .env.example .env
+chamber write server/servername/svc/coder-tunnel TUNNEL_TOKEN token1234
 ```
 
-`.env` requires a cloudflared tunnel token. 
+Return to the dashboard and set the public hostname as `*.servername.defn.run` with service `https` and `localhost:3000`
 
-In Zero Trust under Networks, create a `cloudflared` tunnel. Name it `*.servername.defn.run`. It will provide you with a connector command.
+### 2. Configure a DNS record for Coder server.
 
-Ignore the command part and paste the token into `TUNNEL_TOKEN=`. Continue setting up the tunnel in Cloudflare.
+To prevent Cloudflare from creating a negative DNS cache, where server is created and connected to the tunnel without a DNS, first create a CNAME record. In the `defn.run` domain, create a CNAME with the name `*.name` and the target `tunnelID.cfargotunnel.com`. Enable proxy status.
 
+### 3. Configure the Coder server
 
-Activate the `coder tunnel` and check that it is running.
+With the `.env.example` coder server file, use Chamber to configure the `.env` varibles. 
 ```
-m activate 
-m log
-```
-
-The new tunnel provides you with a tunnel ID. In the Cloudflare dashboard, under your domain and then DNS, create a CNAME record with the name `*.name` and the target `tunnelID.cfargotunnel.com`. Enable proxy status.
-
-Next setup the coder server, connecting the tunnel to it and giving github Oauth priviledges:
-Begin by symlinking the coderserver with the svc definition and creating the `.env` file
-```
-cd 
-cd m/svc
-ln -nfs ../svc.d/coder-server .
-cd coder-server
-cp .env.example .env
+cd m
+cat ../svc.d/coder-server/.env.example
+export CODER_OAUTH2_GITHUB_ALLOW_SIGNUPS=true
+chamber write server/penguin-dev/svc/coder-server CODER_OAUTH2_GITHUB_ALLOWED_ORGS defn
+chamber write server/penguin-dev/svc/coder-server CODER_OAUTH2_GITHUB_ALLOWED_TEAMS=defn/coder-servername,defn/coder-admin
+chamber write server/penguin-dev/svc/coder-server CODER_SERVER_NAME servername
+chamber write server/penguin-dev/svc/coder-server CODER_SERVER_DOMAIN defn.run
+chamber write server/penguin-dev/svc/coder-server CODER_OAUTH2_GITHUB_CLIENT_ID id1234
+chamber write server/penguin-dev/svc/coder-server CODER_OAUTH2_GITHUB_CLIENT_SECRET secret1234
 ```
 
-Before configuring the environment variables, create a new OAuth app. In the repo developer settings, create an app.  Name it `Coder-servername`and set the two URLs.
+Create a github team `coder-servername` with the parent team `coder-admin`, add the appropiate members. Make sure to have both teams allowed in the configuration. 
+To generate the `OAUTH` varibles create a Github OAuth App called `Coder servername`. 
+
+### 4. Activate and start the server 
+
+Activate s6 services. Use the `s6` Ansible playbook to activate coder server and coder tunnel. Limit to your server and configure the coder tunnel and coder server.
 ```
-Homepage URL
-https://coder.servername.defn.run
-
-Authorization callback URL
-https://coder.servername.defn.run/api/v2/users/oauth2/github/callback
-```
-
-Create a Github team to authorize access to the Coder server. At the git repo homepage, navigate to teams and then click on Github team `coder-admin`. Create a team named `coder-servername`.
-
-Change `.env` to fit your Coder server. Ensure both the `coder-servername` and `coder-admin` teams are set in `CODER_OAUTH2_GITHUB_ALLOWED_TEAMS`.
-
-Returning to the OAuth app, Generate a CLI secret and paste the secret and ID into `.env`.
-Activate it.
-```
-cd
-cd m/svc/coder-server
-m activate
+ansible-playbook -l servername -e server_name=servername -e service_name=coder-tunnel playbooks/s6.yaml 
+ansible-playbook -l servername -e server_name=servername -e service_name=coder-server playbooks/s6.yaml 
 ```
 
+After running s6 services, check if `coder-server` and `coder-tunnel` are up. If they are down, use `m start` to start them up. If there is no value, then use `m activate`. Then verify that the server and tunnel are avalible with `m log coder-server`, `m log coder-tunnel`.  
 
-After, create the coder workspace ssh template:
-
-Running `m log` in coder-tunnel will give you an link to the coder server. After verifying, set a ssh template. Login to the coder server.
-
-Login to the coder server, then push the `docker` and `ssh` templates. Use `m log` to get a link to the coder server.
+Next, update the coder `ssh` and `docker` templates. Login to the Coder server, and use `j push` to update the two template files. 
 ```
-cd
-cd m/coder/template
-coder login servername.defn.run
-j push coder-defn-ssh-template
+coder login coder.servername.defn.run 
+cd coder/template
 j push coder-defn-docker-template
-cd ../..
-m log coder-server
-
+j push coder-defn-ssh-template
 ```
 
-Finally, create a workspace with the `ssh` template with the name `dev`, and/or with the `docker` template named `duck`. The server has been created and a workspace available!
+Finally, verify that you can visit the Coder server on the browser and the two templates can be used. You can use `dev` and `duck` as names for the `ssh` and `docker` templates, respectively.
