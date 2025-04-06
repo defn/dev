@@ -6,6 +6,7 @@ services:
     user: ubuntu
     working_dir: /home/ubuntu
     entrypoint: ["/app/entrypoint.sh"]
+    command: []
     restart: always
     privileged: true
     devices:
