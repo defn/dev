@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+#MISE description="Run a playbook locally"
+#USAGE arg "playbook" help="Path to playbook"
+
+cd "${MISE_ORIGINAL_CWD}"
+
+ansible-playbook "${usage_playbook}" -i localhost, -c local 
+
