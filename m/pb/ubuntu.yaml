@@ -99,6 +99,7 @@
         path: /etc/apt/apt.conf.d/99-Phased-Updates
         state: absent
     - name: Add NOPASSWD to sudoers.d for user
+      become: true
       copy:
         content: "ubuntu ALL=(ALL:ALL) NOPASSWD: ALL"
         dest: /etc/sudoers.d/ubuntu
