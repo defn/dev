@@ -52,7 +52,6 @@ inventory: {
 	chrome: hosts: [
 		"penguin",
 		"small",
-		"defn-chromebook",
 	]
 
 	rpi: {
@@ -95,15 +94,14 @@ inventory: {
 
 	heavy: hosts: [
 		"thinkpad",
-		// dead "gw",
 		"pc",
+		// dead "gw",
 	]
 
 	// docker compose
 	dc: hosts: [
 		"gori",
 		"penguin-dev",
-		"pc",
 		"lanpy-dev",
 	]
 }

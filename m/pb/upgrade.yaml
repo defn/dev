@@ -2,6 +2,10 @@
   hosts: all
   become: true
   tasks:
+    - name: Fail if not Ubuntu or Debian
+      fail:
+        msg: "This playbook only supports Ubuntu or Debian systems."
+      when: ansible_facts['os_family'] != "Debian"
     - name: Fix dpkg
       shell: sudo dpkg --configure -a || true
       args:

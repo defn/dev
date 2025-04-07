@@ -2,6 +2,10 @@
 - name: Ubuntu setup
   hosts: all
   tasks:
+    - name: Fail if not Ubuntu or Debian
+      fail:
+        msg: "This playbook only supports Ubuntu or Debian systems."
+      when: ansible_facts['os_family'] != "Debian"
     - name: Disable apt-daily.timer
       become: true
       ignore_errors: true
