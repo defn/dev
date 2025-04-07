@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+#MISE description="Run a playbook"
+#USAGE arg "playbook" help="Path to playbook"
+#USAGE arg "limit" help="Limit to hosts" default="none"
+
+cd "${MISE_ORIGINAL_CWD}"
+
+ansible-playbook "${usage_playbook}" -l "${usage_limit}"

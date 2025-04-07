@@ -1,4 +1,0 @@
-- name: fix git repo
-  hosts: all
-  roles:
-    - fix_origin

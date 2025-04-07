@@ -1,7 +1,0 @@
-- name: rpi playbook
-  hosts: rpi
-  roles:
-    - base_packages
-    - rpi_packages
-    - network_ethernet
-    - base_bazel

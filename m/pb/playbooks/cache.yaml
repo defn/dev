@@ -1,5 +1,0 @@
-- name: Cache new flakes
-  hosts: cache
-  roles:
-    - home_flakes
-    - home_cache

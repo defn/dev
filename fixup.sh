@@ -7,10 +7,6 @@ function main {
 
 	perl -pe 's{^\s*GSSAPIAuthentication}{#GSSAPIAuthentication}' -i /etc/ssh/ssh_config
 
-	if test -x /usr/local/bin/nix/ping; then
-		setcap cap_net_raw+p $(readlink /usr/local/bin/nix/ping)
-	fi
-
 	for a in docker-credential-{pass,secretservice}; do rm -vf "$(which "$a")"; done
 
 	if ! test -e .docker/config.json; then
@@ -22,7 +18,7 @@ function main {
 	fi
 	usermod -aG docker "$(id -un $SUDO_USER)"
 
-	if [[ -n "${LANG:-}" ]]; then
+	if [[ -n ${LANG-} ]]; then
 		sudo locale-gen "$LANG"
 		sudo update-locale LANG="$LANG"
 	fi

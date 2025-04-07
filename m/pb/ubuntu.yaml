@@ -1,0 +1,101 @@
+---
+- name: Ubuntu setup
+  hosts: all
+  tasks:
+    - name: Disable apt-daily.timer
+      become: true
+      ignore_errors: true
+      service:
+        name: apt-daily.timer
+        enabled: "no"
+        state: stopped
+    - name: Disable apt-daily-upgrade.timer
+      become: true
+      ignore_errors: true
+      service:
+        name: apt-daily-upgrade.timer
+        enabled: "no"
+        state: stopped
+    - name: Disable unattended-upgrades service
+      become: true
+      ignore_errors: true
+      service:
+        name: unattended-upgrades
+        enabled: "no"
+        state: stopped
+    - name: Remove packages
+      become: true
+      apt:
+        name:
+          - nano
+          - unattended-upgrades
+        state: absent
+    - name: Install base packages
+      become: true
+      apt:
+        name:
+          - bc
+          - bind9-dnsutils
+          - build-essential
+          - ca-certificates
+          - cpu-checker
+          - curl
+          - dirmngr
+          - gettext
+          - git
+          - git-lfs
+          - gpg
+          - gpg-agent
+          - ifupdown
+          - iproute2
+          - iptables
+          - locales
+          - lsb-release
+          - make
+          - ncdu
+          - net-tools
+          - openssh-client
+          - pass
+          - pcscd
+          - pv
+          - rsync
+          - s6
+          - scdaemon
+          - skopeo
+          - socat
+          - sudo
+          - tini
+          - tzdata
+          - vim-nox
+          - xz-utils
+        state: present
+    - name: Remove files
+      become: true
+      file:
+        path:
+          - /usr/bin/gs
+        state: absent
+    - name: Allow user to run Docker
+      become: true
+      user:
+        name: ubuntu
+        groups: docker
+        append: "yes"
+    - name: Create /etc/apt/apt.conf.d directory
+      become: true
+      file:
+        path: /etc/apt/apt.conf.d
+        state: directory
+        owner: root
+        group: root
+        mode: "0755"
+    - name: Delete old apt config
+      become: true
+      file:
+        path: /etc/apt/apt.conf.d/99-Phased-Updates
+        state: absent
+    - name: Add NOPASSWD to sudoers.d for user
+      copy:
+        content: "ubuntu ALL=(ALL:ALL) NOPASSWD: ALL"
+        dest: /etc/sudoers.d/ubuntu
+        mode: "0440"

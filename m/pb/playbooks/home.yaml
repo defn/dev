@@ -1,4 +1,0 @@
-- name: Install new flakes
-  hosts: all
-  roles:
-    - home_flakes

@@ -1,5 +1,0 @@
-- name: Install rpi-specific packages
-  become: true
-  apt:
-    name: []
-    state: present
