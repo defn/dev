@@ -2,6 +2,7 @@
 experimental = true
 
 [tools]
+ansible = "11.4.0"
 aws = "2.25.11"
 bat = "0.25.0"
 bazelisk = "1.25.0"
@@ -12,13 +13,10 @@ dive = "0.13.1"
 dyff = "1.10.1"
 fzf = "0.61.1"
 gh = "2.69.0"
-go = "1.24.2"
 gron = "0.7.1"
 jq = "1.7.1"
 just = "1.40.0"
-node = "22.14.0"
 pipx = "1.7.1"
-python = "3.13.2"
 starship = "1.22.1"
 "ubi:buildkite/agent" = { version = "3.95.1", exe = "buildkite-agent" }
 "ubi:coder/code-server" = { version = "4.98.2", bin_path = "bin", extract_all = "true" }
