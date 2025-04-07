@@ -2,8 +2,12 @@
 
 #MISE description="Run a playbook"
 #USAGE arg "playbook" help="Path to playbook"
-#USAGE arg "limit" help="Limit to hosts" default="none"
+#USAGE arg "limit" help="Limit to hosts" default=""
 
 cd "${MISE_ORIGINAL_CWD}"
+
+if [[ -z ${usage_limit} ]]; then
+	usage_limit="$(ansible-inventory --list | jq -r '._meta.hostvars | keys | sort | .[]' | fzf --select-1)"
+fi
 
 ansible-playbook "${usage_playbook}" -l "${usage_limit}"
