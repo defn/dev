@@ -35,3 +35,10 @@ When accessing AWS, such as for secrets, the defn-org account is selected using 
 - figure out how cuelang generates people play books
 - figure out how m play finds cuelang playbooks
 - example of a playbook in another workarea
+- backlinks for all playbooks
+- backlinks for configuration
+- backlinks for mise commands
+- backlinks for tooling
+- cue repo schema to track the above
+- backlinks for uses of playbooks
+  
