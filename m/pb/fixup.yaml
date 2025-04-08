@@ -1,0 +1,73 @@
+---
+- name: Setup Docker and SSH configs
+  hosts: all
+  become: true
+  vars:
+    user_id: 1000
+    group_id: 100
+    username: "{{ lookup('pipe', 'id -un 1000') }}"
+    groupname: "{{ lookup('pipe', 'id -gn 1000') }}"
+    home_dir: "/home/{{ username }}"
+    docker_config_dir: "{{ home_dir }}/.docker"
+
+  tasks:
+    - name: Comment out GSSAPIAuthentication in ssh_config
+      lineinfile:
+        path: /etc/ssh/ssh_config
+        regexp: '^\s*GSSAPIAuthentication'
+        line: '#GSSAPIAuthentication'
+        state: present
+
+    - name: Remove docker credential helpers if they exist
+      file:
+        path: "{{ item }}"
+        state: absent
+      loop:
+        - "{{ lookup('pipe', 'which docker-credential-pass || true') }}"
+        - "{{ lookup('pipe', 'which docker-credential-secretservice || true') }}"
+      when: item != ""
+
+    - name: Copy config.json.example to config.json if not exists
+      copy:
+        src: "{{ docker_config_dir }}/config.json.example"
+        dest: "{{ docker_config_dir }}/config.json"
+        owner: "{{ username }}"
+        group: "{{ groupname }}"
+        mode: '0600'
+        remote_src: yes
+      when: not lookup('file', docker_config_dir + '/config.json', errors='ignore')
+
+    - name: Change group of /var/run/docker.sock if exists
+      file:
+        state: file
+        path: /var/run/docker.sock
+        group: "{{ groupname }}"
+      when: ansible_facts['devices'] is defined and ansible_facts['devices']['docker0'] is defined
+
+    - name: Add user to docker group
+      user:
+        name: "{{ username }}"
+        groups: docker
+        append: yes
+
+    - name: Generate locale 
+      block:
+        - name: Generate locale
+          command: "locale-gen en_US.UTF-8"
+
+        - name: Update system locale
+          command: "update-locale en_US.UTF-8"
+
+    - name: Create standard directories
+      file:
+        state: directory
+        path: "{{ item.path }}"
+        owner: "{{username}}"
+        group: "{{groupname}}"
+        mode: "{{ item.mode }}"
+      loop:
+        - { path: "/home/{{username}}", mode: "0755" }
+        - { path: "/run/user/{{user_id}}", mode: "0755" }
+        - { path: "/run/user/{{user_id}}/gnupg", mode: "0755" }
+        - { path: "/tmp/uscreens", mode: "1777" }
+
