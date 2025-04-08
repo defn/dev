@@ -62,6 +62,7 @@
           - pass
           - pcscd
           - pv
+          - python-is-python3 
           - rsync
           - s6
           - scdaemon
