@@ -10,7 +10,7 @@ module(
 bazel_dep(name = "bazel_skylib", version = "1.7.1")
 
 # https://registry.bazel.build/modules/rules_oci
-bazel_dep(name = "rules_oci", version = "2.2.2")
+bazel_dep(name = "rules_oci", version = "2.2.5")
 
 # https://registry.bazel.build/modules/rules_distroless
 bazel_dep(name = "rules_distroless", version = "0.5.1")
@@ -19,13 +19,10 @@ bazel_dep(name = "rules_distroless", version = "0.5.1")
 bazel_dep(name = "rules_shell", version = "0.4.0")
 
 # https://registry.bazel.build/modules/rules_pkg
-bazel_dep(name = "rules_pkg", version = "1.0.1")
-
-# https://registry.bazel.build/modules/rules_uv
-bazel_dep(name = "rules_uv", version = "0.59.0", dev_dependency = True)
+bazel_dep(name = "rules_pkg", version = "1.1.0")
 
 # https://registry.bazel.build/modules/protobuf
-bazel_dep(name = "protobuf", version = "30.0")
+bazel_dep(name = "protobuf", version = "30.2")
 
 # https://registry.bazel.build/modules/rules_proto
 bazel_dep(name = "rules_proto", version = "7.1.0")
@@ -40,7 +37,7 @@ bazel_dep(name = "rules_proto_grpc_go", version = "5.0.1")
 bazel_dep(name = "rules_go", version = "0.53.0", repo_name = "io_bazel_rules_go")
 
 go_sdk = use_extension("@io_bazel_rules_go//go:extensions.bzl", "go_sdk")
-go_sdk.download(version = "1.24.0")
+go_sdk.download(version = "1.24.2")
 go_sdk.host()
 
 # https://registry.bazel.build/modules/gazelle

@@ -109,7 +109,6 @@ update:
 
 regen:
 	@mark gazelle
-	$(MAKE) bazel-ignore
 	set -x; go get $$(git ls-files | grep 'go$$' | perl -pe 's{[^/]+$$}{\n}' | sort -u | runmany 4 1 'echo ./$$1' | grep -v /demo/)
 	mkdir -p node_modules demo/node_modules
 	for a in node_modules demo/node_modules infra/stacks/*/.terraform demo/stacks/*/.terraform; do \
@@ -215,28 +214,6 @@ activate:
 
 create-activation:
 	@b agent b exec defn-org aws ssm create-activation --default-instance-name $(name) --iam-role service-role/AmazonEC2RunCommandRoleForManagedInstances --registration-limit 1 --region $(region)  --expiration-date "$$(date -d "+1 day" +"%Y-%m-%dT00:00:00")" | jq -r '"make activate region=$(region) actid=\(.ActivationId) actcode=\(.ActivationCode)"'work ?= /home/ubuntu/m/demo
-
-bazel-ignore:
-	echo > .bazelignore.tmp
-	echo tf/mod >> .bazelignore.tmp
-	echo tf/bootstrap>> .bazelignore.tmp
-	echo tf/global >> .bazelignore.tmp
-	echo tf/cdktf.out >> .bazelignore.tmp
-	echo cutout >> .bazelignore.tmp
-	echo comfyui >> .bazelignore.tmp
-	echo .direnv >> .bazelignore.tmp
-	echo demo/.direnv >> .bazelignore.tmp
-	find . -name 'node_modules'| perl -pe 's{/node_modules/.*}{/node_modules}' | sort -u >> .bazelignore.tmp
-	git ls-files | grep flake.nix | perl -pe 's{(/?)flake.nix}{\1.direnv}' | sort >> .bazelignore.tmp
-	git ls-files | grep flake.nix | perl -pe 's{(/?)flake.nix}{\1result}' | sort >> .bazelignore.tmp
-	git ls-files | grep '{{cookiecutter' | perl -pe 's{\}\}/.*}{\}\}}' | sort -u >> .bazelignore.tmp
-	git ls-files | grep '{{cookiecutter' | perl -pe 's{/\{\{.*}{}' | sort -u >> .bazelignore.tmp
-	for a in infra/stacks/*/ infra/cdktf.out/stacks/*/ demo/stacks/*/ demo/cfg/cdktf.out/stacks/*/ coder/template/*/; do echo "$${a}.terraform"; done | sort >> .bazelignore.tmp
-	git ls-files | grep /.env | perl -pe 's{/[^/]+$$}{\n}' | while read -r a; do echo "$$a/.direnv"; done | sort >> .bazelignore.tmp
-	(cat ~/.gitignore && echo && echo m && echo work && echo bin) > ~/.bazelignore.tmp
-	cat .bazelignore >> .bazelignore.tmp
-	cat .bazelignore.tmp | sort -u > .bazelignore
-	rm -f .bazelignore.tmp ../.bazelignore.tmp
 
 inventory:
 	(echo package m; git ls-files | sed "s#^#/#" | perl -pe 's{^}{files: "}; s{$$}{": #file}; s{(\S+)/}{$$1": "}' | env LANG=C sort) > m.cue
