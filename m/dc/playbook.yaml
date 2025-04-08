@@ -1,0 +1,7 @@
+---
+- name: Hello
+  hosts: all
+  tasks:
+    - name: Say hello
+      shell: uname -a
+      changed_when: false
