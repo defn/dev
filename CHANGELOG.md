@@ -1,5 +1,49 @@
 # Changelog
 
+## [1.24.0](https://github.com/defn/dev/compare/v1.23.0...v1.24.0) (2025-04-08)
+
+
+### Features
+
+* ansible is global, no language toolchains ([d60d076](https://github.com/defn/dev/commit/d60d076b44bc45172c9b48fbaa835da9b1ca1712))
+* ansible m tasks can run from anywhere ([07c1c56](https://github.com/defn/dev/commit/07c1c568f0f007849d155df5e84548168afb7cda))
+* bazel 8.1.1 ([6fe68ee](https://github.com/defn/dev/commit/6fe68eefa785dcf32194c2acdf2e43f5bbb9a8fe))
+* coder-server playbook ([765cc0d](https://github.com/defn/dev/commit/765cc0dff10048b8960be2210b81c8ebc55e2ecc))
+* docker-compose dev shares host docker ([9949a60](https://github.com/defn/dev/commit/9949a6016068b192cca952bb02ca98165dac768e))
+* m local to run playbook locally ([d6d8a7e](https://github.com/defn/dev/commit/d6d8a7e0644a5fb34acda06d687c0d8882fd44d3))
+* m play, m remote ansible tasks ([2ecc6d2](https://github.com/defn/dev/commit/2ecc6d29e611b87acd38c9358bf3b45d33b9106e))
+* m play, remote runs fzf to select inventory ([cd61b4f](https://github.com/defn/dev/commit/cd61b4f33a22e3e440ad75d8fd9edce037651ad4))
+* m shell to enter a dockercompose workarea ([0a066b1](https://github.com/defn/dev/commit/0a066b1ab77ea25469b160e85220da4a7c36a255))
+* m/dc has an /app/entrypoint.sh ([02a68d8](https://github.com/defn/dev/commit/02a68d8e6c5017a9c39412b051d49255e184a91b))
+* m/dc has j down ([e318322](https://github.com/defn/dev/commit/e318322e7af7bedc3987e8ec253de6ef33a2a538))
+* m/dc running as s6 service ([81cf693](https://github.com/defn/dev/commit/81cf6932e0bf8ba9f3ddb7d6a363692a530112d4))
+* make menu for playbooks ([7d2a63a](https://github.com/defn/dev/commit/7d2a63a3586b8e4cb1bd17010a49a0d3b58789cf))
+* move playbooks into m/pb directly ([2626482](https://github.com/defn/dev/commit/262648291d10de43edd0b247211f7c87c562c6c8))
+* tasks in their workarea, linked globally ([126ed88](https://github.com/defn/dev/commit/126ed889628a481867a8540729d97a888459d0ee))
+
+
+### Bug Fixes
+
+* bazel needs golang and python ([dc8cc45](https://github.com/defn/dev/commit/dc8cc45b2e11cfaf64796c6e519e64481972a1a0))
+* be sudo to mess with sudo ([40eeea7](https://github.com/defn/dev/commit/40eeea7d4801099a4a5401fa77cba5b3a5bbaaf2))
+* dont need redundant server_name ([b04f486](https://github.com/defn/dev/commit/b04f486923c0432122eb16948fe365d85f3f1d77))
+* explicit server_name to s6 playbook ([a4840bb](https://github.com/defn/dev/commit/a4840bb2a1a98a83449e39547af2205bf86045ac))
+* fail os on ubuntu/debian only playbooks ([3fc02fd](https://github.com/defn/dev/commit/3fc02fd5134f330dfbedf1e7a3efee20d6d9619a))
+* fake helm chart version ([7ea7612](https://github.com/defn/dev/commit/7ea7612024c0f260d32cd2ef5e36a4693a463495))
+* fall back to /bin/open if browser.sh not found ([631c791](https://github.com/defn/dev/commit/631c791d96d874b261f252c1b7d0c13cffa1c547))
+* global ansible.cfg ([8e79ce0](https://github.com/defn/dev/commit/8e79ce0f9175e512b65ca82c6303e786de0cabdb))
+* m shell use fzf to select which service ([92b4318](https://github.com/defn/dev/commit/92b4318d9586f9a924c2b0e7fa543cdbcddfb433))
+* m/dc j up moved to s6 ([a220cbb](https://github.com/defn/dev/commit/a220cbbc3a7e7c6d21f6ba838f562db3db36f21f))
+* m/dc ownership of .config/coderv2 ([8a04c13](https://github.com/defn/dev/commit/8a04c13dd58b356ba9dcd33371ec81a4229cecd8))
+* mise upgrades: aws, fzf, cloudflared, wrangler ([1d7254f](https://github.com/defn/dev/commit/1d7254ff6bf33adf10352e3397853706d28de3b2))
+* python3 is python ([917ab93](https://github.com/defn/dev/commit/917ab93970f8f3228d7cd1a4cb20e766fb22df52))
+* reduce image size by remmoving python ([1c08afd](https://github.com/defn/dev/commit/1c08afd9ea7f8ea05b55a109d6c0914396c5fa7d))
+* remove aws config from tool workareas ([82b853d](https://github.com/defn/dev/commit/82b853db55e380613b92a4b077dc35ee08a7d9ff))
+* set aws config with profile ([f6e0814](https://github.com/defn/dev/commit/f6e0814f5e263a8559eb8a29e721928dc74ed894))
+* start s6-svscan if not running ([c8616c8](https://github.com/defn/dev/commit/c8616c87e1df03a5deee20e4286e42351f87d1e8))
+* use /bin/open to prevent loop ([71b0c3e](https://github.com/defn/dev/commit/71b0c3e66696fd4a6b5ac86b41501741a7d92a25))
+* vivify m/dc/svc ([0dcdb5d](https://github.com/defn/dev/commit/0dcdb5d5a372f7e6d7dc367e247ac1daa33f30a9))
+
 ## [1.23.0](https://github.com/defn/dev/compare/v1.22.0...v1.23.0) (2025-04-06)
 
 
