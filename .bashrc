@@ -128,26 +128,32 @@ function m {
 export MISE_PIN=1
 
 function profile {
-	if [[ -n "${1:-}" ]]; then
+	if [[ -n ${1-} ]]; then
 		export AWS_PROFILE="$1"
 		shift
+
+		export AWS_CONFIG_FILE="$HOME/m/bazel-bin/aws/aws_config.txt"
 
 		region "$@"
 	else
 		unset AWS_PROFILE
 		unset AWS_REGION
 		unset AWS_DEFAULT_REGION
+		unset AWS_CONFIG_FILE
 	fi
 }
 
 function region {
-	if [[ -n "${1:-}" ]]; then
+	if [[ -n ${1-} ]]; then
 		export AWS_REGION="$1"
 		unset AWS_DEFAULT_REGION
 		shift
+
+		export AWS_CONFIG_FILE="$HOME/m/bazel-bin/aws/aws_config.txt"
 	else
 		unset AWS_REGION
 		unset AWS_DEFAULT_REGION
+		unset AWS_CONFIG_FILE
 	fi
 }
 
@@ -241,4 +247,3 @@ export BROWSER="$(type -P browser || true)"
 unset MAKEFLAGS
 
 if test -r ~/.ssh-agent-rc; then source ~/.ssh-agent-rc >/dev/null; fi
-
