@@ -1,2 +1,3 @@
 [tools]
-"npm:wrangler" = "4.7.2"
+node = "23.11.0"
+"npm:wrangler" = "4.9.1"

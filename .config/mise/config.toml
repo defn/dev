@@ -19,7 +19,7 @@ just = "1.40.0"
 pipx = "1.7.1"
 starship = "1.22.1"
 "ubi:buildkite/agent" = { version = "3.95.1", exe = "buildkite-agent" }
-"ubi:coder/code-server" = { version = "4.99.0", bin_path = "bin", extract_all = "true" }
+"ubi:coder/code-server" = { version = "4.99.1", bin_path = "bin", extract_all = "true" }
 "ubi:honeycombio/buildevents" = "0.17.0"
 "ubi:peak/s5cmd" = "2.3.0"
 "ubi:traefik/yaegi" = "0.16.1"
