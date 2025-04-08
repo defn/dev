@@ -14,7 +14,7 @@ function main {
 		shift
 		export TRACE_ID="${name}-$(date +%s)"
 		if type -P buildevents >/dev/null; then
-			if [[ -n ${BUILDEVENT_APIKEY:-} ]]; then
+			if [[ -n ${BUILDEVENT_APIKEY-} ]]; then
 				if buildevents cmd "${TRACE_ID}" "${TRACE_ID}" "${name}" -- "$@"; then
 					t build "${TRACE_ID}" success "${STARTED}"
 				else
@@ -42,7 +42,7 @@ function main {
 		shift
 		if [[ -n ${PARENT_ID} ]]; then
 			if type -P buildevents >/dev/null; then
-				if [[ -n ${BUILDEVENT_APIKEY:-} ]]; then
+				if [[ -n ${BUILDEVENT_APIKEY-} ]]; then
 					buildevents cmd "${TRACE_ID}" "${PARENT_ID}" "${name}" -- "$@"
 				else
 					"$@"
