@@ -7,4 +7,3 @@
 - schema: repo
 - adapters for things (mise commands)
 - examples
-

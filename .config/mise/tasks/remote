@@ -1,15 +1,1 @@
-#!/usr/bin/env bash
-
-#MISE description="Run a remote command with Ansible"
-#USAGE arg "cmd" help="Remote command" default="true"
-#USAGE arg "limit" help="Limit to hosts" default=""
-
-cd "${MISE_ORIGINAL_CWD}"
-
-export ANSIBLE_LOAD_CALLBACK_PLUGINS=1
-
-if [[ -z ${usage_limit} ]]; then
-	usage_limit="$(ansible-inventory --list | jq -r '._meta.hostvars | keys | sort | .[]' | fzf --select-1)"
-fi
-
-ansible "${usage_limit}" -m shell -a "${usage_cmd}"
+../../../m/pb/tasks/remote

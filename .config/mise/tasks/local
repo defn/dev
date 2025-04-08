@@ -1,14 +1,1 @@
-#!/usr/bin/env bash
-
-#MISE description="Run a playbook locally"
-#USAGE arg "playbook" help="Path to playbook"
-
-cd "${MISE_ORIGINAL_CWD}"
-
-if ! test -r "${usage_playbook}"; then
-	if test -r "/home/ubuntu/m/pb/${usage_playbook}.yaml"; then
-		usage_playbook="/home/ubuntu/m/pb/${usage_playbook}.yaml"
-	fi
-fi
-
-ansible-playbook "${usage_playbook}" -i localhost, -c local
+../../../m/pb/tasks/local
