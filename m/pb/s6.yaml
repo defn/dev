@@ -8,7 +8,7 @@
   tasks:
     - name: Start s6-svscan
       shell: |
-        cd m && mise run start
+        cd ~/m && mise run start
       changed_when: false
 
     - name: Link {{ service_name }} service
@@ -41,10 +41,10 @@
 
     - name: Activate service
       shell: |
-        cd m && mise run activate {{ service_name }}
+        cd ~/m && mise run activate {{ service_name }}
       when: svc_link.changed
 
     - name: Restart service
       shell: |
-        cd m && mise run restart {{ service_name }}
+        cd ~/m && mise run restart {{ service_name }}
       when: svc_env.changed
