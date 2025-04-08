@@ -1,10 +1,2 @@
-[env]
-AWS_PROFILE = "defn-org"
-AWS_REGION = "us-west-2"
-AWS_CONFIG_FILE = "/home/ubuntu/m/bazel-bin/aws/aws_config.txt"
-
-[hooks]
-enter = "aws sts get-caller-identity || (aws sso login && aws sts get-caller-identity)"
-
 [tools]
 packer = "1.12.0"
