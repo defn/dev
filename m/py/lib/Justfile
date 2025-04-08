@@ -1,5 +1,0 @@
-update:
-    b build
-    b pass run :generate_requirements_txt
-    perl -pe 's/linkify, plugins/linkify/' -i requirements.txt
-    b build

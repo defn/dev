@@ -1,9 +1,0 @@
-run +args="Nobody":
-    @b pass run :cli -- {{ args }}
-
-update:
-    b pass run :cli.venv
-    source .py+cli+cli.venv/bin/activate && python cli.py
-
-watch:
-    @b watch
