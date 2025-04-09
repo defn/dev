@@ -15,7 +15,7 @@
       lineinfile:
         path: /etc/ssh/ssh_config
         regexp: '^\s*GSSAPIAuthentication'
-        line: '#GSSAPIAuthentication'
+        line: "#GSSAPIAuthentication"
         state: present
 
     - name: Remove docker credential helpers if they exist
@@ -33,16 +33,9 @@
         dest: "{{ docker_config_dir }}/config.json"
         owner: "{{ username }}"
         group: "{{ groupname }}"
-        mode: '0600'
+        mode: "0600"
         remote_src: yes
       when: not lookup('file', docker_config_dir + '/config.json', errors='ignore')
-
-    - name: Change group of /var/run/docker.sock if exists
-      file:
-        state: file
-        path: /var/run/docker.sock
-        group: "{{ groupname }}"
-      when: ansible_facts['devices'] is defined and ansible_facts['devices']['docker0'] is defined
 
     - name: Add user to docker group
       user:
@@ -50,7 +43,7 @@
         groups: docker
         append: yes
 
-    - name: Generate locale 
+    - name: Generate locale
       block:
         - name: Generate locale
           command: "locale-gen en_US.UTF-8"
@@ -61,13 +54,21 @@
     - name: Create standard directories
       file:
         state: directory
-        path: "{{ item.path }}"
         owner: "{{username}}"
         group: "{{groupname}}"
+        path: "{{ item.path }}"
         mode: "{{ item.mode }}"
       loop:
-        - { path: "/home/{{username}}", mode: "0755" }
-        - { path: "/run/user/{{user_id}}", mode: "0755" }
-        - { path: "/run/user/{{user_id}}/gnupg", mode: "0755" }
-        - { path: "/tmp/uscreens", mode: "1777" }
+        - { path: "/home/{{username}}", mode: "0700" }
+        - { path: "/run/user/{{user_id}}", mode: "0700" }
+        - { path: "/run/user/{{user_id}}/gnupg", mode: "0700" }
 
+    - name: Create tmp directories
+      file:
+        state: directory
+        owner: root
+        group: root
+        path: "{{ item.path }}"
+        mode: "{{ item.mode }}"
+      loop:
+        - { path: "/tmp/uscreens", mode: "1777" }
