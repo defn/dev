@@ -11,7 +11,7 @@ RUN apt update \
         make curl xz-utils dirmngr gpg pcscd scdaemon gpg-agent rsync \
         build-essential sudo ca-certificates tzdata locales git git-lfs tini \
         iproute2 iptables bc pv socat s6 cpu-checker bind9-dnsutils \
-        pass skopeo
+        pass skopeo python3-venv
 
 RUN install -m 0755 -d /etc/apt/keyrings \
     && curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc \
@@ -40,7 +40,7 @@ RUN git clone https://github.com/defn/dev dev && \
     mv dev/.git . && \
     git reset --hard && \
     rm -rf dev
-RUN	--mount=type=secret,id=GITHUB_TOKEN,env=GITHUB_TOKEN bash -c "git pull && source .bash_profile && ./install.sh && ./install.sh"
+RUN	--mount=type=secret,id=GITHUB_TOKEN,env=GITHUB_TOKEN bash -c "git pull && source .bash_profile && ./install.sh"
 RUN ./fixup.sh
 RUN sudo apt update && sudo apt upgrade -y
 
