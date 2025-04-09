@@ -47,9 +47,11 @@
       block:
         - name: Generate locale
           command: "locale-gen en_US.UTF-8"
+          changed_when: false
 
         - name: Update system locale
           command: "update-locale en_US.UTF-8"
+          changed_when: false
 
     - name: Create standard directories
       file:

@@ -22,7 +22,7 @@ function main {
 	make install
 
 	git checkout .docker
-	sudo ./fixup.sh || true
+	./fixup.sh
 }
 
 main "$@"

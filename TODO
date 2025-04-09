@@ -24,7 +24,7 @@ docker run --sig-proxy=false -a STDOUT -a STDERR
 -l ContainerVersion=13
 -l Type=codespaces 
 -l devcontainer.metadata=[{
-    "postCreateCommand":"source ~/.bash_profile && make sync && m start m && cd && make sync && git checkout . && sudo ./fixup.sh",
+    "postCreateCommand":"source ~/.bash_profile && make sync && m start m && cd && make sync && git checkout . && ./fixup.sh",
     "waitFor":"postCreateCommand",
     "customizations":{
         "vscode":{

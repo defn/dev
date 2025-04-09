@@ -23,7 +23,6 @@ RUN install -m 0755 -d /etc/apt/keyrings \
 RUN curl -fsSL https://tailscale.com/install.sh | sh
 
 RUN if [ "$(id -u ubuntu)" != 1000 ]; then groupadd -r --gid 1000 ubuntu && useradd -m -s /bin/bash -g ubuntu --uid 1000 ubuntu; fi
-RUN usermod -aG docker ubuntu
 RUN echo "ubuntu ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 
 USER ubuntu
@@ -34,7 +33,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 WORKDIR /home/ubuntu
 
 # bump to rebuild defn/dev from scratch
-RUN echo 3
+RUN echo 4
 
 # initial clone and build
 RUN git clone https://github.com/defn/dev dev && \
@@ -42,24 +41,16 @@ RUN git clone https://github.com/defn/dev dev && \
     git reset --hard && \
     rm -rf dev
 RUN	--mount=type=secret,id=GITHUB_TOKEN,env=GITHUB_TOKEN bash -c "git pull && source .bash_profile && ./install.sh && ./install.sh"
-
-# sudo doesnt work with qemu arm64 emulation
-USER root
-RUN apt update && sudo apt upgrade -y
 RUN ./fixup.sh
-USER ubuntu
+RUN sudo apt update && sudo apt upgrade -y
 
 # release rebuild on top of an old defn/dev
 ARG RELEASE
 
 RUN echo "$RELEASE"
 RUN	--mount=type=secret,id=GITHUB_TOKEN,env=GITHUB_TOKEN bash -c "git pull && source .bash_profile && ./install.sh"
-
-# sudo doesnt work with qemu arm64 emulation
-USER root
-RUN apt update && sudo apt upgrade -y
 RUN ./fixup.sh
-USER ubuntu
+RUN sudo apt update && sudo apt upgrade -y
 
 RUN ln -nfs ../svc.d/tailscaled m/svc/
 
