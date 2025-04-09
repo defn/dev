@@ -3,7 +3,7 @@
 set -efu -o pipefail
 
 function main {
-	if text -x ~/.local/bin/mise; then
+	if test -x ~/.local/bin/mise; then
 		~/.local/bin/mise run local fixup
 	fi
 }
