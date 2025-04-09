@@ -63,6 +63,7 @@
           - pcscd
           - pv
           - python-is-python3
+          - python3-venv
           - rsync
           - s6
           - scdaemon
