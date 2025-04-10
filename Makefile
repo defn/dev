@@ -257,10 +257,10 @@ fast:
 	source .bash_profile && $(MAKE) fast_inner
 
 fast_inner:
-	mise self-update --yes || true
+	~/.local/bin/mise self-update --yes || true
 	git ls-files | grep 'mise.toml$$' | runmany 'mise trust $$1'
-	mise install
-	(cd m && mise install)
+	~/.local/bin/mise install
+	(cd m && ~/.local/bin/mise install)
 	for a in cue yaegi; do sudo ln -nfs $$(mise exec -- which $$a) /usr/local/bin/; done
 	bin/persist-cache
 
