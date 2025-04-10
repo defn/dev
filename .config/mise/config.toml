@@ -3,9 +3,9 @@ experimental = true
 
 [tools]
 ansible = "11.4.0"
-aws = "2.25.12"
+aws = "2.25.14"
 bat = "0.25.0"
-bazelisk = "1.25.0"
+bazelisk = "1.26.0"
 chamber = "3.1.1"
 coder = "2.21.0"
 cue = "0.12.1"
