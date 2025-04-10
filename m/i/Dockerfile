@@ -33,13 +33,13 @@ ENV DEBIAN_FRONTEND=noninteractive
 WORKDIR /home/ubuntu
 
 # initial clone and build
-RUN echo 4
+ARG BASE=4
+RUN echo "$BASE"
 RUN git clone https://github.com/defn/dev dev && mv dev/.git . && git reset --hard && rm -rf dev
-RUN	--mount=type=secret,id=GITHUB_TOKEN,env=GITHUB_TOKEN bash -c "git pull && source .bash_profile && ./install.sh"
+RUN	--mount=type=secret,id=GITHUB_TOKEN,env=GITHUB_TOKEN bash -c "git pull && source .bash_profile && make sync"
 
 # release rebuild on top of an old defn/dev
 ARG RELEASE
-
 RUN echo "$RELEASE"
 RUN	--mount=type=secret,id=GITHUB_TOKEN,env=GITHUB_TOKEN bash -c "git pull && source .bash_profile && make sync"
 RUN ln -nfs ../svc.d/tailscaled m/svc/
