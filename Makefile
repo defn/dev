@@ -265,10 +265,10 @@ fast_inner:
 	bin/persist-cache
 
 sync_inner:
-	mise run local upgrade
-	mise run local ubuntu
+	~/.local/bin/mise run local upgrade
+	~/.local/bin/mise run local ubuntu
 	$(MAKE) fast_inner
-	mise run local fixup
+	~/.local/bin/mise run local fixup
 
 up:
 	cd m/dc && just up
