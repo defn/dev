@@ -6,15 +6,20 @@ function main {
 	export DEBIAN_FRONTEND=noninteractive
 
 	if [[ "$(whoami || true)" == "ubuntu" ]]; then
+		# initialize the OS
 		sudo "$0" "$@"
 
+		# clone defn/dev
 		cd /home/ubuntu
-
 		git clone https://github.com/defn/dev
 		mv dev/.git .
 		rm -rf dev
 		git reset --hard
 
+		# install mise
+		curl -sSL https://mise.run | bash
+
+		# install defn/dev
 		make sync
 
 		return $?
