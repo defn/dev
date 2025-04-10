@@ -253,12 +253,12 @@ sync:
 	$(MAKE) sync_inner
 
 sync_inner:
+	mise run local upgrade
+	mise run local ubuntu
 	mise self-update --yes || true
 	git ls-files | grep 'mise.toml$$' | runmany 'mise trust $$1'
 	mise install
 	(cd m && mise install)
-	mise run local upgrade
-	mise run local ubuntu
 	mise run local fixup
 	for a in cue yaegi; do sudo ln -nfs $$(mise exec -- which $$a) /usr/local/bin/; done
 	bin/persist-cache
