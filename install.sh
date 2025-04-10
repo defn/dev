@@ -20,9 +20,6 @@ function main {
 
 	make sync
 	make install
-
-	git checkout .docker
-	./fixup.sh
 }
 
 main "$@"

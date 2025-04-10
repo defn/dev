@@ -1,0 +1,86 @@
+---
+- name: Persist cache directories
+  vars:
+    data_dir: "{{ lookup('env', 'HOME') }}/work"
+    home: "{{ lookup('env', 'HOME') }}"
+    persist_links:
+      - src: "{{ data_dir }}/config-precommit"
+        dest: "{{ home }}/.cache/pre-commit"
+      - src: "{{ data_dir }}/local-gh"
+        dest: "{{ home }}/.local/share/gh"
+      - src: "{{ data_dir }}/terraform-d"
+        dest: "{{ home }}/.terraform.d"
+      - src: "{{ data_dir }}/go"
+        dest: "{{ home }}/go"
+      - src: "{{ data_dir }}/go-build"
+        dest: "{{ home }}/.cache/go-build"
+      - src: "{{ data_dir }}/go-mod"
+        dest: "{{ home }}/.cache/go-mod"
+      - src: "{{ data_dir }}/bazel"
+        dest: "{{ home }}/.cache/bazel"
+      - src: "{{ data_dir }}/bazelisk"
+        dest: "{{ home }}/.cache/bazelisk"
+      - src: "{{ data_dir }}/direnv-allow"
+        dest: "{{ home }}/.local/share/direnv"
+      - src: "{{ data_dir }}/direnv-home"
+        dest: "{{ home }}/.direnv"
+
+  tasks:
+    - name: Ensure base work directory exists
+      file:
+        path: "{{ data_dir }}"
+        state: directory
+        mode: "0700"
+
+    - name: Ensure ~/.gnupg exists with correct permissions
+      file:
+        path: "{{ home }}/.gnupg"
+        state: directory
+        mode: "0700"
+
+    - name: Ensure miscellaneous cache directories exist
+      file:
+        path: "{{ item }}"
+        state: directory
+      loop:
+        - "{{ home }}/.terraform.d/plugin-cache"
+        - "{{ home }}/.cache/helm"
+        - "{{ home }}/.cache/nix"
+        - "{{ data_dir }}/bazel-cache"
+        - "{{ data_dir }}/squid"
+
+    - name: Persist directory links
+      block:
+        - name: Ensure source directory exists
+          file:
+            path: "{{ item.src }}"
+            state: directory
+          loop: "{{ persist_links }}"
+          loop_control:
+            loop_var: item
+
+        - name: Remove existing dest if not symlink
+          file:
+            path: "{{ item.dest }}"
+            state: absent
+          when: item.dest is not none and not item.dest | path_is_symlink
+          loop: "{{ persist_links }}"
+          loop_control:
+            loop_var: item
+
+        - name: Ensure destination parent directory exists
+          file:
+            path: "{{ item.dest | dirname }}"
+            state: directory
+          loop: "{{ persist_links }}"
+          loop_control:
+            loop_var: item
+
+        - name: Create symlink for persistence
+          file:
+            src: "{{ item.src }}"
+            dest: "{{ item.dest }}"
+            state: link
+            force: yes
+          loop: "{{ persist_links }}"
+          loop_control: item
