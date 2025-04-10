@@ -258,7 +258,7 @@ fast:
 
 fast_inner:
 	~/.local/bin/mise self-update --yes || true
-	git ls-files | grep 'mise.toml$$' | ~/bin/runmany 'mise trust $$1'
+	git ls-files | grep 'mise.toml$$' | ~/bin/runmany '~/.local/bin/mise trust $$1'
 	~/.local/bin/mise install
 	(cd m && ~/.local/bin/mise install)
 	for a in cue yaegi; do sudo ln -nfs $$(mise exec -- which $$a) /usr/local/bin/; done
