@@ -4,12 +4,16 @@ FROM ubuntu:noble-20250127
 
 ENV DEBIAN_FRONTEND=noninteractive
 
+# curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o docker.asc
+RUN install -m 0755 -d /etc/apt/keyrings
+COPY docker.asc /etc/apt/keyrings/docker.asc
+
 # install docker, minimum os packages
 RUN install -m 0755 -d /etc/apt/keyrings \
-    && curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc \
     && chmod a+r /etc/apt/keyrings/docker.asc \
     && echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu noble stable" | tee /etc/apt/sources.list.d/docker.list \
     && apt update -y \
+    && apt upgrade -y \
     && apt install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin \
     && apt install -y make curl rsync sudo ca-certificates tzdata locales git
 
