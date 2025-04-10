@@ -46,10 +46,10 @@ RUN curl -sSL https://mise.run | bash
 ARG BASE=4
 RUN echo "$BASE"
 RUN git clone https://github.com/defn/dev dev && mv dev/.git . && git reset --hard && rm -rf dev
-RUN	--mount=type=secret,id=GITHUB_TOKEN,env=GITHUB_TOKEN bash -c "git pull && source .bash_profile && make sync"
+RUN	--mount=type=secret,id=GITHUB_TOKEN,env=GITHUB_TOKEN make sync
 
 # release rebuild, short term caching
 ARG RELEASE
 RUN echo "$RELEASE"
-RUN	--mount=type=secret,id=GITHUB_TOKEN,env=GITHUB_TOKEN bash -c "git pull && source .bash_profile && make sync"
+RUN	--mount=type=secret,id=GITHUB_TOKEN,env=GITHUB_TOKEN make sync
 RUN ln -nfs ../svc.d/tailscaled m/svc/
