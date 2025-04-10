@@ -5,7 +5,9 @@ FROM ubuntu:noble-20250127
 ENV DEBIAN_FRONTEND=noninteractive
 
 # bootstrap
-RUN apt update && apt upgrade -y && apt install -y make curl rsync sudo ca-certificates tzdata locales git
+# ca-certificates for docker repo
+# python3.12-venv for mise python tooling
+RUN apt update && apt upgrade -y && apt install -y make curl rsync sudo ca-certificates tzdata locales git python3.12-venv
 
 # install docker
 # curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o docker.asc
