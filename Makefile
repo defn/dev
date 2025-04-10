@@ -250,11 +250,11 @@ zfs:
 
 sync:
 	git pull
-	$(MAKE) sync_inner
+	source .bash_profile && $(MAKE) sync_inner
 
 fast:
 	git pull
-	$(MAKE) fast_inner
+	source .bash_profile && $(MAKE) fast_inner
 
 fast_inner:
 	mise self-update --yes || true
