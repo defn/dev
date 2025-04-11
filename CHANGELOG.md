@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.25.1](https://github.com/defn/dev/compare/v1.25.0...v1.25.1) (2025-04-11)
+
+
+### Bug Fixes
+
+* bump base to rebuild for ansible ([d6157c6](https://github.com/defn/dev/commit/d6157c6c817e20a9a86a55c160650c835ed8c78c))
+
 ## [1.25.0](https://github.com/defn/dev/compare/v1.24.0...v1.25.0) (2025-04-11)
 
 
