@@ -43,7 +43,7 @@ CMD [ "/home/ubuntu/m/svc" ]
 RUN curl -sSL https://mise.run | bash
 
 # initial clone and build, long term caching
-ARG BASE=4
+ARG BASE=5
 RUN echo "$BASE"
 RUN git clone https://github.com/defn/dev dev && mv dev/.git . && git reset --hard && rm -rf dev
 RUN	--mount=type=secret,id=GITHUB_TOKEN,env=GITHUB_TOKEN make sync
