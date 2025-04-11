@@ -2,7 +2,7 @@
 experimental = true
 
 [tools]
-ansible = "11.4.0"
+ansible = "11.3.0"
 aws = "2.26.0"
 bat = "0.25.0"
 bazelisk = "1.26.0"
