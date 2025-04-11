@@ -1,5 +1,54 @@
 # Changelog
 
+## [1.25.0](https://github.com/defn/dev/compare/v1.24.0...v1.25.0) (2025-04-11)
+
+
+### Features
+
+* fixup.sh is a playbook ([e7da5a6](https://github.com/defn/dev/commit/e7da5a6454d0aac2a3c64d8524c9696872e19f14))
+* m/v just to see what versions changed ([4391f6b](https://github.com/defn/dev/commit/4391f6b3584825bbe5e56c9d08dc69651aea5981))
+* make fast since sync is slower ([bbee2b2](https://github.com/defn/dev/commit/bbee2b2dea4aa45cca5a296e9214e07a5e8c49e8))
+* make sync runs os playbooks ([8743b4b](https://github.com/defn/dev/commit/8743b4b8a7e8789c119430d239e16287e613b0e6))
+* put everthing into make sync ([55cc566](https://github.com/defn/dev/commit/55cc5665075ad71381dab08e9bea68361ea8cbd5))
+* remove install.sh ([ad08eeb](https://github.com/defn/dev/commit/ad08eeb88af89aa3d92346c2a30000857257c464))
+
+
+### Bug Fixes
+
+* ami builder uses make sync ([e8bf6d3](https://github.com/defn/dev/commit/e8bf6d3ddfcfefe4cf5c24e34ac5a4ec742e475d))
+* another fq mise ([512ace3](https://github.com/defn/dev/commit/512ace39f0eee141b73a2722df0abaeb953c0f6d))
+* bazel wrapper calls bazelisk ([a5ed314](https://github.com/defn/dev/commit/a5ed31465991b2b8e3272e4554f5c810d46aaf78))
+* brew s6 on macos, remove mise managed tools ([2b98423](https://github.com/defn/dev/commit/2b98423a45ae37d8c27b4318960e077b74052dac))
+* cache docker apt repo key ([5ce8fcb](https://github.com/defn/dev/commit/5ce8fcb7e756c9f85c32e6befaed2cc46f35366c))
+* dont hardcode ubuntu in ssh entrypoint ([b03de5f](https://github.com/defn/dev/commit/b03de5fe06dc9a93c4abf429acd714c88e658935))
+* dont make /nix for bazel ([491b77d](https://github.com/defn/dev/commit/491b77d8054b2f671280058a9f929b8973c2c724))
+* dont use install.sh in docker image ([e1c4032](https://github.com/defn/dev/commit/e1c4032286d270e1a538bd7422c8b189588b010c))
+* dont use setsid, not available on macos ([09c5e1c](https://github.com/defn/dev/commit/09c5e1ce03fdfe40644dbae198cd622e7c376c2c))
+* downgrade ansible to 11.3.0 because macos x86 ([08dcfdf](https://github.com/defn/dev/commit/08dcfdff3bd5556bacbae6834290cb0b8f0f8938))
+* dry apt package installs ([535fa0d](https://github.com/defn/dev/commit/535fa0d2c3b43da09d91d5dcb64c2284e3f96ed2))
+* fixup: tighter permissions, skip docker socket ([6ee9f1f](https://github.com/defn/dev/commit/6ee9f1f5b8a11f2ec7d1247d5cf8db626cd07c9c))
+* fq path to mise ([ceb6780](https://github.com/defn/dev/commit/ceb678059570074600b8d68d17492d9d3e0970fd))
+* fq runmany, try without bash_profile ([4dbf5e8](https://github.com/defn/dev/commit/4dbf5e8bcaba01f8c9d2f73bdfbe60fdfa4561d9))
+* install venv earlier ([97bbf78](https://github.com/defn/dev/commit/97bbf7840612bbff72e228a9afe63fed2140ff31))
+* line continuation ([adf2a2e](https://github.com/defn/dev/commit/adf2a2e205ae3797d8cca2259620f7543af851c4))
+* line continuation in dockerfile ([f64cb52](https://github.com/defn/dev/commit/f64cb52619a2938f405761a6d590e9c7e9d5c8f4))
+* make install-package like Dockerfile ([491dc62](https://github.com/defn/dev/commit/491dc621ed848f6ac8aaf351b9c5758241550267))
+* make targets should source .bash_profile ([48f244f](https://github.com/defn/dev/commit/48f244fc983bc6446b226f5c2fcc7b0390c5ac88))
+* more fq mise ([eac51fa](https://github.com/defn/dev/commit/eac51fa466f07b34cb8df34ef4e2b883e27905f4))
+* more fq mise paths ([b54b88b](https://github.com/defn/dev/commit/b54b88be1547cc69e51c259b4c2a8653918263e4))
+* need python venv ([7d3d6dc](https://github.com/defn/dev/commit/7d3d6dccb5a09c872af51445eb2ed0938c696fda))
+* python3.12-venv for mise python tooling ([3c87b6d](https://github.com/defn/dev/commit/3c87b6d806ef746bc4c738d0c99c8561e289a2f3))
+* remove /nix from bazelrc ([bd7182a](https://github.com/defn/dev/commit/bd7182abf442862b60b4111a69a1e38b64f6f164))
+* remove bazel-watcher, not available on macos x86 ([a4886db](https://github.com/defn/dev/commit/a4886dbc38ab0a562e24090e1e4c7e7963186665))
+* rework fixup.sh and sudo ([5eb689d](https://github.com/defn/dev/commit/5eb689d9075688977058877692ff580a508b5a85))
+* run fixup if mise is available ([3e707f1](https://github.com/defn/dev/commit/3e707f19789395cd7da03e286673f8f4c0ad8936))
+* run os upgrade, install first ([f43ffa2](https://github.com/defn/dev/commit/f43ffa2dfe454dc12d234fe4f6225195c2c7f1d7))
+* separate ami config for m/i docker build ([6a14ea2](https://github.com/defn/dev/commit/6a14ea2c1f194ee7520967239b81be27a5aa0445))
+* separate base os, docker, etc installs ([f918f28](https://github.com/defn/dev/commit/f918f28d08e7098f41cd1d487775304624b12979))
+* typo in fixup.sh ([90b2895](https://github.com/defn/dev/commit/90b289558078d918eb326af4f8b6482da5d0df70))
+* typo mise ([f29c7c2](https://github.com/defn/dev/commit/f29c7c23d872cd775a650b0a58dccf68e2dcc53a))
+* working ami build using make sync ([2ee0eb1](https://github.com/defn/dev/commit/2ee0eb1455b2470d91f1bf3cefa30690de6501df))
+
 ## [1.24.0](https://github.com/defn/dev/compare/v1.23.0...v1.24.0) (2025-04-08)
 
 
