@@ -6,7 +6,7 @@ function main {
     cd
     source ~/.bash_profile
 
-    sudo install -d -m 0700 -o ubuntu -g ubuntu dotfiles .local/share/code-server/extensions
+    sudo install -d -m 0700 -o "$(id -un)" -g "$(id -gn)" dotfiles .local/share/code-server/extensions
     
     cd ~/m
 
@@ -31,7 +31,7 @@ function main {
           m restart code-server || true
           ;;
       *)
-          exec /bin/s6-svscan /home/ubuntu/m/svc
+          exec s6-svscan ~/m/svc
     esac
 }
 
