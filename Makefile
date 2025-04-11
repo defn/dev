@@ -117,7 +117,6 @@ gpg:
 	$(MARK) configure gpg
 	dirmngr --shutdown || true
 	dirmngr --daemon
-	t make_perms $(MAKE) perms
 	if [[ "$(shell uname -s)" == "Darwin" ]]; then t make_macos $(MAKE) macos; fi
 
 docker:
@@ -136,13 +135,6 @@ trunk:
 login:
 	if test -f /run/secrets/kubernetes.io/serviceaccount/ca.crt; then mark kubernetes; this-kubeconfig; this-argocd-login || true; fi
 	this-github-login
-
-perms:
-	$(MARK) configure permissions
-	if [[ "Linux" == "$(shell uname -s)" ]]; then if test -S /var/run/docker.sock; then sudo chgrp "$$(id -gn)" /var/run/docker.sock; sudo chmod 770 /var/run/docker.sock; fi; fi
-	if test -S /run/containerd/containerd.sock; then sudo chgrp "$$(id -gn)" /run/containerd/containerd.sock; sudo chmod 770 /run/containerd/containerd.sock; fi
-	-if ! test -f ~/.kube/config; then mkdir -p ~/.kube; touch ~/.kube/config; fi
-	-chmod 0600 ~/.kube/config
 
 update:
 	git pull
@@ -176,7 +168,6 @@ install_t:
 	@mark finished
 
 install-inner:
-	t make_perms $(MAKE) perms
 	t make_install_innermost bash -c '. ~/.bash_profile && $(MAKE) install-innermost'
 
 install-innermost:
@@ -189,7 +180,6 @@ mise:
 	if [[ ! -x ~/.local/bin/mise ]]; then curl -sSL https://mise.run | bash; fi
 	~/.local/bin/mise trust
 	~/.local/bin/mise install
-	ln -nfs $$(~/.local/bin/mise exec -- which bazelisk) $$HOME/bin/$$(uname -s)/bazel
 
 nix-uninstall:
 	-sudo mv /etc/zshrc.backup-before-nix /etc/zshrc
@@ -265,10 +255,10 @@ fast_inner:
 	~/bin/persist-cache
 
 sync_inner:
-	~/.local/bin/mise run local upgrade
-	~/.local/bin/mise run local ubuntu
+	if [[ "$(shell uname -s)" == "Linux" ]]; then t play-upgrade ~/.local/bin/mise run local upgrade; fi
+	if [[ "$(shell uname -s)" == "Linux" ]]; then t play-ubuntu ~/.local/bin/mise run local ubuntu; fi
 	$(MAKE) fast_inner
-	~/.local/bin/mise run local fixup
+	if [[ "$(shell uname -s)" == "Linux" ]]; then t play-fixup ~/.local/bin/mise run local fixup; fi
 
 up:
 	cd m/dc && just up

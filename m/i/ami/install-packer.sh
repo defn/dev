@@ -38,16 +38,16 @@ function main {
 	# install docker
 	install -m 0755 -d /etc/apt/keyrings
 	curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
-	chmod a+r /etc/apt/keyrings/docker.asc \
-		&& echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu noble stable" | tee /etc/apt/sources.list.d/docker.list \
-		&& apt update -y \
-		&& apt install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+	chmod a+r /etc/apt/keyrings/docker.asc &&
+		echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu noble stable" | tee /etc/apt/sources.list.d/docker.list &&
+		apt update -y &&
+		apt install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 
 	# install tailscale
 	curl -fsSL https://tailscale.com/install.sh | bash
 
 	# authorize sudo usage
-	echo "ubuntu ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
+	echo "ubuntu ALL=(ALL) NOPASSWD:ALL" >>/etc/sudoers
 
 	# misc configurations
 	ln -sf /usr/share/zoneinfo/UTC /etc/localtime
