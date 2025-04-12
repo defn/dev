@@ -4,15 +4,15 @@ This is the workarea for Ansible playbooks, inventories, and mise tasks.
 
 ## Playbooks
 
-Machine executable playbooks are yaml files.  They are imported into people useable playbooks, which are managed by cuelang.
+Machine executable playbooks are yaml files. They are imported into people useable playbooks, which are managed by cuelang.
 
 ## Inventory
 
-Inventories are also managed by cuelang.  Dynamic inventories for cloud jostswre merged with static configs, then augmented with global, group, and host variables using cuelang.
+Inventories are also managed by cuelang. Dynamic inventories for cloud jostswre merged with static configs, then augmented with global, group, and host variables using cuelang.
 
 ## mise tasks
 
-The Ansible mise tasks can be run anywhere.  They use a central ansible.cfg in $HOME, which configures paths to m/pb.  They also have a declarative namespace that looks up playbooks and inventories.
+The Ansible mise tasks can be run anywhere. They use a central ansible.cfg in $HOME, which configures paths to m/pb. They also have a declarative namespace that looks up playbooks and inventories.
 
 - m play PLAYBOOK LIMIT - runs a playbook on hosts
 - m local PLAYBOOK - runs a playbook locally
@@ -20,7 +20,7 @@ The Ansible mise tasks can be run anywhere.  They use a central ansible.cfg in $
 
 If LIMIT is omittted, fzf offers an inventory menu.
 
-If PLAYBOOK is a file, that file,is use as the playbook.  Otherwise, the playbook is mapped to m/pb/PLAYBOOK.yaml or a cuelang generated playbook.
+If PLAYBOOK is a file, that file,is use as the playbook. Otherwise, the playbook is mapped to m/pb/PLAYBOOK.yaml or a cuelang generated playbook.
 
 ## Access
 
@@ -41,4 +41,3 @@ When accessing AWS, such as for secrets, the defn-org account is selected using 
 - backlinks for tooling
 - cue repo schema to track the above
 - backlinks for uses of playbooks
-  

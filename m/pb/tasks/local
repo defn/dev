@@ -6,8 +6,8 @@
 cd "${MISE_ORIGINAL_CWD}"
 
 if ! test -r "${usage_playbook}"; then
-	if test -r "/home/ubuntu/m/pb/${usage_playbook}.yaml"; then
-		usage_playbook="/home/ubuntu/m/pb/${usage_playbook}.yaml"
+	if test -r "${HOME}/m/pb/${usage_playbook}.yaml"; then
+		usage_playbook="${HOME}/m/pb/${usage_playbook}.yaml"
 	fi
 fi
 
