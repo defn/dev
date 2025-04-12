@@ -6,7 +6,7 @@ cli:
 plugins:
   sources:
     - id: trunk
-      ref: v1.6.7
+      ref: v1.6.8
       uri: https://github.com/trunk-io/plugins
 runtimes:
   enabled:
@@ -25,6 +25,7 @@ lint:
         - .cache/**
         - .npm/**
   enabled:
+    - golangci-lint2@2.1.1
     - actionlint@1.7.7
     - isort@6.0.1
     - clippy@1.65.0

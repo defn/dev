@@ -87,21 +87,22 @@ inventory: {
 	]
 
 	zimaboard: hosts: [
-		// "zm1",
-		// "zm2",
-		// dead "zm3",
+		"zm1",
+		"zm2",
+		"zm3",
 	]
 
 	heavy: hosts: [
 		"thinkpad",
 		"pc",
-		// dead "gw",
+		"gw",
 	]
 
 	// docker compose
 	dc: hosts: [
 		"gori",
+		"lanpy",
 		"penguin-dev",
-		"lanpy-dev",
+		"smal-dev",
 	]
 }
