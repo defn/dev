@@ -262,4 +262,3 @@ func validateNewDataCoderExternalAuthParameters(scope constructs.Construct, id *
 
 	return nil
 }
-

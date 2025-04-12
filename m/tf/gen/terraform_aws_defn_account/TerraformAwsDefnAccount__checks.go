@@ -132,4 +132,3 @@ func validateNewTerraformAwsDefnAccountParameters(scope constructs.Construct, id
 
 	return nil
 }
-

@@ -1,6 +1,5 @@
 package datacoderparameter
 
-
 type DataCoderParameterOption struct {
 	// The display name of this value in the UI.
 	//
@@ -21,4 +20,3 @@ type DataCoderParameterOption struct {
 	// Docs at Terraform Registry: {@link https://registry.terraform.io/providers/coder/coder/0.21.0/docs/data-sources/parameter#icon DataCoderParameter#icon}
 	Icon *string `field:"optional" json:"icon" yaml:"icon"`
 }
-

@@ -83,4 +83,3 @@ func (j *jsiiProxy_AppHealthcheckOutputReference) validateSetUrlParameters(val *
 func validateNewAppHealthcheckOutputReferenceParameters(terraformResource cdktf.IInterpolatingParent, terraformAttribute *string) error {
 	return nil
 }
-

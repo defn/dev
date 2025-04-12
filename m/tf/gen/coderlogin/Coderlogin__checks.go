@@ -116,4 +116,3 @@ func validateNewCoderloginParameters(scope constructs.Construct, id *string, con
 
 	return nil
 }
-

@@ -35,4 +35,3 @@ func (j *jsiiProxy_MetadataItemList) validateSetWrapsSetParameters(val *bool) er
 func validateNewMetadataItemListParameters(terraformResource cdktf.IInterpolatingParent, terraformAttribute *string, wrapsSet *bool) error {
 	return nil
 }
-

@@ -51,4 +51,3 @@ func (j *jsiiProxy_TerraformAwsIamRole) validateSetRoleDescriptionParameters(val
 func validateNewTerraformAwsIamRoleParameters(scope constructs.Construct, id *string, config *TerraformAwsIamRoleConfig) error {
 	return nil
 }
-

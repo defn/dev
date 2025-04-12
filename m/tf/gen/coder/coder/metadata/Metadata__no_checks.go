@@ -131,4 +131,3 @@ func (j *jsiiProxy_Metadata) validateSetResourceIdParameters(val *string) error 
 func validateNewMetadataParameters(scope constructs.Construct, id *string, config *MetadataConfig) error {
 	return nil
 }
-

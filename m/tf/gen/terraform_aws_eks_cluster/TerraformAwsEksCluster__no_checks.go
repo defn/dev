@@ -79,4 +79,3 @@ func (j *jsiiProxy_TerraformAwsEksCluster) validateSetSubnetIdsParameters(val *[
 func validateNewTerraformAwsEksClusterParameters(scope constructs.Construct, id *string, config *TerraformAwsEksClusterConfig) error {
 	return nil
 }
-

@@ -230,7 +230,6 @@ func (j *jsiiProxy_CoderProvider) UrlInput() *string {
 	return returns
 }
 
-
 // Create a new {@link https://registry.terraform.io/providers/coder/coder/0.21.0/docs coder} Resource.
 func NewCoderProvider(scope constructs.Construct, id *string, config *CoderProviderConfig) CoderProvider {
 	_init_.Initialize()
@@ -260,7 +259,7 @@ func NewCoderProvider_Override(c CoderProvider, scope constructs.Construct, id *
 	)
 }
 
-func (j *jsiiProxy_CoderProvider)SetAlias(val *string) {
+func (j *jsiiProxy_CoderProvider) SetAlias(val *string) {
 	_jsii_.Set(
 		j,
 		"alias",
@@ -268,7 +267,7 @@ func (j *jsiiProxy_CoderProvider)SetAlias(val *string) {
 	)
 }
 
-func (j *jsiiProxy_CoderProvider)SetFeatureUseManagedVariables(val interface{}) {
+func (j *jsiiProxy_CoderProvider) SetFeatureUseManagedVariables(val interface{}) {
 	if err := j.validateSetFeatureUseManagedVariablesParameters(val); err != nil {
 		panic(err)
 	}
@@ -279,7 +278,7 @@ func (j *jsiiProxy_CoderProvider)SetFeatureUseManagedVariables(val interface{}) 
 	)
 }
 
-func (j *jsiiProxy_CoderProvider)SetUrl(val *string) {
+func (j *jsiiProxy_CoderProvider) SetUrl(val *string) {
 	_jsii_.Set(
 		j,
 		"url",
@@ -521,4 +520,3 @@ func (c *jsiiProxy_CoderProvider) ToTerraform() interface{} {
 
 	return returns
 }
-

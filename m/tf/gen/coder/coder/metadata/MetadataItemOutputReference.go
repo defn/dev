@@ -228,7 +228,6 @@ func (j *jsiiProxy_MetadataItemOutputReference) ValueInput() *string {
 	return returns
 }
 
-
 func NewMetadataItemOutputReference(terraformResource cdktf.IInterpolatingParent, terraformAttribute *string, complexObjectIndex *float64, complexObjectIsFromSet *bool) MetadataItemOutputReference {
 	_init_.Initialize()
 
@@ -256,7 +255,7 @@ func NewMetadataItemOutputReference_Override(m MetadataItemOutputReference, terr
 	)
 }
 
-func (j *jsiiProxy_MetadataItemOutputReference)SetComplexObjectIndex(val interface{}) {
+func (j *jsiiProxy_MetadataItemOutputReference) SetComplexObjectIndex(val interface{}) {
 	if err := j.validateSetComplexObjectIndexParameters(val); err != nil {
 		panic(err)
 	}
@@ -267,7 +266,7 @@ func (j *jsiiProxy_MetadataItemOutputReference)SetComplexObjectIndex(val interfa
 	)
 }
 
-func (j *jsiiProxy_MetadataItemOutputReference)SetComplexObjectIsFromSet(val *bool) {
+func (j *jsiiProxy_MetadataItemOutputReference) SetComplexObjectIsFromSet(val *bool) {
 	if err := j.validateSetComplexObjectIsFromSetParameters(val); err != nil {
 		panic(err)
 	}
@@ -278,7 +277,7 @@ func (j *jsiiProxy_MetadataItemOutputReference)SetComplexObjectIsFromSet(val *bo
 	)
 }
 
-func (j *jsiiProxy_MetadataItemOutputReference)SetInternalValue(val interface{}) {
+func (j *jsiiProxy_MetadataItemOutputReference) SetInternalValue(val interface{}) {
 	if err := j.validateSetInternalValueParameters(val); err != nil {
 		panic(err)
 	}
@@ -289,7 +288,7 @@ func (j *jsiiProxy_MetadataItemOutputReference)SetInternalValue(val interface{})
 	)
 }
 
-func (j *jsiiProxy_MetadataItemOutputReference)SetKey(val *string) {
+func (j *jsiiProxy_MetadataItemOutputReference) SetKey(val *string) {
 	if err := j.validateSetKeyParameters(val); err != nil {
 		panic(err)
 	}
@@ -300,7 +299,7 @@ func (j *jsiiProxy_MetadataItemOutputReference)SetKey(val *string) {
 	)
 }
 
-func (j *jsiiProxy_MetadataItemOutputReference)SetSensitive(val interface{}) {
+func (j *jsiiProxy_MetadataItemOutputReference) SetSensitive(val interface{}) {
 	if err := j.validateSetSensitiveParameters(val); err != nil {
 		panic(err)
 	}
@@ -311,7 +310,7 @@ func (j *jsiiProxy_MetadataItemOutputReference)SetSensitive(val interface{}) {
 	)
 }
 
-func (j *jsiiProxy_MetadataItemOutputReference)SetTerraformAttribute(val *string) {
+func (j *jsiiProxy_MetadataItemOutputReference) SetTerraformAttribute(val *string) {
 	if err := j.validateSetTerraformAttributeParameters(val); err != nil {
 		panic(err)
 	}
@@ -322,7 +321,7 @@ func (j *jsiiProxy_MetadataItemOutputReference)SetTerraformAttribute(val *string
 	)
 }
 
-func (j *jsiiProxy_MetadataItemOutputReference)SetTerraformResource(val cdktf.IInterpolatingParent) {
+func (j *jsiiProxy_MetadataItemOutputReference) SetTerraformResource(val cdktf.IInterpolatingParent) {
 	if err := j.validateSetTerraformResourceParameters(val); err != nil {
 		panic(err)
 	}
@@ -333,7 +332,7 @@ func (j *jsiiProxy_MetadataItemOutputReference)SetTerraformResource(val cdktf.II
 	)
 }
 
-func (j *jsiiProxy_MetadataItemOutputReference)SetValue(val *string) {
+func (j *jsiiProxy_MetadataItemOutputReference) SetValue(val *string) {
 	if err := j.validateSetValueParameters(val); err != nil {
 		panic(err)
 	}
@@ -574,4 +573,3 @@ func (m *jsiiProxy_MetadataItemOutputReference) ToString() *string {
 
 	return returns
 }
-

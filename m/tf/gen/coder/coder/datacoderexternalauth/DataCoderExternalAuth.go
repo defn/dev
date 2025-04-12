@@ -295,7 +295,6 @@ func (j *jsiiProxy_DataCoderExternalAuth) TerraformResourceType() *string {
 	return returns
 }
 
-
 // Create a new {@link https://registry.terraform.io/providers/coder/coder/0.21.0/docs/data-sources/external_auth coder_external_auth} Data Source.
 func NewDataCoderExternalAuth(scope constructs.Construct, id *string, config *DataCoderExternalAuthConfig) DataCoderExternalAuth {
 	_init_.Initialize()
@@ -325,7 +324,7 @@ func NewDataCoderExternalAuth_Override(d DataCoderExternalAuth, scope constructs
 	)
 }
 
-func (j *jsiiProxy_DataCoderExternalAuth)SetCount(val interface{}) {
+func (j *jsiiProxy_DataCoderExternalAuth) SetCount(val interface{}) {
 	if err := j.validateSetCountParameters(val); err != nil {
 		panic(err)
 	}
@@ -336,7 +335,7 @@ func (j *jsiiProxy_DataCoderExternalAuth)SetCount(val interface{}) {
 	)
 }
 
-func (j *jsiiProxy_DataCoderExternalAuth)SetDependsOn(val *[]*string) {
+func (j *jsiiProxy_DataCoderExternalAuth) SetDependsOn(val *[]*string) {
 	_jsii_.Set(
 		j,
 		"dependsOn",
@@ -344,7 +343,7 @@ func (j *jsiiProxy_DataCoderExternalAuth)SetDependsOn(val *[]*string) {
 	)
 }
 
-func (j *jsiiProxy_DataCoderExternalAuth)SetForEach(val cdktf.ITerraformIterator) {
+func (j *jsiiProxy_DataCoderExternalAuth) SetForEach(val cdktf.ITerraformIterator) {
 	_jsii_.Set(
 		j,
 		"forEach",
@@ -352,7 +351,7 @@ func (j *jsiiProxy_DataCoderExternalAuth)SetForEach(val cdktf.ITerraformIterator
 	)
 }
 
-func (j *jsiiProxy_DataCoderExternalAuth)SetId(val *string) {
+func (j *jsiiProxy_DataCoderExternalAuth) SetId(val *string) {
 	if err := j.validateSetIdParameters(val); err != nil {
 		panic(err)
 	}
@@ -363,7 +362,7 @@ func (j *jsiiProxy_DataCoderExternalAuth)SetId(val *string) {
 	)
 }
 
-func (j *jsiiProxy_DataCoderExternalAuth)SetLifecycle(val *cdktf.TerraformResourceLifecycle) {
+func (j *jsiiProxy_DataCoderExternalAuth) SetLifecycle(val *cdktf.TerraformResourceLifecycle) {
 	if err := j.validateSetLifecycleParameters(val); err != nil {
 		panic(err)
 	}
@@ -374,7 +373,7 @@ func (j *jsiiProxy_DataCoderExternalAuth)SetLifecycle(val *cdktf.TerraformResour
 	)
 }
 
-func (j *jsiiProxy_DataCoderExternalAuth)SetOptional(val interface{}) {
+func (j *jsiiProxy_DataCoderExternalAuth) SetOptional(val interface{}) {
 	if err := j.validateSetOptionalParameters(val); err != nil {
 		panic(err)
 	}
@@ -385,7 +384,7 @@ func (j *jsiiProxy_DataCoderExternalAuth)SetOptional(val interface{}) {
 	)
 }
 
-func (j *jsiiProxy_DataCoderExternalAuth)SetProvider(val cdktf.TerraformProvider) {
+func (j *jsiiProxy_DataCoderExternalAuth) SetProvider(val cdktf.TerraformProvider) {
 	_jsii_.Set(
 		j,
 		"provider",
@@ -771,4 +770,3 @@ func (d *jsiiProxy_DataCoderExternalAuth) ToTerraform() interface{} {
 
 	return returns
 }
-

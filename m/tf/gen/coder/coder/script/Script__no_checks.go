@@ -151,4 +151,3 @@ func (j *jsiiProxy_Script) validateSetTimeoutParameters(val *float64) error {
 func validateNewScriptParameters(scope constructs.Construct, id *string, config *ScriptConfig) error {
 	return nil
 }
-

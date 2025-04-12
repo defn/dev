@@ -254,4 +254,3 @@ func validateNewDataCoderParameterOptionOutputReferenceParameters(terraformResou
 
 	return nil
 }
-

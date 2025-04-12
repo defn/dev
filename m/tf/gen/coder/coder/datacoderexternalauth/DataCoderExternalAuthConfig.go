@@ -31,4 +31,3 @@ type DataCoderExternalAuthConfig struct {
 	// Docs at Terraform Registry: {@link https://registry.terraform.io/providers/coder/coder/0.21.0/docs/data-sources/external_auth#optional DataCoderExternalAuth#optional}
 	Optional interface{} `field:"optional" json:"optional" yaml:"optional"`
 }
-

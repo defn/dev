@@ -123,4 +123,3 @@ func (j *jsiiProxy_Env) validateSetValueParameters(val *string) error {
 func validateNewEnvParameters(scope constructs.Construct, id *string, config *EnvConfig) error {
 	return nil
 }
-

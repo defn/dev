@@ -49,4 +49,3 @@ type MetadataConfig struct {
 	// Docs at Terraform Registry: {@link https://registry.terraform.io/providers/coder/coder/0.21.0/docs/resources/metadata#item Metadata#item}
 	Item interface{} `field:"optional" json:"item" yaml:"item"`
 }
-

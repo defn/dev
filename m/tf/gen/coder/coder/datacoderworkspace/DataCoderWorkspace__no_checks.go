@@ -79,4 +79,3 @@ func (j *jsiiProxy_DataCoderWorkspace) validateSetLifecycleParameters(val *cdktf
 func validateNewDataCoderWorkspaceParameters(scope constructs.Construct, id *string, config *DataCoderWorkspaceConfig) error {
 	return nil
 }
-

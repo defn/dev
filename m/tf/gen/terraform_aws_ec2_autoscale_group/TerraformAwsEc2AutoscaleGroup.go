@@ -1403,7 +1403,6 @@ func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup) WarmPool() interface{} {
 	return returns
 }
 
-
 func NewTerraformAwsEc2AutoscaleGroup(scope constructs.Construct, id *string, config *TerraformAwsEc2AutoscaleGroupConfig) TerraformAwsEc2AutoscaleGroup {
 	_init_.Initialize()
 
@@ -1431,7 +1430,7 @@ func NewTerraformAwsEc2AutoscaleGroup_Override(t TerraformAwsEc2AutoscaleGroup, 
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup)SetAdditionalTagMap(val *map[string]*string) {
+func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup) SetAdditionalTagMap(val *map[string]*string) {
 	_jsii_.Set(
 		j,
 		"additionalTagMap",
@@ -1439,7 +1438,7 @@ func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup)SetAdditionalTagMap(val *map[st
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup)SetAssociatePublicIpAddress(val *bool) {
+func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup) SetAssociatePublicIpAddress(val *bool) {
 	_jsii_.Set(
 		j,
 		"associatePublicIpAddress",
@@ -1447,7 +1446,7 @@ func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup)SetAssociatePublicIpAddress(val
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup)SetAttributes(val *[]*string) {
+func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup) SetAttributes(val *[]*string) {
 	_jsii_.Set(
 		j,
 		"attributes",
@@ -1455,7 +1454,7 @@ func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup)SetAttributes(val *[]*string) {
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup)SetAutoscalingPoliciesEnabled(val *bool) {
+func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup) SetAutoscalingPoliciesEnabled(val *bool) {
 	_jsii_.Set(
 		j,
 		"autoscalingPoliciesEnabled",
@@ -1463,7 +1462,7 @@ func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup)SetAutoscalingPoliciesEnabled(v
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup)SetBlockDeviceMappings(val interface{}) {
+func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup) SetBlockDeviceMappings(val interface{}) {
 	if err := j.validateSetBlockDeviceMappingsParameters(val); err != nil {
 		panic(err)
 	}
@@ -1474,7 +1473,7 @@ func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup)SetBlockDeviceMappings(val inte
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup)SetCapacityRebalance(val *bool) {
+func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup) SetCapacityRebalance(val *bool) {
 	_jsii_.Set(
 		j,
 		"capacityRebalance",
@@ -1482,7 +1481,7 @@ func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup)SetCapacityRebalance(val *bool)
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup)SetContext(val interface{}) {
+func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup) SetContext(val interface{}) {
 	if err := j.validateSetContextParameters(val); err != nil {
 		panic(err)
 	}
@@ -1493,7 +1492,7 @@ func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup)SetContext(val interface{}) {
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup)SetCpuUtilizationHighEvaluationPeriods(val *float64) {
+func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup) SetCpuUtilizationHighEvaluationPeriods(val *float64) {
 	_jsii_.Set(
 		j,
 		"cpuUtilizationHighEvaluationPeriods",
@@ -1501,7 +1500,7 @@ func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup)SetCpuUtilizationHighEvaluation
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup)SetCpuUtilizationHighPeriodSeconds(val *float64) {
+func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup) SetCpuUtilizationHighPeriodSeconds(val *float64) {
 	_jsii_.Set(
 		j,
 		"cpuUtilizationHighPeriodSeconds",
@@ -1509,7 +1508,7 @@ func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup)SetCpuUtilizationHighPeriodSeco
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup)SetCpuUtilizationHighStatistic(val *string) {
+func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup) SetCpuUtilizationHighStatistic(val *string) {
 	_jsii_.Set(
 		j,
 		"cpuUtilizationHighStatistic",
@@ -1517,7 +1516,7 @@ func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup)SetCpuUtilizationHighStatistic(
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup)SetCpuUtilizationHighThresholdPercent(val *float64) {
+func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup) SetCpuUtilizationHighThresholdPercent(val *float64) {
 	_jsii_.Set(
 		j,
 		"cpuUtilizationHighThresholdPercent",
@@ -1525,7 +1524,7 @@ func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup)SetCpuUtilizationHighThresholdP
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup)SetCpuUtilizationLowEvaluationPeriods(val *float64) {
+func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup) SetCpuUtilizationLowEvaluationPeriods(val *float64) {
 	_jsii_.Set(
 		j,
 		"cpuUtilizationLowEvaluationPeriods",
@@ -1533,7 +1532,7 @@ func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup)SetCpuUtilizationLowEvaluationP
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup)SetCpuUtilizationLowPeriodSeconds(val *float64) {
+func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup) SetCpuUtilizationLowPeriodSeconds(val *float64) {
 	_jsii_.Set(
 		j,
 		"cpuUtilizationLowPeriodSeconds",
@@ -1541,7 +1540,7 @@ func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup)SetCpuUtilizationLowPeriodSecon
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup)SetCpuUtilizationLowStatistic(val *string) {
+func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup) SetCpuUtilizationLowStatistic(val *string) {
 	_jsii_.Set(
 		j,
 		"cpuUtilizationLowStatistic",
@@ -1549,7 +1548,7 @@ func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup)SetCpuUtilizationLowStatistic(v
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup)SetCpuUtilizationLowThresholdPercent(val *float64) {
+func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup) SetCpuUtilizationLowThresholdPercent(val *float64) {
 	_jsii_.Set(
 		j,
 		"cpuUtilizationLowThresholdPercent",
@@ -1557,7 +1556,7 @@ func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup)SetCpuUtilizationLowThresholdPe
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup)SetCreditSpecification(val interface{}) {
+func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup) SetCreditSpecification(val interface{}) {
 	if err := j.validateSetCreditSpecificationParameters(val); err != nil {
 		panic(err)
 	}
@@ -1568,7 +1567,7 @@ func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup)SetCreditSpecification(val inte
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup)SetCustomAlarms(val interface{}) {
+func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup) SetCustomAlarms(val interface{}) {
 	if err := j.validateSetCustomAlarmsParameters(val); err != nil {
 		panic(err)
 	}
@@ -1579,7 +1578,7 @@ func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup)SetCustomAlarms(val interface{}
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup)SetDefaultAlarmsEnabled(val *bool) {
+func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup) SetDefaultAlarmsEnabled(val *bool) {
 	_jsii_.Set(
 		j,
 		"defaultAlarmsEnabled",
@@ -1587,7 +1586,7 @@ func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup)SetDefaultAlarmsEnabled(val *bo
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup)SetDefaultCooldown(val *float64) {
+func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup) SetDefaultCooldown(val *float64) {
 	_jsii_.Set(
 		j,
 		"defaultCooldown",
@@ -1595,7 +1594,7 @@ func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup)SetDefaultCooldown(val *float64
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup)SetDelimiter(val *string) {
+func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup) SetDelimiter(val *string) {
 	_jsii_.Set(
 		j,
 		"delimiter",
@@ -1603,7 +1602,7 @@ func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup)SetDelimiter(val *string) {
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup)SetDependsOn(val *[]*string) {
+func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup) SetDependsOn(val *[]*string) {
 	_jsii_.Set(
 		j,
 		"dependsOn",
@@ -1611,7 +1610,7 @@ func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup)SetDependsOn(val *[]*string) {
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup)SetDescriptorFormats(val interface{}) {
+func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup) SetDescriptorFormats(val interface{}) {
 	if err := j.validateSetDescriptorFormatsParameters(val); err != nil {
 		panic(err)
 	}
@@ -1622,7 +1621,7 @@ func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup)SetDescriptorFormats(val interf
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup)SetDesiredCapacity(val *float64) {
+func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup) SetDesiredCapacity(val *float64) {
 	_jsii_.Set(
 		j,
 		"desiredCapacity",
@@ -1630,7 +1629,7 @@ func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup)SetDesiredCapacity(val *float64
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup)SetDisableApiTermination(val *bool) {
+func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup) SetDisableApiTermination(val *bool) {
 	_jsii_.Set(
 		j,
 		"disableApiTermination",
@@ -1638,7 +1637,7 @@ func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup)SetDisableApiTermination(val *b
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup)SetEbsOptimized(val *bool) {
+func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup) SetEbsOptimized(val *bool) {
 	_jsii_.Set(
 		j,
 		"ebsOptimized",
@@ -1646,7 +1645,7 @@ func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup)SetEbsOptimized(val *bool) {
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup)SetElasticGpuSpecifications(val interface{}) {
+func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup) SetElasticGpuSpecifications(val interface{}) {
 	if err := j.validateSetElasticGpuSpecificationsParameters(val); err != nil {
 		panic(err)
 	}
@@ -1657,7 +1656,7 @@ func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup)SetElasticGpuSpecifications(val
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup)SetEnabled(val *bool) {
+func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup) SetEnabled(val *bool) {
 	_jsii_.Set(
 		j,
 		"enabled",
@@ -1665,7 +1664,7 @@ func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup)SetEnabled(val *bool) {
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup)SetEnabledMetrics(val *[]*string) {
+func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup) SetEnabledMetrics(val *[]*string) {
 	_jsii_.Set(
 		j,
 		"enabledMetrics",
@@ -1673,7 +1672,7 @@ func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup)SetEnabledMetrics(val *[]*strin
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup)SetEnableMonitoring(val *bool) {
+func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup) SetEnableMonitoring(val *bool) {
 	_jsii_.Set(
 		j,
 		"enableMonitoring",
@@ -1681,7 +1680,7 @@ func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup)SetEnableMonitoring(val *bool) 
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup)SetEnvironment(val *string) {
+func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup) SetEnvironment(val *string) {
 	_jsii_.Set(
 		j,
 		"environment",
@@ -1689,7 +1688,7 @@ func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup)SetEnvironment(val *string) {
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup)SetForceDelete(val *bool) {
+func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup) SetForceDelete(val *bool) {
 	_jsii_.Set(
 		j,
 		"forceDelete",
@@ -1697,7 +1696,7 @@ func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup)SetForceDelete(val *bool) {
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup)SetForEach(val cdktf.ITerraformIterator) {
+func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup) SetForEach(val cdktf.ITerraformIterator) {
 	_jsii_.Set(
 		j,
 		"forEach",
@@ -1705,7 +1704,7 @@ func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup)SetForEach(val cdktf.ITerraform
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup)SetHealthCheckGracePeriod(val *float64) {
+func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup) SetHealthCheckGracePeriod(val *float64) {
 	_jsii_.Set(
 		j,
 		"healthCheckGracePeriod",
@@ -1713,7 +1712,7 @@ func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup)SetHealthCheckGracePeriod(val *
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup)SetHealthCheckType(val *string) {
+func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup) SetHealthCheckType(val *string) {
 	_jsii_.Set(
 		j,
 		"healthCheckType",
@@ -1721,7 +1720,7 @@ func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup)SetHealthCheckType(val *string)
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup)SetIamInstanceProfileName(val *string) {
+func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup) SetIamInstanceProfileName(val *string) {
 	_jsii_.Set(
 		j,
 		"iamInstanceProfileName",
@@ -1729,7 +1728,7 @@ func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup)SetIamInstanceProfileName(val *
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup)SetIdLengthLimit(val *float64) {
+func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup) SetIdLengthLimit(val *float64) {
 	_jsii_.Set(
 		j,
 		"idLengthLimit",
@@ -1737,7 +1736,7 @@ func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup)SetIdLengthLimit(val *float64) 
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup)SetImageId(val *string) {
+func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup) SetImageId(val *string) {
 	_jsii_.Set(
 		j,
 		"imageId",
@@ -1745,7 +1744,7 @@ func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup)SetImageId(val *string) {
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup)SetInstanceInitiatedShutdownBehavior(val *string) {
+func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup) SetInstanceInitiatedShutdownBehavior(val *string) {
 	_jsii_.Set(
 		j,
 		"instanceInitiatedShutdownBehavior",
@@ -1753,7 +1752,7 @@ func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup)SetInstanceInitiatedShutdownBeh
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup)SetInstanceMarketOptions(val interface{}) {
+func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup) SetInstanceMarketOptions(val interface{}) {
 	if err := j.validateSetInstanceMarketOptionsParameters(val); err != nil {
 		panic(err)
 	}
@@ -1764,7 +1763,7 @@ func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup)SetInstanceMarketOptions(val in
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup)SetInstanceRefresh(val interface{}) {
+func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup) SetInstanceRefresh(val interface{}) {
 	if err := j.validateSetInstanceRefreshParameters(val); err != nil {
 		panic(err)
 	}
@@ -1775,7 +1774,7 @@ func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup)SetInstanceRefresh(val interfac
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup)SetInstanceReusePolicy(val interface{}) {
+func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup) SetInstanceReusePolicy(val interface{}) {
 	if err := j.validateSetInstanceReusePolicyParameters(val); err != nil {
 		panic(err)
 	}
@@ -1786,7 +1785,7 @@ func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup)SetInstanceReusePolicy(val inte
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup)SetInstanceType(val *string) {
+func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup) SetInstanceType(val *string) {
 	if err := j.validateSetInstanceTypeParameters(val); err != nil {
 		panic(err)
 	}
@@ -1797,7 +1796,7 @@ func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup)SetInstanceType(val *string) {
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup)SetKeyName(val *string) {
+func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup) SetKeyName(val *string) {
 	_jsii_.Set(
 		j,
 		"keyName",
@@ -1805,7 +1804,7 @@ func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup)SetKeyName(val *string) {
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup)SetLabelKeyCase(val *string) {
+func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup) SetLabelKeyCase(val *string) {
 	_jsii_.Set(
 		j,
 		"labelKeyCase",
@@ -1813,7 +1812,7 @@ func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup)SetLabelKeyCase(val *string) {
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup)SetLabelOrder(val *[]*string) {
+func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup) SetLabelOrder(val *[]*string) {
 	_jsii_.Set(
 		j,
 		"labelOrder",
@@ -1821,7 +1820,7 @@ func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup)SetLabelOrder(val *[]*string) {
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup)SetLabelsAsTags(val *[]*string) {
+func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup) SetLabelsAsTags(val *[]*string) {
 	_jsii_.Set(
 		j,
 		"labelsAsTags",
@@ -1829,7 +1828,7 @@ func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup)SetLabelsAsTags(val *[]*string)
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup)SetLabelValueCase(val *string) {
+func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup) SetLabelValueCase(val *string) {
 	_jsii_.Set(
 		j,
 		"labelValueCase",
@@ -1837,7 +1836,7 @@ func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup)SetLabelValueCase(val *string) 
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup)SetLaunchTemplateVersion(val *string) {
+func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup) SetLaunchTemplateVersion(val *string) {
 	_jsii_.Set(
 		j,
 		"launchTemplateVersion",
@@ -1845,7 +1844,7 @@ func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup)SetLaunchTemplateVersion(val *s
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup)SetLoadBalancers(val *[]*string) {
+func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup) SetLoadBalancers(val *[]*string) {
 	_jsii_.Set(
 		j,
 		"loadBalancers",
@@ -1853,7 +1852,7 @@ func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup)SetLoadBalancers(val *[]*string
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup)SetMaxInstanceLifetime(val *float64) {
+func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup) SetMaxInstanceLifetime(val *float64) {
 	_jsii_.Set(
 		j,
 		"maxInstanceLifetime",
@@ -1861,7 +1860,7 @@ func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup)SetMaxInstanceLifetime(val *flo
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup)SetMaxSize(val *float64) {
+func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup) SetMaxSize(val *float64) {
 	if err := j.validateSetMaxSizeParameters(val); err != nil {
 		panic(err)
 	}
@@ -1872,7 +1871,7 @@ func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup)SetMaxSize(val *float64) {
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup)SetMetadataHttpEndpointEnabled(val *bool) {
+func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup) SetMetadataHttpEndpointEnabled(val *bool) {
 	_jsii_.Set(
 		j,
 		"metadataHttpEndpointEnabled",
@@ -1880,7 +1879,7 @@ func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup)SetMetadataHttpEndpointEnabled(
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup)SetMetadataHttpProtocolIpv6Enabled(val *bool) {
+func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup) SetMetadataHttpProtocolIpv6Enabled(val *bool) {
 	_jsii_.Set(
 		j,
 		"metadataHttpProtocolIpv6Enabled",
@@ -1888,7 +1887,7 @@ func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup)SetMetadataHttpProtocolIpv6Enab
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup)SetMetadataHttpPutResponseHopLimit(val *float64) {
+func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup) SetMetadataHttpPutResponseHopLimit(val *float64) {
 	_jsii_.Set(
 		j,
 		"metadataHttpPutResponseHopLimit",
@@ -1896,7 +1895,7 @@ func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup)SetMetadataHttpPutResponseHopLi
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup)SetMetadataHttpTokensRequired(val *bool) {
+func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup) SetMetadataHttpTokensRequired(val *bool) {
 	_jsii_.Set(
 		j,
 		"metadataHttpTokensRequired",
@@ -1904,7 +1903,7 @@ func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup)SetMetadataHttpTokensRequired(v
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup)SetMetadataInstanceMetadataTagsEnabled(val *bool) {
+func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup) SetMetadataInstanceMetadataTagsEnabled(val *bool) {
 	_jsii_.Set(
 		j,
 		"metadataInstanceMetadataTagsEnabled",
@@ -1912,7 +1911,7 @@ func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup)SetMetadataInstanceMetadataTags
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup)SetMetricsGranularity(val *string) {
+func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup) SetMetricsGranularity(val *string) {
 	_jsii_.Set(
 		j,
 		"metricsGranularity",
@@ -1920,7 +1919,7 @@ func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup)SetMetricsGranularity(val *stri
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup)SetMinElbCapacity(val *float64) {
+func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup) SetMinElbCapacity(val *float64) {
 	_jsii_.Set(
 		j,
 		"minElbCapacity",
@@ -1928,7 +1927,7 @@ func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup)SetMinElbCapacity(val *float64)
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup)SetMinSize(val *float64) {
+func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup) SetMinSize(val *float64) {
 	if err := j.validateSetMinSizeParameters(val); err != nil {
 		panic(err)
 	}
@@ -1939,7 +1938,7 @@ func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup)SetMinSize(val *float64) {
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup)SetMixedInstancesPolicy(val interface{}) {
+func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup) SetMixedInstancesPolicy(val interface{}) {
 	if err := j.validateSetMixedInstancesPolicyParameters(val); err != nil {
 		panic(err)
 	}
@@ -1950,7 +1949,7 @@ func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup)SetMixedInstancesPolicy(val int
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup)SetName(val *string) {
+func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup) SetName(val *string) {
 	_jsii_.Set(
 		j,
 		"name",
@@ -1958,7 +1957,7 @@ func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup)SetName(val *string) {
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup)SetNamespace(val *string) {
+func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup) SetNamespace(val *string) {
 	_jsii_.Set(
 		j,
 		"namespace",
@@ -1966,7 +1965,7 @@ func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup)SetNamespace(val *string) {
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup)SetNetworkInterfaceId(val *string) {
+func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup) SetNetworkInterfaceId(val *string) {
 	_jsii_.Set(
 		j,
 		"networkInterfaceId",
@@ -1974,7 +1973,7 @@ func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup)SetNetworkInterfaceId(val *stri
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup)SetPlacement(val interface{}) {
+func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup) SetPlacement(val interface{}) {
 	if err := j.validateSetPlacementParameters(val); err != nil {
 		panic(err)
 	}
@@ -1985,7 +1984,7 @@ func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup)SetPlacement(val interface{}) {
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup)SetPlacementGroup(val *string) {
+func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup) SetPlacementGroup(val *string) {
 	_jsii_.Set(
 		j,
 		"placementGroup",
@@ -1993,7 +1992,7 @@ func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup)SetPlacementGroup(val *string) 
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup)SetProtectFromScaleIn(val *bool) {
+func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup) SetProtectFromScaleIn(val *bool) {
 	_jsii_.Set(
 		j,
 		"protectFromScaleIn",
@@ -2001,7 +2000,7 @@ func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup)SetProtectFromScaleIn(val *bool
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup)SetRegexReplaceChars(val *string) {
+func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup) SetRegexReplaceChars(val *string) {
 	_jsii_.Set(
 		j,
 		"regexReplaceChars",
@@ -2009,7 +2008,7 @@ func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup)SetRegexReplaceChars(val *strin
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup)SetScaleDownAdjustmentType(val *string) {
+func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup) SetScaleDownAdjustmentType(val *string) {
 	_jsii_.Set(
 		j,
 		"scaleDownAdjustmentType",
@@ -2017,7 +2016,7 @@ func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup)SetScaleDownAdjustmentType(val 
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup)SetScaleDownCooldownSeconds(val *float64) {
+func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup) SetScaleDownCooldownSeconds(val *float64) {
 	_jsii_.Set(
 		j,
 		"scaleDownCooldownSeconds",
@@ -2025,7 +2024,7 @@ func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup)SetScaleDownCooldownSeconds(val
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup)SetScaleDownPolicyType(val *string) {
+func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup) SetScaleDownPolicyType(val *string) {
 	_jsii_.Set(
 		j,
 		"scaleDownPolicyType",
@@ -2033,7 +2032,7 @@ func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup)SetScaleDownPolicyType(val *str
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup)SetScaleDownScalingAdjustment(val *float64) {
+func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup) SetScaleDownScalingAdjustment(val *float64) {
 	_jsii_.Set(
 		j,
 		"scaleDownScalingAdjustment",
@@ -2041,7 +2040,7 @@ func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup)SetScaleDownScalingAdjustment(v
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup)SetScaleUpAdjustmentType(val *string) {
+func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup) SetScaleUpAdjustmentType(val *string) {
 	_jsii_.Set(
 		j,
 		"scaleUpAdjustmentType",
@@ -2049,7 +2048,7 @@ func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup)SetScaleUpAdjustmentType(val *s
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup)SetScaleUpCooldownSeconds(val *float64) {
+func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup) SetScaleUpCooldownSeconds(val *float64) {
 	_jsii_.Set(
 		j,
 		"scaleUpCooldownSeconds",
@@ -2057,7 +2056,7 @@ func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup)SetScaleUpCooldownSeconds(val *
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup)SetScaleUpPolicyType(val *string) {
+func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup) SetScaleUpPolicyType(val *string) {
 	_jsii_.Set(
 		j,
 		"scaleUpPolicyType",
@@ -2065,7 +2064,7 @@ func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup)SetScaleUpPolicyType(val *strin
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup)SetScaleUpScalingAdjustment(val *float64) {
+func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup) SetScaleUpScalingAdjustment(val *float64) {
 	_jsii_.Set(
 		j,
 		"scaleUpScalingAdjustment",
@@ -2073,7 +2072,7 @@ func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup)SetScaleUpScalingAdjustment(val
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup)SetSecurityGroupIds(val *[]*string) {
+func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup) SetSecurityGroupIds(val *[]*string) {
 	_jsii_.Set(
 		j,
 		"securityGroupIds",
@@ -2081,7 +2080,7 @@ func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup)SetSecurityGroupIds(val *[]*str
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup)SetServiceLinkedRoleArn(val *string) {
+func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup) SetServiceLinkedRoleArn(val *string) {
 	_jsii_.Set(
 		j,
 		"serviceLinkedRoleArn",
@@ -2089,7 +2088,7 @@ func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup)SetServiceLinkedRoleArn(val *st
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup)SetStage(val *string) {
+func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup) SetStage(val *string) {
 	_jsii_.Set(
 		j,
 		"stage",
@@ -2097,7 +2096,7 @@ func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup)SetStage(val *string) {
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup)SetSubnetIds(val *[]*string) {
+func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup) SetSubnetIds(val *[]*string) {
 	if err := j.validateSetSubnetIdsParameters(val); err != nil {
 		panic(err)
 	}
@@ -2108,7 +2107,7 @@ func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup)SetSubnetIds(val *[]*string) {
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup)SetSuspendedProcesses(val *[]*string) {
+func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup) SetSuspendedProcesses(val *[]*string) {
 	_jsii_.Set(
 		j,
 		"suspendedProcesses",
@@ -2116,7 +2115,7 @@ func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup)SetSuspendedProcesses(val *[]*s
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup)SetTags(val *map[string]*string) {
+func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup) SetTags(val *map[string]*string) {
 	_jsii_.Set(
 		j,
 		"tags",
@@ -2124,7 +2123,7 @@ func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup)SetTags(val *map[string]*string
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup)SetTagSpecificationsResourceTypes(val *[]*string) {
+func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup) SetTagSpecificationsResourceTypes(val *[]*string) {
 	_jsii_.Set(
 		j,
 		"tagSpecificationsResourceTypes",
@@ -2132,7 +2131,7 @@ func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup)SetTagSpecificationsResourceTyp
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup)SetTargetGroupArns(val *[]*string) {
+func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup) SetTargetGroupArns(val *[]*string) {
 	_jsii_.Set(
 		j,
 		"targetGroupArns",
@@ -2140,7 +2139,7 @@ func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup)SetTargetGroupArns(val *[]*stri
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup)SetTenant(val *string) {
+func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup) SetTenant(val *string) {
 	_jsii_.Set(
 		j,
 		"tenant",
@@ -2148,7 +2147,7 @@ func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup)SetTenant(val *string) {
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup)SetTerminationPolicies(val *[]*string) {
+func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup) SetTerminationPolicies(val *[]*string) {
 	_jsii_.Set(
 		j,
 		"terminationPolicies",
@@ -2156,7 +2155,7 @@ func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup)SetTerminationPolicies(val *[]*
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup)SetUpdateDefaultVersion(val *bool) {
+func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup) SetUpdateDefaultVersion(val *bool) {
 	_jsii_.Set(
 		j,
 		"updateDefaultVersion",
@@ -2164,7 +2163,7 @@ func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup)SetUpdateDefaultVersion(val *bo
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup)SetUserDataBase64(val *string) {
+func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup) SetUserDataBase64(val *string) {
 	_jsii_.Set(
 		j,
 		"userDataBase64",
@@ -2172,7 +2171,7 @@ func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup)SetUserDataBase64(val *string) 
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup)SetWaitForCapacityTimeout(val *string) {
+func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup) SetWaitForCapacityTimeout(val *string) {
 	_jsii_.Set(
 		j,
 		"waitForCapacityTimeout",
@@ -2180,7 +2179,7 @@ func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup)SetWaitForCapacityTimeout(val *
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup)SetWaitForElbCapacity(val *float64) {
+func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup) SetWaitForElbCapacity(val *float64) {
 	_jsii_.Set(
 		j,
 		"waitForElbCapacity",
@@ -2188,7 +2187,7 @@ func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup)SetWaitForElbCapacity(val *floa
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup)SetWarmPool(val interface{}) {
+func (j *jsiiProxy_TerraformAwsEc2AutoscaleGroup) SetWarmPool(val interface{}) {
 	if err := j.validateSetWarmPoolParameters(val); err != nil {
 		panic(err)
 	}
@@ -2403,4 +2402,3 @@ func (t *jsiiProxy_TerraformAwsEc2AutoscaleGroup) ToTerraform() interface{} {
 
 	return returns
 }
-

@@ -283,7 +283,6 @@ func (j *jsiiProxy_DataCoderProvisioner) TerraformResourceType() *string {
 	return returns
 }
 
-
 // Create a new {@link https://registry.terraform.io/providers/coder/coder/0.21.0/docs/data-sources/provisioner coder_provisioner} Data Source.
 func NewDataCoderProvisioner(scope constructs.Construct, id *string, config *DataCoderProvisionerConfig) DataCoderProvisioner {
 	_init_.Initialize()
@@ -313,7 +312,7 @@ func NewDataCoderProvisioner_Override(d DataCoderProvisioner, scope constructs.C
 	)
 }
 
-func (j *jsiiProxy_DataCoderProvisioner)SetCount(val interface{}) {
+func (j *jsiiProxy_DataCoderProvisioner) SetCount(val interface{}) {
 	if err := j.validateSetCountParameters(val); err != nil {
 		panic(err)
 	}
@@ -324,7 +323,7 @@ func (j *jsiiProxy_DataCoderProvisioner)SetCount(val interface{}) {
 	)
 }
 
-func (j *jsiiProxy_DataCoderProvisioner)SetDependsOn(val *[]*string) {
+func (j *jsiiProxy_DataCoderProvisioner) SetDependsOn(val *[]*string) {
 	_jsii_.Set(
 		j,
 		"dependsOn",
@@ -332,7 +331,7 @@ func (j *jsiiProxy_DataCoderProvisioner)SetDependsOn(val *[]*string) {
 	)
 }
 
-func (j *jsiiProxy_DataCoderProvisioner)SetForEach(val cdktf.ITerraformIterator) {
+func (j *jsiiProxy_DataCoderProvisioner) SetForEach(val cdktf.ITerraformIterator) {
 	_jsii_.Set(
 		j,
 		"forEach",
@@ -340,7 +339,7 @@ func (j *jsiiProxy_DataCoderProvisioner)SetForEach(val cdktf.ITerraformIterator)
 	)
 }
 
-func (j *jsiiProxy_DataCoderProvisioner)SetId(val *string) {
+func (j *jsiiProxy_DataCoderProvisioner) SetId(val *string) {
 	if err := j.validateSetIdParameters(val); err != nil {
 		panic(err)
 	}
@@ -351,7 +350,7 @@ func (j *jsiiProxy_DataCoderProvisioner)SetId(val *string) {
 	)
 }
 
-func (j *jsiiProxy_DataCoderProvisioner)SetLifecycle(val *cdktf.TerraformResourceLifecycle) {
+func (j *jsiiProxy_DataCoderProvisioner) SetLifecycle(val *cdktf.TerraformResourceLifecycle) {
 	if err := j.validateSetLifecycleParameters(val); err != nil {
 		panic(err)
 	}
@@ -362,7 +361,7 @@ func (j *jsiiProxy_DataCoderProvisioner)SetLifecycle(val *cdktf.TerraformResourc
 	)
 }
 
-func (j *jsiiProxy_DataCoderProvisioner)SetProvider(val cdktf.TerraformProvider) {
+func (j *jsiiProxy_DataCoderProvisioner) SetProvider(val cdktf.TerraformProvider) {
 	_jsii_.Set(
 		j,
 		"provider",
@@ -748,4 +747,3 @@ func (d *jsiiProxy_DataCoderProvisioner) ToTerraform() interface{} {
 
 	return returns
 }
-

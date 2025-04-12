@@ -271,7 +271,6 @@ func (j *jsiiProxy_DataCoderGitAuth) TerraformResourceType() *string {
 	return returns
 }
 
-
 // Create a new {@link https://registry.terraform.io/providers/coder/coder/0.21.0/docs/data-sources/git_auth coder_git_auth} Data Source.
 func NewDataCoderGitAuth(scope constructs.Construct, id *string, config *DataCoderGitAuthConfig) DataCoderGitAuth {
 	_init_.Initialize()
@@ -301,7 +300,7 @@ func NewDataCoderGitAuth_Override(d DataCoderGitAuth, scope constructs.Construct
 	)
 }
 
-func (j *jsiiProxy_DataCoderGitAuth)SetCount(val interface{}) {
+func (j *jsiiProxy_DataCoderGitAuth) SetCount(val interface{}) {
 	if err := j.validateSetCountParameters(val); err != nil {
 		panic(err)
 	}
@@ -312,7 +311,7 @@ func (j *jsiiProxy_DataCoderGitAuth)SetCount(val interface{}) {
 	)
 }
 
-func (j *jsiiProxy_DataCoderGitAuth)SetDependsOn(val *[]*string) {
+func (j *jsiiProxy_DataCoderGitAuth) SetDependsOn(val *[]*string) {
 	_jsii_.Set(
 		j,
 		"dependsOn",
@@ -320,7 +319,7 @@ func (j *jsiiProxy_DataCoderGitAuth)SetDependsOn(val *[]*string) {
 	)
 }
 
-func (j *jsiiProxy_DataCoderGitAuth)SetForEach(val cdktf.ITerraformIterator) {
+func (j *jsiiProxy_DataCoderGitAuth) SetForEach(val cdktf.ITerraformIterator) {
 	_jsii_.Set(
 		j,
 		"forEach",
@@ -328,7 +327,7 @@ func (j *jsiiProxy_DataCoderGitAuth)SetForEach(val cdktf.ITerraformIterator) {
 	)
 }
 
-func (j *jsiiProxy_DataCoderGitAuth)SetId(val *string) {
+func (j *jsiiProxy_DataCoderGitAuth) SetId(val *string) {
 	if err := j.validateSetIdParameters(val); err != nil {
 		panic(err)
 	}
@@ -339,7 +338,7 @@ func (j *jsiiProxy_DataCoderGitAuth)SetId(val *string) {
 	)
 }
 
-func (j *jsiiProxy_DataCoderGitAuth)SetLifecycle(val *cdktf.TerraformResourceLifecycle) {
+func (j *jsiiProxy_DataCoderGitAuth) SetLifecycle(val *cdktf.TerraformResourceLifecycle) {
 	if err := j.validateSetLifecycleParameters(val); err != nil {
 		panic(err)
 	}
@@ -350,7 +349,7 @@ func (j *jsiiProxy_DataCoderGitAuth)SetLifecycle(val *cdktf.TerraformResourceLif
 	)
 }
 
-func (j *jsiiProxy_DataCoderGitAuth)SetProvider(val cdktf.TerraformProvider) {
+func (j *jsiiProxy_DataCoderGitAuth) SetProvider(val cdktf.TerraformProvider) {
 	_jsii_.Set(
 		j,
 		"provider",
@@ -728,4 +727,3 @@ func (d *jsiiProxy_DataCoderGitAuth) ToTerraform() interface{} {
 
 	return returns
 }
-

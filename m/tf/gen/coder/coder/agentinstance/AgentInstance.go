@@ -352,7 +352,6 @@ func (j *jsiiProxy_AgentInstance) TerraformResourceType() *string {
 	return returns
 }
 
-
 // Create a new {@link https://registry.terraform.io/providers/coder/coder/0.21.0/docs/resources/agent_instance coder_agent_instance} Resource.
 func NewAgentInstance(scope constructs.Construct, id *string, config *AgentInstanceConfig) AgentInstance {
 	_init_.Initialize()
@@ -382,7 +381,7 @@ func NewAgentInstance_Override(a AgentInstance, scope constructs.Construct, id *
 	)
 }
 
-func (j *jsiiProxy_AgentInstance)SetAgentId(val *string) {
+func (j *jsiiProxy_AgentInstance) SetAgentId(val *string) {
 	if err := j.validateSetAgentIdParameters(val); err != nil {
 		panic(err)
 	}
@@ -393,7 +392,7 @@ func (j *jsiiProxy_AgentInstance)SetAgentId(val *string) {
 	)
 }
 
-func (j *jsiiProxy_AgentInstance)SetConnection(val interface{}) {
+func (j *jsiiProxy_AgentInstance) SetConnection(val interface{}) {
 	if err := j.validateSetConnectionParameters(val); err != nil {
 		panic(err)
 	}
@@ -404,7 +403,7 @@ func (j *jsiiProxy_AgentInstance)SetConnection(val interface{}) {
 	)
 }
 
-func (j *jsiiProxy_AgentInstance)SetCount(val interface{}) {
+func (j *jsiiProxy_AgentInstance) SetCount(val interface{}) {
 	if err := j.validateSetCountParameters(val); err != nil {
 		panic(err)
 	}
@@ -415,7 +414,7 @@ func (j *jsiiProxy_AgentInstance)SetCount(val interface{}) {
 	)
 }
 
-func (j *jsiiProxy_AgentInstance)SetDependsOn(val *[]*string) {
+func (j *jsiiProxy_AgentInstance) SetDependsOn(val *[]*string) {
 	_jsii_.Set(
 		j,
 		"dependsOn",
@@ -423,7 +422,7 @@ func (j *jsiiProxy_AgentInstance)SetDependsOn(val *[]*string) {
 	)
 }
 
-func (j *jsiiProxy_AgentInstance)SetForEach(val cdktf.ITerraformIterator) {
+func (j *jsiiProxy_AgentInstance) SetForEach(val cdktf.ITerraformIterator) {
 	_jsii_.Set(
 		j,
 		"forEach",
@@ -431,7 +430,7 @@ func (j *jsiiProxy_AgentInstance)SetForEach(val cdktf.ITerraformIterator) {
 	)
 }
 
-func (j *jsiiProxy_AgentInstance)SetId(val *string) {
+func (j *jsiiProxy_AgentInstance) SetId(val *string) {
 	if err := j.validateSetIdParameters(val); err != nil {
 		panic(err)
 	}
@@ -442,7 +441,7 @@ func (j *jsiiProxy_AgentInstance)SetId(val *string) {
 	)
 }
 
-func (j *jsiiProxy_AgentInstance)SetInstanceId(val *string) {
+func (j *jsiiProxy_AgentInstance) SetInstanceId(val *string) {
 	if err := j.validateSetInstanceIdParameters(val); err != nil {
 		panic(err)
 	}
@@ -453,7 +452,7 @@ func (j *jsiiProxy_AgentInstance)SetInstanceId(val *string) {
 	)
 }
 
-func (j *jsiiProxy_AgentInstance)SetLifecycle(val *cdktf.TerraformResourceLifecycle) {
+func (j *jsiiProxy_AgentInstance) SetLifecycle(val *cdktf.TerraformResourceLifecycle) {
 	if err := j.validateSetLifecycleParameters(val); err != nil {
 		panic(err)
 	}
@@ -464,7 +463,7 @@ func (j *jsiiProxy_AgentInstance)SetLifecycle(val *cdktf.TerraformResourceLifecy
 	)
 }
 
-func (j *jsiiProxy_AgentInstance)SetProvider(val cdktf.TerraformProvider) {
+func (j *jsiiProxy_AgentInstance) SetProvider(val cdktf.TerraformProvider) {
 	_jsii_.Set(
 		j,
 		"provider",
@@ -472,7 +471,7 @@ func (j *jsiiProxy_AgentInstance)SetProvider(val cdktf.TerraformProvider) {
 	)
 }
 
-func (j *jsiiProxy_AgentInstance)SetProvisioners(val *[]interface{}) {
+func (j *jsiiProxy_AgentInstance) SetProvisioners(val *[]interface{}) {
 	if err := j.validateSetProvisionersParameters(val); err != nil {
 		panic(err)
 	}
@@ -929,4 +928,3 @@ func (a *jsiiProxy_AgentInstance) ToTerraform() interface{} {
 
 	return returns
 }
-

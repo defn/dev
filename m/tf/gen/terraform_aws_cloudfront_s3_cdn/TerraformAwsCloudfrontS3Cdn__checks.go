@@ -177,4 +177,3 @@ func validateNewTerraformAwsCloudfrontS3CdnParameters(scope constructs.Construct
 
 	return nil
 }
-

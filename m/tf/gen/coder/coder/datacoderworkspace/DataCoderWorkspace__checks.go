@@ -231,4 +231,3 @@ func validateNewDataCoderWorkspaceParameters(scope constructs.Construct, id *str
 
 	return nil
 }
-

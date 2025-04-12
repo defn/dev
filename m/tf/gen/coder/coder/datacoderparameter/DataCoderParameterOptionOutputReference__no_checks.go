@@ -87,4 +87,3 @@ func (j *jsiiProxy_DataCoderParameterOptionOutputReference) validateSetValuePara
 func validateNewDataCoderParameterOptionOutputReferenceParameters(terraformResource cdktf.IInterpolatingParent, terraformAttribute *string, complexObjectIndex *float64, complexObjectIsFromSet *bool) error {
 	return nil
 }
-

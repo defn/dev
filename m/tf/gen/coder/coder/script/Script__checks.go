@@ -530,4 +530,3 @@ func validateNewScriptParameters(scope constructs.Construct, id *string, config 
 
 	return nil
 }
-

@@ -103,4 +103,3 @@ func validateNewCoderProviderParameters(scope constructs.Construct, id *string, 
 
 	return nil
 }
-

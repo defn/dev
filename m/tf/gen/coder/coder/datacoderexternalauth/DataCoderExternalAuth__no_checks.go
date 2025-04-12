@@ -87,4 +87,3 @@ func (j *jsiiProxy_DataCoderExternalAuth) validateSetOptionalParameters(val inte
 func validateNewDataCoderExternalAuthParameters(scope constructs.Construct, id *string, config *DataCoderExternalAuthConfig) error {
 	return nil
 }
-

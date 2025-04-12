@@ -1,6 +1,5 @@
 package datacoderparameter
 
-
 type DataCoderParameterValidation struct {
 	// An error message to display if the value breaks the validation rules.
 	//
@@ -25,4 +24,3 @@ type DataCoderParameterValidation struct {
 	// Docs at Terraform Registry: {@link https://registry.terraform.io/providers/coder/coder/0.21.0/docs/data-sources/parameter#regex DataCoderParameter#regex}
 	Regex *string `field:"optional" json:"regex" yaml:"regex"`
 }
-

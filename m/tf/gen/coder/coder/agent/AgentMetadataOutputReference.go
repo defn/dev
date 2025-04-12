@@ -287,7 +287,6 @@ func (j *jsiiProxy_AgentMetadataOutputReference) TimeoutInput() *float64 {
 	return returns
 }
 
-
 func NewAgentMetadataOutputReference(terraformResource cdktf.IInterpolatingParent, terraformAttribute *string, complexObjectIndex *float64, complexObjectIsFromSet *bool) AgentMetadataOutputReference {
 	_init_.Initialize()
 
@@ -315,7 +314,7 @@ func NewAgentMetadataOutputReference_Override(a AgentMetadataOutputReference, te
 	)
 }
 
-func (j *jsiiProxy_AgentMetadataOutputReference)SetComplexObjectIndex(val interface{}) {
+func (j *jsiiProxy_AgentMetadataOutputReference) SetComplexObjectIndex(val interface{}) {
 	if err := j.validateSetComplexObjectIndexParameters(val); err != nil {
 		panic(err)
 	}
@@ -326,7 +325,7 @@ func (j *jsiiProxy_AgentMetadataOutputReference)SetComplexObjectIndex(val interf
 	)
 }
 
-func (j *jsiiProxy_AgentMetadataOutputReference)SetComplexObjectIsFromSet(val *bool) {
+func (j *jsiiProxy_AgentMetadataOutputReference) SetComplexObjectIsFromSet(val *bool) {
 	if err := j.validateSetComplexObjectIsFromSetParameters(val); err != nil {
 		panic(err)
 	}
@@ -337,7 +336,7 @@ func (j *jsiiProxy_AgentMetadataOutputReference)SetComplexObjectIsFromSet(val *b
 	)
 }
 
-func (j *jsiiProxy_AgentMetadataOutputReference)SetDisplayName(val *string) {
+func (j *jsiiProxy_AgentMetadataOutputReference) SetDisplayName(val *string) {
 	if err := j.validateSetDisplayNameParameters(val); err != nil {
 		panic(err)
 	}
@@ -348,7 +347,7 @@ func (j *jsiiProxy_AgentMetadataOutputReference)SetDisplayName(val *string) {
 	)
 }
 
-func (j *jsiiProxy_AgentMetadataOutputReference)SetInternalValue(val interface{}) {
+func (j *jsiiProxy_AgentMetadataOutputReference) SetInternalValue(val interface{}) {
 	if err := j.validateSetInternalValueParameters(val); err != nil {
 		panic(err)
 	}
@@ -359,7 +358,7 @@ func (j *jsiiProxy_AgentMetadataOutputReference)SetInternalValue(val interface{}
 	)
 }
 
-func (j *jsiiProxy_AgentMetadataOutputReference)SetInterval(val *float64) {
+func (j *jsiiProxy_AgentMetadataOutputReference) SetInterval(val *float64) {
 	if err := j.validateSetIntervalParameters(val); err != nil {
 		panic(err)
 	}
@@ -370,7 +369,7 @@ func (j *jsiiProxy_AgentMetadataOutputReference)SetInterval(val *float64) {
 	)
 }
 
-func (j *jsiiProxy_AgentMetadataOutputReference)SetKey(val *string) {
+func (j *jsiiProxy_AgentMetadataOutputReference) SetKey(val *string) {
 	if err := j.validateSetKeyParameters(val); err != nil {
 		panic(err)
 	}
@@ -381,7 +380,7 @@ func (j *jsiiProxy_AgentMetadataOutputReference)SetKey(val *string) {
 	)
 }
 
-func (j *jsiiProxy_AgentMetadataOutputReference)SetOrder(val *float64) {
+func (j *jsiiProxy_AgentMetadataOutputReference) SetOrder(val *float64) {
 	if err := j.validateSetOrderParameters(val); err != nil {
 		panic(err)
 	}
@@ -392,7 +391,7 @@ func (j *jsiiProxy_AgentMetadataOutputReference)SetOrder(val *float64) {
 	)
 }
 
-func (j *jsiiProxy_AgentMetadataOutputReference)SetScript(val *string) {
+func (j *jsiiProxy_AgentMetadataOutputReference) SetScript(val *string) {
 	if err := j.validateSetScriptParameters(val); err != nil {
 		panic(err)
 	}
@@ -403,7 +402,7 @@ func (j *jsiiProxy_AgentMetadataOutputReference)SetScript(val *string) {
 	)
 }
 
-func (j *jsiiProxy_AgentMetadataOutputReference)SetTerraformAttribute(val *string) {
+func (j *jsiiProxy_AgentMetadataOutputReference) SetTerraformAttribute(val *string) {
 	if err := j.validateSetTerraformAttributeParameters(val); err != nil {
 		panic(err)
 	}
@@ -414,7 +413,7 @@ func (j *jsiiProxy_AgentMetadataOutputReference)SetTerraformAttribute(val *strin
 	)
 }
 
-func (j *jsiiProxy_AgentMetadataOutputReference)SetTerraformResource(val cdktf.IInterpolatingParent) {
+func (j *jsiiProxy_AgentMetadataOutputReference) SetTerraformResource(val cdktf.IInterpolatingParent) {
 	if err := j.validateSetTerraformResourceParameters(val); err != nil {
 		panic(err)
 	}
@@ -425,7 +424,7 @@ func (j *jsiiProxy_AgentMetadataOutputReference)SetTerraformResource(val cdktf.I
 	)
 }
 
-func (j *jsiiProxy_AgentMetadataOutputReference)SetTimeout(val *float64) {
+func (j *jsiiProxy_AgentMetadataOutputReference) SetTimeout(val *float64) {
 	if err := j.validateSetTimeoutParameters(val); err != nil {
 		panic(err)
 	}
@@ -674,4 +673,3 @@ func (a *jsiiProxy_AgentMetadataOutputReference) ToString() *string {
 
 	return returns
 }
-

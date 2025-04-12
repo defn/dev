@@ -425,7 +425,6 @@ func (j *jsiiProxy_Metadata) TerraformResourceType() *string {
 	return returns
 }
 
-
 // Create a new {@link https://registry.terraform.io/providers/coder/coder/0.21.0/docs/resources/metadata coder_metadata} Resource.
 func NewMetadata(scope constructs.Construct, id *string, config *MetadataConfig) Metadata {
 	_init_.Initialize()
@@ -455,7 +454,7 @@ func NewMetadata_Override(m Metadata, scope constructs.Construct, id *string, co
 	)
 }
 
-func (j *jsiiProxy_Metadata)SetConnection(val interface{}) {
+func (j *jsiiProxy_Metadata) SetConnection(val interface{}) {
 	if err := j.validateSetConnectionParameters(val); err != nil {
 		panic(err)
 	}
@@ -466,7 +465,7 @@ func (j *jsiiProxy_Metadata)SetConnection(val interface{}) {
 	)
 }
 
-func (j *jsiiProxy_Metadata)SetCount(val interface{}) {
+func (j *jsiiProxy_Metadata) SetCount(val interface{}) {
 	if err := j.validateSetCountParameters(val); err != nil {
 		panic(err)
 	}
@@ -477,7 +476,7 @@ func (j *jsiiProxy_Metadata)SetCount(val interface{}) {
 	)
 }
 
-func (j *jsiiProxy_Metadata)SetDailyCost(val *float64) {
+func (j *jsiiProxy_Metadata) SetDailyCost(val *float64) {
 	if err := j.validateSetDailyCostParameters(val); err != nil {
 		panic(err)
 	}
@@ -488,7 +487,7 @@ func (j *jsiiProxy_Metadata)SetDailyCost(val *float64) {
 	)
 }
 
-func (j *jsiiProxy_Metadata)SetDependsOn(val *[]*string) {
+func (j *jsiiProxy_Metadata) SetDependsOn(val *[]*string) {
 	_jsii_.Set(
 		j,
 		"dependsOn",
@@ -496,7 +495,7 @@ func (j *jsiiProxy_Metadata)SetDependsOn(val *[]*string) {
 	)
 }
 
-func (j *jsiiProxy_Metadata)SetForEach(val cdktf.ITerraformIterator) {
+func (j *jsiiProxy_Metadata) SetForEach(val cdktf.ITerraformIterator) {
 	_jsii_.Set(
 		j,
 		"forEach",
@@ -504,7 +503,7 @@ func (j *jsiiProxy_Metadata)SetForEach(val cdktf.ITerraformIterator) {
 	)
 }
 
-func (j *jsiiProxy_Metadata)SetHide(val interface{}) {
+func (j *jsiiProxy_Metadata) SetHide(val interface{}) {
 	if err := j.validateSetHideParameters(val); err != nil {
 		panic(err)
 	}
@@ -515,7 +514,7 @@ func (j *jsiiProxy_Metadata)SetHide(val interface{}) {
 	)
 }
 
-func (j *jsiiProxy_Metadata)SetIcon(val *string) {
+func (j *jsiiProxy_Metadata) SetIcon(val *string) {
 	if err := j.validateSetIconParameters(val); err != nil {
 		panic(err)
 	}
@@ -526,7 +525,7 @@ func (j *jsiiProxy_Metadata)SetIcon(val *string) {
 	)
 }
 
-func (j *jsiiProxy_Metadata)SetId(val *string) {
+func (j *jsiiProxy_Metadata) SetId(val *string) {
 	if err := j.validateSetIdParameters(val); err != nil {
 		panic(err)
 	}
@@ -537,7 +536,7 @@ func (j *jsiiProxy_Metadata)SetId(val *string) {
 	)
 }
 
-func (j *jsiiProxy_Metadata)SetLifecycle(val *cdktf.TerraformResourceLifecycle) {
+func (j *jsiiProxy_Metadata) SetLifecycle(val *cdktf.TerraformResourceLifecycle) {
 	if err := j.validateSetLifecycleParameters(val); err != nil {
 		panic(err)
 	}
@@ -548,7 +547,7 @@ func (j *jsiiProxy_Metadata)SetLifecycle(val *cdktf.TerraformResourceLifecycle) 
 	)
 }
 
-func (j *jsiiProxy_Metadata)SetProvider(val cdktf.TerraformProvider) {
+func (j *jsiiProxy_Metadata) SetProvider(val cdktf.TerraformProvider) {
 	_jsii_.Set(
 		j,
 		"provider",
@@ -556,7 +555,7 @@ func (j *jsiiProxy_Metadata)SetProvider(val cdktf.TerraformProvider) {
 	)
 }
 
-func (j *jsiiProxy_Metadata)SetProvisioners(val *[]interface{}) {
+func (j *jsiiProxy_Metadata) SetProvisioners(val *[]interface{}) {
 	if err := j.validateSetProvisionersParameters(val); err != nil {
 		panic(err)
 	}
@@ -567,7 +566,7 @@ func (j *jsiiProxy_Metadata)SetProvisioners(val *[]interface{}) {
 	)
 }
 
-func (j *jsiiProxy_Metadata)SetResourceId(val *string) {
+func (j *jsiiProxy_Metadata) SetResourceId(val *string) {
 	if err := j.validateSetResourceIdParameters(val); err != nil {
 		panic(err)
 	}
@@ -1067,4 +1066,3 @@ func (m *jsiiProxy_Metadata) ToTerraform() interface{} {
 
 	return returns
 }
-

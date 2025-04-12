@@ -1,6 +1,5 @@
 package agent
 
-
 type AgentDisplayApps struct {
 	// Display the port-forwarding helper button in the agent bar.
 	//
@@ -23,4 +22,3 @@ type AgentDisplayApps struct {
 	// Docs at Terraform Registry: {@link https://registry.terraform.io/providers/coder/coder/0.21.0/docs/resources/agent#web_terminal Agent#web_terminal}
 	WebTerminal interface{} `field:"optional" json:"webTerminal" yaml:"webTerminal"`
 }
-

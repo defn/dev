@@ -169,4 +169,3 @@ func validateNewTerraformAwsVpcParameters(scope constructs.Construct, id *string
 
 	return nil
 }
-

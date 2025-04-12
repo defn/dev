@@ -801,7 +801,6 @@ func (j *jsiiProxy_TerraformAwsVpc) VpcMainRouteTableIdOutput() *string {
 	return returns
 }
 
-
 func NewTerraformAwsVpc(scope constructs.Construct, id *string, config *TerraformAwsVpcConfig) TerraformAwsVpc {
 	_init_.Initialize()
 
@@ -829,7 +828,7 @@ func NewTerraformAwsVpc_Override(t TerraformAwsVpc, scope constructs.Construct, 
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsVpc)SetAdditionalTagMap(val *map[string]*string) {
+func (j *jsiiProxy_TerraformAwsVpc) SetAdditionalTagMap(val *map[string]*string) {
 	_jsii_.Set(
 		j,
 		"additionalTagMap",
@@ -837,7 +836,7 @@ func (j *jsiiProxy_TerraformAwsVpc)SetAdditionalTagMap(val *map[string]*string) 
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsVpc)SetAssignGeneratedIpv6CidrBlock(val *bool) {
+func (j *jsiiProxy_TerraformAwsVpc) SetAssignGeneratedIpv6CidrBlock(val *bool) {
 	_jsii_.Set(
 		j,
 		"assignGeneratedIpv6CidrBlock",
@@ -845,7 +844,7 @@ func (j *jsiiProxy_TerraformAwsVpc)SetAssignGeneratedIpv6CidrBlock(val *bool) {
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsVpc)SetAttributes(val *[]*string) {
+func (j *jsiiProxy_TerraformAwsVpc) SetAttributes(val *[]*string) {
 	_jsii_.Set(
 		j,
 		"attributes",
@@ -853,7 +852,7 @@ func (j *jsiiProxy_TerraformAwsVpc)SetAttributes(val *[]*string) {
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsVpc)SetContext(val interface{}) {
+func (j *jsiiProxy_TerraformAwsVpc) SetContext(val interface{}) {
 	if err := j.validateSetContextParameters(val); err != nil {
 		panic(err)
 	}
@@ -864,7 +863,7 @@ func (j *jsiiProxy_TerraformAwsVpc)SetContext(val interface{}) {
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsVpc)SetDefaultNetworkAclDenyAll(val *bool) {
+func (j *jsiiProxy_TerraformAwsVpc) SetDefaultNetworkAclDenyAll(val *bool) {
 	_jsii_.Set(
 		j,
 		"defaultNetworkAclDenyAll",
@@ -872,7 +871,7 @@ func (j *jsiiProxy_TerraformAwsVpc)SetDefaultNetworkAclDenyAll(val *bool) {
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsVpc)SetDefaultRouteTableNoRoutes(val *bool) {
+func (j *jsiiProxy_TerraformAwsVpc) SetDefaultRouteTableNoRoutes(val *bool) {
 	_jsii_.Set(
 		j,
 		"defaultRouteTableNoRoutes",
@@ -880,7 +879,7 @@ func (j *jsiiProxy_TerraformAwsVpc)SetDefaultRouteTableNoRoutes(val *bool) {
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsVpc)SetDefaultSecurityGroupDenyAll(val *bool) {
+func (j *jsiiProxy_TerraformAwsVpc) SetDefaultSecurityGroupDenyAll(val *bool) {
 	_jsii_.Set(
 		j,
 		"defaultSecurityGroupDenyAll",
@@ -888,7 +887,7 @@ func (j *jsiiProxy_TerraformAwsVpc)SetDefaultSecurityGroupDenyAll(val *bool) {
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsVpc)SetDelimiter(val *string) {
+func (j *jsiiProxy_TerraformAwsVpc) SetDelimiter(val *string) {
 	_jsii_.Set(
 		j,
 		"delimiter",
@@ -896,7 +895,7 @@ func (j *jsiiProxy_TerraformAwsVpc)SetDelimiter(val *string) {
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsVpc)SetDependsOn(val *[]*string) {
+func (j *jsiiProxy_TerraformAwsVpc) SetDependsOn(val *[]*string) {
 	_jsii_.Set(
 		j,
 		"dependsOn",
@@ -904,7 +903,7 @@ func (j *jsiiProxy_TerraformAwsVpc)SetDependsOn(val *[]*string) {
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsVpc)SetDescriptorFormats(val interface{}) {
+func (j *jsiiProxy_TerraformAwsVpc) SetDescriptorFormats(val interface{}) {
 	if err := j.validateSetDescriptorFormatsParameters(val); err != nil {
 		panic(err)
 	}
@@ -915,7 +914,7 @@ func (j *jsiiProxy_TerraformAwsVpc)SetDescriptorFormats(val interface{}) {
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsVpc)SetDnsHostnamesEnabled(val *bool) {
+func (j *jsiiProxy_TerraformAwsVpc) SetDnsHostnamesEnabled(val *bool) {
 	_jsii_.Set(
 		j,
 		"dnsHostnamesEnabled",
@@ -923,7 +922,7 @@ func (j *jsiiProxy_TerraformAwsVpc)SetDnsHostnamesEnabled(val *bool) {
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsVpc)SetDnsSupportEnabled(val *bool) {
+func (j *jsiiProxy_TerraformAwsVpc) SetDnsSupportEnabled(val *bool) {
 	_jsii_.Set(
 		j,
 		"dnsSupportEnabled",
@@ -931,7 +930,7 @@ func (j *jsiiProxy_TerraformAwsVpc)SetDnsSupportEnabled(val *bool) {
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsVpc)SetEnabled(val *bool) {
+func (j *jsiiProxy_TerraformAwsVpc) SetEnabled(val *bool) {
 	_jsii_.Set(
 		j,
 		"enabled",
@@ -939,7 +938,7 @@ func (j *jsiiProxy_TerraformAwsVpc)SetEnabled(val *bool) {
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsVpc)SetEnvironment(val *string) {
+func (j *jsiiProxy_TerraformAwsVpc) SetEnvironment(val *string) {
 	_jsii_.Set(
 		j,
 		"environment",
@@ -947,7 +946,7 @@ func (j *jsiiProxy_TerraformAwsVpc)SetEnvironment(val *string) {
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsVpc)SetForEach(val cdktf.ITerraformIterator) {
+func (j *jsiiProxy_TerraformAwsVpc) SetForEach(val cdktf.ITerraformIterator) {
 	_jsii_.Set(
 		j,
 		"forEach",
@@ -955,7 +954,7 @@ func (j *jsiiProxy_TerraformAwsVpc)SetForEach(val cdktf.ITerraformIterator) {
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsVpc)SetIdLengthLimit(val *float64) {
+func (j *jsiiProxy_TerraformAwsVpc) SetIdLengthLimit(val *float64) {
 	_jsii_.Set(
 		j,
 		"idLengthLimit",
@@ -963,7 +962,7 @@ func (j *jsiiProxy_TerraformAwsVpc)SetIdLengthLimit(val *float64) {
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsVpc)SetInstanceTenancy(val *string) {
+func (j *jsiiProxy_TerraformAwsVpc) SetInstanceTenancy(val *string) {
 	_jsii_.Set(
 		j,
 		"instanceTenancy",
@@ -971,7 +970,7 @@ func (j *jsiiProxy_TerraformAwsVpc)SetInstanceTenancy(val *string) {
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsVpc)SetInternetGatewayEnabled(val *bool) {
+func (j *jsiiProxy_TerraformAwsVpc) SetInternetGatewayEnabled(val *bool) {
 	_jsii_.Set(
 		j,
 		"internetGatewayEnabled",
@@ -979,7 +978,7 @@ func (j *jsiiProxy_TerraformAwsVpc)SetInternetGatewayEnabled(val *bool) {
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsVpc)SetIpv4AdditionalCidrBlockAssociations(val interface{}) {
+func (j *jsiiProxy_TerraformAwsVpc) SetIpv4AdditionalCidrBlockAssociations(val interface{}) {
 	if err := j.validateSetIpv4AdditionalCidrBlockAssociationsParameters(val); err != nil {
 		panic(err)
 	}
@@ -990,7 +989,7 @@ func (j *jsiiProxy_TerraformAwsVpc)SetIpv4AdditionalCidrBlockAssociations(val in
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsVpc)SetIpv4CidrBlockAssociationTimeouts(val interface{}) {
+func (j *jsiiProxy_TerraformAwsVpc) SetIpv4CidrBlockAssociationTimeouts(val interface{}) {
 	if err := j.validateSetIpv4CidrBlockAssociationTimeoutsParameters(val); err != nil {
 		panic(err)
 	}
@@ -1001,7 +1000,7 @@ func (j *jsiiProxy_TerraformAwsVpc)SetIpv4CidrBlockAssociationTimeouts(val inter
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsVpc)SetIpv4PrimaryCidrBlock(val *string) {
+func (j *jsiiProxy_TerraformAwsVpc) SetIpv4PrimaryCidrBlock(val *string) {
 	_jsii_.Set(
 		j,
 		"ipv4PrimaryCidrBlock",
@@ -1009,7 +1008,7 @@ func (j *jsiiProxy_TerraformAwsVpc)SetIpv4PrimaryCidrBlock(val *string) {
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsVpc)SetIpv4PrimaryCidrBlockAssociation(val interface{}) {
+func (j *jsiiProxy_TerraformAwsVpc) SetIpv4PrimaryCidrBlockAssociation(val interface{}) {
 	if err := j.validateSetIpv4PrimaryCidrBlockAssociationParameters(val); err != nil {
 		panic(err)
 	}
@@ -1020,7 +1019,7 @@ func (j *jsiiProxy_TerraformAwsVpc)SetIpv4PrimaryCidrBlockAssociation(val interf
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsVpc)SetIpv6AdditionalCidrBlockAssociations(val interface{}) {
+func (j *jsiiProxy_TerraformAwsVpc) SetIpv6AdditionalCidrBlockAssociations(val interface{}) {
 	if err := j.validateSetIpv6AdditionalCidrBlockAssociationsParameters(val); err != nil {
 		panic(err)
 	}
@@ -1031,7 +1030,7 @@ func (j *jsiiProxy_TerraformAwsVpc)SetIpv6AdditionalCidrBlockAssociations(val in
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsVpc)SetIpv6CidrBlockAssociationTimeouts(val interface{}) {
+func (j *jsiiProxy_TerraformAwsVpc) SetIpv6CidrBlockAssociationTimeouts(val interface{}) {
 	if err := j.validateSetIpv6CidrBlockAssociationTimeoutsParameters(val); err != nil {
 		panic(err)
 	}
@@ -1042,7 +1041,7 @@ func (j *jsiiProxy_TerraformAwsVpc)SetIpv6CidrBlockAssociationTimeouts(val inter
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsVpc)SetIpv6CidrBlockNetworkBorderGroup(val *string) {
+func (j *jsiiProxy_TerraformAwsVpc) SetIpv6CidrBlockNetworkBorderGroup(val *string) {
 	_jsii_.Set(
 		j,
 		"ipv6CidrBlockNetworkBorderGroup",
@@ -1050,7 +1049,7 @@ func (j *jsiiProxy_TerraformAwsVpc)SetIpv6CidrBlockNetworkBorderGroup(val *strin
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsVpc)SetIpv6EgressOnlyInternetGatewayEnabled(val *bool) {
+func (j *jsiiProxy_TerraformAwsVpc) SetIpv6EgressOnlyInternetGatewayEnabled(val *bool) {
 	_jsii_.Set(
 		j,
 		"ipv6EgressOnlyInternetGatewayEnabled",
@@ -1058,7 +1057,7 @@ func (j *jsiiProxy_TerraformAwsVpc)SetIpv6EgressOnlyInternetGatewayEnabled(val *
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsVpc)SetIpv6PrimaryCidrBlockAssociation(val interface{}) {
+func (j *jsiiProxy_TerraformAwsVpc) SetIpv6PrimaryCidrBlockAssociation(val interface{}) {
 	if err := j.validateSetIpv6PrimaryCidrBlockAssociationParameters(val); err != nil {
 		panic(err)
 	}
@@ -1069,7 +1068,7 @@ func (j *jsiiProxy_TerraformAwsVpc)SetIpv6PrimaryCidrBlockAssociation(val interf
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsVpc)SetLabelKeyCase(val *string) {
+func (j *jsiiProxy_TerraformAwsVpc) SetLabelKeyCase(val *string) {
 	_jsii_.Set(
 		j,
 		"labelKeyCase",
@@ -1077,7 +1076,7 @@ func (j *jsiiProxy_TerraformAwsVpc)SetLabelKeyCase(val *string) {
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsVpc)SetLabelOrder(val *[]*string) {
+func (j *jsiiProxy_TerraformAwsVpc) SetLabelOrder(val *[]*string) {
 	_jsii_.Set(
 		j,
 		"labelOrder",
@@ -1085,7 +1084,7 @@ func (j *jsiiProxy_TerraformAwsVpc)SetLabelOrder(val *[]*string) {
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsVpc)SetLabelsAsTags(val *[]*string) {
+func (j *jsiiProxy_TerraformAwsVpc) SetLabelsAsTags(val *[]*string) {
 	_jsii_.Set(
 		j,
 		"labelsAsTags",
@@ -1093,7 +1092,7 @@ func (j *jsiiProxy_TerraformAwsVpc)SetLabelsAsTags(val *[]*string) {
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsVpc)SetLabelValueCase(val *string) {
+func (j *jsiiProxy_TerraformAwsVpc) SetLabelValueCase(val *string) {
 	_jsii_.Set(
 		j,
 		"labelValueCase",
@@ -1101,7 +1100,7 @@ func (j *jsiiProxy_TerraformAwsVpc)SetLabelValueCase(val *string) {
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsVpc)SetName(val *string) {
+func (j *jsiiProxy_TerraformAwsVpc) SetName(val *string) {
 	_jsii_.Set(
 		j,
 		"name",
@@ -1109,7 +1108,7 @@ func (j *jsiiProxy_TerraformAwsVpc)SetName(val *string) {
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsVpc)SetNamespace(val *string) {
+func (j *jsiiProxy_TerraformAwsVpc) SetNamespace(val *string) {
 	_jsii_.Set(
 		j,
 		"namespace",
@@ -1117,7 +1116,7 @@ func (j *jsiiProxy_TerraformAwsVpc)SetNamespace(val *string) {
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsVpc)SetNetworkAddressUsageMetricsEnabled(val *bool) {
+func (j *jsiiProxy_TerraformAwsVpc) SetNetworkAddressUsageMetricsEnabled(val *bool) {
 	_jsii_.Set(
 		j,
 		"networkAddressUsageMetricsEnabled",
@@ -1125,7 +1124,7 @@ func (j *jsiiProxy_TerraformAwsVpc)SetNetworkAddressUsageMetricsEnabled(val *boo
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsVpc)SetRegexReplaceChars(val *string) {
+func (j *jsiiProxy_TerraformAwsVpc) SetRegexReplaceChars(val *string) {
 	_jsii_.Set(
 		j,
 		"regexReplaceChars",
@@ -1133,7 +1132,7 @@ func (j *jsiiProxy_TerraformAwsVpc)SetRegexReplaceChars(val *string) {
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsVpc)SetStage(val *string) {
+func (j *jsiiProxy_TerraformAwsVpc) SetStage(val *string) {
 	_jsii_.Set(
 		j,
 		"stage",
@@ -1141,7 +1140,7 @@ func (j *jsiiProxy_TerraformAwsVpc)SetStage(val *string) {
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsVpc)SetTags(val *map[string]*string) {
+func (j *jsiiProxy_TerraformAwsVpc) SetTags(val *map[string]*string) {
 	_jsii_.Set(
 		j,
 		"tags",
@@ -1149,7 +1148,7 @@ func (j *jsiiProxy_TerraformAwsVpc)SetTags(val *map[string]*string) {
 	)
 }
 
-func (j *jsiiProxy_TerraformAwsVpc)SetTenant(val *string) {
+func (j *jsiiProxy_TerraformAwsVpc) SetTenant(val *string) {
 	_jsii_.Set(
 		j,
 		"tenant",
@@ -1361,4 +1360,3 @@ func (t *jsiiProxy_TerraformAwsVpc) ToTerraform() interface{} {
 
 	return returns
 }
-

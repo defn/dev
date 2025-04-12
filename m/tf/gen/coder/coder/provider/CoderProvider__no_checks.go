@@ -35,4 +35,3 @@ func (j *jsiiProxy_CoderProvider) validateSetFeatureUseManagedVariablesParameter
 func validateNewCoderProviderParameters(scope constructs.Construct, id *string, config *CoderProviderConfig) error {
 	return nil
 }
-

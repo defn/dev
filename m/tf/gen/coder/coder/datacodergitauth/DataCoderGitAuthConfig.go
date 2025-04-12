@@ -27,4 +27,3 @@ type DataCoderGitAuthConfig struct {
 	// If you experience problems setting this value it might not be settable. Please take a look at the provider documentation to ensure it should be settable.
 	Id *string `field:"required" json:"id" yaml:"id"`
 }
-
