@@ -255,10 +255,10 @@ fast_inner:
 	~/bin/persist-cache
 
 sync_inner:
-	if [[ "$(shell uname -s)" == "Linux" ]]; then t play-upgrade ~/.local/bin/mise run local upgrade; fi
-	if [[ "$(shell uname -s)" == "Linux" ]]; then t play-ubuntu ~/.local/bin/mise run local ubuntu; fi
+	if [[ "$(shell uname -s)" == "Linux" ]]; then ~/bin/t play-upgrade ~/.local/bin/mise run local upgrade; fi
+	if [[ "$(shell uname -s)" == "Linux" ]]; then ~/bin/t play-ubuntu ~/.local/bin/mise run local ubuntu; fi
 	$(MAKE) fast_inner
-	if [[ "$(shell uname -s)" == "Linux" ]]; then t play-fixup ~/.local/bin/mise run local fixup; fi
+	if [[ "$(shell uname -s)" == "Linux" ]]; then ~/bin/t play-fixup ~/.local/bin/mise run local fixup; fi
 
 up:
 	cd m/dc && just up
