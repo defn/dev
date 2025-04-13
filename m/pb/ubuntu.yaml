@@ -81,6 +81,8 @@
         path:
           - /usr/bin/gs
           - /home/ubuntu/bin/Linux/bazel
+          - /home/ubuntu/bin/Linux/go
+          - /home/ubuntu/bin/Linux/cue
         state: absent
     - name: Allow user to run Docker
       become: true
