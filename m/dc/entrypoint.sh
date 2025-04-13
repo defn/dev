@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-sudo chown ubuntu:ubuntu ~/.config/coderv2
+sudo chown -R ubuntu:ubuntu ~/.config/coderv2 ~/.local/share/code-server/extensions ~/.config ~/.local
 
 (
 	sleep 5

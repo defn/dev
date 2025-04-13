@@ -19,8 +19,10 @@ services:
     volumes:
       - tailscale:/var/lib/tailscale
       - coder:/home/ubuntu/.config/coderv2
+      - extentions:/home/ubuntu/.local/share/code-server/extensions
       - /var/run/docker.sock:/var/run/docker.sock
       - ./:/app
 volumes:
   tailscale:
   coder:
+  extensions:
