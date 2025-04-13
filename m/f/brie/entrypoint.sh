@@ -2,7 +2,7 @@
 
 set -efu
 
-sudo install -d -m 0700 -o ubuntu -g ubuntu /data/coder /data/tailscale /data/extensions
+sudo install -d -m 0700 -o ubuntu -g ubuntu /data /data/coder /data/tailscale /data/extensions
 
 cd
 source .bash_profile
