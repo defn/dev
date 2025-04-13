@@ -103,6 +103,6 @@ inventory: {
 		"gori",
 		"lanpy",
 		"penguin-dev",
-		"smal-dev",
+		"small-dev",
 	]
 }
