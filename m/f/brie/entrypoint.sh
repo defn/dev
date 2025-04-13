@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-set -efu
+set -xefu
 
 sudo install -d -m 0700 -o ubuntu -g ubuntu /data /data/coder /data/tailscale /data/extensions
 
