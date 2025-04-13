@@ -12,17 +12,19 @@ require (
 	github.com/aws/jsii-runtime-go v1.111.0
 	github.com/bitfield/script v0.24.1
 	github.com/cdktf/cdktf-provider-aws-go/aws/v19 v19.60.1
-	github.com/cdktf/cdktf-provider-null-go/null/v10 v10.0.1
 	github.com/charmbracelet/bubbles v0.21.0
 	github.com/charmbracelet/bubbletea v1.3.4
 	github.com/charmbracelet/lipgloss v1.1.0
 	github.com/gin-gonic/gin v1.10.0
 	github.com/hashicorp/terraform-cdk-go/cdktf v0.20.11
+	github.com/lucasb-eyer/go-colorful v1.2.0
+	github.com/muesli/gamut v0.3.1
 	github.com/noisysockets/noisysockets v0.28.0
 	github.com/spf13/cobra v1.9.1
 	github.com/spf13/viper v1.20.1
 	github.com/urfave/cli/v2 v2.27.6
 	golang.org/x/sys v0.32.0
+	golang.org/x/term v0.31.0
 )
 
 require (
@@ -61,7 +63,6 @@ require (
 	github.com/json-iterator/go v1.1.12 // indirect
 	github.com/klauspost/cpuid/v2 v2.2.10 // indirect
 	github.com/leodido/go-urn v1.4.0 // indirect
-	github.com/lucasb-eyer/go-colorful v1.2.0 // indirect
 	github.com/mattn/go-colorable v0.1.14 // indirect
 	github.com/mattn/go-isatty v0.0.20 // indirect
 	github.com/mattn/go-localereader v0.0.1 // indirect
@@ -72,6 +73,8 @@ require (
 	github.com/modern-go/reflect2 v1.0.2 // indirect
 	github.com/muesli/ansi v0.0.0-20230316100256-276c6243b2f6 // indirect
 	github.com/muesli/cancelreader v0.2.2 // indirect
+	github.com/muesli/clusters v0.0.0-20200529215643-2700303c1762 // indirect
+	github.com/muesli/kmeans v0.3.1 // indirect
 	github.com/muesli/termenv v0.16.0 // indirect
 	github.com/noisysockets/netstack v0.9.0 // indirect
 	github.com/noisysockets/netutil v0.9.0 // indirect

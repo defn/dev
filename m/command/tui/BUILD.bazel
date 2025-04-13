@@ -10,6 +10,9 @@ go_library(
         "@com_github_charmbracelet_bubbles//list",
         "@com_github_charmbracelet_bubbletea//:bubbletea",
         "@com_github_charmbracelet_lipgloss//:lipgloss",
+        "@com_github_lucasb_eyer_go_colorful//:go-colorful",
+        "@com_github_muesli_gamut//:gamut",
         "@com_github_spf13_cobra//:cobra",
+        "@org_golang_x_term//:term",
     ],
 )
