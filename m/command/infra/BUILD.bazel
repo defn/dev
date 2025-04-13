@@ -6,7 +6,11 @@ go_library(
     importpath = "github.com/defn/dev/m/command/infra",
     visibility = ["//visibility:public"],
     deps = [
-        "@com_github_aws_jsii_runtime_go//:jsii-runtime-go",
+        "//command/root",
+        "//infra:infra_lib",
+        "//tf:tf_lib",
+        "@com_github_hashicorp_terraform_cdk_go_cdktf//:cdktf",
+        "@com_github_spf13_cobra//:cobra",
         "@org_cuelang_go//cue",
         "@org_cuelang_go//cue/cuecontext",
         "@org_cuelang_go//cue/load",

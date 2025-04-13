@@ -18,7 +18,7 @@ import (
 	"github.com/cdktf/cdktf-provider-aws-go/aws/v19/ssoadminmanagedpolicyattachment"
 	"github.com/cdktf/cdktf-provider-aws-go/aws/v19/ssoadminpermissionset"
 
-	infra "github.com/defn/dev/m/command/infra"
+	"github.com/defn/dev/m/infra"
 )
 
 func AwsOrganizationStack(scope constructs.Construct, site *infra.AwsProps, org *infra.AwsOrganization) cdktf.TerraformStack {
@@ -131,7 +131,7 @@ func AwsOrganizationStack(scope constructs.Construct, site *infra.AwsProps, org 
 			// iam_user_access_to_billing, role_name
 			organizations_account_config = organizationsaccount.OrganizationsAccountConfig{
 				Name:  infra.Js(fmt.Sprintf("%s%s", acct.Prefix, acct.Name)),
-				Email: infra.Jsf(acct.Email),
+				Email: infra.Jsf("%s", acct.Email),
 				Tags:  &map[string]*string{"ManagedBy": infra.Js("Terraform")},
 			}
 		} else {
@@ -139,13 +139,13 @@ func AwsOrganizationStack(scope constructs.Construct, site *infra.AwsProps, org 
 			if acct.Imported == "yes" {
 				organizations_account_config = organizationsaccount.OrganizationsAccountConfig{
 					Name:  infra.Js(fmt.Sprintf("%s%s", acct.Prefix, acct.Name)),
-					Email: infra.Jsf(acct.Email),
+					Email: infra.Jsf("%s", acct.Email),
 					Tags:  &map[string]*string{"ManagedBy": infra.Js("Terraform")},
 				}
 			} else {
 				organizations_account_config = organizationsaccount.OrganizationsAccountConfig{
 					Name:                   infra.Js(fmt.Sprintf("%s%s", acct.Prefix, acct.Name)),
-					Email:                  infra.Jsf(acct.Email),
+					Email:                  infra.Jsf("%s", acct.Email),
 					Tags:                   &map[string]*string{"ManagedBy": infra.Js("Terraform")},
 					IamUserAccessToBilling: infra.Js("ALLOW"),
 					RoleName:               infra.Js("OrganizationAccountAccessRole"),

@@ -5,6 +5,20 @@ import (
 	inf "github.com/defn/dev/m/command/infra"
 )
 
+input: {
+	backend: inf.#AwsBackend
+
+	organization: [NAME=string]: inf.#AwsOrganization & {
+		name: NAME
+
+		#no_admins: []
+		admins: [... {...}] | *#no_admins
+
+		#no_accounts: []
+		accounts: [...inf.#AwsAccount] | *#no_accounts
+	}
+}
+
 full_accounts: [
 	"org", // organization master
 	"net", // network
