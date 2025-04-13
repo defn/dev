@@ -22,7 +22,7 @@ fi
 case "$(basename "$(pwd)")" in
 svc)
 	set +f
-	runmany 'cd $1 && echo "$(basename $(pwd)) $(mise run status 2>/dev/null)"' */ | sort | talign 2
+	runmany 'if test -d $1; then cd $1 && echo "$(basename $(pwd)) $(mise run status 2>/dev/null)"; fi' */ | sort | talign 2
 	set -f
 	;;
 *)
