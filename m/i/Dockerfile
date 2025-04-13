@@ -1,6 +1,6 @@
 # syntax=docker/dockerfile:1.14.0
 
-FROM ubuntu:noble-20250127
+FROM ubuntu:noble-20250404
 
 ENV DEBIAN_FRONTEND=noninteractive
 
@@ -43,12 +43,12 @@ CMD [ "/home/ubuntu/m/svc" ]
 RUN curl -sSL https://mise.run | bash
 
 # initial clone and build, long term caching
-ARG BASE=5
+ARG BASE=6
 RUN echo "$BASE"
 RUN git clone https://github.com/defn/dev dev && mv dev/.git . && git reset --hard && rm -rf dev
-RUN	--mount=type=secret,id=GITHUB_TOKEN,env=GITHUB_TOKEN make sync
+RUN	--mount=type=secret,id=GITHUB_TOKEN,env=GITHUB_TOKEN ~/bin/with-env make sync
 
 # release rebuild, short term caching
 ARG RELEASE
 RUN echo "$RELEASE"
-RUN	--mount=type=secret,id=GITHUB_TOKEN,env=GITHUB_TOKEN make sync
+RUN	--mount=type=secret,id=GITHUB_TOKEN,env=GITHUB_TOKEN ~/bin/with-env make sync
