@@ -17,6 +17,7 @@ gron = "0.7.1"
 jq = "1.7.1"
 just = "1.40.0"
 pipx = "1.7.1"
+shfmt = "3.11.0"
 starship = "1.22.1"
 "ubi:buildkite/agent" = { version = "3.96.0", exe = "buildkite-agent" }
 "ubi:coder/code-server" = { version = "4.99.2", bin_path = "bin", extract_all = "true" }

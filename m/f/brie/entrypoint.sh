@@ -1,16 +1,21 @@
-#!/usr/bin/env ba
+#!/usr/bin/env bash
 
 set -efu
 
-sudo install -d -m 0700 -o ubuntu -g ubuntu /data/coder /data/tailscale
-
-(sudo tailscale up --ssh || true) &
+sudo install -d -m 0700 -o ubuntu -g ubuntu /data/coder /data/tailscale /data/extensions
 
 cd
-
 source .bash_profile
 
 cd m
 mise run start
+mise run status
 
-exec /bin/sleep infinity
+(while true; do
+	if sudo tailscale up --ssh; then
+		break
+	fi
+	sleep 1
+done) &
+
+exec mise run log coder-server

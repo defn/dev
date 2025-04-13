@@ -17,3 +17,6 @@ start:
 
 restart:
     mise exec -- fly machine restart $(fly machine list --json | jq -r '.[].id')
+
+logs:
+    fly logs -a "$(basename $(pwd))"

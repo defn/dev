@@ -11,6 +11,15 @@
         group: ubuntu
         mode: "0755"
 
+    - name: Make entrypoint executable
+      become: true
+      file:
+        path: /app/entrypoint.sh
+        state: file
+        owner: ubuntu
+        group: ubuntu
+        mode: "0755"
+
     - name: Remove /var/lib/tailscale
       become: true
       file:
@@ -27,8 +36,8 @@
 
     - name: Create symlink for tailscale in m/svc
       file:
-        src: ../svc.d/tailscale
-        dest: /home/ubuntu/m/svc/tailscale
+        src: ../svc.d/tailscaled
+        dest: /home/ubuntu/m/svc/tailscaled
         state: link
         force: yes
 
@@ -58,3 +67,15 @@
           export CODER_EXTRA_ARGS=--telemetry=false
           export CODER_HTTP_ADDRESS=0.0.0.0:3000
           export CODER_ACCESS_URL=https://brie.fly.dev
+
+    - name: Remove ~/.local/share/code-server/extensions"
+      file:
+        path: "/home/ubuntu/.local/share/code-server/extensions"
+        state: absent
+
+    - name: Link ~/.local/share/code-server/extensions to /data/extensions
+      file:
+        src: /data/extensions
+        dest: "/home/ubuntu/.local/share/code-server/extensions"
+        state: link
+        force: yes
