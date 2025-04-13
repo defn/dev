@@ -1,45 +1,35 @@
 This document will allow you to create a coder server.
 
-### Configure the Coder tunnel
+# Configure the Coder tunnel
 
 Create a managed Coder tunnel and retrieve its tunnel token.
 
-First, login to Cloudflare:
+## Login to Cloudflare
 
-```
-cloudflared login
-```
+`cloudflared login`
 
-Then, create a tunnel:
+## Create a tunnel
 
-```
-cloudflared tunnel create '*.servername.defn.run'
-```
+`cloudflared tunnel create '*.servername.defn.run'`
 
 Configure the wildcard DNS for the tunnel:
 
-```
-cloudflared tunnel route dns '*.servername.defn.run' '*.servername.defn.run'
-```
+`cloudflared tunnel route dns '*.servername.defn.run' '*.servername.defn.run'`
 
 Remove the saved Cloudflare tunnel credentials (your file will be randomly named):
 
-```
-rm ~/.cloudflared/1fe10d8e-253f-474d-a3a6-41956b7f2fca.json
-```
+`rm ~/.cloudflared/1fe10d8e-253f-474d-a3a6-41956b7f2fca.json`
 
-Then, configure the tunnel with the Cloudflare Web UI:
+## Configure the tunnel with the Cloudflare Web UI:
 
 - look up the tunnel token
 - configure public hostname: \*.servername on defn.run to HTTP, localhost:3000
 
-Finally, record the tunnel token in the coder-tunnel service for the server.
+## Record the tunnel token in the coder-tunnel service for the server.
 
-```
-chamber write server/servername/svc/coder-tunnel TUNNEL_TOKEN token1234
-```
+`chamber write server/servername/svc/coder-tunnel TUNNEL_TOKEN token1234`
 
-### Configure the Coder server
+# Configure the Coder server
 
 With the `.env.example` coder server file, use Chamber to configure the `.env` varibles.
 
