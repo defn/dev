@@ -1,0 +1,60 @@
+---
+- name: Setup brie.fly.dev
+  hosts: localhost
+  tasks:
+    - name: Create /app directory
+      become: true
+      file:
+        path: /app
+        state: directory
+        owner: ubuntu
+        group: ubuntu
+        mode: "0755"
+
+    - name: Remove /var/lib/tailscale
+      become: true
+      file:
+        path: /var/lib/tailscale
+        state: absent
+
+    - name: Link /var/lib/tailscale to /data/tailscale
+      become: true
+      file:
+        src: /data/tailscale
+        dest: /var/lib/tailscale
+        state: link
+        force: yes
+
+    - name: Create symlink for tailscale in m/svc
+      file:
+        src: ../svc.d/tailscale
+        dest: /home/ubuntu/m/svc/tailscale
+        state: link
+        force: yes
+
+    - name: Remove ~/.config/coderv2
+      file:
+        path: "/home/ubuntu/.config/coderv2"
+        state: absent
+
+    - name: Link ~/.config/coderv2 to /data/coder
+      file:
+        src: /data/coder
+        dest: "/home/ubuntu/.config/coderv2"
+        state: link
+        force: yes
+
+    - name: Create symlink for coder-server in m/svc
+      file:
+        src: ../svc.d/coder-server
+        dest: /home/ubuntu/m/svc/coder-server
+        state: link
+        force: yes
+
+    - name: Write environment variables to coder-server/.env
+      copy:
+        dest: /home/ubuntu/m/svc/coder-server/.env
+        content: |
+          export CODER_EXTRA_ARGS=--telemetry=false
+          export CODER_HTTP_ADDRESS=0.0.0.0:3000
+          export CODER_ACCESS_URL=https://brie.fly.dev
