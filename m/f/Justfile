@@ -3,12 +3,12 @@ status:
 
 build:
     docker pull ghcr.io/defn/dev
-    mise exec -- fly deploy --local-only --build-only
+    mise exec -- fly deploy --build-only
 
 deploy:
     docker pull ghcr.io/defn/dev
-    mise exec -- fly deploy --local-only
-    
+    mise exec -- fly deploy
+
 stop:
     mise exec -- fly machine stop $(fly machine list --json | jq -r '.[].id')
 
