@@ -1,25 +1,39 @@
 [push]
-	default = simple
+    default = simple
 
 [core]
-	quotepath = false
+    quotepath = false
+    pager = delta
 
 [pull]
-	rebase = false
+    rebase = false
 
 [filter "lfs"]
-	required = true
-	clean = git-lfs clean -- %f
-	smudge = git-lfs smudge -- %f
-	process = git-lfs filter-process
+    required = true
+    clean = git-lfs clean -- %f
+    smudge = git-lfs smudge -- %f
+    process = git-lfs filter-process
 
 [credential "https://github.com"]
-	helper = 
-	helper = !gh auth git-credential
+    helper = 
+    helper = !gh auth git-credential
 
 [credential "https://gist.github.com"]
-	helper = 
-	helper = !gh auth git-credential
+    helper = 
+    helper = !gh auth git-credential
 
 [includeIf "gitdir:~/"]
     path = ~/dotfiles/.gitconfig
+
+[interactive]
+    diffFilter = delta --color-only
+
+[delta]
+    navigate = true
+    dark = true
+    side-by-side = true
+    line-numbers = true
+
+[merge]
+    conflictstyle = zdiff3
+    
