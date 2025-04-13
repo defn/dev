@@ -106,3 +106,9 @@
         content: "ubuntu ALL=(ALL:ALL) NOPASSWD: ALL"
         dest: /etc/sudoers.d/ubuntu
         mode: "0440"
+    - name: Link gitconfig
+      file:
+        src: ".gitconfig.default"
+        dest: "/home/ubuntu/.gitconfig"
+        state: link
+        force: yes
