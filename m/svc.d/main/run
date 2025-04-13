@@ -1,5 +1,4 @@
-#!/usr/local/bin/yaegi
+#!/usr/bin/env bash
 
-func main() {
-    select {} // Blocks forever
-}
+date
+exec sleep infinity
