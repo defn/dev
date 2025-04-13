@@ -1,5 +1,28 @@
 # Changelog
 
+## [1.26.0](https://github.com/defn/dev/compare/v1.25.0...v1.26.0) (2025-04-13)
+
+
+### Features
+
+* consolidate commands under m/cmd ([1a262d3](https://github.com/defn/dev/commit/1a262d3b386d42f74cfae8cc9d0bdacc6fd9033a))
+* fly build with just ansible playbook and entrypoint script ([8c9f13f](https://github.com/defn/dev/commit/8c9f13fd24b647995da7099836f092736e545dbb))
+
+
+### Bug Fixes
+
+* /data/ owned by user ([1e6774b](https://github.com/defn/dev/commit/1e6774b9fd0559878858931e686c3268e6dee796))
+* brie is working, with persistent extensions ([86080e7](https://github.com/defn/dev/commit/86080e71f369b3cf92322aaf48a90bb575557162))
+* bump base to rebuild for ansible ([d6157c6](https://github.com/defn/dev/commit/d6157c6c817e20a9a86a55c160650c835ed8c78c))
+* isolate cdktf to m/infra ([884d768](https://github.com/defn/dev/commit/884d768d4fb8dfa500c5363972426366742821d7))
+* no demo ([e1f8288](https://github.com/defn/dev/commit/e1f8288b4903a18696703505ed6168a357098bf4))
+* os test to run ansible ([fe17e83](https://github.com/defn/dev/commit/fe17e83e7824095dae9ad9b4a11a2e27bfad08a6))
+* persist extentions in m/dc ([f293d8d](https://github.com/defn/dev/commit/f293d8dea853187dcdaf80be1c31bb79fd31efe8))
+* remove hardcoded homedir from playbook tasks ([f27c651](https://github.com/defn/dev/commit/f27c651a602d8c866ce237b8459fd07128957184))
+* typo ([fba74e3](https://github.com/defn/dev/commit/fba74e3435234e023060a79ca5ab46e2fa2ddfb5))
+* use defn wrapper ([3560418](https://github.com/defn/dev/commit/3560418f03837393474a941675f19cff4ef46a95))
+* use fly remote builders ([c7aeb77](https://github.com/defn/dev/commit/c7aeb77cab0ef37744979c1b7343a78418d8f38f))
+
 ## [1.25.0](https://github.com/defn/dev/compare/v1.24.0...v1.25.0) (2025-04-11)
 
 ### Features
