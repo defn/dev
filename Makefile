@@ -251,7 +251,6 @@ fast_inner:
 	git ls-files | grep 'mise.toml$$' | ~/bin/runmany '~/.local/bin/mise trust $$1'
 	~/.local/bin/mise install
 	(cd m && ~/.local/bin/mise install)
-	for a in cue yaegi; do sudo ln -nfs $$(~/.local/bin/mise exec -- which $$a) /usr/local/bin/; done
 	~/bin/persist-cache
 
 sync_inner:

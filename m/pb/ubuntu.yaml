@@ -80,6 +80,7 @@
       file:
         path:
           - /usr/bin/gs
+          - /home/ubuntu/bin/Linux/bazel
         state: absent
     - name: Allow user to run Docker
       become: true
@@ -112,3 +113,22 @@
         dest: "/home/ubuntu/.gitconfig"
         state: link
         force: yes
+    - name: Find full path to mise tool
+      ansible.builtin.command: >
+        ~/bin/with-env mise exec -- which {{ item }}
+      register: mise_paths
+      args:
+        chdir: /home/ubuntu
+      loop:
+        - cue
+        - go
+      changed_when: false
+
+    - name: Create symlinks in /usr/local/bin
+      become: true
+      ansible.builtin.file:
+        src: "{{ item.stdout }}"
+        dest: "/usr/local/bin/{{ item.item }}"
+        state: link
+        force: true
+      loop: "{{ mise_paths.results }}"
