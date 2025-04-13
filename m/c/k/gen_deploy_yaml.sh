@@ -23,7 +23,8 @@ function main {
 		cue export --out json -e image_digests "${cue_import}" "${image_digest}" k/*.cue |
 			jq -r '.[]' |
 			while read -r image_original image_digested; do
-				if [[ "$(skopeo inspect --tls-verify=false "docker://${registry}/${image_digested}" | jq -r .Digest)" != "${image_digested##*@}" ]]; then
+				# if [[ "$(skopeo inspect --tls-verify=false "docker://${registry}/${image_digested}" | jq -r .Digest)" != "${image_digested##*@}" ]]; then
+        if false; then
 					echo "caching ${image_digested} to docker://${registry}/${image_digested%%@*}"
 					skopeo copy docker://${image_digested} docker://${registry}/${image_digested%%@*} --multi-arch all --dest-tls-verify=false --insecure-policy
 				else
