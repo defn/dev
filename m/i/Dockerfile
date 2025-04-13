@@ -52,4 +52,3 @@ RUN	--mount=type=secret,id=GITHUB_TOKEN,env=GITHUB_TOKEN make sync
 ARG RELEASE
 RUN echo "$RELEASE"
 RUN	--mount=type=secret,id=GITHUB_TOKEN,env=GITHUB_TOKEN make sync
-RUN ln -nfs ../svc.d/tailscaled m/svc/
