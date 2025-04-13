@@ -13,7 +13,7 @@ require (
 	github.com/bitfield/script v0.24.1
 	github.com/cdktf/cdktf-provider-aws-go/aws/v19 v19.60.1
 	github.com/cdktf/cdktf-provider-null-go/null/v10 v10.0.1
-	github.com/charmbracelet/bubbles v0.20.0
+	github.com/charmbracelet/bubbles v0.21.0
 	github.com/charmbracelet/bubbletea v1.3.4
 	github.com/charmbracelet/lipgloss v1.1.0
 	github.com/gin-gonic/gin v1.10.0

@@ -1,11 +1,12 @@
 default:
 	mise install
+	mise exec -- npm install
 	mise exec -- $(MAKE) build
 
-build: ../node_modules/.bin/cdktf
+build:
 	cue eval -c >/dev/null
-	b build
-	../node_modules/.bin/cdktf synth --hcl
+	cd ../cmd && b build
+	env JSII_SILENCE_WARNING_UNTESTED_NODE_VERSION=1 ./node_modules/.bin/cdktf synth --hcl
 	runmany 'perl -pe "\
 		s{when\s*=\s*\"create\"}{when = create}g; \
 		s{\"ami\",}{ami,}g; \
@@ -29,9 +30,6 @@ build: ../node_modules/.bin/cdktf
 	-git status -sb | grep lock.hcl | awk '{print $$2}' | xargs git checkout --
 # final add
 	git add -u .
-
-../node_modules/.bin/cdktf:
-	cd .. && npm install
 
 upgrade:
 	runmany 'cd $$1 && tf upgrade && tf locks' cdktf.out/stacks/*/

@@ -96,9 +96,9 @@ cdktf:
 upgrade:
 	$(MAKE) go-upgrade
 	$(MAKE) regen
-	npm -q --no-update-notifier --no-audit install
-	npm -q --no-update-notifier --no-audit upgrade
-	npm -q --no-update-notifier --no-audit outdated
+	#npm -q --no-update-notifier --no-audit install
+	#npm -q --no-update-notifier --no-audit upgrade
+	#npm -q --no-update-notifier --no-audit outdated
 
 go-upgrade:
 	set -x; go get -u $$(git ls-files | grep 'go$$' | perl -pe 's{[^/]+$$}{\n}' | sort -u | runmany 4 1 'echo ./$$1' | grep -v /demo/)

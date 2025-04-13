@@ -1,18 +1,3 @@
 load("@bazel_gazelle//:def.bzl", "gazelle")
-load("@io_bazel_rules_go//go:def.bzl", "go_binary", "go_library")
 
 gazelle(name = "gazelle")
-
-go_library(
-    name = "m_lib",
-    srcs = ["main.go"],
-    importpath = "github.com/defn/dev/m",
-    visibility = ["//visibility:private"],
-    deps = ["@com_github_bitfield_script//:script"],
-)
-
-go_binary(
-    name = "m",
-    embed = [":m_lib"],
-    visibility = ["//visibility:public"],
-)

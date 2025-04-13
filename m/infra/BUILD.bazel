@@ -1,4 +1,4 @@
-load("@io_bazel_rules_go//go:def.bzl", "go_binary", "go_library")
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
 
 filegroup(
     name = "cue",
@@ -10,18 +10,12 @@ filegroup(
     visibility = ["//visibility:public"],
 )
 
-go_binary(
-    name = "infra",
-    embed = [":infra_lib"],
-    visibility = ["//visibility:public"],
-)
-
 go_library(
     name = "infra_lib",
     srcs = ["infra.go"],
     embedsrcs = ["schema.cue"],
     importpath = "github.com/defn/dev/m/infra",
-    visibility = ["//visibility:private"],
+    visibility = ["//visibility:public"],
     deps = [
         "//command/infra",
         "//command/root",

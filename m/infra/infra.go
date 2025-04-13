@@ -1,4 +1,4 @@
-package main
+package infra
 
 import (
 	_ "embed"
@@ -17,7 +17,7 @@ var schema string
 
 func init() {
 	root.RootCmd.AddCommand(&cobra.Command{
-		Use:   "build",
+		Use:   "infra",
 		Short: "Generates Terraform configs from CUE",
 		Long:  `Generates Terraform configs from CUE.`,
 
@@ -35,14 +35,7 @@ func init() {
 
 			tf.GlobalStack(app, &site)
 
-			tf.CoderDefnEc2Stack(app, &site, "coder-defn-ec2-template")
-			tf.CoderDefnSshStack(app, &site, "coder-defn-ssh-template")
-
 			app.Synth()
 		},
 	})
-}
-
-func main() {
-	root.Execute()
 }
