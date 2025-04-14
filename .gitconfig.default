@@ -37,7 +37,7 @@
     side-by-side = true
     line-numbers = true
     light = false
-    # villsau, mirthful-willow, weeping-willow, coracias-caudatus
+    # villsau, mirthful-willow, weeping-willow, coracias-caudatus, mellow-barbet
     features = coracias-caudatus
 
 [include]
