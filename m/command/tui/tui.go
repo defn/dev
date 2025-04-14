@@ -21,47 +21,49 @@ import (
 )
 
 func init() {
-	root.RootCmd.AddCommand(tuiCmd)
-}
-
-var tuiCmd = &cobra.Command{
-	Use:   "tui",
-	Short: "A brief description of your command",
-	Long: `A longer description that spans multiple lines and likely contains examples
+	root.RootCmd.AddCommand(&cobra.Command{
+		Use:   "tui",
+		Short: "A brief description of your command",
+		Long: `A longer description that spans multiple lines and likely contains examples
 and usage of using your command. For example:
 
 Cobra is a CLI library for Go that empowers applications.
 This application is a tool to generate the needed files
 to quickly create a Cobra application.`,
-	Run: func(cmd *cobra.Command, args []string) {
-		items := []list.Item{
-			item("Ramen"),
-			item("Tomato Soup"),
-			item("Hamburgers"),
-			item("Cheeseburgers"),
-			item("Currywurst"),
-			item("Okonomiyaki"),
-			item("Pasta"),
-			item("Fillet Mignon"),
-			item("Caviar"),
-			item("Just Wine"),
-		}
+		Run: func(cmd *cobra.Command, args []string) {
+			// items
+			items := []list.Item{
+				item("Ramen"),
+				item("Tomato Soup"),
+				item("Hamburgers"),
+				item("Cheeseburgers"),
+				item("Currywurst"),
+				item("Okonomiyaki"),
+				item("Pasta"),
+				item("Fillet Mignon"),
+				item("Caviar"),
+				item("Just Wine"),
+			}
 
-		l := list.New(items, itemDelegate{}, physicalWidth, listHeight)
-		l.Title = "What do you want for dinner?"
-		l.SetShowStatusBar(false)
-		l.SetFilteringEnabled(false)
-		l.Styles.Title = titleStyle2
-		l.Styles.PaginationStyle = paginationStyle
-		l.Styles.HelpStyle = helpStyle
+			// list widget
+			l := list.New(items, itemDelegate{}, physicalWidth, listHeight)
+			l.Title = "What do you want for dinner?"
+			l.SetShowStatusBar(false)
+			l.SetFilteringEnabled(false)
+			l.Styles.Title = titleStyle2
+			l.Styles.PaginationStyle = paginationStyle
+			l.Styles.HelpStyle = helpStyle
 
-		m := model{list: l}
+			// model
+			m := model{list: l}
 
-		if _, err := tea.NewProgram(m).Run(); err != nil {
-			fmt.Println("Error running program:", err)
-			os.Exit(1)
-		}
-	},
+			// run program
+			if _, err := tea.NewProgram(m).Run(); err != nil {
+				fmt.Println("Error running program:", err)
+				os.Exit(1)
+			}
+		},
+	})
 }
 
 var (
@@ -241,10 +243,12 @@ var (
 	docStyle = lipgloss.NewStyle().Padding(1, 0, 1, 0)
 )
 
+// type item
 type item string
 
 func (i item) FilterValue() string { return "" }
 
+// type itemDelegate
 type itemDelegate struct{}
 
 func (d itemDelegate) Height() int                               { return 1 }
@@ -268,6 +272,7 @@ func (d itemDelegate) Render(w io.Writer, m list.Model, index int, listItem list
 	fmt.Fprint(w, fn(str))
 }
 
+// type model
 type model struct {
 	list     list.Model
 	choice   string
@@ -314,15 +319,13 @@ func (m model) View() string {
 	}
 
 	if m.quitting {
-		return meh()
+		return docStyle.Render(demoLayout())
 	}
 
-	return "\n" + m.list.View()
+	return m.list.View()
 }
 
-/////////////////////////
-
-func meh() string {
+func demoLayout() string {
 	doc := strings.Builder{}
 
 	// Tabs
@@ -450,8 +453,10 @@ func meh() string {
 	}
 
 	// return the rendered document
-	return docStyle.Render(doc.String())
+	return doc.String()
 }
+
+// utilities
 
 func colorGrid(xSteps, ySteps int) [][]string {
 	x0y0, _ := colorful.Hex("#F25D94")
