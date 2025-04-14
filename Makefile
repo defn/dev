@@ -3,38 +3,14 @@ SHELL := /bin/bash
 name ?= local
 domain ?= defn.run
 
-latest:
-	git pull
-	$(MAKE) update
-	$(MAKE) install
+dummy_ip ?= 169.254.32.1
 
-rpi:
-	$(MAKE) no-gpg
-	$(MAKE) rpi-install
+first = $(word 1, $(subst -, ,$@))
+second = $(word 2, $(subst -, ,$@))
+first_ = $(word 1, $(subst _, ,$@))
+second_ = $(word 2, $(subst _, ,$@))
 
-cb:
-	$(MAKE) no-gpg
-	$(MAKE) cb-install
-
-rpi-install:
-	sudo apt update
-	sudo apt install -y git direnv make rsync bc pipx
-
-vpn:
-	cd m/openvpn && ./service server
-
-gpg-setup:
-	$(MAKE) vpn-install
-	$(MAKE) gpg
-	$(MAKE) chrome-dev-gpg
-
-vpn-install:
-	sudo apt update
-	sudo apt install -y git direnv make rsync bc pipx pigz
-	sudo apt install -y socat pcscd scdaemon gpg gpg-agent wireguard-tools qemu-system libvirt-clients libvirt-daemon-system openvpn easy-rsa expect tpm2-tools
-	sudo apt install -y curl xz-utils git-lfs pv
-	sudo apt install -y zfsutils-linux ubuntu-drivers-common
-	sudo apt install -y build-essential
+MARK = $(shell which mark || echo echo)
 
 no-gpg:
 	systemctl --user enable gpg-agent-browser.socket --now || true
@@ -54,36 +30,12 @@ chrome-dev-dns:
 	touch ~/.config/cloudflare-ddns.toml 
 	cloudflare-ddns --domain $(domain) --record '*.$(name).$(domain)' --ip "$$(ip addr show eth0 | grep 'inet ' | awk '{print $$2}' | cut -d/ -f1)" --token "$$(pass cloudflare_$(domain))" --config ~/.config/cloudflare-ddns.toml 
 
-build:
-	bazel --version
-
-ci:
-	@echo "+++ Results"
-	@echo
-	@ps axf; echo
-	@pwd; echo
-	@id -a; echo
-	@cd m && $(MAKE) build
-
-menu: # This menu
-	@perl -ne 'printf("%20s: %s\n","$$1","$$2") if m{^([\w+-]+):[^#]+#\s(.+)$$}' $(shell ls -d Makefile2>/dev/null)
-
-dummy_ip ?= 169.254.32.1
-
-first = $(word 1, $(subst -, ,$@))
-second = $(word 2, $(subst -, ,$@))
-first_ = $(word 1, $(subst _, ,$@))
-second_ = $(word 2, $(subst _, ,$@))
-
-MARK = $(shell which mark || echo echo)
-
 macos-reinstall:
 	sudo rm -rf /Library/Developer/CommandLineTools
 	/usr/bin/xcode-select --install
 
 macos:
 	$(MARK) macos
-	-$(shell which gpg-agent) --daemon --pinentry-program $$(which pinentry-mac)
 	for ip in $(dummy_ip); do if ! ifconfig lo0 | grep "inet $$ip"; then sudo ifconfig lo0 alias "$$ip" netmask 255.255.255.255; fi; done;
 	ifconfig lo0
 	defaults write -g ApplePressAndHoldEnabled -bool false
@@ -117,13 +69,7 @@ gpg:
 	$(MARK) configure gpg
 	dirmngr --shutdown || true
 	dirmngr --daemon
-	if [[ "$(shell uname -s)" == "Darwin" ]]; then t make_macos $(MAKE) macos; fi
-
-docker:
-	$(MARK) docker
-	docker context create pod --docker host=tcp://localhost:2375 || true \
-		&& docker context create host --docker host=unix:///var/run/docker.sock || true \
-		&& docker context use host
+	if [[ "$(shell uname -s)" == "Darwin" ]]; then $(shell which gpg-agent) --daemon --pinentry-program $$(which pinentry-mac); fi
 
 trunk:
 	@$(MARK) trunk
@@ -131,32 +77,6 @@ trunk:
 	@trunk version || true
 	@sudo rm -f /usr/local/bin/trunk
 	@git checkout .local/share/code-server/User/settings.json
-
-login:
-	if test -f /run/secrets/kubernetes.io/serviceaccount/ca.crt; then mark kubernetes; this-kubeconfig; this-argocd-login || true; fi
-	this-github-login
-
-update:
-	git pull
-	-cd .password-store && git pull
-	-cd dotfiles && git pull && ./bootstrap
-	$(MAKE) install
-
-init:
-	git branch --set-upstream-to origin/main main
-	git fetch origin
-	git reset --hard origin/main
-	bin/persist-cache
-	cp .ssh/config.example .ssh/config
-	ssh -o BatchMode=yes -o StrictHostKeyChecking=no home true || true
-	cd m/pb && $(MAKE) local || true
-	b agent make install
-
-play:
-	cd m/pb && $(MAKE) ubuntu opt="-i inventory/packer.ini -e ansible_connection=local"
-
-upgrade:
-	cd m/pb && $(MAKE) upgrade opt="-i inventory/packer.ini -e ansible_connection=local"
 
 install:
 	t make_install $(MAKE) install_t
@@ -180,23 +100,6 @@ mise:
 	if [[ ! -x ~/.local/bin/mise ]]; then curl -sSL https://mise.run | bash; fi
 	~/.local/bin/mise trust
 	~/.local/bin/mise install
-
-nix-uninstall:
-	-sudo mv /etc/zshrc.backup-before-nix /etc/zshrc
-	-sudo mv /etc/bashrc.backup-before-nix /etc/bashrc
-	-sudo rm -f /etc/bash.bashrc.backup-before-nix
-	-sudo launchctl unload /Library/LaunchDaemon/org.nixos.nix-daemon.plist
-	-sudo rm /Library/LaunchDaemons/org.nixos.nix-daemon.plist
-	-sudo launchctl unload /Library/LaunchDaemons/org.nixos.activate-system.plist
-	-sudo rm /Library/LaunchDaemons/org.nixos.activate-system.plist
-	-sudo rm -rf /etc/nix /var/root/.nix-profile /var/root/.nix-defexpr /var/root/.nix-channels ~/.nix-profile ~/.nix-defexpr ~/.nix-channels
-	-sudo dscl . delete /Groups/nixbld
-	-for i in $$(seq 1 32); do sudo dscl . -delete /Users/_nixbld$$i; done
-	-sudo diskutil apfs deleteVolume /nix
-	-sudo rm -rf /nix/
-
-nix-clean:
-	rm -rf .nix-profile .local/state/nix
 
 zfs:
 	sudo zfs destroy defn/nix@latest || true
@@ -251,19 +154,12 @@ fast_inner:
 	git ls-files | grep 'mise.toml$$' | ~/bin/runmany '~/.local/bin/mise trust $$1'
 	~/.local/bin/mise install
 	(cd m && ~/.local/bin/mise install)
-	~/bin/persist-cache
 
 sync_inner:
 	if [[ "$(shell uname -s)" == "Linux" ]]; then t play-upgrade ~/.local/bin/mise run local upgrade; fi
 	if [[ "$(shell uname -s)" == "Linux" ]]; then t play-ubuntu ~/.local/bin/mise run local ubuntu; fi
 	$(MAKE) fast_inner
 	if [[ "$(shell uname -s)" == "Linux" ]]; then t play-fixup ~/.local/bin/mise run local fixup; fi
-
-up:
-	cd m/dc && just up
-	
-release:
-	cd m/i && $(MAKE) sync
 
 mise-upgrade:
 	@(echo .; git grep [t]ools | grep [m]ise.toml | cut -d: -f1 | perl -pe 's{/mise.toml}{}') | runmany 'cd $$1 && pwd && mise upgrade --bump -i'

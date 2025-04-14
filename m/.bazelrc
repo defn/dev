@@ -1,35 +1,37 @@
-run --ui_event_filters=-info,-stdout,-stderr
-run --noshow_progress
 run --noshow_loading_progress
+run --noshow_progress
+run --ui_event_filters=-info,-stdout,-stderr
 
-query --ui_event_filters=-info
-query --noshow_progress
-query --noshow_loading_progress
 query --incompatible_disallow_empty_glob=false
+query --noshow_loading_progress
+query --noshow_progress
+query --ui_event_filters=-info
 
-cquery --ui_event_filters=-info
-cquery --noshow_progress
-cquery --noshow_loading_progress
 cquery --incompatible_disallow_empty_glob=false
+cquery --noshow_loading_progress
+cquery --noshow_progress
+cquery --ui_event_filters=-info
 
-info --ui_event_filters=-info
-info --noshow_progress
-info --noshow_loading_progress
 info --incompatible_disallow_empty_glob=false
+info --noshow_loading_progress
+info --noshow_progress
+info --ui_event_filters=-info
 
-build --verbose_failures
-build --noincompatible_sandbox_hermetic_tmp
 build --action_env=HOME=/home/ubuntu
-build --test_env=HOME=/home/ubuntu
 build --enable_runfiles
+build --incompatible_autoload_externally=+@rules_android
 build --incompatible_disallow_empty_glob=false
 build --legacy_important_outputs
+build --noincompatible_sandbox_hermetic_tmp
+build --noremote_upload_local_results
 build --noslim_profile --experimental_profile_include_target_label --experimental_profile_include_primary_output 
-build --incompatible_autoload_externally=+@rules_android
+build --remote_download_minimal
+build --test_env=HOME=/home/ubuntu
+build --verbose_failures
 
-build --sandbox_writable_path=/home/ubuntu/.cache/helm
-build --sandbox_writable_path=/home/ubuntu/.cache/go-mod
 build --sandbox_writable_path=/home/ubuntu/.cache/go-build
+build --sandbox_writable_path=/home/ubuntu/.cache/go-mod
+build --sandbox_writable_path=/home/ubuntu/.cache/helm
 build --sandbox_writable_path=/home/ubuntu/m/cue.mod/gen
 build --sandbox_writable_path=/home/ubuntu/m/k
 build --sandbox_writable_path=/home/ubuntu/work
