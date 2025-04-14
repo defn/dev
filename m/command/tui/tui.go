@@ -55,7 +55,7 @@ to quickly create a Cobra application.`,
 			l.Styles.HelpStyle = helpStyle
 
 			// model
-			m := model{list: l}
+			m := model{menu: l}
 
 			// run program
 			if _, err := tea.NewProgram(m).Run(); err != nil {
@@ -274,7 +274,7 @@ func (d itemDelegate) Render(w io.Writer, m list.Model, index int, listItem list
 
 // type model
 type model struct {
-	list     list.Model
+	menu     list.Model
 	choice   string
 	quitting bool
 }
@@ -286,21 +286,17 @@ func (m model) Init() tea.Cmd {
 func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 	switch msg := msg.(type) {
 	case tea.WindowSizeMsg:
-		m.list.SetWidth(msg.Width)
+		m.menu.SetWidth(msg.Width)
 		return m, nil
 
 	case tea.KeyMsg:
 		switch keypress := msg.String(); keypress {
-		case "q":
-			m.quitting = true
-			return m, tea.Quit
-
-		case "ctrl+c":
+		case "ctrl+c", "q":
 			m.quitting = true
 			return m, tea.Quit
 
 		case "enter":
-			i, ok := m.list.SelectedItem().(item)
+			i, ok := m.menu.SelectedItem().(item)
 			if ok {
 				m.choice = string(i)
 			}
@@ -309,7 +305,7 @@ func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 	}
 
 	var cmd tea.Cmd
-	m.list, cmd = m.list.Update(msg)
+	m.menu, cmd = m.menu.Update(msg)
 	return m, cmd
 }
 
@@ -322,7 +318,7 @@ func (m model) View() string {
 		return docStyle.Render(demoLayout())
 	}
 
-	return m.list.View()
+	return m.menu.View()
 }
 
 func demoLayout() string {
