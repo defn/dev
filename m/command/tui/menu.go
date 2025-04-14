@@ -4,8 +4,13 @@ import (
 	"fmt"
 
 	tea "github.com/charmbracelet/bubbletea"
+	"github.com/charmbracelet/lipgloss"
 
 	"github.com/charmbracelet/bubbles/list"
+)
+
+var (
+	quitTextStyle = lipgloss.NewStyle().Margin(1, 0, 2, 4)
 )
 
 // type model
