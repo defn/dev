@@ -161,6 +161,9 @@ sync_inner:
 	$(MAKE) fast_inner
 	if [[ "$(shell uname -s)" == "Linux" ]]; then t play-fixup ~/.local/bin/mise run local fixup; fi
 
+mise-list:
+	@(echo .; git grep [t]ools | grep [m]ise.toml | cut -d: -f1 | perl -pe 's{/mise.toml}{}') | runmany 'cd $$1 && pwd && mise upgrade --bump --dry-run' | grep -v ansible | grep 'Would bump' | while read -r a b tool c mfile; do echo mise use --cd "$$(dirname $$mfile)" $$tool; done
+
 mise-upgrade:
 	@(echo .; git grep [t]ools | grep [m]ise.toml | cut -d: -f1 | perl -pe 's{/mise.toml}{}') | runmany 'cd $$1 && pwd && mise upgrade --bump -i'
 
