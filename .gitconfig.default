@@ -3,7 +3,7 @@
 
 [core]
     quotepath = false
-    pager = delta
+    pager = delta  # meh
 
 [pull]
     rebase = false
@@ -22,18 +22,26 @@
     helper = 
     helper = !gh auth git-credential
 
-[includeIf "gitdir:~/"]
-    path = ~/dotfiles/.gitconfig
-
 [interactive]
     diffFilter = delta --color-only
+
+[diff]
+    colorMoved = default
+
+[merge]
+    conflictstyle = zdiff3
 
 [delta]
     navigate = true
     dark = true
     side-by-side = true
     line-numbers = true
+    light = false
+    # villsau, mirthful-willow, weeping-willow, coracias-caudatus
+    features = coracias-caudatus
 
-[merge]
-    conflictstyle = zdiff3
-    
+[include]
+    path = ~/delta-themes.gitconfig
+
+[includeIf "gitdir:~/"]
+    path = ~/dotfiles/.gitconfig
