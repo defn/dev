@@ -2,7 +2,14 @@ load("@io_bazel_rules_go//go:def.bzl", "go_library")
 
 go_library(
     name = "tui",
-    srcs = ["tui.go"],
+    srcs = [
+        "item.go",
+        "item-delegate.go",
+        "layouts.go",
+        "menu.go",
+        "tui.go",
+        "utils.go",
+    ],
     importpath = "github.com/defn/dev/m/command/tui",
     visibility = ["//visibility:public"],
     deps = [
