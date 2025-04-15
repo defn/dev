@@ -1,6 +1,7 @@
 package command
 
 import (
+	"fmt"
 	"strings"
 
 	"github.com/charmbracelet/lipgloss"
@@ -10,6 +11,7 @@ import (
 // layouts
 func demoLayout() string {
 	w := lipgloss.Width
+	h := lipgloss.Height
 
 	var (
 		columnWidth = (physicalWidth / 3)
@@ -166,22 +168,29 @@ func demoLayout() string {
 
 		ui := lipgloss.JoinVertical(lipgloss.Center, question, buttons)
 
-		// TODO how to calculate 10 from cols and sbar?
-		dialog = lipgloss.Place(physicalWidth, physicalHeight-10,
+		dialog = lipgloss.Place(physicalWidth, physicalHeight-1-h(cols)-h(sbar),
 			lipgloss.Center, lipgloss.Center,
 			dialogBoxStyle.Render(ui),
-			lipgloss.WithWhitespaceChars("猫咪"),
+			lipgloss.WithWhitespaceChars(fmt.Sprintf("%d",h(cols))),
 			lipgloss.WithWhitespaceForeground(subtle),
 		)
 	}
+			// lipgloss.WithWhitespaceChars("猫咪"),
 
 	doc := strings.Builder{}
 
+	// dialog
 	doc.WriteString(dialog)
 	doc.WriteString("\n")
+
+	// newline
 	doc.WriteString("\n")
+
+	// columns
 	doc.WriteString(cols)
 	doc.WriteString("\n")
+
+	// statusbar
 	doc.WriteString(sbar)
 
 	return doc.String()
