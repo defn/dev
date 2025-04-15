@@ -28,6 +28,7 @@ func (m order) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 	switch msg := msg.(type) {
 	case tea.WindowSizeMsg:
 		m.menu.SetWidth(msg.Width)
+		physicalWidth = msg.Width
 		return m, nil
 
 	case tea.KeyMsg:
@@ -56,6 +57,7 @@ func (m order) View() string {
 	}
 
 	if m.quitting {
+		docStyle := lipgloss.NewStyle().Padding(1, 0, 1, 0).MaxWidth(physicalWidth)
 		return docStyle.Render(demoLayout())
 	}
 

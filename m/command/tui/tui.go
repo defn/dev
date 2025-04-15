@@ -5,7 +5,6 @@ import (
 	"os"
 
 	"github.com/spf13/cobra"
-	"golang.org/x/term"
 
 	tea "github.com/charmbracelet/bubbletea"
 
@@ -15,11 +14,8 @@ import (
 	root "github.com/defn/dev/m/command/root"
 )
 
-var physicalWidth, _, _ = term.GetSize(int(os.Stdout.Fd()))
-
-var (
-	listHeight = 20
-)
+var physicalWidth int
+var listHeight = 20
 
 func init() {
 	root.RootCmd.AddCommand(&cobra.Command{
