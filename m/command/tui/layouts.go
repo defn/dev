@@ -9,8 +9,6 @@ import (
 
 // layouts
 func demoLayout() string {
-	doc := strings.Builder{}
-
 	w := lipgloss.Width
 
 	var (
@@ -100,28 +98,6 @@ func demoLayout() string {
 		fishCakeStyle = statusNugget.Background(lipgloss.Color("#6124DF"))
 	)
 
-	// Dialog
-	{
-		question := lipgloss.NewStyle().Width(50).Align(lipgloss.Center).Render(rainbow(lipgloss.NewStyle(), "Are you sure you want to eat marmalade?", blends))
-
-		okButton := activeButtonStyle.Render("Yes")
-		maybeButton := buttonStyle.Render("Maybe")
-
-		buttons := lipgloss.JoinHorizontal(lipgloss.Top, okButton, maybeButton)
-
-		ui := lipgloss.JoinVertical(lipgloss.Center, question, buttons)
-
-		dialog := lipgloss.Place(physicalWidth, physicalHeight-11,
-			lipgloss.Center, lipgloss.Center,
-			dialogBoxStyle.Render(ui),
-			lipgloss.WithWhitespaceChars("猫咪"),
-			lipgloss.WithWhitespaceForeground(subtle),
-		)
-
-		doc.WriteString(dialog)
-		doc.WriteString("\n\n")
-	}
-
 	// Text boxes
 	lists := lipgloss.JoinHorizontal(lipgloss.Top,
 		list2.Width(columnWidth).Render(
@@ -156,10 +132,8 @@ func demoLayout() string {
 		),
 	)
 
-	doc.WriteString(lipgloss.JoinHorizontal(lipgloss.Top, lists))
-	doc.WriteString("\n")
-
 	// Status bar
+	var bar string
 	{
 		statusKey := statusStyle.Render("STATUS")
 		encoding := encodingStyle.Render("UTF-8")
@@ -169,16 +143,46 @@ func demoLayout() string {
 			Width(physicalWidth - w(statusKey) - w(encoding) - w(fishCake)).
 			Render("Ravishing")
 
-		bar := lipgloss.JoinHorizontal(lipgloss.Top,
+		bar = lipgloss.JoinHorizontal(lipgloss.Top,
 			statusKey,
 			statusVal,
 			encoding,
 			fishCake,
 		)
-
-		doc.WriteString(statusBarStyle.Width(physicalWidth).Render(bar))
 	}
 
-	// return the rendered document
+	cols := lipgloss.JoinHorizontal(lipgloss.Top, lists)
+	sbar := statusBarStyle.Width(physicalWidth).Render(bar)
+
+	// Dialog
+	var dialog string
+	{
+		question := lipgloss.NewStyle().Width(50).Align(lipgloss.Center).Render(rainbow(lipgloss.NewStyle(), "Are you sure you want to eat marmalade?", blends))
+
+		okButton := activeButtonStyle.Render("Yes")
+		maybeButton := buttonStyle.Render("Maybe")
+
+		buttons := lipgloss.JoinHorizontal(lipgloss.Top, okButton, maybeButton)
+
+		ui := lipgloss.JoinVertical(lipgloss.Center, question, buttons)
+
+		// TODO how to calculate 10 from cols and sbar?
+		dialog = lipgloss.Place(physicalWidth, physicalHeight-10,
+			lipgloss.Center, lipgloss.Center,
+			dialogBoxStyle.Render(ui),
+			lipgloss.WithWhitespaceChars("猫咪"),
+			lipgloss.WithWhitespaceForeground(subtle),
+		)
+	}
+
+	doc := strings.Builder{}
+
+	doc.WriteString(dialog)
+	doc.WriteString("\n")
+	doc.WriteString("\n")
+	doc.WriteString(cols)
+	doc.WriteString("\n")
+	doc.WriteString(sbar)
+
 	return doc.String()
 }
