@@ -35,13 +35,6 @@ func colorGrid(xSteps, ySteps int) [][]string {
 	return grid
 }
 
-func max(a, b int) int {
-	if a > b {
-		return a
-	}
-	return b
-}
-
 func rainbow(base lipgloss.Style, s string, colors []color.Color) string {
 	var str string
 	for i, ss := range s {

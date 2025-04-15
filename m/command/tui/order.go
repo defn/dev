@@ -9,10 +9,6 @@ import (
 	"github.com/charmbracelet/bubbles/list"
 )
 
-var (
-	quitTextStyle = lipgloss.NewStyle().Margin(1, 0, 2, 4)
-)
-
 // type order
 type order struct {
 	menu     list.Model
@@ -29,6 +25,7 @@ func (m order) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 	case tea.WindowSizeMsg:
 		m.menu.SetWidth(msg.Width)
 		physicalWidth = msg.Width
+		physicalHeight = msg.Height
 		return m, nil
 
 	case tea.KeyMsg:
@@ -53,6 +50,7 @@ func (m order) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 
 func (m order) View() string {
 	if m.choice != "" {
+		quitTextStyle := lipgloss.NewStyle().Margin(1, 0, 2, 4)
 		return quitTextStyle.Render(fmt.Sprintf("%s? Sounds good to me.", m.choice))
 	}
 

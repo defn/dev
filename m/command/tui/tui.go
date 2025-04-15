@@ -15,7 +15,7 @@ import (
 )
 
 var physicalWidth int
-var listHeight = 20
+var physicalHeight int
 
 func init() {
 	root.RootCmd.AddCommand(&cobra.Command{
@@ -43,6 +43,7 @@ to quickly create a Cobra application.`,
 			}
 
 			// list widget
+			listHeight := 20
 			l := list.New(items, itemDelegate{}, physicalWidth, listHeight)
 			l.Title = "What do you want for dinner?"
 			l.SetShowStatusBar(false)
