@@ -56,7 +56,7 @@ to quickly create a Cobra application.`,
 			l.Styles.HelpStyle = list.DefaultStyles().HelpStyle.PaddingLeft(4).PaddingBottom(1)
 
 			// model
-			m := model{menu: l}
+			m := order{menu: l}
 
 			// run program
 			if _, err := tea.NewProgram(m).Run(); err != nil {

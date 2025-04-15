@@ -6,7 +6,7 @@ go_library(
         "item.go",
         "item-delegate.go",
         "layouts.go",
-        "menu.go",
+        "order.go",
         "tui.go",
         "utils.go",
     ],
