@@ -35,7 +35,7 @@ func (m order) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 			return m, tea.Quit
 
 		case "q":
-			m.quitting = true
+			m.quitting = !m.quitting
 			return m, nil
 
 		case "enter":
