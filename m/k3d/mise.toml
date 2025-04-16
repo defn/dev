@@ -1,2 +1,7 @@
 [tools]
+helm = "3.17.3"
 k3d = "5.8.3"
+k9s = "0.50.3"
+kubectl = "1.32.3"
+kustomize = "5.6.0"
+stern = "1.32.0"
