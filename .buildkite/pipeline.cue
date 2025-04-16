@@ -6,6 +6,23 @@ import (
 
 #scripts: "./.buildkite/bin"
 
+// bazel query "kind('source file', deps(//cmd))" --output=label_kind | perl -ne '(s{source file //}{} && s{:}{/} && s{/?[^/\s]+$}{} && print) if m{^source file\s+//([^@]*\.go)$}' | sort -u
+#cmd: [
+	"cmd",
+	"command/api",
+	"command/infra",
+	"command/root",
+	"command/tui",
+	"infra",
+	"tf",
+	"tf/gen/terraform_aws_defn_account",
+	"tf/gen/terraform_aws_defn_account/internal",
+	"tf/gen/terraform_aws_defn_account/jsii",
+	"tf/gen/terraform_aws_s3_bucket",
+	"tf/gen/terraform_aws_s3_bucket/internal",
+	"tf/gen/terraform_aws_s3_bucket/jsii",
+]
+
 steps: [{
 	label:   "home build"
 	command: "\(#scripts)/home-build.sh"
@@ -23,6 +40,18 @@ steps: [{
 				for d in infra.domains {
 					path: "m/w/sites/\(d)/"
 					config: command: "\(#scripts)/deploy-cf-pages.sh m/w/sites/\(d)"
+				},
+			]
+		}
+	}]
+}, {
+	label: "cmd deploys"
+	plugins: [{
+		config: command: "\(#scripts)/build-cmd.sh"
+		"monorepo-diff#v1.2.0": {
+			watch: [
+				for d in #cmd {
+					"m/\(d)/"
 				},
 			]
 		}

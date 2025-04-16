@@ -60,3 +60,22 @@ steps:
             - path: m/w/sites/hana.studio/
               config:
                 command: ./.buildkite/bin/deploy-cf-pages.sh m/w/sites/hana.studio
+  - label: cmd deploys
+    plugins:
+      - config:
+          command: ./.buildkite/bin/build-cmd.sh
+        monorepo-diff#v1.2.0:
+          watch:
+            - m/cmd/
+            - m/command/api/
+            - m/command/infra/
+            - m/command/root/
+            - m/command/tui/
+            - m/infra/
+            - m/tf/
+            - m/tf/gen/terraform_aws_defn_account/
+            - m/tf/gen/terraform_aws_defn_account/internal/
+            - m/tf/gen/terraform_aws_defn_account/jsii/
+            - m/tf/gen/terraform_aws_s3_bucket/
+            - m/tf/gen/terraform_aws_s3_bucket/internal/
+            - m/tf/gen/terraform_aws_s3_bucket/jsii/
