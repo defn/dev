@@ -45,9 +45,9 @@ steps: [{
 		}
 	}]
 }, {
-	label: "cmd deploys"
+	label:   "cmd deploys"
+	command: "\(#scripts)/build-cmd.sh"
 	plugins: [{
-		config: command: "\(#scripts)/build-cmd.sh"
 		"monorepo-diff#v1.2.0": {
 			watch: [
 				for d in #cmd {

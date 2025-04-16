@@ -61,10 +61,9 @@ steps:
               config:
                 command: ./.buildkite/bin/deploy-cf-pages.sh m/w/sites/hana.studio
   - label: cmd deploys
+    command: ./.buildkite/bin/build-cmd.sh
     plugins:
-      - config:
-          command: ./.buildkite/bin/build-cmd.sh
-        monorepo-diff#v1.2.0:
+      - monorepo-diff#v1.2.0:
           watch:
             - m/cmd/
             - m/command/api/
