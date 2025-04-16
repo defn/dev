@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+exec 2>&1
+exec /home/ubuntu/.local/bin/mise exec -- kubectl port-forward -n argocd svc/argocd-server 6666:80
