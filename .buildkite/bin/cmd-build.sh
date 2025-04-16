@@ -2,7 +2,9 @@
 
 set -e
 
-source .bash_profile
+cd ~/m/cmd
+
+source ~/.bash_profile
 
 for a in darwin linux; do for b in amd64 arm64; do
 	echo $a $b
