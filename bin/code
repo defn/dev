@@ -2,11 +2,11 @@
 
 function main {
 	case "${VSCODE_GIT_ASKPASS_MAIN-}" in
-	*/.vscode-server/bin/*)
-		exec "${VSCODE_GIT_ASKPASS_MAIN%%extensions/*}"/bin/remote-cli/code "$@"
+	*code-server*)
+		exec "${VSCODE_GIT_ASKPASS_MAIN%%extensions/*}"/bin/remote-cli/code-server "$@"
 		;;
-	/tmp/code-server/lib/* | /nix/store/*codeserver*)
-		exec "${VSCODE_GIT_ASKPASS_MAIN%%extensions/*}/bin/remote-cli/code-linux.sh" "$@"
+	*/.vscode-server/*)
+		exec "${VSCODE_GIT_ASKPASS_MAIN%%extensions/*}"/bin/remote-cli/code-server "$@"
 		;;
 	esac
 
