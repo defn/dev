@@ -1,2 +1,3 @@
 [tools]
 aws = "2.26.2"
+"ubi:coder/code-server" = { version = "4.99.3", bin_path = "bin", extract_all = "true" }
