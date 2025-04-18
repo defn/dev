@@ -1,0 +1,14 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_binary", "go_library")
+
+go_library(
+    name = "coder-tunnel_lib",
+    srcs = ["coder-tunnel.go"],
+    importpath = "github.com/defn/dev/m/svc.d/coder-tunnel",
+    visibility = ["//visibility:private"],
+)
+
+go_binary(
+    name = "coder-tunnel",
+    embed = [":coder-tunnel_lib"],
+    visibility = ["//visibility:public"],
+)
