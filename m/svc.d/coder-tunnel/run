@@ -1,12 +1,6 @@
 #!/usr/bin/env bash
 
 exec 2>&1
-
-export STARSHIP_NO=1
 source ~/.bash_profile
-mise trust
-mise install
 source .env
-export PATH
-
-exec mise exec -- cloudflared tunnel --no-autoupdate run
+exec ./coder-tunnel

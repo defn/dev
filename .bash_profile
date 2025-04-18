@@ -2,7 +2,7 @@
 
 . ~/.bashrc_path
 BASE_PATH="${PATH}"
-PATH="${BASE_PATH}:${HOME}/bin/blackhole"
+export PATH="${BASE_PATH}:${HOME}/bin/blackhole"
 
 if [[ -r /etc/profile.d/bash_completion.sh ]]; then
 	source /etc/profile.d/bash_completion.sh
