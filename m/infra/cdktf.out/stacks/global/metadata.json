@@ -400,14 +400,6 @@
         }
       }
     },
-    "s3-fogg-cde": {
-      "//": {
-        "metadata": {
-          "path": "global/s3-fogg-cde",
-          "uniqueId": "s3-fogg-cde"
-        }
-      }
-    },
     "s3-fogg-ci": {
       "//": {
         "metadata": {
@@ -472,6 +464,14 @@
         }
       }
     },
+    "s3-fogg-prod": {
+      "//": {
+        "metadata": {
+          "path": "global/s3-fogg-prod",
+          "uniqueId": "s3-fogg-prod"
+        }
+      }
+    },
     "s3-fogg-pub": {
       "//": {
         "metadata": {
@@ -493,14 +493,6 @@
         "metadata": {
           "path": "global/s3-gyre-org",
           "uniqueId": "s3-gyre-org"
-        }
-      }
-    },
-    "s3-helix-cde": {
-      "//": {
-        "metadata": {
-          "path": "global/s3-helix-cde",
-          "uniqueId": "s3-helix-cde"
         }
       }
     },
@@ -565,6 +557,14 @@
         "metadata": {
           "path": "global/s3-helix-org",
           "uniqueId": "s3-helix-org"
+        }
+      }
+    },
+    "s3-helix-prod": {
+      "//": {
+        "metadata": {
+          "path": "global/s3-helix-prod",
+          "uniqueId": "s3-helix-prod"
         }
       }
     },
@@ -744,14 +744,6 @@
         }
       }
     },
-    "s3-spiral-cde": {
-      "//": {
-        "metadata": {
-          "path": "global/s3-spiral-cde",
-          "uniqueId": "s3-spiral-cde"
-        }
-      }
-    },
     "s3-spiral-ci": {
       "//": {
         "metadata": {
@@ -816,19 +808,19 @@
         }
       }
     },
+    "s3-spiral-prod": {
+      "//": {
+        "metadata": {
+          "path": "global/s3-spiral-prod",
+          "uniqueId": "s3-spiral-prod"
+        }
+      }
+    },
     "s3-spiral-pub": {
       "//": {
         "metadata": {
           "path": "global/s3-spiral-pub",
           "uniqueId": "s3-spiral-pub"
-        }
-      }
-    },
-    "s3-vault-cde": {
-      "//": {
-        "metadata": {
-          "path": "global/s3-vault-cde",
-          "uniqueId": "s3-vault-cde"
         }
       }
     },
@@ -893,6 +885,14 @@
         "metadata": {
           "path": "global/s3-vault-org",
           "uniqueId": "s3-vault-org"
+        }
+      }
+    },
+    "s3-vault-prod": {
+      "//": {
+        "metadata": {
+          "path": "global/s3-vault-prod",
+          "uniqueId": "s3-vault-prod"
         }
       }
     },

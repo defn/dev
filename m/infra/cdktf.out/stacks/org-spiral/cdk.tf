@@ -82,25 +82,6 @@ resource "aws_ssoadmin_account_assignment" "spiral_admin_sso_account_assignment"
   target_type        = "AWS_ACCOUNT"
 }
 
-resource "aws_organizations_account" "spiral-net" {
-  email                      = "aws-spiral+net@defn.us"
-  iam_user_access_to_billing = "ALLOW"
-  name                       = "net"
-  role_name                  = "OrganizationAccountAccessRole"
-  tags = {
-    ManagedBy = "Terraform"
-  }
-}
-
-resource "aws_ssoadmin_account_assignment" "net_admin_sso_account_assignment" {
-  instance_arn       = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn
-  permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
-  principal_id       = aws_identitystore_group.administrators_sso_group.group_id
-  principal_type     = "GROUP"
-  target_id          = aws_organizations_account.spiral-net.id
-  target_type        = "AWS_ACCOUNT"
-}
-
 resource "aws_organizations_account" "spiral-log" {
   email                      = "aws-spiral+log@defn.us"
   iam_user_access_to_billing = "ALLOW"
@@ -117,6 +98,25 @@ resource "aws_ssoadmin_account_assignment" "log_admin_sso_account_assignment" {
   principal_id       = aws_identitystore_group.administrators_sso_group.group_id
   principal_type     = "GROUP"
   target_id          = aws_organizations_account.spiral-log.id
+  target_type        = "AWS_ACCOUNT"
+}
+
+resource "aws_organizations_account" "spiral-net" {
+  email                      = "aws-spiral+net@defn.us"
+  iam_user_access_to_billing = "ALLOW"
+  name                       = "net"
+  role_name                  = "OrganizationAccountAccessRole"
+  tags = {
+    ManagedBy = "Terraform"
+  }
+}
+
+resource "aws_ssoadmin_account_assignment" "net_admin_sso_account_assignment" {
+  instance_arn       = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn
+  permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
+  principal_id       = aws_identitystore_group.administrators_sso_group.group_id
+  principal_type     = "GROUP"
+  target_id          = aws_organizations_account.spiral-net.id
   target_type        = "AWS_ACCOUNT"
 }
 
@@ -177,6 +177,25 @@ resource "aws_ssoadmin_account_assignment" "pub_admin_sso_account_assignment" {
   target_type        = "AWS_ACCOUNT"
 }
 
+resource "aws_organizations_account" "spiral-pub" {
+  email                      = "aws-spiral+dmz@defn.us"
+  iam_user_access_to_billing = "ALLOW"
+  name                       = "dmz"
+  role_name                  = "OrganizationAccountAccessRole"
+  tags = {
+    ManagedBy = "Terraform"
+  }
+}
+
+resource "aws_ssoadmin_account_assignment" "dmz_admin_sso_account_assignment" {
+  instance_arn       = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn
+  permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
+  principal_id       = aws_identitystore_group.administrators_sso_group.group_id
+  principal_type     = "GROUP"
+  target_id          = aws_organizations_account.spiral-pub.id
+  target_type        = "AWS_ACCOUNT"
+}
+
 resource "aws_organizations_account" "spiral-hub" {
   email                      = "aws-spiral+hub@defn.us"
   iam_user_access_to_billing = "ALLOW"
@@ -193,25 +212,6 @@ resource "aws_ssoadmin_account_assignment" "hub_admin_sso_account_assignment" {
   principal_id       = aws_identitystore_group.administrators_sso_group.group_id
   principal_type     = "GROUP"
   target_id          = aws_organizations_account.spiral-hub.id
-  target_type        = "AWS_ACCOUNT"
-}
-
-resource "aws_organizations_account" "spiral-cde" {
-  email                      = "aws-spiral+sec@defn.us"
-  iam_user_access_to_billing = "ALLOW"
-  name                       = "sec"
-  role_name                  = "OrganizationAccountAccessRole"
-  tags = {
-    ManagedBy = "Terraform"
-  }
-}
-
-resource "aws_ssoadmin_account_assignment" "sec_admin_sso_account_assignment" {
-  instance_arn       = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn
-  permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
-  principal_id       = aws_identitystore_group.administrators_sso_group.group_id
-  principal_type     = "GROUP"
-  target_id          = aws_organizations_account.spiral-cde.id
   target_type        = "AWS_ACCOUNT"
 }
 
@@ -234,21 +234,21 @@ resource "aws_ssoadmin_account_assignment" "dev_admin_sso_account_assignment" {
   target_type        = "AWS_ACCOUNT"
 }
 
-resource "aws_organizations_account" "spiral-pub" {
-  email                      = "aws-spiral+dmz@defn.us"
+resource "aws_organizations_account" "spiral-prod" {
+  email                      = "aws-spiral+sec@defn.us"
   iam_user_access_to_billing = "ALLOW"
-  name                       = "dmz"
+  name                       = "sec"
   role_name                  = "OrganizationAccountAccessRole"
   tags = {
     ManagedBy = "Terraform"
   }
 }
 
-resource "aws_ssoadmin_account_assignment" "dmz_admin_sso_account_assignment" {
+resource "aws_ssoadmin_account_assignment" "sec_admin_sso_account_assignment" {
   instance_arn       = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn
   permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
   principal_id       = aws_identitystore_group.administrators_sso_group.group_id
   principal_type     = "GROUP"
-  target_id          = aws_organizations_account.spiral-pub.id
+  target_id          = aws_organizations_account.spiral-prod.id
   target_type        = "AWS_ACCOUNT"
 }

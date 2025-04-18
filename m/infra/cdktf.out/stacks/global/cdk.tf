@@ -1475,16 +1475,16 @@ module "s3-fogg-hub" {
 provider "aws" {
   profile = "defn-org-sso-source"
   region  = "us-east-1"
-  alias   = "fogg-cde"
+  alias   = "fogg-prod"
   assume_role {
     role_arn = "arn:aws:iam::565963418226:role/fogg-ops-terraform"
   }
 }
 
-module "s3-fogg-cde" {
+module "s3-fogg-prod" {
   acl = "private"
   attributes = [
-    "fogg-cde",
+    "fogg-prod",
   ]
   enabled            = true
   name               = "global"
@@ -1494,7 +1494,7 @@ module "s3-fogg-cde" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = aws.fogg-cde
+    aws = aws.fogg-prod
   }
 }
 
@@ -1631,32 +1631,6 @@ module "s3-helix-org" {
 provider "aws" {
   profile = "defn-org-sso-source"
   region  = "us-east-1"
-  alias   = "helix-net"
-  assume_role {
-    role_arn = "arn:aws:iam::504722108514:role/helix-ops-terraform"
-  }
-}
-
-module "s3-helix-net" {
-  acl = "private"
-  attributes = [
-    "helix-net",
-  ]
-  enabled            = true
-  name               = "global"
-  namespace          = "dfn"
-  stage              = "defn"
-  user_enabled       = false
-  versioning_enabled = false
-  source             = "./mod/terraform-aws-s3-bucket"
-  providers = {
-    aws = aws.helix-net
-  }
-}
-
-provider "aws" {
-  profile = "defn-org-sso-source"
-  region  = "us-east-1"
   alias   = "helix-log"
   assume_role {
     role_arn = "arn:aws:iam::664427926343:role/helix-ops-terraform"
@@ -1677,6 +1651,32 @@ module "s3-helix-log" {
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
     aws = aws.helix-log
+  }
+}
+
+provider "aws" {
+  profile = "defn-org-sso-source"
+  region  = "us-east-1"
+  alias   = "helix-net"
+  assume_role {
+    role_arn = "arn:aws:iam::504722108514:role/helix-ops-terraform"
+  }
+}
+
+module "s3-helix-net" {
+  acl = "private"
+  attributes = [
+    "helix-net",
+  ]
+  enabled            = true
+  name               = "global"
+  namespace          = "dfn"
+  stage              = "defn"
+  user_enabled       = false
+  versioning_enabled = false
+  source             = "./mod/terraform-aws-s3-bucket"
+  providers = {
+    aws = aws.helix-net
   }
 }
 
@@ -1761,6 +1761,32 @@ module "s3-helix-ci" {
 provider "aws" {
   profile = "defn-org-sso-source"
   region  = "us-east-1"
+  alias   = "helix-pub"
+  assume_role {
+    role_arn = "arn:aws:iam::536806623881:role/helix-ops-terraform"
+  }
+}
+
+module "s3-helix-pub" {
+  acl = "private"
+  attributes = [
+    "helix-pub",
+  ]
+  enabled            = true
+  name               = "global"
+  namespace          = "dfn"
+  stage              = "defn"
+  user_enabled       = false
+  versioning_enabled = false
+  source             = "./mod/terraform-aws-s3-bucket"
+  providers = {
+    aws = aws.helix-pub
+  }
+}
+
+provider "aws" {
+  profile = "defn-org-sso-source"
+  region  = "us-east-1"
   alias   = "helix-hub"
   assume_role {
     role_arn = "arn:aws:iam::436043820387:role/helix-ops-terraform"
@@ -1781,32 +1807,6 @@ module "s3-helix-hub" {
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
     aws = aws.helix-hub
-  }
-}
-
-provider "aws" {
-  profile = "defn-org-sso-source"
-  region  = "us-east-1"
-  alias   = "helix-cde"
-  assume_role {
-    role_arn = "arn:aws:iam::724643698007:role/helix-ops-terraform"
-  }
-}
-
-module "s3-helix-cde" {
-  acl = "private"
-  attributes = [
-    "helix-cde",
-  ]
-  enabled            = true
-  name               = "global"
-  namespace          = "dfn"
-  stage              = "defn"
-  user_enabled       = false
-  versioning_enabled = false
-  source             = "./mod/terraform-aws-s3-bucket"
-  providers = {
-    aws = aws.helix-cde
   }
 }
 
@@ -1839,16 +1839,16 @@ module "s3-helix-dev" {
 provider "aws" {
   profile = "defn-org-sso-source"
   region  = "us-east-1"
-  alias   = "helix-pub"
+  alias   = "helix-prod"
   assume_role {
-    role_arn = "arn:aws:iam::536806623881:role/helix-ops-terraform"
+    role_arn = "arn:aws:iam::724643698007:role/helix-ops-terraform"
   }
 }
 
-module "s3-helix-pub" {
+module "s3-helix-prod" {
   acl = "private"
   attributes = [
-    "helix-pub",
+    "helix-prod",
   ]
   enabled            = true
   name               = "global"
@@ -1858,7 +1858,7 @@ module "s3-helix-pub" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = aws.helix-pub
+    aws = aws.helix-prod
   }
 }
 
@@ -2437,32 +2437,6 @@ module "s3-spiral-org" {
 provider "aws" {
   profile = "defn-org-sso-source"
   region  = "us-east-1"
-  alias   = "spiral-net"
-  assume_role {
-    role_arn = "arn:aws:iam::057533398557:role/spiral-ops-terraform"
-  }
-}
-
-module "s3-spiral-net" {
-  acl = "private"
-  attributes = [
-    "spiral-net",
-  ]
-  enabled            = true
-  name               = "global"
-  namespace          = "dfn"
-  stage              = "defn"
-  user_enabled       = false
-  versioning_enabled = false
-  source             = "./mod/terraform-aws-s3-bucket"
-  providers = {
-    aws = aws.spiral-net
-  }
-}
-
-provider "aws" {
-  profile = "defn-org-sso-source"
-  region  = "us-east-1"
   alias   = "spiral-log"
   assume_role {
     role_arn = "arn:aws:iam::442333715734:role/spiral-ops-terraform"
@@ -2483,6 +2457,32 @@ module "s3-spiral-log" {
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
     aws = aws.spiral-log
+  }
+}
+
+provider "aws" {
+  profile = "defn-org-sso-source"
+  region  = "us-east-1"
+  alias   = "spiral-net"
+  assume_role {
+    role_arn = "arn:aws:iam::057533398557:role/spiral-ops-terraform"
+  }
+}
+
+module "s3-spiral-net" {
+  acl = "private"
+  attributes = [
+    "spiral-net",
+  ]
+  enabled            = true
+  name               = "global"
+  namespace          = "dfn"
+  stage              = "defn"
+  user_enabled       = false
+  versioning_enabled = false
+  source             = "./mod/terraform-aws-s3-bucket"
+  providers = {
+    aws = aws.spiral-net
   }
 }
 
@@ -2567,6 +2567,32 @@ module "s3-spiral-ci" {
 provider "aws" {
   profile = "defn-org-sso-source"
   region  = "us-east-1"
+  alias   = "spiral-pub"
+  assume_role {
+    role_arn = "arn:aws:iam::130046154300:role/spiral-ops-terraform"
+  }
+}
+
+module "s3-spiral-pub" {
+  acl = "private"
+  attributes = [
+    "spiral-pub",
+  ]
+  enabled            = true
+  name               = "global"
+  namespace          = "dfn"
+  stage              = "defn"
+  user_enabled       = false
+  versioning_enabled = false
+  source             = "./mod/terraform-aws-s3-bucket"
+  providers = {
+    aws = aws.spiral-pub
+  }
+}
+
+provider "aws" {
+  profile = "defn-org-sso-source"
+  region  = "us-east-1"
   alias   = "spiral-hub"
   assume_role {
     role_arn = "arn:aws:iam::216704421225:role/spiral-ops-terraform"
@@ -2587,32 +2613,6 @@ module "s3-spiral-hub" {
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
     aws = aws.spiral-hub
-  }
-}
-
-provider "aws" {
-  profile = "defn-org-sso-source"
-  region  = "us-east-1"
-  alias   = "spiral-cde"
-  assume_role {
-    role_arn = "arn:aws:iam::398258703387:role/spiral-ops-terraform"
-  }
-}
-
-module "s3-spiral-cde" {
-  acl = "private"
-  attributes = [
-    "spiral-cde",
-  ]
-  enabled            = true
-  name               = "global"
-  namespace          = "dfn"
-  stage              = "defn"
-  user_enabled       = false
-  versioning_enabled = false
-  source             = "./mod/terraform-aws-s3-bucket"
-  providers = {
-    aws = aws.spiral-cde
   }
 }
 
@@ -2645,16 +2645,16 @@ module "s3-spiral-dev" {
 provider "aws" {
   profile = "defn-org-sso-source"
   region  = "us-east-1"
-  alias   = "spiral-pub"
+  alias   = "spiral-prod"
   assume_role {
-    role_arn = "arn:aws:iam::130046154300:role/spiral-ops-terraform"
+    role_arn = "arn:aws:iam::398258703387:role/spiral-ops-terraform"
   }
 }
 
-module "s3-spiral-pub" {
+module "s3-spiral-prod" {
   acl = "private"
   attributes = [
-    "spiral-pub",
+    "spiral-prod",
   ]
   enabled            = true
   name               = "global"
@@ -2664,7 +2664,7 @@ module "s3-spiral-pub" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = aws.spiral-pub
+    aws = aws.spiral-prod
   }
 }
 
@@ -2697,32 +2697,6 @@ module "s3-vault-org" {
 provider "aws" {
   profile = "defn-org-sso-source"
   region  = "us-east-1"
-  alias   = "vault-net"
-  assume_role {
-    role_arn = "arn:aws:iam::915207860232:role/vault-ops-terraform"
-  }
-}
-
-module "s3-vault-net" {
-  acl = "private"
-  attributes = [
-    "vault-net",
-  ]
-  enabled            = true
-  name               = "global"
-  namespace          = "dfn"
-  stage              = "defn"
-  user_enabled       = false
-  versioning_enabled = false
-  source             = "./mod/terraform-aws-s3-bucket"
-  providers = {
-    aws = aws.vault-net
-  }
-}
-
-provider "aws" {
-  profile = "defn-org-sso-source"
-  region  = "us-east-1"
   alias   = "vault-log"
   assume_role {
     role_arn = "arn:aws:iam::749185891195:role/vault-ops-terraform"
@@ -2743,6 +2717,32 @@ module "s3-vault-log" {
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
     aws = aws.vault-log
+  }
+}
+
+provider "aws" {
+  profile = "defn-org-sso-source"
+  region  = "us-east-1"
+  alias   = "vault-net"
+  assume_role {
+    role_arn = "arn:aws:iam::915207860232:role/vault-ops-terraform"
+  }
+}
+
+module "s3-vault-net" {
+  acl = "private"
+  attributes = [
+    "vault-net",
+  ]
+  enabled            = true
+  name               = "global"
+  namespace          = "dfn"
+  stage              = "defn"
+  user_enabled       = false
+  versioning_enabled = false
+  source             = "./mod/terraform-aws-s3-bucket"
+  providers = {
+    aws = aws.vault-net
   }
 }
 
@@ -2827,6 +2827,32 @@ module "s3-vault-ci" {
 provider "aws" {
   profile = "defn-org-sso-source"
   region  = "us-east-1"
+  alias   = "vault-pub"
+  assume_role {
+    role_arn = "arn:aws:iam::851162413429:role/vault-ops-terraform"
+  }
+}
+
+module "s3-vault-pub" {
+  acl = "private"
+  attributes = [
+    "vault-pub",
+  ]
+  enabled            = true
+  name               = "global"
+  namespace          = "dfn"
+  stage              = "defn"
+  user_enabled       = false
+  versioning_enabled = false
+  source             = "./mod/terraform-aws-s3-bucket"
+  providers = {
+    aws = aws.vault-pub
+  }
+}
+
+provider "aws" {
+  profile = "defn-org-sso-source"
+  region  = "us-east-1"
   alias   = "vault-hub"
   assume_role {
     role_arn = "arn:aws:iam::539099112425:role/vault-ops-terraform"
@@ -2847,32 +2873,6 @@ module "s3-vault-hub" {
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
     aws = aws.vault-hub
-  }
-}
-
-provider "aws" {
-  profile = "defn-org-sso-source"
-  region  = "us-east-1"
-  alias   = "vault-cde"
-  assume_role {
-    role_arn = "arn:aws:iam::040769490632:role/vault-ops-terraform"
-  }
-}
-
-module "s3-vault-cde" {
-  acl = "private"
-  attributes = [
-    "vault-cde",
-  ]
-  enabled            = true
-  name               = "global"
-  namespace          = "dfn"
-  stage              = "defn"
-  user_enabled       = false
-  versioning_enabled = false
-  source             = "./mod/terraform-aws-s3-bucket"
-  providers = {
-    aws = aws.vault-cde
   }
 }
 
@@ -2905,16 +2905,16 @@ module "s3-vault-dev" {
 provider "aws" {
   profile = "defn-org-sso-source"
   region  = "us-east-1"
-  alias   = "vault-pub"
+  alias   = "vault-prod"
   assume_role {
-    role_arn = "arn:aws:iam::851162413429:role/vault-ops-terraform"
+    role_arn = "arn:aws:iam::040769490632:role/vault-ops-terraform"
   }
 }
 
-module "s3-vault-pub" {
+module "s3-vault-prod" {
   acl = "private"
   attributes = [
-    "vault-pub",
+    "vault-prod",
   ]
   enabled            = true
   name               = "global"
@@ -2924,7 +2924,7 @@ module "s3-vault-pub" {
   versioning_enabled = false
   source             = "./mod/terraform-aws-s3-bucket"
   providers = {
-    aws = aws.vault-pub
+    aws = aws.vault-prod
   }
 }
 

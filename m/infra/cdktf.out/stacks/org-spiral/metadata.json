@@ -31,14 +31,6 @@
       }
     },
     "aws_organizations_account": {
-      "spiral-cde": {
-        "//": {
-          "metadata": {
-            "path": "org-spiral/spiral-cde",
-            "uniqueId": "spiral-cde"
-          }
-        }
-      },
       "spiral-ci": {
         "//": {
           "metadata": {
@@ -100,6 +92,14 @@
           "metadata": {
             "path": "org-spiral/spiral-org",
             "uniqueId": "spiral-org"
+          }
+        }
+      },
+      "spiral-prod": {
+        "//": {
+          "metadata": {
+            "path": "org-spiral/spiral-prod",
+            "uniqueId": "spiral-prod"
           }
         }
       },

@@ -31,14 +31,6 @@
       }
     },
     "aws_organizations_account": {
-      "vault-cde": {
-        "//": {
-          "metadata": {
-            "path": "org-vault/vault-cde",
-            "uniqueId": "vault-cde"
-          }
-        }
-      },
       "vault-ci": {
         "//": {
           "metadata": {
@@ -100,6 +92,14 @@
           "metadata": {
             "path": "org-vault/vault-org",
             "uniqueId": "vault-org"
+          }
+        }
+      },
+      "vault-prod": {
+        "//": {
+          "metadata": {
+            "path": "org-vault/vault-prod",
+            "uniqueId": "vault-prod"
           }
         }
       },

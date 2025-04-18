@@ -31,14 +31,6 @@
       }
     },
     "aws_organizations_account": {
-      "helix-cde": {
-        "//": {
-          "metadata": {
-            "path": "org-helix/helix-cde",
-            "uniqueId": "helix-cde"
-          }
-        }
-      },
       "helix-ci": {
         "//": {
           "metadata": {
@@ -100,6 +92,14 @@
           "metadata": {
             "path": "org-helix/helix-org",
             "uniqueId": "helix-org"
+          }
+        }
+      },
+      "helix-prod": {
+        "//": {
+          "metadata": {
+            "path": "org-helix/helix-prod",
+            "uniqueId": "helix-prod"
           }
         }
       },

@@ -9,7 +9,7 @@ terraform {
     bucket         = "dfn-defn-terraform-state"
     dynamodb_table = "dfn-defn-terraform-state-lock"
     encrypt        = true
-    key            = "stacks/acc-vault-cde/terraform.tfstate"
+    key            = "stacks/acc-helix-prod/terraform.tfstate"
     profile        = "defn-org-sso-source"
     region         = "us-east-1"
   }
@@ -17,17 +17,17 @@ terraform {
 }
 
 provider "aws" {
-  profile = "vault-cde-sso-source"
-  alias   = "vault-cde"
+  profile = "helix-prod-sso-source"
+  alias   = "helix-prod"
 }
 
-module "vault-cde" {
+module "helix-prod" {
   account   = 510430971399
   name      = "terraform"
-  namespace = "vault"
+  namespace = "helix"
   stage     = "ops"
   source    = "./mod/terraform-aws-defn-account"
   providers = {
-    aws = aws.vault-cde
+    aws = aws.helix-prod
   }
 }

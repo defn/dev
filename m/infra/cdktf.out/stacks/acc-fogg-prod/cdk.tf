@@ -9,7 +9,7 @@ terraform {
     bucket         = "dfn-defn-terraform-state"
     dynamodb_table = "dfn-defn-terraform-state-lock"
     encrypt        = true
-    key            = "stacks/acc-helix-cde/terraform.tfstate"
+    key            = "stacks/acc-fogg-prod/terraform.tfstate"
     profile        = "defn-org-sso-source"
     region         = "us-east-1"
   }
@@ -17,17 +17,17 @@ terraform {
 }
 
 provider "aws" {
-  profile = "helix-cde-sso-source"
-  alias   = "helix-cde"
+  profile = "fogg-prod-sso-source"
+  alias   = "fogg-prod"
 }
 
-module "helix-cde" {
+module "fogg-prod" {
   account   = 510430971399
   name      = "terraform"
-  namespace = "helix"
+  namespace = "fogg"
   stage     = "ops"
   source    = "./mod/terraform-aws-defn-account"
   providers = {
-    aws = aws.helix-cde
+    aws = aws.fogg-prod
   }
 }

@@ -2,17 +2,17 @@
   "//": {
     "metadata": {
       "backend": "s3",
-      "stackName": "acc-vault-cde",
+      "stackName": "acc-spiral-prod",
       "version": "0.20.11"
     },
     "outputs": {}
   },
   "module": {
-    "vault-cde": {
+    "spiral-prod": {
       "//": {
         "metadata": {
-          "path": "acc-vault-cde/vault-cde",
-          "uniqueId": "vault-cde"
+          "path": "acc-spiral-prod/spiral-prod",
+          "uniqueId": "spiral-prod"
         }
       }
     }
@@ -23,7 +23,7 @@
         "bucket": "dfn-defn-terraform-state",
         "dynamodb_table": "dfn-defn-terraform-state-lock",
         "encrypt": true,
-        "key": "stacks/acc-vault-cde/terraform.tfstate",
+        "key": "stacks/acc-spiral-prod/terraform.tfstate",
         "profile": "defn-org-sso-source",
         "region": "us-east-1"
       }

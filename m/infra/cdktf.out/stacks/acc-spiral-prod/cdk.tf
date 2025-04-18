@@ -9,7 +9,7 @@ terraform {
     bucket         = "dfn-defn-terraform-state"
     dynamodb_table = "dfn-defn-terraform-state-lock"
     encrypt        = true
-    key            = "stacks/acc-fogg-cde/terraform.tfstate"
+    key            = "stacks/acc-spiral-prod/terraform.tfstate"
     profile        = "defn-org-sso-source"
     region         = "us-east-1"
   }
@@ -17,17 +17,17 @@ terraform {
 }
 
 provider "aws" {
-  profile = "fogg-cde-sso-source"
-  alias   = "fogg-cde"
+  profile = "spiral-prod-sso-source"
+  alias   = "spiral-prod"
 }
 
-module "fogg-cde" {
+module "spiral-prod" {
   account   = 510430971399
   name      = "terraform"
-  namespace = "fogg"
+  namespace = "spiral"
   stage     = "ops"
   source    = "./mod/terraform-aws-defn-account"
   providers = {
-    aws = aws.fogg-cde
+    aws = aws.spiral-prod
   }
 }

@@ -184,7 +184,7 @@ resource "aws_ssoadmin_account_assignment" "hub_admin_sso_account_assignment" {
   target_type        = "AWS_ACCOUNT"
 }
 
-resource "aws_organizations_account" "fogg-cde" {
+resource "aws_organizations_account" "fogg-prod" {
   email = "fogg-postx@defn.sh"
   name  = "fogg-postx"
   tags = {
@@ -197,7 +197,7 @@ resource "aws_ssoadmin_account_assignment" "postx_admin_sso_account_assignment" 
   permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
   principal_id       = aws_identitystore_group.administrators_sso_group.group_id
   principal_type     = "GROUP"
-  target_id          = aws_organizations_account.fogg-cde.id
+  target_id          = aws_organizations_account.fogg-prod.id
   target_type        = "AWS_ACCOUNT"
 }
 

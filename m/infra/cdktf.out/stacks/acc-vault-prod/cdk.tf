@@ -9,7 +9,7 @@ terraform {
     bucket         = "dfn-defn-terraform-state"
     dynamodb_table = "dfn-defn-terraform-state-lock"
     encrypt        = true
-    key            = "stacks/acc-spiral-cde/terraform.tfstate"
+    key            = "stacks/acc-vault-prod/terraform.tfstate"
     profile        = "defn-org-sso-source"
     region         = "us-east-1"
   }
@@ -17,17 +17,17 @@ terraform {
 }
 
 provider "aws" {
-  profile = "spiral-cde-sso-source"
-  alias   = "spiral-cde"
+  profile = "vault-prod-sso-source"
+  alias   = "vault-prod"
 }
 
-module "spiral-cde" {
+module "vault-prod" {
   account   = 510430971399
   name      = "terraform"
-  namespace = "spiral"
+  namespace = "vault"
   stage     = "ops"
   source    = "./mod/terraform-aws-defn-account"
   providers = {
-    aws = aws.spiral-cde
+    aws = aws.vault-prod
   }
 }

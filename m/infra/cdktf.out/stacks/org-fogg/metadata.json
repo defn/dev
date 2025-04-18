@@ -31,14 +31,6 @@
       }
     },
     "aws_organizations_account": {
-      "fogg-cde": {
-        "//": {
-          "metadata": {
-            "path": "org-fogg/fogg-cde",
-            "uniqueId": "fogg-cde"
-          }
-        }
-      },
       "fogg-ci": {
         "//": {
           "metadata": {
@@ -100,6 +92,14 @@
           "metadata": {
             "path": "org-fogg/fogg-org",
             "uniqueId": "fogg-org"
+          }
+        }
+      },
+      "fogg-prod": {
+        "//": {
+          "metadata": {
+            "path": "org-fogg/fogg-prod",
+            "uniqueId": "fogg-prod"
           }
         }
       },
