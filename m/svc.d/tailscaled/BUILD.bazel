@@ -1,0 +1,15 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_binary", "go_library")
+
+go_library(
+    name = "tailscaled_lib",
+    srcs = ["tailscaled.go"],
+    importpath = "github.com/defn/dev/m/svc.d/tailscaled",
+    visibility = ["//visibility:private"],
+    deps = ["@com_github_joho_godotenv//:godotenv"],
+)
+
+go_binary(
+    name = "tailscaled",
+    embed = [":tailscaled_lib"],
+    visibility = ["//visibility:public"],
+)
