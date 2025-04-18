@@ -1,3 +1,29 @@
+[settings]
+experimental = true
+
 [tools]
+ansible = "11.3.0"
 aws = "2.26.2"
+bat = "0.25.0"
+bazelisk = "1.26.0"
+chamber = "3.1.1"
+coder = "2.21.0"
+cue = "0.12.1"
+delta = "0.18.2"
+dive = "0.13.1"
+dyff = "1.10.1"
+fzf = "0.61.1"
+gh = "2.69.0"
+glow = "2.1.0"
+go = "1.24.2"
+gron = "0.7.1"
+jq = "1.7.1"
+just = "1.40.0"
+pipx = "1.7.1"
+shfmt = "3.11.0"
+starship = "1.22.1"
+"ubi:buildkite/agent" = { version = "3.96.0", exe = "buildkite-agent" }
 "ubi:coder/code-server" = { version = "4.99.3", bin_path = "bin", extract_all = "true" }
+"ubi:honeycombio/buildevents" = "0.17.0"
+"ubi:peak/s5cmd" = "2.3.0"
+"ubi:stefanlogue/meteor" = "0.26.0"
