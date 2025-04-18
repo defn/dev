@@ -19,17 +19,23 @@ input: {
 	}
 }
 
+// https://whimsical.com/aws-organizations-D6p7mKoZiwNqZdTZnysYUy
 full_accounts: [
 	"org", // organization master
-	"net", // network
 	"log", // logging
+	"net", // network
 	"lib", // artifacts
 	"ops", // operation teams
-	"ci",  // ci/cd
-	"hub", // shared services
-	"cde", // engineeering teams
-	"dev", // development environments
-	"pub", // public facing infra
+	// "cde", // cloud development environments
+	"ci",   // ci/cd
+	"pub",  // public facing infra
+	"hub",  // shared services
+	"dev",  // development environments
+	"prod", // production environments
+
+	// "sandbox", // sandbox environments
+
+	// cde became prod
 ]
 
 input: inf.#AwsProps & {
@@ -140,7 +146,7 @@ input: inf.#AwsProps & {
 
 		fogg: {
 			region: "us-west-2"
-			#types: ["org", "net", "log", "lib", "ops", "ci", "hub", "cde", "dev", "pub"]
+			#types: ["org", "net", "log", "lib", "ops", "ci", "hub", "prod", "dev", "pub"]
 		}
 
 		chamber: {
@@ -275,7 +281,7 @@ lookup: {
 			hub: {
 				id: "436043820387"
 			}
-			cde: {
+			prod: {
 				t:    "dmz"
 				name: t
 				id:   "724643698007"
@@ -321,7 +327,7 @@ lookup: {
 			hub: {
 				id: "216704421225"
 			}
-			cde: {
+			prod: {
 				t:    "sec"
 				name: t
 				id:   "398258703387"
@@ -385,7 +391,7 @@ lookup: {
 				id:     "337248635000"
 				prefix: "fogg-"
 			}
-			cde: {
+			prod: {
 				t:      "postx"
 				name:   t
 				id:     "565963418226"
@@ -812,7 +818,7 @@ lookup: {
 				email:    "aws-vault-\(t)@defn.sh"
 				imported: "yes"
 			}
-			cde: {
+			prod: {
 				t:        "vault1"
 				name:     t
 				id:       "040769490632"
