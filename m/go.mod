@@ -17,6 +17,7 @@ require (
 	github.com/charmbracelet/lipgloss v1.1.0
 	github.com/gin-gonic/gin v1.10.0
 	github.com/hashicorp/terraform-cdk-go/cdktf v0.20.11
+	github.com/joho/godotenv v1.5.1
 	github.com/lucasb-eyer/go-colorful v1.2.0
 	github.com/muesli/gamut v0.3.1
 	github.com/noisysockets/noisysockets v0.28.0

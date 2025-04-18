@@ -56,6 +56,7 @@ use_repo(
     "com_github_charmbracelet_lipgloss",
     "com_github_gin_gonic_gin",
     "com_github_hashicorp_terraform_cdk_go_cdktf",
+    "com_github_joho_godotenv",
     "com_github_lucasb_eyer_go_colorful",
     "com_github_muesli_gamut",
     "com_github_noisysockets_noisysockets",

@@ -2,5 +2,4 @@
 
 exec 2>&1
 source ~/.bash_profile
-source .env
 exec ./coder-tunnel

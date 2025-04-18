@@ -109,12 +109,9 @@ update:
 
 regen:
 	@mark gazelle
-	set -x; go get $$(git ls-files | grep 'go$$' | perl -pe 's{[^/]+$$}{\n}' | sort -u | runmany 4 1 'echo ./$$1' | grep -v /demo/)
-	mkdir -p node_modules demo/node_modules
-	for a in node_modules demo/node_modules infra/stacks/*/.terraform demo/stacks/*/.terraform; do \
-		touch $$a/go.mod 2>/dev/null || true; \
-	done
+	go get $$(git ls-files | grep 'go$$' | perl -pe 's{[^/]+$$}{\n}' | sort -u | runmany 4 1 'echo ./$$1')
 	go mod tidy
+	bazel mod tidy
 	b pass run //:gazelle
 
 coder-login:

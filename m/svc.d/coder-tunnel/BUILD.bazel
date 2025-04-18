@@ -5,6 +5,7 @@ go_library(
     srcs = ["coder-tunnel.go"],
     importpath = "github.com/defn/dev/m/svc.d/coder-tunnel",
     visibility = ["//visibility:private"],
+    deps = ["@com_github_joho_godotenv//:godotenv"],
 )
 
 go_binary(
