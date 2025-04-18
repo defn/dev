@@ -83,8 +83,8 @@ daily-inner file n:
 download-user file n="4":
     cat {{ file }} | runmany {{ n }} 'just user $1'
 
-html file="following.txt" n="20":
-    cat {{ file }} | runmany {{ n }} 'just process js-username-$1.json.js.json'
+html file="following.txt" n="40":
+    cat {{ file }} | runmany {{ n }} 'just process js-username-$1.json.js.json || true'
 
 backup transfers="60":
     screen -dmS backup j backup-inner {{ transfers }}
