@@ -3,7 +3,7 @@
 exec 2>&1
 
 if ! test -e /dev/net/tun; then
-    exec sleep infinity
+	exec sleep infinity
 fi
 
 exec sudo tailscaled
