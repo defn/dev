@@ -1,5 +1,11 @@
 #!/usr/bin/env bash
 
 exec 2>&1
-source ~/.bash_profile
-exec ./"$(basename "$(pwd)")"
+bin="$(basename "$(pwd)")"
+if test -x "${bin}"; then
+	bin="./${bin}"
+else
+	bin="../../bazel-bin/svc.d/${bin}/${bin}_/${bin}"
+fi
+touch .env
+exec ~/bin/with-env "${bin}"
