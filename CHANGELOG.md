@@ -1,5 +1,63 @@
 # Changelog
 
+## [1.27.0](https://github.com/defn/dev/compare/v1.26.0...v1.27.0) (2025-04-21)
+
+
+### Features
+
+* add aws prod in lieu of cde ([f5d7784](https://github.com/defn/dev/commit/f5d77846c397d7e98d1dd7190e87288e703b4038))
+* build defn cli if sources change ([238988c](https://github.com/defn/dev/commit/238988c5739a008dab2aad894fb4a32c6e460a7b))
+* coder-tunnel s6 is a go program ([7ab6e5d](https://github.com/defn/dev/commit/7ab6e5d87bd8dd5f329717d64f004012e97b053f))
+* coracias-caudatus delts theme ([be4be1b](https://github.com/defn/dev/commit/be4be1b14bd976356448d827c10dda8de63335f7))
+* cue adds customizations to argocd ([b89ae5f](https://github.com/defn/dev/commit/b89ae5f056522c0764ff8d69671cf8579066aeb7))
+* delta for diffs ([001fb51](https://github.com/defn/dev/commit/001fb51d439733723ab651b119586e7761af3da9))
+* example go service ([212240a](https://github.com/defn/dev/commit/212240a41816d526d84c3fcde39c43a73a86456b))
+* example runs by default ([a970a51](https://github.com/defn/dev/commit/a970a510435d8715e629bd1bc1416201bd8d1491))
+* install glow, update docs for glow ([113412e](https://github.com/defn/dev/commit/113412e66967aca5dec376e96f27a689c583b058))
+* k3d ([0fd9f44](https://github.com/defn/dev/commit/0fd9f4461ad3e48ffb0882a1a687aa0c368838f8))
+* k3d port forwards as s6 services ([a781353](https://github.com/defn/dev/commit/a781353f9770c20cf7a685a5e3b2d7e4f3a05498))
+* **mise:** install meteor globally ([8025bdf](https://github.com/defn/dev/commit/8025bdf5d722344a6bf753c9b4a1a7958dad0601))
+* **mise:** make mise-list shows dry-run ([fffaf94](https://github.com/defn/dev/commit/fffaf94dbd59f6e078f1aff4f9d34f31b2b62b7a))
+* **mise:** make mise-list with upgrade commands ([24b7338](https://github.com/defn/dev/commit/24b7338344cf92224b01b155eb2c2fbd3e0e4dc2))
+* run bazel bin if go build isnt found ([5504f8f](https://github.com/defn/dev/commit/5504f8f3867282b7618294cd9901d6327371c891))
+* **s6:** tailscaled golang run ([8f41012](https://github.com/defn/dev/commit/8f41012b74afacd205eb41316b72a1a64dbb4c4f))
+* **tui:** height tracks terminal resize ([fdaf005](https://github.com/defn/dev/commit/fdaf005c916d11ccb930e2749f208e223c757e1f))
+* **tui:** width tracks terminal resizes ([feb6d73](https://github.com/defn/dev/commit/feb6d73b11782bb8c57a78b28b2372024fcf98b8))
+* ubuntu 0404 from ([bd9cd14](https://github.com/defn/dev/commit/bd9cd14d166918100a9f5042ba16e8a19560107e))
+* use gotdoenv to load .env ([04a8686](https://github.com/defn/dev/commit/04a86866771ca4a0ab450786fda8eff862e3bee2))
+
+
+### Bug Fixes
+
+* also remove old go, cue links ([7bb1d30](https://github.com/defn/dev/commit/7bb1d30089fe9d6d30da8e8ef55e9acd7038f3dc))
+* argocd no longer redirecting ([323e501](https://github.com/defn/dev/commit/323e501841459dbfbb66e1a5fc58a6bfda8823ef))
+* cmd build with correct directories ([f853ad3](https://github.com/defn/dev/commit/f853ad3e0e85534d3f8ea9430ab5dc793afac371))
+* command/infra is the command, infra is the site config ([d1bc4eb](https://github.com/defn/dev/commit/d1bc4eb602721b9b39b66eb4324488dac6ca8e3b))
+* dont actually talk to registries ([9826860](https://github.com/defn/dev/commit/9826860d557310456a7e49b06b101c41a41245a0))
+* dont upload with bazel, dont make my cache dirs with scripts ([2fb61da](https://github.com/defn/dev/commit/2fb61dac95fe660113fea29fd20a2a61fcf75cfa))
+* executable entrypoint.sh ([b058d3a](https://github.com/defn/dev/commit/b058d3a4a584913277bb9f6b24f2a55f4feee21c))
+* fix dyff between by removing namespace ([b0f23d0](https://github.com/defn/dev/commit/b0f23d06ccd068329622fa139fcc08bb495e00d3))
+* fq t ([27ca532](https://github.com/defn/dev/commit/27ca532ea0fb0222f97a9367a10e7a8ce2bac259))
+* generate bazel for new go programs ([b24551a](https://github.com/defn/dev/commit/b24551aedf17432ae39979cbffdc5bbb5b6e8b37))
+* glow is global, always link gitconfig ([c9dc949](https://github.com/defn/dev/commit/c9dc94970a3be99d0cef784d15641eb5b0f18ddc))
+* m start work on macos, on not services activated ([792ad40](https://github.com/defn/dev/commit/792ad408e2397c75f74ea35f493acbeaef075622))
+* m/dc tailscaled startup and docker permissions ([045aaf3](https://github.com/defn/dev/commit/045aaf38e35d25ffdb0803359ca215119576ec3d))
+* **mise:** show unique mise updates ([4a54faa](https://github.com/defn/dev/commit/4a54faaed90b39d5d28bf8bed6605e182463ad91))
+* more tools for k3d ([60eef20](https://github.com/defn/dev/commit/60eef20d60b47c999df4aa4cbfed43d2bbd987c7))
+* move command up for defn cli build ([c978655](https://github.com/defn/dev/commit/c9786555abbac003580bad81f24415cdd8f2d7d6))
+* no gleam, the generated js is awkward to use ([01528b6](https://github.com/defn/dev/commit/01528b68c870795eabde0621b0f54766ae1c1078))
+* no yaegi ([00b38a3](https://github.com/defn/dev/commit/00b38a3f9fd4d0b4a3b5d9aa45a1ac80e41b544c))
+* other way: config.toml is global ([4afdd8e](https://github.com/defn/dev/commit/4afdd8e2bded1e80f68ef03f8a7f3b7888b3763d))
+* relax go.mod version base ([7c622b6](https://github.com/defn/dev/commit/7c622b6036eaf2e09fd35007a17a2cff43313e26))
+* remove bazel link, make mise links for go, cue ([dd835a7](https://github.com/defn/dev/commit/dd835a7b6adcf4e434df0e43e13b20453761ee49))
+* **tui:** calculate heights correctly ([cd0c291](https://github.com/defn/dev/commit/cd0c2916901c69794f8e539150baacbafa8d51d0))
+* **tui:** ctrl-c exits ([163eee0](https://github.com/defn/dev/commit/163eee01230e4ccbbed39711a1a8a841a423e323))
+* **tui:** toggle quit screens ([aea0c02](https://github.com/defn/dev/commit/aea0c027d35211c816e0630493ff1e677c98c10f))
+* typo smal-step inventory ([e84883b](https://github.com/defn/dev/commit/e84883b8a6b4d57c8ce500ce9b5efa600955f4b4))
+* update code wrapper paths ([3167d70](https://github.com/defn/dev/commit/3167d70de055d3563d7ddf20f85446c8b900c03e))
+* use mise.toml for global config ([cbf24bd](https://github.com/defn/dev/commit/cbf24bd5141f145f5e9749aff99f6c3f699a3125))
+* with-env to load inner targets ([a3eac50](https://github.com/defn/dev/commit/a3eac50842d7704280caa61e7a8ec92c5ac0a099))
+
 ## [1.26.0](https://github.com/defn/dev/compare/v1.25.0...v1.26.0) (2025-04-13)
 
 
