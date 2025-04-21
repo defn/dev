@@ -92,7 +92,7 @@
   "editor.stickyScroll.enabled": false,
   "markdown.marp.exportType": "html",
   "markdown.marp.html": "all",
-  "terminal.integrated.fontFamily": "monospace",
+  "terminal.integrated.fontFamily": "Cousine",
   "npm.packageManager": "npm",
   "remote.portsAttributes": {
     "default": {
