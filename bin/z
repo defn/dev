@@ -1,7 +1,0 @@
-#!/usr/bin/env bash
-
-if [[ $# == 0 ]]; then
-	exec zellij options --disable-mouse-mode
-else
-	exec zellij "$@"
-fi

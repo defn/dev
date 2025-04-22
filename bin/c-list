@@ -1,6 +1,0 @@
-#!/usr/bin/env bash
-
-expr="$1"
-shift
-
-cue export --out json -e "${expr}" | jq -r '.[]'
