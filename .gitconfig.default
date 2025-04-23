@@ -28,9 +28,6 @@
 [diff]
     colorMoved = default
 
-[merge]
-    conflictstyle = zdiff3
-
 [delta]
     navigate = true
     dark = true
