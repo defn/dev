@@ -2,7 +2,6 @@ status:
     mise exec -- fly machine list
 
 build:
-    docker pull ghcr.io/defn/dev
     mise exec -- fly deploy --build-only
 
 deploy:
