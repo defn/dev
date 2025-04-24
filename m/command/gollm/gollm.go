@@ -47,6 +47,7 @@ func AskQuestion(ctx context.Context, llm gollm.LLM, question string) string {
 			"Focus on the robot's internal experience",
 			"The robot is lonely",
 			"Use a rough and rude Irish street vocabulary",
+			"Format response as Markdown",
 			"Answer directly without narrating what you're going to do",
 		))
 
