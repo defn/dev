@@ -1,14 +1,6 @@
 load("@io_bazel_rules_go//go:def.bzl", "go_library")
 
 go_library(
-    name = "gollm_lib",
-    srcs = ["main.go"],
-    importpath = "github.com/defn/dev/m/gollm",
-    visibility = ["//visibility:private"],
-    deps = ["@com_github_teilomillet_gollm//:gollm"],
-)
-
-go_library(
     name = "gollm",
     srcs = ["gollm.go"],
     importpath = "github.com/defn/dev/m/command/gollm",
