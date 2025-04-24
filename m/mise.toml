@@ -3,3 +3,6 @@
 helm = "3.17.3"
 kubectl = "1.32.3"
 kustomize = "5.6.0"
+
+[env]
+_.file = '.env'

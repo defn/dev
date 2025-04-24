@@ -228,6 +228,7 @@ bin/devcontainer
 !flake.lock
 /bazel*
 .env*
+!.env.example
 .prefect
 .xsession-errors*
 Bookshelf/
