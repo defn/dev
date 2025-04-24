@@ -1,4 +1,4 @@
-package main
+package command
 
 import (
 	"context"
@@ -6,25 +6,34 @@ import (
 	"log"
 	"os"
 
+	"github.com/spf13/cobra"
 	"github.com/teilomillet/gollm"
+
+	root "github.com/defn/dev/m/command/root"
 )
 
-func main() {
-	llm, err := gollm.NewLLM(
-		// https://docs.anthropic.com/en/docs/about-claude/models/all-models
-		gollm.SetModel("claude-3-5-haiku-20241022"),
-		gollm.SetProvider("anthropic"),
-		gollm.SetMaxTokens(200),
-		gollm.SetAPIKey(os.Getenv("GOLLM_API_KEY")),
-	)
-	if err != nil {
-		log.Fatalf("Failed to create LLM: %v", err)
-	}
+func init() {
+	root.RootCmd.AddCommand(&cobra.Command{
+		Use:   "gollm",
+		Short: "A brief description of your command",
+		Long:  `Something longer`,
+		Run: func(cmd *cobra.Command, args []string) {
+			llm, err := gollm.NewLLM(
+				// https://docs.anthropic.com/en/docs/about-claude/models/all-models
+				gollm.SetModel("claude-3-5-haiku-20241022"),
+				gollm.SetProvider("anthropic"),
+				gollm.SetMaxTokens(200),
+				gollm.SetAPIKey(os.Getenv("GOLLM_API_KEY")),
+			)
+			if err != nil {
+				log.Fatalf("Failed to create LLM: %v", err)
+			}
 
-	ctx := context.Background()
+			ctx := context.Background()
 
-	fmt.Printf("%s\n\n", AskQuestion(ctx, llm, "Tell me a short joke about programming."))
-	fmt.Printf("%s\n\n", AskQuestion(ctx, llm, "Tell me a one paragraph story about a cat"))
+			fmt.Printf("%s\n\n", AskQuestion(ctx, llm, args[0]))
+		},
+	})
 }
 
 func AskQuestion(ctx context.Context, llm gollm.LLM, question string) string {
