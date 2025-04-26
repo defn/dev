@@ -3,10 +3,6 @@ package infra
 import (
 	"fmt"
 
-	"cuelang.org/go/cue"
-	"cuelang.org/go/cue/cuecontext"
-	"cuelang.org/go/cue/load"
-
 	"github.com/aws/jsii-runtime-go"
 )
 
@@ -92,20 +88,4 @@ func Jsfalse() *bool {
 //lint:ignore U1000 utility
 func Jsbool(b bool) *bool {
 	return jsii.Bool(b)
-}
-
-func LoadUserAwsProps(infra_schema string) AwsProps {
-	ctx := cuecontext.New()
-
-	user_schema := ctx.CompileString(infra_schema)
-
-	user_input_instance := load.Instances([]string{"."}, nil)[0]
-	user_input := ctx.BuildInstance(user_input_instance)
-
-	user_schema.Unify(user_input)
-
-	var aws_props AwsProps
-	user_input.LookupPath(cue.ParsePath("input")).Decode(&aws_props)
-
-	return aws_props
 }

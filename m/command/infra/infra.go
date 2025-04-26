@@ -1,6 +1,8 @@
 package command
 
 import (
+	"fmt"
+
 	"cuelang.org/go/cue"
 	"cuelang.org/go/cue/cuecontext"
 	"cuelang.org/go/cue/load"
@@ -15,20 +17,23 @@ import (
 	root "github.com/defn/dev/m/command/root"
 )
 
-func LoadUserAwsProps(infra_schema string) infra.AwsProps {
+func LoadUserAwsProps(infra_schema string) (*infra.AwsProps, error) {
 	ctx := cuecontext.New()
 
 	user_schema := ctx.CompileString(infra_schema)
 
-	user_input_instance := load.Instances([]string{"."}, nil)[0]
-	user_input := ctx.BuildInstance(user_input_instance)
+	instance := load.Instances([]string{"."}, nil)[0]
+	user_input := ctx.BuildInstance(instance)
 
-	user_schema.Unify(user_input)
+	unified := user_schema.Unify(user_input)
+	if err := unified.Validate(); err != nil {
+		return nil, err
+	}
 
 	var aws_props infra.AwsProps
 	user_input.LookupPath(cue.ParsePath("input")).Decode(&aws_props)
 
-	return aws_props
+	return &aws_props, nil
 }
 
 func init() {
@@ -38,18 +43,23 @@ func init() {
 		Long:  `Generates Terraform configs from CUE.`,
 
 		Run: func(cmd *cobra.Command, args []string) {
-			site := LoadUserAwsProps("")
+			site, err := LoadUserAwsProps("")
+			if err != nil {
+				fmt.Errorf("Input did not validate: %w", err)
+				return
+			}
+
 			app := cdktf.NewApp(&cdktf.AppConfig{})
 
 			for _, org := range site.Organization {
-				tf.AwsOrganizationStack(app, &site, &org)
+				tf.AwsOrganizationStack(app, site, &org)
 
 				for _, acc := range org.Accounts {
-					tf.AwsAccountStack(app, &site, &org, &acc)
+					tf.AwsAccountStack(app, site, &org, &acc)
 				}
 			}
 
-			tf.GlobalStack(app, &site)
+			tf.GlobalStack(app, site)
 
 			app.Synth()
 		},
