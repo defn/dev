@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"io"
 	"io/fs"
+	"strings"
 
 	"cuelang.org/go/cue"
 	"cuelang.org/go/cue/cuecontext"
@@ -17,11 +18,7 @@ var defn_dev_use embed.FS
 func main() {
 	overlay := make(map[string]load.Source)
 
-	if err := BuildOverlayFromFS(&overlay, defn_dev_mod); err != nil {
-		panic(err)
-	}
-
-	if err := BuildOverlayFromFS(&overlay, defn_dev_use); err != nil {
+	if err := BuildOverlayFromFS(&overlay, defn_dev_use, "/use"); err != nil {
 		panic(err)
 	}
 
@@ -61,7 +58,7 @@ func BuildValueFromOverlay(overlay *map[string]load.Source, instanceNames []stri
 	return value, nil
 }
 
-func BuildOverlayFromFS(overlay *map[string]load.Source, fsys fs.FS) error {
+func BuildOverlayFromFS(overlay *map[string]load.Source, fsys fs.FS, prefix string) error {
 	err := fs.WalkDir(fsys, ".", func(path string, d fs.DirEntry, err error) error {
 		if err != nil {
 			return err
@@ -82,10 +79,11 @@ func BuildOverlayFromFS(overlay *map[string]load.Source, fsys fs.FS) error {
 		}
 
 		absPath := "/" + path
+		relPath := strings.TrimPrefix(absPath, prefix)
 
 		src := load.FromBytes(content)
 
-		(*overlay)[absPath] = src
+		(*overlay)[relPath] = src
 
 		return nil
 	})
