@@ -163,5 +163,5 @@ sync_inner:
 
 mise-list:
 	@(echo .; git grep [t]ools | grep [m]ise.toml | cut -d: -f1 | perl -pe 's{/mise.toml}{}') | runmany 'cd $$1 && pwd && mise upgrade --bump --dry-run' ; echo
-	@(echo .; git grep [t]ools | grep [m]ise.toml | cut -d: -f1 | perl -pe 's{/mise.toml}{}') | runmany 'cd $$1 && pwd && mise upgrade --bump --dry-run' | grep -v ansible | grep 'Would bump' | while read -r a b tool c mfile; do echo mise use --cd "$$(dirname $$mfile)" $$tool; done | sort -u
+	@(echo .; git grep [t]ools | grep [m]ise.toml | cut -d: -f1 | perl -pe 's{/mise.toml}{}') | runmany 'cd $$1 && pwd && mise upgrade --bump --dry-run' | grep 'Would bump' | while read -r a b tool c mfile; do echo mise use --cd "$$(dirname $$mfile)" $$tool; done | sort -u | sed 's# --cd ~/.config/mise##'
 
