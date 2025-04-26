@@ -63,7 +63,7 @@ func BuildOverlayFromFS(overlay *map[string]load.Source, fsys fs.FS, prefix stri
 		if err != nil {
 			return err
 		}
-		if d.IsDir() {
+		if !d.Type().IsRegular() {
 			return nil
 		}
 
@@ -80,7 +80,6 @@ func BuildOverlayFromFS(overlay *map[string]load.Source, fsys fs.FS, prefix stri
 
 		absPath := "/" + path
 		relPath := strings.TrimPrefix(absPath, prefix)
-
 		src := load.FromBytes(content)
 
 		(*overlay)[relPath] = src
