@@ -7,5 +7,7 @@ if test -x "${bin}"; then
 else
 	bin="../../bazel-bin/svc.d/${bin}/${bin}_/${bin}"
 fi
-touch .env
+if test -r .env; then
+	source .env
+fi
 exec ~/bin/with-env "${bin}"
