@@ -25,7 +25,7 @@ lint:
         - .cache/**
         - .npm/**
   enabled:
-    - golangci-lint2@2.1.2
+    - golangci-lint2@2.1.5
     - actionlint@1.7.7
     - isort@6.0.1
     - clippy@1.65.0
