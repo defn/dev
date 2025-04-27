@@ -15,7 +15,9 @@ import (
 var defn_dev_use embed.FS
 
 func main() {
-	val, err := BuildValueFromOverlay(defn_dev_use, "/cue")
+	ctx := cuecontext.New()
+
+	val, err := BuildValueFromOverlay(ctx, defn_dev_use, "/cue")
 	if err != nil {
 		panic(err)
 	}
@@ -23,7 +25,7 @@ func main() {
 	fmt.Printf("%s\n", val)
 }
 
-func BuildValueFromOverlay(overfs embed.FS, prefix string) (cue.Value, error) {
+func BuildValueFromOverlay(ctx *cue.Context, overfs embed.FS, prefix string) (cue.Value, error) {
 	overlay := make(map[string]load.Source)
 
 	if err := BuildOverlayFromFS(&overlay, overfs); err != nil {
@@ -47,8 +49,6 @@ func BuildValueFromOverlay(overfs embed.FS, prefix string) (cue.Value, error) {
 	if inst.Err != nil {
 		return cue.Value{}, inst.Err
 	}
-
-	ctx := cuecontext.New()
 
 	value := ctx.BuildInstance(inst)
 
