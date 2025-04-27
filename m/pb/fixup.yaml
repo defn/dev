@@ -81,7 +81,7 @@
       loop:
         - { path: "/tmp/uscreens", mode: "1777" }
     - name: Find full path to mise tool
-      become: true
+      become: false
       ansible.builtin.command: >
         ~/bin/with-env mise exec --cd ~/m -- which {{ item }}
       register: mise_paths
@@ -91,15 +91,16 @@
         - cue
         - go
       changed_when: false
-    - name: Make user owned /usr/local/bin
+    - name: Make /usr/local/bin
       become: true
       file:
         state: directory
-        owner: ubuntu
-        group: ubuntu
+        owner: root
+        group: root
         path: "/usr/local/bin"
         mode: "0755"
     - name: Create symlinks in /usr/local/bin
+      become: true
       ansible.builtin.file:
         src: "{{ item.stdout }}"
         dest: "/usr/local/bin/{{ item.item }}"
