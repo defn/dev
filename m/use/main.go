@@ -5,24 +5,17 @@ import (
 	"fmt"
 	"io"
 	"io/fs"
-	"strings"
 
 	"cuelang.org/go/cue"
 	"cuelang.org/go/cue/cuecontext"
 	"cuelang.org/go/cue/load"
 )
 
-//go:embed use/*
+//go:embed cue/*
 var defn_dev_use embed.FS
 
 func main() {
-	overlay := make(map[string]load.Source)
-
-	if err := BuildOverlayFromFS(&overlay, defn_dev_use, "/use"); err != nil {
-		panic(err)
-	}
-
-	val, err := BuildValueFromOverlay(&overlay, []string{"."})
+	val, err := BuildValueFromOverlay(defn_dev_use, "/cue")
 	if err != nil {
 		panic(err)
 	}
@@ -30,11 +23,19 @@ func main() {
 	fmt.Printf("%s\n", val)
 }
 
-func BuildValueFromOverlay(overlay *map[string]load.Source, instanceNames []string) (cue.Value, error) {
-	cfg := &load.Config{
-		Overlay: *overlay,
-		Dir:     "/",
+func BuildValueFromOverlay(overfs embed.FS, prefix string) (cue.Value, error) {
+	overlay := make(map[string]load.Source)
+
+	if err := BuildOverlayFromFS(&overlay, overfs); err != nil {
+		panic(err)
 	}
+
+	cfg := &load.Config{
+		Overlay: overlay,
+		Dir:     prefix,
+	}
+
+	instanceNames := []string{"."}
 
 	instances := load.Instances(instanceNames, cfg)
 
@@ -58,7 +59,7 @@ func BuildValueFromOverlay(overlay *map[string]load.Source, instanceNames []stri
 	return value, nil
 }
 
-func BuildOverlayFromFS(overlay *map[string]load.Source, fsys fs.FS, prefix string) error {
+func BuildOverlayFromFS(overlay *map[string]load.Source, fsys fs.FS) error {
 	err := fs.WalkDir(fsys, ".", func(path string, d fs.DirEntry, err error) error {
 		if err != nil {
 			return err
@@ -79,10 +80,9 @@ func BuildOverlayFromFS(overlay *map[string]load.Source, fsys fs.FS, prefix stri
 		}
 
 		absPath := "/" + path
-		relPath := strings.TrimPrefix(absPath, prefix)
 		src := load.FromBytes(content)
 
-		(*overlay)[relPath] = src
+		(*overlay)[absPath] = src
 
 		return nil
 	})

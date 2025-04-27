@@ -1,4 +1,4 @@
-package use
+package main
 
 import (
 	main "defn.dev/main"
