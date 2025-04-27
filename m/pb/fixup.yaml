@@ -84,9 +84,14 @@
         - cue
         - go
       changed_when: false
-
+    - name: Make user owned /usr/local/bin
+      file:
+        state: directory
+        owner: ubuntu
+        group: ubuntu
+        path: "/usr/local/bin"
+        mode: "0755"
     - name: Create symlinks in /usr/local/bin
-      become: true
       ansible.builtin.file:
         src: "{{ item.stdout }}"
         dest: "/usr/local/bin/{{ item.item }}"
