@@ -76,7 +76,7 @@
         - { path: "/tmp/uscreens", mode: "1777" }
     - name: Find full path to mise tool
       ansible.builtin.command: >
-        ~/bin/with-env mise exec -- which {{ item }}
+        ~/bin/with-env mise exec --cd ~/m -- which {{ item }}
       register: mise_paths
       args:
         chdir: /home/ubuntu
