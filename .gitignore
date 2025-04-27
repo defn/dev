@@ -259,3 +259,4 @@ __pycache__
 .amazon
 .shiv
 .rvmrc
+.sigstore
