@@ -1,7 +1,6 @@
 ---
 - name: Setup Docker and SSH configs
   hosts: all
-  become: true
   vars:
     user_id: 1000
     group_id: 100
@@ -12,6 +11,7 @@
 
   tasks:
     - name: Comment out GSSAPIAuthentication in ssh_config
+      become: true
       lineinfile:
         path: /etc/ssh/ssh_config
         regexp: '^\s*GSSAPIAuthentication'
@@ -19,6 +19,7 @@
         state: present
 
     - name: Remove docker credential helpers if they exist
+      become: true
       file:
         path: "{{ item }}"
         state: absent
@@ -28,6 +29,7 @@
       when: item != ""
 
     - name: Copy config.json.example to config.json if not exists
+      become: true
       copy:
         src: "{{ docker_config_dir }}/config.json.example"
         dest: "{{ docker_config_dir }}/config.json"
@@ -38,12 +40,14 @@
       when: not lookup('file', docker_config_dir + '/config.json', errors='ignore')
 
     - name: Add user to docker group
+      become: true
       user:
         name: "{{ username }}"
         groups: docker
         append: yes
 
     - name: Generate locale
+      become: true
       block:
         - name: Generate locale
           command: "locale-gen en_US.UTF-8"
@@ -54,6 +58,7 @@
           changed_when: false
 
     - name: Create standard directories
+      become: true
       file:
         state: directory
         owner: "{{username}}"
@@ -66,6 +71,7 @@
         - { path: "/run/user/{{user_id}}/gnupg", mode: "0700" }
 
     - name: Create tmp directories
+      become: true
       file:
         state: directory
         owner: root
@@ -75,6 +81,7 @@
       loop:
         - { path: "/tmp/uscreens", mode: "1777" }
     - name: Find full path to mise tool
+      become: true
       ansible.builtin.command: >
         ~/bin/with-env mise exec --cd ~/m -- which {{ item }}
       register: mise_paths
@@ -85,6 +92,7 @@
         - go
       changed_when: false
     - name: Make user owned /usr/local/bin
+      become: true
       file:
         state: directory
         owner: ubuntu
