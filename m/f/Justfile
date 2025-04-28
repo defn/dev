@@ -5,7 +5,6 @@ build:
     mise exec -- fly deploy --build-only
 
 deploy:
-    docker pull ghcr.io/defn/dev
     mise exec -- fly deploy
 
 stop:
