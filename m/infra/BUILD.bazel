@@ -14,10 +14,5 @@ go_library(
     srcs = ["infra.go"],
     importpath = "github.com/defn/dev/m/infra",
     visibility = ["//visibility:public"],
-    deps = [
-        "@com_github_aws_jsii_runtime_go//:jsii-runtime-go",
-        "@org_cuelang_go//cue",
-        "@org_cuelang_go//cue/cuecontext",
-        "@org_cuelang_go//cue/load",
-    ],
+    deps = ["@com_github_aws_jsii_runtime_go//:jsii-runtime-go"],
 )

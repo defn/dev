@@ -1,0 +1,25 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_binary", "go_library")
+
+go_library(
+    name = "use_lib",
+    srcs = ["main.go"],
+    embedsrcs = [
+        "cue/cue.mod/module.cue",
+        "cue/cue.mod/pkg/defn.dev/cue.mod/module.cue",
+        "cue/cue.mod/pkg/defn.dev/main/main.cue",
+        "cue/main.cue",
+    ],
+    importpath = "github.com/defn/dev/m/use",
+    visibility = ["//visibility:private"],
+    deps = [
+        "@org_cuelang_go//cue",
+        "@org_cuelang_go//cue/cuecontext",
+        "@org_cuelang_go//cue/load",
+    ],
+)
+
+go_binary(
+    name = "use",
+    embed = [":use_lib"],
+    visibility = ["//visibility:public"],
+)
