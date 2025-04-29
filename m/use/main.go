@@ -25,12 +25,12 @@ type CueConfig interface {
 	GetContext() *cue.Context
 }
 
-// StudentProfile implements CueConfig
-type StudentProfile struct {
+// StudentConfig implements CueConfig
+type StudentConfig struct {
 	ctx *cue.Context
 }
 
-func (s *StudentProfile) GetContext() *cue.Context {
+func (s *StudentConfig) GetContext() *cue.Context {
 	return s.ctx
 }
 
@@ -38,28 +38,24 @@ func (s *StudentProfile) GetContext() *cue.Context {
 type StudentRepository struct{}
 
 func (u StudentRepository) VendCueConfig() CueConfig {
-	return &StudentProfile{
+	return &StudentConfig{
 		ctx: cuecontext.New(),
 	}
 }
 
 // get a StudentRepository
-func ProvideCueRepository() CueRepository {
+func UseStudentRepository() CueRepository {
 	return StudentRepository{}
 }
 
 // main
 func main() {
 	fx.New(
-		fx.Provide(ProvideCueRepository),
+		fx.Provide(UseStudentRepository),
 		fx.Invoke(func(cr CueRepository) {
 			u := cr.VendCueConfig()
 			ctx := u.GetContext()
-			val, err := BuildValueFromOverlay(ctx, defn_dev_use, "/cue")
-			if err != nil {
-				return
-			}
-
+			val, _ := BuildValueFromOverlay(ctx, defn_dev_use, "/cue")
 			fmt.Printf("%s\n", val)
 		}),
 	).Run()
