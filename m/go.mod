@@ -25,6 +25,7 @@ require (
 	github.com/spf13/viper v1.20.1
 	github.com/teilomillet/gollm v0.1.9
 	github.com/urfave/cli/v2 v2.27.6
+	go.uber.org/fx v1.23.0
 	golang.org/x/sys v0.32.0
 )
 
@@ -114,7 +115,9 @@ require (
 	github.com/xo/terminfo v0.0.0-20220910002029-abceb7e1c41e // indirect
 	github.com/xrash/smetrics v0.0.0-20240521201337-686a1a2994c1 // indirect
 	github.com/yuin/goldmark v1.7.11 // indirect
+	go.uber.org/dig v1.18.0 // indirect
 	go.uber.org/multierr v1.11.0 // indirect
+	go.uber.org/zap v1.26.0 // indirect
 	golang.org/x/arch v0.16.0 // indirect
 	golang.org/x/crypto v0.37.0 // indirect
 	golang.org/x/exp v0.0.0-20250305212735-054e65f0b394 // indirect

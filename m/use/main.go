@@ -9,20 +9,60 @@ import (
 	"cuelang.org/go/cue"
 	"cuelang.org/go/cue/cuecontext"
 	"cuelang.org/go/cue/load"
+
+	"go.uber.org/fx"
 )
 
 //go:embed cue/*
 var defn_dev_use embed.FS
 
-func main() {
-	ctx := cuecontext.New()
+// CueRepository + CueConfig interfaces
+type CueRepository interface {
+	VendCueConfig() CueConfig
+}
 
-	val, err := BuildValueFromOverlay(ctx, defn_dev_use, "/cue")
-	if err != nil {
-		panic(err)
+type CueConfig interface {
+	GetContext() *cue.Context
+}
+
+// StudentProfile implements CueConfig
+type StudentProfile struct {
+	ctx *cue.Context
+}
+
+func (s *StudentProfile) GetContext() *cue.Context {
+	return s.ctx
+}
+
+// StudentRepository implements CueRepository
+type StudentRepository struct{}
+
+func (u StudentRepository) VendCueConfig() CueConfig {
+	return &StudentProfile{
+		ctx: cuecontext.New(),
 	}
+}
 
-	fmt.Printf("%s\n", val)
+// get a StudentRepository
+func ProvideCueRepository() CueRepository {
+	return StudentRepository{}
+}
+
+// main
+func main() {
+	fx.New(
+		fx.Provide(ProvideCueRepository),
+		fx.Invoke(func(cr CueRepository) {
+			u := cr.VendCueConfig()
+			ctx := u.GetContext()
+			val, err := BuildValueFromOverlay(ctx, defn_dev_use, "/cue")
+			if err != nil {
+				return
+			}
+
+			fmt.Printf("%s\n", val)
+		}),
+	).Run()
 }
 
 func BuildValueFromOverlay(ctx *cue.Context, overfs embed.FS, prefix string) (cue.Value, error) {

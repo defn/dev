@@ -15,6 +15,7 @@ go_library(
         "@org_cuelang_go//cue",
         "@org_cuelang_go//cue/cuecontext",
         "@org_cuelang_go//cue/load",
+        "@org_uber_go_fx//:fx",
     ],
 )
 
