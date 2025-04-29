@@ -113,7 +113,7 @@ require (
 	github.com/wk8/go-ordered-map/v2 v2.1.8 // indirect
 	github.com/xo/terminfo v0.0.0-20220910002029-abceb7e1c41e // indirect
 	github.com/xrash/smetrics v0.0.0-20240521201337-686a1a2994c1 // indirect
-	github.com/yuin/goldmark v1.7.10 // indirect
+	github.com/yuin/goldmark v1.7.11 // indirect
 	go.uber.org/multierr v1.11.0 // indirect
 	golang.org/x/arch v0.16.0 // indirect
 	golang.org/x/crypto v0.37.0 // indirect
