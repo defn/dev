@@ -2,7 +2,12 @@ load("@io_bazel_rules_go//go:def.bzl", "go_binary", "go_library")
 
 go_library(
     name = "use_lib",
-    srcs = ["main.go"],
+    srcs = [
+        "impl.go",
+        "intf.go",
+        "main.go",
+        "util.go",
+    ],
     embedsrcs = [
         "cue/cue.mod/module.cue",
         "cue/cue.mod/pkg/defn.dev/cue.mod/module.cue",
