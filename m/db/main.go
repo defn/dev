@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 	"sort"
+	"time"
 
 	"github.com/jackc/pgx/v5/pgxpool"
 	"github.com/riverqueue/river"
@@ -32,7 +33,7 @@ func main() {
 	workers := river.NewWorkers()
 	river.AddWorker(workers, &SortWorker{})
 
-	dbPool, err := pgxpool.New(ctx, "postgresql://postgres@/postgres")
+	dbPool, _ := pgxpool.New(ctx, "postgresql://postgres@/postgres")
 
 	riverClient, err := river.NewClient(riverpgxv5.New(dbPool), &river.Config{
 		Queues: map[string]river.QueueConfig{
@@ -57,6 +58,8 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
+
+	time.Sleep(10 * time.Second)
 
 	if err := riverClient.Stop(ctx); err != nil {
 		panic(err)

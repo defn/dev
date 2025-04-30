@@ -1,0 +1,19 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_binary", "go_library")
+
+go_library(
+    name = "db_lib",
+    srcs = ["main.go"],
+    importpath = "github.com/defn/dev/m/db",
+    visibility = ["//visibility:private"],
+    deps = [
+        "@com_github_jackc_pgx_v5//pgxpool",
+        "@com_github_riverqueue_river//:river",
+        "@com_github_riverqueue_river_riverdriver_riverpgxv5//:riverpgxv5",
+    ],
+)
+
+go_binary(
+    name = "db",
+    embed = [":db_lib"],
+    visibility = ["//visibility:public"],
+)

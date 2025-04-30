@@ -1,6 +1,8 @@
-export DATABASE_URL="postgresql://postgres@/postgres"
+sudo apt install -y postgresql
 
-export PORT="8181"
+sudo vi /etc/postgresql/*/main/pg_hba.conf
+
+sudo systemctl restart postgresql
 
 river migrate-up --database-url "${DATABASE_URL}"
 
