@@ -1,2 +1,7 @@
-river migrate-up --database-url "postgresql://postgres@/postgres"
+export DATABASE_URL="postgresql://postgres@/postgres"
 
+export PORT="8181"
+
+river migrate-up --database-url "${DATABASE_URL}"
+
+riverui
