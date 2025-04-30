@@ -13,19 +13,21 @@ import (
 	"github.com/riverqueue/river/riverdriver/riverpgxv5"
 )
 
-// job config
-type SortConfig struct {
+// see https://pkg.go.dev/github.com/riverqueue/river#example-package-InsertAndWork
+
+// task
+type SortTask struct {
 	Things []string `json:"strings"`
 }
 
-func (SortConfig) Kind() string { return "sort" }
+func (SortTask) Kind() string { return "sort" }
 
-// job worker
+// worker
 type SortWorker struct {
-	river.WorkerDefaults[SortConfig]
+	river.WorkerDefaults[SortTask]
 }
 
-func (w *SortWorker) Work(ctx context.Context, job *river.Job[SortConfig]) error {
+func (w *SortWorker) Work(ctx context.Context, job *river.Job[SortTask]) error {
 	sort.Strings(job.Args.Things)
 	fmt.Printf("Sorted strings: %+v\n", job.Args.Things)
 	return nil
@@ -58,7 +60,7 @@ func main() {
 	}
 
 	// jobs
-	_, err = server.Insert(ctx, SortConfig{
+	_, err = server.Insert(ctx, SortTask{
 		Things: []string{
 			"whale", "tiger", "bear",
 		},
