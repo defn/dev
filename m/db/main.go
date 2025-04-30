@@ -3,39 +3,47 @@ package main
 import (
 	"context"
 	"fmt"
+	"os"
+	"os/signal"
 	"sort"
-	"time"
+	"syscall"
 
 	"github.com/jackc/pgx/v5/pgxpool"
 	"github.com/riverqueue/river"
 	"github.com/riverqueue/river/riverdriver/riverpgxv5"
 )
 
-type SortArgs struct {
-	Strings []string `json:"strings"`
+// job config
+type SortConfig struct {
+	Things []string `json:"strings"`
 }
 
-func (SortArgs) Kind() string { return "sort" }
+func (SortConfig) Kind() string { return "sort" }
 
+// job worker
 type SortWorker struct {
-	river.WorkerDefaults[SortArgs]
+	river.WorkerDefaults[SortConfig]
 }
 
-func (w *SortWorker) Work(ctx context.Context, job *river.Job[SortArgs]) error {
-	sort.Strings(job.Args.Strings)
-	fmt.Printf("Sorted strings: %+v\n", job.Args.Strings)
+func (w *SortWorker) Work(ctx context.Context, job *river.Job[SortConfig]) error {
+	sort.Strings(job.Args.Things)
+	fmt.Printf("Sorted strings: %+v\n", job.Args.Things)
 	return nil
 }
 
+// main
 func main() {
 	ctx := context.Background()
 
+	// database
+	db_pool, _ := pgxpool.New(ctx, "postgresql://postgres@/postgres")
+
+	// workers
 	workers := river.NewWorkers()
 	river.AddWorker(workers, &SortWorker{})
 
-	dbPool, _ := pgxpool.New(ctx, "postgresql://postgres@/postgres")
-
-	riverClient, err := river.NewClient(riverpgxv5.New(dbPool), &river.Config{
+	// server
+	server, err := river.NewClient(riverpgxv5.New(db_pool), &river.Config{
 		Queues: map[string]river.QueueConfig{
 			river.QueueDefault: {MaxWorkers: 100},
 		},
@@ -45,12 +53,13 @@ func main() {
 		panic(err)
 	}
 
-	if err := riverClient.Start(ctx); err != nil {
+	if err := server.Start(ctx); err != nil {
 		panic(err)
 	}
 
-	_, err = riverClient.Insert(ctx, SortArgs{
-		Strings: []string{
+	// jobs
+	_, err = server.Insert(ctx, SortConfig{
+		Things: []string{
 			"whale", "tiger", "bear",
 		},
 	}, nil)
@@ -59,9 +68,13 @@ func main() {
 		panic(err)
 	}
 
-	time.Sleep(10 * time.Second)
+	// idle until quit, interrupted
+	sigs := make(chan os.Signal, 1)
+	signal.Notify(sigs, syscall.SIGINT, syscall.SIGTERM)
+	<-sigs
 
-	if err := riverClient.Stop(ctx); err != nil {
+	// exit gracefully
+	if err := server.Stop(ctx); err != nil {
 		panic(err)
 	}
 }
