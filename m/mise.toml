@@ -1,5 +1,5 @@
 [tools]
-"ubi:bazelbuild/buildtools" = { version = "8.0.3", exe = "buildifier" }
+"ubi:bazelbuild/buildtools" = { version = "8.2.0", exe = "buildifier" }
 helm = "3.17.3"
 kubectl = "1.33.0"
 kustomize = "5.6.0"
