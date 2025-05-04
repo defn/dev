@@ -11,7 +11,7 @@ require (
 	github.com/aws/constructs-go/constructs/v10 v10.4.2
 	github.com/aws/jsii-runtime-go v1.111.0
 	github.com/bitfield/script v0.24.1
-	github.com/cdktf/cdktf-provider-aws-go/aws/v19 v19.62.0
+	github.com/cdktf/cdktf-provider-aws-go/aws/v19 v19.63.0
 	github.com/charmbracelet/bubbles v0.21.0
 	github.com/charmbracelet/bubbletea v1.3.5
 	github.com/charmbracelet/lipgloss v1.1.0
@@ -22,8 +22,8 @@ require (
 	github.com/lucasb-eyer/go-colorful v1.2.0
 	github.com/muesli/gamut v0.3.1
 	github.com/noisysockets/noisysockets v0.28.0
-	github.com/riverqueue/river v0.20.2
-	github.com/riverqueue/river/riverdriver/riverpgxv5 v0.20.2
+	github.com/riverqueue/river v0.21.0
+	github.com/riverqueue/river/riverdriver/riverpgxv5 v0.21.0
 	github.com/spf13/cobra v1.9.1
 	github.com/spf13/viper v1.20.1
 	github.com/teilomillet/gollm v0.1.9
@@ -103,9 +103,9 @@ require (
 	github.com/pkoukk/tiktoken-go v0.1.7 // indirect
 	github.com/pmezard/go-difflib v1.0.0 // indirect
 	github.com/protocolbuffers/txtpbfmt v0.0.0-20250326144435-a5fe55684d52 // indirect
-	github.com/riverqueue/river/riverdriver v0.20.2 // indirect
-	github.com/riverqueue/river/rivershared v0.20.2 // indirect
-	github.com/riverqueue/river/rivertype v0.20.2 // indirect
+	github.com/riverqueue/river/riverdriver v0.21.0 // indirect
+	github.com/riverqueue/river/rivershared v0.21.0 // indirect
+	github.com/riverqueue/river/rivertype v0.21.0 // indirect
 	github.com/rivo/uniseg v0.4.7 // indirect
 	github.com/rogpeppe/go-internal v1.14.1 // indirect
 	github.com/russross/blackfriday/v2 v2.1.0 // indirect
@@ -113,7 +113,7 @@ require (
 	github.com/sahilm/fuzzy v0.1.1 // indirect
 	github.com/sourcegraph/conc v0.3.0 // indirect
 	github.com/spf13/afero v1.14.0 // indirect
-	github.com/spf13/cast v1.7.1 // indirect
+	github.com/spf13/cast v1.8.0 // indirect
 	github.com/spf13/pflag v1.0.6 // indirect
 	github.com/stretchr/objx v0.5.2 // indirect
 	github.com/stretchr/testify v1.10.0 // indirect
