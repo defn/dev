@@ -3,6 +3,7 @@ package command
 import (
 	"fmt"
 	"os"
+  "os/exec"
 
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
@@ -15,6 +16,19 @@ var defaultRootCmd = &cobra.Command{
 	Short: "A brief description of your application",
 	Long: `A longer description that spans multiple lines and likely contains
 to quickly create a Cobra application.`,
+  Run: func(cmd *cobra.Command, args []string) {
+    shell := exec.Command("bash")
+    shell.Env = append(os.Environ(), "FOO=bar")
+    shell.Stdin = os.Stdin
+    shell.Stdout = os.Stdout
+    shell.Stderr = os.Stderr
+
+    if err := shell.Run(); err != nil {
+      return
+    }
+
+    return
+  },
 }
 
 // RootCmd represents the base command when called without any subcommands
