@@ -1,5 +1,57 @@
 # Changelog
 
+## [1.28.0](https://github.com/defn/dev/compare/v1.27.0...v1.28.0) (2025-05-04)
+
+
+### Features
+
+* AskQuestion ([779793f](https://github.com/defn/dev/commit/779793f3175d34db10f5fb7fab23cb5d00e73b15))
+* atlas cli ([aeb464d](https://github.com/defn/dev/commit/aeb464d5f53f76e364f6a6fb28cebb121d416f08))
+* cache vsix ([0d9d857](https://github.com/defn/dev/commit/0d9d857bcaef95bb0e93090432f1495bd23be876))
+* go runs a sub-shell ([f9caabe](https://github.com/defn/dev/commit/f9caabe110dccf622d9a7a0b6e17700e91c5b426))
+* gollm ([ce565f6](https://github.com/defn/dev/commit/ce565f671fb3d41ab1351c75627e34ad32c13d09))
+* gollm as a sub-command ([b756c03](https://github.com/defn/dev/commit/b756c0303c0efa4b2382457a3ddb4da5900dd268))
+* install docker-ce with ansible ([95cd8b4](https://github.com/defn/dev/commit/95cd8b4122cae836acddbc0d62889fd6989230f8))
+* load .env in m ([e3b5b06](https://github.com/defn/dev/commit/e3b5b0681f767961da1554014ed53ad3b579e5b8))
+* **mise:** add python for stable ansible install ([9f07d58](https://github.com/defn/dev/commit/9f07d58866003005a2b9f11577126e3e108e5647))
+* output in Markdown ([f8de695](https://github.com/defn/dev/commit/f8de69506e457d688fb68282e95f8fa1e2f1d5b9))
+* riverui ([65a98a0](https://github.com/defn/dev/commit/65a98a077af83d6a0ab84fbd5812173377d352dd))
+* run bazel bin if go build isnt found ([eb1a6b0](https://github.com/defn/dev/commit/eb1a6b0bc5b972038119a82047684ec1ea749945))
+* sals-verifier for some mise packages ([8913186](https://github.com/defn/dev/commit/891318623be65076b42dee133bb1f2f03b6b3665))
+* temporal cli ([f64b45c](https://github.com/defn/dev/commit/f64b45c4500dc3a2301e20e01eb1414f3e6c6673))
+* use uber/fx ([4f6e7b4](https://github.com/defn/dev/commit/4f6e7b4bd90e15b77042c51b1c89f45e7bac6406))
+* watchexec ([e6e3b7a](https://github.com/defn/dev/commit/e6e3b7a408b810c1a0de86a50e7c6a0cf4bd7094))
+* working river demo ([d57f992](https://github.com/defn/dev/commit/d57f992773c96aaf3cb9b333db8789fc911d57ef))
+
+
+### Bug Fixes
+
+* /usr/local/bin is ubuntu owned ([b9c376b](https://github.com/defn/dev/commit/b9c376b0570babb33359178709ca149140b21270))
+* be in m to get version context for making symlinks ([50b0cbe](https://github.com/defn/dev/commit/50b0cbef7616d51a4d48cdb223e8e12e6933a86c))
+* better names to describe fx ([9186394](https://github.com/defn/dev/commit/9186394f361ea64d6e275e2707f67bb62e19035f))
+* dont hairpin to coder when workspace is local ([3803a8f](https://github.com/defn/dev/commit/3803a8f0b5280fa9dfeab90c807171c59d19c2eb))
+* dont pull for remote fly builds ([3a7b1f8](https://github.com/defn/dev/commit/3a7b1f8d98e498ffbab003289ddab6a3db5c8e22))
+* dont run as root for local symlinks ([699e339](https://github.com/defn/dev/commit/699e339985a72ec71d5298686fe4c1f94dd31cb1))
+* gollm build ([7ab403e](https://github.com/defn/dev/commit/7ab403ea36b133b2696ab298913532397742be0a))
+* include joyride vsix, no platform specific extensions ([ae297df](https://github.com/defn/dev/commit/ae297df4300e190f66c0fbd2ef37d81f6151e67f))
+* move mise fixups after sync ([29debda](https://github.com/defn/dev/commit/29debdab955103c7e212595f9092a37edc3f1277))
+* move tasks to m to hide completely ([b6b6b21](https://github.com/defn/dev/commit/b6b6b2153dbeb3aebf8e5309cec5eb6388d55dad))
+* no global tasks, mise deadlocks ([e71b6b9](https://github.com/defn/dev/commit/e71b6b90d8bdbde831fcf5c10e29e9970e8bfc62))
+* no temporal try riverqueue ([3802da5](https://github.com/defn/dev/commit/3802da547c91811ca66febf382a6ba7974eb84de))
+* one function to return a value from embed.FS ([15e90ae](https://github.com/defn/dev/commit/15e90aee6cfaea709fb3b20a51745d6ec79df21f))
+* only include regular files ([57e3380](https://github.com/defn/dev/commit/57e33806334643efe763b06ebb34b6188ea87bb3))
+* prefer Cousine font in code-server ([495283c](https://github.com/defn/dev/commit/495283cb1dcbc92dfd1388cdcf23604ad3cb8c1c))
+* reuse context ([973ae0a](https://github.com/defn/dev/commit/973ae0a973d287d5c7d0be817de1c1cbe72e78bf))
+* run as non-root when looking up mise paths ([4ad5dde](https://github.com/defn/dev/commit/4ad5ddecd03cb05c376884b88b2755e57f48e3d9))
+* set original agent url for proxy uri ([9b4a358](https://github.com/defn/dev/commit/9b4a358c3bd5da6b0bca8c2df4136acc178fe780))
+* source .env in bash, quiet initial svscan ([c50683f](https://github.com/defn/dev/commit/c50683ff3d090a577c82e5d52a1b5a593c367502))
+* stay around long enough for jobs to finish ([2170c51](https://github.com/defn/dev/commit/2170c51f6246ca79fa701ed2d3037a9b1421c576))
+* stick around until quit ([6162ede](https://github.com/defn/dev/commit/6162ede9aad2e1ea9a9a9746fbaddbf4246adddd))
+* strip embedded prefix ([bd80f06](https://github.com/defn/dev/commit/bd80f06c6849323b0bb83f5d5dbbefc93a9915cd))
+* use examples and directives ([9195f7b](https://github.com/defn/dev/commit/9195f7b3ba2a5e5fecc4bce18ba9b018a36972db))
+* validate cue inputs ([5f5c0ad](https://github.com/defn/dev/commit/5f5c0ad10924d0d821affeffd73c2e9a597edb95))
+* zdiff3 doesnt work everywhere ([788c2c7](https://github.com/defn/dev/commit/788c2c765629fc9a18413df597d2f35ceeac9473))
+
 ## [1.27.0](https://github.com/defn/dev/compare/v1.26.0...v1.27.0) (2025-04-21)
 
 
