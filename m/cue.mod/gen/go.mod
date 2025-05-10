@@ -2,8 +2,6 @@ module github.com/defn/dev/m/ignore/this
 
 go 1.24.0
 
-toolchain go1.24.2
-
 require (
 	github.com/fxamacker/cbor/v2 v2.7.0 // indirect
 	github.com/go-logr/logr v1.4.2 // indirect
