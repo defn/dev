@@ -17,15 +17,15 @@ func demoLayout() string {
 		columnWidth = (physicalWidth / 3)
 
 		// General style
-		normal  = lipgloss.Color("#EEEEEE")
 		subtle  = lipgloss.AdaptiveColor{Light: "#D9DCCF", Dark: "#383838"}
 		special = lipgloss.AdaptiveColor{Light: "#43BF6D", Dark: "#73F59F"}
 		blends  = gamut.Blends(lipgloss.Color("#F25D94"), lipgloss.Color("#EDFF82"), 50)
 
-		base = lipgloss.NewStyle().Foreground(normal)
+		normal  = lipgloss.Color("#EEEEEE")
+		base_style = lipgloss.NewStyle().Foreground(normal)
 
 		// Dialog.
-		dialogBoxStyle = lipgloss.NewStyle().
+		dialog_style = lipgloss.NewStyle().
 				Border(lipgloss.RoundedBorder()).
 				BorderForeground(lipgloss.Color("#874BFD")).
 				Padding(1, 0).
@@ -34,13 +34,13 @@ func demoLayout() string {
 				BorderRight(true).
 				BorderBottom(true)
 
-		buttonStyle = lipgloss.NewStyle().
+		button_style = lipgloss.NewStyle().
 				Foreground(lipgloss.Color("#FFF7DB")).
 				Background(lipgloss.Color("#888B7E")).
 				Padding(0, 3).
 				MarginTop(1)
 
-		activeButtonStyle = buttonStyle.
+		active_button_style = button_style.
 					Foreground(lipgloss.Color("#FFF7DB")).
 					Background(lipgloss.Color("#F25D94")).
 					MarginRight(2).
@@ -54,14 +54,14 @@ func demoLayout() string {
 			Height(8).
 			Width(columnWidth + 1)
 
-		listHeader = base.
+		listHeader = base_style.
 				BorderStyle(lipgloss.NormalBorder()).
 				BorderBottom(true).
 				BorderForeground(subtle).
 				MarginRight(2).
 				Render
 
-		listItem = base.PaddingLeft(2).Render
+		listItem = base_style.PaddingLeft(2).Render
 
 		checkMark = lipgloss.NewStyle().SetString("✓").
 				Foreground(special).
@@ -161,8 +161,8 @@ func demoLayout() string {
 	{
 		question := lipgloss.NewStyle().Width(50).Align(lipgloss.Center).Render(rainbow(lipgloss.NewStyle(), "Are you sure you want to eat marmalade?", blends))
 
-		okButton := activeButtonStyle.Render("Yes")
-		maybeButton := buttonStyle.Render("Maybe")
+		okButton := active_button_style.Render("Yes")
+		maybeButton := button_style.Render("Maybe")
 
 		buttons := lipgloss.JoinHorizontal(lipgloss.Top, okButton, maybeButton)
 
@@ -170,7 +170,7 @@ func demoLayout() string {
 
 		dialog = lipgloss.Place(physicalWidth, physicalHeight-1-h(cols)-h(sbar),
 			lipgloss.Center, lipgloss.Center,
-			dialogBoxStyle.Render(ui),
+			dialog_style.Render(ui),
 			lipgloss.WithWhitespaceChars(fmt.Sprintf("%d",h(cols))),
 			lipgloss.WithWhitespaceForeground(subtle),
 		)

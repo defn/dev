@@ -3,3 +3,4 @@
 helm = "3.17.3"
 kubectl = "1.33.0"
 kustomize = "5.6.0"
+"ubi:charmbracelet/freeze" = "0.2.2"
