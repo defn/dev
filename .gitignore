@@ -260,3 +260,7 @@ __pycache__
 .shiv
 .rvmrc
 .sigstore
+
+**/.claude/settings.local.json
+
+.claude*

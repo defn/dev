@@ -1,0 +1,3 @@
+[tools]
+node = "24.0.1"
+"npm:@anthropic-ai/claude-code" = "0.2.107"

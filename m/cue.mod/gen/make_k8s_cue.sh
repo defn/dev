@@ -1,23 +1,23 @@
 #!/usr/bin/env bash
 
 function main {
-	local config="${shome}/${in[config]}"
-	local out="${shome}/${out}"
+  local config="${shome}/${in[config]}"
+  local out="${shome}/${out}"
 
-	# TODO how to guess the workarea, cue.mod/gen
-	local workarea="cue.mod/gen"
-	local ns="k8s.io"
+  # TODO how to guess the workarea, cue.mod/gen
+  local workarea="cue.mod/gen"
+  local ns="k8s.io"
 
-	cd "${workarea}"
+  cd "${workarea}"
 
-	export GOMODCACHE="${HOME}/.cache/go-mod"
+  export GOMODCACHE="${HOME}/.cache/go-mod"
 
-	for pkg in $(jq -r '.k8s.apis[]' "${config}"); do
-		go get "${pkg}"
-		cue get go "${pkg}"
-	done
+  for pkg in $(jq -r '.k8s.apis[]' "${config}"); do
+    go get "${pkg}"
+    cue get go "${pkg}"
+  done
 
-	tar cfz - --numeric-owner --mtime='1970-01-01 00:00:00' -C "${workarea}" "${ns}" >"${out}"
+  tar cfz - --numeric-owner --mtime='1970-01-01 00:00:00' -C "${workarea}" "${ns}" >"${out}"
 }
 
 source b/lib/lib.sh
