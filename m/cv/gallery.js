@@ -363,7 +363,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 2) {
       if (eop == false) {
         eop = true;
-        setTimeout(autoScroll, 5000);
+        // setTimeout(autoScroll, 5000);
       }
     }
   });
