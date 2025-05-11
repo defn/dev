@@ -1,10 +1,11 @@
-// Default blurhash colors if none is provided
-const defaultBlurhash = [
-  [235, 164, 52],  // Orange
-  [213, 116, 33],  // Dark orange
-  [244, 190, 97],  // Light orange
-  [226, 141, 41]   // Medium orange
-];
+// Default blurhash colors (4x4 grid) in hexadecimal format
+// Creates a more visually interesting pattern with orange gradient
+// that resembles a flame or abstract shape
+const defaultBlurhash =
+  "F7941DEA8219D5651CE38A26" + // Row 1: Top gradient (lighter oranges)
+  "CB5719E07B20F0AD38BC6C18" + // Row 2: Upper middle (brighter oranges)
+  "A33A09D55216F29C41892C05" + // Row 3: Lower middle (darker oranges)
+  "7D2806B14A12E88B3D6B1E02"; // Row 4: Bottom gradient (deepest oranges)
 
 function setBodyMarginToZero() {
   document.body.style.margin = "0";
@@ -172,19 +173,23 @@ function toggleVisibility(element) {
     .catch((error) => console.error("Error:", error));
 }
 
+// Convert hex string to RGB array
+function hexToRgb(hex) {
+  const r = parseInt(hex.substring(0, 2), 16);
+  const g = parseInt(hex.substring(2, 4), 16);
+  const b = parseInt(hex.substring(4, 6), 16);
+  return [r, g, b];
+}
+
 // Get blurhash from image tag attribute or use default
 function generateBlurHash(image) {
   // Check if image has a blurhash attribute
   if (image && image.dataset && image.dataset.blurhash) {
-    try {
-      // Parse the hash from the data attribute
-      return JSON.parse(image.dataset.blurhash);
-    } catch (e) {
-      console.error('Error parsing blurhash data attribute:', e);
-    }
+    // Return the blurhash string directly - always a hex string
+    return image.dataset.blurhash;
   }
 
-  // If no hash in data attribute or parsing failed, return default
+  // If no hash in data attribute, return default
   return defaultBlurhash;
 }
 
@@ -220,74 +225,155 @@ function hslToRgb(h, s, l) {
   ];
 }
 
-// Render blurhash to canvas with gradients for a more organic look
+// Render blurhash to canvas with a 4x4 grid pattern
 function renderBlurHash(hash, canvas, width, height) {
   const ctx = canvas.getContext('2d');
 
-  // Create a more complex pattern using gradients
   // Clear canvas first
   ctx.clearRect(0, 0, width, height);
 
-  // Choose a random pattern style for variety
-  const patternType = Math.floor(Math.random() * 3);
+  // Choose a pattern type (more complex shapes)
+  const patternType = Math.floor(Math.random() * 4);
+
+  // No need to check for old format - always expect a hex string
+
+  // Extract the 16 colors from the hash string (each color is 6 hex chars)
+  const colors = [];
+  for (let i = 0; i < 16; i++) {
+    const startIdx = i * 6;
+    const colorHex = hash.substring(startIdx, startIdx + 6);
+    colors.push(hexToRgb(colorHex));
+  }
+
+  // Cell size for 4x4 grid
+  const cellWidth = width / 4;
+  const cellHeight = height / 4;
 
   if (patternType === 0) {
-    // Pattern 1: Diagonal gradient
-    const gradient = ctx.createLinearGradient(0, 0, width, height);
-    gradient.addColorStop(0, `rgb(${hash[0][0]}, ${hash[0][1]}, ${hash[0][2]})`);
-    gradient.addColorStop(0.5, `rgb(${hash[1][0]}, ${hash[1][1]}, ${hash[1][2]})`);
-    gradient.addColorStop(1, `rgb(${hash[2][0]}, ${hash[2][1]}, ${hash[2][2]})`);
-
-    ctx.fillStyle = gradient;
-    ctx.fillRect(0, 0, width, height);
+    // Pattern 1: Simple 4x4 grid with blurred edges
+    for (let y = 0; y < 4; y++) {
+      for (let x = 0; x < 4; x++) {
+        const color = colors[y * 4 + x];
+        ctx.fillStyle = `rgb(${color[0]}, ${color[1]}, ${color[2]})`;
+        ctx.fillRect(x * cellWidth, y * cellHeight, cellWidth, cellHeight);
+      }
+    }
   }
   else if (patternType === 1) {
-    // Pattern 2: Radial gradient from center
-    const gradient = ctx.createRadialGradient(
-      width/2, height/2, 0,
-      width/2, height/2, Math.max(width, height)/1.5
-    );
+    // Pattern 2: Overlapping circles
+    for (let y = 0; y < 4; y++) {
+      for (let x = 0; x < 4; x++) {
+        const color = colors[y * 4 + x];
+        const centerX = (x + 0.5) * cellWidth;
+        const centerY = (y + 0.5) * cellHeight;
+        const radius = Math.max(cellWidth, cellHeight) * 0.7;
 
-    gradient.addColorStop(0, `rgb(${hash[0][0]}, ${hash[0][1]}, ${hash[0][2]})`);
-    gradient.addColorStop(0.5, `rgb(${hash[1][0]}, ${hash[1][1]}, ${hash[1][2]})`);
-    gradient.addColorStop(1, `rgb(${hash[3][0]}, ${hash[3][1]}, ${hash[3][2]})`);
+        const gradient = ctx.createRadialGradient(
+          centerX, centerY, 0,
+          centerX, centerY, radius
+        );
 
-    ctx.fillStyle = gradient;
-    ctx.fillRect(0, 0, width, height);
+        gradient.addColorStop(0, `rgba(${color[0]}, ${color[1]}, ${color[2]}, 0.8)`);
+        gradient.addColorStop(1, `rgba(${color[0]}, ${color[1]}, ${color[2]}, 0)`);
+
+        ctx.fillStyle = gradient;
+        ctx.beginPath();
+        ctx.arc(centerX, centerY, radius, 0, Math.PI * 2);
+        ctx.fill();
+      }
+    }
+  }
+  else if (patternType === 2) {
+    // Pattern 3: Diagonal stripes
+    for (let i = 0; i < 8; i++) {
+      // Use different colors for different stripes
+      const colorIdx = i % 4 + Math.floor(i / 4) * 4; // Distribute colors across the grid
+      const color = colors[colorIdx];
+
+      const startX = i < 4 ? 0 : (i - 4) * width / 4;
+      const startY = i < 4 ? i * height / 4 : 0;
+      const endX = i < 4 ? width : width;
+      const endY = i < 4 ? height : (i - 4) * height / 4;
+
+      const gradient = ctx.createLinearGradient(startX, startY, endX, endY);
+      gradient.addColorStop(0, `rgba(${color[0]}, ${color[1]}, ${color[2]}, 0.8)`);
+      gradient.addColorStop(1, `rgba(${color[0]}, ${color[1]}, ${color[2]}, 0.2)`);
+
+      ctx.fillStyle = gradient;
+      ctx.beginPath();
+      ctx.moveTo(startX, startY);
+      ctx.lineTo(endX, endY);
+      ctx.lineTo(i < 4 ? 0 : endX, i < 4 ? endY : height);
+      ctx.lineTo(i < 4 ? startX : 0, i < 4 ? 0 : startY);
+      ctx.closePath();
+      ctx.fill();
+    }
   }
   else {
-    // Pattern 3: Quadrants with soft edges
-    // Top-left quadrant
-    const gradient1 = ctx.createRadialGradient(
-      0, 0, 0,
-      0, 0, width
-    );
-    gradient1.addColorStop(0, `rgb(${hash[0][0]}, ${hash[0][1]}, ${hash[0][2]})`);
-    gradient1.addColorStop(1, 'rgba(0,0,0,0)');
+    // Pattern 4: Voronoi-like pattern with more efficient drawing
+    const points = [];
 
-    // Bottom-right quadrant
-    const gradient2 = ctx.createRadialGradient(
-      width, height, 0,
-      width, height, width
-    );
-    gradient2.addColorStop(0, `rgb(${hash[1][0]}, ${hash[1][1]}, ${hash[1][2]})`);
-    gradient2.addColorStop(1, 'rgba(0,0,0,0)');
+    // Create center points for each cell in the 4x4 grid
+    for (let y = 0; y < 4; y++) {
+      for (let x = 0; x < 4; x++) {
+        // Add some randomness to point positions for more organic look
+        const offsetX = (Math.random() - 0.5) * cellWidth * 0.5;
+        const offsetY = (Math.random() - 0.5) * cellHeight * 0.5;
 
-    // Draw background first (average color)
-    const avgColor = [
-      Math.round((hash[0][0] + hash[1][0] + hash[2][0] + hash[3][0]) / 4),
-      Math.round((hash[0][1] + hash[1][1] + hash[2][1] + hash[3][1]) / 4),
-      Math.round((hash[0][2] + hash[1][2] + hash[2][2] + hash[3][2]) / 4)
-    ];
+        points.push({
+          x: (x + 0.5) * cellWidth + offsetX,
+          y: (y + 0.5) * cellHeight + offsetY,
+          color: colors[y * 4 + x]
+        });
+      }
+    }
 
-    ctx.fillStyle = `rgb(${avgColor[0]}, ${avgColor[1]}, ${avgColor[2]})`;
-    ctx.fillRect(0, 0, width, height);
+    // Use an offscreen canvas for more efficient drawing
+    const cellSize = 10; // Draw in larger cells for efficiency
+    const numCellsX = Math.ceil(width / cellSize);
+    const numCellsY = Math.ceil(height / cellSize);
 
-    // Draw the gradients
-    ctx.fillStyle = gradient1;
-    ctx.fillRect(0, 0, width, height);
+    // Draw using larger cells instead of pixel by pixel for better performance
+    for (let cy = 0; cy < numCellsY; cy++) {
+      for (let cx = 0; cx < numCellsX; cx++) {
+        const x = cx * cellSize + cellSize / 2;
+        const y = cy * cellSize + cellSize / 2;
 
-    ctx.fillStyle = gradient2;
+        // Find the closest point
+        let minDist = Infinity;
+        let closestPoint = null;
+
+        for (const point of points) {
+          const dx = x - point.x;
+          const dy = y - point.y;
+          const dist = dx * dx + dy * dy;
+
+          if (dist < minDist) {
+            minDist = dist;
+            closestPoint = point;
+          }
+        }
+
+        // Draw a cell with the color of the closest point
+        if (closestPoint) {
+          const color = closestPoint.color;
+          ctx.fillStyle = `rgb(${color[0]}, ${color[1]}, ${color[2]})`;
+          ctx.fillRect(cx * cellSize, cy * cellSize, cellSize, cellSize);
+        }
+      }
+    }
+
+    // Add some gradient overlays for more interesting patterns
+    const overlayGradient = ctx.createLinearGradient(0, 0, width, height);
+    const randomPoint1 = points[Math.floor(Math.random() * points.length)];
+    const randomPoint2 = points[Math.floor(Math.random() * points.length)];
+    const randomPoint3 = points[Math.floor(Math.random() * points.length)];
+
+    overlayGradient.addColorStop(0, `rgba(${randomPoint1.color[0]}, ${randomPoint1.color[1]}, ${randomPoint1.color[2]}, 0.3)`);
+    overlayGradient.addColorStop(0.5, `rgba(${randomPoint2.color[0]}, ${randomPoint2.color[1]}, ${randomPoint2.color[2]}, 0.1)`);
+    overlayGradient.addColorStop(1, `rgba(${randomPoint3.color[0]}, ${randomPoint3.color[1]}, ${randomPoint3.color[2]}, 0.3)`);
+
+    ctx.fillStyle = overlayGradient;
     ctx.fillRect(0, 0, width, height);
   }
 
@@ -296,7 +382,6 @@ function renderBlurHash(hash, canvas, width, height) {
   ctx.drawImage(canvas, 0, 0, width, height);
   ctx.filter = 'none';
 }
-
 
 // Create blurhash canvas for an image
 function createBlurCanvas(image, width, height) {
@@ -522,9 +607,11 @@ document.addEventListener("DOMContentLoaded", () => {
         setTimeout(processDownloadQueue, 0);
       };
 
-      // Load the image immediately
-      lazyImage.src = lazyImage.dataset.src;
-      lazyImage.classList.remove("lazyload");
+      // Load the image after a 100ms delay
+      setTimeout(() => {
+        lazyImage.src = lazyImage.dataset.src;
+        lazyImage.classList.remove("lazyload");
+      }, 100);
     };
 
     let lazyImageObserver = new IntersectionObserver((entries, observer) => {
