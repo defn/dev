@@ -34,6 +34,8 @@ type ImageInfo struct {
 type Result struct {
 	Filename string
 	Blurmap  string
+	Width    int
+	Height   int
 	Error    error
 	Cached   bool
 }
@@ -114,6 +116,11 @@ func main() {
 		// Update the ImageInfo object directly
 		if info, found := imageInfoMap[result.Filename]; found {
 			info.Blurmap = result.Blurmap
+			// Update width and height from image processing if they were 0
+			if info.Width == 0 || info.Height == 0 {
+				info.Width = result.Width
+				info.Height = result.Height
+			}
 		}
 	}
 
@@ -215,12 +222,12 @@ func worker(jobs <-chan ImageInfo, results chan<- Result, wg *sync.WaitGroup) {
 		blurmap, err := readFromCache(cacheFile)
 		if err == nil {
 			// Cache hit
-			results <- Result{Filename: imageInfo.Filename, Blurmap: blurmap, Cached: true}
+			results <- Result{Filename: imageInfo.Filename, Blurmap: blurmap, Width: imageInfo.Width, Height: imageInfo.Height, Cached: true}
 			continue
 		}
 		
-		// Cache miss - generate the blurmap
-		blurmap, err = generateBlurmap(imagePath)
+		// Cache miss - generate the blurmap and get image dimensions
+		blurmap, width, height, err := generateBlurmap(imagePath)
 		if err != nil {
 			results <- Result{Filename: imageInfo.Filename, Error: err, Cached: false}
 			continue
@@ -231,8 +238,8 @@ func worker(jobs <-chan ImageInfo, results chan<- Result, wg *sync.WaitGroup) {
 			fmt.Fprintf(os.Stderr, "Warning: Failed to write to cache for %s: %v\n", imageInfo.Filename, err)
 		}
 		
-		// Send result
-		results <- Result{Filename: imageInfo.Filename, Blurmap: blurmap, Cached: false}
+		// Send result with width and height
+		results <- Result{Filename: imageInfo.Filename, Blurmap: blurmap, Width: width, Height: height, Cached: false}
 	}
 }
 
@@ -248,16 +255,20 @@ func parseImageListFile(filePath string) ([]ImageInfo, error) {
 	scanner := bufio.NewScanner(file)
 
 	// Regular expression to extract image info
-	// Example format: { filename: "000040a4-e733-4cec-b744-be1d7ec7de49.png", width: 400, height: 400},
-	// Or with blurhash: { filename: "000040a4-e733-4cec-b744-be1d7ec7de49.png", width: 400, height: 400, blurhash: "abc123..."},
-	re := regexp.MustCompile(`{\s*filename:\s*"([^"]+)",\s*width:\s*(\d+),\s*height:\s*(\d+)(?:,\s*blurhash:\s*"([^"]*)")?\s*}`)
+	// Now supports the format with just filename: { filename: "image.jpg" }
+	// And also the traditional format: { filename: "image.jpg", width: 400, height: 400 }
+	// Or with blurhash: { filename: "image.jpg", width: 400, height: 400, blurhash: "abc123..." }
+	reWithDimensions := regexp.MustCompile(`{\s*filename:\s*"([^"]+)",\s*width:\s*(\d+),\s*height:\s*(\d+)(?:,\s*blurhash:\s*"([^"]*)")?\s*}`)
+	reFileOnly := regexp.MustCompile(`{\s*filename:\s*"([^"]+)"\s*}`)
 
 	for scanner.Scan() {
 		line := scanner.Text()
-		matches := re.FindStringSubmatch(line)
 
-		// Match will have 4 or 5 groups (with optional blurhash as group 4)
+		// First try to match the full pattern with dimensions
+		matches := reWithDimensions.FindStringSubmatch(line)
+
 		if len(matches) >= 4 {
+			// We have a match with dimensions
 			width, _ := strconv.Atoi(matches[2])
 			height, _ := strconv.Atoi(matches[3])
 
@@ -273,6 +284,18 @@ func parseImageListFile(filePath string) ([]ImageInfo, error) {
 			}
 
 			imageInfos = append(imageInfos, imageInfo)
+		} else {
+			// Try to match just filename pattern
+			filenameMatches := reFileOnly.FindStringSubmatch(line)
+			if len(filenameMatches) >= 2 {
+				// We have a match with just filename
+				imageInfo := ImageInfo{
+					Filename: filenameMatches[1],
+					Width:    0,  // We'll read these from the actual image later
+					Height:   0,
+				}
+				imageInfos = append(imageInfos, imageInfo)
+			}
 		}
 	}
 
@@ -313,18 +336,18 @@ func writeToCache(cacheFile string, blurmap string) error {
 	return ioutil.WriteFile(cacheFile, []byte(blurmap), 0644)
 }
 
-func generateBlurmap(imagePath string) (string, error) {
+func generateBlurmap(imagePath string) (string, int, int, error) {
 	// Open the image file
 	file, err := os.Open(imagePath)
 	if err != nil {
-		return "", fmt.Errorf("failed to open image file: %w", err)
+		return "", 0, 0, fmt.Errorf("failed to open image file: %w", err)
 	}
 	defer file.Close()
 
 	// Decode the image
 	img, _, err := image.Decode(file)
 	if err != nil {
-		return "", fmt.Errorf("failed to decode image: %w", err)
+		return "", 0, 0, fmt.Errorf("failed to decode image: %w", err)
 	}
 
 	// Get image bounds
@@ -338,14 +361,14 @@ func generateBlurmap(imagePath string) (string, error) {
 		cellSize = height
 	}
 
-	cellWidth := cellSize / 4
-	cellHeight := cellSize / 4
+	cellWidth := cellSize / 10
+	cellHeight := cellSize / 10
 
 	var blurValues []string
 
-	// Process each of the 4x4 cells
-	for y := 0; y < 4; y++ {
-		for x := 0; x < 4; x++ {
+	// Process each of the 10x10 cells
+	for y := 0; y < 10; y++ {
+		for x := 0; x < 10; x++ {
 			// Calculate cell boundaries
 			startX := bounds.Min.X + x*cellWidth
 			startY := bounds.Min.Y + y*cellHeight
@@ -367,19 +390,19 @@ func generateBlurmap(imagePath string) (string, error) {
 		}
 	}
 
-	// Join all hex values into a single string (96 bytes total)
-	// Make sure we have exactly 16 values (4x4 grid)
-	if len(blurValues) != 16 {
+	// Join all hex values into a single string (600 bytes total)
+	// Make sure we have exactly 100 values (10x10 grid)
+	if len(blurValues) != 100 {
 		// Pad or truncate as needed
-		for len(blurValues) < 16 {
+		for len(blurValues) < 100 {
 			blurValues = append(blurValues, "000000") // Black
 		}
-		if len(blurValues) > 16 {
-			blurValues = blurValues[:16]
+		if len(blurValues) > 100 {
+			blurValues = blurValues[:100]
 		}
 	}
 
-	return strings.Join(blurValues, ""), nil
+	return strings.Join(blurValues, ""), width, height, nil
 }
 
 // AverageColor holds RGB values for a cell
@@ -436,16 +459,33 @@ func generateJavaScriptFile(imageInfos []ImageInfo, outputFile string) error {
 	out.WriteString("window.hashImages = window.hashImages || [];\n")
 	out.WriteString("window.hashImages = [\n")
 
-	// Directly use the ImageInfo objects that already have width, height, and blurhash data
+	// Process each image to include width, height, and blurhash
 	for _, info := range imageInfos {
+		// Always read actual image dimensions from the file, even if we have them in metadata
+		imagePath := filepath.Join(imageDir, info.Filename)
+		width, height, err := getImageDimensions(imagePath)
+
+		// Use the dimensions we got, or fallback to the ones in the metadata
+		if err != nil || width == 0 || height == 0 {
+			width = info.Width
+			height = info.Height
+		}
+
 		if info.Blurmap != "" {
 			// If we have a blurhash, include it
 			fmt.Fprintf(out, "  { filename: \"%s\", width: %d, height: %d, blurhash: \"%s\" },\n",
-				info.Filename, info.Width, info.Height, info.Blurmap)
+				info.Filename, width, height, info.Blurmap)
 		} else {
-			// Otherwise output without blurhash
-			fmt.Fprintf(out, "  { filename: \"%s\", width: %d, height: %d },\n",
-				info.Filename, info.Width, info.Height)
+			// If we don't have a blurhash, generate one
+			blurmap, _, _, err := generateBlurmap(imagePath)
+			if err == nil && blurmap != "" {
+				fmt.Fprintf(out, "  { filename: \"%s\", width: %d, height: %d, blurhash: \"%s\" },\n",
+					info.Filename, width, height, blurmap)
+			} else {
+				// Otherwise output without blurhash
+				fmt.Fprintf(out, "  { filename: \"%s\", width: %d, height: %d },\n",
+					info.Filename, width, height)
+			}
 		}
 	}
 
@@ -453,4 +493,26 @@ func generateJavaScriptFile(imageInfos []ImageInfo, outputFile string) error {
 	out.WriteString("];\n")
 
 	return nil
+}
+
+// getImageDimensions reads an image file and returns its width and height
+func getImageDimensions(imagePath string) (int, int, error) {
+	file, err := os.Open(imagePath)
+	if err != nil {
+		return 0, 0, fmt.Errorf("failed to open image file: %w", err)
+	}
+	defer file.Close()
+
+	// Decode the image
+	img, _, err := image.Decode(file)
+	if err != nil {
+		return 0, 0, fmt.Errorf("failed to decode image: %w", err)
+	}
+
+	// Get image dimensions
+	bounds := img.Bounds()
+	width := bounds.Max.X - bounds.Min.X
+	height := bounds.Max.Y - bounds.Min.Y
+
+	return width, height, nil
 }

@@ -24,9 +24,9 @@ function getBlurhashByFilename(filename) {
     if (img.filename === filename) {
       console.log(`Found blurhash for ${filename}: ${img.blurhash.substring(0, 20)}...`);
 
-      // Validate the blurhash - should be 96 characters (6 bytes per 16 colors in 4x4 grid)
-      if (img.blurhash.length !== 96) {
-        console.warn(`Blurhash for ${filename} has unexpected length: ${img.blurhash.length} chars, expected 96 chars`);
+      // Validate the blurhash - should be 600 characters (6 bytes per 100 colors in 10x10 grid)
+      if (img.blurhash.length !== 600) {
+        console.warn(`Blurhash for ${filename} has unexpected length: ${img.blurhash.length} chars, expected 600 chars`);
         // Continue anyway, don't return null
       }
 
@@ -52,9 +52,9 @@ function getBlurhashByFilename(filename) {
       if (imgBasename === basename) {
         console.log(`Found blurhash for ${basename}: ${img.blurhash.substring(0, 20)}...`);
 
-        // Validate the blurhash - should be 96 characters (6 bytes per 16 colors in 4x4 grid)
-        if (img.blurhash.length !== 96) {
-          console.warn(`Blurhash for ${basename} has unexpected length: ${img.blurhash.length} chars, expected 96 chars`);
+        // Validate the blurhash - should be 600 characters (6 bytes per 100 colors in 10x10 grid)
+        if (img.blurhash.length !== 600) {
+          console.warn(`Blurhash for ${basename} has unexpected length: ${img.blurhash.length} chars, expected 600 chars`);
           // Continue anyway, don't return null
         }
 
@@ -75,10 +75,26 @@ function renderBlurhashGrid(image, blurhash) {
   // Create a canvas element for the blurhash grid
   const canvas = document.createElement('canvas');
 
-  // Set the canvas dimensions to match the image width
+  // Get the aspect ratio from the image object or find it in hashImages
+  let aspectRatio = 1;
+
+  if (image.dataset && image.dataset.filename) {
+    const filename = image.dataset.filename;
+    const imgData = window.hashImages.find(img =>
+      img.filename === filename ||
+      img.filename.split('/').pop() === filename.split('/').pop()
+    );
+
+    if (imgData && imgData.width && imgData.height) {
+      aspectRatio = imgData.width / imgData.height;
+    }
+  }
+
+  // Set the canvas dimensions
   const width = image.width || 300;
+  const height = width / aspectRatio;
   canvas.width = width;
-  canvas.height = width; // Square canvas
+  canvas.height = height;
 
   // Position the canvas absolutely over the image
   canvas.style.position = 'absolute';
@@ -86,35 +102,35 @@ function renderBlurhashGrid(image, blurhash) {
   canvas.style.left = '0';
   canvas.style.width = '100%';
   canvas.style.height = '100%';
-  canvas.style.aspectRatio = '1/1'; // Force square aspect ratio
-  canvas.style.objectFit = 'cover'; // Ensure the canvas fills the space
+  canvas.style.aspectRatio = `${aspectRatio}`; // Use correct aspect ratio
+  canvas.style.objectFit = 'contain'; // Show full image without cropping
   canvas.style.zIndex = '1'; // Below the image (image will have z-index 2)
 
   // Get the drawing context
   const ctx = canvas.getContext('2d');
 
   // If no valid blurhash, fill with default orange
-  if (!blurhash || blurhash.length !== 96) {
-    console.warn(`Invalid blurhash (length: ${blurhash ? blurhash.length : 0}), expected 96 chars. Using orange fallback`);
+  if (!blurhash || blurhash.length !== 600) {
+    console.warn(`Invalid blurhash (length: ${blurhash ? blurhash.length : 0}), expected 600 chars. Using orange fallback`);
     ctx.fillStyle = "#FF8C00";
     ctx.fillRect(0, 0, width, width);
     return canvas;
   }
 
-  console.log(`Valid blurhash found (length: ${blurhash.length}), rendering 4x4 grid`);
+  console.log(`Valid blurhash found (length: ${blurhash.length}), rendering 10x10 grid`);
 
-  // Draw the 4x4 grid from the blurhash
+  // Draw the 10x10 grid from the blurhash
   try {
     // Create a higher-resolution canvas for better blurring
     const offscreenCanvas = document.createElement('canvas');
     const scale = 2; // Higher resolution for better blur
     offscreenCanvas.width = width * scale;
-    offscreenCanvas.height = width * scale;
+    offscreenCanvas.height = height * scale;
     const offCtx = offscreenCanvas.getContext('2d');
 
     // Extract RGB colors from the blurhash
     const colors = [];
-    for (let i = 0; i < 16; i++) {
+    for (let i = 0; i < 100; i++) {
       const startIndex = i * 6;
       if (startIndex + 6 <= blurhash.length) {
         // Extract RRGGBB hex color
@@ -139,17 +155,18 @@ function renderBlurhashGrid(image, blurhash) {
     console.log(`Parsed ${colors.length} RGB colors from blurhash`);
 
     // Generate smooth gradient canvas
-    const cellSize = width * scale / 4;
+    const cellWidth = width * scale / 10;
+    const cellHeight = height * scale / 10;
 
     // First draw the base grid with rectangles
-    for (let y = 0; y < 4; y++) {
-      for (let x = 0; x < 4; x++) {
-        const index = y * 4 + x;
+    for (let y = 0; y < 10; y++) {
+      for (let x = 0; x < 10; x++) {
+        const index = y * 10 + x;
         const color = colors[index];
 
         // Draw the rectangle with RGB value
         offCtx.fillStyle = `rgb(${color.r}, ${color.g}, ${color.b})`;
-        offCtx.fillRect(x * cellSize, y * cellSize, cellSize, cellSize);
+        offCtx.fillRect(x * cellWidth, y * cellHeight, cellWidth, cellHeight);
       }
     }
 
@@ -168,14 +185,14 @@ function renderBlurhashGrid(image, blurhash) {
     // Tint with a slight color to make it look nicer than pure grayscale
     const enhancedCanvas = document.createElement('canvas');
     enhancedCanvas.width = width;
-    enhancedCanvas.height = width;
+    enhancedCanvas.height = height;
     const enhCtx = enhancedCanvas.getContext('2d');
 
     // Draw the blurred image at regular size
-    enhCtx.drawImage(offscreenCanvas, 0, 0, width, width);
+    enhCtx.drawImage(offscreenCanvas, 0, 0, width, height);
 
     // Apply slight enhancement for better visual appearance
-    const imageData = enhCtx.getImageData(0, 0, width, width);
+    const imageData = enhCtx.getImageData(0, 0, width, height);
     const data = imageData.data;
 
     // Calculate average brightness
@@ -224,10 +241,11 @@ function renderBlurhashGrid(image, blurhash) {
 
     try {
       // Fall back to simple rendering if enhanced version fails
-      const cellSize = width / 4;
-      for (let y = 0; y < 4; y++) {
-        for (let x = 0; x < 4; x++) {
-          const index = y * 4 + x;
+      const cellWidth = width / 10;
+      const cellHeight = height / 10;
+      for (let y = 0; y < 10; y++) {
+        for (let x = 0; x < 10; x++) {
+          const index = y * 10 + x;
           const startIndex = index * 6;
           if (startIndex + 6 <= blurhash.length) {
             const hexColor = blurhash.substring(startIndex, startIndex + 6);
@@ -237,7 +255,7 @@ function renderBlurhashGrid(image, blurhash) {
 
             if (!isNaN(r) && !isNaN(g) && !isNaN(b)) {
               ctx.fillStyle = `rgb(${r}, ${g}, ${b})`;
-              ctx.fillRect(x * cellSize, y * cellSize, cellSize, cellSize);
+              ctx.fillRect(x * cellWidth, y * cellHeight, cellWidth, cellHeight);
             }
           }
         }
@@ -322,9 +340,12 @@ function generateGrid() {
     img.width = Math.floor(window.innerWidth / numColumns) - 5;
     img.dataset.src = `${basePath}/${image.filename}`;
     img.dataset.filename = image.filename;
-    if (image.width != 400 && image.height != 400) {
+
+    // Always calculate aspect ratio from image dimensions
+    if (image.width && image.height) {
       const aspectRatio = image.width / image.height;
-      img.height = width / aspectRatio;
+      img.style.aspectRatio = `${aspectRatio}`;
+      img.height = Math.floor(img.width / aspectRatio);
     } else {
       img.height = "auto";
     }
@@ -574,11 +595,15 @@ document.addEventListener("DOMContentLoaded", () => {
             console.log(`Rendering blurhash grid for ${filename} from blurhash`);
 
             // Create wrapper div for positioning
+            // Get the aspect ratio from the image data if available
+            const img = window.hashImages.find(img => img.filename === filename || img.filename.split('/').pop() === filename.split('/').pop());
+            const aspectRatio = img && img.width && img.height ? img.width / img.height : 1;
+
             const wrapper = document.createElement('div');
             wrapper.style.position = 'relative';
             wrapper.style.display = 'inline-block';
             wrapper.style.width = '100%';
-            wrapper.style.aspectRatio = '1/1'; // Initial square aspect ratio for the wrapper (will be updated when image loads)
+            wrapper.style.aspectRatio = `${aspectRatio}`; // Use calculated aspect ratio instead of 1:1
             wrapper.style.overflow = 'hidden'; // Prevent overflow
 
             // Render blurhash canvas
@@ -595,8 +620,8 @@ document.addEventListener("DOMContentLoaded", () => {
             lazyImage.style.opacity = '0'; // Hide image initially
             lazyImage.style.height = 'auto'; // Let height adjust based on width while maintaining aspect ratio
             lazyImage.style.width = '100%'; // Fill the wrapper width
-            lazyImage.style.aspectRatio = '1/1'; // Initial square aspect ratio (will be updated when image loads)
-            lazyImage.style.objectFit = 'cover'; // Scale to cover entire area
+            lazyImage.style.aspectRatio = `${aspectRatio}`; // Use same aspect ratio as wrapper
+            lazyImage.style.objectFit = 'contain'; // Show entire image without cropping
           } else {
             // Use default orange
             console.log(`No blurhash found for ${filename}, using default orange`);
@@ -607,23 +632,40 @@ document.addEventListener("DOMContentLoaded", () => {
           setTimeout(() => {
             // Add onload handler to fade in the image
             lazyImage.onload = () => {
+              // Get the filename from the data attribute
+              const filename = lazyImage.dataset.filename;
               console.log(`Image loaded: ${filename}`);
 
               // Get the actual image dimensions
               const actualWidth = lazyImage.naturalWidth;
               const actualHeight = lazyImage.naturalHeight;
-              const aspectRatio = actualWidth / actualHeight;
+              const actualAspectRatio = actualWidth / actualHeight;
 
-              console.log(`Actual image dimensions: ${actualWidth}x${actualHeight}, aspect ratio: ${aspectRatio}`);
+              console.log(`Actual image dimensions: ${actualWidth}x${actualHeight}, aspect ratio: ${actualAspectRatio}`);
+
+              // Check if we had the correct aspect ratio from metadata
+              const imgData = window.hashImages.find(img =>
+                img.filename === filename ||
+                img.filename.split('/').pop() === filename.split('/').pop()
+              );
+
+              const metadataAspectRatio = imgData && imgData.width && imgData.height
+                ? imgData.width / imgData.height
+                : null;
+
+              // Log if aspect ratio from metadata doesn't match actual
+              if (metadataAspectRatio && Math.abs(metadataAspectRatio - actualAspectRatio) > 0.01) {
+                console.warn(`Aspect ratio mismatch: metadata=${metadataAspectRatio.toFixed(3)}, actual=${actualAspectRatio.toFixed(3)}`);
+              }
 
               // Update the wrapper to use the actual aspect ratio
               if (lazyImage.parentNode) {
-                lazyImage.parentNode.style.aspectRatio = `${aspectRatio}`;
+                lazyImage.parentNode.style.aspectRatio = `${actualAspectRatio}`;
               }
 
               // Update the image to use its natural aspect ratio
-              lazyImage.style.aspectRatio = `${aspectRatio}`;
-              lazyImage.style.objectFit = 'contain'; // Switch from 'cover' to 'contain' to show full image
+              lazyImage.style.aspectRatio = `${actualAspectRatio}`;
+              lazyImage.style.objectFit = 'contain'; // Show full image without cropping
 
               // Fade in the image with a transition
               lazyImage.style.transition = 'opacity 0.5s ease-in-out';

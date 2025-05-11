@@ -62,10 +62,7 @@ while read -r imgid; do
 			continue
 		fi
 	fi
-	height=$(echo "select thumb_height from img where id = '$imgid'" | sqlite3 cv.db)
-	if [[ -z ${height} ]]; then height=300; fi
-
-	echo "{ filename: \"$imgid.${thumbsext}\", width: 400, height: $height},"
+	echo "{ filename: \"$imgid.${thumbsext}\" },"
 
 done
 echo "];"

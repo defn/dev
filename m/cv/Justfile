@@ -57,7 +57,7 @@ big prefix="replicate/":
     find yes -type f | cut -d/ -f2 | cut -d. -f1 | sort > all.input
     just gallery {{ prefix }}img one &
     just gallery {{ prefix }}t2  two &
-    just gallery {{ prefix }}t2  all 1000000 &
+    #just gallery {{ prefix }}t2  all 1000000 &
     wait
 
 index file stage1 stage2:
