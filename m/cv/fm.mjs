@@ -38,7 +38,7 @@ try {
   // Write the JSON object to a file
   fs.writeFileSync(
     `fm/js/${imageFromId}-${imageToId}.json`,
-    JSON.stringify(result, null, 2),
+    JSON.stringify(result, null, 2)
   );
 
   // Fetch the file from the .output URL and save it to a file
