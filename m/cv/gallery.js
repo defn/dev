@@ -1,33 +1,278 @@
-// Default blurhash colors (4x4 grid) in hexadecimal format
-// Creates a more visually interesting pattern with orange gradient
-// that resembles a flame or abstract shape
-const defaultBlurhash =
-  "F7941DEA8219D5651CE38A26" + // Row 1: Top gradient (lighter oranges)
-  "CB5719E07B20F0AD38BC6C18" + // Row 2: Upper middle (brighter oranges)
-  "A33A09D55216F29C41892C05" + // Row 3: Lower middle (darker oranges)
-  "7D2806B14A12E88B3D6B1E02"; // Row 4: Bottom gradient (deepest oranges)
-
 function setBodyMarginToZero() {
   document.body.style.margin = "0";
 }
 
-// Calculate the number of columns based on screen size and device
-function calculateColumns() {
-  const userAgent = navigator.userAgent || navigator.vendor || window.opera;
-  const isMobile =
-    /android|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(
-      userAgent.toLowerCase(),
-    );
+// Function to get blurhash from hashImages array by filename
+function getBlurhashByFilename(filename) {
+  // Quick check if we have what we need
+  if (!window.hashImages || !filename) {
+    console.warn(`Cannot get blurhash for ${filename} - hashImages not available or filename missing`);
+    return null;
+  }
 
-  if (basePath == "replicate/img") {
-    return 1;
-  } else {
-    if (isMobile) {
-      return Math.floor(window.innerWidth / 490);
-    } else {
-      return Math.floor(window.innerWidth / 300);
+  // Log what we're looking for
+  console.log(`Searching for blurhash for ${filename}`);
+
+  // Try to find the image in the hashImages array
+  for (let i = 0; i < window.hashImages.length; i++) {
+    const img = window.hashImages[i];
+
+    // Skip if missing filename or blurhash
+    if (!img || !img.filename || !img.blurhash) continue;
+
+    // Check if this is the image we're looking for
+    if (img.filename === filename) {
+      console.log(`Found blurhash for ${filename}: ${img.blurhash.substring(0, 20)}...`);
+
+      // Validate the blurhash - should be 96 characters (6 bytes per 16 colors in 4x4 grid)
+      if (img.blurhash.length !== 96) {
+        console.warn(`Blurhash for ${filename} has unexpected length: ${img.blurhash.length} chars, expected 96 chars`);
+        // Continue anyway, don't return null
+      }
+
+      return img.blurhash;
     }
   }
+
+  // Try one more time with just the filename (no path)
+  // This handles cases where the path in hashImages doesn't match the path in the image
+  const basename = filename.split('/').pop();
+  if (basename !== filename) {
+    console.log(`Trying again with basename: ${basename}`);
+
+    for (let i = 0; i < window.hashImages.length; i++) {
+      const img = window.hashImages[i];
+
+      // Skip if missing filename or blurhash
+      if (!img || !img.filename || !img.blurhash) continue;
+
+      // Compare basenames
+      const imgBasename = img.filename.split('/').pop();
+
+      if (imgBasename === basename) {
+        console.log(`Found blurhash for ${basename}: ${img.blurhash.substring(0, 20)}...`);
+
+        // Validate the blurhash - should be 96 characters (6 bytes per 16 colors in 4x4 grid)
+        if (img.blurhash.length !== 96) {
+          console.warn(`Blurhash for ${basename} has unexpected length: ${img.blurhash.length} chars, expected 96 chars`);
+          // Continue anyway, don't return null
+        }
+
+        return img.blurhash;
+      }
+    }
+  }
+
+  console.warn(`No blurhash found for ${filename} after checking ${window.hashImages.length} images`);
+  return null;
+}
+
+// Function to render a 4x4 blurhash grid on a canvas
+function renderBlurhashGrid(image, blurhash) {
+  console.log(`Rendering blurhash grid with hash: ${blurhash ? blurhash.substring(0, 20) + '...' : 'null'}`);
+  console.log(`Image dimensions: ${image.width}x${image.height}`);
+
+  // Create a canvas element for the blurhash grid
+  const canvas = document.createElement('canvas');
+
+  // Set the canvas dimensions to match the image width
+  const width = image.width || 300;
+  canvas.width = width;
+  canvas.height = width; // Square canvas
+
+  // Position the canvas absolutely over the image
+  canvas.style.position = 'absolute';
+  canvas.style.top = '0';
+  canvas.style.left = '0';
+  canvas.style.width = '100%';
+  canvas.style.height = '100%';
+  canvas.style.aspectRatio = '1/1'; // Force square aspect ratio
+  canvas.style.objectFit = 'cover'; // Ensure the canvas fills the space
+  canvas.style.zIndex = '1'; // Below the image (image will have z-index 2)
+
+  // Get the drawing context
+  const ctx = canvas.getContext('2d');
+
+  // If no valid blurhash, fill with default orange
+  if (!blurhash || blurhash.length !== 96) {
+    console.warn(`Invalid blurhash (length: ${blurhash ? blurhash.length : 0}), expected 96 chars. Using orange fallback`);
+    ctx.fillStyle = "#FF8C00";
+    ctx.fillRect(0, 0, width, width);
+    return canvas;
+  }
+
+  console.log(`Valid blurhash found (length: ${blurhash.length}), rendering 4x4 grid`);
+
+  // Draw the 4x4 grid from the blurhash
+  try {
+    // Create a higher-resolution canvas for better blurring
+    const offscreenCanvas = document.createElement('canvas');
+    const scale = 2; // Higher resolution for better blur
+    offscreenCanvas.width = width * scale;
+    offscreenCanvas.height = width * scale;
+    const offCtx = offscreenCanvas.getContext('2d');
+
+    // Extract RGB colors from the blurhash
+    const colors = [];
+    for (let i = 0; i < 16; i++) {
+      const startIndex = i * 6;
+      if (startIndex + 6 <= blurhash.length) {
+        // Extract RRGGBB hex color
+        const hexColor = blurhash.substring(startIndex, startIndex + 6);
+
+        // Parse RGB components
+        const r = parseInt(hexColor.substring(0, 2), 16);
+        const g = parseInt(hexColor.substring(2, 4), 16);
+        const b = parseInt(hexColor.substring(4, 6), 16);
+
+        // Validate values
+        const validR = isNaN(r) ? 128 : r;
+        const validG = isNaN(g) ? 128 : g;
+        const validB = isNaN(b) ? 128 : b;
+
+        colors.push({ r: validR, g: validG, b: validB });
+      } else {
+        colors.push({ r: 128, g: 128, b: 128 }); // Fallback gray
+      }
+    }
+
+    console.log(`Parsed ${colors.length} RGB colors from blurhash`);
+
+    // Generate smooth gradient canvas
+    const cellSize = width * scale / 4;
+
+    // First draw the base grid with rectangles
+    for (let y = 0; y < 4; y++) {
+      for (let x = 0; x < 4; x++) {
+        const index = y * 4 + x;
+        const color = colors[index];
+
+        // Draw the rectangle with RGB value
+        offCtx.fillStyle = `rgb(${color.r}, ${color.g}, ${color.b})`;
+        offCtx.fillRect(x * cellSize, y * cellSize, cellSize, cellSize);
+      }
+    }
+
+    // Blur the offscreen canvas for smoother transitions
+    offCtx.filter = 'blur(8px)';
+    offCtx.globalAlpha = 0.8;
+    offCtx.drawImage(offscreenCanvas, 0, 0);
+
+    // Add a second pass of blur for even smoother result
+    offCtx.filter = 'blur(12px)';
+    offCtx.globalAlpha = 0.5;
+    offCtx.drawImage(offscreenCanvas, 0, 0);
+    offCtx.globalAlpha = 1.0;
+
+    // Normalize and enhance contrast
+    // Tint with a slight color to make it look nicer than pure grayscale
+    const enhancedCanvas = document.createElement('canvas');
+    enhancedCanvas.width = width;
+    enhancedCanvas.height = width;
+    const enhCtx = enhancedCanvas.getContext('2d');
+
+    // Draw the blurred image at regular size
+    enhCtx.drawImage(offscreenCanvas, 0, 0, width, width);
+
+    // Apply slight enhancement for better visual appearance
+    const imageData = enhCtx.getImageData(0, 0, width, width);
+    const data = imageData.data;
+
+    // Calculate average brightness
+    let totalBrightness = 0;
+    for (let i = 0; i < colors.length; i++) {
+      const color = colors[i];
+      totalBrightness += (color.r + color.g + color.b) / 3;
+    }
+    const avgBrightness = totalBrightness / colors.length;
+
+    // Apply enhancement based on brightness
+    const contrast = 1.1;  // Slight contrast boost
+    const saturation = 1.2; // Slight saturation boost
+
+    for (let i = 0; i < data.length; i += 4) {
+      // Apply contrast - move values away from middle gray (128)
+      let r = data[i];
+      let g = data[i+1];
+      let b = data[i+2];
+
+      // Apply contrast
+      r = 128 + (r - 128) * contrast;
+      g = 128 + (g - 128) * contrast;
+      b = 128 + (b - 128) * contrast;
+
+      // Apply saturation (increase difference between each color and the average)
+      const gray = (r + g + b) / 3;
+      r = gray + (r - gray) * saturation;
+      g = gray + (g - gray) * saturation;
+      b = gray + (b - gray) * saturation;
+
+      // Clamp values
+      data[i] = Math.min(255, Math.max(0, r));
+      data[i+1] = Math.min(255, Math.max(0, g));
+      data[i+2] = Math.min(255, Math.max(0, b));
+    }
+
+    enhCtx.putImageData(imageData, 0, 0);
+
+    // Final draw to the main canvas
+    ctx.drawImage(enhancedCanvas, 0, 0);
+
+    console.log(`Blurhash rendered with full RGB colors and visual enhancements`);
+  } catch (mainError) {
+    console.warn('Failed to apply enhanced blur:', mainError);
+
+    try {
+      // Fall back to simple rendering if enhanced version fails
+      const cellSize = width / 4;
+      for (let y = 0; y < 4; y++) {
+        for (let x = 0; x < 4; x++) {
+          const index = y * 4 + x;
+          const startIndex = index * 6;
+          if (startIndex + 6 <= blurhash.length) {
+            const hexColor = blurhash.substring(startIndex, startIndex + 6);
+            const r = parseInt(hexColor.substring(0, 2), 16);
+            const g = parseInt(hexColor.substring(2, 4), 16);
+            const b = parseInt(hexColor.substring(4, 6), 16);
+
+            if (!isNaN(r) && !isNaN(g) && !isNaN(b)) {
+              ctx.fillStyle = `rgb(${r}, ${g}, ${b})`;
+              ctx.fillRect(x * cellSize, y * cellSize, cellSize, cellSize);
+            }
+          }
+        }
+      }
+
+      // Add basic blur if possible
+      try {
+        ctx.filter = 'blur(5px)';
+        ctx.drawImage(canvas, 0, 0);
+      } catch (blurError) {
+        // Ignore if blur fails
+        console.warn('Basic blur failed, continuing without blur:', blurError);
+      }
+    } catch (fallbackError) {
+      console.error('Even fallback rendering failed:', fallbackError);
+      // Last resort - orange fallback
+      ctx.fillStyle = "#FF8C00";
+      ctx.fillRect(0, 0, width, width);
+    }
+  }
+
+  return canvas;
+}
+
+// Simple function for backwards compatibility or fallback
+function blurhashToColor(hash) {
+  if (!hash || hash.length < 6) return "#FF8C00"; // Default orange
+
+  // Get first color in the hash to use as placeholder
+  const r = parseInt(hash.substring(0, 2), 16);
+  const g = parseInt(hash.substring(2, 4), 16);
+  const b = parseInt(hash.substring(4, 6), 16);
+
+  if (isNaN(r) || isNaN(g) || isNaN(b)) return "#FF8C00";
+  return `rgb(${r}, ${g}, ${b})`;
 }
 
 function generateGrid() {
@@ -42,8 +287,21 @@ function generateGrid() {
           return images[Math.floor(Math.random() * images.length)];
         });
 
-  // Calculate number of columns
-  numColumns = calculateColumns();
+  const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+  const isMobile =
+    /android|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(
+      userAgent.toLowerCase(),
+    );
+
+  if (basePath == "replicate/img") {
+    numColumns = 1;
+  } else {
+    if (isMobile) {
+      numColumns = Math.floor(window.innerWidth / 490);
+    } else {
+      numColumns = Math.floor(window.innerWidth / 300);
+    }
+  }
 
   // Initialize an array to hold columns
   const columns = Array.from({ length: numColumns }, () => {
@@ -64,8 +322,6 @@ function generateGrid() {
     img.width = Math.floor(window.innerWidth / numColumns) - 5;
     img.dataset.src = `${basePath}/${image.filename}`;
     img.dataset.filename = image.filename;
-    // Set dark orange background for loading state
-    img.style.backgroundColor = "#FF8C00";
     if (image.width != 400 && image.height != 400) {
       const aspectRatio = image.width / image.height;
       img.height = width / aspectRatio;
@@ -173,235 +429,6 @@ function toggleVisibility(element) {
     .catch((error) => console.error("Error:", error));
 }
 
-// Convert hex string to RGB array
-function hexToRgb(hex) {
-  const r = parseInt(hex.substring(0, 2), 16);
-  const g = parseInt(hex.substring(2, 4), 16);
-  const b = parseInt(hex.substring(4, 6), 16);
-  return [r, g, b];
-}
-
-// Get blurhash from image tag attribute or use default
-function generateBlurHash(image) {
-  // Check if image has a blurhash attribute
-  if (image && image.dataset && image.dataset.blurhash) {
-    // Return the blurhash string directly - always a hex string
-    return image.dataset.blurhash;
-  }
-
-  // If no hash in data attribute, return default
-  return defaultBlurhash;
-}
-
-// Helper function to convert HSL to RGB
-function hslToRgb(h, s, l) {
-  s /= 100;
-  l /= 100;
-
-  const c = (1 - Math.abs(2 * l - 1)) * s;
-  const x = c * (1 - Math.abs(((h / 60) % 2) - 1));
-  const m = l - c / 2;
-
-  let r, g, b;
-
-  if (0 <= h && h < 60) {
-    [r, g, b] = [c, x, 0];
-  } else if (60 <= h && h < 120) {
-    [r, g, b] = [x, c, 0];
-  } else if (120 <= h && h < 180) {
-    [r, g, b] = [0, c, x];
-  } else if (180 <= h && h < 240) {
-    [r, g, b] = [0, x, c];
-  } else if (240 <= h && h < 300) {
-    [r, g, b] = [x, 0, c];
-  } else {
-    [r, g, b] = [c, 0, x];
-  }
-
-  return [
-    Math.round((r + m) * 255),
-    Math.round((g + m) * 255),
-    Math.round((b + m) * 255)
-  ];
-}
-
-// Render blurhash to canvas with a 4x4 grid pattern
-function renderBlurHash(hash, canvas, width, height) {
-  const ctx = canvas.getContext('2d');
-
-  // Clear canvas first
-  ctx.clearRect(0, 0, width, height);
-
-  // Choose a pattern type (more complex shapes)
-  const patternType = Math.floor(Math.random() * 4);
-
-  // No need to check for old format - always expect a hex string
-
-  // Extract the 16 colors from the hash string (each color is 6 hex chars)
-  const colors = [];
-  for (let i = 0; i < 16; i++) {
-    const startIdx = i * 6;
-    const colorHex = hash.substring(startIdx, startIdx + 6);
-    colors.push(hexToRgb(colorHex));
-  }
-
-  // Cell size for 4x4 grid
-  const cellWidth = width / 4;
-  const cellHeight = height / 4;
-
-  if (patternType === 0) {
-    // Pattern 1: Simple 4x4 grid with blurred edges
-    for (let y = 0; y < 4; y++) {
-      for (let x = 0; x < 4; x++) {
-        const color = colors[y * 4 + x];
-        ctx.fillStyle = `rgb(${color[0]}, ${color[1]}, ${color[2]})`;
-        ctx.fillRect(x * cellWidth, y * cellHeight, cellWidth, cellHeight);
-      }
-    }
-  }
-  else if (patternType === 1) {
-    // Pattern 2: Overlapping circles
-    for (let y = 0; y < 4; y++) {
-      for (let x = 0; x < 4; x++) {
-        const color = colors[y * 4 + x];
-        const centerX = (x + 0.5) * cellWidth;
-        const centerY = (y + 0.5) * cellHeight;
-        const radius = Math.max(cellWidth, cellHeight) * 0.7;
-
-        const gradient = ctx.createRadialGradient(
-          centerX, centerY, 0,
-          centerX, centerY, radius
-        );
-
-        gradient.addColorStop(0, `rgba(${color[0]}, ${color[1]}, ${color[2]}, 0.8)`);
-        gradient.addColorStop(1, `rgba(${color[0]}, ${color[1]}, ${color[2]}, 0)`);
-
-        ctx.fillStyle = gradient;
-        ctx.beginPath();
-        ctx.arc(centerX, centerY, radius, 0, Math.PI * 2);
-        ctx.fill();
-      }
-    }
-  }
-  else if (patternType === 2) {
-    // Pattern 3: Diagonal stripes
-    for (let i = 0; i < 8; i++) {
-      // Use different colors for different stripes
-      const colorIdx = i % 4 + Math.floor(i / 4) * 4; // Distribute colors across the grid
-      const color = colors[colorIdx];
-
-      const startX = i < 4 ? 0 : (i - 4) * width / 4;
-      const startY = i < 4 ? i * height / 4 : 0;
-      const endX = i < 4 ? width : width;
-      const endY = i < 4 ? height : (i - 4) * height / 4;
-
-      const gradient = ctx.createLinearGradient(startX, startY, endX, endY);
-      gradient.addColorStop(0, `rgba(${color[0]}, ${color[1]}, ${color[2]}, 0.8)`);
-      gradient.addColorStop(1, `rgba(${color[0]}, ${color[1]}, ${color[2]}, 0.2)`);
-
-      ctx.fillStyle = gradient;
-      ctx.beginPath();
-      ctx.moveTo(startX, startY);
-      ctx.lineTo(endX, endY);
-      ctx.lineTo(i < 4 ? 0 : endX, i < 4 ? endY : height);
-      ctx.lineTo(i < 4 ? startX : 0, i < 4 ? 0 : startY);
-      ctx.closePath();
-      ctx.fill();
-    }
-  }
-  else {
-    // Pattern 4: Voronoi-like pattern with more efficient drawing
-    const points = [];
-
-    // Create center points for each cell in the 4x4 grid
-    for (let y = 0; y < 4; y++) {
-      for (let x = 0; x < 4; x++) {
-        // Add some randomness to point positions for more organic look
-        const offsetX = (Math.random() - 0.5) * cellWidth * 0.5;
-        const offsetY = (Math.random() - 0.5) * cellHeight * 0.5;
-
-        points.push({
-          x: (x + 0.5) * cellWidth + offsetX,
-          y: (y + 0.5) * cellHeight + offsetY,
-          color: colors[y * 4 + x]
-        });
-      }
-    }
-
-    // Use an offscreen canvas for more efficient drawing
-    const cellSize = 10; // Draw in larger cells for efficiency
-    const numCellsX = Math.ceil(width / cellSize);
-    const numCellsY = Math.ceil(height / cellSize);
-
-    // Draw using larger cells instead of pixel by pixel for better performance
-    for (let cy = 0; cy < numCellsY; cy++) {
-      for (let cx = 0; cx < numCellsX; cx++) {
-        const x = cx * cellSize + cellSize / 2;
-        const y = cy * cellSize + cellSize / 2;
-
-        // Find the closest point
-        let minDist = Infinity;
-        let closestPoint = null;
-
-        for (const point of points) {
-          const dx = x - point.x;
-          const dy = y - point.y;
-          const dist = dx * dx + dy * dy;
-
-          if (dist < minDist) {
-            minDist = dist;
-            closestPoint = point;
-          }
-        }
-
-        // Draw a cell with the color of the closest point
-        if (closestPoint) {
-          const color = closestPoint.color;
-          ctx.fillStyle = `rgb(${color[0]}, ${color[1]}, ${color[2]})`;
-          ctx.fillRect(cx * cellSize, cy * cellSize, cellSize, cellSize);
-        }
-      }
-    }
-
-    // Add some gradient overlays for more interesting patterns
-    const overlayGradient = ctx.createLinearGradient(0, 0, width, height);
-    const randomPoint1 = points[Math.floor(Math.random() * points.length)];
-    const randomPoint2 = points[Math.floor(Math.random() * points.length)];
-    const randomPoint3 = points[Math.floor(Math.random() * points.length)];
-
-    overlayGradient.addColorStop(0, `rgba(${randomPoint1.color[0]}, ${randomPoint1.color[1]}, ${randomPoint1.color[2]}, 0.3)`);
-    overlayGradient.addColorStop(0.5, `rgba(${randomPoint2.color[0]}, ${randomPoint2.color[1]}, ${randomPoint2.color[2]}, 0.1)`);
-    overlayGradient.addColorStop(1, `rgba(${randomPoint3.color[0]}, ${randomPoint3.color[1]}, ${randomPoint3.color[2]}, 0.3)`);
-
-    ctx.fillStyle = overlayGradient;
-    ctx.fillRect(0, 0, width, height);
-  }
-
-  // Apply blur for a smoother appearance
-  ctx.filter = 'blur(8px)';
-  ctx.drawImage(canvas, 0, 0, width, height);
-  ctx.filter = 'none';
-}
-
-// Create blurhash canvas for an image
-function createBlurCanvas(image, width, height) {
-  const canvas = document.createElement('canvas');
-  canvas.width = width;
-  canvas.height = height;
-  canvas.className = 'blurhash-canvas';
-  canvas.style.position = 'absolute';
-  canvas.style.top = '0';
-  canvas.style.left = '0';
-  canvas.style.width = '100%';
-  canvas.style.height = '100%';
-
-  // Generate and render blurhash using the image's data attribute if available
-  const hash = generateBlurHash(image);
-  renderBlurHash(hash, canvas, width, height);
-
-  return canvas;
-}
-
 function toggleHidden(element) {
   const placeholder =
     "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/wcAAgAB/PrlqscAAAAASUVORK5CYII=";
@@ -505,128 +532,109 @@ document.addEventListener("DOMContentLoaded", () => {
   let eop = false;
   let keySequence = "";
   let autos = false;
-  // Queue management for limiting concurrent downloads
-  const downloadQueue = [];
-  const activeDownloads = new Set();
-  // Set download limit to 2x number of columns
-  const columnCount = calculateColumns();
-  const MAX_CONCURRENT_DOWNLOADS = columnCount * 2;
 
+  // Check if hashImages is available from blurhash.js
+  if (typeof window.hashImages !== 'undefined') {
+    console.log(`Found hashImages array with ${window.hashImages.length} images`);
+
+    // Log the first few entries for debugging
+    if (window.hashImages.length > 0) {
+      console.log('First few entries:',
+        window.hashImages.slice(0, 2).map(img => ({
+          filename: img.filename,
+          blurhash: img.blurhash ?
+            (img.blurhash.length > 20 ?
+              img.blurhash.substring(0, 20) + '...' :
+              img.blurhash) :
+            'none'
+        }))
+      );
+    }
+  } else {
+    console.warn('hashImages not found - blurhash.js must be included before gallery.js');
+  }
 
   setBodyMarginToZero();
 
   if ("IntersectionObserver" in window) {
+
     const lazyloadImages = document.querySelectorAll(".lazyload");
-
-    // Function to sort images by distance from top of page
-    const sortImagesByPosition = () => {
-      return Array.from(downloadQueue).sort((a, b) => {
-        return a.getBoundingClientRect().top - b.getBoundingClientRect().top;
-      });
-    };
-
-    // Function to process the download queue
-    const processDownloadQueue = () => {
-      // Sort the queue by position from top
-      const sortedQueue = sortImagesByPosition();
-
-      // Process up to MAX_CONCURRENT_DOWNLOADS
-      while (activeDownloads.size < MAX_CONCURRENT_DOWNLOADS && sortedQueue.length > 0) {
-        const nextImage = sortedQueue.shift();
-        if (!activeDownloads.has(nextImage) && nextImage.classList.contains('lazyload')) {
-          startImageDownload(nextImage);
-        }
-      }
-    };
-
-    // Function to start downloading an image
-    const startImageDownload = (lazyImage) => {
-      activeDownloads.add(lazyImage);
-      lazyImage.removeAttribute("height");
-
-      // Create a wrapper div for positioning
-      const wrapper = document.createElement('div');
-      wrapper.style.position = 'relative';
-      wrapper.style.display = 'inline-block';
-      wrapper.style.width = '100%';
-
-      // Get column width for the square dimensions
-      const columnWidth = Math.floor(window.innerWidth / columnCount) - 5;
-      const width = columnWidth;
-      const height = columnWidth; // Make it square
-
-      // Create and add the blurmap canvas
-      const blurCanvas = createBlurCanvas(lazyImage, width, height);
-
-      // Set the canvas to take the full width of the container
-      blurCanvas.style.width = '100%';
-      blurCanvas.style.height = 'auto';
-      blurCanvas.style.aspectRatio = '1/1';
-
-      // Replace the image with the wrapper containing both canvas and image
-      lazyImage.parentNode.insertBefore(wrapper, lazyImage);
-      wrapper.appendChild(blurCanvas);
-      wrapper.appendChild(lazyImage);
-
-      // Position the image on top of the canvas
-      lazyImage.style.position = 'relative';
-      lazyImage.style.zIndex = '2';
-      lazyImage.style.width = '100%';
-
-      lazyImage.onload = () => {
-        // Remove background color once image is loaded
-        lazyImage.style.backgroundColor = "transparent";
-
-        // Fade out the blur canvas
-        const fadeOut = () => {
-          if (blurCanvas.style.opacity > 0) {
-            blurCanvas.style.opacity -= 0.1;
-            setTimeout(fadeOut, 30);
-          } else {
-            blurCanvas.remove();
-          }
-        };
-
-        blurCanvas.style.opacity = 1;
-        setTimeout(fadeOut, 0);
-
-        activeDownloads.delete(lazyImage);
-        // Remove from queue if it's still there
-        const queueIndex = downloadQueue.indexOf(lazyImage);
-        if (queueIndex > -1) {
-          downloadQueue.splice(queueIndex, 1);
-        }
-        // Process next images in queue
-        setTimeout(processDownloadQueue, 0);
-      };
-
-      lazyImage.onerror = () => {
-        // Keep orange background for error state as a visual indicator
-        activeDownloads.delete(lazyImage);
-        // Process next images in queue
-        setTimeout(processDownloadQueue, 0);
-      };
-
-      // Load the image after a 100ms delay
-      setTimeout(() => {
-        lazyImage.src = lazyImage.dataset.src;
-        lazyImage.classList.remove("lazyload");
-      }, 100);
-    };
 
     let lazyImageObserver = new IntersectionObserver((entries, observer) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
           let lazyImage = entry.target;
-          // Add to download queue if not already loading
-          if (!activeDownloads.has(lazyImage) && !downloadQueue.includes(lazyImage)) {
-            downloadQueue.push(lazyImage);
-            lazyImageObserver.unobserve(lazyImage);
+          lazyImage.removeAttribute("height");
+
+          // Look for blurhash in hashImages array
+          const filename = lazyImage.dataset.filename;
+          const blurhash = getBlurhashByFilename(filename);
+
+          if (blurhash) {
+            console.log(`Rendering blurhash grid for ${filename} from blurhash`);
+
+            // Create wrapper div for positioning
+            const wrapper = document.createElement('div');
+            wrapper.style.position = 'relative';
+            wrapper.style.display = 'inline-block';
+            wrapper.style.width = '100%';
+            wrapper.style.aspectRatio = '1/1'; // Force square aspect ratio for the wrapper
+            wrapper.style.overflow = 'hidden'; // Prevent overflow
+
+            // Render blurhash canvas
+            const canvas = renderBlurhashGrid(lazyImage, blurhash);
+
+            // Replace the image with the wrapper containing both canvas and image
+            lazyImage.parentNode.insertBefore(wrapper, lazyImage);
+            wrapper.appendChild(canvas);
+            wrapper.appendChild(lazyImage);
+
+            // Position the image on top of the canvas
+            lazyImage.style.position = 'relative';
+            lazyImage.style.zIndex = '2';
+            lazyImage.style.opacity = '0'; // Hide image initially
+            lazyImage.style.height = 'auto'; // Let height adjust based on width while maintaining aspect ratio
+            lazyImage.style.width = '100%'; // Fill the wrapper width
+            lazyImage.style.aspectRatio = '1/1'; // Force square aspect ratio
+            lazyImage.style.objectFit = 'cover'; // Scale to cover entire area
+          } else {
+            // Use default orange
+            console.log(`No blurhash found for ${filename}, using default orange`);
+            lazyImage.style.backgroundColor = "#FF8C00";
           }
+
+          // Add a 3-second delay before loading the image
+          setTimeout(() => {
+            // Add onload handler to fade in the image
+            lazyImage.onload = () => {
+              console.log(`Image loaded: ${filename}`);
+
+              // Fade in the image with a transition
+              lazyImage.style.transition = 'opacity 0.5s ease-in-out';
+              lazyImage.style.opacity = '1';
+
+              // Fade out the canvas if it exists (parent of the image is the wrapper)
+              if (lazyImage.parentNode && lazyImage.parentNode.querySelector('canvas')) {
+                const canvas = lazyImage.parentNode.querySelector('canvas');
+                canvas.style.transition = 'opacity 0.5s ease-in-out';
+                canvas.style.opacity = '0';
+
+                // Remove the canvas after transition
+                setTimeout(() => {
+                  if (canvas.parentNode) {
+                    canvas.parentNode.removeChild(canvas);
+                  }
+                }, 500);
+              }
+            };
+
+            // Start loading the image
+            lazyImage.src = lazyImage.dataset.src;
+            lazyImage.classList.remove("lazyload");
+          }, 0);
+          lazyImageObserver.unobserve(lazyImage);
         }
       });
-      // Process queue after detecting visible images
-      processDownloadQueue();
     },
     {
     rootMargin: "0px", // No margin, only load when fully inside viewport
@@ -732,7 +740,7 @@ document.addEventListener("DOMContentLoaded", () => {
         metaKey: false,
       });
 
-      // document.dispatchEvent(event);
+      document.dispatchEvent(event);
     }, 30000);
   }
 });
