@@ -666,151 +666,228 @@ document.addEventListener("DOMContentLoaded", () => {
   if ("IntersectionObserver" in window) {
     const lazyloadImages = document.querySelectorAll(".lazyload");
 
-    let lazyImageObserver = new IntersectionObserver(
+    // Track which images have already had their blur rendered
+    const blurRenderedImages = new Set();
+
+    // Track in-flight image loading requests
+    let inflightRequests = 0;
+    const maxInflightRequests = numColumns + 3 || 6; // Column count plus 3 additional concurrent loads
+    const imageLoadQueue = []; // Queue for pending image loads
+
+    // Function to process the next image in the queue if under the cap
+    const processImageLoadQueue = () => {
+      // If we're under the cap and have images to load, load the next one
+      if (inflightRequests < maxInflightRequests && imageLoadQueue.length > 0) {
+        const nextImageToLoad = imageLoadQueue.shift();
+        loadImage(nextImageToLoad);
+      }
+    };
+
+    // Function to load an image
+    const loadImage = (lazyImage) => {
+      inflightRequests++;
+      console.log(
+        `Loading image: ${lazyImage.dataset.filename} (${inflightRequests} in flight)`
+      );
+
+      // Add onload handler to fade in the image
+      lazyImage.onload = () => {
+        // Get the filename from the data attribute
+        const filename = lazyImage.dataset.filename;
+        console.log(`Image loaded: ${filename}`);
+
+        // Get the actual image dimensions
+        const actualWidth = lazyImage.naturalWidth;
+        const actualHeight = lazyImage.naturalHeight;
+        const actualAspectRatio = actualWidth / actualHeight;
+
+        console.log(
+          `Actual image dimensions: ${actualWidth}x${actualHeight}, aspect ratio: ${actualAspectRatio}`
+        );
+
+        // Check if we had the correct aspect ratio from metadata
+        const imgData = window.hashImages.find(
+          (img) =>
+            img.filename === filename ||
+            img.filename.split("/").pop() === filename.split("/").pop()
+        );
+
+        const metadataAspectRatio =
+          imgData && imgData.width && imgData.height
+            ? imgData.width / imgData.height
+            : null;
+
+        // Log if aspect ratio from metadata doesn't match actual
+        if (
+          metadataAspectRatio &&
+          Math.abs(metadataAspectRatio - actualAspectRatio) > 0.01
+        ) {
+          console.warn(
+            `Aspect ratio mismatch: metadata=${metadataAspectRatio.toFixed(
+              3
+            )}, actual=${actualAspectRatio.toFixed(3)}`
+          );
+        }
+
+        // Update the wrapper to use the actual aspect ratio
+        if (lazyImage.parentNode) {
+          lazyImage.parentNode.style.aspectRatio = `${actualAspectRatio}`;
+        }
+
+        // Update the image to use its natural aspect ratio
+        lazyImage.style.aspectRatio = `${actualAspectRatio}`;
+        lazyImage.style.objectFit = "contain"; // Show full image without cropping
+
+        // Fade in the image with a transition
+        lazyImage.style.transition = "opacity 0.5s ease-in-out";
+        lazyImage.style.opacity = "1";
+
+        // Fade out the canvas if it exists (parent of the image is the wrapper)
+        if (
+          lazyImage.parentNode &&
+          lazyImage.parentNode.querySelector("canvas")
+        ) {
+          const canvas = lazyImage.parentNode.querySelector("canvas");
+          canvas.style.transition = "opacity 0.5s ease-in-out";
+          canvas.style.opacity = "0";
+
+          // Remove the canvas after transition
+          setTimeout(() => {
+            if (canvas.parentNode) {
+              canvas.parentNode.removeChild(canvas);
+            }
+          }, 500);
+        }
+
+        // Reduce the in-flight counter and process the next image
+        inflightRequests--;
+        processImageLoadQueue();
+      };
+
+      // Handle image loading errors
+      lazyImage.onerror = () => {
+        console.error(`Failed to load image: ${lazyImage.dataset.filename}`);
+        inflightRequests--;
+        processImageLoadQueue();
+      };
+
+      // Start loading the image
+      lazyImage.src = lazyImage.dataset.src;
+      lazyImage.classList.remove("lazyload");
+    };
+
+    // Function to render the blur for an image
+    const renderBlur = (lazyImage) => {
+      const imageId = lazyImage.id;
+
+      // Skip if we've already rendered the blur for this image
+      if (blurRenderedImages.has(imageId)) {
+        return;
+      }
+
+      // Mark this image as having its blur rendered
+      blurRenderedImages.add(imageId);
+
+      lazyImage.removeAttribute("height");
+
+      // Look for blurhash in hashImages array
+      const filename = lazyImage.dataset.filename;
+      const blurhash = getBlurhashByFilename(filename);
+
+      if (blurhash) {
+        console.log(`Rendering blurhash grid for ${filename} from blurhash`);
+
+        // Create wrapper div for positioning
+        // Get the aspect ratio from the image data if available
+        const img = window.hashImages.find(
+          (img) =>
+            img.filename === filename ||
+            img.filename.split("/").pop() === filename.split("/").pop()
+        );
+        const aspectRatio =
+          img && img.width && img.height ? img.width / img.height : 1;
+
+        const wrapper = document.createElement("div");
+        wrapper.style.position = "relative";
+        wrapper.style.display = "inline-block";
+        wrapper.style.width = "100%";
+        wrapper.style.aspectRatio = `${aspectRatio}`; // Use calculated aspect ratio instead of 1:1
+        wrapper.style.overflow = "hidden"; // Prevent overflow
+
+        // Render blurhash canvas
+        const canvas = renderBlurhashGrid(lazyImage, blurhash);
+
+        // Replace the image with the wrapper containing both canvas and image
+        lazyImage.parentNode.insertBefore(wrapper, lazyImage);
+        wrapper.appendChild(canvas);
+        wrapper.appendChild(lazyImage);
+
+        // Position the image on top of the canvas
+        lazyImage.style.position = "relative";
+        lazyImage.style.zIndex = "2";
+        lazyImage.style.opacity = "0"; // Hide image initially
+        lazyImage.style.height = "auto"; // Let height adjust based on width while maintaining aspect ratio
+        lazyImage.style.width = "100%"; // Fill the wrapper width
+        lazyImage.style.aspectRatio = `${aspectRatio}`; // Use same aspect ratio as wrapper
+        lazyImage.style.objectFit = "contain"; // Show entire image without cropping
+      } else {
+        // Use default orange
+        console.log(`No blurhash found for ${filename}, using default orange`);
+        lazyImage.style.backgroundColor = "#FF8C00";
+      }
+    };
+
+    // Separate observer for rendering the blur - renders blur when element is approaching viewport
+    let blurRenderObserver = new IntersectionObserver(
       (entries, observer) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             let lazyImage = entry.target;
-            lazyImage.removeAttribute("height");
 
-            // Look for blurhash in hashImages array
-            const filename = lazyImage.dataset.filename;
-            const blurhash = getBlurhashByFilename(filename);
+            // Immediately render the blur
+            renderBlur(lazyImage);
 
-            if (blurhash) {
-              console.log(
-                `Rendering blurhash grid for ${filename} from blurhash`
-              );
-
-              // Create wrapper div for positioning
-              // Get the aspect ratio from the image data if available
-              const img = window.hashImages.find(
-                (img) =>
-                  img.filename === filename ||
-                  img.filename.split("/").pop() === filename.split("/").pop()
-              );
-              const aspectRatio =
-                img && img.width && img.height ? img.width / img.height : 1;
-
-              const wrapper = document.createElement("div");
-              wrapper.style.position = "relative";
-              wrapper.style.display = "inline-block";
-              wrapper.style.width = "100%";
-              wrapper.style.aspectRatio = `${aspectRatio}`; // Use calculated aspect ratio instead of 1:1
-              wrapper.style.overflow = "hidden"; // Prevent overflow
-
-              // Render blurhash canvas
-              const canvas = renderBlurhashGrid(lazyImage, blurhash);
-
-              // Replace the image with the wrapper containing both canvas and image
-              lazyImage.parentNode.insertBefore(wrapper, lazyImage);
-              wrapper.appendChild(canvas);
-              wrapper.appendChild(lazyImage);
-
-              // Position the image on top of the canvas
-              lazyImage.style.position = "relative";
-              lazyImage.style.zIndex = "2";
-              lazyImage.style.opacity = "0"; // Hide image initially
-              lazyImage.style.height = "auto"; // Let height adjust based on width while maintaining aspect ratio
-              lazyImage.style.width = "100%"; // Fill the wrapper width
-              lazyImage.style.aspectRatio = `${aspectRatio}`; // Use same aspect ratio as wrapper
-              lazyImage.style.objectFit = "contain"; // Show entire image without cropping
-            } else {
-              // Use default orange
-              console.log(
-                `No blurhash found for ${filename}, using default orange`
-              );
-              lazyImage.style.backgroundColor = "#FF8C00";
-            }
-
-            // Add a 3-second delay before loading the image
-            setTimeout(() => {
-              // Add onload handler to fade in the image
-              lazyImage.onload = () => {
-                // Get the filename from the data attribute
-                const filename = lazyImage.dataset.filename;
-                console.log(`Image loaded: ${filename}`);
-
-                // Get the actual image dimensions
-                const actualWidth = lazyImage.naturalWidth;
-                const actualHeight = lazyImage.naturalHeight;
-                const actualAspectRatio = actualWidth / actualHeight;
-
-                console.log(
-                  `Actual image dimensions: ${actualWidth}x${actualHeight}, aspect ratio: ${actualAspectRatio}`
-                );
-
-                // Check if we had the correct aspect ratio from metadata
-                const imgData = window.hashImages.find(
-                  (img) =>
-                    img.filename === filename ||
-                    img.filename.split("/").pop() === filename.split("/").pop()
-                );
-
-                const metadataAspectRatio =
-                  imgData && imgData.width && imgData.height
-                    ? imgData.width / imgData.height
-                    : null;
-
-                // Log if aspect ratio from metadata doesn't match actual
-                if (
-                  metadataAspectRatio &&
-                  Math.abs(metadataAspectRatio - actualAspectRatio) > 0.01
-                ) {
-                  console.warn(
-                    `Aspect ratio mismatch: metadata=${metadataAspectRatio.toFixed(
-                      3
-                    )}, actual=${actualAspectRatio.toFixed(3)}`
-                  );
-                }
-
-                // Update the wrapper to use the actual aspect ratio
-                if (lazyImage.parentNode) {
-                  lazyImage.parentNode.style.aspectRatio = `${actualAspectRatio}`;
-                }
-
-                // Update the image to use its natural aspect ratio
-                lazyImage.style.aspectRatio = `${actualAspectRatio}`;
-                lazyImage.style.objectFit = "contain"; // Show full image without cropping
-
-                // Fade in the image with a transition
-                lazyImage.style.transition = "opacity 0.5s ease-in-out";
-                lazyImage.style.opacity = "1";
-
-                // Fade out the canvas if it exists (parent of the image is the wrapper)
-                if (
-                  lazyImage.parentNode &&
-                  lazyImage.parentNode.querySelector("canvas")
-                ) {
-                  const canvas = lazyImage.parentNode.querySelector("canvas");
-                  canvas.style.transition = "opacity 0.5s ease-in-out";
-                  canvas.style.opacity = "0";
-
-                  // Remove the canvas after transition
-                  setTimeout(() => {
-                    if (canvas.parentNode) {
-                      canvas.parentNode.removeChild(canvas);
-                    }
-                  }, 500);
-                }
-              };
-
-              // Start loading the image
-              lazyImage.src = lazyImage.dataset.src;
-              lazyImage.classList.remove("lazyload");
-            }, 0);
-            lazyImageObserver.unobserve(lazyImage);
+            // Unobserve this image for blur rendering
+            blurRenderObserver.unobserve(lazyImage);
           }
         });
       },
       {
-        rootMargin: "0px", // No margin, only load when fully inside viewport
-        threshold: 0.25, // 100% of the image must be visible
+        rootMargin: "300px", // Start checking when within 300px of viewport
+        threshold: 0, // Trigger as soon as any part intersects with the expanded margin
       }
     );
 
+    // Image loading observer - queues images for loading when they're visible
+    let imageLoadObserver = new IntersectionObserver(
+      (entries, observer) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            let lazyImage = entry.target;
+
+            // Queue this image for loading or load immediately if under the cap
+            if (inflightRequests < maxInflightRequests) {
+              loadImage(lazyImage);
+            } else {
+              console.log(`Queueing image: ${lazyImage.dataset.filename}`);
+              imageLoadQueue.push(lazyImage);
+            }
+
+            // Unobserve this image for loading
+            imageLoadObserver.unobserve(lazyImage);
+          }
+        });
+      },
+      {
+        rootMargin: "0px", // No margin
+        threshold: 0.25, // 25% of the image must be visible
+      }
+    );
+
+    // Observe all lazyload images with both observers
     lazyloadImages.forEach((lazyImage) => {
-      lazyImageObserver.observe(lazyImage);
+      blurRenderObserver.observe(lazyImage);
+      imageLoadObserver.observe(lazyImage);
     });
   }
 
