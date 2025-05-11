@@ -1,6 +1,0 @@
-.direnv
-.venv
-__pycache__
-data
-minio
-.secrets.*
