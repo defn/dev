@@ -578,7 +578,7 @@ document.addEventListener("DOMContentLoaded", () => {
             wrapper.style.position = 'relative';
             wrapper.style.display = 'inline-block';
             wrapper.style.width = '100%';
-            wrapper.style.aspectRatio = '1/1'; // Force square aspect ratio for the wrapper
+            wrapper.style.aspectRatio = '1/1'; // Initial square aspect ratio for the wrapper (will be updated when image loads)
             wrapper.style.overflow = 'hidden'; // Prevent overflow
 
             // Render blurhash canvas
@@ -595,7 +595,7 @@ document.addEventListener("DOMContentLoaded", () => {
             lazyImage.style.opacity = '0'; // Hide image initially
             lazyImage.style.height = 'auto'; // Let height adjust based on width while maintaining aspect ratio
             lazyImage.style.width = '100%'; // Fill the wrapper width
-            lazyImage.style.aspectRatio = '1/1'; // Force square aspect ratio
+            lazyImage.style.aspectRatio = '1/1'; // Initial square aspect ratio (will be updated when image loads)
             lazyImage.style.objectFit = 'cover'; // Scale to cover entire area
           } else {
             // Use default orange
@@ -608,6 +608,22 @@ document.addEventListener("DOMContentLoaded", () => {
             // Add onload handler to fade in the image
             lazyImage.onload = () => {
               console.log(`Image loaded: ${filename}`);
+
+              // Get the actual image dimensions
+              const actualWidth = lazyImage.naturalWidth;
+              const actualHeight = lazyImage.naturalHeight;
+              const aspectRatio = actualWidth / actualHeight;
+
+              console.log(`Actual image dimensions: ${actualWidth}x${actualHeight}, aspect ratio: ${aspectRatio}`);
+
+              // Update the wrapper to use the actual aspect ratio
+              if (lazyImage.parentNode) {
+                lazyImage.parentNode.style.aspectRatio = `${aspectRatio}`;
+              }
+
+              // Update the image to use its natural aspect ratio
+              lazyImage.style.aspectRatio = `${aspectRatio}`;
+              lazyImage.style.objectFit = 'contain'; // Switch from 'cover' to 'contain' to show full image
 
               // Fade in the image with a transition
               lazyImage.style.transition = 'opacity 0.5s ease-in-out';
@@ -684,7 +700,7 @@ document.addEventListener("DOMContentLoaded", () => {
         //window.scrollBy(0, window.innerHeight);
         scrollToPartialImage();
       }
-      setTimeout(autoScroll, 2000);
+      //setTimeout(autoScroll, 2000);
     }
   };
 
@@ -723,7 +739,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 2) {
       if (eop == false) {
         eop = true;
-        setTimeout(autoScroll, 5000);
+        //setTimeout(autoScroll, 5000);
       }
     }
   });

@@ -12,6 +12,7 @@ import (
 	"path/filepath"
 	"regexp"
 	"runtime"
+	"strconv"
 	"strings"
 	"sync"
 )
@@ -26,6 +27,7 @@ type ImageInfo struct {
 	Filename string
 	Width    int
 	Height   int
+	Blurmap  string
 }
 
 // Result holds the result of processing an image
@@ -47,13 +49,13 @@ func main() {
 	if len(os.Args) > 2 {
 		jsOutputFile = os.Args[2]
 	}
-	
+
 	// Create cache directory if it doesn't exist
 	if err := ensureCacheDir(); err != nil {
 		fmt.Fprintf(os.Stderr, "Error creating cache directory: %v\n", err)
 		os.Exit(1)
 	}
-	
+
 	// Process the images first to get the hashes
 	imageInfos, err := parseImageListFile(imageListFile)
 	if err != nil {
@@ -64,34 +66,42 @@ func main() {
 	// Use all available CPU cores
 	numWorkers := runtime.NumCPU()
 	runtime.GOMAXPROCS(numWorkers)
-	
+
 	// Create channels for distributing work and collecting results
 	jobs := make(chan ImageInfo, len(imageInfos))
 	results := make(chan Result, len(imageInfos))
-	
+
 	// Create wait group to wait for all goroutines to finish
 	var wg sync.WaitGroup
-	
+
 	// Start worker goroutines
 	for w := 0; w < numWorkers; w++ {
 		wg.Add(1)
 		go worker(jobs, results, &wg)
 	}
-	
+
 	// Send jobs to the workers
 	for _, imageInfo := range imageInfos {
 		jobs <- imageInfo
 	}
 	close(jobs)
-	
+
 	// Wait for all workers to finish and close results channel
 	go func() {
 		wg.Wait()
 		close(results)
 	}()
-	
-	// Collect results into a map for lookup
+
+	// Update imageInfos with blurhash data directly
 	resultMap := make(map[string]string)
+	imageInfoMap := make(map[string]*ImageInfo)
+
+	// First create a map for quick lookup
+	for i := range imageInfos {
+		imageInfoMap[imageInfos[i].Filename] = &imageInfos[i]
+	}
+
+	// Process results and update ImageInfo objects
 	for result := range results {
 		if result.Error != nil {
 			fmt.Fprintf(os.Stderr, "Error processing %s: %v\n", result.Filename, result.Error)
@@ -100,6 +110,11 @@ func main() {
 
 		// Store the blurhash for each filename
 		resultMap[result.Filename] = result.Blurmap
+
+		// Update the ImageInfo object directly
+		if info, found := imageInfoMap[result.Filename]; found {
+			info.Blurmap = result.Blurmap
+		}
 	}
 
 	// Generate the JavaScript file with image data and full RGB blurhashes
@@ -108,8 +123,8 @@ func main() {
 		outputFile = jsOutputFile
 	}
 
-	// Always generate the JavaScript file with blurhashes
-	if err := generateJavaScriptFile(imageListFile, resultMap, outputFile); err != nil {
+	// Generate the JavaScript file with blurhashes directly from memory
+	if err := generateJavaScriptFile(imageInfos, outputFile); err != nil {
 		fmt.Fprintf(os.Stderr, "Error generating JavaScript file: %v\n", err)
 	} else {
 		fmt.Printf("Generated JavaScript file with full RGB blurhashes: %s\n", outputFile)
@@ -231,31 +246,40 @@ func parseImageListFile(filePath string) ([]ImageInfo, error) {
 
 	var imageInfos []ImageInfo
 	scanner := bufio.NewScanner(file)
-	
+
 	// Regular expression to extract image info
 	// Example format: { filename: "000040a4-e733-4cec-b744-be1d7ec7de49.png", width: 400, height: 400},
 	// Or with blurhash: { filename: "000040a4-e733-4cec-b744-be1d7ec7de49.png", width: 400, height: 400, blurhash: "abc123..."},
 	re := regexp.MustCompile(`{\s*filename:\s*"([^"]+)",\s*width:\s*(\d+),\s*height:\s*(\d+)(?:,\s*blurhash:\s*"([^"]*)")?\s*}`)
-	
+
 	for scanner.Scan() {
 		line := scanner.Text()
 		matches := re.FindStringSubmatch(line)
-		
+
 		// Match will have 4 or 5 groups (with optional blurhash as group 4)
 		if len(matches) >= 4 {
+			width, _ := strconv.Atoi(matches[2])
+			height, _ := strconv.Atoi(matches[3])
+
 			imageInfo := ImageInfo{
 				Filename: matches[1],
-				// Width and Height not used in current implementation
-				// but parsed for potential future use
+				Width:    width,
+				Height:   height,
 			}
+
+			// If there's existing blurhash in the file, store it
+			if len(matches) == 5 && matches[4] != "" {
+				imageInfo.Blurmap = matches[4]
+			}
+
 			imageInfos = append(imageInfos, imageInfo)
 		}
 	}
-	
+
 	if err := scanner.Err(); err != nil {
 		return nil, err
 	}
-	
+
 	return imageInfos, nil
 }
 
@@ -397,17 +421,8 @@ func calculateAverageColor(img image.Image, startX, startY, endX, endY int) Aver
 }
 
 // generateJavaScriptFile creates a JavaScript file with the image array including blurhash attributes
-func generateJavaScriptFile(inputFile string, blurhashMap map[string]string, outputFile string) error {
-	// Read the input file to extract image info
-	file, err := os.Open(inputFile)
-	if err != nil {
-		return err
-	}
-	defer file.Close()
-
-	// Regular expression to extract image info
-	re := regexp.MustCompile(`{\s*filename:\s*"([^"]+)",\s*width:\s*(\d+),\s*height:\s*(\d+)(?:,\s*blurhash:\s*"([^"]*)")?\s*}`)
-
+// This version uses the in-memory imageInfos array which already contains all the data we need
+func generateJavaScriptFile(imageInfos []ImageInfo, outputFile string) error {
 	// Create the output file
 	out, err := os.Create(outputFile)
 	if err != nil {
@@ -421,58 +436,16 @@ func generateJavaScriptFile(inputFile string, blurhashMap map[string]string, out
 	out.WriteString("window.hashImages = window.hashImages || [];\n")
 	out.WriteString("window.hashImages = [\n")
 
-	// First pass: collect image info
-	var imageInfos []struct {
-		Filename string
-		Width    string
-		Height   string
-	}
-
-	scanner := bufio.NewScanner(file)
-	for scanner.Scan() {
-		line := scanner.Text()
-		matches := re.FindStringSubmatch(line)
-
-		if len(matches) >= 4 {
-			imageInfos = append(imageInfos, struct {
-				Filename string
-				Width    string
-				Height   string
-			}{
-				Filename: matches[1],
-				Width:    matches[2],
-				Height:   matches[3],
-			})
-		}
-	}
-
-	if err := scanner.Err(); err != nil {
-		return err
-	}
-
-	// Second pass: generate fresh blurhashes for each image
+	// Directly use the ImageInfo objects that already have width, height, and blurhash data
 	for _, info := range imageInfos {
-		// Construct the full path to the image
-		imagePath := filepath.Join(imageDir, info.Filename)
-
-		// Generate a new blurhash (with full RGB)
-		blurhash, err := generateBlurmap(imagePath)
-
-		if err == nil {
-			// Write with the new RGB blurhash
-			fmt.Fprintf(out, "  { filename: \"%s\", width: %s, height: %s, blurhash: \"%s\" },\n",
-				info.Filename, info.Width, info.Height, blurhash)
+		if info.Blurmap != "" {
+			// If we have a blurhash, include it
+			fmt.Fprintf(out, "  { filename: \"%s\", width: %d, height: %d, blurhash: \"%s\" },\n",
+				info.Filename, info.Width, info.Height, info.Blurmap)
 		} else {
-			// If generation failed, try to use the cached one
-			blurhash, hasHash := blurhashMap[info.Filename]
-			if hasHash {
-				fmt.Fprintf(out, "  { filename: \"%s\", width: %s, height: %s, blurhash: \"%s\" },\n",
-					info.Filename, info.Width, info.Height, blurhash)
-			} else {
-				// Write without blurhash
-				fmt.Fprintf(out, "  { filename: \"%s\", width: %s, height: %s },\n",
-					info.Filename, info.Width, info.Height)
-			}
+			// Otherwise output without blurhash
+			fmt.Fprintf(out, "  { filename: \"%s\", width: %d, height: %d },\n",
+				info.Filename, info.Width, info.Height)
 		}
 	}
 
