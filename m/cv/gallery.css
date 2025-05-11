@@ -28,8 +28,11 @@ td {
 }
 
 .blurhash-canvas {
-  width: 100px; /* Adjust as needed */
-  height: 100px; /* Adjust as needed */
+  width: 100%;
+  height: 100%;
+  transition: opacity 0.3s ease;
+  opacity: 1;
+  z-index: 1;
 }
 
 #overlay {
