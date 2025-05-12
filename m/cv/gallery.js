@@ -2,105 +2,23 @@ function setBodyMarginToZero() {
   document.body.style.margin = "0";
 }
 
-// Function to get blurhash from hashImages array by filename
+// Function to get blurhash from index by filename
 function getBlurhashByFilename(filename) {
-  // Quick check if we have what we need
-  if (!window.hashImages || !filename) {
-    console.warn(
-      `Cannot get blurhash for ${filename} - hashImages not available or filename missing`
-    );
-    return null;
-  }
-
-  // Log what we're looking for
-  console.log(`Searching for blurhash for ${filename}`);
-
-  // Try to find the image in the hashImages array
-  for (let i = 0; i < window.hashImages.length; i++) {
-    const img = window.hashImages[i];
-
-    // Skip if missing filename or blurhash
-    if (!img || !img.filename || !img.blurhash) continue;
-
-    // Check if this is the image we're looking for
-    if (img.filename === filename) {
-      console.log(
-        `Found blurhash for ${filename}: ${img.blurhash.substring(0, 20)}...`
-      );
-
-      // Validate the blurhash - should be 600 characters (6 bytes per 100 colors in 10x10 grid)
-      if (img.blurhash.length !== 600) {
-        console.warn(
-          `Blurhash for ${filename} has unexpected length: ${img.blurhash.length} chars, expected 600 chars`
-        );
-        // Continue anyway, don't return null
-      }
-
-      return img.blurhash;
-    }
-  }
-
-  // Try one more time with just the filename (no path)
-  // This handles cases where the path in hashImages doesn't match the path in the image
-  const basename = filename.split("/").pop();
-  if (basename !== filename) {
-    console.log(`Trying again with basename: ${basename}`);
-
-    for (let i = 0; i < window.hashImages.length; i++) {
-      const img = window.hashImages[i];
-
-      // Skip if missing filename or blurhash
-      if (!img || !img.filename || !img.blurhash) continue;
-
-      // Compare basenames
-      const imgBasename = img.filename.split("/").pop();
-
-      if (imgBasename === basename) {
-        console.log(
-          `Found blurhash for ${basename}: ${img.blurhash.substring(0, 20)}...`
-        );
-
-        // Validate the blurhash - should be 600 characters (6 bytes per 100 colors in 10x10 grid)
-        if (img.blurhash.length !== 600) {
-          console.warn(
-            `Blurhash for ${basename} has unexpected length: ${img.blurhash.length} chars, expected 600 chars`
-          );
-          // Continue anyway, don't return null
-        }
-
-        return img.blurhash;
-      }
-    }
-  }
-
-  console.warn(
-    `No blurhash found for ${filename} after checking ${window.hashImages.length} images`
-  );
-  return null;
+  return window.blurhashIndex[filename].blurhash;
 }
 
 // Function to render a 4x4 blurhash grid on a canvas
 function renderBlurhashGrid(image, blurhash) {
-  console.log(
-    `Rendering blurhash grid with hash: ${
-      blurhash ? blurhash.substring(0, 20) + "..." : "null"
-    }`
-  );
-  console.log(`Image dimensions: ${image.width}x${image.height}`);
-
   // Create a canvas element for the blurhash grid
   const canvas = document.createElement("canvas");
 
-  // Get the aspect ratio from the image object or find it in hashImages
+  // Get the aspect ratio from the image object or find it in the blurhash index
   let aspectRatio = 1;
 
   if (image.dataset && image.dataset.filename) {
     const filename = image.dataset.filename;
-    const imgData = window.hashImages.find(
-      (img) =>
-        img.filename === filename ||
-        img.filename.split("/").pop() === filename.split("/").pop()
-    );
+    const imgData = window.blurhashIndex[filename] || 
+                    window.blurhashIndex[filename.split("/").pop()];
 
     if (imgData && imgData.width && imgData.height) {
       aspectRatio = imgData.width / imgData.height;
@@ -138,12 +56,7 @@ function renderBlurhashGrid(image, blurhash) {
     return canvas;
   }
 
-  console.log(
-    `Valid blurhash found (length: ${blurhash.length}), rendering 10x10 grid`
-  );
-
   // Draw the 10x10 grid from the blurhash
-  try {
     // Create a higher-resolution canvas for better blurring
     const offscreenCanvas = document.createElement("canvas");
     const scale = 3; // Higher resolution for smoother blur
@@ -174,8 +87,6 @@ function renderBlurhashGrid(image, blurhash) {
         colors.push({ r: 128, g: 128, b: 128 }); // Fallback gray
       }
     }
-
-    console.log(`Parsed ${colors.length} RGB colors from blurhash`);
 
     // Generate smooth gradient canvas
     const cellWidth = (width * scale) / 10;
@@ -300,65 +211,6 @@ function renderBlurhashGrid(image, blurhash) {
     // Final draw to the main canvas
     ctx.drawImage(enhancedCanvas, 0, 0);
 
-    console.log(
-      `Blurhash rendered with full RGB colors and visual enhancements`
-    );
-  } catch (mainError) {
-    console.warn("Failed to apply enhanced blur:", mainError);
-
-    try {
-      // Fall back to simple rendering if enhanced version fails
-      const cellWidth = width / 10;
-      const cellHeight = height / 10;
-      for (let y = 0; y < 10; y++) {
-        for (let x = 0; x < 10; x++) {
-          const index = y * 10 + x;
-          const startIndex = index * 6;
-          if (startIndex + 6 <= blurhash.length) {
-            const hexColor = blurhash.substring(startIndex, startIndex + 6);
-            const r = parseInt(hexColor.substring(0, 2), 16);
-            const g = parseInt(hexColor.substring(2, 4), 16);
-            const b = parseInt(hexColor.substring(4, 6), 16);
-
-            if (!isNaN(r) && !isNaN(g) && !isNaN(b)) {
-              ctx.fillStyle = `rgb(${r}, ${g}, ${b})`;
-              ctx.fillRect(
-                x * cellWidth,
-                y * cellHeight,
-                cellWidth,
-                cellHeight
-              );
-            }
-          }
-        }
-      }
-
-      // Add scaled blur if possible
-      try {
-        // Calculate blur size based on image dimensions
-        const smallestDim = Math.min(canvas.width, canvas.height);
-        const baseBlur = Math.max(3, Math.round(smallestDim / 40)); // Scale blur with image
-
-        ctx.filter = `blur(${baseBlur}px)`;
-        ctx.drawImage(canvas, 0, 0);
-
-        // Second pass with lighter blur
-        ctx.filter = `blur(${baseBlur * 0.7}px)`;
-        ctx.globalAlpha = 0.5;
-        ctx.drawImage(canvas, 0, 0);
-        ctx.globalAlpha = 1.0;
-      } catch (blurError) {
-        // Ignore if blur fails
-        console.warn("Basic blur failed, continuing without blur:", blurError);
-      }
-    } catch (fallbackError) {
-      console.error("Even fallback rendering failed:", fallbackError);
-      // Last resort - orange fallback
-      ctx.fillStyle = "#FF8C00";
-      ctx.fillRect(0, 0, width, width);
-    }
-  }
-
   return canvas;
 }
 
@@ -423,8 +275,17 @@ function generateGrid() {
     img.dataset.src = `${basePath}/${image.filename}`;
     img.dataset.filename = image.filename;
 
-    // Always calculate aspect ratio from image dimensions
-    if (image.width && image.height) {
+    // First try to get dimensions from blurhashIndex, then fall back to image object
+    const imgData = window.blurhashIndex[image.filename] ||
+                   window.blurhashIndex[image.filename.split("/").pop()];
+
+    if (imgData && imgData.width && imgData.height) {
+      // Use dimensions from blurhashIndex
+      const aspectRatio = imgData.width / imgData.height;
+      img.style.aspectRatio = `${aspectRatio}`;
+      img.height = Math.floor(img.width / aspectRatio);
+    } else if (image.width && image.height) {
+      // Fall back to dimensions from the image object if available
       const aspectRatio = image.width / image.height;
       img.style.aspectRatio = `${aspectRatio}`;
       img.height = Math.floor(img.width / aspectRatio);
@@ -592,23 +453,6 @@ function scrollToClosestImage() {
   }
 }
 
-function scrollToRandomImage(className) {
-  // Get all elements with the specified class
-  const images = document.querySelectorAll(`.${className}`);
-
-  if (images.length === 0) {
-    console.log("No images found with the given class.");
-    return;
-  }
-
-  // Select a random image from the list
-  const randomIndex = Math.floor(Math.random() * images.length - 1000);
-  const randomImage = images[randomIndex];
-
-  // Scroll to the random image
-  randomImage.scrollIntoView({ behavior: "auto", block: "center" });
-}
-
 // JavaScript to adjust heights of containers
 window.addEventListener("load", () => {
   const containers = document.querySelectorAll(".image-container");
@@ -635,32 +479,6 @@ document.addEventListener("DOMContentLoaded", () => {
   let keySequence = "";
   let autos = false;
 
-  // Check if hashImages is available from blurhash.js
-  if (typeof window.hashImages !== "undefined") {
-    console.log(
-      `Found hashImages array with ${window.hashImages.length} images`
-    );
-
-    // Log the first few entries for debugging
-    if (window.hashImages.length > 0) {
-      console.log(
-        "First few entries:",
-        window.hashImages.slice(0, 2).map((img) => ({
-          filename: img.filename,
-          blurhash: img.blurhash
-            ? img.blurhash.length > 20
-              ? img.blurhash.substring(0, 20) + "..."
-              : img.blurhash
-            : "none",
-        }))
-      );
-    }
-  } else {
-    console.warn(
-      "hashImages not found - blurhash.js must be included before gallery.js"
-    );
-  }
-
   setBodyMarginToZero();
 
   if ("IntersectionObserver" in window) {
@@ -671,13 +489,31 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Track in-flight image loading requests
     let inflightRequests = 0;
-    const maxInflightRequests = numColumns + 3 || 6; // Column count plus 3 additional concurrent loads
+    const maxInflightRequests = numColumns * 3;
     const imageLoadQueue = []; // Queue for pending image loads
 
     // Function to process the next image in the queue if under the cap
     const processImageLoadQueue = () => {
       // If we're under the cap and have images to load, load the next one
       if (inflightRequests < maxInflightRequests && imageLoadQueue.length > 0) {
+        // Sort the queue to prioritize visible images first
+        imageLoadQueue.sort((a, b) => {
+          const rectA = a.getBoundingClientRect();
+          const rectB = b.getBoundingClientRect();
+
+          // Is image A visible in viewport?
+          const isAVisible = rectA.top < window.innerHeight && rectA.bottom > 0;
+
+          // Is image B visible in viewport?
+          const isBVisible = rectB.top < window.innerHeight && rectB.bottom > 0;
+
+          if (isAVisible && !isBVisible) return -1; // A is visible, B is not
+          if (!isAVisible && isBVisible) return 1;  // B is visible, A is not
+
+          // If both visible or both not visible, prioritize by distance to viewport
+          return Math.abs(rectA.top) - Math.abs(rectB.top);
+        });
+
         const nextImageToLoad = imageLoadQueue.shift();
         loadImage(nextImageToLoad);
       }
@@ -694,7 +530,6 @@ document.addEventListener("DOMContentLoaded", () => {
       lazyImage.onload = () => {
         // Get the filename from the data attribute
         const filename = lazyImage.dataset.filename;
-        console.log(`Image loaded: ${filename}`);
 
         // Get the actual image dimensions
         const actualWidth = lazyImage.naturalWidth;
@@ -706,28 +541,13 @@ document.addEventListener("DOMContentLoaded", () => {
         );
 
         // Check if we had the correct aspect ratio from metadata
-        const imgData = window.hashImages.find(
-          (img) =>
-            img.filename === filename ||
-            img.filename.split("/").pop() === filename.split("/").pop()
-        );
+        const imgData = window.blurhashIndex[filename] || 
+                       window.blurhashIndex[filename.split("/").pop()];
 
         const metadataAspectRatio =
           imgData && imgData.width && imgData.height
             ? imgData.width / imgData.height
             : null;
-
-        // Log if aspect ratio from metadata doesn't match actual
-        if (
-          metadataAspectRatio &&
-          Math.abs(metadataAspectRatio - actualAspectRatio) > 0.01
-        ) {
-          console.warn(
-            `Aspect ratio mismatch: metadata=${metadataAspectRatio.toFixed(
-              3
-            )}, actual=${actualAspectRatio.toFixed(3)}`
-          );
-        }
 
         // Update the wrapper to use the actual aspect ratio
         if (lazyImage.parentNode) {
@@ -790,7 +610,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       lazyImage.removeAttribute("height");
 
-      // Look for blurhash in hashImages array
+      // Look for blurhash in the index
       const filename = lazyImage.dataset.filename;
       const blurhash = getBlurhashByFilename(filename);
 
@@ -799,13 +619,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // Create wrapper div for positioning
         // Get the aspect ratio from the image data if available
-        const img = window.hashImages.find(
-          (img) =>
-            img.filename === filename ||
-            img.filename.split("/").pop() === filename.split("/").pop()
-        );
+        const imgData = window.blurhashIndex[filename] || 
+                       window.blurhashIndex[filename.split("/").pop()];
         const aspectRatio =
-          img && img.width && img.height ? img.width / img.height : 1;
+          imgData && imgData.width && imgData.height ? imgData.width / imgData.height : 1;
 
         const wrapper = document.createElement("div");
         wrapper.style.position = "relative";
@@ -837,155 +654,130 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     };
 
-    // Separate observer for rendering the blur - renders blur when element is approaching viewport
-    let blurRenderObserver = new IntersectionObserver(
+    // Separate observers for rendering the blur - one for visible images, one for near-viewport images
+    // First observer prioritizes currently visible images (no margin)
+    let visibleBlurRenderObserver = new IntersectionObserver(
+      (entries, observer) => {
+        console.log(`Visible blur render observe: seen ${entries.length}`);
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            let lazyImage = entry.target;
+
+            // Immediately render the blur for visible images
+            renderBlur(lazyImage);
+
+            // Unobserve this image for blur rendering
+            visibleBlurRenderObserver.unobserve(lazyImage);
+
+            // Also unobserve in the preload observer
+            nearViewportBlurRenderObserver.unobserve(lazyImage);
+          }
+        });
+      },
+      {
+        rootMargin: "0px", // Only process currently visible images
+        threshold: 0.1, // Trigger when at least 10% is visible
+      }
+    );
+
+    // Second observer handles images approaching the viewport (with delay)
+    let nearViewportBlurRenderObserver = new IntersectionObserver(
       (entries, observer) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             let lazyImage = entry.target;
 
-            // Immediately render the blur
-            renderBlur(lazyImage);
+            // Render blur with a small delay for images just outside viewport
+            // This allows visible images to be processed first
+            setTimeout(() => {
+              // Check if this image is now visible (if so, the other observer will handle it)
+              const rect = lazyImage.getBoundingClientRect();
+              const isNowVisible = rect.top < window.innerHeight && rect.bottom > 0;
 
-            // Unobserve this image for blur rendering
-            blurRenderObserver.unobserve(lazyImage);
+              if (!isNowVisible && !blurRenderedImages.has(lazyImage.id)) {
+                renderBlur(lazyImage);
+              }
+
+              // Unobserve this image for blur rendering
+              nearViewportBlurRenderObserver.unobserve(lazyImage);
+            }, 50);
           }
         });
       },
       {
-        rootMargin: "300px", // Start checking when within 300px of viewport
+        rootMargin: "150px", // Process images approaching the viewport
         threshold: 0, // Trigger as soon as any part intersects with the expanded margin
       }
     );
 
-    // Image loading observer - queues images for loading when they're visible
-    let imageLoadObserver = new IntersectionObserver(
+    // Create separate observers for immediately visible vs upcoming images
+    // High priority observer - loads immediately visible images first
+    let visibleImageLoadObserver = new IntersectionObserver(
       (entries, observer) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             let lazyImage = entry.target;
 
-            // Queue this image for loading or load immediately if under the cap
-            if (inflightRequests < maxInflightRequests) {
-              loadImage(lazyImage);
-            } else {
-              console.log(`Queueing image: ${lazyImage.dataset.filename}`);
-              imageLoadQueue.push(lazyImage);
-            }
+            // Always prioritize loading visible images immediately
+            loadImage(lazyImage);
 
-            // Unobserve this image for loading
-            imageLoadObserver.unobserve(lazyImage);
+            // Unobserve from both observers
+            visibleImageLoadObserver.unobserve(lazyImage);
+            upcomingImageLoadObserver.unobserve(lazyImage);
           }
         });
       },
       {
-        rootMargin: "0px", // No margin
-        threshold: 0.25, // 25% of the image must be visible
+        rootMargin: "0px", // Only currently visible images
+        threshold: 0.1, // 10% of the image must be visible - reduced to catch more visible images
       }
     );
 
-    // Observe all lazyload images with both observers
+    // Lower priority observer - queues images that are approaching the viewport
+    let upcomingImageLoadObserver = new IntersectionObserver(
+      (entries, observer) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            let lazyImage = entry.target;
+
+            // Check if the image is now in the viewport (if so, let the other observer handle it)
+            const rect = lazyImage.getBoundingClientRect();
+            const isNowVisible = rect.top < window.innerHeight && rect.bottom > 0;
+
+            if (!isNowVisible) {
+              // Queue this image for loading or load if under the cap
+              if (inflightRequests < maxInflightRequests) {
+                loadImage(lazyImage);
+              } else {
+                console.log(`Queueing image: ${lazyImage.dataset.filename}`);
+                imageLoadQueue.push(lazyImage);
+              }
+
+              // Unobserve this image
+              upcomingImageLoadObserver.unobserve(lazyImage);
+            }
+          }
+        });
+      },
+      {
+        rootMargin: "100px", // Images approaching the viewport
+        threshold: 0, // Trigger as soon as any part intersects
+      }
+    );
+
+    // Observe all lazyload images with all observers
     lazyloadImages.forEach((lazyImage) => {
-      blurRenderObserver.observe(lazyImage);
-      imageLoadObserver.observe(lazyImage);
+      // First priority: visible blur rendering
+      visibleBlurRenderObserver.observe(lazyImage);
+
+      // Second priority: near-viewport blur rendering
+      nearViewportBlurRenderObserver.observe(lazyImage);
+
+      // First priority for image loading: visible images
+      visibleImageLoadObserver.observe(lazyImage);
+
+      // Second priority for image loading: upcoming images
+      upcomingImageLoadObserver.observe(lazyImage);
     });
-  }
-
-  const moveFirstImageToEnd = (cell) => {
-    const images = cell.getElementsByTagName("img");
-    if (images.length > 5) {
-      const firstImage = images[0];
-
-      cell.appendChild(images[0]);
-      cell.appendChild(images[1]);
-      cell.appendChild(images[2]);
-      cell.appendChild(images[3]);
-      cell.appendChild(images[4]);
-    }
-  };
-
-  const processTable = () => {
-    for (let row of tableBody.rows) {
-      for (let cell of row.cells) {
-        // moveFirstImageToEnd(cell);
-      }
-    }
-  };
-
-  const moveFirstTdToEnd = () => {
-    for (let row of tableBody.rows) {
-      if (row.cells.length > 0) {
-        const firstTd = row.cells[0];
-        row.appendChild(firstTd); // Move the first TD to the end of the row
-      }
-    }
-  };
-
-  const autoScroll = () => {
-    if (autos == true) {
-      if (areVisibleImagesLoaded() == true) {
-        processTable();
-        //moveFirstTdToEnd();
-        //window.scrollBy(0, window.innerHeight);
-        scrollToPartialImage();
-      }
-      //setTimeout(autoScroll, 2000);
-    }
-  };
-
-  // Event listener for keydown event to check for 'v' key
-  document.addEventListener("keydown", (event) => {
-    if (event.key === "v") {
-      logFullyVisibleImages();
-      console.log(`v key found ${event.key}`);
-    } else if (event.key === "f") {
-    } else if (event.key === "s") {
-      autos = !autos;
-      if (autos == true) {
-        autoScroll();
-        console.log(`started autoscrolling ${event.key}`);
-      } else {
-        console.log(`stopped autoscrolling ${event.key}`);
-      }
-    } else if (event.key >= "a" && event.key <= "z") {
-      console.log(`other key found ${event.key} ${keySequence}`);
-      keySequence += event.key;
-      if (keySequence.endsWith("qwertz")) {
-        console.log(`restoring display: key ${event.key}`);
-        keySequence = "";
-        overlay.style.width = "0";
-        overlay.style.height = "0";
-      } else {
-        console.log(`hiding display: key ${event.key}`);
-        autos = false;
-        overlay.style.width = "100%";
-        overlay.style.height = "100%";
-      }
-    }
-  });
-
-  window.addEventListener("scroll", () => {
-    if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 2) {
-      if (eop == false) {
-        eop = true;
-        //setTimeout(autoScroll, 5000);
-      }
-    }
-  });
-
-  if (selectMode == "no") {
-    setTimeout(function () {
-      const event = new KeyboardEvent("keydown", {
-        key: "s",
-        keyCode: 115,
-        code: "KeyS",
-        which: 115,
-        shiftKey: false,
-        ctrlKey: false,
-        metaKey: false,
-      });
-
-      document.dispatchEvent(event);
-    }, 30000);
   }
 });
