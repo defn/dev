@@ -279,6 +279,8 @@ function generateGrid() {
     img.width = Math.floor(window.innerWidth / numColumns) - 5;
     img.dataset.src = `${basePath}/${image.filename}`;
     img.dataset.filename = image.filename;
+    img.style.border = "none";
+    img.style.outline = "none";
 
     // First try to get dimensions from blurhashIndex, then fall back to image object
     const imgData = window.blurhashIndex[image.filename] ||
@@ -641,6 +643,9 @@ document.addEventListener("DOMContentLoaded", () => {
         wrapper.style.width = "100%";
         wrapper.style.aspectRatio = `${aspectRatio}`; // Use calculated aspect ratio instead of 1:1
         wrapper.style.overflow = "hidden"; // Prevent overflow
+        wrapper.style.padding = "0"; // Remove any padding
+        wrapper.style.margin = "0"; // Remove any margin
+        wrapper.style.lineHeight = "0"; // Remove any line height spacing
 
         // Render blurhash canvas
         const canvas = renderBlurhashGrid(lazyImage, blurhash);
@@ -658,6 +663,8 @@ document.addEventListener("DOMContentLoaded", () => {
         lazyImage.style.width = "100%"; // Fill the wrapper width
         lazyImage.style.aspectRatio = `${aspectRatio}`; // Use same aspect ratio as wrapper
         lazyImage.style.objectFit = "contain"; // Show entire image without cropping
+        lazyImage.style.border = "none"; // Remove border
+        lazyImage.style.outline = "none"; // Remove outline
       } else {
         // Use default orange
         console.log(`No blurhash found for ${filename}, using default orange`);

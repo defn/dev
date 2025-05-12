@@ -6,6 +6,13 @@ body::-webkit-scrollbar {
   width: 0;
 }
 
+/* Global rule to prevent white outlines on all images */
+img {
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+}
+
 table {
   width: 100%;
   border-collapse: collapse;
@@ -25,6 +32,8 @@ td {
 }
 .image-container img {
   max-width: 100%;
+  border: none;
+  outline: none;
 }
 
 .blurhash-canvas {
