@@ -120,7 +120,7 @@ function renderBlurhashGrid(image, blurhash) {
     offCtx.drawImage(offscreenCanvas, 0, 0);
 
     // Second blur pass - larger blur
-    offCtx.filter = `blur(${baseBlur * 2.5}px)`;
+    offCtx.filter = `blur(${baseBlur *3.5}px)`;
     offCtx.globalAlpha = 0.7;
     offCtx.drawImage(offscreenCanvas, 0, 0);
 
