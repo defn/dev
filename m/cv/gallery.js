@@ -12,8 +12,8 @@ function getBlurhashByFilename(filename) {
   return entry ? entry.blurhash : null;
 }
 
-// Function to render a 4x4 blurhash grid on a canvas
-function renderBlurhashGrid(image, blurhash) {
+// Function to render a blurhash grid on a canvas
+function renderBlurhashGrid(image, blurhash, dim = 10) {
   // Create a canvas element for the blurhash grid
   const canvas = document.createElement("canvas");
 
@@ -22,7 +22,7 @@ function renderBlurhashGrid(image, blurhash) {
 
   if (image.dataset && image.dataset.filename) {
     const filename = image.dataset.filename;
-    const imgData = window.blurhashIndex[filename] || 
+    const imgData = window.blurhashIndex[filename] ||
                     window.blurhashIndex[filename.split("/").pop()];
 
     if (imgData && imgData.width && imgData.height) {
@@ -49,19 +49,22 @@ function renderBlurhashGrid(image, blurhash) {
   // Get the drawing context
   const ctx = canvas.getContext("2d");
 
+  // Calculate expected blurhash length based on dimension: dim * dim * 3 * 2
+  const expectedLength = dim * dim * 3 * 2;
+
   // If no valid blurhash, fill with default orange
-  if (!blurhash || blurhash.length !== 600) {
+  if (!blurhash || blurhash.length !== expectedLength) {
     console.warn(
       `Invalid blurhash (length: ${
         blurhash ? blurhash.length : 0
-      }), expected 600 chars. Using orange fallback`
+      }), expected ${expectedLength} chars. Using orange fallback`
     );
     ctx.fillStyle = "#FF8C00";
     ctx.fillRect(0, 0, width, width);
     return canvas;
   }
 
-  // Draw the 10x10 grid from the blurhash
+  // Draw the dim x dim grid from the blurhash
     // Create a higher-resolution canvas for better blurring
     const offscreenCanvas = document.createElement("canvas");
     const scale = 3; // Higher resolution for smoother blur
@@ -71,7 +74,7 @@ function renderBlurhashGrid(image, blurhash) {
 
     // Extract RGB colors from the blurhash
     const colors = [];
-    for (let i = 0; i < 100; i++) {
+    for (let i = 0; i < dim * dim; i++) {
       const startIndex = i * 6;
       if (startIndex + 6 <= blurhash.length) {
         // Extract RRGGBB hex color
@@ -94,13 +97,13 @@ function renderBlurhashGrid(image, blurhash) {
     }
 
     // Generate smooth gradient canvas
-    const cellWidth = (width * scale) / 10;
-    const cellHeight = (height * scale) / 10;
+    const cellWidth = (width * scale) / dim;
+    const cellHeight = (height * scale) / dim;
 
     // First draw the base grid with rectangles
-    for (let y = 0; y < 10; y++) {
-      for (let x = 0; x < 10; x++) {
-        const index = y * 10 + x;
+    for (let y = 0; y < dim; y++) {
+      for (let x = 0; x < dim; x++) {
+        const index = y * dim + x;
         const color = colors[index];
 
         // Draw the rectangle with RGB value
@@ -648,7 +651,7 @@ document.addEventListener("DOMContentLoaded", () => {
         wrapper.style.lineHeight = "0"; // Remove any line height spacing
 
         // Render blurhash canvas
-        const canvas = renderBlurhashGrid(lazyImage, blurhash);
+        const canvas = renderBlurhashGrid(lazyImage, blurhash, 10);
 
         // Replace the image with the wrapper containing both canvas and image
         lazyImage.parentNode.insertBefore(wrapper, lazyImage);
