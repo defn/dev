@@ -676,36 +676,30 @@ document.addEventListener("DOMContentLoaded", () => {
       },
       {
         rootMargin: "0px", // Only process currently visible images
-        threshold: 0.1, // Trigger when at least 10% is visible
+        threshold: 0.01, // Trigger when even a small portion (1%) is visible for faster rendering
       }
     );
 
-    // Second observer handles images approaching the viewport (with delay)
+    // Second observer handles images approaching the viewport (immediately without delay)
     let nearViewportBlurRenderObserver = new IntersectionObserver(
       (entries, observer) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             let lazyImage = entry.target;
 
-            // Render blur with a small delay for images just outside viewport
-            // This allows visible images to be processed first
-            setTimeout(() => {
-              // Check if this image is now visible (if so, the other observer will handle it)
-              const rect = lazyImage.getBoundingClientRect();
-              const isNowVisible = rect.top < window.innerHeight && rect.bottom > 0;
+            // Render blur immediately for images near viewport - no delay
+            // Only render if it hasn't already been rendered
+            if (!blurRenderedImages.has(lazyImage.id)) {
+              renderBlur(lazyImage);
+            }
 
-              if (!isNowVisible && !blurRenderedImages.has(lazyImage.id)) {
-                renderBlur(lazyImage);
-              }
-
-              // Unobserve this image for blur rendering
-              nearViewportBlurRenderObserver.unobserve(lazyImage);
-            }, 50);
+            // Unobserve this image for blur rendering
+            nearViewportBlurRenderObserver.unobserve(lazyImage);
           }
         });
       },
       {
-        rootMargin: "150px", // Process images approaching the viewport
+        rootMargin: `${window.innerHeight}px`, // Use full screen height as margin for preloading
         threshold: 0, // Trigger as soon as any part intersects with the expanded margin
       }
     );
@@ -767,16 +761,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Observe all lazyload images with all observers
     lazyloadImages.forEach((lazyImage) => {
-      // First priority: visible blur rendering
+      // HIGHEST priority: visible blur rendering - do this first
       visibleBlurRenderObserver.observe(lazyImage);
 
-      // Second priority: near-viewport blur rendering
+      // HIGH priority: near-viewport blur rendering
       nearViewportBlurRenderObserver.observe(lazyImage);
 
-      // First priority for image loading: visible images
+      // After blur rendering is set up, handle image loading
+
+      // MEDIUM priority: visible images loading
       visibleImageLoadObserver.observe(lazyImage);
 
-      // Second priority for image loading: upcoming images
+      // LOWEST priority: upcoming images loading
       upcomingImageLoadObserver.observe(lazyImage);
     });
   }
