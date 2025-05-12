@@ -4,7 +4,12 @@ function setBodyMarginToZero() {
 
 // Function to get blurhash from index by filename
 function getBlurhashByFilename(filename) {
-  return window.blurhashIndex[filename].blurhash;
+  // First check if the filename exists in the index, try both full path and basename
+  const entry = window.blurhashIndex[filename] ||
+                window.blurhashIndex[filename.split("/").pop()];
+
+  // Return the blurhash if entry exists, otherwise return null
+  return entry ? entry.blurhash : null;
 }
 
 // Function to render a 4x4 blurhash grid on a canvas
@@ -480,6 +485,12 @@ document.addEventListener("DOMContentLoaded", () => {
   let autos = false;
 
   setBodyMarginToZero();
+
+  // Ensure blurhashIndex exists to prevent errors
+  if (!window.blurhashIndex) {
+    console.warn("blurhashIndex not found, creating empty object");
+    window.blurhashIndex = {};
+  }
 
   if ("IntersectionObserver" in window) {
     const lazyloadImages = document.querySelectorAll(".lazyload");
