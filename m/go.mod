@@ -22,8 +22,8 @@ require (
 	github.com/lucasb-eyer/go-colorful v1.2.0
 	github.com/muesli/gamut v0.3.1
 	github.com/noisysockets/noisysockets v0.28.0
-	github.com/riverqueue/river v0.21.0
-	github.com/riverqueue/river/riverdriver/riverpgxv5 v0.21.0
+	github.com/riverqueue/river v0.22.0
+	github.com/riverqueue/river/riverdriver/riverpgxv5 v0.22.0
 	github.com/spf13/cobra v1.9.1
 	github.com/spf13/viper v1.20.1
 	github.com/teilomillet/gollm v0.1.9
@@ -103,9 +103,9 @@ require (
 	github.com/pkoukk/tiktoken-go v0.1.7 // indirect
 	github.com/pmezard/go-difflib v1.0.0 // indirect
 	github.com/protocolbuffers/txtpbfmt v0.0.0-20250326144435-a5fe55684d52 // indirect
-	github.com/riverqueue/river/riverdriver v0.21.0 // indirect
-	github.com/riverqueue/river/rivershared v0.21.0 // indirect
-	github.com/riverqueue/river/rivertype v0.21.0 // indirect
+	github.com/riverqueue/river/riverdriver v0.22.0 // indirect
+	github.com/riverqueue/river/rivershared v0.22.0 // indirect
+	github.com/riverqueue/river/rivertype v0.22.0 // indirect
 	github.com/rivo/uniseg v0.4.7 // indirect
 	github.com/rogpeppe/go-internal v1.14.1 // indirect
 	github.com/russross/blackfriday/v2 v2.1.0 // indirect

@@ -1,0 +1,14 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_binary", "go_library")
+
+go_library(
+    name = "cv_lib",
+    srcs = ["blurmap.go"],
+    importpath = "github.com/defn/dev/m/cv",
+    visibility = ["//visibility:private"],
+)
+
+go_binary(
+    name = "cv",
+    embed = [":cv_lib"],
+    visibility = ["//visibility:public"],
+)
