@@ -100,17 +100,35 @@ function renderBlurhashGrid(image, blurhash, dim = 10) {
     const cellWidth = (width * scale) / dim;
     const cellHeight = (height * scale) / dim;
 
-    // First draw the base grid with rectangles
+    // First pass: Draw solid circles with soft edges using globalCompositeOperation
+    offCtx.globalCompositeOperation = 'lighter'; // Additive blending to avoid dark shadows
+    
     for (let y = 0; y < dim; y++) {
       for (let x = 0; x < dim; x++) {
         const index = y * dim + x;
         const color = colors[index];
 
-        // Draw the rectangle with RGB value
-        offCtx.fillStyle = `rgb(${color.r}, ${color.g}, ${color.b})`;
-        offCtx.fillRect(x * cellWidth, y * cellHeight, cellWidth, cellHeight);
+        // Calculate center position and radius
+        const centerX = x * cellWidth + cellWidth / 2;
+        const centerY = y * cellHeight + cellHeight / 2;
+        const radius = Math.max(cellWidth, cellHeight) * 0.85; // Increased radius for better overlap
+
+        // Create softer radial gradient
+        const gradient = offCtx.createRadialGradient(centerX, centerY, 0, centerX, centerY, radius);
+        gradient.addColorStop(0, `rgba(${color.r}, ${color.g}, ${color.b}, 0.8)`); // Reduced opacity
+        gradient.addColorStop(0.5, `rgba(${color.r}, ${color.g}, ${color.b}, 0.4)`);
+        gradient.addColorStop(1, `rgba(${color.r}, ${color.g}, ${color.b}, 0)`);
+
+        // Draw circle with gradient
+        offCtx.fillStyle = gradient;
+        offCtx.beginPath();
+        offCtx.arc(centerX, centerY, radius, 0, Math.PI * 2);
+        offCtx.fill();
       }
     }
+    
+    // Reset composite operation
+    offCtx.globalCompositeOperation = 'source-over';
 
     // Calculate blur sizes relative to image dimensions
     const smallestDim = Math.min(offscreenCanvas.width, offscreenCanvas.height);
@@ -403,10 +421,52 @@ function toggleVisibility(element) {
 }
 
 function toggleHidden(element) {
-  const placeholder =
-    "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/wcAAgAB/PrlqscAAAAASUVORK5CYII=";
-
-  element.src = placeholder;
+  // Check if blurmap is already displayed
+  const wrapper = element.parentNode;
+  let blurCanvas = wrapper.querySelector('canvas.toggle-blur');
+  
+  if (blurCanvas) {
+    // Remove the blur canvas and restore image visibility
+    blurCanvas.remove();
+    element.style.opacity = "1";
+  } else {
+    // Get blurhash for this image
+    const filename = element.dataset.filename;
+    const blurhash = getBlurhashByFilename(filename);
+    
+    if (blurhash) {
+      // Create and render the blurhash canvas
+      const canvas = renderBlurhashGrid(element, blurhash, 10);
+      canvas.classList.add('toggle-blur');
+      
+      // Position canvas over the image
+      canvas.style.position = "absolute";
+      canvas.style.top = "0";
+      canvas.style.left = "0";
+      canvas.style.width = "100%";
+      canvas.style.height = "100%";
+      canvas.style.zIndex = "3"; // Above the image
+      
+      // Add canvas to wrapper or create wrapper if it doesn't exist
+      if (wrapper && wrapper.style.position === 'relative') {
+        wrapper.appendChild(canvas);
+      } else {
+        const newWrapper = document.createElement("div");
+        newWrapper.style.position = "relative";
+        newWrapper.style.display = "inline-block";
+        newWrapper.style.width = "100%";
+        element.parentNode.insertBefore(newWrapper, element);
+        newWrapper.appendChild(element);
+        newWrapper.appendChild(canvas);
+      }
+      
+      // Make image invisible but keep its space
+      element.style.opacity = "0";
+    } else {
+      // Fallback to simple opacity change if no blurhash is available
+      element.style.opacity = element.style.opacity === "0.3" ? "1" : "0.3";
+    }
+  }
 }
 
 function areVisibleImagesLoaded() {
