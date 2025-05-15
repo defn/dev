@@ -5,8 +5,9 @@ function setBodyMarginToZero() {
 // Function to get blurhash from index by filename
 function getBlurhashByFilename(filename) {
   // First check if the filename exists in the index, try both full path and basename
-  const entry = window.blurhashIndex[filename] ||
-                window.blurhashIndex[filename.split("/").pop()];
+  const entry =
+    window.blurhashIndex[filename] ||
+    window.blurhashIndex[filename.split("/").pop()];
 
   // Return the blurhash if entry exists, otherwise return null
   return entry ? entry.blurhash : null;
@@ -22,8 +23,9 @@ function renderBlurhashGrid(image, blurhash, dim = 10) {
 
   if (image.dataset && image.dataset.filename) {
     const filename = image.dataset.filename;
-    const imgData = window.blurhashIndex[filename] ||
-                    window.blurhashIndex[filename.split("/").pop()];
+    const imgData =
+      window.blurhashIndex[filename] ||
+      window.blurhashIndex[filename.split("/").pop()];
 
     if (imgData && imgData.width && imgData.height) {
       aspectRatio = imgData.width / imgData.height;
@@ -65,177 +67,187 @@ function renderBlurhashGrid(image, blurhash, dim = 10) {
   }
 
   // Draw the dim x dim grid from the blurhash
-    // Create a higher-resolution canvas for better blurring
-    const offscreenCanvas = document.createElement("canvas");
-    const scale = 3; // Higher resolution for smoother blur
-    offscreenCanvas.width = width * scale;
-    offscreenCanvas.height = height * scale;
-    const offCtx = offscreenCanvas.getContext("2d");
+  // Create a higher-resolution canvas for better blurring
+  const offscreenCanvas = document.createElement("canvas");
+  const scale = 3; // Higher resolution for smoother blur
+  offscreenCanvas.width = width * scale;
+  offscreenCanvas.height = height * scale;
+  const offCtx = offscreenCanvas.getContext("2d");
 
-    // Extract RGB colors from the blurhash
-    const colors = [];
-    for (let i = 0; i < dim * dim; i++) {
-      const startIndex = i * 6;
-      if (startIndex + 6 <= blurhash.length) {
-        // Extract RRGGBB hex color
-        const hexColor = blurhash.substring(startIndex, startIndex + 6);
+  // Extract RGB colors from the blurhash
+  const colors = [];
+  for (let i = 0; i < dim * dim; i++) {
+    const startIndex = i * 6;
+    if (startIndex + 6 <= blurhash.length) {
+      // Extract RRGGBB hex color
+      const hexColor = blurhash.substring(startIndex, startIndex + 6);
 
-        // Parse RGB components
-        const r = parseInt(hexColor.substring(0, 2), 16);
-        const g = parseInt(hexColor.substring(2, 4), 16);
-        const b = parseInt(hexColor.substring(4, 6), 16);
+      // Parse RGB components
+      const r = parseInt(hexColor.substring(0, 2), 16);
+      const g = parseInt(hexColor.substring(2, 4), 16);
+      const b = parseInt(hexColor.substring(4, 6), 16);
 
-        // Validate values
-        const validR = isNaN(r) ? 128 : r;
-        const validG = isNaN(g) ? 128 : g;
-        const validB = isNaN(b) ? 128 : b;
+      // Validate values
+      const validR = isNaN(r) ? 128 : r;
+      const validG = isNaN(g) ? 128 : g;
+      const validB = isNaN(b) ? 128 : b;
 
-        colors.push({ r: validR, g: validG, b: validB });
-      } else {
-        colors.push({ r: 128, g: 128, b: 128 }); // Fallback gray
-      }
+      colors.push({ r: validR, g: validG, b: validB });
+    } else {
+      colors.push({ r: 128, g: 128, b: 128 }); // Fallback gray
     }
+  }
 
-    // Generate smooth gradient canvas
-    const cellWidth = (width * scale) / dim;
-    const cellHeight = (height * scale) / dim;
+  // Generate smooth gradient canvas
+  const cellWidth = (width * scale) / dim;
+  const cellHeight = (height * scale) / dim;
 
-    // First pass: Draw solid circles with soft edges using globalCompositeOperation
-    offCtx.globalCompositeOperation = 'lighter'; // Additive blending to avoid dark shadows
-    
-    for (let y = 0; y < dim; y++) {
-      for (let x = 0; x < dim; x++) {
-        const index = y * dim + x;
-        const color = colors[index];
+  // First pass: Draw solid circles with soft edges using globalCompositeOperation
+  offCtx.globalCompositeOperation = "lighter"; // Additive blending to avoid dark shadows
 
-        // Calculate center position and radius
-        const centerX = x * cellWidth + cellWidth / 2;
-        const centerY = y * cellHeight + cellHeight / 2;
-        const radius = Math.max(cellWidth, cellHeight) * 0.85; // Increased radius for better overlap
+  for (let y = 0; y < dim; y++) {
+    for (let x = 0; x < dim; x++) {
+      const index = y * dim + x;
+      const color = colors[index];
 
-        // Create softer radial gradient
-        const gradient = offCtx.createRadialGradient(centerX, centerY, 0, centerX, centerY, radius);
-        gradient.addColorStop(0, `rgba(${color.r}, ${color.g}, ${color.b}, 0.8)`); // Reduced opacity
-        gradient.addColorStop(0.5, `rgba(${color.r}, ${color.g}, ${color.b}, 0.4)`);
-        gradient.addColorStop(1, `rgba(${color.r}, ${color.g}, ${color.b}, 0)`);
+      // Calculate center position and radius
+      const centerX = x * cellWidth + cellWidth / 2;
+      const centerY = y * cellHeight + cellHeight / 2;
+      const radius = Math.max(cellWidth, cellHeight) * 0.85; // Increased radius for better overlap
 
-        // Draw circle with gradient
-        offCtx.fillStyle = gradient;
-        offCtx.beginPath();
-        offCtx.arc(centerX, centerY, radius, 0, Math.PI * 2);
-        offCtx.fill();
-      }
+      // Create softer radial gradient
+      const gradient = offCtx.createRadialGradient(
+        centerX,
+        centerY,
+        0,
+        centerX,
+        centerY,
+        radius
+      );
+      gradient.addColorStop(0, `rgba(${color.r}, ${color.g}, ${color.b}, 0.8)`); // Reduced opacity
+      gradient.addColorStop(
+        0.5,
+        `rgba(${color.r}, ${color.g}, ${color.b}, 0.4)`
+      );
+      gradient.addColorStop(1, `rgba(${color.r}, ${color.g}, ${color.b}, 0)`);
+
+      // Draw circle with gradient
+      offCtx.fillStyle = gradient;
+      offCtx.beginPath();
+      offCtx.arc(centerX, centerY, radius, 0, Math.PI * 2);
+      offCtx.fill();
     }
-    
-    // Reset composite operation
-    offCtx.globalCompositeOperation = 'source-over';
+  }
 
-    // Calculate blur sizes relative to image dimensions
-    const smallestDim = Math.min(offscreenCanvas.width, offscreenCanvas.height);
-    const baseBlur = Math.max(4, Math.round(smallestDim / 50)); // Scales with image size
+  // Reset composite operation
+  offCtx.globalCompositeOperation = "source-over";
 
-    // Apply multiple blur passes with different radii for a much smoother result
-    // First blur pass - medium blur (scaled to image size)
-    offCtx.filter = `blur(${baseBlur * 1.5}px)`;
-    offCtx.globalAlpha = 0.9;
-    offCtx.drawImage(offscreenCanvas, 0, 0);
+  // Calculate blur sizes relative to image dimensions
+  const smallestDim = Math.min(offscreenCanvas.width, offscreenCanvas.height);
+  const baseBlur = Math.max(4, Math.round(smallestDim / 50)); // Scales with image size
 
-    // Second blur pass - larger blur
-    offCtx.filter = `blur(${baseBlur *3.5}px)`;
-    offCtx.globalAlpha = 0.7;
-    offCtx.drawImage(offscreenCanvas, 0, 0);
+  // Apply multiple blur passes with different radii for a much smoother result
+  // First blur pass - medium blur (scaled to image size)
+  offCtx.filter = `blur(${baseBlur * 1.5}px)`;
+  offCtx.globalAlpha = 0.9;
+  offCtx.drawImage(offscreenCanvas, 0, 0);
 
-    // Third blur pass - fine detail blur
-    offCtx.filter = `blur(${baseBlur * 0.5}px)`;
-    offCtx.globalAlpha = 0.4;
-    offCtx.drawImage(offscreenCanvas, 0, 0);
+  // Second blur pass - larger blur
+  offCtx.filter = `blur(${baseBlur * 3.5}px)`;
+  offCtx.globalAlpha = 0.7;
+  offCtx.drawImage(offscreenCanvas, 0, 0);
 
-    // Reset alpha
-    offCtx.globalAlpha = 1.0;
+  // Third blur pass - fine detail blur
+  offCtx.filter = `blur(${baseBlur * 0.5}px)`;
+  offCtx.globalAlpha = 0.4;
+  offCtx.drawImage(offscreenCanvas, 0, 0);
 
-    // Normalize and enhance contrast
-    // Tint with a slight color to make it look nicer than pure grayscale
-    const enhancedCanvas = document.createElement("canvas");
-    enhancedCanvas.width = width;
-    enhancedCanvas.height = height;
-    const enhCtx = enhancedCanvas.getContext("2d");
+  // Reset alpha
+  offCtx.globalAlpha = 1.0;
 
-    // Draw the blurred image at regular size
-    enhCtx.drawImage(offscreenCanvas, 0, 0, width, height);
+  // Normalize and enhance contrast
+  // Tint with a slight color to make it look nicer than pure grayscale
+  const enhancedCanvas = document.createElement("canvas");
+  enhancedCanvas.width = width;
+  enhancedCanvas.height = height;
+  const enhCtx = enhancedCanvas.getContext("2d");
 
-    // Apply slight enhancement for better visual appearance
-    const imageData = enhCtx.getImageData(0, 0, width, height);
-    const data = imageData.data;
+  // Draw the blurred image at regular size
+  enhCtx.drawImage(offscreenCanvas, 0, 0, width, height);
 
-    // Calculate average brightness
-    let totalBrightness = 0;
-    for (let i = 0; i < colors.length; i++) {
-      const color = colors[i];
-      totalBrightness += (color.r + color.g + color.b) / 3;
-    }
-    const avgBrightness = totalBrightness / colors.length;
+  // Apply slight enhancement for better visual appearance
+  const imageData = enhCtx.getImageData(0, 0, width, height);
+  const data = imageData.data;
 
-    // Apply adaptive enhancement based on image brightness
-    // Analyze brightness to determine appropriate enhancement values
-    let brightnessClass = "medium";
-    if (avgBrightness < 80) brightnessClass = "dark";
-    if (avgBrightness > 170) brightnessClass = "light";
+  // Calculate average brightness
+  let totalBrightness = 0;
+  for (let i = 0; i < colors.length; i++) {
+    const color = colors[i];
+    totalBrightness += (color.r + color.g + color.b) / 3;
+  }
+  const avgBrightness = totalBrightness / colors.length;
 
-    // Set enhancement parameters based on brightness class
-    let contrast, saturation, vibrance;
-    switch (brightnessClass) {
-      case "dark":
-        contrast = 1.2; // Higher contrast for dark images
-        saturation = 1.3; // Higher saturation for dark images
-        vibrance = 1.15; // Boost vibrance for dark images
-        break;
-      case "light":
-        contrast = 1.05; // Lower contrast for light images
-        saturation = 1.1; // Lower saturation for light images
-        vibrance = 1.05; // Lower vibrance for light images
-        break;
-      default: // medium
-        contrast = 1.15; // Medium contrast
-        saturation = 1.25; // Medium saturation
-        vibrance = 1.1; // Medium vibrance
-    }
+  // Apply adaptive enhancement based on image brightness
+  // Analyze brightness to determine appropriate enhancement values
+  let brightnessClass = "medium";
+  if (avgBrightness < 80) brightnessClass = "dark";
+  if (avgBrightness > 170) brightnessClass = "light";
 
-    // Process each pixel with adaptive enhancements
-    for (let i = 0; i < data.length; i += 4) {
-      // Get RGB values
-      let r = data[i];
-      let g = data[i + 1];
-      let b = data[i + 2];
+  // Set enhancement parameters based on brightness class
+  let contrast, saturation, vibrance;
+  switch (brightnessClass) {
+    case "dark":
+      contrast = 1.2; // Higher contrast for dark images
+      saturation = 1.3; // Higher saturation for dark images
+      vibrance = 1.15; // Boost vibrance for dark images
+      break;
+    case "light":
+      contrast = 1.05; // Lower contrast for light images
+      saturation = 1.1; // Lower saturation for light images
+      vibrance = 1.05; // Lower vibrance for light images
+      break;
+    default: // medium
+      contrast = 1.15; // Medium contrast
+      saturation = 1.25; // Medium saturation
+      vibrance = 1.1; // Medium vibrance
+  }
 
-      // Apply adaptive contrast - move values away from middle gray (128)
-      r = 128 + (r - 128) * contrast;
-      g = 128 + (g - 128) * contrast;
-      b = 128 + (b - 128) * contrast;
+  // Process each pixel with adaptive enhancements
+  for (let i = 0; i < data.length; i += 4) {
+    // Get RGB values
+    let r = data[i];
+    let g = data[i + 1];
+    let b = data[i + 2];
 
-      // Calculate luminance-preserving grayscale
-      const gray = r * 0.299 + g * 0.587 + b * 0.114;
+    // Apply adaptive contrast - move values away from middle gray (128)
+    r = 128 + (r - 128) * contrast;
+    g = 128 + (g - 128) * contrast;
+    b = 128 + (b - 128) * contrast;
 
-      // Apply vibrance (boosts saturation more for less saturated colors)
-      const maxChannel = Math.max(r, g, b);
-      const minChannel = Math.min(r, g, b);
-      const saturationAmount = (maxChannel - minChannel) / 255;
-      const dynamicSatFactor = saturation * (1 - saturationAmount * vibrance);
+    // Calculate luminance-preserving grayscale
+    const gray = r * 0.299 + g * 0.587 + b * 0.114;
 
-      // Apply adaptive saturation with vibrance
-      r = gray + (r - gray) * dynamicSatFactor;
-      g = gray + (g - gray) * dynamicSatFactor;
-      b = gray + (b - gray) * dynamicSatFactor;
+    // Apply vibrance (boosts saturation more for less saturated colors)
+    const maxChannel = Math.max(r, g, b);
+    const minChannel = Math.min(r, g, b);
+    const saturationAmount = (maxChannel - minChannel) / 255;
+    const dynamicSatFactor = saturation * (1 - saturationAmount * vibrance);
 
-      // Clamp values
-      data[i] = Math.min(255, Math.max(0, r));
-      data[i + 1] = Math.min(255, Math.max(0, g));
-      data[i + 2] = Math.min(255, Math.max(0, b));
-    }
+    // Apply adaptive saturation with vibrance
+    r = gray + (r - gray) * dynamicSatFactor;
+    g = gray + (g - gray) * dynamicSatFactor;
+    b = gray + (b - gray) * dynamicSatFactor;
 
-    enhCtx.putImageData(imageData, 0, 0);
+    // Clamp values
+    data[i] = Math.min(255, Math.max(0, r));
+    data[i + 1] = Math.min(255, Math.max(0, g));
+    data[i + 2] = Math.min(255, Math.max(0, b));
+  }
 
-    // Final draw to the main canvas
-    ctx.drawImage(enhancedCanvas, 0, 0);
+  enhCtx.putImageData(imageData, 0, 0);
+
+  // Final draw to the main canvas
+  ctx.drawImage(enhancedCanvas, 0, 0);
 
   return canvas;
 }
@@ -304,8 +316,9 @@ function generateGrid() {
     img.style.outline = "none";
 
     // First try to get dimensions from blurhashIndex, then fall back to image object
-    const imgData = window.blurhashIndex[image.filename] ||
-                   window.blurhashIndex[image.filename.split("/").pop()];
+    const imgData =
+      window.blurhashIndex[image.filename] ||
+      window.blurhashIndex[image.filename.split("/").pop()];
 
     if (imgData && imgData.width && imgData.height) {
       // Use dimensions from blurhashIndex
@@ -423,8 +436,8 @@ function toggleVisibility(element) {
 function toggleHidden(element) {
   // Check if blurmap is already displayed
   const wrapper = element.parentNode;
-  let blurCanvas = wrapper.querySelector('canvas.toggle-blur');
-  
+  let blurCanvas = wrapper.querySelector("canvas.toggle-blur");
+
   if (blurCanvas) {
     // Remove the blur canvas and restore image visibility
     blurCanvas.remove();
@@ -433,12 +446,12 @@ function toggleHidden(element) {
     // Get blurhash for this image
     const filename = element.dataset.filename;
     const blurhash = getBlurhashByFilename(filename);
-    
+
     if (blurhash) {
       // Create and render the blurhash canvas
       const canvas = renderBlurhashGrid(element, blurhash, 10);
-      canvas.classList.add('toggle-blur');
-      
+      canvas.classList.add("toggle-blur");
+
       // Position canvas over the image
       canvas.style.position = "absolute";
       canvas.style.top = "0";
@@ -446,9 +459,9 @@ function toggleHidden(element) {
       canvas.style.width = "100%";
       canvas.style.height = "100%";
       canvas.style.zIndex = "3"; // Above the image
-      
+
       // Add canvas to wrapper or create wrapper if it doesn't exist
-      if (wrapper && wrapper.style.position === 'relative') {
+      if (wrapper && wrapper.style.position === "relative") {
         wrapper.appendChild(canvas);
       } else {
         const newWrapper = document.createElement("div");
@@ -459,7 +472,7 @@ function toggleHidden(element) {
         newWrapper.appendChild(element);
         newWrapper.appendChild(canvas);
       }
-      
+
       // Make image invisible but keep its space
       element.style.opacity = "0";
     } else {
@@ -548,6 +561,8 @@ document.addEventListener("DOMContentLoaded", () => {
   let eop = false;
   let keySequence = "";
   let autos = false;
+  let autoscrollInterval = null;
+  const IMAGES_PER_SECOND = 7; // Number of images that equals 1 second of wait time
 
   setBodyMarginToZero();
 
@@ -584,7 +599,7 @@ document.addEventListener("DOMContentLoaded", () => {
           const isBVisible = rectB.top < window.innerHeight && rectB.bottom > 0;
 
           if (isAVisible && !isBVisible) return -1; // A is visible, B is not
-          if (!isAVisible && isBVisible) return 1;  // B is visible, A is not
+          if (!isAVisible && isBVisible) return 1; // B is visible, A is not
 
           // If both visible or both not visible, prioritize by distance to viewport
           return Math.abs(rectA.top) - Math.abs(rectB.top);
@@ -617,8 +632,9 @@ document.addEventListener("DOMContentLoaded", () => {
         );
 
         // Check if we had the correct aspect ratio from metadata
-        const imgData = window.blurhashIndex[filename] || 
-                       window.blurhashIndex[filename.split("/").pop()];
+        const imgData =
+          window.blurhashIndex[filename] ||
+          window.blurhashIndex[filename.split("/").pop()];
 
         const metadataAspectRatio =
           imgData && imgData.width && imgData.height
@@ -695,10 +711,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // Create wrapper div for positioning
         // Get the aspect ratio from the image data if available
-        const imgData = window.blurhashIndex[filename] || 
-                       window.blurhashIndex[filename.split("/").pop()];
+        const imgData =
+          window.blurhashIndex[filename] ||
+          window.blurhashIndex[filename.split("/").pop()];
         const aspectRatio =
-          imgData && imgData.width && imgData.height ? imgData.width / imgData.height : 1;
+          imgData && imgData.width && imgData.height
+            ? imgData.width / imgData.height
+            : 1;
 
         const wrapper = document.createElement("div");
         wrapper.style.position = "relative";
@@ -817,7 +836,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
             // Check if the image is now in the viewport (if so, let the other observer handle it)
             const rect = lazyImage.getBoundingClientRect();
-            const isNowVisible = rect.top < window.innerHeight && rect.bottom > 0;
+            const isNowVisible =
+              rect.top < window.innerHeight && rect.bottom > 0;
 
             if (!isNowVisible) {
               // Queue this image for loading or load if under the cap
@@ -857,4 +877,143 @@ document.addEventListener("DOMContentLoaded", () => {
       upcomingImageLoadObserver.observe(lazyImage);
     });
   }
+
+  // Autoscroll functionality
+
+  // Function to count visible images
+  function countVisibleImages() {
+    const images = document.querySelectorAll("img");
+    let visibleCount = 0;
+    const viewportTop = window.pageYOffset;
+    const viewportBottom = viewportTop + window.innerHeight;
+
+    images.forEach((img) => {
+      const rect = img.getBoundingClientRect();
+      const imgTop = rect.top + window.pageYOffset;
+      const imgBottom = imgTop + rect.height;
+
+      // Check if image is at least partially visible
+      if (imgBottom > viewportTop && imgTop < viewportBottom) {
+        visibleCount++;
+      }
+    });
+
+    console.log(`[Autoscroll] Counted ${visibleCount} visible images`);
+    return visibleCount;
+  }
+
+  // Function to scroll like space key
+  function performSpaceScroll() {
+    console.log("[Autoscroll] Performing space-like scroll");
+
+    // Check if we're at the bottom of the page
+    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    const scrollHeight = document.documentElement.scrollHeight;
+    const clientHeight = window.innerHeight;
+    const isAtBottom = scrollTop + clientHeight >= scrollHeight - 5; // 5px tolerance
+
+    if (isAtBottom) {
+      // Reset to the top of the page
+      console.log("[Autoscroll] At bottom of page, resetting to top");
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      });
+    } else {
+      // Space key typically scrolls by viewport height minus a small overlap
+      const scrollAmount = window.innerHeight * 0.9;
+      console.log(`[Autoscroll] Scrolling by ${scrollAmount}px`);
+
+      window.scrollBy({
+        top: scrollAmount,
+        behavior: "smooth",
+      });
+    }
+  }
+
+  // Function to start/stop autoscroll
+  function toggleAutoscroll() {
+    if (autoscrollInterval) {
+      // Stop autoscroll
+      console.log("[Autoscroll] Stopping autoscroll");
+      clearInterval(autoscrollInterval);
+      autoscrollInterval = null;
+      console.log("[Autoscroll] Autoscroll stopped");
+    } else {
+      // Start autoscroll
+      console.log("[Autoscroll] Starting autoscroll");
+
+      // Function to perform scroll and schedule next one
+      let lastWaitTime = 1000; // Start with 1 second default
+
+      const scroll = () => {
+        console.log("[Autoscroll] Scroll timer fired");
+
+        // Perform space-like scroll
+        performSpaceScroll();
+
+        // Count visible images after scroll for next interval
+        setTimeout(() => {
+          const visibleImages = countVisibleImages();
+          const newWaitTime =
+            Math.ceil(visibleImages / IMAGES_PER_SECOND) * 1000; // Calculate based on IMAGES_PER_SECOND
+
+          console.log(
+            `[Autoscroll] Next wait time: ${newWaitTime}ms (${visibleImages} images / ${IMAGES_PER_SECOND} = ${
+              visibleImages / IMAGES_PER_SECOND
+            } seconds, rounded up)`
+          );
+
+          // Only update interval if wait time has changed significantly
+          if (newWaitTime !== lastWaitTime) {
+            lastWaitTime = newWaitTime;
+
+            // Clear existing interval and set new one with updated wait time
+            if (autoscrollInterval) {
+              clearInterval(autoscrollInterval);
+              autoscrollInterval = setInterval(scroll, newWaitTime);
+              console.log(
+                `[Autoscroll] Timer updated with ${newWaitTime}ms interval`
+              );
+            }
+          }
+        }, 500); // Wait 500ms for scroll to complete before counting images
+      };
+
+      // Calculate initial wait time based on current visible images
+      const initialVisibleImages = countVisibleImages();
+      const initialWaitTime =
+        Math.ceil(initialVisibleImages / IMAGES_PER_SECOND) * 1000;
+      lastWaitTime = initialWaitTime;
+
+      console.log(`[Autoscroll] Initial wait time: ${initialWaitTime}ms`);
+
+      // Start with initial scroll immediately
+      scroll();
+
+      // Set up the interval
+      autoscrollInterval = setInterval(scroll, initialWaitTime);
+      console.log("[Autoscroll] Autoscroll started with interval");
+    }
+  }
+
+  // Add keyboard event listener
+  document.addEventListener("keydown", (event) => {
+    console.log(
+      `[Keyboard] Key pressed: ${event.key} (keyCode: ${event.keyCode})`
+    );
+
+    if (event.key === "s" || event.key === "S") {
+      console.log("[Keyboard] 's' key detected, toggling autoscroll");
+      event.preventDefault();
+      toggleAutoscroll();
+    }
+  });
+
+  // Automatically start autoscrolling after 5 seconds
+  console.log("[Autoscroll] Will start automatically in 5 seconds...");
+  setTimeout(() => {
+    console.log("[Autoscroll] Starting automatic autoscroll");
+    toggleAutoscroll();
+  }, 5000);
 });
