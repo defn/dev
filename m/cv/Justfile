@@ -54,9 +54,9 @@ gallery dir="thumbs" output="thumbs" max="10000":
     
 big prefix="replicate/":
     #!/usr/bin/env bash
-    find yes -type f | cut -d/ -f2 | cut -d. -f1 | sort > all.input
-    just gallery {{ prefix }}t2 two 3000 &
-    time go run blurmap.go two.html blurhash.js
+    find {{prefix}}t2 -type f | cut -d/ -f3 | cut -d. -f1 | sort > all.input
+    just gallery {{ prefix }}t2 two 3000
+    time go run blurmap.go two.html blurmap.js
     #just gallery {{ prefix }}t2  all 1000000 &
     wait
 

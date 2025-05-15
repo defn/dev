@@ -35,8 +35,7 @@ echo '<link rel="stylesheet" href="/gallery.css">'
 echo '</head>'
 
 echo '<body style="background-color: black;">'
-echo '<script src="/blurhash-loader.js"></script>'
-echo '<script src="/blurhash.js"></script>'
+echo '<script src="/blurmap.js"></script>'
 echo '<script src="/gallery.js"></script>'
 
 # Start the HTML table
