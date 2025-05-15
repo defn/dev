@@ -1010,10 +1010,22 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
+  // Store the automatic start timer
+  let autoStartTimer = null;
+  
   // Automatically start autoscrolling after 5 seconds
   console.log("[Autoscroll] Will start automatically in 5 seconds...");
-  setTimeout(() => {
+  autoStartTimer = setTimeout(() => {
     console.log("[Autoscroll] Starting automatic autoscroll");
     toggleAutoscroll();
   }, 5000);
+  
+  // Add listener to cancel auto-start on any key press
+  document.addEventListener("keydown", (event) => {
+    if (autoStartTimer) {
+      console.log("[Autoscroll] Key pressed, cancelling automatic start");
+      clearTimeout(autoStartTimer);
+      autoStartTimer = null;
+    }
+  }, { once: true }); // Remove listener after first key press
 });
