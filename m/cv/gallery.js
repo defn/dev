@@ -422,15 +422,20 @@ function scrollToPartialImage() {
 
 function toggleVisibility(element) {
   toggleHidden(element);
-  fetch(
-    `select-${selectMode}?filename=${element.getAttribute("data-filename")}`,
-    {
-      mode: "no-cors",
-    }
-  )
-    .then((response) => response.text())
-    .then((data) => console.log(data))
-    .catch((error) => console.error("Error:", error));
+
+  // Only send to server when selectMode is "yes"
+  if (selectMode === "yes") {
+    fetch(
+      `select-${selectMode}?filename=${element.getAttribute("data-filename")}`,
+      {
+        mode: "no-cors",
+      }
+    )
+      .then((response) => response.text())
+      .then((data) => console.log(data))
+      .catch((error) => console.error("Error:", error));
+  }
+  // When selectMode is "no", just toggle blurhash locally without server interaction
 }
 
 function toggleHidden(element) {
@@ -459,6 +464,10 @@ function toggleHidden(element) {
       canvas.style.width = "100%";
       canvas.style.height = "100%";
       canvas.style.zIndex = "3"; // Above the image
+      canvas.style.cursor = "pointer"; // Show pointer cursor
+
+      // Add click handler to canvas to toggle back
+      canvas.onclick = () => toggleVisibility(element);
 
       // Add canvas to wrapper or create wrapper if it doesn't exist
       if (wrapper && wrapper.style.position === "relative") {
@@ -476,8 +485,17 @@ function toggleHidden(element) {
       // Make image invisible but keep its space
       element.style.opacity = "0";
     } else {
-      // Fallback to simple opacity change if no blurhash is available
-      element.style.opacity = element.style.opacity === "0.3" ? "1" : "0.3";
+      // Fallback when no blurhash is available - create dark shadow with saturated highlights
+      if (element.style.filter) {
+        // Remove the filter effects to restore original image
+        element.style.filter = "";
+        element.style.opacity = "1";
+      } else {
+        // Apply darkening with saturated highlights and sepia/aged effect
+        element.style.filter =
+          "brightness(0.4) contrast(1.5) saturate(1.5) sepia(0.4) grayscale(0.2)";
+        element.style.opacity = "0.8";
+      }
     }
   }
 }
