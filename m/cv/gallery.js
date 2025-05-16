@@ -283,14 +283,10 @@ function generateGrid() {
       userAgent.toLowerCase()
     );
 
-  if (basePath == "replicate/img") {
-    numColumns = 1;
+  if (isMobile) {
+    numColumns = Math.floor(window.innerWidth / 490);
   } else {
-    if (isMobile) {
-      numColumns = Math.floor(window.innerWidth / 490);
-    } else {
-      numColumns = Math.floor(window.innerWidth / 300);
-    }
+    numColumns = Math.floor(window.innerWidth / 300);
   }
 
   // Initialize an array to hold columns
@@ -920,9 +916,48 @@ document.addEventListener("DOMContentLoaded", () => {
     return visibleCount;
   }
 
+  // Function to check if all images in viewport are loaded
+  function areAllViewportImagesLoaded() {
+    const images = document.querySelectorAll("img");
+    let allLoaded = true;
+    let loadingCount = 0;
+    let fullyVisibleCount = 0;
+
+    images.forEach((img) => {
+      const rect = img.getBoundingClientRect();
+      // Check if image is FULLY visible in viewport
+      if (
+        rect.top >= 0 &&
+        rect.left >= 0 &&
+        rect.bottom <= window.innerHeight &&
+        rect.right <= window.innerWidth
+      ) {
+        fullyVisibleCount++;
+        // Check if image is loaded
+        if (!img.complete || img.naturalHeight === 0) {
+          allLoaded = false;
+          loadingCount++;
+        }
+      }
+    });
+
+    console.log(
+      `[Autoscroll] Viewport images check: ${loadingCount} of ${fullyVisibleCount} fully visible images still loading`
+    );
+    return allLoaded;
+  }
+
   // Function to scroll like space key
   function performSpaceScroll() {
     console.log("[Autoscroll] Performing space-like scroll");
+
+    // First check if all viewport images are loaded
+    if (!areAllViewportImagesLoaded()) {
+      console.log(
+        "[Autoscroll] Waiting for all viewport images to load before scrolling"
+      );
+      return false; // Return false to indicate scroll was not performed
+    }
 
     // Check if we're at the bottom of the page
     const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
@@ -947,6 +982,8 @@ document.addEventListener("DOMContentLoaded", () => {
         behavior: "smooth",
       });
     }
+
+    return true; // Return true to indicate scroll was performed
   }
 
   // Function to start/stop autoscroll
@@ -968,18 +1005,27 @@ document.addEventListener("DOMContentLoaded", () => {
         console.log("[Autoscroll] Scroll timer fired");
 
         // Perform space-like scroll
-        performSpaceScroll();
+        const scrollPerformed = performSpaceScroll();
+
+        if (!scrollPerformed) {
+          // Images are still loading, retry after a short delay
+          console.log("[Autoscroll] Retrying scroll in 500ms");
+          setTimeout(() => {
+            scroll(); // Retry the scroll
+          }, 500);
+          return; // Exit early
+        }
 
         // Count visible images after scroll for next interval
         setTimeout(() => {
           const visibleImages = countVisibleImages();
           const newWaitTime =
-            Math.ceil(visibleImages / IMAGES_PER_SECOND) * 1000; // Calculate based on IMAGES_PER_SECOND
+            Math.ceil(visibleImages / IMAGES_PER_SECOND) * 1000 + 1000; // Calculate based on IMAGES_PER_SECOND and add 1 second
 
           console.log(
             `[Autoscroll] Next wait time: ${newWaitTime}ms (${visibleImages} images / ${IMAGES_PER_SECOND} = ${
               visibleImages / IMAGES_PER_SECOND
-            } seconds, rounded up)`
+            } seconds, rounded up, plus 1 second)`
           );
 
           // Only update interval if wait time has changed significantly
@@ -1001,7 +1047,7 @@ document.addEventListener("DOMContentLoaded", () => {
       // Calculate initial wait time based on current visible images
       const initialVisibleImages = countVisibleImages();
       const initialWaitTime =
-        Math.ceil(initialVisibleImages / IMAGES_PER_SECOND) * 1000;
+        Math.ceil(initialVisibleImages / IMAGES_PER_SECOND) * 1000 + 1000;
       lastWaitTime = initialWaitTime;
 
       console.log(`[Autoscroll] Initial wait time: ${initialWaitTime}ms`);
@@ -1025,6 +1071,14 @@ document.addEventListener("DOMContentLoaded", () => {
       console.log("[Keyboard] 's' key detected, toggling autoscroll");
       event.preventDefault();
       toggleAutoscroll();
+    }
+
+    // Handle space key to check if images are loaded before scrolling
+    if (event.key === " " || event.keyCode === 32) {
+      if (!areAllViewportImagesLoaded()) {
+        console.log("[Manual Scroll] Preventing scroll - images still loading");
+        event.preventDefault();
+      }
     }
   });
 
@@ -1050,4 +1104,18 @@ document.addEventListener("DOMContentLoaded", () => {
     },
     { once: true }
   ); // Remove listener after first key press
+
+  // Add wheel event listener to prevent scrolling when images are loading
+  document.addEventListener(
+    "wheel",
+    (event) => {
+      if (!areAllViewportImagesLoaded()) {
+        console.log(
+          "[Manual Scroll] Preventing wheel scroll - images still loading"
+        );
+        event.preventDefault();
+      }
+    },
+    { passive: false }
+  );
 });
