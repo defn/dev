@@ -31,8 +31,8 @@ github.com/bytedance/sonic/loader v0.2.4 h1:ZWCw4stuXUsn1/+zQDqeE7JKP+QO47tz7QCN
 github.com/bytedance/sonic/loader v0.2.4/go.mod h1:N8A3vUdtUebEY2/VQC0MyhYeKUFosQU6FxH2JmUe6VI=
 github.com/caarlos0/env/v11 v11.3.1 h1:cArPWC15hWmEt+gWk7YBi7lEXTXCvpaSdCiZE2X5mCA=
 github.com/caarlos0/env/v11 v11.3.1/go.mod h1:qupehSf/Y0TUTsxKywqRt/vJjN5nz6vauiYEUUr8P4U=
-github.com/cdktf/cdktf-provider-aws-go/aws/v19 v19.63.0 h1:ynTUF5U6cG+XBUcMBd6eOnX2908ftSQk3c0x5f/MVBE=
-github.com/cdktf/cdktf-provider-aws-go/aws/v19 v19.63.0/go.mod h1:DnpOqXSHHanNWFcvGC5k488aboGWXGz3YVEPObBabm8=
+github.com/cdktf/cdktf-provider-aws-go/aws/v19 v19.64.0 h1:O30D8xPyteopGiqLGC09z27CttL7+lWcl5Kg7gi10ic=
+github.com/cdktf/cdktf-provider-aws-go/aws/v19 v19.64.0/go.mod h1:DnpOqXSHHanNWFcvGC5k488aboGWXGz3YVEPObBabm8=
 github.com/charmbracelet/bubbles v0.21.0 h1:9TdC97SdRVg/1aaXNVWfFH3nnLAwOXr8Fn6u6mfQdFs=
 github.com/charmbracelet/bubbles v0.21.0/go.mod h1:HF+v6QUR4HkEpz62dx7ym2xc71/KBHg+zKwJtMw+qtg=
 github.com/charmbracelet/bubbletea v1.3.5 h1:JAMNLTbqMOhSwoELIr0qyP4VidFq72/6E9j7HHmRKQc=
