@@ -15,15 +15,44 @@ import (
 	"strconv"
 	"strings"
 	"sync"
+	"time"
 )
 
 const (
 	cacheDir     = "blur"
 	imageDir     = "replicate/t2"
 	allInputFile = "all.input"
-	templateFile = "gallery.html"
 	outputDir    = "g" // Base directory for chunked output
 )
+
+// galleryTemplate is the HTML template for the gallery pages, moved from external gallery.html
+const galleryTemplate = `<!doctype html>
+<html>
+  <head>
+    <link rel="stylesheet" href="/gallery.css" />
+    <meta name="total-chunks" content="%d">
+    <meta name="current-chunk" content="%s">
+  </head>
+  <body style="background-color: black">
+    <script src="/gallery.js?cache=%d"></script>
+    <table>
+      <tbody id="table-body">
+        <tr>
+          <script>
+            // INSERT
+
+            const basePath = "/replicate/t2";
+            const selectMode = "no";
+
+            generateGrid();
+          </script>
+        </tr>
+      </tbody>
+    </table>
+    <div id="overlay" />
+    <br />
+  </body>
+</html>`
 
 // ImageInfo holds information about an image file
 type ImageInfo struct {
@@ -54,7 +83,13 @@ const (
 	chunkSize = 500 // Number of images per chunk
 )
 
+// timestampCache holds the current timestamp used for cache busting
+var timestampCache int64
+
 func main() {
+	// Create a single timestamp for cache busting
+	timestampCache = time.Now().Unix()
+
 	// Create cache directory if it doesn't exist
 	if err := ensureCacheDir(); err != nil {
 		fmt.Fprintf(os.Stderr, "Error creating cache directory: %v\n", err)
@@ -347,21 +382,13 @@ func parseInputFile(filePath string) ([]ImageInfo, error) {
 }
 
 // generateChunkHTML creates an HTML file for a chunk of images
-// It uses gallery.html as a template and outputs to the specified file
+// It now uses the inline galleryTemplate instead of an external file
 func generateChunkHTML(imageInfos []ImageInfo, outputPath string, totalChunks int) error {
-	// Read the template file
-	templateContent, err := ioutil.ReadFile(templateFile)
-	if err != nil {
-		return fmt.Errorf("failed to read template file: %w", err)
-	}
+	// Extract chunk number from path
+	chunkNum := strings.Split(outputPath, "/")[1]
 
-	templateStr := string(templateContent)
-
-	// Check if the template is the updated format
-	isUpdatedTemplate := strings.Contains(templateStr, "// INSERT\n\n            const basePath")
-
-	// We'll derive the images array from the blurhashIndex keys
-	// so we don't need a separate images array generator
+	// Format the template with proper values
+	templateStr := fmt.Sprintf(galleryTemplate, totalChunks, chunkNum, timestampCache)
 
 	// Generate the blurhashIndex map
 	var blurhashMap strings.Builder
@@ -401,33 +428,111 @@ func generateChunkHTML(imageInfos []ImageInfo, outputPath string, totalChunks in
 
 	blurhashMap.WriteString("};\n")
 
-	// Combine the JavaScript content
+	// Combine the JavaScript content with global variable definitions to fix errors
 	var jsContent strings.Builder
 
-	// First write the blurhashIndex
+	// Define required global variables to avoid "is not defined" errors
+	jsContent.WriteString("// Define global variables for gallery.js\n")
+	jsContent.WriteString("window.numColumns = Math.floor(window.innerWidth / 300);\n")
+	jsContent.WriteString("window.images = [];\n\n")
+
+	// Add the blurhash index
 	jsContent.WriteString(blurhashMap.String())
 
-	// Generate the images array from the blurhashIndex keys and randomize it
-	jsContent.WriteString("\n// Generate randomized images array from blurhashIndex\n")
-	jsContent.WriteString("let images = Object.keys(window.blurhashIndex)\n")
-	jsContent.WriteString("  // Convert to array of objects with filename\n")
-	jsContent.WriteString("  .map(filename => ({ filename }));\n\n")
+	// Generate the images array from the blurhashIndex keys
+	jsContent.WriteString("\n// Generate images array from blurhashIndex\n")
+	jsContent.WriteString("window.images = Object.keys(window.blurhashIndex)\n")
+	jsContent.WriteString("  .map(filename => ({\n")
+	jsContent.WriteString("    filename, \n")
+	jsContent.WriteString("    width: window.blurhashIndex[filename].width,\n")
+	jsContent.WriteString("    height: window.blurhashIndex[filename].height\n")
+	jsContent.WriteString("  }));\n\n")
 
-	// Add proper Fisher-Yates shuffle for better randomization
-	jsContent.WriteString("// Randomize array with Fisher-Yates shuffle (more uniform than sort with random)\n")
-	jsContent.WriteString("for (let i = images.length - 1; i > 0; i--) {\n")
+	// Add proper Fisher-Yates shuffle for randomization
+	jsContent.WriteString("// Randomize array with Fisher-Yates shuffle\n")
+	jsContent.WriteString("for (let i = window.images.length - 1; i > 0; i--) {\n")
 	jsContent.WriteString("  const j = Math.floor(Math.random() * (i + 1));\n")
-	jsContent.WriteString("  [images[i], images[j]] = [images[j], images[i]];\n")
-	jsContent.WriteString("}\n")
+	jsContent.WriteString("  [window.images[i], window.images[j]] = [window.images[j], window.images[i]];\n")
+	jsContent.WriteString("}\n\n")
 
-	// Add navigation between chunks
-	chunkNum := strings.Split(outputPath, "/")[1] // Extract chunk number from path
-	chunkNumInt, _ := strconv.Atoi(chunkNum)      // Convert to integer for calculations
+	// Parse chunk numbers
+	chunkNumInt, _ := strconv.Atoi(chunkNum)
 	prevChunk := chunkNumInt - 1
 	nextChunk := chunkNumInt + 1
 
-	jsContent.WriteString("\n// Add navigation links for chunked galleries\n")
+	// Add navigation between chunks with image position tracking
+	jsContent.WriteString("// Function to track image positions and visibility\n")
+	jsContent.WriteString("let imagePositions = [];\n")
+	jsContent.WriteString("let currentVisibleImageIndex = 0;\n")
+
+	// Track image positions
+	jsContent.WriteString("function calculateImagePositions() {\n")
+	jsContent.WriteString("  const allImages = Array.from(document.querySelectorAll('img'));\n")
+	jsContent.WriteString("  \n")
+	jsContent.WriteString("  // Sort images by their vertical position\n")
+	jsContent.WriteString("  imagePositions = allImages.map((img, originalIndex) => {\n")
+	jsContent.WriteString("    const rect = img.getBoundingClientRect();\n")
+	jsContent.WriteString("    const absoluteTop = rect.top + window.pageYOffset;\n")
+	jsContent.WriteString("    return {\n")
+	jsContent.WriteString("      element: img,\n")
+	jsContent.WriteString("      originalIndex,\n")
+	jsContent.WriteString("      top: absoluteTop,\n")
+	jsContent.WriteString("      bottom: absoluteTop + rect.height,\n")
+	jsContent.WriteString("      filename: img.dataset.filename || ''\n")
+	jsContent.WriteString("    };\n")
+	jsContent.WriteString("  });\n")
+
+	jsContent.WriteString("  // Sort by vertical position (top to bottom)\n")
+	jsContent.WriteString("  imagePositions.sort((a, b) => a.top - b.top);\n")
+
+	jsContent.WriteString("  // Assign sequential position numbers\n")
+	jsContent.WriteString("  imagePositions.forEach((img, index) => { img.positionIndex = index + 1; });\n")
+	jsContent.WriteString("  \n")
+	jsContent.WriteString("  console.log(`Calculated positions for ${imagePositions.length} images`);\n")
+	jsContent.WriteString("  return imagePositions;\n")
+	jsContent.WriteString("}\n")
+
+	// Track fully visible images
+	jsContent.WriteString("function updateVisibleImageIndex() {\n")
+	jsContent.WriteString("  if (!imagePositions.length) calculateImagePositions();\n")
+
+	jsContent.WriteString("  // Find highest number fully visible image\n")
+	jsContent.WriteString("  let highestVisibleIndex = 0;\n")
+	jsContent.WriteString("  const viewportTop = window.pageYOffset;\n")
+	jsContent.WriteString("  const viewportBottom = viewportTop + window.innerHeight;\n")
+
+	jsContent.WriteString("  // Check each image position\n")
+	jsContent.WriteString("  imagePositions.forEach(img => {\n")
+	jsContent.WriteString("    // Check if fully visible (image top and bottom are within viewport)\n")
+	jsContent.WriteString("    if (img.top >= viewportTop && img.bottom <= viewportBottom) {\n")
+	jsContent.WriteString("      highestVisibleIndex = Math.max(highestVisibleIndex, img.positionIndex);\n")
+	jsContent.WriteString("    }\n")
+	jsContent.WriteString("  });\n")
+
+	jsContent.WriteString("  // Update the current image index if changed\n")
+	jsContent.WriteString("  if (highestVisibleIndex !== currentVisibleImageIndex) {\n")
+	jsContent.WriteString("    currentVisibleImageIndex = highestVisibleIndex;\n")
+	jsContent.WriteString("    updateNavigationDisplay();\n")
+	jsContent.WriteString("  }\n")
+	jsContent.WriteString("}\n")
+
+	// Update the navigation display
+	jsContent.WriteString("function updateNavigationDisplay() {\n")
+	jsContent.WriteString("  const imageInfoDisplay = document.getElementById('current-image-info');\n")
+	jsContent.WriteString("  if (!imageInfoDisplay) return;\n")
+
+	jsContent.WriteString("  if (currentVisibleImageIndex > 0 && currentVisibleImageIndex <= imagePositions.length) {\n")
+	jsContent.WriteString("    const currentImage = imagePositions[currentVisibleImageIndex - 1];\n")
+	jsContent.WriteString("    imageInfoDisplay.textContent = `${currentVisibleImageIndex}/${imagePositions.length}`;\n")
+	jsContent.WriteString("    imageInfoDisplay.title = currentImage.filename || '';\n")
+	jsContent.WriteString("  } else {\n")
+	jsContent.WriteString("    imageInfoDisplay.textContent = `-/${imagePositions.length || 0}`;\n")
+	jsContent.WriteString("  }\n")
+	jsContent.WriteString("}\n")
+
+	// Add navigation links
 	jsContent.WriteString("document.addEventListener('DOMContentLoaded', () => {\n")
+	jsContent.WriteString("  // Create the navigation container\n")
 	jsContent.WriteString("  const nav = document.createElement('div');\n")
 	jsContent.WriteString("  nav.className = 'chunk-nav';\n")
 	jsContent.WriteString("  nav.style.cssText = 'position:fixed;bottom:10px;right:10px;background:rgba(0,0,0,0.7);color:white;padding:10px;border-radius:5px;z-index:1000;display:flex;gap:10px;align-items:center;';\n")
@@ -447,9 +552,9 @@ func generateChunkHTML(imageInfos []ImageInfo, outputPath string, totalChunks in
 		jsContent.WriteString("  nav.appendChild(prevLink);\n")
 	}
 
-	// Add chunk indicator
+	// Add chunk indicator - just the number
 	jsContent.WriteString("  const chunkIndicator = document.createElement('span');\n")
-	jsContent.WriteString("  chunkIndicator.textContent = 'Chunk " + chunkNum + "';\n")
+	jsContent.WriteString("  chunkIndicator.textContent = '" + chunkNum + "';\n")
 	jsContent.WriteString("  chunkIndicator.style.margin = '0 5px';\n")
 	jsContent.WriteString("  nav.appendChild(chunkIndicator);\n")
 
@@ -468,28 +573,60 @@ func generateChunkHTML(imageInfos []ImageInfo, outputPath string, totalChunks in
 		jsContent.WriteString("  nav.appendChild(nextLink);\n")
 	}
 
+	// Add current image position display
+	jsContent.WriteString("  // Add image position indicator\n")
+	jsContent.WriteString("  const imageInfoDisplay = document.createElement('span');\n")
+	jsContent.WriteString("  imageInfoDisplay.id = 'current-image-info';\n")
+	jsContent.WriteString("  imageInfoDisplay.style.cssText = 'margin-left:15px;font-size:14px;background:rgba(0,0,0,0.5);padding:2px 6px;border-radius:3px;';\n")
+	jsContent.WriteString("  imageInfoDisplay.textContent = '-/-';\n")
+	jsContent.WriteString("  nav.appendChild(imageInfoDisplay);\n")
+
 	jsContent.WriteString("  document.body.appendChild(nav);\n")
 
-	// Add keyboard navigation - always listen for arrow keys
+	// Calculate initial positions and set up scroll listener
+	jsContent.WriteString("  // Calculate image positions after all images are loaded\n")
+	jsContent.WriteString("  window.addEventListener('load', () => {\n")
+	jsContent.WriteString("    setTimeout(() => { // Small delay to ensure all images have rendered\n")
+	jsContent.WriteString("      calculateImagePositions();\n")
+	jsContent.WriteString("      updateVisibleImageIndex();\n")
+	jsContent.WriteString("    }, 500);\n")
+	jsContent.WriteString("  });\n")
+
+	// Update position on scroll
+	jsContent.WriteString("  // Update the visible image index on scroll\n")
+	jsContent.WriteString("  window.addEventListener('scroll', () => {\n")
+	jsContent.WriteString("    requestAnimationFrame(updateVisibleImageIndex);\n")
+	jsContent.WriteString("  });\n")
+
+	// Recalculate on window resize
+	jsContent.WriteString("  // Recalculate positions on window resize\n")
+	jsContent.WriteString("  let resizeTimer;\n")
+	jsContent.WriteString("  window.addEventListener('resize', () => {\n")
+	jsContent.WriteString("    clearTimeout(resizeTimer);\n")
+	jsContent.WriteString("    resizeTimer = setTimeout(() => {\n")
+	jsContent.WriteString("      calculateImagePositions();\n")
+	jsContent.WriteString("      updateVisibleImageIndex();\n")
+	jsContent.WriteString("    }, 300);\n")
+	jsContent.WriteString("  });\n")
+
+	// Add keyboard navigation
 	jsContent.WriteString("\n  // Add keyboard navigation\n")
 	jsContent.WriteString("  document.addEventListener('keydown', (e) => {\n")
 
-	// Left arrow - always add the handler
+	// Left arrow
 	jsContent.WriteString("    if (e.key === 'ArrowLeft' || e.key === 'a' || e.key === 'A') {\n")
 	if chunkNumInt > 1 {
 		jsContent.WriteString("      window.location.href = '../" + strconv.Itoa(prevChunk) + "/';\n")
 	} else {
-		// At first chunk - could optionally loop to last chunk
 		jsContent.WriteString("      console.log('At first chunk');\n")
 	}
 	jsContent.WriteString("    }\n")
 
-	// Right arrow - always add the handler
+	// Right arrow
 	jsContent.WriteString("    if (e.key === 'ArrowRight' || e.key === 'd' || e.key === 'D') {\n")
 	if chunkNumInt < totalChunks {
 		jsContent.WriteString("      window.location.href = '../" + strconv.Itoa(nextChunk) + "/';\n")
 	} else {
-		// At last chunk - could optionally loop to first chunk
 		jsContent.WriteString("      console.log('At last chunk');\n")
 	}
 	jsContent.WriteString("    }\n")
@@ -501,6 +638,104 @@ func generateChunkHTML(imageInfos []ImageInfo, outputPath string, totalChunks in
 		jsContent.WriteString("\n  // Go to next chunk when scrolling to bottom of page\n")
 		jsContent.WriteString("  let scrollTimer = null;\n")
 		jsContent.WriteString("  let isAtBottom = false;\n")
+		jsContent.WriteString("  let allImagesLoaded = false;\n")
+
+		// Helper function to check if all visible images are loaded
+		// Add image retry and failure tracking before the checkAllImagesLoaded function
+		jsContent.WriteString("  // Track image load status and retries\n")
+		jsContent.WriteString("  const imageRetries = new Map();\n")
+		jsContent.WriteString("  const failedImages = new Set();\n")
+		jsContent.WriteString("  let imageErrorTimeout = null;\n")
+
+		// Handle image load errors and retries
+		jsContent.WriteString("  // Handle image load errors\n")
+		jsContent.WriteString("  function handleImageError(img) {\n")
+		jsContent.WriteString("    const src = img.src || img.dataset.src;\n")
+		jsContent.WriteString("    if (!src) return false;\n")
+
+		jsContent.WriteString("    // Check if this image has been retried already\n")
+		jsContent.WriteString("    const retryCount = imageRetries.get(src) || 0;\n")
+
+		jsContent.WriteString("    if (retryCount === 0) {\n")
+		jsContent.WriteString("      // First failure - retry once\n")
+		jsContent.WriteString("      console.log(`Image load failed, retrying: ${src}`);\n")
+		jsContent.WriteString("      imageRetries.set(src, 1);\n")
+
+		jsContent.WriteString("      // Add a cache-busting parameter and retry\n")
+		jsContent.WriteString("      const newSrc = src.includes('?') \n")
+		jsContent.WriteString("        ? `${src}&retry=${Date.now()}` \n")
+		jsContent.WriteString("        : `${src}?retry=${Date.now()}`;\n")
+
+		jsContent.WriteString("      img.src = newSrc;\n")
+		jsContent.WriteString("      return false; // Not resolved yet\n")
+		jsContent.WriteString("    } else {\n")
+		jsContent.WriteString("      // Already retried - mark as permanently failed\n")
+		jsContent.WriteString("      console.log(`Image permanently failed after retry: ${src}`);\n")
+		jsContent.WriteString("      failedImages.add(src);\n")
+
+		jsContent.WriteString("      // Set a timeout to allow navigation after 5 seconds regardless of failed images\n")
+		jsContent.WriteString("      if (!imageErrorTimeout) {\n")
+		jsContent.WriteString("        imageErrorTimeout = setTimeout(() => {\n")
+		jsContent.WriteString("          console.log('Timeout reached for failed images, allowing navigation');\n")
+		jsContent.WriteString("          // Force allImagesLoaded to true after timeout\n")
+		jsContent.WriteString("          allImagesLoaded = true;\n")
+		jsContent.WriteString("        }, 5000);\n")
+		jsContent.WriteString("      }\n")
+
+		jsContent.WriteString("      return true; // Resolved (as failed)\n")
+		jsContent.WriteString("    }\n")
+		jsContent.WriteString("  }\n")
+
+		// Setup global image error handler
+		jsContent.WriteString("  // Set up global error handler for all images\n")
+		jsContent.WriteString("  document.addEventListener('error', (e) => {\n")
+		jsContent.WriteString("    if (e.target.tagName === 'IMG') {\n")
+		jsContent.WriteString("      handleImageError(e.target);\n")
+		jsContent.WriteString("    }\n")
+		jsContent.WriteString("  }, true); // Capture phase to catch all image errors\n")
+
+		// Enhanced version of checkAllImagesLoaded
+		jsContent.WriteString("  function checkAllImagesLoaded() {\n")
+		jsContent.WriteString("    // If the error timeout has fired, consider all images loaded\n")
+		jsContent.WriteString("    if (imageErrorTimeout && Date.now() > imageErrorTimeout._idleStart + 5000) {\n")
+		jsContent.WriteString("      return true;\n")
+		jsContent.WriteString("    }\n")
+
+		jsContent.WriteString("    const visibleImages = Array.from(document.querySelectorAll('img')).filter(img => {\n")
+		jsContent.WriteString("      const rect = img.getBoundingClientRect();\n")
+		jsContent.WriteString("      return rect.top < window.innerHeight && rect.bottom > 0; // Visible in viewport\n")
+		jsContent.WriteString("    });\n")
+		jsContent.WriteString("    \n")
+		jsContent.WriteString("    if (visibleImages.length === 0) return true;\n")
+
+		jsContent.WriteString("    // Check if all visible images are either fully loaded or permanently failed\n")
+		jsContent.WriteString("    return visibleImages.every(img => {\n")
+		jsContent.WriteString("      // Image is loaded successfully\n")
+		jsContent.WriteString("      if (img.complete && img.naturalHeight > 0) return true;\n")
+
+		jsContent.WriteString("      // Image permanently failed (after retry)\n")
+		jsContent.WriteString("      if (failedImages.has(img.src) || failedImages.has(img.dataset.src)) return true;\n")
+
+		jsContent.WriteString("      // Handle error if image has failed but not been processed\n")
+		jsContent.WriteString("      if (img.complete && img.naturalHeight === 0) {\n")
+		jsContent.WriteString("        return handleImageError(img);\n")
+		jsContent.WriteString("      }\n")
+
+		jsContent.WriteString("      // Otherwise still loading\n")
+		jsContent.WriteString("      return false;\n")
+		jsContent.WriteString("    });\n")
+		jsContent.WriteString("  }\n")
+
+		// Setup a MutationObserver to detect when images finish loading
+		jsContent.WriteString("  const imagesLoadedObserver = new MutationObserver(() => {\n")
+		jsContent.WriteString("    allImagesLoaded = checkAllImagesLoaded();\n")
+		jsContent.WriteString("    if (allImagesLoaded && scrollTimer) {\n")
+		jsContent.WriteString("      console.log('All visible images loaded or handled as failed, navigation timer active');\n")
+		jsContent.WriteString("    }\n")
+		jsContent.WriteString("  });\n")
+		jsContent.WriteString("  imagesLoadedObserver.observe(document.body, { subtree: true, attributes: true, attributeFilter: ['src', 'complete', 'naturalHeight'] });\n")
+
+		// Setup scroll event listener
 		jsContent.WriteString("  window.addEventListener('scroll', () => {\n")
 		jsContent.WriteString("    const scrollPosition = window.scrollY + window.innerHeight;\n")
 		jsContent.WriteString("    const scrollHeight = document.documentElement.scrollHeight;\n")
@@ -508,20 +743,124 @@ func generateChunkHTML(imageInfos []ImageInfo, outputPath string, totalChunks in
 		jsContent.WriteString("    const wasAtBottom = isAtBottom;\n")
 		jsContent.WriteString("    isAtBottom = scrollPosition >= bottomThreshold;\n")
 
+		// Check if all images are loaded whenever we're at the bottom
+		jsContent.WriteString("    if (isAtBottom) {\n")
+		jsContent.WriteString("      allImagesLoaded = checkAllImagesLoaded();\n")
+		jsContent.WriteString("    }\n")
+
 		// Only navigate if we just reached the bottom (not if we were already there)
 		jsContent.WriteString("    if (isAtBottom && !wasAtBottom) {\n")
 		jsContent.WriteString("      // Clear any existing timer\n")
 		jsContent.WriteString("      if (scrollTimer) clearTimeout(scrollTimer);\n")
 
-		// Set a timer to navigate after 300ms of being at the bottom
-		jsContent.WriteString("      scrollTimer = setTimeout(() => {\n")
-		jsContent.WriteString("        if (isAtBottom) {\n")
-		jsContent.WriteString("          window.location.href = '../" + strconv.Itoa(nextChunk) + "/';\n")
+		// Setup navigation countdown with status indicator
+		jsContent.WriteString("      // Create countdown indicator\n")
+		jsContent.WriteString("      const countdownIndicator = document.createElement('div');\n")
+		jsContent.WriteString("      countdownIndicator.id = 'navigation-countdown';\n")
+		jsContent.WriteString("      countdownIndicator.style.cssText = 'position:fixed;bottom:50px;right:10px;background:rgba(0,0,0,0.8);color:white;padding:8px;border-radius:4px;font-size:14px;z-index:9999;';\n")
+		jsContent.WriteString("      document.body.appendChild(countdownIndicator);\n")
+
+		jsContent.WriteString("      // Set up reliable navigation with 10 second countdown\n")
+		jsContent.WriteString("      let navigationStarted = false;\n")
+		jsContent.WriteString("      let countdownFinished = false;\n")
+		jsContent.WriteString("      let secondsLeft = 10;\n")
+		jsContent.WriteString("      countdownIndicator.textContent = `Next page in ${secondsLeft}s (waiting for images...)`;\n")
+
+		// Navigation function to ensure proper navigation after countdown
+		jsContent.WriteString("      // Function to handle the actual navigation\n")
+		jsContent.WriteString("      function navigateToNextPage() {\n")
+		jsContent.WriteString("        // Only navigate once\n")
+		jsContent.WriteString("        if (navigationStarted) return;\n")
+		jsContent.WriteString("        navigationStarted = true;\n")
+		jsContent.WriteString("        \n")
+		jsContent.WriteString("        // Double check images are loaded\n")
+		jsContent.WriteString("        const finalCheck = checkAllImagesLoaded();\n")
+		jsContent.WriteString("        if (!isAtBottom) {\n")
+		jsContent.WriteString("          // User scrolled away while waiting\n")
+		jsContent.WriteString("          if (document.body.contains(countdownIndicator)) {\n")
+		jsContent.WriteString("            document.body.removeChild(countdownIndicator);\n")
+		jsContent.WriteString("          }\n")
+		jsContent.WriteString("          return;\n")
 		jsContent.WriteString("        }\n")
-		jsContent.WriteString("      }, 300);\n")
+		jsContent.WriteString("        \n")
+		jsContent.WriteString("        if (finalCheck) {\n")
+		jsContent.WriteString("          // All images loaded, proceed to next page\n")
+		jsContent.WriteString("          countdownIndicator.textContent = 'Going to next page...';\n")
+		jsContent.WriteString("          // Short timeout to ensure UI updates before navigation\n")
+		jsContent.WriteString("          setTimeout(() => {\n")
+		jsContent.WriteString("            window.location.href = '../" + strconv.Itoa(nextChunk) + "/';\n")
+		jsContent.WriteString("          }, 100);\n")
+		jsContent.WriteString("        } else {\n")
+		jsContent.WriteString("          // Some images still loading, wait longer\n")
+		jsContent.WriteString("          countdownIndicator.textContent = 'Waiting for images to load (5s)...';\n")
+		jsContent.WriteString("          setTimeout(() => {\n")
+		jsContent.WriteString("            countdownIndicator.textContent = 'Going to next page...';\n")
+		jsContent.WriteString("            window.location.href = '../" + strconv.Itoa(nextChunk) + "/';\n")
+		jsContent.WriteString("          }, 5000);\n")
+		jsContent.WriteString("        }\n")
+		jsContent.WriteString("      }\n")
+
+		jsContent.WriteString("      // Use a precise timer for countdown\n")
+		jsContent.WriteString("      let startTime = Date.now();\n")
+		jsContent.WriteString("      const updateInterval = setInterval(() => {\n")
+		jsContent.WriteString("        // Calculate seconds based on elapsed time for accuracy\n")
+		jsContent.WriteString("        const elapsed = Math.floor((Date.now() - startTime) / 1000);\n")
+		jsContent.WriteString("        secondsLeft = Math.max(0, 10 - elapsed);\n")
+		jsContent.WriteString("        \n")
+		jsContent.WriteString("        if (secondsLeft <= 0) {\n")
+		jsContent.WriteString("          // Time's up - clear interval and navigate\n")
+		jsContent.WriteString("          clearInterval(updateInterval);\n")
+		jsContent.WriteString("          countdownFinished = true;\n")
+		jsContent.WriteString("          \n")
+		jsContent.WriteString("          // Only navigate if not already started\n")
+		jsContent.WriteString("          if (!navigationStarted) {\n")
+		jsContent.WriteString("            navigateToNextPage();\n")
+		jsContent.WriteString("          }\n")
+		jsContent.WriteString("        } else {\n")
+		jsContent.WriteString("          // Update display with current time\n")
+		jsContent.WriteString("          countdownIndicator.textContent = allImagesLoaded\n")
+		jsContent.WriteString("            ? `Next page in ${secondsLeft}s`\n")
+		jsContent.WriteString("            : `Next page in ${secondsLeft}s (waiting for images...)`;\n")
+		jsContent.WriteString("        }\n")
+		jsContent.WriteString("      }, 200); // Check more frequently for smoother countdown\n")
+
+		// Monitor scroll position for cancellation
+		jsContent.WriteString("      // Monitor scroll position to cancel if user scrolls away\n")
+		jsContent.WriteString("      const scrollMonitor = setInterval(() => {\n")
+		jsContent.WriteString("        if (!isAtBottom && !navigationStarted) {\n")
+		jsContent.WriteString("          // User scrolled away - cancel navigation\n")
+		jsContent.WriteString("          clearInterval(updateInterval);\n")
+		jsContent.WriteString("          clearInterval(scrollMonitor);\n")
+		jsContent.WriteString("          \n")
+		jsContent.WriteString("          // Remove countdown indicator\n")
+		jsContent.WriteString("          if (document.body.contains(countdownIndicator)) {\n")
+		jsContent.WriteString("            document.body.removeChild(countdownIndicator);\n")
+		jsContent.WriteString("          }\n")
+		jsContent.WriteString("        }\n")
+		jsContent.WriteString("      }, 200);\n")
+
+		// Store reference for cleanup
+		jsContent.WriteString("      // Store monitor reference for cleanup\n")
+		jsContent.WriteString("      scrollTimer = scrollMonitor;\n")
 		jsContent.WriteString("    } else if (!isAtBottom) {\n")
-		jsContent.WriteString("      // If we're not at the bottom anymore, clear the timer\n")
-		jsContent.WriteString("      if (scrollTimer) clearTimeout(scrollTimer);\n")
+		jsContent.WriteString("      // If we're not at the bottom anymore, clear all timers\n")
+		jsContent.WriteString("      if (scrollTimer) {\n")
+		jsContent.WriteString("        // Handle both interval and timeout cleanly\n")
+		jsContent.WriteString("        clearInterval(scrollTimer);\n")
+		jsContent.WriteString("        clearTimeout(scrollTimer);\n")
+		jsContent.WriteString("        scrollTimer = null;\n")
+		jsContent.WriteString("        \n")
+		jsContent.WriteString("        // Clear any other intervals that might be running\n")
+		jsContent.WriteString("        try {\n")
+		jsContent.WriteString("          for (let i = 1; i < 1000; i++) {\n")
+		jsContent.WriteString("            window.clearInterval(i);\n")
+		jsContent.WriteString("          }\n")
+		jsContent.WriteString("        } catch (e) {}\n")
+		jsContent.WriteString("        \n")
+		jsContent.WriteString("        // Remove countdown indicator if it exists\n")
+		jsContent.WriteString("        const indicator = document.getElementById('navigation-countdown');\n")
+		jsContent.WriteString("        if (indicator && indicator.parentNode) indicator.parentNode.removeChild(indicator);\n")
+		jsContent.WriteString("      }\n")
 		jsContent.WriteString("    }\n")
 		jsContent.WriteString("  });\n")
 	}
@@ -530,38 +869,11 @@ func generateChunkHTML(imageInfos []ImageInfo, outputPath string, totalChunks in
 	// Replace the appropriate part in the HTML template
 	var modifiedTemplate string
 
-	// Check for the INSERT placeholder
-	if strings.Contains(templateStr, "// INSERT") {
-		// Handle both formats of the INSERT placeholder
-		if isUpdatedTemplate {
-			// For the updated template with INSERT before basePath
-			modifiedTemplate = strings.Replace(templateStr, "// INSERT", jsContent.String(), 1)
-		} else {
-			// For the original template with INSERT as a separate line
-			modifiedTemplate = strings.Replace(templateStr, "// INSERT", jsContent.String(), 1)
-		}
-	} else {
-		// Find the script tag closing
-		scriptEndIndex := strings.Index(templateStr, "</script>")
-		if scriptEndIndex == -1 {
-			return fmt.Errorf("failed to find </script> tag in template")
-		}
-
-		// Try to find const images = []; and replace everything up to the script end
-		imagesDeclarationIndex := strings.Index(templateStr, "const images = [")
-		if imagesDeclarationIndex != -1 && imagesDeclarationIndex < scriptEndIndex {
-			// Replace everything from the images declaration to before the script closing
-			beforeImages := templateStr[:imagesDeclarationIndex]
-			afterScript := templateStr[scriptEndIndex:]
-			modifiedTemplate = beforeImages + jsContent.String() + afterScript
-		} else {
-			// Just insert before the script tag closes
-			modifiedTemplate = templateStr[:scriptEndIndex] + jsContent.String() + templateStr[scriptEndIndex:]
-		}
-	}
+	// Simply replace the INSERT placeholder with our JavaScript content
+	modifiedTemplate = strings.Replace(templateStr, "// INSERT", jsContent.String(), 1)
 
 	// Write the complete HTML to the output file
-	err = ioutil.WriteFile(outputPath, []byte(modifiedTemplate), 0644)
+	err := ioutil.WriteFile(outputPath, []byte(modifiedTemplate), 0644)
 	if err != nil {
 		return fmt.Errorf("failed to write HTML output to file %s: %w", outputPath, err)
 	}
@@ -577,7 +889,7 @@ func ensureCacheDir() error {
 }
 
 func getCacheFilename(imagePath string) string {
-	return getHashedCacheFilename(imagePath, "")
+	return getHashedCacheFilename(imagePath, ".blur")
 }
 
 func getDimensionsCacheFilename(imagePath string) string {
@@ -616,6 +928,7 @@ func generateMainIndex(numChunks int, totalImages int) error {
 	content.WriteString("<html>\n")
 	content.WriteString("<head>\n")
 	content.WriteString("  <title>Gallery Index</title>\n")
+	content.WriteString(fmt.Sprintf("  <script src=\"/gallery.js?cache=%d\"></script>\n", timestampCache))
 	content.WriteString("  <style>\n")
 	content.WriteString("    body { font-family: Arial, sans-serif; margin: 20px; background-color: #111; color: #eee; }\n")
 	content.WriteString("    h1 { color: #ddd; }\n")
@@ -663,25 +976,31 @@ func generateBlurmap(imagePath string) (string, int, int, error) {
 	width := bounds.Max.X - bounds.Min.X
 	height := bounds.Max.Y - bounds.Min.Y
 
-	// Calculate cell dimensions - use the minimum dimension to ensure square cells
-	cellSize := width
-	if height < width {
-		cellSize = height
-	}
+	// Calculate cell dimensions - use the full image dimensions
+	// Divide the width and height equally into 20 segments each
+	cellWidth := width / 20
+	cellHeight := height / 20
 
-	cellWidth := cellSize / 10
-	cellHeight := cellSize / 10
+	// Ensure minimum size of 1 pixel
+	if cellWidth < 1 {
+		cellWidth = 1
+	}
+	if cellHeight < 1 {
+		cellHeight = 1
+	}
 
 	var blurValues []string
 
-	// Process each of the 10x10 cells
-	for y := 0; y < 10; y++ {
-		for x := 0; x < 10; x++ {
+	// Process each of the 20x20 cells over the entire image (not just square portion)
+	for y := 0; y < 20; y++ {
+		for x := 0; x < 20; x++ {
 			// Calculate cell boundaries
 			startX := bounds.Min.X + x*cellWidth
 			startY := bounds.Min.Y + y*cellHeight
 			endX := startX + cellWidth
 			endY := startY + cellHeight
+
+			// Make sure we don't exceed the image bounds
 			if endX > bounds.Max.X {
 				endX = bounds.Max.X
 			}
@@ -698,15 +1017,15 @@ func generateBlurmap(imagePath string) (string, int, int, error) {
 		}
 	}
 
-	// Join all hex values into a single string (600 bytes total)
-	// Make sure we have exactly 100 values (10x10 grid)
-	if len(blurValues) != 100 {
+	// Join all hex values into a single string
+	// Make sure we have exactly 400 values (20x20 grid)
+	if len(blurValues) != 400 {
 		// Pad or truncate as needed
-		for len(blurValues) < 100 {
+		for len(blurValues) < 400 {
 			blurValues = append(blurValues, "000000") // Black
 		}
-		if len(blurValues) > 100 {
-			blurValues = blurValues[:100]
+		if len(blurValues) > 400 {
+			blurValues = blurValues[:400]
 		}
 	}
 
@@ -750,8 +1069,6 @@ func calculateAverageColor(img image.Image, startX, startY, endX, endY int) Aver
 		B: uint8(totalB / count),
 	}
 }
-
-// Removed generateJavaScriptIndex function as per requirements
 
 // getImageDimensions reads an image file and returns its width and height
 func getImageDimensions(imagePath string) (int, int, error) {

@@ -14,7 +14,7 @@ function getBlurhashByFilename(filename) {
 }
 
 // Function to render a blurhash grid on a canvas
-function renderBlurhashGrid(image, blurhash, dim = 10) {
+function renderBlurhashGrid(image, blurhash, dim = 20) {
   // Create a canvas element for the blurhash grid
   const canvas = document.createElement("canvas");
 
@@ -52,6 +52,7 @@ function renderBlurhashGrid(image, blurhash, dim = 10) {
   const ctx = canvas.getContext("2d");
 
   // Calculate expected blurhash length based on dimension: dim * dim * 3 * 2
+  // For 20x20 grid: 20 * 20 * 3 * 2 = 2400 bytes (800 hex triplets)
   const expectedLength = dim * dim * 3 * 2;
 
   // If no valid blurhash, fill with default orange
@@ -59,7 +60,7 @@ function renderBlurhashGrid(image, blurhash, dim = 10) {
     console.warn(
       `Invalid blurhash (length: ${
         blurhash ? blurhash.length : 0
-      }), expected ${expectedLength} chars. Using orange fallback`
+      }), expected ${expectedLength} chars. Using orange fallback`,
     );
     ctx.fillStyle = "#FF8C00";
     ctx.fillRect(0, 0, width, width);
@@ -122,12 +123,12 @@ function renderBlurhashGrid(image, blurhash, dim = 10) {
         0,
         centerX,
         centerY,
-        radius
+        radius,
       );
       gradient.addColorStop(0, `rgba(${color.r}, ${color.g}, ${color.b}, 0.8)`); // Reduced opacity
       gradient.addColorStop(
         0.5,
-        `rgba(${color.r}, ${color.g}, ${color.b}, 0.4)`
+        `rgba(${color.r}, ${color.g}, ${color.b}, 0.4)`,
       );
       gradient.addColorStop(1, `rgba(${color.r}, ${color.g}, ${color.b}, 0)`);
 
@@ -269,79 +270,213 @@ function generateGrid() {
   // Reference to the table body
   const tableBody = document.getElementById("table-body");
 
-  // Randomly select images for the gallery
-  const selectedImages =
-    selectMode == "yes"
-      ? images
-      : Array.from({ length: images.length }, () => {
-          return images[Math.floor(Math.random() * images.length)];
-        });
+  // Use the shuffled images array that's already prepared
+  const selectedImages = window.images || [];
 
   const userAgent = navigator.userAgent || navigator.vendor || window.opera;
   const isMobile =
     /android|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(
-      userAgent.toLowerCase()
+      userAgent.toLowerCase(),
     );
 
   if (isMobile) {
-    numColumns = Math.floor(window.innerWidth / 490);
+    window.numColumns = Math.floor(window.innerWidth / 490);
   } else {
-    numColumns = Math.floor(window.innerWidth / 300);
+    window.numColumns = Math.floor(window.innerWidth / 300);
   }
 
-  // Initialize an array to hold columns
-  const columns = Array.from({ length: numColumns }, () => {
+  // Make sure we have at least 1 column
+  if (window.numColumns < 1) window.numColumns = 1;
+
+  // Initialize an array to hold columns and their heights
+  const columns = Array.from({ length: window.numColumns }, () => {
     const td = document.createElement("td");
     td.setAttribute("valign", "top");
     td.style.textAlign = "center";
     const div = document.createElement("div");
     div.className = "image-container";
     td.appendChild(div);
-    return td;
+    return {
+      element: td,
+      totalHeight: 0, // Track the total height of images in this column
+    };
   });
 
-  // Distribute selected images round-robin across the columns
+  // Calculate the standard image width
+  const standardWidth = Math.floor(window.innerWidth / window.numColumns) - 5;
+
+  // First pass: Distribute images to columns using the greedy algorithm
+  // Keep track of images placed in each column
+  const columnImages = Array.from({ length: window.numColumns }, () => []);
+
   selectedImages.forEach((image, index) => {
     const img = document.createElement("img");
     img.id = `img-${index}`;
     img.className = "lazyload";
-    img.width = Math.floor(window.innerWidth / numColumns) - 5;
-    img.dataset.src = `${basePath}/${image.filename}`;
+    img.width = standardWidth;
+
+    // Choose image path based on column count: use 'replicate/img' when only 1 column, otherwise use default path
+    const imagePath = window.numColumns === 1 ? "/replicate/img" : basePath;
+    img.dataset.src = `${imagePath}/${image.filename}`;
     img.dataset.filename = image.filename;
     img.style.border = "none";
     img.style.outline = "none";
 
-    // First try to get dimensions from blurhashIndex, then fall back to image object
-    const imgData =
-      window.blurhashIndex[image.filename] ||
-      window.blurhashIndex[image.filename.split("/").pop()];
+    // Determine image height based on aspect ratio
+    let aspectRatio = 1; // Default square aspect ratio
+    let imgHeight = standardWidth; // Default height equal to width
 
-    if (imgData && imgData.width && imgData.height) {
-      // Use dimensions from blurhashIndex
-      const aspectRatio = imgData.width / imgData.height;
-      img.style.aspectRatio = `${aspectRatio}`;
-      img.height = Math.floor(img.width / aspectRatio);
-    } else if (image.width && image.height) {
-      // Fall back to dimensions from the image object if available
-      const aspectRatio = image.width / image.height;
-      img.style.aspectRatio = `${aspectRatio}`;
-      img.height = Math.floor(img.width / aspectRatio);
-    } else {
-      img.height = "auto";
+    // First try to get dimensions from the image object which now includes width and height
+    if (image.width && image.height) {
+      aspectRatio = image.width / image.height;
     }
+    // Then try blurhashIndex if needed
+    else {
+      const imgData =
+        window.blurhashIndex[image.filename] ||
+        window.blurhashIndex[image.filename.split("/").pop()];
+
+      if (imgData && imgData.width && imgData.height) {
+        aspectRatio = imgData.width / imgData.height;
+      }
+    }
+
+    // Set the image height based on aspect ratio
+    imgHeight = Math.floor(standardWidth / aspectRatio);
+    img.style.aspectRatio = `${aspectRatio}`;
+    img.height = imgHeight;
+
     img.onclick = () => toggleVisibility(img);
 
-    // Append the image to the appropriate column
-    columns[index % numColumns].appendChild(img);
+    // Store the calculated height
+    const imgInfo = {
+      element: img,
+      height: imgHeight,
+      aspectRatio: aspectRatio,
+    };
 
-    // Add a line break after each image
-    columns[index % numColumns].appendChild(document.createElement("br"));
+    // Find the column with the smallest total height
+    let shortestColumn = 0;
+    let shortestHeight = columns[0].totalHeight;
+    for (let i = 1; i < columns.length; i++) {
+      if (columns[i].totalHeight < shortestHeight) {
+        shortestColumn = i;
+        shortestHeight = columns[i].totalHeight;
+      }
+    }
+
+    // Add image to the column tracking array
+    columnImages[shortestColumn].push(imgInfo);
+
+    // Update the column's total height
+    columns[shortestColumn].totalHeight += imgHeight + 5; // 5px for spacing
+  });
+
+  // Find the tallest column height for reference
+  const tallestColumnHeight = Math.max(
+    ...columns.map((col) => col.totalHeight),
+  );
+  console.log("Tallest column height:", tallestColumnHeight);
+
+  // Calculate the content height of each column based on images
+  columns.forEach((column, colIndex) => {
+    const imagesInColumn = columnImages[colIndex] || [];
+    // Calculate height from images and line breaks
+    let totalContentHeight = 0;
+
+    // Sum up actual image heights
+    imagesInColumn.forEach((img) => {
+      if (img && img.height) {
+        totalContentHeight += img.height;
+      }
+    });
+
+    // Add line break heights (only count breaks if we have images)
+    if (imagesInColumn.length > 0) {
+      totalContentHeight += imagesInColumn.length * 5; // 5px per line break
+    }
+
+    // Store the actual content height
+    column.contentHeight = totalContentHeight;
+  });
+
+  // Find the tallest column content height
+  const tallestContentHeight = Math.max(
+    ...columns.map((col) => col.contentHeight || 0),
+  );
+  console.log("Tallest content height:", tallestContentHeight);
+
+  // Second pass: Add content to the DOM with pixel-by-pixel distribution after each image
+  columns.forEach((column, colIndex) => {
+    const images = columnImages[colIndex] || [];
+    if (images.length === 0) return; // Skip empty columns
+
+    // Calculate the height gap needed for this column
+    const heightGap = Math.max(0, tallestContentHeight - column.contentHeight);
+    console.log(
+      `Column ${colIndex}: gap to fill: ${heightGap}px, images: ${images.length}`,
+    );
+
+    if (heightGap <= 0) {
+      // This is already the tallest column, no spacing needed
+      images.forEach((imgInfo) => {
+        column.element.appendChild(imgInfo.element);
+        column.element.appendChild(document.createElement("br"));
+      });
+    } else if (images.length === 1) {
+      // For a single image, we have no choice but to add spacing at the bottom
+      column.element.appendChild(images[0].element);
+      column.element.appendChild(document.createElement("br"));
+
+      // Add the gap at the bottom
+      const spacer = document.createElement("div");
+      spacer.style.height = `${heightGap}px`;
+      column.element.appendChild(spacer);
+    } else {
+      // For multiple images, we'll distribute the gap incrementally after each image
+
+      // Calculate how much spacing to add after each image
+      // We have (images.length - 1) positions to add spacing after
+      const pixelsPerImage = Math.floor(heightGap / (images.length - 1));
+      let remainingPixels = heightGap - pixelsPerImage * (images.length - 1);
+
+      // Add images with incremental spacing
+      images.forEach((imgInfo, imgIndex) => {
+        // Add the image
+        column.element.appendChild(imgInfo.element);
+        column.element.appendChild(document.createElement("br"));
+
+        // Add spacing after each image except the last one
+        if (imgIndex < images.length - 1) {
+          let thisSpacing = pixelsPerImage;
+
+          // Distribute remaining pixels one by one
+          if (remainingPixels > 0) {
+            thisSpacing++;
+            remainingPixels--;
+          }
+
+          // Add a spacer with the calculated height
+          if (thisSpacing > 0) {
+            const spacer = document.createElement("div");
+            spacer.style.height = `${thisSpacing}px`;
+            column.element.appendChild(spacer);
+          }
+        }
+      });
+    }
   });
 
   // Create a row and append the columns to it
   const row = document.createElement("tr");
-  columns.forEach((column) => row.appendChild(column));
+  columns.forEach((column) => row.appendChild(column.element));
   tableBody.appendChild(row);
+
+  // Log the adjusted column heights
+  console.log(
+    "Final column heights after gap distribution:",
+    columns.map((col) => col.totalHeight),
+  );
 }
 
 function logFullyVisibleImages() {
@@ -398,8 +533,9 @@ function scrollToPartialImage() {
     (img, index, self) =>
       index ===
       self.findIndex(
-        (t) => t.getBoundingClientRect().top === img.getBoundingClientRect().top
-      )
+        (t) =>
+          t.getBoundingClientRect().top === img.getBoundingClientRect().top,
+      ),
   );
 
   // If there are partially visible images, scroll to the first one
@@ -425,7 +561,7 @@ function toggleVisibility(element) {
       `select-${selectMode}?filename=${element.getAttribute("data-filename")}`,
       {
         mode: "no-cors",
-      }
+      },
     )
       .then((response) => response.text())
       .then((data) => console.log(data))
@@ -450,7 +586,7 @@ function toggleHidden(element) {
 
     if (blurhash) {
       // Create and render the blurhash canvas
-      const canvas = renderBlurhashGrid(element, blurhash, 10);
+      const canvas = renderBlurhashGrid(element, blurhash, 20);
       canvas.classList.add("toggle-blur");
 
       // Position canvas over the image
@@ -628,7 +764,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const loadImage = (lazyImage) => {
       inflightRequests++;
       console.log(
-        `Loading image: ${lazyImage.dataset.filename} (${inflightRequests} in flight)`
+        `Loading image: ${lazyImage.dataset.filename} (${inflightRequests} in flight)`,
       );
 
       // Add onload handler to fade in the image
@@ -642,7 +778,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const actualAspectRatio = actualWidth / actualHeight;
 
         console.log(
-          `Actual image dimensions: ${actualWidth}x${actualHeight}, aspect ratio: ${actualAspectRatio}`
+          `Actual image dimensions: ${actualWidth}x${actualHeight}, aspect ratio: ${actualAspectRatio}`,
         );
 
         // Check if we had the correct aspect ratio from metadata
@@ -744,7 +880,7 @@ document.addEventListener("DOMContentLoaded", () => {
         wrapper.style.lineHeight = "0"; // Remove any line height spacing
 
         // Render blurhash canvas
-        const canvas = renderBlurhashGrid(lazyImage, blurhash, 10);
+        const canvas = renderBlurhashGrid(lazyImage, blurhash, 20);
 
         // Replace the image with the wrapper containing both canvas and image
         lazyImage.parentNode.insertBefore(wrapper, lazyImage);
@@ -791,7 +927,7 @@ document.addEventListener("DOMContentLoaded", () => {
       {
         rootMargin: "0px", // Only process currently visible images
         threshold: 0.01, // Trigger when even a small portion (1%) is visible for faster rendering
-      }
+      },
     );
 
     // Second observer handles images approaching the viewport (immediately without delay)
@@ -815,7 +951,7 @@ document.addEventListener("DOMContentLoaded", () => {
       {
         rootMargin: `${window.innerHeight}px`, // Use full screen height as margin for preloading
         threshold: 0, // Trigger as soon as any part intersects with the expanded margin
-      }
+      },
     );
 
     // Create separate observers for immediately visible vs upcoming images
@@ -838,7 +974,7 @@ document.addEventListener("DOMContentLoaded", () => {
       {
         rootMargin: "0px", // Only currently visible images
         threshold: 0.1, // 10% of the image must be visible - reduced to catch more visible images
-      }
+      },
     );
 
     // Lower priority observer - queues images that are approaching the viewport
@@ -871,7 +1007,7 @@ document.addEventListener("DOMContentLoaded", () => {
       {
         rootMargin: "100px", // Images approaching the viewport
         threshold: 0, // Trigger as soon as any part intersects
-      }
+      },
     );
 
     // Observe all lazyload images with all observers
@@ -942,7 +1078,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     console.log(
-      `[Autoscroll] Viewport images check: ${loadingCount} of ${fullyVisibleCount} fully visible images still loading`
+      `[Autoscroll] Viewport images check: ${loadingCount} of ${fullyVisibleCount} fully visible images still loading`,
     );
     return allLoaded;
   }
@@ -954,7 +1090,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // First check if all viewport images are loaded
     if (!areAllViewportImagesLoaded()) {
       console.log(
-        "[Autoscroll] Waiting for all viewport images to load before scrolling"
+        "[Autoscroll] Waiting for all viewport images to load before scrolling",
       );
       return false; // Return false to indicate scroll was not performed
     }
@@ -1025,7 +1161,7 @@ document.addEventListener("DOMContentLoaded", () => {
           console.log(
             `[Autoscroll] Next wait time: ${newWaitTime}ms (${visibleImages} images / ${IMAGES_PER_SECOND} = ${
               visibleImages / IMAGES_PER_SECOND
-            } seconds, rounded up, plus 1 second)`
+            } seconds, rounded up, plus 1 second)`,
           );
 
           // Only update interval if wait time has changed significantly
@@ -1037,7 +1173,7 @@ document.addEventListener("DOMContentLoaded", () => {
               clearInterval(autoscrollInterval);
               autoscrollInterval = setInterval(scroll, newWaitTime);
               console.log(
-                `[Autoscroll] Timer updated with ${newWaitTime}ms interval`
+                `[Autoscroll] Timer updated with ${newWaitTime}ms interval`,
               );
             }
           }
@@ -1064,7 +1200,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // Add keyboard event listener
   document.addEventListener("keydown", (event) => {
     console.log(
-      `[Keyboard] Key pressed: ${event.key} (keyCode: ${event.keyCode})`
+      `[Keyboard] Key pressed: ${event.key} (keyCode: ${event.keyCode})`,
     );
 
     if (event.key === "s" || event.key === "S") {
@@ -1102,7 +1238,7 @@ document.addEventListener("DOMContentLoaded", () => {
         autoStartTimer = null;
       }
     },
-    { once: true }
+    { once: true },
   ); // Remove listener after first key press
 
   // Add wheel event listener to prevent scrolling when images are loading
@@ -1111,11 +1247,11 @@ document.addEventListener("DOMContentLoaded", () => {
     (event) => {
       if (!areAllViewportImagesLoaded()) {
         console.log(
-          "[Manual Scroll] Preventing wheel scroll - images still loading"
+          "[Manual Scroll] Preventing wheel scroll - images still loading",
         );
         event.preventDefault();
       }
     },
-    { passive: false }
+    { passive: false },
   );
 });
