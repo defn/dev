@@ -422,6 +422,11 @@ function generateGrid() {
   );
   console.log("Tallest content height:", tallestContentHeight);
 
+  // navigation display: Create a global mapping of images to their positions in the final layout
+  // This will be used to calculate the correct image index when displaying navigation
+  window.imagePositionMap = new Map();
+  let globalImageIndex = 0;
+
   // Second pass: Add content to the DOM with pixel-by-pixel distribution after each image
   columns.forEach((column, colIndex) => {
     const images = columnImages[colIndex] || [];
@@ -435,12 +440,28 @@ function generateGrid() {
 
     if (heightGap <= 0) {
       // This is already the tallest column, no spacing needed
-      images.forEach((imgInfo) => {
+      images.forEach((imgInfo, imgIndex) => {
+        // Store the position data for this image in our global map
+        window.imagePositionMap.set(imgInfo.element.id, {
+          columnIndex: colIndex,
+          indexInColumn: imgIndex,
+          globalIndex: globalImageIndex++,
+          yPosition: 0, // Will be calculated after layout
+        });
+
         column.element.appendChild(imgInfo.element);
         column.element.appendChild(document.createElement("br"));
       });
     } else if (images.length === 1) {
       // For a single image, we have no choice but to add spacing at the bottom
+      // Store position data
+      window.imagePositionMap.set(images[0].element.id, {
+        columnIndex: colIndex,
+        indexInColumn: 0,
+        globalIndex: globalImageIndex++,
+        yPosition: 0, // Will be calculated after layout
+      });
+
       column.element.appendChild(images[0].element);
       column.element.appendChild(document.createElement("br"));
 
@@ -458,6 +479,14 @@ function generateGrid() {
 
       // Add images with incremental spacing
       images.forEach((imgInfo, imgIndex) => {
+        // Store position data for this image
+        window.imagePositionMap.set(imgInfo.element.id, {
+          columnIndex: colIndex,
+          indexInColumn: imgIndex,
+          globalIndex: globalImageIndex++,
+          yPosition: 0, // Will be calculated after layout
+        });
+
         // Add the image
         column.element.appendChild(imgInfo.element);
         column.element.appendChild(document.createElement("br"));
@@ -493,6 +522,29 @@ function generateGrid() {
     "Final column heights after gap distribution:",
     columns.map((col) => col.totalHeight),
   );
+
+  // navigation display: Calculate total pages based on tallest column height and viewport height
+  setTimeout(() => {
+    // Find the tallest column after all DOM updates
+    let tallestColumnAfterLayout = 0;
+    columns.forEach((column) => {
+      const columnHeight = column.element.offsetHeight;
+      if (columnHeight > tallestColumnAfterLayout) {
+        tallestColumnAfterLayout = columnHeight;
+      }
+    });
+
+    // Calculate total pages based on tallest column height and viewport height
+    const viewportHeight = window.innerHeight;
+    window.totalPages = Math.ceil(tallestColumnAfterLayout / viewportHeight);
+
+    console.log(
+      `[Navigation] Column height: ${tallestColumnAfterLayout}px, Viewport height: ${viewportHeight}px, Total pages: ${window.totalPages}`,
+    );
+
+    // Update the display after calculating total pages
+    window.updateNavigationDisplay();
+  }, 500);
 }
 
 function logFullyVisibleImages() {
@@ -729,6 +781,43 @@ window.addEventListener("load", () => {
   });
 });
 
+// navigation display: Update page calculations when window is resized
+window.addEventListener("resize", () => {
+  // Debounce the resize event to avoid excessive calculations
+  if (window.resizeTimeout) {
+    clearTimeout(window.resizeTimeout);
+  }
+
+  window.resizeTimeout = setTimeout(() => {
+    console.log("[Navigation] Recalculating page counts after resize");
+
+    // Recalculate the total pages based on document height and viewport height
+    const documentHeight = Math.max(
+      document.body.scrollHeight,
+      document.documentElement.scrollHeight,
+    );
+    const viewportHeight = window.innerHeight;
+
+    // Update total pages
+    window.totalPages = Math.ceil(documentHeight / viewportHeight);
+
+    // Recalculate current relative page
+    const scrollPosition = window.pageYOffset;
+    const scrollPercentage = scrollPosition / (documentHeight - viewportHeight);
+    window.relativePage = Math.min(
+      Math.max(1, Math.ceil(scrollPercentage * window.totalPages)),
+      window.totalPages,
+    );
+
+    console.log(
+      `[Navigation] After resize: Document height: ${documentHeight}px, Viewport: ${viewportHeight}px, Total pages: ${window.totalPages}, Current page: ${window.relativePage}`,
+    );
+
+    // Update display
+    window.updateNavigationDisplay();
+  }, 250); // Wait 250ms after resize stops before recalculating
+});
+
 // Create a global function to stop autoscrolling - this will be accessible from anywhere
 window.stopAutoscroll = function () {
   // Only proceed if we're in a document with autoscrolling
@@ -802,6 +891,22 @@ document.addEventListener("DOMContentLoaded", () => {
   const tableBody = document.getElementById("table-body");
   const overlay = document.getElementById("overlay");
 
+  // Check URL parameters for privacy mode
+  try {
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.has("noprivacy") || urlParams.has("public")) {
+      // Disable privacy mode if ?noprivacy or ?public is in the URL
+      window.privacyMode = false;
+      console.log("[Privacy] Privacy mode disabled from URL parameter");
+    } else {
+      // Privacy mode is already enabled by default
+      console.log("[Privacy] Privacy mode enabled by default");
+      // Privacy mode will be applied by the intersection observer as images come into view
+    }
+  } catch (e) {
+    console.error("[Privacy] Error parsing URL parameters:", e);
+  }
+
   // Remove any navigation controls from previous runs or created by blurmap.go
   const oldNav = document.getElementById("navigation-control");
   if (oldNav) oldNav.remove();
@@ -838,7 +943,13 @@ document.addEventListener("DOMContentLoaded", () => {
   window.navigationControl.style.position = "fixed";
   window.navigationControl.style.bottom = "10px";
   window.navigationControl.style.right = "10px";
-  window.navigationControl.style.backgroundColor = "rgba(139, 0, 0, 0.7)"; // Dark red when autoscroll disabled
+  // Set background color based on privacy and autoscroll state
+  if (window.privacyMode) {
+    window.navigationControl.style.backgroundColor = "rgba(128, 0, 128, 0.7)"; // Purple for privacy mode
+  } else {
+    window.navigationControl.style.backgroundColor = "rgba(139, 0, 0, 0.7)"; // Dark red when autoscroll disabled
+  }
+
   window.navigationControl.style.color = "white";
   window.navigationControl.style.padding = "5px 10px";
   window.navigationControl.style.borderRadius = "4px";
@@ -851,19 +962,15 @@ document.addEventListener("DOMContentLoaded", () => {
   window.navigationControl.style.lineHeight = "24px"; // Match the increased height of navigation buttons
   document.body.appendChild(window.navigationControl);
 
-  // Track navigation data on window object to make them globally accessible
-  window.currentPage = 1;
-  window.currentImageNumber = 1;
-  window.totalImages = 0; // Will be calculated
+  // navigation display: Track navigation data on window object to make them globally accessible
+  window.currentPage = 1; // URL page number
+  window.relativePage = 1; // Calculated scroll position relative to total page count
+  window.totalPages = 0; // Will be calculated based on column height and viewport height
   window.countdownValue = null;
+  window.privacyMode = true; // Privacy mode toggle - ENABLED by default
 
   // Function to update the navigation display - make it globally accessible
   window.updateNavigationDisplay = function () {
-    // Calculate total images if not done yet
-    if (window.totalImages === 0 && window.images) {
-      window.totalImages = window.images.length;
-    }
-
     // Clear any existing content in navigation control
     while (window.navigationControl.firstChild) {
       window.navigationControl.removeChild(window.navigationControl.firstChild);
@@ -892,13 +999,13 @@ document.addEventListener("DOMContentLoaded", () => {
     // Add middle content
     const mainContent = document.createElement("span");
     mainContent.style.margin = "0 5px";
-    mainContent.style.minWidth = "70px"; // Ensures consistent width
+    mainContent.style.minWidth = "80px"; // Ensures consistent width
     mainContent.style.textAlign = "center";
     mainContent.style.display = "inline-block";
     mainContent.style.verticalAlign = "middle"; // Align with the larger buttons
 
-    // Set the text content
-    mainContent.textContent = `${window.currentPage} : ${window.currentImageNumber}/${window.totalImages}`;
+    // navigation display: set the text content showing URL page number and relative page position
+    mainContent.textContent = `${window.currentPage} : ${window.relativePage}/${window.totalPages}`;
     if (window.countdownValue !== null) {
       mainContent.textContent += ` ${window.countdownValue}s`;
     }
@@ -970,6 +1077,7 @@ document.addEventListener("DOMContentLoaded", () => {
   function calculateImagePositions() {
     const images = Array.from(document.querySelectorAll("img"));
     if (images.length > 0) {
+      // navigation display: Set total images for navigation counter
       window.totalImages = images.length;
       window.updateNavigationDisplay();
     }
@@ -978,22 +1086,35 @@ document.addEventListener("DOMContentLoaded", () => {
   // Initialize navigation
   setTimeout(calculateImagePositions, 500);
 
-  // Add scroll listener to update navigation
+  // navigation display: Add scroll listener to update navigation
   window.addEventListener("scroll", () => {
-    // Find current visible image - only update image number, not page number
-    const images = Array.from(document.querySelectorAll("img"));
-    const viewportTop = window.pageYOffset;
-    const viewportBottom = viewportTop + window.innerHeight;
+    // Calculate relative page position based on scroll position and total column height
+    const scrollPosition = window.pageYOffset;
+    const viewportHeight = window.innerHeight;
+    const documentHeight = Math.max(
+      document.body.scrollHeight,
+      document.documentElement.scrollHeight,
+    );
 
-    // Find first visible image
-    for (let i = 0; i < images.length; i++) {
-      const img = images[i];
-      const rect = img.getBoundingClientRect();
-      if (rect.top >= 0 && rect.top < window.innerHeight) {
-        window.currentImageNumber = i + 1;
-        break;
-      }
+    // Calculate current page position (1-based)
+    const scrollPercentage = scrollPosition / (documentHeight - viewportHeight);
+    if (window.totalPages > 0) {
+      window.relativePage = Math.min(
+        Math.max(1, Math.ceil(scrollPercentage * window.totalPages)),
+        window.totalPages,
+      );
+    } else {
+      // Fallback if total pages calculation hasn't completed yet
+      window.relativePage = 1;
     }
+
+    // Debug log
+    console.log(
+      `[Navigation] Scroll: ${Math.round(scrollPercentage * 100)}%, Page: ${window.relativePage}/${window.totalPages}`,
+    );
+
+    // Update the navigation display
+    window.updateNavigationDisplay();
 
     // Page number always stays fixed at URL page number (initialized earlier)
     // window.currentPage = getPageNumberFromURL(); // This happens only once at load
@@ -1028,6 +1149,89 @@ document.addEventListener("DOMContentLoaded", () => {
     const maxInflightRequests = numColumns * 3;
     const imageLoadQueue = []; // Queue for pending image loads
 
+    // Set up global privacy observer to handle images as they become visible
+    if (window.privacyMode) {
+      window.privacyObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting && window.privacyMode) {
+              const img = entry.target;
+              // Only apply to loaded images that aren't failed
+              if (!img.classList.contains("load-failed")) {
+                if (img.complete && img.naturalWidth !== 0) {
+                  // Image is already loaded, apply blurhash immediately
+                  showBlurhash(img);
+                } else {
+                  // Image is still loading, set up a load listener
+                  img.addEventListener(
+                    "load",
+                    function onImgLoad() {
+                      if (
+                        window.privacyMode &&
+                        !img.classList.contains("load-failed")
+                      ) {
+                        showBlurhash(img);
+                      }
+                      img.removeEventListener("load", onImgLoad);
+                    },
+                    { once: true },
+                  );
+                }
+              }
+              window.privacyObserver.unobserve(img);
+            }
+          });
+        },
+        { rootMargin: "200px" },
+      );
+
+      // Start observing all images on the page
+      document.querySelectorAll("img").forEach((img) => {
+        if (!img.classList.contains("load-failed")) {
+          window.privacyObserver.observe(img);
+        }
+      });
+
+      // Also check new images as they're added to the DOM via MutationObserver
+      const privacyMutationObserver = new MutationObserver((mutations) => {
+        mutations.forEach((mutation) => {
+          if (mutation.type === "childList") {
+            mutation.addedNodes.forEach((node) => {
+              // If we added an image directly
+              if (node.nodeName === "IMG") {
+                window.privacyObserver.observe(node);
+              }
+              // Or if we added a container that might contain images
+              else if (node.querySelectorAll) {
+                node.querySelectorAll("img").forEach((img) => {
+                  window.privacyObserver.observe(img);
+                });
+              }
+            });
+          }
+        });
+      });
+
+      // Observe the entire document for added images
+      privacyMutationObserver.observe(document.body, {
+        childList: true,
+        subtree: true,
+      });
+    }
+
+    // Function to handle newly loaded images when in privacy mode
+    const handlePrivacyForNewlyLoadedImage = (img) => {
+      if (
+        window.privacyMode &&
+        img &&
+        img.complete &&
+        !img.classList.contains("load-failed")
+      ) {
+        // Apply blurhash to this newly loaded image
+        showBlurhash(img);
+      }
+    };
+
     // Function to process the next image in the queue if under the cap
     const processImageLoadQueue = () => {
       // If we're under the cap and have images to load, load the next one
@@ -1051,6 +1255,21 @@ document.addEventListener("DOMContentLoaded", () => {
         });
 
         const nextImageToLoad = imageLoadQueue.shift();
+
+        // Check if we need to apply privacy mode as soon as it loads
+        if (window.privacyMode) {
+          // Add a listener to apply privacy blur as soon as the image is loaded
+          if (!nextImageToLoad._privacyListenerAdded) {
+            nextImageToLoad._privacyListenerAdded = true;
+            nextImageToLoad.addEventListener("load", () => {
+              // Apply privacy mode when the image loads
+              if (window.privacyMode) {
+                setTimeout(() => showBlurhash(nextImageToLoad), 10);
+              }
+            });
+          }
+        }
+
         loadImage(nextImageToLoad);
       }
     };
@@ -1095,25 +1314,45 @@ document.addEventListener("DOMContentLoaded", () => {
         lazyImage.style.aspectRatio = `${actualAspectRatio}`;
         lazyImage.style.objectFit = "contain"; // Show full image without cropping
 
-        // Fade in the image with a transition
-        lazyImage.style.transition = "opacity 0.5s ease-in-out";
-        lazyImage.style.opacity = "1";
+        // Check privacy mode status
+        if (window.privacyMode) {
+          console.log(
+            `[Privacy] Applying privacy mode to loaded image: ${filename}`,
+          );
 
-        // Fade out the canvas if it exists (parent of the image is the wrapper)
-        if (
-          lazyImage.parentNode &&
-          lazyImage.parentNode.querySelector("canvas")
-        ) {
-          const canvas = lazyImage.parentNode.querySelector("canvas");
-          canvas.style.transition = "opacity 0.5s ease-in-out";
-          canvas.style.opacity = "0";
+          // In privacy mode, keep the blurhash visible
+          // Apply the blurhash if not already present
+          const wrapper = lazyImage.parentNode;
+          const hasBlur =
+            wrapper && wrapper.querySelector("canvas.privacy-blur");
 
-          // Remove the canvas after transition
-          setTimeout(() => {
-            if (canvas.parentNode) {
-              canvas.parentNode.removeChild(canvas);
-            }
-          }, 500);
+          if (!hasBlur) {
+            // Apply proper timing to ensure elements are ready
+            setTimeout(() => showBlurhash(lazyImage), 10);
+          }
+        } else {
+          // Normal mode - show the image
+          lazyImage.style.transition = "opacity 0.5s ease-in-out";
+          lazyImage.style.opacity = "1";
+
+          // Fade out the canvas if it exists (parent of the image is the wrapper)
+          if (
+            lazyImage.parentNode &&
+            lazyImage.parentNode.querySelector("canvas:not(.privacy-blur)")
+          ) {
+            const canvas = lazyImage.parentNode.querySelector(
+              "canvas:not(.privacy-blur)",
+            );
+            canvas.style.transition = "opacity 0.5s ease-in-out";
+            canvas.style.opacity = "0";
+
+            // Remove the canvas after transition
+            setTimeout(() => {
+              if (canvas && canvas.parentNode) {
+                canvas.parentNode.removeChild(canvas);
+              }
+            }, 500);
+          }
         }
 
         // Reduce the in-flight counter and process the next image
@@ -1128,23 +1367,89 @@ document.addEventListener("DOMContentLoaded", () => {
 
       // Handle image loading errors
       lazyImage.onerror = () => {
-        const retryCount = parseInt(lazyImage.dataset.retryCount);
+        const retryCount = parseInt(lazyImage.dataset.retryCount || "0");
         console.error(
           `Failed to load image: ${lazyImage.dataset.filename} (attempt ${retryCount + 1})`,
         );
 
-        // Try once more before giving up
-        if (retryCount < 1) {
-          console.log(`Retrying image: ${lazyImage.dataset.filename}`);
-          lazyImage.dataset.retryCount = "1";
+        // Try up to 3 times before giving up
+        if (retryCount < 3) {
+          const newRetryCount = retryCount + 1;
+          console.log(
+            `Retrying image: ${lazyImage.dataset.filename} (attempt ${newRetryCount})`,
+          );
+          lazyImage.dataset.retryCount = newRetryCount.toString();
 
-          // Add a slight delay before retrying
+          // Add increasing delay before each retry
           setTimeout(() => {
-            lazyImage.src = lazyImage.dataset.src + "?retry=1"; // Add query param to avoid cache
-          }, 500);
+            // Add random query param to avoid cache issues
+            const cacheBuster = `?retry=${newRetryCount}&t=${Date.now()}`;
+            lazyImage.src = lazyImage.dataset.src + cacheBuster;
+          }, 500 * newRetryCount); // Gradually increase the retry delay
         } else {
-          // Mark image as failed after retry
+          // Mark image as failed after maximum retries
+          console.log(
+            `Maximum retries reached for ${lazyImage.dataset.filename}, showing blurhash fallback`,
+          );
           lazyImage.classList.add("load-failed");
+
+          // Always show blurhash for failed images regardless of privacy mode
+          const filename = lazyImage.dataset.filename;
+          const blurhash = getBlurhashByFilename(filename);
+
+          if (blurhash) {
+            // Create wrapper if needed and add blurhash canvas
+            let wrapper = lazyImage.parentNode;
+            if (!wrapper || wrapper.style.position !== "relative") {
+              wrapper = document.createElement("div");
+              wrapper.style.position = "relative";
+              wrapper.style.display = "inline-block";
+              wrapper.style.width = "100%";
+              if (lazyImage.parentNode) {
+                lazyImage.parentNode.insertBefore(wrapper, lazyImage);
+                wrapper.appendChild(lazyImage);
+              }
+            }
+
+            // Remove any existing canvas
+            const existingCanvas = wrapper.querySelector("canvas");
+            if (existingCanvas) existingCanvas.remove();
+
+            // Create and render the blurhash canvas
+            const canvas = renderBlurhashGrid(lazyImage, blurhash, 20);
+            canvas.classList.add("failed-image-blur");
+
+            // Position canvas over the image
+            canvas.style.position = "absolute";
+            canvas.style.top = "0";
+            canvas.style.left = "0";
+            canvas.style.width = "100%";
+            canvas.style.height = "100%";
+            canvas.style.zIndex = "3"; // Above the image
+
+            // Add the canvas to the wrapper
+            wrapper.appendChild(canvas);
+
+            // Hide the broken image
+            lazyImage.style.opacity = "0";
+          } else {
+            // Fallback if no blurhash available
+            lazyImage.style.display = "none";
+
+            // Create a fallback colored div
+            const fallback = document.createElement("div");
+            fallback.style.backgroundColor = "#FF8C00"; // Orange fallback color
+            fallback.style.width = "100%";
+            fallback.style.height = "100%";
+            fallback.style.position = "relative";
+            fallback.style.minHeight = "200px";
+
+            // Insert fallback in place of the image
+            if (lazyImage.parentNode) {
+              lazyImage.parentNode.insertBefore(fallback, lazyImage);
+            }
+          }
+
           inflightRequests--;
           processImageLoadQueue();
         }
@@ -1377,6 +1682,211 @@ document.addEventListener("DOMContentLoaded", () => {
     return visibleCount;
   }
 
+  // Function to toggle privacy mode
+  window.togglePrivacyMode = function () {
+    window.privacyMode = !window.privacyMode;
+    console.log(
+      `[Privacy] Privacy mode ${window.privacyMode ? "enabled" : "disabled"}`,
+    );
+
+    // Only process images that are visible or near-visible in the viewport
+    const viewportHeight = window.innerHeight;
+    const viewportTop = window.pageYOffset;
+    const viewportBottom = viewportTop + viewportHeight;
+    const margin = viewportHeight; // Process images within one viewport height above and below
+
+    // Get visible and near-visible images
+    const allImages = document.querySelectorAll("img");
+    const visibleImages = Array.from(allImages).filter((img) => {
+      const rect = img.getBoundingClientRect();
+      const imgTop = rect.top + window.pageYOffset;
+      const imgBottom = rect.bottom + window.pageYOffset;
+
+      // Image is visible or will soon be visible (within margin)
+      return (
+        imgBottom >= viewportTop - margin && imgTop <= viewportBottom + margin
+      );
+    });
+
+    console.log(
+      `[Privacy] Processing only ${visibleImages.length} visible/near-visible images out of ${allImages.length} total`,
+    );
+
+    // Create a background task to handle off-screen images later when they become visible
+    if (window.privacyMode) {
+      // Set up intersection observer to handle off-screen images when they become visible
+      if (!window.privacyObserver) {
+        window.privacyObserver = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting && window.privacyMode) {
+                const img = entry.target;
+                if (
+                  !img.classList.contains("load-failed") &&
+                  img.complete &&
+                  img.naturalWidth !== 0
+                ) {
+                  showBlurhash(img);
+                  window.privacyObserver.unobserve(img);
+                }
+              }
+            });
+          },
+          { rootMargin: "100px" },
+        );
+      }
+
+      // Observe all non-visible images
+      const offscreenImages = Array.from(allImages).filter(
+        (img) =>
+          !visibleImages.includes(img) &&
+          !img.classList.contains("load-failed"),
+      );
+
+      offscreenImages.forEach((img) => {
+        window.privacyObserver.observe(img);
+      });
+    } else {
+      // If turning off privacy mode, disconnect observer
+      if (window.privacyObserver) {
+        window.privacyObserver.disconnect();
+        window.privacyObserver = null;
+      }
+    }
+
+    // Process visible images immediately
+    visibleImages.forEach((img) => {
+      // Handle failed images differently - don't toggle them
+      if (img.classList.contains("load-failed")) {
+        // Make sure blurhash is showing for failed images regardless of privacy mode
+        const wrapper = img.parentNode;
+        if (wrapper) {
+          const hasFailureBlur = wrapper.querySelector(
+            "canvas.failed-image-blur",
+          );
+          if (!hasFailureBlur) {
+            // Try to add failure blur since it was missing
+            const filename = img.dataset.filename;
+            const blurhash = getBlurhashByFilename(filename);
+            if (blurhash) {
+              // Create and render the blurhash canvas for the failed image
+              const canvas = renderBlurhashGrid(img, blurhash, 20);
+              canvas.classList.add("failed-image-blur");
+              canvas.style.position = "absolute";
+              canvas.style.top = "0";
+              canvas.style.left = "0";
+              canvas.style.width = "100%";
+              canvas.style.height = "100%";
+              canvas.style.zIndex = "3";
+              wrapper.appendChild(canvas);
+              img.style.opacity = "0";
+            }
+          }
+        }
+        return;
+      }
+
+      if (window.privacyMode) {
+        // Apply privacy - show blurhash for loaded images
+        if (img.complete && img.naturalWidth !== 0) {
+          showBlurhash(img);
+        }
+
+        // For images still loading, set up a load handler
+        if (!img.complete || img.classList.contains("lazyload")) {
+          img.addEventListener("load", function onImgLoad() {
+            if (window.privacyMode && !img.classList.contains("load-failed")) {
+              showBlurhash(img);
+            }
+            img.removeEventListener("load", onImgLoad);
+          });
+        }
+      } else {
+        // Only remove privacy blur for successfully loaded images
+        if (img.complete && img.naturalWidth !== 0) {
+          hideBlurhash(img);
+        }
+      }
+    });
+
+    // Update navigation control background color to indicate privacy mode
+    if (window.navigationControl) {
+      if (window.privacyMode) {
+        // Purple background for privacy mode
+        window.navigationControl.style.backgroundColor =
+          "rgba(128, 0, 128, 0.7)";
+      } else {
+        // Return to normal color (red if autoscroll is off, black if on)
+        window.navigationControl.style.backgroundColor =
+          window.autoscrollInterval
+            ? "rgba(0, 0, 0, 0.7)"
+            : "rgba(139, 0, 0, 0.7)";
+      }
+    }
+
+    return window.privacyMode;
+  };
+
+  // Function to show blurhash for an image
+  function showBlurhash(img) {
+    // Skip if already has blur canvas
+    const wrapper = img.parentNode;
+    if (wrapper && wrapper.querySelector("canvas.privacy-blur")) return;
+
+    // Get blurhash for this image
+    const filename = img.dataset.filename;
+    const blurhash = getBlurhashByFilename(filename);
+
+    if (blurhash) {
+      // Create wrapper if not exists
+      let imageWrapper = wrapper;
+      if (
+        !imageWrapper ||
+        imageWrapper.tagName !== "DIV" ||
+        imageWrapper.style.position !== "relative"
+      ) {
+        imageWrapper = document.createElement("div");
+        imageWrapper.style.position = "relative";
+        imageWrapper.style.display = "inline-block";
+        imageWrapper.style.width = "100%";
+        if (img.parentNode) {
+          img.parentNode.insertBefore(imageWrapper, img);
+          imageWrapper.appendChild(img);
+        }
+      }
+
+      // Create and apply blurhash
+      const canvas = renderBlurhashGrid(img, blurhash, 20);
+      canvas.classList.add("privacy-blur");
+      canvas.style.position = "absolute";
+      canvas.style.top = "0";
+      canvas.style.left = "0";
+      canvas.style.width = "100%";
+      canvas.style.height = "100%";
+      canvas.style.zIndex = "3"; // Above the image
+
+      // Add click handler to toggle
+      canvas.onclick = (e) => {
+        e.stopPropagation();
+        toggleVisibility(img);
+      };
+
+      imageWrapper.appendChild(canvas);
+      img.style.opacity = "0"; // Hide actual image
+    }
+  }
+
+  // Function to hide blurhash and show actual image
+  function hideBlurhash(img) {
+    const wrapper = img.parentNode;
+    const blurCanvas = wrapper && wrapper.querySelector("canvas.privacy-blur");
+
+    if (blurCanvas) {
+      blurCanvas.remove();
+      img.style.opacity = "1"; // Show actual image
+    }
+  }
+
   // Function to check if all images in viewport are loaded
   function areAllViewportImagesLoaded() {
     const images = document.querySelectorAll("img");
@@ -1496,24 +2006,30 @@ document.addEventListener("DOMContentLoaded", () => {
         // Don't update page number during autoscroll
         // Keep currentPage fixed at the URL page number
 
-        // Update image number based on visible images (using the first visible image index)
-        const images = Array.from(document.querySelectorAll("img"));
-        const viewportTop = window.pageYOffset;
-        const viewportBottom = viewportTop + window.innerHeight;
-        let totalImages = images.length;
+        // navigation display: Calculate relative page position during autoscroll
+        const scrollPosition = window.pageYOffset;
+        const viewportHeight = window.innerHeight;
+        const documentHeight = Math.max(
+          document.body.scrollHeight,
+          document.documentElement.scrollHeight,
+        );
 
-        // Find the first visible image index
-        for (let i = 0; i < images.length; i++) {
-          const img = images[i];
-          const rect = img.getBoundingClientRect();
-          const imgTop = rect.top + window.pageYOffset;
-
-          if (imgTop >= viewportTop && imgTop < viewportBottom) {
-            // Found first visible image - set current image number
-            currentImageNumber = i + 1;
-            break;
-          }
+        // Calculate current page position (1-based)
+        const scrollPercentage =
+          scrollPosition / (documentHeight - viewportHeight);
+        if (window.totalPages > 0) {
+          window.relativePage = Math.min(
+            Math.max(1, Math.ceil(scrollPercentage * window.totalPages)),
+            window.totalPages,
+          );
+        } else {
+          // Fallback if total pages calculation hasn't completed yet
+          window.relativePage = 1;
         }
+
+        console.log(
+          `[Autoscroll] Scroll: ${Math.round(scrollPercentage * 100)}%, Page: ${window.relativePage}/${window.totalPages}`,
+        );
 
         // Count visible images after scroll for next interval
         setTimeout(() => {
@@ -1624,6 +2140,28 @@ document.addEventListener("DOMContentLoaded", () => {
       console.log("[Keyboard] 's' key detected, toggling autoscroll");
       event.preventDefault();
       toggleAutoscroll();
+    }
+
+    // Toggle privacy mode with 'p' key
+    if (event.key === "p" || event.key === "P") {
+      console.log("[Keyboard] 'p' key detected, toggling privacy mode");
+      event.preventDefault();
+      const isPrivacyEnabled = window.togglePrivacyMode();
+
+      // Update navigation control background to indicate privacy mode
+      if (window.navigationControl) {
+        if (isPrivacyEnabled) {
+          // Purple background for privacy mode
+          window.navigationControl.style.backgroundColor =
+            "rgba(128, 0, 128, 0.7)";
+        } else {
+          // Return to normal color (red if autoscroll is off, black if on)
+          window.navigationControl.style.backgroundColor =
+            window.autoscrollInterval
+              ? "rgba(0, 0, 0, 0.7)"
+              : "rgba(139, 0, 0, 0.7)";
+        }
+      }
     }
 
     // Handle space key to check if images are loaded before scrolling
