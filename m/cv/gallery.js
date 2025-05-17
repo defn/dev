@@ -266,6 +266,9 @@ function blurhashToColor(hash) {
   return `rgb(${r}, ${g}, ${b})`;
 }
 
+// Export generateGrid to global scope for HTML templates to access
+window.generateGrid = generateGrid;
+
 function generateGrid() {
   // Reference to the table body
   const tableBody = document.getElementById("table-body");
@@ -346,7 +349,20 @@ function generateGrid() {
     img.style.aspectRatio = `${aspectRatio}`;
     img.height = imgHeight;
 
-    img.onclick = () => toggleVisibility(img);
+    img.onclick = (event) => {
+      // Stop event propagation to make sure our handler gets priority
+      event.stopPropagation();
+
+      // Add custom event to stop autoscrolling - this will be handled at the document level
+      const stopScrollEvent = new CustomEvent("stopAutoscroll", {
+        bubbles: true,
+        detail: { source: "imageClick" },
+      });
+      document.dispatchEvent(stopScrollEvent);
+
+      // Then perform the original toggleVisibility action
+      toggleVisibility(img);
+    };
 
     // Store the calculated height
     const imgInfo = {
@@ -598,8 +614,16 @@ function toggleHidden(element) {
       canvas.style.zIndex = "3"; // Above the image
       canvas.style.cursor = "pointer"; // Show pointer cursor
 
-      // Add click handler to canvas to toggle back
-      canvas.onclick = () => toggleVisibility(element);
+      // Add click handler to canvas to toggle back and stop autoscroll
+      canvas.onclick = () => {
+        // Stop autoscrolling if active
+        if (autoscrollInterval) {
+          toggleAutoscroll();
+        }
+
+        // Then toggle visibility
+        toggleVisibility(element);
+      };
 
       // Add canvas to wrapper or create wrapper if it doesn't exist
       if (wrapper && wrapper.style.position === "relative") {
@@ -705,14 +729,285 @@ window.addEventListener("load", () => {
   });
 });
 
+// Create a global function to stop autoscrolling - this will be accessible from anywhere
+window.stopAutoscroll = function () {
+  // Only proceed if we're in a document with autoscrolling
+  if (typeof window.autoscrollInterval === "undefined") {
+    console.log("[Autoscroll] autoscrollInterval not found in this scope");
+    return;
+  }
+
+  console.log("[Autoscroll] Stopping autoscroll");
+
+  // Clear the main autoscroll interval
+  if (window.autoscrollInterval) {
+    clearInterval(window.autoscrollInterval);
+    window.autoscrollInterval = null;
+  }
+
+  // Also clear any countdown timers
+  if (window.countdownTimer) {
+    clearInterval(window.countdownTimer);
+    window.countdownTimer = null;
+  }
+
+  // Clear all intervals with reasonable IDs to be thorough
+  for (var i = 1; i < 1000; i++) {
+    clearInterval(i);
+  }
+
+  // Update navigation control to show paused state
+  if (window.navigationControl) {
+    window.navigationControl.style.backgroundColor = "rgba(139, 0, 0, 0.7)"; // Dark red when paused
+  }
+
+  // Clear countdown
+  if (typeof window.countdownValue !== "undefined") {
+    window.countdownValue = null;
+  }
+
+  // Update display
+  if (typeof window.updateNavigationDisplay === "function") {
+    window.updateNavigationDisplay();
+  }
+
+  console.log("[Autoscroll] Autoscroll stopped");
+};
+
+// Global document click handler to stop autoscrolling when clicking on images
+document.addEventListener("click", function (event) {
+  // Check if click is on an image, canvas, or in an image container
+  const isImageClick =
+    event.target.tagName === "IMG" ||
+    event.target.tagName === "CANVAS" ||
+    event.target.closest(".image-container") !== null;
+
+  // If it's an image click, stop autoscrolling
+  if (isImageClick) {
+    console.log("[Autoscroll] Image clicked, calling stopAutoscroll");
+    window.stopAutoscroll();
+  }
+});
+
+// Listen for the custom stopAutoscroll event
+document.addEventListener("stopAutoscroll", function (event) {
+  console.log(
+    "[Autoscroll] Received stopAutoscroll event from:",
+    event.detail?.source,
+  );
+  window.stopAutoscroll();
+});
+
 document.addEventListener("DOMContentLoaded", () => {
   const tableBody = document.getElementById("table-body");
   const overlay = document.getElementById("overlay");
-  let eop = false;
-  let keySequence = "";
-  let autos = false;
-  let autoscrollInterval = null;
-  const IMAGES_PER_SECOND = 7; // Number of images that equals 1 second of wait time
+
+  // Remove any navigation controls from previous runs or created by blurmap.go
+  const oldNav = document.getElementById("navigation-control");
+  if (oldNav) oldNav.remove();
+
+  // Function to remove any navigation elements from blurmap.go
+  function removeExternalNavigationElements() {
+    // Remove chunk-nav elements from blurmap.go
+    const chunkNav = document.querySelector(".chunk-nav");
+    if (chunkNav) chunkNav.remove();
+
+    // Remove any navigation countdown elements
+    const navCountdown = document.getElementById("navigation-countdown");
+    if (navCountdown) navCountdown.remove();
+
+    // Remove any current-image-info elements
+    const imageInfo = document.getElementById("current-image-info");
+    if (imageInfo) imageInfo.remove();
+  }
+
+  // Call initially and set up a MutationObserver to keep removing external nav elements
+  removeExternalNavigationElements();
+
+  // Setup observer to remove external navigation elements when added to DOM
+  const observer = new MutationObserver(() => {
+    removeExternalNavigationElements();
+  });
+
+  // Start observing the document for added nodes
+  observer.observe(document.body, { childList: true, subtree: true });
+
+  // Create our own navigation control with the requested format - make it globally accessible
+  window.navigationControl = document.createElement("div");
+  window.navigationControl.id = "navigation-control";
+  window.navigationControl.style.position = "fixed";
+  window.navigationControl.style.bottom = "10px";
+  window.navigationControl.style.right = "10px";
+  window.navigationControl.style.backgroundColor = "rgba(139, 0, 0, 0.7)"; // Dark red when autoscroll disabled
+  window.navigationControl.style.color = "white";
+  window.navigationControl.style.padding = "5px 10px";
+  window.navigationControl.style.borderRadius = "4px";
+  window.navigationControl.style.fontSize = "16px"; // Increased from 14px
+  window.navigationControl.style.zIndex = "1002";
+  window.navigationControl.style.fontFamily =
+    "'Courier New', Courier, monospace";
+  window.navigationControl.style.display = "flex";
+  window.navigationControl.style.alignItems = "center";
+  window.navigationControl.style.lineHeight = "24px"; // Match the increased height of navigation buttons
+  document.body.appendChild(window.navigationControl);
+
+  // Track navigation data on window object to make them globally accessible
+  window.currentPage = 1;
+  window.currentImageNumber = 1;
+  window.totalImages = 0; // Will be calculated
+  window.countdownValue = null;
+
+  // Function to update the navigation display - make it globally accessible
+  window.updateNavigationDisplay = function () {
+    // Calculate total images if not done yet
+    if (window.totalImages === 0 && window.images) {
+      window.totalImages = window.images.length;
+    }
+
+    // Clear any existing content in navigation control
+    while (window.navigationControl.firstChild) {
+      window.navigationControl.removeChild(window.navigationControl.firstChild);
+    }
+
+    // Create prev button (<)
+    const prevButton = document.createElement("span");
+    prevButton.textContent = "< ";
+    prevButton.style.cursor = "pointer";
+    prevButton.style.fontWeight = "bold";
+    prevButton.style.fontSize = "24px";
+    prevButton.style.marginRight = "5px";
+
+    // Add click event to navigate to previous page
+    if (window.currentPage > 1) {
+      prevButton.onclick = () => {
+        // Navigate to previous page
+        window.location.href = `../${window.currentPage - 1}/`;
+      };
+    } else {
+      // Disabled style for page 1
+      prevButton.style.opacity = "0.5";
+    }
+    window.navigationControl.appendChild(prevButton);
+
+    // Add middle content
+    const mainContent = document.createElement("span");
+    mainContent.style.margin = "0 5px";
+    mainContent.style.minWidth = "70px"; // Ensures consistent width
+    mainContent.style.textAlign = "center";
+    mainContent.style.display = "inline-block";
+    mainContent.style.verticalAlign = "middle"; // Align with the larger buttons
+
+    // Set the text content
+    mainContent.textContent = `${window.currentPage} : ${window.currentImageNumber}/${window.totalImages}`;
+    if (window.countdownValue !== null) {
+      mainContent.textContent += ` ${window.countdownValue}s`;
+    }
+
+    window.navigationControl.appendChild(mainContent);
+
+    // Create next button (>)
+    const nextButton = document.createElement("span");
+    nextButton.textContent = " >";
+    nextButton.style.cursor = "pointer";
+    nextButton.style.fontWeight = "bold";
+    nextButton.style.fontSize = "24px";
+    nextButton.style.marginLeft = "5px";
+
+    // Add click event to navigate to next page
+    if (window.currentPage < window.totalPages) {
+      nextButton.onclick = () => {
+        // Navigate to next page
+        window.location.href = `../${window.currentPage + 1}/`;
+      };
+    } else {
+      // Disabled style for last page
+      nextButton.style.opacity = "0.5";
+    }
+    window.navigationControl.appendChild(nextButton);
+  };
+
+  // Extract page number from URL
+  function getPageNumberFromURL() {
+    // Try to get page number from meta tag (set by blurmap.go)
+    const metaCurrentChunk = document.querySelector(
+      'meta[name="current-chunk"]',
+    );
+    if (metaCurrentChunk && metaCurrentChunk.content) {
+      return parseInt(metaCurrentChunk.content) || 1;
+    }
+
+    // Fallback: extract from URL path
+    try {
+      const pathParts = window.location.pathname
+        .split("/")
+        .filter((p) => p.length > 0);
+      // Look for number in URL path segments
+      for (let i = 0; i < pathParts.length; i++) {
+        const num = parseInt(pathParts[i]);
+        if (!isNaN(num)) {
+          return num;
+        }
+      }
+    } catch (e) {
+      console.error("Error parsing URL for page number:", e);
+    }
+
+    return 1; // Default to page 1 if not found
+  }
+
+  // Initialize page number from URL
+  window.currentPage = getPageNumberFromURL();
+
+  // Get total chunks/pages from meta tag
+  const metaTotalChunks = document.querySelector('meta[name="total-chunks"]');
+  if (metaTotalChunks && metaTotalChunks.content) {
+    window.totalPages = parseInt(metaTotalChunks.content) || 100;
+  } else {
+    window.totalPages = 100; // Default value
+  }
+
+  // Calculate initial image positions
+  function calculateImagePositions() {
+    const images = Array.from(document.querySelectorAll("img"));
+    if (images.length > 0) {
+      window.totalImages = images.length;
+      window.updateNavigationDisplay();
+    }
+  }
+
+  // Initialize navigation
+  setTimeout(calculateImagePositions, 500);
+
+  // Add scroll listener to update navigation
+  window.addEventListener("scroll", () => {
+    // Find current visible image - only update image number, not page number
+    const images = Array.from(document.querySelectorAll("img"));
+    const viewportTop = window.pageYOffset;
+    const viewportBottom = viewportTop + window.innerHeight;
+
+    // Find first visible image
+    for (let i = 0; i < images.length; i++) {
+      const img = images[i];
+      const rect = img.getBoundingClientRect();
+      if (rect.top >= 0 && rect.top < window.innerHeight) {
+        window.currentImageNumber = i + 1;
+        break;
+      }
+    }
+
+    // Page number always stays fixed at URL page number (initialized earlier)
+    // window.currentPage = getPageNumberFromURL(); // This happens only once at load
+
+    // Update the display
+    window.updateNavigationDisplay();
+  });
+
+  // Define variables on the window object to make them globally accessible
+  window.eop = false;
+  window.keySequence = "";
+  window.autos = false;
+  window.autoscrollInterval = null;
+  window.IMAGES_PER_SECOND = 7; // Number of images that equals 1 second of wait time
 
   setBodyMarginToZero();
 
@@ -826,11 +1121,33 @@ document.addEventListener("DOMContentLoaded", () => {
         processImageLoadQueue();
       };
 
+      // Track retry attempts for each image
+      if (!lazyImage.dataset.retryCount) {
+        lazyImage.dataset.retryCount = "0";
+      }
+
       // Handle image loading errors
       lazyImage.onerror = () => {
-        console.error(`Failed to load image: ${lazyImage.dataset.filename}`);
-        inflightRequests--;
-        processImageLoadQueue();
+        const retryCount = parseInt(lazyImage.dataset.retryCount);
+        console.error(
+          `Failed to load image: ${lazyImage.dataset.filename} (attempt ${retryCount + 1})`,
+        );
+
+        // Try once more before giving up
+        if (retryCount < 1) {
+          console.log(`Retrying image: ${lazyImage.dataset.filename}`);
+          lazyImage.dataset.retryCount = "1";
+
+          // Add a slight delay before retrying
+          setTimeout(() => {
+            lazyImage.src = lazyImage.dataset.src + "?retry=1"; // Add query param to avoid cache
+          }, 500);
+        } else {
+          // Mark image as failed after retry
+          lazyImage.classList.add("load-failed");
+          inflightRequests--;
+          processImageLoadQueue();
+        }
       };
 
       // Start loading the image
@@ -1034,6 +1351,7 @@ document.addEventListener("DOMContentLoaded", () => {
   function countVisibleImages() {
     const images = document.querySelectorAll("img");
     let visibleCount = 0;
+    let failedCount = 0;
     const viewportTop = window.pageYOffset;
     const viewportBottom = viewportTop + window.innerHeight;
 
@@ -1044,11 +1362,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
       // Check if image is at least partially visible
       if (imgBottom > viewportTop && imgTop < viewportBottom) {
-        visibleCount++;
+        // Skip failed images in the count
+        if (img.classList.contains("load-failed")) {
+          failedCount++;
+        } else {
+          visibleCount++;
+        }
       }
     });
 
-    console.log(`[Autoscroll] Counted ${visibleCount} visible images`);
+    console.log(
+      `[Autoscroll] Counted ${visibleCount} visible images (${failedCount} failed images ignored)`,
+    );
     return visibleCount;
   }
 
@@ -1058,6 +1383,7 @@ document.addEventListener("DOMContentLoaded", () => {
     let allLoaded = true;
     let loadingCount = 0;
     let fullyVisibleCount = 0;
+    let failedCount = 0;
 
     images.forEach((img) => {
       const rect = img.getBoundingClientRect();
@@ -1069,6 +1395,13 @@ document.addEventListener("DOMContentLoaded", () => {
         rect.right <= window.innerWidth
       ) {
         fullyVisibleCount++;
+
+        // Skip images that failed to load after retry
+        if (img.classList.contains("load-failed")) {
+          failedCount++;
+          return; // Skip this image in the loading check
+        }
+
         // Check if image is loaded
         if (!img.complete || img.naturalHeight === 0) {
           allLoaded = false;
@@ -1078,7 +1411,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     console.log(
-      `[Autoscroll] Viewport images check: ${loadingCount} of ${fullyVisibleCount} fully visible images still loading`,
+      `[Autoscroll] Viewport images check: ${loadingCount} of ${fullyVisibleCount} fully visible images still loading, ${failedCount} failed images ignored`,
     );
     return allLoaded;
   }
@@ -1129,13 +1462,21 @@ document.addEventListener("DOMContentLoaded", () => {
       console.log("[Autoscroll] Stopping autoscroll");
       clearInterval(autoscrollInterval);
       autoscrollInterval = null;
+      // Set background to dark red when autoscroll is disabled
+      navigationControl.style.backgroundColor = "rgba(139, 0, 0, 0.7)";
+      // Clear countdown
+      countdownValue = null;
+      updateNavigationDisplay();
       console.log("[Autoscroll] Autoscroll stopped");
     } else {
       // Start autoscroll
       console.log("[Autoscroll] Starting autoscroll");
+      // Set background to dark when autoscroll is enabled
+      navigationControl.style.backgroundColor = "rgba(0, 0, 0, 0.7)";
 
       // Function to perform scroll and schedule next one
-      let lastWaitTime = 1000; // Start with 1 second default
+      var lastWaitTime = 1000; // Start with 1 second default
+      var countdownTimer = null;
 
       const scroll = () => {
         console.log("[Autoscroll] Scroll timer fired");
@@ -1152,6 +1493,28 @@ document.addEventListener("DOMContentLoaded", () => {
           return; // Exit early
         }
 
+        // Don't update page number during autoscroll
+        // Keep currentPage fixed at the URL page number
+
+        // Update image number based on visible images (using the first visible image index)
+        const images = Array.from(document.querySelectorAll("img"));
+        const viewportTop = window.pageYOffset;
+        const viewportBottom = viewportTop + window.innerHeight;
+        let totalImages = images.length;
+
+        // Find the first visible image index
+        for (let i = 0; i < images.length; i++) {
+          const img = images[i];
+          const rect = img.getBoundingClientRect();
+          const imgTop = rect.top + window.pageYOffset;
+
+          if (imgTop >= viewportTop && imgTop < viewportBottom) {
+            // Found first visible image - set current image number
+            currentImageNumber = i + 1;
+            break;
+          }
+        }
+
         // Count visible images after scroll for next interval
         setTimeout(() => {
           const visibleImages = countVisibleImages();
@@ -1163,6 +1526,29 @@ document.addEventListener("DOMContentLoaded", () => {
               visibleImages / IMAGES_PER_SECOND
             } seconds, rounded up, plus 1 second)`,
           );
+
+          // Set up countdown display
+          if (countdownTimer) clearInterval(countdownTimer);
+
+          const totalSeconds = Math.ceil(newWaitTime / 1000);
+          let secondsLeft = totalSeconds;
+
+          // Update countdown display function
+          const updateCountdown = () => {
+            countdownValue = secondsLeft;
+            updateNavigationDisplay();
+            secondsLeft--;
+
+            if (secondsLeft < 0) {
+              clearInterval(countdownTimer);
+            }
+          };
+
+          // Initial update
+          updateCountdown();
+
+          // Set interval for countdown
+          countdownTimer = setInterval(updateCountdown, 1000);
 
           // Only update interval if wait time has changed significantly
           if (newWaitTime !== lastWaitTime) {
@@ -1186,6 +1572,29 @@ document.addEventListener("DOMContentLoaded", () => {
         Math.ceil(initialVisibleImages / IMAGES_PER_SECOND) * 1000 + 1000;
       lastWaitTime = initialWaitTime;
 
+      // Set up initial countdown display
+      if (countdownTimer) clearInterval(countdownTimer);
+
+      const totalSeconds = Math.ceil(initialWaitTime / 1000);
+      let secondsLeft = totalSeconds;
+
+      // Update countdown display function
+      const updateInitialCountdown = () => {
+        countdownValue = secondsLeft;
+        updateNavigationDisplay();
+        secondsLeft--;
+
+        if (secondsLeft < 0) {
+          clearInterval(countdownTimer);
+        }
+      };
+
+      // Initial update
+      updateInitialCountdown();
+
+      // Set interval for countdown
+      countdownTimer = setInterval(updateInitialCountdown, 1000);
+
       console.log(`[Autoscroll] Initial wait time: ${initialWaitTime}ms`);
 
       // Start with initial scroll immediately
@@ -1196,6 +1605,14 @@ document.addEventListener("DOMContentLoaded", () => {
       console.log("[Autoscroll] Autoscroll started with interval");
     }
   }
+
+  // Only track page and image for internal use (not displayed to user)
+  // We're already tracking these variables above, so just use those
+  var totalPages = Math.ceil(
+    window.images && window.images.length
+      ? window.images.length / (window.numColumns * 5)
+      : 100,
+  ); // Estimate
 
   // Add keyboard event listener
   document.addEventListener("keydown", (event) => {
