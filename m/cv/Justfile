@@ -34,8 +34,6 @@ user uname stage1="yes" stage2="no":
 
 process file stage1="yes" stage2="no" fast="":
     just index {{ file }} {{ stage1 }} {{ stage2 }}
-    cat {{ file }}.input | bash etc/cols.sh yes thumbs /thumbs > {{ file }}.html.2
-    mv {{ file }}.html.2 {{ file }}.$$.big.html
     cat {{ file }}.input | wc -l
 
 download file:
@@ -59,7 +57,7 @@ index file stage1 stage2:
     cat {{ file }}.all | while read -r a; do if ! test -f "{{ stage1 }}/$a.jpeg"; then if ! test -f "{{ stage2 }}/$a.jpeg"; then echo "$a"; fi; fi; done | sort > {{ file }}.input
 
 following:
-    ls -ltrhd js*.html | awk '{print $NF}' | while read -r a; do if grep filename: "$a" >/dev/null; then echo "<a href=\"$a\">$a</a><br>"; fi; done > following.html.1
+    ls -ltrhd tmp/g/js-username-*/*/index.html | awk '{print $NF}' | while read -r a; do echo "<a href=\"$a\">$a</a><br>"; done > following.html.1
     mv -f following.html.1 following.html
 
 daily file="following.txt" n="8":
@@ -77,6 +75,7 @@ download-user file n="4":
     cat {{ file }} | runmany {{ n }} 'just user $1'
 
 html file="following.txt" n="40":
+    runmany 24 'go run . -s yes -c tmp/blur -d thumbs -o tmp/g/$1 -i $1' js-username-*.input
     cat {{ file }} | runmany {{ n }} 'just process js-username-$1.json.js.json || true'
 
 backup transfers="60":
@@ -181,14 +180,6 @@ db-upsert-size*args:
     echo "begin transaction;"
     runmany 16 'img=$1; set -- $(identify -format "%w %h" replicate/t2/$1.png); if [[ -n "$1" ]]; then echo "UPDATE OR IGNORE img SET good = true, thumb_height=$1, thumb_width = $2 WHERE ID = '"'"'$img'"'"';"; fi' {{ args }}
     echo "commit;"
-
-month:
-    etc/period Month 1 100
-    cat js-Month-*.json | jq '.[]' > js-period-Month.json.js.json
-    just download js-period-Month.json.js.json
-    just thumbs
-    just process js-period-Month.json.js.json
-    just following
 
 qa:
     @echo Finding overlap between yes and no
