@@ -879,9 +879,10 @@ document.addEventListener("DOMContentLoaded", () => {
   window.navigationControl.style.zIndex = "1002";
   window.navigationControl.style.fontFamily =
     "'Courier New', Courier, monospace";
-  window.navigationControl.style.display = "flex";
+  window.navigationControl.style.display = "flex"; // Always show navigation
   window.navigationControl.style.alignItems = "center";
   window.navigationControl.style.lineHeight = "24px"; // Match the increased height of navigation buttons
+  window.navigationControl.style.transition = "opacity 0.3s ease-in-out"; // Smooth transition for showing/hiding
   document.body.appendChild(window.navigationControl);
 
   // navigation display: Track navigation data on window object to make them globally accessible
@@ -893,6 +894,23 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Function to update the navigation display - make it globally accessible
   window.updateNavigationDisplay = function () {
+    // Always display the navigation control regardless of scroll position
+
+    // If navigation is not visible, show it
+    if (window.navigationControl.style.display === "none") {
+      window.navigationControl.style.display = "flex";
+      window.navigationControl.style.opacity = "0";
+      setTimeout(() => {
+        window.navigationControl.style.opacity = "1";
+      }, 10);
+    }
+
+    // Update the navigation content
+    updateNavigationContent();
+  };
+
+  // Helper function to update just the content without changing visibility
+  function updateNavigationContent() {
     // Clear any existing content in navigation control
     while (window.navigationControl.firstChild) {
       window.navigationControl.removeChild(window.navigationControl.firstChild);
@@ -928,6 +946,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // navigation display: set the text content showing URL page number and relative page position
     mainContent.textContent = `${window.currentPage} : ${window.relativePage}/${window.totalPages}`;
+
     if (window.countdownValue !== null) {
       // Check if countdownValue already includes 's' (from single column delay)
       if (
@@ -961,7 +980,7 @@ document.addEventListener("DOMContentLoaded", () => {
       nextButton.style.opacity = "0.5";
     }
     window.navigationControl.appendChild(nextButton);
-  };
+  }
 
   // Extract page number from URL
   function getPageNumberFromURL() {
@@ -1026,6 +1045,9 @@ document.addEventListener("DOMContentLoaded", () => {
       document.documentElement.scrollHeight,
     );
 
+    // Always show the navigation control, regardless of scroll position
+    // (removed code that hides navigation at top of page)
+
     // Calculate current page position (1-based)
     const scrollPercentage = scrollPosition / (documentHeight - viewportHeight);
     if (window.totalPages > 0) {
@@ -1044,12 +1066,6 @@ document.addEventListener("DOMContentLoaded", () => {
     );
 
     // Update the navigation display
-    window.updateNavigationDisplay();
-
-    // Page number always stays fixed at URL page number (initialized earlier)
-    // window.currentPage = getPageNumberFromURL(); // This happens only once at load
-
-    // Update the display
     window.updateNavigationDisplay();
   });
 
@@ -1597,7 +1613,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
       const updateDelayCoundown = () => {
         window.countdownValue = `+${remainingSeconds}s`;
+
+        // Update display - this will respect the top-of-page visibility logic
         window.updateNavigationDisplay();
+
         remainingSeconds--;
 
         if (remainingSeconds >= 0) {
@@ -1605,7 +1624,10 @@ document.addEventListener("DOMContentLoaded", () => {
         } else {
           // Reset the countdown and continue
           window.countdownValue = originalCountdownValue;
+
+          // Update display - this will respect the top-of-page visibility logic
           window.updateNavigationDisplay();
+
           window.singleColumnDelayInProgress = false;
 
           // Try to scroll again after delay is complete
@@ -1665,6 +1687,8 @@ document.addEventListener("DOMContentLoaded", () => {
     return true; // Return true to indicate scroll was performed
   }
 
+  // Placeholder comment for where kiosk mode functions were
+
   // Function to calculate average visible images per column
   function calculateImagesPerColumn() {
     // Use the existing countVisibleImages function for consistency
@@ -1714,19 +1738,22 @@ document.addEventListener("DOMContentLoaded", () => {
     const updateCountdown = () => {
       // Round to integer for display
       window.countdownValue = Math.ceil(window.secondsLeft);
+
+      // Update display - this will respect the top-of-page visibility logic
       window.updateNavigationDisplay();
+
       window.secondsLeft -= 1;
 
       if (window.secondsLeft <= 0) {
         clearInterval(window.countdownTimer);
         window.countdownTimer = null;
 
-        // When countdown reaches zero, perform the page down
-        const scrollSuccess = performSpaceScroll();
+        // Perform page down scrolling
+        const success = performSpaceScroll();
 
         // If scroll was successful, continue autoscrolling with new timer
-        if (scrollSuccess) {
-          // After a brief pause, reset the timer for the next scroll
+        if (success) {
+          // After a brief pause, reset the timer for the next action
           setTimeout(() => {
             if (window.autoscrollInterval) {
               window.countdownActive = false;
@@ -1794,6 +1821,9 @@ document.addEventListener("DOMContentLoaded", () => {
       // Save state to session storage
       sessionStorage.setItem("autoscrollEnabled", "false");
 
+      // Always keep the navigation control visible, even when autoscroll is stopped
+      // (code that would hide navigation at top of page has been removed)
+
       console.log("[Autoscroll] Autoscroll stopped");
     } else {
       // Start autoscroll
@@ -1801,6 +1831,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
       // Set background to dark when autoscroll is enabled
       navigationControl.style.backgroundColor = "rgba(0, 0, 0, 0.7)";
+
+      // Always show navigation control when autoscrolling is enabled
+      navigationControl.style.display = "flex";
+      navigationControl.style.opacity = "0";
+      setTimeout(() => {
+        navigationControl.style.opacity = "1";
+      }, 10);
 
       window.countdownActive = false;
 
@@ -1909,7 +1946,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const updateManualDelayCountdown = () => {
           window.countdownValue = `+${remainingSeconds}s`;
+
+          // Update display - this will respect the top-of-page visibility logic
           window.updateNavigationDisplay();
+
           remainingSeconds--;
 
           if (remainingSeconds >= 0) {
@@ -1917,7 +1957,10 @@ document.addEventListener("DOMContentLoaded", () => {
           } else {
             // Reset after countdown completes
             window.countdownValue = originalCountdownValue;
+
+            // Update display - this will respect the top-of-page visibility logic
             window.updateNavigationDisplay();
+
             window.manualSpaceDelay = false;
 
             // Allow the next space key to work normally
@@ -1968,7 +2011,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const updateWheelDelayCountdown = () => {
           window.countdownValue = `+${remainingSeconds}s`;
+
+          // Update display - this will respect the top-of-page visibility logic
           window.updateNavigationDisplay();
+
           remainingSeconds--;
 
           if (remainingSeconds >= 0) {
@@ -1976,7 +2022,10 @@ document.addEventListener("DOMContentLoaded", () => {
           } else {
             // Reset after countdown completes
             window.countdownValue = originalCountdownValue;
+
+            // Update display - this will respect the top-of-page visibility logic
             window.updateNavigationDisplay();
+
             window.wheelScrollDelay = false;
 
             console.log(
