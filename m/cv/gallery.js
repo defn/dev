@@ -377,8 +377,8 @@ function generateGrid() {
     // Add image to the column tracking array
     columnImages[shortestColumn].push(imgInfo);
 
-    // Update the column's total height
-    columns[shortestColumn].totalHeight += imgHeight + 5; // 5px for spacing
+    // Update the column's total height with the image height
+    columns[shortestColumn].totalHeight += imgHeight;
   });
 
   // Find the tallest column height for reference
@@ -400,13 +400,18 @@ function generateGrid() {
       }
     });
 
-    // Add line break heights (only count breaks if we have images)
+    // Add line break heights
     if (imagesInColumn.length > 0) {
-      totalContentHeight += imagesInColumn.length * 5; // 5px per line break
+      // Add line break height for each image
+      totalContentHeight += imagesInColumn.length; // 1px per line break
     }
 
     // Store the actual content height
     column.contentHeight = totalContentHeight;
+
+    // Store information about how many pixels need to be added to make this column
+    // match the height of the tallest column
+    column.heightGap = tallestColumnHeight - column.totalHeight;
   });
 
   // Find the tallest column content height
@@ -465,12 +470,26 @@ function generateGrid() {
     } else {
       // For multiple images, we'll distribute the gap incrementally after each image
 
-      // Calculate how much spacing to add after each image
-      // We have (images.length - 1) positions to add spacing after
-      const pixelsPerImage = Math.floor(heightGap / (images.length - 1));
-      let remainingPixels = heightGap - pixelsPerImage * (images.length - 1);
+      // Add images with even 1px spacing to equalize column heights
+      // Determine how many 1px spaces we need to add
+      const pixelsNeeded = column.heightGap;
 
-      // Add images with incremental spacing
+      // Calculate how many spaces we can add (at most one after each image)
+      // We have "images.length" potential spots to add pixels
+      // We will only need to add pixels if this is not the tallest column
+      const canAddSpaces = pixelsNeeded > 0 && images.length > 0;
+
+      // Calculate a default amount of spaces to add after each image
+      let pixelsPerImage = 0;
+      let remainingPixels = 0;
+      if (canAddSpaces) {
+        pixelsPerImage = Math.floor(pixelsNeeded / images.length);
+        remainingPixels = pixelsNeeded - pixelsPerImage * images.length;
+        console.log(
+          `Column ${colIndex}: needs ${pixelsNeeded}px, adding ${pixelsPerImage} after each image with ${remainingPixels} extra`,
+        );
+      }
+
       images.forEach((imgInfo, imgIndex) => {
         // Store position data for this image
         window.imagePositionMap.set(imgInfo.element.id, {
@@ -484,21 +503,22 @@ function generateGrid() {
         column.element.appendChild(imgInfo.element);
         column.element.appendChild(document.createElement("br"));
 
-        // Add spacing after each image except the last one
-        if (imgIndex < images.length - 1) {
-          let thisSpacing = pixelsPerImage;
+        // Add 1px spaces to achieve height equalization
+        // Distribute the spaces evenly with remaining pixels added one by one
+        if (canAddSpaces) {
+          let pixelsToAdd = pixelsPerImage;
 
-          // Distribute remaining pixels one by one
+          // Add one extra pixel if we have remaining pixels to distribute
           if (remainingPixels > 0) {
-            thisSpacing++;
+            pixelsToAdd++;
             remainingPixels--;
           }
 
-          // Add a spacer with the calculated height
-          if (thisSpacing > 0) {
-            const spacer = document.createElement("div");
-            spacer.style.height = `${thisSpacing}px`;
-            column.element.appendChild(spacer);
+          // Add the calculated number of 1px spaces after this image
+          for (let i = 0; i < pixelsToAdd; i++) {
+            const pixelSpacer = document.createElement("div");
+            pixelSpacer.style.height = "1px";
+            column.element.appendChild(pixelSpacer);
           }
         }
       });
