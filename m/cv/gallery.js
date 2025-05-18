@@ -353,14 +353,7 @@ function generateGrid() {
       // Stop event propagation to make sure our handler gets priority
       event.stopPropagation();
 
-      // Add custom event to stop autoscrolling - this will be handled at the document level
-      const stopScrollEvent = new CustomEvent("stopAutoscroll", {
-        bubbles: true,
-        detail: { source: "imageClick" },
-      });
-      document.dispatchEvent(stopScrollEvent);
-
-      // Then perform the original toggleVisibility action
+      // Perform toggleVisibility action
       toggleVisibility(img);
     };
 
@@ -666,14 +659,9 @@ function toggleHidden(element) {
       canvas.style.zIndex = "3"; // Above the image
       canvas.style.cursor = "pointer"; // Show pointer cursor
 
-      // Add click handler to canvas to toggle back and stop autoscroll
+      // Add click handler to canvas to toggle back
       canvas.onclick = () => {
-        // Stop autoscrolling if active
-        if (autoscrollInterval) {
-          toggleAutoscroll();
-        }
-
-        // Then toggle visibility
+        // Toggle visibility
         toggleVisibility(element);
       };
 
@@ -818,94 +806,31 @@ window.addEventListener("resize", () => {
   }, 250); // Wait 250ms after resize stops before recalculating
 });
 
-// Create a global function to stop autoscrolling - this will be accessible from anywhere
-window.stopAutoscroll = function () {
-  // Only proceed if we're in a document with autoscrolling
-  if (typeof window.autoscrollInterval === "undefined") {
-    console.log("[Autoscroll] autoscrollInterval not found in this scope");
-    return;
-  }
+// Autoscrolling functionality has been removed
 
-  console.log("[Autoscroll] Stopping autoscroll");
-
-  // Clear the main autoscroll interval
-  if (window.autoscrollInterval) {
-    clearInterval(window.autoscrollInterval);
-    window.autoscrollInterval = null;
-  }
-
-  // Also clear any countdown timers
-  if (window.countdownTimer) {
-    clearInterval(window.countdownTimer);
-    window.countdownTimer = null;
-  }
-
-  // Clear all intervals with reasonable IDs to be thorough
-  for (var i = 1; i < 1000; i++) {
-    clearInterval(i);
-  }
-
-  // Update navigation control to show paused state
-  if (window.navigationControl) {
-    window.navigationControl.style.backgroundColor = "rgba(139, 0, 0, 0.7)"; // Dark red when paused
-  }
-
-  // Clear countdown
-  if (typeof window.countdownValue !== "undefined") {
-    window.countdownValue = null;
-  }
-
-  // Update display
-  if (typeof window.updateNavigationDisplay === "function") {
-    window.updateNavigationDisplay();
-  }
-
-  console.log("[Autoscroll] Autoscroll stopped");
-};
-
-// Global document click handler to stop autoscrolling when clicking on images
-document.addEventListener("click", function (event) {
-  // Check if click is on an image, canvas, or in an image container
-  const isImageClick =
-    event.target.tagName === "IMG" ||
-    event.target.tagName === "CANVAS" ||
-    event.target.closest(".image-container") !== null;
-
-  // If it's an image click, stop autoscrolling
-  if (isImageClick) {
-    console.log("[Autoscroll] Image clicked, calling stopAutoscroll");
-    window.stopAutoscroll();
-  }
-});
-
-// Listen for the custom stopAutoscroll event
-document.addEventListener("stopAutoscroll", function (event) {
-  console.log(
-    "[Autoscroll] Received stopAutoscroll event from:",
-    event.detail?.source,
-  );
-  window.stopAutoscroll();
-});
+// Click and custom event handlers for autoscrolling have been removed
 
 document.addEventListener("DOMContentLoaded", () => {
   const tableBody = document.getElementById("table-body");
   const overlay = document.getElementById("overlay");
 
-  // Check URL parameters for privacy mode
-  try {
-    const urlParams = new URLSearchParams(window.location.search);
-    if (urlParams.has("noprivacy") || urlParams.has("public")) {
-      // Disable privacy mode if ?noprivacy or ?public is in the URL
-      window.privacyMode = false;
-      console.log("[Privacy] Privacy mode disabled from URL parameter");
-    } else {
-      // Privacy mode is already enabled by default
-      console.log("[Privacy] Privacy mode enabled by default");
-      // Privacy mode will be applied by the intersection observer as images come into view
+  // Check if autoscrolling was enabled on previous page
+  const shouldEnableAutoscroll =
+    sessionStorage.getItem("autoscrollEnabled") === "true" || true; // Enable by default
+
+  setTimeout(() => {
+    if (!window.autoscrollInterval && shouldEnableAutoscroll) {
+      console.log(
+        "[Autoscroll] Enabling autoscroll" +
+          (sessionStorage.getItem("autoscrollEnabled") === "true"
+            ? " (continued from previous page)"
+            : " by default"),
+      );
+      window.toggleAutoscroll();
     }
-  } catch (e) {
-    console.error("[Privacy] Error parsing URL parameters:", e);
-  }
+  }, 1500); // Slightly longer delay to ensure page has fully loaded
+
+  // Privacy mode has been removed
 
   // Remove any navigation controls from previous runs or created by blurmap.go
   const oldNav = document.getElementById("navigation-control");
@@ -943,12 +868,9 @@ document.addEventListener("DOMContentLoaded", () => {
   window.navigationControl.style.position = "fixed";
   window.navigationControl.style.bottom = "10px";
   window.navigationControl.style.right = "10px";
-  // Set background color based on privacy and autoscroll state
-  if (window.privacyMode) {
-    window.navigationControl.style.backgroundColor = "rgba(128, 0, 128, 0.7)"; // Purple for privacy mode
-  } else {
-    window.navigationControl.style.backgroundColor = "rgba(139, 0, 0, 0.7)"; // Dark red when autoscroll disabled
-  }
+
+  // Set background color based on autoscroll state
+  window.navigationControl.style.backgroundColor = "rgba(139, 0, 0, 0.7)"; // Dark red when autoscroll disabled
 
   window.navigationControl.style.color = "white";
   window.navigationControl.style.padding = "5px 10px";
@@ -967,7 +889,7 @@ document.addEventListener("DOMContentLoaded", () => {
   window.relativePage = 1; // Calculated scroll position relative to total page count
   window.totalPages = 0; // Will be calculated based on column height and viewport height
   window.countdownValue = null;
-  window.privacyMode = true; // Privacy mode toggle - ENABLED by default
+  // Privacy mode has been removed
 
   // Function to update the navigation display - make it globally accessible
   window.updateNavigationDisplay = function () {
@@ -987,8 +909,8 @@ document.addEventListener("DOMContentLoaded", () => {
     // Add click event to navigate to previous page
     if (window.currentPage > 1) {
       prevButton.onclick = () => {
-        // Navigate to previous page
-        window.location.href = `../${window.currentPage - 1}/`;
+        // Black out images and navigate to previous page
+        blackOutImagesAndNavigate(`../${window.currentPage - 1}/`);
       };
     } else {
       // Disabled style for page 1
@@ -1007,7 +929,15 @@ document.addEventListener("DOMContentLoaded", () => {
     // navigation display: set the text content showing URL page number and relative page position
     mainContent.textContent = `${window.currentPage} : ${window.relativePage}/${window.totalPages}`;
     if (window.countdownValue !== null) {
-      mainContent.textContent += ` ${window.countdownValue}s`;
+      // Check if countdownValue already includes 's' (from single column delay)
+      if (
+        typeof window.countdownValue === "string" &&
+        window.countdownValue.includes("s")
+      ) {
+        mainContent.textContent += ` ${window.countdownValue}`;
+      } else {
+        mainContent.textContent += ` ${window.countdownValue}s`;
+      }
     }
 
     window.navigationControl.appendChild(mainContent);
@@ -1023,8 +953,8 @@ document.addEventListener("DOMContentLoaded", () => {
     // Add click event to navigate to next page
     if (window.currentPage < window.totalPages) {
       nextButton.onclick = () => {
-        // Navigate to next page
-        window.location.href = `../${window.currentPage + 1}/`;
+        // Black out images and navigate to next page
+        blackOutImagesAndNavigate(`../${window.currentPage + 1}/`);
       };
     } else {
       // Disabled style for last page
@@ -1149,88 +1079,9 @@ document.addEventListener("DOMContentLoaded", () => {
     const maxInflightRequests = numColumns * 3;
     const imageLoadQueue = []; // Queue for pending image loads
 
-    // Set up global privacy observer to handle images as they become visible
-    if (window.privacyMode) {
-      window.privacyObserver = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting && window.privacyMode) {
-              const img = entry.target;
-              // Only apply to loaded images that aren't failed
-              if (!img.classList.contains("load-failed")) {
-                if (img.complete && img.naturalWidth !== 0) {
-                  // Image is already loaded, apply blurhash immediately
-                  showBlurhash(img);
-                } else {
-                  // Image is still loading, set up a load listener
-                  img.addEventListener(
-                    "load",
-                    function onImgLoad() {
-                      if (
-                        window.privacyMode &&
-                        !img.classList.contains("load-failed")
-                      ) {
-                        showBlurhash(img);
-                      }
-                      img.removeEventListener("load", onImgLoad);
-                    },
-                    { once: true },
-                  );
-                }
-              }
-              window.privacyObserver.unobserve(img);
-            }
-          });
-        },
-        { rootMargin: "200px" },
-      );
+    // Privacy observer has been removed
 
-      // Start observing all images on the page
-      document.querySelectorAll("img").forEach((img) => {
-        if (!img.classList.contains("load-failed")) {
-          window.privacyObserver.observe(img);
-        }
-      });
-
-      // Also check new images as they're added to the DOM via MutationObserver
-      const privacyMutationObserver = new MutationObserver((mutations) => {
-        mutations.forEach((mutation) => {
-          if (mutation.type === "childList") {
-            mutation.addedNodes.forEach((node) => {
-              // If we added an image directly
-              if (node.nodeName === "IMG") {
-                window.privacyObserver.observe(node);
-              }
-              // Or if we added a container that might contain images
-              else if (node.querySelectorAll) {
-                node.querySelectorAll("img").forEach((img) => {
-                  window.privacyObserver.observe(img);
-                });
-              }
-            });
-          }
-        });
-      });
-
-      // Observe the entire document for added images
-      privacyMutationObserver.observe(document.body, {
-        childList: true,
-        subtree: true,
-      });
-    }
-
-    // Function to handle newly loaded images when in privacy mode
-    const handlePrivacyForNewlyLoadedImage = (img) => {
-      if (
-        window.privacyMode &&
-        img &&
-        img.complete &&
-        !img.classList.contains("load-failed")
-      ) {
-        // Apply blurhash to this newly loaded image
-        showBlurhash(img);
-      }
-    };
+    // Function to handle newly loaded images when in privacy mode has been removed
 
     // Function to process the next image in the queue if under the cap
     const processImageLoadQueue = () => {
@@ -1256,19 +1107,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const nextImageToLoad = imageLoadQueue.shift();
 
-        // Check if we need to apply privacy mode as soon as it loads
-        if (window.privacyMode) {
-          // Add a listener to apply privacy blur as soon as the image is loaded
-          if (!nextImageToLoad._privacyListenerAdded) {
-            nextImageToLoad._privacyListenerAdded = true;
-            nextImageToLoad.addEventListener("load", () => {
-              // Apply privacy mode when the image loads
-              if (window.privacyMode) {
-                setTimeout(() => showBlurhash(nextImageToLoad), 10);
-              }
-            });
-          }
-        }
+        // Privacy loading handler has been removed
 
         loadImage(nextImageToLoad);
       }
@@ -1281,6 +1120,19 @@ document.addEventListener("DOMContentLoaded", () => {
         `Loading image: ${lazyImage.dataset.filename} (${inflightRequests} in flight)`,
       );
 
+      // Reset autoscroll timer if it's active
+      if (window.autoscrollInterval) {
+        console.log("[Autoscroll] Image downloading started - resetting timer");
+
+        // Reset countdown
+        if (window.countdownTimer) clearInterval(window.countdownTimer);
+        window.countdownValue = null;
+        window.updateNavigationDisplay();
+
+        // Recalculate wait time and restart timer
+        window.resetAutoscrollTimer();
+      }
+
       // Add onload handler to fade in the image
       lazyImage.onload = () => {
         // Get the filename from the data attribute
@@ -1290,10 +1142,6 @@ document.addEventListener("DOMContentLoaded", () => {
         const actualWidth = lazyImage.naturalWidth;
         const actualHeight = lazyImage.naturalHeight;
         const actualAspectRatio = actualWidth / actualHeight;
-
-        console.log(
-          `Actual image dimensions: ${actualWidth}x${actualHeight}, aspect ratio: ${actualAspectRatio}`,
-        );
 
         // Check if we had the correct aspect ratio from metadata
         const imgData =
@@ -1314,50 +1162,36 @@ document.addEventListener("DOMContentLoaded", () => {
         lazyImage.style.aspectRatio = `${actualAspectRatio}`;
         lazyImage.style.objectFit = "contain"; // Show full image without cropping
 
-        // Check privacy mode status
-        if (window.privacyMode) {
-          console.log(
-            `[Privacy] Applying privacy mode to loaded image: ${filename}`,
-          );
+        // Show image normally (privacy mode removed)
+        lazyImage.style.transition = "opacity 0.5s ease-in-out";
+        lazyImage.style.opacity = "1";
 
-          // In privacy mode, keep the blurhash visible
-          // Apply the blurhash if not already present
-          const wrapper = lazyImage.parentNode;
-          const hasBlur =
-            wrapper && wrapper.querySelector("canvas.privacy-blur");
+        // Fade out the canvas if it exists (parent of the image is the wrapper)
+        if (
+          lazyImage.parentNode &&
+          lazyImage.parentNode.querySelector("canvas")
+        ) {
+          const canvas = lazyImage.parentNode.querySelector("canvas");
+          canvas.style.transition = "opacity 0.5s ease-in-out";
+          canvas.style.opacity = "0";
 
-          if (!hasBlur) {
-            // Apply proper timing to ensure elements are ready
-            setTimeout(() => showBlurhash(lazyImage), 10);
-          }
-        } else {
-          // Normal mode - show the image
-          lazyImage.style.transition = "opacity 0.5s ease-in-out";
-          lazyImage.style.opacity = "1";
-
-          // Fade out the canvas if it exists (parent of the image is the wrapper)
-          if (
-            lazyImage.parentNode &&
-            lazyImage.parentNode.querySelector("canvas:not(.privacy-blur)")
-          ) {
-            const canvas = lazyImage.parentNode.querySelector(
-              "canvas:not(.privacy-blur)",
-            );
-            canvas.style.transition = "opacity 0.5s ease-in-out";
-            canvas.style.opacity = "0";
-
-            // Remove the canvas after transition
-            setTimeout(() => {
-              if (canvas && canvas.parentNode) {
-                canvas.parentNode.removeChild(canvas);
-              }
-            }, 500);
-          }
+          // Remove the canvas after transition
+          setTimeout(() => {
+            if (canvas && canvas.parentNode) {
+              canvas.parentNode.removeChild(canvas);
+            }
+          }, 500);
         }
 
         // Reduce the in-flight counter and process the next image
         inflightRequests--;
         processImageLoadQueue();
+
+        // If autoscroll is active, reset the timer when image loads
+        if (window.autoscrollInterval) {
+          console.log("[Autoscroll] Image finished loading - resetting timer");
+          window.resetAutoscrollTimer();
+        }
       };
 
       // Track retry attempts for each image
@@ -1682,210 +1516,7 @@ document.addEventListener("DOMContentLoaded", () => {
     return visibleCount;
   }
 
-  // Function to toggle privacy mode
-  window.togglePrivacyMode = function () {
-    window.privacyMode = !window.privacyMode;
-    console.log(
-      `[Privacy] Privacy mode ${window.privacyMode ? "enabled" : "disabled"}`,
-    );
-
-    // Only process images that are visible or near-visible in the viewport
-    const viewportHeight = window.innerHeight;
-    const viewportTop = window.pageYOffset;
-    const viewportBottom = viewportTop + viewportHeight;
-    const margin = viewportHeight; // Process images within one viewport height above and below
-
-    // Get visible and near-visible images
-    const allImages = document.querySelectorAll("img");
-    const visibleImages = Array.from(allImages).filter((img) => {
-      const rect = img.getBoundingClientRect();
-      const imgTop = rect.top + window.pageYOffset;
-      const imgBottom = rect.bottom + window.pageYOffset;
-
-      // Image is visible or will soon be visible (within margin)
-      return (
-        imgBottom >= viewportTop - margin && imgTop <= viewportBottom + margin
-      );
-    });
-
-    console.log(
-      `[Privacy] Processing only ${visibleImages.length} visible/near-visible images out of ${allImages.length} total`,
-    );
-
-    // Create a background task to handle off-screen images later when they become visible
-    if (window.privacyMode) {
-      // Set up intersection observer to handle off-screen images when they become visible
-      if (!window.privacyObserver) {
-        window.privacyObserver = new IntersectionObserver(
-          (entries) => {
-            entries.forEach((entry) => {
-              if (entry.isIntersecting && window.privacyMode) {
-                const img = entry.target;
-                if (
-                  !img.classList.contains("load-failed") &&
-                  img.complete &&
-                  img.naturalWidth !== 0
-                ) {
-                  showBlurhash(img);
-                  window.privacyObserver.unobserve(img);
-                }
-              }
-            });
-          },
-          { rootMargin: "100px" },
-        );
-      }
-
-      // Observe all non-visible images
-      const offscreenImages = Array.from(allImages).filter(
-        (img) =>
-          !visibleImages.includes(img) &&
-          !img.classList.contains("load-failed"),
-      );
-
-      offscreenImages.forEach((img) => {
-        window.privacyObserver.observe(img);
-      });
-    } else {
-      // If turning off privacy mode, disconnect observer
-      if (window.privacyObserver) {
-        window.privacyObserver.disconnect();
-        window.privacyObserver = null;
-      }
-    }
-
-    // Process visible images immediately
-    visibleImages.forEach((img) => {
-      // Handle failed images differently - don't toggle them
-      if (img.classList.contains("load-failed")) {
-        // Make sure blurhash is showing for failed images regardless of privacy mode
-        const wrapper = img.parentNode;
-        if (wrapper) {
-          const hasFailureBlur = wrapper.querySelector(
-            "canvas.failed-image-blur",
-          );
-          if (!hasFailureBlur) {
-            // Try to add failure blur since it was missing
-            const filename = img.dataset.filename;
-            const blurhash = getBlurhashByFilename(filename);
-            if (blurhash) {
-              // Create and render the blurhash canvas for the failed image
-              const canvas = renderBlurhashGrid(img, blurhash, 20);
-              canvas.classList.add("failed-image-blur");
-              canvas.style.position = "absolute";
-              canvas.style.top = "0";
-              canvas.style.left = "0";
-              canvas.style.width = "100%";
-              canvas.style.height = "100%";
-              canvas.style.zIndex = "3";
-              wrapper.appendChild(canvas);
-              img.style.opacity = "0";
-            }
-          }
-        }
-        return;
-      }
-
-      if (window.privacyMode) {
-        // Apply privacy - show blurhash for loaded images
-        if (img.complete && img.naturalWidth !== 0) {
-          showBlurhash(img);
-        }
-
-        // For images still loading, set up a load handler
-        if (!img.complete || img.classList.contains("lazyload")) {
-          img.addEventListener("load", function onImgLoad() {
-            if (window.privacyMode && !img.classList.contains("load-failed")) {
-              showBlurhash(img);
-            }
-            img.removeEventListener("load", onImgLoad);
-          });
-        }
-      } else {
-        // Only remove privacy blur for successfully loaded images
-        if (img.complete && img.naturalWidth !== 0) {
-          hideBlurhash(img);
-        }
-      }
-    });
-
-    // Update navigation control background color to indicate privacy mode
-    if (window.navigationControl) {
-      if (window.privacyMode) {
-        // Purple background for privacy mode
-        window.navigationControl.style.backgroundColor =
-          "rgba(128, 0, 128, 0.7)";
-      } else {
-        // Return to normal color (red if autoscroll is off, black if on)
-        window.navigationControl.style.backgroundColor =
-          window.autoscrollInterval
-            ? "rgba(0, 0, 0, 0.7)"
-            : "rgba(139, 0, 0, 0.7)";
-      }
-    }
-
-    return window.privacyMode;
-  };
-
-  // Function to show blurhash for an image
-  function showBlurhash(img) {
-    // Skip if already has blur canvas
-    const wrapper = img.parentNode;
-    if (wrapper && wrapper.querySelector("canvas.privacy-blur")) return;
-
-    // Get blurhash for this image
-    const filename = img.dataset.filename;
-    const blurhash = getBlurhashByFilename(filename);
-
-    if (blurhash) {
-      // Create wrapper if not exists
-      let imageWrapper = wrapper;
-      if (
-        !imageWrapper ||
-        imageWrapper.tagName !== "DIV" ||
-        imageWrapper.style.position !== "relative"
-      ) {
-        imageWrapper = document.createElement("div");
-        imageWrapper.style.position = "relative";
-        imageWrapper.style.display = "inline-block";
-        imageWrapper.style.width = "100%";
-        if (img.parentNode) {
-          img.parentNode.insertBefore(imageWrapper, img);
-          imageWrapper.appendChild(img);
-        }
-      }
-
-      // Create and apply blurhash
-      const canvas = renderBlurhashGrid(img, blurhash, 20);
-      canvas.classList.add("privacy-blur");
-      canvas.style.position = "absolute";
-      canvas.style.top = "0";
-      canvas.style.left = "0";
-      canvas.style.width = "100%";
-      canvas.style.height = "100%";
-      canvas.style.zIndex = "3"; // Above the image
-
-      // Add click handler to toggle
-      canvas.onclick = (e) => {
-        e.stopPropagation();
-        toggleVisibility(img);
-      };
-
-      imageWrapper.appendChild(canvas);
-      img.style.opacity = "0"; // Hide actual image
-    }
-  }
-
-  // Function to hide blurhash and show actual image
-  function hideBlurhash(img) {
-    const wrapper = img.parentNode;
-    const blurCanvas = wrapper && wrapper.querySelector("canvas.privacy-blur");
-
-    if (blurCanvas) {
-      blurCanvas.remove();
-      img.style.opacity = "1"; // Show actual image
-    }
-  }
+  // Privacy mode functions have been removed
 
   // Function to check if all images in viewport are loaded
   function areAllViewportImagesLoaded() {
@@ -1923,6 +1554,21 @@ document.addEventListener("DOMContentLoaded", () => {
     console.log(
       `[Autoscroll] Viewport images check: ${loadingCount} of ${fullyVisibleCount} fully visible images still loading, ${failedCount} failed images ignored`,
     );
+
+    // If we're currently autoscrolling and have a countdown but images are still loading,
+    // reset the timer to allow more time for images to load
+    if (
+      loadingCount > 0 &&
+      window.autoscrollInterval &&
+      window.countdownTimer &&
+      window.secondsLeft < 3
+    ) {
+      console.log(
+        "[Autoscroll] Images still loading, resetting countdown to give more time",
+      );
+      window.resetAutoscrollTimer();
+    }
+
     return allLoaded;
   }
 
@@ -1938,6 +1584,45 @@ document.addEventListener("DOMContentLoaded", () => {
       return false; // Return false to indicate scroll was not performed
     }
 
+    // Add additional delay if we're in single column mode
+    if (window.numColumns === 1 && !window.singleColumnDelayInProgress) {
+      console.log(
+        "[Autoscroll] Single column mode detected, adding 5 second additional delay",
+      );
+      window.singleColumnDelayInProgress = true;
+
+      // Create a countdown display for the additional delay
+      let remainingSeconds = 5;
+      const originalCountdownValue = window.countdownValue;
+
+      const updateDelayCoundown = () => {
+        window.countdownValue = `+${remainingSeconds}s`;
+        window.updateNavigationDisplay();
+        remainingSeconds--;
+
+        if (remainingSeconds >= 0) {
+          setTimeout(updateDelayCoundown, 1000);
+        } else {
+          // Reset the countdown and continue
+          window.countdownValue = originalCountdownValue;
+          window.updateNavigationDisplay();
+          window.singleColumnDelayInProgress = false;
+
+          // Try to scroll again after delay is complete
+          performSpaceScroll();
+        }
+      };
+
+      // Start the countdown display
+      updateDelayCoundown();
+
+      // Return false to delay scrolling, the caller will need to retry
+      return false;
+    }
+
+    // Reset the delay flag once we've scrolled
+    window.singleColumnDelayInProgress = false;
+
     // Check if we're at the bottom of the page
     const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
     const scrollHeight = document.documentElement.scrollHeight;
@@ -1945,12 +1630,27 @@ document.addEventListener("DOMContentLoaded", () => {
     const isAtBottom = scrollTop + clientHeight >= scrollHeight - 5; // 5px tolerance
 
     if (isAtBottom) {
-      // Reset to the top of the page
-      console.log("[Autoscroll] At bottom of page, resetting to top");
-      window.scrollTo({
-        top: 0,
-        behavior: "smooth",
-      });
+      console.log("[Autoscroll] At bottom of page");
+
+      // If we're at the bottom, check if we should navigate to next page
+      if (window.currentPage < window.totalPages) {
+        console.log(
+          "[Autoscroll] End of current page, will continue on next page",
+        );
+        // This will help continue autoscrolling on the next page
+        sessionStorage.setItem("autoscrollEnabled", "true");
+
+        // Navigate to next page immediately
+        blackOutImagesAndNavigate(`../${window.currentPage + 1}/`);
+        return true;
+      } else {
+        // If there's no next page, pause autoscroll
+        console.log("[Autoscroll] At bottom of last page, pausing autoscroll");
+        if (window.autoscrollInterval) {
+          window.toggleAutoscroll();
+        }
+        return false;
+      }
     } else {
       // Space key typically scrolls by viewport height minus a small overlap
       const scrollAmount = window.innerHeight * 0.9;
@@ -1965,162 +1665,162 @@ document.addEventListener("DOMContentLoaded", () => {
     return true; // Return true to indicate scroll was performed
   }
 
+  // Function to calculate average visible images per column
+  function calculateImagesPerColumn() {
+    // Use the existing countVisibleImages function for consistency
+    const visibleImages = countVisibleImages();
+
+    // Get number of columns
+    const numColumns = window.numColumns || 1;
+
+    // Calculate average visible images per column (rounded up)
+    const imagesPerColumn = Math.ceil(visibleImages / numColumns);
+
+    console.log(
+      `[Autoscroll] Visible images: ${visibleImages}, Columns: ${numColumns}, Visible images per column: ${imagesPerColumn}`,
+    );
+    return imagesPerColumn;
+  }
+
+  // Function to reset the autoscroll timer
+  window.resetAutoscrollTimer = function () {
+    if (!window.autoscrollInterval) return;
+
+    console.log("[Autoscroll] Resetting timer based on images per column");
+
+    // Calculate images per column (total images ÷ number of columns, rounded up)
+    const imagesPerColumn = calculateImagesPerColumn();
+
+    // Calculate wait time (0.8 seconds per image) with floor of 3 seconds and ceiling of 6 seconds
+    let newWaitTime = Math.round(imagesPerColumn * 800); // Each image adds 0.8 seconds
+
+    // Apply floor and ceiling
+    if (newWaitTime < 3000) newWaitTime = 3000; // Minimum 3 seconds
+    if (newWaitTime > 6000) newWaitTime = 6000; // Maximum 6 seconds
+
+    // Calculate seconds for display
+    const waitTimeSeconds = newWaitTime / 1000;
+
+    console.log(
+      `[Autoscroll] New wait time: ${newWaitTime}ms (${imagesPerColumn} images per column at 0.8s each, capped between 3-6 seconds)`,
+    );
+
+    // Reset the countdown display
+    if (window.countdownTimer) clearInterval(window.countdownTimer);
+
+    window.secondsLeft = waitTimeSeconds;
+
+    // Update countdown display function
+    const updateCountdown = () => {
+      // Round to integer for display
+      window.countdownValue = Math.ceil(window.secondsLeft);
+      window.updateNavigationDisplay();
+      window.secondsLeft -= 1;
+
+      if (window.secondsLeft <= 0) {
+        clearInterval(window.countdownTimer);
+        window.countdownTimer = null;
+
+        // When countdown reaches zero, perform the page down
+        const scrollSuccess = performSpaceScroll();
+
+        // If scroll was successful, continue autoscrolling with new timer
+        if (scrollSuccess) {
+          // After a brief pause, reset the timer for the next scroll
+          setTimeout(() => {
+            if (window.autoscrollInterval) {
+              window.countdownActive = false;
+              console.log("[Autoscroll] Continuing with next scroll cycle");
+            }
+          }, 1000); // Wait 1 second before starting the next countdown
+        }
+      }
+    };
+
+    // Initial update
+    updateCountdown();
+
+    // Set interval for countdown and store it in the global window object
+    window.countdownTimer = setInterval(updateCountdown, 1000);
+
+    // Clear existing interval
+    clearInterval(window.autoscrollInterval);
+
+    // Set new interval that checks if images are loaded but doesn't scroll automatically
+    window.autoscrollInterval = setInterval(() => {
+      // Check if all viewport images are loaded
+      if (areAllViewportImagesLoaded() && !window.countdownActive) {
+        window.countdownActive = true;
+        window.resetAutoscrollTimer();
+      }
+    }, 500);
+
+    // Add additional interval to continuously check for loading images and adjust timer if needed
+    if (window.imageLoadingChecker) clearInterval(window.imageLoadingChecker);
+    window.imageLoadingChecker = setInterval(() => {
+      // This will check for loading images and reset timer if needed (logic is in areAllViewportImagesLoaded)
+      areAllViewportImagesLoaded();
+    }, 1000);
+  };
+
   // Function to start/stop autoscroll
-  function toggleAutoscroll() {
-    if (autoscrollInterval) {
+  window.toggleAutoscroll = function () {
+    if (window.autoscrollInterval) {
       // Stop autoscroll
       console.log("[Autoscroll] Stopping autoscroll");
-      clearInterval(autoscrollInterval);
-      autoscrollInterval = null;
+      clearInterval(window.autoscrollInterval);
+      window.autoscrollInterval = null;
+
+      // Clear countdown timer
+      if (window.countdownTimer) {
+        clearInterval(window.countdownTimer);
+        window.countdownTimer = null;
+      }
+
+      // Clear image loading checker
+      if (window.imageLoadingChecker) {
+        clearInterval(window.imageLoadingChecker);
+        window.imageLoadingChecker = null;
+      }
+
       // Set background to dark red when autoscroll is disabled
       navigationControl.style.backgroundColor = "rgba(139, 0, 0, 0.7)";
-      // Clear countdown
-      countdownValue = null;
+
+      // Clear countdown value
+      window.countdownValue = null;
+      window.countdownActive = false;
       updateNavigationDisplay();
+
+      // Save state to session storage
+      sessionStorage.setItem("autoscrollEnabled", "false");
+
       console.log("[Autoscroll] Autoscroll stopped");
     } else {
       // Start autoscroll
       console.log("[Autoscroll] Starting autoscroll");
+
       // Set background to dark when autoscroll is enabled
       navigationControl.style.backgroundColor = "rgba(0, 0, 0, 0.7)";
 
-      // Function to perform scroll and schedule next one
-      var lastWaitTime = 1000; // Start with 1 second default
-      var countdownTimer = null;
+      window.countdownActive = false;
 
-      const scroll = () => {
-        console.log("[Autoscroll] Scroll timer fired");
-
-        // Perform space-like scroll
-        const scrollPerformed = performSpaceScroll();
-
-        if (!scrollPerformed) {
-          // Images are still loading, retry after a short delay
-          console.log("[Autoscroll] Retrying scroll in 500ms");
-          setTimeout(() => {
-            scroll(); // Retry the scroll
-          }, 500);
-          return; // Exit early
+      // Set interval to check if images are loaded
+      window.autoscrollInterval = setInterval(() => {
+        // Check if all viewport images are loaded
+        if (areAllViewportImagesLoaded() && !window.countdownActive) {
+          window.countdownActive = true;
+          window.resetAutoscrollTimer();
         }
+      }, 500);
 
-        // Don't update page number during autoscroll
-        // Keep currentPage fixed at the URL page number
+      // Save state to session storage
+      sessionStorage.setItem("autoscrollEnabled", "true");
 
-        // navigation display: Calculate relative page position during autoscroll
-        const scrollPosition = window.pageYOffset;
-        const viewportHeight = window.innerHeight;
-        const documentHeight = Math.max(
-          document.body.scrollHeight,
-          document.documentElement.scrollHeight,
-        );
-
-        // Calculate current page position (1-based)
-        const scrollPercentage =
-          scrollPosition / (documentHeight - viewportHeight);
-        if (window.totalPages > 0) {
-          window.relativePage = Math.min(
-            Math.max(1, Math.ceil(scrollPercentage * window.totalPages)),
-            window.totalPages,
-          );
-        } else {
-          // Fallback if total pages calculation hasn't completed yet
-          window.relativePage = 1;
-        }
-
-        console.log(
-          `[Autoscroll] Scroll: ${Math.round(scrollPercentage * 100)}%, Page: ${window.relativePage}/${window.totalPages}`,
-        );
-
-        // Count visible images after scroll for next interval
-        setTimeout(() => {
-          const visibleImages = countVisibleImages();
-          const newWaitTime =
-            Math.ceil(visibleImages / IMAGES_PER_SECOND) * 1000 + 1000; // Calculate based on IMAGES_PER_SECOND and add 1 second
-
-          console.log(
-            `[Autoscroll] Next wait time: ${newWaitTime}ms (${visibleImages} images / ${IMAGES_PER_SECOND} = ${
-              visibleImages / IMAGES_PER_SECOND
-            } seconds, rounded up, plus 1 second)`,
-          );
-
-          // Set up countdown display
-          if (countdownTimer) clearInterval(countdownTimer);
-
-          const totalSeconds = Math.ceil(newWaitTime / 1000);
-          let secondsLeft = totalSeconds;
-
-          // Update countdown display function
-          const updateCountdown = () => {
-            countdownValue = secondsLeft;
-            updateNavigationDisplay();
-            secondsLeft--;
-
-            if (secondsLeft < 0) {
-              clearInterval(countdownTimer);
-            }
-          };
-
-          // Initial update
-          updateCountdown();
-
-          // Set interval for countdown
-          countdownTimer = setInterval(updateCountdown, 1000);
-
-          // Only update interval if wait time has changed significantly
-          if (newWaitTime !== lastWaitTime) {
-            lastWaitTime = newWaitTime;
-
-            // Clear existing interval and set new one with updated wait time
-            if (autoscrollInterval) {
-              clearInterval(autoscrollInterval);
-              autoscrollInterval = setInterval(scroll, newWaitTime);
-              console.log(
-                `[Autoscroll] Timer updated with ${newWaitTime}ms interval`,
-              );
-            }
-          }
-        }, 500); // Wait 500ms for scroll to complete before counting images
-      };
-
-      // Calculate initial wait time based on current visible images
-      const initialVisibleImages = countVisibleImages();
-      const initialWaitTime =
-        Math.ceil(initialVisibleImages / IMAGES_PER_SECOND) * 1000 + 1000;
-      lastWaitTime = initialWaitTime;
-
-      // Set up initial countdown display
-      if (countdownTimer) clearInterval(countdownTimer);
-
-      const totalSeconds = Math.ceil(initialWaitTime / 1000);
-      let secondsLeft = totalSeconds;
-
-      // Update countdown display function
-      const updateInitialCountdown = () => {
-        countdownValue = secondsLeft;
-        updateNavigationDisplay();
-        secondsLeft--;
-
-        if (secondsLeft < 0) {
-          clearInterval(countdownTimer);
-        }
-      };
-
-      // Initial update
-      updateInitialCountdown();
-
-      // Set interval for countdown
-      countdownTimer = setInterval(updateInitialCountdown, 1000);
-
-      console.log(`[Autoscroll] Initial wait time: ${initialWaitTime}ms`);
-
-      // Start with initial scroll immediately
-      scroll();
-
-      // Set up the interval
-      autoscrollInterval = setInterval(scroll, initialWaitTime);
-      console.log("[Autoscroll] Autoscroll started with interval");
+      console.log("[Autoscroll] Autoscroll started");
     }
-  }
+
+    return false;
+  };
 
   // Only track page and image for internal use (not displayed to user)
   // We're already tracking these variables above, so just use those
@@ -2130,81 +1830,163 @@ document.addEventListener("DOMContentLoaded", () => {
       : 100,
   ); // Estimate
 
+  // Function to black out all visible images before navigation
+  function blackOutImagesAndNavigate(url) {
+    // Get all visible images
+    const images = document.querySelectorAll("img");
+    let anyVisible = false;
+
+    // Apply black overlay to each visible image
+    images.forEach((img) => {
+      const rect = img.getBoundingClientRect();
+      if (rect.top < window.innerHeight && rect.bottom > 0) {
+        // Image is at least partially visible
+        anyVisible = true;
+
+        // Create a black overlay for the image
+        toggleHidden(img);
+      }
+    });
+
+    // Navigate after a brief delay to allow the black overlays to appear
+    setTimeout(
+      () => {
+        window.location.href = url;
+      },
+      anyVisible ? 300 : 0,
+    );
+  }
+
   // Add keyboard event listener
   document.addEventListener("keydown", (event) => {
     console.log(
       `[Keyboard] Key pressed: ${event.key} (keyCode: ${event.keyCode})`,
     );
 
+    // 's' key - toggle autoscroll
     if (event.key === "s" || event.key === "S") {
-      console.log("[Keyboard] 's' key detected, toggling autoscroll");
       event.preventDefault();
       toggleAutoscroll();
+      return;
     }
 
-    // Toggle privacy mode with 'p' key
-    if (event.key === "p" || event.key === "P") {
-      console.log("[Keyboard] 'p' key detected, toggling privacy mode");
-      event.preventDefault();
-      const isPrivacyEnabled = window.togglePrivacyMode();
+    // Left arrow or 'a' - previous page
+    if (event.key === "ArrowLeft" || event.key === "a" || event.key === "A") {
+      if (window.currentPage > 1) {
+        blackOutImagesAndNavigate(`../${window.currentPage - 1}/`);
+      }
+    }
 
-      // Update navigation control background to indicate privacy mode
-      if (window.navigationControl) {
-        if (isPrivacyEnabled) {
-          // Purple background for privacy mode
-          window.navigationControl.style.backgroundColor =
-            "rgba(128, 0, 128, 0.7)";
-        } else {
-          // Return to normal color (red if autoscroll is off, black if on)
-          window.navigationControl.style.backgroundColor =
-            window.autoscrollInterval
-              ? "rgba(0, 0, 0, 0.7)"
-              : "rgba(139, 0, 0, 0.7)";
-        }
+    // Right arrow or 'd' - next page
+    if (event.key === "ArrowRight" || event.key === "d" || event.key === "D") {
+      if (window.currentPage < window.totalPages) {
+        blackOutImagesAndNavigate(`../${window.currentPage + 1}/`);
       }
     }
 
     // Handle space key to check if images are loaded before scrolling
     if (event.key === " " || event.keyCode === 32) {
+      // Check for image loading
       if (!areAllViewportImagesLoaded()) {
         console.log("[Manual Scroll] Preventing scroll - images still loading");
         event.preventDefault();
+        return;
       }
+
+      // Check for single column delay
+      if (window.numColumns === 1 && !window.manualSpaceDelay) {
+        console.log(
+          "[Manual Scroll] Single column mode - adding 5 second delay before space scrolling",
+        );
+        event.preventDefault();
+
+        // Set a flag to prevent multiple delays
+        window.manualSpaceDelay = true;
+
+        // Show countdown in navigation control
+        let remainingSeconds = 5;
+        const originalCountdownValue = window.countdownValue;
+
+        const updateManualDelayCountdown = () => {
+          window.countdownValue = `+${remainingSeconds}s`;
+          window.updateNavigationDisplay();
+          remainingSeconds--;
+
+          if (remainingSeconds >= 0) {
+            setTimeout(updateManualDelayCountdown, 1000);
+          } else {
+            // Reset after countdown completes
+            window.countdownValue = originalCountdownValue;
+            window.updateNavigationDisplay();
+            window.manualSpaceDelay = false;
+
+            // Allow the next space key to work normally
+            console.log(
+              "[Manual Scroll] Delay complete, next space press will scroll",
+            );
+          }
+        };
+
+        // Start countdown
+        updateManualDelayCountdown();
+        return;
+      }
+
+      // Reset the delay flag if we've scrolled
+      window.manualSpaceDelay = false;
     }
   });
 
-  // Store the automatic start timer
-  let autoStartTimer = null;
-
-  // Automatically start autoscrolling after 5 seconds
-  console.log("[Autoscroll] Will start automatically in 5 seconds...");
-  autoStartTimer = setTimeout(() => {
-    console.log("[Autoscroll] Starting automatic autoscroll");
-    toggleAutoscroll();
-  }, 5000);
-
-  // Add listener to cancel auto-start on any key press
-  document.addEventListener(
-    "keydown",
-    (event) => {
-      if (autoStartTimer) {
-        console.log("[Autoscroll] Key pressed, cancelling automatic start");
-        clearTimeout(autoStartTimer);
-        autoStartTimer = null;
-      }
-    },
-    { once: true },
-  ); // Remove listener after first key press
+  // Autoscroll auto-start functionality has been removed
 
   // Add wheel event listener to prevent scrolling when images are loading
   document.addEventListener(
     "wheel",
     (event) => {
+      // Prevent scrolling if images are still loading
       if (!areAllViewportImagesLoaded()) {
         console.log(
           "[Manual Scroll] Preventing wheel scroll - images still loading",
         );
         event.preventDefault();
+        return;
+      }
+
+      // Add delay for single column mode if wheel scrolling
+      if (window.numColumns === 1 && !window.wheelScrollDelay) {
+        console.log(
+          "[Manual Scroll] Single column mode - adding delay for wheel scrolling",
+        );
+        event.preventDefault();
+
+        // Set flag to prevent multiple delays
+        window.wheelScrollDelay = true;
+
+        // Show countdown in navigation control
+        let remainingSeconds = 5;
+        const originalCountdownValue = window.countdownValue;
+
+        const updateWheelDelayCountdown = () => {
+          window.countdownValue = `+${remainingSeconds}s`;
+          window.updateNavigationDisplay();
+          remainingSeconds--;
+
+          if (remainingSeconds >= 0) {
+            setTimeout(updateWheelDelayCountdown, 1000);
+          } else {
+            // Reset after countdown completes
+            window.countdownValue = originalCountdownValue;
+            window.updateNavigationDisplay();
+            window.wheelScrollDelay = false;
+
+            console.log(
+              "[Manual Scroll] Wheel delay complete, next wheel event will scroll",
+            );
+          }
+        };
+
+        // Start countdown
+        updateWheelDelayCountdown();
       }
     },
     { passive: false },
