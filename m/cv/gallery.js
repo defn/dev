@@ -276,17 +276,7 @@ function generateGrid() {
   // Use the shuffled images array that's already prepared
   const selectedImages = window.images || [];
 
-  const userAgent = navigator.userAgent || navigator.vendor || window.opera;
-  const isMobile =
-    /android|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(
-      userAgent.toLowerCase(),
-    );
-
-  if (isMobile) {
-    window.numColumns = Math.floor(window.innerWidth / 490);
-  } else {
-    window.numColumns = Math.floor(window.innerWidth / 300);
-  }
+  window.numColumns = Math.floor(window.innerWidth / 330);
 
   // Make sure we have at least 1 column
   if (window.numColumns < 1) window.numColumns = 1;
