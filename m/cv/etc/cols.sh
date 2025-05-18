@@ -4,24 +4,22 @@ kind=$1
 shift
 dir=$1
 shift
-base=$1
-shift
 
-if [[ -n "${1:-}" ]]; then
+if [[ -n ${1-} ]]; then
 	root=$1
 	shift
 else
 	root=
 fi
 
-if [[ -n "${1:-}" ]]; then
+if [[ -n ${1-} ]]; then
 	thumbsdir=$1
 	shift
 else
 	thumbsdir=thumbs
 fi
 
-if [[ -n "${1:-}" ]]; then
+if [[ -n ${1-} ]]; then
 	thumbsext=$1
 	shift
 else

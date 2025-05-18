@@ -49,20 +49,14 @@ thumbs:
 t2:
     cat <(find yes -type f | cut -d/ -f2 | cut -d. -f1) <(find yes -type f | cut -d/ -f2 | cut -d. -f1) <(find t2 -name '*.png' | cut -d/ -f2 | cut -d. -f1) | sort | uniq -c | grep ' 2 ' | awk '{print $NF}' | sort | runmany 32 1 'echo "img/$1.jpeg -> t2/$1.png"; mogrify -path t2 -resize 400x -format png img/$1.jpeg'
 
-gallery dir="thumbs" output="thumbs" max="10000":
-    time etc/proc-thumbs {{dir}} {{output}} {{max}}
-    
-big prefix="replicate/":
+gallery prefix="replicate/":
     #!/usr/bin/env bash
     find {{prefix}}t2 -type f | cut -d/ -f3 | cut -d. -f1 | sort > all.input
-    just gallery {{ prefix }}t2 two 7000
-    time go run blurmap.go two.html blurmap.js
-    wait
+    go run blurmap.go 
 
 index file stage1 stage2:
     cat {{ file }} | jq -r '.url' | cut -d/ -f7 | cut -d. -f1 | sort > {{ file }}.all
     cat {{ file }}.all | while read -r a; do if ! test -f "{{ stage1 }}/$a.jpeg"; then if ! test -f "{{ stage2 }}/$a.jpeg"; then echo "$a"; fi; fi; done | sort > {{ file }}.input
-
 
 following:
     ls -ltrhd js*.html | awk '{print $NF}' | while read -r a; do if grep filename: "$a" >/dev/null; then echo "<a href=\"$a\">$a</a><br>"; fi; done > following.html.1
