@@ -9,6 +9,7 @@
   - in `piskel` clone, create a new branch for the release `git checkout -b vX.Y`
   - build and copy piskel to piskel-website (assumes the clones are in the same folder) `grunt && node bin/copy-to-piskel-website.js`
 - local test
+
   - start piskel-website in the Google app engine launcher, test manually the update
   - if any issue is detected create a commit to fix it (on the `vX.Y` branch) and push it.
 

@@ -1,6 +1,6 @@
-describe("MergeUtils suite", function() {
-  var B = '#000000';
-  var R = '#ff0000';
+describe("MergeUtils suite", function () {
+  var B = "#000000";
+  var R = "#ff0000";
   var T = Constants.TRANSPARENT_COLOR;
 
   var createPiskelFromGrid = function (grid, name) {
@@ -8,7 +8,7 @@ describe("MergeUtils suite", function() {
     var layer = pskl.model.Layer.fromFrames("l1", [frame]);
     return pskl.model.Piskel.fromLayers([layer], 12, {
       name: name || "piskel",
-      description: "desc"
+      description: "desc",
     });
   };
 
@@ -18,9 +18,9 @@ describe("MergeUtils suite", function() {
    */
   var getPiskel = function (color, rows, cols) {
     var grid = [];
-    for (var i = 0 ; i < rows ; i++) {
+    for (var i = 0; i < rows; i++) {
       grid[i] = [];
-      for (var j = 0 ; j < cols ; j++) {
+      for (var j = 0; j < cols; j++) {
         grid[i][j] = color;
       }
     }
@@ -35,7 +35,7 @@ describe("MergeUtils suite", function() {
       index: 0,
       resize: "expand",
       origin: "TOPLEFT",
-      insertMode: "add"
+      insertMode: "add",
     });
 
     expect(mergedPiskel.getWidth()).toBe(2);
@@ -52,7 +52,7 @@ describe("MergeUtils suite", function() {
       index: 0,
       resize: "expand",
       origin: "TOPLEFT",
-      insertMode: "insert"
+      insertMode: "insert",
     });
 
     expect(mergedPiskel.getWidth()).toBe(2);
@@ -69,7 +69,7 @@ describe("MergeUtils suite", function() {
       index: 0,
       resize: "expand",
       origin: "TOPLEFT",
-      insertMode: "insert"
+      insertMode: "insert",
     });
 
     expect(mergedPiskel.getWidth()).toBe(4);
@@ -84,7 +84,7 @@ describe("MergeUtils suite", function() {
       index: 0,
       resize: "keep",
       origin: "TOPLEFT",
-      insertMode: "insert"
+      insertMode: "insert",
     });
 
     expect(mergedPiskel.getWidth()).toBe(2);
@@ -99,7 +99,7 @@ describe("MergeUtils suite", function() {
       index: 0,
       resize: "expand",
       origin: "TOPLEFT",
-      insertMode: "insert"
+      insertMode: "insert",
     });
 
     expect(mergedPiskel.getWidth()).toBe(2);
@@ -114,7 +114,7 @@ describe("MergeUtils suite", function() {
       index: 0,
       resize: "expand",
       origin: "TOPLEFT",
-      insertMode: "insert"
+      insertMode: "insert",
     });
 
     expect(mergedPiskel.getWidth()).toBe(4);
@@ -129,7 +129,7 @@ describe("MergeUtils suite", function() {
       index: 0,
       resize: "expand",
       origin: "TOPLEFT",
-      insertMode: "insert"
+      insertMode: "insert",
     });
 
     expect(mergedPiskel.getWidth()).toBe(3);
@@ -144,7 +144,7 @@ describe("MergeUtils suite", function() {
       index: 0,
       resize: "keep",
       origin: "TOPLEFT",
-      insertMode: "insert"
+      insertMode: "insert",
     });
 
     expect(mergedPiskel.getWidth()).toBe(3);

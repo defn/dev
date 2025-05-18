@@ -3,14 +3,14 @@
  *
  * @require pskl.utils
  */
-(function() {
-  var ns = $.namespace('pskl.tools.drawing.selection');
+(function () {
+  var ns = $.namespace("pskl.tools.drawing.selection");
 
-  ns.LassoSelect = function() {
+  ns.LassoSelect = function () {
     ns.AbstractDragSelect.call(this);
 
-    this.toolId = 'tool-lasso-select';
-    this.helpText = 'Lasso selection';
+    this.toolId = "tool-lasso-select";
+    this.helpText = "Lasso selection";
     this.shortcut = pskl.service.keyboard.Shortcuts.TOOL.LASSO_SELECT;
   };
 
@@ -18,7 +18,7 @@
 
   /** @override */
   ns.LassoSelect.prototype.onDragSelectStart_ = function (col, row) {
-    this.pixels = [{col : col, row : row}];
+    this.pixels = [{ col: col, row: row }];
 
     this.startCol = col;
     this.startRow = row;
@@ -38,10 +38,18 @@
   };
 
   /** @override */
-  ns.LassoSelect.prototype.onDragSelectEnd_ = function (col, row, frame, overlay) {
+  ns.LassoSelect.prototype.onDragSelectEnd_ = function (
+    col,
+    row,
+    frame,
+    overlay,
+  ) {
     this.addPixel_(col, row, frame);
     // use LassoSelection to finalize selection, includes pixels inside the lasso shape
-    var selection = new pskl.selection.LassoSelection(this.getLassoPixels_(), frame);
+    var selection = new pskl.selection.LassoSelection(
+      this.getLassoPixels_(),
+      frame,
+    );
     this.setSelection_(selection, overlay);
 
     $.publish(Events.DRAG_END);
@@ -55,7 +63,12 @@
    * @private
    */
   ns.LassoSelect.prototype.getLassoPixels_ = function () {
-    var line = pskl.PixelUtils.getLinePixels(this.previousCol, this.startCol, this.previousRow, this.startRow);
+    var line = pskl.PixelUtils.getLinePixels(
+      this.previousCol,
+      this.startCol,
+      this.previousRow,
+      this.startRow,
+    );
     return this.pixels.concat(line);
   };
 
@@ -69,7 +82,12 @@
     row = pskl.utils.Math.minmax(row, 0, frame.getHeight() - 1);
 
     // line interpolation needed in case mousemove was too fast
-    var interpolatedPixels = pskl.PixelUtils.getLinePixels(col, this.previousCol, row, this.previousRow);
+    var interpolatedPixels = pskl.PixelUtils.getLinePixels(
+      col,
+      this.previousCol,
+      row,
+      this.previousRow,
+    );
     this.pixels = this.pixels.concat(interpolatedPixels);
 
     // update state

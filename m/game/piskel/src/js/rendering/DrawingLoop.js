@@ -1,5 +1,5 @@
 (function () {
-  var ns = $.namespace('pskl.rendering');
+  var ns = $.namespace("pskl.rendering");
 
   ns.DrawingLoop = function () {
     this.requestAnimationFrame = this.getRequestAnimationFrameShim_();
@@ -11,9 +11,9 @@
 
   ns.DrawingLoop.prototype.addCallback = function (callback, scope, args) {
     var callbackObj = {
-      fn : callback,
-      scope : scope,
-      args : args
+      fn: callback,
+      scope: scope,
+      args: args,
     };
 
     this.callbacks.push(callbackObj);
@@ -41,7 +41,7 @@
   };
 
   ns.DrawingLoop.prototype.executeCallbacks_ = function (deltaTime) {
-    for (var i = 0 ; i < this.callbacks.length ; i++) {
+    for (var i = 0; i < this.callbacks.length; i++) {
       var cb = this.callbacks[i];
       cb.fn.call(cb.scope, deltaTime, cb.args);
     }
@@ -52,11 +52,14 @@
   };
 
   ns.DrawingLoop.prototype.getRequestAnimationFrameShim_ = function () {
-    var requestAnimationFrame = window.requestAnimationFrame ||
-                  window.mozRequestAnimationFrame ||
-                  window.webkitRequestAnimationFrame ||
-                  window.msRequestAnimationFrame ||
-                  function (callback) { window.setTimeout(callback, 1000 / 60); };
+    var requestAnimationFrame =
+      window.requestAnimationFrame ||
+      window.mozRequestAnimationFrame ||
+      window.webkitRequestAnimationFrame ||
+      window.msRequestAnimationFrame ||
+      function (callback) {
+        window.setTimeout(callback, 1000 / 60);
+      };
 
     return requestAnimationFrame;
   };

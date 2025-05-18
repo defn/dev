@@ -1,5 +1,5 @@
 (function () {
-  var ns = $.namespace('pskl.model.frame');
+  var ns = $.namespace("pskl.model.frame");
 
   // Maximum number of cache entries
   var MAX_CACHE_ENTRIES = 100;
@@ -8,9 +8,11 @@
     return pskl.utils.FrameUtils.toImage(frame);
   };
 
-  var DEFAULT_OUTPUT_CLONER = function (o) {return o;};
+  var DEFAULT_OUTPUT_CLONER = function (o) {
+    return o;
+  };
 
-  var DEFAULT_NAMESPACE = '__cache_default__';
+  var DEFAULT_NAMESPACE = "__cache_default__";
 
   ns.CachedFrameProcessor = function () {
     // Cache object.
@@ -33,7 +35,9 @@
    * Function with 1 argument : pskl.model.Frame
    * @param {Function} frameProcessor
    */
-  ns.CachedFrameProcessor.prototype.setFrameProcessor = function (frameProcessor) {
+  ns.CachedFrameProcessor.prototype.setFrameProcessor = function (
+    frameProcessor,
+  ) {
     this.frameProcessor = frameProcessor;
   };
 

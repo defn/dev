@@ -1,5 +1,5 @@
 (function () {
-  var ns = $.namespace('pskl.model.frame');
+  var ns = $.namespace("pskl.model.frame");
 
   ns.AsyncCachedFrameProcessor = function (cacheResetInterval) {
     ns.CachedFrameProcessor.call(this, cacheResetInterval);
@@ -31,7 +31,12 @@
     if (cache[key1]) {
       processedFrame = cache[key1];
     } else {
-      var callback = this.onProcessorComplete_.bind(this, deferred, cache, key1);
+      var callback = this.onProcessorComplete_.bind(
+        this,
+        deferred,
+        cache,
+        key1,
+      );
       this.frameProcessor(frame, callback);
     }
 
@@ -42,7 +47,12 @@
     return deferred.promise;
   };
 
-  ns.AsyncCachedFrameProcessor.prototype.onProcessorComplete_ = function (deferred, cache, key1, result) {
+  ns.AsyncCachedFrameProcessor.prototype.onProcessorComplete_ = function (
+    deferred,
+    cache,
+    key1,
+    result,
+  ) {
     cache[key1] = result;
     deferred.resolve(result);
   };

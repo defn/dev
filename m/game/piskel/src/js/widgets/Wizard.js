@@ -1,5 +1,5 @@
 (function () {
-  var ns = $.namespace('pskl.widgets');
+  var ns = $.namespace("pskl.widgets");
   var TRANSITION_DURATION = 200;
 
   /**
@@ -20,8 +20,8 @@
     this.container = container;
 
     // Create internal wrapper that will contain the wizard steps.
-    this.wrapper = document.createElement('div');
-    this.wrapper.classList.add('wizard-wrapper');
+    this.wrapper = document.createElement("div");
+    this.wrapper.classList.add("wizard-wrapper");
 
     this.currentStep = null;
     this.previousSteps = [];
@@ -29,11 +29,13 @@
 
   ns.Wizard.prototype.init = function () {
     // Prepare all steps and add them in the wrapper.
-    Object.keys(this.steps).forEach(function (stepName) {
-      var step = this.steps[stepName];
-      step.el.classList.add('wizard-step');
-      this.wrapper.appendChild(step.el);
-    }.bind(this));
+    Object.keys(this.steps).forEach(
+      function (stepName) {
+        var step = this.steps[stepName];
+        step.el.classList.add("wizard-step");
+        this.wrapper.appendChild(step.el);
+      }.bind(this),
+    );
     this.container.appendChild(this.wrapper);
   };
 
@@ -52,7 +54,7 @@
   ns.Wizard.prototype.goTo = function (stepName) {
     var step = this.steps[stepName];
     if (!step) {
-      console.error('Wizard could not go to unknown step: ' + stepName);
+      console.error("Wizard could not go to unknown step: " + stepName);
       return;
     }
 
@@ -64,16 +66,19 @@
       this.previousSteps.push(previousStep);
 
       // Update classes to trigger animation.
-      this.currentStep.el.classList.add('current-step-in');
+      this.currentStep.el.classList.add("current-step-in");
 
-      window.setTimeout(function () {
-        // Cleanup transition classes after animation.
-        this.currentStep.el.classList.remove('current-step-in');
-        previousStep.el.classList.remove('current-step');
-        this.currentStep.el.classList.add('current-step');
-      }.bind(this), TRANSITION_DURATION);
+      window.setTimeout(
+        function () {
+          // Cleanup transition classes after animation.
+          this.currentStep.el.classList.remove("current-step-in");
+          previousStep.el.classList.remove("current-step");
+          this.currentStep.el.classList.add("current-step");
+        }.bind(this),
+        TRANSITION_DURATION,
+      );
     } else {
-      this.currentStep.el.classList.add('current-step');
+      this.currentStep.el.classList.add("current-step");
     }
   };
 
@@ -83,25 +88,28 @@
   ns.Wizard.prototype.back = function () {
     var previousStep = this.previousSteps.pop();
     if (!previousStep) {
-      console.error('Wizard has no previous step to go to.');
+      console.error("Wizard has no previous step to go to.");
       return;
     }
 
     var backedStep = this.currentStep;
     if (!backedStep) {
-      console.error('Wizard is in an invalid state');
+      console.error("Wizard is in an invalid state");
     }
 
     this.currentStep = previousStep;
 
     // Update classes to trigger animation.
-    backedStep.el.classList.add('current-step-out');
-    backedStep.el.classList.remove('current-step');
-    this.currentStep.el.classList.add('current-step');
+    backedStep.el.classList.add("current-step-out");
+    backedStep.el.classList.remove("current-step");
+    this.currentStep.el.classList.add("current-step");
 
-    window.setTimeout(function () {
-      // Cleanup transition classes after animation.
-      backedStep.el.classList.remove('current-step-out');
-    }.bind(this), TRANSITION_DURATION);
+    window.setTimeout(
+      function () {
+        // Cleanup transition classes after animation.
+        backedStep.el.classList.remove("current-step-out");
+      }.bind(this),
+      TRANSITION_DURATION,
+    );
   };
 })();

@@ -1,5 +1,5 @@
 (function () {
-  var ns = $.namespace('pskl.controller.dialogs.backups.steps');
+  var ns = $.namespace("pskl.controller.dialogs.backups.steps");
 
   // Should match the transition duration for.session-item defined in dialogs-browse-backups.css
   var DELETE_TRANSITION_DURATION = 500;
@@ -30,7 +30,7 @@
   };
 
   ns.SelectSession.prototype.init = function () {
-    this.addEventListener(this.container, 'click', this.onContainerClick_);
+    this.addEventListener(this.container, "click", this.onContainerClick_);
   };
 
   ns.SelectSession.prototype.onShow = function () {
@@ -38,21 +38,28 @@
   };
 
   ns.SelectSession.prototype.update = function () {
-    pskl.app.backupService.list().then(function (sessions) {
-      var html = this.getMarkupForSessions_(sessions);
-      this.container.querySelector('.session-list').innerHTML = html;
-    }.bind(this)).catch(function () {
-      var html = pskl.utils.Template.get('session-list-error');
-      this.container.querySelector('.session-list').innerHTML = html;
-    }.bind(this));
+    pskl.app.backupService
+      .list()
+      .then(
+        function (sessions) {
+          var html = this.getMarkupForSessions_(sessions);
+          this.container.querySelector(".session-list").innerHTML = html;
+        }.bind(this),
+      )
+      .catch(
+        function () {
+          var html = pskl.utils.Template.get("session-list-error");
+          this.container.querySelector(".session-list").innerHTML = html;
+        }.bind(this),
+      );
   };
 
   ns.SelectSession.prototype.getMarkupForSessions_ = function (sessions) {
     if (sessions.length === 0) {
-      return pskl.utils.Template.get('session-list-empty');
+      return pskl.utils.Template.get("session-list-empty");
     }
 
-    var sessionItemTemplate = pskl.utils.Template.get('session-list-item');
+    var sessionItemTemplate = pskl.utils.Template.get("session-list-item");
     return sessions.reduce(function (previous, session) {
       if (session.id === pskl.app.sessionId) {
         // Do not show backups for the current session.
@@ -61,12 +68,16 @@
       var view = {
         id: session.id,
         name: session.name,
-        description: session.description ? '- ' + session.description : '',
-        date: pskl.utils.DateUtils.format(session.endDate, 'the {{Y}}/{{M}}/{{D}} at {{H}}:{{m}}'),
-        count: session.count === 1 ? '1 snapshot' : session.count + ' snapshots'
+        description: session.description ? "- " + session.description : "",
+        date: pskl.utils.DateUtils.format(
+          session.endDate,
+          "the {{Y}}/{{M}}/{{D}} at {{H}}:{{m}}",
+        ),
+        count:
+          session.count === 1 ? "1 snapshot" : session.count + " snapshots",
       };
       return previous + pskl.utils.Template.replace(sessionItemTemplate, view);
-    }, '');
+    }, "");
   };
 
   ns.SelectSession.prototype.destroy = function () {
@@ -80,22 +91,23 @@
     }
 
     var action = evt.target.dataset.action;
-    if (action == 'view') {
+    if (action == "view") {
       this.backupsController.backupsData.selectedSession = sessionId;
       this.backupsController.next();
-    } else if (action == 'delete') {
-      if (window.confirm('Are you sure you want to delete this session?')) {
-        evt.target.closest('.session-item').classList.add('deleting');
+    } else if (action == "delete") {
+      if (window.confirm("Are you sure you want to delete this session?")) {
+        evt.target.closest(".session-item").classList.add("deleting");
         Q.all([
           pskl.app.backupService.deleteSession(sessionId),
           // Wait for 500ms for the .hide opacity transition.
-          wait(DELETE_TRANSITION_DURATION)
-        ]).then(function () {
-          // Refresh the list of sessions
-          this.update();
-        }.bind(this));
+          wait(DELETE_TRANSITION_DURATION),
+        ]).then(
+          function () {
+            // Refresh the list of sessions
+            this.update();
+          }.bind(this),
+        );
       }
     }
   };
-
 })();

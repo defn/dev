@@ -1,5 +1,5 @@
 (function () {
-  var ns = $.namespace('pskl.service');
+  var ns = $.namespace("pskl.service");
 
   var BUTTON_UNSET = null;
 
@@ -29,14 +29,19 @@
     return this.isMouseButtonPressed_(Constants.MIDDLE_BUTTON);
   };
 
-  ns.MouseStateService.prototype.isMouseButtonPressed_ = function (mouseButton) {
-    return this.lastButtonPressed_ != BUTTON_UNSET && this.lastButtonPressed_ == mouseButton;
+  ns.MouseStateService.prototype.isMouseButtonPressed_ = function (
+    mouseButton,
+  ) {
+    return (
+      this.lastButtonPressed_ != BUTTON_UNSET &&
+      this.lastButtonPressed_ == mouseButton
+    );
   };
 
-  ns.MouseStateService.prototype.onMouseEvent_ = function(evt, mouseEvent) {
-    if (mouseEvent.type == 'mousedown') {
+  ns.MouseStateService.prototype.onMouseEvent_ = function (evt, mouseEvent) {
+    if (mouseEvent.type == "mousedown") {
       this.lastButtonPressed_ = mouseEvent.button;
-    } else if (mouseEvent.type == 'mouseup') {
+    } else if (mouseEvent.type == "mouseup") {
       this.lastButtonPressed_ = BUTTON_UNSET;
     }
   };

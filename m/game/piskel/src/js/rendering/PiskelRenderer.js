@@ -1,10 +1,9 @@
 (function () {
-
-  var ns = $.namespace('pskl.rendering');
+  var ns = $.namespace("pskl.rendering");
 
   ns.PiskelRenderer = function (piskelController) {
     var frames = [];
-    for (var i = 0 ; i < piskelController.getFrameCount() ; i++) {
+    for (var i = 0; i < piskelController.getFrameCount(); i++) {
       frames.push(piskelController.renderFrameAt(i, true));
     }
     this.piskelController = piskelController;
@@ -17,7 +16,7 @@
 
     var canvas = this.createCanvas_(columns, rows);
 
-    for (var i = 0 ; i < this.frames.length ; i++) {
+    for (var i = 0; i < this.frames.length; i++) {
       var frame = this.frames[i];
       var posX = (i % columns) * this.piskelController.getWidth();
       var posY = Math.floor(i / columns) * this.piskelController.getHeight();
@@ -26,9 +25,20 @@
     return canvas;
   };
 
-  ns.PiskelRenderer.prototype.drawFrameInCanvas_ = function (frame, canvas, offsetWidth, offsetHeight) {
-    var context = canvas.getContext('2d');
-    context.drawImage(frame, offsetWidth, offsetHeight, frame.width, frame.height);
+  ns.PiskelRenderer.prototype.drawFrameInCanvas_ = function (
+    frame,
+    canvas,
+    offsetWidth,
+    offsetHeight,
+  ) {
+    var context = canvas.getContext("2d");
+    context.drawImage(
+      frame,
+      offsetWidth,
+      offsetHeight,
+      frame.width,
+      frame.height,
+    );
   };
 
   ns.PiskelRenderer.prototype.createCanvas_ = function (columns, rows) {

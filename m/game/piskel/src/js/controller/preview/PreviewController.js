@@ -1,5 +1,5 @@
 (function () {
-  var ns = $.namespace('pskl.controller.preview');
+  var ns = $.namespace("pskl.controller.preview");
 
   // Preview is a square of PREVIEW_SIZE x PREVIEW_SIZE
   var PREVIEW_SIZE = 200;
@@ -14,17 +14,28 @@
     this.lastRenderTime = 0;
     this.renderFlag = true;
 
-    this.renderer = new pskl.rendering.frame.BackgroundImageFrameRenderer(this.container);
-    this.popupPreviewController = new ns.PopupPreviewController(piskelController);
-    this.previewActionsController = new ns.PreviewActionsController(this, container);
+    this.renderer = new pskl.rendering.frame.BackgroundImageFrameRenderer(
+      this.container,
+    );
+    this.popupPreviewController = new ns.PopupPreviewController(
+      piskelController,
+    );
+    this.previewActionsController = new ns.PreviewActionsController(
+      this,
+      container,
+    );
   };
 
   ns.PreviewController.prototype.init = function () {
-    var width = Constants.ANIMATED_PREVIEW_WIDTH + Constants.RIGHT_COLUMN_PADDING_LEFT;
-    document.querySelector('.right-column').style.width = width + 'px';
+    var width =
+      Constants.ANIMATED_PREVIEW_WIDTH + Constants.RIGHT_COLUMN_PADDING_LEFT;
+    document.querySelector(".right-column").style.width = width + "px";
 
     $.subscribe(Events.FRAME_SIZE_CHANGED, this.onFrameSizeChange_.bind(this));
-    $.subscribe(Events.USER_SETTINGS_CHANGED, this.onUserSettingsChange_.bind(this));
+    $.subscribe(
+      Events.USER_SETTINGS_CHANGED,
+      this.onUserSettingsChange_.bind(this),
+    );
     $.subscribe(Events.PISKEL_SAVE_STATE, this.setRenderFlag_.bind(this, true));
     $.subscribe(Events.PISKEL_RESET, this.setRenderFlag_.bind(this, true));
 
@@ -39,7 +50,11 @@
     this.popupPreviewController.open();
   };
 
-  ns.PreviewController.prototype.onUserSettingsChange_ = function (evt, name, value) {
+  ns.PreviewController.prototype.onUserSettingsChange_ = function (
+    evt,
+    name,
+    value,
+  ) {
     if (name === pskl.UserSettings.SEAMLESS_MODE) {
       this.onFrameSizeChange_();
     } else {
@@ -52,11 +67,11 @@
     var previewSize = pskl.UserSettings.get(pskl.UserSettings.PREVIEW_SIZE);
 
     var zoom;
-    if (previewSize === 'original') {
+    if (previewSize === "original") {
       zoom = 1;
-    } else if (previewSize === 'best') {
+    } else if (previewSize === "best") {
       zoom = Math.floor(this.calculateZoom_());
-    } else if (previewSize === 'full') {
+    } else if (previewSize === "full") {
       zoom = this.calculateZoom_();
     }
 
@@ -68,14 +83,14 @@
     return this.calculateZoom_();
   };
 
-  ns.PreviewController.prototype.getCoordinates = function(x, y) {
+  ns.PreviewController.prototype.getCoordinates = function (x, y) {
     var containerRect = this.container.getBoundingClientRect();
     x = x - containerRect.left;
     y = y - containerRect.top;
     var zoom = this.getZoom();
     return {
-      x : Math.floor(x / zoom),
-      y : Math.floor(y / zoom)
+      x: Math.floor(x / zoom),
+      y: Math.floor(y / zoom),
     };
   };
 
@@ -84,7 +99,10 @@
     var index = this.getNextIndex_(delta);
     if (this.shouldRender_() || this.currentIndex != index) {
       this.currentIndex = index;
-      var frame = pskl.utils.LayerUtils.mergeFrameAt(this.piskelController.getLayers(), index);
+      var frame = pskl.utils.LayerUtils.mergeFrameAt(
+        this.piskelController.getLayers(),
+        index,
+      );
       this.renderer.render(frame);
       this.renderFlag = false;
       this.lastRenderTime = Date.now();
@@ -102,7 +120,9 @@
       var frameIndexes = this.piskelController.getVisibleFrameIndexes();
       if (frameIndexes.length <= index) {
         this.elapsedTime = 0;
-        index = (frameIndexes.length) ? frameIndexes[0] : this.piskelController.getCurrentFrameIndex();
+        index = frameIndexes.length
+          ? frameIndexes[0]
+          : this.piskelController.getCurrentFrameIndex();
         return index;
       }
       return frameIndexes[index];
@@ -143,16 +163,16 @@
     }
 
     var containerEl = this.container;
-    containerEl.style.height = height + 'px';
-    containerEl.style.width = width + 'px';
+    containerEl.style.height = height + "px";
+    containerEl.style.width = width + "px";
 
     var horizontalMargin = (PREVIEW_SIZE - height) / 2;
-    containerEl.style.marginTop = horizontalMargin + 'px';
-    containerEl.style.marginBottom = horizontalMargin + 'px';
+    containerEl.style.marginTop = horizontalMargin + "px";
+    containerEl.style.marginBottom = horizontalMargin + "px";
 
     var verticalMargin = (PREVIEW_SIZE - width) / 2;
-    containerEl.style.marginLeft = verticalMargin + 'px';
-    containerEl.style.marginRight = verticalMargin + 'px';
+    containerEl.style.marginLeft = verticalMargin + "px";
+    containerEl.style.marginRight = verticalMargin + "px";
   };
 
   ns.PreviewController.prototype.setRenderFlag_ = function (bool) {
@@ -160,7 +180,9 @@
   };
 
   ns.PreviewController.prototype.shouldRender_ = function () {
-    return (this.renderFlag || this.popupPreviewController.renderFlag) &&
-            (Date.now() - this.lastRenderTime > RENDER_MINIMUM_DELAY);
+    return (
+      (this.renderFlag || this.popupPreviewController.renderFlag) &&
+      Date.now() - this.lastRenderTime > RENDER_MINIMUM_DELAY
+    );
   };
 })();

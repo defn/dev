@@ -1,10 +1,10 @@
 (function () {
-  var ns = $.namespace('pskl.tools.transform');
+  var ns = $.namespace("pskl.tools.transform");
 
   ns.TransformUtils = {
-    VERTICAL : 'VERTICAL',
-    HORIZONTAL : 'HORIZONTAL',
-    flip : function (frame, axis) {
+    VERTICAL: "VERTICAL",
+    HORIZONTAL: "HORIZONTAL",
+    flip: function (frame, axis) {
       var clone = frame.clone();
       var w = frame.getWidth();
       var h = frame.getHeight();
@@ -21,14 +21,14 @@
       return frame;
     },
 
-    CLOCKWISE : 'clockwise',
-    COUNTERCLOCKWISE : 'counterclockwise',
-    rotate : function (frame, direction) {
+    CLOCKWISE: "clockwise",
+    COUNTERCLOCKWISE: "counterclockwise",
+    rotate: function (frame, direction) {
       var clone = frame.clone();
       var w = frame.getWidth();
       var h = frame.getHeight();
 
-      var max =  Math.max(w, h);
+      var max = Math.max(w, h);
       var xDelta = Math.ceil((max - w) / 2);
       var yDelta = Math.ceil((max - h) / 2);
 
@@ -64,13 +64,15 @@
       return frame;
     },
 
-    getBoundaries : function(frames) {
+    getBoundaries: function (frames) {
       var minx = +Infinity;
       var miny = +Infinity;
       var maxx = 0;
       var maxy = 0;
 
-      var transparentColorInt = pskl.utils.colorToInt(Constants.TRANSPARENT_COLOR);
+      var transparentColorInt = pskl.utils.colorToInt(
+        Constants.TRANSPARENT_COLOR,
+      );
 
       frames.forEach(function (frame) {
         frame.forEachPixel(function (color, x, y) {
@@ -91,9 +93,9 @@
       };
     },
 
-    moveFramePixels : function (frame, dx, dy) {
+    moveFramePixels: function (frame, dx, dy) {
       var clone = frame.clone();
-      frame.forEachPixel(function(color, x, y) {
+      frame.forEachPixel(function (color, x, y) {
         var _x = x;
         var _y = y;
 
@@ -108,7 +110,7 @@
       });
     },
 
-    center : function(frame) {
+    center: function (frame) {
       // Figure out the boundary
       var boundaries = ns.TransformUtils.getBoundaries([frame]);
 
@@ -125,6 +127,6 @@
 
       ns.TransformUtils.moveFramePixels(frame, dx, dy);
       return frame;
-    }
+    },
   };
 })();

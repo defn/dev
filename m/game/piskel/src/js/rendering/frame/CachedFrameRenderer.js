@@ -1,5 +1,5 @@
 (function () {
-  var ns = $.namespace('pskl.rendering.frame');
+  var ns = $.namespace("pskl.rendering.frame");
 
   /**
    * FrameRenderer implementation that prevents unnecessary redraws.
@@ -8,11 +8,19 @@
    * @param {Array} classList array of strings to use for css classes
    */
   ns.CachedFrameRenderer = function (container, renderingOptions, classList) {
-    pskl.rendering.frame.FrameRenderer.call(this, container, renderingOptions, classList);
-    this.serializedFrame = '';
+    pskl.rendering.frame.FrameRenderer.call(
+      this,
+      container,
+      renderingOptions,
+      classList,
+    );
+    this.serializedFrame = "";
   };
 
-  pskl.utils.inherit(pskl.rendering.frame.CachedFrameRenderer, pskl.rendering.frame.FrameRenderer);
+  pskl.utils.inherit(
+    pskl.rendering.frame.CachedFrameRenderer,
+    pskl.rendering.frame.FrameRenderer,
+  );
 
   /**
    * Only call display size if provided values are different from current values.
@@ -36,12 +44,14 @@
       this.getGridWidth(),
       this.getGridSpacing(),
       this.getGridColor(),
-      pskl.UserSettings.get('SEAMLESS_MODE'),
-      pskl.UserSettings.get('SEAMLESS_OPACITY'),
-      offset.x, offset.y,
-      size.width, size.height,
-      frame.getHash()
-    ].join('-');
+      pskl.UserSettings.get("SEAMLESS_MODE"),
+      pskl.UserSettings.get("SEAMLESS_OPACITY"),
+      offset.x,
+      offset.y,
+      size.width,
+      size.height,
+      frame.getHash(),
+    ].join("-");
 
     if (this.serializedFrame != serializedFrame) {
       this.serializedFrame = serializedFrame;

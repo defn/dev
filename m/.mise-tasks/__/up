@@ -5,6 +5,6 @@
 cd "${MISE_ORIGINAL_CWD}"
 
 while true; do
-    echo "$(date) $(uname -a)"
-    sleep 1
+	echo "$(date) $(uname -a)"
+	sleep 1
 done

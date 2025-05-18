@@ -1,11 +1,11 @@
 (function () {
-  var ns = $.namespace('pskl.utils');
+  var ns = $.namespace("pskl.utils");
 
   ns.PiskelFileUtils = {
-    FAILURE : {
-      EMPTY : 'No data found in piskel file',
-      INVALID : 'Invalid piskel file, contact us on twitter @piskelapp',
-      DESERIALIZATION : 'Piskel data deserialization failed'
+    FAILURE: {
+      EMPTY: "No data found in piskel file",
+      INVALID: "Invalid piskel file, contact us on twitter @piskelapp",
+      DESERIALIZATION: "Piskel data deserialization failed",
     },
 
     /**
@@ -16,7 +16,7 @@
      * @param  {Function} onSuccess Called if the deserialization of the piskel is successful
      * @param  {Function} onError NOT USED YET
      */
-    loadFromFile : function (file, onSuccess, onError) {
+    loadFromFile: function (file, onSuccess, onError) {
       pskl.utils.FileUtils.readFile(file, function (content) {
         var rawPiskel = pskl.utils.Base64.toText(content);
         ns.PiskelFileUtils.decodePiskelFile(
@@ -29,12 +29,12 @@
             }
             onSuccess(piskel);
           },
-          onError
+          onError,
         );
       });
     },
 
-    decodePiskelFile : function (rawPiskel, onSuccess, onError) {
+    decodePiskelFile: function (rawPiskel, onSuccess, onError) {
       var serializedPiskel;
       if (rawPiskel.length === 0) {
         onError(ns.PiskelFileUtils.FAILURE.EMPTY);
@@ -49,9 +49,13 @@
       }
 
       var piskel = serializedPiskel.piskel;
-      pskl.utils.serialization.Deserializer.deserialize(serializedPiskel, onSuccess, function () {
-        onError(ns.PiskelFileUtils.FAILURE.DESERIALIZATION);
-      });
-    }
+      pskl.utils.serialization.Deserializer.deserialize(
+        serializedPiskel,
+        onSuccess,
+        function () {
+          onError(ns.PiskelFileUtils.FAILURE.DESERIALIZATION);
+        },
+      );
+    },
   };
 })();

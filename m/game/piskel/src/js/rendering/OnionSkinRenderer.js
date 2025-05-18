@@ -1,5 +1,5 @@
 (function () {
-  var ns = $.namespace('pskl.rendering');
+  var ns = $.namespace("pskl.rendering");
 
   ns.OnionSkinRenderer = function (renderer, piskelController) {
     pskl.rendering.CompositeRenderer.call(this);
@@ -8,16 +8,27 @@
     this.renderer = renderer;
     this.add(this.renderer);
 
-    this.hash = '';
+    this.hash = "";
   };
 
-  ns.OnionSkinRenderer.createInContainer = function (container, renderingOptions, piskelController) {
+  ns.OnionSkinRenderer.createInContainer = function (
+    container,
+    renderingOptions,
+    piskelController,
+  ) {
     // Do not use CachedFrameRenderers here, caching is performed in the render method
-    var renderer = new pskl.rendering.frame.FrameRenderer(container, renderingOptions, ['onion-skin-canvas']);
+    var renderer = new pskl.rendering.frame.FrameRenderer(
+      container,
+      renderingOptions,
+      ["onion-skin-canvas"],
+    );
     return new ns.OnionSkinRenderer(renderer, piskelController);
   };
 
-  pskl.utils.inherit(pskl.rendering.OnionSkinRenderer, pskl.rendering.CompositeRenderer);
+  pskl.utils.inherit(
+    pskl.rendering.OnionSkinRenderer,
+    pskl.rendering.CompositeRenderer,
+  );
 
   ns.OnionSkinRenderer.prototype.render = function () {
     var frames = this.getOnionFrames_();
@@ -64,11 +75,13 @@
       offset.y,
       size.width,
       size.height,
-      frames.map(function (f) {
-        return f.getHash();
-      }).join('-'),
-      layers.length
-    ].join('-');
+      frames
+        .map(function (f) {
+          return f.getHash();
+        })
+        .join("-"),
+      layers.length,
+    ].join("-");
   };
 
   /**
@@ -85,6 +98,6 @@
   };
 
   ns.OnionSkinRenderer.prototype.flush = function () {
-    this.hash = '';
+    this.hash = "";
   };
 })();

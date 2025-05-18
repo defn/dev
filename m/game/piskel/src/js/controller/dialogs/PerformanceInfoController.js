@@ -1,5 +1,5 @@
 (function () {
-  var ns = $.namespace('pskl.controller.dialogs');
+  var ns = $.namespace("pskl.controller.dialogs");
 
   ns.PerformanceInfoController = function () {};
 

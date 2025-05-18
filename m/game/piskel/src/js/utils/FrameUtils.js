@@ -1,5 +1,5 @@
 (function () {
-  var ns = $.namespace('pskl.utils');
+  var ns = $.namespace("pskl.utils");
   var colorCache = {};
   var offCanvasPool = {};
   var imageDataPool = {};
@@ -11,7 +11,7 @@
      * @param zoom {Number} zoom
      * @return {Image}
      */
-    toImage : function (frame, zoom, opacity) {
+    toImage: function (frame, zoom, opacity) {
       zoom = zoom || 1;
       opacity = isNaN(opacity) ? 1 : opacity;
 
@@ -29,14 +29,20 @@
      * @param {String} transparentColor (optional) color to use to represent transparent pixels.
      * @param {String} globalAlpha (optional) global frame opacity
      */
-    drawToCanvas : function (frame, canvas, transparentColor, globalAlpha) {
-      var context = canvas.getContext('2d');
+    drawToCanvas: function (frame, canvas, transparentColor, globalAlpha) {
+      var context = canvas.getContext("2d");
       globalAlpha = isNaN(globalAlpha) ? 1 : globalAlpha;
       context.globalAlpha = globalAlpha;
       transparentColor = transparentColor || Constants.TRANSPARENT_COLOR;
 
       if (frame instanceof pskl.model.frame.RenderedFrame) {
-        context.fillRect(transparentColor, 0, 0, frame.getWidth(), frame.getHeight());
+        context.fillRect(
+          transparentColor,
+          0,
+          0,
+          frame.getWidth(),
+          frame.getHeight(),
+        );
         context.drawImage(frame.getRenderedFrame(), 0, 0);
       } else {
         var w = frame.getWidth();
@@ -44,7 +50,9 @@
         var pixels = frame.pixels;
 
         // Replace transparent color
-        var constantTransparentColorInt = pskl.utils.colorToInt(Constants.TRANSPARENT_COLOR);
+        var constantTransparentColorInt = pskl.utils.colorToInt(
+          Constants.TRANSPARENT_COLOR,
+        );
         var transparentColorInt = pskl.utils.colorToInt(transparentColor);
         if (transparentColorInt != constantTransparentColorInt) {
           pixels = frame.getPixels();
@@ -56,10 +64,13 @@
         }
 
         // Imagedata from cache
-        var imageDataKey = w + '-' + h;
+        var imageDataKey = w + "-" + h;
         var imageData;
         if (!imageDataPool[imageDataKey]) {
-          imageData = imageDataPool[imageDataKey] = context.createImageData(w, h);
+          imageData = imageDataPool[imageDataKey] = context.createImageData(
+            w,
+            h,
+          );
         } else {
           imageData = imageDataPool[imageDataKey];
         }
@@ -70,11 +81,12 @@
         imgDataData.set(data);
 
         // Offcanvas from cache
-        var offCanvasKey = w + '-' + h;
+        var offCanvasKey = w + "-" + h;
         var offCanvas;
         if (!offCanvasPool[offCanvasKey]) {
-          offCanvas = offCanvasPool[offCanvasKey] = pskl.utils.CanvasUtils.createCanvas(w, h);
-          offCanvas.context = offCanvas.getContext('2d');
+          offCanvas = offCanvasPool[offCanvasKey] =
+            pskl.utils.CanvasUtils.createCanvas(w, h);
+          offCanvas.context = offCanvas.getContext("2d");
         } else {
           offCanvas = offCanvasPool[offCanvasKey];
         }
@@ -95,7 +107,7 @@
      * @param  width {Number} width of the line to draw, in pixels
      * @param  context {CanvasRenderingContext2D} context of the canvas target
      */
-    renderLine_ : function (color, x, y, width, context) {
+    renderLine_: function (color, x, y, width, context) {
       if (color === Constants.TRANSPARENT_COLOR || color === null) {
         return;
       }
@@ -103,21 +115,30 @@
       context.fillRect(x, y, 1, width);
     },
 
-    merge : function (frames) {
+    merge: function (frames) {
       var merged = null;
       if (frames.length) {
         merged = frames[0].clone();
-        for (var i = 1 ; i < frames.length ; i++) {
+        for (var i = 1; i < frames.length; i++) {
           pskl.utils.FrameUtils.mergeFrames_(merged, frames[i]);
         }
       }
       return merged;
     },
 
-    mergeFrames_ : function (frameA, frameB) {
-      var transparentColorInt = pskl.utils.colorToInt(Constants.TRANSPARENT_COLOR);
-      for (var i = 0, length = frameA.getWidth() * frameA.getHeight(); i < length; ++i) {
-        if (frameB.pixels[i] != transparentColorInt && frameA.pixels[i] != frameB.pixels[i]) {
+    mergeFrames_: function (frameA, frameB) {
+      var transparentColorInt = pskl.utils.colorToInt(
+        Constants.TRANSPARENT_COLOR,
+      );
+      for (
+        var i = 0, length = frameA.getWidth() * frameA.getHeight();
+        i < length;
+        ++i
+      ) {
+        if (
+          frameB.pixels[i] != transparentColorInt &&
+          frameA.pixels[i] != frameB.pixels[i]
+        ) {
           frameA.pixels[i] = frameB.pixels[i];
         }
       }
@@ -150,32 +171,43 @@
       });
     },
 
-    resize : function (frame, targetWidth, targetHeight, smoothing) {
+    resize: function (frame, targetWidth, targetHeight, smoothing) {
       var image = pskl.utils.FrameUtils.toImage(frame);
-      var resizedImage = pskl.utils.ImageResizer.resize(image, targetWidth, targetHeight, smoothing);
+      var resizedImage = pskl.utils.ImageResizer.resize(
+        image,
+        targetWidth,
+        targetHeight,
+        smoothing,
+      );
       return pskl.utils.FrameUtils.createFromImage(resizedImage);
     },
 
-    removeTransparency : function (frame) {
+    removeTransparency: function (frame) {
       frame.forEachPixel(function (color, x, y) {
-        var alpha = color >> 24 >>> 0 & 0xff;
+        var alpha = ((color >> 24) >>> 0) & 0xff;
         if (alpha && alpha !== 255) {
           var rounded = Math.round(alpha / 255) * 255;
-          var roundedColor = color - (alpha << 24 >>> 0) + (rounded << 24 >>> 0);
+          var roundedColor =
+            color - ((alpha << 24) >>> 0) + ((rounded << 24) >>> 0);
           frame.setPixel(x, y, roundedColor);
         }
       });
     },
 
-    createFromCanvas : function (canvas, x, y, w, h, preserveOpacity) {
-      var imgData = canvas.getContext('2d').getImageData(x, y, w, h).data;
-      return pskl.utils.FrameUtils.createFromImageData_(imgData, w, h, preserveOpacity);
+    createFromCanvas: function (canvas, x, y, w, h, preserveOpacity) {
+      var imgData = canvas.getContext("2d").getImageData(x, y, w, h).data;
+      return pskl.utils.FrameUtils.createFromImageData_(
+        imgData,
+        w,
+        h,
+        preserveOpacity,
+      );
     },
 
-    createFromImageSrc : function (src, preserveOpacity, cb) {
+    createFromImageSrc: function (src, preserveOpacity, cb) {
       var image = new Image();
-      image.addEventListener('load', function onImageLoaded() {
-        image.removeEventListener('load', onImageLoaded);
+      image.addEventListener("load", function onImageLoaded() {
+        image.removeEventListener("load", onImageLoaded);
         var frame = ns.FrameUtils.createFromImage(image, preserveOpacity);
         cb(frame);
       });
@@ -192,18 +224,23 @@
      * @param  {boolean} preserveOpacity set to true to preserve the opacity
      * @return {pskl.model.Frame} corresponding frame
      */
-    createFromImage : function (image, preserveOpacity) {
+    createFromImage: function (image, preserveOpacity) {
       var w = image.width;
       var h = image.height;
       var canvas = pskl.utils.CanvasUtils.createCanvas(w, h);
-      var context = canvas.getContext('2d');
+      var context = canvas.getContext("2d");
 
       context.drawImage(image, 0, 0, w, h, 0, 0, w, h);
       var imgData = context.getImageData(0, 0, w, h).data;
-      return pskl.utils.FrameUtils.createFromImageData_(imgData, w, h, preserveOpacity);
+      return pskl.utils.FrameUtils.createFromImageData_(
+        imgData,
+        w,
+        h,
+        preserveOpacity,
+      );
     },
 
-    createFromImageData_ : function (imageData, width, height, preserveOpacity) {
+    createFromImageData_: function (imageData, width, height, preserveOpacity) {
       var frame = new pskl.model.Frame(width, height);
       frame.pixels = new Uint32Array(imageData.buffer);
       if (!preserveOpacity) {
@@ -221,12 +258,15 @@
      * @param  {Number} frameCount number of frames in the spritesheet
      * @return {Array<Frame>}
      */
-    createFramesFromSpritesheet : function (image, frameCount) {
+    createFramesFromSpritesheet: function (image, frameCount) {
       var layout = [];
-      for (var i = 0 ; i < frameCount ; i++) {
+      for (var i = 0; i < frameCount; i++) {
         layout.push([i]);
       }
-      var chunkFrames = pskl.utils.FrameUtils.createFramesFromChunk(image, layout);
+      var chunkFrames = pskl.utils.FrameUtils.createFramesFromChunk(
+        image,
+        layout,
+      );
       return chunkFrames.map(function (chunkFrame) {
         return chunkFrame.frame;
       });
@@ -240,7 +280,7 @@
      * @param  {Array <Array>} layout description of the frame indexes expected to be found in the chunk
      * @return {Array<Object>} array of objects containing: {index: frame index, frame: frame instance}
      */
-    createFramesFromChunk : function (image, layout) {
+    createFramesFromChunk: function (image, layout) {
       var width = image.width;
       var height = image.height;
 
@@ -250,20 +290,35 @@
 
       // Create a canvas adapted to the image size
       var canvas = pskl.utils.CanvasUtils.createCanvas(frameWidth, frameHeight);
-      var context = canvas.getContext('2d');
+      var context = canvas.getContext("2d");
 
       // Draw the zoomed-up pixels to a different canvas context
       var chunkFrames = [];
-      for (var i = 0 ; i < layout.length ; i++) {
+      for (var i = 0; i < layout.length; i++) {
         var row = layout[i];
-        for (var j = 0 ; j < row.length ; j++) {
-          context.clearRect(0, 0 , frameWidth, frameHeight);
-          context.drawImage(image, frameWidth * i, frameHeight * j,
-            frameWidth, frameHeight, 0, 0, frameWidth, frameHeight);
-          var frame = pskl.utils.FrameUtils.createFromCanvas(canvas, 0, 0, frameWidth, frameHeight);
+        for (var j = 0; j < row.length; j++) {
+          context.clearRect(0, 0, frameWidth, frameHeight);
+          context.drawImage(
+            image,
+            frameWidth * i,
+            frameHeight * j,
+            frameWidth,
+            frameHeight,
+            0,
+            0,
+            frameWidth,
+            frameHeight,
+          );
+          var frame = pskl.utils.FrameUtils.createFromCanvas(
+            canvas,
+            0,
+            0,
+            frameWidth,
+            frameHeight,
+          );
           chunkFrames.push({
-            index : layout[i][j],
-            frame : frame
+            index: layout[i][j],
+            frame: frame,
           });
         }
       }
@@ -271,17 +326,17 @@
       return chunkFrames;
     },
 
-    toFrameGrid : function (normalGrid) {
+    toFrameGrid: function (normalGrid) {
       var frameGrid = [];
       var w = normalGrid[0].length;
       var h = normalGrid.length;
-      for (var x = 0 ; x < w ; x++) {
+      for (var x = 0; x < w; x++) {
         frameGrid[x] = [];
-        for (var y = 0 ; y < h ; y++) {
+        for (var y = 0; y < h; y++) {
           frameGrid[x][y] = normalGrid[y][x];
         }
       }
       return frameGrid;
-    }
+    },
   };
 })();

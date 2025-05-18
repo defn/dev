@@ -4,13 +4,13 @@
    * @param  {HTMLElement} iframe
    */
   var processFrame = function (iframe) {
-    var type = iframe.getAttribute('data-iframe-loader');
+    var type = iframe.getAttribute("data-iframe-loader");
     if (type === "display") {
       displayFrame(iframe);
     } else if (type === "store") {
       storeFrame(iframe);
     } else {
-      console.error('iframeLoader invalid type : ' + type);
+      console.error("iframeLoader invalid type : " + type);
     }
   };
 
@@ -21,7 +21,7 @@
    * @param  {HTMLElement} iframe
    */
   var displayFrame = function (iframe) {
-    var div=document.createElement("div");
+    var div = document.createElement("div");
     div.innerHTML = iframe.contentWindow.document.body.innerHTML;
     if (div.children.length == 1) {
       div = div.children[0];
@@ -35,18 +35,21 @@
    * @param  {HTMLElement} iframe
    */
   var storeFrame = function (iframe) {
-    var script=document.createElement("script");
+    var script = document.createElement("script");
     script.setAttribute("type", "text/html");
-    script.setAttribute("id", iframe.getAttribute("src").replace(/.*templates[^\/]*\//,'templates/'));
+    script.setAttribute(
+      "id",
+      iframe.getAttribute("src").replace(/.*templates[^\/]*\//, "templates/"),
+    );
     script.innerHTML = iframe.contentWindow.document.body.innerHTML;
     iframe.parentNode.removeChild(iframe);
     document.body.appendChild(script);
   };
 
   window.iframeloader = {
-    onLoad : function (event) {
+    onLoad: function (event) {
       var iframe = event.target || event.srcElement;
       processFrame(iframe);
-    }
+    },
   };
 })();

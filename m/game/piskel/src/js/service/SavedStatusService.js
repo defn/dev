@@ -1,10 +1,10 @@
 (function () {
-  var ns = $.namespace('pskl.service');
+  var ns = $.namespace("pskl.service");
 
   ns.SavedStatusService = function (piskelController, historyService) {
     this.piskelController = piskelController;
     this.historyService = historyService;
-    this.lastSavedStateIndex = '';
+    this.lastSavedStateIndex = "";
 
     this.publishStatusUpdateEvent_ = this.publishStatusUpdateEvent_.bind(this);
   };
@@ -26,6 +26,6 @@
   };
 
   ns.SavedStatusService.prototype.isDirty = function () {
-    return (this.lastSavedStateIndex != this.historyService.getCurrentStateId());
+    return this.lastSavedStateIndex != this.historyService.getCurrentStateId();
   };
 })();

@@ -1,5 +1,5 @@
 (function () {
-  var ns = $.namespace('pskl.worker.imageprocessor');
+  var ns = $.namespace("pskl.worker.imageprocessor");
 
   ns.ImageProcessor = function (image, onSuccess, onStep, onError) {
     this.image = image;
@@ -8,7 +8,10 @@
     this.onSuccess = onSuccess;
     this.onError = onError;
 
-    this.worker = pskl.utils.WorkerUtils.createWorker(ns.ImageProcessorWorker, 'image-colors-processor');
+    this.worker = pskl.utils.WorkerUtils.createWorker(
+      ns.ImageProcessorWorker,
+      "image-colors-processor",
+    );
     this.worker.onmessage = this.onWorkerMessage.bind(this);
   };
 
@@ -16,19 +19,19 @@
     var canvas = pskl.utils.CanvasUtils.createFromImage(this.image);
     var imageData = pskl.utils.CanvasUtils.getImageDataFromCanvas(canvas);
     this.worker.postMessage({
-      imageData : imageData,
-      width : this.image.width,
-      height : this.image.height
+      imageData: imageData,
+      width: this.image.width,
+      height: this.image.height,
     });
   };
 
   ns.ImageProcessor.prototype.onWorkerMessage = function (event) {
-    if (event.data.type === 'STEP') {
+    if (event.data.type === "STEP") {
       this.onStep(event);
-    } else if (event.data.type === 'SUCCESS') {
+    } else if (event.data.type === "SUCCESS") {
       this.onSuccess(event);
       this.worker.terminate();
-    } else if (event.data.type === 'ERROR') {
+    } else if (event.data.type === "ERROR") {
       this.onError(event);
       this.worker.terminate();
     }

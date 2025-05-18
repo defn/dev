@@ -1,6 +1,5 @@
 (function () {
-
-  var ns = $.namespace('pskl.controller');
+  var ns = $.namespace("pskl.controller");
 
   ns.DrawingController = function (piskelController, container) {
     /**
@@ -13,7 +12,9 @@
     /**
      * @public
      */
-    this.overlayFrame = pskl.model.Frame.createEmptyFromFrame(piskelController.getCurrentFrame());
+    this.overlayFrame = pskl.model.Frame.createEmptyFromFrame(
+      piskelController.getCurrentFrame(),
+    );
 
     /**
      * @private
@@ -21,19 +22,35 @@
     this.container = container;
 
     var cfg = {
-      'zoom': this.calculateZoom_(),
-      'supportGridRendering' : false,
-      'height' : this.getContainerHeight_(),
-      'width' : this.getContainerWidth_(),
-      'xOffset' : 0,
-      'yOffset' : 0
+      zoom: this.calculateZoom_(),
+      supportGridRendering: false,
+      height: this.getContainerHeight_(),
+      width: this.getContainerWidth_(),
+      xOffset: 0,
+      yOffset: 0,
     };
 
-    this.overlayRenderer = new pskl.rendering.frame.CachedFrameRenderer(this.container, cfg, ['canvas-overlay']);
-    this.onionSkinRenderer = pskl.rendering.OnionSkinRenderer.createInContainer(this.container, cfg, piskelController);
-    this.layersRenderer = new pskl.rendering.layer.LayersRenderer(this.container, cfg, piskelController);
+    this.overlayRenderer = new pskl.rendering.frame.CachedFrameRenderer(
+      this.container,
+      cfg,
+      ["canvas-overlay"],
+    );
+    this.onionSkinRenderer = pskl.rendering.OnionSkinRenderer.createInContainer(
+      this.container,
+      cfg,
+      piskelController,
+    );
+    this.layersRenderer = new pskl.rendering.layer.LayersRenderer(
+      this.container,
+      cfg,
+      piskelController,
+    );
     cfg.supportGridRendering = true;
-    this.renderer = new pskl.rendering.frame.CachedFrameRenderer(this.container, cfg, ['drawing-canvas']);
+    this.renderer = new pskl.rendering.frame.CachedFrameRenderer(
+      this.container,
+      cfg,
+      ["drawing-canvas"],
+    );
 
     this.compositeRenderer = new pskl.rendering.CompositeRenderer();
     this.compositeRenderer
@@ -51,62 +68,104 @@
   ns.DrawingController.prototype.init = function () {
     this.initMouseBehavior();
 
-    $.subscribe(Events.TOOL_SELECTED, (function(evt, toolBehavior) {
-      this.currentToolBehavior = toolBehavior;
-      this.overlayFrame.clear();
-    }).bind(this));
+    $.subscribe(
+      Events.TOOL_SELECTED,
+      function (evt, toolBehavior) {
+        this.currentToolBehavior = toolBehavior;
+        this.overlayFrame.clear();
+      }.bind(this),
+    );
 
-    window.addEventListener('resize', this.startResizeTimer_.bind(this));
+    window.addEventListener("resize", this.startResizeTimer_.bind(this));
 
-    $.subscribe(Events.USER_SETTINGS_CHANGED, this.onUserSettingsChange_.bind(this));
+    $.subscribe(
+      Events.USER_SETTINGS_CHANGED,
+      this.onUserSettingsChange_.bind(this),
+    );
     $.subscribe(Events.FRAME_SIZE_CHANGED, this.onFrameSizeChange_.bind(this));
 
     var shortcuts = pskl.service.keyboard.Shortcuts;
-    pskl.app.shortcutService.registerShortcut(shortcuts.MISC.RESET_ZOOM, this.resetZoom_.bind(this));
-    pskl.app.shortcutService.registerShortcut(shortcuts.MISC.INCREASE_ZOOM, this.updateZoom_.bind(this, 1));
-    pskl.app.shortcutService.registerShortcut(shortcuts.MISC.DECREASE_ZOOM, this.updateZoom_.bind(this, -1));
-    pskl.app.shortcutService.registerShortcut(shortcuts.MISC.OFFSET_UP, this.updateOffset_.bind(this, 'up'));
-    pskl.app.shortcutService.registerShortcut(shortcuts.MISC.OFFSET_RIGHT, this.updateOffset_.bind(this, 'right'));
-    pskl.app.shortcutService.registerShortcut(shortcuts.MISC.OFFSET_DOWN, this.updateOffset_.bind(this, 'down'));
-    pskl.app.shortcutService.registerShortcut(shortcuts.MISC.OFFSET_LEFT, this.updateOffset_.bind(this, 'left'));
+    pskl.app.shortcutService.registerShortcut(
+      shortcuts.MISC.RESET_ZOOM,
+      this.resetZoom_.bind(this),
+    );
+    pskl.app.shortcutService.registerShortcut(
+      shortcuts.MISC.INCREASE_ZOOM,
+      this.updateZoom_.bind(this, 1),
+    );
+    pskl.app.shortcutService.registerShortcut(
+      shortcuts.MISC.DECREASE_ZOOM,
+      this.updateZoom_.bind(this, -1),
+    );
+    pskl.app.shortcutService.registerShortcut(
+      shortcuts.MISC.OFFSET_UP,
+      this.updateOffset_.bind(this, "up"),
+    );
+    pskl.app.shortcutService.registerShortcut(
+      shortcuts.MISC.OFFSET_RIGHT,
+      this.updateOffset_.bind(this, "right"),
+    );
+    pskl.app.shortcutService.registerShortcut(
+      shortcuts.MISC.OFFSET_DOWN,
+      this.updateOffset_.bind(this, "down"),
+    );
+    pskl.app.shortcutService.registerShortcut(
+      shortcuts.MISC.OFFSET_LEFT,
+      this.updateOffset_.bind(this, "left"),
+    );
 
-    window.setTimeout(function () {
-      this.afterWindowResize_();
-      this.resetZoom_();
-    }.bind(this), 100);
+    window.setTimeout(
+      function () {
+        this.afterWindowResize_();
+        this.resetZoom_();
+      }.bind(this),
+      100,
+    );
   };
 
-  ns.DrawingController.prototype.initMouseBehavior = function() {
-    this.container.addEventListener('mousedown', this.onMousedown_.bind(this));
+  ns.DrawingController.prototype.initMouseBehavior = function () {
+    this.container.addEventListener("mousedown", this.onMousedown_.bind(this));
 
     if (pskl.utils.UserAgent.isChrome || pskl.utils.UserAgent.isIE11) {
-      this.container.addEventListener('mousewheel', this.onMousewheel_.bind(this));
+      this.container.addEventListener(
+        "mousewheel",
+        this.onMousewheel_.bind(this),
+      );
     } else {
-      this.container.addEventListener('wheel', this.onMousewheel_.bind(this));
+      this.container.addEventListener("wheel", this.onMousewheel_.bind(this));
     }
 
-    window.addEventListener('mouseup', this.onMouseup_.bind(this));
-    window.addEventListener('mousemove', this.onMousemove_.bind(this));
-    window.addEventListener('keyup', this.onKeyup_.bind(this));
-    window.addEventListener('touchstart', this.onTouchstart_.bind(this));
-    window.addEventListener('touchmove' , this.onTouchmove_.bind(this));
-    window.addEventListener('touchend', this.onTouchend_.bind(this));
+    window.addEventListener("mouseup", this.onMouseup_.bind(this));
+    window.addEventListener("mousemove", this.onMousemove_.bind(this));
+    window.addEventListener("keyup", this.onKeyup_.bind(this));
+    window.addEventListener("touchstart", this.onTouchstart_.bind(this));
+    window.addEventListener("touchmove", this.onTouchmove_.bind(this));
+    window.addEventListener("touchend", this.onTouchend_.bind(this));
 
     // Deactivate right click:
-    document.body.addEventListener('contextmenu', this.onCanvasContextMenu_.bind(this));
+    document.body.addEventListener(
+      "contextmenu",
+      this.onCanvasContextMenu_.bind(this),
+    );
   };
 
   ns.DrawingController.prototype.startResizeTimer_ = function () {
     if (this.resizeTimer) {
       window.clearInterval(this.resizeTimer);
     }
-    this.resizeTimer = window.setTimeout(this.afterWindowResize_.bind(this), 200);
+    this.resizeTimer = window.setTimeout(
+      this.afterWindowResize_.bind(this),
+      200,
+    );
   };
 
   ns.DrawingController.prototype.afterWindowResize_ = function () {
     var initialWidth = this.compositeRenderer.getDisplaySize().width;
 
-    this.compositeRenderer.setDisplaySize(this.getContainerWidth_(), this.getContainerHeight_());
+    this.compositeRenderer.setDisplaySize(
+      this.getContainerWidth_(),
+      this.getContainerHeight_(),
+    );
     var ratio = this.compositeRenderer.getDisplaySize().width / initialWidth;
     var newZoom = ratio * this.compositeRenderer.getZoom();
     this.compositeRenderer.setZoom(newZoom);
@@ -117,10 +176,17 @@
   /**
    * @private
    */
-  ns.DrawingController.prototype.onUserSettingsChange_ = function (evt, settingsName, settingsValue) {
+  ns.DrawingController.prototype.onUserSettingsChange_ = function (
+    evt,
+    settingsName,
+    settingsValue,
+  ) {
     if (settingsName == pskl.UserSettings.SHOW_GRID) {
-      console.warn('DrawingController:onUserSettingsChange_ not implemented !');
-    } else if (settingsName == pskl.UserSettings.ONION_SKIN || settingsName == pskl.UserSettings.LAYER_PREVIEW) {
+      console.warn("DrawingController:onUserSettingsChange_ not implemented !");
+    } else if (
+      settingsName == pskl.UserSettings.ONION_SKIN ||
+      settingsName == pskl.UserSettings.LAYER_PREVIEW
+    ) {
       this.onionSkinRenderer.clear();
       this.onionSkinRenderer.flush();
       this.layersRenderer.clear();
@@ -130,7 +196,10 @@
   };
 
   ns.DrawingController.prototype.onFrameSizeChange_ = function () {
-    this.compositeRenderer.setDisplaySize(this.getContainerWidth_(), this.getContainerHeight_());
+    this.compositeRenderer.setDisplaySize(
+      this.getContainerWidth_(),
+      this.getContainerHeight_(),
+    );
     this.compositeRenderer.setZoom(this.calculateZoom_());
     this.compositeRenderer.setOffset(0, 0);
     $.publish(Events.ZOOM_CHANGED);
@@ -157,7 +226,10 @@
     var frame = this.piskelController.getCurrentFrame();
     var coords = this.getSpriteCoordinates(event.clientX, event.clientY);
     if (event.changedTouches && event.changedTouches[0]) {
-      coords = this.getSpriteCoordinates(event.changedTouches[0].clientX, event.changedTouches[0].clientY);
+      coords = this.getSpriteCoordinates(
+        event.changedTouches[0].clientX,
+        event.changedTouches[0].clientY,
+      );
     }
 
     this.isClicked = true;
@@ -175,7 +247,7 @@
         coords.y,
         frame,
         this.overlayFrame,
-        event
+        event,
       );
     }
   };
@@ -194,7 +266,10 @@
     var currentTime = new Date().getTime();
     // Throttling of the mousemove event:
 
-    if ((currentTime - this.previousMousemoveTime) > Constants.MOUSEMOVE_THROTTLING) {
+    if (
+      currentTime - this.previousMousemoveTime >
+      Constants.MOUSEMOVE_THROTTLING
+    ) {
       this.moveTool_(this._clientX, this._clientY, event);
       this.previousMousemoveTime = currentTime;
     }
@@ -223,7 +298,7 @@
           coords.y | 0,
           currentFrame,
           this.overlayFrame,
-          event
+          event,
         );
       }
     } else {
@@ -232,7 +307,7 @@
         coords.y,
         currentFrame,
         this.overlayFrame,
-        event
+        event,
       );
     }
     $.publish(Events.CURSOR_MOVED, [coords.x, coords.y]);
@@ -250,7 +325,7 @@
     }
 
     delta = delta || 0;
-    var modifier = (delta / 120);
+    var modifier = delta / 120;
 
     if (pskl.utils.UserAgent.isMac ? evt.metaKey : evt.ctrlKey) {
       modifier = modifier * 5;
@@ -269,20 +344,17 @@
    */
   ns.DrawingController.prototype.updateOffset_ = function (direction) {
     var off = this.getOffset();
-    if (direction === 'up') {
+    if (direction === "up") {
       off.y -= 1;
-    } else if (direction === 'right') {
+    } else if (direction === "right") {
       off.x += 1;
-    } else if (direction === 'down') {
+    } else if (direction === "down") {
       off.y += 1;
-    } else if (direction === 'left') {
+    } else if (direction === "left") {
       off.x -= 1;
     }
 
-    this.setOffset(
-      off.x,
-      off.y
-    );
+    this.setOffset(off.x, off.y);
   };
 
   /**
@@ -294,7 +366,10 @@
    *        - {Number} x: x coordinate of the desired center the zoomed canvas
    *        - {Number} y: y coordinate of the desired center the zoomed canvas
    */
-  ns.DrawingController.prototype.updateZoom_ = function (zoomMultiplier, centerCoords) {
+  ns.DrawingController.prototype.updateZoom_ = function (
+    zoomMultiplier,
+    centerCoords,
+  ) {
     if (zoomMultiplier === 0) {
       return;
     }
@@ -306,14 +381,14 @@
     var step = zoomMultiplier * this.getZoomStep_();
     this.setZoom_(this.renderer.getZoom() + step);
 
-    if (typeof centerCoords === 'object') {
+    if (typeof centerCoords === "object") {
       var xRatio = (centerCoords.x - off.x) / oldWidth;
       var yRatio = (centerCoords.y - off.y) / oldHeight;
       var newWidth = this.getContainerWidth_() / this.renderer.getZoom();
       var newHeight = this.getContainerHeight_() / this.renderer.getZoom();
       this.setOffset(
-        off.x - ((newWidth - oldWidth) * xRatio),
-        off.y - ((newHeight - oldHeight) * yRatio)
+        off.x - (newWidth - oldWidth) * xRatio,
+        off.y - (newHeight - oldHeight) * yRatio,
       );
     }
   };
@@ -328,7 +403,10 @@
 
     var coords = this.getSpriteCoordinates(event.clientX, event.clientY);
     if (event.changedTouches && event.changedTouches[0]) {
-      coords = this.getSpriteCoordinates(event.changedTouches[0].clientX, event.changedTouches[0].clientY);
+      coords = this.getSpriteCoordinates(
+        event.changedTouches[0].clientX,
+        event.changedTouches[0].clientY,
+      );
     }
 
     // A mouse button was clicked on the drawing canvas before this mouseup event,
@@ -358,7 +436,7 @@
         coords.y,
         this.piskelController.getCurrentFrame(),
         this.overlayFrame,
-        event
+        event,
       );
       $.publish(Events.TOOL_RELEASED);
     }
@@ -379,18 +457,23 @@
 
     var color = pskl.utils.intToColor(frame.getPixel(coords.x, coords.y));
     var isRightButton = pskl.app.mouseStateService.isRightButtonPressed();
-    var evt = isRightButton ? Events.SELECT_SECONDARY_COLOR : Events.SELECT_PRIMARY_COLOR;
+    var evt = isRightButton
+      ? Events.SELECT_SECONDARY_COLOR
+      : Events.SELECT_PRIMARY_COLOR;
     $.publish(evt, [color]);
   };
 
   ns.DrawingController.prototype.flashColorPicker_ = function () {
-    document.body.classList.add('tool-colorpicker');
+    document.body.classList.add("tool-colorpicker");
     document.body.classList.remove(this.currentToolBehavior.toolId);
     window.clearTimeout(this.flashColorPickerTimer);
-    this.flashColorPickerTimer = window.setTimeout(function () {
-      document.body.classList.remove('tool-colorpicker');
-      document.body.classList.add(this.currentToolBehavior.toolId);
-    }.bind(this), 200);
+    this.flashColorPickerTimer = window.setTimeout(
+      function () {
+        document.body.classList.remove("tool-colorpicker");
+        document.body.classList.add(this.currentToolBehavior.toolId);
+      }.bind(this),
+      200,
+    );
   };
 
   /**
@@ -399,11 +482,17 @@
    * @param  {Number} screenY
    * @return {Object} {x:Number, y:Number}
    */
-  ns.DrawingController.prototype.getSpriteCoordinates = function(screenX, screenY) {
+  ns.DrawingController.prototype.getSpriteCoordinates = function (
+    screenX,
+    screenY,
+  ) {
     return this.renderer.getCoordinates(screenX, screenY);
   };
 
-  ns.DrawingController.prototype.getScreenCoordinates = function(spriteX, spriteY) {
+  ns.DrawingController.prototype.getScreenCoordinates = function (
+    spriteX,
+    spriteY,
+  ) {
     return this.renderer.reverseCoordinates(spriteX, spriteY);
   };
 
@@ -412,7 +501,10 @@
    */
   ns.DrawingController.prototype.onCanvasContextMenu_ = function (event) {
     // closest() not really available everywhere yet, just skip if missing.
-    if (event.target.closest && event.target.closest('#drawing-canvas-container')) {
+    if (
+      event.target.closest &&
+      event.target.closest("#drawing-canvas-container")
+    ) {
       // Deactivate right click on drawing canvas only.
       event.preventDefault();
       event.stopPropagation();
@@ -442,15 +534,19 @@
   /**
    * @private
    */
-  ns.DrawingController.prototype.calculateZoom_ = function() {
+  ns.DrawingController.prototype.calculateZoom_ = function () {
     var frameHeight = this.piskelController.getCurrentFrame().getHeight();
     var frameWidth = this.piskelController.getCurrentFrame().getWidth();
 
-    return Math.min(this.getAvailableWidth_() / frameWidth, this.getAvailableHeight_() / frameHeight);
+    return Math.min(
+      this.getAvailableWidth_() / frameWidth,
+      this.getAvailableHeight_() / frameHeight,
+    );
   };
 
   ns.DrawingController.prototype.getAvailableHeight_ = function () {
-    return document.querySelector('#main-wrapper').getBoundingClientRect().height;
+    return document.querySelector("#main-wrapper").getBoundingClientRect()
+      .height;
   };
 
   ns.DrawingController.prototype.getSelectorWidth_ = function (selector) {
@@ -458,13 +554,19 @@
   };
 
   ns.DrawingController.prototype.getAvailableWidth_ = function () {
-    var leftSectionWidth = this.getSelectorWidth_('.left-column');
-    var rightSectionWidth = this.getSelectorWidth_('.right-column');
-    var toolsContainerWidth = this.getSelectorWidth_('#tool-section');
-    var settingsContainerWidth = this.getSelectorWidth_('#application-action-section');
+    var leftSectionWidth = this.getSelectorWidth_(".left-column");
+    var rightSectionWidth = this.getSelectorWidth_(".right-column");
+    var toolsContainerWidth = this.getSelectorWidth_("#tool-section");
+    var settingsContainerWidth = this.getSelectorWidth_(
+      "#application-action-section",
+    );
 
-    var usedWidth = leftSectionWidth + rightSectionWidth + toolsContainerWidth + settingsContainerWidth;
-    var availableWidth = this.getSelectorWidth_('#main-wrapper') - usedWidth;
+    var usedWidth =
+      leftSectionWidth +
+      rightSectionWidth +
+      toolsContainerWidth +
+      settingsContainerWidth;
+    var availableWidth = this.getSelectorWidth_("#main-wrapper") - usedWidth;
 
     var comfortMargin = 10;
     return availableWidth - comfortMargin;
@@ -503,5 +605,4 @@
     this.compositeRenderer.setZoom(zoom);
     $.publish(Events.ZOOM_CHANGED);
   };
-
 })();

@@ -1,8 +1,8 @@
 (function () {
-  var ns = $.namespace('pskl.service.storage');
-  var PISKEL_EXTENSION = '.piskel';
+  var ns = $.namespace("pskl.service.storage");
+  var PISKEL_EXTENSION = ".piskel";
 
-  ns.DesktopStorageService = function(piskelController) {
+  ns.DesktopStorageService = function (piskelController) {
     this.piskelController = piskelController || pskl.app.piskelController;
     this.hideNotificationTimeoutID = 0;
   };
@@ -14,14 +14,17 @@
       return this.saveAtPath_(piskel, piskel.savePath);
     } else {
       var name = piskel.getDescriptor().name;
-      var filenamePromise = pskl.utils.FileUtilsDesktop.chooseFilenameDialog(name, PISKEL_EXTENSION);
+      var filenamePromise = pskl.utils.FileUtilsDesktop.chooseFilenameDialog(
+        name,
+        PISKEL_EXTENSION,
+      );
       return filenamePromise.then(this.saveAtPath_.bind(this, piskel));
     }
   };
 
   ns.DesktopStorageService.prototype.saveAtPath_ = function (piskel, savePath) {
     if (!savePath) {
-      return Q.reject('Invalid file name');
+      return Q.reject("Invalid file name");
     }
 
     var serialized = pskl.utils.serialization.Serializer.serialize(piskel);
@@ -45,8 +48,11 @@
     });
   };
 
-  ns.DesktopStorageService.prototype.addExtensionIfNeeded_ = function (filename) {
-    var hasExtension = filename.substr(-PISKEL_EXTENSION.length) === PISKEL_EXTENSION;
+  ns.DesktopStorageService.prototype.addExtensionIfNeeded_ = function (
+    filename,
+  ) {
+    var hasExtension =
+      filename.substr(-PISKEL_EXTENSION.length) === PISKEL_EXTENSION;
     if (!hasExtension) {
       return filename + PISKEL_EXTENSION;
     }
@@ -54,7 +60,7 @@
   };
 
   ns.DesktopStorageService.prototype.extractFilename_ = function (savePath) {
-    var matches = (/[\/\\]([^\/\\]*)\.piskel$/gi).exec(savePath);
+    var matches = /[\/\\]([^\/\\]*)\.piskel$/gi.exec(savePath);
     if (matches && matches[1]) {
       return matches[1];
     }

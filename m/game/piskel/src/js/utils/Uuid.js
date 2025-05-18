@@ -1,5 +1,5 @@
 (function () {
-  var ns = $.namespace('pskl.utils');
+  var ns = $.namespace("pskl.utils");
 
   var s4 = function () {
     return Math.floor((1 + Math.random()) * 0x10000)
@@ -8,10 +8,10 @@
   };
 
   ns.Uuid = {
-    generate : function () {
-      return 'ss-s-s-s-sss'.replace(/s/g, function () {
+    generate: function () {
+      return "ss-s-s-s-sss".replace(/s/g, function () {
         return s4();
       });
-    }
+    },
   };
 })();

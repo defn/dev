@@ -1,13 +1,21 @@
 (function () {
-  var ns = $.namespace('pskl.service');
+  var ns = $.namespace("pskl.service");
 
-  ns.HistoryService = function (piskelController, shortcutService, deserializer, serializer) {
+  ns.HistoryService = function (
+    piskelController,
+    shortcutService,
+    deserializer,
+    serializer,
+  ) {
     // Use the real piskel controller that will not fire events when calling setters
     this.piskelController = piskelController.getWrappedPiskelController();
 
     this.shortcutService = shortcutService || pskl.app.shortcutService;
-    this.deserializer = deserializer || pskl.utils.serialization.arraybuffer.ArrayBufferDeserializer;
-    this.serializer = serializer || pskl.utils.serialization.arraybuffer.ArrayBufferSerializer;
+    this.deserializer =
+      deserializer ||
+      pskl.utils.serialization.arraybuffer.ArrayBufferDeserializer;
+    this.serializer =
+      serializer || pskl.utils.serialization.arraybuffer.ArrayBufferSerializer;
 
     this.stateQueue = [];
     this.currentIndex = -1;
@@ -15,10 +23,10 @@
   };
 
   // Force to save a state as a SNAPSHOT
-  ns.HistoryService.SNAPSHOT = 'SNAPSHOT';
+  ns.HistoryService.SNAPSHOT = "SNAPSHOT";
 
   // Default save state
-  ns.HistoryService.REPLAY = 'REPLAY';
+  ns.HistoryService.REPLAY = "REPLAY";
 
   // Period (in number of state saved) between two snapshots
   ns.HistoryService.SNAPSHOT_PERIOD = 50;
@@ -33,11 +41,17 @@
     $.subscribe(Events.PISKEL_SAVE_STATE, this.onSaveStateEvent.bind(this));
 
     var shortcuts = pskl.service.keyboard.Shortcuts;
-    this.shortcutService.registerShortcut(shortcuts.MISC.UNDO, this.undo.bind(this));
-    this.shortcutService.registerShortcut(shortcuts.MISC.REDO, this.redo.bind(this));
+    this.shortcutService.registerShortcut(
+      shortcuts.MISC.UNDO,
+      this.undo.bind(this),
+    );
+    this.shortcutService.registerShortcut(
+      shortcuts.MISC.REDO,
+      this.redo.bind(this),
+    );
 
     this.saveState({
-      type : ns.HistoryService.SNAPSHOT
+      type: ns.HistoryService.SNAPSHOT,
     });
   };
 
@@ -50,15 +64,20 @@
     this.currentIndex = this.currentIndex + 1;
 
     var state = {
-      action : action,
-      frameIndex : action.state ? action.state.frameIndex : this.piskelController.currentFrameIndex,
-      layerIndex : action.state ? action.state.layerIndex : this.piskelController.currentLayerIndex,
-      fps : this.piskelController.getFPS(),
-      uuid: pskl.utils.Uuid.generate()
+      action: action,
+      frameIndex: action.state
+        ? action.state.frameIndex
+        : this.piskelController.currentFrameIndex,
+      layerIndex: action.state
+        ? action.state.layerIndex
+        : this.piskelController.currentLayerIndex,
+      fps: this.piskelController.getFPS(),
+      uuid: pskl.utils.Uuid.generate(),
     };
 
     var isSnapshot = action.type === ns.HistoryService.SNAPSHOT;
-    var isAtAutoSnapshotInterval = this.currentIndex % ns.HistoryService.SNAPSHOT_PERIOD === 0;
+    var isAtAutoSnapshotInterval =
+      this.currentIndex % ns.HistoryService.SNAPSHOT_PERIOD === 0;
     if (isSnapshot || isAtAutoSnapshotInterval) {
       var piskel = this.piskelController.getPiskel();
       state.piskel = this.serializer.serialize(piskel);
@@ -93,7 +112,8 @@
   };
 
   ns.HistoryService.prototype.isLoadStateAllowed_ = function (index) {
-    var timeOk = (Date.now() - this.lastLoadState) > ns.HistoryService.LOAD_STATE_INTERVAL;
+    var timeOk =
+      Date.now() - this.lastLoadState > ns.HistoryService.LOAD_STATE_INTERVAL;
     var indexInRange = index >= 0 && index < this.stateQueue.length;
     return timeOk && indexInRange;
   };
@@ -119,14 +139,18 @@
 
         var snapshotIndex = this.getPreviousSnapshotIndex_(index);
         if (snapshotIndex < 0) {
-          throw 'Could not find previous SNAPSHOT saved in history stateQueue';
+          throw "Could not find previous SNAPSHOT saved in history stateQueue";
         }
         var serializedPiskel = this.getSnapshotFromState_(snapshotIndex);
-        var onPiskelLoadedCb = this.onPiskelLoaded_.bind(this, index, snapshotIndex);
+        var onPiskelLoadedCb = this.onPiskelLoaded_.bind(
+          this,
+          index,
+          snapshotIndex,
+        );
         this.deserializer.deserialize(serializedPiskel, onPiskelLoadedCb);
       }
     } catch (error) {
-      console.error('[CRITICAL ERROR] : Unable to load a history state.');
+      console.error("[CRITICAL ERROR] : Unable to load a history state.");
       this.logError_(error);
       this.stateQueue = [];
       this.currentIndex = -1;
@@ -134,7 +158,7 @@
   };
 
   ns.HistoryService.prototype.logError_ = function (error) {
-    if (typeof error === 'string') {
+    if (typeof error === "string") {
       console.error(error);
     } else {
       console.error(error.message);
@@ -151,14 +175,18 @@
     return piskelSnapshot;
   };
 
-  ns.HistoryService.prototype.onPiskelLoaded_ = function (index, snapshotIndex, piskel) {
+  ns.HistoryService.prototype.onPiskelLoaded_ = function (
+    index,
+    snapshotIndex,
+    piskel,
+  ) {
     var originalSize = this.getPiskelSize_();
     piskel.setDescriptor(this.piskelController.piskel.getDescriptor());
     // propagate save path to the new piskel instance
     piskel.savePath = this.piskelController.piskel.savePath;
     this.piskelController.setPiskel(piskel);
 
-    for (var i = snapshotIndex + 1 ; i <= index ; i++) {
+    for (var i = snapshotIndex + 1; i <= index; i++) {
       var state = this.stateQueue[i];
       this.setupState(state);
       this.replayState(state);
@@ -179,7 +207,9 @@
   };
 
   ns.HistoryService.prototype.getPiskelSize_ = function () {
-    return this.piskelController.getWidth() + 'x' + this.piskelController.getHeight();
+    return (
+      this.piskelController.getWidth() + "x" + this.piskelController.getHeight()
+    );
   };
 
   ns.HistoryService.prototype.setupState = function (state) {
@@ -195,5 +225,4 @@
     var frame = layer.getFrameAt(state.frameIndex);
     action.scope.replay(frame, action.replay);
   };
-
 })();

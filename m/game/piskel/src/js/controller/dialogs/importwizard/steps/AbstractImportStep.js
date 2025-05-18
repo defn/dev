@@ -1,7 +1,11 @@
 (function () {
-  var ns = $.namespace('pskl.controller.dialogs.importwizard.steps');
+  var ns = $.namespace("pskl.controller.dialogs.importwizard.steps");
 
-  ns.AbstractImportStep = function (piskelController, importController, container) {
+  ns.AbstractImportStep = function (
+    piskelController,
+    importController,
+    container,
+  ) {
     this.piskelController = piskelController;
     this.container = container;
     this.importController = importController;
@@ -9,11 +13,11 @@
   };
 
   ns.AbstractImportStep.prototype.init = function () {
-    this.nextButton = this.container.querySelector('.import-next-button');
-    this.backButton = this.container.querySelector('.import-back-button');
+    this.nextButton = this.container.querySelector(".import-next-button");
+    this.backButton = this.container.querySelector(".import-back-button");
 
-    this.addEventListener(this.nextButton, 'click', this.onNextClick);
-    this.addEventListener(this.backButton, 'click', this.onBackClick);
+    this.addEventListener(this.nextButton, "click", this.onNextClick);
+    this.addEventListener(this.backButton, "click", this.onBackClick);
   };
 
   ns.AbstractImportStep.prototype.addEventListener = function (el, type, cb) {
@@ -43,8 +47,12 @@
     }
 
     if (!this.framePickerWidget) {
-      var framePickerContainer = this.container.querySelector('.import-preview');
-      this.framePickerWidget = new pskl.widgets.FramePicker(mergePiskel, framePickerContainer);
+      var framePickerContainer =
+        this.container.querySelector(".import-preview");
+      this.framePickerWidget = new pskl.widgets.FramePicker(
+        mergePiskel,
+        framePickerContainer,
+      );
       this.framePickerWidget.init();
     } else if (this.framePickerWidget.piskel != mergePiskel) {
       // If the piskel displayed by the frame picker is different from the previous one,
@@ -53,13 +61,15 @@
       this.framePickerWidget.setFrameIndex(1);
     }
 
-    var metaHtml = pskl.utils.Template.getAndReplace('import-meta-content', {
-      name : mergePiskel.getDescriptor().name,
-      dimensions : pskl.utils.StringUtils.formatSize(mergePiskel.getWidth(), mergePiskel.getHeight()),
-      frames : mergePiskel.getFrameCount(),
-      layers : mergePiskel.getLayers().length
+    var metaHtml = pskl.utils.Template.getAndReplace("import-meta-content", {
+      name: mergePiskel.getDescriptor().name,
+      dimensions: pskl.utils.StringUtils.formatSize(
+        mergePiskel.getWidth(),
+        mergePiskel.getHeight(),
+      ),
+      frames: mergePiskel.getFrameCount(),
+      layers: mergePiskel.getLayers().length,
     });
-    this.container.querySelector('.import-meta').innerHTML = metaHtml;
+    this.container.querySelector(".import-meta").innerHTML = metaHtml;
   };
-
 })();
