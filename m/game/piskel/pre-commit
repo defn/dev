@@ -4,22 +4,19 @@
 NAME=$(git branch | grep '*' | sed 's/* //')
 
 # don't run on rebase
-if [ $NAME != '(no branch)' ]
-then
-  NOT_STAGED=$(git status | grep 'not staged')
-  # if [ "${NOT_STAGED#*not staged}" != "$NOT_STAGED" ]
-  if [ "$NOT_STAGED" != "" ]
-  then
-    echo "Unclean directory, aborting commit. Run git status."
-    exit 1
-  fi
+if [ $NAME != '(no branch)' ]; then
+	NOT_STAGED=$(git status | grep 'not staged')
+	# if [ "${NOT_STAGED#*not staged}" != "$NOT_STAGED" ]
+	if [ "$NOT_STAGED" != "" ]; then
+		echo "Unclean directory, aborting commit. Run git status."
+		exit 1
+	fi
 
-  grunt precommit
-  RETVAL=$?
+	grunt precommit
+	RETVAL=$?
 
-  if [ $RETVAL -ne 0 ]
-  then
-  	echo "grunt test failed, aborting commit. Run grunt test"
-  	exit 1
-  fi
+	if [ $RETVAL -ne 0 ]; then
+		echo "grunt test failed, aborting commit. Run grunt test"
+		exit 1
+	fi
 fi

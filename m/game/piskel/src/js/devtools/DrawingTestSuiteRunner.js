@@ -1,5 +1,5 @@
 (function () {
-  var ns = $.namespace('pskl.devtools');
+  var ns = $.namespace("pskl.devtools");
 
   ns.DrawingTestSuiteRunner = function (testPaths) {
     if (Array.isArray(testPaths)) {
@@ -8,16 +8,16 @@
       this.status = ns.DrawingTestSuiteRunner.STATUS.NOT_STARTED;
       this.currentIndex = -1;
     } else {
-      throw new Error('testPaths should be an array of string (test paths)');
+      throw new Error("testPaths should be an array of string (test paths)");
     }
   };
 
   ns.DrawingTestSuiteRunner.STATUS = {
-    ERROR : 'ERROR',
-    FAILED : 'FAILED',
-    SUCCESS : 'SUCCESS',
-    ONGOING : 'ONGOING',
-    NOT_STARTED : 'NOT_STARTED'
+    ERROR: "ERROR",
+    FAILED: "FAILED",
+    SUCCESS: "SUCCESS",
+    ONGOING: "ONGOING",
+    NOT_STARTED: "NOT_STARTED",
   };
 
   ns.DrawingTestSuiteRunner.prototype.start = function () {
@@ -44,7 +44,9 @@
     testPlayer.start();
   };
 
-  ns.DrawingTestSuiteRunner.prototype.onTestEnd_ = function (data /* {success, performance} */) {
+  ns.DrawingTestSuiteRunner.prototype.onTestEnd_ = function (
+    data /* {success, performance} */,
+  ) {
     var path = this.testPaths[this.currentIndex];
     this.testStatus[path] = data;
 
@@ -54,15 +56,22 @@
   };
 
   ns.DrawingTestSuiteRunner.prototype.onTestSuiteEnd_ = function () {
-    var success = this.testPaths.every(function (path) {
-      return this.testStatus[path].success;
-    }.bind(this));
+    var success = this.testPaths.every(
+      function (path) {
+        return this.testStatus[path].success;
+      }.bind(this),
+    );
 
-    var performance = this.testPaths.reduce(function (p, path) {
-      return this.testStatus[path].performance + p;
-    }.bind(this), 0);
+    var performance = this.testPaths.reduce(
+      function (p, path) {
+        return this.testStatus[path].performance + p;
+      }.bind(this),
+      0,
+    );
 
-    this.status = success ? ns.DrawingTestSuiteRunner.STATUS.SUCCESS : ns.DrawingTestSuiteRunner.STATUS.ERROR;
+    this.status = success
+      ? ns.DrawingTestSuiteRunner.STATUS.SUCCESS
+      : ns.DrawingTestSuiteRunner.STATUS.ERROR;
     $.publish(Events.TEST_SUITE_END, [this.status, performance]);
   };
 })();

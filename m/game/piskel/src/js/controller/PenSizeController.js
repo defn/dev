@@ -1,12 +1,14 @@
 (function () {
-  var ns = $.namespace('pskl.controller');
+  var ns = $.namespace("pskl.controller");
 
   ns.PenSizeController = function () {
-    this.sizePicker = new pskl.widgets.SizePicker(this.onSizePickerChanged_.bind(this));
+    this.sizePicker = new pskl.widgets.SizePicker(
+      this.onSizePickerChanged_.bind(this),
+    );
   };
 
   ns.PenSizeController.prototype.init = function () {
-    this.sizePicker.init(document.querySelector('.pen-size-container'));
+    this.sizePicker.init(document.querySelector(".pen-size-container"));
 
     $.subscribe(Events.PEN_SIZE_CHANGED, this.onPenSizeChanged_.bind(this));
     this.updateSelectedOption_();

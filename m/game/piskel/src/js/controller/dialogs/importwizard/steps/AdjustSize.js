@@ -1,13 +1,13 @@
 (function () {
-  var ns = $.namespace('pskl.controller.dialogs.importwizard.steps');
+  var ns = $.namespace("pskl.controller.dialogs.importwizard.steps");
 
   ns.AdjustSize = function (piskelController, importController, container) {
     this.superclass.constructor.apply(this, arguments);
   };
 
   ns.AdjustSize.OPTIONS = {
-    KEEP: 'keep',
-    EXPAND: 'expand'
+    KEEP: "keep",
+    EXPAND: "expand",
   };
 
   pskl.utils.inherit(ns.AdjustSize, ns.AbstractImportStep);
@@ -16,12 +16,23 @@
     this.superclass.init.call(this);
 
     // Create anchor widget
-    var anchorContainer = this.container.querySelector('.import-resize-anchor-container');
-    this.anchorWidget = new pskl.widgets.AnchorWidget(anchorContainer, this.onAnchorChange_.bind(this));
-    this.anchorWidget.setOrigin('TOPLEFT');
+    var anchorContainer = this.container.querySelector(
+      ".import-resize-anchor-container",
+    );
+    this.anchorWidget = new pskl.widgets.AnchorWidget(
+      anchorContainer,
+      this.onAnchorChange_.bind(this),
+    );
+    this.anchorWidget.setOrigin("TOPLEFT");
 
-    this.resizeInfoContainer = this.container.querySelector('.import-resize-info');
-    this.addEventListener(this.resizeInfoContainer, 'change', this.onResizeOptionChange_);
+    this.resizeInfoContainer = this.container.querySelector(
+      ".import-resize-info",
+    );
+    this.addEventListener(
+      this.resizeInfoContainer,
+      "change",
+      this.onResizeOptionChange_,
+    );
 
     // By default, set the mode to expand to avoid losing any image content.
     this.mergeData.resize = ns.AdjustSize.OPTIONS.EXPAND;
@@ -46,17 +57,23 @@
     var newSize = this.formatPiskelSize_(this.mergeData.mergePiskel);
     var markup;
     if (isBigger) {
-      markup = pskl.utils.Template.getAndReplace('import-resize-bigger-partial', {
-        size : size,
-        newSize : newSize,
-        keepChecked : keep ? 'checked="checked"' : '',
-        expandChecked : keep ? '' : 'checked="checked"'
-      });
+      markup = pskl.utils.Template.getAndReplace(
+        "import-resize-bigger-partial",
+        {
+          size: size,
+          newSize: newSize,
+          keepChecked: keep ? 'checked="checked"' : "",
+          expandChecked: keep ? "" : 'checked="checked"',
+        },
+      );
     } else {
-      markup = pskl.utils.Template.getAndReplace('import-resize-smaller-partial', {
-        size : size,
-        newSize : newSize
-      });
+      markup = pskl.utils.Template.getAndReplace(
+        "import-resize-smaller-partial",
+        {
+          size: size,
+          newSize: newSize,
+        },
+      );
     }
     this.resizeInfoContainer.innerHTML = markup;
 
@@ -66,18 +83,18 @@
     }
 
     // Update anchor widget info
-    var anchorInfo = this.container.querySelector('.import-resize-anchor-info');
+    var anchorInfo = this.container.querySelector(".import-resize-anchor-info");
     if (isBigger && keep) {
       anchorInfo.innerHTML = [
         '<div class="import-resize-warning">',
-        '  Imported content will be cropped!',
-        '</div>',
-        'Select crop anchor:'
-      ].join('');
+        "  Imported content will be cropped!",
+        "</div>",
+        "Select crop anchor:",
+      ].join("");
     } else if (isBigger) {
-      anchorInfo.innerHTML = 'Select resize anchor:';
+      anchorInfo.innerHTML = "Select resize anchor:";
     } else {
-      anchorInfo.innerHTML = 'Select position anchor:';
+      anchorInfo.innerHTML = "Select position anchor:";
     }
   };
 
@@ -86,7 +103,7 @@
   };
 
   ns.AdjustSize.prototype.onResizeOptionChange_ = function () {
-    var value = this.resizeInfoContainer.querySelector(':checked').value;
+    var value = this.resizeInfoContainer.querySelector(":checked").value;
     if (this.mergeData.resize != value) {
       this.mergeData.resize = value;
       this.refresh_();
@@ -99,8 +116,10 @@
       return false;
     }
 
-    return piskel.width > this.piskelController.getWidth() ||
-           piskel.height > this.piskelController.getHeight();
+    return (
+      piskel.width > this.piskelController.getWidth() ||
+      piskel.height > this.piskelController.getHeight()
+    );
   };
 
   ns.AdjustSize.prototype.formatPiskelSize_ = function (piskel) {

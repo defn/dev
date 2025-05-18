@@ -1,6 +1,7 @@
-
 <!-- markdownlint-disable -->
+
 # terraform-null-label [![Latest Release](https://img.shields.io/github/release/cloudposse/terraform-null-label.svg)](https://github.com/cloudposse/terraform-null-label/releases/latest) [![Slack Community](https://slack.cloudposse.com/badge.svg)](https://slack.cloudposse.com)
+
 <!-- markdownlint-restore -->
 
 [![README Header][readme_header_img]][readme_header_link]
@@ -31,6 +32,7 @@
 Terraform module designed to generate consistent names and tags for resources. Use `terraform-null-label` to implement a strict naming convention.
 
 There are 6 inputs considered "labels" or "ID elements" (because the labels are used to construct the ID):
+
 1. namespace
 1. tenant
 1. environment
@@ -42,6 +44,7 @@ This module generates IDs using the following convention by default: `{namespace
 However, it is highly configurable. The delimiter (e.g. `-`) is configurable. Each label item is optional (although you must provide at least one).
 So if you prefer the term `stage` to `environment` and do not need `tenant`, you can exclude them
 and the label `id` will look like `{namespace}-{stage}-{name}-{attributes}`.
+
 - The `tenant` label was introduced in v0.25.0. To preserve backward compatibility, it is not included by default.
 - The `attributes` input is actually a list of strings and `{attributes}` expands to the list elements joined by the delimiter.
 - If `attributes` is excluded but `namespace`, `stage`, and `environment` are included, `id` will look like `{namespace}-{environment}-{stage}-{name}`.
@@ -51,11 +54,11 @@ and the label `id` will look like `{namespace}-{stage}-{name}-{attributes}`.
   (The module uses a portion of the MD5 hash of the full `id` to represent the missing part, so there remains a slight chance of name collision.)
 - You can control the letter case of the generated labels which make up the `id` using `var.label_value_case`.
 - By default, all of the non-empty labels are also exported as tags, whether they appear in the `id` or not.
-You can control which labels are exported as tags by setting `labels_as_tags` to the list of labels you want exported,
-or the empty list `[]` if you want no labels exported as tags at all. Tags passed in via the `tags` variable are
-always exported, and regardless of settings, empty labels are never exported as tags.
-You can control the case of the tag names (keys) for the labels using `var.label_key_case`.
-Unlike the tags generated from the label inputs, tags passed in via the `tags` input are not modified.
+  You can control which labels are exported as tags by setting `labels_as_tags` to the list of labels you want exported,
+  or the empty list `[]` if you want no labels exported as tags at all. Tags passed in via the `tags` variable are
+  always exported, and regardless of settings, empty labels are never exported as tags.
+  You can control the case of the tag names (keys) for the labels using `var.label_key_case`.
+  Unlike the tags generated from the label inputs, tags passed in via the `tags` input are not modified.
 
 There is an unfortunate collision over the use of the key `name`. Cloud Posse uses `name` in this module
 to represent the component, such as `eks` or `rds`. AWS uses a tag with the key `Name` to store the full human-friendly
@@ -77,6 +80,7 @@ enhanced to add more features that are already in `null-label`. See [examples/co
 All [Cloud Posse Terraform modules](https://github.com/cloudposse?utf8=%E2%9C%93&q=terraform-&type=&language=) use this module to ensure resources can be instantiated multiple times within an account and without conflict.
 
 The Cloud Posse convention is to use labels as follows:
+
 - `namespace`: A short (3-4 letters) abbreviation of the company name, to ensure globally unique IDs for things like S3 buckets
 - `tenant`: _(Rarely needed)_ When a company creates a dedicated resource per customer, `tenant` can be used to identify the customer the resource is dedicated to
 - `environment`: A [short abbreviation](https://github.com/cloudposse/terraform-aws-utils/#introduction) for the AWS region hosting the resource, or `gbl` for resources like IAM roles that have no region
@@ -100,47 +104,30 @@ This project is part of our comprehensive ["SweetOps"](https://cpco.io/sweetops)
 [<img align="right" title="Share on LinkedIn" src="https://docs.cloudposse.com/images/ionicons/social-linkedin-outline-2.0.1-16x16-999999.svg" />][share_linkedin]
 [<img align="right" title="Share on Twitter" src="https://docs.cloudposse.com/images/ionicons/social-twitter-outline-2.0.1-16x16-999999.svg" />][share_twitter]
 
-
 [![Terraform Open Source Modules](https://docs.cloudposse.com/images/terraform-open-source-modules.svg)][terraform_modules]
-
-
 
 It's 100% Open Source and licensed under the [APACHE2](LICENSE).
 
-
-
-
-
-
-
-We literally have [*hundreds of terraform modules*][terraform_modules] that are Open Source and well-maintained. Check them out!
-
-
-
-
-
+We literally have [_hundreds of terraform modules_][terraform_modules] that are Open Source and well-maintained. Check them out!
 
 ## Security & Compliance [<img src="https://cloudposse.com/wp-content/uploads/2020/11/bridgecrew.svg" width="250" align="right" />](https://bridgecrew.io/)
 
 Security scanning is graciously provided by Bridgecrew. Bridgecrew is the leading fully hosted, cloud-native solution providing continuous Terraform security and compliance.
 
-| Benchmark | Description |
-|--------|---------------|
-| [![Infrastructure Security](https://www.bridgecrew.cloud/badges/github/cloudposse/terraform-null-label/general)](https://www.bridgecrew.cloud/link/badge?vcs=github&fullRepo=cloudposse%2Fterraform-null-label&benchmark=INFRASTRUCTURE+SECURITY) | Infrastructure Security Compliance |
-| [![CIS KUBERNETES](https://www.bridgecrew.cloud/badges/github/cloudposse/terraform-null-label/cis_kubernetes)](https://www.bridgecrew.cloud/link/badge?vcs=github&fullRepo=cloudposse%2Fterraform-null-label&benchmark=CIS+KUBERNETES+V1.5) | Center for Internet Security, KUBERNETES Compliance |
-| [![CIS AWS](https://www.bridgecrew.cloud/badges/github/cloudposse/terraform-null-label/cis_aws)](https://www.bridgecrew.cloud/link/badge?vcs=github&fullRepo=cloudposse%2Fterraform-null-label&benchmark=CIS+AWS+V1.2) | Center for Internet Security, AWS Compliance |
-| [![CIS AZURE](https://www.bridgecrew.cloud/badges/github/cloudposse/terraform-null-label/cis_azure)](https://www.bridgecrew.cloud/link/badge?vcs=github&fullRepo=cloudposse%2Fterraform-null-label&benchmark=CIS+AZURE+V1.1) | Center for Internet Security, AZURE Compliance |
-| [![PCI-DSS](https://www.bridgecrew.cloud/badges/github/cloudposse/terraform-null-label/pci)](https://www.bridgecrew.cloud/link/badge?vcs=github&fullRepo=cloudposse%2Fterraform-null-label&benchmark=PCI-DSS+V3.2) | Payment Card Industry Data Security Standards Compliance |
-| [![NIST-800-53](https://www.bridgecrew.cloud/badges/github/cloudposse/terraform-null-label/nist)](https://www.bridgecrew.cloud/link/badge?vcs=github&fullRepo=cloudposse%2Fterraform-null-label&benchmark=NIST-800-53) | National Institute of Standards and Technology Compliance |
-| [![ISO27001](https://www.bridgecrew.cloud/badges/github/cloudposse/terraform-null-label/iso)](https://www.bridgecrew.cloud/link/badge?vcs=github&fullRepo=cloudposse%2Fterraform-null-label&benchmark=ISO27001) | Information Security Management System, ISO/IEC 27001 Compliance |
-| [![SOC2](https://www.bridgecrew.cloud/badges/github/cloudposse/terraform-null-label/soc2)](https://www.bridgecrew.cloud/link/badge?vcs=github&fullRepo=cloudposse%2Fterraform-null-label&benchmark=SOC2)| Service Organization Control 2 Compliance |
-| [![CIS GCP](https://www.bridgecrew.cloud/badges/github/cloudposse/terraform-null-label/cis_gcp)](https://www.bridgecrew.cloud/link/badge?vcs=github&fullRepo=cloudposse%2Fterraform-null-label&benchmark=CIS+GCP+V1.1) | Center for Internet Security, GCP Compliance |
-| [![HIPAA](https://www.bridgecrew.cloud/badges/github/cloudposse/terraform-null-label/hipaa)](https://www.bridgecrew.cloud/link/badge?vcs=github&fullRepo=cloudposse%2Fterraform-null-label&benchmark=HIPAA) | Health Insurance Portability and Accountability Compliance |
-
-
+| Benchmark                                                                                                                                                                                                                                         | Description                                                      |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------- |
+| [![Infrastructure Security](https://www.bridgecrew.cloud/badges/github/cloudposse/terraform-null-label/general)](https://www.bridgecrew.cloud/link/badge?vcs=github&fullRepo=cloudposse%2Fterraform-null-label&benchmark=INFRASTRUCTURE+SECURITY) | Infrastructure Security Compliance                               |
+| [![CIS KUBERNETES](https://www.bridgecrew.cloud/badges/github/cloudposse/terraform-null-label/cis_kubernetes)](https://www.bridgecrew.cloud/link/badge?vcs=github&fullRepo=cloudposse%2Fterraform-null-label&benchmark=CIS+KUBERNETES+V1.5)       | Center for Internet Security, KUBERNETES Compliance              |
+| [![CIS AWS](https://www.bridgecrew.cloud/badges/github/cloudposse/terraform-null-label/cis_aws)](https://www.bridgecrew.cloud/link/badge?vcs=github&fullRepo=cloudposse%2Fterraform-null-label&benchmark=CIS+AWS+V1.2)                            | Center for Internet Security, AWS Compliance                     |
+| [![CIS AZURE](https://www.bridgecrew.cloud/badges/github/cloudposse/terraform-null-label/cis_azure)](https://www.bridgecrew.cloud/link/badge?vcs=github&fullRepo=cloudposse%2Fterraform-null-label&benchmark=CIS+AZURE+V1.1)                      | Center for Internet Security, AZURE Compliance                   |
+| [![PCI-DSS](https://www.bridgecrew.cloud/badges/github/cloudposse/terraform-null-label/pci)](https://www.bridgecrew.cloud/link/badge?vcs=github&fullRepo=cloudposse%2Fterraform-null-label&benchmark=PCI-DSS+V3.2)                                | Payment Card Industry Data Security Standards Compliance         |
+| [![NIST-800-53](https://www.bridgecrew.cloud/badges/github/cloudposse/terraform-null-label/nist)](https://www.bridgecrew.cloud/link/badge?vcs=github&fullRepo=cloudposse%2Fterraform-null-label&benchmark=NIST-800-53)                            | National Institute of Standards and Technology Compliance        |
+| [![ISO27001](https://www.bridgecrew.cloud/badges/github/cloudposse/terraform-null-label/iso)](https://www.bridgecrew.cloud/link/badge?vcs=github&fullRepo=cloudposse%2Fterraform-null-label&benchmark=ISO27001)                                   | Information Security Management System, ISO/IEC 27001 Compliance |
+| [![SOC2](https://www.bridgecrew.cloud/badges/github/cloudposse/terraform-null-label/soc2)](https://www.bridgecrew.cloud/link/badge?vcs=github&fullRepo=cloudposse%2Fterraform-null-label&benchmark=SOC2)                                          | Service Organization Control 2 Compliance                        |
+| [![CIS GCP](https://www.bridgecrew.cloud/badges/github/cloudposse/terraform-null-label/cis_gcp)](https://www.bridgecrew.cloud/link/badge?vcs=github&fullRepo=cloudposse%2Fterraform-null-label&benchmark=CIS+GCP+V1.1)                            | Center for Internet Security, GCP Compliance                     |
+| [![HIPAA](https://www.bridgecrew.cloud/badges/github/cloudposse/terraform-null-label/hipaa)](https://www.bridgecrew.cloud/link/badge?vcs=github&fullRepo=cloudposse%2Fterraform-null-label&benchmark=HIPAA)                                       | Health Insurance Portability and Accountability Compliance       |
 
 ## Usage
-
 
 **IMPORTANT:** We do not pin modules to versions in our examples because of the
 difficulty of keeping the versions in the documentation in sync with the latest released versions.
@@ -151,7 +138,6 @@ systematic way so that they do not catch you by surprise.
 Also, because of a bug in the Terraform registry ([hashicorp/terraform#21417](https://github.com/hashicorp/terraform/issues/21417)),
 the registry shows many of our inputs as required when in fact they are optional.
 The table below correctly indicates which inputs are required.
-
 
 ### Defaults
 
@@ -198,7 +184,7 @@ module "eg_prod_bastion_label" {
 }
 ```
 
-This will create an `id` with the value of `eg-prod-bastion-public` because when generating `id`, the default order is `namespace`, `environment`, `stage`,  `name`, `attributes`
+This will create an `id` with the value of `eg-prod-bastion-public` because when generating `id`, the default order is `namespace`, `environment`, `stage`, `name`, `attributes`
 (you can override it by using the `label_order` variable, see [Advanced Example 3](#advanced-example-3)).
 
 Now reference the label when creating an instance:
@@ -225,7 +211,6 @@ resource "aws_security_group" "eg_prod_bastion_public" {
   }
 }
 ```
-
 
 ### Advanced Example
 
@@ -768,13 +753,10 @@ label3_tags = tomap({
 
 </details>
 
-
-
-
-
-
 <!-- markdownlint-disable -->
+
 ## Makefile Targets
+
 ```text
 Available targets:
 
@@ -784,13 +766,15 @@ Available targets:
   lint                                Lint terraform code
 
 ```
+
 <!-- markdownlint-restore -->
 <!-- markdownlint-disable -->
+
 ## Requirements
 
-| Name | Version |
-|------|---------|
-| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 0.13.0 |
+| Name                                                                     | Version   |
+| ------------------------------------------------------------------------ | --------- |
+| <a name="requirement_terraform"></a> [terraform](#requirement_terraform) | >= 0.13.0 |
 
 ## Providers
 
@@ -806,54 +790,52 @@ No resources.
 
 ## Inputs
 
-| Name | Description | Type | Default | Required |
-|------|-------------|------|---------|:--------:|
-| <a name="input_additional_tag_map"></a> [additional\_tag\_map](#input\_additional\_tag\_map) | Additional key-value pairs to add to each map in `tags_as_list_of_maps`. Not added to `tags` or `id`.<br>This is for some rare cases where resources want additional configuration of tags<br>and therefore take a list of maps with tag key, value, and additional configuration. | `map(string)` | `{}` | no |
-| <a name="input_attributes"></a> [attributes](#input\_attributes) | ID element. Additional attributes (e.g. `workers` or `cluster`) to add to `id`,<br>in the order they appear in the list. New attributes are appended to the<br>end of the list. The elements of the list are joined by the `delimiter`<br>and treated as a single ID element. | `list(string)` | `[]` | no |
-| <a name="input_context"></a> [context](#input\_context) | Single object for setting entire context at once.<br>See description of individual variables for details.<br>Leave string and numeric variables as `null` to use default value.<br>Individual variable settings (non-null) override settings in context object,<br>except for attributes, tags, and additional\_tag\_map, which are merged. | `any` | <pre>{<br>  "additional_tag_map": {},<br>  "attributes": [],<br>  "delimiter": null,<br>  "descriptor_formats": {},<br>  "enabled": true,<br>  "environment": null,<br>  "id_length_limit": null,<br>  "label_key_case": null,<br>  "label_order": [],<br>  "label_value_case": null,<br>  "labels_as_tags": [<br>    "unset"<br>  ],<br>  "name": null,<br>  "namespace": null,<br>  "regex_replace_chars": null,<br>  "stage": null,<br>  "tags": {},<br>  "tenant": null<br>}</pre> | no |
-| <a name="input_delimiter"></a> [delimiter](#input\_delimiter) | Delimiter to be used between ID elements.<br>Defaults to `-` (hyphen). Set to `""` to use no delimiter at all. | `string` | `null` | no |
-| <a name="input_descriptor_formats"></a> [descriptor\_formats](#input\_descriptor\_formats) | Describe additional descriptors to be output in the `descriptors` output map.<br>Map of maps. Keys are names of descriptors. Values are maps of the form<br>`{<br>   format = string<br>   labels = list(string)<br>}`<br>(Type is `any` so the map values can later be enhanced to provide additional options.)<br>`format` is a Terraform format string to be passed to the `format()` function.<br>`labels` is a list of labels, in order, to pass to `format()` function.<br>Label values will be normalized before being passed to `format()` so they will be<br>identical to how they appear in `id`.<br>Default is `{}` (`descriptors` output will be empty). | `any` | `{}` | no |
-| <a name="input_enabled"></a> [enabled](#input\_enabled) | Set to false to prevent the module from creating any resources | `bool` | `null` | no |
-| <a name="input_environment"></a> [environment](#input\_environment) | ID element. Usually used for region e.g. 'uw2', 'us-west-2', OR role 'prod', 'staging', 'dev', 'UAT' | `string` | `null` | no |
-| <a name="input_id_length_limit"></a> [id\_length\_limit](#input\_id\_length\_limit) | Limit `id` to this many characters (minimum 6).<br>Set to `0` for unlimited length.<br>Set to `null` for keep the existing setting, which defaults to `0`.<br>Does not affect `id_full`. | `number` | `null` | no |
-| <a name="input_label_key_case"></a> [label\_key\_case](#input\_label\_key\_case) | Controls the letter case of the `tags` keys (label names) for tags generated by this module.<br>Does not affect keys of tags passed in via the `tags` input.<br>Possible values: `lower`, `title`, `upper`.<br>Default value: `title`. | `string` | `null` | no |
-| <a name="input_label_order"></a> [label\_order](#input\_label\_order) | The order in which the labels (ID elements) appear in the `id`.<br>Defaults to ["namespace", "environment", "stage", "name", "attributes"].<br>You can omit any of the 6 labels ("tenant" is the 6th), but at least one must be present. | `list(string)` | `null` | no |
-| <a name="input_label_value_case"></a> [label\_value\_case](#input\_label\_value\_case) | Controls the letter case of ID elements (labels) as included in `id`,<br>set as tag values, and output by this module individually.<br>Does not affect values of tags passed in via the `tags` input.<br>Possible values: `lower`, `title`, `upper` and `none` (no transformation).<br>Set this to `title` and set `delimiter` to `""` to yield Pascal Case IDs.<br>Default value: `lower`. | `string` | `null` | no |
-| <a name="input_labels_as_tags"></a> [labels\_as\_tags](#input\_labels\_as\_tags) | Set of labels (ID elements) to include as tags in the `tags` output.<br>Default is to include all labels.<br>Tags with empty values will not be included in the `tags` output.<br>Set to `[]` to suppress all generated tags.<br>**Notes:**<br>  The value of the `name` tag, if included, will be the `id`, not the `name`.<br>  Unlike other `null-label` inputs, the initial setting of `labels_as_tags` cannot be<br>  changed in later chained modules. Attempts to change it will be silently ignored. | `set(string)` | <pre>[<br>  "default"<br>]</pre> | no |
-| <a name="input_name"></a> [name](#input\_name) | ID element. Usually the component or solution name, e.g. 'app' or 'jenkins'.<br>This is the only ID element not also included as a `tag`.<br>The "name" tag is set to the full `id` string. There is no tag with the value of the `name` input. | `string` | `null` | no |
-| <a name="input_namespace"></a> [namespace](#input\_namespace) | ID element. Usually an abbreviation of your organization name, e.g. 'eg' or 'cp', to help ensure generated IDs are globally unique | `string` | `null` | no |
-| <a name="input_regex_replace_chars"></a> [regex\_replace\_chars](#input\_regex\_replace\_chars) | Terraform regular expression (regex) string.<br>Characters matching the regex will be removed from the ID elements.<br>If not set, `"/[^a-zA-Z0-9-]/"` is used to remove all characters other than hyphens, letters and digits. | `string` | `null` | no |
-| <a name="input_stage"></a> [stage](#input\_stage) | ID element. Usually used to indicate role, e.g. 'prod', 'staging', 'source', 'build', 'test', 'deploy', 'release' | `string` | `null` | no |
-| <a name="input_tags"></a> [tags](#input\_tags) | Additional tags (e.g. `{'BusinessUnit': 'XYZ'}`).<br>Neither the tag keys nor the tag values will be modified by this module. | `map(string)` | `{}` | no |
-| <a name="input_tenant"></a> [tenant](#input\_tenant) | ID element \_(Rarely used, not included by default)\_. A customer identifier, indicating who this instance of a resource is for | `string` | `null` | no |
+| Name                                                                                       | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          | Type           | Default                                                                                                                                                                                                                                                                                                                                                                                                                                                           | Required |
+| ------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------: |
+| <a name="input_additional_tag_map"></a> [additional_tag_map](#input_additional_tag_map)    | Additional key-value pairs to add to each map in `tags_as_list_of_maps`. Not added to `tags` or `id`.<br>This is for some rare cases where resources want additional configuration of tags<br>and therefore take a list of maps with tag key, value, and additional configuration.                                                                                                                                                                                                                                                                                                                                                                                   | `map(string)`  | `{}`                                                                                                                                                                                                                                                                                                                                                                                                                                                              |    no    |
+| <a name="input_attributes"></a> [attributes](#input_attributes)                            | ID element. Additional attributes (e.g. `workers` or `cluster`) to add to `id`,<br>in the order they appear in the list. New attributes are appended to the<br>end of the list. The elements of the list are joined by the `delimiter`<br>and treated as a single ID element.                                                                                                                                                                                                                                                                                                                                                                                        | `list(string)` | `[]`                                                                                                                                                                                                                                                                                                                                                                                                                                                              |    no    |
+| <a name="input_context"></a> [context](#input_context)                                     | Single object for setting entire context at once.<br>See description of individual variables for details.<br>Leave string and numeric variables as `null` to use default value.<br>Individual variable settings (non-null) override settings in context object,<br>except for attributes, tags, and additional_tag_map, which are merged.                                                                                                                                                                                                                                                                                                                            | `any`          | <pre>{<br> "additional_tag_map": {},<br> "attributes": [],<br> "delimiter": null,<br> "descriptor_formats": {},<br> "enabled": true,<br> "environment": null,<br> "id_length_limit": null,<br> "label_key_case": null,<br> "label_order": [],<br> "label_value_case": null,<br> "labels_as_tags": [<br> "unset"<br> ],<br> "name": null,<br> "namespace": null,<br> "regex_replace_chars": null,<br> "stage": null,<br> "tags": {},<br> "tenant": null<br>}</pre> |    no    |
+| <a name="input_delimiter"></a> [delimiter](#input_delimiter)                               | Delimiter to be used between ID elements.<br>Defaults to `-` (hyphen). Set to `""` to use no delimiter at all.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       | `string`       | `null`                                                                                                                                                                                                                                                                                                                                                                                                                                                            |    no    |
+| <a name="input_descriptor_formats"></a> [descriptor_formats](#input_descriptor_formats)    | Describe additional descriptors to be output in the `descriptors` output map.<br>Map of maps. Keys are names of descriptors. Values are maps of the form<br>`{<br>   format = string<br>   labels = list(string)<br>}`<br>(Type is `any` so the map values can later be enhanced to provide additional options.)<br>`format` is a Terraform format string to be passed to the `format()` function.<br>`labels` is a list of labels, in order, to pass to `format()` function.<br>Label values will be normalized before being passed to `format()` so they will be<br>identical to how they appear in `id`.<br>Default is `{}` (`descriptors` output will be empty). | `any`          | `{}`                                                                                                                                                                                                                                                                                                                                                                                                                                                              |    no    |
+| <a name="input_enabled"></a> [enabled](#input_enabled)                                     | Set to false to prevent the module from creating any resources                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       | `bool`         | `null`                                                                                                                                                                                                                                                                                                                                                                                                                                                            |    no    |
+| <a name="input_environment"></a> [environment](#input_environment)                         | ID element. Usually used for region e.g. 'uw2', 'us-west-2', OR role 'prod', 'staging', 'dev', 'UAT'                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 | `string`       | `null`                                                                                                                                                                                                                                                                                                                                                                                                                                                            |    no    |
+| <a name="input_id_length_limit"></a> [id_length_limit](#input_id_length_limit)             | Limit `id` to this many characters (minimum 6).<br>Set to `0` for unlimited length.<br>Set to `null` for keep the existing setting, which defaults to `0`.<br>Does not affect `id_full`.                                                                                                                                                                                                                                                                                                                                                                                                                                                                             | `number`       | `null`                                                                                                                                                                                                                                                                                                                                                                                                                                                            |    no    |
+| <a name="input_label_key_case"></a> [label_key_case](#input_label_key_case)                | Controls the letter case of the `tags` keys (label names) for tags generated by this module.<br>Does not affect keys of tags passed in via the `tags` input.<br>Possible values: `lower`, `title`, `upper`.<br>Default value: `title`.                                                                                                                                                                                                                                                                                                                                                                                                                               | `string`       | `null`                                                                                                                                                                                                                                                                                                                                                                                                                                                            |    no    |
+| <a name="input_label_order"></a> [label_order](#input_label_order)                         | The order in which the labels (ID elements) appear in the `id`.<br>Defaults to ["namespace", "environment", "stage", "name", "attributes"].<br>You can omit any of the 6 labels ("tenant" is the 6th), but at least one must be present.                                                                                                                                                                                                                                                                                                                                                                                                                             | `list(string)` | `null`                                                                                                                                                                                                                                                                                                                                                                                                                                                            |    no    |
+| <a name="input_label_value_case"></a> [label_value_case](#input_label_value_case)          | Controls the letter case of ID elements (labels) as included in `id`,<br>set as tag values, and output by this module individually.<br>Does not affect values of tags passed in via the `tags` input.<br>Possible values: `lower`, `title`, `upper` and `none` (no transformation).<br>Set this to `title` and set `delimiter` to `""` to yield Pascal Case IDs.<br>Default value: `lower`.                                                                                                                                                                                                                                                                          | `string`       | `null`                                                                                                                                                                                                                                                                                                                                                                                                                                                            |    no    |
+| <a name="input_labels_as_tags"></a> [labels_as_tags](#input_labels_as_tags)                | Set of labels (ID elements) to include as tags in the `tags` output.<br>Default is to include all labels.<br>Tags with empty values will not be included in the `tags` output.<br>Set to `[]` to suppress all generated tags.<br>**Notes:**<br> The value of the `name` tag, if included, will be the `id`, not the `name`.<br> Unlike other `null-label` inputs, the initial setting of `labels_as_tags` cannot be<br> changed in later chained modules. Attempts to change it will be silently ignored.                                                                                                                                                            | `set(string)`  | <pre>[<br> "default"<br>]</pre>                                                                                                                                                                                                                                                                                                                                                                                                                                   |    no    |
+| <a name="input_name"></a> [name](#input_name)                                              | ID element. Usually the component or solution name, e.g. 'app' or 'jenkins'.<br>This is the only ID element not also included as a `tag`.<br>The "name" tag is set to the full `id` string. There is no tag with the value of the `name` input.                                                                                                                                                                                                                                                                                                                                                                                                                      | `string`       | `null`                                                                                                                                                                                                                                                                                                                                                                                                                                                            |    no    |
+| <a name="input_namespace"></a> [namespace](#input_namespace)                               | ID element. Usually an abbreviation of your organization name, e.g. 'eg' or 'cp', to help ensure generated IDs are globally unique                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   | `string`       | `null`                                                                                                                                                                                                                                                                                                                                                                                                                                                            |    no    |
+| <a name="input_regex_replace_chars"></a> [regex_replace_chars](#input_regex_replace_chars) | Terraform regular expression (regex) string.<br>Characters matching the regex will be removed from the ID elements.<br>If not set, `"/[^a-zA-Z0-9-]/"` is used to remove all characters other than hyphens, letters and digits.                                                                                                                                                                                                                                                                                                                                                                                                                                      | `string`       | `null`                                                                                                                                                                                                                                                                                                                                                                                                                                                            |    no    |
+| <a name="input_stage"></a> [stage](#input_stage)                                           | ID element. Usually used to indicate role, e.g. 'prod', 'staging', 'source', 'build', 'test', 'deploy', 'release'                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    | `string`       | `null`                                                                                                                                                                                                                                                                                                                                                                                                                                                            |    no    |
+| <a name="input_tags"></a> [tags](#input_tags)                                              | Additional tags (e.g. `{'BusinessUnit': 'XYZ'}`).<br>Neither the tag keys nor the tag values will be modified by this module.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        | `map(string)`  | `{}`                                                                                                                                                                                                                                                                                                                                                                                                                                                              |    no    |
+| <a name="input_tenant"></a> [tenant](#input_tenant)                                        | ID element \_(Rarely used, not included by default)\_. A customer identifier, indicating who this instance of a resource is for                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      | `string`       | `null`                                                                                                                                                                                                                                                                                                                                                                                                                                                            |    no    |
 
 ## Outputs
 
-| Name | Description |
-|------|-------------|
-| <a name="output_additional_tag_map"></a> [additional\_tag\_map](#output\_additional\_tag\_map) | The merged additional\_tag\_map |
-| <a name="output_attributes"></a> [attributes](#output\_attributes) | List of attributes |
-| <a name="output_context"></a> [context](#output\_context) | Merged but otherwise unmodified input to this module, to be used as context input to other modules.<br>Note: this version will have null values as defaults, not the values actually used as defaults. |
-| <a name="output_delimiter"></a> [delimiter](#output\_delimiter) | Delimiter between `namespace`, `tenant`, `environment`, `stage`, `name` and `attributes` |
-| <a name="output_descriptors"></a> [descriptors](#output\_descriptors) | Map of descriptors as configured by `descriptor_formats` |
-| <a name="output_enabled"></a> [enabled](#output\_enabled) | True if module is enabled, false otherwise |
-| <a name="output_environment"></a> [environment](#output\_environment) | Normalized environment |
-| <a name="output_id"></a> [id](#output\_id) | Disambiguated ID string restricted to `id_length_limit` characters in total |
-| <a name="output_id_full"></a> [id\_full](#output\_id\_full) | ID string not restricted in length |
-| <a name="output_id_length_limit"></a> [id\_length\_limit](#output\_id\_length\_limit) | The id\_length\_limit actually used to create the ID, with `0` meaning unlimited |
-| <a name="output_label_order"></a> [label\_order](#output\_label\_order) | The naming order actually used to create the ID |
-| <a name="output_name"></a> [name](#output\_name) | Normalized name |
-| <a name="output_namespace"></a> [namespace](#output\_namespace) | Normalized namespace |
-| <a name="output_normalized_context"></a> [normalized\_context](#output\_normalized\_context) | Normalized context of this module |
-| <a name="output_regex_replace_chars"></a> [regex\_replace\_chars](#output\_regex\_replace\_chars) | The regex\_replace\_chars actually used to create the ID |
-| <a name="output_stage"></a> [stage](#output\_stage) | Normalized stage |
-| <a name="output_tags"></a> [tags](#output\_tags) | Normalized Tag map |
-| <a name="output_tags_as_list_of_maps"></a> [tags\_as\_list\_of\_maps](#output\_tags\_as\_list\_of\_maps) | This is a list with one map for each `tag`. Each map contains the tag `key`,<br>`value`, and contents of `var.additional_tag_map`. Used in the rare cases<br>where resources need additional configuration information for each tag. |
-| <a name="output_tenant"></a> [tenant](#output\_tenant) | Normalized tenant |
+| Name                                                                                            | Description                                                                                                                                                                                                                          |
+| ----------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| <a name="output_additional_tag_map"></a> [additional_tag_map](#output_additional_tag_map)       | The merged additional_tag_map                                                                                                                                                                                                        |
+| <a name="output_attributes"></a> [attributes](#output_attributes)                               | List of attributes                                                                                                                                                                                                                   |
+| <a name="output_context"></a> [context](#output_context)                                        | Merged but otherwise unmodified input to this module, to be used as context input to other modules.<br>Note: this version will have null values as defaults, not the values actually used as defaults.                               |
+| <a name="output_delimiter"></a> [delimiter](#output_delimiter)                                  | Delimiter between `namespace`, `tenant`, `environment`, `stage`, `name` and `attributes`                                                                                                                                             |
+| <a name="output_descriptors"></a> [descriptors](#output_descriptors)                            | Map of descriptors as configured by `descriptor_formats`                                                                                                                                                                             |
+| <a name="output_enabled"></a> [enabled](#output_enabled)                                        | True if module is enabled, false otherwise                                                                                                                                                                                           |
+| <a name="output_environment"></a> [environment](#output_environment)                            | Normalized environment                                                                                                                                                                                                               |
+| <a name="output_id"></a> [id](#output_id)                                                       | Disambiguated ID string restricted to `id_length_limit` characters in total                                                                                                                                                          |
+| <a name="output_id_full"></a> [id_full](#output_id_full)                                        | ID string not restricted in length                                                                                                                                                                                                   |
+| <a name="output_id_length_limit"></a> [id_length_limit](#output_id_length_limit)                | The id_length_limit actually used to create the ID, with `0` meaning unlimited                                                                                                                                                       |
+| <a name="output_label_order"></a> [label_order](#output_label_order)                            | The naming order actually used to create the ID                                                                                                                                                                                      |
+| <a name="output_name"></a> [name](#output_name)                                                 | Normalized name                                                                                                                                                                                                                      |
+| <a name="output_namespace"></a> [namespace](#output_namespace)                                  | Normalized namespace                                                                                                                                                                                                                 |
+| <a name="output_normalized_context"></a> [normalized_context](#output_normalized_context)       | Normalized context of this module                                                                                                                                                                                                    |
+| <a name="output_regex_replace_chars"></a> [regex_replace_chars](#output_regex_replace_chars)    | The regex_replace_chars actually used to create the ID                                                                                                                                                                               |
+| <a name="output_stage"></a> [stage](#output_stage)                                              | Normalized stage                                                                                                                                                                                                                     |
+| <a name="output_tags"></a> [tags](#output_tags)                                                 | Normalized Tag map                                                                                                                                                                                                                   |
+| <a name="output_tags_as_list_of_maps"></a> [tags_as_list_of_maps](#output_tags_as_list_of_maps) | This is a list with one map for each `tag`. Each map contains the tag `key`,<br>`value`, and contents of `var.additional_tag_map`. Used in the rare cases<br>where resources need additional configuration information for each tag. |
+| <a name="output_tenant"></a> [tenant](#output_tenant)                                           | Normalized tenant                                                                                                                                                                                                                    |
+
 <!-- markdownlint-restore -->
-
-
-
 
 ## Help
 
@@ -864,7 +846,6 @@ File a GitHub [issue](https://github.com/cloudposse/terraform-null-label/issues)
 [![README Commercial Support][readme_commercial_support_img]][readme_commercial_support_link]
 
 ## DevOps Accelerator for Startups
-
 
 We are a [**DevOps Accelerator**][commercial_support]. We'll help you build your cloud infrastructure from the ground up so you can own it. Then we'll show you how to operate it and stick around for as long as you need us.
 
@@ -887,7 +868,7 @@ We deliver 10x the value for a fraction of the cost of a full-time engineer. Our
 
 ## Slack Community
 
-Join our [Open Source Community][slack] on Slack. It's **FREE** for everyone! Our "SweetOps" community is where you get to talk with others who share a similar vision for how to rollout and manage infrastructure. This is the best place to talk shop, ask questions, solicit feedback, and work together as a community to build totally *sweet* infrastructure.
+Join our [Open Source Community][slack] on Slack. It's **FREE** for everyone! Our "SweetOps" community is where you get to talk with others who share a similar vision for how to rollout and manage infrastructure. This is the best place to talk shop, ask questions, solicit feedback, and work together as a community to build totally _sweet_ infrastructure.
 
 ## Discourse Forums
 
@@ -895,7 +876,7 @@ Participate in our [Discourse Forums][discourse]. Here you'll find answers to co
 
 ## Newsletter
 
-Sign up for [our newsletter][newsletter] that covers everything on our technology radar.  Receive updates on what we're up to on GitHub as well as awesome new projects we discover.
+Sign up for [our newsletter][newsletter] that covers everything on our technology radar. Receive updates on what we're up to on GitHub as well as awesome new projects we discover.
 
 ## Office Hours
 
@@ -915,20 +896,17 @@ If you are interested in being a contributor and want to get involved in develop
 
 In general, PRs are welcome. We follow the typical "fork-and-pull" Git workflow.
 
- 1. **Fork** the repo on GitHub
- 2. **Clone** the project to your own machine
- 3. **Commit** changes to your own branch
- 4. **Push** your work back up to your fork
- 5. Submit a **Pull Request** so that we can review your changes
+1.  **Fork** the repo on GitHub
+2.  **Clone** the project to your own machine
+3.  **Commit** changes to your own branch
+4.  **Push** your work back up to your fork
+5.  Submit a **Pull Request** so that we can review your changes
 
 **NOTE:** Be sure to merge the latest changes from "upstream" before making a pull request!
-
 
 ## Copyright
 
 Copyright © 2017-2021 [Cloud Posse, LLC](https://cpco.io/copyright)
-
-
 
 ## License
 
@@ -955,14 +933,6 @@ specific language governing permissions and limitations
 under the License.
 ```
 
-
-
-
-
-
-
-
-
 ## Trademarks
 
 All other trademarks referenced herein are the property of their respective owners.
@@ -973,74 +943,74 @@ This project is maintained and funded by [Cloud Posse, LLC][website]. Like it? P
 
 [![Cloud Posse][logo]][website]
 
-We're a [DevOps Professional Services][hire] company based in Los Angeles, CA. We ❤️  [Open Source Software][we_love_open_source].
+We're a [DevOps Professional Services][hire] company based in Los Angeles, CA. We ❤️ [Open Source Software][we_love_open_source].
 
 We offer [paid support][commercial_support] on all of our projects.
 
 Check out [our other projects][github], [follow us on twitter][twitter], [apply for a job][jobs], or [hire us][hire] to help with your cloud strategy and implementation.
 
-
-
 ### Contributors
 
 <!-- markdownlint-disable -->
-|  [![Erik Osterman][osterman_avatar]][osterman_homepage]<br/>[Erik Osterman][osterman_homepage] | [![Andriy Knysh][aknysh_avatar]][aknysh_homepage]<br/>[Andriy Knysh][aknysh_homepage] | [![Igor Rodionov][goruha_avatar]][goruha_homepage]<br/>[Igor Rodionov][goruha_homepage] | [![Sergey Vasilyev][s2504s_avatar]][s2504s_homepage]<br/>[Sergey Vasilyev][s2504s_homepage] | [![Michael Pereira][MichaelPereira_avatar]][MichaelPereira_homepage]<br/>[Michael Pereira][MichaelPereira_homepage] | [![Jamie Nelson][Jamie-BitFlight_avatar]][Jamie-BitFlight_homepage]<br/>[Jamie Nelson][Jamie-BitFlight_homepage] | [![Vladimir][SweetOps_avatar]][SweetOps_homepage]<br/>[Vladimir][SweetOps_homepage] | [![Daren Desjardins][darend_avatar]][darend_homepage]<br/>[Daren Desjardins][darend_homepage] | [![Maarten van der Hoef][maartenvanderhoef_avatar]][maartenvanderhoef_homepage]<br/>[Maarten van der Hoef][maartenvanderhoef_homepage] | [![Adam Tibbing][tibbing_avatar]][tibbing_homepage]<br/>[Adam Tibbing][tibbing_homepage] | [![Yonatan Koren][korenyoni_avatar]][korenyoni_homepage]<br/>[Yonatan Koren][korenyoni_homepage] |
-|---|---|---|---|---|---|---|---|---|---|---|
+
+| [![Erik Osterman][osterman_avatar]][osterman_homepage]<br/>[Erik Osterman][osterman_homepage] | [![Andriy Knysh][aknysh_avatar]][aknysh_homepage]<br/>[Andriy Knysh][aknysh_homepage] | [![Igor Rodionov][goruha_avatar]][goruha_homepage]<br/>[Igor Rodionov][goruha_homepage] | [![Sergey Vasilyev][s2504s_avatar]][s2504s_homepage]<br/>[Sergey Vasilyev][s2504s_homepage] | [![Michael Pereira][MichaelPereira_avatar]][MichaelPereira_homepage]<br/>[Michael Pereira][MichaelPereira_homepage] | [![Jamie Nelson][Jamie-BitFlight_avatar]][Jamie-BitFlight_homepage]<br/>[Jamie Nelson][Jamie-BitFlight_homepage] | [![Vladimir][SweetOps_avatar]][SweetOps_homepage]<br/>[Vladimir][SweetOps_homepage] | [![Daren Desjardins][darend_avatar]][darend_homepage]<br/>[Daren Desjardins][darend_homepage] | [![Maarten van der Hoef][maartenvanderhoef_avatar]][maartenvanderhoef_homepage]<br/>[Maarten van der Hoef][maartenvanderhoef_homepage] | [![Adam Tibbing][tibbing_avatar]][tibbing_homepage]<br/>[Adam Tibbing][tibbing_homepage] | [![Yonatan Koren][korenyoni_avatar]][korenyoni_homepage]<br/>[Yonatan Koren][korenyoni_homepage] |
+| --------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------ |
+
 <!-- markdownlint-restore -->
 
-  [osterman_homepage]: https://github.com/osterman
-  [osterman_avatar]: https://img.cloudposse.com/150x150/https://github.com/osterman.png
-  [aknysh_homepage]: https://github.com/aknysh
-  [aknysh_avatar]: https://img.cloudposse.com/150x150/https://github.com/aknysh.png
-  [goruha_homepage]: https://github.com/goruha
-  [goruha_avatar]: https://img.cloudposse.com/150x150/https://github.com/goruha.png
-  [s2504s_homepage]: https://github.com/s2504s
-  [s2504s_avatar]: https://img.cloudposse.com/150x150/https://github.com/s2504s.png
-  [MichaelPereira_homepage]: https://github.com/MichaelPereira
-  [MichaelPereira_avatar]: https://img.cloudposse.com/150x150/https://github.com/MichaelPereira.png
-  [Jamie-BitFlight_homepage]: https://github.com/Jamie-BitFlight
-  [Jamie-BitFlight_avatar]: https://img.cloudposse.com/150x150/https://github.com/Jamie-BitFlight.png
-  [SweetOps_homepage]: https://github.com/SweetOps
-  [SweetOps_avatar]: https://img.cloudposse.com/150x150/https://github.com/SweetOps.png
-  [darend_homepage]: https://github.com/darend
-  [darend_avatar]: https://img.cloudposse.com/150x150/https://github.com/darend.png
-  [maartenvanderhoef_homepage]: https://github.com/maartenvanderhoef
-  [maartenvanderhoef_avatar]: https://img.cloudposse.com/150x150/https://github.com/maartenvanderhoef.png
-  [tibbing_homepage]: https://github.com/tibbing
-  [tibbing_avatar]: https://img.cloudposse.com/150x150/https://github.com/tibbing.png
-  [korenyoni_homepage]: https://github.com/korenyoni
-  [korenyoni_avatar]: https://img.cloudposse.com/150x150/https://github.com/korenyoni.png
+[osterman_homepage]: https://github.com/osterman
+[osterman_avatar]: https://img.cloudposse.com/150x150/https://github.com/osterman.png
+[aknysh_homepage]: https://github.com/aknysh
+[aknysh_avatar]: https://img.cloudposse.com/150x150/https://github.com/aknysh.png
+[goruha_homepage]: https://github.com/goruha
+[goruha_avatar]: https://img.cloudposse.com/150x150/https://github.com/goruha.png
+[s2504s_homepage]: https://github.com/s2504s
+[s2504s_avatar]: https://img.cloudposse.com/150x150/https://github.com/s2504s.png
+[MichaelPereira_homepage]: https://github.com/MichaelPereira
+[MichaelPereira_avatar]: https://img.cloudposse.com/150x150/https://github.com/MichaelPereira.png
+[Jamie-BitFlight_homepage]: https://github.com/Jamie-BitFlight
+[Jamie-BitFlight_avatar]: https://img.cloudposse.com/150x150/https://github.com/Jamie-BitFlight.png
+[SweetOps_homepage]: https://github.com/SweetOps
+[SweetOps_avatar]: https://img.cloudposse.com/150x150/https://github.com/SweetOps.png
+[darend_homepage]: https://github.com/darend
+[darend_avatar]: https://img.cloudposse.com/150x150/https://github.com/darend.png
+[maartenvanderhoef_homepage]: https://github.com/maartenvanderhoef
+[maartenvanderhoef_avatar]: https://img.cloudposse.com/150x150/https://github.com/maartenvanderhoef.png
+[tibbing_homepage]: https://github.com/tibbing
+[tibbing_avatar]: https://img.cloudposse.com/150x150/https://github.com/tibbing.png
+[korenyoni_homepage]: https://github.com/korenyoni
+[korenyoni_avatar]: https://img.cloudposse.com/150x150/https://github.com/korenyoni.png
 
 [![README Footer][readme_footer_img]][readme_footer_link]
 [![Beacon][beacon]][website]
 
-  [logo]: https://cloudposse.com/logo-300x69.svg
-  [docs]: https://cpco.io/docs?utm_source=github&utm_medium=readme&utm_campaign=cloudposse/terraform-null-label&utm_content=docs
-  [website]: https://cpco.io/homepage?utm_source=github&utm_medium=readme&utm_campaign=cloudposse/terraform-null-label&utm_content=website
-  [github]: https://cpco.io/github?utm_source=github&utm_medium=readme&utm_campaign=cloudposse/terraform-null-label&utm_content=github
-  [jobs]: https://cpco.io/jobs?utm_source=github&utm_medium=readme&utm_campaign=cloudposse/terraform-null-label&utm_content=jobs
-  [hire]: https://cpco.io/hire?utm_source=github&utm_medium=readme&utm_campaign=cloudposse/terraform-null-label&utm_content=hire
-  [slack]: https://cpco.io/slack?utm_source=github&utm_medium=readme&utm_campaign=cloudposse/terraform-null-label&utm_content=slack
-  [linkedin]: https://cpco.io/linkedin?utm_source=github&utm_medium=readme&utm_campaign=cloudposse/terraform-null-label&utm_content=linkedin
-  [twitter]: https://cpco.io/twitter?utm_source=github&utm_medium=readme&utm_campaign=cloudposse/terraform-null-label&utm_content=twitter
-  [testimonial]: https://cpco.io/leave-testimonial?utm_source=github&utm_medium=readme&utm_campaign=cloudposse/terraform-null-label&utm_content=testimonial
-  [office_hours]: https://cloudposse.com/office-hours?utm_source=github&utm_medium=readme&utm_campaign=cloudposse/terraform-null-label&utm_content=office_hours
-  [newsletter]: https://cpco.io/newsletter?utm_source=github&utm_medium=readme&utm_campaign=cloudposse/terraform-null-label&utm_content=newsletter
-  [discourse]: https://ask.sweetops.com/?utm_source=github&utm_medium=readme&utm_campaign=cloudposse/terraform-null-label&utm_content=discourse
-  [email]: https://cpco.io/email?utm_source=github&utm_medium=readme&utm_campaign=cloudposse/terraform-null-label&utm_content=email
-  [commercial_support]: https://cpco.io/commercial-support?utm_source=github&utm_medium=readme&utm_campaign=cloudposse/terraform-null-label&utm_content=commercial_support
-  [we_love_open_source]: https://cpco.io/we-love-open-source?utm_source=github&utm_medium=readme&utm_campaign=cloudposse/terraform-null-label&utm_content=we_love_open_source
-  [terraform_modules]: https://cpco.io/terraform-modules?utm_source=github&utm_medium=readme&utm_campaign=cloudposse/terraform-null-label&utm_content=terraform_modules
-  [readme_header_img]: https://cloudposse.com/readme/header/img
-  [readme_header_link]: https://cloudposse.com/readme/header/link?utm_source=github&utm_medium=readme&utm_campaign=cloudposse/terraform-null-label&utm_content=readme_header_link
-  [readme_footer_img]: https://cloudposse.com/readme/footer/img
-  [readme_footer_link]: https://cloudposse.com/readme/footer/link?utm_source=github&utm_medium=readme&utm_campaign=cloudposse/terraform-null-label&utm_content=readme_footer_link
-  [readme_commercial_support_img]: https://cloudposse.com/readme/commercial-support/img
-  [readme_commercial_support_link]: https://cloudposse.com/readme/commercial-support/link?utm_source=github&utm_medium=readme&utm_campaign=cloudposse/terraform-null-label&utm_content=readme_commercial_support_link
-  [share_twitter]: https://twitter.com/intent/tweet/?text=terraform-null-label&url=https://github.com/cloudposse/terraform-null-label
-  [share_linkedin]: https://www.linkedin.com/shareArticle?mini=true&title=terraform-null-label&url=https://github.com/cloudposse/terraform-null-label
-  [share_reddit]: https://reddit.com/submit/?url=https://github.com/cloudposse/terraform-null-label
-  [share_facebook]: https://facebook.com/sharer/sharer.php?u=https://github.com/cloudposse/terraform-null-label
-  [share_googleplus]: https://plus.google.com/share?url=https://github.com/cloudposse/terraform-null-label
-  [share_email]: mailto:?subject=terraform-null-label&body=https://github.com/cloudposse/terraform-null-label
-  [beacon]: https://ga-beacon.cloudposse.com/UA-76589703-4/cloudposse/terraform-null-label?pixel&cs=github&cm=readme&an=terraform-null-label
+[logo]: https://cloudposse.com/logo-300x69.svg
+[docs]: https://cpco.io/docs?utm_source=github&utm_medium=readme&utm_campaign=cloudposse/terraform-null-label&utm_content=docs
+[website]: https://cpco.io/homepage?utm_source=github&utm_medium=readme&utm_campaign=cloudposse/terraform-null-label&utm_content=website
+[github]: https://cpco.io/github?utm_source=github&utm_medium=readme&utm_campaign=cloudposse/terraform-null-label&utm_content=github
+[jobs]: https://cpco.io/jobs?utm_source=github&utm_medium=readme&utm_campaign=cloudposse/terraform-null-label&utm_content=jobs
+[hire]: https://cpco.io/hire?utm_source=github&utm_medium=readme&utm_campaign=cloudposse/terraform-null-label&utm_content=hire
+[slack]: https://cpco.io/slack?utm_source=github&utm_medium=readme&utm_campaign=cloudposse/terraform-null-label&utm_content=slack
+[linkedin]: https://cpco.io/linkedin?utm_source=github&utm_medium=readme&utm_campaign=cloudposse/terraform-null-label&utm_content=linkedin
+[twitter]: https://cpco.io/twitter?utm_source=github&utm_medium=readme&utm_campaign=cloudposse/terraform-null-label&utm_content=twitter
+[testimonial]: https://cpco.io/leave-testimonial?utm_source=github&utm_medium=readme&utm_campaign=cloudposse/terraform-null-label&utm_content=testimonial
+[office_hours]: https://cloudposse.com/office-hours?utm_source=github&utm_medium=readme&utm_campaign=cloudposse/terraform-null-label&utm_content=office_hours
+[newsletter]: https://cpco.io/newsletter?utm_source=github&utm_medium=readme&utm_campaign=cloudposse/terraform-null-label&utm_content=newsletter
+[discourse]: https://ask.sweetops.com/?utm_source=github&utm_medium=readme&utm_campaign=cloudposse/terraform-null-label&utm_content=discourse
+[email]: https://cpco.io/email?utm_source=github&utm_medium=readme&utm_campaign=cloudposse/terraform-null-label&utm_content=email
+[commercial_support]: https://cpco.io/commercial-support?utm_source=github&utm_medium=readme&utm_campaign=cloudposse/terraform-null-label&utm_content=commercial_support
+[we_love_open_source]: https://cpco.io/we-love-open-source?utm_source=github&utm_medium=readme&utm_campaign=cloudposse/terraform-null-label&utm_content=we_love_open_source
+[terraform_modules]: https://cpco.io/terraform-modules?utm_source=github&utm_medium=readme&utm_campaign=cloudposse/terraform-null-label&utm_content=terraform_modules
+[readme_header_img]: https://cloudposse.com/readme/header/img
+[readme_header_link]: https://cloudposse.com/readme/header/link?utm_source=github&utm_medium=readme&utm_campaign=cloudposse/terraform-null-label&utm_content=readme_header_link
+[readme_footer_img]: https://cloudposse.com/readme/footer/img
+[readme_footer_link]: https://cloudposse.com/readme/footer/link?utm_source=github&utm_medium=readme&utm_campaign=cloudposse/terraform-null-label&utm_content=readme_footer_link
+[readme_commercial_support_img]: https://cloudposse.com/readme/commercial-support/img
+[readme_commercial_support_link]: https://cloudposse.com/readme/commercial-support/link?utm_source=github&utm_medium=readme&utm_campaign=cloudposse/terraform-null-label&utm_content=readme_commercial_support_link
+[share_twitter]: https://twitter.com/intent/tweet/?text=terraform-null-label&url=https://github.com/cloudposse/terraform-null-label
+[share_linkedin]: https://www.linkedin.com/shareArticle?mini=true&title=terraform-null-label&url=https://github.com/cloudposse/terraform-null-label
+[share_reddit]: https://reddit.com/submit/?url=https://github.com/cloudposse/terraform-null-label
+[share_facebook]: https://facebook.com/sharer/sharer.php?u=https://github.com/cloudposse/terraform-null-label
+[share_googleplus]: https://plus.google.com/share?url=https://github.com/cloudposse/terraform-null-label
+[share_email]: mailto:?subject=terraform-null-label&body=https://github.com/cloudposse/terraform-null-label
+[beacon]: https://ga-beacon.cloudposse.com/UA-76589703-4/cloudposse/terraform-null-label?pixel&cs=github&cm=readme&an=terraform-null-label

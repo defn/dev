@@ -1,5 +1,5 @@
 (function () {
-  var ns = $.namespace('pskl.service');
+  var ns = $.namespace("pskl.service");
 
   ns.BeforeUnloadService = function (piskelController) {
     this.piskelController = piskelController;
@@ -8,11 +8,11 @@
   ns.BeforeUnloadService.prototype.init = function () {
     if (pskl.utils.Environment.detectNodeWebkit()) {
       // Add a dedicated listener to window 'close' event in nwjs environment.
-      var win = require('nw.gui').Window.get();
-      win.on('close', this.onNwWindowClose.bind(this, win));
+      var win = require("nw.gui").Window.get();
+      win.on("close", this.onNwWindowClose.bind(this, win));
     }
 
-    window.addEventListener('beforeunload', this.onBeforeUnload.bind(this));
+    window.addEventListener("beforeunload", this.onBeforeUnload.bind(this));
   };
 
   /**
@@ -34,7 +34,8 @@
     // nature of IndexedDB.
     pskl.app.backupService.backup();
     if (pskl.app.savedStatusService.isDirty()) {
-      var confirmationMessage = 'Your current sprite has unsaved changes. Are you sure you want to quit?';
+      var confirmationMessage =
+        "Your current sprite has unsaved changes. Are you sure you want to quit?";
 
       evt = evt || window.event;
       if (evt) {
@@ -43,5 +44,4 @@
       return confirmationMessage;
     }
   };
-
 })();

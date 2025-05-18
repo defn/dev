@@ -1,5 +1,5 @@
 (function () {
-  var ns = $.namespace('pskl.service.keyboard');
+  var ns = $.namespace("pskl.service.keyboard");
 
   /**
    * Keyboard shortcut wrapper, use it to register on the ShortcutService.
@@ -13,14 +13,14 @@
   ns.Shortcut = function (id, description, defaultKeys, displayKey) {
     this.id_ = id;
     this.description_ = description;
-    if (typeof defaultKeys === 'string') {
+    if (typeof defaultKeys === "string") {
       defaultKeys = [defaultKeys];
     }
     this.defaultKeys_ = defaultKeys;
     this.displayKey_ = displayKey;
   };
 
-  ns.Shortcut.USER_SETTINGS_PREFIX = 'shortcut.';
+  ns.Shortcut.USER_SETTINGS_PREFIX = "shortcut.";
 
   ns.Shortcut.prototype.getId = function () {
     return this.id_;
@@ -35,9 +35,10 @@
    * @return {Array<String>} array of keys
    */
   ns.Shortcut.prototype.getKeys = function () {
-    var keys = pskl.UserSettings.get(this.getLocalStorageKey_()) || this.defaultKeys_;
+    var keys =
+      pskl.UserSettings.get(this.getLocalStorageKey_()) || this.defaultKeys_;
 
-    if (typeof keys === 'string') {
+    if (typeof keys === "string") {
       return [keys];
     }
 
@@ -92,7 +93,7 @@
    */
   ns.Shortcut.prototype.getDisplayKey = function () {
     if (this.isUndefined()) {
-      return '???';
+      return "???";
     }
 
     if (this.displayKey_) {
@@ -103,7 +104,7 @@
   };
 
   ns.Shortcut.prototype.restoreDefault = function (keys) {
-    pskl.UserSettings.set(this.getLocalStorageKey_(), '');
+    pskl.UserSettings.set(this.getLocalStorageKey_(), "");
   };
 
   ns.Shortcut.prototype.updateKeys = function (keys) {

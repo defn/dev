@@ -1,7 +1,7 @@
 (function () {
-  var ns = $.namespace('pskl.database');
+  var ns = $.namespace("pskl.database");
 
-  var DB_NAME = 'PiskelSessionsDatabase';
+  var DB_NAME = "PiskelSessionsDatabase";
   var DB_VERSION = 1;
 
   // Simple wrapper to promisify a request.
@@ -31,12 +31,16 @@
     var request = window.indexedDB.open(DB_NAME, DB_VERSION);
     request.onupgradeneeded = this.onUpgradeNeeded_.bind(this);
 
-    return _requestPromise(request).then(function (event) {
-      this.db = event.target.result;
-      return this.db;
-    }.bind(this)).catch(function (e) {
-      console.log('Could not initialize the piskel backup database');
-    });
+    return _requestPromise(request)
+      .then(
+        function (event) {
+          this.db = event.target.result;
+          return this.db;
+        }.bind(this),
+      )
+      .catch(function (e) {
+        console.log("Could not initialize the piskel backup database");
+      });
   };
 
   ns.BackupDatabase.prototype.onUpgradeNeeded_ = function (event) {
@@ -44,19 +48,26 @@
     this.db = event.target.result;
 
     // Create an object store "piskels" with the autoIncrement flag set as true.
-    var objectStore = this.db.createObjectStore('snapshots', { keyPath: 'id', autoIncrement : true });
+    var objectStore = this.db.createObjectStore("snapshots", {
+      keyPath: "id",
+      autoIncrement: true,
+    });
 
-    objectStore.createIndex('session_id', 'session_id', { unique: false });
-    objectStore.createIndex('date', 'date', { unique: false });
-    objectStore.createIndex('session_id, date', ['session_id', 'date'], { unique: false });
+    objectStore.createIndex("session_id", "session_id", { unique: false });
+    objectStore.createIndex("date", "date", { unique: false });
+    objectStore.createIndex("session_id, date", ["session_id", "date"], {
+      unique: false,
+    });
 
-    objectStore.transaction.oncomplete = function(event) {
+    objectStore.transaction.oncomplete = function (event) {
       // Nothing to do at the moment!
     }.bind(this);
   };
 
   ns.BackupDatabase.prototype.openObjectStore_ = function () {
-    return this.db.transaction(['snapshots'], 'readwrite').objectStore('snapshots');
+    return this.db
+      .transaction(["snapshots"], "readwrite")
+      .objectStore("snapshots");
   };
 
   /**
@@ -115,11 +126,13 @@
     var deferred = Q.defer();
 
     // Open a transaction to the snapshots object store.
-    var objectStore = this.db.transaction(['snapshots']).objectStore('snapshots');
+    var objectStore = this.db
+      .transaction(["snapshots"])
+      .objectStore("snapshots");
 
-    var index = objectStore.index('date');
+    var index = objectStore.index("date");
     var range = IDBKeyRange.upperBound(Infinity);
-    index.openCursor(range, 'prev').onsuccess = function(event) {
+    index.openCursor(range, "prev").onsuccess = function (event) {
       var cursor = event.target.result;
       var snapshot = cursor && cursor.value;
 
@@ -148,18 +161,17 @@
     var deferred = Q.defer();
 
     // Open a transaction to the snapshots object store.
-    var objectStore = this.db.transaction(['snapshots']).objectStore('snapshots');
+    var objectStore = this.db
+      .transaction(["snapshots"])
+      .objectStore("snapshots");
 
     // Loop on all the saved snapshots for the provided piskel id
-    var index = objectStore.index('session_id, date');
-    var keyRange = IDBKeyRange.bound(
-      [sessionId, 0],
-      [sessionId, Infinity]
-    );
+    var index = objectStore.index("session_id, date");
+    var keyRange = IDBKeyRange.bound([sessionId, 0], [sessionId, Infinity]);
 
     var snapshots = [];
     // Ordered by date in descending order.
-    index.openCursor(keyRange, 'prev').onsuccess = function(event) {
+    index.openCursor(keyRange, "prev").onsuccess = function (event) {
       var cursor = event.target.result;
       if (cursor) {
         snapshots.push(cursor.value);
@@ -178,7 +190,9 @@
     var deferred = Q.defer();
 
     // Open a transaction to the snapshots object store.
-    var objectStore = this.db.transaction(['snapshots']).objectStore('snapshots');
+    var objectStore = this.db
+      .transaction(["snapshots"])
+      .objectStore("snapshots");
 
     var sessions = {};
 
@@ -189,7 +203,7 @@
         name: snapshot.name,
         description: snapshot.description,
         id: snapshot.session_id,
-        count: 1
+        count: 1,
       };
     };
 
@@ -207,9 +221,9 @@
       }
     };
 
-    var index = objectStore.index('date');
+    var index = objectStore.index("date");
     var range = IDBKeyRange.upperBound(Infinity);
-    index.openCursor(range, 'prev').onsuccess = function(event) {
+    index.openCursor(range, "prev").onsuccess = function (event) {
       var cursor = event.target.result;
       var snapshot = cursor && cursor.value;
       if (!snapshot) {
@@ -240,10 +254,10 @@
     var objectStore = this.openObjectStore_();
 
     // Loop on all the saved snapshots for the provided piskel id
-    var index = objectStore.index('session_id');
+    var index = objectStore.index("session_id");
     var keyRange = IDBKeyRange.only(sessionId);
 
-    index.openCursor(keyRange).onsuccess = function(event) {
+    index.openCursor(keyRange).onsuccess = function (event) {
       var cursor = event.target.result;
       if (cursor) {
         cursor.delete();

@@ -4,16 +4,17 @@
  */
 
 (function () {
-
-  var ns = $.namespace('pskl.utils');
+  var ns = $.namespace("pskl.utils");
 
   ns.Environment = {
-    detectNodeWebkit : function () {
-      var isNode = (typeof window.process !== 'undefined' && typeof window.require !== 'undefined');
+    detectNodeWebkit: function () {
+      var isNode =
+        typeof window.process !== "undefined" &&
+        typeof window.require !== "undefined";
       var isNodeWebkit = false;
       if (isNode) {
         try {
-          isNodeWebkit = (typeof window.require('nw.gui') !== 'undefined');
+          isNodeWebkit = typeof window.require("nw.gui") !== "undefined";
         } catch (e) {
           isNodeWebkit = false;
         }
@@ -21,17 +22,16 @@
       return isNodeWebkit;
     },
 
-    isIntegrationTest : function () {
-      return window.location.href.indexOf('integration-test') !== -1;
+    isIntegrationTest: function () {
+      return window.location.href.indexOf("integration-test") !== -1;
     },
 
-    isDebug : function () {
-      return window.location.href.indexOf('debug') !== -1;
+    isDebug: function () {
+      return window.location.href.indexOf("debug") !== -1;
     },
 
-    isHttps : function () {
-      return window.location.href.indexOf('https://') === 0;
+    isHttps: function () {
+      return window.location.href.indexOf("https://") === 0;
     },
   };
-
 })();

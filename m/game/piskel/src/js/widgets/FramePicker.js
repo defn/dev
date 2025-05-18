@@ -1,15 +1,15 @@
 (function () {
-  var ns = $.namespace('pskl.widgets');
+  var ns = $.namespace("pskl.widgets");
 
   var WIDGET_MARKUP =
     '<div class="frame-viewer"></div>' +
     '<div class="frame-nav">' +
-      '<button class="button frame-nav-first">&lt;&lt;</button>' +
-      '<button class="button frame-nav-previous">&lt;</button>' +
-      '<input class="textfield frame-nav-input" type="text">' +
-      '<button class="button frame-nav-next">&gt;</button>' +
-      '<button class="button frame-nav-last">&gt;&gt;</button>' +
-    '</div>';
+    '<button class="button frame-nav-first">&lt;&lt;</button>' +
+    '<button class="button frame-nav-previous">&lt;</button>' +
+    '<input class="textfield frame-nav-input" type="text">' +
+    '<button class="button frame-nav-next">&gt;</button>' +
+    '<button class="button frame-nav-last">&gt;&gt;</button>' +
+    "</div>";
 
   /**
    * The frame picker widget displays a a simple UI to view the frames of a piskel.
@@ -25,16 +25,16 @@
     this.firstFrameIndex = 1;
 
     // Create internal wrapper that will contain the widget.
-    this.wrapper = document.createElement('div');
+    this.wrapper = document.createElement("div");
     this.wrapper.innerHTML = WIDGET_MARKUP;
-    this.wrapper.classList.add('frame-picker-wrapper');
+    this.wrapper.classList.add("frame-picker-wrapper");
 
-    this.frameViewer = this.wrapper.querySelector('.frame-viewer');
-    this.firstButton = this.wrapper.querySelector('.frame-nav-first');
-    this.previousButton = this.wrapper.querySelector('.frame-nav-previous');
-    this.nextButton = this.wrapper.querySelector('.frame-nav-next');
-    this.lastButton = this.wrapper.querySelector('.frame-nav-last');
-    this.input = this.wrapper.querySelector('.frame-nav-input');
+    this.frameViewer = this.wrapper.querySelector(".frame-viewer");
+    this.firstButton = this.wrapper.querySelector(".frame-nav-first");
+    this.previousButton = this.wrapper.querySelector(".frame-nav-previous");
+    this.nextButton = this.wrapper.querySelector(".frame-nav-next");
+    this.lastButton = this.wrapper.querySelector(".frame-nav-last");
+    this.input = this.wrapper.querySelector(".frame-nav-input");
   };
 
   ns.FramePicker.prototype.init = function () {
@@ -42,11 +42,15 @@
     this.container.appendChild(this.wrapper);
 
     // Attach event listeners
-    this.addEventListener(this.firstButton, 'click', this.onFirstClicked_);
-    this.addEventListener(this.previousButton, 'click', this.onPreviousClicked_);
-    this.addEventListener(this.nextButton, 'click', this.onNextClicked_);
-    this.addEventListener(this.lastButton, 'click', this.onLastClicked_);
-    this.addEventListener(this.input, 'change', this.onInputChange_);
+    this.addEventListener(this.firstButton, "click", this.onFirstClicked_);
+    this.addEventListener(
+      this.previousButton,
+      "click",
+      this.onPreviousClicked_,
+    );
+    this.addEventListener(this.nextButton, "click", this.onNextClicked_);
+    this.addEventListener(this.lastButton, "click", this.onLastClicked_);
+    this.addEventListener(this.input, "change", this.onInputChange_);
 
     // Select the first frame
     this.setFrameIndex(1);
@@ -117,8 +121,8 @@
     this.input.value = frameIndex;
 
     var image = this.getFrameAsImage_(frameIndex);
-    image.classList.add('canvas-background');
-    this.frameViewer.innerHTML = '';
+    image.classList.add("canvas-background");
+    this.frameViewer.innerHTML = "";
     this.frameViewer.appendChild(image);
 
     var frameCount = this.getFrameCount_();
@@ -128,8 +132,8 @@
     this.setEnabled_(this.lastButton, frameIndex !== frameCount);
 
     if (frameIndex === 0) {
-      this.previousButton.setAttribute('disabled', true);
-      this.firstButton.setAttribute('disabled', true);
+      this.previousButton.setAttribute("disabled", true);
+      this.firstButton.setAttribute("disabled", true);
     }
   };
 
@@ -138,7 +142,10 @@
       return new Image();
     }
 
-    var frame = pskl.utils.LayerUtils.mergeFrameAt(this.piskel.getLayers(), frameIndex - 1);
+    var frame = pskl.utils.LayerUtils.mergeFrameAt(
+      this.piskel.getLayers(),
+      frameIndex - 1,
+    );
     var zoom = this.getZoomLevel_();
     return pskl.utils.FrameUtils.toImage(frame, zoom);
   };
@@ -160,9 +167,9 @@
    */
   ns.FramePicker.prototype.setEnabled_ = function (el, enabled) {
     if (enabled) {
-      el.removeAttribute('disabled');
+      el.removeAttribute("disabled");
     } else {
-      el.setAttribute('disabled', true);
+      el.setAttribute("disabled", true);
     }
   };
 })();

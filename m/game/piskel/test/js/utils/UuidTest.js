@@ -1,9 +1,8 @@
-describe("UUID Generator", function() {
+describe("UUID Generator", function () {
+  beforeEach(function () {});
+  afterEach(function () {});
 
-  beforeEach(function() {});
-  afterEach(function() {});
-
-  it("returns valid uuids", function() {
+  it("returns valid uuids", function () {
     // when
 
     // then
@@ -13,7 +12,7 @@ describe("UUID Generator", function() {
     // verify
     expect(typeof uuid1).toBe("string");
     expect(uuid1.length).toBe(36);
-    var splits = uuid1.split('-');
+    var splits = uuid1.split("-");
     expect(splits.length).toBe(5);
 
     expect(splits[0].length).toBe(8);

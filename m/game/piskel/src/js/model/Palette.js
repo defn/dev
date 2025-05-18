@@ -1,5 +1,5 @@
 (function () {
-  var ns = $.namespace('pskl.model');
+  var ns = $.namespace("pskl.model");
 
   ns.Palette = function (id, name, colors) {
     this.id = id;
@@ -8,7 +8,7 @@
   };
 
   ns.Palette.fromObject = function (paletteObj) {
-    var colors = paletteObj.colors.slice(0 , paletteObj.colors.length);
+    var colors = paletteObj.colors.slice(0, paletteObj.colors.length);
     return new ns.Palette(paletteObj.id, paletteObj.name, colors);
   };
 

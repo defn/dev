@@ -1,29 +1,29 @@
 (function () {
-  var ns = $.namespace('pskl.utils');
+  var ns = $.namespace("pskl.utils");
   var ua = navigator.userAgent;
 
-  var hasChrome =
-
-  ns.UserAgent = {
-    isIE : /MSIE/i.test(ua),
-    isIE11 : /trident/i.test(ua),
-    isEdge : /edge\//i.test(ua),
-    isFirefox : /Firefox/i.test(ua),
-    isMac : /Mac/.test(ua),
-    isOpera : /OPR\//.test(ua),
+  var hasChrome = (ns.UserAgent = {
+    isIE: /MSIE/i.test(ua),
+    isIE11: /trident/i.test(ua),
+    isEdge: /edge\//i.test(ua),
+    isFirefox: /Firefox/i.test(ua),
+    isMac: /Mac/.test(ua),
+    isOpera: /OPR\//.test(ua),
     // Shared user agent strings, sadly found in many useragent strings
-    hasChrome : /Chrome/i.test(ua),
-    hasSafari : /Safari\//.test(ua),
-  };
+    hasChrome: /Chrome/i.test(ua),
+    hasSafari: /Safari\//.test(ua),
+  });
 
-  ns.UserAgent.isChrome = ns.UserAgent.hasChrome && !ns.UserAgent.isOpera && !ns.UserAgent.isEdge;
-  ns.UserAgent.isSafari = ns.UserAgent.hasSafari && !ns.UserAgent.isOpera && !ns.UserAgent.isEdge;
+  ns.UserAgent.isChrome =
+    ns.UserAgent.hasChrome && !ns.UserAgent.isOpera && !ns.UserAgent.isEdge;
+  ns.UserAgent.isSafari =
+    ns.UserAgent.hasSafari && !ns.UserAgent.isOpera && !ns.UserAgent.isEdge;
 
   ns.UserAgent.supportedUserAgents = [
-    'isIE11',
-    'isEdge',
-    'isChrome',
-    'isFirefox'
+    "isIE11",
+    "isEdge",
+    "isChrome",
+    "isFirefox",
   ];
 
   ns.UserAgent.version = (function () {
@@ -45,15 +45,15 @@
 
   ns.UserAgent.getDisplayName = function () {
     if (ns.UserAgent.isIE) {
-      return 'Internet Explorer';
+      return "Internet Explorer";
     } else if (ns.UserAgent.isChrome) {
-      return 'Chrome';
+      return "Chrome";
     } else if (ns.UserAgent.isFirefox) {
-      return 'Firefox';
+      return "Firefox";
     } else if (ns.UserAgent.isSafari) {
-      return 'Safari';
+      return "Safari";
     } else if (ns.UserAgent.isOpera) {
-      return 'Opera';
+      return "Opera";
     } else {
       return ua;
     }

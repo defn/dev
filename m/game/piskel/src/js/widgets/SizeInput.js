@@ -1,5 +1,5 @@
 (function () {
-  var ns = $.namespace('pskl.widgets');
+  var ns = $.namespace("pskl.widgets");
 
   /**
    * Synchronize two "number" inputs to stick to their initial ratio.
@@ -22,11 +22,15 @@
     this.synchronizedInputs = new ns.SynchronizedInputs({
       leftInput: this.widthInput,
       rightInput: this.heightInput,
-      synchronize: this.synchronize_.bind(this)
+      synchronize: this.synchronize_.bind(this),
     });
 
-    this.disableSync = this.synchronizedInputs.disableSync.bind(this.synchronizedInputs);
-    this.enableSync = this.synchronizedInputs.enableSync.bind(this.synchronizedInputs);
+    this.disableSync = this.synchronizedInputs.disableSync.bind(
+      this.synchronizedInputs,
+    );
+    this.enableSync = this.synchronizedInputs.enableSync.bind(
+      this.synchronizedInputs,
+    );
 
     this.widthInput.value = this.initWidth;
     this.heightInput.value = this.initHeight;
@@ -61,9 +65,13 @@
     }
 
     if (sizeInput === this.widthInput) {
-      this.heightInput.value = Math.round(value * this.initHeight / this.initWidth);
+      this.heightInput.value = Math.round(
+        (value * this.initHeight) / this.initWidth,
+      );
     } else if (sizeInput === this.heightInput) {
-      this.widthInput.value = Math.round(value * this.initWidth / this.initHeight);
+      this.widthInput.value = Math.round(
+        (value * this.initWidth) / this.initHeight,
+      );
     }
 
     if (this.onChange) {

@@ -1,11 +1,11 @@
 (function () {
-  var ns = $.namespace('pskl.controller.piskel');
+  var ns = $.namespace("pskl.controller.piskel");
 
   ns.PiskelController = function (piskel) {
     if (piskel) {
       this.setPiskel(piskel);
     } else {
-      throw 'A piskel instance is mandatory for instanciating PiskelController';
+      throw "A piskel instance is mandatory for instanciating PiskelController";
     }
   };
 
@@ -28,8 +28,7 @@
     this.layerIdCounter = 1;
   };
 
-  ns.PiskelController.prototype.init = function () {
-  };
+  ns.PiskelController.prototype.init = function () {};
 
   ns.PiskelController.prototype.getHeight = function () {
     return this.piskel.getHeight();
@@ -44,7 +43,7 @@
   };
 
   ns.PiskelController.prototype.setFPS = function (fps) {
-    if (typeof fps !== 'number') {
+    if (typeof fps !== "number") {
       return;
     }
     this.piskel.fps = fps;
@@ -101,8 +100,15 @@
     });
   };
 
-  ns.PiskelController.prototype.renderFrameAt = function (index, preserveOpacity) {
-    return pskl.utils.LayerUtils.flattenFrameAt(this.getLayers(), index, preserveOpacity);
+  ns.PiskelController.prototype.renderFrameAt = function (
+    index,
+    preserveOpacity,
+  ) {
+    return pskl.utils.LayerUtils.flattenFrameAt(
+      this.getLayers(),
+      index,
+      preserveOpacity,
+    );
   };
 
   ns.PiskelController.prototype.hasFrameAt = function (index) {
@@ -118,20 +124,24 @@
   };
 
   ns.PiskelController.prototype.addFrameAt = function (index) {
-    this.getLayers().forEach(function (l) {
-      l.addFrameAt(this.createEmptyFrame_(), index);
-    }.bind(this));
+    this.getLayers().forEach(
+      function (l) {
+        l.addFrameAt(this.createEmptyFrame_(), index);
+      }.bind(this),
+    );
 
     this.onFrameAddedAt_(index);
   };
 
   ns.PiskelController.prototype.onFrameAddedAt_ = function (index) {
-    this.piskel.hiddenFrames = this.piskel.hiddenFrames.map(function (hiddenIndex) {
-      if (hiddenIndex >= index) {
-        return hiddenIndex + 1;
-      }
-      return hiddenIndex;
-    });
+    this.piskel.hiddenFrames = this.piskel.hiddenFrames.map(
+      function (hiddenIndex) {
+        if (hiddenIndex >= index) {
+          return hiddenIndex + 1;
+        }
+        return hiddenIndex;
+      },
+    );
 
     this.setCurrentFrameIndex(index);
   };
@@ -148,12 +158,14 @@
     });
 
     // Update the array of hidden frames since some hidden indexes might have shifted.
-    this.piskel.hiddenFrames = this.piskel.hiddenFrames.map(function (hiddenIndex) {
-      if (hiddenIndex > index) {
-        return hiddenIndex - 1;
-      }
-      return hiddenIndex;
-    });
+    this.piskel.hiddenFrames = this.piskel.hiddenFrames.map(
+      function (hiddenIndex) {
+        if (hiddenIndex > index) {
+          return hiddenIndex - 1;
+        }
+        return hiddenIndex;
+      },
+    );
 
     // Current frame index is impacted if the removed frame was before the current frame
     if (this.currentFrameIndex >= index && this.currentFrameIndex > 0) {
@@ -202,8 +214,9 @@
       }
 
       // All the frames between fromIndex and toIndex changed their index.
-      var isImpacted = index >= Math.min(fromIndex, toIndex) &&
-                       index <= Math.max(fromIndex, toIndex);
+      var isImpacted =
+        index >= Math.min(fromIndex, toIndex) &&
+        index <= Math.max(fromIndex, toIndex);
       if (isImpacted) {
         if (fromIndex < toIndex) {
           // If the frame moved to a higher index, all impacted frames had their index
@@ -222,11 +235,16 @@
   };
 
   ns.PiskelController.prototype.getVisibleFrameIndexes = function () {
-    return this.getCurrentLayer().getFrames().map(function (frame, index) {
-      return index;
-    }).filter(function (index) {
-      return this.piskel.hiddenFrames.indexOf(index) === -1;
-    }.bind(this));
+    return this.getCurrentLayer()
+      .getFrames()
+      .map(function (frame, index) {
+        return index;
+      })
+      .filter(
+        function (index) {
+          return this.piskel.hiddenFrames.indexOf(index) === -1;
+        }.bind(this),
+      );
   };
 
   ns.PiskelController.prototype.getFrameCount = function () {
@@ -237,7 +255,7 @@
     if (this.hasFrameAt(index)) {
       this.currentFrameIndex = index;
     } else {
-      window.console.error('Could not set current frame index to ' + index);
+      window.console.error("Could not set current frame index to " + index);
     }
   };
 
@@ -259,7 +277,7 @@
     if (this.hasLayerAt(index)) {
       this.currentLayerIndex = index;
     } else {
-      window.console.error('Could not set current layer index to ' + index);
+      window.console.error("Could not set current layer index to " + index);
     }
   };
 
@@ -297,10 +315,10 @@
   };
 
   ns.PiskelController.prototype.generateLayerName_ = function () {
-    var name = 'Layer ' + this.layerIdCounter;
+    var name = "Layer " + this.layerIdCounter;
     while (this.hasLayerForName_(name)) {
       this.layerIdCounter++;
-      name = 'Layer ' + this.layerIdCounter;
+      name = "Layer " + this.layerIdCounter;
     }
     return name;
   };
@@ -319,14 +337,14 @@
     }
     if (!this.hasLayerForName_(name)) {
       var layer = new pskl.model.Layer(name);
-      for (var i = 0 ; i < this.getFrameCount() ; i++) {
+      for (var i = 0; i < this.getFrameCount(); i++) {
         layer.addFrame(this.createEmptyFrame_());
       }
       var currentLayerIndex = this.getCurrentLayerIndex();
       this.piskel.addLayerAt(layer, currentLayerIndex + 1);
       this.setCurrentLayerIndex(currentLayerIndex + 1);
     } else {
-      throw 'Layer name should be unique';
+      throw "Layer name should be unique";
     }
   };
 

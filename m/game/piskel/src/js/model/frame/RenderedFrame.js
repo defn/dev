@@ -1,5 +1,5 @@
 (function () {
-  var ns = $.namespace('pskl.model.frame');
+  var ns = $.namespace("pskl.model.frame");
 
   /**
    * Create a frame instance that provides an image getter. Can be faster

@@ -1,9 +1,9 @@
 (function () {
-  var ns = $.namespace('pskl.tools.transform');
+  var ns = $.namespace("pskl.tools.transform");
 
   ns.Clone = function () {
-    this.toolId = 'tool-clone';
-    this.helpText = 'Clone current layer to all frames';
+    this.toolId = "tool-clone";
+    this.helpText = "Clone current layer to all frames";
     this.tooltipDescriptors = [];
   };
 
@@ -13,7 +13,7 @@
     var ref = pskl.app.piskelController.getCurrentFrame();
     var layer = pskl.app.piskelController.getCurrentLayer();
     layer.getFrames().forEach(function (frame) {
-      if (frame !==  ref) {
+      if (frame !== ref) {
         frame.setPixels(ref.getPixels());
       }
     });

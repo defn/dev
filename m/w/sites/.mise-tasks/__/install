@@ -5,4 +5,3 @@
 cd "${MISE_ORIGINAL_CWD}"
 npm install
 npm run astro -- telemetry disable
-

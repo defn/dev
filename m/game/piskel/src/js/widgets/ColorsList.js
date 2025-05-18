@@ -1,26 +1,36 @@
 (function () {
-  var ns = $.namespace('pskl.widgets');
+  var ns = $.namespace("pskl.widgets");
 
-  var DEFAULT_COLOR = '#000000';
+  var DEFAULT_COLOR = "#000000";
 
   ns.ColorsList = function (container) {
     this.selectedIndex = -1;
-    this.palette = new pskl.model.Palette('tmp', 'tmp', []);
+    this.palette = new pskl.model.Palette("tmp", "tmp", []);
     this.container = container;
 
-    this.colorsList = this.container.querySelector('.colors-list');
-    this.colorPreviewEl = this.container.querySelector('.color-preview');
+    this.colorsList = this.container.querySelector(".colors-list");
+    this.colorPreviewEl = this.container.querySelector(".color-preview");
 
     $(container).sortable({
-      placeholder: 'colors-list-drop-proxy',
+      placeholder: "colors-list-drop-proxy",
       update: this.onColorDrop_.bind(this),
-      items: '.create-palette-color'
+      items: ".create-palette-color",
     });
 
-    pskl.utils.Event.addEventListener(this.colorsList, 'click', this.onColorContainerClick_, this);
+    pskl.utils.Event.addEventListener(
+      this.colorsList,
+      "click",
+      this.onColorContainerClick_,
+      this,
+    );
 
-    var colorPickerContainer = container.querySelector('.color-picker-container');
-    this.hslRgbColorPicker = new pskl.widgets.HslRgbColorPicker(colorPickerContainer, this.onColorUpdated_.bind(this));
+    var colorPickerContainer = container.querySelector(
+      ".color-picker-container",
+    );
+    this.hslRgbColorPicker = new pskl.widgets.HslRgbColorPicker(
+      colorPickerContainer,
+      this.onColorUpdated_.bind(this),
+    );
     this.hslRgbColorPicker.init();
   };
 
@@ -42,7 +52,7 @@
   ns.ColorsList.prototype.destroy = function () {
     pskl.utils.Event.removeAllEventListeners(this);
 
-    $(this.container).sortable('destroy');
+    $(this.container).sortable("destroy");
 
     this.hslRgbColorPicker.destroy();
     this.container = null;
@@ -55,20 +65,22 @@
    */
   ns.ColorsList.prototype.refreshColorElement_ = function (index) {
     var color = this.palette.get(this.selectedIndex);
-    var element = document.querySelector('[data-palette-index="' + index + '"]');
+    var element = document.querySelector(
+      '[data-palette-index="' + index + '"]',
+    );
     if (element) {
       element.style.background = color;
-      element.classList.toggle('light-color', this.isLight_(color));
+      element.classList.toggle("light-color", this.isLight_(color));
     }
   };
 
   ns.ColorsList.prototype.onColorContainerClick_ = function (evt) {
     var target = evt.target;
-    if (target.classList.contains('create-palette-color')) {
+    if (target.classList.contains("create-palette-color")) {
       this.onPaletteColorClick_(evt, target);
-    } else if (target.classList.contains('create-palette-new-color')) {
+    } else if (target.classList.contains("create-palette-new-color")) {
       this.onNewColorClick_(evt, target);
-    } else if (target.classList.contains('create-palette-remove-color')) {
+    } else if (target.classList.contains("create-palette-remove-color")) {
       this.onRemoveColorClick_(evt, target);
     }
     this.refresh_();
@@ -95,25 +107,28 @@
   };
 
   ns.ColorsList.prototype.onNewColorClick_ = function (evt, target) {
-    var newColor = this.palette.get(this.selectedIndex) || '#000000';
+    var newColor = this.palette.get(this.selectedIndex) || "#000000";
     this.palette.add(newColor);
     this.selectColor_(this.palette.size() - 1);
   };
 
   ns.ColorsList.prototype.refresh_ = function () {
-    var html = '';
-    var tpl = pskl.utils.Template.get('create-palette-color-template');
+    var html = "";
+    var tpl = pskl.utils.Template.get("create-palette-color-template");
     var colors = this.palette.getColors();
 
-    colors.forEach(function (color, index) {
-      var isSelected = (index === this.selectedIndex);
+    colors.forEach(
+      function (color, index) {
+        var isSelected = index === this.selectedIndex;
 
-      html += pskl.utils.Template.replace(tpl, {
-        'color' : color, index : index,
-        ':selected' : isSelected,
-        ':light-color' : this.isLight_(color)
-      });
-    }.bind(this));
+        html += pskl.utils.Template.replace(tpl, {
+          color: color,
+          index: index,
+          ":selected": isSelected,
+          ":light-color": this.isLight_(color),
+        });
+      }.bind(this),
+    );
 
     html += '<li class="create-palette-new-color">+</li>';
 
@@ -139,7 +154,7 @@
     var colorElement = drop.item.get(0);
 
     var oldIndex = parseInt(colorElement.dataset.paletteIndex, 10);
-    var colors = document.querySelectorAll('.create-palette-color');
+    var colors = document.querySelectorAll(".create-palette-color");
     var newIndex = Array.prototype.indexOf.call(colors, colorElement);
     this.palette.move(oldIndex, newIndex);
 

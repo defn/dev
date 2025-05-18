@@ -1,12 +1,11 @@
-describe("Deserializer v0 test", function() {
-
-  var black = '#000000';
+describe("Deserializer v0 test", function () {
+  var black = "#000000";
   var transparent = Constants.TRANSPARENT_COLOR;
   var data = [
     [
-        ["#000000", "TRANSPARENT"],
-        ["TRANSPARENT", "#000000"]
-    ]
+      ["#000000", "TRANSPARENT"],
+      ["TRANSPARENT", "#000000"],
+    ],
   ];
 
   it("deserializes data serialized for model v0 correctly", function (done) {
@@ -17,7 +16,7 @@ describe("Deserializer v0 test", function() {
       var frame = p.getLayerAt(0).getFrameAt(0);
       test.testutils.frameEqualsGrid(frame, [
         [black, transparent],
-        [transparent, black]
+        [transparent, black],
       ]);
       done();
     });

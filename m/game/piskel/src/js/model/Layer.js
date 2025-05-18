@@ -1,9 +1,9 @@
 (function () {
-  var ns = $.namespace('pskl.model');
+  var ns = $.namespace("pskl.model");
 
   ns.Layer = function (name) {
     if (!name) {
-      throw 'Invalid arguments in Layer constructor : \'name\' is mandatory';
+      throw "Invalid arguments in Layer constructor : 'name' is mandatory";
     } else {
       this.name = name;
       this.frames = [];
@@ -37,7 +37,7 @@
   };
 
   ns.Layer.prototype.setOpacity = function (opacity) {
-    if (typeof opacity == 'string') {
+    if (typeof opacity == "string") {
       opacity = parseFloat(opacity);
     }
     if (opacity === null || isNaN(opacity) || opacity < 0 || opacity > 1) {
@@ -75,7 +75,11 @@
     if (this.frames[index]) {
       this.frames.splice(index, 1);
     } else {
-      console.error('Invalid index in removeFrameAt : %s (size : %s)', index, this.size());
+      console.error(
+        "Invalid index in removeFrameAt : %s (size : %s)",
+        index,
+        this.size(),
+      );
     }
   };
 
@@ -91,7 +95,11 @@
       this.frames[toIndex] = fromFrame;
       this.frames[fromIndex] = toFrame;
     } else {
-      console.error('Frame not found in moveFrameAt (from %s, to %s)', fromIndex, toIndex);
+      console.error(
+        "Frame not found in moveFrameAt (from %s, to %s)",
+        fromIndex,
+        toIndex,
+      );
     }
   };
 
@@ -106,7 +114,7 @@
       var clone = frame.clone();
       this.addFrameAt(clone, index);
     } else {
-      console.error('Frame not found in duplicateFrameAt (at %s)', index);
+      console.error("Frame not found in duplicateFrameAt (at %s)", index);
     }
   };
 
@@ -115,8 +123,10 @@
   };
 
   ns.Layer.prototype.getHash = function () {
-    return this.frames.map(function (frame) {
-      return frame.getHash();
-    }).join('-');
+    return this.frames
+      .map(function (frame) {
+        return frame.getHash();
+      })
+      .join("-");
   };
 })();

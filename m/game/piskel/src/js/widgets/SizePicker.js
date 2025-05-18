@@ -1,5 +1,5 @@
 (function () {
-  var ns = $.namespace('pskl.widgets');
+  var ns = $.namespace("pskl.widgets");
 
   ns.SizePicker = function (onChange) {
     this.onChange = onChange;
@@ -7,7 +7,12 @@
 
   ns.SizePicker.prototype.init = function (container) {
     this.container = container;
-    pskl.utils.Event.addEventListener(this.container, 'click', this.onSizeOptionClick_, this);
+    pskl.utils.Event.addEventListener(
+      this.container,
+      "click",
+      this.onSizeOptionClick_,
+      this,
+    );
   };
 
   ns.SizePicker.prototype.destroy = function () {
@@ -15,7 +20,7 @@
   };
 
   ns.SizePicker.prototype.getSize = function () {
-    var selectedOption = this.container.querySelector('.selected');
+    var selectedOption = this.container.querySelector(".selected");
     return selectedOption ? selectedOption.dataset.size : null;
   };
 
@@ -24,17 +29,17 @@
       return;
     }
 
-    pskl.utils.Dom.removeClass('labeled', this.container);
-    pskl.utils.Dom.removeClass('selected', this.container);
+    pskl.utils.Dom.removeClass("labeled", this.container);
+    pskl.utils.Dom.removeClass("selected", this.container);
     var selectedOption;
     selectedOption = this.container.querySelector('[data-size="' + size + '"]');
     if (!selectedOption) {
-      selectedOption = this.container.querySelector('[data-size]:last-child');
-      selectedOption.classList.add('labeled');
-      selectedOption.setAttribute('real-size', size);
+      selectedOption = this.container.querySelector("[data-size]:last-child");
+      selectedOption.classList.add("labeled");
+      selectedOption.setAttribute("real-size", size);
     }
     if (selectedOption) {
-      selectedOption.classList.add('selected');
+      selectedOption.classList.add("selected");
     }
   };
 

@@ -1,8 +1,8 @@
 (function () {
-  var ns = $.namespace('pskl.utils');
+  var ns = $.namespace("pskl.utils");
 
   ns.ColorUtils = {
-    getUnusedColor : function (usedColors) {
+    getUnusedColor: function (usedColors) {
       usedColors = usedColors || [];
       // create check map
       var colorMap = {};
@@ -12,9 +12,9 @@
 
       // start with white
       var color = {
-        r : 255,
-        g : 255,
-        b : 0
+        r: 255,
+        g: 255,
+        b: 0,
       };
       var match = null;
       while (true) {
@@ -25,7 +25,8 @@
           break;
         } else {
           // pick a non null component to decrease its value
-          var component = (color.r && 'r') || (color.g && 'g') || (color.b && 'b');
+          var component =
+            (color.r && "r") || (color.g && "g") || (color.b && "b");
           if (component) {
             color[component] = color[component] - 1;
           } else {
@@ -36,6 +37,6 @@
       }
 
       return match;
-    }
+    },
   };
 })();

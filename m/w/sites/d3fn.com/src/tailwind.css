@@ -1,8 +1,8 @@
 @layer base, starlight, theme, components, utilities;
 
-@import '@astrojs/starlight-tailwind';
-@import 'tailwindcss/theme.css' layer(theme);
-@import 'tailwindcss/utilities.css' layer(utilities);
+@import "@astrojs/starlight-tailwind";
+@import "tailwindcss/theme.css" layer(theme);
+@import "tailwindcss/utilities.css" layer(utilities);
 
 @theme {
   /* https://starlight.astro.build/guides/css-and-tailwind/#styling-starlight-with-tailwind */
@@ -32,7 +32,7 @@
   --color-gray-900: var(--color-slate-900);
   --color-gray-950: var(--color-slate-950);
   /* Custom text font. */
-  --font-sans: 'Atkinson Hyperlegible';
+  --font-sans: "Atkinson Hyperlegible";
   /* Custom code font. */
-  --font-mono: 'IBM Plex Mono';
+  --font-mono: "IBM Plex Mono";
 }

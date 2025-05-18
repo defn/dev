@@ -1,5 +1,5 @@
 (function () {
-  var ns = $.namespace('pskl.utils.serialization.backward');
+  var ns = $.namespace("pskl.utils.serialization.backward");
 
   ns.Deserializer_v0 = function (data, callback) {
     this.data_ = data;
@@ -11,9 +11,14 @@
     var frames = pixelGrids.map(function (grid) {
       return pskl.model.Frame.fromPixelGrid(grid);
     });
-    var descriptor = new pskl.model.piskel.Descriptor('Deserialized piskel', '');
-    var layer = pskl.model.Layer.fromFrames('Layer 1', frames);
+    var descriptor = new pskl.model.piskel.Descriptor(
+      "Deserialized piskel",
+      "",
+    );
+    var layer = pskl.model.Layer.fromFrames("Layer 1", frames);
 
-    this.callback_(pskl.model.Piskel.fromLayers([layer], Constants.DEFAULT.FPS, descriptor));
+    this.callback_(
+      pskl.model.Piskel.fromLayers([layer], Constants.DEFAULT.FPS, descriptor),
+    );
   };
 })();

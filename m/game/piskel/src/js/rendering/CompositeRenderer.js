@@ -1,11 +1,14 @@
 (function () {
-  var ns = $.namespace('pskl.rendering');
+  var ns = $.namespace("pskl.rendering");
 
   ns.CompositeRenderer = function () {
     this.renderers = [];
   };
 
-  pskl.utils.inherit(pskl.rendering.CompositeRenderer, pskl.rendering.AbstractRenderer);
+  pskl.utils.inherit(
+    pskl.rendering.CompositeRenderer,
+    pskl.rendering.AbstractRenderer,
+  );
 
   ns.CompositeRenderer.prototype.add = function (renderer) {
     this.renderers.push(renderer);
@@ -62,7 +65,7 @@
     if (this.renderers.length > 0) {
       return this.renderers[0];
     } else {
-      throw 'Renderer manager is empty';
+      throw "Renderer manager is empty";
     }
   };
 })();

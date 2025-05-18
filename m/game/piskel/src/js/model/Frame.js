@@ -1,5 +1,5 @@
 (function () {
-  var ns = $.namespace('pskl.model');
+  var ns = $.namespace("pskl.model");
   var __idCounter = 0;
   ns.Frame = function (width, height) {
     if (width && height) {
@@ -10,7 +10,12 @@
       this.pixels = ns.Frame.createEmptyPixelGrid_(width, height);
       this.stateIndex = 0;
     } else {
-      throw 'Bad arguments in pskl.model.Frame constructor : ' + width + ', ' + height;
+      throw (
+        "Bad arguments in pskl.model.Frame constructor : " +
+        width +
+        ", " +
+        height
+      );
     }
   };
 
@@ -26,7 +31,7 @@
         buffer = [];
         for (var y = 0; y < h; y++) {
           for (var x = 0; x < w; x++) {
-            if (typeof pixels[x][y] == 'string') {
+            if (typeof pixels[x][y] == "string") {
               buffer[y * w + x] = pskl.utils.colorToInt(pixels[x][y]);
             } else {
               buffer[y * w + x] = pixels[x][y];
@@ -38,26 +43,28 @@
         h = height;
         buffer = pixels;
       } else {
-        throw 'Bad arguments in pskl.model.frame.fromPixelGrid, missing width and height';
+        throw "Bad arguments in pskl.model.frame.fromPixelGrid, missing width and height";
       }
 
       var frame = new pskl.model.Frame(w, h);
       frame.setPixels(buffer);
       return frame;
     } else {
-      throw 'Bad arguments in pskl.model.Frame.fromPixelGrid';
+      throw "Bad arguments in pskl.model.Frame.fromPixelGrid";
     }
   };
 
   var _emptyPixelGridCache = {};
   ns.Frame.createEmptyPixelGrid_ = function (width, height) {
     var pixels;
-    var key = width + '-' + height;
+    var key = width + "-" + height;
     if (_emptyPixelGridCache[key]) {
       pixels = _emptyPixelGridCache[key];
     } else {
       pixels = _emptyPixelGridCache[key] = new Uint32Array(width * height);
-      var transparentColorInt = pskl.utils.colorToInt(Constants.TRANSPARENT_COLOR);
+      var transparentColorInt = pskl.utils.colorToInt(
+        Constants.TRANSPARENT_COLOR,
+      );
       pixels.fill(transparentColorInt);
     }
 
@@ -90,7 +97,10 @@
   };
 
   ns.Frame.prototype.clear = function () {
-    this.pixels = ns.Frame.createEmptyPixelGrid_(this.getWidth(), this.getHeight());
+    this.pixels = ns.Frame.createEmptyPixelGrid_(
+      this.getWidth(),
+      this.getHeight(),
+    );
     this.version++;
   };
 
@@ -103,7 +113,7 @@
   };
 
   ns.Frame.prototype.getHash = function () {
-    return [this.id, this.version].join('-');
+    return [this.id, this.version].join("-");
   };
 
   ns.Frame.prototype.setPixel = function (x, y, color) {
@@ -113,7 +123,8 @@
       color = pskl.utils.colorToInt(color);
 
       if (p !== color) {
-        this.pixels[index] = color || pskl.utils.colorToInt(Constants.TRANSPARENT_COLOR);
+        this.pixels[index] =
+          color || pskl.utils.colorToInt(Constants.TRANSPARENT_COLOR);
         this.version++;
       }
     }
@@ -131,7 +142,7 @@
     var width = this.getWidth();
     var height = this.getHeight();
     var length = width * height;
-    for (var i = 0; i < length ; i++) {
+    for (var i = 0; i < length; i++) {
       callback(this.pixels[i], i % width, Math.floor(i / width), this);
     }
   };
@@ -149,6 +160,9 @@
   };
 
   ns.Frame.prototype.isSameSize = function (otherFrame) {
-    return this.getHeight() == otherFrame.getHeight() && this.getWidth() == otherFrame.getWidth();
+    return (
+      this.getHeight() == otherFrame.getHeight() &&
+      this.getWidth() == otherFrame.getWidth()
+    );
   };
 })();

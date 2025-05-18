@@ -1,5 +1,5 @@
 (function () {
-  var ns = $.namespace('pskl.controller.dialogs');
+  var ns = $.namespace("pskl.controller.dialogs");
 
   ns.CreatePaletteController = function (piskelController) {
     this.paletteService = pskl.app.paletteService;
@@ -11,42 +11,61 @@
   ns.CreatePaletteController.prototype.init = function (paletteId) {
     this.superclass.init.call(this);
 
-    this.hiddenFileInput = document.querySelector('.create-palette-import-input');
+    this.hiddenFileInput = document.querySelector(
+      ".create-palette-import-input",
+    );
     this.nameInput = document.querySelector('input[name="palette-name"]');
 
-    var buttonsContainer = document.querySelector('.create-palette-actions');
-    var deleteButton = document.querySelector('.create-palette-delete');
-    var downloadButton = document.querySelector('.create-palette-download-button');
-    var importFileButton = document.querySelector('.create-palette-import-button');
+    var buttonsContainer = document.querySelector(".create-palette-actions");
+    var deleteButton = document.querySelector(".create-palette-delete");
+    var downloadButton = document.querySelector(
+      ".create-palette-download-button",
+    );
+    var importFileButton = document.querySelector(
+      ".create-palette-import-button",
+    );
 
-    this.addEventListener(this.nameInput, 'input', this.onNameInputChange_);
-    this.addEventListener(this.hiddenFileInput, 'change', this.onFileInputChange_);
+    this.addEventListener(this.nameInput, "input", this.onNameInputChange_);
+    this.addEventListener(
+      this.hiddenFileInput,
+      "change",
+      this.onFileInputChange_,
+    );
 
-    this.addEventListener(buttonsContainer, 'click', this.onButtonClick_);
-    this.addEventListener(downloadButton, 'click', this.onDownloadButtonClick_);
-    this.addEventListener(importFileButton, 'click', this.onImportFileButtonClick_);
+    this.addEventListener(buttonsContainer, "click", this.onButtonClick_);
+    this.addEventListener(downloadButton, "click", this.onDownloadButtonClick_);
+    this.addEventListener(
+      importFileButton,
+      "click",
+      this.onImportFileButtonClick_,
+    );
 
-    var colorsListContainer = document.querySelector('.colors-container');
+    var colorsListContainer = document.querySelector(".colors-container");
     this.colorsListWidget = new pskl.widgets.ColorsList(colorsListContainer);
 
     var palette;
-    var isCurrentColorsPalette = paletteId == Constants.CURRENT_COLORS_PALETTE_ID;
+    var isCurrentColorsPalette =
+      paletteId == Constants.CURRENT_COLORS_PALETTE_ID;
     if (paletteId && !isCurrentColorsPalette) {
-      importFileButton.style.display = 'none';
-      this.setTitle('Edit Palette');
+      importFileButton.style.display = "none";
+      this.setTitle("Edit Palette");
 
       var paletteObject = this.paletteService.getPaletteById(paletteId);
       palette = pskl.model.Palette.fromObject(paletteObject);
     } else {
-      downloadButton.style.display = 'none';
-      deleteButton.style.display = 'none';
-      this.setTitle('Create Palette');
+      downloadButton.style.display = "none";
+      deleteButton.style.display = "none";
+      this.setTitle("Create Palette");
 
       var uuid = pskl.utils.Uuid.generate();
       if (isCurrentColorsPalette) {
-        palette = new pskl.model.Palette(uuid, 'Current colors clone', this.getCurrentColors_());
+        palette = new pskl.model.Palette(
+          uuid,
+          "Current colors clone",
+          this.getCurrentColors_(),
+        );
       } else {
-        palette = new pskl.model.Palette(uuid, 'New palette', []);
+        palette = new pskl.model.Palette(uuid, "New palette", []);
       }
     }
 
@@ -54,7 +73,9 @@
   };
 
   ns.CreatePaletteController.prototype.getCurrentColors_ = function () {
-    var palette = this.paletteService.getPaletteById(Constants.CURRENT_COLORS_PALETTE_ID);
+    var palette = this.paletteService.getPaletteById(
+      Constants.CURRENT_COLORS_PALETTE_ID,
+    );
     return palette.getColors();
   };
 
@@ -74,11 +95,11 @@
 
   ns.CreatePaletteController.prototype.onButtonClick_ = function (evt) {
     var target = evt.target;
-    if (target.dataset.action === 'submit') {
+    if (target.dataset.action === "submit") {
       this.saveAndSelectPalette_();
-    } else if (target.dataset.action === 'cancel') {
+    } else if (target.dataset.action === "cancel") {
       this.closeDialog();
-    } else if (target.dataset.action === 'delete') {
+    } else if (target.dataset.action === "delete") {
       this.deletePalette_();
     }
   };
@@ -91,9 +112,16 @@
   };
 
   ns.CreatePaletteController.prototype.deletePalette_ = function () {
-    if (window.confirm('Are you sure you want to delete palette ' + this.palette.name)) {
+    if (
+      window.confirm(
+        "Are you sure you want to delete palette " + this.palette.name,
+      )
+    ) {
       this.paletteService.deletePaletteById(this.palette.id);
-      pskl.UserSettings.set(pskl.UserSettings.SELECTED_PALETTE, Constants.CURRENT_COLORS_PALETTE_ID);
+      pskl.UserSettings.set(
+        pskl.UserSettings.SELECTED_PALETTE,
+        Constants.CURRENT_COLORS_PALETTE_ID,
+      );
       this.closeDialog();
     }
   };
@@ -102,9 +130,13 @@
     var paletteWriter = new pskl.service.palette.PaletteGplWriter(this.palette);
     var paletteAsString = paletteWriter.write();
 
-    pskl.utils.BlobUtils.stringToBlob(paletteAsString, function(blob) {
-      pskl.utils.FileUtils.downloadAsFile(blob, this.palette.name + '.gpl');
-    }.bind(this), 'application/json');
+    pskl.utils.BlobUtils.stringToBlob(
+      paletteAsString,
+      function (blob) {
+        pskl.utils.FileUtils.downloadAsFile(blob, this.palette.name + ".gpl");
+      }.bind(this),
+      "application/json",
+    );
   };
 
   ns.CreatePaletteController.prototype.onImportFileButtonClick_ = function () {
@@ -114,15 +146,23 @@
   ns.CreatePaletteController.prototype.onFileInputChange_ = function (evt) {
     var files = this.hiddenFileInput.files;
     if (files.length == 1) {
-      this.paletteImportService.read(files[0], this.setPalette_.bind(this), this.displayErrorMessage_.bind(this));
+      this.paletteImportService.read(
+        files[0],
+        this.setPalette_.bind(this),
+        this.displayErrorMessage_.bind(this),
+      );
     }
   };
 
-  ns.CreatePaletteController.prototype.displayErrorMessage_ = function (message) {
-    message = 'Could not import palette : ' + message;
-    $.publish(Events.SHOW_NOTIFICATION, [{
-      'content' : message
-    }]);
+  ns.CreatePaletteController.prototype.displayErrorMessage_ = function (
+    message,
+  ) {
+    message = "Could not import palette : " + message;
+    $.publish(Events.SHOW_NOTIFICATION, [
+      {
+        content: message,
+      },
+    ]);
     window.setTimeout($.publish.bind($, Events.HIDE_NOTIFICATION), 2000);
   };
 

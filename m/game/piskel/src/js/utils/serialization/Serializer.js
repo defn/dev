@@ -1,15 +1,18 @@
 (function () {
-  var ns = $.namespace('pskl.utils.serialization');
+  var ns = $.namespace("pskl.utils.serialization");
 
   var areChunksValid = function (chunks) {
-    return chunks.length && chunks.every(function (chunk) {
-      return chunk.base64PNG && chunk.base64PNG !== 'data:,';
-    });
+    return (
+      chunks.length &&
+      chunks.every(function (chunk) {
+        return chunk.base64PNG && chunk.base64PNG !== "data:,";
+      })
+    );
   };
 
   var createLineLayout = function (size, offset) {
     var layout = [];
-    for (var i = 0 ; i < size ; i++) {
+    for (var i = 0; i < size; i++) {
       layout.push([i + offset]);
     }
 
@@ -17,31 +20,31 @@
   };
 
   ns.Serializer = {
-    serialize : function (piskel) {
+    serialize: function (piskel) {
       var serializedLayers = piskel.getLayers().map(function (l) {
         return pskl.utils.serialization.Serializer.serializeLayer(l);
       });
 
       return JSON.stringify({
-        modelVersion : Constants.MODEL_VERSION,
-        piskel : {
-          name : piskel.getDescriptor().name,
-          description : piskel.getDescriptor().description,
-          fps : pskl.app.piskelController.getFPS(),
-          height : piskel.getHeight(),
-          width : piskel.getWidth(),
-          layers : serializedLayers,
-          hiddenFrames : piskel.hiddenFrames,
-        }
+        modelVersion: Constants.MODEL_VERSION,
+        piskel: {
+          name: piskel.getDescriptor().name,
+          description: piskel.getDescriptor().description,
+          fps: pskl.app.piskelController.getFPS(),
+          height: piskel.getHeight(),
+          width: piskel.getWidth(),
+          layers: serializedLayers,
+          hiddenFrames: piskel.hiddenFrames,
+        },
       });
     },
 
-    serializeLayer : function (layer) {
+    serializeLayer: function (layer) {
       var frames = layer.getFrames();
       var layerToSerialize = {
-        name : layer.getName(),
-        opacity : layer.getOpacity(),
-        frameCount : frames.length
+        name: layer.getName(),
+        opacity: layer.getOpacity(),
+        frameCount: frames.length,
       };
 
       // A layer spritesheet data can be chunked in case the spritesheet PNG is to big to be
@@ -65,12 +68,12 @@
 
         // After each chunk update the offset by te number of frames that have been processed.
         var offset = 0;
-        for (var i = 0 ; i < frameChunks.length ; i++) {
+        for (var i = 0; i < frameChunks.length; i++) {
           var chunkFrames = frameChunks[i];
           chunks.push({
             // create a layout array, containing the indices of the frames extracted in this chunk
-            layout : createLineLayout(chunkFrames.length, offset),
-            base64PNG : ns.Serializer.serializeFramesToBase64(chunkFrames),
+            layout: createLineLayout(chunkFrames.length, offset),
+            base64PNG: ns.Serializer.serializeFramesToBase64(chunkFrames),
           });
 
           offset += chunkFrames.length;
@@ -81,13 +84,13 @@
       return JSON.stringify(layerToSerialize);
     },
 
-    serializeFramesToBase64 : function (frames) {
+    serializeFramesToBase64: function (frames) {
       try {
         var renderer = new pskl.rendering.FramesheetRenderer(frames);
         return renderer.renderAsCanvas().toDataURL();
       } catch (e) {
-        return '';
+        return "";
       }
-    }
+    },
   };
 })();

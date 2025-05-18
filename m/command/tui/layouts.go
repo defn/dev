@@ -21,7 +21,7 @@ func demoLayout() string {
 		special = lipgloss.AdaptiveColor{Light: "#43BF6D", Dark: "#73F59F"}
 		blends  = gamut.Blends(lipgloss.Color("#F25D94"), lipgloss.Color("#EDFF82"), 50)
 
-		normal  = lipgloss.Color("#EEEEEE")
+		normal     = lipgloss.Color("#EEEEEE")
 		base_style = lipgloss.NewStyle().Foreground(normal)
 
 		// Dialog.
@@ -171,11 +171,11 @@ func demoLayout() string {
 		dialog = lipgloss.Place(physicalWidth, physicalHeight-1-h(cols)-h(sbar),
 			lipgloss.Center, lipgloss.Center,
 			dialog_style.Render(ui),
-			lipgloss.WithWhitespaceChars(fmt.Sprintf("%d",h(cols))),
+			lipgloss.WithWhitespaceChars(fmt.Sprintf("%d", h(cols))),
 			lipgloss.WithWhitespaceForeground(subtle),
 		)
 	}
-			// lipgloss.WithWhitespaceChars("猫咪"),
+	// lipgloss.WithWhitespaceChars("猫咪"),
 
 	doc := strings.Builder{}
 

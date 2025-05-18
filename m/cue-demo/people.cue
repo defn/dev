@@ -1,57 +1,57 @@
 package spiral
 
 #Person: {
-    first: string
-    last: string
-    middle?: string
-    title: string
-    title: "parent" | "child"
+	first:   string
+	last:    string
+	middle?: string
+	title:   string
+	title:   "parent" | "child"
 }
 
 #Parent: #Person & {
-    title: "parent"
+	title: "parent"
 }
 
 #Child: #Person & {
-    title: "child"
+	title: "child"
 }
 
-family: "defn": people.defn
-family: "lamda": people.lamda
+family: "defn":   people.defn
+family: "lamda":  people.lamda
 family: [string]: #Person
 
 tools: {
-    mise: {}
-    nix: {}
+	mise: {}
+	nix: {}
 }
 
 #defn: #Person & {
-    first: "Cuong"
+	first: "Cuong"
 }
 
 people: {
-    defn: #defn & #Parent & {
-        first: "Cuong"
-        last: "Nghiem"
-    }
+	defn: #defn & #Parent & {
+		first: "Cuong"
+		last:  "Nghiem"
+	}
 
-    lamda: #Child & {
-        first: "David"
-        last: "Nghiem"
-    }
+	lamda: #Child & {
+		first: "David"
+		last:  "Nghiem"
+	}
 }
 
 relationships: {
-    fam_members: [
-        for f in family {
-            "\(f.first) \(f.last)"
-        }
-    ]
+	fam_members: [
+		for f in family {
+			"\(f.first) \(f.last)"
+		},
+	]
 
-    parents: [
-        for f in family
-        if (f & #Parent) != _|_ {
-            f.first
-        }
-    ]
+	parents: [
+		for f in family
+		if (f & #Parent) != _|_ {
+			f.first
+		},
+	]
 }

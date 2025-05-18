@@ -1,54 +1,61 @@
 (function () {
-  var ns = $.namespace('pskl.controller.settings.exportimage');
+  var ns = $.namespace("pskl.controller.settings.exportimage");
 
   var tabs = {
-    'png' : {
-      template : 'templates/settings/export/png.html',
-      controller : ns.PngExportController
+    png: {
+      template: "templates/settings/export/png.html",
+      controller: ns.PngExportController,
     },
-    'gif' : {
-      template : 'templates/settings/export/gif.html',
-      controller : ns.GifExportController
+    gif: {
+      template: "templates/settings/export/gif.html",
+      controller: ns.GifExportController,
     },
-    'zip' : {
-      template : 'templates/settings/export/zip.html',
-      controller : ns.ZipExportController
+    zip: {
+      template: "templates/settings/export/zip.html",
+      controller: ns.ZipExportController,
     },
-    'misc' : {
-      template : 'templates/settings/export/misc.html',
-      controller : ns.MiscExportController
-    }
+    misc: {
+      template: "templates/settings/export/misc.html",
+      controller: ns.MiscExportController,
+    },
   };
 
   ns.ExportController = function (piskelController) {
     this.piskelController = piskelController;
-    this.tabsWidget = new pskl.widgets.Tabs(tabs, this, pskl.UserSettings.EXPORT_TAB);
+    this.tabsWidget = new pskl.widgets.Tabs(
+      tabs,
+      this,
+      pskl.UserSettings.EXPORT_TAB,
+    );
     this.onSizeInputChange_ = this.onSizeInputChange_.bind(this);
   };
 
-  pskl.utils.inherit(ns.ExportController, pskl.controller.settings.AbstractSettingController);
+  pskl.utils.inherit(
+    ns.ExportController,
+    pskl.controller.settings.AbstractSettingController,
+  );
 
   ns.ExportController.prototype.init = function () {
     // Initialize zoom controls
-    this.scaleInput = document.querySelector('.export-scale .scale-input');
-    this.addEventListener(this.scaleInput, 'change', this.onScaleChange_);
-    this.addEventListener(this.scaleInput, 'input', this.onScaleChange_);
+    this.scaleInput = document.querySelector(".export-scale .scale-input");
+    this.addEventListener(this.scaleInput, "change", this.onScaleChange_);
+    this.addEventListener(this.scaleInput, "input", this.onScaleChange_);
 
-    this.widthInput = document.querySelector('.export-resize .resize-width');
-    this.heightInput = document.querySelector('.export-resize .resize-height');
+    this.widthInput = document.querySelector(".export-resize .resize-width");
+    this.heightInput = document.querySelector(".export-resize .resize-height");
     var scale = pskl.UserSettings.get(pskl.UserSettings.EXPORT_SCALE);
     this.sizeInputWidget = new pskl.widgets.SizeInput({
-      widthInput : this.widthInput,
-      heightInput : this.heightInput,
-      initWidth : this.piskelController.getWidth() * scale,
-      initHeight : this.piskelController.getHeight() * scale,
-      onChange : this.onSizeInputChange_
+      widthInput: this.widthInput,
+      heightInput: this.heightInput,
+      initWidth: this.piskelController.getWidth() * scale,
+      initHeight: this.piskelController.getHeight() * scale,
+      onChange: this.onSizeInputChange_,
     });
 
     this.onSizeInputChange_();
 
     // Initialize tabs and panel
-    var container = document.querySelector('.settings-section-export');
+    var container = document.querySelector(".settings-section-export");
     this.tabsWidget.init(container);
   };
 
@@ -70,8 +77,8 @@
 
   ns.ExportController.prototype.updateScaleText_ = function (scale) {
     scale = scale.toFixed(1);
-    var scaleText = document.querySelector('.export-scale .scale-text');
-    scaleText.innerHTML = scale + 'x';
+    var scaleText = document.querySelector(".export-scale .scale-text");
+    scaleText.innerHTML = scale + "x";
   };
 
   ns.ExportController.prototype.onSizeInputChange_ = function () {
@@ -90,6 +97,8 @@
   };
 
   ns.ExportController.prototype.getExportZoom = function () {
-    return parseInt(this.widthInput.value, 10) / this.piskelController.getWidth();
+    return (
+      parseInt(this.widthInput.value, 10) / this.piskelController.getWidth()
+    );
   };
 })();

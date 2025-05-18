@@ -1,5 +1,5 @@
 (function () {
-  var ns = $.namespace('pskl.widgets');
+  var ns = $.namespace("pskl.widgets");
 
   ns.HslRgbColorPicker = function (container, colorUpdatedCallback) {
     this.container = container;
@@ -16,33 +16,43 @@
     var isFirefox = pskl.utils.UserAgent.isFirefox;
     var isChrome = pskl.utils.UserAgent.isChrome;
 
-    var changeEvent = (isChrome || isFirefox) ? 'input' : 'change';
-    pskl.utils.Event.addEventListener(this.container, changeEvent, this.onPickerChange_, this);
-    pskl.utils.Event.addEventListener(this.container, 'keydown', this.onPickerChange_, this);
+    var changeEvent = isChrome || isFirefox ? "input" : "change";
+    pskl.utils.Event.addEventListener(
+      this.container,
+      changeEvent,
+      this.onPickerChange_,
+      this,
+    );
+    pskl.utils.Event.addEventListener(
+      this.container,
+      "keydown",
+      this.onPickerChange_,
+      this,
+    );
 
     // Cannot use pskl.utils.Event with useCapture for now ...
     this.onBlur_ = this.onBlur_.bind(this);
-    this.container.addEventListener('blur', this.onBlur_, true);
+    this.container.addEventListener("blur", this.onBlur_, true);
 
-    this.spectrumEl = this.container.querySelector('.color-picker-spectrum');
+    this.spectrumEl = this.container.querySelector(".color-picker-spectrum");
 
     $(this.spectrumEl).spectrum({
       flat: true,
       showButtons: false,
-      move : this.setColor.bind(this),
-      change : this.setColor.bind(this)
+      move: this.setColor.bind(this),
+      change: this.setColor.bind(this),
     });
 
-    this.setColor('#000000');
+    this.setColor("#000000");
   };
 
   ns.HslRgbColorPicker.prototype.destroy = function () {
     // Remove event listeners.
     pskl.utils.Event.removeAllEventListeners(this);
-    this.container.removeEventListener('blur', this.onBlur_, true);
+    this.container.removeEventListener("blur", this.onBlur_, true);
 
     // Destroy spectrum widget.
-    $(this.spectrumEl).spectrum('destroy');
+    $(this.spectrumEl).spectrum("destroy");
 
     this.container = null;
     this.spectrumEl = null;
@@ -68,11 +78,11 @@
   ns.HslRgbColorPicker.prototype.onKeydown_ = function (evt) {
     var target = evt.target;
 
-    var isInputText = target.getAttribute('type').toLowerCase() === 'text';
+    var isInputText = target.getAttribute("type").toLowerCase() === "text";
     if (isInputText && target.dataset.dimension) {
       var model = target.dataset.model;
 
-      if (model === 'rgb' || model === 'hsv') {
+      if (model === "rgb" || model === "hsv") {
         var increment = this.getIncrement_(evt);
         if (increment) {
           var dimension = target.dataset.dimension;
@@ -86,9 +96,9 @@
   ns.HslRgbColorPicker.prototype.getIncrement_ = function (evt) {
     var increment = 0;
     var key = pskl.service.keyboard.KeycodeTranslator.toChar(evt.keyCode);
-    if (key === 'up') {
+    if (key === "up") {
       increment = 1;
-    } else if (key === 'down') {
+    } else if (key === "down") {
       increment = -1;
     }
 
@@ -99,15 +109,19 @@
     return increment;
   };
 
-  ns.HslRgbColorPicker.prototype.updateColor_ = function (inputValue, model, dimension) {
+  ns.HslRgbColorPicker.prototype.updateColor_ = function (
+    inputValue,
+    model,
+    dimension,
+  ) {
     var value = this.toModelValue_(inputValue, model, dimension);
-    if (model === 'hsv' || model === 'rgb') {
+    if (model === "hsv" || model === "rgb") {
       if (!isNaN(value)) {
         var color = this.getColor_(model);
         color[dimension] = this.normalizeDimension_(value, dimension);
         this.setColor(color);
       }
-    } else if (model === 'hex') {
+    } else if (model === "hex") {
       if (/^#([a-f0-9]{3}){1,2}$/i.test(value)) {
         this.setColor(value);
       }
@@ -117,7 +131,7 @@
   ns.HslRgbColorPicker.prototype.onBlur_ = function (evt) {
     var target = evt.target;
 
-    var isInputText = target.getAttribute('type').toLowerCase() === 'text';
+    var isInputText = target.getAttribute("type").toLowerCase() === "text";
     if (isInputText && target.dataset.dimension) {
       var model = target.dataset.model;
       var dimension = target.dataset.dimension;
@@ -134,7 +148,7 @@
       this.rgbColor = this.tinyColor.toRgb();
 
       this.updateInputs();
-      $('.color-picker-spectrum').spectrum('set', this.tinyColor);
+      $(".color-picker-spectrum").spectrum("set", this.tinyColor);
 
       this.colorUpdatedCallback(this.tinyColor);
 
@@ -143,9 +157,9 @@
   };
 
   ns.HslRgbColorPicker.prototype.updateInputs = function () {
-    var inputs = this.container.querySelectorAll('input');
+    var inputs = this.container.querySelectorAll("input");
 
-    for (var i = 0 ; i < inputs.length ; i++) {
+    for (var i = 0; i < inputs.length; i++) {
       var input = inputs[i];
       var dimension = input.dataset.dimension;
       var model = input.dataset.model;
@@ -154,7 +168,7 @@
       if (input.value != value) {
         input.value = value;
       }
-      if (input.getAttribute('type') === 'range') {
+      if (input.getAttribute("type") === "range") {
         this.updateSliderBackground(input);
       }
     }
@@ -163,30 +177,34 @@
   ns.HslRgbColorPicker.prototype.toInputValue_ = function (model, dimension) {
     var value;
 
-    if (model === 'rgb' || model === 'hsv') {
+    if (model === "rgb" || model === "hsv") {
       var color = this.getColor_(model);
       value = color[dimension];
 
-      if (dimension === 'v' || dimension === 's') {
+      if (dimension === "v" || dimension === "s") {
         value = 100 * value;
       }
       value = Math.round(value);
-    } else if (model === 'hex') {
+    } else if (model === "hex") {
       value = this.tinyColor.toHexString(true);
     }
 
     return value;
   };
 
-  ns.HslRgbColorPicker.prototype.toModelValue_ = function (value, model, dimension) {
+  ns.HslRgbColorPicker.prototype.toModelValue_ = function (
+    value,
+    model,
+    dimension,
+  ) {
     var modelValue;
 
-    if (model === 'rgb' || model === 'hsv') {
+    if (model === "rgb" || model === "hsv") {
       modelValue = parseInt(value, 10);
-      if (dimension === 'v' || dimension === 's') {
+      if (dimension === "v" || dimension === "s") {
         modelValue = modelValue / 100;
       }
-    } else if (model === 'hex') {
+    } else if (model === "hex") {
       modelValue = value;
     }
 
@@ -194,7 +212,8 @@
   };
 
   ns.HslRgbColorPicker.prototype.toTinyColor_ = function (color) {
-    var isTinyColor = typeof color == 'object' && color.hasOwnProperty('_tc_id');
+    var isTinyColor =
+      typeof color == "object" && color.hasOwnProperty("_tc_id");
     if (isTinyColor) {
       return color;
     } else {
@@ -203,19 +222,22 @@
   };
 
   ns.HslRgbColorPicker.prototype.toHsvColor_ = function (color) {
-    var isHsvColor = ['h', 's', 'v'].every(color.hasOwnProperty.bind(color));
+    var isHsvColor = ["h", "s", "v"].every(color.hasOwnProperty.bind(color));
     if (isHsvColor) {
       return {
-        h : this.normalizeDimension_(color.h, 'h'),
-        s : this.normalizeDimension_(color.s, 's'),
-        v : this.normalizeDimension_(color.v, 'v')
+        h: this.normalizeDimension_(color.h, "h"),
+        s: this.normalizeDimension_(color.s, "s"),
+        v: this.normalizeDimension_(color.v, "v"),
       };
     } else {
       return this.toTinyColor_(color).toHsv();
     }
   };
 
-  ns.HslRgbColorPicker.prototype.normalizeDimension_ = function (value, dimension) {
+  ns.HslRgbColorPicker.prototype.normalizeDimension_ = function (
+    value,
+    dimension,
+  ) {
     var range = this.getDimensionRange_(dimension);
     return Math.max(range[0], Math.min(range[1], value));
   };
@@ -229,14 +251,22 @@
 
     var start;
     var end;
-    var isHueSlider = dimension === 'h';
+    var isHueSlider = dimension === "h";
     if (!isHueSlider) {
       var colors = this.getSliderBackgroundColors_(model, dimension);
-      slider.style.backgroundImage = 'linear-gradient(to right, ' + colors.start + ' 0, ' + colors.end + ' 100%)';
+      slider.style.backgroundImage =
+        "linear-gradient(to right, " +
+        colors.start +
+        " 0, " +
+        colors.end +
+        " 100%)";
     }
   };
 
-  ns.HslRgbColorPicker.prototype.getSliderBackgroundColors_ = function (model, dimension) {
+  ns.HslRgbColorPicker.prototype.getSliderBackgroundColors_ = function (
+    model,
+    dimension,
+  ) {
     var color = this.getColor_(model);
     var start = pskl.utils.copy(color);
     var end = pskl.utils.copy(color);
@@ -246,29 +276,28 @@
     end[dimension] = range[1];
 
     return {
-      start : window.tinycolor(start).toRgbString(),
-      end : window.tinycolor(end).toRgbString()
+      start: window.tinycolor(start).toRgbString(),
+      end: window.tinycolor(end).toRgbString(),
     };
   };
 
   ns.HslRgbColorPicker.prototype.getDimensionRange_ = function (d) {
-    if (d === 'h') {
+    if (d === "h") {
       return [0, 359];
-    } else if (d === 's' || d === 'v') {
+    } else if (d === "s" || d === "v") {
       return [0, 1];
-    } else if (d === 'r' || d === 'g' || d === 'b') {
+    } else if (d === "r" || d === "g" || d === "b") {
       return [0, 255];
     }
   };
 
   ns.HslRgbColorPicker.prototype.getColor_ = function (model) {
     var color;
-    if (model === 'hsv') {
+    if (model === "hsv") {
       color = this.hsvColor;
-    } else if (model === 'rgb') {
+    } else if (model === "rgb") {
       color = this.rgbColor;
     }
     return color;
   };
-
 })();

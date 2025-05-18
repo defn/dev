@@ -1,5 +1,5 @@
 (function () {
-  var ns = $.namespace('pskl.service.storage');
+  var ns = $.namespace("pskl.service.storage");
 
   ns.IndexedDbStorageService = function (piskelController) {
     this.piskelController = piskelController;
@@ -8,7 +8,9 @@
 
   ns.IndexedDbStorageService.prototype.init = function () {
     this.piskelDatabase.init().catch(function (e) {
-      console.log('Failed to initialize PiskelDatabase, local browser saves will be unavailable.');
+      console.log(
+        "Failed to initialize PiskelDatabase, local browser saves will be unavailable.",
+      );
     });
   };
 
@@ -21,28 +23,45 @@
     return this.save_(name, description, date, serialized);
   };
 
-  ns.IndexedDbStorageService.prototype.save_ = function (name, description, date, serialized) {
-    return this.piskelDatabase.get(name).then(function (piskelData) {
-      if (typeof piskelData !== 'undefined') {
-        return this.piskelDatabase.update(name, description, date, serialized);
-      } else {
-        return this.piskelDatabase.create(name, description, date, serialized);
-      }
-    }.bind(this));
+  ns.IndexedDbStorageService.prototype.save_ = function (
+    name,
+    description,
+    date,
+    serialized,
+  ) {
+    return this.piskelDatabase.get(name).then(
+      function (piskelData) {
+        if (typeof piskelData !== "undefined") {
+          return this.piskelDatabase.update(
+            name,
+            description,
+            date,
+            serialized,
+          );
+        } else {
+          return this.piskelDatabase.create(
+            name,
+            description,
+            date,
+            serialized,
+          );
+        }
+      }.bind(this),
+    );
   };
 
   ns.IndexedDbStorageService.prototype.load = function (name) {
     return this.piskelDatabase.get(name).then(function (piskelData) {
-      if (typeof piskelData !== 'undefined') {
+      if (typeof piskelData !== "undefined") {
         var serialized = piskelData.serialized;
         pskl.utils.serialization.Deserializer.deserialize(
           JSON.parse(serialized),
           function (piskel) {
             pskl.app.piskelController.setPiskel(piskel);
-          }
+          },
         );
       } else {
-        console.log('no local browser save found for name: ' + name);
+        console.log("no local browser save found for name: " + name);
       }
     });
   };
