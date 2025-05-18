@@ -12,7 +12,7 @@ const replicate = new Replicate({
 // Check if there is at least one command line argument provided
 if (process.argv.length < 3) {
   console.error(
-    "Usage: node script.js <image_filename> [scale] [face_enhance]"
+    "Usage: node script.js <image_filename> [scale] [face_enhance]",
   );
   process.exit(1);
 }
@@ -43,7 +43,7 @@ try {
   // Write the JSON object to a file
   fs.writeFileSync(
     `replicate/js/${imageId}.json`,
-    JSON.stringify(result, null, 2)
+    JSON.stringify(result, null, 2),
   );
 
   // Fetch the file from the .output URL and save it to a file
