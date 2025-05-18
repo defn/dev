@@ -628,15 +628,35 @@ function toggleVisibility(element) {
 
   // Only send to server when selectMode is "yes"
   if (selectMode === "yes") {
-    fetch(
-      `select-${selectMode}?filename=${element.getAttribute("data-filename")}`,
-      {
-        mode: "no-cors",
-      },
-    )
-      .then((response) => response.text())
-      .then((data) => console.log(data))
-      .catch((error) => console.error("Error:", error));
+    const filename = element.getAttribute("data-filename");
+    console.log(
+      `[selectMode=${selectMode}] Sending request for filename: ${filename}`,
+    );
+
+    fetch(`/select-${selectMode}?filename=${encodeURIComponent(filename)}`, {
+      method: "GET",
+      // Remove no-cors mode to see actual errors
+      // mode: "no-cors",
+    })
+      .then((response) => {
+        console.log(
+          `[selectMode=${selectMode}] Response status: ${response.status}`,
+        );
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        return response.text();
+      })
+      .then((data) => {
+        console.log(`[selectMode=${selectMode}] Response data: ${data}`);
+      })
+      .catch((error) => {
+        console.error(`[selectMode=${selectMode}] Error:`, error);
+      });
+  } else {
+    console.log(
+      `[selectMode=${selectMode}] Not sending request - selectMode is not "yes"`,
+    );
   }
   // When selectMode is "no", just toggle blurhash locally without server interaction
 }
@@ -826,7 +846,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Check if autoscrolling was enabled on previous page
   const shouldEnableAutoscroll =
-    sessionStorage.getItem("autoscrollEnabled") === "true" || true; // Enable by default
+    sessionStorage.getItem("autoscrollEnabled") === "true" ||
+    typeof selectMode === "undefined" ||
+    selectMode !== "yes"; // Enable by default when NOT in yes mode
 
   setTimeout(() => {
     if (!window.autoscrollInterval && shouldEnableAutoscroll) {
@@ -834,7 +856,7 @@ document.addEventListener("DOMContentLoaded", () => {
         "[Autoscroll] Enabling autoscroll" +
           (sessionStorage.getItem("autoscrollEnabled") === "true"
             ? " (continued from previous page)"
-            : " by default"),
+            : " (not in yes mode)"),
       );
       window.toggleAutoscroll();
     }

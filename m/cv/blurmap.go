@@ -3,6 +3,7 @@ package main
 import (
 	"bufio"
 	"crypto/sha256"
+	"flag"
 	"fmt"
 	"image"
 	_ "image/jpeg" // Register JPEG format
@@ -18,11 +19,13 @@ import (
 	"time"
 )
 
-const (
-	cacheDir     = "blur"
-	imageDir     = "replicate/t2"
-	allInputFile = "all.input"
-	outputDir    = "g" // Base directory for chunked output
+var (
+	// These will be set by command-line flags
+	allInputFile string
+	outputDir    string
+	cacheDir     string
+	imageDir     string
+	selectMode   string
 )
 
 // galleryTemplate is the HTML template for the gallery pages, moved from external gallery.html
@@ -41,8 +44,8 @@ const galleryTemplate = `<!doctype html>
           <script>
             // INSERT
 
-            const basePath = "/replicate/t2";
-            const selectMode = "no";
+            const basePath = "/%s";
+            const selectMode = "%s";
 
             generateGrid();
           </script>
@@ -87,6 +90,29 @@ const (
 var timestampCache int64
 
 func main() {
+	// Parse command-line flags
+	flag.StringVar(&allInputFile, "input", "all.input", "Input file containing image identifiers")
+	flag.StringVar(&allInputFile, "i", "all.input", "Input file containing image identifiers (shorthand)")
+	flag.StringVar(&outputDir, "output", "g", "Output directory for HTML gallery pages")
+	flag.StringVar(&outputDir, "o", "g", "Output directory for HTML gallery pages (shorthand)")
+	flag.StringVar(&cacheDir, "cache", "blur", "Cache directory for blurhash data")
+	flag.StringVar(&cacheDir, "c", "blur", "Cache directory for blurhash data (shorthand)")
+	flag.StringVar(&imageDir, "imagedir", "replicate/t2", "Source image directory")
+	flag.StringVar(&imageDir, "d", "replicate/t2", "Source image directory (shorthand)")
+	flag.StringVar(&selectMode, "selectmode", "no", "Select mode for image interaction (default: no)")
+	flag.StringVar(&selectMode, "s", "no", "Select mode for image interaction (shorthand)")
+	showHelp := flag.Bool("help", false, "Show help message")
+	showHelpShort := flag.Bool("h", false, "Show help message (shorthand)")
+	flag.Parse()
+
+	// Show help if requested
+	if *showHelp || *showHelpShort {
+		fmt.Fprintf(os.Stderr, "Usage: %s [options]\n", os.Args[0])
+		fmt.Fprintf(os.Stderr, "\nOptions:\n")
+		flag.PrintDefaults()
+		os.Exit(0)
+	}
+
 	// Create a single timestamp for cache busting
 	timestampCache = time.Now().Unix()
 
@@ -96,7 +122,7 @@ func main() {
 		os.Exit(1)
 	}
 
-	// Process the identifiers from all.input
+	// Process the identifiers from the input file
 	imageInfos, err := parseInputFile(allInputFile)
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error parsing input file: %v\n", err)
@@ -388,7 +414,7 @@ func generateChunkHTML(imageInfos []ImageInfo, outputPath string, totalChunks in
 	chunkNum := strings.Split(outputPath, "/")[1]
 
 	// Format the template with proper values
-	templateStr := fmt.Sprintf(galleryTemplate, totalChunks, chunkNum, timestampCache)
+	templateStr := fmt.Sprintf(galleryTemplate, totalChunks, chunkNum, timestampCache, imageDir, selectMode)
 
 	// Generate the blurhashIndex map
 	var blurhashMap strings.Builder
