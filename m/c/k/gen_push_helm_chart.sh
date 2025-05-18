@@ -3,37 +3,37 @@
 # count: 12
 
 function main {
-  local app="${in[app]}"
-  local name="${in[name]}"
-  local registry="${in[registry]}"
+	local app="${in[app]}"
+	local name="${in[name]}"
+	local registry="${in[registry]}"
 
-  mkdir chart
-  tar xfz "${app}" -C chart
+	mkdir chart
+	tar xfz "${app}" -C chart
 
-  (
-    set +f
-    cd chart/*/
-    local version
-    local bumped_version
-    version="$(echo "1.0.0" || helm show chart --insecure-skip-tls-verify "oci://${registry}/${name}" 2>/dev/null | grep ^version: | awk '{print $2}' || true)"
-    if [[ -z ${version} ]]; then
-      version="0.0.0"
-    fi
-    bumped_version="${version%.*}.$((${version##*.} + 1))"
+	(
+		set +f
+		cd chart/*/
+		local version
+		local bumped_version
+		version="$(echo "1.0.0" || helm show chart --insecure-skip-tls-verify "oci://${registry}/${name}" 2>/dev/null | grep ^version: | awk '{print $2}' || true)"
+		if [[ -z ${version} ]]; then
+			version="0.0.0"
+		fi
+		bumped_version="${version%.*}.$((${version##*.} + 1))"
 
-    sed "s#^version: .*#version: ${bumped_version}#" -i Chart.yaml
-    sed "s#^appVersion: .*#version: ${bumped_version}#" -i Chart.yaml
+		sed "s#^version: .*#version: ${bumped_version}#" -i Chart.yaml
+		sed "s#^appVersion: .*#version: ${bumped_version}#" -i Chart.yaml
 
-    cd ..
-    helm package */
+		cd ..
+		helm package */
 
-    cd ..
-    cp */*.tgz chart.tgz
-  )
+		cd ..
+		cp */*.tgz chart.tgz
+	)
 
-  echo helm push --insecure-skip-tls-verify chart.tgz "oci://${registry}"
+	echo helm push --insecure-skip-tls-verify chart.tgz "oci://${registry}"
 
-  cp chart.tgz "${out}"
+	cp chart.tgz "${out}"
 }
 
 source b/lib/lib.sh

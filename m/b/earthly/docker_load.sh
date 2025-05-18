@@ -3,12 +3,12 @@
 set -efuo pipefail
 
 function main {
-  local image_save
+	local image_save
 
-  image_save="$1"
-  shift
+	image_save="$1"
+	shift
 
-  docker load --input="${image_save}"
+	docker load --input="${image_save}"
 }
 
 main "$@"
