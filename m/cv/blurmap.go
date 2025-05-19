@@ -584,7 +584,7 @@ func generateChunkHTML(imageInfos []ImageInfo, outputPath string, totalChunks in
 	jsContent.WriteString("  chunkIndicator.style.margin = '0 5px';\n")
 	jsContent.WriteString("  nav.appendChild(chunkIndicator);\n")
 
-	// Add next link if not the last chunk
+	// Add next link - for last chunk, it loops back to gallery 1
 	if chunkNumInt < totalChunks {
 		jsContent.WriteString("  const nextLink = document.createElement('a');\n")
 		jsContent.WriteString("  nextLink.href = '../" + strconv.Itoa(nextChunk) + "/';\n")
@@ -592,9 +592,10 @@ func generateChunkHTML(imageInfos []ImageInfo, outputPath string, totalChunks in
 		jsContent.WriteString("  nextLink.textContent = '>';\n")
 		jsContent.WriteString("  nav.appendChild(nextLink);\n")
 	} else {
-		// Add disabled next link
-		jsContent.WriteString("  const nextLink = document.createElement('span');\n")
-		jsContent.WriteString("  nextLink.style.cssText = 'color:#555;font-weight:bold;font-size:24px;';\n")
+		// Add next link that goes back to gallery 1
+		jsContent.WriteString("  const nextLink = document.createElement('a');\n")
+		jsContent.WriteString("  nextLink.href = '../1/';\n")
+		jsContent.WriteString("  nextLink.style.cssText = 'color:white;text-decoration:none;font-weight:bold;font-size:24px;';\n")
 		jsContent.WriteString("  nextLink.textContent = '>';\n")
 		jsContent.WriteString("  nav.appendChild(nextLink);\n")
 	}
@@ -648,12 +649,12 @@ func generateChunkHTML(imageInfos []ImageInfo, outputPath string, totalChunks in
 	}
 	jsContent.WriteString("    }\n")
 
-	// Right arrow
+	// Right arrow - for last chunk, it loops back to gallery 1
 	jsContent.WriteString("    if (e.key === 'ArrowRight' || e.key === 'd' || e.key === 'D') {\n")
 	if chunkNumInt < totalChunks {
 		jsContent.WriteString("      window.location.href = '../" + strconv.Itoa(nextChunk) + "/';\n")
 	} else {
-		jsContent.WriteString("      console.log('At last chunk');\n")
+		jsContent.WriteString("      window.location.href = '../1/';\n")
 	}
 	jsContent.WriteString("    }\n")
 
@@ -718,35 +719,34 @@ func writeToCache(cacheFile string, blurmap string) error {
 	return ioutil.WriteFile(cacheFile, []byte(blurmap), 0644)
 }
 
-// generateMainIndex creates a main index.html file that links to all chunks
+// generateMainIndex creates a main index.html file that randomly redirects to one of the galleries
 func generateMainIndex(numChunks int, totalImages int) error {
-	// Create HTML content with links to all chunks
+	// Create HTML content that randomly redirects to one of the galleries
 	var content strings.Builder
 
 	content.WriteString("<!DOCTYPE html>\n")
 	content.WriteString("<html>\n")
 	content.WriteString("<head>\n")
-	content.WriteString("  <title>Gallery Index</title>\n")
-	content.WriteString(fmt.Sprintf("  <script src=\"/gallery.js?cache=%d\"></script>\n", timestampCache))
+	content.WriteString("  <title>Gallery - Redirecting...</title>\n")
 	content.WriteString("  <style>\n")
-	content.WriteString("    body { font-family: Arial, sans-serif; margin: 20px; background-color: #111; color: #eee; }\n")
-	content.WriteString("    h1 { color: #ddd; }\n")
-	content.WriteString("    .chunks { display: flex; flex-wrap: wrap; gap: 10px; }\n")
-	content.WriteString("    .chunk-link { display: block; padding: 15px; background-color: #333; color: white; text-decoration: none; border-radius: 5px; }\n")
-	content.WriteString("    .chunk-link:hover { background-color: #555; }\n")
+	content.WriteString("    body { font-family: Arial, sans-serif; margin: 0; background-color: #111; color: #eee; height: 100vh; display: flex; justify-content: center; align-items: center; }\n")
+	content.WriteString("    .loading { text-align: center; }\n")
+	content.WriteString("    h1 { color: #ddd; font-size: 2em; margin-bottom: 20px; }\n")
+	content.WriteString("    p { color: #999; font-size: 1.2em; }\n")
 	content.WriteString("  </style>\n")
+	content.WriteString("  <script>\n")
+	content.WriteString("    // Randomly select a gallery between 1 and " + strconv.Itoa(numChunks) + "\n")
+	content.WriteString("    const totalGalleries = " + strconv.Itoa(numChunks) + ";\n")
+	content.WriteString("    const randomGallery = Math.floor(Math.random() * totalGalleries) + 1;\n")
+	content.WriteString("    \n")
+	content.WriteString("    // Redirect to the randomly selected gallery with trailing slash\n")
+	content.WriteString("    window.location.href = randomGallery + '/';\n")
+	content.WriteString("  </script>\n")
 	content.WriteString("</head>\n")
 	content.WriteString("<body>\n")
-	content.WriteString("  <h1>Gallery Chunks</h1>\n")
-	content.WriteString("  <p>Total chunks: " + strconv.Itoa(numChunks) + "</p>\n")
-	content.WriteString("  <p>Total images: " + strconv.Itoa(totalImages) + " (approximately " + strconv.Itoa(chunkSize) + " images per chunk)</p>\n")
-	content.WriteString("  <div class=\"chunks\">\n")
-
-	// Add links to each chunk
-	for i := 1; i <= numChunks; i++ {
-		content.WriteString("    <a href=\"" + strconv.Itoa(i) + "/index.html\" class=\"chunk-link\">Chunk " + strconv.Itoa(i) + "</a>\n")
-	}
-
+	content.WriteString("  <div class=\"loading\">\n")
+	content.WriteString("    <h1>Gallery</h1>\n")
+	content.WriteString("    <p>Redirecting to a random gallery...</p>\n")
 	content.WriteString("  </div>\n")
 	content.WriteString("</body>\n")
 	content.WriteString("</html>\n")

@@ -1008,8 +1008,10 @@ document.addEventListener("DOMContentLoaded", () => {
         blackOutImagesAndNavigate(`../${window.currentPage + 1}/`);
       };
     } else {
-      // Disabled style for last page
-      nextButton.style.opacity = "0.5";
+      // Navigate to first page from last page
+      nextButton.onclick = () => {
+        blackOutImagesAndNavigate(`../1/`);
+      };
     }
     window.navigationControl.appendChild(nextButton);
   }
@@ -1698,12 +1700,16 @@ document.addEventListener("DOMContentLoaded", () => {
         blackOutImagesAndNavigate(`../${window.currentPage + 1}/`);
         return true;
       } else {
-        // If there's no next page, pause autoscroll
-        console.log("[Autoscroll] At bottom of last page, pausing autoscroll");
-        if (window.autoscrollInterval) {
-          window.toggleAutoscroll();
-        }
-        return false;
+        // If we're at the last page, navigate back to gallery 1
+        console.log(
+          "[Autoscroll] At bottom of last page, looping back to gallery 1",
+        );
+        // This will help continue autoscrolling on the next page
+        sessionStorage.setItem("autoscrollEnabled", "true");
+
+        // Navigate back to gallery 1
+        blackOutImagesAndNavigate(`../1/`);
+        return true;
       }
     } else {
       // Space key typically scrolls by viewport height minus a small overlap
@@ -1946,10 +1952,12 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     }
 
-    // Right arrow or 'd' - next page
+    // Right arrow or 'd' - next page (loops back to 1 from last page)
     if (event.key === "ArrowRight" || event.key === "d" || event.key === "D") {
       if (window.currentPage < window.totalPages) {
         blackOutImagesAndNavigate(`../${window.currentPage + 1}/`);
+      } else {
+        blackOutImagesAndNavigate(`../1/`);
       }
     }
 
