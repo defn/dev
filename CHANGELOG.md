@@ -1,5 +1,21 @@
 # Changelog
 
+## [1.29.0](https://github.com/defn/dev/compare/v1.28.0...v1.29.0) (2025-05-20)
+
+
+### Features
+
+* install freeze ([0cf9931](https://github.com/defn/dev/commit/0cf993164dd0be84fe34bca395964c79d1ff9053))
+
+
+### Bug Fixes
+
+* consolidate helm, kubectl, kustomize ([fbb3a5b](https://github.com/defn/dev/commit/fbb3a5bbe2cd949fe62ba1bdc7ee5c3559a6db55))
+* no .env, mise parses it bad ([d818d20](https://github.com/defn/dev/commit/d818d20d2f522bf94d51258acced2626980be41b))
+* no temporal, pepr ([f1e30b2](https://github.com/defn/dev/commit/f1e30b204ca42ba14789f4c979dbab0cf57c65af))
+* node in m ([0daf75d](https://github.com/defn/dev/commit/0daf75d2418a45c3a24eee9c6f6d8e853fa3fd8d))
+* nodejs is global, too many tools use it ([12fb3a9](https://github.com/defn/dev/commit/12fb3a96b778f7e03f8079333ab6ff54eb48c29c))
+
 ## [1.28.0](https://github.com/defn/dev/compare/v1.27.0...v1.28.0) (2025-05-04)
 
 ### Features
