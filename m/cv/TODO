@@ -1,2 +1,4 @@
-runmany 16 'if ! test -f pub/w-3/w-3-${1%.*}.png; then echo $1; node fm.mjs pub/w-3.png pub/W/$1 pub/w-3/w-3-${1%.*}.png; fi ' $(cd pub/W && ls -d *.jpg | sort)
+for a in $(cd pub && ls -d w-*/); do export a; runmany 16 'a="${a%%/}"; if ! test -f pub/$a/$a-${1%.*}.png; then echo $1; node fm.mjs pub/$a.* pub/W/$1 pub/$a/$a-${1%.*}.png; fi ' $(cd pub/W && ls -d *.jpg | sort); done
 for a in pub/w-*/; do (cd $a; ls -d w-*.png | sort | while read -r a; do echo "<img src=\"$a\"></img><br>"; done > index.html); done
+(echo  "<table>"; for a in $(cd pub/W && ls -d *.jpg); do echo "<tr>"; for g in $(cd pub && ls -d w-*/); do g="${g%%/}"; echo "<td><img src=\"$g/$g-${a%%.jpg}.png\"></img></td>"; done; echo "</tr>"; done; echo "</table>") > pub/w.html
+
