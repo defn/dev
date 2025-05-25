@@ -1,2 +1,2 @@
 runmany 16 'if ! test -f pub/w-3/w-3-${1%.*}.png; then echo $1; node fm.mjs pub/w-3.png pub/W/$1 pub/w-3/w-3-${1%.*}.png; fi ' $(cd pub/W && ls -d *.jpg | sort)
-ls -d w-3-* | sort | while read -r a; do echo "<img src=\"$a\"></img><br>"; done > index.html
+for a in pub/w-*/; do (cd $a; ls -d w-*.png | sort | while read -r a; do echo "<img src=\"$a\"></img><br>"; done > index.html); done
