@@ -1,55 +1,25 @@
 #!/usr/bin/env node
 
+import { writeFile } from "fs/promises";
 import Replicate from "replicate";
-import fs from "fs";
-import fetch from "node-fetch";
-
-// Create a Replicate instance using the API token from the environment variables
-const replicate = new Replicate({
-  auth: process.env.REPLICATE_API_TOKEN,
-});
+const replicate = new Replicate();
 
 // Check if there is at least one command line argument provided
 if (process.argv.length < 3) {
-  console.error("Usage: node script.js <from_filename> <to_filename>");
+  console.error(
+    "Usage: node script.js <swap_filename> <input_filename> <save_filename>",
+  );
   process.exit(1);
 }
 
 // Get the command line arguments
-const imageFromId = process.argv[2];
-const imageFromUrl = process.argv[3];
-const imageToId = process.argv[4];
-const imageToUrl = `https://pc.tail3884f.ts.net/pub/r2/${imageToId}.png`;
+const input = {
+  swap_image: `https://penguin.tail3884f.ts.net/${process.argv[2]}`,
+  input_image: `https://penguin.tail3884f.ts.net/${process.argv[3]}`,
+};
 
-console.error("public from url :", imageFromUrl);
-console.error("public to url :", imageToUrl);
-try {
-  // Run the Replicate model
-  const prediction = await replicate.predictions.create({
-    version: "c71604c00f0b74344fb50bb3c323f6089ed9defc229e02063cd3a5b59e081621",
-    input: {
-      image_from: imageFromUrl,
-      image_to: imageToUrl,
-    },
-  });
-
-  const result = await replicate.wait(prediction);
-
-  // Write the JSON object to a file
-  fs.writeFileSync(
-    `fm/js/${imageFromId}-${imageToId}.json`,
-    JSON.stringify(result, null, 2),
-  );
-
-  // Fetch the file from the .output URL and save it to a file
-  const outputUrl = result.output;
-  const response = await fetch(outputUrl);
-
-  if (!response.ok)
-    throw new Error(`Failed to fetch file: ${response.statusText}`);
-
-  const buffer = await response.buffer();
-  fs.writeFileSync(`fm/img/${imageFromId}-${imageToId}.png`, buffer);
-} catch (error) {
-  console.error("Error running the Replicate model:", error);
-}
+const output = await replicate.run(
+  "codeplugtech/face-swap:278a81e7ebb22db98bcba54de985d22cc1abeead2754eb1f2af717247be69b34",
+  { input },
+);
+await writeFile(process.argv[4], output);

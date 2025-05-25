@@ -1,7 +1,6 @@
 {
   "dependencies": {
     "@types/node": "^22.10.5",
-    "cv": "link:",
     "node-fetch": "^3.3.2",
     "replicate": "^1.0.1"
   }
