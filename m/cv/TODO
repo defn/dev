@@ -1,4 +1,0 @@
-for a in $(cd pub && ls -d w-*/); do export a; runmany 16 'a="${a%%/}"; if ! test -f pub/$a/$a-$1; then echo $1; node fm.mjs pub/$a.* pub/W/$1 pub/$a/$a-$1; fi ' $(cd pub/W && ls -d *.png | sort); done
-for a in pub/w-*/; do (cd $a; for w in ../$(basename $(pwd)).*; do echo "<img width=400 src=\"$w\"></img><br>"; done; ls -d w-*.png | sort | while read -r a; do echo "<img width=400 src=\"$a\"></img><br>"; done) > $a/index.html; done
-(echo "<table>"; echo "<tr>"; for a in $(cd pub && ls -d w-*.*); do echo "<td><img width=400 src=\"$a\"></td>"; done; echo "</tr>"; for a in $(cd pub/W && ls -d *.png); do echo "<tr>"; for g in $(cd pub && ls -d w-*/); do g="${g%%/}"; echo "<td><img src=\"$g/$g-$a\"></img></td>"; done; echo "</tr>"; done; echo "</table>") > pub/w.html
-

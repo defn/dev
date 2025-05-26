@@ -1,0 +1,42 @@
+# Generate gallery images if missing
+for a in $(find pub -maxdepth 1 -type d -name 'w-*' | cut -d/ -f2); do
+	export a
+	runmany 16 '
+    a="${a%%/}"
+    if ! test -f pub/$a/$a-$1; then
+      echo $1
+      node fm.mjs pub/$a.png pub/W/$1 pub/$a/$a-$1
+    fi
+  ' $(find pub/W -maxdepth 1 -type f -name '*.png' | xargs -n1 basename | sort)
+done
+
+# Generate index.html for each gallery
+for a in $(find pub -maxdepth 1 -type d -name 'w-*' | cut -d/ -f2); do
+	(
+		echo "<img width=400 src=\"../$a.png\"></img><br>"
+		find pub/$a -maxdepth 1 -type f -name 'w-*.png' | sort | while read -r img; do
+			echo "<img width=400 src=\"$(basename "$img")\"></img><br>"
+		done
+	) >pub/$a/index.html
+done
+
+# Generate unified gallery page
+(
+	echo "<table>"
+
+	echo "<tr>"
+	find pub -maxdepth 1 -type f -name 'w-*.png' | sort | while read -r img; do
+		echo "<td><img width=400 src=\"$(basename "$img")\"></td>"
+	done
+	echo "</tr>"
+
+	for template in $(find pub/W -maxdepth 1 -type f -name '*.png' | xargs -n1 basename | sort); do
+		echo "<tr>"
+		for g in $(find pub -maxdepth 1 -type d -name 'w-*' | cut -d/ -f2); do
+			echo "<td><img width=400 src=\"$g/$g-$template\"></img></td>"
+		done
+		echo "</tr>"
+	done
+
+	echo "</table>"
+) >pub/w.html
