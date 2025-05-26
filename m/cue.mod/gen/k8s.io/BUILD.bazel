@@ -1,5 +1,0 @@
-filegroup(
-    name = "k8s_io",
-    srcs = glob(["**/*.cue"]) + ["//cue.mod:cue_mod"],
-    visibility = ["//visibility:public"],
-)

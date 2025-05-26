@@ -101,7 +101,7 @@ upgrade:
 	#npm -q --no-update-notifier --no-audit outdated
 
 go-upgrade:
-	set -x; go get -u $$(git ls-files | grep 'go$$' | perl -pe 's{[^/]+$$}{\n}' | sort -u | runmany 4 1 'echo ./$$1' | grep -v /demo/)
+	set -x; go get -u $$(git ls-files | grep 'go$$' | perl -pe 's{[^/]+$$}{\n}' | sort -u | runmany 4 1 'echo ./$$1' | grep -v /demo/ | grep -v /cv/)
 
 update:
 # cd tf && env SYNTH_HCL_OUTPUT=true cli infra && terraform fmt cdktf.out/stacks/*
@@ -109,7 +109,7 @@ update:
 
 regen:
 	@mark gazelle
-	go get $$(git ls-files | grep 'go$$' | perl -pe 's{[^/]+$$}{\n}' | sort -u | runmany 4 1 'echo ./$$1')
+	go get $$(git ls-files | grep 'go$$' | perl -pe 's{[^/]+$$}{\n}' | sort -u | runmany 4 1 'echo ./$$1' | grep -v /cv/)
 	go mod tidy
 	bazel mod tidy
 	b pass run //:gazelle

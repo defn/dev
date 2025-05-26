@@ -15,9 +15,9 @@ require (
 	github.com/charmbracelet/bubbles v0.21.0
 	github.com/charmbracelet/bubbletea v1.3.5
 	github.com/charmbracelet/lipgloss v1.1.0
-	github.com/gin-gonic/gin v1.10.0
+	github.com/gin-gonic/gin v1.10.1
 	github.com/hashicorp/terraform-cdk-go/cdktf v0.20.12
-	github.com/jackc/pgx/v5 v5.7.4
+	github.com/jackc/pgx/v5 v5.7.5
 	github.com/joho/godotenv v1.5.1
 	github.com/lucasb-eyer/go-colorful v1.2.0
 	github.com/muesli/gamut v0.3.1
@@ -127,7 +127,7 @@ require (
 	github.com/wk8/go-ordered-map/v2 v2.1.8 // indirect
 	github.com/xo/terminfo v0.0.0-20220910002029-abceb7e1c41e // indirect
 	github.com/xrash/smetrics v0.0.0-20240521201337-686a1a2994c1 // indirect
-	github.com/yuin/goldmark v1.7.11 // indirect
+	github.com/yuin/goldmark v1.7.12 // indirect
 	go.uber.org/dig v1.19.0 // indirect
 	go.uber.org/goleak v1.3.0 // indirect
 	go.uber.org/multierr v1.11.0 // indirect

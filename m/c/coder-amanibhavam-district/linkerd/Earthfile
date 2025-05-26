@@ -1,9 +1,0 @@
-VERSION 0.8
-
-demo:
-    ARG image
-    ARG save
-
-    FROM ${image}
-
-    SAVE IMAGE --push ${save}
