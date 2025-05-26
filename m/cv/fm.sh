@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # Generate gallery images if missing
-for a in $(find pub -maxdepth 1 -type d -name 'w-*' | cut -d/ -f2); do
+for a in $(find pub -maxdepth 1 -type d -name 'w-*' | cut -d/ -f2 | sort); do
 	export a
 	runmany 16 '
     a="${a%%/}"
@@ -13,7 +13,7 @@ for a in $(find pub -maxdepth 1 -type d -name 'w-*' | cut -d/ -f2); do
 done
 
 # Generate index.html for each gallery
-for a in $(find pub -maxdepth 1 -type d -name 'w-*' | cut -d/ -f2); do
+for a in $(find pub -maxdepth 1 -type d -name 'w-*' | cut -d/ -f2 | sort); do
 	(
 		echo "<img width=400 src=\"../$a.png\"></img><br>"
 		find pub/$a -maxdepth 1 -type f -name 'w-*.png' | sort | while read -r img; do
@@ -34,7 +34,7 @@ done
 
 	for template in $(find pub/W -maxdepth 1 -type f -name '*.png' | xargs -n1 basename | sort); do
 		echo "<tr>"
-		for g in $(find pub -maxdepth 1 -type d -name 'w-*' | cut -d/ -f2); do
+		for g in $(find pub -maxdepth 1 -type d -name 'w-*' | cut -d/ -f2 | sort); do
 			echo "<td><img width=400 src=\"$g/$g-$template\"></img></td>"
 		done
 		echo "</tr>"
