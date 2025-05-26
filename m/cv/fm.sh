@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 # Generate gallery images if missing
 for a in $(find pub -maxdepth 1 -type d -name 'w-*' | cut -d/ -f2); do
 	export a
