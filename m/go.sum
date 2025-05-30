@@ -1,5 +1,5 @@
-cuelabs.dev/go/oci/ociregistry v0.0.0-20250304105642-27e071d2c9b1 h1:Dmbd5Q+ENb2C6carvwrMsrOUwJ9X9qfL5JdW32gYAHo=
-cuelabs.dev/go/oci/ociregistry v0.0.0-20250304105642-27e071d2c9b1/go.mod h1:dqrnoZx62xbOZr11giMPrWbhlaV8euHwciXZEy3baT8=
+cuelabs.dev/go/oci/ociregistry v0.0.0-20250529160848-9fd279f1ce12 h1:PZ8Xev1rdbxsBWW8SYeQPwavaCWCwlDNwdg4aUrPm+I=
+cuelabs.dev/go/oci/ociregistry v0.0.0-20250529160848-9fd279f1ce12/go.mod h1:dqrnoZx62xbOZr11giMPrWbhlaV8euHwciXZEy3baT8=
 cuelang.org/go v0.13.0 h1:Z9NQY9RK3zMbjq1ZK67hvOV58pI3FKQgfuu1Znz+akQ=
 cuelang.org/go v0.13.0/go.mod h1:8MoQXu+RcXsa2s9mebJN1HJ1orVDc9aI9/yKi6Dzsi4=
 dario.cat/mergo v1.0.2 h1:85+piFYR1tMbRrLcDwR18y4UKJ3aH1Tbzi24VRW1TK8=

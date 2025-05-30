@@ -33,7 +33,7 @@ require (
 )
 
 require (
-	cuelabs.dev/go/oci/ociregistry v0.0.0-20250304105642-27e071d2c9b1 // indirect
+	cuelabs.dev/go/oci/ociregistry v0.0.0-20250529160848-9fd279f1ce12 // indirect
 	dario.cat/mergo v1.0.2 // indirect
 	github.com/Masterminds/semver/v3 v3.3.1 // indirect
 	github.com/atotto/clipboard v0.1.4 // indirect
