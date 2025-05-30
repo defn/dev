@@ -27,6 +27,7 @@ done
 	echo "<table>"
 
 	echo "<tr>"
+	echo "<td></td>"
 	find pub -maxdepth 1 -type f -name 'w-*.png' | sort | while read -r img; do
 		echo "<td><img width=400 src=\"$(basename "$img")\"></td>"
 	done
@@ -34,6 +35,7 @@ done
 
 	for template in $(find pub/W -maxdepth 1 -type f -name '*.png' | xargs -n1 basename | sort); do
 		echo "<tr>"
+		echo "<td><img width=400 src=\"W/$template\"></img></td>"
 		for g in $(find pub -maxdepth 1 -type d -name 'w-*' | cut -d/ -f2 | sort); do
 			echo "<td><img width=400 src=\"$g/$g-$template\"></img></td>"
 		done

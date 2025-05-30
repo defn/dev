@@ -28,6 +28,6 @@ starship = "1.23.0"
 "ubi:coder/code-server" = { version = "4.100.2", bin_path = "bin", extract_all = "true" }
 "ubi:honeycombio/buildevents" = "0.17.0"
 "ubi:peak/s5cmd" = "2.3.0"
-"ubi:stefanlogue/meteor" = "0.26.0"
+"ubi:stefanlogue/meteor" = "0.27.0"
 watchexec = "2.3.2"
 yq = "4.45.4"
