@@ -1,13 +1,15 @@
 #!/usr/bin/env bash
 
+export model="$1"; shift
+
 # Generate gallery images if missing
 for a in $(find pub -maxdepth 1 -type d -name 'w-*' | cut -d/ -f2 | sort); do
 	export a
-	runmany 16 '
+	runmany 4 '
     a="${a%%/}"
     if ! test -f pub/$a/$a-$1; then
       echo $1
-      node fm.mjs pub/$a.png pub/W/$1 pub/$a/$a-$1
+      cog predict "$model" -i input_image=@pub/W/$1 -i swap_image=@pub/$a.png -o pub/$a/$a-$1
     fi
   ' $(find pub/W -maxdepth 1 -type f -name '*.png' | xargs -n1 basename | sort)
 done
