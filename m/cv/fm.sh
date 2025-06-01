@@ -11,9 +11,11 @@ find pub/W -maxdepth 1 -type f -name '*.png' | xargs -n1 basename | sort | while
 	export a
   find pub -maxdepth 1 -type d -name 'w-*' | cut -d/ -f2 | sort | runmany 5 '
     b="${1%%/}"
-    if ! test -f pub/$b/$b-$a; then
-      echo "$b $a $(cog predict "$model" -i input_image=@pub/W/$a -i swap_image=@pub/$b.png -o pub/$b/$b-$a 2>&1 | grep -i output)"
-    fi
+    for n in 1 2 3; do
+      if ! test -f pub/$b/$b-$a; then
+        echo "$b $a $(cog predict "$model" -i input_image=@pub/W/$a -i swap_image=@pub/$b.png -o pub/$b/$b-$a 2>&1 | grep -i output)"
+      fi
+    done
   ' 
 done
 
