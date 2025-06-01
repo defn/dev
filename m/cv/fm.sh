@@ -7,14 +7,14 @@ fi
 export model="$1"; shift
 
 # Generate gallery images if missing
-for a in $(find pub -maxdepth 1 -type d -name 'w-*' | cut -d/ -f2 | sort); do
+find pub/W -maxdepth 1 -type f -name '*.png' | xargs -n1 basename | sort | while read -r a; do
 	export a
-	runmany 5 '
-    a="${a%%/}"
-    if ! test -f pub/$a/$a-$1; then
-      echo "$a $1 $(cog predict "$model" -i input_image=@pub/W/$1 -i swap_image=@pub/$a.png -o pub/$a/$a-$1 2>&1 | grep -i output)"
+  find pub -maxdepth 1 -type d -name 'w-*' | cut -d/ -f2 | sort | runmany 5 '
+    b="${1%%/}"
+    if ! test -f pub/$b/$b-$a; then
+      echo "$b $a $(cog predict "$model" -i input_image=@pub/W/$a -i swap_image=@pub/$b.png -o pub/$b/$b-$a 2>&1 | grep -i output)"
     fi
-  ' $(find pub/W -maxdepth 1 -type f -name '*.png' | xargs -n1 basename | sort)
+  ' 
 done
 
 # Generate index.html for each gallery
