@@ -1,15 +1,18 @@
 #!/usr/bin/env bash
 
+if [[ -z "${1:-}" ]]; then
+  set -- meh
+fi
+
 export model="$1"; shift
 
 # Generate gallery images if missing
 for a in $(find pub -maxdepth 1 -type d -name 'w-*' | cut -d/ -f2 | sort); do
 	export a
-	runmany 4 '
+	runmany 5 '
     a="${a%%/}"
     if ! test -f pub/$a/$a-$1; then
-      echo $1
-      cog predict "$model" -i input_image=@pub/W/$1 -i swap_image=@pub/$a.png -o pub/$a/$a-$1
+      echo "$a $1 $(cog predict "$model" -i input_image=@pub/W/$1 -i swap_image=@pub/$a.png -o pub/$a/$a-$1 2>&1 | grep -i output)"
     fi
   ' $(find pub/W -maxdepth 1 -type f -name '*.png' | xargs -n1 basename | sort)
 done
