@@ -216,9 +216,9 @@ func main() {
 	}
 
 	// Sort images by filename
-	sort.Slice(validImages, func(i, j int) bool {
-		return validImages[i].Filename < validImages[j].Filename
-	})
+	//sort.Slice(validImages, func(i, j int) bool {
+	//	return validImages[i].Filename < validImages[j].Filename
+	//})
 
 	// Calculate number of chunks needed
 	totalImages := len(validImages)
