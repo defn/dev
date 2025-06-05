@@ -28,66 +28,11 @@ function fmpost {
 export -f fm
 export -f fmpost
 
-function gen-html {
-	# Generate index.html for each gallery
-	for a in $(find pub -maxdepth 1 -type d -name 'w-*' | cut -d/ -f2 | sort); do
-		(
-			# echo "<img width=400 src=\"../$a.png\"></img><br>"
-			find pub/$a -maxdepth 1 -type f -name 'w-*.png' | sort | while read -r img; do
-				echo "<img width=400 src=\"$(basename "$img")\"></img><br>"
-			done
-		) >pub/$a/index.html
-	done
-
-	# Generate unified gallery page
-	(
-		echo "<table>"
-
-		echo "<tr>"
-		echo "<td></td>"
-		find pub -maxdepth 1 -type f -name 'w-*.png' | sort | while read -r img; do
-			# echo "<td><img width=400 src=\"$(basename "$img")\"></td>"
-			true
-		done
-		echo "</tr>"
-
-		for template in $(find pub/W -maxdepth 1 -type f -name '*.png' | xargs -n1 basename | sort); do
-			echo "<tr>"
-			echo "<td><img width=400 src=\"W/$template\"></img></td>"
-			for g in $(find pub -maxdepth 1 -type d -name 'w-*' | cut -d/ -f2 | sort); do
-				echo "<td><img width=400 src=\"$g/$g-$template\"></img></td>"
-			done
-			echo "</tr>"
-		done
-
-		echo "</table>"
-	) >pub/w.html
-
-	(
-		echo "<table>"
-
-		for template in $(find pub/W -maxdepth 1 -type f -name '*.png' | xargs -n1 basename | sort); do
-			echo "<tr><td>"
-			echo "<img width=400 src=\"W/$template\"></img>"
-			for g in $(find pub -maxdepth 1 -type d -name 'w-*' | cut -d/ -f2 | sort); do
-				echo "<img width=400 src=\"$g/$g-$template\"></img>"
-			done
-			echo "</td></tr>"
-		done
-
-		echo "</table>"
-	) >pub/h.html
-
-	echo generated html
-}
-
 function main {
-	time gen-html
-
 	# Generate gallery images if missing
 	find pub/W -maxdepth 1 -type f -name '*.png' | xargs -n1 basename | sort | while read -r a; do
 		export a
-		find pub -maxdepth 1 -type d -name 'w-*' | cut -d/ -f2 | sort | runmany 5 '
+		find pub/ -maxdepth 1 -type d -name 'w-*' | cut -d/ -f2 | sort | runmany 5 '
       b="${1%%/}"
       for n in 1 2 3; do
         if ! test -f pub/$b/$b-$a; then
@@ -96,8 +41,6 @@ function main {
       done
     '
 	done
-
-	gen-html
 }
 
 main "$@"
