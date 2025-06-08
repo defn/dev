@@ -1,7 +1,7 @@
 [tools]
 atlas = "0.34.0"
 "go:github.com/riverqueue/river/cmd/river" = "0.23.1"
-"ubi:riverqueue/riverui" = "0.10.0"
+"ubi:riverqueue/riverui" = "0.11.0"
 
 [env]
 DATABASE_URL = "postgresql://postgres@/postgres"
