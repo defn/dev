@@ -54,7 +54,7 @@ gallery prefix="replicate/":
 
 index file stage1 stage2:
     cat {{ file }} | jq -r '.url' | cut -d/ -f7 | cut -d. -f1 | sort > {{ file }}.all
-    cat {{ file }}.all | while read -r a; do if ! test -f "{{ stage1 }}/$a.jpeg"; then if ! test -f "{{ stage2 }}/$a.jpeg"; then echo "$a"; fi; fi; done | sort > {{ file }}.input
+    cat {{ file }}.all | while read -r a; do if test -s thumbs/$a.png; then if ! test -f "{{ stage1 }}/$a.jpeg"; then if ! test -f "{{ stage2 }}/$a.jpeg"; then echo "$a"; fi; fi; fi; done | sort > {{ file }}.input
 
 following:
     ls -ltrhd tmp/g/js-username-*/*/index.html | awk '{print $NF}' | while read -r a; do echo "<a href=\"$a\">$a</a><br>"; done > following.html.1
@@ -68,15 +68,14 @@ daily file="following.txt" n="8":
 daily-inner file n:
     just download-user {{ file }} {{ n }} || true
     just thumbs
-    just html {{ file }} || true
-    just following
+    #just html {{ file }} || true
+    #just following
 
 download-user file n="4":
     cat {{ file }} | runmany {{ n }} 'just user $1'
 
 html file="following.txt" n="40":
-    runmany 24 'go run . -s yes -c tmp/blur -d thumbs -o tmp/g/$1 -i <(cat $1 | sort)' js-username-*.input
-    cat {{ file }} | runmany {{ n }} 'just process js-username-$1.json.js.json || true'
+    cat {{ file }} | runmany {{ n }} 'just process js-username-$1.json.js.json || true; go run . -s yes -c tmp/blur -d thumbs -o tmp/g/js-username-$1.json.js.json.input -i <(cat js-username-$1.json.js.json.input | sort)'
 
 w-html:
     for a in $(cd pub/fm && ls -d w-??); do go run . -s no -d pub/fm/$a -c tmp/blur -o pub/w/$a -i <(cd pub/fm/$a && ls -d *.png | cut -d. -f1 | sort); done
