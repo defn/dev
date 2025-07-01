@@ -3,17 +3,17 @@ experimental = true
 
 [tools]
 ansible = "11.7.0"
-aws = "2.27.37"
+aws = "2.27.46"
 bat = "0.25.0"
 bazelisk = "1.26.0"
 chamber = "3.1.2"
 coder = "2.23.1"
-cue = "0.13.1"
+cue = "0.13.2"
 delta = "0.18.2"
 dive = "0.13.1"
 dyff = "1.10.1"
-fzf = "0.62.0"
-gh = "2.74.1"
+fzf = "0.63.0"
+gh = "2.74.2"
 glow = "2.1.1"
 go = "1.24.4"
 gron = "0.7.1"
@@ -22,12 +22,12 @@ just = "1.40.0"
 pipx = "1.7.1"
 python = "3.13.5"
 shfmt = "3.11.0"
-slsa-verifier = "2.7.0"
+slsa-verifier = "2.7.1"
 starship = "1.23.0"
-"ubi:buildkite/agent" = { version = "3.98.2", exe = "buildkite-agent" }
-"ubi:coder/code-server" = { version = "4.100.3", bin_path = "bin", extract_all = "true" }
+"ubi:buildkite/agent" = { version = "3.100.1", exe = "buildkite-agent" }
+"ubi:coder/code-server" = { version = "4.101.2", bin_path = "bin", extract_all = "true" }
 "ubi:honeycombio/buildevents" = "0.17.0"
 "ubi:peak/s5cmd" = "2.3.0"
-"ubi:stefanlogue/meteor" = "0.27.0"
+"ubi:stefanlogue/meteor" = "0.28.1"
 watchexec = "2.3.2"
 yq = "4.45.4"

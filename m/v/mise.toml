@@ -1,2 +1,2 @@
 [tools]
-bazel = "8.2.1"
+bazel = "8.3.0"
