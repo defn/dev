@@ -2,7 +2,7 @@
 "ubi:bazelbuild/buildtools" = { version = "8.2.1", exe = "buildifier" }
 helm = "3.18.3"
 kubectl = "1.33.2"
-kustomize = "5.6.0"
+kustomize = "5.7.0"
 "ubi:charmbracelet/freeze" = "0.2.2"
-"npm:@anthropic-ai/claude-code" = "1.0.41"
+"npm:@anthropic-ai/claude-code" = "1.0.43"
 node = "24.3.0"
