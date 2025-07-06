@@ -51,11 +51,11 @@ These methods assume the latest repo is used.
 
 At every start of a session update your tools with `make sync`. This also updates your home directory git repo.
 
-Daily run `make home` to update the base tools. These tools don't change often
+## Supported Environments
 
-If there's been a long period between your last session, do an end-to-end update:
+- macOS
+- Linux
 
-```
-git pull
-./install.sh
-```
+Only `$HOME` is supported as the repo root. Getting the repo to work in
+arbitrary directories is necessary to support Buildkite and devcontainers which
+separate the operating user from the project.
