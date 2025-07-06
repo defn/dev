@@ -121,7 +121,7 @@ function m {
 	if [[ $# -gt 0 ]]; then
 		mise run "$@"
 	else
-		mise task ls
+		mise run default
 	fi
 }
 
