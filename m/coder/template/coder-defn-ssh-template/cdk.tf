@@ -110,8 +110,19 @@ resource "null_resource" "deploy" {
   }
   count = data.coder_workspace.me.start_count
   provisioner "local-exec" {
-    command = "(echo cd; echo cd m; echo exec env GIT_AUTHOR_EMAIL=${data.coder_workspace_owner.me.email} GIT_AUTHOR_NAME=${data.coder_workspace_owner.me.name} GIT_COMMITTER_EMAIL=${data.coder_workspace_owner.me.email} GIT_COMMITTER_NAME=${data.coder_workspace_owner.me.name} CODER_AGENT_URL_ORIGINAL=${data.coder_workspace.me.access_url} CODER_AGENT_URL=${data.coder_parameter.remote.value == "" ? "http://127.0.0.1:3000" : data.coder_workspace.me.access_url} CODER_AGENT_TOKEN=${coder_agent.main.token} CODER_NAME=${data.coder_workspace.me.name} CODER_HOMEDIR=${data.coder_parameter.homedir.value} ./entrypoint.sh setup) | ${data.coder_parameter.remote.value} bash -x -"
+    command = "(echo cd; echo cd m; echo exec env GIT_AUTHOR_EMAIL=${data.coder_workspace_owner.me.email} GIT_AUTHOR_NAME=${data.coder_workspace_owner.me.name} GIT_COMMITTER_EMAIL=${data.coder_workspace_owner.me.email} GIT_COMMITTER_NAME=${data.coder_workspace_owner.me.name} CODER_AGENT_URL_ORIGINAL=${data.coder_workspace.me.access_url} CODER_AGENT_URL=${data.coder_parameter.remote.value == "" ? "http://127.0.0.1:3000" : data.coder_workspace.me.access_url} CODER_AGENT_TOKEN=${coder_agent.main.token} CODER_NAME=${data.coder_workspace.me.name} CODER_HOMEDIR=${data.coder_parameter.homedir.value} CODER_AGENT_DEVCONTAINERS_ENABLE=true ./entrypoint.sh setup) | ${data.coder_parameter.remote.value} bash -x -"
     when    = create
   }
 }
 
+module "devcontainers-cli" {
+  count    = data.coder_workspace.me.start_count
+  source   = "dev.registry.coder.com/modules/devcontainers-cli/coder"
+  agent_id = coder_agent.main.id
+}
+
+resource "coder_devcontainer" "m" {
+  count            = data.coder_workspace.me.start_count
+  agent_id         = coder_agent.main.id
+  workspace_folder = "/home/ubuntu/m/meh"
+}
