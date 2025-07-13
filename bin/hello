@@ -1,0 +1,16 @@
+#!/bin/bash
+# hello - A simple script that prints all arguments passed to it
+#
+# Usage: hello [arguments...]
+#
+# This script echoes back any arguments provided on the command line.
+# If no arguments are given, it prints an empty line.
+
+set -efu -o pipefail
+
+main() {
+	# Print all arguments passed to the script
+	echo "$@"
+}
+
+main "$@"
