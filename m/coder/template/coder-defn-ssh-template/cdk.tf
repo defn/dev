@@ -47,6 +47,11 @@ data "coder_parameter" "arch" {
   type         = "string"
 }
 
+data "coder_parameter" "ai_prompt" {
+    name = "AI Prompt"
+    type = "string"
+}
+
 resource "coder_agent" "main" {
   arch = data.coder_parameter.arch.value
   auth = "token"
@@ -55,6 +60,14 @@ resource "coder_agent" "main" {
     ssh_helper      = false
     vscode          = false
     vscode_insiders = false
+  }
+
+  env = {
+    CODER_MCP_CLAUDE_TASK_PROMPT   = data.coder_parameter.ai_prompt.value
+    CODER_MCP_APP_STATUS_SLUG      = "claude-code"
+    CODER_MCP_CLAUDE_SYSTEM_PROMPT = <<-EOT
+      Be terse.
+    EOT
   }
 }
 
@@ -131,4 +144,15 @@ resource "coder_devcontainer" "f" {
   count            = data.coder_workspace.me.start_count
   agent_id         = coder_agent.main.id
   workspace_folder = "/home/ubuntu/m/feh"
+}
+
+module "claude-code" {
+  count               = data.coder_workspace.me.start_count
+  source              = "registry.coder.com/coder/claude-code/coder"
+  version             = "2.0.2"
+  agent_id            = coder_agent.main.id
+  folder              = "/home/ubuntu"
+  install_claude_code = false
+
+  experiment_report_tasks = true
 }
