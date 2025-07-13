@@ -1,4 +1,10 @@
 #!/usr/bin/env bash
+# with-env - Execute commands with bash profile environment
+#
+# Usage: with-env [command] [args...]
+#
+# Sources ~/.bash_profile to load environment variables and aliases,
+# then executes the specified command with all arguments.
 
 source ~/.bash_profile
 exec "$@"

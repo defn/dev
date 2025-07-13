@@ -1,4 +1,11 @@
 #!/usr/bin/env bash
+# mark - Display styled text using gum or echo as fallback
+#
+# Usage: mark [text...]
+#
+# This script displays text with styling using the gum tool if available.
+# If gum is not installed, it falls back to plain echo output.
+# All arguments are combined into a single message and displayed.
 
 gm="$(type -P gum)"
 if [[ -x ${gm} ]]; then

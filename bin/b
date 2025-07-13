@@ -1,4 +1,20 @@
 #!/usr/bin/env bash
+# b - Interactive Bazel wrapper with fuzzy search support
+#
+# Usage: b [command] [arguments...]
+#
+# Commands:
+#   (no args)    - List all Bazel targets in current directory
+#   build [rule] - Build specified rule or fuzzy search for one
+#   test [rule]  - Run tests for specified rule or fuzzy search
+#   outputs      - Show output files for a rule
+#   in [rule]    - Show input files for a rule
+#   out [rule]   - Show output files for a rule
+#   cat [rule]   - Display contents of a rule's output
+#   run [rule]   - Run a binary rule
+#   pass <cmd>   - Pass through any Bazel command
+#
+# Rules can be specified as absolute (//path:target) or searched with fzf.
 
 source ~/.bash_profile
 

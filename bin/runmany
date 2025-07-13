@@ -1,4 +1,15 @@
 #!/usr/bin/env bash
+# runmany - Run commands in parallel with xargs
+#
+# Usage: runmany [procs] [args_per_proc] command [args...] [-- command_args]
+#        echo items | runmany [procs] [args_per_proc] command
+#
+# Options:
+#   procs         - Number of parallel processes (default: 1)
+#   args_per_proc - Number of arguments per process (default: 1)
+#
+# Reads items from arguments or stdin and executes command in parallel.
+# Arguments after -- are passed directly to the command.
 
 function main {
 	local cnt_proc="1"

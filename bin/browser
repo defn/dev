@@ -1,4 +1,11 @@
 #!/usr/bin/env bash
+# browser - Cross-platform web browser launcher
+#
+# Usage: browser [url]
+#
+# Opens a URL in the default web browser. Detects and uses the appropriate
+# browser command based on the environment (VSCode, code-server, or native).
+# Prevents recursive calls by tracking invocation state.
 
 if [[ -n ${_BROWSER-} ]]; then
 	echo "ERROR: browser already called: ${_BROWSER}" 1>&2

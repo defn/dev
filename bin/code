@@ -1,4 +1,11 @@
 #!/usr/bin/env bash
+# code - VSCode/code-server launcher wrapper
+#
+# Usage: code [options] [path]
+#
+# Launches VSCode or code-server depending on the environment.
+# Automatically detects and uses the appropriate executable based
+# on VSCODE_GIT_ASKPASS_MAIN environment variable.
 
 function main {
 	case "${VSCODE_GIT_ASKPASS_MAIN-}" in

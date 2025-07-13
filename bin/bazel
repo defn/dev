@@ -1,3 +1,9 @@
 #!/usr/bin/env bash
+# bazel - Wrapper script that executes bazelisk
+#
+# Usage: bazel [command] [args...]
+#
+# This script delegates all commands to bazelisk, which automatically
+# downloads and manages the appropriate Bazel version for your project.
 
 exec bazelisk "$@"

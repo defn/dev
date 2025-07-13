@@ -1,4 +1,13 @@
 #!/usr/bin/env bash
+# t - Tracing wrapper for commands with Honeycomb integration
+#
+# Usage: t [command] [args...]
+#        t start <name> <command> [args...] - Start new trace
+#        t build <trace_id> <status> <start> - Complete build trace
+#
+# Wraps commands with distributed tracing support using buildevents.
+# Automatically handles trace IDs and parent IDs from HONEYCOMB_TRACE.
+# Falls back to plain execution if buildevents is not available.
 
 set -efu
 

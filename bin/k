@@ -1,4 +1,12 @@
 #!/usr/bin/env bash
+# k - kubectl wrapper with config profile support
+#
+# Usage: k [profile] [command] [args...]
+#        k [profile] x [command] - Execute command with profile's kubeconfig
+#
+# If profile exists as ~/.kube/config.<profile>, uses that config.
+# Otherwise passes all arguments directly to kubectl.
+# Use 'x' after profile to execute arbitrary commands with that kubeconfig.
 
 function main {
 	if test -r "${HOME}/.kube/config.${1-}"; then

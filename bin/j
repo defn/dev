@@ -1,4 +1,12 @@
 #!/usr/bin/env bash
+# j - Just command runner wrapper with interactive selection
+#
+# Usage: j [command] [args...]
+#        j /        - Interactive command selection with chooser
+#        j          - List available commands
+#
+# A wrapper for the Just command runner that provides interactive
+# command selection and enables unstable features.
 
 export JUST_UNSTABLE=1
 
