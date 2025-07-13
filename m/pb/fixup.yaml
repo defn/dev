@@ -90,6 +90,8 @@
       loop:
         - cue
         - go
+        - claude
+        - node
       changed_when: false
     - name: Make /usr/local/bin
       become: true
