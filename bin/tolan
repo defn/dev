@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+# tolan - A simple argument printer
+# Usage: tolan [arg1] [arg2] ... [argN]
+# Description: Prints each argument passed to the script on a separate line
+# Example: tolan foo bar "hello world"
+# Output:
+#   foo
+#   bar
+#   hello world
+
+set -efu -o pipefail
+
+tolan() {
+	# Print each argument on its own line
+	for arg in "$@"; do
+		echo "$arg"
+	done
+}
+
+# Only run if script is executed directly (not sourced)
+if [[ ${BASH_SOURCE[0]} == "${0}" ]]; then
+	tolan "$@"
+fi
