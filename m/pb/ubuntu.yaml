@@ -1,4 +1,13 @@
 ---
+# ubuntu.yaml - Comprehensive Ubuntu/Debian system setup playbook
+# Purpose: Sets up a complete development environment on Ubuntu/Debian systems
+# Usage: ansible-playbook ubuntu.yaml -i inventory
+# Dependencies: Ubuntu or Debian OS, sudo privileges
+# Features:
+#   - Disables automatic updates
+#   - Installs development packages (build tools, git, docker, etc.)
+#   - Configures Docker and user permissions
+#   - Sets up passwordless sudo for ubuntu user
 - name: Ubuntu setup
   hosts: all
   tasks:

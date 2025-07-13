@@ -1,4 +1,15 @@
 ---
+# fixup.yaml - Ansible playbook for system configuration fixes and setup
+# Purpose: Fixes various system configurations, permissions, and tool integrations
+# Usage: ansible-playbook fixup.yaml -i inventory
+# Dependencies: Requires mise tool manager and development tools
+# Variables:
+#   - user_id: User ID (default: 1000)
+#   - group_id: Group ID (default: 100)
+#   - username: Username derived from user_id
+#   - groupname: Group name derived from user_id
+#   - home_dir: User home directory
+#   - docker_config_dir: Docker configuration directory
 - name: Setup Docker and SSH configs
   hosts: all
   vars:

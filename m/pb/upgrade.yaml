@@ -1,3 +1,13 @@
+---
+# upgrade.yaml - System package upgrade and maintenance playbook
+# Purpose: Updates and upgrades all apt packages with error handling and cleanup
+# Usage: ansible-playbook upgrade.yaml -i inventory
+# Dependencies: Ubuntu or Debian OS, sudo privileges
+# Features:
+#   - Fixes broken dpkg configurations
+#   - Updates package cache and upgrades all packages
+#   - Removes unnecessary packages (autoremove)
+#   - Includes retry logic for reliability
 - name: Upgrade all packages
   hosts: all
   become: true

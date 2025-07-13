@@ -1,4 +1,12 @@
 ---
+# s6.yaml - Generic Ansible playbook for s6 service supervision setup
+# Purpose: Configures services using s6 supervision with AWS Parameter Store integration
+# Usage: ansible-playbook s6.yaml -i inventory -e "server_name=hostname service_name=myservice"
+# Dependencies: Requires s6, AWS CLI, mise tool, and proper AWS credentials
+# Variables:
+#   - server_name: Target server hostname (required)
+#   - service_name: Name of the service to configure (required)
+# AWS Parameter Store Path: /server/{server_name}/svc/{service_name}/
 - name: Configure {{ service_name }} service
   hosts: all
   gather_facts: no

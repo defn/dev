@@ -1,4 +1,13 @@
 ---
+# cache.yaml - Ansible playbook for persisting development tool cache directories
+# Purpose: Creates symlinks from standard cache locations to a centralized work directory
+# This ensures cache data persists across container restarts and workspace rebuilds
+# Usage: ansible-playbook cache.yaml -i inventory
+# Dependencies: None
+# Variables:
+#   - data_dir: Base directory for persistent storage (default: ~/work)
+#   - home: User home directory
+#   - persist_links: List of src/dest pairs for symlinks
 - name: Persist cache directories
   vars:
     data_dir: "{{ lookup('env', 'HOME') }}/work"

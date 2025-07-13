@@ -1,4 +1,9 @@
 ---
+# hello.yaml - Simple Ansible test playbook
+# Purpose: Basic connectivity and system information test
+# Usage: ansible-playbook hello.yaml -i inventory
+# Dependencies: None
+# Output: Displays system information via uname -a
 - name: Hello
   hosts: all
   tasks:

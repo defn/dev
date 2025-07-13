@@ -1,4 +1,11 @@
 ---
+# coder.yaml - Ansible playbook for setting up Coder services
+# Purpose: Configures both coder-tunnel and coder-server services using s6 supervision
+# Usage: ansible-playbook coder.yaml -i inventory
+# Dependencies: Requires s6.yaml playbook and s6 supervision system
+# Variables:
+#   - inventory_hostname: Target server name from inventory
+#   - service_name: Set automatically (coder-tunnel or coder-server)
 - name: Setup coder-tunnel
   import_playbook: s6.yaml
   vars:
