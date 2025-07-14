@@ -59,3 +59,52 @@ At every start of a session update your tools with `make sync`. This also update
 Only `$HOME` is supported as the repo root. Getting the repo to work in
 arbitrary directories is necessary to support Buildkite and devcontainers which
 separate the operating user from the project.
+
+---
+
+## Repository Structure
+
+### Core Directories
+- **bin/** - Executable scripts and utilities
+- **m/** - Main project workspace with build system and applications
+- **.buildkite/** - CI/CD pipeline configuration
+- **.github/** - GitHub workflows and repository configuration
+- **docs/** - Project documentation
+
+### Configuration Files
+- **Makefile** - Project automation and system setup
+- **Justfile** - Just command runner recipes
+- **mise.toml** - Tool version management
+- **.devcontainer.json** - Development container configuration
+- **.gitignore** - Git ignore rules
+- **.env.example** - Environment variables template
+
+### Shell Configuration
+- **.bash_profile** - Bash profile configuration
+- **.bashrc** - Bash runtime configuration
+- **.bashrc_path** - PATH configuration
+- **.bash_entrypoint** - Container entrypoint script
+- **.vimrc** - Vim editor configuration
+
+### Development Tools
+- **Brewfile** - Homebrew package definitions
+- **.npmrc** - NPM configuration
+- **.dockerignore** - Docker ignore rules
+- **.earthlyignore** - Earthly ignore rules
+- **.gitconfig.default** - Default Git configuration
+
+### System Configuration
+- **.ansible.cfg** - Ansible configuration
+- **.direnvrc** - Direnv configuration
+- **.direnvlib** - Direnv library functions
+- **.gnupg2** - GPG configuration symlink
+- **.password-store** - Password store symlink
+- **.vscode** - VS Code configuration symlink
+
+### Project Metadata
+- **CHANGELOG.md** - Project changelog
+- **CONTRIBUTING.md** - Contribution guidelines
+- **LICENSE** - Project license
+- **SECURITY.md** - Security policy
+- **version.txt** - Version information
+- **release-please-config.json** - Release automation configuration
