@@ -1,8 +1,12 @@
+# Install dependencies and build infrastructure
 default:
 	mise install
 	mise exec -- npm install
 	mise exec -- $(MAKE) build
 
+# Build infrastructure by validating CUE config, building CLI, and synthesizing Terraform
+# Dependencies: cue command, ../cmd directory with build target, b binary, node_modules/.bin/cdktf, runmany script, perl command, git command, terraform command, trunk command, tf/mod directory
+# Outputs: Validated CUE configuration, built CLI binary, synthesized Terraform HCL files in cdktf.out/stacks, processed Terraform files with perl transformations, added files to git staging, formatted Terraform files, formatted with trunk, created mod symlinks, restored lock files, staged final changes
 build:
 	cue eval -c >/dev/null
 	cd ../cmd && b build
@@ -31,5 +35,8 @@ build:
 # final add
 	git add -u .
 
+# Upgrade Terraform providers and update lock files for all stacks
+# Dependencies: runmany script, tf command, cdktf.out/stacks/*/ directories
+# Outputs: Upgraded Terraform providers and updated lock files for all stack directories
 upgrade:
 	runmany 'cd $$1 && tf upgrade && tf locks' cdktf.out/stacks/*/

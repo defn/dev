@@ -1,8 +1,10 @@
 SHELL := /bin/bash
 
+# Build the project using Bazel
 build:
 	b build
 
+# Post-process Bazel build artifacts by copying Nix dependencies and installing the binary
 post-bazel:
 	if test -f $(build); then \
 		mkdir -p store; \
@@ -10,14 +12,17 @@ post-bazel:
 		install -v -m 0755 -o ubuntu -g ubuntu $(build) $(release); \
 	fi
 
+# Build and watch for changes
 watch:
 	b build
 	b watch
 
+# Build and push Docker image using Earthly
 image:
 	env -u SSH_AUTH_SOCK earthly --push --no-output +build --image=$$EXPECTED_REF
 	docker pull $$EXPECTED_REF
 
+# Generate Helm chart templates from CUE configuration
 .PHONY: chart
 chart:
 	mkdir -p chart/templates
