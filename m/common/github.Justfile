@@ -1,9 +1,15 @@
 # Wrapper for git diff that runs dyff
+# Description: Enhances git diff to use dyff for YAML/JSON file comparison
+# Dependencies: git, just, dyff (for YAML/JSON files)
+# Outputs: Standard git diff or enhanced dyff output for structured files
 [no-cd]
 diff *args:
 	env GIT_EXTERNAL_DIFF="pwd 1>&2; just dyff" git diff {{args}}
 
 # Internal dyff, called by git diff
+# Description: Compares YAML/JSON files with structured diff output
+# Dependencies: dyff
+# Outputs: Colored structured diff for YAML/JSON files, nothing for other files
 [no-cd, private]
 dyff +args:
 	#!/usr/bin/env bash
@@ -28,6 +34,9 @@ dyff +args:
 	esac
 
 # Get GitHub token from git credential helper
+# Description: Retrieves GitHub authentication token from git credential store
+# Dependencies: git with configured credential helper
+# Outputs: GitHub token to stdout
 [no-cd]
 token:
 	#!/usr/bin/env bash

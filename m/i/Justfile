@@ -1,3 +1,7 @@
+# Build and push Docker images for multiple platforms
+# Description: Builds multi-platform Docker images and pushes to GitHub Container Registry
+# Dependencies: docker, git, buildkit, qemu, buildkite env vars, just
+# Outputs: Multi-platform Docker images pushed to ghcr.io/defn/dev
 latest platforms="amd64 arm64":
 	#!/usr/bin/env bash
 	set -efu -o pipefail

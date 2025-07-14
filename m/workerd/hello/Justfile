@@ -1,8 +1,16 @@
+# Build the workerd application
+# Description: Installs worker-build, compiles worker, and creates executable
+# Dependencies: cargo, worker-build, workerd, config.capnp
+# Outputs: Executable 'hello' file from compiled workerd config
 build:
     PATH=$PATH:$HOME/.cargo/bin cargo install worker-build
     PATH=$PATH:$HOME/.cargo/bin worker-build --release 
     workerd compile config.capnp > hello
     chmod 755 hello
 
+# Start the workerd server
+# Description: Runs the compiled workerd application
+# Dependencies: Built 'hello' executable
+# Outputs: Running workerd server
 serve:
     ./hello

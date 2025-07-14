@@ -1,6 +1,9 @@
 # This is a Justfile
 
 # test is a just target.  Run it with `just test`
+# Description: Validates and formats CUE configuration files
+# Dependencies: cue CLI tool
+# Outputs: Evaluated CUE output and formatted .cue files
 test:
     # test target runs these commands
     cue eval

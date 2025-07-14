@@ -1,3 +1,7 @@
+# Game module with imports
+# Description: Imports game recipes and parent Justfile
+# Dependencies: game.Justfile, ../Justfile
+# Outputs: Combined recipes from game module and parent
 mod game 'game.Justfile'
 
 import '../Justfile'

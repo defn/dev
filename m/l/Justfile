@@ -1,8 +1,14 @@
 # Run tilt to start servers and builds
+# Description: Starts Tilt to manage development environment
+# Dependencies: tilt
+# Outputs: Running development environment with live reload
 up:
     tilt up
 
 # Build the software
+# Description: Builds software and formats tutorial HTML
+# Dependencies: bazel (b), chmod, trunk
+# Outputs: Built software, copied and formatted tutorial.html
 build:
     b build
     b run tutorial_html__copy
@@ -10,16 +16,25 @@ build:
     trunk fmt tutorial.html
 
 # Run a python web service
+# Description: Creates venv and runs Python web server
+# Dependencies: python, pip, requirements.txt, main.py
+# Outputs: Running Python web service
 server:
     python -m venv venv
     venv/bin/pip install -r requirements.txt
     venv/bin/python main.py
 
 # Run a check script
+# Description: No-op check that always passes
+# Dependencies: none
+# Outputs: Always exits successfully
 check:
     true
 
-# Make a lesson cutout from 0002 template 
+# Make a lesson cutout from 0002 template
+# Description: Creates new lesson from cookiecutter template with unique ports
+# Dependencies: cookiecutter, git, grep, perl, seq, sort, uniq, awk
+# Outputs: New lesson directory with unique server and tilt ports
 cutout name:
     cookiecutter -f 0002 --no-input project_name={{ name }} path={{ name }} \
         server_port="$( cd ./$(git rev-parse --show-cdup)/m; (git ls-files | grep /main.py | xargs git grep port=5     -- | perl -pe 's{.*?port=}{}; s{\)}{}';      seq 5000 5999)   | sort | uniq -c | grep ' 1 ' | awk '{print $2}' | head -1)" \

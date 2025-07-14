@@ -1,8 +1,14 @@
 # Run tilt to start servers and builds
+# Description: Starts Tilt to manage development environment
+# Dependencies: tilt
+# Outputs: Running development environment with live reload
 up:
     tilt up
 
 # Build the software
+# Description: Builds software and formats tutorial HTML
+# Dependencies: bazel (b), chmod, trunk
+# Outputs: Built software, copied and formatted tutorial.html
 build:
     b build
     b run tutorial_html__copy
@@ -10,12 +16,18 @@ build:
     trunk fmt tutorial.html
 
 # Run a python web service
+# Description: Creates venv and runs Python web server
+# Dependencies: python, pip, requirements.txt, main.py
+# Outputs: Running Python web service
 server:
     python -m venv venv
     venv/bin/pip install -r requirements.txt
     venv/bin/python main.py
 
 # Run a check script
+# Description: Checks LVM filesystem usage and free space
+# Dependencies: df, sudo, vgdisplay, grep
+# Outputs: LVM filesystem usage and free volume group space
 check:
     echo File-systems using LVM:
     echo

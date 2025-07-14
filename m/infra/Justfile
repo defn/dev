@@ -1,5 +1,9 @@
 import "../Justfile"
 
+# Upgrade Terraform providers in all stacks
+# Description: Updates Terraform providers in infrastructure stacks
+# Dependencies: terraform (tf), bash
+# Outputs: Updated .terraform.lock.hcl files in all stacks
 upgrade: 
     #!/usr/bin/env bash
 
@@ -13,11 +17,19 @@ upgrade:
 
     runmany 'cd $1 && tf upgrade' stacks/coder*/ stacks/global
 
+# Sync Terraform lock files across stacks
+# Description: Copies lock files from chamber stacks to other stacks
+# Dependencies: bash, runmany
+# Outputs: Synchronized .terraform.lock.hcl files across stacks
 sync:
     #!/usr/bin/env bash
 
     runmany 'cp -v stacks/acc-chamber-1/.terraform.lock.hcl $1 || true' stacks/acc-*/
     runmany 'cp -v stacks/org-chamber/.terraform.lock.hcl $1 || true' stacks/org-*/
 
+# Show summary of staged changes
+# Description: Shows count of additions/deletions in staged changes
+# Dependencies: git, egrep, sort, uniq
+# Outputs: Summary count of added/removed lines by pattern
 diff:
     @git diff --cached . | egrep '^[+-]' | egrep -v '^[+-]{,3} [ab]/' | sort | uniq -c

@@ -1,9 +1,15 @@
 # Lock gpg-agent
+# Description: Reloads gpg-agent, effectively locking it and clearing cached passphrases
+# Dependencies: gpg-connect-agent
+# Outputs: Clears gpg-agent cache
 [no-cd]
 lock:
 	@gpg-connect-agent reloadagent /bye
 
 # Reverse-proxy gpg-agent from home
+# Description: Sets up GPG agent forwarding from home machine via SSH tunnel
+# Dependencies: ssh, coder (if in Coder env), pass, gpg, dirmngr
+# Outputs: Establishes GPG agent socket forwarding and validates with pass hello
 [no-cd]
 agent *args:
 	#!/usr/bin/env bash
@@ -50,6 +56,9 @@ agent *args:
 	fi
 
 # Forward gpg-agent socket to remote host
+# Description: Forwards local GPG agent socket to a remote host via SSH
+# Dependencies: ssh, gpg-agent running locally
+# Outputs: Creates GPG agent socket on remote host at /tmp/S.gpg-agent.{timestamp}
 forward remote *args:
 	#!/usr/bin/env bash
 	set -exfuo pipefail

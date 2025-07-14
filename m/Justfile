@@ -6,18 +6,30 @@ mod aws 'common/aws.Justfile'
 mod lib 'common/lib.Justfile'
 
 # Run a playbook
+# Description: Executes an Ansible playbook with optional host limitation
+# Dependencies: just, playbook module
+# Outputs: Ansible playbook execution results
 play pb *lim:
 	just playbook::playbook {{pb}} {{lim}}
 
 # Run a command
+# Description: Executes a command on hosts matching a pattern
+# Dependencies: just, playbook module
+# Outputs: Command execution results on matched hosts
 command pattern *args:
 	just playbook::command {{pattern}} {{args}}
 
 # Use this workspace
+# Description: Switches to or creates a Coder workspace
+# Dependencies: just, coder module
+# Outputs: Active workspace changed to specified name
 [no-cd]
 use *name:
 	just coder::use {{name}}
 
 # Do nothing for Joyride
+# Description: No-op recipe for Joyride compatibility
+# Dependencies: none
+# Outputs: none (always succeeds)
 up:
 	@true

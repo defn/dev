@@ -1,4 +1,7 @@
 # Push workspace template to Coder
+# Description: Packages and pushes a Coder template to the server, then sets default TTL
+# Dependencies: coder CLI, tar command, valid template directory
+# Outputs: Updates template in Coder server with 1 hour default TTL
 [no-cd]
 push template:
 	#!/usr/bin/env bash

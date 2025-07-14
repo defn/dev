@@ -1,20 +1,48 @@
+# Show status of Fly machines
+# Description: Lists all machines in the current Fly app
+# Dependencies: mise, fly CLI
+# Outputs: List of Fly machines with their status
 status:
     mise exec -- fly machine list
 
+# Build Docker image without deploying
+# Description: Builds the Docker image for the Fly app without deployment
+# Dependencies: mise, fly CLI, Dockerfile
+# Outputs: Built Docker image pushed to Fly registry
 build:
     mise exec -- fly deploy --build-only
 
+# Deploy application to Fly.io
+# Description: Builds and deploys the application to Fly.io
+# Dependencies: mise, fly CLI, Dockerfile, fly.toml
+# Outputs: Deployed application on Fly.io
 deploy:
     mise exec -- fly deploy
 
+# Stop all Fly machines
+# Description: Stops all running machines in the Fly app
+# Dependencies: mise, fly CLI, jq
+# Outputs: All machines stopped
 stop:
     mise exec -- fly machine stop $(fly machine list --json | jq -r '.[].id')
 
+# Start all Fly machines
+# Description: Starts all stopped machines in the Fly app
+# Dependencies: mise, fly CLI, jq
+# Outputs: All machines started
 start:
     mise exec -- fly machine start $(fly machine list --json | jq -r '.[].id')
 
+# Restart all Fly machines
+# Description: Restarts all machines in the Fly app
+# Dependencies: mise, fly CLI, jq
+# Outputs: All machines restarted
 restart:
     mise exec -- fly machine restart $(fly machine list --json | jq -r '.[].id')
 
+# Stream application logs
+# Description: Streams real-time logs from the Fly app (app name based on current directory)
+# Dependencies: fly CLI
+# Outputs: Streaming logs from the application
 logs:
     fly logs -a "$(basename $(pwd))"

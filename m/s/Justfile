@@ -1,10 +1,22 @@
+# Run tilt to start development environment
+# Description: Starts Tilt for development with live reload
+# Dependencies: tilt
+# Outputs: Running development environment
 up:
     tilt up
 
+# Start development server
+# Description: Installs dependencies and starts dev server in remote mode
+# Dependencies: npm, package.json
+# Outputs: Running development server without opening browser
 server:
     npm install
     npm run dev -- --remote --open=false
 
+# Build the application
+# Description: Builds application and formats tutorial HTML
+# Dependencies: bazel (b), chmod, trunk
+# Outputs: Built application, copied and formatted tutorial.html
 build:
     b build
     b run tutorial.html__copy
