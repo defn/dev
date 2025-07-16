@@ -66,18 +66,23 @@ When asked to "run mise upgrade task" or similar, follow these steps:
 
 1. Run `make mise-list` in $HOME directory
 2. Check if the output contains only mise commands (ignore any error messages like "Failed to connect to bus")
-3. Execute each mise command shown (e.g., `mise use aws@2.27.52`, `mise use --cd ~/m node@24.4.1`)
-4. Stage and commit the changed mise.toml files:
+3. Note the current versions before executing the upgrade commands (check git diff or mise list)
+4. Execute each mise command shown (e.g., `mise use aws@2.27.52`, `mise use --cd ~/m node@24.4.1`)
+5. Stage and commit the changed mise.toml files:
 
    ```bash
-   git add .config/mise/config.toml m/mise.toml
+   git add .config/mise/config.toml m/mise.toml m/w/mise.toml
    git commit -m "chore: upgrade mise tool versions
 
-   - [list upgraded tools and versions]
+   - ansible: 11.7.0 → 11.8.0
+   - just: 1.42.1 → 1.42.2
+   - npm:wrangler: 4.24.3 → 4.24.4
 
    🤖 Generated with [Claude Code](https://claude.ai/code)
 
    Co-Authored-By: Claude <noreply@anthropic.com>"
    ```
+
+   **Important**: Include the version changes (from → to) in the commit message for each upgraded tool.
 
 This task updates tool versions managed by mise across the repository.
