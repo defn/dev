@@ -60,6 +60,8 @@ This is a Bazel-based monorepo for cloud integrated development environments. Ke
 
 ## Common Tasks
 
+**Note**: When the user mentions "task" without qualification, it refers only to tasks documented in this CLAUDE.md file. For tasks defined in other tools (e.g., mise tasks, just recipes), the word "task" must be qualified, such as "mise task" or "just task".
+
 ### Task: mise upgrade
 
 When asked to "run mise upgrade task" or similar, follow these steps:
