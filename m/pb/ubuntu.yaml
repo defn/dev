@@ -59,6 +59,7 @@
           - git-lfs
           - gpg
           - gpg-agent
+          - htop
           - ifupdown
           - iproute2
           - iptables
