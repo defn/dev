@@ -36,6 +36,14 @@ This is a Bazel-based monorepo for cloud integrated development environments. Ke
 
 ## Important Directives
 
+- **Always check for upstream changes before executing any task**:
+  1. Check if upstream git is newer than local with `git fetch` and `git status`
+  2. If upstream is newer, ask user if they want to `git pull` first
+  3. If user agrees to pull, run `git pull` then re-read CLAUDE.md
+  4. Report any differences in instructions so user can review updated instructions
+  5. Only proceed with task execution after user agrees to updated instructions
+  6. If no upstream changes or instruction changes, proceed directly with task execution
+  7. This prevents running stale tasks or new tasks without instruction review
 - **Always use conventional commits** when committing changes (e.g., `feat:`, `fix:`, `docs:`, `chore:`, `refactor:`, `test:`)
 - **Run `trunk fmt` after making file changes** to ensure proper formatting. This can be run after a series of edits to batch the formatting for efficiency
 - **NEVER add secrets to the git repository**. If you encounter any text that looks like a password, token, API key, or other sensitive information:
