@@ -1,5 +1,9 @@
 command_timeout = 100000
 
+# Disable D-Bus integration to prevent "Failed to connect to bus" errors
+[env_var.DBUS_SESSION_BUS_ADDRESS]
+disabled = true
+
 [battery]
 
 disabled = true
