@@ -34,6 +34,11 @@ This is a Bazel-based monorepo for cloud integrated development environments. Ke
 4. Build with Bazel: `b build //...`
 5. Update BUILD files after adding deps: `make regen`
 
+## Important Directives
+
+- **Always use conventional commits** when committing changes (e.g., `feat:`, `fix:`, `docs:`, `chore:`, `refactor:`, `test:`)
+- **Run `trunk fmt` after making file changes** to ensure proper formatting. This can be run after a series of edits to batch the formatting for efficiency
+
 ## Infrastructure Commands
 
 - **Start local k3s cluster**: `make up`
@@ -58,6 +63,7 @@ When asked to "run mise upgrade task" or similar, follow these steps:
 2. Check if the output contains only mise commands (ignore any error messages like "Failed to connect to bus")
 3. Execute each mise command shown (e.g., `mise use aws@2.27.52`, `mise use --cd ~/m node@24.4.1`)
 4. Stage and commit the changed mise.toml files:
+
    ```bash
    git add .config/mise/config.toml m/mise.toml
    git commit -m "chore: upgrade mise tool versions
