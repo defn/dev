@@ -55,6 +55,11 @@ macos:
 	ifconfig lo0
 	defaults write -g ApplePressAndHoldEnabled -bool false
 
+dummy:
+	$(MARK) dummy
+	ip addr add 169.254.32.1/32 dev lo
+	ip addr show dev
+
 # Clone and bootstrap user dotfiles from GitHub repository
 # Dependencies: mark binary, GIT_AUTHOR_NAME environment variable, git command, t binary, internet connection
 # Outputs: Mark log entry, removed ~/.dotfiles directory, created ~/dotfiles directory, cloned/updated dotfiles repository, executed bootstrap script
