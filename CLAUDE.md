@@ -114,3 +114,14 @@ When asked to "run go upgrade task" or similar, follow these steps:
    **Important**: Only include direct dependency changes in the commit message, not indirect ones.
 
 This task updates Go module dependencies and ensures they compile correctly with Bazel.
+
+### Task: upgrade
+
+When asked to "run upgrade task" or similar, follow these steps:
+
+1. Run `make sync` in $HOME directory
+2. This command installs/updates system tools and configurations based on what's already in git
+3. No files should be modified in the home directory
+4. No commit is needed as this task is run purely for its side effects
+
+**Note**: This task updates the local system environment to match the configuration stored in git. It ensures all tools, configurations, and system settings are properly synchronized.
