@@ -38,6 +38,11 @@ This is a Bazel-based monorepo for cloud integrated development environments. Ke
 
 - **Always use conventional commits** when committing changes (e.g., `feat:`, `fix:`, `docs:`, `chore:`, `refactor:`, `test:`)
 - **Run `trunk fmt` after making file changes** to ensure proper formatting. This can be run after a series of edits to batch the formatting for efficiency
+- **NEVER add secrets to the git repository**. If you encounter any text that looks like a password, token, API key, or other sensitive information:
+  - Immediately warn the user about the potential secret
+  - Stop any git add/commit operations
+  - Wait for the user to decide on further actions
+  - Do not proceed with any commits until the user confirms it's safe
 
 ## Infrastructure Commands
 
