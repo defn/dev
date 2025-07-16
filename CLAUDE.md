@@ -47,3 +47,26 @@ This is a Bazel-based monorepo for cloud integrated development environments. Ke
 - `.buildkite/`: CI pipeline configurations
 - `bin/`: Executable scripts and utilities
 - `docs/`: Project documentation
+
+## Common Tasks
+
+### Task: mise upgrade
+
+When asked to "run mise upgrade task" or similar, follow these steps:
+
+1. Run `make mise-list` in $HOME directory
+2. Check if the output contains only mise commands (ignore any error messages like "Failed to connect to bus")
+3. Execute each mise command shown (e.g., `mise use aws@2.27.52`, `mise use --cd ~/m node@24.4.1`)
+4. Stage and commit the changed mise.toml files:
+   ```bash
+   git add .config/mise/config.toml m/mise.toml
+   git commit -m "chore: upgrade mise tool versions
+
+   - [list upgraded tools and versions]
+
+   🤖 Generated with [Claude Code](https://claude.ai/code)
+
+   Co-Authored-By: Claude <noreply@anthropic.com>"
+   ```
+
+This task updates tool versions managed by mise across the repository.
