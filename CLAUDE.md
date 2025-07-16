@@ -86,3 +86,31 @@ When asked to "run mise upgrade task" or similar, follow these steps:
    **Important**: Include the version changes (from → to) in the commit message for each upgraded tool.
 
 This task updates tool versions managed by mise across the repository.
+
+### Task: go upgrade
+
+When asked to "run go upgrade task" or similar, follow these steps:
+
+1. Change directory to m: `cd m`
+2. Run `make upgrade` to upgrade Go dependencies
+3. Examine changes to `go.mod` and `go.sum` files
+4. Summarize **only direct dependencies** changes from go.mod (ignore indirect dependencies marked with `// indirect`)
+5. Test if changes compile: run `b build` in the m directory
+6. If build succeeds, stage and commit the changes:
+
+   ```bash
+   git add go.mod go.sum
+   git commit -m "chore: upgrade Go dependencies
+
+   - github.com/example/package: v1.2.3 → v1.2.4
+   - github.com/another/lib: v2.0.0 → v2.1.0
+   [list only direct dependency changes]
+
+   🤖 Generated with [Claude Code](https://claude.ai/code)
+
+   Co-Authored-By: Claude <noreply@anthropic.com>"
+   ```
+
+   **Important**: Only include direct dependency changes in the commit message, not indirect ones.
+
+This task updates Go module dependencies and ensures they compile correctly with Bazel.
