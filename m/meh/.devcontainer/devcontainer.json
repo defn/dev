@@ -21,6 +21,10 @@
       "auth": "none"
     }
   },
+  "mounts": [
+    "source=/home/ubuntu,target=/home/node,type=bind",
+    "source=/home/ubuntu,target=/home/ubuntu,type=bind"
+  ],
   "remoteUser": "node",
   "updateContentCommand": "npm install -g @devcontainers/cli"
 }
