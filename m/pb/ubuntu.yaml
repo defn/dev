@@ -63,6 +63,7 @@
           - ifupdown
           - iproute2
           - iptables
+          - iputils-ping
           - locales
           - lsb-release
           - make
