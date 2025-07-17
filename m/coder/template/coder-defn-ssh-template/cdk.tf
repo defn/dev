@@ -140,12 +140,6 @@ resource "coder_devcontainer" "m" {
   workspace_folder = "/home/ubuntu/m/meh"
 }
 
-resource "coder_devcontainer" "f" {
-  count            = data.coder_workspace.me.start_count
-  agent_id         = coder_agent.main.id
-  workspace_folder = "/home/ubuntu/m/feh"
-}
-
 module "claude-code" {
   count               = data.coder_workspace.me.start_count
   source              = "registry.coder.com/coder/claude-code/coder"
