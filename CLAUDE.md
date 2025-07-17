@@ -147,3 +147,14 @@ When asked to "run coder login task" or similar, follow these steps:
 5. Complete the login process with the user-provided token
 
 **Note**: This task authenticates the local Coder CLI with the Coder deployment. The user will need to obtain a token from their Coder dashboard to complete the login.
+
+### Task: coder update template
+
+When asked to "run coder update template [name]" or similar, follow these steps:
+
+1. Change directory to m/coder/template: `cd m/coder/template`
+2. Run the push command with the template name: `j push coder-defn-[name]-template`
+   - Replace `[name]` with the parameter provided by the user
+   - For example: `j push coder-defn-ssh-template` if the user specified "ssh"
+
+**Note**: This task uploads/updates a Coder template. The template name parameter is required and will be inserted into the command as `coder-defn-[name]-template`.
