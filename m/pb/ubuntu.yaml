@@ -125,6 +125,7 @@
 
     - name: Install Docker packages
       become: true
+      ignore_errors: true
       apt:
         name:
           - docker-ce
@@ -144,6 +145,7 @@
         state: absent
     - name: Allow user to run Docker
       become: true
+      ignore_errors: true
       user:
         name: ubuntu
         groups: docker
