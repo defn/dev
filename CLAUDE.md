@@ -135,3 +135,15 @@ When asked to "run upgrade task" or similar, follow these steps:
 4. No commit is needed as this task is run purely for its side effects
 
 **Note**: This task updates the local system environment to match the configuration stored in git. It ensures all tools, configurations, and system settings are properly synchronized.
+
+### Task: coder login
+
+When asked to "run coder login task" or similar, follow these steps:
+
+1. Get the Coder URL from the environment variable: `$CODER_AGENT_URL_ORIGINAL`
+2. Run `coder login` with that URL as an argument: `coder login $CODER_AGENT_URL_ORIGINAL`
+3. Wait for the Coder login command to prompt for a token
+4. Ask the user to provide the token to paste into the Coder login prompt
+5. Complete the login process with the user-provided token
+
+**Note**: This task authenticates the local Coder CLI with the Coder deployment. The user will need to obtain a token from their Coder dashboard to complete the login.
