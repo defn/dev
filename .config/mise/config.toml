@@ -25,7 +25,7 @@ shfmt = "3.12.0"
 slsa-verifier = "2.7.1"
 starship = "1.23.0"
 "ubi:buildkite/agent" = { version = "3.102.2", exe = "buildkite-agent" }
-"ubi:coder/code-server" = { version = "4.102.0", bin_path = "bin", extract_all = "true" }
+"ubi:coder/code-server" = { version = "4.102.1", bin_path = "bin", extract_all = "true" }
 "ubi:honeycombio/buildevents" = "0.18.0"
 "ubi:peak/s5cmd" = "2.3.0"
 "ubi:stefanlogue/meteor" = "0.28.2"
