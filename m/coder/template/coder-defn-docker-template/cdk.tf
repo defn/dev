@@ -165,6 +165,31 @@ resource "docker_volume" "code_server_extensions_volume" {
   }
 }
 
+resource "docker_volume" "claude_volume" {
+  name = "coder-${data.coder_workspace.me.id}-claude"
+
+  lifecycle {
+    ignore_changes = all
+  }
+
+  labels {
+    label = "coder.owner"
+    value = data.coder_workspace_owner.me.name
+  }
+  labels {
+    label = "coder.owner_id"
+    value = data.coder_workspace_owner.me.id
+  }
+  labels {
+    label = "coder.workspace_id"
+    value = data.coder_workspace.me.id
+  }
+  labels {
+    label = "coder.workspace_name_at_creation"
+    value = data.coder_workspace.me.name
+  }
+}
+
 data "docker_registry_image" "defn_dev" {
   name = "ghcr.io/defn/dev:latest"
 }
@@ -210,6 +235,12 @@ resource "docker_container" "workspace" {
   volumes {
     container_path = "/home/ubuntu/dotfiles"
     volume_name    = docker_volume.dotfiles_volume.name
+    read_only      = false
+  }
+
+  volumes {
+    container_path = "/home/ubuntu/.claude"
+    volume_name    = claude_volume.dotfiles_volume.name
     read_only      = false
   }
 
