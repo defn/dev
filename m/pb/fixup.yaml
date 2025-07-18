@@ -103,6 +103,8 @@
         - go
         - claude
         - node
+        - agentapi
+        - devcontainer
       changed_when: false
     - name: Make /usr/local/bin
       become: true
