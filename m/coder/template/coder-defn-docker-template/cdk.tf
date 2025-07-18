@@ -240,7 +240,7 @@ resource "docker_container" "workspace" {
 
   volumes {
     container_path = "/home/ubuntu/.claude"
-    volume_name    = claude_volume.dotfiles_volume.name
+    volume_name    = docker_volume.claude_volume.name
     read_only      = false
   }
 
