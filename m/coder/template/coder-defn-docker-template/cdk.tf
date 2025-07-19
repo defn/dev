@@ -270,6 +270,7 @@ module "claude-code" {
   folder              = "/home/ubuntu"
   install_claude_code = false
   install_agentapi = false
+  experiment_pre_install_script = "claude-setup.sh" 
 
   experiment_report_tasks = true
 }
