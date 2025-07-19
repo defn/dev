@@ -190,3 +190,32 @@ When asked to "run coder update template [name]" or similar, follow these steps:
    - For example: `j push coder-defn-ssh-template` if the user specified "ssh"
 
 **Note**: This task uploads/updates a Coder template. The template name parameter is required and will be inserted into the command as `coder-defn-[name]-template`.
+
+### Task: upgrade all
+
+When asked to "run upgrade all task" or similar, follow these steps:
+
+1. Run the upgrade task to sync system tools and configurations
+2. Run the mise upgrade task to update tool versions
+3. Run the go upgrade task to update Go dependencies
+4. Run the go sync task to synchronize Go versions
+
+Specifically, execute these tasks in order:
+1. **upgrade**: Run `make sync` in $HOME directory
+2. **mise upgrade**: 
+   - Run `make mise-list` in $HOME directory
+   - Execute the suggested mise commands (if any)
+   - Stage and commit the changed mise.toml files with version changes
+3. **go upgrade**:
+   - Change to m directory: `cd m`
+   - Run `make upgrade`
+   - Test with `b build`
+   - Stage and commit go.mod and go.sum with direct dependency changes
+4. **go sync**:
+   - Get Go version: `mise exec -- go version`
+   - Update go.mod files, go.work, and trunk.yaml with the version
+   - Run `trunk fmt`
+   - Test with `b build` in m directory
+   - Stage and commit the synchronized files
+
+**Note**: This comprehensive task ensures all development tools, dependencies, and version configurations are updated and synchronized across the entire repository. Each sub-task should complete successfully before proceeding to the next.
