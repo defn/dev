@@ -162,7 +162,8 @@ When asked to "run go sync task" or similar, follow these steps:
    - `.trunk/trunk.yaml`: Update the `go@` runtime version
    - `.trunk/trunk.yaml`: Update the `gofmt@` linter version to match
 4. Run `trunk fmt` to format any modified files
-5. Stage and commit the synchronized versions:
+5. Test the synchronized versions by running `b build` in the m directory
+6. Stage and commit the synchronized versions:
 
    ```bash
    git add m/go.mod m/cv/go.mod m/go.work .trunk/trunk.yaml
