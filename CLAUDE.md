@@ -149,6 +149,36 @@ When asked to "run coder login task" or similar, follow these steps:
 
 **Note**: This task authenticates the local Coder CLI with the Coder deployment. The user will need to obtain a token from their Coder dashboard to complete the login.
 
+### Task: go sync
+
+When asked to "run go sync task" or similar, follow these steps:
+
+1. Get the current Go version from mise: `mise exec -- go version`
+2. Extract the version number (e.g., "1.24.5") from the output
+3. Update the following files to use this version:
+   - `m/go.mod`: Update the `go` directive line
+   - `m/cv/go.mod`: Update the `go` directive line
+   - `m/go.work`: Update the `go` directive line
+   - `.trunk/trunk.yaml`: Update the `go@` runtime version
+   - `.trunk/trunk.yaml`: Update the `gofmt@` linter version to match
+4. Run `trunk fmt` to format any modified files
+5. Stage and commit the synchronized versions:
+
+   ```bash
+   git add m/go.mod m/cv/go.mod m/go.work .trunk/trunk.yaml
+   git commit -m "chore: sync Go version across all configuration files
+
+   - Update all Go references to match mise version: [version]
+   - Ensures consistency across go.mod, go.work, and trunk.yaml
+   - Synchronizes development tooling with configured Go version
+
+   🤖 Generated with [Claude Code](https://claude.ai/code)
+
+   Co-Authored-By: Claude <noreply@anthropic.com>"
+   ```
+
+**Note**: This task ensures all Go version references in the repository are synchronized with the version configured in mise, providing consistency across development, building, and tooling environments.
+
 ### Task: coder update template
 
 When asked to "run coder update template [name]" or similar, follow these steps:
