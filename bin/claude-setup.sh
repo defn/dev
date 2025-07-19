@@ -12,7 +12,7 @@ git pull
 mkdir -p ~/.claude
 
 # Change ownership of .claude directory to ubuntu:ubuntu
-chown -R ubuntu:ubuntu ~/.claude
+sudo chown -R ubuntu:ubuntu ~/.claude
 
 # Path to settings file
 SETTINGS_FILE="$HOME/.claude/settings.local.json"
