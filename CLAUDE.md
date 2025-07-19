@@ -236,3 +236,19 @@ Specifically, execute these tasks in order:
    - Run: `j push coder-defn-docker-template`
 
 **Note**: This task updates both SSH and Docker Coder templates, ensuring all template versions are current and deployed.
+
+### Task: coder upgrade workspaces
+
+When asked to "run coder upgrade workspaces task" or similar, follow these steps:
+
+1. List all workspaces using `coder list`
+2. For each workspace name in the output, run `coder update WORKSPACE`
+3. Handle any errors gracefully and continue with remaining workspaces
+
+Specifically, execute these steps:
+1. **List workspaces**: Run `coder list` to get all workspace names
+2. **Extract workspace names**: Parse the output to get individual workspace names
+3. **Update each workspace**: For each workspace name, run `coder update [workspace-name]`
+4. **Report results**: Summarize which workspaces were updated successfully and any that failed
+
+**Note**: This task updates all existing workspaces to use the latest template versions. Workspaces that are stopped or in error states may need special handling.
