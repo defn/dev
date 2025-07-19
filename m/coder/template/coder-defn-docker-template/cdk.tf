@@ -244,6 +244,12 @@ resource "docker_container" "workspace" {
     read_only      = false
   }
 
+  volumes {
+    container_path = "/home/ubuntu/.env-shared"
+    host_path      = "/home/ubuntu/.env-shared"
+    read_only      = true
+  }
+
   labels {
     label = "coder.owner"
     value = data.coder_workspace_owner.me.name
