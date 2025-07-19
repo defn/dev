@@ -1,5 +1,29 @@
 # Changelog
 
+## [1.30.0](https://github.com/defn/dev/compare/v1.29.0...v1.30.0) (2025-07-19)
+
+
+### Features
+
+* add bind mounts to meh devcontainer ([bfbc4bd](https://github.com/defn/dev/commit/bfbc4bd36e443e73885469347be5b102891395f9))
+* add Claude Code authentication helper scripts ([0b478fa](https://github.com/defn/dev/commit/0b478fad0b74aef53b6680ff12fcdc46c2f64ed4))
+* add Claude configuration volume to docker template ([18f78c1](https://github.com/defn/dev/commit/18f78c167e3dcd0a8374b0e3411a68624a03e2b9))
+* add htop package to Ubuntu playbook ([b409f90](https://github.com/defn/dev/commit/b409f90bbc38664c7f5ce9b72d875514ad4dfb6e))
+* add iputils-ping package to ubuntu playbook ([bab3301](https://github.com/defn/dev/commit/bab330168533b7b33688c33639c3552ac3850cfd))
+* add shared environment directory support ([9c88242](https://github.com/defn/dev/commit/9c882421b8449ba2b0911c497f60e33c59cef18b))
+* update Coder templates and add devcontainers CLI support ([bfc718b](https://github.com/defn/dev/commit/bfc718bbbd521cfd4a1321bafa274432d5a13a7a))
+
+
+### Bug Fixes
+
+* add git pull before claude-setup.sh in docker template ([8048e9a](https://github.com/defn/dev/commit/8048e9a235ce79d376d4c6d211f9f6e01f683b58))
+* add sudo to chown command in claude-setup.sh ([a61ab2c](https://github.com/defn/dev/commit/a61ab2c580a18cc4a321323ad5d869f9a35bd910))
+* allow Docker installation tasks to fail gracefully in ubuntu playbook ([2e546c8](https://github.com/defn/dev/commit/2e546c8b94669ede643f0e758c65a1583b4e6526))
+* correct Docker volume reference in docker template ([17df8cb](https://github.com/defn/dev/commit/17df8cbc321f18b0860bcec44b8098a1ed7aad91))
+* disable D-Bus integration in starship to prevent connection errors ([dd0f306](https://github.com/defn/dev/commit/dd0f306e4afc8e5eaf55948daf17ac4a726e502f))
+* remove feh dev container from SSH template ([d45cc3a](https://github.com/defn/dev/commit/d45cc3a050f7ddbeef20b546ab1583b4a7960052))
+* update claude-setup.sh to properly handle .claude directory ([d45d0ea](https://github.com/defn/dev/commit/d45d0ea9dfd374f5f4f7a79efa587513ced94abe))
+
 ## [1.29.0](https://github.com/defn/dev/compare/v1.28.0...v1.29.0) (2025-05-20)
 
 
