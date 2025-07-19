@@ -219,3 +219,20 @@ Specifically, execute these tasks in order:
    - Stage and commit go.mod and go.sum with direct dependency changes
 
 **Note**: This comprehensive task ensures all development tools, dependencies, and version configurations are updated and synchronized across the entire repository. Each sub-task should complete successfully before proceeding to the next.
+
+### Task: coder upgrade all
+
+When asked to "run coder upgrade all task" or similar, follow these steps:
+
+1. Run the coder update template ssh task
+2. Run the coder update template docker task
+
+Specifically, execute these tasks in order:
+1. **coder update template ssh**: 
+   - Change directory to m/coder/template: `cd m/coder/template`
+   - Run: `j push coder-defn-ssh-template`
+2. **coder update template docker**:
+   - Change directory to m/coder/template: `cd m/coder/template`
+   - Run: `j push coder-defn-docker-template`
+
+**Note**: This task updates both SSH and Docker Coder templates, ensuring all template versions are current and deployed.
