@@ -3,11 +3,11 @@ experimental = true
 
 [tools]
 ansible = "11.8.0"
-aws = "2.27.53"
+aws = "2.27.55"
 bat = "0.25.0"
 bazelisk = "1.26.0"
 chamber = "3.1.2"
-coder = "2.24.1"
+coder = "2.24.2"
 cue = "0.13.2"
 delta = "0.18.2"
 dive = "0.13.1"
@@ -25,7 +25,7 @@ shfmt = "3.12.0"
 slsa-verifier = "2.7.1"
 starship = "1.23.0"
 "ubi:buildkite/agent" = { version = "3.102.2", exe = "buildkite-agent" }
-"ubi:coder/code-server" = { version = "4.101.2", bin_path = "bin", extract_all = "true" }
+"ubi:coder/code-server" = { version = "4.102.1", bin_path = "bin", extract_all = "true" }
 "ubi:honeycombio/buildevents" = "0.18.0"
 "ubi:peak/s5cmd" = "2.3.0"
 "ubi:stefanlogue/meteor" = "0.28.2"
