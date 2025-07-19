@@ -47,6 +47,11 @@ data "coder_parameter" "arch" {
   type         = "string"
 }
 
+data "coder_parameter" "ai_prompt" {
+  name = "AI Prompt"
+  type = "string"
+}
+
 resource "coder_agent" "main" {
   arch = data.coder_parameter.arch.value
   auth = "token"
@@ -55,6 +60,14 @@ resource "coder_agent" "main" {
     ssh_helper      = false
     vscode          = false
     vscode_insiders = false
+  }
+
+  env = {
+    CODER_MCP_CLAUDE_TASK_PROMPT   = data.coder_parameter.ai_prompt.value
+    CODER_MCP_APP_STATUS_SLUG      = "claude-code"
+    CODER_MCP_CLAUDE_SYSTEM_PROMPT = <<-EOT
+      Be terse.
+    EOT
   }
 }
 
@@ -90,6 +103,18 @@ provider "docker" {
   host = var.docker_socket != "" ? var.docker_socket : null
 }
 
+module "devcontainers-cli" {
+  count    = data.coder_workspace.me.start_count
+  source   = "dev.registry.coder.com/modules/devcontainers-cli/coder"
+  agent_id = coder_agent.main.id
+}
+
+resource "coder_devcontainer" "m" {
+  count            = data.coder_workspace.me.start_count
+  agent_id         = coder_agent.main.id
+  workspace_folder = data.coder_parameter.homedir.value
+}
+
 resource "docker_volume" "dotfiles_volume" {
   name = "coder-${data.coder_workspace.me.id}-dotfiles"
 
@@ -117,6 +142,31 @@ resource "docker_volume" "dotfiles_volume" {
 
 resource "docker_volume" "code_server_extensions_volume" {
   name = "coder-${data.coder_workspace.me.id}-code-server-extensions"
+
+  lifecycle {
+    ignore_changes = all
+  }
+
+  labels {
+    label = "coder.owner"
+    value = data.coder_workspace_owner.me.name
+  }
+  labels {
+    label = "coder.owner_id"
+    value = data.coder_workspace_owner.me.id
+  }
+  labels {
+    label = "coder.workspace_id"
+    value = data.coder_workspace.me.id
+  }
+  labels {
+    label = "coder.workspace_name_at_creation"
+    value = data.coder_workspace.me.name
+  }
+}
+
+resource "docker_volume" "claude_volume" {
+  name = "coder-${data.coder_workspace.me.id}-claude"
 
   lifecycle {
     ignore_changes = all
@@ -188,6 +238,12 @@ resource "docker_container" "workspace" {
     read_only      = false
   }
 
+  volumes {
+    container_path = "/home/ubuntu/.claude"
+    volume_name    = docker_volume.claude_volume.name
+    read_only      = false
+  }
+
   labels {
     label = "coder.owner"
     value = data.coder_workspace_owner.me.name
@@ -204,5 +260,17 @@ resource "docker_container" "workspace" {
     label = "coder.workspace_name"
     value = data.coder_workspace.me.name
   }
+}
+
+module "claude-code" {
+  count               = data.coder_workspace.me.start_count
+  source              = "registry.coder.com/coder/claude-code/coder"
+  version             = "2.0.2"
+  agent_id            = coder_agent.main.id
+  folder              = "/home/ubuntu"
+  install_claude_code = false
+  install_agentapi = false
+
+  experiment_report_tasks = true
 }
 
