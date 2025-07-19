@@ -2,21 +2,30 @@
 
 set -euo pipefail
 
+# Change to home directory
+cd "$HOME"
+
+# Pull latest changes from git
+git pull
+
 # Create .claude directory if it doesn't exist
 mkdir -p ~/.claude
+
+# Change ownership of .claude directory to ubuntu:ubuntu
+chown -R ubuntu:ubuntu ~/.claude
 
 # Path to settings file
 SETTINGS_FILE="$HOME/.claude/settings.local.json"
 
 # Create settings file if it doesn't exist or initialize empty JSON
-if [[ ! -f "$SETTINGS_FILE" ]]; then
-    echo '{}' > "$SETTINGS_FILE"
+if [[ ! -f $SETTINGS_FILE ]]; then
+	echo '{}' >"$SETTINGS_FILE"
 fi
 
 # Add or update apiKeyHelper setting
 jq --arg helper_path "$HOME/bin/claude-api-key.sh" \
-   '.apiKeyHelper = $helper_path' \
-   "$SETTINGS_FILE" > "$SETTINGS_FILE.tmp" && \
-   mv "$SETTINGS_FILE.tmp" "$SETTINGS_FILE"
+	'.apiKeyHelper = $helper_path' \
+	"$SETTINGS_FILE" >"$SETTINGS_FILE.tmp" &&
+	mv "$SETTINGS_FILE.tmp" "$SETTINGS_FILE"
 
 echo "Updated $SETTINGS_FILE with apiKeyHelper: $HOME/bin/claude-api-key.sh"
