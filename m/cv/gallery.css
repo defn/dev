@@ -1,59 +1,139 @@
+/*
+ * Gallery CSS - Responsive Image Gallery Styles
+ * =============================================
+ * 
+ * This stylesheet provides the visual foundation for the responsive image gallery.
+ * It includes styles for:
+ * - Responsive layout and scrolling behavior
+ * - Image presentation and borders
+ * - Blurhash canvas placeholders
+ * - Navigation overlays
+ * - Masonry-style grid layout
+ */
+
+/* ===== BODY AND SCROLLING STYLES ===== */
+
+/**
+ * Body scrolling configuration
+ * Ensures smooth scrolling while hiding scrollbars for clean appearance
+ */
 body {
   overflow-y: scroll; /* Ensure the body is scrollable */
 }
-/* Hide scrollbar for Webkit browsers (Chrome, Safari) */
+
+/**
+ * Hide scrollbar for Webkit browsers (Chrome, Safari)
+ * Maintains scrolling functionality while removing visual scrollbar
+ * Note: scrollbar-width: none; would be needed for Firefox
+ */
 body::-webkit-scrollbar {
   width: 0;
 }
 
-/* Global rule to prevent white outlines on all images */
+/* ===== IMAGE STYLES ===== */
+
+/**
+ * Global image styling - removes default browser styling
+ * Prevents white borders/outlines that can appear around images
+ * Uses !important to override any inherited or injected styles
+ */
 img {
   border: none !important;
   outline: none !important;
   box-shadow: none !important;
 }
 
+/* ===== GRID LAYOUT STYLES ===== */
+
+/**
+ * Table-based grid layout
+ * Uses table layout for reliable column distribution across different screen sizes
+ * Each column (td) represents one column in the masonry layout
+ */
 table {
-  width: 100%;
-  border-collapse: collapse;
+  width: 100%; /* Full viewport width */
+  border-collapse: collapse; /* Remove spacing between cells */
 }
+
+/**
+ * Grid column styling
+ * Each td represents a column in the masonry grid
+ */
 td {
-  border: 1px solid #000;
-  vertical-align: top;
-  padding: 0;
+  border: 1px solid #000; /* Visual column separation */
+  vertical-align: top; /* Align content to top of column */
+  padding: 0; /* No internal padding to maximize image space */
 }
+/**
+ * Image container within each column
+ * Provides flexible layout for images within each grid column
+ * Ensures proper vertical distribution and spacing
+ */
 .image-container {
   display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  height: 100%;
+  flex-direction: column; /* Stack images vertically */
+  justify-content: space-between; /* Distribute space evenly */
+  height: 100%; /* Fill entire column height */
   padding: 0;
-  box-sizing: border-box;
+  box-sizing: border-box; /* Include borders in width calculations */
 }
+
+/**
+ * Images within containers
+ * Ensures responsive behavior and clean presentation
+ */
 .image-container img {
-  max-width: 100%;
-  border: none;
-  outline: none;
+  max-width: 100%; /* Responsive width - never exceed container */
+  border: none; /* Remove any default borders */
+  outline: none; /* Remove focus outlines */
 }
 
+/* ===== BLURHASH PLACEHOLDER STYLES ===== */
+
+/**
+ * Blurhash canvas styling
+ * These canvases show blurred previews before images load
+ * Provides smooth transitions between placeholder and actual image
+ */
 .blurhash-canvas {
-  width: 100%;
+  width: 100%; /* Match image dimensions */
   height: 100%;
-  transition: opacity 0.3s ease;
-  opacity: 1;
-  z-index: 1;
+  transition: opacity 0.3s ease; /* Smooth fade transition */
+  opacity: 1; /* Visible by default */
+  z-index: 1; /* Below actual images (z-index 2) */
 }
 
+/* ===== OVERLAY AND NAVIGATION STYLES ===== */
+
+/**
+ * Full-screen overlay element
+ * Used for navigation transitions and visual effects
+ * Initially sized to 0x0 and expanded via JavaScript when needed
+ */
 #overlay {
-  position: fixed;
+  position: fixed; /* Fixed positioning relative to viewport */
   top: 0;
   left: 0;
-  width: 0;
-  height: 0;
-  background: black;
-  opacity: 0.95;
-  z-index: 1000;
+  width: 0; /* Initially invisible */
+  height: 0; /* Initially invisible */
+  background: black; /* Dark overlay background */
+  opacity: 0.95; /* Semi-transparent */
+  z-index: 1000; /* Above all other content */
   display: block;
 }
 
-/* Navigation control has been removed */
+/* ===== NOTES AND FUTURE ENHANCEMENTS ===== */
+
+/**
+ * Navigation control styling has been removed
+ * Navigation elements are now created and styled dynamically via JavaScript
+ * This provides more flexible positioning and responsive behavior
+ * 
+ * Future CSS considerations:
+ * - Add responsive breakpoints for different screen sizes
+ * - Consider CSS Grid as alternative to table layout
+ * - Add dark/light theme support
+ * - Implement CSS custom properties for easier theming
+ * - Add print styles for gallery printing
+ * - Consider reduced motion preferences for transitions
+ */
