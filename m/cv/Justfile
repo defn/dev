@@ -1,5 +1,38 @@
+# Computer Vision Gallery Management System - Justfile
+# ================================================
+# 
+# This Justfile provides a comprehensive set of tasks for managing a computer vision
+# image gallery system. It handles image processing, metadata management, web serving,
+# and integration with external services like ESRGAN and Replicate AI.
+#
+# Key Components:
+# - Image processing pipeline (thumbnails, upscaling, format conversion)
+# - Web gallery generation with blurhash placeholders
+# - Database management for image metadata
+# - User content downloading and processing
+# - ESRGAN integration for image super-resolution
+# - Backup and synchronization workflows
+# - Development server management
+#
+# Usage Examples:
+#   just gallery                    # Generate image gallery
+#   just thumbs                     # Create thumbnails for all images
+#   just ersgan 5                   # Run ESRGAN on 5 parallel processes
+#   just user username              # Download user content
+#   just backup 20                  # Backup with 20 transfer threads
+#
+# Directory Structure:
+#   img/         - Original full-size images
+#   thumbs/      - Thumbnail versions (400px)
+#   t2/          - Processed images for web display
+#   replicate/   - ESRGAN enhanced images
+#   posts/       - JSON metadata files
+#   yes/no/      - Image classification directories
+
 set shell := ["bash", "-cu"]
 
+# End-of-day cleanup and reset operations
+# Processes JSON files, cleans up directories, and truncates large files
 eod:
     just json
     ls -d js-*.js.json | runmany 8 'echo $1; just posts $1 $1.txt'
@@ -10,6 +43,8 @@ eod:
     find thumbs t2 img yodayo/dl -type f -size +100c | runmany 64 'echo $1; truncate $1 --size 0'
 
 
+# Aggregate all JSON metadata files into a single file and extract URLs
+# Combines post metadata and user data, then generates a deduplicated URL list
 json file="js.json":
     find posts -name '*.json' | while read -r js; do echo; cat $js; echo; done > {{ file }}
     for a in js-*js.json; do echo; cat $a; echo; done >> {{ file }}
@@ -26,6 +61,8 @@ posts input file:
     done
     rm {{ file }}.txt
     
+# Download and process content for a specific user
+# Fetches user data, processes JSON, and downloads associated images
 user uname stage1="yes" stage2="no":
     etc/user {{uname}} 1 100
     cat js-username-{{ uname }}.json | jq '.[]' > js-username-{{ uname}}.json.js.json
@@ -39,6 +76,9 @@ process file stage1="yes" stage2="no" fast="":
 download file:
     cat {{ file }} | jq -r '.url' | sort -u | runmany 8 20 'cd img && wget -nc --no-verbose $@'
 
+# Generate 400px PNG thumbnails from JPEG images
+# Handles animated GIFs and invalid image files by marking them appropriately
+# Uses parallel processing (32 workers) for efficiency
 thumbs:
     cat <(find thumbs -name '*.png' | cut -d/ -f2 | cut -d. -f1) <(find img -name '*.jpeg' | cut -d/ -f2 | cut -d. -f1) | sort | uniq -c | grep ' 1 ' | awk '{print $2}' | while read -r a; do if ! test -f "thumbs/$a.png"; then echo "$a"; fi; done | sort | runmany 32 'if ! test -f thumbs/${1}.png; then if [[ "$(identify -format "%n" img/$1.jpeg)" == 1 ]]; then echo thumbs/$1.png; mogrify -path thumbs -resize 400x -format png img/$1.jpeg || true; fi; fi'
     cat <(find thumbs -name '*.png' | cut -d/ -f2 | cut -d. -f1) <(find img -name '*.jpeg' | cut -d/ -f2 | cut -d. -f1) | sort | uniq -c | grep ' 1 ' | awk '{print $2}' | while read -r a; do if ! test -f "thumbs/$a.png"; then echo "img/$a.jpeg"; fi; done | xargs file | grep "image data" | grep GIF | cut -d: -f1 | cut -d/ -f2 | while read -r a; do echo "GIF img/$a"; touch no/$a thumbs/${a%%.jpeg}.png; done
@@ -47,6 +87,9 @@ thumbs:
 t2:
     cat <(find yes -type f | cut -d/ -f2 | cut -d. -f1) <(find yes -type f | cut -d/ -f2 | cut -d. -f1) <(find t2 -name '*.png' | cut -d/ -f2 | cut -d. -f1) | sort | uniq -c | grep ' 2 ' | awk '{print $NF}' | sort | runmany 32 1 'echo "img/$1.jpeg -> t2/$1.png"; mogrify -path t2 -resize 400x -format png img/$1.jpeg'
 
+# Generate web gallery with blurhash placeholders
+# Creates responsive HTML gallery from processed images in t2 directory
+# Uses Go program to generate blurhash previews for fast loading
 gallery prefix="replicate/":
     #!/usr/bin/env bash
     find {{prefix}}t2 -type f | cut -d/ -f3 | cut -d. -f1 | sort > all.input
@@ -81,6 +124,8 @@ w-html:
     for a in $(cd pub/fm && ls -d w-??); do go run . -s no -d pub/fm/$a -c tmp/blur -o pub/w/$a -i <(cd pub/fm/$a && ls -d *.png | cut -d. -f1 | sort); done
     go run . -s no -d pub/fm -c tmp/blur -o pub/w/g -i <(cd pub/fm && find w-?? -name '*.png' | cut -d. -f1 | shuf)
 
+# Start backup process in screen session
+# Syncs replicate directory to remote storage with configurable transfer threads
 backup transfers="60":
     screen -dmS backup j backup-inner {{ transfers }}
     screen -DRR backup
@@ -90,6 +135,8 @@ backup-inner transfers:
     mkdir -p replicate/js
     rclone sync -L --progress --ignore-checksum --transfers={{ transfers }} replicate district-enc:cv/replicate
 
+# Start nginx proxy server in screen session
+# Serves static files and handles web requests for the gallery
 proxy:
     screen -dmS proxy j proxy-inner
     screen -DRR proxy
@@ -113,6 +160,9 @@ reset-inner:
     just eod
     rm -f js-* js.json.* js.json || true
 
+# Run ESRGAN super-resolution processing on images
+# Checks for images that need processing and runs ESRGAN if needed
+# Parameters: n = number of parallel ESRGAN processes (default: 10)
 ersgan n="10":
     just t2 || true
     rm -f .something
@@ -177,6 +227,8 @@ db-upsert-size*args:
     runmany 16 'img=$1; set -- $(identify -format "%w %h" replicate/t2/$1.png); if [[ -n "$1" ]]; then echo "UPDATE OR IGNORE img SET good = true, thumb_height=$1, thumb_width = $2 WHERE ID = '"'"'$img'"'"';"; fi' {{ args }}
     echo "commit;"
 
+# Quality assurance checks for data consistency
+# Identifies overlaps, missing files, and inconsistencies between directories
 qa:
     @echo Finding overlap between yes and no
     @for a in yes yes no; do find $a -type f; done | cut -d/ -f2- | cut -d. -f1 | sort | uniq -c | grep ' 3 ' || true
@@ -214,6 +266,8 @@ freeze from snap backups:
     if test -n "{{backups}}"; then runmany 'just send fast/cv {{snap}} $1' {{backups}}; fi
     if test -z "{{backups}}"; then just split fast/cv {{from}} {{snap}} /backup/backup/zfs/cv-; fi
 
+# Configure Tailscale serving for gallery access
+# Sets up web endpoints for gallery files and directories via Tailscale
 serve:
   sudo tailscale serve --bg --set-path=/replicate /remote/cv/replicate
   sudo tailscale serve --bg --set-path=/all.html /remote/cv/all.html
