@@ -1,8 +1,16 @@
+/**
+ * Sets the document body margin to zero for full-width layout
+ * Used to ensure the gallery takes up the full viewport width
+ */
 function setBodyMarginToZero() {
   document.body.style.margin = "0";
 }
 
-// Function to get blurhash from index by filename
+/**
+ * Retrieves the blurhash string for a given filename from the global blurhash index
+ * @param {string} filename - The filename to look up (can be full path or basename)
+ * @returns {string|null} The blurhash string if found, null otherwise
+ */
 function getBlurhashByFilename(filename) {
   // First check if the filename exists in the index, try both full path and basename
   const entry =
@@ -13,7 +21,14 @@ function getBlurhashByFilename(filename) {
   return entry ? entry.blurhash : null;
 }
 
-// Function to render a blurhash grid on a canvas
+/**
+ * Renders a smooth blurhash visualization on a canvas element
+ * Creates a blurred grid pattern from the encoded blurhash data
+ * @param {HTMLElement} image - The image element to extract dimensions from
+ * @param {string} blurhash - The blurhash string containing color data
+ * @param {number} dim - Dimension of the color grid (default 20x20)
+ * @returns {HTMLCanvasElement} Canvas element with rendered blurhash
+ */
 function renderBlurhashGrid(image, blurhash, dim = 20) {
   // Create a canvas element for the blurhash grid
   const canvas = document.createElement("canvas");
@@ -53,9 +68,11 @@ function renderBlurhashGrid(image, blurhash, dim = 20) {
 
   // Calculate expected blurhash length based on dimension: dim * dim * 3 * 2
   // For 20x20 grid: 20 * 20 * 3 * 2 = 2400 bytes (800 hex triplets)
+  // Each pixel requires 6 characters (RRGGBB hex format)
   const expectedLength = dim * dim * 3 * 2;
 
   // If no valid blurhash, fill with default orange
+  // This provides a consistent fallback when blurhash data is missing or corrupted
   if (!blurhash || blurhash.length !== expectedLength) {
     console.warn(
       `Invalid blurhash (length: ${
@@ -69,6 +86,7 @@ function renderBlurhashGrid(image, blurhash, dim = 20) {
 
   // Draw the dim x dim grid from the blurhash
   // Create a higher-resolution canvas for better blurring
+  // The scale factor improves the quality of the blur effect
   const offscreenCanvas = document.createElement("canvas");
   const scale = 3; // Higher resolution for smoother blur
   offscreenCanvas.width = width * scale;
@@ -76,6 +94,7 @@ function renderBlurhashGrid(image, blurhash, dim = 20) {
   const offCtx = offscreenCanvas.getContext("2d");
 
   // Extract RGB colors from the blurhash
+  // Parse each 6-character hex color (RRGGBB) from the blurhash string
   const colors = [];
   for (let i = 0; i < dim * dim; i++) {
     const startIndex = i * 6;
@@ -83,12 +102,12 @@ function renderBlurhashGrid(image, blurhash, dim = 20) {
       // Extract RRGGBB hex color
       const hexColor = blurhash.substring(startIndex, startIndex + 6);
 
-      // Parse RGB components
+      // Parse RGB components from hex
       const r = parseInt(hexColor.substring(0, 2), 16);
       const g = parseInt(hexColor.substring(2, 4), 16);
       const b = parseInt(hexColor.substring(4, 6), 16);
 
-      // Validate values
+      // Validate values and use fallback for invalid data
       const validR = isNaN(r) ? 128 : r;
       const validG = isNaN(g) ? 128 : g;
       const validB = isNaN(b) ? 128 : b;
@@ -100,23 +119,28 @@ function renderBlurhashGrid(image, blurhash, dim = 20) {
   }
 
   // Generate smooth gradient canvas
+  // Calculate cell dimensions for the grid
   const cellWidth = (width * scale) / dim;
   const cellHeight = (height * scale) / dim;
 
   // First pass: Draw solid circles with soft edges using globalCompositeOperation
+  // Use additive blending to create smooth color transitions
   offCtx.globalCompositeOperation = "lighter"; // Additive blending to avoid dark shadows
 
+  // Draw each color as a radial gradient circle
+  // This creates smooth color transitions between adjacent grid cells
   for (let y = 0; y < dim; y++) {
     for (let x = 0; x < dim; x++) {
       const index = y * dim + x;
       const color = colors[index];
 
-      // Calculate center position and radius
+      // Calculate center position and radius for this grid cell
       const centerX = x * cellWidth + cellWidth / 2;
       const centerY = y * cellHeight + cellHeight / 2;
       const radius = Math.max(cellWidth, cellHeight) * 0.85; // Increased radius for better overlap
 
-      // Create softer radial gradient
+      // Create softer radial gradient with opacity falloff
+      // This creates a smooth transition from solid color at center to transparent at edges
       const gradient = offCtx.createRadialGradient(
         centerX,
         centerY,
@@ -125,12 +149,12 @@ function renderBlurhashGrid(image, blurhash, dim = 20) {
         centerY,
         radius,
       );
-      gradient.addColorStop(0, `rgba(${color.r}, ${color.g}, ${color.b}, 0.8)`); // Reduced opacity
+      gradient.addColorStop(0, `rgba(${color.r}, ${color.g}, ${color.b}, 0.8)`); // Solid at center
       gradient.addColorStop(
         0.5,
         `rgba(${color.r}, ${color.g}, ${color.b}, 0.4)`,
-      );
-      gradient.addColorStop(1, `rgba(${color.r}, ${color.g}, ${color.b}, 0)`);
+      ); // Semi-transparent at middle
+      gradient.addColorStop(1, `rgba(${color.r}, ${color.g}, ${color.b}, 0)`); // Transparent at edges
 
       // Draw circle with gradient
       offCtx.fillStyle = gradient;
@@ -144,10 +168,12 @@ function renderBlurhashGrid(image, blurhash, dim = 20) {
   offCtx.globalCompositeOperation = "source-over";
 
   // Calculate blur sizes relative to image dimensions
+  // Larger images get proportionally larger blur for consistent visual effect
   const smallestDim = Math.min(offscreenCanvas.width, offscreenCanvas.height);
   const baseBlur = Math.max(4, Math.round(smallestDim / 50)); // Scales with image size
 
   // Apply multiple blur passes with different radii for a much smoother result
+  // Multiple passes create a more natural, photo-realistic blur effect
   // First blur pass - medium blur (scaled to image size)
   offCtx.filter = `blur(${baseBlur * 1.5}px)`;
   offCtx.globalAlpha = 0.9;
@@ -167,7 +193,7 @@ function renderBlurhashGrid(image, blurhash, dim = 20) {
   offCtx.globalAlpha = 1.0;
 
   // Normalize and enhance contrast
-  // Tint with a slight color to make it look nicer than pure grayscale
+  // Create a final canvas with enhanced colors for better visual appeal
   const enhancedCanvas = document.createElement("canvas");
   enhancedCanvas.width = width;
   enhancedCanvas.height = height;
@@ -180,7 +206,8 @@ function renderBlurhashGrid(image, blurhash, dim = 20) {
   const imageData = enhCtx.getImageData(0, 0, width, height);
   const data = imageData.data;
 
-  // Calculate average brightness
+  // Calculate average brightness to determine enhancement strategy
+  // Different brightness levels require different enhancement approaches
   let totalBrightness = 0;
   for (let i = 0; i < colors.length; i++) {
     const color = colors[i];
@@ -189,12 +216,14 @@ function renderBlurhashGrid(image, blurhash, dim = 20) {
   const avgBrightness = totalBrightness / colors.length;
 
   // Apply adaptive enhancement based on image brightness
-  // Analyze brightness to determine appropriate enhancement values
+  // Different brightness levels need different enhancement strategies
   let brightnessClass = "medium";
   if (avgBrightness < 80) brightnessClass = "dark";
   if (avgBrightness > 170) brightnessClass = "light";
 
   // Set enhancement parameters based on brightness class
+  // Dark images need more aggressive enhancement to remain visible
+  // Light images need subtle enhancement to avoid oversaturation
   let contrast, saturation, vibrance;
   switch (brightnessClass) {
     case "dark":
@@ -214,32 +243,37 @@ function renderBlurhashGrid(image, blurhash, dim = 20) {
   }
 
   // Process each pixel with adaptive enhancements
+  // Apply contrast, saturation, and vibrance adjustments
   for (let i = 0; i < data.length; i += 4) {
-    // Get RGB values
+    // Get RGB values (alpha is at i+3 but we don't modify it)
     let r = data[i];
     let g = data[i + 1];
     let b = data[i + 2];
 
     // Apply adaptive contrast - move values away from middle gray (128)
+    // This increases the difference between light and dark areas
     r = 128 + (r - 128) * contrast;
     g = 128 + (g - 128) * contrast;
     b = 128 + (b - 128) * contrast;
 
-    // Calculate luminance-preserving grayscale
+    // Calculate luminance-preserving grayscale using standard weights
+    // These weights approximate how the human eye perceives brightness
     const gray = r * 0.299 + g * 0.587 + b * 0.114;
 
     // Apply vibrance (boosts saturation more for less saturated colors)
+    // This preserves skin tones and prevents oversaturation of already colorful areas
     const maxChannel = Math.max(r, g, b);
     const minChannel = Math.min(r, g, b);
     const saturationAmount = (maxChannel - minChannel) / 255;
     const dynamicSatFactor = saturation * (1 - saturationAmount * vibrance);
 
     // Apply adaptive saturation with vibrance
+    // Move colors away from gray while preserving luminance
     r = gray + (r - gray) * dynamicSatFactor;
     g = gray + (g - gray) * dynamicSatFactor;
     b = gray + (b - gray) * dynamicSatFactor;
 
-    // Clamp values
+    // Clamp values to valid RGB range (0-255)
     data[i] = Math.min(255, Math.max(0, r));
     data[i + 1] = Math.min(255, Math.max(0, g));
     data[i + 2] = Math.min(255, Math.max(0, b));
@@ -253,7 +287,12 @@ function renderBlurhashGrid(image, blurhash, dim = 20) {
   return canvas;
 }
 
-// Simple function for backwards compatibility or fallback
+/**
+ * Simple function to extract a single color from a blurhash
+ * Used for backwards compatibility or as a fallback when full grid rendering fails
+ * @param {string} hash - The blurhash string
+ * @returns {string} CSS color string (rgb or hex)
+ */
 function blurhashToColor(hash) {
   if (!hash || hash.length < 6) return "#FF8C00"; // Default orange
 
@@ -269,19 +308,27 @@ function blurhashToColor(hash) {
 // Export generateGrid to global scope for HTML templates to access
 window.generateGrid = generateGrid;
 
+/**
+ * Main function to generate the responsive image gallery grid
+ * Creates a masonry-style layout with column balancing and lazy loading
+ * Calculates optimal column count based on viewport width and distributes images evenly
+ */
 function generateGrid() {
-  // Reference to the table body
+  // Reference to the table body where the grid will be rendered
   const tableBody = document.getElementById("table-body");
 
   // Use the shuffled images array that's already prepared
   const selectedImages = window.images || [];
 
+  // Calculate number of columns based on viewport width
+  // Each column needs approximately 330px width including margins
   window.numColumns = Math.floor(window.innerWidth / 330);
 
   // Make sure we have at least 1 column
   if (window.numColumns < 1) window.numColumns = 1;
 
   // Initialize an array to hold columns and their heights
+  // Each column tracks its DOM element and total height for balanced distribution
   const columns = Array.from({ length: window.numColumns }, () => {
     const td = document.createElement("td");
     td.setAttribute("valign", "top");
@@ -295,20 +342,23 @@ function generateGrid() {
     };
   });
 
-  // Calculate the standard image width
+  // Calculate the standard image width based on available space
+  // Subtract 5px for margins and spacing between columns
   const standardWidth = Math.floor(window.innerWidth / window.numColumns) - 5;
 
   // First pass: Distribute images to columns using the greedy algorithm
-  // Keep track of images placed in each column
+  // Always place the next image in the shortest column to balance heights
   const columnImages = Array.from({ length: window.numColumns }, () => []);
 
+  // Process each image and assign it to the optimal column
   selectedImages.forEach((image, index) => {
     const img = document.createElement("img");
     img.id = `img-${index}`;
-    img.className = "lazyload";
+    img.className = "lazyload"; // Enable lazy loading
     img.width = standardWidth;
 
     // Choose image path based on column count: use 'replicate/img' when only 1 column, otherwise use default path
+    // Single column mode uses higher resolution images
     const imagePath = window.numColumns === 1 ? "/replicate/img" : basePath;
     img.dataset.src = `${imagePath}/${image.filename}`;
     img.dataset.filename = image.filename;
@@ -316,6 +366,7 @@ function generateGrid() {
     img.style.outline = "none";
 
     // Determine image height based on aspect ratio
+    // This ensures proper spacing calculations before the image loads
     let aspectRatio = 1; // Default square aspect ratio
     let imgHeight = standardWidth; // Default height equal to width
 
@@ -335,26 +386,29 @@ function generateGrid() {
     }
 
     // Set the image height based on aspect ratio
+    // This maintains the image's original proportions
     imgHeight = Math.floor(standardWidth / aspectRatio);
     img.style.aspectRatio = `${aspectRatio}`;
     img.height = imgHeight;
 
+    // Add click handler for image selection/deselection
     img.onclick = (event) => {
       // Stop event propagation to make sure our handler gets priority
       event.stopPropagation();
 
-      // Perform toggleVisibility action
+      // Perform toggleVisibility action (shows/hides blurhash overlay)
       toggleVisibility(img);
     };
 
-    // Store the calculated height
+    // Store the calculated height and metadata for later processing
     const imgInfo = {
       element: img,
       height: imgHeight,
       aspectRatio: aspectRatio,
     };
 
-    // Find the column with the smallest total height
+    // Find the column with the smallest total height (greedy algorithm)
+    // This balances the column heights for a more even layout
     let shortestColumn = 0;
     let shortestHeight = columns[0].totalHeight;
     for (let i = 1; i < columns.length; i++) {
@@ -368,16 +422,19 @@ function generateGrid() {
     columnImages[shortestColumn].push(imgInfo);
 
     // Update the column's total height with the image height
+    // This helps the greedy algorithm make better decisions for subsequent images
     columns[shortestColumn].totalHeight += imgHeight;
   });
 
   // Find the tallest column height for reference
+  // This will be used to calculate spacing needed to equalize column heights
   const tallestColumnHeight = Math.max(
     ...columns.map((col) => col.totalHeight),
   );
   console.log("Tallest column height:", tallestColumnHeight);
 
   // Calculate the content height of each column based on images
+  // This accounts for both image heights and spacing elements
   columns.forEach((column, colIndex) => {
     const imagesInColumn = columnImages[colIndex] || [];
     // Calculate height from images and line breaks
@@ -390,7 +447,7 @@ function generateGrid() {
       }
     });
 
-    // Add line break heights
+    // Add line break heights (1px each)
     if (imagesInColumn.length > 0) {
       // Add line break height for each image
       totalContentHeight += imagesInColumn.length; // 1px per line break
@@ -400,11 +457,12 @@ function generateGrid() {
     column.contentHeight = totalContentHeight;
 
     // Store information about how many pixels need to be added to make this column
-    // match the height of the tallest column
+    // match the height of the tallest column (for visual balance)
     column.heightGap = tallestColumnHeight - column.totalHeight;
   });
 
   // Find the tallest column content height
+  // This is used for the final height equalization pass
   const tallestContentHeight = Math.max(
     ...columns.map((col) => col.contentHeight || 0),
   );
@@ -416,11 +474,13 @@ function generateGrid() {
   let globalImageIndex = 0;
 
   // Second pass: Add content to the DOM with pixel-by-pixel distribution after each image
+  // This ensures all columns have equal visual height despite different content
   columns.forEach((column, colIndex) => {
     const images = columnImages[colIndex] || [];
     if (images.length === 0) return; // Skip empty columns
 
     // Calculate the height gap needed for this column
+    // This determines how much spacing to add to match the tallest column
     const heightGap = Math.max(0, tallestContentHeight - column.contentHeight);
     console.log(
       `Column ${colIndex}: gap to fill: ${heightGap}px, images: ${images.length}`,
@@ -428,6 +488,7 @@ function generateGrid() {
 
     if (heightGap <= 0) {
       // This is already the tallest column, no spacing needed
+      // Just add images with regular line breaks
       images.forEach((imgInfo, imgIndex) => {
         // Store the position data for this image in our global map
         window.imagePositionMap.set(imgInfo.element.id, {
@@ -442,6 +503,7 @@ function generateGrid() {
       });
     } else if (images.length === 1) {
       // For a single image, we have no choice but to add spacing at the bottom
+      // This maintains column height balance when only one image is present
       // Store position data
       window.imagePositionMap.set(images[0].element.id, {
         columnIndex: colIndex,
@@ -459,6 +521,7 @@ function generateGrid() {
       column.element.appendChild(spacer);
     } else {
       // For multiple images, we'll distribute the gap incrementally after each image
+      // This creates more natural spacing than adding all spacing at the bottom
 
       // Add images with even 1px spacing to equalize column heights
       // Determine how many 1px spaces we need to add
@@ -470,6 +533,7 @@ function generateGrid() {
       const canAddSpaces = pixelsNeeded > 0 && images.length > 0;
 
       // Calculate a default amount of spaces to add after each image
+      // Distribute evenly with remainder distributed one pixel at a time
       let pixelsPerImage = 0;
       let remainingPixels = 0;
       if (canAddSpaces) {
@@ -480,6 +544,7 @@ function generateGrid() {
         );
       }
 
+      // Process each image in the column and add appropriate spacing
       images.forEach((imgInfo, imgIndex) => {
         // Store position data for this image
         window.imagePositionMap.set(imgInfo.element.id, {
@@ -516,17 +581,19 @@ function generateGrid() {
   });
 
   // Create a row and append the columns to it
+  // This creates the final table structure for the grid layout
   const row = document.createElement("tr");
   columns.forEach((column) => row.appendChild(column.element));
   tableBody.appendChild(row);
 
-  // Log the adjusted column heights
+  // Log the adjusted column heights for debugging
   console.log(
     "Final column heights after gap distribution:",
     columns.map((col) => col.totalHeight),
   );
 
   // navigation display: Calculate total pages based on tallest column height and viewport height
+  // This happens after DOM layout is complete
   setTimeout(() => {
     // Find the tallest column after all DOM updates
     let tallestColumnAfterLayout = 0;
@@ -538,6 +605,7 @@ function generateGrid() {
     });
 
     // Calculate total pages based on tallest column height and viewport height
+    // This determines how many "pages" of content exist for navigation purposes
     const viewportHeight = window.innerHeight;
     window.totalPages = Math.ceil(tallestColumnAfterLayout / viewportHeight);
 
@@ -550,11 +618,17 @@ function generateGrid() {
   }, 500);
 }
 
+/**
+ * Logs and removes all fully visible images from the DOM
+ * Used for debugging visibility calculations and cleanup
+ * After removal, scrolls to the closest remaining image
+ */
 function logFullyVisibleImages() {
   const fullyVisibleImages = [];
   const images = document.querySelectorAll("img");
   images.forEach((img) => {
     const rect = img.getBoundingClientRect();
+    // Check if image is completely within the viewport
     if (
       rect.top >= 0 &&
       rect.left >= 0 &&
@@ -574,6 +648,11 @@ function logFullyVisibleImages() {
   scrollToClosestImage();
 }
 
+/**
+ * Scrolls the viewport to show partially visible images properly
+ * Prioritizes images that are cut off at the bottom of the viewport
+ * Provides smooth navigation through the image gallery
+ */
 function scrollToPartialImage() {
   const images = Array.from(document.querySelectorAll("img"));
   const viewportHeight = window.innerHeight;
@@ -585,6 +664,7 @@ function scrollToPartialImage() {
     const rect = img.getBoundingClientRect();
 
     // Check if the image is partially visible with the top visible and not fully in the viewport
+    // These are images that are cut off at the bottom of the screen
     if (
       rect.top > 0 &&
       rect.top < viewportHeight &&
@@ -600,6 +680,7 @@ function scrollToPartialImage() {
   });
 
   // Sort images by rect.top (uniquely, without duplicates)
+  // Remove duplicate images that might have the same Y position
   partiallyVisibleImages = partiallyVisibleImages.filter(
     (img, index, self) =>
       index ===
@@ -617,16 +698,23 @@ function scrollToPartialImage() {
     });
   } else if (visibleImages.length > 0) {
     // If no partial images, scroll to the bottom of the visible images plus 10px
+    // This provides smooth continuous scrolling
     const lastVisibleImage = visibleImages[visibleImages.length - 1];
     const rect = lastVisibleImage.getBoundingClientRect();
     window.scrollBy(0, rect.bottom + 10);
   }
 }
 
+/**
+ * Toggles the visibility state of an image (shows/hides blurhash overlay)
+ * In select mode, also sends selection state to the server
+ * @param {HTMLElement} element - The image element to toggle
+ */
 function toggleVisibility(element) {
   toggleHidden(element);
 
   // Only send to server when selectMode is "yes"
+  // This allows server-side tracking of selected images
   if (selectMode === "yes") {
     const filename = element.getAttribute("data-filename");
     console.log(
@@ -661,6 +749,11 @@ function toggleVisibility(element) {
   // When selectMode is "no", just toggle blurhash locally without server interaction
 }
 
+/**
+ * Toggles the blurhash overlay on an image element
+ * Creates or removes a canvas with blurhash visualization
+ * @param {HTMLElement} element - The image element to toggle
+ */
 function toggleHidden(element) {
   // Check if blurmap is already displayed
   const wrapper = element.parentNode;
@@ -712,6 +805,7 @@ function toggleHidden(element) {
       element.style.opacity = "0";
     } else {
       // Fallback when no blurhash is available - create dark shadow with saturated highlights
+      // This provides visual feedback even when blurhash data is missing
       if (element.style.filter) {
         // Remove the filter effects to restore original image
         element.style.filter = "";
@@ -840,16 +934,22 @@ window.addEventListener("resize", () => {
 
 // Click and custom event handlers for autoscrolling have been removed
 
+/**
+ * Main initialization function that runs when the DOM is fully loaded
+ * Sets up the image gallery, navigation, lazy loading, and autoscroll functionality
+ */
 document.addEventListener("DOMContentLoaded", () => {
   const tableBody = document.getElementById("table-body");
   const overlay = document.getElementById("overlay");
 
   // Check if autoscrolling was enabled on previous page
+  // Autoscroll continues across page navigation for seamless browsing
   const shouldEnableAutoscroll =
     sessionStorage.getItem("autoscrollEnabled") === "true" ||
     typeof selectMode === "undefined" ||
     selectMode !== "yes"; // Enable by default when NOT in yes mode
 
+  // Auto-enable autoscroll if it was previously enabled or not in selection mode
   setTimeout(() => {
     if (!window.autoscrollInterval && shouldEnableAutoscroll) {
       console.log(
@@ -865,10 +965,14 @@ document.addEventListener("DOMContentLoaded", () => {
   // Privacy mode has been removed
 
   // Remove any navigation controls from previous runs or created by blurmap.go
+  // This ensures clean navigation state on page load
   const oldNav = document.getElementById("navigation-control");
   if (oldNav) oldNav.remove();
 
-  // Function to remove any navigation elements from blurmap.go
+  /**
+   * Removes navigation elements that might be created by external scripts (blurmap.go)
+   * This ensures our custom navigation system doesn't conflict with other navigation
+   */
   function removeExternalNavigationElements() {
     // Remove chunk-nav elements from blurmap.go
     const chunkNav = document.querySelector(".chunk-nav");
@@ -887,6 +991,7 @@ document.addEventListener("DOMContentLoaded", () => {
   removeExternalNavigationElements();
 
   // Setup observer to remove external navigation elements when added to DOM
+  // This prevents conflicts with other navigation systems
   const observer = new MutationObserver(() => {
     removeExternalNavigationElements();
   });
@@ -895,6 +1000,7 @@ document.addEventListener("DOMContentLoaded", () => {
   observer.observe(document.body, { childList: true, subtree: true });
 
   // Create our own navigation control with the requested format - make it globally accessible
+  // This provides persistent navigation and status information
   window.navigationControl = document.createElement("div");
   window.navigationControl.id = "navigation-control";
   window.navigationControl.style.position = "fixed";
