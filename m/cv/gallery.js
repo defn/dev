@@ -1,3 +1,44 @@
+/*
+ * REFACTOR OPPORTUNITIES - Code Duplication Analysis
+ * ================================================
+ * 
+ * CRITICAL DUPLICATIONS (High Priority):
+ * 1. Aspect Ratio Calculation (5+ instances): Lines 37-48, 370-386, 1303-1310, 1476-1482
+ *    - Extract to: getAspectRatioFromIndex(filename, defaultRatio = 1)
+ * 
+ * 2. Countdown Display Pattern (4 instances): Lines 1774-1794, 2118-2138, 2184-2204
+ *    - Extract to: createCountdownDisplay(seconds, prefix, onComplete, onUpdate)
+ * 
+ * 3. Canvas Overlay Positioning (3+ instances): Lines 789-798, 1431-1438
+ *    - Extract to: styleCanvasOverlay(canvas, zIndex = 3, cursor = 'pointer')
+ * 
+ * 4. Relative Wrapper Creation (3+ instances): Lines 807-819, 1409-1421, 1505-1520
+ *    - Extract to: ensureRelativeWrapper(element, appendElement)
+ * 
+ * MEDIUM PRIORITY DUPLICATIONS:
+ * 5. Image Visibility Checks:
+ *    - Full visibility: Lines 643-649, 1709-1716 → isImageFullyVisible(img)
+ *    - Basic visibility: Lines 687-692, 1679-1688 → isImageVisible(img)
+ * 
+ * 6. Column Finding Algorithm: Lines 417-428
+ *    - Extract to: findShortestColumn(columns)
+ * 
+ * 7. Blurhash Color Parsing: Lines 98-123
+ *    - Extract to: parseBlurhashColors(blurhash, dim)
+ * 
+ * 8. Multi-Pass Blur Effect: Lines 181-196
+ *    - Extract to: applyMultipleBlurPasses(context, canvas, baseBlur)
+ * 
+ * 9. Page Bottom Detection: Lines 1813-1819
+ *    - Extract to: isAtPageBottom(tolerance = 5)
+ * 
+ * Implementing these refactorings would:
+ * - Reduce code size by ~15-20%
+ * - Improve maintainability and testability
+ * - Reduce bugs from inconsistent implementations
+ * - Enable better code reuse across the gallery system
+ */
+
 /**
  * Sets the document body margin to zero for full-width layout
  * Used to ensure the gallery takes up the full viewport width
@@ -33,6 +74,8 @@ function renderBlurhashGrid(image, blurhash, dim = 20) {
   // Create a canvas element for the blurhash grid
   const canvas = document.createElement("canvas");
 
+  // REFACTOR: Extract aspect ratio calculation to getAspectRatioFromIndex(filename)
+  // This pattern is repeated at lines 37-48, 370-386, 1303-1310, 1476-1482
   // Get the aspect ratio from the image object or find it in the blurhash index
   let aspectRatio = 1;
 
@@ -93,6 +136,8 @@ function renderBlurhashGrid(image, blurhash, dim = 20) {
   offscreenCanvas.height = height * scale;
   const offCtx = offscreenCanvas.getContext("2d");
 
+  // REFACTOR: Extract to parseBlurhashColors(blurhash, dim) function
+  // This RGB color parsing pattern is used only here but could be reusable
   // Extract RGB colors from the blurhash
   // Parse each 6-character hex color (RRGGBB) from the blurhash string
   const colors = [];
@@ -174,6 +219,8 @@ function renderBlurhashGrid(image, blurhash, dim = 20) {
 
   // Apply multiple blur passes with different radii for a much smoother result
   // Multiple passes create a more natural, photo-realistic blur effect
+  // REFACTOR: Extract to applyMultipleBlurPasses(context, canvas, baseBlur) function
+  // This multi-pass blur pattern could be reusable for other canvas effects
   // First blur pass - medium blur (scaled to image size)
   offCtx.filter = `blur(${baseBlur * 1.5}px)`;
   offCtx.globalAlpha = 0.9;
@@ -370,6 +417,7 @@ function generateGrid() {
     let aspectRatio = 1; // Default square aspect ratio
     let imgHeight = standardWidth; // Default height equal to width
 
+    // REFACTOR: Another instance of aspect ratio calculation - should use getAspectRatioFromIndex()
     // First try to get dimensions from the image object which now includes width and height
     if (image.width && image.height) {
       aspectRatio = image.width / image.height;
@@ -407,6 +455,8 @@ function generateGrid() {
       aspectRatio: aspectRatio,
     };
 
+    // REFACTOR: Extract to findShortestColumn(columns) function
+    // This greedy algorithm logic is self-contained and reusable
     // Find the column with the smallest total height (greedy algorithm)
     // This balances the column heights for a more even layout
     let shortestColumn = 0;
@@ -627,6 +677,8 @@ function logFullyVisibleImages() {
   const fullyVisibleImages = [];
   const images = document.querySelectorAll("img");
   images.forEach((img) => {
+    // REFACTOR: Extract to isImageFullyVisible(img) function
+    // This viewport visibility check pattern is repeated at lines 632-640, 1687-1693
     const rect = img.getBoundingClientRect();
     // Check if image is completely within the viewport
     if (
@@ -673,6 +725,8 @@ function scrollToPartialImage() {
       partiallyVisibleImages.push(img);
     }
 
+    // REFACTOR: Extract to isImageVisible(img) function  
+    // This basic visibility check is repeated at lines 677-679, 1658-1665
     // Check if the image is visible (completely or partially)
     if (rect.top < viewportHeight && rect.bottom > 0) {
       visibleImages.push(img);
@@ -773,6 +827,8 @@ function toggleHidden(element) {
       const canvas = renderBlurhashGrid(element, blurhash, 20);
       canvas.classList.add("toggle-blur");
 
+      // REFACTOR: Extract to styleCanvasOverlay(canvas, zIndex, cursor) function
+      // This canvas positioning pattern is repeated at lines 777-784, 1413-1418
       // Position canvas over the image
       canvas.style.position = "absolute";
       canvas.style.top = "0";
@@ -789,6 +845,8 @@ function toggleHidden(element) {
       };
 
       // Add canvas to wrapper or create wrapper if it doesn't exist
+      // REFACTOR: Extract to ensureRelativeWrapper(element, canvas) function
+      // This wrapper creation pattern is repeated at lines 805-815, 1393-1402, 1485-1502
       if (wrapper && wrapper.style.position === "relative") {
         wrapper.appendChild(canvas);
       } else {
@@ -1304,6 +1362,7 @@ document.addEventListener("DOMContentLoaded", () => {
           window.blurhashIndex[filename] ||
           window.blurhashIndex[filename.split("/").pop()];
 
+        // REFACTOR: Another aspect ratio calculation - should use getAspectRatioFromIndex()
         const metadataAspectRatio =
           imgData && imgData.width && imgData.height
             ? imgData.width / imgData.height
@@ -1383,6 +1442,7 @@ document.addEventListener("DOMContentLoaded", () => {
           );
           lazyImage.classList.add("load-failed");
 
+          // REFACTOR: This blurhash creation and wrapper setup is repeated - extract to createBlurhashForFailedImage()
           // Always show blurhash for failed images regardless of privacy mode
           const filename = lazyImage.dataset.filename;
           const blurhash = getBlurhashByFilename(filename);
@@ -1409,6 +1469,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const canvas = renderBlurhashGrid(lazyImage, blurhash, 20);
             canvas.classList.add("failed-image-blur");
 
+            // REFACTOR: Another instance of canvas positioning - should use styleCanvasOverlay()
             // Position canvas over the image
             canvas.style.position = "absolute";
             canvas.style.top = "0";
@@ -1476,6 +1537,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const imgData =
           window.blurhashIndex[filename] ||
           window.blurhashIndex[filename.split("/").pop()];
+        // REFACTOR: Yet another aspect ratio calculation - should use getAspectRatioFromIndex()
         const aspectRatio =
           imgData && imgData.width && imgData.height
             ? imgData.width / imgData.height
@@ -1642,6 +1704,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Autoscroll functionality
 
+  // REFACTOR: This function has similar logic to areAllViewportImagesLoaded()
+  // Consider consolidating into a general image analysis utility
   // Function to count visible images
   function countVisibleImages() {
     const images = document.querySelectorAll("img");
@@ -1655,6 +1719,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const imgTop = rect.top + window.pageYOffset;
       const imgBottom = imgTop + rect.height;
 
+      // REFACTOR: Another instance of image visibility check - should use isImageVisible()
       // Check if image is at least partially visible
       if (imgBottom > viewportTop && imgTop < viewportBottom) {
         // Skip failed images in the count
@@ -1674,6 +1739,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Privacy mode functions have been removed
 
+  // REFACTOR: This function shares logic with countVisibleImages() above
+  // Both functions iterate images and check viewport visibility - consolidate
   // Function to check if all images in viewport are loaded
   function areAllViewportImagesLoaded() {
     const images = document.querySelectorAll("img");
@@ -1684,6 +1751,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     images.forEach((img) => {
       const rect = img.getBoundingClientRect();
+      // REFACTOR: Another instance of full visibility check - should use isImageFullyVisible()
       // Check if image is FULLY visible in viewport
       if (
         rect.top >= 0 &&
@@ -1752,6 +1820,8 @@ document.addEventListener("DOMContentLoaded", () => {
       const originalCountdownValue = window.countdownValue;
 
       const updateDelayCoundown = () => {
+        // REFACTOR: Extract to createCountdownDisplay(seconds, prefix, callback) function
+        // This countdown pattern is repeated at lines 1754-1780, 2093-2117, 2158-2181
         window.countdownValue = `+${remainingSeconds}s`;
 
         // Update display - this will respect the top-of-page visibility logic
@@ -1785,6 +1855,8 @@ document.addEventListener("DOMContentLoaded", () => {
     // Reset the delay flag once we've scrolled
     window.singleColumnDelayInProgress = false;
 
+    // REFACTOR: Extract to isAtPageBottom(tolerance = 5) function
+    // This page bottom detection could be reusable
     // Check if we're at the bottom of the page
     const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
     const scrollHeight = document.documentElement.scrollHeight;
@@ -1880,6 +1952,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Update countdown display function
     const updateCountdown = () => {
+      // REFACTOR: Another countdown pattern - should use createCountdownDisplay()
       // Round to integer for display
       window.countdownValue = Math.ceil(window.secondsLeft);
 
@@ -2011,6 +2084,8 @@ document.addEventListener("DOMContentLoaded", () => {
       : 100,
   ); // Estimate
 
+  // REFACTOR: This function also uses image visibility checks
+  // Could benefit from the proposed isImageVisible() utility function
   // Function to black out all visible images before navigation
   function blackOutImagesAndNavigate(url) {
     // Get all visible images
@@ -2086,10 +2161,13 @@ document.addEventListener("DOMContentLoaded", () => {
         // Set a flag to prevent multiple delays
         window.manualSpaceDelay = true;
 
+        // REFACTOR: Duplicate countdown pattern - extract to createCountdownDisplay()
+        // This is identical to patterns throughout the file
         // Show countdown in navigation control
         let remainingSeconds = 5;
         const originalCountdownValue = window.countdownValue;
 
+        // REFACTOR: Another countdown pattern instance - should use createCountdownDisplay()
         const updateManualDelayCountdown = () => {
           window.countdownValue = `+${remainingSeconds}s`;
 
@@ -2151,10 +2229,13 @@ document.addEventListener("DOMContentLoaded", () => {
         // Set flag to prevent multiple delays
         window.wheelScrollDelay = true;
 
+        // REFACTOR: Duplicate countdown pattern - extract to createCountdownDisplay()
+        // This is identical to patterns throughout the file
         // Show countdown in navigation control
         let remainingSeconds = 5;
         const originalCountdownValue = window.countdownValue;
 
+        // REFACTOR: Final countdown pattern instance - should use createCountdownDisplay()
         const updateWheelDelayCountdown = () => {
           window.countdownValue = `+${remainingSeconds}s`;
 
