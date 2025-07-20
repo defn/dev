@@ -1,3 +1,40 @@
+/*
+Blurmap Gallery Generator
+========================
+
+This program generates responsive HTML image galleries with blurhash placeholders
+for fast loading. It processes images to create blur previews, manages caching,
+and outputs paginated HTML galleries with responsive layouts.
+
+Key Features:
+- Parallel blurhash generation for image placeholders
+- Intelligent caching system for performance optimization
+- Responsive HTML gallery generation with pagination
+- Integration with JavaScript frontend for dynamic loading
+- Support for different select modes (interactive vs read-only)
+
+Architecture:
+- Worker pool pattern for concurrent image processing
+- SHA256-based cache keys for reliable cache invalidation
+- Template-based HTML generation with embedded JavaScript
+- Chunked output for handling large image collections
+
+Usage:
+  go run blurmap.go -i images.input -o gallery/ -d img/ -c cache/
+
+Input Format:
+  Text file with one image identifier per line (without extension)
+
+Output:
+  - Paginated HTML files (1.html, 2.html, etc.)
+  - Embedded JavaScript with image metadata and blurhash data
+  - CSS and JavaScript integration for responsive gallery display
+
+Dependencies:
+  - Standard Go libraries only
+  - Image processing for PNG/JPEG formats
+  - No external dependencies required
+*/
 package main
 
 import (
@@ -19,16 +56,19 @@ import (
 	"time"
 )
 
+// Command-line configuration variables
+// These control the behavior and paths used by the gallery generator
 var (
-	// These will be set by command-line flags
-	allInputFile string
-	outputDir    string
-	cacheDir     string
-	imageDir     string
-	selectMode   string
+	allInputFile string // Path to input file containing image identifiers
+	outputDir    string // Directory where HTML gallery pages will be written
+	cacheDir     string // Directory for caching blurhash and dimension data
+	imageDir     string // Source directory containing the actual image files
+	selectMode   string // Gallery interaction mode ("yes" for selection, "no" for read-only)
 )
 
-// galleryTemplate is the HTML template for the gallery pages, moved from external gallery.html
+// galleryTemplate defines the HTML structure for gallery pages
+// This template is populated with image data and blurhash information
+// Includes responsive design elements and JavaScript integration
 const galleryTemplate = `<!doctype html>
 <html>
   <head>
@@ -57,55 +97,72 @@ const galleryTemplate = `<!doctype html>
   </body>
 </html>`
 
-// ImageInfo holds information about an image file
+// ImageInfo represents metadata for a single image in the gallery
+// Contains both source information and processed blurhash data
 type ImageInfo struct {
-	Filename string
-	Width    int
-	Height   int
-	Blurmap  string
+	Filename string // Base filename without extension
+	Width    int    // Image width in pixels
+	Height   int    // Image height in pixels
+	Blurmap  string // Generated blurhash string for placeholder
 }
 
-// Result holds the result of processing an image
+// Result represents the outcome of processing a single image
+// Used to communicate between worker goroutines and main thread
 type Result struct {
-	Filename  string
-	Blurmap   string
-	Width     int
-	Height    int
-	Error     error
-	Cached    bool
-	DimCached bool // Whether dimensions were from cache
+	Filename  string // Image filename that was processed
+	Blurmap   string // Generated or cached blurhash string
+	Width     int    // Image width (from file or cache)
+	Height    int    // Image height (from file or cache)
+	Error     error  // Any error encountered during processing
+	Cached    bool   // Whether blurhash was loaded from cache
+	DimCached bool   // Whether dimensions were loaded from cache
 }
 
-// GalleryData holds data to be injected into the template
+// GalleryData contains the processed data ready for template injection
+// Represents the final output data structure for HTML generation
 type GalleryData struct {
-	Images      string
-	BlurhashMap string
+	Images      string // JavaScript array of image objects with metadata
+	BlurhashMap string // JavaScript object mapping filenames to blurhash data
 }
 
+// Configuration constants for gallery generation
 const (
-	chunkSize = 500 // Number of images per chunk
+	chunkSize = 500 // Number of images per HTML page (pagination size)
 )
 
-// timestampCache holds the current timestamp used for cache busting
+// timestampCache provides cache-busting functionality for browser assets
+// Set once at startup to ensure consistent cache invalidation across all pages
 var timestampCache int64
 
+// main orchestrates the entire gallery generation process
+// 1. Parses command-line arguments and validates configuration
+// 2. Sets up worker pool for parallel image processing  
+// 3. Processes images to generate blurhash data with caching
+// 4. Generates paginated HTML gallery files with embedded data
 func main() {
-	// Parse command-line flags
+	// Configure command-line flags with both long and short forms
+	// Input/output configuration
 	flag.StringVar(&allInputFile, "input", "all.input", "Input file containing image identifiers")
 	flag.StringVar(&allInputFile, "i", "all.input", "Input file containing image identifiers (shorthand)")
 	flag.StringVar(&outputDir, "output", "g", "Output directory for HTML gallery pages")
 	flag.StringVar(&outputDir, "o", "g", "Output directory for HTML gallery pages (shorthand)")
+	
+	// Cache and source configuration
 	flag.StringVar(&cacheDir, "cache", "blur", "Cache directory for blurhash data")
 	flag.StringVar(&cacheDir, "c", "blur", "Cache directory for blurhash data (shorthand)")
 	flag.StringVar(&imageDir, "imagedir", "replicate/t2", "Source image directory")
 	flag.StringVar(&imageDir, "d", "replicate/t2", "Source image directory (shorthand)")
+	
+	// Gallery behavior configuration
 	flag.StringVar(&selectMode, "selectmode", "no", "Select mode for image interaction (default: no)")
 	flag.StringVar(&selectMode, "s", "no", "Select mode for image interaction (shorthand)")
+	
+	// Help flags
 	showHelp := flag.Bool("help", false, "Show help message")
 	showHelpShort := flag.Bool("h", false, "Show help message (shorthand)")
 	flag.Parse()
 
-	// Show help if requested
+	// Display help information if requested
 	if *showHelp || *showHelpShort {
 		fmt.Fprintf(os.Stderr, "Usage: %s [options]\n", os.Args[0])
 		fmt.Fprintf(os.Stderr, "\nOptions:\n")
@@ -113,16 +170,16 @@ func main() {
 		os.Exit(0)
 	}
 
-	// Create a single timestamp for cache busting
+	// Initialize cache-busting timestamp (consistent across all generated pages)
 	timestampCache = time.Now().Unix()
 
-	// Create cache directory if it doesn't exist
+	// Ensure cache directory exists for storing blurhash and dimension data
 	if err := ensureCacheDir(); err != nil {
 		fmt.Fprintf(os.Stderr, "Error creating cache directory: %v\n", err)
 		os.Exit(1)
 	}
 
-	// Process the identifiers from the input file
+	// Load and parse the input file containing image identifiers
 	imageInfos, err := parseInputFile(allInputFile)
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error parsing input file: %v\n", err)
@@ -131,28 +188,29 @@ func main() {
 
 	fmt.Fprintf(os.Stderr, "Found %d images to process\n", len(imageInfos))
 
-	// Use all available CPU cores
+	// Configure worker pool for parallel image processing
+	// Use all available CPU cores for optimal performance
 	numWorkers := runtime.NumCPU()
 	runtime.GOMAXPROCS(numWorkers)
 
-	// Create channels for distributing work and collecting results
-	jobs := make(chan ImageInfo, len(imageInfos))
-	results := make(chan Result, len(imageInfos))
+	// Set up channels for distributing work and collecting results
+	jobs := make(chan ImageInfo, len(imageInfos))    // Buffered channel for work distribution
+	results := make(chan Result, len(imageInfos))    // Buffered channel for result collection
 
-	// Create wait group to wait for all goroutines to finish
+	// Synchronization primitive to wait for all workers to complete
 	var wg sync.WaitGroup
 
-	// Start worker goroutines
+	// Launch worker goroutines for parallel processing
 	for w := 0; w < numWorkers; w++ {
 		wg.Add(1)
 		go worker(jobs, results, &wg)
 	}
 
-	// Send jobs to the workers
+	// Distribute all image processing jobs to workers
 	for _, imageInfo := range imageInfos {
 		jobs <- imageInfo
 	}
-	close(jobs)
+	close(jobs) // Signal no more jobs will be sent
 
 	// Wait for all workers to finish and close results channel
 	go func() {
