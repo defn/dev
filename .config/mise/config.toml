@@ -3,7 +3,7 @@ experimental = true
 
 [tools]
 ansible = "11.8.0"
-aws = "2.27.55"
+aws = "2.27.56"
 bat = "0.25.0"
 bazelisk = "1.26.0"
 chamber = "3.1.2"
@@ -13,7 +13,7 @@ delta = "0.18.2"
 dive = "0.13.1"
 dyff = "1.10.1"
 fzf = "0.64.0"
-gh = "2.75.0"
+gh = "2.76.0"
 glow = "2.1.1"
 go = "1.24.5"
 gron = "0.7.1"

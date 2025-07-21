@@ -2,4 +2,4 @@
 _.file = '.env'
 
 [tools]
-"ubi:replicate/cog" = "0.15.11"
+"ubi:replicate/cog" = "0.16.0"
