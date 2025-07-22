@@ -1,0 +1,87 @@
+#!/usr/bin/env bash
+
+# packages - Package hold/unhold management script
+# Usage:
+#   packages hold pkg1,pkg2,pkg3      # Hold packages from upgrades
+#   packages unhold pkg1,pkg2,pkg3    # Unhold packages for upgrades
+#   packages show                     # Show currently held packages
+#   packages help                     # Show this help
+
+set -euo pipefail
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+PLAYBOOK_DIR="$(dirname "$SCRIPT_DIR")"
+
+usage() {
+    cat << EOF
+Package Hold/Unhold Management
+
+USAGE:
+    packages <action> [packages]
+
+ACTIONS:
+    hold <packages>     Hold comma-separated packages from upgrades
+    unhold <packages>   Unhold comma-separated packages for upgrades  
+    show                Show currently held packages
+    help                Show this help
+
+EXAMPLES:
+    packages hold docker-ce,kubectl,kubelet
+    packages unhold docker-ce
+    packages show
+
+NOTES:
+    - Package names should be comma-separated without spaces
+    - Holding a package prevents it from being upgraded
+    - Use 'show' to see which packages are currently held
+    - Invalid package names will cause the operation to fail
+EOF
+}
+
+main() {
+    local action="${1:-}"
+    local packages="${2:-}"
+
+    case "$action" in
+        hold|unhold)
+            if [[ -z "$packages" ]]; then
+                echo "Error: packages parameter required for $action action" >&2
+                echo "Usage: packages $action pkg1,pkg2,pkg3" >&2
+                exit 1
+            fi
+            ;;
+        show)
+            # No packages parameter needed
+            ;;
+        help|--help|-h)
+            usage
+            exit 0
+            ;;
+        "")
+            echo "Error: action required" >&2
+            usage
+            exit 1
+            ;;
+        *)
+            echo "Error: unknown action '$action'" >&2
+            echo "Valid actions: hold, unhold, show, help" >&2
+            exit 1
+            ;;
+    esac
+
+    # Run the Ansible playbook
+    local ansible_args=(-e "action=$action")
+    if [[ -n "$packages" ]]; then
+        ansible_args+=(-e "packages=$packages")
+    fi
+
+    echo "Running package management playbook with action: $action"
+    if [[ -n "$packages" ]]; then
+        echo "Packages: $packages"
+    fi
+    echo
+
+    exec ansible-playbook "$PLAYBOOK_DIR/packages.yaml" -i localhost, -c local "${ansible_args[@]}"
+}
+
+main "$@"

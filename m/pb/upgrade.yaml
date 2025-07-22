@@ -1,9 +1,10 @@
 ---
 # upgrade.yaml - System package upgrade and maintenance playbook
 # Purpose: Updates and upgrades all apt packages with error handling and cleanup
-# Usage: ansible-playbook upgrade.yaml -i inventory
+# Usage: ansible-playbook upgrade.yaml -i inventory [-e packages_to_hold="pkg1,pkg2"] [-e packages_to_unhold="pkg3,pkg4"]
 # Dependencies: Ubuntu or Debian OS, sudo privileges
 # Features:
+#   - Hold/unhold packages from upgrades
 #   - Fixes broken dpkg configurations
 #   - Updates package cache and upgrades all packages
 #   - Removes unnecessary packages (autoremove)
@@ -16,6 +17,20 @@
       fail:
         msg: "This playbook only supports Ubuntu or Debian systems."
       when: ansible_facts['os_family'] != "Debian"
+
+    - name: Hold packages from upgrades
+      shell: "apt-mark hold {{ item }}"
+      with_items: "{{ packages_to_hold.split(',') if packages_to_hold is defined and packages_to_hold != '' else [] }}"
+      when: packages_to_hold is defined and packages_to_hold != ''
+      register: hold_result
+      failed_when: hold_result.rc != 0 and 'already set on hold' not in hold_result.stderr
+
+    - name: Unhold packages for upgrades
+      shell: "apt-mark unhold {{ item }}"
+      with_items: "{{ packages_to_unhold.split(',') if packages_to_unhold is defined and packages_to_unhold != '' else [] }}"
+      when: packages_to_unhold is defined and packages_to_unhold != ''
+      register: unhold_result
+      failed_when: unhold_result.rc != 0 and 'not set on hold' not in unhold_result.stderr
     - name: Fix dpkg
       shell: sudo dpkg --configure -a || true
       args:

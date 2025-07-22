@@ -1,0 +1,83 @@
+---
+# packages.yaml - Package hold/unhold management playbook
+# Purpose: Manages apt package holds to prevent or allow upgrades for specific packages
+# Usage: 
+#   - Hold packages: ansible-playbook packages.yaml -e "action=hold packages='pkg1,pkg2,pkg3'"
+#   - Unhold packages: ansible-playbook packages.yaml -e "action=unhold packages='pkg1,pkg2,pkg3'"
+#   - Show held packages: ansible-playbook packages.yaml -e "action=show"
+# Dependencies: Ubuntu or Debian OS, sudo privileges
+# Features:
+#   - Hold packages to prevent upgrades
+#   - Unhold packages to allow upgrades
+#   - List currently held packages
+#   - Handles already held/unheld packages gracefully
+#   - Validates package names before operations
+- name: Manage package holds
+  hosts: all
+  become: true
+  vars:
+    pkg_action: "{{ action | default('show') }}"
+    pkg_list: "{{ packages | default('') }}"
+  tasks:
+    - name: Fail if not Ubuntu or Debian
+      fail:
+        msg: "This playbook only supports Ubuntu or Debian systems."
+      when: ansible_facts['os_family'] != "Debian"
+
+    - name: Validate action parameter
+      fail:
+        msg: "Action must be one of: hold, unhold, show"
+      when: pkg_action not in ['hold', 'unhold', 'show']
+
+    - name: Show currently held packages
+      shell: "apt-mark showhold"
+      register: held_packages
+      when: pkg_action == 'show'
+
+    - name: Display held packages
+      debug:
+        msg: "Currently held packages: {{ held_packages.stdout_lines | join(', ') if held_packages.stdout_lines else 'None' }}"
+      when: pkg_action == 'show'
+
+    - name: Validate packages parameter for hold/unhold operations
+      fail:
+        msg: "packages parameter is required for {{ pkg_action }} action"
+      when: pkg_action in ['hold', 'unhold'] and (pkg_list is not defined or pkg_list == '')
+
+    - name: Split package list
+      set_fact:
+        package_list: "{{ pkg_list.split(',') | map('trim') | list }}"
+      when: pkg_action in ['hold', 'unhold'] and pkg_list != ''
+
+    - name: Verify packages exist before holding
+      shell: "apt-cache show {{ item }}"
+      with_items: "{{ package_list }}"
+      register: package_check
+      failed_when: package_check.rc != 0
+      when: pkg_action == 'hold'
+
+    - name: Hold packages from upgrades
+      shell: "apt-mark hold {{ item }}"
+      with_items: "{{ package_list }}"
+      when: pkg_action == 'hold'
+      register: hold_result
+      failed_when: hold_result.rc != 0 and 'already set on hold' not in hold_result.stderr
+
+    - name: Display hold results
+      debug:
+        msg: "Package {{ item.item }} {% if 'already set on hold' in item.stderr %}was already held{% else %}has been held{% endif %}"
+      with_items: "{{ hold_result.results }}"
+      when: pkg_action == 'hold' and hold_result is defined
+
+    - name: Unhold packages for upgrades
+      shell: "apt-mark unhold {{ item }}"
+      with_items: "{{ package_list }}"
+      when: pkg_action == 'unhold'
+      register: unhold_result
+      failed_when: unhold_result.rc != 0 and 'not set on hold' not in unhold_result.stderr
+
+    - name: Display unhold results
+      debug:
+        msg: "Package {{ item.item }} {% if 'not set on hold' in item.stderr %}was not held{% else %}has been unheld{% endif %}"
+      with_items: "{{ unhold_result.results }}"
+      when: pkg_action == 'unhold' and unhold_result is defined
