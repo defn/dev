@@ -252,3 +252,20 @@ Specifically, execute these steps:
 4. **Report results**: Summarize which workspaces were updated successfully and any that failed
 
 **Note**: This task updates all existing workspaces to use the latest template versions. Workspaces that are stopped or in error states may need special handling.
+
+### Task: coder delete tasks
+
+When asked to "run coder delete tasks task" or similar, follow these steps:
+
+1. List all workspaces using `coder list`
+2. Filter workspaces whose names start with "task"
+3. For each matching workspace that is not running, delete it without prompting
+
+Specifically, execute these steps:
+1. **List workspaces**: Run `coder list` to get all workspace names and statuses
+2. **Filter task workspaces**: Identify workspaces whose names start with "task"
+3. **Check status**: Only delete workspaces that are not in "running" state
+4. **Delete workspaces**: For each matching workspace, run `coder delete --yes [workspace-name]`
+5. **Report results**: Summarize which workspaces were deleted and any that were skipped
+
+**Note**: This task cleans up temporary task workspaces that are no longer running. The `--yes` flag prevents interactive prompts during deletion.
