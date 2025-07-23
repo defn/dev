@@ -159,6 +159,7 @@ When asked to "run go sync task" or similar, follow these steps:
    - `m/go.mod`: Update the `go` directive line
    - `m/cv/go.mod`: Update the `go` directive line
    - `m/go.work`: Update the `go` directive line
+   - `m/MODULE.bazel`: Update the `go_sdk.download(version = "X.X.X")` line
    - `.trunk/trunk.yaml`: Update the `go@` runtime version
    - `.trunk/trunk.yaml`: Update the `gofmt@` linter version to match
 4. Run `trunk fmt` to format any modified files
@@ -166,11 +167,11 @@ When asked to "run go sync task" or similar, follow these steps:
 6. Stage and commit the synchronized versions:
 
    ```bash
-   git add m/go.mod m/cv/go.mod m/go.work .trunk/trunk.yaml
+   git add m/go.mod m/cv/go.mod m/go.work m/MODULE.bazel .trunk/trunk.yaml
    git commit -m "chore: sync Go version across all configuration files
 
    - Update all Go references to match mise version: [version]
-   - Ensures consistency across go.mod, go.work, and trunk.yaml
+   - Ensures consistency across go.mod, go.work, MODULE.bazel, and trunk.yaml
    - Synchronizes development tooling with configured Go version
 
    🤖 Generated with [Claude Code](https://claude.ai/code)
@@ -208,7 +209,7 @@ Specifically, execute these tasks in order:
    - Stage and commit the changed mise.toml files with version changes
 3. **go sync**:
    - Get Go version: `mise exec -- go version`
-   - Update go.mod files, go.work, and trunk.yaml with the version
+   - Update go.mod files, go.work, MODULE.bazel, and trunk.yaml with the version
    - Run `trunk fmt`
    - Test with `b build` in m directory
    - Stage and commit the synchronized files
