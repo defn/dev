@@ -61,14 +61,26 @@ resource "coder_agent" "main" {
     vscode          = false
     vscode_insiders = false
   }
+}
 
-  env = {
-    CODER_MCP_CLAUDE_TASK_PROMPT   = data.coder_parameter.ai_prompt.value
-    CODER_MCP_APP_STATUS_SLUG      = "claude-code"
-    CODER_MCP_CLAUDE_SYSTEM_PROMPT = <<-EOT
-      Be terse.
-    EOT
-  }
+resource "coder_env" "mcp_claude_task_prompt" {
+  agent_id = coder_agent.main.id
+  name     = "CODER_MCP_CLAUDE_TASK_PROMPT"
+  value    = data.coder_parameter.ai_prompt.value
+}
+
+resource "coder_env" "mcp_app_status_slug" {
+  agent_id = coder_agent.main.id
+  name     = "CODER_MCP_APP_STATUS_SLUG"
+  value    = "claude-code"
+}
+
+resource "coder_env" "mcp_claude_system_prompt" {
+  agent_id = coder_agent.main.id
+  name     = "CODER_MCP_CLAUDE_SYSTEM_PROMPT"
+  value    = <<-EOT
+    Be terse.
+  EOT
 }
 
 resource "coder_app" "code-server" {
