@@ -268,6 +268,12 @@ resource "docker_container" "workspace" {
     read_only      = true
   }
 
+  volumes {
+    container_path = "/home/ubuntu/.config/gh"
+    host_path      = "/home/ubuntu/.config/gh"
+    read_only      = true
+  }
+
   labels {
     label = "coder.owner"
     value = data.coder_workspace_owner.me.name
