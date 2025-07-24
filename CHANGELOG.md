@@ -1,5 +1,21 @@
 # Changelog
 
+## [1.31.0](https://github.com/defn/dev/compare/v1.30.0...v1.31.0) (2025-07-24)
+
+
+### Features
+
+* add Ansible tasks for package hold/unhold management ([213cfdc](https://github.com/defn/dev/commit/213cfdc45d09a3ba9b93775bf72a74397d693d2c))
+* add coder delete tasks task to CLAUDE.md ([e0b7094](https://github.com/defn/dev/commit/e0b7094b44eecc4fb2f9fb2c34b5280de1691f9d))
+* add GitHub CLI config mount to Docker template ([0cd97b6](https://github.com/defn/dev/commit/0cd97b66e6acd2dc9cc1c1ed33050f6611e2fe26))
+* mount host Claude auth and copy credentials in Docker template ([f355e2c](https://github.com/defn/dev/commit/f355e2c597dbd94e15dfd371373f64f554289bd4))
+* upgrade mise packages to latest versions ([effc9db](https://github.com/defn/dev/commit/effc9dbcf53e0bdeb60ca77701dfe0550f209fea))
+
+
+### Bug Fixes
+
+* remove hosts ending in -dev from Ansible inventory ([d853fb8](https://github.com/defn/dev/commit/d853fb8f0597a124879f9c73483a1bcdd550d16f))
+
 ## [1.30.0](https://github.com/defn/dev/compare/v1.29.0...v1.30.0) (2025-07-19)
 
 
