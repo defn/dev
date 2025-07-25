@@ -274,6 +274,12 @@ resource "docker_container" "workspace" {
     read_only      = true
   }
 
+  volumes {
+    container_path = "/var/run/docker.sock"
+    host_path      = "/var/run/docker.sock"
+    read_only      = false
+  }
+
   labels {
     label = "coder.owner"
     value = data.coder_workspace_owner.me.name
