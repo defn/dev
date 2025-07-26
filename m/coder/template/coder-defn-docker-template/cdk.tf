@@ -115,18 +115,6 @@ provider "docker" {
   host = var.docker_socket != "" ? var.docker_socket : null
 }
 
-module "devcontainers-cli" {
-  count    = data.coder_workspace.me.start_count
-  source   = "dev.registry.coder.com/modules/devcontainers-cli/coder"
-  agent_id = coder_agent.main.id
-}
-
-resource "coder_devcontainer" "m" {
-  count            = data.coder_workspace.me.start_count
-  agent_id         = coder_agent.main.id
-  workspace_folder = data.coder_parameter.homedir.value
-}
-
 resource "docker_volume" "dotfiles_volume" {
   name = "coder-${data.coder_workspace.me.id}-dotfiles"
 
