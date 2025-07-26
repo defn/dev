@@ -128,17 +128,6 @@ resource "null_resource" "deploy" {
   }
 }
 
-module "devcontainers-cli" {
-  count    = data.coder_workspace.me.start_count
-  source   = "dev.registry.coder.com/modules/devcontainers-cli/coder"
-  agent_id = coder_agent.main.id
-}
-
-resource "coder_devcontainer" "m" {
-  count            = data.coder_workspace.me.start_count
-  agent_id         = coder_agent.main.id
-  workspace_folder = "/home/ubuntu/m/meh"
-}
 
 module "claude-code" {
   count               = data.coder_workspace.me.start_count
