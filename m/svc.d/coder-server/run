@@ -10,6 +10,7 @@ source .env
 export PATH
 
 exec mise exec -- coder server --enable-terraform-debug-mode \
+	--link-protection-trusted-domains github.com,defn.run \
 	--oauth2-github-device-flow=false \
 	--oauth2-github-allow-signups="${CODER_OAUTH2_GITHUB_ALLOW_SIGNUPS}" \
 	--oauth2-github-allowed-orgs="${CODER_OAUTH2_GITHUB_ALLOWED_ORGS}" \
