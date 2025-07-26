@@ -150,3 +150,10 @@ module "claude-code" {
 
   experiment_report_tasks = true
 }
+
+module "coder-login" {
+  count    = data.coder_workspace.me.start_count
+  source   = "registry.coder.com/coder/coder-login/coder"
+  version  = "1.0.31"
+  agent_id = coder_agent.main.id
+}
