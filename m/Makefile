@@ -83,10 +83,10 @@ ci:
 # Outputs: Created buildkite agent and plugins directories, started Buildkite agent with specified configuration
 ci_inner:
 	mkdir -p ~/work/buildkite-{agent,plugins}${AGENT}
-	env BUILDKITE_AGENT_DISCONNECT_AFTER_IDLE_TIMEOUT=$(timeout) buildkite-agent start \
+	. ~/work/.buildkite/.env && env BUILDKITE_AGENT_DISCONNECT_AFTER_IDLE_TIMEOUT=$(timeout) buildkite-agent start \
 		--build-path ~/work/buildkite-agent${AGENT} \
 		--plugins-path ~/work/buildkite-plugins${AGENT} \
-		--token "$(BUILDKITE_AGENT_TOKEN)"
+		--token "$${BUILDKITE_AGENT_TOKEN}"
 
 # Build website documentation and commit changes
 # Dependencies: defn/dev/www directory with Makefile, make command, git command, docs directory
