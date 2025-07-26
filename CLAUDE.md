@@ -270,3 +270,24 @@ Specifically, execute these steps:
 5. **Report results**: Summarize which workspaces were deleted and any that were skipped
 
 **Note**: This task cleans up temporary task workspaces that are no longer running. The `--yes` flag prevents interactive prompts during deletion.
+
+### Task: coder all
+
+When asked to "run coder all task" or similar, follow these steps:
+
+1. Run the coder delete tasks task to clean up non-running task workspaces
+2. Run the coder upgrade all task to update both SSH and Docker templates
+3. Run the coder upgrade workspaces task to update all workspaces to latest templates
+
+Specifically, execute these tasks in order:
+1. **coder delete tasks**: 
+   - List all workspaces with `coder list`
+   - Delete non-running workspaces starting with "task" using `coder delete --yes`
+2. **coder upgrade all**:
+   - Update SSH template: `cd m/coder/template && j push coder-defn-ssh-template`
+   - Update Docker template: `cd m/coder/template && j push coder-defn-docker-template`
+3. **coder upgrade workspaces**:
+   - List all workspaces with `coder list`
+   - Update each workspace with `coder update [workspace-name]`
+
+**Note**: This comprehensive task ensures Coder infrastructure is fully updated - cleaning up temporary workspaces, deploying latest templates, and upgrading all active workspaces to use the new templates.
