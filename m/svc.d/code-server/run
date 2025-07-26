@@ -17,4 +17,4 @@ fi
 
 export PATH
 
-exec mise exec -- code-server --auth none
+exec mise exec -- code-server --auth none --link-protection-trusted-domains github.com,defn.run
