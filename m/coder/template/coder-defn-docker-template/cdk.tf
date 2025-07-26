@@ -152,31 +152,6 @@ resource "docker_volume" "dotfiles_volume" {
   }
 }
 
-resource "docker_volume" "code_server_extensions_volume" {
-  name = "coder-${data.coder_workspace.me.id}-code-server-extensions"
-
-  lifecycle {
-    ignore_changes = all
-  }
-
-  labels {
-    label = "coder.owner"
-    value = data.coder_workspace_owner.me.name
-  }
-  labels {
-    label = "coder.owner_id"
-    value = data.coder_workspace_owner.me.id
-  }
-  labels {
-    label = "coder.workspace_id"
-    value = data.coder_workspace.me.id
-  }
-  labels {
-    label = "coder.workspace_name_at_creation"
-    value = data.coder_workspace.me.name
-  }
-}
-
 resource "docker_volume" "claude_volume" {
   name = "coder-${data.coder_workspace.me.id}-claude"
 
@@ -239,12 +214,6 @@ resource "docker_container" "workspace" {
   }
 
   volumes {
-    container_path = "/home/ubuntu/.local/share/code-server/extensions"
-    volume_name    = docker_volume.code_server_extensions_volume.name
-    read_only      = false
-  }
-
-  volumes {
     container_path = "/home/ubuntu/dotfiles"
     volume_name    = docker_volume.dotfiles_volume.name
     read_only      = false
@@ -272,6 +241,12 @@ resource "docker_container" "workspace" {
     container_path = "/home/ubuntu/.config/gh"
     host_path      = "/home/ubuntu/.config/gh"
     read_only      = true
+  }
+
+  volumes {
+    container_path = "/home/ubuntu/.local/share/code-server/extensions"
+    host_path      = "/home/ubuntu/.local/share/code-server/extensions"
+    read_only      = false
   }
 
   volumes {
