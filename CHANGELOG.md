@@ -1,5 +1,29 @@
 # Changelog
 
+## [1.32.0](https://github.com/defn/dev/compare/v1.31.0...v1.32.0) (2025-07-27)
+
+
+### Features
+
+* add coder-login module to Coder templates ([d431673](https://github.com/defn/dev/commit/d431673a5b8b7e16046bf5e5ab5796bf3c807c0e))
+* add GitHub to Coder's trusted domains for link protection ([3bbd08f](https://github.com/defn/dev/commit/3bbd08f0aec01a16bae8835b03b214f044d648bf))
+* **coder:** Replace Docker volume with host mount for code-server extensions ([9a5f5dc](https://github.com/defn/dev/commit/9a5f5dcf5fcfb8be9f021c8d895213b40de7a9a5))
+* expand trusted domains for code-server link protection ([bcfc0e8](https://github.com/defn/dev/commit/bcfc0e8649877e707d8cb898e0264d347db594ed))
+* mount Docker socket in Coder Docker template ([370e7ff](https://github.com/defn/dev/commit/370e7ff0cb203e3f9efe3309d458531546180077))
+* move trusted domains from coder-server to code-server ([f169d1a](https://github.com/defn/dev/commit/f169d1a4308ed2f57d18233ae7b1810cf3ff8d6a))
+* remove devcontainer from Docker template ([3d40eeb](https://github.com/defn/dev/commit/3d40eeb23fe74e0cfe76a678c8ed303f570a8118))
+* remove devcontainer from SSH template ([58f1a5a](https://github.com/defn/dev/commit/58f1a5a1f9bd7c8581a2128b1c1258e4a5012c33))
+* update coder service and ansible playbook ([d04fd86](https://github.com/defn/dev/commit/d04fd8614b2a5bea2a7fe3508bc4cae1264ab1d0))
+* upgrade claude-code module to version 2.0.3 ([1fc23c2](https://github.com/defn/dev/commit/1fc23c20a1315c1ec6cdcacd313322e5454f6748))
+* upgrade claude-code module to version 2.0.3 in SSH template ([3cf04d1](https://github.com/defn/dev/commit/3cf04d1359d53e0416795b36bad5cfbc8adfa770))
+* upgrade mise packages to latest versions ([f4eb4d9](https://github.com/defn/dev/commit/f4eb4d912d0e9a087efacb0a08456b757c31a4bf))
+
+
+### Bug Fixes
+
+* **buildkite:** source environment variables and escape token reference ([55c0636](https://github.com/defn/dev/commit/55c0636bb9a2846db14d40ab5b901a1fff72fda6))
+* improve dummy target with sudo and error handling ([3b105ea](https://github.com/defn/dev/commit/3b105eab0e99fd8f310a80566f90eee534f531d9))
+
 ## [1.31.0](https://github.com/defn/dev/compare/v1.30.0...v1.31.0) (2025-07-24)
 
 
