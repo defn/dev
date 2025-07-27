@@ -105,6 +105,7 @@
         - node
         - agentapi
         - devcontainer
+        - coder
       changed_when: false
     - name: Make /usr/local/bin
       become: true
