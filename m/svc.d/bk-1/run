@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+cd ./$(git rev-parse --show-cdup)
+source .bash_profile
+
+cd m
+exec 2>&1
+exec mise exec -- make ci AGENT=-1
