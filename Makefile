@@ -57,8 +57,8 @@ macos:
 
 dummy:
 	$(MARK) dummy
-	ip addr add 169.254.32.1/32 dev lo
-	ip addr show dev
+	sudo ip addr add 169.254.32.1/32 dev lo || true
+	ip addr show dev lo
 
 # Clone and bootstrap user dotfiles from GitHub repository
 # Dependencies: mark binary, GIT_AUTHOR_NAME environment variable, git command, t binary, internet connection
