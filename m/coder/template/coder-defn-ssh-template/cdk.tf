@@ -132,7 +132,7 @@ resource "null_resource" "deploy" {
 module "claude-code" {
   count               = data.coder_workspace.me.start_count
   source              = "registry.coder.com/coder/claude-code/coder"
-  version             = "2.0.2"
+  version             = "2.0.3"
   agent_id            = coder_agent.main.id
   folder              = "/home/ubuntu"
   install_claude_code = false
