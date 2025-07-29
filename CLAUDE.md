@@ -226,19 +226,46 @@ Specifically, execute these tasks in order:
 
 When asked to "run coder upgrade all task" or similar, follow these steps:
 
-1. Run the coder update template ssh task
-2. Run the coder update template docker task
+1. For each template (ssh and docker), run terraform init -upgrade to update provider versions
+2. Check if lock files changed and stage them
+3. Push the templates to Coder
+4. Test by updating workspaces
+5. If everything works, commit the lock file changes
 
 Specifically, execute these tasks in order:
 
-1. **coder update template ssh**:
-   - Change directory to m/coder/template: `cd m/coder/template`
-   - Run: `j push coder-defn-ssh-template`
-2. **coder update template docker**:
-   - Change directory to m/coder/template: `cd m/coder/template`
-   - Run: `j push coder-defn-docker-template`
+1. **Update SSH template**:
+   - Change directory: `cd m/coder/template/coder-defn-ssh-template`
+   - Run: `terraform init -upgrade`
+   - Check for changes: `git diff .terraform.lock.hcl`
+   - If lock file changed, stage it: `git add .terraform.lock.hcl`
+   - Change directory: `cd m/coder/template`
+   - Push template: `j push coder-defn-ssh-template`
 
-**Note**: This task updates both SSH and Docker Coder templates, ensuring all template versions are current and deployed.
+2. **Update Docker template**:
+   - Change directory: `cd m/coder/template/coder-defn-docker-template`
+   - Run: `terraform init -upgrade`
+   - Check for changes: `git diff .terraform.lock.hcl`
+   - If lock file changed, stage it: `git add .terraform.lock.hcl`
+   - Change directory: `cd m/coder/template`
+   - Push template: `j push coder-defn-docker-template`
+
+3. **Test the updates**:
+   - Update workspaces to use new templates (run coder upgrade workspaces task)
+   - If workspaces update successfully, commit any staged lock file changes:
+     ```bash
+     git commit -m "chore: update terraform provider versions in Coder templates
+
+     - Updated .terraform.lock.hcl files with latest provider versions
+     - Tested by pushing templates and updating workspaces
+
+     🤖 Generated with [Claude Code](https://claude.ai/code)
+
+     Co-Authored-By: Claude <noreply@anthropic.com>"
+     ```
+   - If updates fail, reset the staged changes: `git reset HEAD`
+
+**Note**: This task updates both SSH and Docker Coder templates with the latest Terraform provider versions, tests them in production, and only commits the changes if everything works correctly.
 
 ### Task: coder upgrade workspaces
 
