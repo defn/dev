@@ -202,8 +202,9 @@ When asked to "run upgrade all task" or similar, follow these steps:
 4. Run the go upgrade task to update Go dependencies
 
 Specifically, execute these tasks in order:
+
 1. **upgrade**: Run `make sync` in $HOME directory
-2. **mise upgrade**: 
+2. **mise upgrade**:
    - Run `make mise-list` in $HOME directory
    - Execute the suggested mise commands (if any)
    - Stage and commit the changed mise.toml files with version changes
@@ -229,7 +230,8 @@ When asked to "run coder upgrade all task" or similar, follow these steps:
 2. Run the coder update template docker task
 
 Specifically, execute these tasks in order:
-1. **coder update template ssh**: 
+
+1. **coder update template ssh**:
    - Change directory to m/coder/template: `cd m/coder/template`
    - Run: `j push coder-defn-ssh-template`
 2. **coder update template docker**:
@@ -247,6 +249,7 @@ When asked to "run coder upgrade workspaces task" or similar, follow these steps
 3. Handle any errors gracefully and continue with remaining workspaces
 
 Specifically, execute these steps:
+
 1. **List workspaces**: Run `coder list` to get all workspace names
 2. **Extract workspace names**: Parse the output to get individual workspace names
 3. **Update each workspace**: For each workspace name, run `coder update [workspace-name]`
@@ -263,6 +266,7 @@ When asked to "run coder delete tasks task" or similar, follow these steps:
 3. For each matching workspace that is not running, delete it without prompting
 
 Specifically, execute these steps:
+
 1. **List workspaces**: Run `coder list` to get all workspace names and statuses
 2. **Filter task workspaces**: Identify workspaces whose names start with "task"
 3. **Check status**: Only delete workspaces that are not in "running" state
@@ -280,7 +284,8 @@ When asked to "run coder all task" or similar, follow these steps:
 3. Run the coder upgrade workspaces task to update all workspaces to latest templates
 
 Specifically, execute these tasks in order:
-1. **coder delete tasks**: 
+
+1. **coder delete tasks**:
    - List all workspaces with `coder list`
    - Delete non-running workspaces starting with "task" using `coder delete --yes`
 2. **coder upgrade all**:
@@ -291,3 +296,24 @@ Specifically, execute these tasks in order:
    - Update each workspace with `coder update [workspace-name]`
 
 **Note**: This comprehensive task ensures Coder infrastructure is fully updated - cleaning up temporary workspaces, deploying latest templates, and upgrading all active workspaces to use the new templates.
+
+### Task: nervous
+
+When asked to "run nervous task" or similar, follow these steps:
+
+1. Run the upgrade all task to update system tools, dependencies, and versions
+2. Run the coder all task to update Coder infrastructure
+
+Specifically, execute these tasks in order:
+
+1. **upgrade all**:
+   - Run the upgrade task (make sync)
+   - Run the mise upgrade task (update tool versions)
+   - Run the go sync task (synchronize Go versions)
+   - Run the go upgrade task (update Go dependencies)
+2. **coder all**:
+   - Run the coder delete tasks task (clean up non-running task workspaces)
+   - Run the coder upgrade all task (update SSH and Docker templates)
+   - Run the coder upgrade workspaces task (update all workspaces to latest templates)
+
+**Note**: This comprehensive task performs a complete system and Coder infrastructure update, ensuring all tools, dependencies, templates, and workspaces are current and synchronized.
