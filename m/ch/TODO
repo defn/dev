@@ -11,13 +11,15 @@ sudo iptables -t nat -A POSTROUTING -s 192.168.249.0/24 -o ${gw} -j MASQUERADE
 sudo iptables -A FORWARD -s 192.168.249.0/24 -o ${gw} -j ACCEPT
 sudo iptables -A FORWARD -d 192.168.249.0/24 -m state --state RELATED,ESTABLISHED -i ${gw} -j ACCEPT
 
-wget https://github.com/cloud-hypervisor/rust-hypervisor-firmware/releases/download/0.5.0/hypervisor-fw
+wget -nc https://github.com/cloud-hypervisor/rust-hypervisor-firmware/releases/download/0.5.0/hypervisor-fw
+wget -nc https://github.com/cloud-hypervisor/edk2/releases/download/ch-a54f262b09/CLOUDHV.fd
 
-wget https://cloud-images.ubuntu.com/jammy/current/jammy-server-cloudimg-amd64.img
-
-rm -f jammy-server-cloudimg-amd64.raw
-qemu-img convert -p -f qcow2 -O raw jammy-server-cloudimg-amd64.img jammy-server-cloudimg-amd64.raw
-qemu-img resize -f raw jammy-server-cloudimg-amd64.raw 30G
+for a in jammy noble; do
+	wget -nc https://cloud-images.ubuntu.com/$a/current/$a-server-cloudimg-amd64.img
+	rm -f $a-server-cloudimg-amd64.raw
+	qemu-img convert -p -f qcow2 -O raw $a-server-cloudimg-amd64.img $a-server-cloudimg-amd64.raw
+	qemu-img resize -f raw $a-server-cloudimg-amd64.raw 30G
+done
 
 rm -f ubuntu-cloudinit.img
 mkdosfs -n CIDATA -C ubuntu-cloudinit.img 8192
@@ -25,13 +27,29 @@ mcopy -oi ubuntu-cloudinit.img -s user-data ::
 mcopy -oi ubuntu-cloudinit.img -s meta-data ::
 mcopy -oi ubuntu-cloudinit.img -s network-config ::
 
+rm -f noble-cloudinit.img
+mkdosfs -n CIDATA -C noble-cloudinit.img 8192
+mcopy -oi noble-cloudinit.img -s user-data ::
+mcopy -oi noble-cloudinit.img -s meta-data ::
+mcopy -oi noble-cloudinit.img -s network-noble ::
+
 sudo cloud-hypervisor \
 	--kernel ./hypervisor-fw \
-	--disk path=jammy-server-cloudimg-amd64.raw \
-	       path=ubuntu-cloudinit.img \
 	--cpus boot=4 \
 	--memory size=4G \
 	--net "tap=,mac=,ip=,mask=" \
 	--console off \
-	--serial tty
+	--serial tty \
+	--disk path=jammy-server-cloudimg-amd64.raw \
+	       path=ubuntu-cloudinit.img
+
+sudo cloud-hypervisor \
+	--kernel ./CLOUDHV.fd \
+	--cpus boot=4 \
+	--memory size=4G \
+	--net "tap=,mac=,ip=,mask=" \
+	--console off \
+	--serial tty \
+	--disk path=noble-server-cloudimg-amd64.raw \
+	       path=noble-cloudinit.img
 
