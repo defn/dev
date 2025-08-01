@@ -22,16 +22,18 @@ for a in jammy noble; do
 done
 
 rm -f ubuntu-cloudinit.img
+cp network-jammy network-config
 mkdosfs -n CIDATA -C ubuntu-cloudinit.img 8192
 mcopy -oi ubuntu-cloudinit.img -s user-data ::
 mcopy -oi ubuntu-cloudinit.img -s meta-data ::
 mcopy -oi ubuntu-cloudinit.img -s network-config ::
 
 rm -f noble-cloudinit.img
+cp network-noble network-config
 mkdosfs -n CIDATA -C noble-cloudinit.img 8192
 mcopy -oi noble-cloudinit.img -s user-data ::
 mcopy -oi noble-cloudinit.img -s meta-data ::
-mcopy -oi noble-cloudinit.img -s network-noble ::
+mcopy -oi noble-cloudinit.img -s network-config ::
 
 sudo cloud-hypervisor \
 	--kernel ./hypervisor-fw \

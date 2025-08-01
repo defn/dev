@@ -2,3 +2,4 @@
 *.raw
 *.fd
 hypervisor-fw
+network-config
