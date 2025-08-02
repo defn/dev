@@ -85,8 +85,8 @@ sudo cloud-hypervisor \
 	       path=noble-cloudinit.img
 
 # Multiple Noble VMs
-for n in 1 2 3; do
-	sudo cloud-hypervisor \
+n=1
+sudo cloud-hypervisor \
 		--kernel ./CLOUDHV.fd \
 		--cpus boot=8 \
 		--memory size=16G \
@@ -94,6 +94,4 @@ for n in 1 2 3; do
 		--console off \
 		--serial tty \
 		--disk path=noble-$n-server-cloudimg-amd64.raw \
-		       path=noble-$n-cloudinit.img &
-done
-wait
+		       path=noble-$n-cloudinit.img
