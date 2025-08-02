@@ -103,10 +103,4 @@ inventory: {
 		"pc",
 		"gw",
 	]
-
-	// docker compose
-	dc: hosts: [
-		"gori",
-		"lanpy",
-	]
 }
