@@ -11,6 +11,18 @@ sudo iptables -t nat -A POSTROUTING -s 192.168.249.0/24 -o ${gw} -j MASQUERADE
 sudo iptables -A FORWARD -s 192.168.249.0/24 -o ${gw} -j ACCEPT
 sudo iptables -A FORWARD -d 192.168.249.0/24 -m state --state RELATED,ESTABLISHED -i ${gw} -j ACCEPT
 
+# Create bridge for VM networking
+sudo ip link add name chbr0 type bridge
+sudo ip addr add 192.168.249.1/24 dev chbr0
+sudo ip link set chbr0 up
+
+# Create and configure tap devices for VMs
+for tap in ch-tap-jammy ch-tap-noble ch-tap-noble-1 ch-tap-noble-2 ch-tap-noble-3; do
+	sudo ip tuntap add $tap mode tap
+	sudo ip link set $tap master chbr0
+	sudo ip link set $tap up
+done
+
 wget -nc https://github.com/cloud-hypervisor/rust-hypervisor-firmware/releases/download/0.5.0/hypervisor-fw
 wget -nc https://github.com/cloud-hypervisor/edk2/releases/download/ch-a54f262b09/CLOUDHV.fd
 
@@ -56,7 +68,7 @@ sudo cloud-hypervisor \
 	--kernel ./hypervisor-fw \
 	--cpus boot=4 \
 	--memory size=4G \
-	--net "tap=,mac=,ip=,mask=" \
+	--net "tap=ch-tap-jammy,mac=,ip=,mask=" \
 	--console off \
 	--serial tty \
 	--disk path=jammy-server-cloudimg-amd64.raw \
@@ -66,20 +78,22 @@ sudo cloud-hypervisor \
 	--kernel ./CLOUDHV.fd \
 	--cpus boot=4 \
 	--memory size=4G \
-	--net "tap=,mac=,ip=,mask=" \
+	--net "tap=ch-tap-noble,mac=,ip=,mask=" \
 	--console off \
 	--serial tty \
 	--disk path=noble-server-cloudimg-amd64.raw \
 	       path=noble-cloudinit.img
 
-a=noble
-n=1
-sudo cloud-hypervisor \
-	--kernel ./CLOUDHV.fd \
-	--cpus boot=8 \
-	--memory size=16G \
-	--net "tap=,mac=,ip=,mask=" \
-	--console off \
-	--serial tty \
-	--disk path=$a-$n-server-cloudimg-amd64.raw \
-	       path=$a-$n-cloudinit.img
+# Multiple Noble VMs
+for n in 1 2 3; do
+	sudo cloud-hypervisor \
+		--kernel ./CLOUDHV.fd \
+		--cpus boot=8 \
+		--memory size=16G \
+		--net "tap=ch-tap-noble-$n,mac=,ip=,mask=" \
+		--console off \
+		--serial tty \
+		--disk path=noble-$n-server-cloudimg-amd64.raw \
+		       path=noble-$n-cloudinit.img &
+done
+wait
