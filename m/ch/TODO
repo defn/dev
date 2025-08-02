@@ -18,7 +18,24 @@ for a in jammy noble; do
 	wget -nc https://cloud-images.ubuntu.com/$a/current/$a-server-cloudimg-amd64.img
 	rm -f $a-server-cloudimg-amd64.raw
 	qemu-img convert -p -f qcow2 -O raw $a-server-cloudimg-amd64.img $a-server-cloudimg-amd64.raw
-	qemu-img resize -f raw $a-server-cloudimg-amd64.raw 30G
+	qemu-img resize -f raw $a-server-cloudimg-amd64.raw 100G
+done
+
+a=noble
+for n in 1 2 3; do
+	rm -f $a-$n-server-cloudimg-amd64.raw
+	qemu-img convert -p -f qcow2 -O raw $a-server-cloudimg-amd64.img $a-$n-server-cloudimg-amd64.raw
+	qemu-img resize -f raw $a-$n-server-cloudimg-amd64.raw 30G
+done
+
+a=noble
+for n in 1 2 3; do
+	rm -f $a-$n-cloudinit.img
+	cp network-$a-$n network-config
+	mkdosfs -n CIDATA -C $a-$n-cloudinit.img 8192
+	mcopy -oi $a-$n-cloudinit.img -s user-data ::
+	mcopy -oi $a-$n-cloudinit.img -s meta-data ::
+	mcopy -oi $a-$n-cloudinit.img -s network-config ::
 done
 
 rm -f ubuntu-cloudinit.img
@@ -55,3 +72,14 @@ sudo cloud-hypervisor \
 	--disk path=noble-server-cloudimg-amd64.raw \
 	       path=noble-cloudinit.img
 
+a=noble
+n=1
+sudo cloud-hypervisor \
+	--kernel ./CLOUDHV.fd \
+	--cpus boot=8 \
+	--memory size=16G \
+	--net "tap=,mac=,ip=,mask=" \
+	--console off \
+	--serial tty \
+	--disk path=$a-$n-server-cloudimg-amd64.raw \
+	       path=$a-$n-cloudinit.img
