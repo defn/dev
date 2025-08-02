@@ -28,8 +28,14 @@ inventory: {
 		"kowloon",
 	]
 
+	meh: hosts: [
+		"meh1",
+		"meh2",
+		"meh3",
+	]
+
 	cloud: children: [
-		"aws", "hetzner",
+		"aws", "hetzner", "meh",
 	]
 
 	spiral: children: [
