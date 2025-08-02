@@ -106,6 +106,7 @@
         - agentapi
         - devcontainer
         - coder
+        - gemini
       changed_when: false
     - name: Make /usr/local/bin
       become: true
