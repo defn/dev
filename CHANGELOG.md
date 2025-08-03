@@ -1,5 +1,24 @@
 # Changelog
 
+## [1.33.0](https://github.com/defn/dev/compare/v1.32.0...v1.33.0) (2025-08-03)
+
+
+### Features
+
+* add buildkite agent service definitions ([2d051da](https://github.com/defn/dev/commit/2d051da04d8c144228d54664e7d434488b91b69c))
+* add cache and work directories to fixup playbook ([bbb5bc5](https://github.com/defn/dev/commit/bbb5bc562397b446c9710acb27da7aee34b773ef))
+* add Gemini CLI symlink to fixup playbook ([3b76fd2](https://github.com/defn/dev/commit/3b76fd238df99042d1fb3ed0147c7bb9dd7ad4a6))
+* add meh hosts group to Ansible inventory ([f3c94a6](https://github.com/defn/dev/commit/f3c94a60e90e2a3447e0cc2aa03135b69c8e875a))
+* add nervous task to CLAUDE.md ([5645475](https://github.com/defn/dev/commit/5645475f4244e920d0876d8e1006fbbeddc79173))
+* add Ubuntu Noble support to cloud-hypervisor setup ([2f44058](https://github.com/defn/dev/commit/2f440586594c38b16b933cefa80f64b197235d25))
+* expand cloud-hypervisor setup for multiple Noble VMs ([e6d8151](https://github.com/defn/dev/commit/e6d81519aaee5882a507afa4ad91f26d64603d61))
+
+
+### Bug Fixes
+
+* bump Claude code module version from 2.0.3 to 2.0.5 ([970d929](https://github.com/defn/dev/commit/970d9296c2b9e4493c32ff5b746a6cc3e2699574))
+* configure bridge networking for cloud-hypervisor VMs ([140daca](https://github.com/defn/dev/commit/140dacab7e2fa70511e00a998b34d73220982da2))
+
 ## [1.32.0](https://github.com/defn/dev/compare/v1.31.0...v1.32.0) (2025-07-27)
 
 
