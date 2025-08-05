@@ -111,6 +111,7 @@
         - devcontainer
         - coder
         - gemini
+        - codex
       changed_when: false
     - name: Make /usr/local/bin
       become: true
