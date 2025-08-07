@@ -118,6 +118,11 @@
         - coder
         - gemini
         - codex
+        - python
+        - python3
+        - pip
+        - pip3
+        - npm
       changed_when: false
     - name: Make /usr/local/bin
       become: true
