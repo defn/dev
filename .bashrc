@@ -77,10 +77,10 @@ export EDITOR=vim
 # ssh-agent
 case "$(uname -s)" in
 Darwin)
-	export SSH_AUTH_SOCK=$HOME/.gnupg/S.gpg-agent.ssh
+	true export SSH_AUTH_SOCK=$HOME/.gnupg/S.gpg-agent.ssh
 	;;
 Linux)
-	export SSH_AUTH_SOCK="$(gpgconf --list-dirs agent-ssh-socket)"
+	true export SSH_AUTH_SOCK="$(gpgconf --list-dirs agent-ssh-socket)"
 	;;
 esac
 
