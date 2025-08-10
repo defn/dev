@@ -459,9 +459,20 @@ function generateGrid() {
       }
     };
 
+    // Create anchor element to wrap the image
+    const anchor = document.createElement("a");
+    anchor.id = image.filename;
+    anchor.name = image.filename;
+    anchor.style.display = "inline-block";
+    anchor.style.width = "100%";
+    anchor.style.textDecoration = "none";
+    
+    // Wrap the image in the anchor
+    anchor.appendChild(img);
+
     // Store the calculated height and metadata for later processing
     const imgInfo = {
-      element: img,
+      element: anchor,  // Store the anchor instead of the img
       height: imgHeight,
       aspectRatio: aspectRatio,
     };
