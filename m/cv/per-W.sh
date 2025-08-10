@@ -78,7 +78,7 @@ find fm/W -type f | cut -d/ -f3 | sort | while read -r a; do
         const wPrefix = `w-${imageSrcMatch[1]}`; // e.g., "w-02"
 
         // Extract UUID by removing w-NN- prefix and .png extension
-        const uuid = anchor.replace(/^w-\d+-/, '').replace('.png', '');
+        const uuid = anchor.replace(/^w-\d+-/, '');
 
         // Generate the gallery path with ../w/ prefix
         const galleryPath = `../w/${wPrefix}/${pageParam}/#${wPrefix}-${uuid}`;
