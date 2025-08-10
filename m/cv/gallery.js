@@ -1037,10 +1037,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Check if autoscrolling was enabled on previous page
   // Autoscroll continues across page navigation for seamless browsing
-  const shouldEnableAutoscroll =
+  let shouldEnableAutoscroll =
     sessionStorage.getItem("autoscrollEnabled") === "true" ||
-    (typeof selectMode === "undefined" ||
-    (selectMode !== "yes" && selectMode !== "W-gallery")); // Disable autoscroll for W-gallery mode
+    typeof selectMode === "undefined" ||
+    selectMode !== "yes"; // Enable by default when NOT in yes mode
+  
+  // Explicitly disable autoscroll for W-gallery mode
+  if (typeof selectMode !== "undefined" && selectMode === "W-gallery") {
+    shouldEnableAutoscroll = false;
+  }
 
   // Auto-enable autoscroll if it was previously enabled or not in selection mode
   setTimeout(() => {
