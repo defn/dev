@@ -99,7 +99,7 @@ function main {
       b="${1%%/}"  # Remove trailing slash from directory name
       # Retry up to 3 times for each image generation
       for n in 1 2 3; do
-        # Only generate if output file doesn\'t already exist
+        # Only generate if output file doesnt already exist
         if ! test -f pub/$b/$b-$a; then
           echo "Processing: $b style + $a source -> $b-$a"
           echo "$b $a $(fmpost pub/W/$a pub/$b.png pub/$b/$b-$a)"
