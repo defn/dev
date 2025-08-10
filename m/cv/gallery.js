@@ -444,8 +444,19 @@ function generateGrid() {
       // Stop event propagation to make sure our handler gets priority
       event.stopPropagation();
 
-      // Perform toggleVisibility action (shows/hides blurhash overlay)
-      toggleVisibility(img);
+      // Check if we're in W-gallery mode
+      if (typeof selectMode !== 'undefined' && selectMode === 'W-gallery') {
+        // Extract UUID from the filename by removing the w-NN- prefix
+        const filename = img.dataset.filename;
+        const uuid = filename.replace(/^w-\d+-/, '');
+        
+        // Navigate to the individual image page
+        const imagePageUrl = `../../../W/${uuid}.html`;
+        window.location.href = imagePageUrl;
+      } else {
+        // Perform toggleVisibility action (shows/hides blurhash overlay)
+        toggleVisibility(img);
+      }
     };
 
     // Store the calculated height and metadata for later processing
@@ -838,10 +849,23 @@ function toggleHidden(element) {
       canvas.style.zIndex = "3"; // Above the image
       canvas.style.cursor = "pointer"; // Show pointer cursor
 
-      // Add click handler to canvas to toggle back
-      canvas.onclick = () => {
-        // Toggle visibility
-        toggleVisibility(element);
+      // Add click handler to canvas
+      canvas.onclick = (event) => {
+        event.stopPropagation();
+        
+        // Check if we're in W-gallery mode
+        if (typeof selectMode !== 'undefined' && selectMode === 'W-gallery') {
+          // Extract UUID from the filename by removing the w-NN- prefix
+          const filename = element.dataset.filename;
+          const uuid = filename.replace(/^w-\d+-/, '');
+          
+          // Navigate to the individual image page
+          const imagePageUrl = `../../../W/${uuid}.html`;
+          window.location.href = imagePageUrl;
+        } else {
+          // Toggle visibility
+          toggleVisibility(element);
+        }
       };
 
       // Add canvas to wrapper or create wrapper if it doesn't exist
