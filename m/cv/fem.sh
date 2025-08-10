@@ -97,7 +97,6 @@ function main {
 		# For each source image, process against all style directories
 		# Use runmany for parallel processing (5 concurrent jobs)
 		find pub/ -maxdepth 1 -type d -name 'w-*' | cut -d/ -f2 | sort | runmany 5 '
-      echo "X = $1" 1>&2
       b="${1%%/}"  # Remove trailing slash from directory name
       # Retry up to 3 times for each image generation
       for n in 1 2 3; do
