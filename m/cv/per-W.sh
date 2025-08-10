@@ -70,12 +70,12 @@ find fm/W -type f | cut -d/ -f3 | sort | while read -r a; do
           throw new Error('Missing anchor fragment');
         }
 
-        // Extract w-NN prefix from anchor
-        const wPrefixMatch = anchor.match(/^(w-\d+)-/);
-        if (!wPrefixMatch) {
-          throw new Error('Invalid anchor format - missing w-NN prefix');
+        // Extract w-NN prefix from imageSrc path
+        const imageSrcMatch = imageSrc.match(/\/w-(\d+)\//);
+        if (!imageSrcMatch) {
+          throw new Error('Invalid imageSrc format - missing w-NN directory');
         }
-        const wPrefix = wPrefixMatch[1]; // e.g., "w-02"
+        const wPrefix = `w-${imageSrcMatch[1]}`; // e.g., "w-02"
 
         // Extract UUID by removing w-NN- prefix and .png extension
         const uuid = anchor.replace(/^w-\d+-/, '').replace('.png', '');
