@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.34.0](https://github.com/defn/dev/compare/v1.33.0...v1.34.0) (2025-08-10)
+
+
+### Features
+
+* add ansible file cleanup to fixup playbook ([78b092e](https://github.com/defn/dev/commit/78b092edb07a3d01222f55d4681aa572ce13fad3))
+* add python, pip, and npm utilities to fixup playbook ([1f888e4](https://github.com/defn/dev/commit/1f888e473fa4aea75dbd3da29d747fb3771373e4))
+
 ## [1.33.0](https://github.com/defn/dev/compare/v1.32.0...v1.33.0) (2025-08-03)
 
 
