@@ -2145,6 +2145,79 @@ document.addEventListener("DOMContentLoaded", () => {
     );
   }
 
+  // Track modal state
+  let modalOverlayElement = null;
+  let modalEscapeHandler = null;
+
+  // Function to show modal image for W-gallery mode
+  function showModalImage() {
+    // Check if modal is already open - if so, close it
+    if (modalOverlayElement) {
+      closeModal();
+      return;
+    }
+
+    // Extract w-NN from current URL path
+    const pathMatch = window.location.pathname.match(/\/w-(\d+)\//);
+    if (!pathMatch) {
+      console.error('Could not extract w-NN from URL path');
+      return;
+    }
+    const wPrefix = `w-${pathMatch[1]}`;
+    
+    // Create modal overlay
+    modalOverlayElement = document.createElement('div');
+    modalOverlayElement.style.position = 'fixed';
+    modalOverlayElement.style.top = '0';
+    modalOverlayElement.style.left = '0';
+    modalOverlayElement.style.width = '100%';
+    modalOverlayElement.style.height = '100%';
+    modalOverlayElement.style.backgroundColor = 'rgba(0, 0, 0, 0.8)';
+    modalOverlayElement.style.zIndex = '9999';
+    modalOverlayElement.style.display = 'flex';
+    modalOverlayElement.style.justifyContent = 'center';
+    modalOverlayElement.style.alignItems = 'center';
+    modalOverlayElement.style.cursor = 'pointer';
+    
+    // Create modal image
+    const modalImage = document.createElement('img');
+    modalImage.src = `../../../fm/${wPrefix}.png`;
+    modalImage.style.maxWidth = '90%';
+    modalImage.style.maxHeight = '90%';
+    modalImage.style.objectFit = 'contain';
+    modalImage.style.border = '2px solid white';
+    
+    // Close modal on click
+    modalOverlayElement.onclick = () => {
+      closeModal();
+    };
+    
+    // Close modal on escape key or x key
+    modalEscapeHandler = (e) => {
+      if (e.key === 'Escape' || e.key === 'x' || e.key === 'X') {
+        e.preventDefault();
+        closeModal();
+      }
+    };
+    document.addEventListener('keydown', modalEscapeHandler);
+    
+    // Add to DOM
+    modalOverlayElement.appendChild(modalImage);
+    document.body.appendChild(modalOverlayElement);
+  }
+
+  // Function to close the modal
+  function closeModal() {
+    if (modalOverlayElement) {
+      document.body.removeChild(modalOverlayElement);
+      modalOverlayElement = null;
+    }
+    if (modalEscapeHandler) {
+      document.removeEventListener('keydown', modalEscapeHandler);
+      modalEscapeHandler = null;
+    }
+  }
+
   // Add keyboard event listener
   document.addEventListener("keydown", (event) => {
     console.log(
@@ -2156,6 +2229,15 @@ document.addEventListener("DOMContentLoaded", () => {
       event.preventDefault();
       toggleAutoscroll();
       return;
+    }
+
+    // 'x' key - show modal image for W-gallery mode
+    if (event.key === "x" || event.key === "X") {
+      if (typeof selectMode !== 'undefined' && selectMode === 'W-gallery') {
+        event.preventDefault();
+        showModalImage();
+        return;
+      }
     }
 
     // Left arrow or 'a' - previous page
