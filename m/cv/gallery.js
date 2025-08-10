@@ -451,7 +451,7 @@ function generateGrid() {
         const uuid = filename.replace(/^w-\d+-/, '');
         
         // Navigate to the individual image page
-        const imagePageUrl = `../../../W/${uuid}.html`;
+        const imagePageUrl = `../../../W/${uuid}.html?page=${window.currentPage}#${filename}`;
         window.location.href = imagePageUrl;
       } else {
         // Perform toggleVisibility action (shows/hides blurhash overlay)
@@ -1217,14 +1217,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Extract page number from URL
   function getPageNumberFromURL() {
-    // Try to get page number from meta tag (set by blurmap.go)
-    const metaCurrentChunk = document.querySelector(
-      'meta[name="current-chunk"]',
-    );
-    if (metaCurrentChunk && metaCurrentChunk.content) {
-      return parseInt(metaCurrentChunk.content) || 1;
-    }
-
     // Fallback: extract from URL path
     try {
       const pathParts = window.location.pathname
