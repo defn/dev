@@ -28,8 +28,10 @@ function main {
 	*)
 		if type -P browser.sh >/dev/null; then
 			exec browser.sh "$@"
-		else
+		elif type -P /bin/open >/dev/null; then
 			/bin/open "$@"
+		elif type -P /usr/bin/open >/dev/null; then
+			/usr/bin/open "$@"
 		fi
 		;;
 	esac
