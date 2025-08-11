@@ -446,9 +446,12 @@ function generateGrid() {
 
       // Check if we're in W-gallery mode
       if (typeof selectMode !== 'undefined' && selectMode === 'W-gallery') {
-        // Extract UUID from the filename by removing the w-NN- prefix
+        // Extract UUID from the filename by removing any directory path and w-NN- prefix
         const filename = img.dataset.filename;
-        const uuid = filename.replace(/^w-\d+-/, '');
+        // First get just the filename without directory
+        const basename = filename.split('/').pop();
+        // Then remove the w-NN- prefix to get UUID.png
+        const uuid = basename.replace(/^w-\d+-/, '');
         
         // Navigate to the individual image page
         const imagePageUrl = `../../../W/${uuid}.html?page=${window.currentPage}#${filename}`;
@@ -866,12 +869,15 @@ function toggleHidden(element) {
         
         // Check if we're in W-gallery mode
         if (typeof selectMode !== 'undefined' && selectMode === 'W-gallery') {
-          // Extract UUID from the filename by removing the w-NN- prefix
+          // Extract UUID from the filename by removing any directory path and w-NN- prefix
           const filename = element.dataset.filename;
-          const uuid = filename.replace(/^w-\d+-/, '');
+          // First get just the filename without directory
+          const basename = filename.split('/').pop();
+          // Then remove the w-NN- prefix to get UUID.png
+          const uuid = basename.replace(/^w-\d+-/, '');
           
           // Navigate to the individual image page
-          const imagePageUrl = `../../../W/${uuid}.html`;
+          const imagePageUrl = `../../../W/${uuid}.html?page=${window.currentPage}#${filename}`;
           window.location.href = imagePageUrl;
         } else {
           // Toggle visibility
