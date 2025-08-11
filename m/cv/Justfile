@@ -124,7 +124,7 @@ w-html:
     for a in $(cd pub/fm && ls -d w-??); do go run . -s no -d pub/fm/$a -c tmp/blur -o pub/w/$a -i <(cd pub/fm/$a && ls -d *.png | cut -d. -f1 | sort); done
     go run . -s no -d pub/fm -c tmp/blur -o pub/w/g -i <(cd pub/fm && find w-?? -name '*.png' | cut -d. -f1 | sort | shuf)
     # Post-process HTML files to change selectMode from "no" to "W-gallery"
-    find pub/w/w-??/*/index.html -type f | while read -r html; do sed -i 's/const selectMode = "no"/const selectMode = "W-gallery"/g' "$html"; done
+    find pub/w -name index.html -type f | while read -r html; do sed -i 's/const selectMode = "no"/const selectMode = "W-gallery"/g' "$html"; done
 
 # Start backup process in screen session
 # Syncs replicate directory to remote storage with configurable transfer threads
