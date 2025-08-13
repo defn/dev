@@ -1,6 +1,6 @@
 module github.com/defn/dev/m
 
-go 1.24.6
+go 1.25.0
 
 // pin, otherwise something cue + protobuf breaks
 /// https://github.com/cue-lang/cue/blob/master/go.mod
