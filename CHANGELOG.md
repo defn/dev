@@ -1,5 +1,30 @@
 # Changelog
 
+## [1.34.0](https://github.com/defn/dev/compare/v1.33.0...v1.34.0) (2025-08-18)
+
+
+### Features
+
+* add anchor elements to gallery images for direct linking ([0e5220a](https://github.com/defn/dev/commit/0e5220a175aa278b3cd22b553a4025beeee5ba6b))
+* add ansible file cleanup to fixup playbook ([78b092e](https://github.com/defn/dev/commit/78b092edb07a3d01222f55d4681aa572ce13fad3))
+* add JavaScript-powered gallery links to per-W.sh ([9680395](https://github.com/defn/dev/commit/9680395136db839bf3b5018363f0bc5ae0b60b76))
+* add modal image display for W-gallery mode with x key ([cc01569](https://github.com/defn/dev/commit/cc01569ca7b94b0c51f82cb17ed07a7d39470cc3))
+* add python, pip, and npm utilities to fixup playbook ([1f888e4](https://github.com/defn/dev/commit/1f888e473fa4aea75dbd3da29d747fb3771373e4))
+* add W-gallery mode navigation to individual image pages ([dede0b7](https://github.com/defn/dev/commit/dede0b7968ad06c6b3ebf72606b5040bea87851a))
+* expand w-html gallery processing to include 3-digit week directories ([4acd5c0](https://github.com/defn/dev/commit/4acd5c0e60903a4a3d691f42820fc447fd2c6b8b))
+* post-process w-html galleries to set selectMode to W-gallery ([b2bf21a](https://github.com/defn/dev/commit/b2bf21a72749311d50fa0c2dd69db4daefe37081))
+
+
+### Bug Fixes
+
+* add URL parameters and anchor to W-gallery navigation ([682abd8](https://github.com/defn/dev/commit/682abd8281ae585404f4692c7def27c7e264568c))
+* correct UUID extraction for W-gallery mode navigation ([f6c1dc1](https://github.com/defn/dev/commit/f6c1dc133fbc1d412ab969a8af905c4e44c98e02))
+* disable autoscroll for W-gallery mode ([b2136d7](https://github.com/defn/dev/commit/b2136d7aacbcd3971b5a8891704f22610f2e32b3))
+* extract w-NN prefix from imageSrc path instead of anchor ([8c5fa1f](https://github.com/defn/dev/commit/8c5fa1fe0b84c29c6baafdada2ea5eda5a582210))
+* remove .png extension removal from UUID extraction ([f0380b1](https://github.com/defn/dev/commit/f0380b138164b134b0347538aa503ddef54c9828))
+* use Go 1.24.6 in MODULE.bazel for Bazel compatibility ([4ecdaae](https://github.com/defn/dev/commit/4ecdaae879d700de54df7d1310999c7ee7cab3c6))
+* use sorted order instead of shuffle for w-gallery global view ([8f25d7c](https://github.com/defn/dev/commit/8f25d7c76d7b146225a11defe1a923e47da82225))
+
 ## [1.33.0](https://github.com/defn/dev/compare/v1.32.0...v1.33.0) (2025-08-03)
 
 
