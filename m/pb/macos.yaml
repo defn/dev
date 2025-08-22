@@ -1,0 +1,156 @@
+---
+# macos.yaml - macOS system setup playbook
+# Purpose: System configuration for macOS development environment
+# Usage: ansible-playbook macos.yaml -i inventory
+# Dependencies: macOS, sudo privileges
+# Features:
+#   - Disables automounter for /home directory
+#   - Creates symlink from /home/ubuntu to current $HOME
+#   - Configures loopback interface with dummy IP (169.254.32.1)
+#   - Disables Apple Press and Hold for faster key repeat
+- name: macOS automounter and home setup
+  hosts: all
+  tasks:
+    - name: Fail if not macOS
+      fail:
+        msg: "This playbook only supports macOS systems."
+      when: ansible_facts['os_family'] != "Darwin"
+
+    - name: Ensure ansible temp directory exists for root
+      become: true
+      file:
+        path: /var/root/.ansible/tmp
+        state: directory
+        mode: "0700"
+        owner: root
+        group: wheel
+
+    - name: Check if /etc/auto_master exists
+      stat:
+        path: /etc/auto_master
+      register: auto_master_stat
+
+    - name: Backup /etc/auto_master
+      become: true
+      copy:
+        src: /etc/auto_master
+        dest: /etc/auto_master.backup
+        remote_src: true
+        force: false
+      when: auto_master_stat.stat.exists
+
+    - name: Disable /home automount in /etc/auto_master
+      become: true
+      lineinfile:
+        path: /etc/auto_master
+        regexp: '^/home\s+'
+        line: "#/home			auto_home	-nobrowse,hidefromfinder"
+        backrefs: true
+      when: auto_master_stat.stat.exists
+      register: auto_master_changed
+
+    - name: Reload automounter to apply changes
+      become: true
+      command: automount -vc
+      when: auto_master_changed.changed
+
+    - name: Wait for automounter to reload
+      pause:
+        seconds: 2
+      when: auto_master_changed.changed
+
+    - name: Check if /home exists and is not automounted
+      stat:
+        path: /home
+      register: home_stat
+
+    - name: Create /home directory if it doesn't exist
+      become: true
+      file:
+        path: /home
+        state: directory
+        mode: "0755"
+      when: not home_stat.stat.exists or not home_stat.stat.isdir
+
+    - name: Get current home directory
+      set_fact:
+        current_home: "{{ ansible_env.HOME }}"
+
+    - name: Check if /home/ubuntu already exists
+      stat:
+        path: /home/ubuntu
+      register: ubuntu_home_stat
+
+    - name: Remove /home/ubuntu if it's a directory (not a symlink)
+      become: true
+      file:
+        path: /home/ubuntu
+        state: absent
+      when:
+        - ubuntu_home_stat.stat.exists
+        - ubuntu_home_stat.stat.isdir
+        - not ubuntu_home_stat.stat.islnk
+
+    - name: Create symlink from /home/ubuntu to current home
+      become: true
+      file:
+        src: "{{ current_home }}"
+        dest: /home/ubuntu
+        state: link
+        force: true
+
+    - name: Verify symlink was created
+      stat:
+        path: /home/ubuntu
+      register: symlink_stat
+
+    - name: Display setup status
+      debug:
+        msg: |
+          Automounter has been disabled for /home.
+          Symlink created: /home/ubuntu -> {{ current_home }}
+
+          You can now use /home/ubuntu as an alias to your home directory.
+          The symlink points to: {{ symlink_stat.stat.lnk_source }}
+      when: symlink_stat.stat.islnk
+
+    # Networking setup from Makefile macos target
+    - name: Set dummy IP address variable
+      set_fact:
+        dummy_ip: "169.254.32.1"
+
+    - name: Check if dummy IP is already configured on lo0
+      command: ifconfig lo0
+      register: lo0_config
+      changed_when: false
+
+    - name: Add dummy IP alias to loopback interface
+      become: true
+      command: ifconfig lo0 alias {{ dummy_ip }} netmask 255.255.255.255
+      when: dummy_ip not in lo0_config.stdout
+
+    - name: Display loopback interface configuration
+      command: ifconfig lo0
+      register: lo0_final
+      changed_when: false
+
+    - name: Show loopback configuration
+      debug:
+        var: lo0_final.stdout_lines
+
+    - name: Disable Apple Press and Hold for key repeat
+      osx_defaults:
+        domain: NSGlobalDomain
+        key: ApplePressAndHoldEnabled
+        type: bool
+        value: false
+        state: present
+
+    - name: Display networking setup complete
+      debug:
+        msg: |
+          Networking configuration complete:
+          - Loopback alias {{ dummy_ip }} configured on lo0
+          - Apple Press and Hold disabled for faster key repeat
+
+          Note: You may need to log out and back in for the key repeat setting to take effect.
