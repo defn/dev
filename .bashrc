@@ -168,6 +168,12 @@ function vi {
 			return $?
 		fi
 
+		code="${VSCODE_GIT_ASKPASS_MAIN%/extensions/*}/bin/code"
+		if [[ -x $code ]]; then
+			"$code" "$@"
+			return $?
+		fi
+
 		code="${VSCODE_GIT_ASKPASS_MAIN%/extensions/*}/bin/remote-cli/code-linux.sh"
 		if [[ ! -x $code ]]; then
 			code="${VSCODE_GIT_ASKPASS_MAIN%/extensions/*}/bin/remote-cli/code"
