@@ -3,7 +3,7 @@ experimental = true
 
 [tools]
 ansible = "11.9.0"
-aws = "2.28.15"
+aws = "2.28.16"
 bat = "0.25.0"
 bazelisk = "1.27.0"
 chamber = "3.1.3"
