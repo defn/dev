@@ -6,7 +6,7 @@
   },
   {
     "key": "ctrl+1",
-    "command": "editor.action.rename",
+    "command": "editor.action.rename"
   },
   {
     "key": "ctrl+w",
@@ -80,7 +80,7 @@
     "when": "!isAuxiliaryWindowFocusedContext"
   },
   {
-    "key": "ctrl+alt+cmd+enter",
+    "key": "ctrl+alt+\\",
     "command": "workbench.action.createTerminalEditorSide",
     "when": "terminalProcessSupported"
   }
