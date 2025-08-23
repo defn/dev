@@ -41,7 +41,7 @@ lint:
     - nixpkgs-fmt@1.3.0
     - prettier@3.6.2
     - shellcheck@0.11.0
-    - shfmt@3.6.0
+    - shfmt@3.12.0
     - taplo@0.10.0
     - yamllint@1.37.1
   disabled:
