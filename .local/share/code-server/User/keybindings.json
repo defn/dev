@@ -78,5 +78,10 @@
     "key": "ctrl+lk z",
     "command": "-workbench.action.toggleZenMode",
     "when": "!isAuxiliaryWindowFocusedContext"
+  },
+  {
+    "key": "ctrl+alt+cmd+enter",
+    "command": "workbench.action.createTerminalEditorSide",
+    "when": "terminalProcessSupported"
   }
 ]
