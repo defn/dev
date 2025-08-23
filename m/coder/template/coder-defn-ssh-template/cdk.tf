@@ -130,7 +130,7 @@ resource "null_resource" "deploy" {
 
 
 module "claude-code" {
-  count               = data.coder_workspace.me.start_count
+  count               = 0
   source              = "registry.coder.com/coder/claude-code/coder"
   version             = "2.0.5"
   agent_id            = coder_agent.main.id
