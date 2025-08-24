@@ -6,7 +6,7 @@
   },
   {
     "key": "ctrl+1",
-    "command": "editor.action.rename",
+    "command": "editor.action.rename"
   },
   {
     "key": "ctrl+w",
@@ -78,5 +78,10 @@
     "key": "ctrl+lk z",
     "command": "-workbench.action.toggleZenMode",
     "when": "!isAuxiliaryWindowFocusedContext"
+  },
+  {
+    "key": "ctrl+alt+\\",
+    "command": "workbench.action.createTerminalEditorSide",
+    "when": "terminalProcessSupported"
   }
 ]

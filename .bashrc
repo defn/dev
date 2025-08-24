@@ -160,6 +160,19 @@ function region {
 function vi {
 	if [[ -n ${VSCODE_GIT_ASKPASS_MAIN-} ]]; then
 		local code
+		local windsurf
+
+		windsurf="${VSCODE_GIT_ASKPASS_MAIN%/extensions/*}/bin/windsurf"
+		if [[ -x $windsurf ]]; then
+			"$windsurf" "$@"
+			return $?
+		fi
+
+		code="${VSCODE_GIT_ASKPASS_MAIN%/extensions/*}/bin/code"
+		if [[ -x $code ]]; then
+			"$code" "$@"
+			return $?
+		fi
 
 		code="${VSCODE_GIT_ASKPASS_MAIN%/extensions/*}/bin/remote-cli/code-linux.sh"
 		if [[ ! -x $code ]]; then
@@ -172,11 +185,14 @@ function vi {
 
 		if [[ ! -x $code ]]; then
 			command vi "$@"
+			return $?
 		else
 			"$code" "$@"
+			return $?
 		fi
 	else
 		command vi "$@"
+		return $?
 	fi
 }
 

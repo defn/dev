@@ -2,11 +2,11 @@
 # To learn more about the format of this file, see https://docs.trunk.io/reference/trunk-yaml
 version: 0.1
 cli:
-  version: 1.24.0
+  version: 1.25.0
 plugins:
   sources:
     - id: trunk
-      ref: v1.7.1
+      ref: v1.7.2
       uri: https://github.com/trunk-io/plugins
 runtimes:
   enabled:
@@ -25,7 +25,7 @@ lint:
         - .cache/**
         - .npm/**
   enabled:
-    - golangci-lint2@2.2.1
+    - golangci-lint2@2.4.0
     - actionlint@1.7.7
     - isort@6.0.1
     - clippy@1.65.0
@@ -40,9 +40,9 @@ lint:
     - markdownlint@0.45.0
     - nixpkgs-fmt@1.3.0
     - prettier@3.6.2
-    - shellcheck@0.10.0
-    - shfmt@3.6.0
-    - taplo@0.9.3
+    - shellcheck@0.11.0
+    - shfmt@3.12.0
+    - taplo@0.10.0
     - yamllint@1.37.1
   disabled:
     - bandit
