@@ -13,10 +13,10 @@ bazel_dep(name = "bazel_skylib", version = "1.8.1")
 bazel_dep(name = "rules_oci", version = "2.2.6")
 
 # https://registry.bazel.build/modules/rules_distroless
-bazel_dep(name = "rules_distroless", version = "0.5.1")
+bazel_dep(name = "rules_distroless", version = "0.5.3")
 
 # https://registry.bazel.build/modules/rules_shell
-bazel_dep(name = "rules_shell", version = "0.5.1")
+bazel_dep(name = "rules_shell", version = "0.6.1")
 
 # https://registry.bazel.build/modules/rules_pkg
 bazel_dep(name = "rules_pkg", version = "1.1.0")
@@ -28,10 +28,10 @@ bazel_dep(name = "protobuf", version = "32.0")
 bazel_dep(name = "rules_proto", version = "7.1.0")
 
 # https://registry.bazel.build/modules/rules_proto_grpc
-bazel_dep(name = "rules_proto_grpc", version = "5.6.0")
+bazel_dep(name = "rules_proto_grpc", version = "5.7.1")
 
 # https://registry.bazel.build/modules/rules_proto_grpc_go
-bazel_dep(name = "rules_proto_grpc_go", version = "5.6.0")
+bazel_dep(name = "rules_proto_grpc_go", version = "5.7.1")
 
 # https://registry.bazel.build/modules/rules_go
 bazel_dep(name = "rules_go", version = "0.57.0", repo_name = "io_bazel_rules_go")
