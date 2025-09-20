@@ -1,6 +1,6 @@
 [tools]
-atlas = "0.36.0"
-"go:github.com/riverqueue/river/cmd/river" = "0.24.0"
+atlas = "0.37.0"
+"go:github.com/riverqueue/river/cmd/river" = "0.25.0"
 "ubi:riverqueue/riverui" = "0.12.2"
 
 [env]
