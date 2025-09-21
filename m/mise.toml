@@ -1,17 +1,17 @@
 [tools]
 "ubi:bazelbuild/buildtools" = { version = "8.2.1", exe = "buildifier" }
-helm = "3.18.6"
+helm = "3.19.0"
 kubectl = "1.34.1"
 kustomize = "5.7.1"
 "ubi:charmbracelet/freeze" = "0.2.2"
-"npm:@anthropic-ai/claude-code" = "1.0.110"
-node = "24.7.0"
-"ubi:coder/agentapi" = "0.6.3"
+"npm:@anthropic-ai/claude-code" = "1.0.120"
+node = "24.8.0"
+"ubi:coder/agentapi" = "0.7.1"
 "npm:@devcontainers/cli" = "0.80.1"
-"npm:@google/gemini-cli" = "0.4.0"
-"npm:@openai/codex" = "0.32.0"
+"npm:@google/gemini-cli" = "0.5.5"
+"npm:@openai/codex" = "0.39.0"
 ansible = "12.0.0"
-aws = "2.29.1"
+aws = "2.30.6"
 gh = "2.79.0"
-"ubi:buildkite/agent" = { version = "3.104.0", exe = "buildkite-agent" }
+"ubi:buildkite/agent" = { version = "3.107.0", exe = "buildkite-agent" }
 yq = "4.47.2"
