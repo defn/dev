@@ -275,7 +275,7 @@ module "claude-code" {
   workdir = "/home/ubuntu"
   install_claude_code = false
   install_agentapi = false
-  pre_install_script = "(cd && git pull); ~/bin/claude-setup.sh" 
+  pre_install_script = "(cd && git pull); sudo mount --bind /home/ubuntu /home/coder; ~/bin/claude-setup.sh" 
 
   report_tasks = true
 }
