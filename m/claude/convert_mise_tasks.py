@@ -26,27 +26,46 @@ def get_git_managed_mise_files():
     return mise_files
 
 def parse_mise_file(filepath):
-    """Parse a mise.toml file and extract tasks."""
+    """Parse a mise.toml file and extract tasks and full data."""
     try:
         with open(filepath, 'rb') as f:
             data = tomllib.load(f)
 
         tasks = {}
+        task_keys = []  # Track which keys are task-related
+
         # Look for tasks in the toml structure
         if 'tasks' in data:
             for task_name, task_config in data.get('tasks', {}).items():
                 tasks[task_name] = task_config
+            task_keys.append('tasks')
 
         # Also check for [tasks.taskname] sections
-        for key in data.keys():
+        for key in list(data.keys()):
             if key.startswith('tasks.'):
                 task_name = key[6:]  # Remove 'tasks.' prefix
                 tasks[task_name] = data[key]
+                task_keys.append(key)
 
-        return tasks
+        return tasks, data, task_keys
     except Exception as e:
         print(f"Error parsing {filepath}: {e}", file=sys.stderr)
-        return {}
+        return {}, {}, []
+
+def remove_tasks_from_toml(filepath, data, task_keys):
+    """Remove task definitions from TOML file and write it back."""
+    import toml
+
+    # Remove all task-related keys
+    for key in task_keys:
+        if key in data:
+            del data[key]
+
+    # Write the cleaned data back to the file
+    with open(filepath, 'w') as f:
+        toml.dump(data, f)
+
+    print(f"  Removed task definitions from {filepath}")
 
 def create_bash_script(task_name, task_config, tasks_dir):
     """Create a bash script for a mise task."""
@@ -139,7 +158,7 @@ def create_alias_symlinks(task_name, task_config, tasks_dir, script_path):
 
     return created_symlinks
 
-def process_mise_file(mise_file):
+def process_mise_file(mise_file, remove_from_toml=False):
     """Process a single mise.toml file."""
     print(f"Processing: {mise_file}")
 
@@ -153,11 +172,11 @@ def process_mise_file(mise_file):
         tasks_dir = mise_file.parent / "tasks"
 
     # Parse tasks from the file
-    tasks = parse_mise_file(mise_file)
+    tasks, full_data, task_keys = parse_mise_file(mise_file)
 
     if not tasks:
         print(f"  No tasks found in {mise_file}")
-        return None
+        return None, False
 
     # Create tasks directory if needed
     created_new_dir = False
@@ -179,11 +198,32 @@ def process_mise_file(mise_file):
         for symlink in symlinks:
             print(f"    Created symlink: {symlink} -> {script_path.name}")
 
-    return tasks_dir if created_new_dir else None
+    # Remove tasks from TOML if requested
+    modified_toml = False
+    if remove_from_toml and task_keys:
+        try:
+            remove_tasks_from_toml(mise_file, full_data, task_keys)
+            modified_toml = True
+        except ImportError:
+            print("  Warning: 'toml' package not available, cannot remove tasks from TOML file", file=sys.stderr)
+            print("  Install with: pip install toml", file=sys.stderr)
+        except Exception as e:
+            print(f"  Error removing tasks from TOML: {e}", file=sys.stderr)
+
+    return tasks_dir if created_new_dir else None, modified_toml
 
 def main():
     """Main function to process all mise.toml files."""
+    import argparse
+
+    parser = argparse.ArgumentParser(description='Convert mise TOML tasks to bash scripts')
+    parser.add_argument('--remove-from-toml', action='store_true',
+                        help='Remove task definitions from TOML files after conversion')
+    args = parser.parse_args()
+
     print("Converting mise TOML tasks to bash scripts...")
+    if args.remove_from_toml:
+        print("Will remove task definitions from TOML files after conversion")
     print()
 
     # Get all mise files
@@ -191,25 +231,31 @@ def main():
     print(f"Found {len(mise_files)} mise configuration files")
     print()
 
-    # Track created directories for git add
+    # Track created directories and modified files for git add
     created_dirs = set()
+    modified_files = set()
 
     # Process each file
     for mise_file in mise_files:
         try:
-            tasks_dir = process_mise_file(mise_file)
+            tasks_dir, modified = process_mise_file(mise_file, remove_from_toml=args.remove_from_toml)
             if tasks_dir:
                 created_dirs.add(tasks_dir)
+            if modified:
+                modified_files.add(mise_file)
         except Exception as e:
             print(f"Error processing {mise_file}: {e}", file=sys.stderr)
         print()
 
-    # Add created directories to git
-    if created_dirs:
-        print("Adding created task directories to git...")
+    # Add created directories and modified files to git
+    if created_dirs or modified_files:
+        print("Adding changes to git...")
         for task_dir in created_dirs:
             subprocess.run(["git", "add", str(task_dir)], cwd="/Users/ubuntu")
-            print(f"  Added: {task_dir}")
+            print(f"  Added directory: {task_dir}")
+        for modified_file in modified_files:
+            subprocess.run(["git", "add", str(modified_file)], cwd="/Users/ubuntu")
+            print(f"  Added modified file: {modified_file}")
         print()
 
     print("Conversion complete!")

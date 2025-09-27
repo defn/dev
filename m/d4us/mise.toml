@@ -1,7 +1,2 @@
-# This is a mise.toml file
-
-# test is a mise task.  Run with `mise run test`
-[tasks.test]
-description = "Test and format cue files"
-# test mise task runs these commands
-run = "cue eval && cue fmt ."
+[task_config]
+dir = "tasks"
