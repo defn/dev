@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+#MISE description="Test and format cue files"
+
+cue eval && cue fmt .
