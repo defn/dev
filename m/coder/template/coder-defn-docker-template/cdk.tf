@@ -264,7 +264,7 @@ resource "docker_container" "workspace" {
 module "claude-code" {
   count               = data.coder_workspace.me.start_count
   source              = "registry.coder.com/coder/claude-code/coder"
-  version             = "2.0.5"
+  version             = "3.0.0"
   agent_id            = coder_agent.main.id
   folder              = "/home/ubuntu"
   install_claude_code = false
@@ -277,7 +277,7 @@ module "claude-code" {
 module "coder-login" {
   count    = data.coder_workspace.me.start_count
   source   = "registry.coder.com/coder/coder-login/coder"
-  version  = "1.0.31"
+  version  = "1.1.0"
   agent_id = coder_agent.main.id
 }
 
