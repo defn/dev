@@ -63,6 +63,7 @@ resource "coder_agent" "main" {
   }
 
   env = {
+    AGENTAPI_ALLOWED_HOSTS = "*"
     CODER_MCP_CLAUDE_TASK_PROMPT   = data.coder_parameter.ai_prompt.value
     CODER_MCP_APP_STATUS_SLUG      = "claude-code"
     CODER_MCP_CLAUDE_SYSTEM_PROMPT = <<-EOT

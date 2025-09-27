@@ -16,8 +16,10 @@ sudo chown -R ubuntu:ubuntu ~/.claude
 
 # Copy authentication from host if available
 if [[ -f ~/.claude-host/.credentials.json ]]; then
-    cp ~/.claude-host/.credentials.json ~/.claude/
-    echo "Copied authentication from host to ~/.claude/.credentials.json"
+	cp ~/.claude-host/.credentials.json ~/.claude/
+	echo "Copied authentication from host to ~/.claude/.credentials.json"
 else
-    echo "No host authentication found at ~/.claude-host/.credentials.json"
+	echo "No host authentication found at ~/.claude-host/.credentials.json"
 fi
+
+sudo ln -nfs ubuntu /home/coder

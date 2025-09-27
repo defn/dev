@@ -63,6 +63,12 @@ resource "coder_agent" "main" {
   }
 }
 
+resource "coder_env" "AGENTAPI_ALLOWED_HOSTS" {
+  agent_id = coder_agent.main.id
+  name     = "AGENTAPI_ALLOWED_HOSTS"
+  value    = "*"
+}
+
 resource "coder_env" "mcp_claude_task_prompt" {
   agent_id = coder_agent.main.id
   name     = "CODER_MCP_CLAUDE_TASK_PROMPT"
@@ -266,12 +272,12 @@ module "claude-code" {
   source              = "registry.coder.com/coder/claude-code/coder"
   version             = "3.0.0"
   agent_id            = coder_agent.main.id
-  folder              = "/home/ubuntu"
+  workdir = "/home/ubuntu"
   install_claude_code = false
   install_agentapi = false
-  experiment_pre_install_script = "(cd && git pull); ~/bin/claude-setup.sh" 
+  pre_install_script = "(cd && git pull); ~/bin/claude-setup.sh" 
 
-  experiment_report_tasks = true
+  report_tasks = true
 }
 
 module "coder-login" {
