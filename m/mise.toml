@@ -1,3 +1,6 @@
+[task_config]
+dir = "tasks"
+
 [tools]
 "ubi:bazelbuild/buildtools" = { version = "8.2.1", exe = "buildifier" }
 helm = "3.19.0"
