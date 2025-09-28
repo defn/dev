@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.36.0](https://github.com/defn/dev/compare/v1.35.0...v1.36.0) (2025-09-28)
+
+
+### Features
+
+* convert mise TOML tasks to bash scripts ([aa630ef](https://github.com/defn/dev/commit/aa630ef771646228e607cce207f622c00a6a40ee))
+* enhance mise task conversion script and clean TOML files ([b016f39](https://github.com/defn/dev/commit/b016f39bcf160df31274a6a1df7b27de536c67d4))
+
 ## [1.35.0](https://github.com/defn/dev/compare/v1.34.0...v1.35.0) (2025-08-28)
 
 
