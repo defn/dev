@@ -5,6 +5,7 @@ v1alpha1.extension_repo(
 )
 
 load("ext://defn/common", "main")
+load("ext://uibutton", "cmd_button")
 
 local_resource(
     "build",
@@ -15,4 +16,22 @@ local_resource(
             exec make build
         """,
     ],
+)
+
+local_resource(
+    name="hello",
+    cmd="echo hello",
+)
+
+local_resource(
+    name="sleep-server",
+    serve_cmd="sleep 86400",
+)
+
+cmd_button(
+    name="hello-google",
+    argv=["bash", "-c", "open https://google.com"],
+    resource="hello",
+    icon_name="cloud_download",
+    text="google",
 )

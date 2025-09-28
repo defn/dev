@@ -16,3 +16,5 @@ gh = "2.80.0"
 "ubi:buildkite/agent" = { version = "3.107.2", exe = "buildkite-agent" }
 yq = "4.47.2"
 prettier = "3.6.2"
+tilt = "0.35.1"
+black = "25.9.0"
