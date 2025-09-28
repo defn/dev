@@ -5,7 +5,7 @@ v1alpha1.extension_repo(
 )
 
 load("ext://defn/common", "main")
-load("ext://uibutton", "cmd_button")
+load("ext://uibutton", "cmd_button", "text_input", "location")
 
 local_resource(
     "build",
@@ -34,4 +34,15 @@ cmd_button(
     resource="hello",
     icon_name="cloud_download",
     text="google",
+)
+
+cmd_button(
+    name="hello",
+    argv=["sh", "-c", "echo Hello, $NAME"],
+    location=location.NAV,
+    icon_name="front_hand",
+    text="Hello!",
+    inputs=[
+        text_input("NAME"),
+    ],
 )
