@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+# mise description="Run Claude Code CLI with skip permissions flag"
+
+claude --dangerously-skip-permissions
