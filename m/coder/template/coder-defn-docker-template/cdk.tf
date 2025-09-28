@@ -264,12 +264,12 @@ resource "docker_container" "workspace" {
 module "claude-code" {
   count               = data.coder_workspace.me.start_count
   source              = "registry.coder.com/coder/claude-code/coder"
-  version             = "2.2.0"
+  version             = "2.2.1"
   agent_id            = coder_agent.main.id
   folder = "/home/ubuntu"
   install_claude_code = false
   install_agentapi = false
-  experiment_pre_install_script = "(cd && git pull); sudo mount --bind /home/ubuntu /home/coder; ~/bin/claude-setup.sh" 
+  experiment_pre_install_script = "(cd && git pull); sudo mount --bind /home/ubuntu /home/coder; ~/bin/claude-setup.sh"
 
   experiment_report_tasks = true
 }
