@@ -15,3 +15,4 @@ aws = "2.31.3"
 gh = "2.80.0"
 "ubi:buildkite/agent" = { version = "3.107.2", exe = "buildkite-agent" }
 yq = "4.47.2"
+prettier = "3.6.2"

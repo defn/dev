@@ -1,102 +1,105 @@
 {
-  "editor.fontFamily": "Fira Code",
-  "editor.fontLigatures": true,
-  "files.autoSave": "afterDelay",
-  "editor.formatOnSave": true,
-  "editor.minimap.enabled": false,
-  "extensions.ignoreRecommendations": true,
-  "git.confirmSync": false,
-  "terminal.integrated.copyOnSelection": true,
-  "terminal.integrated.enableMultiLinePasteWarning": "never",
-  "terminal.integrated.localEchoEnabled": "off",
-  "terminal.integrated.sendKeybindingsToShell": true,
-  "terminal.integrated.showExitAlert": false,
-  "terminal.integrated.defaultProfile.linux": "dev",
-  "terminal.integrated.profiles.linux": {
-    "dev": {
-      "path": "bash",
-      "args": ["--init-file", "~/.bash_entrypoint", "-s", "${workspaceFolder}"]
-    }
-  },
-  "terminal.integrated.env.linux": {
-    "PATH": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
-  },
-  "workbench.startupEditor": "none",
-  "go.survey.prompt": false,
-  "go.toolsManagement.checkForUpdates": "off",
-  "gopls": {
-    "ui.semanticTokens": true
-  },
-  "files.watcherExclude": {
-    "**/.git/**": true,
-    "**/node_modules/**": true,
-    "**/.local/**": true,
-    "**/.cache/**": true,
-    "**/.kube/**": true,
-    "**/work/**": true,
-    "**/.trunk/*out/": true,
-    "**/.trunk/*actions/": true,
-    "**/.trunk/*logs/": true,
-    "**/.trunk/*plugins/": true,
-    "**/.trunk/*notifications/": true
-  },
-  "terraform.languageServer.ignoreSingleFileWarning": true,
-  "terraform.languageServer.enable": false,
-  "git.ignoreLimitWarning": true,
-  "diffEditor.ignoreTrimWhitespace": false,
-  "git.openRepositoryInParentFolders": "always",
-  "dev.containers.copyGitConfig": true,
-  "dev.containers.gitCredentialHelperConfigLocation": "none",
-  "go.terminal.activateEnvironment": false,
-  "svelte.enable-ts-plugin": true,
-  "cue.formatTool": "cue fmt",
-  "trunk.trunkGrayOutNonBlockingIssues": true,
-  "files.exclude": {
-    "**/.trunk/*out/": true,
-    "**/.trunk/*actions/": true,
-    "**/.trunk/*logs/": true,
-    "**/.trunk/*plugins/": true,
-    "**/.trunk/*notifications/": true
-  },
-  "trunk.showWhatsNewMessage": false,
-  "files.associations": {
-    "Makefile": "makefile"
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "[jsonc]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
-  "git.suggestSmartCommit": false,
-  "trunk.showWhatsNew": false,
-  "security.workspace.trust.untrustedFiles": "open",
-  "workbench.colorTheme": "Default Dark Modern",
-  "calva.prettyPrintingOptions": {
-    "printEngine": "pprint",
-    "enabled": true,
-    "width": 120,
-    "maxLength": 50
-  },
-  "calva.paredit.defaultKeyMap": "strict",
-  "git.detectSubmodules": false,
-  "workbench.editor.empty.hint": "hidden",
-  "tailscale.portDiscovery.enabled": false,
-  "tailscale.ssh.defaultUsername": "ubuntu",
   "[python]": {
     "diffEditor.ignoreTrimWhitespace": false
   },
-  "remote.autoForwardPortsSource": "hybrid",
   "bazel.buildifierFixOnFormat": true,
-  "[json]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  "calva.paredit.defaultKeyMap": "strict",
+  "calva.prettyPrintingOptions": {
+    "enabled": true,
+    "maxLength": 50,
+    "printEngine": "pprint",
+    "width": 120
+  },
+  "cue.formatTool": "cue fmt",
+  "dev.containers.copyGitConfig": true,
+  "dev.containers.gitCredentialHelperConfigLocation": "none",
+  "diffEditor.ignoreTrimWhitespace": false,
+  "editor.fontFamily": "Fira Code",
+  "editor.fontLigatures": true,
+  "editor.formatOnSave": true,
+  "editor.minimap.enabled": false,
+  "editor.stickyScroll.enabled": false,
+  "extensions.ignoreRecommendations": true,
+  "files.associations": {
+    "Makefile": "makefile"
+  },
+  "files.autoSave": "afterDelay",
+  "files.exclude": {
+    "**/.trunk/*actions/": true,
+    "**/.trunk/*logs/": true,
+    "**/.trunk/*notifications/": true,
+    "**/.trunk/*out/": true,
+    "**/.trunk/*plugins/": true
+  },
+  "files.watcherExclude": {
+    "**/.cache/**": true,
+    "**/.git/**": true,
+    "**/.kube/**": true,
+    "**/.local/**": true,
+    "**/.trunk/*actions/": true,
+    "**/.trunk/*logs/": true,
+    "**/.trunk/*notifications/": true,
+    "**/.trunk/*out/": true,
+    "**/.trunk/*plugins/": true,
+    "**/node_modules/**": true,
+    "**/work/**": true
   },
   "genieai.enableConversationHistory": true,
-  "editor.stickyScroll.enabled": false,
+  "git.confirmSync": false,
+  "git.detectSubmodules": false,
+  "git.ignoreLimitWarning": true,
+  "git.openRepositoryInParentFolders": "always",
+  "git.suggestSmartCommit": false,
+  "go.survey.prompt": false,
+  "go.terminal.activateEnvironment": false,
+  "go.toolsManagement.checkForUpdates": "off",
+  "gopls": {
+    "ui.semanticTokens": true
+  },
   "markdown.marp.exportType": "html",
   "markdown.marp.html": "all",
-  "terminal.integrated.fontFamily": "Cousine",
   "npm.packageManager": "npm",
+  "remote.autoForwardPortsSource": "hybrid",
   "remote.portsAttributes": {
     "default": {
       "onAutoForward": "ignore"
     }
-  }
+  },
+  "security.workspace.trust.enabled": true,
+  "security.workspace.trust.startupPrompt": "never",
+  "security.workspace.trust.trustedFolders": ["/home/ubuntu/m"],
+  "security.workspace.trust.untrustedFiles": "open",
+  "svelte.enable-ts-plugin": true,
+  "tailscale.portDiscovery.enabled": false,
+  "tailscale.ssh.defaultUsername": "ubuntu",
+  "terminal.integrated.copyOnSelection": true,
+  "terminal.integrated.defaultProfile.linux": "dev",
+  "terminal.integrated.enableMultiLinePasteWarning": "never",
+  "terminal.integrated.env.linux": {
+    "PATH": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+  },
+  "terminal.integrated.fontFamily": "Cousine",
+  "terminal.integrated.localEchoEnabled": "off",
+  "terminal.integrated.profiles.linux": {
+    "dev": {
+      "args": ["--init-file", "~/.bash_entrypoint", "-s", "${workspaceFolder}"],
+      "path": "bash"
+    }
+  },
+  "terminal.integrated.sendKeybindingsToShell": true,
+  "terminal.integrated.showExitAlert": false,
+  "terraform.languageServer.enable": false,
+  "terraform.languageServer.ignoreSingleFileWarning": true,
+  "trunk.showWhatsNew": false,
+  "trunk.showWhatsNewMessage": false,
+  "trunk.trunkGrayOutNonBlockingIssues": true,
+  "workbench.colorTheme": "Default Dark Modern",
+  "workbench.editor.empty.hint": "hidden",
+  "workbench.startupEditor": "none"
 }
