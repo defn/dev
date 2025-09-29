@@ -3,8 +3,9 @@
 
 provider "registry.terraform.io/coder/coder" {
   version     = "2.11.0"
-  constraints = ">= 0.23.0, >= 2.7.0"
+  constraints = ">= 0.23.0"
   hashes = [
+    "h1:+qcljUDz2FSrkiL2xZ4kM3jPN76AmbZefyXipxtWUU4=",
     "h1:nvP1/5GV2smNJ1Vkoq7pCCKYmC/BtmyhJFwNnDzWNT4=",
     "zh:149f9da8a52d4d0352f97b71cdd2527a79ab79745dabab917f0f44b183a25a28",
     "zh:218dcadb37927fac084e7465fc47d25a2e73e8db7773d7cbed96ff331e93e8be",
@@ -27,6 +28,7 @@ provider "registry.terraform.io/coder/coder" {
 provider "registry.terraform.io/hashicorp/null" {
   version = "3.2.4"
   hashes = [
+    "h1:L5V05xwp/Gto1leRryuesxjMfgZwjb7oool4WS1UEFQ=",
     "h1:hkf5w5B6q8e2A42ND2CjAvgvSN3puAosDmOJb3zCVQM=",
     "zh:59f6b52ab4ff35739647f9509ee6d93d7c032985d9f8c6237d1f8a59471bbbe2",
     "zh:78d5eefdd9e494defcb3c68d282b8f96630502cac21d1ea161f53cfe9bb483b3",
