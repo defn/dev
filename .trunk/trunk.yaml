@@ -27,7 +27,7 @@ lint:
   enabled:
     - golangci-lint2@2.5.0
     - actionlint@1.7.7
-    - isort@6.0.1
+    - isort@6.1.0
     - clippy@1.65.0
     - rustfmt@1.65.0
     - dotenv-linter@3.3.0
@@ -36,7 +36,7 @@ lint:
     - cue-fmt@0.9.0
     - git-diff-check
     - gofmt@1.25.1
-    #- isort@6.0.1
+    #- isort@6.1.0
     - markdownlint@0.45.0
     - nixpkgs-fmt@1.3.0
     - prettier@3.6.2
