@@ -83,6 +83,17 @@ resource "coder_env" "mcp_claude_system_prompt" {
   EOT
 }
 
+resource "coder_app" "app" {
+  agent_id     = coder_agent.main.id
+  display_name = "app"
+  icon         = "/icon/code.svg"
+  share        = "owner"
+  slug         = "app"
+  subdomain    = true
+  url          = "http://localhost:3000"
+  order        = 1
+}
+
 resource "coder_app" "code-server" {
   agent_id     = coder_agent.main.id
   display_name = "code-server"
@@ -91,6 +102,7 @@ resource "coder_app" "code-server" {
   slug         = "cs"
   subdomain    = true
   url          = "http://localhost:8080/?folder=${data.coder_parameter.homedir.value}"
+  order        = 2
   healthcheck {
     interval  = 5
     threshold = 6
