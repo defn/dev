@@ -9,6 +9,7 @@
     "diffEditor.ignoreTrimWhitespace": false
   },
   "bazel.buildifierFixOnFormat": true,
+  "breadcrumbs.enabled": false,
   "calva.paredit.defaultKeyMap": "strict",
   "calva.prettyPrintingOptions": {
     "enabled": true,
@@ -20,8 +21,10 @@
   "dev.containers.copyGitConfig": true,
   "dev.containers.gitCredentialHelperConfigLocation": "none",
   "diffEditor.ignoreTrimWhitespace": false,
+  "editor.codeLens": false,
   "editor.fontFamily": "Fira Code",
   "editor.fontLigatures": true,
+  "editor.lightbulb.enabled": "off",
   "editor.formatOnSave": true,
   "editor.minimap.enabled": false,
   "editor.stickyScroll.enabled": false,
@@ -101,5 +104,6 @@
   "trunk.trunkGrayOutNonBlockingIssues": true,
   "workbench.colorTheme": "Default Dark Modern",
   "workbench.editor.empty.hint": "hidden",
-  "workbench.startupEditor": "none"
+  "workbench.startupEditor": "none",
+  "terminal.integrated.stickyScroll.enabled": false
 }
