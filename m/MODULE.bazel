@@ -7,7 +7,7 @@ module(
 )
 
 # https://registry.bazel.build/modules/bazel_skylib
-bazel_dep(name = "bazel_skylib", version = "1.8.1")
+bazel_dep(name = "bazel_skylib", version = "1.8.2")
 
 # https://registry.bazel.build/modules/rules_oci
 bazel_dep(name = "rules_oci", version = "2.2.6")
@@ -22,7 +22,7 @@ bazel_dep(name = "rules_shell", version = "0.6.1")
 bazel_dep(name = "rules_pkg", version = "1.1.0")
 
 # https://registry.bazel.build/modules/protobuf
-bazel_dep(name = "protobuf", version = "32.0")
+bazel_dep(name = "protobuf", version = "32.1")
 
 # https://registry.bazel.build/modules/rules_proto
 bazel_dep(name = "rules_proto", version = "7.1.0")
