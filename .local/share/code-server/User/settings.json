@@ -105,5 +105,6 @@
   "workbench.colorTheme": "Default Dark Modern",
   "workbench.editor.empty.hint": "hidden",
   "workbench.startupEditor": "none",
-  "terminal.integrated.stickyScroll.enabled": false
+  "terminal.integrated.stickyScroll.enabled": false,
+  "remote.defaultExtensionsIfInstalledLocally": []
 }
