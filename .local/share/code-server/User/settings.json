@@ -106,5 +106,8 @@
   "workbench.editor.empty.hint": "hidden",
   "workbench.startupEditor": "none",
   "terminal.integrated.stickyScroll.enabled": false,
-  "remote.defaultExtensionsIfInstalledLocally": []
+  "remote.defaultExtensionsIfInstalledLocally": [],
+  "chat.disableAIFeatures": true,
+  "workbench.settings.showAISearchToggle": false,
+  "files.trimTrailingWhitespace": true
 }
