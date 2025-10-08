@@ -1,0 +1,6 @@
+hemorrhag.ing {
+    reverse_proxy localhost:8111
+    tls {
+        dns cloudflare {env.CLOUDFLARE_API_TOKEN}
+    }
+}
