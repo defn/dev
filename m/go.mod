@@ -22,14 +22,14 @@ require (
 	github.com/lucasb-eyer/go-colorful v1.3.0
 	github.com/muesli/gamut v0.3.1
 	github.com/noisysockets/noisysockets v0.28.0
-	github.com/riverqueue/river v0.25.0
-	github.com/riverqueue/river/riverdriver/riverpgxv5 v0.25.0
+	github.com/riverqueue/river v0.26.0
+	github.com/riverqueue/river/riverdriver/riverpgxv5 v0.26.0
 	github.com/spf13/cobra v1.10.1
 	github.com/spf13/viper v1.21.0
 	github.com/teilomillet/gollm v0.1.9
 	github.com/urfave/cli/v2 v2.27.7
 	go.uber.org/fx v1.24.0
-	golang.org/x/sys v0.36.0
+	golang.org/x/sys v0.37.0
 )
 
 require (
@@ -108,9 +108,9 @@ require (
 	github.com/protocolbuffers/txtpbfmt v0.0.0-20251002044816-ff5ff96e8aaf // indirect
 	github.com/quic-go/qpack v0.5.1 // indirect
 	github.com/quic-go/quic-go v0.55.0 // indirect
-	github.com/riverqueue/river/riverdriver v0.25.0 // indirect
-	github.com/riverqueue/river/rivershared v0.25.0 // indirect
-	github.com/riverqueue/river/rivertype v0.25.0 // indirect
+	github.com/riverqueue/river/riverdriver v0.26.0 // indirect
+	github.com/riverqueue/river/rivershared v0.26.0 // indirect
+	github.com/riverqueue/river/rivertype v0.26.0 // indirect
 	github.com/rivo/uniseg v0.4.7 // indirect
 	github.com/rogpeppe/go-internal v1.14.1 // indirect
 	github.com/russross/blackfriday/v2 v2.1.0 // indirect
@@ -138,17 +138,17 @@ require (
 	go.uber.org/multierr v1.11.0 // indirect
 	go.uber.org/zap v1.27.0 // indirect
 	go.yaml.in/yaml/v3 v3.0.4 // indirect
-	golang.org/x/arch v0.21.0 // indirect
-	golang.org/x/crypto v0.42.0 // indirect
+	golang.org/x/arch v0.22.0 // indirect
+	golang.org/x/crypto v0.43.0 // indirect
 	golang.org/x/lint v0.0.0-20241112194109-818c5a804067 // indirect
-	golang.org/x/mod v0.28.0 // indirect
-	golang.org/x/net v0.45.0 // indirect
-	golang.org/x/oauth2 v0.31.0 // indirect
+	golang.org/x/mod v0.29.0 // indirect
+	golang.org/x/net v0.46.0 // indirect
+	golang.org/x/oauth2 v0.32.0 // indirect
 	golang.org/x/sync v0.17.0 // indirect
-	golang.org/x/telemetry v0.0.0-20251001141935-4eae98a72453 // indirect
-	golang.org/x/text v0.29.0 // indirect
-	golang.org/x/time v0.13.0 // indirect
-	golang.org/x/tools v0.37.0 // indirect
+	golang.org/x/telemetry v0.0.0-20251008203120-078029d740a8 // indirect
+	golang.org/x/text v0.30.0 // indirect
+	golang.org/x/time v0.14.0 // indirect
+	golang.org/x/tools v0.38.0 // indirect
 	golang.org/x/tools/cmd/godoc v0.1.0-deprecated // indirect
 	golang.org/x/tools/godoc v0.1.0-deprecated // indirect
 	google.golang.org/protobuf v1.36.10 // indirect
