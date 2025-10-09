@@ -10,8 +10,8 @@ services:
     restart: always
     privileged: true
     ports:
-      - "80:8080"
-      - "443:8443"
+      - "169.254.32.1:80:8080"
+      - "169.254.32.1:443:8443"
     devices:
       - "/dev/kvm:/dev/kvm"
       - "/dev/net/tun:/dev/net/tun"
