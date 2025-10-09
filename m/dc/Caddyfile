@@ -1,0 +1,15 @@
+http://defn.xxx:8080 http://*.defn.xxx:8080 {
+    redir https://{host}{uri} permanent
+    reverse_proxy localhost:8222
+    tls {
+        dns cloudflare {env.CLOUDFLARE_API_TOKEN}
+    }
+}
+
+https://defn.xxx:8443 https://*.defn.xxx:8443 {
+    reverse_proxy localhost:8222
+    tls {
+        dns cloudflare {env.CLOUDFLARE_API_TOKEN}
+    }
+}
+
