@@ -1,14 +1,30 @@
-http://defn.xxx:8080 http://*.defn.xxx:8080 {
-    redir https://{host}{uri} permanent
+{
+    auto_https off
+}
+
+http://169.254.32.1:8080, http://defn.xxx:8080, http://*.defn.xxx:8080 {
+    @allowed_hosts {
+        host defn.xxx *.defn.xxx
+    }
+    redir @allowed_hosts https://{host}{uri} permanent
+}
+
+https://169.254.32.1:8443, https://defn.xxx:8443, https://*.defn.xxx:8443 {
     reverse_proxy localhost:8222
+
     tls {
         dns cloudflare {env.CLOUDFLARE_API_TOKEN}
     }
-}
 
-https://defn.xxx:8443 https://*.defn.xxx:8443 {
-    reverse_proxy localhost:8222
-    tls {
-        dns cloudflare {env.CLOUDFLARE_API_TOKEN}
+    @allowed_hosts {
+        host defn.xxx *.defn.xxx
+    }
+    respond @allowed_hosts 200
+
+    header {
+        Access-Control-Allow-Origin "https://defn.xxx"
+        Access-Control-Allow-Methods "GET, POST, PUT, DELETE, OPTIONS"
+        Access-Control-Allow-Headers "Authorization, Content-Type"
+        Access-Control-Allow-Credentials true
     }
 }
