@@ -89,6 +89,12 @@ export -f fmpost
 # Main processing function that generates all missing gallery images
 # Processes each source image against each reference style with retry logic
 function main {
+  # Generate gallery index
+  (
+    cd fm
+    for a in $(ls -trhd w-??.png w-???.png); do echo "<a href=\"/pub/w/${a%.png}/\"><img src=\"$a\"></a>"; done > fm.html
+  )
+
 	# Generate gallery images if missing
 	# Find all source images in pub/W directory
 	find pub/W -maxdepth 1 -type f -name '*.png' | xargs -n1 basename | sort | while read -r a; do
