@@ -1,5 +1,22 @@
 # Changelog
 
+## [1.37.0](https://github.com/defn/dev/compare/v1.36.0...v1.37.0) (2025-10-14)
+
+
+### Features
+
+* add gallery index generation to fem.sh ([a34a62c](https://github.com/defn/dev/commit/a34a62c33162410a075cb34644a71bbbf3db37d1))
+* add hello button with text input to Tiltfile and update linter versions ([69963d4](https://github.com/defn/dev/commit/69963d409e5e8248fbeb3a6b3c80c076a7f177af))
+* add mise task for claude command ([88e23f8](https://github.com/defn/dev/commit/88e23f852b9da5b2c9ffb7cbb000b349a75603d1))
+* add task config to mise.toml ([0366eab](https://github.com/defn/dev/commit/0366eab868072c2d915b2e205957be849c66ccfe))
+* enable DERP force websockets for coder server ([5a6e789](https://github.com/defn/dev/commit/5a6e789331e2beb451d9f024ed20fb334bec467d))
+* set app as default in Docker Coder template ([e732a0b](https://github.com/defn/dev/commit/e732a0b00845b7fad48cb1fd38ce8a0e6044e804))
+
+
+### Bug Fixes
+
+* bind Caddy server to specific IP address ([23662f9](https://github.com/defn/dev/commit/23662f9e5996befeb023dc9f9c813710467d7722))
+
 ## [1.36.0](https://github.com/defn/dev/compare/v1.35.0...v1.36.0) (2025-09-28)
 
 
