@@ -22,7 +22,7 @@
 #
 # Usage:
 #   ./fem.sh [model_name]
-#   
+#
 # Parameters:
 #   model_name    - Optional model identifier (default: "meh")
 #
@@ -66,7 +66,7 @@ function fm {
 # Extracts base64 image from JSON response, decodes it, and validates the result
 # Parameters:
 #   $1 - Input image file path
-#   $2 - Reference image file path  
+#   $2 - Reference image file path
 #   $3 - Output file path
 # Process:
 #   1. Calls fm() to get JSON response
@@ -89,11 +89,16 @@ export -f fmpost
 # Main processing function that generates all missing gallery images
 # Processes each source image against each reference style with retry logic
 function main {
-  # Generate gallery index
-  (
-    cd fm
-    for a in $(ls -trhd w-??.png w-???.png); do echo "<a href=\"/pub/w/${a%.png}/\"><img src=\"${a%.png}/${a%.png}-00fc688b-4933-42cb-9274-3216a0fb39ce.png\"></a>"; done > fm.html
-  )
+	# Generate gallery index
+	(
+		cd fm
+		for a in $(ls -trhd w-??.png w-???.png); do
+			echo '<span style="white-space: nowrap;">'
+			echo "<a href=\"/pub/w/${a%.png}/\"><img style=\"vertical-align: top;\" src=\"${a%.png}/${a%.png}-00fc688b-4933-42cb-9274-3216a0fb39ce.png\"></a>"
+			echo "<a href=\"/pub/w/${a%.png}/\"><img style=\"vertical-align: top;\" src=\"$a\"></a>"
+			echo '</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'
+		done >fm.html
+	)
 
 	# Generate gallery images if missing
 	# Find all source images in pub/W directory
