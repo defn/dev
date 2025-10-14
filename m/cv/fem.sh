@@ -92,7 +92,7 @@ function main {
   # Generate gallery index
   (
     cd fm
-    for a in $(ls -trhd w-??.png w-???.png); do echo "<a href=\"/pub/w/${a%.png}/\"><img src=\"$a\"></a>"; done > fm.html
+    for a in $(ls -trhd w-??.png w-???.png); do echo "<a href=\"/pub/w/${a%.png}/\"><img src=\"${a%.png}/${a%.png}-00fc688b-4933-42cb-9274-3216a0fb39ce.png\"></a>"; done > fm.html
   )
 
 	# Generate gallery images if missing
