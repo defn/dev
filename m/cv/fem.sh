@@ -94,7 +94,7 @@ function main {
 		cd fm
 		for a in $(ls -trhd w-??.png w-???.png); do
 			echo '<span style="white-space: nowrap;">'
-			echo "<a href=\"/pub/w/${a%.png}/\"><img style=\"vertical-align: top;\" src=\"${a%.png}/${a%.png}-00fc688b-4933-42cb-9274-3216a0fb39ce.png\"></a>"
+			echo "<a href=\"/pub/w/${a%.png}/\"><img style=\"vertical-align: top;\" src=\"${a%.png}/${a%.png}-00000000-0000-0000-0000-000000000000.png\"></a>"
 			echo "<a href=\"/pub/w/${a%.png}/\"><img style=\"vertical-align: top;\" src=\"$a\"></a>"
 			echo '</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'
 		done >fm.html
