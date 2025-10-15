@@ -9,7 +9,7 @@ replace github.com/protocolbuffers/txtpbfmt => github.com/protocolbuffers/txtpbf
 require (
 	cuelang.org/go v0.15.0-alpha.2
 	github.com/aws/constructs-go/constructs/v10 v10.4.2
-	github.com/aws/jsii-runtime-go v1.115.0
+	github.com/aws/jsii-runtime-go v1.116.0
 	github.com/bitfield/script v0.24.1
 	github.com/cdktf/cdktf-provider-aws-go/aws/v19 v19.65.1
 	github.com/charmbracelet/bubbles v0.21.0
