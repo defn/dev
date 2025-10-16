@@ -1,5 +1,14 @@
 # Changelog
 
+## [1.37.1](https://github.com/defn/dev/compare/v1.37.0...v1.37.1) (2025-10-16)
+
+
+### Bug Fixes
+
+* improve gallery index layout with dual image display ([3df1ffc](https://github.com/defn/dev/commit/3df1ffc004a9638b8c657d55f4bd25a34ca0ad68))
+* replace hardcoded UUID with generic placeholder in gallery image link ([57b199a](https://github.com/defn/dev/commit/57b199a952ac98e8f68f2beaa53c83e07a57927c))
+* update gallery index image paths to use subdirectory structure ([ce69cc3](https://github.com/defn/dev/commit/ce69cc36d0e9f037b006e1c342df5326e4737ed4))
+
 ## [1.37.0](https://github.com/defn/dev/compare/v1.36.0...v1.37.0) (2025-10-14)
 
 
