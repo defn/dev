@@ -193,7 +193,7 @@ graph.png
 .lvm_history
 .psql_history
 .nx
-.qt 
+.qt
 Google*
 .cookiecutter_replay
 My*Drive
@@ -234,7 +234,7 @@ bin/devcontainer
 Bookshelf/
 .aaa*
 .ssh-agent*
-.continue 
+.continue
 .boto
 .gsutil
 
@@ -268,3 +268,5 @@ __pycache__
 .codeium
 .gemini
 .windsurf
+
+.groundcover
