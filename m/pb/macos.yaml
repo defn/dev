@@ -39,6 +39,26 @@
         force: false
       when: auto_master_stat.stat.exists
 
+    - name: Enable /home automount in /etc/auto_master (if commented)
+      become: true
+      lineinfile:
+        path: /etc/auto_master
+        regexp: '^#/home\s+'
+        line: "/home			auto_home	-nobrowse,hidefromfinder"
+        backrefs: true
+      when: auto_master_stat.stat.exists
+      register: auto_master_enabled
+
+    - name: Reload automounter to mount /home
+      become: true
+      command: automount -vc
+      when: auto_master_enabled.changed
+
+    - name: Wait for automounter to mount /home
+      pause:
+        seconds: 2
+      when: auto_master_enabled.changed
+
     - name: Disable /home automount in /etc/auto_master
       become: true
       lineinfile:
