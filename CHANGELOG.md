@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.37.2](https://github.com/defn/dev/compare/v1.37.1...v1.37.2) (2025-10-18)
+
+
+### Bug Fixes
+
+* enable /home mount before disabling in macOS playbook ([95c31dd](https://github.com/defn/dev/commit/95c31dd85da8794d18e921cbf289ccb698f9ab38))
+* pass arguments to claude command in mise task ([693b6fc](https://github.com/defn/dev/commit/693b6fc5cd03088797bccbc2d556e876f98f341d))
+
 ## [1.37.1](https://github.com/defn/dev/compare/v1.37.0...v1.37.1) (2025-10-16)
 
 
