@@ -1,11 +1,11 @@
 package main
 
 import (
-	e "github.com/defn/dev/m/c/e"
-	a "github.com/defn/dev/m/c/a"
+	execution "github.com/defn/dev/m/c/execution"
+	application "github.com/defn/dev/m/c/application"
 )
 
 config: {
-	resource: e.resource
-	repo:     a.repo
+	resource: execution.resource
+	repo:     application.repo
 }
