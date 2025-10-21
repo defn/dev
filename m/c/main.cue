@@ -3,6 +3,7 @@ package main
 import (
 	intention "github.com/defn/dev/m/c/intention"
 	definition "github.com/defn/dev/m/c/definition"
+	aws "github.com/defn/dev/m/c/definition/aws"
 	execution "github.com/defn/dev/m/c/execution"
 	application "github.com/defn/dev/m/c/application"
 )
@@ -14,4 +15,6 @@ config: {
 	repo: intention.repo
 	repo: definition.repo
 	repo: application.repo
+
+	"aws": aws
 }
