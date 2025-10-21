@@ -7,7 +7,11 @@ configMapGenerator:
   - name: nyan-cat
     literals:
       - repo=nyan-cat
+    options:
+      disableNameSuffixHash: true
 
   - name: dev
     literals:
       - repo=dev
+    options:
+      disableNameSuffixHash: true

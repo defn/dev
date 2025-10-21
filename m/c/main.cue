@@ -8,8 +8,10 @@ import (
 )
 
 config: {
+	resource: intention.resource
 	resource: execution.resource
-	repo:     intention.repo
-	repo:     definition.repo
-	repo:     application.repo
+
+	repo: intention.repo
+	repo: definition.repo
+	repo: application.repo
 }

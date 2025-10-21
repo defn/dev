@@ -5,7 +5,7 @@ repo: {
 		createdAt:   "2022-02-11T22:28:21Z"
 		description: "Internal developer platform for home and cloud labs"
 		name:        "dev"
-		updatedAt:   "2025-10-18T02:54:05Z"
+		updatedAt:   "2025-10-21T01:11:09Z"
 		url:         "https://github.com/defn/dev"
 	}
 	".github": {

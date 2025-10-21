@@ -1,20 +1,20 @@
 package execution
 
-resource: default: "dev-db7ddb9b59": {
+resource: default: dev: {
 	apiVersion: "v1"
 	data: repo: "dev"
 	kind: "ConfigMap"
 	metadata: {
-		name:      "dev-db7ddb9b59"
+		name:      "dev"
 		namespace: "default"
 	}
 }
-resource: default: "nyan-cat-4mhth8gdk2": {
+resource: default: "nyan-cat": {
 	apiVersion: "v1"
 	data: repo: "nyan-cat"
 	kind: "ConfigMap"
 	metadata: {
-		name:      "nyan-cat-4mhth8gdk2"
+		name:      "nyan-cat"
 		namespace: "default"
 	}
 }
