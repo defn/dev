@@ -1,8 +1,14 @@
 package intention
 
-resource: [NS=string]: [NAME=string]: #ConfigMap & {
-	data: repo:          NAME
-	metadata: namespace: NS
+import definition "github.com/defn/dev/m/c/definition"
+
+resource: [NS=string]: [NAME=string]: {
+	// Ensure NAME references an existing GitRepo
+	definition.repo[NAME]
+	#ConfigMap & {
+		data: repo:          NAME
+		metadata: namespace: NS
+	}
 }
 
 #ConfigMap: {
