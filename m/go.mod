@@ -37,7 +37,7 @@ require (
 	dario.cat/mergo v1.0.2 // indirect
 	github.com/Masterminds/semver/v3 v3.4.0 // indirect
 	github.com/atotto/clipboard v0.1.4 // indirect
-	github.com/avast/retry-go/v4 v4.6.1 // indirect
+	github.com/avast/retry-go/v4 v4.7.0 // indirect
 	github.com/aymanbagabas/go-osc52/v2 v2.0.1 // indirect
 	github.com/bahlo/generic-list-go v0.2.0 // indirect
 	github.com/buger/jsonparser v1.1.1 // indirect
@@ -105,7 +105,7 @@ require (
 	github.com/pelletier/go-toml/v2 v2.2.4 // indirect
 	github.com/pkoukk/tiktoken-go v0.1.8 // indirect
 	github.com/pmezard/go-difflib v1.0.0 // indirect
-	github.com/protocolbuffers/txtpbfmt v0.0.0-20251002044816-ff5ff96e8aaf // indirect
+	github.com/protocolbuffers/txtpbfmt v0.0.0-20251016062345-16587c79cd91 // indirect
 	github.com/quic-go/qpack v0.5.1 // indirect
 	github.com/quic-go/quic-go v0.55.0 // indirect
 	github.com/riverqueue/river/riverdriver v0.26.0 // indirect
@@ -145,7 +145,7 @@ require (
 	golang.org/x/net v0.46.0 // indirect
 	golang.org/x/oauth2 v0.32.0 // indirect
 	golang.org/x/sync v0.17.0 // indirect
-	golang.org/x/telemetry v0.0.0-20251009181524-91c411e14f39 // indirect
+	golang.org/x/telemetry v0.0.0-20251014153721-24f779f6aaef // indirect
 	golang.org/x/text v0.30.0 // indirect
 	golang.org/x/time v0.14.0 // indirect
 	golang.org/x/tools v0.38.0 // indirect
