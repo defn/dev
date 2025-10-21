@@ -5,10 +5,81 @@ This directory implements a layered CUE configuration system that validates and 
 ## Purpose
 
 This work area manages configuration validation across four layers:
+
 - **intention/** - CUE schemas that define structure and constraints
 - **definition/** - Configuration data from YAML files
 - **execution/** - Build artifacts from Kubernetes manifests
 - **application/** - Live data from external APIs (GitHub)
+
+## Inventory Schemas Pattern
+
+This system uses **Inventory Schemas** to create type-safe inventories of configuration items. The pattern has three components:
+
+### 1. Schema Definition
+
+Define typed schemas with `#` prefix to specify structure and constraints:
+
+```cue
+#GitRepo: {
+    name:        string
+    description: string | *""
+    createdAt?:  string
+    updatedAt?:  string
+    url?:        string
+}
+```
+
+### 2. Inventory Field with Schema Constraint
+
+Apply the schema to an indexed field, binding the key to a constraint:
+
+```cue
+repo: [NAME=string]: #GitRepo & {
+    name: NAME
+}
+```
+
+This creates an inventory where:
+
+- Each entry is indexed by a key (e.g., `repo.dev`, `repo.guide`)
+- The key must match a field in the schema (`name: NAME`)
+- All entries conform to the `#GitRepo` schema
+
+### 3. Multi-Layer Unification
+
+Unify multiple data sources that all conform to the schema:
+
+```cue
+config: {
+    repo: intention.repo   // Schema constraint
+    repo: definition.repo  // Static YAML data
+    repo: application.repo // Live API data
+}
+```
+
+CUE validates that all layers are compatible and produces a unified view.
+
+### Examples
+
+**Single-level inventory** (`repo:`):
+
+- Schema: `intention/repo.cue` defines `#GitRepo`
+- Constraint: `repo: [NAME=string]: #GitRepo & { name: NAME }`
+- Data layers: definition (YAML), application (GitHub API)
+
+**Multi-level inventory** (`resource:`):
+
+- Schema: `intention/resource.cue` defines `#ConfigMap`
+- Constraint: `resource: [NS=string]: [NAME=string]: #ConfigMap & { ... }`
+- Indexed by namespace, then name (e.g., `resource.default.dev`)
+- Data layer: execution (Kubernetes manifests)
+
+### Benefits
+
+1. **Type Safety**: All data validated against schemas at unification time
+2. **Multi-Source**: Combine static config, build outputs, and live API data
+3. **Consistency**: Key constraints ensure inventory keys match item identities
+4. **Extensibility**: New data sources added by unifying additional layers
 
 ## Common Commands
 
