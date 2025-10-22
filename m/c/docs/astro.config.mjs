@@ -6,6 +6,7 @@ import starlight from "@astrojs/starlight";
 export default defineConfig({
   site: "https://defn.github.io",
   base: "/dev",
+  trailingSlash: "always",
   build: {
     assets: "a",
   },
