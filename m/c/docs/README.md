@@ -109,9 +109,13 @@ See the [Starlight documentation](https://starlight.astro.build/) for more detai
 
 The `aws` collection contains YAML files describing AWS accounts. This collection is populated by the ACUTE pipeline:
 
-1. `../unify.sh` - Consolidates CUE data from multiple sources (Accumulate, Configure, Unify phases)
-2. `../transform.sh` - Transforms CUE to YAML format (Transform phase)
-3. `npm run build` - Executes Astro.js to generate the documentation site (Execute phase)
+1. `../accumulate.sh` - Gathers raw data from all sources (Accumulate phase)
+2. `../configure.sh` - Processes and prepares data for unification (Configure phase)
+3. `../unify.sh` - Applies schemas and consolidates CUE data (Unify phase)
+4. `../transform.sh` - Transforms CUE to YAML format (Transform phase)
+5. `../execute.sh` - Builds the documentation site (Execute phase)
+
+**Quick Start:** Run `mise` in the `c/` directory to execute all phases automatically.
 
 **Directory Structure → URL Mapping:**
 
