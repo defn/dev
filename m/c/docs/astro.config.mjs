@@ -15,6 +15,21 @@ export default defineConfig({
       host: true,
       allowedHosts: [".defn.run"],
     },
+    plugins: [
+      {
+        name: "redirect-to-base",
+        configureServer(server) {
+          server.middlewares.use((req, res, next) => {
+            if (req.url === "/" || req.url === "/dev") {
+              res.writeHead(302, { Location: "/dev/" });
+              res.end();
+              return;
+            }
+            next();
+          });
+        },
+      },
+    ],
     build: {
       rollupOptions: {
         onwarn(warning, warn) {
