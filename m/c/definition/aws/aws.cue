@@ -82,6 +82,425 @@ org: close({
 
 // list the accounts
 org: {
+	// Bootstrap IAM account only
+	defn: account: org: {
+		id:    "510430971399"
+		email: "iam+bootstrap@defn.sh"
+	}
+
+	// Infrastructure subset: org, ops
+	gyre: account: {
+		org: {
+			id:    "065163301604"
+			email: "aws-gyre@defn.us"
+		}
+		ops: {
+			id:    "319951235442"
+			email: "aws-gyre+ops@defn.us"
+		}
+	}
+
+	// Infrastructure subset: org, hub, lib, net
+	coil: account: {
+		org: {
+			id:    "138291560003"
+			email: "aws-coil@defn.us"
+		}
+		hub: {
+			id:    "453991412409"
+			email: "aws-coil+hub@defn.us"
+		}
+		lib: {
+			id:    "160764896647"
+			email: "aws-coil+lib@defn.us"
+		}
+		net: {
+			id:    "278790191486"
+			email: "aws-coil+net@defn.us"
+		}
+	}
+
+	// Infrastructure subset: org, hub, lib, net
+	curl: account: {
+		org: {
+			id:    "424535767618"
+			email: "aws-curl@defn.us"
+		}
+		hub: {
+			id:    "804430872255"
+			email: "aws-curl+hub@defn.us"
+		}
+		lib: {
+			id:    "298406631539"
+			email: "aws-curl+lib@defn.us"
+		}
+		net: {
+			id:    "101142583332"
+			email: "aws-curl+net@defn.us"
+		}
+	}
+
+	// Complete 10-account structure: org, ops, ci, dev, hub, lib, log, net, prod, pub
+	spiral: account: {
+		org: {
+			id:    "232091571197"
+			email: "aws-spiral@defn.us"
+		}
+		ci: {
+			id:    "371657257885"
+			email: "aws-spiral+pub@defn.us"
+			name:  "pub"
+		}
+		dev: {
+			id:    "308726031860"
+			email: "aws-spiral+dev@defn.us"
+		}
+		hub: {
+			id:    "216704421225"
+			email: "aws-spiral+hub@defn.us"
+		}
+		lib: {
+			id:    "073874947996"
+			email: "aws-spiral+lib@defn.us"
+		}
+		log: {
+			id:    "442333715734"
+			email: "aws-spiral+log@defn.us"
+		}
+		net: {
+			id:    "057533398557"
+			email: "aws-spiral+net@defn.us"
+		}
+		ops: {
+			id:    "601164058091"
+			email: "aws-spiral+ops@defn.us"
+		}
+		prod: {
+			id:    "398258703387"
+			email: "aws-spiral+sec@defn.us"
+			name:  "sec"
+		}
+		pub: {
+			id:    "130046154300"
+			email: "aws-spiral+dmz@defn.us"
+			name:  "dmz"
+		}
+	}
+
+	// Complete 10-account structure: org, ops, ci, dev, hub, lib, log, net, prod, pub
+	helix: account: {
+		org: {
+			id:    "816178966829"
+			email: "aws-helix@defn.sh"
+		}
+		ci: {
+			id:    "018520313738"
+			email: "aws-helix+sec@defn.sh"
+			name:  "sec"
+		}
+		dev: {
+			id:    "843784871878"
+			email: "aws-helix+dev@defn.sh"
+		}
+		hub: {
+			id:    "436043820387"
+			email: "aws-helix+hub@defn.sh"
+		}
+		lib: {
+			id:    "377857698578"
+			email: "aws-helix+lib@defn.sh"
+		}
+		log: {
+			id:    "664427926343"
+			email: "aws-helix+log@defn.sh"
+		}
+		net: {
+			id:    "504722108514"
+			email: "aws-helix+net@defn.sh"
+		}
+		ops: {
+			id:    "368812692254"
+			email: "aws-helix+ops@defn.sh"
+		}
+		prod: {
+			id:    "724643698007"
+			email: "aws-helix+dmz@defn.sh"
+			name:  "dmz"
+		}
+		pub: {
+			id:    "536806623881"
+			email: "aws-helix+pub@defn.sh"
+		}
+	}
+
+	// Complete 10-account structure: org, ops, ci, dev, hub, lib, log, net, prod, pub
+	fogg: account: {
+		org: {
+			id:    "328216504962"
+			email: "spiral@defn.sh"
+		}
+		ci: {
+			id:    "812459563189"
+			email: "fogg-home@defn.sh"
+			name:  "home"
+		}
+		dev: {
+			id:    "442766271046"
+			email: "fogg-sandbox@defn.sh"
+			name:  "sandbox"
+		}
+		hub: {
+			id:    "337248635000"
+			email: "fogg-hub@defn.sh"
+		}
+		lib: {
+			id:    "624713464251"
+			email: "fogg-data@defn.sh"
+			name:  "data"
+		}
+		log: {
+			id:    "844609041254"
+			email: "fogg-circus@defn.sh"
+			name:  "circus"
+		}
+		net: {
+			id:    "060659916753"
+			email: "fogg-asset@defn.sh"
+			name:  "asset"
+		}
+		ops: {
+			id:    "318746665903"
+			email: "fogg-gateway@defn.sh"
+			name:  "gateway"
+		}
+		prod: {
+			id:    "565963418226"
+			email: "fogg-postx@defn.sh"
+			name:  "postx"
+		}
+		pub: {
+			id:    "372333168887"
+			email: "fogg-security@defn.sh"
+			name:  "security"
+		}
+	}
+
+	// Complete 10-account structure: org, ops, ci, dev, hub, lib, log, net, prod, pub
+	vault: account: {
+		org: {
+			id:    "475528707847"
+			email: "aws-vault@defn.us"
+		}
+		ci: {
+			id:    "313228123503"
+			email: "aws-vault-vault0@defn.sh"
+			name:  "vault0"
+		}
+		dev: {
+			id:    "497393606242"
+			email: "aws-vault-dev@defn.sh"
+		}
+		hub: {
+			id:    "539099112425"
+			email: "aws-vault-hub@defn.sh"
+		}
+		lib: {
+			id:    "066356637485"
+			email: "aws-vault-library@defn.sh"
+			name:  "library"
+		}
+		log: {
+			id:    "749185891195"
+			email: "aws-vault-audit@defn.sh"
+			name:  "audit"
+		}
+		net: {
+			id:    "915207860232"
+			email: "aws-vault-transit@defn.sh"
+			name:  "transit"
+		}
+		ops: {
+			id:    "188066400611"
+			email: "aws-vault-ops@defn.sh"
+		}
+		prod: {
+			id:    "040769490632"
+			email: "aws-vault-vault1@defn.sh"
+			name:  "vault1"
+		}
+		pub: {
+			id:    "851162413429"
+			email: "aws-vault-pub@defn.sh"
+		}
+	}
+
+	// Infrastructure subset: org, ops, lib, log, net
+	circus: account: {
+		org: {
+			id:    "036139182623"
+			email: "aws-circus@defn.us"
+		}
+		lib: {
+			id:    "497790518354"
+			email: "aws-circus-govcloud@defn.sh"
+			name:  "govcloud"
+		}
+		log: {
+			id:    "707476523482"
+			email: "aws-circus-audit@defn.sh"
+			name:  "audit"
+		}
+		net: {
+			id:    "002516226222"
+			email: "aws-circus-transit@defn.sh"
+			name:  "transit"
+		}
+		ops: {
+			id:    "415618116579"
+			email: "aws-circus-ops@defn.sh"
+		}
+	}
+
+	// Infrastructure subset: org, log, net
+	jianghu: account: {
+		org: {
+			id:    "657613322961"
+			email: "aws-jianghu@defn.us"
+		}
+		log: {
+			id:    "298431841138"
+			email: "klamath@defn.us"
+			name:  "klamath"
+		}
+		net: {
+			id:    "025636091251"
+			email: "tahoe@defn.us"
+			name:  "tahoe"
+		}
+	}
+
+	// Miscellaneous: org, dev, lib, log, net, pub
+	imma: account: {
+		org: {
+			id:    "548373030883"
+			email: "aws-imma@defn.us"
+		}
+		dev: {
+			id:    "445584037541"
+			email: "imma-dev@imma.io"
+			name:  "imma-dev"
+		}
+		lib: {
+			id:    "516851121506"
+			email: "imma-tolan@defn.us"
+			name:  "imma-tolan"
+		}
+		log: {
+			id:    "289716781198"
+			email: "imma-dgwyn@defn.us"
+			name:  "imma-dgwyn"
+		}
+		net: {
+			id:    "246197522468"
+			email: "imma-defn@defn.us"
+			name:  "imma-defn"
+		}
+		pub: {
+			id:    "766142996227"
+			email: "imma-prod@imma.io"
+			name:  "imma-prod"
+		}
+	}
+
+	// Miscellaneous: org, dev, hub, net, pub
+	whoa: account: {
+		org: {
+			id:    "389772512117"
+			email: "aws-whoa@defn.us"
+		}
+		dev: {
+			id:    "439761234835"
+			email: "whoa-dev@imma.io"
+		}
+		hub: {
+			id:    "462478722501"
+			email: "whoa-hub@imma.io"
+		}
+		net: {
+			id:    "464075062390"
+			email: "whoa-secrets@imma.io"
+			name:  "secrets"
+		}
+		pub: {
+			id:    "204827926367"
+			email: "whoa-prod@imma.io"
+			name:  "prod"
+		}
+	}
+
+	// Extended multi-account structure with Earthsea-themed account names
+	immanent: account: {
+		org: {
+			id:    "545070380609"
+			email: "aws-immanent@defn.us"
+		}
+		changer: {
+			id:    "003884504807"
+			email: "immanent-changer@defn.us"
+			name:  "immanent-changer"
+		}
+		chanter: {
+			id:    "071244154667"
+			email: "immanent-chanter@defn.us"
+			name:  "immanent-chanter"
+		}
+		doorkeeper: {
+			id:    "013267321144"
+			email: "immanent-doorkeeper@defn.us"
+			name:  "immanent-doorkeeper"
+		}
+		ged: {
+			id:    "640792184178"
+			email: "immanent-ged@defn.us"
+			name:  "immanent-ged"
+		}
+		hand: {
+			id:    "826250190242"
+			email: "immanent-hand@defn.us"
+			name:  "immanent-hand"
+		}
+		herbal: {
+			id:    "165452499696"
+			email: "immanent-herbal@defn.us"
+			name:  "immanent-herbal"
+		}
+		namer: {
+			id:    "856549015893"
+			email: "immanent-namer@defn.us"
+			name:  "immanent-namer"
+		}
+		patterner: {
+			id:    "143220204648"
+			email: "immanent-patterner@defn.us"
+			name:  "immanent-patterner"
+		}
+		roke: {
+			id:    "892560628624"
+			email: "immanent-roke@defn.us"
+			name:  "immanent-roke"
+		}
+		summoner: {
+			id:    "397411277587"
+			email: "immanent-summoner@defn.us"
+			name:  "immanent-summoner"
+		}
+		windkey: {
+			id:    "095764861781"
+			email: "immanent-windkey@defn.us"
+			name:  "immanent-windkey"
+		}
+	}
+
 	// Large multi-environment organization (30 accounts)
 	chamber: account: {
 		org: {
@@ -257,415 +676,6 @@ org: {
 			id:    "037804009879"
 			email: "aws-hub@defn.us"
 			name:  "defn-hub"
-		}
-	}
-	// Infrastructure subset: org, ops, lib, log, net
-	circus: account: {
-		org: {
-			id:    "036139182623"
-			email: "aws-circus@defn.us"
-		}
-		lib: {
-			id:    "497790518354"
-			email: "aws-circus-govcloud@defn.sh"
-			name:  "govcloud"
-		}
-		log: {
-			id:    "707476523482"
-			email: "aws-circus-audit@defn.sh"
-			name:  "audit"
-		}
-		net: {
-			id:    "002516226222"
-			email: "aws-circus-transit@defn.sh"
-			name:  "transit"
-		}
-		ops: {
-			id:    "415618116579"
-			email: "aws-circus-ops@defn.sh"
-		}
-	}
-	// Infrastructure subset: org, hub, lib, net
-	coil: account: {
-		org: {
-			id:    "138291560003"
-			email: "aws-coil@defn.us"
-		}
-		hub: {
-			id:    "453991412409"
-			email: "aws-coil+hub@defn.us"
-		}
-		lib: {
-			id:    "160764896647"
-			email: "aws-coil+lib@defn.us"
-		}
-		net: {
-			id:    "278790191486"
-			email: "aws-coil+net@defn.us"
-		}
-	}
-	// Infrastructure subset: org, hub, lib, net
-	curl: account: {
-		org: {
-			id:    "424535767618"
-			email: "aws-curl@defn.us"
-		}
-		hub: {
-			id:    "804430872255"
-			email: "aws-curl+hub@defn.us"
-		}
-		lib: {
-			id:    "298406631539"
-			email: "aws-curl+lib@defn.us"
-		}
-		net: {
-			id:    "101142583332"
-			email: "aws-curl+net@defn.us"
-		}
-	}
-	// Bootstrap IAM account only
-	defn: account: org: {
-		id:    "510430971399"
-		email: "iam+bootstrap@defn.sh"
-	}
-
-	// Complete 10-account structure: org, ops, ci, dev, hub, lib, log, net, prod, pub
-	fogg: account: {
-		org: {
-			id:    "328216504962"
-			email: "spiral@defn.sh"
-		}
-		ci: {
-			id:    "812459563189"
-			email: "fogg-home@defn.sh"
-			name:  "home"
-		}
-		dev: {
-			id:    "442766271046"
-			email: "fogg-sandbox@defn.sh"
-			name:  "sandbox"
-		}
-		hub: {
-			id:    "337248635000"
-			email: "fogg-hub@defn.sh"
-		}
-		lib: {
-			id:    "624713464251"
-			email: "fogg-data@defn.sh"
-			name:  "data"
-		}
-		log: {
-			id:    "844609041254"
-			email: "fogg-circus@defn.sh"
-			name:  "circus"
-		}
-		net: {
-			id:    "060659916753"
-			email: "fogg-asset@defn.sh"
-			name:  "asset"
-		}
-		ops: {
-			id:    "318746665903"
-			email: "fogg-gateway@defn.sh"
-			name:  "gateway"
-		}
-		prod: {
-			id:    "565963418226"
-			email: "fogg-postx@defn.sh"
-			name:  "postx"
-		}
-		pub: {
-			id:    "372333168887"
-			email: "fogg-security@defn.sh"
-			name:  "security"
-		}
-	}
-	// Infrastructure subset: org, ops
-	gyre: account: {
-		org: {
-			id:    "065163301604"
-			email: "aws-gyre@defn.us"
-		}
-		ops: {
-			id:    "319951235442"
-			email: "aws-gyre+ops@defn.us"
-		}
-	}
-
-	// Complete 10-account structure: org, ops, ci, dev, hub, lib, log, net, prod, pub
-	helix: account: {
-		org: {
-			id:    "816178966829"
-			email: "aws-helix@defn.sh"
-		}
-		ci: {
-			id:    "018520313738"
-			email: "aws-helix+sec@defn.sh"
-			name:  "sec"
-		}
-		dev: {
-			id:    "843784871878"
-			email: "aws-helix+dev@defn.sh"
-		}
-		hub: {
-			id:    "436043820387"
-			email: "aws-helix+hub@defn.sh"
-		}
-		lib: {
-			id:    "377857698578"
-			email: "aws-helix+lib@defn.sh"
-		}
-		log: {
-			id:    "664427926343"
-			email: "aws-helix+log@defn.sh"
-		}
-		net: {
-			id:    "504722108514"
-			email: "aws-helix+net@defn.sh"
-		}
-		ops: {
-			id:    "368812692254"
-			email: "aws-helix+ops@defn.sh"
-		}
-		prod: {
-			id:    "724643698007"
-			email: "aws-helix+dmz@defn.sh"
-			name:  "dmz"
-		}
-		pub: {
-			id:    "536806623881"
-			email: "aws-helix+pub@defn.sh"
-		}
-	}
-	// Miscellaneous
-	imma: account: {
-		org: {
-			id:    "548373030883"
-			email: "aws-imma@defn.us"
-		}
-		dev: {
-			id:    "445584037541"
-			email: "imma-dev@imma.io"
-			name:  "imma-dev"
-		}
-		lib: {
-			id:    "516851121506"
-			email: "imma-tolan@defn.us"
-			name:  "imma-tolan"
-		}
-		log: {
-			id:    "289716781198"
-			email: "imma-dgwyn@defn.us"
-			name:  "imma-dgwyn"
-		}
-		net: {
-			id:    "246197522468"
-			email: "imma-defn@defn.us"
-			name:  "imma-defn"
-		}
-		pub: {
-			id:    "766142996227"
-			email: "imma-prod@imma.io"
-			name:  "imma-prod"
-		}
-	}
-	// Extended multi-account structure with Earthsea-themed account names
-	immanent: account: {
-		org: {
-			id:    "545070380609"
-			email: "aws-immanent@defn.us"
-		}
-		changer: {
-			id:    "003884504807"
-			email: "immanent-changer@defn.us"
-			name:  "immanent-changer"
-		}
-		chanter: {
-			id:    "071244154667"
-			email: "immanent-chanter@defn.us"
-			name:  "immanent-chanter"
-		}
-		doorkeeper: {
-			id:    "013267321144"
-			email: "immanent-doorkeeper@defn.us"
-			name:  "immanent-doorkeeper"
-		}
-		ged: {
-			id:    "640792184178"
-			email: "immanent-ged@defn.us"
-			name:  "immanent-ged"
-		}
-		hand: {
-			id:    "826250190242"
-			email: "immanent-hand@defn.us"
-			name:  "immanent-hand"
-		}
-		herbal: {
-			id:    "165452499696"
-			email: "immanent-herbal@defn.us"
-			name:  "immanent-herbal"
-		}
-		namer: {
-			id:    "856549015893"
-			email: "immanent-namer@defn.us"
-			name:  "immanent-namer"
-		}
-		patterner: {
-			id:    "143220204648"
-			email: "immanent-patterner@defn.us"
-			name:  "immanent-patterner"
-		}
-		roke: {
-			id:    "892560628624"
-			email: "immanent-roke@defn.us"
-			name:  "immanent-roke"
-		}
-		summoner: {
-			id:    "397411277587"
-			email: "immanent-summoner@defn.us"
-			name:  "immanent-summoner"
-		}
-		windkey: {
-			id:    "095764861781"
-			email: "immanent-windkey@defn.us"
-			name:  "immanent-windkey"
-		}
-	}
-	// Infrastructure subset: org, log, net
-	jianghu: account: {
-		org: {
-			id:    "657613322961"
-			email: "aws-jianghu@defn.us"
-		}
-		log: {
-			id:    "298431841138"
-			email: "klamath@defn.us"
-			name:  "klamath"
-		}
-		net: {
-			id:    "025636091251"
-			email: "tahoe@defn.us"
-			name:  "tahoe"
-		}
-	}
-
-	// Complete 10-account structure: org, ops, ci, dev, hub, lib, log, net, prod, pub
-	spiral: account: {
-		org: {
-			id:    "232091571197"
-			email: "aws-spiral@defn.us"
-		}
-		ci: {
-			id:    "371657257885"
-			email: "aws-spiral+pub@defn.us"
-			name:  "pub"
-		}
-		dev: {
-			id:    "308726031860"
-			email: "aws-spiral+dev@defn.us"
-		}
-		hub: {
-			id:    "216704421225"
-			email: "aws-spiral+hub@defn.us"
-		}
-		lib: {
-			id:    "073874947996"
-			email: "aws-spiral+lib@defn.us"
-		}
-		log: {
-			id:    "442333715734"
-			email: "aws-spiral+log@defn.us"
-		}
-		net: {
-			id:    "057533398557"
-			email: "aws-spiral+net@defn.us"
-		}
-		ops: {
-			id:    "601164058091"
-			email: "aws-spiral+ops@defn.us"
-		}
-		prod: {
-			id:    "398258703387"
-			email: "aws-spiral+sec@defn.us"
-			name:  "sec"
-		}
-		pub: {
-			id:    "130046154300"
-			email: "aws-spiral+dmz@defn.us"
-			name:  "dmz"
-		}
-	}
-	// Complete 10-account structure: org, ops, ci, dev, hub, lib, log, net, prod, pub
-	vault: account: {
-		org: {
-			id:    "475528707847"
-			email: "aws-vault@defn.us"
-		}
-		ci: {
-			id:    "313228123503"
-			email: "aws-vault-vault0@defn.sh"
-			name:  "vault0"
-		}
-		dev: {
-			id:    "497393606242"
-			email: "aws-vault-dev@defn.sh"
-		}
-		hub: {
-			id:    "539099112425"
-			email: "aws-vault-hub@defn.sh"
-		}
-		lib: {
-			id:    "066356637485"
-			email: "aws-vault-library@defn.sh"
-			name:  "library"
-		}
-		log: {
-			id:    "749185891195"
-			email: "aws-vault-audit@defn.sh"
-			name:  "audit"
-		}
-		net: {
-			id:    "915207860232"
-			email: "aws-vault-transit@defn.sh"
-			name:  "transit"
-		}
-		ops: {
-			id:    "188066400611"
-			email: "aws-vault-ops@defn.sh"
-		}
-		prod: {
-			id:    "040769490632"
-			email: "aws-vault-vault1@defn.sh"
-			name:  "vault1"
-		}
-		pub: {
-			id:    "851162413429"
-			email: "aws-vault-pub@defn.sh"
-		}
-	}
-	// Miscellaneous
-	whoa: account: {
-		org: {
-			id:    "389772512117"
-			email: "aws-whoa@defn.us"
-		}
-		dev: {
-			id:    "439761234835"
-			email: "whoa-dev@imma.io"
-		}
-		hub: {
-			id:    "462478722501"
-			email: "whoa-hub@imma.io"
-		}
-		net: {
-			id:    "464075062390"
-			email: "whoa-secrets@imma.io"
-			name:  "secrets"
-		}
-		pub: {
-			id:    "204827926367"
-			email: "whoa-prod@imma.io"
-			name:  "prod"
 		}
 	}
 }
