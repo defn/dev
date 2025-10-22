@@ -1,0 +1,36 @@
+---
+import { getCollection } from 'astro:content';
+import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro';
+
+const awsAccounts = await getCollection('aws');
+const sortedAccounts = awsAccounts.sort((a, b) => a.data.name.localeCompare(b.data.name));
+---
+
+<StarlightPage frontmatter={{ title: 'AWS Accounts', description: 'List of all AWS accounts in the organization' }}>
+  <p>This page lists all AWS accounts managed in this repository.</p>
+
+  <div style="margin-top: 2rem;">
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Account ID</th>
+          <th>Email</th>
+          <th>Type</th>
+          <th>Region</th>
+        </tr>
+      </thead>
+      <tbody>
+        {sortedAccounts.map((account) => (
+          <tr>
+            <td><a href={`/aws/${account.id}/`}>{account.data.name}</a></td>
+            <td><code>{account.data.id}</code></td>
+            <td>{account.data.email}</td>
+            <td>{account.data.accountType || 'N/A'}</td>
+            <td>{account.data.region || 'N/A'}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+</StarlightPage>

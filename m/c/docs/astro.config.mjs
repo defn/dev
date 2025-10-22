@@ -29,6 +29,12 @@ export default defineConfig({
           ],
         },
         {
+          label: "AWS Accounts",
+          items: [
+            { label: "All Accounts", link: "/aws/" },
+          ],
+        },
+        {
           label: "Reference",
           autogenerate: { directory: "reference" },
         },

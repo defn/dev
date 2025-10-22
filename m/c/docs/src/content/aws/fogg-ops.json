@@ -1,0 +1,8 @@
+{
+  "name": "fogg-ops",
+  "id": "188066400611",
+  "email": "aws-fogg-ops@defn.us",
+  "region": "us-east-1",
+  "accountType": "operations",
+  "description": "Fogg operations account - receives delegation from org master"
+}
