@@ -1,3 +1,13 @@
+## Documentation
+
+The `c/docs/` directory contains an Astro.js + Starlight documentation site.
+
+- **Development**: Run `npm run dev` in the `c/docs/` directory to start the development server
+- **Build**: Run `npm run build` to create a production build
+- **Preview**: Run `npm run preview` to preview the production build locally
+
+See [c/docs/README.md](c/docs/README.md) for detailed setup and usage instructions.
+
 ## AWS Organization Structure
 
 This repository manages 14 AWS Organizations with ~145 AWS accounts.
