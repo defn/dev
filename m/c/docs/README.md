@@ -98,6 +98,18 @@ See the [Starlight documentation](https://starlight.astro.build/) for more detai
 
 If you see an error about blocked hosts when accessing the dev server, verify that `astro.config.mjs` includes the Vite server configuration with your workspace domain in `allowedHosts`.
 
+### Vite serving allow list error
+
+If you see an error like `The request url "..." is outside of Vite serving allow list`, this means `node_modules` is in the wrong location.
+
+**Important:** `node_modules` must be located in `c/docs/node_modules` (the same directory as `package.json`), not in a parent directory. If you move or rename the project directory, you must delete and recreate `node_modules`:
+
+```bash
+cd c/docs
+rm -rf node_modules
+npm install
+```
+
 ### Module not found errors
 
 Run `npm install` to ensure all dependencies are installed.
