@@ -13,6 +13,13 @@ export default defineConfig({
   integrations: [
     starlight({
       title: "My Docs",
+      customCss: [
+        '@fontsource/roboto/400.css',
+        '@fontsource/roboto/500.css',
+        '@fontsource/roboto/700.css',
+        '@fontsource-variable/roboto-mono',
+        './src/styles/custom.css',
+      ],
       social: [
         {
           icon: "github",
