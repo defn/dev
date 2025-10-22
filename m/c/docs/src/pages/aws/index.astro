@@ -24,7 +24,7 @@ const sortedAccounts = awsAccounts.sort((a, b) => a.data.name.localeCompare(b.da
         {sortedAccounts.map((account) => (
           <tr>
             <td>{account.data.org}</td>
-            <td><a href={`/aws/${account.id}/`}>{account.data.account}</a></td>
+            <td><a href={`./${account.id}/`}>{account.data.account}</a></td>
             <td><code>{account.data.id}</code></td>
             <td>{account.data.email}</td>
             <td>{account.data.sso_role}</td>
