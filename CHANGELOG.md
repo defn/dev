@@ -1,5 +1,23 @@
 # Changelog
 
+## [1.38.0](https://github.com/defn/dev/compare/v1.37.1...v1.38.0) (2025-10-22)
+
+
+### Features
+
+* add AWS organization configuration data ([9192e34](https://github.com/defn/dev/commit/9192e3430a86848db4e453c015bdda625be741ac))
+* add CUE ingestion scripts and configuration ([34f7969](https://github.com/defn/dev/commit/34f79698d567217ba9ef94d4a44f1ea74992acf8))
+* add custom CUE formatter to trunk configuration ([fcc83c0](https://github.com/defn/dev/commit/fcc83c0ab8015ba2e19d6bc01394b22e61543a93))
+
+
+### Bug Fixes
+
+* change to original working directory in mise claude task ([5769f0c](https://github.com/defn/dev/commit/5769f0c54672b2d204d7673906de0ad9b6129fb9))
+* correct git difftool extcmd to avoid duplicate arguments ([c88a960](https://github.com/defn/dev/commit/c88a960e410a7d9ec1ed06df7610bab47c90eff5))
+* enable /home mount before disabling in macOS playbook ([95c31dd](https://github.com/defn/dev/commit/95c31dd85da8794d18e921cbf289ccb698f9ab38))
+* improve shell formatting and variable escaping in ingest.sh ([914f10d](https://github.com/defn/dev/commit/914f10da39c9d0cf27436c5ed09ed6c5af68e2da))
+* pass arguments to claude command in mise task ([693b6fc](https://github.com/defn/dev/commit/693b6fc5cd03088797bccbc2d556e876f98f341d))
+
 ## [1.37.1](https://github.com/defn/dev/compare/v1.37.0...v1.37.1) (2025-10-16)
 
 
