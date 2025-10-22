@@ -107,7 +107,11 @@ See the [Starlight documentation](https://starlight.astro.build/) for more detai
 
 ### AWS Collection (JSON)
 
-The `aws` collection contains JSON files describing AWS accounts. This collection is populated by running `../transform.sh` which processes data from `../unify.sh`.
+The `aws` collection contains JSON files describing AWS accounts. This collection is populated by the ACUTE pipeline:
+
+1. `../unify.sh` - Consolidates CUE data from multiple sources
+2. `../transform.sh` - Transforms CUE to JSON format
+3. `npm run build` - Executes Astro.js to generate the documentation site
 
 **Directory Structure → URL Mapping:**
 
