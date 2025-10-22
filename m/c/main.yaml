@@ -22,7 +22,7 @@ config:
       name: dev
       description: Internal developer platform for home and cloud labs
       createdAt: "2022-02-11T22:28:21Z"
-      updatedAt: "2025-10-22T02:55:09Z"
+      updatedAt: "2025-10-22T04:33:05Z"
       url: https://github.com/defn/dev
     .github:
       name: .github
@@ -61,873 +61,873 @@ config:
         url: https://chamber-0.awsapps.com/start
         account:
           org:
+            name: chamber
             account: org
             org: chamber
             id: "730917619329"
             email: aws-chamber@defn.us
             sso_role: Administrator
-            name: chamber
           "1":
+            name: defn-cd
             account: "1"
             org: chamber
             id: "741346472057"
             email: aws-cd@defn.us
             sso_role: Administrator
-            name: defn-cd
           "2":
+            name: defn-ci
             account: "2"
             org: chamber
             id: "447993872368"
             email: aws-ci@defn.us
             sso_role: Administrator
-            name: defn-ci
           "3":
+            name: defn-security
             account: "3"
             org: chamber
             id: "463050069968"
             email: aws-users@defn.us
             sso_role: Administrator
-            name: defn-security
           "4":
+            name: chamber-4
             account: "4"
             org: chamber
             id: "368890376620"
             email: chamber-4@defn.us
             sso_role: Administrator
-            name: chamber-4
           "5":
+            name: chamber-5
             account: "5"
             org: chamber
             id: "200733412967"
             email: chamber-5@defn.us
             sso_role: Administrator
-            name: chamber-5
           "6":
+            name: chamber-6
             account: "6"
             org: chamber
             id: "493089153027"
             email: chamber-6@defn.us
             sso_role: Administrator
-            name: chamber-6
           "7":
+            name: chamber-7
             account: "7"
             org: chamber
             id: "837425503386"
             email: chamber-7@defn.us
             sso_role: Administrator
-            name: chamber-7
           "8":
+            name: chamber-8
             account: "8"
             org: chamber
             id: "773314335856"
             email: chamber-8@defn.us
             sso_role: Administrator
-            name: chamber-8
           "9":
+            name: chamber-9
             account: "9"
             org: chamber
             id: "950940975070"
             email: chamber-9@defn.us
             sso_role: Administrator
-            name: chamber-9
           a:
+            name: defn-a
             account: a
             org: chamber
             id: "503577294851"
             email: defn-a@imma.io
             sso_role: Administrator
-            name: defn-a
           b:
+            name: defn-b
             account: b
             org: chamber
             id: "310940910494"
             email: imma-admin1@imma.io
             sso_role: Administrator
-            name: defn-b
           c:
+            name: defn-c
             account: c
             org: chamber
             id: "047633732615"
             email: dev-eng1@imma.io
             sso_role: Administrator
-            name: defn-c
           d:
+            name: defn-d
             account: d
             org: chamber
             id: "699441347021"
             email: box-adm1@imma.io
             sso_role: Administrator
-            name: defn-d
           e:
+            name: defn-e
             account: e
             org: chamber
             id: "171831323337"
             email: stg-eng1@imma.io
             sso_role: Administrator
-            name: defn-e
           "f":
+            name: defn-f
             account: "f"
             org: chamber
             id: "842022523232"
             email: usr-admin1@imma.io
             sso_role: Administrator
-            name: defn-f
           g:
+            name: defn-g
             account: g
             org: chamber
             id: "023867963778"
             email: usr-adm1@imma.io
             sso_role: Administrator
-            name: defn-g
           h:
+            name: defn-h
             account: h
             org: chamber
             id: "371020107387"
             email: usr-eng1@imma.io
             sso_role: Administrator
-            name: defn-h
           i:
+            name: defn-i
             account: i
             org: chamber
             id: "290132238209"
             email: aws-admin1@defn.us
             sso_role: Administrator
-            name: defn-i
           j:
+            name: defn-j
             account: j
             org: chamber
             id: "738433022197"
             email: aws-development1@defn.us
             sso_role: Administrator
-            name: defn-j
           l:
+            name: defn-l
             account: l
             org: chamber
             id: "991300382347"
             email: aws-staging1@defn.us
             sso_role: Administrator
-            name: defn-l
           m:
+            name: defn-m
             account: m
             org: chamber
             id: "684895750259"
             email: defn-m@defn.us
             sso_role: Administrator
-            name: defn-m
           "n":
+            name: defn-n
             account: "n"
             org: chamber
             id: "705881812506"
             email: defn-n@defn.us
             sso_role: Administrator
-            name: defn-n
           o:
+            name: defn-o
             account: o
             org: chamber
             id: "307136835824"
             email: defn-o@defn.us
             sso_role: Administrator
-            name: defn-o
           p:
+            name: defn-p
             account: p
             org: chamber
             id: "706168331526"
             email: defn-p@defn.us
             sso_role: Administrator
-            name: defn-p
           q:
+            name: defn-dev
             account: q
             org: chamber
             id: "217047480856"
             email: aws-dev@defn.us
             sso_role: Administrator
-            name: defn-dev
           r:
+            name: defn-r
             account: r
             org: chamber
             id: "416221726155"
             email: defn-r@imma.io
             sso_role: Administrator
-            name: defn-r
           s:
+            name: defn-s
             account: s
             org: chamber
             id: "840650118369"
             email: defn-s@imma.io
             sso_role: Administrator
-            name: defn-s
           "t":
+            name: defn-t
             account: "t"
             org: chamber
             id: "490895200523"
             email: defn-t@imma.io
             sso_role: Administrator
-            name: defn-t
           u:
+            name: defn-qa
             account: u
             org: chamber
             id: "467995590869"
             email: aws-qa@defn.us
             sso_role: Administrator
-            name: defn-qa
           v:
+            name: defn-v
             account: v
             org: chamber
             id: "979368042862"
             email: defn-v@imma.io
             sso_role: Administrator
-            name: defn-v
           w:
+            name: defn-w
             account: w
             org: chamber
             id: "313387692116"
             email: defn-w@imma.io
             sso_role: Administrator
-            name: defn-w
           x:
+            name: defn-stage
             account: x
             org: chamber
             id: "834936839208"
             email: aws-stage@defn.us
             sso_role: Administrator
-            name: defn-stage
           "y":
+            name: defn-prod
             account: "y"
             org: chamber
             id: "153556747817"
             email: aws-prod@defn.us
             sso_role: Administrator
-            name: defn-prod
           z:
+            name: defn-hub
             account: z
             org: chamber
             id: "037804009879"
             email: aws-hub@defn.us
             sso_role: Administrator
-            name: defn-hub
       circus:
         region: us-west-2
         url: https://d-92670c4790.awsapps.com/start
         account:
           org:
+            name: circus
             account: org
             org: circus
             id: "036139182623"
             email: aws-circus@defn.us
             sso_role: Administrator
-            name: circus
           lib:
+            name: govcloud
             account: lib
             org: circus
             id: "497790518354"
             email: aws-circus-govcloud@defn.sh
             sso_role: Administrator
-            name: govcloud
           log:
+            name: audit
             account: log
             org: circus
             id: "707476523482"
             email: aws-circus-audit@defn.sh
             sso_role: Administrator
-            name: audit
           net:
+            name: transit
             account: net
             org: circus
             id: "002516226222"
             email: aws-circus-transit@defn.sh
             sso_role: Administrator
-            name: transit
           ops:
+            name: ops
             account: ops
             org: circus
             id: "415618116579"
             email: aws-circus-ops@defn.sh
             sso_role: Administrator
-            name: ops
       coil:
         region: us-east-1
         url: https://d-90674c3cfd.awsapps.com/start
         account:
           org:
+            name: coil
             account: org
             org: coil
             id: "138291560003"
             email: aws-coil@defn.us
             sso_role: Administrator
-            name: coil
           hub:
+            name: hub
             account: hub
             org: coil
             id: "453991412409"
             email: aws-coil+hub@defn.us
             sso_role: Administrator
-            name: hub
           lib:
+            name: lib
             account: lib
             org: coil
             id: "160764896647"
             email: aws-coil+lib@defn.us
             sso_role: Administrator
-            name: lib
           net:
+            name: net
             account: net
             org: coil
             id: "278790191486"
             email: aws-coil+net@defn.us
             sso_role: Administrator
-            name: net
       curl:
         region: us-west-2
         url: https://d-926760a859.awsapps.com/start
         account:
           org:
+            name: curl
             account: org
             org: curl
             id: "424535767618"
             email: aws-curl@defn.us
             sso_role: Administrator
-            name: curl
           hub:
+            name: hub
             account: hub
             org: curl
             id: "804430872255"
             email: aws-curl+hub@defn.us
             sso_role: Administrator
-            name: hub
           lib:
+            name: lib
             account: lib
             org: curl
             id: "298406631539"
             email: aws-curl+lib@defn.us
             sso_role: Administrator
-            name: lib
           net:
+            name: net
             account: net
             org: curl
             id: "101142583332"
             email: aws-curl+net@defn.us
             sso_role: Administrator
-            name: net
       defn:
         region: us-east-2
         url: https://defn.awsapps.com/start
         account:
           org:
+            name: defn
             account: org
             org: defn
             id: "510430971399"
             email: iam+bootstrap@defn.sh
             sso_role: Administrator
-            name: defn
       fogg:
         region: us-west-2
         url: https://fogg-0.awsapps.com/start
         account:
           org:
+            name: fogg
             account: org
             org: fogg
             id: "328216504962"
             email: spiral@defn.sh
             sso_role: Administrator
-            name: fogg
           ci:
+            name: home
             account: ci
             org: fogg
             id: "812459563189"
             email: fogg-home@defn.sh
             sso_role: Administrator
-            name: home
           dev:
+            name: sandbox
             account: dev
             org: fogg
             id: "442766271046"
             email: fogg-sandbox@defn.sh
             sso_role: Administrator
-            name: sandbox
           hub:
+            name: hub
             account: hub
             org: fogg
             id: "337248635000"
             email: fogg-hub@defn.sh
             sso_role: Administrator
-            name: hub
           lib:
+            name: data
             account: lib
             org: fogg
             id: "624713464251"
             email: fogg-data@defn.sh
             sso_role: Administrator
-            name: data
           log:
+            name: circus
             account: log
             org: fogg
             id: "844609041254"
             email: fogg-circus@defn.sh
             sso_role: Administrator
-            name: circus
           net:
+            name: asset
             account: net
             org: fogg
             id: "060659916753"
             email: fogg-asset@defn.sh
             sso_role: Administrator
-            name: asset
           ops:
+            name: gateway
             account: ops
             org: fogg
             id: "318746665903"
             email: fogg-gateway@defn.sh
             sso_role: Administrator
-            name: gateway
           prod:
+            name: postx
             account: prod
             org: fogg
             id: "565963418226"
             email: fogg-postx@defn.sh
             sso_role: Administrator
-            name: postx
           pub:
+            name: security
             account: pub
             org: fogg
             id: "372333168887"
             email: fogg-security@defn.sh
             sso_role: Administrator
-            name: security
       gyre:
         region: us-east-2
         url: https://d-9a6716e54a.awsapps.com/start
         account:
           org:
+            name: gyre
             account: org
             org: gyre
             id: "065163301604"
             email: aws-gyre@defn.us
             sso_role: Administrator
-            name: gyre
           ops:
+            name: ops
             account: ops
             org: gyre
             id: "319951235442"
             email: aws-gyre+ops@defn.us
             sso_role: Administrator
-            name: ops
       helix:
         region: us-east-2
         url: https://d-9a6716ffd1.awsapps.com/start
         account:
           org:
+            name: helix
             account: org
             org: helix
             id: "816178966829"
             email: aws-helix@defn.sh
             sso_role: Administrator
-            name: helix
           ci:
+            name: sec
             account: ci
             org: helix
             id: "018520313738"
             email: aws-helix+sec@defn.sh
             sso_role: Administrator
-            name: sec
           dev:
+            name: dev
             account: dev
             org: helix
             id: "843784871878"
             email: aws-helix+dev@defn.sh
             sso_role: Administrator
-            name: dev
           hub:
+            name: hub
             account: hub
             org: helix
             id: "436043820387"
             email: aws-helix+hub@defn.sh
             sso_role: Administrator
-            name: hub
           lib:
+            name: lib
             account: lib
             org: helix
             id: "377857698578"
             email: aws-helix+lib@defn.sh
             sso_role: Administrator
-            name: lib
           log:
+            name: log
             account: log
             org: helix
             id: "664427926343"
             email: aws-helix+log@defn.sh
             sso_role: Administrator
-            name: log
           net:
+            name: net
             account: net
             org: helix
             id: "504722108514"
             email: aws-helix+net@defn.sh
             sso_role: Administrator
-            name: net
           ops:
+            name: ops
             account: ops
             org: helix
             id: "368812692254"
             email: aws-helix+ops@defn.sh
             sso_role: Administrator
-            name: ops
           prod:
+            name: dmz
             account: prod
             org: helix
             id: "724643698007"
             email: aws-helix+dmz@defn.sh
             sso_role: Administrator
-            name: dmz
           pub:
+            name: pub
             account: pub
             org: helix
             id: "536806623881"
             email: aws-helix+pub@defn.sh
             sso_role: Administrator
-            name: pub
       imma:
         region: us-west-2
         url: https://imma-0.awsapps.com/start
         account:
           org:
+            name: imma
             account: org
             org: imma
             id: "548373030883"
             email: aws-imma@defn.us
             sso_role: Administrator
-            name: imma
           dev:
+            name: imma-dev
             account: dev
             org: imma
             id: "445584037541"
             email: imma-dev@imma.io
             sso_role: Administrator
-            name: imma-dev
           lib:
+            name: imma-tolan
             account: lib
             org: imma
             id: "516851121506"
             email: imma-tolan@defn.us
             sso_role: Administrator
-            name: imma-tolan
           log:
+            name: imma-dgwyn
             account: log
             org: imma
             id: "289716781198"
             email: imma-dgwyn@defn.us
             sso_role: Administrator
-            name: imma-dgwyn
           net:
+            name: imma-defn
             account: net
             org: imma
             id: "246197522468"
             email: imma-defn@defn.us
             sso_role: Administrator
-            name: imma-defn
           pub:
+            name: imma-prod
             account: pub
             org: imma
             id: "766142996227"
             email: imma-prod@imma.io
             sso_role: Administrator
-            name: imma-prod
       immanent:
         region: us-west-2
         url: https://immanent-0.awsapps.com/start
         account:
           org:
+            name: immanent
             account: org
             org: immanent
             id: "545070380609"
             email: aws-immanent@defn.us
             sso_role: Administrator
-            name: immanent
           changer:
+            name: immanent-changer
             account: changer
             org: immanent
             id: "003884504807"
             email: immanent-changer@defn.us
             sso_role: Administrator
-            name: immanent-changer
           chanter:
+            name: immanent-chanter
             account: chanter
             org: immanent
             id: "071244154667"
             email: immanent-chanter@defn.us
             sso_role: Administrator
-            name: immanent-chanter
           doorkeeper:
+            name: immanent-doorkeeper
             account: doorkeeper
             org: immanent
             id: "013267321144"
             email: immanent-doorkeeper@defn.us
             sso_role: Administrator
-            name: immanent-doorkeeper
           ged:
+            name: immanent-ged
             account: ged
             org: immanent
             id: "640792184178"
             email: immanent-ged@defn.us
             sso_role: Administrator
-            name: immanent-ged
           hand:
+            name: immanent-hand
             account: hand
             org: immanent
             id: "826250190242"
             email: immanent-hand@defn.us
             sso_role: Administrator
-            name: immanent-hand
           herbal:
+            name: immanent-herbal
             account: herbal
             org: immanent
             id: "165452499696"
             email: immanent-herbal@defn.us
             sso_role: Administrator
-            name: immanent-herbal
           namer:
+            name: immanent-namer
             account: namer
             org: immanent
             id: "856549015893"
             email: immanent-namer@defn.us
             sso_role: Administrator
-            name: immanent-namer
           patterner:
+            name: immanent-patterner
             account: patterner
             org: immanent
             id: "143220204648"
             email: immanent-patterner@defn.us
             sso_role: Administrator
-            name: immanent-patterner
           roke:
+            name: immanent-roke
             account: roke
             org: immanent
             id: "892560628624"
             email: immanent-roke@defn.us
             sso_role: Administrator
-            name: immanent-roke
           summoner:
+            name: immanent-summoner
             account: summoner
             org: immanent
             id: "397411277587"
             email: immanent-summoner@defn.us
             sso_role: Administrator
-            name: immanent-summoner
           windkey:
+            name: immanent-windkey
             account: windkey
             org: immanent
             id: "095764861781"
             email: immanent-windkey@defn.us
             sso_role: Administrator
-            name: immanent-windkey
       jianghu:
         region: us-west-2
         url: https://jianghu-0.awsapps.com/start
         account:
           org:
+            name: jianghu
             account: org
             org: jianghu
             id: "657613322961"
             email: aws-jianghu@defn.us
             sso_role: Administrator
-            name: jianghu
           log:
+            name: klamath
             account: log
             org: jianghu
             id: "298431841138"
             email: klamath@defn.us
             sso_role: Administrator
-            name: klamath
           net:
+            name: tahoe
             account: net
             org: jianghu
             id: "025636091251"
             email: tahoe@defn.us
             sso_role: Administrator
-            name: tahoe
       spiral:
         region: us-west-2
         url: https://d-926760b322.awsapps.com/start
         account:
           org:
+            name: spiral
             account: org
             org: spiral
             id: "232091571197"
             email: aws-spiral@defn.us
             sso_role: Administrator
-            name: spiral
           ci:
+            name: pub
             account: ci
             org: spiral
             id: "371657257885"
             email: aws-spiral+pub@defn.us
             sso_role: Administrator
-            name: pub
           dev:
+            name: dev
             account: dev
             org: spiral
             id: "308726031860"
             email: aws-spiral+dev@defn.us
             sso_role: Administrator
-            name: dev
           hub:
+            name: hub
             account: hub
             org: spiral
             id: "216704421225"
             email: aws-spiral+hub@defn.us
             sso_role: Administrator
-            name: hub
           lib:
+            name: lib
             account: lib
             org: spiral
             id: "073874947996"
             email: aws-spiral+lib@defn.us
             sso_role: Administrator
-            name: lib
           log:
+            name: log
             account: log
             org: spiral
             id: "442333715734"
             email: aws-spiral+log@defn.us
             sso_role: Administrator
-            name: log
           net:
+            name: net
             account: net
             org: spiral
             id: "057533398557"
             email: aws-spiral+net@defn.us
             sso_role: Administrator
-            name: net
           ops:
+            name: ops
             account: ops
             org: spiral
             id: "601164058091"
             email: aws-spiral+ops@defn.us
             sso_role: Administrator
-            name: ops
           prod:
+            name: sec
             account: prod
             org: spiral
             id: "398258703387"
             email: aws-spiral+sec@defn.us
             sso_role: Administrator
-            name: sec
           pub:
+            name: dmz
             account: pub
             org: spiral
             id: "130046154300"
             email: aws-spiral+dmz@defn.us
             sso_role: Administrator
-            name: dmz
       vault:
         region: us-east-2
         url: https://d-9a672a0e52.awsapps.com/start
         account:
           org:
+            name: vault
             account: org
             org: vault
             id: "475528707847"
             email: aws-vault@defn.us
             sso_role: Administrator
-            name: vault
           ci:
+            name: vault0
             account: ci
             org: vault
             id: "313228123503"
             email: aws-vault-vault0@defn.sh
             sso_role: Administrator
-            name: vault0
           dev:
+            name: dev
             account: dev
             org: vault
             id: "497393606242"
             email: aws-vault-dev@defn.sh
             sso_role: Administrator
-            name: dev
           hub:
+            name: hub
             account: hub
             org: vault
             id: "539099112425"
             email: aws-vault-hub@defn.sh
             sso_role: Administrator
-            name: hub
           lib:
+            name: library
             account: lib
             org: vault
             id: "066356637485"
             email: aws-vault-library@defn.sh
             sso_role: Administrator
-            name: library
           log:
+            name: audit
             account: log
             org: vault
             id: "749185891195"
             email: aws-vault-audit@defn.sh
             sso_role: Administrator
-            name: audit
           net:
+            name: transit
             account: net
             org: vault
             id: "915207860232"
             email: aws-vault-transit@defn.sh
             sso_role: Administrator
-            name: transit
           ops:
+            name: ops
             account: ops
             org: vault
             id: "188066400611"
             email: aws-vault-ops@defn.sh
             sso_role: Administrator
-            name: ops
           prod:
+            name: vault1
             account: prod
             org: vault
             id: "040769490632"
             email: aws-vault-vault1@defn.sh
             sso_role: Administrator
-            name: vault1
           pub:
+            name: pub
             account: pub
             org: vault
             id: "851162413429"
             email: aws-vault-pub@defn.sh
             sso_role: Administrator
-            name: pub
       whoa:
         region: us-west-2
         url: https://whoa-0.awsapps.com/start
         account:
           org:
+            name: whoa
             account: org
             org: whoa
             id: "389772512117"
             email: aws-whoa@defn.us
             sso_role: Administrator
-            name: whoa
           dev:
+            name: dev
             account: dev
             org: whoa
             id: "439761234835"
             email: whoa-dev@imma.io
             sso_role: Administrator
-            name: dev
           hub:
+            name: hub
             account: hub
             org: whoa
             id: "462478722501"
             email: whoa-hub@imma.io
             sso_role: Administrator
-            name: hub
           net:
+            name: secrets
             account: net
             org: whoa
             id: "464075062390"
             email: whoa-secrets@imma.io
             sso_role: Administrator
-            name: secrets
           pub:
+            name: prod
             account: pub
             org: whoa
             id: "204827926367"
             email: whoa-prod@imma.io
             sso_role: Administrator
-            name: prod

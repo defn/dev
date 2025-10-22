@@ -8,14 +8,15 @@ org: [ORG=string]: close({
 	account: [ACCOUNT=string]: close({
 		account:  ACCOUNT
 		org:      ORG
+
 		id!:      =~"^[0-9]+$"
 		email!:   string
-		sso_role: string | *"Administrator"
-
 		name: string | *ACCOUNT
 		if ACCOUNT == "org" {
 			name: ORG
 		}
+
+		sso_role: string | *"Administrator"
 	})
 })
 
