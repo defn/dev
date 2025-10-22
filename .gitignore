@@ -116,7 +116,6 @@ work
 .viminfo
 .vscode
 .python_history
-.local
 .cache
 .npm
 .docker
