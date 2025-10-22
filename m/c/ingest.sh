@@ -4,9 +4,10 @@ function main {
 	(cd definition && ./ingest-repo.sh)
 	(cd execution && ./ingest-kustomize.sh)
 	(cd application && ./ingest-github-repo.sh)
-	cue eval >/dev/null
-	cue export --out yaml >main.yaml
-	git difftool --no-prompt --extcmd='dyff between' main.yaml
+	if cue eval -c >/dev/null; then
+		cue export --out yaml >main.yaml
+		git difftool --no-prompt --extcmd='dyff between' main.yaml
+	fi
 }
 
 main "$@"

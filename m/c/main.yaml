@@ -22,7 +22,7 @@ config:
       name: dev
       description: Internal developer platform for home and cloud labs
       createdAt: "2022-02-11T22:28:21Z"
-      updatedAt: "2025-10-22T04:33:05Z"
+      updatedAt: "2025-10-22T04:46:46Z"
       url: https://github.com/defn/dev
     .github:
       name: .github

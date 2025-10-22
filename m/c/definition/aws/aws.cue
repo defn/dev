@@ -21,7 +21,7 @@ org: [ORG=string]: close({
 })
 
 // aws account metadata
-org: {
+org: close({
 	chamber: {
 		region: "us-west-2"
 		url:    "https://chamber-0.awsapps.com/start"
@@ -78,7 +78,7 @@ org: {
 		region: "us-west-2"
 		url:    "https://whoa-0.awsapps.com/start"
 	}
-}
+})
 
 // list the accounts
 org: {
