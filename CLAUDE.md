@@ -34,6 +34,8 @@ This is a Bazel-based monorepo for cloud integrated development environments. Ke
 4. Build with Bazel: `b build //...`
 5. Update BUILD files after adding deps: `make regen`
 
+**Note on CUE formatting**: Always use `trunk fmt` for CUE files instead of `cue fmt` directly. The trunk configuration includes a custom CUE formatter that uses the system `cue` binary.
+
 ## Important Directives
 
 - **Always check for upstream changes before executing any task**:
