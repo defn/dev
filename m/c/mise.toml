@@ -1,3 +1,3 @@
 [tasks.default]
 run = "./unify.sh && ./transform.sh"
-description = "Run the ACUTE pipeline (Accumulate, Configure, Unify)"
+description = "Run the ACUTE pipeline (Accumulate, Configure, Unify, Transform)"

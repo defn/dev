@@ -102,9 +102,9 @@ The `transform.sh` script transforms unified CUE data into tool-specific formats
 
 This will:
 
-- Convert CUE data to JSON format for Astro.js documentation
+- Convert CUE data to YAML format for Astro.js documentation
 - Generate files for `docs/src/content/` collections
-- Create AWS account JSON from `definition/aws/aws.cue`
+- Create AWS account YAML files from `definition/aws/aws.cue`
 - (Future) Generate Terraform configurations, Ansible playbooks, etc.
 
 These transformed formats are then consumed by tools in the Execute phase.
@@ -147,7 +147,7 @@ CUE's unification ensures that:
    ./transform.sh
    ```
 
-   This generates tool-specific files (JSON for Astro.js, etc.) from CUE data.
+   This generates tool-specific files (YAML for Astro.js, etc.) from CUE data.
 
 3. **Execute tools to generate outputs:**
 
@@ -157,9 +157,25 @@ CUE's unification ensures that:
    npm run dev
    ```
 
-   This runs Astro.js to build the documentation site from transformed JSON.
+   This runs Astro.js to build the documentation site from transformed YAML.
 
    Visit the docs site to browse AWS accounts, configurations, and infrastructure details.
+
+## Example: AWS Account YAML
+
+After running `transform.sh`, AWS account files are generated in `docs/src/content/aws/`:
+
+```yaml
+# docs/src/content/aws/fogg/org.yaml
+name: fogg
+account: org
+org: fogg
+id: "328216504962"
+email: spiral@defn.sh
+sso_role: Administrator
+```
+
+The file path determines the URL: `aws/fogg/org.yaml` → `/aws/fogg/org/`
 
 ## Development Workflow
 
@@ -177,7 +193,7 @@ CUE's unification ensures that:
    - Unifies all data sources into single CUE structure
 
 4. **Transform**: Run `./transform.sh` to convert CUE to tool-specific formats
-   - Generates JSON for Astro.js documentation
+   - Generates YAML for Astro.js documentation
    - (Future) Creates Terraform configs, Ansible playbooks, etc.
 
 5. **Execute**: Run tools to generate final outputs

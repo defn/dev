@@ -78,11 +78,11 @@ c/docs/
 │   │   │   ├── index.mdx
 │   │   │   ├── guides/
 │   │   │   └── reference/
-│   │   └── aws/         # AWS accounts JSON collection
+│   │   └── aws/         # AWS accounts YAML collection
 │   │       ├── fogg/    # Example: organization subdirectory
-│   │       │   ├── org.json
-│   │       │   └── ops.json
-│   │       └── helix-org.json
+│   │       │   ├── org.yaml
+│   │       │   └── ops.yaml
+│   │       └── helix-org.yaml
 │   ├── pages/
 │   │   └── aws/         # Pages for rendering AWS collection
 │   │       ├── index.astro
@@ -109,9 +109,9 @@ See the [Starlight documentation](https://starlight.astro.build/) for more detai
 
 The `aws` collection contains YAML files describing AWS accounts. This collection is populated by the ACUTE pipeline:
 
-1. `../unify.sh` - Consolidates CUE data from multiple sources
-2. `../transform.sh` - Transforms CUE to YAML format
-3. `npm run build` - Executes Astro.js to generate the documentation site
+1. `../unify.sh` - Consolidates CUE data from multiple sources (Accumulate, Configure, Unify phases)
+2. `../transform.sh` - Transforms CUE to YAML format (Transform phase)
+3. `npm run build` - Executes Astro.js to generate the documentation site (Execute phase)
 
 **Directory Structure → URL Mapping:**
 
