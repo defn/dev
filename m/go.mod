@@ -7,7 +7,7 @@ go 1.25.3
 replace github.com/protocolbuffers/txtpbfmt => github.com/protocolbuffers/txtpbfmt v0.0.0-20250129171521-feedd8250727
 
 require (
-	cuelang.org/go v0.15.0-alpha.2
+	cuelang.org/go v0.15.0-alpha.3
 	github.com/aws/constructs-go/constructs/v10 v10.4.2
 	github.com/aws/jsii-runtime-go v1.116.0
 	github.com/bitfield/script v0.24.1
