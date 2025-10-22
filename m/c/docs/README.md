@@ -105,39 +105,39 @@ Add new documentation pages as `.md` or `.mdx` files in `src/content/docs/`. The
 
 See the [Starlight documentation](https://starlight.astro.build/) for more details on authoring content.
 
-### AWS Collection (JSON)
+### AWS Collection (YAML)
 
-The `aws` collection contains JSON files describing AWS accounts. This collection is populated by the ACUTE pipeline:
+The `aws` collection contains YAML files describing AWS accounts. This collection is populated by the ACUTE pipeline:
 
 1. `../unify.sh` - Consolidates CUE data from multiple sources
-2. `../transform.sh` - Transforms CUE to JSON format
+2. `../transform.sh` - Transforms CUE to YAML format
 3. `npm run build` - Executes Astro.js to generate the documentation site
 
 **Directory Structure → URL Mapping:**
 
 The file path within `src/content/aws/` directly maps to the URL:
 
-- `aws/fogg/org.json` → `/aws/fogg/org/`
-- `aws/fogg/ops.json` → `/aws/fogg/ops/`
-- `aws/helix-org.json` → `/aws/helix-org/`
+- `aws/fogg/org.yaml` → `/aws/fogg/org/`
+- `aws/fogg/ops.yaml` → `/aws/fogg/ops/`
+- `aws/helix-org.yaml` → `/aws/helix-org/`
 
 **Supported Organization Styles:**
 
-You can organize JSON files using either approach:
+You can organize YAML files using either approach:
 
-1. **Subdirectories** (grouped by organization): `aws/fogg/*.json`
-2. **Flat files** (standalone accounts): `aws/account-name.json`
+1. **Subdirectories** (grouped by organization): `aws/fogg/*.yaml`
+2. **Flat files** (standalone accounts): `aws/account-name.yaml`
 3. **Mixed** (both styles in the same collection)
 
-**JSON Schema:**
+**YAML Schema:**
 
-Each AWS account JSON file must include:
-- `name` (string, required)
+Each AWS account YAML file must include:
+- `name` (string, required) - Full account name (e.g., "fogg-org")
+- `account` (string, required) - Account type (e.g., "org", "ops", "dev")
+- `org` (string, required) - Organization name (e.g., "fogg", "helix")
 - `id` (string, required) - AWS account ID
 - `email` (string, required) - Must be valid email format
-- `region` (string, optional)
-- `accountType` (string, optional)
-- `description` (string, optional)
+- `sso_role` (string, required) - SSO role name (e.g., "Administrator")
 
 ## Troubleshooting
 

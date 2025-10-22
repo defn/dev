@@ -1,0 +1,6 @@
+name: fogg-ops
+account: ops
+org: fogg
+id: "188066400611"
+email: aws-fogg-ops@defn.us
+sso_role: Administrator

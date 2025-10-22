@@ -1,8 +1,0 @@
-{
-  "name": "helix",
-  "id": "816178966829",
-  "email": "aws-helix@defn.sh",
-  "region": "us-west-2",
-  "accountType": "organization",
-  "description": "Helix organization master account - complete 10-account structure"
-}
