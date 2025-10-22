@@ -4,7 +4,8 @@ import starlight from "@astrojs/starlight";
 
 // https://astro.build/config
 export default defineConfig({
-  site: "https://docs.defn.sh",
+  site: "https://defn.github.io",
+  base: "/dev",
   vite: {
     server: {
       host: true,
