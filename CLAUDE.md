@@ -36,6 +36,14 @@ This is a Bazel-based monorepo for cloud integrated development environments. Ke
 
 **Note on CUE formatting**: Always use `trunk fmt` for CUE files instead of `cue fmt` directly. The trunk configuration includes a custom CUE formatter that uses the system `cue` binary.
 
+**Note on Node.js projects**: When moving or renaming a Node.js project directory, always delete and recreate `node_modules`:
+```bash
+cd <project-directory>
+rm -rf node_modules
+npm install
+```
+This prevents Vite serving errors where files are outside the allowed serving directory.
+
 ## Important Directives
 
 - **Always check for upstream changes before executing any task**:
