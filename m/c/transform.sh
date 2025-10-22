@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # transform.sh - Transform unified CUE data into tool-specific formats
-# Part of ACUTE: Agent, Config, Unify, Transform, Execute
+# Part of ACUTE: Accumulate, Configure, Unify, Transform, Execute
 #
 # This script converts CUE (the single source of truth) into formats
 # consumed by various tools in the Execute phase:

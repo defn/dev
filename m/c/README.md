@@ -1,30 +1,32 @@
-# ACUTE - Agent, Config, Unify, Transform, Execute
+# ACUTE - Accumulate, Configure, Unify, Transform, Execute
 
 ACUTE is a configuration and infrastructure management system that uses CUE as a unified source of truth, transforming it to tool-specific formats, and executing tools to generate outputs.
 
-This directory implements a layered CUE configuration system that separates concerns between schemas, configurations, build artifacts, and API data.
+This directory implements a layered CUE configuration system that separates concerns between raw data accumulation, schema-based configuration, unification, transformation, and execution.
 
 ## ACUTE Architecture
 
 ACUTE follows a five-phase pipeline:
 
-1. **Agent** - AI-assisted configuration management
-2. **Config** - CUE-based configuration definitions
-3. **Unify** - Consolidate data from multiple sources into CUE
+1. **Accumulate** - Gather raw data from multiple sources (APIs, files, commands)
+2. **Configure** - Apply CUE schemas to validate and structure accumulated data
+3. **Unify** - Consolidate configured data from all sources into unified CUE
 4. **Transform** - Convert CUE to tool/service-specific formats (JSON, YAML, Terraform, etc.)
-5. **Execute** - Run tools to generate outputs (documentation sites, infrastructure, deployments)
+5. **Execute** - Tools consume transformed formats to generate outputs (docs, infrastructure, deployments)
 
 ## Directory Structure
 
 ```
 c/
-├── agent/          # Agent - AI configurations and prompts
-├── definition/     # Config - CUE configuration definitions (AWS, etc.)
-├── intention/      # Config - CUE schemas for validation
-├── application/    # Unify - API clients (GitHub repository metadata)
-├── unify.sh        # Unify - Consolidate data from sources into CUE
+├── intention/      # Configure - CUE schemas for validation
+├── definition/     # Accumulate - Raw data sources (AWS, repos, etc.)
+│   └── accum.sh    # Accumulate - Gather data from repo.yaml
+├── application/    # Accumulate - API clients (GitHub repository metadata)
+│   └── accum.sh    # Accumulate - Fetch from GitHub API
+├── execution/      # Accumulate - Tool outputs (Kustomize, etc.)
+│   └── accum.sh    # Accumulate - Gather from kubectl kustomize
+├── unify.sh        # Unify - Consolidate accumulated data into CUE with schemas
 ├── transform.sh    # Transform - Convert CUE to tool-specific formats
-├── execution/      # Execute - Tool configurations (Kustomize, etc.)
 ├── docs/           # Execute output - Generated Astro.js documentation site
 └── README.md       # This file
 ```
@@ -40,21 +42,24 @@ These schemas define the intended structure of data without providing actual val
 ### `definition/` - Configuration Files
 Contains concrete configuration data imported from YAML files.
 
-- `gen.cue` - Generated from `repo.yaml` via ingestion scripts
+- `accum.sh` - Accumulates data from `repo.yaml`
+- `gen.cue` - Generated CUE output from accum.sh
 - `aws/aws.cue` - AWS organization and account definitions
 - Provides actual repository definitions with descriptions and metadata
 
 ### `execution/` - Tool Configurations
 Contains tool-specific configurations and manifests.
 
-- `gen.cue` - Generated from `kubectl kustomize` output via `ingest-kustomize.sh`
+- `accum.sh` - Accumulates data from `kubectl kustomize` output
+- `gen.cue` - Generated CUE output from accum.sh
 - Kustomize configurations for Kubernetes deployments
 - Will contain other tool configurations (Terraform, Ansible, etc.)
 
 ### `application/` - API Clients
 Contains data fetched from external APIs.
 
-- `gen.cue` - Generated from GitHub API via `ingest-github-repo.sh`
+- `accum.sh` - Accumulates data from GitHub API
+- `gen.cue` - Generated CUE output from accum.sh
 - Fetches repository metadata including names, descriptions, URLs, and timestamps
 
 ### `docs/` - Documentation Site (Execute Output)
@@ -62,23 +67,24 @@ Astro.js + Starlight documentation site built from transformed CUE data. This is
 
 ## ACUTE Workflow Scripts
 
-### unify.sh - Unify Data Sources
+### unify.sh - Unify Accumulated Data
 
-The `unify.sh` script orchestrates data ingestion across all layers, transforming external data sources into importable CUE packages:
+The `unify.sh` script orchestrates the Accumulate, Configure, and Unify phases:
 
 ```bash
 ./unify.sh
 ```
 
-This runs three ingestion scripts in sequence:
+This runs three accumulation scripts in sequence:
 
-1. **definition/ingest-repo.sh** - Converts `repo.yaml` to CUE format
-2. **execution/ingest-kustomize.sh** - Converts kustomize output to CUE format
-3. **application/ingest-github-repo.sh** - Fetches GitHub repo data and converts to CUE
+1. **definition/accum.sh** - Accumulates raw data from `repo.yaml`
+2. **execution/accum.sh** - Accumulates raw data from kustomize output
+3. **application/accum.sh** - Accumulates raw data from GitHub API
 
-Each ingestion script transforms data (YAML files, command output, or API responses) into properly formatted CUE packages that can be imported and unified with the schema definitions.
-
-After ingestion, it runs `cue eval` to unify all layers and exports to YAML.
+Each `accum.sh` script gathers raw data and generates CUE files. Then `unify.sh`:
+- Applies CUE schemas from `intention/` (Configure phase)
+- Validates and unifies all data sources (Unify phase)
+- Exports to YAML format
 
 ### transform.sh - Transform to Tool-Specific Formats
 
@@ -143,14 +149,23 @@ CUE's unification ensures that:
 
 ## Development Workflow
 
-1. **Agent**: Use AI to assist with configuration management and updates
-2. **Config**: Define schemas in `intention/` and configurations in `definition/`
-3. **Unify**: Run `./unify.sh` to consolidate data from multiple sources into CUE
-   - Imports configuration files, API data, and existing tool outputs
-   - Validates and unifies all data against schemas
+1. **Accumulate**: Gather raw data from various sources
+   - Each subdirectory has `accum.sh` to collect data (YAML files, APIs, commands)
+   - Raw data is converted to CUE format without validation
+
+2. **Configure**: Define schemas and validate
+   - Schemas defined in `intention/` describe expected structure
+   - CUE automatically applies schemas during unification
+
+3. **Unify**: Run `./unify.sh` to consolidate and validate
+   - Calls all `accum.sh` scripts to gather raw data
+   - Applies schemas to validate accumulated data
+   - Unifies all data sources into single CUE structure
+
 4. **Transform**: Run `./transform.sh` to convert CUE to tool-specific formats
    - Generates JSON for Astro.js documentation
    - (Future) Creates Terraform configs, Ansible playbooks, etc.
+
 5. **Execute**: Run tools to generate final outputs
    - Build documentation site with `cd docs && npm run build`
    - Deploy infrastructure with `kubectl apply -k execution/`
