@@ -19,8 +19,8 @@ export default defineConfig({
         onwarn(warning, warn) {
           // Suppress "unused import" warnings from Astro's internal modules
           if (
-            warning.code === 'UNUSED_EXTERNAL_IMPORT' &&
-            warning.exporter?.includes('@astrojs/internal-helpers/remote')
+            warning.code === "UNUSED_EXTERNAL_IMPORT" &&
+            warning.exporter?.includes("@astrojs/internal-helpers/remote")
           ) {
             return;
           }
@@ -33,11 +33,11 @@ export default defineConfig({
     starlight({
       title: "ACUTE",
       customCss: [
-        '@fontsource/roboto/400.css',
-        '@fontsource/roboto/500.css',
-        '@fontsource/roboto/700.css',
-        '@fontsource-variable/roboto-mono',
-        './src/styles/custom.css',
+        "@fontsource/roboto/400.css",
+        "@fontsource/roboto/500.css",
+        "@fontsource/roboto/700.css",
+        "@fontsource-variable/roboto-mono",
+        "./src/styles/custom.css",
       ],
       pagination: false,
       social: [
