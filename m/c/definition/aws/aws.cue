@@ -1,5 +1,7 @@
 package aws
 
+// diagram: https://whimsical.com/aws-account-layout-D6p7mKoZiwNqZdTZnysYUy
+
 org: [ORG=string]: close({
 	region: "us-west-2" | "us-east-2" | "us-east-1"
 	url:    =~"https://[a-z0-9-]+.awsapps.com/start"
