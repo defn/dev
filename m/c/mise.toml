@@ -1,3 +1,3 @@
 [tasks.default]
-run = "./ingest.sh"
-description = "Run the CUE ingestion pipeline"
+run = "./unify.sh"
+description = "Run the ACUTE unify pipeline (Accumulate, Configure, Unify)"
