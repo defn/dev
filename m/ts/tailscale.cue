@@ -1,3 +1,6 @@
+@experiment(aliasv2)
+@experiment(explicitopen)
+
 package tailscale
 
 // https://tailscale.com/kb/1324/acl-grants

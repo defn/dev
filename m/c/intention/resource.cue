@@ -1,3 +1,6 @@
+@experiment(aliasv2)
+@experiment(explicitopen)
+
 package intention
 
 import definition "github.com/defn/dev/m/c/definition"

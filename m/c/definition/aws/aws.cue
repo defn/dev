@@ -1,3 +1,6 @@
+@experiment(aliasv2)
+@experiment(explicitopen)
+
 package aws
 
 // diagram: https://whimsical.com/aws-account-layout-D6p7mKoZiwNqZdTZnysYUy

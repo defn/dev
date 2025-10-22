@@ -1,8 +1,12 @@
 #!/usr/bin/env bash
 
 function main {
-	kubectl kustomize . | cue import -p execution -l \"resource\" -l metadata.namespace -l metadata.name yaml: - >gen.cue
-	cue fmt
+	{
+		echo '@experiment(aliasv2)'
+		echo '@experiment(explicitopen)'
+		echo ''
+		kubectl kustomize . | cue import -p execution -l \"resource\" -l metadata.namespace -l metadata.name yaml: -
+	} >gen.cue
 }
 
 main "$@"

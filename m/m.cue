@@ -1,3 +1,6 @@
+@experiment(aliasv2)
+@experiment(explicitopen)
+
 package m
 
 files: "": ".bazel_fix_commands.json":                                                                        #file

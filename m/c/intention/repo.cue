@@ -1,3 +1,6 @@
+@experiment(aliasv2)
+@experiment(explicitopen)
+
 package intention
 
 repo: [NAME=string]: #GitRepo & {
