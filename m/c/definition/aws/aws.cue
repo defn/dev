@@ -79,6 +79,7 @@ org: {
 
 // list the accounts
 org: {
+	// Large multi-environment organization (30 accounts)
 	chamber: account: {
 		org: {
 			id:    "730917619329"
@@ -255,6 +256,7 @@ org: {
 			name:  "defn-hub"
 		}
 	}
+	// Infrastructure subset: org, ops, lib, log, net
 	circus: account: {
 		org: {
 			id:    "036139182623"
@@ -280,6 +282,7 @@ org: {
 			email: "aws-circus-ops@defn.sh"
 		}
 	}
+	// Infrastructure subset: org, hub, lib, net
 	coil: account: {
 		org: {
 			id:    "138291560003"
@@ -298,6 +301,7 @@ org: {
 			email: "aws-coil+net@defn.us"
 		}
 	}
+	// Infrastructure subset: org, hub, lib, net
 	curl: account: {
 		org: {
 			id:    "424535767618"
@@ -316,10 +320,13 @@ org: {
 			email: "aws-curl+net@defn.us"
 		}
 	}
+	// Bootstrap IAM account only
 	defn: account: org: {
 		id:    "510430971399"
 		email: "iam+bootstrap@defn.sh"
 	}
+
+	// Complete 10-account structure: org, ops, ci, dev, hub, lib, log, net, prod, pub
 	fogg: account: {
 		org: {
 			id:    "328216504962"
@@ -370,6 +377,7 @@ org: {
 			name:  "security"
 		}
 	}
+	// Infrastructure subset: org, ops
 	gyre: account: {
 		org: {
 			id:    "065163301604"
@@ -380,6 +388,8 @@ org: {
 			email: "aws-gyre+ops@defn.us"
 		}
 	}
+
+	// Complete 10-account structure: org, ops, ci, dev, hub, lib, log, net, prod, pub
 	helix: account: {
 		org: {
 			id:    "816178966829"
@@ -424,6 +434,7 @@ org: {
 			email: "aws-helix+pub@defn.sh"
 		}
 	}
+	// Miscellaneous
 	imma: account: {
 		org: {
 			id:    "548373030883"
@@ -455,6 +466,7 @@ org: {
 			name:  "imma-prod"
 		}
 	}
+	// Extended multi-account structure with Earthsea-themed account names
 	immanent: account: {
 		org: {
 			id:    "545070380609"
@@ -516,6 +528,7 @@ org: {
 			name:  "immanent-windkey"
 		}
 	}
+	// Infrastructure subset: org, log, net
 	jianghu: account: {
 		org: {
 			id:    "657613322961"
@@ -532,6 +545,8 @@ org: {
 			name:  "tahoe"
 		}
 	}
+
+	// Complete 10-account structure: org, ops, ci, dev, hub, lib, log, net, prod, pub
 	spiral: account: {
 		org: {
 			id:    "232091571197"
@@ -577,6 +592,7 @@ org: {
 			name:  "dmz"
 		}
 	}
+	// Complete 10-account structure: org, ops, ci, dev, hub, lib, log, net, prod, pub
 	vault: account: {
 		org: {
 			id:    "475528707847"
@@ -624,6 +640,7 @@ org: {
 			email: "aws-vault-pub@defn.sh"
 		}
 	}
+	// Miscellaneous
 	whoa: account: {
 		org: {
 			id:    "389772512117"
