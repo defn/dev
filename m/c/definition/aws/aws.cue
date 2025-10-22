@@ -6,12 +6,12 @@ org: [ORG=string]: close({
 	region: "us-west-2" | "us-east-2" | "us-east-1"
 	url:    =~"https://[a-z0-9-]+.awsapps.com/start"
 	account: [ACCOUNT=string]: close({
-		account:  ACCOUNT
-		org:      ORG
+		account: ACCOUNT
+		org:     ORG
 
-		id!:      =~"^[0-9]+$"
-		email!:   string
-		name: string | *ACCOUNT
+		id!:    =~"^[0-9]+$"
+		email!: string
+		name:   string | *ACCOUNT
 		if ACCOUNT == "org" {
 			name: ORG
 		}
