@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+# unify.sh - Unify data from multiple sources into CUE format
+# Part of ACUTE: Agent, Config, Unify, Transform, Execute
+
 function main {
 	(cd definition && ./ingest-repo.sh)
 	(cd execution && ./ingest-kustomize.sh)

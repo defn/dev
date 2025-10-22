@@ -30,9 +30,7 @@ export default defineConfig({
         },
         {
           label: "AWS Accounts",
-          items: [
-            { label: "All Accounts", link: "/aws/" },
-          ],
+          items: [{ label: "All Accounts", link: "/aws/" }],
         },
         {
           label: "Reference",

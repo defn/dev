@@ -12,6 +12,7 @@ npm install
 ```
 
 This will install all required packages listed in `package.json`:
+
 - `astro` - The Astro framework
 - `@astrojs/starlight` - Starlight documentation theme
 - `sharp` - Image optimization library
@@ -53,6 +54,7 @@ npm run astro -- <command>
 ```
 
 Run any Astro CLI command directly. Examples:
+
 - `npm run astro -- add react` - Add React integration
 - `npm run astro -- check` - Check for errors in your project
 
@@ -72,17 +74,28 @@ c/docs/
 ├── src/
 │   ├── assets/          # Images and assets processed by Astro
 │   ├── content/
-│   │   └── docs/        # Documentation markdown files
-│   │       ├── index.mdx
-│   │       ├── guides/
-│   │       └── reference/
+│   │   ├── docs/        # Documentation markdown files
+│   │   │   ├── index.mdx
+│   │   │   ├── guides/
+│   │   │   └── reference/
+│   │   └── aws/         # AWS accounts JSON collection
+│   │       ├── fogg/    # Example: organization subdirectory
+│   │       │   ├── org.json
+│   │       │   └── ops.json
+│   │       └── helix-org.json
+│   ├── pages/
+│   │   └── aws/         # Pages for rendering AWS collection
+│   │       ├── index.astro
+│   │       └── [...slug].astro
 │   └── content.config.ts
 ├── astro.config.mjs     # Astro configuration
 ├── package.json         # Dependencies and scripts
 └── tsconfig.json        # TypeScript configuration
 ```
 
-## Writing Documentation
+## Content Collections
+
+### Docs Collection (Markdown)
 
 Add new documentation pages as `.md` or `.mdx` files in `src/content/docs/`. The file structure determines the URL:
 
@@ -91,6 +104,36 @@ Add new documentation pages as `.md` or `.mdx` files in `src/content/docs/`. The
 - `src/content/docs/reference/example.md` → `/reference/example`
 
 See the [Starlight documentation](https://starlight.astro.build/) for more details on authoring content.
+
+### AWS Collection (JSON)
+
+The `aws` collection contains JSON files describing AWS accounts. This collection is populated by running `../transform.sh` which processes data from `../unify.sh`.
+
+**Directory Structure → URL Mapping:**
+
+The file path within `src/content/aws/` directly maps to the URL:
+
+- `aws/fogg/org.json` → `/aws/fogg/org/`
+- `aws/fogg/ops.json` → `/aws/fogg/ops/`
+- `aws/helix-org.json` → `/aws/helix-org/`
+
+**Supported Organization Styles:**
+
+You can organize JSON files using either approach:
+
+1. **Subdirectories** (grouped by organization): `aws/fogg/*.json`
+2. **Flat files** (standalone accounts): `aws/account-name.json`
+3. **Mixed** (both styles in the same collection)
+
+**JSON Schema:**
+
+Each AWS account JSON file must include:
+- `name` (string, required)
+- `id` (string, required) - AWS account ID
+- `email` (string, required) - Must be valid email format
+- `region` (string, optional)
+- `accountType` (string, optional)
+- `description` (string, optional)
 
 ## Troubleshooting
 
