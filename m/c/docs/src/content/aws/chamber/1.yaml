@@ -1,0 +1,6 @@
+name: defn-cd
+account: "1"
+org: chamber
+id: "741346472057"
+email: aws-cd@defn.us
+sso_role: Administrator

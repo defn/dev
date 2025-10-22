@@ -1,0 +1,6 @@
+name: vault1
+account: prod
+org: vault
+id: "040769490632"
+email: aws-vault-vault1@defn.sh
+sso_role: Administrator

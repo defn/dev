@@ -1,0 +1,6 @@
+name: vault0
+account: ci
+org: vault
+id: "313228123503"
+email: aws-vault-vault0@defn.sh
+sso_role: Administrator

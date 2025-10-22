@@ -1,0 +1,6 @@
+name: hub
+account: hub
+org: vault
+id: "539099112425"
+email: aws-vault-hub@defn.sh
+sso_role: Administrator

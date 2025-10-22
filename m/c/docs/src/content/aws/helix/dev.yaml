@@ -1,0 +1,6 @@
+name: dev
+account: dev
+org: helix
+id: "843784871878"
+email: aws-helix+dev@defn.sh
+sso_role: Administrator

@@ -37,11 +37,13 @@ This is a Bazel-based monorepo for cloud integrated development environments. Ke
 **Note on CUE formatting**: Always use `trunk fmt` for CUE files instead of `cue fmt` directly. The trunk configuration includes a custom CUE formatter that uses the system `cue` binary.
 
 **Note on Node.js projects**: When moving or renaming a Node.js project directory, always delete and recreate `node_modules`:
+
 ```bash
 cd <project-directory>
 rm -rf node_modules
 npm install
 ```
+
 This prevents Vite serving errors where files are outside the allowed serving directory.
 
 ## Important Directives
@@ -263,6 +265,7 @@ Specifically, execute these tasks in order:
 3. **Test the updates**:
    - Update workspaces to use new templates (run coder upgrade workspaces task)
    - If workspaces update successfully, commit any staged lock file changes:
+
      ```bash
      git commit -m "chore: update terraform provider versions in Coder templates
 
@@ -273,6 +276,7 @@ Specifically, execute these tasks in order:
 
      Co-Authored-By: Claude <noreply@anthropic.com>"
      ```
+
    - If updates fail, reset the staged changes: `git reset HEAD`
 
 **Note**: This task updates both SSH and Docker Coder templates with the latest Terraform provider versions, tests them in production, and only commits the changes if everything works correctly.

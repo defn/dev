@@ -1,0 +1,6 @@
+name: defn-ci
+account: "2"
+org: chamber
+id: "447993872368"
+email: aws-ci@defn.us
+sso_role: Administrator

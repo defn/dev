@@ -1,0 +1,6 @@
+name: library
+account: lib
+org: vault
+id: "066356637485"
+email: aws-vault-library@defn.sh
+sso_role: Administrator

@@ -1,0 +1,6 @@
+name: pub
+account: ci
+org: spiral
+id: "371657257885"
+email: aws-spiral+pub@defn.us
+sso_role: Administrator

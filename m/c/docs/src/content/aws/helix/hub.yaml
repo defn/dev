@@ -1,0 +1,6 @@
+name: hub
+account: hub
+org: helix
+id: "436043820387"
+email: aws-helix+hub@defn.sh
+sso_role: Administrator

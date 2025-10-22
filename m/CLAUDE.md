@@ -17,6 +17,7 @@ This repository manages 14 AWS Organizations with ~145 AWS accounts.
 The ideal AWS organization structure uses 10 accounts (the default AWS limit):
 
 **Core Infrastructure (5 accounts):**
+
 - **org**: Organization Master account (manages policies, delegates to ops)
 - **log**: Logging account (receives logs from all accounts)
 - **net**: Network account (shares subnets via Transit Gateway)
@@ -24,11 +25,13 @@ The ideal AWS organization structure uses 10 accounts (the default AWS limit):
 - **hub**: Shared Services
 
 **Work Environments (3 accounts):**
+
 - **ops**: Administration/operations account (receives delegation from org)
 - **ci**: CI/CD pipelines and builds
 - **cde**: Cloud Development Environments
 
 **Service Environments (2 accounts):**
+
 - **dev**: Development environment
 - **sandbox**: Sandbox for wild west experiments
 - **prod**: Production environment

@@ -1,0 +1,6 @@
+name: dmz
+account: prod
+org: helix
+id: "724643698007"
+email: aws-helix+dmz@defn.sh
+sso_role: Administrator

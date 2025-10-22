@@ -132,6 +132,7 @@ You can organize YAML files using either approach:
 **YAML Schema:**
 
 Each AWS account YAML file must include:
+
 - `name` (string, required) - Full account name (e.g., "fogg-org")
 - `account` (string, required) - Account type (e.g., "org", "ops", "dev")
 - `org` (string, required) - Organization name (e.g., "fogg", "helix")

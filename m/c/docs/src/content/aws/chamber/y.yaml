@@ -1,0 +1,6 @@
+name: defn-prod
+account: "y"
+org: chamber
+id: "153556747817"
+email: aws-prod@defn.us
+sso_role: Administrator

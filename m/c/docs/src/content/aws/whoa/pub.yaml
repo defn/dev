@@ -1,0 +1,6 @@
+name: prod
+account: pub
+org: whoa
+id: "204827926367"
+email: whoa-prod@imma.io
+sso_role: Administrator

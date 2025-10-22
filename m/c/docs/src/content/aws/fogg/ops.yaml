@@ -1,6 +1,6 @@
-name: fogg-ops
+name: gateway
 account: ops
 org: fogg
-id: "188066400611"
-email: aws-fogg-ops@defn.us
+id: "318746665903"
+email: fogg-gateway@defn.sh
 sso_role: Administrator

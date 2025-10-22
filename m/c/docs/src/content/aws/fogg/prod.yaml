@@ -1,0 +1,6 @@
+name: postx
+account: prod
+org: fogg
+id: "565963418226"
+email: fogg-postx@defn.sh
+sso_role: Administrator
