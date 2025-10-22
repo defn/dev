@@ -10,6 +10,20 @@ export default defineConfig({
       host: true,
       allowedHosts: [".defn.run"],
     },
+    build: {
+      rollupOptions: {
+        onwarn(warning, warn) {
+          // Suppress "unused import" warnings from Astro's internal modules
+          if (
+            warning.code === 'UNUSED_EXTERNAL_IMPORT' &&
+            warning.exporter?.includes('@astrojs/internal-helpers/remote')
+          ) {
+            return;
+          }
+          warn(warning);
+        },
+      },
+    },
   },
   integrations: [
     starlight({
