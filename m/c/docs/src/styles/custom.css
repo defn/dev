@@ -7,3 +7,12 @@
   /* Set Roboto Mono as the monospace font */
   --sl-font-mono: 'Roboto Mono Variable', monospace;
 }
+
+/* Prevent account IDs and other code elements from wrapping */
+table code {
+  white-space: nowrap;
+}
+
+dl code {
+  white-space: nowrap;
+}
