@@ -35,6 +35,7 @@ export default defineConfig({
         '@fontsource-variable/roboto-mono',
         './src/styles/custom.css',
       ],
+      pagination: false,
       social: [
         {
           icon: "github",
@@ -44,19 +45,8 @@ export default defineConfig({
       ],
       sidebar: [
         {
-          label: "Guides",
-          items: [
-            // Each item here is one entry in the navigation menu.
-            { label: "Example Guide", slug: "guides/example" },
-          ],
-        },
-        {
           label: "AWS Accounts",
           items: [{ label: "All Accounts", link: "/aws/" }],
-        },
-        {
-          label: "Reference",
-          autogenerate: { directory: "reference" },
         },
       ],
     }),
