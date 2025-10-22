@@ -6,6 +6,9 @@ import starlight from "@astrojs/starlight";
 export default defineConfig({
   site: "https://defn.github.io",
   base: "/dev",
+  build: {
+    assets: "a",
+  },
   vite: {
     server: {
       host: true,
