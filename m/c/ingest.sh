@@ -6,7 +6,7 @@ function main {
 	(cd application && ./ingest-github-repo.sh)
 	cue eval >/dev/null
 	cue export --out yaml >main.yaml
-	git difftool --no-prompt --extcmd="$(which dyff) between \$LOCAL \$REMOTE" main.yaml
+	git difftool --no-prompt --extcmd='dyff between' main.yaml
 }
 
 main "$@"
