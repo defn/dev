@@ -11,7 +11,7 @@ resource: [NS=string]: [NAME=string]: #ConfigMap & {
 
 #ConfigMap: {
 	apiVersion: "v1"
-	kind: "ConfigMap"
+	kind:       "ConfigMap"
 	metadata: {
 		name:      string
 		namespace: string

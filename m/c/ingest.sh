@@ -4,8 +4,9 @@ function main {
 	(cd definition && ./ingest-repo.sh)
 	(cd execution && ./ingest-kustomize.sh)
 	(cd application && ./ingest-github-repo.sh)
-	cue eval
+	cue eval >/dev/null
 	cue export --out yaml >main.yaml
+    git difftool --no-prompt --extcmd="$(which dyff) between $LOCAL $REMOTE" main.yaml
 }
 
 main "$@"

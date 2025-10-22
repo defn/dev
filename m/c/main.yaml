@@ -22,7 +22,7 @@ config:
       name: dev
       description: Internal developer platform for home and cloud labs
       createdAt: "2022-02-11T22:28:21Z"
-      updatedAt: "2025-10-21T21:52:01Z"
+      updatedAt: "2025-10-21T22:39:39Z"
       url: https://github.com/defn/dev
     .github:
       name: .github
@@ -61,413 +61,449 @@ config:
         url: https://chamber-0.awsapps.com/start
         account:
           org:
-            org: chamber
             account: org
+            org: chamber
             id: "730917619329"
-            email: aws-chamber@defn.us
             sso_role: Administrator
+            email: aws-chamber@defn.us
             name: chamber
             prefix: ""
             imported: "yes"
+            "t": org
           "1":
-            org: chamber
             account: "1"
+            org: chamber
             id: "741346472057"
-            email: aws-cd@defn.us
             sso_role: Administrator
+            email: aws-cd@defn.us
             name: defn-cd
             prefix: ""
             imported: "yes"
+            "t": "1"
           "2":
-            org: chamber
             account: "2"
+            org: chamber
             id: "447993872368"
-            email: aws-ci@defn.us
             sso_role: Administrator
+            email: aws-ci@defn.us
             name: defn-ci
             prefix: ""
             imported: "yes"
+            "t": "2"
           "3":
-            org: chamber
             account: "3"
+            org: chamber
             id: "463050069968"
-            email: aws-users@defn.us
             sso_role: Administrator
+            email: aws-users@defn.us
             name: defn-security
             prefix: ""
             imported: "yes"
+            "t": "3"
           "4":
-            org: chamber
             account: "4"
+            org: chamber
             id: "368890376620"
-            email: chamber-4@defn.us
             sso_role: Administrator
+            email: chamber-4@defn.us
             name: chamber-4
             prefix: ""
             imported: "yes"
+            "t": "4"
           "5":
-            org: chamber
             account: "5"
+            org: chamber
             id: "200733412967"
-            email: chamber-5@defn.us
             sso_role: Administrator
+            email: chamber-5@defn.us
             name: chamber-5
             prefix: ""
             imported: "yes"
+            "t": "5"
           "6":
-            org: chamber
             account: "6"
+            org: chamber
             id: "493089153027"
-            email: chamber-6@defn.us
             sso_role: Administrator
+            email: chamber-6@defn.us
             name: chamber-6
             prefix: ""
             imported: "yes"
+            "t": "6"
           "7":
-            org: chamber
             account: "7"
+            org: chamber
             id: "837425503386"
-            email: chamber-7@defn.us
             sso_role: Administrator
+            email: chamber-7@defn.us
             name: chamber-7
             prefix: ""
             imported: "yes"
+            "t": "7"
           "8":
-            org: chamber
             account: "8"
+            org: chamber
             id: "773314335856"
-            email: chamber-8@defn.us
             sso_role: Administrator
+            email: chamber-8@defn.us
             name: chamber-8
             prefix: ""
             imported: "yes"
+            "t": "8"
           "9":
-            org: chamber
             account: "9"
+            org: chamber
             id: "950940975070"
-            email: chamber-9@defn.us
             sso_role: Administrator
+            email: chamber-9@defn.us
             name: chamber-9
             prefix: ""
             imported: "yes"
+            "t": "9"
           a:
-            org: chamber
             account: a
+            org: chamber
             id: "503577294851"
-            email: defn-a@imma.io
             sso_role: Administrator
+            email: defn-a@imma.io
             name: defn-a
             prefix: ""
             imported: "yes"
+            "t": a
           b:
-            org: chamber
             account: b
+            org: chamber
             id: "310940910494"
-            email: imma-admin1@imma.io
             sso_role: Administrator
+            email: imma-admin1@imma.io
             name: defn-b
             prefix: ""
             imported: "yes"
+            "t": b
           c:
-            org: chamber
             account: c
+            org: chamber
             id: "047633732615"
-            email: dev-eng1@imma.io
             sso_role: Administrator
+            email: dev-eng1@imma.io
             name: defn-c
             prefix: ""
             imported: "yes"
+            "t": c
           d:
-            org: chamber
             account: d
+            org: chamber
             id: "699441347021"
-            email: box-adm1@imma.io
             sso_role: Administrator
+            email: box-adm1@imma.io
             name: defn-d
             prefix: ""
             imported: "yes"
+            "t": d
           e:
-            org: chamber
             account: e
+            org: chamber
             id: "171831323337"
-            email: stg-eng1@imma.io
             sso_role: Administrator
+            email: stg-eng1@imma.io
             name: defn-e
             prefix: ""
             imported: "yes"
+            "t": e
           "f":
-            org: chamber
             account: "f"
+            org: chamber
             id: "842022523232"
-            email: usr-admin1@imma.io
             sso_role: Administrator
+            email: usr-admin1@imma.io
             name: defn-f
             prefix: ""
             imported: "yes"
+            "t": "f"
           g:
-            org: chamber
             account: g
+            org: chamber
             id: "023867963778"
-            email: usr-adm1@imma.io
             sso_role: Administrator
+            email: usr-adm1@imma.io
             name: defn-g
             prefix: ""
             imported: "yes"
+            "t": g
           h:
-            org: chamber
             account: h
+            org: chamber
             id: "371020107387"
-            email: usr-eng1@imma.io
             sso_role: Administrator
+            email: usr-eng1@imma.io
             name: defn-h
             prefix: ""
             imported: "yes"
+            "t": h
           i:
-            org: chamber
             account: i
+            org: chamber
             id: "290132238209"
-            email: aws-admin1@defn.us
             sso_role: Administrator
+            email: aws-admin1@defn.us
             name: defn-i
             prefix: ""
             imported: "yes"
+            "t": i
           j:
-            org: chamber
             account: j
+            org: chamber
             id: "738433022197"
-            email: aws-development1@defn.us
             sso_role: Administrator
+            email: aws-development1@defn.us
             name: defn-j
             prefix: ""
             imported: "yes"
+            "t": j
           l:
-            org: chamber
             account: l
+            org: chamber
             id: "991300382347"
-            email: aws-staging1@defn.us
             sso_role: Administrator
+            email: aws-staging1@defn.us
             name: defn-l
             prefix: ""
             imported: "yes"
+            "t": l
           m:
-            org: chamber
             account: m
+            org: chamber
             id: "684895750259"
-            email: defn-m@defn.us
             sso_role: Administrator
+            email: defn-m@defn.us
             name: defn-m
             prefix: ""
             imported: "yes"
+            "t": m
           "n":
-            org: chamber
             account: "n"
+            org: chamber
             id: "705881812506"
-            email: defn-n@defn.us
             sso_role: Administrator
+            email: defn-n@defn.us
             name: defn-n
             prefix: ""
             imported: "yes"
+            "t": "n"
           o:
-            org: chamber
             account: o
+            org: chamber
             id: "307136835824"
-            email: defn-o@defn.us
             sso_role: Administrator
+            email: defn-o@defn.us
             name: defn-o
             prefix: ""
             imported: "yes"
+            "t": o
           p:
-            org: chamber
             account: p
+            org: chamber
             id: "706168331526"
-            email: defn-p@defn.us
             sso_role: Administrator
+            email: defn-p@defn.us
             name: defn-p
             prefix: ""
             imported: "yes"
+            "t": p
           q:
-            org: chamber
             account: q
+            org: chamber
             id: "217047480856"
-            email: aws-dev@defn.us
             sso_role: Administrator
+            email: aws-dev@defn.us
             name: defn-dev
             prefix: ""
             imported: "yes"
+            "t": q
           r:
-            org: chamber
             account: r
+            org: chamber
             id: "416221726155"
-            email: defn-r@imma.io
             sso_role: Administrator
+            email: defn-r@imma.io
             name: defn-r
             prefix: ""
             imported: "yes"
+            "t": r
           s:
-            org: chamber
             account: s
+            org: chamber
             id: "840650118369"
-            email: defn-s@imma.io
             sso_role: Administrator
+            email: defn-s@imma.io
             name: defn-s
             prefix: ""
             imported: "yes"
+            "t": s
           "t":
-            org: chamber
             account: "t"
+            org: chamber
             id: "490895200523"
-            email: defn-t@imma.io
             sso_role: Administrator
+            email: defn-t@imma.io
             name: defn-t
             prefix: ""
             imported: "yes"
+            "t": "t"
           u:
-            org: chamber
             account: u
+            org: chamber
             id: "467995590869"
-            email: aws-qa@defn.us
             sso_role: Administrator
+            email: aws-qa@defn.us
             name: defn-qa
             prefix: ""
             imported: "yes"
+            "t": u
           v:
-            org: chamber
             account: v
+            org: chamber
             id: "979368042862"
-            email: defn-v@imma.io
             sso_role: Administrator
+            email: defn-v@imma.io
             name: defn-v
             prefix: ""
             imported: "yes"
+            "t": v
           w:
-            org: chamber
             account: w
+            org: chamber
             id: "313387692116"
-            email: defn-w@imma.io
             sso_role: Administrator
+            email: defn-w@imma.io
             name: defn-w
             prefix: ""
             imported: "yes"
+            "t": w
           x:
-            org: chamber
             account: x
+            org: chamber
             id: "834936839208"
-            email: aws-stage@defn.us
             sso_role: Administrator
+            email: aws-stage@defn.us
             name: defn-stage
             prefix: ""
             imported: "yes"
+            "t": x
           "y":
-            org: chamber
             account: "y"
+            org: chamber
             id: "153556747817"
-            email: aws-prod@defn.us
             sso_role: Administrator
+            email: aws-prod@defn.us
             name: defn-prod
             prefix: ""
             imported: "yes"
+            "t": "y"
           z:
-            org: chamber
             account: z
+            org: chamber
             id: "037804009879"
-            email: aws-hub@defn.us
             sso_role: Administrator
+            email: aws-hub@defn.us
             name: defn-hub
             prefix: ""
             imported: "yes"
+            "t": z
       circus:
         region: us-west-2
         url: https://d-92670c4790.awsapps.com/start
         account:
           org:
-            org: circus
             account: org
+            org: circus
             id: "036139182623"
-            email: aws-circus@defn.us
             sso_role: Administrator
+            email: aws-circus@defn.us
             name: circus
             prefix: ""
             imported: "yes"
+            "t": org
           net:
-            org: circus
             account: net
+            org: circus
             id: "002516226222"
-            email: aws-circus-transit@defn.sh
             sso_role: Administrator
-            "t": transit
+            email: aws-circus-transit@defn.sh
             name: transit
             prefix: ""
             imported: "yes"
+            "t": transit
           log:
-            org: circus
             account: log
+            org: circus
             id: "707476523482"
-            email: aws-circus-audit@defn.sh
             sso_role: Administrator
-            "t": audit
+            email: aws-circus-audit@defn.sh
             name: audit
             prefix: ""
             imported: "yes"
+            "t": audit
           lib:
-            org: circus
             account: lib
+            org: circus
             id: "497790518354"
-            email: aws-circus-govcloud@defn.sh
             sso_role: Administrator
-            "t": govcloud
+            email: aws-circus-govcloud@defn.sh
             name: govcloud
             prefix: ""
             imported: "yes"
+            "t": govcloud
           ops:
-            org: circus
             account: ops
+            org: circus
             id: "415618116579"
-            email: aws-circus-ops@defn.sh
             sso_role: Administrator
+            email: aws-circus-ops@defn.sh
             name: ops
             prefix: ""
-            "t": ops
             imported: "yes"
+            "t": ops
       coil:
         region: us-east-1
         url: https://d-90674c3cfd.awsapps.com/start
         account:
           org:
-            org: coil
             account: org
+            org: coil
             id: "138291560003"
-            email: aws-coil@defn.us
             sso_role: Administrator
+            email: aws-coil@defn.us
             name: coil
             prefix: ""
             imported: "no"
             "t": org
           net:
-            org: coil
             account: net
+            org: coil
             id: "278790191486"
-            email: aws-coil+net@defn.us
             sso_role: Administrator
+            email: aws-coil+net@defn.us
             name: net
             prefix: ""
             imported: "no"
             "t": net
           lib:
-            org: coil
             account: lib
+            org: coil
             id: "160764896647"
-            email: aws-coil+lib@defn.us
             sso_role: Administrator
+            email: aws-coil+lib@defn.us
             name: lib
             prefix: ""
             imported: "no"
             "t": lib
           hub:
-            org: coil
             account: hub
+            org: coil
             id: "453991412409"
-            email: aws-coil+hub@defn.us
             sso_role: Administrator
+            email: aws-coil+hub@defn.us
             name: hub
             prefix: ""
             imported: "no"
@@ -477,41 +513,41 @@ config:
         url: https://d-926760a859.awsapps.com/start
         account:
           org:
-            org: curl
             account: org
+            org: curl
             id: "424535767618"
-            email: aws-curl@defn.us
             sso_role: Administrator
+            email: aws-curl@defn.us
             name: curl
             prefix: ""
             imported: "no"
             "t": org
           net:
-            org: curl
             account: net
+            org: curl
             id: "101142583332"
-            email: aws-curl+net@defn.us
             sso_role: Administrator
+            email: aws-curl+net@defn.us
             name: net
             prefix: ""
             imported: "no"
             "t": net
           lib:
-            org: curl
             account: lib
+            org: curl
             id: "298406631539"
-            email: aws-curl+lib@defn.us
             sso_role: Administrator
+            email: aws-curl+lib@defn.us
             name: lib
             prefix: ""
             imported: "no"
             "t": lib
           hub:
-            org: curl
             account: hub
+            org: curl
             id: "804430872255"
-            email: aws-curl+hub@defn.us
             sso_role: Administrator
+            email: aws-curl+hub@defn.us
             name: hub
             prefix: ""
             imported: "no"
@@ -521,138 +557,139 @@ config:
         url: https://defn.awsapps.com/start
         account:
           org:
-            org: defn
             account: org
+            org: defn
             id: "510430971399"
-            email: iam+bootstrap@defn.sh
             sso_role: Administrator
+            email: iam+bootstrap@defn.sh
             name: defn
             prefix: ""
             imported: "no"
+            "t": org
       fogg:
         region: us-west-2
         url: https://fogg-0.awsapps.com/start
         account:
           org:
-            org: fogg
             account: org
+            org: fogg
             id: "328216504962"
-            email: spiral@defn.sh
             sso_role: Administrator
+            email: spiral@defn.sh
             name: fogg
             prefix: ""
-            "t": org
             imported: "yes"
+            "t": org
           net:
-            org: fogg
             account: net
+            org: fogg
             id: "060659916753"
-            email: fogg-asset@defn.sh
             sso_role: Administrator
-            "t": asset
+            email: fogg-asset@defn.sh
             name: asset
             prefix: fogg-
             imported: "yes"
+            "t": asset
           log:
-            org: fogg
             account: log
+            org: fogg
             id: "844609041254"
-            email: fogg-circus@defn.sh
             sso_role: Administrator
-            "t": circus
+            email: fogg-circus@defn.sh
             name: circus
             prefix: fogg-
             imported: "yes"
+            "t": circus
           lib:
-            org: fogg
             account: lib
+            org: fogg
             id: "624713464251"
-            email: fogg-data@defn.sh
             sso_role: Administrator
-            "t": data
+            email: fogg-data@defn.sh
             name: data
             prefix: fogg-
             imported: "yes"
+            "t": data
           ops:
-            org: fogg
             account: ops
+            org: fogg
             id: "318746665903"
-            email: fogg-gateway@defn.sh
             sso_role: Administrator
-            "t": gateway
+            email: fogg-gateway@defn.sh
             name: gateway
             prefix: fogg-
             imported: "yes"
+            "t": gateway
           ci:
-            org: fogg
             account: ci
+            org: fogg
             id: "812459563189"
-            email: fogg-home@defn.sh
             sso_role: Administrator
-            "t": home
+            email: fogg-home@defn.sh
             name: home
             prefix: fogg-
             imported: "yes"
+            "t": home
           hub:
-            org: fogg
             account: hub
+            org: fogg
             id: "337248635000"
-            email: fogg-hub@defn.sh
             sso_role: Administrator
+            email: fogg-hub@defn.sh
             name: hub
             prefix: fogg-
-            "t": hub
             imported: "yes"
+            "t": hub
           prod:
-            org: fogg
             account: prod
+            org: fogg
             id: "565963418226"
-            email: fogg-postx@defn.sh
             sso_role: Administrator
-            "t": postx
+            email: fogg-postx@defn.sh
             name: postx
             prefix: fogg-
             imported: "yes"
+            "t": postx
           dev:
-            org: fogg
             account: dev
+            org: fogg
             id: "442766271046"
-            email: fogg-sandbox@defn.sh
             sso_role: Administrator
-            "t": sandbox
+            email: fogg-sandbox@defn.sh
             name: sandbox
             prefix: fogg-
             imported: "yes"
+            "t": sandbox
           pub:
-            org: fogg
             account: pub
+            org: fogg
             id: "372333168887"
-            email: fogg-security@defn.sh
             sso_role: Administrator
-            "t": security
+            email: fogg-security@defn.sh
             name: security
             prefix: fogg-
             imported: "yes"
+            "t": security
       gyre:
         region: us-east-2
         url: https://d-9a6716e54a.awsapps.com/start
         account:
           org:
-            org: gyre
             account: org
+            org: gyre
             id: "065163301604"
-            email: aws-gyre@defn.us
             sso_role: Administrator
+            email: aws-gyre@defn.us
             name: gyre
             prefix: ""
             imported: "no"
             "t": org
           ops:
-            org: gyre
             account: ops
+            org: gyre
             id: "319951235442"
-            email: aws-gyre+ops@defn.us
             sso_role: Administrator
+            email: aws-gyre+ops@defn.us
             name: ops
             prefix: ""
             imported: "no"
@@ -662,582 +699,586 @@ config:
         url: https://d-9a6716ffd1.awsapps.com/start
         account:
           org:
-            org: helix
             account: org
+            org: helix
             id: "816178966829"
-            email: aws-helix@defn.sh
             sso_role: Administrator
+            email: aws-helix@defn.sh
             name: helix
             prefix: ""
             imported: "no"
             "t": org
           log:
-            org: helix
             account: log
+            org: helix
             id: "664427926343"
-            email: aws-helix+log@defn.sh
             sso_role: Administrator
+            email: aws-helix+log@defn.sh
             name: log
             prefix: ""
             imported: "no"
             "t": log
           net:
-            org: helix
             account: net
+            org: helix
             id: "504722108514"
-            email: aws-helix+net@defn.sh
             sso_role: Administrator
+            email: aws-helix+net@defn.sh
             name: net
             prefix: ""
             imported: "no"
             "t": net
           lib:
-            org: helix
             account: lib
+            org: helix
             id: "377857698578"
-            email: aws-helix+lib@defn.sh
             sso_role: Administrator
+            email: aws-helix+lib@defn.sh
             name: lib
             prefix: ""
             imported: "no"
             "t": lib
           ops:
-            org: helix
             account: ops
+            org: helix
             id: "368812692254"
-            email: aws-helix+ops@defn.sh
             sso_role: Administrator
+            email: aws-helix+ops@defn.sh
             name: ops
             prefix: ""
             imported: "no"
             "t": ops
           ci:
-            org: helix
             account: ci
+            org: helix
             id: "018520313738"
-            email: aws-helix+sec@defn.sh
             sso_role: Administrator
-            "t": sec
+            email: aws-helix+sec@defn.sh
             name: sec
             prefix: ""
             imported: "no"
+            "t": sec
           pub:
-            org: helix
             account: pub
+            org: helix
             id: "536806623881"
-            email: aws-helix+pub@defn.sh
             sso_role: Administrator
+            email: aws-helix+pub@defn.sh
             name: pub
             prefix: ""
             imported: "no"
             "t": pub
           hub:
-            org: helix
             account: hub
+            org: helix
             id: "436043820387"
-            email: aws-helix+hub@defn.sh
             sso_role: Administrator
+            email: aws-helix+hub@defn.sh
             name: hub
             prefix: ""
             imported: "no"
             "t": hub
           dev:
-            org: helix
             account: dev
+            org: helix
             id: "843784871878"
-            email: aws-helix+dev@defn.sh
             sso_role: Administrator
+            email: aws-helix+dev@defn.sh
             name: dev
             prefix: ""
             imported: "no"
             "t": dev
           prod:
-            org: helix
             account: prod
+            org: helix
             id: "724643698007"
-            email: aws-helix+dmz@defn.sh
             sso_role: Administrator
-            "t": dmz
+            email: aws-helix+dmz@defn.sh
             name: dmz
             prefix: ""
             imported: "no"
+            "t": dmz
       imma:
         region: us-west-2
         url: https://imma-0.awsapps.com/start
         account:
           org:
-            org: imma
             account: org
+            org: imma
             id: "548373030883"
-            email: aws-imma@defn.us
             sso_role: Administrator
+            email: aws-imma@defn.us
             name: imma
             prefix: ""
             imported: "yes"
+            "t": org
           net:
-            org: imma
             account: net
+            org: imma
             id: "246197522468"
-            email: imma-defn@defn.us
             sso_role: Administrator
-            "t": defn
+            email: imma-defn@defn.us
             name: imma-defn
             prefix: ""
             imported: "yes"
+            "t": defn
           log:
-            org: imma
             account: log
+            org: imma
             id: "289716781198"
-            email: imma-dgwyn@defn.us
             sso_role: Administrator
-            "t": dgwyn
+            email: imma-dgwyn@defn.us
             name: imma-dgwyn
             prefix: ""
             imported: "yes"
+            "t": dgwyn
           lib:
-            org: imma
             account: lib
+            org: imma
             id: "516851121506"
-            email: imma-tolan@defn.us
             sso_role: Administrator
-            "t": tolan
+            email: imma-tolan@defn.us
             name: imma-tolan
             prefix: ""
             imported: "yes"
+            "t": tolan
           dev:
-            org: imma
             account: dev
+            org: imma
             id: "445584037541"
-            email: imma-dev@imma.io
             sso_role: Administrator
-            "t": dev
+            email: imma-dev@imma.io
             name: imma-dev
             prefix: ""
             imported: "yes"
+            "t": dev
           pub:
-            org: imma
             account: pub
+            org: imma
             id: "766142996227"
-            email: imma-prod@imma.io
             sso_role: Administrator
-            "t": prod
+            email: imma-prod@imma.io
             name: imma-prod
             prefix: ""
             imported: "yes"
+            "t": prod
       immanent:
         region: us-west-2
         url: https://immanent-0.awsapps.com/start
         account:
           org:
-            org: immanent
             account: org
+            org: immanent
             id: "545070380609"
-            email: aws-immanent@defn.us
             sso_role: Administrator
+            email: aws-immanent@defn.us
             name: immanent
             prefix: ""
-            "t": org
             imported: "yes"
+            "t": org
           patterner:
-            org: immanent
             account: patterner
+            org: immanent
             id: "143220204648"
-            email: immanent-patterner@defn.us
             sso_role: Administrator
+            email: immanent-patterner@defn.us
             name: immanent-patterner
             prefix: ""
-            "t": patterner
             imported: "yes"
+            "t": patterner
           windkey:
-            org: immanent
             account: windkey
+            org: immanent
             id: "095764861781"
-            email: immanent-windkey@defn.us
             sso_role: Administrator
+            email: immanent-windkey@defn.us
             name: immanent-windkey
             prefix: ""
-            "t": windkey
             imported: "yes"
+            "t": windkey
           summoner:
-            org: immanent
             account: summoner
+            org: immanent
             id: "397411277587"
-            email: immanent-summoner@defn.us
             sso_role: Administrator
+            email: immanent-summoner@defn.us
             name: immanent-summoner
             prefix: ""
-            "t": summoner
             imported: "yes"
+            "t": summoner
           herbal:
-            org: immanent
             account: herbal
+            org: immanent
             id: "165452499696"
-            email: immanent-herbal@defn.us
             sso_role: Administrator
+            email: immanent-herbal@defn.us
             name: immanent-herbal
             prefix: ""
-            "t": herbal
             imported: "yes"
+            "t": herbal
           namer:
-            org: immanent
             account: namer
+            org: immanent
             id: "856549015893"
-            email: immanent-namer@defn.us
             sso_role: Administrator
+            email: immanent-namer@defn.us
             name: immanent-namer
             prefix: ""
-            "t": namer
             imported: "yes"
+            "t": namer
           ged:
-            org: immanent
             account: ged
+            org: immanent
             id: "640792184178"
-            email: immanent-ged@defn.us
             sso_role: Administrator
+            email: immanent-ged@defn.us
             name: immanent-ged
             prefix: ""
-            "t": ged
             imported: "yes"
+            "t": ged
           roke:
-            org: immanent
             account: roke
+            org: immanent
             id: "892560628624"
-            email: immanent-roke@defn.us
             sso_role: Administrator
+            email: immanent-roke@defn.us
             name: immanent-roke
             prefix: ""
-            "t": roke
             imported: "yes"
+            "t": roke
           chanter:
-            org: immanent
             account: chanter
+            org: immanent
             id: "071244154667"
-            email: immanent-chanter@defn.us
             sso_role: Administrator
+            email: immanent-chanter@defn.us
             name: immanent-chanter
             prefix: ""
-            "t": chanter
             imported: "yes"
+            "t": chanter
           changer:
-            org: immanent
             account: changer
+            org: immanent
             id: "003884504807"
-            email: immanent-changer@defn.us
             sso_role: Administrator
+            email: immanent-changer@defn.us
             name: immanent-changer
             prefix: ""
-            "t": changer
             imported: "yes"
+            "t": changer
           hand:
-            org: immanent
             account: hand
+            org: immanent
             id: "826250190242"
-            email: immanent-hand@defn.us
             sso_role: Administrator
+            email: immanent-hand@defn.us
             name: immanent-hand
             prefix: ""
-            "t": hand
             imported: "yes"
+            "t": hand
           doorkeeper:
-            org: immanent
             account: doorkeeper
+            org: immanent
             id: "013267321144"
-            email: immanent-doorkeeper@defn.us
             sso_role: Administrator
+            email: immanent-doorkeeper@defn.us
             name: immanent-doorkeeper
             prefix: ""
-            "t": doorkeeper
             imported: "yes"
+            "t": doorkeeper
       jianghu:
         region: us-west-2
         url: https://jianghu-0.awsapps.com/start
         account:
           org:
-            org: jianghu
             account: org
+            org: jianghu
             id: "657613322961"
-            email: aws-jianghu@defn.us
             sso_role: Administrator
+            email: aws-jianghu@defn.us
             name: jianghu
             prefix: ""
             imported: "yes"
+            "t": org
           net:
-            org: jianghu
             account: net
+            org: jianghu
             id: "025636091251"
-            email: tahoe@defn.us
             sso_role: Administrator
-            "t": tahoe
+            email: tahoe@defn.us
             name: tahoe
             prefix: ""
             imported: "yes"
+            "t": tahoe
           log:
-            org: jianghu
             account: log
+            org: jianghu
             id: "298431841138"
-            email: klamath@defn.us
             sso_role: Administrator
-            "t": klamath
+            email: klamath@defn.us
             name: klamath
             prefix: ""
             imported: "yes"
+            "t": klamath
       spiral:
         region: us-west-2
         url: https://d-926760b322.awsapps.com/start
         account:
           org:
-            org: spiral
             account: org
+            org: spiral
             id: "232091571197"
-            email: aws-spiral@defn.us
             sso_role: Administrator
+            email: aws-spiral@defn.us
             name: spiral
             prefix: ""
             imported: "no"
             "t": org
           log:
-            org: spiral
             account: log
+            org: spiral
             id: "442333715734"
-            email: aws-spiral+log@defn.us
             sso_role: Administrator
+            email: aws-spiral+log@defn.us
             name: log
             prefix: ""
             imported: "no"
             "t": log
           net:
-            org: spiral
             account: net
+            org: spiral
             id: "057533398557"
-            email: aws-spiral+net@defn.us
             sso_role: Administrator
+            email: aws-spiral+net@defn.us
             name: net
             prefix: ""
             imported: "no"
             "t": net
           lib:
-            org: spiral
             account: lib
+            org: spiral
             id: "073874947996"
-            email: aws-spiral+lib@defn.us
             sso_role: Administrator
+            email: aws-spiral+lib@defn.us
             name: lib
             prefix: ""
             imported: "no"
             "t": lib
           ops:
-            org: spiral
             account: ops
+            org: spiral
             id: "601164058091"
-            email: aws-spiral+ops@defn.us
             sso_role: Administrator
+            email: aws-spiral+ops@defn.us
             name: ops
             prefix: ""
             imported: "no"
             "t": ops
           ci:
-            org: spiral
             account: ci
+            org: spiral
             id: "371657257885"
-            email: aws-spiral+pub@defn.us
             sso_role: Administrator
-            "t": pub
+            email: aws-spiral+pub@defn.us
             name: pub
             prefix: ""
             imported: "no"
+            "t": pub
           pub:
-            org: spiral
             account: pub
+            org: spiral
             id: "130046154300"
-            email: aws-spiral+dmz@defn.us
             sso_role: Administrator
-            "t": dmz
+            email: aws-spiral+dmz@defn.us
             name: dmz
             prefix: ""
             imported: "no"
+            "t": dmz
           hub:
-            org: spiral
             account: hub
+            org: spiral
             id: "216704421225"
-            email: aws-spiral+hub@defn.us
             sso_role: Administrator
+            email: aws-spiral+hub@defn.us
             name: hub
             prefix: ""
             imported: "no"
             "t": hub
           dev:
-            org: spiral
             account: dev
+            org: spiral
             id: "308726031860"
-            email: aws-spiral+dev@defn.us
             sso_role: Administrator
+            email: aws-spiral+dev@defn.us
             name: dev
             prefix: ""
             imported: "no"
             "t": dev
           prod:
-            org: spiral
             account: prod
+            org: spiral
             id: "398258703387"
-            email: aws-spiral+sec@defn.us
             sso_role: Administrator
-            "t": sec
+            email: aws-spiral+sec@defn.us
             name: sec
             prefix: ""
             imported: "no"
+            "t": sec
       vault:
         region: us-east-2
         url: https://d-9a672a0e52.awsapps.com/start
         account:
           org:
-            org: vault
             account: org
+            org: vault
             id: "475528707847"
-            email: aws-vault@defn.us
             sso_role: Administrator
+            email: aws-vault@defn.us
             name: vault
             prefix: ""
             imported: "yes"
+            "t": org
           log:
-            org: vault
             account: log
+            org: vault
             id: "749185891195"
-            email: aws-vault-audit@defn.sh
             sso_role: Administrator
-            "t": audit
+            email: aws-vault-audit@defn.sh
             name: audit
             prefix: ""
             imported: "yes"
+            "t": audit
           net:
-            org: vault
             account: net
+            org: vault
             id: "915207860232"
-            email: aws-vault-transit@defn.sh
             sso_role: Administrator
-            "t": transit
+            email: aws-vault-transit@defn.sh
             name: transit
             prefix: ""
             imported: "yes"
+            "t": transit
           lib:
-            org: vault
             account: lib
+            org: vault
             id: "066356637485"
-            email: aws-vault-library@defn.sh
             sso_role: Administrator
-            "t": library
+            email: aws-vault-library@defn.sh
             name: library
             prefix: ""
             imported: "yes"
+            "t": library
           ops:
-            org: vault
             account: ops
+            org: vault
             id: "188066400611"
-            email: aws-vault-ops@defn.sh
             sso_role: Administrator
+            email: aws-vault-ops@defn.sh
             name: ops
             prefix: ""
-            "t": ops
             imported: "yes"
+            "t": ops
           ci:
-            org: vault
             account: ci
+            org: vault
             id: "313228123503"
-            email: aws-vault-vault0@defn.sh
             sso_role: Administrator
-            "t": vault0
+            email: aws-vault-vault0@defn.sh
             name: vault0
             prefix: ""
             imported: "yes"
+            "t": vault0
           pub:
-            org: vault
             account: pub
+            org: vault
             id: "851162413429"
-            email: aws-vault-pub@defn.sh
             sso_role: Administrator
+            email: aws-vault-pub@defn.sh
             name: pub
             prefix: ""
-            "t": pub
             imported: "yes"
+            "t": pub
           hub:
-            org: vault
             account: hub
+            org: vault
             id: "539099112425"
-            email: aws-vault-hub@defn.sh
             sso_role: Administrator
+            email: aws-vault-hub@defn.sh
             name: hub
             prefix: ""
-            "t": hub
             imported: "yes"
+            "t": hub
           dev:
-            org: vault
             account: dev
+            org: vault
             id: "497393606242"
-            email: aws-vault-dev@defn.sh
             sso_role: Administrator
+            email: aws-vault-dev@defn.sh
             name: dev
             prefix: ""
-            "t": dev
             imported: "yes"
+            "t": dev
           prod:
-            org: vault
             account: prod
+            org: vault
             id: "040769490632"
-            email: aws-vault-vault1@defn.sh
             sso_role: Administrator
-            "t": vault1
+            email: aws-vault-vault1@defn.sh
             name: vault1
             prefix: ""
             imported: "yes"
+            "t": vault1
       whoa:
         region: us-west-2
         url: https://whoa-0.awsapps.com/start
         account:
           org:
-            org: whoa
             account: org
+            org: whoa
             id: "389772512117"
-            email: aws-whoa@defn.us
             sso_role: Administrator
+            email: aws-whoa@defn.us
             name: whoa
             prefix: ""
             imported: "yes"
+            "t": org
           net:
-            org: whoa
             account: net
+            org: whoa
             id: "464075062390"
+            sso_role: Administrator
             email: whoa-secrets@imma.io
-            sso_role: Administrator
-            "t": secrets
             name: secrets
-            imported: "yes"
             prefix: whoa-
+            imported: "yes"
+            "t": secrets
           hub:
-            org: whoa
             account: hub
+            org: whoa
             id: "462478722501"
+            sso_role: Administrator
             email: whoa-hub@imma.io
-            sso_role: Administrator
             name: hub
+            prefix: whoa-
+            imported: "yes"
             "t": hub
-            imported: "yes"
-            prefix: whoa-
           dev:
-            org: whoa
             account: dev
-            id: "439761234835"
-            email: whoa-dev@imma.io
-            sso_role: Administrator
-            name: dev
-            "t": dev
-            imported: "yes"
-            prefix: whoa-
-          pub:
             org: whoa
-            account: pub
-            id: "204827926367"
-            email: whoa-prod@imma.io
+            id: "439761234835"
             sso_role: Administrator
-            "t": prod
-            name: prod
-            imported: "yes"
+            email: whoa-dev@imma.io
+            name: dev
             prefix: whoa-
+            imported: "yes"
+            "t": dev
+          pub:
+            account: pub
+            org: whoa
+            id: "204827926367"
+            sso_role: Administrator
+            email: whoa-prod@imma.io
+            name: prod
+            prefix: whoa-
+            imported: "yes"
+            "t": prod
