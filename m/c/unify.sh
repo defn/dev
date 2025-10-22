@@ -13,7 +13,6 @@ function main {
 	# Unify with schema validation and export
 	if cue eval -c >/dev/null; then
 		cue export --out yaml | yq 'del(.config.repo.[].updatedAt)' >main.yaml
-		git difftool --no-prompt --extcmd='dyff between' main.yaml
 	fi
 }
 
