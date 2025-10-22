@@ -4,21 +4,16 @@ org: [ORG=string]: close({
 	region: "us-west-2" | "us-east-2" | "us-east-1"
 	url:    =~"https://[a-z0-9-]+.awsapps.com/start"
 	account: [ACCOUNT=string]: close({
-		account:   ACCOUNT
-		org:       ORG
-		id!:       =~"^[0-9]+$"
-		email!:    string
-        sso_role: string | *"Administrator"
+		account:  ACCOUNT
+		org:      ORG
+		id!:      =~"^[0-9]+$"
+		email!:   string
+		sso_role: string | *"Administrator"
 
-		name:     string | *ACCOUNT
-        if ACCOUNT == "org" {
-            name: ORG
-        }
-
-		prefix:   string | *""
-		imported: "yes" | *"no"
-
-		t: string | *ACCOUNT
+		name: string | *ACCOUNT
+		if ACCOUNT == "org" {
+			name: ORG
+		}
 	})
 })
 
@@ -86,711 +81,571 @@ org: {
 org: {
 	chamber: account: {
 		org: {
-			id:       "730917619329"
-			email:    "aws-chamber@defn.us"
-			imported: "yes"
+			id:    "730917619329"
+			email: "aws-chamber@defn.us"
 		}
 		"1": {
-			id:       "741346472057"
-			email:    "aws-cd@defn.us"
-			name:     "defn-cd"
-			imported: "yes"
+			id:    "741346472057"
+			email: "aws-cd@defn.us"
+			name:  "defn-cd"
 		}
 		"2": {
-			id:       "447993872368"
-			email:    "aws-ci@defn.us"
-			name:     "defn-ci"
-			imported: "yes"
+			id:    "447993872368"
+			email: "aws-ci@defn.us"
+			name:  "defn-ci"
 		}
 		"3": {
-			id:       "463050069968"
-			email:    "aws-users@defn.us"
-			name:     "defn-security"
-			imported: "yes"
+			id:    "463050069968"
+			email: "aws-users@defn.us"
+			name:  "defn-security"
 		}
 		"4": {
-			id:       "368890376620"
-			email:    "chamber-4@defn.us"
-			name:     "chamber-4"
-			imported: "yes"
+			id:    "368890376620"
+			email: "chamber-4@defn.us"
+			name:  "chamber-4"
 		}
 		"5": {
-			id:       "200733412967"
-			email:    "chamber-5@defn.us"
-			name:     "chamber-5"
-			imported: "yes"
+			id:    "200733412967"
+			email: "chamber-5@defn.us"
+			name:  "chamber-5"
 		}
 		"6": {
-			id:       "493089153027"
-			email:    "chamber-6@defn.us"
-			name:     "chamber-6"
-			imported: "yes"
+			id:    "493089153027"
+			email: "chamber-6@defn.us"
+			name:  "chamber-6"
 		}
 		"7": {
-			id:       "837425503386"
-			email:    "chamber-7@defn.us"
-			name:     "chamber-7"
-			imported: "yes"
+			id:    "837425503386"
+			email: "chamber-7@defn.us"
+			name:  "chamber-7"
 		}
 		"8": {
-			id:       "773314335856"
-			email:    "chamber-8@defn.us"
-			name:     "chamber-8"
-			imported: "yes"
+			id:    "773314335856"
+			email: "chamber-8@defn.us"
+			name:  "chamber-8"
 		}
 		"9": {
-			id:       "950940975070"
-			email:    "chamber-9@defn.us"
-			name:     "chamber-9"
-			imported: "yes"
+			id:    "950940975070"
+			email: "chamber-9@defn.us"
+			name:  "chamber-9"
 		}
 		a: {
-			id:       "503577294851"
-			email:    "defn-a@imma.io"
-			name:     "defn-a"
-			imported: "yes"
+			id:    "503577294851"
+			email: "defn-a@imma.io"
+			name:  "defn-a"
 		}
 		b: {
-			id:       "310940910494"
-			email:    "imma-admin1@imma.io"
-			name:     "defn-b"
-			imported: "yes"
+			id:    "310940910494"
+			email: "imma-admin1@imma.io"
+			name:  "defn-b"
 		}
 		c: {
-			id:       "047633732615"
-			email:    "dev-eng1@imma.io"
-			name:     "defn-c"
-			imported: "yes"
+			id:    "047633732615"
+			email: "dev-eng1@imma.io"
+			name:  "defn-c"
 		}
 		d: {
-			id:       "699441347021"
-			email:    "box-adm1@imma.io"
-			name:     "defn-d"
-			imported: "yes"
+			id:    "699441347021"
+			email: "box-adm1@imma.io"
+			name:  "defn-d"
 		}
 		e: {
-			id:       "171831323337"
-			email:    "stg-eng1@imma.io"
-			name:     "defn-e"
-			imported: "yes"
+			id:    "171831323337"
+			email: "stg-eng1@imma.io"
+			name:  "defn-e"
 		}
 		f: {
-			id:       "842022523232"
-			email:    "usr-admin1@imma.io"
-			name:     "defn-f"
-			imported: "yes"
+			id:    "842022523232"
+			email: "usr-admin1@imma.io"
+			name:  "defn-f"
 		}
 		g: {
-			id:       "023867963778"
-			email:    "usr-adm1@imma.io"
-			name:     "defn-g"
-			imported: "yes"
+			id:    "023867963778"
+			email: "usr-adm1@imma.io"
+			name:  "defn-g"
 		}
 		h: {
-			id:       "371020107387"
-			email:    "usr-eng1@imma.io"
-			name:     "defn-h"
-			imported: "yes"
+			id:    "371020107387"
+			email: "usr-eng1@imma.io"
+			name:  "defn-h"
 		}
 		i: {
-			id:       "290132238209"
-			email:    "aws-admin1@defn.us"
-			name:     "defn-i"
-			imported: "yes"
+			id:    "290132238209"
+			email: "aws-admin1@defn.us"
+			name:  "defn-i"
 		}
 		j: {
-			id:       "738433022197"
-			email:    "aws-development1@defn.us"
-			name:     "defn-j"
-			imported: "yes"
+			id:    "738433022197"
+			email: "aws-development1@defn.us"
+			name:  "defn-j"
 		}
 		l: {
-			id:       "991300382347"
-			email:    "aws-staging1@defn.us"
-			name:     "defn-l"
-			imported: "yes"
+			id:    "991300382347"
+			email: "aws-staging1@defn.us"
+			name:  "defn-l"
 		}
 		m: {
-			id:       "684895750259"
-			email:    "defn-m@defn.us"
-			name:     "defn-m"
-			imported: "yes"
+			id:    "684895750259"
+			email: "defn-m@defn.us"
+			name:  "defn-m"
 		}
 		n: {
-			id:       "705881812506"
-			email:    "defn-n@defn.us"
-			name:     "defn-n"
-			imported: "yes"
+			id:    "705881812506"
+			email: "defn-n@defn.us"
+			name:  "defn-n"
 		}
 		o: {
-			id:       "307136835824"
-			email:    "defn-o@defn.us"
-			name:     "defn-o"
-			imported: "yes"
+			id:    "307136835824"
+			email: "defn-o@defn.us"
+			name:  "defn-o"
 		}
 		p: {
-			id:       "706168331526"
-			email:    "defn-p@defn.us"
-			name:     "defn-p"
-			imported: "yes"
+			id:    "706168331526"
+			email: "defn-p@defn.us"
+			name:  "defn-p"
 		}
 		q: {
-			id:       "217047480856"
-			email:    "aws-dev@defn.us"
-			name:     "defn-dev"
-			imported: "yes"
+			id:    "217047480856"
+			email: "aws-dev@defn.us"
+			name:  "defn-dev"
 		}
 		r: {
-			id:       "416221726155"
-			email:    "defn-r@imma.io"
-			name:     "defn-r"
-			imported: "yes"
+			id:    "416221726155"
+			email: "defn-r@imma.io"
+			name:  "defn-r"
 		}
 		s: {
-			id:       "840650118369"
-			email:    "defn-s@imma.io"
-			name:     "defn-s"
-			imported: "yes"
+			id:    "840650118369"
+			email: "defn-s@imma.io"
+			name:  "defn-s"
 		}
 		t: {
-			id:       "490895200523"
-			email:    "defn-t@imma.io"
-			name:     "defn-t"
-			imported: "yes"
+			id:    "490895200523"
+			email: "defn-t@imma.io"
+			name:  "defn-t"
 		}
 		u: {
-			id:       "467995590869"
-			email:    "aws-qa@defn.us"
-			name:     "defn-qa"
-			imported: "yes"
+			id:    "467995590869"
+			email: "aws-qa@defn.us"
+			name:  "defn-qa"
 		}
 		v: {
-			id:       "979368042862"
-			email:    "defn-v@imma.io"
-			name:     "defn-v"
-			imported: "yes"
+			id:    "979368042862"
+			email: "defn-v@imma.io"
+			name:  "defn-v"
 		}
 		w: {
-			id:       "313387692116"
-			email:    "defn-w@imma.io"
-			name:     "defn-w"
-			imported: "yes"
+			id:    "313387692116"
+			email: "defn-w@imma.io"
+			name:  "defn-w"
 		}
 		x: {
-			id:       "834936839208"
-			email:    "aws-stage@defn.us"
-			name:     "defn-stage"
-			imported: "yes"
+			id:    "834936839208"
+			email: "aws-stage@defn.us"
+			name:  "defn-stage"
 		}
 		y: {
-			id:       "153556747817"
-			email:    "aws-prod@defn.us"
-			name:     "defn-prod"
-			imported: "yes"
+			id:    "153556747817"
+			email: "aws-prod@defn.us"
+			name:  "defn-prod"
 		}
 		z: {
-			id:       "037804009879"
-			email:    "aws-hub@defn.us"
-			name:     "defn-hub"
-			imported: "yes"
+			id:    "037804009879"
+			email: "aws-hub@defn.us"
+			name:  "defn-hub"
 		}
 	}
 	circus: account: {
 		org: {
-			id:       "036139182623"
-			email:    "aws-circus@defn.us"
-			imported: "yes"
-		}
-		net: {
-			id:       "002516226222"
-			email:    "aws-circus-transit@defn.sh"
-			t:        "transit"
-			name:     "transit"
-			imported: "yes"
-		}
-		log: {
-			id:       "707476523482"
-			email:    "aws-circus-audit@defn.sh"
-			t:        "audit"
-			name:     "audit"
-			imported: "yes"
+			id:    "036139182623"
+			email: "aws-circus@defn.us"
 		}
 		lib: {
-			id:       "497790518354"
-			email:    "aws-circus-govcloud@defn.sh"
-			t:        "govcloud"
-			name:     "govcloud"
-			imported: "yes"
+			id:    "497790518354"
+			email: "aws-circus-govcloud@defn.sh"
+			name:  "govcloud"
+		}
+		log: {
+			id:    "707476523482"
+			email: "aws-circus-audit@defn.sh"
+			name:  "audit"
+		}
+		net: {
+			id:    "002516226222"
+			email: "aws-circus-transit@defn.sh"
+			name:  "transit"
 		}
 		ops: {
-			id:       "415618116579"
-			email:    "aws-circus-ops@defn.sh"
-			imported: "yes"
+			id:    "415618116579"
+			email: "aws-circus-ops@defn.sh"
 		}
 	}
 	coil: account: {
 		org: {
-			id:       "138291560003"
-			email:    "aws-coil@defn.us"
-		}
-		net: {
-			id:       "278790191486"
-			email:    "aws-coil+net@defn.us"
-		}
-		lib: {
-			id:       "160764896647"
-			email:    "aws-coil+lib@defn.us"
+			id:    "138291560003"
+			email: "aws-coil@defn.us"
 		}
 		hub: {
-			id:       "453991412409"
-			email:    "aws-coil+hub@defn.us"
+			id:    "453991412409"
+			email: "aws-coil+hub@defn.us"
+		}
+		lib: {
+			id:    "160764896647"
+			email: "aws-coil+lib@defn.us"
+		}
+		net: {
+			id:    "278790191486"
+			email: "aws-coil+net@defn.us"
 		}
 	}
 	curl: account: {
 		org: {
-			id:       "424535767618"
-			email:    "aws-curl@defn.us"
-		}
-		net: {
-			id:       "101142583332"
-			email:    "aws-curl+net@defn.us"
-		}
-		lib: {
-			id:       "298406631539"
-			email:    "aws-curl+lib@defn.us"
+			id:    "424535767618"
+			email: "aws-curl@defn.us"
 		}
 		hub: {
-			id:       "804430872255"
-			email:    "aws-curl+hub@defn.us"
+			id:    "804430872255"
+			email: "aws-curl+hub@defn.us"
+		}
+		lib: {
+			id:    "298406631539"
+			email: "aws-curl+lib@defn.us"
+		}
+		net: {
+			id:    "101142583332"
+			email: "aws-curl+net@defn.us"
 		}
 	}
 	defn: account: org: {
-		id:       "510430971399"
-		email:    "iam+bootstrap@defn.sh"
+		id:    "510430971399"
+		email: "iam+bootstrap@defn.sh"
 	}
 	fogg: account: {
 		org: {
-			id:       "328216504962"
-			email:    "spiral@defn.sh"
-			imported: "yes"
-		}
-		net: {
-			id:       "060659916753"
-			email:    "fogg-asset@defn.sh"
-			t:        "asset"
-			name:     "asset"
-			prefix:   "fogg-"
-			imported: "yes"
-		}
-		log: {
-			id:       "844609041254"
-			email:    "fogg-circus@defn.sh"
-			t:        "circus"
-			name:     "circus"
-			prefix:   "fogg-"
-			imported: "yes"
-		}
-		lib: {
-			id:       "624713464251"
-			email:    "fogg-data@defn.sh"
-			t:        "data"
-			name:     "data"
-			prefix:   "fogg-"
-			imported: "yes"
-		}
-		ops: {
-			id:       "318746665903"
-			email:    "fogg-gateway@defn.sh"
-			t:        "gateway"
-			name:     "gateway"
-			prefix:   "fogg-"
-			imported: "yes"
+			id:    "328216504962"
+			email: "spiral@defn.sh"
 		}
 		ci: {
-			id:       "812459563189"
-			email:    "fogg-home@defn.sh"
-			t:        "home"
-			name:     "home"
-			prefix:   "fogg-"
-			imported: "yes"
-		}
-		hub: {
-			id:       "337248635000"
-			email:    "fogg-hub@defn.sh"
-			prefix:   "fogg-"
-			imported: "yes"
-		}
-		prod: {
-			id:       "565963418226"
-			email:    "fogg-postx@defn.sh"
-			t:        "postx"
-			name:     "postx"
-			prefix:   "fogg-"
-			imported: "yes"
+			id:    "812459563189"
+			email: "fogg-home@defn.sh"
+			name:  "home"
 		}
 		dev: {
-			id:       "442766271046"
-			email:    "fogg-sandbox@defn.sh"
-			t:        "sandbox"
-			name:     "sandbox"
-			prefix:   "fogg-"
-			imported: "yes"
+			id:    "442766271046"
+			email: "fogg-sandbox@defn.sh"
+			name:  "sandbox"
+		}
+		hub: {
+			id:    "337248635000"
+			email: "fogg-hub@defn.sh"
+		}
+		lib: {
+			id:    "624713464251"
+			email: "fogg-data@defn.sh"
+			name:  "data"
+		}
+		log: {
+			id:    "844609041254"
+			email: "fogg-circus@defn.sh"
+			name:  "circus"
+		}
+		net: {
+			id:    "060659916753"
+			email: "fogg-asset@defn.sh"
+			name:  "asset"
+		}
+		ops: {
+			id:    "318746665903"
+			email: "fogg-gateway@defn.sh"
+			name:  "gateway"
+		}
+		prod: {
+			id:    "565963418226"
+			email: "fogg-postx@defn.sh"
+			name:  "postx"
 		}
 		pub: {
-			id:       "372333168887"
-			email:    "fogg-security@defn.sh"
-			t:        "security"
-			name:     "security"
-			prefix:   "fogg-"
-			imported: "yes"
+			id:    "372333168887"
+			email: "fogg-security@defn.sh"
+			name:  "security"
 		}
 	}
 	gyre: account: {
 		org: {
-			id:       "065163301604"
-			email:    "aws-gyre@defn.us"
+			id:    "065163301604"
+			email: "aws-gyre@defn.us"
 		}
 		ops: {
-			id:       "319951235442"
-			email:    "aws-gyre+ops@defn.us"
+			id:    "319951235442"
+			email: "aws-gyre+ops@defn.us"
 		}
 	}
 	helix: account: {
 		org: {
-			id:       "816178966829"
-			email:    "aws-helix@defn.sh"
-		}
-		log: {
-			id:       "664427926343"
-			email:    "aws-helix+log@defn.sh"
-		}
-		net: {
-			id:       "504722108514"
-			email:    "aws-helix+net@defn.sh"
-		}
-		lib: {
-			id:       "377857698578"
-			email:    "aws-helix+lib@defn.sh"
-		}
-		ops: {
-			id:       "368812692254"
-			email:    "aws-helix+ops@defn.sh"
+			id:    "816178966829"
+			email: "aws-helix@defn.sh"
 		}
 		ci: {
-			id:       "018520313738"
-			email:    "aws-helix+sec@defn.sh"
-			t:        "sec"
-			name:     "sec"
-		}
-		pub: {
-			id:       "536806623881"
-			email:    "aws-helix+pub@defn.sh"
-		}
-		hub: {
-			id:       "436043820387"
-			email:    "aws-helix+hub@defn.sh"
+			id:    "018520313738"
+			email: "aws-helix+sec@defn.sh"
+			name:  "sec"
 		}
 		dev: {
-			id:       "843784871878"
-			email:    "aws-helix+dev@defn.sh"
+			id:    "843784871878"
+			email: "aws-helix+dev@defn.sh"
+		}
+		hub: {
+			id:    "436043820387"
+			email: "aws-helix+hub@defn.sh"
+		}
+		lib: {
+			id:    "377857698578"
+			email: "aws-helix+lib@defn.sh"
+		}
+		log: {
+			id:    "664427926343"
+			email: "aws-helix+log@defn.sh"
+		}
+		net: {
+			id:    "504722108514"
+			email: "aws-helix+net@defn.sh"
+		}
+		ops: {
+			id:    "368812692254"
+			email: "aws-helix+ops@defn.sh"
 		}
 		prod: {
-			id:       "724643698007"
-			email:    "aws-helix+dmz@defn.sh"
-			t:        "dmz"
-			name:     "dmz"
+			id:    "724643698007"
+			email: "aws-helix+dmz@defn.sh"
+			name:  "dmz"
+		}
+		pub: {
+			id:    "536806623881"
+			email: "aws-helix+pub@defn.sh"
 		}
 	}
 	imma: account: {
 		org: {
-			id:       "548373030883"
-			email:    "aws-imma@defn.us"
-			imported: "yes"
-		}
-		net: {
-			id:       "246197522468"
-			email:    "imma-defn@defn.us"
-			t:        "defn"
-			name:     "imma-defn"
-			imported: "yes"
-		}
-		log: {
-			id:       "289716781198"
-			email:    "imma-dgwyn@defn.us"
-			t:        "dgwyn"
-			name:     "imma-dgwyn"
-			imported: "yes"
-		}
-		lib: {
-			id:       "516851121506"
-			email:    "imma-tolan@defn.us"
-			t:        "tolan"
-			name:     "imma-tolan"
-			imported: "yes"
+			id:    "548373030883"
+			email: "aws-imma@defn.us"
 		}
 		dev: {
-			id:       "445584037541"
-			email:    "imma-dev@imma.io"
-			name:     "imma-dev"
-			imported: "yes"
+			id:    "445584037541"
+			email: "imma-dev@imma.io"
+			name:  "imma-dev"
+		}
+		lib: {
+			id:    "516851121506"
+			email: "imma-tolan@defn.us"
+			name:  "imma-tolan"
+		}
+		log: {
+			id:    "289716781198"
+			email: "imma-dgwyn@defn.us"
+			name:  "imma-dgwyn"
+		}
+		net: {
+			id:    "246197522468"
+			email: "imma-defn@defn.us"
+			name:  "imma-defn"
 		}
 		pub: {
-			id:       "766142996227"
-			email:    "imma-prod@imma.io"
-			t:        "prod"
-			name:     "imma-prod"
-			imported: "yes"
+			id:    "766142996227"
+			email: "imma-prod@imma.io"
+			name:  "imma-prod"
 		}
 	}
 	immanent: account: {
 		org: {
-			id:       "545070380609"
-			email:    "aws-immanent@defn.us"
-			imported: "yes"
-		}
-		patterner: {
-			id:       "143220204648"
-			email:    "immanent-patterner@defn.us"
-			name:     "immanent-patterner"
-			t:        "patterner"
-			imported: "yes"
-		}
-		windkey: {
-			id:       "095764861781"
-			email:    "immanent-windkey@defn.us"
-			name:     "immanent-windkey"
-			t:        "windkey"
-			imported: "yes"
-		}
-		summoner: {
-			id:       "397411277587"
-			email:    "immanent-summoner@defn.us"
-			name:     "immanent-summoner"
-			t:        "summoner"
-			imported: "yes"
-		}
-		herbal: {
-			id:       "165452499696"
-			email:    "immanent-herbal@defn.us"
-			name:     "immanent-herbal"
-			t:        "herbal"
-			imported: "yes"
-		}
-		namer: {
-			id:       "856549015893"
-			email:    "immanent-namer@defn.us"
-			name:     "immanent-namer"
-			t:        "namer"
-			imported: "yes"
-		}
-		ged: {
-			id:       "640792184178"
-			email:    "immanent-ged@defn.us"
-			name:     "immanent-ged"
-			t:        "ged"
-			imported: "yes"
-		}
-		roke: {
-			id:       "892560628624"
-			email:    "immanent-roke@defn.us"
-			name:     "immanent-roke"
-			t:        "roke"
-			imported: "yes"
-		}
-		chanter: {
-			id:       "071244154667"
-			email:    "immanent-chanter@defn.us"
-			name:     "immanent-chanter"
-			t:        "chanter"
-			imported: "yes"
+			id:    "545070380609"
+			email: "aws-immanent@defn.us"
 		}
 		changer: {
-			id:       "003884504807"
-			email:    "immanent-changer@defn.us"
-			name:     "immanent-changer"
-			t:        "changer"
-			imported: "yes"
+			id:    "003884504807"
+			email: "immanent-changer@defn.us"
+			name:  "immanent-changer"
 		}
-		hand: {
-			id:       "826250190242"
-			email:    "immanent-hand@defn.us"
-			name:     "immanent-hand"
-			t:        "hand"
-			imported: "yes"
+		chanter: {
+			id:    "071244154667"
+			email: "immanent-chanter@defn.us"
+			name:  "immanent-chanter"
 		}
 		doorkeeper: {
-			id:       "013267321144"
-			email:    "immanent-doorkeeper@defn.us"
-			name:     "immanent-doorkeeper"
-			t:        "doorkeeper"
-			imported: "yes"
+			id:    "013267321144"
+			email: "immanent-doorkeeper@defn.us"
+			name:  "immanent-doorkeeper"
+		}
+		ged: {
+			id:    "640792184178"
+			email: "immanent-ged@defn.us"
+			name:  "immanent-ged"
+		}
+		hand: {
+			id:    "826250190242"
+			email: "immanent-hand@defn.us"
+			name:  "immanent-hand"
+		}
+		herbal: {
+			id:    "165452499696"
+			email: "immanent-herbal@defn.us"
+			name:  "immanent-herbal"
+		}
+		namer: {
+			id:    "856549015893"
+			email: "immanent-namer@defn.us"
+			name:  "immanent-namer"
+		}
+		patterner: {
+			id:    "143220204648"
+			email: "immanent-patterner@defn.us"
+			name:  "immanent-patterner"
+		}
+		roke: {
+			id:    "892560628624"
+			email: "immanent-roke@defn.us"
+			name:  "immanent-roke"
+		}
+		summoner: {
+			id:    "397411277587"
+			email: "immanent-summoner@defn.us"
+			name:  "immanent-summoner"
+		}
+		windkey: {
+			id:    "095764861781"
+			email: "immanent-windkey@defn.us"
+			name:  "immanent-windkey"
 		}
 	}
 	jianghu: account: {
 		org: {
-			id:       "657613322961"
-			email:    "aws-jianghu@defn.us"
-			imported: "yes"
-		}
-		net: {
-			id:       "025636091251"
-			email:    "tahoe@defn.us"
-			t:        "tahoe"
-			name:     "tahoe"
-			imported: "yes"
+			id:    "657613322961"
+			email: "aws-jianghu@defn.us"
 		}
 		log: {
-			id:       "298431841138"
-			email:    "klamath@defn.us"
-			t:        "klamath"
-			name:     "klamath"
-			imported: "yes"
+			id:    "298431841138"
+			email: "klamath@defn.us"
+			name:  "klamath"
+		}
+		net: {
+			id:    "025636091251"
+			email: "tahoe@defn.us"
+			name:  "tahoe"
 		}
 	}
 	spiral: account: {
 		org: {
-			id:       "232091571197"
-			email:    "aws-spiral@defn.us"
-		}
-		log: {
-			id:       "442333715734"
-			email:    "aws-spiral+log@defn.us"
-		}
-		net: {
-			id:       "057533398557"
-			email:    "aws-spiral+net@defn.us"
-		}
-		lib: {
-			id:       "073874947996"
-			email:    "aws-spiral+lib@defn.us"
-		}
-		ops: {
-			id:       "601164058091"
-			email:    "aws-spiral+ops@defn.us"
+			id:    "232091571197"
+			email: "aws-spiral@defn.us"
 		}
 		ci: {
-			id:       "371657257885"
-			email:    "aws-spiral+pub@defn.us"
-			t:        "pub"
-			name:     "pub"
-		}
-		pub: {
-			id:       "130046154300"
-			email:    "aws-spiral+dmz@defn.us"
-			t:        "dmz"
-			name:     "dmz"
-		}
-		hub: {
-			id:       "216704421225"
-			email:    "aws-spiral+hub@defn.us"
+			id:    "371657257885"
+			email: "aws-spiral+pub@defn.us"
+			name:  "pub"
 		}
 		dev: {
-			id:       "308726031860"
-			email:    "aws-spiral+dev@defn.us"
+			id:    "308726031860"
+			email: "aws-spiral+dev@defn.us"
+		}
+		hub: {
+			id:    "216704421225"
+			email: "aws-spiral+hub@defn.us"
+		}
+		lib: {
+			id:    "073874947996"
+			email: "aws-spiral+lib@defn.us"
+		}
+		log: {
+			id:    "442333715734"
+			email: "aws-spiral+log@defn.us"
+		}
+		net: {
+			id:    "057533398557"
+			email: "aws-spiral+net@defn.us"
+		}
+		ops: {
+			id:    "601164058091"
+			email: "aws-spiral+ops@defn.us"
 		}
 		prod: {
-			id:       "398258703387"
-			email:    "aws-spiral+sec@defn.us"
-			t:        "sec"
-			name:     "sec"
+			id:    "398258703387"
+			email: "aws-spiral+sec@defn.us"
+			name:  "sec"
+		}
+		pub: {
+			id:    "130046154300"
+			email: "aws-spiral+dmz@defn.us"
+			name:  "dmz"
 		}
 	}
 	vault: account: {
 		org: {
-			id:       "475528707847"
-			email:    "aws-vault@defn.us"
-			imported: "yes"
-		}
-		log: {
-			id:       "749185891195"
-			email:    "aws-vault-audit@defn.sh"
-			t:        "audit"
-			name:     "audit"
-			imported: "yes"
-		}
-		net: {
-			id:       "915207860232"
-			email:    "aws-vault-transit@defn.sh"
-			t:        "transit"
-			name:     "transit"
-			imported: "yes"
-		}
-		lib: {
-			id:       "066356637485"
-			email:    "aws-vault-library@defn.sh"
-			t:        "library"
-			name:     "library"
-			imported: "yes"
-		}
-		ops: {
-			id:       "188066400611"
-			email:    "aws-vault-ops@defn.sh"
-			imported: "yes"
+			id:    "475528707847"
+			email: "aws-vault@defn.us"
 		}
 		ci: {
-			id:       "313228123503"
-			email:    "aws-vault-vault0@defn.sh"
-			t:        "vault0"
-			name:     "vault0"
-			imported: "yes"
-		}
-		pub: {
-			id:       "851162413429"
-			email:    "aws-vault-pub@defn.sh"
-			imported: "yes"
-		}
-		hub: {
-			id:       "539099112425"
-			email:    "aws-vault-hub@defn.sh"
-			imported: "yes"
+			id:    "313228123503"
+			email: "aws-vault-vault0@defn.sh"
+			name:  "vault0"
 		}
 		dev: {
-			id:       "497393606242"
-			email:    "aws-vault-dev@defn.sh"
-			imported: "yes"
+			id:    "497393606242"
+			email: "aws-vault-dev@defn.sh"
+		}
+		hub: {
+			id:    "539099112425"
+			email: "aws-vault-hub@defn.sh"
+		}
+		lib: {
+			id:    "066356637485"
+			email: "aws-vault-library@defn.sh"
+			name:  "library"
+		}
+		log: {
+			id:    "749185891195"
+			email: "aws-vault-audit@defn.sh"
+			name:  "audit"
+		}
+		net: {
+			id:    "915207860232"
+			email: "aws-vault-transit@defn.sh"
+			name:  "transit"
+		}
+		ops: {
+			id:    "188066400611"
+			email: "aws-vault-ops@defn.sh"
 		}
 		prod: {
-			id:       "040769490632"
-			email:    "aws-vault-vault1@defn.sh"
-			t:        "vault1"
-			name:     "vault1"
-			imported: "yes"
+			id:    "040769490632"
+			email: "aws-vault-vault1@defn.sh"
+			name:  "vault1"
+		}
+		pub: {
+			id:    "851162413429"
+			email: "aws-vault-pub@defn.sh"
 		}
 	}
 	whoa: account: {
 		org: {
-			id:       "389772512117"
-			email:    "aws-whoa@defn.us"
-			imported: "yes"
-		}
-		net: {
-			id:       "464075062390"
-			email:    "whoa-secrets@imma.io"
-			t:        "secrets"
-			name:     "secrets"
-			imported: "yes"
-			prefix:   "whoa-"
-		}
-		hub: {
-			id:       "462478722501"
-			email:    "whoa-hub@imma.io"
-			imported: "yes"
-			prefix:   "whoa-"
+			id:    "389772512117"
+			email: "aws-whoa@defn.us"
 		}
 		dev: {
-			id:       "439761234835"
-			email:    "whoa-dev@imma.io"
-			t:        "dev"
-			imported: "yes"
-			prefix:   "whoa-"
+			id:    "439761234835"
+			email: "whoa-dev@imma.io"
+		}
+		hub: {
+			id:    "462478722501"
+			email: "whoa-hub@imma.io"
+		}
+		net: {
+			id:    "464075062390"
+			email: "whoa-secrets@imma.io"
+			name:  "secrets"
 		}
 		pub: {
-			id:       "204827926367"
-			email:    "whoa-prod@imma.io"
-			t:        "prod"
-			name:     "prod"
-			imported: "yes"
-			prefix:   "whoa-"
+			id:    "204827926367"
+			email: "whoa-prod@imma.io"
+			name:  "prod"
 		}
 	}
 }
