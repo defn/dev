@@ -5,7 +5,7 @@ function main {
 	(cd execution && ./ingest-kustomize.sh)
 	(cd application && ./ingest-github-repo.sh)
 	if cue eval -c >/dev/null; then
-		cue export --out yaml >main.yaml
+		cue export --out yaml | yq 'del(.config.repo.[].updatedAt)' >main.yaml
 		git difftool --no-prompt --extcmd='dyff between' main.yaml
 	fi
 }
