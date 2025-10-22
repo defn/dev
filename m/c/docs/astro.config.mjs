@@ -27,7 +27,7 @@ export default defineConfig({
   },
   integrations: [
     starlight({
-      title: "My Docs",
+      title: "ACUTE",
       customCss: [
         '@fontsource/roboto/400.css',
         '@fontsource/roboto/500.css',
@@ -40,7 +40,7 @@ export default defineConfig({
         {
           icon: "github",
           label: "GitHub",
-          href: "https://github.com/withastro/starlight",
+          href: "https://github.com/defn/dev",
         },
       ],
       sidebar: [
