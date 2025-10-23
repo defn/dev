@@ -11,14 +11,16 @@ import (
 input: {
 	backend: inf.#AwsBackend
 
-	organization: [NAME=string]: inf.#AwsOrganization & {
-		name: NAME
+	organization: {
+		[string]~(NAME,_): inf.#AwsOrganization & {
+			name: NAME
 
-		#no_admins: []
-		admins: [... {...}] | *#no_admins
+			#no_admins: []
+			admins: [... {...}] | *#no_admins
 
-		#no_accounts: []
-		accounts: [...inf.#AwsAccount] | *#no_accounts
+			#no_accounts: []
+			accounts: [...inf.#AwsAccount] | *#no_accounts
+		}
 	}
 }
 
@@ -53,7 +55,7 @@ input: inf.#AwsProps & {
 	}
 
 	organization: {
-		THIS=[ORG=string]: {
+		[string]~(ORG,THIS): {
 			ops_org_name:     "defn"
 			ops_account_name: "org"
 			ops_account_id:   lookup[ops_org_name].accounts[ops_account_name].id
@@ -166,12 +168,14 @@ input: inf.#AwsProps & {
 }
 
 lookup: {
-	[ORG=string]: {
-		accounts: [ACC=string]: {
-			name:     string | *ACC
-			prefix:   string | *""
-			imported: string | *"no"
-			email:    string
+	[string]~(ORG,_): {
+		accounts: {
+			[string]~(ACC,_): {
+				name:     string | *ACC
+				prefix:   string | *""
+				imported: string | *"no"
+				email:    string
+			}
 		}
 	}
 
@@ -189,7 +193,7 @@ lookup: {
 	coil: {
 		url: "https://d-90674c3cfd.awsapps.com/start"
 		accounts: {
-			[ACC=string]: {
+			[string]~(ACC,_): {
 				t:     string | *ACC
 				email: string | *"aws-coil+\(t)@defn.us"
 			}
@@ -213,7 +217,7 @@ lookup: {
 	curl: {
 		url: "https://d-926760a859.awsapps.com/start"
 		accounts: {
-			[ACC=string]: {
+			[string]~(ACC,_): {
 				t:     string | *ACC
 				email: string | *"aws-curl+\(t)@defn.us"
 			}
@@ -237,7 +241,7 @@ lookup: {
 	gyre: {
 		url: "https://d-9a6716e54a.awsapps.com/start"
 		accounts: {
-			[ACC=string]: {
+			[string]~(ACC,_): {
 				t:     string | *ACC
 				email: string | *"aws-gyre+\(t)@defn.us"
 			}
@@ -255,7 +259,7 @@ lookup: {
 	helix: {
 		url: "https://d-9a6716ffd1.awsapps.com/start"
 		accounts: {
-			[ACC=string]: {
+			[string]~(ACC,_): {
 				t:     string | *ACC
 				email: string | *"aws-helix+\(t)@defn.sh"
 			}
@@ -301,7 +305,7 @@ lookup: {
 	spiral: {
 		url: "https://d-926760b322.awsapps.com/start"
 		accounts: {
-			[ACC=string]: {
+			[string]~(ACC,_): {
 				t:     string | *ACC
 				email: string | *"aws-spiral+\(t)@defn.us"
 			}
@@ -349,7 +353,7 @@ lookup: {
 	fogg: {
 		url: "https://fogg-0.awsapps.com/start"
 		accounts: {
-			[ACC=string]: {
+			[string]~(ACC,_): {
 				t:        string | *ACC
 				email:    string | *"fogg-\(t)@defn.sh"
 				imported: "yes"
@@ -465,7 +469,7 @@ lookup: {
 	immanent: {
 		url: "https://immanent-0.awsapps.com/start"
 		accounts: {
-			[ACC=string]: {
+			[string]~(ACC,_): {
 				t:        string | *ACC
 				email:    string | *"immanent-\(t)@defn.us"
 				imported: "yes"

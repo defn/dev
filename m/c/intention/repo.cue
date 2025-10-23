@@ -3,8 +3,11 @@
 
 package intention
 
-repo: [NAME=string]: #GitRepo & {
-	name: NAME
+repo: {
+	[string]~(NAME,_): {
+		#GitRepo...
+		name: NAME
+	}
 }
 
 #GitRepo: {

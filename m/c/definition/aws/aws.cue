@@ -5,23 +5,27 @@ package aws
 
 // diagram: https://whimsical.com/aws-account-layout-D6p7mKoZiwNqZdTZnysYUy
 
-org: [ORG=string]: close({
-	region: "us-west-2" | "us-east-2" | "us-east-1"
-	url:    =~"https://[a-z0-9-]+.awsapps.com/start"
-	account: [ACCOUNT=string]: close({
-		account: ACCOUNT
-		org:     ORG
+org: {
+	[string]~(ORG,_): close({
+		region: "us-west-2" | "us-east-2" | "us-east-1"
+		url:    =~"https://[a-z0-9-]+.awsapps.com/start"
+		account: {
+			[string]~(ACCOUNT,_): close({
+				account: ACCOUNT
+				org:     ORG
 
-		id!:    =~"^[0-9]+$"
-		email!: string
-		name:   string | *ACCOUNT
-		if ACCOUNT == "org" {
-			name: ORG
+				id!:    =~"^[0-9]+$"
+				email!: string
+				name:   string | *ACCOUNT
+				if ACCOUNT == "org" {
+					name: ORG
+				}
+
+				sso_role: string | *"Administrator"
+			})
 		}
-
-		sso_role: string | *"Administrator"
 	})
-})
+}
 
 // aws account metadata
 org: close({

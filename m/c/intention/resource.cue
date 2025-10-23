@@ -5,10 +5,14 @@ package intention
 
 import definition "github.com/defn/dev/m/c/definition"
 
-resource: [NS=string]: [NAME=string]: #ConfigMap & {
-	metadata: namespace: NS
-	if definition.repo[NAME] == _|_ {
-		metadata: name: "TODO-repo-not-found-\(NAME)"
+resource: {
+	[string]~(NS,_): {
+		[string]~(NAME,_): #ConfigMap & {
+			metadata: namespace: NS
+			if definition.repo[NAME] == _|_ {
+				metadata: name: "TODO-repo-not-found-\(NAME)"
+			}
+		}
 	}
 }
 

@@ -37,6 +37,7 @@ lint:
         - .local/**
         - .cache/**
         - .npm/**
+        - m/c/docs/dist
   enabled:
     - golangci-lint2@2.5.0
     - actionlint@1.7.8

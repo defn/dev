@@ -8,15 +8,17 @@ import (
 )
 
 org: {
-	[ORG=string]: {
+	[string]~(ORG,_): {
 		region: tf.input.organization[ORG].region
 
-		account: [ACCOUNT=string]: {
-			org:      ORG
-			account:  ACCOUNT
-			id:       string
-			email:    string
-			sso_role: string | *"Administrator"
+		account: {
+			[string]~(ACCOUNT,_): {
+				org:      ORG
+				account:  ACCOUNT
+				id:       string
+				email:    string
+				sso_role: string | *"Administrator"
+			}
 		}
 	}
 
