@@ -14,6 +14,3 @@ node = "25.0.0"
 "npm:@openai/codex" = "0.47.0"
 prettier = "3.6.2"
 tilt = "0.35.2"
-aws = "2.31.20"
-gh = "2.82.1"
-"ubi:buildkite/agent" = { version = "3.110.0", exe = "buildkite-agent" }
