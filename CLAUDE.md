@@ -144,10 +144,24 @@ When asked to "run upgrade task" or similar, follow these steps:
 
 1. Run `make sync` in $HOME directory
 2. This command installs/updates system tools and configurations based on what's already in git
-3. No files should be modified in the home directory
-4. No commit is needed as this task is run purely for its side effects
+3. After sync completes, run `make mise-list` to check for available tool upgrades
+4. Execute each mise command shown in the output to upgrade tools
+5. If any mise.toml files were modified, stage and commit them with version changes listed
 
-**Note**: This task updates the local system environment to match the configuration stored in git. It ensures all tools, configurations, and system settings are properly synchronized.
+**Example commit message format:**
+```
+chore: upgrade mise tool versions
+
+- aws: 2.31.19 → 2.31.20
+- gh: 2.82.0 → 2.82.1
+- buildkite-agent: 3.109.1 → 3.110.0
+
+🤖 Generated with [Claude Code](https://claude.ai/code)
+
+Co-Authored-By: Claude <noreply@anthropic.com>
+```
+
+**Note**: This task updates the local system environment to match the configuration stored in git, then upgrades all mise-managed tools to their latest versions.
 
 ### Task: coder login
 
