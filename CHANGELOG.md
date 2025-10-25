@@ -1,5 +1,40 @@
 # Changelog
 
+## [1.39.0](https://github.com/defn/dev/compare/v1.38.0...v1.39.0) (2025-10-25)
+
+
+### Features
+
+* add Astro.js + Starlight documentation site ([570bb05](https://github.com/defn/dev/commit/570bb0549b9b5e5f988bd9f682431ace0b4c84de))
+* add AWS accounts JSON collection with Starlight pages ([25b3758](https://github.com/defn/dev/commit/25b37583b4418226efe75acc42f97cb9c72c3e77))
+* add complete AWS organization data to documentation ([d962ab3](https://github.com/defn/dev/commit/d962ab3b2f8a079e8f398748cf5eb4e81f35ad07))
+* add Roboto and Roboto Mono web fonts to documentation ([fef0493](https://github.com/defn/dev/commit/fef04934d9bcc2c6196d9edb7bcfcf064ba8e41c))
+* add Vite dev server redirect from / and /dev to /dev/ ([997ee33](https://github.com/defn/dev/commit/997ee338e6f6bcf816cdd54b4d7c1552855ab556))
+* configure GitHub Pages deployment with /docs directory ([280b5df](https://github.com/defn/dev/commit/280b5dfbcb3723f301da54bd14fee0880f5b834b))
+
+
+### Bug Fixes
+
+* add HTML redirect page for root path in dev mode ([d818ce4](https://github.com/defn/dev/commit/d818ce45433c5bdbc7ae599b7a3c05e94d64a1fd))
+* add missing print.DNXP8c50.css file referenced by HTML ([d8655b0](https://github.com/defn/dev/commit/d8655b021213fc2910b2db529efc424aac707429))
+* add site config to enable sitemap generation ([c0a8fa2](https://github.com/defn/dev/commit/c0a8fa249839295e9a575c947871edc80ec48134))
+* add trailingSlash always option for consistent URL handling ([61d7295](https://github.com/defn/dev/commit/61d72956a08db848b84ac86f5f2ee2c9f7ebcf66))
+* change AWS account links from absolute to relative paths ([d5a57e7](https://github.com/defn/dev/commit/d5a57e7aff829399df75cf76daa2e804df6b38d4))
+* change AWS links from absolute to relative for /dev base path ([2b89eff](https://github.com/defn/dev/commit/2b89effcabd2f06dd2b5239b1232e4abf2c9fa60))
+* configure site URLs for GitHub Pages deployment ([954dac7](https://github.com/defn/dev/commit/954dac7d9d693dbb8f273847bebfb7d8abe81cfc))
+* correct back link to navigate up two levels to /aws/ ([8e0fc5d](https://github.com/defn/dev/commit/8e0fc5d794827de39a63f120d8a46b132e2c8b3c))
+* prevent account IDs from wrapping to multiple lines ([1734605](https://github.com/defn/dev/commit/1734605ba1dae74745b63fd9c403b67caa3e8408))
+* remove 'm' from .gitignore and add missing chamber/m page ([c8f5a7a](https://github.com/defn/dev/commit/c8f5a7abb15edff938337a78b54e14b2c8db2bb5))
+* rename assets directory from _astro to 'a' for GitHub Pages ([a010c32](https://github.com/defn/dev/commit/a010c327a06b7e94eef78f6a5a4b41f31a55af81))
+* suppress Node.js DEP0190 deprecation warning during docs build ([dedaf52](https://github.com/defn/dev/commit/dedaf52160e063d1a3a2efa8a3730d7efebee93c))
+* suppress Vite unused import warning from Astro internals ([fd3c4d3](https://github.com/defn/dev/commit/fd3c4d3eb568b8d8fdeade0f856020735478b80c))
+* use relative back link in AWS account detail pages ([885d862](https://github.com/defn/dev/commit/885d862176fda1de5a29c342cdac6fab93389ca8))
+
+
+### Reverts
+
+* remove public/index.html redirect approach ([984ac49](https://github.com/defn/dev/commit/984ac49eb8aa262cdd18af79a738ba47a74c0498))
+
 ## [1.38.0](https://github.com/defn/dev/compare/v1.37.1...v1.38.0) (2025-10-22)
 
 
