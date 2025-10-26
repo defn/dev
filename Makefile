@@ -218,8 +218,8 @@ fast_inner:
 # Dependencies: uname command, t binary, ~/.local/bin/mise binary, mise.toml files with local tasks (upgrade, ubuntu, fixup), make command
 # Outputs: Executed Linux system upgrade/ubuntu/fixup tasks via mise, performed fast_inner sync
 sync_inner:
-	set -x; mise trust || true
-	set -x; cd m && mise install node
+	set -x; mise trust
+	set -x; cd m && mise trust && mise install node
 	if [[ "$(shell uname -s)" == "Linux" ]]; then t play-upgrade ~/.local/bin/mise run local upgrade; fi
 	if [[ "$(shell uname -s)" == "Linux" ]]; then t play-ubuntu ~/.local/bin/mise run local ubuntu; fi
 	$(MAKE) fast_inner
