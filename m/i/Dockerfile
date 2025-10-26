@@ -1,6 +1,10 @@
-# syntax=docker/dockerfile:1.14.0
+# syntax=docker.io/docker/dockerfile-upstream:1.19.0
+# https://github.com/moby/buildkit/releases
 
-FROM ubuntu:noble-20250404
+FROM ubuntu:noble-20251001
+
+ARG BASE=7
+RUN echo "$BASE"
 
 ENV DEBIAN_FRONTEND=noninteractive
 
@@ -43,14 +47,10 @@ CMD [ "/home/ubuntu/m/svc" ]
 RUN curl -sSL https://mise.run | bash
 
 # initial clone and build, long term caching
-ARG BASE=6
-RUN echo "$BASE"
 RUN git clone https://github.com/defn/dev dev && mv dev/.git . && git reset --hard && rm -rf dev
-RUN --mount=type=secret,id=GITHUB_TOKEN,env=GITHUB_TOKEN bin/with-env ~/.local/bin/mise self-update --yes || true
 RUN	--mount=type=secret,id=GITHUB_TOKEN,env=GITHUB_TOKEN bin/with-env make sync
 
 # release rebuild, short term caching
 ARG RELEASE
 RUN echo "$RELEASE"
-RUN --mount=type=secret,id=GITHUB_TOKEN,env=GITHUB_TOKEN bin/with-env ~/.local/bin/mise self-update --yes || true
 RUN	--mount=type=secret,id=GITHUB_TOKEN,env=GITHUB_TOKEN bin/with-env make sync

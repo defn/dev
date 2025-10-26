@@ -2,8 +2,6 @@ ARG FROM=ghcr.io/defn/dev:latest
 
 FROM ${FROM}
 
-RUN --mount=type=secret,id=GITHUB_TOKEN,env=GITHUB_TOKEN bin/with-env ~/.local/bin/mise self-update --yes || true
-RUN --mount=type=secret,id=GITHUB_TOKEN,env=GITHUB_TOKEN bin/with-env make sync || true
 RUN --mount=type=secret,id=GITHUB_TOKEN,env=GITHUB_TOKEN bin/with-env make sync
 
 ENTRYPOINT ["/home/ubuntu/m/entrypoint.sh"]
