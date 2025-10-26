@@ -196,7 +196,6 @@ zfs:
 # Outputs: Updated git repository, executed sync_inner target with environment wrapper
 sync:
 	git pull
-	mise trust
 	~/bin/with-env $(MAKE) sync_inner
 
 # Pull latest changes and run fast sync (mise updates only)
@@ -219,6 +218,8 @@ fast_inner:
 # Dependencies: uname command, t binary, ~/.local/bin/mise binary, mise.toml files with local tasks (upgrade, ubuntu, fixup), make command
 # Outputs: Executed Linux system upgrade/ubuntu/fixup tasks via mise, performed fast_inner sync
 sync_inner:
+	mise trust || true
+	cd m && mise install node
 	if [[ "$(shell uname -s)" == "Linux" ]]; then t play-upgrade ~/.local/bin/mise run local upgrade; fi
 	if [[ "$(shell uname -s)" == "Linux" ]]; then t play-ubuntu ~/.local/bin/mise run local ubuntu; fi
 	$(MAKE) fast_inner
