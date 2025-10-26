@@ -6,5 +6,6 @@
 # Sources ~/.bash_profile to load environment variables and aliases,
 # then executes the specified command with all arguments.
 
+mise trust
 source ~/.bash_profile
 exec "$@"
