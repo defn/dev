@@ -80,7 +80,9 @@ Darwin)
 	true export SSH_AUTH_SOCK=$HOME/.gnupg/S.gpg-agent.ssh
 	;;
 Linux)
-	true export SSH_AUTH_SOCK="$(gpgconf --list-dirs agent-ssh-socket)"
+	if type -P gpgconf >/dev/null; then
+		true export SSH_AUTH_SOCK="$(gpgconf --list-dirs agent-ssh-socket)"
+	fi
 	;;
 esac
 

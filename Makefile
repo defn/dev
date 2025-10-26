@@ -36,8 +36,8 @@ chrome-dev-gpg:
 # Dependencies: ~/.config directory, cloudflare-ddns binary, eth0 network interface, pass command, cloudflare_$(domain) password entry
 # Outputs: ~/.config/cloudflare-ddns.toml file, updated Cloudflare DNS records for *.$(name).$(domain)
 chrome-dev-dns:
-	touch ~/.config/cloudflare-ddns.toml 
-	cloudflare-ddns --domain $(domain) --record '*.$(name).$(domain)' --ip "$$(ip addr show eth0 | grep 'inet ' | awk '{print $$2}' | cut -d/ -f1)" --token "$$(pass cloudflare_$(domain))" --config ~/.config/cloudflare-ddns.toml 
+	touch ~/.config/cloudflare-ddns.toml
+	cloudflare-ddns --domain $(domain) --record '*.$(name).$(domain)' --ip "$$(ip addr show eth0 | grep 'inet ' | awk '{print $$2}' | cut -d/ -f1)" --token "$$(pass cloudflare_$(domain))" --config ~/.config/cloudflare-ddns.toml
 
 # Reinstall macOS Command Line Tools by removing and reinstalling them
 # Dependencies: /Library/Developer/CommandLineTools directory, /usr/bin/xcode-select binary, macOS system
@@ -196,6 +196,7 @@ zfs:
 # Outputs: Updated git repository, executed sync_inner target with environment wrapper
 sync:
 	git pull
+	mise trust
 	~/bin/with-env $(MAKE) sync_inner
 
 # Pull latest changes and run fast sync (mise updates only)
