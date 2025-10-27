@@ -1,3 +1,6 @@
+@experiment(aliasv2)
+@experiment(explicitopen)
+
 package k3d
 
 import (

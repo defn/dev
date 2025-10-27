@@ -1,3 +1,6 @@
+@experiment(aliasv2)
+@experiment(explicitopen)
+
 package infra
 
 #AwsOrganization: {
@@ -34,8 +37,11 @@ package infra
 #AwsProps: {
 	backend: #AwsBackend
 
-	organization: [N=string]: #AwsOrganization & {
-		name: N
+	organization: {
+		[string]~(N,_): {
+			#AwsOrganization...
+			name: N
+		}
 	}
 
 	accounts: [...string] | *#acc_list

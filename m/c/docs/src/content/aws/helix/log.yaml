@@ -1,0 +1,6 @@
+name: log
+account: log
+org: helix
+id: "664427926343"
+email: aws-helix+log@defn.sh
+sso_role: Administrator

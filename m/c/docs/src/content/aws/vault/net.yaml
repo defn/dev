@@ -1,0 +1,6 @@
+name: transit
+account: net
+org: vault
+id: "915207860232"
+email: aws-vault-transit@defn.sh
+sso_role: Administrator

@@ -34,6 +34,18 @@ This is a Bazel-based monorepo for cloud integrated development environments. Ke
 4. Build with Bazel: `b build //...`
 5. Update BUILD files after adding deps: `make regen`
 
+**Note on CUE formatting**: Always use `trunk fmt` for CUE files instead of `cue fmt` directly. The trunk configuration includes a custom CUE formatter that uses the system `cue` binary.
+
+**Note on Node.js projects**: When moving or renaming a Node.js project directory, always delete and recreate `node_modules`:
+
+```bash
+cd <project-directory>
+rm -rf node_modules
+npm install
+```
+
+This prevents Vite serving errors where files are outside the allowed serving directory.
+
 ## Important Directives
 
 - **Always check for upstream changes before executing any task**:
@@ -132,10 +144,24 @@ When asked to "run upgrade task" or similar, follow these steps:
 
 1. Run `make sync` in $HOME directory
 2. This command installs/updates system tools and configurations based on what's already in git
-3. No files should be modified in the home directory
-4. No commit is needed as this task is run purely for its side effects
+3. After sync completes, run `make mise-list` to check for available tool upgrades
+4. Execute each mise command shown in the output to upgrade tools
+5. If any mise.toml files were modified, stage and commit them with version changes listed
 
-**Note**: This task updates the local system environment to match the configuration stored in git. It ensures all tools, configurations, and system settings are properly synchronized.
+**Example commit message format:**
+```
+chore: upgrade mise tool versions
+
+- aws: 2.31.19 → 2.31.20
+- gh: 2.82.0 → 2.82.1
+- buildkite-agent: 3.109.1 → 3.110.0
+
+🤖 Generated with [Claude Code](https://claude.ai/code)
+
+Co-Authored-By: Claude <noreply@anthropic.com>
+```
+
+**Note**: This task updates the local system environment to match the configuration stored in git, then upgrades all mise-managed tools to their latest versions.
 
 ### Task: coder login
 
@@ -253,6 +279,7 @@ Specifically, execute these tasks in order:
 3. **Test the updates**:
    - Update workspaces to use new templates (run coder upgrade workspaces task)
    - If workspaces update successfully, commit any staged lock file changes:
+
      ```bash
      git commit -m "chore: update terraform provider versions in Coder templates
 
@@ -263,6 +290,7 @@ Specifically, execute these tasks in order:
 
      Co-Authored-By: Claude <noreply@anthropic.com>"
      ```
+
    - If updates fail, reset the staged changes: `git reset HEAD`
 
 **Note**: This task updates both SSH and Docker Coder templates with the latest Terraform provider versions, tests them in production, and only commits the changes if everything works correctly.

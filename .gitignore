@@ -17,6 +17,7 @@ node_modules
 .vim/plugged
 .python_history
 .local
+!.local/share/code-server/User/settings.json
 .cache
 .npm
 .docker
@@ -115,7 +116,6 @@ work
 .viminfo
 .vscode
 .python_history
-.local
 .cache
 .npm
 .docker

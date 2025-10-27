@@ -1,0 +1,6 @@
+name: ops
+account: ops
+org: circus
+id: "415618116579"
+email: aws-circus-ops@defn.sh
+sso_role: Administrator

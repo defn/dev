@@ -1,0 +1,23 @@
+@experiment(aliasv2)
+@experiment(explicitopen)
+
+package main
+
+import (
+	intention "github.com/defn/dev/m/c/intention"
+	definition "github.com/defn/dev/m/c/definition"
+	aws "github.com/defn/dev/m/c/definition/aws"
+	execution "github.com/defn/dev/m/c/execution"
+	application "github.com/defn/dev/m/c/application"
+)
+
+config: {
+	resource: intention.resource
+	resource: execution.resource
+
+	repo: intention.repo
+	repo: definition.repo
+	repo: application.repo
+
+	"aws": aws
+}

@@ -1,0 +1,6 @@
+name: gateway
+account: ops
+org: fogg
+id: "318746665903"
+email: fogg-gateway@defn.sh
+sso_role: Administrator

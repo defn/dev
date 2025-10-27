@@ -1,0 +1,51 @@
+---
+import { getCollection } from 'astro:content';
+import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro';
+
+export async function getStaticPaths() {
+  const awsAccounts = await getCollection('aws');
+  return awsAccounts.map((account) => ({
+    params: { slug: account.id },
+    props: { account },
+  }));
+}
+
+const { account } = Astro.props;
+const { name, account: accountName, org, id, email, sso_role } = account.data;
+---
+
+<StarlightPage frontmatter={{
+  title: `AWS Account: ${name}`,
+  description: `Details for ${org}/${accountName} AWS account`
+}}>
+  <div style="margin-bottom: 2rem;">
+    <a href="../../">← Back to all AWS accounts</a>
+  </div>
+
+  <h2>Account Details</h2>
+
+  <dl style="display: grid; grid-template-columns: max-content 1fr; gap: 0.5rem 1rem; margin-top: 1rem;">
+    <dt style="font-weight: bold;">Name:</dt>
+    <dd>{name}</dd>
+
+    <dt style="font-weight: bold;">Organization:</dt>
+    <dd>{org}</dd>
+
+    <dt style="font-weight: bold;">Account:</dt>
+    <dd>{accountName}</dd>
+
+    <dt style="font-weight: bold;">Account ID:</dt>
+    <dd><code>{id}</code></dd>
+
+    <dt style="font-weight: bold;">Email:</dt>
+    <dd>{email}</dd>
+
+    <dt style="font-weight: bold;">SSO Role:</dt>
+    <dd>{sso_role}</dd>
+  </dl>
+
+  <div style="margin-top: 2rem; padding: 1rem; background: var(--sl-color-gray-6); border-radius: 0.5rem;">
+    <h3>Raw JSON Data</h3>
+    <pre><code>{JSON.stringify(account.data, null, 2)}</code></pre>
+  </div>
+</StarlightPage>

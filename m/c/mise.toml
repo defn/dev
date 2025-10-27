@@ -1,0 +1,3 @@
+[tasks.default]
+run = "./accumulate.sh && ./configure.sh && ./unify.sh && ./transform.sh && ./execute.sh && git difftool --no-prompt --extcmd='dyff between' main.yaml"
+description = "Run the full ACUTE pipeline (Accumulate, Configure, Unify, Transform, Execute)"

@@ -36,8 +36,8 @@ chrome-dev-gpg:
 # Dependencies: ~/.config directory, cloudflare-ddns binary, eth0 network interface, pass command, cloudflare_$(domain) password entry
 # Outputs: ~/.config/cloudflare-ddns.toml file, updated Cloudflare DNS records for *.$(name).$(domain)
 chrome-dev-dns:
-	touch ~/.config/cloudflare-ddns.toml 
-	cloudflare-ddns --domain $(domain) --record '*.$(name).$(domain)' --ip "$$(ip addr show eth0 | grep 'inet ' | awk '{print $$2}' | cut -d/ -f1)" --token "$$(pass cloudflare_$(domain))" --config ~/.config/cloudflare-ddns.toml 
+	touch ~/.config/cloudflare-ddns.toml
+	cloudflare-ddns --domain $(domain) --record '*.$(name).$(domain)' --ip "$$(ip addr show eth0 | grep 'inet ' | awk '{print $$2}' | cut -d/ -f1)" --token "$$(pass cloudflare_$(domain))" --config ~/.config/cloudflare-ddns.toml
 
 # Reinstall macOS Command Line Tools by removing and reinstalling them
 # Dependencies: /Library/Developer/CommandLineTools directory, /usr/bin/xcode-select binary, macOS system
@@ -218,6 +218,8 @@ fast_inner:
 # Dependencies: uname command, t binary, ~/.local/bin/mise binary, mise.toml files with local tasks (upgrade, ubuntu, fixup), make command
 # Outputs: Executed Linux system upgrade/ubuntu/fixup tasks via mise, performed fast_inner sync
 sync_inner:
+	~/.local/bin/mise trust
+	~/.local/bin/mise install node python pipx ansible
 	if [[ "$(shell uname -s)" == "Linux" ]]; then t play-upgrade ~/.local/bin/mise run local upgrade; fi
 	if [[ "$(shell uname -s)" == "Linux" ]]; then t play-ubuntu ~/.local/bin/mise run local ubuntu; fi
 	$(MAKE) fast_inner

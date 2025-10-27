@@ -1,3 +1,6 @@
+@experiment(aliasv2)
+@experiment(explicitopen)
+
 package m
 
 #file: {
@@ -26,5 +29,5 @@ uncovered: {
 files: {
 	[=~"^/a/\\w+/\\w+$"]: #aws_account
 
-	[DIR=string]: [=~"^mise.toml$"]: #mise_toml
+	[string]: [=~"^mise.toml$"]: #mise_toml
 }

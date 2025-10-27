@@ -1,0 +1,6 @@
+name: imma-prod
+account: pub
+org: imma
+id: "766142996227"
+email: imma-prod@imma.io
+sso_role: Administrator

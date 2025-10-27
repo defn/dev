@@ -1,0 +1,6 @@
+name: chamber
+account: org
+org: chamber
+id: "730917619329"
+email: aws-chamber@defn.us
+sso_role: Administrator

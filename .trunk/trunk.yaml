@@ -14,8 +14,21 @@ runtimes:
     # no downloads for anything later than this
     - python@3.12.2
     - go@1.25.3
-    - node@24.0.1
+    - node@25.0.0
 lint:
+  definitions:
+    - name: cue-fmt
+      files: [cue]
+      commands:
+        - name: format
+          output: rewrite
+          formatter: true
+          run: /usr/local/bin/cue fmt ${target}
+          success_codes: [0]
+          in_place: true
+          batch: true
+      suggest_if: files_present
+      direct_configs: []
   ignore:
     - linters: [ALL]
       paths:
@@ -24,6 +37,7 @@ lint:
         - .local/**
         - .cache/**
         - .npm/**
+        - m/c/docs/dist
   enabled:
     - golangci-lint2@2.5.0
     - actionlint@1.7.8
@@ -33,10 +47,10 @@ lint:
     - dotenv-linter@3.3.0
     - black@25.9.0
     - buildifier@8.2.1
-    - cue-fmt@0.9.0
+    - cue-fmt
     - git-diff-check
     - gofmt@1.25.3
-    #- isort@7.0.0
+    - isort@7.0.0
     - markdownlint@0.45.0
     - nixpkgs-fmt@1.3.0
     - prettier@3.6.2

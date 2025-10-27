@@ -1,0 +1,6 @@
+name: dev
+account: dev
+org: spiral
+id: "308726031860"
+email: aws-spiral+dev@defn.us
+sso_role: Administrator

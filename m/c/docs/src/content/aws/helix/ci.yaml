@@ -1,0 +1,6 @@
+name: sec
+account: ci
+org: helix
+id: "018520313738"
+email: aws-helix+sec@defn.sh
+sso_role: Administrator

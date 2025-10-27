@@ -1,0 +1,6 @@
+name: sec
+account: prod
+org: spiral
+id: "398258703387"
+email: aws-spiral+sec@defn.us
+sso_role: Administrator

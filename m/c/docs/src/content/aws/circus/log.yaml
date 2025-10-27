@@ -1,0 +1,6 @@
+name: audit
+account: log
+org: circus
+id: "707476523482"
+email: aws-circus-audit@defn.sh
+sso_role: Administrator

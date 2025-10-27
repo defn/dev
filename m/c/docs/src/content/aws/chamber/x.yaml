@@ -1,0 +1,6 @@
+name: defn-stage
+account: x
+org: chamber
+id: "834936839208"
+email: aws-stage@defn.us
+sso_role: Administrator

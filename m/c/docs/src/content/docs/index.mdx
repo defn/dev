@@ -1,0 +1,33 @@
+---
+title: ACUTE
+description: Accumulate, Configure, Unify, Transform, Execute - A CUE-based infrastructure management system.
+template: splash
+hero:
+  tagline: Accumulate, Configure, Unify, Transform, Execute
+  image:
+    file: ../../assets/houston.webp
+  actions:
+    - text: View AWS Accounts
+      link: ./aws/
+      icon: right-arrow
+---
+
+import { Card, CardGrid } from "@astrojs/starlight/components";
+
+## About ACUTE
+
+ACUTE is a configuration and infrastructure management system that uses CUE as a unified source of truth, transforming it to tool-specific formats for execution.
+
+<CardGrid stagger>
+  <Card title="AWS Accounts" icon="open-book">
+    Browse all [AWS accounts](./aws/) across 14 organizations managing ~145
+    accounts.
+  </Card>
+  <Card title="CUE-Based" icon="setting">
+    Single source of truth with schema validation and multi-format
+    transformation.
+  </Card>
+  <Card title="Five-Phase Pipeline" icon="rocket">
+    Accumulate → Configure → Unify → Transform → Execute
+  </Card>
+</CardGrid>

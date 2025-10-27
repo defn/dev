@@ -1,0 +1,6 @@
+name: transit
+account: net
+org: circus
+id: "002516226222"
+email: aws-circus-transit@defn.sh
+sso_role: Administrator

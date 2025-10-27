@@ -76,7 +76,9 @@
   },
   "security.workspace.trust.enabled": true,
   "security.workspace.trust.startupPrompt": "never",
-  "security.workspace.trust.trustedFolders": ["/home/ubuntu/m"],
+  "security.workspace.trust.trustedFolders": [
+    "/home/ubuntu/m"
+  ],
   "security.workspace.trust.untrustedFiles": "open",
   "svelte.enable-ts-plugin": true,
   "tailscale.portDiscovery.enabled": false,
@@ -91,7 +93,12 @@
   "terminal.integrated.localEchoEnabled": "off",
   "terminal.integrated.profiles.linux": {
     "dev": {
-      "args": ["--init-file", "~/.bash_entrypoint", "-s", "${workspaceFolder}"],
+      "args": [
+        "--init-file",
+        "~/.bash_entrypoint",
+        "-s",
+        "${workspaceFolder}"
+      ],
       "path": "bash"
     }
   },
@@ -109,5 +116,6 @@
   "remote.defaultExtensionsIfInstalledLocally": [],
   "chat.disableAIFeatures": true,
   "workbench.settings.showAISearchToggle": false,
-  "files.trimTrailingWhitespace": true
+  "files.trimTrailingWhitespace": true,
+  "chat.commandCenter.enabled": false
 }
