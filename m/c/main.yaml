@@ -51,877 +51,1593 @@ config:
   aws:
     org:
       chamber:
-        region: us-west-2
-        url: https://chamber-0.awsapps.com/start
+        org: chamber
+        sso_region: us-west-2
         account:
           org:
-            name: chamber
             account: org
-            org: chamber
             id: "730917619329"
             email: aws-chamber@defn.us
-            sso_role: Administrator
-          "1":
-            name: defn-cd
-            account: "1"
             org: chamber
+            name: chamber
+            sso_role: Administrator
+            aws_config: |-
+              [profile chamber-org]
+              sso_account_id=730917619329
+              sso_start_url=https://chamber-0.awsapps.com/start
+              sso_role_name=Administrator
+              sso_region=us-west-2
+          "1":
+            account: "1"
             id: "741346472057"
             email: aws-cd@defn.us
-            sso_role: Administrator
-          "2":
-            name: defn-ci
-            account: "2"
             org: chamber
+            name: defn-cd
+            sso_role: Administrator
+            aws_config: |-
+              [profile chamber-1]
+              sso_account_id=741346472057
+              sso_start_url=https://chamber-0.awsapps.com/start
+              sso_role_name=Administrator
+              sso_region=us-west-2
+          "2":
+            account: "2"
             id: "447993872368"
             email: aws-ci@defn.us
-            sso_role: Administrator
-          "3":
-            name: defn-security
-            account: "3"
             org: chamber
+            name: defn-ci
+            sso_role: Administrator
+            aws_config: |-
+              [profile chamber-2]
+              sso_account_id=447993872368
+              sso_start_url=https://chamber-0.awsapps.com/start
+              sso_role_name=Administrator
+              sso_region=us-west-2
+          "3":
+            account: "3"
             id: "463050069968"
             email: aws-users@defn.us
-            sso_role: Administrator
-          "4":
-            name: chamber-4
-            account: "4"
             org: chamber
+            name: defn-security
+            sso_role: Administrator
+            aws_config: |-
+              [profile chamber-3]
+              sso_account_id=463050069968
+              sso_start_url=https://chamber-0.awsapps.com/start
+              sso_role_name=Administrator
+              sso_region=us-west-2
+          "4":
+            account: "4"
             id: "368890376620"
             email: chamber-4@defn.us
-            sso_role: Administrator
-          "5":
-            name: chamber-5
-            account: "5"
             org: chamber
+            name: chamber-4
+            sso_role: Administrator
+            aws_config: |-
+              [profile chamber-4]
+              sso_account_id=368890376620
+              sso_start_url=https://chamber-0.awsapps.com/start
+              sso_role_name=Administrator
+              sso_region=us-west-2
+          "5":
+            account: "5"
             id: "200733412967"
             email: chamber-5@defn.us
-            sso_role: Administrator
-          "6":
-            name: chamber-6
-            account: "6"
             org: chamber
+            name: chamber-5
+            sso_role: Administrator
+            aws_config: |-
+              [profile chamber-5]
+              sso_account_id=200733412967
+              sso_start_url=https://chamber-0.awsapps.com/start
+              sso_role_name=Administrator
+              sso_region=us-west-2
+          "6":
+            account: "6"
             id: "493089153027"
             email: chamber-6@defn.us
-            sso_role: Administrator
-          "7":
-            name: chamber-7
-            account: "7"
             org: chamber
+            name: chamber-6
+            sso_role: Administrator
+            aws_config: |-
+              [profile chamber-6]
+              sso_account_id=493089153027
+              sso_start_url=https://chamber-0.awsapps.com/start
+              sso_role_name=Administrator
+              sso_region=us-west-2
+          "7":
+            account: "7"
             id: "837425503386"
             email: chamber-7@defn.us
-            sso_role: Administrator
-          "8":
-            name: chamber-8
-            account: "8"
             org: chamber
+            name: chamber-7
+            sso_role: Administrator
+            aws_config: |-
+              [profile chamber-7]
+              sso_account_id=837425503386
+              sso_start_url=https://chamber-0.awsapps.com/start
+              sso_role_name=Administrator
+              sso_region=us-west-2
+          "8":
+            account: "8"
             id: "773314335856"
             email: chamber-8@defn.us
-            sso_role: Administrator
-          "9":
-            name: chamber-9
-            account: "9"
             org: chamber
+            name: chamber-8
+            sso_role: Administrator
+            aws_config: |-
+              [profile chamber-8]
+              sso_account_id=773314335856
+              sso_start_url=https://chamber-0.awsapps.com/start
+              sso_role_name=Administrator
+              sso_region=us-west-2
+          "9":
+            account: "9"
             id: "950940975070"
             email: chamber-9@defn.us
-            sso_role: Administrator
-          a:
-            name: defn-a
-            account: a
             org: chamber
+            name: chamber-9
+            sso_role: Administrator
+            aws_config: |-
+              [profile chamber-9]
+              sso_account_id=950940975070
+              sso_start_url=https://chamber-0.awsapps.com/start
+              sso_role_name=Administrator
+              sso_region=us-west-2
+          a:
+            account: a
             id: "503577294851"
             email: defn-a@imma.io
-            sso_role: Administrator
-          b:
-            name: defn-b
-            account: b
             org: chamber
+            name: defn-a
+            sso_role: Administrator
+            aws_config: |-
+              [profile chamber-a]
+              sso_account_id=503577294851
+              sso_start_url=https://chamber-0.awsapps.com/start
+              sso_role_name=Administrator
+              sso_region=us-west-2
+          b:
+            account: b
             id: "310940910494"
             email: imma-admin1@imma.io
-            sso_role: Administrator
-          c:
-            name: defn-c
-            account: c
             org: chamber
+            name: defn-b
+            sso_role: Administrator
+            aws_config: |-
+              [profile chamber-b]
+              sso_account_id=310940910494
+              sso_start_url=https://chamber-0.awsapps.com/start
+              sso_role_name=Administrator
+              sso_region=us-west-2
+          c:
+            account: c
             id: "047633732615"
             email: dev-eng1@imma.io
-            sso_role: Administrator
-          d:
-            name: defn-d
-            account: d
             org: chamber
+            name: defn-c
+            sso_role: Administrator
+            aws_config: |-
+              [profile chamber-c]
+              sso_account_id=047633732615
+              sso_start_url=https://chamber-0.awsapps.com/start
+              sso_role_name=Administrator
+              sso_region=us-west-2
+          d:
+            account: d
             id: "699441347021"
             email: box-adm1@imma.io
-            sso_role: Administrator
-          e:
-            name: defn-e
-            account: e
             org: chamber
+            name: defn-d
+            sso_role: Administrator
+            aws_config: |-
+              [profile chamber-d]
+              sso_account_id=699441347021
+              sso_start_url=https://chamber-0.awsapps.com/start
+              sso_role_name=Administrator
+              sso_region=us-west-2
+          e:
+            account: e
             id: "171831323337"
             email: stg-eng1@imma.io
-            sso_role: Administrator
-          "f":
-            name: defn-f
-            account: "f"
             org: chamber
+            name: defn-e
+            sso_role: Administrator
+            aws_config: |-
+              [profile chamber-e]
+              sso_account_id=171831323337
+              sso_start_url=https://chamber-0.awsapps.com/start
+              sso_role_name=Administrator
+              sso_region=us-west-2
+          "f":
+            account: "f"
             id: "842022523232"
             email: usr-admin1@imma.io
-            sso_role: Administrator
-          g:
-            name: defn-g
-            account: g
             org: chamber
+            name: defn-f
+            sso_role: Administrator
+            aws_config: |-
+              [profile chamber-f]
+              sso_account_id=842022523232
+              sso_start_url=https://chamber-0.awsapps.com/start
+              sso_role_name=Administrator
+              sso_region=us-west-2
+          g:
+            account: g
             id: "023867963778"
             email: usr-adm1@imma.io
-            sso_role: Administrator
-          h:
-            name: defn-h
-            account: h
             org: chamber
+            name: defn-g
+            sso_role: Administrator
+            aws_config: |-
+              [profile chamber-g]
+              sso_account_id=023867963778
+              sso_start_url=https://chamber-0.awsapps.com/start
+              sso_role_name=Administrator
+              sso_region=us-west-2
+          h:
+            account: h
             id: "371020107387"
             email: usr-eng1@imma.io
-            sso_role: Administrator
-          i:
-            name: defn-i
-            account: i
             org: chamber
+            name: defn-h
+            sso_role: Administrator
+            aws_config: |-
+              [profile chamber-h]
+              sso_account_id=371020107387
+              sso_start_url=https://chamber-0.awsapps.com/start
+              sso_role_name=Administrator
+              sso_region=us-west-2
+          i:
+            account: i
             id: "290132238209"
             email: aws-admin1@defn.us
-            sso_role: Administrator
-          j:
-            name: defn-j
-            account: j
             org: chamber
+            name: defn-i
+            sso_role: Administrator
+            aws_config: |-
+              [profile chamber-i]
+              sso_account_id=290132238209
+              sso_start_url=https://chamber-0.awsapps.com/start
+              sso_role_name=Administrator
+              sso_region=us-west-2
+          j:
+            account: j
             id: "738433022197"
             email: aws-development1@defn.us
-            sso_role: Administrator
-          l:
-            name: defn-l
-            account: l
             org: chamber
+            name: defn-j
+            sso_role: Administrator
+            aws_config: |-
+              [profile chamber-j]
+              sso_account_id=738433022197
+              sso_start_url=https://chamber-0.awsapps.com/start
+              sso_role_name=Administrator
+              sso_region=us-west-2
+          l:
+            account: l
             id: "991300382347"
             email: aws-staging1@defn.us
-            sso_role: Administrator
-          m:
-            name: defn-m
-            account: m
             org: chamber
+            name: defn-l
+            sso_role: Administrator
+            aws_config: |-
+              [profile chamber-l]
+              sso_account_id=991300382347
+              sso_start_url=https://chamber-0.awsapps.com/start
+              sso_role_name=Administrator
+              sso_region=us-west-2
+          m:
+            account: m
             id: "684895750259"
             email: defn-m@defn.us
-            sso_role: Administrator
-          "n":
-            name: defn-n
-            account: "n"
             org: chamber
+            name: defn-m
+            sso_role: Administrator
+            aws_config: |-
+              [profile chamber-m]
+              sso_account_id=684895750259
+              sso_start_url=https://chamber-0.awsapps.com/start
+              sso_role_name=Administrator
+              sso_region=us-west-2
+          "n":
+            account: "n"
             id: "705881812506"
             email: defn-n@defn.us
-            sso_role: Administrator
-          o:
-            name: defn-o
-            account: o
             org: chamber
+            name: defn-n
+            sso_role: Administrator
+            aws_config: |-
+              [profile chamber-n]
+              sso_account_id=705881812506
+              sso_start_url=https://chamber-0.awsapps.com/start
+              sso_role_name=Administrator
+              sso_region=us-west-2
+          o:
+            account: o
             id: "307136835824"
             email: defn-o@defn.us
-            sso_role: Administrator
-          p:
-            name: defn-p
-            account: p
             org: chamber
+            name: defn-o
+            sso_role: Administrator
+            aws_config: |-
+              [profile chamber-o]
+              sso_account_id=307136835824
+              sso_start_url=https://chamber-0.awsapps.com/start
+              sso_role_name=Administrator
+              sso_region=us-west-2
+          p:
+            account: p
             id: "706168331526"
             email: defn-p@defn.us
-            sso_role: Administrator
-          q:
-            name: defn-dev
-            account: q
             org: chamber
+            name: defn-p
+            sso_role: Administrator
+            aws_config: |-
+              [profile chamber-p]
+              sso_account_id=706168331526
+              sso_start_url=https://chamber-0.awsapps.com/start
+              sso_role_name=Administrator
+              sso_region=us-west-2
+          q:
+            account: q
             id: "217047480856"
             email: aws-dev@defn.us
-            sso_role: Administrator
-          r:
-            name: defn-r
-            account: r
             org: chamber
+            name: defn-dev
+            sso_role: Administrator
+            aws_config: |-
+              [profile chamber-q]
+              sso_account_id=217047480856
+              sso_start_url=https://chamber-0.awsapps.com/start
+              sso_role_name=Administrator
+              sso_region=us-west-2
+          r:
+            account: r
             id: "416221726155"
             email: defn-r@imma.io
-            sso_role: Administrator
-          s:
-            name: defn-s
-            account: s
             org: chamber
+            name: defn-r
+            sso_role: Administrator
+            aws_config: |-
+              [profile chamber-r]
+              sso_account_id=416221726155
+              sso_start_url=https://chamber-0.awsapps.com/start
+              sso_role_name=Administrator
+              sso_region=us-west-2
+          s:
+            account: s
             id: "840650118369"
             email: defn-s@imma.io
-            sso_role: Administrator
-          "t":
-            name: defn-t
-            account: "t"
             org: chamber
+            name: defn-s
+            sso_role: Administrator
+            aws_config: |-
+              [profile chamber-s]
+              sso_account_id=840650118369
+              sso_start_url=https://chamber-0.awsapps.com/start
+              sso_role_name=Administrator
+              sso_region=us-west-2
+          "t":
+            account: "t"
             id: "490895200523"
             email: defn-t@imma.io
-            sso_role: Administrator
-          u:
-            name: defn-qa
-            account: u
             org: chamber
+            name: defn-t
+            sso_role: Administrator
+            aws_config: |-
+              [profile chamber-t]
+              sso_account_id=490895200523
+              sso_start_url=https://chamber-0.awsapps.com/start
+              sso_role_name=Administrator
+              sso_region=us-west-2
+          u:
+            account: u
             id: "467995590869"
             email: aws-qa@defn.us
-            sso_role: Administrator
-          v:
-            name: defn-v
-            account: v
             org: chamber
+            name: defn-qa
+            sso_role: Administrator
+            aws_config: |-
+              [profile chamber-u]
+              sso_account_id=467995590869
+              sso_start_url=https://chamber-0.awsapps.com/start
+              sso_role_name=Administrator
+              sso_region=us-west-2
+          v:
+            account: v
             id: "979368042862"
             email: defn-v@imma.io
-            sso_role: Administrator
-          w:
-            name: defn-w
-            account: w
             org: chamber
+            name: defn-v
+            sso_role: Administrator
+            aws_config: |-
+              [profile chamber-v]
+              sso_account_id=979368042862
+              sso_start_url=https://chamber-0.awsapps.com/start
+              sso_role_name=Administrator
+              sso_region=us-west-2
+          w:
+            account: w
             id: "313387692116"
             email: defn-w@imma.io
-            sso_role: Administrator
-          x:
-            name: defn-stage
-            account: x
             org: chamber
+            name: defn-w
+            sso_role: Administrator
+            aws_config: |-
+              [profile chamber-w]
+              sso_account_id=313387692116
+              sso_start_url=https://chamber-0.awsapps.com/start
+              sso_role_name=Administrator
+              sso_region=us-west-2
+          x:
+            account: x
             id: "834936839208"
             email: aws-stage@defn.us
-            sso_role: Administrator
-          "y":
-            name: defn-prod
-            account: "y"
             org: chamber
+            name: defn-stage
+            sso_role: Administrator
+            aws_config: |-
+              [profile chamber-x]
+              sso_account_id=834936839208
+              sso_start_url=https://chamber-0.awsapps.com/start
+              sso_role_name=Administrator
+              sso_region=us-west-2
+          "y":
+            account: "y"
             id: "153556747817"
             email: aws-prod@defn.us
-            sso_role: Administrator
-          z:
-            name: defn-hub
-            account: z
             org: chamber
+            name: defn-prod
+            sso_role: Administrator
+            aws_config: |-
+              [profile chamber-y]
+              sso_account_id=153556747817
+              sso_start_url=https://chamber-0.awsapps.com/start
+              sso_role_name=Administrator
+              sso_region=us-west-2
+          z:
+            account: z
             id: "037804009879"
             email: aws-hub@defn.us
+            org: chamber
+            name: defn-hub
             sso_role: Administrator
+            aws_config: |-
+              [profile chamber-z]
+              sso_account_id=037804009879
+              sso_start_url=https://chamber-0.awsapps.com/start
+              sso_role_name=Administrator
+              sso_region=us-west-2
+        sso_url: https://chamber-0.awsapps.com/start
       circus:
-        region: us-west-2
-        url: https://d-92670c4790.awsapps.com/start
+        org: circus
+        sso_region: us-west-2
         account:
           org:
-            name: circus
             account: org
-            org: circus
             id: "036139182623"
             email: aws-circus@defn.us
-            sso_role: Administrator
-          lib:
-            name: govcloud
-            account: lib
             org: circus
+            name: circus
+            sso_role: Administrator
+            aws_config: |-
+              [profile circus-org]
+              sso_account_id=036139182623
+              sso_start_url=https://d-92670c4790.awsapps.com/start
+              sso_role_name=Administrator
+              sso_region=us-west-2
+          lib:
+            account: lib
             id: "497790518354"
             email: aws-circus-govcloud@defn.sh
-            sso_role: Administrator
-          log:
-            name: audit
-            account: log
             org: circus
+            name: govcloud
+            sso_role: Administrator
+            aws_config: |-
+              [profile circus-lib]
+              sso_account_id=497790518354
+              sso_start_url=https://d-92670c4790.awsapps.com/start
+              sso_role_name=Administrator
+              sso_region=us-west-2
+          log:
+            account: log
             id: "707476523482"
             email: aws-circus-audit@defn.sh
-            sso_role: Administrator
-          net:
-            name: transit
-            account: net
             org: circus
+            name: audit
+            sso_role: Administrator
+            aws_config: |-
+              [profile circus-log]
+              sso_account_id=707476523482
+              sso_start_url=https://d-92670c4790.awsapps.com/start
+              sso_role_name=Administrator
+              sso_region=us-west-2
+          net:
+            account: net
             id: "002516226222"
             email: aws-circus-transit@defn.sh
-            sso_role: Administrator
-          ops:
-            name: ops
-            account: ops
             org: circus
+            name: transit
+            sso_role: Administrator
+            aws_config: |-
+              [profile circus-net]
+              sso_account_id=002516226222
+              sso_start_url=https://d-92670c4790.awsapps.com/start
+              sso_role_name=Administrator
+              sso_region=us-west-2
+          ops:
+            account: ops
             id: "415618116579"
             email: aws-circus-ops@defn.sh
+            org: circus
+            name: ops
             sso_role: Administrator
+            aws_config: |-
+              [profile circus-ops]
+              sso_account_id=415618116579
+              sso_start_url=https://d-92670c4790.awsapps.com/start
+              sso_role_name=Administrator
+              sso_region=us-west-2
+        sso_url: https://d-92670c4790.awsapps.com/start
       coil:
-        region: us-east-1
-        url: https://d-90674c3cfd.awsapps.com/start
+        org: coil
+        sso_region: us-east-1
         account:
           org:
-            name: coil
             account: org
-            org: coil
             id: "138291560003"
             email: aws-coil@defn.us
-            sso_role: Administrator
-          hub:
-            name: hub
-            account: hub
             org: coil
+            name: coil
+            sso_role: Administrator
+            aws_config: |-
+              [profile coil-org]
+              sso_account_id=138291560003
+              sso_start_url=https://d-90674c3cfd.awsapps.com/start
+              sso_role_name=Administrator
+              sso_region=us-east-1
+          hub:
+            account: hub
             id: "453991412409"
             email: aws-coil+hub@defn.us
-            sso_role: Administrator
-          lib:
-            name: lib
-            account: lib
             org: coil
+            name: hub
+            sso_role: Administrator
+            aws_config: |-
+              [profile coil-hub]
+              sso_account_id=453991412409
+              sso_start_url=https://d-90674c3cfd.awsapps.com/start
+              sso_role_name=Administrator
+              sso_region=us-east-1
+          lib:
+            account: lib
             id: "160764896647"
             email: aws-coil+lib@defn.us
-            sso_role: Administrator
-          net:
-            name: net
-            account: net
             org: coil
+            name: lib
+            sso_role: Administrator
+            aws_config: |-
+              [profile coil-lib]
+              sso_account_id=160764896647
+              sso_start_url=https://d-90674c3cfd.awsapps.com/start
+              sso_role_name=Administrator
+              sso_region=us-east-1
+          net:
+            account: net
             id: "278790191486"
             email: aws-coil+net@defn.us
+            org: coil
+            name: net
             sso_role: Administrator
-      curl:
-        region: us-west-2
-        url: https://d-926760a859.awsapps.com/start
+            aws_config: |-
+              [profile coil-net]
+              sso_account_id=278790191486
+              sso_start_url=https://d-90674c3cfd.awsapps.com/start
+              sso_role_name=Administrator
+              sso_region=us-east-1
+        sso_url: https://d-90674c3cfd.awsapps.com/start
+      csso_url:
+        org: csso_url
+        sso_region: us-west-2
         account:
           org:
-            name: curl
             account: org
-            org: curl
             id: "424535767618"
             email: aws-curl@defn.us
+            org: csso_url
+            name: csso_url
             sso_role: Administrator
+            aws_config: |-
+              [profile csso_url-org]
+              sso_account_id=424535767618
+              sso_start_url=https://d-926760a859.awsapps.com/start
+              sso_role_name=Administrator
+              sso_region=us-west-2
           hub:
-            name: hub
             account: hub
-            org: curl
             id: "804430872255"
             email: aws-curl+hub@defn.us
+            org: csso_url
+            name: hub
             sso_role: Administrator
+            aws_config: |-
+              [profile csso_url-hub]
+              sso_account_id=804430872255
+              sso_start_url=https://d-926760a859.awsapps.com/start
+              sso_role_name=Administrator
+              sso_region=us-west-2
           lib:
-            name: lib
             account: lib
-            org: curl
             id: "298406631539"
             email: aws-curl+lib@defn.us
+            org: csso_url
+            name: lib
             sso_role: Administrator
+            aws_config: |-
+              [profile csso_url-lib]
+              sso_account_id=298406631539
+              sso_start_url=https://d-926760a859.awsapps.com/start
+              sso_role_name=Administrator
+              sso_region=us-west-2
           net:
-            name: net
             account: net
-            org: curl
             id: "101142583332"
             email: aws-curl+net@defn.us
+            org: csso_url
+            name: net
             sso_role: Administrator
+            aws_config: |-
+              [profile csso_url-net]
+              sso_account_id=101142583332
+              sso_start_url=https://d-926760a859.awsapps.com/start
+              sso_role_name=Administrator
+              sso_region=us-west-2
+        sso_url: https://d-926760a859.awsapps.com/start
       defn:
-        region: us-east-2
-        url: https://defn.awsapps.com/start
+        org: defn
+        sso_region: us-east-2
         account:
           org:
-            name: defn
             account: org
-            org: defn
             id: "510430971399"
             email: iam+bootstrap@defn.sh
+            org: defn
+            name: defn
             sso_role: Administrator
+            aws_config: |-
+              [profile defn-org]
+              sso_account_id=510430971399
+              sso_start_url=https://defn.awsapps.com/start
+              sso_role_name=Administrator
+              sso_region=us-east-2
+        sso_url: https://defn.awsapps.com/start
       fogg:
-        region: us-west-2
-        url: https://fogg-0.awsapps.com/start
+        org: fogg
+        sso_region: us-west-2
         account:
           org:
-            name: fogg
             account: org
-            org: fogg
             id: "328216504962"
             email: spiral@defn.sh
-            sso_role: Administrator
-          ci:
-            name: home
-            account: ci
             org: fogg
+            name: fogg
+            sso_role: Administrator
+            aws_config: |-
+              [profile fogg-org]
+              sso_account_id=328216504962
+              sso_start_url=https://fogg-0.awsapps.com/start
+              sso_role_name=Administrator
+              sso_region=us-west-2
+          ci:
+            account: ci
             id: "812459563189"
             email: fogg-home@defn.sh
-            sso_role: Administrator
-          dev:
-            name: sandbox
-            account: dev
             org: fogg
+            name: home
+            sso_role: Administrator
+            aws_config: |-
+              [profile fogg-ci]
+              sso_account_id=812459563189
+              sso_start_url=https://fogg-0.awsapps.com/start
+              sso_role_name=Administrator
+              sso_region=us-west-2
+          dev:
+            account: dev
             id: "442766271046"
             email: fogg-sandbox@defn.sh
-            sso_role: Administrator
-          hub:
-            name: hub
-            account: hub
             org: fogg
+            name: sandbox
+            sso_role: Administrator
+            aws_config: |-
+              [profile fogg-dev]
+              sso_account_id=442766271046
+              sso_start_url=https://fogg-0.awsapps.com/start
+              sso_role_name=Administrator
+              sso_region=us-west-2
+          hub:
+            account: hub
             id: "337248635000"
             email: fogg-hub@defn.sh
-            sso_role: Administrator
-          lib:
-            name: data
-            account: lib
             org: fogg
+            name: hub
+            sso_role: Administrator
+            aws_config: |-
+              [profile fogg-hub]
+              sso_account_id=337248635000
+              sso_start_url=https://fogg-0.awsapps.com/start
+              sso_role_name=Administrator
+              sso_region=us-west-2
+          lib:
+            account: lib
             id: "624713464251"
             email: fogg-data@defn.sh
-            sso_role: Administrator
-          log:
-            name: circus
-            account: log
             org: fogg
+            name: data
+            sso_role: Administrator
+            aws_config: |-
+              [profile fogg-lib]
+              sso_account_id=624713464251
+              sso_start_url=https://fogg-0.awsapps.com/start
+              sso_role_name=Administrator
+              sso_region=us-west-2
+          log:
+            account: log
             id: "844609041254"
             email: fogg-circus@defn.sh
-            sso_role: Administrator
-          net:
-            name: asset
-            account: net
             org: fogg
+            name: circus
+            sso_role: Administrator
+            aws_config: |-
+              [profile fogg-log]
+              sso_account_id=844609041254
+              sso_start_url=https://fogg-0.awsapps.com/start
+              sso_role_name=Administrator
+              sso_region=us-west-2
+          net:
+            account: net
             id: "060659916753"
             email: fogg-asset@defn.sh
-            sso_role: Administrator
-          ops:
-            name: gateway
-            account: ops
             org: fogg
+            name: asset
+            sso_role: Administrator
+            aws_config: |-
+              [profile fogg-net]
+              sso_account_id=060659916753
+              sso_start_url=https://fogg-0.awsapps.com/start
+              sso_role_name=Administrator
+              sso_region=us-west-2
+          ops:
+            account: ops
             id: "318746665903"
             email: fogg-gateway@defn.sh
-            sso_role: Administrator
-          prod:
-            name: postx
-            account: prod
             org: fogg
+            name: gateway
+            sso_role: Administrator
+            aws_config: |-
+              [profile fogg-ops]
+              sso_account_id=318746665903
+              sso_start_url=https://fogg-0.awsapps.com/start
+              sso_role_name=Administrator
+              sso_region=us-west-2
+          prod:
+            account: prod
             id: "565963418226"
             email: fogg-postx@defn.sh
-            sso_role: Administrator
-          pub:
-            name: security
-            account: pub
             org: fogg
+            name: postx
+            sso_role: Administrator
+            aws_config: |-
+              [profile fogg-prod]
+              sso_account_id=565963418226
+              sso_start_url=https://fogg-0.awsapps.com/start
+              sso_role_name=Administrator
+              sso_region=us-west-2
+          pub:
+            account: pub
             id: "372333168887"
             email: fogg-security@defn.sh
+            org: fogg
+            name: security
             sso_role: Administrator
+            aws_config: |-
+              [profile fogg-pub]
+              sso_account_id=372333168887
+              sso_start_url=https://fogg-0.awsapps.com/start
+              sso_role_name=Administrator
+              sso_region=us-west-2
+        sso_url: https://fogg-0.awsapps.com/start
       gyre:
-        region: us-east-2
-        url: https://d-9a6716e54a.awsapps.com/start
+        org: gyre
+        sso_region: us-east-2
         account:
           org:
-            name: gyre
             account: org
-            org: gyre
             id: "065163301604"
             email: aws-gyre@defn.us
-            sso_role: Administrator
-          ops:
-            name: ops
-            account: ops
             org: gyre
+            name: gyre
+            sso_role: Administrator
+            aws_config: |-
+              [profile gyre-org]
+              sso_account_id=065163301604
+              sso_start_url=https://d-9a6716e54a.awsapps.com/start
+              sso_role_name=Administrator
+              sso_region=us-east-2
+          ops:
+            account: ops
             id: "319951235442"
             email: aws-gyre+ops@defn.us
+            org: gyre
+            name: ops
             sso_role: Administrator
+            aws_config: |-
+              [profile gyre-ops]
+              sso_account_id=319951235442
+              sso_start_url=https://d-9a6716e54a.awsapps.com/start
+              sso_role_name=Administrator
+              sso_region=us-east-2
+        sso_url: https://d-9a6716e54a.awsapps.com/start
       helix:
-        region: us-east-2
-        url: https://d-9a6716ffd1.awsapps.com/start
+        org: helix
+        sso_region: us-east-2
         account:
           org:
-            name: helix
             account: org
-            org: helix
             id: "816178966829"
             email: aws-helix@defn.sh
-            sso_role: Administrator
-          ci:
-            name: sec
-            account: ci
             org: helix
+            name: helix
+            sso_role: Administrator
+            aws_config: |-
+              [profile helix-org]
+              sso_account_id=816178966829
+              sso_start_url=https://d-9a6716ffd1.awsapps.com/start
+              sso_role_name=Administrator
+              sso_region=us-east-2
+          ci:
+            account: ci
             id: "018520313738"
             email: aws-helix+sec@defn.sh
-            sso_role: Administrator
-          dev:
-            name: dev
-            account: dev
             org: helix
+            name: sec
+            sso_role: Administrator
+            aws_config: |-
+              [profile helix-ci]
+              sso_account_id=018520313738
+              sso_start_url=https://d-9a6716ffd1.awsapps.com/start
+              sso_role_name=Administrator
+              sso_region=us-east-2
+          dev:
+            account: dev
             id: "843784871878"
             email: aws-helix+dev@defn.sh
-            sso_role: Administrator
-          hub:
-            name: hub
-            account: hub
             org: helix
+            name: dev
+            sso_role: Administrator
+            aws_config: |-
+              [profile helix-dev]
+              sso_account_id=843784871878
+              sso_start_url=https://d-9a6716ffd1.awsapps.com/start
+              sso_role_name=Administrator
+              sso_region=us-east-2
+          hub:
+            account: hub
             id: "436043820387"
             email: aws-helix+hub@defn.sh
-            sso_role: Administrator
-          lib:
-            name: lib
-            account: lib
             org: helix
+            name: hub
+            sso_role: Administrator
+            aws_config: |-
+              [profile helix-hub]
+              sso_account_id=436043820387
+              sso_start_url=https://d-9a6716ffd1.awsapps.com/start
+              sso_role_name=Administrator
+              sso_region=us-east-2
+          lib:
+            account: lib
             id: "377857698578"
             email: aws-helix+lib@defn.sh
-            sso_role: Administrator
-          log:
-            name: log
-            account: log
             org: helix
+            name: lib
+            sso_role: Administrator
+            aws_config: |-
+              [profile helix-lib]
+              sso_account_id=377857698578
+              sso_start_url=https://d-9a6716ffd1.awsapps.com/start
+              sso_role_name=Administrator
+              sso_region=us-east-2
+          log:
+            account: log
             id: "664427926343"
             email: aws-helix+log@defn.sh
-            sso_role: Administrator
-          net:
-            name: net
-            account: net
             org: helix
+            name: log
+            sso_role: Administrator
+            aws_config: |-
+              [profile helix-log]
+              sso_account_id=664427926343
+              sso_start_url=https://d-9a6716ffd1.awsapps.com/start
+              sso_role_name=Administrator
+              sso_region=us-east-2
+          net:
+            account: net
             id: "504722108514"
             email: aws-helix+net@defn.sh
-            sso_role: Administrator
-          ops:
-            name: ops
-            account: ops
             org: helix
+            name: net
+            sso_role: Administrator
+            aws_config: |-
+              [profile helix-net]
+              sso_account_id=504722108514
+              sso_start_url=https://d-9a6716ffd1.awsapps.com/start
+              sso_role_name=Administrator
+              sso_region=us-east-2
+          ops:
+            account: ops
             id: "368812692254"
             email: aws-helix+ops@defn.sh
-            sso_role: Administrator
-          prod:
-            name: dmz
-            account: prod
             org: helix
+            name: ops
+            sso_role: Administrator
+            aws_config: |-
+              [profile helix-ops]
+              sso_account_id=368812692254
+              sso_start_url=https://d-9a6716ffd1.awsapps.com/start
+              sso_role_name=Administrator
+              sso_region=us-east-2
+          prod:
+            account: prod
             id: "724643698007"
             email: aws-helix+dmz@defn.sh
-            sso_role: Administrator
-          pub:
-            name: pub
-            account: pub
             org: helix
+            name: dmz
+            sso_role: Administrator
+            aws_config: |-
+              [profile helix-prod]
+              sso_account_id=724643698007
+              sso_start_url=https://d-9a6716ffd1.awsapps.com/start
+              sso_role_name=Administrator
+              sso_region=us-east-2
+          pub:
+            account: pub
             id: "536806623881"
             email: aws-helix+pub@defn.sh
+            org: helix
+            name: pub
             sso_role: Administrator
+            aws_config: |-
+              [profile helix-pub]
+              sso_account_id=536806623881
+              sso_start_url=https://d-9a6716ffd1.awsapps.com/start
+              sso_role_name=Administrator
+              sso_region=us-east-2
+        sso_url: https://d-9a6716ffd1.awsapps.com/start
       imma:
-        region: us-west-2
-        url: https://imma-0.awsapps.com/start
+        org: imma
+        sso_region: us-west-2
         account:
           org:
-            name: imma
             account: org
-            org: imma
             id: "548373030883"
             email: aws-imma@defn.us
-            sso_role: Administrator
-          dev:
-            name: imma-dev
-            account: dev
             org: imma
+            name: imma
+            sso_role: Administrator
+            aws_config: |-
+              [profile imma-org]
+              sso_account_id=548373030883
+              sso_start_url=https://imma-0.awsapps.com/start
+              sso_role_name=Administrator
+              sso_region=us-west-2
+          dev:
+            account: dev
             id: "445584037541"
             email: imma-dev@imma.io
-            sso_role: Administrator
-          lib:
-            name: imma-tolan
-            account: lib
             org: imma
+            name: imma-dev
+            sso_role: Administrator
+            aws_config: |-
+              [profile imma-dev]
+              sso_account_id=445584037541
+              sso_start_url=https://imma-0.awsapps.com/start
+              sso_role_name=Administrator
+              sso_region=us-west-2
+          lib:
+            account: lib
             id: "516851121506"
             email: imma-tolan@defn.us
-            sso_role: Administrator
-          log:
-            name: imma-dgwyn
-            account: log
             org: imma
+            name: imma-tolan
+            sso_role: Administrator
+            aws_config: |-
+              [profile imma-lib]
+              sso_account_id=516851121506
+              sso_start_url=https://imma-0.awsapps.com/start
+              sso_role_name=Administrator
+              sso_region=us-west-2
+          log:
+            account: log
             id: "289716781198"
             email: imma-dgwyn@defn.us
-            sso_role: Administrator
-          net:
-            name: imma-defn
-            account: net
             org: imma
+            name: imma-dgwyn
+            sso_role: Administrator
+            aws_config: |-
+              [profile imma-log]
+              sso_account_id=289716781198
+              sso_start_url=https://imma-0.awsapps.com/start
+              sso_role_name=Administrator
+              sso_region=us-west-2
+          net:
+            account: net
             id: "246197522468"
             email: imma-defn@defn.us
-            sso_role: Administrator
-          pub:
-            name: imma-prod
-            account: pub
             org: imma
+            name: imma-defn
+            sso_role: Administrator
+            aws_config: |-
+              [profile imma-net]
+              sso_account_id=246197522468
+              sso_start_url=https://imma-0.awsapps.com/start
+              sso_role_name=Administrator
+              sso_region=us-west-2
+          pub:
+            account: pub
             id: "766142996227"
             email: imma-prod@imma.io
+            org: imma
+            name: imma-prod
             sso_role: Administrator
+            aws_config: |-
+              [profile imma-pub]
+              sso_account_id=766142996227
+              sso_start_url=https://imma-0.awsapps.com/start
+              sso_role_name=Administrator
+              sso_region=us-west-2
+        sso_url: https://imma-0.awsapps.com/start
       immanent:
-        region: us-west-2
-        url: https://immanent-0.awsapps.com/start
+        org: immanent
+        sso_region: us-west-2
         account:
           org:
-            name: immanent
             account: org
-            org: immanent
             id: "545070380609"
             email: aws-immanent@defn.us
-            sso_role: Administrator
-          changer:
-            name: immanent-changer
-            account: changer
             org: immanent
+            name: immanent
+            sso_role: Administrator
+            aws_config: |-
+              [profile immanent-org]
+              sso_account_id=545070380609
+              sso_start_url=https://immanent-0.awsapps.com/start
+              sso_role_name=Administrator
+              sso_region=us-west-2
+          changer:
+            account: changer
             id: "003884504807"
             email: immanent-changer@defn.us
-            sso_role: Administrator
-          chanter:
-            name: immanent-chanter
-            account: chanter
             org: immanent
+            name: immanent-changer
+            sso_role: Administrator
+            aws_config: |-
+              [profile immanent-changer]
+              sso_account_id=003884504807
+              sso_start_url=https://immanent-0.awsapps.com/start
+              sso_role_name=Administrator
+              sso_region=us-west-2
+          chanter:
+            account: chanter
             id: "071244154667"
             email: immanent-chanter@defn.us
-            sso_role: Administrator
-          doorkeeper:
-            name: immanent-doorkeeper
-            account: doorkeeper
             org: immanent
+            name: immanent-chanter
+            sso_role: Administrator
+            aws_config: |-
+              [profile immanent-chanter]
+              sso_account_id=071244154667
+              sso_start_url=https://immanent-0.awsapps.com/start
+              sso_role_name=Administrator
+              sso_region=us-west-2
+          doorkeeper:
+            account: doorkeeper
             id: "013267321144"
             email: immanent-doorkeeper@defn.us
-            sso_role: Administrator
-          ged:
-            name: immanent-ged
-            account: ged
             org: immanent
+            name: immanent-doorkeeper
+            sso_role: Administrator
+            aws_config: |-
+              [profile immanent-doorkeeper]
+              sso_account_id=013267321144
+              sso_start_url=https://immanent-0.awsapps.com/start
+              sso_role_name=Administrator
+              sso_region=us-west-2
+          ged:
+            account: ged
             id: "640792184178"
             email: immanent-ged@defn.us
-            sso_role: Administrator
-          hand:
-            name: immanent-hand
-            account: hand
             org: immanent
+            name: immanent-ged
+            sso_role: Administrator
+            aws_config: |-
+              [profile immanent-ged]
+              sso_account_id=640792184178
+              sso_start_url=https://immanent-0.awsapps.com/start
+              sso_role_name=Administrator
+              sso_region=us-west-2
+          hand:
+            account: hand
             id: "826250190242"
             email: immanent-hand@defn.us
-            sso_role: Administrator
-          herbal:
-            name: immanent-herbal
-            account: herbal
             org: immanent
+            name: immanent-hand
+            sso_role: Administrator
+            aws_config: |-
+              [profile immanent-hand]
+              sso_account_id=826250190242
+              sso_start_url=https://immanent-0.awsapps.com/start
+              sso_role_name=Administrator
+              sso_region=us-west-2
+          herbal:
+            account: herbal
             id: "165452499696"
             email: immanent-herbal@defn.us
-            sso_role: Administrator
-          namer:
-            name: immanent-namer
-            account: namer
             org: immanent
+            name: immanent-herbal
+            sso_role: Administrator
+            aws_config: |-
+              [profile immanent-herbal]
+              sso_account_id=165452499696
+              sso_start_url=https://immanent-0.awsapps.com/start
+              sso_role_name=Administrator
+              sso_region=us-west-2
+          namer:
+            account: namer
             id: "856549015893"
             email: immanent-namer@defn.us
-            sso_role: Administrator
-          patterner:
-            name: immanent-patterner
-            account: patterner
             org: immanent
+            name: immanent-namer
+            sso_role: Administrator
+            aws_config: |-
+              [profile immanent-namer]
+              sso_account_id=856549015893
+              sso_start_url=https://immanent-0.awsapps.com/start
+              sso_role_name=Administrator
+              sso_region=us-west-2
+          patterner:
+            account: patterner
             id: "143220204648"
             email: immanent-patterner@defn.us
-            sso_role: Administrator
-          roke:
-            name: immanent-roke
-            account: roke
             org: immanent
+            name: immanent-patterner
+            sso_role: Administrator
+            aws_config: |-
+              [profile immanent-patterner]
+              sso_account_id=143220204648
+              sso_start_url=https://immanent-0.awsapps.com/start
+              sso_role_name=Administrator
+              sso_region=us-west-2
+          roke:
+            account: roke
             id: "892560628624"
             email: immanent-roke@defn.us
-            sso_role: Administrator
-          summoner:
-            name: immanent-summoner
-            account: summoner
             org: immanent
+            name: immanent-roke
+            sso_role: Administrator
+            aws_config: |-
+              [profile immanent-roke]
+              sso_account_id=892560628624
+              sso_start_url=https://immanent-0.awsapps.com/start
+              sso_role_name=Administrator
+              sso_region=us-west-2
+          summoner:
+            account: summoner
             id: "397411277587"
             email: immanent-summoner@defn.us
-            sso_role: Administrator
-          windkey:
-            name: immanent-windkey
-            account: windkey
             org: immanent
+            name: immanent-summoner
+            sso_role: Administrator
+            aws_config: |-
+              [profile immanent-summoner]
+              sso_account_id=397411277587
+              sso_start_url=https://immanent-0.awsapps.com/start
+              sso_role_name=Administrator
+              sso_region=us-west-2
+          windkey:
+            account: windkey
             id: "095764861781"
             email: immanent-windkey@defn.us
+            org: immanent
+            name: immanent-windkey
             sso_role: Administrator
+            aws_config: |-
+              [profile immanent-windkey]
+              sso_account_id=095764861781
+              sso_start_url=https://immanent-0.awsapps.com/start
+              sso_role_name=Administrator
+              sso_region=us-west-2
+        sso_url: https://immanent-0.awsapps.com/start
       jianghu:
-        region: us-west-2
-        url: https://jianghu-0.awsapps.com/start
+        org: jianghu
+        sso_region: us-west-2
         account:
           org:
-            name: jianghu
             account: org
-            org: jianghu
             id: "657613322961"
             email: aws-jianghu@defn.us
-            sso_role: Administrator
-          log:
-            name: klamath
-            account: log
             org: jianghu
+            name: jianghu
+            sso_role: Administrator
+            aws_config: |-
+              [profile jianghu-org]
+              sso_account_id=657613322961
+              sso_start_url=https://jianghu-0.awsapps.com/start
+              sso_role_name=Administrator
+              sso_region=us-west-2
+          log:
+            account: log
             id: "298431841138"
             email: klamath@defn.us
-            sso_role: Administrator
-          net:
-            name: tahoe
-            account: net
             org: jianghu
+            name: klamath
+            sso_role: Administrator
+            aws_config: |-
+              [profile jianghu-log]
+              sso_account_id=298431841138
+              sso_start_url=https://jianghu-0.awsapps.com/start
+              sso_role_name=Administrator
+              sso_region=us-west-2
+          net:
+            account: net
             id: "025636091251"
             email: tahoe@defn.us
+            org: jianghu
+            name: tahoe
             sso_role: Administrator
+            aws_config: |-
+              [profile jianghu-net]
+              sso_account_id=025636091251
+              sso_start_url=https://jianghu-0.awsapps.com/start
+              sso_role_name=Administrator
+              sso_region=us-west-2
+        sso_url: https://jianghu-0.awsapps.com/start
       spiral:
-        region: us-west-2
-        url: https://d-926760b322.awsapps.com/start
+        org: spiral
+        sso_region: us-west-2
         account:
           org:
-            name: spiral
             account: org
-            org: spiral
             id: "232091571197"
             email: aws-spiral@defn.us
-            sso_role: Administrator
-          ci:
-            name: pub
-            account: ci
             org: spiral
+            name: spiral
+            sso_role: Administrator
+            aws_config: |-
+              [profile spiral-org]
+              sso_account_id=232091571197
+              sso_start_url=https://d-926760b322.awsapps.com/start
+              sso_role_name=Administrator
+              sso_region=us-west-2
+          ci:
+            account: ci
             id: "371657257885"
             email: aws-spiral+pub@defn.us
-            sso_role: Administrator
-          dev:
-            name: dev
-            account: dev
             org: spiral
+            name: pub
+            sso_role: Administrator
+            aws_config: |-
+              [profile spiral-ci]
+              sso_account_id=371657257885
+              sso_start_url=https://d-926760b322.awsapps.com/start
+              sso_role_name=Administrator
+              sso_region=us-west-2
+          dev:
+            account: dev
             id: "308726031860"
             email: aws-spiral+dev@defn.us
-            sso_role: Administrator
-          hub:
-            name: hub
-            account: hub
             org: spiral
+            name: dev
+            sso_role: Administrator
+            aws_config: |-
+              [profile spiral-dev]
+              sso_account_id=308726031860
+              sso_start_url=https://d-926760b322.awsapps.com/start
+              sso_role_name=Administrator
+              sso_region=us-west-2
+          hub:
+            account: hub
             id: "216704421225"
             email: aws-spiral+hub@defn.us
-            sso_role: Administrator
-          lib:
-            name: lib
-            account: lib
             org: spiral
+            name: hub
+            sso_role: Administrator
+            aws_config: |-
+              [profile spiral-hub]
+              sso_account_id=216704421225
+              sso_start_url=https://d-926760b322.awsapps.com/start
+              sso_role_name=Administrator
+              sso_region=us-west-2
+          lib:
+            account: lib
             id: "073874947996"
             email: aws-spiral+lib@defn.us
-            sso_role: Administrator
-          log:
-            name: log
-            account: log
             org: spiral
+            name: lib
+            sso_role: Administrator
+            aws_config: |-
+              [profile spiral-lib]
+              sso_account_id=073874947996
+              sso_start_url=https://d-926760b322.awsapps.com/start
+              sso_role_name=Administrator
+              sso_region=us-west-2
+          log:
+            account: log
             id: "442333715734"
             email: aws-spiral+log@defn.us
-            sso_role: Administrator
-          net:
-            name: net
-            account: net
             org: spiral
+            name: log
+            sso_role: Administrator
+            aws_config: |-
+              [profile spiral-log]
+              sso_account_id=442333715734
+              sso_start_url=https://d-926760b322.awsapps.com/start
+              sso_role_name=Administrator
+              sso_region=us-west-2
+          net:
+            account: net
             id: "057533398557"
             email: aws-spiral+net@defn.us
-            sso_role: Administrator
-          ops:
-            name: ops
-            account: ops
             org: spiral
+            name: net
+            sso_role: Administrator
+            aws_config: |-
+              [profile spiral-net]
+              sso_account_id=057533398557
+              sso_start_url=https://d-926760b322.awsapps.com/start
+              sso_role_name=Administrator
+              sso_region=us-west-2
+          ops:
+            account: ops
             id: "601164058091"
             email: aws-spiral+ops@defn.us
-            sso_role: Administrator
-          prod:
-            name: sec
-            account: prod
             org: spiral
+            name: ops
+            sso_role: Administrator
+            aws_config: |-
+              [profile spiral-ops]
+              sso_account_id=601164058091
+              sso_start_url=https://d-926760b322.awsapps.com/start
+              sso_role_name=Administrator
+              sso_region=us-west-2
+          prod:
+            account: prod
             id: "398258703387"
             email: aws-spiral+sec@defn.us
-            sso_role: Administrator
-          pub:
-            name: dmz
-            account: pub
             org: spiral
+            name: sec
+            sso_role: Administrator
+            aws_config: |-
+              [profile spiral-prod]
+              sso_account_id=398258703387
+              sso_start_url=https://d-926760b322.awsapps.com/start
+              sso_role_name=Administrator
+              sso_region=us-west-2
+          pub:
+            account: pub
             id: "130046154300"
             email: aws-spiral+dmz@defn.us
+            org: spiral
+            name: dmz
             sso_role: Administrator
+            aws_config: |-
+              [profile spiral-pub]
+              sso_account_id=130046154300
+              sso_start_url=https://d-926760b322.awsapps.com/start
+              sso_role_name=Administrator
+              sso_region=us-west-2
+        sso_url: https://d-926760b322.awsapps.com/start
       vault:
-        region: us-east-2
-        url: https://d-9a672a0e52.awsapps.com/start
+        org: vault
+        sso_region: us-east-2
         account:
           org:
-            name: vault
             account: org
-            org: vault
             id: "475528707847"
             email: aws-vault@defn.us
-            sso_role: Administrator
-          ci:
-            name: vault0
-            account: ci
             org: vault
+            name: vault
+            sso_role: Administrator
+            aws_config: |-
+              [profile vault-org]
+              sso_account_id=475528707847
+              sso_start_url=https://d-9a672a0e52.awsapps.com/start
+              sso_role_name=Administrator
+              sso_region=us-east-2
+          ci:
+            account: ci
             id: "313228123503"
             email: aws-vault-vault0@defn.sh
-            sso_role: Administrator
-          dev:
-            name: dev
-            account: dev
             org: vault
+            name: vault0
+            sso_role: Administrator
+            aws_config: |-
+              [profile vault-ci]
+              sso_account_id=313228123503
+              sso_start_url=https://d-9a672a0e52.awsapps.com/start
+              sso_role_name=Administrator
+              sso_region=us-east-2
+          dev:
+            account: dev
             id: "497393606242"
             email: aws-vault-dev@defn.sh
-            sso_role: Administrator
-          hub:
-            name: hub
-            account: hub
             org: vault
+            name: dev
+            sso_role: Administrator
+            aws_config: |-
+              [profile vault-dev]
+              sso_account_id=497393606242
+              sso_start_url=https://d-9a672a0e52.awsapps.com/start
+              sso_role_name=Administrator
+              sso_region=us-east-2
+          hub:
+            account: hub
             id: "539099112425"
             email: aws-vault-hub@defn.sh
-            sso_role: Administrator
-          lib:
-            name: library
-            account: lib
             org: vault
+            name: hub
+            sso_role: Administrator
+            aws_config: |-
+              [profile vault-hub]
+              sso_account_id=539099112425
+              sso_start_url=https://d-9a672a0e52.awsapps.com/start
+              sso_role_name=Administrator
+              sso_region=us-east-2
+          lib:
+            account: lib
             id: "066356637485"
             email: aws-vault-library@defn.sh
-            sso_role: Administrator
-          log:
-            name: audit
-            account: log
             org: vault
+            name: library
+            sso_role: Administrator
+            aws_config: |-
+              [profile vault-lib]
+              sso_account_id=066356637485
+              sso_start_url=https://d-9a672a0e52.awsapps.com/start
+              sso_role_name=Administrator
+              sso_region=us-east-2
+          log:
+            account: log
             id: "749185891195"
             email: aws-vault-audit@defn.sh
-            sso_role: Administrator
-          net:
-            name: transit
-            account: net
             org: vault
+            name: audit
+            sso_role: Administrator
+            aws_config: |-
+              [profile vault-log]
+              sso_account_id=749185891195
+              sso_start_url=https://d-9a672a0e52.awsapps.com/start
+              sso_role_name=Administrator
+              sso_region=us-east-2
+          net:
+            account: net
             id: "915207860232"
             email: aws-vault-transit@defn.sh
-            sso_role: Administrator
-          ops:
-            name: ops
-            account: ops
             org: vault
+            name: transit
+            sso_role: Administrator
+            aws_config: |-
+              [profile vault-net]
+              sso_account_id=915207860232
+              sso_start_url=https://d-9a672a0e52.awsapps.com/start
+              sso_role_name=Administrator
+              sso_region=us-east-2
+          ops:
+            account: ops
             id: "188066400611"
             email: aws-vault-ops@defn.sh
-            sso_role: Administrator
-          prod:
-            name: vault1
-            account: prod
             org: vault
+            name: ops
+            sso_role: Administrator
+            aws_config: |-
+              [profile vault-ops]
+              sso_account_id=188066400611
+              sso_start_url=https://d-9a672a0e52.awsapps.com/start
+              sso_role_name=Administrator
+              sso_region=us-east-2
+          prod:
+            account: prod
             id: "040769490632"
             email: aws-vault-vault1@defn.sh
-            sso_role: Administrator
-          pub:
-            name: pub
-            account: pub
             org: vault
+            name: vault1
+            sso_role: Administrator
+            aws_config: |-
+              [profile vault-prod]
+              sso_account_id=040769490632
+              sso_start_url=https://d-9a672a0e52.awsapps.com/start
+              sso_role_name=Administrator
+              sso_region=us-east-2
+          pub:
+            account: pub
             id: "851162413429"
             email: aws-vault-pub@defn.sh
+            org: vault
+            name: pub
             sso_role: Administrator
+            aws_config: |-
+              [profile vault-pub]
+              sso_account_id=851162413429
+              sso_start_url=https://d-9a672a0e52.awsapps.com/start
+              sso_role_name=Administrator
+              sso_region=us-east-2
+        sso_url: https://d-9a672a0e52.awsapps.com/start
       whoa:
-        region: us-west-2
-        url: https://whoa-0.awsapps.com/start
+        org: whoa
+        sso_region: us-west-2
         account:
           org:
-            name: whoa
             account: org
-            org: whoa
             id: "389772512117"
             email: aws-whoa@defn.us
-            sso_role: Administrator
-          dev:
-            name: dev
-            account: dev
             org: whoa
+            name: whoa
+            sso_role: Administrator
+            aws_config: |-
+              [profile whoa-org]
+              sso_account_id=389772512117
+              sso_start_url=https://whoa-0.awsapps.com/start
+              sso_role_name=Administrator
+              sso_region=us-west-2
+          dev:
+            account: dev
             id: "439761234835"
             email: whoa-dev@imma.io
-            sso_role: Administrator
-          hub:
-            name: hub
-            account: hub
             org: whoa
+            name: dev
+            sso_role: Administrator
+            aws_config: |-
+              [profile whoa-dev]
+              sso_account_id=439761234835
+              sso_start_url=https://whoa-0.awsapps.com/start
+              sso_role_name=Administrator
+              sso_region=us-west-2
+          hub:
+            account: hub
             id: "462478722501"
             email: whoa-hub@imma.io
-            sso_role: Administrator
-          net:
-            name: secrets
-            account: net
             org: whoa
+            name: hub
+            sso_role: Administrator
+            aws_config: |-
+              [profile whoa-hub]
+              sso_account_id=462478722501
+              sso_start_url=https://whoa-0.awsapps.com/start
+              sso_role_name=Administrator
+              sso_region=us-west-2
+          net:
+            account: net
             id: "464075062390"
             email: whoa-secrets@imma.io
-            sso_role: Administrator
-          pub:
-            name: prod
-            account: pub
             org: whoa
+            name: secrets
+            sso_role: Administrator
+            aws_config: |-
+              [profile whoa-net]
+              sso_account_id=464075062390
+              sso_start_url=https://whoa-0.awsapps.com/start
+              sso_role_name=Administrator
+              sso_region=us-west-2
+          pub:
+            account: pub
             id: "204827926367"
             email: whoa-prod@imma.io
+            org: whoa
+            name: prod
             sso_role: Administrator
+            aws_config: |-
+              [profile whoa-pub]
+              sso_account_id=204827926367
+              sso_start_url=https://whoa-0.awsapps.com/start
+              sso_role_name=Administrator
+              sso_region=us-west-2
+        sso_url: https://whoa-0.awsapps.com/start

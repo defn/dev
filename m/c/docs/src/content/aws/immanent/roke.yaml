@@ -1,6 +1,12 @@
-name: immanent-roke
 account: roke
-org: immanent
 id: "892560628624"
 email: immanent-roke@defn.us
+org: immanent
+name: immanent-roke
 sso_role: Administrator
+aws_config: |-
+  [profile immanent-roke]
+  sso_account_id=892560628624
+  sso_start_url=https://immanent-0.awsapps.com/start
+  sso_role_name=Administrator
+  sso_region=us-west-2

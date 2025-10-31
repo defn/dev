@@ -1,0 +1,12 @@
+account: net
+id: "101142583332"
+email: aws-curl+net@defn.us
+org: csso_url
+name: net
+sso_role: Administrator
+aws_config: |-
+  [profile csso_url-net]
+  sso_account_id=101142583332
+  sso_start_url=https://d-926760a859.awsapps.com/start
+  sso_role_name=Administrator
+  sso_region=us-west-2

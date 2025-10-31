@@ -1,6 +1,12 @@
-name: immanent-windkey
 account: windkey
-org: immanent
 id: "095764861781"
 email: immanent-windkey@defn.us
+org: immanent
+name: immanent-windkey
 sso_role: Administrator
+aws_config: |-
+  [profile immanent-windkey]
+  sso_account_id=095764861781
+  sso_start_url=https://immanent-0.awsapps.com/start
+  sso_role_name=Administrator
+  sso_region=us-west-2

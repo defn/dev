@@ -1,6 +1,12 @@
-name: sec
 account: prod
-org: spiral
 id: "398258703387"
 email: aws-spiral+sec@defn.us
+org: spiral
+name: sec
 sso_role: Administrator
+aws_config: |-
+  [profile spiral-prod]
+  sso_account_id=398258703387
+  sso_start_url=https://d-926760b322.awsapps.com/start
+  sso_role_name=Administrator
+  sso_region=us-west-2

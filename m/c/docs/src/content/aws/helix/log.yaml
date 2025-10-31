@@ -1,6 +1,12 @@
-name: log
 account: log
-org: helix
 id: "664427926343"
 email: aws-helix+log@defn.sh
+org: helix
+name: log
 sso_role: Administrator
+aws_config: |-
+  [profile helix-log]
+  sso_account_id=664427926343
+  sso_start_url=https://d-9a6716ffd1.awsapps.com/start
+  sso_role_name=Administrator
+  sso_region=us-east-2

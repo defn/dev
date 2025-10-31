@@ -1,6 +1,12 @@
-name: lib
 account: lib
-org: helix
 id: "377857698578"
 email: aws-helix+lib@defn.sh
+org: helix
+name: lib
 sso_role: Administrator
+aws_config: |-
+  [profile helix-lib]
+  sso_account_id=377857698578
+  sso_start_url=https://d-9a6716ffd1.awsapps.com/start
+  sso_role_name=Administrator
+  sso_region=us-east-2

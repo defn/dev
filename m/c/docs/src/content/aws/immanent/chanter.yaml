@@ -1,6 +1,12 @@
-name: immanent-chanter
 account: chanter
-org: immanent
 id: "071244154667"
 email: immanent-chanter@defn.us
+org: immanent
+name: immanent-chanter
 sso_role: Administrator
+aws_config: |-
+  [profile immanent-chanter]
+  sso_account_id=071244154667
+  sso_start_url=https://immanent-0.awsapps.com/start
+  sso_role_name=Administrator
+  sso_region=us-west-2

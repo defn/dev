@@ -1,6 +1,12 @@
-name: immanent-patterner
 account: patterner
-org: immanent
 id: "143220204648"
 email: immanent-patterner@defn.us
+org: immanent
+name: immanent-patterner
 sso_role: Administrator
+aws_config: |-
+  [profile immanent-patterner]
+  sso_account_id=143220204648
+  sso_start_url=https://immanent-0.awsapps.com/start
+  sso_role_name=Administrator
+  sso_region=us-west-2

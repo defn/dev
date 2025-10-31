@@ -1,6 +1,12 @@
-name: ops
 account: ops
-org: gyre
 id: "319951235442"
 email: aws-gyre+ops@defn.us
+org: gyre
+name: ops
 sso_role: Administrator
+aws_config: |-
+  [profile gyre-ops]
+  sso_account_id=319951235442
+  sso_start_url=https://d-9a6716e54a.awsapps.com/start
+  sso_role_name=Administrator
+  sso_region=us-east-2

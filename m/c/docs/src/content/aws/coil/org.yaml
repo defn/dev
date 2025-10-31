@@ -1,6 +1,12 @@
-name: coil
 account: org
-org: coil
 id: "138291560003"
 email: aws-coil@defn.us
+org: coil
+name: coil
 sso_role: Administrator
+aws_config: |-
+  [profile coil-org]
+  sso_account_id=138291560003
+  sso_start_url=https://d-90674c3cfd.awsapps.com/start
+  sso_role_name=Administrator
+  sso_region=us-east-1

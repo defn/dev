@@ -1,6 +1,12 @@
-name: ops
 account: ops
-org: helix
 id: "368812692254"
 email: aws-helix+ops@defn.sh
+org: helix
+name: ops
 sso_role: Administrator
+aws_config: |-
+  [profile helix-ops]
+  sso_account_id=368812692254
+  sso_start_url=https://d-9a6716ffd1.awsapps.com/start
+  sso_role_name=Administrator
+  sso_region=us-east-2

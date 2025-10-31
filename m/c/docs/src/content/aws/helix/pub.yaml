@@ -1,6 +1,12 @@
-name: pub
 account: pub
-org: helix
 id: "536806623881"
 email: aws-helix+pub@defn.sh
+org: helix
+name: pub
 sso_role: Administrator
+aws_config: |-
+  [profile helix-pub]
+  sso_account_id=536806623881
+  sso_start_url=https://d-9a6716ffd1.awsapps.com/start
+  sso_role_name=Administrator
+  sso_region=us-east-2

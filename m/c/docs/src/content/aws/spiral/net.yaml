@@ -1,6 +1,12 @@
-name: net
 account: net
-org: spiral
 id: "057533398557"
 email: aws-spiral+net@defn.us
+org: spiral
+name: net
 sso_role: Administrator
+aws_config: |-
+  [profile spiral-net]
+  sso_account_id=057533398557
+  sso_start_url=https://d-926760b322.awsapps.com/start
+  sso_role_name=Administrator
+  sso_region=us-west-2

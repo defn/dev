@@ -1,6 +1,12 @@
-name: ops
 account: ops
-org: circus
 id: "415618116579"
 email: aws-circus-ops@defn.sh
+org: circus
+name: ops
 sso_role: Administrator
+aws_config: |-
+  [profile circus-ops]
+  sso_account_id=415618116579
+  sso_start_url=https://d-92670c4790.awsapps.com/start
+  sso_role_name=Administrator
+  sso_region=us-west-2

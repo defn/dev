@@ -1,6 +1,12 @@
-name: ops
 account: ops
-org: vault
 id: "188066400611"
 email: aws-vault-ops@defn.sh
+org: vault
+name: ops
 sso_role: Administrator
+aws_config: |-
+  [profile vault-ops]
+  sso_account_id=188066400611
+  sso_start_url=https://d-9a672a0e52.awsapps.com/start
+  sso_role_name=Administrator
+  sso_region=us-east-2

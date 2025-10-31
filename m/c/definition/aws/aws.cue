@@ -5,85 +5,83 @@ package aws
 
 // diagram: https://whimsical.com/aws-account-layout-D6p7mKoZiwNqZdTZnysYUy
 
-org: {
-	[string]~(ORG,_): close({
-		region: "us-west-2" | "us-east-2" | "us-east-1"
-		url:    =~"https://[a-z0-9-]+.awsapps.com/start"
-		account: {
-			[string]~(ACCOUNT,_): close({
+"org": {
+	[string]~(ORG,_): {
+		org:        ORG
+		sso_region: "us-west-2" | "us-east-2" | "us-east-1"
+		"account": {
+			[string]~(ACCOUNT,_): {
 				account: ACCOUNT
 				org:     ORG
 
-				id!:    =~"^[0-9]+$"
-				email!: string
-				name:   string | *ACCOUNT
+				name: string | *ACCOUNT
 				if ACCOUNT == "org" {
 					name: ORG
 				}
 
 				sso_role: string | *"Administrator"
-			})
+			}
 		}
-	})
+	}
 }
 
 // aws account metadata
 org: close({
 	chamber: {
-		region: "us-west-2"
-		url:    "https://chamber-0.awsapps.com/start"
+		sso_region: "us-west-2"
+		sso_url:    "https://chamber-0.awsapps.com/start"
 	}
 	circus: {
-		region: "us-west-2"
-		url:    "https://d-92670c4790.awsapps.com/start"
+		sso_region: "us-west-2"
+		sso_url:    "https://d-92670c4790.awsapps.com/start"
 	}
 	coil: {
-		region: "us-east-1"
-		url:    "https://d-90674c3cfd.awsapps.com/start"
+		sso_region: "us-east-1"
+		sso_url:    "https://d-90674c3cfd.awsapps.com/start"
 	}
-	curl: {
-		region: "us-west-2"
-		url:    "https://d-926760a859.awsapps.com/start"
+	csso_url: {
+		sso_region: "us-west-2"
+		sso_url:    "https://d-926760a859.awsapps.com/start"
 	}
 	defn: {
-		region: "us-east-2"
-		url:    "https://defn.awsapps.com/start"
+		sso_region: "us-east-2"
+		sso_url:    "https://defn.awsapps.com/start"
 	}
 	fogg: {
-		region: "us-west-2"
-		url:    "https://fogg-0.awsapps.com/start"
+		sso_region: "us-west-2"
+		sso_url:    "https://fogg-0.awsapps.com/start"
 	}
 	gyre: {
-		region: "us-east-2"
-		url:    "https://d-9a6716e54a.awsapps.com/start"
+		sso_region: "us-east-2"
+		sso_url:    "https://d-9a6716e54a.awsapps.com/start"
 	}
 	helix: {
-		region: "us-east-2"
-		url:    "https://d-9a6716ffd1.awsapps.com/start"
+		sso_region: "us-east-2"
+		sso_url:    "https://d-9a6716ffd1.awsapps.com/start"
 	}
 	imma: {
-		region: "us-west-2"
-		url:    "https://imma-0.awsapps.com/start"
+		sso_region: "us-west-2"
+		sso_url:    "https://imma-0.awsapps.com/start"
 	}
 	immanent: {
-		region: "us-west-2"
-		url:    "https://immanent-0.awsapps.com/start"
+		sso_region: "us-west-2"
+		sso_url:    "https://immanent-0.awsapps.com/start"
 	}
 	jianghu: {
-		region: "us-west-2"
-		url:    "https://jianghu-0.awsapps.com/start"
+		sso_region: "us-west-2"
+		sso_url:    "https://jianghu-0.awsapps.com/start"
 	}
 	spiral: {
-		region: "us-west-2"
-		url:    "https://d-926760b322.awsapps.com/start"
+		sso_region: "us-west-2"
+		sso_url:    "https://d-926760b322.awsapps.com/start"
 	}
 	vault: {
-		region: "us-east-2"
-		url:    "https://d-9a672a0e52.awsapps.com/start"
+		sso_region: "us-east-2"
+		sso_url:    "https://d-9a672a0e52.awsapps.com/start"
 	}
 	whoa: {
-		region: "us-west-2"
-		url:    "https://whoa-0.awsapps.com/start"
+		sso_region: "us-west-2"
+		sso_url:    "https://whoa-0.awsapps.com/start"
 	}
 })
 
@@ -128,7 +126,7 @@ org: {
 	}
 
 	// Infrastructure subset: org, hub, lib, net
-	curl: account: {
+	csso_url: account: {
 		org: {
 			id:    "424535767618"
 			email: "aws-curl@defn.us"

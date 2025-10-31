@@ -1,6 +1,12 @@
-name: immanent-changer
 account: changer
-org: immanent
 id: "003884504807"
 email: immanent-changer@defn.us
+org: immanent
+name: immanent-changer
 sso_role: Administrator
+aws_config: |-
+  [profile immanent-changer]
+  sso_account_id=003884504807
+  sso_start_url=https://immanent-0.awsapps.com/start
+  sso_role_name=Administrator
+  sso_region=us-west-2

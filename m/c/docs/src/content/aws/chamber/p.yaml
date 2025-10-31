@@ -1,6 +1,12 @@
-name: defn-p
 account: p
-org: chamber
 id: "706168331526"
 email: defn-p@defn.us
+org: chamber
+name: defn-p
 sso_role: Administrator
+aws_config: |-
+  [profile chamber-p]
+  sso_account_id=706168331526
+  sso_start_url=https://chamber-0.awsapps.com/start
+  sso_role_name=Administrator
+  sso_region=us-west-2

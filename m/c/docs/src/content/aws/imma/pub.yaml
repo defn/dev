@@ -1,6 +1,12 @@
-name: imma-prod
 account: pub
-org: imma
 id: "766142996227"
 email: imma-prod@imma.io
+org: imma
+name: imma-prod
 sso_role: Administrator
+aws_config: |-
+  [profile imma-pub]
+  sso_account_id=766142996227
+  sso_start_url=https://imma-0.awsapps.com/start
+  sso_role_name=Administrator
+  sso_region=us-west-2

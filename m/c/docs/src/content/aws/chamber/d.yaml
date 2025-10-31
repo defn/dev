@@ -1,6 +1,12 @@
-name: defn-d
 account: d
-org: chamber
 id: "699441347021"
 email: box-adm1@imma.io
+org: chamber
+name: defn-d
 sso_role: Administrator
+aws_config: |-
+  [profile chamber-d]
+  sso_account_id=699441347021
+  sso_start_url=https://chamber-0.awsapps.com/start
+  sso_role_name=Administrator
+  sso_region=us-west-2

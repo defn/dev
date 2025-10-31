@@ -1,6 +1,12 @@
-name: immanent
 account: org
-org: immanent
 id: "545070380609"
 email: aws-immanent@defn.us
+org: immanent
+name: immanent
 sso_role: Administrator
+aws_config: |-
+  [profile immanent-org]
+  sso_account_id=545070380609
+  sso_start_url=https://immanent-0.awsapps.com/start
+  sso_role_name=Administrator
+  sso_region=us-west-2

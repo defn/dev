@@ -1,6 +1,12 @@
-name: jianghu
 account: org
-org: jianghu
 id: "657613322961"
 email: aws-jianghu@defn.us
+org: jianghu
+name: jianghu
 sso_role: Administrator
+aws_config: |-
+  [profile jianghu-org]
+  sso_account_id=657613322961
+  sso_start_url=https://jianghu-0.awsapps.com/start
+  sso_role_name=Administrator
+  sso_region=us-west-2

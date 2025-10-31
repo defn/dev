@@ -1,6 +1,12 @@
-name: sec
 account: ci
-org: helix
 id: "018520313738"
 email: aws-helix+sec@defn.sh
+org: helix
+name: sec
 sso_role: Administrator
+aws_config: |-
+  [profile helix-ci]
+  sso_account_id=018520313738
+  sso_start_url=https://d-9a6716ffd1.awsapps.com/start
+  sso_role_name=Administrator
+  sso_region=us-east-2

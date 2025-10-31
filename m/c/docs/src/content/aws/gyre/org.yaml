@@ -1,6 +1,12 @@
-name: gyre
 account: org
-org: gyre
 id: "065163301604"
 email: aws-gyre@defn.us
+org: gyre
+name: gyre
 sso_role: Administrator
+aws_config: |-
+  [profile gyre-org]
+  sso_account_id=065163301604
+  sso_start_url=https://d-9a6716e54a.awsapps.com/start
+  sso_role_name=Administrator
+  sso_region=us-east-2

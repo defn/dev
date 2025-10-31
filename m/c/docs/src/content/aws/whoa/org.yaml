@@ -1,6 +1,12 @@
-name: whoa
 account: org
-org: whoa
 id: "389772512117"
 email: aws-whoa@defn.us
+org: whoa
+name: whoa
 sso_role: Administrator
+aws_config: |-
+  [profile whoa-org]
+  sso_account_id=389772512117
+  sso_start_url=https://whoa-0.awsapps.com/start
+  sso_role_name=Administrator
+  sso_region=us-west-2

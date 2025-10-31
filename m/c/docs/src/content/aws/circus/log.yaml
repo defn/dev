@@ -1,6 +1,12 @@
-name: audit
 account: log
-org: circus
 id: "707476523482"
 email: aws-circus-audit@defn.sh
+org: circus
+name: audit
 sso_role: Administrator
+aws_config: |-
+  [profile circus-log]
+  sso_account_id=707476523482
+  sso_start_url=https://d-92670c4790.awsapps.com/start
+  sso_role_name=Administrator
+  sso_region=us-west-2

@@ -1,6 +1,12 @@
-name: home
 account: ci
-org: fogg
 id: "812459563189"
 email: fogg-home@defn.sh
+org: fogg
+name: home
 sso_role: Administrator
+aws_config: |-
+  [profile fogg-ci]
+  sso_account_id=812459563189
+  sso_start_url=https://fogg-0.awsapps.com/start
+  sso_role_name=Administrator
+  sso_region=us-west-2

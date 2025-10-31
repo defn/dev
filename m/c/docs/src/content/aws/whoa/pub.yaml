@@ -1,6 +1,12 @@
-name: prod
 account: pub
-org: whoa
 id: "204827926367"
 email: whoa-prod@imma.io
+org: whoa
+name: prod
 sso_role: Administrator
+aws_config: |-
+  [profile whoa-pub]
+  sso_account_id=204827926367
+  sso_start_url=https://whoa-0.awsapps.com/start
+  sso_role_name=Administrator
+  sso_region=us-west-2

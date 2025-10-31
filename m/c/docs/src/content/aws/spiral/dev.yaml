@@ -1,6 +1,12 @@
-name: dev
 account: dev
-org: spiral
 id: "308726031860"
 email: aws-spiral+dev@defn.us
+org: spiral
+name: dev
 sso_role: Administrator
+aws_config: |-
+  [profile spiral-dev]
+  sso_account_id=308726031860
+  sso_start_url=https://d-926760b322.awsapps.com/start
+  sso_role_name=Administrator
+  sso_region=us-west-2

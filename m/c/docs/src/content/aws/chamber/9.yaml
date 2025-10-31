@@ -1,6 +1,12 @@
-name: chamber-9
 account: "9"
-org: chamber
 id: "950940975070"
 email: chamber-9@defn.us
+org: chamber
+name: chamber-9
 sso_role: Administrator
+aws_config: |-
+  [profile chamber-9]
+  sso_account_id=950940975070
+  sso_start_url=https://chamber-0.awsapps.com/start
+  sso_role_name=Administrator
+  sso_region=us-west-2

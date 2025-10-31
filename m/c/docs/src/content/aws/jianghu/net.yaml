@@ -1,6 +1,12 @@
-name: tahoe
 account: net
-org: jianghu
 id: "025636091251"
 email: tahoe@defn.us
+org: jianghu
+name: tahoe
 sso_role: Administrator
+aws_config: |-
+  [profile jianghu-net]
+  sso_account_id=025636091251
+  sso_start_url=https://jianghu-0.awsapps.com/start
+  sso_role_name=Administrator
+  sso_region=us-west-2

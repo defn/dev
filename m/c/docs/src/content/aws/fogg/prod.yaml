@@ -1,6 +1,12 @@
-name: postx
 account: prod
-org: fogg
 id: "565963418226"
 email: fogg-postx@defn.sh
+org: fogg
+name: postx
 sso_role: Administrator
+aws_config: |-
+  [profile fogg-prod]
+  sso_account_id=565963418226
+  sso_start_url=https://fogg-0.awsapps.com/start
+  sso_role_name=Administrator
+  sso_region=us-west-2

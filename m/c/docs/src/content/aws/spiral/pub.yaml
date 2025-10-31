@@ -1,6 +1,12 @@
-name: dmz
 account: pub
-org: spiral
 id: "130046154300"
 email: aws-spiral+dmz@defn.us
+org: spiral
+name: dmz
 sso_role: Administrator
+aws_config: |-
+  [profile spiral-pub]
+  sso_account_id=130046154300
+  sso_start_url=https://d-926760b322.awsapps.com/start
+  sso_role_name=Administrator
+  sso_region=us-west-2

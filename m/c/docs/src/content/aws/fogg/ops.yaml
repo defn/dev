@@ -1,6 +1,12 @@
-name: gateway
 account: ops
-org: fogg
 id: "318746665903"
 email: fogg-gateway@defn.sh
+org: fogg
+name: gateway
 sso_role: Administrator
+aws_config: |-
+  [profile fogg-ops]
+  sso_account_id=318746665903
+  sso_start_url=https://fogg-0.awsapps.com/start
+  sso_role_name=Administrator
+  sso_region=us-west-2

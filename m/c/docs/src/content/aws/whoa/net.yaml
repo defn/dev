@@ -1,6 +1,12 @@
-name: secrets
 account: net
-org: whoa
 id: "464075062390"
 email: whoa-secrets@imma.io
+org: whoa
+name: secrets
 sso_role: Administrator
+aws_config: |-
+  [profile whoa-net]
+  sso_account_id=464075062390
+  sso_start_url=https://whoa-0.awsapps.com/start
+  sso_role_name=Administrator
+  sso_region=us-west-2

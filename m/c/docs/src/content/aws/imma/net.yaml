@@ -1,6 +1,12 @@
-name: imma-defn
 account: net
-org: imma
 id: "246197522468"
 email: imma-defn@defn.us
+org: imma
+name: imma-defn
 sso_role: Administrator
+aws_config: |-
+  [profile imma-net]
+  sso_account_id=246197522468
+  sso_start_url=https://imma-0.awsapps.com/start
+  sso_role_name=Administrator
+  sso_region=us-west-2

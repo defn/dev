@@ -1,6 +1,12 @@
-name: immanent-ged
 account: ged
-org: immanent
 id: "640792184178"
 email: immanent-ged@defn.us
+org: immanent
+name: immanent-ged
 sso_role: Administrator
+aws_config: |-
+  [profile immanent-ged]
+  sso_account_id=640792184178
+  sso_start_url=https://immanent-0.awsapps.com/start
+  sso_role_name=Administrator
+  sso_region=us-west-2

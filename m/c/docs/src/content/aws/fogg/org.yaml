@@ -1,6 +1,12 @@
-name: fogg
 account: org
-org: fogg
 id: "328216504962"
 email: spiral@defn.sh
+org: fogg
+name: fogg
 sso_role: Administrator
+aws_config: |-
+  [profile fogg-org]
+  sso_account_id=328216504962
+  sso_start_url=https://fogg-0.awsapps.com/start
+  sso_role_name=Administrator
+  sso_region=us-west-2

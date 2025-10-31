@@ -1,6 +1,12 @@
-name: hub
 account: hub
-org: vault
 id: "539099112425"
 email: aws-vault-hub@defn.sh
+org: vault
+name: hub
 sso_role: Administrator
+aws_config: |-
+  [profile vault-hub]
+  sso_account_id=539099112425
+  sso_start_url=https://d-9a672a0e52.awsapps.com/start
+  sso_role_name=Administrator
+  sso_region=us-east-2

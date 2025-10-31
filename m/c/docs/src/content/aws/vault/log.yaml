@@ -1,6 +1,12 @@
-name: audit
 account: log
-org: vault
 id: "749185891195"
 email: aws-vault-audit@defn.sh
+org: vault
+name: audit
 sso_role: Administrator
+aws_config: |-
+  [profile vault-log]
+  sso_account_id=749185891195
+  sso_start_url=https://d-9a672a0e52.awsapps.com/start
+  sso_role_name=Administrator
+  sso_region=us-east-2

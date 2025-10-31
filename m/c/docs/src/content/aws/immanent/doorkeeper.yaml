@@ -1,6 +1,12 @@
-name: immanent-doorkeeper
 account: doorkeeper
-org: immanent
 id: "013267321144"
 email: immanent-doorkeeper@defn.us
+org: immanent
+name: immanent-doorkeeper
 sso_role: Administrator
+aws_config: |-
+  [profile immanent-doorkeeper]
+  sso_account_id=013267321144
+  sso_start_url=https://immanent-0.awsapps.com/start
+  sso_role_name=Administrator
+  sso_region=us-west-2

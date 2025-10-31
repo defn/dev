@@ -1,6 +1,12 @@
-name: dev
 account: dev
-org: whoa
 id: "439761234835"
 email: whoa-dev@imma.io
+org: whoa
+name: dev
 sso_role: Administrator
+aws_config: |-
+  [profile whoa-dev]
+  sso_account_id=439761234835
+  sso_start_url=https://whoa-0.awsapps.com/start
+  sso_role_name=Administrator
+  sso_region=us-west-2

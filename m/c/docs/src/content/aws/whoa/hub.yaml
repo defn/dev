@@ -1,6 +1,12 @@
-name: hub
 account: hub
-org: whoa
 id: "462478722501"
 email: whoa-hub@imma.io
+org: whoa
+name: hub
 sso_role: Administrator
+aws_config: |-
+  [profile whoa-hub]
+  sso_account_id=462478722501
+  sso_start_url=https://whoa-0.awsapps.com/start
+  sso_role_name=Administrator
+  sso_region=us-west-2

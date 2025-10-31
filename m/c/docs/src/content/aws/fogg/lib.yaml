@@ -1,6 +1,12 @@
-name: data
 account: lib
-org: fogg
 id: "624713464251"
 email: fogg-data@defn.sh
+org: fogg
+name: data
 sso_role: Administrator
+aws_config: |-
+  [profile fogg-lib]
+  sso_account_id=624713464251
+  sso_start_url=https://fogg-0.awsapps.com/start
+  sso_role_name=Administrator
+  sso_region=us-west-2

@@ -1,6 +1,12 @@
-name: klamath
 account: log
-org: jianghu
 id: "298431841138"
 email: klamath@defn.us
+org: jianghu
+name: klamath
 sso_role: Administrator
+aws_config: |-
+  [profile jianghu-log]
+  sso_account_id=298431841138
+  sso_start_url=https://jianghu-0.awsapps.com/start
+  sso_role_name=Administrator
+  sso_region=us-west-2

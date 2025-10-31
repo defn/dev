@@ -1,6 +1,12 @@
-name: pub
 account: pub
-org: vault
 id: "851162413429"
 email: aws-vault-pub@defn.sh
+org: vault
+name: pub
 sso_role: Administrator
+aws_config: |-
+  [profile vault-pub]
+  sso_account_id=851162413429
+  sso_start_url=https://d-9a672a0e52.awsapps.com/start
+  sso_role_name=Administrator
+  sso_region=us-east-2

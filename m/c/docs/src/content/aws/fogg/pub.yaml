@@ -1,6 +1,12 @@
-name: security
 account: pub
-org: fogg
 id: "372333168887"
 email: fogg-security@defn.sh
+org: fogg
+name: security
 sso_role: Administrator
+aws_config: |-
+  [profile fogg-pub]
+  sso_account_id=372333168887
+  sso_start_url=https://fogg-0.awsapps.com/start
+  sso_role_name=Administrator
+  sso_region=us-west-2

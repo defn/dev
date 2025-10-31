@@ -1,6 +1,12 @@
-name: dev
 account: dev
-org: vault
 id: "497393606242"
 email: aws-vault-dev@defn.sh
+org: vault
+name: dev
 sso_role: Administrator
+aws_config: |-
+  [profile vault-dev]
+  sso_account_id=497393606242
+  sso_start_url=https://d-9a672a0e52.awsapps.com/start
+  sso_role_name=Administrator
+  sso_region=us-east-2

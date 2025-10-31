@@ -1,6 +1,12 @@
-name: imma-dgwyn
 account: log
-org: imma
 id: "289716781198"
 email: imma-dgwyn@defn.us
+org: imma
+name: imma-dgwyn
 sso_role: Administrator
+aws_config: |-
+  [profile imma-log]
+  sso_account_id=289716781198
+  sso_start_url=https://imma-0.awsapps.com/start
+  sso_role_name=Administrator
+  sso_region=us-west-2

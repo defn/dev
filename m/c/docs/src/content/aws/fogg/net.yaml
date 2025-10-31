@@ -1,6 +1,12 @@
-name: asset
 account: net
-org: fogg
 id: "060659916753"
 email: fogg-asset@defn.sh
+org: fogg
+name: asset
 sso_role: Administrator
+aws_config: |-
+  [profile fogg-net]
+  sso_account_id=060659916753
+  sso_start_url=https://fogg-0.awsapps.com/start
+  sso_role_name=Administrator
+  sso_region=us-west-2

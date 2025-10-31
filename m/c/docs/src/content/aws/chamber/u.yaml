@@ -1,6 +1,12 @@
-name: defn-qa
 account: u
-org: chamber
 id: "467995590869"
 email: aws-qa@defn.us
+org: chamber
+name: defn-qa
 sso_role: Administrator
+aws_config: |-
+  [profile chamber-u]
+  sso_account_id=467995590869
+  sso_start_url=https://chamber-0.awsapps.com/start
+  sso_role_name=Administrator
+  sso_region=us-west-2

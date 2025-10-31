@@ -1,6 +1,12 @@
-name: immanent-summoner
 account: summoner
-org: immanent
 id: "397411277587"
 email: immanent-summoner@defn.us
+org: immanent
+name: immanent-summoner
 sso_role: Administrator
+aws_config: |-
+  [profile immanent-summoner]
+  sso_account_id=397411277587
+  sso_start_url=https://immanent-0.awsapps.com/start
+  sso_role_name=Administrator
+  sso_region=us-west-2

@@ -1,6 +1,12 @@
-name: hub
 account: hub
-org: fogg
 id: "337248635000"
 email: fogg-hub@defn.sh
+org: fogg
+name: hub
 sso_role: Administrator
+aws_config: |-
+  [profile fogg-hub]
+  sso_account_id=337248635000
+  sso_start_url=https://fogg-0.awsapps.com/start
+  sso_role_name=Administrator
+  sso_region=us-west-2

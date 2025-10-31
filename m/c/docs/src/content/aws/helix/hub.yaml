@@ -1,6 +1,12 @@
-name: hub
 account: hub
-org: helix
 id: "436043820387"
 email: aws-helix+hub@defn.sh
+org: helix
+name: hub
 sso_role: Administrator
+aws_config: |-
+  [profile helix-hub]
+  sso_account_id=436043820387
+  sso_start_url=https://d-9a6716ffd1.awsapps.com/start
+  sso_role_name=Administrator
+  sso_region=us-east-2

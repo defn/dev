@@ -1,6 +1,12 @@
-name: library
 account: lib
-org: vault
 id: "066356637485"
 email: aws-vault-library@defn.sh
+org: vault
+name: library
 sso_role: Administrator
+aws_config: |-
+  [profile vault-lib]
+  sso_account_id=066356637485
+  sso_start_url=https://d-9a672a0e52.awsapps.com/start
+  sso_role_name=Administrator
+  sso_region=us-east-2

@@ -1,6 +1,12 @@
-name: govcloud
 account: lib
-org: circus
 id: "497790518354"
 email: aws-circus-govcloud@defn.sh
+org: circus
+name: govcloud
 sso_role: Administrator
+aws_config: |-
+  [profile circus-lib]
+  sso_account_id=497790518354
+  sso_start_url=https://d-92670c4790.awsapps.com/start
+  sso_role_name=Administrator
+  sso_region=us-west-2
