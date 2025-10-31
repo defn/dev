@@ -1,0 +1,646 @@
+{
+  "//": {
+    "metadata": {
+      "backend": "s3",
+      "stackName": "org-chamber",
+      "version": "0.21.0"
+    },
+    "outputs": {}
+  },
+  "data": {
+    "aws_ssoadmin_instances": {
+      "sso_instance": {
+        "//": {
+          "metadata": {
+            "path": "org-chamber/sso_instance",
+            "uniqueId": "sso_instance"
+          }
+        }
+      }
+    }
+  },
+  "resource": {
+    "aws_identitystore_group": {
+      "administrators_sso_group": {
+        "//": {
+          "metadata": {
+            "path": "org-chamber/administrators_sso_group",
+            "uniqueId": "administrators_sso_group"
+          }
+        }
+      }
+    },
+    "aws_organizations_account": {
+      "chamber-1": {
+        "//": {
+          "metadata": {
+            "path": "org-chamber/chamber-1",
+            "uniqueId": "chamber-1"
+          }
+        }
+      },
+      "chamber-2": {
+        "//": {
+          "metadata": {
+            "path": "org-chamber/chamber-2",
+            "uniqueId": "chamber-2"
+          }
+        }
+      },
+      "chamber-3": {
+        "//": {
+          "metadata": {
+            "path": "org-chamber/chamber-3",
+            "uniqueId": "chamber-3"
+          }
+        }
+      },
+      "chamber-4": {
+        "//": {
+          "metadata": {
+            "path": "org-chamber/chamber-4",
+            "uniqueId": "chamber-4"
+          }
+        }
+      },
+      "chamber-5": {
+        "//": {
+          "metadata": {
+            "path": "org-chamber/chamber-5",
+            "uniqueId": "chamber-5"
+          }
+        }
+      },
+      "chamber-6": {
+        "//": {
+          "metadata": {
+            "path": "org-chamber/chamber-6",
+            "uniqueId": "chamber-6"
+          }
+        }
+      },
+      "chamber-7": {
+        "//": {
+          "metadata": {
+            "path": "org-chamber/chamber-7",
+            "uniqueId": "chamber-7"
+          }
+        }
+      },
+      "chamber-8": {
+        "//": {
+          "metadata": {
+            "path": "org-chamber/chamber-8",
+            "uniqueId": "chamber-8"
+          }
+        }
+      },
+      "chamber-9": {
+        "//": {
+          "metadata": {
+            "path": "org-chamber/chamber-9",
+            "uniqueId": "chamber-9"
+          }
+        }
+      },
+      "chamber-a": {
+        "//": {
+          "metadata": {
+            "path": "org-chamber/chamber-a",
+            "uniqueId": "chamber-a"
+          }
+        }
+      },
+      "chamber-b": {
+        "//": {
+          "metadata": {
+            "path": "org-chamber/chamber-b",
+            "uniqueId": "chamber-b"
+          }
+        }
+      },
+      "chamber-c": {
+        "//": {
+          "metadata": {
+            "path": "org-chamber/chamber-c",
+            "uniqueId": "chamber-c"
+          }
+        }
+      },
+      "chamber-d": {
+        "//": {
+          "metadata": {
+            "path": "org-chamber/chamber-d",
+            "uniqueId": "chamber-d"
+          }
+        }
+      },
+      "chamber-e": {
+        "//": {
+          "metadata": {
+            "path": "org-chamber/chamber-e",
+            "uniqueId": "chamber-e"
+          }
+        }
+      },
+      "chamber-f": {
+        "//": {
+          "metadata": {
+            "path": "org-chamber/chamber-f",
+            "uniqueId": "chamber-f"
+          }
+        }
+      },
+      "chamber-g": {
+        "//": {
+          "metadata": {
+            "path": "org-chamber/chamber-g",
+            "uniqueId": "chamber-g"
+          }
+        }
+      },
+      "chamber-h": {
+        "//": {
+          "metadata": {
+            "path": "org-chamber/chamber-h",
+            "uniqueId": "chamber-h"
+          }
+        }
+      },
+      "chamber-i": {
+        "//": {
+          "metadata": {
+            "path": "org-chamber/chamber-i",
+            "uniqueId": "chamber-i"
+          }
+        }
+      },
+      "chamber-j": {
+        "//": {
+          "metadata": {
+            "path": "org-chamber/chamber-j",
+            "uniqueId": "chamber-j"
+          }
+        }
+      },
+      "chamber-l": {
+        "//": {
+          "metadata": {
+            "path": "org-chamber/chamber-l",
+            "uniqueId": "chamber-l"
+          }
+        }
+      },
+      "chamber-m": {
+        "//": {
+          "metadata": {
+            "path": "org-chamber/chamber-m",
+            "uniqueId": "chamber-m"
+          }
+        }
+      },
+      "chamber-n": {
+        "//": {
+          "metadata": {
+            "path": "org-chamber/chamber-n",
+            "uniqueId": "chamber-n"
+          }
+        }
+      },
+      "chamber-o": {
+        "//": {
+          "metadata": {
+            "path": "org-chamber/chamber-o",
+            "uniqueId": "chamber-o"
+          }
+        }
+      },
+      "chamber-org": {
+        "//": {
+          "metadata": {
+            "path": "org-chamber/chamber-org",
+            "uniqueId": "chamber-org"
+          }
+        }
+      },
+      "chamber-p": {
+        "//": {
+          "metadata": {
+            "path": "org-chamber/chamber-p",
+            "uniqueId": "chamber-p"
+          }
+        }
+      },
+      "chamber-q": {
+        "//": {
+          "metadata": {
+            "path": "org-chamber/chamber-q",
+            "uniqueId": "chamber-q"
+          }
+        }
+      },
+      "chamber-r": {
+        "//": {
+          "metadata": {
+            "path": "org-chamber/chamber-r",
+            "uniqueId": "chamber-r"
+          }
+        }
+      },
+      "chamber-s": {
+        "//": {
+          "metadata": {
+            "path": "org-chamber/chamber-s",
+            "uniqueId": "chamber-s"
+          }
+        }
+      },
+      "chamber-t": {
+        "//": {
+          "metadata": {
+            "path": "org-chamber/chamber-t",
+            "uniqueId": "chamber-t"
+          }
+        }
+      },
+      "chamber-u": {
+        "//": {
+          "metadata": {
+            "path": "org-chamber/chamber-u",
+            "uniqueId": "chamber-u"
+          }
+        }
+      },
+      "chamber-v": {
+        "//": {
+          "metadata": {
+            "path": "org-chamber/chamber-v",
+            "uniqueId": "chamber-v"
+          }
+        }
+      },
+      "chamber-w": {
+        "//": {
+          "metadata": {
+            "path": "org-chamber/chamber-w",
+            "uniqueId": "chamber-w"
+          }
+        }
+      },
+      "chamber-x": {
+        "//": {
+          "metadata": {
+            "path": "org-chamber/chamber-x",
+            "uniqueId": "chamber-x"
+          }
+        }
+      },
+      "chamber-y": {
+        "//": {
+          "metadata": {
+            "path": "org-chamber/chamber-y",
+            "uniqueId": "chamber-y"
+          }
+        }
+      },
+      "chamber-z": {
+        "//": {
+          "metadata": {
+            "path": "org-chamber/chamber-z",
+            "uniqueId": "chamber-z"
+          }
+        }
+      }
+    },
+    "aws_organizations_organization": {
+      "organization": {
+        "//": {
+          "metadata": {
+            "path": "org-chamber/organization",
+            "uniqueId": "organization"
+          }
+        }
+      }
+    },
+    "aws_ssoadmin_account_assignment": {
+      "chamber-4_admin_sso_account_assignment": {
+        "//": {
+          "metadata": {
+            "path": "org-chamber/chamber-4_admin_sso_account_assignment",
+            "uniqueId": "chamber-4_admin_sso_account_assignment"
+          }
+        }
+      },
+      "chamber-5_admin_sso_account_assignment": {
+        "//": {
+          "metadata": {
+            "path": "org-chamber/chamber-5_admin_sso_account_assignment",
+            "uniqueId": "chamber-5_admin_sso_account_assignment"
+          }
+        }
+      },
+      "chamber-6_admin_sso_account_assignment": {
+        "//": {
+          "metadata": {
+            "path": "org-chamber/chamber-6_admin_sso_account_assignment",
+            "uniqueId": "chamber-6_admin_sso_account_assignment"
+          }
+        }
+      },
+      "chamber-7_admin_sso_account_assignment": {
+        "//": {
+          "metadata": {
+            "path": "org-chamber/chamber-7_admin_sso_account_assignment",
+            "uniqueId": "chamber-7_admin_sso_account_assignment"
+          }
+        }
+      },
+      "chamber-8_admin_sso_account_assignment": {
+        "//": {
+          "metadata": {
+            "path": "org-chamber/chamber-8_admin_sso_account_assignment",
+            "uniqueId": "chamber-8_admin_sso_account_assignment"
+          }
+        }
+      },
+      "chamber-9_admin_sso_account_assignment": {
+        "//": {
+          "metadata": {
+            "path": "org-chamber/chamber-9_admin_sso_account_assignment",
+            "uniqueId": "chamber-9_admin_sso_account_assignment"
+          }
+        }
+      },
+      "chamber_admin_sso_account_assignment": {
+        "//": {
+          "metadata": {
+            "path": "org-chamber/chamber_admin_sso_account_assignment",
+            "uniqueId": "chamber_admin_sso_account_assignment"
+          }
+        }
+      },
+      "defn-a_admin_sso_account_assignment": {
+        "//": {
+          "metadata": {
+            "path": "org-chamber/defn-a_admin_sso_account_assignment",
+            "uniqueId": "defn-a_admin_sso_account_assignment"
+          }
+        }
+      },
+      "defn-b_admin_sso_account_assignment": {
+        "//": {
+          "metadata": {
+            "path": "org-chamber/defn-b_admin_sso_account_assignment",
+            "uniqueId": "defn-b_admin_sso_account_assignment"
+          }
+        }
+      },
+      "defn-c_admin_sso_account_assignment": {
+        "//": {
+          "metadata": {
+            "path": "org-chamber/defn-c_admin_sso_account_assignment",
+            "uniqueId": "defn-c_admin_sso_account_assignment"
+          }
+        }
+      },
+      "defn-cd_admin_sso_account_assignment": {
+        "//": {
+          "metadata": {
+            "path": "org-chamber/defn-cd_admin_sso_account_assignment",
+            "uniqueId": "defn-cd_admin_sso_account_assignment"
+          }
+        }
+      },
+      "defn-ci_admin_sso_account_assignment": {
+        "//": {
+          "metadata": {
+            "path": "org-chamber/defn-ci_admin_sso_account_assignment",
+            "uniqueId": "defn-ci_admin_sso_account_assignment"
+          }
+        }
+      },
+      "defn-d_admin_sso_account_assignment": {
+        "//": {
+          "metadata": {
+            "path": "org-chamber/defn-d_admin_sso_account_assignment",
+            "uniqueId": "defn-d_admin_sso_account_assignment"
+          }
+        }
+      },
+      "defn-dev_admin_sso_account_assignment": {
+        "//": {
+          "metadata": {
+            "path": "org-chamber/defn-dev_admin_sso_account_assignment",
+            "uniqueId": "defn-dev_admin_sso_account_assignment"
+          }
+        }
+      },
+      "defn-e_admin_sso_account_assignment": {
+        "//": {
+          "metadata": {
+            "path": "org-chamber/defn-e_admin_sso_account_assignment",
+            "uniqueId": "defn-e_admin_sso_account_assignment"
+          }
+        }
+      },
+      "defn-f_admin_sso_account_assignment": {
+        "//": {
+          "metadata": {
+            "path": "org-chamber/defn-f_admin_sso_account_assignment",
+            "uniqueId": "defn-f_admin_sso_account_assignment"
+          }
+        }
+      },
+      "defn-g_admin_sso_account_assignment": {
+        "//": {
+          "metadata": {
+            "path": "org-chamber/defn-g_admin_sso_account_assignment",
+            "uniqueId": "defn-g_admin_sso_account_assignment"
+          }
+        }
+      },
+      "defn-h_admin_sso_account_assignment": {
+        "//": {
+          "metadata": {
+            "path": "org-chamber/defn-h_admin_sso_account_assignment",
+            "uniqueId": "defn-h_admin_sso_account_assignment"
+          }
+        }
+      },
+      "defn-hub_admin_sso_account_assignment": {
+        "//": {
+          "metadata": {
+            "path": "org-chamber/defn-hub_admin_sso_account_assignment",
+            "uniqueId": "defn-hub_admin_sso_account_assignment"
+          }
+        }
+      },
+      "defn-i_admin_sso_account_assignment": {
+        "//": {
+          "metadata": {
+            "path": "org-chamber/defn-i_admin_sso_account_assignment",
+            "uniqueId": "defn-i_admin_sso_account_assignment"
+          }
+        }
+      },
+      "defn-j_admin_sso_account_assignment": {
+        "//": {
+          "metadata": {
+            "path": "org-chamber/defn-j_admin_sso_account_assignment",
+            "uniqueId": "defn-j_admin_sso_account_assignment"
+          }
+        }
+      },
+      "defn-l_admin_sso_account_assignment": {
+        "//": {
+          "metadata": {
+            "path": "org-chamber/defn-l_admin_sso_account_assignment",
+            "uniqueId": "defn-l_admin_sso_account_assignment"
+          }
+        }
+      },
+      "defn-m_admin_sso_account_assignment": {
+        "//": {
+          "metadata": {
+            "path": "org-chamber/defn-m_admin_sso_account_assignment",
+            "uniqueId": "defn-m_admin_sso_account_assignment"
+          }
+        }
+      },
+      "defn-n_admin_sso_account_assignment": {
+        "//": {
+          "metadata": {
+            "path": "org-chamber/defn-n_admin_sso_account_assignment",
+            "uniqueId": "defn-n_admin_sso_account_assignment"
+          }
+        }
+      },
+      "defn-o_admin_sso_account_assignment": {
+        "//": {
+          "metadata": {
+            "path": "org-chamber/defn-o_admin_sso_account_assignment",
+            "uniqueId": "defn-o_admin_sso_account_assignment"
+          }
+        }
+      },
+      "defn-p_admin_sso_account_assignment": {
+        "//": {
+          "metadata": {
+            "path": "org-chamber/defn-p_admin_sso_account_assignment",
+            "uniqueId": "defn-p_admin_sso_account_assignment"
+          }
+        }
+      },
+      "defn-prod_admin_sso_account_assignment": {
+        "//": {
+          "metadata": {
+            "path": "org-chamber/defn-prod_admin_sso_account_assignment",
+            "uniqueId": "defn-prod_admin_sso_account_assignment"
+          }
+        }
+      },
+      "defn-qa_admin_sso_account_assignment": {
+        "//": {
+          "metadata": {
+            "path": "org-chamber/defn-qa_admin_sso_account_assignment",
+            "uniqueId": "defn-qa_admin_sso_account_assignment"
+          }
+        }
+      },
+      "defn-r_admin_sso_account_assignment": {
+        "//": {
+          "metadata": {
+            "path": "org-chamber/defn-r_admin_sso_account_assignment",
+            "uniqueId": "defn-r_admin_sso_account_assignment"
+          }
+        }
+      },
+      "defn-s_admin_sso_account_assignment": {
+        "//": {
+          "metadata": {
+            "path": "org-chamber/defn-s_admin_sso_account_assignment",
+            "uniqueId": "defn-s_admin_sso_account_assignment"
+          }
+        }
+      },
+      "defn-security_admin_sso_account_assignment": {
+        "//": {
+          "metadata": {
+            "path": "org-chamber/defn-security_admin_sso_account_assignment",
+            "uniqueId": "defn-security_admin_sso_account_assignment"
+          }
+        }
+      },
+      "defn-stage_admin_sso_account_assignment": {
+        "//": {
+          "metadata": {
+            "path": "org-chamber/defn-stage_admin_sso_account_assignment",
+            "uniqueId": "defn-stage_admin_sso_account_assignment"
+          }
+        }
+      },
+      "defn-t_admin_sso_account_assignment": {
+        "//": {
+          "metadata": {
+            "path": "org-chamber/defn-t_admin_sso_account_assignment",
+            "uniqueId": "defn-t_admin_sso_account_assignment"
+          }
+        }
+      },
+      "defn-v_admin_sso_account_assignment": {
+        "//": {
+          "metadata": {
+            "path": "org-chamber/defn-v_admin_sso_account_assignment",
+            "uniqueId": "defn-v_admin_sso_account_assignment"
+          }
+        }
+      },
+      "defn-w_admin_sso_account_assignment": {
+        "//": {
+          "metadata": {
+            "path": "org-chamber/defn-w_admin_sso_account_assignment",
+            "uniqueId": "defn-w_admin_sso_account_assignment"
+          }
+        }
+      }
+    },
+    "aws_ssoadmin_managed_policy_attachment": {
+      "admin_sso_managed_policy_attachment": {
+        "//": {
+          "metadata": {
+            "path": "org-chamber/admin_sso_managed_policy_attachment",
+            "uniqueId": "admin_sso_managed_policy_attachment"
+          }
+        }
+      }
+    },
+    "aws_ssoadmin_permission_set": {
+      "admin_sso_permission_set": {
+        "//": {
+          "metadata": {
+            "path": "org-chamber/admin_sso_permission_set",
+            "uniqueId": "admin_sso_permission_set"
+          }
+        }
+      }
+    }
+  },
+  "terraform": {
+    "backend": {
+      "s3": {
+        "bucket": "dfn-defn-terraform-state",
+        "dynamodb_table": "dfn-defn-terraform-state-lock",
+        "encrypt": true,
+        "key": "stacks/org-chamber/terraform.tfstate",
+        "profile": "defn-org-sso-source",
+        "region": "us-east-1"
+      }
+    },
+    "required_providers": {
+      "aws": {
+        "source": "aws",
+        "version": "5.99.1"
+      }
+    }
+  }
+}
