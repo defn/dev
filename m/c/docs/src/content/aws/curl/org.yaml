@@ -1,12 +1,12 @@
-account: hub
-id: "804430872255"
-email: aws-curl+hub@defn.us
-org: csso_url
-name: hub
+account: org
+id: "424535767618"
+email: aws-curl@defn.us
+org: curl
+name: curl
 sso_role: Administrator
 aws_config: |-
-  [profile csso_url-hub]
-  sso_account_id=804430872255
+  [profile curl-org]
+  sso_account_id=424535767618
   sso_start_url=https://d-926760a859.awsapps.com/start
   sso_role_name=Administrator
   sso_region=us-west-2

@@ -637,19 +637,19 @@ config:
               sso_role_name=Administrator
               sso_region=us-east-1
         sso_url: https://d-90674c3cfd.awsapps.com/start
-      csso_url:
-        org: csso_url
+      curl:
+        org: curl
         sso_region: us-west-2
         account:
           org:
             account: org
             id: "424535767618"
             email: aws-curl@defn.us
-            org: csso_url
-            name: csso_url
+            org: curl
+            name: curl
             sso_role: Administrator
             aws_config: |-
-              [profile csso_url-org]
+              [profile curl-org]
               sso_account_id=424535767618
               sso_start_url=https://d-926760a859.awsapps.com/start
               sso_role_name=Administrator
@@ -658,11 +658,11 @@ config:
             account: hub
             id: "804430872255"
             email: aws-curl+hub@defn.us
-            org: csso_url
+            org: curl
             name: hub
             sso_role: Administrator
             aws_config: |-
-              [profile csso_url-hub]
+              [profile curl-hub]
               sso_account_id=804430872255
               sso_start_url=https://d-926760a859.awsapps.com/start
               sso_role_name=Administrator
@@ -671,11 +671,11 @@ config:
             account: lib
             id: "298406631539"
             email: aws-curl+lib@defn.us
-            org: csso_url
+            org: curl
             name: lib
             sso_role: Administrator
             aws_config: |-
-              [profile csso_url-lib]
+              [profile curl-lib]
               sso_account_id=298406631539
               sso_start_url=https://d-926760a859.awsapps.com/start
               sso_role_name=Administrator
@@ -684,11 +684,11 @@ config:
             account: net
             id: "101142583332"
             email: aws-curl+net@defn.us
-            org: csso_url
+            org: curl
             name: net
             sso_role: Administrator
             aws_config: |-
-              [profile csso_url-net]
+              [profile curl-net]
               sso_account_id=101142583332
               sso_start_url=https://d-926760a859.awsapps.com/start
               sso_role_name=Administrator

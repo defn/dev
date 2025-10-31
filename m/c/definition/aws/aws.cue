@@ -39,7 +39,7 @@ org: close({
 		sso_region: "us-east-1"
 		sso_url:    "https://d-90674c3cfd.awsapps.com/start"
 	}
-	csso_url: {
+	curl: {
 		sso_region: "us-west-2"
 		sso_url:    "https://d-926760a859.awsapps.com/start"
 	}
@@ -126,7 +126,7 @@ org: {
 	}
 
 	// Infrastructure subset: org, hub, lib, net
-	csso_url: account: {
+	curl: account: {
 		org: {
 			id:    "424535767618"
 			email: "aws-curl@defn.us"

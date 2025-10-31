@@ -1,12 +1,12 @@
-account: lib
-id: "298406631539"
-email: aws-curl+lib@defn.us
-org: csso_url
-name: lib
+account: net
+id: "101142583332"
+email: aws-curl+net@defn.us
+org: curl
+name: net
 sso_role: Administrator
 aws_config: |-
-  [profile csso_url-lib]
-  sso_account_id=298406631539
+  [profile curl-net]
+  sso_account_id=101142583332
   sso_start_url=https://d-926760a859.awsapps.com/start
   sso_role_name=Administrator
   sso_region=us-west-2
