@@ -10,3 +10,7 @@ aws_config: |-
   sso_start_url=https://d-9a6716ffd1.awsapps.com/start
   sso_role_name=Administrator
   sso_region=us-east-2
+mise_config: |-
+  [env]
+  AWS_PROFILE = "helix-hub"
+  AWS_CONFIG_FILE = "/home/ubuntu/m/a/helix/hub/.aws/config"

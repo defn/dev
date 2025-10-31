@@ -10,3 +10,7 @@ aws_config: |-
   sso_start_url=https://imma-0.awsapps.com/start
   sso_role_name=Administrator
   sso_region=us-west-2
+mise_config: |-
+  [env]
+  AWS_PROFILE = "imma-log"
+  AWS_CONFIG_FILE = "/home/ubuntu/m/a/imma/log/.aws/config"

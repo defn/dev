@@ -25,6 +25,12 @@ aws: "org": [string]~(ORG,_): close({
 		}
 		sso_role: string | *"Administrator"
 
+		mise_config: """
+[env]
+AWS_PROFILE = "\(org)-\(account)"
+AWS_CONFIG_FILE = "/home/ubuntu/m/a/\(org)/\(account)/.aws/config"
+"""
+
 		aws_config: """
 [profile \(org)-\(account)]
 sso_account_id=\(id)

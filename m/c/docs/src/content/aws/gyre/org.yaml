@@ -10,3 +10,7 @@ aws_config: |-
   sso_start_url=https://d-9a6716e54a.awsapps.com/start
   sso_role_name=Administrator
   sso_region=us-east-2
+mise_config: |-
+  [env]
+  AWS_PROFILE = "gyre-org"
+  AWS_CONFIG_FILE = "/home/ubuntu/m/a/gyre/org/.aws/config"

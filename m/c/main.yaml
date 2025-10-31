@@ -65,6 +65,10 @@ config:
               sso_start_url=https://chamber-0.awsapps.com/start
               sso_role_name=Administrator
               sso_region=us-west-2
+            mise_config: |-
+              [env]
+              AWS_PROFILE = "chamber-org"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/a/chamber/org/.aws/config"
           "1":
             account: "1"
             email: aws-cd@defn.us
@@ -78,6 +82,10 @@ config:
               sso_start_url=https://chamber-0.awsapps.com/start
               sso_role_name=Administrator
               sso_region=us-west-2
+            mise_config: |-
+              [env]
+              AWS_PROFILE = "chamber-1"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/a/chamber/1/.aws/config"
           "2":
             account: "2"
             email: aws-ci@defn.us
@@ -91,6 +99,10 @@ config:
               sso_start_url=https://chamber-0.awsapps.com/start
               sso_role_name=Administrator
               sso_region=us-west-2
+            mise_config: |-
+              [env]
+              AWS_PROFILE = "chamber-2"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/a/chamber/2/.aws/config"
           "3":
             account: "3"
             email: aws-users@defn.us
@@ -104,6 +116,10 @@ config:
               sso_start_url=https://chamber-0.awsapps.com/start
               sso_role_name=Administrator
               sso_region=us-west-2
+            mise_config: |-
+              [env]
+              AWS_PROFILE = "chamber-3"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/a/chamber/3/.aws/config"
           "4":
             account: "4"
             email: chamber-4@defn.us
@@ -117,6 +133,10 @@ config:
               sso_start_url=https://chamber-0.awsapps.com/start
               sso_role_name=Administrator
               sso_region=us-west-2
+            mise_config: |-
+              [env]
+              AWS_PROFILE = "chamber-4"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/a/chamber/4/.aws/config"
           "5":
             account: "5"
             email: chamber-5@defn.us
@@ -130,6 +150,10 @@ config:
               sso_start_url=https://chamber-0.awsapps.com/start
               sso_role_name=Administrator
               sso_region=us-west-2
+            mise_config: |-
+              [env]
+              AWS_PROFILE = "chamber-5"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/a/chamber/5/.aws/config"
           "6":
             account: "6"
             email: chamber-6@defn.us
@@ -143,6 +167,10 @@ config:
               sso_start_url=https://chamber-0.awsapps.com/start
               sso_role_name=Administrator
               sso_region=us-west-2
+            mise_config: |-
+              [env]
+              AWS_PROFILE = "chamber-6"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/a/chamber/6/.aws/config"
           "7":
             account: "7"
             email: chamber-7@defn.us
@@ -156,6 +184,10 @@ config:
               sso_start_url=https://chamber-0.awsapps.com/start
               sso_role_name=Administrator
               sso_region=us-west-2
+            mise_config: |-
+              [env]
+              AWS_PROFILE = "chamber-7"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/a/chamber/7/.aws/config"
           "8":
             account: "8"
             email: chamber-8@defn.us
@@ -169,6 +201,10 @@ config:
               sso_start_url=https://chamber-0.awsapps.com/start
               sso_role_name=Administrator
               sso_region=us-west-2
+            mise_config: |-
+              [env]
+              AWS_PROFILE = "chamber-8"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/a/chamber/8/.aws/config"
           "9":
             account: "9"
             email: chamber-9@defn.us
@@ -182,6 +218,10 @@ config:
               sso_start_url=https://chamber-0.awsapps.com/start
               sso_role_name=Administrator
               sso_region=us-west-2
+            mise_config: |-
+              [env]
+              AWS_PROFILE = "chamber-9"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/a/chamber/9/.aws/config"
           a:
             account: a
             email: defn-a@imma.io
@@ -195,6 +235,10 @@ config:
               sso_start_url=https://chamber-0.awsapps.com/start
               sso_role_name=Administrator
               sso_region=us-west-2
+            mise_config: |-
+              [env]
+              AWS_PROFILE = "chamber-a"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/a/chamber/a/.aws/config"
           b:
             account: b
             email: imma-admin1@imma.io
@@ -208,6 +252,10 @@ config:
               sso_start_url=https://chamber-0.awsapps.com/start
               sso_role_name=Administrator
               sso_region=us-west-2
+            mise_config: |-
+              [env]
+              AWS_PROFILE = "chamber-b"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/a/chamber/b/.aws/config"
           c:
             account: c
             email: dev-eng1@imma.io
@@ -221,6 +269,10 @@ config:
               sso_start_url=https://chamber-0.awsapps.com/start
               sso_role_name=Administrator
               sso_region=us-west-2
+            mise_config: |-
+              [env]
+              AWS_PROFILE = "chamber-c"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/a/chamber/c/.aws/config"
           d:
             account: d
             email: box-adm1@imma.io
@@ -234,6 +286,10 @@ config:
               sso_start_url=https://chamber-0.awsapps.com/start
               sso_role_name=Administrator
               sso_region=us-west-2
+            mise_config: |-
+              [env]
+              AWS_PROFILE = "chamber-d"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/a/chamber/d/.aws/config"
           e:
             account: e
             email: stg-eng1@imma.io
@@ -247,6 +303,10 @@ config:
               sso_start_url=https://chamber-0.awsapps.com/start
               sso_role_name=Administrator
               sso_region=us-west-2
+            mise_config: |-
+              [env]
+              AWS_PROFILE = "chamber-e"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/a/chamber/e/.aws/config"
           "f":
             account: "f"
             email: usr-admin1@imma.io
@@ -260,6 +320,10 @@ config:
               sso_start_url=https://chamber-0.awsapps.com/start
               sso_role_name=Administrator
               sso_region=us-west-2
+            mise_config: |-
+              [env]
+              AWS_PROFILE = "chamber-f"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/a/chamber/f/.aws/config"
           g:
             account: g
             email: usr-adm1@imma.io
@@ -273,6 +337,10 @@ config:
               sso_start_url=https://chamber-0.awsapps.com/start
               sso_role_name=Administrator
               sso_region=us-west-2
+            mise_config: |-
+              [env]
+              AWS_PROFILE = "chamber-g"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/a/chamber/g/.aws/config"
           h:
             account: h
             email: usr-eng1@imma.io
@@ -286,6 +354,10 @@ config:
               sso_start_url=https://chamber-0.awsapps.com/start
               sso_role_name=Administrator
               sso_region=us-west-2
+            mise_config: |-
+              [env]
+              AWS_PROFILE = "chamber-h"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/a/chamber/h/.aws/config"
           i:
             account: i
             email: aws-admin1@defn.us
@@ -299,6 +371,10 @@ config:
               sso_start_url=https://chamber-0.awsapps.com/start
               sso_role_name=Administrator
               sso_region=us-west-2
+            mise_config: |-
+              [env]
+              AWS_PROFILE = "chamber-i"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/a/chamber/i/.aws/config"
           j:
             account: j
             email: aws-development1@defn.us
@@ -312,6 +388,10 @@ config:
               sso_start_url=https://chamber-0.awsapps.com/start
               sso_role_name=Administrator
               sso_region=us-west-2
+            mise_config: |-
+              [env]
+              AWS_PROFILE = "chamber-j"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/a/chamber/j/.aws/config"
           l:
             account: l
             email: aws-staging1@defn.us
@@ -325,6 +405,10 @@ config:
               sso_start_url=https://chamber-0.awsapps.com/start
               sso_role_name=Administrator
               sso_region=us-west-2
+            mise_config: |-
+              [env]
+              AWS_PROFILE = "chamber-l"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/a/chamber/l/.aws/config"
           m:
             account: m
             email: defn-m@defn.us
@@ -338,6 +422,10 @@ config:
               sso_start_url=https://chamber-0.awsapps.com/start
               sso_role_name=Administrator
               sso_region=us-west-2
+            mise_config: |-
+              [env]
+              AWS_PROFILE = "chamber-m"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/a/chamber/m/.aws/config"
           "n":
             account: "n"
             email: defn-n@defn.us
@@ -351,6 +439,10 @@ config:
               sso_start_url=https://chamber-0.awsapps.com/start
               sso_role_name=Administrator
               sso_region=us-west-2
+            mise_config: |-
+              [env]
+              AWS_PROFILE = "chamber-n"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/a/chamber/n/.aws/config"
           o:
             account: o
             email: defn-o@defn.us
@@ -364,6 +456,10 @@ config:
               sso_start_url=https://chamber-0.awsapps.com/start
               sso_role_name=Administrator
               sso_region=us-west-2
+            mise_config: |-
+              [env]
+              AWS_PROFILE = "chamber-o"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/a/chamber/o/.aws/config"
           p:
             account: p
             email: defn-p@defn.us
@@ -377,6 +473,10 @@ config:
               sso_start_url=https://chamber-0.awsapps.com/start
               sso_role_name=Administrator
               sso_region=us-west-2
+            mise_config: |-
+              [env]
+              AWS_PROFILE = "chamber-p"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/a/chamber/p/.aws/config"
           q:
             account: q
             email: aws-dev@defn.us
@@ -390,6 +490,10 @@ config:
               sso_start_url=https://chamber-0.awsapps.com/start
               sso_role_name=Administrator
               sso_region=us-west-2
+            mise_config: |-
+              [env]
+              AWS_PROFILE = "chamber-q"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/a/chamber/q/.aws/config"
           r:
             account: r
             email: defn-r@imma.io
@@ -403,6 +507,10 @@ config:
               sso_start_url=https://chamber-0.awsapps.com/start
               sso_role_name=Administrator
               sso_region=us-west-2
+            mise_config: |-
+              [env]
+              AWS_PROFILE = "chamber-r"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/a/chamber/r/.aws/config"
           s:
             account: s
             email: defn-s@imma.io
@@ -416,6 +524,10 @@ config:
               sso_start_url=https://chamber-0.awsapps.com/start
               sso_role_name=Administrator
               sso_region=us-west-2
+            mise_config: |-
+              [env]
+              AWS_PROFILE = "chamber-s"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/a/chamber/s/.aws/config"
           "t":
             account: "t"
             email: defn-t@imma.io
@@ -429,6 +541,10 @@ config:
               sso_start_url=https://chamber-0.awsapps.com/start
               sso_role_name=Administrator
               sso_region=us-west-2
+            mise_config: |-
+              [env]
+              AWS_PROFILE = "chamber-t"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/a/chamber/t/.aws/config"
           u:
             account: u
             email: aws-qa@defn.us
@@ -442,6 +558,10 @@ config:
               sso_start_url=https://chamber-0.awsapps.com/start
               sso_role_name=Administrator
               sso_region=us-west-2
+            mise_config: |-
+              [env]
+              AWS_PROFILE = "chamber-u"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/a/chamber/u/.aws/config"
           v:
             account: v
             email: defn-v@imma.io
@@ -455,6 +575,10 @@ config:
               sso_start_url=https://chamber-0.awsapps.com/start
               sso_role_name=Administrator
               sso_region=us-west-2
+            mise_config: |-
+              [env]
+              AWS_PROFILE = "chamber-v"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/a/chamber/v/.aws/config"
           w:
             account: w
             email: defn-w@imma.io
@@ -468,6 +592,10 @@ config:
               sso_start_url=https://chamber-0.awsapps.com/start
               sso_role_name=Administrator
               sso_region=us-west-2
+            mise_config: |-
+              [env]
+              AWS_PROFILE = "chamber-w"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/a/chamber/w/.aws/config"
           x:
             account: x
             email: aws-stage@defn.us
@@ -481,6 +609,10 @@ config:
               sso_start_url=https://chamber-0.awsapps.com/start
               sso_role_name=Administrator
               sso_region=us-west-2
+            mise_config: |-
+              [env]
+              AWS_PROFILE = "chamber-x"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/a/chamber/x/.aws/config"
           "y":
             account: "y"
             email: aws-prod@defn.us
@@ -494,6 +626,10 @@ config:
               sso_start_url=https://chamber-0.awsapps.com/start
               sso_role_name=Administrator
               sso_region=us-west-2
+            mise_config: |-
+              [env]
+              AWS_PROFILE = "chamber-y"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/a/chamber/y/.aws/config"
           z:
             account: z
             email: aws-hub@defn.us
@@ -507,6 +643,10 @@ config:
               sso_start_url=https://chamber-0.awsapps.com/start
               sso_role_name=Administrator
               sso_region=us-west-2
+            mise_config: |-
+              [env]
+              AWS_PROFILE = "chamber-z"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/a/chamber/z/.aws/config"
         sso_region: us-west-2
         sso_url: https://chamber-0.awsapps.com/start
         org: chamber
@@ -525,6 +665,10 @@ config:
               sso_start_url=https://d-92670c4790.awsapps.com/start
               sso_role_name=Administrator
               sso_region=us-west-2
+            mise_config: |-
+              [env]
+              AWS_PROFILE = "circus-org"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/a/circus/org/.aws/config"
           lib:
             account: lib
             email: aws-circus-govcloud@defn.sh
@@ -538,6 +682,10 @@ config:
               sso_start_url=https://d-92670c4790.awsapps.com/start
               sso_role_name=Administrator
               sso_region=us-west-2
+            mise_config: |-
+              [env]
+              AWS_PROFILE = "circus-lib"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/a/circus/lib/.aws/config"
           log:
             account: log
             email: aws-circus-audit@defn.sh
@@ -551,6 +699,10 @@ config:
               sso_start_url=https://d-92670c4790.awsapps.com/start
               sso_role_name=Administrator
               sso_region=us-west-2
+            mise_config: |-
+              [env]
+              AWS_PROFILE = "circus-log"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/a/circus/log/.aws/config"
           net:
             account: net
             email: aws-circus-transit@defn.sh
@@ -564,6 +716,10 @@ config:
               sso_start_url=https://d-92670c4790.awsapps.com/start
               sso_role_name=Administrator
               sso_region=us-west-2
+            mise_config: |-
+              [env]
+              AWS_PROFILE = "circus-net"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/a/circus/net/.aws/config"
           ops:
             account: ops
             email: aws-circus-ops@defn.sh
@@ -577,6 +733,10 @@ config:
               sso_start_url=https://d-92670c4790.awsapps.com/start
               sso_role_name=Administrator
               sso_region=us-west-2
+            mise_config: |-
+              [env]
+              AWS_PROFILE = "circus-ops"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/a/circus/ops/.aws/config"
         sso_region: us-west-2
         sso_url: https://d-92670c4790.awsapps.com/start
         org: circus
@@ -595,6 +755,10 @@ config:
               sso_start_url=https://d-90674c3cfd.awsapps.com/start
               sso_role_name=Administrator
               sso_region=us-east-1
+            mise_config: |-
+              [env]
+              AWS_PROFILE = "coil-org"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/a/coil/org/.aws/config"
           hub:
             account: hub
             email: aws-coil+hub@defn.us
@@ -608,6 +772,10 @@ config:
               sso_start_url=https://d-90674c3cfd.awsapps.com/start
               sso_role_name=Administrator
               sso_region=us-east-1
+            mise_config: |-
+              [env]
+              AWS_PROFILE = "coil-hub"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/a/coil/hub/.aws/config"
           lib:
             account: lib
             email: aws-coil+lib@defn.us
@@ -621,6 +789,10 @@ config:
               sso_start_url=https://d-90674c3cfd.awsapps.com/start
               sso_role_name=Administrator
               sso_region=us-east-1
+            mise_config: |-
+              [env]
+              AWS_PROFILE = "coil-lib"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/a/coil/lib/.aws/config"
           net:
             account: net
             email: aws-coil+net@defn.us
@@ -634,6 +806,10 @@ config:
               sso_start_url=https://d-90674c3cfd.awsapps.com/start
               sso_role_name=Administrator
               sso_region=us-east-1
+            mise_config: |-
+              [env]
+              AWS_PROFILE = "coil-net"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/a/coil/net/.aws/config"
         sso_region: us-east-1
         sso_url: https://d-90674c3cfd.awsapps.com/start
         org: coil
@@ -652,6 +828,10 @@ config:
               sso_start_url=https://d-926760a859.awsapps.com/start
               sso_role_name=Administrator
               sso_region=us-west-2
+            mise_config: |-
+              [env]
+              AWS_PROFILE = "curl-org"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/a/curl/org/.aws/config"
           hub:
             account: hub
             email: aws-curl+hub@defn.us
@@ -665,6 +845,10 @@ config:
               sso_start_url=https://d-926760a859.awsapps.com/start
               sso_role_name=Administrator
               sso_region=us-west-2
+            mise_config: |-
+              [env]
+              AWS_PROFILE = "curl-hub"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/a/curl/hub/.aws/config"
           lib:
             account: lib
             email: aws-curl+lib@defn.us
@@ -678,6 +862,10 @@ config:
               sso_start_url=https://d-926760a859.awsapps.com/start
               sso_role_name=Administrator
               sso_region=us-west-2
+            mise_config: |-
+              [env]
+              AWS_PROFILE = "curl-lib"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/a/curl/lib/.aws/config"
           net:
             account: net
             email: aws-curl+net@defn.us
@@ -691,6 +879,10 @@ config:
               sso_start_url=https://d-926760a859.awsapps.com/start
               sso_role_name=Administrator
               sso_region=us-west-2
+            mise_config: |-
+              [env]
+              AWS_PROFILE = "curl-net"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/a/curl/net/.aws/config"
         sso_region: us-west-2
         sso_url: https://d-926760a859.awsapps.com/start
         org: curl
@@ -709,6 +901,10 @@ config:
               sso_start_url=https://defn.awsapps.com/start
               sso_role_name=Administrator
               sso_region=us-east-2
+            mise_config: |-
+              [env]
+              AWS_PROFILE = "defn-org"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/a/defn/org/.aws/config"
         sso_region: us-east-2
         sso_url: https://defn.awsapps.com/start
         org: defn
@@ -727,6 +923,10 @@ config:
               sso_start_url=https://fogg-0.awsapps.com/start
               sso_role_name=Administrator
               sso_region=us-west-2
+            mise_config: |-
+              [env]
+              AWS_PROFILE = "fogg-org"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/a/fogg/org/.aws/config"
           ci:
             account: ci
             email: fogg-home@defn.sh
@@ -740,6 +940,10 @@ config:
               sso_start_url=https://fogg-0.awsapps.com/start
               sso_role_name=Administrator
               sso_region=us-west-2
+            mise_config: |-
+              [env]
+              AWS_PROFILE = "fogg-ci"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/a/fogg/ci/.aws/config"
           dev:
             account: dev
             email: fogg-sandbox@defn.sh
@@ -753,6 +957,10 @@ config:
               sso_start_url=https://fogg-0.awsapps.com/start
               sso_role_name=Administrator
               sso_region=us-west-2
+            mise_config: |-
+              [env]
+              AWS_PROFILE = "fogg-dev"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/a/fogg/dev/.aws/config"
           hub:
             account: hub
             email: fogg-hub@defn.sh
@@ -766,6 +974,10 @@ config:
               sso_start_url=https://fogg-0.awsapps.com/start
               sso_role_name=Administrator
               sso_region=us-west-2
+            mise_config: |-
+              [env]
+              AWS_PROFILE = "fogg-hub"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/a/fogg/hub/.aws/config"
           lib:
             account: lib
             email: fogg-data@defn.sh
@@ -779,6 +991,10 @@ config:
               sso_start_url=https://fogg-0.awsapps.com/start
               sso_role_name=Administrator
               sso_region=us-west-2
+            mise_config: |-
+              [env]
+              AWS_PROFILE = "fogg-lib"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/a/fogg/lib/.aws/config"
           log:
             account: log
             email: fogg-circus@defn.sh
@@ -792,6 +1008,10 @@ config:
               sso_start_url=https://fogg-0.awsapps.com/start
               sso_role_name=Administrator
               sso_region=us-west-2
+            mise_config: |-
+              [env]
+              AWS_PROFILE = "fogg-log"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/a/fogg/log/.aws/config"
           net:
             account: net
             email: fogg-asset@defn.sh
@@ -805,6 +1025,10 @@ config:
               sso_start_url=https://fogg-0.awsapps.com/start
               sso_role_name=Administrator
               sso_region=us-west-2
+            mise_config: |-
+              [env]
+              AWS_PROFILE = "fogg-net"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/a/fogg/net/.aws/config"
           ops:
             account: ops
             email: fogg-gateway@defn.sh
@@ -818,6 +1042,10 @@ config:
               sso_start_url=https://fogg-0.awsapps.com/start
               sso_role_name=Administrator
               sso_region=us-west-2
+            mise_config: |-
+              [env]
+              AWS_PROFILE = "fogg-ops"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/a/fogg/ops/.aws/config"
           prod:
             account: prod
             email: fogg-postx@defn.sh
@@ -831,6 +1059,10 @@ config:
               sso_start_url=https://fogg-0.awsapps.com/start
               sso_role_name=Administrator
               sso_region=us-west-2
+            mise_config: |-
+              [env]
+              AWS_PROFILE = "fogg-prod"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/a/fogg/prod/.aws/config"
           pub:
             account: pub
             email: fogg-security@defn.sh
@@ -844,6 +1076,10 @@ config:
               sso_start_url=https://fogg-0.awsapps.com/start
               sso_role_name=Administrator
               sso_region=us-west-2
+            mise_config: |-
+              [env]
+              AWS_PROFILE = "fogg-pub"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/a/fogg/pub/.aws/config"
         sso_region: us-west-2
         sso_url: https://fogg-0.awsapps.com/start
         org: fogg
@@ -862,6 +1098,10 @@ config:
               sso_start_url=https://d-9a6716e54a.awsapps.com/start
               sso_role_name=Administrator
               sso_region=us-east-2
+            mise_config: |-
+              [env]
+              AWS_PROFILE = "gyre-org"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/a/gyre/org/.aws/config"
           ops:
             account: ops
             email: aws-gyre+ops@defn.us
@@ -875,6 +1115,10 @@ config:
               sso_start_url=https://d-9a6716e54a.awsapps.com/start
               sso_role_name=Administrator
               sso_region=us-east-2
+            mise_config: |-
+              [env]
+              AWS_PROFILE = "gyre-ops"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/a/gyre/ops/.aws/config"
         sso_region: us-east-2
         sso_url: https://d-9a6716e54a.awsapps.com/start
         org: gyre
@@ -893,6 +1137,10 @@ config:
               sso_start_url=https://d-9a6716ffd1.awsapps.com/start
               sso_role_name=Administrator
               sso_region=us-east-2
+            mise_config: |-
+              [env]
+              AWS_PROFILE = "helix-org"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/a/helix/org/.aws/config"
           ci:
             account: ci
             email: aws-helix+sec@defn.sh
@@ -906,6 +1154,10 @@ config:
               sso_start_url=https://d-9a6716ffd1.awsapps.com/start
               sso_role_name=Administrator
               sso_region=us-east-2
+            mise_config: |-
+              [env]
+              AWS_PROFILE = "helix-ci"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/a/helix/ci/.aws/config"
           dev:
             account: dev
             email: aws-helix+dev@defn.sh
@@ -919,6 +1171,10 @@ config:
               sso_start_url=https://d-9a6716ffd1.awsapps.com/start
               sso_role_name=Administrator
               sso_region=us-east-2
+            mise_config: |-
+              [env]
+              AWS_PROFILE = "helix-dev"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/a/helix/dev/.aws/config"
           hub:
             account: hub
             email: aws-helix+hub@defn.sh
@@ -932,6 +1188,10 @@ config:
               sso_start_url=https://d-9a6716ffd1.awsapps.com/start
               sso_role_name=Administrator
               sso_region=us-east-2
+            mise_config: |-
+              [env]
+              AWS_PROFILE = "helix-hub"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/a/helix/hub/.aws/config"
           lib:
             account: lib
             email: aws-helix+lib@defn.sh
@@ -945,6 +1205,10 @@ config:
               sso_start_url=https://d-9a6716ffd1.awsapps.com/start
               sso_role_name=Administrator
               sso_region=us-east-2
+            mise_config: |-
+              [env]
+              AWS_PROFILE = "helix-lib"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/a/helix/lib/.aws/config"
           log:
             account: log
             email: aws-helix+log@defn.sh
@@ -958,6 +1222,10 @@ config:
               sso_start_url=https://d-9a6716ffd1.awsapps.com/start
               sso_role_name=Administrator
               sso_region=us-east-2
+            mise_config: |-
+              [env]
+              AWS_PROFILE = "helix-log"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/a/helix/log/.aws/config"
           net:
             account: net
             email: aws-helix+net@defn.sh
@@ -971,6 +1239,10 @@ config:
               sso_start_url=https://d-9a6716ffd1.awsapps.com/start
               sso_role_name=Administrator
               sso_region=us-east-2
+            mise_config: |-
+              [env]
+              AWS_PROFILE = "helix-net"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/a/helix/net/.aws/config"
           ops:
             account: ops
             email: aws-helix+ops@defn.sh
@@ -984,6 +1256,10 @@ config:
               sso_start_url=https://d-9a6716ffd1.awsapps.com/start
               sso_role_name=Administrator
               sso_region=us-east-2
+            mise_config: |-
+              [env]
+              AWS_PROFILE = "helix-ops"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/a/helix/ops/.aws/config"
           prod:
             account: prod
             email: aws-helix+dmz@defn.sh
@@ -997,6 +1273,10 @@ config:
               sso_start_url=https://d-9a6716ffd1.awsapps.com/start
               sso_role_name=Administrator
               sso_region=us-east-2
+            mise_config: |-
+              [env]
+              AWS_PROFILE = "helix-prod"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/a/helix/prod/.aws/config"
           pub:
             account: pub
             email: aws-helix+pub@defn.sh
@@ -1010,6 +1290,10 @@ config:
               sso_start_url=https://d-9a6716ffd1.awsapps.com/start
               sso_role_name=Administrator
               sso_region=us-east-2
+            mise_config: |-
+              [env]
+              AWS_PROFILE = "helix-pub"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/a/helix/pub/.aws/config"
         sso_region: us-east-2
         sso_url: https://d-9a6716ffd1.awsapps.com/start
         org: helix
@@ -1028,6 +1312,10 @@ config:
               sso_start_url=https://imma-0.awsapps.com/start
               sso_role_name=Administrator
               sso_region=us-west-2
+            mise_config: |-
+              [env]
+              AWS_PROFILE = "imma-org"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/a/imma/org/.aws/config"
           dev:
             account: dev
             email: imma-dev@imma.io
@@ -1041,6 +1329,10 @@ config:
               sso_start_url=https://imma-0.awsapps.com/start
               sso_role_name=Administrator
               sso_region=us-west-2
+            mise_config: |-
+              [env]
+              AWS_PROFILE = "imma-dev"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/a/imma/dev/.aws/config"
           lib:
             account: lib
             email: imma-tolan@defn.us
@@ -1054,6 +1346,10 @@ config:
               sso_start_url=https://imma-0.awsapps.com/start
               sso_role_name=Administrator
               sso_region=us-west-2
+            mise_config: |-
+              [env]
+              AWS_PROFILE = "imma-lib"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/a/imma/lib/.aws/config"
           log:
             account: log
             email: imma-dgwyn@defn.us
@@ -1067,6 +1363,10 @@ config:
               sso_start_url=https://imma-0.awsapps.com/start
               sso_role_name=Administrator
               sso_region=us-west-2
+            mise_config: |-
+              [env]
+              AWS_PROFILE = "imma-log"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/a/imma/log/.aws/config"
           net:
             account: net
             email: imma-defn@defn.us
@@ -1080,6 +1380,10 @@ config:
               sso_start_url=https://imma-0.awsapps.com/start
               sso_role_name=Administrator
               sso_region=us-west-2
+            mise_config: |-
+              [env]
+              AWS_PROFILE = "imma-net"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/a/imma/net/.aws/config"
           pub:
             account: pub
             email: imma-prod@imma.io
@@ -1093,6 +1397,10 @@ config:
               sso_start_url=https://imma-0.awsapps.com/start
               sso_role_name=Administrator
               sso_region=us-west-2
+            mise_config: |-
+              [env]
+              AWS_PROFILE = "imma-pub"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/a/imma/pub/.aws/config"
         sso_region: us-west-2
         sso_url: https://imma-0.awsapps.com/start
         org: imma
@@ -1111,6 +1419,10 @@ config:
               sso_start_url=https://immanent-0.awsapps.com/start
               sso_role_name=Administrator
               sso_region=us-west-2
+            mise_config: |-
+              [env]
+              AWS_PROFILE = "immanent-org"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/a/immanent/org/.aws/config"
           changer:
             account: changer
             email: immanent-changer@defn.us
@@ -1124,6 +1436,10 @@ config:
               sso_start_url=https://immanent-0.awsapps.com/start
               sso_role_name=Administrator
               sso_region=us-west-2
+            mise_config: |-
+              [env]
+              AWS_PROFILE = "immanent-changer"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/a/immanent/changer/.aws/config"
           chanter:
             account: chanter
             email: immanent-chanter@defn.us
@@ -1137,6 +1453,10 @@ config:
               sso_start_url=https://immanent-0.awsapps.com/start
               sso_role_name=Administrator
               sso_region=us-west-2
+            mise_config: |-
+              [env]
+              AWS_PROFILE = "immanent-chanter"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/a/immanent/chanter/.aws/config"
           doorkeeper:
             account: doorkeeper
             email: immanent-doorkeeper@defn.us
@@ -1150,6 +1470,10 @@ config:
               sso_start_url=https://immanent-0.awsapps.com/start
               sso_role_name=Administrator
               sso_region=us-west-2
+            mise_config: |-
+              [env]
+              AWS_PROFILE = "immanent-doorkeeper"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/a/immanent/doorkeeper/.aws/config"
           ged:
             account: ged
             email: immanent-ged@defn.us
@@ -1163,6 +1487,10 @@ config:
               sso_start_url=https://immanent-0.awsapps.com/start
               sso_role_name=Administrator
               sso_region=us-west-2
+            mise_config: |-
+              [env]
+              AWS_PROFILE = "immanent-ged"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/a/immanent/ged/.aws/config"
           hand:
             account: hand
             email: immanent-hand@defn.us
@@ -1176,6 +1504,10 @@ config:
               sso_start_url=https://immanent-0.awsapps.com/start
               sso_role_name=Administrator
               sso_region=us-west-2
+            mise_config: |-
+              [env]
+              AWS_PROFILE = "immanent-hand"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/a/immanent/hand/.aws/config"
           herbal:
             account: herbal
             email: immanent-herbal@defn.us
@@ -1189,6 +1521,10 @@ config:
               sso_start_url=https://immanent-0.awsapps.com/start
               sso_role_name=Administrator
               sso_region=us-west-2
+            mise_config: |-
+              [env]
+              AWS_PROFILE = "immanent-herbal"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/a/immanent/herbal/.aws/config"
           namer:
             account: namer
             email: immanent-namer@defn.us
@@ -1202,6 +1538,10 @@ config:
               sso_start_url=https://immanent-0.awsapps.com/start
               sso_role_name=Administrator
               sso_region=us-west-2
+            mise_config: |-
+              [env]
+              AWS_PROFILE = "immanent-namer"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/a/immanent/namer/.aws/config"
           patterner:
             account: patterner
             email: immanent-patterner@defn.us
@@ -1215,6 +1555,10 @@ config:
               sso_start_url=https://immanent-0.awsapps.com/start
               sso_role_name=Administrator
               sso_region=us-west-2
+            mise_config: |-
+              [env]
+              AWS_PROFILE = "immanent-patterner"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/a/immanent/patterner/.aws/config"
           roke:
             account: roke
             email: immanent-roke@defn.us
@@ -1228,6 +1572,10 @@ config:
               sso_start_url=https://immanent-0.awsapps.com/start
               sso_role_name=Administrator
               sso_region=us-west-2
+            mise_config: |-
+              [env]
+              AWS_PROFILE = "immanent-roke"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/a/immanent/roke/.aws/config"
           summoner:
             account: summoner
             email: immanent-summoner@defn.us
@@ -1241,6 +1589,10 @@ config:
               sso_start_url=https://immanent-0.awsapps.com/start
               sso_role_name=Administrator
               sso_region=us-west-2
+            mise_config: |-
+              [env]
+              AWS_PROFILE = "immanent-summoner"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/a/immanent/summoner/.aws/config"
           windkey:
             account: windkey
             email: immanent-windkey@defn.us
@@ -1254,6 +1606,10 @@ config:
               sso_start_url=https://immanent-0.awsapps.com/start
               sso_role_name=Administrator
               sso_region=us-west-2
+            mise_config: |-
+              [env]
+              AWS_PROFILE = "immanent-windkey"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/a/immanent/windkey/.aws/config"
         sso_region: us-west-2
         sso_url: https://immanent-0.awsapps.com/start
         org: immanent
@@ -1272,6 +1628,10 @@ config:
               sso_start_url=https://jianghu-0.awsapps.com/start
               sso_role_name=Administrator
               sso_region=us-west-2
+            mise_config: |-
+              [env]
+              AWS_PROFILE = "jianghu-org"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/a/jianghu/org/.aws/config"
           log:
             account: log
             email: klamath@defn.us
@@ -1285,6 +1645,10 @@ config:
               sso_start_url=https://jianghu-0.awsapps.com/start
               sso_role_name=Administrator
               sso_region=us-west-2
+            mise_config: |-
+              [env]
+              AWS_PROFILE = "jianghu-log"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/a/jianghu/log/.aws/config"
           net:
             account: net
             email: tahoe@defn.us
@@ -1298,6 +1662,10 @@ config:
               sso_start_url=https://jianghu-0.awsapps.com/start
               sso_role_name=Administrator
               sso_region=us-west-2
+            mise_config: |-
+              [env]
+              AWS_PROFILE = "jianghu-net"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/a/jianghu/net/.aws/config"
         sso_region: us-west-2
         sso_url: https://jianghu-0.awsapps.com/start
         org: jianghu
@@ -1316,6 +1684,10 @@ config:
               sso_start_url=https://d-926760b322.awsapps.com/start
               sso_role_name=Administrator
               sso_region=us-west-2
+            mise_config: |-
+              [env]
+              AWS_PROFILE = "spiral-org"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/a/spiral/org/.aws/config"
           ci:
             account: ci
             email: aws-spiral+pub@defn.us
@@ -1329,6 +1701,10 @@ config:
               sso_start_url=https://d-926760b322.awsapps.com/start
               sso_role_name=Administrator
               sso_region=us-west-2
+            mise_config: |-
+              [env]
+              AWS_PROFILE = "spiral-ci"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/a/spiral/ci/.aws/config"
           dev:
             account: dev
             email: aws-spiral+dev@defn.us
@@ -1342,6 +1718,10 @@ config:
               sso_start_url=https://d-926760b322.awsapps.com/start
               sso_role_name=Administrator
               sso_region=us-west-2
+            mise_config: |-
+              [env]
+              AWS_PROFILE = "spiral-dev"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/a/spiral/dev/.aws/config"
           hub:
             account: hub
             email: aws-spiral+hub@defn.us
@@ -1355,6 +1735,10 @@ config:
               sso_start_url=https://d-926760b322.awsapps.com/start
               sso_role_name=Administrator
               sso_region=us-west-2
+            mise_config: |-
+              [env]
+              AWS_PROFILE = "spiral-hub"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/a/spiral/hub/.aws/config"
           lib:
             account: lib
             email: aws-spiral+lib@defn.us
@@ -1368,6 +1752,10 @@ config:
               sso_start_url=https://d-926760b322.awsapps.com/start
               sso_role_name=Administrator
               sso_region=us-west-2
+            mise_config: |-
+              [env]
+              AWS_PROFILE = "spiral-lib"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/a/spiral/lib/.aws/config"
           log:
             account: log
             email: aws-spiral+log@defn.us
@@ -1381,6 +1769,10 @@ config:
               sso_start_url=https://d-926760b322.awsapps.com/start
               sso_role_name=Administrator
               sso_region=us-west-2
+            mise_config: |-
+              [env]
+              AWS_PROFILE = "spiral-log"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/a/spiral/log/.aws/config"
           net:
             account: net
             email: aws-spiral+net@defn.us
@@ -1394,6 +1786,10 @@ config:
               sso_start_url=https://d-926760b322.awsapps.com/start
               sso_role_name=Administrator
               sso_region=us-west-2
+            mise_config: |-
+              [env]
+              AWS_PROFILE = "spiral-net"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/a/spiral/net/.aws/config"
           ops:
             account: ops
             email: aws-spiral+ops@defn.us
@@ -1407,6 +1803,10 @@ config:
               sso_start_url=https://d-926760b322.awsapps.com/start
               sso_role_name=Administrator
               sso_region=us-west-2
+            mise_config: |-
+              [env]
+              AWS_PROFILE = "spiral-ops"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/a/spiral/ops/.aws/config"
           prod:
             account: prod
             email: aws-spiral+sec@defn.us
@@ -1420,6 +1820,10 @@ config:
               sso_start_url=https://d-926760b322.awsapps.com/start
               sso_role_name=Administrator
               sso_region=us-west-2
+            mise_config: |-
+              [env]
+              AWS_PROFILE = "spiral-prod"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/a/spiral/prod/.aws/config"
           pub:
             account: pub
             email: aws-spiral+dmz@defn.us
@@ -1433,6 +1837,10 @@ config:
               sso_start_url=https://d-926760b322.awsapps.com/start
               sso_role_name=Administrator
               sso_region=us-west-2
+            mise_config: |-
+              [env]
+              AWS_PROFILE = "spiral-pub"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/a/spiral/pub/.aws/config"
         sso_region: us-west-2
         sso_url: https://d-926760b322.awsapps.com/start
         org: spiral
@@ -1451,6 +1859,10 @@ config:
               sso_start_url=https://d-9a672a0e52.awsapps.com/start
               sso_role_name=Administrator
               sso_region=us-east-2
+            mise_config: |-
+              [env]
+              AWS_PROFILE = "vault-org"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/a/vault/org/.aws/config"
           ci:
             account: ci
             email: aws-vault-vault0@defn.sh
@@ -1464,6 +1876,10 @@ config:
               sso_start_url=https://d-9a672a0e52.awsapps.com/start
               sso_role_name=Administrator
               sso_region=us-east-2
+            mise_config: |-
+              [env]
+              AWS_PROFILE = "vault-ci"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/a/vault/ci/.aws/config"
           dev:
             account: dev
             email: aws-vault-dev@defn.sh
@@ -1477,6 +1893,10 @@ config:
               sso_start_url=https://d-9a672a0e52.awsapps.com/start
               sso_role_name=Administrator
               sso_region=us-east-2
+            mise_config: |-
+              [env]
+              AWS_PROFILE = "vault-dev"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/a/vault/dev/.aws/config"
           hub:
             account: hub
             email: aws-vault-hub@defn.sh
@@ -1490,6 +1910,10 @@ config:
               sso_start_url=https://d-9a672a0e52.awsapps.com/start
               sso_role_name=Administrator
               sso_region=us-east-2
+            mise_config: |-
+              [env]
+              AWS_PROFILE = "vault-hub"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/a/vault/hub/.aws/config"
           lib:
             account: lib
             email: aws-vault-library@defn.sh
@@ -1503,6 +1927,10 @@ config:
               sso_start_url=https://d-9a672a0e52.awsapps.com/start
               sso_role_name=Administrator
               sso_region=us-east-2
+            mise_config: |-
+              [env]
+              AWS_PROFILE = "vault-lib"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/a/vault/lib/.aws/config"
           log:
             account: log
             email: aws-vault-audit@defn.sh
@@ -1516,6 +1944,10 @@ config:
               sso_start_url=https://d-9a672a0e52.awsapps.com/start
               sso_role_name=Administrator
               sso_region=us-east-2
+            mise_config: |-
+              [env]
+              AWS_PROFILE = "vault-log"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/a/vault/log/.aws/config"
           net:
             account: net
             email: aws-vault-transit@defn.sh
@@ -1529,6 +1961,10 @@ config:
               sso_start_url=https://d-9a672a0e52.awsapps.com/start
               sso_role_name=Administrator
               sso_region=us-east-2
+            mise_config: |-
+              [env]
+              AWS_PROFILE = "vault-net"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/a/vault/net/.aws/config"
           ops:
             account: ops
             email: aws-vault-ops@defn.sh
@@ -1542,6 +1978,10 @@ config:
               sso_start_url=https://d-9a672a0e52.awsapps.com/start
               sso_role_name=Administrator
               sso_region=us-east-2
+            mise_config: |-
+              [env]
+              AWS_PROFILE = "vault-ops"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/a/vault/ops/.aws/config"
           prod:
             account: prod
             email: aws-vault-vault1@defn.sh
@@ -1555,6 +1995,10 @@ config:
               sso_start_url=https://d-9a672a0e52.awsapps.com/start
               sso_role_name=Administrator
               sso_region=us-east-2
+            mise_config: |-
+              [env]
+              AWS_PROFILE = "vault-prod"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/a/vault/prod/.aws/config"
           pub:
             account: pub
             email: aws-vault-pub@defn.sh
@@ -1568,6 +2012,10 @@ config:
               sso_start_url=https://d-9a672a0e52.awsapps.com/start
               sso_role_name=Administrator
               sso_region=us-east-2
+            mise_config: |-
+              [env]
+              AWS_PROFILE = "vault-pub"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/a/vault/pub/.aws/config"
         sso_region: us-east-2
         sso_url: https://d-9a672a0e52.awsapps.com/start
         org: vault
@@ -1586,6 +2034,10 @@ config:
               sso_start_url=https://whoa-0.awsapps.com/start
               sso_role_name=Administrator
               sso_region=us-west-2
+            mise_config: |-
+              [env]
+              AWS_PROFILE = "whoa-org"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/a/whoa/org/.aws/config"
           dev:
             account: dev
             email: whoa-dev@imma.io
@@ -1599,6 +2051,10 @@ config:
               sso_start_url=https://whoa-0.awsapps.com/start
               sso_role_name=Administrator
               sso_region=us-west-2
+            mise_config: |-
+              [env]
+              AWS_PROFILE = "whoa-dev"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/a/whoa/dev/.aws/config"
           hub:
             account: hub
             email: whoa-hub@imma.io
@@ -1612,6 +2068,10 @@ config:
               sso_start_url=https://whoa-0.awsapps.com/start
               sso_role_name=Administrator
               sso_region=us-west-2
+            mise_config: |-
+              [env]
+              AWS_PROFILE = "whoa-hub"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/a/whoa/hub/.aws/config"
           net:
             account: net
             email: whoa-secrets@imma.io
@@ -1625,6 +2085,10 @@ config:
               sso_start_url=https://whoa-0.awsapps.com/start
               sso_role_name=Administrator
               sso_region=us-west-2
+            mise_config: |-
+              [env]
+              AWS_PROFILE = "whoa-net"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/a/whoa/net/.aws/config"
           pub:
             account: pub
             email: whoa-prod@imma.io
@@ -1638,6 +2102,10 @@ config:
               sso_start_url=https://whoa-0.awsapps.com/start
               sso_role_name=Administrator
               sso_region=us-west-2
+            mise_config: |-
+              [env]
+              AWS_PROFILE = "whoa-pub"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/a/whoa/pub/.aws/config"
         sso_region: us-west-2
         sso_url: https://whoa-0.awsapps.com/start
         org: whoa

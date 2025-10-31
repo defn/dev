@@ -10,3 +10,7 @@ aws_config: |-
   sso_start_url=https://d-92670c4790.awsapps.com/start
   sso_role_name=Administrator
   sso_region=us-west-2
+mise_config: |-
+  [env]
+  AWS_PROFILE = "circus-lib"
+  AWS_CONFIG_FILE = "/home/ubuntu/m/a/circus/lib/.aws/config"

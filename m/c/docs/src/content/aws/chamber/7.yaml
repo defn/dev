@@ -10,3 +10,7 @@ aws_config: |-
   sso_start_url=https://chamber-0.awsapps.com/start
   sso_role_name=Administrator
   sso_region=us-west-2
+mise_config: |-
+  [env]
+  AWS_PROFILE = "chamber-7"
+  AWS_CONFIG_FILE = "/home/ubuntu/m/a/chamber/7/.aws/config"
