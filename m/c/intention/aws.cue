@@ -1,17 +1,29 @@
+@experiment(aliasv2)
+@experiment(explicitopen)
+
 package intention
 
-aws: "org": [string]: close({
-	org:        string
+aws: "org": [string]~(ORG,_): close({
+	org:        ORG
 	sso_region: string
 	sso_url:    =~"https://[a-z0-9-]+.awsapps.com/start"
-	"account": [string]: close({
+	"account": [string]~(ACCOUNT,_): close({
+		id!:        string
 		account:    string
 		org:        string
-		id!:        =~"^[0-9]+$"
-		email!:     string
 		name:       string
+		email!:     string
 		sso_role:   string
 		aws_config: string
+
+		id:      =~"^[0-9]+$"
+		account: ACCOUNT
+		org:     ORG
+		name:    string | *ACCOUNT
+		if ACCOUNT == "org" {
+			name: ORG
+		}
+		sso_role: string | *"Administrator"
 
 		aws_config: """
 [profile \(org)-\(account)]

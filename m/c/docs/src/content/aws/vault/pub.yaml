@@ -1,8 +1,8 @@
 account: pub
-id: "851162413429"
 email: aws-vault-pub@defn.sh
-org: vault
+id: "851162413429"
 name: pub
+org: vault
 sso_role: Administrator
 aws_config: |-
   [profile vault-pub]

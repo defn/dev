@@ -1,8 +1,8 @@
 account: ops
-id: "319951235442"
 email: aws-gyre+ops@defn.us
-org: gyre
+id: "319951235442"
 name: ops
+org: gyre
 sso_role: Administrator
 aws_config: |-
   [profile gyre-ops]

@@ -1,8 +1,8 @@
 account: e
-id: "171831323337"
 email: stg-eng1@imma.io
-org: chamber
+id: "171831323337"
 name: defn-e
+org: chamber
 sso_role: Administrator
 aws_config: |-
   [profile chamber-e]

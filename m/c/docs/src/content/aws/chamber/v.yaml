@@ -1,8 +1,8 @@
 account: v
-id: "979368042862"
 email: defn-v@imma.io
-org: chamber
+id: "979368042862"
 name: defn-v
+org: chamber
 sso_role: Administrator
 aws_config: |-
   [profile chamber-v]

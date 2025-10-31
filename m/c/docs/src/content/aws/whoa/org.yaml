@@ -1,8 +1,8 @@
 account: org
-id: "389772512117"
 email: aws-whoa@defn.us
-org: whoa
+id: "389772512117"
 name: whoa
+org: whoa
 sso_role: Administrator
 aws_config: |-
   [profile whoa-org]

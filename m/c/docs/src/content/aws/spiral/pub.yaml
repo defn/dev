@@ -1,8 +1,8 @@
 account: pub
-id: "130046154300"
 email: aws-spiral+dmz@defn.us
-org: spiral
+id: "130046154300"
 name: dmz
+org: spiral
 sso_role: Administrator
 aws_config: |-
   [profile spiral-pub]

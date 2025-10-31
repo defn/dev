@@ -1,8 +1,8 @@
 account: pub
-id: "536806623881"
 email: aws-helix+pub@defn.sh
-org: helix
+id: "536806623881"
 name: pub
+org: helix
 sso_role: Administrator
 aws_config: |-
   [profile helix-pub]

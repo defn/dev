@@ -1,8 +1,8 @@
 account: org
-id: "548373030883"
 email: aws-imma@defn.us
-org: imma
+id: "548373030883"
 name: imma
+org: imma
 sso_role: Administrator
 aws_config: |-
   [profile imma-org]

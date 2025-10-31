@@ -1,8 +1,8 @@
 account: log
-id: "749185891195"
 email: aws-vault-audit@defn.sh
-org: vault
+id: "749185891195"
 name: audit
+org: vault
 sso_role: Administrator
 aws_config: |-
   [profile vault-log]

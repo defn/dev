@@ -1,8 +1,8 @@
 account: "8"
-id: "773314335856"
 email: chamber-8@defn.us
-org: chamber
+id: "773314335856"
 name: chamber-8
+org: chamber
 sso_role: Administrator
 aws_config: |-
   [profile chamber-8]

@@ -1,8 +1,8 @@
 account: summoner
-id: "397411277587"
 email: immanent-summoner@defn.us
-org: immanent
+id: "397411277587"
 name: immanent-summoner
+org: immanent
 sso_role: Administrator
 aws_config: |-
   [profile immanent-summoner]

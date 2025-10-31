@@ -1,8 +1,8 @@
 account: chanter
-id: "071244154667"
 email: immanent-chanter@defn.us
-org: immanent
+id: "071244154667"
 name: immanent-chanter
+org: immanent
 sso_role: Administrator
 aws_config: |-
   [profile immanent-chanter]

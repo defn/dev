@@ -1,8 +1,8 @@
 account: org
-id: "510430971399"
 email: iam+bootstrap@defn.sh
-org: defn
+id: "510430971399"
 name: defn
+org: defn
 sso_role: Administrator
 aws_config: |-
   [profile defn-org]

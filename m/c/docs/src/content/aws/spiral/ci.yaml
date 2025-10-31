@@ -1,8 +1,8 @@
 account: ci
-id: "371657257885"
 email: aws-spiral+pub@defn.us
-org: spiral
+id: "371657257885"
 name: pub
+org: spiral
 sso_role: Administrator
 aws_config: |-
   [profile spiral-ci]

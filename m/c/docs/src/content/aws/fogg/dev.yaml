@@ -1,8 +1,8 @@
 account: dev
-id: "442766271046"
 email: fogg-sandbox@defn.sh
-org: fogg
+id: "442766271046"
 name: sandbox
+org: fogg
 sso_role: Administrator
 aws_config: |-
   [profile fogg-dev]

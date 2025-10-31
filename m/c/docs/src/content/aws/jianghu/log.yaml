@@ -1,8 +1,8 @@
 account: log
-id: "298431841138"
 email: klamath@defn.us
-org: jianghu
+id: "298431841138"
 name: klamath
+org: jianghu
 sso_role: Administrator
 aws_config: |-
   [profile jianghu-log]

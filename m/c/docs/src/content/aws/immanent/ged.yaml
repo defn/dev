@@ -1,8 +1,8 @@
 account: ged
-id: "640792184178"
 email: immanent-ged@defn.us
-org: immanent
+id: "640792184178"
 name: immanent-ged
+org: immanent
 sso_role: Administrator
 aws_config: |-
   [profile immanent-ged]

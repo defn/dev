@@ -1,8 +1,8 @@
 account: lib
-id: "377857698578"
 email: aws-helix+lib@defn.sh
-org: helix
+id: "377857698578"
 name: lib
+org: helix
 sso_role: Administrator
 aws_config: |-
   [profile helix-lib]

@@ -1,8 +1,8 @@
 account: lib
-id: "073874947996"
 email: aws-spiral+lib@defn.us
-org: spiral
+id: "073874947996"
 name: lib
+org: spiral
 sso_role: Administrator
 aws_config: |-
   [profile spiral-lib]

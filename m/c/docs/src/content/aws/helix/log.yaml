@@ -1,8 +1,8 @@
 account: log
-id: "664427926343"
 email: aws-helix+log@defn.sh
-org: helix
+id: "664427926343"
 name: log
+org: helix
 sso_role: Administrator
 aws_config: |-
   [profile helix-log]

@@ -1,8 +1,8 @@
 account: net
-id: "025636091251"
 email: tahoe@defn.us
-org: jianghu
+id: "025636091251"
 name: tahoe
+org: jianghu
 sso_role: Administrator
 aws_config: |-
   [profile jianghu-net]

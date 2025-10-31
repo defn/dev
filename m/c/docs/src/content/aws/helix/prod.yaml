@@ -1,8 +1,8 @@
 account: prod
-id: "724643698007"
 email: aws-helix+dmz@defn.sh
-org: helix
+id: "724643698007"
 name: dmz
+org: helix
 sso_role: Administrator
 aws_config: |-
   [profile helix-prod]

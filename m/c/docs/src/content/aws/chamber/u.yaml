@@ -1,8 +1,8 @@
 account: u
-id: "467995590869"
 email: aws-qa@defn.us
-org: chamber
+id: "467995590869"
 name: defn-qa
+org: chamber
 sso_role: Administrator
 aws_config: |-
   [profile chamber-u]

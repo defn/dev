@@ -1,8 +1,8 @@
 account: hub
-id: "539099112425"
 email: aws-vault-hub@defn.sh
-org: vault
+id: "539099112425"
 name: hub
+org: vault
 sso_role: Administrator
 aws_config: |-
   [profile vault-hub]

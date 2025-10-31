@@ -51,15 +51,13 @@ config:
   aws:
     org:
       chamber:
-        org: chamber
-        sso_region: us-west-2
         account:
           org:
             account: org
-            id: "730917619329"
             email: aws-chamber@defn.us
-            org: chamber
+            id: "730917619329"
             name: chamber
+            org: chamber
             sso_role: Administrator
             aws_config: |-
               [profile chamber-org]
@@ -69,10 +67,10 @@ config:
               sso_region=us-west-2
           "1":
             account: "1"
-            id: "741346472057"
             email: aws-cd@defn.us
-            org: chamber
+            id: "741346472057"
             name: defn-cd
+            org: chamber
             sso_role: Administrator
             aws_config: |-
               [profile chamber-1]
@@ -82,10 +80,10 @@ config:
               sso_region=us-west-2
           "2":
             account: "2"
-            id: "447993872368"
             email: aws-ci@defn.us
-            org: chamber
+            id: "447993872368"
             name: defn-ci
+            org: chamber
             sso_role: Administrator
             aws_config: |-
               [profile chamber-2]
@@ -95,10 +93,10 @@ config:
               sso_region=us-west-2
           "3":
             account: "3"
-            id: "463050069968"
             email: aws-users@defn.us
-            org: chamber
+            id: "463050069968"
             name: defn-security
+            org: chamber
             sso_role: Administrator
             aws_config: |-
               [profile chamber-3]
@@ -108,10 +106,10 @@ config:
               sso_region=us-west-2
           "4":
             account: "4"
-            id: "368890376620"
             email: chamber-4@defn.us
-            org: chamber
+            id: "368890376620"
             name: chamber-4
+            org: chamber
             sso_role: Administrator
             aws_config: |-
               [profile chamber-4]
@@ -121,10 +119,10 @@ config:
               sso_region=us-west-2
           "5":
             account: "5"
-            id: "200733412967"
             email: chamber-5@defn.us
-            org: chamber
+            id: "200733412967"
             name: chamber-5
+            org: chamber
             sso_role: Administrator
             aws_config: |-
               [profile chamber-5]
@@ -134,10 +132,10 @@ config:
               sso_region=us-west-2
           "6":
             account: "6"
-            id: "493089153027"
             email: chamber-6@defn.us
-            org: chamber
+            id: "493089153027"
             name: chamber-6
+            org: chamber
             sso_role: Administrator
             aws_config: |-
               [profile chamber-6]
@@ -147,10 +145,10 @@ config:
               sso_region=us-west-2
           "7":
             account: "7"
-            id: "837425503386"
             email: chamber-7@defn.us
-            org: chamber
+            id: "837425503386"
             name: chamber-7
+            org: chamber
             sso_role: Administrator
             aws_config: |-
               [profile chamber-7]
@@ -160,10 +158,10 @@ config:
               sso_region=us-west-2
           "8":
             account: "8"
-            id: "773314335856"
             email: chamber-8@defn.us
-            org: chamber
+            id: "773314335856"
             name: chamber-8
+            org: chamber
             sso_role: Administrator
             aws_config: |-
               [profile chamber-8]
@@ -173,10 +171,10 @@ config:
               sso_region=us-west-2
           "9":
             account: "9"
-            id: "950940975070"
             email: chamber-9@defn.us
-            org: chamber
+            id: "950940975070"
             name: chamber-9
+            org: chamber
             sso_role: Administrator
             aws_config: |-
               [profile chamber-9]
@@ -186,10 +184,10 @@ config:
               sso_region=us-west-2
           a:
             account: a
-            id: "503577294851"
             email: defn-a@imma.io
-            org: chamber
+            id: "503577294851"
             name: defn-a
+            org: chamber
             sso_role: Administrator
             aws_config: |-
               [profile chamber-a]
@@ -199,10 +197,10 @@ config:
               sso_region=us-west-2
           b:
             account: b
-            id: "310940910494"
             email: imma-admin1@imma.io
-            org: chamber
+            id: "310940910494"
             name: defn-b
+            org: chamber
             sso_role: Administrator
             aws_config: |-
               [profile chamber-b]
@@ -212,10 +210,10 @@ config:
               sso_region=us-west-2
           c:
             account: c
-            id: "047633732615"
             email: dev-eng1@imma.io
-            org: chamber
+            id: "047633732615"
             name: defn-c
+            org: chamber
             sso_role: Administrator
             aws_config: |-
               [profile chamber-c]
@@ -225,10 +223,10 @@ config:
               sso_region=us-west-2
           d:
             account: d
-            id: "699441347021"
             email: box-adm1@imma.io
-            org: chamber
+            id: "699441347021"
             name: defn-d
+            org: chamber
             sso_role: Administrator
             aws_config: |-
               [profile chamber-d]
@@ -238,10 +236,10 @@ config:
               sso_region=us-west-2
           e:
             account: e
-            id: "171831323337"
             email: stg-eng1@imma.io
-            org: chamber
+            id: "171831323337"
             name: defn-e
+            org: chamber
             sso_role: Administrator
             aws_config: |-
               [profile chamber-e]
@@ -251,10 +249,10 @@ config:
               sso_region=us-west-2
           "f":
             account: "f"
-            id: "842022523232"
             email: usr-admin1@imma.io
-            org: chamber
+            id: "842022523232"
             name: defn-f
+            org: chamber
             sso_role: Administrator
             aws_config: |-
               [profile chamber-f]
@@ -264,10 +262,10 @@ config:
               sso_region=us-west-2
           g:
             account: g
-            id: "023867963778"
             email: usr-adm1@imma.io
-            org: chamber
+            id: "023867963778"
             name: defn-g
+            org: chamber
             sso_role: Administrator
             aws_config: |-
               [profile chamber-g]
@@ -277,10 +275,10 @@ config:
               sso_region=us-west-2
           h:
             account: h
-            id: "371020107387"
             email: usr-eng1@imma.io
-            org: chamber
+            id: "371020107387"
             name: defn-h
+            org: chamber
             sso_role: Administrator
             aws_config: |-
               [profile chamber-h]
@@ -290,10 +288,10 @@ config:
               sso_region=us-west-2
           i:
             account: i
-            id: "290132238209"
             email: aws-admin1@defn.us
-            org: chamber
+            id: "290132238209"
             name: defn-i
+            org: chamber
             sso_role: Administrator
             aws_config: |-
               [profile chamber-i]
@@ -303,10 +301,10 @@ config:
               sso_region=us-west-2
           j:
             account: j
-            id: "738433022197"
             email: aws-development1@defn.us
-            org: chamber
+            id: "738433022197"
             name: defn-j
+            org: chamber
             sso_role: Administrator
             aws_config: |-
               [profile chamber-j]
@@ -316,10 +314,10 @@ config:
               sso_region=us-west-2
           l:
             account: l
-            id: "991300382347"
             email: aws-staging1@defn.us
-            org: chamber
+            id: "991300382347"
             name: defn-l
+            org: chamber
             sso_role: Administrator
             aws_config: |-
               [profile chamber-l]
@@ -329,10 +327,10 @@ config:
               sso_region=us-west-2
           m:
             account: m
-            id: "684895750259"
             email: defn-m@defn.us
-            org: chamber
+            id: "684895750259"
             name: defn-m
+            org: chamber
             sso_role: Administrator
             aws_config: |-
               [profile chamber-m]
@@ -342,10 +340,10 @@ config:
               sso_region=us-west-2
           "n":
             account: "n"
-            id: "705881812506"
             email: defn-n@defn.us
-            org: chamber
+            id: "705881812506"
             name: defn-n
+            org: chamber
             sso_role: Administrator
             aws_config: |-
               [profile chamber-n]
@@ -355,10 +353,10 @@ config:
               sso_region=us-west-2
           o:
             account: o
-            id: "307136835824"
             email: defn-o@defn.us
-            org: chamber
+            id: "307136835824"
             name: defn-o
+            org: chamber
             sso_role: Administrator
             aws_config: |-
               [profile chamber-o]
@@ -368,10 +366,10 @@ config:
               sso_region=us-west-2
           p:
             account: p
-            id: "706168331526"
             email: defn-p@defn.us
-            org: chamber
+            id: "706168331526"
             name: defn-p
+            org: chamber
             sso_role: Administrator
             aws_config: |-
               [profile chamber-p]
@@ -381,10 +379,10 @@ config:
               sso_region=us-west-2
           q:
             account: q
-            id: "217047480856"
             email: aws-dev@defn.us
-            org: chamber
+            id: "217047480856"
             name: defn-dev
+            org: chamber
             sso_role: Administrator
             aws_config: |-
               [profile chamber-q]
@@ -394,10 +392,10 @@ config:
               sso_region=us-west-2
           r:
             account: r
-            id: "416221726155"
             email: defn-r@imma.io
-            org: chamber
+            id: "416221726155"
             name: defn-r
+            org: chamber
             sso_role: Administrator
             aws_config: |-
               [profile chamber-r]
@@ -407,10 +405,10 @@ config:
               sso_region=us-west-2
           s:
             account: s
-            id: "840650118369"
             email: defn-s@imma.io
-            org: chamber
+            id: "840650118369"
             name: defn-s
+            org: chamber
             sso_role: Administrator
             aws_config: |-
               [profile chamber-s]
@@ -420,10 +418,10 @@ config:
               sso_region=us-west-2
           "t":
             account: "t"
-            id: "490895200523"
             email: defn-t@imma.io
-            org: chamber
+            id: "490895200523"
             name: defn-t
+            org: chamber
             sso_role: Administrator
             aws_config: |-
               [profile chamber-t]
@@ -433,10 +431,10 @@ config:
               sso_region=us-west-2
           u:
             account: u
-            id: "467995590869"
             email: aws-qa@defn.us
-            org: chamber
+            id: "467995590869"
             name: defn-qa
+            org: chamber
             sso_role: Administrator
             aws_config: |-
               [profile chamber-u]
@@ -446,10 +444,10 @@ config:
               sso_region=us-west-2
           v:
             account: v
-            id: "979368042862"
             email: defn-v@imma.io
-            org: chamber
+            id: "979368042862"
             name: defn-v
+            org: chamber
             sso_role: Administrator
             aws_config: |-
               [profile chamber-v]
@@ -459,10 +457,10 @@ config:
               sso_region=us-west-2
           w:
             account: w
-            id: "313387692116"
             email: defn-w@imma.io
-            org: chamber
+            id: "313387692116"
             name: defn-w
+            org: chamber
             sso_role: Administrator
             aws_config: |-
               [profile chamber-w]
@@ -472,10 +470,10 @@ config:
               sso_region=us-west-2
           x:
             account: x
-            id: "834936839208"
             email: aws-stage@defn.us
-            org: chamber
+            id: "834936839208"
             name: defn-stage
+            org: chamber
             sso_role: Administrator
             aws_config: |-
               [profile chamber-x]
@@ -485,10 +483,10 @@ config:
               sso_region=us-west-2
           "y":
             account: "y"
-            id: "153556747817"
             email: aws-prod@defn.us
-            org: chamber
+            id: "153556747817"
             name: defn-prod
+            org: chamber
             sso_role: Administrator
             aws_config: |-
               [profile chamber-y]
@@ -498,10 +496,10 @@ config:
               sso_region=us-west-2
           z:
             account: z
-            id: "037804009879"
             email: aws-hub@defn.us
-            org: chamber
+            id: "037804009879"
             name: defn-hub
+            org: chamber
             sso_role: Administrator
             aws_config: |-
               [profile chamber-z]
@@ -509,17 +507,17 @@ config:
               sso_start_url=https://chamber-0.awsapps.com/start
               sso_role_name=Administrator
               sso_region=us-west-2
-        sso_url: https://chamber-0.awsapps.com/start
-      circus:
-        org: circus
         sso_region: us-west-2
+        sso_url: https://chamber-0.awsapps.com/start
+        org: chamber
+      circus:
         account:
           org:
             account: org
-            id: "036139182623"
             email: aws-circus@defn.us
-            org: circus
+            id: "036139182623"
             name: circus
+            org: circus
             sso_role: Administrator
             aws_config: |-
               [profile circus-org]
@@ -529,10 +527,10 @@ config:
               sso_region=us-west-2
           lib:
             account: lib
-            id: "497790518354"
             email: aws-circus-govcloud@defn.sh
-            org: circus
+            id: "497790518354"
             name: govcloud
+            org: circus
             sso_role: Administrator
             aws_config: |-
               [profile circus-lib]
@@ -542,10 +540,10 @@ config:
               sso_region=us-west-2
           log:
             account: log
-            id: "707476523482"
             email: aws-circus-audit@defn.sh
-            org: circus
+            id: "707476523482"
             name: audit
+            org: circus
             sso_role: Administrator
             aws_config: |-
               [profile circus-log]
@@ -555,10 +553,10 @@ config:
               sso_region=us-west-2
           net:
             account: net
-            id: "002516226222"
             email: aws-circus-transit@defn.sh
-            org: circus
+            id: "002516226222"
             name: transit
+            org: circus
             sso_role: Administrator
             aws_config: |-
               [profile circus-net]
@@ -568,10 +566,10 @@ config:
               sso_region=us-west-2
           ops:
             account: ops
-            id: "415618116579"
             email: aws-circus-ops@defn.sh
-            org: circus
+            id: "415618116579"
             name: ops
+            org: circus
             sso_role: Administrator
             aws_config: |-
               [profile circus-ops]
@@ -579,17 +577,17 @@ config:
               sso_start_url=https://d-92670c4790.awsapps.com/start
               sso_role_name=Administrator
               sso_region=us-west-2
+        sso_region: us-west-2
         sso_url: https://d-92670c4790.awsapps.com/start
+        org: circus
       coil:
-        org: coil
-        sso_region: us-east-1
         account:
           org:
             account: org
-            id: "138291560003"
             email: aws-coil@defn.us
-            org: coil
+            id: "138291560003"
             name: coil
+            org: coil
             sso_role: Administrator
             aws_config: |-
               [profile coil-org]
@@ -599,10 +597,10 @@ config:
               sso_region=us-east-1
           hub:
             account: hub
-            id: "453991412409"
             email: aws-coil+hub@defn.us
-            org: coil
+            id: "453991412409"
             name: hub
+            org: coil
             sso_role: Administrator
             aws_config: |-
               [profile coil-hub]
@@ -612,10 +610,10 @@ config:
               sso_region=us-east-1
           lib:
             account: lib
-            id: "160764896647"
             email: aws-coil+lib@defn.us
-            org: coil
+            id: "160764896647"
             name: lib
+            org: coil
             sso_role: Administrator
             aws_config: |-
               [profile coil-lib]
@@ -625,10 +623,10 @@ config:
               sso_region=us-east-1
           net:
             account: net
-            id: "278790191486"
             email: aws-coil+net@defn.us
-            org: coil
+            id: "278790191486"
             name: net
+            org: coil
             sso_role: Administrator
             aws_config: |-
               [profile coil-net]
@@ -636,17 +634,17 @@ config:
               sso_start_url=https://d-90674c3cfd.awsapps.com/start
               sso_role_name=Administrator
               sso_region=us-east-1
+        sso_region: us-east-1
         sso_url: https://d-90674c3cfd.awsapps.com/start
+        org: coil
       curl:
-        org: curl
-        sso_region: us-west-2
         account:
           org:
             account: org
-            id: "424535767618"
             email: aws-curl@defn.us
-            org: curl
+            id: "424535767618"
             name: curl
+            org: curl
             sso_role: Administrator
             aws_config: |-
               [profile curl-org]
@@ -656,10 +654,10 @@ config:
               sso_region=us-west-2
           hub:
             account: hub
-            id: "804430872255"
             email: aws-curl+hub@defn.us
-            org: curl
+            id: "804430872255"
             name: hub
+            org: curl
             sso_role: Administrator
             aws_config: |-
               [profile curl-hub]
@@ -669,10 +667,10 @@ config:
               sso_region=us-west-2
           lib:
             account: lib
-            id: "298406631539"
             email: aws-curl+lib@defn.us
-            org: curl
+            id: "298406631539"
             name: lib
+            org: curl
             sso_role: Administrator
             aws_config: |-
               [profile curl-lib]
@@ -682,10 +680,10 @@ config:
               sso_region=us-west-2
           net:
             account: net
-            id: "101142583332"
             email: aws-curl+net@defn.us
-            org: curl
+            id: "101142583332"
             name: net
+            org: curl
             sso_role: Administrator
             aws_config: |-
               [profile curl-net]
@@ -693,17 +691,17 @@ config:
               sso_start_url=https://d-926760a859.awsapps.com/start
               sso_role_name=Administrator
               sso_region=us-west-2
+        sso_region: us-west-2
         sso_url: https://d-926760a859.awsapps.com/start
+        org: curl
       defn:
-        org: defn
-        sso_region: us-east-2
         account:
           org:
             account: org
-            id: "510430971399"
             email: iam+bootstrap@defn.sh
-            org: defn
+            id: "510430971399"
             name: defn
+            org: defn
             sso_role: Administrator
             aws_config: |-
               [profile defn-org]
@@ -711,17 +709,17 @@ config:
               sso_start_url=https://defn.awsapps.com/start
               sso_role_name=Administrator
               sso_region=us-east-2
+        sso_region: us-east-2
         sso_url: https://defn.awsapps.com/start
+        org: defn
       fogg:
-        org: fogg
-        sso_region: us-west-2
         account:
           org:
             account: org
-            id: "328216504962"
             email: spiral@defn.sh
-            org: fogg
+            id: "328216504962"
             name: fogg
+            org: fogg
             sso_role: Administrator
             aws_config: |-
               [profile fogg-org]
@@ -731,10 +729,10 @@ config:
               sso_region=us-west-2
           ci:
             account: ci
-            id: "812459563189"
             email: fogg-home@defn.sh
-            org: fogg
+            id: "812459563189"
             name: home
+            org: fogg
             sso_role: Administrator
             aws_config: |-
               [profile fogg-ci]
@@ -744,10 +742,10 @@ config:
               sso_region=us-west-2
           dev:
             account: dev
-            id: "442766271046"
             email: fogg-sandbox@defn.sh
-            org: fogg
+            id: "442766271046"
             name: sandbox
+            org: fogg
             sso_role: Administrator
             aws_config: |-
               [profile fogg-dev]
@@ -757,10 +755,10 @@ config:
               sso_region=us-west-2
           hub:
             account: hub
-            id: "337248635000"
             email: fogg-hub@defn.sh
-            org: fogg
+            id: "337248635000"
             name: hub
+            org: fogg
             sso_role: Administrator
             aws_config: |-
               [profile fogg-hub]
@@ -770,10 +768,10 @@ config:
               sso_region=us-west-2
           lib:
             account: lib
-            id: "624713464251"
             email: fogg-data@defn.sh
-            org: fogg
+            id: "624713464251"
             name: data
+            org: fogg
             sso_role: Administrator
             aws_config: |-
               [profile fogg-lib]
@@ -783,10 +781,10 @@ config:
               sso_region=us-west-2
           log:
             account: log
-            id: "844609041254"
             email: fogg-circus@defn.sh
-            org: fogg
+            id: "844609041254"
             name: circus
+            org: fogg
             sso_role: Administrator
             aws_config: |-
               [profile fogg-log]
@@ -796,10 +794,10 @@ config:
               sso_region=us-west-2
           net:
             account: net
-            id: "060659916753"
             email: fogg-asset@defn.sh
-            org: fogg
+            id: "060659916753"
             name: asset
+            org: fogg
             sso_role: Administrator
             aws_config: |-
               [profile fogg-net]
@@ -809,10 +807,10 @@ config:
               sso_region=us-west-2
           ops:
             account: ops
-            id: "318746665903"
             email: fogg-gateway@defn.sh
-            org: fogg
+            id: "318746665903"
             name: gateway
+            org: fogg
             sso_role: Administrator
             aws_config: |-
               [profile fogg-ops]
@@ -822,10 +820,10 @@ config:
               sso_region=us-west-2
           prod:
             account: prod
-            id: "565963418226"
             email: fogg-postx@defn.sh
-            org: fogg
+            id: "565963418226"
             name: postx
+            org: fogg
             sso_role: Administrator
             aws_config: |-
               [profile fogg-prod]
@@ -835,10 +833,10 @@ config:
               sso_region=us-west-2
           pub:
             account: pub
-            id: "372333168887"
             email: fogg-security@defn.sh
-            org: fogg
+            id: "372333168887"
             name: security
+            org: fogg
             sso_role: Administrator
             aws_config: |-
               [profile fogg-pub]
@@ -846,17 +844,17 @@ config:
               sso_start_url=https://fogg-0.awsapps.com/start
               sso_role_name=Administrator
               sso_region=us-west-2
+        sso_region: us-west-2
         sso_url: https://fogg-0.awsapps.com/start
+        org: fogg
       gyre:
-        org: gyre
-        sso_region: us-east-2
         account:
           org:
             account: org
-            id: "065163301604"
             email: aws-gyre@defn.us
-            org: gyre
+            id: "065163301604"
             name: gyre
+            org: gyre
             sso_role: Administrator
             aws_config: |-
               [profile gyre-org]
@@ -866,10 +864,10 @@ config:
               sso_region=us-east-2
           ops:
             account: ops
-            id: "319951235442"
             email: aws-gyre+ops@defn.us
-            org: gyre
+            id: "319951235442"
             name: ops
+            org: gyre
             sso_role: Administrator
             aws_config: |-
               [profile gyre-ops]
@@ -877,17 +875,17 @@ config:
               sso_start_url=https://d-9a6716e54a.awsapps.com/start
               sso_role_name=Administrator
               sso_region=us-east-2
-        sso_url: https://d-9a6716e54a.awsapps.com/start
-      helix:
-        org: helix
         sso_region: us-east-2
+        sso_url: https://d-9a6716e54a.awsapps.com/start
+        org: gyre
+      helix:
         account:
           org:
             account: org
-            id: "816178966829"
             email: aws-helix@defn.sh
-            org: helix
+            id: "816178966829"
             name: helix
+            org: helix
             sso_role: Administrator
             aws_config: |-
               [profile helix-org]
@@ -897,10 +895,10 @@ config:
               sso_region=us-east-2
           ci:
             account: ci
-            id: "018520313738"
             email: aws-helix+sec@defn.sh
-            org: helix
+            id: "018520313738"
             name: sec
+            org: helix
             sso_role: Administrator
             aws_config: |-
               [profile helix-ci]
@@ -910,10 +908,10 @@ config:
               sso_region=us-east-2
           dev:
             account: dev
-            id: "843784871878"
             email: aws-helix+dev@defn.sh
-            org: helix
+            id: "843784871878"
             name: dev
+            org: helix
             sso_role: Administrator
             aws_config: |-
               [profile helix-dev]
@@ -923,10 +921,10 @@ config:
               sso_region=us-east-2
           hub:
             account: hub
-            id: "436043820387"
             email: aws-helix+hub@defn.sh
-            org: helix
+            id: "436043820387"
             name: hub
+            org: helix
             sso_role: Administrator
             aws_config: |-
               [profile helix-hub]
@@ -936,10 +934,10 @@ config:
               sso_region=us-east-2
           lib:
             account: lib
-            id: "377857698578"
             email: aws-helix+lib@defn.sh
-            org: helix
+            id: "377857698578"
             name: lib
+            org: helix
             sso_role: Administrator
             aws_config: |-
               [profile helix-lib]
@@ -949,10 +947,10 @@ config:
               sso_region=us-east-2
           log:
             account: log
-            id: "664427926343"
             email: aws-helix+log@defn.sh
-            org: helix
+            id: "664427926343"
             name: log
+            org: helix
             sso_role: Administrator
             aws_config: |-
               [profile helix-log]
@@ -962,10 +960,10 @@ config:
               sso_region=us-east-2
           net:
             account: net
-            id: "504722108514"
             email: aws-helix+net@defn.sh
-            org: helix
+            id: "504722108514"
             name: net
+            org: helix
             sso_role: Administrator
             aws_config: |-
               [profile helix-net]
@@ -975,10 +973,10 @@ config:
               sso_region=us-east-2
           ops:
             account: ops
-            id: "368812692254"
             email: aws-helix+ops@defn.sh
-            org: helix
+            id: "368812692254"
             name: ops
+            org: helix
             sso_role: Administrator
             aws_config: |-
               [profile helix-ops]
@@ -988,10 +986,10 @@ config:
               sso_region=us-east-2
           prod:
             account: prod
-            id: "724643698007"
             email: aws-helix+dmz@defn.sh
-            org: helix
+            id: "724643698007"
             name: dmz
+            org: helix
             sso_role: Administrator
             aws_config: |-
               [profile helix-prod]
@@ -1001,10 +999,10 @@ config:
               sso_region=us-east-2
           pub:
             account: pub
-            id: "536806623881"
             email: aws-helix+pub@defn.sh
-            org: helix
+            id: "536806623881"
             name: pub
+            org: helix
             sso_role: Administrator
             aws_config: |-
               [profile helix-pub]
@@ -1012,17 +1010,17 @@ config:
               sso_start_url=https://d-9a6716ffd1.awsapps.com/start
               sso_role_name=Administrator
               sso_region=us-east-2
+        sso_region: us-east-2
         sso_url: https://d-9a6716ffd1.awsapps.com/start
+        org: helix
       imma:
-        org: imma
-        sso_region: us-west-2
         account:
           org:
             account: org
-            id: "548373030883"
             email: aws-imma@defn.us
-            org: imma
+            id: "548373030883"
             name: imma
+            org: imma
             sso_role: Administrator
             aws_config: |-
               [profile imma-org]
@@ -1032,10 +1030,10 @@ config:
               sso_region=us-west-2
           dev:
             account: dev
-            id: "445584037541"
             email: imma-dev@imma.io
-            org: imma
+            id: "445584037541"
             name: imma-dev
+            org: imma
             sso_role: Administrator
             aws_config: |-
               [profile imma-dev]
@@ -1045,10 +1043,10 @@ config:
               sso_region=us-west-2
           lib:
             account: lib
-            id: "516851121506"
             email: imma-tolan@defn.us
-            org: imma
+            id: "516851121506"
             name: imma-tolan
+            org: imma
             sso_role: Administrator
             aws_config: |-
               [profile imma-lib]
@@ -1058,10 +1056,10 @@ config:
               sso_region=us-west-2
           log:
             account: log
-            id: "289716781198"
             email: imma-dgwyn@defn.us
-            org: imma
+            id: "289716781198"
             name: imma-dgwyn
+            org: imma
             sso_role: Administrator
             aws_config: |-
               [profile imma-log]
@@ -1071,10 +1069,10 @@ config:
               sso_region=us-west-2
           net:
             account: net
-            id: "246197522468"
             email: imma-defn@defn.us
-            org: imma
+            id: "246197522468"
             name: imma-defn
+            org: imma
             sso_role: Administrator
             aws_config: |-
               [profile imma-net]
@@ -1084,10 +1082,10 @@ config:
               sso_region=us-west-2
           pub:
             account: pub
-            id: "766142996227"
             email: imma-prod@imma.io
-            org: imma
+            id: "766142996227"
             name: imma-prod
+            org: imma
             sso_role: Administrator
             aws_config: |-
               [profile imma-pub]
@@ -1095,17 +1093,17 @@ config:
               sso_start_url=https://imma-0.awsapps.com/start
               sso_role_name=Administrator
               sso_region=us-west-2
-        sso_url: https://imma-0.awsapps.com/start
-      immanent:
-        org: immanent
         sso_region: us-west-2
+        sso_url: https://imma-0.awsapps.com/start
+        org: imma
+      immanent:
         account:
           org:
             account: org
-            id: "545070380609"
             email: aws-immanent@defn.us
-            org: immanent
+            id: "545070380609"
             name: immanent
+            org: immanent
             sso_role: Administrator
             aws_config: |-
               [profile immanent-org]
@@ -1115,10 +1113,10 @@ config:
               sso_region=us-west-2
           changer:
             account: changer
-            id: "003884504807"
             email: immanent-changer@defn.us
-            org: immanent
+            id: "003884504807"
             name: immanent-changer
+            org: immanent
             sso_role: Administrator
             aws_config: |-
               [profile immanent-changer]
@@ -1128,10 +1126,10 @@ config:
               sso_region=us-west-2
           chanter:
             account: chanter
-            id: "071244154667"
             email: immanent-chanter@defn.us
-            org: immanent
+            id: "071244154667"
             name: immanent-chanter
+            org: immanent
             sso_role: Administrator
             aws_config: |-
               [profile immanent-chanter]
@@ -1141,10 +1139,10 @@ config:
               sso_region=us-west-2
           doorkeeper:
             account: doorkeeper
-            id: "013267321144"
             email: immanent-doorkeeper@defn.us
-            org: immanent
+            id: "013267321144"
             name: immanent-doorkeeper
+            org: immanent
             sso_role: Administrator
             aws_config: |-
               [profile immanent-doorkeeper]
@@ -1154,10 +1152,10 @@ config:
               sso_region=us-west-2
           ged:
             account: ged
-            id: "640792184178"
             email: immanent-ged@defn.us
-            org: immanent
+            id: "640792184178"
             name: immanent-ged
+            org: immanent
             sso_role: Administrator
             aws_config: |-
               [profile immanent-ged]
@@ -1167,10 +1165,10 @@ config:
               sso_region=us-west-2
           hand:
             account: hand
-            id: "826250190242"
             email: immanent-hand@defn.us
-            org: immanent
+            id: "826250190242"
             name: immanent-hand
+            org: immanent
             sso_role: Administrator
             aws_config: |-
               [profile immanent-hand]
@@ -1180,10 +1178,10 @@ config:
               sso_region=us-west-2
           herbal:
             account: herbal
-            id: "165452499696"
             email: immanent-herbal@defn.us
-            org: immanent
+            id: "165452499696"
             name: immanent-herbal
+            org: immanent
             sso_role: Administrator
             aws_config: |-
               [profile immanent-herbal]
@@ -1193,10 +1191,10 @@ config:
               sso_region=us-west-2
           namer:
             account: namer
-            id: "856549015893"
             email: immanent-namer@defn.us
-            org: immanent
+            id: "856549015893"
             name: immanent-namer
+            org: immanent
             sso_role: Administrator
             aws_config: |-
               [profile immanent-namer]
@@ -1206,10 +1204,10 @@ config:
               sso_region=us-west-2
           patterner:
             account: patterner
-            id: "143220204648"
             email: immanent-patterner@defn.us
-            org: immanent
+            id: "143220204648"
             name: immanent-patterner
+            org: immanent
             sso_role: Administrator
             aws_config: |-
               [profile immanent-patterner]
@@ -1219,10 +1217,10 @@ config:
               sso_region=us-west-2
           roke:
             account: roke
-            id: "892560628624"
             email: immanent-roke@defn.us
-            org: immanent
+            id: "892560628624"
             name: immanent-roke
+            org: immanent
             sso_role: Administrator
             aws_config: |-
               [profile immanent-roke]
@@ -1232,10 +1230,10 @@ config:
               sso_region=us-west-2
           summoner:
             account: summoner
-            id: "397411277587"
             email: immanent-summoner@defn.us
-            org: immanent
+            id: "397411277587"
             name: immanent-summoner
+            org: immanent
             sso_role: Administrator
             aws_config: |-
               [profile immanent-summoner]
@@ -1245,10 +1243,10 @@ config:
               sso_region=us-west-2
           windkey:
             account: windkey
-            id: "095764861781"
             email: immanent-windkey@defn.us
-            org: immanent
+            id: "095764861781"
             name: immanent-windkey
+            org: immanent
             sso_role: Administrator
             aws_config: |-
               [profile immanent-windkey]
@@ -1256,17 +1254,17 @@ config:
               sso_start_url=https://immanent-0.awsapps.com/start
               sso_role_name=Administrator
               sso_region=us-west-2
-        sso_url: https://immanent-0.awsapps.com/start
-      jianghu:
-        org: jianghu
         sso_region: us-west-2
+        sso_url: https://immanent-0.awsapps.com/start
+        org: immanent
+      jianghu:
         account:
           org:
             account: org
-            id: "657613322961"
             email: aws-jianghu@defn.us
-            org: jianghu
+            id: "657613322961"
             name: jianghu
+            org: jianghu
             sso_role: Administrator
             aws_config: |-
               [profile jianghu-org]
@@ -1276,10 +1274,10 @@ config:
               sso_region=us-west-2
           log:
             account: log
-            id: "298431841138"
             email: klamath@defn.us
-            org: jianghu
+            id: "298431841138"
             name: klamath
+            org: jianghu
             sso_role: Administrator
             aws_config: |-
               [profile jianghu-log]
@@ -1289,10 +1287,10 @@ config:
               sso_region=us-west-2
           net:
             account: net
-            id: "025636091251"
             email: tahoe@defn.us
-            org: jianghu
+            id: "025636091251"
             name: tahoe
+            org: jianghu
             sso_role: Administrator
             aws_config: |-
               [profile jianghu-net]
@@ -1300,17 +1298,17 @@ config:
               sso_start_url=https://jianghu-0.awsapps.com/start
               sso_role_name=Administrator
               sso_region=us-west-2
-        sso_url: https://jianghu-0.awsapps.com/start
-      spiral:
-        org: spiral
         sso_region: us-west-2
+        sso_url: https://jianghu-0.awsapps.com/start
+        org: jianghu
+      spiral:
         account:
           org:
             account: org
-            id: "232091571197"
             email: aws-spiral@defn.us
-            org: spiral
+            id: "232091571197"
             name: spiral
+            org: spiral
             sso_role: Administrator
             aws_config: |-
               [profile spiral-org]
@@ -1320,10 +1318,10 @@ config:
               sso_region=us-west-2
           ci:
             account: ci
-            id: "371657257885"
             email: aws-spiral+pub@defn.us
-            org: spiral
+            id: "371657257885"
             name: pub
+            org: spiral
             sso_role: Administrator
             aws_config: |-
               [profile spiral-ci]
@@ -1333,10 +1331,10 @@ config:
               sso_region=us-west-2
           dev:
             account: dev
-            id: "308726031860"
             email: aws-spiral+dev@defn.us
-            org: spiral
+            id: "308726031860"
             name: dev
+            org: spiral
             sso_role: Administrator
             aws_config: |-
               [profile spiral-dev]
@@ -1346,10 +1344,10 @@ config:
               sso_region=us-west-2
           hub:
             account: hub
-            id: "216704421225"
             email: aws-spiral+hub@defn.us
-            org: spiral
+            id: "216704421225"
             name: hub
+            org: spiral
             sso_role: Administrator
             aws_config: |-
               [profile spiral-hub]
@@ -1359,10 +1357,10 @@ config:
               sso_region=us-west-2
           lib:
             account: lib
-            id: "073874947996"
             email: aws-spiral+lib@defn.us
-            org: spiral
+            id: "073874947996"
             name: lib
+            org: spiral
             sso_role: Administrator
             aws_config: |-
               [profile spiral-lib]
@@ -1372,10 +1370,10 @@ config:
               sso_region=us-west-2
           log:
             account: log
-            id: "442333715734"
             email: aws-spiral+log@defn.us
-            org: spiral
+            id: "442333715734"
             name: log
+            org: spiral
             sso_role: Administrator
             aws_config: |-
               [profile spiral-log]
@@ -1385,10 +1383,10 @@ config:
               sso_region=us-west-2
           net:
             account: net
-            id: "057533398557"
             email: aws-spiral+net@defn.us
-            org: spiral
+            id: "057533398557"
             name: net
+            org: spiral
             sso_role: Administrator
             aws_config: |-
               [profile spiral-net]
@@ -1398,10 +1396,10 @@ config:
               sso_region=us-west-2
           ops:
             account: ops
-            id: "601164058091"
             email: aws-spiral+ops@defn.us
-            org: spiral
+            id: "601164058091"
             name: ops
+            org: spiral
             sso_role: Administrator
             aws_config: |-
               [profile spiral-ops]
@@ -1411,10 +1409,10 @@ config:
               sso_region=us-west-2
           prod:
             account: prod
-            id: "398258703387"
             email: aws-spiral+sec@defn.us
-            org: spiral
+            id: "398258703387"
             name: sec
+            org: spiral
             sso_role: Administrator
             aws_config: |-
               [profile spiral-prod]
@@ -1424,10 +1422,10 @@ config:
               sso_region=us-west-2
           pub:
             account: pub
-            id: "130046154300"
             email: aws-spiral+dmz@defn.us
-            org: spiral
+            id: "130046154300"
             name: dmz
+            org: spiral
             sso_role: Administrator
             aws_config: |-
               [profile spiral-pub]
@@ -1435,17 +1433,17 @@ config:
               sso_start_url=https://d-926760b322.awsapps.com/start
               sso_role_name=Administrator
               sso_region=us-west-2
+        sso_region: us-west-2
         sso_url: https://d-926760b322.awsapps.com/start
+        org: spiral
       vault:
-        org: vault
-        sso_region: us-east-2
         account:
           org:
             account: org
-            id: "475528707847"
             email: aws-vault@defn.us
-            org: vault
+            id: "475528707847"
             name: vault
+            org: vault
             sso_role: Administrator
             aws_config: |-
               [profile vault-org]
@@ -1455,10 +1453,10 @@ config:
               sso_region=us-east-2
           ci:
             account: ci
-            id: "313228123503"
             email: aws-vault-vault0@defn.sh
-            org: vault
+            id: "313228123503"
             name: vault0
+            org: vault
             sso_role: Administrator
             aws_config: |-
               [profile vault-ci]
@@ -1468,10 +1466,10 @@ config:
               sso_region=us-east-2
           dev:
             account: dev
-            id: "497393606242"
             email: aws-vault-dev@defn.sh
-            org: vault
+            id: "497393606242"
             name: dev
+            org: vault
             sso_role: Administrator
             aws_config: |-
               [profile vault-dev]
@@ -1481,10 +1479,10 @@ config:
               sso_region=us-east-2
           hub:
             account: hub
-            id: "539099112425"
             email: aws-vault-hub@defn.sh
-            org: vault
+            id: "539099112425"
             name: hub
+            org: vault
             sso_role: Administrator
             aws_config: |-
               [profile vault-hub]
@@ -1494,10 +1492,10 @@ config:
               sso_region=us-east-2
           lib:
             account: lib
-            id: "066356637485"
             email: aws-vault-library@defn.sh
-            org: vault
+            id: "066356637485"
             name: library
+            org: vault
             sso_role: Administrator
             aws_config: |-
               [profile vault-lib]
@@ -1507,10 +1505,10 @@ config:
               sso_region=us-east-2
           log:
             account: log
-            id: "749185891195"
             email: aws-vault-audit@defn.sh
-            org: vault
+            id: "749185891195"
             name: audit
+            org: vault
             sso_role: Administrator
             aws_config: |-
               [profile vault-log]
@@ -1520,10 +1518,10 @@ config:
               sso_region=us-east-2
           net:
             account: net
-            id: "915207860232"
             email: aws-vault-transit@defn.sh
-            org: vault
+            id: "915207860232"
             name: transit
+            org: vault
             sso_role: Administrator
             aws_config: |-
               [profile vault-net]
@@ -1533,10 +1531,10 @@ config:
               sso_region=us-east-2
           ops:
             account: ops
-            id: "188066400611"
             email: aws-vault-ops@defn.sh
-            org: vault
+            id: "188066400611"
             name: ops
+            org: vault
             sso_role: Administrator
             aws_config: |-
               [profile vault-ops]
@@ -1546,10 +1544,10 @@ config:
               sso_region=us-east-2
           prod:
             account: prod
-            id: "040769490632"
             email: aws-vault-vault1@defn.sh
-            org: vault
+            id: "040769490632"
             name: vault1
+            org: vault
             sso_role: Administrator
             aws_config: |-
               [profile vault-prod]
@@ -1559,10 +1557,10 @@ config:
               sso_region=us-east-2
           pub:
             account: pub
-            id: "851162413429"
             email: aws-vault-pub@defn.sh
-            org: vault
+            id: "851162413429"
             name: pub
+            org: vault
             sso_role: Administrator
             aws_config: |-
               [profile vault-pub]
@@ -1570,17 +1568,17 @@ config:
               sso_start_url=https://d-9a672a0e52.awsapps.com/start
               sso_role_name=Administrator
               sso_region=us-east-2
+        sso_region: us-east-2
         sso_url: https://d-9a672a0e52.awsapps.com/start
+        org: vault
       whoa:
-        org: whoa
-        sso_region: us-west-2
         account:
           org:
             account: org
-            id: "389772512117"
             email: aws-whoa@defn.us
-            org: whoa
+            id: "389772512117"
             name: whoa
+            org: whoa
             sso_role: Administrator
             aws_config: |-
               [profile whoa-org]
@@ -1590,10 +1588,10 @@ config:
               sso_region=us-west-2
           dev:
             account: dev
-            id: "439761234835"
             email: whoa-dev@imma.io
-            org: whoa
+            id: "439761234835"
             name: dev
+            org: whoa
             sso_role: Administrator
             aws_config: |-
               [profile whoa-dev]
@@ -1603,10 +1601,10 @@ config:
               sso_region=us-west-2
           hub:
             account: hub
-            id: "462478722501"
             email: whoa-hub@imma.io
-            org: whoa
+            id: "462478722501"
             name: hub
+            org: whoa
             sso_role: Administrator
             aws_config: |-
               [profile whoa-hub]
@@ -1616,10 +1614,10 @@ config:
               sso_region=us-west-2
           net:
             account: net
-            id: "464075062390"
             email: whoa-secrets@imma.io
-            org: whoa
+            id: "464075062390"
             name: secrets
+            org: whoa
             sso_role: Administrator
             aws_config: |-
               [profile whoa-net]
@@ -1629,10 +1627,10 @@ config:
               sso_region=us-west-2
           pub:
             account: pub
-            id: "204827926367"
             email: whoa-prod@imma.io
-            org: whoa
+            id: "204827926367"
             name: prod
+            org: whoa
             sso_role: Administrator
             aws_config: |-
               [profile whoa-pub]
@@ -1640,4 +1638,6 @@ config:
               sso_start_url=https://whoa-0.awsapps.com/start
               sso_role_name=Administrator
               sso_region=us-west-2
+        sso_region: us-west-2
         sso_url: https://whoa-0.awsapps.com/start
+        org: whoa

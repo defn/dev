@@ -1,8 +1,8 @@
 account: pub
-id: "766142996227"
 email: imma-prod@imma.io
-org: imma
+id: "766142996227"
 name: imma-prod
+org: imma
 sso_role: Administrator
 aws_config: |-
   [profile imma-pub]

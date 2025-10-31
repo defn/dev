@@ -1,8 +1,8 @@
 account: ops
-id: "318746665903"
 email: fogg-gateway@defn.sh
-org: fogg
+id: "318746665903"
 name: gateway
+org: fogg
 sso_role: Administrator
 aws_config: |-
   [profile fogg-ops]

@@ -1,8 +1,8 @@
 account: doorkeeper
-id: "013267321144"
 email: immanent-doorkeeper@defn.us
-org: immanent
+id: "013267321144"
 name: immanent-doorkeeper
+org: immanent
 sso_role: Administrator
 aws_config: |-
   [profile immanent-doorkeeper]

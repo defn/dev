@@ -1,8 +1,8 @@
 account: hub
-id: "453991412409"
 email: aws-coil+hub@defn.us
-org: coil
+id: "453991412409"
 name: hub
+org: coil
 sso_role: Administrator
 aws_config: |-
   [profile coil-hub]

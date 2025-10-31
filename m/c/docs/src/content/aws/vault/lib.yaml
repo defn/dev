@@ -1,8 +1,8 @@
 account: lib
-id: "066356637485"
 email: aws-vault-library@defn.sh
-org: vault
+id: "066356637485"
 name: library
+org: vault
 sso_role: Administrator
 aws_config: |-
   [profile vault-lib]

@@ -1,8 +1,8 @@
 account: lib
-id: "516851121506"
 email: imma-tolan@defn.us
-org: imma
+id: "516851121506"
 name: imma-tolan
+org: imma
 sso_role: Administrator
 aws_config: |-
   [profile imma-lib]

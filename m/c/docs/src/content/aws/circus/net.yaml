@@ -1,8 +1,8 @@
 account: net
-id: "002516226222"
 email: aws-circus-transit@defn.sh
-org: circus
+id: "002516226222"
 name: transit
+org: circus
 sso_role: Administrator
 aws_config: |-
   [profile circus-net]

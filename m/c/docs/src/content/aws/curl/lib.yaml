@@ -1,8 +1,8 @@
 account: lib
-id: "298406631539"
 email: aws-curl+lib@defn.us
-org: curl
+id: "298406631539"
 name: lib
+org: curl
 sso_role: Administrator
 aws_config: |-
   [profile curl-lib]

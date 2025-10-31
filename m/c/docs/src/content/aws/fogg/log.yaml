@@ -1,8 +1,8 @@
 account: log
-id: "844609041254"
 email: fogg-circus@defn.sh
-org: fogg
+id: "844609041254"
 name: circus
+org: fogg
 sso_role: Administrator
 aws_config: |-
   [profile fogg-log]

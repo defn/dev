@@ -1,8 +1,8 @@
 account: net
-id: "915207860232"
 email: aws-vault-transit@defn.sh
-org: vault
+id: "915207860232"
 name: transit
+org: vault
 sso_role: Administrator
 aws_config: |-
   [profile vault-net]

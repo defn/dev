@@ -1,8 +1,8 @@
 account: lib
-id: "160764896647"
 email: aws-coil+lib@defn.us
-org: coil
+id: "160764896647"
 name: lib
+org: coil
 sso_role: Administrator
 aws_config: |-
   [profile coil-lib]

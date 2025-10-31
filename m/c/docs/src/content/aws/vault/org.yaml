@@ -1,8 +1,8 @@
 account: org
-id: "475528707847"
 email: aws-vault@defn.us
-org: vault
+id: "475528707847"
 name: vault
+org: vault
 sso_role: Administrator
 aws_config: |-
   [profile vault-org]

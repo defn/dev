@@ -1,8 +1,8 @@
 account: hub
-id: "804430872255"
 email: aws-curl+hub@defn.us
-org: curl
+id: "804430872255"
 name: hub
+org: curl
 sso_role: Administrator
 aws_config: |-
   [profile curl-hub]

@@ -1,8 +1,8 @@
 account: hand
-id: "826250190242"
 email: immanent-hand@defn.us
-org: immanent
+id: "826250190242"
 name: immanent-hand
+org: immanent
 sso_role: Administrator
 aws_config: |-
   [profile immanent-hand]

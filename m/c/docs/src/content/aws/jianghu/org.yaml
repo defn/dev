@@ -1,8 +1,8 @@
 account: org
-id: "657613322961"
 email: aws-jianghu@defn.us
-org: jianghu
+id: "657613322961"
 name: jianghu
+org: jianghu
 sso_role: Administrator
 aws_config: |-
   [profile jianghu-org]

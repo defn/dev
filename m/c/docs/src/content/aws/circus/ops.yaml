@@ -1,8 +1,8 @@
 account: ops
-id: "415618116579"
 email: aws-circus-ops@defn.sh
-org: circus
+id: "415618116579"
 name: ops
+org: circus
 sso_role: Administrator
 aws_config: |-
   [profile circus-ops]

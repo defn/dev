@@ -5,25 +5,7 @@ package aws
 
 // diagram: https://whimsical.com/aws-account-layout-D6p7mKoZiwNqZdTZnysYUy
 
-"org": {
-	[string]~(ORG,_): {
-		org:        ORG
-		sso_region: "us-west-2" | "us-east-2" | "us-east-1"
-		"account": {
-			[string]~(ACCOUNT,_): {
-				account: ACCOUNT
-				org:     ORG
-
-				name: string | *ACCOUNT
-				if ACCOUNT == "org" {
-					name: ORG
-				}
-
-				sso_role: string | *"Administrator"
-			}
-		}
-	}
-}
+"org": [string]: sso_region: "us-west-2" | "us-east-2" | "us-east-1"
 
 // aws account metadata
 org: close({

@@ -1,8 +1,8 @@
 account: hub
-id: "337248635000"
 email: fogg-hub@defn.sh
-org: fogg
+id: "337248635000"
 name: hub
+org: fogg
 sso_role: Administrator
 aws_config: |-
   [profile fogg-hub]

@@ -1,8 +1,8 @@
 account: log
-id: "289716781198"
 email: imma-dgwyn@defn.us
-org: imma
+id: "289716781198"
 name: imma-dgwyn
+org: imma
 sso_role: Administrator
 aws_config: |-
   [profile imma-log]

@@ -1,8 +1,8 @@
 account: changer
-id: "003884504807"
 email: immanent-changer@defn.us
-org: immanent
+id: "003884504807"
 name: immanent-changer
+org: immanent
 sso_role: Administrator
 aws_config: |-
   [profile immanent-changer]

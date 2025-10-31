@@ -1,8 +1,8 @@
 account: net
-id: "057533398557"
 email: aws-spiral+net@defn.us
-org: spiral
+id: "057533398557"
 name: net
+org: spiral
 sso_role: Administrator
 aws_config: |-
   [profile spiral-net]

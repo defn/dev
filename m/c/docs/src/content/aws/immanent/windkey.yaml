@@ -1,8 +1,8 @@
 account: windkey
-id: "095764861781"
 email: immanent-windkey@defn.us
-org: immanent
+id: "095764861781"
 name: immanent-windkey
+org: immanent
 sso_role: Administrator
 aws_config: |-
   [profile immanent-windkey]

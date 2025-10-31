@@ -1,8 +1,8 @@
 account: net
-id: "101142583332"
 email: aws-curl+net@defn.us
-org: curl
+id: "101142583332"
 name: net
+org: curl
 sso_role: Administrator
 aws_config: |-
   [profile curl-net]

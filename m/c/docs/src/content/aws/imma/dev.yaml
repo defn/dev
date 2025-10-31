@@ -1,8 +1,8 @@
 account: dev
-id: "445584037541"
 email: imma-dev@imma.io
-org: imma
+id: "445584037541"
 name: imma-dev
+org: imma
 sso_role: Administrator
 aws_config: |-
   [profile imma-dev]

@@ -1,8 +1,8 @@
 account: herbal
-id: "165452499696"
 email: immanent-herbal@defn.us
-org: immanent
+id: "165452499696"
 name: immanent-herbal
+org: immanent
 sso_role: Administrator
 aws_config: |-
   [profile immanent-herbal]

@@ -1,8 +1,8 @@
 account: lib
-id: "624713464251"
 email: fogg-data@defn.sh
-org: fogg
+id: "624713464251"
 name: data
+org: fogg
 sso_role: Administrator
 aws_config: |-
   [profile fogg-lib]

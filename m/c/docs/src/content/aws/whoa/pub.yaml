@@ -1,8 +1,8 @@
 account: pub
-id: "204827926367"
 email: whoa-prod@imma.io
-org: whoa
+id: "204827926367"
 name: prod
+org: whoa
 sso_role: Administrator
 aws_config: |-
   [profile whoa-pub]

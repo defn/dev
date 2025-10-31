@@ -1,8 +1,8 @@
 account: patterner
-id: "143220204648"
 email: immanent-patterner@defn.us
-org: immanent
+id: "143220204648"
 name: immanent-patterner
+org: immanent
 sso_role: Administrator
 aws_config: |-
   [profile immanent-patterner]

@@ -1,8 +1,8 @@
 account: hub
-id: "462478722501"
 email: whoa-hub@imma.io
-org: whoa
+id: "462478722501"
 name: hub
+org: whoa
 sso_role: Administrator
 aws_config: |-
   [profile whoa-hub]

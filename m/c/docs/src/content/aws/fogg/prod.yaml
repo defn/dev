@@ -1,8 +1,8 @@
 account: prod
-id: "565963418226"
 email: fogg-postx@defn.sh
-org: fogg
+id: "565963418226"
 name: postx
+org: fogg
 sso_role: Administrator
 aws_config: |-
   [profile fogg-prod]

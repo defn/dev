@@ -1,8 +1,8 @@
 account: hub
-id: "216704421225"
 email: aws-spiral+hub@defn.us
-org: spiral
+id: "216704421225"
 name: hub
+org: spiral
 sso_role: Administrator
 aws_config: |-
   [profile spiral-hub]
