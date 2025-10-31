@@ -14,6 +14,7 @@ export const collections = {
       id: z.string(),
       email: z.string().email(),
       sso_role: z.string(),
+      aws_config: z.string().optional(),
     }),
   }),
 };

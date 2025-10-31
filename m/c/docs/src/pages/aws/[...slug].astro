@@ -11,7 +11,7 @@ export async function getStaticPaths() {
 }
 
 const { account } = Astro.props;
-const { name, account: accountName, org, id, email, sso_role } = account.data;
+const { name, account: accountName, org, id, email, sso_role, aws_config } = account.data;
 ---
 
 <StarlightPage frontmatter={{
@@ -44,8 +44,11 @@ const { name, account: accountName, org, id, email, sso_role } = account.data;
     <dd>{sso_role}</dd>
   </dl>
 
-  <div style="margin-top: 2rem; padding: 1rem; background: var(--sl-color-gray-6); border-radius: 0.5rem;">
-    <h3>Raw JSON Data</h3>
-    <pre><code>{JSON.stringify(account.data, null, 2)}</code></pre>
-  </div>
+  {aws_config && (
+    <div style="margin-top: 2rem;">
+      <h3>AWS Configuration</h3>
+      <p>Add this to your <code>~/.aws/config</code> file:</p>
+      <pre style="margin-top: 1rem; padding: 1rem; background: var(--sl-color-gray-6); border-radius: 0.5rem; overflow-x: auto;"><code>{aws_config}</code></pre>
+    </div>
+  )}
 </StarlightPage>
