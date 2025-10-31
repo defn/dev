@@ -3,14 +3,16 @@
 function main {
 	rm -rf docs/src/content/aws
 	mkdir -p docs/src/content/aws
-	for org in $(cat main.yaml | yq '.config.aws.org | keys[]'); do
-		for acc in $(cat main.yaml | yq '.config.aws.org["'"$org"'"].account | keys[]'); do
+	for org in $(yq '.config.aws.org | keys[]' main.yaml); do
+		export org
+		for acc in $(yq '.config.aws.org[strenv(org)].account | keys[]' main.yaml); do
+			export acc
 			mkdir -p docs/src/content/aws/$org
-			cat main.yaml | yq '.config.aws.org["'"$org"'"].account["'"$acc"'"]' >docs/src/content/aws/$org/$acc.yaml
+			yq '.config.aws.org[strenv(org)].account[strenv(acc)]' main.yaml >docs/src/content/aws/$org/$acc.yaml
 
 			mkdir -p ../a/$org/$acc/.aws
-			cat main.yaml | yq '.config.aws.org["'"$org"'"].account["'"$acc"'"].aws_config' >../a/$org/$acc/.aws/config
-			cat main.yaml | yq '.config.aws.org["'"$org"'"].account["'"$acc"'"].mise_config' >../a/$org/$acc/mise.toml
+			yq '.config.aws.org[strenv(org)].account[strenv(acc)].aws_config' main.yaml >../a/$org/$acc/.aws/config
+			yq '.config.aws.org[strenv(org)].account[strenv(acc)].mise_config' main.yaml >../a/$org/$acc/mise.toml
 		done
 	done
 }
