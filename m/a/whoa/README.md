@@ -18,10 +18,10 @@ aws sts get-caller-identity
 
 This organization contains 5 AWS account(s):
 
+- `org/` - whoa-org profile
 - `dev/` - whoa-dev profile
 - `hub/` - whoa-hub profile
 - `net/` - whoa-net profile
-- `org/` - whoa-org profile
 - `pub/` - whoa-pub profile
 
 ## Structure

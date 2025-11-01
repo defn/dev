@@ -18,9 +18,9 @@ aws sts get-caller-identity
 
 This organization contains 3 AWS account(s):
 
+- `org/` - jianghu-org profile
 - `log/` - jianghu-log profile
 - `net/` - jianghu-net profile
-- `org/` - jianghu-org profile
 
 ## Structure
 

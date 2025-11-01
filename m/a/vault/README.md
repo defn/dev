@@ -18,6 +18,7 @@ aws sts get-caller-identity
 
 This organization contains 10 AWS account(s):
 
+- `org/` - vault-org profile
 - `ci/` - vault-ci profile
 - `dev/` - vault-dev profile
 - `hub/` - vault-hub profile
@@ -25,7 +26,6 @@ This organization contains 10 AWS account(s):
 - `log/` - vault-log profile
 - `net/` - vault-net profile
 - `ops/` - vault-ops profile
-- `org/` - vault-org profile
 - `prod/` - vault-prod profile
 - `pub/` - vault-pub profile
 

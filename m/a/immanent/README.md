@@ -18,6 +18,7 @@ aws sts get-caller-identity
 
 This organization contains 12 AWS account(s):
 
+- `org/` - immanent-org profile
 - `changer/` - immanent-changer profile
 - `chanter/` - immanent-chanter profile
 - `doorkeeper/` - immanent-doorkeeper profile
@@ -25,7 +26,6 @@ This organization contains 12 AWS account(s):
 - `hand/` - immanent-hand profile
 - `herbal/` - immanent-herbal profile
 - `namer/` - immanent-namer profile
-- `org/` - immanent-org profile
 - `patterner/` - immanent-patterner profile
 - `roke/` - immanent-roke profile
 - `summoner/` - immanent-summoner profile

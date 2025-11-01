@@ -18,6 +18,7 @@ aws sts get-caller-identity
 
 This organization contains 10 AWS account(s):
 
+- `org/` - fogg-org profile
 - `ci/` - fogg-ci profile
 - `dev/` - fogg-dev profile
 - `hub/` - fogg-hub profile
@@ -25,7 +26,6 @@ This organization contains 10 AWS account(s):
 - `log/` - fogg-log profile
 - `net/` - fogg-net profile
 - `ops/` - fogg-ops profile
-- `org/` - fogg-org profile
 - `prod/` - fogg-prod profile
 - `pub/` - fogg-pub profile
 

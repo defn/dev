@@ -18,6 +18,7 @@ aws sts get-caller-identity
 
 This organization contains 10 AWS account(s):
 
+- `org/` - spiral-org profile
 - `ci/` - spiral-ci profile
 - `dev/` - spiral-dev profile
 - `hub/` - spiral-hub profile
@@ -25,7 +26,6 @@ This organization contains 10 AWS account(s):
 - `log/` - spiral-log profile
 - `net/` - spiral-net profile
 - `ops/` - spiral-ops profile
-- `org/` - spiral-org profile
 - `prod/` - spiral-prod profile
 - `pub/` - spiral-pub profile
 

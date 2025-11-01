@@ -11,6 +11,7 @@ aws: "org"~lookup: [string]~(ORG,_): close({
 	org:        ORG
 	sso_region: string
 	sso_url:    =~"https://[a-z0-9-]+.awsapps.com/start"
+
 	"account": [string]~(ACCOUNT,_): close({
 		id!:        string
 		account:    string
@@ -62,5 +63,66 @@ sso_region=\(lookup["defn"].sso_region)
 		if "\(org)-\(account)" == "defn-org" {
 			aws_config: aws_config_account
 		}
+
+		// README for infra/org-* (organization level)
+		infra_org_readme: """
+# \(strings.ToTitle(strings.Split(org, "")[0])+strings.Join(strings.Split(org, "")[1:], "")) Organization Infrastructure
+
+Organization-level Terraform configuration for the \(org) AWS organization.
+
+## Usage
+
+```bash
+cd infra/org-\(org)
+mise trust
+aws sso login
+alogin
+terraform init
+terraform plan
+```
+
+## Configuration
+
+- **Backend**: S3 (`stacks/org-\(org)/terraform.tfstate`)
+- **Profile**: `\(org)-\(account)`
+- **Provider**: AWS 5.99.1
+
+## Resources
+
+This directory manages organization-level resources:
+
+- AWS Organizations structure
+- AWS SSO configuration
+- Cross-account IAM roles
+- Organization-wide policies
+"""
+
+		// README for infra/acc-* (account level)
+		infra_acc_readme: """
+# \(org)-\(account) Account Infrastructure
+
+Account-specific Terraform configuration for the \(org) organization's \(account) account.
+
+## Usage
+
+```bash
+cd infra/acc-\(org)-\(account)
+mise trust
+aws sso login
+alogin
+terraform init
+terraform plan
+```
+
+## Configuration
+
+- **Backend**: S3 (`stacks/acc-\(org)-\(account)/terraform.tfstate`)
+- **Profile**: `\(org)-\(account)`
+- **Provider**: AWS 5.99.1
+
+## Resources
+
+This directory manages account-specific resources and infrastructure.
+"""
 	})
 })

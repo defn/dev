@@ -18,11 +18,11 @@ aws sts get-caller-identity
 
 This organization contains 6 AWS account(s):
 
+- `org/` - imma-org profile
 - `dev/` - imma-dev profile
 - `lib/` - imma-lib profile
 - `log/` - imma-log profile
 - `net/` - imma-net profile
-- `org/` - imma-org profile
 - `pub/` - imma-pub profile
 
 ## Structure

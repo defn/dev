@@ -18,10 +18,10 @@ aws sts get-caller-identity
 
 This organization contains 4 AWS account(s):
 
+- `org/` - curl-org profile
 - `hub/` - curl-hub profile
 - `lib/` - curl-lib profile
 - `net/` - curl-net profile
-- `org/` - curl-org profile
 
 ## Structure
 

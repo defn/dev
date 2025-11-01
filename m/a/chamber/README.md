@@ -18,6 +18,7 @@ aws sts get-caller-identity
 
 This organization contains 35 AWS account(s):
 
+- `org/` - chamber-org profile
 - `1/` - chamber-1 profile
 - `2/` - chamber-2 profile
 - `3/` - chamber-3 profile
@@ -41,7 +42,6 @@ This organization contains 35 AWS account(s):
 - `m/` - chamber-m profile
 - `n/` - chamber-n profile
 - `o/` - chamber-o profile
-- `org/` - chamber-org profile
 - `p/` - chamber-p profile
 - `q/` - chamber-q profile
 - `r/` - chamber-r profile

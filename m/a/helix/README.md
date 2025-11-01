@@ -18,6 +18,7 @@ aws sts get-caller-identity
 
 This organization contains 10 AWS account(s):
 
+- `org/` - helix-org profile
 - `ci/` - helix-ci profile
 - `dev/` - helix-dev profile
 - `hub/` - helix-hub profile
@@ -25,7 +26,6 @@ This organization contains 10 AWS account(s):
 - `log/` - helix-log profile
 - `net/` - helix-net profile
 - `ops/` - helix-ops profile
-- `org/` - helix-org profile
 - `prod/` - helix-prod profile
 - `pub/` - helix-pub profile
 

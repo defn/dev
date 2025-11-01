@@ -18,8 +18,8 @@ aws sts get-caller-identity
 
 This organization contains 2 AWS account(s):
 
-- `ops/` - gyre-ops profile
 - `org/` - gyre-org profile
+- `ops/` - gyre-ops profile
 
 ## Structure
 

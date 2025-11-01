@@ -18,11 +18,11 @@ aws sts get-caller-identity
 
 This organization contains 5 AWS account(s):
 
+- `org/` - circus-org profile
 - `lib/` - circus-lib profile
 - `log/` - circus-log profile
 - `net/` - circus-net profile
 - `ops/` - circus-ops profile
-- `org/` - circus-org profile
 
 ## Structure
 
