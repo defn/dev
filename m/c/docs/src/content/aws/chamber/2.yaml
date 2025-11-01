@@ -7,9 +7,15 @@ sso_role: Administrator
 aws_config: |-
   [profile chamber-2]
   sso_account_id=447993872368
-  sso_start_url=https://chamber-0.awsapps.com/start
   sso_role_name=Administrator
+  sso_start_url=https://chamber-0.awsapps.com/start
   sso_region=us-west-2
+
+  [profile defn-org]
+  sso_account_id=510430971399
+  sso_role_name=Administrator
+  sso_start_url=https://defn.awsapps.com/start
+  sso_region=us-east-2
 mise_config: |-
   [env]
   AWS_PROFILE = "chamber-2"

@@ -10,7 +10,7 @@ terraform {
     dynamodb_table = "dfn-defn-terraform-state-lock"
     encrypt        = true
     key            = "stacks/org-coil/terraform.tfstate"
-    profile        = "defn-org-sso-source"
+    profile        = "defn-org"
     region         = "us-east-1"
   }
 
@@ -22,7 +22,7 @@ locals {
 }
 
 provider "aws" {
-  profile = "coil-org-sso-source"
+  profile = "coil-org"
   region  = "us-east-1"
 }
 

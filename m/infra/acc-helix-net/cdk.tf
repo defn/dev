@@ -10,14 +10,15 @@ terraform {
     dynamodb_table = "dfn-defn-terraform-state-lock"
     encrypt        = true
     key            = "stacks/acc-helix-net/terraform.tfstate"
-    profile        = "defn-org-sso-source"
+    profile        = "defn-org"
     region         = "us-east-1"
   }
 
 }
 
 provider "aws" {
-  profile = "helix-net-sso-source"
+  profile = "helix-net"
+  region  = "us-east-1"
   alias   = "helix-net"
 }
 

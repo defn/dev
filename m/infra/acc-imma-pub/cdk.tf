@@ -10,14 +10,15 @@ terraform {
     dynamodb_table = "dfn-defn-terraform-state-lock"
     encrypt        = true
     key            = "stacks/acc-imma-pub/terraform.tfstate"
-    profile        = "defn-org-sso-source"
+    profile        = "defn-org"
     region         = "us-east-1"
   }
 
 }
 
 provider "aws" {
-  profile = "imma-pub-sso-source"
+  profile = "imma-pub"
+  region  = "us-east-1"
   alias   = "imma-pub"
 }
 

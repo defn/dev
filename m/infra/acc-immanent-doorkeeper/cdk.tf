@@ -10,14 +10,15 @@ terraform {
     dynamodb_table = "dfn-defn-terraform-state-lock"
     encrypt        = true
     key            = "stacks/acc-immanent-doorkeeper/terraform.tfstate"
-    profile        = "defn-org-sso-source"
+    profile        = "defn-org"
     region         = "us-east-1"
   }
 
 }
 
 provider "aws" {
-  profile = "immanent-doorkeeper-sso-source"
+  profile = "immanent-doorkeeper"
+  region  = "us-east-1"
   alias   = "immanent-doorkeeper"
 }
 

@@ -1,0 +1,3 @@
+[env]
+AWS_PROFILE = "fogg-pub"
+AWS_CONFIG_FILE = "/home/ubuntu/m/a/fogg/pub/.aws/config"

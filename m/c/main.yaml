@@ -62,9 +62,15 @@ config:
             aws_config: |-
               [profile chamber-org]
               sso_account_id=730917619329
-              sso_start_url=https://chamber-0.awsapps.com/start
               sso_role_name=Administrator
+              sso_start_url=https://chamber-0.awsapps.com/start
               sso_region=us-west-2
+
+              [profile defn-org]
+              sso_account_id=510430971399
+              sso_role_name=Administrator
+              sso_start_url=https://defn.awsapps.com/start
+              sso_region=us-east-2
             mise_config: |-
               [env]
               AWS_PROFILE = "chamber-org"
@@ -79,9 +85,15 @@ config:
             aws_config: |-
               [profile chamber-1]
               sso_account_id=741346472057
-              sso_start_url=https://chamber-0.awsapps.com/start
               sso_role_name=Administrator
+              sso_start_url=https://chamber-0.awsapps.com/start
               sso_region=us-west-2
+
+              [profile defn-org]
+              sso_account_id=510430971399
+              sso_role_name=Administrator
+              sso_start_url=https://defn.awsapps.com/start
+              sso_region=us-east-2
             mise_config: |-
               [env]
               AWS_PROFILE = "chamber-1"
@@ -96,9 +108,15 @@ config:
             aws_config: |-
               [profile chamber-2]
               sso_account_id=447993872368
-              sso_start_url=https://chamber-0.awsapps.com/start
               sso_role_name=Administrator
+              sso_start_url=https://chamber-0.awsapps.com/start
               sso_region=us-west-2
+
+              [profile defn-org]
+              sso_account_id=510430971399
+              sso_role_name=Administrator
+              sso_start_url=https://defn.awsapps.com/start
+              sso_region=us-east-2
             mise_config: |-
               [env]
               AWS_PROFILE = "chamber-2"
@@ -113,9 +131,15 @@ config:
             aws_config: |-
               [profile chamber-3]
               sso_account_id=463050069968
-              sso_start_url=https://chamber-0.awsapps.com/start
               sso_role_name=Administrator
+              sso_start_url=https://chamber-0.awsapps.com/start
               sso_region=us-west-2
+
+              [profile defn-org]
+              sso_account_id=510430971399
+              sso_role_name=Administrator
+              sso_start_url=https://defn.awsapps.com/start
+              sso_region=us-east-2
             mise_config: |-
               [env]
               AWS_PROFILE = "chamber-3"
@@ -130,9 +154,15 @@ config:
             aws_config: |-
               [profile chamber-4]
               sso_account_id=368890376620
-              sso_start_url=https://chamber-0.awsapps.com/start
               sso_role_name=Administrator
+              sso_start_url=https://chamber-0.awsapps.com/start
               sso_region=us-west-2
+
+              [profile defn-org]
+              sso_account_id=510430971399
+              sso_role_name=Administrator
+              sso_start_url=https://defn.awsapps.com/start
+              sso_region=us-east-2
             mise_config: |-
               [env]
               AWS_PROFILE = "chamber-4"
@@ -147,9 +177,15 @@ config:
             aws_config: |-
               [profile chamber-5]
               sso_account_id=200733412967
-              sso_start_url=https://chamber-0.awsapps.com/start
               sso_role_name=Administrator
+              sso_start_url=https://chamber-0.awsapps.com/start
               sso_region=us-west-2
+
+              [profile defn-org]
+              sso_account_id=510430971399
+              sso_role_name=Administrator
+              sso_start_url=https://defn.awsapps.com/start
+              sso_region=us-east-2
             mise_config: |-
               [env]
               AWS_PROFILE = "chamber-5"
@@ -164,9 +200,15 @@ config:
             aws_config: |-
               [profile chamber-6]
               sso_account_id=493089153027
-              sso_start_url=https://chamber-0.awsapps.com/start
               sso_role_name=Administrator
+              sso_start_url=https://chamber-0.awsapps.com/start
               sso_region=us-west-2
+
+              [profile defn-org]
+              sso_account_id=510430971399
+              sso_role_name=Administrator
+              sso_start_url=https://defn.awsapps.com/start
+              sso_region=us-east-2
             mise_config: |-
               [env]
               AWS_PROFILE = "chamber-6"
@@ -181,9 +223,15 @@ config:
             aws_config: |-
               [profile chamber-7]
               sso_account_id=837425503386
-              sso_start_url=https://chamber-0.awsapps.com/start
               sso_role_name=Administrator
+              sso_start_url=https://chamber-0.awsapps.com/start
               sso_region=us-west-2
+
+              [profile defn-org]
+              sso_account_id=510430971399
+              sso_role_name=Administrator
+              sso_start_url=https://defn.awsapps.com/start
+              sso_region=us-east-2
             mise_config: |-
               [env]
               AWS_PROFILE = "chamber-7"
@@ -198,9 +246,15 @@ config:
             aws_config: |-
               [profile chamber-8]
               sso_account_id=773314335856
-              sso_start_url=https://chamber-0.awsapps.com/start
               sso_role_name=Administrator
+              sso_start_url=https://chamber-0.awsapps.com/start
               sso_region=us-west-2
+
+              [profile defn-org]
+              sso_account_id=510430971399
+              sso_role_name=Administrator
+              sso_start_url=https://defn.awsapps.com/start
+              sso_region=us-east-2
             mise_config: |-
               [env]
               AWS_PROFILE = "chamber-8"
@@ -215,9 +269,15 @@ config:
             aws_config: |-
               [profile chamber-9]
               sso_account_id=950940975070
-              sso_start_url=https://chamber-0.awsapps.com/start
               sso_role_name=Administrator
+              sso_start_url=https://chamber-0.awsapps.com/start
               sso_region=us-west-2
+
+              [profile defn-org]
+              sso_account_id=510430971399
+              sso_role_name=Administrator
+              sso_start_url=https://defn.awsapps.com/start
+              sso_region=us-east-2
             mise_config: |-
               [env]
               AWS_PROFILE = "chamber-9"
@@ -232,9 +292,15 @@ config:
             aws_config: |-
               [profile chamber-a]
               sso_account_id=503577294851
-              sso_start_url=https://chamber-0.awsapps.com/start
               sso_role_name=Administrator
+              sso_start_url=https://chamber-0.awsapps.com/start
               sso_region=us-west-2
+
+              [profile defn-org]
+              sso_account_id=510430971399
+              sso_role_name=Administrator
+              sso_start_url=https://defn.awsapps.com/start
+              sso_region=us-east-2
             mise_config: |-
               [env]
               AWS_PROFILE = "chamber-a"
@@ -249,9 +315,15 @@ config:
             aws_config: |-
               [profile chamber-b]
               sso_account_id=310940910494
-              sso_start_url=https://chamber-0.awsapps.com/start
               sso_role_name=Administrator
+              sso_start_url=https://chamber-0.awsapps.com/start
               sso_region=us-west-2
+
+              [profile defn-org]
+              sso_account_id=510430971399
+              sso_role_name=Administrator
+              sso_start_url=https://defn.awsapps.com/start
+              sso_region=us-east-2
             mise_config: |-
               [env]
               AWS_PROFILE = "chamber-b"
@@ -266,9 +338,15 @@ config:
             aws_config: |-
               [profile chamber-c]
               sso_account_id=047633732615
-              sso_start_url=https://chamber-0.awsapps.com/start
               sso_role_name=Administrator
+              sso_start_url=https://chamber-0.awsapps.com/start
               sso_region=us-west-2
+
+              [profile defn-org]
+              sso_account_id=510430971399
+              sso_role_name=Administrator
+              sso_start_url=https://defn.awsapps.com/start
+              sso_region=us-east-2
             mise_config: |-
               [env]
               AWS_PROFILE = "chamber-c"
@@ -283,9 +361,15 @@ config:
             aws_config: |-
               [profile chamber-d]
               sso_account_id=699441347021
-              sso_start_url=https://chamber-0.awsapps.com/start
               sso_role_name=Administrator
+              sso_start_url=https://chamber-0.awsapps.com/start
               sso_region=us-west-2
+
+              [profile defn-org]
+              sso_account_id=510430971399
+              sso_role_name=Administrator
+              sso_start_url=https://defn.awsapps.com/start
+              sso_region=us-east-2
             mise_config: |-
               [env]
               AWS_PROFILE = "chamber-d"
@@ -300,9 +384,15 @@ config:
             aws_config: |-
               [profile chamber-e]
               sso_account_id=171831323337
-              sso_start_url=https://chamber-0.awsapps.com/start
               sso_role_name=Administrator
+              sso_start_url=https://chamber-0.awsapps.com/start
               sso_region=us-west-2
+
+              [profile defn-org]
+              sso_account_id=510430971399
+              sso_role_name=Administrator
+              sso_start_url=https://defn.awsapps.com/start
+              sso_region=us-east-2
             mise_config: |-
               [env]
               AWS_PROFILE = "chamber-e"
@@ -317,9 +407,15 @@ config:
             aws_config: |-
               [profile chamber-f]
               sso_account_id=842022523232
-              sso_start_url=https://chamber-0.awsapps.com/start
               sso_role_name=Administrator
+              sso_start_url=https://chamber-0.awsapps.com/start
               sso_region=us-west-2
+
+              [profile defn-org]
+              sso_account_id=510430971399
+              sso_role_name=Administrator
+              sso_start_url=https://defn.awsapps.com/start
+              sso_region=us-east-2
             mise_config: |-
               [env]
               AWS_PROFILE = "chamber-f"
@@ -334,9 +430,15 @@ config:
             aws_config: |-
               [profile chamber-g]
               sso_account_id=023867963778
-              sso_start_url=https://chamber-0.awsapps.com/start
               sso_role_name=Administrator
+              sso_start_url=https://chamber-0.awsapps.com/start
               sso_region=us-west-2
+
+              [profile defn-org]
+              sso_account_id=510430971399
+              sso_role_name=Administrator
+              sso_start_url=https://defn.awsapps.com/start
+              sso_region=us-east-2
             mise_config: |-
               [env]
               AWS_PROFILE = "chamber-g"
@@ -351,9 +453,15 @@ config:
             aws_config: |-
               [profile chamber-h]
               sso_account_id=371020107387
-              sso_start_url=https://chamber-0.awsapps.com/start
               sso_role_name=Administrator
+              sso_start_url=https://chamber-0.awsapps.com/start
               sso_region=us-west-2
+
+              [profile defn-org]
+              sso_account_id=510430971399
+              sso_role_name=Administrator
+              sso_start_url=https://defn.awsapps.com/start
+              sso_region=us-east-2
             mise_config: |-
               [env]
               AWS_PROFILE = "chamber-h"
@@ -368,9 +476,15 @@ config:
             aws_config: |-
               [profile chamber-i]
               sso_account_id=290132238209
-              sso_start_url=https://chamber-0.awsapps.com/start
               sso_role_name=Administrator
+              sso_start_url=https://chamber-0.awsapps.com/start
               sso_region=us-west-2
+
+              [profile defn-org]
+              sso_account_id=510430971399
+              sso_role_name=Administrator
+              sso_start_url=https://defn.awsapps.com/start
+              sso_region=us-east-2
             mise_config: |-
               [env]
               AWS_PROFILE = "chamber-i"
@@ -385,9 +499,15 @@ config:
             aws_config: |-
               [profile chamber-j]
               sso_account_id=738433022197
-              sso_start_url=https://chamber-0.awsapps.com/start
               sso_role_name=Administrator
+              sso_start_url=https://chamber-0.awsapps.com/start
               sso_region=us-west-2
+
+              [profile defn-org]
+              sso_account_id=510430971399
+              sso_role_name=Administrator
+              sso_start_url=https://defn.awsapps.com/start
+              sso_region=us-east-2
             mise_config: |-
               [env]
               AWS_PROFILE = "chamber-j"
@@ -402,9 +522,15 @@ config:
             aws_config: |-
               [profile chamber-l]
               sso_account_id=991300382347
-              sso_start_url=https://chamber-0.awsapps.com/start
               sso_role_name=Administrator
+              sso_start_url=https://chamber-0.awsapps.com/start
               sso_region=us-west-2
+
+              [profile defn-org]
+              sso_account_id=510430971399
+              sso_role_name=Administrator
+              sso_start_url=https://defn.awsapps.com/start
+              sso_region=us-east-2
             mise_config: |-
               [env]
               AWS_PROFILE = "chamber-l"
@@ -419,9 +545,15 @@ config:
             aws_config: |-
               [profile chamber-m]
               sso_account_id=684895750259
-              sso_start_url=https://chamber-0.awsapps.com/start
               sso_role_name=Administrator
+              sso_start_url=https://chamber-0.awsapps.com/start
               sso_region=us-west-2
+
+              [profile defn-org]
+              sso_account_id=510430971399
+              sso_role_name=Administrator
+              sso_start_url=https://defn.awsapps.com/start
+              sso_region=us-east-2
             mise_config: |-
               [env]
               AWS_PROFILE = "chamber-m"
@@ -436,9 +568,15 @@ config:
             aws_config: |-
               [profile chamber-n]
               sso_account_id=705881812506
-              sso_start_url=https://chamber-0.awsapps.com/start
               sso_role_name=Administrator
+              sso_start_url=https://chamber-0.awsapps.com/start
               sso_region=us-west-2
+
+              [profile defn-org]
+              sso_account_id=510430971399
+              sso_role_name=Administrator
+              sso_start_url=https://defn.awsapps.com/start
+              sso_region=us-east-2
             mise_config: |-
               [env]
               AWS_PROFILE = "chamber-n"
@@ -453,9 +591,15 @@ config:
             aws_config: |-
               [profile chamber-o]
               sso_account_id=307136835824
-              sso_start_url=https://chamber-0.awsapps.com/start
               sso_role_name=Administrator
+              sso_start_url=https://chamber-0.awsapps.com/start
               sso_region=us-west-2
+
+              [profile defn-org]
+              sso_account_id=510430971399
+              sso_role_name=Administrator
+              sso_start_url=https://defn.awsapps.com/start
+              sso_region=us-east-2
             mise_config: |-
               [env]
               AWS_PROFILE = "chamber-o"
@@ -470,9 +614,15 @@ config:
             aws_config: |-
               [profile chamber-p]
               sso_account_id=706168331526
-              sso_start_url=https://chamber-0.awsapps.com/start
               sso_role_name=Administrator
+              sso_start_url=https://chamber-0.awsapps.com/start
               sso_region=us-west-2
+
+              [profile defn-org]
+              sso_account_id=510430971399
+              sso_role_name=Administrator
+              sso_start_url=https://defn.awsapps.com/start
+              sso_region=us-east-2
             mise_config: |-
               [env]
               AWS_PROFILE = "chamber-p"
@@ -487,9 +637,15 @@ config:
             aws_config: |-
               [profile chamber-q]
               sso_account_id=217047480856
-              sso_start_url=https://chamber-0.awsapps.com/start
               sso_role_name=Administrator
+              sso_start_url=https://chamber-0.awsapps.com/start
               sso_region=us-west-2
+
+              [profile defn-org]
+              sso_account_id=510430971399
+              sso_role_name=Administrator
+              sso_start_url=https://defn.awsapps.com/start
+              sso_region=us-east-2
             mise_config: |-
               [env]
               AWS_PROFILE = "chamber-q"
@@ -504,9 +660,15 @@ config:
             aws_config: |-
               [profile chamber-r]
               sso_account_id=416221726155
-              sso_start_url=https://chamber-0.awsapps.com/start
               sso_role_name=Administrator
+              sso_start_url=https://chamber-0.awsapps.com/start
               sso_region=us-west-2
+
+              [profile defn-org]
+              sso_account_id=510430971399
+              sso_role_name=Administrator
+              sso_start_url=https://defn.awsapps.com/start
+              sso_region=us-east-2
             mise_config: |-
               [env]
               AWS_PROFILE = "chamber-r"
@@ -521,9 +683,15 @@ config:
             aws_config: |-
               [profile chamber-s]
               sso_account_id=840650118369
-              sso_start_url=https://chamber-0.awsapps.com/start
               sso_role_name=Administrator
+              sso_start_url=https://chamber-0.awsapps.com/start
               sso_region=us-west-2
+
+              [profile defn-org]
+              sso_account_id=510430971399
+              sso_role_name=Administrator
+              sso_start_url=https://defn.awsapps.com/start
+              sso_region=us-east-2
             mise_config: |-
               [env]
               AWS_PROFILE = "chamber-s"
@@ -538,9 +706,15 @@ config:
             aws_config: |-
               [profile chamber-t]
               sso_account_id=490895200523
-              sso_start_url=https://chamber-0.awsapps.com/start
               sso_role_name=Administrator
+              sso_start_url=https://chamber-0.awsapps.com/start
               sso_region=us-west-2
+
+              [profile defn-org]
+              sso_account_id=510430971399
+              sso_role_name=Administrator
+              sso_start_url=https://defn.awsapps.com/start
+              sso_region=us-east-2
             mise_config: |-
               [env]
               AWS_PROFILE = "chamber-t"
@@ -555,9 +729,15 @@ config:
             aws_config: |-
               [profile chamber-u]
               sso_account_id=467995590869
-              sso_start_url=https://chamber-0.awsapps.com/start
               sso_role_name=Administrator
+              sso_start_url=https://chamber-0.awsapps.com/start
               sso_region=us-west-2
+
+              [profile defn-org]
+              sso_account_id=510430971399
+              sso_role_name=Administrator
+              sso_start_url=https://defn.awsapps.com/start
+              sso_region=us-east-2
             mise_config: |-
               [env]
               AWS_PROFILE = "chamber-u"
@@ -572,9 +752,15 @@ config:
             aws_config: |-
               [profile chamber-v]
               sso_account_id=979368042862
-              sso_start_url=https://chamber-0.awsapps.com/start
               sso_role_name=Administrator
+              sso_start_url=https://chamber-0.awsapps.com/start
               sso_region=us-west-2
+
+              [profile defn-org]
+              sso_account_id=510430971399
+              sso_role_name=Administrator
+              sso_start_url=https://defn.awsapps.com/start
+              sso_region=us-east-2
             mise_config: |-
               [env]
               AWS_PROFILE = "chamber-v"
@@ -589,9 +775,15 @@ config:
             aws_config: |-
               [profile chamber-w]
               sso_account_id=313387692116
-              sso_start_url=https://chamber-0.awsapps.com/start
               sso_role_name=Administrator
+              sso_start_url=https://chamber-0.awsapps.com/start
               sso_region=us-west-2
+
+              [profile defn-org]
+              sso_account_id=510430971399
+              sso_role_name=Administrator
+              sso_start_url=https://defn.awsapps.com/start
+              sso_region=us-east-2
             mise_config: |-
               [env]
               AWS_PROFILE = "chamber-w"
@@ -606,9 +798,15 @@ config:
             aws_config: |-
               [profile chamber-x]
               sso_account_id=834936839208
-              sso_start_url=https://chamber-0.awsapps.com/start
               sso_role_name=Administrator
+              sso_start_url=https://chamber-0.awsapps.com/start
               sso_region=us-west-2
+
+              [profile defn-org]
+              sso_account_id=510430971399
+              sso_role_name=Administrator
+              sso_start_url=https://defn.awsapps.com/start
+              sso_region=us-east-2
             mise_config: |-
               [env]
               AWS_PROFILE = "chamber-x"
@@ -623,9 +821,15 @@ config:
             aws_config: |-
               [profile chamber-y]
               sso_account_id=153556747817
-              sso_start_url=https://chamber-0.awsapps.com/start
               sso_role_name=Administrator
+              sso_start_url=https://chamber-0.awsapps.com/start
               sso_region=us-west-2
+
+              [profile defn-org]
+              sso_account_id=510430971399
+              sso_role_name=Administrator
+              sso_start_url=https://defn.awsapps.com/start
+              sso_region=us-east-2
             mise_config: |-
               [env]
               AWS_PROFILE = "chamber-y"
@@ -640,9 +844,15 @@ config:
             aws_config: |-
               [profile chamber-z]
               sso_account_id=037804009879
-              sso_start_url=https://chamber-0.awsapps.com/start
               sso_role_name=Administrator
+              sso_start_url=https://chamber-0.awsapps.com/start
               sso_region=us-west-2
+
+              [profile defn-org]
+              sso_account_id=510430971399
+              sso_role_name=Administrator
+              sso_start_url=https://defn.awsapps.com/start
+              sso_region=us-east-2
             mise_config: |-
               [env]
               AWS_PROFILE = "chamber-z"
@@ -662,9 +872,15 @@ config:
             aws_config: |-
               [profile circus-org]
               sso_account_id=036139182623
-              sso_start_url=https://d-92670c4790.awsapps.com/start
               sso_role_name=Administrator
+              sso_start_url=https://d-92670c4790.awsapps.com/start
               sso_region=us-west-2
+
+              [profile defn-org]
+              sso_account_id=510430971399
+              sso_role_name=Administrator
+              sso_start_url=https://defn.awsapps.com/start
+              sso_region=us-east-2
             mise_config: |-
               [env]
               AWS_PROFILE = "circus-org"
@@ -679,9 +895,15 @@ config:
             aws_config: |-
               [profile circus-lib]
               sso_account_id=497790518354
-              sso_start_url=https://d-92670c4790.awsapps.com/start
               sso_role_name=Administrator
+              sso_start_url=https://d-92670c4790.awsapps.com/start
               sso_region=us-west-2
+
+              [profile defn-org]
+              sso_account_id=510430971399
+              sso_role_name=Administrator
+              sso_start_url=https://defn.awsapps.com/start
+              sso_region=us-east-2
             mise_config: |-
               [env]
               AWS_PROFILE = "circus-lib"
@@ -696,9 +918,15 @@ config:
             aws_config: |-
               [profile circus-log]
               sso_account_id=707476523482
-              sso_start_url=https://d-92670c4790.awsapps.com/start
               sso_role_name=Administrator
+              sso_start_url=https://d-92670c4790.awsapps.com/start
               sso_region=us-west-2
+
+              [profile defn-org]
+              sso_account_id=510430971399
+              sso_role_name=Administrator
+              sso_start_url=https://defn.awsapps.com/start
+              sso_region=us-east-2
             mise_config: |-
               [env]
               AWS_PROFILE = "circus-log"
@@ -713,9 +941,15 @@ config:
             aws_config: |-
               [profile circus-net]
               sso_account_id=002516226222
-              sso_start_url=https://d-92670c4790.awsapps.com/start
               sso_role_name=Administrator
+              sso_start_url=https://d-92670c4790.awsapps.com/start
               sso_region=us-west-2
+
+              [profile defn-org]
+              sso_account_id=510430971399
+              sso_role_name=Administrator
+              sso_start_url=https://defn.awsapps.com/start
+              sso_region=us-east-2
             mise_config: |-
               [env]
               AWS_PROFILE = "circus-net"
@@ -730,9 +964,15 @@ config:
             aws_config: |-
               [profile circus-ops]
               sso_account_id=415618116579
-              sso_start_url=https://d-92670c4790.awsapps.com/start
               sso_role_name=Administrator
+              sso_start_url=https://d-92670c4790.awsapps.com/start
               sso_region=us-west-2
+
+              [profile defn-org]
+              sso_account_id=510430971399
+              sso_role_name=Administrator
+              sso_start_url=https://defn.awsapps.com/start
+              sso_region=us-east-2
             mise_config: |-
               [env]
               AWS_PROFILE = "circus-ops"
@@ -752,9 +992,15 @@ config:
             aws_config: |-
               [profile coil-org]
               sso_account_id=138291560003
-              sso_start_url=https://d-90674c3cfd.awsapps.com/start
               sso_role_name=Administrator
+              sso_start_url=https://d-90674c3cfd.awsapps.com/start
               sso_region=us-east-1
+
+              [profile defn-org]
+              sso_account_id=510430971399
+              sso_role_name=Administrator
+              sso_start_url=https://defn.awsapps.com/start
+              sso_region=us-east-2
             mise_config: |-
               [env]
               AWS_PROFILE = "coil-org"
@@ -769,9 +1015,15 @@ config:
             aws_config: |-
               [profile coil-hub]
               sso_account_id=453991412409
-              sso_start_url=https://d-90674c3cfd.awsapps.com/start
               sso_role_name=Administrator
+              sso_start_url=https://d-90674c3cfd.awsapps.com/start
               sso_region=us-east-1
+
+              [profile defn-org]
+              sso_account_id=510430971399
+              sso_role_name=Administrator
+              sso_start_url=https://defn.awsapps.com/start
+              sso_region=us-east-2
             mise_config: |-
               [env]
               AWS_PROFILE = "coil-hub"
@@ -786,9 +1038,15 @@ config:
             aws_config: |-
               [profile coil-lib]
               sso_account_id=160764896647
-              sso_start_url=https://d-90674c3cfd.awsapps.com/start
               sso_role_name=Administrator
+              sso_start_url=https://d-90674c3cfd.awsapps.com/start
               sso_region=us-east-1
+
+              [profile defn-org]
+              sso_account_id=510430971399
+              sso_role_name=Administrator
+              sso_start_url=https://defn.awsapps.com/start
+              sso_region=us-east-2
             mise_config: |-
               [env]
               AWS_PROFILE = "coil-lib"
@@ -803,9 +1061,15 @@ config:
             aws_config: |-
               [profile coil-net]
               sso_account_id=278790191486
-              sso_start_url=https://d-90674c3cfd.awsapps.com/start
               sso_role_name=Administrator
+              sso_start_url=https://d-90674c3cfd.awsapps.com/start
               sso_region=us-east-1
+
+              [profile defn-org]
+              sso_account_id=510430971399
+              sso_role_name=Administrator
+              sso_start_url=https://defn.awsapps.com/start
+              sso_region=us-east-2
             mise_config: |-
               [env]
               AWS_PROFILE = "coil-net"
@@ -825,9 +1089,15 @@ config:
             aws_config: |-
               [profile curl-org]
               sso_account_id=424535767618
-              sso_start_url=https://d-926760a859.awsapps.com/start
               sso_role_name=Administrator
+              sso_start_url=https://d-926760a859.awsapps.com/start
               sso_region=us-west-2
+
+              [profile defn-org]
+              sso_account_id=510430971399
+              sso_role_name=Administrator
+              sso_start_url=https://defn.awsapps.com/start
+              sso_region=us-east-2
             mise_config: |-
               [env]
               AWS_PROFILE = "curl-org"
@@ -842,9 +1112,15 @@ config:
             aws_config: |-
               [profile curl-hub]
               sso_account_id=804430872255
-              sso_start_url=https://d-926760a859.awsapps.com/start
               sso_role_name=Administrator
+              sso_start_url=https://d-926760a859.awsapps.com/start
               sso_region=us-west-2
+
+              [profile defn-org]
+              sso_account_id=510430971399
+              sso_role_name=Administrator
+              sso_start_url=https://defn.awsapps.com/start
+              sso_region=us-east-2
             mise_config: |-
               [env]
               AWS_PROFILE = "curl-hub"
@@ -859,9 +1135,15 @@ config:
             aws_config: |-
               [profile curl-lib]
               sso_account_id=298406631539
-              sso_start_url=https://d-926760a859.awsapps.com/start
               sso_role_name=Administrator
+              sso_start_url=https://d-926760a859.awsapps.com/start
               sso_region=us-west-2
+
+              [profile defn-org]
+              sso_account_id=510430971399
+              sso_role_name=Administrator
+              sso_start_url=https://defn.awsapps.com/start
+              sso_region=us-east-2
             mise_config: |-
               [env]
               AWS_PROFILE = "curl-lib"
@@ -876,9 +1158,15 @@ config:
             aws_config: |-
               [profile curl-net]
               sso_account_id=101142583332
-              sso_start_url=https://d-926760a859.awsapps.com/start
               sso_role_name=Administrator
+              sso_start_url=https://d-926760a859.awsapps.com/start
               sso_region=us-west-2
+
+              [profile defn-org]
+              sso_account_id=510430971399
+              sso_role_name=Administrator
+              sso_start_url=https://defn.awsapps.com/start
+              sso_region=us-east-2
             mise_config: |-
               [env]
               AWS_PROFILE = "curl-net"
@@ -898,8 +1186,14 @@ config:
             aws_config: |-
               [profile defn-org]
               sso_account_id=510430971399
-              sso_start_url=https://defn.awsapps.com/start
               sso_role_name=Administrator
+              sso_start_url=https://defn.awsapps.com/start
+              sso_region=us-east-2
+
+              [profile defn-org]
+              sso_account_id=510430971399
+              sso_role_name=Administrator
+              sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             mise_config: |-
               [env]
@@ -920,9 +1214,15 @@ config:
             aws_config: |-
               [profile fogg-org]
               sso_account_id=328216504962
-              sso_start_url=https://fogg-0.awsapps.com/start
               sso_role_name=Administrator
+              sso_start_url=https://fogg-0.awsapps.com/start
               sso_region=us-west-2
+
+              [profile defn-org]
+              sso_account_id=510430971399
+              sso_role_name=Administrator
+              sso_start_url=https://defn.awsapps.com/start
+              sso_region=us-east-2
             mise_config: |-
               [env]
               AWS_PROFILE = "fogg-org"
@@ -937,9 +1237,15 @@ config:
             aws_config: |-
               [profile fogg-ci]
               sso_account_id=812459563189
-              sso_start_url=https://fogg-0.awsapps.com/start
               sso_role_name=Administrator
+              sso_start_url=https://fogg-0.awsapps.com/start
               sso_region=us-west-2
+
+              [profile defn-org]
+              sso_account_id=510430971399
+              sso_role_name=Administrator
+              sso_start_url=https://defn.awsapps.com/start
+              sso_region=us-east-2
             mise_config: |-
               [env]
               AWS_PROFILE = "fogg-ci"
@@ -954,9 +1260,15 @@ config:
             aws_config: |-
               [profile fogg-dev]
               sso_account_id=442766271046
-              sso_start_url=https://fogg-0.awsapps.com/start
               sso_role_name=Administrator
+              sso_start_url=https://fogg-0.awsapps.com/start
               sso_region=us-west-2
+
+              [profile defn-org]
+              sso_account_id=510430971399
+              sso_role_name=Administrator
+              sso_start_url=https://defn.awsapps.com/start
+              sso_region=us-east-2
             mise_config: |-
               [env]
               AWS_PROFILE = "fogg-dev"
@@ -971,9 +1283,15 @@ config:
             aws_config: |-
               [profile fogg-hub]
               sso_account_id=337248635000
-              sso_start_url=https://fogg-0.awsapps.com/start
               sso_role_name=Administrator
+              sso_start_url=https://fogg-0.awsapps.com/start
               sso_region=us-west-2
+
+              [profile defn-org]
+              sso_account_id=510430971399
+              sso_role_name=Administrator
+              sso_start_url=https://defn.awsapps.com/start
+              sso_region=us-east-2
             mise_config: |-
               [env]
               AWS_PROFILE = "fogg-hub"
@@ -988,9 +1306,15 @@ config:
             aws_config: |-
               [profile fogg-lib]
               sso_account_id=624713464251
-              sso_start_url=https://fogg-0.awsapps.com/start
               sso_role_name=Administrator
+              sso_start_url=https://fogg-0.awsapps.com/start
               sso_region=us-west-2
+
+              [profile defn-org]
+              sso_account_id=510430971399
+              sso_role_name=Administrator
+              sso_start_url=https://defn.awsapps.com/start
+              sso_region=us-east-2
             mise_config: |-
               [env]
               AWS_PROFILE = "fogg-lib"
@@ -1005,9 +1329,15 @@ config:
             aws_config: |-
               [profile fogg-log]
               sso_account_id=844609041254
-              sso_start_url=https://fogg-0.awsapps.com/start
               sso_role_name=Administrator
+              sso_start_url=https://fogg-0.awsapps.com/start
               sso_region=us-west-2
+
+              [profile defn-org]
+              sso_account_id=510430971399
+              sso_role_name=Administrator
+              sso_start_url=https://defn.awsapps.com/start
+              sso_region=us-east-2
             mise_config: |-
               [env]
               AWS_PROFILE = "fogg-log"
@@ -1022,9 +1352,15 @@ config:
             aws_config: |-
               [profile fogg-net]
               sso_account_id=060659916753
-              sso_start_url=https://fogg-0.awsapps.com/start
               sso_role_name=Administrator
+              sso_start_url=https://fogg-0.awsapps.com/start
               sso_region=us-west-2
+
+              [profile defn-org]
+              sso_account_id=510430971399
+              sso_role_name=Administrator
+              sso_start_url=https://defn.awsapps.com/start
+              sso_region=us-east-2
             mise_config: |-
               [env]
               AWS_PROFILE = "fogg-net"
@@ -1039,9 +1375,15 @@ config:
             aws_config: |-
               [profile fogg-ops]
               sso_account_id=318746665903
-              sso_start_url=https://fogg-0.awsapps.com/start
               sso_role_name=Administrator
+              sso_start_url=https://fogg-0.awsapps.com/start
               sso_region=us-west-2
+
+              [profile defn-org]
+              sso_account_id=510430971399
+              sso_role_name=Administrator
+              sso_start_url=https://defn.awsapps.com/start
+              sso_region=us-east-2
             mise_config: |-
               [env]
               AWS_PROFILE = "fogg-ops"
@@ -1056,9 +1398,15 @@ config:
             aws_config: |-
               [profile fogg-prod]
               sso_account_id=565963418226
-              sso_start_url=https://fogg-0.awsapps.com/start
               sso_role_name=Administrator
+              sso_start_url=https://fogg-0.awsapps.com/start
               sso_region=us-west-2
+
+              [profile defn-org]
+              sso_account_id=510430971399
+              sso_role_name=Administrator
+              sso_start_url=https://defn.awsapps.com/start
+              sso_region=us-east-2
             mise_config: |-
               [env]
               AWS_PROFILE = "fogg-prod"
@@ -1073,9 +1421,15 @@ config:
             aws_config: |-
               [profile fogg-pub]
               sso_account_id=372333168887
-              sso_start_url=https://fogg-0.awsapps.com/start
               sso_role_name=Administrator
+              sso_start_url=https://fogg-0.awsapps.com/start
               sso_region=us-west-2
+
+              [profile defn-org]
+              sso_account_id=510430971399
+              sso_role_name=Administrator
+              sso_start_url=https://defn.awsapps.com/start
+              sso_region=us-east-2
             mise_config: |-
               [env]
               AWS_PROFILE = "fogg-pub"
@@ -1095,8 +1449,14 @@ config:
             aws_config: |-
               [profile gyre-org]
               sso_account_id=065163301604
-              sso_start_url=https://d-9a6716e54a.awsapps.com/start
               sso_role_name=Administrator
+              sso_start_url=https://d-9a6716e54a.awsapps.com/start
+              sso_region=us-east-2
+
+              [profile defn-org]
+              sso_account_id=510430971399
+              sso_role_name=Administrator
+              sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             mise_config: |-
               [env]
@@ -1112,8 +1472,14 @@ config:
             aws_config: |-
               [profile gyre-ops]
               sso_account_id=319951235442
-              sso_start_url=https://d-9a6716e54a.awsapps.com/start
               sso_role_name=Administrator
+              sso_start_url=https://d-9a6716e54a.awsapps.com/start
+              sso_region=us-east-2
+
+              [profile defn-org]
+              sso_account_id=510430971399
+              sso_role_name=Administrator
+              sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             mise_config: |-
               [env]
@@ -1134,8 +1500,14 @@ config:
             aws_config: |-
               [profile helix-org]
               sso_account_id=816178966829
-              sso_start_url=https://d-9a6716ffd1.awsapps.com/start
               sso_role_name=Administrator
+              sso_start_url=https://d-9a6716ffd1.awsapps.com/start
+              sso_region=us-east-2
+
+              [profile defn-org]
+              sso_account_id=510430971399
+              sso_role_name=Administrator
+              sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             mise_config: |-
               [env]
@@ -1151,8 +1523,14 @@ config:
             aws_config: |-
               [profile helix-ci]
               sso_account_id=018520313738
-              sso_start_url=https://d-9a6716ffd1.awsapps.com/start
               sso_role_name=Administrator
+              sso_start_url=https://d-9a6716ffd1.awsapps.com/start
+              sso_region=us-east-2
+
+              [profile defn-org]
+              sso_account_id=510430971399
+              sso_role_name=Administrator
+              sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             mise_config: |-
               [env]
@@ -1168,8 +1546,14 @@ config:
             aws_config: |-
               [profile helix-dev]
               sso_account_id=843784871878
-              sso_start_url=https://d-9a6716ffd1.awsapps.com/start
               sso_role_name=Administrator
+              sso_start_url=https://d-9a6716ffd1.awsapps.com/start
+              sso_region=us-east-2
+
+              [profile defn-org]
+              sso_account_id=510430971399
+              sso_role_name=Administrator
+              sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             mise_config: |-
               [env]
@@ -1185,8 +1569,14 @@ config:
             aws_config: |-
               [profile helix-hub]
               sso_account_id=436043820387
-              sso_start_url=https://d-9a6716ffd1.awsapps.com/start
               sso_role_name=Administrator
+              sso_start_url=https://d-9a6716ffd1.awsapps.com/start
+              sso_region=us-east-2
+
+              [profile defn-org]
+              sso_account_id=510430971399
+              sso_role_name=Administrator
+              sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             mise_config: |-
               [env]
@@ -1202,8 +1592,14 @@ config:
             aws_config: |-
               [profile helix-lib]
               sso_account_id=377857698578
-              sso_start_url=https://d-9a6716ffd1.awsapps.com/start
               sso_role_name=Administrator
+              sso_start_url=https://d-9a6716ffd1.awsapps.com/start
+              sso_region=us-east-2
+
+              [profile defn-org]
+              sso_account_id=510430971399
+              sso_role_name=Administrator
+              sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             mise_config: |-
               [env]
@@ -1219,8 +1615,14 @@ config:
             aws_config: |-
               [profile helix-log]
               sso_account_id=664427926343
-              sso_start_url=https://d-9a6716ffd1.awsapps.com/start
               sso_role_name=Administrator
+              sso_start_url=https://d-9a6716ffd1.awsapps.com/start
+              sso_region=us-east-2
+
+              [profile defn-org]
+              sso_account_id=510430971399
+              sso_role_name=Administrator
+              sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             mise_config: |-
               [env]
@@ -1236,8 +1638,14 @@ config:
             aws_config: |-
               [profile helix-net]
               sso_account_id=504722108514
-              sso_start_url=https://d-9a6716ffd1.awsapps.com/start
               sso_role_name=Administrator
+              sso_start_url=https://d-9a6716ffd1.awsapps.com/start
+              sso_region=us-east-2
+
+              [profile defn-org]
+              sso_account_id=510430971399
+              sso_role_name=Administrator
+              sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             mise_config: |-
               [env]
@@ -1253,8 +1661,14 @@ config:
             aws_config: |-
               [profile helix-ops]
               sso_account_id=368812692254
-              sso_start_url=https://d-9a6716ffd1.awsapps.com/start
               sso_role_name=Administrator
+              sso_start_url=https://d-9a6716ffd1.awsapps.com/start
+              sso_region=us-east-2
+
+              [profile defn-org]
+              sso_account_id=510430971399
+              sso_role_name=Administrator
+              sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             mise_config: |-
               [env]
@@ -1270,8 +1684,14 @@ config:
             aws_config: |-
               [profile helix-prod]
               sso_account_id=724643698007
-              sso_start_url=https://d-9a6716ffd1.awsapps.com/start
               sso_role_name=Administrator
+              sso_start_url=https://d-9a6716ffd1.awsapps.com/start
+              sso_region=us-east-2
+
+              [profile defn-org]
+              sso_account_id=510430971399
+              sso_role_name=Administrator
+              sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             mise_config: |-
               [env]
@@ -1287,8 +1707,14 @@ config:
             aws_config: |-
               [profile helix-pub]
               sso_account_id=536806623881
-              sso_start_url=https://d-9a6716ffd1.awsapps.com/start
               sso_role_name=Administrator
+              sso_start_url=https://d-9a6716ffd1.awsapps.com/start
+              sso_region=us-east-2
+
+              [profile defn-org]
+              sso_account_id=510430971399
+              sso_role_name=Administrator
+              sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             mise_config: |-
               [env]
@@ -1309,9 +1735,15 @@ config:
             aws_config: |-
               [profile imma-org]
               sso_account_id=548373030883
-              sso_start_url=https://imma-0.awsapps.com/start
               sso_role_name=Administrator
+              sso_start_url=https://imma-0.awsapps.com/start
               sso_region=us-west-2
+
+              [profile defn-org]
+              sso_account_id=510430971399
+              sso_role_name=Administrator
+              sso_start_url=https://defn.awsapps.com/start
+              sso_region=us-east-2
             mise_config: |-
               [env]
               AWS_PROFILE = "imma-org"
@@ -1326,9 +1758,15 @@ config:
             aws_config: |-
               [profile imma-dev]
               sso_account_id=445584037541
-              sso_start_url=https://imma-0.awsapps.com/start
               sso_role_name=Administrator
+              sso_start_url=https://imma-0.awsapps.com/start
               sso_region=us-west-2
+
+              [profile defn-org]
+              sso_account_id=510430971399
+              sso_role_name=Administrator
+              sso_start_url=https://defn.awsapps.com/start
+              sso_region=us-east-2
             mise_config: |-
               [env]
               AWS_PROFILE = "imma-dev"
@@ -1343,9 +1781,15 @@ config:
             aws_config: |-
               [profile imma-lib]
               sso_account_id=516851121506
-              sso_start_url=https://imma-0.awsapps.com/start
               sso_role_name=Administrator
+              sso_start_url=https://imma-0.awsapps.com/start
               sso_region=us-west-2
+
+              [profile defn-org]
+              sso_account_id=510430971399
+              sso_role_name=Administrator
+              sso_start_url=https://defn.awsapps.com/start
+              sso_region=us-east-2
             mise_config: |-
               [env]
               AWS_PROFILE = "imma-lib"
@@ -1360,9 +1804,15 @@ config:
             aws_config: |-
               [profile imma-log]
               sso_account_id=289716781198
-              sso_start_url=https://imma-0.awsapps.com/start
               sso_role_name=Administrator
+              sso_start_url=https://imma-0.awsapps.com/start
               sso_region=us-west-2
+
+              [profile defn-org]
+              sso_account_id=510430971399
+              sso_role_name=Administrator
+              sso_start_url=https://defn.awsapps.com/start
+              sso_region=us-east-2
             mise_config: |-
               [env]
               AWS_PROFILE = "imma-log"
@@ -1377,9 +1827,15 @@ config:
             aws_config: |-
               [profile imma-net]
               sso_account_id=246197522468
-              sso_start_url=https://imma-0.awsapps.com/start
               sso_role_name=Administrator
+              sso_start_url=https://imma-0.awsapps.com/start
               sso_region=us-west-2
+
+              [profile defn-org]
+              sso_account_id=510430971399
+              sso_role_name=Administrator
+              sso_start_url=https://defn.awsapps.com/start
+              sso_region=us-east-2
             mise_config: |-
               [env]
               AWS_PROFILE = "imma-net"
@@ -1394,9 +1850,15 @@ config:
             aws_config: |-
               [profile imma-pub]
               sso_account_id=766142996227
-              sso_start_url=https://imma-0.awsapps.com/start
               sso_role_name=Administrator
+              sso_start_url=https://imma-0.awsapps.com/start
               sso_region=us-west-2
+
+              [profile defn-org]
+              sso_account_id=510430971399
+              sso_role_name=Administrator
+              sso_start_url=https://defn.awsapps.com/start
+              sso_region=us-east-2
             mise_config: |-
               [env]
               AWS_PROFILE = "imma-pub"
@@ -1416,9 +1878,15 @@ config:
             aws_config: |-
               [profile immanent-org]
               sso_account_id=545070380609
-              sso_start_url=https://immanent-0.awsapps.com/start
               sso_role_name=Administrator
+              sso_start_url=https://immanent-0.awsapps.com/start
               sso_region=us-west-2
+
+              [profile defn-org]
+              sso_account_id=510430971399
+              sso_role_name=Administrator
+              sso_start_url=https://defn.awsapps.com/start
+              sso_region=us-east-2
             mise_config: |-
               [env]
               AWS_PROFILE = "immanent-org"
@@ -1433,9 +1901,15 @@ config:
             aws_config: |-
               [profile immanent-changer]
               sso_account_id=003884504807
-              sso_start_url=https://immanent-0.awsapps.com/start
               sso_role_name=Administrator
+              sso_start_url=https://immanent-0.awsapps.com/start
               sso_region=us-west-2
+
+              [profile defn-org]
+              sso_account_id=510430971399
+              sso_role_name=Administrator
+              sso_start_url=https://defn.awsapps.com/start
+              sso_region=us-east-2
             mise_config: |-
               [env]
               AWS_PROFILE = "immanent-changer"
@@ -1450,9 +1924,15 @@ config:
             aws_config: |-
               [profile immanent-chanter]
               sso_account_id=071244154667
-              sso_start_url=https://immanent-0.awsapps.com/start
               sso_role_name=Administrator
+              sso_start_url=https://immanent-0.awsapps.com/start
               sso_region=us-west-2
+
+              [profile defn-org]
+              sso_account_id=510430971399
+              sso_role_name=Administrator
+              sso_start_url=https://defn.awsapps.com/start
+              sso_region=us-east-2
             mise_config: |-
               [env]
               AWS_PROFILE = "immanent-chanter"
@@ -1467,9 +1947,15 @@ config:
             aws_config: |-
               [profile immanent-doorkeeper]
               sso_account_id=013267321144
-              sso_start_url=https://immanent-0.awsapps.com/start
               sso_role_name=Administrator
+              sso_start_url=https://immanent-0.awsapps.com/start
               sso_region=us-west-2
+
+              [profile defn-org]
+              sso_account_id=510430971399
+              sso_role_name=Administrator
+              sso_start_url=https://defn.awsapps.com/start
+              sso_region=us-east-2
             mise_config: |-
               [env]
               AWS_PROFILE = "immanent-doorkeeper"
@@ -1484,9 +1970,15 @@ config:
             aws_config: |-
               [profile immanent-ged]
               sso_account_id=640792184178
-              sso_start_url=https://immanent-0.awsapps.com/start
               sso_role_name=Administrator
+              sso_start_url=https://immanent-0.awsapps.com/start
               sso_region=us-west-2
+
+              [profile defn-org]
+              sso_account_id=510430971399
+              sso_role_name=Administrator
+              sso_start_url=https://defn.awsapps.com/start
+              sso_region=us-east-2
             mise_config: |-
               [env]
               AWS_PROFILE = "immanent-ged"
@@ -1501,9 +1993,15 @@ config:
             aws_config: |-
               [profile immanent-hand]
               sso_account_id=826250190242
-              sso_start_url=https://immanent-0.awsapps.com/start
               sso_role_name=Administrator
+              sso_start_url=https://immanent-0.awsapps.com/start
               sso_region=us-west-2
+
+              [profile defn-org]
+              sso_account_id=510430971399
+              sso_role_name=Administrator
+              sso_start_url=https://defn.awsapps.com/start
+              sso_region=us-east-2
             mise_config: |-
               [env]
               AWS_PROFILE = "immanent-hand"
@@ -1518,9 +2016,15 @@ config:
             aws_config: |-
               [profile immanent-herbal]
               sso_account_id=165452499696
-              sso_start_url=https://immanent-0.awsapps.com/start
               sso_role_name=Administrator
+              sso_start_url=https://immanent-0.awsapps.com/start
               sso_region=us-west-2
+
+              [profile defn-org]
+              sso_account_id=510430971399
+              sso_role_name=Administrator
+              sso_start_url=https://defn.awsapps.com/start
+              sso_region=us-east-2
             mise_config: |-
               [env]
               AWS_PROFILE = "immanent-herbal"
@@ -1535,9 +2039,15 @@ config:
             aws_config: |-
               [profile immanent-namer]
               sso_account_id=856549015893
-              sso_start_url=https://immanent-0.awsapps.com/start
               sso_role_name=Administrator
+              sso_start_url=https://immanent-0.awsapps.com/start
               sso_region=us-west-2
+
+              [profile defn-org]
+              sso_account_id=510430971399
+              sso_role_name=Administrator
+              sso_start_url=https://defn.awsapps.com/start
+              sso_region=us-east-2
             mise_config: |-
               [env]
               AWS_PROFILE = "immanent-namer"
@@ -1552,9 +2062,15 @@ config:
             aws_config: |-
               [profile immanent-patterner]
               sso_account_id=143220204648
-              sso_start_url=https://immanent-0.awsapps.com/start
               sso_role_name=Administrator
+              sso_start_url=https://immanent-0.awsapps.com/start
               sso_region=us-west-2
+
+              [profile defn-org]
+              sso_account_id=510430971399
+              sso_role_name=Administrator
+              sso_start_url=https://defn.awsapps.com/start
+              sso_region=us-east-2
             mise_config: |-
               [env]
               AWS_PROFILE = "immanent-patterner"
@@ -1569,9 +2085,15 @@ config:
             aws_config: |-
               [profile immanent-roke]
               sso_account_id=892560628624
-              sso_start_url=https://immanent-0.awsapps.com/start
               sso_role_name=Administrator
+              sso_start_url=https://immanent-0.awsapps.com/start
               sso_region=us-west-2
+
+              [profile defn-org]
+              sso_account_id=510430971399
+              sso_role_name=Administrator
+              sso_start_url=https://defn.awsapps.com/start
+              sso_region=us-east-2
             mise_config: |-
               [env]
               AWS_PROFILE = "immanent-roke"
@@ -1586,9 +2108,15 @@ config:
             aws_config: |-
               [profile immanent-summoner]
               sso_account_id=397411277587
-              sso_start_url=https://immanent-0.awsapps.com/start
               sso_role_name=Administrator
+              sso_start_url=https://immanent-0.awsapps.com/start
               sso_region=us-west-2
+
+              [profile defn-org]
+              sso_account_id=510430971399
+              sso_role_name=Administrator
+              sso_start_url=https://defn.awsapps.com/start
+              sso_region=us-east-2
             mise_config: |-
               [env]
               AWS_PROFILE = "immanent-summoner"
@@ -1603,9 +2131,15 @@ config:
             aws_config: |-
               [profile immanent-windkey]
               sso_account_id=095764861781
-              sso_start_url=https://immanent-0.awsapps.com/start
               sso_role_name=Administrator
+              sso_start_url=https://immanent-0.awsapps.com/start
               sso_region=us-west-2
+
+              [profile defn-org]
+              sso_account_id=510430971399
+              sso_role_name=Administrator
+              sso_start_url=https://defn.awsapps.com/start
+              sso_region=us-east-2
             mise_config: |-
               [env]
               AWS_PROFILE = "immanent-windkey"
@@ -1625,9 +2159,15 @@ config:
             aws_config: |-
               [profile jianghu-org]
               sso_account_id=657613322961
-              sso_start_url=https://jianghu-0.awsapps.com/start
               sso_role_name=Administrator
+              sso_start_url=https://jianghu-0.awsapps.com/start
               sso_region=us-west-2
+
+              [profile defn-org]
+              sso_account_id=510430971399
+              sso_role_name=Administrator
+              sso_start_url=https://defn.awsapps.com/start
+              sso_region=us-east-2
             mise_config: |-
               [env]
               AWS_PROFILE = "jianghu-org"
@@ -1642,9 +2182,15 @@ config:
             aws_config: |-
               [profile jianghu-log]
               sso_account_id=298431841138
-              sso_start_url=https://jianghu-0.awsapps.com/start
               sso_role_name=Administrator
+              sso_start_url=https://jianghu-0.awsapps.com/start
               sso_region=us-west-2
+
+              [profile defn-org]
+              sso_account_id=510430971399
+              sso_role_name=Administrator
+              sso_start_url=https://defn.awsapps.com/start
+              sso_region=us-east-2
             mise_config: |-
               [env]
               AWS_PROFILE = "jianghu-log"
@@ -1659,9 +2205,15 @@ config:
             aws_config: |-
               [profile jianghu-net]
               sso_account_id=025636091251
-              sso_start_url=https://jianghu-0.awsapps.com/start
               sso_role_name=Administrator
+              sso_start_url=https://jianghu-0.awsapps.com/start
               sso_region=us-west-2
+
+              [profile defn-org]
+              sso_account_id=510430971399
+              sso_role_name=Administrator
+              sso_start_url=https://defn.awsapps.com/start
+              sso_region=us-east-2
             mise_config: |-
               [env]
               AWS_PROFILE = "jianghu-net"
@@ -1681,9 +2233,15 @@ config:
             aws_config: |-
               [profile spiral-org]
               sso_account_id=232091571197
-              sso_start_url=https://d-926760b322.awsapps.com/start
               sso_role_name=Administrator
+              sso_start_url=https://d-926760b322.awsapps.com/start
               sso_region=us-west-2
+
+              [profile defn-org]
+              sso_account_id=510430971399
+              sso_role_name=Administrator
+              sso_start_url=https://defn.awsapps.com/start
+              sso_region=us-east-2
             mise_config: |-
               [env]
               AWS_PROFILE = "spiral-org"
@@ -1698,9 +2256,15 @@ config:
             aws_config: |-
               [profile spiral-ci]
               sso_account_id=371657257885
-              sso_start_url=https://d-926760b322.awsapps.com/start
               sso_role_name=Administrator
+              sso_start_url=https://d-926760b322.awsapps.com/start
               sso_region=us-west-2
+
+              [profile defn-org]
+              sso_account_id=510430971399
+              sso_role_name=Administrator
+              sso_start_url=https://defn.awsapps.com/start
+              sso_region=us-east-2
             mise_config: |-
               [env]
               AWS_PROFILE = "spiral-ci"
@@ -1715,9 +2279,15 @@ config:
             aws_config: |-
               [profile spiral-dev]
               sso_account_id=308726031860
-              sso_start_url=https://d-926760b322.awsapps.com/start
               sso_role_name=Administrator
+              sso_start_url=https://d-926760b322.awsapps.com/start
               sso_region=us-west-2
+
+              [profile defn-org]
+              sso_account_id=510430971399
+              sso_role_name=Administrator
+              sso_start_url=https://defn.awsapps.com/start
+              sso_region=us-east-2
             mise_config: |-
               [env]
               AWS_PROFILE = "spiral-dev"
@@ -1732,9 +2302,15 @@ config:
             aws_config: |-
               [profile spiral-hub]
               sso_account_id=216704421225
-              sso_start_url=https://d-926760b322.awsapps.com/start
               sso_role_name=Administrator
+              sso_start_url=https://d-926760b322.awsapps.com/start
               sso_region=us-west-2
+
+              [profile defn-org]
+              sso_account_id=510430971399
+              sso_role_name=Administrator
+              sso_start_url=https://defn.awsapps.com/start
+              sso_region=us-east-2
             mise_config: |-
               [env]
               AWS_PROFILE = "spiral-hub"
@@ -1749,9 +2325,15 @@ config:
             aws_config: |-
               [profile spiral-lib]
               sso_account_id=073874947996
-              sso_start_url=https://d-926760b322.awsapps.com/start
               sso_role_name=Administrator
+              sso_start_url=https://d-926760b322.awsapps.com/start
               sso_region=us-west-2
+
+              [profile defn-org]
+              sso_account_id=510430971399
+              sso_role_name=Administrator
+              sso_start_url=https://defn.awsapps.com/start
+              sso_region=us-east-2
             mise_config: |-
               [env]
               AWS_PROFILE = "spiral-lib"
@@ -1766,9 +2348,15 @@ config:
             aws_config: |-
               [profile spiral-log]
               sso_account_id=442333715734
-              sso_start_url=https://d-926760b322.awsapps.com/start
               sso_role_name=Administrator
+              sso_start_url=https://d-926760b322.awsapps.com/start
               sso_region=us-west-2
+
+              [profile defn-org]
+              sso_account_id=510430971399
+              sso_role_name=Administrator
+              sso_start_url=https://defn.awsapps.com/start
+              sso_region=us-east-2
             mise_config: |-
               [env]
               AWS_PROFILE = "spiral-log"
@@ -1783,9 +2371,15 @@ config:
             aws_config: |-
               [profile spiral-net]
               sso_account_id=057533398557
-              sso_start_url=https://d-926760b322.awsapps.com/start
               sso_role_name=Administrator
+              sso_start_url=https://d-926760b322.awsapps.com/start
               sso_region=us-west-2
+
+              [profile defn-org]
+              sso_account_id=510430971399
+              sso_role_name=Administrator
+              sso_start_url=https://defn.awsapps.com/start
+              sso_region=us-east-2
             mise_config: |-
               [env]
               AWS_PROFILE = "spiral-net"
@@ -1800,9 +2394,15 @@ config:
             aws_config: |-
               [profile spiral-ops]
               sso_account_id=601164058091
-              sso_start_url=https://d-926760b322.awsapps.com/start
               sso_role_name=Administrator
+              sso_start_url=https://d-926760b322.awsapps.com/start
               sso_region=us-west-2
+
+              [profile defn-org]
+              sso_account_id=510430971399
+              sso_role_name=Administrator
+              sso_start_url=https://defn.awsapps.com/start
+              sso_region=us-east-2
             mise_config: |-
               [env]
               AWS_PROFILE = "spiral-ops"
@@ -1817,9 +2417,15 @@ config:
             aws_config: |-
               [profile spiral-prod]
               sso_account_id=398258703387
-              sso_start_url=https://d-926760b322.awsapps.com/start
               sso_role_name=Administrator
+              sso_start_url=https://d-926760b322.awsapps.com/start
               sso_region=us-west-2
+
+              [profile defn-org]
+              sso_account_id=510430971399
+              sso_role_name=Administrator
+              sso_start_url=https://defn.awsapps.com/start
+              sso_region=us-east-2
             mise_config: |-
               [env]
               AWS_PROFILE = "spiral-prod"
@@ -1834,9 +2440,15 @@ config:
             aws_config: |-
               [profile spiral-pub]
               sso_account_id=130046154300
-              sso_start_url=https://d-926760b322.awsapps.com/start
               sso_role_name=Administrator
+              sso_start_url=https://d-926760b322.awsapps.com/start
               sso_region=us-west-2
+
+              [profile defn-org]
+              sso_account_id=510430971399
+              sso_role_name=Administrator
+              sso_start_url=https://defn.awsapps.com/start
+              sso_region=us-east-2
             mise_config: |-
               [env]
               AWS_PROFILE = "spiral-pub"
@@ -1856,8 +2468,14 @@ config:
             aws_config: |-
               [profile vault-org]
               sso_account_id=475528707847
-              sso_start_url=https://d-9a672a0e52.awsapps.com/start
               sso_role_name=Administrator
+              sso_start_url=https://d-9a672a0e52.awsapps.com/start
+              sso_region=us-east-2
+
+              [profile defn-org]
+              sso_account_id=510430971399
+              sso_role_name=Administrator
+              sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             mise_config: |-
               [env]
@@ -1873,8 +2491,14 @@ config:
             aws_config: |-
               [profile vault-ci]
               sso_account_id=313228123503
-              sso_start_url=https://d-9a672a0e52.awsapps.com/start
               sso_role_name=Administrator
+              sso_start_url=https://d-9a672a0e52.awsapps.com/start
+              sso_region=us-east-2
+
+              [profile defn-org]
+              sso_account_id=510430971399
+              sso_role_name=Administrator
+              sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             mise_config: |-
               [env]
@@ -1890,8 +2514,14 @@ config:
             aws_config: |-
               [profile vault-dev]
               sso_account_id=497393606242
-              sso_start_url=https://d-9a672a0e52.awsapps.com/start
               sso_role_name=Administrator
+              sso_start_url=https://d-9a672a0e52.awsapps.com/start
+              sso_region=us-east-2
+
+              [profile defn-org]
+              sso_account_id=510430971399
+              sso_role_name=Administrator
+              sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             mise_config: |-
               [env]
@@ -1907,8 +2537,14 @@ config:
             aws_config: |-
               [profile vault-hub]
               sso_account_id=539099112425
-              sso_start_url=https://d-9a672a0e52.awsapps.com/start
               sso_role_name=Administrator
+              sso_start_url=https://d-9a672a0e52.awsapps.com/start
+              sso_region=us-east-2
+
+              [profile defn-org]
+              sso_account_id=510430971399
+              sso_role_name=Administrator
+              sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             mise_config: |-
               [env]
@@ -1924,8 +2560,14 @@ config:
             aws_config: |-
               [profile vault-lib]
               sso_account_id=066356637485
-              sso_start_url=https://d-9a672a0e52.awsapps.com/start
               sso_role_name=Administrator
+              sso_start_url=https://d-9a672a0e52.awsapps.com/start
+              sso_region=us-east-2
+
+              [profile defn-org]
+              sso_account_id=510430971399
+              sso_role_name=Administrator
+              sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             mise_config: |-
               [env]
@@ -1941,8 +2583,14 @@ config:
             aws_config: |-
               [profile vault-log]
               sso_account_id=749185891195
-              sso_start_url=https://d-9a672a0e52.awsapps.com/start
               sso_role_name=Administrator
+              sso_start_url=https://d-9a672a0e52.awsapps.com/start
+              sso_region=us-east-2
+
+              [profile defn-org]
+              sso_account_id=510430971399
+              sso_role_name=Administrator
+              sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             mise_config: |-
               [env]
@@ -1958,8 +2606,14 @@ config:
             aws_config: |-
               [profile vault-net]
               sso_account_id=915207860232
-              sso_start_url=https://d-9a672a0e52.awsapps.com/start
               sso_role_name=Administrator
+              sso_start_url=https://d-9a672a0e52.awsapps.com/start
+              sso_region=us-east-2
+
+              [profile defn-org]
+              sso_account_id=510430971399
+              sso_role_name=Administrator
+              sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             mise_config: |-
               [env]
@@ -1975,8 +2629,14 @@ config:
             aws_config: |-
               [profile vault-ops]
               sso_account_id=188066400611
-              sso_start_url=https://d-9a672a0e52.awsapps.com/start
               sso_role_name=Administrator
+              sso_start_url=https://d-9a672a0e52.awsapps.com/start
+              sso_region=us-east-2
+
+              [profile defn-org]
+              sso_account_id=510430971399
+              sso_role_name=Administrator
+              sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             mise_config: |-
               [env]
@@ -1992,8 +2652,14 @@ config:
             aws_config: |-
               [profile vault-prod]
               sso_account_id=040769490632
-              sso_start_url=https://d-9a672a0e52.awsapps.com/start
               sso_role_name=Administrator
+              sso_start_url=https://d-9a672a0e52.awsapps.com/start
+              sso_region=us-east-2
+
+              [profile defn-org]
+              sso_account_id=510430971399
+              sso_role_name=Administrator
+              sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             mise_config: |-
               [env]
@@ -2009,8 +2675,14 @@ config:
             aws_config: |-
               [profile vault-pub]
               sso_account_id=851162413429
-              sso_start_url=https://d-9a672a0e52.awsapps.com/start
               sso_role_name=Administrator
+              sso_start_url=https://d-9a672a0e52.awsapps.com/start
+              sso_region=us-east-2
+
+              [profile defn-org]
+              sso_account_id=510430971399
+              sso_role_name=Administrator
+              sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             mise_config: |-
               [env]
@@ -2031,9 +2703,15 @@ config:
             aws_config: |-
               [profile whoa-org]
               sso_account_id=389772512117
-              sso_start_url=https://whoa-0.awsapps.com/start
               sso_role_name=Administrator
+              sso_start_url=https://whoa-0.awsapps.com/start
               sso_region=us-west-2
+
+              [profile defn-org]
+              sso_account_id=510430971399
+              sso_role_name=Administrator
+              sso_start_url=https://defn.awsapps.com/start
+              sso_region=us-east-2
             mise_config: |-
               [env]
               AWS_PROFILE = "whoa-org"
@@ -2048,9 +2726,15 @@ config:
             aws_config: |-
               [profile whoa-dev]
               sso_account_id=439761234835
-              sso_start_url=https://whoa-0.awsapps.com/start
               sso_role_name=Administrator
+              sso_start_url=https://whoa-0.awsapps.com/start
               sso_region=us-west-2
+
+              [profile defn-org]
+              sso_account_id=510430971399
+              sso_role_name=Administrator
+              sso_start_url=https://defn.awsapps.com/start
+              sso_region=us-east-2
             mise_config: |-
               [env]
               AWS_PROFILE = "whoa-dev"
@@ -2065,9 +2749,15 @@ config:
             aws_config: |-
               [profile whoa-hub]
               sso_account_id=462478722501
-              sso_start_url=https://whoa-0.awsapps.com/start
               sso_role_name=Administrator
+              sso_start_url=https://whoa-0.awsapps.com/start
               sso_region=us-west-2
+
+              [profile defn-org]
+              sso_account_id=510430971399
+              sso_role_name=Administrator
+              sso_start_url=https://defn.awsapps.com/start
+              sso_region=us-east-2
             mise_config: |-
               [env]
               AWS_PROFILE = "whoa-hub"
@@ -2082,9 +2772,15 @@ config:
             aws_config: |-
               [profile whoa-net]
               sso_account_id=464075062390
-              sso_start_url=https://whoa-0.awsapps.com/start
               sso_role_name=Administrator
+              sso_start_url=https://whoa-0.awsapps.com/start
               sso_region=us-west-2
+
+              [profile defn-org]
+              sso_account_id=510430971399
+              sso_role_name=Administrator
+              sso_start_url=https://defn.awsapps.com/start
+              sso_region=us-east-2
             mise_config: |-
               [env]
               AWS_PROFILE = "whoa-net"
@@ -2099,9 +2795,15 @@ config:
             aws_config: |-
               [profile whoa-pub]
               sso_account_id=204827926367
-              sso_start_url=https://whoa-0.awsapps.com/start
               sso_role_name=Administrator
+              sso_start_url=https://whoa-0.awsapps.com/start
               sso_region=us-west-2
+
+              [profile defn-org]
+              sso_account_id=510430971399
+              sso_role_name=Administrator
+              sso_start_url=https://defn.awsapps.com/start
+              sso_region=us-east-2
             mise_config: |-
               [env]
               AWS_PROFILE = "whoa-pub"

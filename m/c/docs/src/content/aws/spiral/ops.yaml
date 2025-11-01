@@ -7,9 +7,15 @@ sso_role: Administrator
 aws_config: |-
   [profile spiral-ops]
   sso_account_id=601164058091
-  sso_start_url=https://d-926760b322.awsapps.com/start
   sso_role_name=Administrator
+  sso_start_url=https://d-926760b322.awsapps.com/start
   sso_region=us-west-2
+
+  [profile defn-org]
+  sso_account_id=510430971399
+  sso_role_name=Administrator
+  sso_start_url=https://defn.awsapps.com/start
+  sso_region=us-east-2
 mise_config: |-
   [env]
   AWS_PROFILE = "spiral-ops"

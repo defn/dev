@@ -1,0 +1,3 @@
+[env]
+AWS_PROFILE = "immanent-doorkeeper"
+AWS_CONFIG_FILE = "/home/ubuntu/m/a/immanent/doorkeeper/.aws/config"

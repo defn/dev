@@ -10,14 +10,15 @@ terraform {
     dynamodb_table = "dfn-defn-terraform-state-lock"
     encrypt        = true
     key            = "stacks/acc-jianghu-net/terraform.tfstate"
-    profile        = "defn-org-sso-source"
+    profile        = "defn-org"
     region         = "us-east-1"
   }
 
 }
 
 provider "aws" {
-  profile = "jianghu-net-sso-source"
+  profile = "jianghu-net"
+  region  = "us-east-1"
   alias   = "jianghu-net"
 }
 

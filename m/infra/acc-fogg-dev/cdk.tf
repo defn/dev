@@ -10,14 +10,15 @@ terraform {
     dynamodb_table = "dfn-defn-terraform-state-lock"
     encrypt        = true
     key            = "stacks/acc-fogg-dev/terraform.tfstate"
-    profile        = "defn-org-sso-source"
+    profile        = "defn-org"
     region         = "us-east-1"
   }
 
 }
 
 provider "aws" {
-  profile = "fogg-dev-sso-source"
+  profile = "fogg-dev"
+  region  = "us-east-1"
   alias   = "fogg-dev"
 }
 
