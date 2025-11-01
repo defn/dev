@@ -128,13 +128,10 @@ dev_inner:
 		--tls-key-file ~/m/coder/live/$(name).$(domain)/privkey.pem \
 		--tls-address $(listen)
 
-# Install CDKTF dependencies and regenerate code
-# Dependencies: npm command, package.json file, tf directory, npx command, cdktf binary, make command
-# Outputs: Installed npm dependencies, downloaded CDKTF providers, regenerated code
+# Legacy target - CDKTF removed
 cdktf:
-	npm -q --no-update-notifier --no-audit install
-	cd tf && npx cdktf get
-	$(MAKE) regen
+	@echo "CDKTF has been removed from this repository"
+	@echo "Infrastructure is now managed through CUE configuration in c/ directory"
 
 # Upgrade Go dependencies and regenerate code
 upgrade:
@@ -148,10 +145,10 @@ upgrade:
 go-upgrade:
 	set -x; go get -u $$(git ls-files | grep 'go$$' | perl -pe 's{[^/]+$$}{\n}' | sort -u | runmany 4 1 'echo ./$$1' | grep -v /demo/ | grep -v /cv/)
 
-# Update infrastructure by regenerating CDKTF
+# Update infrastructure configuration
 update:
-# cd tf && env SYNTH_HCL_OUTPUT=true cli infra && terraform fmt cdktf.out/stacks/*
-	$(MAKE) cdktf
+	@echo "Infrastructure is now managed through CUE configuration in c/ directory"
+	@echo "Run 'make -C c transform' to regenerate infrastructure configs"
 
 # Regenerate Go dependencies and Bazel BUILD files
 # Dependencies: mark binary, go command, git command, perl command, runmany script, bazel command, b binary, go.mod files

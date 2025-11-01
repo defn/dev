@@ -38,14 +38,6 @@ go run . client
 
 ```
 
-Run the cdktf generator:
-
-```
-
-go run . infra
-
-```
-
 Load and verify bash completion:
 
 ```
