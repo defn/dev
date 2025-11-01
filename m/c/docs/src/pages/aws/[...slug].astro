@@ -11,7 +11,7 @@ export async function getStaticPaths() {
 }
 
 const { account } = Astro.props;
-const { name, account: accountName, org, id, email, sso_role, aws_config } = account.data;
+const { name, account: accountName, org, id, email, sso_role, aws_config_account } = account.data;
 const profileName = `${org}-${accountName}`;
 ---
 
@@ -45,11 +45,11 @@ const profileName = `${org}-${accountName}`;
     <dd>{sso_role}</dd>
   </dl>
 
-  {aws_config && (
+  {aws_config_account && (
     <div style="margin-top: 2rem;">
       <h3>AWS Configuration</h3>
       <p>Add this to your <code>~/.aws/config</code> file:</p>
-      <pre style="margin-top: 1rem; padding: 1rem; background: var(--sl-color-gray-6); border-radius: 0.5rem; overflow-x: auto;"><code>{aws_config}</code></pre>
+      <pre style="margin-top: 1rem; padding: 1rem; background: var(--sl-color-gray-6); border-radius: 0.5rem; overflow-x: auto;"><code>{aws_config_account}</code></pre>
       <p style="margin-top: 1rem;">Then set the profile environment variable:</p>
       <pre style="margin-top: 0.5rem; padding: 1rem; background: var(--sl-color-gray-6); border-radius: 0.5rem; overflow-x: auto;"><code>export AWS_PROFILE={profileName}</code></pre>
     </div>

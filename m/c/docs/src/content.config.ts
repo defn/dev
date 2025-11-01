@@ -15,6 +15,7 @@ export const collections = {
       email: z.string().email(),
       sso_role: z.string(),
       aws_config: z.string().optional(),
+      aws_config_account: z.string().optional(),
     }),
   }),
 };
