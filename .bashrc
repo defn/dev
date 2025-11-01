@@ -243,6 +243,18 @@ function w {
 	cd "${workdir}"
 }
 
+function use {
+	local selected="$(cd; find m/c m/a m/infra -type d | egrep -v '/(\.terraform|docs|node_modules|\.aws)' | sort | fzf --select-1 --query="$@")"
+	if [[ -z "${selected}" ]]; then
+		return 0
+	fi
+
+	cd "$HOME/$selected"
+	if [[ -r README.md ]]; then
+		glow README.md  --width 0
+	fi
+}
+
 # coder ssh helper
 if [[ -z ${BUILDKITE-} ]]; then
 	if [[ -n ${CODER_NAME-} ]]; then
