@@ -1,23 +1,60 @@
-# Base Mise Configuration
+# AWS Mise Environments
 
-Base mise configuration directory for AWS environment setup.
+Auto-generated mise configurations for AWS SSO profiles across 14 organizations.
 
-## Contents
+## Usage
 
-- `mise.toml` - Base AWS configuration with config file path
-- `chamber/` - Chamber environment configurations (AWS profiles 1-9, a-z, org)
-- `circus/` - Circus tool environment configurations
-- `coil/` - Coil tool environment configurations  
-- `curl/` - Curl tool environment configurations
-- `defn/` - Defn tool environment configurations
-- `fogg/` - Fogg tool environment configurations
-- `gyre/` - Gyre tool environment configurations
-- `helix/` - Helix tool environment configurations
-- `imma/` - Imma tool environment configurations
-- `immanent/` - Immanent tool environment configurations
-- `jianghu/` - Jianghu tool environment configurations
-- `spiral/` - Spiral tool environment configurations
-- `vault/` - Vault tool environment configurations
-- `whoa/` - Whoa tool environment configurations
+Activate an AWS environment using mise:
 
-Each subdirectory contains mise.toml files with tool-specific AWS profile and environment configurations.
+```bash
+cd a/fogg/ops       # Navigate to organization/account
+mise trust          # Trust the mise.toml (first time only)
+# Environment activated - AWS_PROFILE and AWS_CONFIG_FILE are set
+aws sts get-caller-identity
+```
+
+## Structure
+
+```
+a/
+├── mise.toml           # Base AWS config file path
+└── {org}/              # Organization directories (14 total)
+    └── {account}/      # Account directories (e.g., org, ops, ci, dev)
+        ├── mise.toml   # Sets AWS_PROFILE and AWS_REGION
+        └── .aws/config # SSO profile configuration
+```
+
+## Organizations
+
+This directory contains configurations for 14 AWS organizations (~145 accounts total):
+
+**Complete (10-account structure):**
+
+- `fogg/` - 10 accounts (org, ops, ci, dev, hub, lib, log, net, prod, pub)
+- `helix/` - 10 accounts
+- `spiral/` - 10 accounts
+- `vault/` - 10 accounts
+
+**Infrastructure-focused:**
+
+- `circus/` - 5 accounts (org, lib, log, net, ops)
+- `coil/` - 4 accounts (org, hub, lib, net)
+- `curl/` - 4 accounts (org, hub, lib, net)
+- `gyre/` - 2 accounts (org, ops)
+- `jianghu/` - 3 accounts (org, log, net)
+
+**Special purpose:**
+
+- `chamber/` - 30 accounts (large multi-environment)
+- `defn/` - 1 account (bootstrap IAM)
+- `immanent/` - 12 accounts (Earthsea-themed names)
+- `imma/` - 6 accounts
+- `whoa/` - 4 accounts
+
+See individual organization README.md files for account details.
+
+## Generated Files
+
+All `mise.toml` and `.aws/config` files are auto-generated from CUE definitions. Do not edit manually.
+
+**Source:** `c/definition/aws/aws.cue` → Transform phase → `a/{org}/{account}/`
