@@ -7,6 +7,7 @@ Organization-level Terraform configuration for the curl AWS organization.
 ```bash
 cd infra/org-curl
 mise trust
+aws sso login
 terraform init
 terraform plan
 ```

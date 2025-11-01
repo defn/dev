@@ -7,6 +7,7 @@ Account-specific Terraform configuration for the helix organization's ops accoun
 ```bash
 cd infra/acc-helix-ops
 mise trust
+aws sso login
 terraform init
 terraform plan
 ```

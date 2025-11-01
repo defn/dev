@@ -7,6 +7,7 @@ Cross-account and global AWS infrastructure resources.
 ```bash
 cd infra/global
 mise trust
+aws sso login
 terraform init
 terraform plan
 ```

@@ -9,6 +9,7 @@ Activate an account environment:
 ```bash
 cd a/jianghu/ops
 mise trust
+aws sso login
 aws sts get-caller-identity
 ```
 

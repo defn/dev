@@ -7,6 +7,7 @@ Organization-level Terraform configuration for the immanent AWS organization.
 ```bash
 cd infra/org-immanent
 mise trust
+aws sso login
 terraform init
 terraform plan
 ```

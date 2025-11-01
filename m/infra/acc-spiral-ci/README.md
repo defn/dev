@@ -7,6 +7,7 @@ Account-specific Terraform configuration for the spiral organization's ci accoun
 ```bash
 cd infra/acc-spiral-ci
 mise trust
+aws sso login
 terraform init
 terraform plan
 ```

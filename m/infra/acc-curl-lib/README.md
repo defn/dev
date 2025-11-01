@@ -7,6 +7,7 @@ Account-specific Terraform configuration for the curl organization's lib account
 ```bash
 cd infra/acc-curl-lib
 mise trust
+aws sso login
 terraform init
 terraform plan
 ```

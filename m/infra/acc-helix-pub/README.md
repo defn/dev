@@ -7,6 +7,7 @@ Account-specific Terraform configuration for the helix organization's pub accoun
 ```bash
 cd infra/acc-helix-pub
 mise trust
+aws sso login
 terraform init
 terraform plan
 ```

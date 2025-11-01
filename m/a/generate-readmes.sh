@@ -2,14 +2,14 @@
 # Generate README.md files for each AWS organization
 
 generate_readme() {
-    local org=$1
-    local accounts=("${@:2}")
-    local readme="a/${org}/README.md"
+	local org=$1
+	local accounts=("${@:2}")
+	local readme="a/${org}/README.md"
 
-    # Capitalize first letter of org name for title
-    local org_title="$(echo ${org:0:1} | tr '[:lower:]' '[:upper:]')${org:1}"
+	# Capitalize first letter of org name for title
+	local org_title="$(echo ${org:0:1} | tr '[:lower:]' '[:upper:]')${org:1}"
 
-    cat > "$readme" <<EOF
+	cat >"$readme" <<EOF
 # ${org_title} AWS Organization
 
 AWS SSO configuration for the ${org} organization.
@@ -21,6 +21,7 @@ Activate an account environment:
 \`\`\`bash
 cd a/${org}/ops
 mise trust
+aws sso login
 aws sts get-caller-identity
 \`\`\`
 
@@ -30,12 +31,12 @@ This organization contains ${#accounts[@]} AWS account(s):
 
 EOF
 
-    # Add account list
-    for account in "${accounts[@]}"; do
-        echo "- \`${account}/\` - ${org}-${account} profile" >> "$readme"
-    done
+	# Add account list
+	for account in "${accounts[@]}"; do
+		echo "- \`${account}/\` - ${org}-${account} profile" >>"$readme"
+	done
 
-    cat >> "$readme" <<'EOF'
+	cat >>"$readme" <<'EOF'
 
 ## Structure
 

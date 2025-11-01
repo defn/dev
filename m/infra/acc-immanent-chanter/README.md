@@ -7,6 +7,7 @@ Account-specific Terraform configuration for the immanent organization's chanter
 ```bash
 cd infra/acc-immanent-chanter
 mise trust
+aws sso login
 terraform init
 terraform plan
 ```

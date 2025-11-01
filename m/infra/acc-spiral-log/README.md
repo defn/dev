@@ -7,6 +7,7 @@ Account-specific Terraform configuration for the spiral organization's log accou
 ```bash
 cd infra/acc-spiral-log
 mise trust
+aws sso login
 terraform init
 terraform plan
 ```

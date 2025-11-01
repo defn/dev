@@ -52,6 +52,7 @@ Each directory contains a `mise.toml` that sets up the appropriate AWS profile:
 ```bash
 cd infra/acc-fogg-ops
 mise trust
+aws sso login       # Authenticate and get credentials
 terraform init
 terraform plan
 ```
@@ -79,8 +80,9 @@ All configurations use AWS provider version `5.99.1`.
 
 1. Navigate to the appropriate directory
 2. Trust mise configuration: `mise trust`
-3. Initialize Terraform: `terraform init`
-4. Review changes: `terraform plan`
-5. Apply changes: `terraform apply`
+3. Authenticate with AWS SSO: `aws sso login`
+4. Initialize Terraform: `terraform init`
+5. Review changes: `terraform plan`
+6. Apply changes: `terraform apply`
 
 See individual directory READMEs for specific configuration details.

@@ -7,6 +7,7 @@ Organization-level Terraform configuration for the fogg AWS organization.
 ```bash
 cd infra/org-fogg
 mise trust
+aws sso login
 terraform init
 terraform plan
 ```

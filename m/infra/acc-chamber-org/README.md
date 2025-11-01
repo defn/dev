@@ -7,6 +7,7 @@ Account-specific Terraform configuration for the chamber organization's org acco
 ```bash
 cd infra/acc-chamber-org
 mise trust
+aws sso login
 terraform init
 terraform plan
 ```

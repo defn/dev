@@ -7,6 +7,7 @@ Account-specific Terraform configuration for the immanent organization's summone
 ```bash
 cd infra/acc-immanent-summoner
 mise trust
+aws sso login
 terraform init
 terraform plan
 ```

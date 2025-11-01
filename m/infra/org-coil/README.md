@@ -7,6 +7,7 @@ Organization-level Terraform configuration for the coil AWS organization.
 ```bash
 cd infra/org-coil
 mise trust
+aws sso login
 terraform init
 terraform plan
 ```

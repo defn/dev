@@ -7,6 +7,7 @@ Account-specific Terraform configuration for the circus organization's lib accou
 ```bash
 cd infra/acc-circus-lib
 mise trust
+aws sso login
 terraform init
 terraform plan
 ```

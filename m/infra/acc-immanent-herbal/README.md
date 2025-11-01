@@ -7,6 +7,7 @@ Account-specific Terraform configuration for the immanent organization's herbal 
 ```bash
 cd infra/acc-immanent-herbal
 mise trust
+aws sso login
 terraform init
 terraform plan
 ```

@@ -7,6 +7,7 @@ Organization-level Terraform configuration for the defn AWS organization.
 ```bash
 cd infra/org-defn
 mise trust
+aws sso login
 terraform init
 terraform plan
 ```

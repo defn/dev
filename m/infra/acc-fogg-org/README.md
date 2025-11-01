@@ -7,6 +7,7 @@ Account-specific Terraform configuration for the fogg organization's org account
 ```bash
 cd infra/acc-fogg-org
 mise trust
+aws sso login
 terraform init
 terraform plan
 ```

@@ -7,6 +7,7 @@ Account-specific Terraform configuration for the helix organization's prod accou
 ```bash
 cd infra/acc-helix-prod
 mise trust
+aws sso login
 terraform init
 terraform plan
 ```

@@ -7,6 +7,7 @@ Account-specific Terraform configuration for the vault organization's hub accoun
 ```bash
 cd infra/acc-vault-hub
 mise trust
+aws sso login
 terraform init
 terraform plan
 ```

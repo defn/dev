@@ -7,6 +7,7 @@ Account-specific Terraform configuration for the coil organization's net account
 ```bash
 cd infra/acc-coil-net
 mise trust
+aws sso login
 terraform init
 terraform plan
 ```

@@ -7,6 +7,7 @@ Account-specific Terraform configuration for the immanent organization's namer a
 ```bash
 cd infra/acc-immanent-namer
 mise trust
+aws sso login
 terraform init
 terraform plan
 ```

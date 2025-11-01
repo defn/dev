@@ -10,6 +10,7 @@ Activate an AWS environment using mise:
 cd a/fogg/ops       # Navigate to organization/account
 mise trust          # Trust the mise.toml (first time only)
 # Environment activated - AWS_PROFILE and AWS_CONFIG_FILE are set
+aws sso login       # Authenticate and get credentials
 aws sts get-caller-identity
 ```
 

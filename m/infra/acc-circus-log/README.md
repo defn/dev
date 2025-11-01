@@ -7,6 +7,7 @@ Account-specific Terraform configuration for the circus organization's log accou
 ```bash
 cd infra/acc-circus-log
 mise trust
+aws sso login
 terraform init
 terraform plan
 ```

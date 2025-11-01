@@ -7,6 +7,7 @@ Account-specific Terraform configuration for the vault organization's log accoun
 ```bash
 cd infra/acc-vault-log
 mise trust
+aws sso login
 terraform init
 terraform plan
 ```

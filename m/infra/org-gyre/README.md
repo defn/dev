@@ -7,6 +7,7 @@ Organization-level Terraform configuration for the gyre AWS organization.
 ```bash
 cd infra/org-gyre
 mise trust
+aws sso login
 terraform init
 terraform plan
 ```

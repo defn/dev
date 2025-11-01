@@ -7,6 +7,7 @@ Account-specific Terraform configuration for the immanent organization's pattern
 ```bash
 cd infra/acc-immanent-patterner
 mise trust
+aws sso login
 terraform init
 terraform plan
 ```

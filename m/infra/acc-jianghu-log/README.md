@@ -7,6 +7,7 @@ Account-specific Terraform configuration for the jianghu organization's log acco
 ```bash
 cd infra/acc-jianghu-log
 mise trust
+aws sso login
 terraform init
 terraform plan
 ```

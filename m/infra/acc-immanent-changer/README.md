@@ -7,6 +7,7 @@ Account-specific Terraform configuration for the immanent organization's changer
 ```bash
 cd infra/acc-immanent-changer
 mise trust
+aws sso login
 terraform init
 terraform plan
 ```

@@ -7,6 +7,7 @@ Account-specific Terraform configuration for the immanent organization's ged acc
 ```bash
 cd infra/acc-immanent-ged
 mise trust
+aws sso login
 terraform init
 terraform plan
 ```

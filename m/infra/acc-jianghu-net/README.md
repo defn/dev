@@ -7,6 +7,7 @@ Account-specific Terraform configuration for the jianghu organization's net acco
 ```bash
 cd infra/acc-jianghu-net
 mise trust
+aws sso login
 terraform init
 terraform plan
 ```

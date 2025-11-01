@@ -7,6 +7,7 @@ Account-specific Terraform configuration for the immanent organization's hand ac
 ```bash
 cd infra/acc-immanent-hand
 mise trust
+aws sso login
 terraform init
 terraform plan
 ```

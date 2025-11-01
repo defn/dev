@@ -7,6 +7,7 @@ Account-specific Terraform configuration for the coil organization's lib account
 ```bash
 cd infra/acc-coil-lib
 mise trust
+aws sso login
 terraform init
 terraform plan
 ```

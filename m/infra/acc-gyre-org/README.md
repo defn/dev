@@ -7,6 +7,7 @@ Account-specific Terraform configuration for the gyre organization's org account
 ```bash
 cd infra/acc-gyre-org
 mise trust
+aws sso login
 terraform init
 terraform plan
 ```
