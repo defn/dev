@@ -1,3 +1,4 @@
+# auto-generated: aws.cue
 [env]
 AWS_PROFILE = "chamber-v"
 AWS_CONFIG_FILE = "/home/ubuntu/m/a/chamber/v/.aws/config"

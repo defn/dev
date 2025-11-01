@@ -1,3 +1,5 @@
+# auto-generated: transform.sh
+# auto-generated: aws.cue
 [env]
 AWS_PROFILE = "jianghu-net"
 AWS_CONFIG_FILE = "/home/ubuntu/m/a/jianghu/net/.aws/config"

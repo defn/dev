@@ -1,3 +1,4 @@
+# auto-generated: transform.sh
 account: summoner
 email: immanent-summoner@defn.us
 id: "397411277587"
@@ -5,28 +6,33 @@ name: immanent-summoner
 org: immanent
 sso_role: Administrator
 aws_config: |-
+  # auto-generated: aws.cue
   [profile immanent-summoner]
   sso_account_id=397411277587
   sso_role_name=Administrator
   sso_start_url=https://immanent-0.awsapps.com/start
   sso_region=us-west-2
 
+  # auto-generated: aws.cue
   [profile defn-org]
   sso_account_id=510430971399
   sso_role_name=Administrator
   sso_start_url=https://defn.awsapps.com/start
   sso_region=us-east-2
 mise_config: |-
+  # auto-generated: aws.cue
   [env]
   AWS_PROFILE = "immanent-summoner"
   AWS_CONFIG_FILE = "/home/ubuntu/m/a/immanent/summoner/.aws/config"
 aws_config_account: |-
+  # auto-generated: aws.cue
   [profile immanent-summoner]
   sso_account_id=397411277587
   sso_role_name=Administrator
   sso_start_url=https://immanent-0.awsapps.com/start
   sso_region=us-west-2
 aws_config_bootstrap: |-
+  # auto-generated: aws.cue
   [profile defn-org]
   sso_account_id=510430971399
   sso_role_name=Administrator

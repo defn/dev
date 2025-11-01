@@ -1,3 +1,4 @@
+# auto-generated: transform.sh
 account: ops
 email: aws-vault-ops@defn.sh
 id: "188066400611"
@@ -5,28 +6,33 @@ name: ops
 org: vault
 sso_role: Administrator
 aws_config: |-
+  # auto-generated: aws.cue
   [profile vault-ops]
   sso_account_id=188066400611
   sso_role_name=Administrator
   sso_start_url=https://d-9a672a0e52.awsapps.com/start
   sso_region=us-east-2
 
+  # auto-generated: aws.cue
   [profile defn-org]
   sso_account_id=510430971399
   sso_role_name=Administrator
   sso_start_url=https://defn.awsapps.com/start
   sso_region=us-east-2
 mise_config: |-
+  # auto-generated: aws.cue
   [env]
   AWS_PROFILE = "vault-ops"
   AWS_CONFIG_FILE = "/home/ubuntu/m/a/vault/ops/.aws/config"
 aws_config_account: |-
+  # auto-generated: aws.cue
   [profile vault-ops]
   sso_account_id=188066400611
   sso_role_name=Administrator
   sso_start_url=https://d-9a672a0e52.awsapps.com/start
   sso_region=us-east-2
 aws_config_bootstrap: |-
+  # auto-generated: aws.cue
   [profile defn-org]
   sso_account_id=510430971399
   sso_role_name=Administrator

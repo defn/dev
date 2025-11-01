@@ -60,28 +60,33 @@ config:
             org: chamber
             sso_role: Administrator
             aws_config: |-
+              # auto-generated: aws.cue
               [profile chamber-org]
               sso_account_id=730917619329
               sso_role_name=Administrator
               sso_start_url=https://chamber-0.awsapps.com/start
               sso_region=us-west-2
 
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             mise_config: |-
+              # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "chamber-org"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/chamber/org/.aws/config"
             aws_config_account: |-
+              # auto-generated: aws.cue
               [profile chamber-org]
               sso_account_id=730917619329
               sso_role_name=Administrator
               sso_start_url=https://chamber-0.awsapps.com/start
               sso_region=us-west-2
             aws_config_bootstrap: |-
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
@@ -95,28 +100,33 @@ config:
             org: chamber
             sso_role: Administrator
             aws_config: |-
+              # auto-generated: aws.cue
               [profile chamber-1]
               sso_account_id=741346472057
               sso_role_name=Administrator
               sso_start_url=https://chamber-0.awsapps.com/start
               sso_region=us-west-2
 
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             mise_config: |-
+              # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "chamber-1"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/chamber/1/.aws/config"
             aws_config_account: |-
+              # auto-generated: aws.cue
               [profile chamber-1]
               sso_account_id=741346472057
               sso_role_name=Administrator
               sso_start_url=https://chamber-0.awsapps.com/start
               sso_region=us-west-2
             aws_config_bootstrap: |-
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
@@ -130,28 +140,33 @@ config:
             org: chamber
             sso_role: Administrator
             aws_config: |-
+              # auto-generated: aws.cue
               [profile chamber-2]
               sso_account_id=447993872368
               sso_role_name=Administrator
               sso_start_url=https://chamber-0.awsapps.com/start
               sso_region=us-west-2
 
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             mise_config: |-
+              # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "chamber-2"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/chamber/2/.aws/config"
             aws_config_account: |-
+              # auto-generated: aws.cue
               [profile chamber-2]
               sso_account_id=447993872368
               sso_role_name=Administrator
               sso_start_url=https://chamber-0.awsapps.com/start
               sso_region=us-west-2
             aws_config_bootstrap: |-
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
@@ -165,28 +180,33 @@ config:
             org: chamber
             sso_role: Administrator
             aws_config: |-
+              # auto-generated: aws.cue
               [profile chamber-3]
               sso_account_id=463050069968
               sso_role_name=Administrator
               sso_start_url=https://chamber-0.awsapps.com/start
               sso_region=us-west-2
 
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             mise_config: |-
+              # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "chamber-3"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/chamber/3/.aws/config"
             aws_config_account: |-
+              # auto-generated: aws.cue
               [profile chamber-3]
               sso_account_id=463050069968
               sso_role_name=Administrator
               sso_start_url=https://chamber-0.awsapps.com/start
               sso_region=us-west-2
             aws_config_bootstrap: |-
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
@@ -200,28 +220,33 @@ config:
             org: chamber
             sso_role: Administrator
             aws_config: |-
+              # auto-generated: aws.cue
               [profile chamber-4]
               sso_account_id=368890376620
               sso_role_name=Administrator
               sso_start_url=https://chamber-0.awsapps.com/start
               sso_region=us-west-2
 
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             mise_config: |-
+              # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "chamber-4"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/chamber/4/.aws/config"
             aws_config_account: |-
+              # auto-generated: aws.cue
               [profile chamber-4]
               sso_account_id=368890376620
               sso_role_name=Administrator
               sso_start_url=https://chamber-0.awsapps.com/start
               sso_region=us-west-2
             aws_config_bootstrap: |-
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
@@ -235,28 +260,33 @@ config:
             org: chamber
             sso_role: Administrator
             aws_config: |-
+              # auto-generated: aws.cue
               [profile chamber-5]
               sso_account_id=200733412967
               sso_role_name=Administrator
               sso_start_url=https://chamber-0.awsapps.com/start
               sso_region=us-west-2
 
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             mise_config: |-
+              # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "chamber-5"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/chamber/5/.aws/config"
             aws_config_account: |-
+              # auto-generated: aws.cue
               [profile chamber-5]
               sso_account_id=200733412967
               sso_role_name=Administrator
               sso_start_url=https://chamber-0.awsapps.com/start
               sso_region=us-west-2
             aws_config_bootstrap: |-
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
@@ -270,28 +300,33 @@ config:
             org: chamber
             sso_role: Administrator
             aws_config: |-
+              # auto-generated: aws.cue
               [profile chamber-6]
               sso_account_id=493089153027
               sso_role_name=Administrator
               sso_start_url=https://chamber-0.awsapps.com/start
               sso_region=us-west-2
 
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             mise_config: |-
+              # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "chamber-6"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/chamber/6/.aws/config"
             aws_config_account: |-
+              # auto-generated: aws.cue
               [profile chamber-6]
               sso_account_id=493089153027
               sso_role_name=Administrator
               sso_start_url=https://chamber-0.awsapps.com/start
               sso_region=us-west-2
             aws_config_bootstrap: |-
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
@@ -305,28 +340,33 @@ config:
             org: chamber
             sso_role: Administrator
             aws_config: |-
+              # auto-generated: aws.cue
               [profile chamber-7]
               sso_account_id=837425503386
               sso_role_name=Administrator
               sso_start_url=https://chamber-0.awsapps.com/start
               sso_region=us-west-2
 
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             mise_config: |-
+              # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "chamber-7"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/chamber/7/.aws/config"
             aws_config_account: |-
+              # auto-generated: aws.cue
               [profile chamber-7]
               sso_account_id=837425503386
               sso_role_name=Administrator
               sso_start_url=https://chamber-0.awsapps.com/start
               sso_region=us-west-2
             aws_config_bootstrap: |-
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
@@ -340,28 +380,33 @@ config:
             org: chamber
             sso_role: Administrator
             aws_config: |-
+              # auto-generated: aws.cue
               [profile chamber-8]
               sso_account_id=773314335856
               sso_role_name=Administrator
               sso_start_url=https://chamber-0.awsapps.com/start
               sso_region=us-west-2
 
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             mise_config: |-
+              # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "chamber-8"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/chamber/8/.aws/config"
             aws_config_account: |-
+              # auto-generated: aws.cue
               [profile chamber-8]
               sso_account_id=773314335856
               sso_role_name=Administrator
               sso_start_url=https://chamber-0.awsapps.com/start
               sso_region=us-west-2
             aws_config_bootstrap: |-
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
@@ -375,28 +420,33 @@ config:
             org: chamber
             sso_role: Administrator
             aws_config: |-
+              # auto-generated: aws.cue
               [profile chamber-9]
               sso_account_id=950940975070
               sso_role_name=Administrator
               sso_start_url=https://chamber-0.awsapps.com/start
               sso_region=us-west-2
 
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             mise_config: |-
+              # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "chamber-9"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/chamber/9/.aws/config"
             aws_config_account: |-
+              # auto-generated: aws.cue
               [profile chamber-9]
               sso_account_id=950940975070
               sso_role_name=Administrator
               sso_start_url=https://chamber-0.awsapps.com/start
               sso_region=us-west-2
             aws_config_bootstrap: |-
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
@@ -410,28 +460,33 @@ config:
             org: chamber
             sso_role: Administrator
             aws_config: |-
+              # auto-generated: aws.cue
               [profile chamber-a]
               sso_account_id=503577294851
               sso_role_name=Administrator
               sso_start_url=https://chamber-0.awsapps.com/start
               sso_region=us-west-2
 
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             mise_config: |-
+              # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "chamber-a"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/chamber/a/.aws/config"
             aws_config_account: |-
+              # auto-generated: aws.cue
               [profile chamber-a]
               sso_account_id=503577294851
               sso_role_name=Administrator
               sso_start_url=https://chamber-0.awsapps.com/start
               sso_region=us-west-2
             aws_config_bootstrap: |-
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
@@ -445,28 +500,33 @@ config:
             org: chamber
             sso_role: Administrator
             aws_config: |-
+              # auto-generated: aws.cue
               [profile chamber-b]
               sso_account_id=310940910494
               sso_role_name=Administrator
               sso_start_url=https://chamber-0.awsapps.com/start
               sso_region=us-west-2
 
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             mise_config: |-
+              # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "chamber-b"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/chamber/b/.aws/config"
             aws_config_account: |-
+              # auto-generated: aws.cue
               [profile chamber-b]
               sso_account_id=310940910494
               sso_role_name=Administrator
               sso_start_url=https://chamber-0.awsapps.com/start
               sso_region=us-west-2
             aws_config_bootstrap: |-
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
@@ -480,28 +540,33 @@ config:
             org: chamber
             sso_role: Administrator
             aws_config: |-
+              # auto-generated: aws.cue
               [profile chamber-c]
               sso_account_id=047633732615
               sso_role_name=Administrator
               sso_start_url=https://chamber-0.awsapps.com/start
               sso_region=us-west-2
 
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             mise_config: |-
+              # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "chamber-c"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/chamber/c/.aws/config"
             aws_config_account: |-
+              # auto-generated: aws.cue
               [profile chamber-c]
               sso_account_id=047633732615
               sso_role_name=Administrator
               sso_start_url=https://chamber-0.awsapps.com/start
               sso_region=us-west-2
             aws_config_bootstrap: |-
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
@@ -515,28 +580,33 @@ config:
             org: chamber
             sso_role: Administrator
             aws_config: |-
+              # auto-generated: aws.cue
               [profile chamber-d]
               sso_account_id=699441347021
               sso_role_name=Administrator
               sso_start_url=https://chamber-0.awsapps.com/start
               sso_region=us-west-2
 
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             mise_config: |-
+              # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "chamber-d"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/chamber/d/.aws/config"
             aws_config_account: |-
+              # auto-generated: aws.cue
               [profile chamber-d]
               sso_account_id=699441347021
               sso_role_name=Administrator
               sso_start_url=https://chamber-0.awsapps.com/start
               sso_region=us-west-2
             aws_config_bootstrap: |-
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
@@ -550,28 +620,33 @@ config:
             org: chamber
             sso_role: Administrator
             aws_config: |-
+              # auto-generated: aws.cue
               [profile chamber-e]
               sso_account_id=171831323337
               sso_role_name=Administrator
               sso_start_url=https://chamber-0.awsapps.com/start
               sso_region=us-west-2
 
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             mise_config: |-
+              # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "chamber-e"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/chamber/e/.aws/config"
             aws_config_account: |-
+              # auto-generated: aws.cue
               [profile chamber-e]
               sso_account_id=171831323337
               sso_role_name=Administrator
               sso_start_url=https://chamber-0.awsapps.com/start
               sso_region=us-west-2
             aws_config_bootstrap: |-
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
@@ -585,28 +660,33 @@ config:
             org: chamber
             sso_role: Administrator
             aws_config: |-
+              # auto-generated: aws.cue
               [profile chamber-f]
               sso_account_id=842022523232
               sso_role_name=Administrator
               sso_start_url=https://chamber-0.awsapps.com/start
               sso_region=us-west-2
 
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             mise_config: |-
+              # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "chamber-f"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/chamber/f/.aws/config"
             aws_config_account: |-
+              # auto-generated: aws.cue
               [profile chamber-f]
               sso_account_id=842022523232
               sso_role_name=Administrator
               sso_start_url=https://chamber-0.awsapps.com/start
               sso_region=us-west-2
             aws_config_bootstrap: |-
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
@@ -620,28 +700,33 @@ config:
             org: chamber
             sso_role: Administrator
             aws_config: |-
+              # auto-generated: aws.cue
               [profile chamber-g]
               sso_account_id=023867963778
               sso_role_name=Administrator
               sso_start_url=https://chamber-0.awsapps.com/start
               sso_region=us-west-2
 
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             mise_config: |-
+              # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "chamber-g"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/chamber/g/.aws/config"
             aws_config_account: |-
+              # auto-generated: aws.cue
               [profile chamber-g]
               sso_account_id=023867963778
               sso_role_name=Administrator
               sso_start_url=https://chamber-0.awsapps.com/start
               sso_region=us-west-2
             aws_config_bootstrap: |-
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
@@ -655,28 +740,33 @@ config:
             org: chamber
             sso_role: Administrator
             aws_config: |-
+              # auto-generated: aws.cue
               [profile chamber-h]
               sso_account_id=371020107387
               sso_role_name=Administrator
               sso_start_url=https://chamber-0.awsapps.com/start
               sso_region=us-west-2
 
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             mise_config: |-
+              # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "chamber-h"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/chamber/h/.aws/config"
             aws_config_account: |-
+              # auto-generated: aws.cue
               [profile chamber-h]
               sso_account_id=371020107387
               sso_role_name=Administrator
               sso_start_url=https://chamber-0.awsapps.com/start
               sso_region=us-west-2
             aws_config_bootstrap: |-
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
@@ -690,28 +780,33 @@ config:
             org: chamber
             sso_role: Administrator
             aws_config: |-
+              # auto-generated: aws.cue
               [profile chamber-i]
               sso_account_id=290132238209
               sso_role_name=Administrator
               sso_start_url=https://chamber-0.awsapps.com/start
               sso_region=us-west-2
 
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             mise_config: |-
+              # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "chamber-i"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/chamber/i/.aws/config"
             aws_config_account: |-
+              # auto-generated: aws.cue
               [profile chamber-i]
               sso_account_id=290132238209
               sso_role_name=Administrator
               sso_start_url=https://chamber-0.awsapps.com/start
               sso_region=us-west-2
             aws_config_bootstrap: |-
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
@@ -725,28 +820,33 @@ config:
             org: chamber
             sso_role: Administrator
             aws_config: |-
+              # auto-generated: aws.cue
               [profile chamber-j]
               sso_account_id=738433022197
               sso_role_name=Administrator
               sso_start_url=https://chamber-0.awsapps.com/start
               sso_region=us-west-2
 
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             mise_config: |-
+              # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "chamber-j"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/chamber/j/.aws/config"
             aws_config_account: |-
+              # auto-generated: aws.cue
               [profile chamber-j]
               sso_account_id=738433022197
               sso_role_name=Administrator
               sso_start_url=https://chamber-0.awsapps.com/start
               sso_region=us-west-2
             aws_config_bootstrap: |-
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
@@ -760,28 +860,33 @@ config:
             org: chamber
             sso_role: Administrator
             aws_config: |-
+              # auto-generated: aws.cue
               [profile chamber-l]
               sso_account_id=991300382347
               sso_role_name=Administrator
               sso_start_url=https://chamber-0.awsapps.com/start
               sso_region=us-west-2
 
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             mise_config: |-
+              # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "chamber-l"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/chamber/l/.aws/config"
             aws_config_account: |-
+              # auto-generated: aws.cue
               [profile chamber-l]
               sso_account_id=991300382347
               sso_role_name=Administrator
               sso_start_url=https://chamber-0.awsapps.com/start
               sso_region=us-west-2
             aws_config_bootstrap: |-
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
@@ -795,28 +900,33 @@ config:
             org: chamber
             sso_role: Administrator
             aws_config: |-
+              # auto-generated: aws.cue
               [profile chamber-m]
               sso_account_id=684895750259
               sso_role_name=Administrator
               sso_start_url=https://chamber-0.awsapps.com/start
               sso_region=us-west-2
 
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             mise_config: |-
+              # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "chamber-m"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/chamber/m/.aws/config"
             aws_config_account: |-
+              # auto-generated: aws.cue
               [profile chamber-m]
               sso_account_id=684895750259
               sso_role_name=Administrator
               sso_start_url=https://chamber-0.awsapps.com/start
               sso_region=us-west-2
             aws_config_bootstrap: |-
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
@@ -830,28 +940,33 @@ config:
             org: chamber
             sso_role: Administrator
             aws_config: |-
+              # auto-generated: aws.cue
               [profile chamber-n]
               sso_account_id=705881812506
               sso_role_name=Administrator
               sso_start_url=https://chamber-0.awsapps.com/start
               sso_region=us-west-2
 
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             mise_config: |-
+              # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "chamber-n"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/chamber/n/.aws/config"
             aws_config_account: |-
+              # auto-generated: aws.cue
               [profile chamber-n]
               sso_account_id=705881812506
               sso_role_name=Administrator
               sso_start_url=https://chamber-0.awsapps.com/start
               sso_region=us-west-2
             aws_config_bootstrap: |-
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
@@ -865,28 +980,33 @@ config:
             org: chamber
             sso_role: Administrator
             aws_config: |-
+              # auto-generated: aws.cue
               [profile chamber-o]
               sso_account_id=307136835824
               sso_role_name=Administrator
               sso_start_url=https://chamber-0.awsapps.com/start
               sso_region=us-west-2
 
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             mise_config: |-
+              # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "chamber-o"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/chamber/o/.aws/config"
             aws_config_account: |-
+              # auto-generated: aws.cue
               [profile chamber-o]
               sso_account_id=307136835824
               sso_role_name=Administrator
               sso_start_url=https://chamber-0.awsapps.com/start
               sso_region=us-west-2
             aws_config_bootstrap: |-
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
@@ -900,28 +1020,33 @@ config:
             org: chamber
             sso_role: Administrator
             aws_config: |-
+              # auto-generated: aws.cue
               [profile chamber-p]
               sso_account_id=706168331526
               sso_role_name=Administrator
               sso_start_url=https://chamber-0.awsapps.com/start
               sso_region=us-west-2
 
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             mise_config: |-
+              # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "chamber-p"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/chamber/p/.aws/config"
             aws_config_account: |-
+              # auto-generated: aws.cue
               [profile chamber-p]
               sso_account_id=706168331526
               sso_role_name=Administrator
               sso_start_url=https://chamber-0.awsapps.com/start
               sso_region=us-west-2
             aws_config_bootstrap: |-
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
@@ -935,28 +1060,33 @@ config:
             org: chamber
             sso_role: Administrator
             aws_config: |-
+              # auto-generated: aws.cue
               [profile chamber-q]
               sso_account_id=217047480856
               sso_role_name=Administrator
               sso_start_url=https://chamber-0.awsapps.com/start
               sso_region=us-west-2
 
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             mise_config: |-
+              # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "chamber-q"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/chamber/q/.aws/config"
             aws_config_account: |-
+              # auto-generated: aws.cue
               [profile chamber-q]
               sso_account_id=217047480856
               sso_role_name=Administrator
               sso_start_url=https://chamber-0.awsapps.com/start
               sso_region=us-west-2
             aws_config_bootstrap: |-
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
@@ -970,28 +1100,33 @@ config:
             org: chamber
             sso_role: Administrator
             aws_config: |-
+              # auto-generated: aws.cue
               [profile chamber-r]
               sso_account_id=416221726155
               sso_role_name=Administrator
               sso_start_url=https://chamber-0.awsapps.com/start
               sso_region=us-west-2
 
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             mise_config: |-
+              # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "chamber-r"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/chamber/r/.aws/config"
             aws_config_account: |-
+              # auto-generated: aws.cue
               [profile chamber-r]
               sso_account_id=416221726155
               sso_role_name=Administrator
               sso_start_url=https://chamber-0.awsapps.com/start
               sso_region=us-west-2
             aws_config_bootstrap: |-
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
@@ -1005,28 +1140,33 @@ config:
             org: chamber
             sso_role: Administrator
             aws_config: |-
+              # auto-generated: aws.cue
               [profile chamber-s]
               sso_account_id=840650118369
               sso_role_name=Administrator
               sso_start_url=https://chamber-0.awsapps.com/start
               sso_region=us-west-2
 
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             mise_config: |-
+              # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "chamber-s"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/chamber/s/.aws/config"
             aws_config_account: |-
+              # auto-generated: aws.cue
               [profile chamber-s]
               sso_account_id=840650118369
               sso_role_name=Administrator
               sso_start_url=https://chamber-0.awsapps.com/start
               sso_region=us-west-2
             aws_config_bootstrap: |-
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
@@ -1040,28 +1180,33 @@ config:
             org: chamber
             sso_role: Administrator
             aws_config: |-
+              # auto-generated: aws.cue
               [profile chamber-t]
               sso_account_id=490895200523
               sso_role_name=Administrator
               sso_start_url=https://chamber-0.awsapps.com/start
               sso_region=us-west-2
 
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             mise_config: |-
+              # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "chamber-t"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/chamber/t/.aws/config"
             aws_config_account: |-
+              # auto-generated: aws.cue
               [profile chamber-t]
               sso_account_id=490895200523
               sso_role_name=Administrator
               sso_start_url=https://chamber-0.awsapps.com/start
               sso_region=us-west-2
             aws_config_bootstrap: |-
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
@@ -1075,28 +1220,33 @@ config:
             org: chamber
             sso_role: Administrator
             aws_config: |-
+              # auto-generated: aws.cue
               [profile chamber-u]
               sso_account_id=467995590869
               sso_role_name=Administrator
               sso_start_url=https://chamber-0.awsapps.com/start
               sso_region=us-west-2
 
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             mise_config: |-
+              # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "chamber-u"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/chamber/u/.aws/config"
             aws_config_account: |-
+              # auto-generated: aws.cue
               [profile chamber-u]
               sso_account_id=467995590869
               sso_role_name=Administrator
               sso_start_url=https://chamber-0.awsapps.com/start
               sso_region=us-west-2
             aws_config_bootstrap: |-
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
@@ -1110,28 +1260,33 @@ config:
             org: chamber
             sso_role: Administrator
             aws_config: |-
+              # auto-generated: aws.cue
               [profile chamber-v]
               sso_account_id=979368042862
               sso_role_name=Administrator
               sso_start_url=https://chamber-0.awsapps.com/start
               sso_region=us-west-2
 
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             mise_config: |-
+              # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "chamber-v"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/chamber/v/.aws/config"
             aws_config_account: |-
+              # auto-generated: aws.cue
               [profile chamber-v]
               sso_account_id=979368042862
               sso_role_name=Administrator
               sso_start_url=https://chamber-0.awsapps.com/start
               sso_region=us-west-2
             aws_config_bootstrap: |-
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
@@ -1145,28 +1300,33 @@ config:
             org: chamber
             sso_role: Administrator
             aws_config: |-
+              # auto-generated: aws.cue
               [profile chamber-w]
               sso_account_id=313387692116
               sso_role_name=Administrator
               sso_start_url=https://chamber-0.awsapps.com/start
               sso_region=us-west-2
 
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             mise_config: |-
+              # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "chamber-w"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/chamber/w/.aws/config"
             aws_config_account: |-
+              # auto-generated: aws.cue
               [profile chamber-w]
               sso_account_id=313387692116
               sso_role_name=Administrator
               sso_start_url=https://chamber-0.awsapps.com/start
               sso_region=us-west-2
             aws_config_bootstrap: |-
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
@@ -1180,28 +1340,33 @@ config:
             org: chamber
             sso_role: Administrator
             aws_config: |-
+              # auto-generated: aws.cue
               [profile chamber-x]
               sso_account_id=834936839208
               sso_role_name=Administrator
               sso_start_url=https://chamber-0.awsapps.com/start
               sso_region=us-west-2
 
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             mise_config: |-
+              # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "chamber-x"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/chamber/x/.aws/config"
             aws_config_account: |-
+              # auto-generated: aws.cue
               [profile chamber-x]
               sso_account_id=834936839208
               sso_role_name=Administrator
               sso_start_url=https://chamber-0.awsapps.com/start
               sso_region=us-west-2
             aws_config_bootstrap: |-
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
@@ -1215,28 +1380,33 @@ config:
             org: chamber
             sso_role: Administrator
             aws_config: |-
+              # auto-generated: aws.cue
               [profile chamber-y]
               sso_account_id=153556747817
               sso_role_name=Administrator
               sso_start_url=https://chamber-0.awsapps.com/start
               sso_region=us-west-2
 
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             mise_config: |-
+              # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "chamber-y"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/chamber/y/.aws/config"
             aws_config_account: |-
+              # auto-generated: aws.cue
               [profile chamber-y]
               sso_account_id=153556747817
               sso_role_name=Administrator
               sso_start_url=https://chamber-0.awsapps.com/start
               sso_region=us-west-2
             aws_config_bootstrap: |-
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
@@ -1250,28 +1420,33 @@ config:
             org: chamber
             sso_role: Administrator
             aws_config: |-
+              # auto-generated: aws.cue
               [profile chamber-z]
               sso_account_id=037804009879
               sso_role_name=Administrator
               sso_start_url=https://chamber-0.awsapps.com/start
               sso_region=us-west-2
 
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             mise_config: |-
+              # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "chamber-z"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/chamber/z/.aws/config"
             aws_config_account: |-
+              # auto-generated: aws.cue
               [profile chamber-z]
               sso_account_id=037804009879
               sso_role_name=Administrator
               sso_start_url=https://chamber-0.awsapps.com/start
               sso_region=us-west-2
             aws_config_bootstrap: |-
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
@@ -1290,28 +1465,33 @@ config:
             org: circus
             sso_role: Administrator
             aws_config: |-
+              # auto-generated: aws.cue
               [profile circus-org]
               sso_account_id=036139182623
               sso_role_name=Administrator
               sso_start_url=https://d-92670c4790.awsapps.com/start
               sso_region=us-west-2
 
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             mise_config: |-
+              # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "circus-org"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/circus/org/.aws/config"
             aws_config_account: |-
+              # auto-generated: aws.cue
               [profile circus-org]
               sso_account_id=036139182623
               sso_role_name=Administrator
               sso_start_url=https://d-92670c4790.awsapps.com/start
               sso_region=us-west-2
             aws_config_bootstrap: |-
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
@@ -1325,28 +1505,33 @@ config:
             org: circus
             sso_role: Administrator
             aws_config: |-
+              # auto-generated: aws.cue
               [profile circus-lib]
               sso_account_id=497790518354
               sso_role_name=Administrator
               sso_start_url=https://d-92670c4790.awsapps.com/start
               sso_region=us-west-2
 
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             mise_config: |-
+              # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "circus-lib"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/circus/lib/.aws/config"
             aws_config_account: |-
+              # auto-generated: aws.cue
               [profile circus-lib]
               sso_account_id=497790518354
               sso_role_name=Administrator
               sso_start_url=https://d-92670c4790.awsapps.com/start
               sso_region=us-west-2
             aws_config_bootstrap: |-
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
@@ -1360,28 +1545,33 @@ config:
             org: circus
             sso_role: Administrator
             aws_config: |-
+              # auto-generated: aws.cue
               [profile circus-log]
               sso_account_id=707476523482
               sso_role_name=Administrator
               sso_start_url=https://d-92670c4790.awsapps.com/start
               sso_region=us-west-2
 
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             mise_config: |-
+              # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "circus-log"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/circus/log/.aws/config"
             aws_config_account: |-
+              # auto-generated: aws.cue
               [profile circus-log]
               sso_account_id=707476523482
               sso_role_name=Administrator
               sso_start_url=https://d-92670c4790.awsapps.com/start
               sso_region=us-west-2
             aws_config_bootstrap: |-
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
@@ -1395,28 +1585,33 @@ config:
             org: circus
             sso_role: Administrator
             aws_config: |-
+              # auto-generated: aws.cue
               [profile circus-net]
               sso_account_id=002516226222
               sso_role_name=Administrator
               sso_start_url=https://d-92670c4790.awsapps.com/start
               sso_region=us-west-2
 
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             mise_config: |-
+              # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "circus-net"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/circus/net/.aws/config"
             aws_config_account: |-
+              # auto-generated: aws.cue
               [profile circus-net]
               sso_account_id=002516226222
               sso_role_name=Administrator
               sso_start_url=https://d-92670c4790.awsapps.com/start
               sso_region=us-west-2
             aws_config_bootstrap: |-
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
@@ -1430,28 +1625,33 @@ config:
             org: circus
             sso_role: Administrator
             aws_config: |-
+              # auto-generated: aws.cue
               [profile circus-ops]
               sso_account_id=415618116579
               sso_role_name=Administrator
               sso_start_url=https://d-92670c4790.awsapps.com/start
               sso_region=us-west-2
 
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             mise_config: |-
+              # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "circus-ops"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/circus/ops/.aws/config"
             aws_config_account: |-
+              # auto-generated: aws.cue
               [profile circus-ops]
               sso_account_id=415618116579
               sso_role_name=Administrator
               sso_start_url=https://d-92670c4790.awsapps.com/start
               sso_region=us-west-2
             aws_config_bootstrap: |-
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
@@ -1470,28 +1670,33 @@ config:
             org: coil
             sso_role: Administrator
             aws_config: |-
+              # auto-generated: aws.cue
               [profile coil-org]
               sso_account_id=138291560003
               sso_role_name=Administrator
               sso_start_url=https://d-90674c3cfd.awsapps.com/start
               sso_region=us-east-1
 
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             mise_config: |-
+              # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "coil-org"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/coil/org/.aws/config"
             aws_config_account: |-
+              # auto-generated: aws.cue
               [profile coil-org]
               sso_account_id=138291560003
               sso_role_name=Administrator
               sso_start_url=https://d-90674c3cfd.awsapps.com/start
               sso_region=us-east-1
             aws_config_bootstrap: |-
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
@@ -1505,28 +1710,33 @@ config:
             org: coil
             sso_role: Administrator
             aws_config: |-
+              # auto-generated: aws.cue
               [profile coil-hub]
               sso_account_id=453991412409
               sso_role_name=Administrator
               sso_start_url=https://d-90674c3cfd.awsapps.com/start
               sso_region=us-east-1
 
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             mise_config: |-
+              # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "coil-hub"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/coil/hub/.aws/config"
             aws_config_account: |-
+              # auto-generated: aws.cue
               [profile coil-hub]
               sso_account_id=453991412409
               sso_role_name=Administrator
               sso_start_url=https://d-90674c3cfd.awsapps.com/start
               sso_region=us-east-1
             aws_config_bootstrap: |-
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
@@ -1540,28 +1750,33 @@ config:
             org: coil
             sso_role: Administrator
             aws_config: |-
+              # auto-generated: aws.cue
               [profile coil-lib]
               sso_account_id=160764896647
               sso_role_name=Administrator
               sso_start_url=https://d-90674c3cfd.awsapps.com/start
               sso_region=us-east-1
 
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             mise_config: |-
+              # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "coil-lib"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/coil/lib/.aws/config"
             aws_config_account: |-
+              # auto-generated: aws.cue
               [profile coil-lib]
               sso_account_id=160764896647
               sso_role_name=Administrator
               sso_start_url=https://d-90674c3cfd.awsapps.com/start
               sso_region=us-east-1
             aws_config_bootstrap: |-
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
@@ -1575,28 +1790,33 @@ config:
             org: coil
             sso_role: Administrator
             aws_config: |-
+              # auto-generated: aws.cue
               [profile coil-net]
               sso_account_id=278790191486
               sso_role_name=Administrator
               sso_start_url=https://d-90674c3cfd.awsapps.com/start
               sso_region=us-east-1
 
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             mise_config: |-
+              # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "coil-net"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/coil/net/.aws/config"
             aws_config_account: |-
+              # auto-generated: aws.cue
               [profile coil-net]
               sso_account_id=278790191486
               sso_role_name=Administrator
               sso_start_url=https://d-90674c3cfd.awsapps.com/start
               sso_region=us-east-1
             aws_config_bootstrap: |-
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
@@ -1615,28 +1835,33 @@ config:
             org: curl
             sso_role: Administrator
             aws_config: |-
+              # auto-generated: aws.cue
               [profile curl-org]
               sso_account_id=424535767618
               sso_role_name=Administrator
               sso_start_url=https://d-926760a859.awsapps.com/start
               sso_region=us-west-2
 
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             mise_config: |-
+              # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "curl-org"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/curl/org/.aws/config"
             aws_config_account: |-
+              # auto-generated: aws.cue
               [profile curl-org]
               sso_account_id=424535767618
               sso_role_name=Administrator
               sso_start_url=https://d-926760a859.awsapps.com/start
               sso_region=us-west-2
             aws_config_bootstrap: |-
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
@@ -1650,28 +1875,33 @@ config:
             org: curl
             sso_role: Administrator
             aws_config: |-
+              # auto-generated: aws.cue
               [profile curl-hub]
               sso_account_id=804430872255
               sso_role_name=Administrator
               sso_start_url=https://d-926760a859.awsapps.com/start
               sso_region=us-west-2
 
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             mise_config: |-
+              # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "curl-hub"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/curl/hub/.aws/config"
             aws_config_account: |-
+              # auto-generated: aws.cue
               [profile curl-hub]
               sso_account_id=804430872255
               sso_role_name=Administrator
               sso_start_url=https://d-926760a859.awsapps.com/start
               sso_region=us-west-2
             aws_config_bootstrap: |-
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
@@ -1685,28 +1915,33 @@ config:
             org: curl
             sso_role: Administrator
             aws_config: |-
+              # auto-generated: aws.cue
               [profile curl-lib]
               sso_account_id=298406631539
               sso_role_name=Administrator
               sso_start_url=https://d-926760a859.awsapps.com/start
               sso_region=us-west-2
 
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             mise_config: |-
+              # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "curl-lib"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/curl/lib/.aws/config"
             aws_config_account: |-
+              # auto-generated: aws.cue
               [profile curl-lib]
               sso_account_id=298406631539
               sso_role_name=Administrator
               sso_start_url=https://d-926760a859.awsapps.com/start
               sso_region=us-west-2
             aws_config_bootstrap: |-
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
@@ -1720,28 +1955,33 @@ config:
             org: curl
             sso_role: Administrator
             aws_config: |-
+              # auto-generated: aws.cue
               [profile curl-net]
               sso_account_id=101142583332
               sso_role_name=Administrator
               sso_start_url=https://d-926760a859.awsapps.com/start
               sso_region=us-west-2
 
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             mise_config: |-
+              # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "curl-net"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/curl/net/.aws/config"
             aws_config_account: |-
+              # auto-generated: aws.cue
               [profile curl-net]
               sso_account_id=101142583332
               sso_role_name=Administrator
               sso_start_url=https://d-926760a859.awsapps.com/start
               sso_region=us-west-2
             aws_config_bootstrap: |-
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
@@ -1760,22 +2000,26 @@ config:
             org: defn
             sso_role: Administrator
             aws_config: |-
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             mise_config: |-
+              # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "defn-org"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/defn/org/.aws/config"
             aws_config_account: |-
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             aws_config_bootstrap: |-
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
@@ -1794,28 +2038,33 @@ config:
             org: fogg
             sso_role: Administrator
             aws_config: |-
+              # auto-generated: aws.cue
               [profile fogg-org]
               sso_account_id=328216504962
               sso_role_name=Administrator
               sso_start_url=https://fogg-0.awsapps.com/start
               sso_region=us-west-2
 
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             mise_config: |-
+              # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "fogg-org"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/fogg/org/.aws/config"
             aws_config_account: |-
+              # auto-generated: aws.cue
               [profile fogg-org]
               sso_account_id=328216504962
               sso_role_name=Administrator
               sso_start_url=https://fogg-0.awsapps.com/start
               sso_region=us-west-2
             aws_config_bootstrap: |-
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
@@ -1829,28 +2078,33 @@ config:
             org: fogg
             sso_role: Administrator
             aws_config: |-
+              # auto-generated: aws.cue
               [profile fogg-ci]
               sso_account_id=812459563189
               sso_role_name=Administrator
               sso_start_url=https://fogg-0.awsapps.com/start
               sso_region=us-west-2
 
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             mise_config: |-
+              # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "fogg-ci"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/fogg/ci/.aws/config"
             aws_config_account: |-
+              # auto-generated: aws.cue
               [profile fogg-ci]
               sso_account_id=812459563189
               sso_role_name=Administrator
               sso_start_url=https://fogg-0.awsapps.com/start
               sso_region=us-west-2
             aws_config_bootstrap: |-
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
@@ -1864,28 +2118,33 @@ config:
             org: fogg
             sso_role: Administrator
             aws_config: |-
+              # auto-generated: aws.cue
               [profile fogg-dev]
               sso_account_id=442766271046
               sso_role_name=Administrator
               sso_start_url=https://fogg-0.awsapps.com/start
               sso_region=us-west-2
 
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             mise_config: |-
+              # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "fogg-dev"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/fogg/dev/.aws/config"
             aws_config_account: |-
+              # auto-generated: aws.cue
               [profile fogg-dev]
               sso_account_id=442766271046
               sso_role_name=Administrator
               sso_start_url=https://fogg-0.awsapps.com/start
               sso_region=us-west-2
             aws_config_bootstrap: |-
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
@@ -1899,28 +2158,33 @@ config:
             org: fogg
             sso_role: Administrator
             aws_config: |-
+              # auto-generated: aws.cue
               [profile fogg-hub]
               sso_account_id=337248635000
               sso_role_name=Administrator
               sso_start_url=https://fogg-0.awsapps.com/start
               sso_region=us-west-2
 
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             mise_config: |-
+              # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "fogg-hub"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/fogg/hub/.aws/config"
             aws_config_account: |-
+              # auto-generated: aws.cue
               [profile fogg-hub]
               sso_account_id=337248635000
               sso_role_name=Administrator
               sso_start_url=https://fogg-0.awsapps.com/start
               sso_region=us-west-2
             aws_config_bootstrap: |-
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
@@ -1934,28 +2198,33 @@ config:
             org: fogg
             sso_role: Administrator
             aws_config: |-
+              # auto-generated: aws.cue
               [profile fogg-lib]
               sso_account_id=624713464251
               sso_role_name=Administrator
               sso_start_url=https://fogg-0.awsapps.com/start
               sso_region=us-west-2
 
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             mise_config: |-
+              # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "fogg-lib"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/fogg/lib/.aws/config"
             aws_config_account: |-
+              # auto-generated: aws.cue
               [profile fogg-lib]
               sso_account_id=624713464251
               sso_role_name=Administrator
               sso_start_url=https://fogg-0.awsapps.com/start
               sso_region=us-west-2
             aws_config_bootstrap: |-
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
@@ -1969,28 +2238,33 @@ config:
             org: fogg
             sso_role: Administrator
             aws_config: |-
+              # auto-generated: aws.cue
               [profile fogg-log]
               sso_account_id=844609041254
               sso_role_name=Administrator
               sso_start_url=https://fogg-0.awsapps.com/start
               sso_region=us-west-2
 
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             mise_config: |-
+              # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "fogg-log"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/fogg/log/.aws/config"
             aws_config_account: |-
+              # auto-generated: aws.cue
               [profile fogg-log]
               sso_account_id=844609041254
               sso_role_name=Administrator
               sso_start_url=https://fogg-0.awsapps.com/start
               sso_region=us-west-2
             aws_config_bootstrap: |-
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
@@ -2004,28 +2278,33 @@ config:
             org: fogg
             sso_role: Administrator
             aws_config: |-
+              # auto-generated: aws.cue
               [profile fogg-net]
               sso_account_id=060659916753
               sso_role_name=Administrator
               sso_start_url=https://fogg-0.awsapps.com/start
               sso_region=us-west-2
 
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             mise_config: |-
+              # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "fogg-net"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/fogg/net/.aws/config"
             aws_config_account: |-
+              # auto-generated: aws.cue
               [profile fogg-net]
               sso_account_id=060659916753
               sso_role_name=Administrator
               sso_start_url=https://fogg-0.awsapps.com/start
               sso_region=us-west-2
             aws_config_bootstrap: |-
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
@@ -2039,28 +2318,33 @@ config:
             org: fogg
             sso_role: Administrator
             aws_config: |-
+              # auto-generated: aws.cue
               [profile fogg-ops]
               sso_account_id=318746665903
               sso_role_name=Administrator
               sso_start_url=https://fogg-0.awsapps.com/start
               sso_region=us-west-2
 
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             mise_config: |-
+              # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "fogg-ops"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/fogg/ops/.aws/config"
             aws_config_account: |-
+              # auto-generated: aws.cue
               [profile fogg-ops]
               sso_account_id=318746665903
               sso_role_name=Administrator
               sso_start_url=https://fogg-0.awsapps.com/start
               sso_region=us-west-2
             aws_config_bootstrap: |-
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
@@ -2074,28 +2358,33 @@ config:
             org: fogg
             sso_role: Administrator
             aws_config: |-
+              # auto-generated: aws.cue
               [profile fogg-prod]
               sso_account_id=565963418226
               sso_role_name=Administrator
               sso_start_url=https://fogg-0.awsapps.com/start
               sso_region=us-west-2
 
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             mise_config: |-
+              # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "fogg-prod"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/fogg/prod/.aws/config"
             aws_config_account: |-
+              # auto-generated: aws.cue
               [profile fogg-prod]
               sso_account_id=565963418226
               sso_role_name=Administrator
               sso_start_url=https://fogg-0.awsapps.com/start
               sso_region=us-west-2
             aws_config_bootstrap: |-
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
@@ -2109,28 +2398,33 @@ config:
             org: fogg
             sso_role: Administrator
             aws_config: |-
+              # auto-generated: aws.cue
               [profile fogg-pub]
               sso_account_id=372333168887
               sso_role_name=Administrator
               sso_start_url=https://fogg-0.awsapps.com/start
               sso_region=us-west-2
 
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             mise_config: |-
+              # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "fogg-pub"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/fogg/pub/.aws/config"
             aws_config_account: |-
+              # auto-generated: aws.cue
               [profile fogg-pub]
               sso_account_id=372333168887
               sso_role_name=Administrator
               sso_start_url=https://fogg-0.awsapps.com/start
               sso_region=us-west-2
             aws_config_bootstrap: |-
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
@@ -2149,28 +2443,33 @@ config:
             org: gyre
             sso_role: Administrator
             aws_config: |-
+              # auto-generated: aws.cue
               [profile gyre-org]
               sso_account_id=065163301604
               sso_role_name=Administrator
               sso_start_url=https://d-9a6716e54a.awsapps.com/start
               sso_region=us-east-2
 
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             mise_config: |-
+              # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "gyre-org"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/gyre/org/.aws/config"
             aws_config_account: |-
+              # auto-generated: aws.cue
               [profile gyre-org]
               sso_account_id=065163301604
               sso_role_name=Administrator
               sso_start_url=https://d-9a6716e54a.awsapps.com/start
               sso_region=us-east-2
             aws_config_bootstrap: |-
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
@@ -2184,28 +2483,33 @@ config:
             org: gyre
             sso_role: Administrator
             aws_config: |-
+              # auto-generated: aws.cue
               [profile gyre-ops]
               sso_account_id=319951235442
               sso_role_name=Administrator
               sso_start_url=https://d-9a6716e54a.awsapps.com/start
               sso_region=us-east-2
 
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             mise_config: |-
+              # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "gyre-ops"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/gyre/ops/.aws/config"
             aws_config_account: |-
+              # auto-generated: aws.cue
               [profile gyre-ops]
               sso_account_id=319951235442
               sso_role_name=Administrator
               sso_start_url=https://d-9a6716e54a.awsapps.com/start
               sso_region=us-east-2
             aws_config_bootstrap: |-
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
@@ -2224,28 +2528,33 @@ config:
             org: helix
             sso_role: Administrator
             aws_config: |-
+              # auto-generated: aws.cue
               [profile helix-org]
               sso_account_id=816178966829
               sso_role_name=Administrator
               sso_start_url=https://d-9a6716ffd1.awsapps.com/start
               sso_region=us-east-2
 
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             mise_config: |-
+              # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "helix-org"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/helix/org/.aws/config"
             aws_config_account: |-
+              # auto-generated: aws.cue
               [profile helix-org]
               sso_account_id=816178966829
               sso_role_name=Administrator
               sso_start_url=https://d-9a6716ffd1.awsapps.com/start
               sso_region=us-east-2
             aws_config_bootstrap: |-
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
@@ -2259,28 +2568,33 @@ config:
             org: helix
             sso_role: Administrator
             aws_config: |-
+              # auto-generated: aws.cue
               [profile helix-ci]
               sso_account_id=018520313738
               sso_role_name=Administrator
               sso_start_url=https://d-9a6716ffd1.awsapps.com/start
               sso_region=us-east-2
 
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             mise_config: |-
+              # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "helix-ci"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/helix/ci/.aws/config"
             aws_config_account: |-
+              # auto-generated: aws.cue
               [profile helix-ci]
               sso_account_id=018520313738
               sso_role_name=Administrator
               sso_start_url=https://d-9a6716ffd1.awsapps.com/start
               sso_region=us-east-2
             aws_config_bootstrap: |-
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
@@ -2294,28 +2608,33 @@ config:
             org: helix
             sso_role: Administrator
             aws_config: |-
+              # auto-generated: aws.cue
               [profile helix-dev]
               sso_account_id=843784871878
               sso_role_name=Administrator
               sso_start_url=https://d-9a6716ffd1.awsapps.com/start
               sso_region=us-east-2
 
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             mise_config: |-
+              # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "helix-dev"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/helix/dev/.aws/config"
             aws_config_account: |-
+              # auto-generated: aws.cue
               [profile helix-dev]
               sso_account_id=843784871878
               sso_role_name=Administrator
               sso_start_url=https://d-9a6716ffd1.awsapps.com/start
               sso_region=us-east-2
             aws_config_bootstrap: |-
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
@@ -2329,28 +2648,33 @@ config:
             org: helix
             sso_role: Administrator
             aws_config: |-
+              # auto-generated: aws.cue
               [profile helix-hub]
               sso_account_id=436043820387
               sso_role_name=Administrator
               sso_start_url=https://d-9a6716ffd1.awsapps.com/start
               sso_region=us-east-2
 
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             mise_config: |-
+              # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "helix-hub"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/helix/hub/.aws/config"
             aws_config_account: |-
+              # auto-generated: aws.cue
               [profile helix-hub]
               sso_account_id=436043820387
               sso_role_name=Administrator
               sso_start_url=https://d-9a6716ffd1.awsapps.com/start
               sso_region=us-east-2
             aws_config_bootstrap: |-
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
@@ -2364,28 +2688,33 @@ config:
             org: helix
             sso_role: Administrator
             aws_config: |-
+              # auto-generated: aws.cue
               [profile helix-lib]
               sso_account_id=377857698578
               sso_role_name=Administrator
               sso_start_url=https://d-9a6716ffd1.awsapps.com/start
               sso_region=us-east-2
 
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             mise_config: |-
+              # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "helix-lib"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/helix/lib/.aws/config"
             aws_config_account: |-
+              # auto-generated: aws.cue
               [profile helix-lib]
               sso_account_id=377857698578
               sso_role_name=Administrator
               sso_start_url=https://d-9a6716ffd1.awsapps.com/start
               sso_region=us-east-2
             aws_config_bootstrap: |-
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
@@ -2399,28 +2728,33 @@ config:
             org: helix
             sso_role: Administrator
             aws_config: |-
+              # auto-generated: aws.cue
               [profile helix-log]
               sso_account_id=664427926343
               sso_role_name=Administrator
               sso_start_url=https://d-9a6716ffd1.awsapps.com/start
               sso_region=us-east-2
 
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             mise_config: |-
+              # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "helix-log"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/helix/log/.aws/config"
             aws_config_account: |-
+              # auto-generated: aws.cue
               [profile helix-log]
               sso_account_id=664427926343
               sso_role_name=Administrator
               sso_start_url=https://d-9a6716ffd1.awsapps.com/start
               sso_region=us-east-2
             aws_config_bootstrap: |-
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
@@ -2434,28 +2768,33 @@ config:
             org: helix
             sso_role: Administrator
             aws_config: |-
+              # auto-generated: aws.cue
               [profile helix-net]
               sso_account_id=504722108514
               sso_role_name=Administrator
               sso_start_url=https://d-9a6716ffd1.awsapps.com/start
               sso_region=us-east-2
 
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             mise_config: |-
+              # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "helix-net"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/helix/net/.aws/config"
             aws_config_account: |-
+              # auto-generated: aws.cue
               [profile helix-net]
               sso_account_id=504722108514
               sso_role_name=Administrator
               sso_start_url=https://d-9a6716ffd1.awsapps.com/start
               sso_region=us-east-2
             aws_config_bootstrap: |-
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
@@ -2469,28 +2808,33 @@ config:
             org: helix
             sso_role: Administrator
             aws_config: |-
+              # auto-generated: aws.cue
               [profile helix-ops]
               sso_account_id=368812692254
               sso_role_name=Administrator
               sso_start_url=https://d-9a6716ffd1.awsapps.com/start
               sso_region=us-east-2
 
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             mise_config: |-
+              # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "helix-ops"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/helix/ops/.aws/config"
             aws_config_account: |-
+              # auto-generated: aws.cue
               [profile helix-ops]
               sso_account_id=368812692254
               sso_role_name=Administrator
               sso_start_url=https://d-9a6716ffd1.awsapps.com/start
               sso_region=us-east-2
             aws_config_bootstrap: |-
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
@@ -2504,28 +2848,33 @@ config:
             org: helix
             sso_role: Administrator
             aws_config: |-
+              # auto-generated: aws.cue
               [profile helix-prod]
               sso_account_id=724643698007
               sso_role_name=Administrator
               sso_start_url=https://d-9a6716ffd1.awsapps.com/start
               sso_region=us-east-2
 
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             mise_config: |-
+              # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "helix-prod"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/helix/prod/.aws/config"
             aws_config_account: |-
+              # auto-generated: aws.cue
               [profile helix-prod]
               sso_account_id=724643698007
               sso_role_name=Administrator
               sso_start_url=https://d-9a6716ffd1.awsapps.com/start
               sso_region=us-east-2
             aws_config_bootstrap: |-
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
@@ -2539,28 +2888,33 @@ config:
             org: helix
             sso_role: Administrator
             aws_config: |-
+              # auto-generated: aws.cue
               [profile helix-pub]
               sso_account_id=536806623881
               sso_role_name=Administrator
               sso_start_url=https://d-9a6716ffd1.awsapps.com/start
               sso_region=us-east-2
 
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             mise_config: |-
+              # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "helix-pub"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/helix/pub/.aws/config"
             aws_config_account: |-
+              # auto-generated: aws.cue
               [profile helix-pub]
               sso_account_id=536806623881
               sso_role_name=Administrator
               sso_start_url=https://d-9a6716ffd1.awsapps.com/start
               sso_region=us-east-2
             aws_config_bootstrap: |-
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
@@ -2579,28 +2933,33 @@ config:
             org: imma
             sso_role: Administrator
             aws_config: |-
+              # auto-generated: aws.cue
               [profile imma-org]
               sso_account_id=548373030883
               sso_role_name=Administrator
               sso_start_url=https://imma-0.awsapps.com/start
               sso_region=us-west-2
 
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             mise_config: |-
+              # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "imma-org"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/imma/org/.aws/config"
             aws_config_account: |-
+              # auto-generated: aws.cue
               [profile imma-org]
               sso_account_id=548373030883
               sso_role_name=Administrator
               sso_start_url=https://imma-0.awsapps.com/start
               sso_region=us-west-2
             aws_config_bootstrap: |-
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
@@ -2614,28 +2973,33 @@ config:
             org: imma
             sso_role: Administrator
             aws_config: |-
+              # auto-generated: aws.cue
               [profile imma-dev]
               sso_account_id=445584037541
               sso_role_name=Administrator
               sso_start_url=https://imma-0.awsapps.com/start
               sso_region=us-west-2
 
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             mise_config: |-
+              # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "imma-dev"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/imma/dev/.aws/config"
             aws_config_account: |-
+              # auto-generated: aws.cue
               [profile imma-dev]
               sso_account_id=445584037541
               sso_role_name=Administrator
               sso_start_url=https://imma-0.awsapps.com/start
               sso_region=us-west-2
             aws_config_bootstrap: |-
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
@@ -2649,28 +3013,33 @@ config:
             org: imma
             sso_role: Administrator
             aws_config: |-
+              # auto-generated: aws.cue
               [profile imma-lib]
               sso_account_id=516851121506
               sso_role_name=Administrator
               sso_start_url=https://imma-0.awsapps.com/start
               sso_region=us-west-2
 
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             mise_config: |-
+              # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "imma-lib"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/imma/lib/.aws/config"
             aws_config_account: |-
+              # auto-generated: aws.cue
               [profile imma-lib]
               sso_account_id=516851121506
               sso_role_name=Administrator
               sso_start_url=https://imma-0.awsapps.com/start
               sso_region=us-west-2
             aws_config_bootstrap: |-
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
@@ -2684,28 +3053,33 @@ config:
             org: imma
             sso_role: Administrator
             aws_config: |-
+              # auto-generated: aws.cue
               [profile imma-log]
               sso_account_id=289716781198
               sso_role_name=Administrator
               sso_start_url=https://imma-0.awsapps.com/start
               sso_region=us-west-2
 
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             mise_config: |-
+              # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "imma-log"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/imma/log/.aws/config"
             aws_config_account: |-
+              # auto-generated: aws.cue
               [profile imma-log]
               sso_account_id=289716781198
               sso_role_name=Administrator
               sso_start_url=https://imma-0.awsapps.com/start
               sso_region=us-west-2
             aws_config_bootstrap: |-
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
@@ -2719,28 +3093,33 @@ config:
             org: imma
             sso_role: Administrator
             aws_config: |-
+              # auto-generated: aws.cue
               [profile imma-net]
               sso_account_id=246197522468
               sso_role_name=Administrator
               sso_start_url=https://imma-0.awsapps.com/start
               sso_region=us-west-2
 
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             mise_config: |-
+              # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "imma-net"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/imma/net/.aws/config"
             aws_config_account: |-
+              # auto-generated: aws.cue
               [profile imma-net]
               sso_account_id=246197522468
               sso_role_name=Administrator
               sso_start_url=https://imma-0.awsapps.com/start
               sso_region=us-west-2
             aws_config_bootstrap: |-
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
@@ -2754,28 +3133,33 @@ config:
             org: imma
             sso_role: Administrator
             aws_config: |-
+              # auto-generated: aws.cue
               [profile imma-pub]
               sso_account_id=766142996227
               sso_role_name=Administrator
               sso_start_url=https://imma-0.awsapps.com/start
               sso_region=us-west-2
 
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             mise_config: |-
+              # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "imma-pub"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/imma/pub/.aws/config"
             aws_config_account: |-
+              # auto-generated: aws.cue
               [profile imma-pub]
               sso_account_id=766142996227
               sso_role_name=Administrator
               sso_start_url=https://imma-0.awsapps.com/start
               sso_region=us-west-2
             aws_config_bootstrap: |-
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
@@ -2794,28 +3178,33 @@ config:
             org: immanent
             sso_role: Administrator
             aws_config: |-
+              # auto-generated: aws.cue
               [profile immanent-org]
               sso_account_id=545070380609
               sso_role_name=Administrator
               sso_start_url=https://immanent-0.awsapps.com/start
               sso_region=us-west-2
 
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             mise_config: |-
+              # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "immanent-org"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/immanent/org/.aws/config"
             aws_config_account: |-
+              # auto-generated: aws.cue
               [profile immanent-org]
               sso_account_id=545070380609
               sso_role_name=Administrator
               sso_start_url=https://immanent-0.awsapps.com/start
               sso_region=us-west-2
             aws_config_bootstrap: |-
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
@@ -2829,28 +3218,33 @@ config:
             org: immanent
             sso_role: Administrator
             aws_config: |-
+              # auto-generated: aws.cue
               [profile immanent-changer]
               sso_account_id=003884504807
               sso_role_name=Administrator
               sso_start_url=https://immanent-0.awsapps.com/start
               sso_region=us-west-2
 
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             mise_config: |-
+              # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "immanent-changer"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/immanent/changer/.aws/config"
             aws_config_account: |-
+              # auto-generated: aws.cue
               [profile immanent-changer]
               sso_account_id=003884504807
               sso_role_name=Administrator
               sso_start_url=https://immanent-0.awsapps.com/start
               sso_region=us-west-2
             aws_config_bootstrap: |-
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
@@ -2864,28 +3258,33 @@ config:
             org: immanent
             sso_role: Administrator
             aws_config: |-
+              # auto-generated: aws.cue
               [profile immanent-chanter]
               sso_account_id=071244154667
               sso_role_name=Administrator
               sso_start_url=https://immanent-0.awsapps.com/start
               sso_region=us-west-2
 
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             mise_config: |-
+              # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "immanent-chanter"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/immanent/chanter/.aws/config"
             aws_config_account: |-
+              # auto-generated: aws.cue
               [profile immanent-chanter]
               sso_account_id=071244154667
               sso_role_name=Administrator
               sso_start_url=https://immanent-0.awsapps.com/start
               sso_region=us-west-2
             aws_config_bootstrap: |-
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
@@ -2899,28 +3298,33 @@ config:
             org: immanent
             sso_role: Administrator
             aws_config: |-
+              # auto-generated: aws.cue
               [profile immanent-doorkeeper]
               sso_account_id=013267321144
               sso_role_name=Administrator
               sso_start_url=https://immanent-0.awsapps.com/start
               sso_region=us-west-2
 
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             mise_config: |-
+              # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "immanent-doorkeeper"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/immanent/doorkeeper/.aws/config"
             aws_config_account: |-
+              # auto-generated: aws.cue
               [profile immanent-doorkeeper]
               sso_account_id=013267321144
               sso_role_name=Administrator
               sso_start_url=https://immanent-0.awsapps.com/start
               sso_region=us-west-2
             aws_config_bootstrap: |-
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
@@ -2934,28 +3338,33 @@ config:
             org: immanent
             sso_role: Administrator
             aws_config: |-
+              # auto-generated: aws.cue
               [profile immanent-ged]
               sso_account_id=640792184178
               sso_role_name=Administrator
               sso_start_url=https://immanent-0.awsapps.com/start
               sso_region=us-west-2
 
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             mise_config: |-
+              # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "immanent-ged"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/immanent/ged/.aws/config"
             aws_config_account: |-
+              # auto-generated: aws.cue
               [profile immanent-ged]
               sso_account_id=640792184178
               sso_role_name=Administrator
               sso_start_url=https://immanent-0.awsapps.com/start
               sso_region=us-west-2
             aws_config_bootstrap: |-
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
@@ -2969,28 +3378,33 @@ config:
             org: immanent
             sso_role: Administrator
             aws_config: |-
+              # auto-generated: aws.cue
               [profile immanent-hand]
               sso_account_id=826250190242
               sso_role_name=Administrator
               sso_start_url=https://immanent-0.awsapps.com/start
               sso_region=us-west-2
 
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             mise_config: |-
+              # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "immanent-hand"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/immanent/hand/.aws/config"
             aws_config_account: |-
+              # auto-generated: aws.cue
               [profile immanent-hand]
               sso_account_id=826250190242
               sso_role_name=Administrator
               sso_start_url=https://immanent-0.awsapps.com/start
               sso_region=us-west-2
             aws_config_bootstrap: |-
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
@@ -3004,28 +3418,33 @@ config:
             org: immanent
             sso_role: Administrator
             aws_config: |-
+              # auto-generated: aws.cue
               [profile immanent-herbal]
               sso_account_id=165452499696
               sso_role_name=Administrator
               sso_start_url=https://immanent-0.awsapps.com/start
               sso_region=us-west-2
 
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             mise_config: |-
+              # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "immanent-herbal"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/immanent/herbal/.aws/config"
             aws_config_account: |-
+              # auto-generated: aws.cue
               [profile immanent-herbal]
               sso_account_id=165452499696
               sso_role_name=Administrator
               sso_start_url=https://immanent-0.awsapps.com/start
               sso_region=us-west-2
             aws_config_bootstrap: |-
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
@@ -3039,28 +3458,33 @@ config:
             org: immanent
             sso_role: Administrator
             aws_config: |-
+              # auto-generated: aws.cue
               [profile immanent-namer]
               sso_account_id=856549015893
               sso_role_name=Administrator
               sso_start_url=https://immanent-0.awsapps.com/start
               sso_region=us-west-2
 
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             mise_config: |-
+              # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "immanent-namer"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/immanent/namer/.aws/config"
             aws_config_account: |-
+              # auto-generated: aws.cue
               [profile immanent-namer]
               sso_account_id=856549015893
               sso_role_name=Administrator
               sso_start_url=https://immanent-0.awsapps.com/start
               sso_region=us-west-2
             aws_config_bootstrap: |-
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
@@ -3074,28 +3498,33 @@ config:
             org: immanent
             sso_role: Administrator
             aws_config: |-
+              # auto-generated: aws.cue
               [profile immanent-patterner]
               sso_account_id=143220204648
               sso_role_name=Administrator
               sso_start_url=https://immanent-0.awsapps.com/start
               sso_region=us-west-2
 
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             mise_config: |-
+              # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "immanent-patterner"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/immanent/patterner/.aws/config"
             aws_config_account: |-
+              # auto-generated: aws.cue
               [profile immanent-patterner]
               sso_account_id=143220204648
               sso_role_name=Administrator
               sso_start_url=https://immanent-0.awsapps.com/start
               sso_region=us-west-2
             aws_config_bootstrap: |-
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
@@ -3109,28 +3538,33 @@ config:
             org: immanent
             sso_role: Administrator
             aws_config: |-
+              # auto-generated: aws.cue
               [profile immanent-roke]
               sso_account_id=892560628624
               sso_role_name=Administrator
               sso_start_url=https://immanent-0.awsapps.com/start
               sso_region=us-west-2
 
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             mise_config: |-
+              # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "immanent-roke"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/immanent/roke/.aws/config"
             aws_config_account: |-
+              # auto-generated: aws.cue
               [profile immanent-roke]
               sso_account_id=892560628624
               sso_role_name=Administrator
               sso_start_url=https://immanent-0.awsapps.com/start
               sso_region=us-west-2
             aws_config_bootstrap: |-
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
@@ -3144,28 +3578,33 @@ config:
             org: immanent
             sso_role: Administrator
             aws_config: |-
+              # auto-generated: aws.cue
               [profile immanent-summoner]
               sso_account_id=397411277587
               sso_role_name=Administrator
               sso_start_url=https://immanent-0.awsapps.com/start
               sso_region=us-west-2
 
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             mise_config: |-
+              # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "immanent-summoner"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/immanent/summoner/.aws/config"
             aws_config_account: |-
+              # auto-generated: aws.cue
               [profile immanent-summoner]
               sso_account_id=397411277587
               sso_role_name=Administrator
               sso_start_url=https://immanent-0.awsapps.com/start
               sso_region=us-west-2
             aws_config_bootstrap: |-
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
@@ -3179,28 +3618,33 @@ config:
             org: immanent
             sso_role: Administrator
             aws_config: |-
+              # auto-generated: aws.cue
               [profile immanent-windkey]
               sso_account_id=095764861781
               sso_role_name=Administrator
               sso_start_url=https://immanent-0.awsapps.com/start
               sso_region=us-west-2
 
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             mise_config: |-
+              # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "immanent-windkey"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/immanent/windkey/.aws/config"
             aws_config_account: |-
+              # auto-generated: aws.cue
               [profile immanent-windkey]
               sso_account_id=095764861781
               sso_role_name=Administrator
               sso_start_url=https://immanent-0.awsapps.com/start
               sso_region=us-west-2
             aws_config_bootstrap: |-
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
@@ -3219,28 +3663,33 @@ config:
             org: jianghu
             sso_role: Administrator
             aws_config: |-
+              # auto-generated: aws.cue
               [profile jianghu-org]
               sso_account_id=657613322961
               sso_role_name=Administrator
               sso_start_url=https://jianghu-0.awsapps.com/start
               sso_region=us-west-2
 
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             mise_config: |-
+              # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "jianghu-org"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/jianghu/org/.aws/config"
             aws_config_account: |-
+              # auto-generated: aws.cue
               [profile jianghu-org]
               sso_account_id=657613322961
               sso_role_name=Administrator
               sso_start_url=https://jianghu-0.awsapps.com/start
               sso_region=us-west-2
             aws_config_bootstrap: |-
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
@@ -3254,28 +3703,33 @@ config:
             org: jianghu
             sso_role: Administrator
             aws_config: |-
+              # auto-generated: aws.cue
               [profile jianghu-log]
               sso_account_id=298431841138
               sso_role_name=Administrator
               sso_start_url=https://jianghu-0.awsapps.com/start
               sso_region=us-west-2
 
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             mise_config: |-
+              # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "jianghu-log"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/jianghu/log/.aws/config"
             aws_config_account: |-
+              # auto-generated: aws.cue
               [profile jianghu-log]
               sso_account_id=298431841138
               sso_role_name=Administrator
               sso_start_url=https://jianghu-0.awsapps.com/start
               sso_region=us-west-2
             aws_config_bootstrap: |-
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
@@ -3289,28 +3743,33 @@ config:
             org: jianghu
             sso_role: Administrator
             aws_config: |-
+              # auto-generated: aws.cue
               [profile jianghu-net]
               sso_account_id=025636091251
               sso_role_name=Administrator
               sso_start_url=https://jianghu-0.awsapps.com/start
               sso_region=us-west-2
 
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             mise_config: |-
+              # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "jianghu-net"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/jianghu/net/.aws/config"
             aws_config_account: |-
+              # auto-generated: aws.cue
               [profile jianghu-net]
               sso_account_id=025636091251
               sso_role_name=Administrator
               sso_start_url=https://jianghu-0.awsapps.com/start
               sso_region=us-west-2
             aws_config_bootstrap: |-
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
@@ -3329,28 +3788,33 @@ config:
             org: spiral
             sso_role: Administrator
             aws_config: |-
+              # auto-generated: aws.cue
               [profile spiral-org]
               sso_account_id=232091571197
               sso_role_name=Administrator
               sso_start_url=https://d-926760b322.awsapps.com/start
               sso_region=us-west-2
 
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             mise_config: |-
+              # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "spiral-org"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/spiral/org/.aws/config"
             aws_config_account: |-
+              # auto-generated: aws.cue
               [profile spiral-org]
               sso_account_id=232091571197
               sso_role_name=Administrator
               sso_start_url=https://d-926760b322.awsapps.com/start
               sso_region=us-west-2
             aws_config_bootstrap: |-
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
@@ -3364,28 +3828,33 @@ config:
             org: spiral
             sso_role: Administrator
             aws_config: |-
+              # auto-generated: aws.cue
               [profile spiral-ci]
               sso_account_id=371657257885
               sso_role_name=Administrator
               sso_start_url=https://d-926760b322.awsapps.com/start
               sso_region=us-west-2
 
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             mise_config: |-
+              # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "spiral-ci"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/spiral/ci/.aws/config"
             aws_config_account: |-
+              # auto-generated: aws.cue
               [profile spiral-ci]
               sso_account_id=371657257885
               sso_role_name=Administrator
               sso_start_url=https://d-926760b322.awsapps.com/start
               sso_region=us-west-2
             aws_config_bootstrap: |-
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
@@ -3399,28 +3868,33 @@ config:
             org: spiral
             sso_role: Administrator
             aws_config: |-
+              # auto-generated: aws.cue
               [profile spiral-dev]
               sso_account_id=308726031860
               sso_role_name=Administrator
               sso_start_url=https://d-926760b322.awsapps.com/start
               sso_region=us-west-2
 
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             mise_config: |-
+              # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "spiral-dev"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/spiral/dev/.aws/config"
             aws_config_account: |-
+              # auto-generated: aws.cue
               [profile spiral-dev]
               sso_account_id=308726031860
               sso_role_name=Administrator
               sso_start_url=https://d-926760b322.awsapps.com/start
               sso_region=us-west-2
             aws_config_bootstrap: |-
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
@@ -3434,28 +3908,33 @@ config:
             org: spiral
             sso_role: Administrator
             aws_config: |-
+              # auto-generated: aws.cue
               [profile spiral-hub]
               sso_account_id=216704421225
               sso_role_name=Administrator
               sso_start_url=https://d-926760b322.awsapps.com/start
               sso_region=us-west-2
 
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             mise_config: |-
+              # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "spiral-hub"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/spiral/hub/.aws/config"
             aws_config_account: |-
+              # auto-generated: aws.cue
               [profile spiral-hub]
               sso_account_id=216704421225
               sso_role_name=Administrator
               sso_start_url=https://d-926760b322.awsapps.com/start
               sso_region=us-west-2
             aws_config_bootstrap: |-
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
@@ -3469,28 +3948,33 @@ config:
             org: spiral
             sso_role: Administrator
             aws_config: |-
+              # auto-generated: aws.cue
               [profile spiral-lib]
               sso_account_id=073874947996
               sso_role_name=Administrator
               sso_start_url=https://d-926760b322.awsapps.com/start
               sso_region=us-west-2
 
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             mise_config: |-
+              # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "spiral-lib"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/spiral/lib/.aws/config"
             aws_config_account: |-
+              # auto-generated: aws.cue
               [profile spiral-lib]
               sso_account_id=073874947996
               sso_role_name=Administrator
               sso_start_url=https://d-926760b322.awsapps.com/start
               sso_region=us-west-2
             aws_config_bootstrap: |-
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
@@ -3504,28 +3988,33 @@ config:
             org: spiral
             sso_role: Administrator
             aws_config: |-
+              # auto-generated: aws.cue
               [profile spiral-log]
               sso_account_id=442333715734
               sso_role_name=Administrator
               sso_start_url=https://d-926760b322.awsapps.com/start
               sso_region=us-west-2
 
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             mise_config: |-
+              # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "spiral-log"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/spiral/log/.aws/config"
             aws_config_account: |-
+              # auto-generated: aws.cue
               [profile spiral-log]
               sso_account_id=442333715734
               sso_role_name=Administrator
               sso_start_url=https://d-926760b322.awsapps.com/start
               sso_region=us-west-2
             aws_config_bootstrap: |-
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
@@ -3539,28 +4028,33 @@ config:
             org: spiral
             sso_role: Administrator
             aws_config: |-
+              # auto-generated: aws.cue
               [profile spiral-net]
               sso_account_id=057533398557
               sso_role_name=Administrator
               sso_start_url=https://d-926760b322.awsapps.com/start
               sso_region=us-west-2
 
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             mise_config: |-
+              # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "spiral-net"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/spiral/net/.aws/config"
             aws_config_account: |-
+              # auto-generated: aws.cue
               [profile spiral-net]
               sso_account_id=057533398557
               sso_role_name=Administrator
               sso_start_url=https://d-926760b322.awsapps.com/start
               sso_region=us-west-2
             aws_config_bootstrap: |-
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
@@ -3574,28 +4068,33 @@ config:
             org: spiral
             sso_role: Administrator
             aws_config: |-
+              # auto-generated: aws.cue
               [profile spiral-ops]
               sso_account_id=601164058091
               sso_role_name=Administrator
               sso_start_url=https://d-926760b322.awsapps.com/start
               sso_region=us-west-2
 
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             mise_config: |-
+              # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "spiral-ops"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/spiral/ops/.aws/config"
             aws_config_account: |-
+              # auto-generated: aws.cue
               [profile spiral-ops]
               sso_account_id=601164058091
               sso_role_name=Administrator
               sso_start_url=https://d-926760b322.awsapps.com/start
               sso_region=us-west-2
             aws_config_bootstrap: |-
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
@@ -3609,28 +4108,33 @@ config:
             org: spiral
             sso_role: Administrator
             aws_config: |-
+              # auto-generated: aws.cue
               [profile spiral-prod]
               sso_account_id=398258703387
               sso_role_name=Administrator
               sso_start_url=https://d-926760b322.awsapps.com/start
               sso_region=us-west-2
 
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             mise_config: |-
+              # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "spiral-prod"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/spiral/prod/.aws/config"
             aws_config_account: |-
+              # auto-generated: aws.cue
               [profile spiral-prod]
               sso_account_id=398258703387
               sso_role_name=Administrator
               sso_start_url=https://d-926760b322.awsapps.com/start
               sso_region=us-west-2
             aws_config_bootstrap: |-
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
@@ -3644,28 +4148,33 @@ config:
             org: spiral
             sso_role: Administrator
             aws_config: |-
+              # auto-generated: aws.cue
               [profile spiral-pub]
               sso_account_id=130046154300
               sso_role_name=Administrator
               sso_start_url=https://d-926760b322.awsapps.com/start
               sso_region=us-west-2
 
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             mise_config: |-
+              # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "spiral-pub"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/spiral/pub/.aws/config"
             aws_config_account: |-
+              # auto-generated: aws.cue
               [profile spiral-pub]
               sso_account_id=130046154300
               sso_role_name=Administrator
               sso_start_url=https://d-926760b322.awsapps.com/start
               sso_region=us-west-2
             aws_config_bootstrap: |-
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
@@ -3684,28 +4193,33 @@ config:
             org: vault
             sso_role: Administrator
             aws_config: |-
+              # auto-generated: aws.cue
               [profile vault-org]
               sso_account_id=475528707847
               sso_role_name=Administrator
               sso_start_url=https://d-9a672a0e52.awsapps.com/start
               sso_region=us-east-2
 
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             mise_config: |-
+              # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "vault-org"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/vault/org/.aws/config"
             aws_config_account: |-
+              # auto-generated: aws.cue
               [profile vault-org]
               sso_account_id=475528707847
               sso_role_name=Administrator
               sso_start_url=https://d-9a672a0e52.awsapps.com/start
               sso_region=us-east-2
             aws_config_bootstrap: |-
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
@@ -3719,28 +4233,33 @@ config:
             org: vault
             sso_role: Administrator
             aws_config: |-
+              # auto-generated: aws.cue
               [profile vault-ci]
               sso_account_id=313228123503
               sso_role_name=Administrator
               sso_start_url=https://d-9a672a0e52.awsapps.com/start
               sso_region=us-east-2
 
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             mise_config: |-
+              # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "vault-ci"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/vault/ci/.aws/config"
             aws_config_account: |-
+              # auto-generated: aws.cue
               [profile vault-ci]
               sso_account_id=313228123503
               sso_role_name=Administrator
               sso_start_url=https://d-9a672a0e52.awsapps.com/start
               sso_region=us-east-2
             aws_config_bootstrap: |-
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
@@ -3754,28 +4273,33 @@ config:
             org: vault
             sso_role: Administrator
             aws_config: |-
+              # auto-generated: aws.cue
               [profile vault-dev]
               sso_account_id=497393606242
               sso_role_name=Administrator
               sso_start_url=https://d-9a672a0e52.awsapps.com/start
               sso_region=us-east-2
 
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             mise_config: |-
+              # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "vault-dev"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/vault/dev/.aws/config"
             aws_config_account: |-
+              # auto-generated: aws.cue
               [profile vault-dev]
               sso_account_id=497393606242
               sso_role_name=Administrator
               sso_start_url=https://d-9a672a0e52.awsapps.com/start
               sso_region=us-east-2
             aws_config_bootstrap: |-
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
@@ -3789,28 +4313,33 @@ config:
             org: vault
             sso_role: Administrator
             aws_config: |-
+              # auto-generated: aws.cue
               [profile vault-hub]
               sso_account_id=539099112425
               sso_role_name=Administrator
               sso_start_url=https://d-9a672a0e52.awsapps.com/start
               sso_region=us-east-2
 
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             mise_config: |-
+              # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "vault-hub"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/vault/hub/.aws/config"
             aws_config_account: |-
+              # auto-generated: aws.cue
               [profile vault-hub]
               sso_account_id=539099112425
               sso_role_name=Administrator
               sso_start_url=https://d-9a672a0e52.awsapps.com/start
               sso_region=us-east-2
             aws_config_bootstrap: |-
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
@@ -3824,28 +4353,33 @@ config:
             org: vault
             sso_role: Administrator
             aws_config: |-
+              # auto-generated: aws.cue
               [profile vault-lib]
               sso_account_id=066356637485
               sso_role_name=Administrator
               sso_start_url=https://d-9a672a0e52.awsapps.com/start
               sso_region=us-east-2
 
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             mise_config: |-
+              # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "vault-lib"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/vault/lib/.aws/config"
             aws_config_account: |-
+              # auto-generated: aws.cue
               [profile vault-lib]
               sso_account_id=066356637485
               sso_role_name=Administrator
               sso_start_url=https://d-9a672a0e52.awsapps.com/start
               sso_region=us-east-2
             aws_config_bootstrap: |-
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
@@ -3859,28 +4393,33 @@ config:
             org: vault
             sso_role: Administrator
             aws_config: |-
+              # auto-generated: aws.cue
               [profile vault-log]
               sso_account_id=749185891195
               sso_role_name=Administrator
               sso_start_url=https://d-9a672a0e52.awsapps.com/start
               sso_region=us-east-2
 
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             mise_config: |-
+              # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "vault-log"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/vault/log/.aws/config"
             aws_config_account: |-
+              # auto-generated: aws.cue
               [profile vault-log]
               sso_account_id=749185891195
               sso_role_name=Administrator
               sso_start_url=https://d-9a672a0e52.awsapps.com/start
               sso_region=us-east-2
             aws_config_bootstrap: |-
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
@@ -3894,28 +4433,33 @@ config:
             org: vault
             sso_role: Administrator
             aws_config: |-
+              # auto-generated: aws.cue
               [profile vault-net]
               sso_account_id=915207860232
               sso_role_name=Administrator
               sso_start_url=https://d-9a672a0e52.awsapps.com/start
               sso_region=us-east-2
 
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             mise_config: |-
+              # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "vault-net"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/vault/net/.aws/config"
             aws_config_account: |-
+              # auto-generated: aws.cue
               [profile vault-net]
               sso_account_id=915207860232
               sso_role_name=Administrator
               sso_start_url=https://d-9a672a0e52.awsapps.com/start
               sso_region=us-east-2
             aws_config_bootstrap: |-
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
@@ -3929,28 +4473,33 @@ config:
             org: vault
             sso_role: Administrator
             aws_config: |-
+              # auto-generated: aws.cue
               [profile vault-ops]
               sso_account_id=188066400611
               sso_role_name=Administrator
               sso_start_url=https://d-9a672a0e52.awsapps.com/start
               sso_region=us-east-2
 
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             mise_config: |-
+              # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "vault-ops"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/vault/ops/.aws/config"
             aws_config_account: |-
+              # auto-generated: aws.cue
               [profile vault-ops]
               sso_account_id=188066400611
               sso_role_name=Administrator
               sso_start_url=https://d-9a672a0e52.awsapps.com/start
               sso_region=us-east-2
             aws_config_bootstrap: |-
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
@@ -3964,28 +4513,33 @@ config:
             org: vault
             sso_role: Administrator
             aws_config: |-
+              # auto-generated: aws.cue
               [profile vault-prod]
               sso_account_id=040769490632
               sso_role_name=Administrator
               sso_start_url=https://d-9a672a0e52.awsapps.com/start
               sso_region=us-east-2
 
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             mise_config: |-
+              # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "vault-prod"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/vault/prod/.aws/config"
             aws_config_account: |-
+              # auto-generated: aws.cue
               [profile vault-prod]
               sso_account_id=040769490632
               sso_role_name=Administrator
               sso_start_url=https://d-9a672a0e52.awsapps.com/start
               sso_region=us-east-2
             aws_config_bootstrap: |-
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
@@ -3999,28 +4553,33 @@ config:
             org: vault
             sso_role: Administrator
             aws_config: |-
+              # auto-generated: aws.cue
               [profile vault-pub]
               sso_account_id=851162413429
               sso_role_name=Administrator
               sso_start_url=https://d-9a672a0e52.awsapps.com/start
               sso_region=us-east-2
 
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             mise_config: |-
+              # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "vault-pub"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/vault/pub/.aws/config"
             aws_config_account: |-
+              # auto-generated: aws.cue
               [profile vault-pub]
               sso_account_id=851162413429
               sso_role_name=Administrator
               sso_start_url=https://d-9a672a0e52.awsapps.com/start
               sso_region=us-east-2
             aws_config_bootstrap: |-
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
@@ -4039,28 +4598,33 @@ config:
             org: whoa
             sso_role: Administrator
             aws_config: |-
+              # auto-generated: aws.cue
               [profile whoa-org]
               sso_account_id=389772512117
               sso_role_name=Administrator
               sso_start_url=https://whoa-0.awsapps.com/start
               sso_region=us-west-2
 
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             mise_config: |-
+              # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "whoa-org"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/whoa/org/.aws/config"
             aws_config_account: |-
+              # auto-generated: aws.cue
               [profile whoa-org]
               sso_account_id=389772512117
               sso_role_name=Administrator
               sso_start_url=https://whoa-0.awsapps.com/start
               sso_region=us-west-2
             aws_config_bootstrap: |-
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
@@ -4074,28 +4638,33 @@ config:
             org: whoa
             sso_role: Administrator
             aws_config: |-
+              # auto-generated: aws.cue
               [profile whoa-dev]
               sso_account_id=439761234835
               sso_role_name=Administrator
               sso_start_url=https://whoa-0.awsapps.com/start
               sso_region=us-west-2
 
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             mise_config: |-
+              # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "whoa-dev"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/whoa/dev/.aws/config"
             aws_config_account: |-
+              # auto-generated: aws.cue
               [profile whoa-dev]
               sso_account_id=439761234835
               sso_role_name=Administrator
               sso_start_url=https://whoa-0.awsapps.com/start
               sso_region=us-west-2
             aws_config_bootstrap: |-
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
@@ -4109,28 +4678,33 @@ config:
             org: whoa
             sso_role: Administrator
             aws_config: |-
+              # auto-generated: aws.cue
               [profile whoa-hub]
               sso_account_id=462478722501
               sso_role_name=Administrator
               sso_start_url=https://whoa-0.awsapps.com/start
               sso_region=us-west-2
 
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             mise_config: |-
+              # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "whoa-hub"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/whoa/hub/.aws/config"
             aws_config_account: |-
+              # auto-generated: aws.cue
               [profile whoa-hub]
               sso_account_id=462478722501
               sso_role_name=Administrator
               sso_start_url=https://whoa-0.awsapps.com/start
               sso_region=us-west-2
             aws_config_bootstrap: |-
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
@@ -4144,28 +4718,33 @@ config:
             org: whoa
             sso_role: Administrator
             aws_config: |-
+              # auto-generated: aws.cue
               [profile whoa-net]
               sso_account_id=464075062390
               sso_role_name=Administrator
               sso_start_url=https://whoa-0.awsapps.com/start
               sso_region=us-west-2
 
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             mise_config: |-
+              # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "whoa-net"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/whoa/net/.aws/config"
             aws_config_account: |-
+              # auto-generated: aws.cue
               [profile whoa-net]
               sso_account_id=464075062390
               sso_role_name=Administrator
               sso_start_url=https://whoa-0.awsapps.com/start
               sso_region=us-west-2
             aws_config_bootstrap: |-
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
@@ -4179,28 +4758,33 @@ config:
             org: whoa
             sso_role: Administrator
             aws_config: |-
+              # auto-generated: aws.cue
               [profile whoa-pub]
               sso_account_id=204827926367
               sso_role_name=Administrator
               sso_start_url=https://whoa-0.awsapps.com/start
               sso_region=us-west-2
 
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             mise_config: |-
+              # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "whoa-pub"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/whoa/pub/.aws/config"
             aws_config_account: |-
+              # auto-generated: aws.cue
               [profile whoa-pub]
               sso_account_id=204827926367
               sso_role_name=Administrator
               sso_start_url=https://whoa-0.awsapps.com/start
               sso_region=us-west-2
             aws_config_bootstrap: |-
+              # auto-generated: aws.cue
               [profile defn-org]
               sso_account_id=510430971399
               sso_role_name=Administrator

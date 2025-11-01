@@ -30,6 +30,7 @@ aws: "org"~lookup: [string]~(ORG,_): close({
 		sso_role: string | *"Administrator"
 
 		mise_config: """
+# auto-generated: aws.cue
 [env]
 AWS_PROFILE = "\(org)-\(account)"
 AWS_CONFIG_FILE = "/home/ubuntu/m/a/\(org)/\(account)/.aws/config"
@@ -44,6 +45,7 @@ AWS_CONFIG_FILE = "/home/ubuntu/m/a/\(org)/\(account)/.aws/config"
 		}
 
 		aws_config_account: """
+# auto-generated: aws.cue
 [profile \(org)-\(account)]
 sso_account_id=\(id)
 sso_role_name=\(sso_role)
@@ -52,6 +54,7 @@ sso_region=\(sso_region)
 """
 
 		aws_config_bootstrap: """
+# auto-generated: aws.cue
 [profile defn-org]
 sso_account_id=\(lookup["defn"].account["org"].id)
 sso_role_name=\(lookup["defn"].account["org"].sso_role)

@@ -1,3 +1,4 @@
+# auto-generated: transform.sh
 account: w
 email: defn-w@imma.io
 id: "313387692116"
@@ -5,28 +6,33 @@ name: defn-w
 org: chamber
 sso_role: Administrator
 aws_config: |-
+  # auto-generated: aws.cue
   [profile chamber-w]
   sso_account_id=313387692116
   sso_role_name=Administrator
   sso_start_url=https://chamber-0.awsapps.com/start
   sso_region=us-west-2
 
+  # auto-generated: aws.cue
   [profile defn-org]
   sso_account_id=510430971399
   sso_role_name=Administrator
   sso_start_url=https://defn.awsapps.com/start
   sso_region=us-east-2
 mise_config: |-
+  # auto-generated: aws.cue
   [env]
   AWS_PROFILE = "chamber-w"
   AWS_CONFIG_FILE = "/home/ubuntu/m/a/chamber/w/.aws/config"
 aws_config_account: |-
+  # auto-generated: aws.cue
   [profile chamber-w]
   sso_account_id=313387692116
   sso_role_name=Administrator
   sso_start_url=https://chamber-0.awsapps.com/start
   sso_region=us-west-2
 aws_config_bootstrap: |-
+  # auto-generated: aws.cue
   [profile defn-org]
   sso_account_id=510430971399
   sso_role_name=Administrator

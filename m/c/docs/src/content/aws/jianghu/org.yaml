@@ -1,3 +1,4 @@
+# auto-generated: transform.sh
 account: org
 email: aws-jianghu@defn.us
 id: "657613322961"
@@ -5,28 +6,33 @@ name: jianghu
 org: jianghu
 sso_role: Administrator
 aws_config: |-
+  # auto-generated: aws.cue
   [profile jianghu-org]
   sso_account_id=657613322961
   sso_role_name=Administrator
   sso_start_url=https://jianghu-0.awsapps.com/start
   sso_region=us-west-2
 
+  # auto-generated: aws.cue
   [profile defn-org]
   sso_account_id=510430971399
   sso_role_name=Administrator
   sso_start_url=https://defn.awsapps.com/start
   sso_region=us-east-2
 mise_config: |-
+  # auto-generated: aws.cue
   [env]
   AWS_PROFILE = "jianghu-org"
   AWS_CONFIG_FILE = "/home/ubuntu/m/a/jianghu/org/.aws/config"
 aws_config_account: |-
+  # auto-generated: aws.cue
   [profile jianghu-org]
   sso_account_id=657613322961
   sso_role_name=Administrator
   sso_start_url=https://jianghu-0.awsapps.com/start
   sso_region=us-west-2
 aws_config_bootstrap: |-
+  # auto-generated: aws.cue
   [profile defn-org]
   sso_account_id=510430971399
   sso_role_name=Administrator

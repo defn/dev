@@ -1,3 +1,4 @@
+# auto-generated: aws.cue
 [env]
 AWS_PROFILE = "chamber-3"
 AWS_CONFIG_FILE = "/home/ubuntu/m/a/chamber/3/.aws/config"

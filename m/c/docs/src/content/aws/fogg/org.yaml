@@ -1,3 +1,4 @@
+# auto-generated: transform.sh
 account: org
 email: spiral@defn.sh
 id: "328216504962"
@@ -5,28 +6,33 @@ name: fogg
 org: fogg
 sso_role: Administrator
 aws_config: |-
+  # auto-generated: aws.cue
   [profile fogg-org]
   sso_account_id=328216504962
   sso_role_name=Administrator
   sso_start_url=https://fogg-0.awsapps.com/start
   sso_region=us-west-2
 
+  # auto-generated: aws.cue
   [profile defn-org]
   sso_account_id=510430971399
   sso_role_name=Administrator
   sso_start_url=https://defn.awsapps.com/start
   sso_region=us-east-2
 mise_config: |-
+  # auto-generated: aws.cue
   [env]
   AWS_PROFILE = "fogg-org"
   AWS_CONFIG_FILE = "/home/ubuntu/m/a/fogg/org/.aws/config"
 aws_config_account: |-
+  # auto-generated: aws.cue
   [profile fogg-org]
   sso_account_id=328216504962
   sso_role_name=Administrator
   sso_start_url=https://fogg-0.awsapps.com/start
   sso_region=us-west-2
 aws_config_bootstrap: |-
+  # auto-generated: aws.cue
   [profile defn-org]
   sso_account_id=510430971399
   sso_role_name=Administrator

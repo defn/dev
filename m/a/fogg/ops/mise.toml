@@ -1,3 +1,4 @@
+# auto-generated: aws.cue
 [env]
 AWS_PROFILE = "fogg-ops"
 AWS_CONFIG_FILE = "/home/ubuntu/m/a/fogg/ops/.aws/config"
