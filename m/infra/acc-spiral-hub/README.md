@@ -8,6 +8,7 @@ Account-specific Terraform configuration for the spiral organization's hub accou
 cd infra/acc-spiral-hub
 mise trust
 aws sso login
+alogin
 terraform init
 terraform plan
 ```

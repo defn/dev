@@ -8,6 +8,7 @@ Account-specific Terraform configuration for the spiral organization's prod acco
 cd infra/acc-spiral-prod
 mise trust
 aws sso login
+alogin
 terraform init
 terraform plan
 ```

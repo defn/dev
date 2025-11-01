@@ -8,6 +8,7 @@ Account-specific Terraform configuration for the imma organization's lib account
 cd infra/acc-imma-lib
 mise trust
 aws sso login
+alogin
 terraform init
 terraform plan
 ```

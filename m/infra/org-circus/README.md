@@ -8,6 +8,7 @@ Organization-level Terraform configuration for the circus AWS organization.
 cd infra/org-circus
 mise trust
 aws sso login
+alogin
 terraform init
 terraform plan
 ```

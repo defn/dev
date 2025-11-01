@@ -8,6 +8,7 @@ Account-specific Terraform configuration for the immanent organization's namer a
 cd infra/acc-immanent-namer
 mise trust
 aws sso login
+alogin
 terraform init
 terraform plan
 ```

@@ -8,6 +8,7 @@ Account-specific Terraform configuration for the vault organization's org accoun
 cd infra/acc-vault-org
 mise trust
 aws sso login
+alogin
 terraform init
 terraform plan
 ```

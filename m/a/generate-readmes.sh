@@ -22,6 +22,7 @@ Activate an account environment:
 cd a/${org}/ops
 mise trust
 aws sso login
+alogin
 aws sts get-caller-identity
 \`\`\`
 

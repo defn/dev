@@ -8,6 +8,7 @@ Account-specific Terraform configuration for the gyre organization's org account
 cd infra/acc-gyre-org
 mise trust
 aws sso login
+alogin
 terraform init
 terraform plan
 ```

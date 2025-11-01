@@ -8,6 +8,7 @@ Account-specific Terraform configuration for the jianghu organization's org acco
 cd infra/acc-jianghu-org
 mise trust
 aws sso login
+alogin
 terraform init
 terraform plan
 ```

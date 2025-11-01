@@ -8,6 +8,7 @@ Account-specific Terraform configuration for the vault organization's lib accoun
 cd infra/acc-vault-lib
 mise trust
 aws sso login
+alogin
 terraform init
 terraform plan
 ```

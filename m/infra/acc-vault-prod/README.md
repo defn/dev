@@ -8,6 +8,7 @@ Account-specific Terraform configuration for the vault organization's prod accou
 cd infra/acc-vault-prod
 mise trust
 aws sso login
+alogin
 terraform init
 terraform plan
 ```

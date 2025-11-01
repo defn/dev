@@ -8,6 +8,7 @@ Account-specific Terraform configuration for the fogg organization's prod accoun
 cd infra/acc-fogg-prod
 mise trust
 aws sso login
+alogin
 terraform init
 terraform plan
 ```

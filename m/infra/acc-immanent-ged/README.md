@@ -8,6 +8,7 @@ Account-specific Terraform configuration for the immanent organization's ged acc
 cd infra/acc-immanent-ged
 mise trust
 aws sso login
+alogin
 terraform init
 terraform plan
 ```

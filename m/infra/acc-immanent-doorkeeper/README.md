@@ -8,6 +8,7 @@ Account-specific Terraform configuration for the immanent organization's doorkee
 cd infra/acc-immanent-doorkeeper
 mise trust
 aws sso login
+alogin
 terraform init
 terraform plan
 ```

@@ -8,6 +8,7 @@ Account-specific Terraform configuration for the helix organization's org accoun
 cd infra/acc-helix-org
 mise trust
 aws sso login
+alogin
 terraform init
 terraform plan
 ```

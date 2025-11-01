@@ -8,6 +8,7 @@ Organization-level Terraform configuration for the defn AWS organization.
 cd infra/org-defn
 mise trust
 aws sso login
+alogin
 terraform init
 terraform plan
 ```

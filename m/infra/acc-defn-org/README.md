@@ -8,6 +8,7 @@ Account-specific Terraform configuration for the defn organization's org account
 cd infra/acc-defn-org
 mise trust
 aws sso login
+alogin
 terraform init
 terraform plan
 ```

@@ -8,6 +8,7 @@ Account-specific Terraform configuration for the whoa organization's pub account
 cd infra/acc-whoa-pub
 mise trust
 aws sso login
+alogin
 terraform init
 terraform plan
 ```

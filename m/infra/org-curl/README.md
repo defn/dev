@@ -8,6 +8,7 @@ Organization-level Terraform configuration for the curl AWS organization.
 cd infra/org-curl
 mise trust
 aws sso login
+alogin
 terraform init
 terraform plan
 ```

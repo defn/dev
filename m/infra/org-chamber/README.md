@@ -8,6 +8,7 @@ Organization-level Terraform configuration for the chamber AWS organization.
 cd infra/org-chamber
 mise trust
 aws sso login
+alogin
 terraform init
 terraform plan
 ```

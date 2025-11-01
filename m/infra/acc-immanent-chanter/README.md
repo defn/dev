@@ -8,6 +8,7 @@ Account-specific Terraform configuration for the immanent organization's chanter
 cd infra/acc-immanent-chanter
 mise trust
 aws sso login
+alogin
 terraform init
 terraform plan
 ```

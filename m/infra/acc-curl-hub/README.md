@@ -8,6 +8,7 @@ Account-specific Terraform configuration for the curl organization's hub account
 cd infra/acc-curl-hub
 mise trust
 aws sso login
+alogin
 terraform init
 terraform plan
 ```

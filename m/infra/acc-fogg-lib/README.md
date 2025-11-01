@@ -8,6 +8,7 @@ Account-specific Terraform configuration for the fogg organization's lib account
 cd infra/acc-fogg-lib
 mise trust
 aws sso login
+alogin
 terraform init
 terraform plan
 ```

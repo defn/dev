@@ -8,6 +8,7 @@ Organization-level Terraform configuration for the jianghu AWS organization.
 cd infra/org-jianghu
 mise trust
 aws sso login
+alogin
 terraform init
 terraform plan
 ```

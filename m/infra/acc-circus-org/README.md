@@ -8,6 +8,7 @@ Account-specific Terraform configuration for the circus organization's org accou
 cd infra/acc-circus-org
 mise trust
 aws sso login
+alogin
 terraform init
 terraform plan
 ```

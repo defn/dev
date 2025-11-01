@@ -8,6 +8,7 @@ Organization-level Terraform configuration for the vault AWS organization.
 cd infra/org-vault
 mise trust
 aws sso login
+alogin
 terraform init
 terraform plan
 ```

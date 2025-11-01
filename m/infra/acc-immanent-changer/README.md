@@ -8,6 +8,7 @@ Account-specific Terraform configuration for the immanent organization's changer
 cd infra/acc-immanent-changer
 mise trust
 aws sso login
+alogin
 terraform init
 terraform plan
 ```

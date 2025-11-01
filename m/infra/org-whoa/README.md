@@ -8,6 +8,7 @@ Organization-level Terraform configuration for the whoa AWS organization.
 cd infra/org-whoa
 mise trust
 aws sso login
+alogin
 terraform init
 terraform plan
 ```

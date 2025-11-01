@@ -8,6 +8,7 @@ Account-specific Terraform configuration for the imma organization's net account
 cd infra/acc-imma-net
 mise trust
 aws sso login
+alogin
 terraform init
 terraform plan
 ```

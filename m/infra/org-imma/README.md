@@ -8,6 +8,7 @@ Organization-level Terraform configuration for the imma AWS organization.
 cd infra/org-imma
 mise trust
 aws sso login
+alogin
 terraform init
 terraform plan
 ```

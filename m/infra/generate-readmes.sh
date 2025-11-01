@@ -13,6 +13,7 @@ Cross-account and global AWS infrastructure resources.
 cd infra/global
 mise trust
 aws sso login
+alogin
 terraform init
 terraform plan
 ```
@@ -44,6 +45,7 @@ Organization-level Terraform configuration for the ${org} AWS organization.
 cd infra/org-${org}
 mise trust
 aws sso login
+alogin
 terraform init
 terraform plan
 \`\`\`
@@ -80,6 +82,7 @@ Account-specific Terraform configuration for the ${org} organization's ${account
 cd infra/acc-${org}-${account}
 mise trust
 aws sso login
+alogin
 terraform init
 terraform plan
 \`\`\`

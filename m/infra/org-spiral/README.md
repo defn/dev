@@ -8,6 +8,7 @@ Organization-level Terraform configuration for the spiral AWS organization.
 cd infra/org-spiral
 mise trust
 aws sso login
+alogin
 terraform init
 terraform plan
 ```

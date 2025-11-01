@@ -8,6 +8,7 @@ Account-specific Terraform configuration for the vault organization's pub accoun
 cd infra/acc-vault-pub
 mise trust
 aws sso login
+alogin
 terraform init
 terraform plan
 ```

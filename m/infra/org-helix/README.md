@@ -8,6 +8,7 @@ Organization-level Terraform configuration for the helix AWS organization.
 cd infra/org-helix
 mise trust
 aws sso login
+alogin
 terraform init
 terraform plan
 ```

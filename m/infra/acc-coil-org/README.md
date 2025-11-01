@@ -8,6 +8,7 @@ Account-specific Terraform configuration for the coil organization's org account
 cd infra/acc-coil-org
 mise trust
 aws sso login
+alogin
 terraform init
 terraform plan
 ```

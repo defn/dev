@@ -8,6 +8,7 @@ Account-specific Terraform configuration for the immanent organization's windkey
 cd infra/acc-immanent-windkey
 mise trust
 aws sso login
+alogin
 terraform init
 terraform plan
 ```

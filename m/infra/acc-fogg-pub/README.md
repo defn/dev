@@ -8,6 +8,7 @@ Account-specific Terraform configuration for the fogg organization's pub account
 cd infra/acc-fogg-pub
 mise trust
 aws sso login
+alogin
 terraform init
 terraform plan
 ```

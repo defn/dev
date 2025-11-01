@@ -8,6 +8,7 @@ Account-specific Terraform configuration for the immanent organization's org acc
 cd infra/acc-immanent-org
 mise trust
 aws sso login
+alogin
 terraform init
 terraform plan
 ```

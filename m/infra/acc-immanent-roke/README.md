@@ -8,6 +8,7 @@ Account-specific Terraform configuration for the immanent organization's roke ac
 cd infra/acc-immanent-roke
 mise trust
 aws sso login
+alogin
 terraform init
 terraform plan
 ```

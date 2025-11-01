@@ -8,6 +8,7 @@ Account-specific Terraform configuration for the chamber organization's h accoun
 cd infra/acc-chamber-h
 mise trust
 aws sso login
+alogin
 terraform init
 terraform plan
 ```
