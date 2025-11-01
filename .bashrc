@@ -87,8 +87,11 @@ Linux)
 esac
 
 # aws-vault
-export AWS_VAULT_BACKEND=pass
-export AWS_VAULT_PASS_PREFIX=aws-vault
+#export AWS_VAULT_BACKEND=pass
+#export AWS_VAULT_PASS_PREFIX=aws-vault
+export AWS_VAULT_BACKEND=file
+export AWS_VAULT_FILE_DIR=~/.awsvault/keys
+export AWS_VAULT_FILE_PASSPHRASE=""
 
 # nix
 if [[ "Linux" == "$(uname -s)" ]]; then
@@ -209,7 +212,7 @@ function alogin {
 			shift
 		fi
 
-		local aws_url="$(aws-vault login ${AWS_PROFILE}-sso-source -s | sed 's#://#://us-east-1.#')"
+		local aws_url="$(aws-vault login ${AWS_PROFILE} -s | sed 's#://#://us-east-1.#')"
 		local encoded_url=$(printf "%s" "$aws_url" | python -c 'import sys; from urllib.parse import quote_plus; print(quote_plus(sys.stdin.read().strip()))')
 		open "https://signin.aws.amazon.com/oauth?Action=logout&redirect_uri=${encoded_url}"
 	)
