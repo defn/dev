@@ -23,6 +23,7 @@ mise_config: |-
   # auto-generated: aws.cue
   [env]
   AWS_PROFILE = "spiral-log"
+  AWS_REGION = "us-west-2"
   AWS_CONFIG_FILE = "/home/ubuntu/m/a/spiral/log/.aws/config"
 aws_config_account: |-
   # auto-generated: aws.cue

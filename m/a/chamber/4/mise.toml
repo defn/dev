@@ -1,4 +1,5 @@
 # auto-generated: aws.cue
 [env]
 AWS_PROFILE = "chamber-4"
+AWS_REGION = "us-west-2"
 AWS_CONFIG_FILE = "/home/ubuntu/m/a/chamber/4/.aws/config"

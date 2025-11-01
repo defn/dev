@@ -33,16 +33,9 @@ aws: "org"~lookup: [string]~(ORG,_): close({
 # auto-generated: aws.cue
 [env]
 AWS_PROFILE = "\(org)-\(account)"
+AWS_REGION = "\(sso_region)"
 AWS_CONFIG_FILE = "/home/ubuntu/m/a/\(org)/\(account)/.aws/config"
 """
-
-		if "\(org)-\(account)" != "defn-org" {
-			aws_config: strings.Join([aws_config_account, aws_config_bootstrap], "\n\n")
-		}
-
-		if "\(org)-\(account)" == "defn-org" {
-			aws_config: aws_config_account
-		}
 
 		aws_config_account: """
 # auto-generated: aws.cue
@@ -61,5 +54,13 @@ sso_role_name=\(lookup["defn"].account["org"].sso_role)
 sso_start_url=\(lookup["defn"].sso_url)
 sso_region=\(lookup["defn"].sso_region)
 """
+
+		if "\(org)-\(account)" != "defn-org" {
+			aws_config: strings.Join([aws_config_account, aws_config_bootstrap], "\n\n")
+		}
+
+		if "\(org)-\(account)" == "defn-org" {
+			aws_config: aws_config_account
+		}
 	})
 })

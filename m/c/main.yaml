@@ -77,6 +77,7 @@ config:
               # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "chamber-org"
+              AWS_REGION = "us-west-2"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/chamber/org/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue
@@ -117,6 +118,7 @@ config:
               # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "chamber-1"
+              AWS_REGION = "us-west-2"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/chamber/1/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue
@@ -157,6 +159,7 @@ config:
               # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "chamber-2"
+              AWS_REGION = "us-west-2"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/chamber/2/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue
@@ -197,6 +200,7 @@ config:
               # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "chamber-3"
+              AWS_REGION = "us-west-2"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/chamber/3/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue
@@ -237,6 +241,7 @@ config:
               # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "chamber-4"
+              AWS_REGION = "us-west-2"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/chamber/4/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue
@@ -277,6 +282,7 @@ config:
               # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "chamber-5"
+              AWS_REGION = "us-west-2"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/chamber/5/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue
@@ -317,6 +323,7 @@ config:
               # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "chamber-6"
+              AWS_REGION = "us-west-2"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/chamber/6/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue
@@ -357,6 +364,7 @@ config:
               # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "chamber-7"
+              AWS_REGION = "us-west-2"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/chamber/7/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue
@@ -397,6 +405,7 @@ config:
               # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "chamber-8"
+              AWS_REGION = "us-west-2"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/chamber/8/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue
@@ -437,6 +446,7 @@ config:
               # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "chamber-9"
+              AWS_REGION = "us-west-2"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/chamber/9/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue
@@ -477,6 +487,7 @@ config:
               # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "chamber-a"
+              AWS_REGION = "us-west-2"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/chamber/a/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue
@@ -517,6 +528,7 @@ config:
               # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "chamber-b"
+              AWS_REGION = "us-west-2"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/chamber/b/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue
@@ -557,6 +569,7 @@ config:
               # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "chamber-c"
+              AWS_REGION = "us-west-2"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/chamber/c/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue
@@ -597,6 +610,7 @@ config:
               # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "chamber-d"
+              AWS_REGION = "us-west-2"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/chamber/d/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue
@@ -637,6 +651,7 @@ config:
               # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "chamber-e"
+              AWS_REGION = "us-west-2"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/chamber/e/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue
@@ -677,6 +692,7 @@ config:
               # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "chamber-f"
+              AWS_REGION = "us-west-2"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/chamber/f/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue
@@ -717,6 +733,7 @@ config:
               # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "chamber-g"
+              AWS_REGION = "us-west-2"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/chamber/g/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue
@@ -757,6 +774,7 @@ config:
               # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "chamber-h"
+              AWS_REGION = "us-west-2"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/chamber/h/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue
@@ -797,6 +815,7 @@ config:
               # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "chamber-i"
+              AWS_REGION = "us-west-2"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/chamber/i/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue
@@ -837,6 +856,7 @@ config:
               # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "chamber-j"
+              AWS_REGION = "us-west-2"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/chamber/j/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue
@@ -877,6 +897,7 @@ config:
               # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "chamber-l"
+              AWS_REGION = "us-west-2"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/chamber/l/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue
@@ -917,6 +938,7 @@ config:
               # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "chamber-m"
+              AWS_REGION = "us-west-2"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/chamber/m/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue
@@ -957,6 +979,7 @@ config:
               # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "chamber-n"
+              AWS_REGION = "us-west-2"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/chamber/n/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue
@@ -997,6 +1020,7 @@ config:
               # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "chamber-o"
+              AWS_REGION = "us-west-2"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/chamber/o/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue
@@ -1037,6 +1061,7 @@ config:
               # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "chamber-p"
+              AWS_REGION = "us-west-2"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/chamber/p/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue
@@ -1077,6 +1102,7 @@ config:
               # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "chamber-q"
+              AWS_REGION = "us-west-2"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/chamber/q/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue
@@ -1117,6 +1143,7 @@ config:
               # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "chamber-r"
+              AWS_REGION = "us-west-2"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/chamber/r/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue
@@ -1157,6 +1184,7 @@ config:
               # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "chamber-s"
+              AWS_REGION = "us-west-2"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/chamber/s/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue
@@ -1197,6 +1225,7 @@ config:
               # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "chamber-t"
+              AWS_REGION = "us-west-2"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/chamber/t/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue
@@ -1237,6 +1266,7 @@ config:
               # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "chamber-u"
+              AWS_REGION = "us-west-2"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/chamber/u/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue
@@ -1277,6 +1307,7 @@ config:
               # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "chamber-v"
+              AWS_REGION = "us-west-2"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/chamber/v/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue
@@ -1317,6 +1348,7 @@ config:
               # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "chamber-w"
+              AWS_REGION = "us-west-2"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/chamber/w/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue
@@ -1357,6 +1389,7 @@ config:
               # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "chamber-x"
+              AWS_REGION = "us-west-2"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/chamber/x/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue
@@ -1397,6 +1430,7 @@ config:
               # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "chamber-y"
+              AWS_REGION = "us-west-2"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/chamber/y/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue
@@ -1437,6 +1471,7 @@ config:
               # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "chamber-z"
+              AWS_REGION = "us-west-2"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/chamber/z/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue
@@ -1482,6 +1517,7 @@ config:
               # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "circus-org"
+              AWS_REGION = "us-west-2"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/circus/org/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue
@@ -1522,6 +1558,7 @@ config:
               # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "circus-lib"
+              AWS_REGION = "us-west-2"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/circus/lib/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue
@@ -1562,6 +1599,7 @@ config:
               # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "circus-log"
+              AWS_REGION = "us-west-2"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/circus/log/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue
@@ -1602,6 +1640,7 @@ config:
               # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "circus-net"
+              AWS_REGION = "us-west-2"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/circus/net/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue
@@ -1642,6 +1681,7 @@ config:
               # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "circus-ops"
+              AWS_REGION = "us-west-2"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/circus/ops/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue
@@ -1687,6 +1727,7 @@ config:
               # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "coil-org"
+              AWS_REGION = "us-east-1"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/coil/org/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue
@@ -1727,6 +1768,7 @@ config:
               # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "coil-hub"
+              AWS_REGION = "us-east-1"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/coil/hub/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue
@@ -1767,6 +1809,7 @@ config:
               # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "coil-lib"
+              AWS_REGION = "us-east-1"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/coil/lib/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue
@@ -1807,6 +1850,7 @@ config:
               # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "coil-net"
+              AWS_REGION = "us-east-1"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/coil/net/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue
@@ -1852,6 +1896,7 @@ config:
               # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "curl-org"
+              AWS_REGION = "us-west-2"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/curl/org/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue
@@ -1892,6 +1937,7 @@ config:
               # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "curl-hub"
+              AWS_REGION = "us-west-2"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/curl/hub/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue
@@ -1932,6 +1978,7 @@ config:
               # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "curl-lib"
+              AWS_REGION = "us-west-2"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/curl/lib/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue
@@ -1972,6 +2019,7 @@ config:
               # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "curl-net"
+              AWS_REGION = "us-west-2"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/curl/net/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue
@@ -2010,6 +2058,7 @@ config:
               # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "defn-org"
+              AWS_REGION = "us-east-2"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/defn/org/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue
@@ -2055,6 +2104,7 @@ config:
               # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "fogg-org"
+              AWS_REGION = "us-west-2"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/fogg/org/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue
@@ -2095,6 +2145,7 @@ config:
               # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "fogg-ci"
+              AWS_REGION = "us-west-2"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/fogg/ci/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue
@@ -2135,6 +2186,7 @@ config:
               # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "fogg-dev"
+              AWS_REGION = "us-west-2"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/fogg/dev/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue
@@ -2175,6 +2227,7 @@ config:
               # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "fogg-hub"
+              AWS_REGION = "us-west-2"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/fogg/hub/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue
@@ -2215,6 +2268,7 @@ config:
               # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "fogg-lib"
+              AWS_REGION = "us-west-2"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/fogg/lib/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue
@@ -2255,6 +2309,7 @@ config:
               # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "fogg-log"
+              AWS_REGION = "us-west-2"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/fogg/log/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue
@@ -2295,6 +2350,7 @@ config:
               # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "fogg-net"
+              AWS_REGION = "us-west-2"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/fogg/net/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue
@@ -2335,6 +2391,7 @@ config:
               # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "fogg-ops"
+              AWS_REGION = "us-west-2"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/fogg/ops/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue
@@ -2375,6 +2432,7 @@ config:
               # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "fogg-prod"
+              AWS_REGION = "us-west-2"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/fogg/prod/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue
@@ -2415,6 +2473,7 @@ config:
               # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "fogg-pub"
+              AWS_REGION = "us-west-2"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/fogg/pub/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue
@@ -2460,6 +2519,7 @@ config:
               # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "gyre-org"
+              AWS_REGION = "us-east-2"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/gyre/org/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue
@@ -2500,6 +2560,7 @@ config:
               # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "gyre-ops"
+              AWS_REGION = "us-east-2"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/gyre/ops/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue
@@ -2545,6 +2606,7 @@ config:
               # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "helix-org"
+              AWS_REGION = "us-east-2"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/helix/org/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue
@@ -2585,6 +2647,7 @@ config:
               # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "helix-ci"
+              AWS_REGION = "us-east-2"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/helix/ci/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue
@@ -2625,6 +2688,7 @@ config:
               # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "helix-dev"
+              AWS_REGION = "us-east-2"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/helix/dev/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue
@@ -2665,6 +2729,7 @@ config:
               # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "helix-hub"
+              AWS_REGION = "us-east-2"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/helix/hub/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue
@@ -2705,6 +2770,7 @@ config:
               # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "helix-lib"
+              AWS_REGION = "us-east-2"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/helix/lib/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue
@@ -2745,6 +2811,7 @@ config:
               # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "helix-log"
+              AWS_REGION = "us-east-2"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/helix/log/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue
@@ -2785,6 +2852,7 @@ config:
               # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "helix-net"
+              AWS_REGION = "us-east-2"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/helix/net/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue
@@ -2825,6 +2893,7 @@ config:
               # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "helix-ops"
+              AWS_REGION = "us-east-2"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/helix/ops/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue
@@ -2865,6 +2934,7 @@ config:
               # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "helix-prod"
+              AWS_REGION = "us-east-2"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/helix/prod/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue
@@ -2905,6 +2975,7 @@ config:
               # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "helix-pub"
+              AWS_REGION = "us-east-2"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/helix/pub/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue
@@ -2950,6 +3021,7 @@ config:
               # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "imma-org"
+              AWS_REGION = "us-west-2"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/imma/org/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue
@@ -2990,6 +3062,7 @@ config:
               # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "imma-dev"
+              AWS_REGION = "us-west-2"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/imma/dev/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue
@@ -3030,6 +3103,7 @@ config:
               # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "imma-lib"
+              AWS_REGION = "us-west-2"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/imma/lib/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue
@@ -3070,6 +3144,7 @@ config:
               # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "imma-log"
+              AWS_REGION = "us-west-2"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/imma/log/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue
@@ -3110,6 +3185,7 @@ config:
               # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "imma-net"
+              AWS_REGION = "us-west-2"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/imma/net/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue
@@ -3150,6 +3226,7 @@ config:
               # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "imma-pub"
+              AWS_REGION = "us-west-2"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/imma/pub/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue
@@ -3195,6 +3272,7 @@ config:
               # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "immanent-org"
+              AWS_REGION = "us-west-2"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/immanent/org/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue
@@ -3235,6 +3313,7 @@ config:
               # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "immanent-changer"
+              AWS_REGION = "us-west-2"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/immanent/changer/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue
@@ -3275,6 +3354,7 @@ config:
               # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "immanent-chanter"
+              AWS_REGION = "us-west-2"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/immanent/chanter/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue
@@ -3315,6 +3395,7 @@ config:
               # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "immanent-doorkeeper"
+              AWS_REGION = "us-west-2"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/immanent/doorkeeper/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue
@@ -3355,6 +3436,7 @@ config:
               # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "immanent-ged"
+              AWS_REGION = "us-west-2"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/immanent/ged/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue
@@ -3395,6 +3477,7 @@ config:
               # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "immanent-hand"
+              AWS_REGION = "us-west-2"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/immanent/hand/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue
@@ -3435,6 +3518,7 @@ config:
               # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "immanent-herbal"
+              AWS_REGION = "us-west-2"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/immanent/herbal/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue
@@ -3475,6 +3559,7 @@ config:
               # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "immanent-namer"
+              AWS_REGION = "us-west-2"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/immanent/namer/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue
@@ -3515,6 +3600,7 @@ config:
               # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "immanent-patterner"
+              AWS_REGION = "us-west-2"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/immanent/patterner/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue
@@ -3555,6 +3641,7 @@ config:
               # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "immanent-roke"
+              AWS_REGION = "us-west-2"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/immanent/roke/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue
@@ -3595,6 +3682,7 @@ config:
               # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "immanent-summoner"
+              AWS_REGION = "us-west-2"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/immanent/summoner/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue
@@ -3635,6 +3723,7 @@ config:
               # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "immanent-windkey"
+              AWS_REGION = "us-west-2"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/immanent/windkey/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue
@@ -3680,6 +3769,7 @@ config:
               # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "jianghu-org"
+              AWS_REGION = "us-west-2"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/jianghu/org/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue
@@ -3720,6 +3810,7 @@ config:
               # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "jianghu-log"
+              AWS_REGION = "us-west-2"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/jianghu/log/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue
@@ -3760,6 +3851,7 @@ config:
               # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "jianghu-net"
+              AWS_REGION = "us-west-2"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/jianghu/net/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue
@@ -3805,6 +3897,7 @@ config:
               # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "spiral-org"
+              AWS_REGION = "us-west-2"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/spiral/org/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue
@@ -3845,6 +3938,7 @@ config:
               # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "spiral-ci"
+              AWS_REGION = "us-west-2"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/spiral/ci/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue
@@ -3885,6 +3979,7 @@ config:
               # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "spiral-dev"
+              AWS_REGION = "us-west-2"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/spiral/dev/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue
@@ -3925,6 +4020,7 @@ config:
               # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "spiral-hub"
+              AWS_REGION = "us-west-2"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/spiral/hub/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue
@@ -3965,6 +4061,7 @@ config:
               # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "spiral-lib"
+              AWS_REGION = "us-west-2"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/spiral/lib/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue
@@ -4005,6 +4102,7 @@ config:
               # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "spiral-log"
+              AWS_REGION = "us-west-2"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/spiral/log/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue
@@ -4045,6 +4143,7 @@ config:
               # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "spiral-net"
+              AWS_REGION = "us-west-2"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/spiral/net/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue
@@ -4085,6 +4184,7 @@ config:
               # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "spiral-ops"
+              AWS_REGION = "us-west-2"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/spiral/ops/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue
@@ -4125,6 +4225,7 @@ config:
               # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "spiral-prod"
+              AWS_REGION = "us-west-2"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/spiral/prod/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue
@@ -4165,6 +4266,7 @@ config:
               # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "spiral-pub"
+              AWS_REGION = "us-west-2"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/spiral/pub/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue
@@ -4210,6 +4312,7 @@ config:
               # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "vault-org"
+              AWS_REGION = "us-east-2"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/vault/org/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue
@@ -4250,6 +4353,7 @@ config:
               # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "vault-ci"
+              AWS_REGION = "us-east-2"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/vault/ci/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue
@@ -4290,6 +4394,7 @@ config:
               # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "vault-dev"
+              AWS_REGION = "us-east-2"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/vault/dev/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue
@@ -4330,6 +4435,7 @@ config:
               # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "vault-hub"
+              AWS_REGION = "us-east-2"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/vault/hub/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue
@@ -4370,6 +4476,7 @@ config:
               # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "vault-lib"
+              AWS_REGION = "us-east-2"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/vault/lib/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue
@@ -4410,6 +4517,7 @@ config:
               # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "vault-log"
+              AWS_REGION = "us-east-2"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/vault/log/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue
@@ -4450,6 +4558,7 @@ config:
               # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "vault-net"
+              AWS_REGION = "us-east-2"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/vault/net/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue
@@ -4490,6 +4599,7 @@ config:
               # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "vault-ops"
+              AWS_REGION = "us-east-2"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/vault/ops/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue
@@ -4530,6 +4640,7 @@ config:
               # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "vault-prod"
+              AWS_REGION = "us-east-2"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/vault/prod/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue
@@ -4570,6 +4681,7 @@ config:
               # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "vault-pub"
+              AWS_REGION = "us-east-2"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/vault/pub/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue
@@ -4615,6 +4727,7 @@ config:
               # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "whoa-org"
+              AWS_REGION = "us-west-2"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/whoa/org/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue
@@ -4655,6 +4768,7 @@ config:
               # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "whoa-dev"
+              AWS_REGION = "us-west-2"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/whoa/dev/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue
@@ -4695,6 +4809,7 @@ config:
               # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "whoa-hub"
+              AWS_REGION = "us-west-2"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/whoa/hub/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue
@@ -4735,6 +4850,7 @@ config:
               # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "whoa-net"
+              AWS_REGION = "us-west-2"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/whoa/net/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue
@@ -4775,6 +4891,7 @@ config:
               # auto-generated: aws.cue
               [env]
               AWS_PROFILE = "whoa-pub"
+              AWS_REGION = "us-west-2"
               AWS_CONFIG_FILE = "/home/ubuntu/m/a/whoa/pub/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue
