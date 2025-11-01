@@ -20,3 +20,15 @@ mise_config: |-
   [env]
   AWS_PROFILE = "chamber-d"
   AWS_CONFIG_FILE = "/home/ubuntu/m/a/chamber/d/.aws/config"
+aws_config_account: |-
+  [profile chamber-d]
+  sso_account_id=699441347021
+  sso_role_name=Administrator
+  sso_start_url=https://chamber-0.awsapps.com/start
+  sso_region=us-west-2
+aws_config_bootstrap: |-
+  [profile defn-org]
+  sso_account_id=510430971399
+  sso_role_name=Administrator
+  sso_start_url=https://defn.awsapps.com/start
+  sso_region=us-east-2

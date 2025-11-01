@@ -20,3 +20,15 @@ mise_config: |-
   [env]
   AWS_PROFILE = "whoa-dev"
   AWS_CONFIG_FILE = "/home/ubuntu/m/a/whoa/dev/.aws/config"
+aws_config_account: |-
+  [profile whoa-dev]
+  sso_account_id=439761234835
+  sso_role_name=Administrator
+  sso_start_url=https://whoa-0.awsapps.com/start
+  sso_region=us-west-2
+aws_config_bootstrap: |-
+  [profile defn-org]
+  sso_account_id=510430971399
+  sso_role_name=Administrator
+  sso_start_url=https://defn.awsapps.com/start
+  sso_region=us-east-2
