@@ -1,9 +1,30 @@
-# Defn Environment Configurations
+# Defn AWS Organization
 
-Defn tool environment configurations with AWS profile setups.
+AWS SSO configuration for the defn organization.
 
-## Environments
+## Usage
 
-- `org/` - Organization environment (defn-org profile)
+Activate an account environment:
 
-Each environment contains mise.toml with AWS profile configuration and SSO authentication hooks.
+```bash
+cd a/defn/ops
+mise trust
+aws sts get-caller-identity
+```
+
+## Accounts
+
+This organization contains 1 AWS account(s):
+
+- `org/` - defn-org profile
+
+## Structure
+
+Each account directory contains:
+
+- `mise.toml` - Sets AWS_PROFILE, AWS_REGION, and AWS_CONFIG_FILE
+- `.aws/config` - AWS SSO profile configuration
+
+## Generated Files
+
+All configuration files are auto-generated from `c/definition/aws/aws.cue`. Do not edit manually.

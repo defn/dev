@@ -1,10 +1,31 @@
-# Gyre Environment Configurations
+# Gyre AWS Organization
 
-Gyre tool environment configurations with AWS profile setups.
+AWS SSO configuration for the gyre organization.
 
-## Environments
+## Usage
 
-- `ops/` - Operations environment (gyre-ops profile)
-- `org/` - Organization environment (gyre-org profile)
+Activate an account environment:
 
-Each environment contains mise.toml with AWS profile configuration and SSO authentication hooks.
+```bash
+cd a/gyre/ops
+mise trust
+aws sts get-caller-identity
+```
+
+## Accounts
+
+This organization contains 2 AWS account(s):
+
+- `ops/` - gyre-ops profile
+- `org/` - gyre-org profile
+
+## Structure
+
+Each account directory contains:
+
+- `mise.toml` - Sets AWS_PROFILE, AWS_REGION, and AWS_CONFIG_FILE
+- `.aws/config` - AWS SSO profile configuration
+
+## Generated Files
+
+All configuration files are auto-generated from `c/definition/aws/aws.cue`. Do not edit manually.

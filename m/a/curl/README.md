@@ -1,12 +1,33 @@
-# Curl Environment Configurations
+# Curl AWS Organization
 
-Curl tool environment configurations with AWS profile setups.
+AWS SSO configuration for the curl organization.
 
-## Environments
+## Usage
 
-- `hub/` - Hub environment (curl-hub profile)
-- `lib/` - Library environment (curl-lib profile)
-- `net/` - Network environment (curl-net profile)
-- `org/` - Organization environment (curl-org profile)
+Activate an account environment:
 
-Each environment contains mise.toml with AWS profile configuration and SSO authentication hooks.
+```bash
+cd a/curl/ops
+mise trust
+aws sts get-caller-identity
+```
+
+## Accounts
+
+This organization contains 4 AWS account(s):
+
+- `hub/` - curl-hub profile
+- `lib/` - curl-lib profile
+- `net/` - curl-net profile
+- `org/` - curl-org profile
+
+## Structure
+
+Each account directory contains:
+
+- `mise.toml` - Sets AWS_PROFILE, AWS_REGION, and AWS_CONFIG_FILE
+- `.aws/config` - AWS SSO profile configuration
+
+## Generated Files
+
+All configuration files are auto-generated from `c/definition/aws/aws.cue`. Do not edit manually.

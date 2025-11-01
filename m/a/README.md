@@ -17,7 +17,6 @@ aws sts get-caller-identity
 
 ```
 a/
-├── mise.toml           # Base AWS config file path
 └── {org}/              # Organization directories (14 total)
     └── {account}/      # Account directories (e.g., org, ops, ci, dev)
         ├── mise.toml   # Sets AWS_PROFILE and AWS_REGION

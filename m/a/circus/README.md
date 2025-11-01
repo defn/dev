@@ -1,13 +1,34 @@
-# Circus Environment Configurations
+# Circus AWS Organization
 
-Circus tool environment configurations with AWS profile setups.
+AWS SSO configuration for the circus organization.
 
-## Environments
+## Usage
 
-- `lib/` - Library environment (circus-lib profile)
-- `log/` - Logging environment (circus-log profile)
-- `net/` - Network environment (circus-net profile)
-- `ops/` - Operations environment (circus-ops profile)
-- `org/` - Organization environment (circus-org profile)
+Activate an account environment:
 
-Each environment contains mise.toml with AWS profile configuration and SSO authentication hooks.
+```bash
+cd a/circus/ops
+mise trust
+aws sts get-caller-identity
+```
+
+## Accounts
+
+This organization contains 5 AWS account(s):
+
+- `lib/` - circus-lib profile
+- `log/` - circus-log profile
+- `net/` - circus-net profile
+- `ops/` - circus-ops profile
+- `org/` - circus-org profile
+
+## Structure
+
+Each account directory contains:
+
+- `mise.toml` - Sets AWS_PROFILE, AWS_REGION, and AWS_CONFIG_FILE
+- `.aws/config` - AWS SSO profile configuration
+
+## Generated Files
+
+All configuration files are auto-generated from `c/definition/aws/aws.cue`. Do not edit manually.

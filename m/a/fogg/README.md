@@ -1,18 +1,39 @@
-# Fogg Environment Configurations
+# Fogg AWS Organization
 
-Fogg tool environment configurations with AWS profile setups.
+AWS SSO configuration for the fogg organization.
 
-## Environments
+## Usage
 
-- `ci/` - CI environment (fogg-ci profile)
-- `dev/` - Development environment (fogg-dev profile)
-- `hub/` - Hub environment (fogg-hub profile)
-- `lib/` - Library environment (fogg-lib profile)
-- `log/` - Logging environment (fogg-log profile)
-- `net/` - Network environment (fogg-net profile)
-- `ops/` - Operations environment (fogg-ops profile)
-- `org/` - Organization environment (fogg-org profile)
-- `prod/` - Production environment (fogg-prod profile)
-- `pub/` - Public environment (fogg-pub profile)
+Activate an account environment:
 
-Each environment contains mise.toml with AWS profile configuration and SSO authentication hooks.
+```bash
+cd a/fogg/ops
+mise trust
+aws sts get-caller-identity
+```
+
+## Accounts
+
+This organization contains 10 AWS account(s):
+
+- `ci/` - fogg-ci profile
+- `dev/` - fogg-dev profile
+- `hub/` - fogg-hub profile
+- `lib/` - fogg-lib profile
+- `log/` - fogg-log profile
+- `net/` - fogg-net profile
+- `ops/` - fogg-ops profile
+- `org/` - fogg-org profile
+- `prod/` - fogg-prod profile
+- `pub/` - fogg-pub profile
+
+## Structure
+
+Each account directory contains:
+
+- `mise.toml` - Sets AWS_PROFILE, AWS_REGION, and AWS_CONFIG_FILE
+- `.aws/config` - AWS SSO profile configuration
+
+## Generated Files
+
+All configuration files are auto-generated from `c/definition/aws/aws.cue`. Do not edit manually.

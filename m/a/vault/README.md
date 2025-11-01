@@ -1,18 +1,39 @@
-# Vault Environment Configurations
+# Vault AWS Organization
 
-Vault tool environment configurations with AWS profile setups.
+AWS SSO configuration for the vault organization.
 
-## Environments
+## Usage
 
-- `ci/` - CI environment (vault-ci profile)
-- `dev/` - Development environment (vault-dev profile)
-- `hub/` - Hub environment (vault-hub profile)
-- `lib/` - Library environment (vault-lib profile)
-- `log/` - Logging environment (vault-log profile)
-- `net/` - Network environment (vault-net profile)
-- `ops/` - Operations environment (vault-ops profile)
-- `org/` - Organization environment (vault-org profile)
-- `prod/` - Production environment (vault-prod profile)
-- `pub/` - Public environment (vault-pub profile)
+Activate an account environment:
 
-Each environment contains mise.toml with AWS profile configuration and SSO authentication hooks.
+```bash
+cd a/vault/ops
+mise trust
+aws sts get-caller-identity
+```
+
+## Accounts
+
+This organization contains 10 AWS account(s):
+
+- `ci/` - vault-ci profile
+- `dev/` - vault-dev profile
+- `hub/` - vault-hub profile
+- `lib/` - vault-lib profile
+- `log/` - vault-log profile
+- `net/` - vault-net profile
+- `ops/` - vault-ops profile
+- `org/` - vault-org profile
+- `prod/` - vault-prod profile
+- `pub/` - vault-pub profile
+
+## Structure
+
+Each account directory contains:
+
+- `mise.toml` - Sets AWS_PROFILE, AWS_REGION, and AWS_CONFIG_FILE
+- `.aws/config` - AWS SSO profile configuration
+
+## Generated Files
+
+All configuration files are auto-generated from `c/definition/aws/aws.cue`. Do not edit manually.

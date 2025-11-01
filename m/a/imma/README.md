@@ -1,14 +1,35 @@
-# Imma Environment Configurations
+# Imma AWS Organization
 
-Imma tool environment configurations with AWS profile setups.
+AWS SSO configuration for the imma organization.
 
-## Environments
+## Usage
 
-- `dev/` - Development environment (imma-dev profile)
-- `lib/` - Library environment (imma-lib profile)
-- `log/` - Logging environment (imma-log profile)
-- `net/` - Network environment (imma-net profile)
-- `org/` - Organization environment (imma-org profile)
-- `pub/` - Public environment (imma-pub profile)
+Activate an account environment:
 
-Each environment contains mise.toml with AWS profile configuration and SSO authentication hooks.
+```bash
+cd a/imma/ops
+mise trust
+aws sts get-caller-identity
+```
+
+## Accounts
+
+This organization contains 6 AWS account(s):
+
+- `dev/` - imma-dev profile
+- `lib/` - imma-lib profile
+- `log/` - imma-log profile
+- `net/` - imma-net profile
+- `org/` - imma-org profile
+- `pub/` - imma-pub profile
+
+## Structure
+
+Each account directory contains:
+
+- `mise.toml` - Sets AWS_PROFILE, AWS_REGION, and AWS_CONFIG_FILE
+- `.aws/config` - AWS SSO profile configuration
+
+## Generated Files
+
+All configuration files are auto-generated from `c/definition/aws/aws.cue`. Do not edit manually.

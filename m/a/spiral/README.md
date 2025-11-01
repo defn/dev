@@ -1,18 +1,39 @@
-# Spiral Environment Configurations
+# Spiral AWS Organization
 
-Spiral tool environment configurations with AWS profile setups.
+AWS SSO configuration for the spiral organization.
 
-## Environments
+## Usage
 
-- `ci/` - CI environment (spiral-ci profile)
-- `dev/` - Development environment (spiral-dev profile)
-- `hub/` - Hub environment (spiral-hub profile)
-- `lib/` - Library environment (spiral-lib profile)
-- `log/` - Logging environment (spiral-log profile)
-- `net/` - Network environment (spiral-net profile)
-- `ops/` - Operations environment (spiral-ops profile)
-- `org/` - Organization environment (spiral-org profile)
-- `prod/` - Production environment (spiral-prod profile)
-- `pub/` - Public environment (spiral-pub profile)
+Activate an account environment:
 
-Each environment contains mise.toml with AWS profile configuration and SSO authentication hooks.
+```bash
+cd a/spiral/ops
+mise trust
+aws sts get-caller-identity
+```
+
+## Accounts
+
+This organization contains 10 AWS account(s):
+
+- `ci/` - spiral-ci profile
+- `dev/` - spiral-dev profile
+- `hub/` - spiral-hub profile
+- `lib/` - spiral-lib profile
+- `log/` - spiral-log profile
+- `net/` - spiral-net profile
+- `ops/` - spiral-ops profile
+- `org/` - spiral-org profile
+- `prod/` - spiral-prod profile
+- `pub/` - spiral-pub profile
+
+## Structure
+
+Each account directory contains:
+
+- `mise.toml` - Sets AWS_PROFILE, AWS_REGION, and AWS_CONFIG_FILE
+- `.aws/config` - AWS SSO profile configuration
+
+## Generated Files
+
+All configuration files are auto-generated from `c/definition/aws/aws.cue`. Do not edit manually.

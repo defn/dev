@@ -1,18 +1,39 @@
-# Helix Environment Configurations
+# Helix AWS Organization
 
-Helix tool environment configurations with AWS profile setups.
+AWS SSO configuration for the helix organization.
 
-## Environments
+## Usage
 
-- `ci/` - CI environment (helix-ci profile)
-- `dev/` - Development environment (helix-dev profile)
-- `hub/` - Hub environment (helix-hub profile)
-- `lib/` - Library environment (helix-lib profile)
-- `log/` - Logging environment (helix-log profile)
-- `net/` - Network environment (helix-net profile)
-- `ops/` - Operations environment (helix-ops profile)
-- `org/` - Organization environment (helix-org profile)
-- `prod/` - Production environment (helix-prod profile)
-- `pub/` - Public environment (helix-pub profile)
+Activate an account environment:
 
-Each environment contains mise.toml with AWS profile configuration and SSO authentication hooks.
+```bash
+cd a/helix/ops
+mise trust
+aws sts get-caller-identity
+```
+
+## Accounts
+
+This organization contains 10 AWS account(s):
+
+- `ci/` - helix-ci profile
+- `dev/` - helix-dev profile
+- `hub/` - helix-hub profile
+- `lib/` - helix-lib profile
+- `log/` - helix-log profile
+- `net/` - helix-net profile
+- `ops/` - helix-ops profile
+- `org/` - helix-org profile
+- `prod/` - helix-prod profile
+- `pub/` - helix-pub profile
+
+## Structure
+
+Each account directory contains:
+
+- `mise.toml` - Sets AWS_PROFILE, AWS_REGION, and AWS_CONFIG_FILE
+- `.aws/config` - AWS SSO profile configuration
+
+## Generated Files
+
+All configuration files are auto-generated from `c/definition/aws/aws.cue`. Do not edit manually.

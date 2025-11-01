@@ -1,20 +1,41 @@
-# Immanent Environment Configurations
+# Immanent AWS Organization
 
-Immanent tool environment configurations with AWS profile setups.
+AWS SSO configuration for the immanent organization.
 
-## Environments
+## Usage
 
-- `changer/` - Changer environment (immanent-changer profile)
-- `chanter/` - Chanter environment (immanent-chanter profile)
-- `doorkeeper/` - Doorkeeper environment (immanent-doorkeeper profile)
-- `ged/` - Ged environment (immanent-ged profile)
-- `hand/` - Hand environment (immanent-hand profile)
-- `herbal/` - Herbal environment (immanent-herbal profile)
-- `namer/` - Namer environment (immanent-namer profile)
-- `org/` - Organization environment (immanent-org profile)
-- `patterner/` - Patterner environment (immanent-patterner profile)
-- `roke/` - Roke environment (immanent-roke profile)
-- `summoner/` - Summoner environment (immanent-summoner profile)
-- `windkey/` - Windkey environment (immanent-windkey profile)
+Activate an account environment:
 
-Each environment contains mise.toml with AWS profile configuration and SSO authentication hooks.
+```bash
+cd a/immanent/ops
+mise trust
+aws sts get-caller-identity
+```
+
+## Accounts
+
+This organization contains 12 AWS account(s):
+
+- `changer/` - immanent-changer profile
+- `chanter/` - immanent-chanter profile
+- `doorkeeper/` - immanent-doorkeeper profile
+- `ged/` - immanent-ged profile
+- `hand/` - immanent-hand profile
+- `herbal/` - immanent-herbal profile
+- `namer/` - immanent-namer profile
+- `org/` - immanent-org profile
+- `patterner/` - immanent-patterner profile
+- `roke/` - immanent-roke profile
+- `summoner/` - immanent-summoner profile
+- `windkey/` - immanent-windkey profile
+
+## Structure
+
+Each account directory contains:
+
+- `mise.toml` - Sets AWS_PROFILE, AWS_REGION, and AWS_CONFIG_FILE
+- `.aws/config` - AWS SSO profile configuration
+
+## Generated Files
+
+All configuration files are auto-generated from `c/definition/aws/aws.cue`. Do not edit manually.
