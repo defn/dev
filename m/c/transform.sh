@@ -32,16 +32,16 @@ function main {
 
 				# Generate org-level infra README
 				yq '.config.aws.org[strenv(org)].account[strenv(acc)].infra_org_readme' main.yaml >../infra/org-$org/README.md
-			else
-				mkdir -p ../infra/acc-$org-$acc
-				(
-					echo "# auto-generated: transform.sh"
-					cat ../a/$org/$acc/mise.toml
-				) >../infra/acc-$org-$acc/mise.toml
-
-				# Generate account-level infra README
-				yq '.config.aws.org[strenv(org)].account[strenv(acc)].infra_acc_readme' main.yaml >../infra/acc-$org-$acc/README.md
 			fi
+
+			mkdir -p ../infra/acc-$org-$acc
+			(
+				echo "# auto-generated: transform.sh"
+				cat ../a/$org/$acc/mise.toml
+			) >../infra/acc-$org-$acc/mise.toml
+
+			# Generate account-level infra README
+			yq '.config.aws.org[strenv(org)].account[strenv(acc)].infra_acc_readme' main.yaml >../infra/acc-$org-$acc/README.md
 		done
 	done
 }

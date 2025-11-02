@@ -1,24 +1,10 @@
-# helix-org Account Infrastructure
-
-Account-specific Terraform configuration for the helix organization's org account.
-
-## Usage
+## Account-specific Terraform: helix-org
 
 ```bash
 cd infra/acc-helix-org
 mise trust
+aws sso login --profile defn-org
 aws sso login
-alogin
 terraform init
 terraform plan
 ```
-
-## Configuration
-
-- **Backend**: S3 (`stacks/acc-helix-org/terraform.tfstate`)
-- **Profile**: `helix-org`
-- **Provider**: AWS 5.99.1
-
-## Resources
-
-This directory manages account-specific resources and infrastructure.

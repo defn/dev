@@ -1,24 +1,10 @@
-# jianghu-org Account Infrastructure
-
-Account-specific Terraform configuration for the jianghu organization's org account.
-
-## Usage
+## Account-specific Terraform: jianghu-org
 
 ```bash
 cd infra/acc-jianghu-org
 mise trust
+aws sso login --profile defn-org
 aws sso login
-alogin
 terraform init
 terraform plan
 ```
-
-## Configuration
-
-- **Backend**: S3 (`stacks/acc-jianghu-org/terraform.tfstate`)
-- **Profile**: `jianghu-org`
-- **Provider**: AWS 5.99.1
-
-## Resources
-
-This directory manages account-specific resources and infrastructure.
