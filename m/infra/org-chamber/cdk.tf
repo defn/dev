@@ -28,6 +28,8 @@ provider "aws" {
 
 resource "aws_organizations_organization" "organization" {
   aws_service_access_principals = [
+    "account.amazonaws.com",
+    "iam.amazonaws.com",
     "cloudtrail.amazonaws.com",
     "config.amazonaws.com",
     "ram.amazonaws.com",
