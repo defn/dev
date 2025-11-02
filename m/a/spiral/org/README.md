@@ -1,16 +1,9 @@
-# Spiral Environment: org
-
-AWS environment configuration for spiral-org profile.
-
-## Configuration
-
-- AWS Profile: spiral-org
-- AWS Region: us-west-2
-- SSO authentication
-
-## Usage
+## Usage: AWS Environment: spiral-org
 
 ```bash
-cd m/a/spiral/org
+cd a/spiral/org
+mise trust
+aws sso login
+alogin
 aws sts get-caller-identity
 ```

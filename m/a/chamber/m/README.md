@@ -1,7 +1,7 @@
-## Usage: AWS Environment: helix-hub
+## Usage: AWS Environment: chamber-m
 
 ```bash
-cd a/helix/hub
+cd a/chamber/m
 mise trust
 aws sso login
 alogin

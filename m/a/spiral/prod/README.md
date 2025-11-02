@@ -1,16 +1,9 @@
-# Spiral Environment: prod
-
-AWS environment configuration for spiral-prod profile.
-
-## Configuration
-
-- AWS Profile: spiral-prod
-- AWS Region: us-west-2
-- SSO authentication
-
-## Usage
+## Usage: AWS Environment: spiral-prod
 
 ```bash
-cd m/a/spiral/prod
+cd a/spiral/prod
+mise trust
+aws sso login
+alogin
 aws sts get-caller-identity
 ```

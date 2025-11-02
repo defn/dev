@@ -1,16 +1,9 @@
-# Immanent Environment: hand
-
-AWS environment configuration for immanent-hand profile.
-
-## Configuration
-
-- AWS Profile: immanent-hand
-- AWS Region: us-west-2
-- SSO authentication
-
-## Usage
+## Usage: AWS Environment: immanent-hand
 
 ```bash
-cd m/a/immanent/hand
+cd a/immanent/hand
+mise trust
+aws sso login
+alogin
 aws sts get-caller-identity
 ```

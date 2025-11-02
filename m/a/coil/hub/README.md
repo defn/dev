@@ -1,16 +1,9 @@
-# Coil Environment: hub
-
-AWS environment configuration for coil-hub profile.
-
-## Configuration
-
-- AWS Profile: coil-hub
-- AWS Region: us-west-2
-- SSO authentication
-
-## Usage
+## Usage: AWS Environment: coil-hub
 
 ```bash
-cd m/a/coil/hub
+cd a/coil/hub
+mise trust
+aws sso login
+alogin
 aws sts get-caller-identity
 ```

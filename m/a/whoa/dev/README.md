@@ -1,16 +1,9 @@
-# Whoa Environment: dev
-
-AWS environment configuration for whoa-dev profile.
-
-## Configuration
-
-- AWS Profile: whoa-dev
-- AWS Region: us-west-2
-- SSO authentication
-
-## Usage
+## Usage: AWS Environment: whoa-dev
 
 ```bash
-cd m/a/whoa/dev
+cd a/whoa/dev
+mise trust
+aws sso login
+alogin
 aws sts get-caller-identity
 ```

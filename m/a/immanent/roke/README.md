@@ -1,16 +1,9 @@
-# Immanent Environment: roke
-
-AWS environment configuration for immanent-roke profile.
-
-## Configuration
-
-- AWS Profile: immanent-roke
-- AWS Region: us-west-2
-- SSO authentication
-
-## Usage
+## Usage: AWS Environment: immanent-roke
 
 ```bash
-cd m/a/immanent/roke
+cd a/immanent/roke
+mise trust
+aws sso login
+alogin
 aws sts get-caller-identity
 ```

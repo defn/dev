@@ -1,16 +1,9 @@
-# Spiral Environment: hub
-
-AWS environment configuration for spiral-hub profile.
-
-## Configuration
-
-- AWS Profile: spiral-hub
-- AWS Region: us-west-2
-- SSO authentication
-
-## Usage
+## Usage: AWS Environment: spiral-hub
 
 ```bash
-cd m/a/spiral/hub
+cd a/spiral/hub
+mise trust
+aws sso login
+alogin
 aws sts get-caller-identity
 ```

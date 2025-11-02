@@ -1,16 +1,9 @@
-# Immanent Environment: doorkeeper
-
-AWS environment configuration for immanent-doorkeeper profile.
-
-## Configuration
-
-- AWS Profile: immanent-doorkeeper
-- AWS Region: us-west-2
-- SSO authentication
-
-## Usage
+## Usage: AWS Environment: immanent-doorkeeper
 
 ```bash
-cd m/a/immanent/doorkeeper
+cd a/immanent/doorkeeper
+mise trust
+aws sso login
+alogin
 aws sts get-caller-identity
 ```

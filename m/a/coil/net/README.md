@@ -1,16 +1,9 @@
-# Coil Environment: net
-
-AWS environment configuration for coil-net profile.
-
-## Configuration
-
-- AWS Profile: coil-net
-- AWS Region: us-west-2
-- SSO authentication
-
-## Usage
+## Usage: AWS Environment: coil-net
 
 ```bash
-cd m/a/coil/net
+cd a/coil/net
+mise trust
+aws sso login
+alogin
 aws sts get-caller-identity
 ```

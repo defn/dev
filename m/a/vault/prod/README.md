@@ -1,16 +1,9 @@
-# Vault Environment: prod
-
-AWS environment configuration for vault-prod profile.
-
-## Configuration
-
-- AWS Profile: vault-prod
-- AWS Region: us-west-2
-- SSO authentication
-
-## Usage
+## Usage: AWS Environment: vault-prod
 
 ```bash
-cd m/a/vault/prod
+cd a/vault/prod
+mise trust
+aws sso login
+alogin
 aws sts get-caller-identity
 ```

@@ -1,16 +1,9 @@
-# Fogg Environment: dev
-
-AWS environment configuration for fogg-dev profile.
-
-## Configuration
-
-- AWS Profile: fogg-dev
-- AWS Region: us-west-2
-- SSO authentication
-
-## Usage
+## Usage: AWS Environment: fogg-dev
 
 ```bash
-cd m/a/fogg/dev
+cd a/fogg/dev
+mise trust
+aws sso login
+alogin
 aws sts get-caller-identity
 ```

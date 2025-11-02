@@ -1,16 +1,9 @@
-# Vault Environment: dev
-
-AWS environment configuration for vault-dev profile.
-
-## Configuration
-
-- AWS Profile: vault-dev
-- AWS Region: us-west-2
-- SSO authentication
-
-## Usage
+## Usage: AWS Environment: vault-dev
 
 ```bash
-cd m/a/vault/dev
+cd a/vault/dev
+mise trust
+aws sso login
+alogin
 aws sts get-caller-identity
 ```

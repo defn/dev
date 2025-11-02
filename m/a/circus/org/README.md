@@ -1,16 +1,9 @@
-# Circus Environment: org
-
-AWS environment configuration for circus-org profile.
-
-## Configuration
-
-- AWS Profile: circus-org
-- AWS Region: us-west-2
-- SSO authentication
-
-## Usage
+## Usage: AWS Environment: circus-org
 
 ```bash
-cd m/a/circus/org
+cd a/circus/org
+mise trust
+aws sso login
+alogin
 aws sts get-caller-identity
 ```

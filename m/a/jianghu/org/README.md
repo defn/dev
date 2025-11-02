@@ -1,16 +1,9 @@
-# Jianghu Environment: org
-
-AWS environment configuration for jianghu-org profile.
-
-## Configuration
-
-- AWS Profile: jianghu-org
-- AWS Region: us-west-2
-- SSO authentication
-
-## Usage
+## Usage: AWS Environment: jianghu-org
 
 ```bash
-cd m/a/jianghu/org
+cd a/jianghu/org
+mise trust
+aws sso login
+alogin
 aws sts get-caller-identity
 ```

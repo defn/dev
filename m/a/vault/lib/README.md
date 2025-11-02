@@ -1,16 +1,9 @@
-# Vault Environment: lib
-
-AWS environment configuration for vault-lib profile.
-
-## Configuration
-
-- AWS Profile: vault-lib
-- AWS Region: us-west-2
-- SSO authentication
-
-## Usage
+## Usage: AWS Environment: vault-lib
 
 ```bash
-cd m/a/vault/lib
+cd a/vault/lib
+mise trust
+aws sso login
+alogin
 aws sts get-caller-identity
 ```

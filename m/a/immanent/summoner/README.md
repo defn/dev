@@ -1,16 +1,9 @@
-# Immanent Environment: summoner
-
-AWS environment configuration for immanent-summoner profile.
-
-## Configuration
-
-- AWS Profile: immanent-summoner
-- AWS Region: us-west-2
-- SSO authentication
-
-## Usage
+## Usage: AWS Environment: immanent-summoner
 
 ```bash
-cd m/a/immanent/summoner
+cd a/immanent/summoner
+mise trust
+aws sso login
+alogin
 aws sts get-caller-identity
 ```

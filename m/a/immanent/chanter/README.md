@@ -1,16 +1,9 @@
-# Immanent Environment: chanter
-
-AWS environment configuration for immanent-chanter profile.
-
-## Configuration
-
-- AWS Profile: immanent-chanter
-- AWS Region: us-west-2
-- SSO authentication
-
-## Usage
+## Usage: AWS Environment: immanent-chanter
 
 ```bash
-cd m/a/immanent/chanter
+cd a/immanent/chanter
+mise trust
+aws sso login
+alogin
 aws sts get-caller-identity
 ```

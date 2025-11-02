@@ -1,16 +1,9 @@
-# Vault Environment: log
-
-AWS environment configuration for vault-log profile.
-
-## Configuration
-
-- AWS Profile: vault-log
-- AWS Region: us-west-2
-- SSO authentication
-
-## Usage
+## Usage: AWS Environment: vault-log
 
 ```bash
-cd m/a/vault/log
+cd a/vault/log
+mise trust
+aws sso login
+alogin
 aws sts get-caller-identity
 ```

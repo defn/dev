@@ -1,16 +1,9 @@
-# Spiral Environment: dev
-
-AWS environment configuration for spiral-dev profile.
-
-## Configuration
-
-- AWS Profile: spiral-dev
-- AWS Region: us-west-2
-- SSO authentication
-
-## Usage
+## Usage: AWS Environment: spiral-dev
 
 ```bash
-cd m/a/spiral/dev
+cd a/spiral/dev
+mise trust
+aws sso login
+alogin
 aws sts get-caller-identity
 ```

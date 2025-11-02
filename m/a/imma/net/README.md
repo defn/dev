@@ -1,16 +1,9 @@
-# Imma Environment: net
-
-AWS environment configuration for imma-net profile.
-
-## Configuration
-
-- AWS Profile: imma-net
-- AWS Region: us-west-2
-- SSO authentication
-
-## Usage
+## Usage: AWS Environment: imma-net
 
 ```bash
-cd m/a/imma/net
+cd a/imma/net
+mise trust
+aws sso login
+alogin
 aws sts get-caller-identity
 ```

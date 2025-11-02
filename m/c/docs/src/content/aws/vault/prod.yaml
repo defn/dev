@@ -39,6 +39,16 @@ aws_config_bootstrap: |-
   sso_role_name=Administrator
   sso_start_url=https://defn.awsapps.com/start
   sso_region=us-east-2
+account_readme: |-
+  ## Usage: AWS Environment: vault-prod
+
+  ```bash
+  cd a/vault/prod
+  mise trust
+  aws sso login
+  alogin
+  aws sts get-caller-identity
+  ```
 infra_org_readme: |-
   ## Usage: Organizational-level Terraform: vault-prod
 

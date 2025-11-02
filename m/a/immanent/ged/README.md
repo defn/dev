@@ -1,16 +1,9 @@
-# Immanent Environment: ged
-
-AWS environment configuration for immanent-ged profile.
-
-## Configuration
-
-- AWS Profile: immanent-ged
-- AWS Region: us-west-2
-- SSO authentication
-
-## Usage
+## Usage: AWS Environment: immanent-ged
 
 ```bash
-cd m/a/immanent/ged
+cd a/immanent/ged
+mise trust
+aws sso login
+alogin
 aws sts get-caller-identity
 ```

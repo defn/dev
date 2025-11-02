@@ -1,16 +1,9 @@
-# Helix Environment: org
-
-AWS environment configuration for helix-org profile.
-
-## Configuration
-
-- AWS Profile: helix-org
-- AWS Region: us-west-2
-- SSO authentication
-
-## Usage
+## Usage: AWS Environment: helix-org
 
 ```bash
-cd m/a/helix/org
+cd a/helix/org
+mise trust
+aws sso login
+alogin
 aws sts get-caller-identity
 ```

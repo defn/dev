@@ -1,16 +1,9 @@
-# Spiral Environment: log
-
-AWS environment configuration for spiral-log profile.
-
-## Configuration
-
-- AWS Profile: spiral-log
-- AWS Region: us-west-2
-- SSO authentication
-
-## Usage
+## Usage: AWS Environment: spiral-log
 
 ```bash
-cd m/a/spiral/log
+cd a/spiral/log
+mise trust
+aws sso login
+alogin
 aws sts get-caller-identity
 ```

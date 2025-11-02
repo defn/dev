@@ -1,16 +1,9 @@
-# Fogg Environment: log
-
-AWS environment configuration for fogg-log profile.
-
-## Configuration
-
-- AWS Profile: fogg-log
-- AWS Region: us-west-2
-- SSO authentication
-
-## Usage
+## Usage: AWS Environment: fogg-log
 
 ```bash
-cd m/a/fogg/log
+cd a/fogg/log
+mise trust
+aws sso login
+alogin
 aws sts get-caller-identity
 ```

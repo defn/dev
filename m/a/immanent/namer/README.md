@@ -1,16 +1,9 @@
-# Immanent Environment: namer
-
-AWS environment configuration for immanent-namer profile.
-
-## Configuration
-
-- AWS Profile: immanent-namer
-- AWS Region: us-west-2
-- SSO authentication
-
-## Usage
+## Usage: AWS Environment: immanent-namer
 
 ```bash
-cd m/a/immanent/namer
+cd a/immanent/namer
+mise trust
+aws sso login
+alogin
 aws sts get-caller-identity
 ```

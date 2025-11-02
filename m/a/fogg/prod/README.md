@@ -1,16 +1,9 @@
-# Fogg Environment: prod
-
-AWS environment configuration for fogg-prod profile.
-
-## Configuration
-
-- AWS Profile: fogg-prod
-- AWS Region: us-west-2
-- SSO authentication
-
-## Usage
+## Usage: AWS Environment: fogg-prod
 
 ```bash
-cd m/a/fogg/prod
+cd a/fogg/prod
+mise trust
+aws sso login
+alogin
 aws sts get-caller-identity
 ```

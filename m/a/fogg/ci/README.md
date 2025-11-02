@@ -1,16 +1,9 @@
-# Fogg Environment: ci
-
-AWS environment configuration for fogg-ci profile.
-
-## Configuration
-
-- AWS Profile: fogg-ci
-- AWS Region: us-west-2
-- SSO authentication
-
-## Usage
+## Usage: AWS Environment: fogg-ci
 
 ```bash
-cd m/a/fogg/ci
+cd a/fogg/ci
+mise trust
+aws sso login
+alogin
 aws sts get-caller-identity
 ```

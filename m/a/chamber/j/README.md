@@ -1,18 +1,9 @@
-# Chamber Environment: j
-
-AWS environment configuration for chamber-j profile.
-
-## Configuration
-
-This directory contains mise.toml with:
-- AWS Profile: chamber-j
-- AWS Region: us-west-2
-- SSO authentication hook
-
-## Usage
+## Usage: AWS Environment: chamber-j
 
 ```bash
-cd m/a/chamber/j
-# AWS profile automatically activated via mise
+cd a/chamber/j
+mise trust
+aws sso login
+alogin
 aws sts get-caller-identity
 ```

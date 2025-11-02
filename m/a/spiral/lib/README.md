@@ -1,16 +1,9 @@
-# Spiral Environment: lib
-
-AWS environment configuration for spiral-lib profile.
-
-## Configuration
-
-- AWS Profile: spiral-lib
-- AWS Region: us-west-2
-- SSO authentication
-
-## Usage
+## Usage: AWS Environment: spiral-lib
 
 ```bash
-cd m/a/spiral/lib
+cd a/spiral/lib
+mise trust
+aws sso login
+alogin
 aws sts get-caller-identity
 ```

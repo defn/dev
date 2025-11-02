@@ -1,16 +1,9 @@
-# Helix Environment: lib
-
-AWS environment configuration for helix-lib profile.
-
-## Configuration
-
-- AWS Profile: helix-lib
-- AWS Region: us-west-2
-- SSO authentication
-
-## Usage
+## Usage: AWS Environment: helix-lib
 
 ```bash
-cd m/a/helix/lib
+cd a/helix/lib
+mise trust
+aws sso login
+alogin
 aws sts get-caller-identity
 ```

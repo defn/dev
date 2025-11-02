@@ -1,16 +1,9 @@
-# Whoa Environment: net
-
-AWS environment configuration for whoa-net profile.
-
-## Configuration
-
-- AWS Profile: whoa-net
-- AWS Region: us-west-2
-- SSO authentication
-
-## Usage
+## Usage: AWS Environment: whoa-net
 
 ```bash
-cd m/a/whoa/net
+cd a/whoa/net
+mise trust
+aws sso login
+alogin
 aws sts get-caller-identity
 ```

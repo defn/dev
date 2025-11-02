@@ -1,16 +1,9 @@
-# Imma Environment: org
-
-AWS environment configuration for imma-org profile.
-
-## Configuration
-
-- AWS Profile: imma-org
-- AWS Region: us-west-2
-- SSO authentication
-
-## Usage
+## Usage: AWS Environment: imma-org
 
 ```bash
-cd m/a/imma/org
+cd a/imma/org
+mise trust
+aws sso login
+alogin
 aws sts get-caller-identity
 ```

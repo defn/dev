@@ -1,16 +1,9 @@
-# Coil Environment: org
-
-AWS environment configuration for coil-org profile.
-
-## Configuration
-
-- AWS Profile: coil-org
-- AWS Region: us-west-2
-- SSO authentication
-
-## Usage
+## Usage: AWS Environment: coil-org
 
 ```bash
-cd m/a/coil/org
+cd a/coil/org
+mise trust
+aws sso login
+alogin
 aws sts get-caller-identity
 ```

@@ -1,16 +1,9 @@
-# Whoa Environment: org
-
-AWS environment configuration for whoa-org profile.
-
-## Configuration
-
-- AWS Profile: whoa-org
-- AWS Region: us-west-2
-- SSO authentication
-
-## Usage
+## Usage: AWS Environment: whoa-org
 
 ```bash
-cd m/a/whoa/org
+cd a/whoa/org
+mise trust
+aws sso login
+alogin
 aws sts get-caller-identity
 ```

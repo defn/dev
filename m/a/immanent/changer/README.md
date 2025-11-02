@@ -1,16 +1,9 @@
-# Immanent Environment: changer
-
-AWS environment configuration for immanent-changer profile.
-
-## Configuration
-
-- AWS Profile: immanent-changer
-- AWS Region: us-west-2
-- SSO authentication
-
-## Usage
+## Usage: AWS Environment: immanent-changer
 
 ```bash
-cd m/a/immanent/changer
+cd a/immanent/changer
+mise trust
+aws sso login
+alogin
 aws sts get-caller-identity
 ```

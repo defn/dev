@@ -1,16 +1,9 @@
-# Helix Environment: dev
-
-AWS environment configuration for helix-dev profile.
-
-## Configuration
-
-- AWS Profile: helix-dev
-- AWS Region: us-west-2
-- SSO authentication
-
-## Usage
+## Usage: AWS Environment: helix-dev
 
 ```bash
-cd m/a/helix/dev
+cd a/helix/dev
+mise trust
+aws sso login
+alogin
 aws sts get-caller-identity
 ```

@@ -1,16 +1,9 @@
-# Helix Environment: prod
-
-AWS environment configuration for helix-prod profile.
-
-## Configuration
-
-- AWS Profile: helix-prod
-- AWS Region: us-west-2
-- SSO authentication
-
-## Usage
+## Usage: AWS Environment: helix-prod
 
 ```bash
-cd m/a/helix/prod
+cd a/helix/prod
+mise trust
+aws sso login
+alogin
 aws sts get-caller-identity
 ```

@@ -1,16 +1,9 @@
-# Vault Environment: hub
-
-AWS environment configuration for vault-hub profile.
-
-## Configuration
-
-- AWS Profile: vault-hub
-- AWS Region: us-west-2
-- SSO authentication
-
-## Usage
+## Usage: AWS Environment: vault-hub
 
 ```bash
-cd m/a/vault/hub
+cd a/vault/hub
+mise trust
+aws sso login
+alogin
 aws sts get-caller-identity
 ```

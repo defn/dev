@@ -1,16 +1,9 @@
-# Helix Environment: ci
-
-AWS environment configuration for helix-ci profile.
-
-## Configuration
-
-- AWS Profile: helix-ci
-- AWS Region: us-west-2
-- SSO authentication
-
-## Usage
+## Usage: AWS Environment: helix-ci
 
 ```bash
-cd m/a/helix/ci
+cd a/helix/ci
+mise trust
+aws sso login
+alogin
 aws sts get-caller-identity
 ```

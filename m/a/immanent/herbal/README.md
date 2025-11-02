@@ -1,16 +1,9 @@
-# Immanent Environment: herbal
-
-AWS environment configuration for immanent-herbal profile.
-
-## Configuration
-
-- AWS Profile: immanent-herbal
-- AWS Region: us-west-2
-- SSO authentication
-
-## Usage
+## Usage: AWS Environment: immanent-herbal
 
 ```bash
-cd m/a/immanent/herbal
+cd a/immanent/herbal
+mise trust
+aws sso login
+alogin
 aws sts get-caller-identity
 ```

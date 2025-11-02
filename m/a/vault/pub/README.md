@@ -1,16 +1,9 @@
-# Vault Environment: pub
-
-AWS environment configuration for vault-pub profile.
-
-## Configuration
-
-- AWS Profile: vault-pub
-- AWS Region: us-west-2
-- SSO authentication
-
-## Usage
+## Usage: AWS Environment: vault-pub
 
 ```bash
-cd m/a/vault/pub
+cd a/vault/pub
+mise trust
+aws sso login
+alogin
 aws sts get-caller-identity
 ```

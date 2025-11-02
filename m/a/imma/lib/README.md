@@ -1,16 +1,9 @@
-# Imma Environment: lib
-
-AWS environment configuration for imma-lib profile.
-
-## Configuration
-
-- AWS Profile: imma-lib
-- AWS Region: us-west-2
-- SSO authentication
-
-## Usage
+## Usage: AWS Environment: imma-lib
 
 ```bash
-cd m/a/imma/lib
+cd a/imma/lib
+mise trust
+aws sso login
+alogin
 aws sts get-caller-identity
 ```

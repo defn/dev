@@ -1,16 +1,9 @@
-# Gyre Environment: ops
-
-AWS environment configuration for gyre-ops profile.
-
-## Configuration
-
-- AWS Profile: gyre-ops
-- AWS Region: us-west-2
-- SSO authentication
-
-## Usage
+## Usage: AWS Environment: gyre-ops
 
 ```bash
-cd m/a/gyre/ops
+cd a/gyre/ops
+mise trust
+aws sso login
+alogin
 aws sts get-caller-identity
 ```

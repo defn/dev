@@ -1,16 +1,9 @@
-# Curl Environment: hub
-
-AWS environment configuration for curl-hub profile.
-
-## Configuration
-
-- AWS Profile: curl-hub
-- AWS Region: us-west-2
-- SSO authentication
-
-## Usage
+## Usage: AWS Environment: curl-hub
 
 ```bash
-cd m/a/curl/hub
+cd a/curl/hub
+mise trust
+aws sso login
+alogin
 aws sts get-caller-identity
 ```

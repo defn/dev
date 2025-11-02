@@ -93,6 +93,16 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            account_readme: |-
+              ## Usage: AWS Environment: chamber-org
+
+              ```bash
+              cd a/chamber/org
+              mise trust
+              aws sso login
+              alogin
+              aws sts get-caller-identity
+              ```
             infra_org_readme: |-
               ## Usage: Organizational-level Terraform: chamber-org
 
@@ -156,6 +166,16 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            account_readme: |-
+              ## Usage: AWS Environment: chamber-1
+
+              ```bash
+              cd a/chamber/1
+              mise trust
+              aws sso login
+              alogin
+              aws sts get-caller-identity
+              ```
             infra_org_readme: |-
               ## Usage: Organizational-level Terraform: chamber-1
 
@@ -219,6 +239,16 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            account_readme: |-
+              ## Usage: AWS Environment: chamber-2
+
+              ```bash
+              cd a/chamber/2
+              mise trust
+              aws sso login
+              alogin
+              aws sts get-caller-identity
+              ```
             infra_org_readme: |-
               ## Usage: Organizational-level Terraform: chamber-2
 
@@ -282,6 +312,16 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            account_readme: |-
+              ## Usage: AWS Environment: chamber-3
+
+              ```bash
+              cd a/chamber/3
+              mise trust
+              aws sso login
+              alogin
+              aws sts get-caller-identity
+              ```
             infra_org_readme: |-
               ## Usage: Organizational-level Terraform: chamber-3
 
@@ -345,6 +385,16 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            account_readme: |-
+              ## Usage: AWS Environment: chamber-4
+
+              ```bash
+              cd a/chamber/4
+              mise trust
+              aws sso login
+              alogin
+              aws sts get-caller-identity
+              ```
             infra_org_readme: |-
               ## Usage: Organizational-level Terraform: chamber-4
 
@@ -408,6 +458,16 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            account_readme: |-
+              ## Usage: AWS Environment: chamber-5
+
+              ```bash
+              cd a/chamber/5
+              mise trust
+              aws sso login
+              alogin
+              aws sts get-caller-identity
+              ```
             infra_org_readme: |-
               ## Usage: Organizational-level Terraform: chamber-5
 
@@ -471,6 +531,16 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            account_readme: |-
+              ## Usage: AWS Environment: chamber-6
+
+              ```bash
+              cd a/chamber/6
+              mise trust
+              aws sso login
+              alogin
+              aws sts get-caller-identity
+              ```
             infra_org_readme: |-
               ## Usage: Organizational-level Terraform: chamber-6
 
@@ -534,6 +604,16 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            account_readme: |-
+              ## Usage: AWS Environment: chamber-7
+
+              ```bash
+              cd a/chamber/7
+              mise trust
+              aws sso login
+              alogin
+              aws sts get-caller-identity
+              ```
             infra_org_readme: |-
               ## Usage: Organizational-level Terraform: chamber-7
 
@@ -597,6 +677,16 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            account_readme: |-
+              ## Usage: AWS Environment: chamber-8
+
+              ```bash
+              cd a/chamber/8
+              mise trust
+              aws sso login
+              alogin
+              aws sts get-caller-identity
+              ```
             infra_org_readme: |-
               ## Usage: Organizational-level Terraform: chamber-8
 
@@ -660,6 +750,16 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            account_readme: |-
+              ## Usage: AWS Environment: chamber-9
+
+              ```bash
+              cd a/chamber/9
+              mise trust
+              aws sso login
+              alogin
+              aws sts get-caller-identity
+              ```
             infra_org_readme: |-
               ## Usage: Organizational-level Terraform: chamber-9
 
@@ -723,6 +823,16 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            account_readme: |-
+              ## Usage: AWS Environment: chamber-a
+
+              ```bash
+              cd a/chamber/a
+              mise trust
+              aws sso login
+              alogin
+              aws sts get-caller-identity
+              ```
             infra_org_readme: |-
               ## Usage: Organizational-level Terraform: chamber-a
 
@@ -786,6 +896,16 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            account_readme: |-
+              ## Usage: AWS Environment: chamber-b
+
+              ```bash
+              cd a/chamber/b
+              mise trust
+              aws sso login
+              alogin
+              aws sts get-caller-identity
+              ```
             infra_org_readme: |-
               ## Usage: Organizational-level Terraform: chamber-b
 
@@ -849,6 +969,16 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            account_readme: |-
+              ## Usage: AWS Environment: chamber-c
+
+              ```bash
+              cd a/chamber/c
+              mise trust
+              aws sso login
+              alogin
+              aws sts get-caller-identity
+              ```
             infra_org_readme: |-
               ## Usage: Organizational-level Terraform: chamber-c
 
@@ -912,6 +1042,16 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            account_readme: |-
+              ## Usage: AWS Environment: chamber-d
+
+              ```bash
+              cd a/chamber/d
+              mise trust
+              aws sso login
+              alogin
+              aws sts get-caller-identity
+              ```
             infra_org_readme: |-
               ## Usage: Organizational-level Terraform: chamber-d
 
@@ -975,6 +1115,16 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            account_readme: |-
+              ## Usage: AWS Environment: chamber-e
+
+              ```bash
+              cd a/chamber/e
+              mise trust
+              aws sso login
+              alogin
+              aws sts get-caller-identity
+              ```
             infra_org_readme: |-
               ## Usage: Organizational-level Terraform: chamber-e
 
@@ -1038,6 +1188,16 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            account_readme: |-
+              ## Usage: AWS Environment: chamber-f
+
+              ```bash
+              cd a/chamber/f
+              mise trust
+              aws sso login
+              alogin
+              aws sts get-caller-identity
+              ```
             infra_org_readme: |-
               ## Usage: Organizational-level Terraform: chamber-f
 
@@ -1101,6 +1261,16 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            account_readme: |-
+              ## Usage: AWS Environment: chamber-g
+
+              ```bash
+              cd a/chamber/g
+              mise trust
+              aws sso login
+              alogin
+              aws sts get-caller-identity
+              ```
             infra_org_readme: |-
               ## Usage: Organizational-level Terraform: chamber-g
 
@@ -1164,6 +1334,16 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            account_readme: |-
+              ## Usage: AWS Environment: chamber-h
+
+              ```bash
+              cd a/chamber/h
+              mise trust
+              aws sso login
+              alogin
+              aws sts get-caller-identity
+              ```
             infra_org_readme: |-
               ## Usage: Organizational-level Terraform: chamber-h
 
@@ -1227,6 +1407,16 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            account_readme: |-
+              ## Usage: AWS Environment: chamber-i
+
+              ```bash
+              cd a/chamber/i
+              mise trust
+              aws sso login
+              alogin
+              aws sts get-caller-identity
+              ```
             infra_org_readme: |-
               ## Usage: Organizational-level Terraform: chamber-i
 
@@ -1290,6 +1480,16 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            account_readme: |-
+              ## Usage: AWS Environment: chamber-j
+
+              ```bash
+              cd a/chamber/j
+              mise trust
+              aws sso login
+              alogin
+              aws sts get-caller-identity
+              ```
             infra_org_readme: |-
               ## Usage: Organizational-level Terraform: chamber-j
 
@@ -1353,6 +1553,16 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            account_readme: |-
+              ## Usage: AWS Environment: chamber-l
+
+              ```bash
+              cd a/chamber/l
+              mise trust
+              aws sso login
+              alogin
+              aws sts get-caller-identity
+              ```
             infra_org_readme: |-
               ## Usage: Organizational-level Terraform: chamber-l
 
@@ -1416,6 +1626,16 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            account_readme: |-
+              ## Usage: AWS Environment: chamber-m
+
+              ```bash
+              cd a/chamber/m
+              mise trust
+              aws sso login
+              alogin
+              aws sts get-caller-identity
+              ```
             infra_org_readme: |-
               ## Usage: Organizational-level Terraform: chamber-m
 
@@ -1479,6 +1699,16 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            account_readme: |-
+              ## Usage: AWS Environment: chamber-n
+
+              ```bash
+              cd a/chamber/n
+              mise trust
+              aws sso login
+              alogin
+              aws sts get-caller-identity
+              ```
             infra_org_readme: |-
               ## Usage: Organizational-level Terraform: chamber-n
 
@@ -1542,6 +1772,16 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            account_readme: |-
+              ## Usage: AWS Environment: chamber-o
+
+              ```bash
+              cd a/chamber/o
+              mise trust
+              aws sso login
+              alogin
+              aws sts get-caller-identity
+              ```
             infra_org_readme: |-
               ## Usage: Organizational-level Terraform: chamber-o
 
@@ -1605,6 +1845,16 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            account_readme: |-
+              ## Usage: AWS Environment: chamber-p
+
+              ```bash
+              cd a/chamber/p
+              mise trust
+              aws sso login
+              alogin
+              aws sts get-caller-identity
+              ```
             infra_org_readme: |-
               ## Usage: Organizational-level Terraform: chamber-p
 
@@ -1668,6 +1918,16 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            account_readme: |-
+              ## Usage: AWS Environment: chamber-q
+
+              ```bash
+              cd a/chamber/q
+              mise trust
+              aws sso login
+              alogin
+              aws sts get-caller-identity
+              ```
             infra_org_readme: |-
               ## Usage: Organizational-level Terraform: chamber-q
 
@@ -1731,6 +1991,16 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            account_readme: |-
+              ## Usage: AWS Environment: chamber-r
+
+              ```bash
+              cd a/chamber/r
+              mise trust
+              aws sso login
+              alogin
+              aws sts get-caller-identity
+              ```
             infra_org_readme: |-
               ## Usage: Organizational-level Terraform: chamber-r
 
@@ -1794,6 +2064,16 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            account_readme: |-
+              ## Usage: AWS Environment: chamber-s
+
+              ```bash
+              cd a/chamber/s
+              mise trust
+              aws sso login
+              alogin
+              aws sts get-caller-identity
+              ```
             infra_org_readme: |-
               ## Usage: Organizational-level Terraform: chamber-s
 
@@ -1857,6 +2137,16 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            account_readme: |-
+              ## Usage: AWS Environment: chamber-t
+
+              ```bash
+              cd a/chamber/t
+              mise trust
+              aws sso login
+              alogin
+              aws sts get-caller-identity
+              ```
             infra_org_readme: |-
               ## Usage: Organizational-level Terraform: chamber-t
 
@@ -1920,6 +2210,16 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            account_readme: |-
+              ## Usage: AWS Environment: chamber-u
+
+              ```bash
+              cd a/chamber/u
+              mise trust
+              aws sso login
+              alogin
+              aws sts get-caller-identity
+              ```
             infra_org_readme: |-
               ## Usage: Organizational-level Terraform: chamber-u
 
@@ -1983,6 +2283,16 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            account_readme: |-
+              ## Usage: AWS Environment: chamber-v
+
+              ```bash
+              cd a/chamber/v
+              mise trust
+              aws sso login
+              alogin
+              aws sts get-caller-identity
+              ```
             infra_org_readme: |-
               ## Usage: Organizational-level Terraform: chamber-v
 
@@ -2046,6 +2356,16 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            account_readme: |-
+              ## Usage: AWS Environment: chamber-w
+
+              ```bash
+              cd a/chamber/w
+              mise trust
+              aws sso login
+              alogin
+              aws sts get-caller-identity
+              ```
             infra_org_readme: |-
               ## Usage: Organizational-level Terraform: chamber-w
 
@@ -2109,6 +2429,16 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            account_readme: |-
+              ## Usage: AWS Environment: chamber-x
+
+              ```bash
+              cd a/chamber/x
+              mise trust
+              aws sso login
+              alogin
+              aws sts get-caller-identity
+              ```
             infra_org_readme: |-
               ## Usage: Organizational-level Terraform: chamber-x
 
@@ -2172,6 +2502,16 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            account_readme: |-
+              ## Usage: AWS Environment: chamber-y
+
+              ```bash
+              cd a/chamber/y
+              mise trust
+              aws sso login
+              alogin
+              aws sts get-caller-identity
+              ```
             infra_org_readme: |-
               ## Usage: Organizational-level Terraform: chamber-y
 
@@ -2235,6 +2575,16 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            account_readme: |-
+              ## Usage: AWS Environment: chamber-z
+
+              ```bash
+              cd a/chamber/z
+              mise trust
+              aws sso login
+              alogin
+              aws sts get-caller-identity
+              ```
             infra_org_readme: |-
               ## Usage: Organizational-level Terraform: chamber-z
 
@@ -2303,6 +2653,16 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            account_readme: |-
+              ## Usage: AWS Environment: circus-org
+
+              ```bash
+              cd a/circus/org
+              mise trust
+              aws sso login
+              alogin
+              aws sts get-caller-identity
+              ```
             infra_org_readme: |-
               ## Usage: Organizational-level Terraform: circus-org
 
@@ -2366,6 +2726,16 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            account_readme: |-
+              ## Usage: AWS Environment: circus-lib
+
+              ```bash
+              cd a/circus/lib
+              mise trust
+              aws sso login
+              alogin
+              aws sts get-caller-identity
+              ```
             infra_org_readme: |-
               ## Usage: Organizational-level Terraform: circus-lib
 
@@ -2429,6 +2799,16 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            account_readme: |-
+              ## Usage: AWS Environment: circus-log
+
+              ```bash
+              cd a/circus/log
+              mise trust
+              aws sso login
+              alogin
+              aws sts get-caller-identity
+              ```
             infra_org_readme: |-
               ## Usage: Organizational-level Terraform: circus-log
 
@@ -2492,6 +2872,16 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            account_readme: |-
+              ## Usage: AWS Environment: circus-net
+
+              ```bash
+              cd a/circus/net
+              mise trust
+              aws sso login
+              alogin
+              aws sts get-caller-identity
+              ```
             infra_org_readme: |-
               ## Usage: Organizational-level Terraform: circus-net
 
@@ -2555,6 +2945,16 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            account_readme: |-
+              ## Usage: AWS Environment: circus-ops
+
+              ```bash
+              cd a/circus/ops
+              mise trust
+              aws sso login
+              alogin
+              aws sts get-caller-identity
+              ```
             infra_org_readme: |-
               ## Usage: Organizational-level Terraform: circus-ops
 
@@ -2623,6 +3023,16 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            account_readme: |-
+              ## Usage: AWS Environment: coil-org
+
+              ```bash
+              cd a/coil/org
+              mise trust
+              aws sso login
+              alogin
+              aws sts get-caller-identity
+              ```
             infra_org_readme: |-
               ## Usage: Organizational-level Terraform: coil-org
 
@@ -2686,6 +3096,16 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            account_readme: |-
+              ## Usage: AWS Environment: coil-hub
+
+              ```bash
+              cd a/coil/hub
+              mise trust
+              aws sso login
+              alogin
+              aws sts get-caller-identity
+              ```
             infra_org_readme: |-
               ## Usage: Organizational-level Terraform: coil-hub
 
@@ -2749,6 +3169,16 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            account_readme: |-
+              ## Usage: AWS Environment: coil-lib
+
+              ```bash
+              cd a/coil/lib
+              mise trust
+              aws sso login
+              alogin
+              aws sts get-caller-identity
+              ```
             infra_org_readme: |-
               ## Usage: Organizational-level Terraform: coil-lib
 
@@ -2812,6 +3242,16 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            account_readme: |-
+              ## Usage: AWS Environment: coil-net
+
+              ```bash
+              cd a/coil/net
+              mise trust
+              aws sso login
+              alogin
+              aws sts get-caller-identity
+              ```
             infra_org_readme: |-
               ## Usage: Organizational-level Terraform: coil-net
 
@@ -2880,6 +3320,16 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            account_readme: |-
+              ## Usage: AWS Environment: curl-org
+
+              ```bash
+              cd a/curl/org
+              mise trust
+              aws sso login
+              alogin
+              aws sts get-caller-identity
+              ```
             infra_org_readme: |-
               ## Usage: Organizational-level Terraform: curl-org
 
@@ -2943,6 +3393,16 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            account_readme: |-
+              ## Usage: AWS Environment: curl-hub
+
+              ```bash
+              cd a/curl/hub
+              mise trust
+              aws sso login
+              alogin
+              aws sts get-caller-identity
+              ```
             infra_org_readme: |-
               ## Usage: Organizational-level Terraform: curl-hub
 
@@ -3006,6 +3466,16 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            account_readme: |-
+              ## Usage: AWS Environment: curl-lib
+
+              ```bash
+              cd a/curl/lib
+              mise trust
+              aws sso login
+              alogin
+              aws sts get-caller-identity
+              ```
             infra_org_readme: |-
               ## Usage: Organizational-level Terraform: curl-lib
 
@@ -3069,6 +3539,16 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            account_readme: |-
+              ## Usage: AWS Environment: curl-net
+
+              ```bash
+              cd a/curl/net
+              mise trust
+              aws sso login
+              alogin
+              aws sts get-caller-identity
+              ```
             infra_org_readme: |-
               ## Usage: Organizational-level Terraform: curl-net
 
@@ -3130,6 +3610,16 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            account_readme: |-
+              ## Usage: AWS Environment: defn-org
+
+              ```bash
+              cd a/defn/org
+              mise trust
+              aws sso login
+              alogin
+              aws sts get-caller-identity
+              ```
             infra_org_readme: |-
               ## Usage: Organizational-level Terraform: defn-org
 
@@ -3198,6 +3688,16 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            account_readme: |-
+              ## Usage: AWS Environment: fogg-org
+
+              ```bash
+              cd a/fogg/org
+              mise trust
+              aws sso login
+              alogin
+              aws sts get-caller-identity
+              ```
             infra_org_readme: |-
               ## Usage: Organizational-level Terraform: fogg-org
 
@@ -3261,6 +3761,16 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            account_readme: |-
+              ## Usage: AWS Environment: fogg-ci
+
+              ```bash
+              cd a/fogg/ci
+              mise trust
+              aws sso login
+              alogin
+              aws sts get-caller-identity
+              ```
             infra_org_readme: |-
               ## Usage: Organizational-level Terraform: fogg-ci
 
@@ -3324,6 +3834,16 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            account_readme: |-
+              ## Usage: AWS Environment: fogg-dev
+
+              ```bash
+              cd a/fogg/dev
+              mise trust
+              aws sso login
+              alogin
+              aws sts get-caller-identity
+              ```
             infra_org_readme: |-
               ## Usage: Organizational-level Terraform: fogg-dev
 
@@ -3387,6 +3907,16 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            account_readme: |-
+              ## Usage: AWS Environment: fogg-hub
+
+              ```bash
+              cd a/fogg/hub
+              mise trust
+              aws sso login
+              alogin
+              aws sts get-caller-identity
+              ```
             infra_org_readme: |-
               ## Usage: Organizational-level Terraform: fogg-hub
 
@@ -3450,6 +3980,16 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            account_readme: |-
+              ## Usage: AWS Environment: fogg-lib
+
+              ```bash
+              cd a/fogg/lib
+              mise trust
+              aws sso login
+              alogin
+              aws sts get-caller-identity
+              ```
             infra_org_readme: |-
               ## Usage: Organizational-level Terraform: fogg-lib
 
@@ -3513,6 +4053,16 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            account_readme: |-
+              ## Usage: AWS Environment: fogg-log
+
+              ```bash
+              cd a/fogg/log
+              mise trust
+              aws sso login
+              alogin
+              aws sts get-caller-identity
+              ```
             infra_org_readme: |-
               ## Usage: Organizational-level Terraform: fogg-log
 
@@ -3576,6 +4126,16 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            account_readme: |-
+              ## Usage: AWS Environment: fogg-net
+
+              ```bash
+              cd a/fogg/net
+              mise trust
+              aws sso login
+              alogin
+              aws sts get-caller-identity
+              ```
             infra_org_readme: |-
               ## Usage: Organizational-level Terraform: fogg-net
 
@@ -3639,6 +4199,16 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            account_readme: |-
+              ## Usage: AWS Environment: fogg-ops
+
+              ```bash
+              cd a/fogg/ops
+              mise trust
+              aws sso login
+              alogin
+              aws sts get-caller-identity
+              ```
             infra_org_readme: |-
               ## Usage: Organizational-level Terraform: fogg-ops
 
@@ -3702,6 +4272,16 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            account_readme: |-
+              ## Usage: AWS Environment: fogg-prod
+
+              ```bash
+              cd a/fogg/prod
+              mise trust
+              aws sso login
+              alogin
+              aws sts get-caller-identity
+              ```
             infra_org_readme: |-
               ## Usage: Organizational-level Terraform: fogg-prod
 
@@ -3765,6 +4345,16 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            account_readme: |-
+              ## Usage: AWS Environment: fogg-pub
+
+              ```bash
+              cd a/fogg/pub
+              mise trust
+              aws sso login
+              alogin
+              aws sts get-caller-identity
+              ```
             infra_org_readme: |-
               ## Usage: Organizational-level Terraform: fogg-pub
 
@@ -3833,6 +4423,16 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            account_readme: |-
+              ## Usage: AWS Environment: gyre-org
+
+              ```bash
+              cd a/gyre/org
+              mise trust
+              aws sso login
+              alogin
+              aws sts get-caller-identity
+              ```
             infra_org_readme: |-
               ## Usage: Organizational-level Terraform: gyre-org
 
@@ -3896,6 +4496,16 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            account_readme: |-
+              ## Usage: AWS Environment: gyre-ops
+
+              ```bash
+              cd a/gyre/ops
+              mise trust
+              aws sso login
+              alogin
+              aws sts get-caller-identity
+              ```
             infra_org_readme: |-
               ## Usage: Organizational-level Terraform: gyre-ops
 
@@ -3964,6 +4574,16 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            account_readme: |-
+              ## Usage: AWS Environment: helix-org
+
+              ```bash
+              cd a/helix/org
+              mise trust
+              aws sso login
+              alogin
+              aws sts get-caller-identity
+              ```
             infra_org_readme: |-
               ## Usage: Organizational-level Terraform: helix-org
 
@@ -4027,6 +4647,16 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            account_readme: |-
+              ## Usage: AWS Environment: helix-ci
+
+              ```bash
+              cd a/helix/ci
+              mise trust
+              aws sso login
+              alogin
+              aws sts get-caller-identity
+              ```
             infra_org_readme: |-
               ## Usage: Organizational-level Terraform: helix-ci
 
@@ -4090,6 +4720,16 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            account_readme: |-
+              ## Usage: AWS Environment: helix-dev
+
+              ```bash
+              cd a/helix/dev
+              mise trust
+              aws sso login
+              alogin
+              aws sts get-caller-identity
+              ```
             infra_org_readme: |-
               ## Usage: Organizational-level Terraform: helix-dev
 
@@ -4153,6 +4793,16 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            account_readme: |-
+              ## Usage: AWS Environment: helix-hub
+
+              ```bash
+              cd a/helix/hub
+              mise trust
+              aws sso login
+              alogin
+              aws sts get-caller-identity
+              ```
             infra_org_readme: |-
               ## Usage: Organizational-level Terraform: helix-hub
 
@@ -4216,6 +4866,16 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            account_readme: |-
+              ## Usage: AWS Environment: helix-lib
+
+              ```bash
+              cd a/helix/lib
+              mise trust
+              aws sso login
+              alogin
+              aws sts get-caller-identity
+              ```
             infra_org_readme: |-
               ## Usage: Organizational-level Terraform: helix-lib
 
@@ -4279,6 +4939,16 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            account_readme: |-
+              ## Usage: AWS Environment: helix-log
+
+              ```bash
+              cd a/helix/log
+              mise trust
+              aws sso login
+              alogin
+              aws sts get-caller-identity
+              ```
             infra_org_readme: |-
               ## Usage: Organizational-level Terraform: helix-log
 
@@ -4342,6 +5012,16 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            account_readme: |-
+              ## Usage: AWS Environment: helix-net
+
+              ```bash
+              cd a/helix/net
+              mise trust
+              aws sso login
+              alogin
+              aws sts get-caller-identity
+              ```
             infra_org_readme: |-
               ## Usage: Organizational-level Terraform: helix-net
 
@@ -4405,6 +5085,16 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            account_readme: |-
+              ## Usage: AWS Environment: helix-ops
+
+              ```bash
+              cd a/helix/ops
+              mise trust
+              aws sso login
+              alogin
+              aws sts get-caller-identity
+              ```
             infra_org_readme: |-
               ## Usage: Organizational-level Terraform: helix-ops
 
@@ -4468,6 +5158,16 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            account_readme: |-
+              ## Usage: AWS Environment: helix-prod
+
+              ```bash
+              cd a/helix/prod
+              mise trust
+              aws sso login
+              alogin
+              aws sts get-caller-identity
+              ```
             infra_org_readme: |-
               ## Usage: Organizational-level Terraform: helix-prod
 
@@ -4531,6 +5231,16 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            account_readme: |-
+              ## Usage: AWS Environment: helix-pub
+
+              ```bash
+              cd a/helix/pub
+              mise trust
+              aws sso login
+              alogin
+              aws sts get-caller-identity
+              ```
             infra_org_readme: |-
               ## Usage: Organizational-level Terraform: helix-pub
 
@@ -4599,6 +5309,16 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            account_readme: |-
+              ## Usage: AWS Environment: imma-org
+
+              ```bash
+              cd a/imma/org
+              mise trust
+              aws sso login
+              alogin
+              aws sts get-caller-identity
+              ```
             infra_org_readme: |-
               ## Usage: Organizational-level Terraform: imma-org
 
@@ -4662,6 +5382,16 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            account_readme: |-
+              ## Usage: AWS Environment: imma-dev
+
+              ```bash
+              cd a/imma/dev
+              mise trust
+              aws sso login
+              alogin
+              aws sts get-caller-identity
+              ```
             infra_org_readme: |-
               ## Usage: Organizational-level Terraform: imma-dev
 
@@ -4725,6 +5455,16 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            account_readme: |-
+              ## Usage: AWS Environment: imma-lib
+
+              ```bash
+              cd a/imma/lib
+              mise trust
+              aws sso login
+              alogin
+              aws sts get-caller-identity
+              ```
             infra_org_readme: |-
               ## Usage: Organizational-level Terraform: imma-lib
 
@@ -4788,6 +5528,16 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            account_readme: |-
+              ## Usage: AWS Environment: imma-log
+
+              ```bash
+              cd a/imma/log
+              mise trust
+              aws sso login
+              alogin
+              aws sts get-caller-identity
+              ```
             infra_org_readme: |-
               ## Usage: Organizational-level Terraform: imma-log
 
@@ -4851,6 +5601,16 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            account_readme: |-
+              ## Usage: AWS Environment: imma-net
+
+              ```bash
+              cd a/imma/net
+              mise trust
+              aws sso login
+              alogin
+              aws sts get-caller-identity
+              ```
             infra_org_readme: |-
               ## Usage: Organizational-level Terraform: imma-net
 
@@ -4914,6 +5674,16 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            account_readme: |-
+              ## Usage: AWS Environment: imma-pub
+
+              ```bash
+              cd a/imma/pub
+              mise trust
+              aws sso login
+              alogin
+              aws sts get-caller-identity
+              ```
             infra_org_readme: |-
               ## Usage: Organizational-level Terraform: imma-pub
 
@@ -4982,6 +5752,16 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            account_readme: |-
+              ## Usage: AWS Environment: immanent-org
+
+              ```bash
+              cd a/immanent/org
+              mise trust
+              aws sso login
+              alogin
+              aws sts get-caller-identity
+              ```
             infra_org_readme: |-
               ## Usage: Organizational-level Terraform: immanent-org
 
@@ -5045,6 +5825,16 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            account_readme: |-
+              ## Usage: AWS Environment: immanent-changer
+
+              ```bash
+              cd a/immanent/changer
+              mise trust
+              aws sso login
+              alogin
+              aws sts get-caller-identity
+              ```
             infra_org_readme: |-
               ## Usage: Organizational-level Terraform: immanent-changer
 
@@ -5108,6 +5898,16 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            account_readme: |-
+              ## Usage: AWS Environment: immanent-chanter
+
+              ```bash
+              cd a/immanent/chanter
+              mise trust
+              aws sso login
+              alogin
+              aws sts get-caller-identity
+              ```
             infra_org_readme: |-
               ## Usage: Organizational-level Terraform: immanent-chanter
 
@@ -5171,6 +5971,16 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            account_readme: |-
+              ## Usage: AWS Environment: immanent-doorkeeper
+
+              ```bash
+              cd a/immanent/doorkeeper
+              mise trust
+              aws sso login
+              alogin
+              aws sts get-caller-identity
+              ```
             infra_org_readme: |-
               ## Usage: Organizational-level Terraform: immanent-doorkeeper
 
@@ -5234,6 +6044,16 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            account_readme: |-
+              ## Usage: AWS Environment: immanent-ged
+
+              ```bash
+              cd a/immanent/ged
+              mise trust
+              aws sso login
+              alogin
+              aws sts get-caller-identity
+              ```
             infra_org_readme: |-
               ## Usage: Organizational-level Terraform: immanent-ged
 
@@ -5297,6 +6117,16 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            account_readme: |-
+              ## Usage: AWS Environment: immanent-hand
+
+              ```bash
+              cd a/immanent/hand
+              mise trust
+              aws sso login
+              alogin
+              aws sts get-caller-identity
+              ```
             infra_org_readme: |-
               ## Usage: Organizational-level Terraform: immanent-hand
 
@@ -5360,6 +6190,16 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            account_readme: |-
+              ## Usage: AWS Environment: immanent-herbal
+
+              ```bash
+              cd a/immanent/herbal
+              mise trust
+              aws sso login
+              alogin
+              aws sts get-caller-identity
+              ```
             infra_org_readme: |-
               ## Usage: Organizational-level Terraform: immanent-herbal
 
@@ -5423,6 +6263,16 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            account_readme: |-
+              ## Usage: AWS Environment: immanent-namer
+
+              ```bash
+              cd a/immanent/namer
+              mise trust
+              aws sso login
+              alogin
+              aws sts get-caller-identity
+              ```
             infra_org_readme: |-
               ## Usage: Organizational-level Terraform: immanent-namer
 
@@ -5486,6 +6336,16 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            account_readme: |-
+              ## Usage: AWS Environment: immanent-patterner
+
+              ```bash
+              cd a/immanent/patterner
+              mise trust
+              aws sso login
+              alogin
+              aws sts get-caller-identity
+              ```
             infra_org_readme: |-
               ## Usage: Organizational-level Terraform: immanent-patterner
 
@@ -5549,6 +6409,16 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            account_readme: |-
+              ## Usage: AWS Environment: immanent-roke
+
+              ```bash
+              cd a/immanent/roke
+              mise trust
+              aws sso login
+              alogin
+              aws sts get-caller-identity
+              ```
             infra_org_readme: |-
               ## Usage: Organizational-level Terraform: immanent-roke
 
@@ -5612,6 +6482,16 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            account_readme: |-
+              ## Usage: AWS Environment: immanent-summoner
+
+              ```bash
+              cd a/immanent/summoner
+              mise trust
+              aws sso login
+              alogin
+              aws sts get-caller-identity
+              ```
             infra_org_readme: |-
               ## Usage: Organizational-level Terraform: immanent-summoner
 
@@ -5675,6 +6555,16 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            account_readme: |-
+              ## Usage: AWS Environment: immanent-windkey
+
+              ```bash
+              cd a/immanent/windkey
+              mise trust
+              aws sso login
+              alogin
+              aws sts get-caller-identity
+              ```
             infra_org_readme: |-
               ## Usage: Organizational-level Terraform: immanent-windkey
 
@@ -5743,6 +6633,16 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            account_readme: |-
+              ## Usage: AWS Environment: jianghu-org
+
+              ```bash
+              cd a/jianghu/org
+              mise trust
+              aws sso login
+              alogin
+              aws sts get-caller-identity
+              ```
             infra_org_readme: |-
               ## Usage: Organizational-level Terraform: jianghu-org
 
@@ -5806,6 +6706,16 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            account_readme: |-
+              ## Usage: AWS Environment: jianghu-log
+
+              ```bash
+              cd a/jianghu/log
+              mise trust
+              aws sso login
+              alogin
+              aws sts get-caller-identity
+              ```
             infra_org_readme: |-
               ## Usage: Organizational-level Terraform: jianghu-log
 
@@ -5869,6 +6779,16 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            account_readme: |-
+              ## Usage: AWS Environment: jianghu-net
+
+              ```bash
+              cd a/jianghu/net
+              mise trust
+              aws sso login
+              alogin
+              aws sts get-caller-identity
+              ```
             infra_org_readme: |-
               ## Usage: Organizational-level Terraform: jianghu-net
 
@@ -5937,6 +6857,16 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            account_readme: |-
+              ## Usage: AWS Environment: spiral-org
+
+              ```bash
+              cd a/spiral/org
+              mise trust
+              aws sso login
+              alogin
+              aws sts get-caller-identity
+              ```
             infra_org_readme: |-
               ## Usage: Organizational-level Terraform: spiral-org
 
@@ -6000,6 +6930,16 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            account_readme: |-
+              ## Usage: AWS Environment: spiral-ci
+
+              ```bash
+              cd a/spiral/ci
+              mise trust
+              aws sso login
+              alogin
+              aws sts get-caller-identity
+              ```
             infra_org_readme: |-
               ## Usage: Organizational-level Terraform: spiral-ci
 
@@ -6063,6 +7003,16 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            account_readme: |-
+              ## Usage: AWS Environment: spiral-dev
+
+              ```bash
+              cd a/spiral/dev
+              mise trust
+              aws sso login
+              alogin
+              aws sts get-caller-identity
+              ```
             infra_org_readme: |-
               ## Usage: Organizational-level Terraform: spiral-dev
 
@@ -6126,6 +7076,16 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            account_readme: |-
+              ## Usage: AWS Environment: spiral-hub
+
+              ```bash
+              cd a/spiral/hub
+              mise trust
+              aws sso login
+              alogin
+              aws sts get-caller-identity
+              ```
             infra_org_readme: |-
               ## Usage: Organizational-level Terraform: spiral-hub
 
@@ -6189,6 +7149,16 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            account_readme: |-
+              ## Usage: AWS Environment: spiral-lib
+
+              ```bash
+              cd a/spiral/lib
+              mise trust
+              aws sso login
+              alogin
+              aws sts get-caller-identity
+              ```
             infra_org_readme: |-
               ## Usage: Organizational-level Terraform: spiral-lib
 
@@ -6252,6 +7222,16 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            account_readme: |-
+              ## Usage: AWS Environment: spiral-log
+
+              ```bash
+              cd a/spiral/log
+              mise trust
+              aws sso login
+              alogin
+              aws sts get-caller-identity
+              ```
             infra_org_readme: |-
               ## Usage: Organizational-level Terraform: spiral-log
 
@@ -6315,6 +7295,16 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            account_readme: |-
+              ## Usage: AWS Environment: spiral-net
+
+              ```bash
+              cd a/spiral/net
+              mise trust
+              aws sso login
+              alogin
+              aws sts get-caller-identity
+              ```
             infra_org_readme: |-
               ## Usage: Organizational-level Terraform: spiral-net
 
@@ -6378,6 +7368,16 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            account_readme: |-
+              ## Usage: AWS Environment: spiral-ops
+
+              ```bash
+              cd a/spiral/ops
+              mise trust
+              aws sso login
+              alogin
+              aws sts get-caller-identity
+              ```
             infra_org_readme: |-
               ## Usage: Organizational-level Terraform: spiral-ops
 
@@ -6441,6 +7441,16 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            account_readme: |-
+              ## Usage: AWS Environment: spiral-prod
+
+              ```bash
+              cd a/spiral/prod
+              mise trust
+              aws sso login
+              alogin
+              aws sts get-caller-identity
+              ```
             infra_org_readme: |-
               ## Usage: Organizational-level Terraform: spiral-prod
 
@@ -6504,6 +7514,16 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            account_readme: |-
+              ## Usage: AWS Environment: spiral-pub
+
+              ```bash
+              cd a/spiral/pub
+              mise trust
+              aws sso login
+              alogin
+              aws sts get-caller-identity
+              ```
             infra_org_readme: |-
               ## Usage: Organizational-level Terraform: spiral-pub
 
@@ -6572,6 +7592,16 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            account_readme: |-
+              ## Usage: AWS Environment: vault-org
+
+              ```bash
+              cd a/vault/org
+              mise trust
+              aws sso login
+              alogin
+              aws sts get-caller-identity
+              ```
             infra_org_readme: |-
               ## Usage: Organizational-level Terraform: vault-org
 
@@ -6635,6 +7665,16 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            account_readme: |-
+              ## Usage: AWS Environment: vault-ci
+
+              ```bash
+              cd a/vault/ci
+              mise trust
+              aws sso login
+              alogin
+              aws sts get-caller-identity
+              ```
             infra_org_readme: |-
               ## Usage: Organizational-level Terraform: vault-ci
 
@@ -6698,6 +7738,16 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            account_readme: |-
+              ## Usage: AWS Environment: vault-dev
+
+              ```bash
+              cd a/vault/dev
+              mise trust
+              aws sso login
+              alogin
+              aws sts get-caller-identity
+              ```
             infra_org_readme: |-
               ## Usage: Organizational-level Terraform: vault-dev
 
@@ -6761,6 +7811,16 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            account_readme: |-
+              ## Usage: AWS Environment: vault-hub
+
+              ```bash
+              cd a/vault/hub
+              mise trust
+              aws sso login
+              alogin
+              aws sts get-caller-identity
+              ```
             infra_org_readme: |-
               ## Usage: Organizational-level Terraform: vault-hub
 
@@ -6824,6 +7884,16 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            account_readme: |-
+              ## Usage: AWS Environment: vault-lib
+
+              ```bash
+              cd a/vault/lib
+              mise trust
+              aws sso login
+              alogin
+              aws sts get-caller-identity
+              ```
             infra_org_readme: |-
               ## Usage: Organizational-level Terraform: vault-lib
 
@@ -6887,6 +7957,16 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            account_readme: |-
+              ## Usage: AWS Environment: vault-log
+
+              ```bash
+              cd a/vault/log
+              mise trust
+              aws sso login
+              alogin
+              aws sts get-caller-identity
+              ```
             infra_org_readme: |-
               ## Usage: Organizational-level Terraform: vault-log
 
@@ -6950,6 +8030,16 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            account_readme: |-
+              ## Usage: AWS Environment: vault-net
+
+              ```bash
+              cd a/vault/net
+              mise trust
+              aws sso login
+              alogin
+              aws sts get-caller-identity
+              ```
             infra_org_readme: |-
               ## Usage: Organizational-level Terraform: vault-net
 
@@ -7013,6 +8103,16 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            account_readme: |-
+              ## Usage: AWS Environment: vault-ops
+
+              ```bash
+              cd a/vault/ops
+              mise trust
+              aws sso login
+              alogin
+              aws sts get-caller-identity
+              ```
             infra_org_readme: |-
               ## Usage: Organizational-level Terraform: vault-ops
 
@@ -7076,6 +8176,16 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            account_readme: |-
+              ## Usage: AWS Environment: vault-prod
+
+              ```bash
+              cd a/vault/prod
+              mise trust
+              aws sso login
+              alogin
+              aws sts get-caller-identity
+              ```
             infra_org_readme: |-
               ## Usage: Organizational-level Terraform: vault-prod
 
@@ -7139,6 +8249,16 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            account_readme: |-
+              ## Usage: AWS Environment: vault-pub
+
+              ```bash
+              cd a/vault/pub
+              mise trust
+              aws sso login
+              alogin
+              aws sts get-caller-identity
+              ```
             infra_org_readme: |-
               ## Usage: Organizational-level Terraform: vault-pub
 
@@ -7207,6 +8327,16 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            account_readme: |-
+              ## Usage: AWS Environment: whoa-org
+
+              ```bash
+              cd a/whoa/org
+              mise trust
+              aws sso login
+              alogin
+              aws sts get-caller-identity
+              ```
             infra_org_readme: |-
               ## Usage: Organizational-level Terraform: whoa-org
 
@@ -7270,6 +8400,16 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            account_readme: |-
+              ## Usage: AWS Environment: whoa-dev
+
+              ```bash
+              cd a/whoa/dev
+              mise trust
+              aws sso login
+              alogin
+              aws sts get-caller-identity
+              ```
             infra_org_readme: |-
               ## Usage: Organizational-level Terraform: whoa-dev
 
@@ -7333,6 +8473,16 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            account_readme: |-
+              ## Usage: AWS Environment: whoa-hub
+
+              ```bash
+              cd a/whoa/hub
+              mise trust
+              aws sso login
+              alogin
+              aws sts get-caller-identity
+              ```
             infra_org_readme: |-
               ## Usage: Organizational-level Terraform: whoa-hub
 
@@ -7396,6 +8546,16 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            account_readme: |-
+              ## Usage: AWS Environment: whoa-net
+
+              ```bash
+              cd a/whoa/net
+              mise trust
+              aws sso login
+              alogin
+              aws sts get-caller-identity
+              ```
             infra_org_readme: |-
               ## Usage: Organizational-level Terraform: whoa-net
 
@@ -7459,6 +8619,16 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            account_readme: |-
+              ## Usage: AWS Environment: whoa-pub
+
+              ```bash
+              cd a/whoa/pub
+              mise trust
+              aws sso login
+              alogin
+              aws sts get-caller-identity
+              ```
             infra_org_readme: |-
               ## Usage: Organizational-level Terraform: whoa-pub
 

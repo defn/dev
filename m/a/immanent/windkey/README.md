@@ -1,16 +1,9 @@
-# Immanent Environment: windkey
-
-AWS environment configuration for immanent-windkey profile.
-
-## Configuration
-
-- AWS Profile: immanent-windkey
-- AWS Region: us-west-2
-- SSO authentication
-
-## Usage
+## Usage: AWS Environment: immanent-windkey
 
 ```bash
-cd m/a/immanent/windkey
+cd a/immanent/windkey
+mise trust
+aws sso login
+alogin
 aws sts get-caller-identity
 ```

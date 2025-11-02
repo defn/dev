@@ -1,16 +1,9 @@
-# Gyre Environment: org
-
-AWS environment configuration for gyre-org profile.
-
-## Configuration
-
-- AWS Profile: gyre-org
-- AWS Region: us-west-2
-- SSO authentication
-
-## Usage
+## Usage: AWS Environment: gyre-org
 
 ```bash
-cd m/a/gyre/org
+cd a/gyre/org
+mise trust
+aws sso login
+alogin
 aws sts get-caller-identity
 ```

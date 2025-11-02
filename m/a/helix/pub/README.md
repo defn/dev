@@ -1,16 +1,9 @@
-# Helix Environment: pub
-
-AWS environment configuration for helix-pub profile.
-
-## Configuration
-
-- AWS Profile: helix-pub
-- AWS Region: us-west-2
-- SSO authentication
-
-## Usage
+## Usage: AWS Environment: helix-pub
 
 ```bash
-cd m/a/helix/pub
+cd a/helix/pub
+mise trust
+aws sso login
+alogin
 aws sts get-caller-identity
 ```

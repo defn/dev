@@ -1,16 +1,9 @@
-# Fogg Environment: pub
-
-AWS environment configuration for fogg-pub profile.
-
-## Configuration
-
-- AWS Profile: fogg-pub
-- AWS Region: us-west-2
-- SSO authentication
-
-## Usage
+## Usage: AWS Environment: fogg-pub
 
 ```bash
-cd m/a/fogg/pub
+cd a/fogg/pub
+mise trust
+aws sso login
+alogin
 aws sts get-caller-identity
 ```

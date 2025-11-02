@@ -1,16 +1,9 @@
-# Spiral Environment: net
-
-AWS environment configuration for spiral-net profile.
-
-## Configuration
-
-- AWS Profile: spiral-net
-- AWS Region: us-west-2
-- SSO authentication
-
-## Usage
+## Usage: AWS Environment: spiral-net
 
 ```bash
-cd m/a/spiral/net
+cd a/spiral/net
+mise trust
+aws sso login
+alogin
 aws sts get-caller-identity
 ```

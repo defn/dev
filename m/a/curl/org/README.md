@@ -1,16 +1,9 @@
-# Curl Environment: org
-
-AWS environment configuration for curl-org profile.
-
-## Configuration
-
-- AWS Profile: curl-org
-- AWS Region: us-west-2
-- SSO authentication
-
-## Usage
+## Usage: AWS Environment: curl-org
 
 ```bash
-cd m/a/curl/org
+cd a/curl/org
+mise trust
+aws sso login
+alogin
 aws sts get-caller-identity
 ```

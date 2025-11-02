@@ -1,16 +1,9 @@
-# Helix Environment: ops
-
-AWS environment configuration for helix-ops profile.
-
-## Configuration
-
-- AWS Profile: helix-ops
-- AWS Region: us-west-2
-- SSO authentication
-
-## Usage
+## Usage: AWS Environment: helix-ops
 
 ```bash
-cd m/a/helix/ops
+cd a/helix/ops
+mise trust
+aws sso login
+alogin
 aws sts get-caller-identity
 ```

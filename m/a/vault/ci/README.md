@@ -1,16 +1,9 @@
-# Vault Environment: ci
-
-AWS environment configuration for vault-ci profile.
-
-## Configuration
-
-- AWS Profile: vault-ci
-- AWS Region: us-west-2
-- SSO authentication
-
-## Usage
+## Usage: AWS Environment: vault-ci
 
 ```bash
-cd m/a/vault/ci
+cd a/vault/ci
+mise trust
+aws sso login
+alogin
 aws sts get-caller-identity
 ```

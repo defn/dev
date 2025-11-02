@@ -1,16 +1,9 @@
-# Fogg Environment: hub
-
-AWS environment configuration for fogg-hub profile.
-
-## Configuration
-
-- AWS Profile: fogg-hub
-- AWS Region: us-west-2
-- SSO authentication
-
-## Usage
+## Usage: AWS Environment: fogg-hub
 
 ```bash
-cd m/a/fogg/hub
+cd a/fogg/hub
+mise trust
+aws sso login
+alogin
 aws sts get-caller-identity
 ```

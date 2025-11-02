@@ -1,16 +1,9 @@
-# Vault Environment: ops
-
-AWS environment configuration for vault-ops profile.
-
-## Configuration
-
-- AWS Profile: vault-ops
-- AWS Region: us-west-2
-- SSO authentication
-
-## Usage
+## Usage: AWS Environment: vault-ops
 
 ```bash
-cd m/a/vault/ops
+cd a/vault/ops
+mise trust
+aws sso login
+alogin
 aws sts get-caller-identity
 ```

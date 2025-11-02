@@ -1,16 +1,9 @@
-# Immanent Environment: patterner
-
-AWS environment configuration for immanent-patterner profile.
-
-## Configuration
-
-- AWS Profile: immanent-patterner
-- AWS Region: us-west-2
-- SSO authentication
-
-## Usage
+## Usage: AWS Environment: immanent-patterner
 
 ```bash
-cd m/a/immanent/patterner
+cd a/immanent/patterner
+mise trust
+aws sso login
+alogin
 aws sts get-caller-identity
 ```

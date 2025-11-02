@@ -1,16 +1,9 @@
-# Spiral Environment: pub
-
-AWS environment configuration for spiral-pub profile.
-
-## Configuration
-
-- AWS Profile: spiral-pub
-- AWS Region: us-west-2
-- SSO authentication
-
-## Usage
+## Usage: AWS Environment: spiral-pub
 
 ```bash
-cd m/a/spiral/pub
+cd a/spiral/pub
+mise trust
+aws sso login
+alogin
 aws sts get-caller-identity
 ```

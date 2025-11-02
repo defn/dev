@@ -1,16 +1,9 @@
-# Imma Environment: dev
-
-AWS environment configuration for imma-dev profile.
-
-## Configuration
-
-- AWS Profile: imma-dev
-- AWS Region: us-west-2
-- SSO authentication
-
-## Usage
+## Usage: AWS Environment: imma-dev
 
 ```bash
-cd m/a/imma/dev
+cd a/imma/dev
+mise trust
+aws sso login
+alogin
 aws sts get-caller-identity
 ```

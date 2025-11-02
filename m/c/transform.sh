@@ -77,6 +77,9 @@ function main {
 
 			yq '.config.aws.org[strenv(org)].account[strenv(acc)].mise_config' main.yaml >../a/$org/$acc/mise.toml
 
+			# Generate account subdirectory README
+			yq '.config.aws.org[strenv(org)].account[strenv(acc)].account_readme' main.yaml >../a/$org/$acc/README.md
+
 			if [[ $acc == "org" ]]; then
 				mkdir -p ../infra/org-$org
 				(

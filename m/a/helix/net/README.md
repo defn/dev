@@ -1,16 +1,9 @@
-# Helix Environment: net
-
-AWS environment configuration for helix-net profile.
-
-## Configuration
-
-- AWS Profile: helix-net
-- AWS Region: us-west-2
-- SSO authentication
-
-## Usage
+## Usage: AWS Environment: helix-net
 
 ```bash
-cd m/a/helix/net
+cd a/helix/net
+mise trust
+aws sso login
+alogin
 aws sts get-caller-identity
 ```

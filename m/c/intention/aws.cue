@@ -64,6 +64,19 @@ sso_region=\(lookup["defn"].sso_region)
 			aws_config: aws_config_account
 		}
 
+		// README for a/{org}/{account}/ (mise environment)
+		account_readme: """
+## Usage: AWS Environment: \(org)-\(account)
+
+```bash
+cd a/\(org)/\(account)
+mise trust
+aws sso login
+alogin
+aws sts get-caller-identity
+```
+"""
+
 		// README for infra/org-* (organization level)
 		infra_org_readme: """
 ## Usage: Organizational-level Terraform: \(org)-\(account)

@@ -1,16 +1,9 @@
-# Imma Environment: pub
-
-AWS environment configuration for imma-pub profile.
-
-## Configuration
-
-- AWS Profile: imma-pub
-- AWS Region: us-west-2
-- SSO authentication
-
-## Usage
+## Usage: AWS Environment: imma-pub
 
 ```bash
-cd m/a/imma/pub
+cd a/imma/pub
+mise trust
+aws sso login
+alogin
 aws sts get-caller-identity
 ```

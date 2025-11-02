@@ -1,16 +1,9 @@
-# Jianghu Environment: net
-
-AWS environment configuration for jianghu-net profile.
-
-## Configuration
-
-- AWS Profile: jianghu-net
-- AWS Region: us-west-2
-- SSO authentication
-
-## Usage
+## Usage: AWS Environment: jianghu-net
 
 ```bash
-cd m/a/jianghu/net
+cd a/jianghu/net
+mise trust
+aws sso login
+alogin
 aws sts get-caller-identity
 ```

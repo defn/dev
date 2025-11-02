@@ -1,16 +1,9 @@
-# Spiral Environment: ci
-
-AWS environment configuration for spiral-ci profile.
-
-## Configuration
-
-- AWS Profile: spiral-ci
-- AWS Region: us-west-2
-- SSO authentication
-
-## Usage
+## Usage: AWS Environment: spiral-ci
 
 ```bash
-cd m/a/spiral/ci
+cd a/spiral/ci
+mise trust
+aws sso login
+alogin
 aws sts get-caller-identity
 ```

@@ -1,18 +1,9 @@
-# Chamber Environment: 3
-
-AWS environment configuration for chamber-3 profile.
-
-## Configuration
-
-This directory contains mise.toml with:
-- AWS Profile: chamber-3
-- AWS Region: us-west-2
-- SSO authentication hook
-
-## Usage
+## Usage: AWS Environment: chamber-3
 
 ```bash
-cd m/a/chamber/3
-# AWS profile automatically activated via mise
+cd a/chamber/3
+mise trust
+aws sso login
+alogin
 aws sts get-caller-identity
 ```

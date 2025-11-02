@@ -1,16 +1,9 @@
-# Whoa Environment: pub
-
-AWS environment configuration for whoa-pub profile.
-
-## Configuration
-
-- AWS Profile: whoa-pub
-- AWS Region: us-west-2
-- SSO authentication
-
-## Usage
+## Usage: AWS Environment: whoa-pub
 
 ```bash
-cd m/a/whoa/pub
+cd a/whoa/pub
+mise trust
+aws sso login
+alogin
 aws sts get-caller-identity
 ```

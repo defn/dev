@@ -1,16 +1,9 @@
-# Fogg Environment: ops
-
-AWS environment configuration for fogg-ops profile.
-
-## Configuration
-
-- AWS Profile: fogg-ops
-- AWS Region: us-west-2
-- SSO authentication
-
-## Usage
+## Usage: AWS Environment: fogg-ops
 
 ```bash
-cd m/a/fogg/ops
+cd a/fogg/ops
+mise trust
+aws sso login
+alogin
 aws sts get-caller-identity
 ```

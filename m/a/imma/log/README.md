@@ -1,16 +1,9 @@
-# Imma Environment: log
-
-AWS environment configuration for imma-log profile.
-
-## Configuration
-
-- AWS Profile: imma-log
-- AWS Region: us-west-2
-- SSO authentication
-
-## Usage
+## Usage: AWS Environment: imma-log
 
 ```bash
-cd m/a/imma/log
+cd a/imma/log
+mise trust
+aws sso login
+alogin
 aws sts get-caller-identity
 ```
