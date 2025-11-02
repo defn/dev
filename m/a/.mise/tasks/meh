@@ -13,12 +13,23 @@ function fork {
 	shift
 
 
+	local type
 	case "${cmd}" in
 		ec2)
+			type="instance"
 			run="aws --region $r ec2 describe-instances"
-			${run} | jq --arg region "$r" \
-				'.Reservations[].Instances | map({(.InstanceId): .}) | add | {($region): {instance: .}}' \
-				>"${tmp}/$r.json" &
+			${run} | jq --arg region "$r" --arg type "$type" \
+				'.Reservations[].Instances | map({(.InstanceId): .}) | add | {($region): {($type): .}}' \
+				>"${tmp}/$type-$r.json" &
+
+			throttle "${run}"
+			;;
+		ebs)
+			type="volume"
+			run="aws --region $r ec2 describe-volumes"
+			${run} | jq --arg region "$r" --arg type "$type" \
+				'.Volumes | map({(.VolumeId): .}) | add | {($region): {($type): .}}' \
+				>"${tmp}/$type-$r.json" &
 
 			throttle "${run}"
 			;;
@@ -50,12 +61,16 @@ function main {
 
 	for r in "$@"; do
 		fork ec2 "$r"
+		fork ebs "$r"
 	done
 	wait
 
 	(
 		set +f
-		cat ${tmp}/*.json | jq -s 'add | {aws: .}'
+		if ! cat ${tmp}/*.json | jq -s 'add | {aws: .}' >/dev/null; then
+			cd "${tmp}"
+			bash -il
+		fi
 	)
 }
 
