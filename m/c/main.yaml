@@ -93,6 +93,28 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            infra_org_readme: |-
+              ## Usage: Organizational-level Terraform: chamber-org
+
+              ```bash
+              cd infra/org-chamber
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
+            infra_acc_readme: |-
+              ## Usage: Account-specific Terraform: chamber-org
+
+              ```bash
+              cd infra/acc-chamber-org
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
           "1":
             account: "1"
             email: aws-cd@defn.us
@@ -134,6 +156,28 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            infra_org_readme: |-
+              ## Usage: Organizational-level Terraform: chamber-1
+
+              ```bash
+              cd infra/org-chamber
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
+            infra_acc_readme: |-
+              ## Usage: Account-specific Terraform: chamber-1
+
+              ```bash
+              cd infra/acc-chamber-1
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
           "2":
             account: "2"
             email: aws-ci@defn.us
@@ -175,6 +219,28 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            infra_org_readme: |-
+              ## Usage: Organizational-level Terraform: chamber-2
+
+              ```bash
+              cd infra/org-chamber
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
+            infra_acc_readme: |-
+              ## Usage: Account-specific Terraform: chamber-2
+
+              ```bash
+              cd infra/acc-chamber-2
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
           "3":
             account: "3"
             email: aws-users@defn.us
@@ -216,6 +282,28 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            infra_org_readme: |-
+              ## Usage: Organizational-level Terraform: chamber-3
+
+              ```bash
+              cd infra/org-chamber
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
+            infra_acc_readme: |-
+              ## Usage: Account-specific Terraform: chamber-3
+
+              ```bash
+              cd infra/acc-chamber-3
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
           "4":
             account: "4"
             email: chamber-4@defn.us
@@ -257,6 +345,28 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            infra_org_readme: |-
+              ## Usage: Organizational-level Terraform: chamber-4
+
+              ```bash
+              cd infra/org-chamber
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
+            infra_acc_readme: |-
+              ## Usage: Account-specific Terraform: chamber-4
+
+              ```bash
+              cd infra/acc-chamber-4
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
           "5":
             account: "5"
             email: chamber-5@defn.us
@@ -298,6 +408,28 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            infra_org_readme: |-
+              ## Usage: Organizational-level Terraform: chamber-5
+
+              ```bash
+              cd infra/org-chamber
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
+            infra_acc_readme: |-
+              ## Usage: Account-specific Terraform: chamber-5
+
+              ```bash
+              cd infra/acc-chamber-5
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
           "6":
             account: "6"
             email: chamber-6@defn.us
@@ -339,6 +471,28 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            infra_org_readme: |-
+              ## Usage: Organizational-level Terraform: chamber-6
+
+              ```bash
+              cd infra/org-chamber
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
+            infra_acc_readme: |-
+              ## Usage: Account-specific Terraform: chamber-6
+
+              ```bash
+              cd infra/acc-chamber-6
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
           "7":
             account: "7"
             email: chamber-7@defn.us
@@ -380,6 +534,28 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            infra_org_readme: |-
+              ## Usage: Organizational-level Terraform: chamber-7
+
+              ```bash
+              cd infra/org-chamber
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
+            infra_acc_readme: |-
+              ## Usage: Account-specific Terraform: chamber-7
+
+              ```bash
+              cd infra/acc-chamber-7
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
           "8":
             account: "8"
             email: chamber-8@defn.us
@@ -421,6 +597,28 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            infra_org_readme: |-
+              ## Usage: Organizational-level Terraform: chamber-8
+
+              ```bash
+              cd infra/org-chamber
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
+            infra_acc_readme: |-
+              ## Usage: Account-specific Terraform: chamber-8
+
+              ```bash
+              cd infra/acc-chamber-8
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
           "9":
             account: "9"
             email: chamber-9@defn.us
@@ -462,6 +660,28 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            infra_org_readme: |-
+              ## Usage: Organizational-level Terraform: chamber-9
+
+              ```bash
+              cd infra/org-chamber
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
+            infra_acc_readme: |-
+              ## Usage: Account-specific Terraform: chamber-9
+
+              ```bash
+              cd infra/acc-chamber-9
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
           a:
             account: a
             email: defn-a@imma.io
@@ -503,6 +723,28 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            infra_org_readme: |-
+              ## Usage: Organizational-level Terraform: chamber-a
+
+              ```bash
+              cd infra/org-chamber
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
+            infra_acc_readme: |-
+              ## Usage: Account-specific Terraform: chamber-a
+
+              ```bash
+              cd infra/acc-chamber-a
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
           b:
             account: b
             email: imma-admin1@imma.io
@@ -544,6 +786,28 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            infra_org_readme: |-
+              ## Usage: Organizational-level Terraform: chamber-b
+
+              ```bash
+              cd infra/org-chamber
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
+            infra_acc_readme: |-
+              ## Usage: Account-specific Terraform: chamber-b
+
+              ```bash
+              cd infra/acc-chamber-b
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
           c:
             account: c
             email: dev-eng1@imma.io
@@ -585,6 +849,28 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            infra_org_readme: |-
+              ## Usage: Organizational-level Terraform: chamber-c
+
+              ```bash
+              cd infra/org-chamber
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
+            infra_acc_readme: |-
+              ## Usage: Account-specific Terraform: chamber-c
+
+              ```bash
+              cd infra/acc-chamber-c
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
           d:
             account: d
             email: box-adm1@imma.io
@@ -626,6 +912,28 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            infra_org_readme: |-
+              ## Usage: Organizational-level Terraform: chamber-d
+
+              ```bash
+              cd infra/org-chamber
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
+            infra_acc_readme: |-
+              ## Usage: Account-specific Terraform: chamber-d
+
+              ```bash
+              cd infra/acc-chamber-d
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
           e:
             account: e
             email: stg-eng1@imma.io
@@ -667,6 +975,28 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            infra_org_readme: |-
+              ## Usage: Organizational-level Terraform: chamber-e
+
+              ```bash
+              cd infra/org-chamber
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
+            infra_acc_readme: |-
+              ## Usage: Account-specific Terraform: chamber-e
+
+              ```bash
+              cd infra/acc-chamber-e
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
           "f":
             account: "f"
             email: usr-admin1@imma.io
@@ -708,6 +1038,28 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            infra_org_readme: |-
+              ## Usage: Organizational-level Terraform: chamber-f
+
+              ```bash
+              cd infra/org-chamber
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
+            infra_acc_readme: |-
+              ## Usage: Account-specific Terraform: chamber-f
+
+              ```bash
+              cd infra/acc-chamber-f
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
           g:
             account: g
             email: usr-adm1@imma.io
@@ -749,6 +1101,28 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            infra_org_readme: |-
+              ## Usage: Organizational-level Terraform: chamber-g
+
+              ```bash
+              cd infra/org-chamber
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
+            infra_acc_readme: |-
+              ## Usage: Account-specific Terraform: chamber-g
+
+              ```bash
+              cd infra/acc-chamber-g
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
           h:
             account: h
             email: usr-eng1@imma.io
@@ -790,6 +1164,28 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            infra_org_readme: |-
+              ## Usage: Organizational-level Terraform: chamber-h
+
+              ```bash
+              cd infra/org-chamber
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
+            infra_acc_readme: |-
+              ## Usage: Account-specific Terraform: chamber-h
+
+              ```bash
+              cd infra/acc-chamber-h
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
           i:
             account: i
             email: aws-admin1@defn.us
@@ -831,6 +1227,28 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            infra_org_readme: |-
+              ## Usage: Organizational-level Terraform: chamber-i
+
+              ```bash
+              cd infra/org-chamber
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
+            infra_acc_readme: |-
+              ## Usage: Account-specific Terraform: chamber-i
+
+              ```bash
+              cd infra/acc-chamber-i
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
           j:
             account: j
             email: aws-development1@defn.us
@@ -872,6 +1290,28 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            infra_org_readme: |-
+              ## Usage: Organizational-level Terraform: chamber-j
+
+              ```bash
+              cd infra/org-chamber
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
+            infra_acc_readme: |-
+              ## Usage: Account-specific Terraform: chamber-j
+
+              ```bash
+              cd infra/acc-chamber-j
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
           l:
             account: l
             email: aws-staging1@defn.us
@@ -913,6 +1353,28 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            infra_org_readme: |-
+              ## Usage: Organizational-level Terraform: chamber-l
+
+              ```bash
+              cd infra/org-chamber
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
+            infra_acc_readme: |-
+              ## Usage: Account-specific Terraform: chamber-l
+
+              ```bash
+              cd infra/acc-chamber-l
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
           m:
             account: m
             email: defn-m@defn.us
@@ -954,6 +1416,28 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            infra_org_readme: |-
+              ## Usage: Organizational-level Terraform: chamber-m
+
+              ```bash
+              cd infra/org-chamber
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
+            infra_acc_readme: |-
+              ## Usage: Account-specific Terraform: chamber-m
+
+              ```bash
+              cd infra/acc-chamber-m
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
           "n":
             account: "n"
             email: defn-n@defn.us
@@ -995,6 +1479,28 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            infra_org_readme: |-
+              ## Usage: Organizational-level Terraform: chamber-n
+
+              ```bash
+              cd infra/org-chamber
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
+            infra_acc_readme: |-
+              ## Usage: Account-specific Terraform: chamber-n
+
+              ```bash
+              cd infra/acc-chamber-n
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
           o:
             account: o
             email: defn-o@defn.us
@@ -1036,6 +1542,28 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            infra_org_readme: |-
+              ## Usage: Organizational-level Terraform: chamber-o
+
+              ```bash
+              cd infra/org-chamber
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
+            infra_acc_readme: |-
+              ## Usage: Account-specific Terraform: chamber-o
+
+              ```bash
+              cd infra/acc-chamber-o
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
           p:
             account: p
             email: defn-p@defn.us
@@ -1077,6 +1605,28 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            infra_org_readme: |-
+              ## Usage: Organizational-level Terraform: chamber-p
+
+              ```bash
+              cd infra/org-chamber
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
+            infra_acc_readme: |-
+              ## Usage: Account-specific Terraform: chamber-p
+
+              ```bash
+              cd infra/acc-chamber-p
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
           q:
             account: q
             email: aws-dev@defn.us
@@ -1118,6 +1668,28 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            infra_org_readme: |-
+              ## Usage: Organizational-level Terraform: chamber-q
+
+              ```bash
+              cd infra/org-chamber
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
+            infra_acc_readme: |-
+              ## Usage: Account-specific Terraform: chamber-q
+
+              ```bash
+              cd infra/acc-chamber-q
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
           r:
             account: r
             email: defn-r@imma.io
@@ -1159,6 +1731,28 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            infra_org_readme: |-
+              ## Usage: Organizational-level Terraform: chamber-r
+
+              ```bash
+              cd infra/org-chamber
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
+            infra_acc_readme: |-
+              ## Usage: Account-specific Terraform: chamber-r
+
+              ```bash
+              cd infra/acc-chamber-r
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
           s:
             account: s
             email: defn-s@imma.io
@@ -1200,6 +1794,28 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            infra_org_readme: |-
+              ## Usage: Organizational-level Terraform: chamber-s
+
+              ```bash
+              cd infra/org-chamber
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
+            infra_acc_readme: |-
+              ## Usage: Account-specific Terraform: chamber-s
+
+              ```bash
+              cd infra/acc-chamber-s
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
           "t":
             account: "t"
             email: defn-t@imma.io
@@ -1241,6 +1857,28 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            infra_org_readme: |-
+              ## Usage: Organizational-level Terraform: chamber-t
+
+              ```bash
+              cd infra/org-chamber
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
+            infra_acc_readme: |-
+              ## Usage: Account-specific Terraform: chamber-t
+
+              ```bash
+              cd infra/acc-chamber-t
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
           u:
             account: u
             email: aws-qa@defn.us
@@ -1282,6 +1920,28 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            infra_org_readme: |-
+              ## Usage: Organizational-level Terraform: chamber-u
+
+              ```bash
+              cd infra/org-chamber
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
+            infra_acc_readme: |-
+              ## Usage: Account-specific Terraform: chamber-u
+
+              ```bash
+              cd infra/acc-chamber-u
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
           v:
             account: v
             email: defn-v@imma.io
@@ -1323,6 +1983,28 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            infra_org_readme: |-
+              ## Usage: Organizational-level Terraform: chamber-v
+
+              ```bash
+              cd infra/org-chamber
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
+            infra_acc_readme: |-
+              ## Usage: Account-specific Terraform: chamber-v
+
+              ```bash
+              cd infra/acc-chamber-v
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
           w:
             account: w
             email: defn-w@imma.io
@@ -1364,6 +2046,28 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            infra_org_readme: |-
+              ## Usage: Organizational-level Terraform: chamber-w
+
+              ```bash
+              cd infra/org-chamber
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
+            infra_acc_readme: |-
+              ## Usage: Account-specific Terraform: chamber-w
+
+              ```bash
+              cd infra/acc-chamber-w
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
           x:
             account: x
             email: aws-stage@defn.us
@@ -1405,6 +2109,28 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            infra_org_readme: |-
+              ## Usage: Organizational-level Terraform: chamber-x
+
+              ```bash
+              cd infra/org-chamber
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
+            infra_acc_readme: |-
+              ## Usage: Account-specific Terraform: chamber-x
+
+              ```bash
+              cd infra/acc-chamber-x
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
           "y":
             account: "y"
             email: aws-prod@defn.us
@@ -1446,6 +2172,28 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            infra_org_readme: |-
+              ## Usage: Organizational-level Terraform: chamber-y
+
+              ```bash
+              cd infra/org-chamber
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
+            infra_acc_readme: |-
+              ## Usage: Account-specific Terraform: chamber-y
+
+              ```bash
+              cd infra/acc-chamber-y
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
           z:
             account: z
             email: aws-hub@defn.us
@@ -1487,6 +2235,28 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            infra_org_readme: |-
+              ## Usage: Organizational-level Terraform: chamber-z
+
+              ```bash
+              cd infra/org-chamber
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
+            infra_acc_readme: |-
+              ## Usage: Account-specific Terraform: chamber-z
+
+              ```bash
+              cd infra/acc-chamber-z
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
         sso_region: us-west-2
         sso_url: https://chamber-0.awsapps.com/start
         org: chamber
@@ -1533,6 +2303,28 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            infra_org_readme: |-
+              ## Usage: Organizational-level Terraform: circus-org
+
+              ```bash
+              cd infra/org-circus
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
+            infra_acc_readme: |-
+              ## Usage: Account-specific Terraform: circus-org
+
+              ```bash
+              cd infra/acc-circus-org
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
           lib:
             account: lib
             email: aws-circus-govcloud@defn.sh
@@ -1574,6 +2366,28 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            infra_org_readme: |-
+              ## Usage: Organizational-level Terraform: circus-lib
+
+              ```bash
+              cd infra/org-circus
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
+            infra_acc_readme: |-
+              ## Usage: Account-specific Terraform: circus-lib
+
+              ```bash
+              cd infra/acc-circus-lib
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
           log:
             account: log
             email: aws-circus-audit@defn.sh
@@ -1615,6 +2429,28 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            infra_org_readme: |-
+              ## Usage: Organizational-level Terraform: circus-log
+
+              ```bash
+              cd infra/org-circus
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
+            infra_acc_readme: |-
+              ## Usage: Account-specific Terraform: circus-log
+
+              ```bash
+              cd infra/acc-circus-log
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
           net:
             account: net
             email: aws-circus-transit@defn.sh
@@ -1656,6 +2492,28 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            infra_org_readme: |-
+              ## Usage: Organizational-level Terraform: circus-net
+
+              ```bash
+              cd infra/org-circus
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
+            infra_acc_readme: |-
+              ## Usage: Account-specific Terraform: circus-net
+
+              ```bash
+              cd infra/acc-circus-net
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
           ops:
             account: ops
             email: aws-circus-ops@defn.sh
@@ -1697,6 +2555,28 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            infra_org_readme: |-
+              ## Usage: Organizational-level Terraform: circus-ops
+
+              ```bash
+              cd infra/org-circus
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
+            infra_acc_readme: |-
+              ## Usage: Account-specific Terraform: circus-ops
+
+              ```bash
+              cd infra/acc-circus-ops
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
         sso_region: us-west-2
         sso_url: https://d-92670c4790.awsapps.com/start
         org: circus
@@ -1743,6 +2623,28 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            infra_org_readme: |-
+              ## Usage: Organizational-level Terraform: coil-org
+
+              ```bash
+              cd infra/org-coil
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
+            infra_acc_readme: |-
+              ## Usage: Account-specific Terraform: coil-org
+
+              ```bash
+              cd infra/acc-coil-org
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
           hub:
             account: hub
             email: aws-coil+hub@defn.us
@@ -1784,6 +2686,28 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            infra_org_readme: |-
+              ## Usage: Organizational-level Terraform: coil-hub
+
+              ```bash
+              cd infra/org-coil
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
+            infra_acc_readme: |-
+              ## Usage: Account-specific Terraform: coil-hub
+
+              ```bash
+              cd infra/acc-coil-hub
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
           lib:
             account: lib
             email: aws-coil+lib@defn.us
@@ -1825,6 +2749,28 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            infra_org_readme: |-
+              ## Usage: Organizational-level Terraform: coil-lib
+
+              ```bash
+              cd infra/org-coil
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
+            infra_acc_readme: |-
+              ## Usage: Account-specific Terraform: coil-lib
+
+              ```bash
+              cd infra/acc-coil-lib
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
           net:
             account: net
             email: aws-coil+net@defn.us
@@ -1866,6 +2812,28 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            infra_org_readme: |-
+              ## Usage: Organizational-level Terraform: coil-net
+
+              ```bash
+              cd infra/org-coil
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
+            infra_acc_readme: |-
+              ## Usage: Account-specific Terraform: coil-net
+
+              ```bash
+              cd infra/acc-coil-net
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
         sso_region: us-east-1
         sso_url: https://d-90674c3cfd.awsapps.com/start
         org: coil
@@ -1912,6 +2880,28 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            infra_org_readme: |-
+              ## Usage: Organizational-level Terraform: curl-org
+
+              ```bash
+              cd infra/org-curl
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
+            infra_acc_readme: |-
+              ## Usage: Account-specific Terraform: curl-org
+
+              ```bash
+              cd infra/acc-curl-org
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
           hub:
             account: hub
             email: aws-curl+hub@defn.us
@@ -1953,6 +2943,28 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            infra_org_readme: |-
+              ## Usage: Organizational-level Terraform: curl-hub
+
+              ```bash
+              cd infra/org-curl
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
+            infra_acc_readme: |-
+              ## Usage: Account-specific Terraform: curl-hub
+
+              ```bash
+              cd infra/acc-curl-hub
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
           lib:
             account: lib
             email: aws-curl+lib@defn.us
@@ -1994,6 +3006,28 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            infra_org_readme: |-
+              ## Usage: Organizational-level Terraform: curl-lib
+
+              ```bash
+              cd infra/org-curl
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
+            infra_acc_readme: |-
+              ## Usage: Account-specific Terraform: curl-lib
+
+              ```bash
+              cd infra/acc-curl-lib
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
           net:
             account: net
             email: aws-curl+net@defn.us
@@ -2035,6 +3069,28 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            infra_org_readme: |-
+              ## Usage: Organizational-level Terraform: curl-net
+
+              ```bash
+              cd infra/org-curl
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
+            infra_acc_readme: |-
+              ## Usage: Account-specific Terraform: curl-net
+
+              ```bash
+              cd infra/acc-curl-net
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
         sso_region: us-west-2
         sso_url: https://d-926760a859.awsapps.com/start
         org: curl
@@ -2074,6 +3130,28 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            infra_org_readme: |-
+              ## Usage: Organizational-level Terraform: defn-org
+
+              ```bash
+              cd infra/org-defn
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
+            infra_acc_readme: |-
+              ## Usage: Account-specific Terraform: defn-org
+
+              ```bash
+              cd infra/acc-defn-org
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
         sso_region: us-east-2
         sso_url: https://defn.awsapps.com/start
         org: defn
@@ -2120,6 +3198,28 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            infra_org_readme: |-
+              ## Usage: Organizational-level Terraform: fogg-org
+
+              ```bash
+              cd infra/org-fogg
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
+            infra_acc_readme: |-
+              ## Usage: Account-specific Terraform: fogg-org
+
+              ```bash
+              cd infra/acc-fogg-org
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
           ci:
             account: ci
             email: fogg-home@defn.sh
@@ -2161,6 +3261,28 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            infra_org_readme: |-
+              ## Usage: Organizational-level Terraform: fogg-ci
+
+              ```bash
+              cd infra/org-fogg
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
+            infra_acc_readme: |-
+              ## Usage: Account-specific Terraform: fogg-ci
+
+              ```bash
+              cd infra/acc-fogg-ci
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
           dev:
             account: dev
             email: fogg-sandbox@defn.sh
@@ -2202,6 +3324,28 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            infra_org_readme: |-
+              ## Usage: Organizational-level Terraform: fogg-dev
+
+              ```bash
+              cd infra/org-fogg
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
+            infra_acc_readme: |-
+              ## Usage: Account-specific Terraform: fogg-dev
+
+              ```bash
+              cd infra/acc-fogg-dev
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
           hub:
             account: hub
             email: fogg-hub@defn.sh
@@ -2243,6 +3387,28 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            infra_org_readme: |-
+              ## Usage: Organizational-level Terraform: fogg-hub
+
+              ```bash
+              cd infra/org-fogg
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
+            infra_acc_readme: |-
+              ## Usage: Account-specific Terraform: fogg-hub
+
+              ```bash
+              cd infra/acc-fogg-hub
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
           lib:
             account: lib
             email: fogg-data@defn.sh
@@ -2284,6 +3450,28 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            infra_org_readme: |-
+              ## Usage: Organizational-level Terraform: fogg-lib
+
+              ```bash
+              cd infra/org-fogg
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
+            infra_acc_readme: |-
+              ## Usage: Account-specific Terraform: fogg-lib
+
+              ```bash
+              cd infra/acc-fogg-lib
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
           log:
             account: log
             email: fogg-circus@defn.sh
@@ -2325,6 +3513,28 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            infra_org_readme: |-
+              ## Usage: Organizational-level Terraform: fogg-log
+
+              ```bash
+              cd infra/org-fogg
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
+            infra_acc_readme: |-
+              ## Usage: Account-specific Terraform: fogg-log
+
+              ```bash
+              cd infra/acc-fogg-log
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
           net:
             account: net
             email: fogg-asset@defn.sh
@@ -2366,6 +3576,28 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            infra_org_readme: |-
+              ## Usage: Organizational-level Terraform: fogg-net
+
+              ```bash
+              cd infra/org-fogg
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
+            infra_acc_readme: |-
+              ## Usage: Account-specific Terraform: fogg-net
+
+              ```bash
+              cd infra/acc-fogg-net
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
           ops:
             account: ops
             email: fogg-gateway@defn.sh
@@ -2407,6 +3639,28 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            infra_org_readme: |-
+              ## Usage: Organizational-level Terraform: fogg-ops
+
+              ```bash
+              cd infra/org-fogg
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
+            infra_acc_readme: |-
+              ## Usage: Account-specific Terraform: fogg-ops
+
+              ```bash
+              cd infra/acc-fogg-ops
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
           prod:
             account: prod
             email: fogg-postx@defn.sh
@@ -2448,6 +3702,28 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            infra_org_readme: |-
+              ## Usage: Organizational-level Terraform: fogg-prod
+
+              ```bash
+              cd infra/org-fogg
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
+            infra_acc_readme: |-
+              ## Usage: Account-specific Terraform: fogg-prod
+
+              ```bash
+              cd infra/acc-fogg-prod
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
           pub:
             account: pub
             email: fogg-security@defn.sh
@@ -2489,6 +3765,28 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            infra_org_readme: |-
+              ## Usage: Organizational-level Terraform: fogg-pub
+
+              ```bash
+              cd infra/org-fogg
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
+            infra_acc_readme: |-
+              ## Usage: Account-specific Terraform: fogg-pub
+
+              ```bash
+              cd infra/acc-fogg-pub
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
         sso_region: us-west-2
         sso_url: https://fogg-0.awsapps.com/start
         org: fogg
@@ -2535,6 +3833,28 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            infra_org_readme: |-
+              ## Usage: Organizational-level Terraform: gyre-org
+
+              ```bash
+              cd infra/org-gyre
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
+            infra_acc_readme: |-
+              ## Usage: Account-specific Terraform: gyre-org
+
+              ```bash
+              cd infra/acc-gyre-org
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
           ops:
             account: ops
             email: aws-gyre+ops@defn.us
@@ -2576,6 +3896,28 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            infra_org_readme: |-
+              ## Usage: Organizational-level Terraform: gyre-ops
+
+              ```bash
+              cd infra/org-gyre
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
+            infra_acc_readme: |-
+              ## Usage: Account-specific Terraform: gyre-ops
+
+              ```bash
+              cd infra/acc-gyre-ops
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
         sso_region: us-east-2
         sso_url: https://d-9a6716e54a.awsapps.com/start
         org: gyre
@@ -2622,6 +3964,28 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            infra_org_readme: |-
+              ## Usage: Organizational-level Terraform: helix-org
+
+              ```bash
+              cd infra/org-helix
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
+            infra_acc_readme: |-
+              ## Usage: Account-specific Terraform: helix-org
+
+              ```bash
+              cd infra/acc-helix-org
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
           ci:
             account: ci
             email: aws-helix+sec@defn.sh
@@ -2663,6 +4027,28 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            infra_org_readme: |-
+              ## Usage: Organizational-level Terraform: helix-ci
+
+              ```bash
+              cd infra/org-helix
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
+            infra_acc_readme: |-
+              ## Usage: Account-specific Terraform: helix-ci
+
+              ```bash
+              cd infra/acc-helix-ci
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
           dev:
             account: dev
             email: aws-helix+dev@defn.sh
@@ -2704,6 +4090,28 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            infra_org_readme: |-
+              ## Usage: Organizational-level Terraform: helix-dev
+
+              ```bash
+              cd infra/org-helix
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
+            infra_acc_readme: |-
+              ## Usage: Account-specific Terraform: helix-dev
+
+              ```bash
+              cd infra/acc-helix-dev
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
           hub:
             account: hub
             email: aws-helix+hub@defn.sh
@@ -2745,6 +4153,28 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            infra_org_readme: |-
+              ## Usage: Organizational-level Terraform: helix-hub
+
+              ```bash
+              cd infra/org-helix
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
+            infra_acc_readme: |-
+              ## Usage: Account-specific Terraform: helix-hub
+
+              ```bash
+              cd infra/acc-helix-hub
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
           lib:
             account: lib
             email: aws-helix+lib@defn.sh
@@ -2786,6 +4216,28 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            infra_org_readme: |-
+              ## Usage: Organizational-level Terraform: helix-lib
+
+              ```bash
+              cd infra/org-helix
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
+            infra_acc_readme: |-
+              ## Usage: Account-specific Terraform: helix-lib
+
+              ```bash
+              cd infra/acc-helix-lib
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
           log:
             account: log
             email: aws-helix+log@defn.sh
@@ -2827,6 +4279,28 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            infra_org_readme: |-
+              ## Usage: Organizational-level Terraform: helix-log
+
+              ```bash
+              cd infra/org-helix
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
+            infra_acc_readme: |-
+              ## Usage: Account-specific Terraform: helix-log
+
+              ```bash
+              cd infra/acc-helix-log
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
           net:
             account: net
             email: aws-helix+net@defn.sh
@@ -2868,6 +4342,28 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            infra_org_readme: |-
+              ## Usage: Organizational-level Terraform: helix-net
+
+              ```bash
+              cd infra/org-helix
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
+            infra_acc_readme: |-
+              ## Usage: Account-specific Terraform: helix-net
+
+              ```bash
+              cd infra/acc-helix-net
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
           ops:
             account: ops
             email: aws-helix+ops@defn.sh
@@ -2909,6 +4405,28 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            infra_org_readme: |-
+              ## Usage: Organizational-level Terraform: helix-ops
+
+              ```bash
+              cd infra/org-helix
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
+            infra_acc_readme: |-
+              ## Usage: Account-specific Terraform: helix-ops
+
+              ```bash
+              cd infra/acc-helix-ops
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
           prod:
             account: prod
             email: aws-helix+dmz@defn.sh
@@ -2950,6 +4468,28 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            infra_org_readme: |-
+              ## Usage: Organizational-level Terraform: helix-prod
+
+              ```bash
+              cd infra/org-helix
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
+            infra_acc_readme: |-
+              ## Usage: Account-specific Terraform: helix-prod
+
+              ```bash
+              cd infra/acc-helix-prod
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
           pub:
             account: pub
             email: aws-helix+pub@defn.sh
@@ -2991,6 +4531,28 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            infra_org_readme: |-
+              ## Usage: Organizational-level Terraform: helix-pub
+
+              ```bash
+              cd infra/org-helix
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
+            infra_acc_readme: |-
+              ## Usage: Account-specific Terraform: helix-pub
+
+              ```bash
+              cd infra/acc-helix-pub
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
         sso_region: us-east-2
         sso_url: https://d-9a6716ffd1.awsapps.com/start
         org: helix
@@ -3037,6 +4599,28 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            infra_org_readme: |-
+              ## Usage: Organizational-level Terraform: imma-org
+
+              ```bash
+              cd infra/org-imma
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
+            infra_acc_readme: |-
+              ## Usage: Account-specific Terraform: imma-org
+
+              ```bash
+              cd infra/acc-imma-org
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
           dev:
             account: dev
             email: imma-dev@imma.io
@@ -3078,6 +4662,28 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            infra_org_readme: |-
+              ## Usage: Organizational-level Terraform: imma-dev
+
+              ```bash
+              cd infra/org-imma
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
+            infra_acc_readme: |-
+              ## Usage: Account-specific Terraform: imma-dev
+
+              ```bash
+              cd infra/acc-imma-dev
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
           lib:
             account: lib
             email: imma-tolan@defn.us
@@ -3119,6 +4725,28 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            infra_org_readme: |-
+              ## Usage: Organizational-level Terraform: imma-lib
+
+              ```bash
+              cd infra/org-imma
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
+            infra_acc_readme: |-
+              ## Usage: Account-specific Terraform: imma-lib
+
+              ```bash
+              cd infra/acc-imma-lib
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
           log:
             account: log
             email: imma-dgwyn@defn.us
@@ -3160,6 +4788,28 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            infra_org_readme: |-
+              ## Usage: Organizational-level Terraform: imma-log
+
+              ```bash
+              cd infra/org-imma
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
+            infra_acc_readme: |-
+              ## Usage: Account-specific Terraform: imma-log
+
+              ```bash
+              cd infra/acc-imma-log
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
           net:
             account: net
             email: imma-defn@defn.us
@@ -3201,6 +4851,28 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            infra_org_readme: |-
+              ## Usage: Organizational-level Terraform: imma-net
+
+              ```bash
+              cd infra/org-imma
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
+            infra_acc_readme: |-
+              ## Usage: Account-specific Terraform: imma-net
+
+              ```bash
+              cd infra/acc-imma-net
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
           pub:
             account: pub
             email: imma-prod@imma.io
@@ -3242,6 +4914,28 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            infra_org_readme: |-
+              ## Usage: Organizational-level Terraform: imma-pub
+
+              ```bash
+              cd infra/org-imma
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
+            infra_acc_readme: |-
+              ## Usage: Account-specific Terraform: imma-pub
+
+              ```bash
+              cd infra/acc-imma-pub
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
         sso_region: us-west-2
         sso_url: https://imma-0.awsapps.com/start
         org: imma
@@ -3288,6 +4982,28 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            infra_org_readme: |-
+              ## Usage: Organizational-level Terraform: immanent-org
+
+              ```bash
+              cd infra/org-immanent
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
+            infra_acc_readme: |-
+              ## Usage: Account-specific Terraform: immanent-org
+
+              ```bash
+              cd infra/acc-immanent-org
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
           changer:
             account: changer
             email: immanent-changer@defn.us
@@ -3329,6 +5045,28 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            infra_org_readme: |-
+              ## Usage: Organizational-level Terraform: immanent-changer
+
+              ```bash
+              cd infra/org-immanent
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
+            infra_acc_readme: |-
+              ## Usage: Account-specific Terraform: immanent-changer
+
+              ```bash
+              cd infra/acc-immanent-changer
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
           chanter:
             account: chanter
             email: immanent-chanter@defn.us
@@ -3370,6 +5108,28 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            infra_org_readme: |-
+              ## Usage: Organizational-level Terraform: immanent-chanter
+
+              ```bash
+              cd infra/org-immanent
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
+            infra_acc_readme: |-
+              ## Usage: Account-specific Terraform: immanent-chanter
+
+              ```bash
+              cd infra/acc-immanent-chanter
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
           doorkeeper:
             account: doorkeeper
             email: immanent-doorkeeper@defn.us
@@ -3411,6 +5171,28 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            infra_org_readme: |-
+              ## Usage: Organizational-level Terraform: immanent-doorkeeper
+
+              ```bash
+              cd infra/org-immanent
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
+            infra_acc_readme: |-
+              ## Usage: Account-specific Terraform: immanent-doorkeeper
+
+              ```bash
+              cd infra/acc-immanent-doorkeeper
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
           ged:
             account: ged
             email: immanent-ged@defn.us
@@ -3452,6 +5234,28 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            infra_org_readme: |-
+              ## Usage: Organizational-level Terraform: immanent-ged
+
+              ```bash
+              cd infra/org-immanent
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
+            infra_acc_readme: |-
+              ## Usage: Account-specific Terraform: immanent-ged
+
+              ```bash
+              cd infra/acc-immanent-ged
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
           hand:
             account: hand
             email: immanent-hand@defn.us
@@ -3493,6 +5297,28 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            infra_org_readme: |-
+              ## Usage: Organizational-level Terraform: immanent-hand
+
+              ```bash
+              cd infra/org-immanent
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
+            infra_acc_readme: |-
+              ## Usage: Account-specific Terraform: immanent-hand
+
+              ```bash
+              cd infra/acc-immanent-hand
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
           herbal:
             account: herbal
             email: immanent-herbal@defn.us
@@ -3534,6 +5360,28 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            infra_org_readme: |-
+              ## Usage: Organizational-level Terraform: immanent-herbal
+
+              ```bash
+              cd infra/org-immanent
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
+            infra_acc_readme: |-
+              ## Usage: Account-specific Terraform: immanent-herbal
+
+              ```bash
+              cd infra/acc-immanent-herbal
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
           namer:
             account: namer
             email: immanent-namer@defn.us
@@ -3575,6 +5423,28 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            infra_org_readme: |-
+              ## Usage: Organizational-level Terraform: immanent-namer
+
+              ```bash
+              cd infra/org-immanent
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
+            infra_acc_readme: |-
+              ## Usage: Account-specific Terraform: immanent-namer
+
+              ```bash
+              cd infra/acc-immanent-namer
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
           patterner:
             account: patterner
             email: immanent-patterner@defn.us
@@ -3616,6 +5486,28 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            infra_org_readme: |-
+              ## Usage: Organizational-level Terraform: immanent-patterner
+
+              ```bash
+              cd infra/org-immanent
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
+            infra_acc_readme: |-
+              ## Usage: Account-specific Terraform: immanent-patterner
+
+              ```bash
+              cd infra/acc-immanent-patterner
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
           roke:
             account: roke
             email: immanent-roke@defn.us
@@ -3657,6 +5549,28 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            infra_org_readme: |-
+              ## Usage: Organizational-level Terraform: immanent-roke
+
+              ```bash
+              cd infra/org-immanent
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
+            infra_acc_readme: |-
+              ## Usage: Account-specific Terraform: immanent-roke
+
+              ```bash
+              cd infra/acc-immanent-roke
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
           summoner:
             account: summoner
             email: immanent-summoner@defn.us
@@ -3698,6 +5612,28 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            infra_org_readme: |-
+              ## Usage: Organizational-level Terraform: immanent-summoner
+
+              ```bash
+              cd infra/org-immanent
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
+            infra_acc_readme: |-
+              ## Usage: Account-specific Terraform: immanent-summoner
+
+              ```bash
+              cd infra/acc-immanent-summoner
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
           windkey:
             account: windkey
             email: immanent-windkey@defn.us
@@ -3739,6 +5675,28 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            infra_org_readme: |-
+              ## Usage: Organizational-level Terraform: immanent-windkey
+
+              ```bash
+              cd infra/org-immanent
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
+            infra_acc_readme: |-
+              ## Usage: Account-specific Terraform: immanent-windkey
+
+              ```bash
+              cd infra/acc-immanent-windkey
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
         sso_region: us-west-2
         sso_url: https://immanent-0.awsapps.com/start
         org: immanent
@@ -3785,6 +5743,28 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            infra_org_readme: |-
+              ## Usage: Organizational-level Terraform: jianghu-org
+
+              ```bash
+              cd infra/org-jianghu
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
+            infra_acc_readme: |-
+              ## Usage: Account-specific Terraform: jianghu-org
+
+              ```bash
+              cd infra/acc-jianghu-org
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
           log:
             account: log
             email: klamath@defn.us
@@ -3826,6 +5806,28 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            infra_org_readme: |-
+              ## Usage: Organizational-level Terraform: jianghu-log
+
+              ```bash
+              cd infra/org-jianghu
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
+            infra_acc_readme: |-
+              ## Usage: Account-specific Terraform: jianghu-log
+
+              ```bash
+              cd infra/acc-jianghu-log
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
           net:
             account: net
             email: tahoe@defn.us
@@ -3867,6 +5869,28 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            infra_org_readme: |-
+              ## Usage: Organizational-level Terraform: jianghu-net
+
+              ```bash
+              cd infra/org-jianghu
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
+            infra_acc_readme: |-
+              ## Usage: Account-specific Terraform: jianghu-net
+
+              ```bash
+              cd infra/acc-jianghu-net
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
         sso_region: us-west-2
         sso_url: https://jianghu-0.awsapps.com/start
         org: jianghu
@@ -3913,6 +5937,28 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            infra_org_readme: |-
+              ## Usage: Organizational-level Terraform: spiral-org
+
+              ```bash
+              cd infra/org-spiral
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
+            infra_acc_readme: |-
+              ## Usage: Account-specific Terraform: spiral-org
+
+              ```bash
+              cd infra/acc-spiral-org
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
           ci:
             account: ci
             email: aws-spiral+pub@defn.us
@@ -3954,6 +6000,28 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            infra_org_readme: |-
+              ## Usage: Organizational-level Terraform: spiral-ci
+
+              ```bash
+              cd infra/org-spiral
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
+            infra_acc_readme: |-
+              ## Usage: Account-specific Terraform: spiral-ci
+
+              ```bash
+              cd infra/acc-spiral-ci
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
           dev:
             account: dev
             email: aws-spiral+dev@defn.us
@@ -3995,6 +6063,28 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            infra_org_readme: |-
+              ## Usage: Organizational-level Terraform: spiral-dev
+
+              ```bash
+              cd infra/org-spiral
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
+            infra_acc_readme: |-
+              ## Usage: Account-specific Terraform: spiral-dev
+
+              ```bash
+              cd infra/acc-spiral-dev
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
           hub:
             account: hub
             email: aws-spiral+hub@defn.us
@@ -4036,6 +6126,28 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            infra_org_readme: |-
+              ## Usage: Organizational-level Terraform: spiral-hub
+
+              ```bash
+              cd infra/org-spiral
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
+            infra_acc_readme: |-
+              ## Usage: Account-specific Terraform: spiral-hub
+
+              ```bash
+              cd infra/acc-spiral-hub
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
           lib:
             account: lib
             email: aws-spiral+lib@defn.us
@@ -4077,6 +6189,28 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            infra_org_readme: |-
+              ## Usage: Organizational-level Terraform: spiral-lib
+
+              ```bash
+              cd infra/org-spiral
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
+            infra_acc_readme: |-
+              ## Usage: Account-specific Terraform: spiral-lib
+
+              ```bash
+              cd infra/acc-spiral-lib
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
           log:
             account: log
             email: aws-spiral+log@defn.us
@@ -4118,6 +6252,28 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            infra_org_readme: |-
+              ## Usage: Organizational-level Terraform: spiral-log
+
+              ```bash
+              cd infra/org-spiral
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
+            infra_acc_readme: |-
+              ## Usage: Account-specific Terraform: spiral-log
+
+              ```bash
+              cd infra/acc-spiral-log
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
           net:
             account: net
             email: aws-spiral+net@defn.us
@@ -4159,6 +6315,28 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            infra_org_readme: |-
+              ## Usage: Organizational-level Terraform: spiral-net
+
+              ```bash
+              cd infra/org-spiral
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
+            infra_acc_readme: |-
+              ## Usage: Account-specific Terraform: spiral-net
+
+              ```bash
+              cd infra/acc-spiral-net
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
           ops:
             account: ops
             email: aws-spiral+ops@defn.us
@@ -4200,6 +6378,28 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            infra_org_readme: |-
+              ## Usage: Organizational-level Terraform: spiral-ops
+
+              ```bash
+              cd infra/org-spiral
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
+            infra_acc_readme: |-
+              ## Usage: Account-specific Terraform: spiral-ops
+
+              ```bash
+              cd infra/acc-spiral-ops
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
           prod:
             account: prod
             email: aws-spiral+sec@defn.us
@@ -4241,6 +6441,28 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            infra_org_readme: |-
+              ## Usage: Organizational-level Terraform: spiral-prod
+
+              ```bash
+              cd infra/org-spiral
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
+            infra_acc_readme: |-
+              ## Usage: Account-specific Terraform: spiral-prod
+
+              ```bash
+              cd infra/acc-spiral-prod
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
           pub:
             account: pub
             email: aws-spiral+dmz@defn.us
@@ -4282,6 +6504,28 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            infra_org_readme: |-
+              ## Usage: Organizational-level Terraform: spiral-pub
+
+              ```bash
+              cd infra/org-spiral
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
+            infra_acc_readme: |-
+              ## Usage: Account-specific Terraform: spiral-pub
+
+              ```bash
+              cd infra/acc-spiral-pub
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
         sso_region: us-west-2
         sso_url: https://d-926760b322.awsapps.com/start
         org: spiral
@@ -4328,6 +6572,28 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            infra_org_readme: |-
+              ## Usage: Organizational-level Terraform: vault-org
+
+              ```bash
+              cd infra/org-vault
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
+            infra_acc_readme: |-
+              ## Usage: Account-specific Terraform: vault-org
+
+              ```bash
+              cd infra/acc-vault-org
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
           ci:
             account: ci
             email: aws-vault-vault0@defn.sh
@@ -4369,6 +6635,28 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            infra_org_readme: |-
+              ## Usage: Organizational-level Terraform: vault-ci
+
+              ```bash
+              cd infra/org-vault
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
+            infra_acc_readme: |-
+              ## Usage: Account-specific Terraform: vault-ci
+
+              ```bash
+              cd infra/acc-vault-ci
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
           dev:
             account: dev
             email: aws-vault-dev@defn.sh
@@ -4410,6 +6698,28 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            infra_org_readme: |-
+              ## Usage: Organizational-level Terraform: vault-dev
+
+              ```bash
+              cd infra/org-vault
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
+            infra_acc_readme: |-
+              ## Usage: Account-specific Terraform: vault-dev
+
+              ```bash
+              cd infra/acc-vault-dev
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
           hub:
             account: hub
             email: aws-vault-hub@defn.sh
@@ -4451,6 +6761,28 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            infra_org_readme: |-
+              ## Usage: Organizational-level Terraform: vault-hub
+
+              ```bash
+              cd infra/org-vault
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
+            infra_acc_readme: |-
+              ## Usage: Account-specific Terraform: vault-hub
+
+              ```bash
+              cd infra/acc-vault-hub
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
           lib:
             account: lib
             email: aws-vault-library@defn.sh
@@ -4492,6 +6824,28 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            infra_org_readme: |-
+              ## Usage: Organizational-level Terraform: vault-lib
+
+              ```bash
+              cd infra/org-vault
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
+            infra_acc_readme: |-
+              ## Usage: Account-specific Terraform: vault-lib
+
+              ```bash
+              cd infra/acc-vault-lib
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
           log:
             account: log
             email: aws-vault-audit@defn.sh
@@ -4533,6 +6887,28 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            infra_org_readme: |-
+              ## Usage: Organizational-level Terraform: vault-log
+
+              ```bash
+              cd infra/org-vault
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
+            infra_acc_readme: |-
+              ## Usage: Account-specific Terraform: vault-log
+
+              ```bash
+              cd infra/acc-vault-log
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
           net:
             account: net
             email: aws-vault-transit@defn.sh
@@ -4574,6 +6950,28 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            infra_org_readme: |-
+              ## Usage: Organizational-level Terraform: vault-net
+
+              ```bash
+              cd infra/org-vault
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
+            infra_acc_readme: |-
+              ## Usage: Account-specific Terraform: vault-net
+
+              ```bash
+              cd infra/acc-vault-net
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
           ops:
             account: ops
             email: aws-vault-ops@defn.sh
@@ -4615,6 +7013,28 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            infra_org_readme: |-
+              ## Usage: Organizational-level Terraform: vault-ops
+
+              ```bash
+              cd infra/org-vault
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
+            infra_acc_readme: |-
+              ## Usage: Account-specific Terraform: vault-ops
+
+              ```bash
+              cd infra/acc-vault-ops
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
           prod:
             account: prod
             email: aws-vault-vault1@defn.sh
@@ -4656,6 +7076,28 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            infra_org_readme: |-
+              ## Usage: Organizational-level Terraform: vault-prod
+
+              ```bash
+              cd infra/org-vault
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
+            infra_acc_readme: |-
+              ## Usage: Account-specific Terraform: vault-prod
+
+              ```bash
+              cd infra/acc-vault-prod
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
           pub:
             account: pub
             email: aws-vault-pub@defn.sh
@@ -4697,6 +7139,28 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            infra_org_readme: |-
+              ## Usage: Organizational-level Terraform: vault-pub
+
+              ```bash
+              cd infra/org-vault
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
+            infra_acc_readme: |-
+              ## Usage: Account-specific Terraform: vault-pub
+
+              ```bash
+              cd infra/acc-vault-pub
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
         sso_region: us-east-2
         sso_url: https://d-9a672a0e52.awsapps.com/start
         org: vault
@@ -4743,6 +7207,28 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            infra_org_readme: |-
+              ## Usage: Organizational-level Terraform: whoa-org
+
+              ```bash
+              cd infra/org-whoa
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
+            infra_acc_readme: |-
+              ## Usage: Account-specific Terraform: whoa-org
+
+              ```bash
+              cd infra/acc-whoa-org
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
           dev:
             account: dev
             email: whoa-dev@imma.io
@@ -4784,6 +7270,28 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            infra_org_readme: |-
+              ## Usage: Organizational-level Terraform: whoa-dev
+
+              ```bash
+              cd infra/org-whoa
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
+            infra_acc_readme: |-
+              ## Usage: Account-specific Terraform: whoa-dev
+
+              ```bash
+              cd infra/acc-whoa-dev
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
           hub:
             account: hub
             email: whoa-hub@imma.io
@@ -4825,6 +7333,28 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            infra_org_readme: |-
+              ## Usage: Organizational-level Terraform: whoa-hub
+
+              ```bash
+              cd infra/org-whoa
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
+            infra_acc_readme: |-
+              ## Usage: Account-specific Terraform: whoa-hub
+
+              ```bash
+              cd infra/acc-whoa-hub
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
           net:
             account: net
             email: whoa-secrets@imma.io
@@ -4866,6 +7396,28 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            infra_org_readme: |-
+              ## Usage: Organizational-level Terraform: whoa-net
+
+              ```bash
+              cd infra/org-whoa
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
+            infra_acc_readme: |-
+              ## Usage: Account-specific Terraform: whoa-net
+
+              ```bash
+              cd infra/acc-whoa-net
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
           pub:
             account: pub
             email: whoa-prod@imma.io
@@ -4907,6 +7459,28 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            infra_org_readme: |-
+              ## Usage: Organizational-level Terraform: whoa-pub
+
+              ```bash
+              cd infra/org-whoa
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
+            infra_acc_readme: |-
+              ## Usage: Account-specific Terraform: whoa-pub
+
+              ```bash
+              cd infra/acc-whoa-pub
+              mise trust
+              aws sso login
+              alogin
+              terraform init
+              terraform plan
+              ```
         sso_region: us-west-2
         sso_url: https://whoa-0.awsapps.com/start
         org: whoa

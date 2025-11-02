@@ -1,8 +1,4 @@
-# vault-lib Account Infrastructure
-
-Account-specific Terraform configuration for the vault organization's lib account.
-
-## Usage
+## Usage: Account-specific Terraform: vault-lib
 
 ```bash
 cd infra/acc-vault-lib
@@ -12,13 +8,3 @@ alogin
 terraform init
 terraform plan
 ```
-
-## Configuration
-
-- **Backend**: S3 (`stacks/acc-vault-lib/terraform.tfstate`)
-- **Profile**: `vault-lib`
-- **Provider**: AWS 5.99.1
-
-## Resources
-
-This directory manages account-specific resources and infrastructure.

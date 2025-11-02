@@ -59,7 +59,7 @@ function main {
 		export org
 
 		# Generate org README once per organization
-		if [[ -z "${org_readme_generated[$org]}" ]]; then
+		if [[ -z ${org_readme_generated[$org]} ]]; then
 			generate_org_readme "$org"
 			org_readme_generated[$org]=1
 		fi

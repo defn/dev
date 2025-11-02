@@ -1,8 +1,4 @@
-# chamber-n Account Infrastructure
-
-Account-specific Terraform configuration for the chamber organization's n account.
-
-## Usage
+## Usage: Account-specific Terraform: chamber-n
 
 ```bash
 cd infra/acc-chamber-n
@@ -12,13 +8,3 @@ alogin
 terraform init
 terraform plan
 ```
-
-## Configuration
-
-- **Backend**: S3 (`stacks/acc-chamber-n/terraform.tfstate`)
-- **Profile**: `chamber-n`
-- **Provider**: AWS 5.99.1
-
-## Resources
-
-This directory manages account-specific resources and infrastructure.

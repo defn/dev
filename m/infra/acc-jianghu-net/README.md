@@ -1,8 +1,4 @@
-# jianghu-net Account Infrastructure
-
-Account-specific Terraform configuration for the jianghu organization's net account.
-
-## Usage
+## Usage: Account-specific Terraform: jianghu-net
 
 ```bash
 cd infra/acc-jianghu-net
@@ -12,13 +8,3 @@ alogin
 terraform init
 terraform plan
 ```
-
-## Configuration
-
-- **Backend**: S3 (`stacks/acc-jianghu-net/terraform.tfstate`)
-- **Profile**: `jianghu-net`
-- **Provider**: AWS 5.99.1
-
-## Resources
-
-This directory manages account-specific resources and infrastructure.

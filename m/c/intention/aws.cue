@@ -66,11 +66,7 @@ sso_region=\(lookup["defn"].sso_region)
 
 		// README for infra/org-* (organization level)
 		infra_org_readme: """
-# \(strings.ToTitle(strings.Split(org, "")[0])+strings.Join(strings.Split(org, "")[1:], "")) Organization Infrastructure
-
-Organization-level Terraform configuration for the \(org) AWS organization.
-
-## Usage
+## Usage: Organizational-level Terraform: \(org)-\(account)
 
 ```bash
 cd infra/org-\(org)
@@ -80,30 +76,11 @@ alogin
 terraform init
 terraform plan
 ```
-
-## Configuration
-
-- **Backend**: S3 (`stacks/org-\(org)/terraform.tfstate`)
-- **Profile**: `\(org)-\(account)`
-- **Provider**: AWS 5.99.1
-
-## Resources
-
-This directory manages organization-level resources:
-
-- AWS Organizations structure
-- AWS SSO configuration
-- Cross-account IAM roles
-- Organization-wide policies
 """
 
 		// README for infra/acc-* (account level)
 		infra_acc_readme: """
-# \(org)-\(account) Account Infrastructure
-
-Account-specific Terraform configuration for the \(org) organization's \(account) account.
-
-## Usage
+## Usage: Account-specific Terraform: \(org)-\(account)
 
 ```bash
 cd infra/acc-\(org)-\(account)
@@ -113,16 +90,6 @@ alogin
 terraform init
 terraform plan
 ```
-
-## Configuration
-
-- **Backend**: S3 (`stacks/acc-\(org)-\(account)/terraform.tfstate`)
-- **Profile**: `\(org)-\(account)`
-- **Provider**: AWS 5.99.1
-
-## Resources
-
-This directory manages account-specific resources and infrastructure.
 """
 	})
 })

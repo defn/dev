@@ -1,8 +1,4 @@
-# Curl Organization Infrastructure
-
-Organization-level Terraform configuration for the curl AWS organization.
-
-## Usage
+## Usage: Organizational-level Terraform: curl-org
 
 ```bash
 cd infra/org-curl
@@ -12,18 +8,3 @@ alogin
 terraform init
 terraform plan
 ```
-
-## Configuration
-
-- **Backend**: S3 (`stacks/org-curl/terraform.tfstate`)
-- **Profile**: `curl-org`
-- **Provider**: AWS 5.99.1
-
-## Resources
-
-This directory manages organization-level resources:
-
-- AWS Organizations structure
-- AWS SSO configuration
-- Cross-account IAM roles
-- Organization-wide policies

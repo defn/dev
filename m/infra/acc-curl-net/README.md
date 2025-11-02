@@ -1,8 +1,4 @@
-# curl-net Account Infrastructure
-
-Account-specific Terraform configuration for the curl organization's net account.
-
-## Usage
+## Usage: Account-specific Terraform: curl-net
 
 ```bash
 cd infra/acc-curl-net
@@ -12,13 +8,3 @@ alogin
 terraform init
 terraform plan
 ```
-
-## Configuration
-
-- **Backend**: S3 (`stacks/acc-curl-net/terraform.tfstate`)
-- **Profile**: `curl-net`
-- **Provider**: AWS 5.99.1
-
-## Resources
-
-This directory manages account-specific resources and infrastructure.

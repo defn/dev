@@ -1,8 +1,4 @@
-# imma-log Account Infrastructure
-
-Account-specific Terraform configuration for the imma organization's log account.
-
-## Usage
+## Usage: Account-specific Terraform: imma-log
 
 ```bash
 cd infra/acc-imma-log
@@ -12,13 +8,3 @@ alogin
 terraform init
 terraform plan
 ```
-
-## Configuration
-
-- **Backend**: S3 (`stacks/acc-imma-log/terraform.tfstate`)
-- **Profile**: `imma-log`
-- **Provider**: AWS 5.99.1
-
-## Resources
-
-This directory manages account-specific resources and infrastructure.

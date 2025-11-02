@@ -1,8 +1,4 @@
-# helix-pub Account Infrastructure
-
-Account-specific Terraform configuration for the helix organization's pub account.
-
-## Usage
+## Usage: Account-specific Terraform: helix-pub
 
 ```bash
 cd infra/acc-helix-pub
@@ -12,13 +8,3 @@ alogin
 terraform init
 terraform plan
 ```
-
-## Configuration
-
-- **Backend**: S3 (`stacks/acc-helix-pub/terraform.tfstate`)
-- **Profile**: `helix-pub`
-- **Provider**: AWS 5.99.1
-
-## Resources
-
-This directory manages account-specific resources and infrastructure.

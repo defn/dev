@@ -1,8 +1,4 @@
-# circus-ops Account Infrastructure
-
-Account-specific Terraform configuration for the circus organization's ops account.
-
-## Usage
+## Usage: Account-specific Terraform: circus-ops
 
 ```bash
 cd infra/acc-circus-ops
@@ -12,13 +8,3 @@ alogin
 terraform init
 terraform plan
 ```
-
-## Configuration
-
-- **Backend**: S3 (`stacks/acc-circus-ops/terraform.tfstate`)
-- **Profile**: `circus-ops`
-- **Provider**: AWS 5.99.1
-
-## Resources
-
-This directory manages account-specific resources and infrastructure.

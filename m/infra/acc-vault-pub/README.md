@@ -1,8 +1,4 @@
-# vault-pub Account Infrastructure
-
-Account-specific Terraform configuration for the vault organization's pub account.
-
-## Usage
+## Usage: Account-specific Terraform: vault-pub
 
 ```bash
 cd infra/acc-vault-pub
@@ -12,13 +8,3 @@ alogin
 terraform init
 terraform plan
 ```
-
-## Configuration
-
-- **Backend**: S3 (`stacks/acc-vault-pub/terraform.tfstate`)
-- **Profile**: `vault-pub`
-- **Provider**: AWS 5.99.1
-
-## Resources
-
-This directory manages account-specific resources and infrastructure.

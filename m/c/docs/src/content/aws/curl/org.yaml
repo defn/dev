@@ -39,3 +39,25 @@ aws_config_bootstrap: |-
   sso_role_name=Administrator
   sso_start_url=https://defn.awsapps.com/start
   sso_region=us-east-2
+infra_org_readme: |-
+  ## Usage: Organizational-level Terraform: curl-org
+
+  ```bash
+  cd infra/org-curl
+  mise trust
+  aws sso login
+  alogin
+  terraform init
+  terraform plan
+  ```
+infra_acc_readme: |-
+  ## Usage: Account-specific Terraform: curl-org
+
+  ```bash
+  cd infra/acc-curl-org
+  mise trust
+  aws sso login
+  alogin
+  terraform init
+  terraform plan
+  ```
