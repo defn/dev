@@ -6,16 +6,27 @@ n=$(($(nproc) / 2))
 ((n < 8)) && n=8
 
 function fork {
+	local cmd="$1"
+	shift
+
 	local r="$1"
 	shift
 
-	local cmd="aws --region $r ec2 describe-instances"
 
-	${cmd} | jq --arg region "$r" \
-		'.Reservations[].Instances | map({(.InstanceId): .}) | add | {($region): {instance: .}}' \
-		>"${tmp}/$r.json" &
+	case "${cmd}" in
+		ec2)
+			run="aws --region $r ec2 describe-instances"
+			${run} | jq --arg region "$r" \
+				'.Reservations[].Instances | map({(.InstanceId): .}) | add | {($region): {instance: .}}' \
+				>"${tmp}/$r.json" &
 
-	throttle ${cmd}
+			throttle "${run}"
+			;;
+		*)
+			echo "ERROR: unknown command: ${run} ($r)"
+			return 1
+			;;
+	esac
 }
 
 function throttle {
@@ -38,7 +49,7 @@ function main {
 	trap 'rm -rf "${tmp}"' EXIT
 
 	for r in "$@"; do
-		fork "$r"
+		fork ec2 "$r"
 	done
 	wait
 
