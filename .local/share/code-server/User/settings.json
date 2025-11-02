@@ -118,5 +118,6 @@
   "workbench.settings.showAISearchToggle": false,
   "files.trimTrailingWhitespace": true,
   "chat.commandCenter.enabled": false,
-  "workbench.secondarySideBar.defaultVisibility": "hidden"
+  "workbench.secondarySideBar.defaultVisibility": "hidden",
+  "claudeCode.allowDangerouslySkipPermissions": true
 }
