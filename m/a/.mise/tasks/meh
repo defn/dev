@@ -6,17 +6,15 @@ n=$(($(nproc) / 2))
 ((n < 8)) && n=8
 
 function fork {
-	local cmd="$1"
+	local type="$1"
 	shift
 
 	local r="$1"
 	shift
 
 
-	local type
-	case "${cmd}" in
-		ec2)
-			type="instance"
+	case "${type}" in
+		ec2-instance)
 			run="aws --region $r ec2 describe-instances"
 			${run} | jq --arg region "$r" --arg type "$type" \
 				'.Reservations[].Instances | map({(.InstanceId): .}) | add | {($region): {($type): .}}' \
@@ -24,7 +22,7 @@ function fork {
 
 			throttle "${run}"
 			;;
-		ebs)
+		ec2-volume)
 			type="volume"
 			run="aws --region $r ec2 describe-volumes"
 			${run} | jq --arg region "$r" --arg type "$type" \
@@ -60,8 +58,8 @@ function main {
 	trap 'rm -rf "${tmp}"' EXIT
 
 	for r in "$@"; do
-		fork ec2 "$r"
-		fork ebs "$r"
+		fork ec2-instance "$r"
+		fork ec2-volume "$r"
 	done
 	wait
 
