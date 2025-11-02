@@ -3,8 +3,8 @@
 ```bash
 cd infra/acc-immanent-chanter
 mise trust
+aws sso login --profile defn-org
 aws sso login
-alogin
 terraform init
 terraform plan
 ```

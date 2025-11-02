@@ -110,8 +110,8 @@ config:
               ```bash
               cd infra/acc-chamber-org
               mise trust
+              aws sso login --profile defn-org
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
@@ -173,8 +173,8 @@ config:
               ```bash
               cd infra/acc-chamber-1
               mise trust
+              aws sso login --profile defn-org
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
@@ -236,8 +236,8 @@ config:
               ```bash
               cd infra/acc-chamber-2
               mise trust
+              aws sso login --profile defn-org
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
@@ -299,8 +299,8 @@ config:
               ```bash
               cd infra/acc-chamber-3
               mise trust
+              aws sso login --profile defn-org
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
@@ -362,8 +362,8 @@ config:
               ```bash
               cd infra/acc-chamber-4
               mise trust
+              aws sso login --profile defn-org
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
@@ -425,8 +425,8 @@ config:
               ```bash
               cd infra/acc-chamber-5
               mise trust
+              aws sso login --profile defn-org
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
@@ -488,8 +488,8 @@ config:
               ```bash
               cd infra/acc-chamber-6
               mise trust
+              aws sso login --profile defn-org
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
@@ -551,8 +551,8 @@ config:
               ```bash
               cd infra/acc-chamber-7
               mise trust
+              aws sso login --profile defn-org
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
@@ -614,8 +614,8 @@ config:
               ```bash
               cd infra/acc-chamber-8
               mise trust
+              aws sso login --profile defn-org
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
@@ -677,8 +677,8 @@ config:
               ```bash
               cd infra/acc-chamber-9
               mise trust
+              aws sso login --profile defn-org
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
@@ -740,8 +740,8 @@ config:
               ```bash
               cd infra/acc-chamber-a
               mise trust
+              aws sso login --profile defn-org
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
@@ -803,8 +803,8 @@ config:
               ```bash
               cd infra/acc-chamber-b
               mise trust
+              aws sso login --profile defn-org
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
@@ -866,8 +866,8 @@ config:
               ```bash
               cd infra/acc-chamber-c
               mise trust
+              aws sso login --profile defn-org
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
@@ -929,8 +929,8 @@ config:
               ```bash
               cd infra/acc-chamber-d
               mise trust
+              aws sso login --profile defn-org
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
@@ -992,8 +992,8 @@ config:
               ```bash
               cd infra/acc-chamber-e
               mise trust
+              aws sso login --profile defn-org
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
@@ -1055,8 +1055,8 @@ config:
               ```bash
               cd infra/acc-chamber-f
               mise trust
+              aws sso login --profile defn-org
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
@@ -1118,8 +1118,8 @@ config:
               ```bash
               cd infra/acc-chamber-g
               mise trust
+              aws sso login --profile defn-org
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
@@ -1181,8 +1181,8 @@ config:
               ```bash
               cd infra/acc-chamber-h
               mise trust
+              aws sso login --profile defn-org
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
@@ -1244,8 +1244,8 @@ config:
               ```bash
               cd infra/acc-chamber-i
               mise trust
+              aws sso login --profile defn-org
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
@@ -1307,8 +1307,8 @@ config:
               ```bash
               cd infra/acc-chamber-j
               mise trust
+              aws sso login --profile defn-org
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
@@ -1370,8 +1370,8 @@ config:
               ```bash
               cd infra/acc-chamber-l
               mise trust
+              aws sso login --profile defn-org
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
@@ -1433,8 +1433,8 @@ config:
               ```bash
               cd infra/acc-chamber-m
               mise trust
+              aws sso login --profile defn-org
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
@@ -1496,8 +1496,8 @@ config:
               ```bash
               cd infra/acc-chamber-n
               mise trust
+              aws sso login --profile defn-org
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
@@ -1559,8 +1559,8 @@ config:
               ```bash
               cd infra/acc-chamber-o
               mise trust
+              aws sso login --profile defn-org
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
@@ -1622,8 +1622,8 @@ config:
               ```bash
               cd infra/acc-chamber-p
               mise trust
+              aws sso login --profile defn-org
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
@@ -1685,8 +1685,8 @@ config:
               ```bash
               cd infra/acc-chamber-q
               mise trust
+              aws sso login --profile defn-org
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
@@ -1748,8 +1748,8 @@ config:
               ```bash
               cd infra/acc-chamber-r
               mise trust
+              aws sso login --profile defn-org
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
@@ -1811,8 +1811,8 @@ config:
               ```bash
               cd infra/acc-chamber-s
               mise trust
+              aws sso login --profile defn-org
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
@@ -1874,8 +1874,8 @@ config:
               ```bash
               cd infra/acc-chamber-t
               mise trust
+              aws sso login --profile defn-org
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
@@ -1937,8 +1937,8 @@ config:
               ```bash
               cd infra/acc-chamber-u
               mise trust
+              aws sso login --profile defn-org
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
@@ -2000,8 +2000,8 @@ config:
               ```bash
               cd infra/acc-chamber-v
               mise trust
+              aws sso login --profile defn-org
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
@@ -2063,8 +2063,8 @@ config:
               ```bash
               cd infra/acc-chamber-w
               mise trust
+              aws sso login --profile defn-org
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
@@ -2126,8 +2126,8 @@ config:
               ```bash
               cd infra/acc-chamber-x
               mise trust
+              aws sso login --profile defn-org
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
@@ -2189,8 +2189,8 @@ config:
               ```bash
               cd infra/acc-chamber-y
               mise trust
+              aws sso login --profile defn-org
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
@@ -2252,8 +2252,8 @@ config:
               ```bash
               cd infra/acc-chamber-z
               mise trust
+              aws sso login --profile defn-org
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
@@ -2320,8 +2320,8 @@ config:
               ```bash
               cd infra/acc-circus-org
               mise trust
+              aws sso login --profile defn-org
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
@@ -2383,8 +2383,8 @@ config:
               ```bash
               cd infra/acc-circus-lib
               mise trust
+              aws sso login --profile defn-org
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
@@ -2446,8 +2446,8 @@ config:
               ```bash
               cd infra/acc-circus-log
               mise trust
+              aws sso login --profile defn-org
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
@@ -2509,8 +2509,8 @@ config:
               ```bash
               cd infra/acc-circus-net
               mise trust
+              aws sso login --profile defn-org
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
@@ -2572,8 +2572,8 @@ config:
               ```bash
               cd infra/acc-circus-ops
               mise trust
+              aws sso login --profile defn-org
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
@@ -2640,8 +2640,8 @@ config:
               ```bash
               cd infra/acc-coil-org
               mise trust
+              aws sso login --profile defn-org
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
@@ -2703,8 +2703,8 @@ config:
               ```bash
               cd infra/acc-coil-hub
               mise trust
+              aws sso login --profile defn-org
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
@@ -2766,8 +2766,8 @@ config:
               ```bash
               cd infra/acc-coil-lib
               mise trust
+              aws sso login --profile defn-org
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
@@ -2829,8 +2829,8 @@ config:
               ```bash
               cd infra/acc-coil-net
               mise trust
+              aws sso login --profile defn-org
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
@@ -2897,8 +2897,8 @@ config:
               ```bash
               cd infra/acc-curl-org
               mise trust
+              aws sso login --profile defn-org
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
@@ -2960,8 +2960,8 @@ config:
               ```bash
               cd infra/acc-curl-hub
               mise trust
+              aws sso login --profile defn-org
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
@@ -3023,8 +3023,8 @@ config:
               ```bash
               cd infra/acc-curl-lib
               mise trust
+              aws sso login --profile defn-org
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
@@ -3086,8 +3086,8 @@ config:
               ```bash
               cd infra/acc-curl-net
               mise trust
+              aws sso login --profile defn-org
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
@@ -3147,8 +3147,8 @@ config:
               ```bash
               cd infra/acc-defn-org
               mise trust
+              aws sso login --profile defn-org
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
@@ -3215,8 +3215,8 @@ config:
               ```bash
               cd infra/acc-fogg-org
               mise trust
+              aws sso login --profile defn-org
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
@@ -3278,8 +3278,8 @@ config:
               ```bash
               cd infra/acc-fogg-ci
               mise trust
+              aws sso login --profile defn-org
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
@@ -3341,8 +3341,8 @@ config:
               ```bash
               cd infra/acc-fogg-dev
               mise trust
+              aws sso login --profile defn-org
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
@@ -3404,8 +3404,8 @@ config:
               ```bash
               cd infra/acc-fogg-hub
               mise trust
+              aws sso login --profile defn-org
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
@@ -3467,8 +3467,8 @@ config:
               ```bash
               cd infra/acc-fogg-lib
               mise trust
+              aws sso login --profile defn-org
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
@@ -3530,8 +3530,8 @@ config:
               ```bash
               cd infra/acc-fogg-log
               mise trust
+              aws sso login --profile defn-org
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
@@ -3593,8 +3593,8 @@ config:
               ```bash
               cd infra/acc-fogg-net
               mise trust
+              aws sso login --profile defn-org
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
@@ -3656,8 +3656,8 @@ config:
               ```bash
               cd infra/acc-fogg-ops
               mise trust
+              aws sso login --profile defn-org
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
@@ -3719,8 +3719,8 @@ config:
               ```bash
               cd infra/acc-fogg-prod
               mise trust
+              aws sso login --profile defn-org
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
@@ -3782,8 +3782,8 @@ config:
               ```bash
               cd infra/acc-fogg-pub
               mise trust
+              aws sso login --profile defn-org
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
@@ -3850,8 +3850,8 @@ config:
               ```bash
               cd infra/acc-gyre-org
               mise trust
+              aws sso login --profile defn-org
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
@@ -3913,8 +3913,8 @@ config:
               ```bash
               cd infra/acc-gyre-ops
               mise trust
+              aws sso login --profile defn-org
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
@@ -3981,8 +3981,8 @@ config:
               ```bash
               cd infra/acc-helix-org
               mise trust
+              aws sso login --profile defn-org
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
@@ -4044,8 +4044,8 @@ config:
               ```bash
               cd infra/acc-helix-ci
               mise trust
+              aws sso login --profile defn-org
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
@@ -4107,8 +4107,8 @@ config:
               ```bash
               cd infra/acc-helix-dev
               mise trust
+              aws sso login --profile defn-org
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
@@ -4170,8 +4170,8 @@ config:
               ```bash
               cd infra/acc-helix-hub
               mise trust
+              aws sso login --profile defn-org
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
@@ -4233,8 +4233,8 @@ config:
               ```bash
               cd infra/acc-helix-lib
               mise trust
+              aws sso login --profile defn-org
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
@@ -4296,8 +4296,8 @@ config:
               ```bash
               cd infra/acc-helix-log
               mise trust
+              aws sso login --profile defn-org
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
@@ -4359,8 +4359,8 @@ config:
               ```bash
               cd infra/acc-helix-net
               mise trust
+              aws sso login --profile defn-org
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
@@ -4422,8 +4422,8 @@ config:
               ```bash
               cd infra/acc-helix-ops
               mise trust
+              aws sso login --profile defn-org
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
@@ -4485,8 +4485,8 @@ config:
               ```bash
               cd infra/acc-helix-prod
               mise trust
+              aws sso login --profile defn-org
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
@@ -4548,8 +4548,8 @@ config:
               ```bash
               cd infra/acc-helix-pub
               mise trust
+              aws sso login --profile defn-org
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
@@ -4616,8 +4616,8 @@ config:
               ```bash
               cd infra/acc-imma-org
               mise trust
+              aws sso login --profile defn-org
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
@@ -4679,8 +4679,8 @@ config:
               ```bash
               cd infra/acc-imma-dev
               mise trust
+              aws sso login --profile defn-org
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
@@ -4742,8 +4742,8 @@ config:
               ```bash
               cd infra/acc-imma-lib
               mise trust
+              aws sso login --profile defn-org
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
@@ -4805,8 +4805,8 @@ config:
               ```bash
               cd infra/acc-imma-log
               mise trust
+              aws sso login --profile defn-org
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
@@ -4868,8 +4868,8 @@ config:
               ```bash
               cd infra/acc-imma-net
               mise trust
+              aws sso login --profile defn-org
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
@@ -4931,8 +4931,8 @@ config:
               ```bash
               cd infra/acc-imma-pub
               mise trust
+              aws sso login --profile defn-org
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
@@ -4999,8 +4999,8 @@ config:
               ```bash
               cd infra/acc-immanent-org
               mise trust
+              aws sso login --profile defn-org
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
@@ -5062,8 +5062,8 @@ config:
               ```bash
               cd infra/acc-immanent-changer
               mise trust
+              aws sso login --profile defn-org
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
@@ -5125,8 +5125,8 @@ config:
               ```bash
               cd infra/acc-immanent-chanter
               mise trust
+              aws sso login --profile defn-org
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
@@ -5188,8 +5188,8 @@ config:
               ```bash
               cd infra/acc-immanent-doorkeeper
               mise trust
+              aws sso login --profile defn-org
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
@@ -5251,8 +5251,8 @@ config:
               ```bash
               cd infra/acc-immanent-ged
               mise trust
+              aws sso login --profile defn-org
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
@@ -5314,8 +5314,8 @@ config:
               ```bash
               cd infra/acc-immanent-hand
               mise trust
+              aws sso login --profile defn-org
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
@@ -5377,8 +5377,8 @@ config:
               ```bash
               cd infra/acc-immanent-herbal
               mise trust
+              aws sso login --profile defn-org
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
@@ -5440,8 +5440,8 @@ config:
               ```bash
               cd infra/acc-immanent-namer
               mise trust
+              aws sso login --profile defn-org
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
@@ -5503,8 +5503,8 @@ config:
               ```bash
               cd infra/acc-immanent-patterner
               mise trust
+              aws sso login --profile defn-org
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
@@ -5566,8 +5566,8 @@ config:
               ```bash
               cd infra/acc-immanent-roke
               mise trust
+              aws sso login --profile defn-org
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
@@ -5629,8 +5629,8 @@ config:
               ```bash
               cd infra/acc-immanent-summoner
               mise trust
+              aws sso login --profile defn-org
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
@@ -5692,8 +5692,8 @@ config:
               ```bash
               cd infra/acc-immanent-windkey
               mise trust
+              aws sso login --profile defn-org
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
@@ -5760,8 +5760,8 @@ config:
               ```bash
               cd infra/acc-jianghu-org
               mise trust
+              aws sso login --profile defn-org
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
@@ -5823,8 +5823,8 @@ config:
               ```bash
               cd infra/acc-jianghu-log
               mise trust
+              aws sso login --profile defn-org
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
@@ -5886,8 +5886,8 @@ config:
               ```bash
               cd infra/acc-jianghu-net
               mise trust
+              aws sso login --profile defn-org
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
@@ -5954,8 +5954,8 @@ config:
               ```bash
               cd infra/acc-spiral-org
               mise trust
+              aws sso login --profile defn-org
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
@@ -6017,8 +6017,8 @@ config:
               ```bash
               cd infra/acc-spiral-ci
               mise trust
+              aws sso login --profile defn-org
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
@@ -6080,8 +6080,8 @@ config:
               ```bash
               cd infra/acc-spiral-dev
               mise trust
+              aws sso login --profile defn-org
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
@@ -6143,8 +6143,8 @@ config:
               ```bash
               cd infra/acc-spiral-hub
               mise trust
+              aws sso login --profile defn-org
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
@@ -6206,8 +6206,8 @@ config:
               ```bash
               cd infra/acc-spiral-lib
               mise trust
+              aws sso login --profile defn-org
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
@@ -6269,8 +6269,8 @@ config:
               ```bash
               cd infra/acc-spiral-log
               mise trust
+              aws sso login --profile defn-org
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
@@ -6332,8 +6332,8 @@ config:
               ```bash
               cd infra/acc-spiral-net
               mise trust
+              aws sso login --profile defn-org
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
@@ -6395,8 +6395,8 @@ config:
               ```bash
               cd infra/acc-spiral-ops
               mise trust
+              aws sso login --profile defn-org
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
@@ -6458,8 +6458,8 @@ config:
               ```bash
               cd infra/acc-spiral-prod
               mise trust
+              aws sso login --profile defn-org
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
@@ -6521,8 +6521,8 @@ config:
               ```bash
               cd infra/acc-spiral-pub
               mise trust
+              aws sso login --profile defn-org
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
@@ -6589,8 +6589,8 @@ config:
               ```bash
               cd infra/acc-vault-org
               mise trust
+              aws sso login --profile defn-org
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
@@ -6652,8 +6652,8 @@ config:
               ```bash
               cd infra/acc-vault-ci
               mise trust
+              aws sso login --profile defn-org
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
@@ -6715,8 +6715,8 @@ config:
               ```bash
               cd infra/acc-vault-dev
               mise trust
+              aws sso login --profile defn-org
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
@@ -6778,8 +6778,8 @@ config:
               ```bash
               cd infra/acc-vault-hub
               mise trust
+              aws sso login --profile defn-org
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
@@ -6841,8 +6841,8 @@ config:
               ```bash
               cd infra/acc-vault-lib
               mise trust
+              aws sso login --profile defn-org
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
@@ -6904,8 +6904,8 @@ config:
               ```bash
               cd infra/acc-vault-log
               mise trust
+              aws sso login --profile defn-org
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
@@ -6967,8 +6967,8 @@ config:
               ```bash
               cd infra/acc-vault-net
               mise trust
+              aws sso login --profile defn-org
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
@@ -7030,8 +7030,8 @@ config:
               ```bash
               cd infra/acc-vault-ops
               mise trust
+              aws sso login --profile defn-org
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
@@ -7093,8 +7093,8 @@ config:
               ```bash
               cd infra/acc-vault-prod
               mise trust
+              aws sso login --profile defn-org
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
@@ -7156,8 +7156,8 @@ config:
               ```bash
               cd infra/acc-vault-pub
               mise trust
+              aws sso login --profile defn-org
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
@@ -7224,8 +7224,8 @@ config:
               ```bash
               cd infra/acc-whoa-org
               mise trust
+              aws sso login --profile defn-org
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
@@ -7287,8 +7287,8 @@ config:
               ```bash
               cd infra/acc-whoa-dev
               mise trust
+              aws sso login --profile defn-org
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
@@ -7350,8 +7350,8 @@ config:
               ```bash
               cd infra/acc-whoa-hub
               mise trust
+              aws sso login --profile defn-org
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
@@ -7413,8 +7413,8 @@ config:
               ```bash
               cd infra/acc-whoa-net
               mise trust
+              aws sso login --profile defn-org
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
@@ -7476,8 +7476,8 @@ config:
               ```bash
               cd infra/acc-whoa-pub
               mise trust
+              aws sso login --profile defn-org
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```

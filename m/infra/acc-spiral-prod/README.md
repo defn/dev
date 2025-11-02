@@ -3,8 +3,8 @@
 ```bash
 cd infra/acc-spiral-prod
 mise trust
+aws sso login --profile defn-org
 aws sso login
-alogin
 terraform init
 terraform plan
 ```

@@ -49,8 +49,8 @@ infra_acc_readme: |-
   ```bash
   cd infra/acc-defn-org
   mise trust
+  aws sso login --profile defn-org
   aws sso login
-  alogin
   terraform init
   terraform plan
   ```
