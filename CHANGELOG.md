@@ -1,5 +1,47 @@
 # Changelog
 
+## [1.40.0](https://github.com/defn/dev/compare/v1.39.0...v1.40.0) (2025-11-02)
+
+
+### Features
+
+* add AWS CLI configuration display to account pages ([78c88b8](https://github.com/defn/dev/commit/78c88b8d35cb999decd87e8e587cebd4bbe2d81e))
+* add AWS_REGION environment variable to all AWS account configurations ([c275e56](https://github.com/defn/dev/commit/c275e56b334f9f9984661c35028322af761f0497))
+* add bootstrap SSO login to account-level infra READMEs ([ebffeb2](https://github.com/defn/dev/commit/ebffeb2dd7f343a7591bbad8094439e24e2362c0))
+* add EBS volume querying to AWS meh task ([ab1bb4c](https://github.com/defn/dev/commit/ab1bb4c0870c11752e7b9477a4455d728b42de1e))
+* add libatomic1 dependency for Node.js ([0cbc36f](https://github.com/defn/dev/commit/0cbc36fab4f94de10fadd74531c726d9c6a5664c))
+* add meh cobra command for AWS resource querying ([db1c5fe](https://github.com/defn/dev/commit/db1c5feb7a71a7406cc000f5623822c0ba4918f3))
+* add mise task for running docs dev server ([9924fac](https://github.com/defn/dev/commit/9924fac32cdea849e926575eb8bc88d7b980e86f))
+* add mise task to query AWS EC2 instances and fx tool ([62b5227](https://github.com/defn/dev/commit/62b522795c4e47c72cd9806943fc8cc88cff853f))
+* add mise trust to with-env script ([42234a5](https://github.com/defn/dev/commit/42234a58ca4dbe96caff43cc469540b68bc13ead))
+* add mise.toml configs for all org accounts and simplify READMEs ([30143a1](https://github.com/defn/dev/commit/30143a143324124ae766aa899f7936e2aad6ad0a))
+* add parallel terraform plan task for infrastructure ([b9535ab](https://github.com/defn/dev/commit/b9535aba635de02a3351fb84858793f39745f8dc))
+* add per-region permissions check and structured logging to meh command ([155e5d9](https://github.com/defn/dev/commit/155e5d95235a4da4b8d717f303c0758e7b9ecd90))
+* add pipx to sync_inner mise install ([e3ba444](https://github.com/defn/dev/commit/e3ba444e27798df436667e1d357bd692665c8041))
+* add use function to navigate and display README files ([c61afc8](https://github.com/defn/dev/commit/c61afc81c1b4f3f690f6712e2575aafbc35720d8))
+* enable account and IAM service access for chamber organization ([09fef71](https://github.com/defn/dev/commit/09fef71267cca8f4717caf1e46b4dd6c96961191))
+* filter auto-generated comments from README display ([d479b3d](https://github.com/defn/dev/commit/d479b3ddac4504de938317b6bda65a73a25c7e3a))
+* generate account subdirectory READMEs from CUE schema ([ef575f5](https://github.com/defn/dev/commit/ef575f54ff838dd50772ae7c0d20574a8f5a7f18))
+* generate AWS CLI configs and mise.toml for all accounts ([9332c43](https://github.com/defn/dev/commit/9332c43eeb097d7bd847282a890e939fca26068c))
+
+
+### Bug Fixes
+
+* make mise trust non-fatal in sync_inner ([d1bb3e3](https://github.com/defn/dev/commit/d1bb3e31babf94a9db7c5c700383bbb8d6f887ec))
+* update i/ami/mise.toml to use account-specific AWS config ([dd719d5](https://github.com/defn/dev/commit/dd719d589ba44b745d0c4a5d35c481472a839c13))
+* use absolute path for mise trust in with-env ([72879b9](https://github.com/defn/dev/commit/72879b90472571f72f47b187972cb5fc830a63db))
+
+
+### Performance Improvements
+
+* add concurrency throttling to AWS EC2 query task ([f7c38c4](https://github.com/defn/dev/commit/f7c38c49e399e0834bb855e2020777e8fc4dfacb))
+* parallelize AWS EC2 queries across regions ([0719780](https://github.com/defn/dev/commit/07197809387e4197887d75b1246da285dd136806))
+
+
+### Reverts
+
+* change csso_url organization back to curl ([acd1e8c](https://github.com/defn/dev/commit/acd1e8cd787d9d1b9cae82a1b406b534e41b1796))
+
 ## [1.39.0](https://github.com/defn/dev/compare/v1.38.0...v1.39.0) (2025-10-25)
 
 
