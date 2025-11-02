@@ -9,10 +9,19 @@ function main {
         set -- $(aws ec2 describe-regions | jq -r '.Regions[].RegionName')
     fi
 
+    local tmp="$(mktemp -d ${TEMPDIR:=/tmp}/XXXXXX)"
+
     for r in "$@"; do
         export AWS_REGION="$r"
-        aws ec2 describe-instances | jq --arg region "$r" '.Reservations[].Instances | map({(.InstanceId): .}) | add | {($region): {instance: .}}'
-    done | jq -s 'add | {aws: .}'
+        aws ec2 describe-instances | jq --arg region "$r" '.Reservations[].Instances | map({(.InstanceId): .}) | add | {($region): {instance: .}}' > "${tmp}/$r.json" &
+    done
+    wait
+
+    set +f
+    cat ${tmp}/*.json | jq -s 'add | {aws: .}'
+    set -f
+
+    rm -rf "${tmp}"
 
 }
 
