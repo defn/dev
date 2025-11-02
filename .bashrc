@@ -254,7 +254,7 @@ function use {
 
 	cd "$HOME/$selected"
 	if [[ -r README.md ]]; then
-		glow README.md --width 0
+		cat README.md | grep -v ^auto-generated: | glow --width 0
 	fi
 }
 
