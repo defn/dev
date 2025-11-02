@@ -8,6 +8,7 @@ go_library(
     deps = [
         "//command/api",
         "//command/gollm",
+        "//command/meh",
         "//command/root",
         "//command/tui",
     ],

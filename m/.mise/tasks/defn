@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+#MISE description="Run defn CLI using go run"
+
+cd "${MISE_ORIGINAL_CWD}"
+exec go run /home/ubuntu/m/cmd/main.go "$@"

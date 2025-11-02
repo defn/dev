@@ -6,6 +6,7 @@ cover.out
 cue.mod/pkg
 manifest.json
 charts
+meh*
 
 ca.crt
 ca.key
