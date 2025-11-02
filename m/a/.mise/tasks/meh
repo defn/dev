@@ -2,27 +2,50 @@
 
 set -efu -o pipefail
 
+n=$(($(nproc) / 2))
+((n < 8)) && n=8
+
+function fork {
+	local r="$1"
+	shift
+
+	local cmd="aws --region $r ec2 describe-instances"
+
+	${cmd} | jq --arg region "$r" \
+		'.Reservations[].Instances | map({(.InstanceId): .}) | add | {($region): {instance: .}}' \
+		>"${tmp}/$r.json" &
+
+	throttle ${cmd}
+}
+
+function throttle {
+	if (($(jobs -r | wc -l | awk '{print $1}') >= n)); then
+		echo "INFO: waiting... $@" 1>&2
+		wait -n
+	else
+		echo "INFO: $(jobs -r | wc -l | awk '{print $1}')/$n" 1>&2
+	fi
+}
+
 function main {
-    cd "${MISE_ORIGINAL_CWD}"
+	cd "${MISE_ORIGINAL_CWD}"
 
-    if [[ "$#" == 0 ]]; then
-        set -- $(aws ec2 describe-regions | jq -r '.Regions[].RegionName')
-    fi
+	if [[ $# == 0 ]]; then
+		set -- $(aws ec2 describe-regions | jq -r '.Regions[].RegionName')
+	fi
 
-    local tmp="$(mktemp -d ${TEMPDIR:=/tmp}/XXXXXX)"
+	export tmp="$(mktemp -d ${TEMPDIR:=/tmp}/XXXXXX)"
+	trap 'rm -rf "${tmp}"' EXIT
 
-    for r in "$@"; do
-        export AWS_REGION="$r"
-        aws ec2 describe-instances | jq --arg region "$r" '.Reservations[].Instances | map({(.InstanceId): .}) | add | {($region): {instance: .}}' > "${tmp}/$r.json" &
-    done
-    wait
+	for r in "$@"; do
+		fork "$r"
+	done
+	wait
 
-    set +f
-    cat ${tmp}/*.json | jq -s 'add | {aws: .}'
-    set -f
-
-    rm -rf "${tmp}"
-
+	(
+		set +f
+		cat ${tmp}/*.json | jq -s 'add | {aws: .}'
+	)
 }
 
 main "$@"
