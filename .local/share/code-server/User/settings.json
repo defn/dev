@@ -117,5 +117,6 @@
   "chat.disableAIFeatures": true,
   "workbench.settings.showAISearchToggle": false,
   "files.trimTrailingWhitespace": true,
-  "chat.commandCenter.enabled": false
+  "chat.commandCenter.enabled": false,
+  "workbench.secondarySideBar.defaultVisibility": "hidden"
 }
