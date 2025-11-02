@@ -1,4 +1,4 @@
-## Usage: Account-specific Terraform: chamber-r
+## Account-specific Terraform: chamber-r
 
 ```bash
 cd infra/acc-chamber-r

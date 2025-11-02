@@ -1,4 +1,4 @@
-## Usage: Account-specific Terraform: helix-ci
+## Account-specific Terraform: helix-ci
 
 ```bash
 cd infra/acc-helix-ci

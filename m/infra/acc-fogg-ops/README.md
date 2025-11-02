@@ -1,4 +1,4 @@
-## Usage: Account-specific Terraform: fogg-ops
+## Account-specific Terraform: fogg-ops
 
 ```bash
 cd infra/acc-fogg-ops

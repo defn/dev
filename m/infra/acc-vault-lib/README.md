@@ -1,4 +1,4 @@
-## Usage: Account-specific Terraform: vault-lib
+## Account-specific Terraform: vault-lib
 
 ```bash
 cd infra/acc-vault-lib

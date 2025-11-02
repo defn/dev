@@ -1,4 +1,4 @@
-## Usage: Account-specific Terraform: immanent-hand
+## Account-specific Terraform: immanent-hand
 
 ```bash
 cd infra/acc-immanent-hand

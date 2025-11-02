@@ -1,4 +1,4 @@
-## Usage: Account-specific Terraform: circus-net
+## Account-specific Terraform: circus-net
 
 ```bash
 cd infra/acc-circus-net

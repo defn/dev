@@ -1,4 +1,4 @@
-## Usage: Account-specific Terraform: coil-net
+## Account-specific Terraform: coil-net
 
 ```bash
 cd infra/acc-coil-net

@@ -1,4 +1,4 @@
-## Usage: Account-specific Terraform: imma-lib
+## Account-specific Terraform: imma-lib
 
 ```bash
 cd infra/acc-imma-lib

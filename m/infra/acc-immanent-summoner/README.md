@@ -1,4 +1,4 @@
-## Usage: Account-specific Terraform: immanent-summoner
+## Account-specific Terraform: immanent-summoner
 
 ```bash
 cd infra/acc-immanent-summoner

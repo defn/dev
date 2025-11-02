@@ -1,4 +1,4 @@
-## Usage: Account-specific Terraform: spiral-lib
+## Account-specific Terraform: spiral-lib
 
 ```bash
 cd infra/acc-spiral-lib

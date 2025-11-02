@@ -1,4 +1,4 @@
-## Usage: Account-specific Terraform: immanent-herbal
+## Account-specific Terraform: immanent-herbal
 
 ```bash
 cd infra/acc-immanent-herbal

@@ -1,4 +1,4 @@
-## Usage: Account-specific Terraform: curl-hub
+## Account-specific Terraform: curl-hub
 
 ```bash
 cd infra/acc-curl-hub

@@ -1,4 +1,4 @@
-## Usage: Account-specific Terraform: imma-pub
+## Account-specific Terraform: imma-pub
 
 ```bash
 cd infra/acc-imma-pub

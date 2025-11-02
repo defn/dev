@@ -1,4 +1,4 @@
-## Usage: Account-specific Terraform: fogg-pub
+## Account-specific Terraform: fogg-pub
 
 ```bash
 cd infra/acc-fogg-pub

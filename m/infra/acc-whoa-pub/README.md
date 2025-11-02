@@ -1,4 +1,4 @@
-## Usage: Account-specific Terraform: whoa-pub
+## Account-specific Terraform: whoa-pub
 
 ```bash
 cd infra/acc-whoa-pub

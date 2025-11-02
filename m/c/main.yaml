@@ -94,28 +94,26 @@ config:
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             account_readme: |-
-              ## Usage: AWS Environment: chamber-org
+              ## AWS Environment: chamber-org
 
               ```bash
               cd a/chamber/org
               mise trust
               aws sso login
               alogin
-              aws sts get-caller-identity
               ```
             infra_org_readme: |-
-              ## Usage: Organizational-level Terraform: chamber-org
+              ## Organizational-level Terraform: chamber-org
 
               ```bash
               cd infra/org-chamber
               mise trust
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
             infra_acc_readme: |-
-              ## Usage: Account-specific Terraform: chamber-org
+              ## Account-specific Terraform: chamber-org
 
               ```bash
               cd infra/acc-chamber-org
@@ -167,28 +165,26 @@ config:
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             account_readme: |-
-              ## Usage: AWS Environment: chamber-1
+              ## AWS Environment: chamber-1
 
               ```bash
               cd a/chamber/1
               mise trust
               aws sso login
               alogin
-              aws sts get-caller-identity
               ```
             infra_org_readme: |-
-              ## Usage: Organizational-level Terraform: chamber-1
+              ## Organizational-level Terraform: chamber-1
 
               ```bash
               cd infra/org-chamber
               mise trust
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
             infra_acc_readme: |-
-              ## Usage: Account-specific Terraform: chamber-1
+              ## Account-specific Terraform: chamber-1
 
               ```bash
               cd infra/acc-chamber-1
@@ -240,28 +236,26 @@ config:
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             account_readme: |-
-              ## Usage: AWS Environment: chamber-2
+              ## AWS Environment: chamber-2
 
               ```bash
               cd a/chamber/2
               mise trust
               aws sso login
               alogin
-              aws sts get-caller-identity
               ```
             infra_org_readme: |-
-              ## Usage: Organizational-level Terraform: chamber-2
+              ## Organizational-level Terraform: chamber-2
 
               ```bash
               cd infra/org-chamber
               mise trust
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
             infra_acc_readme: |-
-              ## Usage: Account-specific Terraform: chamber-2
+              ## Account-specific Terraform: chamber-2
 
               ```bash
               cd infra/acc-chamber-2
@@ -313,28 +307,26 @@ config:
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             account_readme: |-
-              ## Usage: AWS Environment: chamber-3
+              ## AWS Environment: chamber-3
 
               ```bash
               cd a/chamber/3
               mise trust
               aws sso login
               alogin
-              aws sts get-caller-identity
               ```
             infra_org_readme: |-
-              ## Usage: Organizational-level Terraform: chamber-3
+              ## Organizational-level Terraform: chamber-3
 
               ```bash
               cd infra/org-chamber
               mise trust
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
             infra_acc_readme: |-
-              ## Usage: Account-specific Terraform: chamber-3
+              ## Account-specific Terraform: chamber-3
 
               ```bash
               cd infra/acc-chamber-3
@@ -386,28 +378,26 @@ config:
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             account_readme: |-
-              ## Usage: AWS Environment: chamber-4
+              ## AWS Environment: chamber-4
 
               ```bash
               cd a/chamber/4
               mise trust
               aws sso login
               alogin
-              aws sts get-caller-identity
               ```
             infra_org_readme: |-
-              ## Usage: Organizational-level Terraform: chamber-4
+              ## Organizational-level Terraform: chamber-4
 
               ```bash
               cd infra/org-chamber
               mise trust
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
             infra_acc_readme: |-
-              ## Usage: Account-specific Terraform: chamber-4
+              ## Account-specific Terraform: chamber-4
 
               ```bash
               cd infra/acc-chamber-4
@@ -459,28 +449,26 @@ config:
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             account_readme: |-
-              ## Usage: AWS Environment: chamber-5
+              ## AWS Environment: chamber-5
 
               ```bash
               cd a/chamber/5
               mise trust
               aws sso login
               alogin
-              aws sts get-caller-identity
               ```
             infra_org_readme: |-
-              ## Usage: Organizational-level Terraform: chamber-5
+              ## Organizational-level Terraform: chamber-5
 
               ```bash
               cd infra/org-chamber
               mise trust
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
             infra_acc_readme: |-
-              ## Usage: Account-specific Terraform: chamber-5
+              ## Account-specific Terraform: chamber-5
 
               ```bash
               cd infra/acc-chamber-5
@@ -532,28 +520,26 @@ config:
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             account_readme: |-
-              ## Usage: AWS Environment: chamber-6
+              ## AWS Environment: chamber-6
 
               ```bash
               cd a/chamber/6
               mise trust
               aws sso login
               alogin
-              aws sts get-caller-identity
               ```
             infra_org_readme: |-
-              ## Usage: Organizational-level Terraform: chamber-6
+              ## Organizational-level Terraform: chamber-6
 
               ```bash
               cd infra/org-chamber
               mise trust
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
             infra_acc_readme: |-
-              ## Usage: Account-specific Terraform: chamber-6
+              ## Account-specific Terraform: chamber-6
 
               ```bash
               cd infra/acc-chamber-6
@@ -605,28 +591,26 @@ config:
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             account_readme: |-
-              ## Usage: AWS Environment: chamber-7
+              ## AWS Environment: chamber-7
 
               ```bash
               cd a/chamber/7
               mise trust
               aws sso login
               alogin
-              aws sts get-caller-identity
               ```
             infra_org_readme: |-
-              ## Usage: Organizational-level Terraform: chamber-7
+              ## Organizational-level Terraform: chamber-7
 
               ```bash
               cd infra/org-chamber
               mise trust
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
             infra_acc_readme: |-
-              ## Usage: Account-specific Terraform: chamber-7
+              ## Account-specific Terraform: chamber-7
 
               ```bash
               cd infra/acc-chamber-7
@@ -678,28 +662,26 @@ config:
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             account_readme: |-
-              ## Usage: AWS Environment: chamber-8
+              ## AWS Environment: chamber-8
 
               ```bash
               cd a/chamber/8
               mise trust
               aws sso login
               alogin
-              aws sts get-caller-identity
               ```
             infra_org_readme: |-
-              ## Usage: Organizational-level Terraform: chamber-8
+              ## Organizational-level Terraform: chamber-8
 
               ```bash
               cd infra/org-chamber
               mise trust
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
             infra_acc_readme: |-
-              ## Usage: Account-specific Terraform: chamber-8
+              ## Account-specific Terraform: chamber-8
 
               ```bash
               cd infra/acc-chamber-8
@@ -751,28 +733,26 @@ config:
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             account_readme: |-
-              ## Usage: AWS Environment: chamber-9
+              ## AWS Environment: chamber-9
 
               ```bash
               cd a/chamber/9
               mise trust
               aws sso login
               alogin
-              aws sts get-caller-identity
               ```
             infra_org_readme: |-
-              ## Usage: Organizational-level Terraform: chamber-9
+              ## Organizational-level Terraform: chamber-9
 
               ```bash
               cd infra/org-chamber
               mise trust
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
             infra_acc_readme: |-
-              ## Usage: Account-specific Terraform: chamber-9
+              ## Account-specific Terraform: chamber-9
 
               ```bash
               cd infra/acc-chamber-9
@@ -824,28 +804,26 @@ config:
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             account_readme: |-
-              ## Usage: AWS Environment: chamber-a
+              ## AWS Environment: chamber-a
 
               ```bash
               cd a/chamber/a
               mise trust
               aws sso login
               alogin
-              aws sts get-caller-identity
               ```
             infra_org_readme: |-
-              ## Usage: Organizational-level Terraform: chamber-a
+              ## Organizational-level Terraform: chamber-a
 
               ```bash
               cd infra/org-chamber
               mise trust
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
             infra_acc_readme: |-
-              ## Usage: Account-specific Terraform: chamber-a
+              ## Account-specific Terraform: chamber-a
 
               ```bash
               cd infra/acc-chamber-a
@@ -897,28 +875,26 @@ config:
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             account_readme: |-
-              ## Usage: AWS Environment: chamber-b
+              ## AWS Environment: chamber-b
 
               ```bash
               cd a/chamber/b
               mise trust
               aws sso login
               alogin
-              aws sts get-caller-identity
               ```
             infra_org_readme: |-
-              ## Usage: Organizational-level Terraform: chamber-b
+              ## Organizational-level Terraform: chamber-b
 
               ```bash
               cd infra/org-chamber
               mise trust
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
             infra_acc_readme: |-
-              ## Usage: Account-specific Terraform: chamber-b
+              ## Account-specific Terraform: chamber-b
 
               ```bash
               cd infra/acc-chamber-b
@@ -970,28 +946,26 @@ config:
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             account_readme: |-
-              ## Usage: AWS Environment: chamber-c
+              ## AWS Environment: chamber-c
 
               ```bash
               cd a/chamber/c
               mise trust
               aws sso login
               alogin
-              aws sts get-caller-identity
               ```
             infra_org_readme: |-
-              ## Usage: Organizational-level Terraform: chamber-c
+              ## Organizational-level Terraform: chamber-c
 
               ```bash
               cd infra/org-chamber
               mise trust
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
             infra_acc_readme: |-
-              ## Usage: Account-specific Terraform: chamber-c
+              ## Account-specific Terraform: chamber-c
 
               ```bash
               cd infra/acc-chamber-c
@@ -1043,28 +1017,26 @@ config:
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             account_readme: |-
-              ## Usage: AWS Environment: chamber-d
+              ## AWS Environment: chamber-d
 
               ```bash
               cd a/chamber/d
               mise trust
               aws sso login
               alogin
-              aws sts get-caller-identity
               ```
             infra_org_readme: |-
-              ## Usage: Organizational-level Terraform: chamber-d
+              ## Organizational-level Terraform: chamber-d
 
               ```bash
               cd infra/org-chamber
               mise trust
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
             infra_acc_readme: |-
-              ## Usage: Account-specific Terraform: chamber-d
+              ## Account-specific Terraform: chamber-d
 
               ```bash
               cd infra/acc-chamber-d
@@ -1116,28 +1088,26 @@ config:
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             account_readme: |-
-              ## Usage: AWS Environment: chamber-e
+              ## AWS Environment: chamber-e
 
               ```bash
               cd a/chamber/e
               mise trust
               aws sso login
               alogin
-              aws sts get-caller-identity
               ```
             infra_org_readme: |-
-              ## Usage: Organizational-level Terraform: chamber-e
+              ## Organizational-level Terraform: chamber-e
 
               ```bash
               cd infra/org-chamber
               mise trust
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
             infra_acc_readme: |-
-              ## Usage: Account-specific Terraform: chamber-e
+              ## Account-specific Terraform: chamber-e
 
               ```bash
               cd infra/acc-chamber-e
@@ -1189,28 +1159,26 @@ config:
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             account_readme: |-
-              ## Usage: AWS Environment: chamber-f
+              ## AWS Environment: chamber-f
 
               ```bash
               cd a/chamber/f
               mise trust
               aws sso login
               alogin
-              aws sts get-caller-identity
               ```
             infra_org_readme: |-
-              ## Usage: Organizational-level Terraform: chamber-f
+              ## Organizational-level Terraform: chamber-f
 
               ```bash
               cd infra/org-chamber
               mise trust
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
             infra_acc_readme: |-
-              ## Usage: Account-specific Terraform: chamber-f
+              ## Account-specific Terraform: chamber-f
 
               ```bash
               cd infra/acc-chamber-f
@@ -1262,28 +1230,26 @@ config:
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             account_readme: |-
-              ## Usage: AWS Environment: chamber-g
+              ## AWS Environment: chamber-g
 
               ```bash
               cd a/chamber/g
               mise trust
               aws sso login
               alogin
-              aws sts get-caller-identity
               ```
             infra_org_readme: |-
-              ## Usage: Organizational-level Terraform: chamber-g
+              ## Organizational-level Terraform: chamber-g
 
               ```bash
               cd infra/org-chamber
               mise trust
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
             infra_acc_readme: |-
-              ## Usage: Account-specific Terraform: chamber-g
+              ## Account-specific Terraform: chamber-g
 
               ```bash
               cd infra/acc-chamber-g
@@ -1335,28 +1301,26 @@ config:
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             account_readme: |-
-              ## Usage: AWS Environment: chamber-h
+              ## AWS Environment: chamber-h
 
               ```bash
               cd a/chamber/h
               mise trust
               aws sso login
               alogin
-              aws sts get-caller-identity
               ```
             infra_org_readme: |-
-              ## Usage: Organizational-level Terraform: chamber-h
+              ## Organizational-level Terraform: chamber-h
 
               ```bash
               cd infra/org-chamber
               mise trust
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
             infra_acc_readme: |-
-              ## Usage: Account-specific Terraform: chamber-h
+              ## Account-specific Terraform: chamber-h
 
               ```bash
               cd infra/acc-chamber-h
@@ -1408,28 +1372,26 @@ config:
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             account_readme: |-
-              ## Usage: AWS Environment: chamber-i
+              ## AWS Environment: chamber-i
 
               ```bash
               cd a/chamber/i
               mise trust
               aws sso login
               alogin
-              aws sts get-caller-identity
               ```
             infra_org_readme: |-
-              ## Usage: Organizational-level Terraform: chamber-i
+              ## Organizational-level Terraform: chamber-i
 
               ```bash
               cd infra/org-chamber
               mise trust
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
             infra_acc_readme: |-
-              ## Usage: Account-specific Terraform: chamber-i
+              ## Account-specific Terraform: chamber-i
 
               ```bash
               cd infra/acc-chamber-i
@@ -1481,28 +1443,26 @@ config:
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             account_readme: |-
-              ## Usage: AWS Environment: chamber-j
+              ## AWS Environment: chamber-j
 
               ```bash
               cd a/chamber/j
               mise trust
               aws sso login
               alogin
-              aws sts get-caller-identity
               ```
             infra_org_readme: |-
-              ## Usage: Organizational-level Terraform: chamber-j
+              ## Organizational-level Terraform: chamber-j
 
               ```bash
               cd infra/org-chamber
               mise trust
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
             infra_acc_readme: |-
-              ## Usage: Account-specific Terraform: chamber-j
+              ## Account-specific Terraform: chamber-j
 
               ```bash
               cd infra/acc-chamber-j
@@ -1554,28 +1514,26 @@ config:
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             account_readme: |-
-              ## Usage: AWS Environment: chamber-l
+              ## AWS Environment: chamber-l
 
               ```bash
               cd a/chamber/l
               mise trust
               aws sso login
               alogin
-              aws sts get-caller-identity
               ```
             infra_org_readme: |-
-              ## Usage: Organizational-level Terraform: chamber-l
+              ## Organizational-level Terraform: chamber-l
 
               ```bash
               cd infra/org-chamber
               mise trust
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
             infra_acc_readme: |-
-              ## Usage: Account-specific Terraform: chamber-l
+              ## Account-specific Terraform: chamber-l
 
               ```bash
               cd infra/acc-chamber-l
@@ -1627,28 +1585,26 @@ config:
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             account_readme: |-
-              ## Usage: AWS Environment: chamber-m
+              ## AWS Environment: chamber-m
 
               ```bash
               cd a/chamber/m
               mise trust
               aws sso login
               alogin
-              aws sts get-caller-identity
               ```
             infra_org_readme: |-
-              ## Usage: Organizational-level Terraform: chamber-m
+              ## Organizational-level Terraform: chamber-m
 
               ```bash
               cd infra/org-chamber
               mise trust
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
             infra_acc_readme: |-
-              ## Usage: Account-specific Terraform: chamber-m
+              ## Account-specific Terraform: chamber-m
 
               ```bash
               cd infra/acc-chamber-m
@@ -1700,28 +1656,26 @@ config:
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             account_readme: |-
-              ## Usage: AWS Environment: chamber-n
+              ## AWS Environment: chamber-n
 
               ```bash
               cd a/chamber/n
               mise trust
               aws sso login
               alogin
-              aws sts get-caller-identity
               ```
             infra_org_readme: |-
-              ## Usage: Organizational-level Terraform: chamber-n
+              ## Organizational-level Terraform: chamber-n
 
               ```bash
               cd infra/org-chamber
               mise trust
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
             infra_acc_readme: |-
-              ## Usage: Account-specific Terraform: chamber-n
+              ## Account-specific Terraform: chamber-n
 
               ```bash
               cd infra/acc-chamber-n
@@ -1773,28 +1727,26 @@ config:
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             account_readme: |-
-              ## Usage: AWS Environment: chamber-o
+              ## AWS Environment: chamber-o
 
               ```bash
               cd a/chamber/o
               mise trust
               aws sso login
               alogin
-              aws sts get-caller-identity
               ```
             infra_org_readme: |-
-              ## Usage: Organizational-level Terraform: chamber-o
+              ## Organizational-level Terraform: chamber-o
 
               ```bash
               cd infra/org-chamber
               mise trust
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
             infra_acc_readme: |-
-              ## Usage: Account-specific Terraform: chamber-o
+              ## Account-specific Terraform: chamber-o
 
               ```bash
               cd infra/acc-chamber-o
@@ -1846,28 +1798,26 @@ config:
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             account_readme: |-
-              ## Usage: AWS Environment: chamber-p
+              ## AWS Environment: chamber-p
 
               ```bash
               cd a/chamber/p
               mise trust
               aws sso login
               alogin
-              aws sts get-caller-identity
               ```
             infra_org_readme: |-
-              ## Usage: Organizational-level Terraform: chamber-p
+              ## Organizational-level Terraform: chamber-p
 
               ```bash
               cd infra/org-chamber
               mise trust
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
             infra_acc_readme: |-
-              ## Usage: Account-specific Terraform: chamber-p
+              ## Account-specific Terraform: chamber-p
 
               ```bash
               cd infra/acc-chamber-p
@@ -1919,28 +1869,26 @@ config:
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             account_readme: |-
-              ## Usage: AWS Environment: chamber-q
+              ## AWS Environment: chamber-q
 
               ```bash
               cd a/chamber/q
               mise trust
               aws sso login
               alogin
-              aws sts get-caller-identity
               ```
             infra_org_readme: |-
-              ## Usage: Organizational-level Terraform: chamber-q
+              ## Organizational-level Terraform: chamber-q
 
               ```bash
               cd infra/org-chamber
               mise trust
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
             infra_acc_readme: |-
-              ## Usage: Account-specific Terraform: chamber-q
+              ## Account-specific Terraform: chamber-q
 
               ```bash
               cd infra/acc-chamber-q
@@ -1992,28 +1940,26 @@ config:
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             account_readme: |-
-              ## Usage: AWS Environment: chamber-r
+              ## AWS Environment: chamber-r
 
               ```bash
               cd a/chamber/r
               mise trust
               aws sso login
               alogin
-              aws sts get-caller-identity
               ```
             infra_org_readme: |-
-              ## Usage: Organizational-level Terraform: chamber-r
+              ## Organizational-level Terraform: chamber-r
 
               ```bash
               cd infra/org-chamber
               mise trust
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
             infra_acc_readme: |-
-              ## Usage: Account-specific Terraform: chamber-r
+              ## Account-specific Terraform: chamber-r
 
               ```bash
               cd infra/acc-chamber-r
@@ -2065,28 +2011,26 @@ config:
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             account_readme: |-
-              ## Usage: AWS Environment: chamber-s
+              ## AWS Environment: chamber-s
 
               ```bash
               cd a/chamber/s
               mise trust
               aws sso login
               alogin
-              aws sts get-caller-identity
               ```
             infra_org_readme: |-
-              ## Usage: Organizational-level Terraform: chamber-s
+              ## Organizational-level Terraform: chamber-s
 
               ```bash
               cd infra/org-chamber
               mise trust
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
             infra_acc_readme: |-
-              ## Usage: Account-specific Terraform: chamber-s
+              ## Account-specific Terraform: chamber-s
 
               ```bash
               cd infra/acc-chamber-s
@@ -2138,28 +2082,26 @@ config:
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             account_readme: |-
-              ## Usage: AWS Environment: chamber-t
+              ## AWS Environment: chamber-t
 
               ```bash
               cd a/chamber/t
               mise trust
               aws sso login
               alogin
-              aws sts get-caller-identity
               ```
             infra_org_readme: |-
-              ## Usage: Organizational-level Terraform: chamber-t
+              ## Organizational-level Terraform: chamber-t
 
               ```bash
               cd infra/org-chamber
               mise trust
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
             infra_acc_readme: |-
-              ## Usage: Account-specific Terraform: chamber-t
+              ## Account-specific Terraform: chamber-t
 
               ```bash
               cd infra/acc-chamber-t
@@ -2211,28 +2153,26 @@ config:
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             account_readme: |-
-              ## Usage: AWS Environment: chamber-u
+              ## AWS Environment: chamber-u
 
               ```bash
               cd a/chamber/u
               mise trust
               aws sso login
               alogin
-              aws sts get-caller-identity
               ```
             infra_org_readme: |-
-              ## Usage: Organizational-level Terraform: chamber-u
+              ## Organizational-level Terraform: chamber-u
 
               ```bash
               cd infra/org-chamber
               mise trust
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
             infra_acc_readme: |-
-              ## Usage: Account-specific Terraform: chamber-u
+              ## Account-specific Terraform: chamber-u
 
               ```bash
               cd infra/acc-chamber-u
@@ -2284,28 +2224,26 @@ config:
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             account_readme: |-
-              ## Usage: AWS Environment: chamber-v
+              ## AWS Environment: chamber-v
 
               ```bash
               cd a/chamber/v
               mise trust
               aws sso login
               alogin
-              aws sts get-caller-identity
               ```
             infra_org_readme: |-
-              ## Usage: Organizational-level Terraform: chamber-v
+              ## Organizational-level Terraform: chamber-v
 
               ```bash
               cd infra/org-chamber
               mise trust
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
             infra_acc_readme: |-
-              ## Usage: Account-specific Terraform: chamber-v
+              ## Account-specific Terraform: chamber-v
 
               ```bash
               cd infra/acc-chamber-v
@@ -2357,28 +2295,26 @@ config:
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             account_readme: |-
-              ## Usage: AWS Environment: chamber-w
+              ## AWS Environment: chamber-w
 
               ```bash
               cd a/chamber/w
               mise trust
               aws sso login
               alogin
-              aws sts get-caller-identity
               ```
             infra_org_readme: |-
-              ## Usage: Organizational-level Terraform: chamber-w
+              ## Organizational-level Terraform: chamber-w
 
               ```bash
               cd infra/org-chamber
               mise trust
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
             infra_acc_readme: |-
-              ## Usage: Account-specific Terraform: chamber-w
+              ## Account-specific Terraform: chamber-w
 
               ```bash
               cd infra/acc-chamber-w
@@ -2430,28 +2366,26 @@ config:
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             account_readme: |-
-              ## Usage: AWS Environment: chamber-x
+              ## AWS Environment: chamber-x
 
               ```bash
               cd a/chamber/x
               mise trust
               aws sso login
               alogin
-              aws sts get-caller-identity
               ```
             infra_org_readme: |-
-              ## Usage: Organizational-level Terraform: chamber-x
+              ## Organizational-level Terraform: chamber-x
 
               ```bash
               cd infra/org-chamber
               mise trust
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
             infra_acc_readme: |-
-              ## Usage: Account-specific Terraform: chamber-x
+              ## Account-specific Terraform: chamber-x
 
               ```bash
               cd infra/acc-chamber-x
@@ -2503,28 +2437,26 @@ config:
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             account_readme: |-
-              ## Usage: AWS Environment: chamber-y
+              ## AWS Environment: chamber-y
 
               ```bash
               cd a/chamber/y
               mise trust
               aws sso login
               alogin
-              aws sts get-caller-identity
               ```
             infra_org_readme: |-
-              ## Usage: Organizational-level Terraform: chamber-y
+              ## Organizational-level Terraform: chamber-y
 
               ```bash
               cd infra/org-chamber
               mise trust
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
             infra_acc_readme: |-
-              ## Usage: Account-specific Terraform: chamber-y
+              ## Account-specific Terraform: chamber-y
 
               ```bash
               cd infra/acc-chamber-y
@@ -2576,28 +2508,26 @@ config:
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             account_readme: |-
-              ## Usage: AWS Environment: chamber-z
+              ## AWS Environment: chamber-z
 
               ```bash
               cd a/chamber/z
               mise trust
               aws sso login
               alogin
-              aws sts get-caller-identity
               ```
             infra_org_readme: |-
-              ## Usage: Organizational-level Terraform: chamber-z
+              ## Organizational-level Terraform: chamber-z
 
               ```bash
               cd infra/org-chamber
               mise trust
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
             infra_acc_readme: |-
-              ## Usage: Account-specific Terraform: chamber-z
+              ## Account-specific Terraform: chamber-z
 
               ```bash
               cd infra/acc-chamber-z
@@ -2654,28 +2584,26 @@ config:
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             account_readme: |-
-              ## Usage: AWS Environment: circus-org
+              ## AWS Environment: circus-org
 
               ```bash
               cd a/circus/org
               mise trust
               aws sso login
               alogin
-              aws sts get-caller-identity
               ```
             infra_org_readme: |-
-              ## Usage: Organizational-level Terraform: circus-org
+              ## Organizational-level Terraform: circus-org
 
               ```bash
               cd infra/org-circus
               mise trust
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
             infra_acc_readme: |-
-              ## Usage: Account-specific Terraform: circus-org
+              ## Account-specific Terraform: circus-org
 
               ```bash
               cd infra/acc-circus-org
@@ -2727,28 +2655,26 @@ config:
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             account_readme: |-
-              ## Usage: AWS Environment: circus-lib
+              ## AWS Environment: circus-lib
 
               ```bash
               cd a/circus/lib
               mise trust
               aws sso login
               alogin
-              aws sts get-caller-identity
               ```
             infra_org_readme: |-
-              ## Usage: Organizational-level Terraform: circus-lib
+              ## Organizational-level Terraform: circus-lib
 
               ```bash
               cd infra/org-circus
               mise trust
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
             infra_acc_readme: |-
-              ## Usage: Account-specific Terraform: circus-lib
+              ## Account-specific Terraform: circus-lib
 
               ```bash
               cd infra/acc-circus-lib
@@ -2800,28 +2726,26 @@ config:
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             account_readme: |-
-              ## Usage: AWS Environment: circus-log
+              ## AWS Environment: circus-log
 
               ```bash
               cd a/circus/log
               mise trust
               aws sso login
               alogin
-              aws sts get-caller-identity
               ```
             infra_org_readme: |-
-              ## Usage: Organizational-level Terraform: circus-log
+              ## Organizational-level Terraform: circus-log
 
               ```bash
               cd infra/org-circus
               mise trust
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
             infra_acc_readme: |-
-              ## Usage: Account-specific Terraform: circus-log
+              ## Account-specific Terraform: circus-log
 
               ```bash
               cd infra/acc-circus-log
@@ -2873,28 +2797,26 @@ config:
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             account_readme: |-
-              ## Usage: AWS Environment: circus-net
+              ## AWS Environment: circus-net
 
               ```bash
               cd a/circus/net
               mise trust
               aws sso login
               alogin
-              aws sts get-caller-identity
               ```
             infra_org_readme: |-
-              ## Usage: Organizational-level Terraform: circus-net
+              ## Organizational-level Terraform: circus-net
 
               ```bash
               cd infra/org-circus
               mise trust
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
             infra_acc_readme: |-
-              ## Usage: Account-specific Terraform: circus-net
+              ## Account-specific Terraform: circus-net
 
               ```bash
               cd infra/acc-circus-net
@@ -2946,28 +2868,26 @@ config:
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             account_readme: |-
-              ## Usage: AWS Environment: circus-ops
+              ## AWS Environment: circus-ops
 
               ```bash
               cd a/circus/ops
               mise trust
               aws sso login
               alogin
-              aws sts get-caller-identity
               ```
             infra_org_readme: |-
-              ## Usage: Organizational-level Terraform: circus-ops
+              ## Organizational-level Terraform: circus-ops
 
               ```bash
               cd infra/org-circus
               mise trust
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
             infra_acc_readme: |-
-              ## Usage: Account-specific Terraform: circus-ops
+              ## Account-specific Terraform: circus-ops
 
               ```bash
               cd infra/acc-circus-ops
@@ -3024,28 +2944,26 @@ config:
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             account_readme: |-
-              ## Usage: AWS Environment: coil-org
+              ## AWS Environment: coil-org
 
               ```bash
               cd a/coil/org
               mise trust
               aws sso login
               alogin
-              aws sts get-caller-identity
               ```
             infra_org_readme: |-
-              ## Usage: Organizational-level Terraform: coil-org
+              ## Organizational-level Terraform: coil-org
 
               ```bash
               cd infra/org-coil
               mise trust
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
             infra_acc_readme: |-
-              ## Usage: Account-specific Terraform: coil-org
+              ## Account-specific Terraform: coil-org
 
               ```bash
               cd infra/acc-coil-org
@@ -3097,28 +3015,26 @@ config:
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             account_readme: |-
-              ## Usage: AWS Environment: coil-hub
+              ## AWS Environment: coil-hub
 
               ```bash
               cd a/coil/hub
               mise trust
               aws sso login
               alogin
-              aws sts get-caller-identity
               ```
             infra_org_readme: |-
-              ## Usage: Organizational-level Terraform: coil-hub
+              ## Organizational-level Terraform: coil-hub
 
               ```bash
               cd infra/org-coil
               mise trust
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
             infra_acc_readme: |-
-              ## Usage: Account-specific Terraform: coil-hub
+              ## Account-specific Terraform: coil-hub
 
               ```bash
               cd infra/acc-coil-hub
@@ -3170,28 +3086,26 @@ config:
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             account_readme: |-
-              ## Usage: AWS Environment: coil-lib
+              ## AWS Environment: coil-lib
 
               ```bash
               cd a/coil/lib
               mise trust
               aws sso login
               alogin
-              aws sts get-caller-identity
               ```
             infra_org_readme: |-
-              ## Usage: Organizational-level Terraform: coil-lib
+              ## Organizational-level Terraform: coil-lib
 
               ```bash
               cd infra/org-coil
               mise trust
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
             infra_acc_readme: |-
-              ## Usage: Account-specific Terraform: coil-lib
+              ## Account-specific Terraform: coil-lib
 
               ```bash
               cd infra/acc-coil-lib
@@ -3243,28 +3157,26 @@ config:
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             account_readme: |-
-              ## Usage: AWS Environment: coil-net
+              ## AWS Environment: coil-net
 
               ```bash
               cd a/coil/net
               mise trust
               aws sso login
               alogin
-              aws sts get-caller-identity
               ```
             infra_org_readme: |-
-              ## Usage: Organizational-level Terraform: coil-net
+              ## Organizational-level Terraform: coil-net
 
               ```bash
               cd infra/org-coil
               mise trust
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
             infra_acc_readme: |-
-              ## Usage: Account-specific Terraform: coil-net
+              ## Account-specific Terraform: coil-net
 
               ```bash
               cd infra/acc-coil-net
@@ -3321,28 +3233,26 @@ config:
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             account_readme: |-
-              ## Usage: AWS Environment: curl-org
+              ## AWS Environment: curl-org
 
               ```bash
               cd a/curl/org
               mise trust
               aws sso login
               alogin
-              aws sts get-caller-identity
               ```
             infra_org_readme: |-
-              ## Usage: Organizational-level Terraform: curl-org
+              ## Organizational-level Terraform: curl-org
 
               ```bash
               cd infra/org-curl
               mise trust
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
             infra_acc_readme: |-
-              ## Usage: Account-specific Terraform: curl-org
+              ## Account-specific Terraform: curl-org
 
               ```bash
               cd infra/acc-curl-org
@@ -3394,28 +3304,26 @@ config:
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             account_readme: |-
-              ## Usage: AWS Environment: curl-hub
+              ## AWS Environment: curl-hub
 
               ```bash
               cd a/curl/hub
               mise trust
               aws sso login
               alogin
-              aws sts get-caller-identity
               ```
             infra_org_readme: |-
-              ## Usage: Organizational-level Terraform: curl-hub
+              ## Organizational-level Terraform: curl-hub
 
               ```bash
               cd infra/org-curl
               mise trust
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
             infra_acc_readme: |-
-              ## Usage: Account-specific Terraform: curl-hub
+              ## Account-specific Terraform: curl-hub
 
               ```bash
               cd infra/acc-curl-hub
@@ -3467,28 +3375,26 @@ config:
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             account_readme: |-
-              ## Usage: AWS Environment: curl-lib
+              ## AWS Environment: curl-lib
 
               ```bash
               cd a/curl/lib
               mise trust
               aws sso login
               alogin
-              aws sts get-caller-identity
               ```
             infra_org_readme: |-
-              ## Usage: Organizational-level Terraform: curl-lib
+              ## Organizational-level Terraform: curl-lib
 
               ```bash
               cd infra/org-curl
               mise trust
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
             infra_acc_readme: |-
-              ## Usage: Account-specific Terraform: curl-lib
+              ## Account-specific Terraform: curl-lib
 
               ```bash
               cd infra/acc-curl-lib
@@ -3540,28 +3446,26 @@ config:
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             account_readme: |-
-              ## Usage: AWS Environment: curl-net
+              ## AWS Environment: curl-net
 
               ```bash
               cd a/curl/net
               mise trust
               aws sso login
               alogin
-              aws sts get-caller-identity
               ```
             infra_org_readme: |-
-              ## Usage: Organizational-level Terraform: curl-net
+              ## Organizational-level Terraform: curl-net
 
               ```bash
               cd infra/org-curl
               mise trust
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
             infra_acc_readme: |-
-              ## Usage: Account-specific Terraform: curl-net
+              ## Account-specific Terraform: curl-net
 
               ```bash
               cd infra/acc-curl-net
@@ -3611,28 +3515,26 @@ config:
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             account_readme: |-
-              ## Usage: AWS Environment: defn-org
+              ## AWS Environment: defn-org
 
               ```bash
               cd a/defn/org
               mise trust
               aws sso login
               alogin
-              aws sts get-caller-identity
               ```
             infra_org_readme: |-
-              ## Usage: Organizational-level Terraform: defn-org
+              ## Organizational-level Terraform: defn-org
 
               ```bash
               cd infra/org-defn
               mise trust
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
             infra_acc_readme: |-
-              ## Usage: Account-specific Terraform: defn-org
+              ## Account-specific Terraform: defn-org
 
               ```bash
               cd infra/acc-defn-org
@@ -3689,28 +3591,26 @@ config:
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             account_readme: |-
-              ## Usage: AWS Environment: fogg-org
+              ## AWS Environment: fogg-org
 
               ```bash
               cd a/fogg/org
               mise trust
               aws sso login
               alogin
-              aws sts get-caller-identity
               ```
             infra_org_readme: |-
-              ## Usage: Organizational-level Terraform: fogg-org
+              ## Organizational-level Terraform: fogg-org
 
               ```bash
               cd infra/org-fogg
               mise trust
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
             infra_acc_readme: |-
-              ## Usage: Account-specific Terraform: fogg-org
+              ## Account-specific Terraform: fogg-org
 
               ```bash
               cd infra/acc-fogg-org
@@ -3762,28 +3662,26 @@ config:
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             account_readme: |-
-              ## Usage: AWS Environment: fogg-ci
+              ## AWS Environment: fogg-ci
 
               ```bash
               cd a/fogg/ci
               mise trust
               aws sso login
               alogin
-              aws sts get-caller-identity
               ```
             infra_org_readme: |-
-              ## Usage: Organizational-level Terraform: fogg-ci
+              ## Organizational-level Terraform: fogg-ci
 
               ```bash
               cd infra/org-fogg
               mise trust
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
             infra_acc_readme: |-
-              ## Usage: Account-specific Terraform: fogg-ci
+              ## Account-specific Terraform: fogg-ci
 
               ```bash
               cd infra/acc-fogg-ci
@@ -3835,28 +3733,26 @@ config:
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             account_readme: |-
-              ## Usage: AWS Environment: fogg-dev
+              ## AWS Environment: fogg-dev
 
               ```bash
               cd a/fogg/dev
               mise trust
               aws sso login
               alogin
-              aws sts get-caller-identity
               ```
             infra_org_readme: |-
-              ## Usage: Organizational-level Terraform: fogg-dev
+              ## Organizational-level Terraform: fogg-dev
 
               ```bash
               cd infra/org-fogg
               mise trust
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
             infra_acc_readme: |-
-              ## Usage: Account-specific Terraform: fogg-dev
+              ## Account-specific Terraform: fogg-dev
 
               ```bash
               cd infra/acc-fogg-dev
@@ -3908,28 +3804,26 @@ config:
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             account_readme: |-
-              ## Usage: AWS Environment: fogg-hub
+              ## AWS Environment: fogg-hub
 
               ```bash
               cd a/fogg/hub
               mise trust
               aws sso login
               alogin
-              aws sts get-caller-identity
               ```
             infra_org_readme: |-
-              ## Usage: Organizational-level Terraform: fogg-hub
+              ## Organizational-level Terraform: fogg-hub
 
               ```bash
               cd infra/org-fogg
               mise trust
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
             infra_acc_readme: |-
-              ## Usage: Account-specific Terraform: fogg-hub
+              ## Account-specific Terraform: fogg-hub
 
               ```bash
               cd infra/acc-fogg-hub
@@ -3981,28 +3875,26 @@ config:
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             account_readme: |-
-              ## Usage: AWS Environment: fogg-lib
+              ## AWS Environment: fogg-lib
 
               ```bash
               cd a/fogg/lib
               mise trust
               aws sso login
               alogin
-              aws sts get-caller-identity
               ```
             infra_org_readme: |-
-              ## Usage: Organizational-level Terraform: fogg-lib
+              ## Organizational-level Terraform: fogg-lib
 
               ```bash
               cd infra/org-fogg
               mise trust
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
             infra_acc_readme: |-
-              ## Usage: Account-specific Terraform: fogg-lib
+              ## Account-specific Terraform: fogg-lib
 
               ```bash
               cd infra/acc-fogg-lib
@@ -4054,28 +3946,26 @@ config:
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             account_readme: |-
-              ## Usage: AWS Environment: fogg-log
+              ## AWS Environment: fogg-log
 
               ```bash
               cd a/fogg/log
               mise trust
               aws sso login
               alogin
-              aws sts get-caller-identity
               ```
             infra_org_readme: |-
-              ## Usage: Organizational-level Terraform: fogg-log
+              ## Organizational-level Terraform: fogg-log
 
               ```bash
               cd infra/org-fogg
               mise trust
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
             infra_acc_readme: |-
-              ## Usage: Account-specific Terraform: fogg-log
+              ## Account-specific Terraform: fogg-log
 
               ```bash
               cd infra/acc-fogg-log
@@ -4127,28 +4017,26 @@ config:
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             account_readme: |-
-              ## Usage: AWS Environment: fogg-net
+              ## AWS Environment: fogg-net
 
               ```bash
               cd a/fogg/net
               mise trust
               aws sso login
               alogin
-              aws sts get-caller-identity
               ```
             infra_org_readme: |-
-              ## Usage: Organizational-level Terraform: fogg-net
+              ## Organizational-level Terraform: fogg-net
 
               ```bash
               cd infra/org-fogg
               mise trust
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
             infra_acc_readme: |-
-              ## Usage: Account-specific Terraform: fogg-net
+              ## Account-specific Terraform: fogg-net
 
               ```bash
               cd infra/acc-fogg-net
@@ -4200,28 +4088,26 @@ config:
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             account_readme: |-
-              ## Usage: AWS Environment: fogg-ops
+              ## AWS Environment: fogg-ops
 
               ```bash
               cd a/fogg/ops
               mise trust
               aws sso login
               alogin
-              aws sts get-caller-identity
               ```
             infra_org_readme: |-
-              ## Usage: Organizational-level Terraform: fogg-ops
+              ## Organizational-level Terraform: fogg-ops
 
               ```bash
               cd infra/org-fogg
               mise trust
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
             infra_acc_readme: |-
-              ## Usage: Account-specific Terraform: fogg-ops
+              ## Account-specific Terraform: fogg-ops
 
               ```bash
               cd infra/acc-fogg-ops
@@ -4273,28 +4159,26 @@ config:
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             account_readme: |-
-              ## Usage: AWS Environment: fogg-prod
+              ## AWS Environment: fogg-prod
 
               ```bash
               cd a/fogg/prod
               mise trust
               aws sso login
               alogin
-              aws sts get-caller-identity
               ```
             infra_org_readme: |-
-              ## Usage: Organizational-level Terraform: fogg-prod
+              ## Organizational-level Terraform: fogg-prod
 
               ```bash
               cd infra/org-fogg
               mise trust
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
             infra_acc_readme: |-
-              ## Usage: Account-specific Terraform: fogg-prod
+              ## Account-specific Terraform: fogg-prod
 
               ```bash
               cd infra/acc-fogg-prod
@@ -4346,28 +4230,26 @@ config:
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             account_readme: |-
-              ## Usage: AWS Environment: fogg-pub
+              ## AWS Environment: fogg-pub
 
               ```bash
               cd a/fogg/pub
               mise trust
               aws sso login
               alogin
-              aws sts get-caller-identity
               ```
             infra_org_readme: |-
-              ## Usage: Organizational-level Terraform: fogg-pub
+              ## Organizational-level Terraform: fogg-pub
 
               ```bash
               cd infra/org-fogg
               mise trust
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
             infra_acc_readme: |-
-              ## Usage: Account-specific Terraform: fogg-pub
+              ## Account-specific Terraform: fogg-pub
 
               ```bash
               cd infra/acc-fogg-pub
@@ -4424,28 +4306,26 @@ config:
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             account_readme: |-
-              ## Usage: AWS Environment: gyre-org
+              ## AWS Environment: gyre-org
 
               ```bash
               cd a/gyre/org
               mise trust
               aws sso login
               alogin
-              aws sts get-caller-identity
               ```
             infra_org_readme: |-
-              ## Usage: Organizational-level Terraform: gyre-org
+              ## Organizational-level Terraform: gyre-org
 
               ```bash
               cd infra/org-gyre
               mise trust
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
             infra_acc_readme: |-
-              ## Usage: Account-specific Terraform: gyre-org
+              ## Account-specific Terraform: gyre-org
 
               ```bash
               cd infra/acc-gyre-org
@@ -4497,28 +4377,26 @@ config:
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             account_readme: |-
-              ## Usage: AWS Environment: gyre-ops
+              ## AWS Environment: gyre-ops
 
               ```bash
               cd a/gyre/ops
               mise trust
               aws sso login
               alogin
-              aws sts get-caller-identity
               ```
             infra_org_readme: |-
-              ## Usage: Organizational-level Terraform: gyre-ops
+              ## Organizational-level Terraform: gyre-ops
 
               ```bash
               cd infra/org-gyre
               mise trust
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
             infra_acc_readme: |-
-              ## Usage: Account-specific Terraform: gyre-ops
+              ## Account-specific Terraform: gyre-ops
 
               ```bash
               cd infra/acc-gyre-ops
@@ -4575,28 +4453,26 @@ config:
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             account_readme: |-
-              ## Usage: AWS Environment: helix-org
+              ## AWS Environment: helix-org
 
               ```bash
               cd a/helix/org
               mise trust
               aws sso login
               alogin
-              aws sts get-caller-identity
               ```
             infra_org_readme: |-
-              ## Usage: Organizational-level Terraform: helix-org
+              ## Organizational-level Terraform: helix-org
 
               ```bash
               cd infra/org-helix
               mise trust
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
             infra_acc_readme: |-
-              ## Usage: Account-specific Terraform: helix-org
+              ## Account-specific Terraform: helix-org
 
               ```bash
               cd infra/acc-helix-org
@@ -4648,28 +4524,26 @@ config:
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             account_readme: |-
-              ## Usage: AWS Environment: helix-ci
+              ## AWS Environment: helix-ci
 
               ```bash
               cd a/helix/ci
               mise trust
               aws sso login
               alogin
-              aws sts get-caller-identity
               ```
             infra_org_readme: |-
-              ## Usage: Organizational-level Terraform: helix-ci
+              ## Organizational-level Terraform: helix-ci
 
               ```bash
               cd infra/org-helix
               mise trust
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
             infra_acc_readme: |-
-              ## Usage: Account-specific Terraform: helix-ci
+              ## Account-specific Terraform: helix-ci
 
               ```bash
               cd infra/acc-helix-ci
@@ -4721,28 +4595,26 @@ config:
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             account_readme: |-
-              ## Usage: AWS Environment: helix-dev
+              ## AWS Environment: helix-dev
 
               ```bash
               cd a/helix/dev
               mise trust
               aws sso login
               alogin
-              aws sts get-caller-identity
               ```
             infra_org_readme: |-
-              ## Usage: Organizational-level Terraform: helix-dev
+              ## Organizational-level Terraform: helix-dev
 
               ```bash
               cd infra/org-helix
               mise trust
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
             infra_acc_readme: |-
-              ## Usage: Account-specific Terraform: helix-dev
+              ## Account-specific Terraform: helix-dev
 
               ```bash
               cd infra/acc-helix-dev
@@ -4794,28 +4666,26 @@ config:
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             account_readme: |-
-              ## Usage: AWS Environment: helix-hub
+              ## AWS Environment: helix-hub
 
               ```bash
               cd a/helix/hub
               mise trust
               aws sso login
               alogin
-              aws sts get-caller-identity
               ```
             infra_org_readme: |-
-              ## Usage: Organizational-level Terraform: helix-hub
+              ## Organizational-level Terraform: helix-hub
 
               ```bash
               cd infra/org-helix
               mise trust
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
             infra_acc_readme: |-
-              ## Usage: Account-specific Terraform: helix-hub
+              ## Account-specific Terraform: helix-hub
 
               ```bash
               cd infra/acc-helix-hub
@@ -4867,28 +4737,26 @@ config:
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             account_readme: |-
-              ## Usage: AWS Environment: helix-lib
+              ## AWS Environment: helix-lib
 
               ```bash
               cd a/helix/lib
               mise trust
               aws sso login
               alogin
-              aws sts get-caller-identity
               ```
             infra_org_readme: |-
-              ## Usage: Organizational-level Terraform: helix-lib
+              ## Organizational-level Terraform: helix-lib
 
               ```bash
               cd infra/org-helix
               mise trust
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
             infra_acc_readme: |-
-              ## Usage: Account-specific Terraform: helix-lib
+              ## Account-specific Terraform: helix-lib
 
               ```bash
               cd infra/acc-helix-lib
@@ -4940,28 +4808,26 @@ config:
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             account_readme: |-
-              ## Usage: AWS Environment: helix-log
+              ## AWS Environment: helix-log
 
               ```bash
               cd a/helix/log
               mise trust
               aws sso login
               alogin
-              aws sts get-caller-identity
               ```
             infra_org_readme: |-
-              ## Usage: Organizational-level Terraform: helix-log
+              ## Organizational-level Terraform: helix-log
 
               ```bash
               cd infra/org-helix
               mise trust
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
             infra_acc_readme: |-
-              ## Usage: Account-specific Terraform: helix-log
+              ## Account-specific Terraform: helix-log
 
               ```bash
               cd infra/acc-helix-log
@@ -5013,28 +4879,26 @@ config:
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             account_readme: |-
-              ## Usage: AWS Environment: helix-net
+              ## AWS Environment: helix-net
 
               ```bash
               cd a/helix/net
               mise trust
               aws sso login
               alogin
-              aws sts get-caller-identity
               ```
             infra_org_readme: |-
-              ## Usage: Organizational-level Terraform: helix-net
+              ## Organizational-level Terraform: helix-net
 
               ```bash
               cd infra/org-helix
               mise trust
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
             infra_acc_readme: |-
-              ## Usage: Account-specific Terraform: helix-net
+              ## Account-specific Terraform: helix-net
 
               ```bash
               cd infra/acc-helix-net
@@ -5086,28 +4950,26 @@ config:
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             account_readme: |-
-              ## Usage: AWS Environment: helix-ops
+              ## AWS Environment: helix-ops
 
               ```bash
               cd a/helix/ops
               mise trust
               aws sso login
               alogin
-              aws sts get-caller-identity
               ```
             infra_org_readme: |-
-              ## Usage: Organizational-level Terraform: helix-ops
+              ## Organizational-level Terraform: helix-ops
 
               ```bash
               cd infra/org-helix
               mise trust
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
             infra_acc_readme: |-
-              ## Usage: Account-specific Terraform: helix-ops
+              ## Account-specific Terraform: helix-ops
 
               ```bash
               cd infra/acc-helix-ops
@@ -5159,28 +5021,26 @@ config:
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             account_readme: |-
-              ## Usage: AWS Environment: helix-prod
+              ## AWS Environment: helix-prod
 
               ```bash
               cd a/helix/prod
               mise trust
               aws sso login
               alogin
-              aws sts get-caller-identity
               ```
             infra_org_readme: |-
-              ## Usage: Organizational-level Terraform: helix-prod
+              ## Organizational-level Terraform: helix-prod
 
               ```bash
               cd infra/org-helix
               mise trust
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
             infra_acc_readme: |-
-              ## Usage: Account-specific Terraform: helix-prod
+              ## Account-specific Terraform: helix-prod
 
               ```bash
               cd infra/acc-helix-prod
@@ -5232,28 +5092,26 @@ config:
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             account_readme: |-
-              ## Usage: AWS Environment: helix-pub
+              ## AWS Environment: helix-pub
 
               ```bash
               cd a/helix/pub
               mise trust
               aws sso login
               alogin
-              aws sts get-caller-identity
               ```
             infra_org_readme: |-
-              ## Usage: Organizational-level Terraform: helix-pub
+              ## Organizational-level Terraform: helix-pub
 
               ```bash
               cd infra/org-helix
               mise trust
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
             infra_acc_readme: |-
-              ## Usage: Account-specific Terraform: helix-pub
+              ## Account-specific Terraform: helix-pub
 
               ```bash
               cd infra/acc-helix-pub
@@ -5310,28 +5168,26 @@ config:
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             account_readme: |-
-              ## Usage: AWS Environment: imma-org
+              ## AWS Environment: imma-org
 
               ```bash
               cd a/imma/org
               mise trust
               aws sso login
               alogin
-              aws sts get-caller-identity
               ```
             infra_org_readme: |-
-              ## Usage: Organizational-level Terraform: imma-org
+              ## Organizational-level Terraform: imma-org
 
               ```bash
               cd infra/org-imma
               mise trust
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
             infra_acc_readme: |-
-              ## Usage: Account-specific Terraform: imma-org
+              ## Account-specific Terraform: imma-org
 
               ```bash
               cd infra/acc-imma-org
@@ -5383,28 +5239,26 @@ config:
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             account_readme: |-
-              ## Usage: AWS Environment: imma-dev
+              ## AWS Environment: imma-dev
 
               ```bash
               cd a/imma/dev
               mise trust
               aws sso login
               alogin
-              aws sts get-caller-identity
               ```
             infra_org_readme: |-
-              ## Usage: Organizational-level Terraform: imma-dev
+              ## Organizational-level Terraform: imma-dev
 
               ```bash
               cd infra/org-imma
               mise trust
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
             infra_acc_readme: |-
-              ## Usage: Account-specific Terraform: imma-dev
+              ## Account-specific Terraform: imma-dev
 
               ```bash
               cd infra/acc-imma-dev
@@ -5456,28 +5310,26 @@ config:
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             account_readme: |-
-              ## Usage: AWS Environment: imma-lib
+              ## AWS Environment: imma-lib
 
               ```bash
               cd a/imma/lib
               mise trust
               aws sso login
               alogin
-              aws sts get-caller-identity
               ```
             infra_org_readme: |-
-              ## Usage: Organizational-level Terraform: imma-lib
+              ## Organizational-level Terraform: imma-lib
 
               ```bash
               cd infra/org-imma
               mise trust
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
             infra_acc_readme: |-
-              ## Usage: Account-specific Terraform: imma-lib
+              ## Account-specific Terraform: imma-lib
 
               ```bash
               cd infra/acc-imma-lib
@@ -5529,28 +5381,26 @@ config:
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             account_readme: |-
-              ## Usage: AWS Environment: imma-log
+              ## AWS Environment: imma-log
 
               ```bash
               cd a/imma/log
               mise trust
               aws sso login
               alogin
-              aws sts get-caller-identity
               ```
             infra_org_readme: |-
-              ## Usage: Organizational-level Terraform: imma-log
+              ## Organizational-level Terraform: imma-log
 
               ```bash
               cd infra/org-imma
               mise trust
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
             infra_acc_readme: |-
-              ## Usage: Account-specific Terraform: imma-log
+              ## Account-specific Terraform: imma-log
 
               ```bash
               cd infra/acc-imma-log
@@ -5602,28 +5452,26 @@ config:
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             account_readme: |-
-              ## Usage: AWS Environment: imma-net
+              ## AWS Environment: imma-net
 
               ```bash
               cd a/imma/net
               mise trust
               aws sso login
               alogin
-              aws sts get-caller-identity
               ```
             infra_org_readme: |-
-              ## Usage: Organizational-level Terraform: imma-net
+              ## Organizational-level Terraform: imma-net
 
               ```bash
               cd infra/org-imma
               mise trust
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
             infra_acc_readme: |-
-              ## Usage: Account-specific Terraform: imma-net
+              ## Account-specific Terraform: imma-net
 
               ```bash
               cd infra/acc-imma-net
@@ -5675,28 +5523,26 @@ config:
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             account_readme: |-
-              ## Usage: AWS Environment: imma-pub
+              ## AWS Environment: imma-pub
 
               ```bash
               cd a/imma/pub
               mise trust
               aws sso login
               alogin
-              aws sts get-caller-identity
               ```
             infra_org_readme: |-
-              ## Usage: Organizational-level Terraform: imma-pub
+              ## Organizational-level Terraform: imma-pub
 
               ```bash
               cd infra/org-imma
               mise trust
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
             infra_acc_readme: |-
-              ## Usage: Account-specific Terraform: imma-pub
+              ## Account-specific Terraform: imma-pub
 
               ```bash
               cd infra/acc-imma-pub
@@ -5753,28 +5599,26 @@ config:
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             account_readme: |-
-              ## Usage: AWS Environment: immanent-org
+              ## AWS Environment: immanent-org
 
               ```bash
               cd a/immanent/org
               mise trust
               aws sso login
               alogin
-              aws sts get-caller-identity
               ```
             infra_org_readme: |-
-              ## Usage: Organizational-level Terraform: immanent-org
+              ## Organizational-level Terraform: immanent-org
 
               ```bash
               cd infra/org-immanent
               mise trust
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
             infra_acc_readme: |-
-              ## Usage: Account-specific Terraform: immanent-org
+              ## Account-specific Terraform: immanent-org
 
               ```bash
               cd infra/acc-immanent-org
@@ -5826,28 +5670,26 @@ config:
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             account_readme: |-
-              ## Usage: AWS Environment: immanent-changer
+              ## AWS Environment: immanent-changer
 
               ```bash
               cd a/immanent/changer
               mise trust
               aws sso login
               alogin
-              aws sts get-caller-identity
               ```
             infra_org_readme: |-
-              ## Usage: Organizational-level Terraform: immanent-changer
+              ## Organizational-level Terraform: immanent-changer
 
               ```bash
               cd infra/org-immanent
               mise trust
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
             infra_acc_readme: |-
-              ## Usage: Account-specific Terraform: immanent-changer
+              ## Account-specific Terraform: immanent-changer
 
               ```bash
               cd infra/acc-immanent-changer
@@ -5899,28 +5741,26 @@ config:
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             account_readme: |-
-              ## Usage: AWS Environment: immanent-chanter
+              ## AWS Environment: immanent-chanter
 
               ```bash
               cd a/immanent/chanter
               mise trust
               aws sso login
               alogin
-              aws sts get-caller-identity
               ```
             infra_org_readme: |-
-              ## Usage: Organizational-level Terraform: immanent-chanter
+              ## Organizational-level Terraform: immanent-chanter
 
               ```bash
               cd infra/org-immanent
               mise trust
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
             infra_acc_readme: |-
-              ## Usage: Account-specific Terraform: immanent-chanter
+              ## Account-specific Terraform: immanent-chanter
 
               ```bash
               cd infra/acc-immanent-chanter
@@ -5972,28 +5812,26 @@ config:
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             account_readme: |-
-              ## Usage: AWS Environment: immanent-doorkeeper
+              ## AWS Environment: immanent-doorkeeper
 
               ```bash
               cd a/immanent/doorkeeper
               mise trust
               aws sso login
               alogin
-              aws sts get-caller-identity
               ```
             infra_org_readme: |-
-              ## Usage: Organizational-level Terraform: immanent-doorkeeper
+              ## Organizational-level Terraform: immanent-doorkeeper
 
               ```bash
               cd infra/org-immanent
               mise trust
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
             infra_acc_readme: |-
-              ## Usage: Account-specific Terraform: immanent-doorkeeper
+              ## Account-specific Terraform: immanent-doorkeeper
 
               ```bash
               cd infra/acc-immanent-doorkeeper
@@ -6045,28 +5883,26 @@ config:
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             account_readme: |-
-              ## Usage: AWS Environment: immanent-ged
+              ## AWS Environment: immanent-ged
 
               ```bash
               cd a/immanent/ged
               mise trust
               aws sso login
               alogin
-              aws sts get-caller-identity
               ```
             infra_org_readme: |-
-              ## Usage: Organizational-level Terraform: immanent-ged
+              ## Organizational-level Terraform: immanent-ged
 
               ```bash
               cd infra/org-immanent
               mise trust
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
             infra_acc_readme: |-
-              ## Usage: Account-specific Terraform: immanent-ged
+              ## Account-specific Terraform: immanent-ged
 
               ```bash
               cd infra/acc-immanent-ged
@@ -6118,28 +5954,26 @@ config:
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             account_readme: |-
-              ## Usage: AWS Environment: immanent-hand
+              ## AWS Environment: immanent-hand
 
               ```bash
               cd a/immanent/hand
               mise trust
               aws sso login
               alogin
-              aws sts get-caller-identity
               ```
             infra_org_readme: |-
-              ## Usage: Organizational-level Terraform: immanent-hand
+              ## Organizational-level Terraform: immanent-hand
 
               ```bash
               cd infra/org-immanent
               mise trust
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
             infra_acc_readme: |-
-              ## Usage: Account-specific Terraform: immanent-hand
+              ## Account-specific Terraform: immanent-hand
 
               ```bash
               cd infra/acc-immanent-hand
@@ -6191,28 +6025,26 @@ config:
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             account_readme: |-
-              ## Usage: AWS Environment: immanent-herbal
+              ## AWS Environment: immanent-herbal
 
               ```bash
               cd a/immanent/herbal
               mise trust
               aws sso login
               alogin
-              aws sts get-caller-identity
               ```
             infra_org_readme: |-
-              ## Usage: Organizational-level Terraform: immanent-herbal
+              ## Organizational-level Terraform: immanent-herbal
 
               ```bash
               cd infra/org-immanent
               mise trust
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
             infra_acc_readme: |-
-              ## Usage: Account-specific Terraform: immanent-herbal
+              ## Account-specific Terraform: immanent-herbal
 
               ```bash
               cd infra/acc-immanent-herbal
@@ -6264,28 +6096,26 @@ config:
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             account_readme: |-
-              ## Usage: AWS Environment: immanent-namer
+              ## AWS Environment: immanent-namer
 
               ```bash
               cd a/immanent/namer
               mise trust
               aws sso login
               alogin
-              aws sts get-caller-identity
               ```
             infra_org_readme: |-
-              ## Usage: Organizational-level Terraform: immanent-namer
+              ## Organizational-level Terraform: immanent-namer
 
               ```bash
               cd infra/org-immanent
               mise trust
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
             infra_acc_readme: |-
-              ## Usage: Account-specific Terraform: immanent-namer
+              ## Account-specific Terraform: immanent-namer
 
               ```bash
               cd infra/acc-immanent-namer
@@ -6337,28 +6167,26 @@ config:
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             account_readme: |-
-              ## Usage: AWS Environment: immanent-patterner
+              ## AWS Environment: immanent-patterner
 
               ```bash
               cd a/immanent/patterner
               mise trust
               aws sso login
               alogin
-              aws sts get-caller-identity
               ```
             infra_org_readme: |-
-              ## Usage: Organizational-level Terraform: immanent-patterner
+              ## Organizational-level Terraform: immanent-patterner
 
               ```bash
               cd infra/org-immanent
               mise trust
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
             infra_acc_readme: |-
-              ## Usage: Account-specific Terraform: immanent-patterner
+              ## Account-specific Terraform: immanent-patterner
 
               ```bash
               cd infra/acc-immanent-patterner
@@ -6410,28 +6238,26 @@ config:
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             account_readme: |-
-              ## Usage: AWS Environment: immanent-roke
+              ## AWS Environment: immanent-roke
 
               ```bash
               cd a/immanent/roke
               mise trust
               aws sso login
               alogin
-              aws sts get-caller-identity
               ```
             infra_org_readme: |-
-              ## Usage: Organizational-level Terraform: immanent-roke
+              ## Organizational-level Terraform: immanent-roke
 
               ```bash
               cd infra/org-immanent
               mise trust
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
             infra_acc_readme: |-
-              ## Usage: Account-specific Terraform: immanent-roke
+              ## Account-specific Terraform: immanent-roke
 
               ```bash
               cd infra/acc-immanent-roke
@@ -6483,28 +6309,26 @@ config:
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             account_readme: |-
-              ## Usage: AWS Environment: immanent-summoner
+              ## AWS Environment: immanent-summoner
 
               ```bash
               cd a/immanent/summoner
               mise trust
               aws sso login
               alogin
-              aws sts get-caller-identity
               ```
             infra_org_readme: |-
-              ## Usage: Organizational-level Terraform: immanent-summoner
+              ## Organizational-level Terraform: immanent-summoner
 
               ```bash
               cd infra/org-immanent
               mise trust
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
             infra_acc_readme: |-
-              ## Usage: Account-specific Terraform: immanent-summoner
+              ## Account-specific Terraform: immanent-summoner
 
               ```bash
               cd infra/acc-immanent-summoner
@@ -6556,28 +6380,26 @@ config:
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             account_readme: |-
-              ## Usage: AWS Environment: immanent-windkey
+              ## AWS Environment: immanent-windkey
 
               ```bash
               cd a/immanent/windkey
               mise trust
               aws sso login
               alogin
-              aws sts get-caller-identity
               ```
             infra_org_readme: |-
-              ## Usage: Organizational-level Terraform: immanent-windkey
+              ## Organizational-level Terraform: immanent-windkey
 
               ```bash
               cd infra/org-immanent
               mise trust
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
             infra_acc_readme: |-
-              ## Usage: Account-specific Terraform: immanent-windkey
+              ## Account-specific Terraform: immanent-windkey
 
               ```bash
               cd infra/acc-immanent-windkey
@@ -6634,28 +6456,26 @@ config:
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             account_readme: |-
-              ## Usage: AWS Environment: jianghu-org
+              ## AWS Environment: jianghu-org
 
               ```bash
               cd a/jianghu/org
               mise trust
               aws sso login
               alogin
-              aws sts get-caller-identity
               ```
             infra_org_readme: |-
-              ## Usage: Organizational-level Terraform: jianghu-org
+              ## Organizational-level Terraform: jianghu-org
 
               ```bash
               cd infra/org-jianghu
               mise trust
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
             infra_acc_readme: |-
-              ## Usage: Account-specific Terraform: jianghu-org
+              ## Account-specific Terraform: jianghu-org
 
               ```bash
               cd infra/acc-jianghu-org
@@ -6707,28 +6527,26 @@ config:
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             account_readme: |-
-              ## Usage: AWS Environment: jianghu-log
+              ## AWS Environment: jianghu-log
 
               ```bash
               cd a/jianghu/log
               mise trust
               aws sso login
               alogin
-              aws sts get-caller-identity
               ```
             infra_org_readme: |-
-              ## Usage: Organizational-level Terraform: jianghu-log
+              ## Organizational-level Terraform: jianghu-log
 
               ```bash
               cd infra/org-jianghu
               mise trust
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
             infra_acc_readme: |-
-              ## Usage: Account-specific Terraform: jianghu-log
+              ## Account-specific Terraform: jianghu-log
 
               ```bash
               cd infra/acc-jianghu-log
@@ -6780,28 +6598,26 @@ config:
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             account_readme: |-
-              ## Usage: AWS Environment: jianghu-net
+              ## AWS Environment: jianghu-net
 
               ```bash
               cd a/jianghu/net
               mise trust
               aws sso login
               alogin
-              aws sts get-caller-identity
               ```
             infra_org_readme: |-
-              ## Usage: Organizational-level Terraform: jianghu-net
+              ## Organizational-level Terraform: jianghu-net
 
               ```bash
               cd infra/org-jianghu
               mise trust
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
             infra_acc_readme: |-
-              ## Usage: Account-specific Terraform: jianghu-net
+              ## Account-specific Terraform: jianghu-net
 
               ```bash
               cd infra/acc-jianghu-net
@@ -6858,28 +6674,26 @@ config:
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             account_readme: |-
-              ## Usage: AWS Environment: spiral-org
+              ## AWS Environment: spiral-org
 
               ```bash
               cd a/spiral/org
               mise trust
               aws sso login
               alogin
-              aws sts get-caller-identity
               ```
             infra_org_readme: |-
-              ## Usage: Organizational-level Terraform: spiral-org
+              ## Organizational-level Terraform: spiral-org
 
               ```bash
               cd infra/org-spiral
               mise trust
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
             infra_acc_readme: |-
-              ## Usage: Account-specific Terraform: spiral-org
+              ## Account-specific Terraform: spiral-org
 
               ```bash
               cd infra/acc-spiral-org
@@ -6931,28 +6745,26 @@ config:
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             account_readme: |-
-              ## Usage: AWS Environment: spiral-ci
+              ## AWS Environment: spiral-ci
 
               ```bash
               cd a/spiral/ci
               mise trust
               aws sso login
               alogin
-              aws sts get-caller-identity
               ```
             infra_org_readme: |-
-              ## Usage: Organizational-level Terraform: spiral-ci
+              ## Organizational-level Terraform: spiral-ci
 
               ```bash
               cd infra/org-spiral
               mise trust
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
             infra_acc_readme: |-
-              ## Usage: Account-specific Terraform: spiral-ci
+              ## Account-specific Terraform: spiral-ci
 
               ```bash
               cd infra/acc-spiral-ci
@@ -7004,28 +6816,26 @@ config:
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             account_readme: |-
-              ## Usage: AWS Environment: spiral-dev
+              ## AWS Environment: spiral-dev
 
               ```bash
               cd a/spiral/dev
               mise trust
               aws sso login
               alogin
-              aws sts get-caller-identity
               ```
             infra_org_readme: |-
-              ## Usage: Organizational-level Terraform: spiral-dev
+              ## Organizational-level Terraform: spiral-dev
 
               ```bash
               cd infra/org-spiral
               mise trust
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
             infra_acc_readme: |-
-              ## Usage: Account-specific Terraform: spiral-dev
+              ## Account-specific Terraform: spiral-dev
 
               ```bash
               cd infra/acc-spiral-dev
@@ -7077,28 +6887,26 @@ config:
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             account_readme: |-
-              ## Usage: AWS Environment: spiral-hub
+              ## AWS Environment: spiral-hub
 
               ```bash
               cd a/spiral/hub
               mise trust
               aws sso login
               alogin
-              aws sts get-caller-identity
               ```
             infra_org_readme: |-
-              ## Usage: Organizational-level Terraform: spiral-hub
+              ## Organizational-level Terraform: spiral-hub
 
               ```bash
               cd infra/org-spiral
               mise trust
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
             infra_acc_readme: |-
-              ## Usage: Account-specific Terraform: spiral-hub
+              ## Account-specific Terraform: spiral-hub
 
               ```bash
               cd infra/acc-spiral-hub
@@ -7150,28 +6958,26 @@ config:
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             account_readme: |-
-              ## Usage: AWS Environment: spiral-lib
+              ## AWS Environment: spiral-lib
 
               ```bash
               cd a/spiral/lib
               mise trust
               aws sso login
               alogin
-              aws sts get-caller-identity
               ```
             infra_org_readme: |-
-              ## Usage: Organizational-level Terraform: spiral-lib
+              ## Organizational-level Terraform: spiral-lib
 
               ```bash
               cd infra/org-spiral
               mise trust
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
             infra_acc_readme: |-
-              ## Usage: Account-specific Terraform: spiral-lib
+              ## Account-specific Terraform: spiral-lib
 
               ```bash
               cd infra/acc-spiral-lib
@@ -7223,28 +7029,26 @@ config:
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             account_readme: |-
-              ## Usage: AWS Environment: spiral-log
+              ## AWS Environment: spiral-log
 
               ```bash
               cd a/spiral/log
               mise trust
               aws sso login
               alogin
-              aws sts get-caller-identity
               ```
             infra_org_readme: |-
-              ## Usage: Organizational-level Terraform: spiral-log
+              ## Organizational-level Terraform: spiral-log
 
               ```bash
               cd infra/org-spiral
               mise trust
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
             infra_acc_readme: |-
-              ## Usage: Account-specific Terraform: spiral-log
+              ## Account-specific Terraform: spiral-log
 
               ```bash
               cd infra/acc-spiral-log
@@ -7296,28 +7100,26 @@ config:
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             account_readme: |-
-              ## Usage: AWS Environment: spiral-net
+              ## AWS Environment: spiral-net
 
               ```bash
               cd a/spiral/net
               mise trust
               aws sso login
               alogin
-              aws sts get-caller-identity
               ```
             infra_org_readme: |-
-              ## Usage: Organizational-level Terraform: spiral-net
+              ## Organizational-level Terraform: spiral-net
 
               ```bash
               cd infra/org-spiral
               mise trust
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
             infra_acc_readme: |-
-              ## Usage: Account-specific Terraform: spiral-net
+              ## Account-specific Terraform: spiral-net
 
               ```bash
               cd infra/acc-spiral-net
@@ -7369,28 +7171,26 @@ config:
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             account_readme: |-
-              ## Usage: AWS Environment: spiral-ops
+              ## AWS Environment: spiral-ops
 
               ```bash
               cd a/spiral/ops
               mise trust
               aws sso login
               alogin
-              aws sts get-caller-identity
               ```
             infra_org_readme: |-
-              ## Usage: Organizational-level Terraform: spiral-ops
+              ## Organizational-level Terraform: spiral-ops
 
               ```bash
               cd infra/org-spiral
               mise trust
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
             infra_acc_readme: |-
-              ## Usage: Account-specific Terraform: spiral-ops
+              ## Account-specific Terraform: spiral-ops
 
               ```bash
               cd infra/acc-spiral-ops
@@ -7442,28 +7242,26 @@ config:
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             account_readme: |-
-              ## Usage: AWS Environment: spiral-prod
+              ## AWS Environment: spiral-prod
 
               ```bash
               cd a/spiral/prod
               mise trust
               aws sso login
               alogin
-              aws sts get-caller-identity
               ```
             infra_org_readme: |-
-              ## Usage: Organizational-level Terraform: spiral-prod
+              ## Organizational-level Terraform: spiral-prod
 
               ```bash
               cd infra/org-spiral
               mise trust
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
             infra_acc_readme: |-
-              ## Usage: Account-specific Terraform: spiral-prod
+              ## Account-specific Terraform: spiral-prod
 
               ```bash
               cd infra/acc-spiral-prod
@@ -7515,28 +7313,26 @@ config:
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             account_readme: |-
-              ## Usage: AWS Environment: spiral-pub
+              ## AWS Environment: spiral-pub
 
               ```bash
               cd a/spiral/pub
               mise trust
               aws sso login
               alogin
-              aws sts get-caller-identity
               ```
             infra_org_readme: |-
-              ## Usage: Organizational-level Terraform: spiral-pub
+              ## Organizational-level Terraform: spiral-pub
 
               ```bash
               cd infra/org-spiral
               mise trust
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
             infra_acc_readme: |-
-              ## Usage: Account-specific Terraform: spiral-pub
+              ## Account-specific Terraform: spiral-pub
 
               ```bash
               cd infra/acc-spiral-pub
@@ -7593,28 +7389,26 @@ config:
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             account_readme: |-
-              ## Usage: AWS Environment: vault-org
+              ## AWS Environment: vault-org
 
               ```bash
               cd a/vault/org
               mise trust
               aws sso login
               alogin
-              aws sts get-caller-identity
               ```
             infra_org_readme: |-
-              ## Usage: Organizational-level Terraform: vault-org
+              ## Organizational-level Terraform: vault-org
 
               ```bash
               cd infra/org-vault
               mise trust
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
             infra_acc_readme: |-
-              ## Usage: Account-specific Terraform: vault-org
+              ## Account-specific Terraform: vault-org
 
               ```bash
               cd infra/acc-vault-org
@@ -7666,28 +7460,26 @@ config:
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             account_readme: |-
-              ## Usage: AWS Environment: vault-ci
+              ## AWS Environment: vault-ci
 
               ```bash
               cd a/vault/ci
               mise trust
               aws sso login
               alogin
-              aws sts get-caller-identity
               ```
             infra_org_readme: |-
-              ## Usage: Organizational-level Terraform: vault-ci
+              ## Organizational-level Terraform: vault-ci
 
               ```bash
               cd infra/org-vault
               mise trust
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
             infra_acc_readme: |-
-              ## Usage: Account-specific Terraform: vault-ci
+              ## Account-specific Terraform: vault-ci
 
               ```bash
               cd infra/acc-vault-ci
@@ -7739,28 +7531,26 @@ config:
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             account_readme: |-
-              ## Usage: AWS Environment: vault-dev
+              ## AWS Environment: vault-dev
 
               ```bash
               cd a/vault/dev
               mise trust
               aws sso login
               alogin
-              aws sts get-caller-identity
               ```
             infra_org_readme: |-
-              ## Usage: Organizational-level Terraform: vault-dev
+              ## Organizational-level Terraform: vault-dev
 
               ```bash
               cd infra/org-vault
               mise trust
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
             infra_acc_readme: |-
-              ## Usage: Account-specific Terraform: vault-dev
+              ## Account-specific Terraform: vault-dev
 
               ```bash
               cd infra/acc-vault-dev
@@ -7812,28 +7602,26 @@ config:
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             account_readme: |-
-              ## Usage: AWS Environment: vault-hub
+              ## AWS Environment: vault-hub
 
               ```bash
               cd a/vault/hub
               mise trust
               aws sso login
               alogin
-              aws sts get-caller-identity
               ```
             infra_org_readme: |-
-              ## Usage: Organizational-level Terraform: vault-hub
+              ## Organizational-level Terraform: vault-hub
 
               ```bash
               cd infra/org-vault
               mise trust
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
             infra_acc_readme: |-
-              ## Usage: Account-specific Terraform: vault-hub
+              ## Account-specific Terraform: vault-hub
 
               ```bash
               cd infra/acc-vault-hub
@@ -7885,28 +7673,26 @@ config:
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             account_readme: |-
-              ## Usage: AWS Environment: vault-lib
+              ## AWS Environment: vault-lib
 
               ```bash
               cd a/vault/lib
               mise trust
               aws sso login
               alogin
-              aws sts get-caller-identity
               ```
             infra_org_readme: |-
-              ## Usage: Organizational-level Terraform: vault-lib
+              ## Organizational-level Terraform: vault-lib
 
               ```bash
               cd infra/org-vault
               mise trust
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
             infra_acc_readme: |-
-              ## Usage: Account-specific Terraform: vault-lib
+              ## Account-specific Terraform: vault-lib
 
               ```bash
               cd infra/acc-vault-lib
@@ -7958,28 +7744,26 @@ config:
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             account_readme: |-
-              ## Usage: AWS Environment: vault-log
+              ## AWS Environment: vault-log
 
               ```bash
               cd a/vault/log
               mise trust
               aws sso login
               alogin
-              aws sts get-caller-identity
               ```
             infra_org_readme: |-
-              ## Usage: Organizational-level Terraform: vault-log
+              ## Organizational-level Terraform: vault-log
 
               ```bash
               cd infra/org-vault
               mise trust
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
             infra_acc_readme: |-
-              ## Usage: Account-specific Terraform: vault-log
+              ## Account-specific Terraform: vault-log
 
               ```bash
               cd infra/acc-vault-log
@@ -8031,28 +7815,26 @@ config:
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             account_readme: |-
-              ## Usage: AWS Environment: vault-net
+              ## AWS Environment: vault-net
 
               ```bash
               cd a/vault/net
               mise trust
               aws sso login
               alogin
-              aws sts get-caller-identity
               ```
             infra_org_readme: |-
-              ## Usage: Organizational-level Terraform: vault-net
+              ## Organizational-level Terraform: vault-net
 
               ```bash
               cd infra/org-vault
               mise trust
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
             infra_acc_readme: |-
-              ## Usage: Account-specific Terraform: vault-net
+              ## Account-specific Terraform: vault-net
 
               ```bash
               cd infra/acc-vault-net
@@ -8104,28 +7886,26 @@ config:
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             account_readme: |-
-              ## Usage: AWS Environment: vault-ops
+              ## AWS Environment: vault-ops
 
               ```bash
               cd a/vault/ops
               mise trust
               aws sso login
               alogin
-              aws sts get-caller-identity
               ```
             infra_org_readme: |-
-              ## Usage: Organizational-level Terraform: vault-ops
+              ## Organizational-level Terraform: vault-ops
 
               ```bash
               cd infra/org-vault
               mise trust
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
             infra_acc_readme: |-
-              ## Usage: Account-specific Terraform: vault-ops
+              ## Account-specific Terraform: vault-ops
 
               ```bash
               cd infra/acc-vault-ops
@@ -8177,28 +7957,26 @@ config:
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             account_readme: |-
-              ## Usage: AWS Environment: vault-prod
+              ## AWS Environment: vault-prod
 
               ```bash
               cd a/vault/prod
               mise trust
               aws sso login
               alogin
-              aws sts get-caller-identity
               ```
             infra_org_readme: |-
-              ## Usage: Organizational-level Terraform: vault-prod
+              ## Organizational-level Terraform: vault-prod
 
               ```bash
               cd infra/org-vault
               mise trust
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
             infra_acc_readme: |-
-              ## Usage: Account-specific Terraform: vault-prod
+              ## Account-specific Terraform: vault-prod
 
               ```bash
               cd infra/acc-vault-prod
@@ -8250,28 +8028,26 @@ config:
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             account_readme: |-
-              ## Usage: AWS Environment: vault-pub
+              ## AWS Environment: vault-pub
 
               ```bash
               cd a/vault/pub
               mise trust
               aws sso login
               alogin
-              aws sts get-caller-identity
               ```
             infra_org_readme: |-
-              ## Usage: Organizational-level Terraform: vault-pub
+              ## Organizational-level Terraform: vault-pub
 
               ```bash
               cd infra/org-vault
               mise trust
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
             infra_acc_readme: |-
-              ## Usage: Account-specific Terraform: vault-pub
+              ## Account-specific Terraform: vault-pub
 
               ```bash
               cd infra/acc-vault-pub
@@ -8328,28 +8104,26 @@ config:
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             account_readme: |-
-              ## Usage: AWS Environment: whoa-org
+              ## AWS Environment: whoa-org
 
               ```bash
               cd a/whoa/org
               mise trust
               aws sso login
               alogin
-              aws sts get-caller-identity
               ```
             infra_org_readme: |-
-              ## Usage: Organizational-level Terraform: whoa-org
+              ## Organizational-level Terraform: whoa-org
 
               ```bash
               cd infra/org-whoa
               mise trust
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
             infra_acc_readme: |-
-              ## Usage: Account-specific Terraform: whoa-org
+              ## Account-specific Terraform: whoa-org
 
               ```bash
               cd infra/acc-whoa-org
@@ -8401,28 +8175,26 @@ config:
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             account_readme: |-
-              ## Usage: AWS Environment: whoa-dev
+              ## AWS Environment: whoa-dev
 
               ```bash
               cd a/whoa/dev
               mise trust
               aws sso login
               alogin
-              aws sts get-caller-identity
               ```
             infra_org_readme: |-
-              ## Usage: Organizational-level Terraform: whoa-dev
+              ## Organizational-level Terraform: whoa-dev
 
               ```bash
               cd infra/org-whoa
               mise trust
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
             infra_acc_readme: |-
-              ## Usage: Account-specific Terraform: whoa-dev
+              ## Account-specific Terraform: whoa-dev
 
               ```bash
               cd infra/acc-whoa-dev
@@ -8474,28 +8246,26 @@ config:
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             account_readme: |-
-              ## Usage: AWS Environment: whoa-hub
+              ## AWS Environment: whoa-hub
 
               ```bash
               cd a/whoa/hub
               mise trust
               aws sso login
               alogin
-              aws sts get-caller-identity
               ```
             infra_org_readme: |-
-              ## Usage: Organizational-level Terraform: whoa-hub
+              ## Organizational-level Terraform: whoa-hub
 
               ```bash
               cd infra/org-whoa
               mise trust
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
             infra_acc_readme: |-
-              ## Usage: Account-specific Terraform: whoa-hub
+              ## Account-specific Terraform: whoa-hub
 
               ```bash
               cd infra/acc-whoa-hub
@@ -8547,28 +8317,26 @@ config:
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             account_readme: |-
-              ## Usage: AWS Environment: whoa-net
+              ## AWS Environment: whoa-net
 
               ```bash
               cd a/whoa/net
               mise trust
               aws sso login
               alogin
-              aws sts get-caller-identity
               ```
             infra_org_readme: |-
-              ## Usage: Organizational-level Terraform: whoa-net
+              ## Organizational-level Terraform: whoa-net
 
               ```bash
               cd infra/org-whoa
               mise trust
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
             infra_acc_readme: |-
-              ## Usage: Account-specific Terraform: whoa-net
+              ## Account-specific Terraform: whoa-net
 
               ```bash
               cd infra/acc-whoa-net
@@ -8620,28 +8388,26 @@ config:
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
             account_readme: |-
-              ## Usage: AWS Environment: whoa-pub
+              ## AWS Environment: whoa-pub
 
               ```bash
               cd a/whoa/pub
               mise trust
               aws sso login
               alogin
-              aws sts get-caller-identity
               ```
             infra_org_readme: |-
-              ## Usage: Organizational-level Terraform: whoa-pub
+              ## Organizational-level Terraform: whoa-pub
 
               ```bash
               cd infra/org-whoa
               mise trust
               aws sso login
-              alogin
               terraform init
               terraform plan
               ```
             infra_acc_readme: |-
-              ## Usage: Account-specific Terraform: whoa-pub
+              ## Account-specific Terraform: whoa-pub
 
               ```bash
               cd infra/acc-whoa-pub

@@ -66,26 +66,24 @@ sso_region=\(lookup["defn"].sso_region)
 
 		// README for a/{org}/{account}/ (mise environment)
 		account_readme: """
-## Usage: AWS Environment: \(org)-\(account)
+## AWS Environment: \(org)-\(account)
 
 ```bash
 cd a/\(org)/\(account)
 mise trust
 aws sso login
 alogin
-aws sts get-caller-identity
 ```
 """
 
 		// README for infra/org-* (organization level)
 		infra_org_readme: """
-## Usage: Organizational-level Terraform: \(org)-\(account)
+## Organizational-level Terraform: \(org)-\(account)
 
 ```bash
 cd infra/org-\(org)
 mise trust
 aws sso login
-alogin
 terraform init
 terraform plan
 ```
@@ -93,7 +91,7 @@ terraform plan
 
 		// README for infra/acc-* (account level)
 		infra_acc_readme: """
-## Usage: Account-specific Terraform: \(org)-\(account)
+## Account-specific Terraform: \(org)-\(account)
 
 ```bash
 cd infra/acc-\(org)-\(account)

@@ -1,4 +1,4 @@
-## Usage: Account-specific Terraform: curl-lib
+## Account-specific Terraform: curl-lib
 
 ```bash
 cd infra/acc-curl-lib

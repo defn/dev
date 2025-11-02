@@ -1,4 +1,4 @@
-## Usage: Account-specific Terraform: curl-net
+## Account-specific Terraform: curl-net
 
 ```bash
 cd infra/acc-curl-net

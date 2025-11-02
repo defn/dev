@@ -1,4 +1,4 @@
-## Usage: Account-specific Terraform: vault-log
+## Account-specific Terraform: vault-log
 
 ```bash
 cd infra/acc-vault-log

@@ -1,4 +1,4 @@
-## Usage: Account-specific Terraform: coil-lib
+## Account-specific Terraform: coil-lib
 
 ```bash
 cd infra/acc-coil-lib

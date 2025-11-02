@@ -1,4 +1,4 @@
-## Usage: Account-specific Terraform: spiral-log
+## Account-specific Terraform: spiral-log
 
 ```bash
 cd infra/acc-spiral-log

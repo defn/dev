@@ -1,4 +1,4 @@
-## Usage: Account-specific Terraform: imma-net
+## Account-specific Terraform: imma-net
 
 ```bash
 cd infra/acc-imma-net

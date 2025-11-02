@@ -1,4 +1,4 @@
-## Usage: Account-specific Terraform: jianghu-log
+## Account-specific Terraform: jianghu-log
 
 ```bash
 cd infra/acc-jianghu-log

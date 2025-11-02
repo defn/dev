@@ -40,28 +40,26 @@ aws_config_bootstrap: |-
   sso_start_url=https://defn.awsapps.com/start
   sso_region=us-east-2
 account_readme: |-
-  ## Usage: AWS Environment: fogg-lib
+  ## AWS Environment: fogg-lib
 
   ```bash
   cd a/fogg/lib
   mise trust
   aws sso login
   alogin
-  aws sts get-caller-identity
   ```
 infra_org_readme: |-
-  ## Usage: Organizational-level Terraform: fogg-lib
+  ## Organizational-level Terraform: fogg-lib
 
   ```bash
   cd infra/org-fogg
   mise trust
   aws sso login
-  alogin
   terraform init
   terraform plan
   ```
 infra_acc_readme: |-
-  ## Usage: Account-specific Terraform: fogg-lib
+  ## Account-specific Terraform: fogg-lib
 
   ```bash
   cd infra/acc-fogg-lib

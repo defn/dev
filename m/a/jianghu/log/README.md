@@ -1,9 +1,8 @@
-## Usage: AWS Environment: jianghu-log
+## AWS Environment: jianghu-log
 
 ```bash
 cd a/jianghu/log
 mise trust
 aws sso login
 alogin
-aws sts get-caller-identity
 ```

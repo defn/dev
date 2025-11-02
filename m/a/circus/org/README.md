@@ -1,9 +1,8 @@
-## Usage: AWS Environment: circus-org
+## AWS Environment: circus-org
 
 ```bash
 cd a/circus/org
 mise trust
 aws sso login
 alogin
-aws sts get-caller-identity
 ```

@@ -1,4 +1,4 @@
-## Usage: Account-specific Terraform: spiral-ops
+## Account-specific Terraform: spiral-ops
 
 ```bash
 cd infra/acc-spiral-ops

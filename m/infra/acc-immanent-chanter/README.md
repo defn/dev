@@ -1,4 +1,4 @@
-## Usage: Account-specific Terraform: immanent-chanter
+## Account-specific Terraform: immanent-chanter
 
 ```bash
 cd infra/acc-immanent-chanter

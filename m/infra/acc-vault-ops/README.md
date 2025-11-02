@@ -1,4 +1,4 @@
-## Usage: Account-specific Terraform: vault-ops
+## Account-specific Terraform: vault-ops
 
 ```bash
 cd infra/acc-vault-ops

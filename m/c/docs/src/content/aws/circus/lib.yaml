@@ -40,28 +40,26 @@ aws_config_bootstrap: |-
   sso_start_url=https://defn.awsapps.com/start
   sso_region=us-east-2
 account_readme: |-
-  ## Usage: AWS Environment: circus-lib
+  ## AWS Environment: circus-lib
 
   ```bash
   cd a/circus/lib
   mise trust
   aws sso login
   alogin
-  aws sts get-caller-identity
   ```
 infra_org_readme: |-
-  ## Usage: Organizational-level Terraform: circus-lib
+  ## Organizational-level Terraform: circus-lib
 
   ```bash
   cd infra/org-circus
   mise trust
   aws sso login
-  alogin
   terraform init
   terraform plan
   ```
 infra_acc_readme: |-
-  ## Usage: Account-specific Terraform: circus-lib
+  ## Account-specific Terraform: circus-lib
 
   ```bash
   cd infra/acc-circus-lib

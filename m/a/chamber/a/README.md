@@ -1,9 +1,8 @@
-## Usage: AWS Environment: chamber-a
+## AWS Environment: chamber-a
 
 ```bash
 cd a/chamber/a
 mise trust
 aws sso login
 alogin
-aws sts get-caller-identity
 ```

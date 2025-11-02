@@ -1,4 +1,4 @@
-## Usage: Account-specific Terraform: vault-net
+## Account-specific Terraform: vault-net
 
 ```bash
 cd infra/acc-vault-net

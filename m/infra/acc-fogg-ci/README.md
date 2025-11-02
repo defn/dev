@@ -1,4 +1,4 @@
-## Usage: Account-specific Terraform: fogg-ci
+## Account-specific Terraform: fogg-ci
 
 ```bash
 cd infra/acc-fogg-ci

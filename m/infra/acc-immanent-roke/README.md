@@ -1,4 +1,4 @@
-## Usage: Account-specific Terraform: immanent-roke
+## Account-specific Terraform: immanent-roke
 
 ```bash
 cd infra/acc-immanent-roke

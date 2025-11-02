@@ -1,4 +1,4 @@
-## Usage: Account-specific Terraform: helix-pub
+## Account-specific Terraform: helix-pub
 
 ```bash
 cd infra/acc-helix-pub

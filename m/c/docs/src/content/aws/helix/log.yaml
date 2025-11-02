@@ -40,28 +40,26 @@ aws_config_bootstrap: |-
   sso_start_url=https://defn.awsapps.com/start
   sso_region=us-east-2
 account_readme: |-
-  ## Usage: AWS Environment: helix-log
+  ## AWS Environment: helix-log
 
   ```bash
   cd a/helix/log
   mise trust
   aws sso login
   alogin
-  aws sts get-caller-identity
   ```
 infra_org_readme: |-
-  ## Usage: Organizational-level Terraform: helix-log
+  ## Organizational-level Terraform: helix-log
 
   ```bash
   cd infra/org-helix
   mise trust
   aws sso login
-  alogin
   terraform init
   terraform plan
   ```
 infra_acc_readme: |-
-  ## Usage: Account-specific Terraform: helix-log
+  ## Account-specific Terraform: helix-log
 
   ```bash
   cd infra/acc-helix-log

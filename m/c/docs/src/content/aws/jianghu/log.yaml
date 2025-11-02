@@ -40,28 +40,26 @@ aws_config_bootstrap: |-
   sso_start_url=https://defn.awsapps.com/start
   sso_region=us-east-2
 account_readme: |-
-  ## Usage: AWS Environment: jianghu-log
+  ## AWS Environment: jianghu-log
 
   ```bash
   cd a/jianghu/log
   mise trust
   aws sso login
   alogin
-  aws sts get-caller-identity
   ```
 infra_org_readme: |-
-  ## Usage: Organizational-level Terraform: jianghu-log
+  ## Organizational-level Terraform: jianghu-log
 
   ```bash
   cd infra/org-jianghu
   mise trust
   aws sso login
-  alogin
   terraform init
   terraform plan
   ```
 infra_acc_readme: |-
-  ## Usage: Account-specific Terraform: jianghu-log
+  ## Account-specific Terraform: jianghu-log
 
   ```bash
   cd infra/acc-jianghu-log

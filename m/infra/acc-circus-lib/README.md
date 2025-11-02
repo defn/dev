@@ -1,4 +1,4 @@
-## Usage: Account-specific Terraform: circus-lib
+## Account-specific Terraform: circus-lib
 
 ```bash
 cd infra/acc-circus-lib

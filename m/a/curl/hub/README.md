@@ -1,9 +1,8 @@
-## Usage: AWS Environment: curl-hub
+## AWS Environment: curl-hub
 
 ```bash
 cd a/curl/hub
 mise trust
 aws sso login
 alogin
-aws sts get-caller-identity
 ```

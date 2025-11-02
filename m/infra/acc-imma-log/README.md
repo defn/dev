@@ -1,4 +1,4 @@
-## Usage: Account-specific Terraform: imma-log
+## Account-specific Terraform: imma-log
 
 ```bash
 cd infra/acc-imma-log

@@ -1,4 +1,4 @@
-## Usage: Account-specific Terraform: immanent-changer
+## Account-specific Terraform: immanent-changer
 
 ```bash
 cd infra/acc-immanent-changer

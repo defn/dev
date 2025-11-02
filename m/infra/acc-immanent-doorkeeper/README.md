@@ -1,4 +1,4 @@
-## Usage: Account-specific Terraform: immanent-doorkeeper
+## Account-specific Terraform: immanent-doorkeeper
 
 ```bash
 cd infra/acc-immanent-doorkeeper

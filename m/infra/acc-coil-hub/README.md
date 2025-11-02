@@ -1,4 +1,4 @@
-## Usage: Account-specific Terraform: coil-hub
+## Account-specific Terraform: coil-hub
 
 ```bash
 cd infra/acc-coil-hub

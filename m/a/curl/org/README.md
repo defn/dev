@@ -1,9 +1,8 @@
-## Usage: AWS Environment: curl-org
+## AWS Environment: curl-org
 
 ```bash
 cd a/curl/org
 mise trust
 aws sso login
 alogin
-aws sts get-caller-identity
 ```

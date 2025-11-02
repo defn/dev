@@ -1,4 +1,4 @@
-## Usage: Account-specific Terraform: gyre-ops
+## Account-specific Terraform: gyre-ops
 
 ```bash
 cd infra/acc-gyre-ops

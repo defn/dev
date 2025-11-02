@@ -1,4 +1,4 @@
-## Usage: Account-specific Terraform: fogg-log
+## Account-specific Terraform: fogg-log
 
 ```bash
 cd infra/acc-fogg-log

@@ -40,28 +40,26 @@ aws_config_bootstrap: |-
   sso_start_url=https://defn.awsapps.com/start
   sso_region=us-east-2
 account_readme: |-
-  ## Usage: AWS Environment: chamber-a
+  ## AWS Environment: chamber-a
 
   ```bash
   cd a/chamber/a
   mise trust
   aws sso login
   alogin
-  aws sts get-caller-identity
   ```
 infra_org_readme: |-
-  ## Usage: Organizational-level Terraform: chamber-a
+  ## Organizational-level Terraform: chamber-a
 
   ```bash
   cd infra/org-chamber
   mise trust
   aws sso login
-  alogin
   terraform init
   terraform plan
   ```
 infra_acc_readme: |-
-  ## Usage: Account-specific Terraform: chamber-a
+  ## Account-specific Terraform: chamber-a
 
   ```bash
   cd infra/acc-chamber-a

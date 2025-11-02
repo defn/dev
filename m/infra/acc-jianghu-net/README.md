@@ -1,4 +1,4 @@
-## Usage: Account-specific Terraform: jianghu-net
+## Account-specific Terraform: jianghu-net
 
 ```bash
 cd infra/acc-jianghu-net

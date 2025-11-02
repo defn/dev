@@ -1,4 +1,4 @@
-## Usage: Account-specific Terraform: immanent-namer
+## Account-specific Terraform: immanent-namer
 
 ```bash
 cd infra/acc-immanent-namer

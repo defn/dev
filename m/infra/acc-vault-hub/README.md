@@ -1,4 +1,4 @@
-## Usage: Account-specific Terraform: vault-hub
+## Account-specific Terraform: vault-hub
 
 ```bash
 cd infra/acc-vault-hub

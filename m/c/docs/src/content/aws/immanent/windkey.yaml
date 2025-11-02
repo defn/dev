@@ -40,28 +40,26 @@ aws_config_bootstrap: |-
   sso_start_url=https://defn.awsapps.com/start
   sso_region=us-east-2
 account_readme: |-
-  ## Usage: AWS Environment: immanent-windkey
+  ## AWS Environment: immanent-windkey
 
   ```bash
   cd a/immanent/windkey
   mise trust
   aws sso login
   alogin
-  aws sts get-caller-identity
   ```
 infra_org_readme: |-
-  ## Usage: Organizational-level Terraform: immanent-windkey
+  ## Organizational-level Terraform: immanent-windkey
 
   ```bash
   cd infra/org-immanent
   mise trust
   aws sso login
-  alogin
   terraform init
   terraform plan
   ```
 infra_acc_readme: |-
-  ## Usage: Account-specific Terraform: immanent-windkey
+  ## Account-specific Terraform: immanent-windkey
 
   ```bash
   cd infra/acc-immanent-windkey

@@ -1,4 +1,4 @@
-## Usage: Account-specific Terraform: immanent-ged
+## Account-specific Terraform: immanent-ged
 
 ```bash
 cd infra/acc-immanent-ged

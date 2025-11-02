@@ -1,4 +1,4 @@
-## Usage: Account-specific Terraform: immanent-windkey
+## Account-specific Terraform: immanent-windkey
 
 ```bash
 cd infra/acc-immanent-windkey

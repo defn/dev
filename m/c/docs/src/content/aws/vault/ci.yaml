@@ -40,28 +40,26 @@ aws_config_bootstrap: |-
   sso_start_url=https://defn.awsapps.com/start
   sso_region=us-east-2
 account_readme: |-
-  ## Usage: AWS Environment: vault-ci
+  ## AWS Environment: vault-ci
 
   ```bash
   cd a/vault/ci
   mise trust
   aws sso login
   alogin
-  aws sts get-caller-identity
   ```
 infra_org_readme: |-
-  ## Usage: Organizational-level Terraform: vault-ci
+  ## Organizational-level Terraform: vault-ci
 
   ```bash
   cd infra/org-vault
   mise trust
   aws sso login
-  alogin
   terraform init
   terraform plan
   ```
 infra_acc_readme: |-
-  ## Usage: Account-specific Terraform: vault-ci
+  ## Account-specific Terraform: vault-ci
 
   ```bash
   cd infra/acc-vault-ci

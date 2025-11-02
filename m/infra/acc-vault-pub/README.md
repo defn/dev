@@ -1,4 +1,4 @@
-## Usage: Account-specific Terraform: vault-pub
+## Account-specific Terraform: vault-pub
 
 ```bash
 cd infra/acc-vault-pub

@@ -1,4 +1,4 @@
-## Usage: Account-specific Terraform: spiral-prod
+## Account-specific Terraform: spiral-prod
 
 ```bash
 cd infra/acc-spiral-prod

@@ -1,9 +1,8 @@
-## Usage: AWS Environment: vault-dev
+## AWS Environment: vault-dev
 
 ```bash
 cd a/vault/dev
 mise trust
 aws sso login
 alogin
-aws sts get-caller-identity
 ```

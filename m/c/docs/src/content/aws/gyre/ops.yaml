@@ -40,28 +40,26 @@ aws_config_bootstrap: |-
   sso_start_url=https://defn.awsapps.com/start
   sso_region=us-east-2
 account_readme: |-
-  ## Usage: AWS Environment: gyre-ops
+  ## AWS Environment: gyre-ops
 
   ```bash
   cd a/gyre/ops
   mise trust
   aws sso login
   alogin
-  aws sts get-caller-identity
   ```
 infra_org_readme: |-
-  ## Usage: Organizational-level Terraform: gyre-ops
+  ## Organizational-level Terraform: gyre-ops
 
   ```bash
   cd infra/org-gyre
   mise trust
   aws sso login
-  alogin
   terraform init
   terraform plan
   ```
 infra_acc_readme: |-
-  ## Usage: Account-specific Terraform: gyre-ops
+  ## Account-specific Terraform: gyre-ops
 
   ```bash
   cd infra/acc-gyre-ops

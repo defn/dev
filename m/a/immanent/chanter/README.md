@@ -1,9 +1,8 @@
-## Usage: AWS Environment: immanent-chanter
+## AWS Environment: immanent-chanter
 
 ```bash
 cd a/immanent/chanter
 mise trust
 aws sso login
 alogin
-aws sts get-caller-identity
 ```

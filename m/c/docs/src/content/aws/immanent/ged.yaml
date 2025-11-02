@@ -40,28 +40,26 @@ aws_config_bootstrap: |-
   sso_start_url=https://defn.awsapps.com/start
   sso_region=us-east-2
 account_readme: |-
-  ## Usage: AWS Environment: immanent-ged
+  ## AWS Environment: immanent-ged
 
   ```bash
   cd a/immanent/ged
   mise trust
   aws sso login
   alogin
-  aws sts get-caller-identity
   ```
 infra_org_readme: |-
-  ## Usage: Organizational-level Terraform: immanent-ged
+  ## Organizational-level Terraform: immanent-ged
 
   ```bash
   cd infra/org-immanent
   mise trust
   aws sso login
-  alogin
   terraform init
   terraform plan
   ```
 infra_acc_readme: |-
-  ## Usage: Account-specific Terraform: immanent-ged
+  ## Account-specific Terraform: immanent-ged
 
   ```bash
   cd infra/acc-immanent-ged

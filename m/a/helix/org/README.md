@@ -1,9 +1,8 @@
-## Usage: AWS Environment: helix-org
+## AWS Environment: helix-org
 
 ```bash
 cd a/helix/org
 mise trust
 aws sso login
 alogin
-aws sts get-caller-identity
 ```

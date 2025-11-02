@@ -1,4 +1,4 @@
-## Usage: Account-specific Terraform: circus-ops
+## Account-specific Terraform: circus-ops
 
 ```bash
 cd infra/acc-circus-ops

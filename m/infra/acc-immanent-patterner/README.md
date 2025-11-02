@@ -1,4 +1,4 @@
-## Usage: Account-specific Terraform: immanent-patterner
+## Account-specific Terraform: immanent-patterner
 
 ```bash
 cd infra/acc-immanent-patterner

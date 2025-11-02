@@ -40,28 +40,26 @@ aws_config_bootstrap: |-
   sso_start_url=https://defn.awsapps.com/start
   sso_region=us-east-2
 account_readme: |-
-  ## Usage: AWS Environment: whoa-net
+  ## AWS Environment: whoa-net
 
   ```bash
   cd a/whoa/net
   mise trust
   aws sso login
   alogin
-  aws sts get-caller-identity
   ```
 infra_org_readme: |-
-  ## Usage: Organizational-level Terraform: whoa-net
+  ## Organizational-level Terraform: whoa-net
 
   ```bash
   cd infra/org-whoa
   mise trust
   aws sso login
-  alogin
   terraform init
   terraform plan
   ```
 infra_acc_readme: |-
-  ## Usage: Account-specific Terraform: whoa-net
+  ## Account-specific Terraform: whoa-net
 
   ```bash
   cd infra/acc-whoa-net

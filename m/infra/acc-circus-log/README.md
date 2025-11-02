@@ -1,4 +1,4 @@
-## Usage: Account-specific Terraform: circus-log
+## Account-specific Terraform: circus-log
 
 ```bash
 cd infra/acc-circus-log

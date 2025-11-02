@@ -1,4 +1,4 @@
-## Usage: Account-specific Terraform: whoa-net
+## Account-specific Terraform: whoa-net
 
 ```bash
 cd infra/acc-whoa-net
