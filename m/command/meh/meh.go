@@ -38,6 +38,12 @@ type queryResult struct {
 }
 
 func runMeh(regions []string) error {
+	// Get AWS profile for logging
+	awsProfile := os.Getenv("AWS_PROFILE")
+	if awsProfile == "" {
+		awsProfile = "default"
+	}
+
 	// Get regions if not specified
 	if len(regions) == 0 {
 		var err error
@@ -69,6 +75,12 @@ func runMeh(regions []string) error {
 	var wg sync.WaitGroup
 
 	for _, region := range regions {
+		// Check permissions for this region
+		if err := checkAWSPermissions(region); err != nil {
+			fmt.Fprintf(os.Stderr, "[%s:%s] Warning: skipping region: %v\n", awsProfile, region, err)
+			continue
+		}
+
 		// Query EC2 instances
 		wg.Add(1)
 		go func(r string) {
@@ -97,21 +109,21 @@ func runMeh(regions []string) error {
 	// Write results to temporary files
 	for result := range results {
 		if result.err != nil {
-			fmt.Fprintf(os.Stderr, "Warning: %v\n", result.err)
+			fmt.Fprintf(os.Stderr, "[%s:%s] Warning: %v\n", awsProfile, result.region, result.err)
 			continue
 		}
 
 		filename := filepath.Join(tmpDir, fmt.Sprintf("%s-%s.json", result.typ, result.region))
 		if err := os.WriteFile(filename, result.data, 0644); err != nil {
-			fmt.Fprintf(os.Stderr, "Warning: failed to write %s: %v\n", filename, err)
+			fmt.Fprintf(os.Stderr, "[%s:%s] Warning: failed to write %s: %v\n", awsProfile, result.region, filename, err)
 		}
 	}
 
 	// Merge all JSON files
-	if err := mergeResults(tmpDir); err != nil {
+	if err := mergeResults(tmpDir, awsProfile); err != nil {
 		// On error, drop into interactive shell for debugging
-		fmt.Fprintf(os.Stderr, "Error merging results: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Dropping into shell in %s for debugging...\n", tmpDir)
+		fmt.Fprintf(os.Stderr, "[%s] Error merging results: %v\n", awsProfile, err)
+		fmt.Fprintf(os.Stderr, "[%s] Dropping into shell in %s for debugging...\n", awsProfile, tmpDir)
 		shell := exec.Command("bash", "-il")
 		shell.Dir = tmpDir
 		shell.Stdin = os.Stdin
@@ -136,6 +148,14 @@ func getAllRegions() ([]string, error) {
 	}
 
 	return regions, nil
+}
+
+func checkAWSPermissions(region string) error {
+	cmd := exec.Command("aws", "--region", region, "ec2", "describe-availability-zones", "--output", "json")
+	if err := cmd.Run(); err != nil {
+		return fmt.Errorf("insufficient AWS permissions (describe-availability-zones failed): %w", err)
+	}
+	return nil
 }
 
 func queryEC2Instances(region string, results chan<- queryResult) {
@@ -236,7 +256,7 @@ func transformEBSVolumes(data map[string]interface{}, region, typ string) map[st
 	return result
 }
 
-func mergeResults(tmpDir string) error {
+func mergeResults(tmpDir string, awsProfile string) error {
 	// Find all JSON files
 	pattern := filepath.Join(tmpDir, "*.json")
 	files, err := filepath.Glob(pattern)
@@ -254,13 +274,13 @@ func mergeResults(tmpDir string) error {
 	for _, file := range files {
 		data, err := os.ReadFile(file)
 		if err != nil {
-			fmt.Fprintf(os.Stderr, "Warning: failed to read %s: %v\n", file, err)
+			fmt.Fprintf(os.Stderr, "[%s] Warning: failed to read %s: %v\n", awsProfile, file, err)
 			continue
 		}
 
 		var fileData map[string]interface{}
 		if err := json.Unmarshal(data, &fileData); err != nil {
-			fmt.Fprintf(os.Stderr, "Warning: failed to parse %s: %v\n", file, err)
+			fmt.Fprintf(os.Stderr, "[%s] Warning: failed to parse %s: %v\n", awsProfile, file, err)
 			continue
 		}
 
