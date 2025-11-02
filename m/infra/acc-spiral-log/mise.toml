@@ -1,5 +1,5 @@
 # auto-generated: transform.sh
-# auto-generated: aws.cue
+# auto-generated: aws.cue mise_config
 [env]
 AWS_PROFILE = "spiral-log"
 AWS_REGION = "us-west-2"

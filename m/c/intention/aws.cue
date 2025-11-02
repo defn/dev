@@ -31,7 +31,7 @@ aws: "org"~lookup: [string]~(ORG,_): close({
 		sso_role: string | *"Administrator"
 
 		mise_config: """
-# auto-generated: aws.cue
+# auto-generated: aws.cue mise_config
 [env]
 AWS_PROFILE = "\(org)-\(account)"
 AWS_REGION = "\(sso_region)"
@@ -39,7 +39,7 @@ AWS_CONFIG_FILE = "/home/ubuntu/m/a/\(org)/\(account)/.aws/config"
 """
 
 		aws_config_account: """
-# auto-generated: aws.cue
+# auto-generated: aws.cue aws_config_account
 [profile \(org)-\(account)]
 sso_account_id=\(id)
 sso_role_name=\(sso_role)
@@ -48,7 +48,7 @@ sso_region=\(sso_region)
 """
 
 		aws_config_bootstrap: """
-# auto-generated: aws.cue
+# auto-generated: aws.cue aws_config_bootstrap
 [profile defn-org]
 sso_account_id=\(lookup["defn"].account["org"].id)
 sso_role_name=\(lookup["defn"].account["org"].sso_role)
@@ -64,7 +64,6 @@ sso_region=\(lookup["defn"].sso_region)
 			aws_config: aws_config_account
 		}
 
-		// README for a/{org}/{account}/ (mise environment)
 		account_readme: """
 ## AWS Environment: \(org)-\(account)
 
@@ -74,9 +73,10 @@ mise trust
 aws sso login
 alogin
 ```
+
+auto-generated: aws.cue account_readme
 """
 
-		// README for infra/org-* (organization level)
 		infra_org_readme: """
 ## Organizational-level Terraform: \(org)-\(account)
 
@@ -87,9 +87,10 @@ aws sso login
 terraform init
 terraform plan
 ```
+
+auto-generated: aws.cue infra_org_readme
 """
 
-		// README for infra/acc-* (account level)
 		infra_acc_readme: """
 ## Account-specific Terraform: \(org)-\(account)
 
@@ -101,6 +102,8 @@ aws sso login
 terraform init
 terraform plan
 ```
+
+auto-generated: aws.cue infra_acc_readme
 """
 	})
 })

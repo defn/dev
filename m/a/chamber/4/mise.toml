@@ -1,4 +1,4 @@
-# auto-generated: aws.cue
+# auto-generated: aws.cue mise_config
 [env]
 AWS_PROFILE = "chamber-4"
 AWS_REGION = "us-west-2"

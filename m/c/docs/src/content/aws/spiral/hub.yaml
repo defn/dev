@@ -6,34 +6,34 @@ name: hub
 org: spiral
 sso_role: Administrator
 aws_config: |-
-  # auto-generated: aws.cue
+  # auto-generated: aws.cue aws_config_account
   [profile spiral-hub]
   sso_account_id=216704421225
   sso_role_name=Administrator
   sso_start_url=https://d-926760b322.awsapps.com/start
   sso_region=us-west-2
 
-  # auto-generated: aws.cue
+  # auto-generated: aws.cue aws_config_bootstrap
   [profile defn-org]
   sso_account_id=510430971399
   sso_role_name=Administrator
   sso_start_url=https://defn.awsapps.com/start
   sso_region=us-east-2
 mise_config: |-
-  # auto-generated: aws.cue
+  # auto-generated: aws.cue mise_config
   [env]
   AWS_PROFILE = "spiral-hub"
   AWS_REGION = "us-west-2"
   AWS_CONFIG_FILE = "/home/ubuntu/m/a/spiral/hub/.aws/config"
 aws_config_account: |-
-  # auto-generated: aws.cue
+  # auto-generated: aws.cue aws_config_account
   [profile spiral-hub]
   sso_account_id=216704421225
   sso_role_name=Administrator
   sso_start_url=https://d-926760b322.awsapps.com/start
   sso_region=us-west-2
 aws_config_bootstrap: |-
-  # auto-generated: aws.cue
+  # auto-generated: aws.cue aws_config_bootstrap
   [profile defn-org]
   sso_account_id=510430971399
   sso_role_name=Administrator
@@ -48,6 +48,8 @@ account_readme: |-
   aws sso login
   alogin
   ```
+
+  auto-generated: aws.cue account_readme
 infra_org_readme: |-
   ## Organizational-level Terraform: spiral-hub
 
@@ -58,6 +60,8 @@ infra_org_readme: |-
   terraform init
   terraform plan
   ```
+
+  auto-generated: aws.cue infra_org_readme
 infra_acc_readme: |-
   ## Account-specific Terraform: spiral-hub
 
@@ -69,3 +73,5 @@ infra_acc_readme: |-
   terraform init
   terraform plan
   ```
+
+  auto-generated: aws.cue infra_acc_readme
