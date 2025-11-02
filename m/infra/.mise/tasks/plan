@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+function main {
+	if [[ $# == 0 ]]; then
+		set -- $(ls -d */ | sort)
+	fi
+
+	runmany 8 'echo $1; cd $1 && mise exec -- terraform plan --out .plan || true' "$@"
+}
+
+main "$@"
