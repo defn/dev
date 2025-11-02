@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+set -efu -o pipefail
+
+function main {
+    cd "${MISE_ORIGINAL_CWD}"
+
+    if [[ "$#" == 0 ]]; then
+        set -- $(aws ec2 describe-regions | jq -r '.Regions[].RegionName')
+    fi
+
+    for r in "$@"; do
+        export AWS_REGION="$r"
+        aws ec2 describe-instances | jq --arg region "$r" '.Reservations[].Instances | map({(.InstanceId): .}) | add | {($region): {instance: .}}'
+    done | jq -s 'add | {aws: .}'
+
+}
+
+main "$@"
