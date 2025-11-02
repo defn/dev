@@ -114,7 +114,6 @@ if type -P mise >/dev/null; then
 fi
 
 # prompt
-export PROMPT_COMMAND
 if test -z "${STARSHIP_NO-}"; then
 	if [[ -x "$(which starship)" ]]; then
 		# starship
