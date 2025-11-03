@@ -1,9 +1,9 @@
 # auto-generated: transform.sh
-account: dev
-email: whoa-dev@imma.io
 id: "439761234835"
-name: dev
+account: dev
 org: whoa
+name: dev
+email: whoa-dev@imma.io
 sso_role: Administrator
 aws_config: |-
   # auto-generated: aws.cue aws_config_account
@@ -75,3 +75,38 @@ infra_acc_readme: |-
   ```
 
   auto-generated: aws.cue infra_acc_readme
+infra_acc_terraform: |-
+  terraform {
+    required_providers {
+      aws = {
+        version = "5.99.1"
+        source  = "aws"
+      }
+    }
+    backend "s3" {
+      bucket         = "dfn-defn-terraform-state"
+      dynamodb_table = "dfn-defn-terraform-state-lock"
+      encrypt        = true
+      key            = "stacks/acc-whoa-dev/terraform.tfstate"
+      profile        = "defn-org"
+      region         = "us-east-1"
+    }
+
+  }
+
+  provider "aws" {
+    profile = "whoa-dev"
+    region  = "us-east-1"
+    alias   = "whoa-dev"
+  }
+
+  module "whoa-dev" {
+    account   = 510430971399
+    name      = "terraform"
+    namespace = "whoa"
+    stage     = "ops"
+    source    = "./mod/terraform-aws-defn-account"
+    providers = {
+      aws = aws.whoa-dev
+    }
+  }

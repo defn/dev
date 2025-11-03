@@ -1,9 +1,9 @@
 # auto-generated: transform.sh
-account: ci
-email: aws-spiral+pub@defn.us
 id: "371657257885"
-name: pub
+account: ci
 org: spiral
+email: aws-spiral+pub@defn.us
+name: pub
 sso_role: Administrator
 aws_config: |-
   # auto-generated: aws.cue aws_config_account
@@ -75,3 +75,38 @@ infra_acc_readme: |-
   ```
 
   auto-generated: aws.cue infra_acc_readme
+infra_acc_terraform: |-
+  terraform {
+    required_providers {
+      aws = {
+        version = "5.99.1"
+        source  = "aws"
+      }
+    }
+    backend "s3" {
+      bucket         = "dfn-defn-terraform-state"
+      dynamodb_table = "dfn-defn-terraform-state-lock"
+      encrypt        = true
+      key            = "stacks/acc-spiral-ci/terraform.tfstate"
+      profile        = "defn-org"
+      region         = "us-east-1"
+    }
+
+  }
+
+  provider "aws" {
+    profile = "spiral-ci"
+    region  = "us-east-1"
+    alias   = "spiral-ci"
+  }
+
+  module "spiral-ci" {
+    account   = 510430971399
+    name      = "terraform"
+    namespace = "spiral"
+    stage     = "ops"
+    source    = "./mod/terraform-aws-defn-account"
+    providers = {
+      aws = aws.spiral-ci
+    }
+  }

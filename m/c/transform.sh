@@ -32,6 +32,9 @@ function main {
 
 				# Generate org-level infra README
 				yq '.config.aws.org[strenv(org)].account[strenv(acc)].infra_org_readme' main.yaml >../infra/org-$org/README.md
+
+				# Generate org-level Terraform
+				yq '.config.aws.org[strenv(org)].account[strenv(acc)].infra_org_terraform' main.yaml >../infra/org-$org/cdk.tf
 			fi
 
 			mkdir -p ../infra/acc-$org-$acc
@@ -42,6 +45,9 @@ function main {
 
 			# Generate account-level infra README
 			yq '.config.aws.org[strenv(org)].account[strenv(acc)].infra_acc_readme' main.yaml >../infra/acc-$org-$acc/README.md
+
+			# Generate account-level Terraform
+			yq '.config.aws.org[strenv(org)].account[strenv(acc)].infra_acc_terraform' main.yaml >../infra/acc-$org-$acc/cdk.tf
 		done
 	done
 }

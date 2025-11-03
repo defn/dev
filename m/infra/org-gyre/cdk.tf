@@ -28,6 +28,8 @@ provider "aws" {
 
 resource "aws_organizations_organization" "organization" {
   aws_service_access_principals = [
+    "account.amazonaws.com",
+    "iam.amazonaws.com",
     "cloudtrail.amazonaws.com",
     "config.amazonaws.com",
     "ram.amazonaws.com",
@@ -64,7 +66,6 @@ resource "aws_identitystore_group" "administrators_sso_group" {
   display_name      = "Administrators"
   identity_store_id = element(local.sso_instance_isid, 0)
 }
-
 resource "aws_organizations_account" "gyre-org" {
   email = "aws-gyre@defn.us"
   name  = "gyre"
@@ -81,12 +82,9 @@ resource "aws_ssoadmin_account_assignment" "gyre_admin_sso_account_assignment" {
   target_id          = aws_organizations_account.gyre-org.id
   target_type        = "AWS_ACCOUNT"
 }
-
 resource "aws_organizations_account" "gyre-ops" {
-  email                      = "aws-gyre+ops@defn.us"
-  iam_user_access_to_billing = "ALLOW"
-  name                       = "ops"
-  role_name                  = "OrganizationAccountAccessRole"
+  email = "aws-gyre+ops@defn.us"
+  name  = "ops"
   tags = {
     ManagedBy = "Terraform"
   }

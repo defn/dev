@@ -28,6 +28,8 @@ provider "aws" {
 
 resource "aws_organizations_organization" "organization" {
   aws_service_access_principals = [
+    "account.amazonaws.com",
+    "iam.amazonaws.com",
     "cloudtrail.amazonaws.com",
     "config.amazonaws.com",
     "ram.amazonaws.com",
@@ -64,7 +66,6 @@ resource "aws_identitystore_group" "administrators_sso_group" {
   display_name      = "Administrators"
   identity_store_id = element(local.sso_instance_isid, 0)
 }
-
 resource "aws_organizations_account" "defn-org" {
   email = "iam+bootstrap@defn.sh"
   name  = "defn"

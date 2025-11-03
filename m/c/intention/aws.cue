@@ -91,6 +91,8 @@ terraform plan
 auto-generated: aws.cue infra_org_readme
 """
 
+		infra_org_terraform?: string
+
 		infra_acc_readme: """
 ## Account-specific Terraform: \(org)-\(account)
 
@@ -104,6 +106,43 @@ terraform plan
 ```
 
 auto-generated: aws.cue infra_acc_readme
+"""
+
+		infra_acc_terraform: """
+terraform {
+  required_providers {
+    aws = {
+      version = "5.99.1"
+      source  = "aws"
+    }
+  }
+  backend "s3" {
+    bucket         = "dfn-defn-terraform-state"
+    dynamodb_table = "dfn-defn-terraform-state-lock"
+    encrypt        = true
+    key            = "stacks/acc-\(org)-\(account)/terraform.tfstate"
+    profile        = "defn-org"
+    region         = "us-east-1"
+  }
+
+}
+
+provider "aws" {
+  profile = "\(org)-\(account)"
+  region  = "us-east-1"
+  alias   = "\(org)-\(account)"
+}
+
+module "\(org)-\(account)" {
+  account   = \(lookup["defn"].account["org"].id)
+  name      = "terraform"
+  namespace = "\(org)"
+  stage     = "ops"
+  source    = "./mod/terraform-aws-defn-account"
+  providers = {
+    aws = aws.\(org)-\(account)
+  }
+}
 """
 	})
 })

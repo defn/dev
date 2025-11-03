@@ -28,6 +28,8 @@ provider "aws" {
 
 resource "aws_organizations_organization" "organization" {
   aws_service_access_principals = [
+    "account.amazonaws.com",
+    "iam.amazonaws.com",
     "cloudtrail.amazonaws.com",
     "config.amazonaws.com",
     "ram.amazonaws.com",
@@ -64,7 +66,6 @@ resource "aws_identitystore_group" "administrators_sso_group" {
   display_name      = "Administrators"
   identity_store_id = element(local.sso_instance_isid, 0)
 }
-
 resource "aws_organizations_account" "helix-org" {
   email = "aws-helix@defn.sh"
   name  = "helix"
@@ -81,88 +82,9 @@ resource "aws_ssoadmin_account_assignment" "helix_admin_sso_account_assignment" 
   target_id          = aws_organizations_account.helix-org.id
   target_type        = "AWS_ACCOUNT"
 }
-
-resource "aws_organizations_account" "helix-log" {
-  email                      = "aws-helix+log@defn.sh"
-  iam_user_access_to_billing = "ALLOW"
-  name                       = "log"
-  role_name                  = "OrganizationAccountAccessRole"
-  tags = {
-    ManagedBy = "Terraform"
-  }
-}
-
-resource "aws_ssoadmin_account_assignment" "log_admin_sso_account_assignment" {
-  instance_arn       = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn
-  permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
-  principal_id       = aws_identitystore_group.administrators_sso_group.group_id
-  principal_type     = "GROUP"
-  target_id          = aws_organizations_account.helix-log.id
-  target_type        = "AWS_ACCOUNT"
-}
-
-resource "aws_organizations_account" "helix-net" {
-  email                      = "aws-helix+net@defn.sh"
-  iam_user_access_to_billing = "ALLOW"
-  name                       = "net"
-  role_name                  = "OrganizationAccountAccessRole"
-  tags = {
-    ManagedBy = "Terraform"
-  }
-}
-
-resource "aws_ssoadmin_account_assignment" "net_admin_sso_account_assignment" {
-  instance_arn       = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn
-  permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
-  principal_id       = aws_identitystore_group.administrators_sso_group.group_id
-  principal_type     = "GROUP"
-  target_id          = aws_organizations_account.helix-net.id
-  target_type        = "AWS_ACCOUNT"
-}
-
-resource "aws_organizations_account" "helix-lib" {
-  email                      = "aws-helix+lib@defn.sh"
-  iam_user_access_to_billing = "ALLOW"
-  name                       = "lib"
-  role_name                  = "OrganizationAccountAccessRole"
-  tags = {
-    ManagedBy = "Terraform"
-  }
-}
-
-resource "aws_ssoadmin_account_assignment" "lib_admin_sso_account_assignment" {
-  instance_arn       = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn
-  permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
-  principal_id       = aws_identitystore_group.administrators_sso_group.group_id
-  principal_type     = "GROUP"
-  target_id          = aws_organizations_account.helix-lib.id
-  target_type        = "AWS_ACCOUNT"
-}
-
-resource "aws_organizations_account" "helix-ops" {
-  email                      = "aws-helix+ops@defn.sh"
-  iam_user_access_to_billing = "ALLOW"
-  name                       = "ops"
-  role_name                  = "OrganizationAccountAccessRole"
-  tags = {
-    ManagedBy = "Terraform"
-  }
-}
-
-resource "aws_ssoadmin_account_assignment" "ops_admin_sso_account_assignment" {
-  instance_arn       = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn
-  permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
-  principal_id       = aws_identitystore_group.administrators_sso_group.group_id
-  principal_type     = "GROUP"
-  target_id          = aws_organizations_account.helix-ops.id
-  target_type        = "AWS_ACCOUNT"
-}
-
 resource "aws_organizations_account" "helix-ci" {
-  email                      = "aws-helix+sec@defn.sh"
-  iam_user_access_to_billing = "ALLOW"
-  name                       = "sec"
-  role_name                  = "OrganizationAccountAccessRole"
+  email = "aws-helix+sec@defn.sh"
+  name  = "sec"
   tags = {
     ManagedBy = "Terraform"
   }
@@ -176,50 +98,9 @@ resource "aws_ssoadmin_account_assignment" "sec_admin_sso_account_assignment" {
   target_id          = aws_organizations_account.helix-ci.id
   target_type        = "AWS_ACCOUNT"
 }
-
-resource "aws_organizations_account" "helix-pub" {
-  email                      = "aws-helix+pub@defn.sh"
-  iam_user_access_to_billing = "ALLOW"
-  name                       = "pub"
-  role_name                  = "OrganizationAccountAccessRole"
-  tags = {
-    ManagedBy = "Terraform"
-  }
-}
-
-resource "aws_ssoadmin_account_assignment" "pub_admin_sso_account_assignment" {
-  instance_arn       = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn
-  permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
-  principal_id       = aws_identitystore_group.administrators_sso_group.group_id
-  principal_type     = "GROUP"
-  target_id          = aws_organizations_account.helix-pub.id
-  target_type        = "AWS_ACCOUNT"
-}
-
-resource "aws_organizations_account" "helix-hub" {
-  email                      = "aws-helix+hub@defn.sh"
-  iam_user_access_to_billing = "ALLOW"
-  name                       = "hub"
-  role_name                  = "OrganizationAccountAccessRole"
-  tags = {
-    ManagedBy = "Terraform"
-  }
-}
-
-resource "aws_ssoadmin_account_assignment" "hub_admin_sso_account_assignment" {
-  instance_arn       = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn
-  permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
-  principal_id       = aws_identitystore_group.administrators_sso_group.group_id
-  principal_type     = "GROUP"
-  target_id          = aws_organizations_account.helix-hub.id
-  target_type        = "AWS_ACCOUNT"
-}
-
 resource "aws_organizations_account" "helix-dev" {
-  email                      = "aws-helix+dev@defn.sh"
-  iam_user_access_to_billing = "ALLOW"
-  name                       = "dev"
-  role_name                  = "OrganizationAccountAccessRole"
+  email = "aws-helix+dev@defn.sh"
+  name  = "dev"
   tags = {
     ManagedBy = "Terraform"
   }
@@ -233,12 +114,89 @@ resource "aws_ssoadmin_account_assignment" "dev_admin_sso_account_assignment" {
   target_id          = aws_organizations_account.helix-dev.id
   target_type        = "AWS_ACCOUNT"
 }
+resource "aws_organizations_account" "helix-hub" {
+  email = "aws-helix+hub@defn.sh"
+  name  = "hub"
+  tags = {
+    ManagedBy = "Terraform"
+  }
+}
 
+resource "aws_ssoadmin_account_assignment" "hub_admin_sso_account_assignment" {
+  instance_arn       = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn
+  permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
+  principal_id       = aws_identitystore_group.administrators_sso_group.group_id
+  principal_type     = "GROUP"
+  target_id          = aws_organizations_account.helix-hub.id
+  target_type        = "AWS_ACCOUNT"
+}
+resource "aws_organizations_account" "helix-lib" {
+  email = "aws-helix+lib@defn.sh"
+  name  = "lib"
+  tags = {
+    ManagedBy = "Terraform"
+  }
+}
+
+resource "aws_ssoadmin_account_assignment" "lib_admin_sso_account_assignment" {
+  instance_arn       = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn
+  permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
+  principal_id       = aws_identitystore_group.administrators_sso_group.group_id
+  principal_type     = "GROUP"
+  target_id          = aws_organizations_account.helix-lib.id
+  target_type        = "AWS_ACCOUNT"
+}
+resource "aws_organizations_account" "helix-log" {
+  email = "aws-helix+log@defn.sh"
+  name  = "log"
+  tags = {
+    ManagedBy = "Terraform"
+  }
+}
+
+resource "aws_ssoadmin_account_assignment" "log_admin_sso_account_assignment" {
+  instance_arn       = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn
+  permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
+  principal_id       = aws_identitystore_group.administrators_sso_group.group_id
+  principal_type     = "GROUP"
+  target_id          = aws_organizations_account.helix-log.id
+  target_type        = "AWS_ACCOUNT"
+}
+resource "aws_organizations_account" "helix-net" {
+  email = "aws-helix+net@defn.sh"
+  name  = "net"
+  tags = {
+    ManagedBy = "Terraform"
+  }
+}
+
+resource "aws_ssoadmin_account_assignment" "net_admin_sso_account_assignment" {
+  instance_arn       = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn
+  permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
+  principal_id       = aws_identitystore_group.administrators_sso_group.group_id
+  principal_type     = "GROUP"
+  target_id          = aws_organizations_account.helix-net.id
+  target_type        = "AWS_ACCOUNT"
+}
+resource "aws_organizations_account" "helix-ops" {
+  email = "aws-helix+ops@defn.sh"
+  name  = "ops"
+  tags = {
+    ManagedBy = "Terraform"
+  }
+}
+
+resource "aws_ssoadmin_account_assignment" "ops_admin_sso_account_assignment" {
+  instance_arn       = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn
+  permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
+  principal_id       = aws_identitystore_group.administrators_sso_group.group_id
+  principal_type     = "GROUP"
+  target_id          = aws_organizations_account.helix-ops.id
+  target_type        = "AWS_ACCOUNT"
+}
 resource "aws_organizations_account" "helix-prod" {
-  email                      = "aws-helix+dmz@defn.sh"
-  iam_user_access_to_billing = "ALLOW"
-  name                       = "dmz"
-  role_name                  = "OrganizationAccountAccessRole"
+  email = "aws-helix+dmz@defn.sh"
+  name  = "dmz"
   tags = {
     ManagedBy = "Terraform"
   }
@@ -250,5 +208,21 @@ resource "aws_ssoadmin_account_assignment" "dmz_admin_sso_account_assignment" {
   principal_id       = aws_identitystore_group.administrators_sso_group.group_id
   principal_type     = "GROUP"
   target_id          = aws_organizations_account.helix-prod.id
+  target_type        = "AWS_ACCOUNT"
+}
+resource "aws_organizations_account" "helix-pub" {
+  email = "aws-helix+pub@defn.sh"
+  name  = "pub"
+  tags = {
+    ManagedBy = "Terraform"
+  }
+}
+
+resource "aws_ssoadmin_account_assignment" "pub_admin_sso_account_assignment" {
+  instance_arn       = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn
+  permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
+  principal_id       = aws_identitystore_group.administrators_sso_group.group_id
+  principal_type     = "GROUP"
+  target_id          = aws_organizations_account.helix-pub.id
   target_type        = "AWS_ACCOUNT"
 }

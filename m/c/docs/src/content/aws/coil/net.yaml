@@ -1,9 +1,9 @@
 # auto-generated: transform.sh
-account: net
-email: aws-coil+net@defn.us
 id: "278790191486"
-name: net
+account: net
 org: coil
+name: net
+email: aws-coil+net@defn.us
 sso_role: Administrator
 aws_config: |-
   # auto-generated: aws.cue aws_config_account
@@ -75,3 +75,38 @@ infra_acc_readme: |-
   ```
 
   auto-generated: aws.cue infra_acc_readme
+infra_acc_terraform: |-
+  terraform {
+    required_providers {
+      aws = {
+        version = "5.99.1"
+        source  = "aws"
+      }
+    }
+    backend "s3" {
+      bucket         = "dfn-defn-terraform-state"
+      dynamodb_table = "dfn-defn-terraform-state-lock"
+      encrypt        = true
+      key            = "stacks/acc-coil-net/terraform.tfstate"
+      profile        = "defn-org"
+      region         = "us-east-1"
+    }
+
+  }
+
+  provider "aws" {
+    profile = "coil-net"
+    region  = "us-east-1"
+    alias   = "coil-net"
+  }
+
+  module "coil-net" {
+    account   = 510430971399
+    name      = "terraform"
+    namespace = "coil"
+    stage     = "ops"
+    source    = "./mod/terraform-aws-defn-account"
+    providers = {
+      aws = aws.coil-net
+    }
+  }

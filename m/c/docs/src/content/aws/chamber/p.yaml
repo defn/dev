@@ -1,9 +1,9 @@
 # auto-generated: transform.sh
-account: p
-email: defn-p@defn.us
 id: "706168331526"
-name: defn-p
+account: p
 org: chamber
+email: defn-p@defn.us
+name: defn-p
 sso_role: Administrator
 aws_config: |-
   # auto-generated: aws.cue aws_config_account
@@ -75,3 +75,38 @@ infra_acc_readme: |-
   ```
 
   auto-generated: aws.cue infra_acc_readme
+infra_acc_terraform: |-
+  terraform {
+    required_providers {
+      aws = {
+        version = "5.99.1"
+        source  = "aws"
+      }
+    }
+    backend "s3" {
+      bucket         = "dfn-defn-terraform-state"
+      dynamodb_table = "dfn-defn-terraform-state-lock"
+      encrypt        = true
+      key            = "stacks/acc-chamber-p/terraform.tfstate"
+      profile        = "defn-org"
+      region         = "us-east-1"
+    }
+
+  }
+
+  provider "aws" {
+    profile = "chamber-p"
+    region  = "us-east-1"
+    alias   = "chamber-p"
+  }
+
+  module "chamber-p" {
+    account   = 510430971399
+    name      = "terraform"
+    namespace = "chamber"
+    stage     = "ops"
+    source    = "./mod/terraform-aws-defn-account"
+    providers = {
+      aws = aws.chamber-p
+    }
+  }

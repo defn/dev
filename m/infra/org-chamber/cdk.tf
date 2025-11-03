@@ -66,7 +66,6 @@ resource "aws_identitystore_group" "administrators_sso_group" {
   display_name      = "Administrators"
   identity_store_id = element(local.sso_instance_isid, 0)
 }
-
 resource "aws_organizations_account" "chamber-org" {
   email = "aws-chamber@defn.us"
   name  = "chamber"
@@ -83,7 +82,6 @@ resource "aws_ssoadmin_account_assignment" "chamber_admin_sso_account_assignment
   target_id          = aws_organizations_account.chamber-org.id
   target_type        = "AWS_ACCOUNT"
 }
-
 resource "aws_organizations_account" "chamber-1" {
   email = "aws-cd@defn.us"
   name  = "defn-cd"
@@ -92,7 +90,7 @@ resource "aws_organizations_account" "chamber-1" {
   }
 }
 
-resource "aws_ssoadmin_account_assignment" "defn-cd_admin_sso_account_assignment" {
+resource "aws_ssoadmin_account_assignment" "defn_cd_admin_sso_account_assignment" {
   instance_arn       = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn
   permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
   principal_id       = aws_identitystore_group.administrators_sso_group.group_id
@@ -100,7 +98,6 @@ resource "aws_ssoadmin_account_assignment" "defn-cd_admin_sso_account_assignment
   target_id          = aws_organizations_account.chamber-1.id
   target_type        = "AWS_ACCOUNT"
 }
-
 resource "aws_organizations_account" "chamber-2" {
   email = "aws-ci@defn.us"
   name  = "defn-ci"
@@ -109,7 +106,7 @@ resource "aws_organizations_account" "chamber-2" {
   }
 }
 
-resource "aws_ssoadmin_account_assignment" "defn-ci_admin_sso_account_assignment" {
+resource "aws_ssoadmin_account_assignment" "defn_ci_admin_sso_account_assignment" {
   instance_arn       = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn
   permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
   principal_id       = aws_identitystore_group.administrators_sso_group.group_id
@@ -117,7 +114,6 @@ resource "aws_ssoadmin_account_assignment" "defn-ci_admin_sso_account_assignment
   target_id          = aws_organizations_account.chamber-2.id
   target_type        = "AWS_ACCOUNT"
 }
-
 resource "aws_organizations_account" "chamber-3" {
   email = "aws-users@defn.us"
   name  = "defn-security"
@@ -126,7 +122,7 @@ resource "aws_organizations_account" "chamber-3" {
   }
 }
 
-resource "aws_ssoadmin_account_assignment" "defn-security_admin_sso_account_assignment" {
+resource "aws_ssoadmin_account_assignment" "defn_security_admin_sso_account_assignment" {
   instance_arn       = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn
   permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
   principal_id       = aws_identitystore_group.administrators_sso_group.group_id
@@ -134,7 +130,6 @@ resource "aws_ssoadmin_account_assignment" "defn-security_admin_sso_account_assi
   target_id          = aws_organizations_account.chamber-3.id
   target_type        = "AWS_ACCOUNT"
 }
-
 resource "aws_organizations_account" "chamber-4" {
   email = "chamber-4@defn.us"
   name  = "chamber-4"
@@ -143,7 +138,7 @@ resource "aws_organizations_account" "chamber-4" {
   }
 }
 
-resource "aws_ssoadmin_account_assignment" "chamber-4_admin_sso_account_assignment" {
+resource "aws_ssoadmin_account_assignment" "chamber_4_admin_sso_account_assignment" {
   instance_arn       = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn
   permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
   principal_id       = aws_identitystore_group.administrators_sso_group.group_id
@@ -151,7 +146,6 @@ resource "aws_ssoadmin_account_assignment" "chamber-4_admin_sso_account_assignme
   target_id          = aws_organizations_account.chamber-4.id
   target_type        = "AWS_ACCOUNT"
 }
-
 resource "aws_organizations_account" "chamber-5" {
   email = "chamber-5@defn.us"
   name  = "chamber-5"
@@ -160,7 +154,7 @@ resource "aws_organizations_account" "chamber-5" {
   }
 }
 
-resource "aws_ssoadmin_account_assignment" "chamber-5_admin_sso_account_assignment" {
+resource "aws_ssoadmin_account_assignment" "chamber_5_admin_sso_account_assignment" {
   instance_arn       = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn
   permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
   principal_id       = aws_identitystore_group.administrators_sso_group.group_id
@@ -168,7 +162,6 @@ resource "aws_ssoadmin_account_assignment" "chamber-5_admin_sso_account_assignme
   target_id          = aws_organizations_account.chamber-5.id
   target_type        = "AWS_ACCOUNT"
 }
-
 resource "aws_organizations_account" "chamber-6" {
   email = "chamber-6@defn.us"
   name  = "chamber-6"
@@ -177,7 +170,7 @@ resource "aws_organizations_account" "chamber-6" {
   }
 }
 
-resource "aws_ssoadmin_account_assignment" "chamber-6_admin_sso_account_assignment" {
+resource "aws_ssoadmin_account_assignment" "chamber_6_admin_sso_account_assignment" {
   instance_arn       = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn
   permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
   principal_id       = aws_identitystore_group.administrators_sso_group.group_id
@@ -185,7 +178,6 @@ resource "aws_ssoadmin_account_assignment" "chamber-6_admin_sso_account_assignme
   target_id          = aws_organizations_account.chamber-6.id
   target_type        = "AWS_ACCOUNT"
 }
-
 resource "aws_organizations_account" "chamber-7" {
   email = "chamber-7@defn.us"
   name  = "chamber-7"
@@ -194,7 +186,7 @@ resource "aws_organizations_account" "chamber-7" {
   }
 }
 
-resource "aws_ssoadmin_account_assignment" "chamber-7_admin_sso_account_assignment" {
+resource "aws_ssoadmin_account_assignment" "chamber_7_admin_sso_account_assignment" {
   instance_arn       = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn
   permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
   principal_id       = aws_identitystore_group.administrators_sso_group.group_id
@@ -202,7 +194,6 @@ resource "aws_ssoadmin_account_assignment" "chamber-7_admin_sso_account_assignme
   target_id          = aws_organizations_account.chamber-7.id
   target_type        = "AWS_ACCOUNT"
 }
-
 resource "aws_organizations_account" "chamber-8" {
   email = "chamber-8@defn.us"
   name  = "chamber-8"
@@ -211,7 +202,7 @@ resource "aws_organizations_account" "chamber-8" {
   }
 }
 
-resource "aws_ssoadmin_account_assignment" "chamber-8_admin_sso_account_assignment" {
+resource "aws_ssoadmin_account_assignment" "chamber_8_admin_sso_account_assignment" {
   instance_arn       = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn
   permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
   principal_id       = aws_identitystore_group.administrators_sso_group.group_id
@@ -219,7 +210,6 @@ resource "aws_ssoadmin_account_assignment" "chamber-8_admin_sso_account_assignme
   target_id          = aws_organizations_account.chamber-8.id
   target_type        = "AWS_ACCOUNT"
 }
-
 resource "aws_organizations_account" "chamber-9" {
   email = "chamber-9@defn.us"
   name  = "chamber-9"
@@ -228,7 +218,7 @@ resource "aws_organizations_account" "chamber-9" {
   }
 }
 
-resource "aws_ssoadmin_account_assignment" "chamber-9_admin_sso_account_assignment" {
+resource "aws_ssoadmin_account_assignment" "chamber_9_admin_sso_account_assignment" {
   instance_arn       = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn
   permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
   principal_id       = aws_identitystore_group.administrators_sso_group.group_id
@@ -236,7 +226,6 @@ resource "aws_ssoadmin_account_assignment" "chamber-9_admin_sso_account_assignme
   target_id          = aws_organizations_account.chamber-9.id
   target_type        = "AWS_ACCOUNT"
 }
-
 resource "aws_organizations_account" "chamber-a" {
   email = "defn-a@imma.io"
   name  = "defn-a"
@@ -245,7 +234,7 @@ resource "aws_organizations_account" "chamber-a" {
   }
 }
 
-resource "aws_ssoadmin_account_assignment" "defn-a_admin_sso_account_assignment" {
+resource "aws_ssoadmin_account_assignment" "defn_a_admin_sso_account_assignment" {
   instance_arn       = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn
   permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
   principal_id       = aws_identitystore_group.administrators_sso_group.group_id
@@ -253,7 +242,6 @@ resource "aws_ssoadmin_account_assignment" "defn-a_admin_sso_account_assignment"
   target_id          = aws_organizations_account.chamber-a.id
   target_type        = "AWS_ACCOUNT"
 }
-
 resource "aws_organizations_account" "chamber-b" {
   email = "imma-admin1@imma.io"
   name  = "defn-b"
@@ -262,7 +250,7 @@ resource "aws_organizations_account" "chamber-b" {
   }
 }
 
-resource "aws_ssoadmin_account_assignment" "defn-b_admin_sso_account_assignment" {
+resource "aws_ssoadmin_account_assignment" "defn_b_admin_sso_account_assignment" {
   instance_arn       = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn
   permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
   principal_id       = aws_identitystore_group.administrators_sso_group.group_id
@@ -270,7 +258,6 @@ resource "aws_ssoadmin_account_assignment" "defn-b_admin_sso_account_assignment"
   target_id          = aws_organizations_account.chamber-b.id
   target_type        = "AWS_ACCOUNT"
 }
-
 resource "aws_organizations_account" "chamber-c" {
   email = "dev-eng1@imma.io"
   name  = "defn-c"
@@ -279,7 +266,7 @@ resource "aws_organizations_account" "chamber-c" {
   }
 }
 
-resource "aws_ssoadmin_account_assignment" "defn-c_admin_sso_account_assignment" {
+resource "aws_ssoadmin_account_assignment" "defn_c_admin_sso_account_assignment" {
   instance_arn       = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn
   permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
   principal_id       = aws_identitystore_group.administrators_sso_group.group_id
@@ -287,7 +274,6 @@ resource "aws_ssoadmin_account_assignment" "defn-c_admin_sso_account_assignment"
   target_id          = aws_organizations_account.chamber-c.id
   target_type        = "AWS_ACCOUNT"
 }
-
 resource "aws_organizations_account" "chamber-d" {
   email = "box-adm1@imma.io"
   name  = "defn-d"
@@ -296,7 +282,7 @@ resource "aws_organizations_account" "chamber-d" {
   }
 }
 
-resource "aws_ssoadmin_account_assignment" "defn-d_admin_sso_account_assignment" {
+resource "aws_ssoadmin_account_assignment" "defn_d_admin_sso_account_assignment" {
   instance_arn       = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn
   permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
   principal_id       = aws_identitystore_group.administrators_sso_group.group_id
@@ -304,7 +290,6 @@ resource "aws_ssoadmin_account_assignment" "defn-d_admin_sso_account_assignment"
   target_id          = aws_organizations_account.chamber-d.id
   target_type        = "AWS_ACCOUNT"
 }
-
 resource "aws_organizations_account" "chamber-e" {
   email = "stg-eng1@imma.io"
   name  = "defn-e"
@@ -313,7 +298,7 @@ resource "aws_organizations_account" "chamber-e" {
   }
 }
 
-resource "aws_ssoadmin_account_assignment" "defn-e_admin_sso_account_assignment" {
+resource "aws_ssoadmin_account_assignment" "defn_e_admin_sso_account_assignment" {
   instance_arn       = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn
   permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
   principal_id       = aws_identitystore_group.administrators_sso_group.group_id
@@ -321,7 +306,6 @@ resource "aws_ssoadmin_account_assignment" "defn-e_admin_sso_account_assignment"
   target_id          = aws_organizations_account.chamber-e.id
   target_type        = "AWS_ACCOUNT"
 }
-
 resource "aws_organizations_account" "chamber-f" {
   email = "usr-admin1@imma.io"
   name  = "defn-f"
@@ -330,7 +314,7 @@ resource "aws_organizations_account" "chamber-f" {
   }
 }
 
-resource "aws_ssoadmin_account_assignment" "defn-f_admin_sso_account_assignment" {
+resource "aws_ssoadmin_account_assignment" "defn_f_admin_sso_account_assignment" {
   instance_arn       = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn
   permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
   principal_id       = aws_identitystore_group.administrators_sso_group.group_id
@@ -338,7 +322,6 @@ resource "aws_ssoadmin_account_assignment" "defn-f_admin_sso_account_assignment"
   target_id          = aws_organizations_account.chamber-f.id
   target_type        = "AWS_ACCOUNT"
 }
-
 resource "aws_organizations_account" "chamber-g" {
   email = "usr-adm1@imma.io"
   name  = "defn-g"
@@ -347,7 +330,7 @@ resource "aws_organizations_account" "chamber-g" {
   }
 }
 
-resource "aws_ssoadmin_account_assignment" "defn-g_admin_sso_account_assignment" {
+resource "aws_ssoadmin_account_assignment" "defn_g_admin_sso_account_assignment" {
   instance_arn       = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn
   permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
   principal_id       = aws_identitystore_group.administrators_sso_group.group_id
@@ -355,7 +338,6 @@ resource "aws_ssoadmin_account_assignment" "defn-g_admin_sso_account_assignment"
   target_id          = aws_organizations_account.chamber-g.id
   target_type        = "AWS_ACCOUNT"
 }
-
 resource "aws_organizations_account" "chamber-h" {
   email = "usr-eng1@imma.io"
   name  = "defn-h"
@@ -364,7 +346,7 @@ resource "aws_organizations_account" "chamber-h" {
   }
 }
 
-resource "aws_ssoadmin_account_assignment" "defn-h_admin_sso_account_assignment" {
+resource "aws_ssoadmin_account_assignment" "defn_h_admin_sso_account_assignment" {
   instance_arn       = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn
   permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
   principal_id       = aws_identitystore_group.administrators_sso_group.group_id
@@ -372,7 +354,6 @@ resource "aws_ssoadmin_account_assignment" "defn-h_admin_sso_account_assignment"
   target_id          = aws_organizations_account.chamber-h.id
   target_type        = "AWS_ACCOUNT"
 }
-
 resource "aws_organizations_account" "chamber-i" {
   email = "aws-admin1@defn.us"
   name  = "defn-i"
@@ -381,7 +362,7 @@ resource "aws_organizations_account" "chamber-i" {
   }
 }
 
-resource "aws_ssoadmin_account_assignment" "defn-i_admin_sso_account_assignment" {
+resource "aws_ssoadmin_account_assignment" "defn_i_admin_sso_account_assignment" {
   instance_arn       = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn
   permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
   principal_id       = aws_identitystore_group.administrators_sso_group.group_id
@@ -389,7 +370,6 @@ resource "aws_ssoadmin_account_assignment" "defn-i_admin_sso_account_assignment"
   target_id          = aws_organizations_account.chamber-i.id
   target_type        = "AWS_ACCOUNT"
 }
-
 resource "aws_organizations_account" "chamber-j" {
   email = "aws-development1@defn.us"
   name  = "defn-j"
@@ -398,7 +378,7 @@ resource "aws_organizations_account" "chamber-j" {
   }
 }
 
-resource "aws_ssoadmin_account_assignment" "defn-j_admin_sso_account_assignment" {
+resource "aws_ssoadmin_account_assignment" "defn_j_admin_sso_account_assignment" {
   instance_arn       = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn
   permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
   principal_id       = aws_identitystore_group.administrators_sso_group.group_id
@@ -406,7 +386,6 @@ resource "aws_ssoadmin_account_assignment" "defn-j_admin_sso_account_assignment"
   target_id          = aws_organizations_account.chamber-j.id
   target_type        = "AWS_ACCOUNT"
 }
-
 resource "aws_organizations_account" "chamber-l" {
   email = "aws-staging1@defn.us"
   name  = "defn-l"
@@ -415,7 +394,7 @@ resource "aws_organizations_account" "chamber-l" {
   }
 }
 
-resource "aws_ssoadmin_account_assignment" "defn-l_admin_sso_account_assignment" {
+resource "aws_ssoadmin_account_assignment" "defn_l_admin_sso_account_assignment" {
   instance_arn       = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn
   permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
   principal_id       = aws_identitystore_group.administrators_sso_group.group_id
@@ -423,7 +402,6 @@ resource "aws_ssoadmin_account_assignment" "defn-l_admin_sso_account_assignment"
   target_id          = aws_organizations_account.chamber-l.id
   target_type        = "AWS_ACCOUNT"
 }
-
 resource "aws_organizations_account" "chamber-m" {
   email = "defn-m@defn.us"
   name  = "defn-m"
@@ -432,7 +410,7 @@ resource "aws_organizations_account" "chamber-m" {
   }
 }
 
-resource "aws_ssoadmin_account_assignment" "defn-m_admin_sso_account_assignment" {
+resource "aws_ssoadmin_account_assignment" "defn_m_admin_sso_account_assignment" {
   instance_arn       = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn
   permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
   principal_id       = aws_identitystore_group.administrators_sso_group.group_id
@@ -440,7 +418,6 @@ resource "aws_ssoadmin_account_assignment" "defn-m_admin_sso_account_assignment"
   target_id          = aws_organizations_account.chamber-m.id
   target_type        = "AWS_ACCOUNT"
 }
-
 resource "aws_organizations_account" "chamber-n" {
   email = "defn-n@defn.us"
   name  = "defn-n"
@@ -449,7 +426,7 @@ resource "aws_organizations_account" "chamber-n" {
   }
 }
 
-resource "aws_ssoadmin_account_assignment" "defn-n_admin_sso_account_assignment" {
+resource "aws_ssoadmin_account_assignment" "defn_n_admin_sso_account_assignment" {
   instance_arn       = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn
   permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
   principal_id       = aws_identitystore_group.administrators_sso_group.group_id
@@ -457,7 +434,6 @@ resource "aws_ssoadmin_account_assignment" "defn-n_admin_sso_account_assignment"
   target_id          = aws_organizations_account.chamber-n.id
   target_type        = "AWS_ACCOUNT"
 }
-
 resource "aws_organizations_account" "chamber-o" {
   email = "defn-o@defn.us"
   name  = "defn-o"
@@ -466,7 +442,7 @@ resource "aws_organizations_account" "chamber-o" {
   }
 }
 
-resource "aws_ssoadmin_account_assignment" "defn-o_admin_sso_account_assignment" {
+resource "aws_ssoadmin_account_assignment" "defn_o_admin_sso_account_assignment" {
   instance_arn       = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn
   permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
   principal_id       = aws_identitystore_group.administrators_sso_group.group_id
@@ -474,7 +450,6 @@ resource "aws_ssoadmin_account_assignment" "defn-o_admin_sso_account_assignment"
   target_id          = aws_organizations_account.chamber-o.id
   target_type        = "AWS_ACCOUNT"
 }
-
 resource "aws_organizations_account" "chamber-p" {
   email = "defn-p@defn.us"
   name  = "defn-p"
@@ -483,7 +458,7 @@ resource "aws_organizations_account" "chamber-p" {
   }
 }
 
-resource "aws_ssoadmin_account_assignment" "defn-p_admin_sso_account_assignment" {
+resource "aws_ssoadmin_account_assignment" "defn_p_admin_sso_account_assignment" {
   instance_arn       = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn
   permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
   principal_id       = aws_identitystore_group.administrators_sso_group.group_id
@@ -491,7 +466,6 @@ resource "aws_ssoadmin_account_assignment" "defn-p_admin_sso_account_assignment"
   target_id          = aws_organizations_account.chamber-p.id
   target_type        = "AWS_ACCOUNT"
 }
-
 resource "aws_organizations_account" "chamber-q" {
   email = "aws-dev@defn.us"
   name  = "defn-dev"
@@ -500,7 +474,7 @@ resource "aws_organizations_account" "chamber-q" {
   }
 }
 
-resource "aws_ssoadmin_account_assignment" "defn-dev_admin_sso_account_assignment" {
+resource "aws_ssoadmin_account_assignment" "defn_dev_admin_sso_account_assignment" {
   instance_arn       = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn
   permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
   principal_id       = aws_identitystore_group.administrators_sso_group.group_id
@@ -508,7 +482,6 @@ resource "aws_ssoadmin_account_assignment" "defn-dev_admin_sso_account_assignmen
   target_id          = aws_organizations_account.chamber-q.id
   target_type        = "AWS_ACCOUNT"
 }
-
 resource "aws_organizations_account" "chamber-r" {
   email = "defn-r@imma.io"
   name  = "defn-r"
@@ -517,7 +490,7 @@ resource "aws_organizations_account" "chamber-r" {
   }
 }
 
-resource "aws_ssoadmin_account_assignment" "defn-r_admin_sso_account_assignment" {
+resource "aws_ssoadmin_account_assignment" "defn_r_admin_sso_account_assignment" {
   instance_arn       = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn
   permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
   principal_id       = aws_identitystore_group.administrators_sso_group.group_id
@@ -525,7 +498,6 @@ resource "aws_ssoadmin_account_assignment" "defn-r_admin_sso_account_assignment"
   target_id          = aws_organizations_account.chamber-r.id
   target_type        = "AWS_ACCOUNT"
 }
-
 resource "aws_organizations_account" "chamber-s" {
   email = "defn-s@imma.io"
   name  = "defn-s"
@@ -534,7 +506,7 @@ resource "aws_organizations_account" "chamber-s" {
   }
 }
 
-resource "aws_ssoadmin_account_assignment" "defn-s_admin_sso_account_assignment" {
+resource "aws_ssoadmin_account_assignment" "defn_s_admin_sso_account_assignment" {
   instance_arn       = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn
   permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
   principal_id       = aws_identitystore_group.administrators_sso_group.group_id
@@ -542,7 +514,6 @@ resource "aws_ssoadmin_account_assignment" "defn-s_admin_sso_account_assignment"
   target_id          = aws_organizations_account.chamber-s.id
   target_type        = "AWS_ACCOUNT"
 }
-
 resource "aws_organizations_account" "chamber-t" {
   email = "defn-t@imma.io"
   name  = "defn-t"
@@ -551,7 +522,7 @@ resource "aws_organizations_account" "chamber-t" {
   }
 }
 
-resource "aws_ssoadmin_account_assignment" "defn-t_admin_sso_account_assignment" {
+resource "aws_ssoadmin_account_assignment" "defn_t_admin_sso_account_assignment" {
   instance_arn       = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn
   permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
   principal_id       = aws_identitystore_group.administrators_sso_group.group_id
@@ -559,7 +530,6 @@ resource "aws_ssoadmin_account_assignment" "defn-t_admin_sso_account_assignment"
   target_id          = aws_organizations_account.chamber-t.id
   target_type        = "AWS_ACCOUNT"
 }
-
 resource "aws_organizations_account" "chamber-u" {
   email = "aws-qa@defn.us"
   name  = "defn-qa"
@@ -568,7 +538,7 @@ resource "aws_organizations_account" "chamber-u" {
   }
 }
 
-resource "aws_ssoadmin_account_assignment" "defn-qa_admin_sso_account_assignment" {
+resource "aws_ssoadmin_account_assignment" "defn_qa_admin_sso_account_assignment" {
   instance_arn       = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn
   permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
   principal_id       = aws_identitystore_group.administrators_sso_group.group_id
@@ -576,7 +546,6 @@ resource "aws_ssoadmin_account_assignment" "defn-qa_admin_sso_account_assignment
   target_id          = aws_organizations_account.chamber-u.id
   target_type        = "AWS_ACCOUNT"
 }
-
 resource "aws_organizations_account" "chamber-v" {
   email = "defn-v@imma.io"
   name  = "defn-v"
@@ -585,7 +554,7 @@ resource "aws_organizations_account" "chamber-v" {
   }
 }
 
-resource "aws_ssoadmin_account_assignment" "defn-v_admin_sso_account_assignment" {
+resource "aws_ssoadmin_account_assignment" "defn_v_admin_sso_account_assignment" {
   instance_arn       = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn
   permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
   principal_id       = aws_identitystore_group.administrators_sso_group.group_id
@@ -593,7 +562,6 @@ resource "aws_ssoadmin_account_assignment" "defn-v_admin_sso_account_assignment"
   target_id          = aws_organizations_account.chamber-v.id
   target_type        = "AWS_ACCOUNT"
 }
-
 resource "aws_organizations_account" "chamber-w" {
   email = "defn-w@imma.io"
   name  = "defn-w"
@@ -602,7 +570,7 @@ resource "aws_organizations_account" "chamber-w" {
   }
 }
 
-resource "aws_ssoadmin_account_assignment" "defn-w_admin_sso_account_assignment" {
+resource "aws_ssoadmin_account_assignment" "defn_w_admin_sso_account_assignment" {
   instance_arn       = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn
   permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
   principal_id       = aws_identitystore_group.administrators_sso_group.group_id
@@ -610,7 +578,6 @@ resource "aws_ssoadmin_account_assignment" "defn-w_admin_sso_account_assignment"
   target_id          = aws_organizations_account.chamber-w.id
   target_type        = "AWS_ACCOUNT"
 }
-
 resource "aws_organizations_account" "chamber-x" {
   email = "aws-stage@defn.us"
   name  = "defn-stage"
@@ -619,7 +586,7 @@ resource "aws_organizations_account" "chamber-x" {
   }
 }
 
-resource "aws_ssoadmin_account_assignment" "defn-stage_admin_sso_account_assignment" {
+resource "aws_ssoadmin_account_assignment" "defn_stage_admin_sso_account_assignment" {
   instance_arn       = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn
   permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
   principal_id       = aws_identitystore_group.administrators_sso_group.group_id
@@ -627,7 +594,6 @@ resource "aws_ssoadmin_account_assignment" "defn-stage_admin_sso_account_assignm
   target_id          = aws_organizations_account.chamber-x.id
   target_type        = "AWS_ACCOUNT"
 }
-
 resource "aws_organizations_account" "chamber-y" {
   email = "aws-prod@defn.us"
   name  = "defn-prod"
@@ -636,7 +602,7 @@ resource "aws_organizations_account" "chamber-y" {
   }
 }
 
-resource "aws_ssoadmin_account_assignment" "defn-prod_admin_sso_account_assignment" {
+resource "aws_ssoadmin_account_assignment" "defn_prod_admin_sso_account_assignment" {
   instance_arn       = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn
   permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
   principal_id       = aws_identitystore_group.administrators_sso_group.group_id
@@ -644,7 +610,6 @@ resource "aws_ssoadmin_account_assignment" "defn-prod_admin_sso_account_assignme
   target_id          = aws_organizations_account.chamber-y.id
   target_type        = "AWS_ACCOUNT"
 }
-
 resource "aws_organizations_account" "chamber-z" {
   email = "aws-hub@defn.us"
   name  = "defn-hub"
@@ -653,11 +618,147 @@ resource "aws_organizations_account" "chamber-z" {
   }
 }
 
-resource "aws_ssoadmin_account_assignment" "defn-hub_admin_sso_account_assignment" {
+resource "aws_ssoadmin_account_assignment" "defn_hub_admin_sso_account_assignment" {
   instance_arn       = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn
   permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
   principal_id       = aws_identitystore_group.administrators_sso_group.group_id
   principal_type     = "GROUP"
   target_id          = aws_organizations_account.chamber-z.id
   target_type        = "AWS_ACCOUNT"
+}
+moved {
+  from = aws_ssoadmin_account_assignment.defn-cd_admin_sso_account_assignment
+  to   = aws_ssoadmin_account_assignment.defn_cd_admin_sso_account_assignment
+}
+moved {
+  from = aws_ssoadmin_account_assignment.defn-ci_admin_sso_account_assignment
+  to   = aws_ssoadmin_account_assignment.defn_ci_admin_sso_account_assignment
+}
+moved {
+  from = aws_ssoadmin_account_assignment.defn-security_admin_sso_account_assignment
+  to   = aws_ssoadmin_account_assignment.defn_security_admin_sso_account_assignment
+}
+moved {
+  from = aws_ssoadmin_account_assignment.chamber-4_admin_sso_account_assignment
+  to   = aws_ssoadmin_account_assignment.chamber_4_admin_sso_account_assignment
+}
+moved {
+  from = aws_ssoadmin_account_assignment.chamber-5_admin_sso_account_assignment
+  to   = aws_ssoadmin_account_assignment.chamber_5_admin_sso_account_assignment
+}
+moved {
+  from = aws_ssoadmin_account_assignment.chamber-6_admin_sso_account_assignment
+  to   = aws_ssoadmin_account_assignment.chamber_6_admin_sso_account_assignment
+}
+moved {
+  from = aws_ssoadmin_account_assignment.chamber-7_admin_sso_account_assignment
+  to   = aws_ssoadmin_account_assignment.chamber_7_admin_sso_account_assignment
+}
+moved {
+  from = aws_ssoadmin_account_assignment.chamber-8_admin_sso_account_assignment
+  to   = aws_ssoadmin_account_assignment.chamber_8_admin_sso_account_assignment
+}
+moved {
+  from = aws_ssoadmin_account_assignment.chamber-9_admin_sso_account_assignment
+  to   = aws_ssoadmin_account_assignment.chamber_9_admin_sso_account_assignment
+}
+moved {
+  from = aws_ssoadmin_account_assignment.defn-a_admin_sso_account_assignment
+  to   = aws_ssoadmin_account_assignment.defn_a_admin_sso_account_assignment
+}
+moved {
+  from = aws_ssoadmin_account_assignment.defn-b_admin_sso_account_assignment
+  to   = aws_ssoadmin_account_assignment.defn_b_admin_sso_account_assignment
+}
+moved {
+  from = aws_ssoadmin_account_assignment.defn-c_admin_sso_account_assignment
+  to   = aws_ssoadmin_account_assignment.defn_c_admin_sso_account_assignment
+}
+moved {
+  from = aws_ssoadmin_account_assignment.defn-d_admin_sso_account_assignment
+  to   = aws_ssoadmin_account_assignment.defn_d_admin_sso_account_assignment
+}
+moved {
+  from = aws_ssoadmin_account_assignment.defn-e_admin_sso_account_assignment
+  to   = aws_ssoadmin_account_assignment.defn_e_admin_sso_account_assignment
+}
+moved {
+  from = aws_ssoadmin_account_assignment.defn-f_admin_sso_account_assignment
+  to   = aws_ssoadmin_account_assignment.defn_f_admin_sso_account_assignment
+}
+moved {
+  from = aws_ssoadmin_account_assignment.defn-g_admin_sso_account_assignment
+  to   = aws_ssoadmin_account_assignment.defn_g_admin_sso_account_assignment
+}
+moved {
+  from = aws_ssoadmin_account_assignment.defn-h_admin_sso_account_assignment
+  to   = aws_ssoadmin_account_assignment.defn_h_admin_sso_account_assignment
+}
+moved {
+  from = aws_ssoadmin_account_assignment.defn-i_admin_sso_account_assignment
+  to   = aws_ssoadmin_account_assignment.defn_i_admin_sso_account_assignment
+}
+moved {
+  from = aws_ssoadmin_account_assignment.defn-j_admin_sso_account_assignment
+  to   = aws_ssoadmin_account_assignment.defn_j_admin_sso_account_assignment
+}
+moved {
+  from = aws_ssoadmin_account_assignment.defn-l_admin_sso_account_assignment
+  to   = aws_ssoadmin_account_assignment.defn_l_admin_sso_account_assignment
+}
+moved {
+  from = aws_ssoadmin_account_assignment.defn-m_admin_sso_account_assignment
+  to   = aws_ssoadmin_account_assignment.defn_m_admin_sso_account_assignment
+}
+moved {
+  from = aws_ssoadmin_account_assignment.defn-n_admin_sso_account_assignment
+  to   = aws_ssoadmin_account_assignment.defn_n_admin_sso_account_assignment
+}
+moved {
+  from = aws_ssoadmin_account_assignment.defn-o_admin_sso_account_assignment
+  to   = aws_ssoadmin_account_assignment.defn_o_admin_sso_account_assignment
+}
+moved {
+  from = aws_ssoadmin_account_assignment.defn-p_admin_sso_account_assignment
+  to   = aws_ssoadmin_account_assignment.defn_p_admin_sso_account_assignment
+}
+moved {
+  from = aws_ssoadmin_account_assignment.defn-dev_admin_sso_account_assignment
+  to   = aws_ssoadmin_account_assignment.defn_dev_admin_sso_account_assignment
+}
+moved {
+  from = aws_ssoadmin_account_assignment.defn-r_admin_sso_account_assignment
+  to   = aws_ssoadmin_account_assignment.defn_r_admin_sso_account_assignment
+}
+moved {
+  from = aws_ssoadmin_account_assignment.defn-s_admin_sso_account_assignment
+  to   = aws_ssoadmin_account_assignment.defn_s_admin_sso_account_assignment
+}
+moved {
+  from = aws_ssoadmin_account_assignment.defn-t_admin_sso_account_assignment
+  to   = aws_ssoadmin_account_assignment.defn_t_admin_sso_account_assignment
+}
+moved {
+  from = aws_ssoadmin_account_assignment.defn-qa_admin_sso_account_assignment
+  to   = aws_ssoadmin_account_assignment.defn_qa_admin_sso_account_assignment
+}
+moved {
+  from = aws_ssoadmin_account_assignment.defn-v_admin_sso_account_assignment
+  to   = aws_ssoadmin_account_assignment.defn_v_admin_sso_account_assignment
+}
+moved {
+  from = aws_ssoadmin_account_assignment.defn-w_admin_sso_account_assignment
+  to   = aws_ssoadmin_account_assignment.defn_w_admin_sso_account_assignment
+}
+moved {
+  from = aws_ssoadmin_account_assignment.defn-stage_admin_sso_account_assignment
+  to   = aws_ssoadmin_account_assignment.defn_stage_admin_sso_account_assignment
+}
+moved {
+  from = aws_ssoadmin_account_assignment.defn-prod_admin_sso_account_assignment
+  to   = aws_ssoadmin_account_assignment.defn_prod_admin_sso_account_assignment
+}
+moved {
+  from = aws_ssoadmin_account_assignment.defn-hub_admin_sso_account_assignment
+  to   = aws_ssoadmin_account_assignment.defn_hub_admin_sso_account_assignment
 }

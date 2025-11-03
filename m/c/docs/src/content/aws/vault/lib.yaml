@@ -1,9 +1,9 @@
 # auto-generated: transform.sh
-account: lib
-email: aws-vault-library@defn.sh
 id: "066356637485"
-name: library
+account: lib
 org: vault
+email: aws-vault-library@defn.sh
+name: library
 sso_role: Administrator
 aws_config: |-
   # auto-generated: aws.cue aws_config_account
@@ -75,3 +75,38 @@ infra_acc_readme: |-
   ```
 
   auto-generated: aws.cue infra_acc_readme
+infra_acc_terraform: |-
+  terraform {
+    required_providers {
+      aws = {
+        version = "5.99.1"
+        source  = "aws"
+      }
+    }
+    backend "s3" {
+      bucket         = "dfn-defn-terraform-state"
+      dynamodb_table = "dfn-defn-terraform-state-lock"
+      encrypt        = true
+      key            = "stacks/acc-vault-lib/terraform.tfstate"
+      profile        = "defn-org"
+      region         = "us-east-1"
+    }
+
+  }
+
+  provider "aws" {
+    profile = "vault-lib"
+    region  = "us-east-1"
+    alias   = "vault-lib"
+  }
+
+  module "vault-lib" {
+    account   = 510430971399
+    name      = "terraform"
+    namespace = "vault"
+    stage     = "ops"
+    source    = "./mod/terraform-aws-defn-account"
+    providers = {
+      aws = aws.vault-lib
+    }
+  }

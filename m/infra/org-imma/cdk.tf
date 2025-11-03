@@ -28,6 +28,8 @@ provider "aws" {
 
 resource "aws_organizations_organization" "organization" {
   aws_service_access_principals = [
+    "account.amazonaws.com",
+    "iam.amazonaws.com",
     "cloudtrail.amazonaws.com",
     "config.amazonaws.com",
     "ram.amazonaws.com",
@@ -64,7 +66,6 @@ resource "aws_identitystore_group" "administrators_sso_group" {
   display_name      = "Administrators"
   identity_store_id = element(local.sso_instance_isid, 0)
 }
-
 resource "aws_organizations_account" "imma-org" {
   email = "aws-imma@defn.us"
   name  = "imma"
@@ -81,58 +82,6 @@ resource "aws_ssoadmin_account_assignment" "imma_admin_sso_account_assignment" {
   target_id          = aws_organizations_account.imma-org.id
   target_type        = "AWS_ACCOUNT"
 }
-
-resource "aws_organizations_account" "imma-net" {
-  email = "imma-defn@defn.us"
-  name  = "imma-defn"
-  tags = {
-    ManagedBy = "Terraform"
-  }
-}
-
-resource "aws_ssoadmin_account_assignment" "imma-defn_admin_sso_account_assignment" {
-  instance_arn       = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn
-  permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
-  principal_id       = aws_identitystore_group.administrators_sso_group.group_id
-  principal_type     = "GROUP"
-  target_id          = aws_organizations_account.imma-net.id
-  target_type        = "AWS_ACCOUNT"
-}
-
-resource "aws_organizations_account" "imma-log" {
-  email = "imma-dgwyn@defn.us"
-  name  = "imma-dgwyn"
-  tags = {
-    ManagedBy = "Terraform"
-  }
-}
-
-resource "aws_ssoadmin_account_assignment" "imma-dgwyn_admin_sso_account_assignment" {
-  instance_arn       = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn
-  permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
-  principal_id       = aws_identitystore_group.administrators_sso_group.group_id
-  principal_type     = "GROUP"
-  target_id          = aws_organizations_account.imma-log.id
-  target_type        = "AWS_ACCOUNT"
-}
-
-resource "aws_organizations_account" "imma-lib" {
-  email = "imma-tolan@defn.us"
-  name  = "imma-tolan"
-  tags = {
-    ManagedBy = "Terraform"
-  }
-}
-
-resource "aws_ssoadmin_account_assignment" "imma-tolan_admin_sso_account_assignment" {
-  instance_arn       = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn
-  permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
-  principal_id       = aws_identitystore_group.administrators_sso_group.group_id
-  principal_type     = "GROUP"
-  target_id          = aws_organizations_account.imma-lib.id
-  target_type        = "AWS_ACCOUNT"
-}
-
 resource "aws_organizations_account" "imma-dev" {
   email = "imma-dev@imma.io"
   name  = "imma-dev"
@@ -141,7 +90,7 @@ resource "aws_organizations_account" "imma-dev" {
   }
 }
 
-resource "aws_ssoadmin_account_assignment" "imma-dev_admin_sso_account_assignment" {
+resource "aws_ssoadmin_account_assignment" "imma_dev_admin_sso_account_assignment" {
   instance_arn       = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn
   permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
   principal_id       = aws_identitystore_group.administrators_sso_group.group_id
@@ -149,7 +98,54 @@ resource "aws_ssoadmin_account_assignment" "imma-dev_admin_sso_account_assignmen
   target_id          = aws_organizations_account.imma-dev.id
   target_type        = "AWS_ACCOUNT"
 }
+resource "aws_organizations_account" "imma-lib" {
+  email = "imma-tolan@defn.us"
+  name  = "imma-tolan"
+  tags = {
+    ManagedBy = "Terraform"
+  }
+}
 
+resource "aws_ssoadmin_account_assignment" "imma_tolan_admin_sso_account_assignment" {
+  instance_arn       = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn
+  permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
+  principal_id       = aws_identitystore_group.administrators_sso_group.group_id
+  principal_type     = "GROUP"
+  target_id          = aws_organizations_account.imma-lib.id
+  target_type        = "AWS_ACCOUNT"
+}
+resource "aws_organizations_account" "imma-log" {
+  email = "imma-dgwyn@defn.us"
+  name  = "imma-dgwyn"
+  tags = {
+    ManagedBy = "Terraform"
+  }
+}
+
+resource "aws_ssoadmin_account_assignment" "imma_dgwyn_admin_sso_account_assignment" {
+  instance_arn       = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn
+  permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
+  principal_id       = aws_identitystore_group.administrators_sso_group.group_id
+  principal_type     = "GROUP"
+  target_id          = aws_organizations_account.imma-log.id
+  target_type        = "AWS_ACCOUNT"
+}
+resource "aws_organizations_account" "imma-net" {
+  email = "imma-defn@defn.us"
+  name  = "imma-defn"
+  tags = {
+    ManagedBy = "Terraform"
+  }
+}
+
+resource "aws_ssoadmin_account_assignment" "imma_defn_admin_sso_account_assignment" {
+  instance_arn       = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn
+  permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
+  principal_id       = aws_identitystore_group.administrators_sso_group.group_id
+  principal_type     = "GROUP"
+  target_id          = aws_organizations_account.imma-net.id
+  target_type        = "AWS_ACCOUNT"
+}
 resource "aws_organizations_account" "imma-pub" {
   email = "imma-prod@imma.io"
   name  = "imma-prod"
@@ -158,11 +154,31 @@ resource "aws_organizations_account" "imma-pub" {
   }
 }
 
-resource "aws_ssoadmin_account_assignment" "imma-prod_admin_sso_account_assignment" {
+resource "aws_ssoadmin_account_assignment" "imma_prod_admin_sso_account_assignment" {
   instance_arn       = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn
   permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
   principal_id       = aws_identitystore_group.administrators_sso_group.group_id
   principal_type     = "GROUP"
   target_id          = aws_organizations_account.imma-pub.id
   target_type        = "AWS_ACCOUNT"
+}
+moved {
+  from = aws_ssoadmin_account_assignment.imma-dev_admin_sso_account_assignment
+  to   = aws_ssoadmin_account_assignment.imma_dev_admin_sso_account_assignment
+}
+moved {
+  from = aws_ssoadmin_account_assignment.imma-tolan_admin_sso_account_assignment
+  to   = aws_ssoadmin_account_assignment.imma_tolan_admin_sso_account_assignment
+}
+moved {
+  from = aws_ssoadmin_account_assignment.imma-dgwyn_admin_sso_account_assignment
+  to   = aws_ssoadmin_account_assignment.imma_dgwyn_admin_sso_account_assignment
+}
+moved {
+  from = aws_ssoadmin_account_assignment.imma-defn_admin_sso_account_assignment
+  to   = aws_ssoadmin_account_assignment.imma_defn_admin_sso_account_assignment
+}
+moved {
+  from = aws_ssoadmin_account_assignment.imma-prod_admin_sso_account_assignment
+  to   = aws_ssoadmin_account_assignment.imma_prod_admin_sso_account_assignment
 }

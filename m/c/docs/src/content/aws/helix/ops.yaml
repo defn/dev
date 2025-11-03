@@ -1,9 +1,9 @@
 # auto-generated: transform.sh
-account: ops
-email: aws-helix+ops@defn.sh
 id: "368812692254"
-name: ops
+account: ops
 org: helix
+name: ops
+email: aws-helix+ops@defn.sh
 sso_role: Administrator
 aws_config: |-
   # auto-generated: aws.cue aws_config_account
@@ -75,3 +75,38 @@ infra_acc_readme: |-
   ```
 
   auto-generated: aws.cue infra_acc_readme
+infra_acc_terraform: |-
+  terraform {
+    required_providers {
+      aws = {
+        version = "5.99.1"
+        source  = "aws"
+      }
+    }
+    backend "s3" {
+      bucket         = "dfn-defn-terraform-state"
+      dynamodb_table = "dfn-defn-terraform-state-lock"
+      encrypt        = true
+      key            = "stacks/acc-helix-ops/terraform.tfstate"
+      profile        = "defn-org"
+      region         = "us-east-1"
+    }
+
+  }
+
+  provider "aws" {
+    profile = "helix-ops"
+    region  = "us-east-1"
+    alias   = "helix-ops"
+  }
+
+  module "helix-ops" {
+    account   = 510430971399
+    name      = "terraform"
+    namespace = "helix"
+    stage     = "ops"
+    source    = "./mod/terraform-aws-defn-account"
+    providers = {
+      aws = aws.helix-ops
+    }
+  }

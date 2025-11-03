@@ -1,9 +1,9 @@
 # auto-generated: transform.sh
-account: lib
-email: imma-tolan@defn.us
 id: "516851121506"
-name: imma-tolan
+account: lib
 org: imma
+email: imma-tolan@defn.us
+name: imma-tolan
 sso_role: Administrator
 aws_config: |-
   # auto-generated: aws.cue aws_config_account
@@ -75,3 +75,38 @@ infra_acc_readme: |-
   ```
 
   auto-generated: aws.cue infra_acc_readme
+infra_acc_terraform: |-
+  terraform {
+    required_providers {
+      aws = {
+        version = "5.99.1"
+        source  = "aws"
+      }
+    }
+    backend "s3" {
+      bucket         = "dfn-defn-terraform-state"
+      dynamodb_table = "dfn-defn-terraform-state-lock"
+      encrypt        = true
+      key            = "stacks/acc-imma-lib/terraform.tfstate"
+      profile        = "defn-org"
+      region         = "us-east-1"
+    }
+
+  }
+
+  provider "aws" {
+    profile = "imma-lib"
+    region  = "us-east-1"
+    alias   = "imma-lib"
+  }
+
+  module "imma-lib" {
+    account   = 510430971399
+    name      = "terraform"
+    namespace = "imma"
+    stage     = "ops"
+    source    = "./mod/terraform-aws-defn-account"
+    providers = {
+      aws = aws.imma-lib
+    }
+  }
