@@ -285,6 +285,46 @@ moved {
   to   = aws_organizations_account.spiral_pub
 }
 moved {
+  from = aws_organizations_account.spiral
+  to   = aws_organizations_account.spiral_org
+}
+moved {
+  from = aws_organizations_account.pub
+  to   = aws_organizations_account.spiral_ci
+}
+moved {
+  from = aws_organizations_account.dev
+  to   = aws_organizations_account.spiral_dev
+}
+moved {
+  from = aws_organizations_account.hub
+  to   = aws_organizations_account.spiral_hub
+}
+moved {
+  from = aws_organizations_account.lib
+  to   = aws_organizations_account.spiral_lib
+}
+moved {
+  from = aws_organizations_account.log
+  to   = aws_organizations_account.spiral_log
+}
+moved {
+  from = aws_organizations_account.net
+  to   = aws_organizations_account.spiral_net
+}
+moved {
+  from = aws_organizations_account.ops
+  to   = aws_organizations_account.spiral_ops
+}
+moved {
+  from = aws_organizations_account.sec
+  to   = aws_organizations_account.spiral_prod
+}
+moved {
+  from = aws_organizations_account.dmz
+  to   = aws_organizations_account.spiral_pub
+}
+moved {
   from = aws_ssoadmin_account_assignment.spiral-org_admin_sso_account_assignment
   to   = aws_ssoadmin_account_assignment.spiral_org_admin_sso_account_assignment
 }

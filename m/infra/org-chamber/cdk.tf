@@ -767,6 +767,122 @@ moved {
   to   = aws_organizations_account.chamber_z
 }
 moved {
+  from = aws_organizations_account.chamber
+  to   = aws_organizations_account.chamber_org
+}
+moved {
+  from = aws_organizations_account.defn_cd
+  to   = aws_organizations_account.chamber_1
+}
+moved {
+  from = aws_organizations_account.defn_ci
+  to   = aws_organizations_account.chamber_2
+}
+moved {
+  from = aws_organizations_account.defn_security
+  to   = aws_organizations_account.chamber_3
+}
+moved {
+  from = aws_organizations_account.defn_a
+  to   = aws_organizations_account.chamber_a
+}
+moved {
+  from = aws_organizations_account.defn_b
+  to   = aws_organizations_account.chamber_b
+}
+moved {
+  from = aws_organizations_account.defn_c
+  to   = aws_organizations_account.chamber_c
+}
+moved {
+  from = aws_organizations_account.defn_d
+  to   = aws_organizations_account.chamber_d
+}
+moved {
+  from = aws_organizations_account.defn_e
+  to   = aws_organizations_account.chamber_e
+}
+moved {
+  from = aws_organizations_account.defn_f
+  to   = aws_organizations_account.chamber_f
+}
+moved {
+  from = aws_organizations_account.defn_g
+  to   = aws_organizations_account.chamber_g
+}
+moved {
+  from = aws_organizations_account.defn_h
+  to   = aws_organizations_account.chamber_h
+}
+moved {
+  from = aws_organizations_account.defn_i
+  to   = aws_organizations_account.chamber_i
+}
+moved {
+  from = aws_organizations_account.defn_j
+  to   = aws_organizations_account.chamber_j
+}
+moved {
+  from = aws_organizations_account.defn_l
+  to   = aws_organizations_account.chamber_l
+}
+moved {
+  from = aws_organizations_account.defn_m
+  to   = aws_organizations_account.chamber_m
+}
+moved {
+  from = aws_organizations_account.defn_n
+  to   = aws_organizations_account.chamber_n
+}
+moved {
+  from = aws_organizations_account.defn_o
+  to   = aws_organizations_account.chamber_o
+}
+moved {
+  from = aws_organizations_account.defn_p
+  to   = aws_organizations_account.chamber_p
+}
+moved {
+  from = aws_organizations_account.defn_dev
+  to   = aws_organizations_account.chamber_q
+}
+moved {
+  from = aws_organizations_account.defn_r
+  to   = aws_organizations_account.chamber_r
+}
+moved {
+  from = aws_organizations_account.defn_s
+  to   = aws_organizations_account.chamber_s
+}
+moved {
+  from = aws_organizations_account.defn_t
+  to   = aws_organizations_account.chamber_t
+}
+moved {
+  from = aws_organizations_account.defn_qa
+  to   = aws_organizations_account.chamber_u
+}
+moved {
+  from = aws_organizations_account.defn_v
+  to   = aws_organizations_account.chamber_v
+}
+moved {
+  from = aws_organizations_account.defn_w
+  to   = aws_organizations_account.chamber_w
+}
+moved {
+  from = aws_organizations_account.defn_stage
+  to   = aws_organizations_account.chamber_x
+}
+moved {
+  from = aws_organizations_account.defn_prod
+  to   = aws_organizations_account.chamber_y
+}
+moved {
+  from = aws_organizations_account.defn_hub
+  to   = aws_organizations_account.chamber_z
+}
+moved {
   from = aws_ssoadmin_account_assignment.chamber-org_admin_sso_account_assignment
   to   = aws_ssoadmin_account_assignment.chamber_org_admin_sso_account_assignment
 }

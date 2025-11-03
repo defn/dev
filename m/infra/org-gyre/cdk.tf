@@ -109,6 +109,14 @@ moved {
   to   = aws_organizations_account.gyre_ops
 }
 moved {
+  from = aws_organizations_account.gyre
+  to   = aws_organizations_account.gyre_org
+}
+moved {
+  from = aws_organizations_account.ops
+  to   = aws_organizations_account.gyre_ops
+}
+moved {
   from = aws_ssoadmin_account_assignment.gyre-org_admin_sso_account_assignment
   to   = aws_ssoadmin_account_assignment.gyre_org_admin_sso_account_assignment
 }

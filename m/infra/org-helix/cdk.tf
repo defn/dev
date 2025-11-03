@@ -285,6 +285,46 @@ moved {
   to   = aws_organizations_account.helix_pub
 }
 moved {
+  from = aws_organizations_account.helix
+  to   = aws_organizations_account.helix_org
+}
+moved {
+  from = aws_organizations_account.sec
+  to   = aws_organizations_account.helix_ci
+}
+moved {
+  from = aws_organizations_account.dev
+  to   = aws_organizations_account.helix_dev
+}
+moved {
+  from = aws_organizations_account.hub
+  to   = aws_organizations_account.helix_hub
+}
+moved {
+  from = aws_organizations_account.lib
+  to   = aws_organizations_account.helix_lib
+}
+moved {
+  from = aws_organizations_account.log
+  to   = aws_organizations_account.helix_log
+}
+moved {
+  from = aws_organizations_account.net
+  to   = aws_organizations_account.helix_net
+}
+moved {
+  from = aws_organizations_account.ops
+  to   = aws_organizations_account.helix_ops
+}
+moved {
+  from = aws_organizations_account.dmz
+  to   = aws_organizations_account.helix_prod
+}
+moved {
+  from = aws_organizations_account.pub
+  to   = aws_organizations_account.helix_pub
+}
+moved {
   from = aws_ssoadmin_account_assignment.helix-org_admin_sso_account_assignment
   to   = aws_ssoadmin_account_assignment.helix_org_admin_sso_account_assignment
 }
