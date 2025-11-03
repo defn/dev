@@ -1,2 +1,112 @@
 # auto-generated: transform.sh
-{"id": "707476523482", "account": "log", "org": "circus", "name": "circus-log", "email": "aws-circus-audit@defn.sh", "sso_role": "Administrator", "aws_config": "# auto-generated: aws.cue aws_config_account\n[profile circus-log]\nsso_account_id=707476523482\nsso_role_name=Administrator\nsso_start_url=https://d-92670c4790.awsapps.com/start\nsso_region=us-west-2\n\n# auto-generated: aws.cue aws_config_bootstrap\n[profile defn-org]\nsso_account_id=510430971399\nsso_role_name=Administrator\nsso_start_url=https://defn.awsapps.com/start\nsso_region=us-east-2", "mise_config": "# auto-generated: aws.cue mise_config\n[env]\nAWS_PROFILE = \"circus-log\"\nAWS_REGION = \"us-west-2\"\nAWS_CONFIG_FILE = \"/home/ubuntu/m/a/circus/log/.aws/config\"", "aws_config_account": "# auto-generated: aws.cue aws_config_account\n[profile circus-log]\nsso_account_id=707476523482\nsso_role_name=Administrator\nsso_start_url=https://d-92670c4790.awsapps.com/start\nsso_region=us-west-2", "aws_config_bootstrap": "# auto-generated: aws.cue aws_config_bootstrap\n[profile defn-org]\nsso_account_id=510430971399\nsso_role_name=Administrator\nsso_start_url=https://defn.awsapps.com/start\nsso_region=us-east-2", "account_readme": "## AWS Environment: circus-log\n\n```bash\ncd a/circus/log\nmise trust\naws sso login\nalogin\n```\n\nauto-generated: aws.cue account_readme", "infra_org_readme": "## Organizational-level Terraform: circus-log\n\n```bash\ncd infra/org-circus\nmise trust\naws sso login\nterraform init\nterraform plan\n```\n\nauto-generated: aws.cue infra_org_readme", "infra_acc_readme": "## Account-specific Terraform: circus-log\n\n```bash\ncd infra/acc-circus-log\nmise trust\naws sso login --profile defn-org\naws sso login\nterraform init\nterraform plan\n```\n\nauto-generated: aws.cue infra_acc_readme", "infra_acc_terraform": "terraform {\n  required_providers {\n    aws = {\n      version = \"5.99.1\"\n      source  = \"aws\"\n    }\n  }\n  backend \"s3\" {\n    bucket         = \"dfn-defn-terraform-state\"\n    dynamodb_table = \"dfn-defn-terraform-state-lock\"\n    encrypt        = true\n    key            = \"stacks/acc-circus-log/terraform.tfstate\"\n    profile        = \"defn-org\"\n    region         = \"us-east-1\"\n  }\n\n}\n\nprovider \"aws\" {\n  profile = \"circus-log\"\n  region  = \"us-east-1\"\n  alias   = \"circus-log\"\n}\n\nmodule \"circus-log\" {\n  account   = 510430971399\n  name      = \"terraform\"\n  namespace = \"circus\"\n  stage     = \"ops\"\n  source    = \"./mod/terraform-aws-defn-account\"\n  providers = {\n    aws = aws.circus-log\n  }\n}"}
+id: "707476523482"
+account: log
+org: circus
+name: circus-log
+email: aws-circus-audit@defn.sh
+sso_role: Administrator
+aws_config: |-
+  # auto-generated: aws.cue aws_config_account
+  [profile circus-log]
+  sso_account_id=707476523482
+  sso_role_name=Administrator
+  sso_start_url=https://d-92670c4790.awsapps.com/start
+  sso_region=us-west-2
+
+  # auto-generated: aws.cue aws_config_bootstrap
+  [profile defn-org]
+  sso_account_id=510430971399
+  sso_role_name=Administrator
+  sso_start_url=https://defn.awsapps.com/start
+  sso_region=us-east-2
+mise_config: |-
+  # auto-generated: aws.cue mise_config
+  [env]
+  AWS_PROFILE = "circus-log"
+  AWS_REGION = "us-west-2"
+  AWS_CONFIG_FILE = "/home/ubuntu/m/a/circus/log/.aws/config"
+aws_config_account: |-
+  # auto-generated: aws.cue aws_config_account
+  [profile circus-log]
+  sso_account_id=707476523482
+  sso_role_name=Administrator
+  sso_start_url=https://d-92670c4790.awsapps.com/start
+  sso_region=us-west-2
+aws_config_bootstrap: |-
+  # auto-generated: aws.cue aws_config_bootstrap
+  [profile defn-org]
+  sso_account_id=510430971399
+  sso_role_name=Administrator
+  sso_start_url=https://defn.awsapps.com/start
+  sso_region=us-east-2
+account_readme: |-
+  ## AWS Environment: circus-log
+
+  ```bash
+  cd a/circus/log
+  mise trust
+  aws sso login
+  alogin
+  ```
+
+  auto-generated: aws.cue account_readme
+infra_org_readme: |-
+  ## Organizational-level Terraform: circus-log
+
+  ```bash
+  cd infra/org-circus
+  mise trust
+  aws sso login
+  terraform init
+  terraform plan
+  ```
+
+  auto-generated: aws.cue infra_org_readme
+infra_acc_readme: |-
+  ## Account-specific Terraform: circus-log
+
+  ```bash
+  cd infra/acc-circus-log
+  mise trust
+  aws sso login --profile defn-org
+  aws sso login
+  terraform init
+  terraform plan
+  ```
+
+  auto-generated: aws.cue infra_acc_readme
+infra_acc_terraform: |-
+  terraform {
+    required_providers {
+      aws = {
+        version = "5.99.1"
+        source  = "aws"
+      }
+    }
+    backend "s3" {
+      bucket         = "dfn-defn-terraform-state"
+      dynamodb_table = "dfn-defn-terraform-state-lock"
+      encrypt        = true
+      key            = "stacks/acc-circus-log/terraform.tfstate"
+      profile        = "defn-org"
+      region         = "us-east-1"
+    }
+
+  }
+
+  provider "aws" {
+    profile = "circus-log"
+    region  = "us-east-1"
+    alias   = "circus-log"
+  }
+
+  module "circus-log" {
+    account   = 510430971399
+    name      = "terraform"
+    namespace = "circus"
+    stage     = "ops"
+    source    = "./mod/terraform-aws-defn-account"
+    providers = {
+      aws = aws.circus-log
+    }
+  }

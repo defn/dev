@@ -136,35 +136,3 @@ resource "aws_ssoadmin_account_assignment" "curl_net_admin_sso_account_assignmen
   target_id          = aws_organizations_account.curl_net.id
   target_type        = "AWS_ACCOUNT"
 }
-moved {
-  from = aws_organizations_account.curl
-  to   = aws_organizations_account.curl_org
-}
-moved {
-  from = aws_organizations_account.hub
-  to   = aws_organizations_account.curl_hub
-}
-moved {
-  from = aws_organizations_account.lib
-  to   = aws_organizations_account.curl_lib
-}
-moved {
-  from = aws_organizations_account.net
-  to   = aws_organizations_account.curl_net
-}
-moved {
-  from = aws_ssoadmin_account_assignment.curl-org_admin_sso_account_assignment
-  to   = aws_ssoadmin_account_assignment.curl_org_admin_sso_account_assignment
-}
-moved {
-  from = aws_ssoadmin_account_assignment.curl-hub_admin_sso_account_assignment
-  to   = aws_ssoadmin_account_assignment.curl_hub_admin_sso_account_assignment
-}
-moved {
-  from = aws_ssoadmin_account_assignment.curl-lib_admin_sso_account_assignment
-  to   = aws_ssoadmin_account_assignment.curl_lib_admin_sso_account_assignment
-}
-moved {
-  from = aws_ssoadmin_account_assignment.curl-net_admin_sso_account_assignment
-  to   = aws_ssoadmin_account_assignment.curl_net_admin_sso_account_assignment
-}

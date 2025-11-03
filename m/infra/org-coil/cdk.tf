@@ -136,35 +136,3 @@ resource "aws_ssoadmin_account_assignment" "coil_net_admin_sso_account_assignmen
   target_id          = aws_organizations_account.coil_net.id
   target_type        = "AWS_ACCOUNT"
 }
-moved {
-  from = aws_organizations_account.coil
-  to   = aws_organizations_account.coil_org
-}
-moved {
-  from = aws_organizations_account.hub
-  to   = aws_organizations_account.coil_hub
-}
-moved {
-  from = aws_organizations_account.lib
-  to   = aws_organizations_account.coil_lib
-}
-moved {
-  from = aws_organizations_account.net
-  to   = aws_organizations_account.coil_net
-}
-moved {
-  from = aws_ssoadmin_account_assignment.coil-org_admin_sso_account_assignment
-  to   = aws_ssoadmin_account_assignment.coil_org_admin_sso_account_assignment
-}
-moved {
-  from = aws_ssoadmin_account_assignment.coil-hub_admin_sso_account_assignment
-  to   = aws_ssoadmin_account_assignment.coil_hub_admin_sso_account_assignment
-}
-moved {
-  from = aws_ssoadmin_account_assignment.coil-lib_admin_sso_account_assignment
-  to   = aws_ssoadmin_account_assignment.coil_lib_admin_sso_account_assignment
-}
-moved {
-  from = aws_ssoadmin_account_assignment.coil-net_admin_sso_account_assignment
-  to   = aws_ssoadmin_account_assignment.coil_net_admin_sso_account_assignment
-}

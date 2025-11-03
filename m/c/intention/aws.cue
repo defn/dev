@@ -13,20 +13,20 @@ aws: "org"~lookup: [string]~(ORG,_): close({
 	sso_url:    =~"https://[a-z0-9-]+.awsapps.com/start"
 
 	"account": [string]~(ACCOUNT,_): close({
-		id!:        string
-		account:    string
-		org:        string
-		name:       string
-		email!:     string
-		sso_role:   string
-		aws_config: string
+		id!:                         string
+		account:                     string
+		org:                         string
+		name:                        string
+		email!:                      string
+		sso_role:                    string
+		aws_config:                  string
 		iam_user_access_to_billing?: string
 		role_name?:                  string
 
-		id:      =~"^[0-9]+$"
-		account: ACCOUNT
-		org:     ORG
-		name:    string | *"\(ORG)-\(ACCOUNT)"
+		id:       =~"^[0-9]+$"
+		account:  ACCOUNT
+		org:      ORG
+		name:     string | *"\(ORG)-\(ACCOUNT)"
 		sso_role: string | *"Administrator"
 
 		mise_config: """

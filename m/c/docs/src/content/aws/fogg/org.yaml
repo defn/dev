@@ -1,2 +1,341 @@
 # auto-generated: transform.sh
-{"id": "328216504962", "account": "org", "org": "fogg", "name": "fogg-org", "email": "spiral@defn.sh", "sso_role": "Administrator", "aws_config": "# auto-generated: aws.cue aws_config_account\n[profile fogg-org]\nsso_account_id=328216504962\nsso_role_name=Administrator\nsso_start_url=https://fogg-0.awsapps.com/start\nsso_region=us-west-2\n\n# auto-generated: aws.cue aws_config_bootstrap\n[profile defn-org]\nsso_account_id=510430971399\nsso_role_name=Administrator\nsso_start_url=https://defn.awsapps.com/start\nsso_region=us-east-2", "mise_config": "# auto-generated: aws.cue mise_config\n[env]\nAWS_PROFILE = \"fogg-org\"\nAWS_REGION = \"us-west-2\"\nAWS_CONFIG_FILE = \"/home/ubuntu/m/a/fogg/org/.aws/config\"", "aws_config_account": "# auto-generated: aws.cue aws_config_account\n[profile fogg-org]\nsso_account_id=328216504962\nsso_role_name=Administrator\nsso_start_url=https://fogg-0.awsapps.com/start\nsso_region=us-west-2", "aws_config_bootstrap": "# auto-generated: aws.cue aws_config_bootstrap\n[profile defn-org]\nsso_account_id=510430971399\nsso_role_name=Administrator\nsso_start_url=https://defn.awsapps.com/start\nsso_region=us-east-2", "account_readme": "## AWS Environment: fogg-org\n\n```bash\ncd a/fogg/org\nmise trust\naws sso login\nalogin\n```\n\nauto-generated: aws.cue account_readme", "infra_org_readme": "## Organizational-level Terraform: fogg-org\n\n```bash\ncd infra/org-fogg\nmise trust\naws sso login\nterraform init\nterraform plan\n```\n\nauto-generated: aws.cue infra_org_readme", "infra_org_terraform": "terraform {\n  required_providers {\n    aws = {\n      version = \"5.99.1\"\n      source  = \"aws\"\n    }\n  }\n  backend \"s3\" {\n    bucket         = \"dfn-defn-terraform-state\"\n    dynamodb_table = \"dfn-defn-terraform-state-lock\"\n    encrypt        = true\n    key            = \"stacks/org-fogg/terraform.tfstate\"\n    profile        = \"defn-org\"\n    region         = \"us-east-1\"\n  }\n\n}\n\nlocals {\n  sso_instance_arn  = data.aws_ssoadmin_instances.sso_instance.arns\n  sso_instance_isid = data.aws_ssoadmin_instances.sso_instance.identity_store_ids\n}\n\nprovider \"aws\" {\n  profile = \"fogg-org\"\n  region  = \"us-west-2\"\n}\n\nresource \"aws_organizations_organization\" \"organization\" {\n  aws_service_access_principals = [\n    \"account.amazonaws.com\",\n    \"iam.amazonaws.com\",\n    \"cloudtrail.amazonaws.com\",\n    \"config.amazonaws.com\",\n    \"ram.amazonaws.com\",\n    \"ssm.amazonaws.com\",\n    \"sso.amazonaws.com\",\n    \"tagpolicies.tag.amazonaws.com\"\n  ]\n  enabled_policy_types = [\n    \"SERVICE_CONTROL_POLICY\",\n    \"TAG_POLICY\"\n  ]\n  feature_set = \"ALL\"\n}\n\ndata \"aws_ssoadmin_instances\" \"sso_instance\" {\n}\n\nresource \"aws_ssoadmin_permission_set\" \"admin_sso_permission_set\" {\n  instance_arn     = element(local.sso_instance_arn, 0)\n  name             = \"Administrator\"\n  session_duration = \"PT2H\"\n  tags = {\n    ManagedBy = \"Terraform\"\n  }\n}\n\nresource \"aws_ssoadmin_managed_policy_attachment\" \"admin_sso_managed_policy_attachment\" {\n  instance_arn       = aws_ssoadmin_permission_set.admin_sso_permission_set.instance_arn\n  managed_policy_arn = \"arn:aws:iam::aws:policy/AdministratorAccess\"\n  permission_set_arn = aws_ssoadmin_permission_set.admin_sso_permission_set.arn\n}\n\nresource \"aws_identitystore_group\" \"administrators_sso_group\" {\n  display_name      = \"Administrators\"\n  identity_store_id = element(local.sso_instance_isid, 0)\n}\nresource \"aws_organizations_account\" \"fogg_org\" {\n  email = \"spiral@defn.sh\"\n  name  = \"fogg-org\"\n  tags = {\n    ManagedBy = \"Terraform\"\n  }\n}\n\nresource \"aws_ssoadmin_account_assignment\" \"fogg_org_admin_sso_account_assignment\" {\n  instance_arn       = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn\n  permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn\n  principal_id       = aws_identitystore_group.administrators_sso_group.group_id\n  principal_type     = \"GROUP\"\n  target_id          = aws_organizations_account.fogg_org.id\n  target_type        = \"AWS_ACCOUNT\"\n}\nresource \"aws_organizations_account\" \"fogg_ci\" {\n  email = \"fogg-home@defn.sh\"\n  name  = \"fogg-ci\"\n  tags = {\n    ManagedBy = \"Terraform\"\n  }\n}\n\nresource \"aws_ssoadmin_account_assignment\" \"fogg_ci_admin_sso_account_assignment\" {\n  instance_arn       = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn\n  permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn\n  principal_id       = aws_identitystore_group.administrators_sso_group.group_id\n  principal_type     = \"GROUP\"\n  target_id          = aws_organizations_account.fogg_ci.id\n  target_type        = \"AWS_ACCOUNT\"\n}\nresource \"aws_organizations_account\" \"fogg_dev\" {\n  email = \"fogg-sandbox@defn.sh\"\n  name  = \"fogg-dev\"\n  tags = {\n    ManagedBy = \"Terraform\"\n  }\n}\n\nresource \"aws_ssoadmin_account_assignment\" \"fogg_dev_admin_sso_account_assignment\" {\n  instance_arn       = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn\n  permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn\n  principal_id       = aws_identitystore_group.administrators_sso_group.group_id\n  principal_type     = \"GROUP\"\n  target_id          = aws_organizations_account.fogg_dev.id\n  target_type        = \"AWS_ACCOUNT\"\n}\nresource \"aws_organizations_account\" \"fogg_hub\" {\n  email = \"fogg-hub@defn.sh\"\n  name  = \"fogg-hub\"\n  tags = {\n    ManagedBy = \"Terraform\"\n  }\n}\n\nresource \"aws_ssoadmin_account_assignment\" \"fogg_hub_admin_sso_account_assignment\" {\n  instance_arn       = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn\n  permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn\n  principal_id       = aws_identitystore_group.administrators_sso_group.group_id\n  principal_type     = \"GROUP\"\n  target_id          = aws_organizations_account.fogg_hub.id\n  target_type        = \"AWS_ACCOUNT\"\n}\nresource \"aws_organizations_account\" \"fogg_lib\" {\n  email = \"fogg-data@defn.sh\"\n  name  = \"fogg-lib\"\n  tags = {\n    ManagedBy = \"Terraform\"\n  }\n}\n\nresource \"aws_ssoadmin_account_assignment\" \"fogg_lib_admin_sso_account_assignment\" {\n  instance_arn       = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn\n  permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn\n  principal_id       = aws_identitystore_group.administrators_sso_group.group_id\n  principal_type     = \"GROUP\"\n  target_id          = aws_organizations_account.fogg_lib.id\n  target_type        = \"AWS_ACCOUNT\"\n}\nresource \"aws_organizations_account\" \"fogg_log\" {\n  email = \"fogg-circus@defn.sh\"\n  name  = \"fogg-log\"\n  tags = {\n    ManagedBy = \"Terraform\"\n  }\n}\n\nresource \"aws_ssoadmin_account_assignment\" \"fogg_log_admin_sso_account_assignment\" {\n  instance_arn       = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn\n  permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn\n  principal_id       = aws_identitystore_group.administrators_sso_group.group_id\n  principal_type     = \"GROUP\"\n  target_id          = aws_organizations_account.fogg_log.id\n  target_type        = \"AWS_ACCOUNT\"\n}\nresource \"aws_organizations_account\" \"fogg_net\" {\n  email = \"fogg-asset@defn.sh\"\n  name  = \"fogg-net\"\n  tags = {\n    ManagedBy = \"Terraform\"\n  }\n}\n\nresource \"aws_ssoadmin_account_assignment\" \"fogg_net_admin_sso_account_assignment\" {\n  instance_arn       = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn\n  permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn\n  principal_id       = aws_identitystore_group.administrators_sso_group.group_id\n  principal_type     = \"GROUP\"\n  target_id          = aws_organizations_account.fogg_net.id\n  target_type        = \"AWS_ACCOUNT\"\n}\nresource \"aws_organizations_account\" \"fogg_ops\" {\n  email = \"fogg-gateway@defn.sh\"\n  name  = \"fogg-ops\"\n  tags = {\n    ManagedBy = \"Terraform\"\n  }\n}\n\nresource \"aws_ssoadmin_account_assignment\" \"fogg_ops_admin_sso_account_assignment\" {\n  instance_arn       = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn\n  permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn\n  principal_id       = aws_identitystore_group.administrators_sso_group.group_id\n  principal_type     = \"GROUP\"\n  target_id          = aws_organizations_account.fogg_ops.id\n  target_type        = \"AWS_ACCOUNT\"\n}\nresource \"aws_organizations_account\" \"fogg_prod\" {\n  email = \"fogg-postx@defn.sh\"\n  name  = \"fogg-prod\"\n  tags = {\n    ManagedBy = \"Terraform\"\n  }\n}\n\nresource \"aws_ssoadmin_account_assignment\" \"fogg_prod_admin_sso_account_assignment\" {\n  instance_arn       = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn\n  permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn\n  principal_id       = aws_identitystore_group.administrators_sso_group.group_id\n  principal_type     = \"GROUP\"\n  target_id          = aws_organizations_account.fogg_prod.id\n  target_type        = \"AWS_ACCOUNT\"\n}\nresource \"aws_organizations_account\" \"fogg_pub\" {\n  email = \"fogg-security@defn.sh\"\n  name  = \"fogg-pub\"\n  tags = {\n    ManagedBy = \"Terraform\"\n  }\n}\n\nresource \"aws_ssoadmin_account_assignment\" \"fogg_pub_admin_sso_account_assignment\" {\n  instance_arn       = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn\n  permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn\n  principal_id       = aws_identitystore_group.administrators_sso_group.group_id\n  principal_type     = \"GROUP\"\n  target_id          = aws_organizations_account.fogg_pub.id\n  target_type        = \"AWS_ACCOUNT\"\n}\nmoved {\n  from = aws_organizations_account.fogg-org\n  to   = aws_organizations_account.fogg_org\n}\nmoved {\n  from = aws_organizations_account.fogg-ci\n  to   = aws_organizations_account.fogg_ci\n}\nmoved {\n  from = aws_organizations_account.fogg-dev\n  to   = aws_organizations_account.fogg_dev\n}\nmoved {\n  from = aws_organizations_account.fogg-hub\n  to   = aws_organizations_account.fogg_hub\n}\nmoved {\n  from = aws_organizations_account.fogg-lib\n  to   = aws_organizations_account.fogg_lib\n}\nmoved {\n  from = aws_organizations_account.fogg-log\n  to   = aws_organizations_account.fogg_log\n}\nmoved {\n  from = aws_organizations_account.fogg-net\n  to   = aws_organizations_account.fogg_net\n}\nmoved {\n  from = aws_organizations_account.fogg-ops\n  to   = aws_organizations_account.fogg_ops\n}\nmoved {\n  from = aws_organizations_account.fogg-prod\n  to   = aws_organizations_account.fogg_prod\n}\nmoved {\n  from = aws_organizations_account.fogg-pub\n  to   = aws_organizations_account.fogg_pub\n}\nmoved {\n  from = aws_ssoadmin_account_assignment.fogg-org_admin_sso_account_assignment\n  to   = aws_ssoadmin_account_assignment.fogg_org_admin_sso_account_assignment\n}\nmoved {\n  from = aws_ssoadmin_account_assignment.fogg-ci_admin_sso_account_assignment\n  to   = aws_ssoadmin_account_assignment.fogg_ci_admin_sso_account_assignment\n}\nmoved {\n  from = aws_ssoadmin_account_assignment.fogg-dev_admin_sso_account_assignment\n  to   = aws_ssoadmin_account_assignment.fogg_dev_admin_sso_account_assignment\n}\nmoved {\n  from = aws_ssoadmin_account_assignment.fogg-hub_admin_sso_account_assignment\n  to   = aws_ssoadmin_account_assignment.fogg_hub_admin_sso_account_assignment\n}\nmoved {\n  from = aws_ssoadmin_account_assignment.fogg-lib_admin_sso_account_assignment\n  to   = aws_ssoadmin_account_assignment.fogg_lib_admin_sso_account_assignment\n}\nmoved {\n  from = aws_ssoadmin_account_assignment.fogg-log_admin_sso_account_assignment\n  to   = aws_ssoadmin_account_assignment.fogg_log_admin_sso_account_assignment\n}\nmoved {\n  from = aws_ssoadmin_account_assignment.fogg-net_admin_sso_account_assignment\n  to   = aws_ssoadmin_account_assignment.fogg_net_admin_sso_account_assignment\n}\nmoved {\n  from = aws_ssoadmin_account_assignment.fogg-ops_admin_sso_account_assignment\n  to   = aws_ssoadmin_account_assignment.fogg_ops_admin_sso_account_assignment\n}\nmoved {\n  from = aws_ssoadmin_account_assignment.fogg-prod_admin_sso_account_assignment\n  to   = aws_ssoadmin_account_assignment.fogg_prod_admin_sso_account_assignment\n}\nmoved {\n  from = aws_ssoadmin_account_assignment.fogg-pub_admin_sso_account_assignment\n  to   = aws_ssoadmin_account_assignment.fogg_pub_admin_sso_account_assignment\n}", "infra_acc_readme": "## Account-specific Terraform: fogg-org\n\n```bash\ncd infra/acc-fogg-org\nmise trust\naws sso login --profile defn-org\naws sso login\nterraform init\nterraform plan\n```\n\nauto-generated: aws.cue infra_acc_readme", "infra_acc_terraform": "terraform {\n  required_providers {\n    aws = {\n      version = \"5.99.1\"\n      source  = \"aws\"\n    }\n  }\n  backend \"s3\" {\n    bucket         = \"dfn-defn-terraform-state\"\n    dynamodb_table = \"dfn-defn-terraform-state-lock\"\n    encrypt        = true\n    key            = \"stacks/acc-fogg-org/terraform.tfstate\"\n    profile        = \"defn-org\"\n    region         = \"us-east-1\"\n  }\n\n}\n\nprovider \"aws\" {\n  profile = \"fogg-org\"\n  region  = \"us-east-1\"\n  alias   = \"fogg-org\"\n}\n\nmodule \"fogg-org\" {\n  account   = 510430971399\n  name      = \"terraform\"\n  namespace = \"fogg\"\n  stage     = \"ops\"\n  source    = \"./mod/terraform-aws-defn-account\"\n  providers = {\n    aws = aws.fogg-org\n  }\n}"}
+id: "328216504962"
+account: org
+org: fogg
+name: fogg-org
+email: spiral@defn.sh
+sso_role: Administrator
+aws_config: |-
+  # auto-generated: aws.cue aws_config_account
+  [profile fogg-org]
+  sso_account_id=328216504962
+  sso_role_name=Administrator
+  sso_start_url=https://fogg-0.awsapps.com/start
+  sso_region=us-west-2
+
+  # auto-generated: aws.cue aws_config_bootstrap
+  [profile defn-org]
+  sso_account_id=510430971399
+  sso_role_name=Administrator
+  sso_start_url=https://defn.awsapps.com/start
+  sso_region=us-east-2
+mise_config: |-
+  # auto-generated: aws.cue mise_config
+  [env]
+  AWS_PROFILE = "fogg-org"
+  AWS_REGION = "us-west-2"
+  AWS_CONFIG_FILE = "/home/ubuntu/m/a/fogg/org/.aws/config"
+aws_config_account: |-
+  # auto-generated: aws.cue aws_config_account
+  [profile fogg-org]
+  sso_account_id=328216504962
+  sso_role_name=Administrator
+  sso_start_url=https://fogg-0.awsapps.com/start
+  sso_region=us-west-2
+aws_config_bootstrap: |-
+  # auto-generated: aws.cue aws_config_bootstrap
+  [profile defn-org]
+  sso_account_id=510430971399
+  sso_role_name=Administrator
+  sso_start_url=https://defn.awsapps.com/start
+  sso_region=us-east-2
+account_readme: |-
+  ## AWS Environment: fogg-org
+
+  ```bash
+  cd a/fogg/org
+  mise trust
+  aws sso login
+  alogin
+  ```
+
+  auto-generated: aws.cue account_readme
+infra_org_readme: |-
+  ## Organizational-level Terraform: fogg-org
+
+  ```bash
+  cd infra/org-fogg
+  mise trust
+  aws sso login
+  terraform init
+  terraform plan
+  ```
+
+  auto-generated: aws.cue infra_org_readme
+infra_org_terraform: |-
+  terraform {
+    required_providers {
+      aws = {
+        version = "5.99.1"
+        source  = "aws"
+      }
+    }
+    backend "s3" {
+      bucket         = "dfn-defn-terraform-state"
+      dynamodb_table = "dfn-defn-terraform-state-lock"
+      encrypt        = true
+      key            = "stacks/org-fogg/terraform.tfstate"
+      profile        = "defn-org"
+      region         = "us-east-1"
+    }
+
+  }
+
+  locals {
+    sso_instance_arn  = data.aws_ssoadmin_instances.sso_instance.arns
+    sso_instance_isid = data.aws_ssoadmin_instances.sso_instance.identity_store_ids
+  }
+
+  provider "aws" {
+    profile = "fogg-org"
+    region  = "us-west-2"
+  }
+
+  resource "aws_organizations_organization" "organization" {
+    aws_service_access_principals = [
+      "account.amazonaws.com",
+      "iam.amazonaws.com",
+      "cloudtrail.amazonaws.com",
+      "config.amazonaws.com",
+      "ram.amazonaws.com",
+      "ssm.amazonaws.com",
+      "sso.amazonaws.com",
+      "tagpolicies.tag.amazonaws.com"
+    ]
+    enabled_policy_types = [
+      "SERVICE_CONTROL_POLICY",
+      "TAG_POLICY"
+    ]
+    feature_set = "ALL"
+  }
+
+  data "aws_ssoadmin_instances" "sso_instance" {
+  }
+
+  resource "aws_ssoadmin_permission_set" "admin_sso_permission_set" {
+    instance_arn     = element(local.sso_instance_arn, 0)
+    name             = "Administrator"
+    session_duration = "PT2H"
+    tags = {
+      ManagedBy = "Terraform"
+    }
+  }
+
+  resource "aws_ssoadmin_managed_policy_attachment" "admin_sso_managed_policy_attachment" {
+    instance_arn       = aws_ssoadmin_permission_set.admin_sso_permission_set.instance_arn
+    managed_policy_arn = "arn:aws:iam::aws:policy/AdministratorAccess"
+    permission_set_arn = aws_ssoadmin_permission_set.admin_sso_permission_set.arn
+  }
+
+  resource "aws_identitystore_group" "administrators_sso_group" {
+    display_name      = "Administrators"
+    identity_store_id = element(local.sso_instance_isid, 0)
+  }
+  resource "aws_organizations_account" "fogg_org" {
+    email = "spiral@defn.sh"
+    name  = "fogg-org"
+    tags = {
+      ManagedBy = "Terraform"
+    }
+  }
+
+  resource "aws_ssoadmin_account_assignment" "fogg_org_admin_sso_account_assignment" {
+    instance_arn       = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn
+    permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
+    principal_id       = aws_identitystore_group.administrators_sso_group.group_id
+    principal_type     = "GROUP"
+    target_id          = aws_organizations_account.fogg_org.id
+    target_type        = "AWS_ACCOUNT"
+  }
+  resource "aws_organizations_account" "fogg_ci" {
+    email = "fogg-home@defn.sh"
+    name  = "fogg-ci"
+    tags = {
+      ManagedBy = "Terraform"
+    }
+  }
+
+  resource "aws_ssoadmin_account_assignment" "fogg_ci_admin_sso_account_assignment" {
+    instance_arn       = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn
+    permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
+    principal_id       = aws_identitystore_group.administrators_sso_group.group_id
+    principal_type     = "GROUP"
+    target_id          = aws_organizations_account.fogg_ci.id
+    target_type        = "AWS_ACCOUNT"
+  }
+  resource "aws_organizations_account" "fogg_dev" {
+    email = "fogg-sandbox@defn.sh"
+    name  = "fogg-dev"
+    tags = {
+      ManagedBy = "Terraform"
+    }
+  }
+
+  resource "aws_ssoadmin_account_assignment" "fogg_dev_admin_sso_account_assignment" {
+    instance_arn       = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn
+    permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
+    principal_id       = aws_identitystore_group.administrators_sso_group.group_id
+    principal_type     = "GROUP"
+    target_id          = aws_organizations_account.fogg_dev.id
+    target_type        = "AWS_ACCOUNT"
+  }
+  resource "aws_organizations_account" "fogg_hub" {
+    email = "fogg-hub@defn.sh"
+    name  = "fogg-hub"
+    tags = {
+      ManagedBy = "Terraform"
+    }
+  }
+
+  resource "aws_ssoadmin_account_assignment" "fogg_hub_admin_sso_account_assignment" {
+    instance_arn       = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn
+    permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
+    principal_id       = aws_identitystore_group.administrators_sso_group.group_id
+    principal_type     = "GROUP"
+    target_id          = aws_organizations_account.fogg_hub.id
+    target_type        = "AWS_ACCOUNT"
+  }
+  resource "aws_organizations_account" "fogg_lib" {
+    email = "fogg-data@defn.sh"
+    name  = "fogg-lib"
+    tags = {
+      ManagedBy = "Terraform"
+    }
+  }
+
+  resource "aws_ssoadmin_account_assignment" "fogg_lib_admin_sso_account_assignment" {
+    instance_arn       = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn
+    permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
+    principal_id       = aws_identitystore_group.administrators_sso_group.group_id
+    principal_type     = "GROUP"
+    target_id          = aws_organizations_account.fogg_lib.id
+    target_type        = "AWS_ACCOUNT"
+  }
+  resource "aws_organizations_account" "fogg_log" {
+    email = "fogg-circus@defn.sh"
+    name  = "fogg-log"
+    tags = {
+      ManagedBy = "Terraform"
+    }
+  }
+
+  resource "aws_ssoadmin_account_assignment" "fogg_log_admin_sso_account_assignment" {
+    instance_arn       = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn
+    permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
+    principal_id       = aws_identitystore_group.administrators_sso_group.group_id
+    principal_type     = "GROUP"
+    target_id          = aws_organizations_account.fogg_log.id
+    target_type        = "AWS_ACCOUNT"
+  }
+  resource "aws_organizations_account" "fogg_net" {
+    email = "fogg-asset@defn.sh"
+    name  = "fogg-net"
+    tags = {
+      ManagedBy = "Terraform"
+    }
+  }
+
+  resource "aws_ssoadmin_account_assignment" "fogg_net_admin_sso_account_assignment" {
+    instance_arn       = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn
+    permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
+    principal_id       = aws_identitystore_group.administrators_sso_group.group_id
+    principal_type     = "GROUP"
+    target_id          = aws_organizations_account.fogg_net.id
+    target_type        = "AWS_ACCOUNT"
+  }
+  resource "aws_organizations_account" "fogg_ops" {
+    email = "fogg-gateway@defn.sh"
+    name  = "fogg-ops"
+    tags = {
+      ManagedBy = "Terraform"
+    }
+  }
+
+  resource "aws_ssoadmin_account_assignment" "fogg_ops_admin_sso_account_assignment" {
+    instance_arn       = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn
+    permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
+    principal_id       = aws_identitystore_group.administrators_sso_group.group_id
+    principal_type     = "GROUP"
+    target_id          = aws_organizations_account.fogg_ops.id
+    target_type        = "AWS_ACCOUNT"
+  }
+  resource "aws_organizations_account" "fogg_prod" {
+    email = "fogg-postx@defn.sh"
+    name  = "fogg-prod"
+    tags = {
+      ManagedBy = "Terraform"
+    }
+  }
+
+  resource "aws_ssoadmin_account_assignment" "fogg_prod_admin_sso_account_assignment" {
+    instance_arn       = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn
+    permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
+    principal_id       = aws_identitystore_group.administrators_sso_group.group_id
+    principal_type     = "GROUP"
+    target_id          = aws_organizations_account.fogg_prod.id
+    target_type        = "AWS_ACCOUNT"
+  }
+  resource "aws_organizations_account" "fogg_pub" {
+    email = "fogg-security@defn.sh"
+    name  = "fogg-pub"
+    tags = {
+      ManagedBy = "Terraform"
+    }
+  }
+
+  resource "aws_ssoadmin_account_assignment" "fogg_pub_admin_sso_account_assignment" {
+    instance_arn       = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn
+    permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
+    principal_id       = aws_identitystore_group.administrators_sso_group.group_id
+    principal_type     = "GROUP"
+    target_id          = aws_organizations_account.fogg_pub.id
+    target_type        = "AWS_ACCOUNT"
+  }
+infra_acc_readme: |-
+  ## Account-specific Terraform: fogg-org
+
+  ```bash
+  cd infra/acc-fogg-org
+  mise trust
+  aws sso login --profile defn-org
+  aws sso login
+  terraform init
+  terraform plan
+  ```
+
+  auto-generated: aws.cue infra_acc_readme
+infra_acc_terraform: |-
+  terraform {
+    required_providers {
+      aws = {
+        version = "5.99.1"
+        source  = "aws"
+      }
+    }
+    backend "s3" {
+      bucket         = "dfn-defn-terraform-state"
+      dynamodb_table = "dfn-defn-terraform-state-lock"
+      encrypt        = true
+      key            = "stacks/acc-fogg-org/terraform.tfstate"
+      profile        = "defn-org"
+      region         = "us-east-1"
+    }
+
+  }
+
+  provider "aws" {
+    profile = "fogg-org"
+    region  = "us-east-1"
+    alias   = "fogg-org"
+  }
+
+  module "fogg-org" {
+    account   = 510430971399
+    name      = "terraform"
+    namespace = "fogg"
+    stage     = "ops"
+    source    = "./mod/terraform-aws-defn-account"
+    providers = {
+      aws = aws.fogg-org
+    }
+  }

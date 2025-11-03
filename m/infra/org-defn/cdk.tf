@@ -82,11 +82,3 @@ resource "aws_ssoadmin_account_assignment" "defn_org_admin_sso_account_assignmen
   target_id          = aws_organizations_account.defn_org.id
   target_type        = "AWS_ACCOUNT"
 }
-moved {
-  from = aws_organizations_account.defn-org
-  to   = aws_organizations_account.defn_org
-}
-moved {
-  from = aws_ssoadmin_account_assignment.defn-org_admin_sso_account_assignment
-  to   = aws_ssoadmin_account_assignment.defn_org_admin_sso_account_assignment
-}

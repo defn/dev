@@ -100,19 +100,3 @@ resource "aws_ssoadmin_account_assignment" "gyre_ops_admin_sso_account_assignmen
   target_id          = aws_organizations_account.gyre_ops.id
   target_type        = "AWS_ACCOUNT"
 }
-moved {
-  from = aws_organizations_account.gyre
-  to   = aws_organizations_account.gyre_org
-}
-moved {
-  from = aws_organizations_account.ops
-  to   = aws_organizations_account.gyre_ops
-}
-moved {
-  from = aws_ssoadmin_account_assignment.gyre-org_admin_sso_account_assignment
-  to   = aws_ssoadmin_account_assignment.gyre_org_admin_sso_account_assignment
-}
-moved {
-  from = aws_ssoadmin_account_assignment.gyre-ops_admin_sso_account_assignment
-  to   = aws_ssoadmin_account_assignment.gyre_ops_admin_sso_account_assignment
-}

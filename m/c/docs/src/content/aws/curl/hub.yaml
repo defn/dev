@@ -1,2 +1,114 @@
 # auto-generated: transform.sh
-{"id": "804430872255", "account": "hub", "org": "curl", "name": "curl-hub", "email": "aws-curl+hub@defn.us", "sso_role": "Administrator", "aws_config": "# auto-generated: aws.cue aws_config_account\n[profile curl-hub]\nsso_account_id=804430872255\nsso_role_name=Administrator\nsso_start_url=https://d-926760a859.awsapps.com/start\nsso_region=us-west-2\n\n# auto-generated: aws.cue aws_config_bootstrap\n[profile defn-org]\nsso_account_id=510430971399\nsso_role_name=Administrator\nsso_start_url=https://defn.awsapps.com/start\nsso_region=us-east-2", "iam_user_access_to_billing": "ALLOW", "role_name": "OrganizationAccountAccessRole", "mise_config": "# auto-generated: aws.cue mise_config\n[env]\nAWS_PROFILE = \"curl-hub\"\nAWS_REGION = \"us-west-2\"\nAWS_CONFIG_FILE = \"/home/ubuntu/m/a/curl/hub/.aws/config\"", "aws_config_account": "# auto-generated: aws.cue aws_config_account\n[profile curl-hub]\nsso_account_id=804430872255\nsso_role_name=Administrator\nsso_start_url=https://d-926760a859.awsapps.com/start\nsso_region=us-west-2", "aws_config_bootstrap": "# auto-generated: aws.cue aws_config_bootstrap\n[profile defn-org]\nsso_account_id=510430971399\nsso_role_name=Administrator\nsso_start_url=https://defn.awsapps.com/start\nsso_region=us-east-2", "account_readme": "## AWS Environment: curl-hub\n\n```bash\ncd a/curl/hub\nmise trust\naws sso login\nalogin\n```\n\nauto-generated: aws.cue account_readme", "infra_org_readme": "## Organizational-level Terraform: curl-hub\n\n```bash\ncd infra/org-curl\nmise trust\naws sso login\nterraform init\nterraform plan\n```\n\nauto-generated: aws.cue infra_org_readme", "infra_acc_readme": "## Account-specific Terraform: curl-hub\n\n```bash\ncd infra/acc-curl-hub\nmise trust\naws sso login --profile defn-org\naws sso login\nterraform init\nterraform plan\n```\n\nauto-generated: aws.cue infra_acc_readme", "infra_acc_terraform": "terraform {\n  required_providers {\n    aws = {\n      version = \"5.99.1\"\n      source  = \"aws\"\n    }\n  }\n  backend \"s3\" {\n    bucket         = \"dfn-defn-terraform-state\"\n    dynamodb_table = \"dfn-defn-terraform-state-lock\"\n    encrypt        = true\n    key            = \"stacks/acc-curl-hub/terraform.tfstate\"\n    profile        = \"defn-org\"\n    region         = \"us-east-1\"\n  }\n\n}\n\nprovider \"aws\" {\n  profile = \"curl-hub\"\n  region  = \"us-east-1\"\n  alias   = \"curl-hub\"\n}\n\nmodule \"curl-hub\" {\n  account   = 510430971399\n  name      = \"terraform\"\n  namespace = \"curl\"\n  stage     = \"ops\"\n  source    = \"./mod/terraform-aws-defn-account\"\n  providers = {\n    aws = aws.curl-hub\n  }\n}"}
+id: "804430872255"
+account: hub
+org: curl
+name: curl-hub
+email: aws-curl+hub@defn.us
+sso_role: Administrator
+aws_config: |-
+  # auto-generated: aws.cue aws_config_account
+  [profile curl-hub]
+  sso_account_id=804430872255
+  sso_role_name=Administrator
+  sso_start_url=https://d-926760a859.awsapps.com/start
+  sso_region=us-west-2
+
+  # auto-generated: aws.cue aws_config_bootstrap
+  [profile defn-org]
+  sso_account_id=510430971399
+  sso_role_name=Administrator
+  sso_start_url=https://defn.awsapps.com/start
+  sso_region=us-east-2
+iam_user_access_to_billing: ALLOW
+role_name: OrganizationAccountAccessRole
+mise_config: |-
+  # auto-generated: aws.cue mise_config
+  [env]
+  AWS_PROFILE = "curl-hub"
+  AWS_REGION = "us-west-2"
+  AWS_CONFIG_FILE = "/home/ubuntu/m/a/curl/hub/.aws/config"
+aws_config_account: |-
+  # auto-generated: aws.cue aws_config_account
+  [profile curl-hub]
+  sso_account_id=804430872255
+  sso_role_name=Administrator
+  sso_start_url=https://d-926760a859.awsapps.com/start
+  sso_region=us-west-2
+aws_config_bootstrap: |-
+  # auto-generated: aws.cue aws_config_bootstrap
+  [profile defn-org]
+  sso_account_id=510430971399
+  sso_role_name=Administrator
+  sso_start_url=https://defn.awsapps.com/start
+  sso_region=us-east-2
+account_readme: |-
+  ## AWS Environment: curl-hub
+
+  ```bash
+  cd a/curl/hub
+  mise trust
+  aws sso login
+  alogin
+  ```
+
+  auto-generated: aws.cue account_readme
+infra_org_readme: |-
+  ## Organizational-level Terraform: curl-hub
+
+  ```bash
+  cd infra/org-curl
+  mise trust
+  aws sso login
+  terraform init
+  terraform plan
+  ```
+
+  auto-generated: aws.cue infra_org_readme
+infra_acc_readme: |-
+  ## Account-specific Terraform: curl-hub
+
+  ```bash
+  cd infra/acc-curl-hub
+  mise trust
+  aws sso login --profile defn-org
+  aws sso login
+  terraform init
+  terraform plan
+  ```
+
+  auto-generated: aws.cue infra_acc_readme
+infra_acc_terraform: |-
+  terraform {
+    required_providers {
+      aws = {
+        version = "5.99.1"
+        source  = "aws"
+      }
+    }
+    backend "s3" {
+      bucket         = "dfn-defn-terraform-state"
+      dynamodb_table = "dfn-defn-terraform-state-lock"
+      encrypt        = true
+      key            = "stacks/acc-curl-hub/terraform.tfstate"
+      profile        = "defn-org"
+      region         = "us-east-1"
+    }
+
+  }
+
+  provider "aws" {
+    profile = "curl-hub"
+    region  = "us-east-1"
+    alias   = "curl-hub"
+  }
+
+  module "curl-hub" {
+    account   = 510430971399
+    name      = "terraform"
+    namespace = "curl"
+    stage     = "ops"
+    source    = "./mod/terraform-aws-defn-account"
+    providers = {
+      aws = aws.curl-hub
+    }
+  }

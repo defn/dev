@@ -1,2 +1,261 @@
 # auto-generated: transform.sh
-{"id": "036139182623", "account": "org", "org": "circus", "name": "circus-org", "email": "aws-circus@defn.us", "sso_role": "Administrator", "aws_config": "# auto-generated: aws.cue aws_config_account\n[profile circus-org]\nsso_account_id=036139182623\nsso_role_name=Administrator\nsso_start_url=https://d-92670c4790.awsapps.com/start\nsso_region=us-west-2\n\n# auto-generated: aws.cue aws_config_bootstrap\n[profile defn-org]\nsso_account_id=510430971399\nsso_role_name=Administrator\nsso_start_url=https://defn.awsapps.com/start\nsso_region=us-east-2", "mise_config": "# auto-generated: aws.cue mise_config\n[env]\nAWS_PROFILE = \"circus-org\"\nAWS_REGION = \"us-west-2\"\nAWS_CONFIG_FILE = \"/home/ubuntu/m/a/circus/org/.aws/config\"", "aws_config_account": "# auto-generated: aws.cue aws_config_account\n[profile circus-org]\nsso_account_id=036139182623\nsso_role_name=Administrator\nsso_start_url=https://d-92670c4790.awsapps.com/start\nsso_region=us-west-2", "aws_config_bootstrap": "# auto-generated: aws.cue aws_config_bootstrap\n[profile defn-org]\nsso_account_id=510430971399\nsso_role_name=Administrator\nsso_start_url=https://defn.awsapps.com/start\nsso_region=us-east-2", "account_readme": "## AWS Environment: circus-org\n\n```bash\ncd a/circus/org\nmise trust\naws sso login\nalogin\n```\n\nauto-generated: aws.cue account_readme", "infra_org_readme": "## Organizational-level Terraform: circus-org\n\n```bash\ncd infra/org-circus\nmise trust\naws sso login\nterraform init\nterraform plan\n```\n\nauto-generated: aws.cue infra_org_readme", "infra_org_terraform": "terraform {\n  required_providers {\n    aws = {\n      version = \"5.99.1\"\n      source  = \"aws\"\n    }\n  }\n  backend \"s3\" {\n    bucket         = \"dfn-defn-terraform-state\"\n    dynamodb_table = \"dfn-defn-terraform-state-lock\"\n    encrypt        = true\n    key            = \"stacks/org-circus/terraform.tfstate\"\n    profile        = \"defn-org\"\n    region         = \"us-east-1\"\n  }\n\n}\n\nlocals {\n  sso_instance_arn  = data.aws_ssoadmin_instances.sso_instance.arns\n  sso_instance_isid = data.aws_ssoadmin_instances.sso_instance.identity_store_ids\n}\n\nprovider \"aws\" {\n  profile = \"circus-org\"\n  region  = \"us-west-2\"\n}\n\nresource \"aws_organizations_organization\" \"organization\" {\n  aws_service_access_principals = [\n    \"account.amazonaws.com\",\n    \"iam.amazonaws.com\",\n    \"cloudtrail.amazonaws.com\",\n    \"config.amazonaws.com\",\n    \"ram.amazonaws.com\",\n    \"ssm.amazonaws.com\",\n    \"sso.amazonaws.com\",\n    \"tagpolicies.tag.amazonaws.com\"\n  ]\n  enabled_policy_types = [\n    \"SERVICE_CONTROL_POLICY\",\n    \"TAG_POLICY\"\n  ]\n  feature_set = \"ALL\"\n}\n\ndata \"aws_ssoadmin_instances\" \"sso_instance\" {\n}\n\nresource \"aws_ssoadmin_permission_set\" \"admin_sso_permission_set\" {\n  instance_arn     = element(local.sso_instance_arn, 0)\n  name             = \"Administrator\"\n  session_duration = \"PT2H\"\n  tags = {\n    ManagedBy = \"Terraform\"\n  }\n}\n\nresource \"aws_ssoadmin_managed_policy_attachment\" \"admin_sso_managed_policy_attachment\" {\n  instance_arn       = aws_ssoadmin_permission_set.admin_sso_permission_set.instance_arn\n  managed_policy_arn = \"arn:aws:iam::aws:policy/AdministratorAccess\"\n  permission_set_arn = aws_ssoadmin_permission_set.admin_sso_permission_set.arn\n}\n\nresource \"aws_identitystore_group\" \"administrators_sso_group\" {\n  display_name      = \"Administrators\"\n  identity_store_id = element(local.sso_instance_isid, 0)\n}\nresource \"aws_organizations_account\" \"circus_org\" {\n  email = \"aws-circus@defn.us\"\n  name  = \"circus-org\"\n  tags = {\n    ManagedBy = \"Terraform\"\n  }\n}\n\nresource \"aws_ssoadmin_account_assignment\" \"circus_org_admin_sso_account_assignment\" {\n  instance_arn       = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn\n  permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn\n  principal_id       = aws_identitystore_group.administrators_sso_group.group_id\n  principal_type     = \"GROUP\"\n  target_id          = aws_organizations_account.circus_org.id\n  target_type        = \"AWS_ACCOUNT\"\n}\nresource \"aws_organizations_account\" \"circus_lib\" {\n  email = \"aws-circus-govcloud@defn.sh\"\n  name  = \"circus-lib\"\n  tags = {\n    ManagedBy = \"Terraform\"\n  }\n}\n\nresource \"aws_ssoadmin_account_assignment\" \"circus_lib_admin_sso_account_assignment\" {\n  instance_arn       = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn\n  permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn\n  principal_id       = aws_identitystore_group.administrators_sso_group.group_id\n  principal_type     = \"GROUP\"\n  target_id          = aws_organizations_account.circus_lib.id\n  target_type        = \"AWS_ACCOUNT\"\n}\nresource \"aws_organizations_account\" \"circus_log\" {\n  email = \"aws-circus-audit@defn.sh\"\n  name  = \"circus-log\"\n  tags = {\n    ManagedBy = \"Terraform\"\n  }\n}\n\nresource \"aws_ssoadmin_account_assignment\" \"circus_log_admin_sso_account_assignment\" {\n  instance_arn       = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn\n  permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn\n  principal_id       = aws_identitystore_group.administrators_sso_group.group_id\n  principal_type     = \"GROUP\"\n  target_id          = aws_organizations_account.circus_log.id\n  target_type        = \"AWS_ACCOUNT\"\n}\nresource \"aws_organizations_account\" \"circus_net\" {\n  email = \"aws-circus-transit@defn.sh\"\n  name  = \"circus-net\"\n  tags = {\n    ManagedBy = \"Terraform\"\n  }\n}\n\nresource \"aws_ssoadmin_account_assignment\" \"circus_net_admin_sso_account_assignment\" {\n  instance_arn       = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn\n  permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn\n  principal_id       = aws_identitystore_group.administrators_sso_group.group_id\n  principal_type     = \"GROUP\"\n  target_id          = aws_organizations_account.circus_net.id\n  target_type        = \"AWS_ACCOUNT\"\n}\nresource \"aws_organizations_account\" \"circus_ops\" {\n  email = \"aws-circus-ops@defn.sh\"\n  name  = \"circus-ops\"\n  tags = {\n    ManagedBy = \"Terraform\"\n  }\n}\n\nresource \"aws_ssoadmin_account_assignment\" \"circus_ops_admin_sso_account_assignment\" {\n  instance_arn       = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn\n  permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn\n  principal_id       = aws_identitystore_group.administrators_sso_group.group_id\n  principal_type     = \"GROUP\"\n  target_id          = aws_organizations_account.circus_ops.id\n  target_type        = \"AWS_ACCOUNT\"\n}\nmoved {\n  from = aws_organizations_account.circus-org\n  to   = aws_organizations_account.circus_org\n}\nmoved {\n  from = aws_organizations_account.circus-lib\n  to   = aws_organizations_account.circus_lib\n}\nmoved {\n  from = aws_organizations_account.circus-log\n  to   = aws_organizations_account.circus_log\n}\nmoved {\n  from = aws_organizations_account.circus-net\n  to   = aws_organizations_account.circus_net\n}\nmoved {\n  from = aws_organizations_account.circus-ops\n  to   = aws_organizations_account.circus_ops\n}\nmoved {\n  from = aws_ssoadmin_account_assignment.circus-org_admin_sso_account_assignment\n  to   = aws_ssoadmin_account_assignment.circus_org_admin_sso_account_assignment\n}\nmoved {\n  from = aws_ssoadmin_account_assignment.circus-lib_admin_sso_account_assignment\n  to   = aws_ssoadmin_account_assignment.circus_lib_admin_sso_account_assignment\n}\nmoved {\n  from = aws_ssoadmin_account_assignment.circus-log_admin_sso_account_assignment\n  to   = aws_ssoadmin_account_assignment.circus_log_admin_sso_account_assignment\n}\nmoved {\n  from = aws_ssoadmin_account_assignment.circus-net_admin_sso_account_assignment\n  to   = aws_ssoadmin_account_assignment.circus_net_admin_sso_account_assignment\n}\nmoved {\n  from = aws_ssoadmin_account_assignment.circus-ops_admin_sso_account_assignment\n  to   = aws_ssoadmin_account_assignment.circus_ops_admin_sso_account_assignment\n}", "infra_acc_readme": "## Account-specific Terraform: circus-org\n\n```bash\ncd infra/acc-circus-org\nmise trust\naws sso login --profile defn-org\naws sso login\nterraform init\nterraform plan\n```\n\nauto-generated: aws.cue infra_acc_readme", "infra_acc_terraform": "terraform {\n  required_providers {\n    aws = {\n      version = \"5.99.1\"\n      source  = \"aws\"\n    }\n  }\n  backend \"s3\" {\n    bucket         = \"dfn-defn-terraform-state\"\n    dynamodb_table = \"dfn-defn-terraform-state-lock\"\n    encrypt        = true\n    key            = \"stacks/acc-circus-org/terraform.tfstate\"\n    profile        = \"defn-org\"\n    region         = \"us-east-1\"\n  }\n\n}\n\nprovider \"aws\" {\n  profile = \"circus-org\"\n  region  = \"us-east-1\"\n  alias   = \"circus-org\"\n}\n\nmodule \"circus-org\" {\n  account   = 510430971399\n  name      = \"terraform\"\n  namespace = \"circus\"\n  stage     = \"ops\"\n  source    = \"./mod/terraform-aws-defn-account\"\n  providers = {\n    aws = aws.circus-org\n  }\n}"}
+id: "036139182623"
+account: org
+org: circus
+name: circus-org
+email: aws-circus@defn.us
+sso_role: Administrator
+aws_config: |-
+  # auto-generated: aws.cue aws_config_account
+  [profile circus-org]
+  sso_account_id=036139182623
+  sso_role_name=Administrator
+  sso_start_url=https://d-92670c4790.awsapps.com/start
+  sso_region=us-west-2
+
+  # auto-generated: aws.cue aws_config_bootstrap
+  [profile defn-org]
+  sso_account_id=510430971399
+  sso_role_name=Administrator
+  sso_start_url=https://defn.awsapps.com/start
+  sso_region=us-east-2
+mise_config: |-
+  # auto-generated: aws.cue mise_config
+  [env]
+  AWS_PROFILE = "circus-org"
+  AWS_REGION = "us-west-2"
+  AWS_CONFIG_FILE = "/home/ubuntu/m/a/circus/org/.aws/config"
+aws_config_account: |-
+  # auto-generated: aws.cue aws_config_account
+  [profile circus-org]
+  sso_account_id=036139182623
+  sso_role_name=Administrator
+  sso_start_url=https://d-92670c4790.awsapps.com/start
+  sso_region=us-west-2
+aws_config_bootstrap: |-
+  # auto-generated: aws.cue aws_config_bootstrap
+  [profile defn-org]
+  sso_account_id=510430971399
+  sso_role_name=Administrator
+  sso_start_url=https://defn.awsapps.com/start
+  sso_region=us-east-2
+account_readme: |-
+  ## AWS Environment: circus-org
+
+  ```bash
+  cd a/circus/org
+  mise trust
+  aws sso login
+  alogin
+  ```
+
+  auto-generated: aws.cue account_readme
+infra_org_readme: |-
+  ## Organizational-level Terraform: circus-org
+
+  ```bash
+  cd infra/org-circus
+  mise trust
+  aws sso login
+  terraform init
+  terraform plan
+  ```
+
+  auto-generated: aws.cue infra_org_readme
+infra_org_terraform: |-
+  terraform {
+    required_providers {
+      aws = {
+        version = "5.99.1"
+        source  = "aws"
+      }
+    }
+    backend "s3" {
+      bucket         = "dfn-defn-terraform-state"
+      dynamodb_table = "dfn-defn-terraform-state-lock"
+      encrypt        = true
+      key            = "stacks/org-circus/terraform.tfstate"
+      profile        = "defn-org"
+      region         = "us-east-1"
+    }
+
+  }
+
+  locals {
+    sso_instance_arn  = data.aws_ssoadmin_instances.sso_instance.arns
+    sso_instance_isid = data.aws_ssoadmin_instances.sso_instance.identity_store_ids
+  }
+
+  provider "aws" {
+    profile = "circus-org"
+    region  = "us-west-2"
+  }
+
+  resource "aws_organizations_organization" "organization" {
+    aws_service_access_principals = [
+      "account.amazonaws.com",
+      "iam.amazonaws.com",
+      "cloudtrail.amazonaws.com",
+      "config.amazonaws.com",
+      "ram.amazonaws.com",
+      "ssm.amazonaws.com",
+      "sso.amazonaws.com",
+      "tagpolicies.tag.amazonaws.com"
+    ]
+    enabled_policy_types = [
+      "SERVICE_CONTROL_POLICY",
+      "TAG_POLICY"
+    ]
+    feature_set = "ALL"
+  }
+
+  data "aws_ssoadmin_instances" "sso_instance" {
+  }
+
+  resource "aws_ssoadmin_permission_set" "admin_sso_permission_set" {
+    instance_arn     = element(local.sso_instance_arn, 0)
+    name             = "Administrator"
+    session_duration = "PT2H"
+    tags = {
+      ManagedBy = "Terraform"
+    }
+  }
+
+  resource "aws_ssoadmin_managed_policy_attachment" "admin_sso_managed_policy_attachment" {
+    instance_arn       = aws_ssoadmin_permission_set.admin_sso_permission_set.instance_arn
+    managed_policy_arn = "arn:aws:iam::aws:policy/AdministratorAccess"
+    permission_set_arn = aws_ssoadmin_permission_set.admin_sso_permission_set.arn
+  }
+
+  resource "aws_identitystore_group" "administrators_sso_group" {
+    display_name      = "Administrators"
+    identity_store_id = element(local.sso_instance_isid, 0)
+  }
+  resource "aws_organizations_account" "circus_org" {
+    email = "aws-circus@defn.us"
+    name  = "circus-org"
+    tags = {
+      ManagedBy = "Terraform"
+    }
+  }
+
+  resource "aws_ssoadmin_account_assignment" "circus_org_admin_sso_account_assignment" {
+    instance_arn       = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn
+    permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
+    principal_id       = aws_identitystore_group.administrators_sso_group.group_id
+    principal_type     = "GROUP"
+    target_id          = aws_organizations_account.circus_org.id
+    target_type        = "AWS_ACCOUNT"
+  }
+  resource "aws_organizations_account" "circus_lib" {
+    email = "aws-circus-govcloud@defn.sh"
+    name  = "circus-lib"
+    tags = {
+      ManagedBy = "Terraform"
+    }
+  }
+
+  resource "aws_ssoadmin_account_assignment" "circus_lib_admin_sso_account_assignment" {
+    instance_arn       = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn
+    permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
+    principal_id       = aws_identitystore_group.administrators_sso_group.group_id
+    principal_type     = "GROUP"
+    target_id          = aws_organizations_account.circus_lib.id
+    target_type        = "AWS_ACCOUNT"
+  }
+  resource "aws_organizations_account" "circus_log" {
+    email = "aws-circus-audit@defn.sh"
+    name  = "circus-log"
+    tags = {
+      ManagedBy = "Terraform"
+    }
+  }
+
+  resource "aws_ssoadmin_account_assignment" "circus_log_admin_sso_account_assignment" {
+    instance_arn       = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn
+    permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
+    principal_id       = aws_identitystore_group.administrators_sso_group.group_id
+    principal_type     = "GROUP"
+    target_id          = aws_organizations_account.circus_log.id
+    target_type        = "AWS_ACCOUNT"
+  }
+  resource "aws_organizations_account" "circus_net" {
+    email = "aws-circus-transit@defn.sh"
+    name  = "circus-net"
+    tags = {
+      ManagedBy = "Terraform"
+    }
+  }
+
+  resource "aws_ssoadmin_account_assignment" "circus_net_admin_sso_account_assignment" {
+    instance_arn       = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn
+    permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
+    principal_id       = aws_identitystore_group.administrators_sso_group.group_id
+    principal_type     = "GROUP"
+    target_id          = aws_organizations_account.circus_net.id
+    target_type        = "AWS_ACCOUNT"
+  }
+  resource "aws_organizations_account" "circus_ops" {
+    email = "aws-circus-ops@defn.sh"
+    name  = "circus-ops"
+    tags = {
+      ManagedBy = "Terraform"
+    }
+  }
+
+  resource "aws_ssoadmin_account_assignment" "circus_ops_admin_sso_account_assignment" {
+    instance_arn       = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn
+    permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
+    principal_id       = aws_identitystore_group.administrators_sso_group.group_id
+    principal_type     = "GROUP"
+    target_id          = aws_organizations_account.circus_ops.id
+    target_type        = "AWS_ACCOUNT"
+  }
+infra_acc_readme: |-
+  ## Account-specific Terraform: circus-org
+
+  ```bash
+  cd infra/acc-circus-org
+  mise trust
+  aws sso login --profile defn-org
+  aws sso login
+  terraform init
+  terraform plan
+  ```
+
+  auto-generated: aws.cue infra_acc_readme
+infra_acc_terraform: |-
+  terraform {
+    required_providers {
+      aws = {
+        version = "5.99.1"
+        source  = "aws"
+      }
+    }
+    backend "s3" {
+      bucket         = "dfn-defn-terraform-state"
+      dynamodb_table = "dfn-defn-terraform-state-lock"
+      encrypt        = true
+      key            = "stacks/acc-circus-org/terraform.tfstate"
+      profile        = "defn-org"
+      region         = "us-east-1"
+    }
+
+  }
+
+  provider "aws" {
+    profile = "circus-org"
+    region  = "us-east-1"
+    alias   = "circus-org"
+  }
+
+  module "circus-org" {
+    account   = 510430971399
+    name      = "terraform"
+    namespace = "circus"
+    stage     = "ops"
+    source    = "./mod/terraform-aws-defn-account"
+    providers = {
+      aws = aws.circus-org
+    }
+  }

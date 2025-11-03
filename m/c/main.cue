@@ -40,31 +40,31 @@ _oldResourceNames: {
 		"1": "defn_cd"
 		"2": "defn_ci"
 		"3": "defn_security"
-		a: "defn_a"
-		b: "defn_b"
-		c: "defn_c"
-		d: "defn_d"
-		e: "defn_e"
-		f: "defn_f"
-		g: "defn_g"
-		h: "defn_h"
-		i: "defn_i"
-		j: "defn_j"
-		l: "defn_l"
-		m: "defn_m"
-		n: "defn_n"
-		o: "defn_o"
-		p: "defn_p"
-		q: "defn_dev"
-		r: "defn_r"
-		s: "defn_s"
-		t: "defn_t"
-		u: "defn_qa"
-		v: "defn_v"
-		w: "defn_w"
-		x: "defn_stage"
-		y: "defn_prod"
-		z: "defn_hub"
+		a:   "defn_a"
+		b:   "defn_b"
+		c:   "defn_c"
+		d:   "defn_d"
+		e:   "defn_e"
+		f:   "defn_f"
+		g:   "defn_g"
+		h:   "defn_h"
+		i:   "defn_i"
+		j:   "defn_j"
+		l:   "defn_l"
+		m:   "defn_m"
+		n:   "defn_n"
+		o:   "defn_o"
+		p:   "defn_p"
+		q:   "defn_dev"
+		r:   "defn_r"
+		s:   "defn_s"
+		t:   "defn_t"
+		u:   "defn_qa"
+		v:   "defn_v"
+		w:   "defn_w"
+		x:   "defn_stage"
+		y:   "defn_prod"
+		z:   "defn_hub"
 	}
 	gyre: {
 		org: "gyre"
@@ -83,28 +83,28 @@ _oldResourceNames: {
 		net: "net"
 	}
 	spiral: {
-		org: "spiral"
-		ci: "pub"
-		dev: "dev"
-		hub: "hub"
-		lib: "lib"
-		log: "log"
-		net: "net"
-		ops: "ops"
+		org:  "spiral"
+		ci:   "pub"
+		dev:  "dev"
+		hub:  "hub"
+		lib:  "lib"
+		log:  "log"
+		net:  "net"
+		ops:  "ops"
 		prod: "sec"
-		pub: "dmz"
+		pub:  "dmz"
 	}
 	helix: {
-		org: "helix"
-		ci: "sec"
-		dev: "dev"
-		hub: "hub"
-		lib: "lib"
-		log: "log"
-		net: "net"
-		ops: "ops"
+		org:  "helix"
+		ci:   "sec"
+		dev:  "dev"
+		hub:  "hub"
+		lib:  "lib"
+		log:  "log"
+		net:  "net"
+		ops:  "ops"
 		prod: "dmz"
-		pub: "pub"
+		pub:  "pub"
 	}
 }
 
@@ -189,9 +189,9 @@ _orgTerraform: {
 				resource "aws_organizations_account" "\(strings.Replace(accData.name, "-", "_", -1))" {
 				  email = "\(accData.email)"
 				  name  = "\(accData.name)"\(strings.Join([
-					if accData.iam_user_access_to_billing != _|_ {"\n\t\t  iam_user_access_to_billing = \"\(accData.iam_user_access_to_billing)\""},
-					if accData.role_name != _|_ {"\n\t\t  role_name                  = \"\(accData.role_name)\""},
-				], ""))
+						if accData.iam_user_access_to_billing != _|_ {"\n\t\t  iam_user_access_to_billing = \"\(accData.iam_user_access_to_billing)\""},
+						if accData.role_name != _|_ {"\n\t\t  role_name                  = \"\(accData.role_name)\""},
+					], ""))
 				  tags = {
 				    ManagedBy = "Terraform"
 				  }
@@ -204,35 +204,6 @@ _orgTerraform: {
 				  principal_type     = "GROUP"
 				  target_id          = aws_organizations_account.\(strings.Replace(accData.name, "-", "_", -1)).id
 				  target_type        = "AWS_ACCOUNT"
-				}
-				"""
-				}], ""),
-				strings.Join([for accKey, accData in orgData.account {
-					"""
-
-				moved {
-				  from = aws_organizations_account.\(orgName)-\(accKey)
-				  to   = aws_organizations_account.\(strings.Replace(accData.name, "-", "_", -1))
-				}
-				"""
-				}], ""),
-				strings.Join([for accKey, accData in orgData.account
-					if _oldResourceNames[orgName] != _|_
-					if _oldResourceNames[orgName][accKey] != _|_ {
-					"""
-
-				moved {
-				  from = aws_organizations_account.\(_oldResourceNames[orgName][accKey])
-				  to   = aws_organizations_account.\(strings.Replace(accData.name, "-", "_", -1))
-				}
-				"""
-				}], ""),
-				strings.Join([for accKey, accData in orgData.account if strings.Contains(accData.name, "-") {
-					"""
-
-				moved {
-				  from = aws_ssoadmin_account_assignment.\(accData.name)_admin_sso_account_assignment
-				  to   = aws_ssoadmin_account_assignment.\(strings.Replace(accData.name, "-", "_", -1))_admin_sso_account_assignment
 				}
 				"""
 				}], ""),

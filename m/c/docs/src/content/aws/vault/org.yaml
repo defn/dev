@@ -1,2 +1,341 @@
 # auto-generated: transform.sh
-{"id": "475528707847", "account": "org", "org": "vault", "name": "vault-org", "email": "aws-vault@defn.us", "sso_role": "Administrator", "aws_config": "# auto-generated: aws.cue aws_config_account\n[profile vault-org]\nsso_account_id=475528707847\nsso_role_name=Administrator\nsso_start_url=https://d-9a672a0e52.awsapps.com/start\nsso_region=us-east-2\n\n# auto-generated: aws.cue aws_config_bootstrap\n[profile defn-org]\nsso_account_id=510430971399\nsso_role_name=Administrator\nsso_start_url=https://defn.awsapps.com/start\nsso_region=us-east-2", "mise_config": "# auto-generated: aws.cue mise_config\n[env]\nAWS_PROFILE = \"vault-org\"\nAWS_REGION = \"us-east-2\"\nAWS_CONFIG_FILE = \"/home/ubuntu/m/a/vault/org/.aws/config\"", "aws_config_account": "# auto-generated: aws.cue aws_config_account\n[profile vault-org]\nsso_account_id=475528707847\nsso_role_name=Administrator\nsso_start_url=https://d-9a672a0e52.awsapps.com/start\nsso_region=us-east-2", "aws_config_bootstrap": "# auto-generated: aws.cue aws_config_bootstrap\n[profile defn-org]\nsso_account_id=510430971399\nsso_role_name=Administrator\nsso_start_url=https://defn.awsapps.com/start\nsso_region=us-east-2", "account_readme": "## AWS Environment: vault-org\n\n```bash\ncd a/vault/org\nmise trust\naws sso login\nalogin\n```\n\nauto-generated: aws.cue account_readme", "infra_org_readme": "## Organizational-level Terraform: vault-org\n\n```bash\ncd infra/org-vault\nmise trust\naws sso login\nterraform init\nterraform plan\n```\n\nauto-generated: aws.cue infra_org_readme", "infra_org_terraform": "terraform {\n  required_providers {\n    aws = {\n      version = \"5.99.1\"\n      source  = \"aws\"\n    }\n  }\n  backend \"s3\" {\n    bucket         = \"dfn-defn-terraform-state\"\n    dynamodb_table = \"dfn-defn-terraform-state-lock\"\n    encrypt        = true\n    key            = \"stacks/org-vault/terraform.tfstate\"\n    profile        = \"defn-org\"\n    region         = \"us-east-1\"\n  }\n\n}\n\nlocals {\n  sso_instance_arn  = data.aws_ssoadmin_instances.sso_instance.arns\n  sso_instance_isid = data.aws_ssoadmin_instances.sso_instance.identity_store_ids\n}\n\nprovider \"aws\" {\n  profile = \"vault-org\"\n  region  = \"us-east-2\"\n}\n\nresource \"aws_organizations_organization\" \"organization\" {\n  aws_service_access_principals = [\n    \"account.amazonaws.com\",\n    \"iam.amazonaws.com\",\n    \"cloudtrail.amazonaws.com\",\n    \"config.amazonaws.com\",\n    \"ram.amazonaws.com\",\n    \"ssm.amazonaws.com\",\n    \"sso.amazonaws.com\",\n    \"tagpolicies.tag.amazonaws.com\"\n  ]\n  enabled_policy_types = [\n    \"SERVICE_CONTROL_POLICY\",\n    \"TAG_POLICY\"\n  ]\n  feature_set = \"ALL\"\n}\n\ndata \"aws_ssoadmin_instances\" \"sso_instance\" {\n}\n\nresource \"aws_ssoadmin_permission_set\" \"admin_sso_permission_set\" {\n  instance_arn     = element(local.sso_instance_arn, 0)\n  name             = \"Administrator\"\n  session_duration = \"PT2H\"\n  tags = {\n    ManagedBy = \"Terraform\"\n  }\n}\n\nresource \"aws_ssoadmin_managed_policy_attachment\" \"admin_sso_managed_policy_attachment\" {\n  instance_arn       = aws_ssoadmin_permission_set.admin_sso_permission_set.instance_arn\n  managed_policy_arn = \"arn:aws:iam::aws:policy/AdministratorAccess\"\n  permission_set_arn = aws_ssoadmin_permission_set.admin_sso_permission_set.arn\n}\n\nresource \"aws_identitystore_group\" \"administrators_sso_group\" {\n  display_name      = \"Administrators\"\n  identity_store_id = element(local.sso_instance_isid, 0)\n}\nresource \"aws_organizations_account\" \"vault_org\" {\n  email = \"aws-vault@defn.us\"\n  name  = \"vault-org\"\n  tags = {\n    ManagedBy = \"Terraform\"\n  }\n}\n\nresource \"aws_ssoadmin_account_assignment\" \"vault_org_admin_sso_account_assignment\" {\n  instance_arn       = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn\n  permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn\n  principal_id       = aws_identitystore_group.administrators_sso_group.group_id\n  principal_type     = \"GROUP\"\n  target_id          = aws_organizations_account.vault_org.id\n  target_type        = \"AWS_ACCOUNT\"\n}\nresource \"aws_organizations_account\" \"vault_ci\" {\n  email = \"aws-vault-vault0@defn.sh\"\n  name  = \"vault-ci\"\n  tags = {\n    ManagedBy = \"Terraform\"\n  }\n}\n\nresource \"aws_ssoadmin_account_assignment\" \"vault_ci_admin_sso_account_assignment\" {\n  instance_arn       = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn\n  permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn\n  principal_id       = aws_identitystore_group.administrators_sso_group.group_id\n  principal_type     = \"GROUP\"\n  target_id          = aws_organizations_account.vault_ci.id\n  target_type        = \"AWS_ACCOUNT\"\n}\nresource \"aws_organizations_account\" \"vault_dev\" {\n  email = \"aws-vault-dev@defn.sh\"\n  name  = \"vault-dev\"\n  tags = {\n    ManagedBy = \"Terraform\"\n  }\n}\n\nresource \"aws_ssoadmin_account_assignment\" \"vault_dev_admin_sso_account_assignment\" {\n  instance_arn       = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn\n  permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn\n  principal_id       = aws_identitystore_group.administrators_sso_group.group_id\n  principal_type     = \"GROUP\"\n  target_id          = aws_organizations_account.vault_dev.id\n  target_type        = \"AWS_ACCOUNT\"\n}\nresource \"aws_organizations_account\" \"vault_hub\" {\n  email = \"aws-vault-hub@defn.sh\"\n  name  = \"vault-hub\"\n  tags = {\n    ManagedBy = \"Terraform\"\n  }\n}\n\nresource \"aws_ssoadmin_account_assignment\" \"vault_hub_admin_sso_account_assignment\" {\n  instance_arn       = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn\n  permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn\n  principal_id       = aws_identitystore_group.administrators_sso_group.group_id\n  principal_type     = \"GROUP\"\n  target_id          = aws_organizations_account.vault_hub.id\n  target_type        = \"AWS_ACCOUNT\"\n}\nresource \"aws_organizations_account\" \"vault_lib\" {\n  email = \"aws-vault-library@defn.sh\"\n  name  = \"vault-lib\"\n  tags = {\n    ManagedBy = \"Terraform\"\n  }\n}\n\nresource \"aws_ssoadmin_account_assignment\" \"vault_lib_admin_sso_account_assignment\" {\n  instance_arn       = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn\n  permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn\n  principal_id       = aws_identitystore_group.administrators_sso_group.group_id\n  principal_type     = \"GROUP\"\n  target_id          = aws_organizations_account.vault_lib.id\n  target_type        = \"AWS_ACCOUNT\"\n}\nresource \"aws_organizations_account\" \"vault_log\" {\n  email = \"aws-vault-audit@defn.sh\"\n  name  = \"vault-log\"\n  tags = {\n    ManagedBy = \"Terraform\"\n  }\n}\n\nresource \"aws_ssoadmin_account_assignment\" \"vault_log_admin_sso_account_assignment\" {\n  instance_arn       = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn\n  permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn\n  principal_id       = aws_identitystore_group.administrators_sso_group.group_id\n  principal_type     = \"GROUP\"\n  target_id          = aws_organizations_account.vault_log.id\n  target_type        = \"AWS_ACCOUNT\"\n}\nresource \"aws_organizations_account\" \"vault_net\" {\n  email = \"aws-vault-transit@defn.sh\"\n  name  = \"vault-net\"\n  tags = {\n    ManagedBy = \"Terraform\"\n  }\n}\n\nresource \"aws_ssoadmin_account_assignment\" \"vault_net_admin_sso_account_assignment\" {\n  instance_arn       = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn\n  permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn\n  principal_id       = aws_identitystore_group.administrators_sso_group.group_id\n  principal_type     = \"GROUP\"\n  target_id          = aws_organizations_account.vault_net.id\n  target_type        = \"AWS_ACCOUNT\"\n}\nresource \"aws_organizations_account\" \"vault_ops\" {\n  email = \"aws-vault-ops@defn.sh\"\n  name  = \"vault-ops\"\n  tags = {\n    ManagedBy = \"Terraform\"\n  }\n}\n\nresource \"aws_ssoadmin_account_assignment\" \"vault_ops_admin_sso_account_assignment\" {\n  instance_arn       = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn\n  permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn\n  principal_id       = aws_identitystore_group.administrators_sso_group.group_id\n  principal_type     = \"GROUP\"\n  target_id          = aws_organizations_account.vault_ops.id\n  target_type        = \"AWS_ACCOUNT\"\n}\nresource \"aws_organizations_account\" \"vault_prod\" {\n  email = \"aws-vault-vault1@defn.sh\"\n  name  = \"vault-prod\"\n  tags = {\n    ManagedBy = \"Terraform\"\n  }\n}\n\nresource \"aws_ssoadmin_account_assignment\" \"vault_prod_admin_sso_account_assignment\" {\n  instance_arn       = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn\n  permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn\n  principal_id       = aws_identitystore_group.administrators_sso_group.group_id\n  principal_type     = \"GROUP\"\n  target_id          = aws_organizations_account.vault_prod.id\n  target_type        = \"AWS_ACCOUNT\"\n}\nresource \"aws_organizations_account\" \"vault_pub\" {\n  email = \"aws-vault-pub@defn.sh\"\n  name  = \"vault-pub\"\n  tags = {\n    ManagedBy = \"Terraform\"\n  }\n}\n\nresource \"aws_ssoadmin_account_assignment\" \"vault_pub_admin_sso_account_assignment\" {\n  instance_arn       = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn\n  permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn\n  principal_id       = aws_identitystore_group.administrators_sso_group.group_id\n  principal_type     = \"GROUP\"\n  target_id          = aws_organizations_account.vault_pub.id\n  target_type        = \"AWS_ACCOUNT\"\n}\nmoved {\n  from = aws_organizations_account.vault-org\n  to   = aws_organizations_account.vault_org\n}\nmoved {\n  from = aws_organizations_account.vault-ci\n  to   = aws_organizations_account.vault_ci\n}\nmoved {\n  from = aws_organizations_account.vault-dev\n  to   = aws_organizations_account.vault_dev\n}\nmoved {\n  from = aws_organizations_account.vault-hub\n  to   = aws_organizations_account.vault_hub\n}\nmoved {\n  from = aws_organizations_account.vault-lib\n  to   = aws_organizations_account.vault_lib\n}\nmoved {\n  from = aws_organizations_account.vault-log\n  to   = aws_organizations_account.vault_log\n}\nmoved {\n  from = aws_organizations_account.vault-net\n  to   = aws_organizations_account.vault_net\n}\nmoved {\n  from = aws_organizations_account.vault-ops\n  to   = aws_organizations_account.vault_ops\n}\nmoved {\n  from = aws_organizations_account.vault-prod\n  to   = aws_organizations_account.vault_prod\n}\nmoved {\n  from = aws_organizations_account.vault-pub\n  to   = aws_organizations_account.vault_pub\n}\nmoved {\n  from = aws_ssoadmin_account_assignment.vault-org_admin_sso_account_assignment\n  to   = aws_ssoadmin_account_assignment.vault_org_admin_sso_account_assignment\n}\nmoved {\n  from = aws_ssoadmin_account_assignment.vault-ci_admin_sso_account_assignment\n  to   = aws_ssoadmin_account_assignment.vault_ci_admin_sso_account_assignment\n}\nmoved {\n  from = aws_ssoadmin_account_assignment.vault-dev_admin_sso_account_assignment\n  to   = aws_ssoadmin_account_assignment.vault_dev_admin_sso_account_assignment\n}\nmoved {\n  from = aws_ssoadmin_account_assignment.vault-hub_admin_sso_account_assignment\n  to   = aws_ssoadmin_account_assignment.vault_hub_admin_sso_account_assignment\n}\nmoved {\n  from = aws_ssoadmin_account_assignment.vault-lib_admin_sso_account_assignment\n  to   = aws_ssoadmin_account_assignment.vault_lib_admin_sso_account_assignment\n}\nmoved {\n  from = aws_ssoadmin_account_assignment.vault-log_admin_sso_account_assignment\n  to   = aws_ssoadmin_account_assignment.vault_log_admin_sso_account_assignment\n}\nmoved {\n  from = aws_ssoadmin_account_assignment.vault-net_admin_sso_account_assignment\n  to   = aws_ssoadmin_account_assignment.vault_net_admin_sso_account_assignment\n}\nmoved {\n  from = aws_ssoadmin_account_assignment.vault-ops_admin_sso_account_assignment\n  to   = aws_ssoadmin_account_assignment.vault_ops_admin_sso_account_assignment\n}\nmoved {\n  from = aws_ssoadmin_account_assignment.vault-prod_admin_sso_account_assignment\n  to   = aws_ssoadmin_account_assignment.vault_prod_admin_sso_account_assignment\n}\nmoved {\n  from = aws_ssoadmin_account_assignment.vault-pub_admin_sso_account_assignment\n  to   = aws_ssoadmin_account_assignment.vault_pub_admin_sso_account_assignment\n}", "infra_acc_readme": "## Account-specific Terraform: vault-org\n\n```bash\ncd infra/acc-vault-org\nmise trust\naws sso login --profile defn-org\naws sso login\nterraform init\nterraform plan\n```\n\nauto-generated: aws.cue infra_acc_readme", "infra_acc_terraform": "terraform {\n  required_providers {\n    aws = {\n      version = \"5.99.1\"\n      source  = \"aws\"\n    }\n  }\n  backend \"s3\" {\n    bucket         = \"dfn-defn-terraform-state\"\n    dynamodb_table = \"dfn-defn-terraform-state-lock\"\n    encrypt        = true\n    key            = \"stacks/acc-vault-org/terraform.tfstate\"\n    profile        = \"defn-org\"\n    region         = \"us-east-1\"\n  }\n\n}\n\nprovider \"aws\" {\n  profile = \"vault-org\"\n  region  = \"us-east-1\"\n  alias   = \"vault-org\"\n}\n\nmodule \"vault-org\" {\n  account   = 510430971399\n  name      = \"terraform\"\n  namespace = \"vault\"\n  stage     = \"ops\"\n  source    = \"./mod/terraform-aws-defn-account\"\n  providers = {\n    aws = aws.vault-org\n  }\n}"}
+id: "475528707847"
+account: org
+org: vault
+name: vault-org
+email: aws-vault@defn.us
+sso_role: Administrator
+aws_config: |-
+  # auto-generated: aws.cue aws_config_account
+  [profile vault-org]
+  sso_account_id=475528707847
+  sso_role_name=Administrator
+  sso_start_url=https://d-9a672a0e52.awsapps.com/start
+  sso_region=us-east-2
+
+  # auto-generated: aws.cue aws_config_bootstrap
+  [profile defn-org]
+  sso_account_id=510430971399
+  sso_role_name=Administrator
+  sso_start_url=https://defn.awsapps.com/start
+  sso_region=us-east-2
+mise_config: |-
+  # auto-generated: aws.cue mise_config
+  [env]
+  AWS_PROFILE = "vault-org"
+  AWS_REGION = "us-east-2"
+  AWS_CONFIG_FILE = "/home/ubuntu/m/a/vault/org/.aws/config"
+aws_config_account: |-
+  # auto-generated: aws.cue aws_config_account
+  [profile vault-org]
+  sso_account_id=475528707847
+  sso_role_name=Administrator
+  sso_start_url=https://d-9a672a0e52.awsapps.com/start
+  sso_region=us-east-2
+aws_config_bootstrap: |-
+  # auto-generated: aws.cue aws_config_bootstrap
+  [profile defn-org]
+  sso_account_id=510430971399
+  sso_role_name=Administrator
+  sso_start_url=https://defn.awsapps.com/start
+  sso_region=us-east-2
+account_readme: |-
+  ## AWS Environment: vault-org
+
+  ```bash
+  cd a/vault/org
+  mise trust
+  aws sso login
+  alogin
+  ```
+
+  auto-generated: aws.cue account_readme
+infra_org_readme: |-
+  ## Organizational-level Terraform: vault-org
+
+  ```bash
+  cd infra/org-vault
+  mise trust
+  aws sso login
+  terraform init
+  terraform plan
+  ```
+
+  auto-generated: aws.cue infra_org_readme
+infra_org_terraform: |-
+  terraform {
+    required_providers {
+      aws = {
+        version = "5.99.1"
+        source  = "aws"
+      }
+    }
+    backend "s3" {
+      bucket         = "dfn-defn-terraform-state"
+      dynamodb_table = "dfn-defn-terraform-state-lock"
+      encrypt        = true
+      key            = "stacks/org-vault/terraform.tfstate"
+      profile        = "defn-org"
+      region         = "us-east-1"
+    }
+
+  }
+
+  locals {
+    sso_instance_arn  = data.aws_ssoadmin_instances.sso_instance.arns
+    sso_instance_isid = data.aws_ssoadmin_instances.sso_instance.identity_store_ids
+  }
+
+  provider "aws" {
+    profile = "vault-org"
+    region  = "us-east-2"
+  }
+
+  resource "aws_organizations_organization" "organization" {
+    aws_service_access_principals = [
+      "account.amazonaws.com",
+      "iam.amazonaws.com",
+      "cloudtrail.amazonaws.com",
+      "config.amazonaws.com",
+      "ram.amazonaws.com",
+      "ssm.amazonaws.com",
+      "sso.amazonaws.com",
+      "tagpolicies.tag.amazonaws.com"
+    ]
+    enabled_policy_types = [
+      "SERVICE_CONTROL_POLICY",
+      "TAG_POLICY"
+    ]
+    feature_set = "ALL"
+  }
+
+  data "aws_ssoadmin_instances" "sso_instance" {
+  }
+
+  resource "aws_ssoadmin_permission_set" "admin_sso_permission_set" {
+    instance_arn     = element(local.sso_instance_arn, 0)
+    name             = "Administrator"
+    session_duration = "PT2H"
+    tags = {
+      ManagedBy = "Terraform"
+    }
+  }
+
+  resource "aws_ssoadmin_managed_policy_attachment" "admin_sso_managed_policy_attachment" {
+    instance_arn       = aws_ssoadmin_permission_set.admin_sso_permission_set.instance_arn
+    managed_policy_arn = "arn:aws:iam::aws:policy/AdministratorAccess"
+    permission_set_arn = aws_ssoadmin_permission_set.admin_sso_permission_set.arn
+  }
+
+  resource "aws_identitystore_group" "administrators_sso_group" {
+    display_name      = "Administrators"
+    identity_store_id = element(local.sso_instance_isid, 0)
+  }
+  resource "aws_organizations_account" "vault_org" {
+    email = "aws-vault@defn.us"
+    name  = "vault-org"
+    tags = {
+      ManagedBy = "Terraform"
+    }
+  }
+
+  resource "aws_ssoadmin_account_assignment" "vault_org_admin_sso_account_assignment" {
+    instance_arn       = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn
+    permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
+    principal_id       = aws_identitystore_group.administrators_sso_group.group_id
+    principal_type     = "GROUP"
+    target_id          = aws_organizations_account.vault_org.id
+    target_type        = "AWS_ACCOUNT"
+  }
+  resource "aws_organizations_account" "vault_ci" {
+    email = "aws-vault-vault0@defn.sh"
+    name  = "vault-ci"
+    tags = {
+      ManagedBy = "Terraform"
+    }
+  }
+
+  resource "aws_ssoadmin_account_assignment" "vault_ci_admin_sso_account_assignment" {
+    instance_arn       = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn
+    permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
+    principal_id       = aws_identitystore_group.administrators_sso_group.group_id
+    principal_type     = "GROUP"
+    target_id          = aws_organizations_account.vault_ci.id
+    target_type        = "AWS_ACCOUNT"
+  }
+  resource "aws_organizations_account" "vault_dev" {
+    email = "aws-vault-dev@defn.sh"
+    name  = "vault-dev"
+    tags = {
+      ManagedBy = "Terraform"
+    }
+  }
+
+  resource "aws_ssoadmin_account_assignment" "vault_dev_admin_sso_account_assignment" {
+    instance_arn       = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn
+    permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
+    principal_id       = aws_identitystore_group.administrators_sso_group.group_id
+    principal_type     = "GROUP"
+    target_id          = aws_organizations_account.vault_dev.id
+    target_type        = "AWS_ACCOUNT"
+  }
+  resource "aws_organizations_account" "vault_hub" {
+    email = "aws-vault-hub@defn.sh"
+    name  = "vault-hub"
+    tags = {
+      ManagedBy = "Terraform"
+    }
+  }
+
+  resource "aws_ssoadmin_account_assignment" "vault_hub_admin_sso_account_assignment" {
+    instance_arn       = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn
+    permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
+    principal_id       = aws_identitystore_group.administrators_sso_group.group_id
+    principal_type     = "GROUP"
+    target_id          = aws_organizations_account.vault_hub.id
+    target_type        = "AWS_ACCOUNT"
+  }
+  resource "aws_organizations_account" "vault_lib" {
+    email = "aws-vault-library@defn.sh"
+    name  = "vault-lib"
+    tags = {
+      ManagedBy = "Terraform"
+    }
+  }
+
+  resource "aws_ssoadmin_account_assignment" "vault_lib_admin_sso_account_assignment" {
+    instance_arn       = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn
+    permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
+    principal_id       = aws_identitystore_group.administrators_sso_group.group_id
+    principal_type     = "GROUP"
+    target_id          = aws_organizations_account.vault_lib.id
+    target_type        = "AWS_ACCOUNT"
+  }
+  resource "aws_organizations_account" "vault_log" {
+    email = "aws-vault-audit@defn.sh"
+    name  = "vault-log"
+    tags = {
+      ManagedBy = "Terraform"
+    }
+  }
+
+  resource "aws_ssoadmin_account_assignment" "vault_log_admin_sso_account_assignment" {
+    instance_arn       = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn
+    permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
+    principal_id       = aws_identitystore_group.administrators_sso_group.group_id
+    principal_type     = "GROUP"
+    target_id          = aws_organizations_account.vault_log.id
+    target_type        = "AWS_ACCOUNT"
+  }
+  resource "aws_organizations_account" "vault_net" {
+    email = "aws-vault-transit@defn.sh"
+    name  = "vault-net"
+    tags = {
+      ManagedBy = "Terraform"
+    }
+  }
+
+  resource "aws_ssoadmin_account_assignment" "vault_net_admin_sso_account_assignment" {
+    instance_arn       = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn
+    permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
+    principal_id       = aws_identitystore_group.administrators_sso_group.group_id
+    principal_type     = "GROUP"
+    target_id          = aws_organizations_account.vault_net.id
+    target_type        = "AWS_ACCOUNT"
+  }
+  resource "aws_organizations_account" "vault_ops" {
+    email = "aws-vault-ops@defn.sh"
+    name  = "vault-ops"
+    tags = {
+      ManagedBy = "Terraform"
+    }
+  }
+
+  resource "aws_ssoadmin_account_assignment" "vault_ops_admin_sso_account_assignment" {
+    instance_arn       = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn
+    permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
+    principal_id       = aws_identitystore_group.administrators_sso_group.group_id
+    principal_type     = "GROUP"
+    target_id          = aws_organizations_account.vault_ops.id
+    target_type        = "AWS_ACCOUNT"
+  }
+  resource "aws_organizations_account" "vault_prod" {
+    email = "aws-vault-vault1@defn.sh"
+    name  = "vault-prod"
+    tags = {
+      ManagedBy = "Terraform"
+    }
+  }
+
+  resource "aws_ssoadmin_account_assignment" "vault_prod_admin_sso_account_assignment" {
+    instance_arn       = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn
+    permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
+    principal_id       = aws_identitystore_group.administrators_sso_group.group_id
+    principal_type     = "GROUP"
+    target_id          = aws_organizations_account.vault_prod.id
+    target_type        = "AWS_ACCOUNT"
+  }
+  resource "aws_organizations_account" "vault_pub" {
+    email = "aws-vault-pub@defn.sh"
+    name  = "vault-pub"
+    tags = {
+      ManagedBy = "Terraform"
+    }
+  }
+
+  resource "aws_ssoadmin_account_assignment" "vault_pub_admin_sso_account_assignment" {
+    instance_arn       = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn
+    permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
+    principal_id       = aws_identitystore_group.administrators_sso_group.group_id
+    principal_type     = "GROUP"
+    target_id          = aws_organizations_account.vault_pub.id
+    target_type        = "AWS_ACCOUNT"
+  }
+infra_acc_readme: |-
+  ## Account-specific Terraform: vault-org
+
+  ```bash
+  cd infra/acc-vault-org
+  mise trust
+  aws sso login --profile defn-org
+  aws sso login
+  terraform init
+  terraform plan
+  ```
+
+  auto-generated: aws.cue infra_acc_readme
+infra_acc_terraform: |-
+  terraform {
+    required_providers {
+      aws = {
+        version = "5.99.1"
+        source  = "aws"
+      }
+    }
+    backend "s3" {
+      bucket         = "dfn-defn-terraform-state"
+      dynamodb_table = "dfn-defn-terraform-state-lock"
+      encrypt        = true
+      key            = "stacks/acc-vault-org/terraform.tfstate"
+      profile        = "defn-org"
+      region         = "us-east-1"
+    }
+
+  }
+
+  provider "aws" {
+    profile = "vault-org"
+    region  = "us-east-1"
+    alias   = "vault-org"
+  }
+
+  module "vault-org" {
+    account   = 510430971399
+    name      = "terraform"
+    namespace = "vault"
+    stage     = "ops"
+    source    = "./mod/terraform-aws-defn-account"
+    providers = {
+      aws = aws.vault-org
+    }
+  }

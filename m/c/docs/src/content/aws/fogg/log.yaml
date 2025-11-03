@@ -1,2 +1,112 @@
 # auto-generated: transform.sh
-{"id": "844609041254", "account": "log", "org": "fogg", "name": "fogg-log", "email": "fogg-circus@defn.sh", "sso_role": "Administrator", "aws_config": "# auto-generated: aws.cue aws_config_account\n[profile fogg-log]\nsso_account_id=844609041254\nsso_role_name=Administrator\nsso_start_url=https://fogg-0.awsapps.com/start\nsso_region=us-west-2\n\n# auto-generated: aws.cue aws_config_bootstrap\n[profile defn-org]\nsso_account_id=510430971399\nsso_role_name=Administrator\nsso_start_url=https://defn.awsapps.com/start\nsso_region=us-east-2", "mise_config": "# auto-generated: aws.cue mise_config\n[env]\nAWS_PROFILE = \"fogg-log\"\nAWS_REGION = \"us-west-2\"\nAWS_CONFIG_FILE = \"/home/ubuntu/m/a/fogg/log/.aws/config\"", "aws_config_account": "# auto-generated: aws.cue aws_config_account\n[profile fogg-log]\nsso_account_id=844609041254\nsso_role_name=Administrator\nsso_start_url=https://fogg-0.awsapps.com/start\nsso_region=us-west-2", "aws_config_bootstrap": "# auto-generated: aws.cue aws_config_bootstrap\n[profile defn-org]\nsso_account_id=510430971399\nsso_role_name=Administrator\nsso_start_url=https://defn.awsapps.com/start\nsso_region=us-east-2", "account_readme": "## AWS Environment: fogg-log\n\n```bash\ncd a/fogg/log\nmise trust\naws sso login\nalogin\n```\n\nauto-generated: aws.cue account_readme", "infra_org_readme": "## Organizational-level Terraform: fogg-log\n\n```bash\ncd infra/org-fogg\nmise trust\naws sso login\nterraform init\nterraform plan\n```\n\nauto-generated: aws.cue infra_org_readme", "infra_acc_readme": "## Account-specific Terraform: fogg-log\n\n```bash\ncd infra/acc-fogg-log\nmise trust\naws sso login --profile defn-org\naws sso login\nterraform init\nterraform plan\n```\n\nauto-generated: aws.cue infra_acc_readme", "infra_acc_terraform": "terraform {\n  required_providers {\n    aws = {\n      version = \"5.99.1\"\n      source  = \"aws\"\n    }\n  }\n  backend \"s3\" {\n    bucket         = \"dfn-defn-terraform-state\"\n    dynamodb_table = \"dfn-defn-terraform-state-lock\"\n    encrypt        = true\n    key            = \"stacks/acc-fogg-log/terraform.tfstate\"\n    profile        = \"defn-org\"\n    region         = \"us-east-1\"\n  }\n\n}\n\nprovider \"aws\" {\n  profile = \"fogg-log\"\n  region  = \"us-east-1\"\n  alias   = \"fogg-log\"\n}\n\nmodule \"fogg-log\" {\n  account   = 510430971399\n  name      = \"terraform\"\n  namespace = \"fogg\"\n  stage     = \"ops\"\n  source    = \"./mod/terraform-aws-defn-account\"\n  providers = {\n    aws = aws.fogg-log\n  }\n}"}
+id: "844609041254"
+account: log
+org: fogg
+name: fogg-log
+email: fogg-circus@defn.sh
+sso_role: Administrator
+aws_config: |-
+  # auto-generated: aws.cue aws_config_account
+  [profile fogg-log]
+  sso_account_id=844609041254
+  sso_role_name=Administrator
+  sso_start_url=https://fogg-0.awsapps.com/start
+  sso_region=us-west-2
+
+  # auto-generated: aws.cue aws_config_bootstrap
+  [profile defn-org]
+  sso_account_id=510430971399
+  sso_role_name=Administrator
+  sso_start_url=https://defn.awsapps.com/start
+  sso_region=us-east-2
+mise_config: |-
+  # auto-generated: aws.cue mise_config
+  [env]
+  AWS_PROFILE = "fogg-log"
+  AWS_REGION = "us-west-2"
+  AWS_CONFIG_FILE = "/home/ubuntu/m/a/fogg/log/.aws/config"
+aws_config_account: |-
+  # auto-generated: aws.cue aws_config_account
+  [profile fogg-log]
+  sso_account_id=844609041254
+  sso_role_name=Administrator
+  sso_start_url=https://fogg-0.awsapps.com/start
+  sso_region=us-west-2
+aws_config_bootstrap: |-
+  # auto-generated: aws.cue aws_config_bootstrap
+  [profile defn-org]
+  sso_account_id=510430971399
+  sso_role_name=Administrator
+  sso_start_url=https://defn.awsapps.com/start
+  sso_region=us-east-2
+account_readme: |-
+  ## AWS Environment: fogg-log
+
+  ```bash
+  cd a/fogg/log
+  mise trust
+  aws sso login
+  alogin
+  ```
+
+  auto-generated: aws.cue account_readme
+infra_org_readme: |-
+  ## Organizational-level Terraform: fogg-log
+
+  ```bash
+  cd infra/org-fogg
+  mise trust
+  aws sso login
+  terraform init
+  terraform plan
+  ```
+
+  auto-generated: aws.cue infra_org_readme
+infra_acc_readme: |-
+  ## Account-specific Terraform: fogg-log
+
+  ```bash
+  cd infra/acc-fogg-log
+  mise trust
+  aws sso login --profile defn-org
+  aws sso login
+  terraform init
+  terraform plan
+  ```
+
+  auto-generated: aws.cue infra_acc_readme
+infra_acc_terraform: |-
+  terraform {
+    required_providers {
+      aws = {
+        version = "5.99.1"
+        source  = "aws"
+      }
+    }
+    backend "s3" {
+      bucket         = "dfn-defn-terraform-state"
+      dynamodb_table = "dfn-defn-terraform-state-lock"
+      encrypt        = true
+      key            = "stacks/acc-fogg-log/terraform.tfstate"
+      profile        = "defn-org"
+      region         = "us-east-1"
+    }
+
+  }
+
+  provider "aws" {
+    profile = "fogg-log"
+    region  = "us-east-1"
+    alias   = "fogg-log"
+  }
+
+  module "fogg-log" {
+    account   = 510430971399
+    name      = "terraform"
+    namespace = "fogg"
+    stage     = "ops"
+    source    = "./mod/terraform-aws-defn-account"
+    providers = {
+      aws = aws.fogg-log
+    }
+  }

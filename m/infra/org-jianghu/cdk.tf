@@ -114,27 +114,3 @@ resource "aws_ssoadmin_account_assignment" "jianghu_net_admin_sso_account_assign
   target_id          = aws_organizations_account.jianghu_net.id
   target_type        = "AWS_ACCOUNT"
 }
-moved {
-  from = aws_organizations_account.jianghu-org
-  to   = aws_organizations_account.jianghu_org
-}
-moved {
-  from = aws_organizations_account.jianghu-log
-  to   = aws_organizations_account.jianghu_log
-}
-moved {
-  from = aws_organizations_account.jianghu-net
-  to   = aws_organizations_account.jianghu_net
-}
-moved {
-  from = aws_ssoadmin_account_assignment.jianghu-org_admin_sso_account_assignment
-  to   = aws_ssoadmin_account_assignment.jianghu_org_admin_sso_account_assignment
-}
-moved {
-  from = aws_ssoadmin_account_assignment.jianghu-log_admin_sso_account_assignment
-  to   = aws_ssoadmin_account_assignment.jianghu_log_admin_sso_account_assignment
-}
-moved {
-  from = aws_ssoadmin_account_assignment.jianghu-net_admin_sso_account_assignment
-  to   = aws_ssoadmin_account_assignment.jianghu_net_admin_sso_account_assignment
-}
