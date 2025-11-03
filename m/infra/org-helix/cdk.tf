@@ -245,46 +245,6 @@ resource "aws_ssoadmin_account_assignment" "helix_pub_admin_sso_account_assignme
   target_type        = "AWS_ACCOUNT"
 }
 moved {
-  from = aws_organizations_account.helix-org
-  to   = aws_organizations_account.helix_org
-}
-moved {
-  from = aws_organizations_account.helix-ci
-  to   = aws_organizations_account.helix_ci
-}
-moved {
-  from = aws_organizations_account.helix-dev
-  to   = aws_organizations_account.helix_dev
-}
-moved {
-  from = aws_organizations_account.helix-hub
-  to   = aws_organizations_account.helix_hub
-}
-moved {
-  from = aws_organizations_account.helix-lib
-  to   = aws_organizations_account.helix_lib
-}
-moved {
-  from = aws_organizations_account.helix-log
-  to   = aws_organizations_account.helix_log
-}
-moved {
-  from = aws_organizations_account.helix-net
-  to   = aws_organizations_account.helix_net
-}
-moved {
-  from = aws_organizations_account.helix-ops
-  to   = aws_organizations_account.helix_ops
-}
-moved {
-  from = aws_organizations_account.helix-prod
-  to   = aws_organizations_account.helix_prod
-}
-moved {
-  from = aws_organizations_account.helix-pub
-  to   = aws_organizations_account.helix_pub
-}
-moved {
   from = aws_organizations_account.helix
   to   = aws_organizations_account.helix_org
 }

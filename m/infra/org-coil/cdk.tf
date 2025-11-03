@@ -137,22 +137,6 @@ resource "aws_ssoadmin_account_assignment" "coil_net_admin_sso_account_assignmen
   target_type        = "AWS_ACCOUNT"
 }
 moved {
-  from = aws_organizations_account.coil-org
-  to   = aws_organizations_account.coil_org
-}
-moved {
-  from = aws_organizations_account.coil-hub
-  to   = aws_organizations_account.coil_hub
-}
-moved {
-  from = aws_organizations_account.coil-lib
-  to   = aws_organizations_account.coil_lib
-}
-moved {
-  from = aws_organizations_account.coil-net
-  to   = aws_organizations_account.coil_net
-}
-moved {
   from = aws_organizations_account.coil
   to   = aws_organizations_account.coil_org
 }

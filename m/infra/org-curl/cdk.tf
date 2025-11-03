@@ -137,22 +137,6 @@ resource "aws_ssoadmin_account_assignment" "curl_net_admin_sso_account_assignmen
   target_type        = "AWS_ACCOUNT"
 }
 moved {
-  from = aws_organizations_account.curl-org
-  to   = aws_organizations_account.curl_org
-}
-moved {
-  from = aws_organizations_account.curl-hub
-  to   = aws_organizations_account.curl_hub
-}
-moved {
-  from = aws_organizations_account.curl-lib
-  to   = aws_organizations_account.curl_lib
-}
-moved {
-  from = aws_organizations_account.curl-net
-  to   = aws_organizations_account.curl_net
-}
-moved {
   from = aws_organizations_account.curl
   to   = aws_organizations_account.curl_org
 }

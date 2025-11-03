@@ -245,46 +245,6 @@ resource "aws_ssoadmin_account_assignment" "spiral_pub_admin_sso_account_assignm
   target_type        = "AWS_ACCOUNT"
 }
 moved {
-  from = aws_organizations_account.spiral-org
-  to   = aws_organizations_account.spiral_org
-}
-moved {
-  from = aws_organizations_account.spiral-ci
-  to   = aws_organizations_account.spiral_ci
-}
-moved {
-  from = aws_organizations_account.spiral-dev
-  to   = aws_organizations_account.spiral_dev
-}
-moved {
-  from = aws_organizations_account.spiral-hub
-  to   = aws_organizations_account.spiral_hub
-}
-moved {
-  from = aws_organizations_account.spiral-lib
-  to   = aws_organizations_account.spiral_lib
-}
-moved {
-  from = aws_organizations_account.spiral-log
-  to   = aws_organizations_account.spiral_log
-}
-moved {
-  from = aws_organizations_account.spiral-net
-  to   = aws_organizations_account.spiral_net
-}
-moved {
-  from = aws_organizations_account.spiral-ops
-  to   = aws_organizations_account.spiral_ops
-}
-moved {
-  from = aws_organizations_account.spiral-prod
-  to   = aws_organizations_account.spiral_prod
-}
-moved {
-  from = aws_organizations_account.spiral-pub
-  to   = aws_organizations_account.spiral_pub
-}
-moved {
   from = aws_organizations_account.spiral
   to   = aws_organizations_account.spiral_org
 }
