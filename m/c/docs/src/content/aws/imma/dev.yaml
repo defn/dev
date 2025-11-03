@@ -2,8 +2,8 @@
 id: "445584037541"
 account: dev
 org: imma
-email: imma-dev@imma.io
 name: imma-dev
+email: imma-dev@imma.io
 sso_role: Administrator
 aws_config: |-
   # auto-generated: aws.cue aws_config_account

@@ -2,7 +2,7 @@
 id: "601164058091"
 account: ops
 org: spiral
-name: ops
+name: spiral-ops
 email: aws-spiral+ops@defn.us
 sso_role: Administrator
 aws_config: |-

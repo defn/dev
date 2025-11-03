@@ -2,7 +2,7 @@
 id: "319951235442"
 account: ops
 org: gyre
-name: ops
+name: gyre-ops
 email: aws-gyre+ops@defn.us
 sso_role: Administrator
 aws_config: |-

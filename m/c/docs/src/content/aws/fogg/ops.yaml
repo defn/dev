@@ -2,8 +2,8 @@
 id: "318746665903"
 account: ops
 org: fogg
+name: fogg-ops
 email: fogg-gateway@defn.sh
-name: gateway
 sso_role: Administrator
 aws_config: |-
   # auto-generated: aws.cue aws_config_account

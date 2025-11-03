@@ -2,8 +2,8 @@
 id: "066356637485"
 account: lib
 org: vault
+name: vault-lib
 email: aws-vault-library@defn.sh
-name: library
 sso_role: Administrator
 aws_config: |-
   # auto-generated: aws.cue aws_config_account

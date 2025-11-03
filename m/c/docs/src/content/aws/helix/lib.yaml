@@ -2,7 +2,7 @@
 id: "377857698578"
 account: lib
 org: helix
-name: lib
+name: helix-lib
 email: aws-helix+lib@defn.sh
 sso_role: Administrator
 aws_config: |-

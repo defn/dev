@@ -2,8 +2,8 @@
 id: "002516226222"
 account: net
 org: circus
+name: circus-net
 email: aws-circus-transit@defn.sh
-name: transit
 sso_role: Administrator
 aws_config: |-
   # auto-generated: aws.cue aws_config_account

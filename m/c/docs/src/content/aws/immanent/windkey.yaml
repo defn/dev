@@ -2,8 +2,8 @@
 id: "095764861781"
 account: windkey
 org: immanent
-email: immanent-windkey@defn.us
 name: immanent-windkey
+email: immanent-windkey@defn.us
 sso_role: Administrator
 aws_config: |-
   # auto-generated: aws.cue aws_config_account

@@ -2,8 +2,8 @@
 id: "707476523482"
 account: log
 org: circus
+name: circus-log
 email: aws-circus-audit@defn.sh
-name: audit
 sso_role: Administrator
 aws_config: |-
   # auto-generated: aws.cue aws_config_account

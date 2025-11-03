@@ -32,6 +32,82 @@ config: {
 	aws: org: _orgTerraform
 }
 
+// Mapping of old Terraform resource names for migration
+// Format: org: { account_key: "old_terraform_resource_name" }
+_oldResourceNames: {
+	chamber: {
+		org: "chamber"
+		"1": "defn_cd"
+		"2": "defn_ci"
+		"3": "defn_security"
+		a: "defn_a"
+		b: "defn_b"
+		c: "defn_c"
+		d: "defn_d"
+		e: "defn_e"
+		f: "defn_f"
+		g: "defn_g"
+		h: "defn_h"
+		i: "defn_i"
+		j: "defn_j"
+		l: "defn_l"
+		m: "defn_m"
+		n: "defn_n"
+		o: "defn_o"
+		p: "defn_p"
+		q: "defn_dev"
+		r: "defn_r"
+		s: "defn_s"
+		t: "defn_t"
+		u: "defn_qa"
+		v: "defn_v"
+		w: "defn_w"
+		x: "defn_stage"
+		y: "defn_prod"
+		z: "defn_hub"
+	}
+	gyre: {
+		org: "gyre"
+		ops: "ops"
+	}
+	coil: {
+		org: "coil"
+		hub: "hub"
+		lib: "lib"
+		net: "net"
+	}
+	curl: {
+		org: "curl"
+		hub: "hub"
+		lib: "lib"
+		net: "net"
+	}
+	spiral: {
+		org: "spiral"
+		ci: "pub"
+		dev: "dev"
+		hub: "hub"
+		lib: "lib"
+		log: "log"
+		net: "net"
+		ops: "ops"
+		prod: "sec"
+		pub: "dmz"
+	}
+	helix: {
+		org: "helix"
+		ci: "sec"
+		dev: "dev"
+		hub: "hub"
+		lib: "lib"
+		log: "log"
+		net: "net"
+		ops: "ops"
+		prod: "dmz"
+		pub: "pub"
+	}
+}
+
 // Generate organization-level Terraform for each org
 _orgTerraform: {
 	for orgName, orgData in _awsBase.org {
@@ -136,6 +212,17 @@ _orgTerraform: {
 
 				moved {
 				  from = aws_organizations_account.\(orgName)-\(accKey)
+				  to   = aws_organizations_account.\(strings.Replace(accData.name, "-", "_", -1))
+				}
+				"""
+				}], ""),
+				strings.Join([for accKey, accData in orgData.account
+					if _oldResourceNames[orgName] != _|_
+					if _oldResourceNames[orgName][accKey] != _|_ {
+					"""
+
+				moved {
+				  from = aws_organizations_account.\(_oldResourceNames[orgName][accKey])
 				  to   = aws_organizations_account.\(strings.Replace(accData.name, "-", "_", -1))
 				}
 				"""

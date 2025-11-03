@@ -2,8 +2,8 @@
 id: "040769490632"
 account: prod
 org: vault
+name: vault-prod
 email: aws-vault-vault1@defn.sh
-name: vault1
 sso_role: Administrator
 aws_config: |-
   # auto-generated: aws.cue aws_config_account

@@ -2,7 +2,7 @@
 id: "545070380609"
 account: org
 org: immanent
-name: immanent
+name: immanent-org
 email: aws-immanent@defn.us
 sso_role: Administrator
 aws_config: |-
@@ -131,20 +131,20 @@ infra_org_terraform: |-
     display_name      = "Administrators"
     identity_store_id = element(local.sso_instance_isid, 0)
   }
-  resource "aws_organizations_account" "immanent" {
+  resource "aws_organizations_account" "immanent_org" {
     email = "aws-immanent@defn.us"
-    name  = "immanent"
+    name  = "immanent-org"
     tags = {
       ManagedBy = "Terraform"
     }
   }
 
-  resource "aws_ssoadmin_account_assignment" "immanent_admin_sso_account_assignment" {
+  resource "aws_ssoadmin_account_assignment" "immanent_org_admin_sso_account_assignment" {
     instance_arn       = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn
     permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
     principal_id       = aws_identitystore_group.administrators_sso_group.group_id
     principal_type     = "GROUP"
-    target_id          = aws_organizations_account.immanent.id
+    target_id          = aws_organizations_account.immanent_org.id
     target_type        = "AWS_ACCOUNT"
   }
   resource "aws_organizations_account" "immanent_changer" {
@@ -325,7 +325,7 @@ infra_org_terraform: |-
   }
   moved {
     from = aws_organizations_account.immanent-org
-    to   = aws_organizations_account.immanent
+    to   = aws_organizations_account.immanent_org
   }
   moved {
     from = aws_organizations_account.immanent-changer
@@ -370,6 +370,10 @@ infra_org_terraform: |-
   moved {
     from = aws_organizations_account.immanent-windkey
     to   = aws_organizations_account.immanent_windkey
+  }
+  moved {
+    from = aws_ssoadmin_account_assignment.immanent-org_admin_sso_account_assignment
+    to   = aws_ssoadmin_account_assignment.immanent_org_admin_sso_account_assignment
   }
   moved {
     from = aws_ssoadmin_account_assignment.immanent-changer_admin_sso_account_assignment

@@ -2,7 +2,7 @@
 id: "188066400611"
 account: ops
 org: vault
-name: ops
+name: vault-ops
 email: aws-vault-ops@defn.sh
 sso_role: Administrator
 aws_config: |-

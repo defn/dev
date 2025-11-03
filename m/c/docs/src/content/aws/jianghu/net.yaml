@@ -2,8 +2,8 @@
 id: "025636091251"
 account: net
 org: jianghu
+name: jianghu-net
 email: tahoe@defn.us
-name: tahoe
 sso_role: Administrator
 aws_config: |-
   # auto-generated: aws.cue aws_config_account

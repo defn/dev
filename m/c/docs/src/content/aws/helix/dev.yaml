@@ -2,7 +2,7 @@
 id: "843784871878"
 account: dev
 org: helix
-name: dev
+name: helix-dev
 email: aws-helix+dev@defn.sh
 sso_role: Administrator
 aws_config: |-

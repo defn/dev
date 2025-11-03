@@ -66,25 +66,25 @@ resource "aws_identitystore_group" "administrators_sso_group" {
   display_name      = "Administrators"
   identity_store_id = element(local.sso_instance_isid, 0)
 }
-resource "aws_organizations_account" "spiral" {
+resource "aws_organizations_account" "spiral_org" {
   email = "aws-spiral@defn.us"
-  name  = "spiral"
+  name  = "spiral-org"
   tags = {
     ManagedBy = "Terraform"
   }
 }
 
-resource "aws_ssoadmin_account_assignment" "spiral_admin_sso_account_assignment" {
+resource "aws_ssoadmin_account_assignment" "spiral_org_admin_sso_account_assignment" {
   instance_arn       = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn
   permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
   principal_id       = aws_identitystore_group.administrators_sso_group.group_id
   principal_type     = "GROUP"
-  target_id          = aws_organizations_account.spiral.id
+  target_id          = aws_organizations_account.spiral_org.id
   target_type        = "AWS_ACCOUNT"
 }
-resource "aws_organizations_account" "pub" {
+resource "aws_organizations_account" "spiral_ci" {
   email = "aws-spiral+pub@defn.us"
-  name  = "pub"
+  name  = "spiral-ci"
 		  iam_user_access_to_billing = "ALLOW"
 		  role_name                  = "OrganizationAccountAccessRole"
   tags = {
@@ -92,17 +92,17 @@ resource "aws_organizations_account" "pub" {
   }
 }
 
-resource "aws_ssoadmin_account_assignment" "pub_admin_sso_account_assignment" {
+resource "aws_ssoadmin_account_assignment" "spiral_ci_admin_sso_account_assignment" {
   instance_arn       = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn
   permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
   principal_id       = aws_identitystore_group.administrators_sso_group.group_id
   principal_type     = "GROUP"
-  target_id          = aws_organizations_account.pub.id
+  target_id          = aws_organizations_account.spiral_ci.id
   target_type        = "AWS_ACCOUNT"
 }
-resource "aws_organizations_account" "dev" {
+resource "aws_organizations_account" "spiral_dev" {
   email = "aws-spiral+dev@defn.us"
-  name  = "dev"
+  name  = "spiral-dev"
 		  iam_user_access_to_billing = "ALLOW"
 		  role_name                  = "OrganizationAccountAccessRole"
   tags = {
@@ -110,17 +110,17 @@ resource "aws_organizations_account" "dev" {
   }
 }
 
-resource "aws_ssoadmin_account_assignment" "dev_admin_sso_account_assignment" {
+resource "aws_ssoadmin_account_assignment" "spiral_dev_admin_sso_account_assignment" {
   instance_arn       = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn
   permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
   principal_id       = aws_identitystore_group.administrators_sso_group.group_id
   principal_type     = "GROUP"
-  target_id          = aws_organizations_account.dev.id
+  target_id          = aws_organizations_account.spiral_dev.id
   target_type        = "AWS_ACCOUNT"
 }
-resource "aws_organizations_account" "hub" {
+resource "aws_organizations_account" "spiral_hub" {
   email = "aws-spiral+hub@defn.us"
-  name  = "hub"
+  name  = "spiral-hub"
 		  iam_user_access_to_billing = "ALLOW"
 		  role_name                  = "OrganizationAccountAccessRole"
   tags = {
@@ -128,17 +128,17 @@ resource "aws_organizations_account" "hub" {
   }
 }
 
-resource "aws_ssoadmin_account_assignment" "hub_admin_sso_account_assignment" {
+resource "aws_ssoadmin_account_assignment" "spiral_hub_admin_sso_account_assignment" {
   instance_arn       = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn
   permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
   principal_id       = aws_identitystore_group.administrators_sso_group.group_id
   principal_type     = "GROUP"
-  target_id          = aws_organizations_account.hub.id
+  target_id          = aws_organizations_account.spiral_hub.id
   target_type        = "AWS_ACCOUNT"
 }
-resource "aws_organizations_account" "lib" {
+resource "aws_organizations_account" "spiral_lib" {
   email = "aws-spiral+lib@defn.us"
-  name  = "lib"
+  name  = "spiral-lib"
 		  iam_user_access_to_billing = "ALLOW"
 		  role_name                  = "OrganizationAccountAccessRole"
   tags = {
@@ -146,17 +146,17 @@ resource "aws_organizations_account" "lib" {
   }
 }
 
-resource "aws_ssoadmin_account_assignment" "lib_admin_sso_account_assignment" {
+resource "aws_ssoadmin_account_assignment" "spiral_lib_admin_sso_account_assignment" {
   instance_arn       = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn
   permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
   principal_id       = aws_identitystore_group.administrators_sso_group.group_id
   principal_type     = "GROUP"
-  target_id          = aws_organizations_account.lib.id
+  target_id          = aws_organizations_account.spiral_lib.id
   target_type        = "AWS_ACCOUNT"
 }
-resource "aws_organizations_account" "log" {
+resource "aws_organizations_account" "spiral_log" {
   email = "aws-spiral+log@defn.us"
-  name  = "log"
+  name  = "spiral-log"
 		  iam_user_access_to_billing = "ALLOW"
 		  role_name                  = "OrganizationAccountAccessRole"
   tags = {
@@ -164,17 +164,17 @@ resource "aws_organizations_account" "log" {
   }
 }
 
-resource "aws_ssoadmin_account_assignment" "log_admin_sso_account_assignment" {
+resource "aws_ssoadmin_account_assignment" "spiral_log_admin_sso_account_assignment" {
   instance_arn       = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn
   permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
   principal_id       = aws_identitystore_group.administrators_sso_group.group_id
   principal_type     = "GROUP"
-  target_id          = aws_organizations_account.log.id
+  target_id          = aws_organizations_account.spiral_log.id
   target_type        = "AWS_ACCOUNT"
 }
-resource "aws_organizations_account" "net" {
+resource "aws_organizations_account" "spiral_net" {
   email = "aws-spiral+net@defn.us"
-  name  = "net"
+  name  = "spiral-net"
 		  iam_user_access_to_billing = "ALLOW"
 		  role_name                  = "OrganizationAccountAccessRole"
   tags = {
@@ -182,17 +182,17 @@ resource "aws_organizations_account" "net" {
   }
 }
 
-resource "aws_ssoadmin_account_assignment" "net_admin_sso_account_assignment" {
+resource "aws_ssoadmin_account_assignment" "spiral_net_admin_sso_account_assignment" {
   instance_arn       = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn
   permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
   principal_id       = aws_identitystore_group.administrators_sso_group.group_id
   principal_type     = "GROUP"
-  target_id          = aws_organizations_account.net.id
+  target_id          = aws_organizations_account.spiral_net.id
   target_type        = "AWS_ACCOUNT"
 }
-resource "aws_organizations_account" "ops" {
+resource "aws_organizations_account" "spiral_ops" {
   email = "aws-spiral+ops@defn.us"
-  name  = "ops"
+  name  = "spiral-ops"
 		  iam_user_access_to_billing = "ALLOW"
 		  role_name                  = "OrganizationAccountAccessRole"
   tags = {
@@ -200,17 +200,17 @@ resource "aws_organizations_account" "ops" {
   }
 }
 
-resource "aws_ssoadmin_account_assignment" "ops_admin_sso_account_assignment" {
+resource "aws_ssoadmin_account_assignment" "spiral_ops_admin_sso_account_assignment" {
   instance_arn       = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn
   permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
   principal_id       = aws_identitystore_group.administrators_sso_group.group_id
   principal_type     = "GROUP"
-  target_id          = aws_organizations_account.ops.id
+  target_id          = aws_organizations_account.spiral_ops.id
   target_type        = "AWS_ACCOUNT"
 }
-resource "aws_organizations_account" "sec" {
+resource "aws_organizations_account" "spiral_prod" {
   email = "aws-spiral+sec@defn.us"
-  name  = "sec"
+  name  = "spiral-prod"
 		  iam_user_access_to_billing = "ALLOW"
 		  role_name                  = "OrganizationAccountAccessRole"
   tags = {
@@ -218,17 +218,17 @@ resource "aws_organizations_account" "sec" {
   }
 }
 
-resource "aws_ssoadmin_account_assignment" "sec_admin_sso_account_assignment" {
+resource "aws_ssoadmin_account_assignment" "spiral_prod_admin_sso_account_assignment" {
   instance_arn       = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn
   permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
   principal_id       = aws_identitystore_group.administrators_sso_group.group_id
   principal_type     = "GROUP"
-  target_id          = aws_organizations_account.sec.id
+  target_id          = aws_organizations_account.spiral_prod.id
   target_type        = "AWS_ACCOUNT"
 }
-resource "aws_organizations_account" "dmz" {
+resource "aws_organizations_account" "spiral_pub" {
   email = "aws-spiral+dmz@defn.us"
-  name  = "dmz"
+  name  = "spiral-pub"
 		  iam_user_access_to_billing = "ALLOW"
 		  role_name                  = "OrganizationAccountAccessRole"
   tags = {
@@ -236,51 +236,91 @@ resource "aws_organizations_account" "dmz" {
   }
 }
 
-resource "aws_ssoadmin_account_assignment" "dmz_admin_sso_account_assignment" {
+resource "aws_ssoadmin_account_assignment" "spiral_pub_admin_sso_account_assignment" {
   instance_arn       = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn
   permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
   principal_id       = aws_identitystore_group.administrators_sso_group.group_id
   principal_type     = "GROUP"
-  target_id          = aws_organizations_account.dmz.id
+  target_id          = aws_organizations_account.spiral_pub.id
   target_type        = "AWS_ACCOUNT"
 }
 moved {
   from = aws_organizations_account.spiral-org
-  to   = aws_organizations_account.spiral
+  to   = aws_organizations_account.spiral_org
 }
 moved {
   from = aws_organizations_account.spiral-ci
-  to   = aws_organizations_account.pub
+  to   = aws_organizations_account.spiral_ci
 }
 moved {
   from = aws_organizations_account.spiral-dev
-  to   = aws_organizations_account.dev
+  to   = aws_organizations_account.spiral_dev
 }
 moved {
   from = aws_organizations_account.spiral-hub
-  to   = aws_organizations_account.hub
+  to   = aws_organizations_account.spiral_hub
 }
 moved {
   from = aws_organizations_account.spiral-lib
-  to   = aws_organizations_account.lib
+  to   = aws_organizations_account.spiral_lib
 }
 moved {
   from = aws_organizations_account.spiral-log
-  to   = aws_organizations_account.log
+  to   = aws_organizations_account.spiral_log
 }
 moved {
   from = aws_organizations_account.spiral-net
-  to   = aws_organizations_account.net
+  to   = aws_organizations_account.spiral_net
 }
 moved {
   from = aws_organizations_account.spiral-ops
-  to   = aws_organizations_account.ops
+  to   = aws_organizations_account.spiral_ops
 }
 moved {
   from = aws_organizations_account.spiral-prod
-  to   = aws_organizations_account.sec
+  to   = aws_organizations_account.spiral_prod
 }
 moved {
   from = aws_organizations_account.spiral-pub
-  to   = aws_organizations_account.dmz
+  to   = aws_organizations_account.spiral_pub
+}
+moved {
+  from = aws_ssoadmin_account_assignment.spiral-org_admin_sso_account_assignment
+  to   = aws_ssoadmin_account_assignment.spiral_org_admin_sso_account_assignment
+}
+moved {
+  from = aws_ssoadmin_account_assignment.spiral-ci_admin_sso_account_assignment
+  to   = aws_ssoadmin_account_assignment.spiral_ci_admin_sso_account_assignment
+}
+moved {
+  from = aws_ssoadmin_account_assignment.spiral-dev_admin_sso_account_assignment
+  to   = aws_ssoadmin_account_assignment.spiral_dev_admin_sso_account_assignment
+}
+moved {
+  from = aws_ssoadmin_account_assignment.spiral-hub_admin_sso_account_assignment
+  to   = aws_ssoadmin_account_assignment.spiral_hub_admin_sso_account_assignment
+}
+moved {
+  from = aws_ssoadmin_account_assignment.spiral-lib_admin_sso_account_assignment
+  to   = aws_ssoadmin_account_assignment.spiral_lib_admin_sso_account_assignment
+}
+moved {
+  from = aws_ssoadmin_account_assignment.spiral-log_admin_sso_account_assignment
+  to   = aws_ssoadmin_account_assignment.spiral_log_admin_sso_account_assignment
+}
+moved {
+  from = aws_ssoadmin_account_assignment.spiral-net_admin_sso_account_assignment
+  to   = aws_ssoadmin_account_assignment.spiral_net_admin_sso_account_assignment
+}
+moved {
+  from = aws_ssoadmin_account_assignment.spiral-ops_admin_sso_account_assignment
+  to   = aws_ssoadmin_account_assignment.spiral_ops_admin_sso_account_assignment
+}
+moved {
+  from = aws_ssoadmin_account_assignment.spiral-prod_admin_sso_account_assignment
+  to   = aws_ssoadmin_account_assignment.spiral_prod_admin_sso_account_assignment
+}
+moved {
+  from = aws_ssoadmin_account_assignment.spiral-pub_admin_sso_account_assignment
+  to   = aws_ssoadmin_account_assignment.spiral_pub_admin_sso_account_assignment
 }

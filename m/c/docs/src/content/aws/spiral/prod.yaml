@@ -2,8 +2,8 @@
 id: "398258703387"
 account: prod
 org: spiral
+name: spiral-prod
 email: aws-spiral+sec@defn.us
-name: sec
 sso_role: Administrator
 aws_config: |-
   # auto-generated: aws.cue aws_config_account

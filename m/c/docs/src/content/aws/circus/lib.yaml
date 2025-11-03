@@ -2,8 +2,8 @@
 id: "497790518354"
 account: lib
 org: circus
+name: circus-lib
 email: aws-circus-govcloud@defn.sh
-name: govcloud
 sso_role: Administrator
 aws_config: |-
   # auto-generated: aws.cue aws_config_account

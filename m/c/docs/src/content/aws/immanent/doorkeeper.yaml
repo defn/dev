@@ -2,8 +2,8 @@
 id: "013267321144"
 account: doorkeeper
 org: immanent
-email: immanent-doorkeeper@defn.us
 name: immanent-doorkeeper
+email: immanent-doorkeeper@defn.us
 sso_role: Administrator
 aws_config: |-
   # auto-generated: aws.cue aws_config_account

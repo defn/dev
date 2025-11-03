@@ -2,8 +2,8 @@
 id: "018520313738"
 account: ci
 org: helix
+name: helix-ci
 email: aws-helix+sec@defn.sh
-name: sec
 sso_role: Administrator
 aws_config: |-
   # auto-generated: aws.cue aws_config_account

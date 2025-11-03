@@ -2,8 +2,8 @@
 id: "915207860232"
 account: net
 org: vault
+name: vault-net
 email: aws-vault-transit@defn.sh
-name: transit
 sso_role: Administrator
 aws_config: |-
   # auto-generated: aws.cue aws_config_account

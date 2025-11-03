@@ -2,8 +2,8 @@
 id: "200733412967"
 account: "5"
 org: chamber
-email: chamber-5@defn.us
 name: chamber-5
+email: chamber-5@defn.us
 sso_role: Administrator
 aws_config: |-
   # auto-generated: aws.cue aws_config_account

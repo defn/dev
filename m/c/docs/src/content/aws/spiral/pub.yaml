@@ -2,8 +2,8 @@
 id: "130046154300"
 account: pub
 org: spiral
+name: spiral-pub
 email: aws-spiral+dmz@defn.us
-name: dmz
 sso_role: Administrator
 aws_config: |-
   # auto-generated: aws.cue aws_config_account

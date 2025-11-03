@@ -2,8 +2,8 @@
 id: "826250190242"
 account: hand
 org: immanent
-email: immanent-hand@defn.us
 name: immanent-hand
+email: immanent-hand@defn.us
 sso_role: Administrator
 aws_config: |-
   # auto-generated: aws.cue aws_config_account

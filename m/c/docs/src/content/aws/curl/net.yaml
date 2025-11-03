@@ -2,7 +2,7 @@
 id: "101142583332"
 account: net
 org: curl
-name: net
+name: curl-net
 email: aws-curl+net@defn.us
 sso_role: Administrator
 aws_config: |-

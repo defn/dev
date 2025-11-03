@@ -2,7 +2,7 @@
 id: "337248635000"
 account: hub
 org: fogg
-name: hub
+name: fogg-hub
 email: fogg-hub@defn.sh
 sso_role: Administrator
 aws_config: |-

@@ -2,8 +2,8 @@
 id: "991300382347"
 account: l
 org: chamber
+name: chamber-l
 email: aws-staging1@defn.us
-name: defn-l
 sso_role: Administrator
 aws_config: |-
   # auto-generated: aws.cue aws_config_account

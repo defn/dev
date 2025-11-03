@@ -2,8 +2,8 @@
 id: "516851121506"
 account: lib
 org: imma
+name: imma-lib
 email: imma-tolan@defn.us
-name: imma-tolan
 sso_role: Administrator
 aws_config: |-
   # auto-generated: aws.cue aws_config_account

@@ -2,7 +2,7 @@
 id: "278790191486"
 account: net
 org: coil
-name: net
+name: coil-net
 email: aws-coil+net@defn.us
 sso_role: Administrator
 aws_config: |-

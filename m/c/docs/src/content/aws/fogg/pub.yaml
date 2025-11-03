@@ -2,8 +2,8 @@
 id: "372333168887"
 account: pub
 org: fogg
+name: fogg-pub
 email: fogg-security@defn.sh
-name: security
 sso_role: Administrator
 aws_config: |-
   # auto-generated: aws.cue aws_config_account

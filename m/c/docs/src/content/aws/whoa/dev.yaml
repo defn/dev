@@ -2,7 +2,7 @@
 id: "439761234835"
 account: dev
 org: whoa
-name: dev
+name: whoa-dev
 email: whoa-dev@imma.io
 sso_role: Administrator
 aws_config: |-

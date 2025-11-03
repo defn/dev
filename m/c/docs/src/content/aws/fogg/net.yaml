@@ -2,8 +2,8 @@
 id: "060659916753"
 account: net
 org: fogg
+name: fogg-net
 email: fogg-asset@defn.sh
-name: asset
 sso_role: Administrator
 aws_config: |-
   # auto-generated: aws.cue aws_config_account

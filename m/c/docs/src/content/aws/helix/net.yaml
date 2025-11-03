@@ -2,7 +2,7 @@
 id: "504722108514"
 account: net
 org: helix
-name: net
+name: helix-net
 email: aws-helix+net@defn.sh
 sso_role: Administrator
 aws_config: |-

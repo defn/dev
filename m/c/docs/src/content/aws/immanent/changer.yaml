@@ -2,8 +2,8 @@
 id: "003884504807"
 account: changer
 org: immanent
-email: immanent-changer@defn.us
 name: immanent-changer
+email: immanent-changer@defn.us
 sso_role: Administrator
 aws_config: |-
   # auto-generated: aws.cue aws_config_account

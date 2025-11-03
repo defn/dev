@@ -2,8 +2,8 @@
 id: "724643698007"
 account: prod
 org: helix
+name: helix-prod
 email: aws-helix+dmz@defn.sh
-name: dmz
 sso_role: Administrator
 aws_config: |-
   # auto-generated: aws.cue aws_config_account

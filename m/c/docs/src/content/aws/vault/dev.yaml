@@ -2,7 +2,7 @@
 id: "497393606242"
 account: dev
 org: vault
-name: dev
+name: vault-dev
 email: aws-vault-dev@defn.sh
 sso_role: Administrator
 aws_config: |-

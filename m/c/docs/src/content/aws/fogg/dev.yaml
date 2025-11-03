@@ -2,8 +2,8 @@
 id: "442766271046"
 account: dev
 org: fogg
+name: fogg-dev
 email: fogg-sandbox@defn.sh
-name: sandbox
 sso_role: Administrator
 aws_config: |-
   # auto-generated: aws.cue aws_config_account

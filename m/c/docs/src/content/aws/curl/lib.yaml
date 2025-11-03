@@ -2,7 +2,7 @@
 id: "298406631539"
 account: lib
 org: curl
-name: lib
+name: curl-lib
 email: aws-curl+lib@defn.us
 sso_role: Administrator
 aws_config: |-

@@ -2,7 +2,7 @@
 id: "730917619329"
 account: org
 org: chamber
-name: chamber
+name: chamber-org
 email: aws-chamber@defn.us
 sso_role: Administrator
 aws_config: |-
@@ -131,68 +131,68 @@ infra_org_terraform: |-
     display_name      = "Administrators"
     identity_store_id = element(local.sso_instance_isid, 0)
   }
-  resource "aws_organizations_account" "chamber" {
+  resource "aws_organizations_account" "chamber_org" {
     email = "aws-chamber@defn.us"
-    name  = "chamber"
+    name  = "chamber-org"
     tags = {
       ManagedBy = "Terraform"
     }
   }
 
-  resource "aws_ssoadmin_account_assignment" "chamber_admin_sso_account_assignment" {
+  resource "aws_ssoadmin_account_assignment" "chamber_org_admin_sso_account_assignment" {
     instance_arn       = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn
     permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
     principal_id       = aws_identitystore_group.administrators_sso_group.group_id
     principal_type     = "GROUP"
-    target_id          = aws_organizations_account.chamber.id
+    target_id          = aws_organizations_account.chamber_org.id
     target_type        = "AWS_ACCOUNT"
   }
-  resource "aws_organizations_account" "defn_cd" {
+  resource "aws_organizations_account" "chamber_1" {
     email = "aws-cd@defn.us"
-    name  = "defn-cd"
+    name  = "chamber-1"
     tags = {
       ManagedBy = "Terraform"
     }
   }
 
-  resource "aws_ssoadmin_account_assignment" "defn_cd_admin_sso_account_assignment" {
+  resource "aws_ssoadmin_account_assignment" "chamber_1_admin_sso_account_assignment" {
     instance_arn       = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn
     permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
     principal_id       = aws_identitystore_group.administrators_sso_group.group_id
     principal_type     = "GROUP"
-    target_id          = aws_organizations_account.defn_cd.id
+    target_id          = aws_organizations_account.chamber_1.id
     target_type        = "AWS_ACCOUNT"
   }
-  resource "aws_organizations_account" "defn_ci" {
+  resource "aws_organizations_account" "chamber_2" {
     email = "aws-ci@defn.us"
-    name  = "defn-ci"
+    name  = "chamber-2"
     tags = {
       ManagedBy = "Terraform"
     }
   }
 
-  resource "aws_ssoadmin_account_assignment" "defn_ci_admin_sso_account_assignment" {
+  resource "aws_ssoadmin_account_assignment" "chamber_2_admin_sso_account_assignment" {
     instance_arn       = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn
     permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
     principal_id       = aws_identitystore_group.administrators_sso_group.group_id
     principal_type     = "GROUP"
-    target_id          = aws_organizations_account.defn_ci.id
+    target_id          = aws_organizations_account.chamber_2.id
     target_type        = "AWS_ACCOUNT"
   }
-  resource "aws_organizations_account" "defn_security" {
+  resource "aws_organizations_account" "chamber_3" {
     email = "aws-users@defn.us"
-    name  = "defn-security"
+    name  = "chamber-3"
     tags = {
       ManagedBy = "Terraform"
     }
   }
 
-  resource "aws_ssoadmin_account_assignment" "defn_security_admin_sso_account_assignment" {
+  resource "aws_ssoadmin_account_assignment" "chamber_3_admin_sso_account_assignment" {
     instance_arn       = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn
     permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
     principal_id       = aws_identitystore_group.administrators_sso_group.group_id
     principal_type     = "GROUP"
-    target_id          = aws_organizations_account.defn_security.id
+    target_id          = aws_organizations_account.chamber_3.id
     target_type        = "AWS_ACCOUNT"
   }
   resource "aws_organizations_account" "chamber_4" {
@@ -291,421 +291,421 @@ infra_org_terraform: |-
     target_id          = aws_organizations_account.chamber_9.id
     target_type        = "AWS_ACCOUNT"
   }
-  resource "aws_organizations_account" "defn_a" {
+  resource "aws_organizations_account" "chamber_a" {
     email = "defn-a@imma.io"
-    name  = "defn-a"
+    name  = "chamber-a"
     tags = {
       ManagedBy = "Terraform"
     }
   }
 
-  resource "aws_ssoadmin_account_assignment" "defn_a_admin_sso_account_assignment" {
+  resource "aws_ssoadmin_account_assignment" "chamber_a_admin_sso_account_assignment" {
     instance_arn       = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn
     permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
     principal_id       = aws_identitystore_group.administrators_sso_group.group_id
     principal_type     = "GROUP"
-    target_id          = aws_organizations_account.defn_a.id
+    target_id          = aws_organizations_account.chamber_a.id
     target_type        = "AWS_ACCOUNT"
   }
-  resource "aws_organizations_account" "defn_b" {
+  resource "aws_organizations_account" "chamber_b" {
     email = "imma-admin1@imma.io"
-    name  = "defn-b"
+    name  = "chamber-b"
     tags = {
       ManagedBy = "Terraform"
     }
   }
 
-  resource "aws_ssoadmin_account_assignment" "defn_b_admin_sso_account_assignment" {
+  resource "aws_ssoadmin_account_assignment" "chamber_b_admin_sso_account_assignment" {
     instance_arn       = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn
     permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
     principal_id       = aws_identitystore_group.administrators_sso_group.group_id
     principal_type     = "GROUP"
-    target_id          = aws_organizations_account.defn_b.id
+    target_id          = aws_organizations_account.chamber_b.id
     target_type        = "AWS_ACCOUNT"
   }
-  resource "aws_organizations_account" "defn_c" {
+  resource "aws_organizations_account" "chamber_c" {
     email = "dev-eng1@imma.io"
-    name  = "defn-c"
+    name  = "chamber-c"
     tags = {
       ManagedBy = "Terraform"
     }
   }
 
-  resource "aws_ssoadmin_account_assignment" "defn_c_admin_sso_account_assignment" {
+  resource "aws_ssoadmin_account_assignment" "chamber_c_admin_sso_account_assignment" {
     instance_arn       = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn
     permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
     principal_id       = aws_identitystore_group.administrators_sso_group.group_id
     principal_type     = "GROUP"
-    target_id          = aws_organizations_account.defn_c.id
+    target_id          = aws_organizations_account.chamber_c.id
     target_type        = "AWS_ACCOUNT"
   }
-  resource "aws_organizations_account" "defn_d" {
+  resource "aws_organizations_account" "chamber_d" {
     email = "box-adm1@imma.io"
-    name  = "defn-d"
+    name  = "chamber-d"
     tags = {
       ManagedBy = "Terraform"
     }
   }
 
-  resource "aws_ssoadmin_account_assignment" "defn_d_admin_sso_account_assignment" {
+  resource "aws_ssoadmin_account_assignment" "chamber_d_admin_sso_account_assignment" {
     instance_arn       = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn
     permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
     principal_id       = aws_identitystore_group.administrators_sso_group.group_id
     principal_type     = "GROUP"
-    target_id          = aws_organizations_account.defn_d.id
+    target_id          = aws_organizations_account.chamber_d.id
     target_type        = "AWS_ACCOUNT"
   }
-  resource "aws_organizations_account" "defn_e" {
+  resource "aws_organizations_account" "chamber_e" {
     email = "stg-eng1@imma.io"
-    name  = "defn-e"
+    name  = "chamber-e"
     tags = {
       ManagedBy = "Terraform"
     }
   }
 
-  resource "aws_ssoadmin_account_assignment" "defn_e_admin_sso_account_assignment" {
+  resource "aws_ssoadmin_account_assignment" "chamber_e_admin_sso_account_assignment" {
     instance_arn       = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn
     permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
     principal_id       = aws_identitystore_group.administrators_sso_group.group_id
     principal_type     = "GROUP"
-    target_id          = aws_organizations_account.defn_e.id
+    target_id          = aws_organizations_account.chamber_e.id
     target_type        = "AWS_ACCOUNT"
   }
-  resource "aws_organizations_account" "defn_f" {
+  resource "aws_organizations_account" "chamber_f" {
     email = "usr-admin1@imma.io"
-    name  = "defn-f"
+    name  = "chamber-f"
     tags = {
       ManagedBy = "Terraform"
     }
   }
 
-  resource "aws_ssoadmin_account_assignment" "defn_f_admin_sso_account_assignment" {
+  resource "aws_ssoadmin_account_assignment" "chamber_f_admin_sso_account_assignment" {
     instance_arn       = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn
     permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
     principal_id       = aws_identitystore_group.administrators_sso_group.group_id
     principal_type     = "GROUP"
-    target_id          = aws_organizations_account.defn_f.id
+    target_id          = aws_organizations_account.chamber_f.id
     target_type        = "AWS_ACCOUNT"
   }
-  resource "aws_organizations_account" "defn_g" {
+  resource "aws_organizations_account" "chamber_g" {
     email = "usr-adm1@imma.io"
-    name  = "defn-g"
+    name  = "chamber-g"
     tags = {
       ManagedBy = "Terraform"
     }
   }
 
-  resource "aws_ssoadmin_account_assignment" "defn_g_admin_sso_account_assignment" {
+  resource "aws_ssoadmin_account_assignment" "chamber_g_admin_sso_account_assignment" {
     instance_arn       = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn
     permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
     principal_id       = aws_identitystore_group.administrators_sso_group.group_id
     principal_type     = "GROUP"
-    target_id          = aws_organizations_account.defn_g.id
+    target_id          = aws_organizations_account.chamber_g.id
     target_type        = "AWS_ACCOUNT"
   }
-  resource "aws_organizations_account" "defn_h" {
+  resource "aws_organizations_account" "chamber_h" {
     email = "usr-eng1@imma.io"
-    name  = "defn-h"
+    name  = "chamber-h"
     tags = {
       ManagedBy = "Terraform"
     }
   }
 
-  resource "aws_ssoadmin_account_assignment" "defn_h_admin_sso_account_assignment" {
+  resource "aws_ssoadmin_account_assignment" "chamber_h_admin_sso_account_assignment" {
     instance_arn       = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn
     permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
     principal_id       = aws_identitystore_group.administrators_sso_group.group_id
     principal_type     = "GROUP"
-    target_id          = aws_organizations_account.defn_h.id
+    target_id          = aws_organizations_account.chamber_h.id
     target_type        = "AWS_ACCOUNT"
   }
-  resource "aws_organizations_account" "defn_i" {
+  resource "aws_organizations_account" "chamber_i" {
     email = "aws-admin1@defn.us"
-    name  = "defn-i"
+    name  = "chamber-i"
     tags = {
       ManagedBy = "Terraform"
     }
   }
 
-  resource "aws_ssoadmin_account_assignment" "defn_i_admin_sso_account_assignment" {
+  resource "aws_ssoadmin_account_assignment" "chamber_i_admin_sso_account_assignment" {
     instance_arn       = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn
     permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
     principal_id       = aws_identitystore_group.administrators_sso_group.group_id
     principal_type     = "GROUP"
-    target_id          = aws_organizations_account.defn_i.id
+    target_id          = aws_organizations_account.chamber_i.id
     target_type        = "AWS_ACCOUNT"
   }
-  resource "aws_organizations_account" "defn_j" {
+  resource "aws_organizations_account" "chamber_j" {
     email = "aws-development1@defn.us"
-    name  = "defn-j"
+    name  = "chamber-j"
     tags = {
       ManagedBy = "Terraform"
     }
   }
 
-  resource "aws_ssoadmin_account_assignment" "defn_j_admin_sso_account_assignment" {
+  resource "aws_ssoadmin_account_assignment" "chamber_j_admin_sso_account_assignment" {
     instance_arn       = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn
     permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
     principal_id       = aws_identitystore_group.administrators_sso_group.group_id
     principal_type     = "GROUP"
-    target_id          = aws_organizations_account.defn_j.id
+    target_id          = aws_organizations_account.chamber_j.id
     target_type        = "AWS_ACCOUNT"
   }
-  resource "aws_organizations_account" "defn_l" {
+  resource "aws_organizations_account" "chamber_l" {
     email = "aws-staging1@defn.us"
-    name  = "defn-l"
+    name  = "chamber-l"
     tags = {
       ManagedBy = "Terraform"
     }
   }
 
-  resource "aws_ssoadmin_account_assignment" "defn_l_admin_sso_account_assignment" {
+  resource "aws_ssoadmin_account_assignment" "chamber_l_admin_sso_account_assignment" {
     instance_arn       = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn
     permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
     principal_id       = aws_identitystore_group.administrators_sso_group.group_id
     principal_type     = "GROUP"
-    target_id          = aws_organizations_account.defn_l.id
+    target_id          = aws_organizations_account.chamber_l.id
     target_type        = "AWS_ACCOUNT"
   }
-  resource "aws_organizations_account" "defn_m" {
+  resource "aws_organizations_account" "chamber_m" {
     email = "defn-m@defn.us"
-    name  = "defn-m"
+    name  = "chamber-m"
     tags = {
       ManagedBy = "Terraform"
     }
   }
 
-  resource "aws_ssoadmin_account_assignment" "defn_m_admin_sso_account_assignment" {
+  resource "aws_ssoadmin_account_assignment" "chamber_m_admin_sso_account_assignment" {
     instance_arn       = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn
     permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
     principal_id       = aws_identitystore_group.administrators_sso_group.group_id
     principal_type     = "GROUP"
-    target_id          = aws_organizations_account.defn_m.id
+    target_id          = aws_organizations_account.chamber_m.id
     target_type        = "AWS_ACCOUNT"
   }
-  resource "aws_organizations_account" "defn_n" {
+  resource "aws_organizations_account" "chamber_n" {
     email = "defn-n@defn.us"
-    name  = "defn-n"
+    name  = "chamber-n"
     tags = {
       ManagedBy = "Terraform"
     }
   }
 
-  resource "aws_ssoadmin_account_assignment" "defn_n_admin_sso_account_assignment" {
+  resource "aws_ssoadmin_account_assignment" "chamber_n_admin_sso_account_assignment" {
     instance_arn       = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn
     permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
     principal_id       = aws_identitystore_group.administrators_sso_group.group_id
     principal_type     = "GROUP"
-    target_id          = aws_organizations_account.defn_n.id
+    target_id          = aws_organizations_account.chamber_n.id
     target_type        = "AWS_ACCOUNT"
   }
-  resource "aws_organizations_account" "defn_o" {
+  resource "aws_organizations_account" "chamber_o" {
     email = "defn-o@defn.us"
-    name  = "defn-o"
+    name  = "chamber-o"
     tags = {
       ManagedBy = "Terraform"
     }
   }
 
-  resource "aws_ssoadmin_account_assignment" "defn_o_admin_sso_account_assignment" {
+  resource "aws_ssoadmin_account_assignment" "chamber_o_admin_sso_account_assignment" {
     instance_arn       = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn
     permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
     principal_id       = aws_identitystore_group.administrators_sso_group.group_id
     principal_type     = "GROUP"
-    target_id          = aws_organizations_account.defn_o.id
+    target_id          = aws_organizations_account.chamber_o.id
     target_type        = "AWS_ACCOUNT"
   }
-  resource "aws_organizations_account" "defn_p" {
+  resource "aws_organizations_account" "chamber_p" {
     email = "defn-p@defn.us"
-    name  = "defn-p"
+    name  = "chamber-p"
     tags = {
       ManagedBy = "Terraform"
     }
   }
 
-  resource "aws_ssoadmin_account_assignment" "defn_p_admin_sso_account_assignment" {
+  resource "aws_ssoadmin_account_assignment" "chamber_p_admin_sso_account_assignment" {
     instance_arn       = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn
     permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
     principal_id       = aws_identitystore_group.administrators_sso_group.group_id
     principal_type     = "GROUP"
-    target_id          = aws_organizations_account.defn_p.id
+    target_id          = aws_organizations_account.chamber_p.id
     target_type        = "AWS_ACCOUNT"
   }
-  resource "aws_organizations_account" "defn_dev" {
+  resource "aws_organizations_account" "chamber_q" {
     email = "aws-dev@defn.us"
-    name  = "defn-dev"
+    name  = "chamber-q"
     tags = {
       ManagedBy = "Terraform"
     }
   }
 
-  resource "aws_ssoadmin_account_assignment" "defn_dev_admin_sso_account_assignment" {
+  resource "aws_ssoadmin_account_assignment" "chamber_q_admin_sso_account_assignment" {
     instance_arn       = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn
     permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
     principal_id       = aws_identitystore_group.administrators_sso_group.group_id
     principal_type     = "GROUP"
-    target_id          = aws_organizations_account.defn_dev.id
+    target_id          = aws_organizations_account.chamber_q.id
     target_type        = "AWS_ACCOUNT"
   }
-  resource "aws_organizations_account" "defn_r" {
+  resource "aws_organizations_account" "chamber_r" {
     email = "defn-r@imma.io"
-    name  = "defn-r"
+    name  = "chamber-r"
     tags = {
       ManagedBy = "Terraform"
     }
   }
 
-  resource "aws_ssoadmin_account_assignment" "defn_r_admin_sso_account_assignment" {
+  resource "aws_ssoadmin_account_assignment" "chamber_r_admin_sso_account_assignment" {
     instance_arn       = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn
     permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
     principal_id       = aws_identitystore_group.administrators_sso_group.group_id
     principal_type     = "GROUP"
-    target_id          = aws_organizations_account.defn_r.id
+    target_id          = aws_organizations_account.chamber_r.id
     target_type        = "AWS_ACCOUNT"
   }
-  resource "aws_organizations_account" "defn_s" {
+  resource "aws_organizations_account" "chamber_s" {
     email = "defn-s@imma.io"
-    name  = "defn-s"
+    name  = "chamber-s"
     tags = {
       ManagedBy = "Terraform"
     }
   }
 
-  resource "aws_ssoadmin_account_assignment" "defn_s_admin_sso_account_assignment" {
+  resource "aws_ssoadmin_account_assignment" "chamber_s_admin_sso_account_assignment" {
     instance_arn       = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn
     permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
     principal_id       = aws_identitystore_group.administrators_sso_group.group_id
     principal_type     = "GROUP"
-    target_id          = aws_organizations_account.defn_s.id
+    target_id          = aws_organizations_account.chamber_s.id
     target_type        = "AWS_ACCOUNT"
   }
-  resource "aws_organizations_account" "defn_t" {
+  resource "aws_organizations_account" "chamber_t" {
     email = "defn-t@imma.io"
-    name  = "defn-t"
+    name  = "chamber-t"
     tags = {
       ManagedBy = "Terraform"
     }
   }
 
-  resource "aws_ssoadmin_account_assignment" "defn_t_admin_sso_account_assignment" {
+  resource "aws_ssoadmin_account_assignment" "chamber_t_admin_sso_account_assignment" {
     instance_arn       = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn
     permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
     principal_id       = aws_identitystore_group.administrators_sso_group.group_id
     principal_type     = "GROUP"
-    target_id          = aws_organizations_account.defn_t.id
+    target_id          = aws_organizations_account.chamber_t.id
     target_type        = "AWS_ACCOUNT"
   }
-  resource "aws_organizations_account" "defn_qa" {
+  resource "aws_organizations_account" "chamber_u" {
     email = "aws-qa@defn.us"
-    name  = "defn-qa"
+    name  = "chamber-u"
     tags = {
       ManagedBy = "Terraform"
     }
   }
 
-  resource "aws_ssoadmin_account_assignment" "defn_qa_admin_sso_account_assignment" {
+  resource "aws_ssoadmin_account_assignment" "chamber_u_admin_sso_account_assignment" {
     instance_arn       = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn
     permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
     principal_id       = aws_identitystore_group.administrators_sso_group.group_id
     principal_type     = "GROUP"
-    target_id          = aws_organizations_account.defn_qa.id
+    target_id          = aws_organizations_account.chamber_u.id
     target_type        = "AWS_ACCOUNT"
   }
-  resource "aws_organizations_account" "defn_v" {
+  resource "aws_organizations_account" "chamber_v" {
     email = "defn-v@imma.io"
-    name  = "defn-v"
+    name  = "chamber-v"
     tags = {
       ManagedBy = "Terraform"
     }
   }
 
-  resource "aws_ssoadmin_account_assignment" "defn_v_admin_sso_account_assignment" {
+  resource "aws_ssoadmin_account_assignment" "chamber_v_admin_sso_account_assignment" {
     instance_arn       = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn
     permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
     principal_id       = aws_identitystore_group.administrators_sso_group.group_id
     principal_type     = "GROUP"
-    target_id          = aws_organizations_account.defn_v.id
+    target_id          = aws_organizations_account.chamber_v.id
     target_type        = "AWS_ACCOUNT"
   }
-  resource "aws_organizations_account" "defn_w" {
+  resource "aws_organizations_account" "chamber_w" {
     email = "defn-w@imma.io"
-    name  = "defn-w"
+    name  = "chamber-w"
     tags = {
       ManagedBy = "Terraform"
     }
   }
 
-  resource "aws_ssoadmin_account_assignment" "defn_w_admin_sso_account_assignment" {
+  resource "aws_ssoadmin_account_assignment" "chamber_w_admin_sso_account_assignment" {
     instance_arn       = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn
     permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
     principal_id       = aws_identitystore_group.administrators_sso_group.group_id
     principal_type     = "GROUP"
-    target_id          = aws_organizations_account.defn_w.id
+    target_id          = aws_organizations_account.chamber_w.id
     target_type        = "AWS_ACCOUNT"
   }
-  resource "aws_organizations_account" "defn_stage" {
+  resource "aws_organizations_account" "chamber_x" {
     email = "aws-stage@defn.us"
-    name  = "defn-stage"
+    name  = "chamber-x"
     tags = {
       ManagedBy = "Terraform"
     }
   }
 
-  resource "aws_ssoadmin_account_assignment" "defn_stage_admin_sso_account_assignment" {
+  resource "aws_ssoadmin_account_assignment" "chamber_x_admin_sso_account_assignment" {
     instance_arn       = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn
     permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
     principal_id       = aws_identitystore_group.administrators_sso_group.group_id
     principal_type     = "GROUP"
-    target_id          = aws_organizations_account.defn_stage.id
+    target_id          = aws_organizations_account.chamber_x.id
     target_type        = "AWS_ACCOUNT"
   }
-  resource "aws_organizations_account" "defn_prod" {
+  resource "aws_organizations_account" "chamber_y" {
     email = "aws-prod@defn.us"
-    name  = "defn-prod"
+    name  = "chamber-y"
     tags = {
       ManagedBy = "Terraform"
     }
   }
 
-  resource "aws_ssoadmin_account_assignment" "defn_prod_admin_sso_account_assignment" {
+  resource "aws_ssoadmin_account_assignment" "chamber_y_admin_sso_account_assignment" {
     instance_arn       = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn
     permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
     principal_id       = aws_identitystore_group.administrators_sso_group.group_id
     principal_type     = "GROUP"
-    target_id          = aws_organizations_account.defn_prod.id
+    target_id          = aws_organizations_account.chamber_y.id
     target_type        = "AWS_ACCOUNT"
   }
-  resource "aws_organizations_account" "defn_hub" {
+  resource "aws_organizations_account" "chamber_z" {
     email = "aws-hub@defn.us"
-    name  = "defn-hub"
+    name  = "chamber-z"
     tags = {
       ManagedBy = "Terraform"
     }
   }
 
-  resource "aws_ssoadmin_account_assignment" "defn_hub_admin_sso_account_assignment" {
+  resource "aws_ssoadmin_account_assignment" "chamber_z_admin_sso_account_assignment" {
     instance_arn       = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn
     permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
     principal_id       = aws_identitystore_group.administrators_sso_group.group_id
     principal_type     = "GROUP"
-    target_id          = aws_organizations_account.defn_hub.id
+    target_id          = aws_organizations_account.chamber_z.id
     target_type        = "AWS_ACCOUNT"
   }
   moved {
     from = aws_organizations_account.chamber-org
-    to   = aws_organizations_account.chamber
+    to   = aws_organizations_account.chamber_org
   }
   moved {
     from = aws_organizations_account.chamber-1
-    to   = aws_organizations_account.defn_cd
+    to   = aws_organizations_account.chamber_1
   }
   moved {
     from = aws_organizations_account.chamber-2
-    to   = aws_organizations_account.defn_ci
+    to   = aws_organizations_account.chamber_2
   }
   moved {
     from = aws_organizations_account.chamber-3
-    to   = aws_organizations_account.defn_security
+    to   = aws_organizations_account.chamber_3
   }
   moved {
     from = aws_organizations_account.chamber-4
@@ -733,115 +733,119 @@ infra_org_terraform: |-
   }
   moved {
     from = aws_organizations_account.chamber-a
-    to   = aws_organizations_account.defn_a
+    to   = aws_organizations_account.chamber_a
   }
   moved {
     from = aws_organizations_account.chamber-b
-    to   = aws_organizations_account.defn_b
+    to   = aws_organizations_account.chamber_b
   }
   moved {
     from = aws_organizations_account.chamber-c
-    to   = aws_organizations_account.defn_c
+    to   = aws_organizations_account.chamber_c
   }
   moved {
     from = aws_organizations_account.chamber-d
-    to   = aws_organizations_account.defn_d
+    to   = aws_organizations_account.chamber_d
   }
   moved {
     from = aws_organizations_account.chamber-e
-    to   = aws_organizations_account.defn_e
+    to   = aws_organizations_account.chamber_e
   }
   moved {
     from = aws_organizations_account.chamber-f
-    to   = aws_organizations_account.defn_f
+    to   = aws_organizations_account.chamber_f
   }
   moved {
     from = aws_organizations_account.chamber-g
-    to   = aws_organizations_account.defn_g
+    to   = aws_organizations_account.chamber_g
   }
   moved {
     from = aws_organizations_account.chamber-h
-    to   = aws_organizations_account.defn_h
+    to   = aws_organizations_account.chamber_h
   }
   moved {
     from = aws_organizations_account.chamber-i
-    to   = aws_organizations_account.defn_i
+    to   = aws_organizations_account.chamber_i
   }
   moved {
     from = aws_organizations_account.chamber-j
-    to   = aws_organizations_account.defn_j
+    to   = aws_organizations_account.chamber_j
   }
   moved {
     from = aws_organizations_account.chamber-l
-    to   = aws_organizations_account.defn_l
+    to   = aws_organizations_account.chamber_l
   }
   moved {
     from = aws_organizations_account.chamber-m
-    to   = aws_organizations_account.defn_m
+    to   = aws_organizations_account.chamber_m
   }
   moved {
     from = aws_organizations_account.chamber-n
-    to   = aws_organizations_account.defn_n
+    to   = aws_organizations_account.chamber_n
   }
   moved {
     from = aws_organizations_account.chamber-o
-    to   = aws_organizations_account.defn_o
+    to   = aws_organizations_account.chamber_o
   }
   moved {
     from = aws_organizations_account.chamber-p
-    to   = aws_organizations_account.defn_p
+    to   = aws_organizations_account.chamber_p
   }
   moved {
     from = aws_organizations_account.chamber-q
-    to   = aws_organizations_account.defn_dev
+    to   = aws_organizations_account.chamber_q
   }
   moved {
     from = aws_organizations_account.chamber-r
-    to   = aws_organizations_account.defn_r
+    to   = aws_organizations_account.chamber_r
   }
   moved {
     from = aws_organizations_account.chamber-s
-    to   = aws_organizations_account.defn_s
+    to   = aws_organizations_account.chamber_s
   }
   moved {
     from = aws_organizations_account.chamber-t
-    to   = aws_organizations_account.defn_t
+    to   = aws_organizations_account.chamber_t
   }
   moved {
     from = aws_organizations_account.chamber-u
-    to   = aws_organizations_account.defn_qa
+    to   = aws_organizations_account.chamber_u
   }
   moved {
     from = aws_organizations_account.chamber-v
-    to   = aws_organizations_account.defn_v
+    to   = aws_organizations_account.chamber_v
   }
   moved {
     from = aws_organizations_account.chamber-w
-    to   = aws_organizations_account.defn_w
+    to   = aws_organizations_account.chamber_w
   }
   moved {
     from = aws_organizations_account.chamber-x
-    to   = aws_organizations_account.defn_stage
+    to   = aws_organizations_account.chamber_x
   }
   moved {
     from = aws_organizations_account.chamber-y
-    to   = aws_organizations_account.defn_prod
+    to   = aws_organizations_account.chamber_y
   }
   moved {
     from = aws_organizations_account.chamber-z
-    to   = aws_organizations_account.defn_hub
+    to   = aws_organizations_account.chamber_z
   }
   moved {
-    from = aws_ssoadmin_account_assignment.defn-cd_admin_sso_account_assignment
-    to   = aws_ssoadmin_account_assignment.defn_cd_admin_sso_account_assignment
+    from = aws_ssoadmin_account_assignment.chamber-org_admin_sso_account_assignment
+    to   = aws_ssoadmin_account_assignment.chamber_org_admin_sso_account_assignment
   }
   moved {
-    from = aws_ssoadmin_account_assignment.defn-ci_admin_sso_account_assignment
-    to   = aws_ssoadmin_account_assignment.defn_ci_admin_sso_account_assignment
+    from = aws_ssoadmin_account_assignment.chamber-1_admin_sso_account_assignment
+    to   = aws_ssoadmin_account_assignment.chamber_1_admin_sso_account_assignment
   }
   moved {
-    from = aws_ssoadmin_account_assignment.defn-security_admin_sso_account_assignment
-    to   = aws_ssoadmin_account_assignment.defn_security_admin_sso_account_assignment
+    from = aws_ssoadmin_account_assignment.chamber-2_admin_sso_account_assignment
+    to   = aws_ssoadmin_account_assignment.chamber_2_admin_sso_account_assignment
+  }
+  moved {
+    from = aws_ssoadmin_account_assignment.chamber-3_admin_sso_account_assignment
+    to   = aws_ssoadmin_account_assignment.chamber_3_admin_sso_account_assignment
   }
   moved {
     from = aws_ssoadmin_account_assignment.chamber-4_admin_sso_account_assignment
@@ -868,104 +872,104 @@ infra_org_terraform: |-
     to   = aws_ssoadmin_account_assignment.chamber_9_admin_sso_account_assignment
   }
   moved {
-    from = aws_ssoadmin_account_assignment.defn-a_admin_sso_account_assignment
-    to   = aws_ssoadmin_account_assignment.defn_a_admin_sso_account_assignment
+    from = aws_ssoadmin_account_assignment.chamber-a_admin_sso_account_assignment
+    to   = aws_ssoadmin_account_assignment.chamber_a_admin_sso_account_assignment
   }
   moved {
-    from = aws_ssoadmin_account_assignment.defn-b_admin_sso_account_assignment
-    to   = aws_ssoadmin_account_assignment.defn_b_admin_sso_account_assignment
+    from = aws_ssoadmin_account_assignment.chamber-b_admin_sso_account_assignment
+    to   = aws_ssoadmin_account_assignment.chamber_b_admin_sso_account_assignment
   }
   moved {
-    from = aws_ssoadmin_account_assignment.defn-c_admin_sso_account_assignment
-    to   = aws_ssoadmin_account_assignment.defn_c_admin_sso_account_assignment
+    from = aws_ssoadmin_account_assignment.chamber-c_admin_sso_account_assignment
+    to   = aws_ssoadmin_account_assignment.chamber_c_admin_sso_account_assignment
   }
   moved {
-    from = aws_ssoadmin_account_assignment.defn-d_admin_sso_account_assignment
-    to   = aws_ssoadmin_account_assignment.defn_d_admin_sso_account_assignment
+    from = aws_ssoadmin_account_assignment.chamber-d_admin_sso_account_assignment
+    to   = aws_ssoadmin_account_assignment.chamber_d_admin_sso_account_assignment
   }
   moved {
-    from = aws_ssoadmin_account_assignment.defn-e_admin_sso_account_assignment
-    to   = aws_ssoadmin_account_assignment.defn_e_admin_sso_account_assignment
+    from = aws_ssoadmin_account_assignment.chamber-e_admin_sso_account_assignment
+    to   = aws_ssoadmin_account_assignment.chamber_e_admin_sso_account_assignment
   }
   moved {
-    from = aws_ssoadmin_account_assignment.defn-f_admin_sso_account_assignment
-    to   = aws_ssoadmin_account_assignment.defn_f_admin_sso_account_assignment
+    from = aws_ssoadmin_account_assignment.chamber-f_admin_sso_account_assignment
+    to   = aws_ssoadmin_account_assignment.chamber_f_admin_sso_account_assignment
   }
   moved {
-    from = aws_ssoadmin_account_assignment.defn-g_admin_sso_account_assignment
-    to   = aws_ssoadmin_account_assignment.defn_g_admin_sso_account_assignment
+    from = aws_ssoadmin_account_assignment.chamber-g_admin_sso_account_assignment
+    to   = aws_ssoadmin_account_assignment.chamber_g_admin_sso_account_assignment
   }
   moved {
-    from = aws_ssoadmin_account_assignment.defn-h_admin_sso_account_assignment
-    to   = aws_ssoadmin_account_assignment.defn_h_admin_sso_account_assignment
+    from = aws_ssoadmin_account_assignment.chamber-h_admin_sso_account_assignment
+    to   = aws_ssoadmin_account_assignment.chamber_h_admin_sso_account_assignment
   }
   moved {
-    from = aws_ssoadmin_account_assignment.defn-i_admin_sso_account_assignment
-    to   = aws_ssoadmin_account_assignment.defn_i_admin_sso_account_assignment
+    from = aws_ssoadmin_account_assignment.chamber-i_admin_sso_account_assignment
+    to   = aws_ssoadmin_account_assignment.chamber_i_admin_sso_account_assignment
   }
   moved {
-    from = aws_ssoadmin_account_assignment.defn-j_admin_sso_account_assignment
-    to   = aws_ssoadmin_account_assignment.defn_j_admin_sso_account_assignment
+    from = aws_ssoadmin_account_assignment.chamber-j_admin_sso_account_assignment
+    to   = aws_ssoadmin_account_assignment.chamber_j_admin_sso_account_assignment
   }
   moved {
-    from = aws_ssoadmin_account_assignment.defn-l_admin_sso_account_assignment
-    to   = aws_ssoadmin_account_assignment.defn_l_admin_sso_account_assignment
+    from = aws_ssoadmin_account_assignment.chamber-l_admin_sso_account_assignment
+    to   = aws_ssoadmin_account_assignment.chamber_l_admin_sso_account_assignment
   }
   moved {
-    from = aws_ssoadmin_account_assignment.defn-m_admin_sso_account_assignment
-    to   = aws_ssoadmin_account_assignment.defn_m_admin_sso_account_assignment
+    from = aws_ssoadmin_account_assignment.chamber-m_admin_sso_account_assignment
+    to   = aws_ssoadmin_account_assignment.chamber_m_admin_sso_account_assignment
   }
   moved {
-    from = aws_ssoadmin_account_assignment.defn-n_admin_sso_account_assignment
-    to   = aws_ssoadmin_account_assignment.defn_n_admin_sso_account_assignment
+    from = aws_ssoadmin_account_assignment.chamber-n_admin_sso_account_assignment
+    to   = aws_ssoadmin_account_assignment.chamber_n_admin_sso_account_assignment
   }
   moved {
-    from = aws_ssoadmin_account_assignment.defn-o_admin_sso_account_assignment
-    to   = aws_ssoadmin_account_assignment.defn_o_admin_sso_account_assignment
+    from = aws_ssoadmin_account_assignment.chamber-o_admin_sso_account_assignment
+    to   = aws_ssoadmin_account_assignment.chamber_o_admin_sso_account_assignment
   }
   moved {
-    from = aws_ssoadmin_account_assignment.defn-p_admin_sso_account_assignment
-    to   = aws_ssoadmin_account_assignment.defn_p_admin_sso_account_assignment
+    from = aws_ssoadmin_account_assignment.chamber-p_admin_sso_account_assignment
+    to   = aws_ssoadmin_account_assignment.chamber_p_admin_sso_account_assignment
   }
   moved {
-    from = aws_ssoadmin_account_assignment.defn-dev_admin_sso_account_assignment
-    to   = aws_ssoadmin_account_assignment.defn_dev_admin_sso_account_assignment
+    from = aws_ssoadmin_account_assignment.chamber-q_admin_sso_account_assignment
+    to   = aws_ssoadmin_account_assignment.chamber_q_admin_sso_account_assignment
   }
   moved {
-    from = aws_ssoadmin_account_assignment.defn-r_admin_sso_account_assignment
-    to   = aws_ssoadmin_account_assignment.defn_r_admin_sso_account_assignment
+    from = aws_ssoadmin_account_assignment.chamber-r_admin_sso_account_assignment
+    to   = aws_ssoadmin_account_assignment.chamber_r_admin_sso_account_assignment
   }
   moved {
-    from = aws_ssoadmin_account_assignment.defn-s_admin_sso_account_assignment
-    to   = aws_ssoadmin_account_assignment.defn_s_admin_sso_account_assignment
+    from = aws_ssoadmin_account_assignment.chamber-s_admin_sso_account_assignment
+    to   = aws_ssoadmin_account_assignment.chamber_s_admin_sso_account_assignment
   }
   moved {
-    from = aws_ssoadmin_account_assignment.defn-t_admin_sso_account_assignment
-    to   = aws_ssoadmin_account_assignment.defn_t_admin_sso_account_assignment
+    from = aws_ssoadmin_account_assignment.chamber-t_admin_sso_account_assignment
+    to   = aws_ssoadmin_account_assignment.chamber_t_admin_sso_account_assignment
   }
   moved {
-    from = aws_ssoadmin_account_assignment.defn-qa_admin_sso_account_assignment
-    to   = aws_ssoadmin_account_assignment.defn_qa_admin_sso_account_assignment
+    from = aws_ssoadmin_account_assignment.chamber-u_admin_sso_account_assignment
+    to   = aws_ssoadmin_account_assignment.chamber_u_admin_sso_account_assignment
   }
   moved {
-    from = aws_ssoadmin_account_assignment.defn-v_admin_sso_account_assignment
-    to   = aws_ssoadmin_account_assignment.defn_v_admin_sso_account_assignment
+    from = aws_ssoadmin_account_assignment.chamber-v_admin_sso_account_assignment
+    to   = aws_ssoadmin_account_assignment.chamber_v_admin_sso_account_assignment
   }
   moved {
-    from = aws_ssoadmin_account_assignment.defn-w_admin_sso_account_assignment
-    to   = aws_ssoadmin_account_assignment.defn_w_admin_sso_account_assignment
+    from = aws_ssoadmin_account_assignment.chamber-w_admin_sso_account_assignment
+    to   = aws_ssoadmin_account_assignment.chamber_w_admin_sso_account_assignment
   }
   moved {
-    from = aws_ssoadmin_account_assignment.defn-stage_admin_sso_account_assignment
-    to   = aws_ssoadmin_account_assignment.defn_stage_admin_sso_account_assignment
+    from = aws_ssoadmin_account_assignment.chamber-x_admin_sso_account_assignment
+    to   = aws_ssoadmin_account_assignment.chamber_x_admin_sso_account_assignment
   }
   moved {
-    from = aws_ssoadmin_account_assignment.defn-prod_admin_sso_account_assignment
-    to   = aws_ssoadmin_account_assignment.defn_prod_admin_sso_account_assignment
+    from = aws_ssoadmin_account_assignment.chamber-y_admin_sso_account_assignment
+    to   = aws_ssoadmin_account_assignment.chamber_y_admin_sso_account_assignment
   }
   moved {
-    from = aws_ssoadmin_account_assignment.defn-hub_admin_sso_account_assignment
-    to   = aws_ssoadmin_account_assignment.defn_hub_admin_sso_account_assignment
+    from = aws_ssoadmin_account_assignment.chamber-z_admin_sso_account_assignment
+    to   = aws_ssoadmin_account_assignment.chamber_z_admin_sso_account_assignment
   }
 infra_acc_readme: |-
   ## Account-specific Terraform: chamber-org

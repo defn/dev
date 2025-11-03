@@ -2,7 +2,7 @@
 id: "415618116579"
 account: ops
 org: circus
-name: ops
+name: circus-ops
 email: aws-circus-ops@defn.sh
 sso_role: Administrator
 aws_config: |-

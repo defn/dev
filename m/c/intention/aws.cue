@@ -26,10 +26,7 @@ aws: "org"~lookup: [string]~(ORG,_): close({
 		id:      =~"^[0-9]+$"
 		account: ACCOUNT
 		org:     ORG
-		name:    string | *ACCOUNT
-		if ACCOUNT == "org" {
-			name: ORG
-		}
+		name:    string | *"\(ORG)-\(ACCOUNT)"
 		sso_role: string | *"Administrator"
 
 		mise_config: """

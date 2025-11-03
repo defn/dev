@@ -66,25 +66,25 @@ resource "aws_identitystore_group" "administrators_sso_group" {
   display_name      = "Administrators"
   identity_store_id = element(local.sso_instance_isid, 0)
 }
-resource "aws_organizations_account" "gyre" {
+resource "aws_organizations_account" "gyre_org" {
   email = "aws-gyre@defn.us"
-  name  = "gyre"
+  name  = "gyre-org"
   tags = {
     ManagedBy = "Terraform"
   }
 }
 
-resource "aws_ssoadmin_account_assignment" "gyre_admin_sso_account_assignment" {
+resource "aws_ssoadmin_account_assignment" "gyre_org_admin_sso_account_assignment" {
   instance_arn       = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn
   permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
   principal_id       = aws_identitystore_group.administrators_sso_group.group_id
   principal_type     = "GROUP"
-  target_id          = aws_organizations_account.gyre.id
+  target_id          = aws_organizations_account.gyre_org.id
   target_type        = "AWS_ACCOUNT"
 }
-resource "aws_organizations_account" "ops" {
+resource "aws_organizations_account" "gyre_ops" {
   email = "aws-gyre+ops@defn.us"
-  name  = "ops"
+  name  = "gyre-ops"
 		  iam_user_access_to_billing = "ALLOW"
 		  role_name                  = "OrganizationAccountAccessRole"
   tags = {
@@ -92,19 +92,27 @@ resource "aws_organizations_account" "ops" {
   }
 }
 
-resource "aws_ssoadmin_account_assignment" "ops_admin_sso_account_assignment" {
+resource "aws_ssoadmin_account_assignment" "gyre_ops_admin_sso_account_assignment" {
   instance_arn       = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn
   permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
   principal_id       = aws_identitystore_group.administrators_sso_group.group_id
   principal_type     = "GROUP"
-  target_id          = aws_organizations_account.ops.id
+  target_id          = aws_organizations_account.gyre_ops.id
   target_type        = "AWS_ACCOUNT"
 }
 moved {
   from = aws_organizations_account.gyre-org
-  to   = aws_organizations_account.gyre
+  to   = aws_organizations_account.gyre_org
 }
 moved {
   from = aws_organizations_account.gyre-ops
-  to   = aws_organizations_account.ops
+  to   = aws_organizations_account.gyre_ops
+}
+moved {
+  from = aws_ssoadmin_account_assignment.gyre-org_admin_sso_account_assignment
+  to   = aws_ssoadmin_account_assignment.gyre_org_admin_sso_account_assignment
+}
+moved {
+  from = aws_ssoadmin_account_assignment.gyre-ops_admin_sso_account_assignment
+  to   = aws_ssoadmin_account_assignment.gyre_ops_admin_sso_account_assignment
 }

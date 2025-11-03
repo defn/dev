@@ -2,8 +2,8 @@
 id: "640792184178"
 account: ged
 org: immanent
-email: immanent-ged@defn.us
 name: immanent-ged
+email: immanent-ged@defn.us
 sso_role: Administrator
 aws_config: |-
   # auto-generated: aws.cue aws_config_account

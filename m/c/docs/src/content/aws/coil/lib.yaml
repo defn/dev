@@ -2,7 +2,7 @@
 id: "160764896647"
 account: lib
 org: coil
-name: lib
+name: coil-lib
 email: aws-coil+lib@defn.us
 sso_role: Administrator
 aws_config: |-

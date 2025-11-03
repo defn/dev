@@ -66,23 +66,27 @@ resource "aws_identitystore_group" "administrators_sso_group" {
   display_name      = "Administrators"
   identity_store_id = element(local.sso_instance_isid, 0)
 }
-resource "aws_organizations_account" "defn" {
+resource "aws_organizations_account" "defn_org" {
   email = "iam+bootstrap@defn.sh"
-  name  = "defn"
+  name  = "defn-org"
   tags = {
     ManagedBy = "Terraform"
   }
 }
 
-resource "aws_ssoadmin_account_assignment" "defn_admin_sso_account_assignment" {
+resource "aws_ssoadmin_account_assignment" "defn_org_admin_sso_account_assignment" {
   instance_arn       = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.instance_arn
   permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
   principal_id       = aws_identitystore_group.administrators_sso_group.group_id
   principal_type     = "GROUP"
-  target_id          = aws_organizations_account.defn.id
+  target_id          = aws_organizations_account.defn_org.id
   target_type        = "AWS_ACCOUNT"
 }
 moved {
   from = aws_organizations_account.defn-org
-  to   = aws_organizations_account.defn
+  to   = aws_organizations_account.defn_org
+}
+moved {
+  from = aws_ssoadmin_account_assignment.defn-org_admin_sso_account_assignment
+  to   = aws_ssoadmin_account_assignment.defn_org_admin_sso_account_assignment
 }

@@ -2,8 +2,8 @@
 id: "844609041254"
 account: log
 org: fogg
+name: fogg-log
 email: fogg-circus@defn.sh
-name: circus
 sso_role: Administrator
 aws_config: |-
   # auto-generated: aws.cue aws_config_account

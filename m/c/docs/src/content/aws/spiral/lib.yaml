@@ -2,7 +2,7 @@
 id: "073874947996"
 account: lib
 org: spiral
-name: lib
+name: spiral-lib
 email: aws-spiral+lib@defn.us
 sso_role: Administrator
 aws_config: |-

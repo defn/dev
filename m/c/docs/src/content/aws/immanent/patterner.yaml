@@ -2,8 +2,8 @@
 id: "143220204648"
 account: patterner
 org: immanent
-email: immanent-patterner@defn.us
 name: immanent-patterner
+email: immanent-patterner@defn.us
 sso_role: Administrator
 aws_config: |-
   # auto-generated: aws.cue aws_config_account

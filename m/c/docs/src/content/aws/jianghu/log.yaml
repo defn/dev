@@ -2,8 +2,8 @@
 id: "298431841138"
 account: log
 org: jianghu
+name: jianghu-log
 email: klamath@defn.us
-name: klamath
 sso_role: Administrator
 aws_config: |-
   # auto-generated: aws.cue aws_config_account
