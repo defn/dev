@@ -1,3 +1,4 @@
+# auto-generated: aws.cue infra_org_terraform
 terraform {
   required_providers {
     aws = {
@@ -6,24 +7,24 @@ terraform {
     }
   }
   backend "s3" {
+    profile        = "defn-org"
     bucket         = "dfn-defn-terraform-state"
     dynamodb_table = "dfn-defn-terraform-state-lock"
-    encrypt        = true
     key            = "stacks/org-gyre/terraform.tfstate"
-    profile        = "defn-org"
     region         = "us-east-1"
+    encrypt        = true
   }
 
-}
-
-locals {
-  sso_instance_arn  = data.aws_ssoadmin_instances.sso_instance.arns
-  sso_instance_isid = data.aws_ssoadmin_instances.sso_instance.identity_store_ids
 }
 
 provider "aws" {
   profile = "gyre-org"
   region  = "us-east-2"
+}
+
+locals {
+  sso_instance_arn  = data.aws_ssoadmin_instances.sso_instance.arns
+  sso_instance_isid = data.aws_ssoadmin_instances.sso_instance.identity_store_ids
 }
 
 resource "aws_organizations_organization" "organization" {
@@ -83,10 +84,10 @@ resource "aws_ssoadmin_account_assignment" "gyre_org_admin_sso_account_assignmen
   target_type        = "AWS_ACCOUNT"
 }
 resource "aws_organizations_account" "gyre_ops" {
-  email = "aws-gyre+ops@defn.us"
-  name  = "gyre-ops"
-		  iam_user_access_to_billing = "ALLOW"
-		  role_name                  = "OrganizationAccountAccessRole"
+  email                      = "aws-gyre+ops@defn.us"
+  name                       = "gyre-ops"
+  iam_user_access_to_billing = "ALLOW"
+  role_name                  = "OrganizationAccountAccessRole"
   tags = {
     ManagedBy = "Terraform"
   }

@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+function main {
+	if [[ $# == 0 ]]; then
+		set -- $(ls -d */ | shuf)
+	fi
+
+	for a in */; do echo "$a $(grep No.changes $a/.plan.txt)"; done | grep -v 'No changes' || true
+}
+
+main "$@"

@@ -1,3 +1,4 @@
+# auto-generated: aws.cue infra_acc_terraform
 terraform {
   required_providers {
     aws = {
@@ -13,13 +14,12 @@ terraform {
     profile        = "defn-org"
     region         = "us-east-1"
   }
-
 }
 
 provider "aws" {
   profile = "immanent-roke"
-  region  = "us-east-1"
   alias   = "immanent-roke"
+  region  = "us-east-1"
 }
 
 module "immanent-roke" {

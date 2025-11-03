@@ -1,3 +1,4 @@
+# auto-generated: aws.cue infra_org_terraform
 terraform {
   required_providers {
     aws = {
@@ -6,24 +7,24 @@ terraform {
     }
   }
   backend "s3" {
+    profile        = "defn-org"
     bucket         = "dfn-defn-terraform-state"
     dynamodb_table = "dfn-defn-terraform-state-lock"
-    encrypt        = true
     key            = "stacks/org-spiral/terraform.tfstate"
-    profile        = "defn-org"
     region         = "us-east-1"
+    encrypt        = true
   }
 
-}
-
-locals {
-  sso_instance_arn  = data.aws_ssoadmin_instances.sso_instance.arns
-  sso_instance_isid = data.aws_ssoadmin_instances.sso_instance.identity_store_ids
 }
 
 provider "aws" {
   profile = "spiral-org"
   region  = "us-west-2"
+}
+
+locals {
+  sso_instance_arn  = data.aws_ssoadmin_instances.sso_instance.arns
+  sso_instance_isid = data.aws_ssoadmin_instances.sso_instance.identity_store_ids
 }
 
 resource "aws_organizations_organization" "organization" {
@@ -83,10 +84,10 @@ resource "aws_ssoadmin_account_assignment" "spiral_org_admin_sso_account_assignm
   target_type        = "AWS_ACCOUNT"
 }
 resource "aws_organizations_account" "spiral_ci" {
-  email = "aws-spiral+pub@defn.us"
-  name  = "spiral-ci"
-		  iam_user_access_to_billing = "ALLOW"
-		  role_name                  = "OrganizationAccountAccessRole"
+  email                      = "aws-spiral+pub@defn.us"
+  name                       = "spiral-ci"
+  iam_user_access_to_billing = "ALLOW"
+  role_name                  = "OrganizationAccountAccessRole"
   tags = {
     ManagedBy = "Terraform"
   }
@@ -101,10 +102,10 @@ resource "aws_ssoadmin_account_assignment" "spiral_ci_admin_sso_account_assignme
   target_type        = "AWS_ACCOUNT"
 }
 resource "aws_organizations_account" "spiral_dev" {
-  email = "aws-spiral+dev@defn.us"
-  name  = "spiral-dev"
-		  iam_user_access_to_billing = "ALLOW"
-		  role_name                  = "OrganizationAccountAccessRole"
+  email                      = "aws-spiral+dev@defn.us"
+  name                       = "spiral-dev"
+  iam_user_access_to_billing = "ALLOW"
+  role_name                  = "OrganizationAccountAccessRole"
   tags = {
     ManagedBy = "Terraform"
   }
@@ -119,10 +120,10 @@ resource "aws_ssoadmin_account_assignment" "spiral_dev_admin_sso_account_assignm
   target_type        = "AWS_ACCOUNT"
 }
 resource "aws_organizations_account" "spiral_hub" {
-  email = "aws-spiral+hub@defn.us"
-  name  = "spiral-hub"
-		  iam_user_access_to_billing = "ALLOW"
-		  role_name                  = "OrganizationAccountAccessRole"
+  email                      = "aws-spiral+hub@defn.us"
+  name                       = "spiral-hub"
+  iam_user_access_to_billing = "ALLOW"
+  role_name                  = "OrganizationAccountAccessRole"
   tags = {
     ManagedBy = "Terraform"
   }
@@ -137,10 +138,10 @@ resource "aws_ssoadmin_account_assignment" "spiral_hub_admin_sso_account_assignm
   target_type        = "AWS_ACCOUNT"
 }
 resource "aws_organizations_account" "spiral_lib" {
-  email = "aws-spiral+lib@defn.us"
-  name  = "spiral-lib"
-		  iam_user_access_to_billing = "ALLOW"
-		  role_name                  = "OrganizationAccountAccessRole"
+  email                      = "aws-spiral+lib@defn.us"
+  name                       = "spiral-lib"
+  iam_user_access_to_billing = "ALLOW"
+  role_name                  = "OrganizationAccountAccessRole"
   tags = {
     ManagedBy = "Terraform"
   }
@@ -155,10 +156,10 @@ resource "aws_ssoadmin_account_assignment" "spiral_lib_admin_sso_account_assignm
   target_type        = "AWS_ACCOUNT"
 }
 resource "aws_organizations_account" "spiral_log" {
-  email = "aws-spiral+log@defn.us"
-  name  = "spiral-log"
-		  iam_user_access_to_billing = "ALLOW"
-		  role_name                  = "OrganizationAccountAccessRole"
+  email                      = "aws-spiral+log@defn.us"
+  name                       = "spiral-log"
+  iam_user_access_to_billing = "ALLOW"
+  role_name                  = "OrganizationAccountAccessRole"
   tags = {
     ManagedBy = "Terraform"
   }
@@ -173,10 +174,10 @@ resource "aws_ssoadmin_account_assignment" "spiral_log_admin_sso_account_assignm
   target_type        = "AWS_ACCOUNT"
 }
 resource "aws_organizations_account" "spiral_net" {
-  email = "aws-spiral+net@defn.us"
-  name  = "spiral-net"
-		  iam_user_access_to_billing = "ALLOW"
-		  role_name                  = "OrganizationAccountAccessRole"
+  email                      = "aws-spiral+net@defn.us"
+  name                       = "spiral-net"
+  iam_user_access_to_billing = "ALLOW"
+  role_name                  = "OrganizationAccountAccessRole"
   tags = {
     ManagedBy = "Terraform"
   }
@@ -191,10 +192,10 @@ resource "aws_ssoadmin_account_assignment" "spiral_net_admin_sso_account_assignm
   target_type        = "AWS_ACCOUNT"
 }
 resource "aws_organizations_account" "spiral_ops" {
-  email = "aws-spiral+ops@defn.us"
-  name  = "spiral-ops"
-		  iam_user_access_to_billing = "ALLOW"
-		  role_name                  = "OrganizationAccountAccessRole"
+  email                      = "aws-spiral+ops@defn.us"
+  name                       = "spiral-ops"
+  iam_user_access_to_billing = "ALLOW"
+  role_name                  = "OrganizationAccountAccessRole"
   tags = {
     ManagedBy = "Terraform"
   }
@@ -209,10 +210,10 @@ resource "aws_ssoadmin_account_assignment" "spiral_ops_admin_sso_account_assignm
   target_type        = "AWS_ACCOUNT"
 }
 resource "aws_organizations_account" "spiral_prod" {
-  email = "aws-spiral+sec@defn.us"
-  name  = "spiral-prod"
-		  iam_user_access_to_billing = "ALLOW"
-		  role_name                  = "OrganizationAccountAccessRole"
+  email                      = "aws-spiral+sec@defn.us"
+  name                       = "spiral-prod"
+  iam_user_access_to_billing = "ALLOW"
+  role_name                  = "OrganizationAccountAccessRole"
   tags = {
     ManagedBy = "Terraform"
   }
@@ -227,10 +228,10 @@ resource "aws_ssoadmin_account_assignment" "spiral_prod_admin_sso_account_assign
   target_type        = "AWS_ACCOUNT"
 }
 resource "aws_organizations_account" "spiral_pub" {
-  email = "aws-spiral+dmz@defn.us"
-  name  = "spiral-pub"
-		  iam_user_access_to_billing = "ALLOW"
-		  role_name                  = "OrganizationAccountAccessRole"
+  email                      = "aws-spiral+dmz@defn.us"
+  name                       = "spiral-pub"
+  iam_user_access_to_billing = "ALLOW"
+  role_name                  = "OrganizationAccountAccessRole"
   tags = {
     ManagedBy = "Terraform"
   }

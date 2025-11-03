@@ -1,9 +1,9 @@
 # auto-generated: transform.sh
-id: "749185891195"
 account: log
-org: vault
-name: vault-log
 email: aws-vault-audit@defn.sh
+id: "749185891195"
+name: vault-log
+org: vault
 sso_role: Administrator
 aws_config: |-
   # auto-generated: aws.cue aws_config_account
@@ -76,6 +76,7 @@ infra_acc_readme: |-
 
   auto-generated: aws.cue infra_acc_readme
 infra_acc_terraform: |-
+  # auto-generated: aws.cue infra_acc_terraform
   terraform {
     required_providers {
       aws = {
@@ -91,13 +92,12 @@ infra_acc_terraform: |-
       profile        = "defn-org"
       region         = "us-east-1"
     }
-
   }
 
   provider "aws" {
     profile = "vault-log"
-    region  = "us-east-1"
     alias   = "vault-log"
+    region  = "us-east-1"
   }
 
   module "vault-log" {

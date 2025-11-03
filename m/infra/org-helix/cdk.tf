@@ -1,3 +1,4 @@
+# auto-generated: aws.cue infra_org_terraform
 terraform {
   required_providers {
     aws = {
@@ -6,24 +7,24 @@ terraform {
     }
   }
   backend "s3" {
+    profile        = "defn-org"
     bucket         = "dfn-defn-terraform-state"
     dynamodb_table = "dfn-defn-terraform-state-lock"
-    encrypt        = true
     key            = "stacks/org-helix/terraform.tfstate"
-    profile        = "defn-org"
     region         = "us-east-1"
+    encrypt        = true
   }
 
-}
-
-locals {
-  sso_instance_arn  = data.aws_ssoadmin_instances.sso_instance.arns
-  sso_instance_isid = data.aws_ssoadmin_instances.sso_instance.identity_store_ids
 }
 
 provider "aws" {
   profile = "helix-org"
   region  = "us-east-2"
+}
+
+locals {
+  sso_instance_arn  = data.aws_ssoadmin_instances.sso_instance.arns
+  sso_instance_isid = data.aws_ssoadmin_instances.sso_instance.identity_store_ids
 }
 
 resource "aws_organizations_organization" "organization" {
@@ -83,10 +84,10 @@ resource "aws_ssoadmin_account_assignment" "helix_org_admin_sso_account_assignme
   target_type        = "AWS_ACCOUNT"
 }
 resource "aws_organizations_account" "helix_ci" {
-  email = "aws-helix+sec@defn.sh"
-  name  = "helix-ci"
-		  iam_user_access_to_billing = "ALLOW"
-		  role_name                  = "OrganizationAccountAccessRole"
+  email                      = "aws-helix+sec@defn.sh"
+  name                       = "helix-ci"
+  iam_user_access_to_billing = "ALLOW"
+  role_name                  = "OrganizationAccountAccessRole"
   tags = {
     ManagedBy = "Terraform"
   }
@@ -101,10 +102,10 @@ resource "aws_ssoadmin_account_assignment" "helix_ci_admin_sso_account_assignmen
   target_type        = "AWS_ACCOUNT"
 }
 resource "aws_organizations_account" "helix_dev" {
-  email = "aws-helix+dev@defn.sh"
-  name  = "helix-dev"
-		  iam_user_access_to_billing = "ALLOW"
-		  role_name                  = "OrganizationAccountAccessRole"
+  email                      = "aws-helix+dev@defn.sh"
+  name                       = "helix-dev"
+  iam_user_access_to_billing = "ALLOW"
+  role_name                  = "OrganizationAccountAccessRole"
   tags = {
     ManagedBy = "Terraform"
   }
@@ -119,10 +120,10 @@ resource "aws_ssoadmin_account_assignment" "helix_dev_admin_sso_account_assignme
   target_type        = "AWS_ACCOUNT"
 }
 resource "aws_organizations_account" "helix_hub" {
-  email = "aws-helix+hub@defn.sh"
-  name  = "helix-hub"
-		  iam_user_access_to_billing = "ALLOW"
-		  role_name                  = "OrganizationAccountAccessRole"
+  email                      = "aws-helix+hub@defn.sh"
+  name                       = "helix-hub"
+  iam_user_access_to_billing = "ALLOW"
+  role_name                  = "OrganizationAccountAccessRole"
   tags = {
     ManagedBy = "Terraform"
   }
@@ -137,10 +138,10 @@ resource "aws_ssoadmin_account_assignment" "helix_hub_admin_sso_account_assignme
   target_type        = "AWS_ACCOUNT"
 }
 resource "aws_organizations_account" "helix_lib" {
-  email = "aws-helix+lib@defn.sh"
-  name  = "helix-lib"
-		  iam_user_access_to_billing = "ALLOW"
-		  role_name                  = "OrganizationAccountAccessRole"
+  email                      = "aws-helix+lib@defn.sh"
+  name                       = "helix-lib"
+  iam_user_access_to_billing = "ALLOW"
+  role_name                  = "OrganizationAccountAccessRole"
   tags = {
     ManagedBy = "Terraform"
   }
@@ -155,10 +156,10 @@ resource "aws_ssoadmin_account_assignment" "helix_lib_admin_sso_account_assignme
   target_type        = "AWS_ACCOUNT"
 }
 resource "aws_organizations_account" "helix_log" {
-  email = "aws-helix+log@defn.sh"
-  name  = "helix-log"
-		  iam_user_access_to_billing = "ALLOW"
-		  role_name                  = "OrganizationAccountAccessRole"
+  email                      = "aws-helix+log@defn.sh"
+  name                       = "helix-log"
+  iam_user_access_to_billing = "ALLOW"
+  role_name                  = "OrganizationAccountAccessRole"
   tags = {
     ManagedBy = "Terraform"
   }
@@ -173,10 +174,10 @@ resource "aws_ssoadmin_account_assignment" "helix_log_admin_sso_account_assignme
   target_type        = "AWS_ACCOUNT"
 }
 resource "aws_organizations_account" "helix_net" {
-  email = "aws-helix+net@defn.sh"
-  name  = "helix-net"
-		  iam_user_access_to_billing = "ALLOW"
-		  role_name                  = "OrganizationAccountAccessRole"
+  email                      = "aws-helix+net@defn.sh"
+  name                       = "helix-net"
+  iam_user_access_to_billing = "ALLOW"
+  role_name                  = "OrganizationAccountAccessRole"
   tags = {
     ManagedBy = "Terraform"
   }
@@ -191,10 +192,10 @@ resource "aws_ssoadmin_account_assignment" "helix_net_admin_sso_account_assignme
   target_type        = "AWS_ACCOUNT"
 }
 resource "aws_organizations_account" "helix_ops" {
-  email = "aws-helix+ops@defn.sh"
-  name  = "helix-ops"
-		  iam_user_access_to_billing = "ALLOW"
-		  role_name                  = "OrganizationAccountAccessRole"
+  email                      = "aws-helix+ops@defn.sh"
+  name                       = "helix-ops"
+  iam_user_access_to_billing = "ALLOW"
+  role_name                  = "OrganizationAccountAccessRole"
   tags = {
     ManagedBy = "Terraform"
   }
@@ -209,10 +210,10 @@ resource "aws_ssoadmin_account_assignment" "helix_ops_admin_sso_account_assignme
   target_type        = "AWS_ACCOUNT"
 }
 resource "aws_organizations_account" "helix_prod" {
-  email = "aws-helix+dmz@defn.sh"
-  name  = "helix-prod"
-		  iam_user_access_to_billing = "ALLOW"
-		  role_name                  = "OrganizationAccountAccessRole"
+  email                      = "aws-helix+dmz@defn.sh"
+  name                       = "helix-prod"
+  iam_user_access_to_billing = "ALLOW"
+  role_name                  = "OrganizationAccountAccessRole"
   tags = {
     ManagedBy = "Terraform"
   }
@@ -227,10 +228,10 @@ resource "aws_ssoadmin_account_assignment" "helix_prod_admin_sso_account_assignm
   target_type        = "AWS_ACCOUNT"
 }
 resource "aws_organizations_account" "helix_pub" {
-  email = "aws-helix+pub@defn.sh"
-  name  = "helix-pub"
-		  iam_user_access_to_billing = "ALLOW"
-		  role_name                  = "OrganizationAccountAccessRole"
+  email                      = "aws-helix+pub@defn.sh"
+  name                       = "helix-pub"
+  iam_user_access_to_billing = "ALLOW"
+  role_name                  = "OrganizationAccountAccessRole"
   tags = {
     ManagedBy = "Terraform"
   }

@@ -1,6 +1,10 @@
 #!/usr/bin/env bash
 
+set -efu -o pipefail
+
 function main {
+	cue eval -c >/dev/null
+
 	rm -rf docs/src/content/aws
 	mkdir -p docs/src/content/aws
 

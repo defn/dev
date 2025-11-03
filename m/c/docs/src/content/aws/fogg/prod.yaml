@@ -1,9 +1,9 @@
 # auto-generated: transform.sh
-id: "565963418226"
 account: prod
-org: fogg
-name: fogg-prod
 email: fogg-postx@defn.sh
+id: "565963418226"
+name: fogg-prod
+org: fogg
 sso_role: Administrator
 aws_config: |-
   # auto-generated: aws.cue aws_config_account
@@ -76,6 +76,7 @@ infra_acc_readme: |-
 
   auto-generated: aws.cue infra_acc_readme
 infra_acc_terraform: |-
+  # auto-generated: aws.cue infra_acc_terraform
   terraform {
     required_providers {
       aws = {
@@ -91,13 +92,12 @@ infra_acc_terraform: |-
       profile        = "defn-org"
       region         = "us-east-1"
     }
-
   }
 
   provider "aws" {
     profile = "fogg-prod"
-    region  = "us-east-1"
     alias   = "fogg-prod"
+    region  = "us-east-1"
   }
 
   module "fogg-prod" {

@@ -1,3 +1,4 @@
+# auto-generated: aws.cue infra_acc_terraform
 terraform {
   required_providers {
     aws = {
@@ -13,13 +14,12 @@ terraform {
     profile        = "defn-org"
     region         = "us-east-1"
   }
-
 }
 
 provider "aws" {
   profile = "curl-lib"
-  region  = "us-east-1"
   alias   = "curl-lib"
+  region  = "us-east-1"
 }
 
 module "curl-lib" {

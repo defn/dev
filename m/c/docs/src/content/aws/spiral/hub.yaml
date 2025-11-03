@@ -1,10 +1,5 @@
 # auto-generated: transform.sh
-id: "216704421225"
 account: hub
-org: spiral
-name: spiral-hub
-email: aws-spiral+hub@defn.us
-sso_role: Administrator
 aws_config: |-
   # auto-generated: aws.cue aws_config_account
   [profile spiral-hub]
@@ -19,8 +14,13 @@ aws_config: |-
   sso_role_name=Administrator
   sso_start_url=https://defn.awsapps.com/start
   sso_region=us-east-2
+email: aws-spiral+hub@defn.us
 iam_user_access_to_billing: ALLOW
+id: "216704421225"
+name: spiral-hub
+org: spiral
 role_name: OrganizationAccountAccessRole
+sso_role: Administrator
 mise_config: |-
   # auto-generated: aws.cue mise_config
   [env]
@@ -78,6 +78,7 @@ infra_acc_readme: |-
 
   auto-generated: aws.cue infra_acc_readme
 infra_acc_terraform: |-
+  # auto-generated: aws.cue infra_acc_terraform
   terraform {
     required_providers {
       aws = {
@@ -93,13 +94,12 @@ infra_acc_terraform: |-
       profile        = "defn-org"
       region         = "us-east-1"
     }
-
   }
 
   provider "aws" {
     profile = "spiral-hub"
-    region  = "us-east-1"
     alias   = "spiral-hub"
+    region  = "us-east-1"
   }
 
   module "spiral-hub" {

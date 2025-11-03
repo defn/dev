@@ -5,7 +5,7 @@ package aws
 
 // diagram: https://whimsical.com/aws-account-layout-D6p7mKoZiwNqZdTZnysYUy
 
-"org": [string]: sso_region: "us-west-2" | "us-east-2" | "us-east-1"
+org: [string]: sso_region: "us-west-2" | "us-east-2" | "us-east-1"
 
 // aws account metadata
 org: close({

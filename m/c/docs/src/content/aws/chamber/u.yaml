@@ -1,9 +1,9 @@
 # auto-generated: transform.sh
-id: "467995590869"
 account: u
-org: chamber
-name: chamber-u
 email: aws-qa@defn.us
+id: "467995590869"
+name: chamber-u
+org: chamber
 sso_role: Administrator
 aws_config: |-
   # auto-generated: aws.cue aws_config_account
@@ -76,6 +76,7 @@ infra_acc_readme: |-
 
   auto-generated: aws.cue infra_acc_readme
 infra_acc_terraform: |-
+  # auto-generated: aws.cue infra_acc_terraform
   terraform {
     required_providers {
       aws = {
@@ -91,13 +92,12 @@ infra_acc_terraform: |-
       profile        = "defn-org"
       region         = "us-east-1"
     }
-
   }
 
   provider "aws" {
     profile = "chamber-u"
-    region  = "us-east-1"
     alias   = "chamber-u"
+    region  = "us-east-1"
   }
 
   module "chamber-u" {

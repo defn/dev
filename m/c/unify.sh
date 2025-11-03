@@ -13,7 +13,6 @@ function main {
 	# Unify with schema validation and export
 	if cue eval -c >/dev/null; then
 		cue export --out yaml >main.yaml
-		trunk fmt
 	fi
 }
 

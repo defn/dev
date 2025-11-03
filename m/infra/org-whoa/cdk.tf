@@ -1,3 +1,4 @@
+# auto-generated: aws.cue infra_org_terraform
 terraform {
   required_providers {
     aws = {
@@ -6,24 +7,24 @@ terraform {
     }
   }
   backend "s3" {
+    profile        = "defn-org"
     bucket         = "dfn-defn-terraform-state"
     dynamodb_table = "dfn-defn-terraform-state-lock"
-    encrypt        = true
     key            = "stacks/org-whoa/terraform.tfstate"
-    profile        = "defn-org"
     region         = "us-east-1"
+    encrypt        = true
   }
 
-}
-
-locals {
-  sso_instance_arn  = data.aws_ssoadmin_instances.sso_instance.arns
-  sso_instance_isid = data.aws_ssoadmin_instances.sso_instance.identity_store_ids
 }
 
 provider "aws" {
   profile = "whoa-org"
   region  = "us-west-2"
+}
+
+locals {
+  sso_instance_arn  = data.aws_ssoadmin_instances.sso_instance.arns
+  sso_instance_isid = data.aws_ssoadmin_instances.sso_instance.identity_store_ids
 }
 
 resource "aws_organizations_organization" "organization" {

@@ -2,12 +2,11 @@
 
 function main {
 	if [[ $# == 0 ]]; then
-		set -- $(ls -d */ | shuf)
+		set -- $(ls -d */ | grep -v ^global | shuf)
 	fi
 
-	runmany 8 'echo $1; cd $1 && mise exec -- terraform plan -no-color --out .plan | tee .plan.txt || true' "$@"
-
-	for a in */; do echo "$a $(grep No.changes $a/.plan.txt)"; done | grep -v 'No changes'
+	time runmany 16 'echo $1; cd $1 && mise exec -- terraform plan -no-color --out .plan | tee .plan.txt || true' "$@"
+	mise run changes
 }
 
 main "$@"
