@@ -110,7 +110,7 @@ _orgTerraform: {
 				strings.Join([for accKey, accData in orgData.account {
 					"""
 
-				resource "aws_organizations_account" "\(orgName)-\(accKey)" {
+				resource "aws_organizations_account" "\(strings.Replace(accData.name, "-", "_", -1))" {
 				  email = "\(accData.email)"
 				  name  = "\(accData.name)"
 				  tags = {
@@ -123,8 +123,17 @@ _orgTerraform: {
 				  permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
 				  principal_id       = aws_identitystore_group.administrators_sso_group.group_id
 				  principal_type     = "GROUP"
-				  target_id          = aws_organizations_account.\(orgName)-\(accKey).id
+				  target_id          = aws_organizations_account.\(strings.Replace(accData.name, "-", "_", -1)).id
 				  target_type        = "AWS_ACCOUNT"
+				}
+				"""
+				}], ""),
+				strings.Join([for accKey, accData in orgData.account {
+					"""
+
+				moved {
+				  from = aws_organizations_account.\(orgName)-\(accKey)
+				  to   = aws_organizations_account.\(strings.Replace(accData.name, "-", "_", -1))
 				}
 				"""
 				}], ""),

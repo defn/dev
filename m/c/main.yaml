@@ -188,7 +188,7 @@ config:
                 display_name      = "Administrators"
                 identity_store_id = element(local.sso_instance_isid, 0)
               }
-              resource "aws_organizations_account" "chamber-org" {
+              resource "aws_organizations_account" "chamber" {
                 email = "aws-chamber@defn.us"
                 name  = "chamber"
                 tags = {
@@ -201,10 +201,10 @@ config:
                 permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
                 principal_id       = aws_identitystore_group.administrators_sso_group.group_id
                 principal_type     = "GROUP"
-                target_id          = aws_organizations_account.chamber-org.id
+                target_id          = aws_organizations_account.chamber.id
                 target_type        = "AWS_ACCOUNT"
               }
-              resource "aws_organizations_account" "chamber-1" {
+              resource "aws_organizations_account" "defn_cd" {
                 email = "aws-cd@defn.us"
                 name  = "defn-cd"
                 tags = {
@@ -217,10 +217,10 @@ config:
                 permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
                 principal_id       = aws_identitystore_group.administrators_sso_group.group_id
                 principal_type     = "GROUP"
-                target_id          = aws_organizations_account.chamber-1.id
+                target_id          = aws_organizations_account.defn_cd.id
                 target_type        = "AWS_ACCOUNT"
               }
-              resource "aws_organizations_account" "chamber-2" {
+              resource "aws_organizations_account" "defn_ci" {
                 email = "aws-ci@defn.us"
                 name  = "defn-ci"
                 tags = {
@@ -233,10 +233,10 @@ config:
                 permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
                 principal_id       = aws_identitystore_group.administrators_sso_group.group_id
                 principal_type     = "GROUP"
-                target_id          = aws_organizations_account.chamber-2.id
+                target_id          = aws_organizations_account.defn_ci.id
                 target_type        = "AWS_ACCOUNT"
               }
-              resource "aws_organizations_account" "chamber-3" {
+              resource "aws_organizations_account" "defn_security" {
                 email = "aws-users@defn.us"
                 name  = "defn-security"
                 tags = {
@@ -249,10 +249,10 @@ config:
                 permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
                 principal_id       = aws_identitystore_group.administrators_sso_group.group_id
                 principal_type     = "GROUP"
-                target_id          = aws_organizations_account.chamber-3.id
+                target_id          = aws_organizations_account.defn_security.id
                 target_type        = "AWS_ACCOUNT"
               }
-              resource "aws_organizations_account" "chamber-4" {
+              resource "aws_organizations_account" "chamber_4" {
                 email = "chamber-4@defn.us"
                 name  = "chamber-4"
                 tags = {
@@ -265,10 +265,10 @@ config:
                 permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
                 principal_id       = aws_identitystore_group.administrators_sso_group.group_id
                 principal_type     = "GROUP"
-                target_id          = aws_organizations_account.chamber-4.id
+                target_id          = aws_organizations_account.chamber_4.id
                 target_type        = "AWS_ACCOUNT"
               }
-              resource "aws_organizations_account" "chamber-5" {
+              resource "aws_organizations_account" "chamber_5" {
                 email = "chamber-5@defn.us"
                 name  = "chamber-5"
                 tags = {
@@ -281,10 +281,10 @@ config:
                 permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
                 principal_id       = aws_identitystore_group.administrators_sso_group.group_id
                 principal_type     = "GROUP"
-                target_id          = aws_organizations_account.chamber-5.id
+                target_id          = aws_organizations_account.chamber_5.id
                 target_type        = "AWS_ACCOUNT"
               }
-              resource "aws_organizations_account" "chamber-6" {
+              resource "aws_organizations_account" "chamber_6" {
                 email = "chamber-6@defn.us"
                 name  = "chamber-6"
                 tags = {
@@ -297,10 +297,10 @@ config:
                 permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
                 principal_id       = aws_identitystore_group.administrators_sso_group.group_id
                 principal_type     = "GROUP"
-                target_id          = aws_organizations_account.chamber-6.id
+                target_id          = aws_organizations_account.chamber_6.id
                 target_type        = "AWS_ACCOUNT"
               }
-              resource "aws_organizations_account" "chamber-7" {
+              resource "aws_organizations_account" "chamber_7" {
                 email = "chamber-7@defn.us"
                 name  = "chamber-7"
                 tags = {
@@ -313,10 +313,10 @@ config:
                 permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
                 principal_id       = aws_identitystore_group.administrators_sso_group.group_id
                 principal_type     = "GROUP"
-                target_id          = aws_organizations_account.chamber-7.id
+                target_id          = aws_organizations_account.chamber_7.id
                 target_type        = "AWS_ACCOUNT"
               }
-              resource "aws_organizations_account" "chamber-8" {
+              resource "aws_organizations_account" "chamber_8" {
                 email = "chamber-8@defn.us"
                 name  = "chamber-8"
                 tags = {
@@ -329,10 +329,10 @@ config:
                 permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
                 principal_id       = aws_identitystore_group.administrators_sso_group.group_id
                 principal_type     = "GROUP"
-                target_id          = aws_organizations_account.chamber-8.id
+                target_id          = aws_organizations_account.chamber_8.id
                 target_type        = "AWS_ACCOUNT"
               }
-              resource "aws_organizations_account" "chamber-9" {
+              resource "aws_organizations_account" "chamber_9" {
                 email = "chamber-9@defn.us"
                 name  = "chamber-9"
                 tags = {
@@ -345,10 +345,10 @@ config:
                 permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
                 principal_id       = aws_identitystore_group.administrators_sso_group.group_id
                 principal_type     = "GROUP"
-                target_id          = aws_organizations_account.chamber-9.id
+                target_id          = aws_organizations_account.chamber_9.id
                 target_type        = "AWS_ACCOUNT"
               }
-              resource "aws_organizations_account" "chamber-a" {
+              resource "aws_organizations_account" "defn_a" {
                 email = "defn-a@imma.io"
                 name  = "defn-a"
                 tags = {
@@ -361,10 +361,10 @@ config:
                 permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
                 principal_id       = aws_identitystore_group.administrators_sso_group.group_id
                 principal_type     = "GROUP"
-                target_id          = aws_organizations_account.chamber-a.id
+                target_id          = aws_organizations_account.defn_a.id
                 target_type        = "AWS_ACCOUNT"
               }
-              resource "aws_organizations_account" "chamber-b" {
+              resource "aws_organizations_account" "defn_b" {
                 email = "imma-admin1@imma.io"
                 name  = "defn-b"
                 tags = {
@@ -377,10 +377,10 @@ config:
                 permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
                 principal_id       = aws_identitystore_group.administrators_sso_group.group_id
                 principal_type     = "GROUP"
-                target_id          = aws_organizations_account.chamber-b.id
+                target_id          = aws_organizations_account.defn_b.id
                 target_type        = "AWS_ACCOUNT"
               }
-              resource "aws_organizations_account" "chamber-c" {
+              resource "aws_organizations_account" "defn_c" {
                 email = "dev-eng1@imma.io"
                 name  = "defn-c"
                 tags = {
@@ -393,10 +393,10 @@ config:
                 permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
                 principal_id       = aws_identitystore_group.administrators_sso_group.group_id
                 principal_type     = "GROUP"
-                target_id          = aws_organizations_account.chamber-c.id
+                target_id          = aws_organizations_account.defn_c.id
                 target_type        = "AWS_ACCOUNT"
               }
-              resource "aws_organizations_account" "chamber-d" {
+              resource "aws_organizations_account" "defn_d" {
                 email = "box-adm1@imma.io"
                 name  = "defn-d"
                 tags = {
@@ -409,10 +409,10 @@ config:
                 permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
                 principal_id       = aws_identitystore_group.administrators_sso_group.group_id
                 principal_type     = "GROUP"
-                target_id          = aws_organizations_account.chamber-d.id
+                target_id          = aws_organizations_account.defn_d.id
                 target_type        = "AWS_ACCOUNT"
               }
-              resource "aws_organizations_account" "chamber-e" {
+              resource "aws_organizations_account" "defn_e" {
                 email = "stg-eng1@imma.io"
                 name  = "defn-e"
                 tags = {
@@ -425,10 +425,10 @@ config:
                 permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
                 principal_id       = aws_identitystore_group.administrators_sso_group.group_id
                 principal_type     = "GROUP"
-                target_id          = aws_organizations_account.chamber-e.id
+                target_id          = aws_organizations_account.defn_e.id
                 target_type        = "AWS_ACCOUNT"
               }
-              resource "aws_organizations_account" "chamber-f" {
+              resource "aws_organizations_account" "defn_f" {
                 email = "usr-admin1@imma.io"
                 name  = "defn-f"
                 tags = {
@@ -441,10 +441,10 @@ config:
                 permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
                 principal_id       = aws_identitystore_group.administrators_sso_group.group_id
                 principal_type     = "GROUP"
-                target_id          = aws_organizations_account.chamber-f.id
+                target_id          = aws_organizations_account.defn_f.id
                 target_type        = "AWS_ACCOUNT"
               }
-              resource "aws_organizations_account" "chamber-g" {
+              resource "aws_organizations_account" "defn_g" {
                 email = "usr-adm1@imma.io"
                 name  = "defn-g"
                 tags = {
@@ -457,10 +457,10 @@ config:
                 permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
                 principal_id       = aws_identitystore_group.administrators_sso_group.group_id
                 principal_type     = "GROUP"
-                target_id          = aws_organizations_account.chamber-g.id
+                target_id          = aws_organizations_account.defn_g.id
                 target_type        = "AWS_ACCOUNT"
               }
-              resource "aws_organizations_account" "chamber-h" {
+              resource "aws_organizations_account" "defn_h" {
                 email = "usr-eng1@imma.io"
                 name  = "defn-h"
                 tags = {
@@ -473,10 +473,10 @@ config:
                 permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
                 principal_id       = aws_identitystore_group.administrators_sso_group.group_id
                 principal_type     = "GROUP"
-                target_id          = aws_organizations_account.chamber-h.id
+                target_id          = aws_organizations_account.defn_h.id
                 target_type        = "AWS_ACCOUNT"
               }
-              resource "aws_organizations_account" "chamber-i" {
+              resource "aws_organizations_account" "defn_i" {
                 email = "aws-admin1@defn.us"
                 name  = "defn-i"
                 tags = {
@@ -489,10 +489,10 @@ config:
                 permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
                 principal_id       = aws_identitystore_group.administrators_sso_group.group_id
                 principal_type     = "GROUP"
-                target_id          = aws_organizations_account.chamber-i.id
+                target_id          = aws_organizations_account.defn_i.id
                 target_type        = "AWS_ACCOUNT"
               }
-              resource "aws_organizations_account" "chamber-j" {
+              resource "aws_organizations_account" "defn_j" {
                 email = "aws-development1@defn.us"
                 name  = "defn-j"
                 tags = {
@@ -505,10 +505,10 @@ config:
                 permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
                 principal_id       = aws_identitystore_group.administrators_sso_group.group_id
                 principal_type     = "GROUP"
-                target_id          = aws_organizations_account.chamber-j.id
+                target_id          = aws_organizations_account.defn_j.id
                 target_type        = "AWS_ACCOUNT"
               }
-              resource "aws_organizations_account" "chamber-l" {
+              resource "aws_organizations_account" "defn_l" {
                 email = "aws-staging1@defn.us"
                 name  = "defn-l"
                 tags = {
@@ -521,10 +521,10 @@ config:
                 permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
                 principal_id       = aws_identitystore_group.administrators_sso_group.group_id
                 principal_type     = "GROUP"
-                target_id          = aws_organizations_account.chamber-l.id
+                target_id          = aws_organizations_account.defn_l.id
                 target_type        = "AWS_ACCOUNT"
               }
-              resource "aws_organizations_account" "chamber-m" {
+              resource "aws_organizations_account" "defn_m" {
                 email = "defn-m@defn.us"
                 name  = "defn-m"
                 tags = {
@@ -537,10 +537,10 @@ config:
                 permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
                 principal_id       = aws_identitystore_group.administrators_sso_group.group_id
                 principal_type     = "GROUP"
-                target_id          = aws_organizations_account.chamber-m.id
+                target_id          = aws_organizations_account.defn_m.id
                 target_type        = "AWS_ACCOUNT"
               }
-              resource "aws_organizations_account" "chamber-n" {
+              resource "aws_organizations_account" "defn_n" {
                 email = "defn-n@defn.us"
                 name  = "defn-n"
                 tags = {
@@ -553,10 +553,10 @@ config:
                 permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
                 principal_id       = aws_identitystore_group.administrators_sso_group.group_id
                 principal_type     = "GROUP"
-                target_id          = aws_organizations_account.chamber-n.id
+                target_id          = aws_organizations_account.defn_n.id
                 target_type        = "AWS_ACCOUNT"
               }
-              resource "aws_organizations_account" "chamber-o" {
+              resource "aws_organizations_account" "defn_o" {
                 email = "defn-o@defn.us"
                 name  = "defn-o"
                 tags = {
@@ -569,10 +569,10 @@ config:
                 permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
                 principal_id       = aws_identitystore_group.administrators_sso_group.group_id
                 principal_type     = "GROUP"
-                target_id          = aws_organizations_account.chamber-o.id
+                target_id          = aws_organizations_account.defn_o.id
                 target_type        = "AWS_ACCOUNT"
               }
-              resource "aws_organizations_account" "chamber-p" {
+              resource "aws_organizations_account" "defn_p" {
                 email = "defn-p@defn.us"
                 name  = "defn-p"
                 tags = {
@@ -585,10 +585,10 @@ config:
                 permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
                 principal_id       = aws_identitystore_group.administrators_sso_group.group_id
                 principal_type     = "GROUP"
-                target_id          = aws_organizations_account.chamber-p.id
+                target_id          = aws_organizations_account.defn_p.id
                 target_type        = "AWS_ACCOUNT"
               }
-              resource "aws_organizations_account" "chamber-q" {
+              resource "aws_organizations_account" "defn_dev" {
                 email = "aws-dev@defn.us"
                 name  = "defn-dev"
                 tags = {
@@ -601,10 +601,10 @@ config:
                 permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
                 principal_id       = aws_identitystore_group.administrators_sso_group.group_id
                 principal_type     = "GROUP"
-                target_id          = aws_organizations_account.chamber-q.id
+                target_id          = aws_organizations_account.defn_dev.id
                 target_type        = "AWS_ACCOUNT"
               }
-              resource "aws_organizations_account" "chamber-r" {
+              resource "aws_organizations_account" "defn_r" {
                 email = "defn-r@imma.io"
                 name  = "defn-r"
                 tags = {
@@ -617,10 +617,10 @@ config:
                 permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
                 principal_id       = aws_identitystore_group.administrators_sso_group.group_id
                 principal_type     = "GROUP"
-                target_id          = aws_organizations_account.chamber-r.id
+                target_id          = aws_organizations_account.defn_r.id
                 target_type        = "AWS_ACCOUNT"
               }
-              resource "aws_organizations_account" "chamber-s" {
+              resource "aws_organizations_account" "defn_s" {
                 email = "defn-s@imma.io"
                 name  = "defn-s"
                 tags = {
@@ -633,10 +633,10 @@ config:
                 permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
                 principal_id       = aws_identitystore_group.administrators_sso_group.group_id
                 principal_type     = "GROUP"
-                target_id          = aws_organizations_account.chamber-s.id
+                target_id          = aws_organizations_account.defn_s.id
                 target_type        = "AWS_ACCOUNT"
               }
-              resource "aws_organizations_account" "chamber-t" {
+              resource "aws_organizations_account" "defn_t" {
                 email = "defn-t@imma.io"
                 name  = "defn-t"
                 tags = {
@@ -649,10 +649,10 @@ config:
                 permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
                 principal_id       = aws_identitystore_group.administrators_sso_group.group_id
                 principal_type     = "GROUP"
-                target_id          = aws_organizations_account.chamber-t.id
+                target_id          = aws_organizations_account.defn_t.id
                 target_type        = "AWS_ACCOUNT"
               }
-              resource "aws_organizations_account" "chamber-u" {
+              resource "aws_organizations_account" "defn_qa" {
                 email = "aws-qa@defn.us"
                 name  = "defn-qa"
                 tags = {
@@ -665,10 +665,10 @@ config:
                 permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
                 principal_id       = aws_identitystore_group.administrators_sso_group.group_id
                 principal_type     = "GROUP"
-                target_id          = aws_organizations_account.chamber-u.id
+                target_id          = aws_organizations_account.defn_qa.id
                 target_type        = "AWS_ACCOUNT"
               }
-              resource "aws_organizations_account" "chamber-v" {
+              resource "aws_organizations_account" "defn_v" {
                 email = "defn-v@imma.io"
                 name  = "defn-v"
                 tags = {
@@ -681,10 +681,10 @@ config:
                 permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
                 principal_id       = aws_identitystore_group.administrators_sso_group.group_id
                 principal_type     = "GROUP"
-                target_id          = aws_organizations_account.chamber-v.id
+                target_id          = aws_organizations_account.defn_v.id
                 target_type        = "AWS_ACCOUNT"
               }
-              resource "aws_organizations_account" "chamber-w" {
+              resource "aws_organizations_account" "defn_w" {
                 email = "defn-w@imma.io"
                 name  = "defn-w"
                 tags = {
@@ -697,10 +697,10 @@ config:
                 permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
                 principal_id       = aws_identitystore_group.administrators_sso_group.group_id
                 principal_type     = "GROUP"
-                target_id          = aws_organizations_account.chamber-w.id
+                target_id          = aws_organizations_account.defn_w.id
                 target_type        = "AWS_ACCOUNT"
               }
-              resource "aws_organizations_account" "chamber-x" {
+              resource "aws_organizations_account" "defn_stage" {
                 email = "aws-stage@defn.us"
                 name  = "defn-stage"
                 tags = {
@@ -713,10 +713,10 @@ config:
                 permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
                 principal_id       = aws_identitystore_group.administrators_sso_group.group_id
                 principal_type     = "GROUP"
-                target_id          = aws_organizations_account.chamber-x.id
+                target_id          = aws_organizations_account.defn_stage.id
                 target_type        = "AWS_ACCOUNT"
               }
-              resource "aws_organizations_account" "chamber-y" {
+              resource "aws_organizations_account" "defn_prod" {
                 email = "aws-prod@defn.us"
                 name  = "defn-prod"
                 tags = {
@@ -729,10 +729,10 @@ config:
                 permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
                 principal_id       = aws_identitystore_group.administrators_sso_group.group_id
                 principal_type     = "GROUP"
-                target_id          = aws_organizations_account.chamber-y.id
+                target_id          = aws_organizations_account.defn_prod.id
                 target_type        = "AWS_ACCOUNT"
               }
-              resource "aws_organizations_account" "chamber-z" {
+              resource "aws_organizations_account" "defn_hub" {
                 email = "aws-hub@defn.us"
                 name  = "defn-hub"
                 tags = {
@@ -745,8 +745,148 @@ config:
                 permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
                 principal_id       = aws_identitystore_group.administrators_sso_group.group_id
                 principal_type     = "GROUP"
-                target_id          = aws_organizations_account.chamber-z.id
+                target_id          = aws_organizations_account.defn_hub.id
                 target_type        = "AWS_ACCOUNT"
+              }
+              moved {
+                from = aws_organizations_account.chamber-org
+                to   = aws_organizations_account.chamber
+              }
+              moved {
+                from = aws_organizations_account.chamber-1
+                to   = aws_organizations_account.defn_cd
+              }
+              moved {
+                from = aws_organizations_account.chamber-2
+                to   = aws_organizations_account.defn_ci
+              }
+              moved {
+                from = aws_organizations_account.chamber-3
+                to   = aws_organizations_account.defn_security
+              }
+              moved {
+                from = aws_organizations_account.chamber-4
+                to   = aws_organizations_account.chamber_4
+              }
+              moved {
+                from = aws_organizations_account.chamber-5
+                to   = aws_organizations_account.chamber_5
+              }
+              moved {
+                from = aws_organizations_account.chamber-6
+                to   = aws_organizations_account.chamber_6
+              }
+              moved {
+                from = aws_organizations_account.chamber-7
+                to   = aws_organizations_account.chamber_7
+              }
+              moved {
+                from = aws_organizations_account.chamber-8
+                to   = aws_organizations_account.chamber_8
+              }
+              moved {
+                from = aws_organizations_account.chamber-9
+                to   = aws_organizations_account.chamber_9
+              }
+              moved {
+                from = aws_organizations_account.chamber-a
+                to   = aws_organizations_account.defn_a
+              }
+              moved {
+                from = aws_organizations_account.chamber-b
+                to   = aws_organizations_account.defn_b
+              }
+              moved {
+                from = aws_organizations_account.chamber-c
+                to   = aws_organizations_account.defn_c
+              }
+              moved {
+                from = aws_organizations_account.chamber-d
+                to   = aws_organizations_account.defn_d
+              }
+              moved {
+                from = aws_organizations_account.chamber-e
+                to   = aws_organizations_account.defn_e
+              }
+              moved {
+                from = aws_organizations_account.chamber-f
+                to   = aws_organizations_account.defn_f
+              }
+              moved {
+                from = aws_organizations_account.chamber-g
+                to   = aws_organizations_account.defn_g
+              }
+              moved {
+                from = aws_organizations_account.chamber-h
+                to   = aws_organizations_account.defn_h
+              }
+              moved {
+                from = aws_organizations_account.chamber-i
+                to   = aws_organizations_account.defn_i
+              }
+              moved {
+                from = aws_organizations_account.chamber-j
+                to   = aws_organizations_account.defn_j
+              }
+              moved {
+                from = aws_organizations_account.chamber-l
+                to   = aws_organizations_account.defn_l
+              }
+              moved {
+                from = aws_organizations_account.chamber-m
+                to   = aws_organizations_account.defn_m
+              }
+              moved {
+                from = aws_organizations_account.chamber-n
+                to   = aws_organizations_account.defn_n
+              }
+              moved {
+                from = aws_organizations_account.chamber-o
+                to   = aws_organizations_account.defn_o
+              }
+              moved {
+                from = aws_organizations_account.chamber-p
+                to   = aws_organizations_account.defn_p
+              }
+              moved {
+                from = aws_organizations_account.chamber-q
+                to   = aws_organizations_account.defn_dev
+              }
+              moved {
+                from = aws_organizations_account.chamber-r
+                to   = aws_organizations_account.defn_r
+              }
+              moved {
+                from = aws_organizations_account.chamber-s
+                to   = aws_organizations_account.defn_s
+              }
+              moved {
+                from = aws_organizations_account.chamber-t
+                to   = aws_organizations_account.defn_t
+              }
+              moved {
+                from = aws_organizations_account.chamber-u
+                to   = aws_organizations_account.defn_qa
+              }
+              moved {
+                from = aws_organizations_account.chamber-v
+                to   = aws_organizations_account.defn_v
+              }
+              moved {
+                from = aws_organizations_account.chamber-w
+                to   = aws_organizations_account.defn_w
+              }
+              moved {
+                from = aws_organizations_account.chamber-x
+                to   = aws_organizations_account.defn_stage
+              }
+              moved {
+                from = aws_organizations_account.chamber-y
+                to   = aws_organizations_account.defn_prod
+              }
+              moved {
+                from = aws_organizations_account.chamber-z
+                to   = aws_organizations_account.defn_hub
               }
               moved {
                 from = aws_ssoadmin_account_assignment.defn-cd_admin_sso_account_assignment
@@ -4878,7 +5018,7 @@ config:
                 display_name      = "Administrators"
                 identity_store_id = element(local.sso_instance_isid, 0)
               }
-              resource "aws_organizations_account" "circus-org" {
+              resource "aws_organizations_account" "circus" {
                 email = "aws-circus@defn.us"
                 name  = "circus"
                 tags = {
@@ -4891,10 +5031,10 @@ config:
                 permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
                 principal_id       = aws_identitystore_group.administrators_sso_group.group_id
                 principal_type     = "GROUP"
-                target_id          = aws_organizations_account.circus-org.id
+                target_id          = aws_organizations_account.circus.id
                 target_type        = "AWS_ACCOUNT"
               }
-              resource "aws_organizations_account" "circus-lib" {
+              resource "aws_organizations_account" "govcloud" {
                 email = "aws-circus-govcloud@defn.sh"
                 name  = "govcloud"
                 tags = {
@@ -4907,10 +5047,10 @@ config:
                 permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
                 principal_id       = aws_identitystore_group.administrators_sso_group.group_id
                 principal_type     = "GROUP"
-                target_id          = aws_organizations_account.circus-lib.id
+                target_id          = aws_organizations_account.govcloud.id
                 target_type        = "AWS_ACCOUNT"
               }
-              resource "aws_organizations_account" "circus-log" {
+              resource "aws_organizations_account" "audit" {
                 email = "aws-circus-audit@defn.sh"
                 name  = "audit"
                 tags = {
@@ -4923,10 +5063,10 @@ config:
                 permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
                 principal_id       = aws_identitystore_group.administrators_sso_group.group_id
                 principal_type     = "GROUP"
-                target_id          = aws_organizations_account.circus-log.id
+                target_id          = aws_organizations_account.audit.id
                 target_type        = "AWS_ACCOUNT"
               }
-              resource "aws_organizations_account" "circus-net" {
+              resource "aws_organizations_account" "transit" {
                 email = "aws-circus-transit@defn.sh"
                 name  = "transit"
                 tags = {
@@ -4939,10 +5079,10 @@ config:
                 permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
                 principal_id       = aws_identitystore_group.administrators_sso_group.group_id
                 principal_type     = "GROUP"
-                target_id          = aws_organizations_account.circus-net.id
+                target_id          = aws_organizations_account.transit.id
                 target_type        = "AWS_ACCOUNT"
               }
-              resource "aws_organizations_account" "circus-ops" {
+              resource "aws_organizations_account" "ops" {
                 email = "aws-circus-ops@defn.sh"
                 name  = "ops"
                 tags = {
@@ -4955,8 +5095,28 @@ config:
                 permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
                 principal_id       = aws_identitystore_group.administrators_sso_group.group_id
                 principal_type     = "GROUP"
-                target_id          = aws_organizations_account.circus-ops.id
+                target_id          = aws_organizations_account.ops.id
                 target_type        = "AWS_ACCOUNT"
+              }
+              moved {
+                from = aws_organizations_account.circus-org
+                to   = aws_organizations_account.circus
+              }
+              moved {
+                from = aws_organizations_account.circus-lib
+                to   = aws_organizations_account.govcloud
+              }
+              moved {
+                from = aws_organizations_account.circus-log
+                to   = aws_organizations_account.audit
+              }
+              moved {
+                from = aws_organizations_account.circus-net
+                to   = aws_organizations_account.transit
+              }
+              moved {
+                from = aws_organizations_account.circus-ops
+                to   = aws_organizations_account.ops
               }
             infra_acc_readme: |-
               ## Account-specific Terraform: circus-org
@@ -5592,7 +5752,7 @@ config:
                 display_name      = "Administrators"
                 identity_store_id = element(local.sso_instance_isid, 0)
               }
-              resource "aws_organizations_account" "coil-org" {
+              resource "aws_organizations_account" "coil" {
                 email = "aws-coil@defn.us"
                 name  = "coil"
                 tags = {
@@ -5605,10 +5765,10 @@ config:
                 permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
                 principal_id       = aws_identitystore_group.administrators_sso_group.group_id
                 principal_type     = "GROUP"
-                target_id          = aws_organizations_account.coil-org.id
+                target_id          = aws_organizations_account.coil.id
                 target_type        = "AWS_ACCOUNT"
               }
-              resource "aws_organizations_account" "coil-hub" {
+              resource "aws_organizations_account" "hub" {
                 email = "aws-coil+hub@defn.us"
                 name  = "hub"
                 tags = {
@@ -5621,10 +5781,10 @@ config:
                 permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
                 principal_id       = aws_identitystore_group.administrators_sso_group.group_id
                 principal_type     = "GROUP"
-                target_id          = aws_organizations_account.coil-hub.id
+                target_id          = aws_organizations_account.hub.id
                 target_type        = "AWS_ACCOUNT"
               }
-              resource "aws_organizations_account" "coil-lib" {
+              resource "aws_organizations_account" "lib" {
                 email = "aws-coil+lib@defn.us"
                 name  = "lib"
                 tags = {
@@ -5637,10 +5797,10 @@ config:
                 permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
                 principal_id       = aws_identitystore_group.administrators_sso_group.group_id
                 principal_type     = "GROUP"
-                target_id          = aws_organizations_account.coil-lib.id
+                target_id          = aws_organizations_account.lib.id
                 target_type        = "AWS_ACCOUNT"
               }
-              resource "aws_organizations_account" "coil-net" {
+              resource "aws_organizations_account" "net" {
                 email = "aws-coil+net@defn.us"
                 name  = "net"
                 tags = {
@@ -5653,8 +5813,24 @@ config:
                 permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
                 principal_id       = aws_identitystore_group.administrators_sso_group.group_id
                 principal_type     = "GROUP"
-                target_id          = aws_organizations_account.coil-net.id
+                target_id          = aws_organizations_account.net.id
                 target_type        = "AWS_ACCOUNT"
+              }
+              moved {
+                from = aws_organizations_account.coil-org
+                to   = aws_organizations_account.coil
+              }
+              moved {
+                from = aws_organizations_account.coil-hub
+                to   = aws_organizations_account.hub
+              }
+              moved {
+                from = aws_organizations_account.coil-lib
+                to   = aws_organizations_account.lib
+              }
+              moved {
+                from = aws_organizations_account.coil-net
+                to   = aws_organizations_account.net
               }
             infra_acc_readme: |-
               ## Account-specific Terraform: coil-org
@@ -6178,7 +6354,7 @@ config:
                 display_name      = "Administrators"
                 identity_store_id = element(local.sso_instance_isid, 0)
               }
-              resource "aws_organizations_account" "curl-org" {
+              resource "aws_organizations_account" "curl" {
                 email = "aws-curl@defn.us"
                 name  = "curl"
                 tags = {
@@ -6191,10 +6367,10 @@ config:
                 permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
                 principal_id       = aws_identitystore_group.administrators_sso_group.group_id
                 principal_type     = "GROUP"
-                target_id          = aws_organizations_account.curl-org.id
+                target_id          = aws_organizations_account.curl.id
                 target_type        = "AWS_ACCOUNT"
               }
-              resource "aws_organizations_account" "curl-hub" {
+              resource "aws_organizations_account" "hub" {
                 email = "aws-curl+hub@defn.us"
                 name  = "hub"
                 tags = {
@@ -6207,10 +6383,10 @@ config:
                 permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
                 principal_id       = aws_identitystore_group.administrators_sso_group.group_id
                 principal_type     = "GROUP"
-                target_id          = aws_organizations_account.curl-hub.id
+                target_id          = aws_organizations_account.hub.id
                 target_type        = "AWS_ACCOUNT"
               }
-              resource "aws_organizations_account" "curl-lib" {
+              resource "aws_organizations_account" "lib" {
                 email = "aws-curl+lib@defn.us"
                 name  = "lib"
                 tags = {
@@ -6223,10 +6399,10 @@ config:
                 permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
                 principal_id       = aws_identitystore_group.administrators_sso_group.group_id
                 principal_type     = "GROUP"
-                target_id          = aws_organizations_account.curl-lib.id
+                target_id          = aws_organizations_account.lib.id
                 target_type        = "AWS_ACCOUNT"
               }
-              resource "aws_organizations_account" "curl-net" {
+              resource "aws_organizations_account" "net" {
                 email = "aws-curl+net@defn.us"
                 name  = "net"
                 tags = {
@@ -6239,8 +6415,24 @@ config:
                 permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
                 principal_id       = aws_identitystore_group.administrators_sso_group.group_id
                 principal_type     = "GROUP"
-                target_id          = aws_organizations_account.curl-net.id
+                target_id          = aws_organizations_account.net.id
                 target_type        = "AWS_ACCOUNT"
+              }
+              moved {
+                from = aws_organizations_account.curl-org
+                to   = aws_organizations_account.curl
+              }
+              moved {
+                from = aws_organizations_account.curl-hub
+                to   = aws_organizations_account.hub
+              }
+              moved {
+                from = aws_organizations_account.curl-lib
+                to   = aws_organizations_account.lib
+              }
+              moved {
+                from = aws_organizations_account.curl-net
+                to   = aws_organizations_account.net
               }
             infra_acc_readme: |-
               ## Account-specific Terraform: curl-org
@@ -6757,7 +6949,7 @@ config:
                 display_name      = "Administrators"
                 identity_store_id = element(local.sso_instance_isid, 0)
               }
-              resource "aws_organizations_account" "defn-org" {
+              resource "aws_organizations_account" "defn" {
                 email = "iam+bootstrap@defn.sh"
                 name  = "defn"
                 tags = {
@@ -6770,8 +6962,12 @@ config:
                 permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
                 principal_id       = aws_identitystore_group.administrators_sso_group.group_id
                 principal_type     = "GROUP"
-                target_id          = aws_organizations_account.defn-org.id
+                target_id          = aws_organizations_account.defn.id
                 target_type        = "AWS_ACCOUNT"
+              }
+              moved {
+                from = aws_organizations_account.defn-org
+                to   = aws_organizations_account.defn
               }
             infra_acc_readme: |-
               ## Account-specific Terraform: defn-org
@@ -6959,7 +7155,7 @@ config:
                 display_name      = "Administrators"
                 identity_store_id = element(local.sso_instance_isid, 0)
               }
-              resource "aws_organizations_account" "fogg-org" {
+              resource "aws_organizations_account" "fogg" {
                 email = "spiral@defn.sh"
                 name  = "fogg"
                 tags = {
@@ -6972,10 +7168,10 @@ config:
                 permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
                 principal_id       = aws_identitystore_group.administrators_sso_group.group_id
                 principal_type     = "GROUP"
-                target_id          = aws_organizations_account.fogg-org.id
+                target_id          = aws_organizations_account.fogg.id
                 target_type        = "AWS_ACCOUNT"
               }
-              resource "aws_organizations_account" "fogg-ci" {
+              resource "aws_organizations_account" "home" {
                 email = "fogg-home@defn.sh"
                 name  = "home"
                 tags = {
@@ -6988,10 +7184,10 @@ config:
                 permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
                 principal_id       = aws_identitystore_group.administrators_sso_group.group_id
                 principal_type     = "GROUP"
-                target_id          = aws_organizations_account.fogg-ci.id
+                target_id          = aws_organizations_account.home.id
                 target_type        = "AWS_ACCOUNT"
               }
-              resource "aws_organizations_account" "fogg-dev" {
+              resource "aws_organizations_account" "sandbox" {
                 email = "fogg-sandbox@defn.sh"
                 name  = "sandbox"
                 tags = {
@@ -7004,10 +7200,10 @@ config:
                 permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
                 principal_id       = aws_identitystore_group.administrators_sso_group.group_id
                 principal_type     = "GROUP"
-                target_id          = aws_organizations_account.fogg-dev.id
+                target_id          = aws_organizations_account.sandbox.id
                 target_type        = "AWS_ACCOUNT"
               }
-              resource "aws_organizations_account" "fogg-hub" {
+              resource "aws_organizations_account" "hub" {
                 email = "fogg-hub@defn.sh"
                 name  = "hub"
                 tags = {
@@ -7020,10 +7216,10 @@ config:
                 permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
                 principal_id       = aws_identitystore_group.administrators_sso_group.group_id
                 principal_type     = "GROUP"
-                target_id          = aws_organizations_account.fogg-hub.id
+                target_id          = aws_organizations_account.hub.id
                 target_type        = "AWS_ACCOUNT"
               }
-              resource "aws_organizations_account" "fogg-lib" {
+              resource "aws_organizations_account" "data" {
                 email = "fogg-data@defn.sh"
                 name  = "data"
                 tags = {
@@ -7036,10 +7232,10 @@ config:
                 permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
                 principal_id       = aws_identitystore_group.administrators_sso_group.group_id
                 principal_type     = "GROUP"
-                target_id          = aws_organizations_account.fogg-lib.id
+                target_id          = aws_organizations_account.data.id
                 target_type        = "AWS_ACCOUNT"
               }
-              resource "aws_organizations_account" "fogg-log" {
+              resource "aws_organizations_account" "circus" {
                 email = "fogg-circus@defn.sh"
                 name  = "circus"
                 tags = {
@@ -7052,10 +7248,10 @@ config:
                 permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
                 principal_id       = aws_identitystore_group.administrators_sso_group.group_id
                 principal_type     = "GROUP"
-                target_id          = aws_organizations_account.fogg-log.id
+                target_id          = aws_organizations_account.circus.id
                 target_type        = "AWS_ACCOUNT"
               }
-              resource "aws_organizations_account" "fogg-net" {
+              resource "aws_organizations_account" "asset" {
                 email = "fogg-asset@defn.sh"
                 name  = "asset"
                 tags = {
@@ -7068,10 +7264,10 @@ config:
                 permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
                 principal_id       = aws_identitystore_group.administrators_sso_group.group_id
                 principal_type     = "GROUP"
-                target_id          = aws_organizations_account.fogg-net.id
+                target_id          = aws_organizations_account.asset.id
                 target_type        = "AWS_ACCOUNT"
               }
-              resource "aws_organizations_account" "fogg-ops" {
+              resource "aws_organizations_account" "gateway" {
                 email = "fogg-gateway@defn.sh"
                 name  = "gateway"
                 tags = {
@@ -7084,10 +7280,10 @@ config:
                 permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
                 principal_id       = aws_identitystore_group.administrators_sso_group.group_id
                 principal_type     = "GROUP"
-                target_id          = aws_organizations_account.fogg-ops.id
+                target_id          = aws_organizations_account.gateway.id
                 target_type        = "AWS_ACCOUNT"
               }
-              resource "aws_organizations_account" "fogg-prod" {
+              resource "aws_organizations_account" "postx" {
                 email = "fogg-postx@defn.sh"
                 name  = "postx"
                 tags = {
@@ -7100,10 +7296,10 @@ config:
                 permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
                 principal_id       = aws_identitystore_group.administrators_sso_group.group_id
                 principal_type     = "GROUP"
-                target_id          = aws_organizations_account.fogg-prod.id
+                target_id          = aws_organizations_account.postx.id
                 target_type        = "AWS_ACCOUNT"
               }
-              resource "aws_organizations_account" "fogg-pub" {
+              resource "aws_organizations_account" "security" {
                 email = "fogg-security@defn.sh"
                 name  = "security"
                 tags = {
@@ -7116,8 +7312,48 @@ config:
                 permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
                 principal_id       = aws_identitystore_group.administrators_sso_group.group_id
                 principal_type     = "GROUP"
-                target_id          = aws_organizations_account.fogg-pub.id
+                target_id          = aws_organizations_account.security.id
                 target_type        = "AWS_ACCOUNT"
+              }
+              moved {
+                from = aws_organizations_account.fogg-org
+                to   = aws_organizations_account.fogg
+              }
+              moved {
+                from = aws_organizations_account.fogg-ci
+                to   = aws_organizations_account.home
+              }
+              moved {
+                from = aws_organizations_account.fogg-dev
+                to   = aws_organizations_account.sandbox
+              }
+              moved {
+                from = aws_organizations_account.fogg-hub
+                to   = aws_organizations_account.hub
+              }
+              moved {
+                from = aws_organizations_account.fogg-lib
+                to   = aws_organizations_account.data
+              }
+              moved {
+                from = aws_organizations_account.fogg-log
+                to   = aws_organizations_account.circus
+              }
+              moved {
+                from = aws_organizations_account.fogg-net
+                to   = aws_organizations_account.asset
+              }
+              moved {
+                from = aws_organizations_account.fogg-ops
+                to   = aws_organizations_account.gateway
+              }
+              moved {
+                from = aws_organizations_account.fogg-prod
+                to   = aws_organizations_account.postx
+              }
+              moved {
+                from = aws_organizations_account.fogg-pub
+                to   = aws_organizations_account.security
               }
             infra_acc_readme: |-
               ## Account-specific Terraform: fogg-org
@@ -8313,7 +8549,7 @@ config:
                 display_name      = "Administrators"
                 identity_store_id = element(local.sso_instance_isid, 0)
               }
-              resource "aws_organizations_account" "gyre-org" {
+              resource "aws_organizations_account" "gyre" {
                 email = "aws-gyre@defn.us"
                 name  = "gyre"
                 tags = {
@@ -8326,10 +8562,10 @@ config:
                 permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
                 principal_id       = aws_identitystore_group.administrators_sso_group.group_id
                 principal_type     = "GROUP"
-                target_id          = aws_organizations_account.gyre-org.id
+                target_id          = aws_organizations_account.gyre.id
                 target_type        = "AWS_ACCOUNT"
               }
-              resource "aws_organizations_account" "gyre-ops" {
+              resource "aws_organizations_account" "ops" {
                 email = "aws-gyre+ops@defn.us"
                 name  = "ops"
                 tags = {
@@ -8342,8 +8578,16 @@ config:
                 permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
                 principal_id       = aws_identitystore_group.administrators_sso_group.group_id
                 principal_type     = "GROUP"
-                target_id          = aws_organizations_account.gyre-ops.id
+                target_id          = aws_organizations_account.ops.id
                 target_type        = "AWS_ACCOUNT"
+              }
+              moved {
+                from = aws_organizations_account.gyre-org
+                to   = aws_organizations_account.gyre
+              }
+              moved {
+                from = aws_organizations_account.gyre-ops
+                to   = aws_organizations_account.ops
               }
             infra_acc_readme: |-
               ## Account-specific Terraform: gyre-org
@@ -8643,7 +8887,7 @@ config:
                 display_name      = "Administrators"
                 identity_store_id = element(local.sso_instance_isid, 0)
               }
-              resource "aws_organizations_account" "helix-org" {
+              resource "aws_organizations_account" "helix" {
                 email = "aws-helix@defn.sh"
                 name  = "helix"
                 tags = {
@@ -8656,10 +8900,10 @@ config:
                 permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
                 principal_id       = aws_identitystore_group.administrators_sso_group.group_id
                 principal_type     = "GROUP"
-                target_id          = aws_organizations_account.helix-org.id
+                target_id          = aws_organizations_account.helix.id
                 target_type        = "AWS_ACCOUNT"
               }
-              resource "aws_organizations_account" "helix-ci" {
+              resource "aws_organizations_account" "sec" {
                 email = "aws-helix+sec@defn.sh"
                 name  = "sec"
                 tags = {
@@ -8672,10 +8916,10 @@ config:
                 permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
                 principal_id       = aws_identitystore_group.administrators_sso_group.group_id
                 principal_type     = "GROUP"
-                target_id          = aws_organizations_account.helix-ci.id
+                target_id          = aws_organizations_account.sec.id
                 target_type        = "AWS_ACCOUNT"
               }
-              resource "aws_organizations_account" "helix-dev" {
+              resource "aws_organizations_account" "dev" {
                 email = "aws-helix+dev@defn.sh"
                 name  = "dev"
                 tags = {
@@ -8688,10 +8932,10 @@ config:
                 permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
                 principal_id       = aws_identitystore_group.administrators_sso_group.group_id
                 principal_type     = "GROUP"
-                target_id          = aws_organizations_account.helix-dev.id
+                target_id          = aws_organizations_account.dev.id
                 target_type        = "AWS_ACCOUNT"
               }
-              resource "aws_organizations_account" "helix-hub" {
+              resource "aws_organizations_account" "hub" {
                 email = "aws-helix+hub@defn.sh"
                 name  = "hub"
                 tags = {
@@ -8704,10 +8948,10 @@ config:
                 permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
                 principal_id       = aws_identitystore_group.administrators_sso_group.group_id
                 principal_type     = "GROUP"
-                target_id          = aws_organizations_account.helix-hub.id
+                target_id          = aws_organizations_account.hub.id
                 target_type        = "AWS_ACCOUNT"
               }
-              resource "aws_organizations_account" "helix-lib" {
+              resource "aws_organizations_account" "lib" {
                 email = "aws-helix+lib@defn.sh"
                 name  = "lib"
                 tags = {
@@ -8720,10 +8964,10 @@ config:
                 permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
                 principal_id       = aws_identitystore_group.administrators_sso_group.group_id
                 principal_type     = "GROUP"
-                target_id          = aws_organizations_account.helix-lib.id
+                target_id          = aws_organizations_account.lib.id
                 target_type        = "AWS_ACCOUNT"
               }
-              resource "aws_organizations_account" "helix-log" {
+              resource "aws_organizations_account" "log" {
                 email = "aws-helix+log@defn.sh"
                 name  = "log"
                 tags = {
@@ -8736,10 +8980,10 @@ config:
                 permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
                 principal_id       = aws_identitystore_group.administrators_sso_group.group_id
                 principal_type     = "GROUP"
-                target_id          = aws_organizations_account.helix-log.id
+                target_id          = aws_organizations_account.log.id
                 target_type        = "AWS_ACCOUNT"
               }
-              resource "aws_organizations_account" "helix-net" {
+              resource "aws_organizations_account" "net" {
                 email = "aws-helix+net@defn.sh"
                 name  = "net"
                 tags = {
@@ -8752,10 +8996,10 @@ config:
                 permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
                 principal_id       = aws_identitystore_group.administrators_sso_group.group_id
                 principal_type     = "GROUP"
-                target_id          = aws_organizations_account.helix-net.id
+                target_id          = aws_organizations_account.net.id
                 target_type        = "AWS_ACCOUNT"
               }
-              resource "aws_organizations_account" "helix-ops" {
+              resource "aws_organizations_account" "ops" {
                 email = "aws-helix+ops@defn.sh"
                 name  = "ops"
                 tags = {
@@ -8768,10 +9012,10 @@ config:
                 permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
                 principal_id       = aws_identitystore_group.administrators_sso_group.group_id
                 principal_type     = "GROUP"
-                target_id          = aws_organizations_account.helix-ops.id
+                target_id          = aws_organizations_account.ops.id
                 target_type        = "AWS_ACCOUNT"
               }
-              resource "aws_organizations_account" "helix-prod" {
+              resource "aws_organizations_account" "dmz" {
                 email = "aws-helix+dmz@defn.sh"
                 name  = "dmz"
                 tags = {
@@ -8784,10 +9028,10 @@ config:
                 permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
                 principal_id       = aws_identitystore_group.administrators_sso_group.group_id
                 principal_type     = "GROUP"
-                target_id          = aws_organizations_account.helix-prod.id
+                target_id          = aws_organizations_account.dmz.id
                 target_type        = "AWS_ACCOUNT"
               }
-              resource "aws_organizations_account" "helix-pub" {
+              resource "aws_organizations_account" "pub" {
                 email = "aws-helix+pub@defn.sh"
                 name  = "pub"
                 tags = {
@@ -8800,8 +9044,48 @@ config:
                 permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
                 principal_id       = aws_identitystore_group.administrators_sso_group.group_id
                 principal_type     = "GROUP"
-                target_id          = aws_organizations_account.helix-pub.id
+                target_id          = aws_organizations_account.pub.id
                 target_type        = "AWS_ACCOUNT"
+              }
+              moved {
+                from = aws_organizations_account.helix-org
+                to   = aws_organizations_account.helix
+              }
+              moved {
+                from = aws_organizations_account.helix-ci
+                to   = aws_organizations_account.sec
+              }
+              moved {
+                from = aws_organizations_account.helix-dev
+                to   = aws_organizations_account.dev
+              }
+              moved {
+                from = aws_organizations_account.helix-hub
+                to   = aws_organizations_account.hub
+              }
+              moved {
+                from = aws_organizations_account.helix-lib
+                to   = aws_organizations_account.lib
+              }
+              moved {
+                from = aws_organizations_account.helix-log
+                to   = aws_organizations_account.log
+              }
+              moved {
+                from = aws_organizations_account.helix-net
+                to   = aws_organizations_account.net
+              }
+              moved {
+                from = aws_organizations_account.helix-ops
+                to   = aws_organizations_account.ops
+              }
+              moved {
+                from = aws_organizations_account.helix-prod
+                to   = aws_organizations_account.dmz
+              }
+              moved {
+                from = aws_organizations_account.helix-pub
+                to   = aws_organizations_account.pub
               }
             infra_acc_readme: |-
               ## Account-specific Terraform: helix-org
@@ -9997,7 +10281,7 @@ config:
                 display_name      = "Administrators"
                 identity_store_id = element(local.sso_instance_isid, 0)
               }
-              resource "aws_organizations_account" "imma-org" {
+              resource "aws_organizations_account" "imma" {
                 email = "aws-imma@defn.us"
                 name  = "imma"
                 tags = {
@@ -10010,10 +10294,10 @@ config:
                 permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
                 principal_id       = aws_identitystore_group.administrators_sso_group.group_id
                 principal_type     = "GROUP"
-                target_id          = aws_organizations_account.imma-org.id
+                target_id          = aws_organizations_account.imma.id
                 target_type        = "AWS_ACCOUNT"
               }
-              resource "aws_organizations_account" "imma-dev" {
+              resource "aws_organizations_account" "imma_dev" {
                 email = "imma-dev@imma.io"
                 name  = "imma-dev"
                 tags = {
@@ -10026,10 +10310,10 @@ config:
                 permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
                 principal_id       = aws_identitystore_group.administrators_sso_group.group_id
                 principal_type     = "GROUP"
-                target_id          = aws_organizations_account.imma-dev.id
+                target_id          = aws_organizations_account.imma_dev.id
                 target_type        = "AWS_ACCOUNT"
               }
-              resource "aws_organizations_account" "imma-lib" {
+              resource "aws_organizations_account" "imma_tolan" {
                 email = "imma-tolan@defn.us"
                 name  = "imma-tolan"
                 tags = {
@@ -10042,10 +10326,10 @@ config:
                 permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
                 principal_id       = aws_identitystore_group.administrators_sso_group.group_id
                 principal_type     = "GROUP"
-                target_id          = aws_organizations_account.imma-lib.id
+                target_id          = aws_organizations_account.imma_tolan.id
                 target_type        = "AWS_ACCOUNT"
               }
-              resource "aws_organizations_account" "imma-log" {
+              resource "aws_organizations_account" "imma_dgwyn" {
                 email = "imma-dgwyn@defn.us"
                 name  = "imma-dgwyn"
                 tags = {
@@ -10058,10 +10342,10 @@ config:
                 permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
                 principal_id       = aws_identitystore_group.administrators_sso_group.group_id
                 principal_type     = "GROUP"
-                target_id          = aws_organizations_account.imma-log.id
+                target_id          = aws_organizations_account.imma_dgwyn.id
                 target_type        = "AWS_ACCOUNT"
               }
-              resource "aws_organizations_account" "imma-net" {
+              resource "aws_organizations_account" "imma_defn" {
                 email = "imma-defn@defn.us"
                 name  = "imma-defn"
                 tags = {
@@ -10074,10 +10358,10 @@ config:
                 permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
                 principal_id       = aws_identitystore_group.administrators_sso_group.group_id
                 principal_type     = "GROUP"
-                target_id          = aws_organizations_account.imma-net.id
+                target_id          = aws_organizations_account.imma_defn.id
                 target_type        = "AWS_ACCOUNT"
               }
-              resource "aws_organizations_account" "imma-pub" {
+              resource "aws_organizations_account" "imma_prod" {
                 email = "imma-prod@imma.io"
                 name  = "imma-prod"
                 tags = {
@@ -10090,8 +10374,32 @@ config:
                 permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
                 principal_id       = aws_identitystore_group.administrators_sso_group.group_id
                 principal_type     = "GROUP"
-                target_id          = aws_organizations_account.imma-pub.id
+                target_id          = aws_organizations_account.imma_prod.id
                 target_type        = "AWS_ACCOUNT"
+              }
+              moved {
+                from = aws_organizations_account.imma-org
+                to   = aws_organizations_account.imma
+              }
+              moved {
+                from = aws_organizations_account.imma-dev
+                to   = aws_organizations_account.imma_dev
+              }
+              moved {
+                from = aws_organizations_account.imma-lib
+                to   = aws_organizations_account.imma_tolan
+              }
+              moved {
+                from = aws_organizations_account.imma-log
+                to   = aws_organizations_account.imma_dgwyn
+              }
+              moved {
+                from = aws_organizations_account.imma-net
+                to   = aws_organizations_account.imma_defn
+              }
+              moved {
+                from = aws_organizations_account.imma-pub
+                to   = aws_organizations_account.imma_prod
               }
               moved {
                 from = aws_ssoadmin_account_assignment.imma-dev_admin_sso_account_assignment
@@ -10859,7 +11167,7 @@ config:
                 display_name      = "Administrators"
                 identity_store_id = element(local.sso_instance_isid, 0)
               }
-              resource "aws_organizations_account" "immanent-org" {
+              resource "aws_organizations_account" "immanent" {
                 email = "aws-immanent@defn.us"
                 name  = "immanent"
                 tags = {
@@ -10872,10 +11180,10 @@ config:
                 permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
                 principal_id       = aws_identitystore_group.administrators_sso_group.group_id
                 principal_type     = "GROUP"
-                target_id          = aws_organizations_account.immanent-org.id
+                target_id          = aws_organizations_account.immanent.id
                 target_type        = "AWS_ACCOUNT"
               }
-              resource "aws_organizations_account" "immanent-changer" {
+              resource "aws_organizations_account" "immanent_changer" {
                 email = "immanent-changer@defn.us"
                 name  = "immanent-changer"
                 tags = {
@@ -10888,10 +11196,10 @@ config:
                 permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
                 principal_id       = aws_identitystore_group.administrators_sso_group.group_id
                 principal_type     = "GROUP"
-                target_id          = aws_organizations_account.immanent-changer.id
+                target_id          = aws_organizations_account.immanent_changer.id
                 target_type        = "AWS_ACCOUNT"
               }
-              resource "aws_organizations_account" "immanent-chanter" {
+              resource "aws_organizations_account" "immanent_chanter" {
                 email = "immanent-chanter@defn.us"
                 name  = "immanent-chanter"
                 tags = {
@@ -10904,10 +11212,10 @@ config:
                 permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
                 principal_id       = aws_identitystore_group.administrators_sso_group.group_id
                 principal_type     = "GROUP"
-                target_id          = aws_organizations_account.immanent-chanter.id
+                target_id          = aws_organizations_account.immanent_chanter.id
                 target_type        = "AWS_ACCOUNT"
               }
-              resource "aws_organizations_account" "immanent-doorkeeper" {
+              resource "aws_organizations_account" "immanent_doorkeeper" {
                 email = "immanent-doorkeeper@defn.us"
                 name  = "immanent-doorkeeper"
                 tags = {
@@ -10920,10 +11228,10 @@ config:
                 permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
                 principal_id       = aws_identitystore_group.administrators_sso_group.group_id
                 principal_type     = "GROUP"
-                target_id          = aws_organizations_account.immanent-doorkeeper.id
+                target_id          = aws_organizations_account.immanent_doorkeeper.id
                 target_type        = "AWS_ACCOUNT"
               }
-              resource "aws_organizations_account" "immanent-ged" {
+              resource "aws_organizations_account" "immanent_ged" {
                 email = "immanent-ged@defn.us"
                 name  = "immanent-ged"
                 tags = {
@@ -10936,10 +11244,10 @@ config:
                 permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
                 principal_id       = aws_identitystore_group.administrators_sso_group.group_id
                 principal_type     = "GROUP"
-                target_id          = aws_organizations_account.immanent-ged.id
+                target_id          = aws_organizations_account.immanent_ged.id
                 target_type        = "AWS_ACCOUNT"
               }
-              resource "aws_organizations_account" "immanent-hand" {
+              resource "aws_organizations_account" "immanent_hand" {
                 email = "immanent-hand@defn.us"
                 name  = "immanent-hand"
                 tags = {
@@ -10952,10 +11260,10 @@ config:
                 permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
                 principal_id       = aws_identitystore_group.administrators_sso_group.group_id
                 principal_type     = "GROUP"
-                target_id          = aws_organizations_account.immanent-hand.id
+                target_id          = aws_organizations_account.immanent_hand.id
                 target_type        = "AWS_ACCOUNT"
               }
-              resource "aws_organizations_account" "immanent-herbal" {
+              resource "aws_organizations_account" "immanent_herbal" {
                 email = "immanent-herbal@defn.us"
                 name  = "immanent-herbal"
                 tags = {
@@ -10968,10 +11276,10 @@ config:
                 permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
                 principal_id       = aws_identitystore_group.administrators_sso_group.group_id
                 principal_type     = "GROUP"
-                target_id          = aws_organizations_account.immanent-herbal.id
+                target_id          = aws_organizations_account.immanent_herbal.id
                 target_type        = "AWS_ACCOUNT"
               }
-              resource "aws_organizations_account" "immanent-namer" {
+              resource "aws_organizations_account" "immanent_namer" {
                 email = "immanent-namer@defn.us"
                 name  = "immanent-namer"
                 tags = {
@@ -10984,10 +11292,10 @@ config:
                 permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
                 principal_id       = aws_identitystore_group.administrators_sso_group.group_id
                 principal_type     = "GROUP"
-                target_id          = aws_organizations_account.immanent-namer.id
+                target_id          = aws_organizations_account.immanent_namer.id
                 target_type        = "AWS_ACCOUNT"
               }
-              resource "aws_organizations_account" "immanent-patterner" {
+              resource "aws_organizations_account" "immanent_patterner" {
                 email = "immanent-patterner@defn.us"
                 name  = "immanent-patterner"
                 tags = {
@@ -11000,10 +11308,10 @@ config:
                 permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
                 principal_id       = aws_identitystore_group.administrators_sso_group.group_id
                 principal_type     = "GROUP"
-                target_id          = aws_organizations_account.immanent-patterner.id
+                target_id          = aws_organizations_account.immanent_patterner.id
                 target_type        = "AWS_ACCOUNT"
               }
-              resource "aws_organizations_account" "immanent-roke" {
+              resource "aws_organizations_account" "immanent_roke" {
                 email = "immanent-roke@defn.us"
                 name  = "immanent-roke"
                 tags = {
@@ -11016,10 +11324,10 @@ config:
                 permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
                 principal_id       = aws_identitystore_group.administrators_sso_group.group_id
                 principal_type     = "GROUP"
-                target_id          = aws_organizations_account.immanent-roke.id
+                target_id          = aws_organizations_account.immanent_roke.id
                 target_type        = "AWS_ACCOUNT"
               }
-              resource "aws_organizations_account" "immanent-summoner" {
+              resource "aws_organizations_account" "immanent_summoner" {
                 email = "immanent-summoner@defn.us"
                 name  = "immanent-summoner"
                 tags = {
@@ -11032,10 +11340,10 @@ config:
                 permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
                 principal_id       = aws_identitystore_group.administrators_sso_group.group_id
                 principal_type     = "GROUP"
-                target_id          = aws_organizations_account.immanent-summoner.id
+                target_id          = aws_organizations_account.immanent_summoner.id
                 target_type        = "AWS_ACCOUNT"
               }
-              resource "aws_organizations_account" "immanent-windkey" {
+              resource "aws_organizations_account" "immanent_windkey" {
                 email = "immanent-windkey@defn.us"
                 name  = "immanent-windkey"
                 tags = {
@@ -11048,8 +11356,56 @@ config:
                 permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
                 principal_id       = aws_identitystore_group.administrators_sso_group.group_id
                 principal_type     = "GROUP"
-                target_id          = aws_organizations_account.immanent-windkey.id
+                target_id          = aws_organizations_account.immanent_windkey.id
                 target_type        = "AWS_ACCOUNT"
+              }
+              moved {
+                from = aws_organizations_account.immanent-org
+                to   = aws_organizations_account.immanent
+              }
+              moved {
+                from = aws_organizations_account.immanent-changer
+                to   = aws_organizations_account.immanent_changer
+              }
+              moved {
+                from = aws_organizations_account.immanent-chanter
+                to   = aws_organizations_account.immanent_chanter
+              }
+              moved {
+                from = aws_organizations_account.immanent-doorkeeper
+                to   = aws_organizations_account.immanent_doorkeeper
+              }
+              moved {
+                from = aws_organizations_account.immanent-ged
+                to   = aws_organizations_account.immanent_ged
+              }
+              moved {
+                from = aws_organizations_account.immanent-hand
+                to   = aws_organizations_account.immanent_hand
+              }
+              moved {
+                from = aws_organizations_account.immanent-herbal
+                to   = aws_organizations_account.immanent_herbal
+              }
+              moved {
+                from = aws_organizations_account.immanent-namer
+                to   = aws_organizations_account.immanent_namer
+              }
+              moved {
+                from = aws_organizations_account.immanent-patterner
+                to   = aws_organizations_account.immanent_patterner
+              }
+              moved {
+                from = aws_organizations_account.immanent-roke
+                to   = aws_organizations_account.immanent_roke
+              }
+              moved {
+                from = aws_organizations_account.immanent-summoner
+                to   = aws_organizations_account.immanent_summoner
+              }
+              moved {
+                from = aws_organizations_account.immanent-windkey
+                to   = aws_organizations_account.immanent_windkey
               }
               moved {
                 from = aws_ssoadmin_account_assignment.immanent-changer_admin_sso_account_assignment
@@ -12513,7 +12869,7 @@ config:
                 display_name      = "Administrators"
                 identity_store_id = element(local.sso_instance_isid, 0)
               }
-              resource "aws_organizations_account" "jianghu-org" {
+              resource "aws_organizations_account" "jianghu" {
                 email = "aws-jianghu@defn.us"
                 name  = "jianghu"
                 tags = {
@@ -12526,10 +12882,10 @@ config:
                 permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
                 principal_id       = aws_identitystore_group.administrators_sso_group.group_id
                 principal_type     = "GROUP"
-                target_id          = aws_organizations_account.jianghu-org.id
+                target_id          = aws_organizations_account.jianghu.id
                 target_type        = "AWS_ACCOUNT"
               }
-              resource "aws_organizations_account" "jianghu-log" {
+              resource "aws_organizations_account" "klamath" {
                 email = "klamath@defn.us"
                 name  = "klamath"
                 tags = {
@@ -12542,10 +12898,10 @@ config:
                 permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
                 principal_id       = aws_identitystore_group.administrators_sso_group.group_id
                 principal_type     = "GROUP"
-                target_id          = aws_organizations_account.jianghu-log.id
+                target_id          = aws_organizations_account.klamath.id
                 target_type        = "AWS_ACCOUNT"
               }
-              resource "aws_organizations_account" "jianghu-net" {
+              resource "aws_organizations_account" "tahoe" {
                 email = "tahoe@defn.us"
                 name  = "tahoe"
                 tags = {
@@ -12558,8 +12914,20 @@ config:
                 permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
                 principal_id       = aws_identitystore_group.administrators_sso_group.group_id
                 principal_type     = "GROUP"
-                target_id          = aws_organizations_account.jianghu-net.id
+                target_id          = aws_organizations_account.tahoe.id
                 target_type        = "AWS_ACCOUNT"
+              }
+              moved {
+                from = aws_organizations_account.jianghu-org
+                to   = aws_organizations_account.jianghu
+              }
+              moved {
+                from = aws_organizations_account.jianghu-log
+                to   = aws_organizations_account.klamath
+              }
+              moved {
+                from = aws_organizations_account.jianghu-net
+                to   = aws_organizations_account.tahoe
               }
             infra_acc_readme: |-
               ## Account-specific Terraform: jianghu-org
@@ -12971,7 +13339,7 @@ config:
                 display_name      = "Administrators"
                 identity_store_id = element(local.sso_instance_isid, 0)
               }
-              resource "aws_organizations_account" "spiral-org" {
+              resource "aws_organizations_account" "spiral" {
                 email = "aws-spiral@defn.us"
                 name  = "spiral"
                 tags = {
@@ -12984,10 +13352,10 @@ config:
                 permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
                 principal_id       = aws_identitystore_group.administrators_sso_group.group_id
                 principal_type     = "GROUP"
-                target_id          = aws_organizations_account.spiral-org.id
+                target_id          = aws_organizations_account.spiral.id
                 target_type        = "AWS_ACCOUNT"
               }
-              resource "aws_organizations_account" "spiral-ci" {
+              resource "aws_organizations_account" "pub" {
                 email = "aws-spiral+pub@defn.us"
                 name  = "pub"
                 tags = {
@@ -13000,10 +13368,10 @@ config:
                 permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
                 principal_id       = aws_identitystore_group.administrators_sso_group.group_id
                 principal_type     = "GROUP"
-                target_id          = aws_organizations_account.spiral-ci.id
+                target_id          = aws_organizations_account.pub.id
                 target_type        = "AWS_ACCOUNT"
               }
-              resource "aws_organizations_account" "spiral-dev" {
+              resource "aws_organizations_account" "dev" {
                 email = "aws-spiral+dev@defn.us"
                 name  = "dev"
                 tags = {
@@ -13016,10 +13384,10 @@ config:
                 permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
                 principal_id       = aws_identitystore_group.administrators_sso_group.group_id
                 principal_type     = "GROUP"
-                target_id          = aws_organizations_account.spiral-dev.id
+                target_id          = aws_organizations_account.dev.id
                 target_type        = "AWS_ACCOUNT"
               }
-              resource "aws_organizations_account" "spiral-hub" {
+              resource "aws_organizations_account" "hub" {
                 email = "aws-spiral+hub@defn.us"
                 name  = "hub"
                 tags = {
@@ -13032,10 +13400,10 @@ config:
                 permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
                 principal_id       = aws_identitystore_group.administrators_sso_group.group_id
                 principal_type     = "GROUP"
-                target_id          = aws_organizations_account.spiral-hub.id
+                target_id          = aws_organizations_account.hub.id
                 target_type        = "AWS_ACCOUNT"
               }
-              resource "aws_organizations_account" "spiral-lib" {
+              resource "aws_organizations_account" "lib" {
                 email = "aws-spiral+lib@defn.us"
                 name  = "lib"
                 tags = {
@@ -13048,10 +13416,10 @@ config:
                 permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
                 principal_id       = aws_identitystore_group.administrators_sso_group.group_id
                 principal_type     = "GROUP"
-                target_id          = aws_organizations_account.spiral-lib.id
+                target_id          = aws_organizations_account.lib.id
                 target_type        = "AWS_ACCOUNT"
               }
-              resource "aws_organizations_account" "spiral-log" {
+              resource "aws_organizations_account" "log" {
                 email = "aws-spiral+log@defn.us"
                 name  = "log"
                 tags = {
@@ -13064,10 +13432,10 @@ config:
                 permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
                 principal_id       = aws_identitystore_group.administrators_sso_group.group_id
                 principal_type     = "GROUP"
-                target_id          = aws_organizations_account.spiral-log.id
+                target_id          = aws_organizations_account.log.id
                 target_type        = "AWS_ACCOUNT"
               }
-              resource "aws_organizations_account" "spiral-net" {
+              resource "aws_organizations_account" "net" {
                 email = "aws-spiral+net@defn.us"
                 name  = "net"
                 tags = {
@@ -13080,10 +13448,10 @@ config:
                 permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
                 principal_id       = aws_identitystore_group.administrators_sso_group.group_id
                 principal_type     = "GROUP"
-                target_id          = aws_organizations_account.spiral-net.id
+                target_id          = aws_organizations_account.net.id
                 target_type        = "AWS_ACCOUNT"
               }
-              resource "aws_organizations_account" "spiral-ops" {
+              resource "aws_organizations_account" "ops" {
                 email = "aws-spiral+ops@defn.us"
                 name  = "ops"
                 tags = {
@@ -13096,10 +13464,10 @@ config:
                 permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
                 principal_id       = aws_identitystore_group.administrators_sso_group.group_id
                 principal_type     = "GROUP"
-                target_id          = aws_organizations_account.spiral-ops.id
+                target_id          = aws_organizations_account.ops.id
                 target_type        = "AWS_ACCOUNT"
               }
-              resource "aws_organizations_account" "spiral-prod" {
+              resource "aws_organizations_account" "sec" {
                 email = "aws-spiral+sec@defn.us"
                 name  = "sec"
                 tags = {
@@ -13112,10 +13480,10 @@ config:
                 permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
                 principal_id       = aws_identitystore_group.administrators_sso_group.group_id
                 principal_type     = "GROUP"
-                target_id          = aws_organizations_account.spiral-prod.id
+                target_id          = aws_organizations_account.sec.id
                 target_type        = "AWS_ACCOUNT"
               }
-              resource "aws_organizations_account" "spiral-pub" {
+              resource "aws_organizations_account" "dmz" {
                 email = "aws-spiral+dmz@defn.us"
                 name  = "dmz"
                 tags = {
@@ -13128,8 +13496,48 @@ config:
                 permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
                 principal_id       = aws_identitystore_group.administrators_sso_group.group_id
                 principal_type     = "GROUP"
-                target_id          = aws_organizations_account.spiral-pub.id
+                target_id          = aws_organizations_account.dmz.id
                 target_type        = "AWS_ACCOUNT"
+              }
+              moved {
+                from = aws_organizations_account.spiral-org
+                to   = aws_organizations_account.spiral
+              }
+              moved {
+                from = aws_organizations_account.spiral-ci
+                to   = aws_organizations_account.pub
+              }
+              moved {
+                from = aws_organizations_account.spiral-dev
+                to   = aws_organizations_account.dev
+              }
+              moved {
+                from = aws_organizations_account.spiral-hub
+                to   = aws_organizations_account.hub
+              }
+              moved {
+                from = aws_organizations_account.spiral-lib
+                to   = aws_organizations_account.lib
+              }
+              moved {
+                from = aws_organizations_account.spiral-log
+                to   = aws_organizations_account.log
+              }
+              moved {
+                from = aws_organizations_account.spiral-net
+                to   = aws_organizations_account.net
+              }
+              moved {
+                from = aws_organizations_account.spiral-ops
+                to   = aws_organizations_account.ops
+              }
+              moved {
+                from = aws_organizations_account.spiral-prod
+                to   = aws_organizations_account.sec
+              }
+              moved {
+                from = aws_organizations_account.spiral-pub
+                to   = aws_organizations_account.dmz
               }
             infra_acc_readme: |-
               ## Account-specific Terraform: spiral-org
@@ -14325,7 +14733,7 @@ config:
                 display_name      = "Administrators"
                 identity_store_id = element(local.sso_instance_isid, 0)
               }
-              resource "aws_organizations_account" "vault-org" {
+              resource "aws_organizations_account" "vault" {
                 email = "aws-vault@defn.us"
                 name  = "vault"
                 tags = {
@@ -14338,10 +14746,10 @@ config:
                 permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
                 principal_id       = aws_identitystore_group.administrators_sso_group.group_id
                 principal_type     = "GROUP"
-                target_id          = aws_organizations_account.vault-org.id
+                target_id          = aws_organizations_account.vault.id
                 target_type        = "AWS_ACCOUNT"
               }
-              resource "aws_organizations_account" "vault-ci" {
+              resource "aws_organizations_account" "vault0" {
                 email = "aws-vault-vault0@defn.sh"
                 name  = "vault0"
                 tags = {
@@ -14354,10 +14762,10 @@ config:
                 permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
                 principal_id       = aws_identitystore_group.administrators_sso_group.group_id
                 principal_type     = "GROUP"
-                target_id          = aws_organizations_account.vault-ci.id
+                target_id          = aws_organizations_account.vault0.id
                 target_type        = "AWS_ACCOUNT"
               }
-              resource "aws_organizations_account" "vault-dev" {
+              resource "aws_organizations_account" "dev" {
                 email = "aws-vault-dev@defn.sh"
                 name  = "dev"
                 tags = {
@@ -14370,10 +14778,10 @@ config:
                 permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
                 principal_id       = aws_identitystore_group.administrators_sso_group.group_id
                 principal_type     = "GROUP"
-                target_id          = aws_organizations_account.vault-dev.id
+                target_id          = aws_organizations_account.dev.id
                 target_type        = "AWS_ACCOUNT"
               }
-              resource "aws_organizations_account" "vault-hub" {
+              resource "aws_organizations_account" "hub" {
                 email = "aws-vault-hub@defn.sh"
                 name  = "hub"
                 tags = {
@@ -14386,10 +14794,10 @@ config:
                 permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
                 principal_id       = aws_identitystore_group.administrators_sso_group.group_id
                 principal_type     = "GROUP"
-                target_id          = aws_organizations_account.vault-hub.id
+                target_id          = aws_organizations_account.hub.id
                 target_type        = "AWS_ACCOUNT"
               }
-              resource "aws_organizations_account" "vault-lib" {
+              resource "aws_organizations_account" "library" {
                 email = "aws-vault-library@defn.sh"
                 name  = "library"
                 tags = {
@@ -14402,10 +14810,10 @@ config:
                 permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
                 principal_id       = aws_identitystore_group.administrators_sso_group.group_id
                 principal_type     = "GROUP"
-                target_id          = aws_organizations_account.vault-lib.id
+                target_id          = aws_organizations_account.library.id
                 target_type        = "AWS_ACCOUNT"
               }
-              resource "aws_organizations_account" "vault-log" {
+              resource "aws_organizations_account" "audit" {
                 email = "aws-vault-audit@defn.sh"
                 name  = "audit"
                 tags = {
@@ -14418,10 +14826,10 @@ config:
                 permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
                 principal_id       = aws_identitystore_group.administrators_sso_group.group_id
                 principal_type     = "GROUP"
-                target_id          = aws_organizations_account.vault-log.id
+                target_id          = aws_organizations_account.audit.id
                 target_type        = "AWS_ACCOUNT"
               }
-              resource "aws_organizations_account" "vault-net" {
+              resource "aws_organizations_account" "transit" {
                 email = "aws-vault-transit@defn.sh"
                 name  = "transit"
                 tags = {
@@ -14434,10 +14842,10 @@ config:
                 permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
                 principal_id       = aws_identitystore_group.administrators_sso_group.group_id
                 principal_type     = "GROUP"
-                target_id          = aws_organizations_account.vault-net.id
+                target_id          = aws_organizations_account.transit.id
                 target_type        = "AWS_ACCOUNT"
               }
-              resource "aws_organizations_account" "vault-ops" {
+              resource "aws_organizations_account" "ops" {
                 email = "aws-vault-ops@defn.sh"
                 name  = "ops"
                 tags = {
@@ -14450,10 +14858,10 @@ config:
                 permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
                 principal_id       = aws_identitystore_group.administrators_sso_group.group_id
                 principal_type     = "GROUP"
-                target_id          = aws_organizations_account.vault-ops.id
+                target_id          = aws_organizations_account.ops.id
                 target_type        = "AWS_ACCOUNT"
               }
-              resource "aws_organizations_account" "vault-prod" {
+              resource "aws_organizations_account" "vault1" {
                 email = "aws-vault-vault1@defn.sh"
                 name  = "vault1"
                 tags = {
@@ -14466,10 +14874,10 @@ config:
                 permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
                 principal_id       = aws_identitystore_group.administrators_sso_group.group_id
                 principal_type     = "GROUP"
-                target_id          = aws_organizations_account.vault-prod.id
+                target_id          = aws_organizations_account.vault1.id
                 target_type        = "AWS_ACCOUNT"
               }
-              resource "aws_organizations_account" "vault-pub" {
+              resource "aws_organizations_account" "pub" {
                 email = "aws-vault-pub@defn.sh"
                 name  = "pub"
                 tags = {
@@ -14482,8 +14890,48 @@ config:
                 permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
                 principal_id       = aws_identitystore_group.administrators_sso_group.group_id
                 principal_type     = "GROUP"
-                target_id          = aws_organizations_account.vault-pub.id
+                target_id          = aws_organizations_account.pub.id
                 target_type        = "AWS_ACCOUNT"
+              }
+              moved {
+                from = aws_organizations_account.vault-org
+                to   = aws_organizations_account.vault
+              }
+              moved {
+                from = aws_organizations_account.vault-ci
+                to   = aws_organizations_account.vault0
+              }
+              moved {
+                from = aws_organizations_account.vault-dev
+                to   = aws_organizations_account.dev
+              }
+              moved {
+                from = aws_organizations_account.vault-hub
+                to   = aws_organizations_account.hub
+              }
+              moved {
+                from = aws_organizations_account.vault-lib
+                to   = aws_organizations_account.library
+              }
+              moved {
+                from = aws_organizations_account.vault-log
+                to   = aws_organizations_account.audit
+              }
+              moved {
+                from = aws_organizations_account.vault-net
+                to   = aws_organizations_account.transit
+              }
+              moved {
+                from = aws_organizations_account.vault-ops
+                to   = aws_organizations_account.ops
+              }
+              moved {
+                from = aws_organizations_account.vault-prod
+                to   = aws_organizations_account.vault1
+              }
+              moved {
+                from = aws_organizations_account.vault-pub
+                to   = aws_organizations_account.pub
               }
             infra_acc_readme: |-
               ## Account-specific Terraform: vault-org
@@ -15679,7 +16127,7 @@ config:
                 display_name      = "Administrators"
                 identity_store_id = element(local.sso_instance_isid, 0)
               }
-              resource "aws_organizations_account" "whoa-org" {
+              resource "aws_organizations_account" "whoa" {
                 email = "aws-whoa@defn.us"
                 name  = "whoa"
                 tags = {
@@ -15692,10 +16140,10 @@ config:
                 permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
                 principal_id       = aws_identitystore_group.administrators_sso_group.group_id
                 principal_type     = "GROUP"
-                target_id          = aws_organizations_account.whoa-org.id
+                target_id          = aws_organizations_account.whoa.id
                 target_type        = "AWS_ACCOUNT"
               }
-              resource "aws_organizations_account" "whoa-dev" {
+              resource "aws_organizations_account" "dev" {
                 email = "whoa-dev@imma.io"
                 name  = "dev"
                 tags = {
@@ -15708,10 +16156,10 @@ config:
                 permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
                 principal_id       = aws_identitystore_group.administrators_sso_group.group_id
                 principal_type     = "GROUP"
-                target_id          = aws_organizations_account.whoa-dev.id
+                target_id          = aws_organizations_account.dev.id
                 target_type        = "AWS_ACCOUNT"
               }
-              resource "aws_organizations_account" "whoa-hub" {
+              resource "aws_organizations_account" "hub" {
                 email = "whoa-hub@imma.io"
                 name  = "hub"
                 tags = {
@@ -15724,10 +16172,10 @@ config:
                 permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
                 principal_id       = aws_identitystore_group.administrators_sso_group.group_id
                 principal_type     = "GROUP"
-                target_id          = aws_organizations_account.whoa-hub.id
+                target_id          = aws_organizations_account.hub.id
                 target_type        = "AWS_ACCOUNT"
               }
-              resource "aws_organizations_account" "whoa-net" {
+              resource "aws_organizations_account" "secrets" {
                 email = "whoa-secrets@imma.io"
                 name  = "secrets"
                 tags = {
@@ -15740,10 +16188,10 @@ config:
                 permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
                 principal_id       = aws_identitystore_group.administrators_sso_group.group_id
                 principal_type     = "GROUP"
-                target_id          = aws_organizations_account.whoa-net.id
+                target_id          = aws_organizations_account.secrets.id
                 target_type        = "AWS_ACCOUNT"
               }
-              resource "aws_organizations_account" "whoa-pub" {
+              resource "aws_organizations_account" "prod" {
                 email = "whoa-prod@imma.io"
                 name  = "prod"
                 tags = {
@@ -15756,8 +16204,28 @@ config:
                 permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
                 principal_id       = aws_identitystore_group.administrators_sso_group.group_id
                 principal_type     = "GROUP"
-                target_id          = aws_organizations_account.whoa-pub.id
+                target_id          = aws_organizations_account.prod.id
                 target_type        = "AWS_ACCOUNT"
+              }
+              moved {
+                from = aws_organizations_account.whoa-org
+                to   = aws_organizations_account.whoa
+              }
+              moved {
+                from = aws_organizations_account.whoa-dev
+                to   = aws_organizations_account.dev
+              }
+              moved {
+                from = aws_organizations_account.whoa-hub
+                to   = aws_organizations_account.hub
+              }
+              moved {
+                from = aws_organizations_account.whoa-net
+                to   = aws_organizations_account.secrets
+              }
+              moved {
+                from = aws_organizations_account.whoa-pub
+                to   = aws_organizations_account.prod
               }
             infra_acc_readme: |-
               ## Account-specific Terraform: whoa-org

@@ -66,7 +66,7 @@ resource "aws_identitystore_group" "administrators_sso_group" {
   display_name      = "Administrators"
   identity_store_id = element(local.sso_instance_isid, 0)
 }
-resource "aws_organizations_account" "imma-org" {
+resource "aws_organizations_account" "imma" {
   email = "aws-imma@defn.us"
   name  = "imma"
   tags = {
@@ -79,10 +79,10 @@ resource "aws_ssoadmin_account_assignment" "imma_admin_sso_account_assignment" {
   permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
   principal_id       = aws_identitystore_group.administrators_sso_group.group_id
   principal_type     = "GROUP"
-  target_id          = aws_organizations_account.imma-org.id
+  target_id          = aws_organizations_account.imma.id
   target_type        = "AWS_ACCOUNT"
 }
-resource "aws_organizations_account" "imma-dev" {
+resource "aws_organizations_account" "imma_dev" {
   email = "imma-dev@imma.io"
   name  = "imma-dev"
   tags = {
@@ -95,10 +95,10 @@ resource "aws_ssoadmin_account_assignment" "imma_dev_admin_sso_account_assignmen
   permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
   principal_id       = aws_identitystore_group.administrators_sso_group.group_id
   principal_type     = "GROUP"
-  target_id          = aws_organizations_account.imma-dev.id
+  target_id          = aws_organizations_account.imma_dev.id
   target_type        = "AWS_ACCOUNT"
 }
-resource "aws_organizations_account" "imma-lib" {
+resource "aws_organizations_account" "imma_tolan" {
   email = "imma-tolan@defn.us"
   name  = "imma-tolan"
   tags = {
@@ -111,10 +111,10 @@ resource "aws_ssoadmin_account_assignment" "imma_tolan_admin_sso_account_assignm
   permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
   principal_id       = aws_identitystore_group.administrators_sso_group.group_id
   principal_type     = "GROUP"
-  target_id          = aws_organizations_account.imma-lib.id
+  target_id          = aws_organizations_account.imma_tolan.id
   target_type        = "AWS_ACCOUNT"
 }
-resource "aws_organizations_account" "imma-log" {
+resource "aws_organizations_account" "imma_dgwyn" {
   email = "imma-dgwyn@defn.us"
   name  = "imma-dgwyn"
   tags = {
@@ -127,10 +127,10 @@ resource "aws_ssoadmin_account_assignment" "imma_dgwyn_admin_sso_account_assignm
   permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
   principal_id       = aws_identitystore_group.administrators_sso_group.group_id
   principal_type     = "GROUP"
-  target_id          = aws_organizations_account.imma-log.id
+  target_id          = aws_organizations_account.imma_dgwyn.id
   target_type        = "AWS_ACCOUNT"
 }
-resource "aws_organizations_account" "imma-net" {
+resource "aws_organizations_account" "imma_defn" {
   email = "imma-defn@defn.us"
   name  = "imma-defn"
   tags = {
@@ -143,10 +143,10 @@ resource "aws_ssoadmin_account_assignment" "imma_defn_admin_sso_account_assignme
   permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
   principal_id       = aws_identitystore_group.administrators_sso_group.group_id
   principal_type     = "GROUP"
-  target_id          = aws_organizations_account.imma-net.id
+  target_id          = aws_organizations_account.imma_defn.id
   target_type        = "AWS_ACCOUNT"
 }
-resource "aws_organizations_account" "imma-pub" {
+resource "aws_organizations_account" "imma_prod" {
   email = "imma-prod@imma.io"
   name  = "imma-prod"
   tags = {
@@ -159,8 +159,32 @@ resource "aws_ssoadmin_account_assignment" "imma_prod_admin_sso_account_assignme
   permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
   principal_id       = aws_identitystore_group.administrators_sso_group.group_id
   principal_type     = "GROUP"
-  target_id          = aws_organizations_account.imma-pub.id
+  target_id          = aws_organizations_account.imma_prod.id
   target_type        = "AWS_ACCOUNT"
+}
+moved {
+  from = aws_organizations_account.imma-org
+  to   = aws_organizations_account.imma
+}
+moved {
+  from = aws_organizations_account.imma-dev
+  to   = aws_organizations_account.imma_dev
+}
+moved {
+  from = aws_organizations_account.imma-lib
+  to   = aws_organizations_account.imma_tolan
+}
+moved {
+  from = aws_organizations_account.imma-log
+  to   = aws_organizations_account.imma_dgwyn
+}
+moved {
+  from = aws_organizations_account.imma-net
+  to   = aws_organizations_account.imma_defn
+}
+moved {
+  from = aws_organizations_account.imma-pub
+  to   = aws_organizations_account.imma_prod
 }
 moved {
   from = aws_ssoadmin_account_assignment.imma-dev_admin_sso_account_assignment

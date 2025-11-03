@@ -66,7 +66,7 @@ resource "aws_identitystore_group" "administrators_sso_group" {
   display_name      = "Administrators"
   identity_store_id = element(local.sso_instance_isid, 0)
 }
-resource "aws_organizations_account" "fogg-org" {
+resource "aws_organizations_account" "fogg" {
   email = "spiral@defn.sh"
   name  = "fogg"
   tags = {
@@ -79,10 +79,10 @@ resource "aws_ssoadmin_account_assignment" "fogg_admin_sso_account_assignment" {
   permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
   principal_id       = aws_identitystore_group.administrators_sso_group.group_id
   principal_type     = "GROUP"
-  target_id          = aws_organizations_account.fogg-org.id
+  target_id          = aws_organizations_account.fogg.id
   target_type        = "AWS_ACCOUNT"
 }
-resource "aws_organizations_account" "fogg-ci" {
+resource "aws_organizations_account" "home" {
   email = "fogg-home@defn.sh"
   name  = "home"
   tags = {
@@ -95,10 +95,10 @@ resource "aws_ssoadmin_account_assignment" "home_admin_sso_account_assignment" {
   permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
   principal_id       = aws_identitystore_group.administrators_sso_group.group_id
   principal_type     = "GROUP"
-  target_id          = aws_organizations_account.fogg-ci.id
+  target_id          = aws_organizations_account.home.id
   target_type        = "AWS_ACCOUNT"
 }
-resource "aws_organizations_account" "fogg-dev" {
+resource "aws_organizations_account" "sandbox" {
   email = "fogg-sandbox@defn.sh"
   name  = "sandbox"
   tags = {
@@ -111,10 +111,10 @@ resource "aws_ssoadmin_account_assignment" "sandbox_admin_sso_account_assignment
   permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
   principal_id       = aws_identitystore_group.administrators_sso_group.group_id
   principal_type     = "GROUP"
-  target_id          = aws_organizations_account.fogg-dev.id
+  target_id          = aws_organizations_account.sandbox.id
   target_type        = "AWS_ACCOUNT"
 }
-resource "aws_organizations_account" "fogg-hub" {
+resource "aws_organizations_account" "hub" {
   email = "fogg-hub@defn.sh"
   name  = "hub"
   tags = {
@@ -127,10 +127,10 @@ resource "aws_ssoadmin_account_assignment" "hub_admin_sso_account_assignment" {
   permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
   principal_id       = aws_identitystore_group.administrators_sso_group.group_id
   principal_type     = "GROUP"
-  target_id          = aws_organizations_account.fogg-hub.id
+  target_id          = aws_organizations_account.hub.id
   target_type        = "AWS_ACCOUNT"
 }
-resource "aws_organizations_account" "fogg-lib" {
+resource "aws_organizations_account" "data" {
   email = "fogg-data@defn.sh"
   name  = "data"
   tags = {
@@ -143,10 +143,10 @@ resource "aws_ssoadmin_account_assignment" "data_admin_sso_account_assignment" {
   permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
   principal_id       = aws_identitystore_group.administrators_sso_group.group_id
   principal_type     = "GROUP"
-  target_id          = aws_organizations_account.fogg-lib.id
+  target_id          = aws_organizations_account.data.id
   target_type        = "AWS_ACCOUNT"
 }
-resource "aws_organizations_account" "fogg-log" {
+resource "aws_organizations_account" "circus" {
   email = "fogg-circus@defn.sh"
   name  = "circus"
   tags = {
@@ -159,10 +159,10 @@ resource "aws_ssoadmin_account_assignment" "circus_admin_sso_account_assignment"
   permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
   principal_id       = aws_identitystore_group.administrators_sso_group.group_id
   principal_type     = "GROUP"
-  target_id          = aws_organizations_account.fogg-log.id
+  target_id          = aws_organizations_account.circus.id
   target_type        = "AWS_ACCOUNT"
 }
-resource "aws_organizations_account" "fogg-net" {
+resource "aws_organizations_account" "asset" {
   email = "fogg-asset@defn.sh"
   name  = "asset"
   tags = {
@@ -175,10 +175,10 @@ resource "aws_ssoadmin_account_assignment" "asset_admin_sso_account_assignment" 
   permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
   principal_id       = aws_identitystore_group.administrators_sso_group.group_id
   principal_type     = "GROUP"
-  target_id          = aws_organizations_account.fogg-net.id
+  target_id          = aws_organizations_account.asset.id
   target_type        = "AWS_ACCOUNT"
 }
-resource "aws_organizations_account" "fogg-ops" {
+resource "aws_organizations_account" "gateway" {
   email = "fogg-gateway@defn.sh"
   name  = "gateway"
   tags = {
@@ -191,10 +191,10 @@ resource "aws_ssoadmin_account_assignment" "gateway_admin_sso_account_assignment
   permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
   principal_id       = aws_identitystore_group.administrators_sso_group.group_id
   principal_type     = "GROUP"
-  target_id          = aws_organizations_account.fogg-ops.id
+  target_id          = aws_organizations_account.gateway.id
   target_type        = "AWS_ACCOUNT"
 }
-resource "aws_organizations_account" "fogg-prod" {
+resource "aws_organizations_account" "postx" {
   email = "fogg-postx@defn.sh"
   name  = "postx"
   tags = {
@@ -207,10 +207,10 @@ resource "aws_ssoadmin_account_assignment" "postx_admin_sso_account_assignment" 
   permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
   principal_id       = aws_identitystore_group.administrators_sso_group.group_id
   principal_type     = "GROUP"
-  target_id          = aws_organizations_account.fogg-prod.id
+  target_id          = aws_organizations_account.postx.id
   target_type        = "AWS_ACCOUNT"
 }
-resource "aws_organizations_account" "fogg-pub" {
+resource "aws_organizations_account" "security" {
   email = "fogg-security@defn.sh"
   name  = "security"
   tags = {
@@ -223,6 +223,46 @@ resource "aws_ssoadmin_account_assignment" "security_admin_sso_account_assignmen
   permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
   principal_id       = aws_identitystore_group.administrators_sso_group.group_id
   principal_type     = "GROUP"
-  target_id          = aws_organizations_account.fogg-pub.id
+  target_id          = aws_organizations_account.security.id
   target_type        = "AWS_ACCOUNT"
+}
+moved {
+  from = aws_organizations_account.fogg-org
+  to   = aws_organizations_account.fogg
+}
+moved {
+  from = aws_organizations_account.fogg-ci
+  to   = aws_organizations_account.home
+}
+moved {
+  from = aws_organizations_account.fogg-dev
+  to   = aws_organizations_account.sandbox
+}
+moved {
+  from = aws_organizations_account.fogg-hub
+  to   = aws_organizations_account.hub
+}
+moved {
+  from = aws_organizations_account.fogg-lib
+  to   = aws_organizations_account.data
+}
+moved {
+  from = aws_organizations_account.fogg-log
+  to   = aws_organizations_account.circus
+}
+moved {
+  from = aws_organizations_account.fogg-net
+  to   = aws_organizations_account.asset
+}
+moved {
+  from = aws_organizations_account.fogg-ops
+  to   = aws_organizations_account.gateway
+}
+moved {
+  from = aws_organizations_account.fogg-prod
+  to   = aws_organizations_account.postx
+}
+moved {
+  from = aws_organizations_account.fogg-pub
+  to   = aws_organizations_account.security
 }

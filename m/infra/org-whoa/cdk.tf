@@ -66,7 +66,7 @@ resource "aws_identitystore_group" "administrators_sso_group" {
   display_name      = "Administrators"
   identity_store_id = element(local.sso_instance_isid, 0)
 }
-resource "aws_organizations_account" "whoa-org" {
+resource "aws_organizations_account" "whoa" {
   email = "aws-whoa@defn.us"
   name  = "whoa"
   tags = {
@@ -79,10 +79,10 @@ resource "aws_ssoadmin_account_assignment" "whoa_admin_sso_account_assignment" {
   permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
   principal_id       = aws_identitystore_group.administrators_sso_group.group_id
   principal_type     = "GROUP"
-  target_id          = aws_organizations_account.whoa-org.id
+  target_id          = aws_organizations_account.whoa.id
   target_type        = "AWS_ACCOUNT"
 }
-resource "aws_organizations_account" "whoa-dev" {
+resource "aws_organizations_account" "dev" {
   email = "whoa-dev@imma.io"
   name  = "dev"
   tags = {
@@ -95,10 +95,10 @@ resource "aws_ssoadmin_account_assignment" "dev_admin_sso_account_assignment" {
   permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
   principal_id       = aws_identitystore_group.administrators_sso_group.group_id
   principal_type     = "GROUP"
-  target_id          = aws_organizations_account.whoa-dev.id
+  target_id          = aws_organizations_account.dev.id
   target_type        = "AWS_ACCOUNT"
 }
-resource "aws_organizations_account" "whoa-hub" {
+resource "aws_organizations_account" "hub" {
   email = "whoa-hub@imma.io"
   name  = "hub"
   tags = {
@@ -111,10 +111,10 @@ resource "aws_ssoadmin_account_assignment" "hub_admin_sso_account_assignment" {
   permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
   principal_id       = aws_identitystore_group.administrators_sso_group.group_id
   principal_type     = "GROUP"
-  target_id          = aws_organizations_account.whoa-hub.id
+  target_id          = aws_organizations_account.hub.id
   target_type        = "AWS_ACCOUNT"
 }
-resource "aws_organizations_account" "whoa-net" {
+resource "aws_organizations_account" "secrets" {
   email = "whoa-secrets@imma.io"
   name  = "secrets"
   tags = {
@@ -127,10 +127,10 @@ resource "aws_ssoadmin_account_assignment" "secrets_admin_sso_account_assignment
   permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
   principal_id       = aws_identitystore_group.administrators_sso_group.group_id
   principal_type     = "GROUP"
-  target_id          = aws_organizations_account.whoa-net.id
+  target_id          = aws_organizations_account.secrets.id
   target_type        = "AWS_ACCOUNT"
 }
-resource "aws_organizations_account" "whoa-pub" {
+resource "aws_organizations_account" "prod" {
   email = "whoa-prod@imma.io"
   name  = "prod"
   tags = {
@@ -143,6 +143,26 @@ resource "aws_ssoadmin_account_assignment" "prod_admin_sso_account_assignment" {
   permission_set_arn = aws_ssoadmin_managed_policy_attachment.admin_sso_managed_policy_attachment.permission_set_arn
   principal_id       = aws_identitystore_group.administrators_sso_group.group_id
   principal_type     = "GROUP"
-  target_id          = aws_organizations_account.whoa-pub.id
+  target_id          = aws_organizations_account.prod.id
   target_type        = "AWS_ACCOUNT"
+}
+moved {
+  from = aws_organizations_account.whoa-org
+  to   = aws_organizations_account.whoa
+}
+moved {
+  from = aws_organizations_account.whoa-dev
+  to   = aws_organizations_account.dev
+}
+moved {
+  from = aws_organizations_account.whoa-hub
+  to   = aws_organizations_account.hub
+}
+moved {
+  from = aws_organizations_account.whoa-net
+  to   = aws_organizations_account.secrets
+}
+moved {
+  from = aws_organizations_account.whoa-pub
+  to   = aws_organizations_account.prod
 }
