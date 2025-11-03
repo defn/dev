@@ -2,10 +2,10 @@
 
 function main {
 	if [[ $# == 0 ]]; then
-		set -- $(ls -d */ | sort)
+		set -- $(ls -d */ | shuf)
 	fi
 
-	runmany 8 'echo $1; cd $1 && mise exec -- terraform plan --out .plan || true' "$@"
+	runmany 8 'echo $1; cd $1 && mise exec -- terraform plan -no-color --out .plan | tee .plan.txt || true' "$@"
 }
 
 main "$@"
