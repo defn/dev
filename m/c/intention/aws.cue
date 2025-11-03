@@ -20,6 +20,8 @@ aws: "org"~lookup: [string]~(ORG,_): close({
 		email!:     string
 		sso_role:   string
 		aws_config: string
+		iam_user_access_to_billing?: string
+		role_name?:                  string
 
 		id:      =~"^[0-9]+$"
 		account: ACCOUNT

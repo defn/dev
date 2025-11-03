@@ -85,6 +85,8 @@ resource "aws_ssoadmin_account_assignment" "coil_admin_sso_account_assignment" {
 resource "aws_organizations_account" "hub" {
   email = "aws-coil+hub@defn.us"
   name  = "hub"
+		  iam_user_access_to_billing = "ALLOW"
+		  role_name                  = "OrganizationAccountAccessRole"
   tags = {
     ManagedBy = "Terraform"
   }
@@ -101,6 +103,8 @@ resource "aws_ssoadmin_account_assignment" "hub_admin_sso_account_assignment" {
 resource "aws_organizations_account" "lib" {
   email = "aws-coil+lib@defn.us"
   name  = "lib"
+		  iam_user_access_to_billing = "ALLOW"
+		  role_name                  = "OrganizationAccountAccessRole"
   tags = {
     ManagedBy = "Terraform"
   }
@@ -117,6 +121,8 @@ resource "aws_ssoadmin_account_assignment" "lib_admin_sso_account_assignment" {
 resource "aws_organizations_account" "net" {
   email = "aws-coil+net@defn.us"
   name  = "net"
+		  iam_user_access_to_billing = "ALLOW"
+		  role_name                  = "OrganizationAccountAccessRole"
   tags = {
     ManagedBy = "Terraform"
   }

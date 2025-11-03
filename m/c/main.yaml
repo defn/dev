@@ -5771,6 +5771,8 @@ config:
               resource "aws_organizations_account" "hub" {
                 email = "aws-coil+hub@defn.us"
                 name  = "hub"
+              		  iam_user_access_to_billing = "ALLOW"
+              		  role_name                  = "OrganizationAccountAccessRole"
                 tags = {
                   ManagedBy = "Terraform"
                 }
@@ -5787,6 +5789,8 @@ config:
               resource "aws_organizations_account" "lib" {
                 email = "aws-coil+lib@defn.us"
                 name  = "lib"
+              		  iam_user_access_to_billing = "ALLOW"
+              		  role_name                  = "OrganizationAccountAccessRole"
                 tags = {
                   ManagedBy = "Terraform"
                 }
@@ -5803,6 +5807,8 @@ config:
               resource "aws_organizations_account" "net" {
                 email = "aws-coil+net@defn.us"
                 name  = "net"
+              		  iam_user_access_to_billing = "ALLOW"
+              		  role_name                  = "OrganizationAccountAccessRole"
                 tags = {
                   ManagedBy = "Terraform"
                 }
@@ -5901,6 +5907,8 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            iam_user_access_to_billing: ALLOW
+            role_name: OrganizationAccountAccessRole
             mise_config: |-
               # auto-generated: aws.cue mise_config
               [env]
@@ -6013,6 +6021,8 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            iam_user_access_to_billing: ALLOW
+            role_name: OrganizationAccountAccessRole
             mise_config: |-
               # auto-generated: aws.cue mise_config
               [env]
@@ -6125,6 +6135,8 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            iam_user_access_to_billing: ALLOW
+            role_name: OrganizationAccountAccessRole
             mise_config: |-
               # auto-generated: aws.cue mise_config
               [env]
@@ -6373,6 +6385,8 @@ config:
               resource "aws_organizations_account" "hub" {
                 email = "aws-curl+hub@defn.us"
                 name  = "hub"
+              		  iam_user_access_to_billing = "ALLOW"
+              		  role_name                  = "OrganizationAccountAccessRole"
                 tags = {
                   ManagedBy = "Terraform"
                 }
@@ -6389,6 +6403,8 @@ config:
               resource "aws_organizations_account" "lib" {
                 email = "aws-curl+lib@defn.us"
                 name  = "lib"
+              		  iam_user_access_to_billing = "ALLOW"
+              		  role_name                  = "OrganizationAccountAccessRole"
                 tags = {
                   ManagedBy = "Terraform"
                 }
@@ -6405,6 +6421,8 @@ config:
               resource "aws_organizations_account" "net" {
                 email = "aws-curl+net@defn.us"
                 name  = "net"
+              		  iam_user_access_to_billing = "ALLOW"
+              		  role_name                  = "OrganizationAccountAccessRole"
                 tags = {
                   ManagedBy = "Terraform"
                 }
@@ -6503,6 +6521,8 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            iam_user_access_to_billing: ALLOW
+            role_name: OrganizationAccountAccessRole
             mise_config: |-
               # auto-generated: aws.cue mise_config
               [env]
@@ -6615,6 +6635,8 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            iam_user_access_to_billing: ALLOW
+            role_name: OrganizationAccountAccessRole
             mise_config: |-
               # auto-generated: aws.cue mise_config
               [env]
@@ -6727,6 +6749,8 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            iam_user_access_to_billing: ALLOW
+            role_name: OrganizationAccountAccessRole
             mise_config: |-
               # auto-generated: aws.cue mise_config
               [env]
@@ -8568,6 +8592,8 @@ config:
               resource "aws_organizations_account" "ops" {
                 email = "aws-gyre+ops@defn.us"
                 name  = "ops"
+              		  iam_user_access_to_billing = "ALLOW"
+              		  role_name                  = "OrganizationAccountAccessRole"
                 tags = {
                   ManagedBy = "Terraform"
                 }
@@ -8658,6 +8684,8 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            iam_user_access_to_billing: ALLOW
+            role_name: OrganizationAccountAccessRole
             mise_config: |-
               # auto-generated: aws.cue mise_config
               [env]
@@ -8906,6 +8934,8 @@ config:
               resource "aws_organizations_account" "sec" {
                 email = "aws-helix+sec@defn.sh"
                 name  = "sec"
+              		  iam_user_access_to_billing = "ALLOW"
+              		  role_name                  = "OrganizationAccountAccessRole"
                 tags = {
                   ManagedBy = "Terraform"
                 }
@@ -8922,6 +8952,8 @@ config:
               resource "aws_organizations_account" "dev" {
                 email = "aws-helix+dev@defn.sh"
                 name  = "dev"
+              		  iam_user_access_to_billing = "ALLOW"
+              		  role_name                  = "OrganizationAccountAccessRole"
                 tags = {
                   ManagedBy = "Terraform"
                 }
@@ -8938,6 +8970,8 @@ config:
               resource "aws_organizations_account" "hub" {
                 email = "aws-helix+hub@defn.sh"
                 name  = "hub"
+              		  iam_user_access_to_billing = "ALLOW"
+              		  role_name                  = "OrganizationAccountAccessRole"
                 tags = {
                   ManagedBy = "Terraform"
                 }
@@ -8954,6 +8988,8 @@ config:
               resource "aws_organizations_account" "lib" {
                 email = "aws-helix+lib@defn.sh"
                 name  = "lib"
+              		  iam_user_access_to_billing = "ALLOW"
+              		  role_name                  = "OrganizationAccountAccessRole"
                 tags = {
                   ManagedBy = "Terraform"
                 }
@@ -8970,6 +9006,8 @@ config:
               resource "aws_organizations_account" "log" {
                 email = "aws-helix+log@defn.sh"
                 name  = "log"
+              		  iam_user_access_to_billing = "ALLOW"
+              		  role_name                  = "OrganizationAccountAccessRole"
                 tags = {
                   ManagedBy = "Terraform"
                 }
@@ -8986,6 +9024,8 @@ config:
               resource "aws_organizations_account" "net" {
                 email = "aws-helix+net@defn.sh"
                 name  = "net"
+              		  iam_user_access_to_billing = "ALLOW"
+              		  role_name                  = "OrganizationAccountAccessRole"
                 tags = {
                   ManagedBy = "Terraform"
                 }
@@ -9002,6 +9042,8 @@ config:
               resource "aws_organizations_account" "ops" {
                 email = "aws-helix+ops@defn.sh"
                 name  = "ops"
+              		  iam_user_access_to_billing = "ALLOW"
+              		  role_name                  = "OrganizationAccountAccessRole"
                 tags = {
                   ManagedBy = "Terraform"
                 }
@@ -9018,6 +9060,8 @@ config:
               resource "aws_organizations_account" "dmz" {
                 email = "aws-helix+dmz@defn.sh"
                 name  = "dmz"
+              		  iam_user_access_to_billing = "ALLOW"
+              		  role_name                  = "OrganizationAccountAccessRole"
                 tags = {
                   ManagedBy = "Terraform"
                 }
@@ -9034,6 +9078,8 @@ config:
               resource "aws_organizations_account" "pub" {
                 email = "aws-helix+pub@defn.sh"
                 name  = "pub"
+              		  iam_user_access_to_billing = "ALLOW"
+              		  role_name                  = "OrganizationAccountAccessRole"
                 tags = {
                   ManagedBy = "Terraform"
                 }
@@ -9156,6 +9202,8 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            iam_user_access_to_billing: ALLOW
+            role_name: OrganizationAccountAccessRole
             mise_config: |-
               # auto-generated: aws.cue mise_config
               [env]
@@ -9268,6 +9316,8 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            iam_user_access_to_billing: ALLOW
+            role_name: OrganizationAccountAccessRole
             mise_config: |-
               # auto-generated: aws.cue mise_config
               [env]
@@ -9380,6 +9430,8 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            iam_user_access_to_billing: ALLOW
+            role_name: OrganizationAccountAccessRole
             mise_config: |-
               # auto-generated: aws.cue mise_config
               [env]
@@ -9492,6 +9544,8 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            iam_user_access_to_billing: ALLOW
+            role_name: OrganizationAccountAccessRole
             mise_config: |-
               # auto-generated: aws.cue mise_config
               [env]
@@ -9604,6 +9658,8 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            iam_user_access_to_billing: ALLOW
+            role_name: OrganizationAccountAccessRole
             mise_config: |-
               # auto-generated: aws.cue mise_config
               [env]
@@ -9716,6 +9772,8 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            iam_user_access_to_billing: ALLOW
+            role_name: OrganizationAccountAccessRole
             mise_config: |-
               # auto-generated: aws.cue mise_config
               [env]
@@ -9828,6 +9886,8 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            iam_user_access_to_billing: ALLOW
+            role_name: OrganizationAccountAccessRole
             mise_config: |-
               # auto-generated: aws.cue mise_config
               [env]
@@ -9940,6 +10000,8 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            iam_user_access_to_billing: ALLOW
+            role_name: OrganizationAccountAccessRole
             mise_config: |-
               # auto-generated: aws.cue mise_config
               [env]
@@ -10052,6 +10114,8 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            iam_user_access_to_billing: ALLOW
+            role_name: OrganizationAccountAccessRole
             mise_config: |-
               # auto-generated: aws.cue mise_config
               [env]
@@ -13358,6 +13422,8 @@ config:
               resource "aws_organizations_account" "pub" {
                 email = "aws-spiral+pub@defn.us"
                 name  = "pub"
+              		  iam_user_access_to_billing = "ALLOW"
+              		  role_name                  = "OrganizationAccountAccessRole"
                 tags = {
                   ManagedBy = "Terraform"
                 }
@@ -13374,6 +13440,8 @@ config:
               resource "aws_organizations_account" "dev" {
                 email = "aws-spiral+dev@defn.us"
                 name  = "dev"
+              		  iam_user_access_to_billing = "ALLOW"
+              		  role_name                  = "OrganizationAccountAccessRole"
                 tags = {
                   ManagedBy = "Terraform"
                 }
@@ -13390,6 +13458,8 @@ config:
               resource "aws_organizations_account" "hub" {
                 email = "aws-spiral+hub@defn.us"
                 name  = "hub"
+              		  iam_user_access_to_billing = "ALLOW"
+              		  role_name                  = "OrganizationAccountAccessRole"
                 tags = {
                   ManagedBy = "Terraform"
                 }
@@ -13406,6 +13476,8 @@ config:
               resource "aws_organizations_account" "lib" {
                 email = "aws-spiral+lib@defn.us"
                 name  = "lib"
+              		  iam_user_access_to_billing = "ALLOW"
+              		  role_name                  = "OrganizationAccountAccessRole"
                 tags = {
                   ManagedBy = "Terraform"
                 }
@@ -13422,6 +13494,8 @@ config:
               resource "aws_organizations_account" "log" {
                 email = "aws-spiral+log@defn.us"
                 name  = "log"
+              		  iam_user_access_to_billing = "ALLOW"
+              		  role_name                  = "OrganizationAccountAccessRole"
                 tags = {
                   ManagedBy = "Terraform"
                 }
@@ -13438,6 +13512,8 @@ config:
               resource "aws_organizations_account" "net" {
                 email = "aws-spiral+net@defn.us"
                 name  = "net"
+              		  iam_user_access_to_billing = "ALLOW"
+              		  role_name                  = "OrganizationAccountAccessRole"
                 tags = {
                   ManagedBy = "Terraform"
                 }
@@ -13454,6 +13530,8 @@ config:
               resource "aws_organizations_account" "ops" {
                 email = "aws-spiral+ops@defn.us"
                 name  = "ops"
+              		  iam_user_access_to_billing = "ALLOW"
+              		  role_name                  = "OrganizationAccountAccessRole"
                 tags = {
                   ManagedBy = "Terraform"
                 }
@@ -13470,6 +13548,8 @@ config:
               resource "aws_organizations_account" "sec" {
                 email = "aws-spiral+sec@defn.us"
                 name  = "sec"
+              		  iam_user_access_to_billing = "ALLOW"
+              		  role_name                  = "OrganizationAccountAccessRole"
                 tags = {
                   ManagedBy = "Terraform"
                 }
@@ -13486,6 +13566,8 @@ config:
               resource "aws_organizations_account" "dmz" {
                 email = "aws-spiral+dmz@defn.us"
                 name  = "dmz"
+              		  iam_user_access_to_billing = "ALLOW"
+              		  role_name                  = "OrganizationAccountAccessRole"
                 tags = {
                   ManagedBy = "Terraform"
                 }
@@ -13608,6 +13690,8 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            iam_user_access_to_billing: ALLOW
+            role_name: OrganizationAccountAccessRole
             mise_config: |-
               # auto-generated: aws.cue mise_config
               [env]
@@ -13720,6 +13804,8 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            iam_user_access_to_billing: ALLOW
+            role_name: OrganizationAccountAccessRole
             mise_config: |-
               # auto-generated: aws.cue mise_config
               [env]
@@ -13832,6 +13918,8 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            iam_user_access_to_billing: ALLOW
+            role_name: OrganizationAccountAccessRole
             mise_config: |-
               # auto-generated: aws.cue mise_config
               [env]
@@ -13944,6 +14032,8 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            iam_user_access_to_billing: ALLOW
+            role_name: OrganizationAccountAccessRole
             mise_config: |-
               # auto-generated: aws.cue mise_config
               [env]
@@ -14056,6 +14146,8 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            iam_user_access_to_billing: ALLOW
+            role_name: OrganizationAccountAccessRole
             mise_config: |-
               # auto-generated: aws.cue mise_config
               [env]
@@ -14168,6 +14260,8 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            iam_user_access_to_billing: ALLOW
+            role_name: OrganizationAccountAccessRole
             mise_config: |-
               # auto-generated: aws.cue mise_config
               [env]
@@ -14280,6 +14374,8 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            iam_user_access_to_billing: ALLOW
+            role_name: OrganizationAccountAccessRole
             mise_config: |-
               # auto-generated: aws.cue mise_config
               [env]
@@ -14392,6 +14488,8 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            iam_user_access_to_billing: ALLOW
+            role_name: OrganizationAccountAccessRole
             mise_config: |-
               # auto-generated: aws.cue mise_config
               [env]
@@ -14504,6 +14602,8 @@ config:
               sso_role_name=Administrator
               sso_start_url=https://defn.awsapps.com/start
               sso_region=us-east-2
+            iam_user_access_to_billing: ALLOW
+            role_name: OrganizationAccountAccessRole
             mise_config: |-
               # auto-generated: aws.cue mise_config
               [env]

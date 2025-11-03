@@ -150,6 +150,8 @@ infra_org_terraform: |-
   resource "aws_organizations_account" "sec" {
     email = "aws-helix+sec@defn.sh"
     name  = "sec"
+  		  iam_user_access_to_billing = "ALLOW"
+  		  role_name                  = "OrganizationAccountAccessRole"
     tags = {
       ManagedBy = "Terraform"
     }
@@ -166,6 +168,8 @@ infra_org_terraform: |-
   resource "aws_organizations_account" "dev" {
     email = "aws-helix+dev@defn.sh"
     name  = "dev"
+  		  iam_user_access_to_billing = "ALLOW"
+  		  role_name                  = "OrganizationAccountAccessRole"
     tags = {
       ManagedBy = "Terraform"
     }
@@ -182,6 +186,8 @@ infra_org_terraform: |-
   resource "aws_organizations_account" "hub" {
     email = "aws-helix+hub@defn.sh"
     name  = "hub"
+  		  iam_user_access_to_billing = "ALLOW"
+  		  role_name                  = "OrganizationAccountAccessRole"
     tags = {
       ManagedBy = "Terraform"
     }
@@ -198,6 +204,8 @@ infra_org_terraform: |-
   resource "aws_organizations_account" "lib" {
     email = "aws-helix+lib@defn.sh"
     name  = "lib"
+  		  iam_user_access_to_billing = "ALLOW"
+  		  role_name                  = "OrganizationAccountAccessRole"
     tags = {
       ManagedBy = "Terraform"
     }
@@ -214,6 +222,8 @@ infra_org_terraform: |-
   resource "aws_organizations_account" "log" {
     email = "aws-helix+log@defn.sh"
     name  = "log"
+  		  iam_user_access_to_billing = "ALLOW"
+  		  role_name                  = "OrganizationAccountAccessRole"
     tags = {
       ManagedBy = "Terraform"
     }
@@ -230,6 +240,8 @@ infra_org_terraform: |-
   resource "aws_organizations_account" "net" {
     email = "aws-helix+net@defn.sh"
     name  = "net"
+  		  iam_user_access_to_billing = "ALLOW"
+  		  role_name                  = "OrganizationAccountAccessRole"
     tags = {
       ManagedBy = "Terraform"
     }
@@ -246,6 +258,8 @@ infra_org_terraform: |-
   resource "aws_organizations_account" "ops" {
     email = "aws-helix+ops@defn.sh"
     name  = "ops"
+  		  iam_user_access_to_billing = "ALLOW"
+  		  role_name                  = "OrganizationAccountAccessRole"
     tags = {
       ManagedBy = "Terraform"
     }
@@ -262,6 +276,8 @@ infra_org_terraform: |-
   resource "aws_organizations_account" "dmz" {
     email = "aws-helix+dmz@defn.sh"
     name  = "dmz"
+  		  iam_user_access_to_billing = "ALLOW"
+  		  role_name                  = "OrganizationAccountAccessRole"
     tags = {
       ManagedBy = "Terraform"
     }
@@ -278,6 +294,8 @@ infra_org_terraform: |-
   resource "aws_organizations_account" "pub" {
     email = "aws-helix+pub@defn.sh"
     name  = "pub"
+  		  iam_user_access_to_billing = "ALLOW"
+  		  role_name                  = "OrganizationAccountAccessRole"
     tags = {
       ManagedBy = "Terraform"
     }

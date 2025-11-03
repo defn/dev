@@ -150,6 +150,8 @@ infra_org_terraform: |-
   resource "aws_organizations_account" "ops" {
     email = "aws-gyre+ops@defn.us"
     name  = "ops"
+  		  iam_user_access_to_billing = "ALLOW"
+  		  role_name                  = "OrganizationAccountAccessRole"
     tags = {
       ManagedBy = "Terraform"
     }

@@ -112,7 +112,10 @@ _orgTerraform: {
 
 				resource "aws_organizations_account" "\(strings.Replace(accData.name, "-", "_", -1))" {
 				  email = "\(accData.email)"
-				  name  = "\(accData.name)"
+				  name  = "\(accData.name)"\(strings.Join([
+					if accData.iam_user_access_to_billing != _|_ {"\n\t\t  iam_user_access_to_billing = \"\(accData.iam_user_access_to_billing)\""},
+					if accData.role_name != _|_ {"\n\t\t  role_name                  = \"\(accData.role_name)\""},
+				], ""))
 				  tags = {
 				    ManagedBy = "Terraform"
 				  }

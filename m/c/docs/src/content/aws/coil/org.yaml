@@ -150,6 +150,8 @@ infra_org_terraform: |-
   resource "aws_organizations_account" "hub" {
     email = "aws-coil+hub@defn.us"
     name  = "hub"
+  		  iam_user_access_to_billing = "ALLOW"
+  		  role_name                  = "OrganizationAccountAccessRole"
     tags = {
       ManagedBy = "Terraform"
     }
@@ -166,6 +168,8 @@ infra_org_terraform: |-
   resource "aws_organizations_account" "lib" {
     email = "aws-coil+lib@defn.us"
     name  = "lib"
+  		  iam_user_access_to_billing = "ALLOW"
+  		  role_name                  = "OrganizationAccountAccessRole"
     tags = {
       ManagedBy = "Terraform"
     }
@@ -182,6 +186,8 @@ infra_org_terraform: |-
   resource "aws_organizations_account" "net" {
     email = "aws-coil+net@defn.us"
     name  = "net"
+  		  iam_user_access_to_billing = "ALLOW"
+  		  role_name                  = "OrganizationAccountAccessRole"
     tags = {
       ManagedBy = "Terraform"
     }

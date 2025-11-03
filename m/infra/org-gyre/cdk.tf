@@ -85,6 +85,8 @@ resource "aws_ssoadmin_account_assignment" "gyre_admin_sso_account_assignment" {
 resource "aws_organizations_account" "ops" {
   email = "aws-gyre+ops@defn.us"
   name  = "ops"
+		  iam_user_access_to_billing = "ALLOW"
+		  role_name                  = "OrganizationAccountAccessRole"
   tags = {
     ManagedBy = "Terraform"
   }

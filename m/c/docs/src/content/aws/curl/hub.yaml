@@ -19,6 +19,8 @@ aws_config: |-
   sso_role_name=Administrator
   sso_start_url=https://defn.awsapps.com/start
   sso_region=us-east-2
+iam_user_access_to_billing: ALLOW
+role_name: OrganizationAccountAccessRole
 mise_config: |-
   # auto-generated: aws.cue mise_config
   [env]

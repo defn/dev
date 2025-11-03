@@ -85,6 +85,8 @@ resource "aws_ssoadmin_account_assignment" "spiral_admin_sso_account_assignment"
 resource "aws_organizations_account" "pub" {
   email = "aws-spiral+pub@defn.us"
   name  = "pub"
+		  iam_user_access_to_billing = "ALLOW"
+		  role_name                  = "OrganizationAccountAccessRole"
   tags = {
     ManagedBy = "Terraform"
   }
@@ -101,6 +103,8 @@ resource "aws_ssoadmin_account_assignment" "pub_admin_sso_account_assignment" {
 resource "aws_organizations_account" "dev" {
   email = "aws-spiral+dev@defn.us"
   name  = "dev"
+		  iam_user_access_to_billing = "ALLOW"
+		  role_name                  = "OrganizationAccountAccessRole"
   tags = {
     ManagedBy = "Terraform"
   }
@@ -117,6 +121,8 @@ resource "aws_ssoadmin_account_assignment" "dev_admin_sso_account_assignment" {
 resource "aws_organizations_account" "hub" {
   email = "aws-spiral+hub@defn.us"
   name  = "hub"
+		  iam_user_access_to_billing = "ALLOW"
+		  role_name                  = "OrganizationAccountAccessRole"
   tags = {
     ManagedBy = "Terraform"
   }
@@ -133,6 +139,8 @@ resource "aws_ssoadmin_account_assignment" "hub_admin_sso_account_assignment" {
 resource "aws_organizations_account" "lib" {
   email = "aws-spiral+lib@defn.us"
   name  = "lib"
+		  iam_user_access_to_billing = "ALLOW"
+		  role_name                  = "OrganizationAccountAccessRole"
   tags = {
     ManagedBy = "Terraform"
   }
@@ -149,6 +157,8 @@ resource "aws_ssoadmin_account_assignment" "lib_admin_sso_account_assignment" {
 resource "aws_organizations_account" "log" {
   email = "aws-spiral+log@defn.us"
   name  = "log"
+		  iam_user_access_to_billing = "ALLOW"
+		  role_name                  = "OrganizationAccountAccessRole"
   tags = {
     ManagedBy = "Terraform"
   }
@@ -165,6 +175,8 @@ resource "aws_ssoadmin_account_assignment" "log_admin_sso_account_assignment" {
 resource "aws_organizations_account" "net" {
   email = "aws-spiral+net@defn.us"
   name  = "net"
+		  iam_user_access_to_billing = "ALLOW"
+		  role_name                  = "OrganizationAccountAccessRole"
   tags = {
     ManagedBy = "Terraform"
   }
@@ -181,6 +193,8 @@ resource "aws_ssoadmin_account_assignment" "net_admin_sso_account_assignment" {
 resource "aws_organizations_account" "ops" {
   email = "aws-spiral+ops@defn.us"
   name  = "ops"
+		  iam_user_access_to_billing = "ALLOW"
+		  role_name                  = "OrganizationAccountAccessRole"
   tags = {
     ManagedBy = "Terraform"
   }
@@ -197,6 +211,8 @@ resource "aws_ssoadmin_account_assignment" "ops_admin_sso_account_assignment" {
 resource "aws_organizations_account" "sec" {
   email = "aws-spiral+sec@defn.us"
   name  = "sec"
+		  iam_user_access_to_billing = "ALLOW"
+		  role_name                  = "OrganizationAccountAccessRole"
   tags = {
     ManagedBy = "Terraform"
   }
@@ -213,6 +229,8 @@ resource "aws_ssoadmin_account_assignment" "sec_admin_sso_account_assignment" {
 resource "aws_organizations_account" "dmz" {
   email = "aws-spiral+dmz@defn.us"
   name  = "dmz"
+		  iam_user_access_to_billing = "ALLOW"
+		  role_name                  = "OrganizationAccountAccessRole"
   tags = {
     ManagedBy = "Terraform"
   }
