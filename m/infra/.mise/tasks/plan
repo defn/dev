@@ -6,6 +6,8 @@ function main {
 	fi
 
 	runmany 8 'echo $1; cd $1 && mise exec -- terraform plan -no-color --out .plan | tee .plan.txt || true' "$@"
+
+	for a in */; do echo "$a $(grep No.changes $a/.plan.txt)"; done | grep -v 'No changes'
 }
 
 main "$@"
