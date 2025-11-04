@@ -1,0 +1,48 @@
+import { k as d, p as f, l as $, m as v, o as y } from "./snippet.CogwZscX.js";
+const u = new WeakMap();
+var h =
+  (s) =>
+  async (a, p, l, { client: e }) => {
+    if (!s.hasAttribute("ssr")) return;
+    let i,
+      o,
+      r = {};
+    for (const [t, c] of Object.entries(l))
+      ((o ??= {}),
+        t === "default"
+          ? ((o.default = !0),
+            (i = d(() => ({ render: () => `<astro-slot>${c}</astro-slot>` }))))
+          : (o[t] = d(() => ({
+              render: () => `<astro-slot name="${t}">${c}</astro-slot>`,
+            }))),
+        t === "default"
+          ? (r.children = d(() => ({
+              render: () => `<astro-slot>${c}</astro-slot>`,
+            })))
+          : (r[t] = d(() => ({
+              render: () => `<astro-slot name="${t}">${c}</astro-slot>`,
+            }))));
+    const n = { ...p, children: i, $$slots: o, ...r };
+    if (u.has(s)) u.get(s).setProps(n);
+    else {
+      const t = m(a, s, n, e !== "only");
+      (u.set(s, t),
+        s.addEventListener("astro:unmount", () => t.destroy(), { once: !0 }));
+    }
+  };
+function m(s, a, p, l) {
+  let e = f(p);
+  const i = l ? $ : v;
+  l || (a.innerHTML = "");
+  const o = i(s, { target: a, props: e });
+  return {
+    setProps(r) {
+      Object.assign(e, r);
+      for (const n in e) n in r || delete e[n];
+    },
+    destroy() {
+      y(o);
+    },
+  };
+}
+export { h as default };
