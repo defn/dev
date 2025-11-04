@@ -5,10 +5,10 @@ package aws
 
 // diagram: https://whimsical.com/aws-account-layout-D6p7mKoZiwNqZdTZnysYUy
 
-org: [string]: sso_region: "us-west-2" | "us-east-2" | "us-east-1"
+aws: org: [string]: sso_region: "us-west-2" | "us-east-2" | "us-east-1"
 
 // aws account metadata
-org: close({
+aws: org: close({
 	chamber: {
 		sso_region: "us-west-2"
 		sso_url:    "https://chamber-0.awsapps.com/start"
@@ -68,7 +68,7 @@ org: close({
 })
 
 // list the accounts
-org: {
+aws: org: {
 	// Bootstrap IAM account only
 	defn: account: org: {
 		id:    "510430971399"

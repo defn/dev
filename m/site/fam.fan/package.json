@@ -1,5 +1,6 @@
 {
   "name": "fam.fan",
+  "description": "auto-generated: site.cue package_json",
   "version": "0.0.1",
   "private": true,
   "scripts": {

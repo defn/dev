@@ -1,4 +1,4 @@
-
+# auto-generated: site.cue wrangler_toml
 name = "defn--cloud"
 
 compatibility_date = "2024-12-30"

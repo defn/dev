@@ -1,4 +1,5 @@
 // @ts-check
+// auto-generated: site.cue astro_config_mjs
 import { defineConfig } from "astro/config";
 import starlight from "@astrojs/starlight";
 import sitemap from "@astrojs/sitemap";

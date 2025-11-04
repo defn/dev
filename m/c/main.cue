@@ -22,9 +22,9 @@ config: {
 	repo: definition.repo
 	repo: application.repo
 
-	aws: definition_aws
+	aws: definition_aws.aws
 	aws: intention.aws
 
-	site: definition_site
+	site: definition_site.site
 	site: intention.site
 }

@@ -12,7 +12,7 @@ site: {
 	"defn.cloud": {}
 	"defn.co": {}
 	"defn.co.in": {}
-	"defn.come": {}
+	"defn.com": {}
 	"defn.dev": {}
 	"defn.net": {}
 	"defn.org": {}

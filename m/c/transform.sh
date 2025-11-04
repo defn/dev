@@ -8,6 +8,19 @@ function main {
 	rm -rf docs/src/content/aws
 	mkdir -p docs/src/content/aws
 
+	for site in $(yq '.config.site | keys[]' main.yaml); do
+		export site
+
+		mkdir -p ../site/$site
+
+		yq '.config.site[strenv(site)].package_json' main.yaml >../site/$site/package.json
+		yq '.config.site[strenv(site)].astro_config_mjs' main.yaml >../site/$site/astro.config.mjs
+		yq '.config.site[strenv(site)].tailwind_config_mjs' main.yaml >../site/$site/tailwind.config.mjs
+		yq '.config.site[strenv(site)].tsconfig_json' main.yaml >../site/$site/tsconfig.json
+		yq '.config.site[strenv(site)].wrangler_toml' main.yaml >../site/$site/wrangler.toml
+		yq '.config.site[strenv(site)].mise_toml' main.yaml >../site/$site/mise.toml
+	done
+
 	for org in $(yq '.config.aws.org | keys[]' main.yaml); do
 		export org
 
