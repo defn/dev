@@ -11,6 +11,7 @@ import (
 
 	definition "github.com/defn/dev/m/c/definition"
 	definition_aws "github.com/defn/dev/m/c/definition/aws"
+	definition_site "github.com/defn/dev/m/c/definition/site"
 )
 
 config: {
@@ -23,4 +24,7 @@ config: {
 
 	aws: definition_aws
 	aws: intention.aws
+
+	site: definition_site
+	site: intention.site
 }
