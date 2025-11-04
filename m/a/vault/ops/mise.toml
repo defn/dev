@@ -1,5 +1,0 @@
-# auto-generated: aws.cue mise_config
-[env]
-AWS_PROFILE = "vault-ops"
-AWS_REGION = "us-east-2"
-AWS_CONFIG_FILE = "/home/ubuntu/m/a/vault/ops/.aws/config"

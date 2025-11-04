@@ -26,7 +26,7 @@ mise_config: |-
   [env]
   AWS_PROFILE = "coil-hub"
   AWS_REGION = "us-east-1"
-  AWS_CONFIG_FILE = "/home/ubuntu/m/a/coil/hub/.aws/config"
+  AWS_CONFIG_FILE = "/home/ubuntu/m/aws/coil/hub/.aws/config"
 aws_config_account: |-
   # auto-generated: aws.cue aws_config_account
   [profile coil-hub]
@@ -45,7 +45,7 @@ account_readme: |-
   ## AWS Environment: coil-hub
 
   ```bash
-  cd a/coil/hub
+  cd aws/coil/hub
   mise trust
   aws sso login
   alogin

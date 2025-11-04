@@ -24,7 +24,7 @@ mise_config: |-
   [env]
   AWS_PROFILE = "circus-net"
   AWS_REGION = "us-west-2"
-  AWS_CONFIG_FILE = "/home/ubuntu/m/a/circus/net/.aws/config"
+  AWS_CONFIG_FILE = "/home/ubuntu/m/aws/circus/net/.aws/config"
 aws_config_account: |-
   # auto-generated: aws.cue aws_config_account
   [profile circus-net]
@@ -43,7 +43,7 @@ account_readme: |-
   ## AWS Environment: circus-net
 
   ```bash
-  cd a/circus/net
+  cd aws/circus/net
   mise trust
   aws sso login
   alogin

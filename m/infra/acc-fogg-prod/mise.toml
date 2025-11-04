@@ -3,4 +3,4 @@
 [env]
 AWS_PROFILE = "fogg-prod"
 AWS_REGION = "us-west-2"
-AWS_CONFIG_FILE = "/home/ubuntu/m/a/fogg/prod/.aws/config"
+AWS_CONFIG_FILE = "/home/ubuntu/m/aws/fogg/prod/.aws/config"

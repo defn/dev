@@ -3,4 +3,4 @@
 [env]
 AWS_PROFILE = "gyre-org"
 AWS_REGION = "us-east-2"
-AWS_CONFIG_FILE = "/home/ubuntu/m/a/gyre/org/.aws/config"
+AWS_CONFIG_FILE = "/home/ubuntu/m/aws/gyre/org/.aws/config"

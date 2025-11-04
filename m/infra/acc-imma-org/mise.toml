@@ -3,4 +3,4 @@
 [env]
 AWS_PROFILE = "imma-org"
 AWS_REGION = "us-west-2"
-AWS_CONFIG_FILE = "/home/ubuntu/m/a/imma/org/.aws/config"
+AWS_CONFIG_FILE = "/home/ubuntu/m/aws/imma/org/.aws/config"

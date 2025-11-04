@@ -3,4 +3,4 @@
 [env]
 AWS_PROFILE = "immanent-summoner"
 AWS_REGION = "us-west-2"
-AWS_CONFIG_FILE = "/home/ubuntu/m/a/immanent/summoner/.aws/config"
+AWS_CONFIG_FILE = "/home/ubuntu/m/aws/immanent/summoner/.aws/config"

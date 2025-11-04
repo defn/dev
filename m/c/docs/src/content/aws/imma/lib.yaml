@@ -24,7 +24,7 @@ mise_config: |-
   [env]
   AWS_PROFILE = "imma-lib"
   AWS_REGION = "us-west-2"
-  AWS_CONFIG_FILE = "/home/ubuntu/m/a/imma/lib/.aws/config"
+  AWS_CONFIG_FILE = "/home/ubuntu/m/aws/imma/lib/.aws/config"
 aws_config_account: |-
   # auto-generated: aws.cue aws_config_account
   [profile imma-lib]
@@ -43,7 +43,7 @@ account_readme: |-
   ## AWS Environment: imma-lib
 
   ```bash
-  cd a/imma/lib
+  cd aws/imma/lib
   mise trust
   aws sso login
   alogin

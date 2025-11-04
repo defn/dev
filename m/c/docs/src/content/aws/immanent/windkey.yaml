@@ -24,7 +24,7 @@ mise_config: |-
   [env]
   AWS_PROFILE = "immanent-windkey"
   AWS_REGION = "us-west-2"
-  AWS_CONFIG_FILE = "/home/ubuntu/m/a/immanent/windkey/.aws/config"
+  AWS_CONFIG_FILE = "/home/ubuntu/m/aws/immanent/windkey/.aws/config"
 aws_config_account: |-
   # auto-generated: aws.cue aws_config_account
   [profile immanent-windkey]
@@ -43,7 +43,7 @@ account_readme: |-
   ## AWS Environment: immanent-windkey
 
   ```bash
-  cd a/immanent/windkey
+  cd aws/immanent/windkey
   mise trust
   aws sso login
   alogin

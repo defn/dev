@@ -24,7 +24,7 @@ mise_config: |-
   [env]
   AWS_PROFILE = "fogg-dev"
   AWS_REGION = "us-west-2"
-  AWS_CONFIG_FILE = "/home/ubuntu/m/a/fogg/dev/.aws/config"
+  AWS_CONFIG_FILE = "/home/ubuntu/m/aws/fogg/dev/.aws/config"
 aws_config_account: |-
   # auto-generated: aws.cue aws_config_account
   [profile fogg-dev]
@@ -43,7 +43,7 @@ account_readme: |-
   ## AWS Environment: fogg-dev
 
   ```bash
-  cd a/fogg/dev
+  cd aws/fogg/dev
   mise trust
   aws sso login
   alogin

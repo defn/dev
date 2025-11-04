@@ -24,7 +24,7 @@ mise_config: |-
   [env]
   AWS_PROFILE = "immanent-summoner"
   AWS_REGION = "us-west-2"
-  AWS_CONFIG_FILE = "/home/ubuntu/m/a/immanent/summoner/.aws/config"
+  AWS_CONFIG_FILE = "/home/ubuntu/m/aws/immanent/summoner/.aws/config"
 aws_config_account: |-
   # auto-generated: aws.cue aws_config_account
   [profile immanent-summoner]
@@ -43,7 +43,7 @@ account_readme: |-
   ## AWS Environment: immanent-summoner
 
   ```bash
-  cd a/immanent/summoner
+  cd aws/immanent/summoner
   mise trust
   aws sso login
   alogin

@@ -3,4 +3,4 @@
 [env]
 AWS_PROFILE = "whoa-org"
 AWS_REGION = "us-west-2"
-AWS_CONFIG_FILE = "/home/ubuntu/m/a/whoa/org/.aws/config"
+AWS_CONFIG_FILE = "/home/ubuntu/m/aws/whoa/org/.aws/config"

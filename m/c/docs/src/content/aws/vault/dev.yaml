@@ -24,7 +24,7 @@ mise_config: |-
   [env]
   AWS_PROFILE = "vault-dev"
   AWS_REGION = "us-east-2"
-  AWS_CONFIG_FILE = "/home/ubuntu/m/a/vault/dev/.aws/config"
+  AWS_CONFIG_FILE = "/home/ubuntu/m/aws/vault/dev/.aws/config"
 aws_config_account: |-
   # auto-generated: aws.cue aws_config_account
   [profile vault-dev]
@@ -43,7 +43,7 @@ account_readme: |-
   ## AWS Environment: vault-dev
 
   ```bash
-  cd a/vault/dev
+  cd aws/vault/dev
   mise trust
   aws sso login
   alogin

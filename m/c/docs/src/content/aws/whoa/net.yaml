@@ -24,7 +24,7 @@ mise_config: |-
   [env]
   AWS_PROFILE = "whoa-net"
   AWS_REGION = "us-west-2"
-  AWS_CONFIG_FILE = "/home/ubuntu/m/a/whoa/net/.aws/config"
+  AWS_CONFIG_FILE = "/home/ubuntu/m/aws/whoa/net/.aws/config"
 aws_config_account: |-
   # auto-generated: aws.cue aws_config_account
   [profile whoa-net]
@@ -43,7 +43,7 @@ account_readme: |-
   ## AWS Environment: whoa-net
 
   ```bash
-  cd a/whoa/net
+  cd aws/whoa/net
   mise trust
   aws sso login
   alogin

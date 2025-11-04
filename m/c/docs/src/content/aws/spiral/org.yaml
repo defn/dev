@@ -24,7 +24,7 @@ mise_config: |-
   [env]
   AWS_PROFILE = "spiral-org"
   AWS_REGION = "us-west-2"
-  AWS_CONFIG_FILE = "/home/ubuntu/m/a/spiral/org/.aws/config"
+  AWS_CONFIG_FILE = "/home/ubuntu/m/aws/spiral/org/.aws/config"
 aws_config_account: |-
   # auto-generated: aws.cue aws_config_account
   [profile spiral-org]
@@ -43,7 +43,7 @@ account_readme: |-
   ## AWS Environment: spiral-org
 
   ```bash
-  cd a/spiral/org
+  cd aws/spiral/org
   mise trust
   aws sso login
   alogin

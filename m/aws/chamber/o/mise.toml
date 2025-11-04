@@ -1,0 +1,5 @@
+# auto-generated: aws.cue mise_config
+[env]
+AWS_PROFILE = "chamber-o"
+AWS_REGION = "us-west-2"
+AWS_CONFIG_FILE = "/home/ubuntu/m/aws/chamber/o/.aws/config"

@@ -19,19 +19,19 @@ function main {
 				yq '.config.aws.org[strenv(org)].account[strenv(acc)]' main.yaml
 			) >"docs/src/content/aws/$org/$acc.yaml"
 
-			mkdir -p ../a/$org/$acc/.aws
-			yq '.config.aws.org[strenv(org)].account[strenv(acc)].aws_config' main.yaml >../a/$org/$acc/.aws/config
+			mkdir -p ../aws/$org/$acc/.aws
+			yq '.config.aws.org[strenv(org)].account[strenv(acc)].aws_config' main.yaml >../aws/$org/$acc/.aws/config
 
-			yq '.config.aws.org[strenv(org)].account[strenv(acc)].mise_config' main.yaml >../a/$org/$acc/mise.toml
+			yq '.config.aws.org[strenv(org)].account[strenv(acc)].mise_config' main.yaml >../aws/$org/$acc/mise.toml
 
 			# Generate account subdirectory README
-			yq '.config.aws.org[strenv(org)].account[strenv(acc)].account_readme' main.yaml >../a/$org/$acc/README.md
+			yq '.config.aws.org[strenv(org)].account[strenv(acc)].account_readme' main.yaml >../aws/$org/$acc/README.md
 
 			if [[ $acc == "org" ]]; then
 				mkdir -p ../infra/org-$org
 				(
 					echo "# auto-generated: transform.sh"
-					cat ../a/$org/$acc/mise.toml
+					cat ../aws/$org/$acc/mise.toml
 				) >../infra/org-$org/mise.toml
 
 				# Generate org-level infra README
@@ -44,7 +44,7 @@ function main {
 			mkdir -p ../infra/acc-$org-$acc
 			(
 				echo "# auto-generated: transform.sh"
-				cat ../a/$org/$acc/mise.toml
+				cat ../aws/$org/$acc/mise.toml
 			) >../infra/acc-$org-$acc/mise.toml
 
 			# Generate account-level infra README

@@ -24,7 +24,7 @@ mise_config: |-
   [env]
   AWS_PROFILE = "immanent-namer"
   AWS_REGION = "us-west-2"
-  AWS_CONFIG_FILE = "/home/ubuntu/m/a/immanent/namer/.aws/config"
+  AWS_CONFIG_FILE = "/home/ubuntu/m/aws/immanent/namer/.aws/config"
 aws_config_account: |-
   # auto-generated: aws.cue aws_config_account
   [profile immanent-namer]
@@ -43,7 +43,7 @@ account_readme: |-
   ## AWS Environment: immanent-namer
 
   ```bash
-  cd a/immanent/namer
+  cd aws/immanent/namer
   mise trust
   aws sso login
   alogin

@@ -78,7 +78,7 @@ config:
               [env]
               AWS_PROFILE = "chamber-org"
               AWS_REGION = "us-west-2"
-              AWS_CONFIG_FILE = "/home/ubuntu/m/a/chamber/org/.aws/config"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/aws/chamber/org/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue aws_config_account
               [profile chamber-org]
@@ -97,7 +97,7 @@ config:
               ## AWS Environment: chamber-org
 
               ```bash
-              cd a/chamber/org
+              cd aws/chamber/org
               mise trust
               aws sso login
               alogin
@@ -820,7 +820,7 @@ config:
               [env]
               AWS_PROFILE = "chamber-1"
               AWS_REGION = "us-west-2"
-              AWS_CONFIG_FILE = "/home/ubuntu/m/a/chamber/1/.aws/config"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/aws/chamber/1/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue aws_config_account
               [profile chamber-1]
@@ -839,7 +839,7 @@ config:
               ## AWS Environment: chamber-1
 
               ```bash
-              cd a/chamber/1
+              cd aws/chamber/1
               mise trust
               aws sso login
               alogin
@@ -932,7 +932,7 @@ config:
               [env]
               AWS_PROFILE = "chamber-2"
               AWS_REGION = "us-west-2"
-              AWS_CONFIG_FILE = "/home/ubuntu/m/a/chamber/2/.aws/config"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/aws/chamber/2/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue aws_config_account
               [profile chamber-2]
@@ -951,7 +951,7 @@ config:
               ## AWS Environment: chamber-2
 
               ```bash
-              cd a/chamber/2
+              cd aws/chamber/2
               mise trust
               aws sso login
               alogin
@@ -1044,7 +1044,7 @@ config:
               [env]
               AWS_PROFILE = "chamber-3"
               AWS_REGION = "us-west-2"
-              AWS_CONFIG_FILE = "/home/ubuntu/m/a/chamber/3/.aws/config"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/aws/chamber/3/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue aws_config_account
               [profile chamber-3]
@@ -1063,7 +1063,7 @@ config:
               ## AWS Environment: chamber-3
 
               ```bash
-              cd a/chamber/3
+              cd aws/chamber/3
               mise trust
               aws sso login
               alogin
@@ -1156,7 +1156,7 @@ config:
               [env]
               AWS_PROFILE = "chamber-4"
               AWS_REGION = "us-west-2"
-              AWS_CONFIG_FILE = "/home/ubuntu/m/a/chamber/4/.aws/config"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/aws/chamber/4/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue aws_config_account
               [profile chamber-4]
@@ -1175,7 +1175,7 @@ config:
               ## AWS Environment: chamber-4
 
               ```bash
-              cd a/chamber/4
+              cd aws/chamber/4
               mise trust
               aws sso login
               alogin
@@ -1268,7 +1268,7 @@ config:
               [env]
               AWS_PROFILE = "chamber-5"
               AWS_REGION = "us-west-2"
-              AWS_CONFIG_FILE = "/home/ubuntu/m/a/chamber/5/.aws/config"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/aws/chamber/5/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue aws_config_account
               [profile chamber-5]
@@ -1287,7 +1287,7 @@ config:
               ## AWS Environment: chamber-5
 
               ```bash
-              cd a/chamber/5
+              cd aws/chamber/5
               mise trust
               aws sso login
               alogin
@@ -1380,7 +1380,7 @@ config:
               [env]
               AWS_PROFILE = "chamber-6"
               AWS_REGION = "us-west-2"
-              AWS_CONFIG_FILE = "/home/ubuntu/m/a/chamber/6/.aws/config"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/aws/chamber/6/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue aws_config_account
               [profile chamber-6]
@@ -1399,7 +1399,7 @@ config:
               ## AWS Environment: chamber-6
 
               ```bash
-              cd a/chamber/6
+              cd aws/chamber/6
               mise trust
               aws sso login
               alogin
@@ -1492,7 +1492,7 @@ config:
               [env]
               AWS_PROFILE = "chamber-7"
               AWS_REGION = "us-west-2"
-              AWS_CONFIG_FILE = "/home/ubuntu/m/a/chamber/7/.aws/config"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/aws/chamber/7/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue aws_config_account
               [profile chamber-7]
@@ -1511,7 +1511,7 @@ config:
               ## AWS Environment: chamber-7
 
               ```bash
-              cd a/chamber/7
+              cd aws/chamber/7
               mise trust
               aws sso login
               alogin
@@ -1604,7 +1604,7 @@ config:
               [env]
               AWS_PROFILE = "chamber-8"
               AWS_REGION = "us-west-2"
-              AWS_CONFIG_FILE = "/home/ubuntu/m/a/chamber/8/.aws/config"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/aws/chamber/8/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue aws_config_account
               [profile chamber-8]
@@ -1623,7 +1623,7 @@ config:
               ## AWS Environment: chamber-8
 
               ```bash
-              cd a/chamber/8
+              cd aws/chamber/8
               mise trust
               aws sso login
               alogin
@@ -1716,7 +1716,7 @@ config:
               [env]
               AWS_PROFILE = "chamber-9"
               AWS_REGION = "us-west-2"
-              AWS_CONFIG_FILE = "/home/ubuntu/m/a/chamber/9/.aws/config"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/aws/chamber/9/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue aws_config_account
               [profile chamber-9]
@@ -1735,7 +1735,7 @@ config:
               ## AWS Environment: chamber-9
 
               ```bash
-              cd a/chamber/9
+              cd aws/chamber/9
               mise trust
               aws sso login
               alogin
@@ -1828,7 +1828,7 @@ config:
               [env]
               AWS_PROFILE = "chamber-a"
               AWS_REGION = "us-west-2"
-              AWS_CONFIG_FILE = "/home/ubuntu/m/a/chamber/a/.aws/config"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/aws/chamber/a/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue aws_config_account
               [profile chamber-a]
@@ -1847,7 +1847,7 @@ config:
               ## AWS Environment: chamber-a
 
               ```bash
-              cd a/chamber/a
+              cd aws/chamber/a
               mise trust
               aws sso login
               alogin
@@ -1940,7 +1940,7 @@ config:
               [env]
               AWS_PROFILE = "chamber-b"
               AWS_REGION = "us-west-2"
-              AWS_CONFIG_FILE = "/home/ubuntu/m/a/chamber/b/.aws/config"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/aws/chamber/b/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue aws_config_account
               [profile chamber-b]
@@ -1959,7 +1959,7 @@ config:
               ## AWS Environment: chamber-b
 
               ```bash
-              cd a/chamber/b
+              cd aws/chamber/b
               mise trust
               aws sso login
               alogin
@@ -2052,7 +2052,7 @@ config:
               [env]
               AWS_PROFILE = "chamber-c"
               AWS_REGION = "us-west-2"
-              AWS_CONFIG_FILE = "/home/ubuntu/m/a/chamber/c/.aws/config"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/aws/chamber/c/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue aws_config_account
               [profile chamber-c]
@@ -2071,7 +2071,7 @@ config:
               ## AWS Environment: chamber-c
 
               ```bash
-              cd a/chamber/c
+              cd aws/chamber/c
               mise trust
               aws sso login
               alogin
@@ -2164,7 +2164,7 @@ config:
               [env]
               AWS_PROFILE = "chamber-d"
               AWS_REGION = "us-west-2"
-              AWS_CONFIG_FILE = "/home/ubuntu/m/a/chamber/d/.aws/config"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/aws/chamber/d/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue aws_config_account
               [profile chamber-d]
@@ -2183,7 +2183,7 @@ config:
               ## AWS Environment: chamber-d
 
               ```bash
-              cd a/chamber/d
+              cd aws/chamber/d
               mise trust
               aws sso login
               alogin
@@ -2276,7 +2276,7 @@ config:
               [env]
               AWS_PROFILE = "chamber-e"
               AWS_REGION = "us-west-2"
-              AWS_CONFIG_FILE = "/home/ubuntu/m/a/chamber/e/.aws/config"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/aws/chamber/e/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue aws_config_account
               [profile chamber-e]
@@ -2295,7 +2295,7 @@ config:
               ## AWS Environment: chamber-e
 
               ```bash
-              cd a/chamber/e
+              cd aws/chamber/e
               mise trust
               aws sso login
               alogin
@@ -2388,7 +2388,7 @@ config:
               [env]
               AWS_PROFILE = "chamber-f"
               AWS_REGION = "us-west-2"
-              AWS_CONFIG_FILE = "/home/ubuntu/m/a/chamber/f/.aws/config"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/aws/chamber/f/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue aws_config_account
               [profile chamber-f]
@@ -2407,7 +2407,7 @@ config:
               ## AWS Environment: chamber-f
 
               ```bash
-              cd a/chamber/f
+              cd aws/chamber/f
               mise trust
               aws sso login
               alogin
@@ -2500,7 +2500,7 @@ config:
               [env]
               AWS_PROFILE = "chamber-g"
               AWS_REGION = "us-west-2"
-              AWS_CONFIG_FILE = "/home/ubuntu/m/a/chamber/g/.aws/config"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/aws/chamber/g/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue aws_config_account
               [profile chamber-g]
@@ -2519,7 +2519,7 @@ config:
               ## AWS Environment: chamber-g
 
               ```bash
-              cd a/chamber/g
+              cd aws/chamber/g
               mise trust
               aws sso login
               alogin
@@ -2612,7 +2612,7 @@ config:
               [env]
               AWS_PROFILE = "chamber-h"
               AWS_REGION = "us-west-2"
-              AWS_CONFIG_FILE = "/home/ubuntu/m/a/chamber/h/.aws/config"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/aws/chamber/h/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue aws_config_account
               [profile chamber-h]
@@ -2631,7 +2631,7 @@ config:
               ## AWS Environment: chamber-h
 
               ```bash
-              cd a/chamber/h
+              cd aws/chamber/h
               mise trust
               aws sso login
               alogin
@@ -2724,7 +2724,7 @@ config:
               [env]
               AWS_PROFILE = "chamber-i"
               AWS_REGION = "us-west-2"
-              AWS_CONFIG_FILE = "/home/ubuntu/m/a/chamber/i/.aws/config"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/aws/chamber/i/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue aws_config_account
               [profile chamber-i]
@@ -2743,7 +2743,7 @@ config:
               ## AWS Environment: chamber-i
 
               ```bash
-              cd a/chamber/i
+              cd aws/chamber/i
               mise trust
               aws sso login
               alogin
@@ -2836,7 +2836,7 @@ config:
               [env]
               AWS_PROFILE = "chamber-j"
               AWS_REGION = "us-west-2"
-              AWS_CONFIG_FILE = "/home/ubuntu/m/a/chamber/j/.aws/config"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/aws/chamber/j/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue aws_config_account
               [profile chamber-j]
@@ -2855,7 +2855,7 @@ config:
               ## AWS Environment: chamber-j
 
               ```bash
-              cd a/chamber/j
+              cd aws/chamber/j
               mise trust
               aws sso login
               alogin
@@ -2948,7 +2948,7 @@ config:
               [env]
               AWS_PROFILE = "chamber-l"
               AWS_REGION = "us-west-2"
-              AWS_CONFIG_FILE = "/home/ubuntu/m/a/chamber/l/.aws/config"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/aws/chamber/l/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue aws_config_account
               [profile chamber-l]
@@ -2967,7 +2967,7 @@ config:
               ## AWS Environment: chamber-l
 
               ```bash
-              cd a/chamber/l
+              cd aws/chamber/l
               mise trust
               aws sso login
               alogin
@@ -3060,7 +3060,7 @@ config:
               [env]
               AWS_PROFILE = "chamber-m"
               AWS_REGION = "us-west-2"
-              AWS_CONFIG_FILE = "/home/ubuntu/m/a/chamber/m/.aws/config"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/aws/chamber/m/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue aws_config_account
               [profile chamber-m]
@@ -3079,7 +3079,7 @@ config:
               ## AWS Environment: chamber-m
 
               ```bash
-              cd a/chamber/m
+              cd aws/chamber/m
               mise trust
               aws sso login
               alogin
@@ -3172,7 +3172,7 @@ config:
               [env]
               AWS_PROFILE = "chamber-n"
               AWS_REGION = "us-west-2"
-              AWS_CONFIG_FILE = "/home/ubuntu/m/a/chamber/n/.aws/config"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/aws/chamber/n/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue aws_config_account
               [profile chamber-n]
@@ -3191,7 +3191,7 @@ config:
               ## AWS Environment: chamber-n
 
               ```bash
-              cd a/chamber/n
+              cd aws/chamber/n
               mise trust
               aws sso login
               alogin
@@ -3284,7 +3284,7 @@ config:
               [env]
               AWS_PROFILE = "chamber-o"
               AWS_REGION = "us-west-2"
-              AWS_CONFIG_FILE = "/home/ubuntu/m/a/chamber/o/.aws/config"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/aws/chamber/o/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue aws_config_account
               [profile chamber-o]
@@ -3303,7 +3303,7 @@ config:
               ## AWS Environment: chamber-o
 
               ```bash
-              cd a/chamber/o
+              cd aws/chamber/o
               mise trust
               aws sso login
               alogin
@@ -3396,7 +3396,7 @@ config:
               [env]
               AWS_PROFILE = "chamber-p"
               AWS_REGION = "us-west-2"
-              AWS_CONFIG_FILE = "/home/ubuntu/m/a/chamber/p/.aws/config"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/aws/chamber/p/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue aws_config_account
               [profile chamber-p]
@@ -3415,7 +3415,7 @@ config:
               ## AWS Environment: chamber-p
 
               ```bash
-              cd a/chamber/p
+              cd aws/chamber/p
               mise trust
               aws sso login
               alogin
@@ -3508,7 +3508,7 @@ config:
               [env]
               AWS_PROFILE = "chamber-q"
               AWS_REGION = "us-west-2"
-              AWS_CONFIG_FILE = "/home/ubuntu/m/a/chamber/q/.aws/config"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/aws/chamber/q/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue aws_config_account
               [profile chamber-q]
@@ -3527,7 +3527,7 @@ config:
               ## AWS Environment: chamber-q
 
               ```bash
-              cd a/chamber/q
+              cd aws/chamber/q
               mise trust
               aws sso login
               alogin
@@ -3620,7 +3620,7 @@ config:
               [env]
               AWS_PROFILE = "chamber-r"
               AWS_REGION = "us-west-2"
-              AWS_CONFIG_FILE = "/home/ubuntu/m/a/chamber/r/.aws/config"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/aws/chamber/r/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue aws_config_account
               [profile chamber-r]
@@ -3639,7 +3639,7 @@ config:
               ## AWS Environment: chamber-r
 
               ```bash
-              cd a/chamber/r
+              cd aws/chamber/r
               mise trust
               aws sso login
               alogin
@@ -3732,7 +3732,7 @@ config:
               [env]
               AWS_PROFILE = "chamber-s"
               AWS_REGION = "us-west-2"
-              AWS_CONFIG_FILE = "/home/ubuntu/m/a/chamber/s/.aws/config"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/aws/chamber/s/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue aws_config_account
               [profile chamber-s]
@@ -3751,7 +3751,7 @@ config:
               ## AWS Environment: chamber-s
 
               ```bash
-              cd a/chamber/s
+              cd aws/chamber/s
               mise trust
               aws sso login
               alogin
@@ -3844,7 +3844,7 @@ config:
               [env]
               AWS_PROFILE = "chamber-t"
               AWS_REGION = "us-west-2"
-              AWS_CONFIG_FILE = "/home/ubuntu/m/a/chamber/t/.aws/config"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/aws/chamber/t/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue aws_config_account
               [profile chamber-t]
@@ -3863,7 +3863,7 @@ config:
               ## AWS Environment: chamber-t
 
               ```bash
-              cd a/chamber/t
+              cd aws/chamber/t
               mise trust
               aws sso login
               alogin
@@ -3956,7 +3956,7 @@ config:
               [env]
               AWS_PROFILE = "chamber-u"
               AWS_REGION = "us-west-2"
-              AWS_CONFIG_FILE = "/home/ubuntu/m/a/chamber/u/.aws/config"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/aws/chamber/u/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue aws_config_account
               [profile chamber-u]
@@ -3975,7 +3975,7 @@ config:
               ## AWS Environment: chamber-u
 
               ```bash
-              cd a/chamber/u
+              cd aws/chamber/u
               mise trust
               aws sso login
               alogin
@@ -4068,7 +4068,7 @@ config:
               [env]
               AWS_PROFILE = "chamber-v"
               AWS_REGION = "us-west-2"
-              AWS_CONFIG_FILE = "/home/ubuntu/m/a/chamber/v/.aws/config"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/aws/chamber/v/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue aws_config_account
               [profile chamber-v]
@@ -4087,7 +4087,7 @@ config:
               ## AWS Environment: chamber-v
 
               ```bash
-              cd a/chamber/v
+              cd aws/chamber/v
               mise trust
               aws sso login
               alogin
@@ -4180,7 +4180,7 @@ config:
               [env]
               AWS_PROFILE = "chamber-w"
               AWS_REGION = "us-west-2"
-              AWS_CONFIG_FILE = "/home/ubuntu/m/a/chamber/w/.aws/config"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/aws/chamber/w/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue aws_config_account
               [profile chamber-w]
@@ -4199,7 +4199,7 @@ config:
               ## AWS Environment: chamber-w
 
               ```bash
-              cd a/chamber/w
+              cd aws/chamber/w
               mise trust
               aws sso login
               alogin
@@ -4292,7 +4292,7 @@ config:
               [env]
               AWS_PROFILE = "chamber-x"
               AWS_REGION = "us-west-2"
-              AWS_CONFIG_FILE = "/home/ubuntu/m/a/chamber/x/.aws/config"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/aws/chamber/x/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue aws_config_account
               [profile chamber-x]
@@ -4311,7 +4311,7 @@ config:
               ## AWS Environment: chamber-x
 
               ```bash
-              cd a/chamber/x
+              cd aws/chamber/x
               mise trust
               aws sso login
               alogin
@@ -4404,7 +4404,7 @@ config:
               [env]
               AWS_PROFILE = "chamber-y"
               AWS_REGION = "us-west-2"
-              AWS_CONFIG_FILE = "/home/ubuntu/m/a/chamber/y/.aws/config"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/aws/chamber/y/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue aws_config_account
               [profile chamber-y]
@@ -4423,7 +4423,7 @@ config:
               ## AWS Environment: chamber-y
 
               ```bash
-              cd a/chamber/y
+              cd aws/chamber/y
               mise trust
               aws sso login
               alogin
@@ -4516,7 +4516,7 @@ config:
               [env]
               AWS_PROFILE = "chamber-z"
               AWS_REGION = "us-west-2"
-              AWS_CONFIG_FILE = "/home/ubuntu/m/a/chamber/z/.aws/config"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/aws/chamber/z/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue aws_config_account
               [profile chamber-z]
@@ -4535,7 +4535,7 @@ config:
               ## AWS Environment: chamber-z
 
               ```bash
-              cd a/chamber/z
+              cd aws/chamber/z
               mise trust
               aws sso login
               alogin
@@ -4633,7 +4633,7 @@ config:
               [env]
               AWS_PROFILE = "circus-org"
               AWS_REGION = "us-west-2"
-              AWS_CONFIG_FILE = "/home/ubuntu/m/a/circus/org/.aws/config"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/aws/circus/org/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue aws_config_account
               [profile circus-org]
@@ -4652,7 +4652,7 @@ config:
               ## AWS Environment: circus-org
 
               ```bash
-              cd a/circus/org
+              cd aws/circus/org
               mise trust
               aws sso login
               alogin
@@ -4895,7 +4895,7 @@ config:
               [env]
               AWS_PROFILE = "circus-lib"
               AWS_REGION = "us-west-2"
-              AWS_CONFIG_FILE = "/home/ubuntu/m/a/circus/lib/.aws/config"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/aws/circus/lib/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue aws_config_account
               [profile circus-lib]
@@ -4914,7 +4914,7 @@ config:
               ## AWS Environment: circus-lib
 
               ```bash
-              cd a/circus/lib
+              cd aws/circus/lib
               mise trust
               aws sso login
               alogin
@@ -5007,7 +5007,7 @@ config:
               [env]
               AWS_PROFILE = "circus-log"
               AWS_REGION = "us-west-2"
-              AWS_CONFIG_FILE = "/home/ubuntu/m/a/circus/log/.aws/config"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/aws/circus/log/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue aws_config_account
               [profile circus-log]
@@ -5026,7 +5026,7 @@ config:
               ## AWS Environment: circus-log
 
               ```bash
-              cd a/circus/log
+              cd aws/circus/log
               mise trust
               aws sso login
               alogin
@@ -5119,7 +5119,7 @@ config:
               [env]
               AWS_PROFILE = "circus-net"
               AWS_REGION = "us-west-2"
-              AWS_CONFIG_FILE = "/home/ubuntu/m/a/circus/net/.aws/config"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/aws/circus/net/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue aws_config_account
               [profile circus-net]
@@ -5138,7 +5138,7 @@ config:
               ## AWS Environment: circus-net
 
               ```bash
-              cd a/circus/net
+              cd aws/circus/net
               mise trust
               aws sso login
               alogin
@@ -5231,7 +5231,7 @@ config:
               [env]
               AWS_PROFILE = "circus-ops"
               AWS_REGION = "us-west-2"
-              AWS_CONFIG_FILE = "/home/ubuntu/m/a/circus/ops/.aws/config"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/aws/circus/ops/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue aws_config_account
               [profile circus-ops]
@@ -5250,7 +5250,7 @@ config:
               ## AWS Environment: circus-ops
 
               ```bash
-              cd a/circus/ops
+              cd aws/circus/ops
               mise trust
               aws sso login
               alogin
@@ -5348,7 +5348,7 @@ config:
               [env]
               AWS_PROFILE = "coil-org"
               AWS_REGION = "us-east-1"
-              AWS_CONFIG_FILE = "/home/ubuntu/m/a/coil/org/.aws/config"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/aws/coil/org/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue aws_config_account
               [profile coil-org]
@@ -5367,7 +5367,7 @@ config:
               ## AWS Environment: coil-org
 
               ```bash
-              cd a/coil/org
+              cd aws/coil/org
               mise trust
               aws sso login
               alogin
@@ -5602,7 +5602,7 @@ config:
               [env]
               AWS_PROFILE = "coil-hub"
               AWS_REGION = "us-east-1"
-              AWS_CONFIG_FILE = "/home/ubuntu/m/a/coil/hub/.aws/config"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/aws/coil/hub/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue aws_config_account
               [profile coil-hub]
@@ -5621,7 +5621,7 @@ config:
               ## AWS Environment: coil-hub
 
               ```bash
-              cd a/coil/hub
+              cd aws/coil/hub
               mise trust
               aws sso login
               alogin
@@ -5716,7 +5716,7 @@ config:
               [env]
               AWS_PROFILE = "coil-lib"
               AWS_REGION = "us-east-1"
-              AWS_CONFIG_FILE = "/home/ubuntu/m/a/coil/lib/.aws/config"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/aws/coil/lib/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue aws_config_account
               [profile coil-lib]
@@ -5735,7 +5735,7 @@ config:
               ## AWS Environment: coil-lib
 
               ```bash
-              cd a/coil/lib
+              cd aws/coil/lib
               mise trust
               aws sso login
               alogin
@@ -5830,7 +5830,7 @@ config:
               [env]
               AWS_PROFILE = "coil-net"
               AWS_REGION = "us-east-1"
-              AWS_CONFIG_FILE = "/home/ubuntu/m/a/coil/net/.aws/config"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/aws/coil/net/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue aws_config_account
               [profile coil-net]
@@ -5849,7 +5849,7 @@ config:
               ## AWS Environment: coil-net
 
               ```bash
-              cd a/coil/net
+              cd aws/coil/net
               mise trust
               aws sso login
               alogin
@@ -5947,7 +5947,7 @@ config:
               [env]
               AWS_PROFILE = "curl-org"
               AWS_REGION = "us-west-2"
-              AWS_CONFIG_FILE = "/home/ubuntu/m/a/curl/org/.aws/config"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/aws/curl/org/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue aws_config_account
               [profile curl-org]
@@ -5966,7 +5966,7 @@ config:
               ## AWS Environment: curl-org
 
               ```bash
-              cd a/curl/org
+              cd aws/curl/org
               mise trust
               aws sso login
               alogin
@@ -6201,7 +6201,7 @@ config:
               [env]
               AWS_PROFILE = "curl-hub"
               AWS_REGION = "us-west-2"
-              AWS_CONFIG_FILE = "/home/ubuntu/m/a/curl/hub/.aws/config"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/aws/curl/hub/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue aws_config_account
               [profile curl-hub]
@@ -6220,7 +6220,7 @@ config:
               ## AWS Environment: curl-hub
 
               ```bash
-              cd a/curl/hub
+              cd aws/curl/hub
               mise trust
               aws sso login
               alogin
@@ -6315,7 +6315,7 @@ config:
               [env]
               AWS_PROFILE = "curl-lib"
               AWS_REGION = "us-west-2"
-              AWS_CONFIG_FILE = "/home/ubuntu/m/a/curl/lib/.aws/config"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/aws/curl/lib/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue aws_config_account
               [profile curl-lib]
@@ -6334,7 +6334,7 @@ config:
               ## AWS Environment: curl-lib
 
               ```bash
-              cd a/curl/lib
+              cd aws/curl/lib
               mise trust
               aws sso login
               alogin
@@ -6429,7 +6429,7 @@ config:
               [env]
               AWS_PROFILE = "curl-net"
               AWS_REGION = "us-west-2"
-              AWS_CONFIG_FILE = "/home/ubuntu/m/a/curl/net/.aws/config"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/aws/curl/net/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue aws_config_account
               [profile curl-net]
@@ -6448,7 +6448,7 @@ config:
               ## AWS Environment: curl-net
 
               ```bash
-              cd a/curl/net
+              cd aws/curl/net
               mise trust
               aws sso login
               alogin
@@ -6539,7 +6539,7 @@ config:
               [env]
               AWS_PROFILE = "defn-org"
               AWS_REGION = "us-east-2"
-              AWS_CONFIG_FILE = "/home/ubuntu/m/a/defn/org/.aws/config"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/aws/defn/org/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue aws_config_account
               [profile defn-org]
@@ -6558,7 +6558,7 @@ config:
               ## AWS Environment: defn-org
 
               ```bash
-              cd a/defn/org
+              cd aws/defn/org
               mise trust
               aws sso login
               alogin
@@ -6742,7 +6742,7 @@ config:
               [env]
               AWS_PROFILE = "fogg-org"
               AWS_REGION = "us-west-2"
-              AWS_CONFIG_FILE = "/home/ubuntu/m/a/fogg/org/.aws/config"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/aws/fogg/org/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue aws_config_account
               [profile fogg-org]
@@ -6761,7 +6761,7 @@ config:
               ## AWS Environment: fogg-org
 
               ```bash
-              cd a/fogg/org
+              cd aws/fogg/org
               mise trust
               aws sso login
               alogin
@@ -7084,7 +7084,7 @@ config:
               [env]
               AWS_PROFILE = "fogg-ci"
               AWS_REGION = "us-west-2"
-              AWS_CONFIG_FILE = "/home/ubuntu/m/a/fogg/ci/.aws/config"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/aws/fogg/ci/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue aws_config_account
               [profile fogg-ci]
@@ -7103,7 +7103,7 @@ config:
               ## AWS Environment: fogg-ci
 
               ```bash
-              cd a/fogg/ci
+              cd aws/fogg/ci
               mise trust
               aws sso login
               alogin
@@ -7196,7 +7196,7 @@ config:
               [env]
               AWS_PROFILE = "fogg-dev"
               AWS_REGION = "us-west-2"
-              AWS_CONFIG_FILE = "/home/ubuntu/m/a/fogg/dev/.aws/config"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/aws/fogg/dev/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue aws_config_account
               [profile fogg-dev]
@@ -7215,7 +7215,7 @@ config:
               ## AWS Environment: fogg-dev
 
               ```bash
-              cd a/fogg/dev
+              cd aws/fogg/dev
               mise trust
               aws sso login
               alogin
@@ -7308,7 +7308,7 @@ config:
               [env]
               AWS_PROFILE = "fogg-hub"
               AWS_REGION = "us-west-2"
-              AWS_CONFIG_FILE = "/home/ubuntu/m/a/fogg/hub/.aws/config"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/aws/fogg/hub/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue aws_config_account
               [profile fogg-hub]
@@ -7327,7 +7327,7 @@ config:
               ## AWS Environment: fogg-hub
 
               ```bash
-              cd a/fogg/hub
+              cd aws/fogg/hub
               mise trust
               aws sso login
               alogin
@@ -7420,7 +7420,7 @@ config:
               [env]
               AWS_PROFILE = "fogg-lib"
               AWS_REGION = "us-west-2"
-              AWS_CONFIG_FILE = "/home/ubuntu/m/a/fogg/lib/.aws/config"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/aws/fogg/lib/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue aws_config_account
               [profile fogg-lib]
@@ -7439,7 +7439,7 @@ config:
               ## AWS Environment: fogg-lib
 
               ```bash
-              cd a/fogg/lib
+              cd aws/fogg/lib
               mise trust
               aws sso login
               alogin
@@ -7532,7 +7532,7 @@ config:
               [env]
               AWS_PROFILE = "fogg-log"
               AWS_REGION = "us-west-2"
-              AWS_CONFIG_FILE = "/home/ubuntu/m/a/fogg/log/.aws/config"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/aws/fogg/log/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue aws_config_account
               [profile fogg-log]
@@ -7551,7 +7551,7 @@ config:
               ## AWS Environment: fogg-log
 
               ```bash
-              cd a/fogg/log
+              cd aws/fogg/log
               mise trust
               aws sso login
               alogin
@@ -7644,7 +7644,7 @@ config:
               [env]
               AWS_PROFILE = "fogg-net"
               AWS_REGION = "us-west-2"
-              AWS_CONFIG_FILE = "/home/ubuntu/m/a/fogg/net/.aws/config"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/aws/fogg/net/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue aws_config_account
               [profile fogg-net]
@@ -7663,7 +7663,7 @@ config:
               ## AWS Environment: fogg-net
 
               ```bash
-              cd a/fogg/net
+              cd aws/fogg/net
               mise trust
               aws sso login
               alogin
@@ -7756,7 +7756,7 @@ config:
               [env]
               AWS_PROFILE = "fogg-ops"
               AWS_REGION = "us-west-2"
-              AWS_CONFIG_FILE = "/home/ubuntu/m/a/fogg/ops/.aws/config"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/aws/fogg/ops/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue aws_config_account
               [profile fogg-ops]
@@ -7775,7 +7775,7 @@ config:
               ## AWS Environment: fogg-ops
 
               ```bash
-              cd a/fogg/ops
+              cd aws/fogg/ops
               mise trust
               aws sso login
               alogin
@@ -7868,7 +7868,7 @@ config:
               [env]
               AWS_PROFILE = "fogg-prod"
               AWS_REGION = "us-west-2"
-              AWS_CONFIG_FILE = "/home/ubuntu/m/a/fogg/prod/.aws/config"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/aws/fogg/prod/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue aws_config_account
               [profile fogg-prod]
@@ -7887,7 +7887,7 @@ config:
               ## AWS Environment: fogg-prod
 
               ```bash
-              cd a/fogg/prod
+              cd aws/fogg/prod
               mise trust
               aws sso login
               alogin
@@ -7980,7 +7980,7 @@ config:
               [env]
               AWS_PROFILE = "fogg-pub"
               AWS_REGION = "us-west-2"
-              AWS_CONFIG_FILE = "/home/ubuntu/m/a/fogg/pub/.aws/config"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/aws/fogg/pub/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue aws_config_account
               [profile fogg-pub]
@@ -7999,7 +7999,7 @@ config:
               ## AWS Environment: fogg-pub
 
               ```bash
-              cd a/fogg/pub
+              cd aws/fogg/pub
               mise trust
               aws sso login
               alogin
@@ -8097,7 +8097,7 @@ config:
               [env]
               AWS_PROFILE = "gyre-org"
               AWS_REGION = "us-east-2"
-              AWS_CONFIG_FILE = "/home/ubuntu/m/a/gyre/org/.aws/config"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/aws/gyre/org/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue aws_config_account
               [profile gyre-org]
@@ -8116,7 +8116,7 @@ config:
               ## AWS Environment: gyre-org
 
               ```bash
-              cd a/gyre/org
+              cd aws/gyre/org
               mise trust
               aws sso login
               alogin
@@ -8315,7 +8315,7 @@ config:
               [env]
               AWS_PROFILE = "gyre-ops"
               AWS_REGION = "us-east-2"
-              AWS_CONFIG_FILE = "/home/ubuntu/m/a/gyre/ops/.aws/config"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/aws/gyre/ops/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue aws_config_account
               [profile gyre-ops]
@@ -8334,7 +8334,7 @@ config:
               ## AWS Environment: gyre-ops
 
               ```bash
-              cd a/gyre/ops
+              cd aws/gyre/ops
               mise trust
               aws sso login
               alogin
@@ -8432,7 +8432,7 @@ config:
               [env]
               AWS_PROFILE = "helix-org"
               AWS_REGION = "us-east-2"
-              AWS_CONFIG_FILE = "/home/ubuntu/m/a/helix/org/.aws/config"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/aws/helix/org/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue aws_config_account
               [profile helix-org]
@@ -8451,7 +8451,7 @@ config:
               ## AWS Environment: helix-org
 
               ```bash
-              cd a/helix/org
+              cd aws/helix/org
               mise trust
               aws sso login
               alogin
@@ -8794,7 +8794,7 @@ config:
               [env]
               AWS_PROFILE = "helix-ci"
               AWS_REGION = "us-east-2"
-              AWS_CONFIG_FILE = "/home/ubuntu/m/a/helix/ci/.aws/config"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/aws/helix/ci/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue aws_config_account
               [profile helix-ci]
@@ -8813,7 +8813,7 @@ config:
               ## AWS Environment: helix-ci
 
               ```bash
-              cd a/helix/ci
+              cd aws/helix/ci
               mise trust
               aws sso login
               alogin
@@ -8908,7 +8908,7 @@ config:
               [env]
               AWS_PROFILE = "helix-dev"
               AWS_REGION = "us-east-2"
-              AWS_CONFIG_FILE = "/home/ubuntu/m/a/helix/dev/.aws/config"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/aws/helix/dev/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue aws_config_account
               [profile helix-dev]
@@ -8927,7 +8927,7 @@ config:
               ## AWS Environment: helix-dev
 
               ```bash
-              cd a/helix/dev
+              cd aws/helix/dev
               mise trust
               aws sso login
               alogin
@@ -9022,7 +9022,7 @@ config:
               [env]
               AWS_PROFILE = "helix-hub"
               AWS_REGION = "us-east-2"
-              AWS_CONFIG_FILE = "/home/ubuntu/m/a/helix/hub/.aws/config"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/aws/helix/hub/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue aws_config_account
               [profile helix-hub]
@@ -9041,7 +9041,7 @@ config:
               ## AWS Environment: helix-hub
 
               ```bash
-              cd a/helix/hub
+              cd aws/helix/hub
               mise trust
               aws sso login
               alogin
@@ -9136,7 +9136,7 @@ config:
               [env]
               AWS_PROFILE = "helix-lib"
               AWS_REGION = "us-east-2"
-              AWS_CONFIG_FILE = "/home/ubuntu/m/a/helix/lib/.aws/config"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/aws/helix/lib/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue aws_config_account
               [profile helix-lib]
@@ -9155,7 +9155,7 @@ config:
               ## AWS Environment: helix-lib
 
               ```bash
-              cd a/helix/lib
+              cd aws/helix/lib
               mise trust
               aws sso login
               alogin
@@ -9250,7 +9250,7 @@ config:
               [env]
               AWS_PROFILE = "helix-log"
               AWS_REGION = "us-east-2"
-              AWS_CONFIG_FILE = "/home/ubuntu/m/a/helix/log/.aws/config"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/aws/helix/log/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue aws_config_account
               [profile helix-log]
@@ -9269,7 +9269,7 @@ config:
               ## AWS Environment: helix-log
 
               ```bash
-              cd a/helix/log
+              cd aws/helix/log
               mise trust
               aws sso login
               alogin
@@ -9364,7 +9364,7 @@ config:
               [env]
               AWS_PROFILE = "helix-net"
               AWS_REGION = "us-east-2"
-              AWS_CONFIG_FILE = "/home/ubuntu/m/a/helix/net/.aws/config"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/aws/helix/net/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue aws_config_account
               [profile helix-net]
@@ -9383,7 +9383,7 @@ config:
               ## AWS Environment: helix-net
 
               ```bash
-              cd a/helix/net
+              cd aws/helix/net
               mise trust
               aws sso login
               alogin
@@ -9478,7 +9478,7 @@ config:
               [env]
               AWS_PROFILE = "helix-ops"
               AWS_REGION = "us-east-2"
-              AWS_CONFIG_FILE = "/home/ubuntu/m/a/helix/ops/.aws/config"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/aws/helix/ops/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue aws_config_account
               [profile helix-ops]
@@ -9497,7 +9497,7 @@ config:
               ## AWS Environment: helix-ops
 
               ```bash
-              cd a/helix/ops
+              cd aws/helix/ops
               mise trust
               aws sso login
               alogin
@@ -9592,7 +9592,7 @@ config:
               [env]
               AWS_PROFILE = "helix-prod"
               AWS_REGION = "us-east-2"
-              AWS_CONFIG_FILE = "/home/ubuntu/m/a/helix/prod/.aws/config"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/aws/helix/prod/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue aws_config_account
               [profile helix-prod]
@@ -9611,7 +9611,7 @@ config:
               ## AWS Environment: helix-prod
 
               ```bash
-              cd a/helix/prod
+              cd aws/helix/prod
               mise trust
               aws sso login
               alogin
@@ -9706,7 +9706,7 @@ config:
               [env]
               AWS_PROFILE = "helix-pub"
               AWS_REGION = "us-east-2"
-              AWS_CONFIG_FILE = "/home/ubuntu/m/a/helix/pub/.aws/config"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/aws/helix/pub/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue aws_config_account
               [profile helix-pub]
@@ -9725,7 +9725,7 @@ config:
               ## AWS Environment: helix-pub
 
               ```bash
-              cd a/helix/pub
+              cd aws/helix/pub
               mise trust
               aws sso login
               alogin
@@ -9823,7 +9823,7 @@ config:
               [env]
               AWS_PROFILE = "imma-org"
               AWS_REGION = "us-west-2"
-              AWS_CONFIG_FILE = "/home/ubuntu/m/a/imma/org/.aws/config"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/aws/imma/org/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue aws_config_account
               [profile imma-org]
@@ -9842,7 +9842,7 @@ config:
               ## AWS Environment: imma-org
 
               ```bash
-              cd a/imma/org
+              cd aws/imma/org
               mise trust
               aws sso login
               alogin
@@ -10101,7 +10101,7 @@ config:
               [env]
               AWS_PROFILE = "imma-dev"
               AWS_REGION = "us-west-2"
-              AWS_CONFIG_FILE = "/home/ubuntu/m/a/imma/dev/.aws/config"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/aws/imma/dev/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue aws_config_account
               [profile imma-dev]
@@ -10120,7 +10120,7 @@ config:
               ## AWS Environment: imma-dev
 
               ```bash
-              cd a/imma/dev
+              cd aws/imma/dev
               mise trust
               aws sso login
               alogin
@@ -10213,7 +10213,7 @@ config:
               [env]
               AWS_PROFILE = "imma-lib"
               AWS_REGION = "us-west-2"
-              AWS_CONFIG_FILE = "/home/ubuntu/m/a/imma/lib/.aws/config"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/aws/imma/lib/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue aws_config_account
               [profile imma-lib]
@@ -10232,7 +10232,7 @@ config:
               ## AWS Environment: imma-lib
 
               ```bash
-              cd a/imma/lib
+              cd aws/imma/lib
               mise trust
               aws sso login
               alogin
@@ -10325,7 +10325,7 @@ config:
               [env]
               AWS_PROFILE = "imma-log"
               AWS_REGION = "us-west-2"
-              AWS_CONFIG_FILE = "/home/ubuntu/m/a/imma/log/.aws/config"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/aws/imma/log/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue aws_config_account
               [profile imma-log]
@@ -10344,7 +10344,7 @@ config:
               ## AWS Environment: imma-log
 
               ```bash
-              cd a/imma/log
+              cd aws/imma/log
               mise trust
               aws sso login
               alogin
@@ -10437,7 +10437,7 @@ config:
               [env]
               AWS_PROFILE = "imma-net"
               AWS_REGION = "us-west-2"
-              AWS_CONFIG_FILE = "/home/ubuntu/m/a/imma/net/.aws/config"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/aws/imma/net/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue aws_config_account
               [profile imma-net]
@@ -10456,7 +10456,7 @@ config:
               ## AWS Environment: imma-net
 
               ```bash
-              cd a/imma/net
+              cd aws/imma/net
               mise trust
               aws sso login
               alogin
@@ -10549,7 +10549,7 @@ config:
               [env]
               AWS_PROFILE = "imma-pub"
               AWS_REGION = "us-west-2"
-              AWS_CONFIG_FILE = "/home/ubuntu/m/a/imma/pub/.aws/config"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/aws/imma/pub/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue aws_config_account
               [profile imma-pub]
@@ -10568,7 +10568,7 @@ config:
               ## AWS Environment: imma-pub
 
               ```bash
-              cd a/imma/pub
+              cd aws/imma/pub
               mise trust
               aws sso login
               alogin
@@ -10666,7 +10666,7 @@ config:
               [env]
               AWS_PROFILE = "immanent-org"
               AWS_REGION = "us-west-2"
-              AWS_CONFIG_FILE = "/home/ubuntu/m/a/immanent/org/.aws/config"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/aws/immanent/org/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue aws_config_account
               [profile immanent-org]
@@ -10685,7 +10685,7 @@ config:
               ## AWS Environment: immanent-org
 
               ```bash
-              cd a/immanent/org
+              cd aws/immanent/org
               mise trust
               aws sso login
               alogin
@@ -11040,7 +11040,7 @@ config:
               [env]
               AWS_PROFILE = "immanent-changer"
               AWS_REGION = "us-west-2"
-              AWS_CONFIG_FILE = "/home/ubuntu/m/a/immanent/changer/.aws/config"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/aws/immanent/changer/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue aws_config_account
               [profile immanent-changer]
@@ -11059,7 +11059,7 @@ config:
               ## AWS Environment: immanent-changer
 
               ```bash
-              cd a/immanent/changer
+              cd aws/immanent/changer
               mise trust
               aws sso login
               alogin
@@ -11152,7 +11152,7 @@ config:
               [env]
               AWS_PROFILE = "immanent-chanter"
               AWS_REGION = "us-west-2"
-              AWS_CONFIG_FILE = "/home/ubuntu/m/a/immanent/chanter/.aws/config"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/aws/immanent/chanter/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue aws_config_account
               [profile immanent-chanter]
@@ -11171,7 +11171,7 @@ config:
               ## AWS Environment: immanent-chanter
 
               ```bash
-              cd a/immanent/chanter
+              cd aws/immanent/chanter
               mise trust
               aws sso login
               alogin
@@ -11264,7 +11264,7 @@ config:
               [env]
               AWS_PROFILE = "immanent-doorkeeper"
               AWS_REGION = "us-west-2"
-              AWS_CONFIG_FILE = "/home/ubuntu/m/a/immanent/doorkeeper/.aws/config"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/aws/immanent/doorkeeper/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue aws_config_account
               [profile immanent-doorkeeper]
@@ -11283,7 +11283,7 @@ config:
               ## AWS Environment: immanent-doorkeeper
 
               ```bash
-              cd a/immanent/doorkeeper
+              cd aws/immanent/doorkeeper
               mise trust
               aws sso login
               alogin
@@ -11376,7 +11376,7 @@ config:
               [env]
               AWS_PROFILE = "immanent-ged"
               AWS_REGION = "us-west-2"
-              AWS_CONFIG_FILE = "/home/ubuntu/m/a/immanent/ged/.aws/config"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/aws/immanent/ged/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue aws_config_account
               [profile immanent-ged]
@@ -11395,7 +11395,7 @@ config:
               ## AWS Environment: immanent-ged
 
               ```bash
-              cd a/immanent/ged
+              cd aws/immanent/ged
               mise trust
               aws sso login
               alogin
@@ -11488,7 +11488,7 @@ config:
               [env]
               AWS_PROFILE = "immanent-hand"
               AWS_REGION = "us-west-2"
-              AWS_CONFIG_FILE = "/home/ubuntu/m/a/immanent/hand/.aws/config"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/aws/immanent/hand/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue aws_config_account
               [profile immanent-hand]
@@ -11507,7 +11507,7 @@ config:
               ## AWS Environment: immanent-hand
 
               ```bash
-              cd a/immanent/hand
+              cd aws/immanent/hand
               mise trust
               aws sso login
               alogin
@@ -11600,7 +11600,7 @@ config:
               [env]
               AWS_PROFILE = "immanent-herbal"
               AWS_REGION = "us-west-2"
-              AWS_CONFIG_FILE = "/home/ubuntu/m/a/immanent/herbal/.aws/config"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/aws/immanent/herbal/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue aws_config_account
               [profile immanent-herbal]
@@ -11619,7 +11619,7 @@ config:
               ## AWS Environment: immanent-herbal
 
               ```bash
-              cd a/immanent/herbal
+              cd aws/immanent/herbal
               mise trust
               aws sso login
               alogin
@@ -11712,7 +11712,7 @@ config:
               [env]
               AWS_PROFILE = "immanent-namer"
               AWS_REGION = "us-west-2"
-              AWS_CONFIG_FILE = "/home/ubuntu/m/a/immanent/namer/.aws/config"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/aws/immanent/namer/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue aws_config_account
               [profile immanent-namer]
@@ -11731,7 +11731,7 @@ config:
               ## AWS Environment: immanent-namer
 
               ```bash
-              cd a/immanent/namer
+              cd aws/immanent/namer
               mise trust
               aws sso login
               alogin
@@ -11824,7 +11824,7 @@ config:
               [env]
               AWS_PROFILE = "immanent-patterner"
               AWS_REGION = "us-west-2"
-              AWS_CONFIG_FILE = "/home/ubuntu/m/a/immanent/patterner/.aws/config"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/aws/immanent/patterner/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue aws_config_account
               [profile immanent-patterner]
@@ -11843,7 +11843,7 @@ config:
               ## AWS Environment: immanent-patterner
 
               ```bash
-              cd a/immanent/patterner
+              cd aws/immanent/patterner
               mise trust
               aws sso login
               alogin
@@ -11936,7 +11936,7 @@ config:
               [env]
               AWS_PROFILE = "immanent-roke"
               AWS_REGION = "us-west-2"
-              AWS_CONFIG_FILE = "/home/ubuntu/m/a/immanent/roke/.aws/config"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/aws/immanent/roke/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue aws_config_account
               [profile immanent-roke]
@@ -11955,7 +11955,7 @@ config:
               ## AWS Environment: immanent-roke
 
               ```bash
-              cd a/immanent/roke
+              cd aws/immanent/roke
               mise trust
               aws sso login
               alogin
@@ -12048,7 +12048,7 @@ config:
               [env]
               AWS_PROFILE = "immanent-summoner"
               AWS_REGION = "us-west-2"
-              AWS_CONFIG_FILE = "/home/ubuntu/m/a/immanent/summoner/.aws/config"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/aws/immanent/summoner/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue aws_config_account
               [profile immanent-summoner]
@@ -12067,7 +12067,7 @@ config:
               ## AWS Environment: immanent-summoner
 
               ```bash
-              cd a/immanent/summoner
+              cd aws/immanent/summoner
               mise trust
               aws sso login
               alogin
@@ -12160,7 +12160,7 @@ config:
               [env]
               AWS_PROFILE = "immanent-windkey"
               AWS_REGION = "us-west-2"
-              AWS_CONFIG_FILE = "/home/ubuntu/m/a/immanent/windkey/.aws/config"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/aws/immanent/windkey/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue aws_config_account
               [profile immanent-windkey]
@@ -12179,7 +12179,7 @@ config:
               ## AWS Environment: immanent-windkey
 
               ```bash
-              cd a/immanent/windkey
+              cd aws/immanent/windkey
               mise trust
               aws sso login
               alogin
@@ -12277,7 +12277,7 @@ config:
               [env]
               AWS_PROFILE = "jianghu-org"
               AWS_REGION = "us-west-2"
-              AWS_CONFIG_FILE = "/home/ubuntu/m/a/jianghu/org/.aws/config"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/aws/jianghu/org/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue aws_config_account
               [profile jianghu-org]
@@ -12296,7 +12296,7 @@ config:
               ## AWS Environment: jianghu-org
 
               ```bash
-              cd a/jianghu/org
+              cd aws/jianghu/org
               mise trust
               aws sso login
               alogin
@@ -12507,7 +12507,7 @@ config:
               [env]
               AWS_PROFILE = "jianghu-log"
               AWS_REGION = "us-west-2"
-              AWS_CONFIG_FILE = "/home/ubuntu/m/a/jianghu/log/.aws/config"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/aws/jianghu/log/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue aws_config_account
               [profile jianghu-log]
@@ -12526,7 +12526,7 @@ config:
               ## AWS Environment: jianghu-log
 
               ```bash
-              cd a/jianghu/log
+              cd aws/jianghu/log
               mise trust
               aws sso login
               alogin
@@ -12619,7 +12619,7 @@ config:
               [env]
               AWS_PROFILE = "jianghu-net"
               AWS_REGION = "us-west-2"
-              AWS_CONFIG_FILE = "/home/ubuntu/m/a/jianghu/net/.aws/config"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/aws/jianghu/net/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue aws_config_account
               [profile jianghu-net]
@@ -12638,7 +12638,7 @@ config:
               ## AWS Environment: jianghu-net
 
               ```bash
-              cd a/jianghu/net
+              cd aws/jianghu/net
               mise trust
               aws sso login
               alogin
@@ -12736,7 +12736,7 @@ config:
               [env]
               AWS_PROFILE = "spiral-org"
               AWS_REGION = "us-west-2"
-              AWS_CONFIG_FILE = "/home/ubuntu/m/a/spiral/org/.aws/config"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/aws/spiral/org/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue aws_config_account
               [profile spiral-org]
@@ -12755,7 +12755,7 @@ config:
               ## AWS Environment: spiral-org
 
               ```bash
-              cd a/spiral/org
+              cd aws/spiral/org
               mise trust
               aws sso login
               alogin
@@ -13098,7 +13098,7 @@ config:
               [env]
               AWS_PROFILE = "spiral-ci"
               AWS_REGION = "us-west-2"
-              AWS_CONFIG_FILE = "/home/ubuntu/m/a/spiral/ci/.aws/config"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/aws/spiral/ci/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue aws_config_account
               [profile spiral-ci]
@@ -13117,7 +13117,7 @@ config:
               ## AWS Environment: spiral-ci
 
               ```bash
-              cd a/spiral/ci
+              cd aws/spiral/ci
               mise trust
               aws sso login
               alogin
@@ -13212,7 +13212,7 @@ config:
               [env]
               AWS_PROFILE = "spiral-dev"
               AWS_REGION = "us-west-2"
-              AWS_CONFIG_FILE = "/home/ubuntu/m/a/spiral/dev/.aws/config"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/aws/spiral/dev/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue aws_config_account
               [profile spiral-dev]
@@ -13231,7 +13231,7 @@ config:
               ## AWS Environment: spiral-dev
 
               ```bash
-              cd a/spiral/dev
+              cd aws/spiral/dev
               mise trust
               aws sso login
               alogin
@@ -13326,7 +13326,7 @@ config:
               [env]
               AWS_PROFILE = "spiral-hub"
               AWS_REGION = "us-west-2"
-              AWS_CONFIG_FILE = "/home/ubuntu/m/a/spiral/hub/.aws/config"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/aws/spiral/hub/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue aws_config_account
               [profile spiral-hub]
@@ -13345,7 +13345,7 @@ config:
               ## AWS Environment: spiral-hub
 
               ```bash
-              cd a/spiral/hub
+              cd aws/spiral/hub
               mise trust
               aws sso login
               alogin
@@ -13440,7 +13440,7 @@ config:
               [env]
               AWS_PROFILE = "spiral-lib"
               AWS_REGION = "us-west-2"
-              AWS_CONFIG_FILE = "/home/ubuntu/m/a/spiral/lib/.aws/config"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/aws/spiral/lib/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue aws_config_account
               [profile spiral-lib]
@@ -13459,7 +13459,7 @@ config:
               ## AWS Environment: spiral-lib
 
               ```bash
-              cd a/spiral/lib
+              cd aws/spiral/lib
               mise trust
               aws sso login
               alogin
@@ -13554,7 +13554,7 @@ config:
               [env]
               AWS_PROFILE = "spiral-log"
               AWS_REGION = "us-west-2"
-              AWS_CONFIG_FILE = "/home/ubuntu/m/a/spiral/log/.aws/config"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/aws/spiral/log/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue aws_config_account
               [profile spiral-log]
@@ -13573,7 +13573,7 @@ config:
               ## AWS Environment: spiral-log
 
               ```bash
-              cd a/spiral/log
+              cd aws/spiral/log
               mise trust
               aws sso login
               alogin
@@ -13668,7 +13668,7 @@ config:
               [env]
               AWS_PROFILE = "spiral-net"
               AWS_REGION = "us-west-2"
-              AWS_CONFIG_FILE = "/home/ubuntu/m/a/spiral/net/.aws/config"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/aws/spiral/net/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue aws_config_account
               [profile spiral-net]
@@ -13687,7 +13687,7 @@ config:
               ## AWS Environment: spiral-net
 
               ```bash
-              cd a/spiral/net
+              cd aws/spiral/net
               mise trust
               aws sso login
               alogin
@@ -13782,7 +13782,7 @@ config:
               [env]
               AWS_PROFILE = "spiral-ops"
               AWS_REGION = "us-west-2"
-              AWS_CONFIG_FILE = "/home/ubuntu/m/a/spiral/ops/.aws/config"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/aws/spiral/ops/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue aws_config_account
               [profile spiral-ops]
@@ -13801,7 +13801,7 @@ config:
               ## AWS Environment: spiral-ops
 
               ```bash
-              cd a/spiral/ops
+              cd aws/spiral/ops
               mise trust
               aws sso login
               alogin
@@ -13896,7 +13896,7 @@ config:
               [env]
               AWS_PROFILE = "spiral-prod"
               AWS_REGION = "us-west-2"
-              AWS_CONFIG_FILE = "/home/ubuntu/m/a/spiral/prod/.aws/config"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/aws/spiral/prod/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue aws_config_account
               [profile spiral-prod]
@@ -13915,7 +13915,7 @@ config:
               ## AWS Environment: spiral-prod
 
               ```bash
-              cd a/spiral/prod
+              cd aws/spiral/prod
               mise trust
               aws sso login
               alogin
@@ -14010,7 +14010,7 @@ config:
               [env]
               AWS_PROFILE = "spiral-pub"
               AWS_REGION = "us-west-2"
-              AWS_CONFIG_FILE = "/home/ubuntu/m/a/spiral/pub/.aws/config"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/aws/spiral/pub/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue aws_config_account
               [profile spiral-pub]
@@ -14029,7 +14029,7 @@ config:
               ## AWS Environment: spiral-pub
 
               ```bash
-              cd a/spiral/pub
+              cd aws/spiral/pub
               mise trust
               aws sso login
               alogin
@@ -14127,7 +14127,7 @@ config:
               [env]
               AWS_PROFILE = "vault-org"
               AWS_REGION = "us-east-2"
-              AWS_CONFIG_FILE = "/home/ubuntu/m/a/vault/org/.aws/config"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/aws/vault/org/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue aws_config_account
               [profile vault-org]
@@ -14146,7 +14146,7 @@ config:
               ## AWS Environment: vault-org
 
               ```bash
-              cd a/vault/org
+              cd aws/vault/org
               mise trust
               aws sso login
               alogin
@@ -14469,7 +14469,7 @@ config:
               [env]
               AWS_PROFILE = "vault-ci"
               AWS_REGION = "us-east-2"
-              AWS_CONFIG_FILE = "/home/ubuntu/m/a/vault/ci/.aws/config"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/aws/vault/ci/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue aws_config_account
               [profile vault-ci]
@@ -14488,7 +14488,7 @@ config:
               ## AWS Environment: vault-ci
 
               ```bash
-              cd a/vault/ci
+              cd aws/vault/ci
               mise trust
               aws sso login
               alogin
@@ -14581,7 +14581,7 @@ config:
               [env]
               AWS_PROFILE = "vault-dev"
               AWS_REGION = "us-east-2"
-              AWS_CONFIG_FILE = "/home/ubuntu/m/a/vault/dev/.aws/config"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/aws/vault/dev/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue aws_config_account
               [profile vault-dev]
@@ -14600,7 +14600,7 @@ config:
               ## AWS Environment: vault-dev
 
               ```bash
-              cd a/vault/dev
+              cd aws/vault/dev
               mise trust
               aws sso login
               alogin
@@ -14693,7 +14693,7 @@ config:
               [env]
               AWS_PROFILE = "vault-hub"
               AWS_REGION = "us-east-2"
-              AWS_CONFIG_FILE = "/home/ubuntu/m/a/vault/hub/.aws/config"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/aws/vault/hub/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue aws_config_account
               [profile vault-hub]
@@ -14712,7 +14712,7 @@ config:
               ## AWS Environment: vault-hub
 
               ```bash
-              cd a/vault/hub
+              cd aws/vault/hub
               mise trust
               aws sso login
               alogin
@@ -14805,7 +14805,7 @@ config:
               [env]
               AWS_PROFILE = "vault-lib"
               AWS_REGION = "us-east-2"
-              AWS_CONFIG_FILE = "/home/ubuntu/m/a/vault/lib/.aws/config"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/aws/vault/lib/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue aws_config_account
               [profile vault-lib]
@@ -14824,7 +14824,7 @@ config:
               ## AWS Environment: vault-lib
 
               ```bash
-              cd a/vault/lib
+              cd aws/vault/lib
               mise trust
               aws sso login
               alogin
@@ -14917,7 +14917,7 @@ config:
               [env]
               AWS_PROFILE = "vault-log"
               AWS_REGION = "us-east-2"
-              AWS_CONFIG_FILE = "/home/ubuntu/m/a/vault/log/.aws/config"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/aws/vault/log/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue aws_config_account
               [profile vault-log]
@@ -14936,7 +14936,7 @@ config:
               ## AWS Environment: vault-log
 
               ```bash
-              cd a/vault/log
+              cd aws/vault/log
               mise trust
               aws sso login
               alogin
@@ -15029,7 +15029,7 @@ config:
               [env]
               AWS_PROFILE = "vault-net"
               AWS_REGION = "us-east-2"
-              AWS_CONFIG_FILE = "/home/ubuntu/m/a/vault/net/.aws/config"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/aws/vault/net/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue aws_config_account
               [profile vault-net]
@@ -15048,7 +15048,7 @@ config:
               ## AWS Environment: vault-net
 
               ```bash
-              cd a/vault/net
+              cd aws/vault/net
               mise trust
               aws sso login
               alogin
@@ -15141,7 +15141,7 @@ config:
               [env]
               AWS_PROFILE = "vault-ops"
               AWS_REGION = "us-east-2"
-              AWS_CONFIG_FILE = "/home/ubuntu/m/a/vault/ops/.aws/config"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/aws/vault/ops/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue aws_config_account
               [profile vault-ops]
@@ -15160,7 +15160,7 @@ config:
               ## AWS Environment: vault-ops
 
               ```bash
-              cd a/vault/ops
+              cd aws/vault/ops
               mise trust
               aws sso login
               alogin
@@ -15253,7 +15253,7 @@ config:
               [env]
               AWS_PROFILE = "vault-prod"
               AWS_REGION = "us-east-2"
-              AWS_CONFIG_FILE = "/home/ubuntu/m/a/vault/prod/.aws/config"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/aws/vault/prod/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue aws_config_account
               [profile vault-prod]
@@ -15272,7 +15272,7 @@ config:
               ## AWS Environment: vault-prod
 
               ```bash
-              cd a/vault/prod
+              cd aws/vault/prod
               mise trust
               aws sso login
               alogin
@@ -15365,7 +15365,7 @@ config:
               [env]
               AWS_PROFILE = "vault-pub"
               AWS_REGION = "us-east-2"
-              AWS_CONFIG_FILE = "/home/ubuntu/m/a/vault/pub/.aws/config"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/aws/vault/pub/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue aws_config_account
               [profile vault-pub]
@@ -15384,7 +15384,7 @@ config:
               ## AWS Environment: vault-pub
 
               ```bash
-              cd a/vault/pub
+              cd aws/vault/pub
               mise trust
               aws sso login
               alogin
@@ -15482,7 +15482,7 @@ config:
               [env]
               AWS_PROFILE = "whoa-org"
               AWS_REGION = "us-west-2"
-              AWS_CONFIG_FILE = "/home/ubuntu/m/a/whoa/org/.aws/config"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/aws/whoa/org/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue aws_config_account
               [profile whoa-org]
@@ -15501,7 +15501,7 @@ config:
               ## AWS Environment: whoa-org
 
               ```bash
-              cd a/whoa/org
+              cd aws/whoa/org
               mise trust
               aws sso login
               alogin
@@ -15744,7 +15744,7 @@ config:
               [env]
               AWS_PROFILE = "whoa-dev"
               AWS_REGION = "us-west-2"
-              AWS_CONFIG_FILE = "/home/ubuntu/m/a/whoa/dev/.aws/config"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/aws/whoa/dev/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue aws_config_account
               [profile whoa-dev]
@@ -15763,7 +15763,7 @@ config:
               ## AWS Environment: whoa-dev
 
               ```bash
-              cd a/whoa/dev
+              cd aws/whoa/dev
               mise trust
               aws sso login
               alogin
@@ -15856,7 +15856,7 @@ config:
               [env]
               AWS_PROFILE = "whoa-hub"
               AWS_REGION = "us-west-2"
-              AWS_CONFIG_FILE = "/home/ubuntu/m/a/whoa/hub/.aws/config"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/aws/whoa/hub/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue aws_config_account
               [profile whoa-hub]
@@ -15875,7 +15875,7 @@ config:
               ## AWS Environment: whoa-hub
 
               ```bash
-              cd a/whoa/hub
+              cd aws/whoa/hub
               mise trust
               aws sso login
               alogin
@@ -15968,7 +15968,7 @@ config:
               [env]
               AWS_PROFILE = "whoa-net"
               AWS_REGION = "us-west-2"
-              AWS_CONFIG_FILE = "/home/ubuntu/m/a/whoa/net/.aws/config"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/aws/whoa/net/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue aws_config_account
               [profile whoa-net]
@@ -15987,7 +15987,7 @@ config:
               ## AWS Environment: whoa-net
 
               ```bash
-              cd a/whoa/net
+              cd aws/whoa/net
               mise trust
               aws sso login
               alogin
@@ -16080,7 +16080,7 @@ config:
               [env]
               AWS_PROFILE = "whoa-pub"
               AWS_REGION = "us-west-2"
-              AWS_CONFIG_FILE = "/home/ubuntu/m/a/whoa/pub/.aws/config"
+              AWS_CONFIG_FILE = "/home/ubuntu/m/aws/whoa/pub/.aws/config"
             aws_config_account: |-
               # auto-generated: aws.cue aws_config_account
               [profile whoa-pub]
@@ -16099,7 +16099,7 @@ config:
               ## AWS Environment: whoa-pub
 
               ```bash
-              cd a/whoa/pub
+              cd aws/whoa/pub
               mise trust
               aws sso login
               alogin

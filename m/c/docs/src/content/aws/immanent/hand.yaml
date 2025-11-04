@@ -24,7 +24,7 @@ mise_config: |-
   [env]
   AWS_PROFILE = "immanent-hand"
   AWS_REGION = "us-west-2"
-  AWS_CONFIG_FILE = "/home/ubuntu/m/a/immanent/hand/.aws/config"
+  AWS_CONFIG_FILE = "/home/ubuntu/m/aws/immanent/hand/.aws/config"
 aws_config_account: |-
   # auto-generated: aws.cue aws_config_account
   [profile immanent-hand]
@@ -43,7 +43,7 @@ account_readme: |-
   ## AWS Environment: immanent-hand
 
   ```bash
-  cd a/immanent/hand
+  cd aws/immanent/hand
   mise trust
   aws sso login
   alogin

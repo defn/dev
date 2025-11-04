@@ -50,7 +50,7 @@ aws: "org"~lookup: [string]~(ORG,_): close({
 [env]
 AWS_PROFILE = "\(org)-\(account)"
 AWS_REGION = "\(sso_region)"
-AWS_CONFIG_FILE = "/home/ubuntu/m/a/\(org)/\(account)/.aws/config"
+AWS_CONFIG_FILE = "/home/ubuntu/m/aws/\(org)/\(account)/.aws/config"
 """
 
 		aws_config_account: """
@@ -75,7 +75,7 @@ sso_region=\(lookup[bootstrap.org].sso_region)
 ## AWS Environment: \(org)-\(account)
 
 ```bash
-cd a/\(org)/\(account)
+cd aws/\(org)/\(account)
 mise trust
 aws sso login
 alogin

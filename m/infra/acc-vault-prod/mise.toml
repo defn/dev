@@ -3,4 +3,4 @@
 [env]
 AWS_PROFILE = "vault-prod"
 AWS_REGION = "us-east-2"
-AWS_CONFIG_FILE = "/home/ubuntu/m/a/vault/prod/.aws/config"
+AWS_CONFIG_FILE = "/home/ubuntu/m/aws/vault/prod/.aws/config"

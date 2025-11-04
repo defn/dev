@@ -26,7 +26,7 @@ mise_config: |-
   [env]
   AWS_PROFILE = "helix-net"
   AWS_REGION = "us-east-2"
-  AWS_CONFIG_FILE = "/home/ubuntu/m/a/helix/net/.aws/config"
+  AWS_CONFIG_FILE = "/home/ubuntu/m/aws/helix/net/.aws/config"
 aws_config_account: |-
   # auto-generated: aws.cue aws_config_account
   [profile helix-net]
@@ -45,7 +45,7 @@ account_readme: |-
   ## AWS Environment: helix-net
 
   ```bash
-  cd a/helix/net
+  cd aws/helix/net
   mise trust
   aws sso login
   alogin

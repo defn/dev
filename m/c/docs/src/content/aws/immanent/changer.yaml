@@ -24,7 +24,7 @@ mise_config: |-
   [env]
   AWS_PROFILE = "immanent-changer"
   AWS_REGION = "us-west-2"
-  AWS_CONFIG_FILE = "/home/ubuntu/m/a/immanent/changer/.aws/config"
+  AWS_CONFIG_FILE = "/home/ubuntu/m/aws/immanent/changer/.aws/config"
 aws_config_account: |-
   # auto-generated: aws.cue aws_config_account
   [profile immanent-changer]
@@ -43,7 +43,7 @@ account_readme: |-
   ## AWS Environment: immanent-changer
 
   ```bash
-  cd a/immanent/changer
+  cd aws/immanent/changer
   mise trust
   aws sso login
   alogin

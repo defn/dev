@@ -3,4 +3,4 @@
 [env]
 AWS_PROFILE = "chamber-w"
 AWS_REGION = "us-west-2"
-AWS_CONFIG_FILE = "/home/ubuntu/m/a/chamber/w/.aws/config"
+AWS_CONFIG_FILE = "/home/ubuntu/m/aws/chamber/w/.aws/config"

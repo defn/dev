@@ -24,7 +24,7 @@ mise_config: |-
   [env]
   AWS_PROFILE = "fogg-prod"
   AWS_REGION = "us-west-2"
-  AWS_CONFIG_FILE = "/home/ubuntu/m/a/fogg/prod/.aws/config"
+  AWS_CONFIG_FILE = "/home/ubuntu/m/aws/fogg/prod/.aws/config"
 aws_config_account: |-
   # auto-generated: aws.cue aws_config_account
   [profile fogg-prod]
@@ -43,7 +43,7 @@ account_readme: |-
   ## AWS Environment: fogg-prod
 
   ```bash
-  cd a/fogg/prod
+  cd aws/fogg/prod
   mise trust
   aws sso login
   alogin

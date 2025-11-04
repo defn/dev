@@ -3,4 +3,4 @@
 [env]
 AWS_PROFILE = "spiral-net"
 AWS_REGION = "us-west-2"
-AWS_CONFIG_FILE = "/home/ubuntu/m/a/spiral/net/.aws/config"
+AWS_CONFIG_FILE = "/home/ubuntu/m/aws/spiral/net/.aws/config"

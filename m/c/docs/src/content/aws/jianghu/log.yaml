@@ -24,7 +24,7 @@ mise_config: |-
   [env]
   AWS_PROFILE = "jianghu-log"
   AWS_REGION = "us-west-2"
-  AWS_CONFIG_FILE = "/home/ubuntu/m/a/jianghu/log/.aws/config"
+  AWS_CONFIG_FILE = "/home/ubuntu/m/aws/jianghu/log/.aws/config"
 aws_config_account: |-
   # auto-generated: aws.cue aws_config_account
   [profile jianghu-log]
@@ -43,7 +43,7 @@ account_readme: |-
   ## AWS Environment: jianghu-log
 
   ```bash
-  cd a/jianghu/log
+  cd aws/jianghu/log
   mise trust
   aws sso login
   alogin

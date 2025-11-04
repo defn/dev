@@ -24,7 +24,7 @@ mise_config: |-
   [env]
   AWS_PROFILE = "imma-org"
   AWS_REGION = "us-west-2"
-  AWS_CONFIG_FILE = "/home/ubuntu/m/a/imma/org/.aws/config"
+  AWS_CONFIG_FILE = "/home/ubuntu/m/aws/imma/org/.aws/config"
 aws_config_account: |-
   # auto-generated: aws.cue aws_config_account
   [profile imma-org]
@@ -43,7 +43,7 @@ account_readme: |-
   ## AWS Environment: imma-org
 
   ```bash
-  cd a/imma/org
+  cd aws/imma/org
   mise trust
   aws sso login
   alogin

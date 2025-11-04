@@ -24,7 +24,7 @@ mise_config: |-
   [env]
   AWS_PROFILE = "curl-org"
   AWS_REGION = "us-west-2"
-  AWS_CONFIG_FILE = "/home/ubuntu/m/a/curl/org/.aws/config"
+  AWS_CONFIG_FILE = "/home/ubuntu/m/aws/curl/org/.aws/config"
 aws_config_account: |-
   # auto-generated: aws.cue aws_config_account
   [profile curl-org]
@@ -43,7 +43,7 @@ account_readme: |-
   ## AWS Environment: curl-org
 
   ```bash
-  cd a/curl/org
+  cd aws/curl/org
   mise trust
   aws sso login
   alogin

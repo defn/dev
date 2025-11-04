@@ -26,7 +26,7 @@ mise_config: |-
   [env]
   AWS_PROFILE = "helix-pub"
   AWS_REGION = "us-east-2"
-  AWS_CONFIG_FILE = "/home/ubuntu/m/a/helix/pub/.aws/config"
+  AWS_CONFIG_FILE = "/home/ubuntu/m/aws/helix/pub/.aws/config"
 aws_config_account: |-
   # auto-generated: aws.cue aws_config_account
   [profile helix-pub]
@@ -45,7 +45,7 @@ account_readme: |-
   ## AWS Environment: helix-pub
 
   ```bash
-  cd a/helix/pub
+  cd aws/helix/pub
   mise trust
   aws sso login
   alogin

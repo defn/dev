@@ -24,7 +24,7 @@ mise_config: |-
   [env]
   AWS_PROFILE = "chamber-q"
   AWS_REGION = "us-west-2"
-  AWS_CONFIG_FILE = "/home/ubuntu/m/a/chamber/q/.aws/config"
+  AWS_CONFIG_FILE = "/home/ubuntu/m/aws/chamber/q/.aws/config"
 aws_config_account: |-
   # auto-generated: aws.cue aws_config_account
   [profile chamber-q]
@@ -43,7 +43,7 @@ account_readme: |-
   ## AWS Environment: chamber-q
 
   ```bash
-  cd a/chamber/q
+  cd aws/chamber/q
   mise trust
   aws sso login
   alogin

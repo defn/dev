@@ -3,4 +3,4 @@
 [env]
 AWS_PROFILE = "helix-pub"
 AWS_REGION = "us-east-2"
-AWS_CONFIG_FILE = "/home/ubuntu/m/a/helix/pub/.aws/config"
+AWS_CONFIG_FILE = "/home/ubuntu/m/aws/helix/pub/.aws/config"

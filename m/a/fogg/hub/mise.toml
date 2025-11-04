@@ -1,5 +1,0 @@
-# auto-generated: aws.cue mise_config
-[env]
-AWS_PROFILE = "fogg-hub"
-AWS_REGION = "us-west-2"
-AWS_CONFIG_FILE = "/home/ubuntu/m/a/fogg/hub/.aws/config"
