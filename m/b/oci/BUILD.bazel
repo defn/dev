@@ -1,5 +1,0 @@
-filegroup(
-    name = "skopeo_copy_script",
-    srcs = ["skopeo_copy.sh"],
-    visibility = ["//visibility:public"],
-)
