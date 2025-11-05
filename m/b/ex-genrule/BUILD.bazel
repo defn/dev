@@ -2,13 +2,13 @@
 
 filegroup(
     name = "uppercase_sh",
-    srcs = ["uppercase.sh"],
+    srcs = ["scripts/uppercase.sh"],
     visibility = ["//visibility:public"],
 )
 
 filegroup(
     name = "word_count_sh",
-    srcs = ["word_count.sh"],
+    srcs = ["scripts/word_count.sh"],
     visibility = ["//visibility:public"],
 )
 
@@ -22,35 +22,35 @@ genrule(
 # Genrule using uppercase.sh
 genrule(
     name = "uppercase_output",
+    srcs = [":sample_input"],
+    outs = ["uppercase.txt"],
+    cmd = "$(location :uppercase_sh) input=$(location :sample_input) $@",
     tools = [
         ":uppercase_sh",
         "//b/lib:lib_sh",
     ],
-    srcs = [":sample_input"],
-    outs = ["uppercase.txt"],
-    cmd = "$(location :uppercase_sh) input=$(location :sample_input) $@",
 )
 
 # Genrule using word_count.sh
 genrule(
     name = "word_count_output",
+    srcs = [":sample_input"],
+    outs = ["word_count.txt"],
+    cmd = "$(location :word_count_sh) input=$(location :sample_input) $@",
     tools = [
         ":word_count_sh",
         "//b/lib:lib_sh",
     ],
-    srcs = [":sample_input"],
-    outs = ["word_count.txt"],
-    cmd = "$(location :word_count_sh) input=$(location :sample_input) $@",
 )
 
 # Chain both: uppercase then count
 genrule(
     name = "chained_output",
+    srcs = [":uppercase_output"],
+    outs = ["uppercase_word_count.txt"],
+    cmd = "$(location :word_count_sh) input=$(location :uppercase_output) $@",
     tools = [
         ":word_count_sh",
         "//b/lib:lib_sh",
     ],
-    srcs = [":uppercase_output"],
-    outs = ["uppercase_word_count.txt"],
-    cmd = "$(location :word_count_sh) input=$(location :uppercase_output) $@",
 )

@@ -2,13 +2,18 @@
 
 This demonstrates wrapping bash scripts in Starlark macros for reusability.
 
-## Scripts
+## Structure
 
-- **create_archive.sh** - Creates tarball from directory
-  - Args: `dir=`, `prefix=` (optional)
+```
+ex-macros/
+├── BUILD.bazel
+├── macros.bzl
+└── scripts/
+    ├── create_archive.sh   # Creates tarball
+    └── list_archive.sh     # Lists tarball contents
+```
 
-- **list_archive.sh** - Lists tarball contents with metadata
-  - Args: `archive=`
+Scripts are in `scripts/` subdirectory, wrapped by `macros.bzl`.
 
 ## Macros
 
@@ -28,6 +33,7 @@ archive_info(
 ```
 
 Macros hide the genrule boilerplate:
+
 - Auto-add `//b/lib:lib_sh` to tools
 - Format `cmd` with proper `$(location ...)` syntax
 - Handle optional arguments with defaults

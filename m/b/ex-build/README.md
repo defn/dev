@@ -1,157 +1,171 @@
-# Example: Complete Build Pipeline
+# Example: Build Client Composing Genrules and Macros
 
-This demonstrates combining genrules and macros in a realistic build pipeline for configuration management.
+This demonstrates a realistic config build workflow by **importing and composing** tools from other examples:
 
-## Architecture
+- **Genrules from [//b/ex-genrule](../ex-genrule/)**: `uppercase.sh`, `word_count.sh`
+- **Macros from [//b/ex-macros](../ex-macros/)**: `archive_directory()`, `archive_info()`
+
+**No scripts defined here** - this is a pure client showing how to use the bash-to-Bazel system at scale.
+
+## Workflow
 
 ```
-Raw Config (JSON)
-    ↓ [genrule: format_json.sh]
-Formatted Config
-    ↓ [genrule: validate_json.sh]
-Validation Report
-    ↓
-Config Directory
-    ↓ [macro: bundle_configs]
-Environment Bundles (prod, dev)
-    ↓ [macro: bundle_info]
+Raw Config Files (.conf)
+  ↓ [genrule: //b/ex-genrule:uppercase_sh]
+Normalized Configs (UPPERCASE)
+  ↓ [genrule: //b/ex-genrule:word_count_sh]
+Size Reports
+  ↓ [macro: archive_directory from //b/ex-macros]
+Deployment Bundles (prod, staging)
+  ↓ [macro: archive_info from //b/ex-macros]
 Bundle Metadata
 ```
 
-## Scripts
+## Build
 
-**Genrule Scripts** (used directly):
-- `format_json.sh` - Formats JSON with configurable indentation
-- `validate_json.sh` - Validates JSON and extracts schema info
+```bash
+# Build entire config pipeline
+bazel build //b/ex-build:all_outputs
 
-**Macro Scripts** (wrapped in `.bzl`):
-- `bundle_configs.sh` - Creates environment-specific config bundles
-- `extract_bundle_info.sh` - Extracts bundle metadata
+# Build specific outputs
+bazel build //b/ex-build:production_config_bundle
+bazel build //b/ex-build:staging_bundle_info
+```
 
-## Usage Patterns
+## View Outputs
 
-### Direct Genrule Usage
+```bash
+# Normalized configs
+cat bazel-bin/b/ex-build/normalized/app.conf
+# Output: APPLICATION CONFIGURATION SETTINGS
 
-For one-off transformations or when you need fine-grained control:
+# Size report
+cat bazel-bin/b/ex-build/reports/app_size.txt
+# Output: 3
+
+# Production bundle contents
+tar tzf bazel-bin/b/ex-build/production_config_bundle.tar.gz
+# Output:
+# ./prod-configs/app.conf
+# ./prod-configs/database.conf
+# ./prod-configs/cache.conf
+
+# Bundle metadata
+cat bazel-bin/b/ex-build/production_bundle_info.txt
+```
+
+## Key Patterns Demonstrated
+
+### 1. Importing Genrule Scripts from Another Package
 
 ```python
 genrule(
-    name = "formatted_config",
-    tools = [":format_json_sh", "//b/lib:lib_sh"],
-    srcs = [":sample_config"],
-    outs = ["formatted_config.json"],
-    cmd = "$(location :format_json_sh) input=$(location :sample_config) indent=4 $@",
+    name = "normalized_app_conf",
+    tools = [
+        "//b/ex-genrule:uppercase_sh",  # Cross-package import
+        "//b/lib:lib_sh",
+    ],
+    cmd = "$(location //b/ex-genrule:uppercase_sh) input=... $@",
 )
 ```
 
-### Macro Usage
+The `//b/ex-genrule:uppercase_sh` reference imports the script filegroup from the ex-genrule package.
 
-For reusable operations you'll call multiple times:
+### 2. Importing Macros from Another Package
 
 ```python
-load(":build_macros.bzl", "bundle_configs")
+load("//b/ex-macros:macros.bzl", "archive_directory", "archive_info")
 
-bundle_configs(
-    name = "prod_bundle",
-    config_dir = ":config_dir",
-    env = "production",
-)
-
-bundle_configs(
-    name = "dev_bundle",
-    config_dir = ":config_dir",
-    env = "development",
+archive_directory(
+    name = "production_config_bundle",
+    dir = ":normalized_configs",
+    prefix = "prod-configs",
 )
 ```
 
-## Try It
+The `load()` statement imports macro functions from the ex-macros package.
+
+### 3. Composing in a Dependency Graph
+
+```
+raw_configs
+  → normalized_app_conf (uses ex-genrule:uppercase_sh)
+  → normalized_database_conf (uses ex-genrule:uppercase_sh)
+  → normalized_cache_conf (uses ex-genrule:uppercase_sh)
+    → normalized_configs (filegroup)
+      → production_config_bundle (uses ex-macros:archive_directory)
+        → production_bundle_info (uses ex-macros:archive_info)
+```
+
+Bazel automatically tracks dependencies across packages and rebuilds only what changed.
+
+### 4. Multiple File Selection with `set --`
 
 ```bash
-# Build entire pipeline
-bazel build //b/ex-build:all_outputs
-
-# View formatted config
-cat bazel-bin/b/ex-build/formatted_config.json
-
-# View validation report
-cat bazel-bin/b/ex-build/validation.txt
-
-# Inspect bundles
-tar tzf bazel-bin/b/ex-build/prod_bundle.tar.gz
-cat bazel-bin/b/ex-build/prod_bundle_info.txt
-
-# Compare dev vs prod bundles
-diff -u \
-    <(tar tzf bazel-bin/b/ex-build/prod_bundle.tar.gz) \
-    <(tar tzf bazel-bin/b/ex-build/dev_bundle.tar.gz)
+cmd = """
+    set -- $(locations :raw_configs)  # $$1=app.conf, $$2=database.conf, $$3=cache.conf
+    $(location //b/ex-genrule:uppercase_sh) input=$$1 $@
+"""
 ```
 
-## When to Use Genrules vs Macros
+When a target produces multiple files, `$(locations)` expands to all of them. Use shell positional parameters to select specific files.
 
-**Use Genrules Directly When:**
-- One-off transformation unique to this BUILD file
-- Need full control over cmd construction
-- Debugging a new script before wrapping in macro
+## Why This Matters
 
-**Use Macros When:**
-- Operation repeated across multiple BUILD files
-- Want to hide implementation details from users
-- Need consistent defaults across the monorepo
-- Planning to auto-generate call sites
+This example shows **real-world Bazel usage**:
 
-## Composition Benefits
+1. **Tooling packages** (`ex-genrule`, `ex-macros`) provide reusable scripts and macros
+2. **Client packages** (`ex-build`) import and compose them without duplication
+3. **No copy-paste** - fix a bug in `uppercase.sh` once, all clients benefit
+4. **Discoverability** - Engineers search for `archive_directory` macro, not raw genrules
+5. **Caching works across packages** - CI builds bundle once, all environments reuse it
 
-Because everything is a Bazel target:
+## Compared to Raw Bash
 
-1. **Dependency Tracking**
-   - Change `config.json` → Bazel rebuilds bundles
-   - Bazel knows validation depends on formatting
+**Without Bazel:**
 
-2. **Caching**
-   - Same `config_dir` hash = reuse bundle from cache
-   - CI shares cached bundles with local builds
-
-3. **Parallelism**
-   - Bazel builds `prod_bundle` and `dev_bundle` concurrently
-   - Independent validation and formatting run in parallel
-
-4. **Incremental Builds**
-   - Modify only validation script → only validation reruns
-   - Config unchanged → bundles come from cache
-
-## Auto-Generation Potential
-
-This structure is highly regular and can be auto-generated from:
-
-```yaml
-# build_manifest.yaml
-scripts:
-  genrules:
-    - name: format_json
-      args: [input, indent]
-    - name: validate_json
-      args: [input]
-
-  macros:
-    - name: bundle_configs
-      script: bundle_configs
-      args: [config_dir, env]
-    - name: bundle_info
-      script: extract_bundle_info
-      args: [bundle]
-
-pipeline:
-  - genrule: format_json
-    input: sample_config
-  - genrule: validate_json
-    input: formatted_config
-  - macro: bundle_configs
-    config_dir: config_dir
-    instances: [prod, dev]
+```bash
+# scripts/build-configs.sh
+#!/bin/bash
+tr '[:lower:]' '[:upper:]' < raw/app.conf > normalized/app.conf
+tr '[:lower:]' '[:upper:]' < raw/database.conf > normalized/database.conf
+tar czf prod-bundle.tar.gz normalized/*
 ```
 
-Generate:
-- Bash script stubs
-- BUILD.bazel filegroups
-- .bzl macros
-- BUILD.bazel pipeline targets
+**Problems:**
+
+- No incremental builds (always runs everything)
+- No caching (CI rebuilds identical bundles)
+- Hard to reuse (copy-paste uppercase logic)
+- No dependency tracking (did you update raw/app.conf?)
+
+**With This System:**
+
+```python
+# BUILD.bazel
+load("//b/ex-macros:macros.bzl", "archive_directory")
+
+genrule(
+    name = "normalized_app_conf",
+    tools = ["//b/ex-genrule:uppercase_sh"],
+    ...
+)
+
+archive_directory(name = "prod_bundle", dir = ":normalized")
+```
+
+**Benefits:**
+
+- Incremental (only rebuilds changed files)
+- Cached (team shares artifacts)
+- Reusable (import `uppercase_sh` anywhere)
+- Tracked (Bazel knows raw → normalized → bundle)
+
+## Next Steps
+
+1. **Add more tools** - Create `//b/ex-json`, `//b/ex-yaml` packages
+2. **Import in your projects** - Use these macros in `//myapp/BUILD.bazel`
+3. **Build pipelines** - Compose genrule → macro → genrule chains
+4. **Share via remote cache** - Team members reuse your build outputs
+
+See [../COOL.md](../COOL.md) for why this approach scales to large teams and monorepos.

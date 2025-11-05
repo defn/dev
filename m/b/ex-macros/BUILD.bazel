@@ -1,19 +1,19 @@
 # Example: Macros wrapping bash scripts with lib.sh
 
+# Example: Using the macros
+load(":macros.bzl", "archive_directory", "archive_info")
+
 filegroup(
     name = "create_archive_sh",
-    srcs = ["create_archive.sh"],
+    srcs = ["scripts/create_archive.sh"],
     visibility = ["//visibility:public"],
 )
 
 filegroup(
     name = "list_archive_sh",
-    srcs = ["list_archive.sh"],
+    srcs = ["scripts/list_archive.sh"],
     visibility = ["//visibility:public"],
 )
-
-# Example: Using the macros
-load(":macros.bzl", "archive_directory", "archive_info")
 
 # Create sample directory to archive
 genrule(

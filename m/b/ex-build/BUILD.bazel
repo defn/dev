@@ -1,111 +1,124 @@
-# Example: Combined genrules and macros in a build pipeline
+# Example: Build client that composes genrules and macros from other examples
+#
+# This demonstrates importing and using:
+# - Genrules from //b/ex-genrule (uppercase, word_count)
+# - Macros from //b/ex-macros (archive_directory, archive_info)
+#
+# Realistic workflow: Build configs, normalize them, bundle for deployment
 
-# === Script filegroups ===
+load("//b/ex-macros:macros.bzl", "archive_directory", "archive_info")
 
-filegroup(
-    name = "format_json_sh",
-    srcs = ["format_json.sh"],
-    visibility = ["//visibility:public"],
-)
-
-filegroup(
-    name = "validate_json_sh",
-    srcs = ["validate_json.sh"],
-    visibility = ["//visibility:public"],
-)
-
-filegroup(
-    name = "bundle_configs_sh",
-    srcs = ["bundle_configs.sh"],
-    visibility = ["//visibility:public"],
-)
-
-filegroup(
-    name = "extract_bundle_info_sh",
-    srcs = ["extract_bundle_info.sh"],
-    visibility = ["//visibility:public"],
-)
-
-# === Load macros ===
-
-load(":build_macros.bzl", "bundle_configs", "bundle_info")
-
-# === Create test data ===
+# === Create raw config files ===
 
 genrule(
-    name = "sample_config",
-    outs = ["config.json"],
-    cmd = """
-        cat > $@ <<'EOF'
-{"environment":"production","version":"1.0.0","features":{"auth":true,"logging":true}}
-EOF
-    """,
-)
-
-# === Use genrules directly for JSON processing ===
-
-genrule(
-    name = "formatted_config",
-    tools = [
-        ":format_json_sh",
-        "//b/lib:lib_sh",
-    ],
-    srcs = [":sample_config"],
-    outs = ["formatted_config.json"],
-    cmd = "$(location :format_json_sh) input=$(location :sample_config) indent=4 $@",
-)
-
-genrule(
-    name = "validation_report",
-    tools = [
-        ":validate_json_sh",
-        "//b/lib:lib_sh",
-    ],
-    srcs = [":formatted_config"],
-    outs = ["validation.txt"],
-    cmd = "$(location :validate_json_sh) input=$(location :formatted_config) $@",
-)
-
-# === Create config directory for bundling ===
-
-genrule(
-    name = "config_dir",
-    srcs = [":formatted_config"],
+    name = "raw_configs",
     outs = [
-        "configs/app.json",
-        "configs/database.json",
+        "raw/app.conf",
+        "raw/database.conf",
+        "raw/cache.conf",
     ],
     cmd = """
-        mkdir -p $(@D)/configs
-        cp $(location :formatted_config) $(@D)/configs/app.json
-        echo '{"host":"localhost","port":5432}' > $(@D)/configs/database.json
+        mkdir -p $(@D)/raw
+        echo 'application configuration settings' > $(@D)/raw/app.conf
+        echo 'database connection parameters' > $(@D)/raw/database.conf
+        echo 'cache backend configuration' > $(@D)/raw/cache.conf
     """,
 )
 
-# === Use macros for bundling ===
+# === Use ex-genrule tools to process configs ===
 
-bundle_configs(
-    name = "prod_bundle",
-    config_dir = ":config_dir",
-    env = "production",
+# Normalize config text to uppercase
+genrule(
+    name = "normalized_app_conf",
+    srcs = [":raw_configs"],
+    outs = ["normalized/app.conf"],
+    cmd = """
+        set -- $(locations :raw_configs)
+        $(location //b/ex-genrule:uppercase_sh) input=$$1 $@
+    """,
+    tools = [
+        "//b/ex-genrule:uppercase_sh",
+        "//b/lib:lib_sh",
+    ],
 )
 
-bundle_configs(
-    name = "dev_bundle",
-    config_dir = ":config_dir",
-    env = "development",
+genrule(
+    name = "normalized_database_conf",
+    srcs = [":raw_configs"],
+    outs = ["normalized/database.conf"],
+    cmd = """
+        set -- $(locations :raw_configs)
+        $(location //b/ex-genrule:uppercase_sh) input=$$2 $@
+    """,
+    tools = [
+        "//b/ex-genrule:uppercase_sh",
+        "//b/lib:lib_sh",
+    ],
 )
 
-# === Use macros to inspect bundles ===
-
-bundle_info(
-    name = "prod_bundle_info",
-    bundle = ":prod_bundle",
+genrule(
+    name = "normalized_cache_conf",
+    srcs = [":raw_configs"],
+    outs = ["normalized/cache.conf"],
+    cmd = """
+        set -- $(locations :raw_configs)
+        $(location //b/ex-genrule:uppercase_sh) input=$$3 $@
+    """,
+    tools = [
+        "//b/ex-genrule:uppercase_sh",
+        "//b/lib:lib_sh",
+    ],
 )
 
-bundle_info(
-    name = "dev_bundle_info",
-    bundle = ":dev_bundle",
+# Gather all normalized configs
+filegroup(
+    name = "normalized_configs",
+    srcs = [
+        ":normalized_app_conf",
+        ":normalized_cache_conf",
+        ":normalized_database_conf",
+    ],
+)
+
+# === Check config sizes ===
+
+genrule(
+    name = "config_size_report",
+    srcs = [":normalized_app_conf"],
+    outs = ["reports/app_size.txt"],
+    cmd = "$(location //b/ex-genrule:word_count_sh) input=$(location :normalized_app_conf) $@",
+    tools = [
+        "//b/ex-genrule:word_count_sh",
+        "//b/lib:lib_sh",
+    ],
+)
+
+# === Use ex-macros tools to bundle configs ===
+
+# Bundle for production deployment
+archive_directory(
+    name = "production_config_bundle",
+    dir = ":normalized_configs",
+    prefix = "prod-configs",
+)
+
+# Bundle for staging deployment
+archive_directory(
+    name = "staging_config_bundle",
+    dir = ":normalized_configs",
+    prefix = "staging-configs",
+)
+
+# === Generate bundle metadata ===
+
+archive_info(
+    name = "production_bundle_info",
+    archive = ":production_config_bundle",
+)
+
+archive_info(
+    name = "staging_bundle_info",
+    archive = ":staging_config_bundle",
 )
 
 # === Build everything ===
@@ -113,11 +126,11 @@ bundle_info(
 filegroup(
     name = "all_outputs",
     srcs = [
-        ":formatted_config",
-        ":validation_report",
-        ":prod_bundle",
-        ":dev_bundle",
-        ":prod_bundle_info",
-        ":dev_bundle_info",
+        ":config_size_report",
+        ":normalized_configs",
+        ":production_bundle_info",
+        ":production_config_bundle",
+        ":staging_bundle_info",
+        ":staging_config_bundle",
     ],
 )
