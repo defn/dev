@@ -22,9 +22,8 @@ build --enable_runfiles
 build --incompatible_autoload_externally=+@rules_android
 build --incompatible_disallow_empty_glob=false
 build --legacy_important_outputs
-build --noincompatible_sandbox_hermetic_tmp
 build --noremote_upload_local_results
-build --noslim_profile --experimental_profile_include_target_label --experimental_profile_include_primary_output 
+build --noslim_profile --experimental_profile_include_target_label --experimental_profile_include_primary_output
 build --remote_download_minimal
 build --test_env=HOME=/home/ubuntu
 build --verbose_failures
