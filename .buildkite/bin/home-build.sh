@@ -2,7 +2,6 @@
 
 set -efu -o pipefail
 
-export PROMPT_COMMAND
 source .bash_profile
 
 case "${BUILDKITE_BRANCH-}" in

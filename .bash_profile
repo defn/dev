@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+export PROMPT_COMMAND="${PROMPT_COMMAND:-}"
+
 . ~/.bashrc_path
 BASE_PATH="${PATH}"
 export PATH="${BASE_PATH}:${HOME}/bin/blackhole"
