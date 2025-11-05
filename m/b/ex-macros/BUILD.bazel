@@ -1,0 +1,45 @@
+# Example: Macros wrapping bash scripts with lib.sh
+
+filegroup(
+    name = "create_archive_sh",
+    srcs = ["create_archive.sh"],
+    visibility = ["//visibility:public"],
+)
+
+filegroup(
+    name = "list_archive_sh",
+    srcs = ["list_archive.sh"],
+    visibility = ["//visibility:public"],
+)
+
+# Example: Using the macros
+load(":macros.bzl", "archive_directory", "archive_info")
+
+# Create sample directory to archive
+genrule(
+    name = "sample_dir",
+    outs = [
+        "sample_dir/file1.txt",
+        "sample_dir/file2.txt",
+        "sample_dir/nested/file3.txt",
+    ],
+    cmd = """
+        mkdir -p $(@D)/sample_dir/nested
+        echo 'First file' > $(@D)/sample_dir/file1.txt
+        echo 'Second file' > $(@D)/sample_dir/file2.txt
+        echo 'Nested file' > $(@D)/sample_dir/nested/file3.txt
+    """,
+)
+
+# Use macro to create archive
+archive_directory(
+    name = "my_archive",
+    dir = ":sample_dir",
+    prefix = "myproject",
+)
+
+# Use macro to get archive info
+archive_info(
+    name = "archive_metadata",
+    archive = ":my_archive",
+)

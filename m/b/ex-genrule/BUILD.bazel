@@ -1,0 +1,56 @@
+# Example: Using bash scripts with lib.sh in genrules
+
+filegroup(
+    name = "uppercase_sh",
+    srcs = ["uppercase.sh"],
+    visibility = ["//visibility:public"],
+)
+
+filegroup(
+    name = "word_count_sh",
+    srcs = ["word_count.sh"],
+    visibility = ["//visibility:public"],
+)
+
+# Example input file
+genrule(
+    name = "sample_input",
+    outs = ["sample.txt"],
+    cmd = "echo 'hello world from bazel genrule example' > $@",
+)
+
+# Genrule using uppercase.sh
+genrule(
+    name = "uppercase_output",
+    tools = [
+        ":uppercase_sh",
+        "//b/lib:lib_sh",
+    ],
+    srcs = [":sample_input"],
+    outs = ["uppercase.txt"],
+    cmd = "$(location :uppercase_sh) input=$(location :sample_input) $@",
+)
+
+# Genrule using word_count.sh
+genrule(
+    name = "word_count_output",
+    tools = [
+        ":word_count_sh",
+        "//b/lib:lib_sh",
+    ],
+    srcs = [":sample_input"],
+    outs = ["word_count.txt"],
+    cmd = "$(location :word_count_sh) input=$(location :sample_input) $@",
+)
+
+# Chain both: uppercase then count
+genrule(
+    name = "chained_output",
+    tools = [
+        ":word_count_sh",
+        "//b/lib:lib_sh",
+    ],
+    srcs = [":uppercase_output"],
+    outs = ["uppercase_word_count.txt"],
+    cmd = "$(location :word_count_sh) input=$(location :uppercase_output) $@",
+)

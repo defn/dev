@@ -1,0 +1,123 @@
+# Example: Combined genrules and macros in a build pipeline
+
+# === Script filegroups ===
+
+filegroup(
+    name = "format_json_sh",
+    srcs = ["format_json.sh"],
+    visibility = ["//visibility:public"],
+)
+
+filegroup(
+    name = "validate_json_sh",
+    srcs = ["validate_json.sh"],
+    visibility = ["//visibility:public"],
+)
+
+filegroup(
+    name = "bundle_configs_sh",
+    srcs = ["bundle_configs.sh"],
+    visibility = ["//visibility:public"],
+)
+
+filegroup(
+    name = "extract_bundle_info_sh",
+    srcs = ["extract_bundle_info.sh"],
+    visibility = ["//visibility:public"],
+)
+
+# === Load macros ===
+
+load(":build_macros.bzl", "bundle_configs", "bundle_info")
+
+# === Create test data ===
+
+genrule(
+    name = "sample_config",
+    outs = ["config.json"],
+    cmd = """
+        cat > $@ <<'EOF'
+{"environment":"production","version":"1.0.0","features":{"auth":true,"logging":true}}
+EOF
+    """,
+)
+
+# === Use genrules directly for JSON processing ===
+
+genrule(
+    name = "formatted_config",
+    tools = [
+        ":format_json_sh",
+        "//b/lib:lib_sh",
+    ],
+    srcs = [":sample_config"],
+    outs = ["formatted_config.json"],
+    cmd = "$(location :format_json_sh) input=$(location :sample_config) indent=4 $@",
+)
+
+genrule(
+    name = "validation_report",
+    tools = [
+        ":validate_json_sh",
+        "//b/lib:lib_sh",
+    ],
+    srcs = [":formatted_config"],
+    outs = ["validation.txt"],
+    cmd = "$(location :validate_json_sh) input=$(location :formatted_config) $@",
+)
+
+# === Create config directory for bundling ===
+
+genrule(
+    name = "config_dir",
+    srcs = [":formatted_config"],
+    outs = [
+        "configs/app.json",
+        "configs/database.json",
+    ],
+    cmd = """
+        mkdir -p $(@D)/configs
+        cp $(location :formatted_config) $(@D)/configs/app.json
+        echo '{"host":"localhost","port":5432}' > $(@D)/configs/database.json
+    """,
+)
+
+# === Use macros for bundling ===
+
+bundle_configs(
+    name = "prod_bundle",
+    config_dir = ":config_dir",
+    env = "production",
+)
+
+bundle_configs(
+    name = "dev_bundle",
+    config_dir = ":config_dir",
+    env = "development",
+)
+
+# === Use macros to inspect bundles ===
+
+bundle_info(
+    name = "prod_bundle_info",
+    bundle = ":prod_bundle",
+)
+
+bundle_info(
+    name = "dev_bundle_info",
+    bundle = ":dev_bundle",
+)
+
+# === Build everything ===
+
+filegroup(
+    name = "all_outputs",
+    srcs = [
+        ":formatted_config",
+        ":validation_report",
+        ":prod_bundle",
+        ":dev_bundle",
+        ":prod_bundle_info",
+        ":dev_bundle_info",
+    ],
+)
