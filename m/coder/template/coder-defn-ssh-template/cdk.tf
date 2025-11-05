@@ -74,6 +74,7 @@ resource "coder_app" "code-server" {
     threshold = 6
     url       = "http://localhost:8080/healthz"
   }
+  open_in = "tab"
 }
 
 //

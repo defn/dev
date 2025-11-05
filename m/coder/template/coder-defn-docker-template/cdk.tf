@@ -92,6 +92,7 @@ resource "coder_app" "app" {
   subdomain    = true
   url          = "http://localhost:3000"
   order        = 1
+  open_in      = "tab"
 }
 
 resource "coder_app" "code-server" {
@@ -278,11 +279,11 @@ module "claude-code" {
   source              = "registry.coder.com/coder/claude-code/coder"
   version             = "3.0.1"
   agent_id            = coder_agent.main.id
-  workdir = "/home/ubuntu"
+  workdir             = "/home/ubuntu"
   install_claude_code = false
-  install_agentapi = false
-  pre_install_script = "(cd && git pull); sudo mount --bind /home/ubuntu /home/coder; ~/bin/claude-setup.sh"
-  report_tasks = true
+  install_agentapi    = false
+  pre_install_script  = "(cd && git pull); sudo mount --bind /home/ubuntu /home/coder; ~/bin/claude-setup.sh"
+  report_tasks        = true
 }
 
 module "coder-login" {
