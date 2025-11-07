@@ -96,7 +96,7 @@ You might ask: "Why not just write Bazel macros?" Several reasons:
 
 2. **Data First**: The model in `build.cue` is pure data. It could be generated from databases, APIs, or other tools. Try generating Starlark function calls programmatically—it's messy.
 
-3. **Validation**: CUE validates the entire model before generation. Bazel only discovers errors during build execution, which is much slower.
+3. **Validation**: CUE validates the entire model before generation. Bazel only discovers errors during build execution.
 
 4. **Transformation Power**: CUE's comprehensions, let you slice, dice, and reshape data in ways that are awkward in Starlark.
 
