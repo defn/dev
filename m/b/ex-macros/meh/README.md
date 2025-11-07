@@ -2,6 +2,8 @@
 
 This directory demonstrates a declarative approach to generating Bazel BUILD files using CUE as a configuration language and template engine.
 
+**Status**: Fully implemented. The [BUILD.bazel](BUILD.bazel) file is generated from [bazel.cue](bazel.cue) and [build.cue](build.cue).
+
 ## The Problem This Solves
 
 Writing Bazel BUILD files by hand is repetitive and error-prone. When you have patterns that repeat across many targets—like normalizing configuration files, creating archive bundles, or generating reports—you end up with hundreds of lines of nearly-identical Starlark code. More importantly, the high-level intent (what you're trying to accomplish) gets obscured by low-level Bazel syntax.
@@ -278,10 +280,13 @@ This separation means the transformation engine (`bazel.cue`) is reusable across
 To regenerate `BUILD.bazel` from the CUE files:
 
 ```bash
+cd b/ex-macros/meh
 cue export --out text -e BUILD bazel.cue build.cue > BUILD.bazel
 ```
 
 The `-e BUILD` flag selects the `BUILD` field from `bazel.cue` as output, and `--out text` produces raw text instead of JSON/YAML.
+
+The generated BUILD file includes a header comment `# auto-generated: bazel.cue` to indicate its origin and discourage manual edits.
 
 In practice, you'd integrate this into your build process, perhaps as a genrule that validates the BUILD file matches the CUE source, or as a pre-commit hook that regenerates BUILD files.
 
