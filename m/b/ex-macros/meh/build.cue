@@ -55,3 +55,34 @@ m: #Model & {
     ]
   }
 }
+
+#Model: {
+  tools: {
+    uppercase: #Label
+    wordcount: #Label
+    lib:       #Label
+  }
+
+  loads: [...{
+    bzl:     string
+    symbols: [...string]
+  }]
+
+  rawFiles: [...#CfgFile]
+
+  normalize: [...#NormalizeStep]
+
+  sizeReports: [...{
+    name: string
+    src:  #Label
+    out:  string
+  }]
+
+  bundles: [...#Bundle]
+  infos:   [...#Info]
+
+  all: {
+    name: string
+    srcs: [...#Label]
+  }
+}

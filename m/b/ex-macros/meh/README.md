@@ -13,23 +13,25 @@ This example shows how to use CUE to:
 
 ## Architecture Overview
 
-The system has three layers:
+The system has three layers split across two files:
 
-### Layer 1: Schema Definition (`meh.cue` - top section)
+### Layer 1: Schema Definitions
 
-The schema defines abstract types that represent build concepts, not Bazel primitives:
-
+**Basic types** (`bazel.cue`): Fundamental building blocks for Bazel concepts:
+- `#Label`: Bazel label validation (must match `^(:|//).+`)
 - `#CfgFile`: A configuration file with a name, path, and content
 - `#NormalizeStep`: A transformation that processes raw files into normalized ones
 - `#Bundle`: A packaging operation that creates archives with prefixes
 - `#Info`: Metadata extraction from archives
-- `#Model`: The complete build specification
+
+**Model schema** (`build.cue`): The complete build specification container:
+- `#Model`: Defines the structure for tools, loads, rawFiles, normalize steps, bundles, infos, and aggregated outputs
 
 These types describe *what* you want to build in business terms, not *how* Bazel will build it. For example, you don't think about `genrule` attributes; you think about "I have raw config files that need normalization."
 
 ### Layer 2: Concrete Instance (`build.cue`)
 
-This file creates a concrete instance of the `#Model` schema with actual values:
+The same file that defines the `#Model` schema also creates a concrete instance with actual values:
 
 ```cue
 m: #Model & {
@@ -53,7 +55,7 @@ m: #Model & {
 
 Notice how readable this is. It's declarative data, not imperative code. You're describing *what* the build produces, not scripting *how* to produce it. The intent is crystal clear: "We have three raw config files, we normalize them, we bundle them for production and staging environments."
 
-### Layer 3: Transform and Render (`meh.cue` - bottom section)
+### Layer 3: Transform and Render (`bazel.cue`)
 
 The transformation layer converts the high-level model into normalized Bazel target representations:
 
@@ -111,21 +113,21 @@ Let's trace a single configuration file through the system:
    { name: "app", path: "raw/app.conf", content: "application configuration settings" }
    ```
 
-2. **Raw Generation** (`meh.cue` - `t_raw`): A CUE comprehension iterates over `m.rawFiles` and generates:
+2. **Raw Generation** (`bazel.cue` - `t_raw`): A CUE comprehension iterates over `m.rawFiles` and generates:
    - An output path for the raw file
    - An echo command to create it
 
    These are collected into a single multi-output genrule.
 
-3. **Normalization** (`meh.cue` - `t_norm`): Another comprehension creates a genrule that:
+3. **Normalization** (`bazel.cue` - `t_norm`): Another comprehension creates a genrule that:
    - Depends on the raw genrule (`:raw_configs`)
    - Uses positional indexing to select the specific raw file
    - Invokes the uppercase transformation tool
    - Produces a normalized output
 
-4. **Aggregation** (`meh.cue` - `t_norm_group`): A comprehension collects all normalized targets into a filegroup, automatically building the `srcs` list by iterating over `t_norm`.
+4. **Aggregation** (`bazel.cue` - `t_norm_group`): A comprehension collects all normalized targets into a filegroup, automatically building the `srcs` list by iterating over `t_norm`.
 
-5. **Rendering** (`meh.cue` - bottom): The `renderGenrule` function takes each target structure and generates proper Starlark syntax, handling:
+5. **Rendering** (`bazel.cue`): The `renderGenrule` function takes each target structure and generates proper Starlark syntax, handling:
    - String quoting
    - List formatting with proper indentation
    - Optional attributes (srcs, tools) that only appear when present
@@ -172,15 +174,18 @@ This IR is easier to manipulate, validate, and transform than raw text. Only at 
 
 Want to add a new build pattern? You'd:
 
-1. **Extend the Schema**: Add a new type to the `#Model`:
+1. **Extend the Schema** (`build.cue`): Add a new field to the `#Model` definition:
    ```cue
-   testSuites: [...{
-     name: string
-     srcs: [...#Label]
-   }]
+   #Model: {
+     // ... existing fields
+     testSuites: [...{
+       name: string
+       srcs: [...#Label]
+     }]
+   }
    ```
 
-2. **Add a Transform**: Create a new target list:
+2. **Add a Transform** (`bazel.cue`): Create a new target list:
    ```cue
    t_tests: [
      for t in m.testSuites {
@@ -193,7 +198,7 @@ Want to add a new build pattern? You'd:
    ]
    ```
 
-3. **Add a Renderer**: Implement the rendering function:
+3. **Add a Renderer** (`bazel.cue`): Implement the rendering function:
    ```cue
    renderTest: {
      #in: { name: string, srcs: [...string] }
@@ -201,7 +206,23 @@ Want to add a new build pattern? You'd:
    }
    ```
 
-4. **Update the Model**: Add test suites to your concrete instance in `build.cue`.
+4. **Update the targets list** (`bazel.cue`): Add to the aggregated targets:
+   ```cue
+   targets: [
+     // ... existing targets
+     for x in t_tests { x },
+   ]
+   ```
+
+5. **Update the Model Instance** (`build.cue`): Add test suites to your concrete `m` instance:
+   ```cue
+   m: #Model & {
+     // ... existing fields
+     testSuites: [
+       { name: "unit_tests", srcs: [":test_sources"] },
+     ]
+   }
+   ```
 
 The rest happens automatically. The existing comprehensions that build the `targets` list and render output will pick up your new pattern.
 
@@ -236,15 +257,31 @@ It's overkill when:
 - The team is small and Bazel-fluent
 - Patterns don't repeat often enough to justify abstraction
 
+## File Organization
+
+The system uses two CUE files with clear separation of concerns:
+
+- **`bazel.cue`**: The transformation engine
+  - Basic schema types (#Label, #CfgFile, #NormalizeStep, #Bundle, #Info)
+  - Transformation logic (t_raw, t_norm, t_reports, t_bundles, t_infos, t_all)
+  - Rendering functions (renderGenrule, renderFilegroup, renderArchiveDir, renderArchiveInfo)
+  - Final BUILD output field
+
+- **`build.cue`**: The declarative model
+  - #Model schema definition (what fields are valid)
+  - Concrete instance `m` (actual values for this build)
+
+This separation means the transformation engine (`bazel.cue`) is reusable across projects. Only `build.cue` changes for different build configurations.
+
 ## Running the Generator
 
 To regenerate `BUILD.bazel` from the CUE files:
 
 ```bash
-cue export --out text -e BUILD meh.cue build.cue > BUILD.bazel
+cue export --out text -e BUILD bazel.cue build.cue > BUILD.bazel
 ```
 
-The `-e BUILD` flag selects the `BUILD` field as output, and `--out text` produces raw text instead of JSON/YAML.
+The `-e BUILD` flag selects the `BUILD` field from `bazel.cue` as output, and `--out text` produces raw text instead of JSON/YAML.
 
 In practice, you'd integrate this into your build process, perhaps as a genrule that validates the BUILD file matches the CUE source, or as a pre-commit hook that regenerates BUILD files.
 
