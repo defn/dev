@@ -95,12 +95,12 @@
         mode: "{{ item.mode }}"
       loop:
         - { path: "/tmp/uscreens", mode: "1777" }
-    
+
     - name: Delete ansible files from ~/.local/bin
       become: false
       ansible.builtin.shell: |
         rm -f /home/{{ username }}/.local/bin/ansible*
-      
+
     - name: Find full path to mise tool
       become: false
       ansible.builtin.command: >
@@ -109,20 +109,21 @@
       args:
         chdir: /home/ubuntu
       loop:
-        - cue
-        - go
-        - claude
-        - node
         - agentapi
-        - devcontainer
+        - buildifier
+        - claude
         - coder
-        - gemini
         - codex
-        - python
-        - python3
+        - cue
+        - devcontainer
+        - gemini
+        - go
+        - node
+        - npm
         - pip
         - pip3
-        - npm
+        - python
+        - python3
       changed_when: false
     - name: Make /usr/local/bin
       become: true
