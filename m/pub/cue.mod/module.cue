@@ -1,4 +1,4 @@
-module: "github.com/defn/pkg@v0"
+module: "github.com/defn/pub@v0"
 language: {
 	version: "v0.15.0"
 }
