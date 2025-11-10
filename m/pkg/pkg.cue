@@ -1,3 +1,3 @@
 package pkg
 
-hello: "world"
+hello: "world!"
