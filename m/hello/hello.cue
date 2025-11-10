@@ -1,0 +1,3 @@
+package hello
+
+hello: "world"
