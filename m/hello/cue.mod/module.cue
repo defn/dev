@@ -7,6 +7,6 @@ source: {
 }
 deps: {
 	"github.com/defn/pkg@v0": {
-		v: "v0.0.1"
+		v: "v0.0.3"
 	}
 }
