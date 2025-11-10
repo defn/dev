@@ -1,7 +1,7 @@
 package hello
 
 import (
-    "github.com/defn/pkg@v0"
+	"github.com/defn/pub@v0"
 )
 
-hello: pkg.hello
+hello: pub.hello

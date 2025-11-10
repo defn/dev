@@ -6,7 +6,7 @@ source: {
 	kind: "git"
 }
 deps: {
-	"github.com/defn/pkg@v0": {
-		v: "v0.0.3"
+	"github.com/defn/pub@v0": {
+		v: "v0.0.2"
 	}
 }
