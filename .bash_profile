@@ -16,4 +16,10 @@ fi
 
 . ~/.bashrc_path
 source ~/.bashrc
+
+if [[ -x /usr/local/bin/brew ]]; then
+  PATH="$(/usr/local/bin/brew --prefix coreutils)/libexec/gnubin:${PATH}"
+fi
+
 if [[ -f ~/dotfiles/dot/bashrc ]]; then source ~/dotfiles/dot/bashrc; fi
+
