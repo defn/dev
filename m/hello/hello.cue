@@ -5,3 +5,5 @@ import (
 )
 
 hello: pub.hello
+
+message: "Hello from Claude Code!"
