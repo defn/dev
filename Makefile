@@ -215,7 +215,7 @@ fast_inner:
 	(cd m && ~/.local/bin/mise install)
 
 # Run system upgrades and updates on Linux, then perform fast sync
-# Dependencies: uname command, t binary, ~/.local/bin/mise binary, mise.toml files with local tasks (upgrade, ubuntu, fixup), make command
+# Dependencies: uname command, t binary, ~/.local/bin/mise binary, mise.toml files with local tasks (upgrade, ubuntu, fixup, macos), make command
 # Outputs: Executed Linux system upgrade/ubuntu/fixup tasks via mise, performed fast_inner sync
 sync_inner:
 	~/.local/bin/mise trust
@@ -224,6 +224,7 @@ sync_inner:
 	if [[ "$(shell uname -s)" == "Linux" ]]; then t play-ubuntu ~/.local/bin/mise run local ubuntu; fi
 	$(MAKE) fast_inner
 	if [[ "$(shell uname -s)" == "Linux" ]]; then t play-fixup ~/.local/bin/mise run local fixup; fi
+	if [[ "$(shell uname -s)" == "Darwin" ]]; then t play-macos ~/.local/bin/mise run local macos; fi
 
 # List available mise tool updates across all mise.toml files in the repository
 # Dependencies: git command, runmany script, perl command, mise binary, mise.toml files in repository
