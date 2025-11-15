@@ -1,6 +1,6 @@
 # ACUTE - Accumulate, Configure, Unify, Transform, Execute
 
-ACUTE is a configuration and infrastructure management system that uses CUE as a unified source of truth.
+ACUTE is a self-refining data pipeline that transforms platform operations into a continuous learning system. It ingests all aspects of infrastructure—code, configuration, runtime state, and external APIs—unifies them into a formal CUE lattice, and generates optimized actions. When execution outputs feed back as inputs to the next cycle, the system creates a continuous refinement loop.
 
 ## Quick Start
 
@@ -21,157 +21,148 @@ Or run phases individually:
 ./execute.sh      # Build outputs
 ```
 
-## Architecture
+## How It Works
 
-ACUTE implements a five-phase pipeline:
+ACUTE operates on four layers of knowledge (IDEA):
 
-1. **Accumulate** - Gather raw data from multiple sources (APIs, files, commands)
-2. **Configure** - Process and prepare data for optimal unification
-3. **Unify** - Apply schemas and consolidate data into unified CUE
-4. **Transform** - Convert CUE to tool-specific formats (YAML, JSON, Terraform)
-5. **Execute** - Run tools to generate final outputs (docs, infrastructure)
+- **Intentions** - Theoretical knowledge: CUE schemas, governance policies, constraints
+- **Definitions** - Direct knowledge: git repos, declared configurations, static data
+- **Execution** - Derived knowledge: what tools plan to deploy (kustomize build, terraform plan)
+- **Application** - Indirect knowledge: what's actually running (kubectl get, AWS state, GitHub API)
+
+The five-phase pipeline processes these layers:
+
+1. **Accumulate** - Ingest everything: git contents, cloud state, API responses, tool outputs
+2. **Configure** - Normalize and index disparate data, relate isolated information
+3. **Unify** - Merge into CUE lattice where constraints compose and conflicts surface
+4. **Transform** - Generate concrete tool inputs: manifests, Terraform configs, scripts
+5. **Execute** - Run tools, deploy changes, capture outputs for next cycle
+
+When Execute changes the world (kubectl apply, terraform apply), the next Accumulate captures that changed state through Application layer queries. Comparing Execution (planned) vs. Application (actual) automatically detects drift.
 
 ## Directory Structure
 
 ```
 c/
-├── intention/      # CUE schemas (what data should look like)
-├── definition/     # Static configuration (YAML files, AWS accounts)
-├── application/    # Dynamic data (API responses, GitHub metadata)
-├── execution/      # Tool outputs (Kustomize manifests, etc.)
-├── docs/           # Generated Astro.js documentation site
-├── main.cue        # Unifies all sources with schemas
+├── intention/      # Schemas: what should be true
+├── definition/     # Static config: what you declared
+├── execution/      # Derived outputs: what tools computed
+├── application/    # Live state: what exists in the world
+├── docs/           # Generated documentation site
+├── main.cue        # Unifies all layers into lattice
 └── *.sh            # Pipeline phase scripts
 ```
 
-### Core Concepts
+The lattice in `main.cue` unifies all four knowledge layers with their schemas. CUE validates that everything is consistent and type-safe.
 
-**CUE Packages:** Each directory is a CUE package containing schemas (intention) or data (definition, application, execution).
+## Current State
 
-**Unification:** `main.cue` combines schemas with data from all sources. CUE validates that data conforms to schemas.
+**Working:**
 
-**Data Layers:**
+- ACUTE pipeline runs and validates across all phases
+- IDEA ontology implemented: all four knowledge layers exist
+- CUE lattice unifies ~19k lines of validated configuration
+- Manages 14 AWS organizations with ~145 accounts
+- Generates Terraform, AWS configs, documentation from unified source
 
-- **intention/** - Schemas defining structure and constraints
-- **definition/** - Static configuration (AWS accounts, repos)
-- **application/** - API-sourced data (GitHub metadata)
-- **execution/** - Tool-generated outputs (Kustomize)
+**In Progress:**
 
-**Generated Outputs:**
+- Accumulate currently ingests: GitHub repos, Kustomize manifests, YAML configs
+- Execute builds documentation but doesn't deploy infrastructure yet
+- Feedback loop not closed: outputs written but not committed to git
 
-- `main.yaml` - Unified configuration (Unify phase)
-- `docs/src/content/aws/` - AWS account YAML files (Transform phase)
-- `docs/dist/` - Built documentation site (Execute phase)
+**Planned:**
 
-See [docs/README.md](docs/README.md) for documentation site details.
+- Execute will deploy via kubectl (ArgoCD bootstrap) and Terraform
+- Accumulate will expand to ingest full Application layer state
+- Continuous cycling: each execution feeds next accumulation
+- Drift detection: automatic comparison of planned vs. actual state
 
-## Pipeline Phases
+## External Systems (Application Layer)
 
-### 1. Accumulate
+ACUTE accumulates state from external systems to detect drift and inform optimization. Currently ingesting:
 
-```bash
-./accumulate.sh
-```
+- **GitHub** - Repository metadata
+- **Kubernetes** - Kustomize build outputs (planned: live cluster state via kubectl)
+- **AWS** - Account definitions (planned: resource state via AWS APIs)
 
-Runs `accum.sh` scripts in subdirectories to gather raw data:
+Planned accumulation sources:
 
-- `definition/accum.sh` - Converts `repo.yaml` to CUE
-- `execution/accum.sh` - Captures Kustomize output
-- `application/accum.sh` - Fetches GitHub API data
+- **Buildkite** - CI/CD pipeline state, build results
+- **ArgoCD** - Kubernetes deployment state, sync status
+- **Coder** - Workspace state, template versions
+- **Tailscale** - Network mesh state, device connectivity
+- **Cloudflare** - Workers/Pages deployments, edge configuration
+- **GCP** - BigQuery datasets, project resources
+- **Google Workspace** - Users, groups (for BigQuery IAM integration)
+- **Docker Registry** (ghcr.io) - Container images, manifests
 
-Each generates a `gen.cue` file with raw data.
+These sources can be queried directly via CLIs or unified through tools like Steampipe for SQL-based accumulation.
 
-### 2. Configure
+## How It Detects Drift
 
-```bash
-./configure.sh
-```
-
-Processes accumulated data for optimal unification. Currently a stub for future normalization and enrichment.
-
-### 3. Unify
-
-```bash
-./unify.sh
-```
-
-Applies schemas and validates data:
-
-- Imports all CUE packages (intention, definition, application, execution)
-- Unifies data with schemas in `main.cue`
-- Exports to `main.yaml`
-
-### 4. Transform
-
-```bash
-./transform.sh
-```
-
-Converts CUE to tool-specific formats:
-
-- Generates AWS account YAML files in `docs/src/content/aws/`
-- Future: Terraform configs, Ansible playbooks, etc.
-
-### 5. Execute
-
-```bash
-./execute.sh
-```
-
-Runs tools on transformed data:
-
-- Builds Astro.js documentation site
-- Future: Deploy infrastructure with kubectl, Terraform, etc.
-
-## How Unification Works
-
-CUE unifies schemas with data from multiple sources:
+The lattice unifies all four IDEA layers. When they don't align, you have drift:
 
 ```cue
 config: {
-    resource: intention.resource  // Schema
-    resource: execution.resource  // Data (must match schema)
+    // What should exist (schema + declared intent)
+    resource: intention.resource
+    resource: definition.resource
 
-    repo: intention.repo          // Schema
-    repo: definition.repo         // Static data
-    repo: application.repo        // API data (all must unify)
+    // What we plan to deploy
+    resource: execution.resource  // from kustomize build
 
-    aws: intention.aws            // Schema
-    aws: definition_aws           // AWS account definitions
+    // What's actually deployed
+    resource: application.resource  // from kubectl get
+
+    // If execution ≠ application → drift detected
 }
 ```
 
-Benefits:
+This same pattern applies across all resources:
 
-- Validates data against schemas at unification time
-- Detects conflicts between data sources
-- Ensures type safety and constraints
-- Single source of truth across all tools
+- AWS accounts: definitions vs. actual AWS state
+- Kubernetes: planned manifests vs. running resources
+- GitHub repos: declared config vs. API metadata
+- Deployments: Terraform plans vs. cloud resources
 
-## Example: AWS Accounts
+CUE validates that all layers unify. When they don't, the lattice tells you exactly where reality diverged from intent.
 
-Input (CUE):
+## Example: AWS Account Management
+
+Define an account in CUE:
 
 ```cue
-// definition/aws/aws.cue
-config: aws: fogg: ci: {
-    account: "ci"
+// definition/aws/fogg.cue
+config: aws: org: fogg: account: ci: {
     id: "812459563189"
-    email: "fogg-home@defn.sh"
+    email: "fogg-ci@defn.sh"
 }
 ```
 
-Output (YAML):
+The schema in `intention/aws.cue` automatically computes derived fields like AWS CLI config. Transform generates multiple outputs from this single source:
 
-```yaml
-# docs/src/content/aws/fogg/ci.yaml
-account: ci
-id: "812459563189"
-email: fogg-home@defn.sh
-aws_config: |
-  [profile fogg-ci]
-  sso_account_id=812459563189
-  ...
-```
+- `docs/src/content/aws/fogg/ci.yaml` - Documentation
+- `../aws/fogg/ci/.aws/config` - AWS CLI configuration
+- `../infra/acc-fogg-ci/cdk.tf` - Terraform for the account
+- `../infra/acc-fogg-ci/mise.toml` - Tool versions
 
-The `aws_config` field is computed by the CUE schema and provides ready-to-use AWS CLI configuration.
+All generated from the unified lattice, ensuring consistency across tools.
+
+## The Continuous Refinement Loop
+
+The system is designed to run continuously. Each cycle:
+
+1. **Accumulate** ingests current state of the world (Application) and what tools plan (Execution)
+2. **Unify** detects drift when planned ≠ actual
+3. **Transform** generates corrective actions
+4. **Execute** applies changes and commits results to git
+5. Next cycle's **Accumulate** ingests those commits → the loop closes
+
+This creates two operational modes:
+
+**Continuous Equilibrium (CE)** - React to the world's response. When a server fails or configuration drifts, detect it in Application layer and generate corrective Execution. The system maintains stability through continuous intervention.
+
+**Continuous Annealing (CA)** - Refine based on patterns. When CE repeatedly corrects the same drift, analyze the pattern and update Intentions (schemas) to match what reality proves optimal. The system evolves toward configurations that naturally stay in equilibrium.
+
+This is planned work. Currently the pipeline runs manually and outputs aren't committed back to git. Once the loop closes, ACUTE becomes a continuous sensemaking system that learns from execution.
