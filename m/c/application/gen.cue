@@ -10,6 +10,12 @@ repo: {
 		name:        "dev"
 		url:         "https://github.com/defn/dev"
 	}
+	pub: {
+		createdAt:   "2025-11-10T06:55:21Z"
+		description: ""
+		name:        "pub"
+		url:         "https://github.com/defn/pub"
+	}
 	".github": {
 		createdAt:   "2025-03-14T04:00:01Z"
 		description: ""
