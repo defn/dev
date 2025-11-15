@@ -2,7 +2,7 @@
 # Description: Builds multi-platform Docker images and pushes to GitHub Container Registry
 # Dependencies: docker, git, buildkit, qemu, buildkite env vars, just
 # Outputs: Multi-platform Docker images pushed to ghcr.io/defn/dev
-latest platforms="amd64 arm64":
+latest platforms="amd64":
 	#!/usr/bin/env bash
 	set -efu -o pipefail
 
@@ -49,5 +49,5 @@ latest platforms="amd64 arm64":
 	wait
 
 	docker manifest rm ghcr.io/defn/dev:latest 2>/dev/null >/dev/null || true
-	docker manifest create ghcr.io/defn/dev:latest ghcr.io/defn/dev:latest-${RELEASE}-${BUILD_SHA}-{amd64,arm64}
+	docker manifest create ghcr.io/defn/dev:latest ghcr.io/defn/dev:latest-${RELEASE}-${BUILD_SHA}-amd64
 	docker manifest push ghcr.io/defn/dev:latest

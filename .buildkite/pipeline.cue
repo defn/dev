@@ -10,17 +10,11 @@ import (
 #cmd: [
 	"cmd",
 	"command/api",
-	"command/infra",
+	"command/gollm",
+	"command/meh",
+	"command/tui",
 	"command/root",
 	"command/tui",
-	"infra",
-	"tf",
-	"tf/gen/terraform_aws_defn_account",
-	"tf/gen/terraform_aws_defn_account/internal",
-	"tf/gen/terraform_aws_defn_account/jsii",
-	"tf/gen/terraform_aws_s3_bucket",
-	"tf/gen/terraform_aws_s3_bucket/internal",
-	"tf/gen/terraform_aws_s3_bucket/jsii",
 ]
 
 steps: [{
@@ -34,8 +28,9 @@ steps: [{
 	command: "\(#scripts)/bazel-build.sh"
 }, {
 	label: "Website deploys"
+	// https://github.com/buildkite-plugins/monorepo-diff-buildkite-plugin/releases
 	plugins: [{
-		"monorepo-diff#v1.2.0": {
+		"monorepo-diff#v1.5.1": {
 			watch: [
 				for d in infra.domains {
 					path: "m/w/sites/\(d)/"
@@ -48,7 +43,7 @@ steps: [{
 	label:   "cmd deploys"
 	command: "\(#scripts)/build-cmd.sh"
 	plugins: [{
-		"monorepo-diff#v1.2.0": {
+		"monorepo-diff#v1.5.1": {
 			watch: [
 				for d in #cmd {
 					"m/\(d)/"

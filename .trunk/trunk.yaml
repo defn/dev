@@ -6,7 +6,7 @@ cli:
 plugins:
   sources:
     - id: trunk
-      ref: v1.7.3
+      ref: v1.7.4
       uri: https://github.com/trunk-io/plugins
 runtimes:
   enabled:
@@ -40,14 +40,14 @@ lint:
         - m/c/docs/dist
   enabled:
     - actionlint@1.7.8
-    - black@25.9.0
+    - black@25.11.0
     - buildifier@8.2.1
     - clippy@1.65.0
     - cue-fmt
-    - dotenv-linter@3.3.0
+    - dotenv-linter@4.0.0
     - git-diff-check
     - gofmt@1.25.4
-    - golangci-lint2@2.6.0
+    - golangci-lint2@2.6.2
     - isort@7.0.0
     - isort@7.0.0
     - markdownlint@0.45.0
