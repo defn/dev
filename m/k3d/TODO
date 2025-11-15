@@ -9,11 +9,15 @@ cue fmt
 
 dyff between -b <(cat argocd.yaml; echo ---; cat headlamp.yaml) <(cue cmd dump)
 
+k3d cluster delete
+k3d cluster create
+
 kubectl create -n kube-system serviceaccount headlamp-admin
 kubectl create clusterrolebinding headlamp-admin --serviceaccount=kube-system:headlamp-admin --clusterrole=cluster-admin
-kubectl create namespace argocd
 
-cue cmd dump | kubectl apply -f - -n argocd
+kubectl create namespace argocd
+kubectl config set-context --current --namespace=argocd
+cue cmd dump | kubectl apply -f -
 
 kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d | code -c
 open http://localhost:6666

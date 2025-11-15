@@ -1,6 +1,3 @@
-@experiment(aliasv2)
-@experiment(explicitopen)
-
 package k3d
 
 kube: headlamp: Service: headlamp: {
@@ -38,7 +35,29 @@ kube: headlamp: Deployment: headlamp: {
 						"-in-cluster",
 						"-plugins-dir=/headlamp/plugins",
 					]
-					ports: [{containerPort: 4466}]
+					env: [{
+						name:  "HEADLAMP_CONFIG_TRACING_ENABLED"
+						value: "true"
+					}, {
+						name:  "HEADLAMP_CONFIG_METRICS_ENABLED"
+						value: "true"
+					}, {
+						name:  "HEADLAMP_CONFIG_OTLP_ENDPOINT"
+						value: "otel-collector:4317"
+					}, {
+						name:  "HEADLAMP_CONFIG_SERVICE_NAME"
+						value: "headlamp"
+					}, {
+						name:  "HEADLAMP_CONFIG_SERVICE_VERSION"
+						value: "latest"
+					}]
+					ports: [{
+						containerPort: 4466
+						name:          "http"
+					}, {
+						containerPort: 9090
+						name:          "metrics"
+					}]
 					readinessProbe: {
 						httpGet: {
 							scheme: "HTTP"

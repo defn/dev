@@ -1,7 +1,6 @@
-@experiment(aliasv2)
-@experiment(explicitopen)
-
 package k3d
+
+import "encoding/yaml"
 
 kube: argocd: CustomResourceDefinition: "applications.argoproj.io": {
 	// This is an auto-generated file. DO NOT EDIT
@@ -72,8 +71,7 @@ kube: argocd: CustomResourceDefinition: "applications.argoproj.io": {
 					}
 					metadata: type: "object"
 					operation: {
-						description:
-							"Operation contains information about a requested or running operation"
+						description: "Operation contains information about a requested or running operation"
 						properties: {
 							info: {
 								description: "Info is a list of informational items for this operation"
@@ -91,18 +89,15 @@ kube: argocd: CustomResourceDefinition: "applications.argoproj.io": {
 								type: "array"
 							}
 							initiatedBy: {
-								description:
-									"InitiatedBy contains information about who initiated the operations"
+								description: "InitiatedBy contains information about who initiated the operations"
 								properties: {
 									automated: {
-										description:
-											"Automated is set to true if operation was initiated automatically by the application controller."
-										type: "boolean"
+										description: "Automated is set to true if operation was initiated automatically by the application controller."
+										type:        "boolean"
 									}
 									username: {
-										description:
-											"Username contains the name of a user who started operation"
-										type: "string"
+										description: "Username contains the name of a user who started operation"
+										type:        "string"
 									}
 								}
 								type: "object"
@@ -111,33 +106,32 @@ kube: argocd: CustomResourceDefinition: "applications.argoproj.io": {
 								description: "Retry controls the strategy to apply if a sync fails"
 								properties: {
 									backoff: {
-										description:
-											"Backoff controls how to backoff on subsequent retries of failed syncs"
+										description: "Backoff controls how to backoff on subsequent retries of failed syncs"
 										properties: {
 											duration: {
-												description:
-													"Duration is the amount to back off. Default unit is seconds, but could also be a duration (e.g. \"2m\", \"1h\")"
-												type: "string"
+												description: "Duration is the amount to back off. Default unit is seconds, but could also be a duration (e.g. \"2m\", \"1h\")"
+												type:        "string"
 											}
 											factor: {
-												description:
-													"Factor is a factor to multiply the base duration after each failed retry"
-												format: "int64"
-												type:   "integer"
+												description: "Factor is a factor to multiply the base duration after each failed retry"
+												format:      "int64"
+												type:        "integer"
 											}
 											maxDuration: {
-												description:
-													"MaxDuration is the maximum amount of time allowed for the backoff strategy"
-												type: "string"
+												description: "MaxDuration is the maximum amount of time allowed for the backoff strategy"
+												type:        "string"
 											}
 										}
 										type: "object"
 									}
 									limit: {
-										description:
-											"Limit is the maximum number of attempts for retrying a failed sync. If set to 0, no retries will be performed."
-										format: "int64"
-										type:   "integer"
+										description: "Limit is the maximum number of attempts for retrying a failed sync. If set to 0, no retries will be performed."
+										format:      "int64"
+										type:        "integer"
+									}
+									refresh: {
+										description: "Refresh indicates if the latest revision should be used on retry instead of the initial one (default: false)"
+										type:        "boolean"
 									}
 								}
 								type: "object"
@@ -146,30 +140,25 @@ kube: argocd: CustomResourceDefinition: "applications.argoproj.io": {
 								description: "Sync contains parameters for the operation"
 								properties: {
 									autoHealAttemptsCount: {
-										description:
-											"SelfHealAttemptsCount contains the number of auto-heal attempts"
-										format: "int64"
-										type:   "integer"
+										description: "SelfHealAttemptsCount contains the number of auto-heal attempts"
+										format:      "int64"
+										type:        "integer"
 									}
 									dryRun: {
-										description:
-											"DryRun specifies to perform a `kubectl apply --dry-run` without actually performing the sync"
-										type: "boolean"
+										description: "DryRun specifies to perform a `kubectl apply --dry-run` without actually performing the sync"
+										type:        "boolean"
 									}
 									manifests: {
-										description:
-											"Manifests is an optional field that overrides sync source with a local directory for development"
+										description: "Manifests is an optional field that overrides sync source with a local directory for development"
 										items: type: "string"
 										type: "array"
 									}
 									prune: {
-										description:
-											"Prune specifies to delete resources from the cluster that are no longer tracked in git"
-										type: "boolean"
+										description: "Prune specifies to delete resources from the cluster that are no longer tracked in git"
+										type:        "boolean"
 									}
 									resources: {
-										description:
-											"Resources describes which resources shall be part of the sync"
+										description: "Resources describes which resources shall be part of the sync"
 										items: {
 											description: "SyncOperationResource contains resources to sync."
 											properties: {
@@ -208,32 +197,27 @@ kube: argocd: CustomResourceDefinition: "applications.argoproj.io": {
 	"""
 										properties: {
 											chart: {
-												description:
-													"Chart is a Helm chart name, and must be specified for applications sourced from a Helm repo."
-												type: "string"
+												description: "Chart is a Helm chart name, and must be specified for applications sourced from a Helm repo."
+												type:        "string"
 											}
 											directory: {
 												description: "Directory holds path/directory specific options"
 												properties: {
 													exclude: {
-														description:
-															"Exclude contains a glob pattern to match paths against that should be explicitly excluded from being used during manifest generation"
-														type: "string"
+														description: "Exclude contains a glob pattern to match paths against that should be explicitly excluded from being used during manifest generation"
+														type:        "string"
 													}
 													include: {
-														description:
-															"Include contains a glob pattern to match paths against that should be explicitly included during manifest generation"
-														type: "string"
+														description: "Include contains a glob pattern to match paths against that should be explicitly included during manifest generation"
+														type:        "string"
 													}
 													jsonnet: {
 														description: "Jsonnet holds options specific to Jsonnet"
 														properties: {
 															extVars: {
-																description:
-																	"ExtVars is a list of Jsonnet External Variables"
+																description: "ExtVars is a list of Jsonnet External Variables"
 																items: {
-																	description:
-																		"JsonnetVar represents a variable to be passed to jsonnet during manifest generation"
+																	description: "JsonnetVar represents a variable to be passed to jsonnet during manifest generation"
 																	properties: {
 																		code: type:  "boolean"
 																		name: type:  "string"
@@ -255,8 +239,7 @@ kube: argocd: CustomResourceDefinition: "applications.argoproj.io": {
 															tlas: {
 																description: "TLAS is a list of Jsonnet Top-level Arguments"
 																items: {
-																	description:
-																		"JsonnetVar represents a variable to be passed to jsonnet during manifest generation"
+																	description: "JsonnetVar represents a variable to be passed to jsonnet during manifest generation"
 																	properties: {
 																		code: type:  "boolean"
 																		name: type:  "string"
@@ -274,9 +257,8 @@ kube: argocd: CustomResourceDefinition: "applications.argoproj.io": {
 														type: "object"
 													}
 													recurse: {
-														description:
-															"Recurse specifies whether to scan a directory recursively for manifests"
-														type: "boolean"
+														description: "Recurse specifies whether to scan a directory recursively for manifests"
+														type:        "boolean"
 													}
 												}
 												type: "object"
@@ -293,20 +275,17 @@ kube: argocd: CustomResourceDefinition: "applications.argoproj.io": {
 														type: "array"
 													}
 													fileParameters: {
-														description:
-															"FileParameters are file parameters to the helm template"
+														description: "FileParameters are file parameters to the helm template"
 														items: {
-															description:
-																"HelmFileParameter is a file parameter that's passed to helm template during manifest generation"
+															description: "HelmFileParameter is a file parameter that's passed to helm template during manifest generation"
 															properties: {
 																name: {
 																	description: "Name is the name of the Helm parameter"
 																	type:        "string"
 																}
 																path: {
-																	description:
-																		"Path is the path to the file containing the values for the Helm parameter"
-																	type: "string"
+																	description: "Path is the path to the file containing the values for the Helm parameter"
+																	type:        "string"
 																}
 															}
 															type: "object"
@@ -314,9 +293,8 @@ kube: argocd: CustomResourceDefinition: "applications.argoproj.io": {
 														type: "array"
 													}
 													ignoreMissingValueFiles: {
-														description:
-															"IgnoreMissingValueFiles prevents helm template from failing when valueFiles do not exist locally by not appending them to helm template --values"
-														type: "boolean"
+														description: "IgnoreMissingValueFiles prevents helm template from failing when valueFiles do not exist locally by not appending them to helm template --values"
+														type:        "boolean"
 													}
 													kubeVersion: {
 														description: """
@@ -326,21 +304,17 @@ kube: argocd: CustomResourceDefinition: "applications.argoproj.io": {
 														type: "string"
 													}
 													namespace: {
-														description:
-															"Namespace is an optional namespace to template with. If left empty, defaults to the app's destination namespace."
-														type: "string"
+														description: "Namespace is an optional namespace to template with. If left empty, defaults to the app's destination namespace."
+														type:        "string"
 													}
 													parameters: {
-														description:
-															"Parameters is a list of Helm parameters which are passed to the helm template command upon manifest generation"
+														description: "Parameters is a list of Helm parameters which are passed to the helm template command upon manifest generation"
 														items: {
-															description:
-																"HelmParameter is a parameter that's passed to helm template during manifest generation"
+															description: "HelmParameter is a parameter that's passed to helm template during manifest generation"
 															properties: {
 																forceString: {
-																	description:
-																		"ForceString determines whether to tell Helm to interpret booleans and numbers as strings"
-																	type: "boolean"
+																	description: "ForceString determines whether to tell Helm to interpret booleans and numbers as strings"
+																	type:        "boolean"
 																}
 																name: {
 																	description: "Name is the name of the Helm parameter"
@@ -356,51 +330,42 @@ kube: argocd: CustomResourceDefinition: "applications.argoproj.io": {
 														type: "array"
 													}
 													passCredentials: {
-														description:
-															"PassCredentials pass credentials to all domains (Helm's --pass-credentials)"
-														type: "boolean"
+														description: "PassCredentials pass credentials to all domains (Helm's --pass-credentials)"
+														type:        "boolean"
 													}
 													releaseName: {
-														description:
-															"ReleaseName is the Helm release name to use. If omitted it will use the application name"
-														type: "string"
+														description: "ReleaseName is the Helm release name to use. If omitted it will use the application name"
+														type:        "string"
 													}
 													skipCrds: {
-														description:
-															"SkipCrds skips custom resource definition installation step (Helm's --skip-crds)"
-														type: "boolean"
+														description: "SkipCrds skips custom resource definition installation step (Helm's --skip-crds)"
+														type:        "boolean"
 													}
 													skipSchemaValidation: {
-														description:
-															"SkipSchemaValidation skips JSON schema validation (Helm's --skip-schema-validation)"
-														type: "boolean"
+														description: "SkipSchemaValidation skips JSON schema validation (Helm's --skip-schema-validation)"
+														type:        "boolean"
 													}
 													skipTests: {
-														description:
-															"SkipTests skips test manifest installation step (Helm's --skip-tests)."
-														type: "boolean"
+														description: "SkipTests skips test manifest installation step (Helm's --skip-tests)."
+														type:        "boolean"
 													}
 													valueFiles: {
-														description:
-															"ValuesFiles is a list of Helm value files to use when generating a template"
+														description: "ValuesFiles is a list of Helm value files to use when generating a template"
 														items: type: "string"
 														type: "array"
 													}
 													values: {
-														description:
-															"Values specifies Helm values to be passed to helm template, typically defined as a block. ValuesObject takes precedence over Values, so use one or the other."
-														type: "string"
+														description: "Values specifies Helm values to be passed to helm template, typically defined as a block. ValuesObject takes precedence over Values, so use one or the other."
+														type:        "string"
 													}
 													valuesObject: {
-														description:
-																			"ValuesObject specifies Helm values to be passed to helm template, defined as a map. This takes precedence over Values."
+														description:                            "ValuesObject specifies Helm values to be passed to helm template, defined as a map. This takes precedence over Values."
 														type:                                   "object"
 														"x-kubernetes-preserve-unknown-fields": true
 													}
 													version: {
-														description:
-															"Version is the Helm version to use for templating (\"3\")"
-														type: "string"
+														description: "Version is the Helm version to use for templating (\"3\")"
+														type:        "string"
 													}
 												}
 												type: "object"
@@ -418,44 +383,40 @@ kube: argocd: CustomResourceDefinition: "applications.argoproj.io": {
 													}
 													commonAnnotations: {
 														additionalProperties: type: "string"
-														description:
-															"CommonAnnotations is a list of additional annotations to add to rendered manifests"
-														type: "object"
+														description: "CommonAnnotations is a list of additional annotations to add to rendered manifests"
+														type:        "object"
 													}
 													commonAnnotationsEnvsubst: {
-														description:
-															"CommonAnnotationsEnvsubst specifies whether to apply env variables substitution for annotation values"
-														type: "boolean"
+														description: "CommonAnnotationsEnvsubst specifies whether to apply env variables substitution for annotation values"
+														type:        "boolean"
 													}
 													commonLabels: {
 														additionalProperties: type: "string"
-														description:
-															"CommonLabels is a list of additional labels to add to rendered manifests"
-														type: "object"
+														description: "CommonLabels is a list of additional labels to add to rendered manifests"
+														type:        "object"
 													}
 													components: {
-														description:
-															"Components specifies a list of kustomize components to add to the kustomization before building"
+														description: "Components specifies a list of kustomize components to add to the kustomization before building"
 														items: type: "string"
 														type: "array"
 													}
 													forceCommonAnnotations: {
-														description:
-															"ForceCommonAnnotations specifies whether to force applying common annotations to resources for Kustomize apps"
-														type: "boolean"
+														description: "ForceCommonAnnotations specifies whether to force applying common annotations to resources for Kustomize apps"
+														type:        "boolean"
 													}
 													forceCommonLabels: {
-														description:
-															"ForceCommonLabels specifies whether to force applying common labels to resources for Kustomize apps"
-														type: "boolean"
+														description: "ForceCommonLabels specifies whether to force applying common labels to resources for Kustomize apps"
+														type:        "boolean"
+													}
+													ignoreMissingComponents: {
+														description: "IgnoreMissingComponents prevents kustomize from failing when components do not exist locally by not appending them to kustomization file"
+														type:        "boolean"
 													}
 													images: {
-														description:
-															"Images is a list of Kustomize image override specifications"
+														description: "Images is a list of Kustomize image override specifications"
 														items: {
-															description:
-																"KustomizeImage represents a Kustomize image definition in the format [old_image_name=]<image_name>:<image_tag>"
-															type: "string"
+															description: "KustomizeImage represents a Kustomize image definition in the format [old_image_name=]<image_name>:<image_tag>"
+															type:        "string"
 														}
 														type: "array"
 													}
@@ -466,25 +427,25 @@ kube: argocd: CustomResourceDefinition: "applications.argoproj.io": {
 	"""
 														type: "string"
 													}
+													labelIncludeTemplates: {
+														description: "LabelIncludeTemplates specifies whether to apply common labels to resource templates or not"
+														type:        "boolean"
+													}
 													labelWithoutSelector: {
-														description:
-															"LabelWithoutSelector specifies whether to apply common labels to resource selectors or not"
-														type: "boolean"
+														description: "LabelWithoutSelector specifies whether to apply common labels to resource selectors or not"
+														type:        "boolean"
 													}
 													namePrefix: {
-														description:
-															"NamePrefix is a prefix appended to resources for Kustomize apps"
-														type: "string"
+														description: "NamePrefix is a prefix appended to resources for Kustomize apps"
+														type:        "string"
 													}
 													nameSuffix: {
-														description:
-															"NameSuffix is a suffix appended to resources for Kustomize apps"
-														type: "string"
+														description: "NameSuffix is a suffix appended to resources for Kustomize apps"
+														type:        "string"
 													}
 													namespace: {
-														description:
-															"Namespace sets the namespace that Kustomize adds to all resources"
-														type: "string"
+														description: "Namespace sets the namespace that Kustomize adds to all resources"
+														type:        "string"
 													}
 													patches: {
 														description: "Patches is a list of Kustomize patches"
@@ -514,8 +475,7 @@ kube: argocd: CustomResourceDefinition: "applications.argoproj.io": {
 														type: "array"
 													}
 													replicas: {
-														description:
-															"Replicas is a list of Kustomize Replicas override specifications"
+														description: "Replicas is a list of Kustomize Replicas override specifications"
 														items: {
 															properties: {
 																count: {
@@ -541,37 +501,31 @@ kube: argocd: CustomResourceDefinition: "applications.argoproj.io": {
 														type: "array"
 													}
 													version: {
-														description:
-															"Version controls which version of Kustomize to use for rendering manifests"
-														type: "string"
+														description: "Version controls which version of Kustomize to use for rendering manifests"
+														type:        "string"
 													}
 												}
 												type: "object"
 											}
 											name: {
-												description:
-													"Name is used to refer to a source and is displayed in the UI. It is used in multi-source Applications."
-												type: "string"
+												description: "Name is used to refer to a source and is displayed in the UI. It is used in multi-source Applications."
+												type:        "string"
 											}
 											path: {
-												description:
-													"Path is a directory path within the Git repository, and is only valid for applications sourced from Git."
-												type: "string"
+												description: "Path is a directory path within the Git repository, and is only valid for applications sourced from Git."
+												type:        "string"
 											}
 											plugin: {
-												description:
-													"Plugin holds config management plugin specific options"
+												description: "Plugin holds config management plugin specific options"
 												properties: {
 													env: {
 														description: "Env is a list of environment variable entries"
 														items: {
-															description:
-																"EnvEntry represents an entry in the application's environment"
+															description: "EnvEntry represents an entry in the application's environment"
 															properties: {
 																name: {
-																	description:
-																		"Name is the name of the variable, usually expressed in uppercase"
-																	type: "string"
+																	description: "Name is the name of the variable, usually expressed in uppercase"
+																	type:        "string"
 																}
 																value: {
 																	description: "Value is the value of the variable"
@@ -591,8 +545,7 @@ kube: argocd: CustomResourceDefinition: "applications.argoproj.io": {
 														items: {
 															properties: {
 																array: {
-																	description:
-																		"Array is the value of an array type parameter."
+																	description: "Array is the value of an array type parameter."
 																	items: type: "string"
 																	type: "array"
 																}
@@ -606,9 +559,8 @@ kube: argocd: CustomResourceDefinition: "applications.argoproj.io": {
 																	type:        "string"
 																}
 																string: {
-																	description:
-																		"String_ is the value of a string type parameter."
-																	type: "string"
+																	description: "String_ is the value of a string type parameter."
+																	type:        "string"
 																}
 															}
 															type: "object"
@@ -619,14 +571,12 @@ kube: argocd: CustomResourceDefinition: "applications.argoproj.io": {
 												type: "object"
 											}
 											ref: {
-												description:
-													"Ref is reference to another source within sources field. This field will not be used if used with a `source` tag."
-												type: "string"
+												description: "Ref is reference to another source within sources field. This field will not be used if used with a `source` tag."
+												type:        "string"
 											}
 											repoURL: {
-												description:
-													"RepoURL is the URL to the repository (Git or Helm) that contains the application manifests"
-												type: "string"
+												description: "RepoURL is the URL to the repository (Git or Helm) that contains the application manifests"
+												type:        "string"
 											}
 											targetRevision: {
 												description: """
@@ -646,36 +596,30 @@ kube: argocd: CustomResourceDefinition: "applications.argoproj.io": {
 	This is typically set in a Rollback operation and is nil during a Sync operation
 	"""
 										items: {
-											description:
-												"ApplicationSource contains all required information about the source of an application"
+											description: "ApplicationSource contains all required information about the source of an application"
 											properties: {
 												chart: {
-													description:
-														"Chart is a Helm chart name, and must be specified for applications sourced from a Helm repo."
-													type: "string"
+													description: "Chart is a Helm chart name, and must be specified for applications sourced from a Helm repo."
+													type:        "string"
 												}
 												directory: {
 													description: "Directory holds path/directory specific options"
 													properties: {
 														exclude: {
-															description:
-																"Exclude contains a glob pattern to match paths against that should be explicitly excluded from being used during manifest generation"
-															type: "string"
+															description: "Exclude contains a glob pattern to match paths against that should be explicitly excluded from being used during manifest generation"
+															type:        "string"
 														}
 														include: {
-															description:
-																"Include contains a glob pattern to match paths against that should be explicitly included during manifest generation"
-															type: "string"
+															description: "Include contains a glob pattern to match paths against that should be explicitly included during manifest generation"
+															type:        "string"
 														}
 														jsonnet: {
 															description: "Jsonnet holds options specific to Jsonnet"
 															properties: {
 																extVars: {
-																	description:
-																		"ExtVars is a list of Jsonnet External Variables"
+																	description: "ExtVars is a list of Jsonnet External Variables"
 																	items: {
-																		description:
-																			"JsonnetVar represents a variable to be passed to jsonnet during manifest generation"
+																		description: "JsonnetVar represents a variable to be passed to jsonnet during manifest generation"
 																		properties: {
 																			code: type:  "boolean"
 																			name: type:  "string"
@@ -695,11 +639,9 @@ kube: argocd: CustomResourceDefinition: "applications.argoproj.io": {
 																	type: "array"
 																}
 																tlas: {
-																	description:
-																		"TLAS is a list of Jsonnet Top-level Arguments"
+																	description: "TLAS is a list of Jsonnet Top-level Arguments"
 																	items: {
-																		description:
-																			"JsonnetVar represents a variable to be passed to jsonnet during manifest generation"
+																		description: "JsonnetVar represents a variable to be passed to jsonnet during manifest generation"
 																		properties: {
 																			code: type:  "boolean"
 																			name: type:  "string"
@@ -717,9 +659,8 @@ kube: argocd: CustomResourceDefinition: "applications.argoproj.io": {
 															type: "object"
 														}
 														recurse: {
-															description:
-																"Recurse specifies whether to scan a directory recursively for manifests"
-															type: "boolean"
+															description: "Recurse specifies whether to scan a directory recursively for manifests"
+															type:        "boolean"
 														}
 													}
 													type: "object"
@@ -736,20 +677,17 @@ kube: argocd: CustomResourceDefinition: "applications.argoproj.io": {
 															type: "array"
 														}
 														fileParameters: {
-															description:
-																"FileParameters are file parameters to the helm template"
+															description: "FileParameters are file parameters to the helm template"
 															items: {
-																description:
-																	"HelmFileParameter is a file parameter that's passed to helm template during manifest generation"
+																description: "HelmFileParameter is a file parameter that's passed to helm template during manifest generation"
 																properties: {
 																	name: {
 																		description: "Name is the name of the Helm parameter"
 																		type:        "string"
 																	}
 																	path: {
-																		description:
-																			"Path is the path to the file containing the values for the Helm parameter"
-																		type: "string"
+																		description: "Path is the path to the file containing the values for the Helm parameter"
+																		type:        "string"
 																	}
 																}
 																type: "object"
@@ -757,9 +695,8 @@ kube: argocd: CustomResourceDefinition: "applications.argoproj.io": {
 															type: "array"
 														}
 														ignoreMissingValueFiles: {
-															description:
-																"IgnoreMissingValueFiles prevents helm template from failing when valueFiles do not exist locally by not appending them to helm template --values"
-															type: "boolean"
+															description: "IgnoreMissingValueFiles prevents helm template from failing when valueFiles do not exist locally by not appending them to helm template --values"
+															type:        "boolean"
 														}
 														kubeVersion: {
 															description: """
@@ -769,21 +706,17 @@ kube: argocd: CustomResourceDefinition: "applications.argoproj.io": {
 															type: "string"
 														}
 														namespace: {
-															description:
-																"Namespace is an optional namespace to template with. If left empty, defaults to the app's destination namespace."
-															type: "string"
+															description: "Namespace is an optional namespace to template with. If left empty, defaults to the app's destination namespace."
+															type:        "string"
 														}
 														parameters: {
-															description:
-																"Parameters is a list of Helm parameters which are passed to the helm template command upon manifest generation"
+															description: "Parameters is a list of Helm parameters which are passed to the helm template command upon manifest generation"
 															items: {
-																description:
-																	"HelmParameter is a parameter that's passed to helm template during manifest generation"
+																description: "HelmParameter is a parameter that's passed to helm template during manifest generation"
 																properties: {
 																	forceString: {
-																		description:
-																			"ForceString determines whether to tell Helm to interpret booleans and numbers as strings"
-																		type: "boolean"
+																		description: "ForceString determines whether to tell Helm to interpret booleans and numbers as strings"
+																		type:        "boolean"
 																	}
 																	name: {
 																		description: "Name is the name of the Helm parameter"
@@ -799,51 +732,42 @@ kube: argocd: CustomResourceDefinition: "applications.argoproj.io": {
 															type: "array"
 														}
 														passCredentials: {
-															description:
-																"PassCredentials pass credentials to all domains (Helm's --pass-credentials)"
-															type: "boolean"
+															description: "PassCredentials pass credentials to all domains (Helm's --pass-credentials)"
+															type:        "boolean"
 														}
 														releaseName: {
-															description:
-																"ReleaseName is the Helm release name to use. If omitted it will use the application name"
-															type: "string"
+															description: "ReleaseName is the Helm release name to use. If omitted it will use the application name"
+															type:        "string"
 														}
 														skipCrds: {
-															description:
-																"SkipCrds skips custom resource definition installation step (Helm's --skip-crds)"
-															type: "boolean"
+															description: "SkipCrds skips custom resource definition installation step (Helm's --skip-crds)"
+															type:        "boolean"
 														}
 														skipSchemaValidation: {
-															description:
-																"SkipSchemaValidation skips JSON schema validation (Helm's --skip-schema-validation)"
-															type: "boolean"
+															description: "SkipSchemaValidation skips JSON schema validation (Helm's --skip-schema-validation)"
+															type:        "boolean"
 														}
 														skipTests: {
-															description:
-																"SkipTests skips test manifest installation step (Helm's --skip-tests)."
-															type: "boolean"
+															description: "SkipTests skips test manifest installation step (Helm's --skip-tests)."
+															type:        "boolean"
 														}
 														valueFiles: {
-															description:
-																"ValuesFiles is a list of Helm value files to use when generating a template"
+															description: "ValuesFiles is a list of Helm value files to use when generating a template"
 															items: type: "string"
 															type: "array"
 														}
 														values: {
-															description:
-																"Values specifies Helm values to be passed to helm template, typically defined as a block. ValuesObject takes precedence over Values, so use one or the other."
-															type: "string"
+															description: "Values specifies Helm values to be passed to helm template, typically defined as a block. ValuesObject takes precedence over Values, so use one or the other."
+															type:        "string"
 														}
 														valuesObject: {
-															description:
-																				"ValuesObject specifies Helm values to be passed to helm template, defined as a map. This takes precedence over Values."
+															description:                            "ValuesObject specifies Helm values to be passed to helm template, defined as a map. This takes precedence over Values."
 															type:                                   "object"
 															"x-kubernetes-preserve-unknown-fields": true
 														}
 														version: {
-															description:
-																"Version is the Helm version to use for templating (\"3\")"
-															type: "string"
+															description: "Version is the Helm version to use for templating (\"3\")"
+															type:        "string"
 														}
 													}
 													type: "object"
@@ -861,44 +785,40 @@ kube: argocd: CustomResourceDefinition: "applications.argoproj.io": {
 														}
 														commonAnnotations: {
 															additionalProperties: type: "string"
-															description:
-																"CommonAnnotations is a list of additional annotations to add to rendered manifests"
-															type: "object"
+															description: "CommonAnnotations is a list of additional annotations to add to rendered manifests"
+															type:        "object"
 														}
 														commonAnnotationsEnvsubst: {
-															description:
-																"CommonAnnotationsEnvsubst specifies whether to apply env variables substitution for annotation values"
-															type: "boolean"
+															description: "CommonAnnotationsEnvsubst specifies whether to apply env variables substitution for annotation values"
+															type:        "boolean"
 														}
 														commonLabels: {
 															additionalProperties: type: "string"
-															description:
-																"CommonLabels is a list of additional labels to add to rendered manifests"
-															type: "object"
+															description: "CommonLabels is a list of additional labels to add to rendered manifests"
+															type:        "object"
 														}
 														components: {
-															description:
-																"Components specifies a list of kustomize components to add to the kustomization before building"
+															description: "Components specifies a list of kustomize components to add to the kustomization before building"
 															items: type: "string"
 															type: "array"
 														}
 														forceCommonAnnotations: {
-															description:
-																"ForceCommonAnnotations specifies whether to force applying common annotations to resources for Kustomize apps"
-															type: "boolean"
+															description: "ForceCommonAnnotations specifies whether to force applying common annotations to resources for Kustomize apps"
+															type:        "boolean"
 														}
 														forceCommonLabels: {
-															description:
-																"ForceCommonLabels specifies whether to force applying common labels to resources for Kustomize apps"
-															type: "boolean"
+															description: "ForceCommonLabels specifies whether to force applying common labels to resources for Kustomize apps"
+															type:        "boolean"
+														}
+														ignoreMissingComponents: {
+															description: "IgnoreMissingComponents prevents kustomize from failing when components do not exist locally by not appending them to kustomization file"
+															type:        "boolean"
 														}
 														images: {
-															description:
-																"Images is a list of Kustomize image override specifications"
+															description: "Images is a list of Kustomize image override specifications"
 															items: {
-																description:
-																	"KustomizeImage represents a Kustomize image definition in the format [old_image_name=]<image_name>:<image_tag>"
-																type: "string"
+																description: "KustomizeImage represents a Kustomize image definition in the format [old_image_name=]<image_name>:<image_tag>"
+																type:        "string"
 															}
 															type: "array"
 														}
@@ -909,25 +829,25 @@ kube: argocd: CustomResourceDefinition: "applications.argoproj.io": {
 	"""
 															type: "string"
 														}
+														labelIncludeTemplates: {
+															description: "LabelIncludeTemplates specifies whether to apply common labels to resource templates or not"
+															type:        "boolean"
+														}
 														labelWithoutSelector: {
-															description:
-																"LabelWithoutSelector specifies whether to apply common labels to resource selectors or not"
-															type: "boolean"
+															description: "LabelWithoutSelector specifies whether to apply common labels to resource selectors or not"
+															type:        "boolean"
 														}
 														namePrefix: {
-															description:
-																"NamePrefix is a prefix appended to resources for Kustomize apps"
-															type: "string"
+															description: "NamePrefix is a prefix appended to resources for Kustomize apps"
+															type:        "string"
 														}
 														nameSuffix: {
-															description:
-																"NameSuffix is a suffix appended to resources for Kustomize apps"
-															type: "string"
+															description: "NameSuffix is a suffix appended to resources for Kustomize apps"
+															type:        "string"
 														}
 														namespace: {
-															description:
-																"Namespace sets the namespace that Kustomize adds to all resources"
-															type: "string"
+															description: "Namespace sets the namespace that Kustomize adds to all resources"
+															type:        "string"
 														}
 														patches: {
 															description: "Patches is a list of Kustomize patches"
@@ -957,8 +877,7 @@ kube: argocd: CustomResourceDefinition: "applications.argoproj.io": {
 															type: "array"
 														}
 														replicas: {
-															description:
-																"Replicas is a list of Kustomize Replicas override specifications"
+															description: "Replicas is a list of Kustomize Replicas override specifications"
 															items: {
 																properties: {
 																	count: {
@@ -984,37 +903,31 @@ kube: argocd: CustomResourceDefinition: "applications.argoproj.io": {
 															type: "array"
 														}
 														version: {
-															description:
-																"Version controls which version of Kustomize to use for rendering manifests"
-															type: "string"
+															description: "Version controls which version of Kustomize to use for rendering manifests"
+															type:        "string"
 														}
 													}
 													type: "object"
 												}
 												name: {
-													description:
-														"Name is used to refer to a source and is displayed in the UI. It is used in multi-source Applications."
-													type: "string"
+													description: "Name is used to refer to a source and is displayed in the UI. It is used in multi-source Applications."
+													type:        "string"
 												}
 												path: {
-													description:
-														"Path is a directory path within the Git repository, and is only valid for applications sourced from Git."
-													type: "string"
+													description: "Path is a directory path within the Git repository, and is only valid for applications sourced from Git."
+													type:        "string"
 												}
 												plugin: {
-													description:
-														"Plugin holds config management plugin specific options"
+													description: "Plugin holds config management plugin specific options"
 													properties: {
 														env: {
 															description: "Env is a list of environment variable entries"
 															items: {
-																description:
-																	"EnvEntry represents an entry in the application's environment"
+																description: "EnvEntry represents an entry in the application's environment"
 																properties: {
 																	name: {
-																		description:
-																			"Name is the name of the variable, usually expressed in uppercase"
-																		type: "string"
+																		description: "Name is the name of the variable, usually expressed in uppercase"
+																		type:        "string"
 																	}
 																	value: {
 																		description: "Value is the value of the variable"
@@ -1034,8 +947,7 @@ kube: argocd: CustomResourceDefinition: "applications.argoproj.io": {
 															items: {
 																properties: {
 																	array: {
-																		description:
-																			"Array is the value of an array type parameter."
+																		description: "Array is the value of an array type parameter."
 																		items: type: "string"
 																		type: "array"
 																	}
@@ -1049,9 +961,8 @@ kube: argocd: CustomResourceDefinition: "applications.argoproj.io": {
 																		type:        "string"
 																	}
 																	string: {
-																		description:
-																			"String_ is the value of a string type parameter."
-																		type: "string"
+																		description: "String_ is the value of a string type parameter."
+																		type:        "string"
 																	}
 																}
 																type: "object"
@@ -1062,14 +973,12 @@ kube: argocd: CustomResourceDefinition: "applications.argoproj.io": {
 													type: "object"
 												}
 												ref: {
-													description:
-														"Ref is reference to another source within sources field. This field will not be used if used with a `source` tag."
-													type: "string"
+													description: "Ref is reference to another source within sources field. This field will not be used if used with a `source` tag."
+													type:        "string"
 												}
 												repoURL: {
-													description:
-														"RepoURL is the URL to the repository (Git or Helm) that contains the application manifests"
-													type: "string"
+													description: "RepoURL is the URL to the repository (Git or Helm) that contains the application manifests"
+													type:        "string"
 												}
 												targetRevision: {
 													description: """
@@ -1094,8 +1003,7 @@ kube: argocd: CustomResourceDefinition: "applications.argoproj.io": {
 										description: "SyncStrategy describes how to perform the sync"
 										properties: {
 											apply: {
-												description:
-													"Apply will perform a `kubectl apply` to perform the sync."
+												description: "Apply will perform a `kubectl apply` to perform the sync."
 												properties: force: {
 													description: """
 	Force indicates whether or not to supply the --force flag to `kubectl apply`.
@@ -1107,8 +1015,7 @@ kube: argocd: CustomResourceDefinition: "applications.argoproj.io": {
 												type: "object"
 											}
 											hook: {
-												description:
-													"Hook will submit any referenced resources to perform the sync. This is the default strategy"
+												description: "Hook will submit any referenced resources to perform the sync. This is the default strategy"
 												properties: force: {
 													description: """
 	Force indicates whether or not to supply the --force flag to `kubectl apply`.
@@ -1129,17 +1036,14 @@ kube: argocd: CustomResourceDefinition: "applications.argoproj.io": {
 						type: "object"
 					}
 					spec: {
-						description:
-							"ApplicationSpec represents desired application state. Contains link to repository with application definition and additional parameters link definition revision."
+						description: "ApplicationSpec represents desired application state. Contains link to repository with application definition and additional parameters link definition revision."
 						properties: {
 							destination: {
-								description:
-									"Destination is a reference to the target Kubernetes server and namespace"
+								description: "Destination is a reference to the target Kubernetes server and namespace"
 								properties: {
 									name: {
-										description:
-											"Name is an alternate way of specifying the target cluster by its symbolic name. This must be set if Server is not set."
-										type: "string"
+										description: "Name is an alternate way of specifying the target cluster by its symbolic name. This must be set if Server is not set."
+										type:        "string"
 									}
 									namespace: {
 										description: """
@@ -1149,19 +1053,16 @@ kube: argocd: CustomResourceDefinition: "applications.argoproj.io": {
 										type: "string"
 									}
 									server: {
-										description:
-											"Server specifies the URL of the target cluster's Kubernetes control plane API. This must be set if Name is not set."
-										type: "string"
+										description: "Server specifies the URL of the target cluster's Kubernetes control plane API. This must be set if Name is not set."
+										type:        "string"
 									}
 								}
 								type: "object"
 							}
 							ignoreDifferences: {
-								description:
-									"IgnoreDifferences is a list of resources and their fields which should be ignored during comparison"
+								description: "IgnoreDifferences is a list of resources and their fields which should be ignored during comparison"
 								items: {
-									description:
-										"ResourceIgnoreDifferences contains resource filter and list of json paths which should be ignored during comparison with live state."
+									description: "ResourceIgnoreDifferences contains resource filter and list of json paths which should be ignored during comparison with live state."
 									properties: {
 										group: type: "string"
 										jqPathExpressions: {
@@ -1190,8 +1091,7 @@ kube: argocd: CustomResourceDefinition: "applications.argoproj.io": {
 								type: "array"
 							}
 							info: {
-								description:
-									"Info contains a list of information (URLs, email addresses, and plain text) that relates to the application"
+								description: "Info contains a list of information (URLs, email addresses, and plain text) that relates to the application"
 								items: {
 									properties: {
 										name: type:  "string"
@@ -1224,26 +1124,22 @@ kube: argocd: CustomResourceDefinition: "applications.argoproj.io": {
 								type:   "integer"
 							}
 							source: {
-								description:
-									"Source is a reference to the location of the application's manifests or chart"
+								description: "Source is a reference to the location of the application's manifests or chart"
 								properties: {
 									chart: {
-										description:
-											"Chart is a Helm chart name, and must be specified for applications sourced from a Helm repo."
-										type: "string"
+										description: "Chart is a Helm chart name, and must be specified for applications sourced from a Helm repo."
+										type:        "string"
 									}
 									directory: {
 										description: "Directory holds path/directory specific options"
 										properties: {
 											exclude: {
-												description:
-													"Exclude contains a glob pattern to match paths against that should be explicitly excluded from being used during manifest generation"
-												type: "string"
+												description: "Exclude contains a glob pattern to match paths against that should be explicitly excluded from being used during manifest generation"
+												type:        "string"
 											}
 											include: {
-												description:
-													"Include contains a glob pattern to match paths against that should be explicitly included during manifest generation"
-												type: "string"
+												description: "Include contains a glob pattern to match paths against that should be explicitly included during manifest generation"
+												type:        "string"
 											}
 											jsonnet: {
 												description: "Jsonnet holds options specific to Jsonnet"
@@ -1251,8 +1147,7 @@ kube: argocd: CustomResourceDefinition: "applications.argoproj.io": {
 													extVars: {
 														description: "ExtVars is a list of Jsonnet External Variables"
 														items: {
-															description:
-																"JsonnetVar represents a variable to be passed to jsonnet during manifest generation"
+															description: "JsonnetVar represents a variable to be passed to jsonnet during manifest generation"
 															properties: {
 																code: type:  "boolean"
 																name: type:  "string"
@@ -1274,8 +1169,7 @@ kube: argocd: CustomResourceDefinition: "applications.argoproj.io": {
 													tlas: {
 														description: "TLAS is a list of Jsonnet Top-level Arguments"
 														items: {
-															description:
-																"JsonnetVar represents a variable to be passed to jsonnet during manifest generation"
+															description: "JsonnetVar represents a variable to be passed to jsonnet during manifest generation"
 															properties: {
 																code: type:  "boolean"
 																name: type:  "string"
@@ -1293,9 +1187,8 @@ kube: argocd: CustomResourceDefinition: "applications.argoproj.io": {
 												type: "object"
 											}
 											recurse: {
-												description:
-													"Recurse specifies whether to scan a directory recursively for manifests"
-												type: "boolean"
+												description: "Recurse specifies whether to scan a directory recursively for manifests"
+												type:        "boolean"
 											}
 										}
 										type: "object"
@@ -1312,20 +1205,17 @@ kube: argocd: CustomResourceDefinition: "applications.argoproj.io": {
 												type: "array"
 											}
 											fileParameters: {
-												description:
-													"FileParameters are file parameters to the helm template"
+												description: "FileParameters are file parameters to the helm template"
 												items: {
-													description:
-														"HelmFileParameter is a file parameter that's passed to helm template during manifest generation"
+													description: "HelmFileParameter is a file parameter that's passed to helm template during manifest generation"
 													properties: {
 														name: {
 															description: "Name is the name of the Helm parameter"
 															type:        "string"
 														}
 														path: {
-															description:
-																"Path is the path to the file containing the values for the Helm parameter"
-															type: "string"
+															description: "Path is the path to the file containing the values for the Helm parameter"
+															type:        "string"
 														}
 													}
 													type: "object"
@@ -1333,9 +1223,8 @@ kube: argocd: CustomResourceDefinition: "applications.argoproj.io": {
 												type: "array"
 											}
 											ignoreMissingValueFiles: {
-												description:
-													"IgnoreMissingValueFiles prevents helm template from failing when valueFiles do not exist locally by not appending them to helm template --values"
-												type: "boolean"
+												description: "IgnoreMissingValueFiles prevents helm template from failing when valueFiles do not exist locally by not appending them to helm template --values"
+												type:        "boolean"
 											}
 											kubeVersion: {
 												description: """
@@ -1345,21 +1234,17 @@ kube: argocd: CustomResourceDefinition: "applications.argoproj.io": {
 												type: "string"
 											}
 											namespace: {
-												description:
-													"Namespace is an optional namespace to template with. If left empty, defaults to the app's destination namespace."
-												type: "string"
+												description: "Namespace is an optional namespace to template with. If left empty, defaults to the app's destination namespace."
+												type:        "string"
 											}
 											parameters: {
-												description:
-													"Parameters is a list of Helm parameters which are passed to the helm template command upon manifest generation"
+												description: "Parameters is a list of Helm parameters which are passed to the helm template command upon manifest generation"
 												items: {
-													description:
-														"HelmParameter is a parameter that's passed to helm template during manifest generation"
+													description: "HelmParameter is a parameter that's passed to helm template during manifest generation"
 													properties: {
 														forceString: {
-															description:
-																"ForceString determines whether to tell Helm to interpret booleans and numbers as strings"
-															type: "boolean"
+															description: "ForceString determines whether to tell Helm to interpret booleans and numbers as strings"
+															type:        "boolean"
 														}
 														name: {
 															description: "Name is the name of the Helm parameter"
@@ -1375,51 +1260,42 @@ kube: argocd: CustomResourceDefinition: "applications.argoproj.io": {
 												type: "array"
 											}
 											passCredentials: {
-												description:
-													"PassCredentials pass credentials to all domains (Helm's --pass-credentials)"
-												type: "boolean"
+												description: "PassCredentials pass credentials to all domains (Helm's --pass-credentials)"
+												type:        "boolean"
 											}
 											releaseName: {
-												description:
-													"ReleaseName is the Helm release name to use. If omitted it will use the application name"
-												type: "string"
+												description: "ReleaseName is the Helm release name to use. If omitted it will use the application name"
+												type:        "string"
 											}
 											skipCrds: {
-												description:
-													"SkipCrds skips custom resource definition installation step (Helm's --skip-crds)"
-												type: "boolean"
+												description: "SkipCrds skips custom resource definition installation step (Helm's --skip-crds)"
+												type:        "boolean"
 											}
 											skipSchemaValidation: {
-												description:
-													"SkipSchemaValidation skips JSON schema validation (Helm's --skip-schema-validation)"
-												type: "boolean"
+												description: "SkipSchemaValidation skips JSON schema validation (Helm's --skip-schema-validation)"
+												type:        "boolean"
 											}
 											skipTests: {
-												description:
-													"SkipTests skips test manifest installation step (Helm's --skip-tests)."
-												type: "boolean"
+												description: "SkipTests skips test manifest installation step (Helm's --skip-tests)."
+												type:        "boolean"
 											}
 											valueFiles: {
-												description:
-													"ValuesFiles is a list of Helm value files to use when generating a template"
+												description: "ValuesFiles is a list of Helm value files to use when generating a template"
 												items: type: "string"
 												type: "array"
 											}
 											values: {
-												description:
-													"Values specifies Helm values to be passed to helm template, typically defined as a block. ValuesObject takes precedence over Values, so use one or the other."
-												type: "string"
+												description: "Values specifies Helm values to be passed to helm template, typically defined as a block. ValuesObject takes precedence over Values, so use one or the other."
+												type:        "string"
 											}
 											valuesObject: {
-												description:
-																	"ValuesObject specifies Helm values to be passed to helm template, defined as a map. This takes precedence over Values."
+												description:                            "ValuesObject specifies Helm values to be passed to helm template, defined as a map. This takes precedence over Values."
 												type:                                   "object"
 												"x-kubernetes-preserve-unknown-fields": true
 											}
 											version: {
-												description:
-													"Version is the Helm version to use for templating (\"3\")"
-												type: "string"
+												description: "Version is the Helm version to use for templating (\"3\")"
+												type:        "string"
 											}
 										}
 										type: "object"
@@ -1437,44 +1313,40 @@ kube: argocd: CustomResourceDefinition: "applications.argoproj.io": {
 											}
 											commonAnnotations: {
 												additionalProperties: type: "string"
-												description:
-													"CommonAnnotations is a list of additional annotations to add to rendered manifests"
-												type: "object"
+												description: "CommonAnnotations is a list of additional annotations to add to rendered manifests"
+												type:        "object"
 											}
 											commonAnnotationsEnvsubst: {
-												description:
-													"CommonAnnotationsEnvsubst specifies whether to apply env variables substitution for annotation values"
-												type: "boolean"
+												description: "CommonAnnotationsEnvsubst specifies whether to apply env variables substitution for annotation values"
+												type:        "boolean"
 											}
 											commonLabels: {
 												additionalProperties: type: "string"
-												description:
-													"CommonLabels is a list of additional labels to add to rendered manifests"
-												type: "object"
+												description: "CommonLabels is a list of additional labels to add to rendered manifests"
+												type:        "object"
 											}
 											components: {
-												description:
-													"Components specifies a list of kustomize components to add to the kustomization before building"
+												description: "Components specifies a list of kustomize components to add to the kustomization before building"
 												items: type: "string"
 												type: "array"
 											}
 											forceCommonAnnotations: {
-												description:
-													"ForceCommonAnnotations specifies whether to force applying common annotations to resources for Kustomize apps"
-												type: "boolean"
+												description: "ForceCommonAnnotations specifies whether to force applying common annotations to resources for Kustomize apps"
+												type:        "boolean"
 											}
 											forceCommonLabels: {
-												description:
-													"ForceCommonLabels specifies whether to force applying common labels to resources for Kustomize apps"
-												type: "boolean"
+												description: "ForceCommonLabels specifies whether to force applying common labels to resources for Kustomize apps"
+												type:        "boolean"
+											}
+											ignoreMissingComponents: {
+												description: "IgnoreMissingComponents prevents kustomize from failing when components do not exist locally by not appending them to kustomization file"
+												type:        "boolean"
 											}
 											images: {
-												description:
-													"Images is a list of Kustomize image override specifications"
+												description: "Images is a list of Kustomize image override specifications"
 												items: {
-													description:
-														"KustomizeImage represents a Kustomize image definition in the format [old_image_name=]<image_name>:<image_tag>"
-													type: "string"
+													description: "KustomizeImage represents a Kustomize image definition in the format [old_image_name=]<image_name>:<image_tag>"
+													type:        "string"
 												}
 												type: "array"
 											}
@@ -1485,25 +1357,25 @@ kube: argocd: CustomResourceDefinition: "applications.argoproj.io": {
 	"""
 												type: "string"
 											}
+											labelIncludeTemplates: {
+												description: "LabelIncludeTemplates specifies whether to apply common labels to resource templates or not"
+												type:        "boolean"
+											}
 											labelWithoutSelector: {
-												description:
-													"LabelWithoutSelector specifies whether to apply common labels to resource selectors or not"
-												type: "boolean"
+												description: "LabelWithoutSelector specifies whether to apply common labels to resource selectors or not"
+												type:        "boolean"
 											}
 											namePrefix: {
-												description:
-													"NamePrefix is a prefix appended to resources for Kustomize apps"
-												type: "string"
+												description: "NamePrefix is a prefix appended to resources for Kustomize apps"
+												type:        "string"
 											}
 											nameSuffix: {
-												description:
-													"NameSuffix is a suffix appended to resources for Kustomize apps"
-												type: "string"
+												description: "NameSuffix is a suffix appended to resources for Kustomize apps"
+												type:        "string"
 											}
 											namespace: {
-												description:
-													"Namespace sets the namespace that Kustomize adds to all resources"
-												type: "string"
+												description: "Namespace sets the namespace that Kustomize adds to all resources"
+												type:        "string"
 											}
 											patches: {
 												description: "Patches is a list of Kustomize patches"
@@ -1533,8 +1405,7 @@ kube: argocd: CustomResourceDefinition: "applications.argoproj.io": {
 												type: "array"
 											}
 											replicas: {
-												description:
-													"Replicas is a list of Kustomize Replicas override specifications"
+												description: "Replicas is a list of Kustomize Replicas override specifications"
 												items: {
 													properties: {
 														count: {
@@ -1560,22 +1431,19 @@ kube: argocd: CustomResourceDefinition: "applications.argoproj.io": {
 												type: "array"
 											}
 											version: {
-												description:
-													"Version controls which version of Kustomize to use for rendering manifests"
-												type: "string"
+												description: "Version controls which version of Kustomize to use for rendering manifests"
+												type:        "string"
 											}
 										}
 										type: "object"
 									}
 									name: {
-										description:
-											"Name is used to refer to a source and is displayed in the UI. It is used in multi-source Applications."
-										type: "string"
+										description: "Name is used to refer to a source and is displayed in the UI. It is used in multi-source Applications."
+										type:        "string"
 									}
 									path: {
-										description:
-											"Path is a directory path within the Git repository, and is only valid for applications sourced from Git."
-										type: "string"
+										description: "Path is a directory path within the Git repository, and is only valid for applications sourced from Git."
+										type:        "string"
 									}
 									plugin: {
 										description: "Plugin holds config management plugin specific options"
@@ -1583,13 +1451,11 @@ kube: argocd: CustomResourceDefinition: "applications.argoproj.io": {
 											env: {
 												description: "Env is a list of environment variable entries"
 												items: {
-													description:
-														"EnvEntry represents an entry in the application's environment"
+													description: "EnvEntry represents an entry in the application's environment"
 													properties: {
 														name: {
-															description:
-																"Name is the name of the variable, usually expressed in uppercase"
-															type: "string"
+															description: "Name is the name of the variable, usually expressed in uppercase"
+															type:        "string"
 														}
 														value: {
 															description: "Value is the value of the variable"
@@ -1635,14 +1501,12 @@ kube: argocd: CustomResourceDefinition: "applications.argoproj.io": {
 										type: "object"
 									}
 									ref: {
-										description:
-											"Ref is reference to another source within sources field. This field will not be used if used with a `source` tag."
-										type: "string"
+										description: "Ref is reference to another source within sources field. This field will not be used if used with a `source` tag."
+										type:        "string"
 									}
 									repoURL: {
-										description:
-											"RepoURL is the URL to the repository (Git or Helm) that contains the application manifests"
-										type: "string"
+										description: "RepoURL is the URL to the repository (Git or Helm) that contains the application manifests"
+										type:        "string"
 									}
 									targetRevision: {
 										description: """
@@ -1657,27 +1521,22 @@ kube: argocd: CustomResourceDefinition: "applications.argoproj.io": {
 								type: "object"
 							}
 							sourceHydrator: {
-								description:
-									"SourceHydrator provides a way to push hydrated manifests back to git before syncing them to the cluster."
+								description: "SourceHydrator provides a way to push hydrated manifests back to git before syncing them to the cluster."
 								properties: {
 									drySource: {
-										description:
-											"DrySource specifies where the dry \"don't repeat yourself\" manifest source lives."
+										description: "DrySource specifies where the dry \"don't repeat yourself\" manifest source lives."
 										properties: {
 											path: {
-												description:
-													"Path is a directory path within the Git repository where the manifests are located"
-												type: "string"
+												description: "Path is a directory path within the Git repository where the manifests are located"
+												type:        "string"
 											}
 											repoURL: {
-												description:
-													"RepoURL is the URL to the git repository that contains the application manifests"
-												type: "string"
+												description: "RepoURL is the URL to the git repository that contains the application manifests"
+												type:        "string"
 											}
 											targetRevision: {
-												description:
-													"TargetRevision defines the revision of the source to hydrate"
-												type: "string"
+												description: "TargetRevision defines the revision of the source to hydrate"
+												type:        "string"
 											}
 										}
 										required: [
@@ -1693,27 +1552,30 @@ kube: argocd: CustomResourceDefinition: "applications.argoproj.io": {
 	have to move manifests to the SyncSource, e.g. by pull request.
 	"""
 										properties: targetBranch: {
-											description:
-												"TargetBranch is the branch to which hydrated manifests should be committed"
-											type: "string"
+											description: "TargetBranch is the branch to which hydrated manifests should be committed"
+											type:        "string"
 										}
 										required: ["targetBranch"]
 										type: "object"
 									}
 									syncSource: {
-										description:
-											"SyncSource specifies where to sync hydrated manifests from."
+										description: "SyncSource specifies where to sync hydrated manifests from."
 										properties: {
 											path: {
 												description: """
 	Path is a directory path within the git repository where hydrated manifests should be committed to and synced
-	from. If hydrateTo is set, this is just the path from which hydrated manifests will be synced.
+	from. The Path should never point to the root of the repo. If hydrateTo is set, this is just the path from which
+	hydrated manifests will be synced.
 	"""
-												type: "string"
+												minLength: 1
+												pattern:   "^.{2,}|[^./]$"
+												type:      "string"
 											}
 											targetBranch: {
-												description:
-													"TargetBranch is the branch to which hydrated manifests should be committed"
+												description: """
+	TargetBranch is the branch from which hydrated manifests will be synced.
+	If HydrateTo is not set, this is also the branch to which hydrated manifests are committed.
+	"""
 												type: "string"
 											}
 										}
@@ -1731,29 +1593,24 @@ kube: argocd: CustomResourceDefinition: "applications.argoproj.io": {
 								type: "object"
 							}
 							sources: {
-								description:
-									"Sources is a reference to the location of the application's manifests or chart"
+								description: "Sources is a reference to the location of the application's manifests or chart"
 								items: {
-									description:
-										"ApplicationSource contains all required information about the source of an application"
+									description: "ApplicationSource contains all required information about the source of an application"
 									properties: {
 										chart: {
-											description:
-												"Chart is a Helm chart name, and must be specified for applications sourced from a Helm repo."
-											type: "string"
+											description: "Chart is a Helm chart name, and must be specified for applications sourced from a Helm repo."
+											type:        "string"
 										}
 										directory: {
 											description: "Directory holds path/directory specific options"
 											properties: {
 												exclude: {
-													description:
-														"Exclude contains a glob pattern to match paths against that should be explicitly excluded from being used during manifest generation"
-													type: "string"
+													description: "Exclude contains a glob pattern to match paths against that should be explicitly excluded from being used during manifest generation"
+													type:        "string"
 												}
 												include: {
-													description:
-														"Include contains a glob pattern to match paths against that should be explicitly included during manifest generation"
-													type: "string"
+													description: "Include contains a glob pattern to match paths against that should be explicitly included during manifest generation"
+													type:        "string"
 												}
 												jsonnet: {
 													description: "Jsonnet holds options specific to Jsonnet"
@@ -1761,8 +1618,7 @@ kube: argocd: CustomResourceDefinition: "applications.argoproj.io": {
 														extVars: {
 															description: "ExtVars is a list of Jsonnet External Variables"
 															items: {
-																description:
-																	"JsonnetVar represents a variable to be passed to jsonnet during manifest generation"
+																description: "JsonnetVar represents a variable to be passed to jsonnet during manifest generation"
 																properties: {
 																	code: type:  "boolean"
 																	name: type:  "string"
@@ -1784,8 +1640,7 @@ kube: argocd: CustomResourceDefinition: "applications.argoproj.io": {
 														tlas: {
 															description: "TLAS is a list of Jsonnet Top-level Arguments"
 															items: {
-																description:
-																	"JsonnetVar represents a variable to be passed to jsonnet during manifest generation"
+																description: "JsonnetVar represents a variable to be passed to jsonnet during manifest generation"
 																properties: {
 																	code: type:  "boolean"
 																	name: type:  "string"
@@ -1803,9 +1658,8 @@ kube: argocd: CustomResourceDefinition: "applications.argoproj.io": {
 													type: "object"
 												}
 												recurse: {
-													description:
-														"Recurse specifies whether to scan a directory recursively for manifests"
-													type: "boolean"
+													description: "Recurse specifies whether to scan a directory recursively for manifests"
+													type:        "boolean"
 												}
 											}
 											type: "object"
@@ -1822,20 +1676,17 @@ kube: argocd: CustomResourceDefinition: "applications.argoproj.io": {
 													type: "array"
 												}
 												fileParameters: {
-													description:
-														"FileParameters are file parameters to the helm template"
+													description: "FileParameters are file parameters to the helm template"
 													items: {
-														description:
-															"HelmFileParameter is a file parameter that's passed to helm template during manifest generation"
+														description: "HelmFileParameter is a file parameter that's passed to helm template during manifest generation"
 														properties: {
 															name: {
 																description: "Name is the name of the Helm parameter"
 																type:        "string"
 															}
 															path: {
-																description:
-																	"Path is the path to the file containing the values for the Helm parameter"
-																type: "string"
+																description: "Path is the path to the file containing the values for the Helm parameter"
+																type:        "string"
 															}
 														}
 														type: "object"
@@ -1843,9 +1694,8 @@ kube: argocd: CustomResourceDefinition: "applications.argoproj.io": {
 													type: "array"
 												}
 												ignoreMissingValueFiles: {
-													description:
-														"IgnoreMissingValueFiles prevents helm template from failing when valueFiles do not exist locally by not appending them to helm template --values"
-													type: "boolean"
+													description: "IgnoreMissingValueFiles prevents helm template from failing when valueFiles do not exist locally by not appending them to helm template --values"
+													type:        "boolean"
 												}
 												kubeVersion: {
 													description: """
@@ -1855,21 +1705,17 @@ kube: argocd: CustomResourceDefinition: "applications.argoproj.io": {
 													type: "string"
 												}
 												namespace: {
-													description:
-														"Namespace is an optional namespace to template with. If left empty, defaults to the app's destination namespace."
-													type: "string"
+													description: "Namespace is an optional namespace to template with. If left empty, defaults to the app's destination namespace."
+													type:        "string"
 												}
 												parameters: {
-													description:
-														"Parameters is a list of Helm parameters which are passed to the helm template command upon manifest generation"
+													description: "Parameters is a list of Helm parameters which are passed to the helm template command upon manifest generation"
 													items: {
-														description:
-															"HelmParameter is a parameter that's passed to helm template during manifest generation"
+														description: "HelmParameter is a parameter that's passed to helm template during manifest generation"
 														properties: {
 															forceString: {
-																description:
-																	"ForceString determines whether to tell Helm to interpret booleans and numbers as strings"
-																type: "boolean"
+																description: "ForceString determines whether to tell Helm to interpret booleans and numbers as strings"
+																type:        "boolean"
 															}
 															name: {
 																description: "Name is the name of the Helm parameter"
@@ -1885,51 +1731,42 @@ kube: argocd: CustomResourceDefinition: "applications.argoproj.io": {
 													type: "array"
 												}
 												passCredentials: {
-													description:
-														"PassCredentials pass credentials to all domains (Helm's --pass-credentials)"
-													type: "boolean"
+													description: "PassCredentials pass credentials to all domains (Helm's --pass-credentials)"
+													type:        "boolean"
 												}
 												releaseName: {
-													description:
-														"ReleaseName is the Helm release name to use. If omitted it will use the application name"
-													type: "string"
+													description: "ReleaseName is the Helm release name to use. If omitted it will use the application name"
+													type:        "string"
 												}
 												skipCrds: {
-													description:
-														"SkipCrds skips custom resource definition installation step (Helm's --skip-crds)"
-													type: "boolean"
+													description: "SkipCrds skips custom resource definition installation step (Helm's --skip-crds)"
+													type:        "boolean"
 												}
 												skipSchemaValidation: {
-													description:
-														"SkipSchemaValidation skips JSON schema validation (Helm's --skip-schema-validation)"
-													type: "boolean"
+													description: "SkipSchemaValidation skips JSON schema validation (Helm's --skip-schema-validation)"
+													type:        "boolean"
 												}
 												skipTests: {
-													description:
-														"SkipTests skips test manifest installation step (Helm's --skip-tests)."
-													type: "boolean"
+													description: "SkipTests skips test manifest installation step (Helm's --skip-tests)."
+													type:        "boolean"
 												}
 												valueFiles: {
-													description:
-														"ValuesFiles is a list of Helm value files to use when generating a template"
+													description: "ValuesFiles is a list of Helm value files to use when generating a template"
 													items: type: "string"
 													type: "array"
 												}
 												values: {
-													description:
-														"Values specifies Helm values to be passed to helm template, typically defined as a block. ValuesObject takes precedence over Values, so use one or the other."
-													type: "string"
+													description: "Values specifies Helm values to be passed to helm template, typically defined as a block. ValuesObject takes precedence over Values, so use one or the other."
+													type:        "string"
 												}
 												valuesObject: {
-													description:
-																		"ValuesObject specifies Helm values to be passed to helm template, defined as a map. This takes precedence over Values."
+													description:                            "ValuesObject specifies Helm values to be passed to helm template, defined as a map. This takes precedence over Values."
 													type:                                   "object"
 													"x-kubernetes-preserve-unknown-fields": true
 												}
 												version: {
-													description:
-														"Version is the Helm version to use for templating (\"3\")"
-													type: "string"
+													description: "Version is the Helm version to use for templating (\"3\")"
+													type:        "string"
 												}
 											}
 											type: "object"
@@ -1947,44 +1784,40 @@ kube: argocd: CustomResourceDefinition: "applications.argoproj.io": {
 												}
 												commonAnnotations: {
 													additionalProperties: type: "string"
-													description:
-														"CommonAnnotations is a list of additional annotations to add to rendered manifests"
-													type: "object"
+													description: "CommonAnnotations is a list of additional annotations to add to rendered manifests"
+													type:        "object"
 												}
 												commonAnnotationsEnvsubst: {
-													description:
-														"CommonAnnotationsEnvsubst specifies whether to apply env variables substitution for annotation values"
-													type: "boolean"
+													description: "CommonAnnotationsEnvsubst specifies whether to apply env variables substitution for annotation values"
+													type:        "boolean"
 												}
 												commonLabels: {
 													additionalProperties: type: "string"
-													description:
-														"CommonLabels is a list of additional labels to add to rendered manifests"
-													type: "object"
+													description: "CommonLabels is a list of additional labels to add to rendered manifests"
+													type:        "object"
 												}
 												components: {
-													description:
-														"Components specifies a list of kustomize components to add to the kustomization before building"
+													description: "Components specifies a list of kustomize components to add to the kustomization before building"
 													items: type: "string"
 													type: "array"
 												}
 												forceCommonAnnotations: {
-													description:
-														"ForceCommonAnnotations specifies whether to force applying common annotations to resources for Kustomize apps"
-													type: "boolean"
+													description: "ForceCommonAnnotations specifies whether to force applying common annotations to resources for Kustomize apps"
+													type:        "boolean"
 												}
 												forceCommonLabels: {
-													description:
-														"ForceCommonLabels specifies whether to force applying common labels to resources for Kustomize apps"
-													type: "boolean"
+													description: "ForceCommonLabels specifies whether to force applying common labels to resources for Kustomize apps"
+													type:        "boolean"
+												}
+												ignoreMissingComponents: {
+													description: "IgnoreMissingComponents prevents kustomize from failing when components do not exist locally by not appending them to kustomization file"
+													type:        "boolean"
 												}
 												images: {
-													description:
-														"Images is a list of Kustomize image override specifications"
+													description: "Images is a list of Kustomize image override specifications"
 													items: {
-														description:
-															"KustomizeImage represents a Kustomize image definition in the format [old_image_name=]<image_name>:<image_tag>"
-														type: "string"
+														description: "KustomizeImage represents a Kustomize image definition in the format [old_image_name=]<image_name>:<image_tag>"
+														type:        "string"
 													}
 													type: "array"
 												}
@@ -1995,25 +1828,25 @@ kube: argocd: CustomResourceDefinition: "applications.argoproj.io": {
 	"""
 													type: "string"
 												}
+												labelIncludeTemplates: {
+													description: "LabelIncludeTemplates specifies whether to apply common labels to resource templates or not"
+													type:        "boolean"
+												}
 												labelWithoutSelector: {
-													description:
-														"LabelWithoutSelector specifies whether to apply common labels to resource selectors or not"
-													type: "boolean"
+													description: "LabelWithoutSelector specifies whether to apply common labels to resource selectors or not"
+													type:        "boolean"
 												}
 												namePrefix: {
-													description:
-														"NamePrefix is a prefix appended to resources for Kustomize apps"
-													type: "string"
+													description: "NamePrefix is a prefix appended to resources for Kustomize apps"
+													type:        "string"
 												}
 												nameSuffix: {
-													description:
-														"NameSuffix is a suffix appended to resources for Kustomize apps"
-													type: "string"
+													description: "NameSuffix is a suffix appended to resources for Kustomize apps"
+													type:        "string"
 												}
 												namespace: {
-													description:
-														"Namespace sets the namespace that Kustomize adds to all resources"
-													type: "string"
+													description: "Namespace sets the namespace that Kustomize adds to all resources"
+													type:        "string"
 												}
 												patches: {
 													description: "Patches is a list of Kustomize patches"
@@ -2043,8 +1876,7 @@ kube: argocd: CustomResourceDefinition: "applications.argoproj.io": {
 													type: "array"
 												}
 												replicas: {
-													description:
-														"Replicas is a list of Kustomize Replicas override specifications"
+													description: "Replicas is a list of Kustomize Replicas override specifications"
 													items: {
 														properties: {
 															count: {
@@ -2070,37 +1902,31 @@ kube: argocd: CustomResourceDefinition: "applications.argoproj.io": {
 													type: "array"
 												}
 												version: {
-													description:
-														"Version controls which version of Kustomize to use for rendering manifests"
-													type: "string"
+													description: "Version controls which version of Kustomize to use for rendering manifests"
+													type:        "string"
 												}
 											}
 											type: "object"
 										}
 										name: {
-											description:
-												"Name is used to refer to a source and is displayed in the UI. It is used in multi-source Applications."
-											type: "string"
+											description: "Name is used to refer to a source and is displayed in the UI. It is used in multi-source Applications."
+											type:        "string"
 										}
 										path: {
-											description:
-												"Path is a directory path within the Git repository, and is only valid for applications sourced from Git."
-											type: "string"
+											description: "Path is a directory path within the Git repository, and is only valid for applications sourced from Git."
+											type:        "string"
 										}
 										plugin: {
-											description:
-												"Plugin holds config management plugin specific options"
+											description: "Plugin holds config management plugin specific options"
 											properties: {
 												env: {
 													description: "Env is a list of environment variable entries"
 													items: {
-														description:
-															"EnvEntry represents an entry in the application's environment"
+														description: "EnvEntry represents an entry in the application's environment"
 														properties: {
 															name: {
-																description:
-																	"Name is the name of the variable, usually expressed in uppercase"
-																type: "string"
+																description: "Name is the name of the variable, usually expressed in uppercase"
+																type:        "string"
 															}
 															value: {
 																description: "Value is the value of the variable"
@@ -2134,9 +1960,8 @@ kube: argocd: CustomResourceDefinition: "applications.argoproj.io": {
 																type:        "string"
 															}
 															string: {
-																description:
-																	"String_ is the value of a string type parameter."
-																type: "string"
+																description: "String_ is the value of a string type parameter."
+																type:        "string"
 															}
 														}
 														type: "object"
@@ -2147,14 +1972,12 @@ kube: argocd: CustomResourceDefinition: "applications.argoproj.io": {
 											type: "object"
 										}
 										ref: {
-											description:
-												"Ref is reference to another source within sources field. This field will not be used if used with a `source` tag."
-											type: "string"
+											description: "Ref is reference to another source within sources field. This field will not be used if used with a `source` tag."
+											type:        "string"
 										}
 										repoURL: {
-											description:
-												"RepoURL is the URL to the repository (Git or Helm) that contains the application manifests"
-											type: "string"
+											description: "RepoURL is the URL to the repository (Git or Helm) that contains the application manifests"
+											type:        "string"
 										}
 										targetRevision: {
 											description: """
@@ -2174,30 +1997,29 @@ kube: argocd: CustomResourceDefinition: "applications.argoproj.io": {
 								description: "SyncPolicy controls when and how a sync will be performed"
 								properties: {
 									automated: {
-										description:
-											"Automated will keep an application synced to the target revision"
+										description: "Automated will keep an application synced to the target revision"
 										properties: {
 											allowEmpty: {
-												description:
-													"AllowEmpty allows apps have zero live resources (default: false)"
-												type: "boolean"
+												description: "AllowEmpty allows apps have zero live resources (default: false)"
+												type:        "boolean"
+											}
+											enabled: {
+												description: "Enable allows apps to explicitly control automated sync"
+												type:        "boolean"
 											}
 											prune: {
-												description:
-													"Prune specifies whether to delete resources from the cluster that are not found in the sources anymore as part of automated sync (default: false)"
-												type: "boolean"
+												description: "Prune specifies whether to delete resources from the cluster that are not found in the sources anymore as part of automated sync (default: false)"
+												type:        "boolean"
 											}
 											selfHeal: {
-												description:
-													"SelfHeal specifies whether to revert resources back to their desired state upon modification in the cluster (default: false)"
-												type: "boolean"
+												description: "SelfHeal specifies whether to revert resources back to their desired state upon modification in the cluster (default: false)"
+												type:        "boolean"
 											}
 										}
 										type: "object"
 									}
 									managedNamespaceMetadata: {
-										description:
-											"ManagedNamespaceMetadata controls metadata in the given namespace (if CreateNamespace=true)"
+										description: "ManagedNamespaceMetadata controls metadata in the given namespace (if CreateNamespace=true)"
 										properties: {
 											annotations: {
 												additionalProperties: type: "string"
@@ -2214,33 +2036,32 @@ kube: argocd: CustomResourceDefinition: "applications.argoproj.io": {
 										description: "Retry controls failed sync retry behavior"
 										properties: {
 											backoff: {
-												description:
-													"Backoff controls how to backoff on subsequent retries of failed syncs"
+												description: "Backoff controls how to backoff on subsequent retries of failed syncs"
 												properties: {
 													duration: {
-														description:
-															"Duration is the amount to back off. Default unit is seconds, but could also be a duration (e.g. \"2m\", \"1h\")"
-														type: "string"
+														description: "Duration is the amount to back off. Default unit is seconds, but could also be a duration (e.g. \"2m\", \"1h\")"
+														type:        "string"
 													}
 													factor: {
-														description:
-															"Factor is a factor to multiply the base duration after each failed retry"
-														format: "int64"
-														type:   "integer"
+														description: "Factor is a factor to multiply the base duration after each failed retry"
+														format:      "int64"
+														type:        "integer"
 													}
 													maxDuration: {
-														description:
-															"MaxDuration is the maximum amount of time allowed for the backoff strategy"
-														type: "string"
+														description: "MaxDuration is the maximum amount of time allowed for the backoff strategy"
+														type:        "string"
 													}
 												}
 												type: "object"
 											}
 											limit: {
-												description:
-													"Limit is the maximum number of attempts for retrying a failed sync. If set to 0, no retries will be performed."
-												format: "int64"
-												type:   "integer"
+												description: "Limit is the maximum number of attempts for retrying a failed sync. If set to 0, no retries will be performed."
+												format:      "int64"
+												type:        "integer"
+											}
+											refresh: {
+												description: "Refresh indicates if the latest revision should be used on retry instead of the initial one (default: false)"
+												type:        "boolean"
 											}
 										}
 										type: "object"
@@ -2264,22 +2085,18 @@ kube: argocd: CustomResourceDefinition: "applications.argoproj.io": {
 						description: "ApplicationStatus contains status information for the application"
 						properties: {
 							conditions: {
-								description:
-									"Conditions is a list of currently observed application conditions"
+								description: "Conditions is a list of currently observed application conditions"
 								items: {
-									description:
-										"ApplicationCondition contains details about an application condition, which is usually an error or warning"
+									description: "ApplicationCondition contains details about an application condition, which is usually an error or warning"
 									properties: {
 										lastTransitionTime: {
-											description:
-												"LastTransitionTime is the time the condition was last observed"
-											format: "date-time"
-											type:   "string"
+											description: "LastTransitionTime is the time the condition was last observed"
+											format:      "date-time"
+											type:        "string"
 										}
 										message: {
-											description:
-												"Message contains human-readable message indicating details about condition"
-											type: "string"
+											description: "Message contains human-readable message indicating details about condition"
+											type:        "string"
 										}
 										type: {
 											description: "Type is an application condition type"
@@ -2295,45 +2112,41 @@ kube: argocd: CustomResourceDefinition: "applications.argoproj.io": {
 								type: "array"
 							}
 							controllerNamespace: {
-								description:
-									"ControllerNamespace indicates the namespace in which the application controller is located"
-								type: "string"
+								description: "ControllerNamespace indicates the namespace in which the application controller is located"
+								type:        "string"
 							}
 							health: {
-								description:
-									"Health contains information about the application's current health status"
+								description: "Health contains information about the application's current health status"
 								properties: {
 									lastTransitionTime: {
-										description:
-											"LastTransitionTime is the time the HealthStatus was set or updated"
-										format: "date-time"
-										type:   "string"
+										description: "LastTransitionTime is the time the HealthStatus was set or updated"
+										format:      "date-time"
+										type:        "string"
 									}
 									message: {
-										description:
-											"Message is a human-readable informational message describing the health status"
+										description: """
+	Message is a human-readable informational message describing the health status
+
+	Deprecated: this field is not used and will be removed in a future release.
+	"""
 										type: "string"
 									}
 									status: {
-										description:
-											"Status holds the status code of the application or resource"
-										type: "string"
+										description: "Status holds the status code of the application"
+										type:        "string"
 									}
 								}
 								type: "object"
 							}
 							history: {
-								description:
-									"History contains information about the application's sync history"
+								description: "History contains information about the application's sync history"
 								items: {
-									description:
-										"RevisionHistory contains history information about a previous sync"
+									description: "RevisionHistory contains history information about a previous sync"
 									properties: {
 										deployStartedAt: {
-											description:
-												"DeployStartedAt holds the time the sync operation started"
-											format: "date-time"
-											type:   "string"
+											description: "DeployStartedAt holds the time the sync operation started"
+											format:      "date-time"
+											type:        "string"
 										}
 										deployedAt: {
 											description: "DeployedAt holds the time the sync operation completed"
@@ -2346,64 +2159,53 @@ kube: argocd: CustomResourceDefinition: "applications.argoproj.io": {
 											type:        "integer"
 										}
 										initiatedBy: {
-											description:
-												"InitiatedBy contains information about who initiated the operations"
+											description: "InitiatedBy contains information about who initiated the operations"
 											properties: {
 												automated: {
-													description:
-														"Automated is set to true if operation was initiated automatically by the application controller."
-													type: "boolean"
+													description: "Automated is set to true if operation was initiated automatically by the application controller."
+													type:        "boolean"
 												}
 												username: {
-													description:
-														"Username contains the name of a user who started operation"
-													type: "string"
+													description: "Username contains the name of a user who started operation"
+													type:        "string"
 												}
 											}
 											type: "object"
 										}
 										revision: {
-											description:
-												"Revision holds the revision the sync was performed against"
-											type: "string"
+											description: "Revision holds the revision the sync was performed against"
+											type:        "string"
 										}
 										revisions: {
-											description:
-												"Revisions holds the revision of each source in sources field the sync was performed against"
+											description: "Revisions holds the revision of each source in sources field the sync was performed against"
 											items: type: "string"
 											type: "array"
 										}
 										source: {
-											description:
-												"Source is a reference to the application source used for the sync operation"
+											description: "Source is a reference to the application source used for the sync operation"
 											properties: {
 												chart: {
-													description:
-														"Chart is a Helm chart name, and must be specified for applications sourced from a Helm repo."
-													type: "string"
+													description: "Chart is a Helm chart name, and must be specified for applications sourced from a Helm repo."
+													type:        "string"
 												}
 												directory: {
 													description: "Directory holds path/directory specific options"
 													properties: {
 														exclude: {
-															description:
-																"Exclude contains a glob pattern to match paths against that should be explicitly excluded from being used during manifest generation"
-															type: "string"
+															description: "Exclude contains a glob pattern to match paths against that should be explicitly excluded from being used during manifest generation"
+															type:        "string"
 														}
 														include: {
-															description:
-																"Include contains a glob pattern to match paths against that should be explicitly included during manifest generation"
-															type: "string"
+															description: "Include contains a glob pattern to match paths against that should be explicitly included during manifest generation"
+															type:        "string"
 														}
 														jsonnet: {
 															description: "Jsonnet holds options specific to Jsonnet"
 															properties: {
 																extVars: {
-																	description:
-																		"ExtVars is a list of Jsonnet External Variables"
+																	description: "ExtVars is a list of Jsonnet External Variables"
 																	items: {
-																		description:
-																			"JsonnetVar represents a variable to be passed to jsonnet during manifest generation"
+																		description: "JsonnetVar represents a variable to be passed to jsonnet during manifest generation"
 																		properties: {
 																			code: type:  "boolean"
 																			name: type:  "string"
@@ -2423,11 +2225,9 @@ kube: argocd: CustomResourceDefinition: "applications.argoproj.io": {
 																	type: "array"
 																}
 																tlas: {
-																	description:
-																		"TLAS is a list of Jsonnet Top-level Arguments"
+																	description: "TLAS is a list of Jsonnet Top-level Arguments"
 																	items: {
-																		description:
-																			"JsonnetVar represents a variable to be passed to jsonnet during manifest generation"
+																		description: "JsonnetVar represents a variable to be passed to jsonnet during manifest generation"
 																		properties: {
 																			code: type:  "boolean"
 																			name: type:  "string"
@@ -2445,9 +2245,8 @@ kube: argocd: CustomResourceDefinition: "applications.argoproj.io": {
 															type: "object"
 														}
 														recurse: {
-															description:
-																"Recurse specifies whether to scan a directory recursively for manifests"
-															type: "boolean"
+															description: "Recurse specifies whether to scan a directory recursively for manifests"
+															type:        "boolean"
 														}
 													}
 													type: "object"
@@ -2464,20 +2263,17 @@ kube: argocd: CustomResourceDefinition: "applications.argoproj.io": {
 															type: "array"
 														}
 														fileParameters: {
-															description:
-																"FileParameters are file parameters to the helm template"
+															description: "FileParameters are file parameters to the helm template"
 															items: {
-																description:
-																	"HelmFileParameter is a file parameter that's passed to helm template during manifest generation"
+																description: "HelmFileParameter is a file parameter that's passed to helm template during manifest generation"
 																properties: {
 																	name: {
 																		description: "Name is the name of the Helm parameter"
 																		type:        "string"
 																	}
 																	path: {
-																		description:
-																			"Path is the path to the file containing the values for the Helm parameter"
-																		type: "string"
+																		description: "Path is the path to the file containing the values for the Helm parameter"
+																		type:        "string"
 																	}
 																}
 																type: "object"
@@ -2485,9 +2281,8 @@ kube: argocd: CustomResourceDefinition: "applications.argoproj.io": {
 															type: "array"
 														}
 														ignoreMissingValueFiles: {
-															description:
-																"IgnoreMissingValueFiles prevents helm template from failing when valueFiles do not exist locally by not appending them to helm template --values"
-															type: "boolean"
+															description: "IgnoreMissingValueFiles prevents helm template from failing when valueFiles do not exist locally by not appending them to helm template --values"
+															type:        "boolean"
 														}
 														kubeVersion: {
 															description: """
@@ -2497,21 +2292,17 @@ kube: argocd: CustomResourceDefinition: "applications.argoproj.io": {
 															type: "string"
 														}
 														namespace: {
-															description:
-																"Namespace is an optional namespace to template with. If left empty, defaults to the app's destination namespace."
-															type: "string"
+															description: "Namespace is an optional namespace to template with. If left empty, defaults to the app's destination namespace."
+															type:        "string"
 														}
 														parameters: {
-															description:
-																"Parameters is a list of Helm parameters which are passed to the helm template command upon manifest generation"
+															description: "Parameters is a list of Helm parameters which are passed to the helm template command upon manifest generation"
 															items: {
-																description:
-																	"HelmParameter is a parameter that's passed to helm template during manifest generation"
+																description: "HelmParameter is a parameter that's passed to helm template during manifest generation"
 																properties: {
 																	forceString: {
-																		description:
-																			"ForceString determines whether to tell Helm to interpret booleans and numbers as strings"
-																		type: "boolean"
+																		description: "ForceString determines whether to tell Helm to interpret booleans and numbers as strings"
+																		type:        "boolean"
 																	}
 																	name: {
 																		description: "Name is the name of the Helm parameter"
@@ -2527,51 +2318,42 @@ kube: argocd: CustomResourceDefinition: "applications.argoproj.io": {
 															type: "array"
 														}
 														passCredentials: {
-															description:
-																"PassCredentials pass credentials to all domains (Helm's --pass-credentials)"
-															type: "boolean"
+															description: "PassCredentials pass credentials to all domains (Helm's --pass-credentials)"
+															type:        "boolean"
 														}
 														releaseName: {
-															description:
-																"ReleaseName is the Helm release name to use. If omitted it will use the application name"
-															type: "string"
+															description: "ReleaseName is the Helm release name to use. If omitted it will use the application name"
+															type:        "string"
 														}
 														skipCrds: {
-															description:
-																"SkipCrds skips custom resource definition installation step (Helm's --skip-crds)"
-															type: "boolean"
+															description: "SkipCrds skips custom resource definition installation step (Helm's --skip-crds)"
+															type:        "boolean"
 														}
 														skipSchemaValidation: {
-															description:
-																"SkipSchemaValidation skips JSON schema validation (Helm's --skip-schema-validation)"
-															type: "boolean"
+															description: "SkipSchemaValidation skips JSON schema validation (Helm's --skip-schema-validation)"
+															type:        "boolean"
 														}
 														skipTests: {
-															description:
-																"SkipTests skips test manifest installation step (Helm's --skip-tests)."
-															type: "boolean"
+															description: "SkipTests skips test manifest installation step (Helm's --skip-tests)."
+															type:        "boolean"
 														}
 														valueFiles: {
-															description:
-																"ValuesFiles is a list of Helm value files to use when generating a template"
+															description: "ValuesFiles is a list of Helm value files to use when generating a template"
 															items: type: "string"
 															type: "array"
 														}
 														values: {
-															description:
-																"Values specifies Helm values to be passed to helm template, typically defined as a block. ValuesObject takes precedence over Values, so use one or the other."
-															type: "string"
+															description: "Values specifies Helm values to be passed to helm template, typically defined as a block. ValuesObject takes precedence over Values, so use one or the other."
+															type:        "string"
 														}
 														valuesObject: {
-															description:
-																				"ValuesObject specifies Helm values to be passed to helm template, defined as a map. This takes precedence over Values."
+															description:                            "ValuesObject specifies Helm values to be passed to helm template, defined as a map. This takes precedence over Values."
 															type:                                   "object"
 															"x-kubernetes-preserve-unknown-fields": true
 														}
 														version: {
-															description:
-																"Version is the Helm version to use for templating (\"3\")"
-															type: "string"
+															description: "Version is the Helm version to use for templating (\"3\")"
+															type:        "string"
 														}
 													}
 													type: "object"
@@ -2589,44 +2371,40 @@ kube: argocd: CustomResourceDefinition: "applications.argoproj.io": {
 														}
 														commonAnnotations: {
 															additionalProperties: type: "string"
-															description:
-																"CommonAnnotations is a list of additional annotations to add to rendered manifests"
-															type: "object"
+															description: "CommonAnnotations is a list of additional annotations to add to rendered manifests"
+															type:        "object"
 														}
 														commonAnnotationsEnvsubst: {
-															description:
-																"CommonAnnotationsEnvsubst specifies whether to apply env variables substitution for annotation values"
-															type: "boolean"
+															description: "CommonAnnotationsEnvsubst specifies whether to apply env variables substitution for annotation values"
+															type:        "boolean"
 														}
 														commonLabels: {
 															additionalProperties: type: "string"
-															description:
-																"CommonLabels is a list of additional labels to add to rendered manifests"
-															type: "object"
+															description: "CommonLabels is a list of additional labels to add to rendered manifests"
+															type:        "object"
 														}
 														components: {
-															description:
-																"Components specifies a list of kustomize components to add to the kustomization before building"
+															description: "Components specifies a list of kustomize components to add to the kustomization before building"
 															items: type: "string"
 															type: "array"
 														}
 														forceCommonAnnotations: {
-															description:
-																"ForceCommonAnnotations specifies whether to force applying common annotations to resources for Kustomize apps"
-															type: "boolean"
+															description: "ForceCommonAnnotations specifies whether to force applying common annotations to resources for Kustomize apps"
+															type:        "boolean"
 														}
 														forceCommonLabels: {
-															description:
-																"ForceCommonLabels specifies whether to force applying common labels to resources for Kustomize apps"
-															type: "boolean"
+															description: "ForceCommonLabels specifies whether to force applying common labels to resources for Kustomize apps"
+															type:        "boolean"
+														}
+														ignoreMissingComponents: {
+															description: "IgnoreMissingComponents prevents kustomize from failing when components do not exist locally by not appending them to kustomization file"
+															type:        "boolean"
 														}
 														images: {
-															description:
-																"Images is a list of Kustomize image override specifications"
+															description: "Images is a list of Kustomize image override specifications"
 															items: {
-																description:
-																	"KustomizeImage represents a Kustomize image definition in the format [old_image_name=]<image_name>:<image_tag>"
-																type: "string"
+																description: "KustomizeImage represents a Kustomize image definition in the format [old_image_name=]<image_name>:<image_tag>"
+																type:        "string"
 															}
 															type: "array"
 														}
@@ -2637,25 +2415,25 @@ kube: argocd: CustomResourceDefinition: "applications.argoproj.io": {
 	"""
 															type: "string"
 														}
+														labelIncludeTemplates: {
+															description: "LabelIncludeTemplates specifies whether to apply common labels to resource templates or not"
+															type:        "boolean"
+														}
 														labelWithoutSelector: {
-															description:
-																"LabelWithoutSelector specifies whether to apply common labels to resource selectors or not"
-															type: "boolean"
+															description: "LabelWithoutSelector specifies whether to apply common labels to resource selectors or not"
+															type:        "boolean"
 														}
 														namePrefix: {
-															description:
-																"NamePrefix is a prefix appended to resources for Kustomize apps"
-															type: "string"
+															description: "NamePrefix is a prefix appended to resources for Kustomize apps"
+															type:        "string"
 														}
 														nameSuffix: {
-															description:
-																"NameSuffix is a suffix appended to resources for Kustomize apps"
-															type: "string"
+															description: "NameSuffix is a suffix appended to resources for Kustomize apps"
+															type:        "string"
 														}
 														namespace: {
-															description:
-																"Namespace sets the namespace that Kustomize adds to all resources"
-															type: "string"
+															description: "Namespace sets the namespace that Kustomize adds to all resources"
+															type:        "string"
 														}
 														patches: {
 															description: "Patches is a list of Kustomize patches"
@@ -2685,8 +2463,7 @@ kube: argocd: CustomResourceDefinition: "applications.argoproj.io": {
 															type: "array"
 														}
 														replicas: {
-															description:
-																"Replicas is a list of Kustomize Replicas override specifications"
+															description: "Replicas is a list of Kustomize Replicas override specifications"
 															items: {
 																properties: {
 																	count: {
@@ -2712,37 +2489,31 @@ kube: argocd: CustomResourceDefinition: "applications.argoproj.io": {
 															type: "array"
 														}
 														version: {
-															description:
-																"Version controls which version of Kustomize to use for rendering manifests"
-															type: "string"
+															description: "Version controls which version of Kustomize to use for rendering manifests"
+															type:        "string"
 														}
 													}
 													type: "object"
 												}
 												name: {
-													description:
-														"Name is used to refer to a source and is displayed in the UI. It is used in multi-source Applications."
-													type: "string"
+													description: "Name is used to refer to a source and is displayed in the UI. It is used in multi-source Applications."
+													type:        "string"
 												}
 												path: {
-													description:
-														"Path is a directory path within the Git repository, and is only valid for applications sourced from Git."
-													type: "string"
+													description: "Path is a directory path within the Git repository, and is only valid for applications sourced from Git."
+													type:        "string"
 												}
 												plugin: {
-													description:
-														"Plugin holds config management plugin specific options"
+													description: "Plugin holds config management plugin specific options"
 													properties: {
 														env: {
 															description: "Env is a list of environment variable entries"
 															items: {
-																description:
-																	"EnvEntry represents an entry in the application's environment"
+																description: "EnvEntry represents an entry in the application's environment"
 																properties: {
 																	name: {
-																		description:
-																			"Name is the name of the variable, usually expressed in uppercase"
-																		type: "string"
+																		description: "Name is the name of the variable, usually expressed in uppercase"
+																		type:        "string"
 																	}
 																	value: {
 																		description: "Value is the value of the variable"
@@ -2762,8 +2533,7 @@ kube: argocd: CustomResourceDefinition: "applications.argoproj.io": {
 															items: {
 																properties: {
 																	array: {
-																		description:
-																			"Array is the value of an array type parameter."
+																		description: "Array is the value of an array type parameter."
 																		items: type: "string"
 																		type: "array"
 																	}
@@ -2777,9 +2547,8 @@ kube: argocd: CustomResourceDefinition: "applications.argoproj.io": {
 																		type:        "string"
 																	}
 																	string: {
-																		description:
-																			"String_ is the value of a string type parameter."
-																		type: "string"
+																		description: "String_ is the value of a string type parameter."
+																		type:        "string"
 																	}
 																}
 																type: "object"
@@ -2790,14 +2559,12 @@ kube: argocd: CustomResourceDefinition: "applications.argoproj.io": {
 													type: "object"
 												}
 												ref: {
-													description:
-														"Ref is reference to another source within sources field. This field will not be used if used with a `source` tag."
-													type: "string"
+													description: "Ref is reference to another source within sources field. This field will not be used if used with a `source` tag."
+													type:        "string"
 												}
 												repoURL: {
-													description:
-														"RepoURL is the URL to the repository (Git or Helm) that contains the application manifests"
-													type: "string"
+													description: "RepoURL is the URL to the repository (Git or Helm) that contains the application manifests"
+													type:        "string"
 												}
 												targetRevision: {
 													description: """
@@ -2812,39 +2579,32 @@ kube: argocd: CustomResourceDefinition: "applications.argoproj.io": {
 											type: "object"
 										}
 										sources: {
-											description:
-												"Sources is a reference to the application sources used for the sync operation"
+											description: "Sources is a reference to the application sources used for the sync operation"
 											items: {
-												description:
-													"ApplicationSource contains all required information about the source of an application"
+												description: "ApplicationSource contains all required information about the source of an application"
 												properties: {
 													chart: {
-														description:
-															"Chart is a Helm chart name, and must be specified for applications sourced from a Helm repo."
-														type: "string"
+														description: "Chart is a Helm chart name, and must be specified for applications sourced from a Helm repo."
+														type:        "string"
 													}
 													directory: {
 														description: "Directory holds path/directory specific options"
 														properties: {
 															exclude: {
-																description:
-																	"Exclude contains a glob pattern to match paths against that should be explicitly excluded from being used during manifest generation"
-																type: "string"
+																description: "Exclude contains a glob pattern to match paths against that should be explicitly excluded from being used during manifest generation"
+																type:        "string"
 															}
 															include: {
-																description:
-																	"Include contains a glob pattern to match paths against that should be explicitly included during manifest generation"
-																type: "string"
+																description: "Include contains a glob pattern to match paths against that should be explicitly included during manifest generation"
+																type:        "string"
 															}
 															jsonnet: {
 																description: "Jsonnet holds options specific to Jsonnet"
 																properties: {
 																	extVars: {
-																		description:
-																			"ExtVars is a list of Jsonnet External Variables"
+																		description: "ExtVars is a list of Jsonnet External Variables"
 																		items: {
-																			description:
-																				"JsonnetVar represents a variable to be passed to jsonnet during manifest generation"
+																			description: "JsonnetVar represents a variable to be passed to jsonnet during manifest generation"
 																			properties: {
 																				code: type:  "boolean"
 																				name: type:  "string"
@@ -2864,11 +2624,9 @@ kube: argocd: CustomResourceDefinition: "applications.argoproj.io": {
 																		type: "array"
 																	}
 																	tlas: {
-																		description:
-																			"TLAS is a list of Jsonnet Top-level Arguments"
+																		description: "TLAS is a list of Jsonnet Top-level Arguments"
 																		items: {
-																			description:
-																				"JsonnetVar represents a variable to be passed to jsonnet during manifest generation"
+																			description: "JsonnetVar represents a variable to be passed to jsonnet during manifest generation"
 																			properties: {
 																				code: type:  "boolean"
 																				name: type:  "string"
@@ -2886,9 +2644,8 @@ kube: argocd: CustomResourceDefinition: "applications.argoproj.io": {
 																type: "object"
 															}
 															recurse: {
-																description:
-																	"Recurse specifies whether to scan a directory recursively for manifests"
-																type: "boolean"
+																description: "Recurse specifies whether to scan a directory recursively for manifests"
+																type:        "boolean"
 															}
 														}
 														type: "object"
@@ -2905,20 +2662,17 @@ kube: argocd: CustomResourceDefinition: "applications.argoproj.io": {
 																type: "array"
 															}
 															fileParameters: {
-																description:
-																	"FileParameters are file parameters to the helm template"
+																description: "FileParameters are file parameters to the helm template"
 																items: {
-																	description:
-																		"HelmFileParameter is a file parameter that's passed to helm template during manifest generation"
+																	description: "HelmFileParameter is a file parameter that's passed to helm template during manifest generation"
 																	properties: {
 																		name: {
 																			description: "Name is the name of the Helm parameter"
 																			type:        "string"
 																		}
 																		path: {
-																			description:
-																				"Path is the path to the file containing the values for the Helm parameter"
-																			type: "string"
+																			description: "Path is the path to the file containing the values for the Helm parameter"
+																			type:        "string"
 																		}
 																	}
 																	type: "object"
@@ -2926,9 +2680,8 @@ kube: argocd: CustomResourceDefinition: "applications.argoproj.io": {
 																type: "array"
 															}
 															ignoreMissingValueFiles: {
-																description:
-																	"IgnoreMissingValueFiles prevents helm template from failing when valueFiles do not exist locally by not appending them to helm template --values"
-																type: "boolean"
+																description: "IgnoreMissingValueFiles prevents helm template from failing when valueFiles do not exist locally by not appending them to helm template --values"
+																type:        "boolean"
 															}
 															kubeVersion: {
 																description: """
@@ -2938,30 +2691,25 @@ kube: argocd: CustomResourceDefinition: "applications.argoproj.io": {
 																type: "string"
 															}
 															namespace: {
-																description:
-																	"Namespace is an optional namespace to template with. If left empty, defaults to the app's destination namespace."
-																type: "string"
+																description: "Namespace is an optional namespace to template with. If left empty, defaults to the app's destination namespace."
+																type:        "string"
 															}
 															parameters: {
-																description:
-																	"Parameters is a list of Helm parameters which are passed to the helm template command upon manifest generation"
+																description: "Parameters is a list of Helm parameters which are passed to the helm template command upon manifest generation"
 																items: {
-																	description:
-																		"HelmParameter is a parameter that's passed to helm template during manifest generation"
+																	description: "HelmParameter is a parameter that's passed to helm template during manifest generation"
 																	properties: {
 																		forceString: {
-																			description:
-																				"ForceString determines whether to tell Helm to interpret booleans and numbers as strings"
-																			type: "boolean"
+																			description: "ForceString determines whether to tell Helm to interpret booleans and numbers as strings"
+																			type:        "boolean"
 																		}
 																		name: {
 																			description: "Name is the name of the Helm parameter"
 																			type:        "string"
 																		}
 																		value: {
-																			description:
-																				"Value is the value for the Helm parameter"
-																			type: "string"
+																			description: "Value is the value for the Helm parameter"
+																			type:        "string"
 																		}
 																	}
 																	type: "object"
@@ -2969,51 +2717,42 @@ kube: argocd: CustomResourceDefinition: "applications.argoproj.io": {
 																type: "array"
 															}
 															passCredentials: {
-																description:
-																	"PassCredentials pass credentials to all domains (Helm's --pass-credentials)"
-																type: "boolean"
+																description: "PassCredentials pass credentials to all domains (Helm's --pass-credentials)"
+																type:        "boolean"
 															}
 															releaseName: {
-																description:
-																	"ReleaseName is the Helm release name to use. If omitted it will use the application name"
-																type: "string"
+																description: "ReleaseName is the Helm release name to use. If omitted it will use the application name"
+																type:        "string"
 															}
 															skipCrds: {
-																description:
-																	"SkipCrds skips custom resource definition installation step (Helm's --skip-crds)"
-																type: "boolean"
+																description: "SkipCrds skips custom resource definition installation step (Helm's --skip-crds)"
+																type:        "boolean"
 															}
 															skipSchemaValidation: {
-																description:
-																	"SkipSchemaValidation skips JSON schema validation (Helm's --skip-schema-validation)"
-																type: "boolean"
+																description: "SkipSchemaValidation skips JSON schema validation (Helm's --skip-schema-validation)"
+																type:        "boolean"
 															}
 															skipTests: {
-																description:
-																	"SkipTests skips test manifest installation step (Helm's --skip-tests)."
-																type: "boolean"
+																description: "SkipTests skips test manifest installation step (Helm's --skip-tests)."
+																type:        "boolean"
 															}
 															valueFiles: {
-																description:
-																	"ValuesFiles is a list of Helm value files to use when generating a template"
+																description: "ValuesFiles is a list of Helm value files to use when generating a template"
 																items: type: "string"
 																type: "array"
 															}
 															values: {
-																description:
-																	"Values specifies Helm values to be passed to helm template, typically defined as a block. ValuesObject takes precedence over Values, so use one or the other."
-																type: "string"
+																description: "Values specifies Helm values to be passed to helm template, typically defined as a block. ValuesObject takes precedence over Values, so use one or the other."
+																type:        "string"
 															}
 															valuesObject: {
-																description:
-																					"ValuesObject specifies Helm values to be passed to helm template, defined as a map. This takes precedence over Values."
+																description:                            "ValuesObject specifies Helm values to be passed to helm template, defined as a map. This takes precedence over Values."
 																type:                                   "object"
 																"x-kubernetes-preserve-unknown-fields": true
 															}
 															version: {
-																description:
-																	"Version is the Helm version to use for templating (\"3\")"
-																type: "string"
+																description: "Version is the Helm version to use for templating (\"3\")"
+																type:        "string"
 															}
 														}
 														type: "object"
@@ -3031,44 +2770,40 @@ kube: argocd: CustomResourceDefinition: "applications.argoproj.io": {
 															}
 															commonAnnotations: {
 																additionalProperties: type: "string"
-																description:
-																	"CommonAnnotations is a list of additional annotations to add to rendered manifests"
-																type: "object"
+																description: "CommonAnnotations is a list of additional annotations to add to rendered manifests"
+																type:        "object"
 															}
 															commonAnnotationsEnvsubst: {
-																description:
-																	"CommonAnnotationsEnvsubst specifies whether to apply env variables substitution for annotation values"
-																type: "boolean"
+																description: "CommonAnnotationsEnvsubst specifies whether to apply env variables substitution for annotation values"
+																type:        "boolean"
 															}
 															commonLabels: {
 																additionalProperties: type: "string"
-																description:
-																	"CommonLabels is a list of additional labels to add to rendered manifests"
-																type: "object"
+																description: "CommonLabels is a list of additional labels to add to rendered manifests"
+																type:        "object"
 															}
 															components: {
-																description:
-																	"Components specifies a list of kustomize components to add to the kustomization before building"
+																description: "Components specifies a list of kustomize components to add to the kustomization before building"
 																items: type: "string"
 																type: "array"
 															}
 															forceCommonAnnotations: {
-																description:
-																	"ForceCommonAnnotations specifies whether to force applying common annotations to resources for Kustomize apps"
-																type: "boolean"
+																description: "ForceCommonAnnotations specifies whether to force applying common annotations to resources for Kustomize apps"
+																type:        "boolean"
 															}
 															forceCommonLabels: {
-																description:
-																	"ForceCommonLabels specifies whether to force applying common labels to resources for Kustomize apps"
-																type: "boolean"
+																description: "ForceCommonLabels specifies whether to force applying common labels to resources for Kustomize apps"
+																type:        "boolean"
+															}
+															ignoreMissingComponents: {
+																description: "IgnoreMissingComponents prevents kustomize from failing when components do not exist locally by not appending them to kustomization file"
+																type:        "boolean"
 															}
 															images: {
-																description:
-																	"Images is a list of Kustomize image override specifications"
+																description: "Images is a list of Kustomize image override specifications"
 																items: {
-																	description:
-																		"KustomizeImage represents a Kustomize image definition in the format [old_image_name=]<image_name>:<image_tag>"
-																	type: "string"
+																	description: "KustomizeImage represents a Kustomize image definition in the format [old_image_name=]<image_name>:<image_tag>"
+																	type:        "string"
 																}
 																type: "array"
 															}
@@ -3079,25 +2814,25 @@ kube: argocd: CustomResourceDefinition: "applications.argoproj.io": {
 	"""
 																type: "string"
 															}
+															labelIncludeTemplates: {
+																description: "LabelIncludeTemplates specifies whether to apply common labels to resource templates or not"
+																type:        "boolean"
+															}
 															labelWithoutSelector: {
-																description:
-																	"LabelWithoutSelector specifies whether to apply common labels to resource selectors or not"
-																type: "boolean"
+																description: "LabelWithoutSelector specifies whether to apply common labels to resource selectors or not"
+																type:        "boolean"
 															}
 															namePrefix: {
-																description:
-																	"NamePrefix is a prefix appended to resources for Kustomize apps"
-																type: "string"
+																description: "NamePrefix is a prefix appended to resources for Kustomize apps"
+																type:        "string"
 															}
 															nameSuffix: {
-																description:
-																	"NameSuffix is a suffix appended to resources for Kustomize apps"
-																type: "string"
+																description: "NameSuffix is a suffix appended to resources for Kustomize apps"
+																type:        "string"
 															}
 															namespace: {
-																description:
-																	"Namespace sets the namespace that Kustomize adds to all resources"
-																type: "string"
+																description: "Namespace sets the namespace that Kustomize adds to all resources"
+																type:        "string"
 															}
 															patches: {
 																description: "Patches is a list of Kustomize patches"
@@ -3127,8 +2862,7 @@ kube: argocd: CustomResourceDefinition: "applications.argoproj.io": {
 																type: "array"
 															}
 															replicas: {
-																description:
-																	"Replicas is a list of Kustomize Replicas override specifications"
+																description: "Replicas is a list of Kustomize Replicas override specifications"
 																items: {
 																	properties: {
 																		count: {
@@ -3154,38 +2888,31 @@ kube: argocd: CustomResourceDefinition: "applications.argoproj.io": {
 																type: "array"
 															}
 															version: {
-																description:
-																	"Version controls which version of Kustomize to use for rendering manifests"
-																type: "string"
+																description: "Version controls which version of Kustomize to use for rendering manifests"
+																type:        "string"
 															}
 														}
 														type: "object"
 													}
 													name: {
-														description:
-															"Name is used to refer to a source and is displayed in the UI. It is used in multi-source Applications."
-														type: "string"
+														description: "Name is used to refer to a source and is displayed in the UI. It is used in multi-source Applications."
+														type:        "string"
 													}
 													path: {
-														description:
-															"Path is a directory path within the Git repository, and is only valid for applications sourced from Git."
-														type: "string"
+														description: "Path is a directory path within the Git repository, and is only valid for applications sourced from Git."
+														type:        "string"
 													}
 													plugin: {
-														description:
-															"Plugin holds config management plugin specific options"
+														description: "Plugin holds config management plugin specific options"
 														properties: {
 															env: {
-																description:
-																	"Env is a list of environment variable entries"
+																description: "Env is a list of environment variable entries"
 																items: {
-																	description:
-																		"EnvEntry represents an entry in the application's environment"
+																	description: "EnvEntry represents an entry in the application's environment"
 																	properties: {
 																		name: {
-																			description:
-																				"Name is the name of the variable, usually expressed in uppercase"
-																			type: "string"
+																			description: "Name is the name of the variable, usually expressed in uppercase"
+																			type:        "string"
 																		}
 																		value: {
 																			description: "Value is the value of the variable"
@@ -3205,26 +2932,22 @@ kube: argocd: CustomResourceDefinition: "applications.argoproj.io": {
 																items: {
 																	properties: {
 																		array: {
-																			description:
-																				"Array is the value of an array type parameter."
+																			description: "Array is the value of an array type parameter."
 																			items: type: "string"
 																			type: "array"
 																		}
 																		map: {
 																			additionalProperties: type: "string"
-																			description:
-																				"Map is the value of a map type parameter."
-																			type: "object"
+																			description: "Map is the value of a map type parameter."
+																			type:        "object"
 																		}
 																		name: {
-																			description:
-																				"Name is the name identifying a parameter."
-																			type: "string"
+																			description: "Name is the name identifying a parameter."
+																			type:        "string"
 																		}
 																		string: {
-																			description:
-																				"String_ is the value of a string type parameter."
-																			type: "string"
+																			description: "String_ is the value of a string type parameter."
+																			type:        "string"
 																		}
 																	}
 																	type: "object"
@@ -3235,14 +2958,12 @@ kube: argocd: CustomResourceDefinition: "applications.argoproj.io": {
 														type: "object"
 													}
 													ref: {
-														description:
-															"Ref is reference to another source within sources field. This field will not be used if used with a `source` tag."
-														type: "string"
+														description: "Ref is reference to another source within sources field. This field will not be used if used with a `source` tag."
+														type:        "string"
 													}
 													repoURL: {
-														description:
-															"RepoURL is the URL to the repository (Git or Helm) that contains the application manifests"
-														type: "string"
+														description: "RepoURL is the URL to the repository (Git or Helm) that contains the application manifests"
+														type:        "string"
 													}
 													targetRevision: {
 														description: """
@@ -3276,8 +2997,7 @@ kube: argocd: CustomResourceDefinition: "applications.argoproj.io": {
 								type:   "string"
 							}
 							operationState: {
-								description:
-									"OperationState contains information about any ongoing operations, such as a sync"
+								description: "OperationState contains information about any ongoing operations, such as a sync"
 								properties: {
 									finishedAt: {
 										description: "FinishedAt contains time of operation completion"
@@ -3285,16 +3005,14 @@ kube: argocd: CustomResourceDefinition: "applications.argoproj.io": {
 										type:        "string"
 									}
 									message: {
-										description:
-											"Message holds any pertinent messages when attempting to perform operation (typically errors)."
-										type: "string"
+										description: "Message holds any pertinent messages when attempting to perform operation (typically errors)."
+										type:        "string"
 									}
 									operation: {
 										description: "Operation is the original requested operation"
 										properties: {
 											info: {
-												description:
-													"Info is a list of informational items for this operation"
+												description: "Info is a list of informational items for this operation"
 												items: {
 													properties: {
 														name: type:  "string"
@@ -3309,54 +3027,49 @@ kube: argocd: CustomResourceDefinition: "applications.argoproj.io": {
 												type: "array"
 											}
 											initiatedBy: {
-												description:
-													"InitiatedBy contains information about who initiated the operations"
+												description: "InitiatedBy contains information about who initiated the operations"
 												properties: {
 													automated: {
-														description:
-															"Automated is set to true if operation was initiated automatically by the application controller."
-														type: "boolean"
+														description: "Automated is set to true if operation was initiated automatically by the application controller."
+														type:        "boolean"
 													}
 													username: {
-														description:
-															"Username contains the name of a user who started operation"
-														type: "string"
+														description: "Username contains the name of a user who started operation"
+														type:        "string"
 													}
 												}
 												type: "object"
 											}
 											retry: {
-												description:
-													"Retry controls the strategy to apply if a sync fails"
+												description: "Retry controls the strategy to apply if a sync fails"
 												properties: {
 													backoff: {
-														description:
-															"Backoff controls how to backoff on subsequent retries of failed syncs"
+														description: "Backoff controls how to backoff on subsequent retries of failed syncs"
 														properties: {
 															duration: {
-																description:
-																	"Duration is the amount to back off. Default unit is seconds, but could also be a duration (e.g. \"2m\", \"1h\")"
-																type: "string"
+																description: "Duration is the amount to back off. Default unit is seconds, but could also be a duration (e.g. \"2m\", \"1h\")"
+																type:        "string"
 															}
 															factor: {
-																description:
-																	"Factor is a factor to multiply the base duration after each failed retry"
-																format: "int64"
-																type:   "integer"
+																description: "Factor is a factor to multiply the base duration after each failed retry"
+																format:      "int64"
+																type:        "integer"
 															}
 															maxDuration: {
-																description:
-																	"MaxDuration is the maximum amount of time allowed for the backoff strategy"
-																type: "string"
+																description: "MaxDuration is the maximum amount of time allowed for the backoff strategy"
+																type:        "string"
 															}
 														}
 														type: "object"
 													}
 													limit: {
-														description:
-															"Limit is the maximum number of attempts for retrying a failed sync. If set to 0, no retries will be performed."
-														format: "int64"
-														type:   "integer"
+														description: "Limit is the maximum number of attempts for retrying a failed sync. If set to 0, no retries will be performed."
+														format:      "int64"
+														type:        "integer"
+													}
+													refresh: {
+														description: "Refresh indicates if the latest revision should be used on retry instead of the initial one (default: false)"
+														type:        "boolean"
 													}
 												}
 												type: "object"
@@ -3365,33 +3078,27 @@ kube: argocd: CustomResourceDefinition: "applications.argoproj.io": {
 												description: "Sync contains parameters for the operation"
 												properties: {
 													autoHealAttemptsCount: {
-														description:
-															"SelfHealAttemptsCount contains the number of auto-heal attempts"
-														format: "int64"
-														type:   "integer"
+														description: "SelfHealAttemptsCount contains the number of auto-heal attempts"
+														format:      "int64"
+														type:        "integer"
 													}
 													dryRun: {
-														description:
-															"DryRun specifies to perform a `kubectl apply --dry-run` without actually performing the sync"
-														type: "boolean"
+														description: "DryRun specifies to perform a `kubectl apply --dry-run` without actually performing the sync"
+														type:        "boolean"
 													}
 													manifests: {
-														description:
-															"Manifests is an optional field that overrides sync source with a local directory for development"
+														description: "Manifests is an optional field that overrides sync source with a local directory for development"
 														items: type: "string"
 														type: "array"
 													}
 													prune: {
-														description:
-															"Prune specifies to delete resources from the cluster that are no longer tracked in git"
-														type: "boolean"
+														description: "Prune specifies to delete resources from the cluster that are no longer tracked in git"
+														type:        "boolean"
 													}
 													resources: {
-														description:
-															"Resources describes which resources shall be part of the sync"
+														description: "Resources describes which resources shall be part of the sync"
 														items: {
-															description:
-																"SyncOperationResource contains resources to sync."
+															description: "SyncOperationResource contains resources to sync."
 															properties: {
 																group: type:     "string"
 																kind: type:      "string"
@@ -3428,34 +3135,27 @@ kube: argocd: CustomResourceDefinition: "applications.argoproj.io": {
 	"""
 														properties: {
 															chart: {
-																description:
-																	"Chart is a Helm chart name, and must be specified for applications sourced from a Helm repo."
-																type: "string"
+																description: "Chart is a Helm chart name, and must be specified for applications sourced from a Helm repo."
+																type:        "string"
 															}
 															directory: {
-																description:
-																	"Directory holds path/directory specific options"
+																description: "Directory holds path/directory specific options"
 																properties: {
 																	exclude: {
-																		description:
-																			"Exclude contains a glob pattern to match paths against that should be explicitly excluded from being used during manifest generation"
-																		type: "string"
+																		description: "Exclude contains a glob pattern to match paths against that should be explicitly excluded from being used during manifest generation"
+																		type:        "string"
 																	}
 																	include: {
-																		description:
-																			"Include contains a glob pattern to match paths against that should be explicitly included during manifest generation"
-																		type: "string"
+																		description: "Include contains a glob pattern to match paths against that should be explicitly included during manifest generation"
+																		type:        "string"
 																	}
 																	jsonnet: {
-																		description:
-																			"Jsonnet holds options specific to Jsonnet"
+																		description: "Jsonnet holds options specific to Jsonnet"
 																		properties: {
 																			extVars: {
-																				description:
-																					"ExtVars is a list of Jsonnet External Variables"
+																				description: "ExtVars is a list of Jsonnet External Variables"
 																				items: {
-																					description:
-																						"JsonnetVar represents a variable to be passed to jsonnet during manifest generation"
+																					description: "JsonnetVar represents a variable to be passed to jsonnet during manifest generation"
 																					properties: {
 																						code: type:  "boolean"
 																						name: type:  "string"
@@ -3475,11 +3175,9 @@ kube: argocd: CustomResourceDefinition: "applications.argoproj.io": {
 																				type: "array"
 																			}
 																			tlas: {
-																				description:
-																					"TLAS is a list of Jsonnet Top-level Arguments"
+																				description: "TLAS is a list of Jsonnet Top-level Arguments"
 																				items: {
-																					description:
-																						"JsonnetVar represents a variable to be passed to jsonnet during manifest generation"
+																					description: "JsonnetVar represents a variable to be passed to jsonnet during manifest generation"
 																					properties: {
 																						code: type:  "boolean"
 																						name: type:  "string"
@@ -3497,9 +3195,8 @@ kube: argocd: CustomResourceDefinition: "applications.argoproj.io": {
 																		type: "object"
 																	}
 																	recurse: {
-																		description:
-																			"Recurse specifies whether to scan a directory recursively for manifests"
-																		type: "boolean"
+																		description: "Recurse specifies whether to scan a directory recursively for manifests"
+																		type:        "boolean"
 																	}
 																}
 																type: "object"
@@ -3516,21 +3213,17 @@ kube: argocd: CustomResourceDefinition: "applications.argoproj.io": {
 																		type: "array"
 																	}
 																	fileParameters: {
-																		description:
-																			"FileParameters are file parameters to the helm template"
+																		description: "FileParameters are file parameters to the helm template"
 																		items: {
-																			description:
-																				"HelmFileParameter is a file parameter that's passed to helm template during manifest generation"
+																			description: "HelmFileParameter is a file parameter that's passed to helm template during manifest generation"
 																			properties: {
 																				name: {
-																					description:
-																						"Name is the name of the Helm parameter"
-																					type: "string"
+																					description: "Name is the name of the Helm parameter"
+																					type:        "string"
 																				}
 																				path: {
-																					description:
-																						"Path is the path to the file containing the values for the Helm parameter"
-																					type: "string"
+																					description: "Path is the path to the file containing the values for the Helm parameter"
+																					type:        "string"
 																				}
 																			}
 																			type: "object"
@@ -3538,9 +3231,8 @@ kube: argocd: CustomResourceDefinition: "applications.argoproj.io": {
 																		type: "array"
 																	}
 																	ignoreMissingValueFiles: {
-																		description:
-																			"IgnoreMissingValueFiles prevents helm template from failing when valueFiles do not exist locally by not appending them to helm template --values"
-																		type: "boolean"
+																		description: "IgnoreMissingValueFiles prevents helm template from failing when valueFiles do not exist locally by not appending them to helm template --values"
+																		type:        "boolean"
 																	}
 																	kubeVersion: {
 																		description: """
@@ -3550,31 +3242,25 @@ kube: argocd: CustomResourceDefinition: "applications.argoproj.io": {
 																		type: "string"
 																	}
 																	namespace: {
-																		description:
-																			"Namespace is an optional namespace to template with. If left empty, defaults to the app's destination namespace."
-																		type: "string"
+																		description: "Namespace is an optional namespace to template with. If left empty, defaults to the app's destination namespace."
+																		type:        "string"
 																	}
 																	parameters: {
-																		description:
-																			"Parameters is a list of Helm parameters which are passed to the helm template command upon manifest generation"
+																		description: "Parameters is a list of Helm parameters which are passed to the helm template command upon manifest generation"
 																		items: {
-																			description:
-																				"HelmParameter is a parameter that's passed to helm template during manifest generation"
+																			description: "HelmParameter is a parameter that's passed to helm template during manifest generation"
 																			properties: {
 																				forceString: {
-																					description:
-																						"ForceString determines whether to tell Helm to interpret booleans and numbers as strings"
-																					type: "boolean"
+																					description: "ForceString determines whether to tell Helm to interpret booleans and numbers as strings"
+																					type:        "boolean"
 																				}
 																				name: {
-																					description:
-																						"Name is the name of the Helm parameter"
-																					type: "string"
+																					description: "Name is the name of the Helm parameter"
+																					type:        "string"
 																				}
 																				value: {
-																					description:
-																						"Value is the value for the Helm parameter"
-																					type: "string"
+																					description: "Value is the value for the Helm parameter"
+																					type:        "string"
 																				}
 																			}
 																			type: "object"
@@ -3582,51 +3268,42 @@ kube: argocd: CustomResourceDefinition: "applications.argoproj.io": {
 																		type: "array"
 																	}
 																	passCredentials: {
-																		description:
-																			"PassCredentials pass credentials to all domains (Helm's --pass-credentials)"
-																		type: "boolean"
+																		description: "PassCredentials pass credentials to all domains (Helm's --pass-credentials)"
+																		type:        "boolean"
 																	}
 																	releaseName: {
-																		description:
-																			"ReleaseName is the Helm release name to use. If omitted it will use the application name"
-																		type: "string"
+																		description: "ReleaseName is the Helm release name to use. If omitted it will use the application name"
+																		type:        "string"
 																	}
 																	skipCrds: {
-																		description:
-																			"SkipCrds skips custom resource definition installation step (Helm's --skip-crds)"
-																		type: "boolean"
+																		description: "SkipCrds skips custom resource definition installation step (Helm's --skip-crds)"
+																		type:        "boolean"
 																	}
 																	skipSchemaValidation: {
-																		description:
-																			"SkipSchemaValidation skips JSON schema validation (Helm's --skip-schema-validation)"
-																		type: "boolean"
+																		description: "SkipSchemaValidation skips JSON schema validation (Helm's --skip-schema-validation)"
+																		type:        "boolean"
 																	}
 																	skipTests: {
-																		description:
-																			"SkipTests skips test manifest installation step (Helm's --skip-tests)."
-																		type: "boolean"
+																		description: "SkipTests skips test manifest installation step (Helm's --skip-tests)."
+																		type:        "boolean"
 																	}
 																	valueFiles: {
-																		description:
-																			"ValuesFiles is a list of Helm value files to use when generating a template"
+																		description: "ValuesFiles is a list of Helm value files to use when generating a template"
 																		items: type: "string"
 																		type: "array"
 																	}
 																	values: {
-																		description:
-																			"Values specifies Helm values to be passed to helm template, typically defined as a block. ValuesObject takes precedence over Values, so use one or the other."
-																		type: "string"
+																		description: "Values specifies Helm values to be passed to helm template, typically defined as a block. ValuesObject takes precedence over Values, so use one or the other."
+																		type:        "string"
 																	}
 																	valuesObject: {
-																		description:
-																							"ValuesObject specifies Helm values to be passed to helm template, defined as a map. This takes precedence over Values."
+																		description:                            "ValuesObject specifies Helm values to be passed to helm template, defined as a map. This takes precedence over Values."
 																		type:                                   "object"
 																		"x-kubernetes-preserve-unknown-fields": true
 																	}
 																	version: {
-																		description:
-																			"Version is the Helm version to use for templating (\"3\")"
-																		type: "string"
+																		description: "Version is the Helm version to use for templating (\"3\")"
+																		type:        "string"
 																	}
 																}
 																type: "object"
@@ -3644,44 +3321,40 @@ kube: argocd: CustomResourceDefinition: "applications.argoproj.io": {
 																	}
 																	commonAnnotations: {
 																		additionalProperties: type: "string"
-																		description:
-																			"CommonAnnotations is a list of additional annotations to add to rendered manifests"
-																		type: "object"
+																		description: "CommonAnnotations is a list of additional annotations to add to rendered manifests"
+																		type:        "object"
 																	}
 																	commonAnnotationsEnvsubst: {
-																		description:
-																			"CommonAnnotationsEnvsubst specifies whether to apply env variables substitution for annotation values"
-																		type: "boolean"
+																		description: "CommonAnnotationsEnvsubst specifies whether to apply env variables substitution for annotation values"
+																		type:        "boolean"
 																	}
 																	commonLabels: {
 																		additionalProperties: type: "string"
-																		description:
-																			"CommonLabels is a list of additional labels to add to rendered manifests"
-																		type: "object"
+																		description: "CommonLabels is a list of additional labels to add to rendered manifests"
+																		type:        "object"
 																	}
 																	components: {
-																		description:
-																			"Components specifies a list of kustomize components to add to the kustomization before building"
+																		description: "Components specifies a list of kustomize components to add to the kustomization before building"
 																		items: type: "string"
 																		type: "array"
 																	}
 																	forceCommonAnnotations: {
-																		description:
-																			"ForceCommonAnnotations specifies whether to force applying common annotations to resources for Kustomize apps"
-																		type: "boolean"
+																		description: "ForceCommonAnnotations specifies whether to force applying common annotations to resources for Kustomize apps"
+																		type:        "boolean"
 																	}
 																	forceCommonLabels: {
-																		description:
-																			"ForceCommonLabels specifies whether to force applying common labels to resources for Kustomize apps"
-																		type: "boolean"
+																		description: "ForceCommonLabels specifies whether to force applying common labels to resources for Kustomize apps"
+																		type:        "boolean"
+																	}
+																	ignoreMissingComponents: {
+																		description: "IgnoreMissingComponents prevents kustomize from failing when components do not exist locally by not appending them to kustomization file"
+																		type:        "boolean"
 																	}
 																	images: {
-																		description:
-																			"Images is a list of Kustomize image override specifications"
+																		description: "Images is a list of Kustomize image override specifications"
 																		items: {
-																			description:
-																				"KustomizeImage represents a Kustomize image definition in the format [old_image_name=]<image_name>:<image_tag>"
-																			type: "string"
+																			description: "KustomizeImage represents a Kustomize image definition in the format [old_image_name=]<image_name>:<image_tag>"
+																			type:        "string"
 																		}
 																		type: "array"
 																	}
@@ -3692,25 +3365,25 @@ kube: argocd: CustomResourceDefinition: "applications.argoproj.io": {
 	"""
 																		type: "string"
 																	}
+																	labelIncludeTemplates: {
+																		description: "LabelIncludeTemplates specifies whether to apply common labels to resource templates or not"
+																		type:        "boolean"
+																	}
 																	labelWithoutSelector: {
-																		description:
-																			"LabelWithoutSelector specifies whether to apply common labels to resource selectors or not"
-																		type: "boolean"
+																		description: "LabelWithoutSelector specifies whether to apply common labels to resource selectors or not"
+																		type:        "boolean"
 																	}
 																	namePrefix: {
-																		description:
-																			"NamePrefix is a prefix appended to resources for Kustomize apps"
-																		type: "string"
+																		description: "NamePrefix is a prefix appended to resources for Kustomize apps"
+																		type:        "string"
 																	}
 																	nameSuffix: {
-																		description:
-																			"NameSuffix is a suffix appended to resources for Kustomize apps"
-																		type: "string"
+																		description: "NameSuffix is a suffix appended to resources for Kustomize apps"
+																		type:        "string"
 																	}
 																	namespace: {
-																		description:
-																			"Namespace sets the namespace that Kustomize adds to all resources"
-																		type: "string"
+																		description: "Namespace sets the namespace that Kustomize adds to all resources"
+																		type:        "string"
 																	}
 																	patches: {
 																		description: "Patches is a list of Kustomize patches"
@@ -3740,8 +3413,7 @@ kube: argocd: CustomResourceDefinition: "applications.argoproj.io": {
 																		type: "array"
 																	}
 																	replicas: {
-																		description:
-																			"Replicas is a list of Kustomize Replicas override specifications"
+																		description: "Replicas is a list of Kustomize Replicas override specifications"
 																		items: {
 																			properties: {
 																				count: {
@@ -3767,38 +3439,31 @@ kube: argocd: CustomResourceDefinition: "applications.argoproj.io": {
 																		type: "array"
 																	}
 																	version: {
-																		description:
-																			"Version controls which version of Kustomize to use for rendering manifests"
-																		type: "string"
+																		description: "Version controls which version of Kustomize to use for rendering manifests"
+																		type:        "string"
 																	}
 																}
 																type: "object"
 															}
 															name: {
-																description:
-																	"Name is used to refer to a source and is displayed in the UI. It is used in multi-source Applications."
-																type: "string"
+																description: "Name is used to refer to a source and is displayed in the UI. It is used in multi-source Applications."
+																type:        "string"
 															}
 															path: {
-																description:
-																	"Path is a directory path within the Git repository, and is only valid for applications sourced from Git."
-																type: "string"
+																description: "Path is a directory path within the Git repository, and is only valid for applications sourced from Git."
+																type:        "string"
 															}
 															plugin: {
-																description:
-																	"Plugin holds config management plugin specific options"
+																description: "Plugin holds config management plugin specific options"
 																properties: {
 																	env: {
-																		description:
-																			"Env is a list of environment variable entries"
+																		description: "Env is a list of environment variable entries"
 																		items: {
-																			description:
-																				"EnvEntry represents an entry in the application's environment"
+																			description: "EnvEntry represents an entry in the application's environment"
 																			properties: {
 																				name: {
-																					description:
-																						"Name is the name of the variable, usually expressed in uppercase"
-																					type: "string"
+																					description: "Name is the name of the variable, usually expressed in uppercase"
+																					type:        "string"
 																				}
 																				value: {
 																					description: "Value is the value of the variable"
@@ -3818,26 +3483,22 @@ kube: argocd: CustomResourceDefinition: "applications.argoproj.io": {
 																		items: {
 																			properties: {
 																				array: {
-																					description:
-																						"Array is the value of an array type parameter."
+																					description: "Array is the value of an array type parameter."
 																					items: type: "string"
 																					type: "array"
 																				}
 																				map: {
 																					additionalProperties: type: "string"
-																					description:
-																						"Map is the value of a map type parameter."
-																					type: "object"
+																					description: "Map is the value of a map type parameter."
+																					type:        "object"
 																				}
 																				name: {
-																					description:
-																						"Name is the name identifying a parameter."
-																					type: "string"
+																					description: "Name is the name identifying a parameter."
+																					type:        "string"
 																				}
 																				string: {
-																					description:
-																						"String_ is the value of a string type parameter."
-																					type: "string"
+																					description: "String_ is the value of a string type parameter."
+																					type:        "string"
 																				}
 																			}
 																			type: "object"
@@ -3848,14 +3509,12 @@ kube: argocd: CustomResourceDefinition: "applications.argoproj.io": {
 																type: "object"
 															}
 															ref: {
-																description:
-																	"Ref is reference to another source within sources field. This field will not be used if used with a `source` tag."
-																type: "string"
+																description: "Ref is reference to another source within sources field. This field will not be used if used with a `source` tag."
+																type:        "string"
 															}
 															repoURL: {
-																description:
-																	"RepoURL is the URL to the repository (Git or Helm) that contains the application manifests"
-																type: "string"
+																description: "RepoURL is the URL to the repository (Git or Helm) that contains the application manifests"
+																type:        "string"
 															}
 															targetRevision: {
 																description: """
@@ -3875,38 +3534,30 @@ kube: argocd: CustomResourceDefinition: "applications.argoproj.io": {
 	This is typically set in a Rollback operation and is nil during a Sync operation
 	"""
 														items: {
-															description:
-																"ApplicationSource contains all required information about the source of an application"
+															description: "ApplicationSource contains all required information about the source of an application"
 															properties: {
 																chart: {
-																	description:
-																		"Chart is a Helm chart name, and must be specified for applications sourced from a Helm repo."
-																	type: "string"
+																	description: "Chart is a Helm chart name, and must be specified for applications sourced from a Helm repo."
+																	type:        "string"
 																}
 																directory: {
-																	description:
-																		"Directory holds path/directory specific options"
+																	description: "Directory holds path/directory specific options"
 																	properties: {
 																		exclude: {
-																			description:
-																				"Exclude contains a glob pattern to match paths against that should be explicitly excluded from being used during manifest generation"
-																			type: "string"
+																			description: "Exclude contains a glob pattern to match paths against that should be explicitly excluded from being used during manifest generation"
+																			type:        "string"
 																		}
 																		include: {
-																			description:
-																				"Include contains a glob pattern to match paths against that should be explicitly included during manifest generation"
-																			type: "string"
+																			description: "Include contains a glob pattern to match paths against that should be explicitly included during manifest generation"
+																			type:        "string"
 																		}
 																		jsonnet: {
-																			description:
-																				"Jsonnet holds options specific to Jsonnet"
+																			description: "Jsonnet holds options specific to Jsonnet"
 																			properties: {
 																				extVars: {
-																					description:
-																						"ExtVars is a list of Jsonnet External Variables"
+																					description: "ExtVars is a list of Jsonnet External Variables"
 																					items: {
-																						description:
-																							"JsonnetVar represents a variable to be passed to jsonnet during manifest generation"
+																						description: "JsonnetVar represents a variable to be passed to jsonnet during manifest generation"
 																						properties: {
 																							code: type:  "boolean"
 																							name: type:  "string"
@@ -3926,11 +3577,9 @@ kube: argocd: CustomResourceDefinition: "applications.argoproj.io": {
 																					type: "array"
 																				}
 																				tlas: {
-																					description:
-																						"TLAS is a list of Jsonnet Top-level Arguments"
+																					description: "TLAS is a list of Jsonnet Top-level Arguments"
 																					items: {
-																						description:
-																							"JsonnetVar represents a variable to be passed to jsonnet during manifest generation"
+																						description: "JsonnetVar represents a variable to be passed to jsonnet during manifest generation"
 																						properties: {
 																							code: type:  "boolean"
 																							name: type:  "string"
@@ -3948,9 +3597,8 @@ kube: argocd: CustomResourceDefinition: "applications.argoproj.io": {
 																			type: "object"
 																		}
 																		recurse: {
-																			description:
-																				"Recurse specifies whether to scan a directory recursively for manifests"
-																			type: "boolean"
+																			description: "Recurse specifies whether to scan a directory recursively for manifests"
+																			type:        "boolean"
 																		}
 																	}
 																	type: "object"
@@ -3967,21 +3615,17 @@ kube: argocd: CustomResourceDefinition: "applications.argoproj.io": {
 																			type: "array"
 																		}
 																		fileParameters: {
-																			description:
-																				"FileParameters are file parameters to the helm template"
+																			description: "FileParameters are file parameters to the helm template"
 																			items: {
-																				description:
-																					"HelmFileParameter is a file parameter that's passed to helm template during manifest generation"
+																				description: "HelmFileParameter is a file parameter that's passed to helm template during manifest generation"
 																				properties: {
 																					name: {
-																						description:
-																							"Name is the name of the Helm parameter"
-																						type: "string"
+																						description: "Name is the name of the Helm parameter"
+																						type:        "string"
 																					}
 																					path: {
-																						description:
-																							"Path is the path to the file containing the values for the Helm parameter"
-																						type: "string"
+																						description: "Path is the path to the file containing the values for the Helm parameter"
+																						type:        "string"
 																					}
 																				}
 																				type: "object"
@@ -3989,9 +3633,8 @@ kube: argocd: CustomResourceDefinition: "applications.argoproj.io": {
 																			type: "array"
 																		}
 																		ignoreMissingValueFiles: {
-																			description:
-																				"IgnoreMissingValueFiles prevents helm template from failing when valueFiles do not exist locally by not appending them to helm template --values"
-																			type: "boolean"
+																			description: "IgnoreMissingValueFiles prevents helm template from failing when valueFiles do not exist locally by not appending them to helm template --values"
+																			type:        "boolean"
 																		}
 																		kubeVersion: {
 																			description: """
@@ -4001,31 +3644,25 @@ kube: argocd: CustomResourceDefinition: "applications.argoproj.io": {
 																			type: "string"
 																		}
 																		namespace: {
-																			description:
-																				"Namespace is an optional namespace to template with. If left empty, defaults to the app's destination namespace."
-																			type: "string"
+																			description: "Namespace is an optional namespace to template with. If left empty, defaults to the app's destination namespace."
+																			type:        "string"
 																		}
 																		parameters: {
-																			description:
-																				"Parameters is a list of Helm parameters which are passed to the helm template command upon manifest generation"
+																			description: "Parameters is a list of Helm parameters which are passed to the helm template command upon manifest generation"
 																			items: {
-																				description:
-																					"HelmParameter is a parameter that's passed to helm template during manifest generation"
+																				description: "HelmParameter is a parameter that's passed to helm template during manifest generation"
 																				properties: {
 																					forceString: {
-																						description:
-																							"ForceString determines whether to tell Helm to interpret booleans and numbers as strings"
-																						type: "boolean"
+																						description: "ForceString determines whether to tell Helm to interpret booleans and numbers as strings"
+																						type:        "boolean"
 																					}
 																					name: {
-																						description:
-																							"Name is the name of the Helm parameter"
-																						type: "string"
+																						description: "Name is the name of the Helm parameter"
+																						type:        "string"
 																					}
 																					value: {
-																						description:
-																							"Value is the value for the Helm parameter"
-																						type: "string"
+																						description: "Value is the value for the Helm parameter"
+																						type:        "string"
 																					}
 																				}
 																				type: "object"
@@ -4033,58 +3670,48 @@ kube: argocd: CustomResourceDefinition: "applications.argoproj.io": {
 																			type: "array"
 																		}
 																		passCredentials: {
-																			description:
-																				"PassCredentials pass credentials to all domains (Helm's --pass-credentials)"
-																			type: "boolean"
+																			description: "PassCredentials pass credentials to all domains (Helm's --pass-credentials)"
+																			type:        "boolean"
 																		}
 																		releaseName: {
-																			description:
-																				"ReleaseName is the Helm release name to use. If omitted it will use the application name"
-																			type: "string"
+																			description: "ReleaseName is the Helm release name to use. If omitted it will use the application name"
+																			type:        "string"
 																		}
 																		skipCrds: {
-																			description:
-																				"SkipCrds skips custom resource definition installation step (Helm's --skip-crds)"
-																			type: "boolean"
+																			description: "SkipCrds skips custom resource definition installation step (Helm's --skip-crds)"
+																			type:        "boolean"
 																		}
 																		skipSchemaValidation: {
-																			description:
-																				"SkipSchemaValidation skips JSON schema validation (Helm's --skip-schema-validation)"
-																			type: "boolean"
+																			description: "SkipSchemaValidation skips JSON schema validation (Helm's --skip-schema-validation)"
+																			type:        "boolean"
 																		}
 																		skipTests: {
-																			description:
-																				"SkipTests skips test manifest installation step (Helm's --skip-tests)."
-																			type: "boolean"
+																			description: "SkipTests skips test manifest installation step (Helm's --skip-tests)."
+																			type:        "boolean"
 																		}
 																		valueFiles: {
-																			description:
-																				"ValuesFiles is a list of Helm value files to use when generating a template"
+																			description: "ValuesFiles is a list of Helm value files to use when generating a template"
 																			items: type: "string"
 																			type: "array"
 																		}
 																		values: {
-																			description:
-																				"Values specifies Helm values to be passed to helm template, typically defined as a block. ValuesObject takes precedence over Values, so use one or the other."
-																			type: "string"
+																			description: "Values specifies Helm values to be passed to helm template, typically defined as a block. ValuesObject takes precedence over Values, so use one or the other."
+																			type:        "string"
 																		}
 																		valuesObject: {
-																			description:
-																								"ValuesObject specifies Helm values to be passed to helm template, defined as a map. This takes precedence over Values."
+																			description:                            "ValuesObject specifies Helm values to be passed to helm template, defined as a map. This takes precedence over Values."
 																			type:                                   "object"
 																			"x-kubernetes-preserve-unknown-fields": true
 																		}
 																		version: {
-																			description:
-																				"Version is the Helm version to use for templating (\"3\")"
-																			type: "string"
+																			description: "Version is the Helm version to use for templating (\"3\")"
+																			type:        "string"
 																		}
 																	}
 																	type: "object"
 																}
 																kustomize: {
-																	description:
-																		"Kustomize holds kustomize specific options"
+																	description: "Kustomize holds kustomize specific options"
 																	properties: {
 																		apiVersions: {
 																			description: """
@@ -4096,44 +3723,40 @@ kube: argocd: CustomResourceDefinition: "applications.argoproj.io": {
 																		}
 																		commonAnnotations: {
 																			additionalProperties: type: "string"
-																			description:
-																				"CommonAnnotations is a list of additional annotations to add to rendered manifests"
-																			type: "object"
+																			description: "CommonAnnotations is a list of additional annotations to add to rendered manifests"
+																			type:        "object"
 																		}
 																		commonAnnotationsEnvsubst: {
-																			description:
-																				"CommonAnnotationsEnvsubst specifies whether to apply env variables substitution for annotation values"
-																			type: "boolean"
+																			description: "CommonAnnotationsEnvsubst specifies whether to apply env variables substitution for annotation values"
+																			type:        "boolean"
 																		}
 																		commonLabels: {
 																			additionalProperties: type: "string"
-																			description:
-																				"CommonLabels is a list of additional labels to add to rendered manifests"
-																			type: "object"
+																			description: "CommonLabels is a list of additional labels to add to rendered manifests"
+																			type:        "object"
 																		}
 																		components: {
-																			description:
-																				"Components specifies a list of kustomize components to add to the kustomization before building"
+																			description: "Components specifies a list of kustomize components to add to the kustomization before building"
 																			items: type: "string"
 																			type: "array"
 																		}
 																		forceCommonAnnotations: {
-																			description:
-																				"ForceCommonAnnotations specifies whether to force applying common annotations to resources for Kustomize apps"
-																			type: "boolean"
+																			description: "ForceCommonAnnotations specifies whether to force applying common annotations to resources for Kustomize apps"
+																			type:        "boolean"
 																		}
 																		forceCommonLabels: {
-																			description:
-																				"ForceCommonLabels specifies whether to force applying common labels to resources for Kustomize apps"
-																			type: "boolean"
+																			description: "ForceCommonLabels specifies whether to force applying common labels to resources for Kustomize apps"
+																			type:        "boolean"
+																		}
+																		ignoreMissingComponents: {
+																			description: "IgnoreMissingComponents prevents kustomize from failing when components do not exist locally by not appending them to kustomization file"
+																			type:        "boolean"
 																		}
 																		images: {
-																			description:
-																				"Images is a list of Kustomize image override specifications"
+																			description: "Images is a list of Kustomize image override specifications"
 																			items: {
-																				description:
-																					"KustomizeImage represents a Kustomize image definition in the format [old_image_name=]<image_name>:<image_tag>"
-																				type: "string"
+																				description: "KustomizeImage represents a Kustomize image definition in the format [old_image_name=]<image_name>:<image_tag>"
+																				type:        "string"
 																			}
 																			type: "array"
 																		}
@@ -4144,29 +3767,28 @@ kube: argocd: CustomResourceDefinition: "applications.argoproj.io": {
 	"""
 																			type: "string"
 																		}
+																		labelIncludeTemplates: {
+																			description: "LabelIncludeTemplates specifies whether to apply common labels to resource templates or not"
+																			type:        "boolean"
+																		}
 																		labelWithoutSelector: {
-																			description:
-																				"LabelWithoutSelector specifies whether to apply common labels to resource selectors or not"
-																			type: "boolean"
+																			description: "LabelWithoutSelector specifies whether to apply common labels to resource selectors or not"
+																			type:        "boolean"
 																		}
 																		namePrefix: {
-																			description:
-																				"NamePrefix is a prefix appended to resources for Kustomize apps"
-																			type: "string"
+																			description: "NamePrefix is a prefix appended to resources for Kustomize apps"
+																			type:        "string"
 																		}
 																		nameSuffix: {
-																			description:
-																				"NameSuffix is a suffix appended to resources for Kustomize apps"
-																			type: "string"
+																			description: "NameSuffix is a suffix appended to resources for Kustomize apps"
+																			type:        "string"
 																		}
 																		namespace: {
-																			description:
-																				"Namespace sets the namespace that Kustomize adds to all resources"
-																			type: "string"
+																			description: "Namespace sets the namespace that Kustomize adds to all resources"
+																			type:        "string"
 																		}
 																		patches: {
-																			description:
-																				"Patches is a list of Kustomize patches"
+																			description: "Patches is a list of Kustomize patches"
 																			items: {
 																				properties: {
 																					options: {
@@ -4193,8 +3815,7 @@ kube: argocd: CustomResourceDefinition: "applications.argoproj.io": {
 																			type: "array"
 																		}
 																		replicas: {
-																			description:
-																				"Replicas is a list of Kustomize Replicas override specifications"
+																			description: "Replicas is a list of Kustomize Replicas override specifications"
 																			items: {
 																				properties: {
 																					count: {
@@ -4220,43 +3841,35 @@ kube: argocd: CustomResourceDefinition: "applications.argoproj.io": {
 																			type: "array"
 																		}
 																		version: {
-																			description:
-																				"Version controls which version of Kustomize to use for rendering manifests"
-																			type: "string"
+																			description: "Version controls which version of Kustomize to use for rendering manifests"
+																			type:        "string"
 																		}
 																	}
 																	type: "object"
 																}
 																name: {
-																	description:
-																		"Name is used to refer to a source and is displayed in the UI. It is used in multi-source Applications."
-																	type: "string"
+																	description: "Name is used to refer to a source and is displayed in the UI. It is used in multi-source Applications."
+																	type:        "string"
 																}
 																path: {
-																	description:
-																		"Path is a directory path within the Git repository, and is only valid for applications sourced from Git."
-																	type: "string"
+																	description: "Path is a directory path within the Git repository, and is only valid for applications sourced from Git."
+																	type:        "string"
 																}
 																plugin: {
-																	description:
-																		"Plugin holds config management plugin specific options"
+																	description: "Plugin holds config management plugin specific options"
 																	properties: {
 																		env: {
-																			description:
-																				"Env is a list of environment variable entries"
+																			description: "Env is a list of environment variable entries"
 																			items: {
-																				description:
-																					"EnvEntry represents an entry in the application's environment"
+																				description: "EnvEntry represents an entry in the application's environment"
 																				properties: {
 																					name: {
-																						description:
-																							"Name is the name of the variable, usually expressed in uppercase"
-																						type: "string"
+																						description: "Name is the name of the variable, usually expressed in uppercase"
+																						type:        "string"
 																					}
 																					value: {
-																						description:
-																							"Value is the value of the variable"
-																						type: "string"
+																						description: "Value is the value of the variable"
+																						type:        "string"
 																					}
 																				}
 																				required: [
@@ -4272,26 +3885,22 @@ kube: argocd: CustomResourceDefinition: "applications.argoproj.io": {
 																			items: {
 																				properties: {
 																					array: {
-																						description:
-																							"Array is the value of an array type parameter."
+																						description: "Array is the value of an array type parameter."
 																						items: type: "string"
 																						type: "array"
 																					}
 																					map: {
 																						additionalProperties: type: "string"
-																						description:
-																							"Map is the value of a map type parameter."
-																						type: "object"
+																						description: "Map is the value of a map type parameter."
+																						type:        "object"
 																					}
 																					name: {
-																						description:
-																							"Name is the name identifying a parameter."
-																						type: "string"
+																						description: "Name is the name identifying a parameter."
+																						type:        "string"
 																					}
 																					string: {
-																						description:
-																							"String_ is the value of a string type parameter."
-																						type: "string"
+																						description: "String_ is the value of a string type parameter."
+																						type:        "string"
 																					}
 																				}
 																				type: "object"
@@ -4302,14 +3911,12 @@ kube: argocd: CustomResourceDefinition: "applications.argoproj.io": {
 																	type: "object"
 																}
 																ref: {
-																	description:
-																		"Ref is reference to another source within sources field. This field will not be used if used with a `source` tag."
-																	type: "string"
+																	description: "Ref is reference to another source within sources field. This field will not be used if used with a `source` tag."
+																	type:        "string"
 																}
 																repoURL: {
-																	description:
-																		"RepoURL is the URL to the repository (Git or Helm) that contains the application manifests"
-																	type: "string"
+																	description: "RepoURL is the URL to the repository (Git or Helm) that contains the application manifests"
+																	type:        "string"
 																}
 																targetRevision: {
 																	description: """
@@ -4326,18 +3933,15 @@ kube: argocd: CustomResourceDefinition: "applications.argoproj.io": {
 														type: "array"
 													}
 													syncOptions: {
-														description:
-															"SyncOptions provide per-sync sync-options, e.g. Validate=false"
+														description: "SyncOptions provide per-sync sync-options, e.g. Validate=false"
 														items: type: "string"
 														type: "array"
 													}
 													syncStrategy: {
-														description:
-															"SyncStrategy describes how to perform the sync"
+														description: "SyncStrategy describes how to perform the sync"
 														properties: {
 															apply: {
-																description:
-																	"Apply will perform a `kubectl apply` to perform the sync."
+																description: "Apply will perform a `kubectl apply` to perform the sync."
 																properties: force: {
 																	description: """
 	Force indicates whether or not to supply the --force flag to `kubectl apply`.
@@ -4349,8 +3953,7 @@ kube: argocd: CustomResourceDefinition: "applications.argoproj.io": {
 																type: "object"
 															}
 															hook: {
-																description:
-																	"Hook will submit any referenced resources to perform the sync. This is the default strategy"
+																description: "Hook will submit any referenced resources to perform the sync. This is the default strategy"
 																properties: force: {
 																	description: """
 	Force indicates whether or not to supply the --force flag to `kubectl apply`.
@@ -4388,8 +3991,7 @@ kube: argocd: CustomResourceDefinition: "applications.argoproj.io": {
 										description: "SyncResult is the result of a Sync operation"
 										properties: {
 											managedNamespaceMetadata: {
-												description:
-													"ManagedNamespaceMetadata contains the current sync state of managed namespace metadata"
+												description: "ManagedNamespaceMetadata contains the current sync state of managed namespace metadata"
 												properties: {
 													annotations: {
 														additionalProperties: type: "string"
@@ -4403,11 +4005,9 @@ kube: argocd: CustomResourceDefinition: "applications.argoproj.io": {
 												type: "object"
 											}
 											resources: {
-												description:
-													"Resources contains a list of sync result items for each individual resource in a sync operation"
+												description: "Resources contains a list of sync result items for each individual resource in a sync operation"
 												items: {
-													description:
-														"ResourceResult holds the operation result details of a specific resource"
+													description: "ResourceResult holds the operation result details of a specific resource"
 													properties: {
 														group: {
 															description: "Group specifies the API group of the resource"
@@ -4421,42 +4021,41 @@ kube: argocd: CustomResourceDefinition: "applications.argoproj.io": {
 															type: "string"
 														}
 														hookType: {
-															description:
-																"HookType specifies the type of the hook. Empty for non-hook resources"
-															type: "string"
+															description: "HookType specifies the type of the hook. Empty for non-hook resources"
+															type:        "string"
+														}
+														images: {
+															description: "Images contains the images related to the ResourceResult"
+															items: type: "string"
+															type: "array"
 														}
 														kind: {
 															description: "Kind specifies the API kind of the resource"
 															type:        "string"
 														}
 														message: {
-															description:
-																"Message contains an informational or error message for the last sync OR operation"
-															type: "string"
+															description: "Message contains an informational or error message for the last sync OR operation"
+															type:        "string"
 														}
 														name: {
 															description: "Name specifies the name of the resource"
 															type:        "string"
 														}
 														namespace: {
-															description:
-																"Namespace specifies the target namespace of the resource"
-															type: "string"
+															description: "Namespace specifies the target namespace of the resource"
+															type:        "string"
 														}
 														status: {
-															description:
-																"Status holds the final result of the sync. Will be empty if the resources is yet to be applied/pruned and is always zero-value for hooks"
-															type: "string"
+															description: "Status holds the final result of the sync. Will be empty if the resources is yet to be applied/pruned and is always zero-value for hooks"
+															type:        "string"
 														}
 														syncPhase: {
-															description:
-																"SyncPhase indicates the particular phase of the sync that this result was acquired in"
-															type: "string"
+															description: "SyncPhase indicates the particular phase of the sync that this result was acquired in"
+															type:        "string"
 														}
 														version: {
-															description:
-																"Version specifies the API version of the resource"
-															type: "string"
+															description: "Version specifies the API version of the resource"
+															type:        "string"
 														}
 													}
 													required: [
@@ -4471,47 +4070,39 @@ kube: argocd: CustomResourceDefinition: "applications.argoproj.io": {
 												type: "array"
 											}
 											revision: {
-												description:
-													"Revision holds the revision this sync operation was performed to"
-												type: "string"
+												description: "Revision holds the revision this sync operation was performed to"
+												type:        "string"
 											}
 											revisions: {
-												description:
-													"Revisions holds the revision this sync operation was performed for respective indexed source in sources field"
+												description: "Revisions holds the revision this sync operation was performed for respective indexed source in sources field"
 												items: type: "string"
 												type: "array"
 											}
 											source: {
-												description:
-													"Source records the application source information of the sync, used for comparing auto-sync"
+												description: "Source records the application source information of the sync, used for comparing auto-sync"
 												properties: {
 													chart: {
-														description:
-															"Chart is a Helm chart name, and must be specified for applications sourced from a Helm repo."
-														type: "string"
+														description: "Chart is a Helm chart name, and must be specified for applications sourced from a Helm repo."
+														type:        "string"
 													}
 													directory: {
 														description: "Directory holds path/directory specific options"
 														properties: {
 															exclude: {
-																description:
-																	"Exclude contains a glob pattern to match paths against that should be explicitly excluded from being used during manifest generation"
-																type: "string"
+																description: "Exclude contains a glob pattern to match paths against that should be explicitly excluded from being used during manifest generation"
+																type:        "string"
 															}
 															include: {
-																description:
-																	"Include contains a glob pattern to match paths against that should be explicitly included during manifest generation"
-																type: "string"
+																description: "Include contains a glob pattern to match paths against that should be explicitly included during manifest generation"
+																type:        "string"
 															}
 															jsonnet: {
 																description: "Jsonnet holds options specific to Jsonnet"
 																properties: {
 																	extVars: {
-																		description:
-																			"ExtVars is a list of Jsonnet External Variables"
+																		description: "ExtVars is a list of Jsonnet External Variables"
 																		items: {
-																			description:
-																				"JsonnetVar represents a variable to be passed to jsonnet during manifest generation"
+																			description: "JsonnetVar represents a variable to be passed to jsonnet during manifest generation"
 																			properties: {
 																				code: type:  "boolean"
 																				name: type:  "string"
@@ -4531,11 +4122,9 @@ kube: argocd: CustomResourceDefinition: "applications.argoproj.io": {
 																		type: "array"
 																	}
 																	tlas: {
-																		description:
-																			"TLAS is a list of Jsonnet Top-level Arguments"
+																		description: "TLAS is a list of Jsonnet Top-level Arguments"
 																		items: {
-																			description:
-																				"JsonnetVar represents a variable to be passed to jsonnet during manifest generation"
+																			description: "JsonnetVar represents a variable to be passed to jsonnet during manifest generation"
 																			properties: {
 																				code: type:  "boolean"
 																				name: type:  "string"
@@ -4553,9 +4142,8 @@ kube: argocd: CustomResourceDefinition: "applications.argoproj.io": {
 																type: "object"
 															}
 															recurse: {
-																description:
-																	"Recurse specifies whether to scan a directory recursively for manifests"
-																type: "boolean"
+																description: "Recurse specifies whether to scan a directory recursively for manifests"
+																type:        "boolean"
 															}
 														}
 														type: "object"
@@ -4572,20 +4160,17 @@ kube: argocd: CustomResourceDefinition: "applications.argoproj.io": {
 																type: "array"
 															}
 															fileParameters: {
-																description:
-																	"FileParameters are file parameters to the helm template"
+																description: "FileParameters are file parameters to the helm template"
 																items: {
-																	description:
-																		"HelmFileParameter is a file parameter that's passed to helm template during manifest generation"
+																	description: "HelmFileParameter is a file parameter that's passed to helm template during manifest generation"
 																	properties: {
 																		name: {
 																			description: "Name is the name of the Helm parameter"
 																			type:        "string"
 																		}
 																		path: {
-																			description:
-																				"Path is the path to the file containing the values for the Helm parameter"
-																			type: "string"
+																			description: "Path is the path to the file containing the values for the Helm parameter"
+																			type:        "string"
 																		}
 																	}
 																	type: "object"
@@ -4593,9 +4178,8 @@ kube: argocd: CustomResourceDefinition: "applications.argoproj.io": {
 																type: "array"
 															}
 															ignoreMissingValueFiles: {
-																description:
-																	"IgnoreMissingValueFiles prevents helm template from failing when valueFiles do not exist locally by not appending them to helm template --values"
-																type: "boolean"
+																description: "IgnoreMissingValueFiles prevents helm template from failing when valueFiles do not exist locally by not appending them to helm template --values"
+																type:        "boolean"
 															}
 															kubeVersion: {
 																description: """
@@ -4605,30 +4189,25 @@ kube: argocd: CustomResourceDefinition: "applications.argoproj.io": {
 																type: "string"
 															}
 															namespace: {
-																description:
-																	"Namespace is an optional namespace to template with. If left empty, defaults to the app's destination namespace."
-																type: "string"
+																description: "Namespace is an optional namespace to template with. If left empty, defaults to the app's destination namespace."
+																type:        "string"
 															}
 															parameters: {
-																description:
-																	"Parameters is a list of Helm parameters which are passed to the helm template command upon manifest generation"
+																description: "Parameters is a list of Helm parameters which are passed to the helm template command upon manifest generation"
 																items: {
-																	description:
-																		"HelmParameter is a parameter that's passed to helm template during manifest generation"
+																	description: "HelmParameter is a parameter that's passed to helm template during manifest generation"
 																	properties: {
 																		forceString: {
-																			description:
-																				"ForceString determines whether to tell Helm to interpret booleans and numbers as strings"
-																			type: "boolean"
+																			description: "ForceString determines whether to tell Helm to interpret booleans and numbers as strings"
+																			type:        "boolean"
 																		}
 																		name: {
 																			description: "Name is the name of the Helm parameter"
 																			type:        "string"
 																		}
 																		value: {
-																			description:
-																				"Value is the value for the Helm parameter"
-																			type: "string"
+																			description: "Value is the value for the Helm parameter"
+																			type:        "string"
 																		}
 																	}
 																	type: "object"
@@ -4636,51 +4215,42 @@ kube: argocd: CustomResourceDefinition: "applications.argoproj.io": {
 																type: "array"
 															}
 															passCredentials: {
-																description:
-																	"PassCredentials pass credentials to all domains (Helm's --pass-credentials)"
-																type: "boolean"
+																description: "PassCredentials pass credentials to all domains (Helm's --pass-credentials)"
+																type:        "boolean"
 															}
 															releaseName: {
-																description:
-																	"ReleaseName is the Helm release name to use. If omitted it will use the application name"
-																type: "string"
+																description: "ReleaseName is the Helm release name to use. If omitted it will use the application name"
+																type:        "string"
 															}
 															skipCrds: {
-																description:
-																	"SkipCrds skips custom resource definition installation step (Helm's --skip-crds)"
-																type: "boolean"
+																description: "SkipCrds skips custom resource definition installation step (Helm's --skip-crds)"
+																type:        "boolean"
 															}
 															skipSchemaValidation: {
-																description:
-																	"SkipSchemaValidation skips JSON schema validation (Helm's --skip-schema-validation)"
-																type: "boolean"
+																description: "SkipSchemaValidation skips JSON schema validation (Helm's --skip-schema-validation)"
+																type:        "boolean"
 															}
 															skipTests: {
-																description:
-																	"SkipTests skips test manifest installation step (Helm's --skip-tests)."
-																type: "boolean"
+																description: "SkipTests skips test manifest installation step (Helm's --skip-tests)."
+																type:        "boolean"
 															}
 															valueFiles: {
-																description:
-																	"ValuesFiles is a list of Helm value files to use when generating a template"
+																description: "ValuesFiles is a list of Helm value files to use when generating a template"
 																items: type: "string"
 																type: "array"
 															}
 															values: {
-																description:
-																	"Values specifies Helm values to be passed to helm template, typically defined as a block. ValuesObject takes precedence over Values, so use one or the other."
-																type: "string"
+																description: "Values specifies Helm values to be passed to helm template, typically defined as a block. ValuesObject takes precedence over Values, so use one or the other."
+																type:        "string"
 															}
 															valuesObject: {
-																description:
-																					"ValuesObject specifies Helm values to be passed to helm template, defined as a map. This takes precedence over Values."
+																description:                            "ValuesObject specifies Helm values to be passed to helm template, defined as a map. This takes precedence over Values."
 																type:                                   "object"
 																"x-kubernetes-preserve-unknown-fields": true
 															}
 															version: {
-																description:
-																	"Version is the Helm version to use for templating (\"3\")"
-																type: "string"
+																description: "Version is the Helm version to use for templating (\"3\")"
+																type:        "string"
 															}
 														}
 														type: "object"
@@ -4698,44 +4268,40 @@ kube: argocd: CustomResourceDefinition: "applications.argoproj.io": {
 															}
 															commonAnnotations: {
 																additionalProperties: type: "string"
-																description:
-																	"CommonAnnotations is a list of additional annotations to add to rendered manifests"
-																type: "object"
+																description: "CommonAnnotations is a list of additional annotations to add to rendered manifests"
+																type:        "object"
 															}
 															commonAnnotationsEnvsubst: {
-																description:
-																	"CommonAnnotationsEnvsubst specifies whether to apply env variables substitution for annotation values"
-																type: "boolean"
+																description: "CommonAnnotationsEnvsubst specifies whether to apply env variables substitution for annotation values"
+																type:        "boolean"
 															}
 															commonLabels: {
 																additionalProperties: type: "string"
-																description:
-																	"CommonLabels is a list of additional labels to add to rendered manifests"
-																type: "object"
+																description: "CommonLabels is a list of additional labels to add to rendered manifests"
+																type:        "object"
 															}
 															components: {
-																description:
-																	"Components specifies a list of kustomize components to add to the kustomization before building"
+																description: "Components specifies a list of kustomize components to add to the kustomization before building"
 																items: type: "string"
 																type: "array"
 															}
 															forceCommonAnnotations: {
-																description:
-																	"ForceCommonAnnotations specifies whether to force applying common annotations to resources for Kustomize apps"
-																type: "boolean"
+																description: "ForceCommonAnnotations specifies whether to force applying common annotations to resources for Kustomize apps"
+																type:        "boolean"
 															}
 															forceCommonLabels: {
-																description:
-																	"ForceCommonLabels specifies whether to force applying common labels to resources for Kustomize apps"
-																type: "boolean"
+																description: "ForceCommonLabels specifies whether to force applying common labels to resources for Kustomize apps"
+																type:        "boolean"
+															}
+															ignoreMissingComponents: {
+																description: "IgnoreMissingComponents prevents kustomize from failing when components do not exist locally by not appending them to kustomization file"
+																type:        "boolean"
 															}
 															images: {
-																description:
-																	"Images is a list of Kustomize image override specifications"
+																description: "Images is a list of Kustomize image override specifications"
 																items: {
-																	description:
-																		"KustomizeImage represents a Kustomize image definition in the format [old_image_name=]<image_name>:<image_tag>"
-																	type: "string"
+																	description: "KustomizeImage represents a Kustomize image definition in the format [old_image_name=]<image_name>:<image_tag>"
+																	type:        "string"
 																}
 																type: "array"
 															}
@@ -4746,25 +4312,25 @@ kube: argocd: CustomResourceDefinition: "applications.argoproj.io": {
 	"""
 																type: "string"
 															}
+															labelIncludeTemplates: {
+																description: "LabelIncludeTemplates specifies whether to apply common labels to resource templates or not"
+																type:        "boolean"
+															}
 															labelWithoutSelector: {
-																description:
-																	"LabelWithoutSelector specifies whether to apply common labels to resource selectors or not"
-																type: "boolean"
+																description: "LabelWithoutSelector specifies whether to apply common labels to resource selectors or not"
+																type:        "boolean"
 															}
 															namePrefix: {
-																description:
-																	"NamePrefix is a prefix appended to resources for Kustomize apps"
-																type: "string"
+																description: "NamePrefix is a prefix appended to resources for Kustomize apps"
+																type:        "string"
 															}
 															nameSuffix: {
-																description:
-																	"NameSuffix is a suffix appended to resources for Kustomize apps"
-																type: "string"
+																description: "NameSuffix is a suffix appended to resources for Kustomize apps"
+																type:        "string"
 															}
 															namespace: {
-																description:
-																	"Namespace sets the namespace that Kustomize adds to all resources"
-																type: "string"
+																description: "Namespace sets the namespace that Kustomize adds to all resources"
+																type:        "string"
 															}
 															patches: {
 																description: "Patches is a list of Kustomize patches"
@@ -4794,8 +4360,7 @@ kube: argocd: CustomResourceDefinition: "applications.argoproj.io": {
 																type: "array"
 															}
 															replicas: {
-																description:
-																	"Replicas is a list of Kustomize Replicas override specifications"
+																description: "Replicas is a list of Kustomize Replicas override specifications"
 																items: {
 																	properties: {
 																		count: {
@@ -4821,38 +4386,31 @@ kube: argocd: CustomResourceDefinition: "applications.argoproj.io": {
 																type: "array"
 															}
 															version: {
-																description:
-																	"Version controls which version of Kustomize to use for rendering manifests"
-																type: "string"
+																description: "Version controls which version of Kustomize to use for rendering manifests"
+																type:        "string"
 															}
 														}
 														type: "object"
 													}
 													name: {
-														description:
-															"Name is used to refer to a source and is displayed in the UI. It is used in multi-source Applications."
-														type: "string"
+														description: "Name is used to refer to a source and is displayed in the UI. It is used in multi-source Applications."
+														type:        "string"
 													}
 													path: {
-														description:
-															"Path is a directory path within the Git repository, and is only valid for applications sourced from Git."
-														type: "string"
+														description: "Path is a directory path within the Git repository, and is only valid for applications sourced from Git."
+														type:        "string"
 													}
 													plugin: {
-														description:
-															"Plugin holds config management plugin specific options"
+														description: "Plugin holds config management plugin specific options"
 														properties: {
 															env: {
-																description:
-																	"Env is a list of environment variable entries"
+																description: "Env is a list of environment variable entries"
 																items: {
-																	description:
-																		"EnvEntry represents an entry in the application's environment"
+																	description: "EnvEntry represents an entry in the application's environment"
 																	properties: {
 																		name: {
-																			description:
-																				"Name is the name of the variable, usually expressed in uppercase"
-																			type: "string"
+																			description: "Name is the name of the variable, usually expressed in uppercase"
+																			type:        "string"
 																		}
 																		value: {
 																			description: "Value is the value of the variable"
@@ -4872,26 +4430,22 @@ kube: argocd: CustomResourceDefinition: "applications.argoproj.io": {
 																items: {
 																	properties: {
 																		array: {
-																			description:
-																				"Array is the value of an array type parameter."
+																			description: "Array is the value of an array type parameter."
 																			items: type: "string"
 																			type: "array"
 																		}
 																		map: {
 																			additionalProperties: type: "string"
-																			description:
-																				"Map is the value of a map type parameter."
-																			type: "object"
+																			description: "Map is the value of a map type parameter."
+																			type:        "object"
 																		}
 																		name: {
-																			description:
-																				"Name is the name identifying a parameter."
-																			type: "string"
+																			description: "Name is the name identifying a parameter."
+																			type:        "string"
 																		}
 																		string: {
-																			description:
-																				"String_ is the value of a string type parameter."
-																			type: "string"
+																			description: "String_ is the value of a string type parameter."
+																			type:        "string"
 																		}
 																	}
 																	type: "object"
@@ -4902,14 +4456,12 @@ kube: argocd: CustomResourceDefinition: "applications.argoproj.io": {
 														type: "object"
 													}
 													ref: {
-														description:
-															"Ref is reference to another source within sources field. This field will not be used if used with a `source` tag."
-														type: "string"
+														description: "Ref is reference to another source within sources field. This field will not be used if used with a `source` tag."
+														type:        "string"
 													}
 													repoURL: {
-														description:
-															"RepoURL is the URL to the repository (Git or Helm) that contains the application manifests"
-														type: "string"
+														description: "RepoURL is the URL to the repository (Git or Helm) that contains the application manifests"
+														type:        "string"
 													}
 													targetRevision: {
 														description: """
@@ -4924,40 +4476,32 @@ kube: argocd: CustomResourceDefinition: "applications.argoproj.io": {
 												type: "object"
 											}
 											sources: {
-												description:
-													"Source records the application source information of the sync, used for comparing auto-sync"
+												description: "Source records the application source information of the sync, used for comparing auto-sync"
 												items: {
-													description:
-														"ApplicationSource contains all required information about the source of an application"
+													description: "ApplicationSource contains all required information about the source of an application"
 													properties: {
 														chart: {
-															description:
-																"Chart is a Helm chart name, and must be specified for applications sourced from a Helm repo."
-															type: "string"
+															description: "Chart is a Helm chart name, and must be specified for applications sourced from a Helm repo."
+															type:        "string"
 														}
 														directory: {
-															description:
-																"Directory holds path/directory specific options"
+															description: "Directory holds path/directory specific options"
 															properties: {
 																exclude: {
-																	description:
-																		"Exclude contains a glob pattern to match paths against that should be explicitly excluded from being used during manifest generation"
-																	type: "string"
+																	description: "Exclude contains a glob pattern to match paths against that should be explicitly excluded from being used during manifest generation"
+																	type:        "string"
 																}
 																include: {
-																	description:
-																		"Include contains a glob pattern to match paths against that should be explicitly included during manifest generation"
-																	type: "string"
+																	description: "Include contains a glob pattern to match paths against that should be explicitly included during manifest generation"
+																	type:        "string"
 																}
 																jsonnet: {
 																	description: "Jsonnet holds options specific to Jsonnet"
 																	properties: {
 																		extVars: {
-																			description:
-																				"ExtVars is a list of Jsonnet External Variables"
+																			description: "ExtVars is a list of Jsonnet External Variables"
 																			items: {
-																				description:
-																					"JsonnetVar represents a variable to be passed to jsonnet during manifest generation"
+																				description: "JsonnetVar represents a variable to be passed to jsonnet during manifest generation"
 																				properties: {
 																					code: type:  "boolean"
 																					name: type:  "string"
@@ -4977,11 +4521,9 @@ kube: argocd: CustomResourceDefinition: "applications.argoproj.io": {
 																			type: "array"
 																		}
 																		tlas: {
-																			description:
-																				"TLAS is a list of Jsonnet Top-level Arguments"
+																			description: "TLAS is a list of Jsonnet Top-level Arguments"
 																			items: {
-																				description:
-																					"JsonnetVar represents a variable to be passed to jsonnet during manifest generation"
+																				description: "JsonnetVar represents a variable to be passed to jsonnet during manifest generation"
 																				properties: {
 																					code: type:  "boolean"
 																					name: type:  "string"
@@ -4999,9 +4541,8 @@ kube: argocd: CustomResourceDefinition: "applications.argoproj.io": {
 																	type: "object"
 																}
 																recurse: {
-																	description:
-																		"Recurse specifies whether to scan a directory recursively for manifests"
-																	type: "boolean"
+																	description: "Recurse specifies whether to scan a directory recursively for manifests"
+																	type:        "boolean"
 																}
 															}
 															type: "object"
@@ -5018,21 +4559,17 @@ kube: argocd: CustomResourceDefinition: "applications.argoproj.io": {
 																	type: "array"
 																}
 																fileParameters: {
-																	description:
-																		"FileParameters are file parameters to the helm template"
+																	description: "FileParameters are file parameters to the helm template"
 																	items: {
-																		description:
-																			"HelmFileParameter is a file parameter that's passed to helm template during manifest generation"
+																		description: "HelmFileParameter is a file parameter that's passed to helm template during manifest generation"
 																		properties: {
 																			name: {
-																				description:
-																					"Name is the name of the Helm parameter"
-																				type: "string"
+																				description: "Name is the name of the Helm parameter"
+																				type:        "string"
 																			}
 																			path: {
-																				description:
-																					"Path is the path to the file containing the values for the Helm parameter"
-																				type: "string"
+																				description: "Path is the path to the file containing the values for the Helm parameter"
+																				type:        "string"
 																			}
 																		}
 																		type: "object"
@@ -5040,9 +4577,8 @@ kube: argocd: CustomResourceDefinition: "applications.argoproj.io": {
 																	type: "array"
 																}
 																ignoreMissingValueFiles: {
-																	description:
-																		"IgnoreMissingValueFiles prevents helm template from failing when valueFiles do not exist locally by not appending them to helm template --values"
-																	type: "boolean"
+																	description: "IgnoreMissingValueFiles prevents helm template from failing when valueFiles do not exist locally by not appending them to helm template --values"
+																	type:        "boolean"
 																}
 																kubeVersion: {
 																	description: """
@@ -5052,31 +4588,25 @@ kube: argocd: CustomResourceDefinition: "applications.argoproj.io": {
 																	type: "string"
 																}
 																namespace: {
-																	description:
-																		"Namespace is an optional namespace to template with. If left empty, defaults to the app's destination namespace."
-																	type: "string"
+																	description: "Namespace is an optional namespace to template with. If left empty, defaults to the app's destination namespace."
+																	type:        "string"
 																}
 																parameters: {
-																	description:
-																		"Parameters is a list of Helm parameters which are passed to the helm template command upon manifest generation"
+																	description: "Parameters is a list of Helm parameters which are passed to the helm template command upon manifest generation"
 																	items: {
-																		description:
-																			"HelmParameter is a parameter that's passed to helm template during manifest generation"
+																		description: "HelmParameter is a parameter that's passed to helm template during manifest generation"
 																		properties: {
 																			forceString: {
-																				description:
-																					"ForceString determines whether to tell Helm to interpret booleans and numbers as strings"
-																				type: "boolean"
+																				description: "ForceString determines whether to tell Helm to interpret booleans and numbers as strings"
+																				type:        "boolean"
 																			}
 																			name: {
-																				description:
-																					"Name is the name of the Helm parameter"
-																				type: "string"
+																				description: "Name is the name of the Helm parameter"
+																				type:        "string"
 																			}
 																			value: {
-																				description:
-																					"Value is the value for the Helm parameter"
-																				type: "string"
+																				description: "Value is the value for the Helm parameter"
+																				type:        "string"
 																			}
 																		}
 																		type: "object"
@@ -5084,51 +4614,42 @@ kube: argocd: CustomResourceDefinition: "applications.argoproj.io": {
 																	type: "array"
 																}
 																passCredentials: {
-																	description:
-																		"PassCredentials pass credentials to all domains (Helm's --pass-credentials)"
-																	type: "boolean"
+																	description: "PassCredentials pass credentials to all domains (Helm's --pass-credentials)"
+																	type:        "boolean"
 																}
 																releaseName: {
-																	description:
-																		"ReleaseName is the Helm release name to use. If omitted it will use the application name"
-																	type: "string"
+																	description: "ReleaseName is the Helm release name to use. If omitted it will use the application name"
+																	type:        "string"
 																}
 																skipCrds: {
-																	description:
-																		"SkipCrds skips custom resource definition installation step (Helm's --skip-crds)"
-																	type: "boolean"
+																	description: "SkipCrds skips custom resource definition installation step (Helm's --skip-crds)"
+																	type:        "boolean"
 																}
 																skipSchemaValidation: {
-																	description:
-																		"SkipSchemaValidation skips JSON schema validation (Helm's --skip-schema-validation)"
-																	type: "boolean"
+																	description: "SkipSchemaValidation skips JSON schema validation (Helm's --skip-schema-validation)"
+																	type:        "boolean"
 																}
 																skipTests: {
-																	description:
-																		"SkipTests skips test manifest installation step (Helm's --skip-tests)."
-																	type: "boolean"
+																	description: "SkipTests skips test manifest installation step (Helm's --skip-tests)."
+																	type:        "boolean"
 																}
 																valueFiles: {
-																	description:
-																		"ValuesFiles is a list of Helm value files to use when generating a template"
+																	description: "ValuesFiles is a list of Helm value files to use when generating a template"
 																	items: type: "string"
 																	type: "array"
 																}
 																values: {
-																	description:
-																		"Values specifies Helm values to be passed to helm template, typically defined as a block. ValuesObject takes precedence over Values, so use one or the other."
-																	type: "string"
+																	description: "Values specifies Helm values to be passed to helm template, typically defined as a block. ValuesObject takes precedence over Values, so use one or the other."
+																	type:        "string"
 																}
 																valuesObject: {
-																	description:
-																						"ValuesObject specifies Helm values to be passed to helm template, defined as a map. This takes precedence over Values."
+																	description:                            "ValuesObject specifies Helm values to be passed to helm template, defined as a map. This takes precedence over Values."
 																	type:                                   "object"
 																	"x-kubernetes-preserve-unknown-fields": true
 																}
 																version: {
-																	description:
-																		"Version is the Helm version to use for templating (\"3\")"
-																	type: "string"
+																	description: "Version is the Helm version to use for templating (\"3\")"
+																	type:        "string"
 																}
 															}
 															type: "object"
@@ -5146,44 +4667,40 @@ kube: argocd: CustomResourceDefinition: "applications.argoproj.io": {
 																}
 																commonAnnotations: {
 																	additionalProperties: type: "string"
-																	description:
-																		"CommonAnnotations is a list of additional annotations to add to rendered manifests"
-																	type: "object"
+																	description: "CommonAnnotations is a list of additional annotations to add to rendered manifests"
+																	type:        "object"
 																}
 																commonAnnotationsEnvsubst: {
-																	description:
-																		"CommonAnnotationsEnvsubst specifies whether to apply env variables substitution for annotation values"
-																	type: "boolean"
+																	description: "CommonAnnotationsEnvsubst specifies whether to apply env variables substitution for annotation values"
+																	type:        "boolean"
 																}
 																commonLabels: {
 																	additionalProperties: type: "string"
-																	description:
-																		"CommonLabels is a list of additional labels to add to rendered manifests"
-																	type: "object"
+																	description: "CommonLabels is a list of additional labels to add to rendered manifests"
+																	type:        "object"
 																}
 																components: {
-																	description:
-																		"Components specifies a list of kustomize components to add to the kustomization before building"
+																	description: "Components specifies a list of kustomize components to add to the kustomization before building"
 																	items: type: "string"
 																	type: "array"
 																}
 																forceCommonAnnotations: {
-																	description:
-																		"ForceCommonAnnotations specifies whether to force applying common annotations to resources for Kustomize apps"
-																	type: "boolean"
+																	description: "ForceCommonAnnotations specifies whether to force applying common annotations to resources for Kustomize apps"
+																	type:        "boolean"
 																}
 																forceCommonLabels: {
-																	description:
-																		"ForceCommonLabels specifies whether to force applying common labels to resources for Kustomize apps"
-																	type: "boolean"
+																	description: "ForceCommonLabels specifies whether to force applying common labels to resources for Kustomize apps"
+																	type:        "boolean"
+																}
+																ignoreMissingComponents: {
+																	description: "IgnoreMissingComponents prevents kustomize from failing when components do not exist locally by not appending them to kustomization file"
+																	type:        "boolean"
 																}
 																images: {
-																	description:
-																		"Images is a list of Kustomize image override specifications"
+																	description: "Images is a list of Kustomize image override specifications"
 																	items: {
-																		description:
-																			"KustomizeImage represents a Kustomize image definition in the format [old_image_name=]<image_name>:<image_tag>"
-																		type: "string"
+																		description: "KustomizeImage represents a Kustomize image definition in the format [old_image_name=]<image_name>:<image_tag>"
+																		type:        "string"
 																	}
 																	type: "array"
 																}
@@ -5194,25 +4711,25 @@ kube: argocd: CustomResourceDefinition: "applications.argoproj.io": {
 	"""
 																	type: "string"
 																}
+																labelIncludeTemplates: {
+																	description: "LabelIncludeTemplates specifies whether to apply common labels to resource templates or not"
+																	type:        "boolean"
+																}
 																labelWithoutSelector: {
-																	description:
-																		"LabelWithoutSelector specifies whether to apply common labels to resource selectors or not"
-																	type: "boolean"
+																	description: "LabelWithoutSelector specifies whether to apply common labels to resource selectors or not"
+																	type:        "boolean"
 																}
 																namePrefix: {
-																	description:
-																		"NamePrefix is a prefix appended to resources for Kustomize apps"
-																	type: "string"
+																	description: "NamePrefix is a prefix appended to resources for Kustomize apps"
+																	type:        "string"
 																}
 																nameSuffix: {
-																	description:
-																		"NameSuffix is a suffix appended to resources for Kustomize apps"
-																	type: "string"
+																	description: "NameSuffix is a suffix appended to resources for Kustomize apps"
+																	type:        "string"
 																}
 																namespace: {
-																	description:
-																		"Namespace sets the namespace that Kustomize adds to all resources"
-																	type: "string"
+																	description: "Namespace sets the namespace that Kustomize adds to all resources"
+																	type:        "string"
 																}
 																patches: {
 																	description: "Patches is a list of Kustomize patches"
@@ -5242,8 +4759,7 @@ kube: argocd: CustomResourceDefinition: "applications.argoproj.io": {
 																	type: "array"
 																}
 																replicas: {
-																	description:
-																		"Replicas is a list of Kustomize Replicas override specifications"
+																	description: "Replicas is a list of Kustomize Replicas override specifications"
 																	items: {
 																		properties: {
 																			count: {
@@ -5269,38 +4785,31 @@ kube: argocd: CustomResourceDefinition: "applications.argoproj.io": {
 																	type: "array"
 																}
 																version: {
-																	description:
-																		"Version controls which version of Kustomize to use for rendering manifests"
-																	type: "string"
+																	description: "Version controls which version of Kustomize to use for rendering manifests"
+																	type:        "string"
 																}
 															}
 															type: "object"
 														}
 														name: {
-															description:
-																"Name is used to refer to a source and is displayed in the UI. It is used in multi-source Applications."
-															type: "string"
+															description: "Name is used to refer to a source and is displayed in the UI. It is used in multi-source Applications."
+															type:        "string"
 														}
 														path: {
-															description:
-																"Path is a directory path within the Git repository, and is only valid for applications sourced from Git."
-															type: "string"
+															description: "Path is a directory path within the Git repository, and is only valid for applications sourced from Git."
+															type:        "string"
 														}
 														plugin: {
-															description:
-																"Plugin holds config management plugin specific options"
+															description: "Plugin holds config management plugin specific options"
 															properties: {
 																env: {
-																	description:
-																		"Env is a list of environment variable entries"
+																	description: "Env is a list of environment variable entries"
 																	items: {
-																		description:
-																			"EnvEntry represents an entry in the application's environment"
+																		description: "EnvEntry represents an entry in the application's environment"
 																		properties: {
 																			name: {
-																				description:
-																					"Name is the name of the variable, usually expressed in uppercase"
-																				type: "string"
+																				description: "Name is the name of the variable, usually expressed in uppercase"
+																				type:        "string"
 																			}
 																			value: {
 																				description: "Value is the value of the variable"
@@ -5320,26 +4829,22 @@ kube: argocd: CustomResourceDefinition: "applications.argoproj.io": {
 																	items: {
 																		properties: {
 																			array: {
-																				description:
-																					"Array is the value of an array type parameter."
+																				description: "Array is the value of an array type parameter."
 																				items: type: "string"
 																				type: "array"
 																			}
 																			map: {
 																				additionalProperties: type: "string"
-																				description:
-																					"Map is the value of a map type parameter."
-																				type: "object"
+																				description: "Map is the value of a map type parameter."
+																				type:        "object"
 																			}
 																			name: {
-																				description:
-																					"Name is the name identifying a parameter."
-																				type: "string"
+																				description: "Name is the name identifying a parameter."
+																				type:        "string"
 																			}
 																			string: {
-																				description:
-																					"String_ is the value of a string type parameter."
-																				type: "string"
+																				description: "String_ is the value of a string type parameter."
+																				type:        "string"
 																			}
 																		}
 																		type: "object"
@@ -5350,14 +4855,12 @@ kube: argocd: CustomResourceDefinition: "applications.argoproj.io": {
 															type: "object"
 														}
 														ref: {
-															description:
-																"Ref is reference to another source within sources field. This field will not be used if used with a `source` tag."
-															type: "string"
+															description: "Ref is reference to another source within sources field. This field will not be used if used with a `source` tag."
+															type:        "string"
 														}
 														repoURL: {
-															description:
-																"RepoURL is the URL to the repository (Git or Helm) that contains the application manifests"
-															type: "string"
+															description: "RepoURL is the URL to the repository (Git or Helm) that contains the application manifests"
+															type:        "string"
 														}
 														targetRevision: {
 															description: """
@@ -5386,98 +4889,113 @@ kube: argocd: CustomResourceDefinition: "applications.argoproj.io": {
 								type: "object"
 							}
 							reconciledAt: {
-								description:
-									"ReconciledAt indicates when the application state was reconciled using the latest git version"
-								format: "date-time"
-								type:   "string"
+								description: "ReconciledAt indicates when the application state was reconciled using the latest git version"
+								format:      "date-time"
+								type:        "string"
 							}
 							resourceHealthSource: {
-								description:
-									"ResourceHealthSource indicates where the resource health status is stored: inline if not set or appTree"
-								type: "string"
+								description: "ResourceHealthSource indicates where the resource health status is stored: inline if not set or appTree"
+								type:        "string"
 							}
 							resources: {
-								description:
-									"Resources is a list of Kubernetes resources managed by this application"
+								description: "Resources is a list of Kubernetes resources managed by this application"
 								items: {
-									description: """
-	ResourceStatus holds the current sync and health status of a resource
-	TODO: describe members of this type
-	"""
+									description: "ResourceStatus holds the current synchronization and health status of a Kubernetes resource."
 									properties: {
-										group: type: "string"
+										group: {
+											description: "Group represents the API group of the resource (e.g., \"apps\" for Deployments)."
+											type:        "string"
+										}
 										health: {
-											description:
-												"HealthStatus contains information about the currently observed health state of an application or resource"
+											description: "Health indicates the health status of the resource (e.g., Healthy, Degraded, Progressing)."
 											properties: {
 												lastTransitionTime: {
-													description:
-														"LastTransitionTime is the time the HealthStatus was set or updated"
+													description: """
+	LastTransitionTime is the time the HealthStatus was set or updated
+
+	Deprecated: this field is not used and will be removed in a future release.
+	"""
 													format: "date-time"
 													type:   "string"
 												}
 												message: {
-													description:
-														"Message is a human-readable informational message describing the health status"
-													type: "string"
+													description: "Message is a human-readable informational message describing the health status"
+													type:        "string"
 												}
 												status: {
-													description:
-														"Status holds the status code of the application or resource"
-													type: "string"
+													description: "Status holds the status code of the resource"
+													type:        "string"
 												}
 											}
 											type: "object"
 										}
-										hook: type:                         "boolean"
-										kind: type:                         "string"
-										name: type:                         "string"
-										namespace: type:                    "string"
-										requiresDeletionConfirmation: type: "boolean"
-										requiresPruning: type:              "boolean"
+										hook: {
+											description: "Hook is true if the resource is used as a lifecycle hook in an Argo CD application."
+											type:        "boolean"
+										}
+										kind: {
+											description: "Kind specifies the type of the resource (e.g., \"Deployment\", \"Service\")."
+											type:        "string"
+										}
+										name: {
+											description: "Name is the unique name of the resource within the namespace."
+											type:        "string"
+										}
+										namespace: {
+											description: "Namespace defines the Kubernetes namespace where the resource is located."
+											type:        "string"
+										}
+										requiresDeletionConfirmation: {
+											description: "RequiresDeletionConfirmation is true if the resource requires explicit user confirmation before deletion."
+											type:        "boolean"
+										}
+										requiresPruning: {
+											description: "RequiresPruning is true if the resource needs to be pruned (deleted) as part of synchronization."
+											type:        "boolean"
+										}
 										status: {
-											description:
-												"SyncStatusCode is a type which represents possible comparison results"
-											type: "string"
+											description: "Status represents the synchronization state of the resource (e.g., Synced, OutOfSync)."
+											type:        "string"
 										}
 										syncWave: {
+											description: """
+	SyncWave determines the order in which resources are applied during a sync operation.
+	Lower values are applied first.
+	"""
 											format: "int64"
 											type:   "integer"
 										}
-										version: type: "string"
+										version: {
+											description: "Version indicates the API version of the resource (e.g., \"v1\", \"v1beta1\")."
+											type:        "string"
+										}
 									}
 									type: "object"
 								}
 								type: "array"
 							}
 							sourceHydrator: {
-								description:
-									"SourceHydrator stores information about the current state of source hydration"
+								description: "SourceHydrator stores information about the current state of source hydration"
 								properties: {
 									currentOperation: {
-										description:
-											"CurrentOperation holds the status of the hydrate operation"
+										description: "CurrentOperation holds the status of the hydrate operation"
 										properties: {
 											drySHA: {
-												description:
-													"DrySHA holds the resolved revision (sha) of the dry source as of the most recent reconciliation"
-												type: "string"
+												description: "DrySHA holds the resolved revision (sha) of the dry source as of the most recent reconciliation"
+												type:        "string"
 											}
 											finishedAt: {
-												description:
-													"FinishedAt indicates when the hydrate operation finished"
-												format: "date-time"
-												type:   "string"
+												description: "FinishedAt indicates when the hydrate operation finished"
+												format:      "date-time"
+												type:        "string"
 											}
 											hydratedSHA: {
-												description:
-													"HydratedSHA holds the resolved revision (sha) of the hydrated source as of the most recent reconciliation"
-												type: "string"
+												description: "HydratedSHA holds the resolved revision (sha) of the hydrated source as of the most recent reconciliation"
+												type:        "string"
 											}
 											message: {
-												description:
-													"Message contains a message describing the current status of the hydrate operation"
-												type: "string"
+												description: "Message contains a message describing the current status of the hydrate operation"
+												type:        "string"
 											}
 											phase: {
 												description: "Phase indicates the status of the hydrate operation"
@@ -5489,27 +5007,22 @@ kube: argocd: CustomResourceDefinition: "applications.argoproj.io": {
 												type: "string"
 											}
 											sourceHydrator: {
-												description:
-													"SourceHydrator holds the hydrator config used for the hydrate operation"
+												description: "SourceHydrator holds the hydrator config used for the hydrate operation"
 												properties: {
 													drySource: {
-														description:
-															"DrySource specifies where the dry \"don't repeat yourself\" manifest source lives."
+														description: "DrySource specifies where the dry \"don't repeat yourself\" manifest source lives."
 														properties: {
 															path: {
-																description:
-																	"Path is a directory path within the Git repository where the manifests are located"
-																type: "string"
+																description: "Path is a directory path within the Git repository where the manifests are located"
+																type:        "string"
 															}
 															repoURL: {
-																description:
-																	"RepoURL is the URL to the git repository that contains the application manifests"
-																type: "string"
+																description: "RepoURL is the URL to the git repository that contains the application manifests"
+																type:        "string"
 															}
 															targetRevision: {
-																description:
-																	"TargetRevision defines the revision of the source to hydrate"
-																type: "string"
+																description: "TargetRevision defines the revision of the source to hydrate"
+																type:        "string"
 															}
 														}
 														required: [
@@ -5525,27 +5038,30 @@ kube: argocd: CustomResourceDefinition: "applications.argoproj.io": {
 	have to move manifests to the SyncSource, e.g. by pull request.
 	"""
 														properties: targetBranch: {
-															description:
-																"TargetBranch is the branch to which hydrated manifests should be committed"
-															type: "string"
+															description: "TargetBranch is the branch to which hydrated manifests should be committed"
+															type:        "string"
 														}
 														required: ["targetBranch"]
 														type: "object"
 													}
 													syncSource: {
-														description:
-															"SyncSource specifies where to sync hydrated manifests from."
+														description: "SyncSource specifies where to sync hydrated manifests from."
 														properties: {
 															path: {
 																description: """
 	Path is a directory path within the git repository where hydrated manifests should be committed to and synced
-	from. If hydrateTo is set, this is just the path from which hydrated manifests will be synced.
+	from. The Path should never point to the root of the repo. If hydrateTo is set, this is just the path from which
+	hydrated manifests will be synced.
 	"""
-																type: "string"
+																minLength: 1
+																pattern:   "^.{2,}|[^./]$"
+																type:      "string"
 															}
 															targetBranch: {
-																description:
-																	"TargetBranch is the branch to which hydrated manifests should be committed"
+																description: """
+	TargetBranch is the branch from which hydrated manifests will be synced.
+	If HydrateTo is not set, this is also the branch to which hydrated manifests are committed.
+	"""
 																type: "string"
 															}
 														}
@@ -5563,10 +5079,9 @@ kube: argocd: CustomResourceDefinition: "applications.argoproj.io": {
 												type: "object"
 											}
 											startedAt: {
-												description:
-													"StartedAt indicates when the hydrate operation started"
-												format: "date-time"
-												type:   "string"
+												description: "StartedAt indicates when the hydrate operation started"
+												format:      "date-time"
+												type:        "string"
 											}
 										}
 										required: [
@@ -5576,41 +5091,33 @@ kube: argocd: CustomResourceDefinition: "applications.argoproj.io": {
 										type: "object"
 									}
 									lastSuccessfulOperation: {
-										description:
-											"LastSuccessfulOperation holds info about the most recent successful hydration"
+										description: "LastSuccessfulOperation holds info about the most recent successful hydration"
 										properties: {
 											drySHA: {
-												description:
-													"DrySHA holds the resolved revision (sha) of the dry source as of the most recent reconciliation"
-												type: "string"
+												description: "DrySHA holds the resolved revision (sha) of the dry source as of the most recent reconciliation"
+												type:        "string"
 											}
 											hydratedSHA: {
-												description:
-													"HydratedSHA holds the resolved revision (sha) of the hydrated source as of the most recent reconciliation"
-												type: "string"
+												description: "HydratedSHA holds the resolved revision (sha) of the hydrated source as of the most recent reconciliation"
+												type:        "string"
 											}
 											sourceHydrator: {
-												description:
-													"SourceHydrator holds the hydrator config used for the hydrate operation"
+												description: "SourceHydrator holds the hydrator config used for the hydrate operation"
 												properties: {
 													drySource: {
-														description:
-															"DrySource specifies where the dry \"don't repeat yourself\" manifest source lives."
+														description: "DrySource specifies where the dry \"don't repeat yourself\" manifest source lives."
 														properties: {
 															path: {
-																description:
-																	"Path is a directory path within the Git repository where the manifests are located"
-																type: "string"
+																description: "Path is a directory path within the Git repository where the manifests are located"
+																type:        "string"
 															}
 															repoURL: {
-																description:
-																	"RepoURL is the URL to the git repository that contains the application manifests"
-																type: "string"
+																description: "RepoURL is the URL to the git repository that contains the application manifests"
+																type:        "string"
 															}
 															targetRevision: {
-																description:
-																	"TargetRevision defines the revision of the source to hydrate"
-																type: "string"
+																description: "TargetRevision defines the revision of the source to hydrate"
+																type:        "string"
 															}
 														}
 														required: [
@@ -5626,27 +5133,30 @@ kube: argocd: CustomResourceDefinition: "applications.argoproj.io": {
 	have to move manifests to the SyncSource, e.g. by pull request.
 	"""
 														properties: targetBranch: {
-															description:
-																"TargetBranch is the branch to which hydrated manifests should be committed"
-															type: "string"
+															description: "TargetBranch is the branch to which hydrated manifests should be committed"
+															type:        "string"
 														}
 														required: ["targetBranch"]
 														type: "object"
 													}
 													syncSource: {
-														description:
-															"SyncSource specifies where to sync hydrated manifests from."
+														description: "SyncSource specifies where to sync hydrated manifests from."
 														properties: {
 															path: {
 																description: """
 	Path is a directory path within the git repository where hydrated manifests should be committed to and synced
-	from. If hydrateTo is set, this is just the path from which hydrated manifests will be synced.
+	from. The Path should never point to the root of the repo. If hydrateTo is set, this is just the path from which
+	hydrated manifests will be synced.
 	"""
-																type: "string"
+																minLength: 1
+																pattern:   "^.{2,}|[^./]$"
+																type:      "string"
 															}
 															targetBranch: {
-																description:
-																	"TargetBranch is the branch to which hydrated manifests should be committed"
+																description: """
+	TargetBranch is the branch from which hydrated manifests will be synced.
+	If HydrateTo is not set, this is also the branch to which hydrated manifests are committed.
+	"""
 																type: "string"
 															}
 														}
@@ -5674,22 +5184,18 @@ kube: argocd: CustomResourceDefinition: "applications.argoproj.io": {
 								type:        "string"
 							}
 							sourceTypes: {
-								description:
-									"SourceTypes specifies the type of the sources included in the application"
+								description: "SourceTypes specifies the type of the sources included in the application"
 								items: {
-									description:
-										"ApplicationSourceType specifies the type of the application's source"
-									type: "string"
+									description: "ApplicationSourceType specifies the type of the application's source"
+									type:        "string"
 								}
 								type: "array"
 							}
 							summary: {
-								description:
-									"Summary contains a list of URLs and container images used by this application"
+								description: "Summary contains a list of URLs and container images used by this application"
 								properties: {
 									externalURLs: {
-										description:
-											"ExternalURLs holds all external URLs of application child resources."
+										description: "ExternalURLs holds all external URLs of application child resources."
 										items: type: "string"
 										type: "array"
 									}
@@ -5702,21 +5208,17 @@ kube: argocd: CustomResourceDefinition: "applications.argoproj.io": {
 								type: "object"
 							}
 							sync: {
-								description:
-									"Sync contains information about the application's current sync status"
+								description: "Sync contains information about the application's current sync status"
 								properties: {
 									comparedTo: {
-										description:
-											"ComparedTo contains information about what has been compared"
+										description: "ComparedTo contains information about what has been compared"
 										properties: {
 											destination: {
-												description:
-													"Destination is a reference to the application's destination used for comparison"
+												description: "Destination is a reference to the application's destination used for comparison"
 												properties: {
 													name: {
-														description:
-															"Name is an alternate way of specifying the target cluster by its symbolic name. This must be set if Server is not set."
-														type: "string"
+														description: "Name is an alternate way of specifying the target cluster by its symbolic name. This must be set if Server is not set."
+														type:        "string"
 													}
 													namespace: {
 														description: """
@@ -5726,19 +5228,16 @@ kube: argocd: CustomResourceDefinition: "applications.argoproj.io": {
 														type: "string"
 													}
 													server: {
-														description:
-															"Server specifies the URL of the target cluster's Kubernetes control plane API. This must be set if Name is not set."
-														type: "string"
+														description: "Server specifies the URL of the target cluster's Kubernetes control plane API. This must be set if Name is not set."
+														type:        "string"
 													}
 												}
 												type: "object"
 											}
 											ignoreDifferences: {
-												description:
-													"IgnoreDifferences is a reference to the application's ignored differences used for comparison"
+												description: "IgnoreDifferences is a reference to the application's ignored differences used for comparison"
 												items: {
-													description:
-														"ResourceIgnoreDifferences contains resource filter and list of json paths which should be ignored during comparison with live state."
+													description: "ResourceIgnoreDifferences contains resource filter and list of json paths which should be ignored during comparison with live state."
 													properties: {
 														group: type: "string"
 														jqPathExpressions: {
@@ -5767,36 +5266,30 @@ kube: argocd: CustomResourceDefinition: "applications.argoproj.io": {
 												type: "array"
 											}
 											source: {
-												description:
-													"Source is a reference to the application's source used for comparison"
+												description: "Source is a reference to the application's source used for comparison"
 												properties: {
 													chart: {
-														description:
-															"Chart is a Helm chart name, and must be specified for applications sourced from a Helm repo."
-														type: "string"
+														description: "Chart is a Helm chart name, and must be specified for applications sourced from a Helm repo."
+														type:        "string"
 													}
 													directory: {
 														description: "Directory holds path/directory specific options"
 														properties: {
 															exclude: {
-																description:
-																	"Exclude contains a glob pattern to match paths against that should be explicitly excluded from being used during manifest generation"
-																type: "string"
+																description: "Exclude contains a glob pattern to match paths against that should be explicitly excluded from being used during manifest generation"
+																type:        "string"
 															}
 															include: {
-																description:
-																	"Include contains a glob pattern to match paths against that should be explicitly included during manifest generation"
-																type: "string"
+																description: "Include contains a glob pattern to match paths against that should be explicitly included during manifest generation"
+																type:        "string"
 															}
 															jsonnet: {
 																description: "Jsonnet holds options specific to Jsonnet"
 																properties: {
 																	extVars: {
-																		description:
-																			"ExtVars is a list of Jsonnet External Variables"
+																		description: "ExtVars is a list of Jsonnet External Variables"
 																		items: {
-																			description:
-																				"JsonnetVar represents a variable to be passed to jsonnet during manifest generation"
+																			description: "JsonnetVar represents a variable to be passed to jsonnet during manifest generation"
 																			properties: {
 																				code: type:  "boolean"
 																				name: type:  "string"
@@ -5816,11 +5309,9 @@ kube: argocd: CustomResourceDefinition: "applications.argoproj.io": {
 																		type: "array"
 																	}
 																	tlas: {
-																		description:
-																			"TLAS is a list of Jsonnet Top-level Arguments"
+																		description: "TLAS is a list of Jsonnet Top-level Arguments"
 																		items: {
-																			description:
-																				"JsonnetVar represents a variable to be passed to jsonnet during manifest generation"
+																			description: "JsonnetVar represents a variable to be passed to jsonnet during manifest generation"
 																			properties: {
 																				code: type:  "boolean"
 																				name: type:  "string"
@@ -5838,9 +5329,8 @@ kube: argocd: CustomResourceDefinition: "applications.argoproj.io": {
 																type: "object"
 															}
 															recurse: {
-																description:
-																	"Recurse specifies whether to scan a directory recursively for manifests"
-																type: "boolean"
+																description: "Recurse specifies whether to scan a directory recursively for manifests"
+																type:        "boolean"
 															}
 														}
 														type: "object"
@@ -5857,20 +5347,17 @@ kube: argocd: CustomResourceDefinition: "applications.argoproj.io": {
 																type: "array"
 															}
 															fileParameters: {
-																description:
-																	"FileParameters are file parameters to the helm template"
+																description: "FileParameters are file parameters to the helm template"
 																items: {
-																	description:
-																		"HelmFileParameter is a file parameter that's passed to helm template during manifest generation"
+																	description: "HelmFileParameter is a file parameter that's passed to helm template during manifest generation"
 																	properties: {
 																		name: {
 																			description: "Name is the name of the Helm parameter"
 																			type:        "string"
 																		}
 																		path: {
-																			description:
-																				"Path is the path to the file containing the values for the Helm parameter"
-																			type: "string"
+																			description: "Path is the path to the file containing the values for the Helm parameter"
+																			type:        "string"
 																		}
 																	}
 																	type: "object"
@@ -5878,9 +5365,8 @@ kube: argocd: CustomResourceDefinition: "applications.argoproj.io": {
 																type: "array"
 															}
 															ignoreMissingValueFiles: {
-																description:
-																	"IgnoreMissingValueFiles prevents helm template from failing when valueFiles do not exist locally by not appending them to helm template --values"
-																type: "boolean"
+																description: "IgnoreMissingValueFiles prevents helm template from failing when valueFiles do not exist locally by not appending them to helm template --values"
+																type:        "boolean"
 															}
 															kubeVersion: {
 																description: """
@@ -5890,30 +5376,25 @@ kube: argocd: CustomResourceDefinition: "applications.argoproj.io": {
 																type: "string"
 															}
 															namespace: {
-																description:
-																	"Namespace is an optional namespace to template with. If left empty, defaults to the app's destination namespace."
-																type: "string"
+																description: "Namespace is an optional namespace to template with. If left empty, defaults to the app's destination namespace."
+																type:        "string"
 															}
 															parameters: {
-																description:
-																	"Parameters is a list of Helm parameters which are passed to the helm template command upon manifest generation"
+																description: "Parameters is a list of Helm parameters which are passed to the helm template command upon manifest generation"
 																items: {
-																	description:
-																		"HelmParameter is a parameter that's passed to helm template during manifest generation"
+																	description: "HelmParameter is a parameter that's passed to helm template during manifest generation"
 																	properties: {
 																		forceString: {
-																			description:
-																				"ForceString determines whether to tell Helm to interpret booleans and numbers as strings"
-																			type: "boolean"
+																			description: "ForceString determines whether to tell Helm to interpret booleans and numbers as strings"
+																			type:        "boolean"
 																		}
 																		name: {
 																			description: "Name is the name of the Helm parameter"
 																			type:        "string"
 																		}
 																		value: {
-																			description:
-																				"Value is the value for the Helm parameter"
-																			type: "string"
+																			description: "Value is the value for the Helm parameter"
+																			type:        "string"
 																		}
 																	}
 																	type: "object"
@@ -5921,51 +5402,42 @@ kube: argocd: CustomResourceDefinition: "applications.argoproj.io": {
 																type: "array"
 															}
 															passCredentials: {
-																description:
-																	"PassCredentials pass credentials to all domains (Helm's --pass-credentials)"
-																type: "boolean"
+																description: "PassCredentials pass credentials to all domains (Helm's --pass-credentials)"
+																type:        "boolean"
 															}
 															releaseName: {
-																description:
-																	"ReleaseName is the Helm release name to use. If omitted it will use the application name"
-																type: "string"
+																description: "ReleaseName is the Helm release name to use. If omitted it will use the application name"
+																type:        "string"
 															}
 															skipCrds: {
-																description:
-																	"SkipCrds skips custom resource definition installation step (Helm's --skip-crds)"
-																type: "boolean"
+																description: "SkipCrds skips custom resource definition installation step (Helm's --skip-crds)"
+																type:        "boolean"
 															}
 															skipSchemaValidation: {
-																description:
-																	"SkipSchemaValidation skips JSON schema validation (Helm's --skip-schema-validation)"
-																type: "boolean"
+																description: "SkipSchemaValidation skips JSON schema validation (Helm's --skip-schema-validation)"
+																type:        "boolean"
 															}
 															skipTests: {
-																description:
-																	"SkipTests skips test manifest installation step (Helm's --skip-tests)."
-																type: "boolean"
+																description: "SkipTests skips test manifest installation step (Helm's --skip-tests)."
+																type:        "boolean"
 															}
 															valueFiles: {
-																description:
-																	"ValuesFiles is a list of Helm value files to use when generating a template"
+																description: "ValuesFiles is a list of Helm value files to use when generating a template"
 																items: type: "string"
 																type: "array"
 															}
 															values: {
-																description:
-																	"Values specifies Helm values to be passed to helm template, typically defined as a block. ValuesObject takes precedence over Values, so use one or the other."
-																type: "string"
+																description: "Values specifies Helm values to be passed to helm template, typically defined as a block. ValuesObject takes precedence over Values, so use one or the other."
+																type:        "string"
 															}
 															valuesObject: {
-																description:
-																					"ValuesObject specifies Helm values to be passed to helm template, defined as a map. This takes precedence over Values."
+																description:                            "ValuesObject specifies Helm values to be passed to helm template, defined as a map. This takes precedence over Values."
 																type:                                   "object"
 																"x-kubernetes-preserve-unknown-fields": true
 															}
 															version: {
-																description:
-																	"Version is the Helm version to use for templating (\"3\")"
-																type: "string"
+																description: "Version is the Helm version to use for templating (\"3\")"
+																type:        "string"
 															}
 														}
 														type: "object"
@@ -5983,44 +5455,40 @@ kube: argocd: CustomResourceDefinition: "applications.argoproj.io": {
 															}
 															commonAnnotations: {
 																additionalProperties: type: "string"
-																description:
-																	"CommonAnnotations is a list of additional annotations to add to rendered manifests"
-																type: "object"
+																description: "CommonAnnotations is a list of additional annotations to add to rendered manifests"
+																type:        "object"
 															}
 															commonAnnotationsEnvsubst: {
-																description:
-																	"CommonAnnotationsEnvsubst specifies whether to apply env variables substitution for annotation values"
-																type: "boolean"
+																description: "CommonAnnotationsEnvsubst specifies whether to apply env variables substitution for annotation values"
+																type:        "boolean"
 															}
 															commonLabels: {
 																additionalProperties: type: "string"
-																description:
-																	"CommonLabels is a list of additional labels to add to rendered manifests"
-																type: "object"
+																description: "CommonLabels is a list of additional labels to add to rendered manifests"
+																type:        "object"
 															}
 															components: {
-																description:
-																	"Components specifies a list of kustomize components to add to the kustomization before building"
+																description: "Components specifies a list of kustomize components to add to the kustomization before building"
 																items: type: "string"
 																type: "array"
 															}
 															forceCommonAnnotations: {
-																description:
-																	"ForceCommonAnnotations specifies whether to force applying common annotations to resources for Kustomize apps"
-																type: "boolean"
+																description: "ForceCommonAnnotations specifies whether to force applying common annotations to resources for Kustomize apps"
+																type:        "boolean"
 															}
 															forceCommonLabels: {
-																description:
-																	"ForceCommonLabels specifies whether to force applying common labels to resources for Kustomize apps"
-																type: "boolean"
+																description: "ForceCommonLabels specifies whether to force applying common labels to resources for Kustomize apps"
+																type:        "boolean"
+															}
+															ignoreMissingComponents: {
+																description: "IgnoreMissingComponents prevents kustomize from failing when components do not exist locally by not appending them to kustomization file"
+																type:        "boolean"
 															}
 															images: {
-																description:
-																	"Images is a list of Kustomize image override specifications"
+																description: "Images is a list of Kustomize image override specifications"
 																items: {
-																	description:
-																		"KustomizeImage represents a Kustomize image definition in the format [old_image_name=]<image_name>:<image_tag>"
-																	type: "string"
+																	description: "KustomizeImage represents a Kustomize image definition in the format [old_image_name=]<image_name>:<image_tag>"
+																	type:        "string"
 																}
 																type: "array"
 															}
@@ -6031,25 +5499,25 @@ kube: argocd: CustomResourceDefinition: "applications.argoproj.io": {
 	"""
 																type: "string"
 															}
+															labelIncludeTemplates: {
+																description: "LabelIncludeTemplates specifies whether to apply common labels to resource templates or not"
+																type:        "boolean"
+															}
 															labelWithoutSelector: {
-																description:
-																	"LabelWithoutSelector specifies whether to apply common labels to resource selectors or not"
-																type: "boolean"
+																description: "LabelWithoutSelector specifies whether to apply common labels to resource selectors or not"
+																type:        "boolean"
 															}
 															namePrefix: {
-																description:
-																	"NamePrefix is a prefix appended to resources for Kustomize apps"
-																type: "string"
+																description: "NamePrefix is a prefix appended to resources for Kustomize apps"
+																type:        "string"
 															}
 															nameSuffix: {
-																description:
-																	"NameSuffix is a suffix appended to resources for Kustomize apps"
-																type: "string"
+																description: "NameSuffix is a suffix appended to resources for Kustomize apps"
+																type:        "string"
 															}
 															namespace: {
-																description:
-																	"Namespace sets the namespace that Kustomize adds to all resources"
-																type: "string"
+																description: "Namespace sets the namespace that Kustomize adds to all resources"
+																type:        "string"
 															}
 															patches: {
 																description: "Patches is a list of Kustomize patches"
@@ -6079,8 +5547,7 @@ kube: argocd: CustomResourceDefinition: "applications.argoproj.io": {
 																type: "array"
 															}
 															replicas: {
-																description:
-																	"Replicas is a list of Kustomize Replicas override specifications"
+																description: "Replicas is a list of Kustomize Replicas override specifications"
 																items: {
 																	properties: {
 																		count: {
@@ -6106,38 +5573,31 @@ kube: argocd: CustomResourceDefinition: "applications.argoproj.io": {
 																type: "array"
 															}
 															version: {
-																description:
-																	"Version controls which version of Kustomize to use for rendering manifests"
-																type: "string"
+																description: "Version controls which version of Kustomize to use for rendering manifests"
+																type:        "string"
 															}
 														}
 														type: "object"
 													}
 													name: {
-														description:
-															"Name is used to refer to a source and is displayed in the UI. It is used in multi-source Applications."
-														type: "string"
+														description: "Name is used to refer to a source and is displayed in the UI. It is used in multi-source Applications."
+														type:        "string"
 													}
 													path: {
-														description:
-															"Path is a directory path within the Git repository, and is only valid for applications sourced from Git."
-														type: "string"
+														description: "Path is a directory path within the Git repository, and is only valid for applications sourced from Git."
+														type:        "string"
 													}
 													plugin: {
-														description:
-															"Plugin holds config management plugin specific options"
+														description: "Plugin holds config management plugin specific options"
 														properties: {
 															env: {
-																description:
-																	"Env is a list of environment variable entries"
+																description: "Env is a list of environment variable entries"
 																items: {
-																	description:
-																		"EnvEntry represents an entry in the application's environment"
+																	description: "EnvEntry represents an entry in the application's environment"
 																	properties: {
 																		name: {
-																			description:
-																				"Name is the name of the variable, usually expressed in uppercase"
-																			type: "string"
+																			description: "Name is the name of the variable, usually expressed in uppercase"
+																			type:        "string"
 																		}
 																		value: {
 																			description: "Value is the value of the variable"
@@ -6157,26 +5617,22 @@ kube: argocd: CustomResourceDefinition: "applications.argoproj.io": {
 																items: {
 																	properties: {
 																		array: {
-																			description:
-																				"Array is the value of an array type parameter."
+																			description: "Array is the value of an array type parameter."
 																			items: type: "string"
 																			type: "array"
 																		}
 																		map: {
 																			additionalProperties: type: "string"
-																			description:
-																				"Map is the value of a map type parameter."
-																			type: "object"
+																			description: "Map is the value of a map type parameter."
+																			type:        "object"
 																		}
 																		name: {
-																			description:
-																				"Name is the name identifying a parameter."
-																			type: "string"
+																			description: "Name is the name identifying a parameter."
+																			type:        "string"
 																		}
 																		string: {
-																			description:
-																				"String_ is the value of a string type parameter."
-																			type: "string"
+																			description: "String_ is the value of a string type parameter."
+																			type:        "string"
 																		}
 																	}
 																	type: "object"
@@ -6187,14 +5643,12 @@ kube: argocd: CustomResourceDefinition: "applications.argoproj.io": {
 														type: "object"
 													}
 													ref: {
-														description:
-															"Ref is reference to another source within sources field. This field will not be used if used with a `source` tag."
-														type: "string"
+														description: "Ref is reference to another source within sources field. This field will not be used if used with a `source` tag."
+														type:        "string"
 													}
 													repoURL: {
-														description:
-															"RepoURL is the URL to the repository (Git or Helm) that contains the application manifests"
-														type: "string"
+														description: "RepoURL is the URL to the repository (Git or Helm) that contains the application manifests"
+														type:        "string"
 													}
 													targetRevision: {
 														description: """
@@ -6209,40 +5663,32 @@ kube: argocd: CustomResourceDefinition: "applications.argoproj.io": {
 												type: "object"
 											}
 											sources: {
-												description:
-													"Sources is a reference to the application's multiple sources used for comparison"
+												description: "Sources is a reference to the application's multiple sources used for comparison"
 												items: {
-													description:
-														"ApplicationSource contains all required information about the source of an application"
+													description: "ApplicationSource contains all required information about the source of an application"
 													properties: {
 														chart: {
-															description:
-																"Chart is a Helm chart name, and must be specified for applications sourced from a Helm repo."
-															type: "string"
+															description: "Chart is a Helm chart name, and must be specified for applications sourced from a Helm repo."
+															type:        "string"
 														}
 														directory: {
-															description:
-																"Directory holds path/directory specific options"
+															description: "Directory holds path/directory specific options"
 															properties: {
 																exclude: {
-																	description:
-																		"Exclude contains a glob pattern to match paths against that should be explicitly excluded from being used during manifest generation"
-																	type: "string"
+																	description: "Exclude contains a glob pattern to match paths against that should be explicitly excluded from being used during manifest generation"
+																	type:        "string"
 																}
 																include: {
-																	description:
-																		"Include contains a glob pattern to match paths against that should be explicitly included during manifest generation"
-																	type: "string"
+																	description: "Include contains a glob pattern to match paths against that should be explicitly included during manifest generation"
+																	type:        "string"
 																}
 																jsonnet: {
 																	description: "Jsonnet holds options specific to Jsonnet"
 																	properties: {
 																		extVars: {
-																			description:
-																				"ExtVars is a list of Jsonnet External Variables"
+																			description: "ExtVars is a list of Jsonnet External Variables"
 																			items: {
-																				description:
-																					"JsonnetVar represents a variable to be passed to jsonnet during manifest generation"
+																				description: "JsonnetVar represents a variable to be passed to jsonnet during manifest generation"
 																				properties: {
 																					code: type:  "boolean"
 																					name: type:  "string"
@@ -6262,11 +5708,9 @@ kube: argocd: CustomResourceDefinition: "applications.argoproj.io": {
 																			type: "array"
 																		}
 																		tlas: {
-																			description:
-																				"TLAS is a list of Jsonnet Top-level Arguments"
+																			description: "TLAS is a list of Jsonnet Top-level Arguments"
 																			items: {
-																				description:
-																					"JsonnetVar represents a variable to be passed to jsonnet during manifest generation"
+																				description: "JsonnetVar represents a variable to be passed to jsonnet during manifest generation"
 																				properties: {
 																					code: type:  "boolean"
 																					name: type:  "string"
@@ -6284,9 +5728,8 @@ kube: argocd: CustomResourceDefinition: "applications.argoproj.io": {
 																	type: "object"
 																}
 																recurse: {
-																	description:
-																		"Recurse specifies whether to scan a directory recursively for manifests"
-																	type: "boolean"
+																	description: "Recurse specifies whether to scan a directory recursively for manifests"
+																	type:        "boolean"
 																}
 															}
 															type: "object"
@@ -6303,21 +5746,17 @@ kube: argocd: CustomResourceDefinition: "applications.argoproj.io": {
 																	type: "array"
 																}
 																fileParameters: {
-																	description:
-																		"FileParameters are file parameters to the helm template"
+																	description: "FileParameters are file parameters to the helm template"
 																	items: {
-																		description:
-																			"HelmFileParameter is a file parameter that's passed to helm template during manifest generation"
+																		description: "HelmFileParameter is a file parameter that's passed to helm template during manifest generation"
 																		properties: {
 																			name: {
-																				description:
-																					"Name is the name of the Helm parameter"
-																				type: "string"
+																				description: "Name is the name of the Helm parameter"
+																				type:        "string"
 																			}
 																			path: {
-																				description:
-																					"Path is the path to the file containing the values for the Helm parameter"
-																				type: "string"
+																				description: "Path is the path to the file containing the values for the Helm parameter"
+																				type:        "string"
 																			}
 																		}
 																		type: "object"
@@ -6325,9 +5764,8 @@ kube: argocd: CustomResourceDefinition: "applications.argoproj.io": {
 																	type: "array"
 																}
 																ignoreMissingValueFiles: {
-																	description:
-																		"IgnoreMissingValueFiles prevents helm template from failing when valueFiles do not exist locally by not appending them to helm template --values"
-																	type: "boolean"
+																	description: "IgnoreMissingValueFiles prevents helm template from failing when valueFiles do not exist locally by not appending them to helm template --values"
+																	type:        "boolean"
 																}
 																kubeVersion: {
 																	description: """
@@ -6337,31 +5775,25 @@ kube: argocd: CustomResourceDefinition: "applications.argoproj.io": {
 																	type: "string"
 																}
 																namespace: {
-																	description:
-																		"Namespace is an optional namespace to template with. If left empty, defaults to the app's destination namespace."
-																	type: "string"
+																	description: "Namespace is an optional namespace to template with. If left empty, defaults to the app's destination namespace."
+																	type:        "string"
 																}
 																parameters: {
-																	description:
-																		"Parameters is a list of Helm parameters which are passed to the helm template command upon manifest generation"
+																	description: "Parameters is a list of Helm parameters which are passed to the helm template command upon manifest generation"
 																	items: {
-																		description:
-																			"HelmParameter is a parameter that's passed to helm template during manifest generation"
+																		description: "HelmParameter is a parameter that's passed to helm template during manifest generation"
 																		properties: {
 																			forceString: {
-																				description:
-																					"ForceString determines whether to tell Helm to interpret booleans and numbers as strings"
-																				type: "boolean"
+																				description: "ForceString determines whether to tell Helm to interpret booleans and numbers as strings"
+																				type:        "boolean"
 																			}
 																			name: {
-																				description:
-																					"Name is the name of the Helm parameter"
-																				type: "string"
+																				description: "Name is the name of the Helm parameter"
+																				type:        "string"
 																			}
 																			value: {
-																				description:
-																					"Value is the value for the Helm parameter"
-																				type: "string"
+																				description: "Value is the value for the Helm parameter"
+																				type:        "string"
 																			}
 																		}
 																		type: "object"
@@ -6369,51 +5801,42 @@ kube: argocd: CustomResourceDefinition: "applications.argoproj.io": {
 																	type: "array"
 																}
 																passCredentials: {
-																	description:
-																		"PassCredentials pass credentials to all domains (Helm's --pass-credentials)"
-																	type: "boolean"
+																	description: "PassCredentials pass credentials to all domains (Helm's --pass-credentials)"
+																	type:        "boolean"
 																}
 																releaseName: {
-																	description:
-																		"ReleaseName is the Helm release name to use. If omitted it will use the application name"
-																	type: "string"
+																	description: "ReleaseName is the Helm release name to use. If omitted it will use the application name"
+																	type:        "string"
 																}
 																skipCrds: {
-																	description:
-																		"SkipCrds skips custom resource definition installation step (Helm's --skip-crds)"
-																	type: "boolean"
+																	description: "SkipCrds skips custom resource definition installation step (Helm's --skip-crds)"
+																	type:        "boolean"
 																}
 																skipSchemaValidation: {
-																	description:
-																		"SkipSchemaValidation skips JSON schema validation (Helm's --skip-schema-validation)"
-																	type: "boolean"
+																	description: "SkipSchemaValidation skips JSON schema validation (Helm's --skip-schema-validation)"
+																	type:        "boolean"
 																}
 																skipTests: {
-																	description:
-																		"SkipTests skips test manifest installation step (Helm's --skip-tests)."
-																	type: "boolean"
+																	description: "SkipTests skips test manifest installation step (Helm's --skip-tests)."
+																	type:        "boolean"
 																}
 																valueFiles: {
-																	description:
-																		"ValuesFiles is a list of Helm value files to use when generating a template"
+																	description: "ValuesFiles is a list of Helm value files to use when generating a template"
 																	items: type: "string"
 																	type: "array"
 																}
 																values: {
-																	description:
-																		"Values specifies Helm values to be passed to helm template, typically defined as a block. ValuesObject takes precedence over Values, so use one or the other."
-																	type: "string"
+																	description: "Values specifies Helm values to be passed to helm template, typically defined as a block. ValuesObject takes precedence over Values, so use one or the other."
+																	type:        "string"
 																}
 																valuesObject: {
-																	description:
-																						"ValuesObject specifies Helm values to be passed to helm template, defined as a map. This takes precedence over Values."
+																	description:                            "ValuesObject specifies Helm values to be passed to helm template, defined as a map. This takes precedence over Values."
 																	type:                                   "object"
 																	"x-kubernetes-preserve-unknown-fields": true
 																}
 																version: {
-																	description:
-																		"Version is the Helm version to use for templating (\"3\")"
-																	type: "string"
+																	description: "Version is the Helm version to use for templating (\"3\")"
+																	type:        "string"
 																}
 															}
 															type: "object"
@@ -6431,44 +5854,40 @@ kube: argocd: CustomResourceDefinition: "applications.argoproj.io": {
 																}
 																commonAnnotations: {
 																	additionalProperties: type: "string"
-																	description:
-																		"CommonAnnotations is a list of additional annotations to add to rendered manifests"
-																	type: "object"
+																	description: "CommonAnnotations is a list of additional annotations to add to rendered manifests"
+																	type:        "object"
 																}
 																commonAnnotationsEnvsubst: {
-																	description:
-																		"CommonAnnotationsEnvsubst specifies whether to apply env variables substitution for annotation values"
-																	type: "boolean"
+																	description: "CommonAnnotationsEnvsubst specifies whether to apply env variables substitution for annotation values"
+																	type:        "boolean"
 																}
 																commonLabels: {
 																	additionalProperties: type: "string"
-																	description:
-																		"CommonLabels is a list of additional labels to add to rendered manifests"
-																	type: "object"
+																	description: "CommonLabels is a list of additional labels to add to rendered manifests"
+																	type:        "object"
 																}
 																components: {
-																	description:
-																		"Components specifies a list of kustomize components to add to the kustomization before building"
+																	description: "Components specifies a list of kustomize components to add to the kustomization before building"
 																	items: type: "string"
 																	type: "array"
 																}
 																forceCommonAnnotations: {
-																	description:
-																		"ForceCommonAnnotations specifies whether to force applying common annotations to resources for Kustomize apps"
-																	type: "boolean"
+																	description: "ForceCommonAnnotations specifies whether to force applying common annotations to resources for Kustomize apps"
+																	type:        "boolean"
 																}
 																forceCommonLabels: {
-																	description:
-																		"ForceCommonLabels specifies whether to force applying common labels to resources for Kustomize apps"
-																	type: "boolean"
+																	description: "ForceCommonLabels specifies whether to force applying common labels to resources for Kustomize apps"
+																	type:        "boolean"
+																}
+																ignoreMissingComponents: {
+																	description: "IgnoreMissingComponents prevents kustomize from failing when components do not exist locally by not appending them to kustomization file"
+																	type:        "boolean"
 																}
 																images: {
-																	description:
-																		"Images is a list of Kustomize image override specifications"
+																	description: "Images is a list of Kustomize image override specifications"
 																	items: {
-																		description:
-																			"KustomizeImage represents a Kustomize image definition in the format [old_image_name=]<image_name>:<image_tag>"
-																		type: "string"
+																		description: "KustomizeImage represents a Kustomize image definition in the format [old_image_name=]<image_name>:<image_tag>"
+																		type:        "string"
 																	}
 																	type: "array"
 																}
@@ -6479,25 +5898,25 @@ kube: argocd: CustomResourceDefinition: "applications.argoproj.io": {
 	"""
 																	type: "string"
 																}
+																labelIncludeTemplates: {
+																	description: "LabelIncludeTemplates specifies whether to apply common labels to resource templates or not"
+																	type:        "boolean"
+																}
 																labelWithoutSelector: {
-																	description:
-																		"LabelWithoutSelector specifies whether to apply common labels to resource selectors or not"
-																	type: "boolean"
+																	description: "LabelWithoutSelector specifies whether to apply common labels to resource selectors or not"
+																	type:        "boolean"
 																}
 																namePrefix: {
-																	description:
-																		"NamePrefix is a prefix appended to resources for Kustomize apps"
-																	type: "string"
+																	description: "NamePrefix is a prefix appended to resources for Kustomize apps"
+																	type:        "string"
 																}
 																nameSuffix: {
-																	description:
-																		"NameSuffix is a suffix appended to resources for Kustomize apps"
-																	type: "string"
+																	description: "NameSuffix is a suffix appended to resources for Kustomize apps"
+																	type:        "string"
 																}
 																namespace: {
-																	description:
-																		"Namespace sets the namespace that Kustomize adds to all resources"
-																	type: "string"
+																	description: "Namespace sets the namespace that Kustomize adds to all resources"
+																	type:        "string"
 																}
 																patches: {
 																	description: "Patches is a list of Kustomize patches"
@@ -6527,8 +5946,7 @@ kube: argocd: CustomResourceDefinition: "applications.argoproj.io": {
 																	type: "array"
 																}
 																replicas: {
-																	description:
-																		"Replicas is a list of Kustomize Replicas override specifications"
+																	description: "Replicas is a list of Kustomize Replicas override specifications"
 																	items: {
 																		properties: {
 																			count: {
@@ -6554,38 +5972,31 @@ kube: argocd: CustomResourceDefinition: "applications.argoproj.io": {
 																	type: "array"
 																}
 																version: {
-																	description:
-																		"Version controls which version of Kustomize to use for rendering manifests"
-																	type: "string"
+																	description: "Version controls which version of Kustomize to use for rendering manifests"
+																	type:        "string"
 																}
 															}
 															type: "object"
 														}
 														name: {
-															description:
-																"Name is used to refer to a source and is displayed in the UI. It is used in multi-source Applications."
-															type: "string"
+															description: "Name is used to refer to a source and is displayed in the UI. It is used in multi-source Applications."
+															type:        "string"
 														}
 														path: {
-															description:
-																"Path is a directory path within the Git repository, and is only valid for applications sourced from Git."
-															type: "string"
+															description: "Path is a directory path within the Git repository, and is only valid for applications sourced from Git."
+															type:        "string"
 														}
 														plugin: {
-															description:
-																"Plugin holds config management plugin specific options"
+															description: "Plugin holds config management plugin specific options"
 															properties: {
 																env: {
-																	description:
-																		"Env is a list of environment variable entries"
+																	description: "Env is a list of environment variable entries"
 																	items: {
-																		description:
-																			"EnvEntry represents an entry in the application's environment"
+																		description: "EnvEntry represents an entry in the application's environment"
 																		properties: {
 																			name: {
-																				description:
-																					"Name is the name of the variable, usually expressed in uppercase"
-																				type: "string"
+																				description: "Name is the name of the variable, usually expressed in uppercase"
+																				type:        "string"
 																			}
 																			value: {
 																				description: "Value is the value of the variable"
@@ -6605,26 +6016,22 @@ kube: argocd: CustomResourceDefinition: "applications.argoproj.io": {
 																	items: {
 																		properties: {
 																			array: {
-																				description:
-																					"Array is the value of an array type parameter."
+																				description: "Array is the value of an array type parameter."
 																				items: type: "string"
 																				type: "array"
 																			}
 																			map: {
 																				additionalProperties: type: "string"
-																				description:
-																					"Map is the value of a map type parameter."
-																				type: "object"
+																				description: "Map is the value of a map type parameter."
+																				type:        "object"
 																			}
 																			name: {
-																				description:
-																					"Name is the name identifying a parameter."
-																				type: "string"
+																				description: "Name is the name identifying a parameter."
+																				type:        "string"
 																			}
 																			string: {
-																				description:
-																					"String_ is the value of a string type parameter."
-																				type: "string"
+																				description: "String_ is the value of a string type parameter."
+																				type:        "string"
 																			}
 																		}
 																		type: "object"
@@ -6635,14 +6042,12 @@ kube: argocd: CustomResourceDefinition: "applications.argoproj.io": {
 															type: "object"
 														}
 														ref: {
-															description:
-																"Ref is reference to another source within sources field. This field will not be used if used with a `source` tag."
-															type: "string"
+															description: "Ref is reference to another source within sources field. This field will not be used if used with a `source` tag."
+															type:        "string"
 														}
 														repoURL: {
-															description:
-																"RepoURL is the URL to the repository (Git or Helm) that contains the application manifests"
-															type: "string"
+															description: "RepoURL is the URL to the repository (Git or Helm) that contains the application manifests"
+															type:        "string"
 														}
 														targetRevision: {
 															description: """
@@ -6663,13 +6068,11 @@ kube: argocd: CustomResourceDefinition: "applications.argoproj.io": {
 										type: "object"
 									}
 									revision: {
-										description:
-											"Revision contains information about the revision the comparison has been performed to"
-										type: "string"
+										description: "Revision contains information about the revision the comparison has been performed to"
+										type:        "string"
 									}
 									revisions: {
-										description:
-											"Revisions contains information about the revisions of multiple sources the comparison has been performed to"
+										description: "Revisions contains information about the revisions of multiple sources the comparison has been performed to"
 										items: type: "string"
 										type: "array"
 									}
@@ -6963,17 +6366,19 @@ kube: argocd: CustomResourceDefinition: "applicationsets.argoproj.io": {
 																					items: type: "string"
 																					type: "array"
 																				}
-																				forceCommonAnnotations: type: "boolean"
-																				forceCommonLabels: type:      "boolean"
+																				forceCommonAnnotations: type:  "boolean"
+																				forceCommonLabels: type:       "boolean"
+																				ignoreMissingComponents: type: "boolean"
 																				images: {
 																					items: type: "string"
 																					type: "array"
 																				}
-																				kubeVersion: type:          "string"
-																				labelWithoutSelector: type: "boolean"
-																				namePrefix: type:           "string"
-																				nameSuffix: type:           "string"
-																				namespace: type:            "string"
+																				kubeVersion: type:           "string"
+																				labelIncludeTemplates: type: "boolean"
+																				labelWithoutSelector: type:  "boolean"
+																				namePrefix: type:            "string"
+																				nameSuffix: type:            "string"
+																				namespace: type:             "string"
 																				patches: {
 																					items: {
 																						properties: {
@@ -7094,7 +6499,11 @@ kube: argocd: CustomResourceDefinition: "applicationsets.argoproj.io": {
 																		}
 																		syncSource: {
 																			properties: {
-																				path: type:         "string"
+																				path: {
+																					minLength: 1
+																					pattern:   "^.{2,}|[^./]$"
+																					type:      "string"
+																				}
 																				targetBranch: type: "string"
 																			}
 																			required: [
@@ -7228,17 +6637,19 @@ kube: argocd: CustomResourceDefinition: "applicationsets.argoproj.io": {
 																						items: type: "string"
 																						type: "array"
 																					}
-																					forceCommonAnnotations: type: "boolean"
-																					forceCommonLabels: type:      "boolean"
+																					forceCommonAnnotations: type:  "boolean"
+																					forceCommonLabels: type:       "boolean"
+																					ignoreMissingComponents: type: "boolean"
 																					images: {
 																						items: type: "string"
 																						type: "array"
 																					}
-																					kubeVersion: type:          "string"
-																					labelWithoutSelector: type: "boolean"
-																					namePrefix: type:           "string"
-																					nameSuffix: type:           "string"
-																					namespace: type:            "string"
+																					kubeVersion: type:           "string"
+																					labelIncludeTemplates: type: "boolean"
+																					labelWithoutSelector: type:  "boolean"
+																					namePrefix: type:            "string"
+																					nameSuffix: type:            "string"
+																					namespace: type:             "string"
 																					patches: {
 																						items: {
 																							properties: {
@@ -7344,6 +6755,7 @@ kube: argocd: CustomResourceDefinition: "applicationsets.argoproj.io": {
 																		automated: {
 																			properties: {
 																				allowEmpty: type: "boolean"
+																				enabled: type:    "boolean"
 																				prune: type:      "boolean"
 																				selfHeal: type:   "boolean"
 																			}
@@ -7379,6 +6791,7 @@ kube: argocd: CustomResourceDefinition: "applicationsets.argoproj.io": {
 																					format: "int64"
 																					type:   "integer"
 																				}
+																				refresh: type: "boolean"
 																			}
 																			type: "object"
 																		}
@@ -7636,17 +7049,19 @@ kube: argocd: CustomResourceDefinition: "applicationsets.argoproj.io": {
 																					items: type: "string"
 																					type: "array"
 																				}
-																				forceCommonAnnotations: type: "boolean"
-																				forceCommonLabels: type:      "boolean"
+																				forceCommonAnnotations: type:  "boolean"
+																				forceCommonLabels: type:       "boolean"
+																				ignoreMissingComponents: type: "boolean"
 																				images: {
 																					items: type: "string"
 																					type: "array"
 																				}
-																				kubeVersion: type:          "string"
-																				labelWithoutSelector: type: "boolean"
-																				namePrefix: type:           "string"
-																				nameSuffix: type:           "string"
-																				namespace: type:            "string"
+																				kubeVersion: type:           "string"
+																				labelIncludeTemplates: type: "boolean"
+																				labelWithoutSelector: type:  "boolean"
+																				namePrefix: type:            "string"
+																				nameSuffix: type:            "string"
+																				namespace: type:             "string"
 																				patches: {
 																					items: {
 																						properties: {
@@ -7767,7 +7182,11 @@ kube: argocd: CustomResourceDefinition: "applicationsets.argoproj.io": {
 																		}
 																		syncSource: {
 																			properties: {
-																				path: type:         "string"
+																				path: {
+																					minLength: 1
+																					pattern:   "^.{2,}|[^./]$"
+																					type:      "string"
+																				}
 																				targetBranch: type: "string"
 																			}
 																			required: [
@@ -7901,17 +7320,19 @@ kube: argocd: CustomResourceDefinition: "applicationsets.argoproj.io": {
 																						items: type: "string"
 																						type: "array"
 																					}
-																					forceCommonAnnotations: type: "boolean"
-																					forceCommonLabels: type:      "boolean"
+																					forceCommonAnnotations: type:  "boolean"
+																					forceCommonLabels: type:       "boolean"
+																					ignoreMissingComponents: type: "boolean"
 																					images: {
 																						items: type: "string"
 																						type: "array"
 																					}
-																					kubeVersion: type:          "string"
-																					labelWithoutSelector: type: "boolean"
-																					namePrefix: type:           "string"
-																					nameSuffix: type:           "string"
-																					namespace: type:            "string"
+																					kubeVersion: type:           "string"
+																					labelIncludeTemplates: type: "boolean"
+																					labelWithoutSelector: type:  "boolean"
+																					namePrefix: type:            "string"
+																					nameSuffix: type:            "string"
+																					namespace: type:             "string"
 																					patches: {
 																						items: {
 																							properties: {
@@ -8017,6 +7438,7 @@ kube: argocd: CustomResourceDefinition: "applicationsets.argoproj.io": {
 																		automated: {
 																			properties: {
 																				allowEmpty: type: "boolean"
+																				enabled: type:    "boolean"
 																				prune: type:      "boolean"
 																				selfHeal: type:   "boolean"
 																			}
@@ -8052,6 +7474,7 @@ kube: argocd: CustomResourceDefinition: "applicationsets.argoproj.io": {
 																					format: "int64"
 																					type:   "integer"
 																				}
+																				refresh: type: "boolean"
 																			}
 																			type: "object"
 																		}
@@ -8098,7 +7521,10 @@ kube: argocd: CustomResourceDefinition: "applicationsets.argoproj.io": {
 												}
 												files: {
 													items: {
-														properties: path: type: "string"
+														properties: {
+															exclude: type: "boolean"
+															path: type:    "string"
+														}
 														required: ["path"]
 														type: "object"
 													}
@@ -8303,17 +7729,19 @@ kube: argocd: CustomResourceDefinition: "applicationsets.argoproj.io": {
 																					items: type: "string"
 																					type: "array"
 																				}
-																				forceCommonAnnotations: type: "boolean"
-																				forceCommonLabels: type:      "boolean"
+																				forceCommonAnnotations: type:  "boolean"
+																				forceCommonLabels: type:       "boolean"
+																				ignoreMissingComponents: type: "boolean"
 																				images: {
 																					items: type: "string"
 																					type: "array"
 																				}
-																				kubeVersion: type:          "string"
-																				labelWithoutSelector: type: "boolean"
-																				namePrefix: type:           "string"
-																				nameSuffix: type:           "string"
-																				namespace: type:            "string"
+																				kubeVersion: type:           "string"
+																				labelIncludeTemplates: type: "boolean"
+																				labelWithoutSelector: type:  "boolean"
+																				namePrefix: type:            "string"
+																				nameSuffix: type:            "string"
+																				namespace: type:             "string"
 																				patches: {
 																					items: {
 																						properties: {
@@ -8434,7 +7862,11 @@ kube: argocd: CustomResourceDefinition: "applicationsets.argoproj.io": {
 																		}
 																		syncSource: {
 																			properties: {
-																				path: type:         "string"
+																				path: {
+																					minLength: 1
+																					pattern:   "^.{2,}|[^./]$"
+																					type:      "string"
+																				}
 																				targetBranch: type: "string"
 																			}
 																			required: [
@@ -8568,17 +8000,19 @@ kube: argocd: CustomResourceDefinition: "applicationsets.argoproj.io": {
 																						items: type: "string"
 																						type: "array"
 																					}
-																					forceCommonAnnotations: type: "boolean"
-																					forceCommonLabels: type:      "boolean"
+																					forceCommonAnnotations: type:  "boolean"
+																					forceCommonLabels: type:       "boolean"
+																					ignoreMissingComponents: type: "boolean"
 																					images: {
 																						items: type: "string"
 																						type: "array"
 																					}
-																					kubeVersion: type:          "string"
-																					labelWithoutSelector: type: "boolean"
-																					namePrefix: type:           "string"
-																					nameSuffix: type:           "string"
-																					namespace: type:            "string"
+																					kubeVersion: type:           "string"
+																					labelIncludeTemplates: type: "boolean"
+																					labelWithoutSelector: type:  "boolean"
+																					namePrefix: type:            "string"
+																					nameSuffix: type:            "string"
+																					namespace: type:             "string"
 																					patches: {
 																						items: {
 																							properties: {
@@ -8684,6 +8118,7 @@ kube: argocd: CustomResourceDefinition: "applicationsets.argoproj.io": {
 																		automated: {
 																			properties: {
 																				allowEmpty: type: "boolean"
+																				enabled: type:    "boolean"
 																				prune: type:      "boolean"
 																				selfHeal: type:   "boolean"
 																			}
@@ -8719,6 +8154,7 @@ kube: argocd: CustomResourceDefinition: "applicationsets.argoproj.io": {
 																					format: "int64"
 																					type:   "integer"
 																				}
+																				refresh: type: "boolean"
 																			}
 																			type: "object"
 																		}
@@ -8953,17 +8389,19 @@ kube: argocd: CustomResourceDefinition: "applicationsets.argoproj.io": {
 																					items: type: "string"
 																					type: "array"
 																				}
-																				forceCommonAnnotations: type: "boolean"
-																				forceCommonLabels: type:      "boolean"
+																				forceCommonAnnotations: type:  "boolean"
+																				forceCommonLabels: type:       "boolean"
+																				ignoreMissingComponents: type: "boolean"
 																				images: {
 																					items: type: "string"
 																					type: "array"
 																				}
-																				kubeVersion: type:          "string"
-																				labelWithoutSelector: type: "boolean"
-																				namePrefix: type:           "string"
-																				nameSuffix: type:           "string"
-																				namespace: type:            "string"
+																				kubeVersion: type:           "string"
+																				labelIncludeTemplates: type: "boolean"
+																				labelWithoutSelector: type:  "boolean"
+																				namePrefix: type:            "string"
+																				nameSuffix: type:            "string"
+																				namespace: type:             "string"
 																				patches: {
 																					items: {
 																						properties: {
@@ -9084,7 +8522,11 @@ kube: argocd: CustomResourceDefinition: "applicationsets.argoproj.io": {
 																		}
 																		syncSource: {
 																			properties: {
-																				path: type:         "string"
+																				path: {
+																					minLength: 1
+																					pattern:   "^.{2,}|[^./]$"
+																					type:      "string"
+																				}
 																				targetBranch: type: "string"
 																			}
 																			required: [
@@ -9218,17 +8660,19 @@ kube: argocd: CustomResourceDefinition: "applicationsets.argoproj.io": {
 																						items: type: "string"
 																						type: "array"
 																					}
-																					forceCommonAnnotations: type: "boolean"
-																					forceCommonLabels: type:      "boolean"
+																					forceCommonAnnotations: type:  "boolean"
+																					forceCommonLabels: type:       "boolean"
+																					ignoreMissingComponents: type: "boolean"
 																					images: {
 																						items: type: "string"
 																						type: "array"
 																					}
-																					kubeVersion: type:          "string"
-																					labelWithoutSelector: type: "boolean"
-																					namePrefix: type:           "string"
-																					nameSuffix: type:           "string"
-																					namespace: type:            "string"
+																					kubeVersion: type:           "string"
+																					labelIncludeTemplates: type: "boolean"
+																					labelWithoutSelector: type:  "boolean"
+																					namePrefix: type:            "string"
+																					nameSuffix: type:            "string"
+																					namespace: type:             "string"
 																					patches: {
 																						items: {
 																							properties: {
@@ -9334,6 +8778,7 @@ kube: argocd: CustomResourceDefinition: "applicationsets.argoproj.io": {
 																		automated: {
 																			properties: {
 																				allowEmpty: type: "boolean"
+																				enabled: type:    "boolean"
 																				prune: type:      "boolean"
 																				selfHeal: type:   "boolean"
 																			}
@@ -9369,6 +8814,7 @@ kube: argocd: CustomResourceDefinition: "applicationsets.argoproj.io": {
 																					format: "int64"
 																					type:   "integer"
 																				}
+																				refresh: type: "boolean"
 																			}
 																			type: "object"
 																		}
@@ -9631,17 +9077,19 @@ kube: argocd: CustomResourceDefinition: "applicationsets.argoproj.io": {
 																										items: type: "string"
 																										type: "array"
 																									}
-																									forceCommonAnnotations: type: "boolean"
-																									forceCommonLabels: type:      "boolean"
+																									forceCommonAnnotations: type:  "boolean"
+																									forceCommonLabels: type:       "boolean"
+																									ignoreMissingComponents: type: "boolean"
 																									images: {
 																										items: type: "string"
 																										type: "array"
 																									}
-																									kubeVersion: type:          "string"
-																									labelWithoutSelector: type: "boolean"
-																									namePrefix: type:           "string"
-																									nameSuffix: type:           "string"
-																									namespace: type:            "string"
+																									kubeVersion: type:           "string"
+																									labelIncludeTemplates: type: "boolean"
+																									labelWithoutSelector: type:  "boolean"
+																									namePrefix: type:            "string"
+																									nameSuffix: type:            "string"
+																									namespace: type:             "string"
 																									patches: {
 																										items: {
 																											properties: {
@@ -9762,7 +9210,11 @@ kube: argocd: CustomResourceDefinition: "applicationsets.argoproj.io": {
 																							}
 																							syncSource: {
 																								properties: {
-																									path: type:         "string"
+																									path: {
+																										minLength: 1
+																										pattern:   "^.{2,}|[^./]$"
+																										type:      "string"
+																									}
 																									targetBranch: type: "string"
 																								}
 																								required: [
@@ -9896,17 +9348,19 @@ kube: argocd: CustomResourceDefinition: "applicationsets.argoproj.io": {
 																											items: type: "string"
 																											type: "array"
 																										}
-																										forceCommonAnnotations: type: "boolean"
-																										forceCommonLabels: type:      "boolean"
+																										forceCommonAnnotations: type:  "boolean"
+																										forceCommonLabels: type:       "boolean"
+																										ignoreMissingComponents: type: "boolean"
 																										images: {
 																											items: type: "string"
 																											type: "array"
 																										}
-																										kubeVersion: type:          "string"
-																										labelWithoutSelector: type: "boolean"
-																										namePrefix: type:           "string"
-																										nameSuffix: type:           "string"
-																										namespace: type:            "string"
+																										kubeVersion: type:           "string"
+																										labelIncludeTemplates: type: "boolean"
+																										labelWithoutSelector: type:  "boolean"
+																										namePrefix: type:            "string"
+																										nameSuffix: type:            "string"
+																										namespace: type:             "string"
 																										patches: {
 																											items: {
 																												properties: {
@@ -10012,6 +9466,7 @@ kube: argocd: CustomResourceDefinition: "applicationsets.argoproj.io": {
 																							automated: {
 																								properties: {
 																									allowEmpty: type: "boolean"
+																									enabled: type:    "boolean"
 																									prune: type:      "boolean"
 																									selfHeal: type:   "boolean"
 																								}
@@ -10047,6 +9502,7 @@ kube: argocd: CustomResourceDefinition: "applicationsets.argoproj.io": {
 																										format: "int64"
 																										type:   "integer"
 																									}
+																									refresh: type: "boolean"
 																								}
 																								type: "object"
 																							}
@@ -10304,17 +9760,19 @@ kube: argocd: CustomResourceDefinition: "applicationsets.argoproj.io": {
 																										items: type: "string"
 																										type: "array"
 																									}
-																									forceCommonAnnotations: type: "boolean"
-																									forceCommonLabels: type:      "boolean"
+																									forceCommonAnnotations: type:  "boolean"
+																									forceCommonLabels: type:       "boolean"
+																									ignoreMissingComponents: type: "boolean"
 																									images: {
 																										items: type: "string"
 																										type: "array"
 																									}
-																									kubeVersion: type:          "string"
-																									labelWithoutSelector: type: "boolean"
-																									namePrefix: type:           "string"
-																									nameSuffix: type:           "string"
-																									namespace: type:            "string"
+																									kubeVersion: type:           "string"
+																									labelIncludeTemplates: type: "boolean"
+																									labelWithoutSelector: type:  "boolean"
+																									namePrefix: type:            "string"
+																									nameSuffix: type:            "string"
+																									namespace: type:             "string"
 																									patches: {
 																										items: {
 																											properties: {
@@ -10435,7 +9893,11 @@ kube: argocd: CustomResourceDefinition: "applicationsets.argoproj.io": {
 																							}
 																							syncSource: {
 																								properties: {
-																									path: type:         "string"
+																									path: {
+																										minLength: 1
+																										pattern:   "^.{2,}|[^./]$"
+																										type:      "string"
+																									}
 																									targetBranch: type: "string"
 																								}
 																								required: [
@@ -10569,17 +10031,19 @@ kube: argocd: CustomResourceDefinition: "applicationsets.argoproj.io": {
 																											items: type: "string"
 																											type: "array"
 																										}
-																										forceCommonAnnotations: type: "boolean"
-																										forceCommonLabels: type:      "boolean"
+																										forceCommonAnnotations: type:  "boolean"
+																										forceCommonLabels: type:       "boolean"
+																										ignoreMissingComponents: type: "boolean"
 																										images: {
 																											items: type: "string"
 																											type: "array"
 																										}
-																										kubeVersion: type:          "string"
-																										labelWithoutSelector: type: "boolean"
-																										namePrefix: type:           "string"
-																										nameSuffix: type:           "string"
-																										namespace: type:            "string"
+																										kubeVersion: type:           "string"
+																										labelIncludeTemplates: type: "boolean"
+																										labelWithoutSelector: type:  "boolean"
+																										namePrefix: type:            "string"
+																										nameSuffix: type:            "string"
+																										namespace: type:             "string"
 																										patches: {
 																											items: {
 																												properties: {
@@ -10685,6 +10149,7 @@ kube: argocd: CustomResourceDefinition: "applicationsets.argoproj.io": {
 																							automated: {
 																								properties: {
 																									allowEmpty: type: "boolean"
+																									enabled: type:    "boolean"
 																									prune: type:      "boolean"
 																									selfHeal: type:   "boolean"
 																								}
@@ -10720,6 +10185,7 @@ kube: argocd: CustomResourceDefinition: "applicationsets.argoproj.io": {
 																										format: "int64"
 																										type:   "integer"
 																									}
+																									refresh: type: "boolean"
 																								}
 																								type: "object"
 																							}
@@ -10766,7 +10232,10 @@ kube: argocd: CustomResourceDefinition: "applicationsets.argoproj.io": {
 																	}
 																	files: {
 																		items: {
-																			properties: path: type: "string"
+																			properties: {
+																				exclude: type: "boolean"
+																				path: type:    "string"
+																			}
 																			required: ["path"]
 																			type: "object"
 																		}
@@ -10971,17 +10440,19 @@ kube: argocd: CustomResourceDefinition: "applicationsets.argoproj.io": {
 																										items: type: "string"
 																										type: "array"
 																									}
-																									forceCommonAnnotations: type: "boolean"
-																									forceCommonLabels: type:      "boolean"
+																									forceCommonAnnotations: type:  "boolean"
+																									forceCommonLabels: type:       "boolean"
+																									ignoreMissingComponents: type: "boolean"
 																									images: {
 																										items: type: "string"
 																										type: "array"
 																									}
-																									kubeVersion: type:          "string"
-																									labelWithoutSelector: type: "boolean"
-																									namePrefix: type:           "string"
-																									nameSuffix: type:           "string"
-																									namespace: type:            "string"
+																									kubeVersion: type:           "string"
+																									labelIncludeTemplates: type: "boolean"
+																									labelWithoutSelector: type:  "boolean"
+																									namePrefix: type:            "string"
+																									nameSuffix: type:            "string"
+																									namespace: type:             "string"
 																									patches: {
 																										items: {
 																											properties: {
@@ -11102,7 +10573,11 @@ kube: argocd: CustomResourceDefinition: "applicationsets.argoproj.io": {
 																							}
 																							syncSource: {
 																								properties: {
-																									path: type:         "string"
+																									path: {
+																										minLength: 1
+																										pattern:   "^.{2,}|[^./]$"
+																										type:      "string"
+																									}
 																									targetBranch: type: "string"
 																								}
 																								required: [
@@ -11236,17 +10711,19 @@ kube: argocd: CustomResourceDefinition: "applicationsets.argoproj.io": {
 																											items: type: "string"
 																											type: "array"
 																										}
-																										forceCommonAnnotations: type: "boolean"
-																										forceCommonLabels: type:      "boolean"
+																										forceCommonAnnotations: type:  "boolean"
+																										forceCommonLabels: type:       "boolean"
+																										ignoreMissingComponents: type: "boolean"
 																										images: {
 																											items: type: "string"
 																											type: "array"
 																										}
-																										kubeVersion: type:          "string"
-																										labelWithoutSelector: type: "boolean"
-																										namePrefix: type:           "string"
-																										nameSuffix: type:           "string"
-																										namespace: type:            "string"
+																										kubeVersion: type:           "string"
+																										labelIncludeTemplates: type: "boolean"
+																										labelWithoutSelector: type:  "boolean"
+																										namePrefix: type:            "string"
+																										nameSuffix: type:            "string"
+																										namespace: type:             "string"
 																										patches: {
 																											items: {
 																												properties: {
@@ -11352,6 +10829,7 @@ kube: argocd: CustomResourceDefinition: "applicationsets.argoproj.io": {
 																							automated: {
 																								properties: {
 																									allowEmpty: type: "boolean"
+																									enabled: type:    "boolean"
 																									prune: type:      "boolean"
 																									selfHeal: type:   "boolean"
 																								}
@@ -11387,6 +10865,7 @@ kube: argocd: CustomResourceDefinition: "applicationsets.argoproj.io": {
 																										format: "int64"
 																										type:   "integer"
 																									}
+																									refresh: type: "boolean"
 																								}
 																								type: "object"
 																							}
@@ -11621,17 +11100,19 @@ kube: argocd: CustomResourceDefinition: "applicationsets.argoproj.io": {
 																										items: type: "string"
 																										type: "array"
 																									}
-																									forceCommonAnnotations: type: "boolean"
-																									forceCommonLabels: type:      "boolean"
+																									forceCommonAnnotations: type:  "boolean"
+																									forceCommonLabels: type:       "boolean"
+																									ignoreMissingComponents: type: "boolean"
 																									images: {
 																										items: type: "string"
 																										type: "array"
 																									}
-																									kubeVersion: type:          "string"
-																									labelWithoutSelector: type: "boolean"
-																									namePrefix: type:           "string"
-																									nameSuffix: type:           "string"
-																									namespace: type:            "string"
+																									kubeVersion: type:           "string"
+																									labelIncludeTemplates: type: "boolean"
+																									labelWithoutSelector: type:  "boolean"
+																									namePrefix: type:            "string"
+																									nameSuffix: type:            "string"
+																									namespace: type:             "string"
 																									patches: {
 																										items: {
 																											properties: {
@@ -11752,7 +11233,11 @@ kube: argocd: CustomResourceDefinition: "applicationsets.argoproj.io": {
 																							}
 																							syncSource: {
 																								properties: {
-																									path: type:         "string"
+																									path: {
+																										minLength: 1
+																										pattern:   "^.{2,}|[^./]$"
+																										type:      "string"
+																									}
 																									targetBranch: type: "string"
 																								}
 																								required: [
@@ -11886,17 +11371,19 @@ kube: argocd: CustomResourceDefinition: "applicationsets.argoproj.io": {
 																											items: type: "string"
 																											type: "array"
 																										}
-																										forceCommonAnnotations: type: "boolean"
-																										forceCommonLabels: type:      "boolean"
+																										forceCommonAnnotations: type:  "boolean"
+																										forceCommonLabels: type:       "boolean"
+																										ignoreMissingComponents: type: "boolean"
 																										images: {
 																											items: type: "string"
 																											type: "array"
 																										}
-																										kubeVersion: type:          "string"
-																										labelWithoutSelector: type: "boolean"
-																										namePrefix: type:           "string"
-																										nameSuffix: type:           "string"
-																										namespace: type:            "string"
+																										kubeVersion: type:           "string"
+																										labelIncludeTemplates: type: "boolean"
+																										labelWithoutSelector: type:  "boolean"
+																										namePrefix: type:            "string"
+																										nameSuffix: type:            "string"
+																										namespace: type:             "string"
 																										patches: {
 																											items: {
 																												properties: {
@@ -12002,6 +11489,7 @@ kube: argocd: CustomResourceDefinition: "applicationsets.argoproj.io": {
 																							automated: {
 																								properties: {
 																									allowEmpty: type: "boolean"
+																									enabled: type:    "boolean"
 																									prune: type:      "boolean"
 																									selfHeal: type:   "boolean"
 																								}
@@ -12037,6 +11525,7 @@ kube: argocd: CustomResourceDefinition: "applicationsets.argoproj.io": {
 																										format: "int64"
 																										type:   "integer"
 																									}
+																									refresh: type: "boolean"
 																								}
 																								type: "object"
 																							}
@@ -12276,17 +11765,19 @@ kube: argocd: CustomResourceDefinition: "applicationsets.argoproj.io": {
 																										items: type: "string"
 																										type: "array"
 																									}
-																									forceCommonAnnotations: type: "boolean"
-																									forceCommonLabels: type:      "boolean"
+																									forceCommonAnnotations: type:  "boolean"
+																									forceCommonLabels: type:       "boolean"
+																									ignoreMissingComponents: type: "boolean"
 																									images: {
 																										items: type: "string"
 																										type: "array"
 																									}
-																									kubeVersion: type:          "string"
-																									labelWithoutSelector: type: "boolean"
-																									namePrefix: type:           "string"
-																									nameSuffix: type:           "string"
-																									namespace: type:            "string"
+																									kubeVersion: type:           "string"
+																									labelIncludeTemplates: type: "boolean"
+																									labelWithoutSelector: type:  "boolean"
+																									namePrefix: type:            "string"
+																									nameSuffix: type:            "string"
+																									namespace: type:             "string"
 																									patches: {
 																										items: {
 																											properties: {
@@ -12407,7 +11898,11 @@ kube: argocd: CustomResourceDefinition: "applicationsets.argoproj.io": {
 																							}
 																							syncSource: {
 																								properties: {
-																									path: type:         "string"
+																									path: {
+																										minLength: 1
+																										pattern:   "^.{2,}|[^./]$"
+																										type:      "string"
+																									}
 																									targetBranch: type: "string"
 																								}
 																								required: [
@@ -12541,17 +12036,19 @@ kube: argocd: CustomResourceDefinition: "applicationsets.argoproj.io": {
 																											items: type: "string"
 																											type: "array"
 																										}
-																										forceCommonAnnotations: type: "boolean"
-																										forceCommonLabels: type:      "boolean"
+																										forceCommonAnnotations: type:  "boolean"
+																										forceCommonLabels: type:       "boolean"
+																										ignoreMissingComponents: type: "boolean"
 																										images: {
 																											items: type: "string"
 																											type: "array"
 																										}
-																										kubeVersion: type:          "string"
-																										labelWithoutSelector: type: "boolean"
-																										namePrefix: type:           "string"
-																										nameSuffix: type:           "string"
-																										namespace: type:            "string"
+																										kubeVersion: type:           "string"
+																										labelIncludeTemplates: type: "boolean"
+																										labelWithoutSelector: type:  "boolean"
+																										namePrefix: type:            "string"
+																										nameSuffix: type:            "string"
+																										namespace: type:             "string"
 																										patches: {
 																											items: {
 																												properties: {
@@ -12657,6 +12154,7 @@ kube: argocd: CustomResourceDefinition: "applicationsets.argoproj.io": {
 																							automated: {
 																								properties: {
 																									allowEmpty: type: "boolean"
+																									enabled: type:    "boolean"
 																									prune: type:      "boolean"
 																									selfHeal: type:   "boolean"
 																								}
@@ -12692,6 +12190,7 @@ kube: argocd: CustomResourceDefinition: "applicationsets.argoproj.io": {
 																										format: "int64"
 																										type:   "integer"
 																									}
+																									refresh: type: "boolean"
 																								}
 																								type: "object"
 																							}
@@ -12864,11 +12363,13 @@ kube: argocd: CustomResourceDefinition: "applicationsets.argoproj.io": {
 																		]
 																		type: "object"
 																	}
+																	continueOnRepoNotFoundError: type: "boolean"
 																	filters: {
 																		items: {
 																			properties: {
 																				branchMatch: type:       "string"
 																				targetBranchMatch: type: "string"
+																				titleMatch: type:        "string"
 																			}
 																			type: "object"
 																		}
@@ -12878,8 +12379,12 @@ kube: argocd: CustomResourceDefinition: "applicationsets.argoproj.io": {
 																		properties: {
 																			api: type:      "string"
 																			insecure: type: "boolean"
-																			owner: type:    "string"
-																			repo: type:     "string"
+																			labels: {
+																				items: type: "string"
+																				type: "array"
+																			}
+																			owner: type: "string"
+																			repo: type:  "string"
 																			tokenRef: {
 																				properties: {
 																					key: type:        "string"
@@ -13159,17 +12664,19 @@ kube: argocd: CustomResourceDefinition: "applicationsets.argoproj.io": {
 																										items: type: "string"
 																										type: "array"
 																									}
-																									forceCommonAnnotations: type: "boolean"
-																									forceCommonLabels: type:      "boolean"
+																									forceCommonAnnotations: type:  "boolean"
+																									forceCommonLabels: type:       "boolean"
+																									ignoreMissingComponents: type: "boolean"
 																									images: {
 																										items: type: "string"
 																										type: "array"
 																									}
-																									kubeVersion: type:          "string"
-																									labelWithoutSelector: type: "boolean"
-																									namePrefix: type:           "string"
-																									nameSuffix: type:           "string"
-																									namespace: type:            "string"
+																									kubeVersion: type:           "string"
+																									labelIncludeTemplates: type: "boolean"
+																									labelWithoutSelector: type:  "boolean"
+																									namePrefix: type:            "string"
+																									nameSuffix: type:            "string"
+																									namespace: type:             "string"
 																									patches: {
 																										items: {
 																											properties: {
@@ -13290,7 +12797,11 @@ kube: argocd: CustomResourceDefinition: "applicationsets.argoproj.io": {
 																							}
 																							syncSource: {
 																								properties: {
-																									path: type:         "string"
+																									path: {
+																										minLength: 1
+																										pattern:   "^.{2,}|[^./]$"
+																										type:      "string"
+																									}
 																									targetBranch: type: "string"
 																								}
 																								required: [
@@ -13424,17 +12935,19 @@ kube: argocd: CustomResourceDefinition: "applicationsets.argoproj.io": {
 																											items: type: "string"
 																											type: "array"
 																										}
-																										forceCommonAnnotations: type: "boolean"
-																										forceCommonLabels: type:      "boolean"
+																										forceCommonAnnotations: type:  "boolean"
+																										forceCommonLabels: type:       "boolean"
+																										ignoreMissingComponents: type: "boolean"
 																										images: {
 																											items: type: "string"
 																											type: "array"
 																										}
-																										kubeVersion: type:          "string"
-																										labelWithoutSelector: type: "boolean"
-																										namePrefix: type:           "string"
-																										nameSuffix: type:           "string"
-																										namespace: type:            "string"
+																										kubeVersion: type:           "string"
+																										labelIncludeTemplates: type: "boolean"
+																										labelWithoutSelector: type:  "boolean"
+																										namePrefix: type:            "string"
+																										nameSuffix: type:            "string"
+																										namespace: type:             "string"
 																										patches: {
 																											items: {
 																												properties: {
@@ -13540,6 +13053,7 @@ kube: argocd: CustomResourceDefinition: "applicationsets.argoproj.io": {
 																							automated: {
 																								properties: {
 																									allowEmpty: type: "boolean"
+																									enabled: type:    "boolean"
 																									prune: type:      "boolean"
 																									selfHeal: type:   "boolean"
 																								}
@@ -13575,6 +13089,7 @@ kube: argocd: CustomResourceDefinition: "applicationsets.argoproj.io": {
 																										format: "int64"
 																										type:   "integer"
 																									}
+																									refresh: type: "boolean"
 																								}
 																								type: "object"
 																							}
@@ -13597,6 +13112,10 @@ kube: argocd: CustomResourceDefinition: "applicationsets.argoproj.io": {
 																			"metadata",
 																			"spec",
 																		]
+																		type: "object"
+																	}
+																	values: {
+																		additionalProperties: type: "string"
 																		type: "object"
 																	}
 																}
@@ -14028,17 +13547,19 @@ kube: argocd: CustomResourceDefinition: "applicationsets.argoproj.io": {
 																										items: type: "string"
 																										type: "array"
 																									}
-																									forceCommonAnnotations: type: "boolean"
-																									forceCommonLabels: type:      "boolean"
+																									forceCommonAnnotations: type:  "boolean"
+																									forceCommonLabels: type:       "boolean"
+																									ignoreMissingComponents: type: "boolean"
 																									images: {
 																										items: type: "string"
 																										type: "array"
 																									}
-																									kubeVersion: type:          "string"
-																									labelWithoutSelector: type: "boolean"
-																									namePrefix: type:           "string"
-																									nameSuffix: type:           "string"
-																									namespace: type:            "string"
+																									kubeVersion: type:           "string"
+																									labelIncludeTemplates: type: "boolean"
+																									labelWithoutSelector: type:  "boolean"
+																									namePrefix: type:            "string"
+																									nameSuffix: type:            "string"
+																									namespace: type:             "string"
 																									patches: {
 																										items: {
 																											properties: {
@@ -14159,7 +13680,11 @@ kube: argocd: CustomResourceDefinition: "applicationsets.argoproj.io": {
 																							}
 																							syncSource: {
 																								properties: {
-																									path: type:         "string"
+																									path: {
+																										minLength: 1
+																										pattern:   "^.{2,}|[^./]$"
+																										type:      "string"
+																									}
 																									targetBranch: type: "string"
 																								}
 																								required: [
@@ -14293,17 +13818,19 @@ kube: argocd: CustomResourceDefinition: "applicationsets.argoproj.io": {
 																											items: type: "string"
 																											type: "array"
 																										}
-																										forceCommonAnnotations: type: "boolean"
-																										forceCommonLabels: type:      "boolean"
+																										forceCommonAnnotations: type:  "boolean"
+																										forceCommonLabels: type:       "boolean"
+																										ignoreMissingComponents: type: "boolean"
 																										images: {
 																											items: type: "string"
 																											type: "array"
 																										}
-																										kubeVersion: type:          "string"
-																										labelWithoutSelector: type: "boolean"
-																										namePrefix: type:           "string"
-																										nameSuffix: type:           "string"
-																										namespace: type:            "string"
+																										kubeVersion: type:           "string"
+																										labelIncludeTemplates: type: "boolean"
+																										labelWithoutSelector: type:  "boolean"
+																										namePrefix: type:            "string"
+																										nameSuffix: type:            "string"
+																										namespace: type:             "string"
 																										patches: {
 																											items: {
 																												properties: {
@@ -14409,6 +13936,7 @@ kube: argocd: CustomResourceDefinition: "applicationsets.argoproj.io": {
 																							automated: {
 																								properties: {
 																									allowEmpty: type: "boolean"
+																									enabled: type:    "boolean"
 																									prune: type:      "boolean"
 																									selfHeal: type:   "boolean"
 																								}
@@ -14444,6 +13972,7 @@ kube: argocd: CustomResourceDefinition: "applicationsets.argoproj.io": {
 																										format: "int64"
 																										type:   "integer"
 																									}
+																									refresh: type: "boolean"
 																								}
 																								type: "object"
 																							}
@@ -14702,17 +14231,19 @@ kube: argocd: CustomResourceDefinition: "applicationsets.argoproj.io": {
 																					items: type: "string"
 																					type: "array"
 																				}
-																				forceCommonAnnotations: type: "boolean"
-																				forceCommonLabels: type:      "boolean"
+																				forceCommonAnnotations: type:  "boolean"
+																				forceCommonLabels: type:       "boolean"
+																				ignoreMissingComponents: type: "boolean"
 																				images: {
 																					items: type: "string"
 																					type: "array"
 																				}
-																				kubeVersion: type:          "string"
-																				labelWithoutSelector: type: "boolean"
-																				namePrefix: type:           "string"
-																				nameSuffix: type:           "string"
-																				namespace: type:            "string"
+																				kubeVersion: type:           "string"
+																				labelIncludeTemplates: type: "boolean"
+																				labelWithoutSelector: type:  "boolean"
+																				namePrefix: type:            "string"
+																				nameSuffix: type:            "string"
+																				namespace: type:             "string"
 																				patches: {
 																					items: {
 																						properties: {
@@ -14833,7 +14364,11 @@ kube: argocd: CustomResourceDefinition: "applicationsets.argoproj.io": {
 																		}
 																		syncSource: {
 																			properties: {
-																				path: type:         "string"
+																				path: {
+																					minLength: 1
+																					pattern:   "^.{2,}|[^./]$"
+																					type:      "string"
+																				}
 																				targetBranch: type: "string"
 																			}
 																			required: [
@@ -14967,17 +14502,19 @@ kube: argocd: CustomResourceDefinition: "applicationsets.argoproj.io": {
 																						items: type: "string"
 																						type: "array"
 																					}
-																					forceCommonAnnotations: type: "boolean"
-																					forceCommonLabels: type:      "boolean"
+																					forceCommonAnnotations: type:  "boolean"
+																					forceCommonLabels: type:       "boolean"
+																					ignoreMissingComponents: type: "boolean"
 																					images: {
 																						items: type: "string"
 																						type: "array"
 																					}
-																					kubeVersion: type:          "string"
-																					labelWithoutSelector: type: "boolean"
-																					namePrefix: type:           "string"
-																					nameSuffix: type:           "string"
-																					namespace: type:            "string"
+																					kubeVersion: type:           "string"
+																					labelIncludeTemplates: type: "boolean"
+																					labelWithoutSelector: type:  "boolean"
+																					namePrefix: type:            "string"
+																					nameSuffix: type:            "string"
+																					namespace: type:             "string"
 																					patches: {
 																						items: {
 																							properties: {
@@ -15083,6 +14620,7 @@ kube: argocd: CustomResourceDefinition: "applicationsets.argoproj.io": {
 																		automated: {
 																			properties: {
 																				allowEmpty: type: "boolean"
+																				enabled: type:    "boolean"
 																				prune: type:      "boolean"
 																				selfHeal: type:   "boolean"
 																			}
@@ -15118,6 +14656,7 @@ kube: argocd: CustomResourceDefinition: "applicationsets.argoproj.io": {
 																					format: "int64"
 																					type:   "integer"
 																				}
+																				refresh: type: "boolean"
 																			}
 																			type: "object"
 																		}
@@ -15381,17 +14920,19 @@ kube: argocd: CustomResourceDefinition: "applicationsets.argoproj.io": {
 																										items: type: "string"
 																										type: "array"
 																									}
-																									forceCommonAnnotations: type: "boolean"
-																									forceCommonLabels: type:      "boolean"
+																									forceCommonAnnotations: type:  "boolean"
+																									forceCommonLabels: type:       "boolean"
+																									ignoreMissingComponents: type: "boolean"
 																									images: {
 																										items: type: "string"
 																										type: "array"
 																									}
-																									kubeVersion: type:          "string"
-																									labelWithoutSelector: type: "boolean"
-																									namePrefix: type:           "string"
-																									nameSuffix: type:           "string"
-																									namespace: type:            "string"
+																									kubeVersion: type:           "string"
+																									labelIncludeTemplates: type: "boolean"
+																									labelWithoutSelector: type:  "boolean"
+																									namePrefix: type:            "string"
+																									nameSuffix: type:            "string"
+																									namespace: type:             "string"
 																									patches: {
 																										items: {
 																											properties: {
@@ -15512,7 +15053,11 @@ kube: argocd: CustomResourceDefinition: "applicationsets.argoproj.io": {
 																							}
 																							syncSource: {
 																								properties: {
-																									path: type:         "string"
+																									path: {
+																										minLength: 1
+																										pattern:   "^.{2,}|[^./]$"
+																										type:      "string"
+																									}
 																									targetBranch: type: "string"
 																								}
 																								required: [
@@ -15646,17 +15191,19 @@ kube: argocd: CustomResourceDefinition: "applicationsets.argoproj.io": {
 																											items: type: "string"
 																											type: "array"
 																										}
-																										forceCommonAnnotations: type: "boolean"
-																										forceCommonLabels: type:      "boolean"
+																										forceCommonAnnotations: type:  "boolean"
+																										forceCommonLabels: type:       "boolean"
+																										ignoreMissingComponents: type: "boolean"
 																										images: {
 																											items: type: "string"
 																											type: "array"
 																										}
-																										kubeVersion: type:          "string"
-																										labelWithoutSelector: type: "boolean"
-																										namePrefix: type:           "string"
-																										nameSuffix: type:           "string"
-																										namespace: type:            "string"
+																										kubeVersion: type:           "string"
+																										labelIncludeTemplates: type: "boolean"
+																										labelWithoutSelector: type:  "boolean"
+																										namePrefix: type:            "string"
+																										nameSuffix: type:            "string"
+																										namespace: type:             "string"
 																										patches: {
 																											items: {
 																												properties: {
@@ -15762,6 +15309,7 @@ kube: argocd: CustomResourceDefinition: "applicationsets.argoproj.io": {
 																							automated: {
 																								properties: {
 																									allowEmpty: type: "boolean"
+																									enabled: type:    "boolean"
 																									prune: type:      "boolean"
 																									selfHeal: type:   "boolean"
 																								}
@@ -15797,6 +15345,7 @@ kube: argocd: CustomResourceDefinition: "applicationsets.argoproj.io": {
 																										format: "int64"
 																										type:   "integer"
 																									}
+																									refresh: type: "boolean"
 																								}
 																								type: "object"
 																							}
@@ -16054,17 +15603,19 @@ kube: argocd: CustomResourceDefinition: "applicationsets.argoproj.io": {
 																										items: type: "string"
 																										type: "array"
 																									}
-																									forceCommonAnnotations: type: "boolean"
-																									forceCommonLabels: type:      "boolean"
+																									forceCommonAnnotations: type:  "boolean"
+																									forceCommonLabels: type:       "boolean"
+																									ignoreMissingComponents: type: "boolean"
 																									images: {
 																										items: type: "string"
 																										type: "array"
 																									}
-																									kubeVersion: type:          "string"
-																									labelWithoutSelector: type: "boolean"
-																									namePrefix: type:           "string"
-																									nameSuffix: type:           "string"
-																									namespace: type:            "string"
+																									kubeVersion: type:           "string"
+																									labelIncludeTemplates: type: "boolean"
+																									labelWithoutSelector: type:  "boolean"
+																									namePrefix: type:            "string"
+																									nameSuffix: type:            "string"
+																									namespace: type:             "string"
 																									patches: {
 																										items: {
 																											properties: {
@@ -16185,7 +15736,11 @@ kube: argocd: CustomResourceDefinition: "applicationsets.argoproj.io": {
 																							}
 																							syncSource: {
 																								properties: {
-																									path: type:         "string"
+																									path: {
+																										minLength: 1
+																										pattern:   "^.{2,}|[^./]$"
+																										type:      "string"
+																									}
 																									targetBranch: type: "string"
 																								}
 																								required: [
@@ -16319,17 +15874,19 @@ kube: argocd: CustomResourceDefinition: "applicationsets.argoproj.io": {
 																											items: type: "string"
 																											type: "array"
 																										}
-																										forceCommonAnnotations: type: "boolean"
-																										forceCommonLabels: type:      "boolean"
+																										forceCommonAnnotations: type:  "boolean"
+																										forceCommonLabels: type:       "boolean"
+																										ignoreMissingComponents: type: "boolean"
 																										images: {
 																											items: type: "string"
 																											type: "array"
 																										}
-																										kubeVersion: type:          "string"
-																										labelWithoutSelector: type: "boolean"
-																										namePrefix: type:           "string"
-																										nameSuffix: type:           "string"
-																										namespace: type:            "string"
+																										kubeVersion: type:           "string"
+																										labelIncludeTemplates: type: "boolean"
+																										labelWithoutSelector: type:  "boolean"
+																										namePrefix: type:            "string"
+																										nameSuffix: type:            "string"
+																										namespace: type:             "string"
 																										patches: {
 																											items: {
 																												properties: {
@@ -16435,6 +15992,7 @@ kube: argocd: CustomResourceDefinition: "applicationsets.argoproj.io": {
 																							automated: {
 																								properties: {
 																									allowEmpty: type: "boolean"
+																									enabled: type:    "boolean"
 																									prune: type:      "boolean"
 																									selfHeal: type:   "boolean"
 																								}
@@ -16470,6 +16028,7 @@ kube: argocd: CustomResourceDefinition: "applicationsets.argoproj.io": {
 																										format: "int64"
 																										type:   "integer"
 																									}
+																									refresh: type: "boolean"
 																								}
 																								type: "object"
 																							}
@@ -16516,7 +16075,10 @@ kube: argocd: CustomResourceDefinition: "applicationsets.argoproj.io": {
 																	}
 																	files: {
 																		items: {
-																			properties: path: type: "string"
+																			properties: {
+																				exclude: type: "boolean"
+																				path: type:    "string"
+																			}
 																			required: ["path"]
 																			type: "object"
 																		}
@@ -16721,17 +16283,19 @@ kube: argocd: CustomResourceDefinition: "applicationsets.argoproj.io": {
 																										items: type: "string"
 																										type: "array"
 																									}
-																									forceCommonAnnotations: type: "boolean"
-																									forceCommonLabels: type:      "boolean"
+																									forceCommonAnnotations: type:  "boolean"
+																									forceCommonLabels: type:       "boolean"
+																									ignoreMissingComponents: type: "boolean"
 																									images: {
 																										items: type: "string"
 																										type: "array"
 																									}
-																									kubeVersion: type:          "string"
-																									labelWithoutSelector: type: "boolean"
-																									namePrefix: type:           "string"
-																									nameSuffix: type:           "string"
-																									namespace: type:            "string"
+																									kubeVersion: type:           "string"
+																									labelIncludeTemplates: type: "boolean"
+																									labelWithoutSelector: type:  "boolean"
+																									namePrefix: type:            "string"
+																									nameSuffix: type:            "string"
+																									namespace: type:             "string"
 																									patches: {
 																										items: {
 																											properties: {
@@ -16852,7 +16416,11 @@ kube: argocd: CustomResourceDefinition: "applicationsets.argoproj.io": {
 																							}
 																							syncSource: {
 																								properties: {
-																									path: type:         "string"
+																									path: {
+																										minLength: 1
+																										pattern:   "^.{2,}|[^./]$"
+																										type:      "string"
+																									}
 																									targetBranch: type: "string"
 																								}
 																								required: [
@@ -16986,17 +16554,19 @@ kube: argocd: CustomResourceDefinition: "applicationsets.argoproj.io": {
 																											items: type: "string"
 																											type: "array"
 																										}
-																										forceCommonAnnotations: type: "boolean"
-																										forceCommonLabels: type:      "boolean"
+																										forceCommonAnnotations: type:  "boolean"
+																										forceCommonLabels: type:       "boolean"
+																										ignoreMissingComponents: type: "boolean"
 																										images: {
 																											items: type: "string"
 																											type: "array"
 																										}
-																										kubeVersion: type:          "string"
-																										labelWithoutSelector: type: "boolean"
-																										namePrefix: type:           "string"
-																										nameSuffix: type:           "string"
-																										namespace: type:            "string"
+																										kubeVersion: type:           "string"
+																										labelIncludeTemplates: type: "boolean"
+																										labelWithoutSelector: type:  "boolean"
+																										namePrefix: type:            "string"
+																										nameSuffix: type:            "string"
+																										namespace: type:             "string"
 																										patches: {
 																											items: {
 																												properties: {
@@ -17102,6 +16672,7 @@ kube: argocd: CustomResourceDefinition: "applicationsets.argoproj.io": {
 																							automated: {
 																								properties: {
 																									allowEmpty: type: "boolean"
+																									enabled: type:    "boolean"
 																									prune: type:      "boolean"
 																									selfHeal: type:   "boolean"
 																								}
@@ -17137,6 +16708,7 @@ kube: argocd: CustomResourceDefinition: "applicationsets.argoproj.io": {
 																										format: "int64"
 																										type:   "integer"
 																									}
+																									refresh: type: "boolean"
 																								}
 																								type: "object"
 																							}
@@ -17371,17 +16943,19 @@ kube: argocd: CustomResourceDefinition: "applicationsets.argoproj.io": {
 																										items: type: "string"
 																										type: "array"
 																									}
-																									forceCommonAnnotations: type: "boolean"
-																									forceCommonLabels: type:      "boolean"
+																									forceCommonAnnotations: type:  "boolean"
+																									forceCommonLabels: type:       "boolean"
+																									ignoreMissingComponents: type: "boolean"
 																									images: {
 																										items: type: "string"
 																										type: "array"
 																									}
-																									kubeVersion: type:          "string"
-																									labelWithoutSelector: type: "boolean"
-																									namePrefix: type:           "string"
-																									nameSuffix: type:           "string"
-																									namespace: type:            "string"
+																									kubeVersion: type:           "string"
+																									labelIncludeTemplates: type: "boolean"
+																									labelWithoutSelector: type:  "boolean"
+																									namePrefix: type:            "string"
+																									nameSuffix: type:            "string"
+																									namespace: type:             "string"
 																									patches: {
 																										items: {
 																											properties: {
@@ -17502,7 +17076,11 @@ kube: argocd: CustomResourceDefinition: "applicationsets.argoproj.io": {
 																							}
 																							syncSource: {
 																								properties: {
-																									path: type:         "string"
+																									path: {
+																										minLength: 1
+																										pattern:   "^.{2,}|[^./]$"
+																										type:      "string"
+																									}
 																									targetBranch: type: "string"
 																								}
 																								required: [
@@ -17636,17 +17214,19 @@ kube: argocd: CustomResourceDefinition: "applicationsets.argoproj.io": {
 																											items: type: "string"
 																											type: "array"
 																										}
-																										forceCommonAnnotations: type: "boolean"
-																										forceCommonLabels: type:      "boolean"
+																										forceCommonAnnotations: type:  "boolean"
+																										forceCommonLabels: type:       "boolean"
+																										ignoreMissingComponents: type: "boolean"
 																										images: {
 																											items: type: "string"
 																											type: "array"
 																										}
-																										kubeVersion: type:          "string"
-																										labelWithoutSelector: type: "boolean"
-																										namePrefix: type:           "string"
-																										nameSuffix: type:           "string"
-																										namespace: type:            "string"
+																										kubeVersion: type:           "string"
+																										labelIncludeTemplates: type: "boolean"
+																										labelWithoutSelector: type:  "boolean"
+																										namePrefix: type:            "string"
+																										nameSuffix: type:            "string"
+																										namespace: type:             "string"
 																										patches: {
 																											items: {
 																												properties: {
@@ -17752,6 +17332,7 @@ kube: argocd: CustomResourceDefinition: "applicationsets.argoproj.io": {
 																							automated: {
 																								properties: {
 																									allowEmpty: type: "boolean"
+																									enabled: type:    "boolean"
 																									prune: type:      "boolean"
 																									selfHeal: type:   "boolean"
 																								}
@@ -17787,6 +17368,7 @@ kube: argocd: CustomResourceDefinition: "applicationsets.argoproj.io": {
 																										format: "int64"
 																										type:   "integer"
 																									}
+																									refresh: type: "boolean"
 																								}
 																								type: "object"
 																							}
@@ -18026,17 +17608,19 @@ kube: argocd: CustomResourceDefinition: "applicationsets.argoproj.io": {
 																										items: type: "string"
 																										type: "array"
 																									}
-																									forceCommonAnnotations: type: "boolean"
-																									forceCommonLabels: type:      "boolean"
+																									forceCommonAnnotations: type:  "boolean"
+																									forceCommonLabels: type:       "boolean"
+																									ignoreMissingComponents: type: "boolean"
 																									images: {
 																										items: type: "string"
 																										type: "array"
 																									}
-																									kubeVersion: type:          "string"
-																									labelWithoutSelector: type: "boolean"
-																									namePrefix: type:           "string"
-																									nameSuffix: type:           "string"
-																									namespace: type:            "string"
+																									kubeVersion: type:           "string"
+																									labelIncludeTemplates: type: "boolean"
+																									labelWithoutSelector: type:  "boolean"
+																									namePrefix: type:            "string"
+																									nameSuffix: type:            "string"
+																									namespace: type:             "string"
 																									patches: {
 																										items: {
 																											properties: {
@@ -18157,7 +17741,11 @@ kube: argocd: CustomResourceDefinition: "applicationsets.argoproj.io": {
 																							}
 																							syncSource: {
 																								properties: {
-																									path: type:         "string"
+																									path: {
+																										minLength: 1
+																										pattern:   "^.{2,}|[^./]$"
+																										type:      "string"
+																									}
 																									targetBranch: type: "string"
 																								}
 																								required: [
@@ -18291,17 +17879,19 @@ kube: argocd: CustomResourceDefinition: "applicationsets.argoproj.io": {
 																											items: type: "string"
 																											type: "array"
 																										}
-																										forceCommonAnnotations: type: "boolean"
-																										forceCommonLabels: type:      "boolean"
+																										forceCommonAnnotations: type:  "boolean"
+																										forceCommonLabels: type:       "boolean"
+																										ignoreMissingComponents: type: "boolean"
 																										images: {
 																											items: type: "string"
 																											type: "array"
 																										}
-																										kubeVersion: type:          "string"
-																										labelWithoutSelector: type: "boolean"
-																										namePrefix: type:           "string"
-																										nameSuffix: type:           "string"
-																										namespace: type:            "string"
+																										kubeVersion: type:           "string"
+																										labelIncludeTemplates: type: "boolean"
+																										labelWithoutSelector: type:  "boolean"
+																										namePrefix: type:            "string"
+																										nameSuffix: type:            "string"
+																										namespace: type:             "string"
 																										patches: {
 																											items: {
 																												properties: {
@@ -18407,6 +17997,7 @@ kube: argocd: CustomResourceDefinition: "applicationsets.argoproj.io": {
 																							automated: {
 																								properties: {
 																									allowEmpty: type: "boolean"
+																									enabled: type:    "boolean"
 																									prune: type:      "boolean"
 																									selfHeal: type:   "boolean"
 																								}
@@ -18442,6 +18033,7 @@ kube: argocd: CustomResourceDefinition: "applicationsets.argoproj.io": {
 																										format: "int64"
 																										type:   "integer"
 																									}
+																									refresh: type: "boolean"
 																								}
 																								type: "object"
 																							}
@@ -18614,11 +18206,13 @@ kube: argocd: CustomResourceDefinition: "applicationsets.argoproj.io": {
 																		]
 																		type: "object"
 																	}
+																	continueOnRepoNotFoundError: type: "boolean"
 																	filters: {
 																		items: {
 																			properties: {
 																				branchMatch: type:       "string"
 																				targetBranchMatch: type: "string"
+																				titleMatch: type:        "string"
 																			}
 																			type: "object"
 																		}
@@ -18628,8 +18222,12 @@ kube: argocd: CustomResourceDefinition: "applicationsets.argoproj.io": {
 																		properties: {
 																			api: type:      "string"
 																			insecure: type: "boolean"
-																			owner: type:    "string"
-																			repo: type:     "string"
+																			labels: {
+																				items: type: "string"
+																				type: "array"
+																			}
+																			owner: type: "string"
+																			repo: type:  "string"
 																			tokenRef: {
 																				properties: {
 																					key: type:        "string"
@@ -18909,17 +18507,19 @@ kube: argocd: CustomResourceDefinition: "applicationsets.argoproj.io": {
 																										items: type: "string"
 																										type: "array"
 																									}
-																									forceCommonAnnotations: type: "boolean"
-																									forceCommonLabels: type:      "boolean"
+																									forceCommonAnnotations: type:  "boolean"
+																									forceCommonLabels: type:       "boolean"
+																									ignoreMissingComponents: type: "boolean"
 																									images: {
 																										items: type: "string"
 																										type: "array"
 																									}
-																									kubeVersion: type:          "string"
-																									labelWithoutSelector: type: "boolean"
-																									namePrefix: type:           "string"
-																									nameSuffix: type:           "string"
-																									namespace: type:            "string"
+																									kubeVersion: type:           "string"
+																									labelIncludeTemplates: type: "boolean"
+																									labelWithoutSelector: type:  "boolean"
+																									namePrefix: type:            "string"
+																									nameSuffix: type:            "string"
+																									namespace: type:             "string"
 																									patches: {
 																										items: {
 																											properties: {
@@ -19040,7 +18640,11 @@ kube: argocd: CustomResourceDefinition: "applicationsets.argoproj.io": {
 																							}
 																							syncSource: {
 																								properties: {
-																									path: type:         "string"
+																									path: {
+																										minLength: 1
+																										pattern:   "^.{2,}|[^./]$"
+																										type:      "string"
+																									}
 																									targetBranch: type: "string"
 																								}
 																								required: [
@@ -19174,17 +18778,19 @@ kube: argocd: CustomResourceDefinition: "applicationsets.argoproj.io": {
 																											items: type: "string"
 																											type: "array"
 																										}
-																										forceCommonAnnotations: type: "boolean"
-																										forceCommonLabels: type:      "boolean"
+																										forceCommonAnnotations: type:  "boolean"
+																										forceCommonLabels: type:       "boolean"
+																										ignoreMissingComponents: type: "boolean"
 																										images: {
 																											items: type: "string"
 																											type: "array"
 																										}
-																										kubeVersion: type:          "string"
-																										labelWithoutSelector: type: "boolean"
-																										namePrefix: type:           "string"
-																										nameSuffix: type:           "string"
-																										namespace: type:            "string"
+																										kubeVersion: type:           "string"
+																										labelIncludeTemplates: type: "boolean"
+																										labelWithoutSelector: type:  "boolean"
+																										namePrefix: type:            "string"
+																										nameSuffix: type:            "string"
+																										namespace: type:             "string"
 																										patches: {
 																											items: {
 																												properties: {
@@ -19290,6 +18896,7 @@ kube: argocd: CustomResourceDefinition: "applicationsets.argoproj.io": {
 																							automated: {
 																								properties: {
 																									allowEmpty: type: "boolean"
+																									enabled: type:    "boolean"
 																									prune: type:      "boolean"
 																									selfHeal: type:   "boolean"
 																								}
@@ -19325,6 +18932,7 @@ kube: argocd: CustomResourceDefinition: "applicationsets.argoproj.io": {
 																										format: "int64"
 																										type:   "integer"
 																									}
+																									refresh: type: "boolean"
 																								}
 																								type: "object"
 																							}
@@ -19347,6 +18955,10 @@ kube: argocd: CustomResourceDefinition: "applicationsets.argoproj.io": {
 																			"metadata",
 																			"spec",
 																		]
+																		type: "object"
+																	}
+																	values: {
+																		additionalProperties: type: "string"
 																		type: "object"
 																	}
 																}
@@ -19778,17 +19390,19 @@ kube: argocd: CustomResourceDefinition: "applicationsets.argoproj.io": {
 																										items: type: "string"
 																										type: "array"
 																									}
-																									forceCommonAnnotations: type: "boolean"
-																									forceCommonLabels: type:      "boolean"
+																									forceCommonAnnotations: type:  "boolean"
+																									forceCommonLabels: type:       "boolean"
+																									ignoreMissingComponents: type: "boolean"
 																									images: {
 																										items: type: "string"
 																										type: "array"
 																									}
-																									kubeVersion: type:          "string"
-																									labelWithoutSelector: type: "boolean"
-																									namePrefix: type:           "string"
-																									nameSuffix: type:           "string"
-																									namespace: type:            "string"
+																									kubeVersion: type:           "string"
+																									labelIncludeTemplates: type: "boolean"
+																									labelWithoutSelector: type:  "boolean"
+																									namePrefix: type:            "string"
+																									nameSuffix: type:            "string"
+																									namespace: type:             "string"
 																									patches: {
 																										items: {
 																											properties: {
@@ -19909,7 +19523,11 @@ kube: argocd: CustomResourceDefinition: "applicationsets.argoproj.io": {
 																							}
 																							syncSource: {
 																								properties: {
-																									path: type:         "string"
+																									path: {
+																										minLength: 1
+																										pattern:   "^.{2,}|[^./]$"
+																										type:      "string"
+																									}
 																									targetBranch: type: "string"
 																								}
 																								required: [
@@ -20043,17 +19661,19 @@ kube: argocd: CustomResourceDefinition: "applicationsets.argoproj.io": {
 																											items: type: "string"
 																											type: "array"
 																										}
-																										forceCommonAnnotations: type: "boolean"
-																										forceCommonLabels: type:      "boolean"
+																										forceCommonAnnotations: type:  "boolean"
+																										forceCommonLabels: type:       "boolean"
+																										ignoreMissingComponents: type: "boolean"
 																										images: {
 																											items: type: "string"
 																											type: "array"
 																										}
-																										kubeVersion: type:          "string"
-																										labelWithoutSelector: type: "boolean"
-																										namePrefix: type:           "string"
-																										nameSuffix: type:           "string"
-																										namespace: type:            "string"
+																										kubeVersion: type:           "string"
+																										labelIncludeTemplates: type: "boolean"
+																										labelWithoutSelector: type:  "boolean"
+																										namePrefix: type:            "string"
+																										nameSuffix: type:            "string"
+																										namespace: type:             "string"
 																										patches: {
 																											items: {
 																												properties: {
@@ -20159,6 +19779,7 @@ kube: argocd: CustomResourceDefinition: "applicationsets.argoproj.io": {
 																							automated: {
 																								properties: {
 																									allowEmpty: type: "boolean"
+																									enabled: type:    "boolean"
 																									prune: type:      "boolean"
 																									selfHeal: type:   "boolean"
 																								}
@@ -20194,6 +19815,7 @@ kube: argocd: CustomResourceDefinition: "applicationsets.argoproj.io": {
 																										format: "int64"
 																										type:   "integer"
 																									}
+																									refresh: type: "boolean"
 																								}
 																								type: "object"
 																							}
@@ -20456,17 +20078,19 @@ kube: argocd: CustomResourceDefinition: "applicationsets.argoproj.io": {
 																					items: type: "string"
 																					type: "array"
 																				}
-																				forceCommonAnnotations: type: "boolean"
-																				forceCommonLabels: type:      "boolean"
+																				forceCommonAnnotations: type:  "boolean"
+																				forceCommonLabels: type:       "boolean"
+																				ignoreMissingComponents: type: "boolean"
 																				images: {
 																					items: type: "string"
 																					type: "array"
 																				}
-																				kubeVersion: type:          "string"
-																				labelWithoutSelector: type: "boolean"
-																				namePrefix: type:           "string"
-																				nameSuffix: type:           "string"
-																				namespace: type:            "string"
+																				kubeVersion: type:           "string"
+																				labelIncludeTemplates: type: "boolean"
+																				labelWithoutSelector: type:  "boolean"
+																				namePrefix: type:            "string"
+																				nameSuffix: type:            "string"
+																				namespace: type:             "string"
 																				patches: {
 																					items: {
 																						properties: {
@@ -20587,7 +20211,11 @@ kube: argocd: CustomResourceDefinition: "applicationsets.argoproj.io": {
 																		}
 																		syncSource: {
 																			properties: {
-																				path: type:         "string"
+																				path: {
+																					minLength: 1
+																					pattern:   "^.{2,}|[^./]$"
+																					type:      "string"
+																				}
 																				targetBranch: type: "string"
 																			}
 																			required: [
@@ -20721,17 +20349,19 @@ kube: argocd: CustomResourceDefinition: "applicationsets.argoproj.io": {
 																						items: type: "string"
 																						type: "array"
 																					}
-																					forceCommonAnnotations: type: "boolean"
-																					forceCommonLabels: type:      "boolean"
+																					forceCommonAnnotations: type:  "boolean"
+																					forceCommonLabels: type:       "boolean"
+																					ignoreMissingComponents: type: "boolean"
 																					images: {
 																						items: type: "string"
 																						type: "array"
 																					}
-																					kubeVersion: type:          "string"
-																					labelWithoutSelector: type: "boolean"
-																					namePrefix: type:           "string"
-																					nameSuffix: type:           "string"
-																					namespace: type:            "string"
+																					kubeVersion: type:           "string"
+																					labelIncludeTemplates: type: "boolean"
+																					labelWithoutSelector: type:  "boolean"
+																					namePrefix: type:            "string"
+																					nameSuffix: type:            "string"
+																					namespace: type:             "string"
 																					patches: {
 																						items: {
 																							properties: {
@@ -20837,6 +20467,7 @@ kube: argocd: CustomResourceDefinition: "applicationsets.argoproj.io": {
 																		automated: {
 																			properties: {
 																				allowEmpty: type: "boolean"
+																				enabled: type:    "boolean"
 																				prune: type:      "boolean"
 																				selfHeal: type:   "boolean"
 																			}
@@ -20872,6 +20503,7 @@ kube: argocd: CustomResourceDefinition: "applicationsets.argoproj.io": {
 																					format: "int64"
 																					type:   "integer"
 																				}
+																				refresh: type: "boolean"
 																			}
 																			type: "object"
 																		}
@@ -21113,17 +20745,19 @@ kube: argocd: CustomResourceDefinition: "applicationsets.argoproj.io": {
 																					items: type: "string"
 																					type: "array"
 																				}
-																				forceCommonAnnotations: type: "boolean"
-																				forceCommonLabels: type:      "boolean"
+																				forceCommonAnnotations: type:  "boolean"
+																				forceCommonLabels: type:       "boolean"
+																				ignoreMissingComponents: type: "boolean"
 																				images: {
 																					items: type: "string"
 																					type: "array"
 																				}
-																				kubeVersion: type:          "string"
-																				labelWithoutSelector: type: "boolean"
-																				namePrefix: type:           "string"
-																				nameSuffix: type:           "string"
-																				namespace: type:            "string"
+																				kubeVersion: type:           "string"
+																				labelIncludeTemplates: type: "boolean"
+																				labelWithoutSelector: type:  "boolean"
+																				namePrefix: type:            "string"
+																				nameSuffix: type:            "string"
+																				namespace: type:             "string"
 																				patches: {
 																					items: {
 																						properties: {
@@ -21244,7 +20878,11 @@ kube: argocd: CustomResourceDefinition: "applicationsets.argoproj.io": {
 																		}
 																		syncSource: {
 																			properties: {
-																				path: type:         "string"
+																				path: {
+																					minLength: 1
+																					pattern:   "^.{2,}|[^./]$"
+																					type:      "string"
+																				}
 																				targetBranch: type: "string"
 																			}
 																			required: [
@@ -21378,17 +21016,19 @@ kube: argocd: CustomResourceDefinition: "applicationsets.argoproj.io": {
 																						items: type: "string"
 																						type: "array"
 																					}
-																					forceCommonAnnotations: type: "boolean"
-																					forceCommonLabels: type:      "boolean"
+																					forceCommonAnnotations: type:  "boolean"
+																					forceCommonLabels: type:       "boolean"
+																					ignoreMissingComponents: type: "boolean"
 																					images: {
 																						items: type: "string"
 																						type: "array"
 																					}
-																					kubeVersion: type:          "string"
-																					labelWithoutSelector: type: "boolean"
-																					namePrefix: type:           "string"
-																					nameSuffix: type:           "string"
-																					namespace: type:            "string"
+																					kubeVersion: type:           "string"
+																					labelIncludeTemplates: type: "boolean"
+																					labelWithoutSelector: type:  "boolean"
+																					namePrefix: type:            "string"
+																					nameSuffix: type:            "string"
+																					namespace: type:             "string"
 																					patches: {
 																						items: {
 																							properties: {
@@ -21494,6 +21134,7 @@ kube: argocd: CustomResourceDefinition: "applicationsets.argoproj.io": {
 																		automated: {
 																			properties: {
 																				allowEmpty: type: "boolean"
+																				enabled: type:    "boolean"
 																				prune: type:      "boolean"
 																				selfHeal: type:   "boolean"
 																			}
@@ -21529,6 +21170,7 @@ kube: argocd: CustomResourceDefinition: "applicationsets.argoproj.io": {
 																					format: "int64"
 																					type:   "integer"
 																				}
+																				refresh: type: "boolean"
 																			}
 																			type: "object"
 																		}
@@ -21701,11 +21343,13 @@ kube: argocd: CustomResourceDefinition: "applicationsets.argoproj.io": {
 													]
 													type: "object"
 												}
+												continueOnRepoNotFoundError: type: "boolean"
 												filters: {
 													items: {
 														properties: {
 															branchMatch: type:       "string"
 															targetBranchMatch: type: "string"
+															titleMatch: type:        "string"
 														}
 														type: "object"
 													}
@@ -21715,8 +21359,12 @@ kube: argocd: CustomResourceDefinition: "applicationsets.argoproj.io": {
 													properties: {
 														api: type:      "string"
 														insecure: type: "boolean"
-														owner: type:    "string"
-														repo: type:     "string"
+														labels: {
+															items: type: "string"
+															type: "array"
+														}
+														owner: type: "string"
+														repo: type:  "string"
 														tokenRef: {
 															properties: {
 																key: type:        "string"
@@ -21996,17 +21644,19 @@ kube: argocd: CustomResourceDefinition: "applicationsets.argoproj.io": {
 																					items: type: "string"
 																					type: "array"
 																				}
-																				forceCommonAnnotations: type: "boolean"
-																				forceCommonLabels: type:      "boolean"
+																				forceCommonAnnotations: type:  "boolean"
+																				forceCommonLabels: type:       "boolean"
+																				ignoreMissingComponents: type: "boolean"
 																				images: {
 																					items: type: "string"
 																					type: "array"
 																				}
-																				kubeVersion: type:          "string"
-																				labelWithoutSelector: type: "boolean"
-																				namePrefix: type:           "string"
-																				nameSuffix: type:           "string"
-																				namespace: type:            "string"
+																				kubeVersion: type:           "string"
+																				labelIncludeTemplates: type: "boolean"
+																				labelWithoutSelector: type:  "boolean"
+																				namePrefix: type:            "string"
+																				nameSuffix: type:            "string"
+																				namespace: type:             "string"
 																				patches: {
 																					items: {
 																						properties: {
@@ -22127,7 +21777,11 @@ kube: argocd: CustomResourceDefinition: "applicationsets.argoproj.io": {
 																		}
 																		syncSource: {
 																			properties: {
-																				path: type:         "string"
+																				path: {
+																					minLength: 1
+																					pattern:   "^.{2,}|[^./]$"
+																					type:      "string"
+																				}
 																				targetBranch: type: "string"
 																			}
 																			required: [
@@ -22261,17 +21915,19 @@ kube: argocd: CustomResourceDefinition: "applicationsets.argoproj.io": {
 																						items: type: "string"
 																						type: "array"
 																					}
-																					forceCommonAnnotations: type: "boolean"
-																					forceCommonLabels: type:      "boolean"
+																					forceCommonAnnotations: type:  "boolean"
+																					forceCommonLabels: type:       "boolean"
+																					ignoreMissingComponents: type: "boolean"
 																					images: {
 																						items: type: "string"
 																						type: "array"
 																					}
-																					kubeVersion: type:          "string"
-																					labelWithoutSelector: type: "boolean"
-																					namePrefix: type:           "string"
-																					nameSuffix: type:           "string"
-																					namespace: type:            "string"
+																					kubeVersion: type:           "string"
+																					labelIncludeTemplates: type: "boolean"
+																					labelWithoutSelector: type:  "boolean"
+																					namePrefix: type:            "string"
+																					nameSuffix: type:            "string"
+																					namespace: type:             "string"
 																					patches: {
 																						items: {
 																							properties: {
@@ -22377,6 +22033,7 @@ kube: argocd: CustomResourceDefinition: "applicationsets.argoproj.io": {
 																		automated: {
 																			properties: {
 																				allowEmpty: type: "boolean"
+																				enabled: type:    "boolean"
 																				prune: type:      "boolean"
 																				selfHeal: type:   "boolean"
 																			}
@@ -22412,6 +22069,7 @@ kube: argocd: CustomResourceDefinition: "applicationsets.argoproj.io": {
 																					format: "int64"
 																					type:   "integer"
 																				}
+																				refresh: type: "boolean"
 																			}
 																			type: "object"
 																		}
@@ -22434,6 +22092,10 @@ kube: argocd: CustomResourceDefinition: "applicationsets.argoproj.io": {
 														"metadata",
 														"spec",
 													]
+													type: "object"
+												}
+												values: {
+													additionalProperties: type: "string"
 													type: "object"
 												}
 											}
@@ -22865,17 +22527,19 @@ kube: argocd: CustomResourceDefinition: "applicationsets.argoproj.io": {
 																					items: type: "string"
 																					type: "array"
 																				}
-																				forceCommonAnnotations: type: "boolean"
-																				forceCommonLabels: type:      "boolean"
+																				forceCommonAnnotations: type:  "boolean"
+																				forceCommonLabels: type:       "boolean"
+																				ignoreMissingComponents: type: "boolean"
 																				images: {
 																					items: type: "string"
 																					type: "array"
 																				}
-																				kubeVersion: type:          "string"
-																				labelWithoutSelector: type: "boolean"
-																				namePrefix: type:           "string"
-																				nameSuffix: type:           "string"
-																				namespace: type:            "string"
+																				kubeVersion: type:           "string"
+																				labelIncludeTemplates: type: "boolean"
+																				labelWithoutSelector: type:  "boolean"
+																				namePrefix: type:            "string"
+																				nameSuffix: type:            "string"
+																				namespace: type:             "string"
 																				patches: {
 																					items: {
 																						properties: {
@@ -22996,7 +22660,11 @@ kube: argocd: CustomResourceDefinition: "applicationsets.argoproj.io": {
 																		}
 																		syncSource: {
 																			properties: {
-																				path: type:         "string"
+																				path: {
+																					minLength: 1
+																					pattern:   "^.{2,}|[^./]$"
+																					type:      "string"
+																				}
 																				targetBranch: type: "string"
 																			}
 																			required: [
@@ -23130,17 +22798,19 @@ kube: argocd: CustomResourceDefinition: "applicationsets.argoproj.io": {
 																						items: type: "string"
 																						type: "array"
 																					}
-																					forceCommonAnnotations: type: "boolean"
-																					forceCommonLabels: type:      "boolean"
+																					forceCommonAnnotations: type:  "boolean"
+																					forceCommonLabels: type:       "boolean"
+																					ignoreMissingComponents: type: "boolean"
 																					images: {
 																						items: type: "string"
 																						type: "array"
 																					}
-																					kubeVersion: type:          "string"
-																					labelWithoutSelector: type: "boolean"
-																					namePrefix: type:           "string"
-																					nameSuffix: type:           "string"
-																					namespace: type:            "string"
+																					kubeVersion: type:           "string"
+																					labelIncludeTemplates: type: "boolean"
+																					labelWithoutSelector: type:  "boolean"
+																					namePrefix: type:            "string"
+																					nameSuffix: type:            "string"
+																					namespace: type:             "string"
 																					patches: {
 																						items: {
 																							properties: {
@@ -23246,6 +22916,7 @@ kube: argocd: CustomResourceDefinition: "applicationsets.argoproj.io": {
 																		automated: {
 																			properties: {
 																				allowEmpty: type: "boolean"
+																				enabled: type:    "boolean"
 																				prune: type:      "boolean"
 																				selfHeal: type:   "boolean"
 																			}
@@ -23281,6 +22952,7 @@ kube: argocd: CustomResourceDefinition: "applicationsets.argoproj.io": {
 																					format: "int64"
 																					type:   "integer"
 																				}
+																				refresh: type: "boolean"
 																			}
 																			type: "object"
 																		}
@@ -23384,6 +23056,7 @@ kube: argocd: CustomResourceDefinition: "applicationsets.argoproj.io": {
 							}
 							strategy: {
 								properties: {
+									deletionOrder: type: "string"
 									rollingSync: {
 										properties: steps: {
 											items: {
@@ -23628,17 +23301,19 @@ kube: argocd: CustomResourceDefinition: "applicationsets.argoproj.io": {
 																items: type: "string"
 																type: "array"
 															}
-															forceCommonAnnotations: type: "boolean"
-															forceCommonLabels: type:      "boolean"
+															forceCommonAnnotations: type:  "boolean"
+															forceCommonLabels: type:       "boolean"
+															ignoreMissingComponents: type: "boolean"
 															images: {
 																items: type: "string"
 																type: "array"
 															}
-															kubeVersion: type:          "string"
-															labelWithoutSelector: type: "boolean"
-															namePrefix: type:           "string"
-															nameSuffix: type:           "string"
-															namespace: type:            "string"
+															kubeVersion: type:           "string"
+															labelIncludeTemplates: type: "boolean"
+															labelWithoutSelector: type:  "boolean"
+															namePrefix: type:            "string"
+															nameSuffix: type:            "string"
+															namespace: type:             "string"
 															patches: {
 																items: {
 																	properties: {
@@ -23759,7 +23434,11 @@ kube: argocd: CustomResourceDefinition: "applicationsets.argoproj.io": {
 													}
 													syncSource: {
 														properties: {
-															path: type:         "string"
+															path: {
+																minLength: 1
+																pattern:   "^.{2,}|[^./]$"
+																type:      "string"
+															}
 															targetBranch: type: "string"
 														}
 														required: [
@@ -23893,17 +23572,19 @@ kube: argocd: CustomResourceDefinition: "applicationsets.argoproj.io": {
 																	items: type: "string"
 																	type: "array"
 																}
-																forceCommonAnnotations: type: "boolean"
-																forceCommonLabels: type:      "boolean"
+																forceCommonAnnotations: type:  "boolean"
+																forceCommonLabels: type:       "boolean"
+																ignoreMissingComponents: type: "boolean"
 																images: {
 																	items: type: "string"
 																	type: "array"
 																}
-																kubeVersion: type:          "string"
-																labelWithoutSelector: type: "boolean"
-																namePrefix: type:           "string"
-																nameSuffix: type:           "string"
-																namespace: type:            "string"
+																kubeVersion: type:           "string"
+																labelIncludeTemplates: type: "boolean"
+																labelWithoutSelector: type:  "boolean"
+																namePrefix: type:            "string"
+																nameSuffix: type:            "string"
+																namespace: type:             "string"
 																patches: {
 																	items: {
 																		properties: {
@@ -24009,6 +23690,7 @@ kube: argocd: CustomResourceDefinition: "applicationsets.argoproj.io": {
 													automated: {
 														properties: {
 															allowEmpty: type: "boolean"
+															enabled: type:    "boolean"
 															prune: type:      "boolean"
 															selfHeal: type:   "boolean"
 														}
@@ -24044,6 +23726,7 @@ kube: argocd: CustomResourceDefinition: "applicationsets.argoproj.io": {
 																format: "int64"
 																type:   "integer"
 															}
+															refresh: type: "boolean"
 														}
 														type: "object"
 													}
@@ -24159,6 +23842,10 @@ kube: argocd: CustomResourceDefinition: "applicationsets.argoproj.io": {
 								}
 								type: "array"
 							}
+							resourcesCount: {
+								format: "int64"
+								type:   "integer"
+							}
 						}
 						type: "object"
 					}
@@ -24234,8 +23921,7 @@ kube: argocd: CustomResourceDefinition: "appprojects.argoproj.io": {
 						description: "AppProjectSpec is the specification of an AppProject"
 						properties: {
 							clusterResourceBlacklist: {
-								description:
-									"ClusterResourceBlacklist contains list of blacklisted cluster level resources"
+								description: "ClusterResourceBlacklist contains list of blacklisted cluster level resources"
 								items: {
 									description: """
 	GroupKind specifies a Group and a Kind, but does not force a version.  This is useful for identifying
@@ -24254,8 +23940,7 @@ kube: argocd: CustomResourceDefinition: "appprojects.argoproj.io": {
 								type: "array"
 							}
 							clusterResourceWhitelist: {
-								description:
-									"ClusterResourceWhitelist contains list of whitelisted cluster level resources"
+								description: "ClusterResourceWhitelist contains list of whitelisted cluster level resources"
 								items: {
 									description: """
 	GroupKind specifies a Group and a Kind, but does not force a version.  This is useful for identifying
@@ -24275,29 +23960,25 @@ kube: argocd: CustomResourceDefinition: "appprojects.argoproj.io": {
 							}
 							description: {
 								description: "Description contains optional project description"
+								maxLength:   255
 								type:        "string"
 							}
 							destinationServiceAccounts: {
-								description:
-									"DestinationServiceAccounts holds information about the service accounts to be impersonated for the application sync operation for each destination."
+								description: "DestinationServiceAccounts holds information about the service accounts to be impersonated for the application sync operation for each destination."
 								items: {
-									description:
-										"ApplicationDestinationServiceAccount holds information about the service account to be impersonated for the application sync operation."
+									description: "ApplicationDestinationServiceAccount holds information about the service account to be impersonated for the application sync operation."
 									properties: {
 										defaultServiceAccount: {
-											description:
-												"DefaultServiceAccount to be used for impersonation during the sync operation"
-											type: "string"
+											description: "DefaultServiceAccount to be used for impersonation during the sync operation"
+											type:        "string"
 										}
 										namespace: {
-											description:
-												"Namespace specifies the target namespace for the application's resources."
-											type: "string"
+											description: "Namespace specifies the target namespace for the application's resources."
+											type:        "string"
 										}
 										server: {
-											description:
-												"Server specifies the URL of the target cluster's Kubernetes control plane API."
-											type: "string"
+											description: "Server specifies the URL of the target cluster's Kubernetes control plane API."
+											type:        "string"
 										}
 									}
 									required: [
@@ -24309,16 +23990,13 @@ kube: argocd: CustomResourceDefinition: "appprojects.argoproj.io": {
 								type: "array"
 							}
 							destinations: {
-								description:
-									"Destinations contains list of destinations available for deployment"
+								description: "Destinations contains list of destinations available for deployment"
 								items: {
-									description:
-										"ApplicationDestination holds information about the application's destination"
+									description: "ApplicationDestination holds information about the application's destination"
 									properties: {
 										name: {
-											description:
-												"Name is an alternate way of specifying the target cluster by its symbolic name. This must be set if Server is not set."
-											type: "string"
+											description: "Name is an alternate way of specifying the target cluster by its symbolic name. This must be set if Server is not set."
+											type:        "string"
 										}
 										namespace: {
 											description: """
@@ -24328,9 +24006,8 @@ kube: argocd: CustomResourceDefinition: "appprojects.argoproj.io": {
 											type: "string"
 										}
 										server: {
-											description:
-												"Server specifies the URL of the target cluster's Kubernetes control plane API. This must be set if Name is not set."
-											type: "string"
+											description: "Server specifies the URL of the target cluster's Kubernetes control plane API. This must be set if Name is not set."
+											type:        "string"
 										}
 									}
 									type: "object"
@@ -24338,8 +24015,7 @@ kube: argocd: CustomResourceDefinition: "appprojects.argoproj.io": {
 								type: "array"
 							}
 							namespaceResourceBlacklist: {
-								description:
-									"NamespaceResourceBlacklist contains list of blacklisted namespace level resources"
+								description: "NamespaceResourceBlacklist contains list of blacklisted namespace level resources"
 								items: {
 									description: """
 	GroupKind specifies a Group and a Kind, but does not force a version.  This is useful for identifying
@@ -24358,8 +24034,7 @@ kube: argocd: CustomResourceDefinition: "appprojects.argoproj.io": {
 								type: "array"
 							}
 							namespaceResourceWhitelist: {
-								description:
-									"NamespaceResourceWhitelist contains list of whitelisted namespace level resources"
+								description: "NamespaceResourceWhitelist contains list of whitelisted namespace level resources"
 								items: {
 									description: """
 	GroupKind specifies a Group and a Kind, but does not force a version.  This is useful for identifying
@@ -24378,15 +24053,12 @@ kube: argocd: CustomResourceDefinition: "appprojects.argoproj.io": {
 								type: "array"
 							}
 							orphanedResources: {
-								description:
-									"OrphanedResources specifies if controller should monitor orphaned resources of apps in this project"
+								description: "OrphanedResources specifies if controller should monitor orphaned resources of apps in this project"
 								properties: {
 									ignore: {
-										description:
-											"Ignore contains a list of resources that are to be excluded from orphaned resources monitoring"
+										description: "Ignore contains a list of resources that are to be excluded from orphaned resources monitoring"
 										items: {
-											description:
-												"OrphanedResourceKey is a reference to a resource to be ignored from"
+											description: "OrphanedResourceKey is a reference to a resource to be ignored from"
 											properties: {
 												group: type: "string"
 												kind: type:  "string"
@@ -24397,41 +24069,34 @@ kube: argocd: CustomResourceDefinition: "appprojects.argoproj.io": {
 										type: "array"
 									}
 									warn: {
-										description:
-											"Warn indicates if warning condition should be created for apps which have orphaned resources"
-										type: "boolean"
+										description: "Warn indicates if warning condition should be created for apps which have orphaned resources"
+										type:        "boolean"
 									}
 								}
 								type: "object"
 							}
 							permitOnlyProjectScopedClusters: {
-								description:
-									"PermitOnlyProjectScopedClusters determines whether destinations can only reference clusters which are project-scoped"
-								type: "boolean"
+								description: "PermitOnlyProjectScopedClusters determines whether destinations can only reference clusters which are project-scoped"
+								type:        "boolean"
 							}
 							roles: {
-								description:
-									"Roles are user defined RBAC roles associated with this project"
+								description: "Roles are user defined RBAC roles associated with this project"
 								items: {
-									description:
-										"ProjectRole represents a role that has access to a project"
+									description: "ProjectRole represents a role that has access to a project"
 									properties: {
 										description: {
 											description: "Description is a description of the role"
 											type:        "string"
 										}
 										groups: {
-											description:
-												"Groups are a list of OIDC group claims bound to this role"
+											description: "Groups are a list of OIDC group claims bound to this role"
 											items: type: "string"
 											type: "array"
 										}
 										jwtTokens: {
-											description:
-												"JWTTokens are a list of generated JWT tokens bound to this role"
+											description: "JWTTokens are a list of generated JWT tokens bound to this role"
 											items: {
-												description:
-													"JWTToken holds the issuedAt and expiresAt values of a token"
+												description: "JWTToken holds the issuedAt and expiresAt values of a token"
 												properties: {
 													exp: {
 														format: "int64"
@@ -24453,8 +24118,7 @@ kube: argocd: CustomResourceDefinition: "appprojects.argoproj.io": {
 											type:        "string"
 										}
 										policies: {
-											description:
-												"Policies Stores a list of casbin formatted strings that define access policies for the role in the project"
+											description: "Policies Stores a list of casbin formatted strings that define access policies for the role in the project"
 											items: type: "string"
 											type: "array"
 										}
@@ -24465,11 +24129,9 @@ kube: argocd: CustomResourceDefinition: "appprojects.argoproj.io": {
 								type: "array"
 							}
 							signatureKeys: {
-								description:
-									"SignatureKeys contains a list of PGP key IDs that commits in Git must be signed with in order to be allowed for sync"
+								description: "SignatureKeys contains a list of PGP key IDs that commits in Git must be signed with in order to be allowed for sync"
 								items: {
-									description:
-										"SignatureKey is the specification of a key required to verify commit signatures with"
+									description: "SignatureKey is the specification of a key required to verify commit signatures with"
 									properties: keyID: {
 										description: "The ID of the key in hexadecimal notation"
 										type:        "string"
@@ -24480,65 +24142,62 @@ kube: argocd: CustomResourceDefinition: "appprojects.argoproj.io": {
 								type: "array"
 							}
 							sourceNamespaces: {
-								description:
-									"SourceNamespaces defines the namespaces application resources are allowed to be created in"
+								description: "SourceNamespaces defines the namespaces application resources are allowed to be created in"
 								items: type: "string"
 								type: "array"
 							}
 							sourceRepos: {
-								description:
-									"SourceRepos contains list of repository URLs which can be used for deployment"
+								description: "SourceRepos contains list of repository URLs which can be used for deployment"
 								items: type: "string"
 								type: "array"
 							}
 							syncWindows: {
-								description:
-									"SyncWindows controls when syncs can be run for apps in this project"
+								description: "SyncWindows controls when syncs can be run for apps in this project"
 								items: {
-									description:
-										"SyncWindow contains the kind, time, duration and attributes that are used to assign the syncWindows to apps"
+									description: "SyncWindow contains the kind, time, duration and attributes that are used to assign the syncWindows to apps"
 									properties: {
+										andOperator: {
+											description: "UseAndOperator use AND operator for matching applications, namespaces and clusters instead of the default OR operator"
+											type:        "boolean"
+										}
 										applications: {
-											description:
-												"Applications contains a list of applications that the window will apply to"
+											description: "Applications contains a list of applications that the window will apply to"
 											items: type: "string"
 											type: "array"
 										}
 										clusters: {
-											description:
-												"Clusters contains a list of clusters that the window will apply to"
+											description: "Clusters contains a list of clusters that the window will apply to"
 											items: type: "string"
 											type: "array"
 										}
+										description: {
+											description: "Description of the sync that will be applied to the schedule, can be used to add any information such as a ticket number for example"
+											type:        "string"
+										}
 										duration: {
-											description:
-												"Duration is the amount of time the sync window will be open"
-											type: "string"
+											description: "Duration is the amount of time the sync window will be open"
+											type:        "string"
 										}
 										kind: {
 											description: "Kind defines if the window allows or blocks syncs"
 											type:        "string"
 										}
 										manualSync: {
-											description:
-												"ManualSync enables manual syncs when they would otherwise be blocked"
-											type: "boolean"
+											description: "ManualSync enables manual syncs when they would otherwise be blocked"
+											type:        "boolean"
 										}
 										namespaces: {
-											description:
-												"Namespaces contains a list of namespaces that the window will apply to"
+											description: "Namespaces contains a list of namespaces that the window will apply to"
 											items: type: "string"
 											type: "array"
 										}
 										schedule: {
-											description:
-												"Schedule is the time the window will begin, specified in cron format"
-											type: "string"
+											description: "Schedule is the time the window will begin, specified in cron format"
+											type:        "string"
 										}
 										timeZone: {
-											description:
-												"TimeZone of the sync that will be applied to the schedule"
-											type: "string"
+											description: "TimeZone of the sync that will be applied to the schedule"
+											type:        "string"
 										}
 									}
 									type: "object"
@@ -24549,15 +24208,13 @@ kube: argocd: CustomResourceDefinition: "appprojects.argoproj.io": {
 						type: "object"
 					}
 					status: {
-						description:
-							"AppProjectStatus contains status information for AppProject CRs"
+						description: "AppProjectStatus contains status information for AppProject CRs"
 						properties: jwtTokensByRole: {
 							additionalProperties: {
 								description: "JWTTokens represents a list of JWT tokens"
 								properties: items: {
 									items: {
-										description:
-											"JWTToken holds the issuedAt and expiresAt values of a token"
+										description: "JWTToken holds the issuedAt and expiresAt values of a token"
 										properties: {
 											exp: {
 												format: "int64"
@@ -24576,9 +24233,8 @@ kube: argocd: CustomResourceDefinition: "appprojects.argoproj.io": {
 								}
 								type: "object"
 							}
-							description:
-								"JWTTokensByRole contains a list of JWT tokens issued for a given role"
-							type: "object"
+							description: "JWTTokensByRole contains a list of JWT tokens issued for a given role"
+							type:        "object"
 						}
 						type: "object"
 					}
@@ -24704,6 +24360,7 @@ kube: argocd: Role: "argocd-application-controller": {
 		apiGroups: ["argoproj.io"]
 		resources: [
 			"applications",
+			"applicationsets",
 			"appprojects",
 		]
 		verbs: [
@@ -24797,15 +24454,17 @@ kube: argocd: Role: "argocd-applicationset-controller": {
 			"watch",
 		]
 	}, {
-		apiGroups: [
-			"apps",
-			"extensions",
-		]
-		resources: ["deployments"]
+		apiGroups: ["coordination.k8s.io"]
+		resources: ["leases"]
+		verbs: ["create"]
+	}, {
+		apiGroups: ["coordination.k8s.io"]
+		resourceNames: ["58ac56fa.applicationsets.argoproj.io"]
+		resources: ["leases"]
 		verbs: [
 			"get",
-			"list",
-			"watch",
+			"update",
+			"create",
 		]
 	}]
 }
@@ -25001,19 +24660,19 @@ kube: argocd: ClusterRole: "argocd-applicationset-controller": {
 		]
 	}, {
 		apiGroups: ["argoproj.io"]
-		resources: ["applicationsets/status"]
-		verbs: [
-			"get",
-			"patch",
-			"update",
-		]
-	}, {
-		apiGroups: ["argoproj.io"]
 		resources: ["appprojects"]
 		verbs: [
 			"get",
 			"list",
 			"watch",
+		]
+	}, {
+		apiGroups: ["argoproj.io"]
+		resources: ["applicationsets/status"]
+		verbs: [
+			"get",
+			"patch",
+			"update",
 		]
 	}, {
 		apiGroups: [""]
@@ -25027,30 +24686,10 @@ kube: argocd: ClusterRole: "argocd-applicationset-controller": {
 		]
 	}, {
 		apiGroups: [""]
-		resources: ["configmaps"]
-		verbs: [
-			"create",
-			"update",
-			"delete",
-			"get",
-			"list",
-			"patch",
-			"watch",
+		resources: [
+			"secrets",
+			"configmaps",
 		]
-	}, {
-		apiGroups: [""]
-		resources: ["secrets"]
-		verbs: [
-			"get",
-			"list",
-			"watch",
-		]
-	}, {
-		apiGroups: [
-			"apps",
-			"extensions",
-		]
-		resources: ["deployments"]
 		verbs: [
 			"get",
 			"list",
@@ -25059,14 +24698,15 @@ kube: argocd: ClusterRole: "argocd-applicationset-controller": {
 	}, {
 		apiGroups: ["coordination.k8s.io"]
 		resources: ["leases"]
+		verbs: ["create"]
+	}, {
+		apiGroups: ["coordination.k8s.io"]
+		resourceNames: ["58ac56fa.applicationsets.argoproj.io"]
+		resources: ["leases"]
 		verbs: [
-			"create",
-			"delete",
 			"get",
-			"list",
-			"patch",
 			"update",
-			"watch",
+			"create",
 		]
 	}]
 }
@@ -25315,7 +24955,132 @@ kube: argocd: ClusterRoleBinding: "argocd-server": {
 }
 kube: argocd: ConfigMap: "argocd-cm": {
 	apiVersion: "v1"
-	kind:       "ConfigMap"
+	data: {
+		"resource.customizations.ignoreResourceUpdates.ConfigMap": yaml.Marshal(_cue_resource_customizations_ignoreResourceUpdates_ConfigMap)
+		let _cue_resource_customizations_ignoreResourceUpdates_ConfigMap = {
+			jqPathExpressions: [
+				// Ignore the cluster-autoscaler status
+				".metadata.annotations.\"cluster-autoscaler.kubernetes.io/last-updated\"",
+				// Ignore the cluster-autoscaler status
+				// Ignore the annotation of the legacy Leases election
+				".metadata.annotations.\"control-plane.alpha.kubernetes.io/leader\"",
+				// Ignore the annotation of the legacy Leases election
+			]
+		}
+		"resource.customizations.ignoreResourceUpdates.Endpoints": yaml.Marshal(_cue_resource_customizations_ignoreResourceUpdates_Endpoints)
+		let _cue_resource_customizations_ignoreResourceUpdates_Endpoints = {
+			jsonPointers: [
+				"/metadata",
+				"/subsets",
+			]
+		}
+		"resource.customizations.ignoreResourceUpdates.all": yaml.Marshal(_cue_resource_customizations_ignoreResourceUpdates_all)
+		let _cue_resource_customizations_ignoreResourceUpdates_all = {
+			jsonPointers: ["/status"]
+		}
+		"resource.customizations.ignoreResourceUpdates.apps_ReplicaSet": yaml.Marshal(_cue_resource_customizations_ignoreResourceUpdates_apps_ReplicaSet)
+		let _cue_resource_customizations_ignoreResourceUpdates_apps_ReplicaSet = {
+			jqPathExpressions: [
+				".metadata.annotations.\"deployment.kubernetes.io/desired-replicas\"",
+				".metadata.annotations.\"deployment.kubernetes.io/max-replicas\"",
+				".metadata.annotations.\"rollout.argoproj.io/desired-replicas\"",
+			]
+		}
+		"resource.customizations.ignoreResourceUpdates.argoproj.io_Application": yaml.Marshal(_cue_resource_customizations_ignoreResourceUpdates_argoproj_io_Application)
+		let _cue_resource_customizations_ignoreResourceUpdates_argoproj_io_Application = {
+			jqPathExpressions: [
+				".metadata.annotations.\"notified.notifications.argoproj.io\"",
+				".metadata.annotations.\"argocd.argoproj.io/refresh\"",
+				".metadata.annotations.\"argocd.argoproj.io/hydrate\"",
+				".operation",
+			]
+		}
+		"resource.customizations.ignoreResourceUpdates.argoproj.io_Rollout": yaml.Marshal(_cue_resource_customizations_ignoreResourceUpdates_argoproj_io_Rollout)
+		let _cue_resource_customizations_ignoreResourceUpdates_argoproj_io_Rollout = {
+			jqPathExpressions: [".metadata.annotations.\"notified.notifications.argoproj.io\""]
+		}
+		"resource.customizations.ignoreResourceUpdates.autoscaling_HorizontalPodAutoscaler": yaml.Marshal(_cue_resource_customizations_ignoreResourceUpdates_autoscaling_HorizontalPodAutoscaler)
+		let _cue_resource_customizations_ignoreResourceUpdates_autoscaling_HorizontalPodAutoscaler = {
+			jqPathExpressions: [
+				".metadata.annotations.\"autoscaling.alpha.kubernetes.io/behavior\"",
+				".metadata.annotations.\"autoscaling.alpha.kubernetes.io/conditions\"",
+				".metadata.annotations.\"autoscaling.alpha.kubernetes.io/metrics\"",
+				".metadata.annotations.\"autoscaling.alpha.kubernetes.io/current-metrics\"",
+			]
+		}
+		"resource.customizations.ignoreResourceUpdates.discovery.k8s.io_EndpointSlice": yaml.Marshal(_cue_resource_customizations_ignoreResourceUpdates_discovery_k8s_io_EndpointSlice)
+		let _cue_resource_customizations_ignoreResourceUpdates_discovery_k8s_io_EndpointSlice = {
+			jsonPointers: [
+				"/metadata",
+				"/endpoints",
+				"/ports",
+			]
+		}
+		"resource.exclusions": yaml.Marshal(_cue_resource_exclusions)
+		let _cue_resource_exclusions = [{
+			//## Network resources created by the Kubernetes control plane and excluded to reduce the number of watched events and UI clutter
+			apiGroups: [
+				"",
+				"discovery.k8s.io",
+			]
+			kinds: [
+				"Endpoints",
+				"EndpointSlice",
+			]
+		}, {
+			//## Internal Kubernetes resources excluded reduce the number of watched events
+			apiGroups: ["coordination.k8s.io"]
+			kinds: ["Lease"]
+		}, {
+			//## Internal Kubernetes Authz/Authn resources excluded reduce the number of watched events
+			apiGroups: [
+				"authentication.k8s.io",
+				"authorization.k8s.io",
+			]
+			kinds: [
+				"SelfSubjectReview",
+				"TokenReview",
+				"LocalSubjectAccessReview",
+				"SelfSubjectAccessReview",
+				"SelfSubjectRulesReview",
+				"SubjectAccessReview",
+			]
+		}, {
+			//## Intermediate Certificate Request excluded reduce the number of watched events
+			apiGroups: ["certificates.k8s.io"]
+			kinds: ["CertificateSigningRequest"]
+		}, {
+			apiGroups: ["cert-manager.io"]
+			kinds: ["CertificateRequest"]
+		}, {
+			//## Cilium internal resources excluded reduce the number of watched events and UI Clutter
+			apiGroups: ["cilium.io"]
+			kinds: [
+				"CiliumIdentity",
+				"CiliumEndpoint",
+				"CiliumEndpointSlice",
+			]
+		}, {
+			//## Kyverno intermediate and reporting resources excluded reduce the number of watched events and improve performance
+			apiGroups: [
+				"kyverno.io",
+				"reports.kyverno.io",
+				"wgpolicyk8s.io",
+			]
+			kinds: [
+				"PolicyReport",
+				"ClusterPolicyReport",
+				"EphemeralReport",
+				"ClusterEphemeralReport",
+				"AdmissionReport",
+				"ClusterAdmissionReport",
+				"BackgroundScanReport",
+				"ClusterBackgroundScanReport",
+				"UpdateRequest",
+			]
+		}]
+	}
+	kind: "ConfigMap"
 	metadata: {
 		labels: {
 			"app.kubernetes.io/name":    "argocd-cm"
@@ -25712,6 +25477,13 @@ kube: argocd: Deployment: "argocd-applicationset-controller": {
 							optional: true
 						}
 					}, {
+						name: "ARGOCD_LOG_FORMAT_TIMESTAMP"
+						valueFrom: configMapKeyRef: {
+							key:      "log.format.timestamp"
+							name:     "argocd-cmd-params-cm"
+							optional: true
+						}
+					}, {
 						name: "ARGOCD_APPLICATIONSET_CONTROLLER_DRY_RUN"
 						valueFrom: configMapKeyRef: {
 							key:      "applicationsetcontroller.dryrun"
@@ -25803,6 +25575,13 @@ kube: argocd: Deployment: "argocd-applicationset-controller": {
 							optional: true
 						}
 					}, {
+						name: "ARGOCD_APPLICATIONSET_CONTROLLER_ENABLE_GITHUB_API_METRICS"
+						valueFrom: configMapKeyRef: {
+							key:      "applicationsetcontroller.enable.github.api.metrics"
+							name:     "argocd-cmd-params-cm"
+							optional: true
+						}
+					}, {
 						name: "ARGOCD_APPLICATIONSET_CONTROLLER_WEBHOOK_PARALLELISM_LIMIT"
 						valueFrom: configMapKeyRef: {
 							key:      "applicationsetcontroller.webhook.parallelism.limit"
@@ -25816,8 +25595,15 @@ kube: argocd: Deployment: "argocd-applicationset-controller": {
 							name:     "argocd-cmd-params-cm"
 							optional: true
 						}
+					}, {
+						name: "ARGOCD_APPLICATIONSET_CONTROLLER_MAX_RESOURCES_STATUS_COUNT"
+						valueFrom: configMapKeyRef: {
+							key:      "applicationsetcontroller.status.max.resources.count"
+							name:     "argocd-cmd-params-cm"
+							optional: true
+						}
 					}]
-					image:           "quay.io/argoproj/argocd:v2.14.6"
+					image:           "quay.io/argoproj/argocd:v3.2.0"
 					imagePullPolicy: "Always"
 					name:            "argocd-applicationset-controller"
 					ports: [{
@@ -25852,6 +25638,9 @@ kube: argocd: Deployment: "argocd-applicationset-controller": {
 					}, {
 						mountPath: "/app/config/reposerver/tls"
 						name:      "argocd-repo-server-tls"
+					}, {
+						mountPath: "/home/argocd/params"
+						name:      "argocd-cmd-params-cm"
 					}]
 				}]
 				nodeSelector: "kubernetes.io/os": "linux"
@@ -25887,6 +25676,16 @@ kube: argocd: Deployment: "argocd-applicationset-controller": {
 						optional:   true
 						secretName: "argocd-repo-server-tls"
 					}
+				}, {
+					configMap: {
+						items: [{
+							key:  "applicationsetcontroller.profile.enabled"
+							path: "profiler.enabled"
+						}]
+						name:     "argocd-cmd-params-cm"
+						optional: true
+					}
+					name: "argocd-cmd-params-cm"
 				}]
 			}
 		}
@@ -25935,6 +25734,13 @@ kube: argocd: Deployment: "argocd-dex-server": {
 							optional: true
 						}
 					}, {
+						name: "ARGOCD_LOG_FORMAT_TIMESTAMP"
+						valueFrom: configMapKeyRef: {
+							key:      "log.format.timestamp"
+							name:     "argocd-cmd-params-cm"
+							optional: true
+						}
+					}, {
 						name: "ARGOCD_DEX_SERVER_DISABLE_TLS"
 						valueFrom: configMapKeyRef: {
 							key:      "dexserver.disable.tls"
@@ -25942,7 +25748,7 @@ kube: argocd: Deployment: "argocd-dex-server": {
 							optional: true
 						}
 					}]
-					image:           "ghcr.io/dexidp/dex:v2.41.1"
+					image:           "ghcr.io/dexidp/dex:v2.43.0"
 					imagePullPolicy: "Always"
 					name:            "dex"
 					ports: [{
@@ -25977,7 +25783,7 @@ kube: argocd: Deployment: "argocd-dex-server": {
 						"/usr/local/bin/argocd",
 						"/shared/argocd-dex",
 					]
-					image:           "quay.io/argoproj/argocd:v2.14.6"
+					image:           "quay.io/argoproj/argocd:v3.2.0"
 					imagePullPolicy: "Always"
 					name:            "copyutil"
 					securityContext: {
@@ -26058,6 +25864,13 @@ kube: argocd: Deployment: "argocd-notifications-controller": {
 							optional: true
 						}
 					}, {
+						name: "ARGOCD_LOG_FORMAT_TIMESTAMP"
+						valueFrom: configMapKeyRef: {
+							key:      "log.format.timestamp"
+							name:     "argocd-cmd-params-cm"
+							optional: true
+						}
+					}, {
 						name: "ARGOCD_APPLICATION_NAMESPACES"
 						valueFrom: configMapKeyRef: {
 							key:      "application.namespaces"
@@ -26079,7 +25892,7 @@ kube: argocd: Deployment: "argocd-notifications-controller": {
 							optional: true
 						}
 					}]
-					image:           "quay.io/argoproj/argocd:v2.14.6"
+					image:           "quay.io/argoproj/argocd:v3.2.0"
 					imagePullPolicy: "Always"
 					livenessProbe: tcpSocket: port: 9001
 					name: "argocd-notifications-controller"
@@ -26171,7 +25984,7 @@ kube: argocd: Deployment: "argocd-redis": {
 							name: "argocd-redis"
 						}
 					}]
-					image:           "redis:7.0.15-alpine"
+					image:           "public.ecr.aws/docker/library/redis:8.2.2-alpine"
 					imagePullPolicy: "Always"
 					name:            "redis"
 					ports: [{containerPort: 6379}]
@@ -26187,7 +26000,7 @@ kube: argocd: Deployment: "argocd-redis": {
 						"admin",
 						"redis-initial-password",
 					]
-					image:           "quay.io/argoproj/argocd:v2.14.6"
+					image:           "quay.io/argoproj/argocd:v3.2.0"
 					imagePullPolicy: "IfNotPresent"
 					name:            "secret-init"
 					securityContext: {
@@ -26265,6 +26078,13 @@ kube: argocd: Deployment: "argocd-repo-server": {
 						name: "ARGOCD_REPO_SERVER_LOGLEVEL"
 						valueFrom: configMapKeyRef: {
 							key:      "reposerver.log.level"
+							name:     "argocd-cmd-params-cm"
+							optional: true
+						}
+					}, {
+						name: "ARGOCD_LOG_FORMAT_TIMESTAMP"
+						valueFrom: configMapKeyRef: {
+							key:      "log.format.timestamp"
 							name:     "argocd-cmd-params-cm"
 							optional: true
 						}
@@ -26374,6 +26194,13 @@ kube: argocd: Deployment: "argocd-repo-server": {
 							optional: true
 						}
 					}, {
+						name: "ARGOCD_REPO_SERVER_OTLP_ATTRS"
+						valueFrom: configMapKeyRef: {
+							key:      "otlp.attrs"
+							name:     "argocd-cmd-params-cm"
+							optional: true
+						}
+					}, {
 						name: "ARGOCD_REPO_SERVER_MAX_COMBINED_DIRECTORY_MANIFESTS_SIZE"
 						valueFrom: configMapKeyRef: {
 							key:      "reposerver.max.combined.directory.manifests.size"
@@ -26430,6 +26257,27 @@ kube: argocd: Deployment: "argocd-repo-server": {
 							optional: true
 						}
 					}, {
+						name: "ARGOCD_REPO_SERVER_OCI_MANIFEST_MAX_EXTRACTED_SIZE"
+						valueFrom: configMapKeyRef: {
+							key:      "reposerver.oci.manifest.max.extracted.size"
+							name:     "argocd-cmd-params-cm"
+							optional: true
+						}
+					}, {
+						name: "ARGOCD_REPO_SERVER_DISABLE_OCI_MANIFEST_MAX_EXTRACTED_SIZE"
+						valueFrom: configMapKeyRef: {
+							key:      "reposerver.disable.oci.manifest.max.extracted.size"
+							name:     "argocd-cmd-params-cm"
+							optional: true
+						}
+					}, {
+						name: "ARGOCD_REPO_SERVER_OCI_LAYER_MEDIA_TYPES"
+						valueFrom: configMapKeyRef: {
+							key:      "reposerver.oci.layer.media.types"
+							name:     "argocd-cmd-params-cm"
+							optional: true
+						}
+					}, {
 						name: "ARGOCD_REVISION_CACHE_LOCK_TIMEOUT"
 						valueFrom: configMapKeyRef: {
 							key:      "reposerver.revision.cache.lock.timeout"
@@ -26481,7 +26329,7 @@ kube: argocd: Deployment: "argocd-repo-server": {
 						name:  "HELM_DATA_HOME"
 						value: "/helm-working-dir"
 					}]
-					image:           "quay.io/argoproj/argocd:v2.14.6"
+					image:           "quay.io/argoproj/argocd:v3.2.0"
 					imagePullPolicy: "Always"
 					livenessProbe: {
 						failureThreshold: 3
@@ -26547,7 +26395,7 @@ kube: argocd: Deployment: "argocd-repo-server": {
 						"/usr/local/bin/argocd",
 						"/var/run/argocd/argocd-cmp-server",
 					]
-					image: "quay.io/argoproj/argocd:v2.14.6"
+					image: "quay.io/argoproj/argocd:v3.2.0"
 					name:  "copyutil"
 					securityContext: {
 						allowPrivilegeEscalation: false
@@ -26793,13 +26641,6 @@ kube: argocd: Deployment: "argocd-server": {
 							optional: true
 						}
 					}, {
-						name: "ARGOCD_SERVER_LOGIN_ATTEMPTS_EXPIRATION"
-						valueFrom: configMapKeyRef: {
-							key:      "server.login.attempts.expiration"
-							name:     "argocd-cmd-params-cm"
-							optional: true
-						}
-					}, {
 						name: "ARGOCD_SERVER_STATIC_ASSETS"
 						valueFrom: configMapKeyRef: {
 							key:      "server.staticassets"
@@ -26884,6 +26725,13 @@ kube: argocd: Deployment: "argocd-server": {
 							optional: true
 						}
 					}, {
+						name: "ARGOCD_SERVER_OTLP_ATTRS"
+						valueFrom: configMapKeyRef: {
+							key:      "otlp.attrs"
+							name:     "argocd-cmd-params-cm"
+							optional: true
+						}
+					}, {
 						name: "ARGOCD_APPLICATION_NAMESPACES"
 						valueFrom: configMapKeyRef: {
 							key:      "application.namespaces"
@@ -26954,14 +26802,28 @@ kube: argocd: Deployment: "argocd-server": {
 							optional: true
 						}
 					}, {
+						name: "ARGOCD_APPLICATIONSET_CONTROLLER_ENABLE_GITHUB_API_METRICS"
+						valueFrom: configMapKeyRef: {
+							key:      "applicationsetcontroller.enable.github.api.metrics"
+							name:     "argocd-cmd-params-cm"
+							optional: true
+						}
+					}, {
 						name: "ARGOCD_HYDRATOR_ENABLED"
 						valueFrom: configMapKeyRef: {
 							key:      "hydrator.enabled"
 							name:     "argocd-cmd-params-cm"
 							optional: true
 						}
+					}, {
+						name: "ARGOCD_SYNC_WITH_REPLACE_ALLOWED"
+						valueFrom: configMapKeyRef: {
+							key:      "server.sync.replace.allowed"
+							name:     "argocd-cmd-params-cm"
+							optional: true
+						}
 					}]
-					image:           "quay.io/argoproj/argocd:v2.14.6"
+					image:           "quay.io/argoproj/argocd:v3.2.0"
 					imagePullPolicy: "Always"
 					livenessProbe: {
 						httpGet: {
@@ -27187,6 +27049,13 @@ kube: argocd: StatefulSet: "argocd-application-controller": {
 							optional: true
 						}
 					}, {
+						name: "ARGOCD_LOG_FORMAT_TIMESTAMP"
+						valueFrom: configMapKeyRef: {
+							key:      "log.format.timestamp"
+							name:     "argocd-cmd-params-cm"
+							optional: true
+						}
+					}, {
 						name: "ARGOCD_APPLICATION_CONTROLLER_METRICS_CACHE_EXPIRATION"
 						valueFrom: configMapKeyRef: {
 							key:      "controller.metrics.cache.expiration"
@@ -27218,6 +27087,20 @@ kube: argocd: StatefulSet: "argocd-application-controller": {
 						name: "ARGOCD_APPLICATION_CONTROLLER_SELF_HEAL_BACKOFF_CAP_SECONDS"
 						valueFrom: configMapKeyRef: {
 							key:      "controller.self.heal.backoff.cap.seconds"
+							name:     "argocd-cmd-params-cm"
+							optional: true
+						}
+					}, {
+						name: "ARGOCD_APPLICATION_CONTROLLER_SELF_HEAL_BACKOFF_COOLDOWN_SECONDS"
+						valueFrom: configMapKeyRef: {
+							key:      "controller.self.heal.backoff.cooldown.seconds"
+							name:     "argocd-cmd-params-cm"
+							optional: true
+						}
+					}, {
+						name: "ARGOCD_SYNC_WAVE_DELAY"
+						valueFrom: configMapKeyRef: {
+							key:      "controller.sync.wave.delay.seconds"
 							name:     "argocd-cmd-params-cm"
 							optional: true
 						}
@@ -27306,6 +27189,13 @@ kube: argocd: StatefulSet: "argocd-application-controller": {
 							optional: true
 						}
 					}, {
+						name: "ARGOCD_APPLICATION_CONTROLLER_OTLP_ATTRS"
+						valueFrom: configMapKeyRef: {
+							key:      "otlp.attrs"
+							name:     "argocd-cmd-params-cm"
+							optional: true
+						}
+					}, {
 						name: "ARGOCD_APPLICATION_NAMESPACES"
 						valueFrom: configMapKeyRef: {
 							key:      "application.namespaces"
@@ -27376,10 +27266,17 @@ kube: argocd: StatefulSet: "argocd-application-controller": {
 							optional: true
 						}
 					}, {
+						name: "ARGOCD_APPLICATION_CONTROLLER_COMMIT_SERVER"
+						valueFrom: configMapKeyRef: {
+							key:      "commit.server"
+							name:     "argocd-cmd-params-cm"
+							optional: true
+						}
+					}, {
 						name:  "KUBECACHEDIR"
 						value: "/tmp/kubecache"
 					}]
-					image:           "quay.io/argoproj/argocd:v2.14.6"
+					image:           "quay.io/argoproj/argocd:v3.2.0"
 					imagePullPolicy: "Always"
 					name:            "argocd-application-controller"
 					ports: [{containerPort: 8082}]
@@ -27455,7 +27352,14 @@ kube: argocd: StatefulSet: "argocd-application-controller": {
 kube: argocd: NetworkPolicy: "argocd-application-controller-network-policy": {
 	apiVersion: "networking.k8s.io/v1"
 	kind:       "NetworkPolicy"
-	metadata: name: "argocd-application-controller-network-policy"
+	metadata: {
+		labels: {
+			"app.kubernetes.io/component": "application-controller"
+			"app.kubernetes.io/name":      "argocd-application-controller"
+			"app.kubernetes.io/part-of":   "argocd"
+		}
+		name: "argocd-application-controller-network-policy"
+	}
 	spec: {
 		ingress: [{
 			from: [{namespaceSelector: {}}]
@@ -27468,7 +27372,14 @@ kube: argocd: NetworkPolicy: "argocd-application-controller-network-policy": {
 kube: argocd: NetworkPolicy: "argocd-applicationset-controller-network-policy": {
 	apiVersion: "networking.k8s.io/v1"
 	kind:       "NetworkPolicy"
-	metadata: name: "argocd-applicationset-controller-network-policy"
+	metadata: {
+		labels: {
+			"app.kubernetes.io/component": "applicationset-controller"
+			"app.kubernetes.io/name":      "argocd-applicationset-controller"
+			"app.kubernetes.io/part-of":   "argocd"
+		}
+		name: "argocd-applicationset-controller-network-policy"
+	}
 	spec: {
 		ingress: [{
 			from: [{namespaceSelector: {}}]
@@ -27487,7 +27398,14 @@ kube: argocd: NetworkPolicy: "argocd-applicationset-controller-network-policy": 
 kube: argocd: NetworkPolicy: "argocd-dex-server-network-policy": {
 	apiVersion: "networking.k8s.io/v1"
 	kind:       "NetworkPolicy"
-	metadata: name: "argocd-dex-server-network-policy"
+	metadata: {
+		labels: {
+			"app.kubernetes.io/component": "dex-server"
+			"app.kubernetes.io/name":      "argocd-dex-server"
+			"app.kubernetes.io/part-of":   "argocd"
+		}
+		name: "argocd-dex-server-network-policy"
+	}
 	spec: {
 		ingress: [{
 			from: [{
@@ -27537,7 +27455,14 @@ kube: argocd: NetworkPolicy: "argocd-notifications-controller-network-policy": {
 kube: argocd: NetworkPolicy: "argocd-redis-network-policy": {
 	apiVersion: "networking.k8s.io/v1"
 	kind:       "NetworkPolicy"
-	metadata: name: "argocd-redis-network-policy"
+	metadata: {
+		labels: {
+			"app.kubernetes.io/component": "redis"
+			"app.kubernetes.io/name":      "argocd-redis"
+			"app.kubernetes.io/part-of":   "argocd"
+		}
+		name: "argocd-redis-network-policy"
+	}
 	spec: {
 		ingress: [{
 			from: [{
@@ -27559,7 +27484,14 @@ kube: argocd: NetworkPolicy: "argocd-redis-network-policy": {
 kube: argocd: NetworkPolicy: "argocd-repo-server-network-policy": {
 	apiVersion: "networking.k8s.io/v1"
 	kind:       "NetworkPolicy"
-	metadata: name: "argocd-repo-server-network-policy"
+	metadata: {
+		labels: {
+			"app.kubernetes.io/component": "repo-server"
+			"app.kubernetes.io/name":      "argocd-repo-server"
+			"app.kubernetes.io/part-of":   "argocd"
+		}
+		name: "argocd-repo-server-network-policy"
+	}
 	spec: {
 		ingress: [{
 			from: [{
@@ -27586,7 +27518,14 @@ kube: argocd: NetworkPolicy: "argocd-repo-server-network-policy": {
 kube: argocd: NetworkPolicy: "argocd-server-network-policy": {
 	apiVersion: "networking.k8s.io/v1"
 	kind:       "NetworkPolicy"
-	metadata: name: "argocd-server-network-policy"
+	metadata: {
+		labels: {
+			"app.kubernetes.io/component": "server"
+			"app.kubernetes.io/name":      "argocd-server"
+			"app.kubernetes.io/part-of":   "argocd"
+		}
+		name: "argocd-server-network-policy"
+	}
 	spec: {
 		ingress: [{}]
 		podSelector: matchLabels: "app.kubernetes.io/name": "argocd-server"
