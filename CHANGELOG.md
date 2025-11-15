@@ -1,5 +1,30 @@
 # Changelog
 
+## [1.41.0](https://github.com/defn/dev/compare/v1.40.0...v1.41.0) (2025-11-15)
+
+
+### Features
+
+* add Bazel bash wrapper examples with lib.sh integration ([34eec96](https://github.com/defn/dev/commit/34eec969b59de01d3284e517bf612683c46cf16e))
+* add exclamation to hello message ([f874032](https://github.com/defn/dev/commit/f874032c0bc47a2179aee5980888f519a08babef))
+* add hello example CUE module ([2c83708](https://github.com/defn/dev/commit/2c837084bf6d26cd8c3343583fc673187117eda7))
+* add iam_user_access_to_billing and role_name to AWS accounts ([1366cb2](https://github.com/defn/dev/commit/1366cb2cb3182af33cfe34151bfff01e00220c55))
+* add initial Astro site structure for defn.com ([4c12524](https://github.com/defn/dev/commit/4c1252430d5a3b82f492e0626bc759e81fe33d38))
+* add meh example demonstrating CUE-to-Bazel build generation ([47e1745](https://github.com/defn/dev/commit/47e1745c40cc3a2046bfc8191b2f24347d866113))
+* add mise task for BUILD.bazel generation in meh example ([40fe4f0](https://github.com/defn/dev/commit/40fe4f08aa9fb0fd97c3267e80bbfb3168206a2a))
+* add pkg module with dependency integration ([e62c3e7](https://github.com/defn/dev/commit/e62c3e7393a2d4edec14baf6b44c65880b07206e))
+* add site configuration schema and definitions ([7a5ed48](https://github.com/defn/dev/commit/7a5ed48a9412cb260849bc0fd705ab5f3b209719))
+* add Terraform moved blocks for SSO assignment resource renames ([2f1ff1d](https://github.com/defn/dev/commit/2f1ff1dbf7b9f045ecc3e687dad8554fbf519e6f))
+* add terraform plan change summary to plan task ([93d864d](https://github.com/defn/dev/commit/93d864d8047ecf4e71d66ab60abf31f45d6113cd))
+* update hello messages in Rust worker and CUE config ([efd85e1](https://github.com/defn/dev/commit/efd85e1a34584d549d558d36c40f0a8513314bf7))
+
+
+### Bug Fixes
+
+* add missing moved blocks for old semantic resource names ([a316080](https://github.com/defn/dev/commit/a31608017779e1b8c7b568cbfd33b49e7a57fcd3))
+* initialize PROMPT_COMMAND in bash_profile ([0d26b5a](https://github.com/defn/dev/commit/0d26b5a5d05e7bb298069de9c5d604f786cbaa4d))
+* update module name from pkg to pub ([6c40c22](https://github.com/defn/dev/commit/6c40c22c4614ee529f8915b38033dfc8503c67fd))
+
 ## [1.40.0](https://github.com/defn/dev/compare/v1.39.0...v1.40.0) (2025-11-02)
 
 ### Features
