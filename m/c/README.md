@@ -99,56 +99,6 @@ Planned accumulation sources:
 
 These sources can be queried directly via CLIs or unified through tools like Steampipe for SQL-based accumulation.
 
-## How It Detects Drift
-
-The lattice unifies all four IDEA layers. When they don't align, you have drift:
-
-```cue
-config: {
-    // What should exist (schema + declared intent)
-    resource: intention.resource
-    resource: definition.resource
-
-    // What we plan to deploy
-    resource: execution.resource  // from kustomize build
-
-    // What's actually deployed
-    resource: application.resource  // from kubectl get
-
-    // If execution ≠ application → drift detected
-}
-```
-
-This same pattern applies across all resources:
-
-- AWS accounts: definitions vs. actual AWS state
-- Kubernetes: planned manifests vs. running resources
-- GitHub repos: declared config vs. API metadata
-- Deployments: Terraform plans vs. cloud resources
-
-CUE validates that all layers unify. When they don't, the lattice tells you exactly where reality diverged from intent.
-
-## Example: AWS Account Management
-
-Define an account in CUE:
-
-```cue
-// definition/aws/fogg.cue
-config: aws: org: fogg: account: ci: {
-    id: "812459563189"
-    email: "fogg-ci@defn.sh"
-}
-```
-
-The schema in `intention/aws.cue` automatically computes derived fields like AWS CLI config. Transform generates multiple outputs from this single source:
-
-- `docs/src/content/aws/fogg/ci.yaml` - Documentation
-- `../aws/fogg/ci/.aws/config` - AWS CLI configuration
-- `../infra/acc-fogg-ci/cdk.tf` - Terraform for the account
-- `../infra/acc-fogg-ci/mise.toml` - Tool versions
-
-All generated from the unified lattice, ensuring consistency across tools.
-
 ## The Continuous Refinement Loop
 
 The system is designed to run continuously. Each cycle:
