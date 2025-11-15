@@ -280,7 +280,7 @@ This separation means the transformation engine (`bazel.cue`) is reusable across
 To regenerate `BUILD.bazel` from the CUE files:
 
 ```bash
-cd b/ex-macros/meh
+cd b/ex
 cue export --out text -e BUILD bazel.cue build.cue > BUILD.bazel
 ```
 
