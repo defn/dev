@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+function main {
+	kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d | code -c
+	open http://localhost:6666
+}
+
+main "$@"

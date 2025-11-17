@@ -24,8 +24,5 @@ m activate pf-argocd
 m activate pf-headlamp
 m status
 
-kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d | code -c
-open http://localhost:6666
-
-kubectl create token headlamp-admin -n kube-system | code -c
-open http://localhost:6655
+m pf-argocd
+m pf-headlamp
