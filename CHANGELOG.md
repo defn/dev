@@ -1,5 +1,15 @@
 # Changelog
 
+## [1.42.0](https://github.com/defn/dev/compare/v1.41.0...v1.42.0) (2025-11-17)
+
+
+### Features
+
+* add hello world program ([3366e17](https://github.com/defn/dev/commit/3366e17e447cd7d00576a84f0c15bb3f31f2cf73))
+* add kube config management and AWS environment setup ([8f896ed](https://github.com/defn/dev/commit/8f896ed06b539b353264d4fca6f2f6eb7130f8c4))
+* add mise tasks for ArgoCD and Headlamp port-forward access ([b99ba1f](https://github.com/defn/dev/commit/b99ba1f59d14113335e7aec6ce51ceaf42b240a5))
+* add pub repository to configuration ([7948516](https://github.com/defn/dev/commit/7948516901243143a9fea5df620bcb461b145876))
+
 ## [1.41.0](https://github.com/defn/dev/compare/v1.40.0...v1.41.0) (2025-11-15)
 
 
