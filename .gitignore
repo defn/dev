@@ -24,7 +24,6 @@ node_modules
 .tilt-dev
 .vscode*
 .wget-hsts
-.kube
 .swp
 .linkerd2
 .irssi
@@ -120,10 +119,10 @@ work
 .npm
 .docker
 .tilt-dev
-.kube
 .lesshst
 .cups
 .k3d
+!.kube/,gitignore
 .fly
 .ctl
 .irssi

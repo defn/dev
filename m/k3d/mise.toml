@@ -1,3 +1,8 @@
+[env]
+AWS_PROFILE = "chamber-1"
+AWS_REGION = "us-west-2"
+AWS_CONFIG_FILE = "${MISE_ORIGINAL_CWD}/.kube/config"
+
 [tools]
 argocd = "3.2.0"
 k3d = "5.8.3"
