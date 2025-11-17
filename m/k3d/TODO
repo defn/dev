@@ -19,6 +19,11 @@ kubectl create namespace argocd
 kubectl config set-context --current --namespace=argocd
 cue cmd dump | kubectl apply -f -
 
+m serve
+m activate pf-argocd
+m activate pf-headlamp
+m status
+
 kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d | code -c
 open http://localhost:6666
 
