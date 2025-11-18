@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+
+function main {
+	curl -sSL -o headlamp.yaml https://raw.githubusercontent.com/headlamp-k8s/headlamp/main/kubernetes-headlamp.yaml
+	curl -sSL -o argocd.yaml https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
+
+	cue import argocd.yaml -f -R -p k3d -l '"kube"' -l '"argocd"' -l 'kind' -l metadata.name
+	cue import headlamp.yaml -f -R -p k3d -l '"kube"' -l '"headlamp"' -l 'kind' -l metadata.name
+
+	trunk fmt
+	cue fmt
+
+	dyff between -b <(
+		cat argocd.yaml
+		echo ---
+		cat headlamp.yaml
+	) <(cue cmd dump)
+}
+
+main "$@"

@@ -1,28 +1,4 @@
-curl -sSL -o headlamp.yaml https://raw.githubusercontent.com/headlamp-k8s/headlamp/main/kubernetes-headlamp.yaml
-curl -sSL -o argocd.yaml https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
-
-cue import argocd.yaml -f -R -p k3d -l '"kube"' -l '"argocd"' -l 'kind' -l metadata.name
-cue import headlamp.yaml -f -R -p k3d -l '"kube"' -l '"headlamp"' -l 'kind' -l metadata.name
-
-trunk fmt
-cue fmt
-
-dyff between -b <(cat argocd.yaml; echo ---; cat headlamp.yaml) <(cue cmd dump)
-
-k3d cluster delete
-k3d cluster create
-
-kubectl create -n kube-system serviceaccount headlamp-admin
-kubectl create clusterrolebinding headlamp-admin --serviceaccount=kube-system:headlamp-admin --clusterrole=cluster-admin
-
-kubectl create namespace argocd
-kubectl config set-context --current --namespace=argocd
-cue cmd dump | kubectl apply -f -
-
-m serve
-m activate pf-argocd
-m activate pf-headlamp
-m status
-
+m update
+m setup
 m pf-argocd
 m pf-headlamp

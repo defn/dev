@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+
+function main {
+	k3d cluster delete
+	k3d cluster create
+
+	kubectl create -n kube-system serviceaccount headlamp-admin
+	kubectl create clusterrolebinding headlamp-admin --serviceaccount=kube-system:headlamp-admin --clusterrole=cluster-admin
+
+	kubectl create namespace argocd
+	kubectl config set-context --current --namespace=argocd
+	cue cmd dump | kubectl apply -f -
+
+	mise run serve
+	mise run activate pf-argocd
+	mise run activate pf-headlamp
+	mise run status
+}
+
+main "$@"
