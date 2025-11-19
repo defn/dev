@@ -52,6 +52,7 @@ resource "coder_agent" "main" {
   auth = "token"
   os   = data.coder_parameter.os.value
   display_apps {
+    web_terminal    = false
     ssh_helper      = false
     vscode          = false
     vscode_insiders = false
@@ -69,6 +70,7 @@ resource "coder_app" "code-server" {
   slug         = "cs"
   subdomain    = data.coder_parameter.subdomain.value
   url          = "http://localhost:8080/?folder=${data.coder_parameter.homedir.value}"
+  order        = 2
   healthcheck {
     interval  = 5
     threshold = 6
@@ -123,6 +125,6 @@ resource "null_resource" "deploy" {
 module "coder-login" {
   count    = data.coder_workspace.me.start_count
   source   = "registry.coder.com/coder/coder-login/coder"
-  version  = "1.0.31"
+  version  = "1.1.0"
   agent_id = coder_agent.main.id
 }

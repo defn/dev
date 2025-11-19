@@ -57,6 +57,7 @@ resource "coder_agent" "main" {
   auth = "token"
   os   = data.coder_parameter.os.value
   display_apps {
+    web_terminal    = false
     ssh_helper      = false
     vscode          = false
     vscode_insiders = false
@@ -109,6 +110,7 @@ resource "coder_app" "code-server" {
     threshold = 6
     url       = "http://localhost:8080/healthz"
   }
+  open_in = "tab"
 }
 
 //
@@ -292,4 +294,3 @@ module "coder-login" {
   version  = "1.1.0"
   agent_id = coder_agent.main.id
 }
-
