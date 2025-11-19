@@ -116,7 +116,10 @@ fi
 # prompt
 if test -z "${STARSHIP_NO-}"; then
 	if [[ -x "$(which starship)" ]]; then
-		# starship
+		eval "$(starship init bash)"
+	fi
+elif test -n "${CODER:-}"; then
+	if [[ -x "$(which starship)" ]]; then
 		eval "$(starship init bash)"
 	fi
 fi
