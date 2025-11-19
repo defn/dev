@@ -84,9 +84,9 @@ resource "coder_env" "mcp_claude_system_prompt" {
   EOT
 }
 
-resource "coder_app" "app" {
+resource "coder_app" "preview" {
   agent_id     = coder_agent.main.id
-  display_name = "app"
+  display_name = "preview"
   icon         = "/icon/code.svg"
   share        = "owner"
   slug         = "preview"
