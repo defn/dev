@@ -89,7 +89,7 @@ resource "coder_app" "app" {
   display_name = "app"
   icon         = "/icon/code.svg"
   share        = "owner"
-  slug         = "app"
+  slug         = "preview"
   subdomain    = true
   url          = "http://localhost:3000"
   order        = 1
