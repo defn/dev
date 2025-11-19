@@ -6,6 +6,8 @@
 push template:
 	#!/usr/bin/env bash
 
-	cd {{template}}
-	tar -cvh --exclude .terraform . | coder templates push -y -d - {{template}}
-	coder templates edit --default-ttl 1h {{template}}
+	tmpl="$(echo {{template}} | perl -pe 's{/+$}{}')"
+
+	cd "$tmpl"
+	tar -cvh --exclude .terraform . | coder templates push -y -d - "${tmpl}"
+	coder templates edit --default-ttl 1h "${tmpl}"
