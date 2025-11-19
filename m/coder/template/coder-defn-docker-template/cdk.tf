@@ -281,16 +281,20 @@ module "claude-code" {
   count               = data.coder_workspace.me.start_count
   source              = "registry.coder.com/coder/claude-code/coder"
   version             = "4.2.0"
-  agent_id            = coder_agent.main.id
-  workdir             = "/home/ubuntu"
+
+  subdomain           = true
   install_claude_code = false
   install_agentapi    = false
-  pre_install_script  = "(cd && git pull); sudo mount --bind /home/ubuntu /home/coder; ~/bin/claude-setup.sh"
   report_tasks        = false
-  subdomain           = true
   continue            = false
+  cli_app             = false
+
+  agent_id            = coder_agent.main.id
   model               = "sonnet"
-  cli_app             = true
+
+  workdir             = "/home/ubuntu"
+  # TODO check if this hardcoded coder home is still used
+  pre_install_script  = "sudo mount --bind /home/ubuntu /home/coder; ~/bin/claude-setup.sh"
 }
 
 # https://registry.coder.com/modules/coder/coder-login
