@@ -276,18 +276,24 @@ resource "docker_container" "workspace" {
   }
 }
 
+# https://registry.coder.com/modules/coder/claude-code
 module "claude-code" {
   count               = data.coder_workspace.me.start_count
   source              = "registry.coder.com/coder/claude-code/coder"
-  version             = "3.0.1"
+  version             = "4.2.0"
   agent_id            = coder_agent.main.id
   workdir             = "/home/ubuntu"
   install_claude_code = false
   install_agentapi    = false
   pre_install_script  = "(cd && git pull); sudo mount --bind /home/ubuntu /home/coder; ~/bin/claude-setup.sh"
-  report_tasks        = true
+  report_tasks        = false
+  subdomain           = true
+  continue            = false
+  model               = "sonnet"
+  cli_app             = true
 }
 
+# https://registry.coder.com/modules/coder/coder-login
 module "coder-login" {
   count    = data.coder_workspace.me.start_count
   source   = "registry.coder.com/coder/coder-login/coder"
