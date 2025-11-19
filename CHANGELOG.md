@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.43.0](https://github.com/defn/dev/compare/v1.42.0...v1.43.0) (2025-11-19)
+
+
+### Features
+
+* add mise tasks for k3d cluster setup and manifest updates ([a5334fb](https://github.com/defn/dev/commit/a5334fbe1ad4ebaaa922ffcc2af9ba9c23f4f634))
+
 ## [1.42.0](https://github.com/defn/dev/compare/v1.41.0...v1.42.0) (2025-11-17)
 
 
