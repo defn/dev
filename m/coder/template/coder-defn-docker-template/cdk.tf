@@ -280,7 +280,7 @@ resource "docker_container" "workspace" {
 module "claude-code" {
   count               = data.coder_workspace.me.start_count
   source              = "registry.coder.com/coder/claude-code/coder"
-  version             = "3.4.3"
+  version             = "3.4.4"
 
   subdomain           = true
   install_claude_code = false
