@@ -32,3 +32,7 @@ module "imma-net" {
     aws = aws.imma-net
   }
 }
+
+output "auditor_arn" {
+  value = module.imma-net.auditor_arn
+}

@@ -32,3 +32,7 @@ module "curl-org" {
     aws = aws.curl-org
   }
 }
+
+output "auditor_arn" {
+  value = module.curl-org.auditor_arn
+}

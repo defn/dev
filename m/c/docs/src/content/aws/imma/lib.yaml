@@ -110,3 +110,7 @@ infra_acc_terraform: |-
       aws = aws.imma-lib
     }
   }
+
+  output "auditor_arn" {
+    value       = module.imma-lib.auditor_arn
+  }

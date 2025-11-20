@@ -32,3 +32,7 @@ module "fogg-ops" {
     aws = aws.fogg-ops
   }
 }
+
+output "auditor_arn" {
+  value = module.fogg-ops.auditor_arn
+}

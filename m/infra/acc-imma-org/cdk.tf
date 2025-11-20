@@ -32,3 +32,7 @@ module "imma-org" {
     aws = aws.imma-org
   }
 }
+
+output "auditor_arn" {
+  value = module.imma-org.auditor_arn
+}

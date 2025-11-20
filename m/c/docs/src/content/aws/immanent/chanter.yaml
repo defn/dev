@@ -110,3 +110,7 @@ infra_acc_terraform: |-
       aws = aws.immanent-chanter
     }
   }
+
+  output "auditor_arn" {
+    value       = module.immanent-chanter.auditor_arn
+  }

@@ -32,3 +32,7 @@ module "immanent-windkey" {
     aws = aws.immanent-windkey
   }
 }
+
+output "auditor_arn" {
+  value = module.immanent-windkey.auditor_arn
+}

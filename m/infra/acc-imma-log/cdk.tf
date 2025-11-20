@@ -32,3 +32,7 @@ module "imma-log" {
     aws = aws.imma-log
   }
 }
+
+output "auditor_arn" {
+  value = module.imma-log.auditor_arn
+}

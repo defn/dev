@@ -372,3 +372,7 @@ infra_acc_terraform: |-
       aws = aws.immanent-org
     }
   }
+
+  output "auditor_arn" {
+    value       = module.immanent-org.auditor_arn
+  }

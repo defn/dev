@@ -32,3 +32,7 @@ module "immanent-namer" {
     aws = aws.immanent-namer
   }
 }
+
+output "auditor_arn" {
+  value = module.immanent-namer.auditor_arn
+}

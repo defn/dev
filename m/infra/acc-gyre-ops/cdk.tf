@@ -32,3 +32,7 @@ module "gyre-ops" {
     aws = aws.gyre-ops
   }
 }
+
+output "auditor_arn" {
+  value = module.gyre-ops.auditor_arn
+}

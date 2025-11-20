@@ -32,3 +32,7 @@ module "curl-lib" {
     aws = aws.curl-lib
   }
 }
+
+output "auditor_arn" {
+  value = module.curl-lib.auditor_arn
+}

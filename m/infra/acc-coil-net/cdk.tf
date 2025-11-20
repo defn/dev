@@ -32,3 +32,7 @@ module "coil-net" {
     aws = aws.coil-net
   }
 }
+
+output "auditor_arn" {
+  value = module.coil-net.auditor_arn
+}

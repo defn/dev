@@ -32,3 +32,7 @@ module "spiral-pub" {
     aws = aws.spiral-pub
   }
 }
+
+output "auditor_arn" {
+  value = module.spiral-pub.auditor_arn
+}

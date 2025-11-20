@@ -32,3 +32,7 @@ module "coil-hub" {
     aws = aws.coil-hub
   }
 }
+
+output "auditor_arn" {
+  value = module.coil-hub.auditor_arn
+}

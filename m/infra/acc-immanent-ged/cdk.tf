@@ -32,3 +32,7 @@ module "immanent-ged" {
     aws = aws.immanent-ged
   }
 }
+
+output "auditor_arn" {
+  value = module.immanent-ged.auditor_arn
+}

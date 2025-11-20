@@ -740,3 +740,7 @@ infra_acc_terraform: |-
       aws = aws.chamber-org
     }
   }
+
+  output "auditor_arn" {
+    value       = module.chamber-org.auditor_arn
+  }

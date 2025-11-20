@@ -32,3 +32,7 @@ module "coil-lib" {
     aws = aws.coil-lib
   }
 }
+
+output "auditor_arn" {
+  value = module.coil-lib.auditor_arn
+}

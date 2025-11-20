@@ -32,3 +32,7 @@ module "vault-dev" {
     aws = aws.vault-dev
   }
 }
+
+output "auditor_arn" {
+  value = module.vault-dev.auditor_arn
+}

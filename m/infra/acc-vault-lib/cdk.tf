@@ -32,3 +32,7 @@ module "vault-lib" {
     aws = aws.vault-lib
   }
 }
+
+output "auditor_arn" {
+  value = module.vault-lib.auditor_arn
+}

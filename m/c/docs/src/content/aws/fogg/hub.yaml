@@ -110,3 +110,7 @@ infra_acc_terraform: |-
       aws = aws.fogg-hub
     }
   }
+
+  output "auditor_arn" {
+    value       = module.fogg-hub.auditor_arn
+  }

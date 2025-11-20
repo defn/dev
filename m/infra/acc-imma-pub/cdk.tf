@@ -32,3 +32,7 @@ module "imma-pub" {
     aws = aws.imma-pub
   }
 }
+
+output "auditor_arn" {
+  value = module.imma-pub.auditor_arn
+}

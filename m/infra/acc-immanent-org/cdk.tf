@@ -32,3 +32,7 @@ module "immanent-org" {
     aws = aws.immanent-org
   }
 }
+
+output "auditor_arn" {
+  value = module.immanent-org.auditor_arn
+}

@@ -32,3 +32,7 @@ module "immanent-doorkeeper" {
     aws = aws.immanent-doorkeeper
   }
 }
+
+output "auditor_arn" {
+  value = module.immanent-doorkeeper.auditor_arn
+}

@@ -32,3 +32,7 @@ module "jianghu-net" {
     aws = aws.jianghu-net
   }
 }
+
+output "auditor_arn" {
+  value = module.jianghu-net.auditor_arn
+}

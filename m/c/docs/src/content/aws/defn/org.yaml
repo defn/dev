@@ -189,3 +189,7 @@ infra_acc_terraform: |-
       aws = aws.defn-org
     }
   }
+
+  output "auditor_arn" {
+    value       = module.defn-org.auditor_arn
+  }

@@ -110,3 +110,7 @@ infra_acc_terraform: |-
       aws = aws.whoa-hub
     }
   }
+
+  output "auditor_arn" {
+    value       = module.whoa-hub.auditor_arn
+  }

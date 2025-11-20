@@ -32,3 +32,7 @@ module "immanent-herbal" {
     aws = aws.immanent-herbal
   }
 }
+
+output "auditor_arn" {
+  value = module.immanent-herbal.auditor_arn
+}

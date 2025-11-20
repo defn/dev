@@ -110,3 +110,7 @@ infra_acc_terraform: |-
       aws = aws.immanent-doorkeeper
     }
   }
+
+  output "auditor_arn" {
+    value       = module.immanent-doorkeeper.auditor_arn
+  }

@@ -32,3 +32,7 @@ module "imma-dev" {
     aws = aws.imma-dev
   }
 }
+
+output "auditor_arn" {
+  value = module.imma-dev.auditor_arn
+}

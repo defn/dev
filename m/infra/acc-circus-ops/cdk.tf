@@ -32,3 +32,7 @@ module "circus-ops" {
     aws = aws.circus-ops
   }
 }
+
+output "auditor_arn" {
+  value = module.circus-ops.auditor_arn
+}

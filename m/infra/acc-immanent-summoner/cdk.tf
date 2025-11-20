@@ -32,3 +32,7 @@ module "immanent-summoner" {
     aws = aws.immanent-summoner
   }
 }
+
+output "auditor_arn" {
+  value = module.immanent-summoner.auditor_arn
+}

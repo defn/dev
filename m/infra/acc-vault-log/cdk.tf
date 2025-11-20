@@ -32,3 +32,7 @@ module "vault-log" {
     aws = aws.vault-log
   }
 }
+
+output "auditor_arn" {
+  value = module.vault-log.auditor_arn
+}

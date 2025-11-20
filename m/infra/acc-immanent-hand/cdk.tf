@@ -32,3 +32,7 @@ module "immanent-hand" {
     aws = aws.immanent-hand
   }
 }
+
+output "auditor_arn" {
+  value = module.immanent-hand.auditor_arn
+}

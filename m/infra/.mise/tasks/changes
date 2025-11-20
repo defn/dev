@@ -5,7 +5,7 @@ function main {
 		set -- $(ls -d */ | shuf)
 	fi
 
-	for a in */; do echo "$a $(grep No.changes $a/.plan.txt)"; done | grep -v 'No changes' || true
+	for a in "$@"; do echo "$a $(grep No.changes $a/.plan.txt)"; done | grep -v 'No changes' || true
 }
 
 main "$@"

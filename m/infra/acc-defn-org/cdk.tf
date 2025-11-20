@@ -32,3 +32,7 @@ module "defn-org" {
     aws = aws.defn-org
   }
 }
+
+output "auditor_arn" {
+  value = module.defn-org.auditor_arn
+}

@@ -110,3 +110,7 @@ infra_acc_terraform: |-
       aws = aws.immanent-herbal
     }
   }
+
+  output "auditor_arn" {
+    value       = module.immanent-herbal.auditor_arn
+  }

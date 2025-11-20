@@ -32,3 +32,7 @@ module "jianghu-org" {
     aws = aws.jianghu-org
   }
 }
+
+output "auditor_arn" {
+  value = module.jianghu-org.auditor_arn
+}

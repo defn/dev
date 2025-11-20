@@ -32,3 +32,7 @@ module "immanent-patterner" {
     aws = aws.immanent-patterner
   }
 }
+
+output "auditor_arn" {
+  value = module.immanent-patterner.auditor_arn
+}

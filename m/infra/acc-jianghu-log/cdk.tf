@@ -32,3 +32,7 @@ module "jianghu-log" {
     aws = aws.jianghu-log
   }
 }
+
+output "auditor_arn" {
+  value = module.jianghu-log.auditor_arn
+}

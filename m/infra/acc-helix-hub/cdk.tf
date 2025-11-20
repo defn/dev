@@ -32,3 +32,7 @@ module "helix-hub" {
     aws = aws.helix-hub
   }
 }
+
+output "auditor_arn" {
+  value = module.helix-hub.auditor_arn
+}

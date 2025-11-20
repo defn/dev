@@ -32,3 +32,7 @@ module "whoa-pub" {
     aws = aws.whoa-pub
   }
 }
+
+output "auditor_arn" {
+  value = module.whoa-pub.auditor_arn
+}

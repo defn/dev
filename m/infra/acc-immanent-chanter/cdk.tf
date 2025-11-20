@@ -32,3 +32,7 @@ module "immanent-chanter" {
     aws = aws.immanent-chanter
   }
 }
+
+output "auditor_arn" {
+  value = module.immanent-chanter.auditor_arn
+}

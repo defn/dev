@@ -112,3 +112,7 @@ infra_acc_terraform: |-
       aws = aws.gyre-ops
     }
   }
+
+  output "auditor_arn" {
+    value       = module.gyre-ops.auditor_arn
+  }

@@ -110,3 +110,7 @@ infra_acc_terraform: |-
       aws = aws.vault-prod
     }
   }
+
+  output "auditor_arn" {
+    value       = module.vault-prod.auditor_arn
+  }

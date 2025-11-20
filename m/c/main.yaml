@@ -809,6 +809,10 @@ config:
                   aws = aws.chamber-org
                 }
               }
+
+              output "auditor_arn" {
+                value       = module.chamber-org.auditor_arn
+              }
           "1":
             account: "1"
             email: aws-cd@defn.us
@@ -920,6 +924,10 @@ config:
                 providers = {
                   aws = aws.chamber-1
                 }
+              }
+
+              output "auditor_arn" {
+                value       = module.chamber-1.auditor_arn
               }
           "2":
             account: "2"
@@ -1033,6 +1041,10 @@ config:
                   aws = aws.chamber-2
                 }
               }
+
+              output "auditor_arn" {
+                value       = module.chamber-2.auditor_arn
+              }
           "3":
             account: "3"
             email: aws-users@defn.us
@@ -1144,6 +1156,10 @@ config:
                 providers = {
                   aws = aws.chamber-3
                 }
+              }
+
+              output "auditor_arn" {
+                value       = module.chamber-3.auditor_arn
               }
           "4":
             account: "4"
@@ -1257,6 +1273,10 @@ config:
                   aws = aws.chamber-4
                 }
               }
+
+              output "auditor_arn" {
+                value       = module.chamber-4.auditor_arn
+              }
           "5":
             account: "5"
             email: chamber-5@defn.us
@@ -1368,6 +1388,10 @@ config:
                 providers = {
                   aws = aws.chamber-5
                 }
+              }
+
+              output "auditor_arn" {
+                value       = module.chamber-5.auditor_arn
               }
           "6":
             account: "6"
@@ -1481,6 +1505,10 @@ config:
                   aws = aws.chamber-6
                 }
               }
+
+              output "auditor_arn" {
+                value       = module.chamber-6.auditor_arn
+              }
           "7":
             account: "7"
             email: chamber-7@defn.us
@@ -1592,6 +1620,10 @@ config:
                 providers = {
                   aws = aws.chamber-7
                 }
+              }
+
+              output "auditor_arn" {
+                value       = module.chamber-7.auditor_arn
               }
           "8":
             account: "8"
@@ -1705,6 +1737,10 @@ config:
                   aws = aws.chamber-8
                 }
               }
+
+              output "auditor_arn" {
+                value       = module.chamber-8.auditor_arn
+              }
           "9":
             account: "9"
             email: chamber-9@defn.us
@@ -1816,6 +1852,10 @@ config:
                 providers = {
                   aws = aws.chamber-9
                 }
+              }
+
+              output "auditor_arn" {
+                value       = module.chamber-9.auditor_arn
               }
           a:
             account: a
@@ -1929,6 +1969,10 @@ config:
                   aws = aws.chamber-a
                 }
               }
+
+              output "auditor_arn" {
+                value       = module.chamber-a.auditor_arn
+              }
           b:
             account: b
             email: imma-admin1@imma.io
@@ -2040,6 +2084,10 @@ config:
                 providers = {
                   aws = aws.chamber-b
                 }
+              }
+
+              output "auditor_arn" {
+                value       = module.chamber-b.auditor_arn
               }
           c:
             account: c
@@ -2153,6 +2201,10 @@ config:
                   aws = aws.chamber-c
                 }
               }
+
+              output "auditor_arn" {
+                value       = module.chamber-c.auditor_arn
+              }
           d:
             account: d
             email: box-adm1@imma.io
@@ -2264,6 +2316,10 @@ config:
                 providers = {
                   aws = aws.chamber-d
                 }
+              }
+
+              output "auditor_arn" {
+                value       = module.chamber-d.auditor_arn
               }
           e:
             account: e
@@ -2377,6 +2433,10 @@ config:
                   aws = aws.chamber-e
                 }
               }
+
+              output "auditor_arn" {
+                value       = module.chamber-e.auditor_arn
+              }
           "f":
             account: "f"
             email: usr-admin1@imma.io
@@ -2488,6 +2548,10 @@ config:
                 providers = {
                   aws = aws.chamber-f
                 }
+              }
+
+              output "auditor_arn" {
+                value       = module.chamber-f.auditor_arn
               }
           g:
             account: g
@@ -2601,6 +2665,10 @@ config:
                   aws = aws.chamber-g
                 }
               }
+
+              output "auditor_arn" {
+                value       = module.chamber-g.auditor_arn
+              }
           h:
             account: h
             email: usr-eng1@imma.io
@@ -2712,6 +2780,10 @@ config:
                 providers = {
                   aws = aws.chamber-h
                 }
+              }
+
+              output "auditor_arn" {
+                value       = module.chamber-h.auditor_arn
               }
           i:
             account: i
@@ -2825,6 +2897,10 @@ config:
                   aws = aws.chamber-i
                 }
               }
+
+              output "auditor_arn" {
+                value       = module.chamber-i.auditor_arn
+              }
           j:
             account: j
             email: aws-development1@defn.us
@@ -2936,6 +3012,10 @@ config:
                 providers = {
                   aws = aws.chamber-j
                 }
+              }
+
+              output "auditor_arn" {
+                value       = module.chamber-j.auditor_arn
               }
           l:
             account: l
@@ -3049,6 +3129,10 @@ config:
                   aws = aws.chamber-l
                 }
               }
+
+              output "auditor_arn" {
+                value       = module.chamber-l.auditor_arn
+              }
           m:
             account: m
             email: defn-m@defn.us
@@ -3160,6 +3244,10 @@ config:
                 providers = {
                   aws = aws.chamber-m
                 }
+              }
+
+              output "auditor_arn" {
+                value       = module.chamber-m.auditor_arn
               }
           "n":
             account: "n"
@@ -3273,6 +3361,10 @@ config:
                   aws = aws.chamber-n
                 }
               }
+
+              output "auditor_arn" {
+                value       = module.chamber-n.auditor_arn
+              }
           o:
             account: o
             email: defn-o@defn.us
@@ -3384,6 +3476,10 @@ config:
                 providers = {
                   aws = aws.chamber-o
                 }
+              }
+
+              output "auditor_arn" {
+                value       = module.chamber-o.auditor_arn
               }
           p:
             account: p
@@ -3497,6 +3593,10 @@ config:
                   aws = aws.chamber-p
                 }
               }
+
+              output "auditor_arn" {
+                value       = module.chamber-p.auditor_arn
+              }
           q:
             account: q
             email: aws-dev@defn.us
@@ -3608,6 +3708,10 @@ config:
                 providers = {
                   aws = aws.chamber-q
                 }
+              }
+
+              output "auditor_arn" {
+                value       = module.chamber-q.auditor_arn
               }
           r:
             account: r
@@ -3721,6 +3825,10 @@ config:
                   aws = aws.chamber-r
                 }
               }
+
+              output "auditor_arn" {
+                value       = module.chamber-r.auditor_arn
+              }
           s:
             account: s
             email: defn-s@imma.io
@@ -3832,6 +3940,10 @@ config:
                 providers = {
                   aws = aws.chamber-s
                 }
+              }
+
+              output "auditor_arn" {
+                value       = module.chamber-s.auditor_arn
               }
           "t":
             account: "t"
@@ -3945,6 +4057,10 @@ config:
                   aws = aws.chamber-t
                 }
               }
+
+              output "auditor_arn" {
+                value       = module.chamber-t.auditor_arn
+              }
           u:
             account: u
             email: aws-qa@defn.us
@@ -4056,6 +4172,10 @@ config:
                 providers = {
                   aws = aws.chamber-u
                 }
+              }
+
+              output "auditor_arn" {
+                value       = module.chamber-u.auditor_arn
               }
           v:
             account: v
@@ -4169,6 +4289,10 @@ config:
                   aws = aws.chamber-v
                 }
               }
+
+              output "auditor_arn" {
+                value       = module.chamber-v.auditor_arn
+              }
           w:
             account: w
             email: defn-w@imma.io
@@ -4280,6 +4404,10 @@ config:
                 providers = {
                   aws = aws.chamber-w
                 }
+              }
+
+              output "auditor_arn" {
+                value       = module.chamber-w.auditor_arn
               }
           x:
             account: x
@@ -4393,6 +4521,10 @@ config:
                   aws = aws.chamber-x
                 }
               }
+
+              output "auditor_arn" {
+                value       = module.chamber-x.auditor_arn
+              }
           "y":
             account: "y"
             email: aws-prod@defn.us
@@ -4505,6 +4637,10 @@ config:
                   aws = aws.chamber-y
                 }
               }
+
+              output "auditor_arn" {
+                value       = module.chamber-y.auditor_arn
+              }
           z:
             account: z
             email: aws-hub@defn.us
@@ -4616,6 +4752,10 @@ config:
                 providers = {
                   aws = aws.chamber-z
                 }
+              }
+
+              output "auditor_arn" {
+                value       = module.chamber-z.auditor_arn
               }
         sso_region: us-west-2
         sso_url: https://chamber-0.awsapps.com/start
@@ -4884,6 +5024,10 @@ config:
                   aws = aws.circus-org
                 }
               }
+
+              output "auditor_arn" {
+                value       = module.circus-org.auditor_arn
+              }
           lib:
             account: lib
             email: aws-circus-govcloud@defn.sh
@@ -4995,6 +5139,10 @@ config:
                 providers = {
                   aws = aws.circus-lib
                 }
+              }
+
+              output "auditor_arn" {
+                value       = module.circus-lib.auditor_arn
               }
           log:
             account: log
@@ -5108,6 +5256,10 @@ config:
                   aws = aws.circus-log
                 }
               }
+
+              output "auditor_arn" {
+                value       = module.circus-log.auditor_arn
+              }
           net:
             account: net
             email: aws-circus-transit@defn.sh
@@ -5220,6 +5372,10 @@ config:
                   aws = aws.circus-net
                 }
               }
+
+              output "auditor_arn" {
+                value       = module.circus-net.auditor_arn
+              }
           ops:
             account: ops
             email: aws-circus-ops@defn.sh
@@ -5331,6 +5487,10 @@ config:
                 providers = {
                   aws = aws.circus-ops
                 }
+              }
+
+              output "auditor_arn" {
+                value       = module.circus-ops.auditor_arn
               }
         sso_region: us-west-2
         sso_url: https://d-92670c4790.awsapps.com/start
@@ -5589,6 +5749,10 @@ config:
                   aws = aws.coil-org
                 }
               }
+
+              output "auditor_arn" {
+                value       = module.coil-org.auditor_arn
+              }
           hub:
             account: hub
             aws_config: |-
@@ -5702,6 +5866,10 @@ config:
                 providers = {
                   aws = aws.coil-hub
                 }
+              }
+
+              output "auditor_arn" {
+                value       = module.coil-hub.auditor_arn
               }
           lib:
             account: lib
@@ -5817,6 +5985,10 @@ config:
                   aws = aws.coil-lib
                 }
               }
+
+              output "auditor_arn" {
+                value       = module.coil-lib.auditor_arn
+              }
           net:
             account: net
             aws_config: |-
@@ -5930,6 +6102,10 @@ config:
                 providers = {
                   aws = aws.coil-net
                 }
+              }
+
+              output "auditor_arn" {
+                value       = module.coil-net.auditor_arn
               }
         sso_region: us-east-1
         sso_url: https://d-90674c3cfd.awsapps.com/start
@@ -6188,6 +6364,10 @@ config:
                   aws = aws.curl-org
                 }
               }
+
+              output "auditor_arn" {
+                value       = module.curl-org.auditor_arn
+              }
           hub:
             account: hub
             aws_config: |-
@@ -6301,6 +6481,10 @@ config:
                 providers = {
                   aws = aws.curl-hub
                 }
+              }
+
+              output "auditor_arn" {
+                value       = module.curl-hub.auditor_arn
               }
           lib:
             account: lib
@@ -6416,6 +6600,10 @@ config:
                   aws = aws.curl-lib
                 }
               }
+
+              output "auditor_arn" {
+                value       = module.curl-lib.auditor_arn
+              }
           net:
             account: net
             aws_config: |-
@@ -6529,6 +6717,10 @@ config:
                 providers = {
                   aws = aws.curl-net
                 }
+              }
+
+              output "auditor_arn" {
+                value       = module.curl-net.auditor_arn
               }
         sso_region: us-west-2
         sso_url: https://d-926760a859.awsapps.com/start
@@ -6725,6 +6917,10 @@ config:
                 providers = {
                   aws = aws.defn-org
                 }
+              }
+
+              output "auditor_arn" {
+                value       = module.defn-org.auditor_arn
               }
         sso_region: us-east-2
         sso_url: https://defn.awsapps.com/start
@@ -7073,6 +7269,10 @@ config:
                   aws = aws.fogg-org
                 }
               }
+
+              output "auditor_arn" {
+                value       = module.fogg-org.auditor_arn
+              }
           ci:
             account: ci
             email: fogg-home@defn.sh
@@ -7184,6 +7384,10 @@ config:
                 providers = {
                   aws = aws.fogg-ci
                 }
+              }
+
+              output "auditor_arn" {
+                value       = module.fogg-ci.auditor_arn
               }
           dev:
             account: dev
@@ -7297,6 +7501,10 @@ config:
                   aws = aws.fogg-dev
                 }
               }
+
+              output "auditor_arn" {
+                value       = module.fogg-dev.auditor_arn
+              }
           hub:
             account: hub
             email: fogg-hub@defn.sh
@@ -7408,6 +7616,10 @@ config:
                 providers = {
                   aws = aws.fogg-hub
                 }
+              }
+
+              output "auditor_arn" {
+                value       = module.fogg-hub.auditor_arn
               }
           lib:
             account: lib
@@ -7521,6 +7733,10 @@ config:
                   aws = aws.fogg-lib
                 }
               }
+
+              output "auditor_arn" {
+                value       = module.fogg-lib.auditor_arn
+              }
           log:
             account: log
             email: fogg-circus@defn.sh
@@ -7632,6 +7848,10 @@ config:
                 providers = {
                   aws = aws.fogg-log
                 }
+              }
+
+              output "auditor_arn" {
+                value       = module.fogg-log.auditor_arn
               }
           net:
             account: net
@@ -7745,6 +7965,10 @@ config:
                   aws = aws.fogg-net
                 }
               }
+
+              output "auditor_arn" {
+                value       = module.fogg-net.auditor_arn
+              }
           ops:
             account: ops
             email: fogg-gateway@defn.sh
@@ -7856,6 +8080,10 @@ config:
                 providers = {
                   aws = aws.fogg-ops
                 }
+              }
+
+              output "auditor_arn" {
+                value       = module.fogg-ops.auditor_arn
               }
           prod:
             account: prod
@@ -7969,6 +8197,10 @@ config:
                   aws = aws.fogg-prod
                 }
               }
+
+              output "auditor_arn" {
+                value       = module.fogg-prod.auditor_arn
+              }
           pub:
             account: pub
             email: fogg-security@defn.sh
@@ -8080,6 +8312,10 @@ config:
                 providers = {
                   aws = aws.fogg-pub
                 }
+              }
+
+              output "auditor_arn" {
+                value       = module.fogg-pub.auditor_arn
               }
         sso_region: us-west-2
         sso_url: https://fogg-0.awsapps.com/start
@@ -8302,6 +8538,10 @@ config:
                   aws = aws.gyre-org
                 }
               }
+
+              output "auditor_arn" {
+                value       = module.gyre-org.auditor_arn
+              }
           ops:
             account: ops
             aws_config: |-
@@ -8415,6 +8655,10 @@ config:
                 providers = {
                   aws = aws.gyre-ops
                 }
+              }
+
+              output "auditor_arn" {
+                value       = module.gyre-ops.auditor_arn
               }
         sso_region: us-east-2
         sso_url: https://d-9a6716e54a.awsapps.com/start
@@ -8781,6 +9025,10 @@ config:
                   aws = aws.helix-org
                 }
               }
+
+              output "auditor_arn" {
+                value       = module.helix-org.auditor_arn
+              }
           ci:
             account: ci
             aws_config: |-
@@ -8894,6 +9142,10 @@ config:
                 providers = {
                   aws = aws.helix-ci
                 }
+              }
+
+              output "auditor_arn" {
+                value       = module.helix-ci.auditor_arn
               }
           dev:
             account: dev
@@ -9009,6 +9261,10 @@ config:
                   aws = aws.helix-dev
                 }
               }
+
+              output "auditor_arn" {
+                value       = module.helix-dev.auditor_arn
+              }
           hub:
             account: hub
             aws_config: |-
@@ -9122,6 +9378,10 @@ config:
                 providers = {
                   aws = aws.helix-hub
                 }
+              }
+
+              output "auditor_arn" {
+                value       = module.helix-hub.auditor_arn
               }
           lib:
             account: lib
@@ -9237,6 +9497,10 @@ config:
                   aws = aws.helix-lib
                 }
               }
+
+              output "auditor_arn" {
+                value       = module.helix-lib.auditor_arn
+              }
           log:
             account: log
             aws_config: |-
@@ -9350,6 +9614,10 @@ config:
                 providers = {
                   aws = aws.helix-log
                 }
+              }
+
+              output "auditor_arn" {
+                value       = module.helix-log.auditor_arn
               }
           net:
             account: net
@@ -9465,6 +9733,10 @@ config:
                   aws = aws.helix-net
                 }
               }
+
+              output "auditor_arn" {
+                value       = module.helix-net.auditor_arn
+              }
           ops:
             account: ops
             aws_config: |-
@@ -9578,6 +9850,10 @@ config:
                 providers = {
                   aws = aws.helix-ops
                 }
+              }
+
+              output "auditor_arn" {
+                value       = module.helix-ops.auditor_arn
               }
           prod:
             account: prod
@@ -9693,6 +9969,10 @@ config:
                   aws = aws.helix-prod
                 }
               }
+
+              output "auditor_arn" {
+                value       = module.helix-prod.auditor_arn
+              }
           pub:
             account: pub
             aws_config: |-
@@ -9806,6 +10086,10 @@ config:
                 providers = {
                   aws = aws.helix-pub
                 }
+              }
+
+              output "auditor_arn" {
+                value       = module.helix-pub.auditor_arn
               }
         sso_region: us-east-2
         sso_url: https://d-9a6716ffd1.awsapps.com/start
@@ -10090,6 +10374,10 @@ config:
                   aws = aws.imma-org
                 }
               }
+
+              output "auditor_arn" {
+                value       = module.imma-org.auditor_arn
+              }
           dev:
             account: dev
             email: imma-dev@imma.io
@@ -10201,6 +10489,10 @@ config:
                 providers = {
                   aws = aws.imma-dev
                 }
+              }
+
+              output "auditor_arn" {
+                value       = module.imma-dev.auditor_arn
               }
           lib:
             account: lib
@@ -10314,6 +10606,10 @@ config:
                   aws = aws.imma-lib
                 }
               }
+
+              output "auditor_arn" {
+                value       = module.imma-lib.auditor_arn
+              }
           log:
             account: log
             email: imma-dgwyn@defn.us
@@ -10425,6 +10721,10 @@ config:
                 providers = {
                   aws = aws.imma-log
                 }
+              }
+
+              output "auditor_arn" {
+                value       = module.imma-log.auditor_arn
               }
           net:
             account: net
@@ -10538,6 +10838,10 @@ config:
                   aws = aws.imma-net
                 }
               }
+
+              output "auditor_arn" {
+                value       = module.imma-net.auditor_arn
+              }
           pub:
             account: pub
             email: imma-prod@imma.io
@@ -10649,6 +10953,10 @@ config:
                 providers = {
                   aws = aws.imma-pub
                 }
+              }
+
+              output "auditor_arn" {
+                value       = module.imma-pub.auditor_arn
               }
         sso_region: us-west-2
         sso_url: https://imma-0.awsapps.com/start
@@ -11029,6 +11337,10 @@ config:
                   aws = aws.immanent-org
                 }
               }
+
+              output "auditor_arn" {
+                value       = module.immanent-org.auditor_arn
+              }
           changer:
             account: changer
             email: immanent-changer@defn.us
@@ -11140,6 +11452,10 @@ config:
                 providers = {
                   aws = aws.immanent-changer
                 }
+              }
+
+              output "auditor_arn" {
+                value       = module.immanent-changer.auditor_arn
               }
           chanter:
             account: chanter
@@ -11253,6 +11569,10 @@ config:
                   aws = aws.immanent-chanter
                 }
               }
+
+              output "auditor_arn" {
+                value       = module.immanent-chanter.auditor_arn
+              }
           doorkeeper:
             account: doorkeeper
             email: immanent-doorkeeper@defn.us
@@ -11364,6 +11684,10 @@ config:
                 providers = {
                   aws = aws.immanent-doorkeeper
                 }
+              }
+
+              output "auditor_arn" {
+                value       = module.immanent-doorkeeper.auditor_arn
               }
           ged:
             account: ged
@@ -11477,6 +11801,10 @@ config:
                   aws = aws.immanent-ged
                 }
               }
+
+              output "auditor_arn" {
+                value       = module.immanent-ged.auditor_arn
+              }
           hand:
             account: hand
             email: immanent-hand@defn.us
@@ -11588,6 +11916,10 @@ config:
                 providers = {
                   aws = aws.immanent-hand
                 }
+              }
+
+              output "auditor_arn" {
+                value       = module.immanent-hand.auditor_arn
               }
           herbal:
             account: herbal
@@ -11701,6 +12033,10 @@ config:
                   aws = aws.immanent-herbal
                 }
               }
+
+              output "auditor_arn" {
+                value       = module.immanent-herbal.auditor_arn
+              }
           namer:
             account: namer
             email: immanent-namer@defn.us
@@ -11812,6 +12148,10 @@ config:
                 providers = {
                   aws = aws.immanent-namer
                 }
+              }
+
+              output "auditor_arn" {
+                value       = module.immanent-namer.auditor_arn
               }
           patterner:
             account: patterner
@@ -11925,6 +12265,10 @@ config:
                   aws = aws.immanent-patterner
                 }
               }
+
+              output "auditor_arn" {
+                value       = module.immanent-patterner.auditor_arn
+              }
           roke:
             account: roke
             email: immanent-roke@defn.us
@@ -12036,6 +12380,10 @@ config:
                 providers = {
                   aws = aws.immanent-roke
                 }
+              }
+
+              output "auditor_arn" {
+                value       = module.immanent-roke.auditor_arn
               }
           summoner:
             account: summoner
@@ -12149,6 +12497,10 @@ config:
                   aws = aws.immanent-summoner
                 }
               }
+
+              output "auditor_arn" {
+                value       = module.immanent-summoner.auditor_arn
+              }
           windkey:
             account: windkey
             email: immanent-windkey@defn.us
@@ -12260,6 +12612,10 @@ config:
                 providers = {
                   aws = aws.immanent-windkey
                 }
+              }
+
+              output "auditor_arn" {
+                value       = module.immanent-windkey.auditor_arn
               }
         sso_region: us-west-2
         sso_url: https://immanent-0.awsapps.com/start
@@ -12496,6 +12852,10 @@ config:
                   aws = aws.jianghu-org
                 }
               }
+
+              output "auditor_arn" {
+                value       = module.jianghu-org.auditor_arn
+              }
           log:
             account: log
             email: klamath@defn.us
@@ -12608,6 +12968,10 @@ config:
                   aws = aws.jianghu-log
                 }
               }
+
+              output "auditor_arn" {
+                value       = module.jianghu-log.auditor_arn
+              }
           net:
             account: net
             email: tahoe@defn.us
@@ -12719,6 +13083,10 @@ config:
                 providers = {
                   aws = aws.jianghu-net
                 }
+              }
+
+              output "auditor_arn" {
+                value       = module.jianghu-net.auditor_arn
               }
         sso_region: us-west-2
         sso_url: https://jianghu-0.awsapps.com/start
@@ -13085,6 +13453,10 @@ config:
                   aws = aws.spiral-org
                 }
               }
+
+              output "auditor_arn" {
+                value       = module.spiral-org.auditor_arn
+              }
           ci:
             account: ci
             aws_config: |-
@@ -13198,6 +13570,10 @@ config:
                 providers = {
                   aws = aws.spiral-ci
                 }
+              }
+
+              output "auditor_arn" {
+                value       = module.spiral-ci.auditor_arn
               }
           dev:
             account: dev
@@ -13313,6 +13689,10 @@ config:
                   aws = aws.spiral-dev
                 }
               }
+
+              output "auditor_arn" {
+                value       = module.spiral-dev.auditor_arn
+              }
           hub:
             account: hub
             aws_config: |-
@@ -13426,6 +13806,10 @@ config:
                 providers = {
                   aws = aws.spiral-hub
                 }
+              }
+
+              output "auditor_arn" {
+                value       = module.spiral-hub.auditor_arn
               }
           lib:
             account: lib
@@ -13541,6 +13925,10 @@ config:
                   aws = aws.spiral-lib
                 }
               }
+
+              output "auditor_arn" {
+                value       = module.spiral-lib.auditor_arn
+              }
           log:
             account: log
             aws_config: |-
@@ -13654,6 +14042,10 @@ config:
                 providers = {
                   aws = aws.spiral-log
                 }
+              }
+
+              output "auditor_arn" {
+                value       = module.spiral-log.auditor_arn
               }
           net:
             account: net
@@ -13769,6 +14161,10 @@ config:
                   aws = aws.spiral-net
                 }
               }
+
+              output "auditor_arn" {
+                value       = module.spiral-net.auditor_arn
+              }
           ops:
             account: ops
             aws_config: |-
@@ -13882,6 +14278,10 @@ config:
                 providers = {
                   aws = aws.spiral-ops
                 }
+              }
+
+              output "auditor_arn" {
+                value       = module.spiral-ops.auditor_arn
               }
           prod:
             account: prod
@@ -13997,6 +14397,10 @@ config:
                   aws = aws.spiral-prod
                 }
               }
+
+              output "auditor_arn" {
+                value       = module.spiral-prod.auditor_arn
+              }
           pub:
             account: pub
             aws_config: |-
@@ -14110,6 +14514,10 @@ config:
                 providers = {
                   aws = aws.spiral-pub
                 }
+              }
+
+              output "auditor_arn" {
+                value       = module.spiral-pub.auditor_arn
               }
         sso_region: us-west-2
         sso_url: https://d-926760b322.awsapps.com/start
@@ -14458,6 +14866,10 @@ config:
                   aws = aws.vault-org
                 }
               }
+
+              output "auditor_arn" {
+                value       = module.vault-org.auditor_arn
+              }
           ci:
             account: ci
             email: aws-vault-vault0@defn.sh
@@ -14569,6 +14981,10 @@ config:
                 providers = {
                   aws = aws.vault-ci
                 }
+              }
+
+              output "auditor_arn" {
+                value       = module.vault-ci.auditor_arn
               }
           dev:
             account: dev
@@ -14682,6 +15098,10 @@ config:
                   aws = aws.vault-dev
                 }
               }
+
+              output "auditor_arn" {
+                value       = module.vault-dev.auditor_arn
+              }
           hub:
             account: hub
             email: aws-vault-hub@defn.sh
@@ -14793,6 +15213,10 @@ config:
                 providers = {
                   aws = aws.vault-hub
                 }
+              }
+
+              output "auditor_arn" {
+                value       = module.vault-hub.auditor_arn
               }
           lib:
             account: lib
@@ -14906,6 +15330,10 @@ config:
                   aws = aws.vault-lib
                 }
               }
+
+              output "auditor_arn" {
+                value       = module.vault-lib.auditor_arn
+              }
           log:
             account: log
             email: aws-vault-audit@defn.sh
@@ -15017,6 +15445,10 @@ config:
                 providers = {
                   aws = aws.vault-log
                 }
+              }
+
+              output "auditor_arn" {
+                value       = module.vault-log.auditor_arn
               }
           net:
             account: net
@@ -15130,6 +15562,10 @@ config:
                   aws = aws.vault-net
                 }
               }
+
+              output "auditor_arn" {
+                value       = module.vault-net.auditor_arn
+              }
           ops:
             account: ops
             email: aws-vault-ops@defn.sh
@@ -15241,6 +15677,10 @@ config:
                 providers = {
                   aws = aws.vault-ops
                 }
+              }
+
+              output "auditor_arn" {
+                value       = module.vault-ops.auditor_arn
               }
           prod:
             account: prod
@@ -15354,6 +15794,10 @@ config:
                   aws = aws.vault-prod
                 }
               }
+
+              output "auditor_arn" {
+                value       = module.vault-prod.auditor_arn
+              }
           pub:
             account: pub
             email: aws-vault-pub@defn.sh
@@ -15465,6 +15909,10 @@ config:
                 providers = {
                   aws = aws.vault-pub
                 }
+              }
+
+              output "auditor_arn" {
+                value       = module.vault-pub.auditor_arn
               }
         sso_region: us-east-2
         sso_url: https://d-9a672a0e52.awsapps.com/start
@@ -15733,6 +16181,10 @@ config:
                   aws = aws.whoa-org
                 }
               }
+
+              output "auditor_arn" {
+                value       = module.whoa-org.auditor_arn
+              }
           dev:
             account: dev
             email: whoa-dev@imma.io
@@ -15844,6 +16296,10 @@ config:
                 providers = {
                   aws = aws.whoa-dev
                 }
+              }
+
+              output "auditor_arn" {
+                value       = module.whoa-dev.auditor_arn
               }
           hub:
             account: hub
@@ -15957,6 +16413,10 @@ config:
                   aws = aws.whoa-hub
                 }
               }
+
+              output "auditor_arn" {
+                value       = module.whoa-hub.auditor_arn
+              }
           net:
             account: net
             email: whoa-secrets@imma.io
@@ -16069,6 +16529,10 @@ config:
                   aws = aws.whoa-net
                 }
               }
+
+              output "auditor_arn" {
+                value       = module.whoa-net.auditor_arn
+              }
           pub:
             account: pub
             email: whoa-prod@imma.io
@@ -16180,6 +16644,10 @@ config:
                 providers = {
                   aws = aws.whoa-pub
                 }
+              }
+
+              output "auditor_arn" {
+                value       = module.whoa-pub.auditor_arn
               }
         sso_region: us-west-2
         sso_url: https://whoa-0.awsapps.com/start

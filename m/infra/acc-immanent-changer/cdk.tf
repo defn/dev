@@ -32,3 +32,7 @@ module "immanent-changer" {
     aws = aws.immanent-changer
   }
 }
+
+output "auditor_arn" {
+  value = module.immanent-changer.auditor_arn
+}

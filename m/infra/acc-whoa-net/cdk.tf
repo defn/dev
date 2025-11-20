@@ -32,3 +32,7 @@ module "whoa-net" {
     aws = aws.whoa-net
   }
 }
+
+output "auditor_arn" {
+  value = module.whoa-net.auditor_arn
+}

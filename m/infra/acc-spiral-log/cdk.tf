@@ -32,3 +32,7 @@ module "spiral-log" {
     aws = aws.spiral-log
   }
 }
+
+output "auditor_arn" {
+  value = module.spiral-log.auditor_arn
+}

@@ -32,3 +32,7 @@ module "chamber-5" {
     aws = aws.chamber-5
   }
 }
+
+output "auditor_arn" {
+  value = module.chamber-5.auditor_arn
+}

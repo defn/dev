@@ -32,3 +32,7 @@ module "chamber-a" {
     aws = aws.chamber-a
   }
 }
+
+output "auditor_arn" {
+  value = module.chamber-a.auditor_arn
+}

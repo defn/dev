@@ -112,3 +112,7 @@ infra_acc_terraform: |-
       aws = aws.helix-net
     }
   }
+
+  output "auditor_arn" {
+    value       = module.helix-net.auditor_arn
+  }

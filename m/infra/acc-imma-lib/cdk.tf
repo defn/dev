@@ -32,3 +32,7 @@ module "imma-lib" {
     aws = aws.imma-lib
   }
 }
+
+output "auditor_arn" {
+  value = module.imma-lib.auditor_arn
+}

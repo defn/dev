@@ -32,3 +32,7 @@ module "immanent-roke" {
     aws = aws.immanent-roke
   }
 }
+
+output "auditor_arn" {
+  value = module.immanent-roke.auditor_arn
+}

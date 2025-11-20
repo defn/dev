@@ -228,3 +228,7 @@ infra_acc_terraform: |-
       aws = aws.jianghu-org
     }
   }
+
+  output "auditor_arn" {
+    value       = module.jianghu-org.auditor_arn
+  }

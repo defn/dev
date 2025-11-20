@@ -32,3 +32,7 @@ module "curl-hub" {
     aws = aws.curl-hub
   }
 }
+
+output "auditor_arn" {
+  value = module.curl-hub.auditor_arn
+}

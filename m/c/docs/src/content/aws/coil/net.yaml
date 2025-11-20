@@ -112,3 +112,7 @@ infra_acc_terraform: |-
       aws = aws.coil-net
     }
   }
+
+  output "auditor_arn" {
+    value       = module.coil-net.auditor_arn
+  }

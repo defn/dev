@@ -110,3 +110,7 @@ infra_acc_terraform: |-
       aws = aws.circus-lib
     }
   }
+
+  output "auditor_arn" {
+    value       = module.circus-lib.auditor_arn
+  }

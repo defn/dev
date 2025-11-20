@@ -246,6 +246,10 @@ module "\(org)-\(account)" {
     aws = aws.\(org)-\(account)
   }
 }
+
+output "auditor_arn" {
+  value       = module.\(org)-\(account).auditor_arn
+}
 """
 	})
 })

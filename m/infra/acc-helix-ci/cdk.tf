@@ -32,3 +32,7 @@ module "helix-ci" {
     aws = aws.helix-ci
   }
 }
+
+output "auditor_arn" {
+  value = module.helix-ci.auditor_arn
+}

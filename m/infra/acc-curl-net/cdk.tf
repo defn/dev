@@ -32,3 +32,7 @@ module "curl-net" {
     aws = aws.curl-net
   }
 }
+
+output "auditor_arn" {
+  value = module.curl-net.auditor_arn
+}

@@ -32,3 +32,7 @@ module "helix-log" {
     aws = aws.helix-log
   }
 }
+
+output "auditor_arn" {
+  value = module.helix-log.auditor_arn
+}

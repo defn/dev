@@ -77,3 +77,7 @@ module "auditor_role" {
     data.aws_iam_policy.readonly.arn
   ]
 }
+
+output "auditor_arn" {
+  value = module.auditor_role.arn
+}

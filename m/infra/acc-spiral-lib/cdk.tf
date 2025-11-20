@@ -32,3 +32,7 @@ module "spiral-lib" {
     aws = aws.spiral-lib
   }
 }
+
+output "auditor_arn" {
+  value = module.spiral-lib.auditor_arn
+}

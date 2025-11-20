@@ -32,3 +32,7 @@ module "circus-lib" {
     aws = aws.circus-lib
   }
 }
+
+output "auditor_arn" {
+  value = module.circus-lib.auditor_arn
+}

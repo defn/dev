@@ -32,3 +32,7 @@ module "circus-net" {
     aws = aws.circus-net
   }
 }
+
+output "auditor_arn" {
+  value = module.circus-net.auditor_arn
+}

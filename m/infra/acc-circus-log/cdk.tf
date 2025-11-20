@@ -32,3 +32,7 @@ module "circus-log" {
     aws = aws.circus-log
   }
 }
+
+output "auditor_arn" {
+  value = module.circus-log.auditor_arn
+}

@@ -110,3 +110,7 @@ infra_acc_terraform: |-
       aws = aws.immanent-patterner
     }
   }
+
+  output "auditor_arn" {
+    value       = module.immanent-patterner.auditor_arn
+  }
