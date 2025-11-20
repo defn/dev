@@ -46,6 +46,12 @@ data "aws_iam_policy_document" "auditor_access" {
   }
 }
 
+locals {
+  remote_auditors = jsondecode(
+    file("${path.module}/remote_auditors.json")
+  )
+}
+
 module "auditor_role" {
   source = "../terraform-aws-iam-role"
 
@@ -57,7 +63,10 @@ module "auditor_role" {
   role_description   = "Account Auditor Role"
 
   principals = {
-    AWS = ["arn:aws:iam::${var.account}:root"]
+    AWS = concat(
+      ["arn:aws:iam::${var.account}:root"],
+      local.remote_auditors
+    )
   }
 
   policy_documents = [
