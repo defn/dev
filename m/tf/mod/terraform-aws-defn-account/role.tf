@@ -38,11 +38,11 @@ data "aws_iam_policy_document" "auditor_access" {
   statement {
     effect = "Allow"
 
-    resources = [
+    actions = [
+      "ec2:DescribeRegions",
     ]
 
-    actions = [
-    ]
+    resources = ["*"]
   }
 }
 
@@ -64,7 +64,6 @@ module "auditor_role" {
 
   principals = {
     AWS = concat(
-      ["arn:aws:iam::${var.account}:root"],
       local.remote_auditors
     )
   }
