@@ -70,7 +70,7 @@ module "auditor_role" {
   }
 
   policy_documents = [
-    data.aws_iam_policy_document.resource_full_access.json
+    data.aws_iam_policy_document.auditor_access.json
   ]
 
   managed_policy_arns = [
