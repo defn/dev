@@ -2,7 +2,7 @@
 dir = "tasks"
 
 [tools]
-"npm:wrangler" = "4.49.0"
+"npm:wrangler" = "4.49.1"
 "ubi:bazelbuild/buildtools" = { version = "8.2.1", exe = "buildifier" }
 helm = "4.0.0"
 kubectl = "1.34.2"
@@ -11,7 +11,7 @@ kustomize = "5.8.0"
 "ubi:coder/agentapi" = "0.11.0"
 "npm:@devcontainers/cli" = "0.80.2"
 "npm:@google/gemini-cli" = "0.16.0"
-"npm:@openai/codex" = "0.60.1"
+"npm:@openai/codex" = "0.61.0"
 prettier = "3.6.2"
 tilt = "0.36.0"
 aws-vault = "7.2.0"
