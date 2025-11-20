@@ -45,6 +45,13 @@ resource "aws_organizations_organization" "organization" {
   feature_set = "ALL"
 }
 
+resource "aws_iam_organizations_features" "organization" {
+  enabled_features = [
+    "RootCredentialsManagement",
+    "RootSessions"
+  ]
+}
+
 data "aws_ssoadmin_instances" "sso_instance" {
 }
 
