@@ -1,5 +1,25 @@
 # Changelog
 
+## [1.44.0](https://github.com/defn/dev/compare/v1.43.0...v1.44.0) (2025-11-20)
+
+
+### Features
+
+* add auditor ARN outputs and apply task across infrastructure ([2ac8605](https://github.com/defn/dev/commit/2ac8605d1acc84db3732ea279efff7665ae460a4))
+* add config variable for remote auditors path ([2ca187a](https://github.com/defn/dev/commit/2ca187a9f2fbbed12bea4a53c3a0ba00b17285dd))
+* add output infrastructure configuration for centralized state aggregation ([cdc034e](https://github.com/defn/dev/commit/cdc034ea4dea9f92dae706e39393eb20217d8162))
+* add support for remote auditors in AWS account role ([e088560](https://github.com/defn/dev/commit/e0885601b82b8f78b4fb505f611b73a42860c623))
+* enable root credentials management and sessions for all AWS organizations ([8a9d247](https://github.com/defn/dev/commit/8a9d247aa6ed65ca88cc0f1fd8034fba0aace763))
+
+
+### Bug Fixes
+
+* improve starship prompt initialization logic ([d5d4f0e](https://github.com/defn/dev/commit/d5d4f0e0099e0611f45afd2946be5dbf6e7806b5))
+* improve template path handling in Justfile push command ([3b9f026](https://github.com/defn/dev/commit/3b9f026007661f77912c9ead15e45c44663cf3c3))
+* pass arguments to changes task in plan workflow ([0bfb6f1](https://github.com/defn/dev/commit/0bfb6f12886e1820c6fa01e24aff2493fcdf117f))
+* rename coder_app resource from 'app' to 'preview' ([f55a27e](https://github.com/defn/dev/commit/f55a27e42495dbdef798d2fdaa6e2d9d54971f56))
+* use correct auditor_access policy for auditor role ([b7ef6e3](https://github.com/defn/dev/commit/b7ef6e3f3f15e216d87e1643316f765fc725a150))
+
 ## [1.43.0](https://github.com/defn/dev/compare/v1.42.0...v1.43.0) (2025-11-19)
 
 
