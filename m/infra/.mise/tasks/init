@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+function main {
+	if [[ $# == 0 ]]; then
+		set -- global $(ls -d */ | grep -v ^global | shuf)
+	fi
+
+	time runmany 16 'echo $1; cd $1 && mise exec -- terraform init' "$@"
+}
+
+main "$@"
