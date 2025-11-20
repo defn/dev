@@ -8,7 +8,7 @@
 
 function main {
 	# Build documentation site from transformed YAML
-	(cd docs && npm run build)
+	(cd docs && npm install && npm run build)
 }
 
 main "$@"

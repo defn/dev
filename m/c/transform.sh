@@ -15,6 +15,7 @@ function main {
 
 		yq '.config.site[strenv(site)].package_json' main.yaml >../site/$site/package.json
 		yq '.config.site[strenv(site)].astro_config_mjs' main.yaml >../site/$site/astro.config.mjs
+
 		yq '.config.site[strenv(site)].tailwind_config_mjs' main.yaml >../site/$site/tailwind.config.mjs
 		yq '.config.site[strenv(site)].tsconfig_json' main.yaml >../site/$site/tsconfig.json
 		yq '.config.site[strenv(site)].wrangler_toml' main.yaml >../site/$site/wrangler.toml

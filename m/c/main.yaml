@@ -48,6 +48,16 @@ config:
       description: Nyan Cat made with HTML5+CSS3+JavaScript
       createdAt: "2023-04-27T06:00:38Z"
       url: https://github.com/defn/nyan-cat
+    tilt:
+      name: tilt
+      description: Define your dev environment as code. For microservice apps on Kubernetes.
+      createdAt: "2025-11-18T20:06:05Z"
+      url: https://github.com/defn/tilt
+    chamber:
+      name: chamber
+      description: CLI for managing secrets
+      createdAt: "2025-11-18T20:05:47Z"
+      url: https://github.com/defn/chamber
     pub:
       name: pub
       description: ""

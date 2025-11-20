@@ -10,6 +10,18 @@ repo: {
 		name:        "dev"
 		url:         "https://github.com/defn/dev"
 	}
+	tilt: {
+		createdAt:   "2025-11-18T20:06:05Z"
+		description: "Define your dev environment as code. For microservice apps on Kubernetes."
+		name:        "tilt"
+		url:         "https://github.com/defn/tilt"
+	}
+	chamber: {
+		createdAt:   "2025-11-18T20:05:47Z"
+		description: "CLI for managing secrets"
+		name:        "chamber"
+		url:         "https://github.com/defn/chamber"
+	}
 	pub: {
 		createdAt:   "2025-11-10T06:55:21Z"
 		description: ""
