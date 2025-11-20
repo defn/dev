@@ -110,16 +110,15 @@
         chdir: /home/ubuntu
       loop:
         - agentapi
+        - bazel
         - buildifier
-        - claude
         - coder
-        - codex
         - cue
         - devcontainer
-        - gemini
         - go
         - node
         - npm
+        - npx
         - pip
         - pip3
         - python
