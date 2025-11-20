@@ -74,7 +74,7 @@ infra_org_terraform: |-
   	backend "s3" {
   		profile        = "defn-org"
   		bucket         = "dfn-defn-terraform-state"
-      	dynamodb_table = "dfn-defn-terraform-state-lock"
+  		use_lockfile   = true
   		key            = "stacks/org-helix/terraform.tfstate"
   		region         = "us-east-1"
   		encrypt        = true
@@ -334,7 +334,7 @@ infra_acc_terraform: |-
     }
     backend "s3" {
       bucket         = "dfn-defn-terraform-state"
-      dynamodb_table = "dfn-defn-terraform-state-lock"
+  	use_lockfile   = true
       encrypt        = true
       key            = "stacks/acc-helix-org/terraform.tfstate"
       profile        = "defn-org"

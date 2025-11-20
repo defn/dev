@@ -7,12 +7,12 @@ terraform {
     }
   }
   backend "s3" {
-    bucket         = "dfn-defn-terraform-state"
-    dynamodb_table = "dfn-defn-terraform-state-lock"
-    encrypt        = true
-    key            = "stacks/acc-circus-log/terraform.tfstate"
-    profile        = "defn-org"
-    region         = "us-east-1"
+    bucket       = "dfn-defn-terraform-state"
+    use_lockfile = true
+    encrypt      = true
+    key          = "stacks/acc-circus-log/terraform.tfstate"
+    profile      = "defn-org"
+    region       = "us-east-1"
   }
 }
 

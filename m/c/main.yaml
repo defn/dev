@@ -143,7 +143,7 @@ config:
               	backend "s3" {
               		profile        = "defn-org"
               		bucket         = "dfn-defn-terraform-state"
-                  	dynamodb_table = "dfn-defn-terraform-state-lock"
+              		use_lockfile   = true
               		key            = "stacks/org-chamber/terraform.tfstate"
               		region         = "us-east-1"
               		encrypt        = true
@@ -785,7 +785,7 @@ config:
                 }
                 backend "s3" {
                   bucket         = "dfn-defn-terraform-state"
-                  dynamodb_table = "dfn-defn-terraform-state-lock"
+              	use_lockfile   = true
                   encrypt        = true
                   key            = "stacks/acc-chamber-org/terraform.tfstate"
                   profile        = "defn-org"
@@ -897,7 +897,7 @@ config:
                 }
                 backend "s3" {
                   bucket         = "dfn-defn-terraform-state"
-                  dynamodb_table = "dfn-defn-terraform-state-lock"
+              	use_lockfile   = true
                   encrypt        = true
                   key            = "stacks/acc-chamber-1/terraform.tfstate"
                   profile        = "defn-org"
@@ -1009,7 +1009,7 @@ config:
                 }
                 backend "s3" {
                   bucket         = "dfn-defn-terraform-state"
-                  dynamodb_table = "dfn-defn-terraform-state-lock"
+              	use_lockfile   = true
                   encrypt        = true
                   key            = "stacks/acc-chamber-2/terraform.tfstate"
                   profile        = "defn-org"
@@ -1121,7 +1121,7 @@ config:
                 }
                 backend "s3" {
                   bucket         = "dfn-defn-terraform-state"
-                  dynamodb_table = "dfn-defn-terraform-state-lock"
+              	use_lockfile   = true
                   encrypt        = true
                   key            = "stacks/acc-chamber-3/terraform.tfstate"
                   profile        = "defn-org"
@@ -1233,7 +1233,7 @@ config:
                 }
                 backend "s3" {
                   bucket         = "dfn-defn-terraform-state"
-                  dynamodb_table = "dfn-defn-terraform-state-lock"
+              	use_lockfile   = true
                   encrypt        = true
                   key            = "stacks/acc-chamber-4/terraform.tfstate"
                   profile        = "defn-org"
@@ -1345,7 +1345,7 @@ config:
                 }
                 backend "s3" {
                   bucket         = "dfn-defn-terraform-state"
-                  dynamodb_table = "dfn-defn-terraform-state-lock"
+              	use_lockfile   = true
                   encrypt        = true
                   key            = "stacks/acc-chamber-5/terraform.tfstate"
                   profile        = "defn-org"
@@ -1457,7 +1457,7 @@ config:
                 }
                 backend "s3" {
                   bucket         = "dfn-defn-terraform-state"
-                  dynamodb_table = "dfn-defn-terraform-state-lock"
+              	use_lockfile   = true
                   encrypt        = true
                   key            = "stacks/acc-chamber-6/terraform.tfstate"
                   profile        = "defn-org"
@@ -1569,7 +1569,7 @@ config:
                 }
                 backend "s3" {
                   bucket         = "dfn-defn-terraform-state"
-                  dynamodb_table = "dfn-defn-terraform-state-lock"
+              	use_lockfile   = true
                   encrypt        = true
                   key            = "stacks/acc-chamber-7/terraform.tfstate"
                   profile        = "defn-org"
@@ -1681,7 +1681,7 @@ config:
                 }
                 backend "s3" {
                   bucket         = "dfn-defn-terraform-state"
-                  dynamodb_table = "dfn-defn-terraform-state-lock"
+              	use_lockfile   = true
                   encrypt        = true
                   key            = "stacks/acc-chamber-8/terraform.tfstate"
                   profile        = "defn-org"
@@ -1793,7 +1793,7 @@ config:
                 }
                 backend "s3" {
                   bucket         = "dfn-defn-terraform-state"
-                  dynamodb_table = "dfn-defn-terraform-state-lock"
+              	use_lockfile   = true
                   encrypt        = true
                   key            = "stacks/acc-chamber-9/terraform.tfstate"
                   profile        = "defn-org"
@@ -1905,7 +1905,7 @@ config:
                 }
                 backend "s3" {
                   bucket         = "dfn-defn-terraform-state"
-                  dynamodb_table = "dfn-defn-terraform-state-lock"
+              	use_lockfile   = true
                   encrypt        = true
                   key            = "stacks/acc-chamber-a/terraform.tfstate"
                   profile        = "defn-org"
@@ -2017,7 +2017,7 @@ config:
                 }
                 backend "s3" {
                   bucket         = "dfn-defn-terraform-state"
-                  dynamodb_table = "dfn-defn-terraform-state-lock"
+              	use_lockfile   = true
                   encrypt        = true
                   key            = "stacks/acc-chamber-b/terraform.tfstate"
                   profile        = "defn-org"
@@ -2129,7 +2129,7 @@ config:
                 }
                 backend "s3" {
                   bucket         = "dfn-defn-terraform-state"
-                  dynamodb_table = "dfn-defn-terraform-state-lock"
+              	use_lockfile   = true
                   encrypt        = true
                   key            = "stacks/acc-chamber-c/terraform.tfstate"
                   profile        = "defn-org"
@@ -2241,7 +2241,7 @@ config:
                 }
                 backend "s3" {
                   bucket         = "dfn-defn-terraform-state"
-                  dynamodb_table = "dfn-defn-terraform-state-lock"
+              	use_lockfile   = true
                   encrypt        = true
                   key            = "stacks/acc-chamber-d/terraform.tfstate"
                   profile        = "defn-org"
@@ -2353,7 +2353,7 @@ config:
                 }
                 backend "s3" {
                   bucket         = "dfn-defn-terraform-state"
-                  dynamodb_table = "dfn-defn-terraform-state-lock"
+              	use_lockfile   = true
                   encrypt        = true
                   key            = "stacks/acc-chamber-e/terraform.tfstate"
                   profile        = "defn-org"
@@ -2465,7 +2465,7 @@ config:
                 }
                 backend "s3" {
                   bucket         = "dfn-defn-terraform-state"
-                  dynamodb_table = "dfn-defn-terraform-state-lock"
+              	use_lockfile   = true
                   encrypt        = true
                   key            = "stacks/acc-chamber-f/terraform.tfstate"
                   profile        = "defn-org"
@@ -2577,7 +2577,7 @@ config:
                 }
                 backend "s3" {
                   bucket         = "dfn-defn-terraform-state"
-                  dynamodb_table = "dfn-defn-terraform-state-lock"
+              	use_lockfile   = true
                   encrypt        = true
                   key            = "stacks/acc-chamber-g/terraform.tfstate"
                   profile        = "defn-org"
@@ -2689,7 +2689,7 @@ config:
                 }
                 backend "s3" {
                   bucket         = "dfn-defn-terraform-state"
-                  dynamodb_table = "dfn-defn-terraform-state-lock"
+              	use_lockfile   = true
                   encrypt        = true
                   key            = "stacks/acc-chamber-h/terraform.tfstate"
                   profile        = "defn-org"
@@ -2801,7 +2801,7 @@ config:
                 }
                 backend "s3" {
                   bucket         = "dfn-defn-terraform-state"
-                  dynamodb_table = "dfn-defn-terraform-state-lock"
+              	use_lockfile   = true
                   encrypt        = true
                   key            = "stacks/acc-chamber-i/terraform.tfstate"
                   profile        = "defn-org"
@@ -2913,7 +2913,7 @@ config:
                 }
                 backend "s3" {
                   bucket         = "dfn-defn-terraform-state"
-                  dynamodb_table = "dfn-defn-terraform-state-lock"
+              	use_lockfile   = true
                   encrypt        = true
                   key            = "stacks/acc-chamber-j/terraform.tfstate"
                   profile        = "defn-org"
@@ -3025,7 +3025,7 @@ config:
                 }
                 backend "s3" {
                   bucket         = "dfn-defn-terraform-state"
-                  dynamodb_table = "dfn-defn-terraform-state-lock"
+              	use_lockfile   = true
                   encrypt        = true
                   key            = "stacks/acc-chamber-l/terraform.tfstate"
                   profile        = "defn-org"
@@ -3137,7 +3137,7 @@ config:
                 }
                 backend "s3" {
                   bucket         = "dfn-defn-terraform-state"
-                  dynamodb_table = "dfn-defn-terraform-state-lock"
+              	use_lockfile   = true
                   encrypt        = true
                   key            = "stacks/acc-chamber-m/terraform.tfstate"
                   profile        = "defn-org"
@@ -3249,7 +3249,7 @@ config:
                 }
                 backend "s3" {
                   bucket         = "dfn-defn-terraform-state"
-                  dynamodb_table = "dfn-defn-terraform-state-lock"
+              	use_lockfile   = true
                   encrypt        = true
                   key            = "stacks/acc-chamber-n/terraform.tfstate"
                   profile        = "defn-org"
@@ -3361,7 +3361,7 @@ config:
                 }
                 backend "s3" {
                   bucket         = "dfn-defn-terraform-state"
-                  dynamodb_table = "dfn-defn-terraform-state-lock"
+              	use_lockfile   = true
                   encrypt        = true
                   key            = "stacks/acc-chamber-o/terraform.tfstate"
                   profile        = "defn-org"
@@ -3473,7 +3473,7 @@ config:
                 }
                 backend "s3" {
                   bucket         = "dfn-defn-terraform-state"
-                  dynamodb_table = "dfn-defn-terraform-state-lock"
+              	use_lockfile   = true
                   encrypt        = true
                   key            = "stacks/acc-chamber-p/terraform.tfstate"
                   profile        = "defn-org"
@@ -3585,7 +3585,7 @@ config:
                 }
                 backend "s3" {
                   bucket         = "dfn-defn-terraform-state"
-                  dynamodb_table = "dfn-defn-terraform-state-lock"
+              	use_lockfile   = true
                   encrypt        = true
                   key            = "stacks/acc-chamber-q/terraform.tfstate"
                   profile        = "defn-org"
@@ -3697,7 +3697,7 @@ config:
                 }
                 backend "s3" {
                   bucket         = "dfn-defn-terraform-state"
-                  dynamodb_table = "dfn-defn-terraform-state-lock"
+              	use_lockfile   = true
                   encrypt        = true
                   key            = "stacks/acc-chamber-r/terraform.tfstate"
                   profile        = "defn-org"
@@ -3809,7 +3809,7 @@ config:
                 }
                 backend "s3" {
                   bucket         = "dfn-defn-terraform-state"
-                  dynamodb_table = "dfn-defn-terraform-state-lock"
+              	use_lockfile   = true
                   encrypt        = true
                   key            = "stacks/acc-chamber-s/terraform.tfstate"
                   profile        = "defn-org"
@@ -3921,7 +3921,7 @@ config:
                 }
                 backend "s3" {
                   bucket         = "dfn-defn-terraform-state"
-                  dynamodb_table = "dfn-defn-terraform-state-lock"
+              	use_lockfile   = true
                   encrypt        = true
                   key            = "stacks/acc-chamber-t/terraform.tfstate"
                   profile        = "defn-org"
@@ -4033,7 +4033,7 @@ config:
                 }
                 backend "s3" {
                   bucket         = "dfn-defn-terraform-state"
-                  dynamodb_table = "dfn-defn-terraform-state-lock"
+              	use_lockfile   = true
                   encrypt        = true
                   key            = "stacks/acc-chamber-u/terraform.tfstate"
                   profile        = "defn-org"
@@ -4145,7 +4145,7 @@ config:
                 }
                 backend "s3" {
                   bucket         = "dfn-defn-terraform-state"
-                  dynamodb_table = "dfn-defn-terraform-state-lock"
+              	use_lockfile   = true
                   encrypt        = true
                   key            = "stacks/acc-chamber-v/terraform.tfstate"
                   profile        = "defn-org"
@@ -4257,7 +4257,7 @@ config:
                 }
                 backend "s3" {
                   bucket         = "dfn-defn-terraform-state"
-                  dynamodb_table = "dfn-defn-terraform-state-lock"
+              	use_lockfile   = true
                   encrypt        = true
                   key            = "stacks/acc-chamber-w/terraform.tfstate"
                   profile        = "defn-org"
@@ -4369,7 +4369,7 @@ config:
                 }
                 backend "s3" {
                   bucket         = "dfn-defn-terraform-state"
-                  dynamodb_table = "dfn-defn-terraform-state-lock"
+              	use_lockfile   = true
                   encrypt        = true
                   key            = "stacks/acc-chamber-x/terraform.tfstate"
                   profile        = "defn-org"
@@ -4481,7 +4481,7 @@ config:
                 }
                 backend "s3" {
                   bucket         = "dfn-defn-terraform-state"
-                  dynamodb_table = "dfn-defn-terraform-state-lock"
+              	use_lockfile   = true
                   encrypt        = true
                   key            = "stacks/acc-chamber-y/terraform.tfstate"
                   profile        = "defn-org"
@@ -4593,7 +4593,7 @@ config:
                 }
                 backend "s3" {
                   bucket         = "dfn-defn-terraform-state"
-                  dynamodb_table = "dfn-defn-terraform-state-lock"
+              	use_lockfile   = true
                   encrypt        = true
                   key            = "stacks/acc-chamber-z/terraform.tfstate"
                   profile        = "defn-org"
@@ -4698,7 +4698,7 @@ config:
               	backend "s3" {
               		profile        = "defn-org"
               		bucket         = "dfn-defn-terraform-state"
-                  	dynamodb_table = "dfn-defn-terraform-state-lock"
+              		use_lockfile   = true
               		key            = "stacks/org-circus/terraform.tfstate"
               		region         = "us-east-1"
               		encrypt        = true
@@ -4860,7 +4860,7 @@ config:
                 }
                 backend "s3" {
                   bucket         = "dfn-defn-terraform-state"
-                  dynamodb_table = "dfn-defn-terraform-state-lock"
+              	use_lockfile   = true
                   encrypt        = true
                   key            = "stacks/acc-circus-org/terraform.tfstate"
                   profile        = "defn-org"
@@ -4972,7 +4972,7 @@ config:
                 }
                 backend "s3" {
                   bucket         = "dfn-defn-terraform-state"
-                  dynamodb_table = "dfn-defn-terraform-state-lock"
+              	use_lockfile   = true
                   encrypt        = true
                   key            = "stacks/acc-circus-lib/terraform.tfstate"
                   profile        = "defn-org"
@@ -5084,7 +5084,7 @@ config:
                 }
                 backend "s3" {
                   bucket         = "dfn-defn-terraform-state"
-                  dynamodb_table = "dfn-defn-terraform-state-lock"
+              	use_lockfile   = true
                   encrypt        = true
                   key            = "stacks/acc-circus-log/terraform.tfstate"
                   profile        = "defn-org"
@@ -5196,7 +5196,7 @@ config:
                 }
                 backend "s3" {
                   bucket         = "dfn-defn-terraform-state"
-                  dynamodb_table = "dfn-defn-terraform-state-lock"
+              	use_lockfile   = true
                   encrypt        = true
                   key            = "stacks/acc-circus-net/terraform.tfstate"
                   profile        = "defn-org"
@@ -5308,7 +5308,7 @@ config:
                 }
                 backend "s3" {
                   bucket         = "dfn-defn-terraform-state"
-                  dynamodb_table = "dfn-defn-terraform-state-lock"
+              	use_lockfile   = true
                   encrypt        = true
                   key            = "stacks/acc-circus-ops/terraform.tfstate"
                   profile        = "defn-org"
@@ -5413,7 +5413,7 @@ config:
               	backend "s3" {
               		profile        = "defn-org"
               		bucket         = "dfn-defn-terraform-state"
-                  	dynamodb_table = "dfn-defn-terraform-state-lock"
+              		use_lockfile   = true
               		key            = "stacks/org-coil/terraform.tfstate"
               		region         = "us-east-1"
               		encrypt        = true
@@ -5565,7 +5565,7 @@ config:
                 }
                 backend "s3" {
                   bucket         = "dfn-defn-terraform-state"
-                  dynamodb_table = "dfn-defn-terraform-state-lock"
+              	use_lockfile   = true
                   encrypt        = true
                   key            = "stacks/acc-coil-org/terraform.tfstate"
                   profile        = "defn-org"
@@ -5679,7 +5679,7 @@ config:
                 }
                 backend "s3" {
                   bucket         = "dfn-defn-terraform-state"
-                  dynamodb_table = "dfn-defn-terraform-state-lock"
+              	use_lockfile   = true
                   encrypt        = true
                   key            = "stacks/acc-coil-hub/terraform.tfstate"
                   profile        = "defn-org"
@@ -5793,7 +5793,7 @@ config:
                 }
                 backend "s3" {
                   bucket         = "dfn-defn-terraform-state"
-                  dynamodb_table = "dfn-defn-terraform-state-lock"
+              	use_lockfile   = true
                   encrypt        = true
                   key            = "stacks/acc-coil-lib/terraform.tfstate"
                   profile        = "defn-org"
@@ -5907,7 +5907,7 @@ config:
                 }
                 backend "s3" {
                   bucket         = "dfn-defn-terraform-state"
-                  dynamodb_table = "dfn-defn-terraform-state-lock"
+              	use_lockfile   = true
                   encrypt        = true
                   key            = "stacks/acc-coil-net/terraform.tfstate"
                   profile        = "defn-org"
@@ -6012,7 +6012,7 @@ config:
               	backend "s3" {
               		profile        = "defn-org"
               		bucket         = "dfn-defn-terraform-state"
-                  	dynamodb_table = "dfn-defn-terraform-state-lock"
+              		use_lockfile   = true
               		key            = "stacks/org-curl/terraform.tfstate"
               		region         = "us-east-1"
               		encrypt        = true
@@ -6164,7 +6164,7 @@ config:
                 }
                 backend "s3" {
                   bucket         = "dfn-defn-terraform-state"
-                  dynamodb_table = "dfn-defn-terraform-state-lock"
+              	use_lockfile   = true
                   encrypt        = true
                   key            = "stacks/acc-curl-org/terraform.tfstate"
                   profile        = "defn-org"
@@ -6278,7 +6278,7 @@ config:
                 }
                 backend "s3" {
                   bucket         = "dfn-defn-terraform-state"
-                  dynamodb_table = "dfn-defn-terraform-state-lock"
+              	use_lockfile   = true
                   encrypt        = true
                   key            = "stacks/acc-curl-hub/terraform.tfstate"
                   profile        = "defn-org"
@@ -6392,7 +6392,7 @@ config:
                 }
                 backend "s3" {
                   bucket         = "dfn-defn-terraform-state"
-                  dynamodb_table = "dfn-defn-terraform-state-lock"
+              	use_lockfile   = true
                   encrypt        = true
                   key            = "stacks/acc-curl-lib/terraform.tfstate"
                   profile        = "defn-org"
@@ -6506,7 +6506,7 @@ config:
                 }
                 backend "s3" {
                   bucket         = "dfn-defn-terraform-state"
-                  dynamodb_table = "dfn-defn-terraform-state-lock"
+              	use_lockfile   = true
                   encrypt        = true
                   key            = "stacks/acc-curl-net/terraform.tfstate"
                   profile        = "defn-org"
@@ -6604,7 +6604,7 @@ config:
               	backend "s3" {
               		profile        = "defn-org"
               		bucket         = "dfn-defn-terraform-state"
-                  	dynamodb_table = "dfn-defn-terraform-state-lock"
+              		use_lockfile   = true
               		key            = "stacks/org-defn/terraform.tfstate"
               		region         = "us-east-1"
               		encrypt        = true
@@ -6702,7 +6702,7 @@ config:
                 }
                 backend "s3" {
                   bucket         = "dfn-defn-terraform-state"
-                  dynamodb_table = "dfn-defn-terraform-state-lock"
+              	use_lockfile   = true
                   encrypt        = true
                   key            = "stacks/acc-defn-org/terraform.tfstate"
                   profile        = "defn-org"
@@ -6807,7 +6807,7 @@ config:
               	backend "s3" {
               		profile        = "defn-org"
               		bucket         = "dfn-defn-terraform-state"
-                  	dynamodb_table = "dfn-defn-terraform-state-lock"
+              		use_lockfile   = true
               		key            = "stacks/org-fogg/terraform.tfstate"
               		region         = "us-east-1"
               		encrypt        = true
@@ -7049,7 +7049,7 @@ config:
                 }
                 backend "s3" {
                   bucket         = "dfn-defn-terraform-state"
-                  dynamodb_table = "dfn-defn-terraform-state-lock"
+              	use_lockfile   = true
                   encrypt        = true
                   key            = "stacks/acc-fogg-org/terraform.tfstate"
                   profile        = "defn-org"
@@ -7161,7 +7161,7 @@ config:
                 }
                 backend "s3" {
                   bucket         = "dfn-defn-terraform-state"
-                  dynamodb_table = "dfn-defn-terraform-state-lock"
+              	use_lockfile   = true
                   encrypt        = true
                   key            = "stacks/acc-fogg-ci/terraform.tfstate"
                   profile        = "defn-org"
@@ -7273,7 +7273,7 @@ config:
                 }
                 backend "s3" {
                   bucket         = "dfn-defn-terraform-state"
-                  dynamodb_table = "dfn-defn-terraform-state-lock"
+              	use_lockfile   = true
                   encrypt        = true
                   key            = "stacks/acc-fogg-dev/terraform.tfstate"
                   profile        = "defn-org"
@@ -7385,7 +7385,7 @@ config:
                 }
                 backend "s3" {
                   bucket         = "dfn-defn-terraform-state"
-                  dynamodb_table = "dfn-defn-terraform-state-lock"
+              	use_lockfile   = true
                   encrypt        = true
                   key            = "stacks/acc-fogg-hub/terraform.tfstate"
                   profile        = "defn-org"
@@ -7497,7 +7497,7 @@ config:
                 }
                 backend "s3" {
                   bucket         = "dfn-defn-terraform-state"
-                  dynamodb_table = "dfn-defn-terraform-state-lock"
+              	use_lockfile   = true
                   encrypt        = true
                   key            = "stacks/acc-fogg-lib/terraform.tfstate"
                   profile        = "defn-org"
@@ -7609,7 +7609,7 @@ config:
                 }
                 backend "s3" {
                   bucket         = "dfn-defn-terraform-state"
-                  dynamodb_table = "dfn-defn-terraform-state-lock"
+              	use_lockfile   = true
                   encrypt        = true
                   key            = "stacks/acc-fogg-log/terraform.tfstate"
                   profile        = "defn-org"
@@ -7721,7 +7721,7 @@ config:
                 }
                 backend "s3" {
                   bucket         = "dfn-defn-terraform-state"
-                  dynamodb_table = "dfn-defn-terraform-state-lock"
+              	use_lockfile   = true
                   encrypt        = true
                   key            = "stacks/acc-fogg-net/terraform.tfstate"
                   profile        = "defn-org"
@@ -7833,7 +7833,7 @@ config:
                 }
                 backend "s3" {
                   bucket         = "dfn-defn-terraform-state"
-                  dynamodb_table = "dfn-defn-terraform-state-lock"
+              	use_lockfile   = true
                   encrypt        = true
                   key            = "stacks/acc-fogg-ops/terraform.tfstate"
                   profile        = "defn-org"
@@ -7945,7 +7945,7 @@ config:
                 }
                 backend "s3" {
                   bucket         = "dfn-defn-terraform-state"
-                  dynamodb_table = "dfn-defn-terraform-state-lock"
+              	use_lockfile   = true
                   encrypt        = true
                   key            = "stacks/acc-fogg-prod/terraform.tfstate"
                   profile        = "defn-org"
@@ -8057,7 +8057,7 @@ config:
                 }
                 backend "s3" {
                   bucket         = "dfn-defn-terraform-state"
-                  dynamodb_table = "dfn-defn-terraform-state-lock"
+              	use_lockfile   = true
                   encrypt        = true
                   key            = "stacks/acc-fogg-pub/terraform.tfstate"
                   profile        = "defn-org"
@@ -8162,7 +8162,7 @@ config:
               	backend "s3" {
               		profile        = "defn-org"
               		bucket         = "dfn-defn-terraform-state"
-                  	dynamodb_table = "dfn-defn-terraform-state-lock"
+              		use_lockfile   = true
               		key            = "stacks/org-gyre/terraform.tfstate"
               		region         = "us-east-1"
               		encrypt        = true
@@ -8278,7 +8278,7 @@ config:
                 }
                 backend "s3" {
                   bucket         = "dfn-defn-terraform-state"
-                  dynamodb_table = "dfn-defn-terraform-state-lock"
+              	use_lockfile   = true
                   encrypt        = true
                   key            = "stacks/acc-gyre-org/terraform.tfstate"
                   profile        = "defn-org"
@@ -8392,7 +8392,7 @@ config:
                 }
                 backend "s3" {
                   bucket         = "dfn-defn-terraform-state"
-                  dynamodb_table = "dfn-defn-terraform-state-lock"
+              	use_lockfile   = true
                   encrypt        = true
                   key            = "stacks/acc-gyre-ops/terraform.tfstate"
                   profile        = "defn-org"
@@ -8497,7 +8497,7 @@ config:
               	backend "s3" {
               		profile        = "defn-org"
               		bucket         = "dfn-defn-terraform-state"
-                  	dynamodb_table = "dfn-defn-terraform-state-lock"
+              		use_lockfile   = true
               		key            = "stacks/org-helix/terraform.tfstate"
               		region         = "us-east-1"
               		encrypt        = true
@@ -8757,7 +8757,7 @@ config:
                 }
                 backend "s3" {
                   bucket         = "dfn-defn-terraform-state"
-                  dynamodb_table = "dfn-defn-terraform-state-lock"
+              	use_lockfile   = true
                   encrypt        = true
                   key            = "stacks/acc-helix-org/terraform.tfstate"
                   profile        = "defn-org"
@@ -8871,7 +8871,7 @@ config:
                 }
                 backend "s3" {
                   bucket         = "dfn-defn-terraform-state"
-                  dynamodb_table = "dfn-defn-terraform-state-lock"
+              	use_lockfile   = true
                   encrypt        = true
                   key            = "stacks/acc-helix-ci/terraform.tfstate"
                   profile        = "defn-org"
@@ -8985,7 +8985,7 @@ config:
                 }
                 backend "s3" {
                   bucket         = "dfn-defn-terraform-state"
-                  dynamodb_table = "dfn-defn-terraform-state-lock"
+              	use_lockfile   = true
                   encrypt        = true
                   key            = "stacks/acc-helix-dev/terraform.tfstate"
                   profile        = "defn-org"
@@ -9099,7 +9099,7 @@ config:
                 }
                 backend "s3" {
                   bucket         = "dfn-defn-terraform-state"
-                  dynamodb_table = "dfn-defn-terraform-state-lock"
+              	use_lockfile   = true
                   encrypt        = true
                   key            = "stacks/acc-helix-hub/terraform.tfstate"
                   profile        = "defn-org"
@@ -9213,7 +9213,7 @@ config:
                 }
                 backend "s3" {
                   bucket         = "dfn-defn-terraform-state"
-                  dynamodb_table = "dfn-defn-terraform-state-lock"
+              	use_lockfile   = true
                   encrypt        = true
                   key            = "stacks/acc-helix-lib/terraform.tfstate"
                   profile        = "defn-org"
@@ -9327,7 +9327,7 @@ config:
                 }
                 backend "s3" {
                   bucket         = "dfn-defn-terraform-state"
-                  dynamodb_table = "dfn-defn-terraform-state-lock"
+              	use_lockfile   = true
                   encrypt        = true
                   key            = "stacks/acc-helix-log/terraform.tfstate"
                   profile        = "defn-org"
@@ -9441,7 +9441,7 @@ config:
                 }
                 backend "s3" {
                   bucket         = "dfn-defn-terraform-state"
-                  dynamodb_table = "dfn-defn-terraform-state-lock"
+              	use_lockfile   = true
                   encrypt        = true
                   key            = "stacks/acc-helix-net/terraform.tfstate"
                   profile        = "defn-org"
@@ -9555,7 +9555,7 @@ config:
                 }
                 backend "s3" {
                   bucket         = "dfn-defn-terraform-state"
-                  dynamodb_table = "dfn-defn-terraform-state-lock"
+              	use_lockfile   = true
                   encrypt        = true
                   key            = "stacks/acc-helix-ops/terraform.tfstate"
                   profile        = "defn-org"
@@ -9669,7 +9669,7 @@ config:
                 }
                 backend "s3" {
                   bucket         = "dfn-defn-terraform-state"
-                  dynamodb_table = "dfn-defn-terraform-state-lock"
+              	use_lockfile   = true
                   encrypt        = true
                   key            = "stacks/acc-helix-prod/terraform.tfstate"
                   profile        = "defn-org"
@@ -9783,7 +9783,7 @@ config:
                 }
                 backend "s3" {
                   bucket         = "dfn-defn-terraform-state"
-                  dynamodb_table = "dfn-defn-terraform-state-lock"
+              	use_lockfile   = true
                   encrypt        = true
                   key            = "stacks/acc-helix-pub/terraform.tfstate"
                   profile        = "defn-org"
@@ -9888,7 +9888,7 @@ config:
               	backend "s3" {
               		profile        = "defn-org"
               		bucket         = "dfn-defn-terraform-state"
-                  	dynamodb_table = "dfn-defn-terraform-state-lock"
+              		use_lockfile   = true
               		key            = "stacks/org-imma/terraform.tfstate"
               		region         = "us-east-1"
               		encrypt        = true
@@ -10066,7 +10066,7 @@ config:
                 }
                 backend "s3" {
                   bucket         = "dfn-defn-terraform-state"
-                  dynamodb_table = "dfn-defn-terraform-state-lock"
+              	use_lockfile   = true
                   encrypt        = true
                   key            = "stacks/acc-imma-org/terraform.tfstate"
                   profile        = "defn-org"
@@ -10178,7 +10178,7 @@ config:
                 }
                 backend "s3" {
                   bucket         = "dfn-defn-terraform-state"
-                  dynamodb_table = "dfn-defn-terraform-state-lock"
+              	use_lockfile   = true
                   encrypt        = true
                   key            = "stacks/acc-imma-dev/terraform.tfstate"
                   profile        = "defn-org"
@@ -10290,7 +10290,7 @@ config:
                 }
                 backend "s3" {
                   bucket         = "dfn-defn-terraform-state"
-                  dynamodb_table = "dfn-defn-terraform-state-lock"
+              	use_lockfile   = true
                   encrypt        = true
                   key            = "stacks/acc-imma-lib/terraform.tfstate"
                   profile        = "defn-org"
@@ -10402,7 +10402,7 @@ config:
                 }
                 backend "s3" {
                   bucket         = "dfn-defn-terraform-state"
-                  dynamodb_table = "dfn-defn-terraform-state-lock"
+              	use_lockfile   = true
                   encrypt        = true
                   key            = "stacks/acc-imma-log/terraform.tfstate"
                   profile        = "defn-org"
@@ -10514,7 +10514,7 @@ config:
                 }
                 backend "s3" {
                   bucket         = "dfn-defn-terraform-state"
-                  dynamodb_table = "dfn-defn-terraform-state-lock"
+              	use_lockfile   = true
                   encrypt        = true
                   key            = "stacks/acc-imma-net/terraform.tfstate"
                   profile        = "defn-org"
@@ -10626,7 +10626,7 @@ config:
                 }
                 backend "s3" {
                   bucket         = "dfn-defn-terraform-state"
-                  dynamodb_table = "dfn-defn-terraform-state-lock"
+              	use_lockfile   = true
                   encrypt        = true
                   key            = "stacks/acc-imma-pub/terraform.tfstate"
                   profile        = "defn-org"
@@ -10731,7 +10731,7 @@ config:
               	backend "s3" {
               		profile        = "defn-org"
               		bucket         = "dfn-defn-terraform-state"
-                  	dynamodb_table = "dfn-defn-terraform-state-lock"
+              		use_lockfile   = true
               		key            = "stacks/org-immanent/terraform.tfstate"
               		region         = "us-east-1"
               		encrypt        = true
@@ -11005,7 +11005,7 @@ config:
                 }
                 backend "s3" {
                   bucket         = "dfn-defn-terraform-state"
-                  dynamodb_table = "dfn-defn-terraform-state-lock"
+              	use_lockfile   = true
                   encrypt        = true
                   key            = "stacks/acc-immanent-org/terraform.tfstate"
                   profile        = "defn-org"
@@ -11117,7 +11117,7 @@ config:
                 }
                 backend "s3" {
                   bucket         = "dfn-defn-terraform-state"
-                  dynamodb_table = "dfn-defn-terraform-state-lock"
+              	use_lockfile   = true
                   encrypt        = true
                   key            = "stacks/acc-immanent-changer/terraform.tfstate"
                   profile        = "defn-org"
@@ -11229,7 +11229,7 @@ config:
                 }
                 backend "s3" {
                   bucket         = "dfn-defn-terraform-state"
-                  dynamodb_table = "dfn-defn-terraform-state-lock"
+              	use_lockfile   = true
                   encrypt        = true
                   key            = "stacks/acc-immanent-chanter/terraform.tfstate"
                   profile        = "defn-org"
@@ -11341,7 +11341,7 @@ config:
                 }
                 backend "s3" {
                   bucket         = "dfn-defn-terraform-state"
-                  dynamodb_table = "dfn-defn-terraform-state-lock"
+              	use_lockfile   = true
                   encrypt        = true
                   key            = "stacks/acc-immanent-doorkeeper/terraform.tfstate"
                   profile        = "defn-org"
@@ -11453,7 +11453,7 @@ config:
                 }
                 backend "s3" {
                   bucket         = "dfn-defn-terraform-state"
-                  dynamodb_table = "dfn-defn-terraform-state-lock"
+              	use_lockfile   = true
                   encrypt        = true
                   key            = "stacks/acc-immanent-ged/terraform.tfstate"
                   profile        = "defn-org"
@@ -11565,7 +11565,7 @@ config:
                 }
                 backend "s3" {
                   bucket         = "dfn-defn-terraform-state"
-                  dynamodb_table = "dfn-defn-terraform-state-lock"
+              	use_lockfile   = true
                   encrypt        = true
                   key            = "stacks/acc-immanent-hand/terraform.tfstate"
                   profile        = "defn-org"
@@ -11677,7 +11677,7 @@ config:
                 }
                 backend "s3" {
                   bucket         = "dfn-defn-terraform-state"
-                  dynamodb_table = "dfn-defn-terraform-state-lock"
+              	use_lockfile   = true
                   encrypt        = true
                   key            = "stacks/acc-immanent-herbal/terraform.tfstate"
                   profile        = "defn-org"
@@ -11789,7 +11789,7 @@ config:
                 }
                 backend "s3" {
                   bucket         = "dfn-defn-terraform-state"
-                  dynamodb_table = "dfn-defn-terraform-state-lock"
+              	use_lockfile   = true
                   encrypt        = true
                   key            = "stacks/acc-immanent-namer/terraform.tfstate"
                   profile        = "defn-org"
@@ -11901,7 +11901,7 @@ config:
                 }
                 backend "s3" {
                   bucket         = "dfn-defn-terraform-state"
-                  dynamodb_table = "dfn-defn-terraform-state-lock"
+              	use_lockfile   = true
                   encrypt        = true
                   key            = "stacks/acc-immanent-patterner/terraform.tfstate"
                   profile        = "defn-org"
@@ -12013,7 +12013,7 @@ config:
                 }
                 backend "s3" {
                   bucket         = "dfn-defn-terraform-state"
-                  dynamodb_table = "dfn-defn-terraform-state-lock"
+              	use_lockfile   = true
                   encrypt        = true
                   key            = "stacks/acc-immanent-roke/terraform.tfstate"
                   profile        = "defn-org"
@@ -12125,7 +12125,7 @@ config:
                 }
                 backend "s3" {
                   bucket         = "dfn-defn-terraform-state"
-                  dynamodb_table = "dfn-defn-terraform-state-lock"
+              	use_lockfile   = true
                   encrypt        = true
                   key            = "stacks/acc-immanent-summoner/terraform.tfstate"
                   profile        = "defn-org"
@@ -12237,7 +12237,7 @@ config:
                 }
                 backend "s3" {
                   bucket         = "dfn-defn-terraform-state"
-                  dynamodb_table = "dfn-defn-terraform-state-lock"
+              	use_lockfile   = true
                   encrypt        = true
                   key            = "stacks/acc-immanent-windkey/terraform.tfstate"
                   profile        = "defn-org"
@@ -12342,7 +12342,7 @@ config:
               	backend "s3" {
               		profile        = "defn-org"
               		bucket         = "dfn-defn-terraform-state"
-                  	dynamodb_table = "dfn-defn-terraform-state-lock"
+              		use_lockfile   = true
               		key            = "stacks/org-jianghu/terraform.tfstate"
               		region         = "us-east-1"
               		encrypt        = true
@@ -12472,7 +12472,7 @@ config:
                 }
                 backend "s3" {
                   bucket         = "dfn-defn-terraform-state"
-                  dynamodb_table = "dfn-defn-terraform-state-lock"
+              	use_lockfile   = true
                   encrypt        = true
                   key            = "stacks/acc-jianghu-org/terraform.tfstate"
                   profile        = "defn-org"
@@ -12584,7 +12584,7 @@ config:
                 }
                 backend "s3" {
                   bucket         = "dfn-defn-terraform-state"
-                  dynamodb_table = "dfn-defn-terraform-state-lock"
+              	use_lockfile   = true
                   encrypt        = true
                   key            = "stacks/acc-jianghu-log/terraform.tfstate"
                   profile        = "defn-org"
@@ -12696,7 +12696,7 @@ config:
                 }
                 backend "s3" {
                   bucket         = "dfn-defn-terraform-state"
-                  dynamodb_table = "dfn-defn-terraform-state-lock"
+              	use_lockfile   = true
                   encrypt        = true
                   key            = "stacks/acc-jianghu-net/terraform.tfstate"
                   profile        = "defn-org"
@@ -12801,7 +12801,7 @@ config:
               	backend "s3" {
               		profile        = "defn-org"
               		bucket         = "dfn-defn-terraform-state"
-                  	dynamodb_table = "dfn-defn-terraform-state-lock"
+              		use_lockfile   = true
               		key            = "stacks/org-spiral/terraform.tfstate"
               		region         = "us-east-1"
               		encrypt        = true
@@ -13061,7 +13061,7 @@ config:
                 }
                 backend "s3" {
                   bucket         = "dfn-defn-terraform-state"
-                  dynamodb_table = "dfn-defn-terraform-state-lock"
+              	use_lockfile   = true
                   encrypt        = true
                   key            = "stacks/acc-spiral-org/terraform.tfstate"
                   profile        = "defn-org"
@@ -13175,7 +13175,7 @@ config:
                 }
                 backend "s3" {
                   bucket         = "dfn-defn-terraform-state"
-                  dynamodb_table = "dfn-defn-terraform-state-lock"
+              	use_lockfile   = true
                   encrypt        = true
                   key            = "stacks/acc-spiral-ci/terraform.tfstate"
                   profile        = "defn-org"
@@ -13289,7 +13289,7 @@ config:
                 }
                 backend "s3" {
                   bucket         = "dfn-defn-terraform-state"
-                  dynamodb_table = "dfn-defn-terraform-state-lock"
+              	use_lockfile   = true
                   encrypt        = true
                   key            = "stacks/acc-spiral-dev/terraform.tfstate"
                   profile        = "defn-org"
@@ -13403,7 +13403,7 @@ config:
                 }
                 backend "s3" {
                   bucket         = "dfn-defn-terraform-state"
-                  dynamodb_table = "dfn-defn-terraform-state-lock"
+              	use_lockfile   = true
                   encrypt        = true
                   key            = "stacks/acc-spiral-hub/terraform.tfstate"
                   profile        = "defn-org"
@@ -13517,7 +13517,7 @@ config:
                 }
                 backend "s3" {
                   bucket         = "dfn-defn-terraform-state"
-                  dynamodb_table = "dfn-defn-terraform-state-lock"
+              	use_lockfile   = true
                   encrypt        = true
                   key            = "stacks/acc-spiral-lib/terraform.tfstate"
                   profile        = "defn-org"
@@ -13631,7 +13631,7 @@ config:
                 }
                 backend "s3" {
                   bucket         = "dfn-defn-terraform-state"
-                  dynamodb_table = "dfn-defn-terraform-state-lock"
+              	use_lockfile   = true
                   encrypt        = true
                   key            = "stacks/acc-spiral-log/terraform.tfstate"
                   profile        = "defn-org"
@@ -13745,7 +13745,7 @@ config:
                 }
                 backend "s3" {
                   bucket         = "dfn-defn-terraform-state"
-                  dynamodb_table = "dfn-defn-terraform-state-lock"
+              	use_lockfile   = true
                   encrypt        = true
                   key            = "stacks/acc-spiral-net/terraform.tfstate"
                   profile        = "defn-org"
@@ -13859,7 +13859,7 @@ config:
                 }
                 backend "s3" {
                   bucket         = "dfn-defn-terraform-state"
-                  dynamodb_table = "dfn-defn-terraform-state-lock"
+              	use_lockfile   = true
                   encrypt        = true
                   key            = "stacks/acc-spiral-ops/terraform.tfstate"
                   profile        = "defn-org"
@@ -13973,7 +13973,7 @@ config:
                 }
                 backend "s3" {
                   bucket         = "dfn-defn-terraform-state"
-                  dynamodb_table = "dfn-defn-terraform-state-lock"
+              	use_lockfile   = true
                   encrypt        = true
                   key            = "stacks/acc-spiral-prod/terraform.tfstate"
                   profile        = "defn-org"
@@ -14087,7 +14087,7 @@ config:
                 }
                 backend "s3" {
                   bucket         = "dfn-defn-terraform-state"
-                  dynamodb_table = "dfn-defn-terraform-state-lock"
+              	use_lockfile   = true
                   encrypt        = true
                   key            = "stacks/acc-spiral-pub/terraform.tfstate"
                   profile        = "defn-org"
@@ -14192,7 +14192,7 @@ config:
               	backend "s3" {
               		profile        = "defn-org"
               		bucket         = "dfn-defn-terraform-state"
-                  	dynamodb_table = "dfn-defn-terraform-state-lock"
+              		use_lockfile   = true
               		key            = "stacks/org-vault/terraform.tfstate"
               		region         = "us-east-1"
               		encrypt        = true
@@ -14434,7 +14434,7 @@ config:
                 }
                 backend "s3" {
                   bucket         = "dfn-defn-terraform-state"
-                  dynamodb_table = "dfn-defn-terraform-state-lock"
+              	use_lockfile   = true
                   encrypt        = true
                   key            = "stacks/acc-vault-org/terraform.tfstate"
                   profile        = "defn-org"
@@ -14546,7 +14546,7 @@ config:
                 }
                 backend "s3" {
                   bucket         = "dfn-defn-terraform-state"
-                  dynamodb_table = "dfn-defn-terraform-state-lock"
+              	use_lockfile   = true
                   encrypt        = true
                   key            = "stacks/acc-vault-ci/terraform.tfstate"
                   profile        = "defn-org"
@@ -14658,7 +14658,7 @@ config:
                 }
                 backend "s3" {
                   bucket         = "dfn-defn-terraform-state"
-                  dynamodb_table = "dfn-defn-terraform-state-lock"
+              	use_lockfile   = true
                   encrypt        = true
                   key            = "stacks/acc-vault-dev/terraform.tfstate"
                   profile        = "defn-org"
@@ -14770,7 +14770,7 @@ config:
                 }
                 backend "s3" {
                   bucket         = "dfn-defn-terraform-state"
-                  dynamodb_table = "dfn-defn-terraform-state-lock"
+              	use_lockfile   = true
                   encrypt        = true
                   key            = "stacks/acc-vault-hub/terraform.tfstate"
                   profile        = "defn-org"
@@ -14882,7 +14882,7 @@ config:
                 }
                 backend "s3" {
                   bucket         = "dfn-defn-terraform-state"
-                  dynamodb_table = "dfn-defn-terraform-state-lock"
+              	use_lockfile   = true
                   encrypt        = true
                   key            = "stacks/acc-vault-lib/terraform.tfstate"
                   profile        = "defn-org"
@@ -14994,7 +14994,7 @@ config:
                 }
                 backend "s3" {
                   bucket         = "dfn-defn-terraform-state"
-                  dynamodb_table = "dfn-defn-terraform-state-lock"
+              	use_lockfile   = true
                   encrypt        = true
                   key            = "stacks/acc-vault-log/terraform.tfstate"
                   profile        = "defn-org"
@@ -15106,7 +15106,7 @@ config:
                 }
                 backend "s3" {
                   bucket         = "dfn-defn-terraform-state"
-                  dynamodb_table = "dfn-defn-terraform-state-lock"
+              	use_lockfile   = true
                   encrypt        = true
                   key            = "stacks/acc-vault-net/terraform.tfstate"
                   profile        = "defn-org"
@@ -15218,7 +15218,7 @@ config:
                 }
                 backend "s3" {
                   bucket         = "dfn-defn-terraform-state"
-                  dynamodb_table = "dfn-defn-terraform-state-lock"
+              	use_lockfile   = true
                   encrypt        = true
                   key            = "stacks/acc-vault-ops/terraform.tfstate"
                   profile        = "defn-org"
@@ -15330,7 +15330,7 @@ config:
                 }
                 backend "s3" {
                   bucket         = "dfn-defn-terraform-state"
-                  dynamodb_table = "dfn-defn-terraform-state-lock"
+              	use_lockfile   = true
                   encrypt        = true
                   key            = "stacks/acc-vault-prod/terraform.tfstate"
                   profile        = "defn-org"
@@ -15442,7 +15442,7 @@ config:
                 }
                 backend "s3" {
                   bucket         = "dfn-defn-terraform-state"
-                  dynamodb_table = "dfn-defn-terraform-state-lock"
+              	use_lockfile   = true
                   encrypt        = true
                   key            = "stacks/acc-vault-pub/terraform.tfstate"
                   profile        = "defn-org"
@@ -15547,7 +15547,7 @@ config:
               	backend "s3" {
               		profile        = "defn-org"
               		bucket         = "dfn-defn-terraform-state"
-                  	dynamodb_table = "dfn-defn-terraform-state-lock"
+              		use_lockfile   = true
               		key            = "stacks/org-whoa/terraform.tfstate"
               		region         = "us-east-1"
               		encrypt        = true
@@ -15709,7 +15709,7 @@ config:
                 }
                 backend "s3" {
                   bucket         = "dfn-defn-terraform-state"
-                  dynamodb_table = "dfn-defn-terraform-state-lock"
+              	use_lockfile   = true
                   encrypt        = true
                   key            = "stacks/acc-whoa-org/terraform.tfstate"
                   profile        = "defn-org"
@@ -15821,7 +15821,7 @@ config:
                 }
                 backend "s3" {
                   bucket         = "dfn-defn-terraform-state"
-                  dynamodb_table = "dfn-defn-terraform-state-lock"
+              	use_lockfile   = true
                   encrypt        = true
                   key            = "stacks/acc-whoa-dev/terraform.tfstate"
                   profile        = "defn-org"
@@ -15933,7 +15933,7 @@ config:
                 }
                 backend "s3" {
                   bucket         = "dfn-defn-terraform-state"
-                  dynamodb_table = "dfn-defn-terraform-state-lock"
+              	use_lockfile   = true
                   encrypt        = true
                   key            = "stacks/acc-whoa-hub/terraform.tfstate"
                   profile        = "defn-org"
@@ -16045,7 +16045,7 @@ config:
                 }
                 backend "s3" {
                   bucket         = "dfn-defn-terraform-state"
-                  dynamodb_table = "dfn-defn-terraform-state-lock"
+              	use_lockfile   = true
                   encrypt        = true
                   key            = "stacks/acc-whoa-net/terraform.tfstate"
                   profile        = "defn-org"
@@ -16157,7 +16157,7 @@ config:
                 }
                 backend "s3" {
                   bucket         = "dfn-defn-terraform-state"
-                  dynamodb_table = "dfn-defn-terraform-state-lock"
+              	use_lockfile   = true
                   encrypt        = true
                   key            = "stacks/acc-whoa-pub/terraform.tfstate"
                   profile        = "defn-org"

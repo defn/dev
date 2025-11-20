@@ -8,11 +8,10 @@ import (
 )
 
 bootstrap: {
-	org:            "defn"
-	account:        "org"
-	profile:        "\(org)-\(account)"
-	bucket:         "dfn-defn-terraform-state"
-	dynamodb_table: "dfn-defn-terraform-state-lock"
+	org:     "defn"
+	account: "org"
+	profile: "\(org)-\(account)"
+	bucket:  "dfn-defn-terraform-state"
 }
 
 aws: "org"~lookup: [string]~(ORG,_): close({
@@ -113,7 +112,7 @@ terraform {
 	backend "s3" {
 		profile        = "\(bootstrap.profile)"
 		bucket         = "\(bootstrap.bucket)"
-    	dynamodb_table = "\(bootstrap.dynamodb_table)"
+		use_lockfile   = true
 		key            = "stacks/org-\(org)/terraform.tfstate"
 		region         = "us-east-1"
 		encrypt        = true
@@ -223,7 +222,7 @@ terraform {
   }
   backend "s3" {
     bucket         = "\(bootstrap.bucket)"
-    dynamodb_table = "\(bootstrap.dynamodb_table)"
+	use_lockfile   = true
     encrypt        = true
     key            = "stacks/acc-\(org)-\(account)/terraform.tfstate"
     profile        = "\(bootstrap.profile)"

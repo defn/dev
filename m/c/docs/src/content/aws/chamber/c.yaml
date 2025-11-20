@@ -86,7 +86,7 @@ infra_acc_terraform: |-
     }
     backend "s3" {
       bucket         = "dfn-defn-terraform-state"
-      dynamodb_table = "dfn-defn-terraform-state-lock"
+  	use_lockfile   = true
       encrypt        = true
       key            = "stacks/acc-chamber-c/terraform.tfstate"
       profile        = "defn-org"
