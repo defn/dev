@@ -6,7 +6,7 @@ function main {
 	fi
 
 	time runmany 16 'echo $1; cd $1 && mise exec -- terraform plan -no-color --out .plan | tee .plan.txt || true' "$@"
-	mise run changes
+	mise run changes "$@"
 }
 
 main "$@"
