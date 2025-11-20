@@ -22,6 +22,8 @@ provider "aws" {
   region  = "us-east-1"
 }
 
+variable "config" {}
+
 module "helix-pub" {
   account   = 510430971399
   name      = "terraform"
@@ -31,6 +33,8 @@ module "helix-pub" {
   providers = {
     aws = aws.helix-pub
   }
+
+  config = var.config
 }
 
 output "auditor_arn" {

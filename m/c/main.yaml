@@ -799,6 +799,8 @@ config:
                 region  = "us-east-1"
               }
 
+              variable "config" {}
+
               module "chamber-org" {
                 account   = 510430971399
                 name      = "terraform"
@@ -808,6 +810,8 @@ config:
                 providers = {
                   aws = aws.chamber-org
                 }
+
+                config = var.config
               }
 
               output "auditor_arn" {
@@ -915,6 +919,8 @@ config:
                 region  = "us-east-1"
               }
 
+              variable "config" {}
+
               module "chamber-1" {
                 account   = 510430971399
                 name      = "terraform"
@@ -924,6 +930,8 @@ config:
                 providers = {
                   aws = aws.chamber-1
                 }
+
+                config = var.config
               }
 
               output "auditor_arn" {
@@ -1031,6 +1039,8 @@ config:
                 region  = "us-east-1"
               }
 
+              variable "config" {}
+
               module "chamber-2" {
                 account   = 510430971399
                 name      = "terraform"
@@ -1040,6 +1050,8 @@ config:
                 providers = {
                   aws = aws.chamber-2
                 }
+
+                config = var.config
               }
 
               output "auditor_arn" {
@@ -1147,6 +1159,8 @@ config:
                 region  = "us-east-1"
               }
 
+              variable "config" {}
+
               module "chamber-3" {
                 account   = 510430971399
                 name      = "terraform"
@@ -1156,6 +1170,8 @@ config:
                 providers = {
                   aws = aws.chamber-3
                 }
+
+                config = var.config
               }
 
               output "auditor_arn" {
@@ -1263,6 +1279,8 @@ config:
                 region  = "us-east-1"
               }
 
+              variable "config" {}
+
               module "chamber-4" {
                 account   = 510430971399
                 name      = "terraform"
@@ -1272,6 +1290,8 @@ config:
                 providers = {
                   aws = aws.chamber-4
                 }
+
+                config = var.config
               }
 
               output "auditor_arn" {
@@ -1379,6 +1399,8 @@ config:
                 region  = "us-east-1"
               }
 
+              variable "config" {}
+
               module "chamber-5" {
                 account   = 510430971399
                 name      = "terraform"
@@ -1388,6 +1410,8 @@ config:
                 providers = {
                   aws = aws.chamber-5
                 }
+
+                config = var.config
               }
 
               output "auditor_arn" {
@@ -1495,6 +1519,8 @@ config:
                 region  = "us-east-1"
               }
 
+              variable "config" {}
+
               module "chamber-6" {
                 account   = 510430971399
                 name      = "terraform"
@@ -1504,6 +1530,8 @@ config:
                 providers = {
                   aws = aws.chamber-6
                 }
+
+                config = var.config
               }
 
               output "auditor_arn" {
@@ -1611,6 +1639,8 @@ config:
                 region  = "us-east-1"
               }
 
+              variable "config" {}
+
               module "chamber-7" {
                 account   = 510430971399
                 name      = "terraform"
@@ -1620,6 +1650,8 @@ config:
                 providers = {
                   aws = aws.chamber-7
                 }
+
+                config = var.config
               }
 
               output "auditor_arn" {
@@ -1727,6 +1759,8 @@ config:
                 region  = "us-east-1"
               }
 
+              variable "config" {}
+
               module "chamber-8" {
                 account   = 510430971399
                 name      = "terraform"
@@ -1736,6 +1770,8 @@ config:
                 providers = {
                   aws = aws.chamber-8
                 }
+
+                config = var.config
               }
 
               output "auditor_arn" {
@@ -1843,6 +1879,8 @@ config:
                 region  = "us-east-1"
               }
 
+              variable "config" {}
+
               module "chamber-9" {
                 account   = 510430971399
                 name      = "terraform"
@@ -1852,6 +1890,8 @@ config:
                 providers = {
                   aws = aws.chamber-9
                 }
+
+                config = var.config
               }
 
               output "auditor_arn" {
@@ -1959,6 +1999,8 @@ config:
                 region  = "us-east-1"
               }
 
+              variable "config" {}
+
               module "chamber-a" {
                 account   = 510430971399
                 name      = "terraform"
@@ -1968,6 +2010,8 @@ config:
                 providers = {
                   aws = aws.chamber-a
                 }
+
+                config = var.config
               }
 
               output "auditor_arn" {
@@ -2075,6 +2119,8 @@ config:
                 region  = "us-east-1"
               }
 
+              variable "config" {}
+
               module "chamber-b" {
                 account   = 510430971399
                 name      = "terraform"
@@ -2084,6 +2130,8 @@ config:
                 providers = {
                   aws = aws.chamber-b
                 }
+
+                config = var.config
               }
 
               output "auditor_arn" {
@@ -2191,6 +2239,8 @@ config:
                 region  = "us-east-1"
               }
 
+              variable "config" {}
+
               module "chamber-c" {
                 account   = 510430971399
                 name      = "terraform"
@@ -2200,6 +2250,8 @@ config:
                 providers = {
                   aws = aws.chamber-c
                 }
+
+                config = var.config
               }
 
               output "auditor_arn" {
@@ -2307,6 +2359,8 @@ config:
                 region  = "us-east-1"
               }
 
+              variable "config" {}
+
               module "chamber-d" {
                 account   = 510430971399
                 name      = "terraform"
@@ -2316,6 +2370,8 @@ config:
                 providers = {
                   aws = aws.chamber-d
                 }
+
+                config = var.config
               }
 
               output "auditor_arn" {
@@ -2423,6 +2479,8 @@ config:
                 region  = "us-east-1"
               }
 
+              variable "config" {}
+
               module "chamber-e" {
                 account   = 510430971399
                 name      = "terraform"
@@ -2432,6 +2490,8 @@ config:
                 providers = {
                   aws = aws.chamber-e
                 }
+
+                config = var.config
               }
 
               output "auditor_arn" {
@@ -2539,6 +2599,8 @@ config:
                 region  = "us-east-1"
               }
 
+              variable "config" {}
+
               module "chamber-f" {
                 account   = 510430971399
                 name      = "terraform"
@@ -2548,6 +2610,8 @@ config:
                 providers = {
                   aws = aws.chamber-f
                 }
+
+                config = var.config
               }
 
               output "auditor_arn" {
@@ -2655,6 +2719,8 @@ config:
                 region  = "us-east-1"
               }
 
+              variable "config" {}
+
               module "chamber-g" {
                 account   = 510430971399
                 name      = "terraform"
@@ -2664,6 +2730,8 @@ config:
                 providers = {
                   aws = aws.chamber-g
                 }
+
+                config = var.config
               }
 
               output "auditor_arn" {
@@ -2771,6 +2839,8 @@ config:
                 region  = "us-east-1"
               }
 
+              variable "config" {}
+
               module "chamber-h" {
                 account   = 510430971399
                 name      = "terraform"
@@ -2780,6 +2850,8 @@ config:
                 providers = {
                   aws = aws.chamber-h
                 }
+
+                config = var.config
               }
 
               output "auditor_arn" {
@@ -2887,6 +2959,8 @@ config:
                 region  = "us-east-1"
               }
 
+              variable "config" {}
+
               module "chamber-i" {
                 account   = 510430971399
                 name      = "terraform"
@@ -2896,6 +2970,8 @@ config:
                 providers = {
                   aws = aws.chamber-i
                 }
+
+                config = var.config
               }
 
               output "auditor_arn" {
@@ -3003,6 +3079,8 @@ config:
                 region  = "us-east-1"
               }
 
+              variable "config" {}
+
               module "chamber-j" {
                 account   = 510430971399
                 name      = "terraform"
@@ -3012,6 +3090,8 @@ config:
                 providers = {
                   aws = aws.chamber-j
                 }
+
+                config = var.config
               }
 
               output "auditor_arn" {
@@ -3119,6 +3199,8 @@ config:
                 region  = "us-east-1"
               }
 
+              variable "config" {}
+
               module "chamber-l" {
                 account   = 510430971399
                 name      = "terraform"
@@ -3128,6 +3210,8 @@ config:
                 providers = {
                   aws = aws.chamber-l
                 }
+
+                config = var.config
               }
 
               output "auditor_arn" {
@@ -3235,6 +3319,8 @@ config:
                 region  = "us-east-1"
               }
 
+              variable "config" {}
+
               module "chamber-m" {
                 account   = 510430971399
                 name      = "terraform"
@@ -3244,6 +3330,8 @@ config:
                 providers = {
                   aws = aws.chamber-m
                 }
+
+                config = var.config
               }
 
               output "auditor_arn" {
@@ -3351,6 +3439,8 @@ config:
                 region  = "us-east-1"
               }
 
+              variable "config" {}
+
               module "chamber-n" {
                 account   = 510430971399
                 name      = "terraform"
@@ -3360,6 +3450,8 @@ config:
                 providers = {
                   aws = aws.chamber-n
                 }
+
+                config = var.config
               }
 
               output "auditor_arn" {
@@ -3467,6 +3559,8 @@ config:
                 region  = "us-east-1"
               }
 
+              variable "config" {}
+
               module "chamber-o" {
                 account   = 510430971399
                 name      = "terraform"
@@ -3476,6 +3570,8 @@ config:
                 providers = {
                   aws = aws.chamber-o
                 }
+
+                config = var.config
               }
 
               output "auditor_arn" {
@@ -3583,6 +3679,8 @@ config:
                 region  = "us-east-1"
               }
 
+              variable "config" {}
+
               module "chamber-p" {
                 account   = 510430971399
                 name      = "terraform"
@@ -3592,6 +3690,8 @@ config:
                 providers = {
                   aws = aws.chamber-p
                 }
+
+                config = var.config
               }
 
               output "auditor_arn" {
@@ -3699,6 +3799,8 @@ config:
                 region  = "us-east-1"
               }
 
+              variable "config" {}
+
               module "chamber-q" {
                 account   = 510430971399
                 name      = "terraform"
@@ -3708,6 +3810,8 @@ config:
                 providers = {
                   aws = aws.chamber-q
                 }
+
+                config = var.config
               }
 
               output "auditor_arn" {
@@ -3815,6 +3919,8 @@ config:
                 region  = "us-east-1"
               }
 
+              variable "config" {}
+
               module "chamber-r" {
                 account   = 510430971399
                 name      = "terraform"
@@ -3824,6 +3930,8 @@ config:
                 providers = {
                   aws = aws.chamber-r
                 }
+
+                config = var.config
               }
 
               output "auditor_arn" {
@@ -3931,6 +4039,8 @@ config:
                 region  = "us-east-1"
               }
 
+              variable "config" {}
+
               module "chamber-s" {
                 account   = 510430971399
                 name      = "terraform"
@@ -3940,6 +4050,8 @@ config:
                 providers = {
                   aws = aws.chamber-s
                 }
+
+                config = var.config
               }
 
               output "auditor_arn" {
@@ -4047,6 +4159,8 @@ config:
                 region  = "us-east-1"
               }
 
+              variable "config" {}
+
               module "chamber-t" {
                 account   = 510430971399
                 name      = "terraform"
@@ -4056,6 +4170,8 @@ config:
                 providers = {
                   aws = aws.chamber-t
                 }
+
+                config = var.config
               }
 
               output "auditor_arn" {
@@ -4163,6 +4279,8 @@ config:
                 region  = "us-east-1"
               }
 
+              variable "config" {}
+
               module "chamber-u" {
                 account   = 510430971399
                 name      = "terraform"
@@ -4172,6 +4290,8 @@ config:
                 providers = {
                   aws = aws.chamber-u
                 }
+
+                config = var.config
               }
 
               output "auditor_arn" {
@@ -4279,6 +4399,8 @@ config:
                 region  = "us-east-1"
               }
 
+              variable "config" {}
+
               module "chamber-v" {
                 account   = 510430971399
                 name      = "terraform"
@@ -4288,6 +4410,8 @@ config:
                 providers = {
                   aws = aws.chamber-v
                 }
+
+                config = var.config
               }
 
               output "auditor_arn" {
@@ -4395,6 +4519,8 @@ config:
                 region  = "us-east-1"
               }
 
+              variable "config" {}
+
               module "chamber-w" {
                 account   = 510430971399
                 name      = "terraform"
@@ -4404,6 +4530,8 @@ config:
                 providers = {
                   aws = aws.chamber-w
                 }
+
+                config = var.config
               }
 
               output "auditor_arn" {
@@ -4511,6 +4639,8 @@ config:
                 region  = "us-east-1"
               }
 
+              variable "config" {}
+
               module "chamber-x" {
                 account   = 510430971399
                 name      = "terraform"
@@ -4520,6 +4650,8 @@ config:
                 providers = {
                   aws = aws.chamber-x
                 }
+
+                config = var.config
               }
 
               output "auditor_arn" {
@@ -4627,6 +4759,8 @@ config:
                 region  = "us-east-1"
               }
 
+              variable "config" {}
+
               module "chamber-y" {
                 account   = 510430971399
                 name      = "terraform"
@@ -4636,6 +4770,8 @@ config:
                 providers = {
                   aws = aws.chamber-y
                 }
+
+                config = var.config
               }
 
               output "auditor_arn" {
@@ -4743,6 +4879,8 @@ config:
                 region  = "us-east-1"
               }
 
+              variable "config" {}
+
               module "chamber-z" {
                 account   = 510430971399
                 name      = "terraform"
@@ -4752,6 +4890,8 @@ config:
                 providers = {
                   aws = aws.chamber-z
                 }
+
+                config = var.config
               }
 
               output "auditor_arn" {
@@ -5014,6 +5154,8 @@ config:
                 region  = "us-east-1"
               }
 
+              variable "config" {}
+
               module "circus-org" {
                 account   = 510430971399
                 name      = "terraform"
@@ -5023,6 +5165,8 @@ config:
                 providers = {
                   aws = aws.circus-org
                 }
+
+                config = var.config
               }
 
               output "auditor_arn" {
@@ -5130,6 +5274,8 @@ config:
                 region  = "us-east-1"
               }
 
+              variable "config" {}
+
               module "circus-lib" {
                 account   = 510430971399
                 name      = "terraform"
@@ -5139,6 +5285,8 @@ config:
                 providers = {
                   aws = aws.circus-lib
                 }
+
+                config = var.config
               }
 
               output "auditor_arn" {
@@ -5246,6 +5394,8 @@ config:
                 region  = "us-east-1"
               }
 
+              variable "config" {}
+
               module "circus-log" {
                 account   = 510430971399
                 name      = "terraform"
@@ -5255,6 +5405,8 @@ config:
                 providers = {
                   aws = aws.circus-log
                 }
+
+                config = var.config
               }
 
               output "auditor_arn" {
@@ -5362,6 +5514,8 @@ config:
                 region  = "us-east-1"
               }
 
+              variable "config" {}
+
               module "circus-net" {
                 account   = 510430971399
                 name      = "terraform"
@@ -5371,6 +5525,8 @@ config:
                 providers = {
                   aws = aws.circus-net
                 }
+
+                config = var.config
               }
 
               output "auditor_arn" {
@@ -5478,6 +5634,8 @@ config:
                 region  = "us-east-1"
               }
 
+              variable "config" {}
+
               module "circus-ops" {
                 account   = 510430971399
                 name      = "terraform"
@@ -5487,6 +5645,8 @@ config:
                 providers = {
                   aws = aws.circus-ops
                 }
+
+                config = var.config
               }
 
               output "auditor_arn" {
@@ -5739,6 +5899,8 @@ config:
                 region  = "us-east-1"
               }
 
+              variable "config" {}
+
               module "coil-org" {
                 account   = 510430971399
                 name      = "terraform"
@@ -5748,6 +5910,8 @@ config:
                 providers = {
                   aws = aws.coil-org
                 }
+
+                config = var.config
               }
 
               output "auditor_arn" {
@@ -5857,6 +6021,8 @@ config:
                 region  = "us-east-1"
               }
 
+              variable "config" {}
+
               module "coil-hub" {
                 account   = 510430971399
                 name      = "terraform"
@@ -5866,6 +6032,8 @@ config:
                 providers = {
                   aws = aws.coil-hub
                 }
+
+                config = var.config
               }
 
               output "auditor_arn" {
@@ -5975,6 +6143,8 @@ config:
                 region  = "us-east-1"
               }
 
+              variable "config" {}
+
               module "coil-lib" {
                 account   = 510430971399
                 name      = "terraform"
@@ -5984,6 +6154,8 @@ config:
                 providers = {
                   aws = aws.coil-lib
                 }
+
+                config = var.config
               }
 
               output "auditor_arn" {
@@ -6093,6 +6265,8 @@ config:
                 region  = "us-east-1"
               }
 
+              variable "config" {}
+
               module "coil-net" {
                 account   = 510430971399
                 name      = "terraform"
@@ -6102,6 +6276,8 @@ config:
                 providers = {
                   aws = aws.coil-net
                 }
+
+                config = var.config
               }
 
               output "auditor_arn" {
@@ -6354,6 +6530,8 @@ config:
                 region  = "us-east-1"
               }
 
+              variable "config" {}
+
               module "curl-org" {
                 account   = 510430971399
                 name      = "terraform"
@@ -6363,6 +6541,8 @@ config:
                 providers = {
                   aws = aws.curl-org
                 }
+
+                config = var.config
               }
 
               output "auditor_arn" {
@@ -6472,6 +6652,8 @@ config:
                 region  = "us-east-1"
               }
 
+              variable "config" {}
+
               module "curl-hub" {
                 account   = 510430971399
                 name      = "terraform"
@@ -6481,6 +6663,8 @@ config:
                 providers = {
                   aws = aws.curl-hub
                 }
+
+                config = var.config
               }
 
               output "auditor_arn" {
@@ -6590,6 +6774,8 @@ config:
                 region  = "us-east-1"
               }
 
+              variable "config" {}
+
               module "curl-lib" {
                 account   = 510430971399
                 name      = "terraform"
@@ -6599,6 +6785,8 @@ config:
                 providers = {
                   aws = aws.curl-lib
                 }
+
+                config = var.config
               }
 
               output "auditor_arn" {
@@ -6708,6 +6896,8 @@ config:
                 region  = "us-east-1"
               }
 
+              variable "config" {}
+
               module "curl-net" {
                 account   = 510430971399
                 name      = "terraform"
@@ -6717,6 +6907,8 @@ config:
                 providers = {
                   aws = aws.curl-net
                 }
+
+                config = var.config
               }
 
               output "auditor_arn" {
@@ -6908,6 +7100,8 @@ config:
                 region  = "us-east-1"
               }
 
+              variable "config" {}
+
               module "defn-org" {
                 account   = 510430971399
                 name      = "terraform"
@@ -6917,6 +7111,8 @@ config:
                 providers = {
                   aws = aws.defn-org
                 }
+
+                config = var.config
               }
 
               output "auditor_arn" {
@@ -7259,6 +7455,8 @@ config:
                 region  = "us-east-1"
               }
 
+              variable "config" {}
+
               module "fogg-org" {
                 account   = 510430971399
                 name      = "terraform"
@@ -7268,6 +7466,8 @@ config:
                 providers = {
                   aws = aws.fogg-org
                 }
+
+                config = var.config
               }
 
               output "auditor_arn" {
@@ -7375,6 +7575,8 @@ config:
                 region  = "us-east-1"
               }
 
+              variable "config" {}
+
               module "fogg-ci" {
                 account   = 510430971399
                 name      = "terraform"
@@ -7384,6 +7586,8 @@ config:
                 providers = {
                   aws = aws.fogg-ci
                 }
+
+                config = var.config
               }
 
               output "auditor_arn" {
@@ -7491,6 +7695,8 @@ config:
                 region  = "us-east-1"
               }
 
+              variable "config" {}
+
               module "fogg-dev" {
                 account   = 510430971399
                 name      = "terraform"
@@ -7500,6 +7706,8 @@ config:
                 providers = {
                   aws = aws.fogg-dev
                 }
+
+                config = var.config
               }
 
               output "auditor_arn" {
@@ -7607,6 +7815,8 @@ config:
                 region  = "us-east-1"
               }
 
+              variable "config" {}
+
               module "fogg-hub" {
                 account   = 510430971399
                 name      = "terraform"
@@ -7616,6 +7826,8 @@ config:
                 providers = {
                   aws = aws.fogg-hub
                 }
+
+                config = var.config
               }
 
               output "auditor_arn" {
@@ -7723,6 +7935,8 @@ config:
                 region  = "us-east-1"
               }
 
+              variable "config" {}
+
               module "fogg-lib" {
                 account   = 510430971399
                 name      = "terraform"
@@ -7732,6 +7946,8 @@ config:
                 providers = {
                   aws = aws.fogg-lib
                 }
+
+                config = var.config
               }
 
               output "auditor_arn" {
@@ -7839,6 +8055,8 @@ config:
                 region  = "us-east-1"
               }
 
+              variable "config" {}
+
               module "fogg-log" {
                 account   = 510430971399
                 name      = "terraform"
@@ -7848,6 +8066,8 @@ config:
                 providers = {
                   aws = aws.fogg-log
                 }
+
+                config = var.config
               }
 
               output "auditor_arn" {
@@ -7955,6 +8175,8 @@ config:
                 region  = "us-east-1"
               }
 
+              variable "config" {}
+
               module "fogg-net" {
                 account   = 510430971399
                 name      = "terraform"
@@ -7964,6 +8186,8 @@ config:
                 providers = {
                   aws = aws.fogg-net
                 }
+
+                config = var.config
               }
 
               output "auditor_arn" {
@@ -8071,6 +8295,8 @@ config:
                 region  = "us-east-1"
               }
 
+              variable "config" {}
+
               module "fogg-ops" {
                 account   = 510430971399
                 name      = "terraform"
@@ -8080,6 +8306,8 @@ config:
                 providers = {
                   aws = aws.fogg-ops
                 }
+
+                config = var.config
               }
 
               output "auditor_arn" {
@@ -8187,6 +8415,8 @@ config:
                 region  = "us-east-1"
               }
 
+              variable "config" {}
+
               module "fogg-prod" {
                 account   = 510430971399
                 name      = "terraform"
@@ -8196,6 +8426,8 @@ config:
                 providers = {
                   aws = aws.fogg-prod
                 }
+
+                config = var.config
               }
 
               output "auditor_arn" {
@@ -8303,6 +8535,8 @@ config:
                 region  = "us-east-1"
               }
 
+              variable "config" {}
+
               module "fogg-pub" {
                 account   = 510430971399
                 name      = "terraform"
@@ -8312,6 +8546,8 @@ config:
                 providers = {
                   aws = aws.fogg-pub
                 }
+
+                config = var.config
               }
 
               output "auditor_arn" {
@@ -8528,6 +8764,8 @@ config:
                 region  = "us-east-1"
               }
 
+              variable "config" {}
+
               module "gyre-org" {
                 account   = 510430971399
                 name      = "terraform"
@@ -8537,6 +8775,8 @@ config:
                 providers = {
                   aws = aws.gyre-org
                 }
+
+                config = var.config
               }
 
               output "auditor_arn" {
@@ -8646,6 +8886,8 @@ config:
                 region  = "us-east-1"
               }
 
+              variable "config" {}
+
               module "gyre-ops" {
                 account   = 510430971399
                 name      = "terraform"
@@ -8655,6 +8897,8 @@ config:
                 providers = {
                   aws = aws.gyre-ops
                 }
+
+                config = var.config
               }
 
               output "auditor_arn" {
@@ -9015,6 +9259,8 @@ config:
                 region  = "us-east-1"
               }
 
+              variable "config" {}
+
               module "helix-org" {
                 account   = 510430971399
                 name      = "terraform"
@@ -9024,6 +9270,8 @@ config:
                 providers = {
                   aws = aws.helix-org
                 }
+
+                config = var.config
               }
 
               output "auditor_arn" {
@@ -9133,6 +9381,8 @@ config:
                 region  = "us-east-1"
               }
 
+              variable "config" {}
+
               module "helix-ci" {
                 account   = 510430971399
                 name      = "terraform"
@@ -9142,6 +9392,8 @@ config:
                 providers = {
                   aws = aws.helix-ci
                 }
+
+                config = var.config
               }
 
               output "auditor_arn" {
@@ -9251,6 +9503,8 @@ config:
                 region  = "us-east-1"
               }
 
+              variable "config" {}
+
               module "helix-dev" {
                 account   = 510430971399
                 name      = "terraform"
@@ -9260,6 +9514,8 @@ config:
                 providers = {
                   aws = aws.helix-dev
                 }
+
+                config = var.config
               }
 
               output "auditor_arn" {
@@ -9369,6 +9625,8 @@ config:
                 region  = "us-east-1"
               }
 
+              variable "config" {}
+
               module "helix-hub" {
                 account   = 510430971399
                 name      = "terraform"
@@ -9378,6 +9636,8 @@ config:
                 providers = {
                   aws = aws.helix-hub
                 }
+
+                config = var.config
               }
 
               output "auditor_arn" {
@@ -9487,6 +9747,8 @@ config:
                 region  = "us-east-1"
               }
 
+              variable "config" {}
+
               module "helix-lib" {
                 account   = 510430971399
                 name      = "terraform"
@@ -9496,6 +9758,8 @@ config:
                 providers = {
                   aws = aws.helix-lib
                 }
+
+                config = var.config
               }
 
               output "auditor_arn" {
@@ -9605,6 +9869,8 @@ config:
                 region  = "us-east-1"
               }
 
+              variable "config" {}
+
               module "helix-log" {
                 account   = 510430971399
                 name      = "terraform"
@@ -9614,6 +9880,8 @@ config:
                 providers = {
                   aws = aws.helix-log
                 }
+
+                config = var.config
               }
 
               output "auditor_arn" {
@@ -9723,6 +9991,8 @@ config:
                 region  = "us-east-1"
               }
 
+              variable "config" {}
+
               module "helix-net" {
                 account   = 510430971399
                 name      = "terraform"
@@ -9732,6 +10002,8 @@ config:
                 providers = {
                   aws = aws.helix-net
                 }
+
+                config = var.config
               }
 
               output "auditor_arn" {
@@ -9841,6 +10113,8 @@ config:
                 region  = "us-east-1"
               }
 
+              variable "config" {}
+
               module "helix-ops" {
                 account   = 510430971399
                 name      = "terraform"
@@ -9850,6 +10124,8 @@ config:
                 providers = {
                   aws = aws.helix-ops
                 }
+
+                config = var.config
               }
 
               output "auditor_arn" {
@@ -9959,6 +10235,8 @@ config:
                 region  = "us-east-1"
               }
 
+              variable "config" {}
+
               module "helix-prod" {
                 account   = 510430971399
                 name      = "terraform"
@@ -9968,6 +10246,8 @@ config:
                 providers = {
                   aws = aws.helix-prod
                 }
+
+                config = var.config
               }
 
               output "auditor_arn" {
@@ -10077,6 +10357,8 @@ config:
                 region  = "us-east-1"
               }
 
+              variable "config" {}
+
               module "helix-pub" {
                 account   = 510430971399
                 name      = "terraform"
@@ -10086,6 +10368,8 @@ config:
                 providers = {
                   aws = aws.helix-pub
                 }
+
+                config = var.config
               }
 
               output "auditor_arn" {
@@ -10364,6 +10648,8 @@ config:
                 region  = "us-east-1"
               }
 
+              variable "config" {}
+
               module "imma-org" {
                 account   = 510430971399
                 name      = "terraform"
@@ -10373,6 +10659,8 @@ config:
                 providers = {
                   aws = aws.imma-org
                 }
+
+                config = var.config
               }
 
               output "auditor_arn" {
@@ -10480,6 +10768,8 @@ config:
                 region  = "us-east-1"
               }
 
+              variable "config" {}
+
               module "imma-dev" {
                 account   = 510430971399
                 name      = "terraform"
@@ -10489,6 +10779,8 @@ config:
                 providers = {
                   aws = aws.imma-dev
                 }
+
+                config = var.config
               }
 
               output "auditor_arn" {
@@ -10596,6 +10888,8 @@ config:
                 region  = "us-east-1"
               }
 
+              variable "config" {}
+
               module "imma-lib" {
                 account   = 510430971399
                 name      = "terraform"
@@ -10605,6 +10899,8 @@ config:
                 providers = {
                   aws = aws.imma-lib
                 }
+
+                config = var.config
               }
 
               output "auditor_arn" {
@@ -10712,6 +11008,8 @@ config:
                 region  = "us-east-1"
               }
 
+              variable "config" {}
+
               module "imma-log" {
                 account   = 510430971399
                 name      = "terraform"
@@ -10721,6 +11019,8 @@ config:
                 providers = {
                   aws = aws.imma-log
                 }
+
+                config = var.config
               }
 
               output "auditor_arn" {
@@ -10828,6 +11128,8 @@ config:
                 region  = "us-east-1"
               }
 
+              variable "config" {}
+
               module "imma-net" {
                 account   = 510430971399
                 name      = "terraform"
@@ -10837,6 +11139,8 @@ config:
                 providers = {
                   aws = aws.imma-net
                 }
+
+                config = var.config
               }
 
               output "auditor_arn" {
@@ -10944,6 +11248,8 @@ config:
                 region  = "us-east-1"
               }
 
+              variable "config" {}
+
               module "imma-pub" {
                 account   = 510430971399
                 name      = "terraform"
@@ -10953,6 +11259,8 @@ config:
                 providers = {
                   aws = aws.imma-pub
                 }
+
+                config = var.config
               }
 
               output "auditor_arn" {
@@ -11327,6 +11635,8 @@ config:
                 region  = "us-east-1"
               }
 
+              variable "config" {}
+
               module "immanent-org" {
                 account   = 510430971399
                 name      = "terraform"
@@ -11336,6 +11646,8 @@ config:
                 providers = {
                   aws = aws.immanent-org
                 }
+
+                config = var.config
               }
 
               output "auditor_arn" {
@@ -11443,6 +11755,8 @@ config:
                 region  = "us-east-1"
               }
 
+              variable "config" {}
+
               module "immanent-changer" {
                 account   = 510430971399
                 name      = "terraform"
@@ -11452,6 +11766,8 @@ config:
                 providers = {
                   aws = aws.immanent-changer
                 }
+
+                config = var.config
               }
 
               output "auditor_arn" {
@@ -11559,6 +11875,8 @@ config:
                 region  = "us-east-1"
               }
 
+              variable "config" {}
+
               module "immanent-chanter" {
                 account   = 510430971399
                 name      = "terraform"
@@ -11568,6 +11886,8 @@ config:
                 providers = {
                   aws = aws.immanent-chanter
                 }
+
+                config = var.config
               }
 
               output "auditor_arn" {
@@ -11675,6 +11995,8 @@ config:
                 region  = "us-east-1"
               }
 
+              variable "config" {}
+
               module "immanent-doorkeeper" {
                 account   = 510430971399
                 name      = "terraform"
@@ -11684,6 +12006,8 @@ config:
                 providers = {
                   aws = aws.immanent-doorkeeper
                 }
+
+                config = var.config
               }
 
               output "auditor_arn" {
@@ -11791,6 +12115,8 @@ config:
                 region  = "us-east-1"
               }
 
+              variable "config" {}
+
               module "immanent-ged" {
                 account   = 510430971399
                 name      = "terraform"
@@ -11800,6 +12126,8 @@ config:
                 providers = {
                   aws = aws.immanent-ged
                 }
+
+                config = var.config
               }
 
               output "auditor_arn" {
@@ -11907,6 +12235,8 @@ config:
                 region  = "us-east-1"
               }
 
+              variable "config" {}
+
               module "immanent-hand" {
                 account   = 510430971399
                 name      = "terraform"
@@ -11916,6 +12246,8 @@ config:
                 providers = {
                   aws = aws.immanent-hand
                 }
+
+                config = var.config
               }
 
               output "auditor_arn" {
@@ -12023,6 +12355,8 @@ config:
                 region  = "us-east-1"
               }
 
+              variable "config" {}
+
               module "immanent-herbal" {
                 account   = 510430971399
                 name      = "terraform"
@@ -12032,6 +12366,8 @@ config:
                 providers = {
                   aws = aws.immanent-herbal
                 }
+
+                config = var.config
               }
 
               output "auditor_arn" {
@@ -12139,6 +12475,8 @@ config:
                 region  = "us-east-1"
               }
 
+              variable "config" {}
+
               module "immanent-namer" {
                 account   = 510430971399
                 name      = "terraform"
@@ -12148,6 +12486,8 @@ config:
                 providers = {
                   aws = aws.immanent-namer
                 }
+
+                config = var.config
               }
 
               output "auditor_arn" {
@@ -12255,6 +12595,8 @@ config:
                 region  = "us-east-1"
               }
 
+              variable "config" {}
+
               module "immanent-patterner" {
                 account   = 510430971399
                 name      = "terraform"
@@ -12264,6 +12606,8 @@ config:
                 providers = {
                   aws = aws.immanent-patterner
                 }
+
+                config = var.config
               }
 
               output "auditor_arn" {
@@ -12371,6 +12715,8 @@ config:
                 region  = "us-east-1"
               }
 
+              variable "config" {}
+
               module "immanent-roke" {
                 account   = 510430971399
                 name      = "terraform"
@@ -12380,6 +12726,8 @@ config:
                 providers = {
                   aws = aws.immanent-roke
                 }
+
+                config = var.config
               }
 
               output "auditor_arn" {
@@ -12487,6 +12835,8 @@ config:
                 region  = "us-east-1"
               }
 
+              variable "config" {}
+
               module "immanent-summoner" {
                 account   = 510430971399
                 name      = "terraform"
@@ -12496,6 +12846,8 @@ config:
                 providers = {
                   aws = aws.immanent-summoner
                 }
+
+                config = var.config
               }
 
               output "auditor_arn" {
@@ -12603,6 +12955,8 @@ config:
                 region  = "us-east-1"
               }
 
+              variable "config" {}
+
               module "immanent-windkey" {
                 account   = 510430971399
                 name      = "terraform"
@@ -12612,6 +12966,8 @@ config:
                 providers = {
                   aws = aws.immanent-windkey
                 }
+
+                config = var.config
               }
 
               output "auditor_arn" {
@@ -12842,6 +13198,8 @@ config:
                 region  = "us-east-1"
               }
 
+              variable "config" {}
+
               module "jianghu-org" {
                 account   = 510430971399
                 name      = "terraform"
@@ -12851,6 +13209,8 @@ config:
                 providers = {
                   aws = aws.jianghu-org
                 }
+
+                config = var.config
               }
 
               output "auditor_arn" {
@@ -12958,6 +13318,8 @@ config:
                 region  = "us-east-1"
               }
 
+              variable "config" {}
+
               module "jianghu-log" {
                 account   = 510430971399
                 name      = "terraform"
@@ -12967,6 +13329,8 @@ config:
                 providers = {
                   aws = aws.jianghu-log
                 }
+
+                config = var.config
               }
 
               output "auditor_arn" {
@@ -13074,6 +13438,8 @@ config:
                 region  = "us-east-1"
               }
 
+              variable "config" {}
+
               module "jianghu-net" {
                 account   = 510430971399
                 name      = "terraform"
@@ -13083,6 +13449,8 @@ config:
                 providers = {
                   aws = aws.jianghu-net
                 }
+
+                config = var.config
               }
 
               output "auditor_arn" {
@@ -13443,6 +13811,8 @@ config:
                 region  = "us-east-1"
               }
 
+              variable "config" {}
+
               module "spiral-org" {
                 account   = 510430971399
                 name      = "terraform"
@@ -13452,6 +13822,8 @@ config:
                 providers = {
                   aws = aws.spiral-org
                 }
+
+                config = var.config
               }
 
               output "auditor_arn" {
@@ -13561,6 +13933,8 @@ config:
                 region  = "us-east-1"
               }
 
+              variable "config" {}
+
               module "spiral-ci" {
                 account   = 510430971399
                 name      = "terraform"
@@ -13570,6 +13944,8 @@ config:
                 providers = {
                   aws = aws.spiral-ci
                 }
+
+                config = var.config
               }
 
               output "auditor_arn" {
@@ -13679,6 +14055,8 @@ config:
                 region  = "us-east-1"
               }
 
+              variable "config" {}
+
               module "spiral-dev" {
                 account   = 510430971399
                 name      = "terraform"
@@ -13688,6 +14066,8 @@ config:
                 providers = {
                   aws = aws.spiral-dev
                 }
+
+                config = var.config
               }
 
               output "auditor_arn" {
@@ -13797,6 +14177,8 @@ config:
                 region  = "us-east-1"
               }
 
+              variable "config" {}
+
               module "spiral-hub" {
                 account   = 510430971399
                 name      = "terraform"
@@ -13806,6 +14188,8 @@ config:
                 providers = {
                   aws = aws.spiral-hub
                 }
+
+                config = var.config
               }
 
               output "auditor_arn" {
@@ -13915,6 +14299,8 @@ config:
                 region  = "us-east-1"
               }
 
+              variable "config" {}
+
               module "spiral-lib" {
                 account   = 510430971399
                 name      = "terraform"
@@ -13924,6 +14310,8 @@ config:
                 providers = {
                   aws = aws.spiral-lib
                 }
+
+                config = var.config
               }
 
               output "auditor_arn" {
@@ -14033,6 +14421,8 @@ config:
                 region  = "us-east-1"
               }
 
+              variable "config" {}
+
               module "spiral-log" {
                 account   = 510430971399
                 name      = "terraform"
@@ -14042,6 +14432,8 @@ config:
                 providers = {
                   aws = aws.spiral-log
                 }
+
+                config = var.config
               }
 
               output "auditor_arn" {
@@ -14151,6 +14543,8 @@ config:
                 region  = "us-east-1"
               }
 
+              variable "config" {}
+
               module "spiral-net" {
                 account   = 510430971399
                 name      = "terraform"
@@ -14160,6 +14554,8 @@ config:
                 providers = {
                   aws = aws.spiral-net
                 }
+
+                config = var.config
               }
 
               output "auditor_arn" {
@@ -14269,6 +14665,8 @@ config:
                 region  = "us-east-1"
               }
 
+              variable "config" {}
+
               module "spiral-ops" {
                 account   = 510430971399
                 name      = "terraform"
@@ -14278,6 +14676,8 @@ config:
                 providers = {
                   aws = aws.spiral-ops
                 }
+
+                config = var.config
               }
 
               output "auditor_arn" {
@@ -14387,6 +14787,8 @@ config:
                 region  = "us-east-1"
               }
 
+              variable "config" {}
+
               module "spiral-prod" {
                 account   = 510430971399
                 name      = "terraform"
@@ -14396,6 +14798,8 @@ config:
                 providers = {
                   aws = aws.spiral-prod
                 }
+
+                config = var.config
               }
 
               output "auditor_arn" {
@@ -14505,6 +14909,8 @@ config:
                 region  = "us-east-1"
               }
 
+              variable "config" {}
+
               module "spiral-pub" {
                 account   = 510430971399
                 name      = "terraform"
@@ -14514,6 +14920,8 @@ config:
                 providers = {
                   aws = aws.spiral-pub
                 }
+
+                config = var.config
               }
 
               output "auditor_arn" {
@@ -14856,6 +15264,8 @@ config:
                 region  = "us-east-1"
               }
 
+              variable "config" {}
+
               module "vault-org" {
                 account   = 510430971399
                 name      = "terraform"
@@ -14865,6 +15275,8 @@ config:
                 providers = {
                   aws = aws.vault-org
                 }
+
+                config = var.config
               }
 
               output "auditor_arn" {
@@ -14972,6 +15384,8 @@ config:
                 region  = "us-east-1"
               }
 
+              variable "config" {}
+
               module "vault-ci" {
                 account   = 510430971399
                 name      = "terraform"
@@ -14981,6 +15395,8 @@ config:
                 providers = {
                   aws = aws.vault-ci
                 }
+
+                config = var.config
               }
 
               output "auditor_arn" {
@@ -15088,6 +15504,8 @@ config:
                 region  = "us-east-1"
               }
 
+              variable "config" {}
+
               module "vault-dev" {
                 account   = 510430971399
                 name      = "terraform"
@@ -15097,6 +15515,8 @@ config:
                 providers = {
                   aws = aws.vault-dev
                 }
+
+                config = var.config
               }
 
               output "auditor_arn" {
@@ -15204,6 +15624,8 @@ config:
                 region  = "us-east-1"
               }
 
+              variable "config" {}
+
               module "vault-hub" {
                 account   = 510430971399
                 name      = "terraform"
@@ -15213,6 +15635,8 @@ config:
                 providers = {
                   aws = aws.vault-hub
                 }
+
+                config = var.config
               }
 
               output "auditor_arn" {
@@ -15320,6 +15744,8 @@ config:
                 region  = "us-east-1"
               }
 
+              variable "config" {}
+
               module "vault-lib" {
                 account   = 510430971399
                 name      = "terraform"
@@ -15329,6 +15755,8 @@ config:
                 providers = {
                   aws = aws.vault-lib
                 }
+
+                config = var.config
               }
 
               output "auditor_arn" {
@@ -15436,6 +15864,8 @@ config:
                 region  = "us-east-1"
               }
 
+              variable "config" {}
+
               module "vault-log" {
                 account   = 510430971399
                 name      = "terraform"
@@ -15445,6 +15875,8 @@ config:
                 providers = {
                   aws = aws.vault-log
                 }
+
+                config = var.config
               }
 
               output "auditor_arn" {
@@ -15552,6 +15984,8 @@ config:
                 region  = "us-east-1"
               }
 
+              variable "config" {}
+
               module "vault-net" {
                 account   = 510430971399
                 name      = "terraform"
@@ -15561,6 +15995,8 @@ config:
                 providers = {
                   aws = aws.vault-net
                 }
+
+                config = var.config
               }
 
               output "auditor_arn" {
@@ -15668,6 +16104,8 @@ config:
                 region  = "us-east-1"
               }
 
+              variable "config" {}
+
               module "vault-ops" {
                 account   = 510430971399
                 name      = "terraform"
@@ -15677,6 +16115,8 @@ config:
                 providers = {
                   aws = aws.vault-ops
                 }
+
+                config = var.config
               }
 
               output "auditor_arn" {
@@ -15784,6 +16224,8 @@ config:
                 region  = "us-east-1"
               }
 
+              variable "config" {}
+
               module "vault-prod" {
                 account   = 510430971399
                 name      = "terraform"
@@ -15793,6 +16235,8 @@ config:
                 providers = {
                   aws = aws.vault-prod
                 }
+
+                config = var.config
               }
 
               output "auditor_arn" {
@@ -15900,6 +16344,8 @@ config:
                 region  = "us-east-1"
               }
 
+              variable "config" {}
+
               module "vault-pub" {
                 account   = 510430971399
                 name      = "terraform"
@@ -15909,6 +16355,8 @@ config:
                 providers = {
                   aws = aws.vault-pub
                 }
+
+                config = var.config
               }
 
               output "auditor_arn" {
@@ -16171,6 +16619,8 @@ config:
                 region  = "us-east-1"
               }
 
+              variable "config" {}
+
               module "whoa-org" {
                 account   = 510430971399
                 name      = "terraform"
@@ -16180,6 +16630,8 @@ config:
                 providers = {
                   aws = aws.whoa-org
                 }
+
+                config = var.config
               }
 
               output "auditor_arn" {
@@ -16287,6 +16739,8 @@ config:
                 region  = "us-east-1"
               }
 
+              variable "config" {}
+
               module "whoa-dev" {
                 account   = 510430971399
                 name      = "terraform"
@@ -16296,6 +16750,8 @@ config:
                 providers = {
                   aws = aws.whoa-dev
                 }
+
+                config = var.config
               }
 
               output "auditor_arn" {
@@ -16403,6 +16859,8 @@ config:
                 region  = "us-east-1"
               }
 
+              variable "config" {}
+
               module "whoa-hub" {
                 account   = 510430971399
                 name      = "terraform"
@@ -16412,6 +16870,8 @@ config:
                 providers = {
                   aws = aws.whoa-hub
                 }
+
+                config = var.config
               }
 
               output "auditor_arn" {
@@ -16519,6 +16979,8 @@ config:
                 region  = "us-east-1"
               }
 
+              variable "config" {}
+
               module "whoa-net" {
                 account   = 510430971399
                 name      = "terraform"
@@ -16528,6 +16990,8 @@ config:
                 providers = {
                   aws = aws.whoa-net
                 }
+
+                config = var.config
               }
 
               output "auditor_arn" {
@@ -16635,6 +17099,8 @@ config:
                 region  = "us-east-1"
               }
 
+              variable "config" {}
+
               module "whoa-pub" {
                 account   = 510430971399
                 name      = "terraform"
@@ -16644,6 +17110,8 @@ config:
                 providers = {
                   aws = aws.whoa-pub
                 }
+
+                config = var.config
               }
 
               output "auditor_arn" {

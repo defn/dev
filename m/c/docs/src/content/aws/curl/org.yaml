@@ -240,6 +240,8 @@ infra_acc_terraform: |-
     region  = "us-east-1"
   }
 
+  variable "config" {}
+
   module "curl-org" {
     account   = 510430971399
     name      = "terraform"
@@ -249,6 +251,8 @@ infra_acc_terraform: |-
     providers = {
       aws = aws.curl-org
     }
+
+    config = var.config
   }
 
   output "auditor_arn" {

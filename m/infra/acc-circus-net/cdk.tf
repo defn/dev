@@ -22,6 +22,8 @@ provider "aws" {
   region  = "us-east-1"
 }
 
+variable "config" {}
+
 module "circus-net" {
   account   = 510430971399
   name      = "terraform"
@@ -31,6 +33,8 @@ module "circus-net" {
   providers = {
     aws = aws.circus-net
   }
+
+  config = var.config
 }
 
 output "auditor_arn" {

@@ -22,6 +22,8 @@ provider "aws" {
   region  = "us-east-1"
 }
 
+variable "config" {}
+
 module "coil-org" {
   account   = 510430971399
   name      = "terraform"
@@ -31,6 +33,8 @@ module "coil-org" {
   providers = {
     aws = aws.coil-org
   }
+
+  config = var.config
 }
 
 output "auditor_arn" {

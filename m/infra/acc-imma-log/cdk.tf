@@ -22,6 +22,8 @@ provider "aws" {
   region  = "us-east-1"
 }
 
+variable "config" {}
+
 module "imma-log" {
   account   = 510430971399
   name      = "terraform"
@@ -31,6 +33,8 @@ module "imma-log" {
   providers = {
     aws = aws.imma-log
   }
+
+  config = var.config
 }
 
 output "auditor_arn" {

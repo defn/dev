@@ -22,6 +22,8 @@ provider "aws" {
   region  = "us-east-1"
 }
 
+variable "config" {}
+
 module "spiral-pub" {
   account   = 510430971399
   name      = "terraform"
@@ -31,6 +33,8 @@ module "spiral-pub" {
   providers = {
     aws = aws.spiral-pub
   }
+
+  config = var.config
 }
 
 output "auditor_arn" {

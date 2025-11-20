@@ -236,6 +236,8 @@ provider "aws" {
   region  = "us-east-1"
 }
 
+variable "config" {}
+
 module "\(org)-\(account)" {
   account   = \(lookup[bootstrap.org].account[bootstrap.account].id)
   name      = "terraform"
@@ -245,6 +247,8 @@ module "\(org)-\(account)" {
   providers = {
     aws = aws.\(org)-\(account)
   }
+
+  config = var.config
 }
 
 output "auditor_arn" {

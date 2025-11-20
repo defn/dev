@@ -22,6 +22,8 @@ provider "aws" {
   region  = "us-east-1"
 }
 
+variable "config" {}
+
 module "vault-pub" {
   account   = 510430971399
   name      = "terraform"
@@ -31,6 +33,8 @@ module "vault-pub" {
   providers = {
     aws = aws.vault-pub
   }
+
+  config = var.config
 }
 
 output "auditor_arn" {

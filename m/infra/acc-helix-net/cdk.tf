@@ -22,6 +22,8 @@ provider "aws" {
   region  = "us-east-1"
 }
 
+variable "config" {}
+
 module "helix-net" {
   account   = 510430971399
   name      = "terraform"
@@ -31,6 +33,8 @@ module "helix-net" {
   providers = {
     aws = aws.helix-net
   }
+
+  config = var.config
 }
 
 output "auditor_arn" {

@@ -22,6 +22,8 @@ provider "aws" {
   region  = "us-east-1"
 }
 
+variable "config" {}
+
 module "fogg-log" {
   account   = 510430971399
   name      = "terraform"
@@ -31,6 +33,8 @@ module "fogg-log" {
   providers = {
     aws = aws.fogg-log
   }
+
+  config = var.config
 }
 
 output "auditor_arn" {

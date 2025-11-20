@@ -1,1 +1,3 @@
 variable "account" {}
+
+variable "config" {}

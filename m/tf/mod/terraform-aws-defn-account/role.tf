@@ -48,7 +48,7 @@ data "aws_iam_policy_document" "auditor_access" {
 
 locals {
   remote_auditors = jsondecode(
-    file("${path.module}/remote_auditors.json")
+    file("${var.config}/remote_auditors.json")
   )
 }
 

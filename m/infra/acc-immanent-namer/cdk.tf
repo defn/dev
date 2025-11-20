@@ -22,6 +22,8 @@ provider "aws" {
   region  = "us-east-1"
 }
 
+variable "config" {}
+
 module "immanent-namer" {
   account   = 510430971399
   name      = "terraform"
@@ -31,6 +33,8 @@ module "immanent-namer" {
   providers = {
     aws = aws.immanent-namer
   }
+
+  config = var.config
 }
 
 output "auditor_arn" {

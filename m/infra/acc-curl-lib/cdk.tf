@@ -22,6 +22,8 @@ provider "aws" {
   region  = "us-east-1"
 }
 
+variable "config" {}
+
 module "curl-lib" {
   account   = 510430971399
   name      = "terraform"
@@ -31,6 +33,8 @@ module "curl-lib" {
   providers = {
     aws = aws.curl-lib
   }
+
+  config = var.config
 }
 
 output "auditor_arn" {

@@ -22,6 +22,8 @@ provider "aws" {
   region  = "us-east-1"
 }
 
+variable "config" {}
+
 module "immanent-herbal" {
   account   = 510430971399
   name      = "terraform"
@@ -31,6 +33,8 @@ module "immanent-herbal" {
   providers = {
     aws = aws.immanent-herbal
   }
+
+  config = var.config
 }
 
 output "auditor_arn" {

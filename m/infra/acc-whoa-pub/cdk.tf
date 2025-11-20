@@ -22,6 +22,8 @@ provider "aws" {
   region  = "us-east-1"
 }
 
+variable "config" {}
+
 module "whoa-pub" {
   account   = 510430971399
   name      = "terraform"
@@ -31,6 +33,8 @@ module "whoa-pub" {
   providers = {
     aws = aws.whoa-pub
   }
+
+  config = var.config
 }
 
 output "auditor_arn" {

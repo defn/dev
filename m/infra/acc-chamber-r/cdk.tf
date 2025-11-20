@@ -22,6 +22,8 @@ provider "aws" {
   region  = "us-east-1"
 }
 
+variable "config" {}
+
 module "chamber-r" {
   account   = 510430971399
   name      = "terraform"
@@ -31,6 +33,8 @@ module "chamber-r" {
   providers = {
     aws = aws.chamber-r
   }
+
+  config = var.config
 }
 
 output "auditor_arn" {

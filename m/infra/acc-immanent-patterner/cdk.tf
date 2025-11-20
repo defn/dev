@@ -22,6 +22,8 @@ provider "aws" {
   region  = "us-east-1"
 }
 
+variable "config" {}
+
 module "immanent-patterner" {
   account   = 510430971399
   name      = "terraform"
@@ -31,6 +33,8 @@ module "immanent-patterner" {
   providers = {
     aws = aws.immanent-patterner
   }
+
+  config = var.config
 }
 
 output "auditor_arn" {

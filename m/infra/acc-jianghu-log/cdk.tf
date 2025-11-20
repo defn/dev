@@ -22,6 +22,8 @@ provider "aws" {
   region  = "us-east-1"
 }
 
+variable "config" {}
+
 module "jianghu-log" {
   account   = 510430971399
   name      = "terraform"
@@ -31,6 +33,8 @@ module "jianghu-log" {
   providers = {
     aws = aws.jianghu-log
   }
+
+  config = var.config
 }
 
 output "auditor_arn" {
