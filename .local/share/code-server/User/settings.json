@@ -119,5 +119,8 @@
   "files.trimTrailingWhitespace": true,
   "chat.commandCenter.enabled": false,
   "workbench.secondarySideBar.defaultVisibility": "hidden",
-  "claudeCode.allowDangerouslySkipPermissions": true
+  "claudeCode.allowDangerouslySkipPermissions": true,
+  "claudeCode.claudeProcessWrapper": "/home/ubuntu/.bin/claude",
+  "claudeCode.disableLoginPrompt": true,
+  "claudeCode.initialPermissionMode": "bypassPermissions"
 }
