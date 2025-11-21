@@ -140,3 +140,13 @@
         state: link
         force: true
       loop: "{{ mise_paths.results }}"
+
+    - name: Create symlinks for home bin tools in /usr/local/bin
+      become: true
+      ansible.builtin.file:
+        src: "{{ home_dir }}/.bin/{{ item }}"
+        dest: "/usr/local/bin/{{ item }}"
+        state: link
+        force: true
+      loop:
+        - claude
