@@ -1,0 +1,21 @@
+{
+  "all": {
+    "sensitive": false,
+    "type": [
+      "object",
+      {
+        "chamber-1": [
+          "object",
+          {
+            "auditor_arn": "string"
+          }
+        ]
+      }
+    ],
+    "value": {
+      "chamber-1": {
+        "auditor_arn": "arn:aws:iam::741346472057:role/auditor"
+      }
+    }
+  }
+}
