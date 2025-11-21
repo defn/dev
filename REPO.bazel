@@ -2,8 +2,5 @@
 """
 
 ignore_directories([
-    "m/**",
-    ".cache",
-    ".cache/**",
-    ".local/**",
+    "**",
 ])
