@@ -5,6 +5,10 @@ set -efu -o pipefail
 function main {
 	cue eval -c >/dev/null
 
+	# Generate terraform output aggregation
+	mkdir -p ../infra/output
+	yq '.config.terraform.main_tf' main.yaml >../infra/output/main.tf
+
 	rm -rf docs/src/content/aws
 	mkdir -p docs/src/content/aws
 

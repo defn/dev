@@ -27,4 +27,8 @@ config: {
 
 	site: definition_site.site
 	site: intention.site
+
+	terraform: execution.terraform
+	terraform: bootstrap: intention.bootstrap
+	terraform: aws_orgs:  aws.org
 }
