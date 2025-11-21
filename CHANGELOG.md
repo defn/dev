@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.45.0](https://github.com/defn/dev/compare/v1.44.0...v1.45.0) (2025-11-21)
+
+
+### Features
+
+* add CUE-based terraform remote state aggregation ([9e4199f](https://github.com/defn/dev/commit/9e4199fcd40f924e701e4bc7177aaf2a1acaa259))
+* integrate terraform output data into CUE configuration ([813fc6b](https://github.com/defn/dev/commit/813fc6b4a62c3a589667542d4e62ec70cfd55dc7))
+
+
+### Bug Fixes
+
+* use sudo for claude symlink in Docker ([b5e7a39](https://github.com/defn/dev/commit/b5e7a3953bdb9851708633f55d91c50abeea52e1))
+
 ## [1.44.0](https://github.com/defn/dev/compare/v1.43.0...v1.44.0) (2025-11-20)
 
 
