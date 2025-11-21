@@ -6,12 +6,12 @@ compile = false
 
 [tools]
 ansible = "13.0.0"
-aws = "2.32.1"
+aws = "2.32.2"
 bat = "0.26.0"
 bazelisk = "1.27.0"
 chamber = "3.1.4"
 coder = "2.28.3"
-cue = "0.15.0"
+cue = "0.15.1"
 delta = "0.18.2"
 dive = "0.13.1"
 dyff = "1.10.2"
