@@ -5,7 +5,7 @@ function main {
 		set -- global $(ls -d */ | grep -v ^global | shuf)
 	fi
 
-	time runmany 16 'echo $1; cd $1 && mise exec -- terraform init' "$@"
+	time runmany 16 'echo $1; cd $1 && mise exec -- terraform init --reconfigure' "$@"
 }
 
 main "$@"
