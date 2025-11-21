@@ -47,9 +47,14 @@ CMD [ "/home/ubuntu/m/svc" ]
 RUN curl -sSL https://mise.run | bash
 
 # initial clone and build, long term caching
-RUN --mount=type=secret,id=GITHUB_TOKEN,env=GITHUB_TOKEN git clone https://github.com/defn/dev dev && mv dev/.git . && git reset --hard && rm -rf dev && bin/with-env make sync trunk
+RUN --mount=type=secret,id=GITHUB_TOKEN,env=GITHUB_TOKEN git clone https://github.com/defn/dev dev && mv dev/.git . && git reset --hard && rm -rf dev && bin/with-env make sync
+
+# initial trunk install
+RUN --mount=type=secret,id=GITHUB_TOKEN,env=GITHUB_TOKEN bin/with-env make trunk
+RUN --mount=type=secret,id=GITHUB_TOKEN,env=GITHUB_TOKEN bin/with-env trunk install
 
 # release rebuild, short term caching
 ARG RELEASE
 RUN echo "$RELEASE"
 RUN	--mount=type=secret,id=GITHUB_TOKEN,env=GITHUB_TOKEN bin/with-env make sync
+RUN --mount=type=secret,id=GITHUB_TOKEN,env=GITHUB_TOKEN bin/with-env trunk install

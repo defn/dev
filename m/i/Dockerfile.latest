@@ -3,8 +3,12 @@ ARG FROM=ghcr.io/defn/dev:latest
 FROM ${FROM}
 
 RUN --mount=type=secret,id=GITHUB_TOKEN,env=GITHUB_TOKEN bin/with-env make sync
+RUN --mount=type=secret,id=GITHUB_TOKEN,env=GITHUB_TOKEN bin/with-env trunk install
+
+# TODO: sometimes mise thinks it has installed a tool
 RUN --mount=type=secret,id=GITHUB_TOKEN,env=GITHUB_TOKEN bin/with-env mise install --force gh
 
+# TODO put this symlink into Ansible
 RUN sudo ln -nfs /home/ubuntu/.bin/claude /usr/local/bin/claude
 
 ENTRYPOINT ["/home/ubuntu/m/entrypoint.sh"]
