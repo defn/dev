@@ -1,3 +1,9 @@
 """
 """
-ignore_directories(["**/node_modules", "**/.direnv", "**/.terraform", "**/result", "**/{{cookiecutter.path}}"])
+ignore_directories([
+    "**/node_modules",
+    "**/.direnv",
+    "**/.terraform",
+    "**/result",
+    "**/{{cookiecutter.path}}",
+])
