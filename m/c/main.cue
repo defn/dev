@@ -24,6 +24,7 @@ config: {
 
 	aws: definition_aws.aws
 	aws: intention.aws
+	aws: output: definition.terraform.output
 
 	site: definition_site.site
 	site: intention.site

@@ -6,6 +6,7 @@ function main {
 		echo '@experiment(explicitopen)'
 		echo ''
 		cat repo.yaml | cue import -p definition yaml: -
+		cat ../../infra/output/output.json | cue import -l '"terraform"' -l '"output"' json: -
 	} >gen.cue
 }
 

@@ -1,21 +1,368 @@
 {
-  "all": {
-    "sensitive": false,
-    "type": [
-      "object",
-      {
-        "chamber-1": [
-          "object",
-          {
-            "auditor_arn": "string"
-          }
-        ]
-      }
-    ],
-    "value": {
-      "chamber-1": {
-        "auditor_arn": "arn:aws:iam::741346472057:role/auditor"
-      }
-    }
-  }
+  "acc-chamber-1": {
+    "auditor_arn": "arn:aws:iam::741346472057:role/auditor"
+  },
+  "acc-chamber-2": {
+    "auditor_arn": "arn:aws:iam::447993872368:role/auditor"
+  },
+  "acc-chamber-3": {
+    "auditor_arn": "arn:aws:iam::463050069968:role/auditor"
+  },
+  "acc-chamber-4": {
+    "auditor_arn": "arn:aws:iam::368890376620:role/auditor"
+  },
+  "acc-chamber-5": {
+    "auditor_arn": "arn:aws:iam::200733412967:role/auditor"
+  },
+  "acc-chamber-6": {
+    "auditor_arn": "arn:aws:iam::493089153027:role/auditor"
+  },
+  "acc-chamber-7": {
+    "auditor_arn": "arn:aws:iam::837425503386:role/auditor"
+  },
+  "acc-chamber-8": {
+    "auditor_arn": "arn:aws:iam::773314335856:role/auditor"
+  },
+  "acc-chamber-9": {
+    "auditor_arn": "arn:aws:iam::950940975070:role/auditor"
+  },
+  "acc-chamber-a": {
+    "auditor_arn": "arn:aws:iam::503577294851:role/auditor"
+  },
+  "acc-chamber-b": {
+    "auditor_arn": "arn:aws:iam::310940910494:role/auditor"
+  },
+  "acc-chamber-c": {
+    "auditor_arn": "arn:aws:iam::047633732615:role/auditor"
+  },
+  "acc-chamber-d": {
+    "auditor_arn": "arn:aws:iam::699441347021:role/auditor"
+  },
+  "acc-chamber-e": {
+    "auditor_arn": "arn:aws:iam::171831323337:role/auditor"
+  },
+  "acc-chamber-f": {
+    "auditor_arn": "arn:aws:iam::842022523232:role/auditor"
+  },
+  "acc-chamber-g": {
+    "auditor_arn": "arn:aws:iam::023867963778:role/auditor"
+  },
+  "acc-chamber-h": {
+    "auditor_arn": "arn:aws:iam::371020107387:role/auditor"
+  },
+  "acc-chamber-i": {
+    "auditor_arn": "arn:aws:iam::290132238209:role/auditor"
+  },
+  "acc-chamber-j": {
+    "auditor_arn": "arn:aws:iam::738433022197:role/auditor"
+  },
+  "acc-chamber-l": {
+    "auditor_arn": "arn:aws:iam::991300382347:role/auditor"
+  },
+  "acc-chamber-m": {
+    "auditor_arn": "arn:aws:iam::684895750259:role/auditor"
+  },
+  "acc-chamber-n": {
+    "auditor_arn": "arn:aws:iam::705881812506:role/auditor"
+  },
+  "acc-chamber-o": {
+    "auditor_arn": "arn:aws:iam::307136835824:role/auditor"
+  },
+  "acc-chamber-org": {
+    "auditor_arn": "arn:aws:iam::730917619329:role/auditor"
+  },
+  "acc-chamber-p": {
+    "auditor_arn": "arn:aws:iam::706168331526:role/auditor"
+  },
+  "acc-chamber-q": {
+    "auditor_arn": "arn:aws:iam::217047480856:role/auditor"
+  },
+  "acc-chamber-r": {
+    "auditor_arn": "arn:aws:iam::416221726155:role/auditor"
+  },
+  "acc-chamber-s": {
+    "auditor_arn": "arn:aws:iam::840650118369:role/auditor"
+  },
+  "acc-chamber-t": {
+    "auditor_arn": "arn:aws:iam::490895200523:role/auditor"
+  },
+  "acc-chamber-u": {
+    "auditor_arn": "arn:aws:iam::467995590869:role/auditor"
+  },
+  "acc-chamber-v": {
+    "auditor_arn": "arn:aws:iam::979368042862:role/auditor"
+  },
+  "acc-chamber-w": {
+    "auditor_arn": "arn:aws:iam::313387692116:role/auditor"
+  },
+  "acc-chamber-x": {
+    "auditor_arn": "arn:aws:iam::834936839208:role/auditor"
+  },
+  "acc-chamber-y": {
+    "auditor_arn": "arn:aws:iam::153556747817:role/auditor"
+  },
+  "acc-chamber-z": {
+    "auditor_arn": "arn:aws:iam::037804009879:role/auditor"
+  },
+  "acc-circus-lib": {
+    "auditor_arn": "arn:aws:iam::497790518354:role/auditor"
+  },
+  "acc-circus-log": {
+    "auditor_arn": "arn:aws:iam::707476523482:role/auditor"
+  },
+  "acc-circus-net": {
+    "auditor_arn": "arn:aws:iam::002516226222:role/auditor"
+  },
+  "acc-circus-ops": {
+    "auditor_arn": "arn:aws:iam::415618116579:role/auditor"
+  },
+  "acc-circus-org": {
+    "auditor_arn": "arn:aws:iam::036139182623:role/auditor"
+  },
+  "acc-coil-hub": {
+    "auditor_arn": "arn:aws:iam::453991412409:role/auditor"
+  },
+  "acc-coil-lib": {
+    "auditor_arn": "arn:aws:iam::160764896647:role/auditor"
+  },
+  "acc-coil-net": {
+    "auditor_arn": "arn:aws:iam::278790191486:role/auditor"
+  },
+  "acc-coil-org": {
+    "auditor_arn": "arn:aws:iam::138291560003:role/auditor"
+  },
+  "acc-curl-hub": {
+    "auditor_arn": "arn:aws:iam::804430872255:role/auditor"
+  },
+  "acc-curl-lib": {
+    "auditor_arn": "arn:aws:iam::298406631539:role/auditor"
+  },
+  "acc-curl-net": {
+    "auditor_arn": "arn:aws:iam::101142583332:role/auditor"
+  },
+  "acc-curl-org": {
+    "auditor_arn": "arn:aws:iam::424535767618:role/auditor"
+  },
+  "acc-defn-org": {
+    "auditor_arn": "arn:aws:iam::510430971399:role/auditor"
+  },
+  "acc-fogg-ci": {
+    "auditor_arn": "arn:aws:iam::812459563189:role/auditor"
+  },
+  "acc-fogg-dev": {
+    "auditor_arn": "arn:aws:iam::442766271046:role/auditor"
+  },
+  "acc-fogg-hub": {
+    "auditor_arn": "arn:aws:iam::337248635000:role/auditor"
+  },
+  "acc-fogg-lib": {
+    "auditor_arn": "arn:aws:iam::624713464251:role/auditor"
+  },
+  "acc-fogg-log": {
+    "auditor_arn": "arn:aws:iam::844609041254:role/auditor"
+  },
+  "acc-fogg-net": {
+    "auditor_arn": "arn:aws:iam::060659916753:role/auditor"
+  },
+  "acc-fogg-ops": {
+    "auditor_arn": "arn:aws:iam::318746665903:role/auditor"
+  },
+  "acc-fogg-org": {
+    "auditor_arn": "arn:aws:iam::328216504962:role/auditor"
+  },
+  "acc-fogg-prod": {
+    "auditor_arn": "arn:aws:iam::565963418226:role/auditor"
+  },
+  "acc-fogg-pub": {
+    "auditor_arn": "arn:aws:iam::372333168887:role/auditor"
+  },
+  "acc-gyre-ops": {
+    "auditor_arn": "arn:aws:iam::319951235442:role/auditor"
+  },
+  "acc-gyre-org": {
+    "auditor_arn": "arn:aws:iam::065163301604:role/auditor"
+  },
+  "acc-helix-ci": {
+    "auditor_arn": "arn:aws:iam::018520313738:role/auditor"
+  },
+  "acc-helix-dev": {
+    "auditor_arn": "arn:aws:iam::843784871878:role/auditor"
+  },
+  "acc-helix-hub": {
+    "auditor_arn": "arn:aws:iam::436043820387:role/auditor"
+  },
+  "acc-helix-lib": {
+    "auditor_arn": "arn:aws:iam::377857698578:role/auditor"
+  },
+  "acc-helix-log": {
+    "auditor_arn": "arn:aws:iam::664427926343:role/auditor"
+  },
+  "acc-helix-net": {
+    "auditor_arn": "arn:aws:iam::504722108514:role/auditor"
+  },
+  "acc-helix-ops": {
+    "auditor_arn": "arn:aws:iam::368812692254:role/auditor"
+  },
+  "acc-helix-org": {
+    "auditor_arn": "arn:aws:iam::816178966829:role/auditor"
+  },
+  "acc-helix-prod": {
+    "auditor_arn": "arn:aws:iam::724643698007:role/auditor"
+  },
+  "acc-helix-pub": {
+    "auditor_arn": "arn:aws:iam::536806623881:role/auditor"
+  },
+  "acc-imma-dev": {
+    "auditor_arn": "arn:aws:iam::445584037541:role/auditor"
+  },
+  "acc-imma-lib": {
+    "auditor_arn": "arn:aws:iam::516851121506:role/auditor"
+  },
+  "acc-imma-log": {
+    "auditor_arn": "arn:aws:iam::289716781198:role/auditor"
+  },
+  "acc-imma-net": {
+    "auditor_arn": "arn:aws:iam::246197522468:role/auditor"
+  },
+  "acc-imma-org": {
+    "auditor_arn": "arn:aws:iam::548373030883:role/auditor"
+  },
+  "acc-imma-pub": {
+    "auditor_arn": "arn:aws:iam::766142996227:role/auditor"
+  },
+  "acc-immanent-changer": {
+    "auditor_arn": "arn:aws:iam::003884504807:role/auditor"
+  },
+  "acc-immanent-chanter": {
+    "auditor_arn": "arn:aws:iam::071244154667:role/auditor"
+  },
+  "acc-immanent-doorkeeper": {
+    "auditor_arn": "arn:aws:iam::013267321144:role/auditor"
+  },
+  "acc-immanent-ged": {
+    "auditor_arn": "arn:aws:iam::640792184178:role/auditor"
+  },
+  "acc-immanent-hand": {
+    "auditor_arn": "arn:aws:iam::826250190242:role/auditor"
+  },
+  "acc-immanent-herbal": {
+    "auditor_arn": "arn:aws:iam::165452499696:role/auditor"
+  },
+  "acc-immanent-namer": {
+    "auditor_arn": "arn:aws:iam::856549015893:role/auditor"
+  },
+  "acc-immanent-org": {
+    "auditor_arn": "arn:aws:iam::545070380609:role/auditor"
+  },
+  "acc-immanent-patterner": {
+    "auditor_arn": "arn:aws:iam::143220204648:role/auditor"
+  },
+  "acc-immanent-roke": {
+    "auditor_arn": "arn:aws:iam::892560628624:role/auditor"
+  },
+  "acc-immanent-summoner": {
+    "auditor_arn": "arn:aws:iam::397411277587:role/auditor"
+  },
+  "acc-immanent-windkey": {
+    "auditor_arn": "arn:aws:iam::095764861781:role/auditor"
+  },
+  "acc-jianghu-log": {
+    "auditor_arn": "arn:aws:iam::298431841138:role/auditor"
+  },
+  "acc-jianghu-net": {
+    "auditor_arn": "arn:aws:iam::025636091251:role/auditor"
+  },
+  "acc-jianghu-org": {
+    "auditor_arn": "arn:aws:iam::657613322961:role/auditor"
+  },
+  "acc-spiral-ci": {
+    "auditor_arn": "arn:aws:iam::371657257885:role/auditor"
+  },
+  "acc-spiral-dev": {
+    "auditor_arn": "arn:aws:iam::308726031860:role/auditor"
+  },
+  "acc-spiral-hub": {
+    "auditor_arn": "arn:aws:iam::216704421225:role/auditor"
+  },
+  "acc-spiral-lib": {
+    "auditor_arn": "arn:aws:iam::073874947996:role/auditor"
+  },
+  "acc-spiral-log": {
+    "auditor_arn": "arn:aws:iam::442333715734:role/auditor"
+  },
+  "acc-spiral-net": {
+    "auditor_arn": "arn:aws:iam::057533398557:role/auditor"
+  },
+  "acc-spiral-ops": {
+    "auditor_arn": "arn:aws:iam::601164058091:role/auditor"
+  },
+  "acc-spiral-org": {
+    "auditor_arn": "arn:aws:iam::232091571197:role/auditor"
+  },
+  "acc-spiral-prod": {
+    "auditor_arn": "arn:aws:iam::398258703387:role/auditor"
+  },
+  "acc-spiral-pub": {
+    "auditor_arn": "arn:aws:iam::130046154300:role/auditor"
+  },
+  "acc-vault-ci": {
+    "auditor_arn": "arn:aws:iam::313228123503:role/auditor"
+  },
+  "acc-vault-dev": {
+    "auditor_arn": "arn:aws:iam::497393606242:role/auditor"
+  },
+  "acc-vault-hub": {
+    "auditor_arn": "arn:aws:iam::539099112425:role/auditor"
+  },
+  "acc-vault-lib": {
+    "auditor_arn": "arn:aws:iam::066356637485:role/auditor"
+  },
+  "acc-vault-log": {
+    "auditor_arn": "arn:aws:iam::749185891195:role/auditor"
+  },
+  "acc-vault-net": {
+    "auditor_arn": "arn:aws:iam::915207860232:role/auditor"
+  },
+  "acc-vault-ops": {
+    "auditor_arn": "arn:aws:iam::188066400611:role/auditor"
+  },
+  "acc-vault-org": {
+    "auditor_arn": "arn:aws:iam::475528707847:role/auditor"
+  },
+  "acc-vault-prod": {
+    "auditor_arn": "arn:aws:iam::040769490632:role/auditor"
+  },
+  "acc-vault-pub": {
+    "auditor_arn": "arn:aws:iam::851162413429:role/auditor"
+  },
+  "acc-whoa-dev": {
+    "auditor_arn": "arn:aws:iam::439761234835:role/auditor"
+  },
+  "acc-whoa-hub": {
+    "auditor_arn": "arn:aws:iam::462478722501:role/auditor"
+  },
+  "acc-whoa-net": {
+    "auditor_arn": "arn:aws:iam::464075062390:role/auditor"
+  },
+  "acc-whoa-org": {
+    "auditor_arn": "arn:aws:iam::389772512117:role/auditor"
+  },
+  "acc-whoa-pub": {
+    "auditor_arn": "arn:aws:iam::204827926367:role/auditor"
+  },
+  "global": {},
+  "org-chamber": {},
+  "org-circus": {},
+  "org-coil": {},
+  "org-curl": {},
+  "org-defn": {},
+  "org-fogg": {},
+  "org-gyre": {},
+  "org-helix": {},
+  "org-imma": {},
+  "org-immanent": {},
+  "org-jianghu": {},
+  "org-spiral": {},
+  "org-vault": {},
+  "org-whoa": {}
 }
