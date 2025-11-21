@@ -37181,7 +37181,7 @@ config:
       aws:
         version: 5.99.1
         source: aws
-    main_tf: |
+    main_tf: |-
       terraform {
         required_providers {
           aws = {
@@ -37213,7 +37213,6 @@ config:
           region = "us-east-1"
         }
       }
-
       data "terraform_remote_state" "org_defn" {
         backend = "s3"
         config = {
@@ -37326,7 +37325,6 @@ config:
           region = "us-east-1"
         }
       }
-
       data "terraform_remote_state" "acc_defn_org" {
         backend = "s3"
         config = {
@@ -38266,137 +38264,137 @@ config:
 
       output "all" {
         value = {
-          "global" : data.terraform_remote_state.global.outputs
-          "org-defn" : data.terraform_remote_state.org_defn.outputs
-          "org-gyre" : data.terraform_remote_state.org_gyre.outputs
-          "org-coil" : data.terraform_remote_state.org_coil.outputs
-          "org-curl" : data.terraform_remote_state.org_curl.outputs
-          "org-spiral" : data.terraform_remote_state.org_spiral.outputs
-          "org-helix" : data.terraform_remote_state.org_helix.outputs
-          "org-fogg" : data.terraform_remote_state.org_fogg.outputs
-          "org-vault" : data.terraform_remote_state.org_vault.outputs
-          "org-circus" : data.terraform_remote_state.org_circus.outputs
-          "org-jianghu" : data.terraform_remote_state.org_jianghu.outputs
-          "org-imma" : data.terraform_remote_state.org_imma.outputs
-          "org-whoa" : data.terraform_remote_state.org_whoa.outputs
-          "org-immanent" : data.terraform_remote_state.org_immanent.outputs
-          "org-chamber" : data.terraform_remote_state.org_chamber.outputs
-          "acc-defn-org" : data.terraform_remote_state.acc_defn_org.outputs
-          "acc-gyre-org" : data.terraform_remote_state.acc_gyre_org.outputs
-          "acc-gyre-ops" : data.terraform_remote_state.acc_gyre_ops.outputs
-          "acc-coil-org" : data.terraform_remote_state.acc_coil_org.outputs
-          "acc-coil-hub" : data.terraform_remote_state.acc_coil_hub.outputs
-          "acc-coil-lib" : data.terraform_remote_state.acc_coil_lib.outputs
-          "acc-coil-net" : data.terraform_remote_state.acc_coil_net.outputs
-          "acc-curl-org" : data.terraform_remote_state.acc_curl_org.outputs
-          "acc-curl-hub" : data.terraform_remote_state.acc_curl_hub.outputs
-          "acc-curl-lib" : data.terraform_remote_state.acc_curl_lib.outputs
-          "acc-curl-net" : data.terraform_remote_state.acc_curl_net.outputs
-          "acc-spiral-org" : data.terraform_remote_state.acc_spiral_org.outputs
-          "acc-spiral-ci" : data.terraform_remote_state.acc_spiral_ci.outputs
-          "acc-spiral-dev" : data.terraform_remote_state.acc_spiral_dev.outputs
-          "acc-spiral-hub" : data.terraform_remote_state.acc_spiral_hub.outputs
-          "acc-spiral-lib" : data.terraform_remote_state.acc_spiral_lib.outputs
-          "acc-spiral-log" : data.terraform_remote_state.acc_spiral_log.outputs
-          "acc-spiral-net" : data.terraform_remote_state.acc_spiral_net.outputs
-          "acc-spiral-ops" : data.terraform_remote_state.acc_spiral_ops.outputs
-          "acc-spiral-prod" : data.terraform_remote_state.acc_spiral_prod.outputs
-          "acc-spiral-pub" : data.terraform_remote_state.acc_spiral_pub.outputs
-          "acc-helix-org" : data.terraform_remote_state.acc_helix_org.outputs
-          "acc-helix-ci" : data.terraform_remote_state.acc_helix_ci.outputs
-          "acc-helix-dev" : data.terraform_remote_state.acc_helix_dev.outputs
-          "acc-helix-hub" : data.terraform_remote_state.acc_helix_hub.outputs
-          "acc-helix-lib" : data.terraform_remote_state.acc_helix_lib.outputs
-          "acc-helix-log" : data.terraform_remote_state.acc_helix_log.outputs
-          "acc-helix-net" : data.terraform_remote_state.acc_helix_net.outputs
-          "acc-helix-ops" : data.terraform_remote_state.acc_helix_ops.outputs
-          "acc-helix-prod" : data.terraform_remote_state.acc_helix_prod.outputs
-          "acc-helix-pub" : data.terraform_remote_state.acc_helix_pub.outputs
-          "acc-fogg-org" : data.terraform_remote_state.acc_fogg_org.outputs
-          "acc-fogg-ci" : data.terraform_remote_state.acc_fogg_ci.outputs
-          "acc-fogg-dev" : data.terraform_remote_state.acc_fogg_dev.outputs
-          "acc-fogg-hub" : data.terraform_remote_state.acc_fogg_hub.outputs
-          "acc-fogg-lib" : data.terraform_remote_state.acc_fogg_lib.outputs
-          "acc-fogg-log" : data.terraform_remote_state.acc_fogg_log.outputs
-          "acc-fogg-net" : data.terraform_remote_state.acc_fogg_net.outputs
-          "acc-fogg-ops" : data.terraform_remote_state.acc_fogg_ops.outputs
-          "acc-fogg-prod" : data.terraform_remote_state.acc_fogg_prod.outputs
-          "acc-fogg-pub" : data.terraform_remote_state.acc_fogg_pub.outputs
-          "acc-vault-org" : data.terraform_remote_state.acc_vault_org.outputs
-          "acc-vault-ci" : data.terraform_remote_state.acc_vault_ci.outputs
-          "acc-vault-dev" : data.terraform_remote_state.acc_vault_dev.outputs
-          "acc-vault-hub" : data.terraform_remote_state.acc_vault_hub.outputs
-          "acc-vault-lib" : data.terraform_remote_state.acc_vault_lib.outputs
-          "acc-vault-log" : data.terraform_remote_state.acc_vault_log.outputs
-          "acc-vault-net" : data.terraform_remote_state.acc_vault_net.outputs
-          "acc-vault-ops" : data.terraform_remote_state.acc_vault_ops.outputs
-          "acc-vault-prod" : data.terraform_remote_state.acc_vault_prod.outputs
-          "acc-vault-pub" : data.terraform_remote_state.acc_vault_pub.outputs
-          "acc-circus-org" : data.terraform_remote_state.acc_circus_org.outputs
-          "acc-circus-lib" : data.terraform_remote_state.acc_circus_lib.outputs
-          "acc-circus-log" : data.terraform_remote_state.acc_circus_log.outputs
-          "acc-circus-net" : data.terraform_remote_state.acc_circus_net.outputs
-          "acc-circus-ops" : data.terraform_remote_state.acc_circus_ops.outputs
-          "acc-jianghu-org" : data.terraform_remote_state.acc_jianghu_org.outputs
-          "acc-jianghu-log" : data.terraform_remote_state.acc_jianghu_log.outputs
-          "acc-jianghu-net" : data.terraform_remote_state.acc_jianghu_net.outputs
-          "acc-imma-org" : data.terraform_remote_state.acc_imma_org.outputs
-          "acc-imma-dev" : data.terraform_remote_state.acc_imma_dev.outputs
-          "acc-imma-lib" : data.terraform_remote_state.acc_imma_lib.outputs
-          "acc-imma-log" : data.terraform_remote_state.acc_imma_log.outputs
-          "acc-imma-net" : data.terraform_remote_state.acc_imma_net.outputs
-          "acc-imma-pub" : data.terraform_remote_state.acc_imma_pub.outputs
-          "acc-whoa-org" : data.terraform_remote_state.acc_whoa_org.outputs
-          "acc-whoa-dev" : data.terraform_remote_state.acc_whoa_dev.outputs
-          "acc-whoa-hub" : data.terraform_remote_state.acc_whoa_hub.outputs
-          "acc-whoa-net" : data.terraform_remote_state.acc_whoa_net.outputs
-          "acc-whoa-pub" : data.terraform_remote_state.acc_whoa_pub.outputs
-          "acc-immanent-org" : data.terraform_remote_state.acc_immanent_org.outputs
-          "acc-immanent-changer" : data.terraform_remote_state.acc_immanent_changer.outputs
-          "acc-immanent-chanter" : data.terraform_remote_state.acc_immanent_chanter.outputs
-          "acc-immanent-doorkeeper" : data.terraform_remote_state.acc_immanent_doorkeeper.outputs
-          "acc-immanent-ged" : data.terraform_remote_state.acc_immanent_ged.outputs
-          "acc-immanent-hand" : data.terraform_remote_state.acc_immanent_hand.outputs
-          "acc-immanent-herbal" : data.terraform_remote_state.acc_immanent_herbal.outputs
-          "acc-immanent-namer" : data.terraform_remote_state.acc_immanent_namer.outputs
-          "acc-immanent-patterner" : data.terraform_remote_state.acc_immanent_patterner.outputs
-          "acc-immanent-roke" : data.terraform_remote_state.acc_immanent_roke.outputs
-          "acc-immanent-summoner" : data.terraform_remote_state.acc_immanent_summoner.outputs
-          "acc-immanent-windkey" : data.terraform_remote_state.acc_immanent_windkey.outputs
-          "acc-chamber-org" : data.terraform_remote_state.acc_chamber_org.outputs
-          "acc-chamber-1" : data.terraform_remote_state.acc_chamber_1.outputs
-          "acc-chamber-2" : data.terraform_remote_state.acc_chamber_2.outputs
-          "acc-chamber-3" : data.terraform_remote_state.acc_chamber_3.outputs
-          "acc-chamber-4" : data.terraform_remote_state.acc_chamber_4.outputs
-          "acc-chamber-5" : data.terraform_remote_state.acc_chamber_5.outputs
-          "acc-chamber-6" : data.terraform_remote_state.acc_chamber_6.outputs
-          "acc-chamber-7" : data.terraform_remote_state.acc_chamber_7.outputs
-          "acc-chamber-8" : data.terraform_remote_state.acc_chamber_8.outputs
-          "acc-chamber-9" : data.terraform_remote_state.acc_chamber_9.outputs
-          "acc-chamber-a" : data.terraform_remote_state.acc_chamber_a.outputs
-          "acc-chamber-b" : data.terraform_remote_state.acc_chamber_b.outputs
-          "acc-chamber-c" : data.terraform_remote_state.acc_chamber_c.outputs
-          "acc-chamber-d" : data.terraform_remote_state.acc_chamber_d.outputs
-          "acc-chamber-e" : data.terraform_remote_state.acc_chamber_e.outputs
-          "acc-chamber-f" : data.terraform_remote_state.acc_chamber_f.outputs
-          "acc-chamber-g" : data.terraform_remote_state.acc_chamber_g.outputs
-          "acc-chamber-h" : data.terraform_remote_state.acc_chamber_h.outputs
-          "acc-chamber-i" : data.terraform_remote_state.acc_chamber_i.outputs
-          "acc-chamber-j" : data.terraform_remote_state.acc_chamber_j.outputs
-          "acc-chamber-l" : data.terraform_remote_state.acc_chamber_l.outputs
-          "acc-chamber-m" : data.terraform_remote_state.acc_chamber_m.outputs
-          "acc-chamber-n" : data.terraform_remote_state.acc_chamber_n.outputs
-          "acc-chamber-o" : data.terraform_remote_state.acc_chamber_o.outputs
-          "acc-chamber-p" : data.terraform_remote_state.acc_chamber_p.outputs
-          "acc-chamber-q" : data.terraform_remote_state.acc_chamber_q.outputs
-          "acc-chamber-r" : data.terraform_remote_state.acc_chamber_r.outputs
-          "acc-chamber-s" : data.terraform_remote_state.acc_chamber_s.outputs
-          "acc-chamber-t" : data.terraform_remote_state.acc_chamber_t.outputs
-          "acc-chamber-u" : data.terraform_remote_state.acc_chamber_u.outputs
-          "acc-chamber-v" : data.terraform_remote_state.acc_chamber_v.outputs
-          "acc-chamber-w" : data.terraform_remote_state.acc_chamber_w.outputs
-          "acc-chamber-x" : data.terraform_remote_state.acc_chamber_x.outputs
-          "acc-chamber-y" : data.terraform_remote_state.acc_chamber_y.outputs
-          "acc-chamber-z" : data.terraform_remote_state.acc_chamber_z.outputs
+      "global" : data.terraform_remote_state.global.outputs
+      "org-defn" : data.terraform_remote_state.org_defn.outputs
+      "org-gyre" : data.terraform_remote_state.org_gyre.outputs
+      "org-coil" : data.terraform_remote_state.org_coil.outputs
+      "org-curl" : data.terraform_remote_state.org_curl.outputs
+      "org-spiral" : data.terraform_remote_state.org_spiral.outputs
+      "org-helix" : data.terraform_remote_state.org_helix.outputs
+      "org-fogg" : data.terraform_remote_state.org_fogg.outputs
+      "org-vault" : data.terraform_remote_state.org_vault.outputs
+      "org-circus" : data.terraform_remote_state.org_circus.outputs
+      "org-jianghu" : data.terraform_remote_state.org_jianghu.outputs
+      "org-imma" : data.terraform_remote_state.org_imma.outputs
+      "org-whoa" : data.terraform_remote_state.org_whoa.outputs
+      "org-immanent" : data.terraform_remote_state.org_immanent.outputs
+      "org-chamber" : data.terraform_remote_state.org_chamber.outputs
+      "acc-defn-org" : data.terraform_remote_state.acc_defn_org.outputs
+      "acc-gyre-org" : data.terraform_remote_state.acc_gyre_org.outputs
+      "acc-gyre-ops" : data.terraform_remote_state.acc_gyre_ops.outputs
+      "acc-coil-org" : data.terraform_remote_state.acc_coil_org.outputs
+      "acc-coil-hub" : data.terraform_remote_state.acc_coil_hub.outputs
+      "acc-coil-lib" : data.terraform_remote_state.acc_coil_lib.outputs
+      "acc-coil-net" : data.terraform_remote_state.acc_coil_net.outputs
+      "acc-curl-org" : data.terraform_remote_state.acc_curl_org.outputs
+      "acc-curl-hub" : data.terraform_remote_state.acc_curl_hub.outputs
+      "acc-curl-lib" : data.terraform_remote_state.acc_curl_lib.outputs
+      "acc-curl-net" : data.terraform_remote_state.acc_curl_net.outputs
+      "acc-spiral-org" : data.terraform_remote_state.acc_spiral_org.outputs
+      "acc-spiral-ci" : data.terraform_remote_state.acc_spiral_ci.outputs
+      "acc-spiral-dev" : data.terraform_remote_state.acc_spiral_dev.outputs
+      "acc-spiral-hub" : data.terraform_remote_state.acc_spiral_hub.outputs
+      "acc-spiral-lib" : data.terraform_remote_state.acc_spiral_lib.outputs
+      "acc-spiral-log" : data.terraform_remote_state.acc_spiral_log.outputs
+      "acc-spiral-net" : data.terraform_remote_state.acc_spiral_net.outputs
+      "acc-spiral-ops" : data.terraform_remote_state.acc_spiral_ops.outputs
+      "acc-spiral-prod" : data.terraform_remote_state.acc_spiral_prod.outputs
+      "acc-spiral-pub" : data.terraform_remote_state.acc_spiral_pub.outputs
+      "acc-helix-org" : data.terraform_remote_state.acc_helix_org.outputs
+      "acc-helix-ci" : data.terraform_remote_state.acc_helix_ci.outputs
+      "acc-helix-dev" : data.terraform_remote_state.acc_helix_dev.outputs
+      "acc-helix-hub" : data.terraform_remote_state.acc_helix_hub.outputs
+      "acc-helix-lib" : data.terraform_remote_state.acc_helix_lib.outputs
+      "acc-helix-log" : data.terraform_remote_state.acc_helix_log.outputs
+      "acc-helix-net" : data.terraform_remote_state.acc_helix_net.outputs
+      "acc-helix-ops" : data.terraform_remote_state.acc_helix_ops.outputs
+      "acc-helix-prod" : data.terraform_remote_state.acc_helix_prod.outputs
+      "acc-helix-pub" : data.terraform_remote_state.acc_helix_pub.outputs
+      "acc-fogg-org" : data.terraform_remote_state.acc_fogg_org.outputs
+      "acc-fogg-ci" : data.terraform_remote_state.acc_fogg_ci.outputs
+      "acc-fogg-dev" : data.terraform_remote_state.acc_fogg_dev.outputs
+      "acc-fogg-hub" : data.terraform_remote_state.acc_fogg_hub.outputs
+      "acc-fogg-lib" : data.terraform_remote_state.acc_fogg_lib.outputs
+      "acc-fogg-log" : data.terraform_remote_state.acc_fogg_log.outputs
+      "acc-fogg-net" : data.terraform_remote_state.acc_fogg_net.outputs
+      "acc-fogg-ops" : data.terraform_remote_state.acc_fogg_ops.outputs
+      "acc-fogg-prod" : data.terraform_remote_state.acc_fogg_prod.outputs
+      "acc-fogg-pub" : data.terraform_remote_state.acc_fogg_pub.outputs
+      "acc-vault-org" : data.terraform_remote_state.acc_vault_org.outputs
+      "acc-vault-ci" : data.terraform_remote_state.acc_vault_ci.outputs
+      "acc-vault-dev" : data.terraform_remote_state.acc_vault_dev.outputs
+      "acc-vault-hub" : data.terraform_remote_state.acc_vault_hub.outputs
+      "acc-vault-lib" : data.terraform_remote_state.acc_vault_lib.outputs
+      "acc-vault-log" : data.terraform_remote_state.acc_vault_log.outputs
+      "acc-vault-net" : data.terraform_remote_state.acc_vault_net.outputs
+      "acc-vault-ops" : data.terraform_remote_state.acc_vault_ops.outputs
+      "acc-vault-prod" : data.terraform_remote_state.acc_vault_prod.outputs
+      "acc-vault-pub" : data.terraform_remote_state.acc_vault_pub.outputs
+      "acc-circus-org" : data.terraform_remote_state.acc_circus_org.outputs
+      "acc-circus-lib" : data.terraform_remote_state.acc_circus_lib.outputs
+      "acc-circus-log" : data.terraform_remote_state.acc_circus_log.outputs
+      "acc-circus-net" : data.terraform_remote_state.acc_circus_net.outputs
+      "acc-circus-ops" : data.terraform_remote_state.acc_circus_ops.outputs
+      "acc-jianghu-org" : data.terraform_remote_state.acc_jianghu_org.outputs
+      "acc-jianghu-log" : data.terraform_remote_state.acc_jianghu_log.outputs
+      "acc-jianghu-net" : data.terraform_remote_state.acc_jianghu_net.outputs
+      "acc-imma-org" : data.terraform_remote_state.acc_imma_org.outputs
+      "acc-imma-dev" : data.terraform_remote_state.acc_imma_dev.outputs
+      "acc-imma-lib" : data.terraform_remote_state.acc_imma_lib.outputs
+      "acc-imma-log" : data.terraform_remote_state.acc_imma_log.outputs
+      "acc-imma-net" : data.terraform_remote_state.acc_imma_net.outputs
+      "acc-imma-pub" : data.terraform_remote_state.acc_imma_pub.outputs
+      "acc-whoa-org" : data.terraform_remote_state.acc_whoa_org.outputs
+      "acc-whoa-dev" : data.terraform_remote_state.acc_whoa_dev.outputs
+      "acc-whoa-hub" : data.terraform_remote_state.acc_whoa_hub.outputs
+      "acc-whoa-net" : data.terraform_remote_state.acc_whoa_net.outputs
+      "acc-whoa-pub" : data.terraform_remote_state.acc_whoa_pub.outputs
+      "acc-immanent-org" : data.terraform_remote_state.acc_immanent_org.outputs
+      "acc-immanent-changer" : data.terraform_remote_state.acc_immanent_changer.outputs
+      "acc-immanent-chanter" : data.terraform_remote_state.acc_immanent_chanter.outputs
+      "acc-immanent-doorkeeper" : data.terraform_remote_state.acc_immanent_doorkeeper.outputs
+      "acc-immanent-ged" : data.terraform_remote_state.acc_immanent_ged.outputs
+      "acc-immanent-hand" : data.terraform_remote_state.acc_immanent_hand.outputs
+      "acc-immanent-herbal" : data.terraform_remote_state.acc_immanent_herbal.outputs
+      "acc-immanent-namer" : data.terraform_remote_state.acc_immanent_namer.outputs
+      "acc-immanent-patterner" : data.terraform_remote_state.acc_immanent_patterner.outputs
+      "acc-immanent-roke" : data.terraform_remote_state.acc_immanent_roke.outputs
+      "acc-immanent-summoner" : data.terraform_remote_state.acc_immanent_summoner.outputs
+      "acc-immanent-windkey" : data.terraform_remote_state.acc_immanent_windkey.outputs
+      "acc-chamber-org" : data.terraform_remote_state.acc_chamber_org.outputs
+      "acc-chamber-1" : data.terraform_remote_state.acc_chamber_1.outputs
+      "acc-chamber-2" : data.terraform_remote_state.acc_chamber_2.outputs
+      "acc-chamber-3" : data.terraform_remote_state.acc_chamber_3.outputs
+      "acc-chamber-4" : data.terraform_remote_state.acc_chamber_4.outputs
+      "acc-chamber-5" : data.terraform_remote_state.acc_chamber_5.outputs
+      "acc-chamber-6" : data.terraform_remote_state.acc_chamber_6.outputs
+      "acc-chamber-7" : data.terraform_remote_state.acc_chamber_7.outputs
+      "acc-chamber-8" : data.terraform_remote_state.acc_chamber_8.outputs
+      "acc-chamber-9" : data.terraform_remote_state.acc_chamber_9.outputs
+      "acc-chamber-a" : data.terraform_remote_state.acc_chamber_a.outputs
+      "acc-chamber-b" : data.terraform_remote_state.acc_chamber_b.outputs
+      "acc-chamber-c" : data.terraform_remote_state.acc_chamber_c.outputs
+      "acc-chamber-d" : data.terraform_remote_state.acc_chamber_d.outputs
+      "acc-chamber-e" : data.terraform_remote_state.acc_chamber_e.outputs
+      "acc-chamber-f" : data.terraform_remote_state.acc_chamber_f.outputs
+      "acc-chamber-g" : data.terraform_remote_state.acc_chamber_g.outputs
+      "acc-chamber-h" : data.terraform_remote_state.acc_chamber_h.outputs
+      "acc-chamber-i" : data.terraform_remote_state.acc_chamber_i.outputs
+      "acc-chamber-j" : data.terraform_remote_state.acc_chamber_j.outputs
+      "acc-chamber-l" : data.terraform_remote_state.acc_chamber_l.outputs
+      "acc-chamber-m" : data.terraform_remote_state.acc_chamber_m.outputs
+      "acc-chamber-n" : data.terraform_remote_state.acc_chamber_n.outputs
+      "acc-chamber-o" : data.terraform_remote_state.acc_chamber_o.outputs
+      "acc-chamber-p" : data.terraform_remote_state.acc_chamber_p.outputs
+      "acc-chamber-q" : data.terraform_remote_state.acc_chamber_q.outputs
+      "acc-chamber-r" : data.terraform_remote_state.acc_chamber_r.outputs
+      "acc-chamber-s" : data.terraform_remote_state.acc_chamber_s.outputs
+      "acc-chamber-t" : data.terraform_remote_state.acc_chamber_t.outputs
+      "acc-chamber-u" : data.terraform_remote_state.acc_chamber_u.outputs
+      "acc-chamber-v" : data.terraform_remote_state.acc_chamber_v.outputs
+      "acc-chamber-w" : data.terraform_remote_state.acc_chamber_w.outputs
+      "acc-chamber-x" : data.terraform_remote_state.acc_chamber_x.outputs
+      "acc-chamber-y" : data.terraform_remote_state.acc_chamber_y.outputs
+      "acc-chamber-z" : data.terraform_remote_state.acc_chamber_z.outputs
         }
       }

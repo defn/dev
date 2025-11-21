@@ -76,27 +76,33 @@ provider "aws" {
   region  = "\(provider.aws.region)"
 }
 
-data "terraform_remote_state" "global" {
-  backend = "s3"
-  config = {
-    bucket = "\(bootstrap.bucket)"
-    key    = "stacks/global/terraform.tfstate"
-    region = "us-east-1"
-  }
-}
-
+\(strings.Join(_global_states, "\n"))
 \(strings.Join(_org_states, "\n"))
-
 \(strings.Join(_acc_states, "\n"))
 
 output "all" {
   value = {
-    "global" : data.terraform_remote_state.global.outputs
 \(strings.Join(_output_refs, "\n"))
   }
 }
-
 """
+
+	// Generate global-level remote states
+	_global_states: [...string]
+	_global_states: list.Concat([
+		[
+			"""
+				data "terraform_remote_state" "global" {
+				  backend = "s3"
+				  config = {
+				    bucket = "\(bootstrap.bucket)"
+				    key    = "stacks/global/terraform.tfstate"
+				    region = "us-east-1"
+				  }
+				}
+				""",
+		],
+	])
 
 	// Generate org-level remote states
 	_org_states: [...string]
@@ -142,19 +148,23 @@ output "all" {
 	// Generate output references
 	_output_refs: [...string]
 	_output_refs: list.Concat([
+		// Global outputs
+		[
+			"\"global\" : data.terraform_remote_state.global.outputs",
+		],
 		// Org outputs
 		[
 			for org_name, org_data in aws_orgs
 			for acc_name, acc_data in org_data.account
 			if acc_name == "org" {
-				"    \"org-\(org_name)\" : data.terraform_remote_state.org_\(org_name).outputs"
+				"\"org-\(org_name)\" : data.terraform_remote_state.org_\(org_name).outputs"
 			},
 		],
 		// Account outputs
 		[
 			for org_name, org_data in aws_orgs
 			for acc_name, acc_data in org_data.account {
-				"    \"acc-\(org_name)-\(acc_name)\" : data.terraform_remote_state.acc_\(org_name)_\(acc_name).outputs"
+				"\"acc-\(org_name)-\(acc_name)\" : data.terraform_remote_state.acc_\(org_name)_\(acc_name).outputs"
 			},
 		],
 	])

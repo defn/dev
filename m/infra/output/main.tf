@@ -29,7 +29,6 @@ data "terraform_remote_state" "global" {
     region = "us-east-1"
   }
 }
-
 data "terraform_remote_state" "org_defn" {
   backend = "s3"
   config = {
@@ -142,7 +141,6 @@ data "terraform_remote_state" "org_chamber" {
     region = "us-east-1"
   }
 }
-
 data "terraform_remote_state" "acc_defn_org" {
   backend = "s3"
   config = {
@@ -1216,4 +1214,3 @@ output "all" {
     "acc-chamber-z" : data.terraform_remote_state.acc_chamber_z.outputs
   }
 }
-
