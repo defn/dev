@@ -8,5 +8,8 @@ RUN --mount=type=secret,id=GITHUB_TOKEN,env=GITHUB_TOKEN bin/with-env trunk inst
 # TODO: sometimes mise thinks it has installed a tool
 RUN --mount=type=secret,id=GITHUB_TOKEN,env=GITHUB_TOKEN bin/with-env mise install --force gh
 
+# TODO: move to ansible?
+RUN mkdir -p .terraform.d/plugin-cache
+
 ENTRYPOINT ["/home/ubuntu/m/entrypoint.sh"]
 CMD []

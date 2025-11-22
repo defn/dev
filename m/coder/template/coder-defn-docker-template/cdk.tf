@@ -64,6 +64,18 @@ resource "coder_agent" "main" {
   }
 }
 
+resource "coder_env" "coder_session_token" {
+  agent_id = var.agent_id
+  name     = "CODER_SESSION_TOKEN"
+  value    = data.coder_workspace_owner.me.session_token
+}
+
+resource "coder_env" "coder_url" {
+  agent_id = var.agent_id
+  name     = "CODER_URL"
+  value    = data.coder_workspace.me.access_url
+}
+
 resource "coder_env" "mcp_claude_task_prompt" {
   agent_id = coder_agent.main.id
   name     = "CODER_MCP_CLAUDE_TASK_PROMPT"
@@ -278,9 +290,10 @@ resource "docker_container" "workspace" {
 
 # https://registry.coder.com/modules/coder/claude-code
 module "claude-code" {
-  count               = data.coder_workspace.me.start_count
-  source              = "registry.coder.com/coder/claude-code/coder"
-  version             = "3.4.4"
+  count    = data.coder_workspace.me.start_count
+  source   = "registry.coder.com/coder/claude-code/coder"
+  version  = "3.4.4"
+  agent_id = coder_agent.main.id
 
   subdomain           = true
   install_claude_code = false
@@ -289,17 +302,7 @@ module "claude-code" {
   continue            = false
   cli_app             = false
 
-  agent_id            = coder_agent.main.id
-  model               = "sonnet"
-
-  workdir             = "/home/ubuntu"
-  pre_install_script  = "~/bin/claude-setup.sh"
-}
-
-# https://registry.coder.com/modules/coder/coder-login
-module "coder-login" {
-  count    = data.coder_workspace.me.start_count
-  source   = "registry.coder.com/coder/coder-login/coder"
-  version  = "1.1.0"
-  agent_id = coder_agent.main.id
+  model              = "sonnet"
+  workdir            = "/home/ubuntu"
+  pre_install_script = "~/bin/claude-setup.sh"
 }
