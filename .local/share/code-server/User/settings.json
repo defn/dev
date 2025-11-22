@@ -104,7 +104,6 @@
   },
   "terminal.integrated.sendKeybindingsToShell": true,
   "terminal.integrated.showExitAlert": false,
-  "terraform.languageServer.enable": false,
   "terraform.languageServer.ignoreSingleFileWarning": true,
   "trunk.showWhatsNew": false,
   "trunk.showWhatsNewMessage": false,
@@ -122,5 +121,7 @@
   "claudeCode.allowDangerouslySkipPermissions": true,
   "claudeCode.claudeProcessWrapper": "/home/ubuntu/.bin/claude",
   "claudeCode.disableLoginPrompt": true,
-  "claudeCode.initialPermissionMode": "bypassPermissions"
+  "claudeCode.initialPermissionMode": "bypassPermissions",
+  "terraform.mcp.server.enable": true,
+  "terraform.validation.enableEnhancedValidation": false
 }
