@@ -47,11 +47,6 @@ data "coder_parameter" "arch" {
   type         = "string"
 }
 
-data "coder_parameter" "ai_prompt" {
-  name = "AI Prompt"
-  type = "string"
-}
-
 resource "coder_agent" "main" {
   arch = data.coder_parameter.arch.value
   auth = "token"
@@ -62,6 +57,11 @@ resource "coder_agent" "main" {
     vscode          = false
     vscode_insiders = false
   }
+}
+
+data "coder_parameter" "ai_prompt" {
+  name = "AI Prompt"
+  type = "string"
 }
 
 resource "coder_env" "mcp_claude_task_prompt" {
@@ -94,6 +94,25 @@ resource "coder_app" "preview" {
   url          = "http://localhost:3000"
   order        = 1
   open_in      = "tab"
+}
+
+# https://registry.coder.com/modules/coder/claude-code
+module "claude-code" {
+  count    = data.coder_workspace.me.start_count
+  source   = "registry.coder.com/coder/claude-code/coder"
+  version  = "3.4.4"
+  agent_id = coder_agent.main.id
+
+  subdomain           = true
+  install_claude_code = false
+  install_agentapi    = false
+  report_tasks        = true
+  continue            = false
+  cli_app             = false
+
+  model              = "sonnet"
+  workdir            = "/home/ubuntu"
+  pre_install_script = "~/bin/claude-setup.sh"
 }
 
 resource "coder_app" "code-server" {
@@ -277,21 +296,3 @@ resource "docker_container" "workspace" {
   }
 }
 
-# https://registry.coder.com/modules/coder/claude-code
-module "claude-code" {
-  count    = data.coder_workspace.me.start_count
-  source   = "registry.coder.com/coder/claude-code/coder"
-  version  = "3.4.4"
-  agent_id = coder_agent.main.id
-
-  subdomain           = true
-  install_claude_code = false
-  install_agentapi    = false
-  report_tasks        = true
-  continue            = false
-  cli_app             = false
-
-  model              = "sonnet"
-  workdir            = "/home/ubuntu"
-  pre_install_script = "~/bin/claude-setup.sh"
-}

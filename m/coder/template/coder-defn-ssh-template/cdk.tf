@@ -57,9 +57,6 @@ resource "coder_agent" "main" {
     vscode          = false
     vscode_insiders = false
   }
-
-  env = {
-  }
 }
 
 resource "coder_app" "code-server" {
@@ -68,7 +65,7 @@ resource "coder_app" "code-server" {
   icon         = "/icon/code.svg"
   share        = "owner"
   slug         = "cs"
-  subdomain    = data.coder_parameter.subdomain.value
+  subdomain    = true
   url          = "http://localhost:8080/?folder=${data.coder_parameter.homedir.value}"
   order        = 2
   healthcheck {
@@ -93,16 +90,6 @@ data "coder_parameter" "remote" {
   type         = "string"
 }
 
-data "coder_parameter" "subdomain" {
-  default      = true
-  description  = "Use subdomain"
-  display_name = "Use sudomain"
-  icon         = "https://raw.githubusercontent.com/matifali/logos/main/cpu-3.svg"
-  mutable      = true
-  name         = "subdomain"
-  type         = "bool"
-}
-
 //
 // custom
 //
@@ -116,15 +103,7 @@ resource "null_resource" "deploy" {
   }
   count = data.coder_workspace.me.start_count
   provisioner "local-exec" {
-    command = "(echo cd; echo cd m; echo exec env GIT_AUTHOR_EMAIL=${data.coder_workspace_owner.me.email} GIT_AUTHOR_NAME=${data.coder_workspace_owner.me.name} GIT_COMMITTER_EMAIL=${data.coder_workspace_owner.me.email} GIT_COMMITTER_NAME=${data.coder_workspace_owner.me.name} CODER_AGENT_URL_ORIGINAL=${data.coder_workspace.me.access_url} CODER_AGENT_URL=${data.coder_parameter.remote.value == "" ? "http://169.254.32.1:3000" : data.coder_workspace.me.access_url} CODER_AGENT_TOKEN=${coder_agent.main.token} CODER_NAME=${data.coder_workspace.me.name} CODER_HOMEDIR=${data.coder_parameter.homedir.value} CODER_AGENT_DEVCONTAINERS_ENABLE=true ./entrypoint.sh setup) | ${data.coder_parameter.remote.value} bash -x -"
+    command = "(echo cd; echo cd m; echo exec env GIT_AUTHOR_EMAIL=${data.coder_workspace_owner.me.email} GIT_AUTHOR_NAME=${data.coder_workspace_owner.me.name} GIT_COMMITTER_EMAIL=${data.coder_workspace_owner.me.email} GIT_COMMITTER_NAME=${data.coder_workspace_owner.me.name} CODER_AGENT_URL_ORIGINAL=${data.coder_workspace.me.access_url} CODER_AGENT_URL=${data.coder_parameter.remote.value == "" ? "http://169.254.32.1:3000" : data.coder_workspace.me.access_url} CODER_AGENT_TOKEN=${coder_agent.main.token} CODER_NAME=${data.coder_workspace.me.name} CODER_HOMEDIR=${data.coder_parameter.homedir.value} CODER_AGENT_DEVCONTAINERS_ENABLE=true CODER_SESSION_TOKEN=${data.coder_workspace_owner.me.session_token} CODER_URL=${data.coder_workspace.me.access_url} ./entrypoint.sh setup) | ${data.coder_parameter.remote.value} bash -x -"
     when    = create
   }
-}
-
-
-module "coder-login" {
-  count    = data.coder_workspace.me.start_count
-  source   = "registry.coder.com/coder/coder-login/coder"
-  version  = "1.1.0"
-  agent_id = coder_agent.main.id
 }
