@@ -64,18 +64,6 @@ resource "coder_agent" "main" {
   }
 }
 
-resource "coder_env" "coder_session_token" {
-  agent_id = coder_agent.main.id
-  name     = "CODER_SESSION_TOKEN"
-  value    = data.coder_workspace_owner.me.session_token
-}
-
-resource "coder_env" "coder_url" {
-  agent_id = coder_agent.main.id
-  name     = "CODER_URL"
-  value    = data.coder_workspace.me.access_url
-}
-
 resource "coder_env" "mcp_claude_task_prompt" {
   agent_id = coder_agent.main.id
   name     = "CODER_MCP_CLAUDE_TASK_PROMPT"
@@ -213,10 +201,11 @@ resource "docker_container" "workspace" {
   env = [
     "CODER_AGENT_TOKEN=${coder_agent.main.token}",
     "CODER_AGENT_URL=${data.coder_workspace.me.access_url}",
-    "CODER_AGENT_TOKEN=${coder_agent.main.token}",
-    "CODER_NAME=${data.coder_workspace.me.name}",
     "CODER_HOMEDIR=${data.coder_parameter.homedir.value}",
     "CODER_INIT_SCRIPT_BASE64=${base64encode(coder_agent.main.init_script)}",
+    "CODER_NAME=${data.coder_workspace.me.name}",
+    "CODER_SESSION_TOKEN=${data.coder_workspace_owner.me.session_token}",
+    "CODER_URL=${data.coder_workspace.me.access_url}",
     "GIT_AUTHOR_EMAIL=${data.coder_workspace_owner.me.email}",
     "GIT_AUTHOR_NAME=${data.coder_workspace_owner.me.name}",
     "GIT_COMMITTER_EMAIL=${data.coder_workspace_owner.me.email}",
