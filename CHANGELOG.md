@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.46.0](https://github.com/defn/dev/compare/v1.45.0...v1.46.0) (2025-11-22)
+
+
+### Features
+
+* configure Bazel 9 workspace with modern ignore directives ([2cef6bb](https://github.com/defn/dev/commit/2cef6bb94049651fdd8c0f999bd6938fd7703fad))
+
+
+### Bug Fixes
+
+* separate code-server link protection domains with protocol ([918ad8c](https://github.com/defn/dev/commit/918ad8c2a0a5ea0923adc7182c8fc2dde6620f26))
+* use coder_agent.main.id for env resources in template ([4c3caa6](https://github.com/defn/dev/commit/4c3caa660a2548d5864a02c888c417feb1e2b752))
+
 ## [1.45.0](https://github.com/defn/dev/compare/v1.44.0...v1.45.0) (2025-11-21)
 
 
