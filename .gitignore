@@ -16,7 +16,13 @@ node_modules
 .viminfo
 .vim/plugged
 .python_history
-.local
+.local/*
+!.local/share/
+.local/share/*
+!.local/share/code-server/
+.local/share/code-server/*
+!.local/share/code-server/User/
+.local/share/code-server/User/*
 !.local/share/code-server/User/settings.json
 .cache
 .npm
