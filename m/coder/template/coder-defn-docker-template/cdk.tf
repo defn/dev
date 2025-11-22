@@ -87,17 +87,23 @@ resource "coder_app" "preview" {
 module "claude-code" {
   count    = data.coder_workspace.me.start_count
   source   = "registry.coder.com/coder/claude-code/coder"
-  version  = "3.4.4"
+  version  = "4.2.1"
   agent_id = coder_agent.main.id
 
-  subdomain           = true
-  install_claude_code = false
-  install_agentapi    = false
-  report_tasks        = true
-  continue            = false
-  cli_app             = false
+  subdomain    = true
+  report_tasks = true
+  continue     = false
+  cli_app      = false
 
-  model              = "sonnet"
+  dangerously_skip_permissions = true
+  disable_autoupdater          = true
+  install_claude_code          = false
+  install_agentapi             = false
+
+  model         = "sonnet"
+  ai_prompt     = data.coder_parameter.ai_prompt.value
+  system_prompt = data.coder_parameter.system_prompt.value
+
   workdir            = "/home/ubuntu"
   pre_install_script = "~/bin/claude-setup.sh"
 }
@@ -216,9 +222,6 @@ resource "docker_container" "workspace" {
     "GIT_AUTHOR_NAME=${data.coder_workspace_owner.me.name}",
     "GIT_COMMITTER_EMAIL=${data.coder_workspace_owner.me.email}",
     "GIT_COMMITTER_NAME=${data.coder_workspace_owner.me.name}",
-    "CODER_MCP_CLAUDE_TASK_PROMPT=${data.coder_parameter.ai_prompt.value}",
-    "CODER_MCP_APP_STATUS_SLUG=claude-code",
-    "CODER_MCP_CLAUDE_SYSTEM_PROMPT=Be terse",
   ]
 
   host {
