@@ -47,6 +47,18 @@ data "coder_parameter" "arch" {
   type         = "string"
 }
 
+data "coder_parameter" "ai_prompt" {
+  name    = "AI Prompt"
+  type    = "string"
+  mutable = false
+}
+
+data "coder_parameter" "system_prompt" {
+  default = "Be succinct, no marketing or kissing ass"
+  name    = "System Prompt"
+  mutable = false
+}
+
 resource "coder_agent" "main" {
   arch = data.coder_parameter.arch.value
   auth = "token"
@@ -57,31 +69,6 @@ resource "coder_agent" "main" {
     vscode          = false
     vscode_insiders = false
   }
-}
-
-data "coder_parameter" "ai_prompt" {
-  name = "AI Prompt"
-  type = "string"
-}
-
-resource "coder_env" "mcp_claude_task_prompt" {
-  agent_id = coder_agent.main.id
-  name     = "CODER_MCP_CLAUDE_TASK_PROMPT"
-  value    = data.coder_parameter.ai_prompt.value
-}
-
-resource "coder_env" "mcp_app_status_slug" {
-  agent_id = coder_agent.main.id
-  name     = "CODER_MCP_APP_STATUS_SLUG"
-  value    = "claude-code"
-}
-
-resource "coder_env" "mcp_claude_system_prompt" {
-  agent_id = coder_agent.main.id
-  name     = "CODER_MCP_CLAUDE_SYSTEM_PROMPT"
-  value    = <<-EOT
-    Be terse.
-  EOT
 }
 
 resource "coder_app" "preview" {
@@ -229,6 +216,9 @@ resource "docker_container" "workspace" {
     "GIT_AUTHOR_NAME=${data.coder_workspace_owner.me.name}",
     "GIT_COMMITTER_EMAIL=${data.coder_workspace_owner.me.email}",
     "GIT_COMMITTER_NAME=${data.coder_workspace_owner.me.name}",
+    "CODER_MCP_CLAUDE_TASK_PROMPT=${data.coder_parameter.ai_prompt.value}",
+    "CODER_MCP_APP_STATUS_SLUG=claude-code",
+    "CODER_MCP_CLAUDE_SYSTEM_PROMPT=Be terse",
   ]
 
   host {
