@@ -123,5 +123,8 @@
   "claudeCode.disableLoginPrompt": true,
   "claudeCode.initialPermissionMode": "bypassPermissions",
   "terraform.mcp.server.enable": true,
-  "terraform.validation.enableEnhancedValidation": false
+  "terraform.validation.enableEnhancedValidation": false,
+  "workbench.navigationControl.enabled": false,
+  "window.commandCenter": false,
+  "workbench.layoutControl.enabled": false
 }
