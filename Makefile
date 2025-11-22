@@ -230,5 +230,5 @@ sync_inner:
 # Dependencies: git command, runmany script, perl command, mise binary, mise.toml files in repository
 # Outputs: List of available mise tool updates formatted as commands to upgrade each tool
 mise-list:
-	@(echo .; git grep [t]ools | grep [m]ise.toml: | cut -d: -f1 | perl -pe 's{/mise.toml}{}') | runmany 'cd $$1 && pwd && mise upgrade --bump --dry-run' | grep 'Would bump' | while read -r a b tool c mfile; do echo mise use --cd "$$(dirname $$mfile)" $$tool; done | sort -u | sed 's# --cd ~/.config/mise##'
+	@(echo .; git grep [t]ools | grep [m]ise.toml: | cut -d: -f1 | perl -pe 's{/mise.toml}{}') | runmany 'cd $$1 && pwd && mise upgrade --bump --dry-run' | grep 'Would bump' | while read -r a b tool c mfile; do echo mise use --cd "$$(dirname $$mfile)" $$tool; done | sort -u | sed 's# --cd ~/.config/mise##' | grep -v "mise use python@3.14"
 
