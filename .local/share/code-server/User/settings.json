@@ -126,5 +126,7 @@
   "terraform.validation.enableEnhancedValidation": false,
   "workbench.navigationControl.enabled": false,
   "window.commandCenter": false,
-  "workbench.layoutControl.enabled": false
+  "workbench.layoutControl.enabled": false,
+  "window.menuBarVisibility": "toggle",
+  "workbench.activityBar.location": "bottom"
 }
