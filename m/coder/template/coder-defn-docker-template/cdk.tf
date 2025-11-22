@@ -65,13 +65,13 @@ resource "coder_agent" "main" {
 }
 
 resource "coder_env" "coder_session_token" {
-  agent_id = var.agent_id
+  agent_id = coder_agent.main.id
   name     = "CODER_SESSION_TOKEN"
   value    = data.coder_workspace_owner.me.session_token
 }
 
 resource "coder_env" "coder_url" {
-  agent_id = var.agent_id
+  agent_id = coder_agent.main.id
   name     = "CODER_URL"
   value    = data.coder_workspace.me.access_url
 }
