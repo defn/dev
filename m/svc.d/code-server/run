@@ -19,4 +19,7 @@ export PATH
 
 exec mise exec -- code-server --auth none \
 	--disable-workspace-trust \
-	--link-protection-trusted-domains '*.github.com,*.defn.run,*.awsapps.com'
+	--link-protection-trusted-domains 'https://*.github.com' \
+	--link-protection-trusted-domains 'https://*.defn.run' \
+	--link-protection-trusted-domains 'https://*.awsapps.com'
+
