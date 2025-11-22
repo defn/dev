@@ -1,16 +1,13 @@
 terraform {
   required_providers {
-    aws = {
-      version = "5.82.2"
-      source  = "aws"
-    }
     coder = {
-      version = "2.1.0"
-      source  = "coder/coder"
+      source = "coder/coder"
+    }
+    aws = {
+      source = "aws"
     }
   }
-  backend "local" {
-  }
+  backend "local" {}
 }
 
 data "coder_parameter" "region" {
@@ -171,11 +168,11 @@ data "coder_workspace_owner" "me" {
 data "coder_workspace" "me" {
 }
 
-
 resource "coder_agent" "main" {
-  arch           = "amd64"
-  os             = "linux"
-  auth           = "aws-instance-identity"
+  arch = "amd64"
+  auth = "aws-instance-identity"
+  os   = "linux"
+
   startup_script = <<-EOT
     set -e
     exec >>/tmp/coder-agent.log
@@ -188,6 +185,7 @@ resource "coder_agent" "main" {
     cd ~/m
     bin/startup.sh
   EOT
+
   env = {
     GIT_AUTHOR_EMAIL    = "${data.coder_workspace_owner.me.email}"
     GIT_AUTHOR_NAME     = "${data.coder_workspace_owner.me.name}"
@@ -196,15 +194,16 @@ resource "coder_agent" "main" {
     LC_ALL              = "C.UTF-8"
     LOCAL_ARCHIVE       = "/usr/lib/locale/locale-archive"
   }
+
   connection_timeout = 200
+
   display_apps {
+    web_terminal    = false
     ssh_helper      = false
     vscode          = false
     vscode_insiders = false
   }
 }
-
-// apps
 
 resource "coder_app" "code-server" {
   agent_id     = coder_agent.main.id
@@ -214,11 +213,13 @@ resource "coder_app" "code-server" {
   slug         = "cs"
   subdomain    = true
   url          = "http://localhost:8080/?folder=${data.coder_parameter.homedir.value}"
+  order        = 2
   healthcheck {
     interval  = 5
     threshold = 6
     url       = "http://localhost:8080/healthz"
   }
+  open_in = "tab"
 }
 
 resource "coder_app" "headlamp" {
