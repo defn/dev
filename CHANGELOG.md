@@ -1,5 +1,27 @@
 # Changelog
 
+## [1.46.0](https://github.com/defn/dev/compare/v1.45.0...v1.46.0) (2025-11-23)
+
+
+### Features
+
+* add Claude Code integration and startup scripts to templates ([2936ae6](https://github.com/defn/dev/commit/2936ae62a978b57c7cf54c280ee8787134ebb043))
+* add cluster-admin RBAC binding for Coder workspace ([66d823c](https://github.com/defn/dev/commit/66d823c297b72f05e2201944af356833a5da90c9))
+* add coder_ai_task resource to Docker template ([e2c447b](https://github.com/defn/dev/commit/e2c447b9abe644c37d4537a46f9c60229ad47977))
+* add Docker socket mount to k8s template ([e0f2537](https://github.com/defn/dev/commit/e0f253703997d569cef62f59f9d6a26558c352c5))
+* configure Bazel 9 workspace with modern ignore directives ([2cef6bb](https://github.com/defn/dev/commit/2cef6bb94049651fdd8c0f999bd6938fd7703fad))
+* enhance Coder template configuration ([0c3756a](https://github.com/defn/dev/commit/0c3756a84ef6ffbf666722b7154390519ba5dcd9))
+
+
+### Bug Fixes
+
+* add error handling to mise-list target ([ed79c55](https://github.com/defn/dev/commit/ed79c5584763013a609c3fd7b610904b4c9e8648))
+* handle Docker socket chown failure gracefully ([534010c](https://github.com/defn/dev/commit/534010c34f378cfa08e6cbf0a7254c404871f84c))
+* reduce AWS SSO login parallelism to sequential execution ([1424ab8](https://github.com/defn/dev/commit/1424ab83ca5554ab589a0c0e6cb59304a0be0f90))
+* separate code-server link protection domains with protocol ([918ad8c](https://github.com/defn/dev/commit/918ad8c2a0a5ea0923adc7182c8fc2dde6620f26))
+* set Docker socket ownership in entrypoint script ([92ab9f2](https://github.com/defn/dev/commit/92ab9f2adb83eaf7634a16cbd2b0e5b50edf1af3))
+* use coder_agent.main.id for env resources in template ([4c3caa6](https://github.com/defn/dev/commit/4c3caa660a2548d5864a02c888c417feb1e2b752))
+
 ## [1.45.0](https://github.com/defn/dev/compare/v1.44.0...v1.45.0) (2025-11-21)
 
 
