@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 
 function main {
+	mise upgrade --bump argocd
+
 	curl -sSL -o headlamp.yaml https://raw.githubusercontent.com/headlamp-k8s/headlamp/main/kubernetes-headlamp.yaml
 	curl -sSL -o argocd.yaml https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
 
