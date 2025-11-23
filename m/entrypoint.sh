@@ -7,6 +7,7 @@ function main {
 	source ~/.bash_profile
 
 	sudo install -d -m 0700 -o "$(id -un)" -g "$(id -gn)" dotfiles .local/share/code-server/extensions
+	sudo chown "$(id -un):$(id -gn)" /var/run/docker.sock
 
 	cd ~/m
 
