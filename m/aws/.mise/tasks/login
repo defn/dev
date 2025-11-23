@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
 function main {
-	runmany 4 'cd $1 && mise exec -- aws s3 ls || mise exec -- aws sso login' */org/
-	runmany 8 'cd $1 && mise exec -- aws s3 ls || mise exec -- aws sso login' */org/
+	runmany 1 'cd $1 && mise exec -- aws s3 ls || mise exec -- aws sso login' */org/
+	runmany 1 'cd $1 && mise exec -- aws s3 ls || mise exec -- aws sso login' */org/
 }
 
 main "$@"
