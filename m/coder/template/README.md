@@ -16,5 +16,6 @@ This directory contains Coder workspace templates for different development envi
 - `coder-defn-ssh-template/` - SSH-based workspace template
 
 Each template directory contains:
+
 - `cdk.tf` - Terraform configuration for the workspace
 - `mod` - Module definitions

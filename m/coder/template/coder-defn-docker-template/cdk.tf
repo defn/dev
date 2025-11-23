@@ -84,7 +84,7 @@ resource "coder_app" "preview" {
 }
 
 resource "coder_ai_task" "task" {
-  count    = data.coder_workspace.me.start_count
+  count  = data.coder_workspace.me.start_count
   app_id = module.claude-code[count.index].task_app_id
 }
 
