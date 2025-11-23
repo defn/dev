@@ -1,6 +1,6 @@
 ```
 m update
 m setup
-m pf-argocd
-m pf-headlamp
+m argocd
+m headlamp
 ```
