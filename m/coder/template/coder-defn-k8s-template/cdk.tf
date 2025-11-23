@@ -168,8 +168,8 @@ provider "kubernetes" {
 }
 
 variable "use_kubeconfig" {
-  type        = bool
-  default     = true
+  type    = bool
+  default = true
 }
 
 data "coder_parameter" "cpu" {
@@ -264,6 +264,7 @@ resource "kubernetes_deployment" "main" {
           "com.coder.user.username"    = lower(data.coder_workspace_owner.me.name)
         }
       }
+
       spec {
         security_context {
           run_as_user = 1000
@@ -275,6 +276,12 @@ resource "kubernetes_deployment" "main" {
           persistent_volume_claim {
             claim_name = lower("coder-${data.coder_workspace_owner.me.name}")
             read_only  = false
+          }
+        }
+        volume {
+          name = "docker-sock"
+          host_path {
+            path = "/var/run/docker.sock"
           }
         }
 
@@ -329,6 +336,10 @@ resource "kubernetes_deployment" "main" {
             name       = "user"
             read_only  = false
             sub_path   = "dotfiles"
+          }
+          volume_mount {
+            mount_path = "/var/run/docker.sock"
+            name       = "docker-sock"
           }
           security_context {
             run_as_user = "1000"
