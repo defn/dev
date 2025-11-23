@@ -17,50 +17,6 @@ data "coder_provisioner" "me" {}
 data "coder_workspace" "me" {}
 data "coder_workspace_owner" "me" {}
 
-variable "use_kubeconfig" {
-  type        = bool
-  description = ""
-  default     = true
-}
-
-data "coder_parameter" "cpu" {
-  name         = "cpu"
-  display_name = "CPU"
-  description  = "The number of CPU cores"
-  default      = "1"
-  icon         = "/icon/memory.svg"
-  mutable      = true
-  option {
-    name  = "1 Core"
-    value = "1"
-  }
-}
-
-data "coder_parameter" "memory" {
-  name         = "memory"
-  display_name = "Memory"
-  description  = "The amount of memory in GB"
-  default      = "1"
-  icon         = "/icon/memory.svg"
-  mutable      = true
-  option {
-    name  = "1 GB"
-    value = "1"
-  }
-}
-
-data "coder_parameter" "provider" {
-  default      = "k8s-pod"
-  description  = "The service provider to deploy the workspace in"
-  display_name = "Provider"
-  icon         = "/emojis/1f30e.png"
-  name         = "provider"
-  option {
-    name  = "Kubernetes Pod"
-    value = "k8s-pod"
-  }
-}
-
 data "coder_parameter" "homedir" {
   default      = "/home/ubuntu/m"
   description  = "home directory"
@@ -128,6 +84,7 @@ resource "coder_agent" "main" {
     cd ~/m
     bin/startup.sh || true
   EOT
+
   env = {
     GIT_AUTHOR_EMAIL    = "${data.coder_workspace_owner.me.email}"
     GIT_AUTHOR_NAME     = "${data.coder_workspace_owner.me.name}"
@@ -146,7 +103,47 @@ resource "coder_agent" "main" {
   }
 }
 
-// apps
+resource "coder_app" "preview" {
+  agent_id     = coder_agent.main.id
+  display_name = "preview"
+  icon         = "/icon/code.svg"
+  share        = "owner"
+  slug         = "preview"
+  subdomain    = true
+  url          = "http://localhost:3000"
+  order        = 1
+  open_in      = "tab"
+}
+
+resource "coder_ai_task" "task" {
+  count  = data.coder_workspace.me.start_count
+  app_id = module.claude-code[count.index].task_app_id
+}
+
+# https://registry.coder.com/modules/coder/claude-code
+module "claude-code" {
+  count    = data.coder_workspace.me.start_count
+  source   = "registry.coder.com/coder/claude-code/coder"
+  version  = "4.2.1"
+  agent_id = coder_agent.main.id
+
+  subdomain    = true
+  report_tasks = true
+  continue     = false
+  cli_app      = false
+
+  dangerously_skip_permissions = true
+  disable_autoupdater          = true
+  install_claude_code          = false
+  install_agentapi             = false
+
+  model         = "sonnet"
+  ai_prompt     = data.coder_parameter.ai_prompt.value
+  system_prompt = data.coder_parameter.system_prompt.value
+
+  workdir            = "/home/ubuntu"
+  pre_install_script = "~/bin/claude-setup.sh"
+}
 
 resource "coder_app" "code-server" {
   agent_id     = coder_agent.main.id
@@ -156,18 +153,65 @@ resource "coder_app" "code-server" {
   slug         = "cs"
   subdomain    = true
   url          = "http://localhost:8080/?folder=${data.coder_parameter.homedir.value}"
+  order        = 2
   healthcheck {
     interval  = 5
     threshold = 6
     url       = "http://localhost:8080/healthz"
   }
+  open_in = "tab"
+
+  auth = "token"
 }
 
-// provider
-
+// implementation
 provider "kubernetes" {
   config_path = var.use_kubeconfig == true ? "~/.kube/config" : null
 }
+
+variable "use_kubeconfig" {
+  type        = bool
+  default     = true
+}
+
+data "coder_parameter" "cpu" {
+  name         = "cpu"
+  display_name = "CPU"
+  description  = "The number of CPU cores"
+  default      = "1"
+  icon         = "/icon/memory.svg"
+  mutable      = true
+  option {
+    name  = "1 Core"
+    value = "1"
+  }
+}
+
+data "coder_parameter" "memory" {
+  name         = "memory"
+  display_name = "Memory"
+  description  = "The amount of memory in GB"
+  default      = "1"
+  icon         = "/icon/memory.svg"
+  mutable      = true
+  option {
+    name  = "1 GB"
+    value = "1"
+  }
+}
+
+data "coder_parameter" "provider" {
+  default      = "k8s-pod"
+  description  = "The service provider to deploy the workspace in"
+  display_name = "Provider"
+  icon         = "/emojis/1f30e.png"
+  name         = "provider"
+  option {
+    name  = "Kubernetes Pod"
+    value = "k8s-pod"
+  }
+}
+
 
 resource "kubernetes_deployment" "main" {
   count            = data.coder_workspace.me.start_count
@@ -333,3 +377,4 @@ resource "kubernetes_deployment" "main" {
     }
   }
 }
+

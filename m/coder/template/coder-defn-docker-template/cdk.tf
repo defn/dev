@@ -72,7 +72,27 @@ resource "coder_agent" "main" {
   arch = data.coder_parameter.arch.value
   os   = data.coder_parameter.os.value
 
-  auth = "token"
+  startup_script = <<-EOT
+    set -e
+    exec >>/tmp/coder-agent.log
+    exec 2>&1
+    cd
+    ssh -o StrictHostKeyChecking=no git@github.com true || true
+    git fetch origin
+    git reset --hard origin/main
+
+    cd ~/m
+    bin/startup.sh || true
+  EOT
+
+  env = {
+    GIT_AUTHOR_EMAIL    = "${data.coder_workspace_owner.me.email}"
+    GIT_AUTHOR_NAME     = "${data.coder_workspace_owner.me.name}"
+    GIT_COMMITTER_EMAIL = "${data.coder_workspace_owner.me.email}"
+    GIT_COMMITTER_NAME  = "${data.coder_workspace_owner.me.name}"
+    LC_ALL              = "C.UTF-8"
+    LOCAL_ARCHIVE       = "/usr/lib/locale/locale-archive"
+  }
 
   connection_timeout = 200
   display_apps {
@@ -140,23 +160,18 @@ resource "coder_app" "code-server" {
     url       = "http://localhost:8080/healthz"
   }
   open_in = "tab"
+
+  auth = "token"
 }
 
-//
-// params
-//
-
-//
-// custom
-//
-
-variable "docker_socket" {
-  default = ""
-  type    = string
-}
-
+// implementation
 provider "docker" {
   host = var.docker_socket != "" ? var.docker_socket : null
+}
+
+variable "docker_socket" {
+  type    = string
+  default = ""
 }
 
 resource "docker_volume" "dotfiles_volume" {
