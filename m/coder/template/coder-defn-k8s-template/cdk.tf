@@ -1,38 +1,26 @@
 terraform {
   required_providers {
+    coder = {
+      source = "coder/coder"
+    }
     kubernetes = {
       source = "hashicorp/kubernetes"
     }
-    coder = {
-      version = "2.1.0"
-      source  = "coder/coder"
-    }
   }
-  backend "local" {
-  }
+  backend "local" {}
 }
+
+provider "coder" {
+}
+
+data "coder_provisioner" "me" {}
+data "coder_workspace" "me" {}
+data "coder_workspace_owner" "me" {}
 
 variable "use_kubeconfig" {
   type        = bool
   description = ""
   default     = true
-}
-
-data "coder_parameter" "tutorial" {
-  name         = "tutorial"
-  display_name = "Tutorial"
-  description  = "Run the tutorial on workspace start"
-  default      = ""
-  icon         = "/icon/memory.svg"
-  mutable      = true
-  option {
-    name  = "yes"
-    value = "1"
-  }
-  option {
-    name  = "no"
-    value = ""
-  }
 }
 
 data "coder_parameter" "cpu" {
@@ -61,25 +49,6 @@ data "coder_parameter" "memory" {
   }
 }
 
-data "coder_parameter" "homedir" {
-  default      = "/home/ubuntu/m"
-  description  = "home directory"
-  display_name = "HOME dir"
-  icon         = "https://raw.githubusercontent.com/matifali/logos/main/cpu-3.svg"
-  mutable      = true
-  name         = "homedir"
-  type         = "string"
-}
-
-data "coder_parameter" "username" {
-  default      = "ubuntu"
-  description  = "Linux account name"
-  display_name = "Username"
-  icon         = "https://raw.githubusercontent.com/matifali/logos/main/cpu-3.svg"
-  name         = "username"
-  type         = "string"
-}
-
 data "coder_parameter" "provider" {
   default      = "k8s-pod"
   description  = "The service provider to deploy the workspace in"
@@ -92,16 +61,61 @@ data "coder_parameter" "provider" {
   }
 }
 
-// coder
-data "coder_workspace_owner" "me" {
+data "coder_parameter" "homedir" {
+  default      = "/home/ubuntu/m"
+  description  = "home directory"
+  display_name = "HOME dir"
+  icon         = "https://raw.githubusercontent.com/matifali/logos/main/cpu-3.svg"
+  mutable      = true
+  name         = "homedir"
+  type         = "string"
 }
 
-data "coder_workspace" "me" {
+data "coder_parameter" "os" {
+  default      = "linux"
+  description  = "Operating system"
+  display_name = "Operation system"
+  icon         = "https://raw.githubusercontent.com/matifali/logos/main/cpu-3.svg"
+  mutable      = true
+  name         = "os"
+  type         = "string"
+}
+
+data "coder_parameter" "arch" {
+  default      = "amd64"
+  description  = "CPU arch"
+  display_name = "CPU arch"
+  icon         = "https://raw.githubusercontent.com/matifali/logos/main/cpu-3.svg"
+  mutable      = true
+  name         = "arch"
+  type         = "string"
+}
+
+data "coder_parameter" "username" {
+  default      = "ubuntu"
+  description  = "Linux account name"
+  display_name = "Username"
+  icon         = "https://raw.githubusercontent.com/matifali/logos/main/cpu-3.svg"
+  name         = "username"
+  type         = "string"
+}
+
+data "coder_parameter" "ai_prompt" {
+  name    = "AI Prompt"
+  type    = "string"
+  mutable = false
+}
+
+data "coder_parameter" "system_prompt" {
+  default = "Be succinct, no marketing or kissing ass"
+  name    = "System Prompt"
+  mutable = false
 }
 
 resource "coder_agent" "main" {
-  arch           = "amd64"
-  os             = "linux"
+  arch = data.coder_parameter.arch.value
+  os   = data.coder_parameter.os.value
+
   startup_script = <<-EOT
     set -e
     exec >>/tmp/coder-agent.log
@@ -122,8 +136,10 @@ resource "coder_agent" "main" {
     LC_ALL              = "C.UTF-8"
     LOCAL_ARCHIVE       = "/usr/lib/locale/locale-archive"
   }
+
   connection_timeout = 200
   display_apps {
+    web_terminal    = false
     ssh_helper      = false
     vscode          = false
     vscode_insiders = false

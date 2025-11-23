@@ -47,6 +47,15 @@ data "coder_parameter" "arch" {
   type         = "string"
 }
 
+data "coder_parameter" "username" {
+  default      = "ubuntu"
+  description  = "Linux account name"
+  display_name = "Username"
+  icon         = "https://raw.githubusercontent.com/matifali/logos/main/cpu-3.svg"
+  name         = "username"
+  type         = "string"
+}
+
 data "coder_parameter" "ai_prompt" {
   name    = "AI Prompt"
   type    = "string"
@@ -61,8 +70,11 @@ data "coder_parameter" "system_prompt" {
 
 resource "coder_agent" "main" {
   arch = data.coder_parameter.arch.value
-  auth = "token"
   os   = data.coder_parameter.os.value
+
+  auth = "token"
+
+  connection_timeout = 200
   display_apps {
     web_terminal    = false
     ssh_helper      = false
