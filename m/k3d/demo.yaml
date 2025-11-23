@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: coder-amanibhavam
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  namespace: coder-amanibhavam
+  name: coder-amanibhavam
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 100Gi

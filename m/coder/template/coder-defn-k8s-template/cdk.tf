@@ -164,7 +164,7 @@ resource "coder_app" "code-server" {
 
 // implementation
 provider "kubernetes" {
-  config_path = var.use_kubeconfig == true ? "~/.kube/config" : null
+  config_path = var.use_kubeconfig == true ? "/home/ubuntu/m/k3d/.kube/config" : null
 }
 
 variable "use_kubeconfig" {
@@ -280,9 +280,9 @@ resource "kubernetes_deployment" "main" {
 
         container {
           name              = "coder-agent"
-          image             = "169.254.32.1:5000/defn/dev:latest"
+          image             = "ghcr.io/defn/dev:latest"
           image_pull_policy = "Always"
-          command           = ["/bin/tini", "--", "bash", "-c", "cd; source .bash_profile; exec j create-coder-agent-sidecar"]
+          command           = ["/bin/tini", "--", "bash", "-c", "cd; source .bash_profile; cd m; exec ./entrypoint.sh"]
 
           security_context {
             run_as_user = "1000"
