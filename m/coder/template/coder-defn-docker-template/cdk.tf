@@ -83,6 +83,11 @@ resource "coder_app" "preview" {
   open_in      = "tab"
 }
 
+resource "coder_ai_task" "task" {
+  count    = data.coder_workspace.me.start_count
+  app_id = module.claude-code[count.index].task_app_id
+}
+
 # https://registry.coder.com/modules/coder/claude-code
 module "claude-code" {
   count    = data.coder_workspace.me.start_count
