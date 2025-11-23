@@ -81,6 +81,7 @@
         - { path: "/home/{{username}}/.cache/go-mod", mode: "0755" }
         - { path: "/home/{{username}}/.cache/go-build", mode: "0755" }
         - { path: "/home/{{username}}/.cache/helm", mode: "0755" }
+        - { path: "/home/{{username}}/.terraform.d/plugin-cache", mode: "0755" }
         - { path: "/home/{{username}}/work", mode: "0755" }
         - { path: "/run/user/{{user_id}}", mode: "0700" }
         - { path: "/run/user/{{user_id}}/gnupg", mode: "0700" }
