@@ -160,8 +160,6 @@ resource "coder_app" "code-server" {
     url       = "http://localhost:8080/healthz"
   }
   open_in = "tab"
-
-  auth = "token"
 }
 
 // implementation

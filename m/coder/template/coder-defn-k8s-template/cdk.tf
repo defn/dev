@@ -160,8 +160,6 @@ resource "coder_app" "code-server" {
     url       = "http://localhost:8080/healthz"
   }
   open_in = "tab"
-
-  auth = "token"
 }
 
 // implementation
@@ -311,7 +309,7 @@ resource "kubernetes_deployment" "main" {
           name              = "dev"
           image             = "169.254.32.1:5000/defn/dev:latest"
           image_pull_policy = "Always"
-          command           = ["/bin/tini", "--", "bash", "-c", "cd; source .bash_profile; exec j create-code-server-sidecar \"${data.coder_parameter.tutorial.value}\""]
+          command           = ["/bin/tini", "--", "bash", "-c", "cd; source .bash_profile; exec j create-code-server-sidecar"]
 
           // chown these mounts in m/bin/startup.sh
           volume_mount {
