@@ -7,6 +7,7 @@ Terraform configurations for AWS infrastructure across 14 organizations and ~145
 ```
 infra/
 ├── global/           # Global/cross-account infrastructure
+├── output/           # Centralized remote state aggregation
 ├── org-{name}/       # Organization-level resources (14 orgs)
 ├── acc-{org}-{acct}/ # Account-level resources (~145 accounts)
 └── mise.toml         # Environment configuration
@@ -17,6 +18,15 @@ infra/
 ### global/
 
 Cross-account and global infrastructure resources.
+
+### output/
+
+Centralized Terraform configuration that aggregates remote state outputs from all infrastructure stacks. Uses `terraform_remote_state` data sources to query outputs from:
+- `global/` stack
+- All 14 `org-{name}/` stacks
+- All ~145 `acc-{org}-{account}/` stacks
+
+Provides a single aggregated output `all` containing outputs from every managed stack for centralized state querying.
 
 ### org-{name}/
 
@@ -60,16 +70,23 @@ terraform plan
 
 ## Backend Configuration
 
-All Terraform state is stored in S3:
+All Terraform state is stored in S3 with **file-based locking**:
 
-- **Bucket**: `dfn-defn-terraform-state`
-- **DynamoDB Table**: `dfn-defn-terraform-state-lock`
-- **Region**: `us-east-1`
-- **Profile**: `defn-org`
+```hcl
+backend "s3" {
+  bucket       = "dfn-defn-terraform-state"
+  use_lockfile = true
+  encrypt      = true
+  key          = "stacks/{directory}/terraform.tfstate"
+  profile      = "defn-org"
+  region       = "us-east-1"
+}
+```
 
 State files are organized by path:
 
 - `stacks/global/terraform.tfstate`
+- `stacks/output/terraform.tfstate`
 - `stacks/org-{name}/terraform.tfstate`
 - `stacks/acc-{org}-{account}/terraform.tfstate`
 
