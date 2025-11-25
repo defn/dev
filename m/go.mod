@@ -12,8 +12,8 @@ require (
 	github.com/joho/godotenv v1.5.1
 	github.com/lucasb-eyer/go-colorful v1.3.0
 	github.com/muesli/gamut v0.3.1
-	github.com/riverqueue/river v0.27.1
-	github.com/riverqueue/river/riverdriver/riverpgxv5 v0.27.1
+	github.com/riverqueue/river v0.28.0
+	github.com/riverqueue/river/riverdriver/riverpgxv5 v0.28.0
 	github.com/spf13/cobra v1.10.1
 	github.com/spf13/viper v1.21.0
 	github.com/teilomillet/gollm v0.1.9
@@ -78,12 +78,12 @@ require (
 	github.com/pelletier/go-toml/v2 v2.2.4 // indirect
 	github.com/pkoukk/tiktoken-go v0.1.8 // indirect
 	github.com/pmezard/go-difflib v1.0.0 // indirect
-	github.com/protocolbuffers/txtpbfmt v0.0.0-20251016062345-16587c79cd91 // indirect
+	github.com/protocolbuffers/txtpbfmt v0.0.0-20251124094003-fcb97cc64c7b // indirect
 	github.com/quic-go/qpack v0.6.0 // indirect
 	github.com/quic-go/quic-go v0.57.0 // indirect
-	github.com/riverqueue/river/riverdriver v0.27.1 // indirect
-	github.com/riverqueue/river/rivershared v0.27.1 // indirect
-	github.com/riverqueue/river/rivertype v0.27.1 // indirect
+	github.com/riverqueue/river/riverdriver v0.28.0 // indirect
+	github.com/riverqueue/river/rivershared v0.28.0 // indirect
+	github.com/riverqueue/river/rivertype v0.28.0 // indirect
 	github.com/rivo/uniseg v0.4.7 // indirect
 	github.com/rogpeppe/go-internal v1.14.1 // indirect
 	github.com/sagikazarmark/locafero v0.12.0 // indirect
@@ -111,7 +111,6 @@ require (
 	go.yaml.in/yaml/v3 v3.0.4 // indirect
 	golang.org/x/arch v0.23.0 // indirect
 	golang.org/x/crypto v0.45.0 // indirect
-	golang.org/x/mod v0.30.0 // indirect
 	golang.org/x/net v0.47.0 // indirect
 	golang.org/x/oauth2 v0.33.0 // indirect
 	golang.org/x/sync v0.18.0 // indirect

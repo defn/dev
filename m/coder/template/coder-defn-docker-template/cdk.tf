@@ -127,32 +127,7 @@ resource "coder_app" "preview" {
 
 resource "coder_ai_task" "task" {
   count  = data.coder_workspace.me.start_count
-  app_id = module.claude-code[count.index].task_app_id
-}
-
-# https://registry.coder.com/modules/coder/claude-code
-module "claude-code" {
-  count    = data.coder_workspace.me.start_count
-  source   = "registry.coder.com/coder/claude-code/coder"
-  version  = "4.2.1"
-  agent_id = coder_agent.main.id
-
-  subdomain    = true
-  report_tasks = true
-  continue     = false
-  cli_app      = false
-
-  dangerously_skip_permissions = true
-  disable_autoupdater          = true
-  install_claude_code          = false
-  install_agentapi             = false
-
-  model         = "sonnet"
-  ai_prompt     = data.coder_parameter.ai_prompt.value
-  system_prompt = data.coder_parameter.system_prompt.value
-
-  workdir            = "/home/ubuntu"
-  pre_install_script = "~/bin/claude-setup.sh"
+  app_id = coder_app.code-server.id
 }
 
 resource "coder_app" "code-server" {
@@ -163,7 +138,6 @@ resource "coder_app" "code-server" {
   slug         = "cs"
   subdomain    = true
   url          = "http://localhost:8080/?folder=${data.coder_parameter.homedir.value}"
-  order        = 2
   healthcheck {
     interval  = 5
     threshold = 6
