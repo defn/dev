@@ -22,6 +22,10 @@ provider "aws" {
   region  = "us-east-1"
 }
 
+data "aws_caller_identity" "current" {
+  provider = aws.fogg-net
+}
+
 variable "config" {}
 
 module "fogg-net" {

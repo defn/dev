@@ -87,6 +87,8 @@ infra_org_terraform: |-
   	region  = "us-east-2"
   }
 
+  data "aws_caller_identity" "current" {}
+
   locals {
   	sso_instance_arn  = data.aws_ssoadmin_instances.sso_instance.arns
   	sso_instance_isid = data.aws_ssoadmin_instances.sso_instance.identity_store_ids
@@ -353,6 +355,10 @@ infra_acc_terraform: |-
     profile = "helix-org"
     alias   = "helix-org"
     region  = "us-east-1"
+  }
+
+  data "aws_caller_identity" "current" {
+  	provider = aws.helix-org
   }
 
   variable "config" {}

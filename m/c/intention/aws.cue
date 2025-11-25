@@ -125,6 +125,8 @@ provider "aws" {
 	region  = "\(sso_region)"
 }
 
+data "aws_caller_identity" "current" {}
+
 locals {
 	sso_instance_arn  = data.aws_ssoadmin_instances.sso_instance.arns
 	sso_instance_isid = data.aws_ssoadmin_instances.sso_instance.identity_store_ids
@@ -241,6 +243,10 @@ provider "aws" {
   profile = "\(org)-\(account)"
   alias   = "\(org)-\(account)"
   region  = "us-east-1"
+}
+
+data "aws_caller_identity" "current" {
+	provider = aws.\(org)-\(account)
 }
 
 variable "config" {}

@@ -156,6 +156,8 @@ config:
               	region  = "us-west-2"
               }
 
+              data "aws_caller_identity" "current" {}
+
               locals {
               	sso_instance_arn  = data.aws_ssoadmin_instances.sso_instance.arns
               	sso_instance_isid = data.aws_ssoadmin_instances.sso_instance.identity_store_ids
@@ -806,6 +808,10 @@ config:
                 region  = "us-east-1"
               }
 
+              data "aws_caller_identity" "current" {
+              	provider = aws.chamber-org
+              }
+
               variable "config" {}
 
               module "chamber-org" {
@@ -924,6 +930,10 @@ config:
                 profile = "chamber-1"
                 alias   = "chamber-1"
                 region  = "us-east-1"
+              }
+
+              data "aws_caller_identity" "current" {
+              	provider = aws.chamber-1
               }
 
               variable "config" {}
@@ -1046,6 +1056,10 @@ config:
                 region  = "us-east-1"
               }
 
+              data "aws_caller_identity" "current" {
+              	provider = aws.chamber-2
+              }
+
               variable "config" {}
 
               module "chamber-2" {
@@ -1164,6 +1178,10 @@ config:
                 profile = "chamber-3"
                 alias   = "chamber-3"
                 region  = "us-east-1"
+              }
+
+              data "aws_caller_identity" "current" {
+              	provider = aws.chamber-3
               }
 
               variable "config" {}
@@ -1286,6 +1304,10 @@ config:
                 region  = "us-east-1"
               }
 
+              data "aws_caller_identity" "current" {
+              	provider = aws.chamber-4
+              }
+
               variable "config" {}
 
               module "chamber-4" {
@@ -1404,6 +1426,10 @@ config:
                 profile = "chamber-5"
                 alias   = "chamber-5"
                 region  = "us-east-1"
+              }
+
+              data "aws_caller_identity" "current" {
+              	provider = aws.chamber-5
               }
 
               variable "config" {}
@@ -1526,6 +1552,10 @@ config:
                 region  = "us-east-1"
               }
 
+              data "aws_caller_identity" "current" {
+              	provider = aws.chamber-6
+              }
+
               variable "config" {}
 
               module "chamber-6" {
@@ -1644,6 +1674,10 @@ config:
                 profile = "chamber-7"
                 alias   = "chamber-7"
                 region  = "us-east-1"
+              }
+
+              data "aws_caller_identity" "current" {
+              	provider = aws.chamber-7
               }
 
               variable "config" {}
@@ -1766,6 +1800,10 @@ config:
                 region  = "us-east-1"
               }
 
+              data "aws_caller_identity" "current" {
+              	provider = aws.chamber-8
+              }
+
               variable "config" {}
 
               module "chamber-8" {
@@ -1884,6 +1922,10 @@ config:
                 profile = "chamber-9"
                 alias   = "chamber-9"
                 region  = "us-east-1"
+              }
+
+              data "aws_caller_identity" "current" {
+              	provider = aws.chamber-9
               }
 
               variable "config" {}
@@ -2006,6 +2048,10 @@ config:
                 region  = "us-east-1"
               }
 
+              data "aws_caller_identity" "current" {
+              	provider = aws.chamber-a
+              }
+
               variable "config" {}
 
               module "chamber-a" {
@@ -2124,6 +2170,10 @@ config:
                 profile = "chamber-b"
                 alias   = "chamber-b"
                 region  = "us-east-1"
+              }
+
+              data "aws_caller_identity" "current" {
+              	provider = aws.chamber-b
               }
 
               variable "config" {}
@@ -2246,6 +2296,10 @@ config:
                 region  = "us-east-1"
               }
 
+              data "aws_caller_identity" "current" {
+              	provider = aws.chamber-c
+              }
+
               variable "config" {}
 
               module "chamber-c" {
@@ -2364,6 +2418,10 @@ config:
                 profile = "chamber-d"
                 alias   = "chamber-d"
                 region  = "us-east-1"
+              }
+
+              data "aws_caller_identity" "current" {
+              	provider = aws.chamber-d
               }
 
               variable "config" {}
@@ -2486,6 +2544,10 @@ config:
                 region  = "us-east-1"
               }
 
+              data "aws_caller_identity" "current" {
+              	provider = aws.chamber-e
+              }
+
               variable "config" {}
 
               module "chamber-e" {
@@ -2604,6 +2666,10 @@ config:
                 profile = "chamber-f"
                 alias   = "chamber-f"
                 region  = "us-east-1"
+              }
+
+              data "aws_caller_identity" "current" {
+              	provider = aws.chamber-f
               }
 
               variable "config" {}
@@ -2726,6 +2792,10 @@ config:
                 region  = "us-east-1"
               }
 
+              data "aws_caller_identity" "current" {
+              	provider = aws.chamber-g
+              }
+
               variable "config" {}
 
               module "chamber-g" {
@@ -2844,6 +2914,10 @@ config:
                 profile = "chamber-h"
                 alias   = "chamber-h"
                 region  = "us-east-1"
+              }
+
+              data "aws_caller_identity" "current" {
+              	provider = aws.chamber-h
               }
 
               variable "config" {}
@@ -2966,6 +3040,10 @@ config:
                 region  = "us-east-1"
               }
 
+              data "aws_caller_identity" "current" {
+              	provider = aws.chamber-i
+              }
+
               variable "config" {}
 
               module "chamber-i" {
@@ -3084,6 +3162,10 @@ config:
                 profile = "chamber-j"
                 alias   = "chamber-j"
                 region  = "us-east-1"
+              }
+
+              data "aws_caller_identity" "current" {
+              	provider = aws.chamber-j
               }
 
               variable "config" {}
@@ -3206,6 +3288,10 @@ config:
                 region  = "us-east-1"
               }
 
+              data "aws_caller_identity" "current" {
+              	provider = aws.chamber-l
+              }
+
               variable "config" {}
 
               module "chamber-l" {
@@ -3324,6 +3410,10 @@ config:
                 profile = "chamber-m"
                 alias   = "chamber-m"
                 region  = "us-east-1"
+              }
+
+              data "aws_caller_identity" "current" {
+              	provider = aws.chamber-m
               }
 
               variable "config" {}
@@ -3446,6 +3536,10 @@ config:
                 region  = "us-east-1"
               }
 
+              data "aws_caller_identity" "current" {
+              	provider = aws.chamber-n
+              }
+
               variable "config" {}
 
               module "chamber-n" {
@@ -3564,6 +3658,10 @@ config:
                 profile = "chamber-o"
                 alias   = "chamber-o"
                 region  = "us-east-1"
+              }
+
+              data "aws_caller_identity" "current" {
+              	provider = aws.chamber-o
               }
 
               variable "config" {}
@@ -3686,6 +3784,10 @@ config:
                 region  = "us-east-1"
               }
 
+              data "aws_caller_identity" "current" {
+              	provider = aws.chamber-p
+              }
+
               variable "config" {}
 
               module "chamber-p" {
@@ -3804,6 +3906,10 @@ config:
                 profile = "chamber-q"
                 alias   = "chamber-q"
                 region  = "us-east-1"
+              }
+
+              data "aws_caller_identity" "current" {
+              	provider = aws.chamber-q
               }
 
               variable "config" {}
@@ -3926,6 +4032,10 @@ config:
                 region  = "us-east-1"
               }
 
+              data "aws_caller_identity" "current" {
+              	provider = aws.chamber-r
+              }
+
               variable "config" {}
 
               module "chamber-r" {
@@ -4044,6 +4154,10 @@ config:
                 profile = "chamber-s"
                 alias   = "chamber-s"
                 region  = "us-east-1"
+              }
+
+              data "aws_caller_identity" "current" {
+              	provider = aws.chamber-s
               }
 
               variable "config" {}
@@ -4166,6 +4280,10 @@ config:
                 region  = "us-east-1"
               }
 
+              data "aws_caller_identity" "current" {
+              	provider = aws.chamber-t
+              }
+
               variable "config" {}
 
               module "chamber-t" {
@@ -4284,6 +4402,10 @@ config:
                 profile = "chamber-u"
                 alias   = "chamber-u"
                 region  = "us-east-1"
+              }
+
+              data "aws_caller_identity" "current" {
+              	provider = aws.chamber-u
               }
 
               variable "config" {}
@@ -4406,6 +4528,10 @@ config:
                 region  = "us-east-1"
               }
 
+              data "aws_caller_identity" "current" {
+              	provider = aws.chamber-v
+              }
+
               variable "config" {}
 
               module "chamber-v" {
@@ -4524,6 +4650,10 @@ config:
                 profile = "chamber-w"
                 alias   = "chamber-w"
                 region  = "us-east-1"
+              }
+
+              data "aws_caller_identity" "current" {
+              	provider = aws.chamber-w
               }
 
               variable "config" {}
@@ -4646,6 +4776,10 @@ config:
                 region  = "us-east-1"
               }
 
+              data "aws_caller_identity" "current" {
+              	provider = aws.chamber-x
+              }
+
               variable "config" {}
 
               module "chamber-x" {
@@ -4764,6 +4898,10 @@ config:
                 profile = "chamber-y"
                 alias   = "chamber-y"
                 region  = "us-east-1"
+              }
+
+              data "aws_caller_identity" "current" {
+              	provider = aws.chamber-y
               }
 
               variable "config" {}
@@ -4886,6 +5024,10 @@ config:
                 region  = "us-east-1"
               }
 
+              data "aws_caller_identity" "current" {
+              	provider = aws.chamber-z
+              }
+
               variable "config" {}
 
               module "chamber-z" {
@@ -4997,6 +5139,8 @@ config:
               	profile = "circus-org"
               	region  = "us-west-2"
               }
+
+              data "aws_caller_identity" "current" {}
 
               locals {
               	sso_instance_arn  = data.aws_ssoadmin_instances.sso_instance.arns
@@ -5168,6 +5312,10 @@ config:
                 region  = "us-east-1"
               }
 
+              data "aws_caller_identity" "current" {
+              	provider = aws.circus-org
+              }
+
               variable "config" {}
 
               module "circus-org" {
@@ -5286,6 +5434,10 @@ config:
                 profile = "circus-lib"
                 alias   = "circus-lib"
                 region  = "us-east-1"
+              }
+
+              data "aws_caller_identity" "current" {
+              	provider = aws.circus-lib
               }
 
               variable "config" {}
@@ -5408,6 +5560,10 @@ config:
                 region  = "us-east-1"
               }
 
+              data "aws_caller_identity" "current" {
+              	provider = aws.circus-log
+              }
+
               variable "config" {}
 
               module "circus-log" {
@@ -5526,6 +5682,10 @@ config:
                 profile = "circus-net"
                 alias   = "circus-net"
                 region  = "us-east-1"
+              }
+
+              data "aws_caller_identity" "current" {
+              	provider = aws.circus-net
               }
 
               variable "config" {}
@@ -5648,6 +5808,10 @@ config:
                 region  = "us-east-1"
               }
 
+              data "aws_caller_identity" "current" {
+              	provider = aws.circus-ops
+              }
+
               variable "config" {}
 
               module "circus-ops" {
@@ -5759,6 +5923,8 @@ config:
               	profile = "coil-org"
               	region  = "us-east-1"
               }
+
+              data "aws_caller_identity" "current" {}
 
               locals {
               	sso_instance_arn  = data.aws_ssoadmin_instances.sso_instance.arns
@@ -5920,6 +6086,10 @@ config:
                 region  = "us-east-1"
               }
 
+              data "aws_caller_identity" "current" {
+              	provider = aws.coil-org
+              }
+
               variable "config" {}
 
               module "coil-org" {
@@ -6040,6 +6210,10 @@ config:
                 profile = "coil-hub"
                 alias   = "coil-hub"
                 region  = "us-east-1"
+              }
+
+              data "aws_caller_identity" "current" {
+              	provider = aws.coil-hub
               }
 
               variable "config" {}
@@ -6164,6 +6338,10 @@ config:
                 region  = "us-east-1"
               }
 
+              data "aws_caller_identity" "current" {
+              	provider = aws.coil-lib
+              }
+
               variable "config" {}
 
               module "coil-lib" {
@@ -6286,6 +6464,10 @@ config:
                 region  = "us-east-1"
               }
 
+              data "aws_caller_identity" "current" {
+              	provider = aws.coil-net
+              }
+
               variable "config" {}
 
               module "coil-net" {
@@ -6397,6 +6579,8 @@ config:
               	profile = "curl-org"
               	region  = "us-west-2"
               }
+
+              data "aws_caller_identity" "current" {}
 
               locals {
               	sso_instance_arn  = data.aws_ssoadmin_instances.sso_instance.arns
@@ -6558,6 +6742,10 @@ config:
                 region  = "us-east-1"
               }
 
+              data "aws_caller_identity" "current" {
+              	provider = aws.curl-org
+              }
+
               variable "config" {}
 
               module "curl-org" {
@@ -6678,6 +6866,10 @@ config:
                 profile = "curl-hub"
                 alias   = "curl-hub"
                 region  = "us-east-1"
+              }
+
+              data "aws_caller_identity" "current" {
+              	provider = aws.curl-hub
               }
 
               variable "config" {}
@@ -6802,6 +6994,10 @@ config:
                 region  = "us-east-1"
               }
 
+              data "aws_caller_identity" "current" {
+              	provider = aws.curl-lib
+              }
+
               variable "config" {}
 
               module "curl-lib" {
@@ -6924,6 +7120,10 @@ config:
                 region  = "us-east-1"
               }
 
+              data "aws_caller_identity" "current" {
+              	provider = aws.curl-net
+              }
+
               variable "config" {}
 
               module "curl-net" {
@@ -7029,6 +7229,8 @@ config:
               	region  = "us-east-2"
               }
 
+              data "aws_caller_identity" "current" {}
+
               locals {
               	sso_instance_arn  = data.aws_ssoadmin_instances.sso_instance.arns
               	sso_instance_isid = data.aws_ssoadmin_instances.sso_instance.identity_store_ids
@@ -7133,6 +7335,10 @@ config:
                 profile = "defn-org"
                 alias   = "defn-org"
                 region  = "us-east-1"
+              }
+
+              data "aws_caller_identity" "current" {
+              	provider = aws.defn-org
               }
 
               variable "config" {}
@@ -7246,6 +7452,8 @@ config:
               	profile = "fogg-org"
               	region  = "us-west-2"
               }
+
+              data "aws_caller_identity" "current" {}
 
               locals {
               	sso_instance_arn  = data.aws_ssoadmin_instances.sso_instance.arns
@@ -7497,6 +7705,10 @@ config:
                 region  = "us-east-1"
               }
 
+              data "aws_caller_identity" "current" {
+              	provider = aws.fogg-org
+              }
+
               variable "config" {}
 
               module "fogg-org" {
@@ -7615,6 +7827,10 @@ config:
                 profile = "fogg-ci"
                 alias   = "fogg-ci"
                 region  = "us-east-1"
+              }
+
+              data "aws_caller_identity" "current" {
+              	provider = aws.fogg-ci
               }
 
               variable "config" {}
@@ -7737,6 +7953,10 @@ config:
                 region  = "us-east-1"
               }
 
+              data "aws_caller_identity" "current" {
+              	provider = aws.fogg-dev
+              }
+
               variable "config" {}
 
               module "fogg-dev" {
@@ -7855,6 +8075,10 @@ config:
                 profile = "fogg-hub"
                 alias   = "fogg-hub"
                 region  = "us-east-1"
+              }
+
+              data "aws_caller_identity" "current" {
+              	provider = aws.fogg-hub
               }
 
               variable "config" {}
@@ -7977,6 +8201,10 @@ config:
                 region  = "us-east-1"
               }
 
+              data "aws_caller_identity" "current" {
+              	provider = aws.fogg-lib
+              }
+
               variable "config" {}
 
               module "fogg-lib" {
@@ -8095,6 +8323,10 @@ config:
                 profile = "fogg-log"
                 alias   = "fogg-log"
                 region  = "us-east-1"
+              }
+
+              data "aws_caller_identity" "current" {
+              	provider = aws.fogg-log
               }
 
               variable "config" {}
@@ -8217,6 +8449,10 @@ config:
                 region  = "us-east-1"
               }
 
+              data "aws_caller_identity" "current" {
+              	provider = aws.fogg-net
+              }
+
               variable "config" {}
 
               module "fogg-net" {
@@ -8335,6 +8571,10 @@ config:
                 profile = "fogg-ops"
                 alias   = "fogg-ops"
                 region  = "us-east-1"
+              }
+
+              data "aws_caller_identity" "current" {
+              	provider = aws.fogg-ops
               }
 
               variable "config" {}
@@ -8457,6 +8697,10 @@ config:
                 region  = "us-east-1"
               }
 
+              data "aws_caller_identity" "current" {
+              	provider = aws.fogg-prod
+              }
+
               variable "config" {}
 
               module "fogg-prod" {
@@ -8577,6 +8821,10 @@ config:
                 region  = "us-east-1"
               }
 
+              data "aws_caller_identity" "current" {
+              	provider = aws.fogg-pub
+              }
+
               variable "config" {}
 
               module "fogg-pub" {
@@ -8688,6 +8936,8 @@ config:
               	profile = "gyre-org"
               	region  = "us-east-2"
               }
+
+              data "aws_caller_identity" "current" {}
 
               locals {
               	sso_instance_arn  = data.aws_ssoadmin_instances.sso_instance.arns
@@ -8813,6 +9063,10 @@ config:
                 region  = "us-east-1"
               }
 
+              data "aws_caller_identity" "current" {
+              	provider = aws.gyre-org
+              }
+
               variable "config" {}
 
               module "gyre-org" {
@@ -8935,6 +9189,10 @@ config:
                 region  = "us-east-1"
               }
 
+              data "aws_caller_identity" "current" {
+              	provider = aws.gyre-ops
+              }
+
               variable "config" {}
 
               module "gyre-ops" {
@@ -9046,6 +9304,8 @@ config:
               	profile = "helix-org"
               	region  = "us-east-2"
               }
+
+              data "aws_caller_identity" "current" {}
 
               locals {
               	sso_instance_arn  = data.aws_ssoadmin_instances.sso_instance.arns
@@ -9315,6 +9575,10 @@ config:
                 region  = "us-east-1"
               }
 
+              data "aws_caller_identity" "current" {
+              	provider = aws.helix-org
+              }
+
               variable "config" {}
 
               module "helix-org" {
@@ -9435,6 +9699,10 @@ config:
                 profile = "helix-ci"
                 alias   = "helix-ci"
                 region  = "us-east-1"
+              }
+
+              data "aws_caller_identity" "current" {
+              	provider = aws.helix-ci
               }
 
               variable "config" {}
@@ -9559,6 +9827,10 @@ config:
                 region  = "us-east-1"
               }
 
+              data "aws_caller_identity" "current" {
+              	provider = aws.helix-dev
+              }
+
               variable "config" {}
 
               module "helix-dev" {
@@ -9679,6 +9951,10 @@ config:
                 profile = "helix-hub"
                 alias   = "helix-hub"
                 region  = "us-east-1"
+              }
+
+              data "aws_caller_identity" "current" {
+              	provider = aws.helix-hub
               }
 
               variable "config" {}
@@ -9803,6 +10079,10 @@ config:
                 region  = "us-east-1"
               }
 
+              data "aws_caller_identity" "current" {
+              	provider = aws.helix-lib
+              }
+
               variable "config" {}
 
               module "helix-lib" {
@@ -9923,6 +10203,10 @@ config:
                 profile = "helix-log"
                 alias   = "helix-log"
                 region  = "us-east-1"
+              }
+
+              data "aws_caller_identity" "current" {
+              	provider = aws.helix-log
               }
 
               variable "config" {}
@@ -10047,6 +10331,10 @@ config:
                 region  = "us-east-1"
               }
 
+              data "aws_caller_identity" "current" {
+              	provider = aws.helix-net
+              }
+
               variable "config" {}
 
               module "helix-net" {
@@ -10167,6 +10455,10 @@ config:
                 profile = "helix-ops"
                 alias   = "helix-ops"
                 region  = "us-east-1"
+              }
+
+              data "aws_caller_identity" "current" {
+              	provider = aws.helix-ops
               }
 
               variable "config" {}
@@ -10291,6 +10583,10 @@ config:
                 region  = "us-east-1"
               }
 
+              data "aws_caller_identity" "current" {
+              	provider = aws.helix-prod
+              }
+
               variable "config" {}
 
               module "helix-prod" {
@@ -10413,6 +10709,10 @@ config:
                 region  = "us-east-1"
               }
 
+              data "aws_caller_identity" "current" {
+              	provider = aws.helix-pub
+              }
+
               variable "config" {}
 
               module "helix-pub" {
@@ -10524,6 +10824,8 @@ config:
               	profile = "imma-org"
               	region  = "us-west-2"
               }
+
+              data "aws_caller_identity" "current" {}
 
               locals {
               	sso_instance_arn  = data.aws_ssoadmin_instances.sso_instance.arns
@@ -10711,6 +11013,10 @@ config:
                 region  = "us-east-1"
               }
 
+              data "aws_caller_identity" "current" {
+              	provider = aws.imma-org
+              }
+
               variable "config" {}
 
               module "imma-org" {
@@ -10829,6 +11135,10 @@ config:
                 profile = "imma-dev"
                 alias   = "imma-dev"
                 region  = "us-east-1"
+              }
+
+              data "aws_caller_identity" "current" {
+              	provider = aws.imma-dev
               }
 
               variable "config" {}
@@ -10951,6 +11261,10 @@ config:
                 region  = "us-east-1"
               }
 
+              data "aws_caller_identity" "current" {
+              	provider = aws.imma-lib
+              }
+
               variable "config" {}
 
               module "imma-lib" {
@@ -11069,6 +11383,10 @@ config:
                 profile = "imma-log"
                 alias   = "imma-log"
                 region  = "us-east-1"
+              }
+
+              data "aws_caller_identity" "current" {
+              	provider = aws.imma-log
               }
 
               variable "config" {}
@@ -11191,6 +11509,10 @@ config:
                 region  = "us-east-1"
               }
 
+              data "aws_caller_identity" "current" {
+              	provider = aws.imma-net
+              }
+
               variable "config" {}
 
               module "imma-net" {
@@ -11311,6 +11633,10 @@ config:
                 region  = "us-east-1"
               }
 
+              data "aws_caller_identity" "current" {
+              	provider = aws.imma-pub
+              }
+
               variable "config" {}
 
               module "imma-pub" {
@@ -11422,6 +11748,8 @@ config:
               	profile = "immanent-org"
               	region  = "us-west-2"
               }
+
+              data "aws_caller_identity" "current" {}
 
               locals {
               	sso_instance_arn  = data.aws_ssoadmin_instances.sso_instance.arns
@@ -11705,6 +12033,10 @@ config:
                 region  = "us-east-1"
               }
 
+              data "aws_caller_identity" "current" {
+              	provider = aws.immanent-org
+              }
+
               variable "config" {}
 
               module "immanent-org" {
@@ -11823,6 +12155,10 @@ config:
                 profile = "immanent-changer"
                 alias   = "immanent-changer"
                 region  = "us-east-1"
+              }
+
+              data "aws_caller_identity" "current" {
+              	provider = aws.immanent-changer
               }
 
               variable "config" {}
@@ -11945,6 +12281,10 @@ config:
                 region  = "us-east-1"
               }
 
+              data "aws_caller_identity" "current" {
+              	provider = aws.immanent-chanter
+              }
+
               variable "config" {}
 
               module "immanent-chanter" {
@@ -12063,6 +12403,10 @@ config:
                 profile = "immanent-doorkeeper"
                 alias   = "immanent-doorkeeper"
                 region  = "us-east-1"
+              }
+
+              data "aws_caller_identity" "current" {
+              	provider = aws.immanent-doorkeeper
               }
 
               variable "config" {}
@@ -12185,6 +12529,10 @@ config:
                 region  = "us-east-1"
               }
 
+              data "aws_caller_identity" "current" {
+              	provider = aws.immanent-ged
+              }
+
               variable "config" {}
 
               module "immanent-ged" {
@@ -12303,6 +12651,10 @@ config:
                 profile = "immanent-hand"
                 alias   = "immanent-hand"
                 region  = "us-east-1"
+              }
+
+              data "aws_caller_identity" "current" {
+              	provider = aws.immanent-hand
               }
 
               variable "config" {}
@@ -12425,6 +12777,10 @@ config:
                 region  = "us-east-1"
               }
 
+              data "aws_caller_identity" "current" {
+              	provider = aws.immanent-herbal
+              }
+
               variable "config" {}
 
               module "immanent-herbal" {
@@ -12543,6 +12899,10 @@ config:
                 profile = "immanent-namer"
                 alias   = "immanent-namer"
                 region  = "us-east-1"
+              }
+
+              data "aws_caller_identity" "current" {
+              	provider = aws.immanent-namer
               }
 
               variable "config" {}
@@ -12665,6 +13025,10 @@ config:
                 region  = "us-east-1"
               }
 
+              data "aws_caller_identity" "current" {
+              	provider = aws.immanent-patterner
+              }
+
               variable "config" {}
 
               module "immanent-patterner" {
@@ -12783,6 +13147,10 @@ config:
                 profile = "immanent-roke"
                 alias   = "immanent-roke"
                 region  = "us-east-1"
+              }
+
+              data "aws_caller_identity" "current" {
+              	provider = aws.immanent-roke
               }
 
               variable "config" {}
@@ -12905,6 +13273,10 @@ config:
                 region  = "us-east-1"
               }
 
+              data "aws_caller_identity" "current" {
+              	provider = aws.immanent-summoner
+              }
+
               variable "config" {}
 
               module "immanent-summoner" {
@@ -13025,6 +13397,10 @@ config:
                 region  = "us-east-1"
               }
 
+              data "aws_caller_identity" "current" {
+              	provider = aws.immanent-windkey
+              }
+
               variable "config" {}
 
               module "immanent-windkey" {
@@ -13136,6 +13512,8 @@ config:
               	profile = "jianghu-org"
               	region  = "us-west-2"
               }
+
+              data "aws_caller_identity" "current" {}
 
               locals {
               	sso_instance_arn  = data.aws_ssoadmin_instances.sso_instance.arns
@@ -13275,6 +13653,10 @@ config:
                 region  = "us-east-1"
               }
 
+              data "aws_caller_identity" "current" {
+              	provider = aws.jianghu-org
+              }
+
               variable "config" {}
 
               module "jianghu-org" {
@@ -13393,6 +13775,10 @@ config:
                 profile = "jianghu-log"
                 alias   = "jianghu-log"
                 region  = "us-east-1"
+              }
+
+              data "aws_caller_identity" "current" {
+              	provider = aws.jianghu-log
               }
 
               variable "config" {}
@@ -13515,6 +13901,10 @@ config:
                 region  = "us-east-1"
               }
 
+              data "aws_caller_identity" "current" {
+              	provider = aws.jianghu-net
+              }
+
               variable "config" {}
 
               module "jianghu-net" {
@@ -13626,6 +14016,8 @@ config:
               	profile = "spiral-org"
               	region  = "us-west-2"
               }
+
+              data "aws_caller_identity" "current" {}
 
               locals {
               	sso_instance_arn  = data.aws_ssoadmin_instances.sso_instance.arns
@@ -13895,6 +14287,10 @@ config:
                 region  = "us-east-1"
               }
 
+              data "aws_caller_identity" "current" {
+              	provider = aws.spiral-org
+              }
+
               variable "config" {}
 
               module "spiral-org" {
@@ -14015,6 +14411,10 @@ config:
                 profile = "spiral-ci"
                 alias   = "spiral-ci"
                 region  = "us-east-1"
+              }
+
+              data "aws_caller_identity" "current" {
+              	provider = aws.spiral-ci
               }
 
               variable "config" {}
@@ -14139,6 +14539,10 @@ config:
                 region  = "us-east-1"
               }
 
+              data "aws_caller_identity" "current" {
+              	provider = aws.spiral-dev
+              }
+
               variable "config" {}
 
               module "spiral-dev" {
@@ -14259,6 +14663,10 @@ config:
                 profile = "spiral-hub"
                 alias   = "spiral-hub"
                 region  = "us-east-1"
+              }
+
+              data "aws_caller_identity" "current" {
+              	provider = aws.spiral-hub
               }
 
               variable "config" {}
@@ -14383,6 +14791,10 @@ config:
                 region  = "us-east-1"
               }
 
+              data "aws_caller_identity" "current" {
+              	provider = aws.spiral-lib
+              }
+
               variable "config" {}
 
               module "spiral-lib" {
@@ -14503,6 +14915,10 @@ config:
                 profile = "spiral-log"
                 alias   = "spiral-log"
                 region  = "us-east-1"
+              }
+
+              data "aws_caller_identity" "current" {
+              	provider = aws.spiral-log
               }
 
               variable "config" {}
@@ -14627,6 +15043,10 @@ config:
                 region  = "us-east-1"
               }
 
+              data "aws_caller_identity" "current" {
+              	provider = aws.spiral-net
+              }
+
               variable "config" {}
 
               module "spiral-net" {
@@ -14747,6 +15167,10 @@ config:
                 profile = "spiral-ops"
                 alias   = "spiral-ops"
                 region  = "us-east-1"
+              }
+
+              data "aws_caller_identity" "current" {
+              	provider = aws.spiral-ops
               }
 
               variable "config" {}
@@ -14871,6 +15295,10 @@ config:
                 region  = "us-east-1"
               }
 
+              data "aws_caller_identity" "current" {
+              	provider = aws.spiral-prod
+              }
+
               variable "config" {}
 
               module "spiral-prod" {
@@ -14993,6 +15421,10 @@ config:
                 region  = "us-east-1"
               }
 
+              data "aws_caller_identity" "current" {
+              	provider = aws.spiral-pub
+              }
+
               variable "config" {}
 
               module "spiral-pub" {
@@ -15104,6 +15536,8 @@ config:
               	profile = "vault-org"
               	region  = "us-east-2"
               }
+
+              data "aws_caller_identity" "current" {}
 
               locals {
               	sso_instance_arn  = data.aws_ssoadmin_instances.sso_instance.arns
@@ -15355,6 +15789,10 @@ config:
                 region  = "us-east-1"
               }
 
+              data "aws_caller_identity" "current" {
+              	provider = aws.vault-org
+              }
+
               variable "config" {}
 
               module "vault-org" {
@@ -15473,6 +15911,10 @@ config:
                 profile = "vault-ci"
                 alias   = "vault-ci"
                 region  = "us-east-1"
+              }
+
+              data "aws_caller_identity" "current" {
+              	provider = aws.vault-ci
               }
 
               variable "config" {}
@@ -15595,6 +16037,10 @@ config:
                 region  = "us-east-1"
               }
 
+              data "aws_caller_identity" "current" {
+              	provider = aws.vault-dev
+              }
+
               variable "config" {}
 
               module "vault-dev" {
@@ -15713,6 +16159,10 @@ config:
                 profile = "vault-hub"
                 alias   = "vault-hub"
                 region  = "us-east-1"
+              }
+
+              data "aws_caller_identity" "current" {
+              	provider = aws.vault-hub
               }
 
               variable "config" {}
@@ -15835,6 +16285,10 @@ config:
                 region  = "us-east-1"
               }
 
+              data "aws_caller_identity" "current" {
+              	provider = aws.vault-lib
+              }
+
               variable "config" {}
 
               module "vault-lib" {
@@ -15953,6 +16407,10 @@ config:
                 profile = "vault-log"
                 alias   = "vault-log"
                 region  = "us-east-1"
+              }
+
+              data "aws_caller_identity" "current" {
+              	provider = aws.vault-log
               }
 
               variable "config" {}
@@ -16075,6 +16533,10 @@ config:
                 region  = "us-east-1"
               }
 
+              data "aws_caller_identity" "current" {
+              	provider = aws.vault-net
+              }
+
               variable "config" {}
 
               module "vault-net" {
@@ -16193,6 +16655,10 @@ config:
                 profile = "vault-ops"
                 alias   = "vault-ops"
                 region  = "us-east-1"
+              }
+
+              data "aws_caller_identity" "current" {
+              	provider = aws.vault-ops
               }
 
               variable "config" {}
@@ -16315,6 +16781,10 @@ config:
                 region  = "us-east-1"
               }
 
+              data "aws_caller_identity" "current" {
+              	provider = aws.vault-prod
+              }
+
               variable "config" {}
 
               module "vault-prod" {
@@ -16435,6 +16905,10 @@ config:
                 region  = "us-east-1"
               }
 
+              data "aws_caller_identity" "current" {
+              	provider = aws.vault-pub
+              }
+
               variable "config" {}
 
               module "vault-pub" {
@@ -16546,6 +17020,8 @@ config:
               	profile = "whoa-org"
               	region  = "us-west-2"
               }
+
+              data "aws_caller_identity" "current" {}
 
               locals {
               	sso_instance_arn  = data.aws_ssoadmin_instances.sso_instance.arns
@@ -16717,6 +17193,10 @@ config:
                 region  = "us-east-1"
               }
 
+              data "aws_caller_identity" "current" {
+              	provider = aws.whoa-org
+              }
+
               variable "config" {}
 
               module "whoa-org" {
@@ -16835,6 +17315,10 @@ config:
                 profile = "whoa-dev"
                 alias   = "whoa-dev"
                 region  = "us-east-1"
+              }
+
+              data "aws_caller_identity" "current" {
+              	provider = aws.whoa-dev
               }
 
               variable "config" {}
@@ -16957,6 +17441,10 @@ config:
                 region  = "us-east-1"
               }
 
+              data "aws_caller_identity" "current" {
+              	provider = aws.whoa-hub
+              }
+
               variable "config" {}
 
               module "whoa-hub" {
@@ -17077,6 +17565,10 @@ config:
                 region  = "us-east-1"
               }
 
+              data "aws_caller_identity" "current" {
+              	provider = aws.whoa-net
+              }
+
               variable "config" {}
 
               module "whoa-net" {
@@ -17195,6 +17687,10 @@ config:
                 profile = "whoa-pub"
                 alias   = "whoa-pub"
                 region  = "us-east-1"
+              }
+
+              data "aws_caller_identity" "current" {
+              	provider = aws.whoa-pub
               }
 
               variable "config" {}
@@ -20351,6 +20847,8 @@ config:
               	region  = "us-west-2"
               }
 
+              data "aws_caller_identity" "current" {}
+
               locals {
               	sso_instance_arn  = data.aws_ssoadmin_instances.sso_instance.arns
               	sso_instance_isid = data.aws_ssoadmin_instances.sso_instance.identity_store_ids
@@ -21001,6 +21499,10 @@ config:
                 region  = "us-east-1"
               }
 
+              data "aws_caller_identity" "current" {
+              	provider = aws.chamber-org
+              }
+
               variable "config" {}
 
               module "chamber-org" {
@@ -21119,6 +21621,10 @@ config:
                 profile = "chamber-1"
                 alias   = "chamber-1"
                 region  = "us-east-1"
+              }
+
+              data "aws_caller_identity" "current" {
+              	provider = aws.chamber-1
               }
 
               variable "config" {}
@@ -21241,6 +21747,10 @@ config:
                 region  = "us-east-1"
               }
 
+              data "aws_caller_identity" "current" {
+              	provider = aws.chamber-2
+              }
+
               variable "config" {}
 
               module "chamber-2" {
@@ -21359,6 +21869,10 @@ config:
                 profile = "chamber-3"
                 alias   = "chamber-3"
                 region  = "us-east-1"
+              }
+
+              data "aws_caller_identity" "current" {
+              	provider = aws.chamber-3
               }
 
               variable "config" {}
@@ -21481,6 +21995,10 @@ config:
                 region  = "us-east-1"
               }
 
+              data "aws_caller_identity" "current" {
+              	provider = aws.chamber-4
+              }
+
               variable "config" {}
 
               module "chamber-4" {
@@ -21599,6 +22117,10 @@ config:
                 profile = "chamber-5"
                 alias   = "chamber-5"
                 region  = "us-east-1"
+              }
+
+              data "aws_caller_identity" "current" {
+              	provider = aws.chamber-5
               }
 
               variable "config" {}
@@ -21721,6 +22243,10 @@ config:
                 region  = "us-east-1"
               }
 
+              data "aws_caller_identity" "current" {
+              	provider = aws.chamber-6
+              }
+
               variable "config" {}
 
               module "chamber-6" {
@@ -21839,6 +22365,10 @@ config:
                 profile = "chamber-7"
                 alias   = "chamber-7"
                 region  = "us-east-1"
+              }
+
+              data "aws_caller_identity" "current" {
+              	provider = aws.chamber-7
               }
 
               variable "config" {}
@@ -21961,6 +22491,10 @@ config:
                 region  = "us-east-1"
               }
 
+              data "aws_caller_identity" "current" {
+              	provider = aws.chamber-8
+              }
+
               variable "config" {}
 
               module "chamber-8" {
@@ -22079,6 +22613,10 @@ config:
                 profile = "chamber-9"
                 alias   = "chamber-9"
                 region  = "us-east-1"
+              }
+
+              data "aws_caller_identity" "current" {
+              	provider = aws.chamber-9
               }
 
               variable "config" {}
@@ -22201,6 +22739,10 @@ config:
                 region  = "us-east-1"
               }
 
+              data "aws_caller_identity" "current" {
+              	provider = aws.chamber-a
+              }
+
               variable "config" {}
 
               module "chamber-a" {
@@ -22319,6 +22861,10 @@ config:
                 profile = "chamber-b"
                 alias   = "chamber-b"
                 region  = "us-east-1"
+              }
+
+              data "aws_caller_identity" "current" {
+              	provider = aws.chamber-b
               }
 
               variable "config" {}
@@ -22441,6 +22987,10 @@ config:
                 region  = "us-east-1"
               }
 
+              data "aws_caller_identity" "current" {
+              	provider = aws.chamber-c
+              }
+
               variable "config" {}
 
               module "chamber-c" {
@@ -22559,6 +23109,10 @@ config:
                 profile = "chamber-d"
                 alias   = "chamber-d"
                 region  = "us-east-1"
+              }
+
+              data "aws_caller_identity" "current" {
+              	provider = aws.chamber-d
               }
 
               variable "config" {}
@@ -22681,6 +23235,10 @@ config:
                 region  = "us-east-1"
               }
 
+              data "aws_caller_identity" "current" {
+              	provider = aws.chamber-e
+              }
+
               variable "config" {}
 
               module "chamber-e" {
@@ -22799,6 +23357,10 @@ config:
                 profile = "chamber-f"
                 alias   = "chamber-f"
                 region  = "us-east-1"
+              }
+
+              data "aws_caller_identity" "current" {
+              	provider = aws.chamber-f
               }
 
               variable "config" {}
@@ -22921,6 +23483,10 @@ config:
                 region  = "us-east-1"
               }
 
+              data "aws_caller_identity" "current" {
+              	provider = aws.chamber-g
+              }
+
               variable "config" {}
 
               module "chamber-g" {
@@ -23039,6 +23605,10 @@ config:
                 profile = "chamber-h"
                 alias   = "chamber-h"
                 region  = "us-east-1"
+              }
+
+              data "aws_caller_identity" "current" {
+              	provider = aws.chamber-h
               }
 
               variable "config" {}
@@ -23161,6 +23731,10 @@ config:
                 region  = "us-east-1"
               }
 
+              data "aws_caller_identity" "current" {
+              	provider = aws.chamber-i
+              }
+
               variable "config" {}
 
               module "chamber-i" {
@@ -23279,6 +23853,10 @@ config:
                 profile = "chamber-j"
                 alias   = "chamber-j"
                 region  = "us-east-1"
+              }
+
+              data "aws_caller_identity" "current" {
+              	provider = aws.chamber-j
               }
 
               variable "config" {}
@@ -23401,6 +23979,10 @@ config:
                 region  = "us-east-1"
               }
 
+              data "aws_caller_identity" "current" {
+              	provider = aws.chamber-l
+              }
+
               variable "config" {}
 
               module "chamber-l" {
@@ -23519,6 +24101,10 @@ config:
                 profile = "chamber-m"
                 alias   = "chamber-m"
                 region  = "us-east-1"
+              }
+
+              data "aws_caller_identity" "current" {
+              	provider = aws.chamber-m
               }
 
               variable "config" {}
@@ -23641,6 +24227,10 @@ config:
                 region  = "us-east-1"
               }
 
+              data "aws_caller_identity" "current" {
+              	provider = aws.chamber-n
+              }
+
               variable "config" {}
 
               module "chamber-n" {
@@ -23759,6 +24349,10 @@ config:
                 profile = "chamber-o"
                 alias   = "chamber-o"
                 region  = "us-east-1"
+              }
+
+              data "aws_caller_identity" "current" {
+              	provider = aws.chamber-o
               }
 
               variable "config" {}
@@ -23881,6 +24475,10 @@ config:
                 region  = "us-east-1"
               }
 
+              data "aws_caller_identity" "current" {
+              	provider = aws.chamber-p
+              }
+
               variable "config" {}
 
               module "chamber-p" {
@@ -23999,6 +24597,10 @@ config:
                 profile = "chamber-q"
                 alias   = "chamber-q"
                 region  = "us-east-1"
+              }
+
+              data "aws_caller_identity" "current" {
+              	provider = aws.chamber-q
               }
 
               variable "config" {}
@@ -24121,6 +24723,10 @@ config:
                 region  = "us-east-1"
               }
 
+              data "aws_caller_identity" "current" {
+              	provider = aws.chamber-r
+              }
+
               variable "config" {}
 
               module "chamber-r" {
@@ -24239,6 +24845,10 @@ config:
                 profile = "chamber-s"
                 alias   = "chamber-s"
                 region  = "us-east-1"
+              }
+
+              data "aws_caller_identity" "current" {
+              	provider = aws.chamber-s
               }
 
               variable "config" {}
@@ -24361,6 +24971,10 @@ config:
                 region  = "us-east-1"
               }
 
+              data "aws_caller_identity" "current" {
+              	provider = aws.chamber-t
+              }
+
               variable "config" {}
 
               module "chamber-t" {
@@ -24479,6 +25093,10 @@ config:
                 profile = "chamber-u"
                 alias   = "chamber-u"
                 region  = "us-east-1"
+              }
+
+              data "aws_caller_identity" "current" {
+              	provider = aws.chamber-u
               }
 
               variable "config" {}
@@ -24601,6 +25219,10 @@ config:
                 region  = "us-east-1"
               }
 
+              data "aws_caller_identity" "current" {
+              	provider = aws.chamber-v
+              }
+
               variable "config" {}
 
               module "chamber-v" {
@@ -24719,6 +25341,10 @@ config:
                 profile = "chamber-w"
                 alias   = "chamber-w"
                 region  = "us-east-1"
+              }
+
+              data "aws_caller_identity" "current" {
+              	provider = aws.chamber-w
               }
 
               variable "config" {}
@@ -24841,6 +25467,10 @@ config:
                 region  = "us-east-1"
               }
 
+              data "aws_caller_identity" "current" {
+              	provider = aws.chamber-x
+              }
+
               variable "config" {}
 
               module "chamber-x" {
@@ -24959,6 +25589,10 @@ config:
                 profile = "chamber-y"
                 alias   = "chamber-y"
                 region  = "us-east-1"
+              }
+
+              data "aws_caller_identity" "current" {
+              	provider = aws.chamber-y
               }
 
               variable "config" {}
@@ -25081,6 +25715,10 @@ config:
                 region  = "us-east-1"
               }
 
+              data "aws_caller_identity" "current" {
+              	provider = aws.chamber-z
+              }
+
               variable "config" {}
 
               module "chamber-z" {
@@ -25192,6 +25830,8 @@ config:
               	profile = "circus-org"
               	region  = "us-west-2"
               }
+
+              data "aws_caller_identity" "current" {}
 
               locals {
               	sso_instance_arn  = data.aws_ssoadmin_instances.sso_instance.arns
@@ -25363,6 +26003,10 @@ config:
                 region  = "us-east-1"
               }
 
+              data "aws_caller_identity" "current" {
+              	provider = aws.circus-org
+              }
+
               variable "config" {}
 
               module "circus-org" {
@@ -25481,6 +26125,10 @@ config:
                 profile = "circus-lib"
                 alias   = "circus-lib"
                 region  = "us-east-1"
+              }
+
+              data "aws_caller_identity" "current" {
+              	provider = aws.circus-lib
               }
 
               variable "config" {}
@@ -25603,6 +26251,10 @@ config:
                 region  = "us-east-1"
               }
 
+              data "aws_caller_identity" "current" {
+              	provider = aws.circus-log
+              }
+
               variable "config" {}
 
               module "circus-log" {
@@ -25721,6 +26373,10 @@ config:
                 profile = "circus-net"
                 alias   = "circus-net"
                 region  = "us-east-1"
+              }
+
+              data "aws_caller_identity" "current" {
+              	provider = aws.circus-net
               }
 
               variable "config" {}
@@ -25843,6 +26499,10 @@ config:
                 region  = "us-east-1"
               }
 
+              data "aws_caller_identity" "current" {
+              	provider = aws.circus-ops
+              }
+
               variable "config" {}
 
               module "circus-ops" {
@@ -25954,6 +26614,8 @@ config:
               	profile = "coil-org"
               	region  = "us-east-1"
               }
+
+              data "aws_caller_identity" "current" {}
 
               locals {
               	sso_instance_arn  = data.aws_ssoadmin_instances.sso_instance.arns
@@ -26115,6 +26777,10 @@ config:
                 region  = "us-east-1"
               }
 
+              data "aws_caller_identity" "current" {
+              	provider = aws.coil-org
+              }
+
               variable "config" {}
 
               module "coil-org" {
@@ -26235,6 +26901,10 @@ config:
                 profile = "coil-hub"
                 alias   = "coil-hub"
                 region  = "us-east-1"
+              }
+
+              data "aws_caller_identity" "current" {
+              	provider = aws.coil-hub
               }
 
               variable "config" {}
@@ -26359,6 +27029,10 @@ config:
                 region  = "us-east-1"
               }
 
+              data "aws_caller_identity" "current" {
+              	provider = aws.coil-lib
+              }
+
               variable "config" {}
 
               module "coil-lib" {
@@ -26481,6 +27155,10 @@ config:
                 region  = "us-east-1"
               }
 
+              data "aws_caller_identity" "current" {
+              	provider = aws.coil-net
+              }
+
               variable "config" {}
 
               module "coil-net" {
@@ -26592,6 +27270,8 @@ config:
               	profile = "curl-org"
               	region  = "us-west-2"
               }
+
+              data "aws_caller_identity" "current" {}
 
               locals {
               	sso_instance_arn  = data.aws_ssoadmin_instances.sso_instance.arns
@@ -26753,6 +27433,10 @@ config:
                 region  = "us-east-1"
               }
 
+              data "aws_caller_identity" "current" {
+              	provider = aws.curl-org
+              }
+
               variable "config" {}
 
               module "curl-org" {
@@ -26873,6 +27557,10 @@ config:
                 profile = "curl-hub"
                 alias   = "curl-hub"
                 region  = "us-east-1"
+              }
+
+              data "aws_caller_identity" "current" {
+              	provider = aws.curl-hub
               }
 
               variable "config" {}
@@ -26997,6 +27685,10 @@ config:
                 region  = "us-east-1"
               }
 
+              data "aws_caller_identity" "current" {
+              	provider = aws.curl-lib
+              }
+
               variable "config" {}
 
               module "curl-lib" {
@@ -27119,6 +27811,10 @@ config:
                 region  = "us-east-1"
               }
 
+              data "aws_caller_identity" "current" {
+              	provider = aws.curl-net
+              }
+
               variable "config" {}
 
               module "curl-net" {
@@ -27224,6 +27920,8 @@ config:
               	region  = "us-east-2"
               }
 
+              data "aws_caller_identity" "current" {}
+
               locals {
               	sso_instance_arn  = data.aws_ssoadmin_instances.sso_instance.arns
               	sso_instance_isid = data.aws_ssoadmin_instances.sso_instance.identity_store_ids
@@ -27328,6 +28026,10 @@ config:
                 profile = "defn-org"
                 alias   = "defn-org"
                 region  = "us-east-1"
+              }
+
+              data "aws_caller_identity" "current" {
+              	provider = aws.defn-org
               }
 
               variable "config" {}
@@ -27441,6 +28143,8 @@ config:
               	profile = "fogg-org"
               	region  = "us-west-2"
               }
+
+              data "aws_caller_identity" "current" {}
 
               locals {
               	sso_instance_arn  = data.aws_ssoadmin_instances.sso_instance.arns
@@ -27692,6 +28396,10 @@ config:
                 region  = "us-east-1"
               }
 
+              data "aws_caller_identity" "current" {
+              	provider = aws.fogg-org
+              }
+
               variable "config" {}
 
               module "fogg-org" {
@@ -27810,6 +28518,10 @@ config:
                 profile = "fogg-ci"
                 alias   = "fogg-ci"
                 region  = "us-east-1"
+              }
+
+              data "aws_caller_identity" "current" {
+              	provider = aws.fogg-ci
               }
 
               variable "config" {}
@@ -27932,6 +28644,10 @@ config:
                 region  = "us-east-1"
               }
 
+              data "aws_caller_identity" "current" {
+              	provider = aws.fogg-dev
+              }
+
               variable "config" {}
 
               module "fogg-dev" {
@@ -28050,6 +28766,10 @@ config:
                 profile = "fogg-hub"
                 alias   = "fogg-hub"
                 region  = "us-east-1"
+              }
+
+              data "aws_caller_identity" "current" {
+              	provider = aws.fogg-hub
               }
 
               variable "config" {}
@@ -28172,6 +28892,10 @@ config:
                 region  = "us-east-1"
               }
 
+              data "aws_caller_identity" "current" {
+              	provider = aws.fogg-lib
+              }
+
               variable "config" {}
 
               module "fogg-lib" {
@@ -28290,6 +29014,10 @@ config:
                 profile = "fogg-log"
                 alias   = "fogg-log"
                 region  = "us-east-1"
+              }
+
+              data "aws_caller_identity" "current" {
+              	provider = aws.fogg-log
               }
 
               variable "config" {}
@@ -28412,6 +29140,10 @@ config:
                 region  = "us-east-1"
               }
 
+              data "aws_caller_identity" "current" {
+              	provider = aws.fogg-net
+              }
+
               variable "config" {}
 
               module "fogg-net" {
@@ -28530,6 +29262,10 @@ config:
                 profile = "fogg-ops"
                 alias   = "fogg-ops"
                 region  = "us-east-1"
+              }
+
+              data "aws_caller_identity" "current" {
+              	provider = aws.fogg-ops
               }
 
               variable "config" {}
@@ -28652,6 +29388,10 @@ config:
                 region  = "us-east-1"
               }
 
+              data "aws_caller_identity" "current" {
+              	provider = aws.fogg-prod
+              }
+
               variable "config" {}
 
               module "fogg-prod" {
@@ -28772,6 +29512,10 @@ config:
                 region  = "us-east-1"
               }
 
+              data "aws_caller_identity" "current" {
+              	provider = aws.fogg-pub
+              }
+
               variable "config" {}
 
               module "fogg-pub" {
@@ -28883,6 +29627,8 @@ config:
               	profile = "gyre-org"
               	region  = "us-east-2"
               }
+
+              data "aws_caller_identity" "current" {}
 
               locals {
               	sso_instance_arn  = data.aws_ssoadmin_instances.sso_instance.arns
@@ -29008,6 +29754,10 @@ config:
                 region  = "us-east-1"
               }
 
+              data "aws_caller_identity" "current" {
+              	provider = aws.gyre-org
+              }
+
               variable "config" {}
 
               module "gyre-org" {
@@ -29130,6 +29880,10 @@ config:
                 region  = "us-east-1"
               }
 
+              data "aws_caller_identity" "current" {
+              	provider = aws.gyre-ops
+              }
+
               variable "config" {}
 
               module "gyre-ops" {
@@ -29241,6 +29995,8 @@ config:
               	profile = "helix-org"
               	region  = "us-east-2"
               }
+
+              data "aws_caller_identity" "current" {}
 
               locals {
               	sso_instance_arn  = data.aws_ssoadmin_instances.sso_instance.arns
@@ -29510,6 +30266,10 @@ config:
                 region  = "us-east-1"
               }
 
+              data "aws_caller_identity" "current" {
+              	provider = aws.helix-org
+              }
+
               variable "config" {}
 
               module "helix-org" {
@@ -29630,6 +30390,10 @@ config:
                 profile = "helix-ci"
                 alias   = "helix-ci"
                 region  = "us-east-1"
+              }
+
+              data "aws_caller_identity" "current" {
+              	provider = aws.helix-ci
               }
 
               variable "config" {}
@@ -29754,6 +30518,10 @@ config:
                 region  = "us-east-1"
               }
 
+              data "aws_caller_identity" "current" {
+              	provider = aws.helix-dev
+              }
+
               variable "config" {}
 
               module "helix-dev" {
@@ -29874,6 +30642,10 @@ config:
                 profile = "helix-hub"
                 alias   = "helix-hub"
                 region  = "us-east-1"
+              }
+
+              data "aws_caller_identity" "current" {
+              	provider = aws.helix-hub
               }
 
               variable "config" {}
@@ -29998,6 +30770,10 @@ config:
                 region  = "us-east-1"
               }
 
+              data "aws_caller_identity" "current" {
+              	provider = aws.helix-lib
+              }
+
               variable "config" {}
 
               module "helix-lib" {
@@ -30118,6 +30894,10 @@ config:
                 profile = "helix-log"
                 alias   = "helix-log"
                 region  = "us-east-1"
+              }
+
+              data "aws_caller_identity" "current" {
+              	provider = aws.helix-log
               }
 
               variable "config" {}
@@ -30242,6 +31022,10 @@ config:
                 region  = "us-east-1"
               }
 
+              data "aws_caller_identity" "current" {
+              	provider = aws.helix-net
+              }
+
               variable "config" {}
 
               module "helix-net" {
@@ -30362,6 +31146,10 @@ config:
                 profile = "helix-ops"
                 alias   = "helix-ops"
                 region  = "us-east-1"
+              }
+
+              data "aws_caller_identity" "current" {
+              	provider = aws.helix-ops
               }
 
               variable "config" {}
@@ -30486,6 +31274,10 @@ config:
                 region  = "us-east-1"
               }
 
+              data "aws_caller_identity" "current" {
+              	provider = aws.helix-prod
+              }
+
               variable "config" {}
 
               module "helix-prod" {
@@ -30608,6 +31400,10 @@ config:
                 region  = "us-east-1"
               }
 
+              data "aws_caller_identity" "current" {
+              	provider = aws.helix-pub
+              }
+
               variable "config" {}
 
               module "helix-pub" {
@@ -30719,6 +31515,8 @@ config:
               	profile = "imma-org"
               	region  = "us-west-2"
               }
+
+              data "aws_caller_identity" "current" {}
 
               locals {
               	sso_instance_arn  = data.aws_ssoadmin_instances.sso_instance.arns
@@ -30906,6 +31704,10 @@ config:
                 region  = "us-east-1"
               }
 
+              data "aws_caller_identity" "current" {
+              	provider = aws.imma-org
+              }
+
               variable "config" {}
 
               module "imma-org" {
@@ -31024,6 +31826,10 @@ config:
                 profile = "imma-dev"
                 alias   = "imma-dev"
                 region  = "us-east-1"
+              }
+
+              data "aws_caller_identity" "current" {
+              	provider = aws.imma-dev
               }
 
               variable "config" {}
@@ -31146,6 +31952,10 @@ config:
                 region  = "us-east-1"
               }
 
+              data "aws_caller_identity" "current" {
+              	provider = aws.imma-lib
+              }
+
               variable "config" {}
 
               module "imma-lib" {
@@ -31264,6 +32074,10 @@ config:
                 profile = "imma-log"
                 alias   = "imma-log"
                 region  = "us-east-1"
+              }
+
+              data "aws_caller_identity" "current" {
+              	provider = aws.imma-log
               }
 
               variable "config" {}
@@ -31386,6 +32200,10 @@ config:
                 region  = "us-east-1"
               }
 
+              data "aws_caller_identity" "current" {
+              	provider = aws.imma-net
+              }
+
               variable "config" {}
 
               module "imma-net" {
@@ -31506,6 +32324,10 @@ config:
                 region  = "us-east-1"
               }
 
+              data "aws_caller_identity" "current" {
+              	provider = aws.imma-pub
+              }
+
               variable "config" {}
 
               module "imma-pub" {
@@ -31617,6 +32439,8 @@ config:
               	profile = "immanent-org"
               	region  = "us-west-2"
               }
+
+              data "aws_caller_identity" "current" {}
 
               locals {
               	sso_instance_arn  = data.aws_ssoadmin_instances.sso_instance.arns
@@ -31900,6 +32724,10 @@ config:
                 region  = "us-east-1"
               }
 
+              data "aws_caller_identity" "current" {
+              	provider = aws.immanent-org
+              }
+
               variable "config" {}
 
               module "immanent-org" {
@@ -32018,6 +32846,10 @@ config:
                 profile = "immanent-changer"
                 alias   = "immanent-changer"
                 region  = "us-east-1"
+              }
+
+              data "aws_caller_identity" "current" {
+              	provider = aws.immanent-changer
               }
 
               variable "config" {}
@@ -32140,6 +32972,10 @@ config:
                 region  = "us-east-1"
               }
 
+              data "aws_caller_identity" "current" {
+              	provider = aws.immanent-chanter
+              }
+
               variable "config" {}
 
               module "immanent-chanter" {
@@ -32258,6 +33094,10 @@ config:
                 profile = "immanent-doorkeeper"
                 alias   = "immanent-doorkeeper"
                 region  = "us-east-1"
+              }
+
+              data "aws_caller_identity" "current" {
+              	provider = aws.immanent-doorkeeper
               }
 
               variable "config" {}
@@ -32380,6 +33220,10 @@ config:
                 region  = "us-east-1"
               }
 
+              data "aws_caller_identity" "current" {
+              	provider = aws.immanent-ged
+              }
+
               variable "config" {}
 
               module "immanent-ged" {
@@ -32498,6 +33342,10 @@ config:
                 profile = "immanent-hand"
                 alias   = "immanent-hand"
                 region  = "us-east-1"
+              }
+
+              data "aws_caller_identity" "current" {
+              	provider = aws.immanent-hand
               }
 
               variable "config" {}
@@ -32620,6 +33468,10 @@ config:
                 region  = "us-east-1"
               }
 
+              data "aws_caller_identity" "current" {
+              	provider = aws.immanent-herbal
+              }
+
               variable "config" {}
 
               module "immanent-herbal" {
@@ -32738,6 +33590,10 @@ config:
                 profile = "immanent-namer"
                 alias   = "immanent-namer"
                 region  = "us-east-1"
+              }
+
+              data "aws_caller_identity" "current" {
+              	provider = aws.immanent-namer
               }
 
               variable "config" {}
@@ -32860,6 +33716,10 @@ config:
                 region  = "us-east-1"
               }
 
+              data "aws_caller_identity" "current" {
+              	provider = aws.immanent-patterner
+              }
+
               variable "config" {}
 
               module "immanent-patterner" {
@@ -32978,6 +33838,10 @@ config:
                 profile = "immanent-roke"
                 alias   = "immanent-roke"
                 region  = "us-east-1"
+              }
+
+              data "aws_caller_identity" "current" {
+              	provider = aws.immanent-roke
               }
 
               variable "config" {}
@@ -33100,6 +33964,10 @@ config:
                 region  = "us-east-1"
               }
 
+              data "aws_caller_identity" "current" {
+              	provider = aws.immanent-summoner
+              }
+
               variable "config" {}
 
               module "immanent-summoner" {
@@ -33220,6 +34088,10 @@ config:
                 region  = "us-east-1"
               }
 
+              data "aws_caller_identity" "current" {
+              	provider = aws.immanent-windkey
+              }
+
               variable "config" {}
 
               module "immanent-windkey" {
@@ -33331,6 +34203,8 @@ config:
               	profile = "jianghu-org"
               	region  = "us-west-2"
               }
+
+              data "aws_caller_identity" "current" {}
 
               locals {
               	sso_instance_arn  = data.aws_ssoadmin_instances.sso_instance.arns
@@ -33470,6 +34344,10 @@ config:
                 region  = "us-east-1"
               }
 
+              data "aws_caller_identity" "current" {
+              	provider = aws.jianghu-org
+              }
+
               variable "config" {}
 
               module "jianghu-org" {
@@ -33588,6 +34466,10 @@ config:
                 profile = "jianghu-log"
                 alias   = "jianghu-log"
                 region  = "us-east-1"
+              }
+
+              data "aws_caller_identity" "current" {
+              	provider = aws.jianghu-log
               }
 
               variable "config" {}
@@ -33710,6 +34592,10 @@ config:
                 region  = "us-east-1"
               }
 
+              data "aws_caller_identity" "current" {
+              	provider = aws.jianghu-net
+              }
+
               variable "config" {}
 
               module "jianghu-net" {
@@ -33821,6 +34707,8 @@ config:
               	profile = "spiral-org"
               	region  = "us-west-2"
               }
+
+              data "aws_caller_identity" "current" {}
 
               locals {
               	sso_instance_arn  = data.aws_ssoadmin_instances.sso_instance.arns
@@ -34090,6 +34978,10 @@ config:
                 region  = "us-east-1"
               }
 
+              data "aws_caller_identity" "current" {
+              	provider = aws.spiral-org
+              }
+
               variable "config" {}
 
               module "spiral-org" {
@@ -34210,6 +35102,10 @@ config:
                 profile = "spiral-ci"
                 alias   = "spiral-ci"
                 region  = "us-east-1"
+              }
+
+              data "aws_caller_identity" "current" {
+              	provider = aws.spiral-ci
               }
 
               variable "config" {}
@@ -34334,6 +35230,10 @@ config:
                 region  = "us-east-1"
               }
 
+              data "aws_caller_identity" "current" {
+              	provider = aws.spiral-dev
+              }
+
               variable "config" {}
 
               module "spiral-dev" {
@@ -34454,6 +35354,10 @@ config:
                 profile = "spiral-hub"
                 alias   = "spiral-hub"
                 region  = "us-east-1"
+              }
+
+              data "aws_caller_identity" "current" {
+              	provider = aws.spiral-hub
               }
 
               variable "config" {}
@@ -34578,6 +35482,10 @@ config:
                 region  = "us-east-1"
               }
 
+              data "aws_caller_identity" "current" {
+              	provider = aws.spiral-lib
+              }
+
               variable "config" {}
 
               module "spiral-lib" {
@@ -34698,6 +35606,10 @@ config:
                 profile = "spiral-log"
                 alias   = "spiral-log"
                 region  = "us-east-1"
+              }
+
+              data "aws_caller_identity" "current" {
+              	provider = aws.spiral-log
               }
 
               variable "config" {}
@@ -34822,6 +35734,10 @@ config:
                 region  = "us-east-1"
               }
 
+              data "aws_caller_identity" "current" {
+              	provider = aws.spiral-net
+              }
+
               variable "config" {}
 
               module "spiral-net" {
@@ -34942,6 +35858,10 @@ config:
                 profile = "spiral-ops"
                 alias   = "spiral-ops"
                 region  = "us-east-1"
+              }
+
+              data "aws_caller_identity" "current" {
+              	provider = aws.spiral-ops
               }
 
               variable "config" {}
@@ -35066,6 +35986,10 @@ config:
                 region  = "us-east-1"
               }
 
+              data "aws_caller_identity" "current" {
+              	provider = aws.spiral-prod
+              }
+
               variable "config" {}
 
               module "spiral-prod" {
@@ -35188,6 +36112,10 @@ config:
                 region  = "us-east-1"
               }
 
+              data "aws_caller_identity" "current" {
+              	provider = aws.spiral-pub
+              }
+
               variable "config" {}
 
               module "spiral-pub" {
@@ -35299,6 +36227,8 @@ config:
               	profile = "vault-org"
               	region  = "us-east-2"
               }
+
+              data "aws_caller_identity" "current" {}
 
               locals {
               	sso_instance_arn  = data.aws_ssoadmin_instances.sso_instance.arns
@@ -35550,6 +36480,10 @@ config:
                 region  = "us-east-1"
               }
 
+              data "aws_caller_identity" "current" {
+              	provider = aws.vault-org
+              }
+
               variable "config" {}
 
               module "vault-org" {
@@ -35668,6 +36602,10 @@ config:
                 profile = "vault-ci"
                 alias   = "vault-ci"
                 region  = "us-east-1"
+              }
+
+              data "aws_caller_identity" "current" {
+              	provider = aws.vault-ci
               }
 
               variable "config" {}
@@ -35790,6 +36728,10 @@ config:
                 region  = "us-east-1"
               }
 
+              data "aws_caller_identity" "current" {
+              	provider = aws.vault-dev
+              }
+
               variable "config" {}
 
               module "vault-dev" {
@@ -35908,6 +36850,10 @@ config:
                 profile = "vault-hub"
                 alias   = "vault-hub"
                 region  = "us-east-1"
+              }
+
+              data "aws_caller_identity" "current" {
+              	provider = aws.vault-hub
               }
 
               variable "config" {}
@@ -36030,6 +36976,10 @@ config:
                 region  = "us-east-1"
               }
 
+              data "aws_caller_identity" "current" {
+              	provider = aws.vault-lib
+              }
+
               variable "config" {}
 
               module "vault-lib" {
@@ -36148,6 +37098,10 @@ config:
                 profile = "vault-log"
                 alias   = "vault-log"
                 region  = "us-east-1"
+              }
+
+              data "aws_caller_identity" "current" {
+              	provider = aws.vault-log
               }
 
               variable "config" {}
@@ -36270,6 +37224,10 @@ config:
                 region  = "us-east-1"
               }
 
+              data "aws_caller_identity" "current" {
+              	provider = aws.vault-net
+              }
+
               variable "config" {}
 
               module "vault-net" {
@@ -36388,6 +37346,10 @@ config:
                 profile = "vault-ops"
                 alias   = "vault-ops"
                 region  = "us-east-1"
+              }
+
+              data "aws_caller_identity" "current" {
+              	provider = aws.vault-ops
               }
 
               variable "config" {}
@@ -36510,6 +37472,10 @@ config:
                 region  = "us-east-1"
               }
 
+              data "aws_caller_identity" "current" {
+              	provider = aws.vault-prod
+              }
+
               variable "config" {}
 
               module "vault-prod" {
@@ -36630,6 +37596,10 @@ config:
                 region  = "us-east-1"
               }
 
+              data "aws_caller_identity" "current" {
+              	provider = aws.vault-pub
+              }
+
               variable "config" {}
 
               module "vault-pub" {
@@ -36741,6 +37711,8 @@ config:
               	profile = "whoa-org"
               	region  = "us-west-2"
               }
+
+              data "aws_caller_identity" "current" {}
 
               locals {
               	sso_instance_arn  = data.aws_ssoadmin_instances.sso_instance.arns
@@ -36912,6 +37884,10 @@ config:
                 region  = "us-east-1"
               }
 
+              data "aws_caller_identity" "current" {
+              	provider = aws.whoa-org
+              }
+
               variable "config" {}
 
               module "whoa-org" {
@@ -37030,6 +38006,10 @@ config:
                 profile = "whoa-dev"
                 alias   = "whoa-dev"
                 region  = "us-east-1"
+              }
+
+              data "aws_caller_identity" "current" {
+              	provider = aws.whoa-dev
               }
 
               variable "config" {}
@@ -37152,6 +38132,10 @@ config:
                 region  = "us-east-1"
               }
 
+              data "aws_caller_identity" "current" {
+              	provider = aws.whoa-hub
+              }
+
               variable "config" {}
 
               module "whoa-hub" {
@@ -37272,6 +38256,10 @@ config:
                 region  = "us-east-1"
               }
 
+              data "aws_caller_identity" "current" {
+              	provider = aws.whoa-net
+              }
+
               variable "config" {}
 
               module "whoa-net" {
@@ -37390,6 +38378,10 @@ config:
                 profile = "whoa-pub"
                 alias   = "whoa-pub"
                 region  = "us-east-1"
+              }
+
+              data "aws_caller_identity" "current" {
+              	provider = aws.whoa-pub
               }
 
               variable "config" {}

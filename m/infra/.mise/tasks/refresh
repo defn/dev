@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+function main {
+	time runmany 16 'echo $1; cd $1 && mise exec -- terraform apply -refresh-only' "$@"
+}
+
+main "$@"

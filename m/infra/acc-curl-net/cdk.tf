@@ -22,6 +22,10 @@ provider "aws" {
   region  = "us-east-1"
 }
 
+data "aws_caller_identity" "current" {
+  provider = aws.curl-net
+}
+
 variable "config" {}
 
 module "curl-net" {

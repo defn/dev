@@ -22,6 +22,10 @@ provider "aws" {
   region  = "us-east-1"
 }
 
+data "aws_caller_identity" "current" {
+  provider = aws.immanent-herbal
+}
+
 variable "config" {}
 
 module "immanent-herbal" {

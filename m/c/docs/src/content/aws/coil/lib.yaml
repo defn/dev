@@ -102,6 +102,10 @@ infra_acc_terraform: |-
     region  = "us-east-1"
   }
 
+  data "aws_caller_identity" "current" {
+  	provider = aws.coil-lib
+  }
+
   variable "config" {}
 
   module "coil-lib" {

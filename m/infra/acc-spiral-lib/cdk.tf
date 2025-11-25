@@ -22,6 +22,10 @@ provider "aws" {
   region  = "us-east-1"
 }
 
+data "aws_caller_identity" "current" {
+  provider = aws.spiral-lib
+}
+
 variable "config" {}
 
 module "spiral-lib" {

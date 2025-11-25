@@ -22,6 +22,8 @@ provider "aws" {
   region  = "us-east-1"
 }
 
+data "aws_caller_identity" "current" {}
+
 locals {
   sso_instance_arn  = data.aws_ssoadmin_instances.sso_instance.arns
   sso_instance_isid = data.aws_ssoadmin_instances.sso_instance.identity_store_ids
