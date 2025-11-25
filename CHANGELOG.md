@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.47.0](https://github.com/defn/dev/compare/v1.46.0...v1.47.0) (2025-11-25)
+
+
+### Features
+
+* add AWS caller identity data sources to all account modules ([c80039a](https://github.com/defn/dev/commit/c80039ae04817968a92febc61bdbd893eb1fdd3f))
+* add AWS caller identity outputs to all account modules ([65de7bd](https://github.com/defn/dev/commit/65de7bdb81e4c9e0a4c0b624f9fcec142669cbb7))
+
 ## [1.46.0](https://github.com/defn/dev/compare/v1.45.0...v1.46.0) (2025-11-23)
 
 
