@@ -26,6 +26,14 @@ data "aws_caller_identity" "current" {
   provider = aws.gyre-org
 }
 
+locals {
+  aws_config = jsonencode({
+    "gyre-org" : {
+      account_id = data.aws_caller_identity.current.account_id
+    }
+  })
+}
+
 variable "config" {}
 
 module "gyre-org" {
@@ -43,4 +51,8 @@ module "gyre-org" {
 
 output "auditor_arn" {
   value = module.gyre-org.auditor_arn
+}
+
+output "aws_config" {
+  value = local.aws_config
 }

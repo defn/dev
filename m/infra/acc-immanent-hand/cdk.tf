@@ -26,6 +26,14 @@ data "aws_caller_identity" "current" {
   provider = aws.immanent-hand
 }
 
+locals {
+  aws_config = jsonencode({
+    "immanent-hand" : {
+      account_id = data.aws_caller_identity.current.account_id
+    }
+  })
+}
+
 variable "config" {}
 
 module "immanent-hand" {
@@ -43,4 +51,8 @@ module "immanent-hand" {
 
 output "auditor_arn" {
   value = module.immanent-hand.auditor_arn
+}
+
+output "aws_config" {
+  value = local.aws_config
 }

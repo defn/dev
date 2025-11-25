@@ -26,6 +26,14 @@ data "aws_caller_identity" "current" {
   provider = aws.immanent-ged
 }
 
+locals {
+  aws_config = jsonencode({
+    "immanent-ged" : {
+      account_id = data.aws_caller_identity.current.account_id
+    }
+  })
+}
+
 variable "config" {}
 
 module "immanent-ged" {
@@ -43,4 +51,8 @@ module "immanent-ged" {
 
 output "auditor_arn" {
   value = module.immanent-ged.auditor_arn
+}
+
+output "aws_config" {
+  value = local.aws_config
 }

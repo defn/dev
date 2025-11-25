@@ -26,6 +26,14 @@ data "aws_caller_identity" "current" {
   provider = aws.circus-net
 }
 
+locals {
+  aws_config = jsonencode({
+    "circus-net" : {
+      account_id = data.aws_caller_identity.current.account_id
+    }
+  })
+}
+
 variable "config" {}
 
 module "circus-net" {
@@ -43,4 +51,8 @@ module "circus-net" {
 
 output "auditor_arn" {
   value = module.circus-net.auditor_arn
+}
+
+output "aws_config" {
+  value = local.aws_config
 }

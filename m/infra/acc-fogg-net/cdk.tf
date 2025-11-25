@@ -26,6 +26,14 @@ data "aws_caller_identity" "current" {
   provider = aws.fogg-net
 }
 
+locals {
+  aws_config = jsonencode({
+    "fogg-net" : {
+      account_id = data.aws_caller_identity.current.account_id
+    }
+  })
+}
+
 variable "config" {}
 
 module "fogg-net" {
@@ -43,4 +51,8 @@ module "fogg-net" {
 
 output "auditor_arn" {
   value = module.fogg-net.auditor_arn
+}
+
+output "aws_config" {
+  value = local.aws_config
 }

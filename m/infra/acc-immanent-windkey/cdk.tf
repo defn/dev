@@ -26,6 +26,14 @@ data "aws_caller_identity" "current" {
   provider = aws.immanent-windkey
 }
 
+locals {
+  aws_config = jsonencode({
+    "immanent-windkey" : {
+      account_id = data.aws_caller_identity.current.account_id
+    }
+  })
+}
+
 variable "config" {}
 
 module "immanent-windkey" {
@@ -43,4 +51,8 @@ module "immanent-windkey" {
 
 output "auditor_arn" {
   value = module.immanent-windkey.auditor_arn
+}
+
+output "aws_config" {
+  value = local.aws_config
 }

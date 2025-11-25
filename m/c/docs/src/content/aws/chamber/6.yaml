@@ -104,6 +104,14 @@ infra_acc_terraform: |-
   	provider = aws.chamber-6
   }
 
+  locals {
+    aws_config = jsonencode({
+  	"chamber-6": {
+  		account_id = data.aws_caller_identity.current.account_id
+  	}
+    })
+  }
+
   variable "config" {}
 
   module "chamber-6" {
@@ -120,5 +128,9 @@ infra_acc_terraform: |-
   }
 
   output "auditor_arn" {
-    value       = module.chamber-6.auditor_arn
+    value = module.chamber-6.auditor_arn
+  }
+
+  output "aws_config" {
+    value = local.aws_config
   }

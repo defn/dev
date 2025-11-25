@@ -26,6 +26,14 @@ data "aws_caller_identity" "current" {
   provider = aws.circus-lib
 }
 
+locals {
+  aws_config = jsonencode({
+    "circus-lib" : {
+      account_id = data.aws_caller_identity.current.account_id
+    }
+  })
+}
+
 variable "config" {}
 
 module "circus-lib" {
@@ -43,4 +51,8 @@ module "circus-lib" {
 
 output "auditor_arn" {
   value = module.circus-lib.auditor_arn
+}
+
+output "aws_config" {
+  value = local.aws_config
 }

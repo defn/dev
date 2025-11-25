@@ -106,6 +106,14 @@ infra_acc_terraform: |-
   	provider = aws.helix-ci
   }
 
+  locals {
+    aws_config = jsonencode({
+  	"helix-ci": {
+  		account_id = data.aws_caller_identity.current.account_id
+  	}
+    })
+  }
+
   variable "config" {}
 
   module "helix-ci" {
@@ -122,5 +130,9 @@ infra_acc_terraform: |-
   }
 
   output "auditor_arn" {
-    value       = module.helix-ci.auditor_arn
+    value = module.helix-ci.auditor_arn
+  }
+
+  output "aws_config" {
+    value = local.aws_config
   }

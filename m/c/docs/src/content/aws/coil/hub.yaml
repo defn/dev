@@ -106,6 +106,14 @@ infra_acc_terraform: |-
   	provider = aws.coil-hub
   }
 
+  locals {
+    aws_config = jsonencode({
+  	"coil-hub": {
+  		account_id = data.aws_caller_identity.current.account_id
+  	}
+    })
+  }
+
   variable "config" {}
 
   module "coil-hub" {
@@ -122,5 +130,9 @@ infra_acc_terraform: |-
   }
 
   output "auditor_arn" {
-    value       = module.coil-hub.auditor_arn
+    value = module.coil-hub.auditor_arn
+  }
+
+  output "aws_config" {
+    value = local.aws_config
   }

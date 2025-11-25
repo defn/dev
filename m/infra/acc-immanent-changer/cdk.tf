@@ -26,6 +26,14 @@ data "aws_caller_identity" "current" {
   provider = aws.immanent-changer
 }
 
+locals {
+  aws_config = jsonencode({
+    "immanent-changer" : {
+      account_id = data.aws_caller_identity.current.account_id
+    }
+  })
+}
+
 variable "config" {}
 
 module "immanent-changer" {
@@ -43,4 +51,8 @@ module "immanent-changer" {
 
 output "auditor_arn" {
   value = module.immanent-changer.auditor_arn
+}
+
+output "aws_config" {
+  value = local.aws_config
 }

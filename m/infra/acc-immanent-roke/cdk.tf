@@ -26,6 +26,14 @@ data "aws_caller_identity" "current" {
   provider = aws.immanent-roke
 }
 
+locals {
+  aws_config = jsonencode({
+    "immanent-roke" : {
+      account_id = data.aws_caller_identity.current.account_id
+    }
+  })
+}
+
 variable "config" {}
 
 module "immanent-roke" {
@@ -43,4 +51,8 @@ module "immanent-roke" {
 
 output "auditor_arn" {
   value = module.immanent-roke.auditor_arn
+}
+
+output "aws_config" {
+  value = local.aws_config
 }

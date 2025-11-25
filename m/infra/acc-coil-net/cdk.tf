@@ -26,6 +26,14 @@ data "aws_caller_identity" "current" {
   provider = aws.coil-net
 }
 
+locals {
+  aws_config = jsonencode({
+    "coil-net" : {
+      account_id = data.aws_caller_identity.current.account_id
+    }
+  })
+}
+
 variable "config" {}
 
 module "coil-net" {
@@ -43,4 +51,8 @@ module "coil-net" {
 
 output "auditor_arn" {
   value = module.coil-net.auditor_arn
+}
+
+output "aws_config" {
+  value = local.aws_config
 }

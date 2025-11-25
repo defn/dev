@@ -26,6 +26,14 @@ data "aws_caller_identity" "current" {
   provider = aws.vault-log
 }
 
+locals {
+  aws_config = jsonencode({
+    "vault-log" : {
+      account_id = data.aws_caller_identity.current.account_id
+    }
+  })
+}
+
 variable "config" {}
 
 module "vault-log" {
@@ -43,4 +51,8 @@ module "vault-log" {
 
 output "auditor_arn" {
   value = module.vault-log.auditor_arn
+}
+
+output "aws_config" {
+  value = local.aws_config
 }

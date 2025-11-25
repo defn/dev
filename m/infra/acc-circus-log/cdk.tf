@@ -26,6 +26,14 @@ data "aws_caller_identity" "current" {
   provider = aws.circus-log
 }
 
+locals {
+  aws_config = jsonencode({
+    "circus-log" : {
+      account_id = data.aws_caller_identity.current.account_id
+    }
+  })
+}
+
 variable "config" {}
 
 module "circus-log" {
@@ -43,4 +51,8 @@ module "circus-log" {
 
 output "auditor_arn" {
   value = module.circus-log.auditor_arn
+}
+
+output "aws_config" {
+  value = local.aws_config
 }

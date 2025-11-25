@@ -26,6 +26,14 @@ data "aws_caller_identity" "current" {
   provider = aws.immanent-herbal
 }
 
+locals {
+  aws_config = jsonencode({
+    "immanent-herbal" : {
+      account_id = data.aws_caller_identity.current.account_id
+    }
+  })
+}
+
 variable "config" {}
 
 module "immanent-herbal" {
@@ -43,4 +51,8 @@ module "immanent-herbal" {
 
 output "auditor_arn" {
   value = module.immanent-herbal.auditor_arn
+}
+
+output "aws_config" {
+  value = local.aws_config
 }

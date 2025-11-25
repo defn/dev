@@ -812,6 +812,14 @@ config:
               	provider = aws.chamber-org
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"chamber-org": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "chamber-org" {
@@ -828,7 +836,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.chamber-org.auditor_arn
+                value = module.chamber-org.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
           "1":
             account: "1"
@@ -936,6 +948,14 @@ config:
               	provider = aws.chamber-1
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"chamber-1": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "chamber-1" {
@@ -952,7 +972,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.chamber-1.auditor_arn
+                value = module.chamber-1.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
           "2":
             account: "2"
@@ -1060,6 +1084,14 @@ config:
               	provider = aws.chamber-2
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"chamber-2": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "chamber-2" {
@@ -1076,7 +1108,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.chamber-2.auditor_arn
+                value = module.chamber-2.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
           "3":
             account: "3"
@@ -1184,6 +1220,14 @@ config:
               	provider = aws.chamber-3
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"chamber-3": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "chamber-3" {
@@ -1200,7 +1244,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.chamber-3.auditor_arn
+                value = module.chamber-3.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
           "4":
             account: "4"
@@ -1308,6 +1356,14 @@ config:
               	provider = aws.chamber-4
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"chamber-4": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "chamber-4" {
@@ -1324,7 +1380,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.chamber-4.auditor_arn
+                value = module.chamber-4.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
           "5":
             account: "5"
@@ -1432,6 +1492,14 @@ config:
               	provider = aws.chamber-5
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"chamber-5": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "chamber-5" {
@@ -1448,7 +1516,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.chamber-5.auditor_arn
+                value = module.chamber-5.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
           "6":
             account: "6"
@@ -1556,6 +1628,14 @@ config:
               	provider = aws.chamber-6
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"chamber-6": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "chamber-6" {
@@ -1572,7 +1652,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.chamber-6.auditor_arn
+                value = module.chamber-6.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
           "7":
             account: "7"
@@ -1680,6 +1764,14 @@ config:
               	provider = aws.chamber-7
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"chamber-7": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "chamber-7" {
@@ -1696,7 +1788,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.chamber-7.auditor_arn
+                value = module.chamber-7.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
           "8":
             account: "8"
@@ -1804,6 +1900,14 @@ config:
               	provider = aws.chamber-8
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"chamber-8": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "chamber-8" {
@@ -1820,7 +1924,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.chamber-8.auditor_arn
+                value = module.chamber-8.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
           "9":
             account: "9"
@@ -1928,6 +2036,14 @@ config:
               	provider = aws.chamber-9
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"chamber-9": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "chamber-9" {
@@ -1944,7 +2060,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.chamber-9.auditor_arn
+                value = module.chamber-9.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
           a:
             account: a
@@ -2052,6 +2172,14 @@ config:
               	provider = aws.chamber-a
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"chamber-a": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "chamber-a" {
@@ -2068,7 +2196,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.chamber-a.auditor_arn
+                value = module.chamber-a.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
           b:
             account: b
@@ -2176,6 +2308,14 @@ config:
               	provider = aws.chamber-b
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"chamber-b": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "chamber-b" {
@@ -2192,7 +2332,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.chamber-b.auditor_arn
+                value = module.chamber-b.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
           c:
             account: c
@@ -2300,6 +2444,14 @@ config:
               	provider = aws.chamber-c
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"chamber-c": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "chamber-c" {
@@ -2316,7 +2468,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.chamber-c.auditor_arn
+                value = module.chamber-c.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
           d:
             account: d
@@ -2424,6 +2580,14 @@ config:
               	provider = aws.chamber-d
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"chamber-d": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "chamber-d" {
@@ -2440,7 +2604,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.chamber-d.auditor_arn
+                value = module.chamber-d.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
           e:
             account: e
@@ -2548,6 +2716,14 @@ config:
               	provider = aws.chamber-e
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"chamber-e": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "chamber-e" {
@@ -2564,7 +2740,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.chamber-e.auditor_arn
+                value = module.chamber-e.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
           "f":
             account: "f"
@@ -2672,6 +2852,14 @@ config:
               	provider = aws.chamber-f
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"chamber-f": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "chamber-f" {
@@ -2688,7 +2876,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.chamber-f.auditor_arn
+                value = module.chamber-f.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
           g:
             account: g
@@ -2796,6 +2988,14 @@ config:
               	provider = aws.chamber-g
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"chamber-g": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "chamber-g" {
@@ -2812,7 +3012,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.chamber-g.auditor_arn
+                value = module.chamber-g.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
           h:
             account: h
@@ -2920,6 +3124,14 @@ config:
               	provider = aws.chamber-h
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"chamber-h": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "chamber-h" {
@@ -2936,7 +3148,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.chamber-h.auditor_arn
+                value = module.chamber-h.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
           i:
             account: i
@@ -3044,6 +3260,14 @@ config:
               	provider = aws.chamber-i
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"chamber-i": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "chamber-i" {
@@ -3060,7 +3284,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.chamber-i.auditor_arn
+                value = module.chamber-i.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
           j:
             account: j
@@ -3168,6 +3396,14 @@ config:
               	provider = aws.chamber-j
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"chamber-j": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "chamber-j" {
@@ -3184,7 +3420,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.chamber-j.auditor_arn
+                value = module.chamber-j.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
           l:
             account: l
@@ -3292,6 +3532,14 @@ config:
               	provider = aws.chamber-l
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"chamber-l": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "chamber-l" {
@@ -3308,7 +3556,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.chamber-l.auditor_arn
+                value = module.chamber-l.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
           m:
             account: m
@@ -3416,6 +3668,14 @@ config:
               	provider = aws.chamber-m
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"chamber-m": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "chamber-m" {
@@ -3432,7 +3692,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.chamber-m.auditor_arn
+                value = module.chamber-m.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
           "n":
             account: "n"
@@ -3540,6 +3804,14 @@ config:
               	provider = aws.chamber-n
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"chamber-n": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "chamber-n" {
@@ -3556,7 +3828,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.chamber-n.auditor_arn
+                value = module.chamber-n.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
           o:
             account: o
@@ -3664,6 +3940,14 @@ config:
               	provider = aws.chamber-o
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"chamber-o": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "chamber-o" {
@@ -3680,7 +3964,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.chamber-o.auditor_arn
+                value = module.chamber-o.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
           p:
             account: p
@@ -3788,6 +4076,14 @@ config:
               	provider = aws.chamber-p
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"chamber-p": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "chamber-p" {
@@ -3804,7 +4100,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.chamber-p.auditor_arn
+                value = module.chamber-p.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
           q:
             account: q
@@ -3912,6 +4212,14 @@ config:
               	provider = aws.chamber-q
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"chamber-q": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "chamber-q" {
@@ -3928,7 +4236,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.chamber-q.auditor_arn
+                value = module.chamber-q.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
           r:
             account: r
@@ -4036,6 +4348,14 @@ config:
               	provider = aws.chamber-r
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"chamber-r": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "chamber-r" {
@@ -4052,7 +4372,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.chamber-r.auditor_arn
+                value = module.chamber-r.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
           s:
             account: s
@@ -4160,6 +4484,14 @@ config:
               	provider = aws.chamber-s
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"chamber-s": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "chamber-s" {
@@ -4176,7 +4508,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.chamber-s.auditor_arn
+                value = module.chamber-s.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
           "t":
             account: "t"
@@ -4284,6 +4620,14 @@ config:
               	provider = aws.chamber-t
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"chamber-t": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "chamber-t" {
@@ -4300,7 +4644,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.chamber-t.auditor_arn
+                value = module.chamber-t.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
           u:
             account: u
@@ -4408,6 +4756,14 @@ config:
               	provider = aws.chamber-u
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"chamber-u": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "chamber-u" {
@@ -4424,7 +4780,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.chamber-u.auditor_arn
+                value = module.chamber-u.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
           v:
             account: v
@@ -4532,6 +4892,14 @@ config:
               	provider = aws.chamber-v
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"chamber-v": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "chamber-v" {
@@ -4548,7 +4916,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.chamber-v.auditor_arn
+                value = module.chamber-v.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
           w:
             account: w
@@ -4656,6 +5028,14 @@ config:
               	provider = aws.chamber-w
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"chamber-w": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "chamber-w" {
@@ -4672,7 +5052,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.chamber-w.auditor_arn
+                value = module.chamber-w.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
           x:
             account: x
@@ -4780,6 +5164,14 @@ config:
               	provider = aws.chamber-x
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"chamber-x": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "chamber-x" {
@@ -4796,7 +5188,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.chamber-x.auditor_arn
+                value = module.chamber-x.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
           "y":
             account: "y"
@@ -4904,6 +5300,14 @@ config:
               	provider = aws.chamber-y
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"chamber-y": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "chamber-y" {
@@ -4920,7 +5324,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.chamber-y.auditor_arn
+                value = module.chamber-y.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
           z:
             account: z
@@ -5028,6 +5436,14 @@ config:
               	provider = aws.chamber-z
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"chamber-z": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "chamber-z" {
@@ -5044,7 +5460,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.chamber-z.auditor_arn
+                value = module.chamber-z.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
         sso_region: us-west-2
         sso_url: https://chamber-0.awsapps.com/start
@@ -5316,6 +5736,14 @@ config:
               	provider = aws.circus-org
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"circus-org": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "circus-org" {
@@ -5332,7 +5760,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.circus-org.auditor_arn
+                value = module.circus-org.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
           lib:
             account: lib
@@ -5440,6 +5872,14 @@ config:
               	provider = aws.circus-lib
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"circus-lib": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "circus-lib" {
@@ -5456,7 +5896,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.circus-lib.auditor_arn
+                value = module.circus-lib.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
           log:
             account: log
@@ -5564,6 +6008,14 @@ config:
               	provider = aws.circus-log
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"circus-log": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "circus-log" {
@@ -5580,7 +6032,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.circus-log.auditor_arn
+                value = module.circus-log.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
           net:
             account: net
@@ -5688,6 +6144,14 @@ config:
               	provider = aws.circus-net
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"circus-net": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "circus-net" {
@@ -5704,7 +6168,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.circus-net.auditor_arn
+                value = module.circus-net.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
           ops:
             account: ops
@@ -5812,6 +6280,14 @@ config:
               	provider = aws.circus-ops
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"circus-ops": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "circus-ops" {
@@ -5828,7 +6304,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.circus-ops.auditor_arn
+                value = module.circus-ops.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
         sso_region: us-west-2
         sso_url: https://d-92670c4790.awsapps.com/start
@@ -6090,6 +6570,14 @@ config:
               	provider = aws.coil-org
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"coil-org": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "coil-org" {
@@ -6106,7 +6594,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.coil-org.auditor_arn
+                value = module.coil-org.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
           hub:
             account: hub
@@ -6216,6 +6708,14 @@ config:
               	provider = aws.coil-hub
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"coil-hub": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "coil-hub" {
@@ -6232,7 +6732,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.coil-hub.auditor_arn
+                value = module.coil-hub.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
           lib:
             account: lib
@@ -6342,6 +6846,14 @@ config:
               	provider = aws.coil-lib
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"coil-lib": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "coil-lib" {
@@ -6358,7 +6870,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.coil-lib.auditor_arn
+                value = module.coil-lib.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
           net:
             account: net
@@ -6468,6 +6984,14 @@ config:
               	provider = aws.coil-net
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"coil-net": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "coil-net" {
@@ -6484,7 +7008,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.coil-net.auditor_arn
+                value = module.coil-net.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
         sso_region: us-east-1
         sso_url: https://d-90674c3cfd.awsapps.com/start
@@ -6746,6 +7274,14 @@ config:
               	provider = aws.curl-org
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"curl-org": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "curl-org" {
@@ -6762,7 +7298,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.curl-org.auditor_arn
+                value = module.curl-org.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
           hub:
             account: hub
@@ -6872,6 +7412,14 @@ config:
               	provider = aws.curl-hub
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"curl-hub": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "curl-hub" {
@@ -6888,7 +7436,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.curl-hub.auditor_arn
+                value = module.curl-hub.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
           lib:
             account: lib
@@ -6998,6 +7550,14 @@ config:
               	provider = aws.curl-lib
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"curl-lib": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "curl-lib" {
@@ -7014,7 +7574,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.curl-lib.auditor_arn
+                value = module.curl-lib.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
           net:
             account: net
@@ -7124,6 +7688,14 @@ config:
               	provider = aws.curl-net
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"curl-net": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "curl-net" {
@@ -7140,7 +7712,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.curl-net.auditor_arn
+                value = module.curl-net.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
         sso_region: us-west-2
         sso_url: https://d-926760a859.awsapps.com/start
@@ -7341,6 +7917,14 @@ config:
               	provider = aws.defn-org
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"defn-org": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "defn-org" {
@@ -7357,7 +7941,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.defn-org.auditor_arn
+                value = module.defn-org.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
         sso_region: us-east-2
         sso_url: https://defn.awsapps.com/start
@@ -7709,6 +8297,14 @@ config:
               	provider = aws.fogg-org
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"fogg-org": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "fogg-org" {
@@ -7725,7 +8321,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.fogg-org.auditor_arn
+                value = module.fogg-org.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
           ci:
             account: ci
@@ -7833,6 +8433,14 @@ config:
               	provider = aws.fogg-ci
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"fogg-ci": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "fogg-ci" {
@@ -7849,7 +8457,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.fogg-ci.auditor_arn
+                value = module.fogg-ci.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
           dev:
             account: dev
@@ -7957,6 +8569,14 @@ config:
               	provider = aws.fogg-dev
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"fogg-dev": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "fogg-dev" {
@@ -7973,7 +8593,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.fogg-dev.auditor_arn
+                value = module.fogg-dev.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
           hub:
             account: hub
@@ -8081,6 +8705,14 @@ config:
               	provider = aws.fogg-hub
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"fogg-hub": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "fogg-hub" {
@@ -8097,7 +8729,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.fogg-hub.auditor_arn
+                value = module.fogg-hub.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
           lib:
             account: lib
@@ -8205,6 +8841,14 @@ config:
               	provider = aws.fogg-lib
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"fogg-lib": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "fogg-lib" {
@@ -8221,7 +8865,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.fogg-lib.auditor_arn
+                value = module.fogg-lib.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
           log:
             account: log
@@ -8329,6 +8977,14 @@ config:
               	provider = aws.fogg-log
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"fogg-log": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "fogg-log" {
@@ -8345,7 +9001,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.fogg-log.auditor_arn
+                value = module.fogg-log.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
           net:
             account: net
@@ -8453,6 +9113,14 @@ config:
               	provider = aws.fogg-net
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"fogg-net": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "fogg-net" {
@@ -8469,7 +9137,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.fogg-net.auditor_arn
+                value = module.fogg-net.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
           ops:
             account: ops
@@ -8577,6 +9249,14 @@ config:
               	provider = aws.fogg-ops
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"fogg-ops": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "fogg-ops" {
@@ -8593,7 +9273,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.fogg-ops.auditor_arn
+                value = module.fogg-ops.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
           prod:
             account: prod
@@ -8701,6 +9385,14 @@ config:
               	provider = aws.fogg-prod
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"fogg-prod": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "fogg-prod" {
@@ -8717,7 +9409,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.fogg-prod.auditor_arn
+                value = module.fogg-prod.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
           pub:
             account: pub
@@ -8825,6 +9521,14 @@ config:
               	provider = aws.fogg-pub
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"fogg-pub": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "fogg-pub" {
@@ -8841,7 +9545,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.fogg-pub.auditor_arn
+                value = module.fogg-pub.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
         sso_region: us-west-2
         sso_url: https://fogg-0.awsapps.com/start
@@ -9067,6 +9775,14 @@ config:
               	provider = aws.gyre-org
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"gyre-org": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "gyre-org" {
@@ -9083,7 +9799,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.gyre-org.auditor_arn
+                value = module.gyre-org.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
           ops:
             account: ops
@@ -9193,6 +9913,14 @@ config:
               	provider = aws.gyre-ops
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"gyre-ops": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "gyre-ops" {
@@ -9209,7 +9937,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.gyre-ops.auditor_arn
+                value = module.gyre-ops.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
         sso_region: us-east-2
         sso_url: https://d-9a6716e54a.awsapps.com/start
@@ -9579,6 +10311,14 @@ config:
               	provider = aws.helix-org
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"helix-org": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "helix-org" {
@@ -9595,7 +10335,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.helix-org.auditor_arn
+                value = module.helix-org.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
           ci:
             account: ci
@@ -9705,6 +10449,14 @@ config:
               	provider = aws.helix-ci
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"helix-ci": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "helix-ci" {
@@ -9721,7 +10473,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.helix-ci.auditor_arn
+                value = module.helix-ci.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
           dev:
             account: dev
@@ -9831,6 +10587,14 @@ config:
               	provider = aws.helix-dev
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"helix-dev": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "helix-dev" {
@@ -9847,7 +10611,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.helix-dev.auditor_arn
+                value = module.helix-dev.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
           hub:
             account: hub
@@ -9957,6 +10725,14 @@ config:
               	provider = aws.helix-hub
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"helix-hub": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "helix-hub" {
@@ -9973,7 +10749,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.helix-hub.auditor_arn
+                value = module.helix-hub.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
           lib:
             account: lib
@@ -10083,6 +10863,14 @@ config:
               	provider = aws.helix-lib
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"helix-lib": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "helix-lib" {
@@ -10099,7 +10887,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.helix-lib.auditor_arn
+                value = module.helix-lib.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
           log:
             account: log
@@ -10209,6 +11001,14 @@ config:
               	provider = aws.helix-log
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"helix-log": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "helix-log" {
@@ -10225,7 +11025,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.helix-log.auditor_arn
+                value = module.helix-log.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
           net:
             account: net
@@ -10335,6 +11139,14 @@ config:
               	provider = aws.helix-net
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"helix-net": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "helix-net" {
@@ -10351,7 +11163,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.helix-net.auditor_arn
+                value = module.helix-net.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
           ops:
             account: ops
@@ -10461,6 +11277,14 @@ config:
               	provider = aws.helix-ops
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"helix-ops": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "helix-ops" {
@@ -10477,7 +11301,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.helix-ops.auditor_arn
+                value = module.helix-ops.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
           prod:
             account: prod
@@ -10587,6 +11415,14 @@ config:
               	provider = aws.helix-prod
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"helix-prod": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "helix-prod" {
@@ -10603,7 +11439,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.helix-prod.auditor_arn
+                value = module.helix-prod.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
           pub:
             account: pub
@@ -10713,6 +11553,14 @@ config:
               	provider = aws.helix-pub
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"helix-pub": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "helix-pub" {
@@ -10729,7 +11577,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.helix-pub.auditor_arn
+                value = module.helix-pub.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
         sso_region: us-east-2
         sso_url: https://d-9a6716ffd1.awsapps.com/start
@@ -11017,6 +11869,14 @@ config:
               	provider = aws.imma-org
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"imma-org": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "imma-org" {
@@ -11033,7 +11893,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.imma-org.auditor_arn
+                value = module.imma-org.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
           dev:
             account: dev
@@ -11141,6 +12005,14 @@ config:
               	provider = aws.imma-dev
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"imma-dev": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "imma-dev" {
@@ -11157,7 +12029,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.imma-dev.auditor_arn
+                value = module.imma-dev.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
           lib:
             account: lib
@@ -11265,6 +12141,14 @@ config:
               	provider = aws.imma-lib
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"imma-lib": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "imma-lib" {
@@ -11281,7 +12165,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.imma-lib.auditor_arn
+                value = module.imma-lib.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
           log:
             account: log
@@ -11389,6 +12277,14 @@ config:
               	provider = aws.imma-log
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"imma-log": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "imma-log" {
@@ -11405,7 +12301,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.imma-log.auditor_arn
+                value = module.imma-log.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
           net:
             account: net
@@ -11513,6 +12413,14 @@ config:
               	provider = aws.imma-net
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"imma-net": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "imma-net" {
@@ -11529,7 +12437,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.imma-net.auditor_arn
+                value = module.imma-net.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
           pub:
             account: pub
@@ -11637,6 +12549,14 @@ config:
               	provider = aws.imma-pub
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"imma-pub": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "imma-pub" {
@@ -11653,7 +12573,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.imma-pub.auditor_arn
+                value = module.imma-pub.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
         sso_region: us-west-2
         sso_url: https://imma-0.awsapps.com/start
@@ -12037,6 +12961,14 @@ config:
               	provider = aws.immanent-org
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"immanent-org": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "immanent-org" {
@@ -12053,7 +12985,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.immanent-org.auditor_arn
+                value = module.immanent-org.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
           changer:
             account: changer
@@ -12161,6 +13097,14 @@ config:
               	provider = aws.immanent-changer
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"immanent-changer": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "immanent-changer" {
@@ -12177,7 +13121,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.immanent-changer.auditor_arn
+                value = module.immanent-changer.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
           chanter:
             account: chanter
@@ -12285,6 +13233,14 @@ config:
               	provider = aws.immanent-chanter
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"immanent-chanter": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "immanent-chanter" {
@@ -12301,7 +13257,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.immanent-chanter.auditor_arn
+                value = module.immanent-chanter.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
           doorkeeper:
             account: doorkeeper
@@ -12409,6 +13369,14 @@ config:
               	provider = aws.immanent-doorkeeper
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"immanent-doorkeeper": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "immanent-doorkeeper" {
@@ -12425,7 +13393,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.immanent-doorkeeper.auditor_arn
+                value = module.immanent-doorkeeper.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
           ged:
             account: ged
@@ -12533,6 +13505,14 @@ config:
               	provider = aws.immanent-ged
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"immanent-ged": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "immanent-ged" {
@@ -12549,7 +13529,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.immanent-ged.auditor_arn
+                value = module.immanent-ged.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
           hand:
             account: hand
@@ -12657,6 +13641,14 @@ config:
               	provider = aws.immanent-hand
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"immanent-hand": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "immanent-hand" {
@@ -12673,7 +13665,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.immanent-hand.auditor_arn
+                value = module.immanent-hand.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
           herbal:
             account: herbal
@@ -12781,6 +13777,14 @@ config:
               	provider = aws.immanent-herbal
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"immanent-herbal": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "immanent-herbal" {
@@ -12797,7 +13801,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.immanent-herbal.auditor_arn
+                value = module.immanent-herbal.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
           namer:
             account: namer
@@ -12905,6 +13913,14 @@ config:
               	provider = aws.immanent-namer
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"immanent-namer": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "immanent-namer" {
@@ -12921,7 +13937,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.immanent-namer.auditor_arn
+                value = module.immanent-namer.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
           patterner:
             account: patterner
@@ -13029,6 +14049,14 @@ config:
               	provider = aws.immanent-patterner
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"immanent-patterner": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "immanent-patterner" {
@@ -13045,7 +14073,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.immanent-patterner.auditor_arn
+                value = module.immanent-patterner.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
           roke:
             account: roke
@@ -13153,6 +14185,14 @@ config:
               	provider = aws.immanent-roke
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"immanent-roke": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "immanent-roke" {
@@ -13169,7 +14209,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.immanent-roke.auditor_arn
+                value = module.immanent-roke.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
           summoner:
             account: summoner
@@ -13277,6 +14321,14 @@ config:
               	provider = aws.immanent-summoner
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"immanent-summoner": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "immanent-summoner" {
@@ -13293,7 +14345,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.immanent-summoner.auditor_arn
+                value = module.immanent-summoner.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
           windkey:
             account: windkey
@@ -13401,6 +14457,14 @@ config:
               	provider = aws.immanent-windkey
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"immanent-windkey": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "immanent-windkey" {
@@ -13417,7 +14481,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.immanent-windkey.auditor_arn
+                value = module.immanent-windkey.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
         sso_region: us-west-2
         sso_url: https://immanent-0.awsapps.com/start
@@ -13657,6 +14725,14 @@ config:
               	provider = aws.jianghu-org
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"jianghu-org": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "jianghu-org" {
@@ -13673,7 +14749,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.jianghu-org.auditor_arn
+                value = module.jianghu-org.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
           log:
             account: log
@@ -13781,6 +14861,14 @@ config:
               	provider = aws.jianghu-log
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"jianghu-log": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "jianghu-log" {
@@ -13797,7 +14885,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.jianghu-log.auditor_arn
+                value = module.jianghu-log.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
           net:
             account: net
@@ -13905,6 +14997,14 @@ config:
               	provider = aws.jianghu-net
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"jianghu-net": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "jianghu-net" {
@@ -13921,7 +15021,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.jianghu-net.auditor_arn
+                value = module.jianghu-net.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
         sso_region: us-west-2
         sso_url: https://jianghu-0.awsapps.com/start
@@ -14291,6 +15395,14 @@ config:
               	provider = aws.spiral-org
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"spiral-org": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "spiral-org" {
@@ -14307,7 +15419,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.spiral-org.auditor_arn
+                value = module.spiral-org.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
           ci:
             account: ci
@@ -14417,6 +15533,14 @@ config:
               	provider = aws.spiral-ci
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"spiral-ci": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "spiral-ci" {
@@ -14433,7 +15557,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.spiral-ci.auditor_arn
+                value = module.spiral-ci.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
           dev:
             account: dev
@@ -14543,6 +15671,14 @@ config:
               	provider = aws.spiral-dev
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"spiral-dev": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "spiral-dev" {
@@ -14559,7 +15695,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.spiral-dev.auditor_arn
+                value = module.spiral-dev.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
           hub:
             account: hub
@@ -14669,6 +15809,14 @@ config:
               	provider = aws.spiral-hub
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"spiral-hub": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "spiral-hub" {
@@ -14685,7 +15833,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.spiral-hub.auditor_arn
+                value = module.spiral-hub.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
           lib:
             account: lib
@@ -14795,6 +15947,14 @@ config:
               	provider = aws.spiral-lib
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"spiral-lib": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "spiral-lib" {
@@ -14811,7 +15971,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.spiral-lib.auditor_arn
+                value = module.spiral-lib.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
           log:
             account: log
@@ -14921,6 +16085,14 @@ config:
               	provider = aws.spiral-log
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"spiral-log": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "spiral-log" {
@@ -14937,7 +16109,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.spiral-log.auditor_arn
+                value = module.spiral-log.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
           net:
             account: net
@@ -15047,6 +16223,14 @@ config:
               	provider = aws.spiral-net
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"spiral-net": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "spiral-net" {
@@ -15063,7 +16247,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.spiral-net.auditor_arn
+                value = module.spiral-net.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
           ops:
             account: ops
@@ -15173,6 +16361,14 @@ config:
               	provider = aws.spiral-ops
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"spiral-ops": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "spiral-ops" {
@@ -15189,7 +16385,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.spiral-ops.auditor_arn
+                value = module.spiral-ops.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
           prod:
             account: prod
@@ -15299,6 +16499,14 @@ config:
               	provider = aws.spiral-prod
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"spiral-prod": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "spiral-prod" {
@@ -15315,7 +16523,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.spiral-prod.auditor_arn
+                value = module.spiral-prod.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
           pub:
             account: pub
@@ -15425,6 +16637,14 @@ config:
               	provider = aws.spiral-pub
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"spiral-pub": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "spiral-pub" {
@@ -15441,7 +16661,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.spiral-pub.auditor_arn
+                value = module.spiral-pub.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
         sso_region: us-west-2
         sso_url: https://d-926760b322.awsapps.com/start
@@ -15793,6 +17017,14 @@ config:
               	provider = aws.vault-org
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"vault-org": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "vault-org" {
@@ -15809,7 +17041,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.vault-org.auditor_arn
+                value = module.vault-org.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
           ci:
             account: ci
@@ -15917,6 +17153,14 @@ config:
               	provider = aws.vault-ci
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"vault-ci": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "vault-ci" {
@@ -15933,7 +17177,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.vault-ci.auditor_arn
+                value = module.vault-ci.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
           dev:
             account: dev
@@ -16041,6 +17289,14 @@ config:
               	provider = aws.vault-dev
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"vault-dev": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "vault-dev" {
@@ -16057,7 +17313,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.vault-dev.auditor_arn
+                value = module.vault-dev.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
           hub:
             account: hub
@@ -16165,6 +17425,14 @@ config:
               	provider = aws.vault-hub
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"vault-hub": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "vault-hub" {
@@ -16181,7 +17449,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.vault-hub.auditor_arn
+                value = module.vault-hub.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
           lib:
             account: lib
@@ -16289,6 +17561,14 @@ config:
               	provider = aws.vault-lib
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"vault-lib": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "vault-lib" {
@@ -16305,7 +17585,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.vault-lib.auditor_arn
+                value = module.vault-lib.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
           log:
             account: log
@@ -16413,6 +17697,14 @@ config:
               	provider = aws.vault-log
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"vault-log": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "vault-log" {
@@ -16429,7 +17721,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.vault-log.auditor_arn
+                value = module.vault-log.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
           net:
             account: net
@@ -16537,6 +17833,14 @@ config:
               	provider = aws.vault-net
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"vault-net": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "vault-net" {
@@ -16553,7 +17857,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.vault-net.auditor_arn
+                value = module.vault-net.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
           ops:
             account: ops
@@ -16661,6 +17969,14 @@ config:
               	provider = aws.vault-ops
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"vault-ops": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "vault-ops" {
@@ -16677,7 +17993,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.vault-ops.auditor_arn
+                value = module.vault-ops.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
           prod:
             account: prod
@@ -16785,6 +18105,14 @@ config:
               	provider = aws.vault-prod
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"vault-prod": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "vault-prod" {
@@ -16801,7 +18129,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.vault-prod.auditor_arn
+                value = module.vault-prod.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
           pub:
             account: pub
@@ -16909,6 +18241,14 @@ config:
               	provider = aws.vault-pub
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"vault-pub": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "vault-pub" {
@@ -16925,7 +18265,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.vault-pub.auditor_arn
+                value = module.vault-pub.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
         sso_region: us-east-2
         sso_url: https://d-9a672a0e52.awsapps.com/start
@@ -17197,6 +18541,14 @@ config:
               	provider = aws.whoa-org
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"whoa-org": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "whoa-org" {
@@ -17213,7 +18565,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.whoa-org.auditor_arn
+                value = module.whoa-org.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
           dev:
             account: dev
@@ -17321,6 +18677,14 @@ config:
               	provider = aws.whoa-dev
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"whoa-dev": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "whoa-dev" {
@@ -17337,7 +18701,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.whoa-dev.auditor_arn
+                value = module.whoa-dev.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
           hub:
             account: hub
@@ -17445,6 +18813,14 @@ config:
               	provider = aws.whoa-hub
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"whoa-hub": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "whoa-hub" {
@@ -17461,7 +18837,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.whoa-hub.auditor_arn
+                value = module.whoa-hub.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
           net:
             account: net
@@ -17569,6 +18949,14 @@ config:
               	provider = aws.whoa-net
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"whoa-net": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "whoa-net" {
@@ -17585,7 +18973,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.whoa-net.auditor_arn
+                value = module.whoa-net.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
           pub:
             account: pub
@@ -17693,6 +19085,14 @@ config:
               	provider = aws.whoa-pub
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"whoa-pub": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "whoa-pub" {
@@ -17709,7 +19109,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.whoa-pub.auditor_arn
+                value = module.whoa-pub.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
         sso_region: us-west-2
         sso_url: https://whoa-0.awsapps.com/start
@@ -21503,6 +22907,14 @@ config:
               	provider = aws.chamber-org
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"chamber-org": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "chamber-org" {
@@ -21519,7 +22931,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.chamber-org.auditor_arn
+                value = module.chamber-org.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
           "1":
             id: "741346472057"
@@ -21627,6 +23043,14 @@ config:
               	provider = aws.chamber-1
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"chamber-1": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "chamber-1" {
@@ -21643,7 +23067,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.chamber-1.auditor_arn
+                value = module.chamber-1.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
           "2":
             id: "447993872368"
@@ -21751,6 +23179,14 @@ config:
               	provider = aws.chamber-2
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"chamber-2": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "chamber-2" {
@@ -21767,7 +23203,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.chamber-2.auditor_arn
+                value = module.chamber-2.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
           "3":
             id: "463050069968"
@@ -21875,6 +23315,14 @@ config:
               	provider = aws.chamber-3
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"chamber-3": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "chamber-3" {
@@ -21891,7 +23339,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.chamber-3.auditor_arn
+                value = module.chamber-3.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
           "4":
             id: "368890376620"
@@ -21999,6 +23451,14 @@ config:
               	provider = aws.chamber-4
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"chamber-4": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "chamber-4" {
@@ -22015,7 +23475,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.chamber-4.auditor_arn
+                value = module.chamber-4.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
           "5":
             id: "200733412967"
@@ -22123,6 +23587,14 @@ config:
               	provider = aws.chamber-5
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"chamber-5": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "chamber-5" {
@@ -22139,7 +23611,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.chamber-5.auditor_arn
+                value = module.chamber-5.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
           "6":
             id: "493089153027"
@@ -22247,6 +23723,14 @@ config:
               	provider = aws.chamber-6
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"chamber-6": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "chamber-6" {
@@ -22263,7 +23747,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.chamber-6.auditor_arn
+                value = module.chamber-6.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
           "7":
             id: "837425503386"
@@ -22371,6 +23859,14 @@ config:
               	provider = aws.chamber-7
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"chamber-7": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "chamber-7" {
@@ -22387,7 +23883,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.chamber-7.auditor_arn
+                value = module.chamber-7.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
           "8":
             id: "773314335856"
@@ -22495,6 +23995,14 @@ config:
               	provider = aws.chamber-8
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"chamber-8": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "chamber-8" {
@@ -22511,7 +24019,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.chamber-8.auditor_arn
+                value = module.chamber-8.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
           "9":
             id: "950940975070"
@@ -22619,6 +24131,14 @@ config:
               	provider = aws.chamber-9
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"chamber-9": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "chamber-9" {
@@ -22635,7 +24155,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.chamber-9.auditor_arn
+                value = module.chamber-9.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
           a:
             id: "503577294851"
@@ -22743,6 +24267,14 @@ config:
               	provider = aws.chamber-a
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"chamber-a": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "chamber-a" {
@@ -22759,7 +24291,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.chamber-a.auditor_arn
+                value = module.chamber-a.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
           b:
             id: "310940910494"
@@ -22867,6 +24403,14 @@ config:
               	provider = aws.chamber-b
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"chamber-b": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "chamber-b" {
@@ -22883,7 +24427,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.chamber-b.auditor_arn
+                value = module.chamber-b.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
           c:
             id: "047633732615"
@@ -22991,6 +24539,14 @@ config:
               	provider = aws.chamber-c
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"chamber-c": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "chamber-c" {
@@ -23007,7 +24563,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.chamber-c.auditor_arn
+                value = module.chamber-c.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
           d:
             id: "699441347021"
@@ -23115,6 +24675,14 @@ config:
               	provider = aws.chamber-d
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"chamber-d": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "chamber-d" {
@@ -23131,7 +24699,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.chamber-d.auditor_arn
+                value = module.chamber-d.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
           e:
             id: "171831323337"
@@ -23239,6 +24811,14 @@ config:
               	provider = aws.chamber-e
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"chamber-e": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "chamber-e" {
@@ -23255,7 +24835,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.chamber-e.auditor_arn
+                value = module.chamber-e.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
           "f":
             id: "842022523232"
@@ -23363,6 +24947,14 @@ config:
               	provider = aws.chamber-f
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"chamber-f": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "chamber-f" {
@@ -23379,7 +24971,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.chamber-f.auditor_arn
+                value = module.chamber-f.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
           g:
             id: "023867963778"
@@ -23487,6 +25083,14 @@ config:
               	provider = aws.chamber-g
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"chamber-g": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "chamber-g" {
@@ -23503,7 +25107,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.chamber-g.auditor_arn
+                value = module.chamber-g.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
           h:
             id: "371020107387"
@@ -23611,6 +25219,14 @@ config:
               	provider = aws.chamber-h
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"chamber-h": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "chamber-h" {
@@ -23627,7 +25243,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.chamber-h.auditor_arn
+                value = module.chamber-h.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
           i:
             id: "290132238209"
@@ -23735,6 +25355,14 @@ config:
               	provider = aws.chamber-i
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"chamber-i": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "chamber-i" {
@@ -23751,7 +25379,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.chamber-i.auditor_arn
+                value = module.chamber-i.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
           j:
             id: "738433022197"
@@ -23859,6 +25491,14 @@ config:
               	provider = aws.chamber-j
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"chamber-j": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "chamber-j" {
@@ -23875,7 +25515,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.chamber-j.auditor_arn
+                value = module.chamber-j.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
           l:
             id: "991300382347"
@@ -23983,6 +25627,14 @@ config:
               	provider = aws.chamber-l
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"chamber-l": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "chamber-l" {
@@ -23999,7 +25651,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.chamber-l.auditor_arn
+                value = module.chamber-l.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
           m:
             id: "684895750259"
@@ -24107,6 +25763,14 @@ config:
               	provider = aws.chamber-m
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"chamber-m": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "chamber-m" {
@@ -24123,7 +25787,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.chamber-m.auditor_arn
+                value = module.chamber-m.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
           "n":
             id: "705881812506"
@@ -24231,6 +25899,14 @@ config:
               	provider = aws.chamber-n
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"chamber-n": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "chamber-n" {
@@ -24247,7 +25923,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.chamber-n.auditor_arn
+                value = module.chamber-n.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
           o:
             id: "307136835824"
@@ -24355,6 +26035,14 @@ config:
               	provider = aws.chamber-o
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"chamber-o": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "chamber-o" {
@@ -24371,7 +26059,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.chamber-o.auditor_arn
+                value = module.chamber-o.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
           p:
             id: "706168331526"
@@ -24479,6 +26171,14 @@ config:
               	provider = aws.chamber-p
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"chamber-p": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "chamber-p" {
@@ -24495,7 +26195,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.chamber-p.auditor_arn
+                value = module.chamber-p.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
           q:
             id: "217047480856"
@@ -24603,6 +26307,14 @@ config:
               	provider = aws.chamber-q
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"chamber-q": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "chamber-q" {
@@ -24619,7 +26331,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.chamber-q.auditor_arn
+                value = module.chamber-q.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
           r:
             id: "416221726155"
@@ -24727,6 +26443,14 @@ config:
               	provider = aws.chamber-r
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"chamber-r": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "chamber-r" {
@@ -24743,7 +26467,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.chamber-r.auditor_arn
+                value = module.chamber-r.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
           s:
             id: "840650118369"
@@ -24851,6 +26579,14 @@ config:
               	provider = aws.chamber-s
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"chamber-s": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "chamber-s" {
@@ -24867,7 +26603,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.chamber-s.auditor_arn
+                value = module.chamber-s.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
           "t":
             id: "490895200523"
@@ -24975,6 +26715,14 @@ config:
               	provider = aws.chamber-t
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"chamber-t": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "chamber-t" {
@@ -24991,7 +26739,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.chamber-t.auditor_arn
+                value = module.chamber-t.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
           u:
             id: "467995590869"
@@ -25099,6 +26851,14 @@ config:
               	provider = aws.chamber-u
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"chamber-u": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "chamber-u" {
@@ -25115,7 +26875,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.chamber-u.auditor_arn
+                value = module.chamber-u.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
           v:
             id: "979368042862"
@@ -25223,6 +26987,14 @@ config:
               	provider = aws.chamber-v
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"chamber-v": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "chamber-v" {
@@ -25239,7 +27011,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.chamber-v.auditor_arn
+                value = module.chamber-v.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
           w:
             id: "313387692116"
@@ -25347,6 +27123,14 @@ config:
               	provider = aws.chamber-w
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"chamber-w": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "chamber-w" {
@@ -25363,7 +27147,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.chamber-w.auditor_arn
+                value = module.chamber-w.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
           x:
             id: "834936839208"
@@ -25471,6 +27259,14 @@ config:
               	provider = aws.chamber-x
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"chamber-x": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "chamber-x" {
@@ -25487,7 +27283,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.chamber-x.auditor_arn
+                value = module.chamber-x.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
           "y":
             id: "153556747817"
@@ -25595,6 +27395,14 @@ config:
               	provider = aws.chamber-y
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"chamber-y": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "chamber-y" {
@@ -25611,7 +27419,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.chamber-y.auditor_arn
+                value = module.chamber-y.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
           z:
             id: "037804009879"
@@ -25719,6 +27531,14 @@ config:
               	provider = aws.chamber-z
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"chamber-z": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "chamber-z" {
@@ -25735,7 +27555,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.chamber-z.auditor_arn
+                value = module.chamber-z.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
         org: chamber
         sso_region: us-west-2
@@ -26007,6 +27831,14 @@ config:
               	provider = aws.circus-org
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"circus-org": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "circus-org" {
@@ -26023,7 +27855,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.circus-org.auditor_arn
+                value = module.circus-org.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
           lib:
             id: "497790518354"
@@ -26131,6 +27967,14 @@ config:
               	provider = aws.circus-lib
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"circus-lib": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "circus-lib" {
@@ -26147,7 +27991,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.circus-lib.auditor_arn
+                value = module.circus-lib.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
           log:
             id: "707476523482"
@@ -26255,6 +28103,14 @@ config:
               	provider = aws.circus-log
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"circus-log": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "circus-log" {
@@ -26271,7 +28127,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.circus-log.auditor_arn
+                value = module.circus-log.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
           net:
             id: "002516226222"
@@ -26379,6 +28239,14 @@ config:
               	provider = aws.circus-net
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"circus-net": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "circus-net" {
@@ -26395,7 +28263,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.circus-net.auditor_arn
+                value = module.circus-net.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
           ops:
             id: "415618116579"
@@ -26503,6 +28375,14 @@ config:
               	provider = aws.circus-ops
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"circus-ops": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "circus-ops" {
@@ -26519,7 +28399,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.circus-ops.auditor_arn
+                value = module.circus-ops.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
         org: circus
         sso_region: us-west-2
@@ -26781,6 +28665,14 @@ config:
               	provider = aws.coil-org
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"coil-org": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "coil-org" {
@@ -26797,7 +28689,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.coil-org.auditor_arn
+                value = module.coil-org.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
           hub:
             id: "453991412409"
@@ -26907,6 +28803,14 @@ config:
               	provider = aws.coil-hub
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"coil-hub": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "coil-hub" {
@@ -26923,7 +28827,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.coil-hub.auditor_arn
+                value = module.coil-hub.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
           lib:
             id: "160764896647"
@@ -27033,6 +28941,14 @@ config:
               	provider = aws.coil-lib
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"coil-lib": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "coil-lib" {
@@ -27049,7 +28965,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.coil-lib.auditor_arn
+                value = module.coil-lib.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
           net:
             id: "278790191486"
@@ -27159,6 +29079,14 @@ config:
               	provider = aws.coil-net
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"coil-net": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "coil-net" {
@@ -27175,7 +29103,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.coil-net.auditor_arn
+                value = module.coil-net.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
         org: coil
         sso_region: us-east-1
@@ -27437,6 +29369,14 @@ config:
               	provider = aws.curl-org
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"curl-org": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "curl-org" {
@@ -27453,7 +29393,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.curl-org.auditor_arn
+                value = module.curl-org.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
           hub:
             id: "804430872255"
@@ -27563,6 +29507,14 @@ config:
               	provider = aws.curl-hub
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"curl-hub": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "curl-hub" {
@@ -27579,7 +29531,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.curl-hub.auditor_arn
+                value = module.curl-hub.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
           lib:
             id: "298406631539"
@@ -27689,6 +29645,14 @@ config:
               	provider = aws.curl-lib
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"curl-lib": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "curl-lib" {
@@ -27705,7 +29669,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.curl-lib.auditor_arn
+                value = module.curl-lib.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
           net:
             id: "101142583332"
@@ -27815,6 +29783,14 @@ config:
               	provider = aws.curl-net
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"curl-net": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "curl-net" {
@@ -27831,7 +29807,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.curl-net.auditor_arn
+                value = module.curl-net.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
         org: curl
         sso_region: us-west-2
@@ -28032,6 +30012,14 @@ config:
               	provider = aws.defn-org
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"defn-org": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "defn-org" {
@@ -28048,7 +30036,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.defn-org.auditor_arn
+                value = module.defn-org.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
         org: defn
         sso_region: us-east-2
@@ -28400,6 +30392,14 @@ config:
               	provider = aws.fogg-org
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"fogg-org": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "fogg-org" {
@@ -28416,7 +30416,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.fogg-org.auditor_arn
+                value = module.fogg-org.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
           ci:
             id: "812459563189"
@@ -28524,6 +30528,14 @@ config:
               	provider = aws.fogg-ci
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"fogg-ci": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "fogg-ci" {
@@ -28540,7 +30552,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.fogg-ci.auditor_arn
+                value = module.fogg-ci.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
           dev:
             id: "442766271046"
@@ -28648,6 +30664,14 @@ config:
               	provider = aws.fogg-dev
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"fogg-dev": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "fogg-dev" {
@@ -28664,7 +30688,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.fogg-dev.auditor_arn
+                value = module.fogg-dev.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
           hub:
             id: "337248635000"
@@ -28772,6 +30800,14 @@ config:
               	provider = aws.fogg-hub
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"fogg-hub": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "fogg-hub" {
@@ -28788,7 +30824,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.fogg-hub.auditor_arn
+                value = module.fogg-hub.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
           lib:
             id: "624713464251"
@@ -28896,6 +30936,14 @@ config:
               	provider = aws.fogg-lib
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"fogg-lib": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "fogg-lib" {
@@ -28912,7 +30960,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.fogg-lib.auditor_arn
+                value = module.fogg-lib.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
           log:
             id: "844609041254"
@@ -29020,6 +31072,14 @@ config:
               	provider = aws.fogg-log
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"fogg-log": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "fogg-log" {
@@ -29036,7 +31096,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.fogg-log.auditor_arn
+                value = module.fogg-log.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
           net:
             id: "060659916753"
@@ -29144,6 +31208,14 @@ config:
               	provider = aws.fogg-net
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"fogg-net": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "fogg-net" {
@@ -29160,7 +31232,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.fogg-net.auditor_arn
+                value = module.fogg-net.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
           ops:
             id: "318746665903"
@@ -29268,6 +31344,14 @@ config:
               	provider = aws.fogg-ops
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"fogg-ops": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "fogg-ops" {
@@ -29284,7 +31368,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.fogg-ops.auditor_arn
+                value = module.fogg-ops.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
           prod:
             id: "565963418226"
@@ -29392,6 +31480,14 @@ config:
               	provider = aws.fogg-prod
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"fogg-prod": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "fogg-prod" {
@@ -29408,7 +31504,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.fogg-prod.auditor_arn
+                value = module.fogg-prod.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
           pub:
             id: "372333168887"
@@ -29516,6 +31616,14 @@ config:
               	provider = aws.fogg-pub
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"fogg-pub": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "fogg-pub" {
@@ -29532,7 +31640,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.fogg-pub.auditor_arn
+                value = module.fogg-pub.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
         org: fogg
         sso_region: us-west-2
@@ -29758,6 +31870,14 @@ config:
               	provider = aws.gyre-org
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"gyre-org": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "gyre-org" {
@@ -29774,7 +31894,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.gyre-org.auditor_arn
+                value = module.gyre-org.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
           ops:
             id: "319951235442"
@@ -29884,6 +32008,14 @@ config:
               	provider = aws.gyre-ops
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"gyre-ops": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "gyre-ops" {
@@ -29900,7 +32032,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.gyre-ops.auditor_arn
+                value = module.gyre-ops.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
         org: gyre
         sso_region: us-east-2
@@ -30270,6 +32406,14 @@ config:
               	provider = aws.helix-org
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"helix-org": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "helix-org" {
@@ -30286,7 +32430,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.helix-org.auditor_arn
+                value = module.helix-org.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
           ci:
             id: "018520313738"
@@ -30396,6 +32544,14 @@ config:
               	provider = aws.helix-ci
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"helix-ci": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "helix-ci" {
@@ -30412,7 +32568,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.helix-ci.auditor_arn
+                value = module.helix-ci.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
           dev:
             id: "843784871878"
@@ -30522,6 +32682,14 @@ config:
               	provider = aws.helix-dev
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"helix-dev": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "helix-dev" {
@@ -30538,7 +32706,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.helix-dev.auditor_arn
+                value = module.helix-dev.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
           hub:
             id: "436043820387"
@@ -30648,6 +32820,14 @@ config:
               	provider = aws.helix-hub
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"helix-hub": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "helix-hub" {
@@ -30664,7 +32844,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.helix-hub.auditor_arn
+                value = module.helix-hub.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
           lib:
             id: "377857698578"
@@ -30774,6 +32958,14 @@ config:
               	provider = aws.helix-lib
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"helix-lib": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "helix-lib" {
@@ -30790,7 +32982,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.helix-lib.auditor_arn
+                value = module.helix-lib.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
           log:
             id: "664427926343"
@@ -30900,6 +33096,14 @@ config:
               	provider = aws.helix-log
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"helix-log": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "helix-log" {
@@ -30916,7 +33120,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.helix-log.auditor_arn
+                value = module.helix-log.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
           net:
             id: "504722108514"
@@ -31026,6 +33234,14 @@ config:
               	provider = aws.helix-net
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"helix-net": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "helix-net" {
@@ -31042,7 +33258,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.helix-net.auditor_arn
+                value = module.helix-net.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
           ops:
             id: "368812692254"
@@ -31152,6 +33372,14 @@ config:
               	provider = aws.helix-ops
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"helix-ops": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "helix-ops" {
@@ -31168,7 +33396,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.helix-ops.auditor_arn
+                value = module.helix-ops.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
           prod:
             id: "724643698007"
@@ -31278,6 +33510,14 @@ config:
               	provider = aws.helix-prod
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"helix-prod": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "helix-prod" {
@@ -31294,7 +33534,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.helix-prod.auditor_arn
+                value = module.helix-prod.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
           pub:
             id: "536806623881"
@@ -31404,6 +33648,14 @@ config:
               	provider = aws.helix-pub
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"helix-pub": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "helix-pub" {
@@ -31420,7 +33672,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.helix-pub.auditor_arn
+                value = module.helix-pub.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
         org: helix
         sso_region: us-east-2
@@ -31708,6 +33964,14 @@ config:
               	provider = aws.imma-org
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"imma-org": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "imma-org" {
@@ -31724,7 +33988,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.imma-org.auditor_arn
+                value = module.imma-org.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
           dev:
             id: "445584037541"
@@ -31832,6 +34100,14 @@ config:
               	provider = aws.imma-dev
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"imma-dev": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "imma-dev" {
@@ -31848,7 +34124,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.imma-dev.auditor_arn
+                value = module.imma-dev.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
           lib:
             id: "516851121506"
@@ -31956,6 +34236,14 @@ config:
               	provider = aws.imma-lib
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"imma-lib": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "imma-lib" {
@@ -31972,7 +34260,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.imma-lib.auditor_arn
+                value = module.imma-lib.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
           log:
             id: "289716781198"
@@ -32080,6 +34372,14 @@ config:
               	provider = aws.imma-log
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"imma-log": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "imma-log" {
@@ -32096,7 +34396,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.imma-log.auditor_arn
+                value = module.imma-log.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
           net:
             id: "246197522468"
@@ -32204,6 +34508,14 @@ config:
               	provider = aws.imma-net
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"imma-net": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "imma-net" {
@@ -32220,7 +34532,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.imma-net.auditor_arn
+                value = module.imma-net.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
           pub:
             id: "766142996227"
@@ -32328,6 +34644,14 @@ config:
               	provider = aws.imma-pub
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"imma-pub": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "imma-pub" {
@@ -32344,7 +34668,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.imma-pub.auditor_arn
+                value = module.imma-pub.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
         org: imma
         sso_region: us-west-2
@@ -32728,6 +35056,14 @@ config:
               	provider = aws.immanent-org
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"immanent-org": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "immanent-org" {
@@ -32744,7 +35080,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.immanent-org.auditor_arn
+                value = module.immanent-org.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
           changer:
             id: "003884504807"
@@ -32852,6 +35192,14 @@ config:
               	provider = aws.immanent-changer
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"immanent-changer": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "immanent-changer" {
@@ -32868,7 +35216,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.immanent-changer.auditor_arn
+                value = module.immanent-changer.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
           chanter:
             id: "071244154667"
@@ -32976,6 +35328,14 @@ config:
               	provider = aws.immanent-chanter
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"immanent-chanter": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "immanent-chanter" {
@@ -32992,7 +35352,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.immanent-chanter.auditor_arn
+                value = module.immanent-chanter.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
           doorkeeper:
             id: "013267321144"
@@ -33100,6 +35464,14 @@ config:
               	provider = aws.immanent-doorkeeper
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"immanent-doorkeeper": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "immanent-doorkeeper" {
@@ -33116,7 +35488,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.immanent-doorkeeper.auditor_arn
+                value = module.immanent-doorkeeper.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
           ged:
             id: "640792184178"
@@ -33224,6 +35600,14 @@ config:
               	provider = aws.immanent-ged
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"immanent-ged": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "immanent-ged" {
@@ -33240,7 +35624,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.immanent-ged.auditor_arn
+                value = module.immanent-ged.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
           hand:
             id: "826250190242"
@@ -33348,6 +35736,14 @@ config:
               	provider = aws.immanent-hand
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"immanent-hand": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "immanent-hand" {
@@ -33364,7 +35760,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.immanent-hand.auditor_arn
+                value = module.immanent-hand.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
           herbal:
             id: "165452499696"
@@ -33472,6 +35872,14 @@ config:
               	provider = aws.immanent-herbal
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"immanent-herbal": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "immanent-herbal" {
@@ -33488,7 +35896,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.immanent-herbal.auditor_arn
+                value = module.immanent-herbal.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
           namer:
             id: "856549015893"
@@ -33596,6 +36008,14 @@ config:
               	provider = aws.immanent-namer
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"immanent-namer": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "immanent-namer" {
@@ -33612,7 +36032,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.immanent-namer.auditor_arn
+                value = module.immanent-namer.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
           patterner:
             id: "143220204648"
@@ -33720,6 +36144,14 @@ config:
               	provider = aws.immanent-patterner
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"immanent-patterner": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "immanent-patterner" {
@@ -33736,7 +36168,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.immanent-patterner.auditor_arn
+                value = module.immanent-patterner.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
           roke:
             id: "892560628624"
@@ -33844,6 +36280,14 @@ config:
               	provider = aws.immanent-roke
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"immanent-roke": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "immanent-roke" {
@@ -33860,7 +36304,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.immanent-roke.auditor_arn
+                value = module.immanent-roke.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
           summoner:
             id: "397411277587"
@@ -33968,6 +36416,14 @@ config:
               	provider = aws.immanent-summoner
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"immanent-summoner": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "immanent-summoner" {
@@ -33984,7 +36440,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.immanent-summoner.auditor_arn
+                value = module.immanent-summoner.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
           windkey:
             id: "095764861781"
@@ -34092,6 +36552,14 @@ config:
               	provider = aws.immanent-windkey
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"immanent-windkey": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "immanent-windkey" {
@@ -34108,7 +36576,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.immanent-windkey.auditor_arn
+                value = module.immanent-windkey.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
         org: immanent
         sso_region: us-west-2
@@ -34348,6 +36820,14 @@ config:
               	provider = aws.jianghu-org
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"jianghu-org": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "jianghu-org" {
@@ -34364,7 +36844,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.jianghu-org.auditor_arn
+                value = module.jianghu-org.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
           log:
             id: "298431841138"
@@ -34472,6 +36956,14 @@ config:
               	provider = aws.jianghu-log
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"jianghu-log": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "jianghu-log" {
@@ -34488,7 +36980,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.jianghu-log.auditor_arn
+                value = module.jianghu-log.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
           net:
             id: "025636091251"
@@ -34596,6 +37092,14 @@ config:
               	provider = aws.jianghu-net
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"jianghu-net": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "jianghu-net" {
@@ -34612,7 +37116,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.jianghu-net.auditor_arn
+                value = module.jianghu-net.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
         org: jianghu
         sso_region: us-west-2
@@ -34982,6 +37490,14 @@ config:
               	provider = aws.spiral-org
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"spiral-org": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "spiral-org" {
@@ -34998,7 +37514,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.spiral-org.auditor_arn
+                value = module.spiral-org.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
           ci:
             id: "371657257885"
@@ -35108,6 +37628,14 @@ config:
               	provider = aws.spiral-ci
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"spiral-ci": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "spiral-ci" {
@@ -35124,7 +37652,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.spiral-ci.auditor_arn
+                value = module.spiral-ci.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
           dev:
             id: "308726031860"
@@ -35234,6 +37766,14 @@ config:
               	provider = aws.spiral-dev
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"spiral-dev": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "spiral-dev" {
@@ -35250,7 +37790,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.spiral-dev.auditor_arn
+                value = module.spiral-dev.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
           hub:
             id: "216704421225"
@@ -35360,6 +37904,14 @@ config:
               	provider = aws.spiral-hub
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"spiral-hub": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "spiral-hub" {
@@ -35376,7 +37928,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.spiral-hub.auditor_arn
+                value = module.spiral-hub.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
           lib:
             id: "073874947996"
@@ -35486,6 +38042,14 @@ config:
               	provider = aws.spiral-lib
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"spiral-lib": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "spiral-lib" {
@@ -35502,7 +38066,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.spiral-lib.auditor_arn
+                value = module.spiral-lib.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
           log:
             id: "442333715734"
@@ -35612,6 +38180,14 @@ config:
               	provider = aws.spiral-log
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"spiral-log": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "spiral-log" {
@@ -35628,7 +38204,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.spiral-log.auditor_arn
+                value = module.spiral-log.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
           net:
             id: "057533398557"
@@ -35738,6 +38318,14 @@ config:
               	provider = aws.spiral-net
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"spiral-net": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "spiral-net" {
@@ -35754,7 +38342,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.spiral-net.auditor_arn
+                value = module.spiral-net.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
           ops:
             id: "601164058091"
@@ -35864,6 +38456,14 @@ config:
               	provider = aws.spiral-ops
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"spiral-ops": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "spiral-ops" {
@@ -35880,7 +38480,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.spiral-ops.auditor_arn
+                value = module.spiral-ops.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
           prod:
             id: "398258703387"
@@ -35990,6 +38594,14 @@ config:
               	provider = aws.spiral-prod
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"spiral-prod": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "spiral-prod" {
@@ -36006,7 +38618,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.spiral-prod.auditor_arn
+                value = module.spiral-prod.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
           pub:
             id: "130046154300"
@@ -36116,6 +38732,14 @@ config:
               	provider = aws.spiral-pub
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"spiral-pub": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "spiral-pub" {
@@ -36132,7 +38756,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.spiral-pub.auditor_arn
+                value = module.spiral-pub.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
         org: spiral
         sso_region: us-west-2
@@ -36484,6 +39112,14 @@ config:
               	provider = aws.vault-org
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"vault-org": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "vault-org" {
@@ -36500,7 +39136,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.vault-org.auditor_arn
+                value = module.vault-org.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
           ci:
             id: "313228123503"
@@ -36608,6 +39248,14 @@ config:
               	provider = aws.vault-ci
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"vault-ci": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "vault-ci" {
@@ -36624,7 +39272,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.vault-ci.auditor_arn
+                value = module.vault-ci.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
           dev:
             id: "497393606242"
@@ -36732,6 +39384,14 @@ config:
               	provider = aws.vault-dev
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"vault-dev": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "vault-dev" {
@@ -36748,7 +39408,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.vault-dev.auditor_arn
+                value = module.vault-dev.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
           hub:
             id: "539099112425"
@@ -36856,6 +39520,14 @@ config:
               	provider = aws.vault-hub
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"vault-hub": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "vault-hub" {
@@ -36872,7 +39544,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.vault-hub.auditor_arn
+                value = module.vault-hub.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
           lib:
             id: "066356637485"
@@ -36980,6 +39656,14 @@ config:
               	provider = aws.vault-lib
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"vault-lib": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "vault-lib" {
@@ -36996,7 +39680,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.vault-lib.auditor_arn
+                value = module.vault-lib.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
           log:
             id: "749185891195"
@@ -37104,6 +39792,14 @@ config:
               	provider = aws.vault-log
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"vault-log": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "vault-log" {
@@ -37120,7 +39816,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.vault-log.auditor_arn
+                value = module.vault-log.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
           net:
             id: "915207860232"
@@ -37228,6 +39928,14 @@ config:
               	provider = aws.vault-net
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"vault-net": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "vault-net" {
@@ -37244,7 +39952,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.vault-net.auditor_arn
+                value = module.vault-net.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
           ops:
             id: "188066400611"
@@ -37352,6 +40064,14 @@ config:
               	provider = aws.vault-ops
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"vault-ops": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "vault-ops" {
@@ -37368,7 +40088,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.vault-ops.auditor_arn
+                value = module.vault-ops.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
           prod:
             id: "040769490632"
@@ -37476,6 +40200,14 @@ config:
               	provider = aws.vault-prod
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"vault-prod": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "vault-prod" {
@@ -37492,7 +40224,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.vault-prod.auditor_arn
+                value = module.vault-prod.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
           pub:
             id: "851162413429"
@@ -37600,6 +40336,14 @@ config:
               	provider = aws.vault-pub
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"vault-pub": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "vault-pub" {
@@ -37616,7 +40360,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.vault-pub.auditor_arn
+                value = module.vault-pub.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
         org: vault
         sso_region: us-east-2
@@ -37888,6 +40636,14 @@ config:
               	provider = aws.whoa-org
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"whoa-org": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "whoa-org" {
@@ -37904,7 +40660,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.whoa-org.auditor_arn
+                value = module.whoa-org.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
           dev:
             id: "439761234835"
@@ -38012,6 +40772,14 @@ config:
               	provider = aws.whoa-dev
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"whoa-dev": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "whoa-dev" {
@@ -38028,7 +40796,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.whoa-dev.auditor_arn
+                value = module.whoa-dev.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
           hub:
             id: "462478722501"
@@ -38136,6 +40908,14 @@ config:
               	provider = aws.whoa-hub
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"whoa-hub": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "whoa-hub" {
@@ -38152,7 +40932,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.whoa-hub.auditor_arn
+                value = module.whoa-hub.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
           net:
             id: "464075062390"
@@ -38260,6 +41044,14 @@ config:
               	provider = aws.whoa-net
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"whoa-net": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "whoa-net" {
@@ -38276,7 +41068,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.whoa-net.auditor_arn
+                value = module.whoa-net.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
           pub:
             id: "204827926367"
@@ -38384,6 +41180,14 @@ config:
               	provider = aws.whoa-pub
               }
 
+              locals {
+                aws_config = jsonencode({
+              	"whoa-pub": {
+              		account_id = data.aws_caller_identity.current.account_id
+              	}
+                })
+              }
+
               variable "config" {}
 
               module "whoa-pub" {
@@ -38400,7 +41204,11 @@ config:
               }
 
               output "auditor_arn" {
-                value       = module.whoa-pub.auditor_arn
+                value = module.whoa-pub.auditor_arn
+              }
+
+              output "aws_config" {
+                value = local.aws_config
               }
         org: whoa
         sso_region: us-west-2

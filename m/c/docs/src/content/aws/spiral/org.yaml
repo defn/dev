@@ -361,6 +361,14 @@ infra_acc_terraform: |-
   	provider = aws.spiral-org
   }
 
+  locals {
+    aws_config = jsonencode({
+  	"spiral-org": {
+  		account_id = data.aws_caller_identity.current.account_id
+  	}
+    })
+  }
+
   variable "config" {}
 
   module "spiral-org" {
@@ -377,5 +385,9 @@ infra_acc_terraform: |-
   }
 
   output "auditor_arn" {
-    value       = module.spiral-org.auditor_arn
+    value = module.spiral-org.auditor_arn
+  }
+
+  output "aws_config" {
+    value = local.aws_config
   }

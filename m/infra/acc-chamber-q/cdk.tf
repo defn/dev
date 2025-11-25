@@ -26,6 +26,14 @@ data "aws_caller_identity" "current" {
   provider = aws.chamber-q
 }
 
+locals {
+  aws_config = jsonencode({
+    "chamber-q" : {
+      account_id = data.aws_caller_identity.current.account_id
+    }
+  })
+}
+
 variable "config" {}
 
 module "chamber-q" {
@@ -43,4 +51,8 @@ module "chamber-q" {
 
 output "auditor_arn" {
   value = module.chamber-q.auditor_arn
+}
+
+output "aws_config" {
+  value = local.aws_config
 }

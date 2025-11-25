@@ -104,6 +104,14 @@ infra_acc_terraform: |-
   	provider = aws.immanent-patterner
   }
 
+  locals {
+    aws_config = jsonencode({
+  	"immanent-patterner": {
+  		account_id = data.aws_caller_identity.current.account_id
+  	}
+    })
+  }
+
   variable "config" {}
 
   module "immanent-patterner" {
@@ -120,5 +128,9 @@ infra_acc_terraform: |-
   }
 
   output "auditor_arn" {
-    value       = module.immanent-patterner.auditor_arn
+    value = module.immanent-patterner.auditor_arn
+  }
+
+  output "aws_config" {
+    value = local.aws_config
   }

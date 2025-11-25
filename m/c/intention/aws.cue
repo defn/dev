@@ -249,6 +249,14 @@ data "aws_caller_identity" "current" {
 	provider = aws.\(org)-\(account)
 }
 
+locals {
+  aws_config = jsonencode({
+	"\(org)-\(account)": {
+		account_id = data.aws_caller_identity.current.account_id
+	}
+  })
+}
+
 variable "config" {}
 
 module "\(org)-\(account)" {
@@ -265,7 +273,11 @@ module "\(org)-\(account)" {
 }
 
 output "auditor_arn" {
-  value       = module.\(org)-\(account).auditor_arn
+  value = module.\(org)-\(account).auditor_arn
+}
+
+output "aws_config" {
+  value = local.aws_config
 }
 """
 	})

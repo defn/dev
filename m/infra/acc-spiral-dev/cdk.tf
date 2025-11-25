@@ -26,6 +26,14 @@ data "aws_caller_identity" "current" {
   provider = aws.spiral-dev
 }
 
+locals {
+  aws_config = jsonencode({
+    "spiral-dev" : {
+      account_id = data.aws_caller_identity.current.account_id
+    }
+  })
+}
+
 variable "config" {}
 
 module "spiral-dev" {
@@ -43,4 +51,8 @@ module "spiral-dev" {
 
 output "auditor_arn" {
   value = module.spiral-dev.auditor_arn
+}
+
+output "aws_config" {
+  value = local.aws_config
 }

@@ -104,6 +104,14 @@ infra_acc_terraform: |-
   	provider = aws.immanent-hand
   }
 
+  locals {
+    aws_config = jsonencode({
+  	"immanent-hand": {
+  		account_id = data.aws_caller_identity.current.account_id
+  	}
+    })
+  }
+
   variable "config" {}
 
   module "immanent-hand" {
@@ -120,5 +128,9 @@ infra_acc_terraform: |-
   }
 
   output "auditor_arn" {
-    value       = module.immanent-hand.auditor_arn
+    value = module.immanent-hand.auditor_arn
+  }
+
+  output "aws_config" {
+    value = local.aws_config
   }

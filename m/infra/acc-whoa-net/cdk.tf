@@ -26,6 +26,14 @@ data "aws_caller_identity" "current" {
   provider = aws.whoa-net
 }
 
+locals {
+  aws_config = jsonencode({
+    "whoa-net" : {
+      account_id = data.aws_caller_identity.current.account_id
+    }
+  })
+}
+
 variable "config" {}
 
 module "whoa-net" {
@@ -43,4 +51,8 @@ module "whoa-net" {
 
 output "auditor_arn" {
   value = module.whoa-net.auditor_arn
+}
+
+output "aws_config" {
+  value = local.aws_config
 }

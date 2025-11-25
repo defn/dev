@@ -26,6 +26,14 @@ data "aws_caller_identity" "current" {
   provider = aws.immanent-summoner
 }
 
+locals {
+  aws_config = jsonencode({
+    "immanent-summoner" : {
+      account_id = data.aws_caller_identity.current.account_id
+    }
+  })
+}
+
 variable "config" {}
 
 module "immanent-summoner" {
@@ -43,4 +51,8 @@ module "immanent-summoner" {
 
 output "auditor_arn" {
   value = module.immanent-summoner.auditor_arn
+}
+
+output "aws_config" {
+  value = local.aws_config
 }

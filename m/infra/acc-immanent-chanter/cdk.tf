@@ -26,6 +26,14 @@ data "aws_caller_identity" "current" {
   provider = aws.immanent-chanter
 }
 
+locals {
+  aws_config = jsonencode({
+    "immanent-chanter" : {
+      account_id = data.aws_caller_identity.current.account_id
+    }
+  })
+}
+
 variable "config" {}
 
 module "immanent-chanter" {
@@ -43,4 +51,8 @@ module "immanent-chanter" {
 
 output "auditor_arn" {
   value = module.immanent-chanter.auditor_arn
+}
+
+output "aws_config" {
+  value = local.aws_config
 }

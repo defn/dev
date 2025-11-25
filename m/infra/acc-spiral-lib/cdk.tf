@@ -26,6 +26,14 @@ data "aws_caller_identity" "current" {
   provider = aws.spiral-lib
 }
 
+locals {
+  aws_config = jsonencode({
+    "spiral-lib" : {
+      account_id = data.aws_caller_identity.current.account_id
+    }
+  })
+}
+
 variable "config" {}
 
 module "spiral-lib" {
@@ -43,4 +51,8 @@ module "spiral-lib" {
 
 output "auditor_arn" {
   value = module.spiral-lib.auditor_arn
+}
+
+output "aws_config" {
+  value = local.aws_config
 }

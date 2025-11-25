@@ -26,6 +26,14 @@ data "aws_caller_identity" "current" {
   provider = aws.helix-ops
 }
 
+locals {
+  aws_config = jsonencode({
+    "helix-ops" : {
+      account_id = data.aws_caller_identity.current.account_id
+    }
+  })
+}
+
 variable "config" {}
 
 module "helix-ops" {
@@ -43,4 +51,8 @@ module "helix-ops" {
 
 output "auditor_arn" {
   value = module.helix-ops.auditor_arn
+}
+
+output "aws_config" {
+  value = local.aws_config
 }

@@ -26,6 +26,14 @@ data "aws_caller_identity" "current" {
   provider = aws.whoa-pub
 }
 
+locals {
+  aws_config = jsonencode({
+    "whoa-pub" : {
+      account_id = data.aws_caller_identity.current.account_id
+    }
+  })
+}
+
 variable "config" {}
 
 module "whoa-pub" {
@@ -43,4 +51,8 @@ module "whoa-pub" {
 
 output "auditor_arn" {
   value = module.whoa-pub.auditor_arn
+}
+
+output "aws_config" {
+  value = local.aws_config
 }

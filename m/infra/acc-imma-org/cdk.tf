@@ -26,6 +26,14 @@ data "aws_caller_identity" "current" {
   provider = aws.imma-org
 }
 
+locals {
+  aws_config = jsonencode({
+    "imma-org" : {
+      account_id = data.aws_caller_identity.current.account_id
+    }
+  })
+}
+
 variable "config" {}
 
 module "imma-org" {
@@ -43,4 +51,8 @@ module "imma-org" {
 
 output "auditor_arn" {
   value = module.imma-org.auditor_arn
+}
+
+output "aws_config" {
+  value = local.aws_config
 }

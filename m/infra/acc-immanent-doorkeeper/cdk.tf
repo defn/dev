@@ -26,6 +26,14 @@ data "aws_caller_identity" "current" {
   provider = aws.immanent-doorkeeper
 }
 
+locals {
+  aws_config = jsonencode({
+    "immanent-doorkeeper" : {
+      account_id = data.aws_caller_identity.current.account_id
+    }
+  })
+}
+
 variable "config" {}
 
 module "immanent-doorkeeper" {
@@ -43,4 +51,8 @@ module "immanent-doorkeeper" {
 
 output "auditor_arn" {
   value = module.immanent-doorkeeper.auditor_arn
+}
+
+output "aws_config" {
+  value = local.aws_config
 }
