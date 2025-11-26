@@ -75,3 +75,8 @@ format = '[$output]($style) '
 command = 'if ! csrutil status | grep -i ": enabled" >/dev/null; then echo sip-disabled; fi'
 when = ''' test "$(uname -s)" == "Darwin" '''
 format = '[$output]($style) '
+
+[custom.defn_env]
+command = "printf '%s' \"$DEFN_ENV\""
+when = "test -n \"$DEFN_ENV\""
+format = '[$output]($style) '

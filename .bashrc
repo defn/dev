@@ -261,6 +261,25 @@ function use {
 	fi
 }
 
+function detect_env {
+	# Kubernetes pod
+	if [[ -f /var/run/secrets/kubernetes.io/serviceaccount/token ]] ||
+		[[ -n ${KUBERNETES_SERVICE_HOST:-} ]]; then
+		echo "k8s"
+		return
+	fi
+
+	# Docker container
+	if grep -qE '(docker|containerd)' /proc/1/cgroup 2>/dev/null ||
+		[[ -f /.dockerenv ]]; then
+		echo "docker"
+		return
+	fi
+
+	# Default: VM / bare-metal
+	echo "vm"
+}
+
 # coder ssh helper
 if [[ -z ${BUILDKITE-} ]]; then
 	if [[ -n ${CODER_NAME-} ]]; then
@@ -282,6 +301,9 @@ fi
 
 # vscode browser
 export BROWSER="$(type -P browser || true)"
+
+# detect env
+export DEFN_ENV="$(detect_env)"
 
 unset MAKEFLAGS
 
