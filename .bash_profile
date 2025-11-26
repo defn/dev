@@ -26,3 +26,4 @@ fi
 
 if [[ -f ~/dotfiles/dot/bashrc ]]; then source ~/dotfiles/dot/bashrc; fi
 
+export PATH=/home/ubuntu/.bin:${PATH}
