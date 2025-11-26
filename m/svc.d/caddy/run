@@ -8,5 +8,6 @@ mise trust
 mise install
 source .env
 export PATH
+export CLOUDFLARE_API_TOKEN
 
 exec mise exec -- caddy run
