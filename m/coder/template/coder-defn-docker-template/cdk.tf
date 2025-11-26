@@ -68,16 +68,6 @@ data "coder_parameter" "system_prompt" {
   mutable = false
 }
 
-data "coder_parameter" "docker_socket" {
-  default      = ""
-  description  = "Docker socket path (leave empty for default)"
-  display_name = "Docker Socket"
-  icon         = "https://raw.githubusercontent.com/matifali/logos/main/docker.svg"
-  mutable      = false
-  name         = "docker_socket"
-  type         = "string"
-}
-
 resource "coder_agent" "main" {
   arch = data.coder_parameter.arch.value
   os   = data.coder_parameter.os.value
@@ -154,6 +144,16 @@ resource "coder_app" "code-server" {
 // implementation
 provider "docker" {
   host = data.coder_parameter.docker_socket.value != "" ? data.coder_parameter.docker_socket.value : null
+}
+
+data "coder_parameter" "docker_socket" {
+  default      = ""
+  description  = "Docker socket path (leave empty for default)"
+  display_name = "Docker Socket"
+  icon         = "https://raw.githubusercontent.com/matifali/logos/main/docker.svg"
+  mutable      = false
+  name         = "docker_socket"
+  type         = "string"
 }
 
 resource "docker_volume" "dotfiles_volume" {
