@@ -115,14 +115,19 @@ resource "coder_agent" "main" {
 
 resource "coder_app" "preview" {
   agent_id     = coder_agent.main.id
-  display_name = "preview"
-  icon         = "/icon/code.svg"
-  share        = "owner"
   slug         = "preview"
+  display_name = "Preview"
+  icon         = "/emojis/1f50e.png"
+  url          = "http://localhost:3001"
+  share        = "owner"
   subdomain    = true
-  url          = "http://localhost:3000"
-  order        = 1
   open_in      = "tab"
+  order        = 0
+  healthcheck {
+    url       = "http://localhost:3001/"
+    interval  = 5
+    threshold = 15
+  }
 }
 
 resource "coder_ai_task" "task" {
