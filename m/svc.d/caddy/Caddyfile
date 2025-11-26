@@ -1,0 +1,17 @@
+http://defn.xxx:8080 http://*.defn.xxx:8080 {
+	redir https://{host}{uri} permanent
+}
+
+https://defn.xxx:8443 https://*.defn.xxx:8443 {
+	reverse_proxy localhost:3000
+	tls {
+		dns cloudflare {env.CLOUDFLARE_API_TOKEN}
+	}
+
+	header {
+		Access-Control-Allow-Origin "https://defn.xxx"
+		Access-Control-Allow-Methods "GET, POST, PUT, DELETE, OPTIONS"
+		Access-Control-Allow-Headers "Authorization, Content-Type"
+		Access-Control-Allow-Credentials true
+	}
+}
