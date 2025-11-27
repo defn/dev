@@ -14,7 +14,7 @@
         "vscodevim.vim",
         "golang.go",
         "esbenp.prettier-vscode",
-        "cuelang.cue",
+        "cuelangorg.vscode-cue",
         "ms-python.python",
         "kokakiwi.vscode-just",
         "svelte.svelte-vscode",
