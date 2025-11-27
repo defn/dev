@@ -305,6 +305,11 @@ export BROWSER="$(type -P browser || true)"
 # detect env
 export DEFN_ENV="$(detect_env)"
 
+# aws-vault
+export AWS_VAULT_BACKEND="file"
+export AWS_VAULT_FILE_DIR="$HOME/.config/aws-vault"
+export AWS_VAULT_FILE_PASSPHRASE=""
+
 unset MAKEFLAGS
 
 if test -r ~/.ssh-agent-rc; then source ~/.ssh-agent-rc >/dev/null; fi

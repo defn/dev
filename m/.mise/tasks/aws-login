@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+#MISE description="Login to AWS web console"
+
+set -efu -o pipefail
+
+cd "${MISE_ORIGINAL_CWD}"
+
+url=$(aws-vault login "${AWS_PROFILE}" -s | sed 's#://#://us-east-1.#')
+encoded_url=$(printf "%s" "$url" | python -c 'import sys; from urllib.parse import quote_plus; print(quote_plus(sys.stdin.read().strip()))')
+open "https://signin.aws.amazon.com/oauth?Action=logout&redirect_uri=${encoded_url}"
