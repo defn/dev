@@ -31,8 +31,16 @@ function bazel {
 
 	case "${cmd}" in
 	watch)
-		if [[ $# == 0 ]]; then set -- .; fi
-		command bazel-watcher build "$@"
+		if [[ $# == 0 ]]; then set -- "//$(realpath --relative-to="$(bazel info workspace)" "${PWD}")"; fi
+		command ibazel build "$@"
+		;;
+	watch-test)
+		if [[ $# == 0 ]]; then set -- "//$(realpath --relative-to="$(bazel info workspace)" "${PWD}")"; fi
+		command ibazel test "$@"
+		;;
+	watch-run)
+		if [[ $# == 0 ]]; then set -- "//$(realpath --relative-to="$(bazel info workspace)" "${PWD}")"; fi
+		command ibazel run "$@"
 		;;
 	build | test | run | query | cquery)
 		# shellcheck disable=SC2065
