@@ -5,6 +5,7 @@ go_library(
     srcs = ["hello.go"],
     importpath = "github.com/defn/dev/m/hello",
     visibility = ["//visibility:private"],
+    deps = ["@com_github_bitfield_script//:script"],
 )
 
 go_binary(
