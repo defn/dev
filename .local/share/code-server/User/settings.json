@@ -128,5 +128,6 @@
   "window.commandCenter": false,
   "workbench.layoutControl.enabled": false,
   "window.menuBarVisibility": "toggle",
-  "workbench.activityBar.location": "bottom"
+  "workbench.activityBar.location": "bottom",
+  "claudeCode.preferredLocation": "panel"
 }
