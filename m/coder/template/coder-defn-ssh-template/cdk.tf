@@ -47,16 +47,83 @@ data "coder_parameter" "arch" {
   type         = "string"
 }
 
+data "coder_parameter" "username" {
+  default      = "ubuntu"
+  description  = "Linux account name"
+  display_name = "Username"
+  icon         = "https://raw.githubusercontent.com/matifali/logos/main/cpu-3.svg"
+  name         = "username"
+  type         = "string"
+}
+
+data "coder_parameter" "ai_prompt" {
+  name    = "AI Prompt"
+  type    = "string"
+  mutable = false
+}
+
+data "coder_parameter" "system_prompt" {
+  default = "Be succinct, no marketing or kissing ass"
+  name    = "System Prompt"
+  mutable = false
+}
+
 resource "coder_agent" "main" {
   arch = data.coder_parameter.arch.value
   auth = "token"
   os   = data.coder_parameter.os.value
+
+  startup_script = <<-EOT
+    set -e
+    exec >>/tmp/coder-agent.log
+    exec 2>&1
+    cd
+    ssh -o StrictHostKeyChecking=no git@github.com true || true
+    git fetch origin
+    git reset --hard origin/main
+
+    cd ~/m
+    bin/startup.sh || true
+  EOT
+
+  env = {
+    GIT_AUTHOR_EMAIL    = "${data.coder_workspace_owner.me.email}"
+    GIT_AUTHOR_NAME     = "${data.coder_workspace_owner.me.name}"
+    GIT_COMMITTER_EMAIL = "${data.coder_workspace_owner.me.email}"
+    GIT_COMMITTER_NAME  = "${data.coder_workspace_owner.me.name}"
+    LC_ALL              = "C.UTF-8"
+    LOCAL_ARCHIVE       = "/usr/lib/locale/locale-archive"
+  }
+
+  connection_timeout = 200
   display_apps {
     web_terminal    = false
     ssh_helper      = false
     vscode          = false
     vscode_insiders = false
   }
+}
+
+resource "coder_app" "preview" {
+  agent_id     = coder_agent.main.id
+  slug         = "preview"
+  display_name = "Preview"
+  icon         = "/emojis/1f50e.png"
+  url          = "http://localhost:3001"
+  share        = "owner"
+  subdomain    = true
+  open_in      = "tab"
+  order        = 0
+  healthcheck {
+    url       = "http://localhost:3001/"
+    interval  = 5
+    threshold = 15
+  }
+}
+
+resource "coder_ai_task" "task" {
+  count  = data.coder_workspace.me.start_count
+  app_id = coder_app.code-server.id
 }
 
 resource "coder_app" "code-server" {
@@ -76,9 +143,7 @@ resource "coder_app" "code-server" {
   open_in = "tab"
 }
 
-//
-// params
-//
+// implementation
 
 data "coder_parameter" "remote" {
   default      = ""
@@ -89,10 +154,6 @@ data "coder_parameter" "remote" {
   name         = "remote"
   type         = "string"
 }
-
-//
-// custom
-//
 
 provider "null" {
 }

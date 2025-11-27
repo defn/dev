@@ -70,6 +70,7 @@ data "coder_parameter" "system_prompt" {
 
 resource "coder_agent" "main" {
   arch = data.coder_parameter.arch.value
+  auth = "token"
   os   = data.coder_parameter.os.value
 
   startup_script = <<-EOT
@@ -133,6 +134,7 @@ resource "coder_app" "code-server" {
   slug         = "cs"
   subdomain    = true
   url          = "http://localhost:8080/?folder=${data.coder_parameter.homedir.value}"
+  order        = 2
   healthcheck {
     interval  = 5
     threshold = 6
