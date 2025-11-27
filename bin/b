@@ -179,7 +179,7 @@ function main {
 
 			case "${1-}" in
 			"")
-				rule="$("$0" | grep _ | fzf --select-1)"
+				rule="//$(realpath --relative-to="$(bazel info workspace)" "${PWD}")"
 				;;
 			//*)
 				rule="$1"
