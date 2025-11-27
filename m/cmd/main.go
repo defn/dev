@@ -4,7 +4,6 @@ import (
 	root "github.com/defn/dev/m/command/root"
 
 	_ "github.com/defn/dev/m/command/api"
-	_ "github.com/defn/dev/m/command/gollm"
 	_ "github.com/defn/dev/m/command/meh"
 	_ "github.com/defn/dev/m/command/tui"
 )

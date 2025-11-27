@@ -7,7 +7,6 @@ go_library(
     visibility = ["//visibility:private"],
     deps = [
         "//command/api",
-        "//command/gollm",
         "//command/meh",
         "//command/root",
         "//command/tui",
