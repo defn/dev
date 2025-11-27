@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+#MISE description="Force login to AWS SSO"
+
+set -efu -o pipefail
+
+cd "${MISE_ORIGINAL_CWD}"
+
+aws sso logout
+aws sso login

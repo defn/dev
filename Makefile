@@ -198,6 +198,10 @@ sync:
 	git pull
 	~/bin/with-env $(MAKE) sync_inner
 
+sync2:
+	~/bin/with-env $(MAKE) sync_inner
+	~/bin/with-env $(MAKE) fast_inner
+
 # Pull latest changes and run fast sync (mise updates only)
 # Dependencies: git command, ~/bin/with-env script, make command
 # Outputs: Updated git repository, executed fast_inner target with environment wrapper

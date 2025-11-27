@@ -11,7 +11,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 # bootstrap
 # ca-certificates for docker repo
 # python3.12-venv for mise python tooling
-RUN apt update && apt upgrade -y && apt install -y make curl rsync sudo ca-certificates tzdata locales git python3.12-venv libatomic1
+RUN apt update && apt upgrade -y && apt install -y make curl rsync sudo ca-certificates tzdata locales git python3.12-venv libatomic1 groff
 
 # install docker
 # curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o docker.asc
