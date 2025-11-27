@@ -16,6 +16,8 @@ terraform {
   }
 }
 
+variable "config" {}
+
 provider "aws" {
   profile = "fogg-prod"
   alias   = "fogg-prod"
@@ -34,7 +36,13 @@ locals {
   })
 }
 
-variable "config" {}
+output "aws_config" {
+  value = local.aws_config
+}
+
+output "auditor_arn" {
+  value = module.fogg-prod.auditor_arn
+}
 
 module "fogg-prod" {
   account   = 510430971399
@@ -47,12 +55,4 @@ module "fogg-prod" {
   }
 
   config = var.config
-}
-
-output "auditor_arn" {
-  value = module.fogg-prod.auditor_arn
-}
-
-output "aws_config" {
-  value = local.aws_config
 }

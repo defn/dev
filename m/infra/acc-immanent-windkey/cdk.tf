@@ -16,6 +16,8 @@ terraform {
   }
 }
 
+variable "config" {}
+
 provider "aws" {
   profile = "immanent-windkey"
   alias   = "immanent-windkey"
@@ -34,7 +36,13 @@ locals {
   })
 }
 
-variable "config" {}
+output "aws_config" {
+  value = local.aws_config
+}
+
+output "auditor_arn" {
+  value = module.immanent-windkey.auditor_arn
+}
 
 module "immanent-windkey" {
   account   = 510430971399
@@ -47,12 +55,4 @@ module "immanent-windkey" {
   }
 
   config = var.config
-}
-
-output "auditor_arn" {
-  value = module.immanent-windkey.auditor_arn
-}
-
-output "aws_config" {
-  value = local.aws_config
 }

@@ -16,6 +16,8 @@ terraform {
   }
 }
 
+variable "config" {}
+
 provider "aws" {
   profile = "spiral-hub"
   alias   = "spiral-hub"
@@ -34,7 +36,13 @@ locals {
   })
 }
 
-variable "config" {}
+output "aws_config" {
+  value = local.aws_config
+}
+
+output "auditor_arn" {
+  value = module.spiral-hub.auditor_arn
+}
 
 module "spiral-hub" {
   account   = 510430971399
@@ -47,12 +55,4 @@ module "spiral-hub" {
   }
 
   config = var.config
-}
-
-output "auditor_arn" {
-  value = module.spiral-hub.auditor_arn
-}
-
-output "aws_config" {
-  value = local.aws_config
 }

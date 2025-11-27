@@ -16,6 +16,8 @@ terraform {
   }
 }
 
+variable "config" {}
+
 provider "aws" {
   profile = "immanent-chanter"
   alias   = "immanent-chanter"
@@ -34,7 +36,13 @@ locals {
   })
 }
 
-variable "config" {}
+output "aws_config" {
+  value = local.aws_config
+}
+
+output "auditor_arn" {
+  value = module.immanent-chanter.auditor_arn
+}
 
 module "immanent-chanter" {
   account   = 510430971399
@@ -47,12 +55,4 @@ module "immanent-chanter" {
   }
 
   config = var.config
-}
-
-output "auditor_arn" {
-  value = module.immanent-chanter.auditor_arn
-}
-
-output "aws_config" {
-  value = local.aws_config
 }

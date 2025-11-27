@@ -16,6 +16,8 @@ terraform {
   }
 }
 
+variable "config" {}
+
 provider "aws" {
   profile = "coil-lib"
   alias   = "coil-lib"
@@ -34,7 +36,13 @@ locals {
   })
 }
 
-variable "config" {}
+output "aws_config" {
+  value = local.aws_config
+}
+
+output "auditor_arn" {
+  value = module.coil-lib.auditor_arn
+}
 
 module "coil-lib" {
   account   = 510430971399
@@ -47,12 +55,4 @@ module "coil-lib" {
   }
 
   config = var.config
-}
-
-output "auditor_arn" {
-  value = module.coil-lib.auditor_arn
-}
-
-output "aws_config" {
-  value = local.aws_config
 }

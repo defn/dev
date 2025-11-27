@@ -16,6 +16,8 @@ terraform {
   }
 }
 
+variable "config" {}
+
 provider "aws" {
   profile = "vault-pub"
   alias   = "vault-pub"
@@ -34,7 +36,13 @@ locals {
   })
 }
 
-variable "config" {}
+output "aws_config" {
+  value = local.aws_config
+}
+
+output "auditor_arn" {
+  value = module.vault-pub.auditor_arn
+}
 
 module "vault-pub" {
   account   = 510430971399
@@ -47,12 +55,4 @@ module "vault-pub" {
   }
 
   config = var.config
-}
-
-output "auditor_arn" {
-  value = module.vault-pub.auditor_arn
-}
-
-output "aws_config" {
-  value = local.aws_config
 }

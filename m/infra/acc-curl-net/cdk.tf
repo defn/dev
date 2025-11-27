@@ -16,6 +16,8 @@ terraform {
   }
 }
 
+variable "config" {}
+
 provider "aws" {
   profile = "curl-net"
   alias   = "curl-net"
@@ -34,7 +36,13 @@ locals {
   })
 }
 
-variable "config" {}
+output "aws_config" {
+  value = local.aws_config
+}
+
+output "auditor_arn" {
+  value = module.curl-net.auditor_arn
+}
 
 module "curl-net" {
   account   = 510430971399
@@ -47,12 +55,4 @@ module "curl-net" {
   }
 
   config = var.config
-}
-
-output "auditor_arn" {
-  value = module.curl-net.auditor_arn
-}
-
-output "aws_config" {
-  value = local.aws_config
 }

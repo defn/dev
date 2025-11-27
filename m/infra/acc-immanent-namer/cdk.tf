@@ -16,6 +16,8 @@ terraform {
   }
 }
 
+variable "config" {}
+
 provider "aws" {
   profile = "immanent-namer"
   alias   = "immanent-namer"
@@ -34,7 +36,13 @@ locals {
   })
 }
 
-variable "config" {}
+output "aws_config" {
+  value = local.aws_config
+}
+
+output "auditor_arn" {
+  value = module.immanent-namer.auditor_arn
+}
 
 module "immanent-namer" {
   account   = 510430971399
@@ -47,12 +55,4 @@ module "immanent-namer" {
   }
 
   config = var.config
-}
-
-output "auditor_arn" {
-  value = module.immanent-namer.auditor_arn
-}
-
-output "aws_config" {
-  value = local.aws_config
 }

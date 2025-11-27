@@ -16,6 +16,8 @@ terraform {
   }
 }
 
+variable "config" {}
+
 provider "aws" {
   profile = "curl-hub"
   alias   = "curl-hub"
@@ -34,7 +36,13 @@ locals {
   })
 }
 
-variable "config" {}
+output "aws_config" {
+  value = local.aws_config
+}
+
+output "auditor_arn" {
+  value = module.curl-hub.auditor_arn
+}
 
 module "curl-hub" {
   account   = 510430971399
@@ -47,12 +55,4 @@ module "curl-hub" {
   }
 
   config = var.config
-}
-
-output "auditor_arn" {
-  value = module.curl-hub.auditor_arn
-}
-
-output "aws_config" {
-  value = local.aws_config
 }

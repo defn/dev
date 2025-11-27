@@ -96,6 +96,8 @@ infra_acc_terraform: |-
     }
   }
 
+  variable "config" {}
+
   provider "aws" {
     profile = "coil-hub"
     alias   = "coil-hub"
@@ -114,7 +116,13 @@ infra_acc_terraform: |-
     })
   }
 
-  variable "config" {}
+  output "aws_config" {
+    value = local.aws_config
+  }
+
+  output "auditor_arn" {
+    value = module.coil-hub.auditor_arn
+  }
 
   module "coil-hub" {
     account   = 510430971399
@@ -127,12 +135,4 @@ infra_acc_terraform: |-
     }
 
     config = var.config
-  }
-
-  output "auditor_arn" {
-    value = module.coil-hub.auditor_arn
-  }
-
-  output "aws_config" {
-    value = local.aws_config
   }

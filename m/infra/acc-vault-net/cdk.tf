@@ -16,6 +16,8 @@ terraform {
   }
 }
 
+variable "config" {}
+
 provider "aws" {
   profile = "vault-net"
   alias   = "vault-net"
@@ -34,7 +36,13 @@ locals {
   })
 }
 
-variable "config" {}
+output "aws_config" {
+  value = local.aws_config
+}
+
+output "auditor_arn" {
+  value = module.vault-net.auditor_arn
+}
 
 module "vault-net" {
   account   = 510430971399
@@ -47,12 +55,4 @@ module "vault-net" {
   }
 
   config = var.config
-}
-
-output "auditor_arn" {
-  value = module.vault-net.auditor_arn
-}
-
-output "aws_config" {
-  value = local.aws_config
 }

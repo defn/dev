@@ -16,6 +16,8 @@ terraform {
   }
 }
 
+variable "config" {}
+
 provider "aws" {
   profile = "immanent-herbal"
   alias   = "immanent-herbal"
@@ -34,7 +36,13 @@ locals {
   })
 }
 
-variable "config" {}
+output "aws_config" {
+  value = local.aws_config
+}
+
+output "auditor_arn" {
+  value = module.immanent-herbal.auditor_arn
+}
 
 module "immanent-herbal" {
   account   = 510430971399
@@ -47,12 +55,4 @@ module "immanent-herbal" {
   }
 
   config = var.config
-}
-
-output "auditor_arn" {
-  value = module.immanent-herbal.auditor_arn
-}
-
-output "aws_config" {
-  value = local.aws_config
 }

@@ -16,6 +16,8 @@ terraform {
   }
 }
 
+variable "config" {}
+
 provider "aws" {
   profile = "vault-ci"
   alias   = "vault-ci"
@@ -34,7 +36,13 @@ locals {
   })
 }
 
-variable "config" {}
+output "aws_config" {
+  value = local.aws_config
+}
+
+output "auditor_arn" {
+  value = module.vault-ci.auditor_arn
+}
 
 module "vault-ci" {
   account   = 510430971399
@@ -47,12 +55,4 @@ module "vault-ci" {
   }
 
   config = var.config
-}
-
-output "auditor_arn" {
-  value = module.vault-ci.auditor_arn
-}
-
-output "aws_config" {
-  value = local.aws_config
 }

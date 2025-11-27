@@ -16,6 +16,8 @@ terraform {
   }
 }
 
+variable "config" {}
+
 provider "aws" {
   profile = "immanent-hand"
   alias   = "immanent-hand"
@@ -34,7 +36,13 @@ locals {
   })
 }
 
-variable "config" {}
+output "aws_config" {
+  value = local.aws_config
+}
+
+output "auditor_arn" {
+  value = module.immanent-hand.auditor_arn
+}
 
 module "immanent-hand" {
   account   = 510430971399
@@ -47,12 +55,4 @@ module "immanent-hand" {
   }
 
   config = var.config
-}
-
-output "auditor_arn" {
-  value = module.immanent-hand.auditor_arn
-}
-
-output "aws_config" {
-  value = local.aws_config
 }

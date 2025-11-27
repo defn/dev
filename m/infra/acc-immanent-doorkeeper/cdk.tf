@@ -16,6 +16,8 @@ terraform {
   }
 }
 
+variable "config" {}
+
 provider "aws" {
   profile = "immanent-doorkeeper"
   alias   = "immanent-doorkeeper"
@@ -34,7 +36,13 @@ locals {
   })
 }
 
-variable "config" {}
+output "aws_config" {
+  value = local.aws_config
+}
+
+output "auditor_arn" {
+  value = module.immanent-doorkeeper.auditor_arn
+}
 
 module "immanent-doorkeeper" {
   account   = 510430971399
@@ -47,12 +55,4 @@ module "immanent-doorkeeper" {
   }
 
   config = var.config
-}
-
-output "auditor_arn" {
-  value = module.immanent-doorkeeper.auditor_arn
-}
-
-output "aws_config" {
-  value = local.aws_config
 }

@@ -16,6 +16,8 @@ terraform {
   }
 }
 
+variable "config" {}
+
 provider "aws" {
   profile = "gyre-ops"
   alias   = "gyre-ops"
@@ -34,7 +36,13 @@ locals {
   })
 }
 
-variable "config" {}
+output "aws_config" {
+  value = local.aws_config
+}
+
+output "auditor_arn" {
+  value = module.gyre-ops.auditor_arn
+}
 
 module "gyre-ops" {
   account   = 510430971399
@@ -47,12 +55,4 @@ module "gyre-ops" {
   }
 
   config = var.config
-}
-
-output "auditor_arn" {
-  value = module.gyre-ops.auditor_arn
-}
-
-output "aws_config" {
-  value = local.aws_config
 }

@@ -16,6 +16,8 @@ terraform {
   }
 }
 
+variable "config" {}
+
 provider "aws" {
   profile = "helix-net"
   alias   = "helix-net"
@@ -34,7 +36,13 @@ locals {
   })
 }
 
-variable "config" {}
+output "aws_config" {
+  value = local.aws_config
+}
+
+output "auditor_arn" {
+  value = module.helix-net.auditor_arn
+}
 
 module "helix-net" {
   account   = 510430971399
@@ -47,12 +55,4 @@ module "helix-net" {
   }
 
   config = var.config
-}
-
-output "auditor_arn" {
-  value = module.helix-net.auditor_arn
-}
-
-output "aws_config" {
-  value = local.aws_config
 }

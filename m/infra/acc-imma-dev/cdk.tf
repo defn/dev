@@ -16,6 +16,8 @@ terraform {
   }
 }
 
+variable "config" {}
+
 provider "aws" {
   profile = "imma-dev"
   alias   = "imma-dev"
@@ -34,7 +36,13 @@ locals {
   })
 }
 
-variable "config" {}
+output "aws_config" {
+  value = local.aws_config
+}
+
+output "auditor_arn" {
+  value = module.imma-dev.auditor_arn
+}
 
 module "imma-dev" {
   account   = 510430971399
@@ -47,12 +55,4 @@ module "imma-dev" {
   }
 
   config = var.config
-}
-
-output "auditor_arn" {
-  value = module.imma-dev.auditor_arn
-}
-
-output "aws_config" {
-  value = local.aws_config
 }

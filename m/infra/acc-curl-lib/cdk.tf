@@ -16,6 +16,8 @@ terraform {
   }
 }
 
+variable "config" {}
+
 provider "aws" {
   profile = "curl-lib"
   alias   = "curl-lib"
@@ -34,7 +36,13 @@ locals {
   })
 }
 
-variable "config" {}
+output "aws_config" {
+  value = local.aws_config
+}
+
+output "auditor_arn" {
+  value = module.curl-lib.auditor_arn
+}
 
 module "curl-lib" {
   account   = 510430971399
@@ -47,12 +55,4 @@ module "curl-lib" {
   }
 
   config = var.config
-}
-
-output "auditor_arn" {
-  value = module.curl-lib.auditor_arn
-}
-
-output "aws_config" {
-  value = local.aws_config
 }

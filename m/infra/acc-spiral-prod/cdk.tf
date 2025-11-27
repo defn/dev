@@ -16,6 +16,8 @@ terraform {
   }
 }
 
+variable "config" {}
+
 provider "aws" {
   profile = "spiral-prod"
   alias   = "spiral-prod"
@@ -34,7 +36,13 @@ locals {
   })
 }
 
-variable "config" {}
+output "aws_config" {
+  value = local.aws_config
+}
+
+output "auditor_arn" {
+  value = module.spiral-prod.auditor_arn
+}
 
 module "spiral-prod" {
   account   = 510430971399
@@ -47,12 +55,4 @@ module "spiral-prod" {
   }
 
   config = var.config
-}
-
-output "auditor_arn" {
-  value = module.spiral-prod.auditor_arn
-}
-
-output "aws_config" {
-  value = local.aws_config
 }

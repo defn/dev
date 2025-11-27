@@ -16,6 +16,8 @@ terraform {
   }
 }
 
+variable "config" {}
+
 provider "aws" {
   profile = "vault-log"
   alias   = "vault-log"
@@ -34,7 +36,13 @@ locals {
   })
 }
 
-variable "config" {}
+output "aws_config" {
+  value = local.aws_config
+}
+
+output "auditor_arn" {
+  value = module.vault-log.auditor_arn
+}
 
 module "vault-log" {
   account   = 510430971399
@@ -47,12 +55,4 @@ module "vault-log" {
   }
 
   config = var.config
-}
-
-output "auditor_arn" {
-  value = module.vault-log.auditor_arn
-}
-
-output "aws_config" {
-  value = local.aws_config
 }

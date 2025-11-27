@@ -16,6 +16,8 @@ terraform {
   }
 }
 
+variable "config" {}
+
 provider "aws" {
   profile = "whoa-hub"
   alias   = "whoa-hub"
@@ -34,7 +36,13 @@ locals {
   })
 }
 
-variable "config" {}
+output "aws_config" {
+  value = local.aws_config
+}
+
+output "auditor_arn" {
+  value = module.whoa-hub.auditor_arn
+}
 
 module "whoa-hub" {
   account   = 510430971399
@@ -47,12 +55,4 @@ module "whoa-hub" {
   }
 
   config = var.config
-}
-
-output "auditor_arn" {
-  value = module.whoa-hub.auditor_arn
-}
-
-output "aws_config" {
-  value = local.aws_config
 }

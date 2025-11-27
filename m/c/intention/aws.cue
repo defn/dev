@@ -127,9 +127,20 @@ provider "aws" {
 
 data "aws_caller_identity" "current" {}
 
+data "aws_ssoadmin_instances" "sso_instance" {}
+
 locals {
 	sso_instance_arn  = data.aws_ssoadmin_instances.sso_instance.arns
 	sso_instance_isid = data.aws_ssoadmin_instances.sso_instance.identity_store_ids
+	aws_config = jsonencode({
+		"\(org)-\(account)": {
+			account_id = data.aws_caller_identity.current.account_id
+		}
+	})
+}
+
+output "aws_config" {
+  value = local.aws_config
 }
 
 resource "aws_organizations_organization" "organization" {
@@ -155,9 +166,6 @@ resource "aws_iam_organizations_features" "organization" {
     "RootCredentialsManagement",
     "RootSessions"
   ]
-}
-
-data "aws_ssoadmin_instances" "sso_instance" {
 }
 
 resource "aws_ssoadmin_permission_set" "admin_sso_permission_set" {
@@ -239,6 +247,8 @@ terraform {
   }
 }
 
+variable "config" {}
+
 provider "aws" {
   profile = "\(org)-\(account)"
   alias   = "\(org)-\(account)"
@@ -257,7 +267,13 @@ locals {
   })
 }
 
-variable "config" {}
+output "aws_config" {
+  value = local.aws_config
+}
+
+output "auditor_arn" {
+  value = module.\(org)-\(account).auditor_arn
+}
 
 module "\(org)-\(account)" {
   account   = \(lookup[bootstrap.org].account[bootstrap.account].id)
@@ -270,14 +286,6 @@ module "\(org)-\(account)" {
   }
 
   config = var.config
-}
-
-output "auditor_arn" {
-  value = module.\(org)-\(account).auditor_arn
-}
-
-output "aws_config" {
-  value = local.aws_config
 }
 """
 	})

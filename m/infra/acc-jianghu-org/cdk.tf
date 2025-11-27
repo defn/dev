@@ -16,6 +16,8 @@ terraform {
   }
 }
 
+variable "config" {}
+
 provider "aws" {
   profile = "jianghu-org"
   alias   = "jianghu-org"
@@ -34,7 +36,13 @@ locals {
   })
 }
 
-variable "config" {}
+output "aws_config" {
+  value = local.aws_config
+}
+
+output "auditor_arn" {
+  value = module.jianghu-org.auditor_arn
+}
 
 module "jianghu-org" {
   account   = 510430971399
@@ -47,12 +55,4 @@ module "jianghu-org" {
   }
 
   config = var.config
-}
-
-output "auditor_arn" {
-  value = module.jianghu-org.auditor_arn
-}
-
-output "aws_config" {
-  value = local.aws_config
 }

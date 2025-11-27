@@ -16,6 +16,8 @@ terraform {
   }
 }
 
+variable "config" {}
+
 provider "aws" {
   profile = "circus-net"
   alias   = "circus-net"
@@ -34,7 +36,13 @@ locals {
   })
 }
 
-variable "config" {}
+output "aws_config" {
+  value = local.aws_config
+}
+
+output "auditor_arn" {
+  value = module.circus-net.auditor_arn
+}
 
 module "circus-net" {
   account   = 510430971399
@@ -47,12 +55,4 @@ module "circus-net" {
   }
 
   config = var.config
-}
-
-output "auditor_arn" {
-  value = module.circus-net.auditor_arn
-}
-
-output "aws_config" {
-  value = local.aws_config
 }

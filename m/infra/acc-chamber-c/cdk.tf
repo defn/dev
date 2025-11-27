@@ -16,6 +16,8 @@ terraform {
   }
 }
 
+variable "config" {}
+
 provider "aws" {
   profile = "chamber-c"
   alias   = "chamber-c"
@@ -34,7 +36,13 @@ locals {
   })
 }
 
-variable "config" {}
+output "aws_config" {
+  value = local.aws_config
+}
+
+output "auditor_arn" {
+  value = module.chamber-c.auditor_arn
+}
 
 module "chamber-c" {
   account   = 510430971399
@@ -47,12 +55,4 @@ module "chamber-c" {
   }
 
   config = var.config
-}
-
-output "auditor_arn" {
-  value = module.chamber-c.auditor_arn
-}
-
-output "aws_config" {
-  value = local.aws_config
 }

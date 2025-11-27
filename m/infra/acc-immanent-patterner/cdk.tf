@@ -16,6 +16,8 @@ terraform {
   }
 }
 
+variable "config" {}
+
 provider "aws" {
   profile = "immanent-patterner"
   alias   = "immanent-patterner"
@@ -34,7 +36,13 @@ locals {
   })
 }
 
-variable "config" {}
+output "aws_config" {
+  value = local.aws_config
+}
+
+output "auditor_arn" {
+  value = module.immanent-patterner.auditor_arn
+}
 
 module "immanent-patterner" {
   account   = 510430971399
@@ -47,12 +55,4 @@ module "immanent-patterner" {
   }
 
   config = var.config
-}
-
-output "auditor_arn" {
-  value = module.immanent-patterner.auditor_arn
-}
-
-output "aws_config" {
-  value = local.aws_config
 }
