@@ -1,5 +1,16 @@
 # Changelog
 
+## [1.48.0](https://github.com/defn/dev/compare/v1.47.0...v1.48.0) (2025-11-27)
+
+
+### Features
+
+* add AWS web console login support ([81f6ec9](https://github.com/defn/dev/commit/81f6ec94bc40766fc665a81c111f8af81560106f))
+* add claude.ai to code-server trusted domains ([d0eb319](https://github.com/defn/dev/commit/d0eb31955ab1ae37f10cd289f30eac895735ab31))
+* add environment detection and starship prompt display ([a218c6b](https://github.com/defn/dev/commit/a218c6be43154e86e6de9ec07c9d463642498e22))
+* enhance Coder SSH template with AI task support ([e065513](https://github.com/defn/dev/commit/e0655139e72d59fd4246dbf83630f10f9de2e789))
+* update preview app with healthcheck and port 3001 ([2a65238](https://github.com/defn/dev/commit/2a652384c82f1cb805943d2e2970931979016e72))
+
 ## [1.47.0](https://github.com/defn/dev/compare/v1.46.0...v1.47.0) (2025-11-25)
 
 
