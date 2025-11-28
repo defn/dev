@@ -1,6 +1,8 @@
 sudo apt install -y postgresql
 
 sudo vi /etc/postgresql/*/main/pg_hba.conf
+# change to:
+# local   all             postgres                                trust
 
 sudo systemctl restart postgresql
 
