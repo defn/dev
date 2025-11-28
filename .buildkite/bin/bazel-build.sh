@@ -7,3 +7,4 @@ source ~/work/.buildkite/.env
 cd m
 mise install
 b build
+b test
