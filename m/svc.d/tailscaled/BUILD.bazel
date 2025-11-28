@@ -11,5 +11,6 @@ go_library(
 go_binary(
     name = "tailscaled",
     embed = [":tailscaled_lib"],
+    pure = "on",
     visibility = ["//visibility:public"],
 )

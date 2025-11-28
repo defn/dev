@@ -11,5 +11,6 @@ go_library(
 go_binary(
     name = "coder-tunnel",
     embed = [":coder-tunnel_lib"],
+    pure = "on",
     visibility = ["//visibility:public"],
 )

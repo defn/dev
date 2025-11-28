@@ -19,6 +19,7 @@ go_library(
 go_binary(
     name = "hello",
     embed = [":hello_lib"],
+    pure = "on",
     visibility = ["//visibility:public"],
 )
 
