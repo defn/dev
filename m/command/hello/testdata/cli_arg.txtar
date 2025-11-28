@@ -1,0 +1,7 @@
+# Test hello command with CLI argument
+exec defn hello Alice
+stdout 'name=Alice'
+
+# Test hello command with default
+exec defn hello
+stdout 'name=World'

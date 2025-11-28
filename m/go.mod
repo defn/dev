@@ -16,6 +16,7 @@ require (
 	github.com/muesli/gamut v0.3.1
 	github.com/riverqueue/river v0.28.0
 	github.com/riverqueue/river/riverdriver/riverpgxv5 v0.28.0
+	github.com/rogpeppe/go-internal v1.14.1
 	github.com/spf13/cobra v1.10.1
 	github.com/spf13/viper v1.21.0
 	go.uber.org/fx v1.24.0
@@ -67,7 +68,6 @@ require (
 	github.com/riverqueue/river/rivershared v0.28.0 // indirect
 	github.com/riverqueue/river/rivertype v0.28.0 // indirect
 	github.com/rivo/uniseg v0.4.7 // indirect
-	github.com/rogpeppe/go-internal v1.14.1 // indirect
 	github.com/sagikazarmark/locafero v0.11.0 // indirect
 	github.com/sahilm/fuzzy v0.1.1 // indirect
 	github.com/sourcegraph/conc v0.3.1-0.20240121214520-5f936abd7ae8 // indirect

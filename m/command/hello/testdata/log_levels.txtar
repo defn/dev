@@ -1,0 +1,15 @@
+# Test hello command with different log levels
+
+# Test with default log level (warn) - charmbracelet/log output goes to stdout
+exec defn hello TestUser
+stdout 'name=TestUser'
+
+# Test with info log level - zap structured logs go to stderr
+exec defn --log-level=info hello InfoUser
+stdout 'name=InfoUser'
+stderr 'greeting'
+
+# Test with warn log level - should suppress info logs
+exec defn --log-level=warn hello WarnUser
+stdout 'name=WarnUser'
+! stderr 'greeting'
