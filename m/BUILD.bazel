@@ -1,3 +1,16 @@
 load("@bazel_gazelle//:def.bzl", "gazelle")
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
 
 gazelle(name = "gazelle")
+
+go_library(
+    name = "m",
+    srcs = ["top.go"],
+    embedsrcs = [
+        # keep
+        "//cue.mod:module.cue",  # keep
+        "//hello:hello.cue",  # keep
+    ],
+    importpath = "github.com/defn/dev/m",
+    visibility = ["//visibility:public"],
+)

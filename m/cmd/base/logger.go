@@ -32,6 +32,7 @@ func InitLogger(level string) error {
 	config.EncoderConfig.TimeKey = "time"
 	config.EncoderConfig.EncodeTime = zapcore.ISO8601TimeEncoder
 	config.EncoderConfig.EncodeLevel = zapcore.CapitalColorLevelEncoder
+	config.DisableStacktrace = true // Disable automatic stack traces on error logs
 
 	var err error
 	logger, err = config.Build()

@@ -1,3 +1,5 @@
+exports_files(["module.cue"])
+
 filegroup(
     name = "cue_mod",
     srcs = ["module.cue"],

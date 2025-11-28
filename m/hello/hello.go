@@ -1,17 +1,24 @@
 package main
 
 import (
+	_ "embed"
 	"os"
+	"path/filepath"
 
 	"github.com/bitfield/script"
 	"github.com/spf13/cobra"
 	"go.uber.org/fx"
 	"go.uber.org/zap"
 
+	top "github.com/defn/dev/m"
 	"github.com/defn/dev/m/cmd/base"
 	"github.com/defn/dev/m/cmd/runner"
 	"github.com/defn/dev/m/command/root"
+	"github.com/defn/dev/m/cue"
 )
+
+//go:embed hello.cue
+var hello_cue_content string
 
 func run() {
 	runner.Run(runner.Config{
@@ -62,6 +69,11 @@ func (s *subCommand) Main() error {
 	logger := base.CommandLogger("hello")
 	logger.Debug("running hello command")
 
+	if err := validateHelloConfig(); err != nil {
+		logger.Error("config validation failed", zap.Error(err))
+		return err
+	}
+
 	// Create temporary file path
 	tmp_file, err := os.CreateTemp("", "greeting-*.txt")
 	if err != nil {
@@ -81,4 +93,24 @@ func (s *subCommand) Main() error {
 	script.File(tmp_path).Stdout()
 
 	return nil
+}
+
+func validateHelloConfig() error {
+	// Get absolute path to hello.yaml
+	hello_yaml_path, err := filepath.Abs("hello.yaml")
+	if err != nil {
+		return err
+	}
+
+	// This mimics: cue vet hello.cue hello.yaml -d hello
+	overlay := cue.NewOverlay()
+	err = overlay.ValidateConfig(
+		top.CueModule,                 // module: CUE module definition
+		"github.com/defn/dev/m/hello", // package_name: package for this module
+		hello_yaml_path,               // config_file_path: path to hello.yaml
+		"#Hello",                      // schema_label: the "#Hello" definition
+		hello_cue_content,             // config: CUE schema content from hello.cue
+		top.Schema,                    // schema_files
+	)
+	return err
 }

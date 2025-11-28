@@ -1,4 +1,8 @@
 # Test hello command with different log levels
+-- hello.yaml --
+message: "Hello!!!"
+greeting: "world!!"
+-- end --
 
 # Test with default log level (warn)
 exec defn hello

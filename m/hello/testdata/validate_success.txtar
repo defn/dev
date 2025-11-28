@@ -1,4 +1,4 @@
-# Test basic hello command
+# Test successful CUE validation
 -- hello.yaml --
 message: "Hello!!!"
 greeting: "world!!"

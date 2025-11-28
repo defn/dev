@@ -1,0 +1,9 @@
+# Test CUE validation failure with invalid field
+-- hello.yaml --
+message: "Hello!!!"
+greetingx: "world!!"
+-- end --
+
+! exec defn hello
+stderr 'config validation failed'
+stderr 'greetingx: field not allowed'

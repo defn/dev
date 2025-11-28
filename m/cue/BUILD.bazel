@@ -1,0 +1,15 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "cue",
+    srcs = ["cue.go"],
+    importpath = "github.com/defn/dev/m/cue",
+    visibility = ["//visibility:public"],
+    deps = [
+        "@org_cuelang_go//cue",
+        "@org_cuelang_go//cue/cuecontext",
+        "@org_cuelang_go//cue/load",
+        "@org_cuelang_go//encoding/json",
+        "@org_cuelang_go//encoding/yaml",
+    ],
+)
