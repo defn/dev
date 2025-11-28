@@ -5,6 +5,7 @@ import (
 
 	"github.com/charmbracelet/log"
 	"github.com/spf13/cobra"
+	"github.com/spf13/viper"
 	"go.uber.org/fx"
 	"go.uber.org/zap"
 
@@ -28,16 +29,20 @@ type subCommand struct {
 func NewCommand(lifecycle fx.Lifecycle) base.Command {
 	sub := &subCommand{}
 
+	// Set default name in viper
+	viper.SetDefault("hello.name", "World")
+
 	cmd := &cobra.Command{
 		Use:   "hello [name]",
 		Short: "Example hello command",
-		Long:  `Example hello command - simple copy-paste template`,
+		Long:  `Example hello command - demonstrates Viper config hierarchy`,
 		Args:  cobra.MaximumNArgs(1),
 		Run: func(cmd *cobra.Command, args []string) {
+			// Precedence: CLI arg > viper (env var > config file > default)
 			if len(args) > 0 {
 				sub.greeting = args[0]
 			} else {
-				sub.greeting = "World"
+				sub.greeting = viper.GetString("hello.name")
 			}
 			if err := sub.Main(); err != nil {
 				base.Logger().Error("failed to run hello command", zap.Error(err))

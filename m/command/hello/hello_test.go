@@ -9,7 +9,6 @@ import (
 )
 
 func TestMain(m *testing.M) {
-	// Use the main binary's Run function for testscript
 	testscript.Main(m, map[string]func(){
 		"defn": run.Run,
 	})

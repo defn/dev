@@ -9,6 +9,7 @@ go_library(
         "//cmd/base",
         "@com_github_charmbracelet_log//:log",
         "@com_github_spf13_cobra//:cobra",
+        "@com_github_spf13_viper//:viper",
         "@org_uber_go_fx//:fx",
         "@org_uber_go_zap//:zap",
     ],

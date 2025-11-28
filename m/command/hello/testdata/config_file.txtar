@@ -1,13 +1,13 @@
 # Test hello command with config file
-# Note: hello command currently uses CLI args, not config
-# This test demonstrates the config file setup for future use
 
 -- defn.yaml --
 hello:
   name: ConfigUser
 
--- test.sh --
-# For now, hello uses CLI args not config
-# This is a placeholder for when we add config support
+# Test with config file (no CLI arg) - should use config value
+exec defn hello
+stdout 'name=ConfigUser'
+
+# Test with CLI arg - should override config value
 exec defn hello Bob
 stdout 'name=Bob'
