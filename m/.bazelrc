@@ -17,6 +17,7 @@ info --noshow_loading_progress
 info --noshow_progress
 info --ui_event_filters=-info
 
+build --stamp=false
 build --action_env=HOME=/home/ubuntu
 build --enable_runfiles
 build --incompatible_autoload_externally=+@rules_android
