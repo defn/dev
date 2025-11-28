@@ -57,7 +57,7 @@ func NewCommand(lifecycle fx.Lifecycle) base.Command {
 }
 
 func (s *subCommand) Main() error {
-	logger := base.Logger().With(zap.String("cmd", "api"))
+	logger := base.CommandLogger("api")
 	logger.Info("starting API server",
 		zap.Int("port", s.port),
 		zap.Strings("config_sources", []string{

@@ -47,3 +47,13 @@ func Logger() *zap.Logger {
 	}
 	return logger
 }
+
+// CommandLogger returns a logger with the command name pre-populated
+func CommandLogger(cmdName string) *zap.Logger {
+	return Logger().With(zap.String("cmd", cmdName))
+}
+
+// WorkerLogger returns a logger with the worker name pre-populated
+func WorkerLogger(workerName string) *zap.Logger {
+	return Logger().With(zap.String("worker", workerName))
+}

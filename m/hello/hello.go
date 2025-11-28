@@ -59,7 +59,7 @@ func NewCommand(lifecycle fx.Lifecycle) base.Command {
 }
 
 func (s *subCommand) Main() error {
-	logger := base.Logger().With(zap.String("cmd", "hello"))
+	logger := base.CommandLogger("hello")
 	logger.Debug("running hello command")
 
 	// Create temporary file path

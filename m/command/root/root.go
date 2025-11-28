@@ -7,7 +7,6 @@ import (
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 	"go.uber.org/fx"
-	"go.uber.org/zap"
 
 	"github.com/defn/dev/m/cmd/base"
 )
@@ -49,7 +48,7 @@ func NewCommand(lifecycle fx.Lifecycle) base.Command {
 }
 
 func (r *rootCommand) Main() error {
-	logger := base.Logger().With(zap.String("cmd", "defn"))
+	logger := base.CommandLogger("defn")
 	logger.Debug("running root command")
 
 	shell_cmd := exec.Command("env")

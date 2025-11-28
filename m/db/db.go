@@ -66,7 +66,7 @@ func NewCommand(lifecycle fx.Lifecycle) base.Command {
 }
 
 func (s *subCommand) Main() error {
-	logger := base.Logger().With(zap.String("cmd", "db"))
+	logger := base.CommandLogger("db")
 	logger.Debug("running db command")
 
 	ctx := context.Background()
@@ -139,7 +139,7 @@ type SortWorker struct {
 }
 
 func (w *SortWorker) Work(ctx context.Context, job *river.Job[SortTask]) error {
-	logger := base.Logger().With(zap.String("worker", "sort"))
+	logger := base.WorkerLogger("sort")
 	sort.Strings(job.Args.Things)
 	logger.Info("sorted strings", zap.Strings("things", job.Args.Things))
 	return nil

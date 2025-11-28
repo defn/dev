@@ -55,7 +55,7 @@ func NewCommand(lifecycle fx.Lifecycle) base.Command {
 }
 
 func (s *subCommand) Main() error {
-	logger := base.Logger().With(zap.String("cmd", "hello"))
+	logger := base.CommandLogger("hello")
 	logger.Info("greeting", zap.String("name", s.greeting))
 
 	charm_logger := log.New(os.Stdout)
