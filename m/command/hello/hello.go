@@ -1,10 +1,12 @@
 package hello
 
 import (
-	"fmt"
+	"os"
 
+	"github.com/charmbracelet/log"
 	"github.com/spf13/cobra"
 	"go.uber.org/fx"
+	"go.uber.org/zap"
 
 	"github.com/defn/dev/m/cmd/base"
 )
@@ -38,7 +40,7 @@ func NewCommand(lifecycle fx.Lifecycle) base.Command {
 				sub.greeting = "World"
 			}
 			if err := sub.Main(); err != nil {
-				fmt.Printf("Error: %v\n", err)
+				base.Logger().Error("failed to run hello command", zap.Error(err))
 			}
 		},
 	}
@@ -48,6 +50,12 @@ func NewCommand(lifecycle fx.Lifecycle) base.Command {
 }
 
 func (s *subCommand) Main() error {
-	fmt.Printf("Hello, %s!\n", s.greeting)
+	logger := base.Logger().With(zap.String("cmd", "hello"))
+	logger.Info("greeting", zap.String("name", s.greeting))
+
+	// Use charmbracelet/log for colorful output
+	charm_logger := log.New(os.Stdout)
+	charm_logger.Info("Hello", "name", s.greeting)
+
 	return nil
 }

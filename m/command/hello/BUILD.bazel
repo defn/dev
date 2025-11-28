@@ -7,7 +7,9 @@ go_library(
     visibility = ["//visibility:public"],
     deps = [
         "//cmd/base",
+        "@com_github_charmbracelet_log//:log",
         "@com_github_spf13_cobra//:cobra",
         "@org_uber_go_fx//:fx",
+        "@org_uber_go_zap//:zap",
     ],
 )

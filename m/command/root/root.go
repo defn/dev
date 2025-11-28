@@ -5,7 +5,9 @@ import (
 	"os/exec"
 
 	"github.com/spf13/cobra"
+	"github.com/spf13/viper"
 	"go.uber.org/fx"
+	"go.uber.org/zap"
 
 	"github.com/defn/dev/m/cmd/base"
 )
@@ -38,11 +40,18 @@ func NewCommand(lifecycle fx.Lifecycle) base.Command {
 		},
 	}
 
+	// Add global --log-level flag
+	cmd.PersistentFlags().String("log-level", "warn", "Log level (debug, info, warn, error)")
+	viper.BindPFlag("global.log_level", cmd.PersistentFlags().Lookup("log-level"))
+
 	root.BaseCommand = base.NewCommand(cmd)
 	return root
 }
 
 func (r *rootCommand) Main() error {
+	logger := base.Logger().With(zap.String("cmd", "defn"))
+	logger.Debug("running root command")
+
 	shell_cmd := exec.Command("env")
 	shell_cmd.Env = append(os.Environ(), "FOO=bar")
 	shell_cmd.Stdin = os.Stdin

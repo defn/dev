@@ -9,6 +9,7 @@ import (
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 	"go.uber.org/fx"
+	"go.uber.org/zap"
 
 	"github.com/defn/dev/m/cmd/base"
 )
@@ -43,7 +44,7 @@ func NewCommand(lifecycle fx.Lifecycle) base.Command {
 			}
 
 			if err := sub.Main(); err != nil {
-				fmt.Printf("Error: %v\n", err)
+				base.Logger().Error("failed to run api command", zap.Error(err))
 			}
 		},
 	}
@@ -57,27 +58,35 @@ func NewCommand(lifecycle fx.Lifecycle) base.Command {
 }
 
 func (s *subCommand) Main() error {
-	fmt.Printf("Starting API server on port %d\n", s.port)
-	fmt.Printf("Port can be configured via:\n")
-	fmt.Printf("  1. --port flag\n")
-	fmt.Printf("  2. DEFN_API_PORT environment variable\n")
-	fmt.Printf("  3. api.port in defn.yaml\n")
-	fmt.Printf("  4. api.port in ~/.defn.yaml\n\n")
+	logger := base.Logger().With(zap.String("cmd", "api"))
+	logger.Info("starting API server",
+		zap.Int("port", s.port),
+		zap.Strings("config_sources", []string{
+			"--port flag",
+			"DEFN_API_PORT environment variable",
+			"api.port in defn.yaml",
+			"api.port in ~/.defn.yaml",
+		}),
+	)
 
 	e := echo.New()
+	e.HideBanner = true
 	e.Use(middleware.Logger())
 	e.Use(middleware.Recover())
 
 	e.GET("/", func(c echo.Context) error {
+		logger.Debug("handling GET /")
 		return c.JSON(http.StatusOK, map[string]string{
 			"message": "hello!",
 		})
 	})
 	e.GET("/api", func(c echo.Context) error {
+		logger.Debug("handling GET /api")
 		return c.JSON(http.StatusOK, map[string]string{
 			"message": `["hello"]`,
 		})
 	})
 
+	logger.Info("server listening", zap.String("address", fmt.Sprintf(":%d", s.port)))
 	return e.Start(fmt.Sprintf(":%d", s.port))
 }

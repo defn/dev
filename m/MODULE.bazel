@@ -54,6 +54,7 @@ use_repo(
     "com_github_charmbracelet_bubbles",
     "com_github_charmbracelet_bubbletea",
     "com_github_charmbracelet_lipgloss",
+    "com_github_charmbracelet_log",
     "com_github_jackc_pgx_v5",
     "com_github_joho_godotenv",
     "com_github_labstack_echo_v4",
@@ -65,4 +66,5 @@ use_repo(
     "com_github_spf13_viper",
     "org_cuelang_go",
     "org_uber_go_fx",
+    "org_uber_go_zap",
 )

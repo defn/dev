@@ -5,11 +5,14 @@ go_library(
     srcs = [
         "base.go",
         "config.go",
+        "logger.go",
     ],
     importpath = "github.com/defn/dev/m/cmd/base",
     visibility = ["//visibility:public"],
     deps = [
         "@com_github_spf13_cobra//:cobra",
         "@com_github_spf13_viper//:viper",
+        "@org_uber_go_zap//:zap",
+        "@org_uber_go_zap//zapcore",
     ],
 )

@@ -19,7 +19,7 @@ type Config struct {
 }
 
 type GlobalConfig struct {
-	// Global configuration accessible to all commands
+	LogLevel string `mapstructure:"log_level"`
 }
 
 type RootConfig struct {
