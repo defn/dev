@@ -7,7 +7,8 @@ go_library(
     visibility = ["//visibility:public"],
     deps = [
         "//cmd/base",
-        "@com_github_gin_gonic_gin//:gin",
+        "@com_github_labstack_echo_v4//:echo",
+        "@com_github_labstack_echo_v4//middleware",
         "@com_github_spf13_cobra//:cobra",
         "@com_github_spf13_viper//:viper",
         "@org_uber_go_fx//:fx",

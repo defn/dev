@@ -4,7 +4,8 @@ import (
 	"fmt"
 	"net/http"
 
-	"github.com/gin-gonic/gin"
+	"github.com/labstack/echo/v4"
+	"github.com/labstack/echo/v4/middleware"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 	"go.uber.org/fx"
@@ -31,8 +32,8 @@ func NewCommand(lifecycle fx.Lifecycle) base.Command {
 
 	cmd := &cobra.Command{
 		Use:   "api",
-		Short: "Example API using Gin",
-		Long:  `Example API using Gin - demonstrates Viper config hierarchy`,
+		Short: "Example API using Echo",
+		Long:  `Example API using Echo - demonstrates Viper config hierarchy`,
 		Args:  cobra.NoArgs,
 		Run: func(cmd *cobra.Command, args []string) {
 			// Get port from viper (checks: flag > ENV > config files)
@@ -63,17 +64,20 @@ func (s *subCommand) Main() error {
 	fmt.Printf("  3. api.port in defn.yaml\n")
 	fmt.Printf("  4. api.port in ~/.defn.yaml\n\n")
 
-	router := gin.Default()
-	router.SetTrustedProxies(nil)
-	router.GET("/", func(ctx *gin.Context) {
-		ctx.JSON(http.StatusOK, gin.H{
+	e := echo.New()
+	e.Use(middleware.Logger())
+	e.Use(middleware.Recover())
+
+	e.GET("/", func(c echo.Context) error {
+		return c.JSON(http.StatusOK, map[string]string{
 			"message": "hello!",
 		})
 	})
-	router.GET("/api", func(ctx *gin.Context) {
-		ctx.JSON(http.StatusOK, gin.H{
+	e.GET("/api", func(c echo.Context) error {
+		return c.JSON(http.StatusOK, map[string]string{
 			"message": `["hello"]`,
 		})
 	})
-	return router.Run(fmt.Sprintf(":%d", s.port))
+
+	return e.Start(fmt.Sprintf(":%d", s.port))
 }
