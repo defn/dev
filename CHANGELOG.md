@@ -1,5 +1,22 @@
 # Changelog
 
+## [1.49.0](https://github.com/defn/dev/compare/v1.48.0...v1.49.0) (2025-11-28)
+
+
+### Features
+
+* add CUE-based configuration validation ([6330072](https://github.com/defn/dev/commit/63300726119c4da6ed982a626e937d0d493426b7))
+* add ibazel support with watch-test and watch-run commands ([f9b48ed](https://github.com/defn/dev/commit/f9b48ed3bbc449e8df0d7632b3ab2804729851a0))
+* add viper config support to hello command ([26c1c9f](https://github.com/defn/dev/commit/26c1c9f57dfcb652b6594675c1a1fef1613e6019))
+* add Viper configuration support and rename CLI to defn ([f7b377e](https://github.com/defn/dev/commit/f7b377eeac28e2ac445d1e1444a0152fcc28f4da))
+* implement structured logging with zap and dynamic log level control ([e3c444d](https://github.com/defn/dev/commit/e3c444dbb13730d9a29c8850fe7ed67ebea88106))
+* update hello program to use bitfield/script library ([ef14fec](https://github.com/defn/dev/commit/ef14fecbebc622178babb636f07d7fcf287d28de))
+
+
+### Bug Fixes
+
+* use current directory as default bazel target ([a7371c9](https://github.com/defn/dev/commit/a7371c98af2d182f492e89ff9fb69872b157e4bf))
+
 ## [1.48.0](https://github.com/defn/dev/compare/v1.47.0...v1.48.0) (2025-11-27)
 
 
