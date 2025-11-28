@@ -1,0 +1,15 @@
+# Test hello command with different log levels
+
+# Test with default log level (warn)
+exec defn hello
+stdout 'Hello, World!'
+
+# Test with debug log level - should show debug logs
+exec defn --log-level=debug hello
+stdout 'Hello, World!'
+stderr 'running hello command'
+
+# Test with warn log level - should suppress debug logs
+exec defn --log-level=warn hello
+stdout 'Hello, World!'
+! stderr 'running hello command'

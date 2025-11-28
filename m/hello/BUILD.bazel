@@ -1,15 +1,31 @@
-load("@io_bazel_rules_go//go:def.bzl", "go_binary", "go_library")
+load("@io_bazel_rules_go//go:def.bzl", "go_binary", "go_library", "go_test")
 
 go_library(
     name = "hello_lib",
     srcs = ["hello.go"],
     importpath = "github.com/defn/dev/m/hello",
     visibility = ["//visibility:private"],
-    deps = ["@com_github_bitfield_script//:script"],
+    deps = [
+        "//cmd/base",
+        "//cmd/runner",
+        "//command/root",
+        "@com_github_bitfield_script//:script",
+        "@com_github_spf13_cobra//:cobra",
+        "@org_uber_go_fx//:fx",
+        "@org_uber_go_zap//:zap",
+    ],
 )
 
 go_binary(
     name = "hello",
     embed = [":hello_lib"],
     visibility = ["//visibility:public"],
+)
+
+go_test(
+    name = "hello_test",
+    srcs = ["hello_test.go"],
+    data = glob(["testdata/**"]),
+    embed = [":hello_lib"],
+    deps = ["@com_github_rogpeppe_go_internal//testscript"],
 )

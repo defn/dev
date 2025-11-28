@@ -1,0 +1,3 @@
+# Test basic hello command
+exec defn hello
+stdout 'Hello, World!'

@@ -1,0 +1,4 @@
+# Test hello command help
+exec defn hello --help
+stdout 'Hello World command - demonstrates script-based greeting'
+stdout 'Usage:'

@@ -1,0 +1,15 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "runner",
+    srcs = ["runner.go"],
+    importpath = "github.com/defn/dev/m/cmd/runner",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//cmd/base",
+        "@com_github_spf13_cobra//:cobra",
+        "@com_github_spf13_viper//:viper",
+        "@org_uber_go_fx//:fx",
+        "@org_uber_go_fx//fxevent",
+    ],
+)
