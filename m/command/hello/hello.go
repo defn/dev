@@ -19,23 +19,35 @@ var Module = fx.Module("SubCommandHello",
 )
 
 type subCommand struct {
-	*base.BaseSubCommand
+	*base.BaseCommand
+	greeting string
 }
 
-func NewCommand(lifecycle fx.Lifecycle) base.SubCommand {
-	return &subCommand{
-		BaseSubCommand: base.NewSubCommand(&cobra.Command{
-			Use:   "hello [name]",
-			Short: "Example hello command",
-			Long:  `Example hello command - simple copy-paste template`,
-			Args:  cobra.MaximumNArgs(1),
-			Run: func(cmd *cobra.Command, args []string) {
-				if len(args) > 0 {
-					fmt.Printf("Hello, %s!\n", args[0])
-				} else {
-					fmt.Println("Hello, World!")
-				}
-			},
-		}),
+func NewCommand(lifecycle fx.Lifecycle) base.Command {
+	sub := &subCommand{}
+
+	cmd := &cobra.Command{
+		Use:   "hello [name]",
+		Short: "Example hello command",
+		Long:  `Example hello command - simple copy-paste template`,
+		Args:  cobra.MaximumNArgs(1),
+		Run: func(cmd *cobra.Command, args []string) {
+			if len(args) > 0 {
+				sub.greeting = args[0]
+			} else {
+				sub.greeting = "World"
+			}
+			if err := sub.Main(); err != nil {
+				fmt.Printf("Error: %v\n", err)
+			}
+		},
 	}
+
+	sub.BaseCommand = base.NewCommand(cmd)
+	return sub
+}
+
+func (s *subCommand) Main() error {
+	fmt.Printf("Hello, %s!\n", s.greeting)
+	return nil
 }

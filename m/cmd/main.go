@@ -28,7 +28,7 @@ func main() {
 		}),
 
 		root.Module,
-		fx.Invoke(func(root_cmd base.RootCommand) error {
+		fx.Invoke(func(root_cmd base.Command) error {
 			return root_cmd.GetCommand().Execute()
 		}),
 
@@ -36,7 +36,7 @@ func main() {
 		hello.Module,
 		tui.Module,
 		fx.Provide(fx.Annotate(
-			func(root base.RootCommand, subs []base.SubCommand) base.RootCommand {
+			func(root base.Command, subs []base.Command) base.Command {
 				for _, sub_cmd := range subs {
 					sub_cmd.Register(root.GetCommand())
 				}

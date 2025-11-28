@@ -22,10 +22,13 @@ var Module = fx.Module("SubCommandApi",
 )
 
 type subCommand struct {
-	*base.BaseSubCommand
+	*base.BaseCommand
+	port int
 }
 
-func NewCommand(lifecycle fx.Lifecycle) base.SubCommand {
+func NewCommand(lifecycle fx.Lifecycle) base.Command {
+	sub := &subCommand{}
+
 	cmd := &cobra.Command{
 		Use:   "api",
 		Short: "Example API using Gin",
@@ -33,31 +36,14 @@ func NewCommand(lifecycle fx.Lifecycle) base.SubCommand {
 		Args:  cobra.NoArgs,
 		Run: func(cmd *cobra.Command, args []string) {
 			// Get port from viper (checks: flag > ENV > config files)
-			port := viper.GetInt("api.port")
-			if port == 0 {
-				port = 8080 // default port
+			sub.port = viper.GetInt("api.port")
+			if sub.port == 0 {
+				sub.port = 8080 // default port
 			}
 
-			fmt.Printf("Starting API server on port %d\n", port)
-			fmt.Printf("Port can be configured via:\n")
-			fmt.Printf("  1. --port flag\n")
-			fmt.Printf("  2. DEFN_API_PORT environment variable\n")
-			fmt.Printf("  3. api.port in defn.yaml\n")
-			fmt.Printf("  4. api.port in ~/.defn.yaml\n\n")
-
-			router := gin.Default()
-			router.SetTrustedProxies(nil)
-			router.GET("/", func(ctx *gin.Context) {
-				ctx.JSON(http.StatusOK, gin.H{
-					"message": "hello!",
-				})
-			})
-			router.GET("/api", func(ctx *gin.Context) {
-				ctx.JSON(http.StatusOK, gin.H{
-					"message": `["hello"]`,
-				})
-			})
-			router.Run(fmt.Sprintf(":%d", port))
+			if err := sub.Main(); err != nil {
+				fmt.Printf("Error: %v\n", err)
+			}
 		},
 	}
 
@@ -65,7 +51,29 @@ func NewCommand(lifecycle fx.Lifecycle) base.SubCommand {
 	cmd.Flags().IntP("port", "p", 8080, "Port to listen on")
 	viper.BindPFlag("api.port", cmd.Flags().Lookup("port"))
 
-	return &subCommand{
-		BaseSubCommand: base.NewSubCommand(cmd),
-	}
+	sub.BaseCommand = base.NewCommand(cmd)
+	return sub
+}
+
+func (s *subCommand) Main() error {
+	fmt.Printf("Starting API server on port %d\n", s.port)
+	fmt.Printf("Port can be configured via:\n")
+	fmt.Printf("  1. --port flag\n")
+	fmt.Printf("  2. DEFN_API_PORT environment variable\n")
+	fmt.Printf("  3. api.port in defn.yaml\n")
+	fmt.Printf("  4. api.port in ~/.defn.yaml\n\n")
+
+	router := gin.Default()
+	router.SetTrustedProxies(nil)
+	router.GET("/", func(ctx *gin.Context) {
+		ctx.JSON(http.StatusOK, gin.H{
+			"message": "hello!",
+		})
+	})
+	router.GET("/api", func(ctx *gin.Context) {
+		ctx.JSON(http.StatusOK, gin.H{
+			"message": `["hello"]`,
+		})
+	})
+	return router.Run(fmt.Sprintf(":%d", s.port))
 }

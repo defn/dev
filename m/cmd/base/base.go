@@ -4,43 +4,26 @@ import (
 	"github.com/spf13/cobra"
 )
 
-// RootCommand interface defines the contract for root commands
-type RootCommand interface {
+// Command interface defines the contract for all commands (root and sub)
+type Command interface {
 	GetCommand() *cobra.Command
+	Main() error
+	Register(*cobra.Command) // Optional: only sub-commands use this
 }
 
-// BaseRootCommand provides a default implementation of RootCommand
-type BaseRootCommand struct {
+// BaseCommand provides a default implementation of Command
+type BaseCommand struct {
 	cmd *cobra.Command
 }
 
-func NewRootCommand(cmd *cobra.Command) *BaseRootCommand {
-	return &BaseRootCommand{cmd: cmd}
+func NewCommand(cmd *cobra.Command) *BaseCommand {
+	return &BaseCommand{cmd: cmd}
 }
 
-func (r *BaseRootCommand) GetCommand() *cobra.Command {
-	return r.cmd
+func (c *BaseCommand) Register(root_cmd *cobra.Command) {
+	root_cmd.AddCommand(c.cmd)
 }
 
-// SubCommand interface defines the contract for all sub-commands
-type SubCommand interface {
-	Register(*cobra.Command)
-	GetCommand() *cobra.Command
-}
-
-// BaseSubCommand provides a default implementation of SubCommand
-type BaseSubCommand struct {
-	cmd *cobra.Command
-}
-
-func NewSubCommand(cmd *cobra.Command) *BaseSubCommand {
-	return &BaseSubCommand{cmd: cmd}
-}
-
-func (b *BaseSubCommand) Register(root_cmd *cobra.Command) {
-	root_cmd.AddCommand(b.cmd)
-}
-
-func (b *BaseSubCommand) GetCommand() *cobra.Command {
-	return b.cmd
+func (c *BaseCommand) GetCommand() *cobra.Command {
+	return c.cmd
 }
