@@ -1,4 +1,4 @@
-package command
+package api
 
 import (
 	"net/http"

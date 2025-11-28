@@ -8,9 +8,9 @@ import (
 	"go.uber.org/fx/fxevent"
 
 	"github.com/defn/dev/m/cmd/base"
-	api "github.com/defn/dev/m/command/api"
-	root "github.com/defn/dev/m/command/root"
-	tui "github.com/defn/dev/m/command/tui"
+	"github.com/defn/dev/m/command/api"
+	"github.com/defn/dev/m/command/root"
+	"github.com/defn/dev/m/command/tui"
 )
 
 func main() {
@@ -19,22 +19,24 @@ func main() {
 		fx.WithLogger(func() fxevent.Logger {
 			return fxevent.NopLogger
 		}),
-		fx.Provide(fx.Annotate(
-			func(root_cmd base.RootCommand, sub_cmds []base.SubCommand) base.RootCommand {
-				for _, sub_cmd := range sub_cmds {
-					sub_cmd.Register(root_cmd.GetCommand())
-				}
 
-				return root_cmd
-			},
-			fx.ParamTags(`name:"root"`, `group:"subs"`)),
-		),
+		root.Module,
 		fx.Invoke(func(root_cmd base.RootCommand) error {
 			return root_cmd.GetCommand().Execute()
 		}),
-		root.Module,
+
 		api.Module,
 		tui.Module,
+		fx.Provide(fx.Annotate(
+			func(root base.RootCommand, subs []base.SubCommand) base.RootCommand {
+				for _, sub_cmd := range subs {
+					sub_cmd.Register(root.GetCommand())
+				}
+
+				return root
+			},
+			fx.ParamTags(`name:"root"`, `group:"subs"`)),
+		),
 	)
 
 	if err := app.Start(ctx); err != nil {
