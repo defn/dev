@@ -139,7 +139,8 @@ type SortWorker struct {
 }
 
 func (w *SortWorker) Work(ctx context.Context, job *river.Job[SortTask]) error {
+	logger := base.Logger().With(zap.String("worker", "sort"))
 	sort.Strings(job.Args.Things)
-	fmt.Printf("Sorted strings: %+v\n", job.Args.Things)
+	logger.Info("sorted strings", zap.Strings("things", job.Args.Things))
 	return nil
 }
