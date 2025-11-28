@@ -9,6 +9,5 @@ go_library(
         "//cmd/base",
         "@com_github_spf13_cobra//:cobra",
         "@org_uber_go_fx//:fx",
-        "@org_uber_go_fx//fxevent",
     ],
 )

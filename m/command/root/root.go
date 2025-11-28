@@ -26,9 +26,10 @@ type rootCommand struct {
 func NewCommand(lifecycle fx.Lifecycle) base.RootCommand {
 	return &rootCommand{
 		BaseRootCommand: base.NewRootCommand(&cobra.Command{
-			Use:   "cli",
+			Use:   "defn",
 			Short: "Root command: dumps env",
 			Long:  `Root command: dumps env`,
+			Args:  cobra.NoArgs,
 			Run: func(cmd *cobra.Command, args []string) {
 				shell_cmd := exec.Command("env")
 				shell_cmd.Env = append(os.Environ(), "FOO=bar")

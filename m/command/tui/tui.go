@@ -34,6 +34,7 @@ func NewCommand() base.SubCommand {
 			Use:   "tui",
 			Short: "Demo of charmbracelet TUI",
 			Long:  `Demo of charmbracelet TUI`,
+			Args:  cobra.NoArgs,
 			Run: func(cmd *cobra.Command, args []string) {
 				// items
 				menu_items := []list.Item{

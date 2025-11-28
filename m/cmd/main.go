@@ -9,11 +9,18 @@ import (
 
 	"github.com/defn/dev/m/cmd/base"
 	"github.com/defn/dev/m/command/api"
+	"github.com/defn/dev/m/command/hello"
 	"github.com/defn/dev/m/command/root"
 	"github.com/defn/dev/m/command/tui"
 )
 
 func main() {
+	// Initialize Viper configuration
+	if err := base.InitConfig(); err != nil {
+		// Config initialization errors are non-fatal
+		// App will run with defaults if config files don't exist
+	}
+
 	ctx := context.Background()
 	app := fx.New(
 		fx.WithLogger(func() fxevent.Logger {
@@ -26,6 +33,7 @@ func main() {
 		}),
 
 		api.Module,
+		hello.Module,
 		tui.Module,
 		fx.Provide(fx.Annotate(
 			func(root base.RootCommand, subs []base.SubCommand) base.RootCommand {
