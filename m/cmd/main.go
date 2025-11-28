@@ -24,10 +24,13 @@ func main() {
 	}
 
 	// Parse --log-level flag early (before fx.New) so fx logs use correct level
+
+	// Check for log level in env
 	log_level := "warn"
 	if level := os.Getenv("DEFN_GLOBAL_LOG_LEVEL"); level != "" {
 		log_level = level
 	}
+
 	// Check for --log-level flag in os.Args
 	for i, arg := range os.Args {
 		if arg == "--log-level" && i+1 < len(os.Args) {

@@ -31,17 +31,16 @@ type subCommand struct {
 func NewCommand(lifecycle fx.Lifecycle) base.Command {
 	sub := &subCommand{}
 
+	// Set default port in viper
+	viper.SetDefault("api.port", 8080)
+
 	cmd := &cobra.Command{
 		Use:   "api",
 		Short: "Example API using Echo",
 		Long:  `Example API using Echo - demonstrates Viper config hierarchy`,
 		Args:  cobra.NoArgs,
 		Run: func(cmd *cobra.Command, args []string) {
-			// Get port from viper (checks: flag > ENV > config files)
 			sub.port = viper.GetInt("api.port")
-			if sub.port == 0 {
-				sub.port = 8080 // default port
-			}
 
 			if err := sub.Main(); err != nil {
 				base.Logger().Error("failed to run api command", zap.Error(err))

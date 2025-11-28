@@ -53,7 +53,6 @@ func (s *subCommand) Main() error {
 	logger := base.Logger().With(zap.String("cmd", "hello"))
 	logger.Info("greeting", zap.String("name", s.greeting))
 
-	// Use charmbracelet/log for colorful output
 	charm_logger := log.New(os.Stdout)
 	charm_logger.Info("Hello", "name", s.greeting)
 
