@@ -1,6 +1,9 @@
 package base
 
 import (
+	"os"
+
+	"github.com/charmbracelet/log"
 	"go.uber.org/zap"
 	"go.uber.org/zap/zapcore"
 )
@@ -56,4 +59,9 @@ func CommandLogger(cmdName string) *zap.Logger {
 // WorkerLogger returns a logger with the worker name pre-populated
 func WorkerLogger(workerName string) *zap.Logger {
 	return Logger().With(zap.String("worker", workerName))
+}
+
+// CharmLogger returns a charmbracelet logger instance
+func CharmLogger() *log.Logger {
+	return log.New(os.Stdout)
 }

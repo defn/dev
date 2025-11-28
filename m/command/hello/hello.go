@@ -1,9 +1,6 @@
 package hello
 
 import (
-	"os"
-
-	"github.com/charmbracelet/log"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 	"go.uber.org/fx"
@@ -58,8 +55,8 @@ func (s *subCommand) Main() error {
 	logger := base.CommandLogger("hello")
 	logger.Info("greeting", zap.String("name", s.greeting))
 
-	charm_logger := log.New(os.Stdout)
-	charm_logger.Info("Hello", "name", s.greeting)
+	charm := base.CharmLogger()
+	charm.Info("Hello", "name", s.greeting)
 
 	return nil
 }
