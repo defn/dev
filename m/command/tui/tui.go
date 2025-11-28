@@ -5,61 +5,69 @@ import (
 	"os"
 
 	"github.com/spf13/cobra"
+	"go.uber.org/fx"
 
 	tea "github.com/charmbracelet/bubbletea"
 
 	"github.com/charmbracelet/bubbles/list"
 	"github.com/charmbracelet/lipgloss"
 
-	root "github.com/defn/dev/m/command/root"
+	"github.com/defn/dev/m/cmd/base"
 )
 
-var physicalWidth int
-var physicalHeight int
+var Module = fx.Module("SubCommandTui",
+	fx.Provide(
+		fx.Annotate(
+			NewCommand,
+			fx.ResultTags(`group:"subs"`),
+		),
+	),
+)
 
-func init() {
-	root.RootCmd.AddCommand(&cobra.Command{
-		Use:   "tui",
-		Short: "A brief description of your command",
-		Long: `A longer description that spans multiple lines and likely contains examples
-and usage of using your command. For example:
+type subCommand struct {
+	*base.BaseSubCommand
+}
 
-Cobra is a CLI library for Go that empowers applications.
-This application is a tool to generate the needed files
-to quickly create a Cobra application.`,
-		Run: func(cmd *cobra.Command, args []string) {
-			// items
-			items := []list.Item{
-				item("Ramen"),
-				item("Tomato Soup"),
-				item("Hamburgers"),
-				item("Cheeseburgers"),
-				item("Currywurst"),
-				item("Okonomiyaki"),
-				item("Pasta"),
-				item("Fillet Mignon"),
-				item("Caviar"),
-				item("Just Wine"),
-			}
+func NewCommand() base.SubCommand {
+	return &subCommand{
+		BaseSubCommand: base.NewSubCommand(&cobra.Command{
+			Use:   "tui",
+			Short: "Demo of charmbracelet TUI",
+			Long:  `Demo of charmbracelet TUI`,
+			Run: func(cmd *cobra.Command, args []string) {
+				// items
+				menu_items := []list.Item{
+					item("Ramen"),
+					item("Tomato Soup"),
+					item("Hamburgers"),
+					item("Cheeseburgers"),
+					item("Currywurst"),
+					item("Okonomiyaki"),
+					item("Pasta"),
+					item("Fillet Mignon"),
+					item("Caviar"),
+					item("Just Wine"),
+				}
 
-			// list widget
-			listHeight := 20
-			l := list.New(items, itemDelegate{}, physicalWidth, listHeight)
-			l.Title = "What do you want for dinner?"
-			l.SetShowStatusBar(false)
-			l.SetFilteringEnabled(false)
-			l.Styles.Title = lipgloss.NewStyle().MarginLeft(2)
-			l.Styles.PaginationStyle = list.DefaultStyles().PaginationStyle.PaddingLeft(4)
-			l.Styles.HelpStyle = list.DefaultStyles().HelpStyle.PaddingLeft(4).PaddingBottom(1)
+				// list widget
+				list_height := 20
+				menu_list := list.New(menu_items, itemDelegate{}, 0, list_height)
+				menu_list.Title = "What do you want for dinner?"
+				menu_list.SetShowStatusBar(false)
+				menu_list.SetFilteringEnabled(false)
+				menu_list.Styles.Title = lipgloss.NewStyle().MarginLeft(2)
+				menu_list.Styles.PaginationStyle = list.DefaultStyles().PaginationStyle.PaddingLeft(4)
+				menu_list.Styles.HelpStyle = list.DefaultStyles().HelpStyle.PaddingLeft(4).PaddingBottom(1)
 
-			// model
-			m := order{menu: l}
+				// model
+				model := order{menu: menu_list}
 
-			// run program
-			if _, err := tea.NewProgram(m).Run(); err != nil {
-				fmt.Println("Error running program:", err)
-				os.Exit(1)
-			}
-		},
-	})
+				// run program
+				if _, err := tea.NewProgram(model).Run(); err != nil {
+					fmt.Println("Error running program:", err)
+					os.Exit(1)
+				}
+			},
+		}),
+	}
 }

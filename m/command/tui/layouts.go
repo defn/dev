@@ -9,30 +9,30 @@ import (
 )
 
 // layouts
-func demoLayout() string {
+func demoLayout(physical_width int, physical_height int) string {
 	w := lipgloss.Width
 	h := lipgloss.Height
 
 	var (
-		columnWidth = (physicalWidth / 3)
+		column_width = (physical_width / 3)
 
 		// General style
-		subtle  = lipgloss.AdaptiveColor{Light: "#D9DCCF", Dark: "#383838"}
-		special = lipgloss.AdaptiveColor{Light: "#43BF6D", Dark: "#73F59F"}
-		blends  = gamut.Blends(lipgloss.Color("#F25D94"), lipgloss.Color("#EDFF82"), 50)
+		subtle_color  = lipgloss.AdaptiveColor{Light: "#D9DCCF", Dark: "#383838"}
+		special_color = lipgloss.AdaptiveColor{Light: "#43BF6D", Dark: "#73F59F"}
+		blend_colors  = gamut.Blends(lipgloss.Color("#F25D94"), lipgloss.Color("#EDFF82"), 50)
 
-		normal     = lipgloss.Color("#EEEEEE")
-		base_style = lipgloss.NewStyle().Foreground(normal)
+		normal_color = lipgloss.Color("#EEEEEE")
+		base_style   = lipgloss.NewStyle().Foreground(normal_color)
 
 		// Dialog.
-		dialog_style = lipgloss.NewStyle().
-				Border(lipgloss.RoundedBorder()).
-				BorderForeground(lipgloss.Color("#874BFD")).
-				Padding(1, 0).
-				BorderTop(true).
-				BorderLeft(true).
-				BorderRight(true).
-				BorderBottom(true)
+		dialog_box_style = lipgloss.NewStyle().
+					Border(lipgloss.RoundedBorder()).
+					BorderForeground(lipgloss.Color("#874BFD")).
+					Padding(1, 0).
+					BorderTop(true).
+					BorderLeft(true).
+					BorderRight(true).
+					BorderBottom(true)
 
 		button_style = lipgloss.NewStyle().
 				Foreground(lipgloss.Color("#FFF7DB")).
@@ -47,151 +47,151 @@ func demoLayout() string {
 					Underline(true)
 
 		// List.
-		list2 = lipgloss.NewStyle().
-			Border(lipgloss.NormalBorder(), false, true, false, false).
-			BorderForeground(subtle).
-			MarginRight(2).
-			Height(8).
-			Width(columnWidth + 1)
+		list_style = lipgloss.NewStyle().
+				Border(lipgloss.NormalBorder(), false, true, false, false).
+				BorderForeground(subtle_color).
+				MarginRight(2).
+				Height(8).
+				Width(column_width + 1)
 
-		listHeader = base_style.
+		list_header_fn = base_style.
 				BorderStyle(lipgloss.NormalBorder()).
 				BorderBottom(true).
-				BorderForeground(subtle).
+				BorderForeground(subtle_color).
 				MarginRight(2).
 				Render
 
-		listItem = base_style.PaddingLeft(2).Render
+		list_item_fn = base_style.PaddingLeft(2).Render
 
-		checkMark = lipgloss.NewStyle().SetString("✓").
-				Foreground(special).
+		check_mark_str = lipgloss.NewStyle().SetString("✓").
+				Foreground(special_color).
 				PaddingRight(1).
 				String()
 
-		listDone = func(s string) string {
-			return checkMark + lipgloss.NewStyle().
+		list_done_fn = func(text string) string {
+			return check_mark_str + lipgloss.NewStyle().
 				Strikethrough(true).
 				Foreground(lipgloss.AdaptiveColor{Light: "#969B86", Dark: "#696969"}).
-				Render(s)
+				Render(text)
 		}
 
 		// Status Bar.
-		statusNugget = lipgloss.NewStyle().
-				Foreground(lipgloss.Color("#FFFDF5")).
-				Padding(0, 1)
+		status_nugget_style = lipgloss.NewStyle().
+					Foreground(lipgloss.Color("#FFFDF5")).
+					Padding(0, 1)
 
-		statusBarStyle = lipgloss.NewStyle().
-				Foreground(lipgloss.AdaptiveColor{Light: "#343433", Dark: "#C1C6B2"}).
-				Background(lipgloss.AdaptiveColor{Light: "#D9DCCF", Dark: "#353533"})
+		status_bar_style = lipgloss.NewStyle().
+					Foreground(lipgloss.AdaptiveColor{Light: "#343433", Dark: "#C1C6B2"}).
+					Background(lipgloss.AdaptiveColor{Light: "#D9DCCF", Dark: "#353533"})
 
-		statusStyle = lipgloss.NewStyle().
-				Inherit(statusBarStyle).
-				Foreground(lipgloss.Color("#FFFDF5")).
-				Background(lipgloss.Color("#FF5F87")).
-				Padding(0, 1).
-				MarginRight(1)
+		status_label_style = lipgloss.NewStyle().
+					Inherit(status_bar_style).
+					Foreground(lipgloss.Color("#FFFDF5")).
+					Background(lipgloss.Color("#FF5F87")).
+					Padding(0, 1).
+					MarginRight(1)
 
-		encodingStyle = statusNugget.
+		encoding_style = status_nugget_style.
 				Background(lipgloss.Color("#A550DF")).
 				Align(lipgloss.Right)
 
-		statusText = lipgloss.NewStyle().Inherit(statusBarStyle)
+		status_text_style = lipgloss.NewStyle().Inherit(status_bar_style)
 
-		fishCakeStyle = statusNugget.Background(lipgloss.Color("#6124DF"))
+		fish_cake_style = status_nugget_style.Background(lipgloss.Color("#6124DF"))
 	)
 
 	// Text boxes
-	lists := lipgloss.JoinHorizontal(lipgloss.Top,
-		list2.Width(columnWidth).Render(
+	list_columns := lipgloss.JoinHorizontal(lipgloss.Top,
+		list_style.Width(column_width).Render(
 			lipgloss.JoinVertical(lipgloss.Left,
-				listHeader("Actual Lip Gloss Vendors"),
-				listDone("Glossier"),
-				listDone("Claire‘s Boutique"),
-				listItem("Nyx"),
-				listDone("Mac"),
-				listItem("Milk"),
+				list_header_fn("Actual Lip Gloss Vendors"),
+				list_done_fn("Glossier"),
+				list_done_fn("Claire's Boutique"),
+				list_item_fn("Nyx"),
+				list_done_fn("Mac"),
+				list_item_fn("Milk"),
 			),
 		),
-		list2.Width(columnWidth).Render(
+		list_style.Width(column_width).Render(
 			lipgloss.JoinVertical(lipgloss.Left,
-				listHeader("Citrus Fruits to Try"),
-				listDone("Grapefruit"),
-				listDone("Yuzu"),
-				listItem("Citron"),
-				listItem("Kumquat"),
-				listItem("Pomelo"),
+				list_header_fn("Citrus Fruits to Try"),
+				list_done_fn("Grapefruit"),
+				list_done_fn("Yuzu"),
+				list_item_fn("Citron"),
+				list_item_fn("Kumquat"),
+				list_item_fn("Pomelo"),
 			),
 		),
-		list2.Width(columnWidth).Render(
+		list_style.Width(column_width).Render(
 			lipgloss.JoinVertical(lipgloss.Left,
-				listHeader("Actual Lip Gloss Vendors"),
-				listItem("Glossier"),
-				listItem("Claire‘s Boutique"),
-				listDone("Nyx"),
-				listItem("Mac"),
-				listDone("Milk"),
+				list_header_fn("Actual Lip Gloss Vendors"),
+				list_item_fn("Glossier"),
+				list_item_fn("Claire's Boutique"),
+				list_done_fn("Nyx"),
+				list_item_fn("Mac"),
+				list_done_fn("Milk"),
 			),
 		),
 	)
 
 	// Status bar
-	var bar string
+	var status_bar_content string
 	{
-		statusKey := statusStyle.Render("STATUS")
-		encoding := encodingStyle.Render("UTF-8")
-		fishCake := fishCakeStyle.Render("Fish Cake")
+		status_key := status_label_style.Render("STATUS")
+		encoding_label := encoding_style.Render("UTF-8")
+		fish_cake_label := fish_cake_style.Render("Fish Cake")
 
-		statusVal := statusText.
-			Width(physicalWidth - w(statusKey) - w(encoding) - w(fishCake)).
+		status_value := status_text_style.
+			Width(physical_width - w(status_key) - w(encoding_label) - w(fish_cake_label)).
 			Render("Ravishing")
 
-		bar = lipgloss.JoinHorizontal(lipgloss.Top,
-			statusKey,
-			statusVal,
-			encoding,
-			fishCake,
+		status_bar_content = lipgloss.JoinHorizontal(lipgloss.Top,
+			status_key,
+			status_value,
+			encoding_label,
+			fish_cake_label,
 		)
 	}
 
-	cols := lipgloss.JoinHorizontal(lipgloss.Top, lists)
-	sbar := statusBarStyle.Width(physicalWidth).Render(bar)
+	all_columns := lipgloss.JoinHorizontal(lipgloss.Top, list_columns)
+	rendered_status_bar := status_bar_style.Width(physical_width).Render(status_bar_content)
 
 	// Dialog
-	var dialog string
+	var dialog_box string
 	{
-		question := lipgloss.NewStyle().Width(50).Align(lipgloss.Center).Render(rainbow(lipgloss.NewStyle(), "Are you sure you want to eat marmalade?", blends))
+		question_text := lipgloss.NewStyle().Width(50).Align(lipgloss.Center).Render(rainbow(lipgloss.NewStyle(), "Are you sure you want to eat marmalade?", blend_colors))
 
-		okButton := active_button_style.Render("Yes")
-		maybeButton := button_style.Render("Maybe")
+		ok_button := active_button_style.Render("Yes")
+		maybe_button := button_style.Render("Maybe")
 
-		buttons := lipgloss.JoinHorizontal(lipgloss.Top, okButton, maybeButton)
+		button_row := lipgloss.JoinHorizontal(lipgloss.Top, ok_button, maybe_button)
 
-		ui := lipgloss.JoinVertical(lipgloss.Center, question, buttons)
+		dialog_ui := lipgloss.JoinVertical(lipgloss.Center, question_text, button_row)
 
-		dialog = lipgloss.Place(physicalWidth, physicalHeight-1-h(cols)-h(sbar),
+		dialog_box = lipgloss.Place(physical_width, physical_height-1-h(all_columns)-h(rendered_status_bar),
 			lipgloss.Center, lipgloss.Center,
-			dialog_style.Render(ui),
-			lipgloss.WithWhitespaceChars(fmt.Sprintf("%d", h(cols))),
-			lipgloss.WithWhitespaceForeground(subtle),
+			dialog_box_style.Render(dialog_ui),
+			lipgloss.WithWhitespaceChars(fmt.Sprintf("%d", h(all_columns))),
+			lipgloss.WithWhitespaceForeground(subtle_color),
 		)
 	}
 	// lipgloss.WithWhitespaceChars("猫咪"),
 
-	doc := strings.Builder{}
+	page_doc := strings.Builder{}
 
 	// dialog
-	doc.WriteString(dialog)
-	doc.WriteString("\n")
+	page_doc.WriteString(dialog_box)
+	page_doc.WriteString("\n")
 
 	// newline
-	doc.WriteString("\n")
+	page_doc.WriteString("\n")
 
 	// columns
-	doc.WriteString(cols)
-	doc.WriteString("\n")
+	page_doc.WriteString(all_columns)
+	page_doc.WriteString("\n")
 
 	// statusbar
-	doc.WriteString(sbar)
+	page_doc.WriteString(rendered_status_bar)
 
-	return doc.String()
+	return page_doc.String()
 }

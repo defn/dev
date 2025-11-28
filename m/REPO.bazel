@@ -6,4 +6,5 @@ ignore_directories([
     "**/.terraform",
     "**/result",
     "**/{{cookiecutter.path}}",
+    "**/.py*",
 ])

@@ -62,7 +62,6 @@ use_repo(
     "com_github_riverqueue_river",
     "com_github_riverqueue_river_riverdriver_riverpgxv5",
     "com_github_spf13_cobra",
-    "com_github_spf13_viper",
     "org_cuelang_go",
     "org_uber_go_fx",
 )

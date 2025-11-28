@@ -11,8 +11,8 @@ import (
 )
 
 var (
-	itemStyle         = lipgloss.NewStyle().PaddingLeft(4)
-	selectedItemStyle = lipgloss.NewStyle().PaddingLeft(2).Foreground(lipgloss.Color("170"))
+	item_style          = lipgloss.NewStyle().PaddingLeft(4)
+	selected_item_style = lipgloss.NewStyle().PaddingLeft(2).Foreground(lipgloss.Color("170"))
 )
 
 // type itemDelegate
@@ -30,20 +30,20 @@ func (d itemDelegate) Update(msg tea.Msg, m *list.Model) tea.Cmd {
 	return nil
 }
 
-func (d itemDelegate) Render(w io.Writer, m list.Model, index int, listItem list.Item) {
-	i, ok := listItem.(item)
+func (d itemDelegate) Render(w io.Writer, m list.Model, index int, list_item list.Item) {
+	menu_item, ok := list_item.(item)
 	if !ok {
 		return
 	}
 
-	str := fmt.Sprintf("%d. %s", index+1, i)
+	item_str := fmt.Sprintf("%d. %s", index+1, menu_item)
 
-	fn := itemStyle.Render
+	render_fn := item_style.Render
 	if index == m.Index() {
-		fn = func(s ...string) string {
-			return selectedItemStyle.Render("> " + s[0])
+		render_fn = func(s ...string) string {
+			return selected_item_style.Render("> " + s[0])
 		}
 	}
 
-	fmt.Fprint(w, fn(str))
+	fmt.Fprint(w, render_fn(item_str))
 }

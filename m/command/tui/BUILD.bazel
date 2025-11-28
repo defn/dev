@@ -13,12 +13,13 @@ go_library(
     importpath = "github.com/defn/dev/m/command/tui",
     visibility = ["//visibility:public"],
     deps = [
-        "//command/root",
+        "//cmd/base",
         "@com_github_charmbracelet_bubbles//list",
         "@com_github_charmbracelet_bubbletea//:bubbletea",
         "@com_github_charmbracelet_lipgloss//:lipgloss",
         "@com_github_lucasb_eyer_go_colorful//:go-colorful",
         "@com_github_muesli_gamut//:gamut",
         "@com_github_spf13_cobra//:cobra",
+        "@org_uber_go_fx//:fx",
     ],
 )

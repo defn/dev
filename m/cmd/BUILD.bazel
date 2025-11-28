@@ -6,10 +6,13 @@ go_library(
     importpath = "github.com/defn/dev/m/cmd",
     visibility = ["//visibility:private"],
     deps = [
+        "//cmd/base",
         "//command/api",
-        "//command/meh",
         "//command/root",
         "//command/tui",
+        "@com_github_spf13_cobra//:cobra",
+        "@org_uber_go_fx//:fx",
+        "@org_uber_go_fx//fxevent",
     ],
 )
 

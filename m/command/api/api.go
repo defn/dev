@@ -5,29 +5,45 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/spf13/cobra"
+	"go.uber.org/fx"
 
-	root "github.com/defn/dev/m/command/root"
+	"github.com/defn/dev/m/cmd/base"
 )
 
-func init() {
-	root.RootCmd.AddCommand(&cobra.Command{
-		Use:   "api",
-		Short: "A brief description of your command",
-		Long:  `Something longer`,
-		Run: func(cmd *cobra.Command, args []string) {
-			r := gin.Default()
-			r.SetTrustedProxies(nil)
-			r.GET("/", func(c *gin.Context) {
-				c.JSON(http.StatusOK, gin.H{
-					"message": "hello!",
+var Module = fx.Module("SubCommandApi",
+	fx.Provide(
+		fx.Annotate(
+			NewCommand,
+			fx.ResultTags(`group:"subs"`),
+		),
+	),
+)
+
+type subCommand struct {
+	*base.BaseSubCommand
+}
+
+func NewCommand(lifecycle fx.Lifecycle) base.SubCommand {
+	return &subCommand{
+		BaseSubCommand: base.NewSubCommand(&cobra.Command{
+			Use:   "api",
+			Short: "Example API using Gin",
+			Long:  `Example API using Gin`,
+			Run: func(cmd *cobra.Command, args []string) {
+				router := gin.Default()
+				router.SetTrustedProxies(nil)
+				router.GET("/", func(ctx *gin.Context) {
+					ctx.JSON(http.StatusOK, gin.H{
+						"message": "hello!",
+					})
 				})
-			})
-			r.GET("/api", func(c *gin.Context) {
-				c.JSON(http.StatusOK, gin.H{
-					"message": `["hello"]`,
+				router.GET("/api", func(ctx *gin.Context) {
+					ctx.JSON(http.StatusOK, gin.H{
+						"message": `["hello"]`,
+					})
 				})
-			})
-			r.Run() // listen and serve on 0.0.0.0:8080 (for windows "localhost:8080")
-		},
-	})
+				router.Run()
+			},
+		}),
+	}
 }
