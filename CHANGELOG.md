@@ -1,5 +1,29 @@
 # Changelog
 
+## [1.51.0](https://github.com/defn/dev/compare/v1.50.0...v1.51.0) (2025-11-29)
+
+
+### Features
+
+* add mise task to start nginx reverse proxy for workbench ([0fb28e6](https://github.com/defn/dev/commit/0fb28e6b8947fd392beb7a298bbcec7572c48b21))
+* add nginx proxy config for workbench on port 3001 ([93dab28](https://github.com/defn/dev/commit/93dab28b731979d7e8ff929479e772e686d4d939))
+* add popular Go libraries to hello command ([bc7eacb](https://github.com/defn/dev/commit/bc7eacb60506867d4630ba260917a39fc0a88833))
+* add socat tunnels for code-server chromebook access ([19abcb7](https://github.com/defn/dev/commit/19abcb7138d1ab6b198d7149f30da65f8411f188))
+* chain two conc pools for sequential concurrent execution ([e5cdd80](https://github.com/defn/dev/commit/e5cdd80f61f924bc02932e191212d32361df2b4b))
+* migrate River job queue from PostgreSQL to SQLite ([32c8e3c](https://github.com/defn/dev/commit/32c8e3c20e125f7487d7f17e5a88ab0cc3309fb6))
+* separate fx and app logging with different levels ([a9f0648](https://github.com/defn/dev/commit/a9f06482ccc9cf157ab86575527082c16c517334))
+* update Coder templates with improved configuration ([7157f49](https://github.com/defn/dev/commit/7157f49a7aa96308ac311ce0b6a086b485992374))
+
+
+### Bug Fixes
+
+* add stub implementations for macOS shell session functions ([6516aae](https://github.com/defn/dev/commit/6516aae339f6ee703802b179e27f70cbe2089779))
+* bind socat tunnel to localhost on macOS ([fd39d3a](https://github.com/defn/dev/commit/fd39d3a289244af64854ce0ceb126433a250f845))
+* correct fx and app logging level behavior ([76dd8a4](https://github.com/defn/dev/commit/76dd8a4490c48e81408e59e65d7f5e2f208e51cb))
+* disable healthcheck timeout for preview app in k8s template ([bd67f72](https://github.com/defn/dev/commit/bd67f72c384eaec2e3dfc6933558a420dba87045))
+* improve platform detection and add VS Code stub function ([d10df68](https://github.com/defn/dev/commit/d10df686817eb08a009e8d04ab1b56a72f0de7d2))
+* update preview app healthcheck to use dedicated endpoint ([70cf2e1](https://github.com/defn/dev/commit/70cf2e105958a411bc798773bd3198bb34a1c25f))
+
 ## [1.50.0](https://github.com/defn/dev/compare/v1.49.0...v1.50.0) (2025-11-29)
 
 
