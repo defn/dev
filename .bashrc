@@ -276,13 +276,26 @@ function detect_env {
 		return
 	fi
 
-	# Default: VM / bare-metal
+	# macOS
+	if [[ "$(uname -s)" == "Darwin" ]]; then
+		echo "mac"
+		return
+	fi
+
+	# Linux (VM / bare-metal)
+	if [[ "$(uname -s)" == "Linux" ]]; then
+		echo "linux"
+		return
+	fi
+
+	# Default: unknown
 	echo "vm"
 }
 
-# empty implementation of macos bullshit
+# empty implementation of macos/vscode bullshit
 shell_session_history_check() { :; }
 update_terminal_cwd() { :; }
+__vsc_prompt_cmd_original() { :; }
 
 # coder ssh helper
 if [[ -z ${BUILDKITE-} ]]; then
