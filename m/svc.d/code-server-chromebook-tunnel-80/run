@@ -6,4 +6,12 @@ export STARSHIP_NO=
 source ~/.bash_profile
 
 sudo pkill -f TCP-LISTEN:80 || true
-exec sudo socat TCP-LISTEN:80,fork TCP:localhost:8080
+
+case "$(uname -s)" in
+    Darwin)
+        exec sudo socat TCP-LISTEN:80,bind=127.0.0.1,fork TCP:localhost:8080
+        ;;
+    *)
+        exec sudo socat TCP-LISTEN:80,fork TCP:localhost:8080
+        ;;
+esac
