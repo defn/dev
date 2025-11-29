@@ -175,12 +175,12 @@ func (s *SubCommand) Main() error {
 	logger := base.CommandLogger("hello")
 	logger.Debug("running hello command")
 
-	// Use conc pool to run greeting pipeline concurrently
-	p := pool.New().WithMaxGoroutines(3)
+	// First pool: Build greeting config concurrently
+	p1 := pool.New().WithMaxGoroutines(3)
 	var greeting_config GreetingConfig
 	var greeting_err error
 
-	p.Go(func() {
+	p1.Go(func() {
 		// Build greeting config using chained fluent builder pattern
 		greeting_config, greeting_err = NewGreetingBuilder(logger).
 			WithViperGreeting(viper.GetString("hello.greeting")).
@@ -190,27 +190,38 @@ func (s *SubCommand) Main() error {
 			Build()
 	})
 
-	// Wait for the concurrent greeting pipeline to complete
-	p.Wait()
+	// Wait for first pool (greeting pipeline) to complete
+	p1.Wait()
 
 	if greeting_err != nil {
 		logger.Error("greeting pipeline failed", zap.Error(greeting_err))
 		return greeting_err
 	}
 
-	// Clean up merged config
+	// Second pool: Output and cleanup concurrently (chained after first pool)
+	p2 := pool.New().WithMaxGoroutines(2)
+
+	p2.Go(func() {
+		// Output the greeting (builder has formatted it with "Hello, " prefix)
+		script.Echo(greeting_config.FormattedGreeting).Stdout()
+	})
+
+	p2.Go(func() {
+		// Log completion
+		logger.Info("greeting pipeline completed",
+			zap.String("viper_greeting", greeting_config.ViperGreeting),
+			zap.String("transformed_greeting", greeting_config.TransformedGreeting),
+			zap.String("formatted_greeting", greeting_config.FormattedGreeting),
+			zap.Bool("validated", greeting_config.Validated))
+	})
+
+	// Wait for second pool (output and logging) to complete
+	p2.Wait()
+
+	// Clean up merged config after all pools complete
 	if greeting_config.MergedConfigPath != "" {
-		defer os.Remove(greeting_config.MergedConfigPath)
+		os.Remove(greeting_config.MergedConfigPath)
 	}
-
-	// Output the greeting (builder has formatted it with "Hello, " prefix)
-	script.Echo(greeting_config.FormattedGreeting).Stdout()
-
-	logger.Info("greeting pipeline completed",
-		zap.String("viper_greeting", greeting_config.ViperGreeting),
-		zap.String("transformed_greeting", greeting_config.TransformedGreeting),
-		zap.String("formatted_greeting", greeting_config.FormattedGreeting),
-		zap.Bool("validated", greeting_config.Validated))
 
 	return nil
 }
