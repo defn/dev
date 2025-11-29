@@ -1,6 +1,6 @@
 {
   "dependencies": {
-    "@marp-team/marp-cli": "^4.0.3",
-    "@mermaid-js/mermaid-cli": "^11.2.0"
+    "@marp-team/marp-cli": "^4.2.3",
+    "@mermaid-js/mermaid-cli": "^11.12.0"
   }
 }

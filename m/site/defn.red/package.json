@@ -11,15 +11,15 @@
     "astro": "astro"
   },
   "dependencies": {
-    "@astrojs/check": "^0.9.5",
-    "@astrojs/cloudflare": "^12.6.10",
+    "@astrojs/check": "^0.9.6",
+    "@astrojs/cloudflare": "^12.6.12",
     "@astrojs/sitemap": "^3.6.0",
-    "@astrojs/starlight": "^0.36.2",
+    "@astrojs/starlight": "^0.37.0",
     "@astrojs/starlight-tailwind": "^4.0.2",
-    "astro": "^5.15.3",
-    "sharp": "^0.34.4",
-    "tailwindcss": "^4.1.16",
+    "astro": "^5.16.3",
+    "sharp": "^0.34.5",
+    "tailwindcss": "^4.1.17",
     "typescript": "^5.9.3",
-    "wrangler": "^4.45.3"
+    "wrangler": "^4.51.0"
   }
 }

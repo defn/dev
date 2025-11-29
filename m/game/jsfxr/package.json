@@ -32,8 +32,8 @@
     "game development"
   ],
   "devDependencies": {
-    "live-server": "1.2.1",
-    "tape": "5.6.1"
+    "live-server": "1.2.2",
+    "tape": "5.9.0"
   },
   "scripts": {
     "serve": "live-server"
