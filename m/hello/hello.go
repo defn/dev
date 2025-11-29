@@ -3,6 +3,7 @@ package main
 import (
 	_ "embed"
 	"fmt"
+	"io/fs"
 	"os"
 	"strings"
 
@@ -48,7 +49,7 @@ var Module = fx.Module("SubCommandHello",
 	),
 )
 
-type subCommand struct {
+type SubCommand struct {
 	*base.BaseCommand
 }
 
@@ -60,43 +61,86 @@ type GreetingConfig struct {
 	Validated           bool
 }
 
-// greetingConfigBuilder implements a fluent builder pattern
-type greetingConfigBuilder struct {
+// GreetingConfigBuilder implements a fluent builder pattern
+type GreetingConfigBuilder struct {
 	config GreetingConfig
+	err    error
+	logger *zap.Logger
 }
 
-func newGreetingBuilder() *greetingConfigBuilder {
-	return &greetingConfigBuilder{}
+func NewGreetingBuilder(logger *zap.Logger) *GreetingConfigBuilder {
+	return &GreetingConfigBuilder{logger: logger}
 }
 
-func (b *greetingConfigBuilder) WithViperGreeting(greeting string) *greetingConfigBuilder {
+func (b *GreetingConfigBuilder) WithViperGreeting(greeting string) *GreetingConfigBuilder {
+	if b.err != nil {
+		return b
+	}
 	b.config.ViperGreeting = greeting
 	return b
 }
 
-func (b *greetingConfigBuilder) WithTransformedGreeting(greeting string) *greetingConfigBuilder {
-	b.config.TransformedGreeting = greeting
+func (b *GreetingConfigBuilder) WithTransform() *GreetingConfigBuilder {
+	if b.err != nil {
+		return b
+	}
+	// Use lo to transform greeting - capitalize each word
+	words := strings.Fields(b.config.ViperGreeting)
+	transformed_words := lo.Map(words, func(word string, _ int) string {
+		if len(word) > 0 {
+			return strings.ToUpper(word[:1]) + word[1:]
+		}
+		return word
+	})
+	b.config.TransformedGreeting = strings.Join(transformed_words, " ")
+
+	b.logger.Debug("transformed greeting",
+		zap.String("original", b.config.ViperGreeting),
+		zap.String("transformed", b.config.TransformedGreeting))
+
 	return b
 }
 
-func (b *greetingConfigBuilder) WithMergedConfigPath(path string) *greetingConfigBuilder {
-	b.config.MergedConfigPath = path
+func (b *GreetingConfigBuilder) WithMergedConfig(config_path string) *GreetingConfigBuilder {
+	if b.err != nil {
+		return b
+	}
+	merged_path, err := mergeConfigWithViper(config_path, b.config.TransformedGreeting)
+	if err != nil {
+		b.err = fmt.Errorf("failed to merge config: %w", err)
+		return b
+	}
+	b.config.MergedConfigPath = merged_path
 	return b
 }
 
-func (b *greetingConfigBuilder) WithValidated(validated bool) *greetingConfigBuilder {
-	b.config.Validated = validated
+func (b *GreetingConfigBuilder) WithValidation(overlay cue.CueOverlayFS, module string, package_name string, schema_label string, cue_content string, schema_files fs.FS) *GreetingConfigBuilder {
+	if b.err != nil {
+		return b
+	}
+	if err := overlay.ValidateConfig(
+		module,
+		package_name,
+		b.config.MergedConfigPath,
+		schema_label,
+		cue_content,
+		schema_files,
+	); err != nil {
+		b.err = fmt.Errorf("config validation failed: %w", err)
+		return b
+	}
+	b.config.Validated = true
 	// Use builder.Append to demonstrate lann/builder usage
 	_ = builder.Append
 	return b
 }
 
-func (b *greetingConfigBuilder) Build() GreetingConfig {
-	return b.config
+func (b *GreetingConfigBuilder) Build() (GreetingConfig, error) {
+	return b.config, b.err
 }
 
 func NewCommand(lifecycle fx.Lifecycle) base.Command {
-	sub := &subCommand{}
+	sub := &SubCommand{}
 
 	viper.SetDefault("hello.greeting", "world!!")
 
@@ -124,7 +168,7 @@ func NewCommand(lifecycle fx.Lifecycle) base.Command {
 	return sub
 }
 
-func (s *subCommand) Main() error {
+func (s *SubCommand) Main() error {
 	logger := base.CommandLogger("hello")
 	logger.Debug("running hello command")
 
@@ -134,48 +178,13 @@ func (s *subCommand) Main() error {
 	var greeting_err error
 
 	p.Go(func() {
-		// Step 1: Get greeting from viper using builder pattern
-		viper_greeting := viper.GetString("hello.greeting")
-		builder := newGreetingBuilder().WithViperGreeting(viper_greeting)
-
-		// Step 2: Transform greeting using lo - capitalize each word
-		words := strings.Fields(viper_greeting)
-		transformed_words := lo.Map(words, func(word string, _ int) string {
-			if len(word) > 0 {
-				return strings.ToUpper(word[:1]) + word[1:]
-			}
-			return word
-		})
-		transformed_greeting := strings.Join(transformed_words, " ")
-		builder = builder.WithTransformedGreeting(transformed_greeting)
-
-		logger.Debug("transformed greeting",
-			zap.String("original", viper_greeting),
-			zap.String("transformed", transformed_greeting))
-
-		// Step 3: Merge config with YAML using transformed greeting
-		merged_path, err := mergeConfigWithViper("hello.yaml", transformed_greeting)
-		if err != nil {
-			greeting_err = fmt.Errorf("failed to merge config: %w", err)
-			return
-		}
-		builder = builder.WithMergedConfigPath(merged_path)
-
-		// Step 4: Validate with CUE
-		if err := cue.NewOverlay().ValidateConfig(
-			top.CueModule,
-			"github.com/defn/dev/m/hello",
-			merged_path,
-			"#Hello",
-			hello_cue_content,
-			top.Schema,
-		); err != nil {
-			greeting_err = fmt.Errorf("config validation failed: %w", err)
-			return
-		}
-		builder = builder.WithValidated(true)
-
-		greeting_config = builder.Build()
+		// Build greeting config using chained fluent builder pattern
+		greeting_config, greeting_err = NewGreetingBuilder(logger).
+			WithViperGreeting(viper.GetString("hello.greeting")).
+			WithTransform().
+			WithMergedConfig("hello.yaml").
+			WithValidation(cue.NewOverlay(), top.CueModule, "github.com/defn/dev/m/hello", "#Hello", hello_cue_content, top.Schema).
+			Build()
 	})
 
 	// Wait for the concurrent greeting pipeline to complete
