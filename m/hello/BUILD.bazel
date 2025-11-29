@@ -1,4 +1,6 @@
 load("@io_bazel_rules_go//go:def.bzl", "go_binary", "go_library", "go_test")
+load("@rules_img//img:image.bzl", "image_manifest")
+load("@rules_img//img:layer.bzl", "image_layer")
 
 exports_files(["hello.cue"])
 
@@ -36,4 +38,19 @@ go_test(
     data = glob(["testdata/**"]),
     embed = [":hello_lib"],
     deps = ["@com_github_rogpeppe_go_internal//testscript"],
+)
+
+image_layer(
+    name = "hello_layer",
+    srcs = {
+        "/hello": "//hello:hello",
+    },
+)
+
+image_manifest(
+    name = "hello_image",
+    base = "@ubuntu",
+    layers = [
+        ":hello_layer",
+    ],
 )
