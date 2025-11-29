@@ -130,7 +130,6 @@ func (b *GreetingConfigBuilder) WithValidation(overlay cue.CueOverlayFS, module 
 		return b
 	}
 	b.config.Validated = true
-	// Use builder.Append to demonstrate lann/builder usage
 	_ = builder.Append
 	return b
 }
