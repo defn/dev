@@ -280,6 +280,10 @@ function detect_env {
 	echo "vm"
 }
 
+# empty implementation of macos bullshit
+shell_session_history_check() { :; }
+update_terminal_cwd() { :; }
+
 # coder ssh helper
 if [[ -z ${BUILDKITE-} ]]; then
 	if [[ -n ${CODER_NAME-} ]]; then
