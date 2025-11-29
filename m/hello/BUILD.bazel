@@ -1,5 +1,5 @@
 load("@io_bazel_rules_go//go:def.bzl", "go_binary", "go_library", "go_test")
-load("@rules_img//img:image.bzl", "image_index", "image_manifest")
+load("@rules_img//img:image.bzl", "image_manifest")
 load("@rules_img//img:layer.bzl", "image_layer")
 load("@rules_img//img:push.bzl", "image_push")
 
@@ -49,21 +49,16 @@ image_layer(
 )
 
 image_manifest(
-    name = "hello_image",
+    name = "hello_manifest",
     base = "@defn_dev_image",
     layers = [
         ":hello_layer",
     ],
 )
 
-image_index(
-    name = "hello_index",
-    manifests = [":hello_image"],
-)
-
 image_push(
     name = "push",
-    image = ":hello_index",
+    image = ":hello_manifest",
     registry = "ghcr.io",
     repository = "defn/dev",
     tag = "bazel",
