@@ -1,8 +1,7 @@
 # Test successful CUE validation
 -- hello.yaml --
 message: "Hello!!!"
-greeting: "world!!"
 -- end --
 
 exec defn hello
-stdout 'Hello, World!'
+stdout 'Hello, world!!'

@@ -16,6 +16,8 @@ go_library(
         "//cue",
         "@com_github_bitfield_script//:script",
         "@com_github_spf13_cobra//:cobra",
+        "@com_github_spf13_viper//:viper",
+        "@in_gopkg_yaml_v3//:yaml_v3",
         "@org_uber_go_fx//:fx",
         "@org_uber_go_zap//:zap",
     ],

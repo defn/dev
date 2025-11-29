@@ -1,19 +1,18 @@
 # Test hello command with different log levels
 -- hello.yaml --
 message: "Hello!!!"
-greeting: "world!!"
 -- end --
 
 # Test with default log level (warn)
 exec defn hello
-stdout 'Hello, World!'
+stdout 'Hello, world!!'
 
 # Test with debug log level - should show debug logs
 exec defn --log-level=debug hello
-stdout 'Hello, World!'
+stdout 'Hello, world!!'
 stderr 'running hello command'
 
 # Test with warn log level - should suppress debug logs
 exec defn --log-level=warn hello
-stdout 'Hello, World!'
+stdout 'Hello, world!!'
 ! stderr 'running hello command'

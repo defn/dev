@@ -1,6 +1,7 @@
 package hello
 
 #Hello: {
-	message:  string
-	greeting: "world!!"
+	message!:  string
+	greeting!: string
+	greeting:  =~"^world"
 }

@@ -1,0 +1,16 @@
+# Test hello command with --greeting flag
+-- hello.yaml --
+message: "Hello!!!"
+-- end --
+
+# Test with --greeting flag
+exec defn hello --greeting 'world from flag'
+stdout 'Hello, world from flag'
+
+# Test with positional argument
+exec defn hello 'world from arg'
+stdout 'Hello, world from arg'
+
+# Test argument overrides flag
+exec defn hello --greeting 'world from flag' 'world from arg'
+stdout 'Hello, world from arg'
