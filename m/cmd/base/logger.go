@@ -46,16 +46,38 @@ func InitLogger(level string) error {
 	return nil
 }
 
-// InitFxLogger initializes the fx logger at DEBUG level
-func InitFxLogger() error {
-	// If fx logger already exists, just ensure it's at DEBUG level
+// InitFxLogger initializes the fx logger based on app log level
+// fx logs at INFO level, so we adjust fx logger to hide them appropriately:
+// - app DEBUG: fx logger at DEBUG (show all fx logs)
+// - app INFO: fx logger at WARN (hide fx INFO logs)
+// - app WARN: fx logger at ERROR (hide fx INFO and WARN logs)
+func InitFxLogger(app_level string) error {
+	var fx_level zapcore.Level
+
+	// Parse app level
+	var app_zap_level zapcore.Level
+	if err := app_zap_level.UnmarshalText([]byte(app_level)); err != nil {
+		app_zap_level = zapcore.InfoLevel
+	}
+
+	// Set fx level based on app level
+	switch app_zap_level {
+	case zapcore.DebugLevel:
+		fx_level = zapcore.DebugLevel // Show all fx logs
+	case zapcore.InfoLevel:
+		fx_level = zapcore.WarnLevel // Hide fx INFO logs
+	default: // WARN or higher
+		fx_level = zapcore.ErrorLevel // Hide fx INFO and WARN logs
+	}
+
+	// If fx logger already exists, just update the level
 	if fx_logger != nil && fx_atomic_level != (zap.AtomicLevel{}) {
-		fx_atomic_level.SetLevel(zapcore.DebugLevel)
+		fx_atomic_level.SetLevel(fx_level)
 		return nil
 	}
 
-	// Create new fx logger with DEBUG level
-	fx_atomic_level = zap.NewAtomicLevelAt(zapcore.DebugLevel)
+	// Create new fx logger
+	fx_atomic_level = zap.NewAtomicLevelAt(fx_level)
 	config := zap.NewProductionConfig()
 	config.Level = fx_atomic_level
 	config.Encoding = "console"
@@ -82,11 +104,11 @@ func Logger() *zap.Logger {
 	return logger
 }
 
-// FxLogger returns the fx-specific logger instance at DEBUG level
+// FxLogger returns the fx-specific logger instance
 func FxLogger() *zap.Logger {
 	if fx_logger == nil {
-		// Fallback: initialize fx logger at DEBUG level
-		InitFxLogger()
+		// Fallback: initialize fx logger with default level
+		InitFxLogger("warn")
 	}
 	return fx_logger
 }

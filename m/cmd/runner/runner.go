@@ -29,7 +29,7 @@ func Run(cfg Config) {
 	// Parse --log-level flag early (before fx.New) so fx logs use correct level
 
 	// Check for log level in env
-	log_level := "info"
+	log_level := "warn"
 	if level := os.Getenv("DEFN_GLOBAL_LOG_LEVEL"); level != "" {
 		log_level = level
 	}
@@ -48,8 +48,9 @@ func Run(cfg Config) {
 		os.Exit(1)
 	}
 
-	// Initialize fx logger at DEBUG level (separate from app logging)
-	if err := base.InitFxLogger(); err != nil {
+	// Initialize fx logger based on app log level
+	// This sets fx logger level appropriately to show/hide fx framework logs
+	if err := base.InitFxLogger(log_level); err != nil {
 		os.Exit(1)
 	}
 
@@ -69,11 +70,12 @@ func Run(cfg Config) {
 			cobra_cmd.PersistentPreRun = func(cmd *cobra.Command, args []string) {
 				// Update logger level with the flag/config value
 				// This ensures viper-bound values take effect
-				log_level := "info"
+				log_level := "warn"
 				if viper_level := viper.GetString("global.log_level"); viper_level != "" {
 					log_level = viper_level
 				}
-				base.InitLogger(log_level) // Uses atomic level, just updates the level
+				base.InitLogger(log_level)   // Update app logger level
+				base.InitFxLogger(log_level) // Update fx logger level accordingly
 			}
 			return cobra_cmd.Execute()
 		}),
