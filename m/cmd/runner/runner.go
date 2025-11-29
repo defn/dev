@@ -29,7 +29,7 @@ func Run(cfg Config) {
 	// Parse --log-level flag early (before fx.New) so fx logs use correct level
 
 	// Check for log level in env
-	log_level := "warn"
+	log_level := "info"
 	if level := os.Getenv("DEFN_GLOBAL_LOG_LEVEL"); level != "" {
 		log_level = level
 	}
@@ -48,14 +48,19 @@ func Run(cfg Config) {
 		os.Exit(1)
 	}
 
+	// Initialize fx logger at DEBUG level (separate from app logging)
+	if err := base.InitFxLogger(); err != nil {
+		os.Exit(1)
+	}
+
 	ctx := context.Background()
 
 	// Build fx options
 	options := []fx.Option{
 		fx.WithLogger(func() fxevent.Logger {
-			// Use zap logger for fx with atomic level
-			// Level can be changed dynamically via --log-level flag
-			return &fxevent.ZapLogger{Logger: base.Logger()}
+			// Use separate fx logger at DEBUG level
+			// App logger remains at configured level (default: warn)
+			return &fxevent.ZapLogger{Logger: base.FxLogger()}
 		}),
 
 		fx.Invoke(func(root_cmd base.Command) error {
@@ -64,7 +69,7 @@ func Run(cfg Config) {
 			cobra_cmd.PersistentPreRun = func(cmd *cobra.Command, args []string) {
 				// Update logger level with the flag/config value
 				// This ensures viper-bound values take effect
-				log_level := "warn"
+				log_level := "info"
 				if viper_level := viper.GetString("global.log_level"); viper_level != "" {
 					log_level = viper_level
 				}
