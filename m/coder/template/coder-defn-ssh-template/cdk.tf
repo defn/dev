@@ -115,7 +115,7 @@ resource "coder_app" "preview" {
   open_in      = "tab"
   order        = 0
   healthcheck {
-    url       = "http://localhost:3001/"
+    url       = "http://localhost:8080/healthz"
     interval  = 5
     threshold = 999999999
   }
