@@ -5,6 +5,9 @@ import (
 	"os"
 
 	"github.com/bitfield/script"
+	"github.com/lann/builder"
+	"github.com/samber/lo"
+	"github.com/sourcegraph/conc/pool"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 	"go.uber.org/fx"
@@ -79,6 +82,19 @@ func NewCommand(lifecycle fx.Lifecycle) base.Command {
 func (s *subCommand) Main() error {
 	logger := base.CommandLogger("hello")
 	logger.Debug("running hello command")
+
+	// Minimal usage of popular libraries
+	// conc: concurrent pool
+	p := pool.New().WithMaxGoroutines(10)
+	_ = p
+
+	// lann/builder: generic builder pattern
+	type configBuilder struct{ limit int }
+	_ = builder.Append
+
+	// lo: utility functions
+	items := []string{"hello", "world"}
+	_ = lo.Reverse(items)
 
 	// Create temporary file path
 	tmp_file, err := os.CreateTemp("", "greeting-*.txt")
