@@ -117,7 +117,7 @@ resource "coder_app" "preview" {
   healthcheck {
     url       = "http://localhost:3001/"
     interval  = 5
-    threshold = 15
+    threshold = 999999999
   }
 }
 
