@@ -130,75 +130,75 @@ func (s *subCommand) Main() error {
 
 	// Use conc pool to run greeting pipeline concurrently
 	p := pool.New().WithMaxGoroutines(3)
-	var greetingConfig GreetingConfig
-	var greetingErr error
+	var greeting_config GreetingConfig
+	var greeting_err error
 
 	p.Go(func() {
 		// Step 1: Get greeting from viper using builder pattern
-		viperGreeting := viper.GetString("hello.greeting")
-		builder := newGreetingBuilder().WithViperGreeting(viperGreeting)
+		viper_greeting := viper.GetString("hello.greeting")
+		builder := newGreetingBuilder().WithViperGreeting(viper_greeting)
 
 		// Step 2: Transform greeting using lo - capitalize each word
-		words := strings.Fields(viperGreeting)
-		transformedWords := lo.Map(words, func(word string, _ int) string {
+		words := strings.Fields(viper_greeting)
+		transformed_words := lo.Map(words, func(word string, _ int) string {
 			if len(word) > 0 {
 				return strings.ToUpper(word[:1]) + word[1:]
 			}
 			return word
 		})
-		transformedGreeting := strings.Join(transformedWords, " ")
-		builder = builder.WithTransformedGreeting(transformedGreeting)
+		transformed_greeting := strings.Join(transformed_words, " ")
+		builder = builder.WithTransformedGreeting(transformed_greeting)
 
 		logger.Debug("transformed greeting",
-			zap.String("original", viperGreeting),
-			zap.String("transformed", transformedGreeting))
+			zap.String("original", viper_greeting),
+			zap.String("transformed", transformed_greeting))
 
 		// Step 3: Merge config with YAML using transformed greeting
-		mergedPath, err := mergeConfigWithViper("hello.yaml", transformedGreeting)
+		merged_path, err := mergeConfigWithViper("hello.yaml", transformed_greeting)
 		if err != nil {
-			greetingErr = fmt.Errorf("failed to merge config: %w", err)
+			greeting_err = fmt.Errorf("failed to merge config: %w", err)
 			return
 		}
-		builder = builder.WithMergedConfigPath(mergedPath)
+		builder = builder.WithMergedConfigPath(merged_path)
 
 		// Step 4: Validate with CUE
 		if err := cue.NewOverlay().ValidateConfig(
 			top.CueModule,
 			"github.com/defn/dev/m/hello",
-			mergedPath,
+			merged_path,
 			"#Hello",
 			hello_cue_content,
 			top.Schema,
 		); err != nil {
-			greetingErr = fmt.Errorf("config validation failed: %w", err)
+			greeting_err = fmt.Errorf("config validation failed: %w", err)
 			return
 		}
 		builder = builder.WithValidated(true)
 
-		greetingConfig = builder.Build()
+		greeting_config = builder.Build()
 	})
 
 	// Wait for the concurrent greeting pipeline to complete
 	p.Wait()
 
-	if greetingErr != nil {
-		logger.Error("greeting pipeline failed", zap.Error(greetingErr))
-		return greetingErr
+	if greeting_err != nil {
+		logger.Error("greeting pipeline failed", zap.Error(greeting_err))
+		return greeting_err
 	}
 
 	// Clean up merged config
-	if greetingConfig.MergedConfigPath != "" {
-		defer os.Remove(greetingConfig.MergedConfigPath)
+	if greeting_config.MergedConfigPath != "" {
+		defer os.Remove(greeting_config.MergedConfigPath)
 	}
 
 	// Output the greeting
-	formattedGreeting := "Hello, " + greetingConfig.TransformedGreeting
-	script.Echo(formattedGreeting).Stdout()
+	formatted_greeting := "Hello, " + greeting_config.TransformedGreeting
+	script.Echo(formatted_greeting).Stdout()
 
 	logger.Info("greeting pipeline completed",
-		zap.String("viper_greeting", greetingConfig.ViperGreeting),
-		zap.String("transformed_greeting", greetingConfig.TransformedGreeting),
-		zap.Bool("validated", greetingConfig.Validated))
+		zap.String("viper_greeting", greeting_config.ViperGreeting),
+		zap.String("transformed_greeting", greeting_config.TransformedGreeting),
+		zap.Bool("validated", greeting_config.Validated))
 
 	return nil
 }
