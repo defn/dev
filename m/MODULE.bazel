@@ -79,8 +79,8 @@ pull(
 )
 
 pull(
-    name = "defn_dev",
-    #digest = "sha256:1e622c5f073b4f6bfad6632f2616c7f59ef256e96fe78bf6a595d1dc4376ac02",
+    name = "defn_dev_image",
+    digest = "sha256:b450043e4924c399d2826f23359ca9c46eab82250efdbb0f6bc62855d9dc7c5b",
     registry = "ghcr.io",
     repository = "defn/dev",
     tag = "latest",
