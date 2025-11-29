@@ -2,7 +2,9 @@ package main
 
 import (
 	_ "embed"
+	"fmt"
 	"os"
+	"strings"
 
 	"github.com/bitfield/script"
 	"github.com/lann/builder"
@@ -50,6 +52,49 @@ type subCommand struct {
 	*base.BaseCommand
 }
 
+// GreetingConfig represents the greeting configuration through the pipeline
+type GreetingConfig struct {
+	ViperGreeting       string
+	TransformedGreeting string
+	MergedConfigPath    string
+	Validated           bool
+}
+
+// greetingConfigBuilder implements a fluent builder pattern
+type greetingConfigBuilder struct {
+	config GreetingConfig
+}
+
+func newGreetingBuilder() *greetingConfigBuilder {
+	return &greetingConfigBuilder{}
+}
+
+func (b *greetingConfigBuilder) WithViperGreeting(greeting string) *greetingConfigBuilder {
+	b.config.ViperGreeting = greeting
+	return b
+}
+
+func (b *greetingConfigBuilder) WithTransformedGreeting(greeting string) *greetingConfigBuilder {
+	b.config.TransformedGreeting = greeting
+	return b
+}
+
+func (b *greetingConfigBuilder) WithMergedConfigPath(path string) *greetingConfigBuilder {
+	b.config.MergedConfigPath = path
+	return b
+}
+
+func (b *greetingConfigBuilder) WithValidated(validated bool) *greetingConfigBuilder {
+	b.config.Validated = validated
+	// Use builder.Append to demonstrate lann/builder usage
+	_ = builder.Append
+	return b
+}
+
+func (b *greetingConfigBuilder) Build() GreetingConfig {
+	return b.config
+}
+
 func NewCommand(lifecycle fx.Lifecycle) base.Command {
 	sub := &subCommand{}
 
@@ -83,64 +128,84 @@ func (s *subCommand) Main() error {
 	logger := base.CommandLogger("hello")
 	logger.Debug("running hello command")
 
-	// Minimal usage of popular libraries
-	// conc: concurrent pool
-	p := pool.New().WithMaxGoroutines(10)
-	_ = p
+	// Use conc pool to run greeting pipeline concurrently
+	p := pool.New().WithMaxGoroutines(3)
+	var greetingConfig GreetingConfig
+	var greetingErr error
 
-	// lann/builder: generic builder pattern
-	type configBuilder struct{ limit int }
-	_ = builder.Append
+	p.Go(func() {
+		// Step 1: Get greeting from viper using builder pattern
+		viperGreeting := viper.GetString("hello.greeting")
+		builder := newGreetingBuilder().WithViperGreeting(viperGreeting)
 
-	// lo: utility functions
-	items := []string{"hello", "world"}
-	_ = lo.Reverse(items)
+		// Step 2: Transform greeting using lo - capitalize each word
+		words := strings.Fields(viperGreeting)
+		transformedWords := lo.Map(words, func(word string, _ int) string {
+			if len(word) > 0 {
+				return strings.ToUpper(word[:1]) + word[1:]
+			}
+			return word
+		})
+		transformedGreeting := strings.Join(transformedWords, " ")
+		builder = builder.WithTransformedGreeting(transformedGreeting)
 
-	// Create temporary file path
-	tmp_file, err := os.CreateTemp("", "greeting-*.txt")
-	if err != nil {
-		script.Echo("error creating temp file").WithError(err).ExitStatus()
-		return err
+		logger.Debug("transformed greeting",
+			zap.String("original", viperGreeting),
+			zap.String("transformed", transformedGreeting))
+
+		// Step 3: Merge config with YAML using transformed greeting
+		mergedPath, err := mergeConfigWithViper("hello.yaml", transformedGreeting)
+		if err != nil {
+			greetingErr = fmt.Errorf("failed to merge config: %w", err)
+			return
+		}
+		builder = builder.WithMergedConfigPath(mergedPath)
+
+		// Step 4: Validate with CUE
+		if err := cue.NewOverlay().ValidateConfig(
+			top.CueModule,
+			"github.com/defn/dev/m/hello",
+			mergedPath,
+			"#Hello",
+			hello_cue_content,
+			top.Schema,
+		); err != nil {
+			greetingErr = fmt.Errorf("config validation failed: %w", err)
+			return
+		}
+		builder = builder.WithValidated(true)
+
+		greetingConfig = builder.Build()
+	})
+
+	// Wait for the concurrent greeting pipeline to complete
+	p.Wait()
+
+	if greetingErr != nil {
+		logger.Error("greeting pipeline failed", zap.Error(greetingErr))
+		return greetingErr
 	}
-	tmp_path := tmp_file.Name()
-	tmp_file.Close()
-	defer os.Remove(tmp_path)
 
-	greeting := viper.GetString("hello.greeting")
-	formatted_greeting := "Hello, " + greeting
-
-	// Echo greeting to temporary file
-	script.Echo(formatted_greeting).WriteFile(tmp_path)
-
-	// Read from temporary file and print to screen
-	script.File(tmp_path).Stdout()
-
-	// Validate hello.yaml merged with viper config
-	merged_config_path, err := mergeConfigWithViper("hello.yaml")
-	if err != nil {
-		logger.Error("failed to merge config with viper", zap.Error(err))
-		return err
+	// Clean up merged config
+	if greetingConfig.MergedConfigPath != "" {
+		defer os.Remove(greetingConfig.MergedConfigPath)
 	}
-	defer os.Remove(merged_config_path)
 
-	if err = cue.NewOverlay().ValidateConfig(
-		top.CueModule,                 // module: CUE module definition
-		"github.com/defn/dev/m/hello", // package_name: package for this module
-		merged_config_path,            // config_file_path: merged config
-		"#Hello",                      // schema_label: the "#Hello" definition
-		hello_cue_content,             // config: CUE schema content from hello.cue
-		top.Schema,                    // schema_files
-	); err != nil {
-		logger.Error("config validation failed", zap.Error(err))
-		return err
-	}
+	// Output the greeting
+	formattedGreeting := "Hello, " + greetingConfig.TransformedGreeting
+	script.Echo(formattedGreeting).Stdout()
+
+	logger.Info("greeting pipeline completed",
+		zap.String("viper_greeting", greetingConfig.ViperGreeting),
+		zap.String("transformed_greeting", greetingConfig.TransformedGreeting),
+		zap.Bool("validated", greetingConfig.Validated))
 
 	return nil
 }
 
-// mergeConfigWithViper reads a YAML config file, merges it with viper settings,
+// mergeConfigWithViper reads a YAML config file, merges it with the provided greeting,
 // and returns the path to a temporary file containing the merged configuration
-func mergeConfigWithViper(config_path string) (string, error) {
+func mergeConfigWithViper(config_path string, greeting string) (string, error) {
 	// Read the YAML config file
 	config_data, err := os.ReadFile(config_path)
 	if err != nil {
@@ -153,9 +218,9 @@ func mergeConfigWithViper(config_path string) (string, error) {
 		return "", err
 	}
 
-	// Add greeting from viper if not present in YAML
+	// Add greeting from parameter if not present in YAML
 	if _, exists := config_map["greeting"]; !exists {
-		config_map["greeting"] = viper.GetString("hello.greeting")
+		config_map["greeting"] = greeting
 	}
 
 	// Marshal back to YAML

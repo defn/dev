@@ -3,5 +3,5 @@ package hello
 #Hello: {
 	message!:  string
 	greeting!: string
-	greeting:  =~"^world"
+	greeting:  =~"^(?i)world"
 }
