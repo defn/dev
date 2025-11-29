@@ -71,7 +71,7 @@ use_repo(
 pull = use_repo_rule("@rules_img//img:pull.bzl", "pull")
 
 pull(
-    name = "ubuntu",
+    name = "ubuntu_image",
     digest = "sha256:1e622c5f073b4f6bfad6632f2616c7f59ef256e96fe78bf6a595d1dc4376ac02",
     registry = "index.docker.io",
     repository = "library/ubuntu",
