@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+#MISE description="Start a reverse proxy to gallery for vscode"
+
+set -efu -o pipefail
+
+cd "${MISE_ORIGINAL_CWD}"
+
+exec nginx -c $(pwd)/workbench.conf -g 'daemon off;'
