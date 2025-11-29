@@ -4,5 +4,5 @@ atlas = "0.38.0"
 "ubi:riverqueue/riverui" = "0.13.0"
 
 [env]
-DATABASE_URL = "postgresql://postgres@/postgres"
+DATABASE_URL = "sqlite://./river.sqlite3"
 PORT = "8181"

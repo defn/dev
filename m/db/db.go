@@ -2,18 +2,20 @@ package main
 
 import (
 	"context"
+	"database/sql"
 	"fmt"
 	"os"
 	"os/signal"
 	"sort"
 	"syscall"
 
-	"github.com/jackc/pgx/v5/pgxpool"
 	"github.com/riverqueue/river"
-	"github.com/riverqueue/river/riverdriver/riverpgxv5"
+	"github.com/riverqueue/river/riverdriver/riversqlite"
+	"github.com/riverqueue/river/rivermigrate"
 	"github.com/spf13/cobra"
 	"go.uber.org/fx"
 	"go.uber.org/zap"
+	_ "modernc.org/sqlite"
 
 	"github.com/defn/dev/m/cmd/base"
 	"github.com/defn/dev/m/cmd/runner"
@@ -51,8 +53,8 @@ func NewCommand(lifecycle fx.Lifecycle) base.Command {
 
 	cmd := &cobra.Command{
 		Use:   "db",
-		Short: "Database worker using River and PostgreSQL",
-		Long:  `Database worker - demonstrates River job queue with PostgreSQL`,
+		Short: "Database worker using River and SQLite",
+		Long:  `Database worker - demonstrates River job queue with SQLite`,
 		Args:  cobra.NoArgs,
 		Run: func(cmd *cobra.Command, args []string) {
 			if err := sub.Main(); err != nil {
@@ -71,18 +73,39 @@ func (s *subCommand) Main() error {
 
 	ctx := context.Background()
 
-	// database
-	db_pool, err := pgxpool.New(ctx, "postgresql://postgres@/postgres")
+	// database - using immediate transactions to prevent deadlocks
+	db_pool, err := sql.Open("sqlite", "file:./river.sqlite3?_txlock=immediate")
 	if err != nil {
 		return fmt.Errorf("failed to create database pool: %w", err)
 	}
+	defer db_pool.Close()
+	db_pool.SetMaxOpenConns(1)
+
+	// enable WAL mode for better concurrency
+	if _, err := db_pool.ExecContext(ctx, "PRAGMA journal_mode = WAL"); err != nil {
+		return fmt.Errorf("failed to enable WAL mode: %w", err)
+	}
+	logger.Debug("enabled WAL mode for SQLite")
+
+	// run migrations automatically
+	driver := riversqlite.New(db_pool)
+	migrator, err := rivermigrate.New(driver, nil)
+	if err != nil {
+		return fmt.Errorf("failed to create migrator: %w", err)
+	}
+
+	res, err := migrator.Migrate(ctx, rivermigrate.DirectionUp, nil)
+	if err != nil {
+		return fmt.Errorf("failed to run migrations: %w", err)
+	}
+	logger.Info("database migrations completed", zap.Any("versions", res.Versions))
 
 	// workers
 	workers := river.NewWorkers()
 	river.AddWorker(workers, &SortWorker{})
 
-	// server
-	server, err := river.NewClient(riverpgxv5.New(db_pool), &river.Config{
+	// server - reuse driver from migration
+	server, err := river.NewClient(driver, &river.Config{
 		Queues: map[string]river.QueueConfig{
 			river.QueueDefault: {MaxWorkers: 100},
 		},
