@@ -83,30 +83,36 @@ func NewOverlay() CueOverlayFS {
 // Parameters:
 //   - module: CUE module definition content
 //   - package_name: package name for the schema (installed at cue.mod/pkg/{package_name})
-//   - config_file_path: path to the configuration file to validate (YAML or JSON)
+//   - config_file_path: path to the configuration file to validate (YAML or JSON, relative or absolute)
 //   - schema_label: CUE path to the schema definition (e.g., "#Config")
 //   - config: CUE config content
 //   - schema_files: filesystem containing the CUE schema files
 func (overlay CueOverlayFS) ValidateConfig(module string, package_name string, config_file_path string, schema_label string, config string, schema_files fs.FS) error {
-	// Step 1: Build the CUE schema from the overlay filesystem
+	// Step 1: Convert config file path to absolute path
+	absolute_config_path, err := filepath.Abs(config_file_path)
+	if err != nil {
+		return err
+	}
+
+	// Step 2: Build the CUE schema from the overlay filesystem
 	built_schema, err := overlay.BuildSchema(package_name, module, config, schema_files)
 	if err != nil {
 		return err
 	}
 
-	// Step 2: Look up the schema definition at the specified path (e.g., "#Config")
+	// Step 3: Look up the schema definition at the specified path (e.g., "#Config")
 	// and validate that the schema itself is well-formed
 	schema_definition := built_schema.LookupPath(cue.ParsePath(schema_label))
 	if err := schema_definition.Validate(); err != nil {
 		return err
 	}
 
-	// Step 3: Read the actual config file (YAML/JSON) from disk
-	file_extension := filepath.Ext(config_file_path)
+	// Step 4: Read the actual config file (YAML/JSON) from disk
+	file_extension := filepath.Ext(absolute_config_path)
 	// Example: config_prefix + ".yaml" → "/config.yaml"
 	//          config_prefix + ".json" → "/config.json"
 	input_config_path := config_prefix + file_extension
-	config_data, err := os.ReadFile(config_file_path)
+	config_data, err := os.ReadFile(absolute_config_path)
 	if err != nil {
 		return err
 	}

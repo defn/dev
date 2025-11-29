@@ -3,7 +3,6 @@ package main
 import (
 	_ "embed"
 	"os"
-	"path/filepath"
 
 	"github.com/bitfield/script"
 	"github.com/spf13/cobra"
@@ -96,21 +95,14 @@ func (s *subCommand) Main() error {
 }
 
 func validateHelloConfig() error {
-	// Get absolute path to hello.yaml
-	hello_yaml_path, err := filepath.Abs("hello.yaml")
-	if err != nil {
-		return err
-	}
-
-	// This mimics: cue vet hello.cue hello.yaml -d hello
+	// This mimics: cue vet hello.cue hello.yaml -d '#Hello'
 	overlay := cue.NewOverlay()
-	err = overlay.ValidateConfig(
+	return overlay.ValidateConfig(
 		top.CueModule,                 // module: CUE module definition
 		"github.com/defn/dev/m/hello", // package_name: package for this module
-		hello_yaml_path,               // config_file_path: path to hello.yaml
+		"hello.yaml",                  // config_file_path: path to hello.yaml
 		"#Hello",                      // schema_label: the "#Hello" definition
 		hello_cue_content,             // config: CUE schema content from hello.cue
 		top.Schema,                    // schema_files
 	)
-	return err
 }
