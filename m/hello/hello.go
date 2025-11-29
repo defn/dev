@@ -56,7 +56,8 @@ type SubCommand struct {
 // GreetingConfig represents the greeting configuration through the pipeline
 type GreetingConfig struct {
 	ViperGreeting       string
-	TransformedGreeting string
+	TransformedGreeting string // Capitalized greeting for YAML (without "Hello, ")
+	FormattedGreeting   string // Final output with "Hello, " prefix
 	MergedConfigPath    string
 	Validated           bool
 }
@@ -93,10 +94,13 @@ func (b *GreetingConfigBuilder) WithTransform() *GreetingConfigBuilder {
 		return word
 	})
 	b.config.TransformedGreeting = strings.Join(transformed_words, " ")
+	// Add "Hello, " prefix for final formatted output
+	b.config.FormattedGreeting = "Hello, " + b.config.TransformedGreeting
 
 	b.logger.Debug("transformed greeting",
 		zap.String("original", b.config.ViperGreeting),
-		zap.String("transformed", b.config.TransformedGreeting))
+		zap.String("transformed", b.config.TransformedGreeting),
+		zap.String("formatted", b.config.FormattedGreeting))
 
 	return b
 }
@@ -199,13 +203,13 @@ func (s *SubCommand) Main() error {
 		defer os.Remove(greeting_config.MergedConfigPath)
 	}
 
-	// Output the greeting
-	formatted_greeting := "Hello, " + greeting_config.TransformedGreeting
-	script.Echo(formatted_greeting).Stdout()
+	// Output the greeting (builder has formatted it with "Hello, " prefix)
+	script.Echo(greeting_config.FormattedGreeting).Stdout()
 
 	logger.Info("greeting pipeline completed",
 		zap.String("viper_greeting", greeting_config.ViperGreeting),
 		zap.String("transformed_greeting", greeting_config.TransformedGreeting),
+		zap.String("formatted_greeting", greeting_config.FormattedGreeting),
 		zap.Bool("validated", greeting_config.Validated))
 
 	return nil
