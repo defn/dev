@@ -20,8 +20,7 @@ COPY docker.asc /etc/apt/keyrings/docker.asc
 RUN chmod a+r /etc/apt/keyrings/docker.asc \
     && echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu noble stable" | tee /etc/apt/sources.list.d/docker.list \
     && apt update -y \
-    && apt install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
-
+    && apt install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin
 # install tailscale
 RUN curl -fsSL https://tailscale.com/install.sh | bash
 
