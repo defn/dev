@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.50.0](https://github.com/defn/dev/compare/v1.49.0...v1.50.0) (2025-11-29)
+
+
+### Features
+
+* add configurable greeting with viper, flag, and argument support ([644d023](https://github.com/defn/dev/commit/644d023ef7539ad7c6be0cef499c8a64442562f5))
+
 ## [1.49.0](https://github.com/defn/dev/compare/v1.48.0...v1.49.0) (2025-11-28)
 
 
