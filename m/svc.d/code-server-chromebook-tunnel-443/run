@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+exec 2>&1
+
+export STARSHIP_NO=
+source ~/.bash_profile
+
+sudo pkill -f TCP-LISTEN:443 || true
+exec sudo socat TCP-LISTEN:443,fork TCP:localhost:8443

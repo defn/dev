@@ -10,6 +10,7 @@ brew "flock"
 brew "mise"
 brew "coreutils"
 brew "s6"
+brew "socat"
 
 cask "divvy"
 cask "google-chrome"
