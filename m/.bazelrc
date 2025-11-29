@@ -1,39 +1,27 @@
+run --@rules_img//img/settings:push_strategy=eager
 run --noshow_loading_progress
 run --noshow_progress
 run --ui_event_filters=-info,-stdout,-stderr
-run --@rules_img//img/settings:push_strategy=eager
 
-query --incompatible_disallow_empty_glob=false
 query --noshow_loading_progress
 query --noshow_progress
 query --ui_event_filters=-info
 
-cquery --incompatible_disallow_empty_glob=false
 cquery --noshow_loading_progress
 cquery --noshow_progress
 cquery --ui_event_filters=-info
 
-info --incompatible_disallow_empty_glob=false
 info --noshow_loading_progress
 info --noshow_progress
 info --ui_event_filters=-info
 
 build --action_env=HOME=/home/ubuntu
-build --enable_runfiles
-build --incompatible_autoload_externally=+@rules_android
-build --incompatible_disallow_empty_glob=false
-build --legacy_important_outputs
+build --experimental_profile_include_primary_output
+build --experimental_profile_include_target_label
 build --noremote_upload_local_results
-build --noslim_profile --experimental_profile_include_target_label --experimental_profile_include_primary_output
+build --noslim_profile
 build --remote_download_minimal
 build --test_env=HOME=/home/ubuntu
 build --verbose_failures
-
-build --sandbox_writable_path=/home/ubuntu/.cache/go-build
-build --sandbox_writable_path=/home/ubuntu/.cache/go-mod
-build --sandbox_writable_path=/home/ubuntu/.cache/helm
-build --sandbox_writable_path=/home/ubuntu/m/cue.mod/gen
-build --sandbox_writable_path=/home/ubuntu/m/k
-build --sandbox_writable_path=/home/ubuntu/work
 
 try-import %workspace%/.bazelrc.user
