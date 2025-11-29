@@ -1,6 +1,7 @@
 run --noshow_loading_progress
 run --noshow_progress
 run --ui_event_filters=-info,-stdout,-stderr
+run --@rules_img//img/settings:push_strategy=eager
 
 query --incompatible_disallow_empty_glob=false
 query --noshow_loading_progress
