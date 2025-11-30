@@ -33,6 +33,9 @@ export DISABLE_VERSION_CHECK=1
 # cloud-nuke
 export DISABLE_TELEMETRY=1
 
+# turbo
+export TURBO_TELEMETRY_DISABLED=1
+
 # nextjs
 export NEXT_TELEMETRY_DISABLED=1
 
