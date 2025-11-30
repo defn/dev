@@ -9,6 +9,8 @@ snap
 .config/*
 .trunk/*
 !.trunk/trunk.yaml
+!.trunk/configs/
+!.trunk/configs/.isort.cfg
 node_modules
 .profile
 .bash_history*
