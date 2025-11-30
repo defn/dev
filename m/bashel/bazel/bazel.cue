@@ -46,11 +46,11 @@ import ( "strings"
 		symbols: [...string]
 	}]
 
-	rawFiles: [...#CfgFile]
+	raw_files: [...#CfgFile]
 
 	normalize: [...#NormalizeStep]
 
-	sizeReports: [...{
+	size_reports: [...{
 		name: string
 		src:  #Label
 		out:  string
@@ -252,8 +252,8 @@ sh_test(
 	_t_raw: {
 		kind: "genrule"
 		name: "raw_configs"
-		outs: [for f in #in.rawFiles {f.path}]
-		_echos: [for f in #in.rawFiles {"echo '\(f.content)' > $(@D)/\(f.path)"}]
+		outs: [for f in #in.raw_files {f.path}]
+		_echos: [for f in #in.raw_files {"echo '\(f.content)' > $(@D)/\(f.path)"}]
 		_echosJoined: strings.Join(_echos, "\n")
 		cmd:          """
 mkdir -p $(@D)/raw
@@ -265,7 +265,7 @@ mkdir -p $(@D)/raw
 		for i, n in #in.normalize {
 			{
 				kind: "genrule"
-				name: "normalized_\(#in.rawFiles[i].name)_conf"
+				name: "normalized_\(#in.raw_files[i].name)_conf"
 				srcs: [n.from]
 				outs: [n.out]
 				cmd: """
@@ -286,7 +286,7 @@ $(location \(#in.tools.uppercase)) input=$$\(n.index) $@
 	}
 
 	_t_reports: [
-		for r in #in.sizeReports {
+		for r in #in.size_reports {
 			{
 				kind: "genrule"
 				name: r.name

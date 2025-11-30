@@ -16,7 +16,7 @@ import (
 		lib:       "//b/lib:lib_sh"
 	}
 
-	rawFiles: [
+	raw_files: [
 		{name: "app", path: "raw/app.conf", content: "application configuration settings"},
 		{name: "database", path: "raw/database.conf", content: "database connection parameters"},
 		{name: "cache", path: "raw/cache.conf", content: "cache backend configuration"},
@@ -28,7 +28,7 @@ import (
 		{from: ":raw_configs", index: 3, out: "normalized/cache.conf"},
 	]
 
-	sizeReports: [
+	size_reports: [
 		{
 			name: "config_size_report"
 			src:  ":normalized_app_conf"
