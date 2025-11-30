@@ -33,6 +33,9 @@ import streamlit_shadcn_ui as ui
 # Import vega_datasets - provides sample datasets including Seattle weather data
 import vega_datasets
 
+# Import streamlit-extras for layout helpers like collapsible sections
+from streamlit_extras.stoggle import stoggle
+
 
 def main():
     """
@@ -56,8 +59,8 @@ def main():
     # hide streamlit controls
     hide_streamlit_controls()
 
-    # Display sample UI badges
-    display_sample_badges()
+    # Display example form using new components (at top since it's collapsed)
+    display_example_form()
 
     # Show metrics for most/least common weather
     display_weather_metrics(df, wi)
@@ -100,19 +103,6 @@ def get_weather_icons():
         "fog": "😶‍🌫️",
         "drizzle": "🌧️",
     }
-
-
-def display_sample_badges():
-    """Display sample shadcn UI badges at the top of the app."""
-    ui.badges(
-        badge_list=[
-            ("default", "default"),  # Text, style
-            ("secondary", "secondary"),
-            ("Hello", "destructive"),  # Red "destructive" style badge
-        ],
-        class_name="flex gap-2",  # CSS classes for flexbox layout with gap spacing
-        key="badges1",  # Unique key for Streamlit to track this widget
-    )
 
 
 def display_weather_metrics(df, wi):
@@ -341,6 +331,96 @@ def display_monthly_breakdown_and_raw_data(df):
         # st.dataframe() displays a scrollable, interactive table
         # Users can sort columns, search, and explore the underlying data
         st.dataframe(df)
+
+
+def display_example_form():
+    """
+    Display an example form demonstrating stoggle and shadcn-ui.
+
+    This showcases the pip packages:
+    - streamlit-extras (stoggle) for collapsible sections
+    - streamlit-shadcn-ui for styled components
+    """
+    # Use expander for interactive content
+    with st.expander("Weather Station Configuration Example", expanded=False):
+        st.markdown("### Weather Station Configuration")
+        st.markdown(
+            "Configure your weather monitoring preferences using enhanced form components."
+        )
+
+        # Create the main form container with shadcn styling
+        with st.container(border=True):
+            # Use columns for better layout
+            col1, col2 = st.columns([2, 1])
+
+            with col1:
+                # Basic text input
+                station_name = st.text_input(
+                    "Station Name",
+                    help="Enter a descriptive name for your weather station",
+                )
+
+                # Multi-select for weather types
+                weather_types = st.multiselect(
+                    "Weather Types to Monitor",
+                    options=["sun", "rain", "snow", "fog", "drizzle", "wind", "storm"],
+                    default=["sun", "rain", "snow"],
+                    key="weather_types",
+                )
+
+                # Text area for alert recipients
+                recipients_text = st.text_area(
+                    "Alert Recipients",
+                    placeholder="Enter email addresses, one per line",
+                    key="email_recipients",
+                )
+                recipients = [
+                    r.strip() for r in recipients_text.split("\n") if r.strip()
+                ]
+
+            with col2:
+                # Display shadcn badges showing selected weather types
+                st.markdown("**Active Monitors**")
+                if weather_types:
+                    ui.badges(
+                        badge_list=[(wt, "default") for wt in weather_types],
+                        class_name="flex flex-wrap gap-2",
+                        key="weather_badges",
+                    )
+                else:
+                    st.info("No weather types selected")
+
+            # Nested collapsible advanced settings using stoggle
+            stoggle(
+                "Advanced Settings",
+                """
+Configure additional monitoring options:
+
+- **Sampling Rate**: How frequently to check weather conditions
+- **Data Retention**: How long to keep historical data
+- **Alert Thresholds**: Custom thresholds for weather alerts
+- **API Integration**: Connect to external weather APIs
+                """,
+            )
+
+            # Form action buttons in horizontal layout
+            st.markdown("---")
+            btn_cols = st.columns([1, 1, 4])
+
+            with btn_cols[0]:
+                if st.button(
+                    "Save Configuration", type="primary", use_container_width=True
+                ):
+                    # Show success message
+                    st.success(
+                        f"Configuration saved for '{station_name or 'Unnamed Station'}' "
+                        f"monitoring {len(weather_types)} weather types "
+                        f"with {len(recipients)} alert recipients."
+                    )
+
+            with btn_cols[1]:
+                if st.button("Reset", use_container_width=True):
+                    st.rerun()
 
 
 # Run the main function when the script is executed

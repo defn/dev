@@ -9,4 +9,5 @@ dependencies = [
   "polars>=1.0.0",
   "vega-datasets>=0.9.0",
   "streamlit-shadcn-ui>=0.1.19",
+  "streamlit-extras>=0.3.0",
 ]
