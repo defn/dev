@@ -49,6 +49,9 @@ def main():
     # Get weather icons dictionary
     weather_icons = get_weather_icons()
 
+    # hide streamlit controls
+    hide_streamlit_controls()
+
     # Display sample UI badges
     display_sample_badges()
 
@@ -63,6 +66,13 @@ def main():
     display_wind_and_precipitation(filtered_df)
     display_monthly_breakdown_and_raw_data(filtered_df)
 
+def hide_streamlit_controls():
+    """Hide streamlit controls at the top"""
+    hide_menu = """
+        <style>
+        </style>
+        """
+    st.markdown(hide_menu, unsafe_allow_html=True)
 
 def get_weather_icons():
     """Return a dictionary mapping weather types to emoji icons."""
