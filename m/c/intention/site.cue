@@ -20,38 +20,38 @@ site: [string]~(SITE,_): {
 
 	package_json: """
 		{
-		  "name": "\(SITE)",
-		  "description": "auto-generated: site.cue package_json",
-		  "version": "0.0.1",
-		  "private": true,
-		  "scripts": {
-		    "dev": "astro dev",
-		    "start": "astro dev",
-		    "build": "astro build",
-		    "preview": "astro preview",
-		    "astro": "astro"
-		  },
-		  "dependencies": {
-		    "@astrojs/check": "^0.9.5",
-		    "@astrojs/cloudflare": "^12.6.10",
-		    "@astrojs/sitemap": "^3.6.0",
-		    "@astrojs/starlight": "^0.36.2",
-		    "@astrojs/starlight-tailwind": "^4.0.2",
-		    "astro": "^5.15.3",
-		    "sharp": "^0.34.4",
-		    "tailwindcss": "^4.1.16",
-		    "typescript": "^5.9.3",
-		    "wrangler": "^4.45.3"
-		  }
+			"name": "\(SITE)",
+			"description": "auto-generated: site.cue package_json",
+			"version": "0.0.1",
+			"private": true,
+			"scripts": {
+				"dev": "astro dev",
+				"start": "astro dev",
+				"build": "astro build",
+				"preview": "astro preview",
+				"astro": "astro"
+			},
+			"dependencies": {
+				"@astrojs/check": "^0.9.6",
+				"@astrojs/cloudflare": "^12.6.12",
+				"@astrojs/sitemap": "^3.6.0",
+				"@astrojs/starlight": "^0.37.0",
+				"@astrojs/starlight-tailwind": "^4.0.2",
+				"astro": "^5.16.3",
+				"sharp": "^0.34.5",
+				"tailwindcss": "^4.1.17",
+				"typescript": "^5.9.3",
+				"wrangler": "^4.51.0"
+			}
 		}
 		"""
 
 	tsconfig_json: """
 		{
-		  "comment": "auto-generated: site.cue tsconfig_json",
-		  "extends": "astro/tsconfigs/strict",
-		  "include": [".astro/types.d.ts", "**/*"],
-		  "exclude": ["dist"]
+			"comment": "auto-generated: site.cue tsconfig_json",
+			"extends": "astro/tsconfigs/strict",
+			"include": [".astro/types.d.ts", "**/*"],
+			"exclude": ["dist"]
 		}
 		"""
 
@@ -64,32 +64,32 @@ site: [string]~(SITE,_): {
 
 		// https://astro.build/config
 		export default defineConfig({
-		  site: "https://\(SITE)",
-		  build: {
-		    assets: "a",
-		  },
-		  vite: {
-		    server: {
-		      allowedHosts: [".defn.run"],
-		    },
-		  },
-		  integrations: [
-		    sitemap(),
-		    starlight({
-		      title: "Docs with Tailwind",
-		      sidebar: [
-		        {
-		          label: "Guides",
-		          items: [{ label: "Example Guide", slug: "guides/example" }],
-		        },
-		        {
-		          label: "Reference",
-		          autogenerate: { directory: "reference" },
-		        },
-		      ],
-		      customCss: ["./src/tailwind.css"],
-		    }),
-		  ],
+			site: "https://\(SITE)",
+			build: {
+				assets: "a",
+			},
+			vite: {
+				server: {
+					allowedHosts: [".defn.run"],
+				},
+			},
+			integrations: [
+				sitemap(),
+				starlight({
+				title: "Docs with Tailwind",
+				sidebar: [
+					{
+						label: "Guides",
+						items: [{ label: "Example Guide", slug: "guides/example" }],
+					},
+					{
+						label: "Reference",
+						autogenerate: { directory: "reference" },
+					},
+				],
+				customCss: ["./src/tailwind.css"],
+				}),
+			],
 		});
 		"""
 
@@ -99,8 +99,8 @@ site: [string]~(SITE,_): {
 
 		/** @type {import('tailwindcss').Config} */
 		export default {
-		  content: ["./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}"],
-		  plugins: [starlightPlugin()],
+			content: ["./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}"],
+			plugins: [starlightPlugin()],
 		};
 		"""
 
