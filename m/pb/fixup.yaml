@@ -132,8 +132,11 @@
         - npx
         - pip
         - pip3
+        - pnpm
         - python
         - python3
+        - turbo
+        - uv
       changed_when: false
     - name: Make /usr/local/bin
       become: true
