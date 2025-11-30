@@ -11,6 +11,7 @@ brew "mise"
 brew "coreutils"
 brew "s6"
 brew "socat"
+brew "ncdu"
 
 cask "divvy"
 cask "google-chrome"
