@@ -4,10 +4,6 @@
     "build": {
       "outputs": ["dist/**"],
       "inputs": ["src/**", "package.json", "tsconfig.json"]
-    },
-    "dev": {
-      "cache": false,
-      "persistent": true
     }
   }
 }
