@@ -119,7 +119,6 @@
   "chat.commandCenter.enabled": false,
   "workbench.secondarySideBar.defaultVisibility": "hidden",
   "claudeCode.allowDangerouslySkipPermissions": true,
-  "claudeCode.claudeProcessWrapper": "/home/ubuntu/.bin/claude",
   "claudeCode.disableLoginPrompt": true,
   "claudeCode.initialPermissionMode": "bypassPermissions",
   "terraform.mcp.server.enable": true,
