@@ -17,6 +17,9 @@ export default defineConfig({
       allowedHosts: [".defn.run"],
     },
     build: {
+      commonjsOptions: {
+        strictRequires: true,
+      },
       rollupOptions: {
         onwarn(warning, warn) {
           // Suppress "unused import" warnings from Astro's internal modules
