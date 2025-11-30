@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.55.0](https://github.com/defn/dev/compare/v1.54.0...v1.55.0) (2025-11-30)
+
+
+### Features
+
+* add bazel.cue to test dependencies ([7c34782](https://github.com/defn/dev/commit/7c34782e0fa9a0115346e461260a6488a71e59dd))
+* add s6 service supervision for coder-agent ([b7020bb](https://github.com/defn/dev/commit/b7020bb9ac52a5082953f601a5380cfc05dbcd97))
+
 ## [1.54.0](https://github.com/defn/dev/compare/v1.53.0...v1.54.0) (2025-11-30)
 
 
