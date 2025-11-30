@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.54.0](https://github.com/defn/dev/compare/v1.53.0...v1.54.0) (2025-11-30)
+
+
+### Features
+
+* add shadcn UI badges to weather dashboard ([e338538](https://github.com/defn/dev/commit/e338538cf2902008c299e4c1dd864626f9845668))
+* transform app into Seattle Weather dashboard ([8564362](https://github.com/defn/dev/commit/8564362c631a3e0c38019a3cbe2b46e92e1b4416))
+
+
+### Bug Fixes
+
+* allow .trunk/configs/.isort.cfg to be tracked by git ([51001ae](https://github.com/defn/dev/commit/51001aedfcd2a15bc233b02fc76d882980c6609c))
+
 ## [1.53.0](https://github.com/defn/dev/compare/v1.52.0...v1.53.0) (2025-11-30)
 
 
