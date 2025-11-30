@@ -83,5 +83,10 @@
     "key": "ctrl+alt+\\",
     "command": "workbench.action.createTerminalEditorSide",
     "when": "terminalProcessSupported"
+  },
+  {
+    "key": "ctrl+alt+cmd+/",
+    "command": "claude-vscode.editor.openLast",
+    "when": "!config.claudeCode.useTerminal"
   }
 ]
