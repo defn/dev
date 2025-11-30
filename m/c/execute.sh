@@ -8,7 +8,8 @@
 
 function main {
 	# Build documentation site from transformed YAML
-	(cd docs && pnpm install && pnpm run build)
+  cd ..
+  turbo build
 }
 
 main "$@"

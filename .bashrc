@@ -36,6 +36,9 @@ export DISABLE_TELEMETRY=1
 # turbo
 export TURBO_TELEMETRY_DISABLED=1
 
+# astro
+export ASTRO_TELEMETRY_DISABLED=1
+
 # nextjs
 export NEXT_TELEMETRY_DISABLED=1
 
