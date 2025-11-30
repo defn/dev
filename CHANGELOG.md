@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.53.0](https://github.com/defn/dev/compare/v1.52.0...v1.53.0) (2025-11-30)
+
+
+### Features
+
+* add Streamlit login app with uv project setup ([61d8823](https://github.com/defn/dev/commit/61d8823b1c0a1fbadee9e2e4ab72376aa1657af2))
+
 ## [1.52.0](https://github.com/defn/dev/compare/v1.51.0...v1.52.0) (2025-11-30)
 
 
