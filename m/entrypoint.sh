@@ -13,7 +13,7 @@ function main {
 
 	(
 		for a in $(env | grep ^CODER_ | cut -d= -f1); do printf 'export %s=%q\n\n' "$a" "$(echo "${!a}")"; done
-	) >svc.d/coder/.env
+	) >svc.d/coder-agent/.env
 
 	(
 		for a in $(env | grep ^CODER_ | cut -d= -f1); do printf 'export %s=%q\n\n' "$a" "$(echo "${!a}")"; done
@@ -21,14 +21,14 @@ function main {
 		for a in $(env | grep ^VSCODE_ | cut -d= -f1); do printf 'export %s=%q\n\n' "$a" "$(echo "${!a}")"; done
 	) >svc.d/code-server/.env
 
-	ln -nfs ../svc.d/coder svc/
+	ln -nfs ../svc.d/coder-agent svc/coder-agent
 	ln -nfs ../svc.d/code-server svc/
 
 	case "${1-}" in
 	setup)
 		m start || true
 		m activate || true
-		m restart coder || true
+		m restart coder-agent || true
 		m restart code-server || true
 		;;
 	*)
