@@ -1,6 +1,14 @@
 {
+  "scripts": {
+    "build": "turbo build",
+    "dev": "turbo dev"
+  },
+  "packageManager": "pnpm@9.15.0",
   "dependencies": {
     "@marp-team/marp-cli": "^4.2.3",
     "@mermaid-js/mermaid-cli": "^11.12.0"
+  },
+  "devDependencies": {
+    "turbo": "^2.6.1"
   }
 }

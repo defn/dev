@@ -1,7 +1,6 @@
 // @ts-check
 // auto-generated: site.cue astro_config_mjs
 import { defineConfig } from "astro/config";
-import starlight from "@astrojs/starlight";
 import sitemap from "@astrojs/sitemap";
 
 // https://astro.build/config
@@ -15,21 +14,5 @@ export default defineConfig({
       allowedHosts: [".defn.run"],
     },
   },
-  integrations: [
-    sitemap(),
-    starlight({
-      title: "Docs with Tailwind",
-      sidebar: [
-        {
-          label: "Guides",
-          items: [{ label: "Example Guide", slug: "guides/example" }],
-        },
-        {
-          label: "Reference",
-          autogenerate: { directory: "reference" },
-        },
-      ],
-      customCss: ["./src/tailwind.css"],
-    }),
-  ],
+  integrations: [sitemap()],
 });

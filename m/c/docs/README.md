@@ -8,7 +8,7 @@ If this is your first time working with this project, you need to install the de
 
 ```bash
 cd c/docs
-npm install
+pnpm install
 ```
 
 This will install all required packages listed in `package.json`:
@@ -24,17 +24,17 @@ All commands are run from the `c/docs/` directory:
 ### Development
 
 ```bash
-npm run dev
+pnpm run dev
 ```
 
 Starts the development server at `http://localhost:4321` (or your Coder workspace URL). The site will automatically reload when you make changes to your content or configuration.
 
-**Alias:** `npm start` does the same thing.
+**Alias:** `pnpm start` does the same thing.
 
 ### Production Build
 
 ```bash
-npm run build
+pnpm run build
 ```
 
 Builds the site for production. The output will be in the `dist/` directory, ready to be deployed to any static hosting service.
@@ -42,21 +42,21 @@ Builds the site for production. The output will be in the `dist/` directory, rea
 ### Preview Production Build
 
 ```bash
-npm run preview
+pnpm run preview
 ```
 
-Starts a local server to preview your production build. Run this after `npm run build` to test the production build locally before deploying.
+Starts a local server to preview your production build. Run this after `pnpm run build` to test the production build locally before deploying.
 
 ### Direct Astro CLI
 
 ```bash
-npm run astro -- <command>
+pnpm run astro -- <command>
 ```
 
 Run any Astro CLI command directly. Examples:
 
-- `npm run astro -- add react` - Add React integration
-- `npm run astro -- check` - Check for errors in your project
+- `pnpm run astro -- add react` - Add React integration
+- `pnpm run astro -- check` - Check for errors in your project
 
 ## Configuration
 
@@ -148,4 +148,4 @@ Each AWS account YAML file must include:
 
 ### Module not found errors
 
-Run `npm install` to ensure all dependencies are installed.
+Run `pnpm install` to ensure all dependencies are installed.

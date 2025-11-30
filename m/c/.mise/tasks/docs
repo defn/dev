@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 #MISE description="Run the documentation development server"
 
-cd docs && npm run dev
+cd docs && pnpm run dev

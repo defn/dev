@@ -7,11 +7,11 @@ up:
 
 # Start development server
 # Description: Installs dependencies and starts dev server in remote mode
-# Dependencies: npm, package.json
+# Dependencies: pnpm, package.json
 # Outputs: Running development server without opening browser
 server:
-    npm install
-    npm run dev -- --remote --open=false
+    pnpm install
+    pnpm run dev -- --remote --open=false
 
 # Build the application
 # Description: Builds application and formats tutorial HTML

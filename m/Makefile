@@ -16,11 +16,11 @@ listen ?= 127.0.0.1:3443
 
 proxy ?= proxy3
 
-# Install npm dependencies quietly
-# Dependencies: npm command, package.json file
-# Outputs: Installed npm dependencies in node_modules directory
+# Install pnpm dependencies quietly
+# Dependencies: pnpm command, package.json file
+# Outputs: Installed pnpm dependencies in node_modules directory
 install:
-	npm -q --no-update-notifier --no-audit install
+	pnpm install --silent
 
 # Sync home directory configuration
 # Dependencies: make command, home directory Makefile
