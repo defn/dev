@@ -25,44 +25,10 @@ import streamlit_shadcn_ui as ui
 # Import vega_datasets - provides sample datasets including Seattle weather data
 import vega_datasets
 
-# Display some sample badges using the shadcn UI library
-# This shows different badge styles at the top of the app
-ui.badges(
-    badge_list=[
-        ("default", "default"),      # Text, style
-        ("secondary", "secondary"),
-        ("outline", "outline"),
-        ("Hello", "destructive"),    # Red "destructive" style badge
-    ],
-    class_name="flex gap-2",  # CSS classes for flexbox layout with gap spacing
-    key="badges1",            # Unique key for Streamlit to track this widget
-)
 
-# Load the Seattle weather dataset into a pandas DataFrame
-# This contains daily weather measurements from Seattle
-full_df = vega_datasets.data("seattle_weather")
-
-# Configure the Streamlit page settings
-# This must be called before any other Streamlit commands
-st.set_page_config(
-    # Title and icon for the browser's tab bar:
-    page_title="Seattle Weather",
-    page_icon="🌦️",
-    # Make the content take up the width of the page:
-    layout="wide",
-)
-
-
-# Create a horizontal container to display metrics side by side
-# Containers help organize content in your Streamlit app
-with st.container(horizontal=True, gap="medium"):
-    # Create 2 columns of equal width (300px each) with medium gap
-    # Columns let you place content side-by-side
-    cols = st.columns(2, gap="medium", width=300)
-
-    # Dictionary mapping weather types to emoji icons
-    # This makes our metrics more visually appealing
-    weather_icons = {
+def get_weather_icons():
+    """Return a dictionary mapping weather types to emoji icons."""
+    return {
         "sun": "☀️",
         "snow": "☃️",
         "rain": "💧",
@@ -70,176 +36,282 @@ with st.container(horizontal=True, gap="medium"):
         "drizzle": "🌧️",
     }
 
-    # Display the most common weather type in the first column
-    with cols[0]:
-        # value_counts() counts how many times each weather type appears
-        # head(1) gets the top result, reset_index() converts to DataFrame
-        weather_name = (
-            full_df["weather"].value_counts().head(1).reset_index()["weather"][0]
-        )
-        # st.metric displays a key metric with a label and value
-        st.metric(
-            "Most common weather",
-            f"{weather_icons[weather_name]} {weather_name.upper()}",
-        )
 
-    # Display the least common weather type in the second column
-    with cols[1]:
-        # tail(1) gets the bottom result (least common)
-        weather_name = (
-            full_df["weather"].value_counts().tail(1).reset_index()["weather"][0]
-        )
-        st.metric(
-            "Least common weather",
-            f"{weather_icons[weather_name]} {weather_name.upper()}",
-        )
-
-# Display a markdown header (## means h2 heading in markdown)
-# In Streamlit, you can use triple quotes to write markdown directly
-"""
-## Compare different years
-"""
-
-# Extract unique years from the dataset
-# .dt.year accesses the year from datetime column, .unique() gets distinct values
-YEARS = full_df["date"].dt.year.unique()
-
-# st.pills creates a multi-select button group for choosing years
-# Users can select multiple years to compare side-by-side
-selected_years = st.pills(
-    "Years to compare", YEARS, default=YEARS, selection_mode="multi"
-)
-
-# Show a warning if no years are selected
-# This prevents errors when trying to display charts with no data
-if not selected_years:
-    st.warning("You must select at least 1 year.", icon=":material/warning:")
-
-# Filter the dataset to only include the selected years
-# .isin() checks if the year is in the selected_years list
-df = full_df[full_df["date"].dt.year.isin(selected_years)]
-
-# Create two columns with a 3:1 ratio (first column is 3x wider)
-# This layout gives more space to the temperature chart
-cols = st.columns([3, 1])
-
-# First column: Temperature chart
-# container() creates a bordered box that stretches to fill available height
-with cols[0].container(border=True, height="stretch"):
-    "### Temperature"
-
-    # Create an interactive temperature range bar chart using Altair
-    # Altair uses a "grammar of graphics" - you describe what to show, not how to draw it
-    st.altair_chart(
-        alt.Chart(df)  # Start with our filtered DataFrame
-        .mark_bar(width=1)  # Draw narrow bars (width=1 pixel)
-        .encode(
-            # X-axis: date shown as month-day (e.g., "Jan 15")
-            alt.X("date", timeUnit="monthdate").title("date"),
-            # Y-axis: max temperature (top of bar)
-            alt.Y("temp_max").title("temperature range (C)"),
-            # Y2: min temperature (bottom of bar) - creates a range bar
-            alt.Y2("temp_min"),
-            # Color bars by year - each year gets a different color
-            alt.Color("date:N", timeUnit="year").title("year"),
-            # Offset bars horizontally by year so they appear side-by-side
-            alt.XOffset("date:N", timeUnit="year"),
-        )
-        .configure_legend(orient="bottom")  # Put the legend below the chart
-    )
-
-# Second column: Weather distribution pie chart
-with cols[1].container(border=True, height="stretch"):
-    "### Weather distribution"
-
-    # Create a pie chart showing the proportion of each weather type
-    st.altair_chart(
-        alt.Chart(df)
-        .mark_arc()  # mark_arc() creates pie/donut chart segments
-        .encode(
-            # Theta controls the angle/size of each pie slice
-            # count() counts rows for each weather type
-            alt.Theta("count()"),
-            # Color each slice by weather type (sun, rain, etc.)
-            alt.Color("weather:N"),
-        )
-        .configure_legend(orient="bottom")
+def display_sample_badges():
+    """Display sample shadcn UI badges at the top of the app."""
+    ui.badges(
+        badge_list=[
+            ("default", "default"),      # Text, style
+            ("secondary", "secondary"),
+            ("outline", "outline"),
+            ("Hello", "destructive"),    # Red "destructive" style badge
+        ],
+        class_name="flex gap-2",  # CSS classes for flexbox layout with gap spacing
+        key="badges1",            # Unique key for Streamlit to track this widget
     )
 
 
-# Create a new row with two equal columns for wind and precipitation
-cols = st.columns(2)
+def display_weather_metrics(df, weather_icons):
+    """
+    Display metrics showing the most and least common weather types.
 
-# Left column: Wind speed over time (with rolling average)
-with cols[0].container(border=True, height="stretch"):
-    "### Wind"
+    Args:
+        df: DataFrame containing weather data
+        weather_icons: Dictionary mapping weather types to emoji icons
+    """
+    # Create a horizontal container to display metrics side by side
+    with st.container(horizontal=True, gap="medium"):
+        # Create 2 columns of equal width (300px each) with medium gap
+        cols = st.columns(2, gap="medium", width=300)
 
-    st.altair_chart(
-        alt.Chart(df)
-        # transform_window() calculates rolling statistics over a window of data
-        .transform_window(
-            avg_wind="mean(wind)",  # Calculate average wind speed
-            std_wind="stdev(wind)",  # Calculate standard deviation (not used in chart)
-            frame=[0, 14],  # Window: current day + next 14 days = 2 weeks
-            groupby=["monthdate(date)"],  # Group by month-day to compare across years
-        )
-        .mark_line(size=1)  # Draw a thin line chart
-        .encode(
-            alt.X("date", timeUnit="monthdate").title("date"),
-            # Y-axis shows the calculated rolling average (":Q" means quantitative data)
-            alt.Y("avg_wind:Q").title("average wind past 2 weeks (m/s)"),
-            # Different color line for each year
-            alt.Color("date:N", timeUnit="year").title("year"),
-        )
-        .configure_legend(orient="bottom")
+        # Display the most common weather type in the first column
+        with cols[0]:
+            # value_counts() counts how many times each weather type appears
+            # head(1) gets the top result, reset_index() converts to DataFrame
+            weather_name = (
+                df["weather"].value_counts().head(1).reset_index()["weather"][0]
+            )
+            # st.metric displays a key metric with a label and value
+            st.metric(
+                "Most common weather",
+                f"{weather_icons[weather_name]} {weather_name.upper()}",
+            )
+
+        # Display the least common weather type in the second column
+        with cols[1]:
+            # tail(1) gets the bottom result (least common)
+            weather_name = (
+                df["weather"].value_counts().tail(1).reset_index()["weather"][0]
+            )
+            st.metric(
+                "Least common weather",
+                f"{weather_icons[weather_name]} {weather_name.upper()}",
+            )
+
+
+def get_filtered_data_by_year(df):
+    """
+    Display year selection widget and return filtered DataFrame.
+
+    Args:
+        df: Full DataFrame with all years
+
+    Returns:
+        DataFrame filtered to selected years
+    """
+    # Display a markdown header for the year comparison section
+    """
+    ## Compare different years
+    """
+
+    # Extract unique years from the dataset
+    # .dt.year accesses the year from datetime column, .unique() gets distinct values
+    years = df["date"].dt.year.unique()
+
+    # st.pills creates a multi-select button group for choosing years
+    # Users can select multiple years to compare side-by-side
+    selected_years = st.pills(
+        "Years to compare", years, default=years, selection_mode="multi"
     )
 
-# Right column: Monthly precipitation totals
-with cols[1].container(border=True, height="stretch"):
-    "### Precipitation"
+    # Show a warning if no years are selected
+    if not selected_years:
+        st.warning("You must select at least 1 year.", icon=":material/warning:")
 
-    st.altair_chart(
-        alt.Chart(df)
-        .mark_bar()  # Bar chart
-        .encode(
-            # X-axis: group by month (":N" means nominal/categorical data)
-            alt.X("date:N", timeUnit="month").title("date"),
-            # Y-axis: sum up all precipitation for each month
-            # aggregate("sum") adds up all the daily precipitation values
-            alt.Y("precipitation:Q").aggregate("sum").title("precipitation (mm)"),
-            # Color bars by year to compare across years
-            alt.Color("date:N", timeUnit="year").title("year"),
+    # Filter the dataset to only include the selected years
+    # .isin() checks if the year is in the selected_years list
+    return df[df["date"].dt.year.isin(selected_years)]
+
+
+def display_temperature_and_distribution(df):
+    """
+    Display temperature range chart and weather distribution pie chart.
+
+    Args:
+        df: Filtered DataFrame containing weather data
+    """
+    # Create two columns with a 3:1 ratio (first column is 3x wider)
+    # This layout gives more space to the temperature chart
+    cols = st.columns([3, 1])
+
+    # First column: Temperature chart
+    with cols[0].container(border=True, height="stretch"):
+        "### Temperature"
+
+        # Create an interactive temperature range bar chart using Altair
+        # Altair uses a "grammar of graphics" - you describe what to show, not how to draw it
+        st.altair_chart(
+            alt.Chart(df)  # Start with our filtered DataFrame
+            .mark_bar(width=1)  # Draw narrow bars (width=1 pixel)
+            .encode(
+                # X-axis: date shown as month-day (e.g., "Jan 15")
+                alt.X("date", timeUnit="monthdate").title("date"),
+                # Y-axis: max temperature (top of bar)
+                alt.Y("temp_max").title("temperature range (C)"),
+                # Y2: min temperature (bottom of bar) - creates a range bar
+                alt.Y2("temp_min"),
+                # Color bars by year - each year gets a different color
+                alt.Color("date:N", timeUnit="year").title("year"),
+                # Offset bars horizontally by year so they appear side-by-side
+                alt.XOffset("date:N", timeUnit="year"),
+            )
+            .configure_legend(orient="bottom")  # Put the legend below the chart
         )
-        .configure_legend(orient="bottom")
+
+    # Second column: Weather distribution pie chart
+    with cols[1].container(border=True, height="stretch"):
+        "### Weather distribution"
+
+        # Create a pie chart showing the proportion of each weather type
+        st.altair_chart(
+            alt.Chart(df)
+            .mark_arc()  # mark_arc() creates pie/donut chart segments
+            .encode(
+                # Theta controls the angle/size of each pie slice
+                # count() counts rows for each weather type
+                alt.Theta("count()"),
+                # Color each slice by weather type (sun, rain, etc.)
+                alt.Color("weather:N"),
+            )
+            .configure_legend(orient="bottom")
+        )
+
+
+def display_wind_and_precipitation(df):
+    """
+    Display wind speed and precipitation charts.
+
+    Args:
+        df: Filtered DataFrame containing weather data
+    """
+    # Create a row with two equal columns for wind and precipitation
+    cols = st.columns(2)
+
+    # Left column: Wind speed over time (with rolling average)
+    with cols[0].container(border=True, height="stretch"):
+        "### Wind"
+
+        st.altair_chart(
+            alt.Chart(df)
+            # transform_window() calculates rolling statistics over a window of data
+            .transform_window(
+                avg_wind="mean(wind)",  # Calculate average wind speed
+                std_wind="stdev(wind)",  # Calculate standard deviation (not used in chart)
+                frame=[0, 14],  # Window: current day + next 14 days = 2 weeks
+                groupby=["monthdate(date)"],  # Group by month-day to compare across years
+            )
+            .mark_line(size=1)  # Draw a thin line chart
+            .encode(
+                alt.X("date", timeUnit="monthdate").title("date"),
+                # Y-axis shows the calculated rolling average (":Q" means quantitative data)
+                alt.Y("avg_wind:Q").title("average wind past 2 weeks (m/s)"),
+                # Different color line for each year
+                alt.Color("date:N", timeUnit="year").title("year"),
+            )
+            .configure_legend(orient="bottom")
+        )
+
+    # Right column: Monthly precipitation totals
+    with cols[1].container(border=True, height="stretch"):
+        "### Precipitation"
+
+        st.altair_chart(
+            alt.Chart(df)
+            .mark_bar()  # Bar chart
+            .encode(
+                # X-axis: group by month (":N" means nominal/categorical data)
+                alt.X("date:N", timeUnit="month").title("date"),
+                # Y-axis: sum up all precipitation for each month
+                # aggregate("sum") adds up all the daily precipitation values
+                alt.Y("precipitation:Q").aggregate("sum").title("precipitation (mm)"),
+                # Color bars by year to compare across years
+                alt.Color("date:N", timeUnit="year").title("year"),
+            )
+            .configure_legend(orient="bottom")
+        )
+
+
+def display_monthly_breakdown_and_raw_data(df):
+    """
+    Display monthly weather breakdown and raw data table.
+
+    Args:
+        df: Filtered DataFrame containing weather data
+    """
+    # Create a final row with two equal columns
+    cols = st.columns(2)
+
+    # Left column: Stacked bar chart showing weather type distribution by month
+    with cols[0].container(border=True, height="stretch"):
+        "### Monthly weather breakdown"
+        ""  # Empty string creates a small spacing
+
+        st.altair_chart(
+            alt.Chart(df)
+            .mark_bar()
+            .encode(
+                # X-axis: months (":O" means ordinal - ordered categories like Jan, Feb, Mar)
+                alt.X("month(date):O", title="month"),
+                # Y-axis: count of days, normalized to show proportions (0-100%)
+                # stack("normalize") makes each bar the same height, showing percentages
+                alt.Y("count():Q", title="days").stack("normalize"),
+                # Color segments by weather type (sun, rain, etc.)
+                alt.Color("weather:N"),
+            )
+            .configure_legend(orient="bottom")
+        )
+
+    # Right column: Interactive data table showing the raw filtered data
+    with cols[1].container(border=True, height="stretch"):
+        "### Raw data"
+
+        # st.dataframe() displays a scrollable, interactive table
+        # Users can sort columns, search, and explore the underlying data
+        st.dataframe(df)
+
+
+def main():
+    """
+    Main function that orchestrates the Seattle Weather Dashboard.
+
+    This function provides a clear overview of the app's structure:
+    1. Load data
+    2. Configure the page
+    3. Display UI components
+    4. Show weather metrics
+    5. Let users filter by year
+    6. Display various weather visualizations
+    """
+    # Load the Seattle weather dataset into a pandas DataFrame
+    # This contains daily weather measurements from Seattle
+    full_df = vega_datasets.data("seattle_weather")
+
+    # Configure the Streamlit page settings
+    # This must be called before any other Streamlit commands
+    st.set_page_config(
+        page_title="Seattle Weather",
+        page_icon="🌦️",
+        layout="wide",
     )
 
-# Create a final row with two equal columns
-cols = st.columns(2)
+    # Get weather icons dictionary
+    weather_icons = get_weather_icons()
 
-# Left column: Stacked bar chart showing weather type distribution by month
-with cols[0].container(border=True, height="stretch"):
-    "### Monthly weather breakdown"
-    ""  # Empty string creates a small spacing
+    # Display sample UI badges
+    display_sample_badges()
 
-    st.altair_chart(
-        alt.Chart(df)
-        .mark_bar()
-        .encode(
-            # X-axis: months (":O" means ordinal - ordered categories like Jan, Feb, Mar)
-            alt.X("month(date):O", title="month"),
-            # Y-axis: count of days, normalized to show proportions (0-100%)
-            # stack("normalize") makes each bar the same height, showing percentages
-            alt.Y("count():Q", title="days").stack("normalize"),
-            # Color segments by weather type (sun, rain, etc.)
-            alt.Color("weather:N"),
-        )
-        .configure_legend(orient="bottom")
-    )
+    # Show metrics for most/least common weather
+    display_weather_metrics(full_df, weather_icons)
 
-# Right column: Interactive data table showing the raw filtered data
-with cols[1].container(border=True, height="stretch"):
-    "### Raw data"
+    # Get filtered data based on user's year selection
+    filtered_df = get_filtered_data_by_year(full_df)
 
-    # st.dataframe() displays a scrollable, interactive table
-    # Users can sort columns, search, and explore the underlying data
-    st.dataframe(df)
+    # Display all the weather visualization charts
+    display_temperature_and_distribution(filtered_df)
+    display_wind_and_precipitation(filtered_df)
+    display_monthly_breakdown_and_raw_data(filtered_df)
+
+
+# Run the main function when the script is executed
+if __name__ == "__main__":
+    main()
