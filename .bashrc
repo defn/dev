@@ -132,23 +132,24 @@ fi
 
 # aliases
 function m {
+	local loader="env MISE_RAW=1 MISE_QUIET=true"
 	if [[ $# -gt 0 ]]; then
 		case "$1" in
 		--)
 			shift
-			mise run default -- "$@"
+			$loader mise run default -- "$@"
 			;;
 		--*)
-			mise run default -- "$@"
+			$loader mise run default -- "$@"
 			;;
 		*)
 			local cmd="$1"
 			shift
-			mise run "${cmd}" -- "$@"
+			$loader mise run "${cmd}" -- "$@"
 			;;
 		esac
 	else
-		mise run default
+		$loader mise run default
 	fi
 }
 
