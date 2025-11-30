@@ -3,4 +3,9 @@ name = "sl"
 version = "0.1.0"
 description = "Add your description here"
 requires-python = ">=3.13"
-dependencies = ["streamlit>=1.51.0", "altair>=5.0.0", "vega-datasets>=0.9.0"]
+dependencies = [
+  "streamlit>=1.51.0",
+  "altair>=5.0.0",
+  "vega-datasets>=0.9.0",
+  "streamlit-shadcn-ui>=0.1.19",
+]

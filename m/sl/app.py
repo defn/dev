@@ -17,7 +17,19 @@ from datetime import datetime
 
 import altair as alt
 import streamlit as st
+import streamlit_shadcn_ui as ui
 import vega_datasets
+
+ui.badges(
+    badge_list=[
+        ("default", "default"),
+        ("secondary", "secondary"),
+        ("outline", "outline"),
+        ("Hello", "destructive"),
+    ],
+    class_name="flex gap-2",
+    key="badges1",
+)
 
 full_df = vega_datasets.data("seattle_weather")
 
