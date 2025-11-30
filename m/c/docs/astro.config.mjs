@@ -1,6 +1,7 @@
 // @ts-check
 import { defineConfig } from "astro/config";
 import starlight from "@astrojs/starlight";
+import sitemap from "@astrojs/sitemap";
 
 // https://astro.build/config
 export default defineConfig({
@@ -31,6 +32,13 @@ export default defineConfig({
     },
   },
   integrations: [
+    sitemap({
+      serialize(item) {
+        // Remove lastmod to ensure reproducible builds
+        delete item.lastmod;
+        return item;
+      },
+    }),
     starlight({
       title: "ACUTE",
       customCss: [
