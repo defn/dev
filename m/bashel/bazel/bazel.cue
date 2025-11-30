@@ -34,6 +34,43 @@ import ( "strings"
 	archive: #Label
 }
 
+#Model: {
+	tools: {
+		uppercase: #Label
+		wordcount: #Label
+		lib:       #Label
+	}
+
+	loads: [...{
+		bzl: string
+		symbols: [...string]
+	}]
+
+	rawFiles: [...#CfgFile]
+
+	normalize: [...#NormalizeStep]
+
+	sizeReports: [...{
+		name: string
+		src:  #Label
+		out:  string
+	}]
+
+	bundles: [...#Bundle]
+	infos: [...#Info]
+
+	all: {
+		name: string
+		srcs: [...#Label]
+	}
+
+	test: {
+		name: string
+		src:  string
+		data: [...#Label]
+	}
+}
+
 // ----------------- Renderers ------------------
 
 #q: {
@@ -186,5 +223,139 @@ sh_test(
   srcs = \(_srcsList),
   data = \(_dataList),
 )
+"""
+}
+
+// ----------------- Build Generator ------------------
+
+#BuildGenerator: {
+	#in: #Model
+
+	// Renderer map
+	_render: {
+		"load":                    renderLoad
+		"genrule":                 renderGenrule
+		"filegroup":               renderFilegroup
+		"macro.archive_directory": renderArchiveDir
+		"macro.archive_info":      renderArchiveInfo
+		"sh_test":                 renderShTest
+	}
+
+	// Templates
+	_t_loads: [
+		for l in #in.loads {
+			kind: "load"
+			l
+		},
+	]
+
+	_t_raw: {
+		kind: "genrule"
+		name: "raw_configs"
+		outs: [for f in #in.rawFiles {f.path}]
+		_echos: [for f in #in.rawFiles {"echo '\(f.content)' > $(@D)/\(f.path)"}]
+		_echosJoined: strings.Join(_echos, "\n")
+		cmd:          """
+mkdir -p $(@D)/raw
+\(_echosJoined)
+"""
+	}
+
+	_t_norm: [
+		for i, n in #in.normalize {
+			{
+				kind: "genrule"
+				name: "normalized_\(#in.rawFiles[i].name)_conf"
+				srcs: [n.from]
+				outs: [n.out]
+				cmd: """
+set -- $(locations \(n.from))
+$(location \(#in.tools.uppercase)) input=$$\(n.index) $@
+"""
+				tools: [#in.tools.uppercase, #in.tools.lib]
+			}
+		},
+	]
+
+	_t_norm_group: {
+		kind: "filegroup"
+		name: "normalized_configs"
+		srcs: [
+			for r in _t_norm {":\(r.name)"},
+		]
+	}
+
+	_t_reports: [
+		for r in #in.sizeReports {
+			{
+				kind: "genrule"
+				name: r.name
+				srcs: [r.src]
+				outs: [r.out]
+				cmd: "$(location \(#in.tools.wordcount)) input=$(location \(r.src)) $@"
+				tools: [#in.tools.wordcount, #in.tools.lib]
+			}
+		},
+	]
+
+	_t_bundles: [
+		for b in #in.bundles {
+			{
+				kind:   "macro.archive_directory"
+				name:   b.name
+				dir:    b.srcs
+				prefix: b.prefix
+			}
+		},
+	]
+
+	_t_infos: [
+		for inf in #in.infos {
+			{
+				kind:    "macro.archive_info"
+				name:    inf.name
+				archive: inf.archive
+			}
+		},
+	]
+
+	_t_all: {
+		kind: "filegroup"
+		name: #in.all.name
+		srcs: #in.all.srcs
+	}
+
+	_t_test: {
+		kind: "sh_test"
+		name: #in.test.name
+		srcs: [#in.test.src]
+		data: #in.test.data
+	}
+
+	// Targets list
+	_targets_list: [
+		for x in _t_loads {x},
+		_t_raw,
+		for x in _t_norm {x},
+		_t_norm_group,
+		for x in _t_reports {x},
+		for x in _t_bundles {x},
+		for x in _t_infos {x},
+		_t_all,
+		_t_test,
+	]
+
+	// Rendered targets
+	_rendered: [
+		for t in _targets_list {
+			(_render[t.kind] & {#in: t}).out
+		},
+	]
+
+	// Final BUILD output
+	out: """
+# auto-generated: bazel.cue
+
+\(strings.Join(_rendered, "\n"))
 """
 }
