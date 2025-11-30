@@ -227,7 +227,7 @@ sync_inner:
 	if [[ "$(shell uname -s)" == "Linux" ]]; then t play-upgrade ~/.local/bin/mise run local upgrade; fi
 	if [[ "$(shell uname -s)" == "Linux" ]]; then t play-ubuntu ~/.local/bin/mise run local ubuntu; fi
 	$(MAKE) fast_inner
-	if [[ "$(shell uname -s)" == "Linux" ]]; then t play-fixup ~/.local/bin/mise run local fixup; fi
+	t play-fixup ~/.local/bin/mise run local fixup
 	if [[ "$(shell uname -s)" == "Darwin" ]]; then t play-macos ~/.local/bin/mise run local macos; fi
 
 # List available mise tool updates across all mise.toml files in the repository

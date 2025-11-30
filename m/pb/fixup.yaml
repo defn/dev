@@ -13,11 +13,11 @@
 - name: Setup Docker and SSH configs
   hosts: all
   vars:
-    user_id: 1000
-    group_id: 100
-    username: "{{ lookup('pipe', 'id -un 1000') }}"
-    groupname: "{{ lookup('pipe', 'id -gn 1000') }}"
-    home_dir: "/home/{{ username }}"
+    username: "{{ ansible_user_id }}"
+    home_dir: "{{ ansible_env.HOME }}"
+    user_id: "{{ ansible_user_uid }}"
+    group_id: "{{ ansible_user_gid }}"
+    groupname: "{{ ansible_user_id }}"
     docker_config_dir: "{{ home_dir }}/.docker"
 
   tasks:
@@ -28,6 +28,7 @@
         regexp: '^\s*GSSAPIAuthentication'
         line: "#GSSAPIAuthentication"
         state: present
+      when: ansible_os_family != "Darwin"
 
     - name: Remove docker credential helpers if they exist
       become: true
@@ -37,7 +38,9 @@
       loop:
         - "{{ lookup('pipe', 'which docker-credential-pass || true') }}"
         - "{{ lookup('pipe', 'which docker-credential-secretservice || true') }}"
-      when: item != ""
+      when:
+        - ansible_os_family != "Darwin"
+        - item != ""
 
     - name: Copy config.json.example to config.json if not exists
       become: true
@@ -48,7 +51,9 @@
         group: "{{ groupname }}"
         mode: "0600"
         remote_src: yes
-      when: not lookup('file', docker_config_dir + '/config.json', errors='ignore')
+      when:
+        - ansible_os_family != "Darwin"
+        - not lookup('file', docker_config_dir + '/config.json', errors='ignore')
 
     - name: Add user to docker group
       become: true
@@ -56,9 +61,11 @@
         name: "{{ username }}"
         groups: docker
         append: yes
+      when: ansible_os_family != "Darwin"
 
     - name: Generate locale
       become: true
+      when: ansible_os_family != "Darwin"
       block:
         - name: Generate locale
           command: "locale-gen en_US.UTF-8"
@@ -85,6 +92,7 @@
         - { path: "/home/{{username}}/work", mode: "0755" }
         - { path: "/run/user/{{user_id}}", mode: "0700" }
         - { path: "/run/user/{{user_id}}/gnupg", mode: "0700" }
+      when: ansible_os_family != "Darwin"
 
     - name: Create tmp directories
       become: true
@@ -96,11 +104,13 @@
         mode: "{{ item.mode }}"
       loop:
         - { path: "/tmp/uscreens", mode: "1777" }
+      when: ansible_os_family != "Darwin"
 
     - name: Delete ansible files from ~/.local/bin
       become: false
       ansible.builtin.shell: |
         rm -f /home/{{ username }}/.local/bin/ansible*
+      when: ansible_os_family != "Darwin"
 
     - name: Find full path to mise tool
       become: false
@@ -130,7 +140,7 @@
       file:
         state: directory
         owner: root
-        group: root
+        group: "{{ 'wheel' if ansible_os_family == 'Darwin' else 'root' }}"
         path: "/usr/local/bin"
         mode: "0755"
     - name: Create symlinks in /usr/local/bin
