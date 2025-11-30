@@ -70,6 +70,17 @@ def hide_streamlit_controls():
     """Hide streamlit controls at the top"""
     hide_menu = """
         <style>
+        div.stMainBlockContainer {
+            margin: 0 !important;
+            padding: 0 !important;
+            padding-left: 15px !important;
+            padding-right: 10px !important;
+        }
+
+        header.stAppHeader {
+            display: none !important;
+            visibility: hidden !important;
+        }
         </style>
         """
     st.markdown(hide_menu, unsafe_allow_html=True)
