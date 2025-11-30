@@ -42,10 +42,6 @@ st.set_page_config(
 )
 
 
-"""
-# Seattle Weather
-"""
-
 with st.container(horizontal=True, gap="medium"):
     cols = st.columns(2, gap="medium", width=300)
 
@@ -74,9 +70,6 @@ with st.container(horizontal=True, gap="medium"):
             "Least common weather",
             f"{weather_icons[weather_name]} {weather_name.upper()}",
         )
-
-""
-""
 
 """
 ## Compare different years
