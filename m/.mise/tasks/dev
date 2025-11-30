@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+
+#MISE description="Run dev process based on current directory type"
+#MISE raw=true
+
+cd "${MISE_ORIGINAL_CWD}"
+
+# Check for Streamlit application (app.py exists)
+if [[ -f app.py ]]; then
+	uv sync && exec ./app.py
+	exit $?
+fi
+
+# Check for Go files (*.go exists)
+if compgen -G "*.go" >/dev/null; then
+	exec go run . "$(basename "$(pwd)")" "$@"
+	exit $?
+fi
+
+# Fallback error message
+echo "Error: No recognized development project found in $(pwd)" >&2
+echo "Supported project types:" >&2
+echo "  - Streamlit: app.py" >&2
+echo "  - Go: *.go files" >&2
+exit 1

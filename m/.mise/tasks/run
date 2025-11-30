@@ -1,6 +1,0 @@
-#!/usr/bin/env bash
-
-#MISE description="Wrapper for go run and defn cli conventions"
-
-cd "${MISE_ORIGINAL_CWD}"
-exec go run . "$(basename "$(pwd)")" "$@"

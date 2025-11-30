@@ -133,7 +133,20 @@ fi
 # aliases
 function m {
 	if [[ $# -gt 0 ]]; then
-		mise run "$@"
+		case "$1" in
+		--)
+			shift
+			mise run default -- "$@"
+			;;
+		--*)
+			mise run default -- "$@"
+			;;
+		*)
+			local cmd="$1"
+			shift
+			mise run "${cmd}" -- "$@"
+			;;
+		esac
 	else
 		mise run default
 	fi

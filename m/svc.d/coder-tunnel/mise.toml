@@ -1,2 +1,7 @@
 [tools]
 cloudflared = "2025.11.1"
+
+[tasks.default]
+dir = "{{cwd}}"
+run = "mise run dev -- \"$@\""
+raw = true

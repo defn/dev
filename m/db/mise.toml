@@ -6,3 +6,8 @@ atlas = "0.38.0"
 [env]
 DATABASE_URL = "sqlite://./river.sqlite3"
 PORT = "8181"
+
+[tasks.default]
+dir = "{{cwd}}"
+run = "mise run dev -- \"$@\""
+raw = true

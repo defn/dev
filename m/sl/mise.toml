@@ -1,4 +1,4 @@
 [tasks.default]
-description = "Run the Streamlit login app on port 3001"
 dir = "{{cwd}}"
-run = "uv sync && ./app.py"
+run = "mise run dev -- \"$@\""
+raw = true
