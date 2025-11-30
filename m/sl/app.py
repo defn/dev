@@ -21,6 +21,9 @@ from datetime import datetime
 # Import Altair - a declarative visualization library for creating interactive charts
 import altair as alt
 
+# Import Polars - a fast DataFrame library built on Apache Arrow
+import polars as pl
+
 # Import Streamlit - the web framework that lets you build data apps quickly
 import streamlit as st
 
@@ -42,12 +45,13 @@ def main():
     4. Let users filter by year
     5. Display various weather visualizations
     """
-    # Load the Seattle weather dataset into a pandas DataFrame
+    # Load the Seattle weather dataset into a Polars DataFrame
     # This contains daily weather measurements from Seattle
-    full_df = vega_datasets.data("seattle_weather")
+    # vega_datasets returns pandas, so we convert to Polars for better performance
+    df = pl.from_pandas(vega_datasets.data("seattle_weather"))
 
     # Get weather icons dictionary
-    weather_icons = get_weather_icons()
+    wi = get_weather_icons()
 
     # hide streamlit controls
     hide_streamlit_controls()
@@ -56,15 +60,16 @@ def main():
     display_sample_badges()
 
     # Show metrics for most/least common weather
-    display_weather_metrics(full_df, weather_icons)
+    display_weather_metrics(df, wi)
 
     # Get filtered data based on user's year selection
-    filtered_df = get_filtered_data_by_year(full_df)
+    filtered_df = get_filtered_data_by_year(df)
 
     # Display all the weather visualization charts
     display_temperature_and_distribution(filtered_df)
     display_wind_and_precipitation(filtered_df)
     display_monthly_breakdown_and_raw_data(filtered_df)
+
 
 def hide_streamlit_controls():
     """Hide streamlit controls at the top"""
@@ -84,6 +89,7 @@ def hide_streamlit_controls():
         </style>
         """
     st.markdown(hide_menu, unsafe_allow_html=True)
+
 
 def get_weather_icons():
     """Return a dictionary mapping weather types to emoji icons."""
@@ -109,13 +115,13 @@ def display_sample_badges():
     )
 
 
-def display_weather_metrics(df, weather_icons):
+def display_weather_metrics(df, wi):
     """
     Display metrics showing the most and least common weather types.
 
     Args:
         df: DataFrame containing weather data
-        weather_icons: Dictionary mapping weather types to emoji icons
+        wi: Dictionary mapping weather types to emoji icons
     """
     # Create a horizontal container to display metrics side by side
     with st.container(horizontal=True, gap="medium"):
@@ -124,26 +130,32 @@ def display_weather_metrics(df, weather_icons):
 
         # Display the most common weather type in the first column
         with cols[0]:
-            # value_counts() counts how many times each weather type appears
-            # head(1) gets the top result, reset_index() converts to DataFrame
+            # group_by + len counts how many times each weather type appears
+            # sort descending and take the first row to get the most common
             weather_name = (
-                df["weather"].value_counts().head(1).reset_index()["weather"][0]
+                df.group_by("weather")
+                .agg(pl.len().alias("count"))
+                .sort("count", descending=True)
+                .head(1)["weather"][0]
             )
             # st.metric displays a key metric with a label and value
             st.metric(
                 "Most common weather",
-                f"{weather_icons[weather_name]} {weather_name.upper()}",
+                f"{wi[weather_name]} {weather_name.upper()}",
             )
 
         # Display the least common weather type in the second column
         with cols[1]:
-            # tail(1) gets the bottom result (least common)
+            # Sort ascending to get the least common weather type
             weather_name = (
-                df["weather"].value_counts().tail(1).reset_index()["weather"][0]
+                df.group_by("weather")
+                .agg(pl.len().alias("count"))
+                .sort("count", descending=False)
+                .head(1)["weather"][0]
             )
             st.metric(
                 "Least common weather",
-                f"{weather_icons[weather_name]} {weather_name.upper()}",
+                f"{wi[weather_name]} {weather_name.upper()}",
             )
 
 
@@ -163,8 +175,9 @@ def get_filtered_data_by_year(df):
     """
 
     # Extract unique years from the dataset
-    # .dt.year accesses the year from datetime column, .unique() gets distinct values
-    years = df["date"].dt.year.unique()
+    # .dt.year() accesses the year from datetime column, .unique() gets distinct values
+    # sort() ensures years are in order
+    years = df.select(pl.col("date").dt.year()).unique().sort("date")["date"].to_list()
 
     # st.pills creates a multi-select button group for choosing years
     # Users can select multiple years to compare side-by-side
@@ -177,8 +190,8 @@ def get_filtered_data_by_year(df):
         st.warning("You must select at least 1 year.", icon=":material/warning:")
 
     # Filter the dataset to only include the selected years
-    # .isin() checks if the year is in the selected_years list
-    return df[df["date"].dt.year.isin(selected_years)]
+    # .is_in() checks if the year is in the selected_years list
+    return df.filter(pl.col("date").dt.year().is_in(selected_years))
 
 
 def display_temperature_and_distribution(df):
