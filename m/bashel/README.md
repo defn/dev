@@ -1,10 +1,64 @@
-# CUE-to-Bazel Build Generation
+# BASHEL: Bazel And SHell Execution Layer
 
-This directory demonstrates a declarative approach to generating Bazel BUILD files using CUE as a configuration language and template engine.
+**BASHEL** is a system for integrating bash scripts with Bazel's build system, demonstrating patterns for building, packaging, and composing shell-based tools in a monorepo.
+
+This directory contains:
+
+1. **Example projects** showing progressive patterns for bash-Bazel integration
+2. **CUE-to-Bazel generator** for declaratively generating BUILD files from configuration
+
+## Example Projects
+
+### [ex-genrule](ex-genrule/) - Direct Genrule Invocations
+
+Basic examples of using bash scripts with `lib.sh` in genrule targets. Scripts accept named arguments and follow a standardized pattern.
+
+**Key concepts:**
+
+- Organizing scripts in subdirectories
+- Using lib.sh for argument parsing
+- Direct genrule invocations with `$(location)` syntax
+
+### [ex-macros](ex-macros/) - Reusable Starlark Macros
+
+Starlark macros that wrap bash scripts for reusability across the monorepo. Hides genrule boilerplate behind user-friendly interfaces.
+
+**Key concepts:**
+
+- Wrapping scripts in macros
+- Auto-adding dependencies (lib.sh)
+- Creating reusable build abstractions
+
+### [ex-build](ex-build/) - Composing at Scale
+
+A realistic client that imports and composes tools from ex-genrule and ex-macros, demonstrating how to build complex workflows by composing reusable components.
+
+**Key concepts:**
+
+- Cross-package imports
+- Dependency graph composition
+- Real-world build pipelines
+
+## CUE-to-Bazel Build Generation
+
+The root directory contains a declarative system for generating Bazel BUILD files using CUE as a configuration language.
 
 **Status**: Fully implemented. The [BUILD.bazel](BUILD.bazel) file is generated from [bazel.cue](bazel.cue) and [build.cue](build.cue).
 
-## The Problem This Solves
+## Learning Path
+
+If you're new to BASHEL, explore the examples in order:
+
+1. **Start with [ex-genrule](ex-genrule/)** - Learn the basic pattern of bash scripts in genrules
+2. **Move to [ex-macros](ex-macros/)** - See how to wrap scripts in reusable macros
+3. **Study [ex-build](ex-build/)** - Understand composition and real-world usage
+4. **Explore the CUE generator** (below) - See how to generate BUILD files declaratively
+
+---
+
+## CUE-to-Bazel Generator Documentation
+
+### The Problem This Solves
 
 Writing Bazel BUILD files by hand is repetitive and error-prone. When you have patterns that repeat across many targets—like normalizing configuration files, creating archive bundles, or generating reports—you end up with hundreds of lines of nearly-identical Starlark code. More importantly, the high-level intent (what you're trying to accomplish) gets obscured by low-level Bazel syntax.
 
@@ -14,11 +68,11 @@ This example shows how to use CUE to:
 - Generate consistent, correct BUILD files from declarative models
 - Separate "what to build" from "how Bazel should build it"
 
-## Architecture Overview
+### Architecture Overview
 
 The system has three layers split across two files:
 
-### Layer 1: Schema Definitions
+#### Layer 1: Schema Definitions
 
 **Basic types** (`bazel.cue`): Fundamental building blocks for Bazel concepts:
 
@@ -34,7 +88,7 @@ The system has three layers split across two files:
 
 These types describe _what_ you want to build in business terms, not _how_ Bazel will build it. For example, you don't think about `genrule` attributes; you think about "I have raw config files that need normalization."
 
-### Layer 2: Concrete Instance (`build.cue`)
+#### Layer 2: Concrete Instance (`build.cue`)
 
 The same file that defines the `#Model` schema also creates a concrete instance with actual values:
 
@@ -60,7 +114,7 @@ m: #Model & {
 
 Notice how readable this is. It's declarative data, not imperative code. You're describing _what_ the build produces, not scripting _how_ to produce it. The intent is crystal clear: "We have three raw config files, we normalize them, we bundle them for production and staging environments."
 
-### Layer 3: Transform and Render (`bazel.cue`)
+#### Layer 3: Transform and Render (`bazel.cue`)
 
 The transformation layer converts the high-level model into normalized Bazel target representations:
 
@@ -81,9 +135,9 @@ The transformation layer converts the high-level model into normalized Bazel tar
 
 The final `BUILD` field contains the complete generated BUILD file text.
 
-## Why This "Weird Combination" Works
+### Why This "Weird Combination" Works
 
-### CUE's Strengths
+#### CUE's Strengths
 
 CUE (Configure Unify Execute) is designed for configuration and data validation. It excels at:
 
@@ -95,7 +149,7 @@ CUE (Configure Unify Execute) is designed for configuration and data validation.
 
 4. **Computed Values**: CUE naturally handles derived data. The `t_norm_group.srcs` field automatically computes its value from `t_norm` targets without manual bookkeeping.
 
-### Why Not Just Write Starlark Macros?
+#### Why Not Just Write Starlark Macros?
 
 You might ask: "Why not just write Bazel macros?" Several reasons:
 
@@ -109,7 +163,7 @@ You might ask: "Why not just write Bazel macros?" Several reasons:
 
 5. **Separation of Concerns**: The model (what to build), schema (what's valid), and rendering (Bazel syntax) are cleanly separated. Each can evolve independently.
 
-## How the Magic Happens
+### How the Magic Happens
 
 Let's trace a single configuration file through the system:
 
@@ -141,7 +195,7 @@ Let's trace a single configuration file through the system:
 
 6. **Output**: The final `BUILD` field contains valid, formatted Bazel BUILD file text that's written to `BUILD.bazel`.
 
-## The Power of Comprehensions
+### The Power of Comprehensions
 
 CUE comprehensions are the secret sauce. They let you write once and generate many:
 
@@ -159,7 +213,7 @@ t_norm: [
 
 This single block generates as many genrules as you have normalization steps. Add another config file to the model, and another genrule appears automatically. No copy-paste, no manual updates to multiple locations.
 
-## The Intermediate Representation
+### The Intermediate Representation
 
 The key insight is the intermediate representation (IR). The transforms don't directly generate Starlark strings. Instead, they generate structured data:
 
@@ -176,7 +230,7 @@ The key insight is the intermediate representation (IR). The transforms don't di
 
 This IR is easier to manipulate, validate, and transform than raw text. Only at the final step does `renderGenrule` convert it to Starlark syntax.
 
-## Extending the System
+### Extending the System
 
 Want to add a new build pattern? You'd:
 
@@ -236,7 +290,7 @@ Want to add a new build pattern? You'd:
 
 The rest happens automatically. The existing comprehensions that build the `targets` list and render output will pick up your new pattern.
 
-## Practical Benefits
+### Practical Benefits
 
 This approach delivers several practical advantages:
 
@@ -252,7 +306,7 @@ This approach delivers several practical advantages:
 
 6. **Composition**: Models can be composed. You could split the model across multiple files, or import common patterns from a shared library.
 
-## When to Use This
+### When to Use This
 
 This approach shines when:
 
@@ -268,38 +322,43 @@ It's overkill when:
 - The team is small and Bazel-fluent
 - Patterns don't repeat often enough to justify abstraction
 
-## File Organization
+### File Organization
 
-The system uses two CUE files with clear separation of concerns:
+The system uses CUE files organized into packages with clear separation of concerns:
 
-- **`bazel.cue`**: The transformation engine
+- **`bazel/bazel.cue`**: The transformation engine (reusable package)
   - Basic schema types (#Label, #CfgFile, #NormalizeStep, #Bundle, #Info)
-  - Transformation logic (t_raw, t_norm, t_reports, t_bundles, t_infos, t_all)
   - Rendering functions (renderGenrule, renderFilegroup, renderArchiveDir, renderArchiveInfo)
+  - Package: `github.com/defn/bashel/bazel`
+
+- **`build.cue`**: The declarative model and transformation logic
+  - Imports the bazel package: `import "github.com/defn/bashel/bazel"`
+  - #Model schema definition (what fields are valid, using bazel package types)
+  - Concrete instance `m` (actual values for this build)
+  - Transformation logic (t_raw, t_norm, t_reports, t_bundles, t_infos, t_all)
   - Final BUILD output field
 
-- **`build.cue`**: The declarative model
-  - #Model schema definition (what fields are valid)
-  - Concrete instance `m` (actual values for this build)
+- **`cue.mod/`**: CUE module configuration
+  - Defines the module path for package imports
 
-This separation means the transformation engine (`bazel.cue`) is reusable across projects. Only `build.cue` changes for different build configurations.
+This separation means the transformation engine (`bazel/bazel.cue`) is a reusable package that can be imported from other CUE projects. Only `build.cue` changes for different build configurations.
 
-## Running the Generator
+### Running the Generator
 
 To regenerate `BUILD.bazel` from the CUE files:
 
 ```bash
-cd bashel/ex
-cue export --out text -e BUILD bazel.cue build.cue > BUILD.bazel
+cd bashel
+cue export --out text -e BUILD build.cue > BUILD.bazel
 ```
 
-The `-e BUILD` flag selects the `BUILD` field from `bazel.cue` as output, and `--out text` produces raw text instead of JSON/YAML.
+The CUE module system automatically finds and imports the `bazel` package from `bazel/bazel.cue`. The `-e BUILD` flag selects the `BUILD` field from `build.cue` as output, and `--out text` produces raw text instead of JSON/YAML.
 
 The generated BUILD file includes a header comment `# auto-generated: bazel.cue` to indicate its origin and discourage manual edits.
 
 In practice, you'd integrate this into your build process, perhaps as a genrule that validates the BUILD file matches the CUE source, or as a pre-commit hook that regenerates BUILD files.
 
-## The Weird Beauty
+### The Weird Beauty
 
 Yes, it's weird to use a configuration language to generate build system code. But it's the _right_ kind of weird. CUE's constraint-based type system, structural typing, and data-oriented design make it surprisingly natural for code generation tasks.
 

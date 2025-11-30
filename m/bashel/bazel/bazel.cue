@@ -1,7 +1,7 @@
-// build_client.cue
-// High-level model -> normalized Bazel rule set -> rendered BUILD text
+// bazel.cue
+// Bazel build generation engine: schemas, renderers, and transformation logic
 
-package buildclient
+package bazel
 
 import ( "strings"
 
@@ -34,111 +34,7 @@ import ( "strings"
 	archive: #Label
 }
 
-// ---------------- Templates  ----------------
-
-t_loads: [
-	for l in m.loads {
-		kind: "load"
-		l
-	},
-]
-
-t_raw: {
-	kind: "genrule"
-	name: "raw_configs"
-	outs: [for f in m.rawFiles {f.path}]
-	_echos: [for f in m.rawFiles {"echo '\(f.content)' > $(@D)/\(f.path)"}]
-	_echosJoined: strings.Join(_echos, "\n")
-	cmd:          """
-mkdir -p $(@D)/raw
-\(_echosJoined)
-"""
-}
-
-t_norm: [
-	for i, n in m.normalize {
-		{
-			kind: "genrule"
-			name: "normalized_\(m.rawFiles[i].name)_conf"
-			srcs: [n.from]
-			outs: [n.out]
-			cmd: """
-set -- $(locations \(n.from))
-$(location \(m.tools.uppercase)) input=$$\(n.index) $@
-"""
-			tools: [m.tools.uppercase, m.tools.lib]
-		}
-	},
-]
-
-t_norm_group: {
-	kind: "filegroup"
-	name: "normalized_configs"
-	srcs: [
-		for r in t_norm {":\(r.name)"},
-	]
-}
-
-t_reports: [
-	for r in m.sizeReports {
-		{
-			kind: "genrule"
-			name: r.name
-			srcs: [r.src]
-			outs: [r.out]
-			cmd: "$(location \(m.tools.wordcount)) input=$(location \(r.src)) $@"
-			tools: [m.tools.wordcount, m.tools.lib]
-		}
-	},
-]
-
-t_bundles: [
-	for b in m.bundles {
-		{
-			kind:   "macro.archive_directory"
-			name:   b.name
-			dir:    b.srcs
-			prefix: b.prefix
-		}
-	},
-]
-
-t_infos: [
-	for inf in m.infos {
-		{
-			kind:    "macro.archive_info"
-			name:    inf.name
-			archive: inf.archive
-		}
-	},
-]
-
-t_all: {
-	kind: "filegroup"
-	name: m.all.name
-	srcs: m.all.srcs
-}
-
-targets: [
-	for x in t_loads {x},
-	t_raw,
-	for x in t_norm {x},
-	t_norm_group,
-	for x in t_reports {x},
-	for x in t_bundles {x},
-	for x in t_infos {x},
-	t_all,
-]
-
 // ----------------- Renderers ------------------
-
-_render: {
-	"load":                    renderLoad
-	"genrule":                 renderGenrule
-	"filegroup":               renderFilegroup
-	"macro.archive_directory": renderArchiveDir
-	"macro.archive_info":      renderArchiveInfo
-}
 
 #q: {
 	#in: string
@@ -269,16 +165,26 @@ archive_info(
 """
 }
 
-// ----------------- Rendering to BUILD ------------------
+renderShTest: {
+	#in: {
+		name: string
+		srcs: [...string]
+		data: [...string]
+		...
+	}
+	_srcsItems: [for s in #in.srcs {"        \"\(s)\",\n"}]
+	_srcsJoined: strings.Join(_srcsItems, "")
+	_srcsList:   "[\n\(_srcsJoined)    ]"
 
-_targets: [
-	for t in targets {
-		(_render[t.kind] & {#in: t}).out
-	},
-]
+	_dataItems: [for d in #in.data {"        \"\(d)\",\n"}]
+	_dataJoined: strings.Join(_dataItems, "")
+	_dataList:   "[\n\(_dataJoined)    ]"
 
-BUILD: """
-# auto-generated: bazel.cue
-
-\(strings.Join(_targets, "\n"))
+	out: """
+sh_test(
+  name = "\(#in.name)",
+  srcs = \(_srcsList),
+  data = \(_dataList),
+)
 """
+}

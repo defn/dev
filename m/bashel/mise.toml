@@ -1,8 +1,9 @@
 [tasks.default]
 description = "Generate BUILD.bazel from CUE files"
 run = """
-cue export --out text -e BUILD bazel.cue build.cue > BUILD.bazel
+cue export --out text -e BUILD > BUILD.bazel
 trunk fmt .
-buildifier BUILD.bazel
 b build
+echo
+b test
 """

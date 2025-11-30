@@ -134,7 +134,9 @@ filegroup(
 
 sh_test(
     name = "test",
-    srcs = ["test.sh"],
+    srcs = [
+        "test.sh",
+    ],
     data = [
         ":all_outputs",
         "//bashel/ex-genrule:uppercase_sh",
