@@ -5,11 +5,13 @@ Buildkite CI/CD pipeline configuration for automated builds and deployments.
 ## Contents
 
 ### Pipeline Configuration
+
 - **pipeline.yml** - Generated Buildkite pipeline YAML configuration
 - **pipeline.cue** - CUE source for pipeline configuration
 - **kubernetes.cue** - Kubernetes deployment configuration in CUE
 
 ### Build Automation
+
 - **Makefile** - Pipeline generation and GitHub integration
   - `all` - Generate pipeline.yml and show GitHub diff
   - `pipeline.yml` - Generate YAML from CUE configuration
