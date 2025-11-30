@@ -229,6 +229,7 @@ bin/devcontainer
 .sommelierrc
 .minikube
 *.lock
+!uv.lock
 !flake.lock
 /bazel*
 .env*

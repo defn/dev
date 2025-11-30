@@ -1,2 +1,28 @@
 [server]
 port = 3001
+
+[browser]
+gatherUsageStats = false
+
+[theme]
+base = "light"
+
+# General color setup
+textColor = "#1c1919"
+primaryColor = "#00d492"
+backgroundColor = "#fafafa"
+secondaryBackgroundColor = "#ffffff"
+
+# Widgets
+showWidgetBorder = true
+borderColor = "#e7e3e4"
+
+# Base text
+font = "'Open Sans':https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"
+baseFontWeight = 400
+baseFontSize = 14
+
+# Heading text
+headingFont = "'Open Sans':https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"
+headingFontWeights = [600, 300, 600]
+headingFontSizes = ["3rem", "2rem", "1rem"]
