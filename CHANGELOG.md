@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.52.0](https://github.com/defn/dev/compare/v1.51.0...v1.52.0) (2025-11-30)
+
+
+### Features
+
+* **turbo:** add dev task for running dev servers ([36ba489](https://github.com/defn/dev/commit/36ba4897e592930054e8ee99539372a29ae3fdf8))
+
+
+### Bug Fixes
+
+* **pb:** make fixup.yaml compatible with macOS ([4bfc516](https://github.com/defn/dev/commit/4bfc516c4f4e2be3c3875da33fccf4ba2dcc1b3e))
+
 ## [1.51.0](https://github.com/defn/dev/compare/v1.50.0...v1.51.0) (2025-11-29)
 
 
