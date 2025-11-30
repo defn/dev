@@ -1,0 +1,4 @@
+[tasks.default]
+dir = "{{cwd}}"
+run = "mise run dev -- \"$@\""
+raw = true
