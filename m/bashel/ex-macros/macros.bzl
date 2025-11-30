@@ -9,7 +9,7 @@ def archive_directory(name, dir, prefix = None, visibility = None):
         prefix: Prefix for files in archive (default: archive)
         visibility: Target visibility
     """
-    script = Label("//b/ex-macros:create_archive_sh")
+    script = Label("//bashel/ex-macros:create_archive_sh")
 
     prefix_arg = "prefix={}".format(prefix) if prefix else "prefix=archive"
 
@@ -37,7 +37,7 @@ def archive_info(name, archive, visibility = None):
         archive: Archive file to inspect
         visibility: Target visibility
     """
-    script = Label("//b/ex-macros:list_archive_sh")
+    script = Label("//bashel/ex-macros:list_archive_sh")
 
     native.genrule(
         name = name,

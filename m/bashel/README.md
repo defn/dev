@@ -9,6 +9,7 @@ This directory demonstrates a declarative approach to generating Bazel BUILD fil
 Writing Bazel BUILD files by hand is repetitive and error-prone. When you have patterns that repeat across many targets—like normalizing configuration files, creating archive bundles, or generating reports—you end up with hundreds of lines of nearly-identical Starlark code. More importantly, the high-level intent (what you're trying to accomplish) gets obscured by low-level Bazel syntax.
 
 This example shows how to use CUE to:
+
 - Define reusable build patterns at a higher level of abstraction
 - Generate consistent, correct BUILD files from declarative models
 - Separate "what to build" from "how Bazel should build it"
@@ -20,6 +21,7 @@ The system has three layers split across two files:
 ### Layer 1: Schema Definitions
 
 **Basic types** (`bazel.cue`): Fundamental building blocks for Bazel concepts:
+
 - `#Label`: Bazel label validation (must match `^(:|//).+`)
 - `#CfgFile`: A configuration file with a name, path, and content
 - `#NormalizeStep`: A transformation that processes raw files into normalized ones
@@ -27,9 +29,10 @@ The system has three layers split across two files:
 - `#Info`: Metadata extraction from archives
 
 **Model schema** (`build.cue`): The complete build specification container:
+
 - `#Model`: Defines the structure for tools, loads, rawFiles, normalize steps, bundles, infos, and aggregated outputs
 
-These types describe *what* you want to build in business terms, not *how* Bazel will build it. For example, you don't think about `genrule` attributes; you think about "I have raw config files that need normalization."
+These types describe _what_ you want to build in business terms, not _how_ Bazel will build it. For example, you don't think about `genrule` attributes; you think about "I have raw config files that need normalization."
 
 ### Layer 2: Concrete Instance (`build.cue`)
 
@@ -55,7 +58,7 @@ m: #Model & {
 }
 ```
 
-Notice how readable this is. It's declarative data, not imperative code. You're describing *what* the build produces, not scripting *how* to produce it. The intent is crystal clear: "We have three raw config files, we normalize them, we bundle them for production and staging environments."
+Notice how readable this is. It's declarative data, not imperative code. You're describing _what_ the build produces, not scripting _how_ to produce it. The intent is crystal clear: "We have three raw config files, we normalize them, we bundle them for production and staging environments."
 
 ### Layer 3: Transform and Render (`bazel.cue`)
 
@@ -88,7 +91,7 @@ CUE (Configure Unify Execute) is designed for configuration and data validation.
 
 2. **Unification**: CUE's constraint-based type system means you can define what's valid once, and all instances must conform. No need to manually validate that every genrule has required fields.
 
-3. **Template-Free Templating**: Unlike traditional template languages (Jinja, Mustache), CUE doesn't have the template/data split. The data *is* the program. You manipulate structures with comprehensions and constraints, not string interpolation.
+3. **Template-Free Templating**: Unlike traditional template languages (Jinja, Mustache), CUE doesn't have the template/data split. The data _is_ the program. You manipulate structures with comprehensions and constraints, not string interpolation.
 
 4. **Computed Values**: CUE naturally handles derived data. The `t_norm_group.srcs` field automatically computes its value from `t_norm` targets without manual bookkeeping.
 
@@ -111,6 +114,7 @@ You might ask: "Why not just write Bazel macros?" Several reasons:
 Let's trace a single configuration file through the system:
 
 1. **Declaration** (`build.cue`): You declare a raw file:
+
    ```cue
    { name: "app", path: "raw/app.conf", content: "application configuration settings" }
    ```
@@ -165,8 +169,8 @@ The key insight is the intermediate representation (IR). The transforms don't di
   name: "config_size_report"
   srcs: [":normalized_app_conf"]
   outs: ["reports/app_size.txt"]
-  cmd: "$(location //b/ex-genrule:word_count_sh) input=$(location :normalized_app_conf) $@"
-  tools: ["//b/ex-genrule:word_count_sh", "//b/lib:lib_sh"]
+  cmd: "$(location //bashel/ex-genrule:word_count_sh) input=$(location :normalized_app_conf) $@"
+  tools: ["//bashel/ex-genrule:word_count_sh", "//b/lib:lib_sh"]
 }
 ```
 
@@ -177,6 +181,7 @@ This IR is easier to manipulate, validate, and transform than raw text. Only at 
 Want to add a new build pattern? You'd:
 
 1. **Extend the Schema** (`build.cue`): Add a new field to the `#Model` definition:
+
    ```cue
    #Model: {
      // ... existing fields
@@ -188,6 +193,7 @@ Want to add a new build pattern? You'd:
    ```
 
 2. **Add a Transform** (`bazel.cue`): Create a new target list:
+
    ```cue
    t_tests: [
      for t in m.testSuites {
@@ -201,6 +207,7 @@ Want to add a new build pattern? You'd:
    ```
 
 3. **Add a Renderer** (`bazel.cue`): Implement the rendering function:
+
    ```cue
    renderTest: {
      #in: { name: string, srcs: [...string] }
@@ -209,6 +216,7 @@ Want to add a new build pattern? You'd:
    ```
 
 4. **Update the targets list** (`bazel.cue`): Add to the aggregated targets:
+
    ```cue
    targets: [
      // ... existing targets
@@ -238,7 +246,7 @@ This approach delivers several practical advantages:
 
 3. **Refactoring**: Want to change how all normalized files are named? Update one line in `t_norm`. The change propagates everywhere.
 
-4. **Documentation**: The schema *is* documentation. Want to know what fields a bundle supports? Look at `#Bundle`. It's enforced by the type system.
+4. **Documentation**: The schema _is_ documentation. Want to know what fields a bundle supports? Look at `#Bundle`. It's enforced by the type system.
 
 5. **Testing**: You can validate the model without running Bazel. CUE's constraint system catches many errors at generation time.
 
@@ -255,6 +263,7 @@ This approach shines when:
 - Build configuration is itself configuration (meta!)
 
 It's overkill when:
+
 - You have a handful of unique, simple targets
 - The team is small and Bazel-fluent
 - Patterns don't repeat often enough to justify abstraction
@@ -280,7 +289,7 @@ This separation means the transformation engine (`bazel.cue`) is reusable across
 To regenerate `BUILD.bazel` from the CUE files:
 
 ```bash
-cd b/ex
+cd bashel/ex
 cue export --out text -e BUILD bazel.cue build.cue > BUILD.bazel
 ```
 
@@ -292,7 +301,7 @@ In practice, you'd integrate this into your build process, perhaps as a genrule 
 
 ## The Weird Beauty
 
-Yes, it's weird to use a configuration language to generate build system code. But it's the *right* kind of weird. CUE's constraint-based type system, structural typing, and data-oriented design make it surprisingly natural for code generation tasks.
+Yes, it's weird to use a configuration language to generate build system code. But it's the _right_ kind of weird. CUE's constraint-based type system, structural typing, and data-oriented design make it surprisingly natural for code generation tasks.
 
 The weirdness comes from breaking free of traditional thinking about build systems. Instead of writing build code, you're declaring build intent. Instead of scripting how targets relate, you're describing what relationships exist. The CUE system figures out the how.
 

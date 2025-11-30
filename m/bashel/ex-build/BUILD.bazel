@@ -1,12 +1,12 @@
 # Example: Build client that composes genrules and macros from other examples
 #
 # This demonstrates importing and using:
-# - Genrules from //b/ex-genrule (uppercase, word_count)
-# - Macros from //b/ex-macros (archive_directory, archive_info)
+# - Genrules from //bashel/ex-genrule (uppercase, word_count)
+# - Macros from //bashel/ex-macros (archive_directory, archive_info)
 #
 # Realistic workflow: Build configs, normalize them, bundle for deployment
 
-load("//b/ex-macros:macros.bzl", "archive_directory", "archive_info")
+load("//bashel/ex-macros:macros.bzl", "archive_directory", "archive_info")
 
 # === Create raw config files ===
 
@@ -34,11 +34,11 @@ genrule(
     outs = ["normalized/app.conf"],
     cmd = """
         set -- $(locations :raw_configs)
-        $(location //b/ex-genrule:uppercase_sh) input=$$1 $@
+        $(location //bashel/ex-genrule:uppercase_sh) input=$$1 $@
     """,
     tools = [
-        "//b/ex-genrule:uppercase_sh",
         "//b/lib:lib_sh",
+        "//bashel/ex-genrule:uppercase_sh",
     ],
 )
 
@@ -48,11 +48,11 @@ genrule(
     outs = ["normalized/database.conf"],
     cmd = """
         set -- $(locations :raw_configs)
-        $(location //b/ex-genrule:uppercase_sh) input=$$2 $@
+        $(location //bashel/ex-genrule:uppercase_sh) input=$$2 $@
     """,
     tools = [
-        "//b/ex-genrule:uppercase_sh",
         "//b/lib:lib_sh",
+        "//bashel/ex-genrule:uppercase_sh",
     ],
 )
 
@@ -62,11 +62,11 @@ genrule(
     outs = ["normalized/cache.conf"],
     cmd = """
         set -- $(locations :raw_configs)
-        $(location //b/ex-genrule:uppercase_sh) input=$$3 $@
+        $(location //bashel/ex-genrule:uppercase_sh) input=$$3 $@
     """,
     tools = [
-        "//b/ex-genrule:uppercase_sh",
         "//b/lib:lib_sh",
+        "//bashel/ex-genrule:uppercase_sh",
     ],
 )
 
@@ -86,10 +86,10 @@ genrule(
     name = "config_size_report",
     srcs = [":normalized_app_conf"],
     outs = ["reports/app_size.txt"],
-    cmd = "$(location //b/ex-genrule:word_count_sh) input=$(location :normalized_app_conf) $@",
+    cmd = "$(location //bashel/ex-genrule:word_count_sh) input=$(location :normalized_app_conf) $@",
     tools = [
-        "//b/ex-genrule:word_count_sh",
         "//b/lib:lib_sh",
+        "//bashel/ex-genrule:word_count_sh",
     ],
 )
 

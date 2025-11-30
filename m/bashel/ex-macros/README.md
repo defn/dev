@@ -42,16 +42,16 @@ Macros hide the genrule boilerplate:
 
 ```bash
 # Build archive
-bazel build //b/ex-macros:my_archive
+bazel build //bashel/ex-macros:my_archive
 
 # View archive contents
-tar tzf bazel-bin/b/ex-macros/my_archive.tar.gz
+tar tzf bazel-bin/bashel/ex-macros/my_archive.tar.gz
 
 # Build metadata
-bazel build //b/ex-macros:archive_metadata
+bazel build //bashel/ex-macros:archive_metadata
 
 # View metadata
-cat bazel-bin/b/ex-macros/archive_metadata.txt
+cat bazel-bin/bashel/ex-macros/archive_metadata.txt
 ```
 
 ## Benefits of Macros

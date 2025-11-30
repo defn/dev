@@ -35,15 +35,15 @@ Each genrule:
 
 ```bash
 # Build individual outputs
-bazel build //b/ex-genrule:uppercase_output
-bazel build //b/ex-genrule:word_count_output
+bazel build //bashel/ex-genrule:uppercase_output
+bazel build //bashel/ex-genrule:word_count_output
 
 # Build chained pipeline
-bazel build //b/ex-genrule:chained_output
+bazel build //bashel/ex-genrule:chained_output
 
 # View outputs
-cat bazel-bin/b/ex-genrule/uppercase.txt
-cat bazel-bin/b/ex-genrule/word_count.txt
+cat bazel-bin/bashel/ex-genrule/uppercase.txt
+cat bazel-bin/bashel/ex-genrule/word_count.txt
 ```
 
 ## Key Pattern

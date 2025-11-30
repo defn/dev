@@ -2,8 +2,8 @@
 
 This demonstrates a realistic config build workflow by **importing and composing** tools from other examples:
 
-- **Genrules from [//b/ex-genrule](../ex-genrule/)**: `uppercase.sh`, `word_count.sh`
-- **Macros from [//b/ex-macros](../ex-macros/)**: `archive_directory()`, `archive_info()`
+- **Genrules from [//bashel/ex-genrule](../ex-genrule/)**: `uppercase.sh`, `word_count.sh`
+- **Macros from [//bashel/ex-macros](../ex-macros/)**: `archive_directory()`, `archive_info()`
 
 **No scripts defined here** - this is a pure client showing how to use the bash-to-Bazel system at scale.
 
@@ -11,13 +11,13 @@ This demonstrates a realistic config build workflow by **importing and composing
 
 ```
 Raw Config Files (.conf)
-  ↓ [genrule: //b/ex-genrule:uppercase_sh]
+  ↓ [genrule: //bashel/ex-genrule:uppercase_sh]
 Normalized Configs (UPPERCASE)
-  ↓ [genrule: //b/ex-genrule:word_count_sh]
+  ↓ [genrule: //bashel/ex-genrule:word_count_sh]
 Size Reports
-  ↓ [macro: archive_directory from //b/ex-macros]
+  ↓ [macro: archive_directory from //bashel/ex-macros]
 Deployment Bundles (prod, staging)
-  ↓ [macro: archive_info from //b/ex-macros]
+  ↓ [macro: archive_info from //bashel/ex-macros]
 Bundle Metadata
 ```
 
@@ -25,33 +25,33 @@ Bundle Metadata
 
 ```bash
 # Build entire config pipeline
-bazel build //b/ex-build:all_outputs
+bazel build //bashel/ex-build:all_outputs
 
 # Build specific outputs
-bazel build //b/ex-build:production_config_bundle
-bazel build //b/ex-build:staging_bundle_info
+bazel build //bashel/ex-build:production_config_bundle
+bazel build //bashel/ex-build:staging_bundle_info
 ```
 
 ## View Outputs
 
 ```bash
 # Normalized configs
-cat bazel-bin/b/ex-build/normalized/app.conf
+cat bazel-bin/bashel/ex-build/normalized/app.conf
 # Output: APPLICATION CONFIGURATION SETTINGS
 
 # Size report
-cat bazel-bin/b/ex-build/reports/app_size.txt
+cat bazel-bin/bashel/ex-build/reports/app_size.txt
 # Output: 3
 
 # Production bundle contents
-tar tzf bazel-bin/b/ex-build/production_config_bundle.tar.gz
+tar tzf bazel-bin/bashel/ex-build/production_config_bundle.tar.gz
 # Output:
 # ./prod-configs/app.conf
 # ./prod-configs/database.conf
 # ./prod-configs/cache.conf
 
 # Bundle metadata
-cat bazel-bin/b/ex-build/production_bundle_info.txt
+cat bazel-bin/bashel/ex-build/production_bundle_info.txt
 ```
 
 ## Key Patterns Demonstrated
@@ -62,19 +62,19 @@ cat bazel-bin/b/ex-build/production_bundle_info.txt
 genrule(
     name = "normalized_app_conf",
     tools = [
-        "//b/ex-genrule:uppercase_sh",  # Cross-package import
+        "//bashel/ex-genrule:uppercase_sh",  # Cross-package import
         "//b/lib:lib_sh",
     ],
-    cmd = "$(location //b/ex-genrule:uppercase_sh) input=... $@",
+    cmd = "$(location //bashel/ex-genrule:uppercase_sh) input=... $@",
 )
 ```
 
-The `//b/ex-genrule:uppercase_sh` reference imports the script filegroup from the ex-genrule package.
+The `//bashel/ex-genrule:uppercase_sh` reference imports the script filegroup from the ex-genrule package.
 
 ### 2. Importing Macros from Another Package
 
 ```python
-load("//b/ex-macros:macros.bzl", "archive_directory", "archive_info")
+load("//bashel/ex-macros:macros.bzl", "archive_directory", "archive_info")
 
 archive_directory(
     name = "production_config_bundle",
@@ -104,7 +104,7 @@ Bazel automatically tracks dependencies across packages and rebuilds only what c
 ```bash
 cmd = """
     set -- $(locations :raw_configs)  # $$1=app.conf, $$2=database.conf, $$3=cache.conf
-    $(location //b/ex-genrule:uppercase_sh) input=$$1 $@
+    $(location //bashel/ex-genrule:uppercase_sh) input=$$1 $@
 """
 ```
 
@@ -143,11 +143,11 @@ tar czf prod-bundle.tar.gz normalized/*
 
 ```python
 # BUILD.bazel
-load("//b/ex-macros:macros.bzl", "archive_directory")
+load("//bashel/ex-macros:macros.bzl", "archive_directory")
 
 genrule(
     name = "normalized_app_conf",
-    tools = ["//b/ex-genrule:uppercase_sh"],
+    tools = ["//bashel/ex-genrule:uppercase_sh"],
     ...
 )
 
@@ -163,7 +163,7 @@ archive_directory(name = "prod_bundle", dir = ":normalized")
 
 ## Next Steps
 
-1. **Add more tools** - Create `//b/ex-json`, `//b/ex-yaml` packages
+1. **Add more tools** - Create `//bashel/ex-json`, `//bashel/ex-yaml` packages
 2. **Import in your projects** - Use these macros in `//myapp/BUILD.bazel`
 3. **Build pipelines** - Compose genrule → macro → genrule chains
 4. **Share via remote cache** - Team members reuse your build outputs

@@ -1,6 +1,7 @@
 # auto-generated: bazel.cue
 
-load("//b/ex-macros:macros.bzl", "archive_directory", "archive_info")
+load("@rules_shell//shell:sh_test.bzl", "sh_test")
+load("//bashel/ex-macros:macros.bzl", "archive_directory", "archive_info")
 
 genrule(
     name = "raw_configs",
@@ -27,11 +28,11 @@ genrule(
     ],
     cmd = """
 set -- $(locations :raw_configs)
-$(location //b/ex-genrule:uppercase_sh) input=$$1 $@
+$(location //bashel/ex-genrule:uppercase_sh) input=$$1 $@
 """,
     tools = [
-        "//b/ex-genrule:uppercase_sh",
         "//b/lib:lib_sh",
+        "//bashel/ex-genrule:uppercase_sh",
     ],
 )
 
@@ -45,11 +46,11 @@ genrule(
     ],
     cmd = """
 set -- $(locations :raw_configs)
-$(location //b/ex-genrule:uppercase_sh) input=$$2 $@
+$(location //bashel/ex-genrule:uppercase_sh) input=$$2 $@
 """,
     tools = [
-        "//b/ex-genrule:uppercase_sh",
         "//b/lib:lib_sh",
+        "//bashel/ex-genrule:uppercase_sh",
     ],
 )
 
@@ -63,11 +64,11 @@ genrule(
     ],
     cmd = """
 set -- $(locations :raw_configs)
-$(location //b/ex-genrule:uppercase_sh) input=$$3 $@
+$(location //bashel/ex-genrule:uppercase_sh) input=$$3 $@
 """,
     tools = [
-        "//b/ex-genrule:uppercase_sh",
         "//b/lib:lib_sh",
+        "//bashel/ex-genrule:uppercase_sh",
     ],
 )
 
@@ -89,11 +90,11 @@ genrule(
         "reports/app_size.txt",
     ],
     cmd = """
-$(location //b/ex-genrule:word_count_sh) input=$(location :normalized_app_conf) $@
+$(location //bashel/ex-genrule:word_count_sh) input=$(location :normalized_app_conf) $@
 """,
     tools = [
-        "//b/ex-genrule:word_count_sh",
         "//b/lib:lib_sh",
+        "//bashel/ex-genrule:word_count_sh",
     ],
 )
 
@@ -128,5 +129,17 @@ filegroup(
         ":production_config_bundle",
         ":staging_bundle_info",
         ":staging_config_bundle",
+    ],
+)
+
+sh_test(
+    name = "test",
+    srcs = ["test.sh"],
+    data = [
+        ":all_outputs",
+        "//bashel/ex-genrule:uppercase_sh",
+        "//bashel/ex-genrule:word_count_sh",
+        "//bashel/ex-macros:create_archive_sh",
+        "//bashel/ex-macros:list_archive_sh",
     ],
 )
