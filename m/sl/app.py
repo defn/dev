@@ -18,12 +18,48 @@ from datetime import datetime
 
 # Import Altair - a declarative visualization library for creating interactive charts
 import altair as alt
+
 # Import Streamlit - the web framework that lets you build data apps quickly
 import streamlit as st
+
 # Import shadcn UI components for modern UI elements like badges
 import streamlit_shadcn_ui as ui
+
 # Import vega_datasets - provides sample datasets including Seattle weather data
 import vega_datasets
+
+
+def main():
+    """
+    Main function that orchestrates the Seattle Weather Dashboard.
+
+    This function provides a clear overview of the app's structure:
+    1. Load data
+    2. Display UI components
+    3. Show weather metrics
+    4. Let users filter by year
+    5. Display various weather visualizations
+    """
+    # Load the Seattle weather dataset into a pandas DataFrame
+    # This contains daily weather measurements from Seattle
+    full_df = vega_datasets.data("seattle_weather")
+
+    # Get weather icons dictionary
+    weather_icons = get_weather_icons()
+
+    # Display sample UI badges
+    display_sample_badges()
+
+    # Show metrics for most/least common weather
+    display_weather_metrics(full_df, weather_icons)
+
+    # Get filtered data based on user's year selection
+    filtered_df = get_filtered_data_by_year(full_df)
+
+    # Display all the weather visualization charts
+    display_temperature_and_distribution(filtered_df)
+    display_wind_and_precipitation(filtered_df)
+    display_monthly_breakdown_and_raw_data(filtered_df)
 
 
 def get_weather_icons():
@@ -41,13 +77,13 @@ def display_sample_badges():
     """Display sample shadcn UI badges at the top of the app."""
     ui.badges(
         badge_list=[
-            ("default", "default"),      # Text, style
+            ("default", "default"),  # Text, style
             ("secondary", "secondary"),
             ("outline", "outline"),
-            ("Hello", "destructive"),    # Red "destructive" style badge
+            ("Hello", "destructive"),  # Red "destructive" style badge
         ],
         class_name="flex gap-2",  # CSS classes for flexbox layout with gap spacing
-        key="badges1",            # Unique key for Streamlit to track this widget
+        key="badges1",  # Unique key for Streamlit to track this widget
     )
 
 
@@ -198,7 +234,9 @@ def display_wind_and_precipitation(df):
                 avg_wind="mean(wind)",  # Calculate average wind speed
                 std_wind="stdev(wind)",  # Calculate standard deviation (not used in chart)
                 frame=[0, 14],  # Window: current day + next 14 days = 2 weeks
-                groupby=["monthdate(date)"],  # Group by month-day to compare across years
+                groupby=[
+                    "monthdate(date)"
+                ],  # Group by month-day to compare across years
             )
             .mark_line(size=1)  # Draw a thin line chart
             .encode(
@@ -270,22 +308,8 @@ def display_monthly_breakdown_and_raw_data(df):
         st.dataframe(df)
 
 
-def main():
-    """
-    Main function that orchestrates the Seattle Weather Dashboard.
-
-    This function provides a clear overview of the app's structure:
-    1. Load data
-    2. Configure the page
-    3. Display UI components
-    4. Show weather metrics
-    5. Let users filter by year
-    6. Display various weather visualizations
-    """
-    # Load the Seattle weather dataset into a pandas DataFrame
-    # This contains daily weather measurements from Seattle
-    full_df = vega_datasets.data("seattle_weather")
-
+# Run the main function when the script is executed
+if __name__ == "__main__":
     # Configure the Streamlit page settings
     # This must be called before any other Streamlit commands
     st.set_page_config(
@@ -294,24 +318,4 @@ def main():
         layout="wide",
     )
 
-    # Get weather icons dictionary
-    weather_icons = get_weather_icons()
-
-    # Display sample UI badges
-    display_sample_badges()
-
-    # Show metrics for most/least common weather
-    display_weather_metrics(full_df, weather_icons)
-
-    # Get filtered data based on user's year selection
-    filtered_df = get_filtered_data_by_year(full_df)
-
-    # Display all the weather visualization charts
-    display_temperature_and_distribution(filtered_df)
-    display_wind_and_precipitation(filtered_df)
-    display_monthly_breakdown_and_raw_data(filtered_df)
-
-
-# Run the main function when the script is executed
-if __name__ == "__main__":
     main()
