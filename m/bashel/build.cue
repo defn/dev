@@ -63,6 +63,7 @@ import (
 		src:  "test.sh"
 		data: [
 			":all_outputs",
+			"//bashel/bazel:bazel_cue",
 			"//bashel/ex-genrule:uppercase_sh",
 			"//bashel/ex-genrule:word_count_sh",
 			"//bashel/ex-macros:create_archive_sh",

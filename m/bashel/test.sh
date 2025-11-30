@@ -24,4 +24,8 @@ ls -lh "$RUNFILES_DIR/_main/bashel/ex-macros/scripts/create_archive.sh"
 ls -lh "$RUNFILES_DIR/_main/bashel/ex-macros/scripts/list_archive.sh"
 
 echo ""
+echo "Checking build configuration..."
+ls -lh "$RUNFILES_DIR/_main/bashel/bazel/bazel.cue"
+
+echo ""
 echo "All dependencies verified!"

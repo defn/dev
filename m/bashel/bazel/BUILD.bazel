@@ -1,0 +1,7 @@
+# Bazel build generation engine
+
+filegroup(
+    name = "bazel_cue",
+    srcs = ["bazel.cue"],
+    visibility = ["//visibility:public"],
+)
