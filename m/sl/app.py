@@ -2,7 +2,7 @@ import streamlit as st
 
 st.set_page_config(page_title="Login", page_icon="🔐")
 
-st.title("🔐 Login")
+st.title("Login")
 
 with st.form("login_form"):
     username = st.text_input("Username")
