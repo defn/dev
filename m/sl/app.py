@@ -81,7 +81,6 @@ def display_sample_badges():
         badge_list=[
             ("default", "default"),  # Text, style
             ("secondary", "secondary"),
-            ("outline", "outline"),
             ("Hello", "destructive"),  # Red "destructive" style badge
         ],
         class_name="flex gap-2",  # CSS classes for flexbox layout with gap spacing

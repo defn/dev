@@ -1,22 +1,23 @@
 [server]
 port = 3001
 address = "127.0.0.1"
+runOnSave = true
 
 [browser]
 gatherUsageStats = false
 
 [theme]
-base = "light"
+base = "dark"
 
 # General color setup
-textColor = "#1c1919"
+textColor = "#f5f5f5"
 primaryColor = "#00d492"
-backgroundColor = "#fafafa"
-secondaryBackgroundColor = "#ffffff"
+backgroundColor = "#1e1e1e"              # dark grey
+secondaryBackgroundColor = "#2a2a2a"      # slightly lighter grey
 
 # Widgets
 showWidgetBorder = true
-borderColor = "#e7e3e4"
+borderColor = "#30363d"
 
 # Base text
 font = "'Open Sans':https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"
