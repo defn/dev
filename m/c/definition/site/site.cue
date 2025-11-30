@@ -5,10 +5,11 @@ package site
 
 site: {
 	"amanibhav.am": {}
+	"cue.fan": {}
 	"d3fn.com": {}
-	"defecat.ing": {}
 	"defn.app": {}
 	"defn.blue": {}
+	"defn.build": {}
 	"defn.cloud": {}
 	"defn.co": {}
 	"defn.co.in": {}
@@ -19,18 +20,19 @@ site: {
 	"defn.red": {}
 	"defn.run": {}
 	"defn.sh": {}
+	"defn.uk": {}
 	"defn.us": {}
-	"destructuring.org": {}
+	"defn.work": {}
+
 	"devopsfor.us": {}
 	"fam.fan": {}
+	"kowloonwalled.city": {}
+
 	"gorillama.com": {}
 	"hana.studio": {}
 	"hanafina.com": {}
-	"hemorrhag.ing": {}
-	"imma.io": {}
-	"kowloon.defn.run": {}
-	"kowloonwalled.city": {}
-	"nghiem.io": {}
+
+	"defecat.ing": {}
 	"retch.ing": {}
 	"sodomiz.ing": {}
 }

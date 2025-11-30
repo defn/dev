@@ -1,9 +1,0 @@
-# auto-generated: site.cue wrangler_toml
-name = "nghiem--io"
-
-compatibility_date = "2024-12-30"
-
-pages_build_output_dir = "dist"
-
-[env]
-production = {}
