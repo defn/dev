@@ -1,3 +1,5 @@
+#!/usr/bin/env -S uv run -m streamlit run
+
 # -*- coding: utf-8 -*-
 # Copyright 2024-2025 Streamlit Inc.
 #
