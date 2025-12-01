@@ -186,7 +186,7 @@ sh_test(
 			lib:       string
 		}
 		load: {[string]: [...string]}
-		raw_file: {[string]: {path: string, content: string}}
+		raw_config: {[string]: {path: string, content: string}}
 		normalize: #InputNormalize
 		size_report: {[string]: {src: string, out: string}}
 		bundle: {[string]: {srcs: string | [...string], prefix: string}}
@@ -217,8 +217,8 @@ sh_test(
 	_t_raw: {
 		kind: "genrule"
 		name: "raw_configs"
-		outs: [for _, f in #in.raw_file {f.path}]
-		_echos: [for _, f in #in.raw_file {"echo '\(f.content)' > $(@D)/\(f.path)"}]
+		outs: [for _, f in #in.raw_config {f.path}]
+		_echos: [for _, f in #in.raw_config {"echo '\(f.content)' > $(@D)/\(f.path)"}]
 		_echosJoined: strings.Join(_echos, "\n")
 		cmd:          """
 mkdir -p $(@D)/raw
