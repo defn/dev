@@ -1,4 +1,4 @@
-package buildclient
+package bashel
 
 import (
 	"github.com/defn/dev/m/bashel/bazel"
