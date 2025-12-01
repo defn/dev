@@ -23,5 +23,6 @@ exec mise exec -- code-server --auth none \
 	--link-protection-trusted-domains 'https://*.defn.run' \
 	--link-protection-trusted-domains 'https://*.claude.ai' \
 	--link-protection-trusted-domains 'https://*.awsapps.com' \
-	--link-protection-trusted-domains 'https://signin.aws.amazon.com'
+	--link-protection-trusted-domains 'https://signin.aws.amazon.com' \
+	--link-protection-trusted-domains 'https://*.tailscale.com'
 

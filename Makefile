@@ -222,6 +222,7 @@ fast_inner:
 # Dependencies: uname command, t binary, ~/.local/bin/mise binary, mise.toml files with local tasks (upgrade, ubuntu, fixup, macos), make command
 # Outputs: Executed Linux system upgrade/ubuntu/fixup tasks via mise, performed fast_inner sync
 sync_inner:
+	~/.local/bin/mise self-update --yes || true
 	~/.local/bin/mise trust
 	~/.local/bin/mise install node python pipx ansible
 	if [[ "$(shell uname -s)" == "Linux" ]]; then t play-upgrade ~/.local/bin/mise run local upgrade; fi
