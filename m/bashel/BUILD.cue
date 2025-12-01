@@ -14,7 +14,7 @@ import (
 	tool: "wordcount": "//bashel/ex-genrule:word_count_sh"
 	tool: "lib":       "//b/lib:lib_sh"
 
-	//
+	//////////////////////////////////////////////////////////////////
 	// inputs
 	//
 
@@ -32,11 +32,11 @@ import (
 		content: "cache backend configuration"
 	}
 
-	//
+	//////////////////////////////////////////////////////////////////
 	// outputs
 	//
 
-	// [ raw_configs -> normalized_configs, normalized_*_conf
+	// raw_configs -> normalized_configs, [ normalized_*_conf ]
 	normalize: "raw_configs": {
 		"normalized/app.conf":      1
 		"normalized/database.conf": 2
@@ -49,7 +49,7 @@ import (
 		out: "reports/app_size.txt"
 	}
 
-	// normalized_configs -> bundle
+	// normalized_configs -> [ bundle ]
 	bundle: "production_config_bundle": {
 		srcs:   "normalized_configs"
 		prefix: "prod-configs"
@@ -59,7 +59,7 @@ import (
 		prefix: "staging-configs"
 	}
 
-	// bundle -> info
+	// [ bundle ] -> [ info ]
 	info: "production_bundle_info": {
 		archive: "production_config_bundle"
 	}
@@ -67,7 +67,7 @@ import (
 		archive: "staging_config_bundle"
 	}
 
-	//
+	//////////////////////////////////////////////////////////////////
 	// tests
 	//
 
