@@ -1,6 +1,7 @@
 [tasks.default]
 dir = "{{cwd}}"
 run = """
+(cd aws/defn/org && mise run aws-sso)
 pnpm install
 turbo build
 b build
