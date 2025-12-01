@@ -16,7 +16,7 @@ info --noshow_progress
 info --ui_event_filters=-info
 
 build --action_env=HOME=/home/ubuntu
-build --action_env=PATH=/opt/homebrew/bin:/usr/bin:/bin
+build --action_env=PATH=/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin
 build --experimental_profile_include_primary_output
 build --experimental_profile_include_target_label
 build --noremote_upload_local_results
