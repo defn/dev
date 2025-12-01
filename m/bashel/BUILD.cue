@@ -36,54 +36,54 @@ import (
 	// outputs
 	//
 
-	// [raw_config] -> normalized_configs
+	// genrule (one per output) + filegroup (:normalized_configs) → consumed by bundle, size_report
 	normalize: "raw_configs": {
 		"normalized/app.conf":      1
 		"normalized/database.conf": 2
 		"normalized/cache.conf":    3
 	}
 
-	// normalized_app_conf -> size_report
-	size_report: "size_report_app": {
+	// genrule: consumes normalized_app_conf → collected by all_outputs
+	size_report: "size_report_config": {
 		src: "normalized_app_conf"
 		out: "reports/app_size.txt"
 	}
 
-	// normalize_configs -> bundle (archive_directory)
-	bundle: "bundle_production_config": {
+	// archive_directory: consumes normalized_configs → consumed by info, collected by all_outputs
+	bundle: "production_config_bundle": {
 		srcs:   "normalized_configs"
 		prefix: "prod-configs"
 	}
-	bundle: "bundle_staging_config": {
+	bundle: "staging_config_bundle": {
 		srcs:   "normalized_configs"
 		prefix: "staging-configs"
 	}
 
-	// bundle -> info (archive_info)
-	info: "info_production_bundle": {
-		archive: "bundle_production_config"
+	// archive_info: consumes bundle → collected by all_outputs
+	info: "production_bundle_info": {
+		archive: "production_config_bundle"
 	}
-	info: "info_staging_bundle": {
-		archive: "bundle_staging_config"
+	info: "staging_bundle_info": {
+		archive: "staging_config_bundle"
 	}
 
 	//
 	// tests
 	//
 
-	// [*] -> all_outputs -> test_sh
-
+	// filegroup: collects all outputs → consumed by test_sh
 	filegroup: "all_outputs": {
 		srcs: [
 			"normalized_configs",
-			"size_report_app",
-			"bundle_production_config",
-			"bundle_staging_config",
-			"info_production_bundle",
-			"info_staging_bundle",
+			"size_report_config",
+			"production_bundle_info",
+			"production_config_bundle",
+			"staging_bundle_info",
+			"staging_config_bundle",
 		]
 	}
 
+	// sh_test
 	test: "test_sh": {
 		src: "test.sh"
 		data: [
