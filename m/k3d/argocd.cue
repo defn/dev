@@ -25603,7 +25603,7 @@ kube: argocd: Deployment: "argocd-applicationset-controller": {
 							optional: true
 						}
 					}]
-					image:           "quay.io/argoproj/argocd:v3.2.0"
+					image:           "quay.io/argoproj/argocd:v3.2.1"
 					imagePullPolicy: "Always"
 					name:            "argocd-applicationset-controller"
 					ports: [{
@@ -25783,7 +25783,7 @@ kube: argocd: Deployment: "argocd-dex-server": {
 						"/usr/local/bin/argocd",
 						"/shared/argocd-dex",
 					]
-					image:           "quay.io/argoproj/argocd:v3.2.0"
+					image:           "quay.io/argoproj/argocd:v3.2.1"
 					imagePullPolicy: "Always"
 					name:            "copyutil"
 					securityContext: {
@@ -25892,7 +25892,7 @@ kube: argocd: Deployment: "argocd-notifications-controller": {
 							optional: true
 						}
 					}]
-					image:           "quay.io/argoproj/argocd:v3.2.0"
+					image:           "quay.io/argoproj/argocd:v3.2.1"
 					imagePullPolicy: "Always"
 					livenessProbe: tcpSocket: port: 9001
 					name: "argocd-notifications-controller"
@@ -26000,7 +26000,7 @@ kube: argocd: Deployment: "argocd-redis": {
 						"admin",
 						"redis-initial-password",
 					]
-					image:           "quay.io/argoproj/argocd:v3.2.0"
+					image:           "quay.io/argoproj/argocd:v3.2.1"
 					imagePullPolicy: "IfNotPresent"
 					name:            "secret-init"
 					securityContext: {
@@ -26306,6 +26306,13 @@ kube: argocd: Deployment: "argocd-repo-server": {
 							optional: true
 						}
 					}, {
+						name: "ARGOCD_REPO_SERVER_ENABLE_BUILTIN_GIT_CONFIG"
+						valueFrom: configMapKeyRef: {
+							key:      "reposerver.enable.builtin.git.config"
+							name:     "argocd-cmd-params-cm"
+							optional: true
+						}
+					}, {
 						name: "ARGOCD_GRPC_MAX_SIZE_MB"
 						valueFrom: configMapKeyRef: {
 							key:      "reposerver.grpc.max.size"
@@ -26329,7 +26336,7 @@ kube: argocd: Deployment: "argocd-repo-server": {
 						name:  "HELM_DATA_HOME"
 						value: "/helm-working-dir"
 					}]
-					image:           "quay.io/argoproj/argocd:v3.2.0"
+					image:           "quay.io/argoproj/argocd:v3.2.1"
 					imagePullPolicy: "Always"
 					livenessProbe: {
 						failureThreshold: 3
@@ -26395,7 +26402,7 @@ kube: argocd: Deployment: "argocd-repo-server": {
 						"/usr/local/bin/argocd",
 						"/var/run/argocd/argocd-cmp-server",
 					]
-					image: "quay.io/argoproj/argocd:v3.2.0"
+					image: "quay.io/argoproj/argocd:v3.2.1"
 					name:  "copyutil"
 					securityContext: {
 						allowPrivilegeEscalation: false
@@ -26823,7 +26830,7 @@ kube: argocd: Deployment: "argocd-server": {
 							optional: true
 						}
 					}]
-					image:           "quay.io/argoproj/argocd:v3.2.0"
+					image:           "quay.io/argoproj/argocd:v3.2.1"
 					imagePullPolicy: "Always"
 					livenessProbe: {
 						httpGet: {
@@ -27276,7 +27283,7 @@ kube: argocd: StatefulSet: "argocd-application-controller": {
 						name:  "KUBECACHEDIR"
 						value: "/tmp/kubecache"
 					}]
-					image:           "quay.io/argoproj/argocd:v3.2.0"
+					image:           "quay.io/argoproj/argocd:v3.2.1"
 					imagePullPolicy: "Always"
 					name:            "argocd-application-controller"
 					ports: [{containerPort: 8082}]
