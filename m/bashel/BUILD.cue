@@ -18,6 +18,7 @@ import (
 	// inputs
 	//
 
+	// [*] -> raw_configs
 	raw_config: "app": {
 		path:    "raw/app.conf"
 		content: "application configuration settings"
@@ -35,7 +36,7 @@ import (
 	// outputs
 	//
 
-	// [ raw_config (genrule) ] -> normalized_configs, normalized_app_conf
+	// [ raw_configs -> normalized_configs, normalized_app_conf
 	normalize: "raw_configs": {
 		"normalized/app.conf":      1
 		"normalized/database.conf": 2
