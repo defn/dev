@@ -5,70 +5,14 @@ package bazel
 
 import ( "strings"
 
-	// ---------------- Schema (abstract, not 1:1 Bazel) ----------------
+	// ---------------- Schema ----------------
 )
 
 #Label: string & =~"^(:|//).+" // Bazel-ish labels
 
-#CfgFile: {
-	name:    string // logical name
-	path:    string // relative output path under raw/ or normalized/
-	content: string // inline content to seed a raw genrule
-}
-
-#NormalizeStep: {
-	// select from a multi-out raw genrule by positional index (1-based for $$N)
-	from:  #Label // e.g. ":raw_configs"
-	index: int & >0
-	out:   string // e.g. "normalized/app.conf"
-}
-
-#Bundle: {
-	name:                      string
-	srcs: #Label | [...#Label] // often a filegroup
-	prefix:                    string
-}
-
-#Info: {
-	name:    string
-	archive: #Label
-}
-
-#Model: {
-	tools: {
-		uppercase: #Label
-		wordcount: #Label
-		lib:       #Label
-	}
-
-	loads: [...{
-		bzl: string
-		symbols: [...string]
-	}]
-
-	raw_files: [...#CfgFile]
-
-	normalize: [...#NormalizeStep]
-
-	size_reports: [...{
-		name: string
-		src:  #Label
-		out:  string
-	}]
-
-	bundles: [...#Bundle]
-	infos: [...#Info]
-
-	all: {
-		name: string
-		srcs: [...#Label]
-	}
-
-	test: {
-		name: string
-		src:  string
-		data: [...#Label]
-	}
+// Input type for normalize field (nested map: source label -> output path -> index)
+#InputNormalize: {
+	[#Label]: [string]: int
 }
 
 // ----------------- Renderers ------------------
@@ -80,7 +24,8 @@ import ( "strings"
 
 renderLoad: {
 	#in: {
-		bzl: string
+		kind: "load"
+		bzl:  string
 		symbols: [...string]
 	}
 	_syms: [for s in #in.symbols {"\"\(s)\""}]
@@ -228,8 +173,27 @@ sh_test(
 
 // ----------------- Build Generator ------------------
 
+// Input type that accepts maps (closed structs with concrete keys)
+#InputNormalize: {
+	[#Label]: [string]: int
+}
+
 #BuildGenerator: {
-	#in: #Model
+	#in: {
+		tool: {
+			uppercase: string
+			wordcount: string
+			lib:       string
+		}
+		load: {[string]: [...string]}
+		raw_file: {[string]: {path: string, content: string}}
+		normalize: #InputNormalize
+		size_report: {[string]: {src: string, out: string}}
+		bundle: {[string]: {srcs: string | [...string], prefix: string}}
+		info: {[string]: {archive: string}}
+		filegroup: {[string]: {srcs: [...string]}}
+		test: {[string]: {src: string, data: [...string]}}
+	}
 
 	// Renderer map
 	_render: {
@@ -241,19 +205,20 @@ sh_test(
 		"sh_test":                 renderShTest
 	}
 
-	// Templates
-	_t_loads: [
-		for l in #in.loads {
-			kind: "load"
-			l
+	// Templates - render loads directly since they come from a map
+	_rendered_load: [
+		for bzl, symbols in #in.load {
+			_syms: [for s in symbols {"\"\(s)\""}]
+			_symsJoined: strings.Join(_syms, ", ")
+			out:         "load(\"\(bzl)\", \(_symsJoined))"
 		},
 	]
 
 	_t_raw: {
 		kind: "genrule"
 		name: "raw_configs"
-		outs: [for f in #in.raw_files {f.path}]
-		_echos: [for f in #in.raw_files {"echo '\(f.content)' > $(@D)/\(f.path)"}]
+		outs: [for _, f in #in.raw_file {f.path}]
+		_echos: [for _, f in #in.raw_file {"echo '\(f.content)' > $(@D)/\(f.path)"}]
 		_echosJoined: strings.Join(_echos, "\n")
 		cmd:          """
 mkdir -p $(@D)/raw
@@ -261,95 +226,107 @@ mkdir -p $(@D)/raw
 """
 	}
 
-	_t_norm: [
-		for i, n in #in.normalize {
-			{
-				kind: "genrule"
-				name: "normalized_\(#in.raw_files[i].name)_conf"
-				srcs: [n.from]
-				outs: [n.out]
-				cmd: """
-set -- $(locations \(n.from))
-$(location \(#in.tools.uppercase)) input=$$\(n.index) $@
-"""
-				tools: [#in.tools.uppercase, #in.tools.lib]
-			}
+	// Render normalize genrules directly
+	_rendered_norm: [
+		for from, outputs in #in.normalize
+		for outPath, index in outputs {
+			_nameBase: strings.Replace(strings.Replace(outPath, "/", "_", -1), ".", "_", -1)
+			_srcsItems: ["        \"\(from)\",\n"]
+			_srcsList: "[\n" + strings.Join(_srcsItems, "") + "    ]"
+			_outsItems: ["        \"\(outPath)\",\n"]
+			_outsList: "[\n" + strings.Join(_outsItems, "") + "    ]"
+			_toolsItems: [
+				"        \"\(#in.tool.uppercase)\",\n",
+				"        \"\(#in.tool.lib)\",\n",
+			]
+			_toolsList: "[\n" + strings.Join(_toolsItems, "") + "    ]"
+			_cmd:       "set -- $(locations \(from))\n$(location \(#in.tool.uppercase)) input=$$\(index) $@"
+			out:        "genrule(\n  name = \"\(_nameBase)\",\n    srcs = \(_srcsList),\n  outs = \(_outsList),\n  cmd = \"\"\"\n\(_cmd)\n\"\"\",\n    tools = \(_toolsList),\n)"
+		},
+	]
+
+	// Collect normalized target names for filegroup
+	_norm_names: [
+		for from, outputs in #in.normalize
+		for outPath, _ in outputs {
+			":" + strings.Replace(strings.Replace(outPath, "/", "_", -1), ".", "_", -1)
 		},
 	]
 
 	_t_norm_group: {
 		kind: "filegroup"
 		name: "normalized_configs"
-		srcs: [
-			for r in _t_norm {":\(r.name)"},
-		]
+		srcs: _norm_names
 	}
 
-	_t_reports: [
-		for r in #in.size_reports {
-			{
-				kind: "genrule"
-				name: r.name
-				srcs: [r.src]
-				outs: [r.out]
-				cmd: "$(location \(#in.tools.wordcount)) input=$(location \(r.src)) $@"
-				tools: [#in.tools.wordcount, #in.tools.lib]
-			}
+	// Render size_report directly
+	_rendered_size_report: [
+		for name, r in #in.size_report {
+			_srcsItems: ["        \"\(r.src)\",\n"]
+			_srcsList: "[\n" + strings.Join(_srcsItems, "") + "    ]"
+			_outsItems: ["        \"\(r.out)\",\n"]
+			_outsList: "[\n" + strings.Join(_outsItems, "") + "    ]"
+			_toolsItems: [
+				"        \"\(#in.tool.wordcount)\",\n",
+				"        \"\(#in.tool.lib)\",\n",
+			]
+			_toolsList: "[\n" + strings.Join(_toolsItems, "") + "    ]"
+			_cmd:       "$(location \(#in.tool.wordcount)) input=$(location \(r.src)) $@"
+			out:        "genrule(\n  name = \"\(name)\",\n    srcs = \(_srcsList),\n  outs = \(_outsList),\n  cmd = \"\"\"\n\(_cmd)\n\"\"\",\n    tools = \(_toolsList),\n)"
 		},
 	]
 
-	_t_bundles: [
-		for b in #in.bundles {
-			{
-				kind:   "macro.archive_directory"
-				name:   b.name
-				dir:    b.srcs
-				prefix: b.prefix
-			}
+	// Render bundle directly
+	_rendered_bundle: [
+		for name, b in #in.bundle {
+			out: "archive_directory(\n  name = \"\(name)\",\n  dir = \"\(b.srcs)\",\n  prefix = \"\(b.prefix)\",\n)"
 		},
 	]
 
-	_t_infos: [
-		for inf in #in.infos {
-			{
-				kind:    "macro.archive_info"
-				name:    inf.name
-				archive: inf.archive
-			}
+	// Render info directly
+	_rendered_info: [
+		for name, inf in #in.info {
+			out: "archive_info(\n  name = \"\(name)\",\n  archive = \"\(inf.archive)\",\n)"
 		},
 	]
 
-	_t_all: {
-		kind: "filegroup"
-		name: #in.all.name
-		srcs: #in.all.srcs
-	}
+	// Render filegroup directly
+	_rendered_filegroup: [
+		for name, a in #in.filegroup {
+			_srcsItems: [for s in a.srcs {"        \"\(s)\",\n"}]
+			_srcsList: "[\n" + strings.Join(_srcsItems, "") + "    ]"
+			out:       "filegroup(\n  name = \"\(name)\",\n  srcs = \(_srcsList),\n)"
+		},
+	]
 
-	_t_test: {
-		kind: "sh_test"
-		name: #in.test.name
-		srcs: [#in.test.src]
-		data: #in.test.data
-	}
+	// Render test directly
+	_rendered_test: [
+		for name, t in #in.test {
+			_srcsItems: ["        \"\(t.src)\",\n"]
+			_srcsList: "[\n" + strings.Join(_srcsItems, "") + "    ]"
+			_dataItems: [for d in t.data {"        \"\(d)\",\n"}]
+			_dataList: "[\n" + strings.Join(_dataItems, "") + "    ]"
+			out:       "sh_test(\n  name = \"\(name)\",\n  srcs = \(_srcsList),\n  data = \(_dataList),\n)"
+		},
+	]
 
-	// Targets list
+	// Targets that still use the renderer map (non-map-based templates)
 	_targets_list: [
-		for x in _t_loads {x},
 		_t_raw,
-		for x in _t_norm {x},
 		_t_norm_group,
-		for x in _t_reports {x},
-		for x in _t_bundles {x},
-		for x in _t_infos {x},
-		_t_all,
-		_t_test,
 	]
 
-	// Rendered targets
+	// Rendered targets - combine all rendered outputs
 	_rendered: [
-		for t in _targets_list {
-			(_render[t.kind] & {#in: t}).out
-		},
+		for l in _rendered_load {l.out},
+		(_render[_t_raw.kind] & {#in: _t_raw}).out,
+		for n in _rendered_norm {n.out},
+		(_render[_t_norm_group.kind] & {#in: _t_norm_group}).out,
+		for r in _rendered_size_report {r.out},
+		for b in _rendered_bundle {b.out},
+		for i in _rendered_info {i.out},
+		for a in _rendered_filegroup {a.out},
+		for t in _rendered_test {t.out},
 	]
 
 	// Final BUILD output

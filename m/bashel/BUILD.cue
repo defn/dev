@@ -4,65 +4,69 @@ import (
 	"github.com/defn/dev/m/bashel/bazel"
 )
 
-(bazel.#BuildGenerator & {#in: bazel.#Model & {
-	loads: [
-		{bzl: "@rules_shell//shell:sh_test.bzl", symbols: ["sh_test"]},
-		{bzl: "//bashel/ex-macros:macros.bzl", symbols: ["archive_directory", "archive_info"]},
-	]
+(bazel.#BuildGenerator & {#in: {
+	load: "@rules_shell//shell:sh_test.bzl": ["sh_test"]
+	load: "//bashel/ex-macros:macros.bzl": ["archive_directory", "archive_info"]
 
-	tools: {
-		uppercase: "//bashel/ex-genrule:uppercase_sh"
-		wordcount: "//bashel/ex-genrule:word_count_sh"
-		lib:       "//b/lib:lib_sh"
+	tool: "uppercase": "//bashel/ex-genrule:uppercase_sh"
+	tool: "wordcount": "//bashel/ex-genrule:word_count_sh"
+	tool: "lib":       "//b/lib:lib_sh"
+
+	raw_file: "app": {
+		path:    "raw/app.conf"
+		content: "application configuration settings"
+	}
+	raw_file: "database": {
+		path:    "raw/database.conf"
+		content: "database connection parameters"
+	}
+	raw_file: "cache": {
+		path:    "raw/cache.conf"
+		content: "cache backend configuration"
 	}
 
-	raw_files: [
-		{name: "app", path: "raw/app.conf", content: "application configuration settings"},
-		{name: "database", path: "raw/database.conf", content: "database connection parameters"},
-		{name: "cache", path: "raw/cache.conf", content: "cache backend configuration"},
-	]
+	normalize: "raw_configs": {
+		"normalized/app.conf":      1
+		"normalized/database.conf": 2
+		"normalized/cache.conf":    3
+	}
 
-	normalize: [
-		{from: ":raw_configs", index: 1, out: "normalized/app.conf"},
-		{from: ":raw_configs", index: 2, out: "normalized/database.conf"},
-		{from: ":raw_configs", index: 3, out: "normalized/cache.conf"},
-	]
+	size_report: "config_size_report": {
+		src: "normalized_app_conf"
+		out: "reports/app_size.txt"
+	}
 
-	size_reports: [
-		{
-			name: "config_size_report"
-			src:  ":normalized_app_conf"
-			out:  "reports/app_size.txt"
-		},
-	]
+	bundle: "production_config_bundle": {
+		srcs:   "normalized_configs"
+		prefix: "prod-configs"
+	}
+	bundle: "staging_config_bundle": {
+		srcs:   "normalized_configs"
+		prefix: "staging-configs"
+	}
 
-	bundles: [
-		{name: "production_config_bundle", srcs: ":normalized_configs", prefix: "prod-configs"},
-		{name: "staging_config_bundle", srcs: ":normalized_configs", prefix: "staging-configs"},
-	]
+	info: "production_bundle_info": {
+		archive: "production_config_bundle"
+	}
+	info: "staging_bundle_info": {
+		archive: "staging_config_bundle"
+	}
 
-	infos: [
-		{name: "production_bundle_info", archive: ":production_config_bundle"},
-		{name: "staging_bundle_info", archive: ":staging_config_bundle"},
-	]
-
-	all: {
-		name: "all_outputs"
+	filegroup: "all_outputs": {
 		srcs: [
-			":config_size_report",
-			":normalized_configs",
-			":production_bundle_info",
-			":production_config_bundle",
-			":staging_bundle_info",
-			":staging_config_bundle",
+			"config_size_report",
+			"normalized_configs",
+			"production_bundle_info",
+			"production_config_bundle",
+			"staging_bundle_info",
+			"staging_config_bundle",
 		]
 	}
 
-	test: {
-		name: "test"
-		src:  "test.sh"
+	test: "test_sh": {
+		src: "test.sh"
 		data: [
-			":all_outputs",
+			"all_outputs",
 			"//bashel/bazel:bazel_cue",
 			"//bashel/ex-genrule:uppercase_sh",
 			"//bashel/ex-genrule:word_count_sh",

@@ -21,13 +21,13 @@ echo 'cache backend configuration' > $(@D)/raw/cache.conf
 genrule(
     name = "normalized_app_conf",
     srcs = [
-        ":raw_configs",
+        "raw_configs",
     ],
     outs = [
         "normalized/app.conf",
     ],
     cmd = """
-set -- $(locations :raw_configs)
+set -- $(locations raw_configs)
 $(location //bashel/ex-genrule:uppercase_sh) input=$$1 $@
 """,
     tools = [
@@ -39,13 +39,13 @@ $(location //bashel/ex-genrule:uppercase_sh) input=$$1 $@
 genrule(
     name = "normalized_database_conf",
     srcs = [
-        ":raw_configs",
+        "raw_configs",
     ],
     outs = [
         "normalized/database.conf",
     ],
     cmd = """
-set -- $(locations :raw_configs)
+set -- $(locations raw_configs)
 $(location //bashel/ex-genrule:uppercase_sh) input=$$2 $@
 """,
     tools = [
@@ -57,13 +57,13 @@ $(location //bashel/ex-genrule:uppercase_sh) input=$$2 $@
 genrule(
     name = "normalized_cache_conf",
     srcs = [
-        ":raw_configs",
+        "raw_configs",
     ],
     outs = [
         "normalized/cache.conf",
     ],
     cmd = """
-set -- $(locations :raw_configs)
+set -- $(locations raw_configs)
 $(location //bashel/ex-genrule:uppercase_sh) input=$$3 $@
 """,
     tools = [
@@ -84,13 +84,13 @@ filegroup(
 genrule(
     name = "config_size_report",
     srcs = [
-        ":normalized_app_conf",
+        "normalized_app_conf",
     ],
     outs = [
         "reports/app_size.txt",
     ],
     cmd = """
-$(location //bashel/ex-genrule:word_count_sh) input=$(location :normalized_app_conf) $@
+$(location //bashel/ex-genrule:word_count_sh) input=$(location normalized_app_conf) $@
 """,
     tools = [
         "//b/lib:lib_sh",
@@ -100,45 +100,45 @@ $(location //bashel/ex-genrule:word_count_sh) input=$(location :normalized_app_c
 
 archive_directory(
     name = "production_config_bundle",
-    dir = ":normalized_configs",
+    dir = "normalized_configs",
     prefix = "prod-configs",
 )
 
 archive_directory(
     name = "staging_config_bundle",
-    dir = ":normalized_configs",
+    dir = "normalized_configs",
     prefix = "staging-configs",
 )
 
 archive_info(
     name = "production_bundle_info",
-    archive = ":production_config_bundle",
+    archive = "production_config_bundle",
 )
 
 archive_info(
     name = "staging_bundle_info",
-    archive = ":staging_config_bundle",
+    archive = "staging_config_bundle",
 )
 
 filegroup(
     name = "all_outputs",
     srcs = [
-        ":config_size_report",
-        ":normalized_configs",
-        ":production_bundle_info",
-        ":production_config_bundle",
-        ":staging_bundle_info",
-        ":staging_config_bundle",
+        "config_size_report",
+        "normalized_configs",
+        "production_bundle_info",
+        "production_config_bundle",
+        "staging_bundle_info",
+        "staging_config_bundle",
     ],
 )
 
 sh_test(
-    name = "test",
+    name = "test_sh",
     srcs = [
         "test.sh",
     ],
     data = [
-        ":all_outputs",
+        "all_outputs",
         "//bashel/bazel:bazel_cue",
         "//bashel/ex-genrule:uppercase_sh",
         "//bashel/ex-genrule:word_count_sh",
