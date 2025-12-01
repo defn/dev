@@ -18,7 +18,6 @@ import (
 	// inputs
 	//
 
-	// genrule: combined into :raw_configs → consumed by normalize
 	raw_config: "app": {
 		path:    "raw/app.conf"
 		content: "application configuration settings"
@@ -36,20 +35,20 @@ import (
 	// outputs
 	//
 
-	// genrule (one per output) + filegroup (:normalized_configs) → consumed by bundle, size_report
+	// [ raw_config (genrule) ] -> normalized_configs, normalized_app_conf
 	normalize: "raw_configs": {
 		"normalized/app.conf":      1
 		"normalized/database.conf": 2
 		"normalized/cache.conf":    3
 	}
 
-	// genrule: consumes normalized_app_conf → collected by all_outputs
-	size_report: "size_report_config": {
+	// normalized_app_conf → size_report
+	size_report: "app_config_size_report": {
 		src: "normalized_app_conf"
 		out: "reports/app_size.txt"
 	}
 
-	// archive_directory: consumes normalized_configs → consumed by info, collected by all_outputs
+	// normalized_configs -> bundle (archive_directory)
 	bundle: "production_config_bundle": {
 		srcs:   "normalized_configs"
 		prefix: "prod-configs"
@@ -59,7 +58,7 @@ import (
 		prefix: "staging-configs"
 	}
 
-	// archive_info: consumes bundle → collected by all_outputs
+	// bundle -> info (archive_info)
 	info: "production_bundle_info": {
 		archive: "production_config_bundle"
 	}
@@ -70,12 +69,13 @@ import (
 	//
 	// tests
 	//
+	// [*] -> all_outputs -> test_sh
+	//
 
-	// filegroup: collects all outputs → consumed by test_sh
 	filegroup: "all_outputs": {
 		srcs: [
 			"normalized_configs",
-			"size_report_config",
+			"app_config_size_report",
 			"production_bundle_info",
 			"production_config_bundle",
 			"staging_bundle_info",
@@ -83,7 +83,6 @@ import (
 		]
 	}
 
-	// sh_test
 	test: "test_sh": {
 		src: "test.sh"
 		data: [
