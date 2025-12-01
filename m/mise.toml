@@ -1,5 +1,12 @@
-[task_config]
-dir = "tasks"
+[tasks.default]
+dir = "{{cwd}}"
+run = """
+pnpm install
+turbo build
+b build
+b test
+"""
+raw = true
 
 [tools]
 "npm:wrangler" = "4.51.0"

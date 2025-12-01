@@ -19,27 +19,6 @@ importers:
         specifier: ^2.6.1
         version: 2.6.1
 
-  c/docs:
-    dependencies:
-      '@astrojs/sitemap':
-        specifier: ^3.6.0
-        version: 3.6.0
-      '@astrojs/starlight':
-        specifier: ^0.37.0
-        version: 0.37.0(astro@5.16.3(@types/node@24.10.1)(jiti@2.6.1)(rollup@4.53.3)(typescript@5.9.3)(yaml@2.8.1))
-      '@fontsource-variable/roboto-mono':
-        specifier: ^5.2.8
-        version: 5.2.8
-      '@fontsource/roboto':
-        specifier: ^5.2.9
-        version: 5.2.9
-      astro:
-        specifier: ^5.16.3
-        version: 5.16.3(@types/node@24.10.1)(jiti@2.6.1)(rollup@4.53.3)(typescript@5.9.3)(yaml@2.8.1)
-      sharp:
-        specifier: ^0.34.5
-        version: 0.34.5
-
   cv:
     dependencies:
       '@types/node':
@@ -1698,12 +1677,6 @@ packages:
 
   '@floating-ui/utils@0.2.10':
     resolution: {integrity: sha512-aGTxbpbg8/b5JfU1HXSrbH3wXZuLPJcNEcZQFMxLs3oSzgtVu6nFPkbbGGUvBcUjKV2YyB9Wxxabo+HEH9tcRQ==}
-
-  '@fontsource-variable/roboto-mono@5.2.8':
-    resolution: {integrity: sha512-6M2U3wGIUxYNKRrUoKls8BRRIPDA57T8J0agqwyDkiEHrLEEAqptsxcUl3eTm6tnRNEn6yEm4pCefvtnujebDA==}
-
-  '@fontsource/roboto@5.2.9':
-    resolution: {integrity: sha512-ZTkyHiPk74B/aj8BZWbsxD5Yu+Lq+nR64eV4wirlrac2qXR7jYk2h6JlLYuOuoruTkGQWNw2fMuKNavw7/rg0w==}
 
   '@headlessui/react@2.2.9':
     resolution: {integrity: sha512-Mb+Un58gwBn0/yWZfyrCh0TJyurtT+dETj7YHleylHk5od3dv2XqETPGWMyQ5/7sYN7oWdyM1u9MvC0OC8UmzQ==}
@@ -6984,10 +6957,6 @@ snapshots:
       tabbable: 6.3.0
 
   '@floating-ui/utils@0.2.10': {}
-
-  '@fontsource-variable/roboto-mono@5.2.8': {}
-
-  '@fontsource/roboto@5.2.9': {}
 
   '@headlessui/react@2.2.9(react-dom@19.2.0(react@19.2.0))(react@19.2.0)':
     dependencies:
