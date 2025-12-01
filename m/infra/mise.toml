@@ -1,0 +1,11 @@
+[tasks.default]
+dir = "{{cwd}}"
+run = """
+mise exec -- aws s3 ls >/dev/null || mise exec -- aws sso login
+mise exec -- aws s3 ls >/dev/null || exit 1
+terraform plan -out .plan
+"""
+raw = true
+
+[env]
+TF_VAR_config = "/home/ubuntu/.claude/tf"
