@@ -36,20 +36,20 @@ import (
 	// outputs
 	//
 
-	// [ raw_configs -> normalized_configs, normalized_app_conf
+	// [ raw_configs -> normalized_configs, normalized_*_conf
 	normalize: "raw_configs": {
 		"normalized/app.conf":      1
 		"normalized/database.conf": 2
 		"normalized/cache.conf":    3
 	}
 
-	// normalized_app_conf → size_report
-	size_report: "app_config_size_report": {
+	// normalized_app_conf → size_report_app_conf
+	size_report: "size_report_app_conf": {
 		src: "normalized_app_conf"
 		out: "reports/app_size.txt"
 	}
 
-	// normalized_configs -> bundle (archive_directory)
+	// normalized_configs -> bundle
 	bundle: "production_config_bundle": {
 		srcs:   "normalized_configs"
 		prefix: "prod-configs"
@@ -59,7 +59,7 @@ import (
 		prefix: "staging-configs"
 	}
 
-	// bundle -> info (archive_info)
+	// bundle -> info
 	info: "production_bundle_info": {
 		archive: "production_config_bundle"
 	}
@@ -70,13 +70,12 @@ import (
 	//
 	// tests
 	//
-	// [*] -> all_outputs -> test_sh
-	//
 
+	// [*] -> all_outputs
 	filegroup: "all_outputs": {
 		srcs: [
 			"normalized_configs",
-			"app_config_size_report",
+			"size_report_app_conf",
 			"production_bundle_info",
 			"production_config_bundle",
 			"staging_bundle_info",
@@ -84,6 +83,7 @@ import (
 		]
 	}
 
+	// all_outputs -> test_sh
 	test: "test_sh": {
 		src: "test.sh"
 		data: [

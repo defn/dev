@@ -82,7 +82,7 @@ filegroup(
 )
 
 genrule(
-    name = "app_config_size_report",
+    name = "size_report_app_conf",
     srcs = [
         "normalized_app_conf",
     ],
@@ -123,10 +123,10 @@ archive_info(
 filegroup(
     name = "all_outputs",
     srcs = [
-        "app_config_size_report",
         "normalized_configs",
         "production_bundle_info",
         "production_config_bundle",
+        "size_report_app_conf",
         "staging_bundle_info",
         "staging_config_bundle",
     ],
