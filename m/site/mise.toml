@@ -1,0 +1,6 @@
+[tasks.default]
+dir = "{{cwd}}"
+run = """
+pnpm run dev
+"""
+raw = true

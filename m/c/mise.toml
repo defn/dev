@@ -1,3 +1,16 @@
 [tasks.default]
-run = "set -x; ./accumulate.sh && ./configure.sh && ./unify.sh && ./transform.sh && ./execute.sh && trunk fmt && git difftool --no-prompt --extcmd='dyff between' main.yaml"
+run = """
+    set -exfuo pipefail
+    ./accumulate.sh
+    ./configure.sh
+    ./unify.sh
+    ./transform.sh
+    # TODO generate amani config correctly
+    git checkout ../site/amanibhav.am
+    trunk fmt
+    ./execute.sh
+    # TODO execute docs website generation
+    trunk fmt
+    git difftool --no-prompt --extcmd='dyff between' main.yaml
+"""
 description = "Run the full ACUTE pipeline (Accumulate, Configure, Unify, Transform, Execute)"
