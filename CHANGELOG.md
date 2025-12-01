@@ -1,5 +1,14 @@
 # Changelog
 
+## [1.56.0](https://github.com/defn/dev/compare/v1.55.0...v1.56.0) (2025-12-01)
+
+
+### Features
+
+* add AWS SSO login step to default mise task ([27b87d3](https://github.com/defn/dev/commit/27b87d3d1588886ac8691d1a56e2225d5b0ac420))
+* add mise task configs for aws and infra directories ([f066361](https://github.com/defn/dev/commit/f0663619630496c4b4630e8ff0cc1857e28f1ec5))
+* add turbo 2.6.1 to mise configuration ([773d00b](https://github.com/defn/dev/commit/773d00b0728e704dad4b1cdd44f80bb1041eb667))
+
 ## [1.55.0](https://github.com/defn/dev/compare/v1.54.0...v1.55.0) (2025-11-30)
 
 
