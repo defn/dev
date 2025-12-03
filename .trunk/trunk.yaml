@@ -13,7 +13,7 @@ runtimes:
     - rust@1.82.0
     # no downloads for anything later than this
     - python@3.12.2
-    - go@1.25.4
+    - go@1.25.5
     - node@25.0.0
 lint:
   definitions:
@@ -46,7 +46,7 @@ lint:
     - cue-fmt
     - dotenv-linter@4.0.0
     - git-diff-check
-    - gofmt@1.25.4
+    - gofmt@1.25.5
     - golangci-lint2@2.6.2
     - isort@7.0.0
     - isort@7.0.0
