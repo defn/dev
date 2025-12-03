@@ -6,11 +6,11 @@ compile = false
 
 [tools]
 ansible = "13.0.0"
-aws = { version = "2.32.6", symlink_bins = "true" }
-bat = "0.26.0"
+aws = { version = "2.32.8", symlink_bins = "true" }
+bat = "0.26.1"
 bazelisk = "1.27.0"
 chamber = "3.1.4"
-coder = "2.28.5"
+coder = "2.29.0"
 cue = "0.15.1"
 delta = "0.18.2"
 dive = "0.13.1"
@@ -18,21 +18,21 @@ dyff = "1.10.2"
 fzf = "0.67.0"
 gh = "2.83.1"
 glow = "2.1.1"
-go = "1.25.4"
+go = "1.25.5"
 gron = "0.7.1"
 jq = "1.8.1"
 just = "1.43.1"
 node = "25.2.1"
-"npm:@anthropic-ai/claude-code" = "2.0.55"
+"npm:@anthropic-ai/claude-code" = "2.0.56"
 pipx = "1.8.0"
 pnpm = "10.24.0"
-python = "3.14.0"
+python = "3.14.1"
 uv = "0.9.14"
 shfmt = "3.12.0"
 slsa-verifier = "2.7.1"
 starship = "1.24.1"
 "ubi:buildkite/agent" = { version = "3.114.0", exe = "buildkite-agent" }
-"ubi:coder/code-server" = { version = "4.106.2", bin_path = "bin", extract_all = "true" }
+"ubi:coder/code-server" = { version = "4.106.3", bin_path = "bin", extract_all = "true" }
 "ubi:honeycombio/buildevents" = "0.18.0"
 "ubi:peak/s5cmd" = "2.3.0"
 watchexec = "2.3.2"
