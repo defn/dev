@@ -282,3 +282,8 @@ __pycache__
 .awsvault
 .streamlit
 .addigy*
+!.cargo/config.toml
+!.config/direnv/direnv.toml
+!.config/k9s/plugins.yaml
+!.config/pypoetry/config.toml
+!.config/starship.toml

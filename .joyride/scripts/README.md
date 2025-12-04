@@ -9,6 +9,7 @@ This directory contains ClojureScript scripts for [Joyride](https://github.com/B
 ## Purpose
 
 These scripts provide:
+
 - VS Code automation and customization
 - Interactive ClojureScript development
 - Custom commands and workflows

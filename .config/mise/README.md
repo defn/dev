@@ -10,6 +10,7 @@ This directory contains configuration for [Mise](https://mise.jdx.dev/), a polyg
 ## Purpose
 
 Mise manages development tool versions and provides task automation:
+
 - Automatic tool version switching per project
 - Global and project-specific tool installations
 - Custom task definitions and automation

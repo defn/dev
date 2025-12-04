@@ -10,6 +10,7 @@ This directory contains [Joyride](https://github.com/BetterThanTomorrow/joyride)
 ## Purpose
 
 This is an alternative location for Joyride files that provides:
+
 - Custom VS Code automation scripts
 - ClojureScript-based editor extensions
 - Interactive development tools

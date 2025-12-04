@@ -8,8 +8,8 @@
 
 function main {
 	# Build documentation site from transformed YAML
-  cd ..
-  turbo build
+	cd ..
+	turbo build
 }
 
 main "$@"

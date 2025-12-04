@@ -5,9 +5,11 @@ GitHub repository configuration and automation.
 ## Contents
 
 ### Repository Configuration
+
 - **CODEOWNERS** - Defines code ownership and required reviewers for different parts of the repository
 
 ### Subdirectories
+
 - **workflows/** - GitHub Actions workflow definitions
 - **ISSUE_TEMPLATE/** - Issue template configurations
 
