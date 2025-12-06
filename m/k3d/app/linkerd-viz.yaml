@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: app-linkerd-viz
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/defn/dev
+    targetRevision: main
+    path: m/k3d/app/linkerd-viz
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: linkerd-viz
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true

@@ -1523,3 +1523,18 @@ spec:
       condition:
         method: GET
         pathRegex: /api/v1/series
+---
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: linkerd-viz
+  namespace: linkerd-viz
+spec:
+  entryPoints:
+    - web
+  routes:
+    - match: Host(`linkerd.defn.xxx`)
+      kind: Rule
+      services:
+        - name: web
+          port: 8084

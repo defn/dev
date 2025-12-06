@@ -64,6 +64,25 @@ spec:
       nodeSelector:
         "kubernetes.io/os": linux
 ---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: headlamp-admin
+  namespace: kube-system
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: headlamp-admin
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: cluster-admin
+subjects:
+  - kind: ServiceAccount
+    name: headlamp-admin
+    namespace: kube-system
+---
 kind: Secret
 apiVersion: v1
 metadata:
@@ -72,3 +91,18 @@ metadata:
   annotations:
     kubernetes.io/service-account.name: "headlamp-admin"
 type: kubernetes.io/service-account-token
+---
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: headlamp
+  namespace: kube-system
+spec:
+  entryPoints:
+    - web
+  routes:
+    - match: Host(`headlamp.defn.xxx`)
+      kind: Rule
+      services:
+        - name: headlamp
+          port: 80
