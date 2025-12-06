@@ -1,0 +1,23 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: app-www
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/defn/dev
+    targetRevision: main
+    path: m/k3d/app/www.yaml
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: app-www
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+    managedNamespaceMetadata:
+      annotations:
+        linkerd.io/inject: enabled
