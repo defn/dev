@@ -1,17 +1,17 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: app-linkerd-viz
+  name: app-linkerd
   namespace: argocd
 spec:
   project: default
   source:
     repoURL: https://github.com/defn/dev
     targetRevision: main
-    path: m/k3d/app/linkerd-viz
+    path: m/app/linkerd
   destination:
     server: https://kubernetes.default.svc
-    namespace: linkerd-viz
+    namespace: linkerd
   syncPolicy:
     automated:
       prune: true

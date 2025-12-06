@@ -1,17 +1,17 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: app-linkerd-crd
+  name: app-headlamp
   namespace: argocd
 spec:
   project: default
   source:
     repoURL: https://github.com/defn/dev
     targetRevision: main
-    path: m/k3d/app/linkerd-crd
+    path: m/app/headlamp
   destination:
     server: https://kubernetes.default.svc
-    namespace: default
+    namespace: kube-system
   syncPolicy:
     automated:
       prune: true

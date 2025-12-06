@@ -1,20 +1,18 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: app-linkerd
+  name: app-gateway
   namespace: argocd
 spec:
   project: default
   source:
     repoURL: https://github.com/defn/dev
     targetRevision: main
-    path: m/k3d/app/linkerd
+    path: m/app/gateway
   destination:
     server: https://kubernetes.default.svc
-    namespace: linkerd
+    namespace: default
   syncPolicy:
     automated:
       prune: true
       selfHeal: true
-    syncOptions:
-      - CreateNamespace=true
