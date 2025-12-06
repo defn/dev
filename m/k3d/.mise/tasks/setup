@@ -1,9 +1,14 @@
 #!/usr/bin/env bash
 
 function main {
+	# Start OCI registry (idempotent)
+	docker rm -f k3d-registry 2>/dev/null || true
+	docker run -d --name k3d-registry --restart always -p 169.254.32.1:5000:5000 -v k3d-registry:/var/lib/registry registry:2
 
 	k3d cluster delete
-	k3d cluster create -p "169.254.32.1:80:80@loadbalancer" -p "169.254.32.1:443:443@loadbalancer" \
+	k3d cluster create \
+		--registry-config "$(pwd)/registries.yaml" \
+		-p "169.254.32.1:80:80@loadbalancer" -p "169.254.32.1:443:443@loadbalancer" \
 		-v "$(pwd)/k3d-registry.yaml:/var/lib/rancher/k3s/server/manifests/k3d-registry.yaml@server:*" \
 		-v "$(pwd)/k3d-admin.yaml:/var/lib/rancher/k3s/server/manifests/k3d-admin.yaml@server:*" \
 		-v "$(pwd)/k3d-argocd.yaml:/var/lib/rancher/k3s/server/manifests/k3d-argocd.yaml@server:*" \

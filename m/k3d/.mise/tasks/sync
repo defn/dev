@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+# Synchronize images from k3d pods to local registry
+# Uses skopeo to preserve multi-platform manifests
+
+kubectl get -A pods -o yaml | grep 'image: ' | cut -d: -f2- | sort -u | while read img; do
+  dest=$(echo "$img" | perl -pe 's{(\w+\.)+\w+/}{}')
+  echo "Syncing $img -> defn.xxx:5000/${dest}"
+  skopeo copy --all --dest-tls-verify=false \
+    "docker://${img}" \
+    "docker://defn.xxx:5000/${dest}"
+done
