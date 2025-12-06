@@ -7,6 +7,14 @@ function main {
 
 	k3d cluster delete --config k3d.yaml
 	k3d cluster create --config k3d.yaml
+
+	tput smcup  # enter alternate screen
+	trap 'tput rmcup' EXIT # restore on exit
+
+	while kubectl get deployments,statefulsets -A --no-headers | talign 3 | perl -ne '$found++ if !/(\d+)\/\1/ && print; END { exit 1 unless $found }'; do
+		sleep 5
+		clear
+	done
 }
 
 main "$@"
