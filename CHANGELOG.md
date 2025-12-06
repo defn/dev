@@ -1,5 +1,26 @@
 # Changelog
 
+## [1.57.0](https://github.com/defn/dev/compare/v1.56.0...v1.57.0) (2025-12-06)
+
+
+### Features
+
+* add linkerd service mesh and gateway api support ([200f49d](https://github.com/defn/dev/commit/200f49d83505ba01753a80a820f98ffc130c5ee3))
+* add macOS VS Code support to code wrapper ([3b75c90](https://github.com/defn/dev/commit/3b75c9085169b1f0ed9d3b8dc370e9a5e935f84a))
+* add progress display for waiting on cluster readiness ([9c33709](https://github.com/defn/dev/commit/9c337095d8581a8fa5913e6ef29d309061ca9837))
+* add traefik dashboard ingress and remove in-cluster registry ([44442e7](https://github.com/defn/dev/commit/44442e7a87b7117d7f6dd79d9f9ea8a83f81d29c))
+* add volume mounts for linkerd and gateway manifests ([0efa889](https://github.com/defn/dev/commit/0efa889b196588027b7e62a99dc341865dfa42c5))
+* use declarative manifests for k3d cluster setup ([3a62158](https://github.com/defn/dev/commit/3a62158bd07c1e9cd731c27548a1ddf08f2e99ab))
+* use ingress hostnames for argocd and headlamp ([37028bb](https://github.com/defn/dev/commit/37028bb7d42d205c47254c027b6a7a1ce582abef))
+* use skopeo for multi-platform image sync ([98fe490](https://github.com/defn/dev/commit/98fe49091b5cb58697a3170ff52a4ed300abd166))
+
+
+### Bug Fixes
+
+* add /usr/local/bin to PATH for macOS x86 bash ([45eff62](https://github.com/defn/dev/commit/45eff62cd03a2e23452ad7767c4bf2bab1671579))
+* add GNU coreutils paths to Bazel PATH ([e652fd5](https://github.com/defn/dev/commit/e652fd528f7fe1a9cefad79ab381b8d710f8eda3))
+* mise self-update before install, add tailscale to trusted hosts ([562ccfb](https://github.com/defn/dev/commit/562ccfbea4375dfb089644ffb65c05dc4e31cc93))
+
 ## [1.56.0](https://github.com/defn/dev/compare/v1.55.0...v1.56.0) (2025-12-01)
 
 
