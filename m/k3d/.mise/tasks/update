@@ -9,6 +9,8 @@ function main {
 	cue import argocd.yaml -f -R -p k3d -l '"kube"' -l '"argocd"' -l 'kind' -l metadata.name
 	cue import headlamp.yaml -f -R -p k3d -l '"kube"' -l '"headlamp"' -l 'kind' -l metadata.name
 
+	cue cmd dump | yq eval 'select(.metadata.namespace == null) .metadata.namespace = "argocd"' >k3d-argocd.yaml
+
 	trunk fmt
 	cue fmt
 
