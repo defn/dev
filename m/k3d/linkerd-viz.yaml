@@ -1,0 +1,1525 @@
+---
+###
+### Linkerd Viz Extension Namespace
+###
+kind: Namespace
+apiVersion: v1
+metadata:
+  name: linkerd-viz
+  labels:
+    linkerd.io/extension: viz
+    pod-security.kubernetes.io/enforce: privileged
+  annotations:
+---
+###
+### Metrics API RBAC
+###
+kind: ClusterRole
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: linkerd-linkerd-viz-metrics-api
+  labels:
+    linkerd.io/extension: viz
+    component: metrics-api
+rules:
+  - apiGroups: ["extensions", "apps"]
+    resources: ["daemonsets", "deployments", "replicasets", "statefulsets"]
+    verbs: ["list", "get", "watch"]
+  - apiGroups: ["extensions", "batch"]
+    resources: ["cronjobs", "jobs"]
+    verbs: ["list", "get", "watch"]
+  - apiGroups: [""]
+    resources:
+      ["pods", "endpoints", "services", "replicationcontrollers", "namespaces"]
+    verbs: ["list", "get", "watch"]
+  - apiGroups: ["linkerd.io"]
+    resources: ["serviceprofiles"]
+    verbs: ["list", "get", "watch"]
+  - apiGroups: ["policy.linkerd.io"]
+    resources:
+      ["servers", "serverauthorizations", "authorizationpolicies", "httproutes"]
+    verbs: ["list", "get"]
+---
+kind: ClusterRoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: linkerd-linkerd-viz-metrics-api
+  labels:
+    linkerd.io/extension: viz
+    component: metrics-api
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: linkerd-linkerd-viz-metrics-api
+subjects:
+  - kind: ServiceAccount
+    name: metrics-api
+    namespace: linkerd-viz
+---
+kind: ServiceAccount
+apiVersion: v1
+metadata:
+  name: metrics-api
+  namespace: linkerd-viz
+  labels:
+    linkerd.io/extension: viz
+    component: metrics-api
+---
+###
+### Prometheus RBAC
+###
+kind: ClusterRole
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: linkerd-linkerd-viz-prometheus
+  labels:
+    linkerd.io/extension: viz
+    component: prometheus
+rules:
+  - apiGroups: [""]
+    resources: ["nodes", "nodes/proxy", "pods"]
+    verbs: ["get", "list", "watch"]
+---
+kind: ClusterRoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: linkerd-linkerd-viz-prometheus
+  labels:
+    linkerd.io/extension: viz
+    component: prometheus
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: linkerd-linkerd-viz-prometheus
+subjects:
+  - kind: ServiceAccount
+    name: prometheus
+    namespace: linkerd-viz
+---
+kind: ServiceAccount
+apiVersion: v1
+metadata:
+  name: prometheus
+  namespace: linkerd-viz
+  labels:
+    linkerd.io/extension: viz
+    component: prometheus
+    namespace: linkerd-viz
+---
+###
+### Tap RBAC
+###
+kind: ClusterRole
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: linkerd-linkerd-viz-tap
+  labels:
+    linkerd.io/extension: viz
+    component: tap
+rules:
+  - apiGroups: [""]
+    resources:
+      ["pods", "services", "replicationcontrollers", "namespaces", "nodes"]
+    verbs: ["list", "get", "watch"]
+  - apiGroups: ["extensions", "apps"]
+    resources: ["daemonsets", "deployments", "replicasets", "statefulsets"]
+    verbs: ["list", "get", "watch"]
+  - apiGroups: ["extensions", "batch"]
+    resources: ["cronjobs", "jobs"]
+    verbs: ["list", "get", "watch"]
+---
+kind: ClusterRole
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: linkerd-linkerd-viz-tap-admin
+  labels:
+    linkerd.io/extension: viz
+    component: tap
+rules:
+  - apiGroups: [""]
+    resources: ["namespaces"]
+    verbs: ["list"]
+  - apiGroups: ["tap.linkerd.io"]
+    resources: ["*"]
+    verbs: ["watch"]
+---
+kind: ClusterRoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: linkerd-linkerd-viz-tap
+  labels:
+    linkerd.io/extension: viz
+    component: tap
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: linkerd-linkerd-viz-tap
+subjects:
+  - kind: ServiceAccount
+    name: tap
+    namespace: linkerd-viz
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: linkerd-linkerd-viz-tap-auth-delegator
+  labels:
+    linkerd.io/extension: viz
+    component: tap
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: system:auth-delegator
+subjects:
+  - kind: ServiceAccount
+    name: tap
+    namespace: linkerd-viz
+---
+kind: ServiceAccount
+apiVersion: v1
+metadata:
+  name: tap
+  namespace: linkerd-viz
+  labels:
+    linkerd.io/extension: viz
+    component: tap
+    namespace: linkerd-viz
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: linkerd-linkerd-viz-tap-auth-reader
+  namespace: kube-system
+  labels:
+    linkerd.io/extension: viz
+    component: tap
+    namespace: linkerd-viz
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: extension-apiserver-authentication-reader
+subjects:
+  - kind: ServiceAccount
+    name: tap
+    namespace: linkerd-viz
+---
+kind: Secret
+apiVersion: v1
+metadata:
+  name: tap-k8s-tls
+  namespace: linkerd-viz
+  labels:
+    linkerd.io/extension: viz
+    component: tap
+    namespace: linkerd-viz
+  annotations:
+    linkerd.io/created-by: linkerd/cli edge-25.12.1
+type: kubernetes.io/tls
+data:
+  tls.crt: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURKakNDQWc2Z0F3SUJBZ0lSQUk3WjRFSUgwdnc4RERZMjQvVWZ0MWt3RFFZSktvWklodmNOQVFFTEJRQXcKSGpFY01Cb0dBMVVFQXhNVGRHRndMbXhwYm10bGNtUXRkbWw2TG5OMll6QWVGdzB5TlRFeU1EWXdPREl6TWpoYQpGdzB5TmpFeU1EWXdPREl6TWpoYU1CNHhIREFhQmdOVkJBTVRFM1JoY0M1c2FXNXJaWEprTFhacGVpNXpkbU13CmdnRWlNQTBHQ1NxR1NJYjNEUUVCQVFVQUE0SUJEd0F3Z2dFS0FvSUJBUUN2L1JVcCtqWXhiWC8vbkh2eHJiaTkKbHNHdFJzbDYzU1VkSzdSanBMNFhzN1dqTk9ZWkd3L1FwMGZ0K1VNMVBRcFJaN3IySHllUEdNOUY4QW1mSCtaQwplVUpDMU84em1odzYwMHdMTjJjRTVTbEgvTytBSkFpVzJGR2xkWFhXYUlUNW1wQW0rY1FnYmlTZVk1QXdVaDRwCk1wcytOeUlKNVVBUnphZlZMbVhOdjZWZ1h2U015OFdCSzdTSFl3THBCS05nbUFQY1dsS0NlSkJFcExWR3dpWnEKd1BHSkdLUkpmbHBrZE1VUUlQOW1qbGxmY2ZuOTQvZVluMlNvcVUyakYxWXhDQWtTRzdPakhTNTVETmFUdW9KWAplVlE3SE1XU3E2amgxL0xhajJ5a3lvRXdvc2hkMnRYcE93NGZoOHZQY01QTXBBdXRjaDNPVFU1UnN6V2Q0UXZQCkFnTUJBQUdqWHpCZE1BNEdBMVVkRHdFQi93UUVBd0lGb0RBZEJnTlZIU1VFRmpBVUJnZ3JCZ0VGQlFjREFRWUkKS3dZQkJRVUhBd0l3REFZRFZSMFRBUUgvQkFJd0FEQWVCZ05WSFJFRUZ6QVZnaE4wWVhBdWJHbHVhMlZ5WkMxMgphWG91YzNaak1BMEdDU3FHU0liM0RRRUJDd1VBQTRJQkFRQi9iczI3RWY5L2ZrSG5zRWlsNSs1RG0zTnVZTVd0CmpMcFVQa3Z4UlF0TWUyT3MxYzRYTTZNc0FhSmhWdGRRbzZvdi84YnN4SFJEbmtYU3U3ODZtTExxNnNHZzM0YUwKNlBIL015MFRLRVVTZUpJV2lTR3p6cG82cWJVT3Q0cytib3dDSkl0ZkJ2MndRZERmRjdHRW5vNDRxQmNlTWc4QwpMb2J5UXA0RFFqQW1waWVGQko2WVVLTUNIQXZ0ZmtnT0RYUVozUGhsRk9qWXE1MHJwRWh0aHJsWVZUVDBqSXBGCkRUMVNEakhNTWU3NGRocW00eTBXZFArUHZLOWpBSmRuNHBRMWNzZHVmVkhoaGhrWEJ1eDFScjBrbzdvYzJDeUIKaHRjNTFnN3h6T1h3LzZ0L09zVHZTM2xVTW5iRUJ0ajcwVEtWRDExYUM5WUhjMnBHZzdVOEl1VlcKLS0tLS1FTkQgQ0VSVElGSUNBVEUtLS0tLQ==
+  tls.key: LS0tLS1CRUdJTiBSU0EgUFJJVkFURSBLRVktLS0tLQpNSUlFcEFJQkFBS0NBUUVBci8wVktmbzJNVzEvLzV4NzhhMjR2WmJCclViSmV0MGxIU3UwWTZTK0Y3TzFvelRtCkdSc1AwS2RIN2ZsRE5UMEtVV2U2OWg4bmp4alBSZkFKbngvbVFubENRdFR2TTVvY090Tk1DemRuQk9VcFIvenYKZ0NRSWx0aFJwWFYxMW1pRStacVFKdm5FSUc0a25tT1FNRkllS1RLYlBqY2lDZVZBRWMybjFTNWx6YitsWUY3MApqTXZGZ1N1MGgyTUM2UVNqWUpnRDNGcFNnbmlRUktTMVJzSW1hc0R4aVJpa1NYNWFaSFRGRUNEL1pvNVpYM0g1Ci9lUDNtSjlrcUtsTm94ZFdNUWdKRWh1em94MHVlUXpXazdxQ1YzbFVPeHpGa3F1bzRkZnkybzlzcE1xQk1LTEkKWGRyVjZUc09INGZMejNERHpLUUxyWElkemsxT1ViTTFuZUVMendJREFRQUJBb0lCQUFIckxmQmp1SFNJZjVVLwpWUUNaQnNNV1lpMHI4T1ZraE5PUkZ1bmhNV3RidTdhNFRHdm9waDc5dStTRnk2eElhcFRobnlHd3pFTWNuNkhoCkVKSEtETDRieVZPbU02ZHAzalhyK00vRWZseUl6UTdxWElnV25IdGNoMk5ZNlB4NTdqMDBhSzdzR1MzTFZaM2UKY3dONzJiVlVSbW9DdXQzRndKR1JIdXZOa2pHUWlUQ1cvUVFTWlNkTjdYejJPcDlvVFpZaXI1blU0c1BEUkdFawpYV21TUC9EeExXTGxlZzJ5RERxbk45SG9MR2ovSUMwWHREa2NlSnk1VjlRWWNTZlZNMCswVGp4Mm1IQWo3YzJQCk4yajVEU0dVQUFEVGlQUEQvaGhkcld5YUdrZEFVT3NjeVRJZzhMV1hkdDlYQU1xZi91andpeXZ6WncybENlc3kKZW5BVFU5VUNnWUVBM2F6RVRBdkxIR2RYN0V2elNNTTd6NkpHdzVJeVRDUTd6emFBMExQc3VHc2hmOHNIZjlVWAozSkZ6TW5tSzl4QUlpNUFUUWZrNEE5QVJFcGlTOW8zNjlJaHMzbFc5ckhnOSt0T2U4N1pNaHhEOHg3V2NoQXJ6ClBxQ05yYUExSVU3SmZYL2RMdGcvVnpTRWhuVmdCTEk5N3ltazBLUldLSWNmOGlpQ2tlNE02c01DZ1lFQXl6MU4KeEVBQkhnTUw3ZVI1QXpDOUwwOG1LOXhZTGtPMlYrM09hNncyNFhxblkySmtwSHVIcVJzS3Qvd3FFcXJqUWFPegpoV0xWUVVpcFdsTlpiaGdIWHFXeXFBcTI2MzZVc254bDFlWUs0RnRtVGoybVVIaURRaTFPcFNaMU5ZaFBhM0VhCkM5a0tjY3ZDdVltWWFlbUFZM0Ira0UrcWpwdzlHaWFLS2diNlVnVUNnWUFhZmNNWHMzRWFlOTh1QmdXVTlILzUKV0ZOTW0vUVcxVjJ3YmJzSE5mbGNNTEZZTEZOQkc1NDJaY3QyaEwvdXRxUE95ZkVET1YxUVYxVXkrN2pVYmpOSApkZVpNeThKWEVpZVdDaVE4eTlScGI4WkZ0NVowMFRvd2ljOWtxSGl3K2xGcUJoWFF1MWNXZk5nNW1WMVlNbFRrCmQvMlNVWkZhVm91aXpPU051LzBmTVFLQmdRREtybWM0ZUkva3F5c2hZZ0Rna3FHSVpZbHVvajU2WE9LaWk3Q1kKcGxUUXhpM2FLZ3l1RDljNWFKTm02aDNYSWY2aXZpdFFzVUIwNjQ2Z1dwREwvMENTUGZLT0xLbEE3cXBCMlZjQgpXbm1zUnRvZTJ0SmFXK1NpZ1daMXdvV1BEbElObHV4ZnRtSDVIRGdrS2JrS25tZUFRM2FrV2g2QVBBV2ZaNkhQCnljZW5OUUtCZ1FDTEEzUkJtV2I3THAySDRYV0h6VzRKT1ZNcFdBTHk5bUoyZjJMb2dGeCtzUm5VOWc4ckVnK3oKMW9kKzlMZFI2MXJhaElLV3J2WHVTRXExNEhiVmxhMTVYS2dNOGNNWmc4VW9LN253N0c1eS9TS3NrNXVkU09ueQpwUjZoQzVZWExBREpLaTRaUEcwNDJpdTRUdkZuVnJGZEhkRXgyek1LS2x2ZzZJaVRiTForN0E9PQotLS0tLUVORCBSU0EgUFJJVkFURSBLRVktLS0tLQ==
+---
+apiVersion: apiregistration.k8s.io/v1
+kind: APIService
+metadata:
+  name: v1alpha1.tap.linkerd.io
+  labels:
+    linkerd.io/extension: viz
+    component: tap
+spec:
+  group: tap.linkerd.io
+  version: v1alpha1
+  groupPriorityMinimum: 1000
+  versionPriority: 100
+  service:
+    name: tap
+    namespace: linkerd-viz
+  caBundle: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURKakNDQWc2Z0F3SUJBZ0lSQUk3WjRFSUgwdnc4RERZMjQvVWZ0MWt3RFFZSktvWklodmNOQVFFTEJRQXcKSGpFY01Cb0dBMVVFQXhNVGRHRndMbXhwYm10bGNtUXRkbWw2TG5OMll6QWVGdzB5TlRFeU1EWXdPREl6TWpoYQpGdzB5TmpFeU1EWXdPREl6TWpoYU1CNHhIREFhQmdOVkJBTVRFM1JoY0M1c2FXNXJaWEprTFhacGVpNXpkbU13CmdnRWlNQTBHQ1NxR1NJYjNEUUVCQVFVQUE0SUJEd0F3Z2dFS0FvSUJBUUN2L1JVcCtqWXhiWC8vbkh2eHJiaTkKbHNHdFJzbDYzU1VkSzdSanBMNFhzN1dqTk9ZWkd3L1FwMGZ0K1VNMVBRcFJaN3IySHllUEdNOUY4QW1mSCtaQwplVUpDMU84em1odzYwMHdMTjJjRTVTbEgvTytBSkFpVzJGR2xkWFhXYUlUNW1wQW0rY1FnYmlTZVk1QXdVaDRwCk1wcytOeUlKNVVBUnphZlZMbVhOdjZWZ1h2U015OFdCSzdTSFl3THBCS05nbUFQY1dsS0NlSkJFcExWR3dpWnEKd1BHSkdLUkpmbHBrZE1VUUlQOW1qbGxmY2ZuOTQvZVluMlNvcVUyakYxWXhDQWtTRzdPakhTNTVETmFUdW9KWAplVlE3SE1XU3E2amgxL0xhajJ5a3lvRXdvc2hkMnRYcE93NGZoOHZQY01QTXBBdXRjaDNPVFU1UnN6V2Q0UXZQCkFnTUJBQUdqWHpCZE1BNEdBMVVkRHdFQi93UUVBd0lGb0RBZEJnTlZIU1VFRmpBVUJnZ3JCZ0VGQlFjREFRWUkKS3dZQkJRVUhBd0l3REFZRFZSMFRBUUgvQkFJd0FEQWVCZ05WSFJFRUZ6QVZnaE4wWVhBdWJHbHVhMlZ5WkMxMgphWG91YzNaak1BMEdDU3FHU0liM0RRRUJDd1VBQTRJQkFRQi9iczI3RWY5L2ZrSG5zRWlsNSs1RG0zTnVZTVd0CmpMcFVQa3Z4UlF0TWUyT3MxYzRYTTZNc0FhSmhWdGRRbzZvdi84YnN4SFJEbmtYU3U3ODZtTExxNnNHZzM0YUwKNlBIL015MFRLRVVTZUpJV2lTR3p6cG82cWJVT3Q0cytib3dDSkl0ZkJ2MndRZERmRjdHRW5vNDRxQmNlTWc4QwpMb2J5UXA0RFFqQW1waWVGQko2WVVLTUNIQXZ0ZmtnT0RYUVozUGhsRk9qWXE1MHJwRWh0aHJsWVZUVDBqSXBGCkRUMVNEakhNTWU3NGRocW00eTBXZFArUHZLOWpBSmRuNHBRMWNzZHVmVkhoaGhrWEJ1eDFScjBrbzdvYzJDeUIKaHRjNTFnN3h6T1h3LzZ0L09zVHZTM2xVTW5iRUJ0ajcwVEtWRDExYUM5WUhjMnBHZzdVOEl1VlcKLS0tLS1FTkQgQ0VSVElGSUNBVEUtLS0tLQ==
+---
+###
+### Web RBAC
+###
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: web
+  namespace: linkerd
+  labels:
+    linkerd.io/extension: viz
+    component: web
+    namespace: linkerd
+rules:
+  - apiGroups: [""]
+    resources: ["configmaps"]
+    verbs: ["get"]
+    resourceNames: ["linkerd-config"]
+  - apiGroups: [""]
+    resources: ["namespaces", "configmaps"]
+    verbs: ["get"]
+  - apiGroups: [""]
+    resources: ["serviceaccounts", "pods"]
+    verbs: ["list"]
+  - apiGroups: ["apps"]
+    resources: ["replicasets"]
+    verbs: ["list"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: web
+  namespace: linkerd
+  labels:
+    linkerd.io/extension: viz
+    component: web
+    namespace: linkerd
+roleRef:
+  kind: Role
+  name: web
+  apiGroup: rbac.authorization.k8s.io
+subjects:
+  - kind: ServiceAccount
+    name: web
+    namespace: linkerd-viz
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: linkerd-linkerd-viz-web-check
+  labels:
+    linkerd.io/extension: viz
+    component: web
+rules:
+  - apiGroups: ["rbac.authorization.k8s.io"]
+    resources: ["clusterroles", "clusterrolebindings"]
+    verbs: ["list"]
+  - apiGroups: ["apiextensions.k8s.io"]
+    resources: ["customresourcedefinitions"]
+    verbs: ["list"]
+  - apiGroups: ["admissionregistration.k8s.io"]
+    resources:
+      ["mutatingwebhookconfigurations", "validatingwebhookconfigurations"]
+    verbs: ["list"]
+  - apiGroups: ["linkerd.io"]
+    resources: ["serviceprofiles"]
+    verbs: ["list"]
+  - apiGroups: [""]
+    resources: ["nodes", "pods", "services"]
+    verbs: ["list"]
+  - apiGroups: ["apiregistration.k8s.io"]
+    resources: ["apiservices"]
+    verbs: ["get"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: linkerd-linkerd-viz-web-check
+  labels:
+    linkerd.io/extension: viz
+    component: web
+roleRef:
+  kind: ClusterRole
+  name: linkerd-linkerd-viz-web-check
+  apiGroup: rbac.authorization.k8s.io
+subjects:
+  - kind: ServiceAccount
+    name: web
+    namespace: linkerd-viz
+---
+kind: ClusterRoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: linkerd-linkerd-viz-web-admin
+  labels:
+    linkerd.io/extension: viz
+    component: web
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: linkerd-linkerd-viz-tap-admin
+subjects:
+  - kind: ServiceAccount
+    name: web
+    namespace: linkerd-viz
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: linkerd-linkerd-viz-web-api
+  labels:
+    linkerd.io/extension: viz
+    component: web
+rules:
+  - apiGroups: [""]
+    resources: ["namespaces"]
+    verbs: ["list"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: linkerd-linkerd-viz-web-api
+  labels:
+    linkerd.io/extension: viz
+    component: web
+roleRef:
+  kind: ClusterRole
+  name: linkerd-linkerd-viz-web-api
+  apiGroup: rbac.authorization.k8s.io
+subjects:
+  - kind: ServiceAccount
+    name: web
+    namespace: linkerd-viz
+---
+kind: ServiceAccount
+apiVersion: v1
+metadata:
+  name: web
+  namespace: linkerd-viz
+  labels:
+    linkerd.io/extension: viz
+    component: web
+    namespace: linkerd-viz
+---
+###
+### Metrics API
+###
+kind: Service
+apiVersion: v1
+metadata:
+  name: metrics-api
+  namespace: linkerd-viz
+  labels:
+    linkerd.io/extension: viz
+    component: metrics-api
+  annotations:
+    linkerd.io/created-by: linkerd/cli edge-25.12.1
+    linkerd.io/inject: enabled
+spec:
+  type: ClusterIP
+  selector:
+    linkerd.io/extension: viz
+    component: metrics-api
+  ports:
+    - name: http
+      port: 8085
+      targetPort: 8085
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    linkerd.io/created-by: linkerd/cli edge-25.12.1
+    linkerd.io/inject: enabled
+    config.linkerd.io/proxy-await: "enabled"
+  labels:
+    linkerd.io/extension: viz
+    app.kubernetes.io/name: metrics-api
+    app.kubernetes.io/part-of: Linkerd
+    app.kubernetes.io/version: edge-25.12.1
+    component: metrics-api
+  name: metrics-api
+  namespace: linkerd-viz
+spec:
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      linkerd.io/extension: viz
+      component: metrics-api
+  template:
+    metadata:
+      annotations:
+        linkerd.io/created-by: linkerd/cli edge-25.12.1
+        linkerd.io/inject: enabled
+        config.alpha.linkerd.io/proxy-wait-before-exit-seconds: "0"
+        cluster-autoscaler.kubernetes.io/safe-to-evict: "true"
+      labels:
+        linkerd.io/extension: viz
+        component: metrics-api
+    spec:
+      nodeSelector:
+        kubernetes.io/os: linux
+      automountServiceAccountToken: false
+      containers:
+        - args:
+            - -controller-namespace=linkerd
+            - -log-level=info
+            - -log-format=plain
+            - -cluster-domain=cluster.local
+            - -prometheus-url=http://prometheus.linkerd-viz.svc.cluster.local:9090
+            - -enable-pprof=false
+          image: cr.l5d.io/linkerd/metrics-api:edge-25.12.1
+          imagePullPolicy: IfNotPresent
+          livenessProbe:
+            httpGet:
+              path: /ping
+              port: 9995
+            initialDelaySeconds: 10
+          name: metrics-api
+          ports:
+            - containerPort: 8085
+              name: http
+            - containerPort: 9995
+              name: admin
+          readinessProbe:
+            failureThreshold: 7
+            httpGet:
+              path: /ready
+              port: 9995
+          resources:
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+                - ALL
+            runAsNonRoot: true
+            readOnlyRootFilesystem: true
+            runAsUser: 2103
+            runAsGroup: 2103
+            seccompProfile:
+              type: RuntimeDefault
+          volumeMounts:
+            - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+              name: kube-api-access
+              readOnly: true
+      securityContext:
+        seccompProfile:
+          type: RuntimeDefault
+      serviceAccountName: metrics-api
+      volumes:
+        - name: kube-api-access
+          projected:
+            defaultMode: 420
+            sources:
+              - serviceAccountToken:
+                  expirationSeconds: 3607
+                  path: token
+              - configMap:
+                  items:
+                    - key: ca.crt
+                      path: ca.crt
+                  name: kube-root-ca.crt
+              - downwardAPI:
+                  items:
+                    - fieldRef:
+                        apiVersion: v1
+                        fieldPath: metadata.namespace
+                      path: namespace
+---
+apiVersion: policy.linkerd.io/v1beta3
+kind: Server
+metadata:
+  namespace: linkerd-viz
+  name: metrics-api
+  labels:
+    linkerd.io/extension: viz
+    component: metrics-api
+  annotations:
+    linkerd.io/created-by: linkerd/cli edge-25.12.1
+spec:
+  podSelector:
+    matchLabels:
+      linkerd.io/extension: viz
+      component: metrics-api
+  port: http
+  proxyProtocol: HTTP/1
+---
+apiVersion: policy.linkerd.io/v1alpha1
+kind: AuthorizationPolicy
+metadata:
+  namespace: linkerd-viz
+  name: metrics-api
+  labels:
+    linkerd.io/extension: viz
+    component: metrics-api
+  annotations:
+    linkerd.io/created-by: linkerd/cli edge-25.12.1
+spec:
+  targetRef:
+    group: policy.linkerd.io
+    kind: Server
+    name: metrics-api
+  requiredAuthenticationRefs:
+    - group: policy.linkerd.io
+      kind: MeshTLSAuthentication
+      name: metrics-api-web
+---
+apiVersion: policy.linkerd.io/v1alpha1
+kind: MeshTLSAuthentication
+metadata:
+  namespace: linkerd-viz
+  name: metrics-api-web
+  labels:
+    linkerd.io/extension: viz
+    component: metrics-api
+  annotations:
+    linkerd.io/created-by: linkerd/cli edge-25.12.1
+spec:
+  identityRefs:
+    - kind: ServiceAccount
+      name: web
+---
+apiVersion: policy.linkerd.io/v1alpha1
+kind: NetworkAuthentication
+metadata:
+  namespace: linkerd-viz
+  name: kubelet
+  labels:
+    linkerd.io/extension: viz
+  annotations:
+    linkerd.io/created-by: linkerd/cli edge-25.12.1
+spec:
+  # Ideally, this should be restricted to the actual set of IPs kubelet uses in
+  # a cluster. This can't easily be discovered.
+  networks:
+    - cidr: "0.0.0.0/0"
+    - cidr: "::/0"
+---
+###
+### Prometheus
+###
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: prometheus-config
+  namespace: linkerd-viz
+  labels:
+    linkerd.io/extension: viz
+    component: prometheus
+    namespace: linkerd-viz
+  annotations:
+    linkerd.io/created-by: linkerd/cli edge-25.12.1
+data:
+  prometheus.yml: |-
+    global:
+      evaluation_interval: 10s
+      scrape_interval: 10s
+      scrape_timeout: 10s
+
+    rule_files:
+    - /etc/prometheus/*_rules.yml
+    - /etc/prometheus/*_rules.yaml
+
+    scrape_configs:
+    - job_name: 'prometheus'
+      static_configs:
+      - targets: ['localhost:9090']
+
+    #  Required for: https://grafana.com/grafana/dashboards/315
+    - job_name: 'kubernetes-nodes-cadvisor'
+      scheme: https
+      tls_config:
+        ca_file: /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
+        insecure_skip_verify: true
+      bearer_token_file: /var/run/secrets/kubernetes.io/serviceaccount/token
+      kubernetes_sd_configs:
+      - role: node
+      relabel_configs:
+      - action: labelmap
+        regex: __meta_kubernetes_node_label_(.+)
+      - target_label: __address__
+        replacement: kubernetes.default.svc:443
+      - source_labels: [__meta_kubernetes_node_name]
+        regex: (.+)
+        target_label: __metrics_path__
+        replacement: /api/v1/nodes/$1/proxy/metrics/cadvisor
+      metric_relabel_configs:
+      - source_labels: [__name__]
+        regex: '(container|machine)_(cpu|memory|network|fs)_(.+)'
+        action: keep
+      - source_labels: [__name__]
+        regex: 'container_memory_failures_total' # unneeded large metric
+        action: drop
+
+    - job_name: 'linkerd-controller'
+      kubernetes_sd_configs:
+      - role: pod
+        namespaces:
+          names:
+          - 'linkerd'
+          - 'linkerd-viz'
+      relabel_configs:
+      - source_labels:
+        - __meta_kubernetes_pod_container_port_name
+        action: keep
+        regex: admin
+      - source_labels: [__meta_kubernetes_pod_container_name]
+        action: replace
+        target_label: component
+
+    - job_name: 'linkerd-multicluster-controller'
+      kubernetes_sd_configs:
+      - role: pod
+      relabel_configs:
+      - source_labels:
+        - __meta_kubernetes_pod_label_component
+        - __meta_kubernetes_pod_container_port_name
+        action: keep
+        regex: (linkerd-service-mirror|controller);admin$
+      - source_labels: [__meta_kubernetes_pod_container_name]
+        action: replace
+        target_label: component
+
+    - job_name: 'linkerd-proxy'
+      kubernetes_sd_configs:
+      - role: pod
+      relabel_configs:
+      - source_labels:
+        - __meta_kubernetes_pod_container_name
+        - __meta_kubernetes_pod_container_port_name
+        - __meta_kubernetes_pod_label_linkerd_io_control_plane_ns
+        action: keep
+        regex: ^linkerd-proxy;linkerd-admin;linkerd$
+      - source_labels: [__meta_kubernetes_namespace]
+        action: replace
+        target_label: namespace
+      - source_labels: [__meta_kubernetes_pod_name]
+        action: replace
+        target_label: pod
+      # special case k8s' "job" label, to not interfere with prometheus' "job"
+      # label
+      # __meta_kubernetes_pod_label_linkerd_io_proxy_job=foo =>
+      # k8s_job=foo
+      - source_labels: [__meta_kubernetes_pod_label_linkerd_io_proxy_job]
+        action: replace
+        target_label: k8s_job
+      # drop __meta_kubernetes_pod_label_linkerd_io_proxy_job
+      - action: labeldrop
+        regex: __meta_kubernetes_pod_label_linkerd_io_proxy_job
+      # __meta_kubernetes_pod_label_linkerd_io_proxy_deployment=foo =>
+      # deployment=foo
+      - action: labelmap
+        regex: __meta_kubernetes_pod_label_linkerd_io_proxy_(.+)
+      # drop all labels that we just made copies of in the previous labelmap
+      - action: labeldrop
+        regex: __meta_kubernetes_pod_label_linkerd_io_proxy_(.+)
+      # __meta_kubernetes_pod_label_linkerd_io_foo=bar =>
+      # foo=bar
+      - action: labelmap
+        regex: __meta_kubernetes_pod_label_linkerd_io_(.+)
+      # Copy all pod labels to tmp labels
+      - action: labelmap
+        regex: __meta_kubernetes_pod_label_(.+)
+        replacement: __tmp_pod_label_$1
+      # Take `linkerd_io_` prefixed labels and copy them without the prefix
+      - action: labelmap
+        regex: __tmp_pod_label_linkerd_io_(.+)
+        replacement:  __tmp_pod_label_$1
+      # Drop the `linkerd_io_` originals
+      - action: labeldrop
+        regex: __tmp_pod_label_linkerd_io_(.+)
+      # Copy tmp labels into real labels
+      - action: labelmap
+        regex: __tmp_pod_label_(.+)
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: prometheus
+  namespace: linkerd-viz
+  labels:
+    linkerd.io/extension: viz
+    component: prometheus
+    namespace: linkerd-viz
+  annotations:
+    linkerd.io/created-by: linkerd/cli edge-25.12.1
+    linkerd.io/inject: enabled
+spec:
+  type: ClusterIP
+  selector:
+    linkerd.io/extension: viz
+    component: prometheus
+  ports:
+    - name: admin
+      port: 9090
+      targetPort: 9090
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    linkerd.io/created-by: linkerd/cli edge-25.12.1
+    linkerd.io/inject: enabled
+    config.linkerd.io/proxy-await: "enabled"
+  labels:
+    linkerd.io/extension: viz
+    app.kubernetes.io/name: prometheus
+    app.kubernetes.io/part-of: Linkerd
+    app.kubernetes.io/version: edge-25.12.1
+    component: prometheus
+    namespace: linkerd-viz
+  name: prometheus
+  namespace: linkerd-viz
+spec:
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      linkerd.io/extension: viz
+      component: prometheus
+      namespace: linkerd-viz
+  template:
+    metadata:
+      annotations:
+        linkerd.io/created-by: linkerd/cli edge-25.12.1
+        linkerd.io/inject: enabled
+        config.alpha.linkerd.io/proxy-wait-before-exit-seconds: "0"
+      labels:
+        linkerd.io/extension: viz
+        component: prometheus
+        namespace: linkerd-viz
+    spec:
+      nodeSelector:
+        kubernetes.io/os: linux
+      automountServiceAccountToken: false
+      containers:
+        - args:
+            - --log.level=info
+            - --log.format=logfmt
+            - --config.file=/etc/prometheus/prometheus.yml
+            - --storage.tsdb.path=/data
+            - --storage.tsdb.retention.time=6h
+          image: prom/prometheus:v2.55.1
+          imagePullPolicy: IfNotPresent
+          livenessProbe:
+            httpGet:
+              path: /-/healthy
+              port: 9090
+            initialDelaySeconds: 30
+            timeoutSeconds: 30
+          name: prometheus
+          ports:
+            - containerPort: 9090
+              name: admin
+          readinessProbe:
+            httpGet:
+              path: /-/ready
+              port: 9090
+            initialDelaySeconds: 30
+            timeoutSeconds: 30
+          resources:
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+                - ALL
+            readOnlyRootFilesystem: true
+            runAsGroup: 65534
+            runAsNonRoot: true
+            runAsUser: 65534
+            seccompProfile:
+              type: RuntimeDefault
+          volumeMounts:
+            - mountPath: /data
+              name: data
+            - mountPath: /etc/prometheus/prometheus.yml
+              name: prometheus-config
+              subPath: prometheus.yml
+              readOnly: true
+            - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+              name: kube-api-access
+              readOnly: true
+      securityContext:
+        fsGroup: 65534
+        seccompProfile:
+          type: RuntimeDefault
+      serviceAccountName: prometheus
+      volumes:
+        - name: data
+          emptyDir: {}
+        - configMap:
+            name: prometheus-config
+          name: prometheus-config
+        - name: kube-api-access
+          projected:
+            defaultMode: 420
+            sources:
+              - serviceAccountToken:
+                  expirationSeconds: 3607
+                  path: token
+              - configMap:
+                  items:
+                    - key: ca.crt
+                      path: ca.crt
+                  name: kube-root-ca.crt
+              - downwardAPI:
+                  items:
+                    - fieldRef:
+                        apiVersion: v1
+                        fieldPath: metadata.namespace
+                      path: namespace
+---
+apiVersion: policy.linkerd.io/v1beta3
+kind: Server
+metadata:
+  namespace: linkerd-viz
+  name: prometheus-admin
+  labels:
+    linkerd.io/extension: viz
+  annotations:
+    linkerd.io/created-by: linkerd/cli edge-25.12.1
+spec:
+  podSelector:
+    matchLabels:
+      linkerd.io/extension: viz
+      component: prometheus
+      namespace: linkerd-viz
+  port: admin
+  proxyProtocol: HTTP/1
+---
+apiVersion: policy.linkerd.io/v1alpha1
+kind: AuthorizationPolicy
+metadata:
+  namespace: linkerd-viz
+  name: prometheus-admin
+  labels:
+    linkerd.io/extension: viz
+  annotations:
+    linkerd.io/created-by: linkerd/cli edge-25.12.1
+spec:
+  targetRef:
+    group: policy.linkerd.io
+    kind: Server
+    name: prometheus-admin
+  requiredAuthenticationRefs:
+    - kind: ServiceAccount
+      name: metrics-api
+      namespace: linkerd-viz
+---
+###
+### Tap
+###
+kind: Service
+apiVersion: v1
+metadata:
+  name: tap
+  namespace: linkerd-viz
+  labels:
+    linkerd.io/extension: viz
+    component: tap
+    namespace: linkerd-viz
+  annotations:
+    linkerd.io/created-by: linkerd/cli edge-25.12.1
+    linkerd.io/inject: enabled
+spec:
+  type: ClusterIP
+  selector:
+    linkerd.io/extension: viz
+    component: tap
+  ports:
+    - name: grpc
+      port: 8088
+      targetPort: 8088
+    - name: apiserver
+      port: 443
+      targetPort: apiserver
+---
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  annotations:
+    linkerd.io/created-by: linkerd/cli edge-25.12.1
+    linkerd.io/inject: enabled
+    config.linkerd.io/proxy-await: "enabled"
+  labels:
+    linkerd.io/extension: viz
+    app.kubernetes.io/name: tap
+    app.kubernetes.io/part-of: Linkerd
+    app.kubernetes.io/version: edge-25.12.1
+    component: tap
+    namespace: linkerd-viz
+  name: tap
+  namespace: linkerd-viz
+spec:
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      linkerd.io/extension: viz
+      component: tap
+      namespace: linkerd-viz
+  template:
+    metadata:
+      annotations:
+        linkerd.io/created-by: linkerd/cli edge-25.12.1
+        linkerd.io/inject: enabled
+        config.alpha.linkerd.io/proxy-wait-before-exit-seconds: "0"
+        cluster-autoscaler.kubernetes.io/safe-to-evict: "true"
+      labels:
+        linkerd.io/extension: viz
+        component: tap
+        namespace: linkerd-viz
+    spec:
+      nodeSelector:
+        kubernetes.io/os: linux
+      automountServiceAccountToken: false
+      containers:
+        - args:
+            - api
+            - -api-namespace=linkerd
+            - -log-level=info
+            - -log-format=plain
+            - -identity-trust-domain=cluster.local
+            - -enable-pprof=false
+          image: cr.l5d.io/linkerd/tap:edge-25.12.1
+          imagePullPolicy: IfNotPresent
+          livenessProbe:
+            httpGet:
+              path: /ping
+              port: 9998
+            initialDelaySeconds: 10
+          name: tap
+          ports:
+            - containerPort: 8088
+              name: grpc
+            - containerPort: 8089
+              name: apiserver
+            - containerPort: 9998
+              name: admin
+          readinessProbe:
+            failureThreshold: 7
+            httpGet:
+              path: /ready
+              port: 9998
+          resources:
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+                - ALL
+            readOnlyRootFilesystem: true
+            runAsNonRoot: true
+            runAsUser: 2103
+            runAsGroup: 2103
+            seccompProfile:
+              type: RuntimeDefault
+          volumeMounts:
+            - mountPath: /var/run/linkerd/tls
+              name: tls
+              readOnly: true
+            - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+              name: kube-api-access
+              readOnly: true
+      securityContext:
+        seccompProfile:
+          type: RuntimeDefault
+      serviceAccountName: tap
+      volumes:
+        - name: tls
+          secret:
+            secretName: tap-k8s-tls
+        - name: kube-api-access
+          projected:
+            defaultMode: 420
+            sources:
+              - serviceAccountToken:
+                  expirationSeconds: 3607
+                  path: token
+              - configMap:
+                  items:
+                    - key: ca.crt
+                      path: ca.crt
+                  name: kube-root-ca.crt
+              - downwardAPI:
+                  items:
+                    - fieldRef:
+                        apiVersion: v1
+                        fieldPath: metadata.namespace
+                      path: namespace
+---
+apiVersion: policy.linkerd.io/v1beta3
+kind: Server
+metadata:
+  namespace: linkerd-viz
+  name: tap-api
+  labels:
+    linkerd.io/extension: viz
+    component: tap
+  annotations:
+    linkerd.io/created-by: linkerd/cli edge-25.12.1
+spec:
+  podSelector:
+    matchLabels:
+      linkerd.io/extension: viz
+      component: tap
+  port: apiserver
+  proxyProtocol: TLS
+---
+apiVersion: policy.linkerd.io/v1alpha1
+kind: AuthorizationPolicy
+metadata:
+  namespace: linkerd-viz
+  name: tap
+  labels:
+    linkerd.io/extension: viz
+    component: tap
+  annotations:
+    linkerd.io/created-by: linkerd/cli edge-25.12.1
+spec:
+  targetRef:
+    group: policy.linkerd.io
+    kind: Server
+    name: tap-api
+  requiredAuthenticationRefs:
+    - group: policy.linkerd.io
+      kind: NetworkAuthentication
+      name: kube-api-server
+---
+###
+### Tap Injector RBAC
+###
+kind: ClusterRole
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: linkerd-tap-injector
+  labels:
+    linkerd.io/extension: viz
+rules:
+  - apiGroups: [""]
+    resources: ["namespaces"]
+    verbs: ["get", "list", "watch"]
+---
+kind: ClusterRoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: linkerd-tap-injector
+  labels:
+    linkerd.io/extension: viz
+subjects:
+  - kind: ServiceAccount
+    name: tap-injector
+    namespace: linkerd-viz
+roleRef:
+  kind: ClusterRole
+  name: linkerd-tap-injector
+  apiGroup: rbac.authorization.k8s.io
+---
+kind: ServiceAccount
+apiVersion: v1
+metadata:
+  name: tap-injector
+  namespace: linkerd-viz
+  labels:
+    linkerd.io/extension: viz
+---
+kind: Secret
+apiVersion: v1
+metadata:
+  name: tap-injector-k8s-tls
+  namespace: linkerd-viz
+  annotations:
+    linkerd.io/created-by: linkerd/cli edge-25.12.1
+  labels:
+    linkerd.io/extension: viz
+type: kubernetes.io/tls
+data:
+  tls.crt: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURRVENDQWltZ0F3SUJBZ0lSQU9vUGtGRzFGVXBoNWZQRkZZWkJWdjh3RFFZSktvWklodmNOQVFFTEJRQXcKSnpFbE1DTUdBMVVFQXhNY2RHRndMV2x1YW1WamRHOXlMbXhwYm10bGNtUXRkbWw2TG5OMll6QWVGdzB5TlRFeQpNRFl3T0RJek1qaGFGdzB5TmpFeU1EWXdPREl6TWpoYU1DY3hKVEFqQmdOVkJBTVRISFJoY0MxcGJtcGxZM1J2CmNpNXNhVzVyWlhKa0xYWnBlaTV6ZG1Nd2dnRWlNQTBHQ1NxR1NJYjNEUUVCQVFVQUE0SUJEd0F3Z2dFS0FvSUIKQVFEVFpqaUxmQkJ0bmVPb3lZTHU5dTYxNnNwd09QNFR5MzM5RXRhd3dpYXBtam5MNmkrSmQ3bk8vTFg5emdmWQpHeGVIOTZ4Mi9oRE5PWXlJZDJqSStxTFRqV3Q3UXo3UDR2RHFoOHFIYkpya3VLcThFUVgxNWdWNUZNZGVUTEdkCldsRGRkMTFrNGtHSDhtOGtvdXNiUEVQUGxiNWpxVURpbGhFbld6cGJkYmhLYW5laHo5U2VtS3BWQWtJa2x0aXkKTy9uNW8vZDc1WWdWa3FpU3A4NTc0T3kxRnhZNE9jUkF3N3JqblBvYkYwWjgzZEdOSjdXZTl2VEhtczZsMjJLKwpnL2pxU01xNHljWU9IN0NwcDlFdlRkSExzcHZCU2lzYnRSUmJDa3dCRDBHdmFoeGt6ejdFQmhyTFMrcmtoTS9SCmpvTmlSb3ZLVFR4WW50VXo2bXRDeFYwVkFnTUJBQUdqYURCbU1BNEdBMVVkRHdFQi93UUVBd0lGb0RBZEJnTlYKSFNVRUZqQVVCZ2dyQmdFRkJRY0RBUVlJS3dZQkJRVUhBd0l3REFZRFZSMFRBUUgvQkFJd0FEQW5CZ05WSFJFRQpJREFlZ2h4MFlYQXRhVzVxWldOMGIzSXViR2x1YTJWeVpDMTJhWG91YzNaak1BMEdDU3FHU0liM0RRRUJDd1VBCkE0SUJBUUFsSThMcWhIWjVsT210TktaZ3hrZjFFbllkTERMSUJzRklWVkdIWCtlRWlDU1JqVTRZSXV5eEtLTGkKR2V0ZEFON3RDMGE1UlhBdGFGY1ZHcEVhZGF5eXRDaEY2OWhtTGxSWmQ5b08vZHBqMG1WQjZPVTNZeUdDY1p4Ywp6ZTNIMWZDaEFHbDQ1MFowTFNsYWdRd1pDOXd3MU95Y1ZtTVhMNnZwUmV2Z3VSUkg4bHJMaldrQXlhMjE3R1ArClVPZk9ObmlpNVdzbmhveWxuVEl4MnFKYVBLUFBjSHcwVW9mK1FWYU14UGNKVGpsakpFdzFMd3Q3TVZUREtKcCsKa050Q1RmRERvdjhoWFVOSExjKzdpOXZnNHV4L29ySG9EeTRqTFMrVzFiWVRMbmdPd2ZHeW9QRGlxR3QxQ0gvRgpxYUxTSG0wQ2NZNmdDcjUySithOVlBdjU3SkpZCi0tLS0tRU5EIENFUlRJRklDQVRFLS0tLS0=
+  tls.key: LS0tLS1CRUdJTiBSU0EgUFJJVkFURSBLRVktLS0tLQpNSUlFb3dJQkFBS0NBUUVBMDJZNGkzd1FiWjNqcU1tQzd2YnV0ZXJLY0RqK0U4dDkvUkxXc01JbXFabzV5K292CmlYZTV6dnkxL2M0SDJCc1hoL2VzZHY0UXpUbU1pSGRveVBxaTA0MXJlME0reitMdzZvZktoMnlhNUxpcXZCRUYKOWVZRmVSVEhYa3l4blZwUTNYZGRaT0pCaC9KdkpLTHJHenhEejVXK1k2bEE0cFlSSjFzNlczVzRTbXAzb2MvVQpucGlxVlFKQ0pKYllzanY1K2FQM2UrV0lGWktva3FmT2UrRHN0UmNXT0RuRVFNTzY0NXo2R3hkR2ZOM1JqU2UxCm52YjB4NXJPcGR0aXZvUDQ2a2pLdU1uR0RoK3dxYWZSTDAzUnk3S2J3VW9yRzdVVVd3cE1BUTlCcjJvY1pNOCsKeEFZYXkwdnE1SVRQMFk2RFlrYUx5azA4V0o3Vk0rcHJRc1ZkRlFJREFRQUJBb0lCQUFoVTlBK1RVVFp3emFNKwpaZm16STg5cHRKYmR1QzNoakZLb0ptd0xDdWtPV2c3T2FSYzY3OGpYcnZpVTRUeEVQUll2emMxVzBDUzJpdkpwCittaEpjSmR6OEhPSVAvYURsRWs2RnVKbGhtbFRXZTlWb0cyRHBsMlNVeFZGWW82NEc0M1BBWkJUVm8vY0gwTkwKWkliTFJrVHRPdmJFbWZrVVB4TFZCcVRLSy94S3lZY3RoNUlxSG1ZMUFTQnFBU1lDcGNCU2I3M2VYWUNmME52RgpoUEVmS0dnZmVXTGNjS1dQRm14VitrVkkwOFZUNDBVS2NzVUtiMlY4c3R5WjRESTFydjF2TzhWYi9Ub3Iwdi9uCmVJT2pDZkhOLzl2b3dXNWhnSEZmVVZqLzdIK2JRcWVYMDd6MlNXa3o2QzFMeS8zdVNQcDFlMmx0YUpFTUxRWjUKQlRxWnpuVUNnWUVBMDlHQ09aRHdhUEUyczM0YURxUnNvMmdyM0NZSFRQZ1EyVEcvd01YT1dIYzNHVUg0YWxHdQpEM2JRQmcvWnhXRGgvM1cxQmNGNHQ0N1k1Nkw3SGJtRWVaR1hmb0NGVHhLd2ExeDJUUmNyT200RnhmblNKZ2xyCkErQzJ2UnFUaUVkUGlob2VsMXZSMDN5MTZtUVRuZVZhMGxRQnlYeHlHeHNpNzc2cG1Nekp5QXNDZ1lFQS8zNVYKZGRHSFM1RFptUVB2VGQ1QjdyUldUZG5mRmd5Z2ZIYjRiMTZsNXhISWN0NThlQ21WNjA4SEsydVFwdHJOck82OQo3ZzY2OHpIUGNpR2dROUpkYnZ0UEtLNElpMklDQ1BpQjJqVzJ6VEtxeVgrbkVDaC9HdjcxYm84a0QrQnlXMHpyCi9OeENVS3lDbzFHUTRhdkExU2d3amErWWgyQit3Mll2SEc4a0ExOENnWUVBbTc3ay9lYndubmtlTzRSeExHc0IKNW5UbUt3MWJPT0Q5b25YT0JMUnRNT2NYZ0Y3ZGhXOWhpTVZYMTkwM3hzV2g1dkJwbGozWHdVQXJoTVoxMWpsZQppdlRlYTRtY2U3UEdQR3JVSVlMenFoYlQ3K25zOTBMZGlSQmx6VTRKUko4S2dRVUxrVWRXVlNiUnEvTEI2Y3VHCnFEaFV5QTNVNk5GZk11RUNXdlBaT2xrQ2dZQlFEZzdMSHY4c3IxTnZQYXRqRTh4RzlsekFnZzhEd3FzYXROQjkKWFFQUTFtS2ZrNVVldGJFVERTMHE3c1poY2RmV1l1eENSbjFQcklEYXV5eVRjN3Z4QlcrMVNHckcrY3UzY2Q2RwpPQ1J5UVhrQU1DNXh3cTZwRDlCcGR4S09vdjVTRzFVcVl2Mm9kNVZyaFNoSGZlQ3JLYStsQmF0ZVo5N3diUGxBCkNKY1pNd0tCZ0FEeFl6bXlRaHVPc0M4enN1eTBBV1JOcjRlR2hkVFBrLzlFeDc5R0pKbGlkeU5rRXZBUXkyK3AKRkJYNy9iVHcrUmRjajQ0bFcwV2FRUEFraFY0aVRvVjlzamtVbzZYNDlCSnduY1IyY1hqWlNEL0x5WDJ0bHVMSQpYVng2Y0E4cU5oVFBiU3NaalkwZHZvQ2JpdTJxeFZyVE5ja0pKQVYwRkcwbXRHVXlwU0ZmCi0tLS0tRU5EIFJTQSBQUklWQVRFIEtFWS0tLS0t
+---
+apiVersion: admissionregistration.k8s.io/v1
+kind: MutatingWebhookConfiguration
+metadata:
+  name: linkerd-tap-injector-webhook-config
+  labels:
+    linkerd.io/extension: viz
+webhooks:
+  - name: tap-injector.linkerd.io
+    namespaceSelector:
+      matchExpressions:
+        - key: kubernetes.io/metadata.name
+          operator: NotIn
+          values:
+            - kube-system
+    clientConfig:
+      service:
+        name: tap-injector
+        namespace: linkerd-viz
+        path: "/"
+      caBundle: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURRVENDQWltZ0F3SUJBZ0lSQU9vUGtGRzFGVXBoNWZQRkZZWkJWdjh3RFFZSktvWklodmNOQVFFTEJRQXcKSnpFbE1DTUdBMVVFQXhNY2RHRndMV2x1YW1WamRHOXlMbXhwYm10bGNtUXRkbWw2TG5OMll6QWVGdzB5TlRFeQpNRFl3T0RJek1qaGFGdzB5TmpFeU1EWXdPREl6TWpoYU1DY3hKVEFqQmdOVkJBTVRISFJoY0MxcGJtcGxZM1J2CmNpNXNhVzVyWlhKa0xYWnBlaTV6ZG1Nd2dnRWlNQTBHQ1NxR1NJYjNEUUVCQVFVQUE0SUJEd0F3Z2dFS0FvSUIKQVFEVFpqaUxmQkJ0bmVPb3lZTHU5dTYxNnNwd09QNFR5MzM5RXRhd3dpYXBtam5MNmkrSmQ3bk8vTFg5emdmWQpHeGVIOTZ4Mi9oRE5PWXlJZDJqSStxTFRqV3Q3UXo3UDR2RHFoOHFIYkpya3VLcThFUVgxNWdWNUZNZGVUTEdkCldsRGRkMTFrNGtHSDhtOGtvdXNiUEVQUGxiNWpxVURpbGhFbld6cGJkYmhLYW5laHo5U2VtS3BWQWtJa2x0aXkKTy9uNW8vZDc1WWdWa3FpU3A4NTc0T3kxRnhZNE9jUkF3N3JqblBvYkYwWjgzZEdOSjdXZTl2VEhtczZsMjJLKwpnL2pxU01xNHljWU9IN0NwcDlFdlRkSExzcHZCU2lzYnRSUmJDa3dCRDBHdmFoeGt6ejdFQmhyTFMrcmtoTS9SCmpvTmlSb3ZLVFR4WW50VXo2bXRDeFYwVkFnTUJBQUdqYURCbU1BNEdBMVVkRHdFQi93UUVBd0lGb0RBZEJnTlYKSFNVRUZqQVVCZ2dyQmdFRkJRY0RBUVlJS3dZQkJRVUhBd0l3REFZRFZSMFRBUUgvQkFJd0FEQW5CZ05WSFJFRQpJREFlZ2h4MFlYQXRhVzVxWldOMGIzSXViR2x1YTJWeVpDMTJhWG91YzNaak1BMEdDU3FHU0liM0RRRUJDd1VBCkE0SUJBUUFsSThMcWhIWjVsT210TktaZ3hrZjFFbllkTERMSUJzRklWVkdIWCtlRWlDU1JqVTRZSXV5eEtLTGkKR2V0ZEFON3RDMGE1UlhBdGFGY1ZHcEVhZGF5eXRDaEY2OWhtTGxSWmQ5b08vZHBqMG1WQjZPVTNZeUdDY1p4Ywp6ZTNIMWZDaEFHbDQ1MFowTFNsYWdRd1pDOXd3MU95Y1ZtTVhMNnZwUmV2Z3VSUkg4bHJMaldrQXlhMjE3R1ArClVPZk9ObmlpNVdzbmhveWxuVEl4MnFKYVBLUFBjSHcwVW9mK1FWYU14UGNKVGpsakpFdzFMd3Q3TVZUREtKcCsKa050Q1RmRERvdjhoWFVOSExjKzdpOXZnNHV4L29ySG9EeTRqTFMrVzFiWVRMbmdPd2ZHeW9QRGlxR3QxQ0gvRgpxYUxTSG0wQ2NZNmdDcjUySithOVlBdjU3SkpZCi0tLS0tRU5EIENFUlRJRklDQVRFLS0tLS0=
+    failurePolicy: Ignore
+    admissionReviewVersions: ["v1", "v1beta1"]
+    reinvocationPolicy: IfNeeded
+    rules:
+      - operations: ["CREATE"]
+        apiGroups: [""]
+        apiVersions: ["v1"]
+        resources: ["pods"]
+        scope: "Namespaced"
+    sideEffects: None
+---
+###
+### Tap Injector
+###
+kind: Service
+apiVersion: v1
+metadata:
+  name: tap-injector
+  namespace: linkerd-viz
+  labels:
+    linkerd.io/extension: viz
+    component: tap-injector
+  annotations:
+    linkerd.io/created-by: linkerd/cli edge-25.12.1
+    linkerd.io/inject: enabled
+spec:
+  type: ClusterIP
+  selector:
+    linkerd.io/extension: viz
+    component: tap-injector
+  ports:
+    - name: tap-injector
+      port: 443
+      targetPort: tap-injector
+---
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  annotations:
+    linkerd.io/created-by: linkerd/cli edge-25.12.1
+    linkerd.io/inject: enabled
+    config.linkerd.io/proxy-await: "enabled"
+  labels:
+    linkerd.io/extension: viz
+    app.kubernetes.io/name: tap-injector
+    app.kubernetes.io/part-of: Linkerd
+    component: tap-injector
+  name: tap-injector
+  namespace: linkerd-viz
+spec:
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      component: tap-injector
+  template:
+    metadata:
+      annotations:
+        linkerd.io/created-by: linkerd/cli edge-25.12.1
+        linkerd.io/inject: enabled
+        config.alpha.linkerd.io/proxy-wait-before-exit-seconds: "0"
+        cluster-autoscaler.kubernetes.io/safe-to-evict: "true"
+      labels:
+        linkerd.io/extension: viz
+        component: tap-injector
+    spec:
+      nodeSelector:
+        kubernetes.io/os: linux
+      automountServiceAccountToken: false
+      containers:
+        - args:
+            - injector
+            - -tap-service-name=tap.linkerd-viz.serviceaccount.identity.linkerd.cluster.local
+            - -log-level=info
+            - -log-format=plain
+            - -enable-pprof=false
+          image: cr.l5d.io/linkerd/tap:edge-25.12.1
+          imagePullPolicy: IfNotPresent
+          livenessProbe:
+            httpGet:
+              path: /ping
+              port: 9995
+            initialDelaySeconds: 10
+          name: tap-injector
+          ports:
+            - containerPort: 8443
+              name: tap-injector
+            - containerPort: 9995
+              name: admin
+          readinessProbe:
+            failureThreshold: 7
+            httpGet:
+              path: /ready
+              port: 9995
+          resources:
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+                - ALL
+            readOnlyRootFilesystem: true
+            runAsNonRoot: true
+            runAsUser: 2103
+            runAsGroup: 2103
+            seccompProfile:
+              type: RuntimeDefault
+          volumeMounts:
+            - mountPath: /var/run/linkerd/tls
+              name: tls
+              readOnly: true
+            - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+              name: kube-api-access
+              readOnly: true
+      securityContext:
+        seccompProfile:
+          type: RuntimeDefault
+      serviceAccountName: tap-injector
+      volumes:
+        - name: tls
+          secret:
+            secretName: tap-injector-k8s-tls
+        - name: kube-api-access
+          projected:
+            defaultMode: 420
+            sources:
+              - serviceAccountToken:
+                  expirationSeconds: 3607
+                  path: token
+              - configMap:
+                  items:
+                    - key: ca.crt
+                      path: ca.crt
+                  name: kube-root-ca.crt
+              - downwardAPI:
+                  items:
+                    - fieldRef:
+                        apiVersion: v1
+                        fieldPath: metadata.namespace
+                      path: namespace
+---
+apiVersion: policy.linkerd.io/v1beta3
+kind: Server
+metadata:
+  namespace: linkerd-viz
+  name: tap-injector-webhook
+  labels:
+    linkerd.io/extension: viz
+    component: tap-injector
+  annotations:
+    linkerd.io/created-by: linkerd/cli edge-25.12.1
+spec:
+  podSelector:
+    matchLabels:
+      linkerd.io/extension: viz
+      component: tap-injector
+  port: tap-injector
+  proxyProtocol: TLS
+---
+apiVersion: policy.linkerd.io/v1alpha1
+kind: AuthorizationPolicy
+metadata:
+  namespace: linkerd-viz
+  name: tap-injector
+  labels:
+    linkerd.io/extension: viz
+    component: tap-injector
+  annotations:
+    linkerd.io/created-by: linkerd/cli edge-25.12.1
+spec:
+  targetRef:
+    group: policy.linkerd.io
+    kind: Server
+    name: tap-injector-webhook
+  requiredAuthenticationRefs:
+    - group: policy.linkerd.io
+      kind: NetworkAuthentication
+      name: kube-api-server
+---
+apiVersion: policy.linkerd.io/v1alpha1
+kind: NetworkAuthentication
+metadata:
+  namespace: linkerd-viz
+  name: kube-api-server
+  labels:
+    linkerd.io/extension: viz
+  annotations:
+    linkerd.io/created-by: linkerd/cli edge-25.12.1
+spec:
+  # Ideally, this should be restricted to the actual set of IPs the kubelet API
+  # server uses for webhooks in a cluster. This can't easily be discovered.
+  networks:
+    - cidr: "0.0.0.0/0"
+    - cidr: "::/0"
+---
+###
+### Web
+###
+kind: Service
+apiVersion: v1
+metadata:
+  name: web
+  namespace: linkerd-viz
+  labels:
+    linkerd.io/extension: viz
+    component: web
+    namespace: linkerd-viz
+  annotations:
+    linkerd.io/created-by: linkerd/cli edge-25.12.1
+
+    linkerd.io/inject: enabled
+spec:
+  type: ClusterIP
+  selector:
+    linkerd.io/extension: viz
+    component: web
+  ports:
+    - name: http
+      port: 8084
+      targetPort: 8084
+    - name: admin
+      port: 9994
+      targetPort: 9994
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    linkerd.io/created-by: linkerd/cli edge-25.12.1
+    linkerd.io/inject: enabled
+    config.linkerd.io/proxy-await: "enabled"
+  labels:
+    linkerd.io/extension: viz
+    app.kubernetes.io/name: web
+    app.kubernetes.io/part-of: Linkerd
+    app.kubernetes.io/version: edge-25.12.1
+    component: web
+    namespace: linkerd-viz
+  name: web
+  namespace: linkerd-viz
+spec:
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      linkerd.io/extension: viz
+      component: web
+      namespace: linkerd-viz
+  template:
+    metadata:
+      annotations:
+        linkerd.io/created-by: linkerd/cli edge-25.12.1
+        linkerd.io/inject: enabled
+        config.alpha.linkerd.io/proxy-wait-before-exit-seconds: "0"
+        cluster-autoscaler.kubernetes.io/safe-to-evict: "true"
+      labels:
+        linkerd.io/extension: viz
+        component: web
+        namespace: linkerd-viz
+    spec:
+      nodeSelector:
+        kubernetes.io/os: linux
+      automountServiceAccountToken: false
+      containers:
+        - args:
+            - -linkerd-metrics-api-addr=metrics-api.linkerd-viz.svc.cluster.local:8085
+            - -cluster-domain=cluster.local
+            - -controller-namespace=linkerd
+            - -log-level=info
+            - -log-format=plain
+            - -enforced-host=^(localhost|127\.0\.0\.1|linkerd\.defn\.xxx|web\.linkerd-viz\.svc\.cluster\.local|web\.linkerd-viz\.svc|\[::1\])(:\d+)?$
+            - -enable-pprof=false
+          image: cr.l5d.io/linkerd/web:edge-25.12.1
+          imagePullPolicy: IfNotPresent
+          livenessProbe:
+            httpGet:
+              path: /ping
+              port: 9994
+            initialDelaySeconds: 10
+          name: web
+          ports:
+            - containerPort: 8084
+              name: http
+            - containerPort: 9994
+              name: admin
+          readinessProbe:
+            failureThreshold: 7
+            httpGet:
+              path: /ready
+              port: 9994
+          resources:
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+                - ALL
+            readOnlyRootFilesystem: true
+            runAsNonRoot: true
+            runAsUser: 2103
+            runAsGroup: 2103
+            seccompProfile:
+              type: RuntimeDefault
+          volumeMounts:
+            - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+              name: kube-api-access
+              readOnly: true
+      securityContext:
+        seccompProfile:
+          type: RuntimeDefault
+      serviceAccountName: web
+      volumes:
+        - name: kube-api-access
+          projected:
+            defaultMode: 420
+            sources:
+              - serviceAccountToken:
+                  expirationSeconds: 3607
+                  path: token
+              - configMap:
+                  items:
+                    - key: ca.crt
+                      path: ca.crt
+                  name: kube-root-ca.crt
+              - downwardAPI:
+                  items:
+                    - fieldRef:
+                        apiVersion: v1
+                        fieldPath: metadata.namespace
+                      path: namespace
+---
+apiVersion: linkerd.io/v1alpha2
+kind: ServiceProfile
+metadata:
+  name: metrics-api.linkerd-viz.svc.cluster.local
+  namespace: linkerd-viz
+  labels:
+    linkerd.io/extension: viz
+spec:
+  routes:
+    - name: POST /api/v1/StatSummary
+      condition:
+        method: POST
+        pathRegex: /api/v1/StatSummary
+    - name: POST /api/v1/TopRoutes
+      condition:
+        method: POST
+        pathRegex: /api/v1/TopRoutes
+    - name: POST /api/v1/ListPods
+      condition:
+        method: POST
+        pathRegex: /api/v1/ListPods
+    - name: POST /api/v1/ListServices
+      condition:
+        method: POST
+        pathRegex: /api/v1/ListServices
+    - name: POST /api/v1/SelfCheck
+      condition:
+        method: POST
+        pathRegex: /api/v1/SelfCheck
+    - name: POST /api/v1/Gateways
+      condition:
+        method: POST
+        pathRegex: /api/v1/Gateways
+    - name: POST /api/v1/Edges
+      condition:
+        method: POST
+        pathRegex: /api/v1/Edges
+---
+apiVersion: linkerd.io/v1alpha2
+kind: ServiceProfile
+metadata:
+  name: prometheus.linkerd-viz.svc.cluster.local
+  namespace: linkerd-viz
+  labels:
+    linkerd.io/extension: viz
+spec:
+  routes:
+    - name: POST /api/v1/query
+      condition:
+        method: POST
+        pathRegex: /api/v1/query
+    - name: GET /api/v1/query_range
+      condition:
+        method: GET
+        pathRegex: /api/v1/query_range
+    - name: GET /api/v1/series
+      condition:
+        method: GET
+        pathRegex: /api/v1/series

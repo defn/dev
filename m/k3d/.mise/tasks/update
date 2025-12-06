@@ -5,6 +5,10 @@ function main {
 
 	curl -sSL -o headlamp.yaml https://raw.githubusercontent.com/headlamp-k8s/headlamp/main/kubernetes-headlamp.yaml
 	curl -sSL -o argocd.yaml https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
+	curl -sSL -o gateway.yaml https://github.com/kubernetes-sigs/gateway-api/releases/download/v1.4.0/standard-install.yaml
+	linkerd install --crds >linkerd-crds.yaml
+	linkerd install >linkerd.yaml
+	linkerd viz install >linkerd-viz.yaml
 
 	cue import argocd.yaml -f -R -p k3d -l '"kube"' -l '"argocd"' -l 'kind' -l metadata.name
 	cue import headlamp.yaml -f -R -p k3d -l '"kube"' -l '"headlamp"' -l 'kind' -l metadata.name
