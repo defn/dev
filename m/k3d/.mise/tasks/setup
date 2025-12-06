@@ -7,6 +7,7 @@ function main {
 
 	k3d cluster delete --config k3d.yaml
 	k3d cluster create --config k3d.yaml
+	kubectl config set-context --current --namespace=argocd
 
 	tput smcup             # enter alternate screen
 	trap 'tput rmcup' EXIT # restore on exit
