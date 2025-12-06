@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: app-kyverno
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/defn/dev
+    targetRevision: main
+    path: m/app/kyverno
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: kyverno
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
