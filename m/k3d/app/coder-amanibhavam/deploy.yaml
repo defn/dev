@@ -9,6 +9,7 @@ metadata:
   namespace: coder-amanibhavam
   name: coder-amanibhavam
 spec:
+  storageClassName: local-path-immediate
   accessModes:
     - ReadWriteOnce
   resources:
