@@ -2,7 +2,7 @@
 
 function main {
 	kubectl create token headlamp-admin -n kube-system | code -c
-	open http://localhost:6655
+	open http://headlamp.defn.xxx
 }
 
 main "$@"
