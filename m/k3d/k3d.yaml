@@ -16,6 +16,12 @@ ports:
     nodeFilters:
       - loadbalancer
 volumes:
+  - volume: ${PWD}/bootstrap.yaml:/var/lib/rancher/k3s/server/manifests/bootstrap.yaml
+    nodeFilters:
+      - server:*
+  - volume: ${PWD}/argocd.yaml:/var/lib/rancher/k3s/server/manifests/argocd.yaml
+    nodeFilters:
+      - server:*
   - volume: ${PWD}/app/gateway.yaml:/var/lib/rancher/k3s/server/manifests/app-gateway.yaml
     nodeFilters:
       - server:*
@@ -26,12 +32,6 @@ volumes:
     nodeFilters:
       - server:*
   - volume: ${PWD}/app/linkerd-viz.yaml:/var/lib/rancher/k3s/server/manifests/app-linkerd-viz.yaml
-    nodeFilters:
-      - server:*
-  - volume: ${PWD}/bootstrap.yaml:/var/lib/rancher/k3s/server/manifests/bootstrap.yaml
-    nodeFilters:
-      - server:*
-  - volume: ${PWD}/argocd.yaml:/var/lib/rancher/k3s/server/manifests/argocd.yaml
     nodeFilters:
       - server:*
   - volume: ${PWD}/app/www.yaml:/var/lib/rancher/k3s/server/manifests/app-www.yaml
