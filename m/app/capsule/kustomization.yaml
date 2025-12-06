@@ -4,7 +4,7 @@ kind: Kustomization
 helmCharts:
   - name: capsule
     repo: oci://ghcr.io/projectcapsule/charts
-    version: 0.12.0
+    version: 0.11.2
     releaseName: capsule
     namespace: capsule-system
     includeCRDs: true
