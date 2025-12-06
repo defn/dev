@@ -1,7 +1,7 @@
 apiVersion: k3d.io/v1alpha5
 kind: Simple
 metadata:
-  name: mycluster
+  name: defnxxx
 servers: 1
 agents: 0
 kubeAPI:
@@ -26,7 +26,33 @@ volumes:
     nodeFilters:
       - server:*
 registries:
-  config: ./registries.yaml
+  config: |
+    mirrors:
+      "docker.io":
+        endpoint:
+          - "http://169.254.32.1:5000"
+      "registry-1.docker.io":
+        endpoint:
+          - "http://169.254.32.1:5000"
+      "ghcr.io":
+        endpoint:
+          - "http://169.254.32.1:5000"
+      "quay.io":
+        endpoint:
+          - "http://169.254.32.1:5000"
+      "gcr.io":
+        endpoint:
+          - "http://169.254.32.1:5000"
+      "registry.k8s.io":
+        endpoint:
+          - "http://169.254.32.1:5000"
+      "*":
+        endpoint:
+          - "http://169.254.32.1:5000"
+    configs:
+      "169.254.32.1:5000":
+        tls:
+          insecure_skip_verify: true
 options:
   k3s:
     extraArgs:
