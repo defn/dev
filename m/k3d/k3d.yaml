@@ -1,0 +1,38 @@
+apiVersion: k3d.io/v1alpha5
+kind: Simple
+metadata:
+  name: mycluster
+servers: 1
+agents: 0
+kubeAPI:
+  host: "defn.xxx"
+  hostIP: "169.254.32.1"
+  hostPort: "6443"
+ports:
+  - port: 169.254.32.1:80:80
+    nodeFilters:
+      - loadbalancer
+  - port: 169.254.32.1:443:443
+    nodeFilters:
+      - loadbalancer
+volumes:
+  - volume: /home/ubuntu/m/k3d/k3d-admin.yaml:/var/lib/rancher/k3s/server/manifests/k3d-admin.yaml
+    nodeFilters:
+      - server:*
+  - volume: /home/ubuntu/m/k3d/k3d-argocd.yaml:/var/lib/rancher/k3s/server/manifests/k3d-argocd.yaml
+    nodeFilters:
+      - server:*
+  - volume: /home/ubuntu/m/k3d/k3d-ingress.yaml:/var/lib/rancher/k3s/server/manifests/k3d-ingress.yaml
+    nodeFilters:
+      - server:*
+registries:
+  config: ./registries.yaml
+options:
+  k3s:
+    extraArgs:
+      - arg: "--tls-san=defn.xxx"
+        nodeFilters:
+          - server:*
+      - arg: "--tls-san=169.254.32.1"
+        nodeFilters:
+          - server:*
