@@ -22,25 +22,7 @@ volumes:
   - volume: ${PWD}/argocd.yaml:/var/lib/rancher/k3s/server/manifests/argocd.yaml
     nodeFilters:
       - server:*
-  - volume: ${PWD}/../app/gateway.yaml:/var/lib/rancher/k3s/server/manifests/app-gateway.yaml
-    nodeFilters:
-      - server:*
-  - volume: ${PWD}/../app/linkerd-crd.yaml:/var/lib/rancher/k3s/server/manifests/app-linkerd-crd.yaml
-    nodeFilters:
-      - server:*
-  - volume: ${PWD}/../app/linkerd.yaml:/var/lib/rancher/k3s/server/manifests/app-linkerd.yaml
-    nodeFilters:
-      - server:*
-  - volume: ${PWD}/../app/linkerd-viz.yaml:/var/lib/rancher/k3s/server/manifests/app-linkerd-viz.yaml
-    nodeFilters:
-      - server:*
-  - volume: ${PWD}/../app/www.yaml:/var/lib/rancher/k3s/server/manifests/app-www.yaml
-    nodeFilters:
-      - server:*
-  - volume: ${PWD}/../app/headlamp.yaml:/var/lib/rancher/k3s/server/manifests/app-headlamp.yaml
-    nodeFilters:
-      - server:*
-  - volume: ${PWD}/../app/coder-amanibhavam.yaml:/var/lib/rancher/k3s/server/manifests/app-coder-amanibhavam.yaml
+  - volume: ${PWD}/../env/defn.xxx.yaml:/var/lib/rancher/k3s/server/manifests/env-defn.xxx.yaml
     nodeFilters:
       - server:*
 registries:
