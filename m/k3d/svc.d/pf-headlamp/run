@@ -1,4 +1,0 @@
-#!/usr/bin/env bash
-
-exec 2>&1
-exec ~/.local/bin/mise exec -- kubectl port-forward -n kube-system svc/headlamp 6655:80
