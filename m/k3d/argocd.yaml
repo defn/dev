@@ -23789,6 +23789,9 @@ data:
         - BackgroundScanReport
         - ClusterBackgroundScanReport
         - UpdateRequest
+apiVersion: v1
+data:
+  kustomize.buildOptions: --enable-helm
 kind: ConfigMap
 metadata:
   labels:
