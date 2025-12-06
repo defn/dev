@@ -37,6 +37,9 @@ volumes:
   - volume: ${PWD}/k3d-ingress.yaml:/var/lib/rancher/k3s/server/manifests/k3d-ingress.yaml
     nodeFilters:
       - server:*
+  - volume: ${PWD}/app/www.yaml:/var/lib/rancher/k3s/server/manifests/app-www.yaml
+    nodeFilters:
+      - server:*
 registries:
   config: |
     mirrors:
