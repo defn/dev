@@ -9,7 +9,6 @@ function main {
 	k3d cluster create \
 		--registry-config "$(pwd)/registries.yaml" \
 		-p "169.254.32.1:80:80@loadbalancer" -p "169.254.32.1:443:443@loadbalancer" \
-		-v "$(pwd)/k3d-registry.yaml:/var/lib/rancher/k3s/server/manifests/k3d-registry.yaml@server:*" \
 		-v "$(pwd)/k3d-admin.yaml:/var/lib/rancher/k3s/server/manifests/k3d-admin.yaml@server:*" \
 		-v "$(pwd)/k3d-argocd.yaml:/var/lib/rancher/k3s/server/manifests/k3d-argocd.yaml@server:*" \
 		-v "$(pwd)/k3d-ingress.yaml:/var/lib/rancher/k3s/server/manifests/k3d-ingress.yaml@server:*"
