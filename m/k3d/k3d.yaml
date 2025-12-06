@@ -16,6 +16,18 @@ ports:
     nodeFilters:
       - loadbalancer
 volumes:
+  - volume: ${PWD}/gateway.yaml:/var/lib/rancher/k3s/server/manifests/gateway.yaml
+    nodeFilters:
+      - server:*
+  - volume: ${PWD}/linkerd-crds.yaml:/var/lib/rancher/k3s/server/manifests/linkerd-crds.yaml
+    nodeFilters:
+      - server:*
+  - volume: ${PWD}/linkerd.yaml:/var/lib/rancher/k3s/server/manifests/linkerd.yaml
+    nodeFilters:
+      - server:*
+  - volume: ${PWD}/linkerd-viz.yaml:/var/lib/rancher/k3s/server/manifests/linkerd-viz.yaml
+    nodeFilters:
+      - server:*
   - volume: ${PWD}/k3d-admin.yaml:/var/lib/rancher/k3s/server/manifests/k3d-admin.yaml
     nodeFilters:
       - server:*
