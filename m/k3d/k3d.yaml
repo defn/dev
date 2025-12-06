@@ -16,13 +16,13 @@ ports:
     nodeFilters:
       - loadbalancer
 volumes:
-  - volume: /home/ubuntu/m/k3d/k3d-admin.yaml:/var/lib/rancher/k3s/server/manifests/k3d-admin.yaml
+  - volume: ${PWD}/k3d-admin.yaml:/var/lib/rancher/k3s/server/manifests/k3d-admin.yaml
     nodeFilters:
       - server:*
-  - volume: /home/ubuntu/m/k3d/k3d-argocd.yaml:/var/lib/rancher/k3s/server/manifests/k3d-argocd.yaml
+  - volume: ${PWD}/k3d-argocd.yaml:/var/lib/rancher/k3s/server/manifests/k3d-argocd.yaml
     nodeFilters:
       - server:*
-  - volume: /home/ubuntu/m/k3d/k3d-ingress.yaml:/var/lib/rancher/k3s/server/manifests/k3d-ingress.yaml
+  - volume: ${PWD}/k3d-ingress.yaml:/var/lib/rancher/k3s/server/manifests/k3d-ingress.yaml
     nodeFilters:
       - server:*
 registries:
