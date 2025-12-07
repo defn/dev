@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 function main {
-	open http://traefik.defn.xxx
+	open https://traefik.defn.xxx
 }
 
 main "$@"

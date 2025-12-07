@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 function main {
-	open http://linkerd.defn.xxx
+	open https://linkerd.defn.xxx
 }
 
 main "$@"
