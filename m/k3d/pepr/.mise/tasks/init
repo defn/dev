@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+#MISE description="Initialize namespace and CRDs"
+
+kubectl delete ns defn
+kubectl create ns defn
+cat crd/crd.*.yaml | kubectl apply -f -

@@ -2,10 +2,9 @@
 
 allow_k8s_contexts("k3d-defnxxx-dev")
 
-k8s_yaml(local("cat crd/crd.*.yaml"))
 k8s_yaml(local("cat deploy.yaml"))
 
 local_resource(
-    "pepr",
-    serve_cmd=["just", "pepr"],
+    "restart",
+    serve_cmd=["mise", "run", "serve"],
 )

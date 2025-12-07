@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+#MISE description="Start tilt development environment"
+#MISE depends=["init"]
+#MISE run_args="all"
+
+tilt up "$@"
