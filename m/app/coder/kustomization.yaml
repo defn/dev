@@ -15,10 +15,8 @@ helmCharts:
             value: "http://coder.defn.xxx"
           - name: CODER_WILDCARD_ACCESS_URL
             value: "*.coder.defn.xxx"
-          - name: CODER_DERP_SERVER_RELAY_URL
-            value: "http://coder.defn.xxx"
-          - name: CODER_DERP_FORCE_WEBSOCKETS
-            value: "true"
+          - name: CODER_DERP_SERVER_ENABLE
+            value: "false"
           - name: CODER_ENABLE_TERRAFORM_DEBUG_MODE
             value: "true"
         podSecurityContext:
