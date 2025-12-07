@@ -11,7 +11,7 @@ terraform {
 }
 
 provider "coder" {
-  url = "http://coder.coder:8080"
+  url = "https://coder.defn.xxx"
 }
 
 data "coder_provisioner" "me" {}
@@ -306,7 +306,7 @@ resource "kubernetes_deployment" "main" {
           }
           env {
             name  = "CODER_AGENT_URL"
-            value = "http://coder.coder:8080"
+            value = "https://coder.defn.xxx"
           }
           env {
             name  = "CODER_NAME"
