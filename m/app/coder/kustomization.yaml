@@ -8,3 +8,14 @@ helmCharts:
     releaseName: coder
     namespace: coder
     includeCRDs: true
+    valuesInline:
+      coder:
+        env:
+          - name: CODER_ACCESS_URL
+            value: "http://coder.defn.xxx"
+        service:
+          type: ClusterIP
+        ingress:
+          enable: true
+          className: traefik
+          host: coder.defn.xxx
