@@ -306,7 +306,7 @@ resource "kubernetes_deployment" "main" {
           }
           env {
             name  = "CODER_AGENT_URL"
-            value = "https://coder.defn.xxx"
+            value = "http://coder.coder:9999"
           }
           env {
             name  = "CODER_NAME"
