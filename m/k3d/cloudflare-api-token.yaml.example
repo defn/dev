@@ -1,0 +1,18 @@
+# Cloudflare API Token Secret for cert-manager DNS-01 challenge
+#
+# Usage:
+#   1. Copy this file: cp cloudflare-api-token.yaml.example cloudflare-api-token.yaml
+#   2. Replace YOUR_CLOUDFLARE_API_TOKEN with your actual token
+#   3. Apply: kubectl apply -f cloudflare-api-token.yaml
+#
+# Create a Cloudflare API token at https://dash.cloudflare.com/profile/api-tokens
+# Required permissions: Zone:DNS:Edit for the defn.xxx zone
+#
+apiVersion: v1
+kind: Secret
+metadata:
+  name: cloudflare-api-token
+  namespace: cert-manager
+type: Opaque
+stringData:
+  api-token: "YOUR_CLOUDFLARE_API_TOKEN"
