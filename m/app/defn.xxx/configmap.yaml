@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: defn-xxx-config
+  namespace: default
+data:
+  domain: defn.xxx

@@ -15,6 +15,8 @@ helmCharts:
             value: "http://coder.defn.xxx"
           - name: CODER_WILDCARD_ACCESS_URL
             value: "*.coder.defn.xxx"
+          - name: CODER_DERP_SERVER_RELAY_URL
+            value: "http://coder.defn.xxx"
         podSecurityContext:
           fsGroup: 1000
         service:
