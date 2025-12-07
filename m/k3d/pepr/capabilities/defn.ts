@@ -57,7 +57,7 @@ When(ScriptKind)
         return;
       }
 
-      Log.info(`Script ${scr.metadata.name}: output:\n\n${stdout}\n`);
+      Log.info(`Script ${scr.metadata.name}: output:\n\n${stdout.trimEnd()}\n`);
 
       const spec = Object.entries(scr.spec)
         .map(([key, value]) => `${key}: ${value}`)
@@ -89,7 +89,7 @@ When(a.ConfigMap)
   .WithLabel("app.kubernetes.io/managed-by", "pepr")
   .Watch(async cm => {
     Log.info(
-      `ConfigMap ${cm.metadata?.name}: updated:\n\n${JSON.stringify(cm.data)}\n`,
+      `ConfigMap ${cm.metadata?.name}: updated:\n\n${JSON.stringify(cm.data).trimEnd()}\n`,
     );
   });
 
