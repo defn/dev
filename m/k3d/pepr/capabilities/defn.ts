@@ -1,7 +1,7 @@
 import { exec } from "child_process";
 import { Capability, K8s, Log, RegisterKind, a, kind } from "pepr";
 
-import { components } from "../crd/Script";
+import { components } from "./crd/Script";
 
 export async function example(name: string, debug: string): Promise<string> {
   return `${name}, ${debug}`;
