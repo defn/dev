@@ -51,6 +51,8 @@ helmCharts:
           className: traefik
           host: coder.defn.xxx
           wildcardHost: "*.coder.defn.xxx"
+          annotations:
+            traefik.ingress.kubernetes.io/router.entrypoints: websecure
           tls:
             enable: true
             secretName: wildcard-defn-xxx-tls

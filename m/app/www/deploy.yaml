@@ -59,10 +59,12 @@ metadata:
   namespace: app-www
 spec:
   entryPoints:
-    - web
+    - websecure
   routes:
     - match: Host(`www.defn.xxx`)
       kind: Rule
       services:
         - name: nginx
           port: 80
+  tls:
+    secretName: wildcard-defn-xxx-tls
