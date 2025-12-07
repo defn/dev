@@ -5,4 +5,4 @@ resources:
   - configmap.yaml
   - clusterissuer.yaml
   - wildcard-certificate.yaml
-  - certificate-coder.yaml
+  - wildcard-certificate-coder-ns.yaml
