@@ -23,6 +23,21 @@ helmCharts:
             value: "true"
         podSecurityContext:
           fsGroup: 1000
+        initContainers:
+          - name: fix-permissions
+            image: busybox:latest
+            command:
+              - sh
+              - -c
+              - |
+                mkdir -p /home/coder/.config/coderv2/postgres/data
+                chmod -R 700 /home/coder/.config/coderv2/postgres
+                chown -R 1000:1000 /home/coder/.config/coderv2
+            volumeMounts:
+              - name: coder-data
+                mountPath: /home/coder/.config/coderv2
+            securityContext:
+              runAsUser: 0
         service:
           type: ClusterIP
         ingress:
