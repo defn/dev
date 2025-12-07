@@ -77,3 +77,9 @@ patches:
         path: /spec/strategy
         value:
           type: Recreate
+      - op: add
+        path: /spec/template/spec/hostNetwork
+        value: true
+      - op: add
+        path: /spec/template/spec/dnsPolicy
+        value: ClusterFirstWithHostNet
