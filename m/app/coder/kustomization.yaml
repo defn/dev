@@ -21,6 +21,10 @@ helmCharts:
             value: "https://controlplane.tailscale.com/derpmap/default"
           - name: CODER_ENABLE_TERRAFORM_DEBUG_MODE
             value: "true"
+          - name: CODER_BLOCK_DIRECT
+            value: "true"
+          - name: CODER_DERP_SERVER_STUN_ADDRESSES
+            value: "disable"
         podSecurityContext:
           fsGroup: 1000
         initContainers:
