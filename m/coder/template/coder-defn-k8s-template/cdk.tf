@@ -305,7 +305,7 @@ resource "kubernetes_deployment" "main" {
           }
           env {
             name  = "CODER_AGENT_URL"
-            value = data.coder_workspace.me.access_url
+            value = "http://coder.coder"
           }
           env {
             name  = "CODER_NAME"
