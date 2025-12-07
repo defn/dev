@@ -1,0 +1,6 @@
+.direnv
+.venv
+node_modules
+dist
+insecure*
+k3d

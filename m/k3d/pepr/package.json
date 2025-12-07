@@ -1,0 +1,37 @@
+{
+  "name": "meh",
+  "version": "0.0.1",
+  "description": "",
+  "keywords": [],
+  "engines": {
+    "node": ">=25.0.0"
+  },
+  "pepr": {
+    "uuid": "0580dd3e-05ba-5e33-beaf-035d5fa9051b",
+    "onError": "reject",
+    "webhookTimeout": 10,
+    "customLabels": {
+      "namespace": {
+        "pepr.dev": ""
+      }
+    },
+    "alwaysIgnore": {
+      "namespaces": []
+    },
+    "includedFiles": [],
+    "env": {}
+  },
+  "dependencies": {
+    "openapi-typescript": "^7.10.1",
+    "pepr": "1.0.2"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.39.1",
+    "@tsconfig/node24": "^24.0.3",
+    "@types/node": "^24.10.1",
+    "eslint": "9.36.0",
+    "ts-node": "^10.9.2",
+    "typescript": "5.8.3",
+    "typescript-eslint": "^8.48.1"
+  }
+}

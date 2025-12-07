@@ -2,3 +2,4 @@ packages:
   - "cv"
   - "s"
   - "site/*"
+  - "k3d/pepr"

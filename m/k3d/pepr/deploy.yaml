@@ -1,0 +1,17 @@
+apiVersion: defn.dev/v1
+kind: Script
+metadata:
+  name: hello
+  namespace: defn
+spec:
+  script: id -a
+  workdir: /tmp
+---
+apiVersion: defn.dev/v1
+kind: Script
+metadata:
+  name: bye
+  namespace: defn
+spec:
+  script: uname -a
+  workdir: /tmp
