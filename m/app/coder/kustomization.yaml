@@ -29,6 +29,8 @@ helmCharts:
             value: "false"
           - name: CODER_DERP_SERVER_ENABLE
             value: "true"
+          - name: CODER_DERP_FORCE_WEBSOCKETS
+            value: "true"
           - name: CODER_SECURE_AUTH_COOKIE
             value: "true"
           - name: CODER_STRICT_TRANSPORT_SECURITY
