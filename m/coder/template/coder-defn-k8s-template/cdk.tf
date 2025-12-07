@@ -198,7 +198,7 @@ resource "kubernetes_deployment" "main" {
   wait_for_rollout = false
   metadata {
     name      = lower("coder-${data.coder_workspace_owner.me.name}-${data.coder_workspace.me.name}")
-    namespace = lower("coder-${data.coder_workspace_owner.me.name}")
+    namespace = "coder"
     labels = {
       "app.kubernetes.io/name"     = "coder-workspace"
       "app.kubernetes.io/instance" = lower("coder-${data.coder_workspace_owner.me.name}-${data.coder_workspace.me.name}")
