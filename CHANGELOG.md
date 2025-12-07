@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.57.1](https://github.com/defn/dev/compare/v1.57.0...v1.57.1) (2025-12-07)
+
+
+### Bug Fixes
+
+* handle missing tools in ansible fixup playbook ([c0e022b](https://github.com/defn/dev/commit/c0e022b5247f043ff2c3d512feddb18fd1750ef8))
+
 ## [1.57.0](https://github.com/defn/dev/compare/v1.56.0...v1.57.0) (2025-12-07)
 
 
