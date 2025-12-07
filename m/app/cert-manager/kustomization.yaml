@@ -8,3 +8,14 @@ helmCharts:
     releaseName: cert-manager
     namespace: cert-manager
     includeCRDs: true
+    valuesInline:
+      crds:
+        enabled: true
+
+patches:
+  - target:
+      kind: CustomResourceDefinition
+    patch: |-
+      - op: add
+        path: /metadata/annotations/argocd.argoproj.io~1sync-options
+        value: ServerSideApply=true
