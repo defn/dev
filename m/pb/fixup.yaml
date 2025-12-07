@@ -138,6 +138,7 @@
         - turbo
         - uv
       changed_when: false
+      failed_when: false
     - name: Make /usr/local/bin
       become: true
       file:
@@ -154,6 +155,7 @@
         state: link
         force: true
       loop: "{{ mise_paths.results }}"
+      when: item.rc == 0 and item.stdout | length > 0
 
     - name: Create symlinks for home bin tools in /usr/local/bin
       become: true
