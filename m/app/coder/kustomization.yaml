@@ -4,7 +4,7 @@ kind: Kustomization
 helmCharts:
   - name: coder
     repo: https://helm.coder.com/v2
-    version: 2.29.0
+    version: 2.28.5
     releaseName: coder
     namespace: coder
     includeCRDs: true
