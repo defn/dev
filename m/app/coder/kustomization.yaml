@@ -12,9 +12,11 @@ helmCharts:
       coder:
         env:
           - name: CODER_ACCESS_URL
-            value: "http://coder.defn.xxx"
+            value: "https://coder.defn.xxx"
           - name: CODER_WILDCARD_ACCESS_URL
             value: "*.coder.defn.xxx"
+          - name: CODER_TLS_ENABLE
+            value: "false"
           - name: CODER_DERP_SERVER_ENABLE
             value: "false"
           - name: CODER_DERP_CONFIG_URL
@@ -49,6 +51,10 @@ helmCharts:
           className: traefik
           host: coder.defn.xxx
           wildcardHost: "*.coder.defn.xxx"
+          tls:
+            enable: true
+            secretName: wildcard-defn-xxx-tls
+            wildcardSecretName: wildcard-defn-xxx-tls
         volumes:
           - name: kubeconfig
             configMap:
@@ -67,6 +73,7 @@ resources:
   - cluster-admin.yaml
   - kubeconfig.yaml
   - pvc.yaml
+  - certificate.yaml
 
 patches:
   - target:

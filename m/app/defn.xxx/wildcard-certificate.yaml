@@ -1,0 +1,13 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: wildcard-defn-xxx
+  namespace: default
+spec:
+  secretName: wildcard-defn-xxx-tls
+  issuerRef:
+    name: letsencrypt-prod
+    kind: ClusterIssuer
+  dnsNames:
+    - "defn.xxx"
+    - "*.defn.xxx"

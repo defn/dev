@@ -112,7 +112,7 @@ resource "coder_app" "preview" {
   icon         = "/emojis/1f50e.png"
   url          = "http://localhost:3001"
   share        = "owner"
-  subdomain    = true
+  subdomain    = false
   open_in      = "tab"
   order        = 0
   healthcheck {
