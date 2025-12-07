@@ -99,10 +99,12 @@ metadata:
   namespace: kube-system
 spec:
   entryPoints:
-    - web
+    - websecure
   routes:
     - match: Host(`headlamp.defn.xxx`)
       kind: Rule
       services:
         - name: headlamp
           port: 80
+  tls:
+    secretName: wildcard-defn-xxx-tls

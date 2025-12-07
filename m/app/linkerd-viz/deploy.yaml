@@ -1531,10 +1531,12 @@ metadata:
   namespace: linkerd-viz
 spec:
   entryPoints:
-    - web
+    - websecure
   routes:
     - match: Host(`linkerd.defn.xxx`)
       kind: Rule
       services:
         - name: web
           port: 8084
+  tls:
+    secretName: wildcard-defn-xxx-tls
