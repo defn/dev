@@ -46,3 +46,13 @@ resources:
   - cluster-admin.yaml
   - kubeconfig.yaml
   - pvc.yaml
+
+patches:
+  - target:
+      kind: Deployment
+      name: coder
+    patch: |-
+      - op: replace
+        path: /spec/strategy
+        value:
+          type: Recreate
