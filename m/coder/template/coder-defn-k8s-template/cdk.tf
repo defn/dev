@@ -11,6 +11,7 @@ terraform {
 }
 
 provider "coder" {
+  url = "http://coder.coder.svc.cluster.local"
 }
 
 data "coder_provisioner" "me" {}
