@@ -1,5 +1,54 @@
 # Changelog
 
+## [1.57.0](https://github.com/defn/dev/compare/v1.56.0...v1.57.0) (2025-12-07)
+
+
+### Features
+
+* add coder app to defn.xxx environment ([96b649d](https://github.com/defn/dev/commit/96b649d7117498b2fda4f37cd287902008871cde))
+* add coder-amanibhavam app to defn.xxx environment ([bd003f7](https://github.com/defn/dev/commit/bd003f7fb4bfbd3bd0363e896d1632dec3b0e003))
+* add immediate-binding StorageClass for PVC health status ([c74892c](https://github.com/defn/dev/commit/c74892c0558aee1d55bfce92d19dea9b405362b7))
+* add kustomize apps with helm charts ([f4d8cc0](https://github.com/defn/dev/commit/f4d8cc0ace457e13fe59ebc206a390ac0ec5fd23))
+* add linkerd service mesh and gateway api support ([200f49d](https://github.com/defn/dev/commit/200f49d83505ba01753a80a820f98ffc130c5ee3))
+* add macOS VS Code support to code wrapper ([3b75c90](https://github.com/defn/dev/commit/3b75c9085169b1f0ed9d3b8dc370e9a5e935f84a))
+* add persistent storage for coder ([b94abbd](https://github.com/defn/dev/commit/b94abbdd7a511b8b9cc673d8e94db746548c7887))
+* add progress display for waiting on cluster readiness ([9c33709](https://github.com/defn/dev/commit/9c337095d8581a8fa5913e6ef29d309061ca9837))
+* add traefik dashboard ingress and remove in-cluster registry ([44442e7](https://github.com/defn/dev/commit/44442e7a87b7117d7f6dd79d9f9ea8a83f81d29c))
+* add volume mount for www app manifest ([7dca7cd](https://github.com/defn/dev/commit/7dca7cdde53f4af5ee5cdb72719ed8240133f9a7))
+* add volume mounts for linkerd and gateway manifests ([0efa889](https://github.com/defn/dev/commit/0efa889b196588027b7e62a99dc341865dfa42c5))
+* add www sample application with ArgoCD ([e606db3](https://github.com/defn/dev/commit/e606db3e76504027f3f47ac92813cec007b36301))
+* configure coder with traefik ingress instead of LoadBalancer ([365165d](https://github.com/defn/dev/commit/365165da57471f2c7a3a7e8c52c4d13c90a78441))
+* enable DERP websockets and terraform debug mode for coder ([31299a6](https://github.com/defn/dev/commit/31299a60f70bac10a78b6f9d7fd426b2c34b71ba))
+* enable server-side apply for large CRDs and kustomize helm support ([abcdb59](https://github.com/defn/dev/commit/abcdb5994ee6c41b5715808838ddb363e9de373d))
+* enable wildcard subdomain support for coder apps ([8fb03be](https://github.com/defn/dev/commit/8fb03beebc010993f87e2e9a56ac80061f4308bf))
+* grant coder cluster-admin and mount kubeconfig ([2779909](https://github.com/defn/dev/commit/277990975354272565c786b2eb770b2eb786b582))
+* set default namespace to argocd after cluster creation ([268ba8d](https://github.com/defn/dev/commit/268ba8d7474f6f8e994f1770030e88595a6fd76c))
+* use declarative manifests for k3d cluster setup ([3a62158](https://github.com/defn/dev/commit/3a62158bd07c1e9cd731c27548a1ddf08f2e99ab))
+* use ingress hostnames for argocd and headlamp ([37028bb](https://github.com/defn/dev/commit/37028bb7d42d205c47254c027b6a7a1ce582abef))
+* use skopeo for multi-platform image sync ([98fe490](https://github.com/defn/dev/commit/98fe49091b5cb58697a3170ff52a4ed300abd166))
+
+
+### Bug Fixes
+
+* add /usr/local/bin to PATH for macOS x86 bash ([45eff62](https://github.com/defn/dev/commit/45eff62cd03a2e23452ad7767c4bf2bab1671579))
+* add GNU coreutils paths to Bazel PATH ([e652fd5](https://github.com/defn/dev/commit/e652fd528f7fe1a9cefad79ab381b8d710f8eda3))
+* add init container to fix postgres data directory permissions ([61fa30d](https://github.com/defn/dev/commit/61fa30dd7dea6176fa7e4a95957b6a73342b39a3))
+* add Tailscale public DERP map for coder networking ([c39f38a](https://github.com/defn/dev/commit/c39f38a66979d37862f0f621b4af2bab233e4af2))
+* coder connectivity and add defn.xxx app ([90baccc](https://github.com/defn/dev/commit/90baccc1ba285f2a3dbc02cbe1d6ced9a73fc9c5))
+* disable embedded DERP server for coder connectivity ([7e78b54](https://github.com/defn/dev/commit/7e78b5470118426a6a56243c4ec9e7b217f2ed70))
+* downgrade capsule to 0.11.2 to avoid DeviceClass API requirement ([a1fd819](https://github.com/defn/dev/commit/a1fd819f1a6a0db9adffafcb4134b509f774edeb))
+* enable cert-manager CRDs installation ([fbf5748](https://github.com/defn/dev/commit/fbf574823939c7ac3e48170592ba86c1f423b382))
+* mise self-update before install, add tailscale to trusted hosts ([562ccfb](https://github.com/defn/dev/commit/562ccfbea4375dfb089644ffb65c05dc4e31cc93))
+* remove scheme from CODER_WILDCARD_ACCESS_URL ([71ea708](https://github.com/defn/dev/commit/71ea7081994e628aaf50326e8cc83f69a8b9f1a4))
+* use explicit amd64 image tag for coder workspace ([5a6dbbf](https://github.com/defn/dev/commit/5a6dbbf0e42dc16d9411499770cebb1ae171a9b4))
+* use internal cluster URL for coder agent connection ([c1a93e0](https://github.com/defn/dev/commit/c1a93e0c2120331cd3972cca6766b92e094354c8))
+* use Recreate strategy for coder deployment ([9a35919](https://github.com/defn/dev/commit/9a35919739daa40d31259f400f680ed4b0fce579))
+
+
+### Reverts
+
+* remove immediate-binding StorageClass ([458db17](https://github.com/defn/dev/commit/458db177b6c7a42d9a3ba82195b63b48529400c7))
+
 ## [1.56.0](https://github.com/defn/dev/compare/v1.55.0...v1.56.0) (2025-12-01)
 
 
