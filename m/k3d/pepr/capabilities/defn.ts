@@ -88,7 +88,9 @@ When(a.ConfigMap)
   .InNamespace("defn")
   .WithLabel("app.kubernetes.io/managed-by", "pepr")
   .Watch(async cm => {
-    Log.info(`ConfigMap ${cm.metadata?.name}: updated:\n\n${JSON.stringify(cm.data)}\n`);
+    Log.info(
+      `ConfigMap ${cm.metadata?.name}: updated:\n\n${JSON.stringify(cm.data)}\n`,
+    );
   });
 
 When(a.Namespace)

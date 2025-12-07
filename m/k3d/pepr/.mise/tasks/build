@@ -2,5 +2,6 @@
 #MISE description="Build all generated artifacts"
 
 (cd capabilities/crd && mise run gen)
+npx pepr build
 trunk fmt
 npx pepr format
