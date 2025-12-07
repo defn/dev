@@ -23,6 +23,7 @@ This operator watches for `Script` custom resources in the `defn` namespace and 
 │       └── Script.d.ts     # Generated TypeScript types
 ├── Tiltfile                # Tilt dev environment config
 └── .mise/tasks/            # Mise task runner scripts
+    ├── build               # Build all generated artifacts
     ├── init                # Initialize namespace and CRDs
     ├── serve               # Run pepr dev server
     └── up                  # Start tilt environment
@@ -44,6 +45,7 @@ spec:
   user: ubuntu # Optional: run as user
   group: staff # Optional: run as group
   umask: "022" # Optional: file creation mask
+  result: "" # Optional: execution result (set by operator)
 ```
 
 ## Development
@@ -58,6 +60,9 @@ spec:
 ### Tasks
 
 ```bash
+# Build all generated artifacts (CRDs, TypeScript types)
+mise run build
+
 # Initialize namespace and apply CRDs
 mise run init
 
