@@ -5,4 +5,4 @@ resources:
   - configmap.yaml
   - clusterissuer.yaml
   - wildcard-certificate.yaml
-  - wildcard-certificate-coder-ns.yaml
+  - traefik-https-redirect.yaml
