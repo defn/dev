@@ -19,3 +19,15 @@ helmCharts:
           enable: true
           className: traefik
           host: coder.defn.xxx
+        volumes:
+          - name: kubeconfig
+            configMap:
+              name: coder-kubeconfig
+        volumeMounts:
+          - name: kubeconfig
+            mountPath: /home/ubuntu/m/k3d/.kube
+            readOnly: true
+
+resources:
+  - cluster-admin.yaml
+  - kubeconfig.yaml
