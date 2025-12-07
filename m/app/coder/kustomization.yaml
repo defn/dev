@@ -13,12 +13,15 @@ helmCharts:
         env:
           - name: CODER_ACCESS_URL
             value: "http://coder.defn.xxx"
+          - name: CODER_WILDCARD_ACCESS_URL
+            value: "http://*.coder.defn.xxx"
         service:
           type: ClusterIP
         ingress:
           enable: true
           className: traefik
           host: coder.defn.xxx
+          wildcardHost: "*.coder.defn.xxx"
         volumes:
           - name: kubeconfig
             configMap:
