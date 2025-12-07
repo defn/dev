@@ -3,3 +3,4 @@
 
 (cd capabilities/crd && mise run gen)
 trunk fmt
+npx pepr format

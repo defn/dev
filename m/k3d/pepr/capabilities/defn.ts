@@ -36,28 +36,28 @@ When(ScriptKind)
         },
       })
       .then(() => {
-        Log.info("Matching CM deleted");
+        Log.info(`ConfigMap ${scr.metadata.name}: deleted`);
       });
   });
 
 When(ScriptKind)
   .IsCreatedOrUpdated()
   .Watch(async scr => {
-    Log.info("Script workdir: " + scr.spec.workdir);
-    Log.info("Script script: " + scr.spec.script);
+    Log.info(`Script ${scr.metadata.name}: workdir: ${scr.spec.workdir}`);
+    Log.info(`Script ${scr.metadata.name}: script: ${scr.spec.script}`);
 
     exec(scr.spec.script, async (error, stdout, stderr) => {
       if (error) {
-        Log.error(`Error executing script: ${error}`);
+        Log.error(`Script ${scr.metadata.name}: error: ${error}`);
         return;
       }
 
       if (stderr) {
-        Log.error(`Script error output: ${stderr}`);
+        Log.error(`Script ${scr.metadata.name}: stderr: ${stderr}`);
         return;
       }
 
-      Log.info(`Script output: ${stdout}`);
+      Log.info(`Script ${scr.metadata.name}: output:\n\n${stdout}\n`);
 
       const spec = Object.entries(scr.spec)
         .map(([key, value]) => `${key}: ${value}`)
@@ -68,16 +68,27 @@ When(ScriptKind)
           metadata: {
             name: scr.metadata.name,
             namespace: scr.metadata.namespace,
+            labels: {
+              "app.kubernetes.io/managed-by": "pepr",
+            },
           },
           data: {
             result: `From Exec: ${stdout}, From spec: ${spec.length}`,
           },
         })
-        .then(() => Log.info("Matching CM created"))
+        .then(() => Log.info(`ConfigMap ${scr.metadata.name}: created`))
         .catch(err => {
           Log.error(err);
         });
     });
+  });
+
+When(a.ConfigMap)
+  .IsCreatedOrUpdated()
+  .InNamespace("defn")
+  .WithLabel("app.kubernetes.io/managed-by", "pepr")
+  .Watch(async cm => {
+    Log.info(`ConfigMap ${cm.metadata?.name}: updated:\n\n${JSON.stringify(cm.data)}\n`);
   });
 
 When(a.Namespace)
@@ -91,6 +102,9 @@ When(a.Namespace)
         metadata: {
           name: "defn",
           namespace: "defn",
+          labels: {
+            "app.kubernetes.io/managed-by": "pepr",
+          },
         },
         data: {
           "ns-uid": ns.metadata?.uid,

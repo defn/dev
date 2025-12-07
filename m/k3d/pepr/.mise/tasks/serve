@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 #MISE description="Run pepr dev server"
 
-npx pepr dev --yes
+LOG_LEVEL=info npx pepr dev --yes
