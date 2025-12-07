@@ -14,7 +14,7 @@ helmCharts:
           - name: CODER_ACCESS_URL
             value: "http://coder.defn.xxx"
           - name: CODER_WILDCARD_ACCESS_URL
-            value: "http://*.coder.defn.xxx"
+            value: "*.coder.defn.xxx"
         podSecurityContext:
           fsGroup: 1000
         service:
