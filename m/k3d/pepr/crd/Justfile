@@ -1,15 +1,3 @@
-up *args:
-    for a in crd.*.yaml; do kubectl apply -f $a; done
-    kubectl delete ns defn
-    kubectl create ns defn
-    tilt up {{ args }}
-
-pepr:
-    #!/usr/bin/env bash
-    while ! kubectl get nodes; do date; sleep 5; done
-    npx pepr format
-    npx pepr dev --yes
-
 test:
     #!/usr/bin/env bash
     set -efu
@@ -37,7 +25,7 @@ test:
     for a in Script ; do
         cue def api.$a.cue --force -o api.$a.yaml --out openapi+yaml
         npx openapi-typescript api.$a.yaml -o $a.d.ts
-        cue export --out yaml -e crd.$a | read_file api.$a.yaml $a > crd/crd.$a.yaml
+        cue export --out yaml -e crd.$a | read_file api.$a.yaml $a > crd.$a.yaml
     done
 
     trunk fmt
