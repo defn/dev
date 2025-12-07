@@ -77,3 +77,10 @@ patches:
         path: /spec/strategy
         value:
           type: Recreate
+  - target:
+      kind: Service
+      name: coder
+    patch: |-
+      - op: add
+        path: /spec/clusterIP
+        value: None
