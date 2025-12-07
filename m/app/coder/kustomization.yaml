@@ -87,3 +87,8 @@ patches:
         value:
           name: CODER_DERP_SERVER_ENABLE
           value: "true"
+      - op: add
+        path: /spec/template/spec/containers/0/env/-
+        value:
+          name: CODER_DERP_FORCE_WEBSOCKETS
+          value: "true"
