@@ -1,4 +1,6 @@
 {
+  "name": "@defn/cv",
+  "private": true,
   "dependencies": {
     "@types/node": "^24.10.1",
     "node-fetch": "^3.3.2",
