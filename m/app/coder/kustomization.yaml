@@ -18,9 +18,7 @@ helmCharts:
           - name: CODER_TLS_ENABLE
             value: "false"
           - name: CODER_DERP_SERVER_ENABLE
-            value: "false"
-          - name: CODER_DERP_CONFIG_URL
-            value: "https://controlplane.tailscale.com/derpmap/default"
+            value: "true"
           - name: CODER_ENABLE_TERRAFORM_DEBUG_MODE
             value: "true"
           - name: CODER_BLOCK_DIRECT
