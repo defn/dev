@@ -54,7 +54,6 @@ helmCharts:
               runAsUser: 0
         service:
           type: LoadBalancer
-          port: 9999
           externalTrafficPolicy: Cluster
           annotations:
             traefik.ingress.kubernetes.io/service.nativelb: "true"
@@ -97,3 +96,10 @@ patches:
         path: /spec/strategy
         value:
           type: Recreate
+  - target:
+      kind: Service
+      name: coder
+    patch: |-
+      - op: replace
+        path: /spec/ports/0/port
+        value: 9999
