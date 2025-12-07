@@ -4,6 +4,10 @@
     "build": {
       "outputs": ["dist/**"],
       "inputs": ["src/**", "package.json", "tsconfig.json"]
+    },
+    "@defn/demo#build": {
+      "outputs": ["dist/**"],
+      "inputs": ["pepr.ts", "capabilities/**", "package.json", "tsconfig.json"]
     }
   }
 }
