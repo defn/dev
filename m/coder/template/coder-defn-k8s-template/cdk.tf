@@ -268,7 +268,7 @@ resource "kubernetes_deployment" "main" {
 
         container {
           name              = "dev"
-          image             = "ghcr.io/defn/dev:v1.56.0-amd64"
+          image             = "ghcr.io/defn/dev:v1.57.0-amd64"
           image_pull_policy = "Always"
           command           = ["/bin/tini", "--", "bash", "-c", "cd; source .bash_profile; cd m; ./entrypoint.sh"]
 
