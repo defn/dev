@@ -19,6 +19,8 @@ helmCharts:
             value: "false"
           - name: CODER_DERP_SERVER_ENABLE
             value: "true"
+          - name: CODER_DERP_SERVER_RELAY_URL
+            value: "https://coder.defn.xxx"
           - name: CODER_ENABLE_TERRAFORM_DEBUG_MODE
             value: "true"
           - name: CODER_BLOCK_DIRECT
