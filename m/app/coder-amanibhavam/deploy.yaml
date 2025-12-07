@@ -1,12 +1,7 @@
 apiVersion: v1
-kind: Namespace
-metadata:
-  name: coder-amanibhavam
----
-apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  namespace: coder-amanibhavam
+  namespace: coder
   name: coder-amanibhavam
 spec:
   accessModes:
@@ -26,4 +21,4 @@ roleRef:
 subjects:
   - kind: ServiceAccount
     name: default
-    namespace: coder-amanibhavam
+    namespace: coder
