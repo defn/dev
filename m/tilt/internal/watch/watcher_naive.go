@@ -315,8 +315,9 @@ func newWatcher(paths []string, ignore PathMatcher, l logger.Logger) (*naiveNoti
 	}
 	MaybeIncreaseBufferSize(fsw)
 
-	err = fsw.SetRecursive()
-	isWatcherRecursive := err == nil
+	// Linux inotify doesn't support recursive watching natively.
+	// We manually walk directories and add watches for each one.
+	isWatcherRecursive := false
 
 	wrappedEvents := make(chan FileEvent)
 	notifyList := make(map[string]bool, len(paths))

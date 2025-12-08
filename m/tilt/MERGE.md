@@ -626,6 +626,39 @@ The docker-compose removal is ongoing. Build errors are being fixed iteratively:
 - `internal/tiltfile/tiltfile.go` - Removed `fakeDcc` parameter from `ProvideTiltfileLoader`
 - Various BUILD.bazel files - Removed docker-compose dependencies
 
+## 14. Fixed Linux x86 Build (fsnotify SetRecursive)
+
+**Problem**: Builds passed on macOS ARM64 but failed on Linux x86 with error:
+```
+tilt/internal/watch/watcher_naive.go:318:12: fsw.SetRecursive undefined (type *fsnotify.Watcher has no field or method SetRecursive)
+```
+
+**Root Cause**: The code attempted to call `fsw.SetRecursive()` to check if the watcher supports recursive watching. This method doesn't exist in `github.com/tilt-dev/fsnotify v1.4.7` on Linux.
+
+**Solution**: On Linux, `inotify` (the underlying mechanism) doesn't support recursive watching natively, so the code must manually walk directories and add watches for each one. We set `isWatcherRecursive = false` directly instead of trying to probe for the capability.
+
+**Files Modified**:
+- `tilt/internal/watch/watcher_naive.go:316-320`:
+  ```go
+  // Before:
+  MaybeIncreaseBufferSize(fsw)
+
+  err = fsw.SetRecursive()
+  isWatcherRecursive := err == nil
+
+  // After:
+  MaybeIncreaseBufferSize(fsw)
+
+  // Linux inotify doesn't support recursive watching natively.
+  // We manually walk directories and add watches for each one.
+  isWatcherRecursive := false
+  ```
+
+**Platform Notes**:
+- This fix only affects `watcher_naive.go` which has build tag `//go:build !darwin` (Linux/Windows)
+- macOS uses `watcher_darwin.go` with `fsevents` which is naturally recursive and unaffected
+- Windows would also use this file and also doesn't have native recursive watching via `fsnotify`
+
 ## Commands Used
 
 ```bash
