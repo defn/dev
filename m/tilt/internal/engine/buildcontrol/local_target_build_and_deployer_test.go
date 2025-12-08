@@ -30,7 +30,7 @@ func TestNoLocalTargets(t *testing.T) {
 	f := newLTFixture(t)
 
 	specs := []model.TargetSpec{
-		model.ImageTarget{}, model.K8sTarget{}, model.DockerComposeTarget{},
+		model.ImageTarget{}, model.K8sTarget{},
 	}
 	res, err := f.ltbad.BuildAndDeploy(f.ctx, f.st, specs, store.BuildStateSet{})
 	assert.Empty(t, res, "expect empty result for failed BuildAndDeploy")

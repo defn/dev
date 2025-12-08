@@ -92,31 +92,7 @@ func (c *downCmd) down(ctx context.Context, downDeps DownDeps, args []string) er
 
 	sortedManifests := sortManifestsForDeletion(tlr.Manifests, tlr.EnabledManifests)
 
-	if err := deleteK8sEntities(ctx, sortedManifests, tlr.UpdateSettings, downDeps, c.deleteNamespaces); err != nil {
-		return err
-	}
-
-	dcProjects := make(map[string]v1alpha1.DockerComposeProject)
-	for _, m := range sortedManifests {
-		if !m.IsDC() {
-			continue
-		}
-		proj := m.DockerComposeTarget().Spec.Project
-
-		if _, exists := dcProjects[proj.Name]; !exists {
-			dcProjects[proj.Name] = proj
-		}
-	}
-
-	for _, dcProject := range dcProjects {
-		dcc := downDeps.dcClient
-		err = dcc.Down(ctx, dcProject, logger.Get(ctx).Writer(logger.InfoLvl), logger.Get(ctx).Writer(logger.InfoLvl), c.deleteVolumes)
-		if err != nil {
-			return errors.Wrap(err, "Running `docker-compose down`")
-		}
-	}
-
-	return nil
+	return deleteK8sEntities(ctx, sortedManifests, tlr.UpdateSettings, downDeps, c.deleteNamespaces)
 }
 
 func sortManifestsForDeletion(manifests []model.Manifest, enabledManifests []model.ManifestName) []model.Manifest {

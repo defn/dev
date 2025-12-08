@@ -504,6 +504,128 @@ Tests that require external CLI tools (helm, kustomize) are removed from Bazel b
 
 5. **macOS linker warnings**: On macOS, you may see warnings like `ld: warning: ignoring duplicate libraries: '-lm'` during linking. This is a known issue with `rules_go` and CGO dependencies on macOS - the math library gets passed multiple times to the linker. These warnings are harmless and can be ignored. They may be fixed in a future `rules_go` release. Linux builds should not have this issue.
 
+## 11. Removed Kustomize Support
+
+**Why:** This fork focuses on Kubernetes-only workflows. Kustomize should be run separately to produce YAML that tilt processes.
+
+### Directories Deleted
+- `tilt/internal/tiltfile/k8s_custom_deploy/` - kustomize deployment logic
+- `tilt/internal/tiltfile/k8scontext/` - k8s context management (contained kustomize refs)
+
+### Files Modified
+
+1. **`tilt/internal/tiltfile/tiltfile_state.go`**:
+   - Removed `KustomizePath` field from `tiltfileState`
+   - Removed `kustomize()` builtin function
+   - Removed all kustomize-related helper functions
+
+2. **`tilt/internal/tiltfile/BUILD.bazel`**:
+   - Removed `//tilt/internal/tiltfile/k8s_custom_deploy` from deps
+   - Removed `//tilt/internal/tiltfile/k8scontext` from deps
+
+3. **`tilt/internal/tiltfile/tiltfile_test.go`**:
+   - Removed kustomize tests (TestKustomize, TestKustomizeFlags, etc.)
+
+## 12. Removed Helm Support
+
+**Why:** Helm should be run separately to produce YAML that tilt processes. Removes complexity and CLI tool dependencies.
+
+### Directories Deleted
+- `tilt/internal/tiltfile/helm/` - All helm templating logic
+
+### Files Modified
+
+1. **`tilt/internal/tiltfile/tiltfile_state.go`**:
+   - Removed `helm()` builtin function
+   - Removed helm-related imports and types
+
+2. **`tilt/internal/tiltfile/BUILD.bazel`**:
+   - Removed `//tilt/internal/tiltfile/helm` from deps
+   - Removed `helm_test.go` from test srcs
+
+3. **Various test files**: Removed helm-specific test cases
+
+## 13. Removed Docker-Compose Support (Complete)
+
+**Why:** This fork focuses on Kubernetes-only workflows. Docker-compose adds significant complexity.
+
+### Directories Deleted
+- `tilt/internal/dockercompose/` - All docker-compose runtime logic
+- `tilt/internal/tiltfile/dockercompose/` - Tiltfile docker-compose functions
+- `tilt/internal/engine/dcwatch/` - Docker-compose file watcher
+- `tilt/internal/engine/dockercompose/` - Docker-compose engine controller
+- `tilt/internal/controllers/core/dockercomposelogstream/` - Log streaming controller
+- `tilt/internal/controllers/core/dockercomposeservice/` - Service controller
+- `tilt/internal/controllers/apis/dockercomposelogstream/` - API types
+- `tilt/internal/controllers/apis/dockercomposeservice/` - API types
+- `tilt/internal/store/dockercomposeservices/` - Store actions
+
+### Files Modified
+
+1. **`tilt/internal/tiltfile/tiltfile_state.go`**:
+   - Removed `dcCli` field from `tiltfileState`
+   - Removed `docker_compose()` and `dc_resource()` builtin functions
+   - Removed `assembleDC()`, `validateDockerComposeVersion()`, `translateDC()` functions
+   - Removed docker-compose imports
+
+2. **`tilt/internal/engine/buildcontroller.go`**:
+   - Removed `DockerComposeServices` from `buildStateSet()` calls
+   - Removed `dcs` parameter from function signatures
+
+3. **`tilt/internal/controllers/core/dockerimage/imagemap.go`**:
+   - Simplified `UpdateImageMap()` to remove docker-compose specific path
+   - Removed docker client parameter
+
+4. **`tilt/internal/hud/view.go`**:
+   - Removed `dockercompose.State` case from `resourceInfoView()`
+   - Removed dockercompose import
+
+5. **`tilt/internal/store/engine_state.go`**:
+   - Removed unused `fmt` import (was used by docker-compose code)
+
+6. **Various BUILD.bazel files**: Removed docker-compose dependencies
+
+### Stub Types for Generated Code
+
+Created `tilt/pkg/apis/core/v1alpha1/dockercompose_stub_types.go` with minimal type definitions to satisfy pre-generated protobuf code (`generated.pb.go`) and deepcopy code (`zz_generated.deepcopy.go`). These files have ~280 references to DockerCompose types.
+
+The stub types include:
+- `DockerComposeLogStream`, `DockerComposeLogStreamList`, `DockerComposeLogStreamSpec`, `DockerComposeLogStreamStatus`
+- `DockerComposeService`, `DockerComposeServiceList`, `DockerComposeServiceSpec`, `DockerComposeServiceStatus`
+- `DockerComposeProject`, `DockerContainerState`, `DockerPortBinding`
+- `LiveUpdateDockerComposeSelector`
+
+Also added `DockerCompose` field back to `LiveUpdateSelector` in `liveupdate_types.go` for generated code compatibility.
+
+**Note:** The generated files contain dead code for docker-compose. This will be cleaned up when protos are regenerated in a future session.
+
+### Files Still Needing Cleanup
+
+The docker-compose removal is ongoing. Build errors are being fixed iteratively:
+- Unused imports in various files
+- References to `m.IsDC()` method (removed from Manifest)
+- Various test files with docker-compose test cases
+
+### Current State
+
+- All core docker-compose directories have been deleted
+- Stub types allow generated code to compile
+- All files have been cleaned up and `bazel build //tilt/...` succeeds
+
+### Files Modified During Cleanup
+- `internal/tiltfile/k8s.go` - Removed `s.dc` usage in `checkResourceConflict()`
+- `internal/controllers/core/tiltfile/api.go` - Removed `OrchestratorDC` cluster creation
+- `internal/controllers/core/tiltfile/reconciler.go` - Removed DC orchestrator handling
+- `internal/controllers/core/tiltfile/reducers.go` - Removed `IsDC()` type check
+- `internal/hud/webview/convert.go` - Removed DC runtime info and manifest type
+- `internal/hud/view.go` - Removed `dockercompose.State` case
+- `internal/store/buildcontrols/reducers.go` - Removed container import and manifest var
+- `internal/engine/analytics/analytics_reporter.go` - Removed `IsDC()` analytics
+- `internal/cli/wire_gen.go` - Fixed missing `localEnv`/`clusterEnv` definitions, marked unused localEnv as `_` in two functions
+- `internal/engine/upper_test.go` - Removed docker-compose controller imports, removed dc controller setup, removed `fakeDcc` parameter, removed unused imports (`path`, `dockertypes`, `apitiltfile`), removed `call.dc()` check
+- `internal/tiltfile/tiltfile.go` - Removed `fakeDcc` parameter from `ProvideTiltfileLoader`
+- Various BUILD.bazel files - Removed docker-compose dependencies
+
 ## Commands Used
 
 ```bash

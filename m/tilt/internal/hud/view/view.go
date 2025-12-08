@@ -1,10 +1,8 @@
 package view
 
 import (
-	"strings"
 	"time"
 
-	"github.com/defn/dev/m/tilt/internal/container"
 	"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1"
 	"github.com/defn/dev/m/tilt/pkg/model"
 	"github.com/defn/dev/m/tilt/pkg/model/logstore"
@@ -20,33 +18,6 @@ type ResourceInfoView interface {
 	RuntimeStatus() v1alpha1.RuntimeStatus
 	Status() string
 }
-
-type DCResourceInfo struct {
-	ContainerStatus string
-	ContainerID     container.ID
-	SpanID          logstore.SpanID
-	StartTime       time.Time
-	RunStatus       v1alpha1.RuntimeStatus
-}
-
-func NewDCResourceInfo(status string, cID container.ID, spanID logstore.SpanID, startTime time.Time, runtimeStatus v1alpha1.RuntimeStatus) DCResourceInfo {
-	return DCResourceInfo{
-		ContainerStatus: status,
-		ContainerID:     cID,
-		SpanID:          spanID,
-		StartTime:       startTime,
-		RunStatus:       runtimeStatus,
-	}
-}
-
-var _ ResourceInfoView = DCResourceInfo{}
-
-func (DCResourceInfo) resourceInfoView()                     {}
-func (dcInfo DCResourceInfo) RuntimeSpanID() logstore.SpanID { return dcInfo.SpanID }
-func (dcInfo DCResourceInfo) Status() string {
-	return strings.Title(dcInfo.ContainerStatus)
-}
-func (dcInfo DCResourceInfo) RuntimeStatus() v1alpha1.RuntimeStatus { return dcInfo.RunStatus }
 
 type K8sResourceInfo struct {
 	PodName            string
@@ -128,25 +99,6 @@ type Resource struct {
 	IsTiltfile bool
 }
 
-func (r Resource) DockerComposeTarget() DCResourceInfo {
-	switch info := r.ResourceInfo.(type) {
-	case DCResourceInfo:
-		return info
-	default:
-		return DCResourceInfo{}
-	}
-}
-
-func (r Resource) DCInfo() DCResourceInfo {
-	ret, _ := r.ResourceInfo.(DCResourceInfo)
-	return ret
-}
-
-func (r Resource) IsDC() bool {
-	_, ok := r.ResourceInfo.(DCResourceInfo)
-	return ok
-}
-
 func (r Resource) K8sInfo() K8sResourceInfo {
 	ret, _ := r.ResourceInfo.(K8sResourceInfo)
 	return ret
@@ -178,10 +130,6 @@ func (r Resource) DefaultCollapse() bool {
 	autoExpand := false
 	if k8sInfo, ok := r.ResourceInfo.(K8sResourceInfo); ok {
 		autoExpand = k8sInfo.PodRestarts > 0 || k8sInfo.PodStatus == "CrashLoopBackOff" || k8sInfo.PodStatus == "Error"
-	}
-
-	if r.IsDC() && r.DockerComposeTarget().RuntimeStatus() == v1alpha1.RuntimeStatusError {
-		autoExpand = true
 	}
 
 	autoExpand = autoExpand ||

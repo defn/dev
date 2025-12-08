@@ -20,11 +20,9 @@ import (
 	"github.com/defn/dev/m/tilt/internal/container"
 	"github.com/defn/dev/m/tilt/internal/controllers/core/cmd"
 	"github.com/defn/dev/m/tilt/internal/controllers/core/cmdimage"
-	"github.com/defn/dev/m/tilt/internal/controllers/core/dockercomposeservice"
 	"github.com/defn/dev/m/tilt/internal/controllers/core/dockerimage"
 	"github.com/defn/dev/m/tilt/internal/controllers/core/kubernetesapply"
 	"github.com/defn/dev/m/tilt/internal/docker"
-	"github.com/defn/dev/m/tilt/internal/dockercompose"
 	"github.com/defn/dev/m/tilt/internal/engine/buildcontrol"
 	"github.com/defn/dev/m/tilt/internal/k8s"
 	"github.com/defn/dev/m/tilt/internal/localexec"
@@ -60,7 +58,6 @@ func provideFakeBuildAndDeployer(
 	dir *dirs.TiltDevDir,
 	env clusterid.Product,
 	updateMode liveupdates.UpdateModeFlag,
-	dcc dockercompose.DockerComposeClient,
 	clock build.Clock,
 	kp build.KINDLoader,
 	analytics *analytics.TiltAnalytics,
@@ -74,7 +71,6 @@ func provideFakeBuildAndDeployer(
 		kubernetesapply.NewReconciler,
 		dockerimage.NewReconciler,
 		cmdimage.NewReconciler,
-		dockercomposeservice.WireSet,
 		cmd.WireSet,
 		clockwork.NewRealClock,
 		provideFakeEnv,

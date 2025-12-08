@@ -64,15 +64,6 @@ func RunningContainersForOnePod(
 	return containers, nil
 }
 
-func RunningContainersForDC(dcs *v1alpha1.DockerComposeService) []Container {
-	if dcs == nil || dcs.Status.ContainerID == "" {
-		return nil
-	}
-	return []Container{
-		Container{ContainerID: container.ID(dcs.Status.ContainerID)},
-	}
-}
-
 // Information describing a single running & ready container
 type Container struct {
 	PodID         k8s.PodID

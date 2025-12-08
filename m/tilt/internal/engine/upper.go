@@ -23,7 +23,6 @@ import (
 	"github.com/defn/dev/m/tilt/internal/store/clusters"
 	"github.com/defn/dev/m/tilt/internal/store/cmdimages"
 	"github.com/defn/dev/m/tilt/internal/store/configmaps"
-	"github.com/defn/dev/m/tilt/internal/store/dockercomposeservices"
 	"github.com/defn/dev/m/tilt/internal/store/dockerimages"
 	"github.com/defn/dev/m/tilt/internal/store/filewatches"
 	"github.com/defn/dev/m/tilt/internal/store/imagemaps"
@@ -176,10 +175,6 @@ func upperReducerFn(ctx context.Context, state *store.EngineState, action store.
 		filewatches.HandleFileWatchUpsertAction(state, action)
 	case filewatches.FileWatchDeleteAction:
 		filewatches.HandleFileWatchDeleteAction(state, action)
-	case dockercomposeservices.DockerComposeServiceUpsertAction:
-		dockercomposeservices.HandleDockerComposeServiceUpsertAction(state, action)
-	case dockercomposeservices.DockerComposeServiceDeleteAction:
-		dockercomposeservices.HandleDockerComposeServiceDeleteAction(state, action)
 	case dockerimages.DockerImageUpsertAction:
 		dockerimages.HandleDockerImageUpsertAction(state, action)
 	case dockerimages.DockerImageDeleteAction:

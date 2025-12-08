@@ -95,8 +95,8 @@ func (g TargetGraph) IsDeployedImage(iTarget ImageTarget) bool {
 	id := iTarget.ID()
 	for _, t := range g.sortedTargets {
 		switch t := t.(type) {
-		case K8sTarget, DockerComposeTarget:
-			// Returns true if a K8s or DC target directly depends on this image.
+		case K8sTarget:
+			// Returns true if a K8s target directly depends on this image.
 			for _, depID := range t.DependencyIDs() {
 				if depID == id {
 					return true

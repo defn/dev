@@ -591,8 +591,7 @@ func TestStatusDisabled(t *testing.T) {
 		m1 := manifestbuilder.New(f, "local_update").WithLocalResource("a", nil).Build()
 		m2 := manifestbuilder.New(f, "local_serve").WithLocalServeCmd("a").Build()
 		m3 := manifestbuilder.New(f, "k8s").WithK8sYAML(testyaml.JobYAML).Build()
-		m4 := manifestbuilder.New(f, "dc").WithDockerCompose().Build()
-		for _, m := range []model.Manifest{m1, m2, m3, m4} {
+		for _, m := range []model.Manifest{m1, m2, m3} {
 			mt := store.NewManifestTarget(m)
 			mt.State.DisableState = v1alpha1.DisableStateDisabled
 			state.UpsertManifestTarget(mt)
@@ -607,8 +606,6 @@ func TestStatusDisabled(t *testing.T) {
 	}
 
 	expectedTargets := []string{
-		"dc:runtime",
-		"dc:update",
 		"k8s:runtime",
 		"k8s:update",
 		"local_update:update",

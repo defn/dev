@@ -10,7 +10,6 @@ type BuildType string
 
 const BuildTypeImage BuildType = "image"
 const BuildTypeLiveUpdate BuildType = "live-update"
-const BuildTypeDockerCompose BuildType = "docker-compose"
 const BuildTypeK8s BuildType = "k8s"
 const BuildTypeLocal BuildType = "local"
 

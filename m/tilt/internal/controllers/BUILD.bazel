@@ -18,8 +18,6 @@ go_library(
         "//tilt/internal/controllers/core/cmd",
         "//tilt/internal/controllers/core/cmdimage",
         "//tilt/internal/controllers/core/configmap",
-        "//tilt/internal/controllers/core/dockercomposelogstream",
-        "//tilt/internal/controllers/core/dockercomposeservice",
         "//tilt/internal/controllers/core/dockerimage",
         "//tilt/internal/controllers/core/extension",
         "//tilt/internal/controllers/core/extensionrepo",

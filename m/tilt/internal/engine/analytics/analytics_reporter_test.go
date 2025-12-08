@@ -27,7 +27,6 @@ var (
 	imgTargDBWithLU = model.ImageTarget{LiveUpdateSpec: lu, BuildDetails: model.DockerBuild{}}
 
 	kTarg    = model.K8sTarget{}
-	dTarg    = model.DockerComposeTarget{}
 	lTarg    = model.LocalTarget{}
 	lSrvTarg = model.LocalTarget{ServeCmd: model.Cmd{Argv: []string{"echo", "hi"}}}
 )
@@ -68,16 +67,6 @@ func TestAnalyticsReporter_Everything(t *testing.T) {
 			WithLabels(map[string]string{"k8s": "k8s3"}).
 			WithDeployTarget(kTarg)) // k8s, unbuilt
 
-	tf.addManifest(
-		tf.nextManifest().
-			WithLabels(map[string]string{"dc": "dc1"}).
-			WithDeployTarget(dTarg)) // dc
-	tf.addManifest(
-		tf.nextManifest().
-			WithLabels(map[string]string{"dc": "dc2"}).
-			WithDeployTarget(dTarg)) // dc
-
-	tf.addManifest(tf.nextManifest().WithImageTarget(imgTargDBWithLU).WithDeployTarget(dTarg)) // dc, liveupdate
 	tf.addManifest(tf.nextManifest().WithImageTargets(
 		[]model.ImageTarget{imgTargDBWithLU, imgTargDBWithLU})) // liveupdate, multipleimageliveupdate
 
@@ -103,16 +92,16 @@ func TestAnalyticsReporter_Everything(t *testing.T) {
 
 	expectedTags := map[string]string{
 		"builds.completed_count":                              "3",
-		"resource.count":                                      "13",
-		"resource.dockercompose.count":                        "3",
+		"resource.count":                                      "10",
+		"resource.dockercompose.count":                        "0",
 		"resource.unbuiltresources.count":                     "3",
-		"resource.liveupdate.count":                           "3",
+		"resource.liveupdate.count":                           "2",
 		"resource.k8s.count":                                  "4",
 		"resource.sameimagemultiplecontainerliveupdate.count": "0", // tests for this below
 		"resource.multipleimageliveupdate.count":              "1",
 		"resource.local.count":                                "3",
 		"resource.localserve.count":                           "1",
-		"resource.enabled.count":                              "12",
+		"resource.enabled.count":                              "9",
 		"tiltfile.error":                                      "false",
 		"up.starttime":                                        state.TiltStartTime.Format(time.RFC3339),
 		"env":                                                 k8s.AnalyticsEnv(clusterid.ProductDockerDesktop),
@@ -120,7 +109,7 @@ func TestAnalyticsReporter_Everything(t *testing.T) {
 		"k8s.runtime":                                         "docker",
 		"k8s.registry.host":                                   "1",
 		"k8s.registry.hostFromCluster":                        "1",
-		"label.count":                                         "2",
+		"label.count":                                         "1",
 		"feature.testflag_enabled.enabled":                    "true",
 	}
 
@@ -180,10 +169,6 @@ func TestAnalyticsReporter_TiltfileError(t *testing.T) {
 	tf.addManifest(tf.nextManifest().WithDeployTarget(model.K8sTarget{}))
 	tf.addManifest(tf.nextManifest().WithDeployTarget(model.K8sTarget{}))
 	tf.addManifest(tf.nextManifest().WithDeployTarget(model.K8sTarget{}))
-	tf.addManifest(tf.nextManifest().WithDeployTarget(model.DockerComposeTarget{}))
-	tf.addManifest(tf.nextManifest().WithDeployTarget(model.DockerComposeTarget{}))
-	tf.addManifest(tf.nextManifest().WithDeployTarget(model.DockerComposeTarget{}))
-	tf.addManifest(tf.nextManifest().WithDeployTarget(model.DockerComposeTarget{}))
 
 	state := tf.st.LockMutableStateForTesting()
 	state.TiltStartTime = time.Now()

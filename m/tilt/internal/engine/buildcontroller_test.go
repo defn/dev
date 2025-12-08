@@ -370,34 +370,6 @@ func TestBuildControllerUnresourcedYAMLFirst(t *testing.T) {
 	assert.Equal(t, expectedBuildOrder, observedBuildOrder)
 }
 
-func TestBuildControllerRespectDockerComposeOrder(t *testing.T) {
-	f := newTestFixture(t)
-
-	sancho := NewSanchoLiveUpdateDCManifest(f)
-	redis := manifestbuilder.New(f, "redis").WithDockerCompose().Build()
-	donQuixote := manifestbuilder.New(f, "don-quixote").WithDockerCompose().Build()
-	manifests := []model.Manifest{redis, sancho, donQuixote}
-	f.Start(manifests)
-
-	var observedBuildOrder []string
-	for i := 0; i < len(manifests); i++ {
-		call := f.nextCall()
-		observedBuildOrder = append(observedBuildOrder, call.dc().Name.String())
-	}
-
-	// If these were Kubernetes resources, we would try to deploy don-quixote
-	// before sancho, because it doesn't have an image build.
-	//
-	// But this would be wrong, because Docker Compose has stricter ordering requirements, see:
-	// https://docs.docker.com/compose/startup-order/
-	expectedBuildOrder := []string{
-		"redis",
-		"sancho",
-		"don-quixote",
-	}
-	assert.Equal(t, expectedBuildOrder, observedBuildOrder)
-}
-
 func TestBuildControllerLocalResourcesBeforeClusterResources(t *testing.T) {
 	f := newTestFixture(t)
 

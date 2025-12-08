@@ -25,21 +25,16 @@ type endpointsCase struct {
 	portFwds []model.PortForward
 	lbURLs   []string
 
-	dcPublishedPorts []int
-	dcPortBindings   []v1alpha1.DockerPortBinding
-
-	k8sResLinks       []model.Link
-	localResLinks     []model.Link
-	dcResLinks        []model.Link
-	dcDoNotInferLinks bool
+	k8sResLinks   []model.Link
+	localResLinks []model.Link
 }
 
 func (c endpointsCase) validate() {
 	if len(c.portFwds) > 0 || len(c.lbURLs) > 0 || len(c.k8sResLinks) > 0 {
-		if len(c.dcPublishedPorts) > 0 || len(c.localResLinks) > 0 {
+		if len(c.localResLinks) > 0 {
 			// portForwards and LoadBalancerURLs are exclusively the province
 			// of k8s resources, so you should never see them paired with
-			// test settings that imply a. a DC resource or b. a local resource
+			// test settings that imply a local resource
 			panic("test case implies impossible resource")
 		}
 	}
@@ -193,64 +188,6 @@ func TestManifestTargetEndpoints(t *testing.T) {
 			},
 		},
 		{
-			name: "docker compose ports",
-			expected: []model.Link{
-				model.MustNewLink("http://localhost:8000/", ""),
-				model.MustNewLink("http://localhost:7000/", ""),
-			},
-			dcPublishedPorts: []int{8000, 7000},
-		},
-		{
-			name: "docker compose ports and links",
-			expected: []model.Link{
-				model.MustNewLink("http://localhost:8000/", ""),
-				model.MustNewLink("http://localhost:7000/", ""),
-				model.MustNewLink("www.apple.edu", "apple"),
-				model.MustNewLink("www.zombo.com", "zombo"),
-			},
-			dcPublishedPorts: []int{8000, 7000},
-			dcResLinks: []model.Link{
-				model.MustNewLink("www.apple.edu", "apple"),
-				model.MustNewLink("www.zombo.com", "zombo"),
-			},
-		},
-		{
-			name:              "docker compose ports with inferLinks=false",
-			dcPublishedPorts:  []int{8000, 7000},
-			dcDoNotInferLinks: true,
-		},
-		{
-			name: "docker compose ports and links with inferLinks=false",
-			expected: []model.Link{
-				model.MustNewLink("www.apple.edu", "apple"),
-				model.MustNewLink("www.zombo.com", "zombo"),
-			},
-			dcPublishedPorts: []int{8000, 7000},
-			dcResLinks: []model.Link{
-				model.MustNewLink("www.apple.edu", "apple"),
-				model.MustNewLink("www.zombo.com", "zombo"),
-			},
-			dcDoNotInferLinks: true,
-		},
-		{
-			name: "docker compose dynamic ports",
-			expected: []model.Link{
-				model.MustNewLink("http://localhost:8000/", ""),
-			},
-			dcPortBindings: []v1alpha1.DockerPortBinding{
-				{
-					ContainerPort: 8080,
-					HostIP:        "0.0.0.0",
-					HostPort:      8000,
-				},
-				{
-					ContainerPort: 8080,
-					HostIP:        "::",
-					HostPort:      8000,
-				},
-			},
-		},
-		{
 			name: "load balancers",
 			expected: []model.Link{
 				model.MustNewLink("a", ""), model.MustNewLink("b", ""), model.MustNewLink("c", ""), model.MustNewLink("d", ""),
@@ -312,36 +249,7 @@ func TestManifestTargetEndpoints(t *testing.T) {
 				m = m.WithDeployTarget(model.LocalTarget{Links: c.localResLinks})
 			}
 
-			isDC := len(c.dcPublishedPorts) > 0 || len(c.dcResLinks) > 0
-
-			if isDC {
-				dockerDeployTarget := model.DockerComposeTarget{}
-
-				if len(c.dcPublishedPorts) > 0 {
-					dockerDeployTarget = dockerDeployTarget.WithPublishedPorts(c.dcPublishedPorts)
-				}
-
-				if len(c.dcResLinks) > 0 {
-					dockerDeployTarget.Links = c.dcResLinks
-				}
-
-				if c.dcDoNotInferLinks {
-					dockerDeployTarget = dockerDeployTarget.WithInferLinks(false)
-				}
-
-				m = m.WithDeployTarget(dockerDeployTarget)
-			}
-
-			if len(c.dcPortBindings) > 0 && !m.IsDC() {
-				m = m.WithDeployTarget(model.DockerComposeTarget{})
-			}
-
 			mt := newManifestTargetWithLoadBalancerURLs(m, c.lbURLs)
-			if len(c.dcPortBindings) > 0 {
-				dcState := mt.State.DCRuntimeState()
-				dcState.Ports = c.dcPortBindings
-				mt.State.RuntimeState = dcState
-			}
 			actual := ManifestTargetEndpoints(mt)
 			assertLinks(t, c.expected, actual)
 		})

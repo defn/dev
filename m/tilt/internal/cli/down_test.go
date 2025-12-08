@@ -5,14 +5,12 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/pkg/errors"
 	"github.com/spf13/afero"
 	"github.com/spf13/cobra"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 
 	"github.com/defn/dev/m/tilt/internal/analytics"
-	"github.com/defn/dev/m/tilt/internal/dockercompose"
 	"github.com/defn/dev/m/tilt/internal/k8s"
 	"github.com/defn/dev/m/tilt/internal/k8s/kubeconfig"
 	"github.com/defn/dev/m/tilt/internal/k8s/testyaml"
@@ -274,26 +272,6 @@ func TestDownK8sDeleteCmd_Error(t *testing.T) {
 	}
 }
 
-func TestDownDockerComposeWithExplodingKubeConfig(t *testing.T) {
-	f := newDownFixture(t)
-
-	f.deps.kClient = k8s.NewExplodingClient(errors.New("could not set up kubernetes client"))
-	f.tfl.Result = newTiltfileLoadResult(newDCManifest())
-	err := f.cmd.down(f.ctx, f.deps, nil)
-	assert.NoError(t, err)
-}
-
-func TestDownDCFails(t *testing.T) {
-	f := newDownFixture(t)
-
-	f.tfl.Result = newTiltfileLoadResult(newDCManifest())
-	f.dcc.DownError = fmt.Errorf("GARBLEGARBLE")
-	err := f.cmd.down(f.ctx, f.deps, nil)
-	if assert.Error(t, err) {
-		assert.Contains(t, err.Error(), "GARBLEGARBLE")
-	}
-}
-
 func TestDownArgs(t *testing.T) {
 	f := newDownFixture(t)
 
@@ -389,19 +367,6 @@ data:
 			ResourceDependencies: []model.ManifestName{"nonexistent"},
 		}.WithDeployTarget(k8s.MustTarget("missing-dep", yaml)),
 	}
-
-}
-
-func newDCManifest() model.Manifest {
-	return model.Manifest{Name: "fe"}.WithDeployTarget(model.DockerComposeTarget{
-		Name: "fe",
-		Spec: v1alpha1.DockerComposeServiceSpec{
-			Service: "fe",
-			Project: v1alpha1.DockerComposeProject{
-				ConfigPaths: []string{"dc.yaml"},
-			},
-		},
-	})
 }
 
 func newK8sMultiEntityManifest() model.Manifest {
@@ -465,7 +430,6 @@ type downFixture struct {
 	cmd    *downCmd
 	deps   DownDeps
 	tfl    *tiltfile.FakeTiltfileLoader
-	dcc    *dockercompose.FakeDCClient
 	kCli   *k8s.FakeK8sClient
 	execer *localexec.FakeExecer
 }
@@ -474,7 +438,6 @@ func newDownFixture(t *testing.T) downFixture {
 	ctx, _, _ := testutils.CtxAndAnalyticsForTest()
 	ctx, cancel := context.WithCancel(ctx)
 	tfl := tiltfile.NewFakeTiltfileLoader()
-	dcc := dockercompose.NewFakeDockerComposeClient(t, ctx)
 	kCli := k8s.NewFakeK8sClient(t)
 	execer := localexec.NewFakeExecer(t)
 	fs := afero.NewMemMapFs()
@@ -483,7 +446,6 @@ func newDownFixture(t *testing.T) downFixture {
 
 	downDeps := DownDeps{
 		tfl:              tfl,
-		dcClient:         dcc,
 		kClient:          kCli,
 		execer:           execer,
 		kubeconfigWriter: writer,
@@ -499,7 +461,6 @@ func newDownFixture(t *testing.T) downFixture {
 		cmd:    cmd,
 		deps:   downDeps,
 		tfl:    tfl,
-		dcc:    dcc,
 		kCli:   kCli,
 		execer: execer,
 	}

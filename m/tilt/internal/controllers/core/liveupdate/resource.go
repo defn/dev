@@ -4,9 +4,7 @@ import (
 	"time"
 
 	"github.com/defn/dev/m/tilt/internal/controllers/apis/liveupdate"
-	"github.com/defn/dev/m/tilt/internal/dockercompose"
 	"github.com/defn/dev/m/tilt/internal/store/k8sconv"
-	"github.com/defn/dev/m/tilt/pkg/apis"
 	"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1"
 )
 
@@ -63,58 +61,3 @@ func (r *luK8sResource) visitSelectedContainers(
 	}
 }
 
-// We model the DockerCompose resource as a single-container pod with a
-// name equal to the container id.
-type luDCResource struct {
-	selector *v1alpha1.LiveUpdateDockerComposeSelector
-	res      *v1alpha1.DockerComposeService
-}
-
-func (r *luDCResource) bestStartTime() time.Time {
-	return r.res.Status.LastApplyStartTime.Time
-}
-
-// Visit all selected containers.
-func (r *luDCResource) visitSelectedContainers(
-	visit func(pod v1alpha1.Pod, c v1alpha1.Container) bool) {
-	cID := r.res.Status.ContainerID
-	state := r.res.Status.ContainerState
-	if cID != "" && state != nil {
-		// In DockerCompose, we leave the pod empty.
-		pod := v1alpha1.Pod{}
-		var waiting *v1alpha1.ContainerStateWaiting
-		var running *v1alpha1.ContainerStateRunning
-		var terminated *v1alpha1.ContainerStateTerminated
-		switch state.Status {
-		case dockercompose.ContainerStatusCreated,
-			dockercompose.ContainerStatusPaused,
-			dockercompose.ContainerStatusRestarting:
-			waiting = &v1alpha1.ContainerStateWaiting{Reason: state.Status}
-		case dockercompose.ContainerStatusRunning:
-			running = &v1alpha1.ContainerStateRunning{
-				StartedAt: apis.NewTime(state.StartedAt.Time),
-			}
-		case dockercompose.ContainerStatusRemoving,
-			dockercompose.ContainerStatusExited,
-			dockercompose.ContainerStatusDead:
-			terminated = &v1alpha1.ContainerStateTerminated{
-				ExitCode:   state.ExitCode,
-				Reason:     state.Status,
-				StartedAt:  apis.NewTime(state.StartedAt.Time),
-				FinishedAt: apis.NewTime(state.FinishedAt.Time),
-			}
-		}
-		cName := r.res.Status.ContainerName
-		c := v1alpha1.Container{
-			Name: cName,
-			ID:   cID,
-			State: v1alpha1.ContainerState{
-				Waiting:    waiting,
-				Running:    running,
-				Terminated: terminated,
-			},
-			Ready: running != nil,
-		}
-		visit(pod, c)
-	}
-}

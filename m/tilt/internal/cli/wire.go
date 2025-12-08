@@ -32,7 +32,6 @@ import (
 	"github.com/defn/dev/m/tilt/internal/controllers"
 	"github.com/defn/dev/m/tilt/internal/controllers/core/kubernetesdiscovery"
 	"github.com/defn/dev/m/tilt/internal/docker"
-	"github.com/defn/dev/m/tilt/internal/dockercompose"
 	"github.com/defn/dev/m/tilt/internal/engine"
 	engineanalytics "github.com/defn/dev/m/tilt/internal/engine/analytics"
 	"github.com/defn/dev/m/tilt/internal/engine/configs"
@@ -87,8 +86,6 @@ var BaseWireSet = wire.NewSet(
 	wire.Bind(new(localexec.Execer), new(*localexec.ProcessExecer)),
 
 	docker.SwitchWireSet,
-
-	dockercompose.NewDockerComposeClient,
 
 	clockwork.NewRealClock,
 	engine.DeployerWireSet,
@@ -290,7 +287,6 @@ func wireDownDeps(ctx context.Context, tiltAnalytics *analytics.TiltAnalytics, s
 
 type DownDeps struct {
 	tfl              tiltfile.TiltfileLoader
-	dcClient         dockercompose.DockerComposeClient
 	kClient          k8s.Client
 	execer           localexec.Execer
 	kubeconfigWriter *kubeconfig.Writer

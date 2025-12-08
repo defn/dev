@@ -24,8 +24,6 @@ import (
 	"github.com/defn/dev/m/tilt/internal/container"
 	"github.com/defn/dev/m/tilt/internal/controllers/apis/liveupdate"
 	ctrltiltfile "github.com/defn/dev/m/tilt/internal/controllers/apis/tiltfile"
-	"github.com/defn/dev/m/tilt/internal/docker"
-	"github.com/defn/dev/m/tilt/internal/dockercompose"
 	"github.com/defn/dev/m/tilt/internal/feature"
 	"github.com/defn/dev/m/tilt/internal/ignore"
 	"github.com/defn/dev/m/tilt/internal/k8s"
@@ -52,7 +50,6 @@ import (
 
 type localResourceLinks []model.Link
 type k8sResourceLinks []model.Link
-type dcResourceLinks []model.Link
 
 const simpleDockerfile = "FROM golang:1.10"
 
@@ -904,34 +901,6 @@ k8s_resource('foo') # test that subsequent calls don't clear the links
 				k8sResourceLinks(c.expected),
 				db(image("gcr.io/foo")),
 				deployment("foo"))
-		})
-
-		t.Run("dc-"+c.name, func(t *testing.T) {
-			f := newFixture(t)
-
-			f.file("docker-compose.yml", `version: '3.0'
-services:
-  foo:
-    image: gcr.io/foo
-`)
-			s := `
-docker_compose('docker-compose.yml')
-dc_resource('foo', links=EXPR)
-dc_resource('foo') # test that subsequent calls don't clear the links
-`
-
-			s = strings.ReplaceAll(s, "EXPR", c.expr)
-			f.file("Tiltfile", s)
-
-			if c.errorMsg != "" {
-				f.loadErrString(c.errorMsg)
-				return
-			}
-
-			f.load()
-			f.assertNextManifest("foo",
-				dcResourceLinks(c.expected),
-			)
 		})
 	}
 }
@@ -4190,7 +4159,6 @@ func TestLocalObeysAllowedK8sContexts(t *testing.T) {
 	}{
 		{"gke", "gke", clusterid.ProductGKE, true, []string{"'gke'", "If you're sure", "switch k8s contexts", "allow_k8s_contexts"}},
 		{"allowed", "allowed-context", clusterid.ProductGKE, false, nil},
-		{"docker-compose", "unknown", k8s.ProductNone, false, nil},
 	} {
 		t.Run(test.name, func(t *testing.T) {
 			f := newFixture(t)
@@ -5720,8 +5688,6 @@ type fixture struct {
 }
 
 func (f *fixture) newTiltfileLoader() TiltfileLoader {
-	dcc := dockercompose.NewDockerComposeClient(docker.LocalEnv{})
-
 	k8sContextPlugin := k8scontext.NewPlugin(f.k8sContext, f.k8sNamespace, f.k8sEnv)
 	versionPlugin := version.NewPlugin(model.TiltBuild{Version: "0.5.0"})
 	configPlugin := config.NewPlugin("up")
@@ -5735,7 +5701,7 @@ func (f *fixture) newTiltfileLoader() TiltfileLoader {
 	extPlugin := tiltextension.NewFakePlugin(extrr, extr)
 	ciSettingsPlugin := cisettings.NewPlugin(0)
 	return ProvideTiltfileLoader(f.ta, k8sContextPlugin, versionPlugin, configPlugin,
-		extPlugin, ciSettingsPlugin, dcc, f.webHost, execer, f.features, f.k8sEnv)
+		extPlugin, ciSettingsPlugin, f.webHost, execer, f.features, f.k8sEnv)
 }
 
 func newFixture(t *testing.T) *fixture {
@@ -6215,8 +6181,6 @@ func (f *fixture) assertNextManifest(name model.ManifestName, opts ...interface{
 					expectedForwards,
 					m.K8sTarget().KubernetesApplySpec.PortForwardTemplateSpec.Forwards)
 			}
-		case dcResourceLinks:
-			f.assertLinks(opt, m.DockerComposeTarget().Links)
 		case localResourceLinks:
 			f.assertLinks(opt, m.LocalTarget().Links)
 		case k8sResourceLinks:
@@ -6351,20 +6315,6 @@ func (f *fixture) cluster(m model.Manifest) *v1alpha1.Cluster {
 			Spec: v1alpha1.ClusterSpec{
 				Connection: &v1alpha1.ClusterConnection{
 					Kubernetes: &v1alpha1.KubernetesClusterConnection{},
-				},
-				DefaultRegistry: tlr.DefaultRegistry,
-			},
-		}
-	}
-
-	if m.IsDC() {
-		return &v1alpha1.Cluster{
-			ObjectMeta: metav1.ObjectMeta{
-				Name: v1alpha1.ClusterNameDocker,
-			},
-			Spec: v1alpha1.ClusterSpec{
-				Connection: &v1alpha1.ClusterConnection{
-					Docker: &v1alpha1.DockerClusterConnection{},
 				},
 				DefaultRegistry: tlr.DefaultRegistry,
 			},

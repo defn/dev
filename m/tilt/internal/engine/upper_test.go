@@ -7,7 +7,6 @@ import (
 	"io"
 	"log"
 	"os"
-	"path"
 	"path/filepath"
 	"regexp"
 	"runtime"
@@ -19,7 +18,6 @@ import (
 
 	"github.com/davecgh/go-spew/spew"
 	"github.com/distribution/reference"
-	dockertypes "github.com/docker/docker/api/types"
 	"github.com/google/uuid"
 	"github.com/jonboulle/clockwork"
 	"github.com/spf13/afero"
@@ -36,13 +34,10 @@ import (
 	"github.com/defn/dev/m/tilt/internal/container"
 	"github.com/defn/dev/m/tilt/internal/containerupdate"
 	"github.com/defn/dev/m/tilt/internal/controllers"
-	apitiltfile "github.com/defn/dev/m/tilt/internal/controllers/apis/tiltfile"
 	"github.com/defn/dev/m/tilt/internal/controllers/core/cluster"
 	"github.com/defn/dev/m/tilt/internal/controllers/core/cmd"
 	"github.com/defn/dev/m/tilt/internal/controllers/core/cmdimage"
 	"github.com/defn/dev/m/tilt/internal/controllers/core/configmap"
-	"github.com/defn/dev/m/tilt/internal/controllers/core/dockercomposelogstream"
-	"github.com/defn/dev/m/tilt/internal/controllers/core/dockercomposeservice"
 	"github.com/defn/dev/m/tilt/internal/controllers/core/dockerimage"
 	"github.com/defn/dev/m/tilt/internal/controllers/core/extension"
 	"github.com/defn/dev/m/tilt/internal/controllers/core/extensionrepo"
@@ -61,7 +56,6 @@ import (
 	ctrluiresource "github.com/defn/dev/m/tilt/internal/controllers/core/uiresource"
 	ctrluisession "github.com/defn/dev/m/tilt/internal/controllers/core/uisession"
 	"github.com/defn/dev/m/tilt/internal/docker"
-	"github.com/defn/dev/m/tilt/internal/dockercompose"
 	engineanalytics "github.com/defn/dev/m/tilt/internal/engine/analytics"
 	"github.com/defn/dev/m/tilt/internal/engine/buildcontrol"
 	"github.com/defn/dev/m/tilt/internal/engine/configs"
@@ -172,15 +166,6 @@ func (c buildAndDeployCall) k8s() model.K8sTarget {
 	return model.K8sTarget{}
 }
 
-func (c buildAndDeployCall) dc() model.DockerComposeTarget {
-	for _, spec := range c.specs {
-		t, ok := spec.(model.DockerComposeTarget)
-		if ok {
-			return t
-		}
-	}
-	return model.DockerComposeTarget{}
-}
 
 func (c buildAndDeployCall) local() model.LocalTarget {
 	for _, spec := range c.specs {
@@ -192,9 +177,6 @@ func (c buildAndDeployCall) local() model.LocalTarget {
 	return model.LocalTarget{}
 }
 
-func (c buildAndDeployCall) dcState() store.BuildState {
-	return c.state[c.dc().ID()]
-}
 
 func (c buildAndDeployCall) k8sState() store.BuildState {
 	return c.state[c.k8s().ID()]
@@ -227,8 +209,6 @@ type fakeBuildAndDeployer struct {
 
 	// Inject the container ID of the container started by Docker Compose.
 	// If not set, we will auto-generate an ID.
-	nextDockerComposeContainerID    container.ID
-	nextDockerComposeContainerState *dockertypes.ContainerState
 
 	targetObjectTree        map[model.TargetID]podbuilder.PodObjectTree
 	nextDeployedUID         types.UID
@@ -244,12 +224,10 @@ type fakeBuildAndDeployer struct {
 
 	// kClient registers deployed entities for subsequent retrieval.
 	kClient  *k8s.FakeK8sClient
-	dcClient *dockercompose.FakeDCClient
 
 	ctrlClient ctrlclient.Client
 
 	kaReconciler *kubernetesapply.Reconciler
-	dcReconciler *dockercomposeservice.Reconciler
 }
 
 var _ buildcontrol.BuildAndDeployer = &fakeBuildAndDeployer{}
@@ -260,8 +238,6 @@ func (b *fakeBuildAndDeployer) nextImageBuildResult(ctx context.Context, iTarget
 		clusterNN = types.NamespacedName{Name: iTarget.DockerBuildInfo().Cluster}
 	} else if iTarget.IsCustomBuild() {
 		clusterNN = types.NamespacedName{Name: iTarget.CustomBuildInfo().Cluster}
-	} else if iTarget.IsDockerComposeBuild() {
-		clusterNN = types.NamespacedName{Name: v1alpha1.ClusterNameDocker}
 	} else {
 		return store.ImageBuildResult{}, fmt.Errorf("Unknown build type. ImageTarget: %s", iTarget.ID().String())
 	}
@@ -301,7 +277,7 @@ func (b *fakeBuildAndDeployer) BuildAndDeploy(ctx context.Context, st store.RSto
 	}
 
 	call := buildAndDeployCall{count: b.buildCount, specs: specs, state: state}
-	if call.dc().Empty() && call.k8s().Empty() && call.local().Empty() {
+	if call.k8s().Empty() && call.local().Empty() {
 		b.t.Fatalf("Invalid call: %+v", call)
 	}
 
@@ -377,23 +353,6 @@ func (b *fakeBuildAndDeployer) BuildAndDeploy(ctx context.Context, st store.RSto
 		return result, err
 	}
 
-	if !call.dc().Empty() {
-		dcContainerID := container.ID(fmt.Sprintf("dc-%s", path.Base(call.dc().ID().Name.String())))
-		if b.nextDockerComposeContainerID != "" {
-			dcContainerID = b.nextDockerComposeContainerID
-		}
-		b.dcClient.ContainerIDDefault = dcContainerID
-
-		err = b.updateDockerComposeServiceStatus(ctx, call.dc(), iTargets)
-		if err != nil {
-			return result, err
-		}
-
-		dcContainerState := b.nextDockerComposeContainerState
-		result[call.dc().ID()] = store.NewDockerComposeDeployResult(
-			call.dc().ID(), dockercompose.ToServiceStatus(dcContainerID, string(dcContainerID), dcContainerState, nil))
-	}
-
 	if kTarg := call.k8s(); !kTarg.Empty() {
 		nextK8sResult := b.nextK8sDeployResult(kTarg)
 		err = b.updateKubernetesApplyStatus(ctx, kTarg, iTargets)
@@ -403,7 +362,6 @@ func (b *fakeBuildAndDeployer) BuildAndDeploy(ctx context.Context, st store.RSto
 		result[call.k8s().ID()] = nextK8sResult
 	}
 
-	b.nextDockerComposeContainerID = ""
 
 	for key, val := range result {
 		b.resultsByID[key] = val
@@ -441,31 +399,6 @@ func (b *fakeBuildAndDeployer) updateKubernetesApplyStatus(ctx context.Context, 
 
 	nn := types.NamespacedName{Name: kTarg.ID().Name.String()}
 	status := b.kaReconciler.ForceApply(ctx, nn, kTarg.KubernetesApplySpec, &cluster, imageMapSet)
-
-	// We want our fake stub to only propagate apiserver problems.
-	_ = status
-
-	return nil
-}
-
-func (b *fakeBuildAndDeployer) updateDockerComposeServiceStatus(ctx context.Context, dcTarg model.DockerComposeTarget, iTargets []model.ImageTarget) error {
-	imageMapSet := make(map[types.NamespacedName]*v1alpha1.ImageMap, len(dcTarg.Spec.ImageMaps))
-	for _, iTarget := range iTargets {
-		if iTarget.IsLiveUpdateOnly {
-			continue
-		}
-
-		var im v1alpha1.ImageMap
-		nn := types.NamespacedName{Name: iTarget.ImageMapName()}
-		err := b.ctrlClient.Get(ctx, nn, &im)
-		if err != nil {
-			return err
-		}
-		imageMapSet[nn] = &im
-	}
-
-	nn := types.NamespacedName{Name: dcTarg.ID().Name.String()}
-	status := b.dcReconciler.ForceApply(ctx, nn, dcTarg.Spec, imageMapSet, false)
 
 	// We want our fake stub to only propagate apiserver problems.
 	_ = status
@@ -564,17 +497,15 @@ func (b *fakeBuildAndDeployer) waitUntilBuildCompleted(ctx context.Context, key 
 	}
 }
 
-func newFakeBuildAndDeployer(t *testing.T, kClient *k8s.FakeK8sClient, dcClient *dockercompose.FakeDCClient, ctrlClient ctrlclient.Client, kaReconciler *kubernetesapply.Reconciler, dcReconciler *dockercomposeservice.Reconciler) *fakeBuildAndDeployer {
+func newFakeBuildAndDeployer(t *testing.T, kClient *k8s.FakeK8sClient, ctrlClient ctrlclient.Client, kaReconciler *kubernetesapply.Reconciler) *fakeBuildAndDeployer {
 	return &fakeBuildAndDeployer{
 		t:                t,
 		calls:            make(chan buildAndDeployCall, 20),
 		buildLogOutput:   make(map[model.TargetID]string),
 		resultsByID:      store.BuildResultSet{},
 		kClient:          kClient,
-		dcClient:         dcClient,
 		ctrlClient:       ctrlClient,
 		kaReconciler:     kaReconciler,
-		dcReconciler:     dcReconciler,
 		targetObjectTree: make(map[model.TargetID]podbuilder.PodObjectTree),
 	}
 }
@@ -1967,139 +1898,6 @@ func TestHudExitWithError(t *testing.T) {
 	_ = f.WaitForNoExit()
 }
 
-func TestDockerComposeUp(t *testing.T) {
-	f := newTestFixture(t)
-	redis, server := f.setupDCFixture()
-
-	f.Start([]model.Manifest{redis, server})
-	call := f.nextCall()
-	assert.True(t, call.dcState().IsEmpty())
-	assert.False(t, call.dc().ID().Empty())
-	assert.Equal(t, redis.DockerComposeTarget().ID(), call.dc().ID())
-	call = f.nextCall()
-	assert.True(t, call.dcState().IsEmpty())
-	assert.False(t, call.dc().ID().Empty())
-	assert.Equal(t, server.DockerComposeTarget().ID(), call.dc().ID())
-}
-
-func TestDockerComposeRedeployFromFileChange(t *testing.T) {
-	if runtime.GOOS == "windows" {
-		t.Skip("flaky on windows")
-	}
-	f := newTestFixture(t)
-	r, m := f.setupDCFixture()
-
-	f.Start([]model.Manifest{r, m})
-	_ = f.nextCall()
-	_ = f.nextCall()
-
-	// Change a file -- should trigger build
-	f.fsWatcher.Events <- watch.NewFileEvent(f.JoinPath("package.json"))
-	call := f.nextCall()
-	assert.Equal(t, []string{f.JoinPath("package.json")}, call.oneImageState().FilesChanged())
-}
-
-func TestDockerComposeRecordsBuildLogs(t *testing.T) {
-	f := newTestFixture(t)
-	f.useRealTiltfileLoader()
-
-	m, _ := f.setupDCFixture()
-	expected := "yarn install"
-	f.setBuildLogOutput(m.DockerComposeTarget().ID(), expected)
-
-	f.loadAndStart()
-	f.waitForCompletedBuildCount(2)
-
-	// recorded in global log
-	f.withState(func(st store.EngineState) {
-		assert.Contains(t, st.LogStore.String(), expected)
-
-		ms, _ := st.ManifestState(m.ManifestName())
-		spanID := ms.LastBuild().SpanID
-		assert.Contains(t, st.LogStore.SpanLog(spanID), expected)
-	})
-}
-
-func TestDockerComposeBuildCompletedSetsStatusToUpIfSuccessful(t *testing.T) {
-	f := newTestFixture(t)
-	f.useRealTiltfileLoader()
-
-	m1, _ := f.setupDCFixture()
-
-	expected := container.ID("aaaaaa")
-	f.b.nextDockerComposeContainerID = expected
-
-	containerState := docker.NewRunningContainerState()
-	f.b.nextDockerComposeContainerState = &containerState
-
-	f.loadAndStart()
-
-	f.waitForCompletedBuildCount(2)
-
-	f.withManifestState(m1.ManifestName(), func(st store.ManifestState) {
-		state, ok := st.RuntimeState.(dockercompose.State)
-		if !ok {
-			t.Fatal("expected RuntimeState to be docker compose, but it wasn't")
-		}
-		assert.Equal(t, expected, state.ContainerID)
-		assert.Equal(t, v1alpha1.RuntimeStatusOK, state.RuntimeStatus())
-	})
-}
-
-func TestDockerComposeStopOnDisable(t *testing.T) {
-	f := newTestFixture(t)
-	f.useRealTiltfileLoader()
-
-	m, _ := f.setupDCFixture()
-
-	expected := container.ID("aaaaaa")
-	f.b.nextDockerComposeContainerID = expected
-
-	containerState := docker.NewRunningContainerState()
-	f.b.nextDockerComposeContainerState = &containerState
-
-	f.loadAndStart()
-
-	f.waitForCompletedBuildCount(2)
-
-	f.setDisableState(m.Name, true)
-
-	require.Eventually(t, func() bool {
-		return len(f.dcc.RmCalls()) > 0
-	}, stdTimeout, time.Millisecond)
-
-	require.Len(t, f.dcc.RmCalls(), 1)
-	require.Len(t, f.dcc.RmCalls()[0].Specs, 1)
-	require.Equal(t, m.Name.String(), f.dcc.RmCalls()[0].Specs[0].Service)
-}
-
-func TestDockerComposeStartOnReenable(t *testing.T) {
-	f := newTestFixture(t)
-	f.useRealTiltfileLoader()
-
-	m, _ := f.setupDCFixture()
-
-	expected := container.ID("aaaaaa")
-	f.b.nextDockerComposeContainerID = expected
-
-	containerState := docker.NewRunningContainerState()
-	f.b.nextDockerComposeContainerState = &containerState
-
-	f.loadAndStart()
-
-	f.waitForCompletedBuildCount(2)
-
-	f.setDisableState(m.Name, true)
-
-	require.Eventually(t, func() bool {
-		return len(f.dcc.RmCalls()) > 0
-	}, stdTimeout, time.Millisecond, "DC rm")
-
-	f.setDisableState(m.Name, false)
-
-	f.waitForCompletedBuildCount(3)
-}
-
 func TestEmptyTiltfile(t *testing.T) {
 	f := newTestFixture(t)
 	f.useRealTiltfileLoader()
@@ -3105,8 +2903,7 @@ type testFixture struct {
 	store                      *store.Store
 	bc                         *BuildController
 	cc                         *configs.ConfigsController
-	dcc                        *dockercompose.FakeDCClient
-	tfl                        *tiltfile.FakeTiltfileLoader
+	tfl *tiltfile.FakeTiltfileLoader
 	realTFL                    tiltfile.TiltfileLoader
 	opter                      *tiltanalytics.FakeOpter
 	dp                         *dockerprune.DockerPruner
@@ -3170,7 +2967,6 @@ func newTestFixture(t *testing.T, options ...fixtureOptions) *testFixture {
 	plsc := podlogstream.NewController(ctx, cdc, sch, st, kClient, podSource, clock)
 	au := engineanalytics.NewAnalyticsUpdater(ta, engineanalytics.CmdTags{}, engineMode)
 	ar := engineanalytics.ProvideAnalyticsReporter(ta, st, kClient, env, feature.MainDefaults)
-	fakeDcc := dockercompose.NewFakeDockerComposeClient(t, ctx)
 	k8sContextPlugin := k8scontext.NewPlugin("fake-context", "default", env)
 	versionPlugin := version.NewPlugin(model.TiltBuild{Version: "0.5.0"})
 	configPlugin := config.NewPlugin("up")
@@ -3182,7 +2978,7 @@ func newTestFixture(t *testing.T, options ...fixtureOptions) *testFixture {
 	ciSettingsPlugin := cisettings.NewPlugin(0)
 	realTFL := tiltfile.ProvideTiltfileLoader(ta,
 		k8sContextPlugin, versionPlugin, configPlugin, extPlugin, ciSettingsPlugin,
-		fakeDcc, "localhost", execer, feature.MainDefaults, env)
+		"localhost", execer, feature.MainDefaults, env)
 	tfl := tiltfile.NewFakeTiltfileLoader()
 	cc := configs.NewConfigsController(cdc)
 	tqs := configs.NewTriggerQueueSubscriber(cdc)
@@ -3227,8 +3023,6 @@ func newTestFixture(t *testing.T, options ...fixtureOptions) *testFixture {
 	wsl := server.NewWebsocketList()
 
 	kar := kubernetesapply.NewReconciler(cdc, kClient, sch, st, execer)
-	dcds := dockercomposeservice.NewDisableSubscriber(ctx, fakeDcc, clock)
-	dcr := dockercomposeservice.NewReconciler(cdc, fakeDcc, dockerClient, st, sch, dcds)
 
 	tfr := ctrltiltfile.NewReconciler(st, tfl, dockerClient, cdc, sch, engineMode, "", "", 0)
 	tbr := togglebutton.NewReconciler(cdc, sch)
@@ -3255,7 +3049,6 @@ func newTestFixture(t *testing.T, options ...fixtureOptions) *testFixture {
 		wsl,
 		kubeconfigWriter,
 		localKubeconfigPathOnce)
-	dclsr := dockercomposelogstream.NewReconciler(cdc, st, fakeDcc, dockerClient)
 
 	cb := controllers.NewControllerBuilder(tscm, controllers.ProvideControllers(
 		fwc,
@@ -3276,16 +3069,14 @@ func newTestFixture(t *testing.T, options ...fixtureOptions) *testFixture {
 		dir,
 		cir,
 		clr,
-		dcr,
 		imagemap.NewReconciler(cdc, st),
-		dclsr,
 		sr,
 	))
 
 	dp := dockerprune.NewDockerPruner(dockerClient)
 	dp.DisabledForTesting(true)
 
-	b := newFakeBuildAndDeployer(t, kClient, fakeDcc, cdc, kar, dcr)
+	b := newFakeBuildAndDeployer(t, kClient, cdc, kar)
 	bc := NewBuildController(b)
 
 	ret := &testFixture{
@@ -3305,8 +3096,7 @@ func newTestFixture(t *testing.T, options ...fixtureOptions) *testFixture {
 		bc:                    bc,
 		onchangeCh:            fSub.ch,
 		cc:                    cc,
-		dcc:                   fakeDcc,
-		tfl:                   tfl,
+		tfl: tfl,
 		realTFL:               realTFL,
 		opter:                 to,
 		dp:                    dp,
@@ -3852,39 +3642,6 @@ func (f *testFixture) WriteConfigFiles(args ...string) {
 	}
 }
 
-func (f *testFixture) setupDCFixture() (redis, server model.Manifest) {
-	dcp := filepath.Join(originalWD, "testdata", "fixture_docker-config.yml")
-	dcpc, err := os.ReadFile(dcp)
-	if err != nil {
-		f.T().Fatal(err)
-	}
-	f.WriteFile("docker-compose.yml", string(dcpc))
-
-	dfp := filepath.Join(originalWD, "testdata", "server.dockerfile")
-	dfc, err := os.ReadFile(dfp)
-	if err != nil {
-		f.T().Fatal(err)
-	}
-	f.WriteFile("Dockerfile", string(dfc))
-
-	f.WriteFile("Tiltfile", `docker_compose('docker-compose.yml')`)
-
-	f.dcc.WorkDir = f.Path()
-	f.dcc.ConfigOutput = string(dcpc)
-
-	tlr := f.realTFL.Load(f.ctx, apitiltfile.MainTiltfile(f.JoinPath("Tiltfile"), nil), nil)
-	if tlr.Error != nil {
-		f.T().Fatal(tlr.Error)
-	}
-
-	if len(tlr.Manifests) != 2 {
-		f.T().Fatalf("Expected two manifests. Actual: %v", tlr.Manifests)
-	}
-
-	require.NoError(f.t, model.InferImageProperties(tlr.Manifests))
-
-	return tlr.Manifests[0], tlr.Manifests[1]
-}
 
 func (f *testFixture) setBuildLogOutput(id model.TargetID, output string) {
 	f.b.buildLogOutput[id] = output

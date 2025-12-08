@@ -81,7 +81,6 @@ func (c *BuildController) needsBuild(ctx context.Context, st store.RStore) (buil
 	buildStateSet := buildStateSet(ctx,
 		manifest,
 		state.KubernetesResources[manifest.Name.String()],
-		state.DockerComposeServices[manifest.Name.String()],
 		state.Clusters[manifest.ClusterName()],
 		targets,
 		ms,
@@ -207,7 +206,6 @@ func SpanIDForBuildLog(buildCount int) logstore.SpanID {
 // Extract a set of build states from a manifest for BuildAndDeploy.
 func buildStateSet(ctx context.Context, manifest model.Manifest,
 	kresource *k8sconv.KubernetesResource,
-	dcs *v1alpha1.DockerComposeService,
 	cluster *v1alpha1.Cluster,
 	specs []model.TargetSpec,
 	ms *store.ManifestState, reason model.BuildReason) store.BuildStateSet {

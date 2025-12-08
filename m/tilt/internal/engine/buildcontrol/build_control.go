@@ -309,9 +309,7 @@ func NextUnbuiltTargetToBuild(unbuilt []*store.ManifestTarget) *store.ManifestTa
 		return unresourced
 	}
 
-	// If this is Kubernetes, unbuilt resources go first.
-	// (If this is Docker Compose, we want to trust the ordering
-	// that docker-compose put things in.)
+	// Unbuilt k8s resources go first.
 	deployOnlyK8sTargets := FindDeployOnlyK8sManifestTargets(unbuilt)
 	if len(deployOnlyK8sTargets) > 0 {
 		return deployOnlyK8sTargets[0]
@@ -572,13 +570,6 @@ func IsLiveUpdateTargetWaitingOnDeploy(state store.EngineState, mt *store.Manife
 			// If the pod is in a finished state, then the containers
 			// may never re-enter Running.
 			if pod.Phase == string(v1.PodSucceeded) || pod.Phase == string(v1.PodFailed) {
-				return false
-			}
-
-		} else if mt.Manifest.IsDC() {
-			dcs := state.DockerComposeServices[mt.Manifest.Name.String()]
-			cInfos := liveupdates.RunningContainersForDC(dcs)
-			if len(cInfos) != 0 {
 				return false
 			}
 		} else {

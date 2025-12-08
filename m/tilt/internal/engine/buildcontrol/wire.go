@@ -19,11 +19,9 @@ import (
 	"github.com/defn/dev/m/tilt/internal/containerupdate"
 	"github.com/defn/dev/m/tilt/internal/controllers/core/cmd"
 	"github.com/defn/dev/m/tilt/internal/controllers/core/cmdimage"
-	"github.com/defn/dev/m/tilt/internal/controllers/core/dockercomposeservice"
 	"github.com/defn/dev/m/tilt/internal/controllers/core/dockerimage"
 	"github.com/defn/dev/m/tilt/internal/controllers/core/kubernetesapply"
 	"github.com/defn/dev/m/tilt/internal/docker"
-	"github.com/defn/dev/m/tilt/internal/dockercompose"
 	"github.com/defn/dev/m/tilt/internal/dockerfile"
 	"github.com/defn/dev/m/tilt/internal/k8s"
 	"github.com/defn/dev/m/tilt/internal/localexec"
@@ -45,7 +43,6 @@ var BaseWireSet = wire.NewSet(
 	wire.Bind(new(build.DockerKubeConnection), new(*build.DockerBuilder)),
 
 	// BuildOrder
-	NewDockerComposeBuildAndDeployer,
 	NewImageBuildAndDeployer,
 	NewLocalTargetBuildAndDeployer,
 	containerupdate.NewDockerUpdater,
@@ -81,31 +78,6 @@ func ProvideImageBuildAndDeployer(
 		localexec.NewProcessExecer,
 		cmd.ProvideExecer,
 		wire.Bind(new(localexec.Execer), new(*localexec.ProcessExecer)),
-		cmd.NewFakeProberManager,
-		wire.Bind(new(cmd.ProberManager), new(*cmd.FakeProberManager)),
-	)
-
-	return nil, nil
-}
-
-func ProvideDockerComposeBuildAndDeployer(
-	ctx context.Context,
-	dcCli dockercompose.DockerComposeClient,
-	dCli docker.Client,
-	ctrlclient ctrlclient.Client,
-	st store.RStore,
-	clock clockwork.Clock,
-	dir *dirs.TiltDevDir) (*DockerComposeBuildAndDeployer, error) {
-	wire.Build(
-		BaseWireSet,
-		dockercomposeservice.WireSet,
-		build.ProvideClock,
-		build.NewKINDLoader,
-		dockerimage.NewReconciler,
-		cmdimage.NewReconciler,
-		cmd.NewController,
-		localexec.EmptyEnv,
-		cmd.ProvideExecer,
 		cmd.NewFakeProberManager,
 		wire.Bind(new(cmd.ProberManager), new(*cmd.FakeProberManager)),
 	)

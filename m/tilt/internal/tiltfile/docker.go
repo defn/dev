@@ -76,9 +76,6 @@ type dockerImage struct {
 	// TODO(milas): we should have a better way of passing the Tiltfile path around during resource assembly
 	tiltfilePath string
 
-	dockerComposeService          string
-	dockerComposeLocalVolumePaths []string
-
 	extraHosts []string
 }
 
@@ -96,7 +93,6 @@ const (
 	UnknownBuild dockerImageBuildType = iota
 	DockerBuild
 	CustomBuild
-	DockerComposeBuild
 )
 
 func (d *dockerImage) Type() dockerImageBuildType {
@@ -607,11 +603,6 @@ func (s *tiltfileState) dockerignoresForImage(image *dockerImage) ([]model.Docke
 	case CustomBuild:
 		paths = append(paths, image.customDeps...)
 		source = fmt.Sprintf("custom_build(%q)", ref)
-	case DockerComposeBuild:
-		if image.dbBuildPath != "" {
-			paths = append(paths, image.dbBuildPath)
-		}
-		source = fmt.Sprintf("docker_compose(%q)", ref)
 	}
 	return s.dockerignoresFromPathsAndContextFilters(
 		source,

@@ -171,10 +171,6 @@ func (i ImageTarget) Validate() error {
 				"[Validate] CustomBuild command must not be empty",
 			)
 		}
-	case DockerComposeBuild:
-		if bd.Service == "" {
-			return fmt.Errorf("[Validate] DockerComposeBuild missing service name")
-		}
 	default:
 		return fmt.Errorf(
 			"[Validate] Image %q has unsupported %T build details", i.ImageMapSpec.Selector, bd)
@@ -204,16 +200,6 @@ func (i ImageTarget) CustomBuildInfo() CustomBuild {
 
 func (i ImageTarget) IsCustomBuild() bool {
 	_, ok := i.BuildDetails.(CustomBuild)
-	return ok
-}
-
-func (i ImageTarget) DockerComposeBuildInfo() DockerComposeBuild {
-	ret, _ := i.BuildDetails.(DockerComposeBuild)
-	return ret
-}
-
-func (i ImageTarget) IsDockerComposeBuild() bool {
-	_, ok := i.BuildDetails.(DockerComposeBuild)
 	return ok
 }
 
@@ -248,8 +234,6 @@ func (i ImageTarget) LocalPaths() []string {
 		return []string{bd.Context}
 	case CustomBuild:
 		return append([]string(nil), bd.Deps...)
-	case DockerComposeBuild:
-		return []string{bd.Context}
 	}
 	return nil
 }
@@ -299,10 +283,6 @@ func (i ImageTarget) Refs(cluster *v1alpha1.Cluster) (container.RefSet, error) {
 	// together.
 	customBuild, ok := i.BuildDetails.(CustomBuild)
 	if ok && customBuild.OutputMode == v1alpha1.CmdImageOutputRemote && customBuild.OutputTag != "" {
-		refs = refs.WithoutRegistry()
-	}
-	_, ok = i.BuildDetails.(DockerComposeBuild)
-	if ok {
 		refs = refs.WithoutRegistry()
 	}
 
@@ -367,15 +347,4 @@ func (cb CustomBuild) WithTag(t string) CustomBuild {
 func (cb CustomBuild) SkipsPush() bool {
 	return cb.OutputMode == v1alpha1.CmdImageOutputLocalDockerAndRemote ||
 		cb.OutputMode == v1alpha1.CmdImageOutputRemote
-}
-
-type DockerComposeBuild struct {
-	// Service is the name of the Docker Compose service as defined in docker-compose.yaml.
-	Service string
-
-	// Context is the build context absolute path.
-	Context string
-}
-
-func (d DockerComposeBuild) buildDetails() {
 }

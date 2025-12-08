@@ -67,27 +67,6 @@ func NewImageBuildResultSingleRef(id model.TargetID, ref reference.NamedTagged) 
 	return NewImageBuildResult(id, ref, ref)
 }
 
-type DockerComposeBuildResult struct {
-	id model.TargetID
-
-	// When we deploy a Docker Compose service, we wait synchronously for the
-	// container to start. Note that this is a different concurrency model than
-	// we use for Kubernetes, where the pods appear some time later via an
-	// asynchronous event.
-	Status v1alpha1.DockerComposeServiceStatus
-}
-
-func (r DockerComposeBuildResult) TargetID() model.TargetID   { return r.id }
-func (r DockerComposeBuildResult) BuildType() model.BuildType { return model.BuildTypeDockerCompose }
-
-// For docker compose deploy targets.
-func NewDockerComposeDeployResult(id model.TargetID, status v1alpha1.DockerComposeServiceStatus) DockerComposeBuildResult {
-	return DockerComposeBuildResult{
-		id:     id,
-		Status: status,
-	}
-}
-
 type K8sBuildResult struct {
 	*k8sconv.KubernetesApplyFilter
 

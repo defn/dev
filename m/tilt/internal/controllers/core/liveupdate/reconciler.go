@@ -44,7 +44,6 @@ import (
 const LiveUpdateSource = "liveupdate"
 
 var discoveryGVK = v1alpha1.SchemeGroupVersion.WithKind("KubernetesDiscovery")
-var dcsGVK = v1alpha1.SchemeGroupVersion.WithKind("DockerComposeService")
 var applyGVK = v1alpha1.SchemeGroupVersion.WithKind("KubernetesApply")
 var fwGVK = v1alpha1.SchemeGroupVersion.WithKind("FileWatch")
 var imageMapGVK = v1alpha1.SchemeGroupVersion.WithKind("ImageMap")
@@ -164,20 +163,12 @@ func (r *Reconciler) Reconcile(ctx context.Context, req ctrl.Request) (ctrl.Resu
 		return ctrl.Result{}, err
 	}
 
-	hasDockerComposeChanges, err := r.reconcileDockerComposeService(ctx, monitor)
-	if err != nil {
-		if apierrors.IsNotFound(err) {
-			return r.handleFailure(ctx, lu, createFailedState(lu, reasonObjectNotFound, err.Error()))
-		}
-		return ctrl.Result{}, err
-	}
-
 	hasTriggerQueueChanges, err := r.reconcileTriggerQueue(ctx, monitor)
 	if err != nil {
 		return ctrl.Result{}, err
 	}
 
-	if hasFileChanges || hasKubernetesChanges || hasDockerComposeChanges || hasTriggerQueueChanges {
+	if hasFileChanges || hasKubernetesChanges || hasTriggerQueueChanges {
 		monitor.hasChangesToSync = true
 	}
 
@@ -218,12 +209,6 @@ func (r *Reconciler) ensureSelectorValid(lu *v1alpha1.LiveUpdate) *v1alpha1.Live
 	if selector.Kubernetes != nil {
 		if selector.Kubernetes.DiscoveryName == "" {
 			return createFailedState(lu, "Invalid", "Kubernetes selector requires DiscoveryName")
-		}
-		return nil
-	}
-	if selector.DockerCompose != nil {
-		if selector.DockerCompose.Service == "" {
-			return createFailedState(lu, "Invalid", "DockerCompose selector requires Service")
 		}
 		return nil
 	}
@@ -446,31 +431,6 @@ func (r *Reconciler) reconcileKubernetesResource(ctx context.Context, monitor *m
 	return changed, nil
 }
 
-// Consume all objects off the DockerComposeSelector.
-// Returns true if we saw any changes to the objects we're watching.
-func (r *Reconciler) reconcileDockerComposeService(ctx context.Context, monitor *monitor) (bool, error) {
-	selector := monitor.spec.Selector.DockerCompose
-	if selector == nil {
-		return false, nil
-	}
-
-	var dcs v1alpha1.DockerComposeService
-	err := r.client.Get(ctx, types.NamespacedName{Name: selector.Service}, &dcs)
-	if err != nil {
-		return false, err
-	}
-
-	changed := false
-	if monitor.lastDockerComposeService == nil ||
-		!apicmp.DeepEqual(monitor.lastDockerComposeService.Status, dcs.Status) {
-		changed = true
-	}
-
-	monitor.lastDockerComposeService = &dcs
-
-	return changed, nil
-}
-
 // Go through all the file changes, and delete files that aren't relevant
 // to the current build.
 //
@@ -593,16 +553,6 @@ func (r *Reconciler) resource(lu *v1alpha1.LiveUpdate, monitor *monitor) (luReso
 			selector: k,
 			res:      r,
 			im:       monitor.lastImageMap,
-		}, nil
-	}
-	dc := lu.Spec.Selector.DockerCompose
-	if dc != nil {
-		if monitor.lastDockerComposeService == nil {
-			return nil, fmt.Errorf("no docker compose status")
-		}
-		return &luDCResource{
-			selector: dc,
-			res:      monitor.lastDockerComposeService,
 		}, nil
 	}
 	return nil, fmt.Errorf("No valid selector")
@@ -774,7 +724,7 @@ func (r *Reconciler) maybeSync(ctx context.Context, lu *v1alpha1.LiveUpdate, mon
 
 			// Apply the change to the container.
 			oneUpdateStatus = r.applyInternal(ctx, lu.Spec, Input{
-				IsDC:               lu.Spec.Selector.DockerCompose != nil,
+				IsDC:               false,
 				ChangedFiles:       plan.SyncPaths,
 				Containers:         []liveupdates.Container{c},
 				LastFileTimeSynced: newHighWaterMark,
@@ -1015,8 +965,6 @@ func (r *Reconciler) CreateBuilder(mgr ctrl.Manager) (*builder.Builder, error) {
 			handler.EnqueueRequestsFromMapFunc(r.indexer.Enqueue)).
 		Watches(&v1alpha1.KubernetesApply{},
 			handler.EnqueueRequestsFromMapFunc(r.indexer.Enqueue)).
-		Watches(&v1alpha1.DockerComposeService{},
-			handler.EnqueueRequestsFromMapFunc(r.indexer.Enqueue)).
 		Watches(&v1alpha1.FileWatch{},
 			handler.EnqueueRequestsFromMapFunc(r.indexer.Enqueue)).
 		Watches(&v1alpha1.ImageMap{},
@@ -1059,7 +1007,6 @@ func (r *Reconciler) enqueueTriggerQueue(ctx context.Context, obj client.Object)
 }
 
 // indexLiveUpdate returns keys of objects referenced _by_ the LiveUpdate object for reverse lookup including:
-//   - DockerComposeService
 //   - FileWatch
 //   - ImageMap
 //   - KubernetesDiscovery
@@ -1122,15 +1069,6 @@ func indexLiveUpdate(obj ctrlclient.Object) []indexer.Key {
 				GVK: imageMapGVK,
 			})
 		}
-	}
-	if lu.Spec.Selector.DockerCompose != nil && lu.Spec.Selector.DockerCompose.Service != "" {
-		result = append(result, indexer.Key{
-			Name: types.NamespacedName{
-				Namespace: lu.Namespace,
-				Name:      lu.Spec.Selector.DockerCompose.Service,
-			},
-			GVK: dcsGVK,
-		})
 	}
 	return result
 }

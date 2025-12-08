@@ -10,7 +10,6 @@ import (
 
 	"github.com/defn/dev/m/tilt/internal/hud/view"
 	"github.com/defn/dev/m/tilt/internal/rty"
-	"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1"
 )
 
 const defaultLogPaneHeight = 8
@@ -202,8 +201,7 @@ func isInError(res view.Resource) bool {
 }
 
 func isCrashing(res view.Resource) bool {
-	return (res.IsK8s() && res.K8sInfo().PodRestarts > 0) ||
-		res.IsDC() && res.DockerComposeTarget().RuntimeStatus() == v1alpha1.RuntimeStatusError
+	return res.IsK8s() && res.K8sInfo().PodRestarts > 0
 }
 
 func (r *Renderer) renderModal(fg rty.Component, bg rty.Component, fixed bool) rty.Component {

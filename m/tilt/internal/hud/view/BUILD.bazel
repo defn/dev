@@ -6,7 +6,6 @@ go_library(
     importpath = "github.com/defn/dev/m/tilt/internal/hud/view",
     visibility = ["//tilt:__subpackages__"],
     deps = [
-        "//tilt/internal/container",
         "//tilt/pkg/apis/core/v1alpha1",
         "//tilt/pkg/model",
         "//tilt/pkg/model/logstore",

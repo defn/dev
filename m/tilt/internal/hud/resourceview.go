@@ -169,8 +169,6 @@ func (v *ResourceView) warnings() []string {
 
 func (v *ResourceView) titleText() rty.Component {
 	switch i := v.res.ResourceInfo.(type) {
-	case view.DCResourceInfo:
-		return titleTextDC(i)
 	case view.K8sResourceInfo:
 		return titleTextK8s(i)
 	default:
@@ -184,16 +182,6 @@ func titleTextK8s(k8sInfo view.K8sResourceInfo) rty.Component {
 		status = "Pending"
 	}
 	return rty.TextString(status)
-}
-
-func titleTextDC(dcInfo view.DCResourceInfo) rty.Component {
-	sb := rty.NewStringBuilder()
-	status := dcInfo.Status()
-	if status == "" {
-		status = "Pending"
-	}
-	sb.Text(status)
-	return sb.Build()
 }
 
 func (v *ResourceView) titleTextBuild() rty.Component {
@@ -219,8 +207,6 @@ func (v *ResourceView) resourceExpandedPane() rty.Component {
 
 func (v *ResourceView) resourceExpanded() rty.Component {
 	switch v.res.ResourceInfo.(type) {
-	case view.DCResourceInfo:
-		return v.resourceExpandedDC()
 	case view.K8sResourceInfo:
 		return v.resourceExpandedK8s()
 	case view.YAMLResourceInfo:
@@ -244,37 +230,6 @@ func (v *ResourceView) resourceExpandedYAML() rty.Component {
 	rhs.Add(rty.TextString(strings.Join(yi.K8sDisplayNames, "\n")))
 	l.AddDynamic(rhs)
 	return l
-}
-
-func (v *ResourceView) resourceExpandedDC() rty.Component {
-	dcInfo := v.res.DCInfo()
-
-	l := rty.NewConcatLayout(rty.DirHor)
-	l.Add(v.resourceTextDCContainer(dcInfo))
-	l.Add(rty.TextString(" "))
-	l.AddDynamic(rty.NewFillerString(' '))
-
-	st := v.res.DockerComposeTarget().StartTime
-	if !st.IsZero() {
-		if len(v.res.Endpoints) > 0 {
-			v.appendEndpoints(l)
-			l.Add(middotText())
-		}
-		l.Add(resourceTextAge(st))
-	}
-
-	return rty.OneLine(l)
-}
-
-func (v *ResourceView) resourceTextDCContainer(dcInfo view.DCResourceInfo) rty.Component {
-	if dcInfo.ContainerID.String() == "" {
-		return rty.EmptyLayout
-	}
-
-	sb := rty.NewStringBuilder()
-	sb.Fg(cLightText).Text("Container ID: ")
-	sb.Fg(tcell.ColorDefault).Text(dcInfo.ContainerID.ShortStr())
-	return sb.Build()
 }
 
 func (v *ResourceView) endpointsNeedSecondLine() bool {

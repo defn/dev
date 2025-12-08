@@ -21,11 +21,6 @@ const (
 	// Image builds
 	TargetTypeImage TargetType = "image"
 
-	// Docker-compose service build and deploy
-	// TODO(nick): Currently, build and deploy are represented as a single target.
-	// In the future, we might have a separate build target and deploy target.
-	TargetTypeDockerCompose TargetType = "docker-compose"
-
 	// Runs a local command when triggered (manually or via changed dep)
 	TargetTypeLocal TargetType = "local"
 

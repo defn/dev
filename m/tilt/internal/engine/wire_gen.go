@@ -19,11 +19,9 @@ import (
 	"github.com/defn/dev/m/tilt/internal/container"
 	"github.com/defn/dev/m/tilt/internal/controllers/core/cmd"
 	"github.com/defn/dev/m/tilt/internal/controllers/core/cmdimage"
-	"github.com/defn/dev/m/tilt/internal/controllers/core/dockercomposeservice"
 	"github.com/defn/dev/m/tilt/internal/controllers/core/dockerimage"
 	"github.com/defn/dev/m/tilt/internal/controllers/core/kubernetesapply"
 	"github.com/defn/dev/m/tilt/internal/docker"
-	"github.com/defn/dev/m/tilt/internal/dockercompose"
 	"github.com/defn/dev/m/tilt/internal/dockerfile"
 	"github.com/defn/dev/m/tilt/internal/engine/buildcontrol"
 	"github.com/defn/dev/m/tilt/internal/k8s"
@@ -38,7 +36,7 @@ import (
 
 // Injectors from wire.go:
 
-func provideFakeBuildAndDeployer(ctx context.Context, docker2 docker.Client, kClient k8s.Client, dir *dirs.TiltDevDir, env clusterid.Product, updateMode liveupdates.UpdateModeFlag, dcc dockercompose.DockerComposeClient, clock build.Clock, kp build.KINDLoader, analytics2 *analytics.TiltAnalytics, ctrlClient client.Client, st store.RStore, execer localexec.Execer) (buildcontrol.BuildAndDeployer, error) {
+func provideFakeBuildAndDeployer(ctx context.Context, docker2 docker.Client, kClient k8s.Client, dir *dirs.TiltDevDir, env clusterid.Product, updateMode liveupdates.UpdateModeFlag, clock build.Clock, kp build.KINDLoader, analytics2 *analytics.TiltAnalytics, ctrlClient client.Client, st store.RStore, execer localexec.Execer) (buildcontrol.BuildAndDeployer, error) {
 	scheme := v1alpha1.NewScheme()
 	labels := _wireLabelsValue
 	dockerBuilder := build.NewDockerBuilder(docker2, labels)
@@ -53,9 +51,6 @@ func provideFakeBuildAndDeployer(ctx context.Context, docker2 docker.Client, kCl
 	cmdimageReconciler := cmdimage.NewReconciler(ctrlClient, st, scheme, docker2, imageBuilder)
 	kubernetesapplyReconciler := kubernetesapply.NewReconciler(ctrlClient, kClient, scheme, st, execer)
 	imageBuildAndDeployer := buildcontrol.NewImageBuildAndDeployer(reconciler, cmdimageReconciler, imageBuilder, analytics2, clock, ctrlClient, kubernetesapplyReconciler)
-	disableSubscriber := dockercomposeservice.NewDisableSubscriber(ctx, dcc, clockworkClock)
-	dockercomposeserviceReconciler := dockercomposeservice.NewReconciler(ctrlClient, dcc, docker2, st, scheme, disableSubscriber)
-	dockerComposeBuildAndDeployer := buildcontrol.NewDockerComposeBuildAndDeployer(reconciler, cmdimageReconciler, imageBuilder, dockercomposeserviceReconciler, clock, ctrlClient)
 	localTargetBuildAndDeployer := buildcontrol.NewLocalTargetBuildAndDeployer(clock, ctrlClient, controller)
 	kubeContext := provideFakeKubeContext(env)
 	clusterEnv := provideFakeDockerClusterEnv(ctx, docker2, env, kubeContext, kClient)
@@ -63,7 +58,7 @@ func provideFakeBuildAndDeployer(ctx context.Context, docker2 docker.Client, kCl
 	if err != nil {
 		return nil, err
 	}
-	buildOrder := DefaultBuildOrder(imageBuildAndDeployer, dockerComposeBuildAndDeployer, localTargetBuildAndDeployer, liveupdatesUpdateMode)
+	buildOrder := DefaultBuildOrder(imageBuildAndDeployer, localTargetBuildAndDeployer, liveupdatesUpdateMode)
 	spanExporter := _wireSpanExporterValue
 	traceTracer := tracer.InitOpenTelemetry(spanExporter)
 	compositeBuildAndDeployer := NewCompositeBuildAndDeployer(buildOrder, traceTracer)

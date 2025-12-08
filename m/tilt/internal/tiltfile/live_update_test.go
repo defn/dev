@@ -423,24 +423,6 @@ docker_build('gcr.io/d', './d',
 	f.loadErrString(restartContainerDeprecationError([]model.ManifestName{"a", "c"}))
 }
 
-func TestLiveUpdateNoRestartContainerDeprecationErrorK8sDockerCompose(t *testing.T) {
-	f := newFixture(t)
-	f.setupFoo()
-	f.file("docker-compose.yml", `version: '3'
-services:
-  foo:
-    image: gcr.io/foo
-`)
-	f.file("Tiltfile", `
-docker_build('gcr.io/foo', 'foo')
-docker_compose('docker-compose.yml')
-`)
-
-	// Expect no deprecation error b/c restart_container() is still allowed on Docker Compose resources
-	f.load()
-	f.assertNextManifest("foo", db(image("gcr.io/foo")))
-}
-
 type liveUpdateFixture struct {
 	*fixture
 

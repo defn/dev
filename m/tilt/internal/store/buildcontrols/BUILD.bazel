@@ -11,12 +11,9 @@ go_library(
     importpath = "github.com/defn/dev/m/tilt/internal/store/buildcontrols",
     visibility = ["//tilt:__subpackages__"],
     deps = [
-        "//tilt/internal/container",
-        "//tilt/internal/dockercompose",
         "//tilt/internal/k8s",
         "//tilt/internal/ospath",
         "//tilt/internal/store",
-        "//tilt/internal/store/dockercomposeservices",
         "//tilt/internal/timecmp",
         "//tilt/pkg/apis/core/v1alpha1",
         "//tilt/pkg/logger",

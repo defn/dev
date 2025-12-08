@@ -98,11 +98,11 @@ func (composite *CompositeBuildAndDeployer) BuildAndDeploy(ctx context.Context, 
 	return store.BuildResultSet{}, lastErr
 }
 
-func DefaultBuildOrder(ibad *buildcontrol.ImageBuildAndDeployer, dcbad *buildcontrol.DockerComposeBuildAndDeployer,
+func DefaultBuildOrder(ibad *buildcontrol.ImageBuildAndDeployer,
 	ltbad *buildcontrol.LocalTargetBuildAndDeployer, updMode liveupdates.UpdateMode) BuildOrder {
 	if updMode == liveupdates.UpdateModeImage {
-		return BuildOrder{dcbad, ibad, ltbad}
+		return BuildOrder{ibad, ltbad}
 	}
 
-	return BuildOrder{dcbad, ibad, ltbad}
+	return BuildOrder{ibad, ltbad}
 }

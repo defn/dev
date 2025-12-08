@@ -116,9 +116,6 @@ func (ar *AnalyticsReporter) report(ctx context.Context) {
 				unbuiltCount++
 			}
 		}
-		if m.IsDC() {
-			dcCount++
-		}
 		var seenLU, multiImgLU, multiContainerLU bool
 		for _, it := range m.ImageTargets {
 			if !liveupdate.IsEmptySpec(it.LiveUpdateSpec) {

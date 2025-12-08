@@ -28,7 +28,6 @@ go_library(
     deps = [
         "//tilt/internal/analytics",
         "//tilt/internal/container",
-        "//tilt/internal/dockercompose",
         "//tilt/internal/k8s",
         "//tilt/internal/store/k8sconv",
         "//tilt/internal/timecmp",

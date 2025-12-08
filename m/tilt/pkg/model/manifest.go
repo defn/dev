@@ -135,16 +135,6 @@ func (m Manifest) IsLocal() bool {
 	return ok
 }
 
-func (m Manifest) DockerComposeTarget() DockerComposeTarget {
-	ret, _ := m.DeployTarget.(DockerComposeTarget)
-	return ret
-}
-
-func (m Manifest) IsDC() bool {
-	_, ok := m.DeployTarget.(DockerComposeTarget)
-	return ok
-}
-
 func (m Manifest) K8sTarget() K8sTarget {
 	ret, _ := m.DeployTarget.(K8sTarget)
 	return ret
@@ -165,9 +155,6 @@ func (m Manifest) PodReadinessMode() PodReadinessMode {
 func (m Manifest) WithDeployTarget(t TargetSpec) Manifest {
 	switch typedTarget := t.(type) {
 	case K8sTarget:
-		typedTarget.Name = m.Name.TargetName()
-		t = typedTarget
-	case DockerComposeTarget:
 		typedTarget.Name = m.Name.TargetName()
 		t = typedTarget
 	}
@@ -214,7 +201,7 @@ func (m Manifest) LocalPaths() []string {
 	switch di := m.DeployTarget.(type) {
 	case LocalTarget:
 		return di.Dependencies()
-	case ImageTarget, K8sTarget, DockerComposeTarget:
+	case ImageTarget, K8sTarget:
 		// fall through to paths for image targets, below
 	}
 	paths := []string{}
@@ -259,9 +246,6 @@ func (m Manifest) Validate() error {
 }
 
 func (m *Manifest) ClusterName() string {
-	if m.IsDC() {
-		return v1alpha1.ClusterNameDocker
-	}
 	if m.IsK8s() {
 		return v1alpha1.ClusterNameDefault
 	}
@@ -335,18 +319,6 @@ func (m *Manifest) InferLiveUpdateSelectors() error {
 			}
 		}
 
-		if m.IsDC() {
-			dcSelector := luSpec.Selector.DockerCompose
-			if dcSelector == nil {
-				dcSelector = &v1alpha1.LiveUpdateDockerComposeSelector{}
-				luSpec.Selector.DockerCompose = dcSelector
-			}
-
-			if dcSelector.Service == "" {
-				dcSelector.Service = m.Name.String()
-			}
-		}
-
 		luSpec.Sources = nil
 		err := dag.VisitTree(iTarget, func(dep TargetSpec) error {
 			// Relies on the idea that ImageTargets creates
@@ -398,9 +370,7 @@ func ChangesInvalidateBuild(old, new Manifest) bool {
 func (m1 Manifest) fieldGroupsEqualForBuildInvalidation(m2 Manifest) (dockerEq, k8sEq, dcEq, localEq bool) {
 	dockerEq = equalForBuildInvalidation(m1.ImageTargets, m2.ImageTargets)
 
-	dc1 := m1.DockerComposeTarget()
-	dc2 := m2.DockerComposeTarget()
-	dcEq = equalForBuildInvalidation(dc1, dc2)
+	dcEq = true
 
 	k8s1 := m1.K8sTarget()
 	k8s2 := m2.K8sTarget()
@@ -583,7 +553,6 @@ func LinksToURLStrings(lns []Link) []string {
 }
 
 var imageTargetAllowUnexported = cmp.AllowUnexported(ImageTarget{})
-var dcTargetAllowUnexported = cmp.AllowUnexported(DockerComposeTarget{})
 var labelRequirementAllowUnexported = cmp.AllowUnexported(labels.Requirement{})
 var k8sTargetAllowUnexported = cmp.AllowUnexported(K8sTarget{})
 var localTargetAllowUnexported = cmp.AllowUnexported(LocalTarget{})
@@ -594,7 +563,6 @@ var ignoreCustomBuildDepsField = cmpopts.IgnoreFields(CustomBuild{}, "Deps")
 var ignoreLocalTargetDepsField = cmpopts.IgnoreFields(LocalTarget{}, "Deps")
 var ignoreDockerBuildCacheFrom = cmpopts.IgnoreFields(DockerBuild{}, "CacheFrom")
 var ignoreLabels = cmpopts.IgnoreFields(Manifest{}, "Labels")
-var ignoreDockerComposeProject = cmpopts.IgnoreFields(v1alpha1.DockerComposeServiceSpec{}, "Project")
 var ignoreRegistryFields = cmpopts.IgnoreFields(v1alpha1.RegistryHosting{}, "HostFromClusterNetwork", "Help")
 
 // ignoreLinks ignores user-defined links for the purpose of build invalidation
@@ -622,7 +590,6 @@ func equalForBuildInvalidation(x, y interface{}) bool {
 	return cmp.Equal(x, y,
 		cmpopts.EquateEmpty(),
 		imageTargetAllowUnexported,
-		dcTargetAllowUnexported,
 		labelRequirementAllowUnexported,
 		k8sTargetAllowUnexported,
 		localTargetAllowUnexported,
@@ -644,11 +611,6 @@ func equalForBuildInvalidation(x, y interface{}) bool {
 
 		// user-added links don't invalidate a build
 		ignoreLinks,
-
-		// We don't want a change to the DockerCompose Project to invalidate
-		// all individual services. We track the service-specific YAML with
-		// a separate ServiceYAML field.
-		ignoreDockerComposeProject,
 
 		// the RegistryHosting spec includes informational fields (Help) as
 		// well as some unused by Tilt (HostFromClusterNetwork)

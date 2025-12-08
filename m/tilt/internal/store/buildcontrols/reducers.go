@@ -5,11 +5,8 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/defn/dev/m/tilt/internal/container"
-	"github.com/defn/dev/m/tilt/internal/dockercompose"
 	"github.com/defn/dev/m/tilt/internal/k8s"
 	"github.com/defn/dev/m/tilt/internal/store"
-	"github.com/defn/dev/m/tilt/internal/store/dockercomposeservices"
 	"github.com/defn/dev/m/tilt/internal/timecmp"
 	"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1"
 	"github.com/defn/dev/m/tilt/pkg/logger"
@@ -24,7 +21,7 @@ func HandleBuildStarted(ctx context.Context, state *store.EngineState, action Bu
 	}
 
 	mn := action.ManifestName
-	manifest, ok := state.Manifest(mn)
+	_, ok := state.Manifest(mn)
 	if !ok {
 		return
 	}
@@ -56,11 +53,6 @@ func HandleBuildStarted(ctx context.Context, state *store.EngineState, action Bu
 				delete(krs.UpdateStartTime, podID)
 			}
 		}
-	} else if manifest.IsDC() {
-		// Attach the SpanID and initialize the runtime state if we haven't yet.
-		state, _ := ms.RuntimeState.(dockercompose.State)
-		state = state.WithSpanID(dockercomposeservices.SpanIDForDCService(mn))
-		ms.RuntimeState = state
 	}
 
 	state.RemoveFromTriggerQueue(mn)
@@ -231,25 +223,6 @@ func HandleBuildCompleted(ctx context.Context, engineState *store.EngineState, c
 
 		if err == nil {
 			state.HasEverDeployedSuccessfully = true
-		}
-
-		ms.RuntimeState = state
-	}
-
-	if mt.Manifest.IsDC() {
-		state, _ := ms.RuntimeState.(dockercompose.State)
-
-		result := cb.Result[mt.Manifest.DockerComposeTarget().ID()]
-		dcResult, _ := result.(store.DockerComposeBuildResult)
-		cid := dcResult.Status.ContainerID
-		if cid != "" {
-			state = state.WithContainerID(container.ID(cid))
-		}
-
-		cState := dcResult.Status.ContainerState
-		if cState != nil {
-			state = state.WithContainerState(*cState)
-			state = state.WithPorts(dcResult.Status.PortBindings)
 		}
 
 		ms.RuntimeState = state

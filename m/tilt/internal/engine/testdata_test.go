@@ -52,13 +52,6 @@ func NewSanchoLiveUpdateManifest(f Fixture) model.Manifest {
 		Build()
 }
 
-func NewSanchoLiveUpdateDCManifest(f Fixture) model.Manifest {
-	return manifestbuilder.New(f, "sancho").
-		WithDockerCompose().
-		WithImageTarget(NewSanchoLiveUpdateImageTarget(f)).
-		Build()
-}
-
 func NewSanchoCustomBuildManifest(fixture Fixture) model.Manifest {
 	return NewSanchoCustomBuildManifestWithTag(fixture, "")
 }

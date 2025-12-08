@@ -260,9 +260,6 @@ const (
 	// The target is a Kubernetes resource deployment.
 	UIResourceTargetTypeKubernetes UIResourceTargetType = "k8s"
 
-	// The target is a Docker Compose service deployment.
-	UIResourceTargetTypeDockerCompose UIResourceTargetType = "docker-compose"
-
 	// The target is a local command or server.
 	UIResourceTargetTypeLocal UIResourceTargetType = "local"
 )

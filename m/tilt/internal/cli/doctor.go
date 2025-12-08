@@ -11,7 +11,6 @@ import (
 	"github.com/defn/dev/m/tilt/internal/analytics"
 	"github.com/defn/dev/m/tilt/internal/container"
 	"github.com/defn/dev/m/tilt/internal/docker"
-	"github.com/defn/dev/m/tilt/internal/dockercompose"
 	"github.com/defn/dev/m/tilt/pkg/logger"
 	"github.com/defn/dev/m/tilt/pkg/model"
 )
@@ -100,24 +99,6 @@ func (c *doctorCmd) run(ctx context.Context, args []string) error {
 			builderVersion, err := localDocker.BuilderVersion(ctx)
 			printField("Builder", builderVersion, err)
 		}
-	}
-
-	// in theory, the env shouldn't matter since we're just calling the version subcommand,
-	// but to be safe, we'll try to use the actual local env if available
-	composeEnv := docker.LocalEnv{}
-	if localDockerErr == nil {
-		composeEnv = docker.LocalEnv(localDocker.Env())
-	}
-	dcCli := dockercompose.NewDockerComposeClient(composeEnv)
-	// errors getting the version aren't generally useful; in many cases it'll just mean that
-	// the command couldn't exec since Docker Compose isn't installed, for example, so they
-	// are just ignored and the field skipped
-	if composeVersion, composeBuild, err := dcCli.Version(ctx); err == nil {
-		composeField := composeVersion
-		if composeBuild != "" {
-			composeField += fmt.Sprintf(" (build %s)", composeBuild)
-		}
-		printField("Compose Version", composeField, nil)
 	}
 
 	fmt.Println("---")

@@ -73,8 +73,6 @@ func AllResourceObjects() []resource.Object {
 		&DockerImage{},
 		&CmdImage{},
 		&Cluster{},
-		&DockerComposeService{},
-		&DockerComposeLogStream{},
 
 		// Hey! You! If you're adding a new top-level type, add the type object here.
 	}
@@ -101,8 +99,6 @@ func AllResourceLists() []runtime.Object {
 		&DockerImageList{},
 		&CmdImageList{},
 		&ClusterList{},
-		&DockerComposeServiceList{},
-		&DockerComposeLogStreamList{},
 
 		// Hey! You! If you're adding a new top-level type, add the List type here.
 	}

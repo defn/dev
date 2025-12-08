@@ -173,39 +173,6 @@ func TestManifestEquality(t *testing.T) {
 	}
 }
 
-func TestDCTargetValidate(t *testing.T) {
-	targ := DockerComposeTarget{
-		Name: "blah",
-		Spec: v1alpha1.DockerComposeServiceSpec{
-			Service: "blah",
-			Project: v1alpha1.DockerComposeProject{
-				ConfigPaths: []string{"docker-compose.yml"},
-			},
-		},
-	}
-	err := targ.Validate()
-	assert.NoError(t, err)
-
-	noConfPath := DockerComposeTarget{Name: "blah"}
-	err = noConfPath.Validate()
-	if assert.Error(t, err) {
-		assert.Contains(t, err.Error(), "missing config path")
-	}
-
-	noName := DockerComposeTarget{
-		Spec: v1alpha1.DockerComposeServiceSpec{
-			Service: "blah",
-			Project: v1alpha1.DockerComposeProject{
-				ConfigPaths: []string{"docker-compose.yml"},
-			},
-		},
-	}
-	err = noName.Validate()
-	if assert.Error(t, err) {
-		assert.Contains(t, err.Error(), "missing name")
-	}
-}
-
 func TestHostCmdToString(t *testing.T) {
 	cmd := ToHostCmd("echo hi")
 	assert.Equal(t, "echo hi", cmd.String())

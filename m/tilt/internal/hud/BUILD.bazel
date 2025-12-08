@@ -24,7 +24,6 @@ go_library(
     visibility = ["//tilt:__subpackages__"],
     deps = [
         "//tilt/internal/analytics",
-        "//tilt/internal/dockercompose",
         "//tilt/internal/hud/view",
         "//tilt/internal/k8s",
         "//tilt/internal/openurl",

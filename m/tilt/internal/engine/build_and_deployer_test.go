@@ -29,7 +29,6 @@ import (
 	"github.com/tilt-dev/wmclient/pkg/dirs"
 
 	"github.com/defn/dev/m/tilt/internal/container"
-	"github.com/defn/dev/m/tilt/internal/dockercompose"
 	"github.com/defn/dev/m/tilt/internal/k8s/testyaml"
 	"github.com/defn/dev/m/tilt/internal/store"
 	"github.com/tilt-dev/clusterid"
@@ -199,23 +198,6 @@ func TestCustomBuildDeterministicTag(t *testing.T) {
 	}
 }
 
-func TestDockerComposeImageBuild(t *testing.T) {
-	f := newBDFixture(t, clusterid.ProductGKE, container.RuntimeDocker)
-
-	manifest := NewSanchoLiveUpdateDCManifest(f)
-	targets := buildcontrol.BuildTargets(manifest)
-
-	_, err := f.BuildAndDeploy(targets, store.BuildStateSet{})
-	if err != nil {
-		t.Fatal(err)
-	}
-
-	assert.Equal(t, 1, f.docker.BuildCount)
-	assert.Equal(t, 0, f.docker.PushCount)
-	assert.Empty(t, f.k8s.Yaml, "expect no k8s YAML for DockerCompose resource")
-	assert.Len(t, f.dcCli.UpCalls(), 1)
-}
-
 func TestReturnLastUnexpectedError(t *testing.T) {
 	f := newBDFixture(t, clusterid.ProductDockerDesktop, container.RuntimeDocker)
 
@@ -307,10 +289,9 @@ type bdFixture struct {
 	cancel     func()
 	docker     *docker.FakeClient
 	k8s        *k8s.FakeK8sClient
-	bd         buildcontrol.BuildAndDeployer
-	st         *testStore
-	dcCli      *dockercompose.FakeDCClient
-	logs       *bytes.Buffer
+	bd   buildcontrol.BuildAndDeployer
+	st   *testStore
+	logs *bytes.Buffer
 	ctrlClient ctrlclient.Client
 }
 
@@ -335,12 +316,11 @@ func newBDFixtureWithUpdateMode(t *testing.T, env clusterid.Product, runtime con
 	k8s := k8s.NewFakeK8sClient(t)
 	k8s.Runtime = runtime
 	mode := liveupdates.UpdateModeFlag(um)
-	dcc := dockercompose.NewFakeDockerComposeClient(t, ctx)
 	kl := &fakeKINDLoader{}
 	ctrlClient := fake.NewFakeTiltClient()
 	st := NewTestingStore(logs)
 	execer := localexec.NewFakeExecer(t)
-	bd, err := provideFakeBuildAndDeployer(ctx, dockerClient, k8s, dir, env, mode, dcc,
+	bd, err := provideFakeBuildAndDeployer(ctx, dockerClient, k8s, dir, env, mode,
 		fakeClock{now: time.Unix(1551202573, 0)}, kl, ta, ctrlClient, st, execer)
 	require.NoError(t, err)
 
@@ -349,12 +329,11 @@ func newBDFixtureWithUpdateMode(t *testing.T, env clusterid.Product, runtime con
 		ctx:            ctx,
 		cancel:         cancel,
 		docker:         dockerClient,
-		k8s:            k8s,
-		bd:             bd,
-		st:             st,
-		dcCli:          dcc,
-		logs:           logs,
-		ctrlClient:     ctrlClient,
+		k8s:        k8s,
+		bd:         bd,
+		st:         st,
+		logs:       logs,
+		ctrlClient: ctrlClient,
 	}
 
 	t.Cleanup(ret.TearDown)
@@ -394,18 +373,12 @@ func (f *bdFixture) updateStatus(obj ctrlclient.Object) {
 }
 
 func (f *bdFixture) BuildAndDeploy(specs []model.TargetSpec, stateSet store.BuildStateSet) (store.BuildResultSet, error) {
-	cluster := &v1alpha1.Cluster{}
-	for _, spec := range specs {
-		switch spec.(type) {
-		case model.DockerComposeTarget:
-			cluster.Spec.Connection = &v1alpha1.ClusterConnection{
-				Docker: &v1alpha1.DockerClusterConnection{},
-			}
-		case model.K8sTarget:
-			cluster.Spec.Connection = &v1alpha1.ClusterConnection{
+	cluster := &v1alpha1.Cluster{
+		Spec: v1alpha1.ClusterSpec{
+			Connection: &v1alpha1.ClusterConnection{
 				Kubernetes: &v1alpha1.KubernetesClusterConnection{},
-			}
-		}
+			},
+		},
 	}
 
 	for _, spec := range specs {
@@ -476,15 +449,6 @@ func (f *bdFixture) BuildAndDeploy(specs []model.TargetSpec, stateSet store.Buil
 				Spec:       kTarget.KubernetesApplySpec,
 			}
 			f.upsertSpec(&ka)
-		}
-
-		dcTarget, ok := spec.(model.DockerComposeTarget)
-		if ok {
-			dcs := v1alpha1.DockerComposeService{
-				ObjectMeta: metav1.ObjectMeta{Name: dcTarget.ID().Name.String()},
-				Spec:       dcTarget.Spec,
-			}
-			f.upsertSpec(&dcs)
 		}
 	}
 	return f.bd.BuildAndDeploy(f.ctx, f.st, specs, stateSet)

@@ -1,7 +1,6 @@
 package store
 
 import (
-	"fmt"
 	"iter"
 	"sort"
 	"time"
@@ -9,7 +8,6 @@ import (
 	"github.com/tilt-dev/wmclient/pkg/analytics"
 
 	tiltanalytics "github.com/defn/dev/m/tilt/internal/analytics"
-	"github.com/defn/dev/m/tilt/internal/dockercompose"
 	"github.com/defn/dev/m/tilt/internal/k8s"
 	"github.com/defn/dev/m/tilt/internal/store/k8sconv"
 	"github.com/defn/dev/m/tilt/internal/timecmp"
@@ -118,7 +116,6 @@ type EngineState struct {
 	LiveUpdates           map[string]*v1alpha1.LiveUpdate           `json:"-"`
 	Clusters              map[string]*v1alpha1.Cluster              `json:"-"`
 	UIButtons             map[string]*v1alpha1.UIButton             `json:"-"`
-	DockerComposeServices map[string]*v1alpha1.DockerComposeService `json:"-"`
 	ImageMaps             map[string]*v1alpha1.ImageMap             `json:"-"`
 	DockerImages          map[string]*v1alpha1.DockerImage          `json:"-"`
 	CmdImages             map[string]*v1alpha1.CmdImage             `json:"-"`
@@ -158,9 +155,6 @@ func (e *EngineState) ManifestNamesForTargetID(id model.TargetID) []model.Manife
 			}
 		}
 		if manifest.K8sTarget().ID() == id {
-			result = append(result, mn)
-		}
-		if manifest.DockerComposeTarget().ID() == id {
 			result = append(result, mn)
 		}
 		if manifest.LocalTarget().ID() == id {
@@ -587,7 +581,6 @@ func NewState() *EngineState {
 	ret.Tiltfiles = make(map[string]*v1alpha1.Tiltfile)
 	ret.FileWatches = make(map[string]*v1alpha1.FileWatch)
 	ret.KubernetesApplys = make(map[string]*v1alpha1.KubernetesApply)
-	ret.DockerComposeServices = make(map[string]*v1alpha1.DockerComposeService)
 	ret.KubernetesDiscoverys = make(map[string]*v1alpha1.KubernetesDiscovery)
 	ret.KubernetesResources = make(map[string]*k8sconv.KubernetesResource)
 	ret.UIResources = make(map[string]*v1alpha1.UIResource)
@@ -656,16 +649,6 @@ func (ms *ManifestState) TargetID() model.TargetID {
 func (ms *ManifestState) BuildStatus(id model.TargetID) (*BuildStatus, bool) {
 	result, ok := ms.BuildStatuses[id]
 	return result, ok
-}
-
-func (ms *ManifestState) DCRuntimeState() dockercompose.State {
-	ret, _ := ms.RuntimeState.(dockercompose.State)
-	return ret
-}
-
-func (ms *ManifestState) IsDC() bool {
-	_, ok := ms.RuntimeState.(dockercompose.State)
-	return ok
 }
 
 func (ms *ManifestState) K8sRuntimeState() K8sRuntimeState {
@@ -934,36 +917,6 @@ func ManifestTargetEndpoints(mt *ManifestTarget) (endpoints []model.Link) {
 	localResourceLinks := mt.Manifest.LocalTarget().Links
 	if len(localResourceLinks) > 0 {
 		return localResourceLinks
-	}
-
-	if mt.Manifest.IsDC() {
-		hostPorts := make(map[int32]bool)
-		publishedPorts := mt.Manifest.DockerComposeTarget().PublishedPorts()
-		inferLinks := mt.Manifest.DockerComposeTarget().InferLinks()
-		for _, p := range publishedPorts {
-			if p == 0 || hostPorts[int32(p)] {
-				continue
-			}
-			hostPorts[int32(p)] = true
-			if inferLinks {
-				endpoints = append(endpoints, model.MustNewLink(fmt.Sprintf("http://localhost:%d/", p), ""))
-			}
-		}
-
-		for _, binding := range mt.State.DCRuntimeState().Ports {
-			// Docker usually contains multiple bindings for each port - one for ipv4 (0.0.0.0)
-			// and one for ipv6 (::1).
-			p := binding.HostPort
-			if hostPorts[p] {
-				continue
-			}
-			hostPorts[p] = true
-			if inferLinks {
-				endpoints = append(endpoints, model.MustNewLink(fmt.Sprintf("http://localhost:%d/", p), ""))
-			}
-		}
-
-		endpoints = append(endpoints, mt.Manifest.DockerComposeTarget().Links...)
 	}
 
 	return endpoints

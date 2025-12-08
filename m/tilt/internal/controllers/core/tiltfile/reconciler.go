@@ -325,8 +325,6 @@ func (r *Reconciler) run(ctx context.Context, nn types.NamespacedName, tf *v1alp
 
 	if tlr.HasOrchestrator(model.OrchestratorK8s) {
 		r.dockerClient.SetOrchestrator(model.OrchestratorK8s)
-	} else if tlr.HasOrchestrator(model.OrchestratorDC) {
-		r.dockerClient.SetOrchestrator(model.OrchestratorDC)
 	}
 
 	if requiresDocker(tlr) {
@@ -460,10 +458,6 @@ func (r *Reconciler) defaultK8sConnection() *v1alpha1.KubernetesClusterConnectio
 }
 
 func requiresDocker(tlr tiltfile.TiltfileLoadResult) bool {
-	if tlr.HasOrchestrator(model.OrchestratorDC) {
-		return true
-	}
-
 	for _, m := range tlr.Manifests {
 		for _, iTarget := range m.ImageTargets {
 			if iTarget.IsDockerBuild() {

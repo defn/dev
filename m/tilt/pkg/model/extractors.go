@@ -23,15 +23,3 @@ func ExtractImageTargets(specs []TargetSpec) []ImageTarget {
 	}
 	return iTargets
 }
-
-func ExtractDockerComposeTargets(specs []TargetSpec) []DockerComposeTarget {
-	targets := make([]DockerComposeTarget, 0)
-	for _, spec := range specs {
-		t, ok := spec.(DockerComposeTarget)
-		if !ok {
-			continue
-		}
-		targets = append(targets, t)
-	}
-	return targets
-}

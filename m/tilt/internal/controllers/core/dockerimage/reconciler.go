@@ -121,7 +121,6 @@ func (r *Reconciler) ForceApply(
 	r.setImageStatus(nn, ToCompletedSuccessStatus(iTarget, startTime, stages, refs))
 
 	buildResult, err := UpdateImageMap(
-		ctx, r.docker,
 		iTarget, cluster, imageMaps, &startTime, refs)
 	if err != nil {
 		return store.ImageBuildResult{}, err

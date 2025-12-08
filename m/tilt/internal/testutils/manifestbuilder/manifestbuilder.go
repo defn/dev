@@ -30,12 +30,11 @@ type ManifestBuilder struct {
 	f    Fixture
 	name model.ManifestName
 
-	k8sPodReadiness    model.PodReadinessMode
-	k8sYAML            string
-	k8sPodSelectors    []labels.Set
-	k8sImageLocators   []v1alpha1.KubernetesImageLocator
-	dcConfigPaths      []string
-	localCmd           string
+	k8sPodReadiness  model.PodReadinessMode
+	k8sYAML          string
+	k8sPodSelectors  []labels.Set
+	k8sImageLocators []v1alpha1.KubernetesImageLocator
+	localCmd         string
 	localServeCmd      string
 	localDeps          []string
 	localAllowParallel bool
@@ -81,11 +80,6 @@ func (b ManifestBuilder) WithK8sYAML(yaml string) ManifestBuilder {
 
 func (b ManifestBuilder) WithK8sPodSelectors(podSelectors []labels.Set) ManifestBuilder {
 	b.k8sPodSelectors = podSelectors
-	return b
-}
-
-func (b ManifestBuilder) WithDockerCompose() ManifestBuilder {
-	b.dcConfigPaths = []string{b.f.JoinPath("docker-compose.yml")}
 	return b
 }
 
@@ -155,18 +149,6 @@ func (b ManifestBuilder) Build() model.Manifest {
 			iTarget.CmdImageName = cmdimage.GetName(b.name, iTarget.ID())
 		}
 
-		if len(b.dcConfigPaths) != 0 {
-			if iTarget.IsDockerBuild() {
-				dbi := iTarget.DockerBuildInfo()
-				dbi.DockerImageSpec.Cluster = v1alpha1.ClusterNameDocker
-				iTarget.BuildDetails = dbi
-			} else if iTarget.IsCustomBuild() {
-				cbi := iTarget.CustomBuildInfo()
-				cbi.CmdImageSpec.Cluster = v1alpha1.ClusterNameDocker
-				iTarget.BuildDetails = cbi
-			}
-		}
-
 		if liveupdate.IsEmptySpec(iTarget.LiveUpdateSpec) {
 			iTarget.LiveUpdateReconciler = false
 		} else {
@@ -191,19 +173,6 @@ func (b ManifestBuilder) Build() model.Manifest {
 		m = assembleK8s(
 			model.Manifest{Name: b.name, ResourceDependencies: rds},
 			k8sTarget,
-			b.iTargets...)
-	} else if len(b.dcConfigPaths) > 0 {
-		m = assembleDC(
-			model.Manifest{Name: b.name, ResourceDependencies: rds},
-			model.DockerComposeTarget{
-				Spec: v1alpha1.DockerComposeServiceSpec{
-					Service: string(b.name),
-					Project: v1alpha1.DockerComposeProject{
-						ConfigPaths: b.dcConfigPaths,
-					},
-				},
-				Name: model.TargetName(b.name),
-			},
 			b.iTargets...)
 	} else if b.localCmd != "" || b.localServeCmd != "" {
 		updateCmd := model.ToHostCmd(b.localCmd)

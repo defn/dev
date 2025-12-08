@@ -2,8 +2,6 @@ package liveupdate
 
 import (
 	"context"
-	"errors"
-	"fmt"
 	"os"
 	"path/filepath"
 	"testing"
@@ -15,18 +13,15 @@ import (
 	"k8s.io/apimachinery/pkg/types"
 	"sigs.k8s.io/controller-runtime/pkg/reconcile"
 
-	"github.com/defn/dev/m/tilt/internal/build"
 	"github.com/defn/dev/m/tilt/internal/containerupdate"
 	"github.com/defn/dev/m/tilt/internal/controllers/apis/configmap"
 	"github.com/defn/dev/m/tilt/internal/controllers/apis/liveupdate"
 	"github.com/defn/dev/m/tilt/internal/controllers/fake"
-	"github.com/defn/dev/m/tilt/internal/dockercompose"
 	"github.com/defn/dev/m/tilt/internal/store"
 	"github.com/defn/dev/m/tilt/internal/store/buildcontrols"
 	"github.com/defn/dev/m/tilt/pkg/apis"
 	"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1"
 	"github.com/defn/dev/m/tilt/pkg/logger"
-	"github.com/defn/dev/m/tilt/pkg/model"
 )
 
 func TestIndexing(t *testing.T) {
@@ -147,70 +142,6 @@ func TestConsumeFileEvents(t *testing.T) {
 		assert.Equal(t, []string{txtPath}, f.st.lastStartedAction.FilesChanged)
 	}
 	assert.NotNil(t, f.st.lastCompletedAction)
-}
-
-func TestConsumeFileEventsDockerCompose(t *testing.T) {
-	f := newFixture(t)
-
-	p, _ := os.Getwd()
-	nowMicro := apis.NowMicro()
-	txtPath := filepath.Join(p, "a.txt")
-	txtChangeTime := metav1.MicroTime{Time: nowMicro.Add(time.Second)}
-
-	f.setupDockerComposeFrontend()
-
-	// Verify initial setup.
-	m, ok := f.r.monitors["frontend-liveupdate"]
-	require.True(t, ok)
-	assert.Equal(t, map[string]*monitorSource{}, m.sources)
-	assert.Equal(t, "frontend-service", m.lastDockerComposeService.Name)
-	assert.Nil(t, f.st.lastStartedAction)
-
-	// Trigger a file event, and make sure that the status reflects the sync.
-	f.addFileEvent("frontend-fw", txtPath, txtChangeTime)
-	f.MustReconcile(types.NamespacedName{Name: "frontend-liveupdate"})
-
-	var lu v1alpha1.LiveUpdate
-	f.MustGet(types.NamespacedName{Name: "frontend-liveupdate"}, &lu)
-	assert.Nil(t, lu.Status.Failed)
-	if assert.Equal(t, 1, len(lu.Status.Containers)) {
-		assert.Equal(t, txtChangeTime, lu.Status.Containers[0].LastFileTimeSynced)
-	}
-
-	// Also make sure the sync gets pulled into the monitor.
-	assert.Equal(t, map[string]metav1.MicroTime{
-		txtPath: txtChangeTime,
-	}, m.sources["frontend-fw"].modTimeByPath)
-	assert.Equal(t, 1, len(f.cu.Calls))
-
-	// re-reconcile, and make sure we don't try to resync.
-	f.MustReconcile(types.NamespacedName{Name: "frontend-liveupdate"})
-	assert.Equal(t, 1, len(f.cu.Calls))
-
-	f.MustGet(types.NamespacedName{Name: "frontend-liveupdate"}, &lu)
-	assert.Nil(t, lu.Status.Failed)
-
-	if assert.NotNil(t, f.st.lastStartedAction) {
-		assert.Equal(t, []string{txtPath}, f.st.lastStartedAction.FilesChanged)
-	}
-	assert.NotNil(t, f.st.lastCompletedAction)
-
-	// Make sure the container was NOT restarted.
-	if assert.Equal(t, 1, len(f.cu.Calls)) {
-		assert.True(t, f.cu.Calls[0].HotReload)
-	}
-
-	f.assertSteadyState(&lu)
-
-	// Docker Compose containers can be restarted in-place,
-	// preserving their filesystem.
-	dc := &v1alpha1.DockerComposeService{}
-	f.MustGet(types.NamespacedName{Name: "frontend-service"}, dc)
-	dc = dc.DeepCopy()
-	dc.Status.ContainerState.StartedAt = apis.NowMicro()
-	f.UpdateStatus(dc)
-
-	f.assertSteadyState(&lu)
 }
 
 func TestConsumeFileEventsUpdateModeManual(t *testing.T) {
@@ -751,159 +682,6 @@ func TestKubernetesImageSelector(t *testing.T) {
 	f.assertSteadyState(&lu)
 }
 
-func TestDockerComposeRestartPolicy(t *testing.T) {
-	f := newFixture(t)
-
-	p, _ := os.Getwd()
-	nowMicro := apis.NowMicro()
-	txtPath := filepath.Join(p, "a.txt")
-	txtChangeTime := metav1.MicroTime{Time: nowMicro.Add(time.Second)}
-
-	f.setupDockerComposeFrontend()
-
-	var lu v1alpha1.LiveUpdate
-	f.MustGet(types.NamespacedName{Name: "frontend-liveupdate"}, &lu)
-	lu.Spec.Restart = v1alpha1.LiveUpdateRestartStrategyAlways
-	f.Upsert(&lu)
-
-	// Trigger a file event, and make sure that the status reflects the sync.
-	f.addFileEvent("frontend-fw", txtPath, txtChangeTime)
-	f.MustReconcile(types.NamespacedName{Name: "frontend-liveupdate"})
-
-	f.MustGet(types.NamespacedName{Name: "frontend-liveupdate"}, &lu)
-	assert.Nil(t, lu.Status.Failed)
-	if assert.Equal(t, 1, len(lu.Status.Containers)) {
-		assert.Equal(t, txtChangeTime, lu.Status.Containers[0].LastFileTimeSynced)
-	}
-
-	// Make sure the container was restarted.
-	if assert.Equal(t, 1, len(f.cu.Calls)) {
-		assert.False(t, f.cu.Calls[0].HotReload)
-	}
-}
-
-func TestDockerComposeExecs(t *testing.T) {
-	f := newFixture(t)
-
-	p, _ := os.Getwd()
-	nowMicro := apis.NowMicro()
-	txtPath := filepath.Join(p, "a.txt")
-	txtChangeTime := metav1.MicroTime{Time: nowMicro.Add(time.Second)}
-
-	f.setupDockerComposeFrontend()
-
-	var lu v1alpha1.LiveUpdate
-	f.MustGet(types.NamespacedName{Name: "frontend-liveupdate"}, &lu)
-
-	execs := []v1alpha1.LiveUpdateExec{
-		{Args: model.ToUnixCmd("./foo.sh bar").Argv},
-		{Args: model.ToUnixCmd("yarn install").Argv, TriggerPaths: []string{"a.txt"}},
-		{Args: model.ToUnixCmd("pip install").Argv, TriggerPaths: []string{"requirements.txt"}},
-	}
-	lu.Spec.Execs = execs
-	f.Upsert(&lu)
-
-	// Trigger a file event, and make sure that the status reflects the sync.
-	f.addFileEvent("frontend-fw", txtPath, txtChangeTime)
-	f.MustReconcile(types.NamespacedName{Name: "frontend-liveupdate"})
-
-	f.MustGet(types.NamespacedName{Name: "frontend-liveupdate"}, &lu)
-	assert.Nil(t, lu.Status.Failed)
-	if assert.Equal(t, 1, len(lu.Status.Containers)) {
-		assert.Equal(t, txtChangeTime, lu.Status.Containers[0].LastFileTimeSynced)
-	}
-
-	// Make sure there were no exec errors.
-	if assert.NotNil(t, f.st.lastCompletedAction) {
-		assert.Nil(t, f.st.lastCompletedAction.Error)
-	}
-
-	// Make sure two cmds were executed, and one was skipped.
-	if assert.Equal(t, 1, len(f.cu.Calls)) {
-		assert.Equal(t, []model.Cmd{
-			model.ToUnixCmd("./foo.sh bar"),
-			model.ToUnixCmd("yarn install"),
-		}, f.cu.Calls[0].Cmds)
-	}
-}
-
-func TestDockerComposeExecInfraFailure(t *testing.T) {
-	f := newFixture(t)
-
-	p, _ := os.Getwd()
-	nowMicro := apis.NowMicro()
-	txtPath := filepath.Join(p, "a.txt")
-	txtChangeTime := metav1.MicroTime{Time: nowMicro.Add(time.Second)}
-
-	f.setupDockerComposeFrontend()
-
-	var lu v1alpha1.LiveUpdate
-	f.MustGet(types.NamespacedName{Name: "frontend-liveupdate"}, &lu)
-
-	execs := []v1alpha1.LiveUpdateExec{
-		{Args: model.ToUnixCmd("echo error && exit 1").Argv},
-	}
-	lu.Spec.Execs = execs
-	f.Upsert(&lu)
-
-	f.cu.SetUpdateErr(fmt.Errorf("cluster connection lost"))
-
-	// Trigger a file event, and make sure that the status reflects the sync.
-	f.addFileEvent("frontend-fw", txtPath, txtChangeTime)
-	f.MustReconcile(types.NamespacedName{Name: "frontend-liveupdate"})
-
-	f.MustGet(types.NamespacedName{Name: "frontend-liveupdate"}, &lu)
-	if assert.NotNil(t, lu.Status.Failed) {
-		assert.Equal(t, "UpdateFailed", lu.Status.Failed.Reason)
-		assert.Equal(t, "Updating container main-id: cluster connection lost",
-			lu.Status.Failed.Message)
-	}
-
-	// Make sure there were  exec errors.
-	if assert.NotNil(t, f.st.lastCompletedAction) {
-		assert.Equal(t, "Updating container main-id: cluster connection lost",
-			f.st.lastCompletedAction.Error.Error())
-	}
-}
-
-func TestDockerComposeExecRunFailure(t *testing.T) {
-	f := newFixture(t)
-
-	p, _ := os.Getwd()
-	nowMicro := apis.NowMicro()
-	txtPath := filepath.Join(p, "a.txt")
-	txtChangeTime := metav1.MicroTime{Time: nowMicro.Add(time.Second)}
-
-	f.setupDockerComposeFrontend()
-
-	var lu v1alpha1.LiveUpdate
-	f.MustGet(types.NamespacedName{Name: "frontend-liveupdate"}, &lu)
-
-	execs := []v1alpha1.LiveUpdateExec{
-		{Args: model.ToUnixCmd("echo error && exit 1").Argv},
-	}
-	lu.Spec.Execs = execs
-	f.Upsert(&lu)
-
-	f.cu.SetUpdateErr(build.NewRunStepFailure(errors.New("compilation failed")))
-
-	// Trigger a file event, and make sure that the status reflects the sync.
-	f.addFileEvent("frontend-fw", txtPath, txtChangeTime)
-	f.MustReconcile(types.NamespacedName{Name: "frontend-liveupdate"})
-
-	f.MustGet(types.NamespacedName{Name: "frontend-liveupdate"}, &lu)
-	assert.Nil(t, lu.Status.Failed)
-	if assert.Equal(t, 1, len(lu.Status.Containers)) {
-		assert.Equal(t, "compilation failed", lu.Status.Containers[0].LastExecError)
-	}
-
-	// Make sure there were  exec errors.
-	if assert.NotNil(t, f.st.lastCompletedAction) {
-		assert.Equal(t, "compilation failed",
-			f.st.lastCompletedAction.Error.Error())
-	}
-}
-
 type TestingStore struct {
 	*store.TestingStore
 	ctx                 context.Context
@@ -1045,71 +823,6 @@ func (f *fixture) setupFrontendWithSelector(selector *v1alpha1.LiveUpdateSelecto
 				ImageMap:  "frontend-image-map",
 			}},
 			Selector: *selector,
-			Syncs: []v1alpha1.LiveUpdateSync{
-				{LocalPath: ".", ContainerPath: "/app"},
-			},
-			StopPaths: []string{"stop.txt"},
-		},
-	})
-	f.Create(&v1alpha1.ConfigMap{
-		ObjectMeta: metav1.ObjectMeta{
-			Name: configmap.TriggerQueueName,
-		},
-	})
-}
-
-// Create a frontend DockerCompose LiveUpdate with all objects attached.
-func (f *fixture) setupDockerComposeFrontend() {
-	p, _ := os.Getwd()
-	nowMicro := apis.NowMicro()
-
-	// Create all the objects.
-	f.Create(&v1alpha1.FileWatch{
-		ObjectMeta: metav1.ObjectMeta{Name: "frontend-fw"},
-		Spec: v1alpha1.FileWatchSpec{
-			WatchedPaths: []string{p},
-		},
-		Status: v1alpha1.FileWatchStatus{
-			MonitorStartTime: nowMicro,
-		},
-	})
-	f.Create(&v1alpha1.DockerComposeService{
-		ObjectMeta: metav1.ObjectMeta{Name: "frontend-service"},
-		Status: v1alpha1.DockerComposeServiceStatus{
-			ContainerID: "main-id",
-			ContainerState: &v1alpha1.DockerContainerState{
-				Status:    dockercompose.ContainerStatusRunning,
-				StartedAt: nowMicro,
-			},
-		},
-	})
-	f.Create(&v1alpha1.ImageMap{
-		ObjectMeta: metav1.ObjectMeta{Name: "frontend-image-map"},
-		Status: v1alpha1.ImageMapStatus{
-			Image:            "frontend-image:my-tag",
-			ImageFromCluster: "frontend-image:my-tag",
-			BuildStartTime:   &nowMicro,
-		},
-	})
-	f.Create(&v1alpha1.LiveUpdate{
-		ObjectMeta: metav1.ObjectMeta{
-			Name: "frontend-liveupdate",
-			Annotations: map[string]string{
-				v1alpha1.AnnotationManifest:     "frontend",
-				liveupdate.AnnotationUpdateMode: "auto",
-			},
-		},
-		Spec: v1alpha1.LiveUpdateSpec{
-			BasePath: p,
-			Sources: []v1alpha1.LiveUpdateSource{{
-				FileWatch: "frontend-fw",
-				ImageMap:  "frontend-image-map",
-			}},
-			Selector: v1alpha1.LiveUpdateSelector{
-				DockerCompose: &v1alpha1.LiveUpdateDockerComposeSelector{
-					Service: "frontend-service",
-				},
-			},
 			Syncs: []v1alpha1.LiveUpdateSync{
 				{LocalPath: ".", ContainerPath: "/app"},
 			},

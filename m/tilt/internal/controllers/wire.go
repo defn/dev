@@ -8,8 +8,6 @@ import (
 	"github.com/defn/dev/m/tilt/internal/controllers/core/cmd"
 	"github.com/defn/dev/m/tilt/internal/controllers/core/cmdimage"
 	"github.com/defn/dev/m/tilt/internal/controllers/core/configmap"
-	"github.com/defn/dev/m/tilt/internal/controllers/core/dockercomposelogstream"
-	"github.com/defn/dev/m/tilt/internal/controllers/core/dockercomposeservice"
 	"github.com/defn/dev/m/tilt/internal/controllers/core/dockerimage"
 	"github.com/defn/dev/m/tilt/internal/controllers/core/extension"
 	"github.com/defn/dev/m/tilt/internal/controllers/core/extensionrepo"
@@ -61,9 +59,7 @@ func ProvideControllers(
 	dir *dockerimage.Reconciler,
 	cir *cmdimage.Reconciler,
 	clr *cluster.Reconciler,
-	dcr *dockercomposeservice.Reconciler,
 	imr *imagemap.Reconciler,
-	dclsr *dockercomposelogstream.Reconciler,
 	sr *session.Reconciler,
 ) []Controller {
 	return []Controller{
@@ -85,9 +81,7 @@ func ProvideControllers(
 		dir,
 		cir,
 		clr,
-		dcr,
 		imr,
-		dclsr,
 		sr,
 	}
 }
@@ -115,8 +109,6 @@ var WireSet = wire.NewSet(
 	configmap.WireSet,
 	dockerimage.WireSet,
 	cmdimage.WireSet,
-	dockercomposeservice.WireSet,
 	imagemap.WireSet,
-	dockercomposelogstream.WireSet,
 	session.WireSet,
 )

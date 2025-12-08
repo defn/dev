@@ -11,7 +11,6 @@ import (
 	"github.com/pkg/errors"
 	"go.starlark.net/starlark"
 	"go.starlark.net/syntax"
-	"golang.org/x/mod/semver"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 
 	"github.com/defn/dev/m/tilt/internal/controllers/apis/cmdimage"
@@ -29,7 +28,6 @@ import (
 	"github.com/defn/dev/m/tilt/pkg/apis"
 
 	"github.com/defn/dev/m/tilt/internal/container"
-	"github.com/defn/dev/m/tilt/internal/dockercompose"
 	"github.com/defn/dev/m/tilt/internal/feature"
 	"github.com/defn/dev/m/tilt/internal/k8s"
 	"github.com/defn/dev/m/tilt/internal/ospath"
@@ -61,7 +59,7 @@ import (
 	"github.com/defn/dev/m/tilt/pkg/model"
 )
 
-var unmatchedImageNoConfigsWarning = "We could not find any deployment instructions, e.g. `k8s_yaml` or `docker_compose`.\n" +
+var unmatchedImageNoConfigsWarning = "We could not find any deployment instructions, e.g. `k8s_yaml`.\n" +
 	"Skipping all image builds until we know how to deploy them."
 
 var unmatchedImageAllUnresourcedWarning = "No Kubernetes configs with images found.\n" +
@@ -71,15 +69,13 @@ var unmatchedImageAllUnresourcedWarning = "No Kubernetes configs with images fou
 var pkgInitTime = time.Now()
 
 type resourceSet struct {
-	dc  []*dcResourceSet
 	k8s []*k8sResource
 }
 
 type tiltfileState struct {
 	// set at creation
-	ctx              context.Context
-	dcCli            dockercompose.DockerComposeClient
-	webHost          model.WebHost
+	ctx     context.Context
+	webHost model.WebHost
 	execer           localexec.Execer
 	k8sContextPlugin k8scontext.Plugin
 	versionPlugin    version.Plugin
@@ -102,8 +98,6 @@ type tiltfileState struct {
 	k8s            []*k8sResource
 	k8sByName      map[string]*k8sResource
 	k8sUnresourced []k8s.K8sEntity
-
-	dc dcResourceMap
 
 	k8sResourceOptions []k8sResourceOptions
 	localResources     []*localResource
@@ -157,7 +151,6 @@ type tiltfileState struct {
 
 func newTiltfileState(
 	ctx context.Context,
-	dcCli dockercompose.DockerComposeClient,
 	webHost model.WebHost,
 	execer localexec.Execer,
 	k8sContextPlugin k8scontext.Plugin,
@@ -168,7 +161,6 @@ func newTiltfileState(
 	features feature.FeatureSet) *tiltfileState {
 	return &tiltfileState{
 		ctx:                       ctx,
-		dcCli:                     dcCli,
 		webHost:                   webHost,
 		execer:                    execer,
 		k8sContextPlugin:          k8sContextPlugin,
@@ -179,7 +171,6 @@ func newTiltfileState(
 		buildIndex:                newBuildIndex(),
 		k8sObjectIndex:            tiltfile_k8s.NewState(),
 		k8sByName:                 make(map[string]*k8sResource),
-		dc:                        make(map[string]*dcResourceSet),
 		localByName:               make(map[string]*localResource),
 		usedImages:                make(map[string]bool),
 		logger:                    logger.Get(ctx),
@@ -281,20 +272,6 @@ to your Tiltfile. Otherwise, switch k8s contexts and restart Tilt.`, kubeContext
 		}
 	}
 
-	if len(resources.dc) > 0 {
-		if err := s.validateDockerComposeVersion(); err != nil {
-			return nil, result, err
-		}
-
-		for _, dc := range resources.dc {
-			ms, err := s.translateDC(dc)
-			if err != nil {
-				return nil, result, err
-			}
-			manifests = append(manifests, ms...)
-		}
-	}
-
 	err = s.validateLiveUpdatesForManifests(manifests)
 	if err != nil {
 		return nil, result, err
@@ -359,10 +336,6 @@ const (
 	dockerBuildN     = "docker_build"
 	customBuildN     = "custom_build"
 	defaultRegistryN = "default_registry"
-
-	// docker compose functions
-	dockerComposeN = "docker_compose"
-	dcResourceN    = "dc_resource"
 
 	// k8s functions
 	k8sYamlN                    = "k8s_yaml"
@@ -475,7 +448,7 @@ func (s *tiltfileState) OnExec(t *starlark.Thread, tiltfilePath string, contents
 }
 
 // wrap a builtin such that it's only allowed to run when we have a known safe k8s context
-// (none (e.g., docker-compose), local, or specified by `allow_k8s_contexts`)
+// (local, or specified by `allow_k8s_contexts`)
 func (s *tiltfileState) potentiallyK8sUnsafeBuiltin(f starkit.Function) starkit.Function {
 	return func(thread *starlark.Thread, fn *starlark.Builtin, args starlark.Tuple, kwargs []starlark.Tuple) (starlark.Value, error) {
 		tf, err := starkit.StartTiltfileFromThread(thread)
@@ -547,8 +520,6 @@ func (s *tiltfileState) OnStart(e *starkit.Environment) error {
 		{dockerBuildN, s.dockerBuild},
 		{customBuildN, s.customBuild},
 		{defaultRegistryN, s.defaultRegistry},
-		{dockerComposeN, s.dockerCompose},
-		{dcResourceN, s.dcResource},
 		{k8sYamlN, s.k8sYaml},
 		{filterYamlN, s.filterYaml},
 		{k8sResourceN, s.k8sResource},
@@ -602,18 +573,7 @@ func (s *tiltfileState) assemble() (resourceSet, []k8s.K8sEntity, error) {
 		return resourceSet{}, nil, err
 	}
 
-	err = s.assembleDC()
-	if err != nil {
-		return resourceSet{}, nil, err
-	}
-
-	dcRes := []*dcResourceSet{}
-	for _, resSet := range s.dc {
-		dcRes = append(dcRes, resSet)
-	}
-
 	return resourceSet{
-		dc:  dcRes,
 		k8s: s.k8s,
 	}, s.k8sUnresourced, nil
 }
@@ -622,7 +582,7 @@ func (s *tiltfileState) assemble() (resourceSet, []k8s.K8sEntity, error) {
 //
 // There are 4 mistakes people commonly make if they
 // have unmatched images:
-//  1. They didn't include any Kubernetes or Docker Compose configs at all.
+//  1. They didn't include any Kubernetes configs at all.
 //  2. They included Kubernetes configs, but they're custom resources
 //     and Tilt can't infer the image.
 //  3. They typo'd the image name, and need help finding the right name.
@@ -640,9 +600,7 @@ func (s *tiltfileState) assertAllImagesMatched(us model.UpdateSettings) error {
 		return nil
 	}
 
-	dcSvcCount := s.dc.ServiceCount()
-
-	if dcSvcCount == 0 && len(s.k8s) == 0 && len(s.k8sUnresourced) == 0 {
+	if len(s.k8s) == 0 && len(s.k8sUnresourced) == 0 {
 		return errors.New(unmatchedImageNoConfigsWarning)
 	}
 
@@ -650,11 +608,7 @@ func (s *tiltfileState) assertAllImagesMatched(us model.UpdateSettings) error {
 		return errors.New(unmatchedImageAllUnresourcedWarning)
 	}
 
-	configType := "Kubernetes"
-	if dcSvcCount > 0 {
-		configType = "Docker Compose"
-	}
-	return s.buildIndex.unmatchedImageWarning(unmatchedImages[0], configType)
+	return s.buildIndex.unmatchedImageWarning(unmatchedImages[0], "Kubernetes")
 }
 
 func (s *tiltfileState) assembleImages() error {
@@ -688,73 +642,6 @@ func (s *tiltfileState) assembleImages() error {
 		}
 
 	}
-	return nil
-}
-
-func (s *tiltfileState) assembleDC() error {
-	if s.dc.ServiceCount() > 0 && !container.IsEmptyRegistry(s.defaultReg) {
-		return errors.New("default_registry is not supported with docker compose")
-	}
-
-	for _, resSet := range s.dc {
-		for _, svcName := range resSet.serviceNames {
-			svc := resSet.services[svcName]
-			builder := s.buildIndex.findBuilderForConsumedImage(svc.ImageRef())
-			if builder != nil {
-				// there's a Tilt-managed builder (e.g. docker_build or custom_build) for this image reference, so use that
-				svc.ImageMapDeps = append(svc.ImageMapDeps, builder.ImageMapName())
-			} else {
-				// create a DockerComposeBuild image target and consume it if this service has a build section in YAML
-				err := s.maybeAddDockerComposeImageBuilder(svc)
-				if err != nil {
-					return err
-				}
-			}
-		}
-	}
-	return nil
-}
-
-func (s *tiltfileState) maybeAddDockerComposeImageBuilder(svc *dcService) error {
-	build := svc.ServiceConfig.Build
-	if build == nil || build.Context == "" {
-		// this Docker Compose service has no build info - it relies purely on
-		// a pre-existing image (e.g. from a registry)
-		return nil
-	}
-
-	buildContext := build.Context
-	dfPath := build.Dockerfile
-	if dfPath == "" {
-		// Per Compose spec, the default is "Dockerfile" (in the context dir)
-		dfPath = "Dockerfile"
-	}
-
-	// Only populate dbBuildPath if it's an absolute path, not if it's a git url.
-	dbBuildPath := ""
-	if filepath.IsAbs(buildContext) {
-		dbBuildPath = buildContext
-	}
-
-	if !filepath.IsAbs(dfPath) && dbBuildPath != "" {
-		dfPath = filepath.Join(dbBuildPath, dfPath)
-	}
-
-	imageRef := svc.ImageRef()
-	err := s.buildIndex.addImage(
-		&dockerImage{
-			buildType:                     DockerComposeBuild,
-			configurationRef:              container.NewRefSelector(imageRef),
-			dockerComposeService:          svc.ServiceName,
-			dockerComposeLocalVolumePaths: svc.MountedLocalDirs,
-			dbBuildPath:                   dbBuildPath,
-			dbDockerfilePath:              dfPath,
-		})
-	if err != nil {
-		return err
-	}
-	b := s.buildIndex.findBuilderForConsumedImage(imageRef)
-	svc.ImageMapDeps = append(svc.ImageMapDeps, b.ImageMapName())
 	return nil
 }
 
@@ -1337,24 +1224,6 @@ func (s *tiltfileState) validateLiveUpdate(iTarget model.ImageTarget, g model.Ta
 	return nil
 }
 
-func (s *tiltfileState) validateDockerComposeVersion() error {
-	const minimumDockerComposeVersion = "v1.28.3"
-
-	dcVersion, _, err := s.dcCli.Version(s.ctx)
-	if err != nil {
-		logger.Get(s.ctx).Debugf("Failed to determine Docker Compose version: %v", err)
-	} else if semver.Compare(dcVersion, minimumDockerComposeVersion) == -1 {
-		return fmt.Errorf(
-			"Tilt requires Docker Compose %s+ (you have %s). Please upgrade and re-launch Tilt.",
-			minimumDockerComposeVersion,
-			dcVersion)
-	} else if semver.Major(dcVersion) == "v2" && semver.Compare(dcVersion, "v2.2") < 0 {
-		logger.Get(s.ctx).Warnf("Using Docker Compose %s (version < 2.2) may result in errors or broken functionality.\n"+
-			"For best results, we recommend upgrading to Docker Compose >= v2.2.0.", dcVersion)
-	}
-	return nil
-}
-
 func maybeRestartContainerDeprecationError(manifests []model.Manifest) error {
 	var needsError []model.ManifestName
 	for _, m := range manifests {
@@ -1371,7 +1240,6 @@ func maybeRestartContainerDeprecationError(manifests []model.Manifest) error {
 func needsRestartContainerDeprecationError(m model.Manifest) bool {
 	// 7/2/20: we've deprecated restart_container() in favor of the restart_process plugin.
 	// If this is a k8s resource with a restart_container step, throw a deprecation error.
-	// (restart_container is still allowed for Docker Compose resources)
 	if !m.IsK8s() {
 		return false
 	}
@@ -1477,12 +1345,6 @@ func (s *tiltfileState) imgTargetsForDepsHelper(mn model.ManifestName, imageMapD
 				Deps:         image.customDeps,
 			}
 			iTarget = iTarget.WithBuildDetails(r)
-		case DockerComposeBuild:
-			bd := model.DockerComposeBuild{
-				Service: image.dockerComposeService,
-				Context: image.dbBuildPath,
-			}
-			iTarget = iTarget.WithBuildDetails(bd)
 		case UnknownBuild:
 			return nil, fmt.Errorf("no build info for image %s", image.configurationRef.RefFamiliarString())
 		}
@@ -1501,33 +1363,6 @@ func (s *tiltfileState) imgTargetsForDepsHelper(mn model.ManifestName, imageMapD
 		claimStatus[imName] = claimFinished
 	}
 	return iTargets, nil
-}
-
-func (s *tiltfileState) translateDC(dc *dcResourceSet) ([]model.Manifest, error) {
-	var result []model.Manifest
-
-	for _, name := range dc.serviceNames {
-		svc := dc.services[name]
-		iTargets, err := s.imgTargetsForDeps(model.ManifestName(svc.Name), svc.ImageMapDeps)
-		if err != nil {
-			return nil, errors.Wrapf(err, "getting image build info for %s", svc.Name)
-		}
-
-		for _, iTarg := range iTargets {
-			if iTarg.OverrideCommand != nil {
-				return nil, fmt.Errorf("docker_build/custom_build.entrypoint not supported for Docker Compose resources")
-			}
-		}
-
-		m, err := s.dcServiceToManifest(svc, dc, iTargets)
-		if err != nil {
-			return nil, err
-		}
-
-		result = append(result, m)
-	}
-
-	return result, nil
 }
 
 type claim int
@@ -1721,18 +1556,6 @@ func (s *tiltfileState) ignoresForImage(image *dockerImage) (contextIgnores []v1
 		// Tiltfile, meaning it's running with a stale version of the
 		// Dockerfile
 		fileWatchIgnores = append(fileWatchIgnores, v1alpha1.IgnoreDef{BasePath: image.dbDockerfilePath})
-	}
-
-	if image.Type() == DockerComposeBuild {
-		// Docker Compose local volumes are mounted into the running container,
-		// so we don't want to watch these paths, as that'd trigger rebuilds
-		// instead of the desired Live Update-ish behavior
-		// note that they ARE eligible for usage within the Docker context, as
-		// it's a common pattern to include some files (e.g. config) in the
-		// image but then mount a local volume on top of it for local dev
-		for _, p := range image.dockerComposeLocalVolumePaths {
-			fileWatchIgnores = append(fileWatchIgnores, v1alpha1.IgnoreDef{BasePath: p})
-		}
 	}
 
 	return

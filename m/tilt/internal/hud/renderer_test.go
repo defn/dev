@@ -10,7 +10,6 @@ import (
 
 	"github.com/stretchr/testify/assert"
 
-	"github.com/defn/dev/m/tilt/internal/container"
 	"github.com/defn/dev/m/tilt/internal/hud/view"
 	"github.com/defn/dev/m/tilt/internal/rty"
 	"github.com/defn/dev/m/tilt/internal/store"
@@ -21,8 +20,6 @@ import (
 
 	"github.com/gdamore/tcell"
 )
-
-const testCID = container.ID("beep-boop")
 
 var clockForTest = func() time.Time { return time.Date(2017, 1, 1, 12, 0, 0, 0, time.UTC) }
 
@@ -479,85 +476,6 @@ func TestBuildHistory(t *testing.T) {
 	})
 	vs := fakeViewState(1, view.CollapseNo)
 	rtf.run("multiple build history entries", 80, 20, v, vs)
-}
-
-func TestDockerComposeUpExpanded(t *testing.T) {
-	rtf := newRendererTestFixture(t)
-
-	now := time.Now()
-	v := newView(view.Resource{
-		Name:         "snack",
-		ResourceInfo: view.NewDCResourceInfo("running", testCID, "snack:dc", now.Add(-5*time.Second), v1alpha1.RuntimeStatusOK),
-		Endpoints:    []string{"http://localhost:3000"},
-		CurrentBuild: model.BuildRecord{
-			StartTime: now.Add(-5 * time.Second),
-			Reason:    model.BuildReasonFlagChangedFiles,
-		},
-	})
-	v.LogReader = newSpanLogReader("snack", "snack:dc", "hellllo")
-
-	vs := fakeViewState(1, view.CollapseNo)
-	rtf.run("docker-compose up expanded", 80, 20, v, vs)
-}
-
-func TestStatusBarDCRebuild(t *testing.T) {
-	rtf := newRendererTestFixture(t)
-
-	now := time.Now()
-	v := newView(view.Resource{
-		Name:         "snack",
-		ResourceInfo: view.NewDCResourceInfo("exited", testCID, "snack:dc", now.Add(-5*time.Second), v1alpha1.RuntimeStatusError),
-		CurrentBuild: model.BuildRecord{
-			StartTime: now.Add(-5 * time.Second),
-			Reason:    model.BuildReasonFlagChangedFiles,
-		},
-	})
-	v.LogReader = newSpanLogReader("snack", "snack:dc", "hellllo")
-
-	vs := fakeViewState(1, view.CollapseYes)
-	rtf.run("status bar after intentional DC restart", 60, 20, v, vs)
-}
-
-func TestDetectDCCrashExpanded(t *testing.T) {
-	rtf := newRendererTestFixture(t)
-
-	now := time.Now()
-	v := newView(view.Resource{
-		Name:         "snack",
-		ResourceInfo: view.NewDCResourceInfo("exited", testCID, "snack:dc", now.Add(-5*time.Second), v1alpha1.RuntimeStatusError),
-	})
-	v.LogReader = newSpanLogReader("snack", "snack:dc", "hi im a crash")
-
-	vs := fakeViewState(1, view.CollapseNo)
-	rtf.run("detected docker compose build crash expanded", 80, 20, v, vs)
-}
-
-func TestDetectDCCrashNotExpanded(t *testing.T) {
-	rtf := newRendererTestFixture(t)
-
-	now := time.Now()
-	v := newView(view.Resource{
-		Name:         "snack",
-		ResourceInfo: view.NewDCResourceInfo("exited", testCID, "snack:dc", now.Add(-5*time.Second), v1alpha1.RuntimeStatusError),
-	})
-	v.LogReader = newSpanLogReader("snack", "snack:dc", "hi im a crash")
-
-	vs := fakeViewState(1, view.CollapseYes)
-	rtf.run("detected docker compose build crash not expanded", 80, 20, v, vs)
-}
-
-func TestDetectDCCrashAutoExpand(t *testing.T) {
-	rtf := newRendererTestFixture(t)
-
-	now := time.Now()
-	v := newView(view.Resource{
-		Name:         "snack",
-		ResourceInfo: view.NewDCResourceInfo("exited", testCID, "snack:dc", now.Add(-5*time.Second), v1alpha1.RuntimeStatusError),
-	})
-	v.LogReader = newSpanLogReader("snack", "snack:dc", "hi im a crash")
-
-	vs := fakeViewState(1, view.CollapseAuto)
-	rtf.run("detected docker compose build crash auto expand", 80, 20, v, vs)
 }
 
 func TestTiltfileResource(t *testing.T) {

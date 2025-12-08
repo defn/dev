@@ -5,7 +5,6 @@ import (
 	"sort"
 	"sync"
 
-	"github.com/defn/dev/m/tilt/internal/dockercompose"
 	"github.com/defn/dev/m/tilt/internal/hud/view"
 	"github.com/defn/dev/m/tilt/internal/k8s"
 	"github.com/defn/dev/m/tilt/internal/ospath"
@@ -119,9 +118,6 @@ func tiltfileResourceView(ms *store.ManifestState) view.Resource {
 func resourceInfoView(mt *store.ManifestTarget) view.ResourceInfoView {
 	runStatus := mt.RuntimeStatus()
 	switch state := mt.State.RuntimeState.(type) {
-	case dockercompose.State:
-		return view.NewDCResourceInfo(
-			state.ContainerState.Status, state.ContainerID, state.SpanID, state.ContainerState.StartedAt.Time, runStatus)
 	case store.K8sRuntimeState:
 		if mt.Manifest.PodReadinessMode() == model.PodReadinessIgnore {
 			return view.YAMLResourceInfo{

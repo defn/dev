@@ -12,7 +12,6 @@ import (
 
 	"github.com/defn/dev/m/tilt/internal/analytics"
 	"github.com/defn/dev/m/tilt/internal/controllers/apiset"
-	"github.com/defn/dev/m/tilt/internal/dockercompose"
 	"github.com/defn/dev/m/tilt/internal/feature"
 	"github.com/defn/dev/m/tilt/internal/k8s"
 	"github.com/defn/dev/m/tilt/internal/localexec"
@@ -70,8 +69,6 @@ func (r TiltfileLoadResult) HasOrchestrator(orc model.Orchestrator) bool {
 	for _, manifest := range r.Manifests {
 		if manifest.IsK8s() && orc == model.OrchestratorK8s {
 			return true
-		} else if manifest.IsDC() && orc == model.OrchestratorDC {
-			return true
 		}
 	}
 	return false
@@ -102,7 +99,6 @@ func ProvideTiltfileLoader(
 	configPlugin *config.Plugin,
 	extensionPlugin *tiltextension.Plugin,
 	ciSettingsPlugin cisettings.Plugin,
-	dcCli dockercompose.DockerComposeClient,
 	webHost model.WebHost,
 	execer localexec.Execer,
 	fDefaults feature.Defaults,
@@ -114,7 +110,6 @@ func ProvideTiltfileLoader(
 		configPlugin:     configPlugin,
 		extensionPlugin:  extensionPlugin,
 		ciSettingsPlugin: ciSettingsPlugin,
-		dcCli:            dcCli,
 		webHost:          webHost,
 		execer:           execer,
 		fDefaults:        fDefaults,
@@ -124,7 +119,6 @@ func ProvideTiltfileLoader(
 
 type tiltfileLoader struct {
 	analytics *analytics.TiltAnalytics
-	dcCli     dockercompose.DockerComposeClient
 	webHost   model.WebHost
 	execer    localexec.Execer
 
@@ -173,7 +167,7 @@ func (tfl tiltfileLoader) Load(ctx context.Context, tf *corev1alpha1.Tiltfile, p
 
 	tlr.Tiltignore = tiltignore
 
-	s := newTiltfileState(ctx, tfl.dcCli, tfl.webHost, tfl.execer, tfl.k8sContextPlugin, tfl.versionPlugin,
+	s := newTiltfileState(ctx, tfl.webHost, tfl.execer, tfl.k8sContextPlugin, tfl.versionPlugin,
 		tfl.configPlugin, tfl.extensionPlugin, tfl.ciSettingsPlugin, feature.FromDefaults(tfl.fDefaults))
 
 	manifests, result, err := s.loadManifests(tf)

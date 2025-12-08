@@ -177,7 +177,6 @@ func (in *LiveUpdate) Validate(ctx context.Context) field.ErrorList {
 
 	selectorPath := field.NewPath("spec.selector")
 	kSelector := in.Spec.Selector.Kubernetes
-	dcSelector := in.Spec.Selector.DockerCompose
 	if kSelector != nil {
 		p := selectorPath.Child("kubernetes")
 		if kSelector.DiscoveryName == "" {
@@ -200,11 +199,6 @@ func (in *LiveUpdate) Validate(ctx context.Context) field.ErrorList {
 				errors = append(errors,
 					field.Forbidden(f, "cannot specify more than one of image, imageMap, or containerName"))
 			}
-		}
-	} else if dcSelector != nil {
-		p := selectorPath.Child("dockerCompose")
-		if dcSelector.Service == "" {
-			errors = append(errors, field.Required(p.Child("service"), "DockerCompose service name is required"))
 		}
 	}
 
@@ -267,13 +261,12 @@ type LiveUpdateSource struct {
 // Specifies how to select containers to live update.
 //
 // Every live update must be associated with some object for finding
-// containers. In the future, we expect there to be other types
-// of container discovery objects (like Docker Compose container discovery).
+// containers.
 type LiveUpdateSelector struct {
 	// Finds containers in Kubernetes.
 	Kubernetes *LiveUpdateKubernetesSelector `json:"kubernetes,omitempty" protobuf:"bytes,1,opt,name=kubernetes"`
 
-	// Finds containers in Docker Compose.
+	// DockerCompose - stub field for generated.pb.go compatibility (docker-compose support removed)
 	DockerCompose *LiveUpdateDockerComposeSelector `json:"dockerCompose,omitempty" protobuf:"bytes,2,opt,name=dockerCompose"`
 }
 
@@ -314,16 +307,6 @@ type LiveUpdateKubernetesSelector struct {
 	//
 	// +optional
 	ImageMapName string `json:"imageMapName,omitempty" protobuf:"bytes,5,opt,name=imageMapName"`
-}
-
-// Specifies how to select containers to live update inside Docker Compose.
-type LiveUpdateDockerComposeSelector struct {
-	// The name of a DockerComposeService object.
-	//
-	// For simple projects, this is usually the same as the service
-	// name in the docker-compose.yml file. (But it doesn't necessarily
-	// have to be.)
-	Service string `json:"service" protobuf:"bytes,1,opt,name=service"`
 }
 
 // Determines how a local path maps into a container image.

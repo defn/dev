@@ -8,7 +8,6 @@ go_library(
         "build_status.go",
         "ci.go",
         "cmd.go",
-        "docker_compose_target.go",
         "docker_prune.go",
         "extractors.go",
         "globalyaml.go",

@@ -166,31 +166,6 @@ func TestK8sDependsOnCluster(t *testing.T) {
 	f.assertNextTargetToBuild("k8s1")
 }
 
-func TestK8sDependsOnCluster_TwoClusters(t *testing.T) {
-	f := newTestFixture(t)
-
-	f.st.Clusters["default"].Status.Error = "connection error"
-
-	_ = f.upsertK8sManifest("k8s1")
-	dc1 := f.upsertDCManifest("dc1")
-	f.assertNextTargetToBuild("dc1")
-	dc1.State.AddCompletedBuild(model.BuildRecord{
-		StartTime:  time.Now(),
-		FinishTime: time.Now(),
-	})
-	f.assertNoTargetNextToBuild()
-
-	f.assertHoldOnRefs("k8s1", store.HoldReasonCluster, v1alpha1.UIResourceStateWaitingOnRef{
-		Group:      "tilt.dev",
-		APIVersion: "v1alpha1",
-		Kind:       "Cluster",
-		Name:       "default",
-	})
-
-	f.st.Clusters["default"].Status.Error = ""
-	f.assertNextTargetToBuild("k8s1")
-}
-
 func TestCurrentlyBuildingLocalResourceDisablesK8sScheduling(t *testing.T) {
 	f := newTestFixture(t)
 
@@ -783,14 +758,6 @@ func (f *testFixture) upsertK8sManifest(name model.ManifestName, opts ...manifes
 		b = o(b)
 	}
 	return f.upsertManifest(b.WithK8sYAML(testyaml.SanchoYAML).Build())
-}
-
-func (f *testFixture) upsertDCManifest(name model.ManifestName, opts ...manifestOption) *store.ManifestTarget {
-	b := manifestbuilder.New(f, name)
-	for _, o := range opts {
-		b = o(b)
-	}
-	return f.upsertManifest(b.WithDockerCompose().Build())
 }
 
 func (f *testFixture) upsertLocalManifest(name model.ManifestName, opts ...manifestOption) *store.ManifestTarget {

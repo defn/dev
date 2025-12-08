@@ -19,11 +19,6 @@ func toAPITargetSpec(spec model.TargetSpec) (v1alpha1.UIResourceTargetSpec, erro
 			Type:          v1alpha1.UIResourceTargetTypeImage,
 			HasLiveUpdate: !liveupdate.IsEmptySpec(typ.LiveUpdateSpec),
 		}, nil
-	case model.DockerComposeTarget:
-		return v1alpha1.UIResourceTargetSpec{
-			ID:   typ.ID().String(),
-			Type: v1alpha1.UIResourceTargetTypeDockerCompose,
-		}, nil
 	case model.K8sTarget:
 		return v1alpha1.UIResourceTargetSpec{
 			ID:   typ.ID().String(),
