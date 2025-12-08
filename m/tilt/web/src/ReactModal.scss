@@ -1,0 +1,18 @@
+@import "constants";
+
+.ReactModal__Overlay {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: -$statusbar-height; // Visually center
+  background-color: rgba($color-gray-10, $translucent) !important;
+  z-index: $z-modal;
+}
+
+.ReactModal__Content {
+  padding: 0;
+  width: $modal-width;
+  background-color: $color-white;
+  color: $color-gray-20;
+  box-shadow: -10px 10px 0px 0px rgba($color-gray-10, $translucent-ish);
+}

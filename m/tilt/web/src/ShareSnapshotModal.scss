@@ -1,0 +1,173 @@
+@import "constants";
+@import "ReactModal";
+
+.ReactModal__Content.ShareSnapshotModal {
+  width: 800px;
+}
+.ShareSnapshotModal-title {
+  margin: 0;
+  font-family: $font-sans-serif;
+  font-size: $font-size-small;
+  text-transform: uppercase;
+  background-color: $color-gray-50;
+  color: $color-white;
+  padding-top: calc($spacing-unit / 2);
+  padding-bottom: calc($spacing-unit / 2);
+  padding-left: $spacing-unit;
+  padding-right: $spacing-unit;
+}
+.ShareSnapshotModal-description {
+  font-family: $font-sans-serif;
+  line-height: 1.75;
+  margin-top: $spacing-unit * 1.5;
+  margin-left: $spacing-unit * 3;
+  // Get the line break where I want it:
+  margin-right: $spacing-unit * 4;
+}
+
+// Learn about Snapshots
+.ShareSnapshotModal-intro {
+  display: flex;
+  margin-top: $spacing-unit * 1.5;
+  margin-left: $spacing-unit * 2;
+  margin-right: $spacing-unit * 2;
+}
+.ShareSnapshotModal-introImage {
+  width: 200px;
+}
+.ShareSnapshotModal-details {
+ margin-left: $spacing-unit * 1.5;
+}
+.ShareSnapshotModal-detailsList {
+  list-style: none;
+  position: relative; // Anchor the list bullets
+}
+.ShareSnapshotModal-detailsList > li {
+  margin-bottom: calc($spacing-unit / 3);
+}
+.ShareSnapshotModal-detailsList > li::before {
+  content: "";
+  width: $spacing-unit;
+  height: $spacing-unit;
+  position: absolute;
+  left: -$spacing-unit;
+  background-image:url('data:image/svg+xml;utf8,<svg fill="none" height="8" viewBox="0 0 6 8" width="6" xmlns="http://www.w3.org/2000/svg"><path d="m6 4-5.25 3.4641v-6.928202z" fill="%23c4c4c4"/></svg>');
+  background-repeat: no-repeat;
+  background-position: center;
+}
+.ShareSnapshotModal-docsLink {
+  display: inline-block;
+  text-decoration: none;
+  background-color: $color-off-white;
+  margin-top: calc($spacing-unit / 4);
+  padding-left: calc($spacing-unit / 2);
+  padding-right: calc($spacing-unit / 2);
+  line-height: 1.75;
+}
+.ShareSnapshotModal-docsLink:hover {
+  text-decoration: underline;
+}
+.ShareSnapshotModal-getStarted {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  border-top: 1px dotted $color-gray-lightest;
+  padding-left: calc($spacing-unit / 2);
+  padding-right: calc($spacing-unit / 2);
+  // This visually centers the button, whose shadow throws things off a bit:
+  padding-top: $spacing-unit * 0.6;
+  padding-bottom: $spacing-unit * 0.8;
+}
+
+
+// Create a Snapshot Link
+.ShareSnapshotModal-shareLinkWrap {
+  background-color: $color-off-white;
+  margin-top: $spacing-unit;
+  padding-top: $spacing-unit * 1.5;
+  padding-bottom: $spacing-unit * 0.8;
+  padding-left: $spacing-unit * 2;
+  padding-right: $spacing-unit * 2;
+}
+.ShareSnapshotModal-shareLink {
+  display: flex;
+}
+.ShareSnapshotModal-shareLink-urlBox {
+  background-color: $color-white;
+  border: 1px solid $color-gray-lightest;
+  padding-top: calc($spacing-unit / 6);
+  padding-bottom: calc($spacing-unit / 6);
+  padding-left: calc($spacing-unit / 3);
+  padding-right: calc($spacing-unit / 3);
+  box-sizing: border-box;
+  display: inline-block;
+  flex-grow: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.ShareSnapshotModal-shareLink-url {
+  user-select: all;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.ShareSnapshotModal-shareLink-placeholder {
+  color: $color-gray-lightest;
+}
+.ShareSnapshotModal-shareLinkInfo {
+  display: flex;
+  justify-content: space-between;
+  margin-top: $spacing-unit * 0.3;
+}
+
+// Tilt Cloud Info
+.ShareSnapshotModal-manageSnapshots {
+  font-family: $font-sans-serif;
+  font-size: $font-size-small;
+  margin-top: $spacing-unit;
+  margin-bottom: $spacing-unit;
+  margin-left: $spacing-unit * 3;
+  margin-right: $spacing-unit * 3;
+}
+
+// Button Styles
+.ShareSnapshotModal-button {
+  cursor: pointer;
+  font-family: $font-sans-serif;
+  text-transform: uppercase;
+  color: $color-white;
+  border: 0;
+  padding-top: calc($spacing-unit / 3);
+  padding-bottom: calc($spacing-unit / 3);
+  padding-left: calc($spacing-unit / 2);
+  padding-right: calc($spacing-unit / 2);
+  text-decoration: none;
+  transition: color 300ms;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.ShareSnapshotModal-button--inline {
+  font-size: $font-size-smallest;
+  background-color: $color-gray-20;
+  min-width: 95px; // Don't let button text wrap
+  box-sizing: border-box;
+}
+.ShareSnapshotModal-button--inline:hover {
+  color: $color-blue;
+}
+.ShareSnapshotModal-button--cta {
+  font-size: $font-size-small;
+  background-color: $color-blue;
+  box-shadow: -5px 5px 0 0 $color-gray-30;
+  margin-left: $spacing-unit;
+  transition-property: box-shadow;
+  transition-duration: 0.3s;
+  transition-timing-function: linear;
+}
+.ShareSnapshotModal-button--cta:hover {
+  box-shadow: -3px 3px 0 0 $color-gray-30;
+}
+.ShareSnapshotModal-button--cta:active {
+  box-shadow: -1px 1px 0 0 $color-gray-30;
+}

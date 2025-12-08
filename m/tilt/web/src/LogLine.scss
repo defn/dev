@@ -1,0 +1,138 @@
+// We're using CSS here because thousands of `LogLine` in a view can really slow rendering.
+// (styled-components wraps each React component with another, adding non-trivial overhead.)
+@import "constants";
+
+:root {
+  // to enable easy programmatic control of font scaling, the LogPaneRoot defines
+  // the absolute font size, and then scaling is controlled via a CSS variable, which
+  // is attached at the root so that it can be trivially manipulated via JS
+  // WARNING: this is relied upon by LogsFontSize component!
+  --log-font-scale: 100%;
+}
+
+.LogLine {
+  display: flex;
+  position: relative;
+  font-size: var(--log-font-scale);
+
+  &.is-highlighted {
+    background-color: rgba($color-blue, $translucent);
+  }
+
+  &.is-buildEvent-init {
+    background-color: $color-gray-30;
+    text-align: right;
+    padding-right: $spacing-unit;
+    border-top: 1px solid rgba($color-gray-50, $translucent);
+    border-bottom: 1px solid $color-blue-dark;
+    
+    &.is-sticky {
+      position: sticky;
+      top: 0;
+      z-index: 1;
+    }
+  }
+  &.is-buildEvent-fallback {
+    background-color: $color-gray-darker;
+  }
+
+  &.is-startOfAlert {
+    margin-top: $spacing-unit * 1.5;
+  }
+  &.is-endOfAlert {
+    padding-bottom: $spacing-unit * 0.5;
+    margin-bottom: $spacing-unit * 0.5;
+    border-bottom: 1px solid $color-gray-darker;
+  }
+}
+
+.LogLine:not(.is-buildEvent) + .LogLine.is-buildEvent {
+  margin-top: 8px;
+}
+.LogLine.is-buildEvent + .LogLine:not(.is-buildEvent) > .LogLine-content,
+.LogLine.is-buildEvent + .LogLine:not(.is-buildEvent) > .logLinePrefix {
+  padding-top: 8px;
+}
+
+// Make spacing around "header" text more generous for legibility
+// We avoid padding on the parent .LogLine, lest we squish .logLinePrefix
+.LogLine.is-buildEvent-init .LogLine-content {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+.LogLine:not(.is-buildEvent-fallback) + .LogLine.is-buildEvent-fallback .LogLine-content {
+  padding-top: 8px;
+}
+.LogLine.is-buildEvent-fallback .LogLine-content {
+  padding-bottom: 8px;
+}
+.LogLine.is-buildEvent-fallback + .LogLine.is-buildEvent-fallback .LogLine-content {
+  margin-top: -8px;
+}
+
+.LogLine-alertNav {
+  position: absolute;
+  display: block;
+  color: $color-gray-lightest;
+  position: absolute;
+  top: $spacing-unit * -1;
+  left: $spacing-unit * 0.5;
+  cursor: pointer;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  transition: color 300ms ease, border-color 300ms ease;
+  padding: 4px $spacing-unit * 0.25;
+  
+  &:hover {
+    color: $color-blue;
+    border-color: $color-blue;
+  }
+}
+
+.logLinePrefix {
+  user-select: none;
+  width: $tabnav-width;
+  box-sizing: border-box;
+  background-color: $color-gray-darker;
+  color: $color-gray-lightest;
+  padding-left: $spacing-unit * 0.5;
+  padding-right: $spacing-unit * 0.5;
+  text-align: right;
+  flex-shrink: 0;
+  
+  // Truncate long text:
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+
+  .LogLine.is-contextChange > & {
+    // Border shouldn't add height:
+    margin-top: -$logLine-separator-height;
+    border-top: $logLine-separator-height solid $color-gray-30;
+  }
+  .LogLine.is-buildEvent-init > & {
+    visibility: hidden;
+  }
+}
+
+
+.LogLine-content {
+  white-space: pre-wrap;
+  padding-left: $spacing-unit * 0.6;
+  flex: 1;
+  border-left: $logLine-separator-height solid $color-gray-30;
+  overflow-wrap: anywhere;
+
+  // A left border draws your eye to notable log lines
+  // Placed right of the prefix, so it's always just next to the log text
+  .LogLine.is-warning & {
+    border-left: $logLine-gutter-width solid $color-yellow;
+  }
+  .LogLine.is-error & {
+    border-left: $logLine-gutter-width solid $color-red;
+  }
+  .LogLine.is-buildEvent-fallback & {
+    border-left: $logLine-gutter-width solid $color-blue-dark;
+  }
+}

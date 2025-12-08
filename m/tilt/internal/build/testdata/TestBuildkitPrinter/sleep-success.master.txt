@@ -1,0 +1,4 @@
+[1/2] FROM docker.io/library/busybox
+[2/2] RUN sleep 5
+[2/2] RUN sleep 5 [done: 5.263s]
+exporting to image

@@ -1,0 +1,14 @@
+# -*- mode: Python -*-
+
+include('../Tiltfile')
+
+k8s_yaml('deployment.yaml')
+
+docker_build('gcr.io/windmill-test-containers/integration/onewatchexec',
+             '.',
+             live_update=[
+               sync('.', '/app'),
+               run('cp /app/source.txt /app/index.html'),
+             ])
+
+k8s_resource('onewatchexec', port_forwards=31234)

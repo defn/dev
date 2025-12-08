@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: onewatchexec
+  namespace: tilt-integration
+  labels:
+    app: onewatchexec
+spec:
+  selector:
+    matchLabels:
+      app: onewatchexec
+  template:
+    metadata:
+      labels:
+        app: onewatchexec
+    spec:
+      containers:
+      - name: onewatchexec
+        image: gcr.io/windmill-test-containers/integration/onewatchexec
+        ports:
+        - containerPort: 5000

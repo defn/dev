@@ -1,0 +1,230 @@
+package config
+
+import (
+	"bytes"
+	"fmt"
+	"os"
+	"strings"
+
+	jsoniter "github.com/json-iterator/go"
+	"github.com/pkg/errors"
+	flag "github.com/spf13/pflag"
+	"go.starlark.net/starlark"
+
+	"github.com/tilt-dev/tilt/internal/tiltfile/starkit"
+)
+
+type configValue interface {
+	flag.Value
+	starlark() starlark.Value
+	setFromInterface(interface{}) error
+	IsSet() bool
+}
+
+type configMap map[string]configValue
+
+type configSetting struct {
+	newValue func() configValue
+	usage    string
+}
+
+type ConfigDef struct {
+	positionalSettingName string
+	configSettings        map[string]configSetting
+}
+
+func (cm configMap) toStarlark() (starlark.Mapping, error) {
+	ret := starlark.NewDict(len(cm))
+	for k, v := range cm {
+		err := ret.SetKey(starlark.String(k), v.starlark())
+		if err != nil {
+			return nil, err
+		}
+	}
+	return ret, nil
+}
+
+// merges settings from config and settings from args, with settings from args trumping
+func mergeConfigMaps(settingsFromConfig, settingsFromArgs configMap) configMap {
+	ret := make(configMap)
+	for k, v := range settingsFromConfig {
+		ret[k] = v
+	}
+
+	for k, v := range settingsFromArgs {
+		if v.IsSet() {
+			ret[k] = v
+		}
+	}
+
+	return ret
+}
+
+// parse any args and merge them into the config
+func (cd ConfigDef) incorporateArgs(config configMap, args []string) (ret configMap, output string, err error) {
+	var settingsFromArgs configMap
+	settingsFromArgs, output, err = cd.parseArgs(args)
+	if err != nil {
+		return nil, output, fmt.Errorf("invalid Tiltfile config args: %v", err)
+	}
+
+	config = mergeConfigMaps(config, settingsFromArgs)
+
+	return config, output, nil
+}
+
+func (cd ConfigDef) parse(configPath string, args []string) (v starlark.Value, output string, err error) {
+	config, err := cd.readFromFile(configPath)
+	if err != nil {
+		return starlark.None, "", err
+	}
+
+	config, output, err = cd.incorporateArgs(config, args)
+	if err != nil {
+		return starlark.None, output, err
+	}
+
+	ret, err := config.toStarlark()
+	if err != nil {
+		return nil, output, err
+	}
+
+	return ret, output, nil
+}
+
+// parse command-line args
+func (cd ConfigDef) parseArgs(args []string) (ret configMap, output string, err error) {
+	fs := flag.NewFlagSet("", flag.ContinueOnError)
+	w := &bytes.Buffer{}
+	fs.SetOutput(w)
+
+	ret = make(configMap)
+	for name, def := range cd.configSettings {
+		ret[name] = def.newValue()
+		if name == cd.positionalSettingName {
+			continue
+		}
+		fs.Var(ret[name], name, def.usage)
+		// for bools, make "--foo" equal to "--foo true"
+		if _, ok := ret[name].(*boolSetting); ok {
+			fs.Lookup(name).NoOptDefVal = "true"
+		}
+	}
+
+	err = fs.Parse(args)
+	if err != nil {
+		usage := fs.FlagUsagesWrapped(80)
+		if strings.TrimSpace(usage) != "" {
+			usage = "\nUsage:\n" + usage
+		}
+		return nil, w.String(), fmt.Errorf("%v%s", err, usage)
+	}
+
+	if len(fs.Args()) > 0 {
+		if cd.positionalSettingName == "" {
+			return nil, w.String(), fmt.Errorf(
+				"positional CLI args (%q) were specified, but none were expected.\n"+
+					"See https://docs.tilt.dev/tiltfile_config.html#positional-arguments for examples.", strings.Join(fs.Args(), " "))
+		} else {
+			for _, arg := range fs.Args() {
+				err := ret[cd.positionalSettingName].Set(arg)
+				if err != nil {
+					return nil, w.String(), fmt.Errorf("invalid positional args (%s): %v", cd.positionalSettingName, err)
+				}
+			}
+		}
+	}
+
+	return ret, w.String(), nil
+}
+
+// parse settings from the config file
+func (cd ConfigDef) readFromFile(tiltConfigPath string) (ret configMap, err error) {
+	ret = make(configMap)
+	r, err := os.Open(tiltConfigPath)
+	if err != nil {
+		if os.IsNotExist(err) {
+			return ret, nil
+		}
+		return nil, errors.Wrapf(err, "error opening %s", tiltConfigPath)
+	}
+	defer func() {
+		_ = r.Close()
+	}()
+
+	m := make(map[string]interface{})
+	err = jsoniter.NewDecoder(r).Decode(&m)
+	if err != nil {
+		return nil, errors.Wrapf(err, "error parsing json from %s", tiltConfigPath)
+	}
+
+	for k, v := range m {
+		def, ok := cd.configSettings[k]
+		if !ok {
+			return nil, fmt.Errorf("%s specified unknown setting name '%s'", tiltConfigPath, k)
+		}
+		ret[k] = def.newValue()
+		err = ret[k].setFromInterface(v)
+		if err != nil {
+			return nil, errors.Wrapf(err, "%s specified invalid value for setting %s", tiltConfigPath, k)
+		}
+	}
+	return ret, nil
+}
+
+// makes a new builtin with the given configValue constructor
+// newConfigValue: a constructor for the `configValue` that we're making a function for
+//
+//	(it's the same logic for all types, except for the `configValue` that gets saved)
+func configSettingDefinitionBuiltin(newConfigValue func() configValue) starkit.Function {
+	return func(thread *starlark.Thread, fn *starlark.Builtin, args starlark.Tuple, kwargs []starlark.Tuple) (starlark.Value, error) {
+		var name string
+		var isArgs bool
+		var usage string
+		err := starkit.UnpackArgs(thread, fn.Name(), args, kwargs,
+			"name",
+			&name,
+			"args?",
+			&isArgs,
+			"usage?",
+			&usage,
+		)
+		if err != nil {
+			return starlark.None, err
+		}
+
+		if name == "" {
+			return starlark.None, errors.New("'name' is required")
+		}
+
+		err = starkit.SetState(thread, func(settings Settings) (Settings, error) {
+			if settings.configParseCalled {
+				return settings, fmt.Errorf("%s cannot be called after config.parse is called", fn.Name())
+			}
+
+			if _, ok := settings.configDef.configSettings[name]; ok {
+				return settings, fmt.Errorf("%s defined multiple times", name)
+			}
+
+			if isArgs {
+				if settings.configDef.positionalSettingName != "" {
+					return settings, fmt.Errorf("both %s and %s are defined as positional args", name, settings.configDef.positionalSettingName)
+				}
+
+				settings.configDef.positionalSettingName = name
+			}
+
+			settings.configDef.configSettings[name] = configSetting{
+				newValue: newConfigValue,
+				usage:    usage,
+			}
+
+			return settings, nil
+		})
+		if err != nil {
+			return starlark.None, err
+		}
+
+		return starlark.None, nil
+	}
+}

@@ -1,0 +1,5 @@
+[1/2] FROM docker.io/library/busybox
+[2/2] RUN echo hi
+  → hi
+[2/2] RUN echo hi [done: 286ms]
+exporting to image

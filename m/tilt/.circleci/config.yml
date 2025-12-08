@@ -1,0 +1,230 @@
+version: 2.1
+orbs:
+  slack: circleci/slack@3.4.0
+  shellcheck: circleci/shellcheck@2.2.2
+  win: circleci/windows@5.0.0
+  gcp-cli: circleci/gcp-cli@3.0.1
+  kubernetes: circleci/kubernetes@0.9.1
+  go: circleci/go@1.7.1
+jobs:
+  build-linux:
+    resource_class: medium+
+    docker:
+      - image: docker/tilt-ci@sha256:24c582b02189c68cf5980f49d238ca9a540b576aa0487de35a3cd739704c4c8b
+    # apiserver code generation scripts require being in GOPATH
+    working_directory: /home/circleci/go/src/github.com/tilt-dev/tilt
+    steps:
+      - checkout
+      - run: echo 'export PATH=~/go/bin:$PATH' >> $BASH_ENV
+      - setup_remote_docker
+      - run: docker pull registry:2
+      - run: make install
+      - run: make lint
+      - run: make test_install_version_check
+      - run: make wire-check
+      - run: ./scripts/check-codegen.sh
+      - run: make test-go
+      - store_test_results:
+          path: test-results
+      - slack/notify-on-failure:
+          only_for_branches: master
+  build-js:
+    docker:
+      - image: cimg/node:22.14.0
+    steps:
+      - checkout
+      - run: make check-js
+      - run:
+          name: Run jest with JUnit Reporter
+          command: make test-js
+          environment:
+            JEST_JUNIT_OUTPUT_DIR: "reports/junit/js-test-results.xml"
+      - run: make test-storybook
+      - store_test_results:
+          path: web/reports/junit
+      - slack/notify-on-failure:
+          only_for_branches: master
+  check-docs:
+    docker:
+      - image: docker/tilt-ci@sha256:24c582b02189c68cf5980f49d238ca9a540b576aa0487de35a3cd739704c4c8b
+    steps:
+      - checkout
+      - setup_remote_docker
+      - run: mkdir -p ../tilt.build && git clone git@github.com:tilt-dev/tilt.build ../tilt.build
+      - run: make install
+      - run: |
+          set -ex
+          cd ../tilt.build
+          tilt dump cli-docs --dir="./docs/cli"
+          tilt dump api-docs --dir="./api"
+          make cli-toc
+          make api
+      - slack/notify-on-failure:
+          only_for_branches: master
+  build-windows:
+    executor:
+      name: win/default
+      size: "large"
+    steps:
+      - run: |
+          choco install -y make kustomize kubernetes-helm docker-compose
+          choco upgrade -y --allow-downgrade golang --version=1.24.1
+
+          # mingw 13 seems to have broken gcc installs
+          # https://community.chocolatey.org/packages/mingw#comment-6290804217
+          choco install -y mingw --version 12.2.0.03042023 --allow-downgrade
+      - run: go install gotest.tools/gotestsum@latest
+      - checkout
+      # Check to make sure Windows binaries compile
+      - run:
+          command: go install -mod vendor ./cmd/tilt
+          shell: bash.exe
+          environment:
+            CGO_ENABLED: '1'
+            CGO_LDFLAGS: -static
+      - run:
+          command: PATH="$HOME/go/bin:$PATH" make shorttestsum
+          shell: bash.exe
+          environment:
+            CGO_ENABLED: '1'
+            CGO_LDFLAGS: -static
+      - run: iex ./scripts/install.ps1
+      - store_test_results:
+          path: test-results
+  build-integration:
+    resource_class: medium+
+    docker:
+      - image: docker/tilt-integration-ci@sha256:475f7d5834f21d48df45963499dff7cf4be0e1ac9717117c7677b6714f0e7ba6
+    steps:
+      - checkout
+      - run: echo 'export PATH=/go/bin:$PATH' >> $BASH_ENV
+      - setup_remote_docker
+      - run: ctlptl create cluster kind --registry=ctlptl-registry && make build-js integration
+      - store_test_results:
+          path: test-results
+      - slack/notify-on-failure:
+          only_for_branches: master
+  test-extensions:
+    resource_class: large
+    docker:
+      - image: "docker/tilt-extensions-ci@sha256:c22a39c287c7c3afba182f4f46044475b43bd2d4e2bb89f41136eae7d4f4b94d"
+    steps:
+      - checkout
+      - run: echo 'export PATH=/go/bin:$PATH' >> $BASH_ENV
+      - setup_remote_docker
+      - run: ctlptl create cluster kind --registry=ctlptl-registry && make build-js install test-extensions
+      - slack/notify-on-failure:
+          only_for_branches: master
+  # NOTE(nicks): Tilt is on Docker's legacy CircleCI plan,
+  # which has lots of credits but does not have access to MacOS
+  # Apple Silicon runners. The MacOS Intel runners have been
+  # decommissioned.
+  #
+  # build-macos:
+  #   resource_class: "macos.x86.medium.gen2"
+  #   macos:
+  #     xcode: "15.0.0"
+
+  #   steps:
+  #     - checkout
+  #     - go/install:
+  #         version: "1.22.2"
+  #     - run: curl -fsSL "https://github.com/gotestyourself/gotestsum/releases/download/v1.7.0/gotestsum_1.7.0_darwin_amd64.tar.gz" | sudo tar -xz -C /usr/local/bin gotestsum
+  #     # We can't run the container tests on macos because nested
+  #     # VMs don't work on circleci.
+  #     - run: mkdir -p test-results
+  #     # Check to make sure binaries compile
+  #     - run: go install -mod vendor ./cmd/tilt
+  #     # Only run watch tests, because these are currently the only tests that are OS-specific.
+  #     # In other Tilt tests, we mock out OS-specific components.
+  #     - run: gotestsum --format standard-quiet --junitfile test-results/unit-tests.xml -- -mod vendor ./internal/watch/...
+  #     - store_test_results:
+  #         path: test-results
+  #     - slack/notify-on-failure:
+  #         only_for_branches: master
+  release-dry-run:
+    resource_class: medium+
+    docker:
+      # keep image in sync with build.toast.yml
+      - image: "docker/tilt-releaser@sha256:2dcf9df09bd9b8c5d51659868b045bea5ee8830fe4638cb59b7bff825d82dd01"
+    steps:
+      - setup_remote_docker
+      # https://discuss.circleci.com/t/arm-version-of-remote-docker/41624
+      - run: ssh remote-docker "sudo apt-get update; sudo apt-get install -y qemu-user-static binfmt-support"
+      - checkout
+      - run: make build-js
+      - run:
+          command: goreleaser --verbose --clean --skip=publish --snapshot
+          no_output_timeout: 20m
+      - slack/notify-on-failure:
+          only_for_branches: main
+  release:
+    resource_class: medium+
+    docker:
+      # keep image in sync with build.toast.yml
+      - image: "docker/tilt-releaser@sha256:2dcf9df09bd9b8c5d51659868b045bea5ee8830fe4638cb59b7bff825d82dd01"
+    environment:
+      DOCKER_CLI_EXPERIMENTAL: enabled
+    steps:
+      - setup_remote_docker
+      # https://discuss.circleci.com/t/arm-version-of-remote-docker/41624
+      - run: ssh remote-docker "sudo apt-get update; sudo apt-get install -y qemu-user-static binfmt-support"
+      - slack/notify:
+          message: "A Tilt release has started!"
+      - checkout
+      - run:
+          command: ./scripts/release-ci.sh
+          no_output_timeout: 20m
+      - slack/status
+workflows:
+  version: 2
+  shellcheck:
+    jobs:
+      - shellcheck/check:
+          dir: scripts
+          exclude: SC2001
+  build:
+    # The linux job is cheaper than the others, so run that first.
+    jobs:
+      - build-linux
+      - build-js:
+          requires:
+            - build-linux
+            # - build-macos:
+            #     requires:
+            #       - build-linux
+      - build-integration:
+          requires:
+            - build-linux
+      - test-extensions:
+          context:
+            - Tilt Pulumi Context
+          requires:
+            - build-linux
+      - build-windows:
+          requires:
+            - build-linux
+      - check-docs:
+          requires:
+            - build-linux
+      - release-dry-run:
+          context: Tilt Slack Context
+          requires:
+            - build-linux
+          filters:
+            branches:
+              only: master
+  release:
+    jobs:
+      - release:
+          context:
+            - Tilt Slack Context
+            - Tilt Release CLI Context
+            - Tilt Docker Login Context
+            - Tilt Cloud Login Context
+            - Tilt Deploy Context
+          filters:
+            branches:
+              only: never-release-on-a-branch
+            tags:
+              only: /v[0-9]+.[0-9]+.[0-9]+/
