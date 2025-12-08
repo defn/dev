@@ -1,0 +1,11 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "procutil",
+    srcs = [
+        "procutil_unix.go",
+        "procutil_windows.go",
+    ],
+    importpath = "github.com/defn/dev/m/tilt/pkg/procutil",
+    visibility = ["//visibility:public"],
+)

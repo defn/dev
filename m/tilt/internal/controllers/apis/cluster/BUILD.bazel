@@ -1,0 +1,38 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
+
+go_library(
+    name = "cluster",
+    srcs = [
+        "client.go",
+        "client_fake.go",
+    ],
+    importpath = "github.com/defn/dev/m/tilt/internal/controllers/apis/cluster",
+    visibility = ["//tilt:__subpackages__"],
+    deps = [
+        "//tilt/internal/controllers/apicmp",
+        "//tilt/internal/k8s",
+        "//tilt/internal/timecmp",
+        "//tilt/pkg/apis",
+        "//tilt/pkg/apis/core/v1alpha1",
+        "@com_github_stretchr_testify//require",
+        "@io_k8s_apimachinery//pkg/api/errors",
+        "@io_k8s_apimachinery//pkg/apis/meta/v1:meta",
+        "@io_k8s_apimachinery//pkg/types",
+        "@io_k8s_sigs_controller_runtime//pkg/client",
+    ],
+)
+
+go_test(
+    name = "cluster_test",
+    srcs = ["client_test.go"],
+    embed = [":cluster"],
+    deps = [
+        "//tilt/internal/controllers/fake",
+        "//tilt/internal/k8s",
+        "//tilt/internal/timecmp",
+        "//tilt/pkg/apis",
+        "//tilt/pkg/apis/core/v1alpha1",
+        "@com_github_stretchr_testify//require",
+        "@io_k8s_apimachinery//pkg/apis/meta/v1:meta",
+    ],
+)

@@ -1,0 +1,15 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "configmaps",
+    srcs = [
+        "actions.go",
+        "reducers.go",
+    ],
+    importpath = "github.com/defn/dev/m/tilt/internal/store/configmaps",
+    visibility = ["//tilt:__subpackages__"],
+    deps = [
+        "//tilt/internal/store",
+        "//tilt/pkg/apis/core/v1alpha1",
+    ],
+)

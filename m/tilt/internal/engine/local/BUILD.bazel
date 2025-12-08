@@ -1,0 +1,32 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
+
+go_library(
+    name = "local",
+    srcs = [
+        "actions.go",
+        "reducers.go",
+        "servercontroller.go",
+        "types.go",
+    ],
+    importpath = "github.com/defn/dev/m/tilt/internal/engine/local",
+    visibility = ["//tilt:__subpackages__"],
+    deps = [
+        "//tilt/internal/controllers/apis/configmap",
+        "//tilt/internal/store",
+        "//tilt/pkg/apis/core/v1alpha1",
+        "//tilt/pkg/logger",
+        "//tilt/pkg/model",
+        "//tilt/pkg/model/logstore",
+        "@io_k8s_apimachinery//pkg/api/equality",
+        "@io_k8s_apimachinery//pkg/api/errors",
+        "@io_k8s_apimachinery//pkg/apis/meta/v1:meta",
+        "@io_k8s_apimachinery//pkg/types",
+        "@io_k8s_sigs_controller_runtime//pkg/client",
+    ],
+)
+
+go_test(
+    name = "local_test",
+    srcs = ["servercontroller_test.go"],
+    embed = [":local"],
+)

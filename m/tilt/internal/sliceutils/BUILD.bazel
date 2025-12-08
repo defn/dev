@@ -1,0 +1,18 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
+
+go_library(
+    name = "sliceutils",
+    srcs = ["sliceutils.go"],
+    importpath = "github.com/defn/dev/m/tilt/internal/sliceutils",
+    visibility = ["//tilt:__subpackages__"],
+)
+
+go_test(
+    name = "sliceutils_test",
+    srcs = ["sliceutils_test.go"],
+    embed = [":sliceutils"],
+    deps = [
+        "@com_github_stretchr_testify//assert",
+        "@com_github_stretchr_testify//require",
+    ],
+)

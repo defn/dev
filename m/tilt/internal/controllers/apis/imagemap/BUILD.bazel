@@ -1,0 +1,15 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "imagemap",
+    srcs = ["imagemap.go"],
+    importpath = "github.com/defn/dev/m/tilt/internal/controllers/apis/imagemap",
+    visibility = ["//tilt:__subpackages__"],
+    deps = [
+        "//tilt/pkg/apis/core/v1alpha1",
+        "//tilt/pkg/model",
+        "@io_k8s_apimachinery//pkg/api/errors",
+        "@io_k8s_apimachinery//pkg/types",
+        "@io_k8s_sigs_controller_runtime//pkg/client",
+    ],
+)

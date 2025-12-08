@@ -1,0 +1,27 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
+
+go_library(
+    name = "git",
+    srcs = [
+        "git.go",
+        "repo.go",
+    ],
+    importpath = "github.com/defn/dev/m/tilt/internal/tiltfile/git",
+    visibility = ["//tilt:__subpackages__"],
+    deps = [
+        "//tilt/internal/tiltfile/starkit",
+        "//tilt/internal/tiltfile/value",
+        "@net_starlark_go//starlark",
+    ],
+)
+
+go_test(
+    name = "git_test",
+    srcs = ["git_test.go"],
+    embed = [":git"],
+    deps = [
+        "//tilt/internal/tiltfile/starkit",
+        "@com_github_stretchr_testify//assert",
+        "@net_starlark_go//starlark",
+    ],
+)

@@ -1,0 +1,43 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
+
+go_library(
+    name = "extensionrepo",
+    srcs = [
+        "reconciler.go",
+        "wire.go",
+    ],
+    importpath = "github.com/defn/dev/m/tilt/internal/controllers/core/extensionrepo",
+    visibility = ["//tilt:__subpackages__"],
+    deps = [
+        "//tilt/internal/controllers/apicmp",
+        "//tilt/internal/store",
+        "//tilt/internal/xdg",
+        "//tilt/pkg/apis",
+        "//tilt/pkg/apis/core/v1alpha1",
+        "//tilt/pkg/logger",
+        "@com_github_google_wire//:wire",
+        "@com_github_tilt_dev_go_get//:go-get",
+        "@io_k8s_apimachinery//pkg/api/errors",
+        "@io_k8s_apimachinery//pkg/types",
+        "@io_k8s_sigs_controller_runtime//:controller-runtime",
+        "@io_k8s_sigs_controller_runtime//pkg/builder",
+        "@io_k8s_sigs_controller_runtime//pkg/client",
+        "@io_k8s_sigs_controller_runtime//pkg/reconcile",
+    ],
+)
+
+go_test(
+    name = "extensionrepo_test",
+    srcs = ["reconciler_test.go"],
+    embed = [":extensionrepo"],
+    deps = [
+        "//tilt/internal/controllers/fake",
+        "//tilt/internal/xdg",
+        "//tilt/pkg/apis/core/v1alpha1",
+        "@com_github_spf13_afero//:afero",
+        "@com_github_stretchr_testify//assert",
+        "@com_github_stretchr_testify//require",
+        "@io_k8s_apimachinery//pkg/apis/meta/v1:meta",
+        "@io_k8s_apimachinery//pkg/types",
+    ],
+)

@@ -1,0 +1,27 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "liveupdates",
+    srcs = [
+        "actions.go",
+        "containers.go",
+        "fake.go",
+        "reducers.go",
+        "string.go",
+        "sync.go",
+        "update_mode.go",
+    ],
+    importpath = "github.com/defn/dev/m/tilt/internal/store/liveupdates",
+    visibility = ["//tilt:__subpackages__"],
+    deps = [
+        "//tilt/internal/build",
+        "//tilt/internal/container",
+        "//tilt/internal/controllers/apis/liveupdate",
+        "//tilt/internal/docker",
+        "//tilt/internal/k8s",
+        "//tilt/internal/store",
+        "//tilt/internal/store/k8sconv",
+        "//tilt/pkg/apis/core/v1alpha1",
+        "@io_k8s_api//core/v1:core",
+    ],
+)

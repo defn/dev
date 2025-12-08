@@ -1,0 +1,19 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
+
+go_library(
+    name = "git",
+    srcs = ["remote.go"],
+    importpath = "github.com/defn/dev/m/tilt/internal/git",
+    visibility = ["//tilt:__subpackages__"],
+    deps = ["@com_github_whilp_git_urls//:git-urls"],
+)
+
+go_test(
+    name = "git_test",
+    srcs = ["remote_test.go"],
+    embed = [":git"],
+    deps = [
+        "//tilt/internal/testutils/tempdir",
+        "@com_github_stretchr_testify//assert",
+    ],
+)

@@ -1,0 +1,44 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
+
+go_library(
+    name = "rty",
+    srcs = [
+        "ansi.go",
+        "canvas.go",
+        "components.go",
+        "error.go",
+        "interactive_tester.go",
+        "layouts.go",
+        "render.go",
+        "scroll.go",
+        "text.go",
+        "tokenizer.go",
+    ],
+    importpath = "github.com/defn/dev/m/tilt/internal/rty",
+    visibility = ["//tilt:__subpackages__"],
+    deps = [
+        "@com_github_gdamore_tcell//:tcell",
+        "@com_github_pkg_errors//:errors",
+        "@com_github_rivo_tview//:tview",
+        "@com_github_stretchr_testify//assert",
+    ],
+)
+
+go_test(
+    name = "rty_test",
+    srcs = [
+        "box_test.go",
+        "layouts_benchmark_test.go",
+        "layouts_test.go",
+        "main_test.go",
+        "modal_test.go",
+        "scroll_test.go",
+        "text_test.go",
+    ],
+    data = glob(["testdata/**"]),
+    embed = [":rty"],
+    deps = [
+        "@com_github_gdamore_tcell//:tcell",
+        "@com_github_stretchr_testify//assert",
+    ],
+)

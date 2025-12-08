@@ -1,0 +1,20 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "exptel",
+    srcs = [
+        "doc.go",
+        "key.go",
+        "rawhelpers.go",
+        "span.go",
+        "span_context.go",
+        "valuetype_string.go",
+    ],
+    importpath = "github.com/defn/dev/m/tilt/internal/tracer/exptel",
+    visibility = ["//tilt:__subpackages__"],
+    deps = [
+        "@io_opentelemetry_go_otel//attribute",
+        "@io_opentelemetry_go_otel_sdk//trace",
+        "@io_opentelemetry_go_otel_trace//:trace",
+    ],
+)

@@ -1,0 +1,36 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "fake",
+    srcs = [
+        "client.go",
+        "fake.go",
+        "fixture.go",
+        "store.go",
+        "upsert.go",
+    ],
+    importpath = "github.com/defn/dev/m/tilt/internal/controllers/fake",
+    visibility = ["//tilt:__subpackages__"],
+    deps = [
+        "//tilt/internal/controllers/indexer",
+        "//tilt/internal/store",
+        "//tilt/internal/testutils",
+        "//tilt/internal/testutils/bufsync",
+        "//tilt/pkg/apis/core/v1alpha1",
+        "@com_github_stretchr_testify//assert",
+        "@com_github_stretchr_testify//require",
+        "@com_github_tilt_dev_tilt_apiserver//pkg/server/builder/resource",
+        "@com_github_tilt_dev_tilt_apiserver//pkg/server/builder/resource/resourcestrategy",
+        "@com_github_tilt_dev_wmclient//pkg/analytics",
+        "@io_k8s_apimachinery//pkg/api/errors",
+        "@io_k8s_apimachinery//pkg/runtime",
+        "@io_k8s_apimachinery//pkg/types",
+        "@io_k8s_sigs_controller_runtime//:controller-runtime",
+        "@io_k8s_sigs_controller_runtime//pkg/builder",
+        "@io_k8s_sigs_controller_runtime//pkg/cache",
+        "@io_k8s_sigs_controller_runtime//pkg/client",
+        "@io_k8s_sigs_controller_runtime//pkg/client/fake",
+        "@io_k8s_sigs_controller_runtime//pkg/reconcile",
+        "@io_k8s_sigs_controller_runtime//pkg/source",
+    ],
+)

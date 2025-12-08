@@ -1,0 +1,24 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
+
+go_library(
+    name = "dockerignore",
+    srcs = ["ignore.go"],
+    importpath = "github.com/defn/dev/m/tilt/internal/dockerignore",
+    visibility = ["//tilt:__subpackages__"],
+    deps = [
+        "//tilt/internal/ospath",
+        "@com_github_moby_buildkit//frontend/dockerfile/dockerignore",
+        "@com_github_tilt_dev_dockerignore//:dockerignore",
+    ],
+)
+
+go_test(
+    name = "dockerignore_test",
+    srcs = ["ignore_test.go"],
+    deps = [
+        ":dockerignore",
+        "//tilt/internal/testutils/tempdir",
+        "//tilt/pkg/model",
+        "@com_github_stretchr_testify//assert",
+    ],
+)

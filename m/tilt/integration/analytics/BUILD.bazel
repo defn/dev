@@ -1,0 +1,14 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_binary", "go_library")
+
+go_library(
+    name = "analytics_lib",
+    srcs = ["main.go"],
+    importpath = "github.com/defn/dev/m/tilt/integration/analytics",
+    visibility = ["//visibility:private"],
+)
+
+go_binary(
+    name = "analytics",
+    embed = [":analytics_lib"],
+    visibility = ["//visibility:public"],
+)

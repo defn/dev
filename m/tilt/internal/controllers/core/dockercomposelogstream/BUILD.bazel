@@ -1,0 +1,55 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
+
+go_library(
+    name = "dockercomposelogstream",
+    srcs = [
+        "project.go",
+        "reconciler.go",
+        "wire.go",
+        "writer.go",
+    ],
+    importpath = "github.com/defn/dev/m/tilt/internal/controllers/core/dockercomposelogstream",
+    visibility = ["//tilt:__subpackages__"],
+    deps = [
+        "//tilt/internal/controllers/apicmp",
+        "//tilt/internal/controllers/indexer",
+        "//tilt/internal/docker",
+        "//tilt/internal/dockercompose",
+        "//tilt/internal/engine/runtimelog",
+        "//tilt/internal/store",
+        "//tilt/internal/store/dockercomposeservices",
+        "//tilt/pkg/apis/core/v1alpha1",
+        "//tilt/pkg/logger",
+        "//tilt/pkg/model",
+        "@com_github_docker_docker//api/types/container",
+        "@com_github_docker_docker//client",
+        "@com_github_docker_docker//pkg/stdcopy",
+        "@com_github_google_wire//:wire",
+        "@io_k8s_apimachinery//pkg/api/errors",
+        "@io_k8s_apimachinery//pkg/types",
+        "@io_k8s_sigs_controller_runtime//:controller-runtime",
+        "@io_k8s_sigs_controller_runtime//pkg/builder",
+        "@io_k8s_sigs_controller_runtime//pkg/client",
+        "@io_k8s_sigs_controller_runtime//pkg/reconcile",
+    ],
+)
+
+go_test(
+    name = "dockercomposelogstream_test",
+    srcs = [
+        "project_test.go",
+        "reconciler_test.go",
+    ],
+    embed = [":dockercomposelogstream"],
+    deps = [
+        "//tilt/internal/container",
+        "//tilt/internal/controllers/apicmp",
+        "//tilt/internal/controllers/fake",
+        "//tilt/internal/docker",
+        "//tilt/internal/dockercompose",
+        "//tilt/pkg/apis/core/v1alpha1",
+        "@com_github_docker_docker//api/types",
+        "@com_github_stretchr_testify//assert",
+        "@io_k8s_apimachinery//pkg/apis/meta/v1:meta",
+    ],
+)

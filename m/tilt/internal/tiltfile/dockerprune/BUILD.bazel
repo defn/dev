@@ -1,0 +1,24 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
+
+go_library(
+    name = "dockerprune",
+    srcs = ["docker_prune.go"],
+    importpath = "github.com/defn/dev/m/tilt/internal/tiltfile/dockerprune",
+    visibility = ["//tilt:__subpackages__"],
+    deps = [
+        "//tilt/internal/tiltfile/starkit",
+        "//tilt/pkg/model",
+        "@net_starlark_go//starlark",
+    ],
+)
+
+go_test(
+    name = "dockerprune_test",
+    srcs = ["docker_prune_test.go"],
+    embed = [":dockerprune"],
+    deps = [
+        "//tilt/internal/tiltfile/starkit",
+        "//tilt/pkg/model",
+        "@com_github_stretchr_testify//assert",
+    ],
+)

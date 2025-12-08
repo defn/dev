@@ -1,0 +1,40 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
+
+go_library(
+    name = "telemetry",
+    srcs = [
+        "actions.go",
+        "controller.go",
+        "start_tracker.go",
+    ],
+    importpath = "github.com/defn/dev/m/tilt/internal/engine/telemetry",
+    visibility = ["//tilt:__subpackages__"],
+    deps = [
+        "//tilt/internal/build",
+        "//tilt/internal/store",
+        "//tilt/internal/tracer",
+        "//tilt/pkg/logger",
+        "//tilt/pkg/model",
+        "//tilt/pkg/model/logstore",
+        "@io_opentelemetry_go_otel_trace//:trace",
+    ],
+)
+
+go_test(
+    name = "telemetry_test",
+    srcs = [
+        "controller_test.go",
+        "start_tracker_test.go",
+    ],
+    embed = [":telemetry"],
+    deps = [
+        "//tilt/internal/store",
+        "//tilt/internal/testutils/tempdir",
+        "//tilt/internal/tracer",
+        "//tilt/pkg/model",
+        "@com_github_stretchr_testify//assert",
+        "@com_github_stretchr_testify//require",
+        "@io_opentelemetry_go_otel_sdk//trace",
+        "@io_opentelemetry_go_otel_sdk//trace/tracetest",
+    ],
+)

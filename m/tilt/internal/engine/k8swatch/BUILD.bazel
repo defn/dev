@@ -1,0 +1,57 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
+
+go_library(
+    name = "k8swatch",
+    srcs = [
+        "actions.go",
+        "event_watch_manager.go",
+        "service_watch.go",
+        "watcher.go",
+    ],
+    importpath = "github.com/defn/dev/m/tilt/internal/engine/k8swatch",
+    visibility = ["//tilt:__subpackages__"],
+    deps = [
+        "//tilt/internal/controllers/apis/cluster",
+        "//tilt/internal/k8s",
+        "//tilt/internal/store",
+        "//tilt/internal/timecmp",
+        "//tilt/pkg/apis/core/v1alpha1",
+        "//tilt/pkg/logger",
+        "//tilt/pkg/model",
+        "@com_github_pkg_errors//:errors",
+        "@io_k8s_api//core/v1:core",
+        "@io_k8s_apimachinery//pkg/types",
+    ],
+)
+
+go_test(
+    name = "k8swatch_test",
+    srcs = [
+        "event_watch_manager_test.go",
+        "service_watch_test.go",
+    ],
+    embed = [":k8swatch"],
+    deps = [
+        "//tilt/internal/controllers/apis/cluster",
+        "//tilt/internal/controllers/fake",
+        "//tilt/internal/k8s",
+        "//tilt/internal/k8s/testyaml",
+        "//tilt/internal/store",
+        "//tilt/internal/store/k8sconv",
+        "//tilt/internal/testutils",
+        "//tilt/internal/testutils/manifestbuilder",
+        "//tilt/internal/testutils/podbuilder",
+        "//tilt/internal/testutils/servicebuilder",
+        "//tilt/internal/testutils/tempdir",
+        "//tilt/pkg/apis",
+        "//tilt/pkg/apis/core/v1alpha1",
+        "//tilt/pkg/model",
+        "@com_github_jonboulle_clockwork//:clockwork",
+        "@com_github_pkg_errors//:errors",
+        "@com_github_stretchr_testify//assert",
+        "@com_github_stretchr_testify//require",
+        "@io_k8s_api//core/v1:core",
+        "@io_k8s_apimachinery//pkg/apis/meta/v1:meta",
+        "@io_k8s_apimachinery//pkg/types",
+    ],
+)

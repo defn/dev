@@ -1,0 +1,39 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
+
+go_library(
+    name = "k8srollout",
+    srcs = ["podmonitor.go"],
+    importpath = "github.com/defn/dev/m/tilt/internal/engine/k8srollout",
+    visibility = ["//tilt:__subpackages__"],
+    deps = [
+        "//tilt/internal/k8s",
+        "//tilt/internal/store",
+        "//tilt/pkg/apis/core/v1alpha1",
+        "//tilt/pkg/logger",
+        "//tilt/pkg/model",
+        "//tilt/pkg/model/logstore",
+        "@com_github_google_go_cmp//cmp",
+        "@com_github_jonboulle_clockwork//:clockwork",
+        "@io_k8s_api//core/v1:core",
+    ],
+)
+
+go_test(
+    name = "k8srollout_test",
+    srcs = ["podmonitor_test.go"],
+    data = glob(["testdata/**"]),
+    embed = [":k8srollout"],
+    deps = [
+        "//tilt/internal/store",
+        "//tilt/internal/testutils/bufsync",
+        "//tilt/internal/testutils/manifestutils",
+        "//tilt/internal/testutils/tempdir",
+        "//tilt/pkg/apis",
+        "//tilt/pkg/apis/core/v1alpha1",
+        "//tilt/pkg/logger",
+        "//tilt/pkg/model",
+        "@com_github_jonboulle_clockwork//:clockwork",
+        "@com_github_stretchr_testify//assert",
+        "@io_k8s_api//core/v1:core",
+    ],
+)

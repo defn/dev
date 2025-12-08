@@ -1,0 +1,14 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "view",
+    srcs = ["view.go"],
+    importpath = "github.com/defn/dev/m/tilt/internal/hud/view",
+    visibility = ["//tilt:__subpackages__"],
+    deps = [
+        "//tilt/internal/container",
+        "//tilt/pkg/apis/core/v1alpha1",
+        "//tilt/pkg/model",
+        "//tilt/pkg/model/logstore",
+    ],
+)

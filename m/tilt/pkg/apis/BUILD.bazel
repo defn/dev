@@ -1,0 +1,32 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
+
+go_library(
+    name = "apis",
+    srcs = [
+        "doc.go",
+        "identifiers.go",
+        "time.go",
+    ],
+    importpath = "github.com/defn/dev/m/tilt/pkg/apis",
+    visibility = ["//visibility:public"],
+    deps = [
+        "@io_k8s_apimachinery//pkg/api/validation/path",
+        "@io_k8s_apimachinery//pkg/apis/meta/v1:meta",
+        "@io_k8s_apimachinery//pkg/types",
+        "@io_k8s_apimachinery//pkg/util/validation",
+    ],
+)
+
+go_test(
+    name = "apis_test",
+    srcs = [
+        "identifiers_test.go",
+        "time_test.go",
+    ],
+    deps = [
+        ":apis",
+        "@com_github_stretchr_testify//assert",
+        "@com_github_stretchr_testify//require",
+        "@io_k8s_apimachinery//pkg/apis/meta/v1:meta",
+    ],
+)

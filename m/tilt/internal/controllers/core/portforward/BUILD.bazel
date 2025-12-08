@@ -1,0 +1,55 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
+
+go_library(
+    name = "portforward",
+    srcs = [
+        "reconciler.go",
+        "types.go",
+    ],
+    importpath = "github.com/defn/dev/m/tilt/internal/controllers/core/portforward",
+    visibility = ["//tilt:__subpackages__"],
+    deps = [
+        "//tilt/internal/controllers/apicmp",
+        "//tilt/internal/controllers/apis/cluster",
+        "//tilt/internal/controllers/indexer",
+        "//tilt/internal/k8s",
+        "//tilt/internal/store",
+        "//tilt/internal/timecmp",
+        "//tilt/pkg/apis",
+        "//tilt/pkg/apis/core/v1alpha1",
+        "//tilt/pkg/logger",
+        "@io_k8s_apimachinery//pkg/api/equality",
+        "@io_k8s_apimachinery//pkg/api/errors",
+        "@io_k8s_apimachinery//pkg/apis/meta/v1:meta",
+        "@io_k8s_apimachinery//pkg/runtime",
+        "@io_k8s_apimachinery//pkg/types",
+        "@io_k8s_apimachinery//pkg/util/wait",
+        "@io_k8s_sigs_controller_runtime//:controller-runtime",
+        "@io_k8s_sigs_controller_runtime//pkg/builder",
+        "@io_k8s_sigs_controller_runtime//pkg/client",
+        "@io_k8s_sigs_controller_runtime//pkg/reconcile",
+    ],
+)
+
+go_test(
+    name = "portforward_test",
+    srcs = ["reconciler_test.go"],
+    embed = [":portforward"],
+    deps = [
+        "//tilt/internal/controllers/apis/cluster",
+        "//tilt/internal/controllers/fake",
+        "//tilt/internal/k8s",
+        "//tilt/internal/store",
+        "//tilt/internal/store/k8sconv",
+        "//tilt/pkg/apis",
+        "//tilt/pkg/apis/core/v1alpha1",
+        "//tilt/pkg/model",
+        "@com_github_davecgh_go_spew//spew",
+        "@com_github_stretchr_testify//assert",
+        "@com_github_stretchr_testify//require",
+        "@io_k8s_apimachinery//pkg/apis/meta/v1:meta",
+        "@io_k8s_apimachinery//pkg/types",
+        "@io_k8s_sigs_controller_runtime//:controller-runtime",
+        "@io_k8s_sigs_controller_runtime//pkg/reconcile",
+    ],
+)

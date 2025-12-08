@@ -1,0 +1,11 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "moby",
+    srcs = [
+        "archive_unix.go",
+        "archive_windows.go",
+    ],
+    importpath = "github.com/defn/dev/m/tilt/internal/build/moby",
+    visibility = ["//tilt:__subpackages__"],
+)

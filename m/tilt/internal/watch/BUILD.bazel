@@ -1,0 +1,90 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
+
+go_library(
+    name = "watch",
+    srcs = [
+        "notify.go",
+        "paths.go",
+        "temp.go",
+        "watcher_darwin.go",
+        "watcher_naive.go",
+        "watcher_nonwin.go",
+        "watcher_windows.go",
+    ],
+    importpath = "github.com/defn/dev/m/tilt/internal/watch",
+    visibility = ["//tilt:__subpackages__"],
+    deps = [
+        "//tilt/internal/ospath",
+        "//tilt/pkg/logger",
+        "@com_github_pkg_errors//:errors",
+    ] + select({
+        "@io_bazel_rules_go//go/platform:aix": [
+            "@com_github_tilt_dev_fsnotify//:fsnotify",
+        ],
+        "@io_bazel_rules_go//go/platform:android": [
+            "@com_github_tilt_dev_fsnotify//:fsnotify",
+        ],
+        "@io_bazel_rules_go//go/platform:darwin": [
+            "@com_github_fsnotify_fsevents//:fsevents",
+            "@com_github_tilt_dev_fsnotify//:fsnotify",
+        ],
+        "@io_bazel_rules_go//go/platform:dragonfly": [
+            "@com_github_tilt_dev_fsnotify//:fsnotify",
+        ],
+        "@io_bazel_rules_go//go/platform:freebsd": [
+            "@com_github_tilt_dev_fsnotify//:fsnotify",
+        ],
+        "@io_bazel_rules_go//go/platform:illumos": [
+            "@com_github_tilt_dev_fsnotify//:fsnotify",
+        ],
+        "@io_bazel_rules_go//go/platform:ios": [
+            "@com_github_fsnotify_fsevents//:fsevents",
+            "@com_github_tilt_dev_fsnotify//:fsnotify",
+        ],
+        "@io_bazel_rules_go//go/platform:js": [
+            "@com_github_tilt_dev_fsnotify//:fsnotify",
+        ],
+        "@io_bazel_rules_go//go/platform:linux": [
+            "@com_github_tilt_dev_fsnotify//:fsnotify",
+        ],
+        "@io_bazel_rules_go//go/platform:netbsd": [
+            "@com_github_tilt_dev_fsnotify//:fsnotify",
+        ],
+        "@io_bazel_rules_go//go/platform:openbsd": [
+            "@com_github_tilt_dev_fsnotify//:fsnotify",
+        ],
+        "@io_bazel_rules_go//go/platform:osx": [
+            "@com_github_tilt_dev_fsnotify//:fsnotify",
+        ],
+        "@io_bazel_rules_go//go/platform:plan9": [
+            "@com_github_tilt_dev_fsnotify//:fsnotify",
+        ],
+        "@io_bazel_rules_go//go/platform:qnx": [
+            "@com_github_tilt_dev_fsnotify//:fsnotify",
+        ],
+        "@io_bazel_rules_go//go/platform:solaris": [
+            "@com_github_tilt_dev_fsnotify//:fsnotify",
+        ],
+        "@io_bazel_rules_go//go/platform:windows": [
+            "@com_github_tilt_dev_fsnotify//:fsnotify",
+        ],
+        "//conditions:default": [],
+    }),
+)
+
+go_test(
+    name = "watch_test",
+    srcs = [
+        "notify_test.go",
+        "paths_test.go",
+        "watcher_naive_test.go",
+    ],
+    embed = [":watch"],
+    deps = [
+        "//tilt/internal/dockerignore",
+        "//tilt/internal/testutils/tempdir",
+        "//tilt/pkg/logger",
+        "@com_github_stretchr_testify//assert",
+        "@com_github_stretchr_testify//require",
+    ],
+)

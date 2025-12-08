@@ -1,0 +1,24 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
+
+go_library(
+    name = "ospath",
+    srcs = [
+        "display.go",
+        "ospath.go",
+    ],
+    importpath = "github.com/defn/dev/m/tilt/internal/ospath",
+    visibility = ["//tilt:__subpackages__"],
+)
+
+go_test(
+    name = "ospath_test",
+    srcs = [
+        "display_test.go",
+        "ospath_test.go",
+    ],
+    embed = [":ospath"],
+    deps = [
+        "//tilt/internal/testutils/tempdir",
+        "@com_github_stretchr_testify//require",
+    ],
+)

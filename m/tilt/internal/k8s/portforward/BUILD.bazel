@@ -1,0 +1,49 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
+
+go_library(
+    name = "portforward",
+    srcs = [
+        "doc.go",
+        "error.go",
+        "fallback_dialer.go",
+        "portforward.go",
+        "tunneling_connection.go",
+        "tunneling_dialer.go",
+    ],
+    importpath = "github.com/defn/dev/m/tilt/internal/k8s/portforward",
+    visibility = ["//tilt:__subpackages__"],
+    deps = [
+        "@com_github_gorilla_websocket//:websocket",
+        "@io_k8s_api//core/v1:core",
+        "@io_k8s_apimachinery//pkg/util/httpstream",
+        "@io_k8s_apimachinery//pkg/util/httpstream/spdy",
+        "@io_k8s_apimachinery//pkg/util/portforward",
+        "@io_k8s_client_go//rest",
+        "@io_k8s_client_go//transport/websocket",
+        "@io_k8s_klog_v2//:klog",
+        "@io_k8s_utils//net",
+    ],
+)
+
+go_test(
+    name = "portforward_test",
+    srcs = [
+        "error_test.go",
+        "fallback_dialer_test.go",
+        "portforward_test.go",
+        "tunneling_connection_test.go",
+    ],
+    embed = [":portforward"],
+    deps = [
+        "@com_github_gorilla_websocket//:websocket",
+        "@com_github_stretchr_testify//assert",
+        "@com_github_stretchr_testify//require",
+        "@io_k8s_api//core/v1:core",
+        "@io_k8s_apimachinery//pkg/util/httpstream",
+        "@io_k8s_apimachinery//pkg/util/httpstream/spdy",
+        "@io_k8s_apimachinery//pkg/util/portforward",
+        "@io_k8s_apimachinery//pkg/util/wait",
+        "@io_k8s_client_go//rest",
+        "@io_k8s_client_go//transport/websocket",
+    ],
+)

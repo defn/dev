@@ -1,0 +1,15 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
+
+go_library(
+    name = "yaml",
+    srcs = ["utils.go"],
+    importpath = "github.com/defn/dev/m/tilt/internal/yaml",
+    visibility = ["//tilt:__subpackages__"],
+)
+
+go_test(
+    name = "yaml_test",
+    srcs = ["utils_test.go"],
+    embed = [":yaml"],
+    deps = ["@com_github_stretchr_testify//assert"],
+)

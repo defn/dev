@@ -1,0 +1,24 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
+
+go_library(
+    name = "hasher",
+    srcs = ["hasher.go"],
+    importpath = "github.com/defn/dev/m/tilt/internal/tiltfile/hasher",
+    visibility = ["//tilt:__subpackages__"],
+    deps = [
+        "//tilt/internal/tiltfile/starkit",
+        "@net_starlark_go//starlark",
+    ],
+)
+
+go_test(
+    name = "hasher_test",
+    srcs = ["hasher_test.go"],
+    embed = [":hasher"],
+    deps = [
+        "//tilt/internal/tiltfile/starkit",
+        "//tilt/internal/tiltfile/starlarkstruct",
+        "@com_github_stretchr_testify//assert",
+        "@com_github_stretchr_testify//require",
+    ],
+)

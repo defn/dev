@@ -70,7 +70,6 @@ up-to-date in real-time. Think 'docker build && kubectl apply' or 'docker-compos
 	addCommand(rootCmd, &logsCmd{})
 	addCommand(rootCmd, newDescribeCmd(streams))
 	addCommand(rootCmd, newGetCmd(streams))
-	addCommand(rootCmd, newExplainCmd(streams))
 	addCommand(rootCmd, newEditCmd(streams))
 	addCommand(rootCmd, newApiresourcesCmd(streams))
 	addCommand(rootCmd, newDeleteCmd(streams))

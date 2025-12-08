@@ -1,0 +1,37 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
+
+go_library(
+    name = "container",
+    srcs = [
+        "container.go",
+        "helpers.go",
+        "ignore.go",
+        "reference.go",
+        "registry.go",
+        "runtime.go",
+        "selector.go",
+    ],
+    importpath = "github.com/defn/dev/m/tilt/internal/container",
+    visibility = ["//tilt:__subpackages__"],
+    deps = [
+        "//tilt/pkg/apis/core/v1alpha1",
+        "@com_github_distribution_reference//:reference",
+        "@com_github_pkg_errors//:errors",
+    ],
+)
+
+go_test(
+    name = "container_test",
+    srcs = [
+        "helpers_test.go",
+        "reference_test.go",
+        "registry_test.go",
+        "runtime_test.go",
+    ],
+    embed = [":container"],
+    deps = [
+        "//tilt/pkg/apis/core/v1alpha1",
+        "@com_github_stretchr_testify//assert",
+        "@com_github_stretchr_testify//require",
+    ],
+)

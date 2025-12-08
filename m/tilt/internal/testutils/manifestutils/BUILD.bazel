@@ -1,0 +1,13 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "manifestutils",
+    srcs = ["manifest.go"],
+    importpath = "github.com/defn/dev/m/tilt/internal/testutils/manifestutils",
+    visibility = ["//tilt:__subpackages__"],
+    deps = [
+        "//tilt/internal/store",
+        "//tilt/pkg/apis/core/v1alpha1",
+        "//tilt/pkg/model",
+    ],
+)

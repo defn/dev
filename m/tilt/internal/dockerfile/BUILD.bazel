@@ -1,0 +1,37 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
+
+go_library(
+    name = "dockerfile",
+    srcs = [
+        "ast.go",
+        "dockerfile.go",
+        "inject.go",
+        "label.go",
+    ],
+    importpath = "github.com/defn/dev/m/tilt/internal/dockerfile",
+    visibility = ["//tilt:__subpackages__"],
+    deps = [
+        "//tilt/internal/container",
+        "@com_github_distribution_reference//:reference",
+        "@com_github_docker_cli//opts",
+        "@com_github_moby_buildkit//frontend/dockerfile/command",
+        "@com_github_moby_buildkit//frontend/dockerfile/instructions",
+        "@com_github_moby_buildkit//frontend/dockerfile/parser",
+        "@com_github_moby_buildkit//frontend/dockerfile/shell",
+        "@com_github_pkg_errors//:errors",
+    ],
+)
+
+go_test(
+    name = "dockerfile_test",
+    srcs = [
+        "ast_test.go",
+        "dockerfile_test.go",
+        "inject_test.go",
+    ],
+    embed = [":dockerfile"],
+    deps = [
+        "//tilt/internal/container",
+        "@com_github_stretchr_testify//assert",
+    ],
+)

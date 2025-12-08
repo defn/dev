@@ -1,0 +1,39 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
+
+go_library(
+    name = "tiltextension",
+    srcs = [
+        "plugin.go",
+        "types.go",
+    ],
+    importpath = "github.com/defn/dev/m/tilt/internal/tiltfile/tiltextension",
+    visibility = ["//tilt:__subpackages__"],
+    deps = [
+        "//tilt/internal/controllers/apiset",
+        "//tilt/internal/controllers/core/extension",
+        "//tilt/internal/controllers/core/extensionrepo",
+        "//tilt/internal/tiltfile/starkit",
+        "//tilt/internal/tiltfile/v1alpha1",
+        "//tilt/pkg/apis",
+        "//tilt/pkg/apis/core/v1alpha1",
+        "//tilt/pkg/logger",
+        "@io_k8s_apimachinery//pkg/apis/meta/v1:meta",
+        "@net_starlark_go//starlark",
+    ],
+)
+
+go_test(
+    name = "tiltextension_test",
+    srcs = ["plugin_test.go"],
+    embed = [":tiltextension"],
+    deps = [
+        "//tilt/internal/testutils/tempdir",
+        "//tilt/internal/tiltfile/include",
+        "//tilt/internal/tiltfile/starkit",
+        "//tilt/internal/tiltfile/v1alpha1",
+        "//tilt/pkg/apis",
+        "//tilt/pkg/apis/core/v1alpha1",
+        "@com_github_stretchr_testify//assert",
+        "@io_k8s_apimachinery//pkg/apis/meta/v1:meta",
+    ],
+)

@@ -1,0 +1,35 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
+
+go_library(
+    name = "prompt",
+    srcs = [
+        "action.go",
+        "prompt.go",
+        "wire.go",
+    ],
+    importpath = "github.com/defn/dev/m/tilt/internal/hud/prompt",
+    visibility = ["//tilt:__subpackages__"],
+    deps = [
+        "//tilt/internal/analytics",
+        "//tilt/internal/hud",
+        "//tilt/internal/openurl",
+        "//tilt/internal/store",
+        "//tilt/pkg/model",
+        "@com_github_fatih_color//:color",
+        "@com_github_google_wire//:wire",
+        "@com_github_mattn_go_tty//:go-tty",
+    ],
+)
+
+go_test(
+    name = "prompt_test",
+    srcs = ["prompt_test.go"],
+    embed = [":prompt"],
+    deps = [
+        "//tilt/internal/store",
+        "//tilt/internal/testutils",
+        "//tilt/internal/testutils/bufsync",
+        "//tilt/pkg/model",
+        "@com_github_stretchr_testify//assert",
+    ],
+)

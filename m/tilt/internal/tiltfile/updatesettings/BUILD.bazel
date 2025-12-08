@@ -1,0 +1,15 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "updatesettings",
+    srcs = ["update_settings.go"],
+    importpath = "github.com/defn/dev/m/tilt/internal/tiltfile/updatesettings",
+    visibility = ["//tilt:__subpackages__"],
+    deps = [
+        "//tilt/internal/tiltfile/starkit",
+        "//tilt/internal/tiltfile/value",
+        "//tilt/pkg/model",
+        "@com_github_pkg_errors//:errors",
+        "@net_starlark_go//starlark",
+    ],
+)

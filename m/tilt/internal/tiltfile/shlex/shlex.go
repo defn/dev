@@ -5,7 +5,7 @@ import (
 
 	"github.com/defn/dev/m/tilt/internal/tiltfile/starkit"
 
-	"github.com/alessio/shellescape"
+	"al.essio.dev/pkg/shellescape"
 )
 
 type Plugin struct{}

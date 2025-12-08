@@ -1,0 +1,20 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "tiltfiles",
+    srcs = [
+        "actions.go",
+        "args.go",
+        "reducers.go",
+    ],
+    importpath = "github.com/defn/dev/m/tilt/internal/store/tiltfiles",
+    visibility = ["//tilt:__subpackages__"],
+    deps = [
+        "//tilt/internal/controllers/apicmp",
+        "//tilt/internal/store",
+        "//tilt/pkg/apis/core/v1alpha1",
+        "//tilt/pkg/model",
+        "@io_k8s_apimachinery//pkg/types",
+        "@io_k8s_sigs_controller_runtime//pkg/client",
+    ],
+)

@@ -1,0 +1,30 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
+
+go_library(
+    name = "visitor",
+    srcs = [
+        "decode.go",
+        "strings.go",
+        "visitor.go",
+    ],
+    importpath = "github.com/defn/dev/m/tilt/internal/cli/visitor",
+    visibility = ["//tilt:__subpackages__"],
+    deps = [
+        "@com_github_pkg_errors//:errors",
+        "@io_k8s_apimachinery//pkg/apis/meta/v1:meta",
+        "@io_k8s_apimachinery//pkg/runtime",
+        "@io_k8s_apimachinery//pkg/util/yaml",
+    ],
+)
+
+go_test(
+    name = "visitor_test",
+    srcs = ["decode_test.go"],
+    deps = [
+        ":visitor",
+        "//tilt/pkg/apis/core/v1alpha1",
+        "@com_github_stretchr_testify//assert",
+        "@com_github_stretchr_testify//require",
+        "@io_k8s_apimachinery//pkg/runtime",
+    ],
+)

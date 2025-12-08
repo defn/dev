@@ -1,0 +1,25 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
+
+go_library(
+    name = "loaddynamic",
+    srcs = ["load.go"],
+    importpath = "github.com/defn/dev/m/tilt/internal/tiltfile/loaddynamic",
+    visibility = ["//tilt:__subpackages__"],
+    deps = [
+        "//tilt/internal/tiltfile/starkit",
+        "//tilt/internal/tiltfile/value",
+        "@net_starlark_go//starlark",
+    ],
+)
+
+go_test(
+    name = "loaddynamic_test",
+    srcs = ["load_test.go"],
+    embed = [":loaddynamic"],
+    deps = [
+        "//tilt/internal/tiltfile/starkit",
+        "@com_github_stretchr_testify//assert",
+        "@com_github_stretchr_testify//require",
+        "@net_starlark_go//starlark",
+    ],
+)

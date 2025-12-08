@@ -1,0 +1,16 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "clusters",
+    srcs = [
+        "actions.go",
+        "reducers.go",
+    ],
+    importpath = "github.com/defn/dev/m/tilt/internal/store/clusters",
+    visibility = ["//tilt:__subpackages__"],
+    deps = [
+        "//tilt/internal/store",
+        "//tilt/pkg/apis/core/v1alpha1",
+        "@io_k8s_apimachinery//pkg/types",
+    ],
+)

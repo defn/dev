@@ -1,0 +1,24 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
+
+go_library(
+    name = "jsonpath",
+    srcs = [
+        "doc.go",
+        "jsonpath.go",
+        "node.go",
+        "parser.go",
+        "value.go",
+    ],
+    importpath = "github.com/defn/dev/m/tilt/internal/k8s/jsonpath",
+    visibility = ["//tilt:__subpackages__"],
+    deps = ["@io_k8s_client_go//third_party/forked/golang/template"],
+)
+
+go_test(
+    name = "jsonpath_test",
+    srcs = [
+        "jsonpath_test.go",
+        "parser_test.go",
+    ],
+    embed = [":jsonpath"],
+)

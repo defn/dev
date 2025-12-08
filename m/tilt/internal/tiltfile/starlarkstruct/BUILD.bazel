@@ -1,0 +1,22 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
+
+go_library(
+    name = "starlarkstruct",
+    srcs = ["struct.go"],
+    importpath = "github.com/defn/dev/m/tilt/internal/tiltfile/starlarkstruct",
+    visibility = ["//tilt:__subpackages__"],
+    deps = [
+        "//tilt/internal/tiltfile/starkit",
+        "@net_starlark_go//starlarkstruct",
+    ],
+)
+
+go_test(
+    name = "starlarkstruct_test",
+    srcs = ["struct_test.go"],
+    embed = [":starlarkstruct"],
+    deps = [
+        "//tilt/internal/tiltfile/starkit",
+        "@com_github_stretchr_testify//require",
+    ],
+)

@@ -1,0 +1,18 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "fsevent",
+    srcs = [
+        "coalesce.go",
+        "factories.go",
+        "fake.go",
+        "fake_watcher.go",
+    ],
+    importpath = "github.com/defn/dev/m/tilt/internal/controllers/core/filewatch/fsevent",
+    visibility = ["//tilt:__subpackages__"],
+    deps = [
+        "//tilt/internal/ospath",
+        "//tilt/internal/watch",
+        "//tilt/pkg/logger",
+    ],
+)

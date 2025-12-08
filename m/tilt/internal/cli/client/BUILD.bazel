@@ -1,0 +1,26 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "client",
+    srcs = [
+        "config.go",
+        "getter.go",
+        "wire.go",
+    ],
+    importpath = "github.com/defn/dev/m/tilt/internal/cli/client",
+    visibility = ["//tilt:__subpackages__"],
+    deps = [
+        "//tilt/internal/filelock",
+        "//tilt/pkg/model",
+        "@com_github_google_wire//:wire",
+        "@com_github_tilt_dev_wmclient//pkg/dirs",
+        "@io_k8s_apimachinery//pkg/api/meta",
+        "@io_k8s_cli_runtime//pkg/genericclioptions",
+        "@io_k8s_client_go//discovery",
+        "@io_k8s_client_go//discovery/cached/disk",
+        "@io_k8s_client_go//rest",
+        "@io_k8s_client_go//restmapper",
+        "@io_k8s_client_go//tools/clientcmd",
+        "@io_k8s_client_go//tools/clientcmd/api",
+    ],
+)

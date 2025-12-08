@@ -1,0 +1,14 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "configmap",
+    srcs = ["disable.go"],
+    importpath = "github.com/defn/dev/m/tilt/internal/testutils/configmap",
+    visibility = ["//tilt:__subpackages__"],
+    deps = [
+        "//tilt/pkg/apis/core/v1alpha1",
+        "@io_k8s_apimachinery//pkg/apis/meta/v1:meta",
+        "@io_k8s_sigs_controller_runtime//pkg/client",
+        "@io_k8s_sigs_controller_runtime//pkg/controller/controllerutil",
+    ],
+)

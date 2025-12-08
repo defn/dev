@@ -1,0 +1,17 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "liveupdate",
+    srcs = [
+        "liveupdate.go",
+        "mode.go",
+    ],
+    importpath = "github.com/defn/dev/m/tilt/internal/controllers/apis/liveupdate",
+    visibility = ["//tilt:__subpackages__"],
+    deps = [
+        "//tilt/internal/container",
+        "//tilt/pkg/apis",
+        "//tilt/pkg/apis/core/v1alpha1",
+        "//tilt/pkg/model",
+    ],
+)

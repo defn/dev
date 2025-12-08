@@ -1,0 +1,13 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "openapi",
+    srcs = ["zz_generated.openapi.go"],
+    importpath = "github.com/defn/dev/m/tilt/pkg/openapi",
+    visibility = ["//visibility:public"],
+    deps = [
+        "@io_k8s_apimachinery//pkg/apis/meta/v1:meta",
+        "@io_k8s_kube_openapi//pkg/common",
+        "@io_k8s_kube_openapi//pkg/validation/spec",
+    ],
+)
