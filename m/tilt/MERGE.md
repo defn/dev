@@ -452,6 +452,46 @@ Replaced `testdata.CertKey()` with `inMemoryCertKey()` which returns an empty `G
 7. **`tilt/internal/git/remote_test.go`**:
    - Fixed test that had old `tilt-dev/tilt` git remote URL, updated to `defn/dev/m/tilt`
 
+## 10. Removed Tests Requiring External CLI Tools
+
+Tests that require external CLI tools (helm, kustomize) are removed from Bazel builds since these tools aren't available in the sandbox.
+
+**Note**: Helm and kustomize support will be removed entirely from this fork. These tools should only be used to render YAML, which tilt can process directly. The tests are removed as a precursor to removing the functionality itself.
+
+### Files Modified
+
+1. **`tilt/internal/tiltfile/tiltfile_test.go`**:
+   - Removed 5 kustomize tests: `TestKustomize`, `TestKustomizeFlags`, `TestKustomizeBin`, `TestKustomizeError`, `TestKustomization`
+   - Added comment noting tests were removed for Bazel sandbox compatibility
+
+2. **`tilt/internal/tiltfile/BUILD.bazel`**:
+   - Removed `helm_test.go` from test srcs (12 helm tests require helm CLI)
+
+### Tests Removed
+
+**Kustomize tests** (require `kustomize` CLI):
+- TestKustomize
+- TestKustomizeFlags
+- TestKustomizeBin
+- TestKustomizeError
+- TestKustomization
+
+**Helm tests** (require `helm` CLI):
+- TestHelm
+- TestHelmArgs
+- TestHelmNamespaceFlagDoesNotInsertNSEntityIfNSInChart
+- TestHelmNamespaceFlagInsertsNSEntityIfDifferentNSInChart
+- TestHelmFromRepoPath
+- TestHelmMalformedChart
+- TestHelmNamespace
+- TestHelmSetArgs
+- TestHelmReleaseName
+- TestHelm3CRD
+- TestHelmSkipsTests
+- TestHelmIncludesRequirements
+
+**Note**: Docker/docker-compose tests use mocks and don't require actual CLI tools.
+
 ## Future Considerations
 
 1. **Proto generation**: Currently disabled for tilt protos. If protos need to be regenerated, the import paths in the .proto files would need to be updated to include `tilt/` prefix, or a proto strip prefix would need to be configured.
@@ -461,6 +501,8 @@ Replaced `testdata.CertKey()` with `inMemoryCertKey()` which returns an empty `G
 3. **gazelle:ignore**: The `tilt/pkg/webview/BUILD.bazel` file has `# gazelle:ignore` to prevent gazelle from overwriting the manual proto fix. Running `bazel run //:gazelle` is safe.
 
 4. **tilt-apiserver testdata.CertKey()**: The upstream `tilt-apiserver` package's `testdata.CertKey()` uses `runtime.Caller()` to find certificate fixture files at compile time. This doesn't work in Bazel sandboxes because the path points to a read-only external dependency location. We replaced it with `inMemoryCertKey()` which returns an empty `GeneratableKeyCert{}` that generates certificates in-memory instead of using cached fixtures. This is slightly slower but works in sandboxed environments. Consider fixing upstream to support configurable fixture paths.
+
+5. **macOS linker warnings**: On macOS, you may see warnings like `ld: warning: ignoring duplicate libraries: '-lm'` during linking. This is a known issue with `rules_go` and CGO dependencies on macOS - the math library gets passed multiple times to the linker. These warnings are harmless and can be ignored. They may be fixed in a future `rules_go` release. Linux builds should not have this issue.
 
 ## Commands Used
 
