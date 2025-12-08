@@ -5,8 +5,8 @@ import (
 	"context"
 	"testing"
 
-	"github.com/tilt-dev/tilt/internal/container"
-	"github.com/tilt-dev/tilt/pkg/logger"
+	"github.com/defn/dev/m/tilt/internal/container"
+	"github.com/defn/dev/m/tilt/pkg/logger"
 
 	"github.com/stretchr/testify/assert"
 	"k8s.io/apimachinery/pkg/runtime"

@@ -117,7 +117,8 @@ const DisabledSidebarItemBox = styled.div`
   &.isSelected {
     background-color: ${Color.gray70};
     color: ${Color.gray10};
-    transition: color ${AnimDuration.default} linear,
+    transition:
+      color ${AnimDuration.default} linear,
       font-weight ${AnimDuration.default} linear;
     font-weight: normal;
   }

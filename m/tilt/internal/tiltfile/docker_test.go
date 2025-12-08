@@ -9,8 +9,8 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 
-	"github.com/tilt-dev/tilt/internal/testutils"
-	"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1"
+	"github.com/defn/dev/m/tilt/internal/testutils"
+	"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1"
 )
 
 func TestDockerignoreInSyncDir(t *testing.T) {

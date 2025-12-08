@@ -39,7 +39,7 @@ import (
 func ExampleGet(t *testing.T) {
 	usr, _ := user.Current()
 	downloader := get.NewDownloader(filepath.Join(usr.HomeDir, ".cache", "go-get"))
-	path, err := downloader.Download("github.com/tilt-dev/tilt-extensions/hello_world")
+	path, err := downloader.Download("github.com/defn/dev/m/tilt-extensions/hello_world")
 	if err != nil {
 		t.Fatal(err)
 	}

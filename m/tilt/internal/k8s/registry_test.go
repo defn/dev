@@ -8,9 +8,9 @@ import (
 	goruntime "runtime"
 	"testing"
 
+	"github.com/defn/dev/m/tilt/internal/container"
+	"github.com/defn/dev/m/tilt/pkg/logger"
 	"github.com/tilt-dev/clusterid"
-	"github.com/tilt-dev/tilt/internal/container"
-	"github.com/tilt-dev/tilt/pkg/logger"
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"

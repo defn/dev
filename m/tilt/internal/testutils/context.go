@@ -9,8 +9,8 @@ import (
 
 	"github.com/tilt-dev/wmclient/pkg/analytics"
 
-	tiltanalytics "github.com/tilt-dev/tilt/internal/analytics"
-	"github.com/tilt-dev/tilt/pkg/logger"
+	tiltanalytics "github.com/defn/dev/m/tilt/internal/analytics"
+	"github.com/defn/dev/m/tilt/pkg/logger"
 )
 
 func LoggerCtx() context.Context {

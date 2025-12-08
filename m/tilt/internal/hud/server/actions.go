@@ -1,7 +1,7 @@
 package server
 
 import (
-	"github.com/tilt-dev/tilt/pkg/model"
+	"github.com/defn/dev/m/tilt/pkg/model"
 )
 
 // TODO: a way to clear an override

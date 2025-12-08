@@ -5,7 +5,7 @@ import (
 
 	"github.com/stretchr/testify/assert"
 
-	"github.com/tilt-dev/tilt/internal/tiltfile/starkit"
+	"github.com/defn/dev/m/tilt/internal/tiltfile/starkit"
 )
 
 func TestMetricsEnabled(t *testing.T) {

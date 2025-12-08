@@ -14,8 +14,8 @@ import (
 
 	"github.com/jonboulle/clockwork"
 
-	"github.com/tilt-dev/tilt/internal/controllers/indexer"
-	"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1"
+	"github.com/defn/dev/m/tilt/internal/controllers/indexer"
+	"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1"
 
 	v1 "k8s.io/api/core/v1"
 	apierrors "k8s.io/apimachinery/pkg/api/errors"
@@ -24,13 +24,13 @@ import (
 	ctrlclient "sigs.k8s.io/controller-runtime/pkg/client"
 	"sigs.k8s.io/controller-runtime/pkg/reconcile"
 
-	"github.com/tilt-dev/tilt/internal/container"
-	"github.com/tilt-dev/tilt/internal/controllers/apicmp"
-	"github.com/tilt-dev/tilt/internal/engine/runtimelog"
-	"github.com/tilt-dev/tilt/internal/k8s"
-	"github.com/tilt-dev/tilt/internal/store"
-	"github.com/tilt-dev/tilt/internal/store/k8sconv"
-	"github.com/tilt-dev/tilt/pkg/logger"
+	"github.com/defn/dev/m/tilt/internal/container"
+	"github.com/defn/dev/m/tilt/internal/controllers/apicmp"
+	"github.com/defn/dev/m/tilt/internal/engine/runtimelog"
+	"github.com/defn/dev/m/tilt/internal/k8s"
+	"github.com/defn/dev/m/tilt/internal/store"
+	"github.com/defn/dev/m/tilt/internal/store/k8sconv"
+	"github.com/defn/dev/m/tilt/pkg/logger"
 )
 
 var podLogHealthCheck = 15 * time.Second
@@ -364,7 +364,7 @@ func (c *Controller) consumeLogs(watch *podLogWatch, st store.RStore) {
 		reader.Now = c.clock.Now
 
 		// A hacky workaround for
-		// https://github.com/tilt-dev/tilt/issues/3908
+		// https://github.com/defn/dev/m/tilt/issues/3908
 		// Every 15 seconds, check to see if the logs have stopped streaming.
 		// If they have, reconnect to the log stream.
 		done := make(chan bool)

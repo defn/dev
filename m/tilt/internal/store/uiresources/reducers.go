@@ -3,11 +3,11 @@ package uiresources
 import (
 	"fmt"
 
-	"github.com/tilt-dev/tilt/internal/store"
-	"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1"
-	"github.com/tilt-dev/tilt/pkg/logger"
-	"github.com/tilt-dev/tilt/pkg/model"
-	"github.com/tilt-dev/tilt/pkg/model/logstore"
+	"github.com/defn/dev/m/tilt/internal/store"
+	"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1"
+	"github.com/defn/dev/m/tilt/pkg/logger"
+	"github.com/defn/dev/m/tilt/pkg/model"
+	"github.com/defn/dev/m/tilt/pkg/model/logstore"
 )
 
 func HandleUIResourceUpsertAction(state *store.EngineState, action UIResourceUpsertAction) {

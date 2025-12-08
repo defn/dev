@@ -3,8 +3,8 @@ package session
 import (
 	"context"
 
-	"github.com/tilt-dev/tilt/internal/controllers/core/session"
-	"github.com/tilt-dev/tilt/internal/store"
+	"github.com/defn/dev/m/tilt/internal/controllers/core/session"
+	"github.com/defn/dev/m/tilt/internal/store"
 )
 
 // A stub controller that simply schedules Session reconciliation whenever

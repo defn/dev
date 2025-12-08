@@ -11,9 +11,9 @@ import (
 
 	"github.com/stretchr/testify/require"
 
-	"github.com/tilt-dev/tilt/internal/store"
-	"github.com/tilt-dev/tilt/internal/testutils"
-	"github.com/tilt-dev/tilt/internal/testutils/httptest"
+	"github.com/defn/dev/m/tilt/internal/store"
+	"github.com/defn/dev/m/tilt/internal/testutils"
+	"github.com/defn/dev/m/tilt/internal/testutils/httptest"
 )
 
 const testCloudAddress = "tiltcloud.example.com"

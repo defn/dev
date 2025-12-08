@@ -10,7 +10,7 @@ import (
 	"k8s.io/apimachinery/pkg/fields"
 	"k8s.io/apimachinery/pkg/labels"
 
-	"github.com/tilt-dev/tilt/internal/timecmp"
+	"github.com/defn/dev/m/tilt/internal/timecmp"
 )
 
 func Comparators() []interface{} {

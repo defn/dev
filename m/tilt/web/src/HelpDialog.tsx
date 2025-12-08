@@ -96,7 +96,7 @@ export default function HelpDialog(props: props) {
       </ShortcutRow>
       <ShortcutRow style={{ marginBottom: "8px" }}>
         <HelpLink
-          href="https://github.com/tilt-dev/tilt/issues/new/choose"
+          href="https://github.com/defn/dev/m/tilt/issues/new/choose"
           target="_blank"
           rel="noopener noreferrer"
         >

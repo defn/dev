@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/tilt-dev/tilt/internal/testutils"
-	"github.com/tilt-dev/tilt/internal/tiltfile/io"
+	"github.com/defn/dev/m/tilt/internal/testutils"
+	"github.com/defn/dev/m/tilt/internal/tiltfile/io"
 
 	"github.com/stretchr/testify/require"
 )

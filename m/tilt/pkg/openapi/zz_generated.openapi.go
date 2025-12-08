@@ -29,249 +29,249 @@ import (
 
 func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenAPIDefinition {
 	return map[string]common.OpenAPIDefinition{
-		"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.Cluster":                           schema_pkg_apis_core_v1alpha1_Cluster(ref),
-		"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.ClusterConnection":                 schema_pkg_apis_core_v1alpha1_ClusterConnection(ref),
-		"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.ClusterConnectionStatus":           schema_pkg_apis_core_v1alpha1_ClusterConnectionStatus(ref),
-		"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.ClusterList":                       schema_pkg_apis_core_v1alpha1_ClusterList(ref),
-		"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.ClusterSpec":                       schema_pkg_apis_core_v1alpha1_ClusterSpec(ref),
-		"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.ClusterStatus":                     schema_pkg_apis_core_v1alpha1_ClusterStatus(ref),
-		"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.Cmd":                               schema_pkg_apis_core_v1alpha1_Cmd(ref),
-		"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.CmdImage":                          schema_pkg_apis_core_v1alpha1_CmdImage(ref),
-		"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.CmdImageList":                      schema_pkg_apis_core_v1alpha1_CmdImageList(ref),
-		"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.CmdImageSpec":                      schema_pkg_apis_core_v1alpha1_CmdImageSpec(ref),
-		"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.CmdImageStateBuilding":             schema_pkg_apis_core_v1alpha1_CmdImageStateBuilding(ref),
-		"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.CmdImageStateCompleted":            schema_pkg_apis_core_v1alpha1_CmdImageStateCompleted(ref),
-		"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.CmdImageStateWaiting":              schema_pkg_apis_core_v1alpha1_CmdImageStateWaiting(ref),
-		"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.CmdImageStatus":                    schema_pkg_apis_core_v1alpha1_CmdImageStatus(ref),
-		"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.CmdList":                           schema_pkg_apis_core_v1alpha1_CmdList(ref),
-		"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.CmdSpec":                           schema_pkg_apis_core_v1alpha1_CmdSpec(ref),
-		"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.CmdStateRunning":                   schema_pkg_apis_core_v1alpha1_CmdStateRunning(ref),
-		"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.CmdStateTerminated":                schema_pkg_apis_core_v1alpha1_CmdStateTerminated(ref),
-		"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.CmdStateWaiting":                   schema_pkg_apis_core_v1alpha1_CmdStateWaiting(ref),
-		"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.CmdStatus":                         schema_pkg_apis_core_v1alpha1_CmdStatus(ref),
-		"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.ConfigMap":                         schema_pkg_apis_core_v1alpha1_ConfigMap(ref),
-		"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.ConfigMapDisableSource":            schema_pkg_apis_core_v1alpha1_ConfigMapDisableSource(ref),
-		"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.ConfigMapList":                     schema_pkg_apis_core_v1alpha1_ConfigMapList(ref),
-		"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.ConfigMapStateSource":              schema_pkg_apis_core_v1alpha1_ConfigMapStateSource(ref),
-		"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.Container":                         schema_pkg_apis_core_v1alpha1_Container(ref),
-		"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.ContainerLogStreamStatus":          schema_pkg_apis_core_v1alpha1_ContainerLogStreamStatus(ref),
-		"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.ContainerState":                    schema_pkg_apis_core_v1alpha1_ContainerState(ref),
-		"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.ContainerStateRunning":             schema_pkg_apis_core_v1alpha1_ContainerStateRunning(ref),
-		"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.ContainerStateTerminated":          schema_pkg_apis_core_v1alpha1_ContainerStateTerminated(ref),
-		"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.ContainerStateWaiting":             schema_pkg_apis_core_v1alpha1_ContainerStateWaiting(ref),
-		"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.DisableResourceStatus":             schema_pkg_apis_core_v1alpha1_DisableResourceStatus(ref),
-		"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.DisableSource":                     schema_pkg_apis_core_v1alpha1_DisableSource(ref),
-		"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.DisableStatus":                     schema_pkg_apis_core_v1alpha1_DisableStatus(ref),
-		"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.DockerClusterConnection":           schema_pkg_apis_core_v1alpha1_DockerClusterConnection(ref),
-		"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.DockerComposeLogStream":            schema_pkg_apis_core_v1alpha1_DockerComposeLogStream(ref),
-		"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.DockerComposeLogStreamList":        schema_pkg_apis_core_v1alpha1_DockerComposeLogStreamList(ref),
-		"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.DockerComposeLogStreamSpec":        schema_pkg_apis_core_v1alpha1_DockerComposeLogStreamSpec(ref),
-		"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.DockerComposeLogStreamStatus":      schema_pkg_apis_core_v1alpha1_DockerComposeLogStreamStatus(ref),
-		"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.DockerComposeProject":              schema_pkg_apis_core_v1alpha1_DockerComposeProject(ref),
-		"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.DockerComposeService":              schema_pkg_apis_core_v1alpha1_DockerComposeService(ref),
-		"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.DockerComposeServiceList":          schema_pkg_apis_core_v1alpha1_DockerComposeServiceList(ref),
-		"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.DockerComposeServiceSpec":          schema_pkg_apis_core_v1alpha1_DockerComposeServiceSpec(ref),
-		"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.DockerComposeServiceStatus":        schema_pkg_apis_core_v1alpha1_DockerComposeServiceStatus(ref),
-		"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.DockerContainerState":              schema_pkg_apis_core_v1alpha1_DockerContainerState(ref),
-		"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.DockerImage":                       schema_pkg_apis_core_v1alpha1_DockerImage(ref),
-		"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.DockerImageList":                   schema_pkg_apis_core_v1alpha1_DockerImageList(ref),
-		"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.DockerImageSpec":                   schema_pkg_apis_core_v1alpha1_DockerImageSpec(ref),
-		"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.DockerImageStageStatus":            schema_pkg_apis_core_v1alpha1_DockerImageStageStatus(ref),
-		"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.DockerImageStateBuilding":          schema_pkg_apis_core_v1alpha1_DockerImageStateBuilding(ref),
-		"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.DockerImageStateCompleted":         schema_pkg_apis_core_v1alpha1_DockerImageStateCompleted(ref),
-		"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.DockerImageStateWaiting":           schema_pkg_apis_core_v1alpha1_DockerImageStateWaiting(ref),
-		"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.DockerImageStatus":                 schema_pkg_apis_core_v1alpha1_DockerImageStatus(ref),
-		"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.DockerPortBinding":                 schema_pkg_apis_core_v1alpha1_DockerPortBinding(ref),
-		"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.ExecAction":                        schema_pkg_apis_core_v1alpha1_ExecAction(ref),
-		"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.Extension":                         schema_pkg_apis_core_v1alpha1_Extension(ref),
-		"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.ExtensionList":                     schema_pkg_apis_core_v1alpha1_ExtensionList(ref),
-		"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.ExtensionRepo":                     schema_pkg_apis_core_v1alpha1_ExtensionRepo(ref),
-		"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.ExtensionRepoList":                 schema_pkg_apis_core_v1alpha1_ExtensionRepoList(ref),
-		"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.ExtensionRepoSpec":                 schema_pkg_apis_core_v1alpha1_ExtensionRepoSpec(ref),
-		"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.ExtensionRepoStatus":               schema_pkg_apis_core_v1alpha1_ExtensionRepoStatus(ref),
-		"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.ExtensionSpec":                     schema_pkg_apis_core_v1alpha1_ExtensionSpec(ref),
-		"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.ExtensionStatus":                   schema_pkg_apis_core_v1alpha1_ExtensionStatus(ref),
-		"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.FileEvent":                         schema_pkg_apis_core_v1alpha1_FileEvent(ref),
-		"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.FileWatch":                         schema_pkg_apis_core_v1alpha1_FileWatch(ref),
-		"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.FileWatchList":                     schema_pkg_apis_core_v1alpha1_FileWatchList(ref),
-		"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.FileWatchSpec":                     schema_pkg_apis_core_v1alpha1_FileWatchSpec(ref),
-		"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.FileWatchStatus":                   schema_pkg_apis_core_v1alpha1_FileWatchStatus(ref),
-		"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.Forward":                           schema_pkg_apis_core_v1alpha1_Forward(ref),
-		"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.ForwardStatus":                     schema_pkg_apis_core_v1alpha1_ForwardStatus(ref),
-		"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.HTTPGetAction":                     schema_pkg_apis_core_v1alpha1_HTTPGetAction(ref),
-		"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.HTTPHeader":                        schema_pkg_apis_core_v1alpha1_HTTPHeader(ref),
-		"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.Handler":                           schema_pkg_apis_core_v1alpha1_Handler(ref),
-		"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.IgnoreDef":                         schema_pkg_apis_core_v1alpha1_IgnoreDef(ref),
-		"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.ImageMap":                          schema_pkg_apis_core_v1alpha1_ImageMap(ref),
-		"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.ImageMapList":                      schema_pkg_apis_core_v1alpha1_ImageMapList(ref),
-		"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.ImageMapOverrideArgs":              schema_pkg_apis_core_v1alpha1_ImageMapOverrideArgs(ref),
-		"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.ImageMapOverrideCommand":           schema_pkg_apis_core_v1alpha1_ImageMapOverrideCommand(ref),
-		"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.ImageMapSpec":                      schema_pkg_apis_core_v1alpha1_ImageMapSpec(ref),
-		"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.ImageMapStatus":                    schema_pkg_apis_core_v1alpha1_ImageMapStatus(ref),
-		"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.KubernetesApply":                   schema_pkg_apis_core_v1alpha1_KubernetesApply(ref),
-		"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.KubernetesApplyCmd":                schema_pkg_apis_core_v1alpha1_KubernetesApplyCmd(ref),
-		"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.KubernetesApplyList":               schema_pkg_apis_core_v1alpha1_KubernetesApplyList(ref),
-		"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.KubernetesApplySpec":               schema_pkg_apis_core_v1alpha1_KubernetesApplySpec(ref),
-		"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.KubernetesApplyStatus":             schema_pkg_apis_core_v1alpha1_KubernetesApplyStatus(ref),
-		"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.KubernetesClusterConnection":       schema_pkg_apis_core_v1alpha1_KubernetesClusterConnection(ref),
-		"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.KubernetesClusterConnectionStatus": schema_pkg_apis_core_v1alpha1_KubernetesClusterConnectionStatus(ref),
-		"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.KubernetesDiscovery":               schema_pkg_apis_core_v1alpha1_KubernetesDiscovery(ref),
-		"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.KubernetesDiscoveryList":           schema_pkg_apis_core_v1alpha1_KubernetesDiscoveryList(ref),
-		"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.KubernetesDiscoverySpec":           schema_pkg_apis_core_v1alpha1_KubernetesDiscoverySpec(ref),
-		"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.KubernetesDiscoveryStateRunning":   schema_pkg_apis_core_v1alpha1_KubernetesDiscoveryStateRunning(ref),
-		"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.KubernetesDiscoveryStateWaiting":   schema_pkg_apis_core_v1alpha1_KubernetesDiscoveryStateWaiting(ref),
-		"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.KubernetesDiscoveryStatus":         schema_pkg_apis_core_v1alpha1_KubernetesDiscoveryStatus(ref),
-		"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.KubernetesDiscoveryTemplateSpec":   schema_pkg_apis_core_v1alpha1_KubernetesDiscoveryTemplateSpec(ref),
-		"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.KubernetesImageLocator":            schema_pkg_apis_core_v1alpha1_KubernetesImageLocator(ref),
-		"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.KubernetesImageObjectDescriptor":   schema_pkg_apis_core_v1alpha1_KubernetesImageObjectDescriptor(ref),
-		"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.KubernetesWatchRef":                schema_pkg_apis_core_v1alpha1_KubernetesWatchRef(ref),
-		"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.LiveUpdate":                        schema_pkg_apis_core_v1alpha1_LiveUpdate(ref),
-		"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.LiveUpdateContainerStateWaiting":   schema_pkg_apis_core_v1alpha1_LiveUpdateContainerStateWaiting(ref),
-		"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.LiveUpdateContainerStatus":         schema_pkg_apis_core_v1alpha1_LiveUpdateContainerStatus(ref),
-		"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.LiveUpdateDockerComposeSelector":   schema_pkg_apis_core_v1alpha1_LiveUpdateDockerComposeSelector(ref),
-		"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.LiveUpdateExec":                    schema_pkg_apis_core_v1alpha1_LiveUpdateExec(ref),
-		"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.LiveUpdateKubernetesSelector":      schema_pkg_apis_core_v1alpha1_LiveUpdateKubernetesSelector(ref),
-		"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.LiveUpdateList":                    schema_pkg_apis_core_v1alpha1_LiveUpdateList(ref),
-		"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.LiveUpdateSelector":                schema_pkg_apis_core_v1alpha1_LiveUpdateSelector(ref),
-		"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.LiveUpdateSource":                  schema_pkg_apis_core_v1alpha1_LiveUpdateSource(ref),
-		"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.LiveUpdateSpec":                    schema_pkg_apis_core_v1alpha1_LiveUpdateSpec(ref),
-		"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.LiveUpdateStateFailed":             schema_pkg_apis_core_v1alpha1_LiveUpdateStateFailed(ref),
-		"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.LiveUpdateStatus":                  schema_pkg_apis_core_v1alpha1_LiveUpdateStatus(ref),
-		"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.LiveUpdateSync":                    schema_pkg_apis_core_v1alpha1_LiveUpdateSync(ref),
-		"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.ObjectSelector":                    schema_pkg_apis_core_v1alpha1_ObjectSelector(ref),
-		"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.Pod":                               schema_pkg_apis_core_v1alpha1_Pod(ref),
-		"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.PodCondition":                      schema_pkg_apis_core_v1alpha1_PodCondition(ref),
-		"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.PodLogStream":                      schema_pkg_apis_core_v1alpha1_PodLogStream(ref),
-		"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.PodLogStreamList":                  schema_pkg_apis_core_v1alpha1_PodLogStreamList(ref),
-		"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.PodLogStreamSpec":                  schema_pkg_apis_core_v1alpha1_PodLogStreamSpec(ref),
-		"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.PodLogStreamStatus":                schema_pkg_apis_core_v1alpha1_PodLogStreamStatus(ref),
-		"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.PodLogStreamTemplateSpec":          schema_pkg_apis_core_v1alpha1_PodLogStreamTemplateSpec(ref),
-		"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.PodOwner":                          schema_pkg_apis_core_v1alpha1_PodOwner(ref),
-		"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.PortForward":                       schema_pkg_apis_core_v1alpha1_PortForward(ref),
-		"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.PortForwardList":                   schema_pkg_apis_core_v1alpha1_PortForwardList(ref),
-		"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.PortForwardSpec":                   schema_pkg_apis_core_v1alpha1_PortForwardSpec(ref),
-		"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.PortForwardStatus":                 schema_pkg_apis_core_v1alpha1_PortForwardStatus(ref),
-		"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.PortForwardTemplateSpec":           schema_pkg_apis_core_v1alpha1_PortForwardTemplateSpec(ref),
-		"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.Probe":                             schema_pkg_apis_core_v1alpha1_Probe(ref),
-		"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.RegistryHosting":                   schema_pkg_apis_core_v1alpha1_RegistryHosting(ref),
-		"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.RestartOnSpec":                     schema_pkg_apis_core_v1alpha1_RestartOnSpec(ref),
-		"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.Session":                           schema_pkg_apis_core_v1alpha1_Session(ref),
-		"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.SessionCISpec":                     schema_pkg_apis_core_v1alpha1_SessionCISpec(ref),
-		"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.SessionList":                       schema_pkg_apis_core_v1alpha1_SessionList(ref),
-		"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.SessionSpec":                       schema_pkg_apis_core_v1alpha1_SessionSpec(ref),
-		"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.SessionStatus":                     schema_pkg_apis_core_v1alpha1_SessionStatus(ref),
-		"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.StartOnSpec":                       schema_pkg_apis_core_v1alpha1_StartOnSpec(ref),
-		"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.StateSource":                       schema_pkg_apis_core_v1alpha1_StateSource(ref),
-		"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.StopOnSpec":                        schema_pkg_apis_core_v1alpha1_StopOnSpec(ref),
-		"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.TCPSocketAction":                   schema_pkg_apis_core_v1alpha1_TCPSocketAction(ref),
-		"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.Target":                            schema_pkg_apis_core_v1alpha1_Target(ref),
-		"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.TargetState":                       schema_pkg_apis_core_v1alpha1_TargetState(ref),
-		"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.TargetStateActive":                 schema_pkg_apis_core_v1alpha1_TargetStateActive(ref),
-		"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.TargetStateDisabled":               schema_pkg_apis_core_v1alpha1_TargetStateDisabled(ref),
-		"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.TargetStateTerminated":             schema_pkg_apis_core_v1alpha1_TargetStateTerminated(ref),
-		"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.TargetStateWaiting":                schema_pkg_apis_core_v1alpha1_TargetStateWaiting(ref),
-		"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.TiltBuild":                         schema_pkg_apis_core_v1alpha1_TiltBuild(ref),
-		"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.Tiltfile":                          schema_pkg_apis_core_v1alpha1_Tiltfile(ref),
-		"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.TiltfileList":                      schema_pkg_apis_core_v1alpha1_TiltfileList(ref),
-		"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.TiltfileSpec":                      schema_pkg_apis_core_v1alpha1_TiltfileSpec(ref),
-		"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.TiltfileStateRunning":              schema_pkg_apis_core_v1alpha1_TiltfileStateRunning(ref),
-		"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.TiltfileStateTerminated":           schema_pkg_apis_core_v1alpha1_TiltfileStateTerminated(ref),
-		"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.TiltfileStateWaiting":              schema_pkg_apis_core_v1alpha1_TiltfileStateWaiting(ref),
-		"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.TiltfileStatus":                    schema_pkg_apis_core_v1alpha1_TiltfileStatus(ref),
-		"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.ToggleButton":                      schema_pkg_apis_core_v1alpha1_ToggleButton(ref),
-		"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.ToggleButtonList":                  schema_pkg_apis_core_v1alpha1_ToggleButtonList(ref),
-		"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.ToggleButtonSpec":                  schema_pkg_apis_core_v1alpha1_ToggleButtonSpec(ref),
-		"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.ToggleButtonStateSpec":             schema_pkg_apis_core_v1alpha1_ToggleButtonStateSpec(ref),
-		"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.ToggleButtonStatus":                schema_pkg_apis_core_v1alpha1_ToggleButtonStatus(ref),
-		"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.UIBoolInputSpec":                   schema_pkg_apis_core_v1alpha1_UIBoolInputSpec(ref),
-		"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.UIBoolInputStatus":                 schema_pkg_apis_core_v1alpha1_UIBoolInputStatus(ref),
-		"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.UIBuildRunning":                    schema_pkg_apis_core_v1alpha1_UIBuildRunning(ref),
-		"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.UIBuildTerminated":                 schema_pkg_apis_core_v1alpha1_UIBuildTerminated(ref),
-		"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.UIButton":                          schema_pkg_apis_core_v1alpha1_UIButton(ref),
-		"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.UIButtonList":                      schema_pkg_apis_core_v1alpha1_UIButtonList(ref),
-		"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.UIButtonSpec":                      schema_pkg_apis_core_v1alpha1_UIButtonSpec(ref),
-		"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.UIButtonStatus":                    schema_pkg_apis_core_v1alpha1_UIButtonStatus(ref),
-		"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.UIChoiceInputSpec":                 schema_pkg_apis_core_v1alpha1_UIChoiceInputSpec(ref),
-		"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.UIChoiceInputStatus":               schema_pkg_apis_core_v1alpha1_UIChoiceInputStatus(ref),
-		"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.UIComponentLocation":               schema_pkg_apis_core_v1alpha1_UIComponentLocation(ref),
-		"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.UIComponentLocationResource":       schema_pkg_apis_core_v1alpha1_UIComponentLocationResource(ref),
-		"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.UIFeatureFlag":                     schema_pkg_apis_core_v1alpha1_UIFeatureFlag(ref),
-		"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.UIHiddenInputSpec":                 schema_pkg_apis_core_v1alpha1_UIHiddenInputSpec(ref),
-		"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.UIHiddenInputStatus":               schema_pkg_apis_core_v1alpha1_UIHiddenInputStatus(ref),
-		"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.UIInputSpec":                       schema_pkg_apis_core_v1alpha1_UIInputSpec(ref),
-		"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.UIInputStatus":                     schema_pkg_apis_core_v1alpha1_UIInputStatus(ref),
-		"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.UIResource":                        schema_pkg_apis_core_v1alpha1_UIResource(ref),
-		"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.UIResourceCompose":                 schema_pkg_apis_core_v1alpha1_UIResourceCompose(ref),
-		"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.UIResourceCondition":               schema_pkg_apis_core_v1alpha1_UIResourceCondition(ref),
-		"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.UIResourceKubernetes":              schema_pkg_apis_core_v1alpha1_UIResourceKubernetes(ref),
-		"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.UIResourceLink":                    schema_pkg_apis_core_v1alpha1_UIResourceLink(ref),
-		"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.UIResourceList":                    schema_pkg_apis_core_v1alpha1_UIResourceList(ref),
-		"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.UIResourceLocal":                   schema_pkg_apis_core_v1alpha1_UIResourceLocal(ref),
-		"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.UIResourceSpec":                    schema_pkg_apis_core_v1alpha1_UIResourceSpec(ref),
-		"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.UIResourceStateWaiting":            schema_pkg_apis_core_v1alpha1_UIResourceStateWaiting(ref),
-		"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.UIResourceStateWaitingOnRef":       schema_pkg_apis_core_v1alpha1_UIResourceStateWaitingOnRef(ref),
-		"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.UIResourceStatus":                  schema_pkg_apis_core_v1alpha1_UIResourceStatus(ref),
-		"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.UIResourceTargetSpec":              schema_pkg_apis_core_v1alpha1_UIResourceTargetSpec(ref),
-		"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.UISession":                         schema_pkg_apis_core_v1alpha1_UISession(ref),
-		"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.UISessionList":                     schema_pkg_apis_core_v1alpha1_UISessionList(ref),
-		"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.UISessionSpec":                     schema_pkg_apis_core_v1alpha1_UISessionSpec(ref),
-		"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.UISessionStatus":                   schema_pkg_apis_core_v1alpha1_UISessionStatus(ref),
-		"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.UITextInputSpec":                   schema_pkg_apis_core_v1alpha1_UITextInputSpec(ref),
-		"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.UITextInputStatus":                 schema_pkg_apis_core_v1alpha1_UITextInputStatus(ref),
-		"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.VersionSettings":                   schema_pkg_apis_core_v1alpha1_VersionSettings(ref),
-		"k8s.io/apimachinery/pkg/apis/meta/v1.APIGroup":                                     schema_pkg_apis_meta_v1_APIGroup(ref),
-		"k8s.io/apimachinery/pkg/apis/meta/v1.APIGroupList":                                 schema_pkg_apis_meta_v1_APIGroupList(ref),
-		"k8s.io/apimachinery/pkg/apis/meta/v1.APIResource":                                  schema_pkg_apis_meta_v1_APIResource(ref),
-		"k8s.io/apimachinery/pkg/apis/meta/v1.APIResourceList":                              schema_pkg_apis_meta_v1_APIResourceList(ref),
-		"k8s.io/apimachinery/pkg/apis/meta/v1.APIVersions":                                  schema_pkg_apis_meta_v1_APIVersions(ref),
-		"k8s.io/apimachinery/pkg/apis/meta/v1.ApplyOptions":                                 schema_pkg_apis_meta_v1_ApplyOptions(ref),
-		"k8s.io/apimachinery/pkg/apis/meta/v1.Condition":                                    schema_pkg_apis_meta_v1_Condition(ref),
-		"k8s.io/apimachinery/pkg/apis/meta/v1.CreateOptions":                                schema_pkg_apis_meta_v1_CreateOptions(ref),
-		"k8s.io/apimachinery/pkg/apis/meta/v1.DeleteOptions":                                schema_pkg_apis_meta_v1_DeleteOptions(ref),
-		"k8s.io/apimachinery/pkg/apis/meta/v1.Duration":                                     schema_pkg_apis_meta_v1_Duration(ref),
-		"k8s.io/apimachinery/pkg/apis/meta/v1.FieldSelectorRequirement":                     schema_pkg_apis_meta_v1_FieldSelectorRequirement(ref),
-		"k8s.io/apimachinery/pkg/apis/meta/v1.FieldsV1":                                     schema_pkg_apis_meta_v1_FieldsV1(ref),
-		"k8s.io/apimachinery/pkg/apis/meta/v1.GetOptions":                                   schema_pkg_apis_meta_v1_GetOptions(ref),
-		"k8s.io/apimachinery/pkg/apis/meta/v1.GroupKind":                                    schema_pkg_apis_meta_v1_GroupKind(ref),
-		"k8s.io/apimachinery/pkg/apis/meta/v1.GroupResource":                                schema_pkg_apis_meta_v1_GroupResource(ref),
-		"k8s.io/apimachinery/pkg/apis/meta/v1.GroupVersion":                                 schema_pkg_apis_meta_v1_GroupVersion(ref),
-		"k8s.io/apimachinery/pkg/apis/meta/v1.GroupVersionForDiscovery":                     schema_pkg_apis_meta_v1_GroupVersionForDiscovery(ref),
-		"k8s.io/apimachinery/pkg/apis/meta/v1.GroupVersionKind":                             schema_pkg_apis_meta_v1_GroupVersionKind(ref),
-		"k8s.io/apimachinery/pkg/apis/meta/v1.GroupVersionResource":                         schema_pkg_apis_meta_v1_GroupVersionResource(ref),
-		"k8s.io/apimachinery/pkg/apis/meta/v1.InternalEvent":                                schema_pkg_apis_meta_v1_InternalEvent(ref),
-		"k8s.io/apimachinery/pkg/apis/meta/v1.LabelSelector":                                schema_pkg_apis_meta_v1_LabelSelector(ref),
-		"k8s.io/apimachinery/pkg/apis/meta/v1.LabelSelectorRequirement":                     schema_pkg_apis_meta_v1_LabelSelectorRequirement(ref),
-		"k8s.io/apimachinery/pkg/apis/meta/v1.List":                                         schema_pkg_apis_meta_v1_List(ref),
-		"k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta":                                     schema_pkg_apis_meta_v1_ListMeta(ref),
-		"k8s.io/apimachinery/pkg/apis/meta/v1.ListOptions":                                  schema_pkg_apis_meta_v1_ListOptions(ref),
-		"k8s.io/apimachinery/pkg/apis/meta/v1.ManagedFieldsEntry":                           schema_pkg_apis_meta_v1_ManagedFieldsEntry(ref),
-		"k8s.io/apimachinery/pkg/apis/meta/v1.MicroTime":                                    schema_pkg_apis_meta_v1_MicroTime(ref),
-		"k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta":                                   schema_pkg_apis_meta_v1_ObjectMeta(ref),
-		"k8s.io/apimachinery/pkg/apis/meta/v1.OwnerReference":                               schema_pkg_apis_meta_v1_OwnerReference(ref),
-		"k8s.io/apimachinery/pkg/apis/meta/v1.PartialObjectMetadata":                        schema_pkg_apis_meta_v1_PartialObjectMetadata(ref),
-		"k8s.io/apimachinery/pkg/apis/meta/v1.PartialObjectMetadataList":                    schema_pkg_apis_meta_v1_PartialObjectMetadataList(ref),
-		"k8s.io/apimachinery/pkg/apis/meta/v1.Patch":                                        schema_pkg_apis_meta_v1_Patch(ref),
-		"k8s.io/apimachinery/pkg/apis/meta/v1.PatchOptions":                                 schema_pkg_apis_meta_v1_PatchOptions(ref),
-		"k8s.io/apimachinery/pkg/apis/meta/v1.Preconditions":                                schema_pkg_apis_meta_v1_Preconditions(ref),
-		"k8s.io/apimachinery/pkg/apis/meta/v1.RootPaths":                                    schema_pkg_apis_meta_v1_RootPaths(ref),
-		"k8s.io/apimachinery/pkg/apis/meta/v1.ServerAddressByClientCIDR":                    schema_pkg_apis_meta_v1_ServerAddressByClientCIDR(ref),
-		"k8s.io/apimachinery/pkg/apis/meta/v1.Status":                                       schema_pkg_apis_meta_v1_Status(ref),
-		"k8s.io/apimachinery/pkg/apis/meta/v1.StatusCause":                                  schema_pkg_apis_meta_v1_StatusCause(ref),
-		"k8s.io/apimachinery/pkg/apis/meta/v1.StatusDetails":                                schema_pkg_apis_meta_v1_StatusDetails(ref),
-		"k8s.io/apimachinery/pkg/apis/meta/v1.Table":                                        schema_pkg_apis_meta_v1_Table(ref),
-		"k8s.io/apimachinery/pkg/apis/meta/v1.TableColumnDefinition":                        schema_pkg_apis_meta_v1_TableColumnDefinition(ref),
-		"k8s.io/apimachinery/pkg/apis/meta/v1.TableOptions":                                 schema_pkg_apis_meta_v1_TableOptions(ref),
-		"k8s.io/apimachinery/pkg/apis/meta/v1.TableRow":                                     schema_pkg_apis_meta_v1_TableRow(ref),
-		"k8s.io/apimachinery/pkg/apis/meta/v1.TableRowCondition":                            schema_pkg_apis_meta_v1_TableRowCondition(ref),
-		"k8s.io/apimachinery/pkg/apis/meta/v1.Time":                                         schema_pkg_apis_meta_v1_Time(ref),
-		"k8s.io/apimachinery/pkg/apis/meta/v1.Timestamp":                                    schema_pkg_apis_meta_v1_Timestamp(ref),
-		"k8s.io/apimachinery/pkg/apis/meta/v1.TypeMeta":                                     schema_pkg_apis_meta_v1_TypeMeta(ref),
-		"k8s.io/apimachinery/pkg/apis/meta/v1.UpdateOptions":                                schema_pkg_apis_meta_v1_UpdateOptions(ref),
-		"k8s.io/apimachinery/pkg/apis/meta/v1.WatchEvent":                                   schema_pkg_apis_meta_v1_WatchEvent(ref),
-		"k8s.io/apimachinery/pkg/runtime.RawExtension":                                      schema_k8sio_apimachinery_pkg_runtime_RawExtension(ref),
-		"k8s.io/apimachinery/pkg/runtime.TypeMeta":                                          schema_k8sio_apimachinery_pkg_runtime_TypeMeta(ref),
-		"k8s.io/apimachinery/pkg/runtime.Unknown":                                           schema_k8sio_apimachinery_pkg_runtime_Unknown(ref),
-		"k8s.io/apimachinery/pkg/version.Info":                                              schema_k8sio_apimachinery_pkg_version_Info(ref),
+		"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.Cluster":                           schema_pkg_apis_core_v1alpha1_Cluster(ref),
+		"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.ClusterConnection":                 schema_pkg_apis_core_v1alpha1_ClusterConnection(ref),
+		"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.ClusterConnectionStatus":           schema_pkg_apis_core_v1alpha1_ClusterConnectionStatus(ref),
+		"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.ClusterList":                       schema_pkg_apis_core_v1alpha1_ClusterList(ref),
+		"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.ClusterSpec":                       schema_pkg_apis_core_v1alpha1_ClusterSpec(ref),
+		"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.ClusterStatus":                     schema_pkg_apis_core_v1alpha1_ClusterStatus(ref),
+		"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.Cmd":                               schema_pkg_apis_core_v1alpha1_Cmd(ref),
+		"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.CmdImage":                          schema_pkg_apis_core_v1alpha1_CmdImage(ref),
+		"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.CmdImageList":                      schema_pkg_apis_core_v1alpha1_CmdImageList(ref),
+		"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.CmdImageSpec":                      schema_pkg_apis_core_v1alpha1_CmdImageSpec(ref),
+		"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.CmdImageStateBuilding":             schema_pkg_apis_core_v1alpha1_CmdImageStateBuilding(ref),
+		"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.CmdImageStateCompleted":            schema_pkg_apis_core_v1alpha1_CmdImageStateCompleted(ref),
+		"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.CmdImageStateWaiting":              schema_pkg_apis_core_v1alpha1_CmdImageStateWaiting(ref),
+		"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.CmdImageStatus":                    schema_pkg_apis_core_v1alpha1_CmdImageStatus(ref),
+		"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.CmdList":                           schema_pkg_apis_core_v1alpha1_CmdList(ref),
+		"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.CmdSpec":                           schema_pkg_apis_core_v1alpha1_CmdSpec(ref),
+		"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.CmdStateRunning":                   schema_pkg_apis_core_v1alpha1_CmdStateRunning(ref),
+		"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.CmdStateTerminated":                schema_pkg_apis_core_v1alpha1_CmdStateTerminated(ref),
+		"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.CmdStateWaiting":                   schema_pkg_apis_core_v1alpha1_CmdStateWaiting(ref),
+		"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.CmdStatus":                         schema_pkg_apis_core_v1alpha1_CmdStatus(ref),
+		"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.ConfigMap":                         schema_pkg_apis_core_v1alpha1_ConfigMap(ref),
+		"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.ConfigMapDisableSource":            schema_pkg_apis_core_v1alpha1_ConfigMapDisableSource(ref),
+		"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.ConfigMapList":                     schema_pkg_apis_core_v1alpha1_ConfigMapList(ref),
+		"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.ConfigMapStateSource":              schema_pkg_apis_core_v1alpha1_ConfigMapStateSource(ref),
+		"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.Container":                         schema_pkg_apis_core_v1alpha1_Container(ref),
+		"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.ContainerLogStreamStatus":          schema_pkg_apis_core_v1alpha1_ContainerLogStreamStatus(ref),
+		"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.ContainerState":                    schema_pkg_apis_core_v1alpha1_ContainerState(ref),
+		"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.ContainerStateRunning":             schema_pkg_apis_core_v1alpha1_ContainerStateRunning(ref),
+		"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.ContainerStateTerminated":          schema_pkg_apis_core_v1alpha1_ContainerStateTerminated(ref),
+		"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.ContainerStateWaiting":             schema_pkg_apis_core_v1alpha1_ContainerStateWaiting(ref),
+		"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.DisableResourceStatus":             schema_pkg_apis_core_v1alpha1_DisableResourceStatus(ref),
+		"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.DisableSource":                     schema_pkg_apis_core_v1alpha1_DisableSource(ref),
+		"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.DisableStatus":                     schema_pkg_apis_core_v1alpha1_DisableStatus(ref),
+		"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.DockerClusterConnection":           schema_pkg_apis_core_v1alpha1_DockerClusterConnection(ref),
+		"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.DockerComposeLogStream":            schema_pkg_apis_core_v1alpha1_DockerComposeLogStream(ref),
+		"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.DockerComposeLogStreamList":        schema_pkg_apis_core_v1alpha1_DockerComposeLogStreamList(ref),
+		"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.DockerComposeLogStreamSpec":        schema_pkg_apis_core_v1alpha1_DockerComposeLogStreamSpec(ref),
+		"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.DockerComposeLogStreamStatus":      schema_pkg_apis_core_v1alpha1_DockerComposeLogStreamStatus(ref),
+		"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.DockerComposeProject":              schema_pkg_apis_core_v1alpha1_DockerComposeProject(ref),
+		"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.DockerComposeService":              schema_pkg_apis_core_v1alpha1_DockerComposeService(ref),
+		"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.DockerComposeServiceList":          schema_pkg_apis_core_v1alpha1_DockerComposeServiceList(ref),
+		"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.DockerComposeServiceSpec":          schema_pkg_apis_core_v1alpha1_DockerComposeServiceSpec(ref),
+		"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.DockerComposeServiceStatus":        schema_pkg_apis_core_v1alpha1_DockerComposeServiceStatus(ref),
+		"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.DockerContainerState":              schema_pkg_apis_core_v1alpha1_DockerContainerState(ref),
+		"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.DockerImage":                       schema_pkg_apis_core_v1alpha1_DockerImage(ref),
+		"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.DockerImageList":                   schema_pkg_apis_core_v1alpha1_DockerImageList(ref),
+		"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.DockerImageSpec":                   schema_pkg_apis_core_v1alpha1_DockerImageSpec(ref),
+		"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.DockerImageStageStatus":            schema_pkg_apis_core_v1alpha1_DockerImageStageStatus(ref),
+		"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.DockerImageStateBuilding":          schema_pkg_apis_core_v1alpha1_DockerImageStateBuilding(ref),
+		"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.DockerImageStateCompleted":         schema_pkg_apis_core_v1alpha1_DockerImageStateCompleted(ref),
+		"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.DockerImageStateWaiting":           schema_pkg_apis_core_v1alpha1_DockerImageStateWaiting(ref),
+		"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.DockerImageStatus":                 schema_pkg_apis_core_v1alpha1_DockerImageStatus(ref),
+		"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.DockerPortBinding":                 schema_pkg_apis_core_v1alpha1_DockerPortBinding(ref),
+		"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.ExecAction":                        schema_pkg_apis_core_v1alpha1_ExecAction(ref),
+		"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.Extension":                         schema_pkg_apis_core_v1alpha1_Extension(ref),
+		"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.ExtensionList":                     schema_pkg_apis_core_v1alpha1_ExtensionList(ref),
+		"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.ExtensionRepo":                     schema_pkg_apis_core_v1alpha1_ExtensionRepo(ref),
+		"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.ExtensionRepoList":                 schema_pkg_apis_core_v1alpha1_ExtensionRepoList(ref),
+		"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.ExtensionRepoSpec":                 schema_pkg_apis_core_v1alpha1_ExtensionRepoSpec(ref),
+		"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.ExtensionRepoStatus":               schema_pkg_apis_core_v1alpha1_ExtensionRepoStatus(ref),
+		"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.ExtensionSpec":                     schema_pkg_apis_core_v1alpha1_ExtensionSpec(ref),
+		"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.ExtensionStatus":                   schema_pkg_apis_core_v1alpha1_ExtensionStatus(ref),
+		"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.FileEvent":                         schema_pkg_apis_core_v1alpha1_FileEvent(ref),
+		"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.FileWatch":                         schema_pkg_apis_core_v1alpha1_FileWatch(ref),
+		"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.FileWatchList":                     schema_pkg_apis_core_v1alpha1_FileWatchList(ref),
+		"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.FileWatchSpec":                     schema_pkg_apis_core_v1alpha1_FileWatchSpec(ref),
+		"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.FileWatchStatus":                   schema_pkg_apis_core_v1alpha1_FileWatchStatus(ref),
+		"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.Forward":                           schema_pkg_apis_core_v1alpha1_Forward(ref),
+		"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.ForwardStatus":                     schema_pkg_apis_core_v1alpha1_ForwardStatus(ref),
+		"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.HTTPGetAction":                     schema_pkg_apis_core_v1alpha1_HTTPGetAction(ref),
+		"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.HTTPHeader":                        schema_pkg_apis_core_v1alpha1_HTTPHeader(ref),
+		"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.Handler":                           schema_pkg_apis_core_v1alpha1_Handler(ref),
+		"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.IgnoreDef":                         schema_pkg_apis_core_v1alpha1_IgnoreDef(ref),
+		"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.ImageMap":                          schema_pkg_apis_core_v1alpha1_ImageMap(ref),
+		"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.ImageMapList":                      schema_pkg_apis_core_v1alpha1_ImageMapList(ref),
+		"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.ImageMapOverrideArgs":              schema_pkg_apis_core_v1alpha1_ImageMapOverrideArgs(ref),
+		"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.ImageMapOverrideCommand":           schema_pkg_apis_core_v1alpha1_ImageMapOverrideCommand(ref),
+		"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.ImageMapSpec":                      schema_pkg_apis_core_v1alpha1_ImageMapSpec(ref),
+		"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.ImageMapStatus":                    schema_pkg_apis_core_v1alpha1_ImageMapStatus(ref),
+		"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.KubernetesApply":                   schema_pkg_apis_core_v1alpha1_KubernetesApply(ref),
+		"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.KubernetesApplyCmd":                schema_pkg_apis_core_v1alpha1_KubernetesApplyCmd(ref),
+		"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.KubernetesApplyList":               schema_pkg_apis_core_v1alpha1_KubernetesApplyList(ref),
+		"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.KubernetesApplySpec":               schema_pkg_apis_core_v1alpha1_KubernetesApplySpec(ref),
+		"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.KubernetesApplyStatus":             schema_pkg_apis_core_v1alpha1_KubernetesApplyStatus(ref),
+		"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.KubernetesClusterConnection":       schema_pkg_apis_core_v1alpha1_KubernetesClusterConnection(ref),
+		"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.KubernetesClusterConnectionStatus": schema_pkg_apis_core_v1alpha1_KubernetesClusterConnectionStatus(ref),
+		"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.KubernetesDiscovery":               schema_pkg_apis_core_v1alpha1_KubernetesDiscovery(ref),
+		"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.KubernetesDiscoveryList":           schema_pkg_apis_core_v1alpha1_KubernetesDiscoveryList(ref),
+		"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.KubernetesDiscoverySpec":           schema_pkg_apis_core_v1alpha1_KubernetesDiscoverySpec(ref),
+		"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.KubernetesDiscoveryStateRunning":   schema_pkg_apis_core_v1alpha1_KubernetesDiscoveryStateRunning(ref),
+		"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.KubernetesDiscoveryStateWaiting":   schema_pkg_apis_core_v1alpha1_KubernetesDiscoveryStateWaiting(ref),
+		"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.KubernetesDiscoveryStatus":         schema_pkg_apis_core_v1alpha1_KubernetesDiscoveryStatus(ref),
+		"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.KubernetesDiscoveryTemplateSpec":   schema_pkg_apis_core_v1alpha1_KubernetesDiscoveryTemplateSpec(ref),
+		"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.KubernetesImageLocator":            schema_pkg_apis_core_v1alpha1_KubernetesImageLocator(ref),
+		"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.KubernetesImageObjectDescriptor":   schema_pkg_apis_core_v1alpha1_KubernetesImageObjectDescriptor(ref),
+		"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.KubernetesWatchRef":                schema_pkg_apis_core_v1alpha1_KubernetesWatchRef(ref),
+		"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.LiveUpdate":                        schema_pkg_apis_core_v1alpha1_LiveUpdate(ref),
+		"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.LiveUpdateContainerStateWaiting":   schema_pkg_apis_core_v1alpha1_LiveUpdateContainerStateWaiting(ref),
+		"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.LiveUpdateContainerStatus":         schema_pkg_apis_core_v1alpha1_LiveUpdateContainerStatus(ref),
+		"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.LiveUpdateDockerComposeSelector":   schema_pkg_apis_core_v1alpha1_LiveUpdateDockerComposeSelector(ref),
+		"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.LiveUpdateExec":                    schema_pkg_apis_core_v1alpha1_LiveUpdateExec(ref),
+		"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.LiveUpdateKubernetesSelector":      schema_pkg_apis_core_v1alpha1_LiveUpdateKubernetesSelector(ref),
+		"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.LiveUpdateList":                    schema_pkg_apis_core_v1alpha1_LiveUpdateList(ref),
+		"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.LiveUpdateSelector":                schema_pkg_apis_core_v1alpha1_LiveUpdateSelector(ref),
+		"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.LiveUpdateSource":                  schema_pkg_apis_core_v1alpha1_LiveUpdateSource(ref),
+		"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.LiveUpdateSpec":                    schema_pkg_apis_core_v1alpha1_LiveUpdateSpec(ref),
+		"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.LiveUpdateStateFailed":             schema_pkg_apis_core_v1alpha1_LiveUpdateStateFailed(ref),
+		"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.LiveUpdateStatus":                  schema_pkg_apis_core_v1alpha1_LiveUpdateStatus(ref),
+		"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.LiveUpdateSync":                    schema_pkg_apis_core_v1alpha1_LiveUpdateSync(ref),
+		"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.ObjectSelector":                    schema_pkg_apis_core_v1alpha1_ObjectSelector(ref),
+		"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.Pod":                               schema_pkg_apis_core_v1alpha1_Pod(ref),
+		"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.PodCondition":                      schema_pkg_apis_core_v1alpha1_PodCondition(ref),
+		"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.PodLogStream":                      schema_pkg_apis_core_v1alpha1_PodLogStream(ref),
+		"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.PodLogStreamList":                  schema_pkg_apis_core_v1alpha1_PodLogStreamList(ref),
+		"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.PodLogStreamSpec":                  schema_pkg_apis_core_v1alpha1_PodLogStreamSpec(ref),
+		"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.PodLogStreamStatus":                schema_pkg_apis_core_v1alpha1_PodLogStreamStatus(ref),
+		"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.PodLogStreamTemplateSpec":          schema_pkg_apis_core_v1alpha1_PodLogStreamTemplateSpec(ref),
+		"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.PodOwner":                          schema_pkg_apis_core_v1alpha1_PodOwner(ref),
+		"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.PortForward":                       schema_pkg_apis_core_v1alpha1_PortForward(ref),
+		"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.PortForwardList":                   schema_pkg_apis_core_v1alpha1_PortForwardList(ref),
+		"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.PortForwardSpec":                   schema_pkg_apis_core_v1alpha1_PortForwardSpec(ref),
+		"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.PortForwardStatus":                 schema_pkg_apis_core_v1alpha1_PortForwardStatus(ref),
+		"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.PortForwardTemplateSpec":           schema_pkg_apis_core_v1alpha1_PortForwardTemplateSpec(ref),
+		"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.Probe":                             schema_pkg_apis_core_v1alpha1_Probe(ref),
+		"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.RegistryHosting":                   schema_pkg_apis_core_v1alpha1_RegistryHosting(ref),
+		"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.RestartOnSpec":                     schema_pkg_apis_core_v1alpha1_RestartOnSpec(ref),
+		"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.Session":                           schema_pkg_apis_core_v1alpha1_Session(ref),
+		"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.SessionCISpec":                     schema_pkg_apis_core_v1alpha1_SessionCISpec(ref),
+		"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.SessionList":                       schema_pkg_apis_core_v1alpha1_SessionList(ref),
+		"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.SessionSpec":                       schema_pkg_apis_core_v1alpha1_SessionSpec(ref),
+		"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.SessionStatus":                     schema_pkg_apis_core_v1alpha1_SessionStatus(ref),
+		"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.StartOnSpec":                       schema_pkg_apis_core_v1alpha1_StartOnSpec(ref),
+		"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.StateSource":                       schema_pkg_apis_core_v1alpha1_StateSource(ref),
+		"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.StopOnSpec":                        schema_pkg_apis_core_v1alpha1_StopOnSpec(ref),
+		"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.TCPSocketAction":                   schema_pkg_apis_core_v1alpha1_TCPSocketAction(ref),
+		"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.Target":                            schema_pkg_apis_core_v1alpha1_Target(ref),
+		"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.TargetState":                       schema_pkg_apis_core_v1alpha1_TargetState(ref),
+		"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.TargetStateActive":                 schema_pkg_apis_core_v1alpha1_TargetStateActive(ref),
+		"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.TargetStateDisabled":               schema_pkg_apis_core_v1alpha1_TargetStateDisabled(ref),
+		"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.TargetStateTerminated":             schema_pkg_apis_core_v1alpha1_TargetStateTerminated(ref),
+		"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.TargetStateWaiting":                schema_pkg_apis_core_v1alpha1_TargetStateWaiting(ref),
+		"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.TiltBuild":                         schema_pkg_apis_core_v1alpha1_TiltBuild(ref),
+		"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.Tiltfile":                          schema_pkg_apis_core_v1alpha1_Tiltfile(ref),
+		"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.TiltfileList":                      schema_pkg_apis_core_v1alpha1_TiltfileList(ref),
+		"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.TiltfileSpec":                      schema_pkg_apis_core_v1alpha1_TiltfileSpec(ref),
+		"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.TiltfileStateRunning":              schema_pkg_apis_core_v1alpha1_TiltfileStateRunning(ref),
+		"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.TiltfileStateTerminated":           schema_pkg_apis_core_v1alpha1_TiltfileStateTerminated(ref),
+		"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.TiltfileStateWaiting":              schema_pkg_apis_core_v1alpha1_TiltfileStateWaiting(ref),
+		"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.TiltfileStatus":                    schema_pkg_apis_core_v1alpha1_TiltfileStatus(ref),
+		"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.ToggleButton":                      schema_pkg_apis_core_v1alpha1_ToggleButton(ref),
+		"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.ToggleButtonList":                  schema_pkg_apis_core_v1alpha1_ToggleButtonList(ref),
+		"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.ToggleButtonSpec":                  schema_pkg_apis_core_v1alpha1_ToggleButtonSpec(ref),
+		"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.ToggleButtonStateSpec":             schema_pkg_apis_core_v1alpha1_ToggleButtonStateSpec(ref),
+		"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.ToggleButtonStatus":                schema_pkg_apis_core_v1alpha1_ToggleButtonStatus(ref),
+		"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.UIBoolInputSpec":                   schema_pkg_apis_core_v1alpha1_UIBoolInputSpec(ref),
+		"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.UIBoolInputStatus":                 schema_pkg_apis_core_v1alpha1_UIBoolInputStatus(ref),
+		"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.UIBuildRunning":                    schema_pkg_apis_core_v1alpha1_UIBuildRunning(ref),
+		"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.UIBuildTerminated":                 schema_pkg_apis_core_v1alpha1_UIBuildTerminated(ref),
+		"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.UIButton":                          schema_pkg_apis_core_v1alpha1_UIButton(ref),
+		"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.UIButtonList":                      schema_pkg_apis_core_v1alpha1_UIButtonList(ref),
+		"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.UIButtonSpec":                      schema_pkg_apis_core_v1alpha1_UIButtonSpec(ref),
+		"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.UIButtonStatus":                    schema_pkg_apis_core_v1alpha1_UIButtonStatus(ref),
+		"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.UIChoiceInputSpec":                 schema_pkg_apis_core_v1alpha1_UIChoiceInputSpec(ref),
+		"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.UIChoiceInputStatus":               schema_pkg_apis_core_v1alpha1_UIChoiceInputStatus(ref),
+		"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.UIComponentLocation":               schema_pkg_apis_core_v1alpha1_UIComponentLocation(ref),
+		"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.UIComponentLocationResource":       schema_pkg_apis_core_v1alpha1_UIComponentLocationResource(ref),
+		"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.UIFeatureFlag":                     schema_pkg_apis_core_v1alpha1_UIFeatureFlag(ref),
+		"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.UIHiddenInputSpec":                 schema_pkg_apis_core_v1alpha1_UIHiddenInputSpec(ref),
+		"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.UIHiddenInputStatus":               schema_pkg_apis_core_v1alpha1_UIHiddenInputStatus(ref),
+		"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.UIInputSpec":                       schema_pkg_apis_core_v1alpha1_UIInputSpec(ref),
+		"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.UIInputStatus":                     schema_pkg_apis_core_v1alpha1_UIInputStatus(ref),
+		"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.UIResource":                        schema_pkg_apis_core_v1alpha1_UIResource(ref),
+		"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.UIResourceCompose":                 schema_pkg_apis_core_v1alpha1_UIResourceCompose(ref),
+		"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.UIResourceCondition":               schema_pkg_apis_core_v1alpha1_UIResourceCondition(ref),
+		"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.UIResourceKubernetes":              schema_pkg_apis_core_v1alpha1_UIResourceKubernetes(ref),
+		"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.UIResourceLink":                    schema_pkg_apis_core_v1alpha1_UIResourceLink(ref),
+		"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.UIResourceList":                    schema_pkg_apis_core_v1alpha1_UIResourceList(ref),
+		"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.UIResourceLocal":                   schema_pkg_apis_core_v1alpha1_UIResourceLocal(ref),
+		"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.UIResourceSpec":                    schema_pkg_apis_core_v1alpha1_UIResourceSpec(ref),
+		"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.UIResourceStateWaiting":            schema_pkg_apis_core_v1alpha1_UIResourceStateWaiting(ref),
+		"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.UIResourceStateWaitingOnRef":       schema_pkg_apis_core_v1alpha1_UIResourceStateWaitingOnRef(ref),
+		"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.UIResourceStatus":                  schema_pkg_apis_core_v1alpha1_UIResourceStatus(ref),
+		"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.UIResourceTargetSpec":              schema_pkg_apis_core_v1alpha1_UIResourceTargetSpec(ref),
+		"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.UISession":                         schema_pkg_apis_core_v1alpha1_UISession(ref),
+		"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.UISessionList":                     schema_pkg_apis_core_v1alpha1_UISessionList(ref),
+		"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.UISessionSpec":                     schema_pkg_apis_core_v1alpha1_UISessionSpec(ref),
+		"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.UISessionStatus":                   schema_pkg_apis_core_v1alpha1_UISessionStatus(ref),
+		"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.UITextInputSpec":                   schema_pkg_apis_core_v1alpha1_UITextInputSpec(ref),
+		"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.UITextInputStatus":                 schema_pkg_apis_core_v1alpha1_UITextInputStatus(ref),
+		"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.VersionSettings":                   schema_pkg_apis_core_v1alpha1_VersionSettings(ref),
+		"k8s.io/apimachinery/pkg/apis/meta/v1.APIGroup":                                       schema_pkg_apis_meta_v1_APIGroup(ref),
+		"k8s.io/apimachinery/pkg/apis/meta/v1.APIGroupList":                                   schema_pkg_apis_meta_v1_APIGroupList(ref),
+		"k8s.io/apimachinery/pkg/apis/meta/v1.APIResource":                                    schema_pkg_apis_meta_v1_APIResource(ref),
+		"k8s.io/apimachinery/pkg/apis/meta/v1.APIResourceList":                                schema_pkg_apis_meta_v1_APIResourceList(ref),
+		"k8s.io/apimachinery/pkg/apis/meta/v1.APIVersions":                                    schema_pkg_apis_meta_v1_APIVersions(ref),
+		"k8s.io/apimachinery/pkg/apis/meta/v1.ApplyOptions":                                   schema_pkg_apis_meta_v1_ApplyOptions(ref),
+		"k8s.io/apimachinery/pkg/apis/meta/v1.Condition":                                      schema_pkg_apis_meta_v1_Condition(ref),
+		"k8s.io/apimachinery/pkg/apis/meta/v1.CreateOptions":                                  schema_pkg_apis_meta_v1_CreateOptions(ref),
+		"k8s.io/apimachinery/pkg/apis/meta/v1.DeleteOptions":                                  schema_pkg_apis_meta_v1_DeleteOptions(ref),
+		"k8s.io/apimachinery/pkg/apis/meta/v1.Duration":                                       schema_pkg_apis_meta_v1_Duration(ref),
+		"k8s.io/apimachinery/pkg/apis/meta/v1.FieldSelectorRequirement":                       schema_pkg_apis_meta_v1_FieldSelectorRequirement(ref),
+		"k8s.io/apimachinery/pkg/apis/meta/v1.FieldsV1":                                       schema_pkg_apis_meta_v1_FieldsV1(ref),
+		"k8s.io/apimachinery/pkg/apis/meta/v1.GetOptions":                                     schema_pkg_apis_meta_v1_GetOptions(ref),
+		"k8s.io/apimachinery/pkg/apis/meta/v1.GroupKind":                                      schema_pkg_apis_meta_v1_GroupKind(ref),
+		"k8s.io/apimachinery/pkg/apis/meta/v1.GroupResource":                                  schema_pkg_apis_meta_v1_GroupResource(ref),
+		"k8s.io/apimachinery/pkg/apis/meta/v1.GroupVersion":                                   schema_pkg_apis_meta_v1_GroupVersion(ref),
+		"k8s.io/apimachinery/pkg/apis/meta/v1.GroupVersionForDiscovery":                       schema_pkg_apis_meta_v1_GroupVersionForDiscovery(ref),
+		"k8s.io/apimachinery/pkg/apis/meta/v1.GroupVersionKind":                               schema_pkg_apis_meta_v1_GroupVersionKind(ref),
+		"k8s.io/apimachinery/pkg/apis/meta/v1.GroupVersionResource":                           schema_pkg_apis_meta_v1_GroupVersionResource(ref),
+		"k8s.io/apimachinery/pkg/apis/meta/v1.InternalEvent":                                  schema_pkg_apis_meta_v1_InternalEvent(ref),
+		"k8s.io/apimachinery/pkg/apis/meta/v1.LabelSelector":                                  schema_pkg_apis_meta_v1_LabelSelector(ref),
+		"k8s.io/apimachinery/pkg/apis/meta/v1.LabelSelectorRequirement":                       schema_pkg_apis_meta_v1_LabelSelectorRequirement(ref),
+		"k8s.io/apimachinery/pkg/apis/meta/v1.List":                                           schema_pkg_apis_meta_v1_List(ref),
+		"k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta":                                       schema_pkg_apis_meta_v1_ListMeta(ref),
+		"k8s.io/apimachinery/pkg/apis/meta/v1.ListOptions":                                    schema_pkg_apis_meta_v1_ListOptions(ref),
+		"k8s.io/apimachinery/pkg/apis/meta/v1.ManagedFieldsEntry":                             schema_pkg_apis_meta_v1_ManagedFieldsEntry(ref),
+		"k8s.io/apimachinery/pkg/apis/meta/v1.MicroTime":                                      schema_pkg_apis_meta_v1_MicroTime(ref),
+		"k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta":                                     schema_pkg_apis_meta_v1_ObjectMeta(ref),
+		"k8s.io/apimachinery/pkg/apis/meta/v1.OwnerReference":                                 schema_pkg_apis_meta_v1_OwnerReference(ref),
+		"k8s.io/apimachinery/pkg/apis/meta/v1.PartialObjectMetadata":                          schema_pkg_apis_meta_v1_PartialObjectMetadata(ref),
+		"k8s.io/apimachinery/pkg/apis/meta/v1.PartialObjectMetadataList":                      schema_pkg_apis_meta_v1_PartialObjectMetadataList(ref),
+		"k8s.io/apimachinery/pkg/apis/meta/v1.Patch":                                          schema_pkg_apis_meta_v1_Patch(ref),
+		"k8s.io/apimachinery/pkg/apis/meta/v1.PatchOptions":                                   schema_pkg_apis_meta_v1_PatchOptions(ref),
+		"k8s.io/apimachinery/pkg/apis/meta/v1.Preconditions":                                  schema_pkg_apis_meta_v1_Preconditions(ref),
+		"k8s.io/apimachinery/pkg/apis/meta/v1.RootPaths":                                      schema_pkg_apis_meta_v1_RootPaths(ref),
+		"k8s.io/apimachinery/pkg/apis/meta/v1.ServerAddressByClientCIDR":                      schema_pkg_apis_meta_v1_ServerAddressByClientCIDR(ref),
+		"k8s.io/apimachinery/pkg/apis/meta/v1.Status":                                         schema_pkg_apis_meta_v1_Status(ref),
+		"k8s.io/apimachinery/pkg/apis/meta/v1.StatusCause":                                    schema_pkg_apis_meta_v1_StatusCause(ref),
+		"k8s.io/apimachinery/pkg/apis/meta/v1.StatusDetails":                                  schema_pkg_apis_meta_v1_StatusDetails(ref),
+		"k8s.io/apimachinery/pkg/apis/meta/v1.Table":                                          schema_pkg_apis_meta_v1_Table(ref),
+		"k8s.io/apimachinery/pkg/apis/meta/v1.TableColumnDefinition":                          schema_pkg_apis_meta_v1_TableColumnDefinition(ref),
+		"k8s.io/apimachinery/pkg/apis/meta/v1.TableOptions":                                   schema_pkg_apis_meta_v1_TableOptions(ref),
+		"k8s.io/apimachinery/pkg/apis/meta/v1.TableRow":                                       schema_pkg_apis_meta_v1_TableRow(ref),
+		"k8s.io/apimachinery/pkg/apis/meta/v1.TableRowCondition":                              schema_pkg_apis_meta_v1_TableRowCondition(ref),
+		"k8s.io/apimachinery/pkg/apis/meta/v1.Time":                                           schema_pkg_apis_meta_v1_Time(ref),
+		"k8s.io/apimachinery/pkg/apis/meta/v1.Timestamp":                                      schema_pkg_apis_meta_v1_Timestamp(ref),
+		"k8s.io/apimachinery/pkg/apis/meta/v1.TypeMeta":                                       schema_pkg_apis_meta_v1_TypeMeta(ref),
+		"k8s.io/apimachinery/pkg/apis/meta/v1.UpdateOptions":                                  schema_pkg_apis_meta_v1_UpdateOptions(ref),
+		"k8s.io/apimachinery/pkg/apis/meta/v1.WatchEvent":                                     schema_pkg_apis_meta_v1_WatchEvent(ref),
+		"k8s.io/apimachinery/pkg/runtime.RawExtension":                                        schema_k8sio_apimachinery_pkg_runtime_RawExtension(ref),
+		"k8s.io/apimachinery/pkg/runtime.TypeMeta":                                            schema_k8sio_apimachinery_pkg_runtime_TypeMeta(ref),
+		"k8s.io/apimachinery/pkg/runtime.Unknown":                                             schema_k8sio_apimachinery_pkg_runtime_Unknown(ref),
+		"k8s.io/apimachinery/pkg/version.Info":                                                schema_k8sio_apimachinery_pkg_version_Info(ref),
 	}
 }
 
@@ -305,20 +305,20 @@ func schema_pkg_apis_core_v1alpha1_Cluster(ref common.ReferenceCallback) common.
 					"spec": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.ClusterSpec"),
+							Ref:     ref("github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.ClusterSpec"),
 						},
 					},
 					"status": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.ClusterStatus"),
+							Ref:     ref("github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.ClusterStatus"),
 						},
 					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.ClusterSpec", "github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.ClusterStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+			"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.ClusterSpec", "github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.ClusterStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
 	}
 }
 
@@ -332,20 +332,20 @@ func schema_pkg_apis_core_v1alpha1_ClusterConnection(ref common.ReferenceCallbac
 					"kubernetes": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Defines connection to a Kubernetes cluster.",
-							Ref:         ref("github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.KubernetesClusterConnection"),
+							Ref:         ref("github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.KubernetesClusterConnection"),
 						},
 					},
 					"docker": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Defines connection to a Docker daemon.",
-							Ref:         ref("github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.DockerClusterConnection"),
+							Ref:         ref("github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.DockerClusterConnection"),
 						},
 					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.DockerClusterConnection", "github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.KubernetesClusterConnection"},
+			"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.DockerClusterConnection", "github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.KubernetesClusterConnection"},
 	}
 }
 
@@ -359,14 +359,14 @@ func schema_pkg_apis_core_v1alpha1_ClusterConnectionStatus(ref common.ReferenceC
 					"kubernetes": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Defines connection to a Kubernetes cluster.",
-							Ref:         ref("github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.KubernetesClusterConnectionStatus"),
+							Ref:         ref("github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.KubernetesClusterConnectionStatus"),
 						},
 					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.KubernetesClusterConnectionStatus"},
+			"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.KubernetesClusterConnectionStatus"},
 	}
 }
 
@@ -404,7 +404,7 @@ func schema_pkg_apis_core_v1alpha1_ClusterList(ref common.ReferenceCallback) com
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.Cluster"),
+										Ref:     ref("github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.Cluster"),
 									},
 								},
 							},
@@ -415,7 +415,7 @@ func schema_pkg_apis_core_v1alpha1_ClusterList(ref common.ReferenceCallback) com
 			},
 		},
 		Dependencies: []string{
-			"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.Cluster", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
+			"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.Cluster", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
 	}
 }
 
@@ -429,20 +429,20 @@ func schema_pkg_apis_core_v1alpha1_ClusterSpec(ref common.ReferenceCallback) com
 					"connection": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Connection spec for an existing cluster.",
-							Ref:         ref("github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.ClusterConnection"),
+							Ref:         ref("github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.ClusterConnection"),
 						},
 					},
 					"defaultRegistry": {
 						SchemaProps: spec.SchemaProps{
 							Description: "DefaultRegistry determines where images for this Cluster should be pushed/pulled from if the Cluster itself does not provide local registry hosting metadata.\n\nIf not specified, no registry rewriting will occur, and the images will be pushed/pulled to from the registry specified by the corresponding image build directive (e.g. `docker_build` or `custom_build`).",
-							Ref:         ref("github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.RegistryHosting"),
+							Ref:         ref("github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.RegistryHosting"),
 						},
 					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.ClusterConnection", "github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.RegistryHosting"},
+			"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.ClusterConnection", "github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.RegistryHosting"},
 	}
 }
 
@@ -476,13 +476,13 @@ func schema_pkg_apis_core_v1alpha1_ClusterStatus(ref common.ReferenceCallback) c
 					"registry": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Registry describes a local registry that developer tools can connect to. A local registry allows clients to load images into the local cluster by pushing to this registry.",
-							Ref:         ref("github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.RegistryHosting"),
+							Ref:         ref("github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.RegistryHosting"),
 						},
 					},
 					"connection": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Connection status for an existing cluster.",
-							Ref:         ref("github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.ClusterConnectionStatus"),
+							Ref:         ref("github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.ClusterConnectionStatus"),
 						},
 					},
 					"version": {
@@ -496,7 +496,7 @@ func schema_pkg_apis_core_v1alpha1_ClusterStatus(ref common.ReferenceCallback) c
 			},
 		},
 		Dependencies: []string{
-			"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.ClusterConnectionStatus", "github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.RegistryHosting", "k8s.io/apimachinery/pkg/apis/meta/v1.MicroTime"},
+			"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.ClusterConnectionStatus", "github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.RegistryHosting", "k8s.io/apimachinery/pkg/apis/meta/v1.MicroTime"},
 	}
 }
 
@@ -530,20 +530,20 @@ func schema_pkg_apis_core_v1alpha1_Cmd(ref common.ReferenceCallback) common.Open
 					"spec": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.CmdSpec"),
+							Ref:     ref("github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.CmdSpec"),
 						},
 					},
 					"status": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.CmdStatus"),
+							Ref:     ref("github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.CmdStatus"),
 						},
 					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.CmdSpec", "github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.CmdStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+			"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.CmdSpec", "github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.CmdStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
 	}
 }
 
@@ -577,20 +577,20 @@ func schema_pkg_apis_core_v1alpha1_CmdImage(ref common.ReferenceCallback) common
 					"spec": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.CmdImageSpec"),
+							Ref:     ref("github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.CmdImageSpec"),
 						},
 					},
 					"status": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.CmdImageStatus"),
+							Ref:     ref("github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.CmdImageStatus"),
 						},
 					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.CmdImageSpec", "github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.CmdImageStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+			"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.CmdImageSpec", "github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.CmdImageStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
 	}
 }
 
@@ -628,7 +628,7 @@ func schema_pkg_apis_core_v1alpha1_CmdImageList(ref common.ReferenceCallback) co
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.CmdImage"),
+										Ref:     ref("github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.CmdImage"),
 									},
 								},
 							},
@@ -639,7 +639,7 @@ func schema_pkg_apis_core_v1alpha1_CmdImageList(ref common.ReferenceCallback) co
 			},
 		},
 		Dependencies: []string{
-			"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.CmdImage", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
+			"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.CmdImage", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
 	}
 }
 
@@ -858,26 +858,26 @@ func schema_pkg_apis_core_v1alpha1_CmdImageStatus(ref common.ReferenceCallback) 
 					"waiting": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Details about a waiting image build.",
-							Ref:         ref("github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.CmdImageStateWaiting"),
+							Ref:         ref("github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.CmdImageStateWaiting"),
 						},
 					},
 					"building": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Details about a building image.",
-							Ref:         ref("github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.CmdImageStateBuilding"),
+							Ref:         ref("github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.CmdImageStateBuilding"),
 						},
 					},
 					"completed": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Details about a finished image build.",
-							Ref:         ref("github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.CmdImageStateCompleted"),
+							Ref:         ref("github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.CmdImageStateCompleted"),
 						},
 					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.CmdImageStateBuilding", "github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.CmdImageStateCompleted", "github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.CmdImageStateWaiting"},
+			"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.CmdImageStateBuilding", "github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.CmdImageStateCompleted", "github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.CmdImageStateWaiting"},
 	}
 }
 
@@ -915,7 +915,7 @@ func schema_pkg_apis_core_v1alpha1_CmdList(ref common.ReferenceCallback) common.
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.Cmd"),
+										Ref:     ref("github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.Cmd"),
 									},
 								},
 							},
@@ -926,7 +926,7 @@ func schema_pkg_apis_core_v1alpha1_CmdList(ref common.ReferenceCallback) common.
 			},
 		},
 		Dependencies: []string{
-			"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.Cmd", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
+			"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.Cmd", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
 	}
 }
 
@@ -977,32 +977,32 @@ func schema_pkg_apis_core_v1alpha1_CmdSpec(ref common.ReferenceCallback) common.
 					"readinessProbe": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Periodic probe of service readiness.",
-							Ref:         ref("github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.Probe"),
+							Ref:         ref("github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.Probe"),
 						},
 					},
 					"restartOn": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Indicates objects that can trigger a restart of this command.\n\nWhen a restart is triggered, Tilt will try to gracefully shutdown any currently running process, waiting for it to exit before starting a new process. If the process doesn't shutdown within the allotted time, Tilt will kill the process abruptly.\n\nRestarts can happen even if the command is already done.\n\nLogs of the current process after the restart are discarded.",
-							Ref:         ref("github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.RestartOnSpec"),
+							Ref:         ref("github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.RestartOnSpec"),
 						},
 					},
 					"startOn": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Indicates objects that can trigger a start/restart of this command.\n\nRestarts behave the same as RestartOn. The key difference is that a Cmd with any StartOn triggers will not have its command run until its StartOn is satisfied.",
-							Ref:         ref("github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.StartOnSpec"),
+							Ref:         ref("github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.StartOnSpec"),
 						},
 					},
 					"disableSource": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Specifies how to disable this.",
-							Ref:         ref("github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.DisableSource"),
+							Ref:         ref("github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.DisableSource"),
 						},
 					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.DisableSource", "github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.Probe", "github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.RestartOnSpec", "github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.StartOnSpec"},
+			"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.DisableSource", "github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.Probe", "github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.RestartOnSpec", "github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.StartOnSpec"},
 	}
 }
 
@@ -1117,19 +1117,19 @@ func schema_pkg_apis_core_v1alpha1_CmdStatus(ref common.ReferenceCallback) commo
 					"waiting": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Details about a waiting process.",
-							Ref:         ref("github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.CmdStateWaiting"),
+							Ref:         ref("github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.CmdStateWaiting"),
 						},
 					},
 					"running": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Details about a running process.",
-							Ref:         ref("github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.CmdStateRunning"),
+							Ref:         ref("github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.CmdStateRunning"),
 						},
 					},
 					"terminated": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Details about a terminated process.",
-							Ref:         ref("github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.CmdStateTerminated"),
+							Ref:         ref("github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.CmdStateTerminated"),
 						},
 					},
 					"ready": {
@@ -1142,14 +1142,14 @@ func schema_pkg_apis_core_v1alpha1_CmdStatus(ref common.ReferenceCallback) commo
 					"disableStatus": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Details about whether/why this is disabled.",
-							Ref:         ref("github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.DisableStatus"),
+							Ref:         ref("github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.DisableStatus"),
 						},
 					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.CmdStateRunning", "github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.CmdStateTerminated", "github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.CmdStateWaiting", "github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.DisableStatus"},
+			"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.CmdStateRunning", "github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.CmdStateTerminated", "github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.CmdStateWaiting", "github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.DisableStatus"},
 	}
 }
 
@@ -1268,7 +1268,7 @@ func schema_pkg_apis_core_v1alpha1_ConfigMapList(ref common.ReferenceCallback) c
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.ConfigMap"),
+										Ref:     ref("github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.ConfigMap"),
 									},
 								},
 							},
@@ -1279,7 +1279,7 @@ func schema_pkg_apis_core_v1alpha1_ConfigMapList(ref common.ReferenceCallback) c
 			},
 		},
 		Dependencies: []string{
-			"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.ConfigMap", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
+			"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.ConfigMap", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
 	}
 }
 
@@ -1378,7 +1378,7 @@ func schema_pkg_apis_core_v1alpha1_Container(ref common.ReferenceCallback) commo
 						SchemaProps: spec.SchemaProps{
 							Description: "State provides details about the container's current condition.",
 							Default:     map[string]interface{}{},
-							Ref:         ref("github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.ContainerState"),
+							Ref:         ref("github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.ContainerState"),
 						},
 					},
 					"ports": {
@@ -1401,7 +1401,7 @@ func schema_pkg_apis_core_v1alpha1_Container(ref common.ReferenceCallback) commo
 			},
 		},
 		Dependencies: []string{
-			"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.ContainerState"},
+			"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.ContainerState"},
 	}
 }
 
@@ -1456,19 +1456,19 @@ func schema_pkg_apis_core_v1alpha1_ContainerState(ref common.ReferenceCallback) 
 					"waiting": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Waiting provides details about a container that is not yet running.",
-							Ref:         ref("github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.ContainerStateWaiting"),
+							Ref:         ref("github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.ContainerStateWaiting"),
 						},
 					},
 					"running": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Running provides details about a currently executing container.",
-							Ref:         ref("github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.ContainerStateRunning"),
+							Ref:         ref("github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.ContainerStateRunning"),
 						},
 					},
 					"terminated": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Terminated provides details about an exited container.",
-							Ref:         ref("github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.ContainerStateTerminated"),
+							Ref:         ref("github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.ContainerStateTerminated"),
 						},
 					},
 				},
@@ -1476,7 +1476,7 @@ func schema_pkg_apis_core_v1alpha1_ContainerState(ref common.ReferenceCallback) 
 			},
 		},
 		Dependencies: []string{
-			"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.ContainerStateRunning", "github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.ContainerStateTerminated", "github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.ContainerStateWaiting"},
+			"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.ContainerStateRunning", "github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.ContainerStateTerminated", "github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.ContainerStateWaiting"},
 	}
 }
 
@@ -1606,7 +1606,7 @@ func schema_pkg_apis_core_v1alpha1_DisableResourceStatus(ref common.ReferenceCal
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.DisableSource"),
+										Ref:     ref("github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.DisableSource"),
 									},
 								},
 							},
@@ -1617,7 +1617,7 @@ func schema_pkg_apis_core_v1alpha1_DisableResourceStatus(ref common.ReferenceCal
 			},
 		},
 		Dependencies: []string{
-			"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.DisableSource"},
+			"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.DisableSource"},
 	}
 }
 
@@ -1631,7 +1631,7 @@ func schema_pkg_apis_core_v1alpha1_DisableSource(ref common.ReferenceCallback) c
 					"configMap": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Disabled by single ConfigMap value.",
-							Ref:         ref("github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.ConfigMapDisableSource"),
+							Ref:         ref("github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.ConfigMapDisableSource"),
 						},
 					},
 					"everyConfigMap": {
@@ -1642,7 +1642,7 @@ func schema_pkg_apis_core_v1alpha1_DisableSource(ref common.ReferenceCallback) c
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.ConfigMapDisableSource"),
+										Ref:     ref("github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.ConfigMapDisableSource"),
 									},
 								},
 							},
@@ -1652,7 +1652,7 @@ func schema_pkg_apis_core_v1alpha1_DisableSource(ref common.ReferenceCallback) c
 			},
 		},
 		Dependencies: []string{
-			"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.ConfigMapDisableSource"},
+			"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.ConfigMapDisableSource"},
 	}
 }
 
@@ -1750,20 +1750,20 @@ func schema_pkg_apis_core_v1alpha1_DockerComposeLogStream(ref common.ReferenceCa
 					"spec": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.DockerComposeLogStreamSpec"),
+							Ref:     ref("github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.DockerComposeLogStreamSpec"),
 						},
 					},
 					"status": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.DockerComposeLogStreamStatus"),
+							Ref:     ref("github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.DockerComposeLogStreamStatus"),
 						},
 					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.DockerComposeLogStreamSpec", "github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.DockerComposeLogStreamStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+			"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.DockerComposeLogStreamSpec", "github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.DockerComposeLogStreamStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
 	}
 }
 
@@ -1801,7 +1801,7 @@ func schema_pkg_apis_core_v1alpha1_DockerComposeLogStreamList(ref common.Referen
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.DockerComposeLogStream"),
+										Ref:     ref("github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.DockerComposeLogStream"),
 									},
 								},
 							},
@@ -1812,7 +1812,7 @@ func schema_pkg_apis_core_v1alpha1_DockerComposeLogStreamList(ref common.Referen
 			},
 		},
 		Dependencies: []string{
-			"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.DockerComposeLogStream", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
+			"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.DockerComposeLogStream", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
 	}
 }
 
@@ -1835,7 +1835,7 @@ func schema_pkg_apis_core_v1alpha1_DockerComposeLogStreamSpec(ref common.Referen
 						SchemaProps: spec.SchemaProps{
 							Description: "A specification of the project the service belongs to.\n\nEach service spec keeps its own copy of the project spec.",
 							Default:     map[string]interface{}{},
-							Ref:         ref("github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.DockerComposeProject"),
+							Ref:         ref("github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.DockerComposeProject"),
 						},
 					},
 				},
@@ -1843,7 +1843,7 @@ func schema_pkg_apis_core_v1alpha1_DockerComposeLogStreamSpec(ref common.Referen
 			},
 		},
 		Dependencies: []string{
-			"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.DockerComposeProject"},
+			"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.DockerComposeProject"},
 	}
 }
 
@@ -1982,20 +1982,20 @@ func schema_pkg_apis_core_v1alpha1_DockerComposeService(ref common.ReferenceCall
 					"spec": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.DockerComposeServiceSpec"),
+							Ref:     ref("github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.DockerComposeServiceSpec"),
 						},
 					},
 					"status": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.DockerComposeServiceStatus"),
+							Ref:     ref("github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.DockerComposeServiceStatus"),
 						},
 					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.DockerComposeServiceSpec", "github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.DockerComposeServiceStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+			"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.DockerComposeServiceSpec", "github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.DockerComposeServiceStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
 	}
 }
 
@@ -2033,7 +2033,7 @@ func schema_pkg_apis_core_v1alpha1_DockerComposeServiceList(ref common.Reference
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.DockerComposeService"),
+										Ref:     ref("github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.DockerComposeService"),
 									},
 								},
 							},
@@ -2044,7 +2044,7 @@ func schema_pkg_apis_core_v1alpha1_DockerComposeServiceList(ref common.Reference
 			},
 		},
 		Dependencies: []string{
-			"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.DockerComposeService", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
+			"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.DockerComposeService", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
 	}
 }
 
@@ -2067,7 +2067,7 @@ func schema_pkg_apis_core_v1alpha1_DockerComposeServiceSpec(ref common.Reference
 						SchemaProps: spec.SchemaProps{
 							Description: "A specification of the project the service belongs to.\n\nEach service spec keeps its own copy of the project spec.",
 							Default:     map[string]interface{}{},
-							Ref:         ref("github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.DockerComposeProject"),
+							Ref:         ref("github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.DockerComposeProject"),
 						},
 					},
 					"imageMaps": {
@@ -2088,7 +2088,7 @@ func schema_pkg_apis_core_v1alpha1_DockerComposeServiceSpec(ref common.Reference
 					"disableSource": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Specifies how to disable this.",
-							Ref:         ref("github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.DisableSource"),
+							Ref:         ref("github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.DisableSource"),
 						},
 					},
 				},
@@ -2096,7 +2096,7 @@ func schema_pkg_apis_core_v1alpha1_DockerComposeServiceSpec(ref common.Reference
 			},
 		},
 		Dependencies: []string{
-			"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.DisableSource", "github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.DockerComposeProject"},
+			"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.DisableSource", "github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.DockerComposeProject"},
 	}
 }
 
@@ -2110,7 +2110,7 @@ func schema_pkg_apis_core_v1alpha1_DockerComposeServiceStatus(ref common.Referen
 					"disableStatus": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Details about whether/why this is disabled.",
-							Ref:         ref("github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.DisableStatus"),
+							Ref:         ref("github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.DisableStatus"),
 						},
 					},
 					"portBindings": {
@@ -2121,7 +2121,7 @@ func schema_pkg_apis_core_v1alpha1_DockerComposeServiceStatus(ref common.Referen
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.DockerPortBinding"),
+										Ref:     ref("github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.DockerPortBinding"),
 									},
 								},
 							},
@@ -2130,7 +2130,7 @@ func schema_pkg_apis_core_v1alpha1_DockerComposeServiceStatus(ref common.Referen
 					"containerState": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Current state of the container for this service.",
-							Ref:         ref("github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.DockerContainerState"),
+							Ref:         ref("github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.DockerContainerState"),
 						},
 					},
 					"containerID": {
@@ -2170,7 +2170,7 @@ func schema_pkg_apis_core_v1alpha1_DockerComposeServiceStatus(ref common.Referen
 			},
 		},
 		Dependencies: []string{
-			"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.DisableStatus", "github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.DockerContainerState", "github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.DockerPortBinding", "k8s.io/apimachinery/pkg/apis/meta/v1.MicroTime"},
+			"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.DisableStatus", "github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.DockerContainerState", "github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.DockerPortBinding", "k8s.io/apimachinery/pkg/apis/meta/v1.MicroTime"},
 	}
 }
 
@@ -2266,20 +2266,20 @@ func schema_pkg_apis_core_v1alpha1_DockerImage(ref common.ReferenceCallback) com
 					"spec": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.DockerImageSpec"),
+							Ref:     ref("github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.DockerImageSpec"),
 						},
 					},
 					"status": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.DockerImageStatus"),
+							Ref:     ref("github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.DockerImageStatus"),
 						},
 					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.DockerImageSpec", "github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.DockerImageStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+			"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.DockerImageSpec", "github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.DockerImageStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
 	}
 }
 
@@ -2317,7 +2317,7 @@ func schema_pkg_apis_core_v1alpha1_DockerImageList(ref common.ReferenceCallback)
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.DockerImage"),
+										Ref:     ref("github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.DockerImage"),
 									},
 								},
 							},
@@ -2328,7 +2328,7 @@ func schema_pkg_apis_core_v1alpha1_DockerImageList(ref common.ReferenceCallback)
 			},
 		},
 		Dependencies: []string{
-			"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.DockerImage", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
+			"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.DockerImage", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
 	}
 }
 
@@ -2369,7 +2369,7 @@ func schema_pkg_apis_core_v1alpha1_DockerImageSpec(ref common.ReferenceCallback)
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.IgnoreDef"),
+										Ref:     ref("github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.IgnoreDef"),
 									},
 								},
 							},
@@ -2527,7 +2527,7 @@ func schema_pkg_apis_core_v1alpha1_DockerImageSpec(ref common.ReferenceCallback)
 			},
 		},
 		Dependencies: []string{
-			"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.IgnoreDef"},
+			"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.IgnoreDef"},
 	}
 }
 
@@ -2687,19 +2687,19 @@ func schema_pkg_apis_core_v1alpha1_DockerImageStatus(ref common.ReferenceCallbac
 					"waiting": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Details about a waiting image build.",
-							Ref:         ref("github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.DockerImageStateWaiting"),
+							Ref:         ref("github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.DockerImageStateWaiting"),
 						},
 					},
 					"building": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Details about a building image.",
-							Ref:         ref("github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.DockerImageStateBuilding"),
+							Ref:         ref("github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.DockerImageStateBuilding"),
 						},
 					},
 					"completed": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Details about a finished image build.",
-							Ref:         ref("github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.DockerImageStateCompleted"),
+							Ref:         ref("github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.DockerImageStateCompleted"),
 						},
 					},
 					"stageStatuses": {
@@ -2710,7 +2710,7 @@ func schema_pkg_apis_core_v1alpha1_DockerImageStatus(ref common.ReferenceCallbac
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.DockerImageStageStatus"),
+										Ref:     ref("github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.DockerImageStageStatus"),
 									},
 								},
 							},
@@ -2720,7 +2720,7 @@ func schema_pkg_apis_core_v1alpha1_DockerImageStatus(ref common.ReferenceCallbac
 			},
 		},
 		Dependencies: []string{
-			"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.DockerImageStageStatus", "github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.DockerImageStateBuilding", "github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.DockerImageStateCompleted", "github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.DockerImageStateWaiting"},
+			"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.DockerImageStageStatus", "github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.DockerImageStateBuilding", "github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.DockerImageStateCompleted", "github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.DockerImageStateWaiting"},
 	}
 }
 
@@ -2816,20 +2816,20 @@ func schema_pkg_apis_core_v1alpha1_Extension(ref common.ReferenceCallback) commo
 					"spec": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.ExtensionSpec"),
+							Ref:     ref("github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.ExtensionSpec"),
 						},
 					},
 					"status": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.ExtensionStatus"),
+							Ref:     ref("github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.ExtensionStatus"),
 						},
 					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.ExtensionSpec", "github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.ExtensionStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+			"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.ExtensionSpec", "github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.ExtensionStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
 	}
 }
 
@@ -2867,7 +2867,7 @@ func schema_pkg_apis_core_v1alpha1_ExtensionList(ref common.ReferenceCallback) c
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.Extension"),
+										Ref:     ref("github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.Extension"),
 									},
 								},
 							},
@@ -2878,7 +2878,7 @@ func schema_pkg_apis_core_v1alpha1_ExtensionList(ref common.ReferenceCallback) c
 			},
 		},
 		Dependencies: []string{
-			"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.Extension", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
+			"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.Extension", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
 	}
 }
 
@@ -2912,20 +2912,20 @@ func schema_pkg_apis_core_v1alpha1_ExtensionRepo(ref common.ReferenceCallback) c
 					"spec": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.ExtensionRepoSpec"),
+							Ref:     ref("github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.ExtensionRepoSpec"),
 						},
 					},
 					"status": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.ExtensionRepoStatus"),
+							Ref:     ref("github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.ExtensionRepoStatus"),
 						},
 					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.ExtensionRepoSpec", "github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.ExtensionRepoStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+			"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.ExtensionRepoSpec", "github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.ExtensionRepoStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
 	}
 }
 
@@ -2963,7 +2963,7 @@ func schema_pkg_apis_core_v1alpha1_ExtensionRepoList(ref common.ReferenceCallbac
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.ExtensionRepo"),
+										Ref:     ref("github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.ExtensionRepo"),
 									},
 								},
 							},
@@ -2974,7 +2974,7 @@ func schema_pkg_apis_core_v1alpha1_ExtensionRepoList(ref common.ReferenceCallbac
 			},
 		},
 		Dependencies: []string{
-			"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.ExtensionRepo", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
+			"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.ExtensionRepo", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
 	}
 }
 
@@ -3208,20 +3208,20 @@ func schema_pkg_apis_core_v1alpha1_FileWatch(ref common.ReferenceCallback) commo
 					"spec": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.FileWatchSpec"),
+							Ref:     ref("github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.FileWatchSpec"),
 						},
 					},
 					"status": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.FileWatchStatus"),
+							Ref:     ref("github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.FileWatchStatus"),
 						},
 					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.FileWatchSpec", "github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.FileWatchStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+			"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.FileWatchSpec", "github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.FileWatchStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
 	}
 }
 
@@ -3259,7 +3259,7 @@ func schema_pkg_apis_core_v1alpha1_FileWatchList(ref common.ReferenceCallback) c
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.FileWatch"),
+										Ref:     ref("github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.FileWatch"),
 									},
 								},
 							},
@@ -3270,7 +3270,7 @@ func schema_pkg_apis_core_v1alpha1_FileWatchList(ref common.ReferenceCallback) c
 			},
 		},
 		Dependencies: []string{
-			"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.FileWatch", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
+			"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.FileWatch", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
 	}
 }
 
@@ -3304,7 +3304,7 @@ func schema_pkg_apis_core_v1alpha1_FileWatchSpec(ref common.ReferenceCallback) c
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.IgnoreDef"),
+										Ref:     ref("github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.IgnoreDef"),
 									},
 								},
 							},
@@ -3313,7 +3313,7 @@ func schema_pkg_apis_core_v1alpha1_FileWatchSpec(ref common.ReferenceCallback) c
 					"disableSource": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Specifies how to disable this.",
-							Ref:         ref("github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.DisableSource"),
+							Ref:         ref("github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.DisableSource"),
 						},
 					},
 				},
@@ -3321,7 +3321,7 @@ func schema_pkg_apis_core_v1alpha1_FileWatchSpec(ref common.ReferenceCallback) c
 			},
 		},
 		Dependencies: []string{
-			"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.DisableSource", "github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.IgnoreDef"},
+			"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.DisableSource", "github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.IgnoreDef"},
 	}
 }
 
@@ -3352,7 +3352,7 @@ func schema_pkg_apis_core_v1alpha1_FileWatchStatus(ref common.ReferenceCallback)
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.FileEvent"),
+										Ref:     ref("github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.FileEvent"),
 									},
 								},
 							},
@@ -3368,14 +3368,14 @@ func schema_pkg_apis_core_v1alpha1_FileWatchStatus(ref common.ReferenceCallback)
 					"disableStatus": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Details about whether/why this is disabled.",
-							Ref:         ref("github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.DisableStatus"),
+							Ref:         ref("github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.DisableStatus"),
 						},
 					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.DisableStatus", "github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.FileEvent", "k8s.io/apimachinery/pkg/apis/meta/v1.MicroTime"},
+			"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.DisableStatus", "github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.FileEvent", "k8s.io/apimachinery/pkg/apis/meta/v1.MicroTime"},
 	}
 }
 
@@ -3533,7 +3533,7 @@ func schema_pkg_apis_core_v1alpha1_HTTPGetAction(ref common.ReferenceCallback) c
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.HTTPHeader"),
+										Ref:     ref("github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.HTTPHeader"),
 									},
 								},
 							},
@@ -3544,7 +3544,7 @@ func schema_pkg_apis_core_v1alpha1_HTTPGetAction(ref common.ReferenceCallback) c
 			},
 		},
 		Dependencies: []string{
-			"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.HTTPHeader"},
+			"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.HTTPHeader"},
 	}
 }
 
@@ -3588,26 +3588,26 @@ func schema_pkg_apis_core_v1alpha1_Handler(ref common.ReferenceCallback) common.
 					"exec": {
 						SchemaProps: spec.SchemaProps{
 							Description: "One and only one of the following should be specified. Exec specifies the action to take.",
-							Ref:         ref("github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.ExecAction"),
+							Ref:         ref("github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.ExecAction"),
 						},
 					},
 					"httpGet": {
 						SchemaProps: spec.SchemaProps{
 							Description: "HTTPGet specifies the http request to perform.",
-							Ref:         ref("github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.HTTPGetAction"),
+							Ref:         ref("github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.HTTPGetAction"),
 						},
 					},
 					"tcpSocket": {
 						SchemaProps: spec.SchemaProps{
 							Description: "TCPSocket specifies an action involving a TCP port. TCP hooks not yet supported",
-							Ref:         ref("github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.TCPSocketAction"),
+							Ref:         ref("github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.TCPSocketAction"),
 						},
 					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.ExecAction", "github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.HTTPGetAction", "github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.TCPSocketAction"},
+			"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.ExecAction", "github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.HTTPGetAction", "github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.TCPSocketAction"},
 	}
 }
 
@@ -3678,20 +3678,20 @@ func schema_pkg_apis_core_v1alpha1_ImageMap(ref common.ReferenceCallback) common
 					"spec": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.ImageMapSpec"),
+							Ref:     ref("github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.ImageMapSpec"),
 						},
 					},
 					"status": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.ImageMapStatus"),
+							Ref:     ref("github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.ImageMapStatus"),
 						},
 					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.ImageMapSpec", "github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.ImageMapStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+			"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.ImageMapSpec", "github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.ImageMapStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
 	}
 }
 
@@ -3729,7 +3729,7 @@ func schema_pkg_apis_core_v1alpha1_ImageMapList(ref common.ReferenceCallback) co
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.ImageMap"),
+										Ref:     ref("github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.ImageMap"),
 									},
 								},
 							},
@@ -3740,7 +3740,7 @@ func schema_pkg_apis_core_v1alpha1_ImageMapList(ref common.ReferenceCallback) co
 			},
 		},
 		Dependencies: []string{
-			"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.ImageMap", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
+			"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.ImageMap", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
 	}
 }
 
@@ -3834,13 +3834,13 @@ func schema_pkg_apis_core_v1alpha1_ImageMapSpec(ref common.ReferenceCallback) co
 					"overrideCommand": {
 						SchemaProps: spec.SchemaProps{
 							Description: "If specified, the injector will replace the 'command' field in the container when it replaces the image.",
-							Ref:         ref("github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.ImageMapOverrideCommand"),
+							Ref:         ref("github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.ImageMapOverrideCommand"),
 						},
 					},
 					"overrideArgs": {
 						SchemaProps: spec.SchemaProps{
 							Description: "If specified, the injector will replace the 'args' field in the container when it replaces the image.",
-							Ref:         ref("github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.ImageMapOverrideArgs"),
+							Ref:         ref("github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.ImageMapOverrideArgs"),
 						},
 					},
 				},
@@ -3848,7 +3848,7 @@ func schema_pkg_apis_core_v1alpha1_ImageMapSpec(ref common.ReferenceCallback) co
 			},
 		},
 		Dependencies: []string{
-			"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.ImageMapOverrideArgs", "github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.ImageMapOverrideCommand"},
+			"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.ImageMapOverrideArgs", "github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.ImageMapOverrideCommand"},
 	}
 }
 
@@ -3924,20 +3924,20 @@ func schema_pkg_apis_core_v1alpha1_KubernetesApply(ref common.ReferenceCallback)
 					"spec": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.KubernetesApplySpec"),
+							Ref:     ref("github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.KubernetesApplySpec"),
 						},
 					},
 					"status": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.KubernetesApplyStatus"),
+							Ref:     ref("github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.KubernetesApplyStatus"),
 						},
 					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.KubernetesApplySpec", "github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.KubernetesApplyStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+			"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.KubernetesApplySpec", "github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.KubernetesApplyStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
 	}
 }
 
@@ -4026,7 +4026,7 @@ func schema_pkg_apis_core_v1alpha1_KubernetesApplyList(ref common.ReferenceCallb
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.KubernetesApply"),
+										Ref:     ref("github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.KubernetesApply"),
 									},
 								},
 							},
@@ -4037,7 +4037,7 @@ func schema_pkg_apis_core_v1alpha1_KubernetesApplyList(ref common.ReferenceCallb
 			},
 		},
 		Dependencies: []string{
-			"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.KubernetesApply", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
+			"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.KubernetesApply", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
 	}
 }
 
@@ -4078,7 +4078,7 @@ func schema_pkg_apis_core_v1alpha1_KubernetesApplySpec(ref common.ReferenceCallb
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.KubernetesImageLocator"),
+										Ref:     ref("github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.KubernetesImageLocator"),
 									},
 								},
 							},
@@ -4093,19 +4093,19 @@ func schema_pkg_apis_core_v1alpha1_KubernetesApplySpec(ref common.ReferenceCallb
 					"kubernetesDiscoveryTemplateSpec": {
 						SchemaProps: spec.SchemaProps{
 							Description: "KubernetesDiscoveryTemplateSpec describes how we discover pods for resources created by this Apply.\n\nIf not specified, the KubernetesDiscovery controller will listen to all pods, and follow owner references to find the pods owned by these resources.",
-							Ref:         ref("github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.KubernetesDiscoveryTemplateSpec"),
+							Ref:         ref("github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.KubernetesDiscoveryTemplateSpec"),
 						},
 					},
 					"portForwardTemplateSpec": {
 						SchemaProps: spec.SchemaProps{
 							Description: "PortForwardTemplateSpec describes the data model for port forwards that KubernetesApply should set up.\n\nUnderneath the hood, we'll create a KubernetesDiscovery object that finds the pods and sets up the port-forwarding. Only one PortForward will be active at a time.",
-							Ref:         ref("github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.PortForwardTemplateSpec"),
+							Ref:         ref("github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.PortForwardTemplateSpec"),
 						},
 					},
 					"podLogStreamTemplateSpec": {
 						SchemaProps: spec.SchemaProps{
 							Description: "PodLogStreamTemplateSpec describes the data model for PodLogStreams that KubernetesApply should set up.\n\nUnderneath the hood, we'll create a KubernetesDiscovery object that finds the pods and sets up the pod log streams.\n\nIf no template is specified, the controller will stream all pod logs available from the apiserver.",
-							Ref:         ref("github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.PodLogStreamTemplateSpec"),
+							Ref:         ref("github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.PodLogStreamTemplateSpec"),
 						},
 					},
 					"discoveryStrategy": {
@@ -4118,25 +4118,25 @@ func schema_pkg_apis_core_v1alpha1_KubernetesApplySpec(ref common.ReferenceCallb
 					"disableSource": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Specifies how to disable this.",
-							Ref:         ref("github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.DisableSource"),
+							Ref:         ref("github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.DisableSource"),
 						},
 					},
 					"applyCmd": {
 						SchemaProps: spec.SchemaProps{
 							Description: "ApplyCmd is a custom command to execute to deploy entities to the Kubernetes cluster.\n\nThe command must be idempotent, e.g. it must not fail if some or all entities already exist.\n\nThe ApplyCmd MUST return valid Kubernetes YAML for the entities it applied to the cluster.\n\nExactly one of YAML OR ApplyCmd MUST be provided.",
-							Ref:         ref("github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.KubernetesApplyCmd"),
+							Ref:         ref("github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.KubernetesApplyCmd"),
 						},
 					},
 					"restartOn": {
 						SchemaProps: spec.SchemaProps{
 							Description: "RestartOn determines external triggers that will result in an apply.",
-							Ref:         ref("github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.RestartOnSpec"),
+							Ref:         ref("github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.RestartOnSpec"),
 						},
 					},
 					"deleteCmd": {
 						SchemaProps: spec.SchemaProps{
 							Description: "DeleteCmd is a custom command to execute to delete entities created by ApplyCmd and clean up any additional state.",
-							Ref:         ref("github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.KubernetesApplyCmd"),
+							Ref:         ref("github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.KubernetesApplyCmd"),
 						},
 					},
 					"cluster": {
@@ -4151,7 +4151,7 @@ func schema_pkg_apis_core_v1alpha1_KubernetesApplySpec(ref common.ReferenceCallb
 			},
 		},
 		Dependencies: []string{
-			"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.DisableSource", "github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.KubernetesApplyCmd", "github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.KubernetesDiscoveryTemplateSpec", "github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.KubernetesImageLocator", "github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.PodLogStreamTemplateSpec", "github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.PortForwardTemplateSpec", "github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.RestartOnSpec", "k8s.io/apimachinery/pkg/apis/meta/v1.Duration"},
+			"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.DisableSource", "github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.KubernetesApplyCmd", "github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.KubernetesDiscoveryTemplateSpec", "github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.KubernetesImageLocator", "github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.PodLogStreamTemplateSpec", "github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.PortForwardTemplateSpec", "github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.RestartOnSpec", "k8s.io/apimachinery/pkg/apis/meta/v1.Duration"},
 	}
 }
 
@@ -4198,7 +4198,7 @@ func schema_pkg_apis_core_v1alpha1_KubernetesApplyStatus(ref common.ReferenceCal
 					"disableStatus": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Details about whether/why this is disabled.",
-							Ref:         ref("github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.DisableStatus"),
+							Ref:         ref("github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.DisableStatus"),
 						},
 					},
 					"conditions": {
@@ -4219,7 +4219,7 @@ func schema_pkg_apis_core_v1alpha1_KubernetesApplyStatus(ref common.ReferenceCal
 			},
 		},
 		Dependencies: []string{
-			"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.DisableStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.Condition", "k8s.io/apimachinery/pkg/apis/meta/v1.MicroTime"},
+			"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.DisableStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.Condition", "k8s.io/apimachinery/pkg/apis/meta/v1.MicroTime"},
 	}
 }
 
@@ -4331,20 +4331,20 @@ func schema_pkg_apis_core_v1alpha1_KubernetesDiscovery(ref common.ReferenceCallb
 					"spec": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.KubernetesDiscoverySpec"),
+							Ref:     ref("github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.KubernetesDiscoverySpec"),
 						},
 					},
 					"status": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.KubernetesDiscoveryStatus"),
+							Ref:     ref("github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.KubernetesDiscoveryStatus"),
 						},
 					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.KubernetesDiscoverySpec", "github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.KubernetesDiscoveryStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+			"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.KubernetesDiscoverySpec", "github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.KubernetesDiscoveryStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
 	}
 }
 
@@ -4382,7 +4382,7 @@ func schema_pkg_apis_core_v1alpha1_KubernetesDiscoveryList(ref common.ReferenceC
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.KubernetesDiscovery"),
+										Ref:     ref("github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.KubernetesDiscovery"),
 									},
 								},
 							},
@@ -4393,7 +4393,7 @@ func schema_pkg_apis_core_v1alpha1_KubernetesDiscoveryList(ref common.ReferenceC
 			},
 		},
 		Dependencies: []string{
-			"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.KubernetesDiscovery", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
+			"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.KubernetesDiscovery", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
 	}
 }
 
@@ -4412,7 +4412,7 @@ func schema_pkg_apis_core_v1alpha1_KubernetesDiscoverySpec(ref common.ReferenceC
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.KubernetesWatchRef"),
+										Ref:     ref("github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.KubernetesWatchRef"),
 									},
 								},
 							},
@@ -4435,13 +4435,13 @@ func schema_pkg_apis_core_v1alpha1_KubernetesDiscoverySpec(ref common.ReferenceC
 					"portForwardTemplateSpec": {
 						SchemaProps: spec.SchemaProps{
 							Description: "PortForwardTemplateSpec describes the data model for port forwards that KubernetesDiscovery should set up.\n\nThe KubernetesDiscovery controller will choose a \"best\" candidate for attaching the port-forwarding. Only one PortForward will be active at a time.",
-							Ref:         ref("github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.PortForwardTemplateSpec"),
+							Ref:         ref("github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.PortForwardTemplateSpec"),
 						},
 					},
 					"podLogStreamTemplateSpec": {
 						SchemaProps: spec.SchemaProps{
 							Description: "PodLogStreamTemplateSpec describes the data model for PodLogStreams that KubernetesDiscovery should set up.\n\nThe KubernetesDiscovery controller will attach PodLogStream objects to all active pods it discovers.\n\nIf no template is specified, the controller will stream all pod logs available from the apiserver.",
-							Ref:         ref("github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.PodLogStreamTemplateSpec"),
+							Ref:         ref("github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.PodLogStreamTemplateSpec"),
 						},
 					},
 					"cluster": {
@@ -4457,7 +4457,7 @@ func schema_pkg_apis_core_v1alpha1_KubernetesDiscoverySpec(ref common.ReferenceC
 			},
 		},
 		Dependencies: []string{
-			"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.KubernetesWatchRef", "github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.PodLogStreamTemplateSpec", "github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.PortForwardTemplateSpec", "k8s.io/apimachinery/pkg/apis/meta/v1.LabelSelector"},
+			"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.KubernetesWatchRef", "github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.PodLogStreamTemplateSpec", "github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.PortForwardTemplateSpec", "k8s.io/apimachinery/pkg/apis/meta/v1.LabelSelector"},
 	}
 }
 
@@ -4524,7 +4524,7 @@ func schema_pkg_apis_core_v1alpha1_KubernetesDiscoveryStatus(ref common.Referenc
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.Pod"),
+										Ref:     ref("github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.Pod"),
 									},
 								},
 							},
@@ -4533,13 +4533,13 @@ func schema_pkg_apis_core_v1alpha1_KubernetesDiscoveryStatus(ref common.Referenc
 					"waiting": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Waiting contains information about why the monitor has not started.",
-							Ref:         ref("github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.KubernetesDiscoveryStateWaiting"),
+							Ref:         ref("github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.KubernetesDiscoveryStateWaiting"),
 						},
 					},
 					"running": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Running contains information about the currently running monitor.",
-							Ref:         ref("github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.KubernetesDiscoveryStateRunning"),
+							Ref:         ref("github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.KubernetesDiscoveryStateRunning"),
 						},
 					},
 				},
@@ -4547,7 +4547,7 @@ func schema_pkg_apis_core_v1alpha1_KubernetesDiscoveryStatus(ref common.Referenc
 			},
 		},
 		Dependencies: []string{
-			"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.KubernetesDiscoveryStateRunning", "github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.KubernetesDiscoveryStateWaiting", "github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.Pod", "k8s.io/apimachinery/pkg/apis/meta/v1.MicroTime"},
+			"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.KubernetesDiscoveryStateRunning", "github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.KubernetesDiscoveryStateWaiting", "github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.Pod", "k8s.io/apimachinery/pkg/apis/meta/v1.MicroTime"},
 	}
 }
 
@@ -4590,7 +4590,7 @@ func schema_pkg_apis_core_v1alpha1_KubernetesImageLocator(ref common.ReferenceCa
 						SchemaProps: spec.SchemaProps{
 							Description: "Selects which objects to look in.",
 							Default:     map[string]interface{}{},
-							Ref:         ref("github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.ObjectSelector"),
+							Ref:         ref("github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.ObjectSelector"),
 						},
 					},
 					"path": {
@@ -4604,7 +4604,7 @@ func schema_pkg_apis_core_v1alpha1_KubernetesImageLocator(ref common.ReferenceCa
 					"object": {
 						SchemaProps: spec.SchemaProps{
 							Description: "A descriptor of the path and structure of an object that describes an image reference. This is a common way to describe images in CRDs, breaking them down into an object rather than an image reference string.",
-							Ref:         ref("github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.KubernetesImageObjectDescriptor"),
+							Ref:         ref("github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.KubernetesImageObjectDescriptor"),
 						},
 					},
 				},
@@ -4612,7 +4612,7 @@ func schema_pkg_apis_core_v1alpha1_KubernetesImageLocator(ref common.ReferenceCa
 			},
 		},
 		Dependencies: []string{
-			"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.KubernetesImageObjectDescriptor", "github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.ObjectSelector"},
+			"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.KubernetesImageObjectDescriptor", "github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.ObjectSelector"},
 	}
 }
 
@@ -4711,20 +4711,20 @@ func schema_pkg_apis_core_v1alpha1_LiveUpdate(ref common.ReferenceCallback) comm
 					"spec": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.LiveUpdateSpec"),
+							Ref:     ref("github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.LiveUpdateSpec"),
 						},
 					},
 					"status": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.LiveUpdateStatus"),
+							Ref:     ref("github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.LiveUpdateStatus"),
 						},
 					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.LiveUpdateSpec", "github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.LiveUpdateStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+			"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.LiveUpdateSpec", "github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.LiveUpdateStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
 	}
 }
 
@@ -4808,7 +4808,7 @@ func schema_pkg_apis_core_v1alpha1_LiveUpdateContainerStatus(ref common.Referenc
 					"waiting": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Details about a waiting live update.\n\nA live update is waiting when the reconciler is aware of file changes that need to be synced to the container, but has decided not to sync them yet.",
-							Ref:         ref("github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.LiveUpdateContainerStateWaiting"),
+							Ref:         ref("github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.LiveUpdateContainerStateWaiting"),
 						},
 					},
 				},
@@ -4816,7 +4816,7 @@ func schema_pkg_apis_core_v1alpha1_LiveUpdateContainerStatus(ref common.Referenc
 			},
 		},
 		Dependencies: []string{
-			"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.LiveUpdateContainerStateWaiting", "k8s.io/apimachinery/pkg/apis/meta/v1.MicroTime"},
+			"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.LiveUpdateContainerStateWaiting", "k8s.io/apimachinery/pkg/apis/meta/v1.MicroTime"},
 	}
 }
 
@@ -4977,7 +4977,7 @@ func schema_pkg_apis_core_v1alpha1_LiveUpdateList(ref common.ReferenceCallback) 
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.LiveUpdate"),
+										Ref:     ref("github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.LiveUpdate"),
 									},
 								},
 							},
@@ -4988,7 +4988,7 @@ func schema_pkg_apis_core_v1alpha1_LiveUpdateList(ref common.ReferenceCallback) 
 			},
 		},
 		Dependencies: []string{
-			"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.LiveUpdate", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
+			"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.LiveUpdate", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
 	}
 }
 
@@ -5002,20 +5002,20 @@ func schema_pkg_apis_core_v1alpha1_LiveUpdateSelector(ref common.ReferenceCallba
 					"kubernetes": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Finds containers in Kubernetes.",
-							Ref:         ref("github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.LiveUpdateKubernetesSelector"),
+							Ref:         ref("github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.LiveUpdateKubernetesSelector"),
 						},
 					},
 					"dockerCompose": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Finds containers in Docker Compose.",
-							Ref:         ref("github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.LiveUpdateDockerComposeSelector"),
+							Ref:         ref("github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.LiveUpdateDockerComposeSelector"),
 						},
 					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.LiveUpdateDockerComposeSelector", "github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.LiveUpdateKubernetesSelector"},
+			"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.LiveUpdateDockerComposeSelector", "github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.LiveUpdateKubernetesSelector"},
 	}
 }
 
@@ -5065,7 +5065,7 @@ func schema_pkg_apis_core_v1alpha1_LiveUpdateSpec(ref common.ReferenceCallback) 
 						SchemaProps: spec.SchemaProps{
 							Description: "Specifies how this live-updater finds the containers that need live update.",
 							Default:     map[string]interface{}{},
-							Ref:         ref("github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.LiveUpdateSelector"),
+							Ref:         ref("github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.LiveUpdateSelector"),
 						},
 					},
 					"sources": {
@@ -5076,7 +5076,7 @@ func schema_pkg_apis_core_v1alpha1_LiveUpdateSpec(ref common.ReferenceCallback) 
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.LiveUpdateSource"),
+										Ref:     ref("github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.LiveUpdateSource"),
 									},
 								},
 							},
@@ -5105,7 +5105,7 @@ func schema_pkg_apis_core_v1alpha1_LiveUpdateSpec(ref common.ReferenceCallback) 
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.LiveUpdateSync"),
+										Ref:     ref("github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.LiveUpdateSync"),
 									},
 								},
 							},
@@ -5119,7 +5119,7 @@ func schema_pkg_apis_core_v1alpha1_LiveUpdateSpec(ref common.ReferenceCallback) 
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.LiveUpdateExec"),
+										Ref:     ref("github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.LiveUpdateExec"),
 									},
 								},
 							},
@@ -5137,7 +5137,7 @@ func schema_pkg_apis_core_v1alpha1_LiveUpdateSpec(ref common.ReferenceCallback) 
 			},
 		},
 		Dependencies: []string{
-			"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.LiveUpdateExec", "github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.LiveUpdateSelector", "github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.LiveUpdateSource", "github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.LiveUpdateSync"},
+			"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.LiveUpdateExec", "github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.LiveUpdateSelector", "github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.LiveUpdateSource", "github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.LiveUpdateSync"},
 	}
 }
 
@@ -5191,7 +5191,7 @@ func schema_pkg_apis_core_v1alpha1_LiveUpdateStatus(ref common.ReferenceCallback
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.LiveUpdateContainerStatus"),
+										Ref:     ref("github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.LiveUpdateContainerStatus"),
 									},
 								},
 							},
@@ -5200,14 +5200,14 @@ func schema_pkg_apis_core_v1alpha1_LiveUpdateStatus(ref common.ReferenceCallback
 					"failed": {
 						SchemaProps: spec.SchemaProps{
 							Description: "If any of the containers are currently failing to process updates, the Failed state surfaces information about what's happening and what the live-updater is doing to fix the problem.\n\nIf all containers are updating successfully, Failed will be nil.",
-							Ref:         ref("github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.LiveUpdateStateFailed"),
+							Ref:         ref("github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.LiveUpdateStateFailed"),
 						},
 					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.LiveUpdateContainerStatus", "github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.LiveUpdateStateFailed"},
+			"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.LiveUpdateContainerStatus", "github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.LiveUpdateStateFailed"},
 	}
 }
 
@@ -5343,7 +5343,7 @@ func schema_pkg_apis_core_v1alpha1_Pod(ref common.ReferenceCallback) common.Open
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.PodCondition"),
+										Ref:     ref("github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.PodCondition"),
 									},
 								},
 							},
@@ -5357,7 +5357,7 @@ func schema_pkg_apis_core_v1alpha1_Pod(ref common.ReferenceCallback) common.Open
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.Container"),
+										Ref:     ref("github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.Container"),
 									},
 								},
 							},
@@ -5371,7 +5371,7 @@ func schema_pkg_apis_core_v1alpha1_Pod(ref common.ReferenceCallback) common.Open
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.Container"),
+										Ref:     ref("github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.Container"),
 									},
 								},
 							},
@@ -5417,7 +5417,7 @@ func schema_pkg_apis_core_v1alpha1_Pod(ref common.ReferenceCallback) common.Open
 					"owner": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Direct owner of this pod, if available.",
-							Ref:         ref("github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.PodOwner"),
+							Ref:         ref("github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.PodOwner"),
 						},
 					},
 				},
@@ -5425,7 +5425,7 @@ func schema_pkg_apis_core_v1alpha1_Pod(ref common.ReferenceCallback) common.Open
 			},
 		},
 		Dependencies: []string{
-			"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.Container", "github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.PodCondition", "github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.PodOwner", "k8s.io/apimachinery/pkg/apis/meta/v1.Time"},
+			"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.Container", "github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.PodCondition", "github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.PodOwner", "k8s.io/apimachinery/pkg/apis/meta/v1.Time"},
 	}
 }
 
@@ -5511,20 +5511,20 @@ func schema_pkg_apis_core_v1alpha1_PodLogStream(ref common.ReferenceCallback) co
 					"spec": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.PodLogStreamSpec"),
+							Ref:     ref("github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.PodLogStreamSpec"),
 						},
 					},
 					"status": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.PodLogStreamStatus"),
+							Ref:     ref("github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.PodLogStreamStatus"),
 						},
 					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.PodLogStreamSpec", "github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.PodLogStreamStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+			"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.PodLogStreamSpec", "github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.PodLogStreamStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
 	}
 }
 
@@ -5562,7 +5562,7 @@ func schema_pkg_apis_core_v1alpha1_PodLogStreamList(ref common.ReferenceCallback
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.PodLogStream"),
+										Ref:     ref("github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.PodLogStream"),
 									},
 								},
 							},
@@ -5573,7 +5573,7 @@ func schema_pkg_apis_core_v1alpha1_PodLogStreamList(ref common.ReferenceCallback
 			},
 		},
 		Dependencies: []string{
-			"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.PodLogStream", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
+			"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.PodLogStream", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
 	}
 }
 
@@ -5665,7 +5665,7 @@ func schema_pkg_apis_core_v1alpha1_PodLogStreamStatus(ref common.ReferenceCallba
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.ContainerLogStreamStatus"),
+										Ref:     ref("github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.ContainerLogStreamStatus"),
 									},
 								},
 							},
@@ -5682,7 +5682,7 @@ func schema_pkg_apis_core_v1alpha1_PodLogStreamStatus(ref common.ReferenceCallba
 			},
 		},
 		Dependencies: []string{
-			"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.ContainerLogStreamStatus"},
+			"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.ContainerLogStreamStatus"},
 	}
 }
 
@@ -5813,20 +5813,20 @@ func schema_pkg_apis_core_v1alpha1_PortForward(ref common.ReferenceCallback) com
 					"spec": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.PortForwardSpec"),
+							Ref:     ref("github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.PortForwardSpec"),
 						},
 					},
 					"status": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.PortForwardStatus"),
+							Ref:     ref("github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.PortForwardStatus"),
 						},
 					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.PortForwardSpec", "github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.PortForwardStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+			"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.PortForwardSpec", "github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.PortForwardStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
 	}
 }
 
@@ -5864,7 +5864,7 @@ func schema_pkg_apis_core_v1alpha1_PortForwardList(ref common.ReferenceCallback)
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.PortForward"),
+										Ref:     ref("github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.PortForward"),
 									},
 								},
 							},
@@ -5875,7 +5875,7 @@ func schema_pkg_apis_core_v1alpha1_PortForwardList(ref common.ReferenceCallback)
 			},
 		},
 		Dependencies: []string{
-			"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.PortForward", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
+			"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.PortForward", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
 	}
 }
 
@@ -5909,7 +5909,7 @@ func schema_pkg_apis_core_v1alpha1_PortForwardSpec(ref common.ReferenceCallback)
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.Forward"),
+										Ref:     ref("github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.Forward"),
 									},
 								},
 							},
@@ -5928,7 +5928,7 @@ func schema_pkg_apis_core_v1alpha1_PortForwardSpec(ref common.ReferenceCallback)
 			},
 		},
 		Dependencies: []string{
-			"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.Forward"},
+			"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.Forward"},
 	}
 }
 
@@ -5946,7 +5946,7 @@ func schema_pkg_apis_core_v1alpha1_PortForwardStatus(ref common.ReferenceCallbac
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.ForwardStatus"),
+										Ref:     ref("github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.ForwardStatus"),
 									},
 								},
 							},
@@ -5956,7 +5956,7 @@ func schema_pkg_apis_core_v1alpha1_PortForwardStatus(ref common.ReferenceCallbac
 			},
 		},
 		Dependencies: []string{
-			"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.ForwardStatus"},
+			"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.ForwardStatus"},
 	}
 }
 
@@ -5975,7 +5975,7 @@ func schema_pkg_apis_core_v1alpha1_PortForwardTemplateSpec(ref common.ReferenceC
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.Forward"),
+										Ref:     ref("github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.Forward"),
 									},
 								},
 							},
@@ -5986,7 +5986,7 @@ func schema_pkg_apis_core_v1alpha1_PortForwardTemplateSpec(ref common.ReferenceC
 			},
 		},
 		Dependencies: []string{
-			"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.Forward"},
+			"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.Forward"},
 	}
 }
 
@@ -6000,19 +6000,19 @@ func schema_pkg_apis_core_v1alpha1_Probe(ref common.ReferenceCallback) common.Op
 					"exec": {
 						SchemaProps: spec.SchemaProps{
 							Description: "One and only one of the following should be specified. Exec specifies the action to take.",
-							Ref:         ref("github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.ExecAction"),
+							Ref:         ref("github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.ExecAction"),
 						},
 					},
 					"httpGet": {
 						SchemaProps: spec.SchemaProps{
 							Description: "HTTPGet specifies the http request to perform.",
-							Ref:         ref("github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.HTTPGetAction"),
+							Ref:         ref("github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.HTTPGetAction"),
 						},
 					},
 					"tcpSocket": {
 						SchemaProps: spec.SchemaProps{
 							Description: "TCPSocket specifies an action involving a TCP port. TCP hooks not yet supported",
-							Ref:         ref("github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.TCPSocketAction"),
+							Ref:         ref("github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.TCPSocketAction"),
 						},
 					},
 					"initialDelaySeconds": {
@@ -6054,7 +6054,7 @@ func schema_pkg_apis_core_v1alpha1_Probe(ref common.ReferenceCallback) common.Op
 			},
 		},
 		Dependencies: []string{
-			"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.ExecAction", "github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.HTTPGetAction", "github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.TCPSocketAction"},
+			"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.ExecAction", "github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.HTTPGetAction", "github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.TCPSocketAction"},
 	}
 }
 
@@ -6095,7 +6095,7 @@ func schema_pkg_apis_core_v1alpha1_RegistryHosting(ref common.ReferenceCallback)
 					},
 					"singleName": {
 						SchemaProps: spec.SchemaProps{
-							Description: "SingleName uses a shared image name for _all_ Tilt-built images and relies on tags to distinguish between logically distinct images.\n\nThis is most commonly used with Amazon Elastic Container Registry (ECR), which works differently than other image registries.\n\nAn ECR host takes the form https://aws_account_id.dkr.ecr.region.amazonaws.com. Each image name in that registry must be pre-created ಠ_ಠ and assigned IAM permissions. For example: https://aws_account_id.dkr.ecr.region.amazonaws.com/my-repo (They call this a repo).\n\nFor this reason, some users using ECR prefer to push all images to a single image name (ECR repo).\n\nA recommended pattern here is to create a \"personal\" image repo for each user during development.\n\nSee: https://docs.aws.amazon.com/AmazonECR/latest/userguide/Repositories.html https://github.com/tilt-dev/tilt/issues/2419",
+							Description: "SingleName uses a shared image name for _all_ Tilt-built images and relies on tags to distinguish between logically distinct images.\n\nThis is most commonly used with Amazon Elastic Container Registry (ECR), which works differently than other image registries.\n\nAn ECR host takes the form https://aws_account_id.dkr.ecr.region.amazonaws.com. Each image name in that registry must be pre-created ಠ_ಠ and assigned IAM permissions. For example: https://aws_account_id.dkr.ecr.region.amazonaws.com/my-repo (They call this a repo).\n\nFor this reason, some users using ECR prefer to push all images to a single image name (ECR repo).\n\nA recommended pattern here is to create a \"personal\" image repo for each user during development.\n\nSee: https://docs.aws.amazon.com/AmazonECR/latest/userguide/Repositories.html https://github.com/defn/dev/m/tilt/issues/2419",
 							Type:        []string{"string"},
 							Format:      "",
 						},
@@ -6180,20 +6180,20 @@ func schema_pkg_apis_core_v1alpha1_Session(ref common.ReferenceCallback) common.
 					"spec": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.SessionSpec"),
+							Ref:     ref("github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.SessionSpec"),
 						},
 					},
 					"status": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.SessionStatus"),
+							Ref:     ref("github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.SessionStatus"),
 						},
 					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.SessionSpec", "github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.SessionStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+			"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.SessionSpec", "github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.SessionStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
 	}
 }
 
@@ -6263,7 +6263,7 @@ func schema_pkg_apis_core_v1alpha1_SessionList(ref common.ReferenceCallback) com
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.Session"),
+										Ref:     ref("github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.Session"),
 									},
 								},
 							},
@@ -6274,7 +6274,7 @@ func schema_pkg_apis_core_v1alpha1_SessionList(ref common.ReferenceCallback) com
 			},
 		},
 		Dependencies: []string{
-			"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.Session", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
+			"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.Session", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
 	}
 }
 
@@ -6304,7 +6304,7 @@ func schema_pkg_apis_core_v1alpha1_SessionSpec(ref common.ReferenceCallback) com
 					"ci": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Additional settings when in exitCondition=CI.",
-							Ref:         ref("github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.SessionCISpec"),
+							Ref:         ref("github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.SessionCISpec"),
 						},
 					},
 				},
@@ -6312,7 +6312,7 @@ func schema_pkg_apis_core_v1alpha1_SessionSpec(ref common.ReferenceCallback) com
 			},
 		},
 		Dependencies: []string{
-			"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.SessionCISpec"},
+			"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.SessionCISpec"},
 	}
 }
 
@@ -6345,7 +6345,7 @@ func schema_pkg_apis_core_v1alpha1_SessionStatus(ref common.ReferenceCallback) c
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.Target"),
+										Ref:     ref("github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.Target"),
 									},
 								},
 							},
@@ -6371,7 +6371,7 @@ func schema_pkg_apis_core_v1alpha1_SessionStatus(ref common.ReferenceCallback) c
 			},
 		},
 		Dependencies: []string{
-			"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.Target", "k8s.io/apimachinery/pkg/apis/meta/v1.MicroTime"},
+			"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.Target", "k8s.io/apimachinery/pkg/apis/meta/v1.MicroTime"},
 	}
 }
 
@@ -6422,14 +6422,14 @@ func schema_pkg_apis_core_v1alpha1_StateSource(ref common.ReferenceCallback) com
 					"configMap": {
 						SchemaProps: spec.SchemaProps{
 							Description: "State is stored in a ConfigMap.",
-							Ref:         ref("github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.ConfigMapStateSource"),
+							Ref:         ref("github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.ConfigMapStateSource"),
 						},
 					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.ConfigMapStateSource"},
+			"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.ConfigMapStateSource"},
 	}
 }
 
@@ -6532,7 +6532,7 @@ func schema_pkg_apis_core_v1alpha1_Target(ref common.ReferenceCallback) common.O
 						SchemaProps: spec.SchemaProps{
 							Description: "State provides information about the current status of the target.",
 							Default:     map[string]interface{}{},
-							Ref:         ref("github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.TargetState"),
+							Ref:         ref("github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.TargetState"),
 						},
 					},
 				},
@@ -6540,7 +6540,7 @@ func schema_pkg_apis_core_v1alpha1_Target(ref common.ReferenceCallback) common.O
 			},
 		},
 		Dependencies: []string{
-			"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.TargetState"},
+			"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.TargetState"},
 	}
 }
 
@@ -6554,32 +6554,32 @@ func schema_pkg_apis_core_v1alpha1_TargetState(ref common.ReferenceCallback) com
 					"waiting": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Waiting being non-nil indicates that the next execution of the target has been queued but not yet started.",
-							Ref:         ref("github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.TargetStateWaiting"),
+							Ref:         ref("github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.TargetStateWaiting"),
 						},
 					},
 					"active": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Active being non-nil indicates that the target is currently executing.",
-							Ref:         ref("github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.TargetStateActive"),
+							Ref:         ref("github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.TargetStateActive"),
 						},
 					},
 					"terminated": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Terminated being non-nil indicates that the target finished execution either normally or due to failure.",
-							Ref:         ref("github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.TargetStateTerminated"),
+							Ref:         ref("github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.TargetStateTerminated"),
 						},
 					},
 					"disabled": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Disabled being non-nil indicates that the target is disabled.",
-							Ref:         ref("github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.TargetStateDisabled"),
+							Ref:         ref("github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.TargetStateDisabled"),
 						},
 					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.TargetStateActive", "github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.TargetStateDisabled", "github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.TargetStateTerminated", "github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.TargetStateWaiting"},
+			"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.TargetStateActive", "github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.TargetStateDisabled", "github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.TargetStateTerminated", "github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.TargetStateWaiting"},
 	}
 }
 
@@ -6765,20 +6765,20 @@ func schema_pkg_apis_core_v1alpha1_Tiltfile(ref common.ReferenceCallback) common
 					"spec": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.TiltfileSpec"),
+							Ref:     ref("github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.TiltfileSpec"),
 						},
 					},
 					"status": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.TiltfileStatus"),
+							Ref:     ref("github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.TiltfileStatus"),
 						},
 					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.TiltfileSpec", "github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.TiltfileStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+			"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.TiltfileSpec", "github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.TiltfileStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
 	}
 }
 
@@ -6816,7 +6816,7 @@ func schema_pkg_apis_core_v1alpha1_TiltfileList(ref common.ReferenceCallback) co
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.Tiltfile"),
+										Ref:     ref("github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.Tiltfile"),
 									},
 								},
 							},
@@ -6827,7 +6827,7 @@ func schema_pkg_apis_core_v1alpha1_TiltfileList(ref common.ReferenceCallback) co
 			},
 		},
 		Dependencies: []string{
-			"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.Tiltfile", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
+			"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.Tiltfile", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
 	}
 }
 
@@ -6865,7 +6865,7 @@ func schema_pkg_apis_core_v1alpha1_TiltfileSpec(ref common.ReferenceCallback) co
 					"restartOn": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Objects that can trigger a re-execution of this Tiltfile.",
-							Ref:         ref("github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.RestartOnSpec"),
+							Ref:         ref("github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.RestartOnSpec"),
 						},
 					},
 					"args": {
@@ -6886,7 +6886,7 @@ func schema_pkg_apis_core_v1alpha1_TiltfileSpec(ref common.ReferenceCallback) co
 					"stopOn": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Objects that can stop execution of this Tiltfile.",
-							Ref:         ref("github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.StopOnSpec"),
+							Ref:         ref("github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.StopOnSpec"),
 						},
 					},
 				},
@@ -6894,7 +6894,7 @@ func schema_pkg_apis_core_v1alpha1_TiltfileSpec(ref common.ReferenceCallback) co
 			},
 		},
 		Dependencies: []string{
-			"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.RestartOnSpec", "github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.StopOnSpec"},
+			"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.RestartOnSpec", "github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.StopOnSpec"},
 	}
 }
 
@@ -7020,26 +7020,26 @@ func schema_pkg_apis_core_v1alpha1_TiltfileStatus(ref common.ReferenceCallback) 
 					"waiting": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Details about a waiting tiltfile.",
-							Ref:         ref("github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.TiltfileStateWaiting"),
+							Ref:         ref("github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.TiltfileStateWaiting"),
 						},
 					},
 					"running": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Details about a running tiltfile.",
-							Ref:         ref("github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.TiltfileStateRunning"),
+							Ref:         ref("github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.TiltfileStateRunning"),
 						},
 					},
 					"terminated": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Details about a terminated tiltfile.",
-							Ref:         ref("github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.TiltfileStateTerminated"),
+							Ref:         ref("github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.TiltfileStateTerminated"),
 						},
 					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.TiltfileStateRunning", "github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.TiltfileStateTerminated", "github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.TiltfileStateWaiting"},
+			"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.TiltfileStateRunning", "github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.TiltfileStateTerminated", "github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.TiltfileStateWaiting"},
 	}
 }
 
@@ -7073,20 +7073,20 @@ func schema_pkg_apis_core_v1alpha1_ToggleButton(ref common.ReferenceCallback) co
 					"spec": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.ToggleButtonSpec"),
+							Ref:     ref("github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.ToggleButtonSpec"),
 						},
 					},
 					"status": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.ToggleButtonStatus"),
+							Ref:     ref("github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.ToggleButtonStatus"),
 						},
 					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.ToggleButtonSpec", "github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.ToggleButtonStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+			"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.ToggleButtonSpec", "github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.ToggleButtonStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
 	}
 }
 
@@ -7124,7 +7124,7 @@ func schema_pkg_apis_core_v1alpha1_ToggleButtonList(ref common.ReferenceCallback
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.ToggleButton"),
+										Ref:     ref("github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.ToggleButton"),
 									},
 								},
 							},
@@ -7135,7 +7135,7 @@ func schema_pkg_apis_core_v1alpha1_ToggleButtonList(ref common.ReferenceCallback
 			},
 		},
 		Dependencies: []string{
-			"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.ToggleButton", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
+			"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.ToggleButton", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
 	}
 }
 
@@ -7150,21 +7150,21 @@ func schema_pkg_apis_core_v1alpha1_ToggleButtonSpec(ref common.ReferenceCallback
 						SchemaProps: spec.SchemaProps{
 							Description: "Where to display the button",
 							Default:     map[string]interface{}{},
-							Ref:         ref("github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.UIComponentLocation"),
+							Ref:         ref("github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.UIComponentLocation"),
 						},
 					},
 					"on": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Config for the button when it is \"on\"",
 							Default:     map[string]interface{}{},
-							Ref:         ref("github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.ToggleButtonStateSpec"),
+							Ref:         ref("github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.ToggleButtonStateSpec"),
 						},
 					},
 					"off": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Config for the button when it is \"off\"",
 							Default:     map[string]interface{}{},
-							Ref:         ref("github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.ToggleButtonStateSpec"),
+							Ref:         ref("github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.ToggleButtonStateSpec"),
 						},
 					},
 					"defaultOn": {
@@ -7179,7 +7179,7 @@ func schema_pkg_apis_core_v1alpha1_ToggleButtonSpec(ref common.ReferenceCallback
 						SchemaProps: spec.SchemaProps{
 							Description: "Where the toggle button's state is stored",
 							Default:     map[string]interface{}{},
-							Ref:         ref("github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.StateSource"),
+							Ref:         ref("github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.StateSource"),
 						},
 					},
 				},
@@ -7187,7 +7187,7 @@ func schema_pkg_apis_core_v1alpha1_ToggleButtonSpec(ref common.ReferenceCallback
 			},
 		},
 		Dependencies: []string{
-			"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.StateSource", "github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.ToggleButtonStateSpec", "github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.UIComponentLocation"},
+			"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.StateSource", "github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.ToggleButtonStateSpec", "github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.UIComponentLocation"},
 	}
 }
 
@@ -7430,20 +7430,20 @@ func schema_pkg_apis_core_v1alpha1_UIButton(ref common.ReferenceCallback) common
 					"spec": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.UIButtonSpec"),
+							Ref:     ref("github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.UIButtonSpec"),
 						},
 					},
 					"status": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.UIButtonStatus"),
+							Ref:     ref("github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.UIButtonStatus"),
 						},
 					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.UIButtonSpec", "github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.UIButtonStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+			"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.UIButtonSpec", "github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.UIButtonStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
 	}
 }
 
@@ -7481,7 +7481,7 @@ func schema_pkg_apis_core_v1alpha1_UIButtonList(ref common.ReferenceCallback) co
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.UIButton"),
+										Ref:     ref("github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.UIButton"),
 									},
 								},
 							},
@@ -7492,7 +7492,7 @@ func schema_pkg_apis_core_v1alpha1_UIButtonList(ref common.ReferenceCallback) co
 			},
 		},
 		Dependencies: []string{
-			"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.UIButton", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
+			"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.UIButton", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
 	}
 }
 
@@ -7507,7 +7507,7 @@ func schema_pkg_apis_core_v1alpha1_UIButtonSpec(ref common.ReferenceCallback) co
 						SchemaProps: spec.SchemaProps{
 							Description: "Location associates the button with another component for layout.",
 							Default:     map[string]interface{}{},
-							Ref:         ref("github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.UIComponentLocation"),
+							Ref:         ref("github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.UIComponentLocation"),
 						},
 					},
 					"text": {
@@ -7554,7 +7554,7 @@ func schema_pkg_apis_core_v1alpha1_UIButtonSpec(ref common.ReferenceCallback) co
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.UIInputSpec"),
+										Ref:     ref("github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.UIInputSpec"),
 									},
 								},
 							},
@@ -7565,7 +7565,7 @@ func schema_pkg_apis_core_v1alpha1_UIButtonSpec(ref common.ReferenceCallback) co
 			},
 		},
 		Dependencies: []string{
-			"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.UIComponentLocation", "github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.UIInputSpec"},
+			"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.UIComponentLocation", "github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.UIInputSpec"},
 	}
 }
 
@@ -7590,7 +7590,7 @@ func schema_pkg_apis_core_v1alpha1_UIButtonStatus(ref common.ReferenceCallback) 
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.UIInputStatus"),
+										Ref:     ref("github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.UIInputStatus"),
 									},
 								},
 							},
@@ -7600,7 +7600,7 @@ func schema_pkg_apis_core_v1alpha1_UIButtonStatus(ref common.ReferenceCallback) 
 			},
 		},
 		Dependencies: []string{
-			"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.UIInputStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.MicroTime"},
+			"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.UIInputStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.MicroTime"},
 	}
 }
 
@@ -7796,25 +7796,25 @@ func schema_pkg_apis_core_v1alpha1_UIInputSpec(ref common.ReferenceCallback) com
 					"text": {
 						SchemaProps: spec.SchemaProps{
 							Description: "A Text input that takes a string.",
-							Ref:         ref("github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.UITextInputSpec"),
+							Ref:         ref("github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.UITextInputSpec"),
 						},
 					},
 					"bool": {
 						SchemaProps: spec.SchemaProps{
 							Description: "A Bool input that is true or false",
-							Ref:         ref("github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.UIBoolInputSpec"),
+							Ref:         ref("github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.UIBoolInputSpec"),
 						},
 					},
 					"hidden": {
 						SchemaProps: spec.SchemaProps{
 							Description: "An input that has a constant value and does not display to the user",
-							Ref:         ref("github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.UIHiddenInputSpec"),
+							Ref:         ref("github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.UIHiddenInputSpec"),
 						},
 					},
 					"choice": {
 						SchemaProps: spec.SchemaProps{
 							Description: "A Choice input that takes a list of strings",
-							Ref:         ref("github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.UIChoiceInputSpec"),
+							Ref:         ref("github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.UIChoiceInputSpec"),
 						},
 					},
 				},
@@ -7822,7 +7822,7 @@ func schema_pkg_apis_core_v1alpha1_UIInputSpec(ref common.ReferenceCallback) com
 			},
 		},
 		Dependencies: []string{
-			"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.UIBoolInputSpec", "github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.UIChoiceInputSpec", "github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.UIHiddenInputSpec", "github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.UITextInputSpec"},
+			"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.UIBoolInputSpec", "github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.UIChoiceInputSpec", "github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.UIHiddenInputSpec", "github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.UITextInputSpec"},
 	}
 }
 
@@ -7844,25 +7844,25 @@ func schema_pkg_apis_core_v1alpha1_UIInputStatus(ref common.ReferenceCallback) c
 					"text": {
 						SchemaProps: spec.SchemaProps{
 							Description: "The status of the input, if it's text",
-							Ref:         ref("github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.UITextInputStatus"),
+							Ref:         ref("github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.UITextInputStatus"),
 						},
 					},
 					"bool": {
 						SchemaProps: spec.SchemaProps{
 							Description: "The status of the input, if it's a bool",
-							Ref:         ref("github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.UIBoolInputStatus"),
+							Ref:         ref("github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.UIBoolInputStatus"),
 						},
 					},
 					"hidden": {
 						SchemaProps: spec.SchemaProps{
 							Description: "The status of the input, if it's a hidden",
-							Ref:         ref("github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.UIHiddenInputStatus"),
+							Ref:         ref("github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.UIHiddenInputStatus"),
 						},
 					},
 					"choice": {
 						SchemaProps: spec.SchemaProps{
 							Description: "The status of the input, if it's a choice",
-							Ref:         ref("github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.UIChoiceInputStatus"),
+							Ref:         ref("github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.UIChoiceInputStatus"),
 						},
 					},
 				},
@@ -7870,7 +7870,7 @@ func schema_pkg_apis_core_v1alpha1_UIInputStatus(ref common.ReferenceCallback) c
 			},
 		},
 		Dependencies: []string{
-			"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.UIBoolInputStatus", "github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.UIChoiceInputStatus", "github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.UIHiddenInputStatus", "github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.UITextInputStatus"},
+			"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.UIBoolInputStatus", "github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.UIChoiceInputStatus", "github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.UIHiddenInputStatus", "github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.UITextInputStatus"},
 	}
 }
 
@@ -7904,20 +7904,20 @@ func schema_pkg_apis_core_v1alpha1_UIResource(ref common.ReferenceCallback) comm
 					"spec": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.UIResourceSpec"),
+							Ref:     ref("github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.UIResourceSpec"),
 						},
 					},
 					"status": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.UIResourceStatus"),
+							Ref:     ref("github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.UIResourceStatus"),
 						},
 					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.UIResourceSpec", "github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.UIResourceStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+			"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.UIResourceSpec", "github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.UIResourceStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
 	}
 }
 
@@ -8137,7 +8137,7 @@ func schema_pkg_apis_core_v1alpha1_UIResourceList(ref common.ReferenceCallback) 
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.UIResource"),
+										Ref:     ref("github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.UIResource"),
 									},
 								},
 							},
@@ -8148,7 +8148,7 @@ func schema_pkg_apis_core_v1alpha1_UIResourceList(ref common.ReferenceCallback) 
 			},
 		},
 		Dependencies: []string{
-			"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.UIResource", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
+			"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.UIResource", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
 	}
 }
 
@@ -8212,7 +8212,7 @@ func schema_pkg_apis_core_v1alpha1_UIResourceStateWaiting(ref common.ReferenceCa
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.UIResourceStateWaitingOnRef"),
+										Ref:     ref("github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.UIResourceStateWaitingOnRef"),
 									},
 								},
 							},
@@ -8223,7 +8223,7 @@ func schema_pkg_apis_core_v1alpha1_UIResourceStateWaiting(ref common.ReferenceCa
 			},
 		},
 		Dependencies: []string{
-			"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.UIResourceStateWaitingOnRef"},
+			"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.UIResourceStateWaitingOnRef"},
 	}
 }
 
@@ -8300,7 +8300,7 @@ func schema_pkg_apis_core_v1alpha1_UIResourceStatus(ref common.ReferenceCallback
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.UIBuildTerminated"),
+										Ref:     ref("github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.UIBuildTerminated"),
 									},
 								},
 							},
@@ -8309,7 +8309,7 @@ func schema_pkg_apis_core_v1alpha1_UIResourceStatus(ref common.ReferenceCallback
 					"currentBuild": {
 						SchemaProps: spec.SchemaProps{
 							Description: "The currently running build, if any.",
-							Ref:         ref("github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.UIBuildRunning"),
+							Ref:         ref("github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.UIBuildRunning"),
 						},
 					},
 					"pendingBuildSince": {
@@ -8333,7 +8333,7 @@ func schema_pkg_apis_core_v1alpha1_UIResourceStatus(ref common.ReferenceCallback
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.UIResourceLink"),
+										Ref:     ref("github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.UIResourceLink"),
 									},
 								},
 							},
@@ -8342,19 +8342,19 @@ func schema_pkg_apis_core_v1alpha1_UIResourceStatus(ref common.ReferenceCallback
 					"k8sResourceInfo": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Extra data about Kubernetes resources.",
-							Ref:         ref("github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.UIResourceKubernetes"),
+							Ref:         ref("github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.UIResourceKubernetes"),
 						},
 					},
 					"composeResourceInfo": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Extra data about Compose resources.",
-							Ref:         ref("github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.UIResourceCompose"),
+							Ref:         ref("github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.UIResourceCompose"),
 						},
 					},
 					"localResourceInfo": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Extra data about Local resources",
-							Ref:         ref("github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.UIResourceLocal"),
+							Ref:         ref("github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.UIResourceLocal"),
 						},
 					},
 					"runtimeStatus": {
@@ -8379,7 +8379,7 @@ func schema_pkg_apis_core_v1alpha1_UIResourceStatus(ref common.ReferenceCallback
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.UIResourceTargetSpec"),
+										Ref:     ref("github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.UIResourceTargetSpec"),
 									},
 								},
 							},
@@ -8403,13 +8403,13 @@ func schema_pkg_apis_core_v1alpha1_UIResourceStatus(ref common.ReferenceCallback
 						SchemaProps: spec.SchemaProps{
 							Description: "Information about the resource's objects' disabled status.",
 							Default:     map[string]interface{}{},
-							Ref:         ref("github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.DisableResourceStatus"),
+							Ref:         ref("github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.DisableResourceStatus"),
 						},
 					},
 					"waiting": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Waiting provides detail on why the resource is currently blocked from updating.",
-							Ref:         ref("github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.UIResourceStateWaiting"),
+							Ref:         ref("github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.UIResourceStateWaiting"),
 						},
 					},
 					"conditions": {
@@ -8420,7 +8420,7 @@ func schema_pkg_apis_core_v1alpha1_UIResourceStatus(ref common.ReferenceCallback
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.UIResourceCondition"),
+										Ref:     ref("github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.UIResourceCondition"),
 									},
 								},
 							},
@@ -8430,7 +8430,7 @@ func schema_pkg_apis_core_v1alpha1_UIResourceStatus(ref common.ReferenceCallback
 			},
 		},
 		Dependencies: []string{
-			"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.DisableResourceStatus", "github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.UIBuildRunning", "github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.UIBuildTerminated", "github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.UIResourceCompose", "github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.UIResourceCondition", "github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.UIResourceKubernetes", "github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.UIResourceLink", "github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.UIResourceLocal", "github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.UIResourceStateWaiting", "github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.UIResourceTargetSpec", "k8s.io/apimachinery/pkg/apis/meta/v1.MicroTime"},
+			"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.DisableResourceStatus", "github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.UIBuildRunning", "github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.UIBuildTerminated", "github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.UIResourceCompose", "github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.UIResourceCondition", "github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.UIResourceKubernetes", "github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.UIResourceLink", "github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.UIResourceLocal", "github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.UIResourceStateWaiting", "github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.UIResourceTargetSpec", "k8s.io/apimachinery/pkg/apis/meta/v1.MicroTime"},
 	}
 }
 
@@ -8498,20 +8498,20 @@ func schema_pkg_apis_core_v1alpha1_UISession(ref common.ReferenceCallback) commo
 					"spec": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.UISessionSpec"),
+							Ref:     ref("github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.UISessionSpec"),
 						},
 					},
 					"status": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
-							Ref:     ref("github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.UISessionStatus"),
+							Ref:     ref("github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.UISessionStatus"),
 						},
 					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.UISessionSpec", "github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.UISessionStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+			"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.UISessionSpec", "github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.UISessionStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
 	}
 }
 
@@ -8549,7 +8549,7 @@ func schema_pkg_apis_core_v1alpha1_UISessionList(ref common.ReferenceCallback) c
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.UISession"),
+										Ref:     ref("github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.UISession"),
 									},
 								},
 							},
@@ -8560,7 +8560,7 @@ func schema_pkg_apis_core_v1alpha1_UISessionList(ref common.ReferenceCallback) c
 			},
 		},
 		Dependencies: []string{
-			"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.UISession", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
+			"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.UISession", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
 	}
 }
 
@@ -8590,7 +8590,7 @@ func schema_pkg_apis_core_v1alpha1_UISessionStatus(ref common.ReferenceCallback)
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Default: map[string]interface{}{},
-										Ref:     ref("github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.UIFeatureFlag"),
+										Ref:     ref("github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.UIFeatureFlag"),
 									},
 								},
 							},
@@ -8607,7 +8607,7 @@ func schema_pkg_apis_core_v1alpha1_UISessionStatus(ref common.ReferenceCallback)
 						SchemaProps: spec.SchemaProps{
 							Description: "RunningTiltBuild reports the currently running version of tilt that this UI is talking to.",
 							Default:     map[string]interface{}{},
-							Ref:         ref("github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.TiltBuild"),
+							Ref:         ref("github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.TiltBuild"),
 						},
 					},
 					"suggestedTiltVersion": {
@@ -8621,7 +8621,7 @@ func schema_pkg_apis_core_v1alpha1_UISessionStatus(ref common.ReferenceCallback)
 						SchemaProps: spec.SchemaProps{
 							Description: "VersionSettings indicates whether version updates have been enabled/disabled from the Tiltfile.",
 							Default:     map[string]interface{}{},
-							Ref:         ref("github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.VersionSettings"),
+							Ref:         ref("github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.VersionSettings"),
 						},
 					},
 					"tiltCloudUsername": {
@@ -8676,7 +8676,7 @@ func schema_pkg_apis_core_v1alpha1_UISessionStatus(ref common.ReferenceCallback)
 			},
 		},
 		Dependencies: []string{
-			"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.TiltBuild", "github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.UIFeatureFlag", "github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1.VersionSettings", "k8s.io/apimachinery/pkg/apis/meta/v1.Time"},
+			"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.TiltBuild", "github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.UIFeatureFlag", "github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1.VersionSettings", "k8s.io/apimachinery/pkg/apis/meta/v1.Time"},
 	}
 }
 

@@ -1,6 +1,6 @@
 package buildcontrol
 
-import "github.com/tilt-dev/tilt/pkg/model"
+import "github.com/defn/dev/m/tilt/pkg/model"
 
 // Extract target specs from a manifest for BuildAndDeploy.
 func BuildTargets(manifest model.Manifest) []model.TargetSpec {

@@ -36,7 +36,7 @@
   width: 200px;
 }
 .ShareSnapshotModal-details {
- margin-left: $spacing-unit * 1.5;
+  margin-left: $spacing-unit * 1.5;
 }
 .ShareSnapshotModal-detailsList {
   list-style: none;
@@ -51,7 +51,7 @@
   height: $spacing-unit;
   position: absolute;
   left: -$spacing-unit;
-  background-image:url('data:image/svg+xml;utf8,<svg fill="none" height="8" viewBox="0 0 6 8" width="6" xmlns="http://www.w3.org/2000/svg"><path d="m6 4-5.25 3.4641v-6.928202z" fill="%23c4c4c4"/></svg>');
+  background-image: url('data:image/svg+xml;utf8,<svg fill="none" height="8" viewBox="0 0 6 8" width="6" xmlns="http://www.w3.org/2000/svg"><path d="m6 4-5.25 3.4641v-6.928202z" fill="%23c4c4c4"/></svg>');
   background-repeat: no-repeat;
   background-position: center;
 }
@@ -78,7 +78,6 @@
   padding-top: $spacing-unit * 0.6;
   padding-bottom: $spacing-unit * 0.8;
 }
-
 
 // Create a Snapshot Link
 .ShareSnapshotModal-shareLinkWrap {

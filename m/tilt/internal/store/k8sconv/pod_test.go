@@ -6,7 +6,7 @@ import (
 
 	v1 "k8s.io/api/core/v1"
 
-	"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1"
+	"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1"
 
 	"github.com/stretchr/testify/assert"
 )

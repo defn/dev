@@ -5,9 +5,9 @@ import (
 
 	"github.com/docker/docker/api/types"
 
-	"github.com/tilt-dev/tilt/internal/controllers/apicmp"
-	"github.com/tilt-dev/tilt/internal/dockercompose"
-	"github.com/tilt-dev/tilt/pkg/logger"
+	"github.com/defn/dev/m/tilt/internal/controllers/apicmp"
+	"github.com/defn/dev/m/tilt/internal/dockercompose"
+	"github.com/defn/dev/m/tilt/pkg/logger"
 )
 
 // Sync all the project watches with the dockercompose objects

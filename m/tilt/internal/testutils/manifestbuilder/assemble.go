@@ -1,8 +1,8 @@
 package manifestbuilder
 
 import (
-	"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1"
-	"github.com/tilt-dev/tilt/pkg/model"
+	"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1"
+	"github.com/defn/dev/m/tilt/pkg/model"
 )
 
 // Assemble these targets into a manifest, that deploys to k8s,

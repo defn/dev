@@ -31,7 +31,8 @@ let ActiveStarIcon = styled(StarIcon)`
 `
 
 let InactiveStarIcon = styled(StarIcon)`
-  transition: fill ${AnimDuration.default} linear,
+  transition:
+    fill ${AnimDuration.default} linear,
     opacity ${AnimDuration.short} linear;
   opacity: 0;
 

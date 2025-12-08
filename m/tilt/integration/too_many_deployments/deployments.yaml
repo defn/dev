@@ -13,9 +13,9 @@ spec:
         app: busybox1
     spec:
       containers:
-      - name: busybox1
-        image: busybox
-        command: ["busybox", "httpd", "-f", "-p", "8080"]
+        - name: busybox1
+          image: busybox
+          command: ["busybox", "httpd", "-f", "-p", "8080"]
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -32,9 +32,9 @@ spec:
         app: busybox2
     spec:
       containers:
-      - name: busybox2
-        image: busybox
-        command: ["busybox", "httpd", "-f", "-p", "8080"]
+        - name: busybox2
+          image: busybox
+          command: ["busybox", "httpd", "-f", "-p", "8080"]
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -51,9 +51,9 @@ spec:
         app: busybox3
     spec:
       containers:
-      - name: busybox3
-        image: busybox
-        command: ["busybox", "httpd", "-f", "-p", "8080"]
+        - name: busybox3
+          image: busybox
+          command: ["busybox", "httpd", "-f", "-p", "8080"]
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -70,9 +70,9 @@ spec:
         app: busybox4
     spec:
       containers:
-      - name: busybox4
-        image: busybox
-        command: ["busybox", "httpd", "-f", "-p", "8080"]
+        - name: busybox4
+          image: busybox
+          command: ["busybox", "httpd", "-f", "-p", "8080"]
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -89,9 +89,9 @@ spec:
         app: busybox5
     spec:
       containers:
-      - name: busybox5
-        image: busybox
-        command: ["busybox", "httpd", "-f", "-p", "8080"]
+        - name: busybox5
+          image: busybox
+          command: ["busybox", "httpd", "-f", "-p", "8080"]
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -108,9 +108,9 @@ spec:
         app: busybox6
     spec:
       containers:
-      - name: busybox6
-        image: busybox
-        command: ["busybox", "httpd", "-f", "-p", "8080"]
+        - name: busybox6
+          image: busybox
+          command: ["busybox", "httpd", "-f", "-p", "8080"]
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -127,9 +127,9 @@ spec:
         app: busybox7
     spec:
       containers:
-      - name: busybox7
-        image: busybox
-        command: ["busybox", "httpd", "-f", "-p", "8080"]
+        - name: busybox7
+          image: busybox
+          command: ["busybox", "httpd", "-f", "-p", "8080"]
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -146,9 +146,9 @@ spec:
         app: busybox8
     spec:
       containers:
-      - name: busybox8
-        image: busybox
-        command: ["busybox", "httpd", "-f", "-p", "8080"]
+        - name: busybox8
+          image: busybox
+          command: ["busybox", "httpd", "-f", "-p", "8080"]
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -165,9 +165,9 @@ spec:
         app: busybox9
     spec:
       containers:
-      - name: busybox9
-        image: busybox
-        command: ["busybox", "httpd", "-f", "-p", "8080"]
+        - name: busybox9
+          image: busybox
+          command: ["busybox", "httpd", "-f", "-p", "8080"]
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -184,9 +184,9 @@ spec:
         app: busybox10
     spec:
       containers:
-      - name: busybox10
-        image: busybox
-        command: ["busybox", "httpd", "-f", "-p", "8080"]
+        - name: busybox10
+          image: busybox
+          command: ["busybox", "httpd", "-f", "-p", "8080"]
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -203,9 +203,9 @@ spec:
         app: busybox11
     spec:
       containers:
-      - name: busybox11
-        image: busybox
-        command: ["busybox", "httpd", "-f", "-p", "8080"]
+        - name: busybox11
+          image: busybox
+          command: ["busybox", "httpd", "-f", "-p", "8080"]
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -222,9 +222,9 @@ spec:
         app: busybox12
     spec:
       containers:
-      - name: busybox12
-        image: busybox
-        command: ["busybox", "httpd", "-f", "-p", "8080"]
+        - name: busybox12
+          image: busybox
+          command: ["busybox", "httpd", "-f", "-p", "8080"]
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -241,9 +241,9 @@ spec:
         app: busybox13
     spec:
       containers:
-      - name: busybox13
-        image: busybox
-        command: ["busybox", "httpd", "-f", "-p", "8080"]
+        - name: busybox13
+          image: busybox
+          command: ["busybox", "httpd", "-f", "-p", "8080"]
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -260,9 +260,9 @@ spec:
         app: busybox14
     spec:
       containers:
-      - name: busybox14
-        image: busybox
-        command: ["busybox", "httpd", "-f", "-p", "8080"]
+        - name: busybox14
+          image: busybox
+          command: ["busybox", "httpd", "-f", "-p", "8080"]
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -279,9 +279,9 @@ spec:
         app: busybox15
     spec:
       containers:
-      - name: busybox15
-        image: busybox
-        command: ["busybox", "httpd", "-f", "-p", "8080"]
+        - name: busybox15
+          image: busybox
+          command: ["busybox", "httpd", "-f", "-p", "8080"]
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -298,9 +298,9 @@ spec:
         app: busybox16
     spec:
       containers:
-      - name: busybox16
-        image: busybox
-        command: ["busybox", "httpd", "-f", "-p", "8080"]
+        - name: busybox16
+          image: busybox
+          command: ["busybox", "httpd", "-f", "-p", "8080"]
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -317,9 +317,9 @@ spec:
         app: busybox17
     spec:
       containers:
-      - name: busybox17
-        image: busybox
-        command: ["busybox", "httpd", "-f", "-p", "8080"]
+        - name: busybox17
+          image: busybox
+          command: ["busybox", "httpd", "-f", "-p", "8080"]
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -336,9 +336,9 @@ spec:
         app: busybox18
     spec:
       containers:
-      - name: busybox18
-        image: busybox
-        command: ["busybox", "httpd", "-f", "-p", "8080"]
+        - name: busybox18
+          image: busybox
+          command: ["busybox", "httpd", "-f", "-p", "8080"]
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -355,9 +355,9 @@ spec:
         app: busybox19
     spec:
       containers:
-      - name: busybox19
-        image: busybox
-        command: ["busybox", "httpd", "-f", "-p", "8080"]
+        - name: busybox19
+          image: busybox
+          command: ["busybox", "httpd", "-f", "-p", "8080"]
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -374,9 +374,9 @@ spec:
         app: busybox20
     spec:
       containers:
-      - name: busybox20
-        image: busybox
-        command: ["busybox", "httpd", "-f", "-p", "8080"]
+        - name: busybox20
+          image: busybox
+          command: ["busybox", "httpd", "-f", "-p", "8080"]
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -393,9 +393,9 @@ spec:
         app: busybox21
     spec:
       containers:
-      - name: busybox21
-        image: busybox
-        command: ["busybox", "httpd", "-f", "-p", "8080"]
+        - name: busybox21
+          image: busybox
+          command: ["busybox", "httpd", "-f", "-p", "8080"]
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -412,9 +412,9 @@ spec:
         app: busybox22
     spec:
       containers:
-      - name: busybox22
-        image: busybox
-        command: ["busybox", "httpd", "-f", "-p", "8080"]
+        - name: busybox22
+          image: busybox
+          command: ["busybox", "httpd", "-f", "-p", "8080"]
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -431,9 +431,9 @@ spec:
         app: busybox23
     spec:
       containers:
-      - name: busybox23
-        image: busybox
-        command: ["busybox", "httpd", "-f", "-p", "8080"]
+        - name: busybox23
+          image: busybox
+          command: ["busybox", "httpd", "-f", "-p", "8080"]
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -450,9 +450,9 @@ spec:
         app: busybox24
     spec:
       containers:
-      - name: busybox24
-        image: busybox
-        command: ["busybox", "httpd", "-f", "-p", "8080"]
+        - name: busybox24
+          image: busybox
+          command: ["busybox", "httpd", "-f", "-p", "8080"]
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -469,9 +469,9 @@ spec:
         app: busybox25
     spec:
       containers:
-      - name: busybox25
-        image: busybox
-        command: ["busybox", "httpd", "-f", "-p", "8080"]
+        - name: busybox25
+          image: busybox
+          command: ["busybox", "httpd", "-f", "-p", "8080"]
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -488,9 +488,9 @@ spec:
         app: busybox26
     spec:
       containers:
-      - name: busybox26
-        image: busybox
-        command: ["busybox", "httpd", "-f", "-p", "8080"]
+        - name: busybox26
+          image: busybox
+          command: ["busybox", "httpd", "-f", "-p", "8080"]
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -507,9 +507,9 @@ spec:
         app: busybox27
     spec:
       containers:
-      - name: busybox27
-        image: busybox
-        command: ["busybox", "httpd", "-f", "-p", "8080"]
+        - name: busybox27
+          image: busybox
+          command: ["busybox", "httpd", "-f", "-p", "8080"]
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -526,9 +526,9 @@ spec:
         app: busybox28
     spec:
       containers:
-      - name: busybox28
-        image: busybox
-        command: ["busybox", "httpd", "-f", "-p", "8080"]
+        - name: busybox28
+          image: busybox
+          command: ["busybox", "httpd", "-f", "-p", "8080"]
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -545,9 +545,9 @@ spec:
         app: busybox29
     spec:
       containers:
-      - name: busybox29
-        image: busybox
-        command: ["busybox", "httpd", "-f", "-p", "8080"]
+        - name: busybox29
+          image: busybox
+          command: ["busybox", "httpd", "-f", "-p", "8080"]
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -564,9 +564,9 @@ spec:
         app: busybox30
     spec:
       containers:
-      - name: busybox30
-        image: busybox
-        command: ["busybox", "httpd", "-f", "-p", "8080"]
+        - name: busybox30
+          image: busybox
+          command: ["busybox", "httpd", "-f", "-p", "8080"]
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -583,9 +583,9 @@ spec:
         app: busybox31
     spec:
       containers:
-      - name: busybox31
-        image: busybox
-        command: ["busybox", "httpd", "-f", "-p", "8080"]
+        - name: busybox31
+          image: busybox
+          command: ["busybox", "httpd", "-f", "-p", "8080"]
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -602,9 +602,9 @@ spec:
         app: busybox32
     spec:
       containers:
-      - name: busybox32
-        image: busybox
-        command: ["busybox", "httpd", "-f", "-p", "8080"]
+        - name: busybox32
+          image: busybox
+          command: ["busybox", "httpd", "-f", "-p", "8080"]
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -621,9 +621,9 @@ spec:
         app: busybox33
     spec:
       containers:
-      - name: busybox33
-        image: busybox
-        command: ["busybox", "httpd", "-f", "-p", "8080"]
+        - name: busybox33
+          image: busybox
+          command: ["busybox", "httpd", "-f", "-p", "8080"]
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -640,9 +640,9 @@ spec:
         app: busybox34
     spec:
       containers:
-      - name: busybox34
-        image: busybox
-        command: ["busybox", "httpd", "-f", "-p", "8080"]
+        - name: busybox34
+          image: busybox
+          command: ["busybox", "httpd", "-f", "-p", "8080"]
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -659,9 +659,9 @@ spec:
         app: busybox35
     spec:
       containers:
-      - name: busybox35
-        image: busybox
-        command: ["busybox", "httpd", "-f", "-p", "8080"]
+        - name: busybox35
+          image: busybox
+          command: ["busybox", "httpd", "-f", "-p", "8080"]
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -678,9 +678,9 @@ spec:
         app: busybox36
     spec:
       containers:
-      - name: busybox36
-        image: busybox
-        command: ["busybox", "httpd", "-f", "-p", "8080"]
+        - name: busybox36
+          image: busybox
+          command: ["busybox", "httpd", "-f", "-p", "8080"]
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -697,9 +697,9 @@ spec:
         app: busybox37
     spec:
       containers:
-      - name: busybox37
-        image: busybox
-        command: ["busybox", "httpd", "-f", "-p", "8080"]
+        - name: busybox37
+          image: busybox
+          command: ["busybox", "httpd", "-f", "-p", "8080"]
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -716,9 +716,9 @@ spec:
         app: busybox38
     spec:
       containers:
-      - name: busybox38
-        image: busybox
-        command: ["busybox", "httpd", "-f", "-p", "8080"]
+        - name: busybox38
+          image: busybox
+          command: ["busybox", "httpd", "-f", "-p", "8080"]
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -735,9 +735,9 @@ spec:
         app: busybox39
     spec:
       containers:
-      - name: busybox39
-        image: busybox
-        command: ["busybox", "httpd", "-f", "-p", "8080"]
+        - name: busybox39
+          image: busybox
+          command: ["busybox", "httpd", "-f", "-p", "8080"]
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -754,9 +754,9 @@ spec:
         app: busybox40
     spec:
       containers:
-      - name: busybox40
-        image: busybox
-        command: ["busybox", "httpd", "-f", "-p", "8080"]
+        - name: busybox40
+          image: busybox
+          command: ["busybox", "httpd", "-f", "-p", "8080"]
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -773,9 +773,9 @@ spec:
         app: busybox41
     spec:
       containers:
-      - name: busybox41
-        image: busybox
-        command: ["busybox", "httpd", "-f", "-p", "8080"]
+        - name: busybox41
+          image: busybox
+          command: ["busybox", "httpd", "-f", "-p", "8080"]
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -792,9 +792,9 @@ spec:
         app: busybox42
     spec:
       containers:
-      - name: busybox42
-        image: busybox
-        command: ["busybox", "httpd", "-f", "-p", "8080"]
+        - name: busybox42
+          image: busybox
+          command: ["busybox", "httpd", "-f", "-p", "8080"]
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -811,9 +811,9 @@ spec:
         app: busybox43
     spec:
       containers:
-      - name: busybox43
-        image: busybox
-        command: ["busybox", "httpd", "-f", "-p", "8080"]
+        - name: busybox43
+          image: busybox
+          command: ["busybox", "httpd", "-f", "-p", "8080"]
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -830,9 +830,9 @@ spec:
         app: busybox44
     spec:
       containers:
-      - name: busybox44
-        image: busybox
-        command: ["busybox", "httpd", "-f", "-p", "8080"]
+        - name: busybox44
+          image: busybox
+          command: ["busybox", "httpd", "-f", "-p", "8080"]
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -849,9 +849,9 @@ spec:
         app: busybox45
     spec:
       containers:
-      - name: busybox45
-        image: busybox
-        command: ["busybox", "httpd", "-f", "-p", "8080"]
+        - name: busybox45
+          image: busybox
+          command: ["busybox", "httpd", "-f", "-p", "8080"]
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -868,9 +868,9 @@ spec:
         app: busybox46
     spec:
       containers:
-      - name: busybox46
-        image: busybox
-        command: ["busybox", "httpd", "-f", "-p", "8080"]
+        - name: busybox46
+          image: busybox
+          command: ["busybox", "httpd", "-f", "-p", "8080"]
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -887,9 +887,9 @@ spec:
         app: busybox47
     spec:
       containers:
-      - name: busybox47
-        image: busybox
-        command: ["busybox", "httpd", "-f", "-p", "8080"]
+        - name: busybox47
+          image: busybox
+          command: ["busybox", "httpd", "-f", "-p", "8080"]
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -906,9 +906,9 @@ spec:
         app: busybox48
     spec:
       containers:
-      - name: busybox48
-        image: busybox
-        command: ["busybox", "httpd", "-f", "-p", "8080"]
+        - name: busybox48
+          image: busybox
+          command: ["busybox", "httpd", "-f", "-p", "8080"]
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -925,6 +925,6 @@ spec:
         app: busybox49
     spec:
       containers:
-      - name: busybox49
-        image: busybox
-        command: ["busybox", "httpd", "-f", "-p", "8080"]
+        - name: busybox49
+          image: busybox
+          command: ["busybox", "httpd", "-f", "-p", "8080"]

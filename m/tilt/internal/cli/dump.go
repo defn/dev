@@ -14,9 +14,9 @@ import (
 	"github.com/spf13/cobra/doc"
 	"k8s.io/cli-runtime/pkg/genericclioptions"
 
-	"github.com/tilt-dev/tilt/internal/container"
-	"github.com/tilt-dev/tilt/internal/tiltfile"
-	"github.com/tilt-dev/tilt/pkg/model"
+	"github.com/defn/dev/m/tilt/internal/container"
+	"github.com/defn/dev/m/tilt/internal/tiltfile"
+	"github.com/defn/dev/m/tilt/pkg/model"
 )
 
 func newDumpCmd(rootCmd *cobra.Command, streams genericclioptions.IOStreams) *cobra.Command {

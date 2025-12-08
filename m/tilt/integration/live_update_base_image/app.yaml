@@ -15,10 +15,10 @@ spec:
         app: live-update-base-image
     spec:
       containers:
-      - name: live-update-base-image
-        image: gcr.io/windmill-test-containers/live-update-base-image-app
-        ports:
-        - containerPort: 8000
-        resources:
-          requests:
-            cpu: "10m"
+        - name: live-update-base-image
+          image: gcr.io/windmill-test-containers/live-update-base-image-app
+          ports:
+            - containerPort: 8000
+          resources:
+            requests:
+              cpu: "10m"

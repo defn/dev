@@ -17,7 +17,7 @@ GOIMPORTS_LOCAL_ARG := -local github.com/tilt-dev
 
 # Build a binary the current commit SHA
 install:
-	go install -mod vendor -ldflags "-X 'github.com/tilt-dev/tilt/internal/cli.commitSHA=$$(git merge-base master HEAD)'" ./cmd/tilt/...
+	go install -mod vendor -ldflags "-X 'github.com/defn/dev/m/tilt/internal/cli.commitSHA=$$(git merge-base master HEAD)'" ./cmd/tilt/...
 
 # disable optimizations and inlining, to allow more complete information when attaching a debugger or capturing a profile
 install-debug:
@@ -163,7 +163,7 @@ update-codegen-go:
 	goimports -w -l $(GOIMPORTS_LOCAL_ARG) pkg
 
 update-codegen-starlark:
-	go install github.com/tilt-dev/tilt-starlark-codegen@latest
+	go install github.com/defn/dev/m/tilt-starlark-codegen@latest
 	tilt-starlark-codegen ./pkg/apis/core/v1alpha1 ./internal/tiltfile/v1alpha1
 	goimports -w -l $(GOIMPORTS_LOCAL_ARG) internal/
 

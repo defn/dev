@@ -5,7 +5,7 @@ import (
 
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 
-	"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1"
+	"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1"
 )
 
 // Inject the flag-specified CI timeout.

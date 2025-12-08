@@ -14,9 +14,9 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 
-	"github.com/tilt-dev/tilt/internal/testutils"
-	"github.com/tilt-dev/tilt/internal/testutils/bufsync"
-	"github.com/tilt-dev/tilt/pkg/model"
+	"github.com/defn/dev/m/tilt/internal/testutils"
+	"github.com/defn/dev/m/tilt/internal/testutils/bufsync"
+	"github.com/defn/dev/m/tilt/pkg/model"
 )
 
 func TestProcessExecer_Run(t *testing.T) {

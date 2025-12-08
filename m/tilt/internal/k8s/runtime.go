@@ -9,8 +9,8 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	apiv1 "k8s.io/client-go/kubernetes/typed/core/v1"
 
-	"github.com/tilt-dev/tilt/internal/container"
-	"github.com/tilt-dev/tilt/pkg/logger"
+	"github.com/defn/dev/m/tilt/internal/container"
+	"github.com/defn/dev/m/tilt/pkg/logger"
 )
 
 type runtimeAsync struct {

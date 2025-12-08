@@ -5,10 +5,10 @@ import (
 
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 
-	"github.com/tilt-dev/tilt/internal/controllers/apis/liveupdate"
-	"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1"
-	"github.com/tilt-dev/tilt/pkg/model"
-	"github.com/tilt-dev/tilt/pkg/model/logstore"
+	"github.com/defn/dev/m/tilt/internal/controllers/apis/liveupdate"
+	"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1"
+	"github.com/defn/dev/m/tilt/pkg/model"
+	"github.com/defn/dev/m/tilt/pkg/model/logstore"
 )
 
 func toAPITargetSpec(spec model.TargetSpec) (v1alpha1.UIResourceTargetSpec, error) {

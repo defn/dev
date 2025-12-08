@@ -13,7 +13,7 @@ spec:
     spec:
       restartPolicy: Never
       containers:
-      - name: job
-        image: job
-        ports:
-          - containerPort: 8000
+        - name: job
+          image: job
+          ports:
+            - containerPort: 8000

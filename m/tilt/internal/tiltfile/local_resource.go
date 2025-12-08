@@ -7,13 +7,13 @@ import (
 	"github.com/pkg/errors"
 	"go.starlark.net/starlark"
 
-	"github.com/tilt-dev/tilt/internal/tiltfile/links"
-	"github.com/tilt-dev/tilt/internal/tiltfile/probe"
-	"github.com/tilt-dev/tilt/internal/tiltfile/starkit"
-	"github.com/tilt-dev/tilt/internal/tiltfile/value"
-	"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1"
-	"github.com/tilt-dev/tilt/pkg/logger"
-	"github.com/tilt-dev/tilt/pkg/model"
+	"github.com/defn/dev/m/tilt/internal/tiltfile/links"
+	"github.com/defn/dev/m/tilt/internal/tiltfile/probe"
+	"github.com/defn/dev/m/tilt/internal/tiltfile/starkit"
+	"github.com/defn/dev/m/tilt/internal/tiltfile/value"
+	"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1"
+	"github.com/defn/dev/m/tilt/pkg/logger"
+	"github.com/defn/dev/m/tilt/pkg/model"
 )
 
 const testDeprecationMsg = "test() is deprecated and will be removed in a future release.\n" +

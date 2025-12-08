@@ -5,8 +5,8 @@ import (
 
 	"github.com/stretchr/testify/assert"
 
-	"github.com/tilt-dev/tilt/internal/ospath"
-	"github.com/tilt-dev/tilt/internal/testutils/tempdir"
+	"github.com/defn/dev/m/tilt/internal/ospath"
+	"github.com/defn/dev/m/tilt/internal/testutils/tempdir"
 )
 
 func TestNewRelativeFileOrChildMatcher(t *testing.T) {

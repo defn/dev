@@ -10,11 +10,11 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	apiv1 "k8s.io/client-go/kubernetes/typed/core/v1"
 
+	"github.com/defn/dev/m/tilt/internal/container"
+	"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1"
+	"github.com/defn/dev/m/tilt/pkg/logger"
 	"github.com/tilt-dev/clusterid"
 	"github.com/tilt-dev/localregistry-go"
-	"github.com/tilt-dev/tilt/internal/container"
-	"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1"
-	"github.com/tilt-dev/tilt/pkg/logger"
 )
 
 // Recommended in Tilt-specific scripts
@@ -90,7 +90,7 @@ func (r *registryAsync) inferRegistryFromMicrok8s(ctx context.Context) *v1alpha1
 
 	// Check to make sure localhost resolves to an IPv4 address. If it doesn't,
 	// then we won't be able to connect to the registry. See:
-	// https://github.com/tilt-dev/tilt/issues/2369
+	// https://github.com/defn/dev/m/tilt/issues/2369
 	ips, err := net.LookupIP("localhost")
 	if err != nil || len(ips) == 0 || ips[0].To4() == nil {
 		logger.Get(ctx).Warnf("Your /etc/hosts is resolving localhost to ::1 (IPv6).\n" +

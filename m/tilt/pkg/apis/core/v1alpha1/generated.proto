@@ -24,7 +24,7 @@ import "k8s.io/apimachinery/pkg/apis/meta/v1/generated.proto";
 import "k8s.io/apimachinery/pkg/runtime/schema/generated.proto";
 
 // Package-wide variables from generator "generated".
-option go_package = "github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1";
+option go_package = "github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1";
 
 // Cluster defines any runtime for running containers, in the broadest
 // sense of the word "runtime".
@@ -2600,7 +2600,7 @@ message RegistryHosting {
   //
   // See:
   // https://docs.aws.amazon.com/AmazonECR/latest/userguide/Repositories.html
-  // https://github.com/tilt-dev/tilt/issues/2419
+  // https://github.com/defn/dev/m/tilt/issues/2419
   //
   // +optional
   optional string singleName = 5;

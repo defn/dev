@@ -3,8 +3,8 @@ package sessions
 import (
 	"errors"
 
-	"github.com/tilt-dev/tilt/internal/store"
-	"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1"
+	"github.com/defn/dev/m/tilt/internal/store"
+	"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1"
 )
 
 type SessionStatusUpdateAction struct {

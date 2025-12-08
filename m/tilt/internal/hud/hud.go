@@ -12,13 +12,13 @@ import (
 	"github.com/gdamore/tcell"
 	"github.com/pkg/errors"
 
-	"github.com/tilt-dev/tilt/internal/analytics"
-	"github.com/tilt-dev/tilt/internal/hud/view"
-	"github.com/tilt-dev/tilt/internal/openurl"
-	"github.com/tilt-dev/tilt/internal/output"
-	"github.com/tilt-dev/tilt/internal/store"
-	"github.com/tilt-dev/tilt/pkg/logger"
-	"github.com/tilt-dev/tilt/pkg/model"
+	"github.com/defn/dev/m/tilt/internal/analytics"
+	"github.com/defn/dev/m/tilt/internal/hud/view"
+	"github.com/defn/dev/m/tilt/internal/openurl"
+	"github.com/defn/dev/m/tilt/internal/output"
+	"github.com/defn/dev/m/tilt/internal/store"
+	"github.com/defn/dev/m/tilt/pkg/logger"
+	"github.com/defn/dev/m/tilt/pkg/model"
 )
 
 // The main loop ensures the HUD updates at least this often

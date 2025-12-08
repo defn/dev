@@ -7,11 +7,11 @@ import (
 
 	"github.com/tilt-dev/starlark-lsp/pkg/document"
 
-	"github.com/tilt-dev/tilt/internal/controllers/core/extension"
-	"github.com/tilt-dev/tilt/internal/controllers/core/extensionrepo"
-	"github.com/tilt-dev/tilt/internal/tiltfile/starkit"
-	"github.com/tilt-dev/tilt/internal/tiltfile/tiltextension"
-	tiltfilev1alpha1 "github.com/tilt-dev/tilt/internal/tiltfile/v1alpha1"
+	"github.com/defn/dev/m/tilt/internal/controllers/core/extension"
+	"github.com/defn/dev/m/tilt/internal/controllers/core/extensionrepo"
+	"github.com/defn/dev/m/tilt/internal/tiltfile/starkit"
+	"github.com/defn/dev/m/tilt/internal/tiltfile/tiltextension"
+	tiltfilev1alpha1 "github.com/defn/dev/m/tilt/internal/tiltfile/v1alpha1"
 )
 
 type ExtensionFinder interface {

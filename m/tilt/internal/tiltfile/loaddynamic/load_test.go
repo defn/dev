@@ -8,7 +8,7 @@ import (
 	"github.com/stretchr/testify/require"
 	"go.starlark.net/starlark"
 
-	"github.com/tilt-dev/tilt/internal/tiltfile/starkit"
+	"github.com/defn/dev/m/tilt/internal/tiltfile/starkit"
 )
 
 func TestLoadDynamicOK(t *testing.T) {

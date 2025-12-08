@@ -11,7 +11,7 @@ var newline = []byte("\n")
 
 // Kubernetes has a bug where it will dump certain kinds of errors to the
 // pod log stream.
-// https://github.com/tilt-dev/tilt/issues/2487
+// https://github.com/defn/dev/m/tilt/issues/2487
 type errorCapturingWriter struct {
 	underlying io.Writer
 

@@ -15,17 +15,17 @@ spec:
         app: twoimages
     spec:
       containers:
-      - name: sparkle
-        image: sparkle
-        ports:
-        - containerPort: 8000
-        resources:
-          requests:
-            cpu: "10m"
-      - name: tada
-        image: tada
-        ports:
-          - containerPort: 8001
-        resources:
-          requests:
-            cpu: "10m"
+        - name: sparkle
+          image: sparkle
+          ports:
+            - containerPort: 8000
+          resources:
+            requests:
+              cpu: "10m"
+        - name: tada
+          image: tada
+          ports:
+            - containerPort: 8001
+          resources:
+            requests:
+              cpu: "10m"

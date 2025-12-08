@@ -6,7 +6,7 @@ import (
 
 	"github.com/stretchr/testify/require"
 
-	"github.com/tilt-dev/tilt/internal/store"
+	"github.com/defn/dev/m/tilt/internal/store"
 )
 
 func TestHudEnabled(t *testing.T) {

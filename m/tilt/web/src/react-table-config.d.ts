@@ -16,8 +16,7 @@ declare module "react-table" {
   // take this file as-is, or comment out the sections that don't apply to your plugin configuration
 
   export interface TableOptions<D extends Record<string, unknown>>
-    extends UseSortByOptions<D>,
-      UsePaginationOptions<D> {
+    extends UseSortByOptions<D>, UsePaginationOptions<D> {
     // UseExpandedOptions<D>,
     // UseFiltersOptions<D>,
     // UseGlobalFiltersOptions<D>,
@@ -32,7 +31,7 @@ declare module "react-table" {
   }
 
   export interface Hooks<
-    D extends Record<string, unknown> = Record<string, unknown>
+    D extends Record<string, unknown> = Record<string, unknown>,
   > extends UseSortByHooks<D> {
     // UseExpandedHooks<D>,
     // UseGroupByHooks<D>,
@@ -41,9 +40,9 @@ declare module "react-table" {
   }
 
   export interface TableInstance<
-    D extends Record<string, unknown> = Record<string, unknown>
-  > extends UseSortByInstanceProps<D>,
-      UsePaginationInstanceProps<D> {
+    D extends Record<string, unknown> = Record<string, unknown>,
+  >
+    extends UseSortByInstanceProps<D>, UsePaginationInstanceProps<D> {
     // UseColumnOrderInstanceProps<D>,
     // UseExpandedInstanceProps<D>,
     // UseFiltersInstanceProps<D>,
@@ -55,9 +54,9 @@ declare module "react-table" {
   }
 
   export interface TableState<
-    D extends Record<string, unknown> = Record<string, unknown>
-  > extends UseSortByState<D>,
-      UsePaginationState<D> {
+    D extends Record<string, unknown> = Record<string, unknown>,
+  >
+    extends UseSortByState<D>, UsePaginationState<D> {
     // UseColumnOrderState<D>,
     // UseExpandedState<D>,
     // UseFiltersState<D>,
@@ -69,7 +68,7 @@ declare module "react-table" {
   }
 
   export interface ColumnInterface<
-    D extends Record<string, unknown> = Record<string, unknown>
+    D extends Record<string, unknown> = Record<string, unknown>,
   > extends UseSortByColumnOptions<D> {
     // UseFiltersColumnOptions<D>,
     // UseGlobalFiltersColumnOptions<D>,
@@ -78,7 +77,7 @@ declare module "react-table" {
   }
 
   export interface ColumnInstance<
-    D extends Record<string, unknown> = Record<string, unknown>
+    D extends Record<string, unknown> = Record<string, unknown>,
   > extends UseSortByColumnProps<D> {
     // UseFiltersColumnProps<D>,
     // UseGroupByColumnProps<D>,

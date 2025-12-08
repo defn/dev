@@ -10,10 +10,10 @@ import (
 	"github.com/distribution/reference"
 	"github.com/stretchr/testify/require"
 
+	wmcontainer "github.com/defn/dev/m/tilt/internal/container"
+	"github.com/defn/dev/m/tilt/internal/k8s"
+	"github.com/defn/dev/m/tilt/internal/testutils"
 	"github.com/tilt-dev/clusterid"
-	wmcontainer "github.com/tilt-dev/tilt/internal/container"
-	"github.com/tilt-dev/tilt/internal/k8s"
-	"github.com/tilt-dev/tilt/internal/testutils"
 )
 
 func TestCli_Run(t *testing.T) {

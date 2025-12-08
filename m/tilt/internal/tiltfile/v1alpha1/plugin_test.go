@@ -8,16 +8,16 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/labels"
 
-	"github.com/tilt-dev/tilt/internal/k8s"
-	"github.com/tilt-dev/tilt/internal/tiltfile/starkit"
-	"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1"
+	"github.com/defn/dev/m/tilt/internal/k8s"
+	"github.com/defn/dev/m/tilt/internal/tiltfile/starkit"
+	"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1"
 )
 
 func TestExtension(t *testing.T) {
 	f := newFixture(t)
 
 	f.File("Tiltfile", `
-v1alpha1.extension_repo(name='default', url='https://github.com/tilt-dev/tilt-extensions', ref='HEAD')
+v1alpha1.extension_repo(name='default', url='https://github.com/defn/dev/m/tilt-extensions', ref='HEAD')
 v1alpha1.extension(name='cancel', repo_name='default', repo_path='cancel')
 `)
 	result, err := f.ExecFile("Tiltfile")
@@ -27,7 +27,7 @@ v1alpha1.extension(name='cancel', repo_name='default', repo_path='cancel')
 
 	repo := set.GetSetForType(&v1alpha1.ExtensionRepo{})["default"].(*v1alpha1.ExtensionRepo)
 	require.NotNil(t, repo)
-	require.Equal(t, "https://github.com/tilt-dev/tilt-extensions", repo.Spec.URL)
+	require.Equal(t, "https://github.com/defn/dev/m/tilt-extensions", repo.Spec.URL)
 	require.Equal(t, "HEAD", repo.Spec.Ref)
 
 	ext := set.GetSetForType(&v1alpha1.Extension{})["cancel"].(*v1alpha1.Extension)
@@ -40,8 +40,8 @@ func TestExtensionRepoTwice(t *testing.T) {
 
 	// Some teams include a team extension repo in each tiltfile. It's OK as long as they match.
 	f.File("Tiltfile", `
-v1alpha1.extension_repo(name='default', url='https://github.com/tilt-dev/tilt-extensions')
-v1alpha1.extension_repo(name='default', url='https://github.com/tilt-dev/tilt-extensions')
+v1alpha1.extension_repo(name='default', url='https://github.com/defn/dev/m/tilt-extensions')
+v1alpha1.extension_repo(name='default', url='https://github.com/defn/dev/m/tilt-extensions')
 `)
 	result, err := f.ExecFile("Tiltfile")
 	require.NoError(t, err)
@@ -50,14 +50,14 @@ v1alpha1.extension_repo(name='default', url='https://github.com/tilt-dev/tilt-ex
 
 	repo := set.GetSetForType(&v1alpha1.ExtensionRepo{})["default"].(*v1alpha1.ExtensionRepo)
 	require.NotNil(t, repo)
-	require.Equal(t, "https://github.com/tilt-dev/tilt-extensions", repo.Spec.URL)
+	require.Equal(t, "https://github.com/defn/dev/m/tilt-extensions", repo.Spec.URL)
 }
 
 func TestExtensionArgs(t *testing.T) {
 	f := newFixture(t)
 
 	f.File("Tiltfile", `
-v1alpha1.extension_repo(name='default', url='https://github.com/tilt-dev/tilt-extensions')
+v1alpha1.extension_repo(name='default', url='https://github.com/defn/dev/m/tilt-extensions')
 v1alpha1.extension(name='cancel', repo_name='default', repo_path='cancel', args=['--namespace=foo'])
 `)
 	result, err := f.ExecFile("Tiltfile")
@@ -74,7 +74,7 @@ func TestExtensionValidation(t *testing.T) {
 	f := newFixture(t)
 
 	f.File("Tiltfile", `
-v1alpha1.extension_repo(name='default', url='ftp://github.com/tilt-dev/tilt-extensions')
+v1alpha1.extension_repo(name='default', url='ftp://github.com/defn/dev/m/tilt-extensions')
 `)
 	_, err := f.ExecFile("Tiltfile")
 	require.Error(t, err)

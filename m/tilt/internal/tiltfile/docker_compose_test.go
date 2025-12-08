@@ -6,9 +6,9 @@ import (
 
 	"github.com/stretchr/testify/assert"
 
-	"github.com/tilt-dev/tilt/internal/dockercompose"
-	"github.com/tilt-dev/tilt/internal/testutils"
-	"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1"
+	"github.com/defn/dev/m/tilt/internal/dockercompose"
+	"github.com/defn/dev/m/tilt/internal/testutils"
+	"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1"
 )
 
 // ParseConfig must return services topologically sorted wrt dependencies.
@@ -133,7 +133,7 @@ func TestMarshalOverflow(t *testing.T) {
 	f := newDCFixture(t)
 
 	// certain Compose types cause a stack overflow panic if marshaled with gopkg.in/yaml.v3
-	// https://github.com/tilt-dev/tilt/issues/4797
+	// https://github.com/defn/dev/m/tilt/issues/4797
 	output := `services:
   foo:
     image: myimage

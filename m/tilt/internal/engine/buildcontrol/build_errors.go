@@ -5,8 +5,8 @@ import (
 
 	"github.com/pkg/errors"
 
-	"github.com/tilt-dev/tilt/internal/store/buildcontrols"
-	"github.com/tilt-dev/tilt/pkg/logger"
+	"github.com/defn/dev/m/tilt/internal/store/buildcontrols"
+	"github.com/defn/dev/m/tilt/pkg/logger"
 )
 
 // Nothing is on fire, this is an expected case like a container builder being

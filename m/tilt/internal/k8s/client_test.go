@@ -27,9 +27,9 @@ import (
 	restfake "k8s.io/client-go/rest/fake"
 	ktesting "k8s.io/client-go/testing"
 
+	"github.com/defn/dev/m/tilt/internal/k8s/testyaml"
+	"github.com/defn/dev/m/tilt/internal/testutils"
 	"github.com/tilt-dev/clusterid"
-	"github.com/tilt-dev/tilt/internal/k8s/testyaml"
-	"github.com/tilt-dev/tilt/internal/testutils"
 )
 
 func TestEmptyNamespace(t *testing.T) {

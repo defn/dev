@@ -9,11 +9,11 @@ import (
 	"github.com/stretchr/testify/assert"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 
-	"github.com/tilt-dev/tilt/internal/container"
-	"github.com/tilt-dev/tilt/internal/controllers/fake"
-	"github.com/tilt-dev/tilt/internal/docker"
-	"github.com/tilt-dev/tilt/internal/dockercompose"
-	"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1"
+	"github.com/defn/dev/m/tilt/internal/container"
+	"github.com/defn/dev/m/tilt/internal/controllers/fake"
+	"github.com/defn/dev/m/tilt/internal/docker"
+	"github.com/defn/dev/m/tilt/internal/dockercompose"
+	"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1"
 )
 
 // Make sure we stream logs correctly when

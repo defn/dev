@@ -6,8 +6,8 @@ import (
 
 	"github.com/spf13/cobra"
 
-	"github.com/tilt-dev/tilt/internal/analytics"
-	"github.com/tilt-dev/tilt/pkg/model"
+	"github.com/defn/dev/m/tilt/internal/analytics"
+	"github.com/defn/dev/m/tilt/pkg/model"
 )
 
 type verifyInstallCmd struct {

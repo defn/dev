@@ -1,6 +1,6 @@
 package encoding
 
-import "github.com/tilt-dev/tilt/internal/tiltfile/starkit"
+import "github.com/defn/dev/m/tilt/internal/tiltfile/starkit"
 
 type Plugin struct{}
 

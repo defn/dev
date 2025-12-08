@@ -30,8 +30,8 @@ import (
 	mfake "k8s.io/client-go/metadata/fake"
 	ktesting "k8s.io/client-go/testing"
 
+	"github.com/defn/dev/m/tilt/internal/testutils"
 	"github.com/tilt-dev/clusterid"
-	"github.com/tilt-dev/tilt/internal/testutils"
 )
 
 func TestK8sClient_WatchPods(t *testing.T) {

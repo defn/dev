@@ -8,9 +8,9 @@ import (
 	"github.com/pkg/errors"
 	"github.com/spf13/cobra"
 
-	"github.com/tilt-dev/tilt/internal/analytics"
-	engineanalytics "github.com/tilt-dev/tilt/internal/engine/analytics"
-	"github.com/tilt-dev/tilt/pkg/model"
+	"github.com/defn/dev/m/tilt/internal/analytics"
+	engineanalytics "github.com/defn/dev/m/tilt/internal/engine/analytics"
+	"github.com/defn/dev/m/tilt/pkg/model"
 )
 
 type disableCmd struct {

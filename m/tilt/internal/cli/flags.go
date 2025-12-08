@@ -8,10 +8,10 @@ import (
 	"github.com/pkg/errors"
 	"github.com/spf13/cobra"
 
-	"github.com/tilt-dev/tilt/internal/hud"
-	"github.com/tilt-dev/tilt/internal/k8s"
-	"github.com/tilt-dev/tilt/internal/tiltfile"
-	"github.com/tilt-dev/tilt/pkg/model"
+	"github.com/defn/dev/m/tilt/internal/hud"
+	"github.com/defn/dev/m/tilt/internal/k8s"
+	"github.com/defn/dev/m/tilt/internal/tiltfile"
+	"github.com/defn/dev/m/tilt/pkg/model"
 )
 
 var (

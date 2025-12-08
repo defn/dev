@@ -13,17 +13,17 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/types"
 
-	"github.com/tilt-dev/tilt/internal/container"
-	"github.com/tilt-dev/tilt/internal/controllers/apis/uibutton"
-	"github.com/tilt-dev/tilt/internal/k8s"
-	"github.com/tilt-dev/tilt/internal/k8s/testyaml"
-	"github.com/tilt-dev/tilt/internal/store"
-	"github.com/tilt-dev/tilt/internal/testutils/configmap"
-	"github.com/tilt-dev/tilt/internal/testutils/manifestbuilder"
-	"github.com/tilt-dev/tilt/internal/testutils/podbuilder"
-	"github.com/tilt-dev/tilt/internal/watch"
-	"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1"
-	"github.com/tilt-dev/tilt/pkg/model"
+	"github.com/defn/dev/m/tilt/internal/container"
+	"github.com/defn/dev/m/tilt/internal/controllers/apis/uibutton"
+	"github.com/defn/dev/m/tilt/internal/k8s"
+	"github.com/defn/dev/m/tilt/internal/k8s/testyaml"
+	"github.com/defn/dev/m/tilt/internal/store"
+	"github.com/defn/dev/m/tilt/internal/testutils/configmap"
+	"github.com/defn/dev/m/tilt/internal/testutils/manifestbuilder"
+	"github.com/defn/dev/m/tilt/internal/testutils/podbuilder"
+	"github.com/defn/dev/m/tilt/internal/watch"
+	"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1"
+	"github.com/defn/dev/m/tilt/pkg/model"
 )
 
 func TestBuildControllerLocalResource(t *testing.T) {

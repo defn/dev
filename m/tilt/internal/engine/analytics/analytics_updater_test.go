@@ -7,8 +7,8 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 
-	tiltanalytics "github.com/tilt-dev/tilt/internal/analytics"
-	"github.com/tilt-dev/tilt/internal/store"
+	tiltanalytics "github.com/defn/dev/m/tilt/internal/analytics"
+	"github.com/defn/dev/m/tilt/internal/store"
 	"github.com/tilt-dev/wmclient/pkg/analytics"
 )
 

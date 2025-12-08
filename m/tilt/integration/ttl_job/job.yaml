@@ -10,6 +10,6 @@ spec:
     spec:
       restartPolicy: Never
       containers:
-      - name: ttl-job
-        image: busybox
-        command: ["echo", "job-success"]
+        - name: ttl-job
+          image: busybox
+          command: ["echo", "job-success"]

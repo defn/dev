@@ -27,14 +27,14 @@ import (
 
 	"github.com/tilt-dev/wmclient/pkg/dirs"
 
+	"github.com/defn/dev/m/tilt/internal/k8s/testyaml"
+	"github.com/defn/dev/m/tilt/internal/store"
+	"github.com/defn/dev/m/tilt/internal/testutils"
+	"github.com/defn/dev/m/tilt/internal/testutils/tempdir"
+	"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1"
+	"github.com/defn/dev/m/tilt/pkg/assets"
+	"github.com/defn/dev/m/tilt/pkg/model"
 	"github.com/tilt-dev/tilt-apiserver/pkg/server/testdata"
-	"github.com/tilt-dev/tilt/internal/k8s/testyaml"
-	"github.com/tilt-dev/tilt/internal/store"
-	"github.com/tilt-dev/tilt/internal/testutils"
-	"github.com/tilt-dev/tilt/internal/testutils/tempdir"
-	"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1"
-	"github.com/tilt-dev/tilt/pkg/assets"
-	"github.com/tilt-dev/tilt/pkg/model"
 )
 
 // Ensure creating objects works with the dynamic API clients.
@@ -79,7 +79,7 @@ func TestAPIServerDynamicClient(t *testing.T) {
 			},
 		},
 		"ExtensionRepo": map[string]interface{}{
-			"url": "https://github.com/tilt-dev/tilt-extensions",
+			"url": "https://github.com/defn/dev/m/tilt-extensions",
 		},
 		"LiveUpdate": map[string]interface{}{
 			"syncs": []interface{}{

@@ -17,9 +17,9 @@ import (
 
 	"github.com/tilt-dev/clusterid"
 
-	"github.com/tilt-dev/tilt/internal/container"
-	"github.com/tilt-dev/tilt/internal/k8s"
-	"github.com/tilt-dev/tilt/pkg/logger"
+	"github.com/defn/dev/m/tilt/internal/container"
+	"github.com/defn/dev/m/tilt/internal/k8s"
+	"github.com/defn/dev/m/tilt/pkg/logger"
 )
 
 // We didn't pick minikube v1.8.0 for any particular reason, it's just what Nick

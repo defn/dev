@@ -96,7 +96,7 @@ warn('ℹ️ Open {tiltfile_path} in your favorite editor to get started.'.forma
 
 # Extensions are open-source, pre-packaged functions that extend Tilt
 #
-#   More info: https://github.com/tilt-dev/tilt-extensions
+#   More info: https://github.com/defn/dev/m/tilt-extensions
 #
 load('ext://git_resource', 'git_checkout')
 
@@ -116,7 +116,7 @@ def tilt_demo():
         # https://docs.tilt.dev/multiple_repos.html
         load_dynamic('tilt-avatars/Tiltfile')
     watch_file('tilt-avatars/Tiltfile')
-    git_checkout('https://github.com/tilt-dev/tilt-avatars.git',
+    git_checkout('https://github.com/defn/dev/m/tilt-avatars.git',
                  checkout_dir='tilt-avatars')
 
 

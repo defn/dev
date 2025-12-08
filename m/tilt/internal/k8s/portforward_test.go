@@ -6,7 +6,7 @@ import (
 	"github.com/stretchr/testify/assert"
 	"k8s.io/apimachinery/pkg/util/httpstream"
 
-	"github.com/tilt-dev/tilt/internal/testutils"
+	"github.com/defn/dev/m/tilt/internal/testutils"
 )
 
 type fakeDialer struct {

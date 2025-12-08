@@ -3,8 +3,8 @@ package liveupdates
 import (
 	"sort"
 
-	"github.com/tilt-dev/tilt/internal/store/k8sconv"
-	"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1"
+	"github.com/defn/dev/m/tilt/internal/store/k8sconv"
+	"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1"
 )
 
 func FakeKubernetesResource(image string, containers []Container) *k8sconv.KubernetesResource {

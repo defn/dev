@@ -15,7 +15,7 @@ spec:
         app: onewatchexec
     spec:
       containers:
-      - name: onewatchexec
-        image: gcr.io/windmill-test-containers/integration/onewatchexec
-        ports:
-        - containerPort: 5000
+        - name: onewatchexec
+          image: gcr.io/windmill-test-containers/integration/onewatchexec
+          ports:
+            - containerPort: 5000

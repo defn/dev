@@ -14,9 +14,9 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/types"
 
-	"github.com/tilt-dev/tilt/internal/controllers/fake"
-	"github.com/tilt-dev/tilt/internal/xdg"
-	"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1"
+	"github.com/defn/dev/m/tilt/internal/controllers/fake"
+	"github.com/defn/dev/m/tilt/internal/xdg"
+	"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1"
 )
 
 func TestInvalidRepo(t *testing.T) {
@@ -61,7 +61,7 @@ func TestDefaultWeb(t *testing.T) {
 			Name: key.Name,
 		},
 		Spec: v1alpha1.ExtensionRepoSpec{
-			URL: "https://github.com/tilt-dev/tilt-extensions",
+			URL: "https://github.com/defn/dev/m/tilt-extensions",
 		},
 	}
 	f.Create(&repo)
@@ -115,7 +115,7 @@ func TestRepoSync(t *testing.T) {
 			Name: key.Name,
 		},
 		Spec: v1alpha1.ExtensionRepoSpec{
-			URL: "https://github.com/tilt-dev/tilt-extensions",
+			URL: "https://github.com/defn/dev/m/tilt-extensions",
 			Ref: "other-ref",
 		},
 	}
@@ -136,13 +136,13 @@ func TestRepoSyncExisting(t *testing.T) {
 			Name: key.Name,
 		},
 		Spec: v1alpha1.ExtensionRepoSpec{
-			URL: "https://github.com/tilt-dev/tilt-extensions",
+			URL: "https://github.com/defn/dev/m/tilt-extensions",
 			Ref: "other-ref",
 		},
 	}
 
-	f.dlr.Download("github.com/tilt-dev/tilt-extensions")
-	f.dlr.RefSync("github.com/tilt-dev/tilt-extensions", "other-ref")
+	f.dlr.Download("github.com/defn/dev/m/tilt-extensions")
+	f.dlr.RefSync("github.com/defn/dev/m/tilt-extensions", "other-ref")
 
 	f.Create(&repo)
 	f.MustGet(key, &repo)
@@ -161,13 +161,13 @@ func TestRepoAlwaysSyncHead(t *testing.T) {
 			Name: key.Name,
 		},
 		Spec: v1alpha1.ExtensionRepoSpec{
-			URL: "https://github.com/tilt-dev/tilt-extensions",
+			URL: "https://github.com/defn/dev/m/tilt-extensions",
 			Ref: "HEAD",
 		},
 	}
 
-	f.dlr.Download("github.com/tilt-dev/tilt-extensions")
-	f.dlr.RefSync("github.com/tilt-dev/tilt-extensions", "HEAD")
+	f.dlr.Download("github.com/defn/dev/m/tilt-extensions")
+	f.dlr.RefSync("github.com/defn/dev/m/tilt-extensions", "HEAD")
 
 	f.Create(&repo)
 	f.MustGet(key, &repo)
@@ -263,7 +263,7 @@ func (d *fakeDownloader) Download(pkg string) (string, error) {
 	if exists && d.lastRefSync != "" && d.lastRefSync != "HEAD" {
 		// If the current disk state is checked out to a ref, then
 		// we expect Download() to fail.
-		// https://github.com/tilt-dev/tilt/issues/5508
+		// https://github.com/defn/dev/m/tilt/issues/5508
 		return "", fmt.Errorf("You are not currently on a branch.")
 	}
 

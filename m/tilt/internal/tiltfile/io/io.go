@@ -9,9 +9,9 @@ import (
 	"github.com/pkg/errors"
 	"go.starlark.net/starlark"
 
-	"github.com/tilt-dev/tilt/internal/sliceutils"
-	"github.com/tilt-dev/tilt/internal/tiltfile/starkit"
-	"github.com/tilt-dev/tilt/internal/tiltfile/value"
+	"github.com/defn/dev/m/tilt/internal/sliceutils"
+	"github.com/defn/dev/m/tilt/internal/tiltfile/starkit"
+	"github.com/defn/dev/m/tilt/internal/tiltfile/value"
 )
 
 type WatchType int
@@ -185,7 +185,7 @@ func RecordReadPath(t *starlark.Thread, wt WatchType, files ...string) error {
 				// during Tiltfile execution, we'd rather not watch the directory at all
 				// rather than overwatch and over-trigger Tiltfile reloads.
 				//
-				// https://github.com/tilt-dev/tilt/issues/3387
+				// https://github.com/defn/dev/m/tilt/issues/3387
 				shouldWatch = true
 			}
 

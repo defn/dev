@@ -44,7 +44,7 @@ func ProvideAPIConfig(clientLoader clientcmd.ClientConfig, contextOverride KubeC
 	}
 
 	// Use ClientConfig() to workaround bugs in the validation api.
-	// See: https://github.com/tilt-dev/tilt/issues/5831
+	// See: https://github.com/defn/dev/m/tilt/issues/5831
 	_, err = clientcmd.NewDefaultClientConfig(config, nil).ClientConfig()
 	if err != nil {
 		return APIConfigOrError{Error: errors.Wrap(err, "Loading Kubernetes config")}

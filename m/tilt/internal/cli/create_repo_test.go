@@ -9,7 +9,7 @@ import (
 	"k8s.io/apimachinery/pkg/types"
 	"k8s.io/cli-runtime/pkg/genericclioptions"
 
-	"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1"
+	"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1"
 )
 
 func TestCreateRepo(t *testing.T) {
@@ -21,7 +21,7 @@ func TestCreateRepo(t *testing.T) {
 	cmd := newCreateRepoCmd(streams)
 	c := cmd.register()
 	err := c.Flags().Parse([]string{
-		"default", "https://github.com/tilt-dev/tilt-extensions",
+		"default", "https://github.com/defn/dev/m/tilt-extensions",
 		"--ref", "FAKE_SHA",
 	})
 	require.NoError(t, err)
@@ -34,6 +34,6 @@ func TestCreateRepo(t *testing.T) {
 	err = f.client.Get(f.ctx, types.NamespacedName{Name: "default"}, &obj)
 	require.NoError(t, err)
 
-	assert.Equal(t, "https://github.com/tilt-dev/tilt-extensions", obj.Spec.URL)
+	assert.Equal(t, "https://github.com/defn/dev/m/tilt-extensions", obj.Spec.URL)
 	assert.Equal(t, "FAKE_SHA", obj.Spec.Ref)
 }

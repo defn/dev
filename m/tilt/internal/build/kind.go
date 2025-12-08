@@ -7,9 +7,9 @@ import (
 
 	"github.com/distribution/reference"
 
+	"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1"
+	"github.com/defn/dev/m/tilt/pkg/logger"
 	"github.com/tilt-dev/clusterid"
-	"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1"
-	"github.com/tilt-dev/tilt/pkg/logger"
 )
 
 type KINDLoader interface {

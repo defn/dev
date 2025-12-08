@@ -14,12 +14,12 @@ import (
 	"k8s.io/cli-runtime/pkg/genericclioptions"
 	ctrllog "sigs.k8s.io/controller-runtime/pkg/log"
 
+	tiltanalytics "github.com/defn/dev/m/tilt/internal/analytics"
+	"github.com/defn/dev/m/tilt/internal/controllers"
+	"github.com/defn/dev/m/tilt/internal/output"
+	"github.com/defn/dev/m/tilt/pkg/logger"
+	"github.com/defn/dev/m/tilt/pkg/model"
 	"github.com/tilt-dev/starlark-lsp/pkg/cli"
-	tiltanalytics "github.com/tilt-dev/tilt/internal/analytics"
-	"github.com/tilt-dev/tilt/internal/controllers"
-	"github.com/tilt-dev/tilt/internal/output"
-	"github.com/tilt-dev/tilt/pkg/logger"
-	"github.com/tilt-dev/tilt/pkg/model"
 	"github.com/tilt-dev/wmclient/pkg/analytics"
 )
 

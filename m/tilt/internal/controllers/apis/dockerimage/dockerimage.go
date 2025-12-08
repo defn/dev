@@ -3,8 +3,8 @@ package dockerimage
 import (
 	"fmt"
 
-	"github.com/tilt-dev/tilt/pkg/apis"
-	"github.com/tilt-dev/tilt/pkg/model"
+	"github.com/defn/dev/m/tilt/pkg/apis"
+	"github.com/defn/dev/m/tilt/pkg/model"
 )
 
 // Generate the name for the DockerImage API object from an ImageTarget and ManifestName.

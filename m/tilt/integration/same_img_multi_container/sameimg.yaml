@@ -15,21 +15,21 @@ spec:
         app: sameimg
     spec:
       containers:
-      - name: c1
-        image: sameimg
-        command: ["/src/start.sh", "/src/main.sh"]
-        args: ["8000"]
-        ports:
-        - containerPort: 8000
-        resources:
-          requests:
-            cpu: "10m"
-      - name: c2
-        image: sameimg
-        command: ["/src/start.sh", "/src/main.sh"]
-        args: ["8001"]
-        ports:
-          - containerPort: 8001
-        resources:
-          requests:
-            cpu: "10m"
+        - name: c1
+          image: sameimg
+          command: ["/src/start.sh", "/src/main.sh"]
+          args: ["8000"]
+          ports:
+            - containerPort: 8000
+          resources:
+            requests:
+              cpu: "10m"
+        - name: c2
+          image: sameimg
+          command: ["/src/start.sh", "/src/main.sh"]
+          args: ["8001"]
+          ports:
+            - containerPort: 8001
+          resources:
+            requests:
+              cpu: "10m"

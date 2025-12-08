@@ -5,8 +5,8 @@ import (
 
 	"go.starlark.net/starlark"
 
-	"github.com/tilt-dev/tilt/internal/tiltfile/value"
-	"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1"
+	"github.com/defn/dev/m/tilt/internal/tiltfile/value"
+	"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1"
 )
 
 // Deserializing discovery strategy from starlark values.

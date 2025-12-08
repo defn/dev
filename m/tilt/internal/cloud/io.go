@@ -10,10 +10,10 @@ import (
 
 	"github.com/grpc-ecosystem/grpc-gateway/runtime"
 
-	"github.com/tilt-dev/tilt/internal/hud/webview"
-	"github.com/tilt-dev/tilt/internal/store"
-	"github.com/tilt-dev/tilt/pkg/logger"
-	proto_webview "github.com/tilt-dev/tilt/pkg/webview"
+	"github.com/defn/dev/m/tilt/internal/hud/webview"
+	"github.com/defn/dev/m/tilt/internal/store"
+	"github.com/defn/dev/m/tilt/pkg/logger"
+	proto_webview "github.com/defn/dev/m/tilt/pkg/webview"
 )
 
 type Snapshotter struct {

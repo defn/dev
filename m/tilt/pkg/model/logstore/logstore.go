@@ -8,15 +8,15 @@ import (
 
 	"google.golang.org/protobuf/types/known/timestamppb"
 
-	"github.com/tilt-dev/tilt/pkg/logger"
-	"github.com/tilt-dev/tilt/pkg/model"
-	"github.com/tilt-dev/tilt/pkg/webview"
+	"github.com/defn/dev/m/tilt/pkg/logger"
+	"github.com/defn/dev/m/tilt/pkg/model"
+	"github.com/defn/dev/m/tilt/pkg/webview"
 )
 
 // All parts of Tilt should display logs incrementally.
 //
 // But the initial page load loads all the existing logs.
-// https://github.com/tilt-dev/tilt/issues/3359
+// https://github.com/defn/dev/m/tilt/issues/3359
 //
 // Until that issue is fixed, we cap the logs at about 2MB.
 const defaultMaxLogLengthInBytes = 2 * 1000 * 1000
@@ -758,7 +758,7 @@ func (s *LogStore) computeLen() int {
 // After a log hits its limit, we need to truncate it to keep it small
 // we do this by cutting a big chunk at a time, so that we have rarer, larger changes, instead of
 // a small change every time new data is written to the log
-// https://github.com/tilt-dev/tilt/issues/1935#issuecomment-531390353
+// https://github.com/defn/dev/m/tilt/issues/1935#issuecomment-531390353
 func (s *LogStore) logTruncationTarget() int {
 	return s.maxLogLengthInBytes / 2
 }

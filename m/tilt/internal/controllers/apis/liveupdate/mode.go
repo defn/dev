@@ -12,8 +12,8 @@ package liveupdate
 // We should probably model this as a more full-featured UpdateStrategy,
 // so that you can have more control over debouncing and number of retries.
 //
-// https://github.com/tilt-dev/tilt/issues/3606
-// https://github.com/tilt-dev/tilt/issues/5054
+// https://github.com/defn/dev/m/tilt/issues/3606
+// https://github.com/defn/dev/m/tilt/issues/5054
 //
 // but for now we'll model this as an annotation.
 

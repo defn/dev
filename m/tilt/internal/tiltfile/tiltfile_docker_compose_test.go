@@ -10,10 +10,10 @@ import (
 	"github.com/stretchr/testify/require"
 	"golang.org/x/mod/semver"
 
-	"github.com/tilt-dev/tilt/internal/controllers/apis/liveupdate"
-	ctrltiltfile "github.com/tilt-dev/tilt/internal/controllers/apis/tiltfile"
-	"github.com/tilt-dev/tilt/internal/dockercompose"
-	"github.com/tilt-dev/tilt/pkg/model"
+	"github.com/defn/dev/m/tilt/internal/controllers/apis/liveupdate"
+	ctrltiltfile "github.com/defn/dev/m/tilt/internal/controllers/apis/tiltfile"
+	"github.com/defn/dev/m/tilt/internal/dockercompose"
+	"github.com/defn/dev/m/tilt/pkg/model"
 )
 
 const simpleConfig = `version: '3'
@@ -138,7 +138,7 @@ func TestBuildURL(t *testing.T) {
 	f.file("docker-compose.yml", `services:
   app:
     command: sh -c 'node server.js'
-    build: https://github.com/tilt-dev/tilt-docker-compose-example.git
+    build: https://github.com/defn/dev/m/tilt-docker-compose-example.git
     ports:
     - published: 3000
       target: 30

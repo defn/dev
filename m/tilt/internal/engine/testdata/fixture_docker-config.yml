@@ -1,7 +1,7 @@
 services:
   redis:
     expose:
-      - '6379'
+      - "6379"
     image: redis:alpine
     network_mode: bridge
   server:
@@ -10,8 +10,8 @@ services:
     environment:
       NAME: TheServer
     expose:
-      - '3000'
+      - "3000"
     links:
       - redis
     network_mode: bridge
-version: '2.1'
+version: "2.1"

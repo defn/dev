@@ -13,14 +13,14 @@ import (
 
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 
-	"github.com/tilt-dev/tilt/internal/controllers/apiset"
-	"github.com/tilt-dev/tilt/internal/controllers/core/extension"
-	"github.com/tilt-dev/tilt/internal/controllers/core/extensionrepo"
-	"github.com/tilt-dev/tilt/internal/tiltfile/starkit"
-	tiltfilev1alpha1 "github.com/tilt-dev/tilt/internal/tiltfile/v1alpha1"
-	"github.com/tilt-dev/tilt/pkg/apis"
-	"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1"
-	"github.com/tilt-dev/tilt/pkg/logger"
+	"github.com/defn/dev/m/tilt/internal/controllers/apiset"
+	"github.com/defn/dev/m/tilt/internal/controllers/core/extension"
+	"github.com/defn/dev/m/tilt/internal/controllers/core/extensionrepo"
+	"github.com/defn/dev/m/tilt/internal/tiltfile/starkit"
+	tiltfilev1alpha1 "github.com/defn/dev/m/tilt/internal/tiltfile/v1alpha1"
+	"github.com/defn/dev/m/tilt/pkg/apis"
+	"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1"
+	"github.com/defn/dev/m/tilt/pkg/logger"
 )
 
 const (
@@ -228,7 +228,7 @@ func (e *Plugin) ensureRepo(t *starlark.Thread, objSet apiset.ObjectSet, repoNam
 			Name: repoName,
 		},
 		Spec: v1alpha1.ExtensionRepoSpec{
-			URL: "https://github.com/tilt-dev/tilt-extensions",
+			URL: "https://github.com/defn/dev/m/tilt-extensions",
 		},
 	}
 

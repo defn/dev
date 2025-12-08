@@ -1,6 +1,6 @@
 package kubernetesapplys
 
-import "github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1"
+import "github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1"
 
 type KubernetesApplyUpsertAction struct {
 	KubernetesApply *v1alpha1.KubernetesApply

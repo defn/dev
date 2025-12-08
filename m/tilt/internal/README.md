@@ -18,7 +18,7 @@ subscriber diffs the state to see what changed since the subscriber last looked
 at the state.
 
 Depending on what changed, the subscriber may kick off some work, or start
-watching an external system (like a Kubernetes Pod) for changes.  As the
+watching an external system (like a Kubernetes Pod) for changes. As the
 subscriber does work, the subscriber creates actions and calls
 `store.Dispatch(action)`.
 
@@ -34,12 +34,10 @@ Almost everything in Tilt is implemented as a subscriber that fires actions.
   new pods that Tilt knows about. If a new pod appears, the log manager
   starts streaming it's logs. As new logs come in, it dispatches actions
   to send the logs to the engine state.
-  
 - **The Tilt browser UI.** When your browser visits `localhost:10350`,
   Tilt creates a new subscriber that's tied to a WebSocket connection.
   On each `OnChange`, Tilt pushes status updates to the browser
   on the WebSocket.
-  
 - **The file watcher.** On each `OnChange`, the file watcher looks at all the file
   paths in the state store that we expect to trigger updates. It diffs these
   against all the file watches it's currently managing, then creates new watches
@@ -72,7 +70,6 @@ Here are the core Tilt packages that manage the control loop:
 
 - [engine](engine) - Functions that translate actions into state changes, and registration logic
   for subscribers.
-  
 - [model](../../pkg/model) - Data models that are shared by the `store` package and other client libraries.
 
 ### Subscriber Packages
@@ -90,20 +87,19 @@ Most subscribers are subpackages of `engine`. Here's a partial listing of import
 - [engine/k8swatch](engine/k8swatch) - Watches Kubernetes resources, and
   dispatches actions when objects (like pods and events) are created, updated,
   or deleted.
-  
 - [engine/local](engine/local) - Manages servers run by `local_resource(serve_cmd)`
 
 - [engine/portforward](engine/portforward) - Sets up port-forwarding to Kubernetes pods.
 
 - [engine/runtimelog](engine/runtimelog) - Streams logs from Kubernetes and
   Docker Compose containers.
-  
+
 There are a few major subscribers that aren't subpackages of `engine`.
 
 - [hud](hud) - The termbox user interface
 
 - [hud/server](hud/server) - Creates websocket connections to send updates to the browser.
-  
+
 ### Client packages
 
 Almost all other packages in Tilt are client libraries that abstract over
@@ -113,7 +109,6 @@ external services that subscribers need to interact with. Here's a partial listi
 
 - [build](build) - An abstraction over docker build, with helpers for building
   docker context tarballs.
-  
 - [tiltfile](tiltfile) - Executes Tiltfiles, and implements all Tiltfile functions.
 
 - [k8s](k8s) - An abstraction over Kubernetes' client-go.
@@ -129,4 +124,3 @@ external services that subscribers need to interact with. Here's a partial listi
 - [cli](cli) - All Tilt CLI commands.
 
 - [web/src](../web/src) - The Tilt web interface.
-

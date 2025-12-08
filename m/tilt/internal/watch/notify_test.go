@@ -14,9 +14,9 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 
-	"github.com/tilt-dev/tilt/internal/dockerignore"
-	"github.com/tilt-dev/tilt/internal/testutils/tempdir"
-	"github.com/tilt-dev/tilt/pkg/logger"
+	"github.com/defn/dev/m/tilt/internal/dockerignore"
+	"github.com/defn/dev/m/tilt/internal/testutils/tempdir"
+	"github.com/defn/dev/m/tilt/pkg/logger"
 )
 
 // Each implementation of the notify interface should have the same basic

@@ -15,7 +15,7 @@ spec:
         app: onewatch
     spec:
       containers:
-      - name: onewatch
-        image: gcr.io/windmill-test-containers/integration/onewatch
-        ports:
-        - containerPort: 8000
+        - name: onewatch
+          image: gcr.io/windmill-test-containers/integration/onewatch
+          ports:
+            - containerPort: 8000

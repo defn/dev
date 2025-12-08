@@ -8,12 +8,12 @@ import (
 	"github.com/gorilla/websocket"
 	"github.com/pkg/errors"
 
-	"github.com/tilt-dev/tilt/internal/hud"
-	"github.com/tilt-dev/tilt/internal/hud/webview"
-	"github.com/tilt-dev/tilt/pkg/logger"
-	"github.com/tilt-dev/tilt/pkg/model"
-	"github.com/tilt-dev/tilt/pkg/model/logstore"
-	proto_webview "github.com/tilt-dev/tilt/pkg/webview"
+	"github.com/defn/dev/m/tilt/internal/hud"
+	"github.com/defn/dev/m/tilt/internal/hud/webview"
+	"github.com/defn/dev/m/tilt/pkg/logger"
+	"github.com/defn/dev/m/tilt/pkg/model"
+	"github.com/defn/dev/m/tilt/pkg/model/logstore"
+	proto_webview "github.com/defn/dev/m/tilt/pkg/webview"
 )
 
 // This file defines machinery to connect to the HUD server websocket and

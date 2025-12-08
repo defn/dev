@@ -3,9 +3,9 @@ package encoding
 import (
 	"testing"
 
-	"github.com/tilt-dev/tilt/internal/tiltfile/io"
-	"github.com/tilt-dev/tilt/internal/tiltfile/starkit"
-	"github.com/tilt-dev/tilt/internal/tiltfile/starlarkstruct"
+	"github.com/defn/dev/m/tilt/internal/tiltfile/io"
+	"github.com/defn/dev/m/tilt/internal/tiltfile/starkit"
+	"github.com/defn/dev/m/tilt/internal/tiltfile/starlarkstruct"
 )
 
 type fixture struct {

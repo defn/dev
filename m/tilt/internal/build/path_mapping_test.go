@@ -6,8 +6,8 @@ import (
 
 	"github.com/stretchr/testify/assert"
 
-	"github.com/tilt-dev/tilt/internal/testutils/tempdir"
-	"github.com/tilt-dev/tilt/pkg/model"
+	"github.com/defn/dev/m/tilt/internal/testutils/tempdir"
+	"github.com/defn/dev/m/tilt/pkg/model"
 )
 
 func TestFilesToPathMappings(t *testing.T) {

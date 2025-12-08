@@ -3,7 +3,7 @@ package server
 import (
 	"github.com/google/wire"
 
-	"github.com/tilt-dev/tilt/pkg/model"
+	"github.com/defn/dev/m/tilt/pkg/model"
 )
 
 var WireSet = wire.NewSet(

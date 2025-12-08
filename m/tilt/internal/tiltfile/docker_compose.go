@@ -20,17 +20,17 @@ import (
 	"go.starlark.net/starlark"
 	composeyaml "gopkg.in/yaml.v3"
 
-	"github.com/tilt-dev/tilt/internal/container"
-	"github.com/tilt-dev/tilt/internal/controllers/apis/liveupdate"
-	"github.com/tilt-dev/tilt/internal/dockercompose"
-	"github.com/tilt-dev/tilt/internal/sliceutils"
-	"github.com/tilt-dev/tilt/internal/tiltfile/io"
-	"github.com/tilt-dev/tilt/internal/tiltfile/links"
-	"github.com/tilt-dev/tilt/internal/tiltfile/starkit"
-	"github.com/tilt-dev/tilt/internal/tiltfile/value"
-	"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1"
-	"github.com/tilt-dev/tilt/pkg/logger"
-	"github.com/tilt-dev/tilt/pkg/model"
+	"github.com/defn/dev/m/tilt/internal/container"
+	"github.com/defn/dev/m/tilt/internal/controllers/apis/liveupdate"
+	"github.com/defn/dev/m/tilt/internal/dockercompose"
+	"github.com/defn/dev/m/tilt/internal/sliceutils"
+	"github.com/defn/dev/m/tilt/internal/tiltfile/io"
+	"github.com/defn/dev/m/tilt/internal/tiltfile/links"
+	"github.com/defn/dev/m/tilt/internal/tiltfile/starkit"
+	"github.com/defn/dev/m/tilt/internal/tiltfile/value"
+	"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1"
+	"github.com/defn/dev/m/tilt/pkg/logger"
+	"github.com/defn/dev/m/tilt/pkg/model"
 )
 
 // dcResourceSet represents a single docker-compose config file and all its associated services

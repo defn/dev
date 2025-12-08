@@ -1,6 +1,6 @@
-from typing import Dict, Union, List, Callable, Any
+from typing import Any, Callable, Dict, List, Union
 
-tilt_subcommand: str = ''
+tilt_subcommand: str = ""
 """The sub-command with which `tilt` was invoked. Does not include extra args or options.
 
 Examples:
@@ -10,15 +10,16 @@ Examples:
 - run `tilt alpha tiltfile-result` -> `config.tilt_subcommand == "alpha tiltfile-result"`
 """
 
-main_path: str = ''
+main_path: str = ""
 """The absolute path of the main Tiltfile."""
 
-main_dir: str = ''
+main_dir: str = ""
 """The absolute directory of the main Tiltfile.
 
 Often used to determine the location of vendored code and caches."""
 
-def define_string_list(name: str, args: bool=False, usage: str="") -> None:
+
+def define_string_list(name: str, args: bool = False, usage: str = "") -> None:
     """
     Defines a config setting of type `List[str]`.
 
@@ -38,7 +39,8 @@ def define_string_list(name: str, args: bool=False, usage: str="") -> None:
       usage: When arg parsing fails, what to print for this setting's description.
     """
 
-def define_string(name: str, args: bool=False, usage: str="") -> None:
+
+def define_string(name: str, args: bool = False, usage: str = "") -> None:
     """
     Defines a config setting of type `str`.
 
@@ -60,7 +62,8 @@ def define_string(name: str, args: bool=False, usage: str="") -> None:
       usage: When arg parsing fails, what to print for this setting's description.
     """
 
-def define_bool(name: str, args: bool=False, usage: str="") -> None:
+
+def define_bool(name: str, args: bool = False, usage: str = "") -> None:
     """
     Defines a config setting of type `bool`.
 
@@ -88,6 +91,7 @@ def define_bool(name: str, args: bool=False, usage: str="") -> None:
       usage: When arg parsing fails, what to print for this setting's description.
     """
 
+
 def parse() -> Dict[str, Any]:
     """
     Loads config settings from tilt_config.json, overlays config settings from
@@ -111,6 +115,7 @@ def parse() -> Dict[str, Any]:
       A Dict where the keys are settings names and the values are their values.
     """
 
+
 def set_enabled_resources(resources: List[str]) -> None:
     """
     Tells Tilt to only run the specified resources.
@@ -126,6 +131,7 @@ def set_enabled_resources(resources: List[str]) -> None:
       resources: The names of the resources to run, or an empty list to run them
                  all.
     """
+
 
 def clear_enabled_resources() -> None:
     """

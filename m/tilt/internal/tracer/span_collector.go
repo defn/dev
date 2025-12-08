@@ -9,7 +9,7 @@ import (
 
 	"go.opentelemetry.io/otel/sdk/trace"
 
-	"github.com/tilt-dev/tilt/internal/tracer/exptel"
+	"github.com/defn/dev/m/tilt/internal/tracer/exptel"
 )
 
 // SpanCollector does 3 things:

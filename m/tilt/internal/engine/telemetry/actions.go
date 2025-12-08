@@ -1,7 +1,7 @@
 package telemetry
 
 import (
-	"github.com/tilt-dev/tilt/pkg/model"
+	"github.com/defn/dev/m/tilt/pkg/model"
 )
 
 type TelemetryScriptRanAction struct {

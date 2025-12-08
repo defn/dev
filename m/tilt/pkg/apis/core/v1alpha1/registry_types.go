@@ -75,7 +75,7 @@ type RegistryHosting struct {
 	//
 	// See:
 	// https://docs.aws.amazon.com/AmazonECR/latest/userguide/Repositories.html
-	// https://github.com/tilt-dev/tilt/issues/2419
+	// https://github.com/defn/dev/m/tilt/issues/2419
 	//
 	// +optional
 	SingleName string `json:"singleName,omitempty" protobuf:"bytes,5,opt,name=singleName"`

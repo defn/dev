@@ -12,7 +12,7 @@ jobs:
     docker:
       - image: docker/tilt-ci@sha256:24c582b02189c68cf5980f49d238ca9a540b576aa0487de35a3cd739704c4c8b
     # apiserver code generation scripts require being in GOPATH
-    working_directory: /home/circleci/go/src/github.com/tilt-dev/tilt
+    working_directory: /home/circleci/go/src/github.com/defn/dev/m/tilt
     steps:
       - checkout
       - run: echo 'export PATH=~/go/bin:$PATH' >> $BASH_ENV
@@ -80,13 +80,13 @@ jobs:
           command: go install -mod vendor ./cmd/tilt
           shell: bash.exe
           environment:
-            CGO_ENABLED: '1'
+            CGO_ENABLED: "1"
             CGO_LDFLAGS: -static
       - run:
           command: PATH="$HOME/go/bin:$PATH" make shorttestsum
           shell: bash.exe
           environment:
-            CGO_ENABLED: '1'
+            CGO_ENABLED: "1"
             CGO_LDFLAGS: -static
       - run: iex ./scripts/install.ps1
       - store_test_results:

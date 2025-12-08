@@ -3,7 +3,7 @@ package tiltfile
 import (
 	"go.starlark.net/starlark"
 
-	"github.com/tilt-dev/tilt/internal/feature"
+	"github.com/defn/dev/m/tilt/internal/feature"
 )
 
 func (s *tiltfileState) enableFeature(thread *starlark.Thread, fn *starlark.Builtin, args starlark.Tuple, kwargs []starlark.Tuple) (starlark.Value, error) {

@@ -153,7 +153,7 @@ describe("document metadata based on resource statuses", () => {
         isSocketConnected: boolean
       },
       title: string,
-      faviconColor: string
+      faviconColor: string,
     ]
   >([
     [

@@ -19,13 +19,13 @@ import (
 	ctrl "sigs.k8s.io/controller-runtime"
 	"sigs.k8s.io/controller-runtime/pkg/reconcile"
 
-	"github.com/tilt-dev/tilt/internal/controllers/fake"
-	"github.com/tilt-dev/tilt/internal/engine/local"
-	"github.com/tilt-dev/tilt/internal/store"
-	"github.com/tilt-dev/tilt/internal/testutils/configmap"
-	"github.com/tilt-dev/tilt/pkg/apis"
-	"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1"
-	"github.com/tilt-dev/tilt/pkg/model"
+	"github.com/defn/dev/m/tilt/internal/controllers/fake"
+	"github.com/defn/dev/m/tilt/internal/engine/local"
+	"github.com/defn/dev/m/tilt/internal/store"
+	"github.com/defn/dev/m/tilt/internal/testutils/configmap"
+	"github.com/defn/dev/m/tilt/pkg/apis"
+	"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1"
+	"github.com/defn/dev/m/tilt/pkg/model"
 )
 
 var timeout = time.Second
@@ -637,7 +637,7 @@ func TestEnableServeCmd(t *testing.T) {
 // to simulate a "toggle" switch on the Cmd.
 //
 // See:
-// https://github.com/tilt-dev/tilt-extensions/issues/202
+// https://github.com/defn/dev/m/tilt-extensions/issues/202
 func TestSelfModifyingCmd(t *testing.T) {
 	f := newFixture(t)
 

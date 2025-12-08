@@ -5,13 +5,13 @@ import (
 
 	v1 "k8s.io/api/core/v1"
 
-	"github.com/tilt-dev/tilt/internal/build"
-	"github.com/tilt-dev/tilt/internal/controllers/apis/liveupdate"
-	"github.com/tilt-dev/tilt/internal/store"
-	"github.com/tilt-dev/tilt/internal/store/k8sconv"
-	"github.com/tilt-dev/tilt/internal/store/liveupdates"
-	"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1"
-	"github.com/tilt-dev/tilt/pkg/model"
+	"github.com/defn/dev/m/tilt/internal/build"
+	"github.com/defn/dev/m/tilt/internal/controllers/apis/liveupdate"
+	"github.com/defn/dev/m/tilt/internal/store"
+	"github.com/defn/dev/m/tilt/internal/store/k8sconv"
+	"github.com/defn/dev/m/tilt/internal/store/liveupdates"
+	"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1"
+	"github.com/defn/dev/m/tilt/pkg/model"
 )
 
 // Algorithm to choose a manifest to build next.
@@ -109,7 +109,7 @@ func NextTargetToBuild(state store.EngineState) (*store.ManifestTarget, HoldSet)
 	// This will ensure that a file change doesn't accidentally overwrite
 	// a pending pod.
 	//
-	// https://github.com/tilt-dev/tilt/issues/3759
+	// https://github.com/defn/dev/m/tilt/issues/3759
 	HoldLiveUpdateTargetsWaitingOnDeploy(state, targets, holds)
 
 	targets = holds.RemoveIneligibleTargets(targets)

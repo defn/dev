@@ -17,7 +17,8 @@ export const StyledTableStarResourceButton = styled(InstrumentedButton)`
 let StyledStarSvg = styled(StarSvg)`
   width: 13px;
   height: 13px;
-  transition: transform ${AnimDuration.short} ease,
+  transition:
+    transform ${AnimDuration.short} ease,
     opacity ${AnimDuration.short} ease;
 
   &:active {

@@ -19,8 +19,8 @@ jqscript='. as {$name, $machine, "git.origin": $gitorigin} |
   { $name, $machine, "git.origin": $gitorigin, time: (now | todate), tags: . }'
 
 while [ "$running" ]; do
-    echo -e "HTTP/1.1 200 OK\r\nContent-Length: 0\r\n\r\n" | \
-        nc -l $port | tail -1 | jq "$jqscript"
+	echo -e "HTTP/1.1 200 OK\r\nContent-Length: 0\r\n\r\n" |
+		nc -l $port | tail -1 | jq "$jqscript"
 done
 
 exit 0

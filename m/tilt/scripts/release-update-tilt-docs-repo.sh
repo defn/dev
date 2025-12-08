@@ -8,23 +8,23 @@
 
 set -euo pipefail
 
-if [[ "${GITHUB_TOKEN-}" == "" ]]; then
-    echo "Missing GITHUB_TOKEN"
-    exit 1
+if [[ ${GITHUB_TOKEN-} == "" ]]; then
+	echo "Missing GITHUB_TOKEN"
+	exit 1
 fi
 
 VERSION=${1//v/}
 VERSION_PATTERN="^[0-9]+\\.[0-9]+\\.[0-9]+$"
 if ! [[ $VERSION =~ $VERSION_PATTERN ]]; then
-    echo "Version did not match expected pattern. Actual: $VERSION"
-    exit 1
+	echo "Version did not match expected pattern. Actual: $VERSION"
+	exit 1
 fi
 
 DIR=$(dirname "$0")
 cd "$DIR/.."
 
 ROOT=$(mktemp -d)
-git clone https://tilt-releaser:"$GITHUB_TOKEN"@github.com/tilt-dev/tilt.build "$ROOT"
+git clone https://tilt-releaser:"$GITHUB_TOKEN"@github.com/defn/dev/m/tilt.build "$ROOT"
 
 set -x
 VERSION_ARGS="-X main.version=$VERSION -X main.date=$(date +%Y-%m-%d)"
@@ -41,7 +41,7 @@ sed -i -E "s/asdf install tilt .*/asdf install tilt $VERSION/" docs/upgrade.md
 sed -i -E "s/asdf global tilt .*/asdf global tilt $VERSION/" docs/upgrade.md
 
 # the sed pattern doesn't need to match the whole string.
-SED_VERSION_PATTERN="[0-9]+\\.[0-9]+\\.[0-9]+"
+SED_VERSION_PATTERN='[0-9]+\.[0-9]+\.[0-9]+'
 sed -i -E "s|/download/v$SED_VERSION_PATTERN/tilt.$SED_VERSION_PATTERN|/download/v$VERSION/tilt.$VERSION|" docs/install.md
 sed -i -E "s|/download/v$SED_VERSION_PATTERN/tilt.$SED_VERSION_PATTERN|/download/v$VERSION/tilt.$VERSION|" docs/upgrade.md
 git add .

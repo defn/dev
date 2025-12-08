@@ -5,8 +5,8 @@ import (
 
 	"k8s.io/apimachinery/pkg/types"
 
-	"github.com/tilt-dev/tilt/pkg/apis"
-	"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1"
+	"github.com/defn/dev/m/tilt/pkg/apis"
+	"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1"
 )
 
 // nsKey is a tuple of Cluster metadata and the K8s namespace being watched.

@@ -16,11 +16,11 @@ import (
 	clientcmdapi "k8s.io/client-go/tools/clientcmd/api"
 	"k8s.io/kubectl/pkg/proxy"
 
+	"github.com/defn/dev/m/tilt/internal/filelock"
+	"github.com/defn/dev/m/tilt/internal/store"
+	"github.com/defn/dev/m/tilt/pkg/assets"
+	"github.com/defn/dev/m/tilt/pkg/model"
 	"github.com/tilt-dev/tilt-apiserver/pkg/server/start"
-	"github.com/tilt-dev/tilt/internal/filelock"
-	"github.com/tilt-dev/tilt/internal/store"
-	"github.com/tilt-dev/tilt/pkg/assets"
-	"github.com/tilt-dev/tilt/pkg/model"
 )
 
 // apiServerProxyPrefix routes web HUD requests to the apiserver as it cannot contact it directly.

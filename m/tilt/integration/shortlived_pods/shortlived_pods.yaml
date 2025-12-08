@@ -37,4 +37,3 @@ spec:
           command: ["sh", "-c", "echo this job will fail && false"]
       restartPolicy: Never
   backoffLimit: 0
-

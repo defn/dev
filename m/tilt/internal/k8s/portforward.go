@@ -14,8 +14,8 @@ import (
 	"k8s.io/client-go/transport/spdy"
 	cmdutil "k8s.io/kubectl/pkg/cmd/util"
 
-	"github.com/tilt-dev/tilt/internal/k8s/portforward"
-	"github.com/tilt-dev/tilt/pkg/logger"
+	"github.com/defn/dev/m/tilt/internal/k8s/portforward"
+	"github.com/defn/dev/m/tilt/pkg/logger"
 
 	"github.com/pkg/errors"
 )
@@ -196,7 +196,7 @@ func getListenableAddresses(host string) ([]string, error) {
 		var l net.Listener
 		if ipv6 := strings.Contains(addr, ":"); ipv6 {
 			// skip ipv6 addresses that include a zone index
-			// see: https://github.com/tilt-dev/tilt/issues/5981
+			// see: https://github.com/defn/dev/m/tilt/issues/5981
 			if hasZoneIndex := strings.Contains(addr, "%"); hasZoneIndex {
 				continue
 			}

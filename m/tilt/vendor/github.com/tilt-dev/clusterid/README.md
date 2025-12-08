@@ -7,7 +7,7 @@ A small Kubernetes cluster detection library.
 
 ## Why?
 
-The [Tilt](https://github.com/tilt-dev/tilt) project interacts with
+The [Tilt](https://github.com/defn/dev/m/tilt) project interacts with
 many different types of local development clusters.
 
 These clusters sometimes have machine-readable ways to determine

@@ -3,7 +3,7 @@ package model
 import (
 	"path/filepath"
 
-	"github.com/tilt-dev/tilt/internal/ospath"
+	"github.com/defn/dev/m/tilt/internal/ospath"
 )
 
 type PathMatcher interface {

@@ -3,8 +3,8 @@ package main
 import (
 	_ "expvar"
 
-	"github.com/tilt-dev/tilt/internal/cli"
-	"github.com/tilt-dev/tilt/pkg/model"
+	"github.com/defn/dev/m/tilt/internal/cli"
+	"github.com/defn/dev/m/tilt/pkg/model"
 )
 
 // Magic variables set by goreleaser

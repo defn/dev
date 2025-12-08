@@ -14,7 +14,7 @@ import React, { ElementType, PropsWithChildren } from "react"
  * https://material-ui.com/api/typography/
  *
  * Using this may cause layout problems, see discussion here:
- * https://github.com/tilt-dev/tilt/pull/5504
+ * https://github.com/defn/dev/m/tilt/pull/5504
  * Prefer aria-label when possible.
  */
 

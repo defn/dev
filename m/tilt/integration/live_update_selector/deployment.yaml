@@ -15,7 +15,7 @@ spec:
         app: live-update-selector
     spec:
       containers:
-      - name: live-update-selector
-        image: gcr.io/windmill-test-containers/integration/live-update-selector
-        ports:
-        - containerPort: 8000
+        - name: live-update-selector
+          image: gcr.io/windmill-test-containers/integration/live-update-selector
+          ports:
+            - containerPort: 8000

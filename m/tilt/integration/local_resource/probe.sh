@@ -1,9 +1,9 @@
 #!/bin/bash
 
 if [[ ! -f ./probe-success ]]; then
-  # failure -> stderr
-  echo "fake probe failure message" 1>&2
-  exit 1
+	# failure -> stderr
+	echo "fake probe failure message" 1>&2
+	exit 1
 fi
 
 # success -> stdout

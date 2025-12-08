@@ -7,15 +7,15 @@ import (
 
 	"github.com/spf13/cobra"
 
+	tiltanalytics "github.com/defn/dev/m/tilt/internal/analytics"
+	"github.com/defn/dev/m/tilt/internal/controllers/core/extension"
+	"github.com/defn/dev/m/tilt/internal/controllers/core/extensionrepo"
+	"github.com/defn/dev/m/tilt/internal/engine/analytics"
+	"github.com/defn/dev/m/tilt/internal/lsp"
+	"github.com/defn/dev/m/tilt/internal/tiltfile"
+	"github.com/defn/dev/m/tilt/pkg/logger"
+	"github.com/defn/dev/m/tilt/pkg/model"
 	"github.com/tilt-dev/starlark-lsp/pkg/cli"
-	tiltanalytics "github.com/tilt-dev/tilt/internal/analytics"
-	"github.com/tilt-dev/tilt/internal/controllers/core/extension"
-	"github.com/tilt-dev/tilt/internal/controllers/core/extensionrepo"
-	"github.com/tilt-dev/tilt/internal/engine/analytics"
-	"github.com/tilt-dev/tilt/internal/lsp"
-	"github.com/tilt-dev/tilt/internal/tiltfile"
-	"github.com/tilt-dev/tilt/pkg/logger"
-	"github.com/tilt-dev/tilt/pkg/model"
 )
 
 func reportLspInvocation(a *tiltanalytics.TiltAnalytics, cmdParts []string) {

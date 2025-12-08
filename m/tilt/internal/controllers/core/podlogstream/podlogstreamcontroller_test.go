@@ -11,11 +11,11 @@ import (
 	"github.com/jonboulle/clockwork"
 	"github.com/stretchr/testify/require"
 
-	"github.com/tilt-dev/tilt/internal/controllers/apicmp"
-	"github.com/tilt-dev/tilt/internal/timecmp"
-	"github.com/tilt-dev/tilt/pkg/apis"
+	"github.com/defn/dev/m/tilt/internal/controllers/apicmp"
+	"github.com/defn/dev/m/tilt/internal/timecmp"
+	"github.com/defn/dev/m/tilt/pkg/apis"
 
-	"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1"
+	"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1"
 
 	"github.com/stretchr/testify/assert"
 	v1 "k8s.io/api/core/v1"
@@ -23,15 +23,15 @@ import (
 	"k8s.io/apimachinery/pkg/types"
 	"sigs.k8s.io/controller-runtime/pkg/reconcile"
 
-	"github.com/tilt-dev/tilt/internal/container"
-	"github.com/tilt-dev/tilt/internal/controllers/fake"
-	"github.com/tilt-dev/tilt/internal/controllers/indexer"
-	"github.com/tilt-dev/tilt/internal/k8s"
-	"github.com/tilt-dev/tilt/internal/store"
-	"github.com/tilt-dev/tilt/internal/store/k8sconv"
-	"github.com/tilt-dev/tilt/internal/testutils/bufsync"
-	"github.com/tilt-dev/tilt/pkg/logger"
-	"github.com/tilt-dev/tilt/pkg/model"
+	"github.com/defn/dev/m/tilt/internal/container"
+	"github.com/defn/dev/m/tilt/internal/controllers/fake"
+	"github.com/defn/dev/m/tilt/internal/controllers/indexer"
+	"github.com/defn/dev/m/tilt/internal/k8s"
+	"github.com/defn/dev/m/tilt/internal/store"
+	"github.com/defn/dev/m/tilt/internal/store/k8sconv"
+	"github.com/defn/dev/m/tilt/internal/testutils/bufsync"
+	"github.com/defn/dev/m/tilt/pkg/logger"
+	"github.com/defn/dev/m/tilt/pkg/model"
 )
 
 var podID = k8s.PodID("pod-id")
@@ -255,7 +255,7 @@ func TestTerminatedContainerLogs(t *testing.T) {
 	f.AssertOutputDoesNotContain("goodbye world!")
 }
 
-// https://github.com/tilt-dev/tilt/issues/3908
+// https://github.com/defn/dev/m/tilt/issues/3908
 func TestLogReconnection(t *testing.T) {
 	f := newPLMFixture(t)
 	cName := container.Name("cName")

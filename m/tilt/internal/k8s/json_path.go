@@ -3,7 +3,7 @@ package k8s
 import (
 	"fmt"
 
-	"github.com/tilt-dev/tilt/internal/k8s/jsonpath"
+	"github.com/defn/dev/m/tilt/internal/k8s/jsonpath"
 )
 
 // A wrapper around JSONPath with utility functions for

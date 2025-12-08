@@ -5,7 +5,7 @@ import (
 
 	"github.com/stretchr/testify/require"
 
-	"github.com/tilt-dev/tilt/internal/k8s/testyaml"
+	"github.com/defn/dev/m/tilt/internal/k8s/testyaml"
 )
 
 func TestNewTargetSortsK8sEntities(t *testing.T) {

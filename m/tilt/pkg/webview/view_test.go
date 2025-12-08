@@ -11,8 +11,8 @@ import (
 	"github.com/stretchr/testify/require"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 
-	"github.com/tilt-dev/tilt/internal/timecmp"
-	v1alpha1 "github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1"
+	"github.com/defn/dev/m/tilt/internal/timecmp"
+	v1alpha1 "github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1"
 )
 
 // Time serialization is a mess.

@@ -8,9 +8,9 @@
 
 set -euo pipefail
 
-if [[ "${GITHUB_TOKEN-}" == "" ]]; then
-    echo "Missing GITHUB_TOKEN"
-    exit 1
+if [[ ${GITHUB_TOKEN-} == "" ]]; then
+	echo "Missing GITHUB_TOKEN"
+	exit 1
 fi
 
 # NOTE(nicks): homebrew started giving the error:
@@ -23,8 +23,8 @@ export HOMEBREW_GITHUB_API_TOKEN="$GITHUB_TOKEN"
 VERSION=${1//v/}
 VERSION_PATTERN="^[0-9]+\\.[0-9]+\\.[0-9]+$"
 if ! [[ $VERSION =~ $VERSION_PATTERN ]]; then
-    echo "Version did not match expected pattern. Actual: $VERSION"
-    exit 1
+	echo "Version did not match expected pattern. Actual: $VERSION"
+	exit 1
 fi
 
 # send the brew team a PR to upgrade homebrew-core

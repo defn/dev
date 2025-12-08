@@ -9,8 +9,8 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/types"
 
-	"github.com/tilt-dev/tilt/internal/k8s/testyaml"
-	"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1"
+	"github.com/defn/dev/m/tilt/internal/k8s/testyaml"
+	"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1"
 )
 
 func TestCreateAndUpdateDisco(t *testing.T) {
@@ -86,7 +86,7 @@ func TestDiscoveryStrategySelectorsOnly(t *testing.T) {
 	assert.Equal(t, map[string]string{"app": "tilt-site"}, kd.Spec.ExtraSelectors[0].MatchLabels)
 }
 
-// https://github.com/tilt-dev/tilt/issues/5773
+// https://github.com/defn/dev/m/tilt/issues/5773
 func TestApplyCmdDiscoveryStrategySelectorsOnly(t *testing.T) {
 	f := newFixture(t)
 	f.execer.RegisterCommand("myapply", 0, testyaml.SanchoYAML, "")

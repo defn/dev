@@ -32,9 +32,9 @@ import (
 	"k8s.io/kubectl/pkg/util/i18n"
 	"k8s.io/kubectl/pkg/util/templates"
 
-	"github.com/tilt-dev/tilt/internal/analytics"
-	engineanalytics "github.com/tilt-dev/tilt/internal/engine/analytics"
-	"github.com/tilt-dev/tilt/pkg/model"
+	"github.com/defn/dev/m/tilt/internal/analytics"
+	engineanalytics "github.com/defn/dev/m/tilt/internal/engine/analytics"
+	"github.com/defn/dev/m/tilt/pkg/model"
 )
 
 var (

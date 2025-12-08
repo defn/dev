@@ -13,11 +13,11 @@ import (
 	"github.com/stretchr/testify/assert"
 	"google.golang.org/protobuf/encoding/protojson"
 
-	"github.com/tilt-dev/tilt/pkg/logger"
+	"github.com/defn/dev/m/tilt/pkg/logger"
 )
 
 // NOTE(dmiller): set at runtime with:
-// go test -ldflags="-X github.com/tilt-dev/tilt/internal/build.WriteGoldenMaster=1" github.com/tilt-dev/tilt/internal/build -run ^TestBuildkitPrinter
+// go test -ldflags="-X github.com/defn/dev/m/tilt/internal/build.WriteGoldenMaster=1" github.com/defn/dev/m/tilt/internal/build -run ^TestBuildkitPrinter
 var WriteGoldenMaster = "0"
 
 type buildkitTestCase struct {

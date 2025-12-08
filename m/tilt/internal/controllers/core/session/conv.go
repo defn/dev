@@ -8,14 +8,14 @@ import (
 	v1 "k8s.io/api/core/v1"
 	ctrl "sigs.k8s.io/controller-runtime"
 
-	"github.com/tilt-dev/tilt/internal/engine/buildcontrol"
-	"github.com/tilt-dev/tilt/internal/store/k8sconv"
+	"github.com/defn/dev/m/tilt/internal/engine/buildcontrol"
+	"github.com/defn/dev/m/tilt/internal/store/k8sconv"
 
-	"github.com/tilt-dev/tilt/internal/store"
-	"github.com/tilt-dev/tilt/pkg/apis"
-	"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1"
-	session "github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1"
-	"github.com/tilt-dev/tilt/pkg/model"
+	"github.com/defn/dev/m/tilt/internal/store"
+	"github.com/defn/dev/m/tilt/pkg/apis"
+	"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1"
+	session "github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1"
+	"github.com/defn/dev/m/tilt/pkg/model"
 )
 
 func (r *Reconciler) targetsForResource(mt *store.ManifestTarget, holds buildcontrol.HoldSet, ci *v1alpha1.SessionCISpec, result *ctrl.Result) []session.Target {
@@ -40,7 +40,7 @@ func (r *Reconciler) k8sRuntimeTarget(mt *store.ManifestTarget, ci *v1alpha1.Ses
 		// 	monitored by Tilt, so instead of faking it, just omit it (note: only applies AFTER first deploy so
 		// 	that we can determine there are no pods, so it will appear in waiting until then, which is actually
 		// 	desirable and matches behavior in K8sRuntimeState::RuntimeStatus())
-		// 	see https://github.com/tilt-dev/tilt/issues/3619
+		// 	see https://github.com/defn/dev/m/tilt/issues/3619
 		return nil
 	}
 

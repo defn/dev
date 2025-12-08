@@ -11,8 +11,8 @@ import (
 
 	"github.com/pkg/errors"
 
-	"github.com/tilt-dev/tilt/internal/ospath"
-	"github.com/tilt-dev/tilt/pkg/model"
+	"github.com/defn/dev/m/tilt/internal/ospath"
+	"github.com/defn/dev/m/tilt/pkg/model"
 )
 
 // PathMapping represents a mapping from the local path to the tarball path

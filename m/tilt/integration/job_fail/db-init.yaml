@@ -13,5 +13,5 @@ spec:
     spec:
       restartPolicy: Never
       containers:
-      - name: db-init
-        image: db-init
+        - name: db-init
+          image: db-init

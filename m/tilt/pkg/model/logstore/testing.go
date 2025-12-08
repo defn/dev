@@ -3,8 +3,8 @@ package logstore
 import (
 	"time"
 
-	"github.com/tilt-dev/tilt/pkg/logger"
-	"github.com/tilt-dev/tilt/pkg/model"
+	"github.com/defn/dev/m/tilt/pkg/logger"
+	"github.com/defn/dev/m/tilt/pkg/model"
 )
 
 type testLogEvent struct {

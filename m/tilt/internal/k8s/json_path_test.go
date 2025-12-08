@@ -7,8 +7,8 @@ import (
 	"github.com/stretchr/testify/assert"
 	"k8s.io/apimachinery/pkg/runtime"
 
-	"github.com/tilt-dev/tilt/internal/k8s/jsonpath"
-	"github.com/tilt-dev/tilt/internal/k8s/testyaml"
+	"github.com/defn/dev/m/tilt/internal/k8s/jsonpath"
+	"github.com/defn/dev/m/tilt/internal/k8s/testyaml"
 )
 
 func TestJSONPathOneMatch(t *testing.T) {

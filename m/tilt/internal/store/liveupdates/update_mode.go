@@ -3,8 +3,8 @@ package liveupdates
 import (
 	"fmt"
 
-	"github.com/tilt-dev/tilt/internal/docker"
-	"github.com/tilt-dev/tilt/internal/k8s"
+	"github.com/defn/dev/m/tilt/internal/docker"
+	"github.com/defn/dev/m/tilt/internal/k8s"
 )
 
 type UpdateMode string

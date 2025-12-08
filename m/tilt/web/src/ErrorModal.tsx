@@ -29,7 +29,7 @@ export default class ErrorModal extends PureComponent<props> {
         <div className="FatalErrorModal-pane">
           <p>
             To get help try{" "}
-            <a href="https://github.com/tilt-dev/tilt/issues/new">
+            <a href="https://github.com/defn/dev/m/tilt/issues/new">
               opening a GitHub issue
             </a>{" "}
             or{" "}

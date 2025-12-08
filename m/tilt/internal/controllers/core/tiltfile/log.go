@@ -3,8 +3,8 @@ package tiltfile
 import (
 	"fmt"
 
-	"github.com/tilt-dev/tilt/pkg/model"
-	"github.com/tilt-dev/tilt/pkg/model/logstore"
+	"github.com/defn/dev/m/tilt/pkg/model"
+	"github.com/defn/dev/m/tilt/pkg/model/logstore"
 )
 
 func SpanIDForLoadCount(mn model.ManifestName, loadCount int) logstore.SpanID {

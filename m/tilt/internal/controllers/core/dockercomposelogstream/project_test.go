@@ -5,7 +5,7 @@ import (
 
 	"github.com/stretchr/testify/assert"
 
-	"github.com/tilt-dev/tilt/internal/controllers/apicmp"
+	"github.com/defn/dev/m/tilt/internal/controllers/apicmp"
 )
 
 func TestDeepEqual(t *testing.T) {

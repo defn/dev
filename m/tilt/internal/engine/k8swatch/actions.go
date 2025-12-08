@@ -5,7 +5,7 @@ import (
 
 	v1 "k8s.io/api/core/v1"
 
-	"github.com/tilt-dev/tilt/pkg/model"
+	"github.com/defn/dev/m/tilt/pkg/model"
 )
 
 type ServiceChangeAction struct {

@@ -16,7 +16,7 @@ import (
 // incurring the overhead of caching.
 //
 // See discussion here:
-// https://github.com/tilt-dev/tilt/issues/4719
+// https://github.com/defn/dev/m/tilt/issues/4719
 func ListOwnedBy(ctx context.Context, client ctrlclient.Client, list ctrlclient.ObjectList, nn types.NamespacedName, ownerType metav1.TypeMeta) error {
 	err := client.List(ctx, list, ctrlclient.InNamespace(nn.Namespace))
 	if err != nil {

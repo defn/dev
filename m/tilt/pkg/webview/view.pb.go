@@ -15,7 +15,7 @@ import (
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 
-	v1alpha1 "github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1"
+	v1alpha1 "github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1"
 )
 
 const (

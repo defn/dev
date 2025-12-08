@@ -12,10 +12,10 @@ import (
 
 	"github.com/stretchr/testify/require"
 
-	"github.com/tilt-dev/tilt/internal/localexec"
-	"github.com/tilt-dev/tilt/pkg/logger"
-	"github.com/tilt-dev/tilt/pkg/model"
-	"github.com/tilt-dev/tilt/pkg/procutil"
+	"github.com/defn/dev/m/tilt/internal/localexec"
+	"github.com/defn/dev/m/tilt/pkg/logger"
+	"github.com/defn/dev/m/tilt/pkg/model"
+	"github.com/defn/dev/m/tilt/pkg/procutil"
 )
 
 var DefaultGracePeriod = 30 * time.Second
@@ -200,7 +200,7 @@ func (e *processExecer) processRun(ctx context.Context, cmd model.Cmd, w io.Writ
 		// Instead, we exit immediately if the main process exits.
 		//
 		// Details:
-		// https://github.com/tilt-dev/tilt/issues/4456
+		// https://github.com/defn/dev/m/tilt/issues/4456
 		state, err := c.Process.Wait()
 		procutil.KillProcessGroup(c)
 

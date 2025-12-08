@@ -27,7 +27,8 @@ let SidebarIconRoot = styled.div`
   justify-content: center;
   width: ${Width.statusIcon}px;
   margin-right: ${Width.statusIconMarginRight}px;
-  transition: background-color ${AnimDuration.default} linear,
+  transition:
+    background-color ${AnimDuration.default} linear,
     opacity ${AnimDuration.default} linear;
 
   &.isWarning {

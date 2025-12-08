@@ -66,7 +66,11 @@ describe("OverviewLogPane", () => {
       term: EMPTY_FILTER_TERM,
     }
     let logStore = new LogStore()
-    appendLines(logStore, "fe", "[32m➜[39m  [1mLocal[22m:   [36mhttp://localhost:[1m5173[22m/[39m\n")
+    appendLines(
+      logStore,
+      "fe",
+      "[32m➜[39m  [1mLocal[22m:   [36mhttp://localhost:[1m5173[22m/[39m\n"
+    )
     const { container } = customRender(
       <LogStoreProvider value={logStore}>
         <OverviewLogPane manifestName="fe" filterSet={defaultFilter} />

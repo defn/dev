@@ -324,7 +324,7 @@ export function HUDFromContext(props: React.PropsWithChildren<{}>) {
 }
 
 function compareObjectsOrder<
-  T extends { status?: any; metadata?: Proto.v1ObjectMeta }
+  T extends { status?: any; metadata?: Proto.v1ObjectMeta },
 >(a: T, b: T): number {
   let aStatus = a.status as UIResourceStatus | null
   let bStatus = b.status as UIResourceStatus | null
@@ -374,7 +374,7 @@ export function mergeAppUpdate<K extends keyof HudState>(
   let newStartTime = state.view?.tiltStartTime
   if (oldStartTime && newStartTime && oldStartTime != newStartTime) {
     // If Tilt restarts, reload the page to get new JS.
-    // https://github.com/tilt-dev/tilt/issues/4421
+    // https://github.com/defn/dev/m/tilt/issues/4421
     window.location.reload()
     return prevState
   }

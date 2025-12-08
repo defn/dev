@@ -10,10 +10,10 @@ import (
 	"github.com/golang/protobuf/jsonpb"
 	"github.com/stretchr/testify/assert"
 
-	"github.com/tilt-dev/tilt/internal/testutils/bufsync"
+	"github.com/defn/dev/m/tilt/internal/testutils/bufsync"
 
-	"github.com/tilt-dev/tilt/internal/testutils"
-	proto_webview "github.com/tilt-dev/tilt/pkg/webview"
+	"github.com/defn/dev/m/tilt/internal/testutils"
+	proto_webview "github.com/defn/dev/m/tilt/pkg/webview"
 )
 
 func TestViewsHandled(t *testing.T) {

@@ -11,23 +11,23 @@ import (
 
 	"github.com/jonboulle/clockwork"
 
-	"github.com/tilt-dev/tilt/pkg/apis"
+	"github.com/defn/dev/m/tilt/pkg/apis"
 
-	"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1"
+	"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1"
 
 	"github.com/stretchr/testify/assert"
 	v1 "k8s.io/api/core/v1"
 
-	"github.com/tilt-dev/tilt/internal/store"
-	"github.com/tilt-dev/tilt/internal/testutils/bufsync"
-	"github.com/tilt-dev/tilt/internal/testutils/manifestutils"
-	"github.com/tilt-dev/tilt/internal/testutils/tempdir"
-	"github.com/tilt-dev/tilt/pkg/logger"
-	"github.com/tilt-dev/tilt/pkg/model"
+	"github.com/defn/dev/m/tilt/internal/store"
+	"github.com/defn/dev/m/tilt/internal/testutils/bufsync"
+	"github.com/defn/dev/m/tilt/internal/testutils/manifestutils"
+	"github.com/defn/dev/m/tilt/internal/testutils/tempdir"
+	"github.com/defn/dev/m/tilt/pkg/logger"
+	"github.com/defn/dev/m/tilt/pkg/model"
 )
 
 // NOTE(han): set at runtime with:
-// go test -ldflags="-X 'github.com/tilt-dev/tilt/internal/engine/k8srollout.PodmonitorWriteGoldenMaster=1'" ./internal/engine/k8srollout
+// go test -ldflags="-X 'github.com/defn/dev/m/tilt/internal/engine/k8srollout.PodmonitorWriteGoldenMaster=1'" ./internal/engine/k8srollout
 var PodmonitorWriteGoldenMaster = "0"
 
 func TestMonitorReady(t *testing.T) {
@@ -102,7 +102,7 @@ func TestAttachExisting(t *testing.T) {
 	assertSnapshot(t, f.out.String())
 }
 
-// https://github.com/tilt-dev/tilt/issues/3513
+// https://github.com/defn/dev/m/tilt/issues/3513
 func TestJobCompleted(t *testing.T) {
 	f := newPMFixture(t)
 

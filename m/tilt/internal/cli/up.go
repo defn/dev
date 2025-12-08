@@ -14,16 +14,16 @@ import (
 	"github.com/mattn/go-isatty"
 	"github.com/spf13/cobra"
 
-	"github.com/tilt-dev/tilt/internal/analytics"
-	"github.com/tilt-dev/tilt/internal/controllers"
-	engineanalytics "github.com/tilt-dev/tilt/internal/engine/analytics"
-	"github.com/tilt-dev/tilt/internal/hud/prompt"
-	"github.com/tilt-dev/tilt/internal/store"
-	"github.com/tilt-dev/tilt/internal/store/liveupdates"
-	"github.com/tilt-dev/tilt/pkg/assets"
-	"github.com/tilt-dev/tilt/pkg/logger"
-	"github.com/tilt-dev/tilt/pkg/model"
-	"github.com/tilt-dev/tilt/web"
+	"github.com/defn/dev/m/tilt/internal/analytics"
+	"github.com/defn/dev/m/tilt/internal/controllers"
+	engineanalytics "github.com/defn/dev/m/tilt/internal/engine/analytics"
+	"github.com/defn/dev/m/tilt/internal/hud/prompt"
+	"github.com/defn/dev/m/tilt/internal/store"
+	"github.com/defn/dev/m/tilt/internal/store/liveupdates"
+	"github.com/defn/dev/m/tilt/pkg/assets"
+	"github.com/defn/dev/m/tilt/pkg/logger"
+	"github.com/defn/dev/m/tilt/pkg/model"
+	"github.com/defn/dev/m/tilt/web"
 )
 
 var webModeFlag model.WebMode = model.DefaultWebMode
@@ -250,14 +250,14 @@ func targetMode(mode model.WebMode, embeddedAvailable bool) (model.WebMode, erro
 	if (mode == model.EmbeddedWebMode || mode == model.PrecompiledWebMode) && !embeddedAvailable {
 		return mode, fmt.Errorf(
 			("requested %s mode, but JS/CSS files are not available.\n" +
-				"Please report this: https://github.com/tilt-dev/tilt/issues"), string(mode))
+				"Please report this: https://github.com/defn/dev/m/tilt/issues"), string(mode))
 	}
 	if mode.IsProd() {
 		// defaults to embedded, reporting an error if embedded not available.
 		if !embeddedAvailable {
 			return mode, fmt.Errorf(
 				("running in prod mode, but JS/CSS files are not available.\n" +
-					"Please report this: https://github.com/tilt-dev/tilt/issues"))
+					"Please report this: https://github.com/defn/dev/m/tilt/issues"))
 		} else if mode == model.ProdWebMode {
 			mode = model.EmbeddedWebMode
 		}

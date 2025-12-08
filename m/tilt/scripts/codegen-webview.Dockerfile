@@ -30,7 +30,7 @@ RUN yarn global add \
 
 # Stage for webview-proto task
 FROM base AS webview-proto-build
-WORKDIR /go/src/github.com/tilt-dev/tilt
+WORKDIR /go/src/github.com/defn/dev/m/tilt
 COPY pkg/webview/log.proto pkg/webview/log.proto
 COPY pkg/webview/view.proto pkg/webview/view.proto
 COPY pkg/apis/core/v1alpha1/generated.proto pkg/apis/core/v1alpha1/generated.proto
@@ -49,22 +49,22 @@ RUN mkdir -p web/src && \
     --go_out=. --go_opt=paths=source_relative \
     --go-grpc_out=. --go-grpc_opt=paths=source_relative \
     pkg/webview/*.proto && \
-    sed -i 's|v1alpha1 "pkg/apis/core/v1alpha1"|v1alpha1 "github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1"|g' pkg/webview/*.pb.go && \
+    sed -i 's|v1alpha1 "pkg/apis/core/v1alpha1"|v1alpha1 "github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1"|g' pkg/webview/*.pb.go && \
     sed -i 's|"$ref": "#/definitions/v1Time",|"type": "string", "format": "date-time",|g' pkg/webview/view.swagger.json && \
     sed -i 's|"$ref": "#/definitions/v1MicroTime",|"type": "string", "format": "date-time",|g' pkg/webview/view.swagger.json && \
     goimports -local github.com/tilt-dev -w pkg/webview/*.pb.go
 
 # Output stage for webview-proto task
 FROM scratch AS webview-proto-output
-COPY --from=webview-proto-build /go/src/github.com/tilt-dev/tilt/pkg/webview/log.pb.go /go/src/github.com/tilt-dev/tilt/pkg/webview/log.pb.go
-COPY --from=webview-proto-build /go/src/github.com/tilt-dev/tilt/pkg/webview/view.pb.go /go/src/github.com/tilt-dev/tilt/pkg/webview/view.pb.go
-COPY --from=webview-proto-build /go/src/github.com/tilt-dev/tilt/pkg/webview/view_grpc.pb.go /go/src/github.com/tilt-dev/tilt/pkg/webview/view_grpc.pb.go
-COPY --from=webview-proto-build /go/src/github.com/tilt-dev/tilt/pkg/webview/view.swagger.json /go/src/github.com/tilt-dev/tilt/pkg/webview/view.swagger.json
+COPY --from=webview-proto-build /go/src/github.com/defn/dev/m/tilt/pkg/webview/log.pb.go /go/src/github.com/defn/dev/m/tilt/pkg/webview/log.pb.go
+COPY --from=webview-proto-build /go/src/github.com/defn/dev/m/tilt/pkg/webview/view.pb.go /go/src/github.com/defn/dev/m/tilt/pkg/webview/view.pb.go
+COPY --from=webview-proto-build /go/src/github.com/defn/dev/m/tilt/pkg/webview/view_grpc.pb.go /go/src/github.com/defn/dev/m/tilt/pkg/webview/view_grpc.pb.go
+COPY --from=webview-proto-build /go/src/github.com/defn/dev/m/tilt/pkg/webview/view.swagger.json /go/src/github.com/defn/dev/m/tilt/pkg/webview/view.swagger.json
 
 # Stage for proto-ts task
 FROM base AS proto-ts-build
-WORKDIR /go/src/github.com/tilt-dev/tilt
-COPY --from=webview-proto-build /go/src/github.com/tilt-dev/tilt/pkg/webview/view.swagger.json pkg/webview/view.swagger.json
+WORKDIR /go/src/github.com/defn/dev/m/tilt
+COPY --from=webview-proto-build /go/src/github.com/defn/dev/m/tilt/pkg/webview/view.swagger.json pkg/webview/view.swagger.json
 
 RUN <<EOF
     mkdir -p web/src && \
@@ -76,4 +76,4 @@ EOF
 
 # Output stage for proto-ts task
 FROM scratch AS proto-ts-output
-COPY --from=proto-ts-build /go/src/github.com/tilt-dev/tilt/web/src/view.d.ts /go/src/github.com/tilt-dev/tilt/web/src/view.d.ts
+COPY --from=proto-ts-build /go/src/github.com/defn/dev/m/tilt/web/src/view.d.ts /go/src/github.com/defn/dev/m/tilt/web/src/view.d.ts

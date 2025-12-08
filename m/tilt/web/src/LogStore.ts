@@ -646,7 +646,7 @@ class LogStore implements LogAlertIndex {
   // After a log hits its limit, we need to truncate it to keep it small
   // we do this by cutting a big chunk at a time, so that we have rarer, larger changes, instead of
   // a small change every time new data is written to the log
-  // https://github.com/tilt-dev/tilt/issues/1935#issuecomment-531390353
+  // https://github.com/defn/dev/m/tilt/issues/1935#issuecomment-531390353
   logTruncationTarget(): number {
     return this.maxLogLength / 2
   }

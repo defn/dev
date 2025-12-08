@@ -9,7 +9,7 @@ import (
 	"github.com/stretchr/testify/require"
 	"k8s.io/cli-runtime/pkg/genericclioptions"
 
-	"github.com/tilt-dev/tilt/internal/testutils"
+	"github.com/defn/dev/m/tilt/internal/testutils"
 )
 
 func TestOpenapi(t *testing.T) {

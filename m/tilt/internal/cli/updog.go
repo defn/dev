@@ -13,17 +13,17 @@ import (
 	"sigs.k8s.io/controller-runtime/pkg/client"
 	ctrlclient "sigs.k8s.io/controller-runtime/pkg/client"
 
-	"github.com/tilt-dev/tilt/internal/analytics"
-	"github.com/tilt-dev/tilt/internal/cli/visitor"
-	"github.com/tilt-dev/tilt/internal/controllers"
-	"github.com/tilt-dev/tilt/internal/engine"
-	engineanalytics "github.com/tilt-dev/tilt/internal/engine/analytics"
-	"github.com/tilt-dev/tilt/internal/hud"
-	"github.com/tilt-dev/tilt/internal/hud/server"
-	"github.com/tilt-dev/tilt/internal/store"
-	"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1"
-	"github.com/tilt-dev/tilt/pkg/logger"
-	"github.com/tilt-dev/tilt/pkg/model"
+	"github.com/defn/dev/m/tilt/internal/analytics"
+	"github.com/defn/dev/m/tilt/internal/cli/visitor"
+	"github.com/defn/dev/m/tilt/internal/controllers"
+	"github.com/defn/dev/m/tilt/internal/engine"
+	engineanalytics "github.com/defn/dev/m/tilt/internal/engine/analytics"
+	"github.com/defn/dev/m/tilt/internal/hud"
+	"github.com/defn/dev/m/tilt/internal/hud/server"
+	"github.com/defn/dev/m/tilt/internal/store"
+	"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1"
+	"github.com/defn/dev/m/tilt/pkg/logger"
+	"github.com/defn/dev/m/tilt/pkg/model"
 )
 
 type updogCmd struct {
@@ -60,7 +60,7 @@ a set of configs. Here's a youtube video showing it in action:
 
 https://www.youtube.com/watch?v=dQw4w9WgXcQ
 
-See https://github.com/tilt-dev/tilt/tree/master/internal/cli/updog-examples
+See https://github.com/defn/dev/m/tilt/tree/master/internal/cli/updog-examples
 for example configs.
 `,
 		Example: "tilt alpha updog -f config.yaml",

@@ -8,7 +8,7 @@ import (
 	"net"
 	"net/http"
 
-	"github.com/tilt-dev/tilt/pkg/assets"
+	"github.com/defn/dev/m/tilt/pkg/assets"
 )
 
 func Serve(ctx context.Context, l net.Listener, rawSnapshot []byte) error {
@@ -50,7 +50,7 @@ func newSnapshotServer(snapshot []byte) (*snapshotServer, error) {
 	if !ok {
 		return nil, fmt.Errorf(
 			("requested embedded mode, but JS/CSS files are not available.\n" +
-				"Please report this: https://github.com/tilt-dev/tilt/issues"))
+				"Please report this: https://github.com/defn/dev/m/tilt/issues"))
 	}
 	result.assetServer = s
 	result.snapshot = snapshot

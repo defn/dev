@@ -7,16 +7,16 @@ import (
 
 	"k8s.io/apimachinery/pkg/types"
 
-	"github.com/tilt-dev/tilt/internal/controllers/apis/cluster"
-	"github.com/tilt-dev/tilt/internal/timecmp"
-	"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1"
+	"github.com/defn/dev/m/tilt/internal/controllers/apis/cluster"
+	"github.com/defn/dev/m/tilt/internal/timecmp"
+	"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1"
 
 	"github.com/pkg/errors"
 	v1 "k8s.io/api/core/v1"
 
-	"github.com/tilt-dev/tilt/internal/k8s"
-	"github.com/tilt-dev/tilt/internal/store"
-	"github.com/tilt-dev/tilt/pkg/model"
+	"github.com/defn/dev/m/tilt/internal/k8s"
+	"github.com/defn/dev/m/tilt/internal/store"
+	"github.com/defn/dev/m/tilt/pkg/model"
 )
 
 // TODO(nick): Right now, the EventWatchManager, PodWatcher, and ServiceWatcher

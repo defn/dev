@@ -9,7 +9,7 @@ import (
 	"github.com/json-iterator/go/extra"
 	"github.com/modern-go/reflect2"
 
-	"github.com/tilt-dev/tilt/pkg/model"
+	"github.com/defn/dev/m/tilt/pkg/model"
 )
 
 var defaultJSONIterator = json.Config{}.Froze()

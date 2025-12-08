@@ -11,8 +11,8 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 
-	"github.com/tilt-dev/tilt/internal/tiltfile/io"
-	"github.com/tilt-dev/tilt/internal/tiltfile/starkit"
+	"github.com/defn/dev/m/tilt/internal/tiltfile/io"
+	"github.com/defn/dev/m/tilt/internal/tiltfile/starkit"
 )
 
 func TestEnviron(t *testing.T) {

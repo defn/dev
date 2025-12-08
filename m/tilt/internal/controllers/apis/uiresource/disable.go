@@ -1,8 +1,8 @@
 package uiresource
 
 import (
-	"github.com/tilt-dev/tilt/internal/controllers/apis/configmap"
-	"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1"
+	"github.com/defn/dev/m/tilt/internal/controllers/apis/configmap"
+	"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1"
 )
 
 func DisableResourceStatus(getCM func(name string) (v1alpha1.ConfigMap, error), disableSources []v1alpha1.DisableSource) (v1alpha1.DisableResourceStatus, error) {

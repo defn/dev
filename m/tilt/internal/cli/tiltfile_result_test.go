@@ -6,8 +6,8 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 
-	"github.com/tilt-dev/tilt/internal/testutils"
-	"github.com/tilt-dev/tilt/internal/testutils/tempdir"
+	"github.com/defn/dev/m/tilt/internal/testutils"
+	"github.com/defn/dev/m/tilt/internal/testutils/tempdir"
 
 	"k8s.io/cli-runtime/pkg/genericclioptions"
 )
@@ -18,7 +18,7 @@ func TestTiltfileResult(t *testing.T) {
 
 	f.WriteFile("Tiltfile", `
 
-v1alpha1.extension_repo(name='default', url='https://github.com/tilt-dev/tilt-extensions')
+v1alpha1.extension_repo(name='default', url='https://github.com/defn/dev/m/tilt-extensions')
 local_resource(name='hi', cmd='echo hi', serve_cmd='echo bye')
 `)
 
@@ -33,5 +33,5 @@ local_resource(name='hi', cmd='echo hi', serve_cmd='echo bye')
 
 	assert.Contains(t, out.String(), `"Error": null`)
 	assert.Contains(t, out.String(), `"Name": "hi"`)
-	assert.Contains(t, out.String(), `"url": "https://github.com/tilt-dev/tilt-extensions"`)
+	assert.Contains(t, out.String(), `"url": "https://github.com/defn/dev/m/tilt-extensions"`)
 }

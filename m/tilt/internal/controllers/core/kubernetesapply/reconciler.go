@@ -21,21 +21,21 @@ import (
 	"sigs.k8s.io/controller-runtime/pkg/handler"
 	"sigs.k8s.io/controller-runtime/pkg/reconcile"
 
-	"github.com/tilt-dev/tilt/internal/container"
-	"github.com/tilt-dev/tilt/internal/controllers/apicmp"
-	"github.com/tilt-dev/tilt/internal/controllers/apis/configmap"
-	"github.com/tilt-dev/tilt/internal/controllers/apis/imagemap"
-	"github.com/tilt-dev/tilt/internal/controllers/apis/trigger"
-	"github.com/tilt-dev/tilt/internal/controllers/indexer"
-	"github.com/tilt-dev/tilt/internal/k8s"
-	"github.com/tilt-dev/tilt/internal/localexec"
-	"github.com/tilt-dev/tilt/internal/store"
-	"github.com/tilt-dev/tilt/internal/store/kubernetesapplys"
-	"github.com/tilt-dev/tilt/internal/timecmp"
-	"github.com/tilt-dev/tilt/pkg/apis"
-	"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1"
-	"github.com/tilt-dev/tilt/pkg/logger"
-	"github.com/tilt-dev/tilt/pkg/model"
+	"github.com/defn/dev/m/tilt/internal/container"
+	"github.com/defn/dev/m/tilt/internal/controllers/apicmp"
+	"github.com/defn/dev/m/tilt/internal/controllers/apis/configmap"
+	"github.com/defn/dev/m/tilt/internal/controllers/apis/imagemap"
+	"github.com/defn/dev/m/tilt/internal/controllers/apis/trigger"
+	"github.com/defn/dev/m/tilt/internal/controllers/indexer"
+	"github.com/defn/dev/m/tilt/internal/k8s"
+	"github.com/defn/dev/m/tilt/internal/localexec"
+	"github.com/defn/dev/m/tilt/internal/store"
+	"github.com/defn/dev/m/tilt/internal/store/kubernetesapplys"
+	"github.com/defn/dev/m/tilt/internal/timecmp"
+	"github.com/defn/dev/m/tilt/pkg/apis"
+	"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1"
+	"github.com/defn/dev/m/tilt/pkg/logger"
+	"github.com/defn/dev/m/tilt/pkg/model"
 )
 
 type deleteSpec struct {
@@ -482,7 +482,7 @@ func (r *Reconciler) createEntitiesToDeploy(ctx context.Context,
 		// changes, we make sure image pull policy isn't set to "Always".
 		// Frequent applies don't work well with this setting, and makes things
 		// slower. See discussion:
-		// https://github.com/tilt-dev/tilt/issues/3209
+		// https://github.com/defn/dev/m/tilt/issues/3209
 		if len(imageMaps) > 0 {
 			e, err = k8s.InjectImagePullPolicy(e, v1.PullIfNotPresent)
 			if err != nil {
@@ -493,8 +493,8 @@ func (r *Reconciler) createEntitiesToDeploy(ctx context.Context,
 		if len(imageMaps) > 0 {
 			// StatefulSet pods should be managed in parallel when we're doing iterative
 			// development. See discussion:
-			// https://github.com/tilt-dev/tilt/issues/1962
-			// https://github.com/tilt-dev/tilt/issues/3906
+			// https://github.com/defn/dev/m/tilt/issues/1962
+			// https://github.com/defn/dev/m/tilt/issues/3906
 			e = k8s.InjectParallelPodManagementPolicy(e)
 		}
 

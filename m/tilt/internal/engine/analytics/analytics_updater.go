@@ -5,9 +5,9 @@ import (
 
 	wmanalytics "github.com/tilt-dev/wmclient/pkg/analytics"
 
-	"github.com/tilt-dev/tilt/internal/analytics"
-	"github.com/tilt-dev/tilt/internal/store"
-	"github.com/tilt-dev/tilt/pkg/logger"
+	"github.com/defn/dev/m/tilt/internal/analytics"
+	"github.com/defn/dev/m/tilt/internal/store"
+	"github.com/defn/dev/m/tilt/pkg/logger"
 )
 
 type CmdTags map[string]string

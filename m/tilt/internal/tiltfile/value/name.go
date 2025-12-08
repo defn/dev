@@ -12,7 +12,7 @@ import (
 // We use the loosest validation rules: valid path segment names.
 //
 // For discussion, see:
-// https://github.com/tilt-dev/tilt/issues/4309
+// https://github.com/defn/dev/m/tilt/issues/4309
 type Name string
 
 func (n *Name) Unpack(v starlark.Value) error {

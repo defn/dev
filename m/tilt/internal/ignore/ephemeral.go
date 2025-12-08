@@ -1,8 +1,8 @@
 package ignore
 
 import (
-	"github.com/tilt-dev/tilt/internal/dockerignore"
-	"github.com/tilt-dev/tilt/pkg/model"
+	"github.com/defn/dev/m/tilt/internal/dockerignore"
+	"github.com/defn/dev/m/tilt/pkg/model"
 )
 
 // EphemeralPathMatcher filters out spurious changes that we don't want to

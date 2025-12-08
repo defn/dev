@@ -15,7 +15,7 @@ spec:
         app: ignores
     spec:
       containers:
-      - name: ignores
-        image: ignores-image
-        ports:
-        - containerPort: 8000
+        - name: ignores
+          image: ignores-image
+          ports:
+            - containerPort: 8000

@@ -15,10 +15,10 @@ spec:
         app: imagetags-stretch
     spec:
       containers:
-      - name: imagetags-stretch
-        image: gcr.io/windmill-test-containers/imagetags-app:stretch
-        ports:
-        - containerPort: 8000
-        resources:
-          requests:
-            cpu: "10m"
+        - name: imagetags-stretch
+          image: gcr.io/windmill-test-containers/imagetags-app:stretch
+          ports:
+            - containerPort: 8000
+          resources:
+            requests:
+              cpu: "10m"

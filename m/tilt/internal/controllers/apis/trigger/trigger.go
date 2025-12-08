@@ -12,10 +12,10 @@ import (
 	"sigs.k8s.io/controller-runtime/pkg/client"
 	"sigs.k8s.io/controller-runtime/pkg/handler"
 
-	"github.com/tilt-dev/tilt/internal/controllers/indexer"
-	"github.com/tilt-dev/tilt/internal/sliceutils"
-	"github.com/tilt-dev/tilt/internal/timecmp"
-	"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1"
+	"github.com/defn/dev/m/tilt/internal/controllers/indexer"
+	"github.com/defn/dev/m/tilt/internal/sliceutils"
+	"github.com/defn/dev/m/tilt/internal/timecmp"
+	"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1"
 )
 
 var fwGVK = v1alpha1.SchemeGroupVersion.WithKind("FileWatch")

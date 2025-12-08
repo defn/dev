@@ -10,13 +10,13 @@ import (
 
 	"go.starlark.net/starlark"
 
-	"github.com/tilt-dev/tilt/internal/tiltfile/starkit"
-	"github.com/tilt-dev/tilt/internal/tiltfile/value"
-	"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1"
-	"github.com/tilt-dev/tilt/pkg/model"
+	"github.com/defn/dev/m/tilt/internal/tiltfile/starkit"
+	"github.com/defn/dev/m/tilt/internal/tiltfile/value"
+	"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1"
+	"github.com/defn/dev/m/tilt/pkg/model"
 )
 
-const fmtRestartContainerDeprecationError = "Found `restart_container()` LiveUpdate step in resource(s): [%s]. `restart_container()`  has been deprecated for k8s resources. We recommend the restart_process extension: https://github.com/tilt-dev/tilt-extensions/tree/master/restart_process. For more information, see https://docs.tilt.dev/live_update_reference.html#restarting-your-process"
+const fmtRestartContainerDeprecationError = "Found `restart_container()` LiveUpdate step in resource(s): [%s]. `restart_container()`  has been deprecated for k8s resources. We recommend the restart_process extension: https://github.com/defn/dev/m/tilt-extensions/tree/master/restart_process. For more information, see https://docs.tilt.dev/live_update_reference.html#restarting-your-process"
 
 func restartContainerDeprecationError(names []model.ManifestName) string {
 	strs := make([]string, len(names))

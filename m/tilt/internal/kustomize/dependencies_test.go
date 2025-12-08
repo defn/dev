@@ -7,7 +7,7 @@ import (
 
 	"github.com/stretchr/testify/require"
 
-	"github.com/tilt-dev/tilt/internal/testutils/tempdir"
+	"github.com/defn/dev/m/tilt/internal/testutils/tempdir"
 )
 
 func TestNoFile(t *testing.T) {
@@ -83,7 +83,7 @@ func TestRecursive(t *testing.T) {
 
 	// these used to be only specified under "bases", but now that's deprecated and "resources"
 	// that purpose. for now, test both.
-	// https://github.com/tilt-dev/tilt/blob/15d0c94ccc08230d3a528b14cb0a3455b947d13c/vendor/sigs.k8s.io/kustomize/api/types/kustomization.go#L102
+	// https://github.com/defn/dev/m/tilt/blob/15d0c94ccc08230d3a528b14cb0a3455b947d13c/vendor/sigs.k8s.io/kustomize/api/types/kustomization.go#L102
 	kustomize := `bases:
 - ./dev
 components:
@@ -144,7 +144,7 @@ namePrefix: prod-`
 }
 
 // patches was deprecated and then re-added with a different meaning
-// https://github.com/tilt-dev/tilt/issues/4081
+// https://github.com/defn/dev/m/tilt/issues/4081
 func TestPatches(t *testing.T) {
 	f := newKustomizeFixture(t)
 	kustomizeFile := `# Example configuration for the webserver

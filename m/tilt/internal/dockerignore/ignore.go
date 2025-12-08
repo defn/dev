@@ -8,8 +8,8 @@ import (
 
 	"github.com/moby/buildkit/frontend/dockerfile/dockerignore"
 
+	"github.com/defn/dev/m/tilt/internal/ospath"
 	tiltDockerignore "github.com/tilt-dev/dockerignore"
-	"github.com/tilt-dev/tilt/internal/ospath"
 )
 
 type dockerPathMatcher struct {

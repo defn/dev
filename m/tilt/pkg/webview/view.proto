@@ -7,7 +7,7 @@ import "google/protobuf/timestamp.proto";
 import "pkg/webview/log.proto";
 import "pkg/apis/core/v1alpha1/generated.proto";
 
-option go_package = "github.com/tilt-dev/tilt/pkg/webview";
+option go_package = "github.com/defn/dev/m/tilt/pkg/webview";
 
 
 // Correspond to implementations of the TargetSpec interface
@@ -139,8 +139,8 @@ message Resource {
   reserved 23;
 
   // Facets have been removed from the UI. They may come back in a future protocol. See:
-  // https://github.com/tilt-dev/tilt/issues/4148
-  // https://github.com/tilt-dev/tilt/issues/4219
+  // https://github.com/defn/dev/m/tilt/issues/4148
+  // https://github.com/defn/dev/m/tilt/issues/4219
   reserved "facets";
   reserved 24;
   

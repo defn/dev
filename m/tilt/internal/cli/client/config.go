@@ -6,8 +6,8 @@ import (
 	"k8s.io/client-go/tools/clientcmd"
 	clientcmdapi "k8s.io/client-go/tools/clientcmd/api"
 
-	"github.com/tilt-dev/tilt/internal/filelock"
-	"github.com/tilt-dev/tilt/pkg/model"
+	"github.com/defn/dev/m/tilt/internal/filelock"
+	"github.com/defn/dev/m/tilt/pkg/model"
 )
 
 type TiltClientConfig clientcmd.ClientConfig

@@ -6,9 +6,9 @@ import (
 
 	"k8s.io/apimachinery/pkg/types"
 
-	"github.com/tilt-dev/tilt/internal/k8s/kubeconfig"
-	"github.com/tilt-dev/tilt/internal/localexec"
-	"github.com/tilt-dev/tilt/pkg/logger"
+	"github.com/defn/dev/m/tilt/internal/k8s/kubeconfig"
+	"github.com/defn/dev/m/tilt/internal/localexec"
+	"github.com/defn/dev/m/tilt/pkg/logger"
 )
 
 func ProvideDefaultLocalKubeconfigPath(

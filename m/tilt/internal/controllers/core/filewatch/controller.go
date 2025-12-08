@@ -27,18 +27,18 @@ import (
 	ctrlclient "sigs.k8s.io/controller-runtime/pkg/client"
 	"sigs.k8s.io/controller-runtime/pkg/handler"
 
+	"github.com/defn/dev/m/tilt/internal/controllers/apicmp"
+	"github.com/defn/dev/m/tilt/internal/controllers/apis/configmap"
+	"github.com/defn/dev/m/tilt/internal/controllers/core/filewatch/fsevent"
+	"github.com/defn/dev/m/tilt/internal/controllers/indexer"
+	"github.com/defn/dev/m/tilt/internal/ignore"
+	"github.com/defn/dev/m/tilt/internal/store"
+	"github.com/defn/dev/m/tilt/internal/store/filewatches"
+	"github.com/defn/dev/m/tilt/internal/watch"
+	"github.com/defn/dev/m/tilt/pkg/apis"
+	"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1"
+	"github.com/defn/dev/m/tilt/pkg/logger"
 	"github.com/tilt-dev/fsnotify"
-	"github.com/tilt-dev/tilt/internal/controllers/apicmp"
-	"github.com/tilt-dev/tilt/internal/controllers/apis/configmap"
-	"github.com/tilt-dev/tilt/internal/controllers/core/filewatch/fsevent"
-	"github.com/tilt-dev/tilt/internal/controllers/indexer"
-	"github.com/tilt-dev/tilt/internal/ignore"
-	"github.com/tilt-dev/tilt/internal/store"
-	"github.com/tilt-dev/tilt/internal/store/filewatches"
-	"github.com/tilt-dev/tilt/internal/watch"
-	"github.com/tilt-dev/tilt/pkg/apis"
-	"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1"
-	"github.com/tilt-dev/tilt/pkg/logger"
 )
 
 // Controller reconciles a FileWatch object
@@ -252,7 +252,7 @@ func (c *Controller) dispatchFileChangesLoop(ctx context.Context, w *watcher) {
 				w.recordError(fmt.Errorf("Windows I/O overflow.\n"+
 					"You may be able to fix this by setting the env var %s.\n"+
 					"Current buffer size: %d\n"+
-					"More details: https://github.com/tilt-dev/tilt/issues/3556\n"+
+					"More details: https://github.com/defn/dev/m/tilt/issues/3556\n"+
 					"Caused by: %v",
 					watch.WindowsBufferSizeEnvVar,
 					watch.DesiredWindowsBufferSize(),

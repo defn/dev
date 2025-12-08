@@ -5,9 +5,9 @@
 
 set -ex
 
-if [[ "$GITHUB_TOKEN" == "" ]]; then
-    echo "Missing GITHUB_TOKEN"
-    exit 1
+if [[ $GITHUB_TOKEN == "" ]]; then
+	echo "Missing GITHUB_TOKEN"
+	exit 1
 fi
 
 DIR=$(dirname "$0")
@@ -18,11 +18,11 @@ docker pull docker/tilt-releaser
 mkdir -p ~/.cache/tilt/release/go-build
 
 docker run --rm --privileged \
-       -e GITHUB_TOKEN="$GITHUB_TOKEN" \
-       -w /src/tilt \
-       -v ~/.docker:/root/.docker \
-       -v ~/.cache/tilt/release/go-build:/root/.cache/go-build \
-       -v "$PWD:/src/tilt:delegated" \
-       -v /var/run/docker.sock:/var/run/docker.sock \
-       docker/tilt-releaser \
-       --clean
+	-e GITHUB_TOKEN="$GITHUB_TOKEN" \
+	-w /src/tilt \
+	-v ~/.docker:/root/.docker \
+	-v ~/.cache/tilt/release/go-build:/root/.cache/go-build \
+	-v "$PWD:/src/tilt:delegated" \
+	-v /var/run/docker.sock:/var/run/docker.sock \
+	docker/tilt-releaser \
+	--clean

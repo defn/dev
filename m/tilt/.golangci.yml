@@ -48,10 +48,10 @@ linters:
     rules:
       - linters:
           - staticcheck
-        text: 'SA1019:'
+        text: "SA1019:"
       - linters:
           - staticcheck
-        text: 'S1008:'
+        text: "S1008:"
       - linters:
           - errcheck
         path: _test\.go

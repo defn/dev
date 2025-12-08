@@ -11,14 +11,14 @@ import (
 	"k8s.io/apimachinery/pkg/types"
 	"k8s.io/client-go/kubernetes/scheme"
 
-	"github.com/tilt-dev/tilt/internal/kustomize"
+	"github.com/defn/dev/m/tilt/internal/kustomize"
 
 	"github.com/pkg/errors"
 	v1 "k8s.io/api/core/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime"
 
-	"github.com/tilt-dev/tilt/internal/container"
+	"github.com/defn/dev/m/tilt/internal/container"
 )
 
 type K8sEntity struct {

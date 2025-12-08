@@ -5,7 +5,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/tilt-dev/tilt/pkg/apis"
+	"github.com/defn/dev/m/tilt/pkg/apis"
 
 	appsv1 "k8s.io/api/apps/v1"
 	v1 "k8s.io/api/core/v1"
@@ -13,9 +13,9 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/types"
 
-	"github.com/tilt-dev/tilt/internal/container"
-	"github.com/tilt-dev/tilt/internal/k8s"
-	"github.com/tilt-dev/tilt/pkg/model"
+	"github.com/defn/dev/m/tilt/internal/container"
+	"github.com/defn/dev/m/tilt/internal/k8s"
+	"github.com/defn/dev/m/tilt/pkg/model"
 )
 
 const fakeContainerID = container.ID("myTestContainer")

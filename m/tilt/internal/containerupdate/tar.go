@@ -3,7 +3,7 @@ package containerupdate
 import (
 	"fmt"
 
-	"github.com/tilt-dev/tilt/pkg/model"
+	"github.com/defn/dev/m/tilt/pkg/model"
 )
 
 // TarExitCodePermissionDenied is returned by `tar` if it does not have
@@ -31,7 +31,7 @@ func cannotExecErr(err error) error {
 		"Please check that the container image includes `tar` in $PATH.\n"+
 		"Some minimal images, such as those that are built `FROM scratch`, "+
 		"will not work with Live Update by default.\n"+
-		"See https://github.com/tilt-dev/tilt/issues/4303 for details.",
+		"See https://github.com/defn/dev/m/tilt/issues/4303 for details.",
 		err)
 }
 

@@ -14,14 +14,14 @@ import (
 
 	"github.com/tilt-dev/go-get"
 
-	"github.com/tilt-dev/tilt/internal/analytics"
-	"github.com/tilt-dev/tilt/internal/cli/demo"
-	"github.com/tilt-dev/tilt/pkg/logger"
-	"github.com/tilt-dev/tilt/pkg/model"
+	"github.com/defn/dev/m/tilt/internal/analytics"
+	"github.com/defn/dev/m/tilt/internal/cli/demo"
+	"github.com/defn/dev/m/tilt/pkg/logger"
+	"github.com/defn/dev/m/tilt/pkg/model"
 )
 
 const demoResourcesPrefix = "tilt-demo-"
-const sampleProjPackage = "github.com/tilt-dev/tilt-avatars"
+const sampleProjPackage = "github.com/defn/dev/m/tilt-avatars"
 
 type demoCmd struct {
 	// legacy disables the web UI (this is only used for integration tests)

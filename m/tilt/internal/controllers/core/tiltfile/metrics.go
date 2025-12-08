@@ -5,7 +5,7 @@ import (
 
 	dockertypes "github.com/docker/docker/api/types"
 
-	"github.com/tilt-dev/tilt/internal/analytics"
+	"github.com/defn/dev/m/tilt/internal/analytics"
 )
 
 // reportDockerConnectionEvent records a metric about Docker connectivity.

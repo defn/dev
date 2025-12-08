@@ -14,7 +14,7 @@ spec:
         app: namespaceflag
     spec:
       containers:
-      - name: namespaceflag
-        image: namespaceflag
-        ports:
-        - containerPort: 8000
+        - name: namespaceflag
+          image: namespaceflag
+          ports:
+            - containerPort: 8000

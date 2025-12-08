@@ -8,7 +8,7 @@ import (
 
 	"github.com/moby/buildkit/frontend/dockerfile/dockerignore"
 
-	"github.com/tilt-dev/tilt/pkg/model"
+	"github.com/defn/dev/m/tilt/pkg/model"
 )
 
 const TiltignoreFileName = ".tiltignore"

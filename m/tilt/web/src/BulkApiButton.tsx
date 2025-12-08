@@ -55,7 +55,8 @@ const BulkButtonElementRoot = styled(InstrumentedButton)`
   font-size: ${FontSize.small};
   padding: 0 ${SizeUnit(1 / 4)};
   text-transform: capitalize;
-  transition: color ${AnimDuration.default} ease,
+  transition:
+    color ${AnimDuration.default} ease,
     border ${AnimDuration.default} ease;
 
   &:hover,

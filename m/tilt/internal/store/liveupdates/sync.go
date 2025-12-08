@@ -1,9 +1,9 @@
 package liveupdates
 
 import (
-	"github.com/tilt-dev/tilt/internal/build"
-	"github.com/tilt-dev/tilt/internal/controllers/apis/liveupdate"
-	"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1"
+	"github.com/defn/dev/m/tilt/internal/build"
+	"github.com/defn/dev/m/tilt/internal/controllers/apis/liveupdate"
+	"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1"
 )
 
 // LiveUpdatePlan is the result of evaluating a list of changed files against the rules in the spec.

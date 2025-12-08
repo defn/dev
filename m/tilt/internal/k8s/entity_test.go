@@ -11,7 +11,7 @@ import (
 	"k8s.io/apimachinery/pkg/runtime"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	"github.com/tilt-dev/tilt/internal/k8s/testyaml"
+	"github.com/defn/dev/m/tilt/internal/k8s/testyaml"
 )
 
 func TestTypedPodGVK(t *testing.T) {

@@ -3,7 +3,7 @@
 <img src="assets/logo-wordmark.png" width="250">
 
 [![Build Status](https://circleci.com/gh/tilt-dev/tilt/tree/master.svg?style=shield)](https://circleci.com/gh/tilt-dev/tilt)
-[![GoDoc](https://godoc.org/github.com/tilt-dev/tilt?status.svg)](https://pkg.go.dev/github.com/tilt-dev/tilt)
+[![GoDoc](https://godoc.org/github.com/defn/dev/m/tilt?status.svg)](https://pkg.go.dev/github.com/defn/dev/m/tilt)
 
 Kubernetes for Prod, Tilt for Dev
 
@@ -44,27 +44,27 @@ For specific package managers (Homebrew, Scoop, Conda, asdf), see the
 
 **New to Tilt?** Our tutorial will [get you started](https://docs.tilt.dev/tutorial.html).
 
-**Configuring a Service?** We have best practice guides for 
-[HTML](https://docs.tilt.dev/example_static_html.html), 
-[NodeJS](https://docs.tilt.dev/example_nodejs.html), 
-[Python](https://docs.tilt.dev/example_python.html), 
+**Configuring a Service?** We have best practice guides for
+[HTML](https://docs.tilt.dev/example_static_html.html),
+[NodeJS](https://docs.tilt.dev/example_nodejs.html),
+[Python](https://docs.tilt.dev/example_python.html),
 [Go](https://docs.tilt.dev/example_go.html),
 [Java](https://docs.tilt.dev/example_java.html),
 and [C#](https://docs.tilt.dev/example_csharp.html).
 
-**Optimizing a Tiltfile?** Search for the function you need in our 
+**Optimizing a Tiltfile?** Search for the function you need in our
 [complete API reference](https://docs.tilt.dev/api.html).
 
 ## Community & Contributions
 
 **Questions:** Join [the Kubernetes slack](http://slack.k8s.io) and
- find us in the [#tilt](https://kubernetes.slack.com/messages/CESBL84MV/)
- channel. Or [file an issue](https://github.com/tilt-dev/tilt/issues). For code snippets of Tiltfile functionality shared by the Tilt community, check out [Tilt Extensions](https://github.com/tilt-dev/tilt-extensions). 
+find us in the [#tilt](https://kubernetes.slack.com/messages/CESBL84MV/)
+channel. Or [file an issue](https://github.com/defn/dev/m/tilt/issues). For code snippets of Tiltfile functionality shared by the Tilt community, check out [Tilt Extensions](https://github.com/defn/dev/m/tilt-extensions).
 
 **Contribute:** Check out our [guidelines](CONTRIBUTING.md) to contribute to Tilt's source code. To extend the capabilities of Tilt via new Tiltfile functionality, read more about [Extensions](https://docs.tilt.dev/extensions.html).
 
 **Follow along:** [@tilt_dev](https://twitter.com/tilt_dev) on Twitter. For updates
-and announcements, follow [the blog](https://blog.tilt.dev) or subscribe to 
+and announcements, follow [the blog](https://blog.tilt.dev) or subscribe to
 [the newsletter](https://tilt.dev/subscribe).
 
 **Help us make Tilt even better:** Tilt sends anonymized usage data, so we can

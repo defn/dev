@@ -12,8 +12,8 @@ import (
 	"k8s.io/client-go/tools/clientcmd/api"
 	"k8s.io/client-go/tools/clientcmd/api/latest"
 
-	"github.com/tilt-dev/tilt/internal/xdg"
-	"github.com/tilt-dev/tilt/pkg/model"
+	"github.com/defn/dev/m/tilt/internal/xdg"
+	"github.com/defn/dev/m/tilt/pkg/model"
 )
 
 type Writer struct {

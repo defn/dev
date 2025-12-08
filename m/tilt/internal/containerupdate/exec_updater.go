@@ -7,10 +7,10 @@ import (
 	"io"
 	"strings"
 
-	"github.com/tilt-dev/tilt/internal/k8s"
-	"github.com/tilt-dev/tilt/internal/store/liveupdates"
-	"github.com/tilt-dev/tilt/pkg/logger"
-	"github.com/tilt-dev/tilt/pkg/model"
+	"github.com/defn/dev/m/tilt/internal/k8s"
+	"github.com/defn/dev/m/tilt/internal/store/liveupdates"
+	"github.com/defn/dev/m/tilt/pkg/logger"
+	"github.com/defn/dev/m/tilt/pkg/model"
 )
 
 type ExecUpdater struct {
@@ -28,7 +28,7 @@ func (cu *ExecUpdater) UpdateContainer(ctx context.Context, cInfo liveupdates.Co
 	if !hotReload {
 		return fmt.Errorf("ExecUpdater does not support `restart_container()` step. If you ran Tilt " +
 			"with `--updateMode=exec`, omit this flag. If you are using a non-Docker container runtime, " +
-			"see https://github.com/tilt-dev/tilt-extensions/tree/master/restart_process for a workaround")
+			"see https://github.com/defn/dev/m/tilt-extensions/tree/master/restart_process for a workaround")
 	}
 
 	l := logger.Get(ctx)

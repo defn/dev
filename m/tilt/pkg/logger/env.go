@@ -29,7 +29,7 @@ func PrepareEnv(l Logger, env []string) []string {
 		hasLines = hasLines || strings.HasPrefix(e, "LINES=")
 		hasColumns = hasColumns || strings.HasPrefix(e, "COLUMNS=")
 
-		// FORCE_COLOR is common in nodejs https://github.com/tilt-dev/tilt/issues/3038
+		// FORCE_COLOR is common in nodejs https://github.com/defn/dev/m/tilt/issues/3038
 		hasForceColor = hasForceColor || strings.HasPrefix(e, "FORCE_COLOR=")
 
 		// PYTHONUNBUFFERED tells old Python versions not to buffer their output (< Python 3.7)

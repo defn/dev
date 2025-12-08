@@ -24,8 +24,8 @@ import (
 	"github.com/pkg/errors"
 	"github.com/stretchr/testify/require"
 
-	"github.com/tilt-dev/tilt/internal/testutils/bufsync"
-	"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1"
+	"github.com/defn/dev/m/tilt/internal/testutils/bufsync"
+	"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1"
 )
 
 var packageDir string
@@ -105,7 +105,7 @@ func (f *fixture) installTilt() {
 	f.t.Helper()
 	// use the current GOROOT to pick which Go to build with
 	goBin := filepath.Join(build.Default.GOROOT, "bin", "go")
-	cmd := exec.CommandContext(f.ctx, goBin, "install", "-mod", "vendor", "github.com/tilt-dev/tilt/cmd/tilt")
+	cmd := exec.CommandContext(f.ctx, goBin, "install", "-mod", "vendor", "github.com/defn/dev/m/tilt/cmd/tilt")
 	cmd.Dir = packageDir
 	f.runOrFail(cmd, "Building tilt")
 }

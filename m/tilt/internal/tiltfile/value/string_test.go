@@ -41,7 +41,7 @@ func TestAsStringOrStringList_ListWithNonStringElement(t *testing.T) {
 	require.Contains(t, err.Error(), "list should contain only strings, but element \"True\" was of type bool")
 }
 
-// https://github.com/tilt-dev/tilt/issues/3570
+// https://github.com/defn/dev/m/tilt/issues/3570
 func TestAsStringOrStringList_Map(t *testing.T) {
 	m := starlark.NewDict(2)
 	err := m.SetKey(starlark.String("foo"), starlark.String("1"))

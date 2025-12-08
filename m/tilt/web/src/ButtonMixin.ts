@@ -12,7 +12,8 @@ export const ButtonMixin = css`
   padding: 4px 8px;
   line-height: 21px;
   cursor: pointer;
-  transition: background-color ${AnimDuration.default} ease,
+  transition:
+    background-color ${AnimDuration.default} ease,
     color ${AnimDuration.default} ease;
 
   &:hover {

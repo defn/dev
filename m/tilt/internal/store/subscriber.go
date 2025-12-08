@@ -8,7 +8,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/tilt-dev/tilt/pkg/logger"
+	"github.com/defn/dev/m/tilt/pkg/logger"
 )
 
 const MaxBackoff = time.Second * 15
@@ -185,7 +185,7 @@ func subscriberName(sub Subscriber) string {
 	if typ.Kind() == reflect.Ptr {
 		typ = typ.Elem()
 	}
-	return fmt.Sprintf("%s.%s", strings.TrimPrefix(typ.PkgPath(), "github.com/tilt-dev/tilt/internal/"), typ.Name())
+	return fmt.Sprintf("%s.%s", strings.TrimPrefix(typ.PkgPath(), "github.com/defn/dev/m/tilt/internal/"), typ.Name())
 }
 
 func (e *subscriberEntry) notify(ctx context.Context, store *Store) {

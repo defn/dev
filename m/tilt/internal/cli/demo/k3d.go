@@ -12,8 +12,8 @@ import (
 	"github.com/distribution/reference"
 	"github.com/docker/docker/api/types/mount"
 
-	"github.com/tilt-dev/tilt/internal/docker"
-	"github.com/tilt-dev/tilt/pkg/logger"
+	"github.com/defn/dev/m/tilt/internal/docker"
+	"github.com/defn/dev/m/tilt/pkg/logger"
 )
 
 const defaultK3dImage = "docker.io/rancher/k3d:v4.4.7"

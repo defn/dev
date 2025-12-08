@@ -32,11 +32,11 @@ import (
 	"github.com/pkg/errors"
 	"golang.org/x/sync/errgroup"
 
-	"github.com/tilt-dev/tilt/internal/container"
-	"github.com/tilt-dev/tilt/internal/docker/buildkit"
-	"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1"
-	"github.com/tilt-dev/tilt/pkg/logger"
-	"github.com/tilt-dev/tilt/pkg/model"
+	"github.com/defn/dev/m/tilt/internal/container"
+	"github.com/defn/dev/m/tilt/internal/docker/buildkit"
+	"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1"
+	"github.com/defn/dev/m/tilt/pkg/logger"
+	"github.com/defn/dev/m/tilt/pkg/model"
 )
 
 const (
@@ -497,7 +497,7 @@ func (c *Cli) ImagePush(ctx context.Context, ref reference.NamedTagged) (io.Read
 func (c *Cli) ImageBuild(ctx context.Context, g *errgroup.Group, buildContext io.Reader, options BuildOptions) (types.ImageBuildResponse, error) {
 	// Always use a one-time session when using buildkit, since credential
 	// passing is fast and we want to get the latest creds.
-	// https://github.com/tilt-dev/tilt/issues/4043
+	// https://github.com/defn/dev/m/tilt/issues/4043
 	var oneTimeSession *session.Session
 	sessionID := ""
 
@@ -594,7 +594,7 @@ func (c *Cli) ExecInContainer(ctx context.Context, cID container.ID, cmd model.C
 	// We've sometimes seen ExecCreate/Attach/Start hang, so we add a timeout
 	// here.  It happens very rarely and is not consistently reproducible. It
 	// seems to happen when running the exec inside a volume.
-	// https://github.com/tilt-dev/tilt/issues/6521
+	// https://github.com/defn/dev/m/tilt/issues/6521
 	createCtx, cancel := context.WithTimeout(ctx, 5*time.Second)
 	defer cancel()
 	execId, err := c.ContainerExecCreate(createCtx, cID.String(), cfg)

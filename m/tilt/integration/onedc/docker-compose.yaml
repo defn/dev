@@ -1,4 +1,4 @@
-version: '3'
+version: "3"
 services:
   web:
     build:
@@ -6,6 +6,6 @@ services:
       dockerfile: Dockerfile
     container_name: onedc-web
     ports:
-    # Use the host:port:container-port syntax to verify
-    # https://github.com/tilt-dev/tilt/issues/5030
-    - "0.0.0.0:31235:8000"
+      # Use the host:port:container-port syntax to verify
+      # https://github.com/defn/dev/m/tilt/issues/5030
+      - "0.0.0.0:31235:8000"

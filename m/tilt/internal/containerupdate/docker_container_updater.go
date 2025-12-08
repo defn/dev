@@ -9,12 +9,12 @@ import (
 
 	"github.com/pkg/errors"
 
-	"github.com/tilt-dev/tilt/internal/container"
-	"github.com/tilt-dev/tilt/internal/docker"
-	"github.com/tilt-dev/tilt/internal/k8s"
-	"github.com/tilt-dev/tilt/internal/store/liveupdates"
-	"github.com/tilt-dev/tilt/pkg/logger"
-	"github.com/tilt-dev/tilt/pkg/model"
+	"github.com/defn/dev/m/tilt/internal/container"
+	"github.com/defn/dev/m/tilt/internal/docker"
+	"github.com/defn/dev/m/tilt/internal/k8s"
+	"github.com/defn/dev/m/tilt/internal/store/liveupdates"
+	"github.com/defn/dev/m/tilt/pkg/logger"
+	"github.com/defn/dev/m/tilt/pkg/model"
 )
 
 type DockerUpdater struct {
@@ -45,7 +45,7 @@ func (cu *DockerUpdater) UpdateContainer(ctx context.Context, cInfo liveupdates.
 	// Although docker has a copy API, it's buggy and not well-maintained
 	// (whereas the Exec API is part of the CRI and much more battle-tested).
 	// Discussion:
-	// https://github.com/tilt-dev/tilt/issues/3708
+	// https://github.com/defn/dev/m/tilt/issues/3708
 	tarCmd := tarCmd()
 	err = cu.dCli.ExecInContainer(ctx, cInfo.ContainerID, tarCmd, archiveToCopy, l.Writer(logger.InfoLvl))
 	if err != nil {

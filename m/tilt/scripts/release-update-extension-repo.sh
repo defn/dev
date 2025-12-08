@@ -8,23 +8,23 @@
 
 set -euo pipefail
 
-if [[ "${GITHUB_TOKEN-}" == "" ]]; then
-    echo "Missing GITHUB_TOKEN"
-    exit 1
+if [[ ${GITHUB_TOKEN-} == "" ]]; then
+	echo "Missing GITHUB_TOKEN"
+	exit 1
 fi
 
 VERSION="$1"
 VERSION_PATTERN="^v[0-9]+\\.[0-9]+\\.[0-9]+$"
 if ! [[ $VERSION =~ $VERSION_PATTERN ]]; then
-    echo "Version did not match expected pattern. Actual: $VERSION"
-    exit 1
+	echo "Version did not match expected pattern. Actual: $VERSION"
+	exit 1
 fi
 
 DIR=$(dirname "$0")
 cd "$DIR/.."
 
 ROOT=$(mktemp -d)
-git clone https://tilt-releaser:"$GITHUB_TOKEN"@github.com/tilt-dev/tilt-extensions "$ROOT"
+git clone https://tilt-releaser:"$GITHUB_TOKEN"@github.com/defn/dev/m/tilt-extensions "$ROOT"
 
 set -x
 cd "$ROOT"

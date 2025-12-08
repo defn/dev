@@ -27,4 +27,4 @@ spec:
     singular: uselessmachine
     kind: UselessMachine
     shortNames:
-    - um
+      - um

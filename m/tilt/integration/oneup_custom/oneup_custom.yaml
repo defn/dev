@@ -15,7 +15,7 @@ spec:
         app: oneup-custom
     spec:
       containers:
-      - name: oneup-custom
-        image: gcr.io/windmill-test-containers/integration/oneup-custom
-        ports:
-        - containerPort: 8000
+        - name: oneup-custom
+          image: gcr.io/windmill-test-containers/integration/oneup-custom
+          ports:
+            - containerPort: 8000

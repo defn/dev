@@ -11,8 +11,8 @@ import (
 	typesimage "github.com/docker/docker/api/types/image"
 	"golang.org/x/sync/errgroup"
 
-	"github.com/tilt-dev/tilt/internal/container"
-	"github.com/tilt-dev/tilt/pkg/model"
+	"github.com/defn/dev/m/tilt/internal/container"
+	"github.com/defn/dev/m/tilt/pkg/model"
 )
 
 // A docker client that returns errors on every method call.

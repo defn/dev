@@ -4,12 +4,8 @@
     "title": "pkg/webview/view.proto",
     "version": "version not set"
   },
-  "consumes": [
-    "application/json"
-  ],
-  "produces": [
-    "application/json"
-  ],
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
   "paths": {
     "/api/snapshot/new": {
       "post": {
@@ -38,9 +34,7 @@
             }
           }
         ],
-        "tags": [
-          "ViewService"
-        ]
+        "tags": ["ViewService"]
       }
     },
     "/api/view": {
@@ -60,9 +54,7 @@
             }
           }
         },
-        "tags": [
-          "ViewService"
-        ]
+        "tags": ["ViewService"]
       }
     },
     "/websocket/ack": {
@@ -92,9 +84,7 @@
             }
           }
         ],
-        "tags": [
-          "WebsocketService"
-        ]
+        "tags": ["WebsocketService"]
       }
     }
   },
@@ -191,7 +181,8 @@
           "description": "APIVersion defines the version of this resource that this field set\napplies to. The format is \"group/version\" just like the top-level\nAPIVersion field. It is necessary to track the version of a field\nset because it cannot be automatically converted."
         },
         "time": {
-          "type": "string", "format": "date-time",
+          "type": "string",
+          "format": "date-time",
           "title": "Time is the timestamp of when the ManagedFields entry was added. The\ntimestamp will also be updated if a field is added, the manager\nchanges any of the owned fields value or removes a field. The\ntimestamp does not update when a field is removed from the entry\nbecause another manager took it over.\n+optional"
         },
         "fieldsType": {
@@ -258,11 +249,13 @@
           "title": "A sequence number representing a specific generation of the desired state.\nPopulated by the system. Read-only.\n+optional"
         },
         "creationTimestamp": {
-          "type": "string", "format": "date-time",
+          "type": "string",
+          "format": "date-time",
           "description": "CreationTimestamp is a timestamp representing the server time when this object was\ncreated. It is not guaranteed to be set in happens-before order across separate operations.\nClients may not set this value. It is represented in RFC3339 form and is in UTC.\n\nPopulated by the system.\nRead-only.\nNull for lists.\nMore info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata\n+optional"
         },
         "deletionTimestamp": {
-          "type": "string", "format": "date-time",
+          "type": "string",
+          "format": "date-time",
           "description": "DeletionTimestamp is RFC 3339 date and time at which this resource will be deleted. This\nfield is set by the server when a graceful deletion is requested by the user, and is not\ndirectly settable by a client. The resource is expected to be deleted (no longer visible\nfrom resource lists, and not reachable by name) after the time in this field, once the\nfinalizers list is empty. As long as the finalizers list contains items, deletion is blocked.\nOnce the deletionTimestamp is set, this value may not be unset or be set further into the\nfuture, although it may be shortened or the resource may be deleted prior to this time.\nFor example, a user may request that a pod is deleted in 30 seconds. The Kubelet will react\nby sending a graceful termination signal to the containers in the pod. After that 30 seconds,\nthe Kubelet will send a hard termination signal (SIGKILL) to the container and after cleanup,\nremove the pod from the API. In the presence of network partitions, this object may still\nexist after this timestamp, until an administrator or automated process can determine the\nresource is fully terminated.\nIf not set, graceful deletion of the object has not been requested.\n\nPopulated by the system when a graceful deletion is requested.\nRead-only.\nMore info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata\n+optional"
         },
         "deletionGracePeriodSeconds": {
@@ -419,7 +412,8 @@
           "description": "An unrecoverable error connecting to the cluster.\n\n+optional"
         },
         "connectedAt": {
-          "type": "string", "format": "date-time",
+          "type": "string",
+          "format": "date-time",
           "description": "ConnectedAt indicates the time at which the cluster connection was established.\n\nConsumers can use this to detect when the underlying config has changed\nand refresh their client/connection accordingly.\n\n+optional"
         },
         "registry": {
@@ -564,7 +558,7 @@
         },
         "singleName": {
           "type": "string",
-          "description": "SingleName uses a shared image name for _all_ Tilt-built images and\nrelies on tags to distinguish between logically distinct images.\n\nThis is most commonly used with Amazon Elastic Container Registry (ECR),\nwhich works differently than other image registries.\n\nAn ECR host takes the form https://aws_account_id.dkr.ecr.region.amazonaws.com.\nEach image name in that registry must be pre-created ಠ_ಠ and assigned\nIAM permissions.\nFor example: https://aws_account_id.dkr.ecr.region.amazonaws.com/my-repo\n(They call this a repo).\n\nFor this reason, some users using ECR prefer to push all images to a\nsingle image name (ECR repo).\n\nA recommended pattern here is to create a \"personal\" image repo for each\nuser during development.\n\nSee:\nhttps://docs.aws.amazon.com/AmazonECR/latest/userguide/Repositories.html\nhttps://github.com/tilt-dev/tilt/issues/2419\n\n+optional"
+          "description": "SingleName uses a shared image name for _all_ Tilt-built images and\nrelies on tags to distinguish between logically distinct images.\n\nThis is most commonly used with Amazon Elastic Container Registry (ECR),\nwhich works differently than other image registries.\n\nAn ECR host takes the form https://aws_account_id.dkr.ecr.region.amazonaws.com.\nEach image name in that registry must be pre-created ಠ_ಠ and assigned\nIAM permissions.\nFor example: https://aws_account_id.dkr.ecr.region.amazonaws.com/my-repo\n(They call this a repo).\n\nFor this reason, some users using ECR prefer to push all images to a\nsingle image name (ECR repo).\n\nA recommended pattern here is to create a \"personal\" image repo for each\nuser during development.\n\nSee:\nhttps://docs.aws.amazon.com/AmazonECR/latest/userguide/Repositories.html\nhttps://github.com/defn/dev/m/tilt/issues/2419\n\n+optional"
         }
       }
     },
@@ -598,7 +592,8 @@
       "type": "object",
       "properties": {
         "startTime": {
-          "type": "string", "format": "date-time",
+          "type": "string",
+          "format": "date-time",
           "title": "The time when the build started.\n+optional"
         },
         "spanID": {
@@ -623,11 +618,13 @@
           "title": "A list of warnings encountered while running the build.\nThese warnings will also be printed to the build's log.\n+optional"
         },
         "startTime": {
-          "type": "string", "format": "date-time",
+          "type": "string",
+          "format": "date-time",
           "title": "The time when the build started.\n+optional"
         },
         "finishTime": {
-          "type": "string", "format": "date-time",
+          "type": "string",
+          "format": "date-time",
           "title": "The time when the build finished.\n+optional"
         },
         "spanID": {
@@ -698,7 +695,8 @@
       "type": "object",
       "properties": {
         "lastClickedAt": {
-          "type": "string", "format": "date-time",
+          "type": "string",
+          "format": "date-time",
           "description": "LastClickedAt is the timestamp of the last time the button was clicked.\n\nIf the button has never clicked before, this will be the zero-value/null."
         },
         "inputs": {
@@ -871,7 +869,8 @@
           "description": "Status of the condition, one of True, False, Unknown."
         },
         "lastTransitionTime": {
-          "type": "string", "format": "date-time",
+          "type": "string",
+          "format": "date-time",
           "title": "Last time the condition transitioned from one status to another.\n+optional"
         },
         "reason": {
@@ -892,11 +891,13 @@
           "description": "The name of the active pod.\n\nThe active pod tends to be what Tilt defaults to for port-forwards,\nlive-updates, etc.\n+optional"
         },
         "podCreationTime": {
-          "type": "string", "format": "date-time",
+          "type": "string",
+          "format": "date-time",
           "title": "The creation time of the active pod.\n+optional"
         },
         "podUpdateStartTime": {
-          "type": "string", "format": "date-time",
+          "type": "string",
+          "format": "date-time",
           "title": "The last update time of the active pod\n+optional"
         },
         "podStatus": {
@@ -1004,7 +1005,8 @@
       "type": "object",
       "properties": {
         "lastDeployTime": {
-          "type": "string", "format": "date-time",
+          "type": "string",
+          "format": "date-time",
           "title": "The last time this resource was deployed.\n+optional"
         },
         "triggerMode": {
@@ -1024,7 +1026,8 @@
           "title": "The currently running build, if any.\n+optional"
         },
         "pendingBuildSince": {
-          "type": "string", "format": "date-time",
+          "type": "string",
+          "format": "date-time",
           "title": "When the build was put in the pending queue.\n+optional"
         },
         "hasPendingChanges": {
@@ -1177,7 +1180,8 @@
           "title": "A FatalError is an error that forces Tilt to stop its control loop.\nThe API server will stay up and continue to serve the UI, but\nno further builds will happen.\n+optional"
         },
         "tiltStartTime": {
-          "type": "string", "format": "date-time",
+          "type": "string",
+          "format": "date-time",
           "title": "The time that this instance of tilt started.\nClients can use this to determine if the API server has restarted\nand all the objects need to be refreshed.\n+optional"
         },
         "tiltfileKey": {
@@ -1320,14 +1324,7 @@
     },
     "webviewLogLevel": {
       "type": "string",
-      "enum": [
-        "NONE",
-        "INFO",
-        "VERBOSE",
-        "DEBUG",
-        "WARN",
-        "ERROR"
-      ],
+      "enum": ["NONE", "INFO", "VERBOSE", "DEBUG", "WARN", "ERROR"],
       "default": "NONE",
       "description": " - NONE: For backwards-compatibility, the int value doesn't say\nanything about relative severity."
     },

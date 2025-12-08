@@ -5,10 +5,10 @@ import (
 
 	"github.com/google/go-cmp/cmp"
 
-	"github.com/tilt-dev/tilt/internal/container"
-	"github.com/tilt-dev/tilt/internal/sliceutils"
-	"github.com/tilt-dev/tilt/pkg/apis"
-	"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1"
+	"github.com/defn/dev/m/tilt/internal/container"
+	"github.com/defn/dev/m/tilt/internal/sliceutils"
+	"github.com/defn/dev/m/tilt/pkg/apis"
+	"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1"
 )
 
 type ImageTarget struct {
@@ -31,7 +31,7 @@ type ImageTarget struct {
 	// In a live-update-only image, we don't inject the image into the Kubernetes
 	// deploy, we only live-update to the deployed object. See this issue:
 	//
-	// https://github.com/tilt-dev/tilt/issues/4577
+	// https://github.com/defn/dev/m/tilt/issues/4577
 	//
 	// This is a hacky way to model this right now until we
 	// firm up how images work in the apiserver.

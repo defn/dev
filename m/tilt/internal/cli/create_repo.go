@@ -8,10 +8,10 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/cli-runtime/pkg/genericclioptions"
 
-	"github.com/tilt-dev/tilt/internal/analytics"
-	engineanalytics "github.com/tilt-dev/tilt/internal/engine/analytics"
-	"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1"
-	"github.com/tilt-dev/tilt/pkg/model"
+	"github.com/defn/dev/m/tilt/internal/analytics"
+	engineanalytics "github.com/defn/dev/m/tilt/internal/engine/analytics"
+	"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1"
+	"github.com/defn/dev/m/tilt/pkg/model"
 )
 
 // A human-friendly CLI for creating extension repos.
@@ -43,9 +43,9 @@ Tilt supports both git-hosted and local filesystem repositories.
 `,
 		Args: cobra.MinimumNArgs(2),
 		Example: `
-tilt create repo default https://github.com/tilt-dev/tilt-extensions
+tilt create repo default https://github.com/defn/dev/m/tilt-extensions
 tilt create repo default file:///home/user/src/tilt-extensions
-tilt create repo default https://github.com/tilt-dev/tilt-extensions --ref=SHA
+tilt create repo default https://github.com/defn/dev/m/tilt-extensions --ref=SHA
 `,
 	}
 

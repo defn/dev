@@ -6,9 +6,8 @@
 set -ex
 
 echo $GOPATH
-cd /go/src/github.com/tilt-dev/tilt
+cd /go/src/github.com/defn/dev/m/tilt
 go-to-protobuf -h ./hack/boilerplate.go.txt \
-               --packages github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1 \
-               --proto-import /go/src/github.com/tilt-dev/tilt/vendor \
-               --apimachinery-packages "-k8s.io/apimachinery/pkg/util/intstr,-k8s.io/apimachinery/pkg/api/resource,-k8s.io/apimachinery/pkg/runtime/schema,-k8s.io/apimachinery/pkg/runtime,-k8s.io/apimachinery/pkg/apis/meta/v1"
-
+	--packages github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1 \
+	--proto-import /go/src/github.com/defn/dev/m/tilt/vendor \
+	--apimachinery-packages "-k8s.io/apimachinery/pkg/util/intstr,-k8s.io/apimachinery/pkg/api/resource,-k8s.io/apimachinery/pkg/runtime/schema,-k8s.io/apimachinery/pkg/runtime,-k8s.io/apimachinery/pkg/apis/meta/v1"

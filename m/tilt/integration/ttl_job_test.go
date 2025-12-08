@@ -13,11 +13,11 @@ import (
 
 	"github.com/stretchr/testify/assert"
 
-	"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1"
+	"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1"
 )
 
 // Create a job with TTL cleanup.
-// https://github.com/tilt-dev/tilt/issues/5949
+// https://github.com/defn/dev/m/tilt/issues/5949
 func TestTTLJob(t *testing.T) {
 	f := newK8sFixture(t, "ttl_job")
 

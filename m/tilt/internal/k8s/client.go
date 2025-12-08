@@ -41,10 +41,10 @@ import (
 	// Client auth plugins! They will auto-init if we import them.
 	_ "k8s.io/client-go/plugin/pkg/client/auth"
 
+	"github.com/defn/dev/m/tilt/internal/container"
+	"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1"
+	"github.com/defn/dev/m/tilt/pkg/logger"
 	"github.com/tilt-dev/clusterid"
-	"github.com/tilt-dev/tilt/internal/container"
-	"github.com/tilt-dev/tilt/pkg/apis/core/v1alpha1"
-	"github.com/tilt-dev/tilt/pkg/logger"
 )
 
 // Due to the way the Kubernetes apiserver works, there's no easy way to
@@ -404,7 +404,7 @@ func (k *K8sClient) applyEntity(ctx context.Context, entity K8sEntity) ([]K8sEnt
 	// In that case, wait for the deletion to finish, then retry the apply.
 	//
 	// Discussion:
-	// https://github.com/tilt-dev/tilt/issues/6048
+	// https://github.com/defn/dev/m/tilt/issues/6048
 	isDeleting := false
 	for _, info := range result.Updated {
 		accessor, err := meta.Accessor(info.Object)
@@ -629,7 +629,7 @@ var MetadataAnnotationsTooLongRe = regexp.MustCompile(`metadata.annotations: Too
 // https://github.com/kubernetes/kubectl/issues/712
 //
 // We've also seen this reported differently, with a 413 HTTP error.
-// https://github.com/tilt-dev/tilt/issues/5279
+// https://github.com/defn/dev/m/tilt/issues/5279
 func maybeTooLargeError(err error) (string, bool) {
 	// We don't have an easy way to reproduce some of these problems, so we check
 	// for both the structured form of the error and the unstructured form.
