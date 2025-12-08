@@ -1,4 +1,4 @@
-.PHONY: all install lint test test-go check-js test-js test-storybook integration wire-check wire ensure goimports vendor shellcheck release-container update-codegen update-codegen-go update-codegen-starlark update-codegen-ts
+.PHONY: all install lint test test-go check-js test-js test-storybook integration wire-check wire ensure goimports shellcheck release-container update-codegen update-codegen-go update-codegen-starlark update-codegen-ts
 
 all: check-js test-js test-storybook
 
@@ -17,11 +17,11 @@ GOIMPORTS_LOCAL_ARG := -local github.com/tilt-dev
 
 # Build a binary the current commit SHA
 install:
-	go install -mod vendor -ldflags "-X 'github.com/defn/dev/m/tilt/internal/cli.commitSHA=$$(git merge-base master HEAD)'" ./cmd/tilt/...
+	go install -ldflags "-X 'github.com/defn/dev/m/tilt/internal/cli.commitSHA=$$(git merge-base master HEAD)'" ./cmd/tilt/...
 
 # disable optimizations and inlining, to allow more complete information when attaching a debugger or capturing a profile
 install-debug:
-	go install -mod vendor -gcflags "all=-N -l" ./...
+	go install -gcflags "all=-N -l" ./...
 
 lint: golangci-lint
 
@@ -29,14 +29,14 @@ lintfix:
 	LINT_FLAGS=--fix make golangci-lint
 
 build:
-	go test -mod vendor -p $(GO_PARALLEL_JOBS) -timeout 60s ./... -run nonsenseregex
+	go test -p $(GO_PARALLEL_JOBS) -timeout 60s ./... -run nonsenseregex
 
 test-go:
 ifneq ($(CIRCLECI),true)
-		gotestsum -- -mod vendor -p $(GO_PARALLEL_JOBS) -timeout 100s ./...
+		gotestsum -- -p $(GO_PARALLEL_JOBS) -timeout 100s ./...
 else
 		mkdir -p test-results
-		gotestsum --format standard-quiet --junitfile test-results/unit-tests.xml -- ./... -mod vendor -p $(GO_PARALLEL_JOBS) -timeout 100s
+		gotestsum --format standard-quiet --junitfile test-results/unit-tests.xml -- ./... -p $(GO_PARALLEL_JOBS) -timeout 100s
 endif
 
 test: test-go test-js
@@ -45,28 +45,28 @@ test: test-go test-js
 # TODO(matt) skiplargetiltfiletests only skips the tiltfile DC+Helm tests at the moment
 # we might also want to skip the ones in engine
 shorttest:
-	go test -mod vendor -p $(GO_PARALLEL_JOBS) -short -tags skipcontainertests,skiplargetiltfiletests -timeout 100s ./...
+	go test -p $(GO_PARALLEL_JOBS) -short -tags skipcontainertests,skiplargetiltfiletests -timeout 100s ./...
 
 shorttestsum:
 ifneq ($(CIRCLECI),true)
-	gotestsum -- -mod vendor -p $(GO_PARALLEL_JOBS) -short -tags skipcontainertests,skiplargetiltfiletests -timeout 100s ./...
+	gotestsum -- -p $(GO_PARALLEL_JOBS) -short -tags skipcontainertests,skiplargetiltfiletests -timeout 100s ./...
 else
 	mkdir -p test-results
-	gotestsum --format standard-quiet --junitfile test-results/unit-tests.xml --rerun-fails=2 --rerun-fails-max-failures=10 --packages="./..." -- -mod vendor -count 1 -p $(GO_PARALLEL_JOBS) -short -tags skipcontainertests,skiplargetiltfiletests -timeout 100s
+	gotestsum --format standard-quiet --junitfile test-results/unit-tests.xml --rerun-fails=2 --rerun-fails-max-failures=10 --packages="./..." -- -count 1 -p $(GO_PARALLEL_JOBS) -short -tags skipcontainertests,skiplargetiltfiletests -timeout 100s
 endif
 
 integration:
 ifneq ($(CIRCLECI),true)
-		go test -mod vendor -v -count 1 -p $(GO_PARALLEL_JOBS) -tags 'integration' -timeout 30m ./integration
+		go test -v -count 1 -p $(GO_PARALLEL_JOBS) -tags 'integration' -timeout 30m ./integration
 else
 		mkdir -p test-results
-		gotestsum --format dots --junitfile test-results/unit-tests.xml -- ./integration -mod vendor -count 1 -p $(GO_PARALLEL_JOBS) -tags 'integration' -timeout 1000s
+		gotestsum --format dots --junitfile test-results/unit-tests.xml -- ./integration -count 1 -p $(GO_PARALLEL_JOBS) -tags 'integration' -timeout 1000s
 endif
 
 # Run the integration tests on kind
 integration-kind:
 	KIND_CLUSTER_NAME=integration ./integration/kind-with-registry.sh
-	KUBECONFIG="$(kind get kubeconfig-path --name="integration")" go test -mod vendor -p $(GO_PARALLEL_JOBS) -tags 'integration' -timeout 30m ./integration -count 1
+	KUBECONFIG="$(kind get kubeconfig-path --name="integration")" go test -p $(GO_PARALLEL_JOBS) -tags 'integration' -timeout 30m ./integration -count 1
 	kind delete cluster --name=integration
 
 # Run the extension integration tests against the current kubecontext
@@ -102,14 +102,14 @@ goimports:
 	goimports -w -l $(GOIMPORTS_LOCAL_ARG) cmd/ integration/ internal/ pkg/
 
 benchmark:
-	go test -mod vendor -run=XXX -bench=. ./...
+	go test -run=XXX -bench=. ./...
 
 golangci-lint:
 ifneq ($(CIRCLECI),true)
-	GOFLAGS="-mod=vendor" golangci-lint run $(LINT_FLAGS) -v --timeout 300s
+	golangci-lint run $(LINT_FLAGS) -v --timeout 300s
 else
 	mkdir -p test-results
-	GOFLAGS="-mod=vendor" golangci-lint run -v --timeout 300s --output.junit-xml.path=test-results/lint.xml
+	golangci-lint run -v --timeout 300s --output.junit-xml.path=test-results/lint.xml
 endif
 
 wire:
@@ -139,10 +139,7 @@ storybook:
 	cd web && yarn install
 	cd web && yarn storybook
 
-ensure: vendor
-
-vendor:
-	go mod vendor
+ensure:
 	go mod tidy
 
 cli-docs:
