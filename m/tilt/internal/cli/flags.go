@@ -1,6 +1,7 @@
 package cli
 
 import (
+	"net/url"
 	"os"
 	"strconv"
 	"strings"
@@ -9,10 +10,15 @@ import (
 	"github.com/spf13/cobra"
 
 	"github.com/defn/dev/m/tilt/internal/hud"
-	"github.com/defn/dev/m/tilt/internal/k8s"
 	"github.com/defn/dev/m/tilt/internal/tiltfile"
 	"github.com/defn/dev/m/tilt/pkg/model"
 )
+
+// KubeContextOverride is the kube context override from command-line flags.
+type KubeContextOverride string
+
+// NamespaceOverride is the namespace override from command-line flags.
+type NamespaceOverride string
 
 var (
 	defaultWebHost       = "localhost"
@@ -73,8 +79,7 @@ func addStartSnapshotViewServerFlags(cmd *cobra.Command) {
 }
 
 func addDevServerFlags(cmd *cobra.Command) {
-	cmd.Flags().IntVar(&webDevPort, "webdev-port", DefaultWebDevPort, "Port for the Tilt Dev Webpack server. Only applies when using --web-mode=local")
-	cmd.Flags().Var(&webModeFlag, "web-mode", "Values: local, prod. Controls whether to use prod assets or a local dev server. (If flag not specified: if Tilt was built from source, it will use a local asset server; otherwise, prod assets.)")
+	// Dev server flags removed - webview is disabled
 }
 
 func addNamespaceFlag(cmd *cobra.Command) {
@@ -124,10 +129,37 @@ func addLogFilterFlags(cmd *cobra.Command, prefix string) {
 
 var kubeContextOverride string
 
-func ProvideKubeContextOverride() k8s.KubeContextOverride {
-	return k8s.KubeContextOverride(kubeContextOverride)
+func ProvideKubeContextOverride() KubeContextOverride {
+	return KubeContextOverride(kubeContextOverride)
 }
 
-func ProvideNamespaceOverride() k8s.NamespaceOverride {
-	return k8s.NamespaceOverride(namespaceOverride)
+func ProvideNamespaceOverride() NamespaceOverride {
+	return NamespaceOverride(namespaceOverride)
+}
+
+func provideWebHost() model.WebHost {
+	host := defaultWebHost
+	if webHostFlag != "" {
+		host = webHostFlag
+	}
+	return model.WebHost(host)
+}
+
+func provideWebPort() model.WebPort {
+	port := defaultWebPort
+	if webPortFlag != 0 {
+		port = webPortFlag
+	}
+	return model.WebPort(port)
+}
+
+func provideWebURL(webHost model.WebHost, webPort model.WebPort) (model.WebURL, bool) {
+	if webPort == 0 {
+		return model.WebURL{}, false
+	}
+	u := &url.URL{
+		Scheme: "http",
+		Host:   string(webHost) + ":" + strconv.Itoa(int(webPort)),
+	}
+	return model.WebURL(*u), true
 }

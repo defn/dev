@@ -8,8 +8,6 @@ import (
 	"github.com/tilt-dev/wmclient/pkg/analytics"
 
 	tiltanalytics "github.com/defn/dev/m/tilt/internal/analytics"
-	"github.com/defn/dev/m/tilt/internal/k8s"
-	"github.com/defn/dev/m/tilt/internal/store/k8sconv"
 	"github.com/defn/dev/m/tilt/internal/timecmp"
 	"github.com/defn/dev/m/tilt/internal/token"
 	"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1"
@@ -87,8 +85,6 @@ type EngineState struct {
 	Token        token.Token
 	TeamID       string
 
-	DockerPruneSettings model.DockerPruneSettings
-
 	TelemetrySettings model.TelemetrySettings
 
 	UserConfigState model.UserConfigState
@@ -100,25 +96,14 @@ type EngineState struct {
 	// 4) ConfigsController dispatches a TiltfileCreateAction, to copy the apiserver data into the EngineState
 	DesiredTiltfilePath string
 
-	// KubernetesResources by name.
-	// Updated to match KubernetesApply + KubernetesDiscovery
-	KubernetesResources map[string]*k8sconv.KubernetesResource `json:"-"`
-
 	// API-server-based data models. Stored in EngineState
 	// to assist in migration.
-	Cmds                  map[string]*Cmd                           `json:"-"`
-	Tiltfiles             map[string]*v1alpha1.Tiltfile             `json:"-"`
-	FileWatches           map[string]*v1alpha1.FileWatch            `json:"-"`
-	KubernetesApplys      map[string]*v1alpha1.KubernetesApply      `json:"-"`
-	KubernetesDiscoverys  map[string]*v1alpha1.KubernetesDiscovery  `json:"-"`
-	UIResources           map[string]*v1alpha1.UIResource           `json:"-"`
-	ConfigMaps            map[string]*v1alpha1.ConfigMap            `json:"-"`
-	LiveUpdates           map[string]*v1alpha1.LiveUpdate           `json:"-"`
-	Clusters              map[string]*v1alpha1.Cluster              `json:"-"`
-	UIButtons             map[string]*v1alpha1.UIButton             `json:"-"`
-	ImageMaps             map[string]*v1alpha1.ImageMap             `json:"-"`
-	DockerImages          map[string]*v1alpha1.DockerImage          `json:"-"`
-	CmdImages             map[string]*v1alpha1.CmdImage             `json:"-"`
+	Cmds        map[string]*Cmd                `json:"-"`
+	Tiltfiles   map[string]*v1alpha1.Tiltfile  `json:"-"`
+	FileWatches map[string]*v1alpha1.FileWatch `json:"-"`
+	UIResources map[string]*v1alpha1.UIResource `json:"-"`
+	ConfigMaps  map[string]*v1alpha1.ConfigMap  `json:"-"`
+	UIButtons   map[string]*v1alpha1.UIButton   `json:"-"`
 }
 
 func (e *EngineState) MainTiltfilePath() string {
@@ -149,14 +134,6 @@ func (e *EngineState) ManifestNamesForTargetID(id model.TargetID) []model.Manife
 	result := make([]model.ManifestName, 0)
 	for mn, mt := range e.ManifestTargets {
 		manifest := mt.Manifest
-		for _, iTarget := range manifest.ImageTargets {
-			if iTarget.ID() == id {
-				result = append(result, mn)
-			}
-		}
-		if manifest.K8sTarget().ID() == id {
-			result = append(result, mn)
-		}
 		if manifest.LocalTarget().ID() == id {
 			result = append(result, mn)
 		}
@@ -363,13 +340,7 @@ func (e *EngineState) MainTiltfileState() *ManifestState {
 }
 
 func (e *EngineState) HasBuild() bool {
-	for _, m := range e.Manifests() {
-		for _, targ := range m.ImageTargets {
-			if targ.IsDockerBuild() || targ.IsCustomBuild() {
-				return true
-			}
-		}
-	}
+	// No image builds in local-only mode
 	return false
 }
 
@@ -391,6 +362,10 @@ func (e *EngineState) InitialBuildsCompleted() bool {
 
 	return true
 }
+
+// BuildResult is the result of a build for a target.
+// Currently unused in local-only mode but kept for interface compatibility.
+type BuildResult interface{}
 
 type BuildStatus struct {
 	// We keep track of a change with two fields:
@@ -559,7 +534,6 @@ func NewState() *EngineState {
 	ret.LogStore = logstore.NewLogStore()
 	ret.ManifestTargets = make(map[model.ManifestName]*ManifestTarget)
 	ret.Secrets = model.SecretSet{}
-	ret.DockerPruneSettings = model.DefaultDockerPruneSettings()
 	ret.VersionSettings = model.VersionSettings{
 		CheckUpdates: true,
 	}
@@ -580,17 +554,9 @@ func NewState() *EngineState {
 	ret.Cmds = make(map[string]*Cmd)
 	ret.Tiltfiles = make(map[string]*v1alpha1.Tiltfile)
 	ret.FileWatches = make(map[string]*v1alpha1.FileWatch)
-	ret.KubernetesApplys = make(map[string]*v1alpha1.KubernetesApply)
-	ret.KubernetesDiscoverys = make(map[string]*v1alpha1.KubernetesDiscovery)
-	ret.KubernetesResources = make(map[string]*k8sconv.KubernetesResource)
 	ret.UIResources = make(map[string]*v1alpha1.UIResource)
 	ret.ConfigMaps = make(map[string]*v1alpha1.ConfigMap)
-	ret.LiveUpdates = make(map[string]*v1alpha1.LiveUpdate)
-	ret.Clusters = make(map[string]*v1alpha1.Cluster)
 	ret.UIButtons = make(map[string]*v1alpha1.UIButton)
-	ret.ImageMaps = make(map[string]*v1alpha1.ImageMap)
-	ret.DockerImages = make(map[string]*v1alpha1.DockerImage)
-	ret.CmdImages = make(map[string]*v1alpha1.CmdImage)
 
 	return ret
 }
@@ -615,13 +581,9 @@ func NewManifestState(m model.Manifest) *ManifestState {
 
 	ms.ResetBuildStatus(m)
 
-	if m.IsK8s() {
-		ms.RuntimeState = NewK8sRuntimeState(m)
-	} else if m.IsLocal() {
+	if m.IsLocal() {
 		ms.RuntimeState = LocalRuntimeState{}
 	}
-
-	// For historical reasons, DC state is initialized differently.
 
 	return ms
 }
@@ -649,16 +611,6 @@ func (ms *ManifestState) TargetID() model.TargetID {
 func (ms *ManifestState) BuildStatus(id model.TargetID) (*BuildStatus, bool) {
 	result, ok := ms.BuildStatuses[id]
 	return result, ok
-}
-
-func (ms *ManifestState) K8sRuntimeState() K8sRuntimeState {
-	ret, _ := ms.RuntimeState.(K8sRuntimeState)
-	return ret
-}
-
-func (ms *ManifestState) IsK8s() bool {
-	_, ok := ms.RuntimeState.(K8sRuntimeState)
-	return ok
 }
 
 func (ms *ManifestState) LocalRuntimeState() LocalRuntimeState {
@@ -699,20 +651,6 @@ func (ms *ManifestState) AddCompletedBuild(bs model.BuildRecord) {
 
 func (ms *ManifestState) StartedFirstBuild() bool {
 	return ms.IsBuilding() || len(ms.BuildHistory) > 0
-}
-
-func (ms *ManifestState) MostRecentPod() v1alpha1.Pod {
-	return ms.K8sRuntimeState().MostRecentPod()
-}
-
-func (ms *ManifestState) PodWithID(pid k8s.PodID) (*v1alpha1.Pod, bool) {
-	name := string(pid)
-	for _, pod := range ms.K8sRuntimeState().GetPods() {
-		if name == pod.Name {
-			return &pod, true
-		}
-	}
-	return nil, false
 }
 
 func (ms *ManifestState) AddPendingFileChange(targetID model.TargetID, file string, timestamp time.Time) {
@@ -887,33 +825,6 @@ func (ms *ManifestState) RuntimeStatus(triggerMode model.TriggerMode) v1alpha1.R
 var _ model.TargetStatus = &ManifestState{}
 
 func ManifestTargetEndpoints(mt *ManifestTarget) (endpoints []model.Link) {
-	if mt.Manifest.IsK8s() {
-		k8sTarg := mt.Manifest.K8sTarget()
-		endpoints = append(endpoints, k8sTarg.Links...)
-
-		// If the user specified port-forwards in the Tiltfile, we
-		// assume that's what they want to see in the UI (so it
-		// takes precedence over any load balancer URLs
-		portForwardSpec := k8sTarg.PortForwardTemplateSpec
-		if portForwardSpec != nil && len(portForwardSpec.Forwards) > 0 {
-			for _, pf := range portForwardSpec.Forwards {
-				endpoints = append(endpoints, model.PortForwardToLink(pf))
-			}
-			return endpoints
-		}
-
-		lbEndpoints := []model.Link{}
-		for _, u := range mt.State.K8sRuntimeState().LBs {
-			if u != nil {
-				lbEndpoints = append(lbEndpoints, model.Link{URL: u})
-			}
-		}
-		// Sort so the ordering of LB endpoints is deterministic
-		// (otherwise it's not, because they live in a map)
-		sort.Sort(model.ByURL(lbEndpoints))
-		endpoints = append(endpoints, lbEndpoints...)
-	}
-
 	localResourceLinks := mt.Manifest.LocalTarget().Links
 	if len(localResourceLinks) > 0 {
 		return localResourceLinks

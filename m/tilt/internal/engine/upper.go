@@ -12,23 +12,12 @@ import (
 	tiltanalytics "github.com/defn/dev/m/tilt/internal/analytics"
 	"github.com/defn/dev/m/tilt/internal/controllers/core/filewatch"
 	ctrltiltfile "github.com/defn/dev/m/tilt/internal/controllers/core/tiltfile"
-	"github.com/defn/dev/m/tilt/internal/engine/k8swatch"
 	"github.com/defn/dev/m/tilt/internal/engine/local"
 	"github.com/defn/dev/m/tilt/internal/hud"
 	"github.com/defn/dev/m/tilt/internal/hud/prompt"
-	"github.com/defn/dev/m/tilt/internal/hud/server"
-	"github.com/defn/dev/m/tilt/internal/k8s"
 	"github.com/defn/dev/m/tilt/internal/store"
-	"github.com/defn/dev/m/tilt/internal/store/buildcontrols"
-	"github.com/defn/dev/m/tilt/internal/store/clusters"
-	"github.com/defn/dev/m/tilt/internal/store/cmdimages"
 	"github.com/defn/dev/m/tilt/internal/store/configmaps"
-	"github.com/defn/dev/m/tilt/internal/store/dockerimages"
 	"github.com/defn/dev/m/tilt/internal/store/filewatches"
-	"github.com/defn/dev/m/tilt/internal/store/imagemaps"
-	"github.com/defn/dev/m/tilt/internal/store/kubernetesapplys"
-	"github.com/defn/dev/m/tilt/internal/store/kubernetesdiscoverys"
-	"github.com/defn/dev/m/tilt/internal/store/liveupdates"
 	"github.com/defn/dev/m/tilt/internal/store/sessions"
 	"github.com/defn/dev/m/tilt/internal/store/tiltfiles"
 	"github.com/defn/dev/m/tilt/internal/store/uibuttons"
@@ -129,14 +118,6 @@ func upperReducerFn(ctx context.Context, state *store.EngineState, action store.
 	case filewatch.FileWatchUpdateStatusAction:
 		filewatch.HandleFileWatchUpdateStatusEvent(ctx, state, action)
 
-	case k8swatch.ServiceChangeAction:
-		handleServiceEvent(ctx, state, action)
-	case store.K8sEventAction:
-		handleK8sEvent(ctx, state, action)
-	case buildcontrols.BuildCompleteAction:
-		buildcontrols.HandleBuildCompleted(ctx, state, action)
-	case buildcontrols.BuildStartedAction:
-		buildcontrols.HandleBuildStarted(ctx, state, action)
 	case ctrltiltfile.ConfigsReloadStartedAction:
 		ctrltiltfile.HandleConfigsReloadStarted(ctx, state, action)
 	case ctrltiltfile.ConfigsReloadedAction:
@@ -159,8 +140,6 @@ func upperReducerFn(ctx context.Context, state *store.EngineState, action store.
 		sessions.HandleSessionStatusUpdateAction(state, action)
 	case prompt.SwitchTerminalModeAction:
 		handleSwitchTerminalModeAction(state, action)
-	case server.OverrideTriggerModeAction:
-		handleOverrideTriggerModeAction(ctx, state, action)
 	case local.CmdCreateAction:
 		local.HandleCmdCreateAction(state, action)
 	case local.CmdUpdateStatusAction:
@@ -175,22 +154,6 @@ func upperReducerFn(ctx context.Context, state *store.EngineState, action store.
 		filewatches.HandleFileWatchUpsertAction(state, action)
 	case filewatches.FileWatchDeleteAction:
 		filewatches.HandleFileWatchDeleteAction(state, action)
-	case dockerimages.DockerImageUpsertAction:
-		dockerimages.HandleDockerImageUpsertAction(state, action)
-	case dockerimages.DockerImageDeleteAction:
-		dockerimages.HandleDockerImageDeleteAction(state, action)
-	case cmdimages.CmdImageUpsertAction:
-		cmdimages.HandleCmdImageUpsertAction(state, action)
-	case cmdimages.CmdImageDeleteAction:
-		cmdimages.HandleCmdImageDeleteAction(state, action)
-	case kubernetesapplys.KubernetesApplyUpsertAction:
-		kubernetesapplys.HandleKubernetesApplyUpsertAction(state, action)
-	case kubernetesapplys.KubernetesApplyDeleteAction:
-		kubernetesapplys.HandleKubernetesApplyDeleteAction(state, action)
-	case kubernetesdiscoverys.KubernetesDiscoveryUpsertAction:
-		kubernetesdiscoverys.HandleKubernetesDiscoveryUpsertAction(state, action)
-	case kubernetesdiscoverys.KubernetesDiscoveryDeleteAction:
-		kubernetesdiscoverys.HandleKubernetesDiscoveryDeleteAction(state, action)
 	case uiresources.UIResourceUpsertAction:
 		uiresources.HandleUIResourceUpsertAction(state, action)
 	case uiresources.UIResourceDeleteAction:
@@ -199,22 +162,10 @@ func upperReducerFn(ctx context.Context, state *store.EngineState, action store.
 		configmaps.HandleConfigMapUpsertAction(state, action)
 	case configmaps.ConfigMapDeleteAction:
 		configmaps.HandleConfigMapDeleteAction(state, action)
-	case liveupdates.LiveUpdateUpsertAction:
-		liveupdates.HandleLiveUpdateUpsertAction(state, action)
-	case liveupdates.LiveUpdateDeleteAction:
-		liveupdates.HandleLiveUpdateDeleteAction(state, action)
-	case clusters.ClusterUpsertAction:
-		clusters.HandleClusterUpsertAction(state, action)
-	case clusters.ClusterDeleteAction:
-		clusters.HandleClusterDeleteAction(state, action)
 	case uibuttons.UIButtonUpsertAction:
 		uibuttons.HandleUIButtonUpsertAction(state, action)
 	case uibuttons.UIButtonDeleteAction:
 		uibuttons.HandleUIButtonDeleteAction(state, action)
-	case imagemaps.ImageMapUpsertAction:
-		imagemaps.HandleImageMapUpsertAction(state, action)
-	case imagemaps.ImageMapDeleteAction:
-		imagemaps.HandleImageMapDeleteAction(state, action)
 	default:
 		state.FatalError = fmt.Errorf("unrecognized action: %T", action)
 	}
@@ -228,28 +179,6 @@ func handleLogAction(state *store.EngineState, action store.LogAction) {
 
 func handleSwitchTerminalModeAction(state *store.EngineState, action prompt.SwitchTerminalModeAction) {
 	state.TerminalMode = action.Mode
-}
-
-func handleServiceEvent(ctx context.Context, state *store.EngineState, action k8swatch.ServiceChangeAction) {
-	service := action.Service
-	ms, ok := state.ManifestState(action.ManifestName)
-	if !ok {
-		return
-	}
-
-	runtime := ms.K8sRuntimeState()
-	runtime.LBs[k8s.ServiceName(service.Name)] = action.URL
-}
-
-func handleK8sEvent(ctx context.Context, state *store.EngineState, action store.K8sEventAction) {
-	// TODO(nick): I think we would so something more intelligent here, where we
-	// have special treatment for different types of events, e.g.:
-	//
-	// - Attach Image Pulling/Pulled events to the pod state, and display how much
-	//   time elapsed between them.
-	// - Display Node unready events as part of a health indicator, and display how
-	//   long it takes them to resolve.
-	handleLogAction(state, action.ToLogAction(action.ManifestName))
 }
 
 func handleDumpEngineStateAction(ctx context.Context, engineState *store.EngineState) {
@@ -310,29 +239,4 @@ func handleAnalyticsNudgeSurfacedAction(ctx context.Context, state *store.Engine
 
 func handleTiltCloudStatusReceivedAction(state *store.EngineState, action store.TiltCloudStatusReceivedAction) {
 	state.SuggestedTiltVersion = action.SuggestedTiltVersion
-}
-
-func handleOverrideTriggerModeAction(ctx context.Context, state *store.EngineState,
-	action server.OverrideTriggerModeAction) {
-	// TODO(maia): in this implementation, overrides do NOT persist across Tiltfile loads
-	//   (i.e. the next Tiltfile load will wipe out the override we just put in place).
-	//   If we want to keep this functionality, the next step is to store the set of overrides
-	//   on the engine state, and whenever we load the manifest from the Tiltfile, apply
-	//   any necessary overrides.
-
-	// We validate trigger mode when we receive a request, so this should never happen
-	if !model.ValidTriggerMode(action.TriggerMode) {
-		logger.Get(ctx).Errorf("INTERNAL ERROR overriding trigger mode: invalid trigger mode %d", action.TriggerMode)
-		return
-	}
-
-	for _, mName := range action.ManifestNames {
-		mt, ok := state.ManifestTargets[mName]
-		if !ok {
-			// We validate manifest names when we receive a request, so this should never happen
-			logger.Get(ctx).Errorf("INTERNAL ERROR overriding trigger mode: no such manifest %q", mName)
-			return
-		}
-		mt.Manifest.TriggerMode = action.TriggerMode
-	}
 }

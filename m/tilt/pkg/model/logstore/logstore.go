@@ -6,11 +6,8 @@ import (
 	"strings"
 	"time"
 
-	"google.golang.org/protobuf/types/known/timestamppb"
-
 	"github.com/defn/dev/m/tilt/pkg/logger"
 	"github.com/defn/dev/m/tilt/pkg/model"
-	"github.com/defn/dev/m/tilt/pkg/webview"
 )
 
 // All parts of Tilt should display logs incrementally.
@@ -505,45 +502,6 @@ func (s *LogStore) ContinuingLinesWithOptions(checkpoint Checkpoint, opts LineOp
 		}, result...)
 	}
 	return result
-}
-
-func (s *LogStore) ToLogList(fromCheckpoint Checkpoint) (*webview.LogList, error) {
-	spans := make(map[string]*webview.LogSpan, len(s.spans))
-	for spanID, span := range s.spans {
-		spans[string(spanID)] = &webview.LogSpan{
-			ManifestName: span.ManifestName.String(),
-		}
-	}
-
-	startIndex := s.checkpointToIndex(fromCheckpoint)
-	if startIndex >= len(s.segments) {
-		// No logs to send down.
-		return &webview.LogList{
-			FromCheckpoint: -1,
-			ToCheckpoint:   -1,
-		}, nil
-	}
-
-	segments := make([]*webview.LogSegment, 0, len(s.segments)-startIndex)
-	for i := startIndex; i < len(s.segments); i++ {
-		segment := s.segments[i]
-		time := timestamppb.New(segment.Time)
-		segments = append(segments, &webview.LogSegment{
-			SpanId: string(segment.SpanID),
-			Level:  webview.LogLevel(segment.Level.ToProtoID()),
-			Time:   time,
-			Text:   string(segment.Text),
-			Anchor: segment.Anchor,
-			Fields: segment.Fields,
-		})
-	}
-
-	return &webview.LogList{
-		Spans:          spans,
-		Segments:       segments,
-		FromCheckpoint: int32(s.checkpointFromIndex(startIndex)),
-		ToCheckpoint:   int32(s.Checkpoint()),
-	}, nil
 }
 
 func (s *LogStore) String() string {

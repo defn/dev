@@ -144,14 +144,3 @@ func ToUnixCmds(cmds []string) []Cmd {
 	return res
 }
 
-func ToRun(cmd Cmd) Run {
-	return Run{Cmd: cmd}
-}
-
-func ToRuns(cmds []Cmd) []Run {
-	res := make([]Run, len(cmds))
-	for i, cmd := range cmds {
-		res[i] = ToRun(cmd)
-	}
-	return res
-}

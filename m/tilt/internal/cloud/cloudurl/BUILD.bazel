@@ -1,8 +1,0 @@
-load("@io_bazel_rules_go//go:def.bzl", "go_library")
-
-go_library(
-    name = "cloudurl",
-    srcs = ["url.go"],
-    importpath = "github.com/defn/dev/m/tilt/internal/cloud/cloudurl",
-    visibility = ["//tilt:__subpackages__"],
-)

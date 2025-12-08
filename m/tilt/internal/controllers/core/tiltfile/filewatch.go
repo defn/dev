@@ -2,7 +2,6 @@ package tiltfile
 
 import (
 	"fmt"
-	"path/filepath"
 
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 
@@ -29,9 +28,7 @@ type WatchableTarget interface {
 	ID() model.TargetID
 }
 
-var _ WatchableTarget = model.ImageTarget{}
 var _ WatchableTarget = model.LocalTarget{}
-var _ WatchableTarget = model.K8sTarget{}
 
 func specForTarget(t WatchableTarget, globalIgnores []model.Dockerignore) *v1alpha1.FileWatchSpec {
 	watchedPaths := append([]string(nil), t.Dependencies()...)
@@ -140,20 +137,6 @@ func globalIgnores(watchInputs WatchInputs) []model.Dockerignore {
 		ignores = append(ignores, watchInputs.Tiltignore)
 	}
 	ignores = append(ignores, watchInputs.WatchSettings.Ignores...)
-
-	for _, manifest := range watchInputs.Manifests {
-		for _, iTarget := range manifest.ImageTargets {
-			customBuild := iTarget.CustomBuildInfo()
-			if customBuild.OutputsImageRefTo != "" {
-				// this could be smarter and try to group by local path
-				ignores = append(ignores, model.Dockerignore{
-					LocalPath: filepath.Dir(customBuild.OutputsImageRefTo),
-					Source:    "outputs_image_ref_to",
-					Patterns:  []string{filepath.Base(customBuild.OutputsImageRefTo)},
-				})
-			}
-		}
-	}
 
 	return ignores
 }

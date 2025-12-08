@@ -6,7 +6,6 @@ import (
 	"sync"
 	"time"
 
-	dockertypes "github.com/docker/docker/api/types"
 	"github.com/pkg/errors"
 	apierrors "k8s.io/apimachinery/pkg/api/errors"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
@@ -23,11 +22,8 @@ import (
 	"github.com/defn/dev/m/tilt/internal/controllers/apis/configmap"
 	"github.com/defn/dev/m/tilt/internal/controllers/apis/trigger"
 	"github.com/defn/dev/m/tilt/internal/controllers/indexer"
-	"github.com/defn/dev/m/tilt/internal/docker"
-	"github.com/defn/dev/m/tilt/internal/k8s"
 	"github.com/defn/dev/m/tilt/internal/sliceutils"
 	"github.com/defn/dev/m/tilt/internal/store"
-	"github.com/defn/dev/m/tilt/internal/store/buildcontrols"
 	"github.com/defn/dev/m/tilt/internal/store/tiltfiles"
 	"github.com/defn/dev/m/tilt/internal/tiltfile"
 	"github.com/defn/dev/m/tilt/internal/timecmp"
@@ -38,28 +34,17 @@ import (
 )
 
 type Reconciler struct {
-	mu                   sync.Mutex
-	st                   store.RStore
-	tfl                  tiltfile.TiltfileLoader
-	dockerClient         docker.Client
-	ctrlClient           ctrlclient.Client
-	k8sContextOverride   k8s.KubeContextOverride
-	k8sNamespaceOverride k8s.NamespaceOverride
-	indexer              *indexer.Indexer
-	requeuer             *indexer.Requeuer
-	engineMode           store.EngineMode
-	loadCount            int // used to differentiate spans
-	ciTimeoutFlag        model.CITimeoutFlag
+	mu            sync.Mutex
+	st            store.RStore
+	tfl           tiltfile.TiltfileLoader
+	ctrlClient    ctrlclient.Client
+	indexer       *indexer.Indexer
+	requeuer      *indexer.Requeuer
+	engineMode    store.EngineMode
+	loadCount     int // used to differentiate spans
+	ciTimeoutFlag model.CITimeoutFlag
 
 	runs map[types.NamespacedName]*runStatus
-
-	// dockerConnectMetricReporter ensures we only report a single Docker connect status
-	// event per `tilt up`. Currently, a client is initialized on start (via wire/DI)
-	// and if there's an error, an exploding client is created; we'll never attempt
-	// to make a new one after that, so reporting on subsequent Tiltfile loads is
-	// not useful, as there's no way its status can change currently (a restart of
-	// Tilt is required).
-	dockerConnectMetricReporter sync.Once
 }
 
 func (r *Reconciler) CreateBuilder(mgr ctrl.Manager) (*builder.Builder, error) {
@@ -82,26 +67,20 @@ func (r *Reconciler) CreateBuilder(mgr ctrl.Manager) (*builder.Builder, error) {
 func NewReconciler(
 	st store.RStore,
 	tfl tiltfile.TiltfileLoader,
-	dockerClient docker.Client,
 	ctrlClient ctrlclient.Client,
 	scheme *runtime.Scheme,
 	engineMode store.EngineMode,
-	k8sContextOverride k8s.KubeContextOverride,
-	k8sNamespaceOverride k8s.NamespaceOverride,
 	ciTimeoutFlag model.CITimeoutFlag,
 ) *Reconciler {
 	return &Reconciler{
-		st:                   st,
-		tfl:                  tfl,
-		dockerClient:         dockerClient,
-		ctrlClient:           ctrlClient,
-		indexer:              indexer.NewIndexer(scheme, indexTiltfile),
-		runs:                 make(map[types.NamespacedName]*runStatus),
-		requeuer:             indexer.NewRequeuer(),
-		engineMode:           engineMode,
-		k8sContextOverride:   k8sContextOverride,
-		k8sNamespaceOverride: k8sNamespaceOverride,
-		ciTimeoutFlag:        ciTimeoutFlag,
+		st:            st,
+		tfl:           tfl,
+		ctrlClient:    ctrlClient,
+		indexer:       indexer.NewIndexer(scheme, indexTiltfile),
+		runs:          make(map[types.NamespacedName]*runStatus),
+		requeuer:      indexer.NewRequeuer(),
+		engineMode:    engineMode,
+		ciTimeoutFlag: ciTimeoutFlag,
 	}
 }
 
@@ -122,7 +101,7 @@ func (r *Reconciler) Reconcile(ctx context.Context, request reconcile.Request) (
 		r.deleteExistingRun(nn)
 
 		// Delete owned objects
-		err := updateOwnedObjects(ctx, r.ctrlClient, nn, nil, nil, false, r.ciTimeoutFlag, r.engineMode, r.defaultK8sConnection())
+		err := updateOwnedObjects(ctx, r.ctrlClient, nn, nil, nil, false, r.ciTimeoutFlag, r.engineMode)
 		if err != nil {
 			return ctrl.Result{}, err
 		}
@@ -137,7 +116,7 @@ func (r *Reconciler) Reconcile(ctx context.Context, request reconcile.Request) (
 	run := r.runs[nn]
 	if run == nil {
 		// Initialize the UISession and filewatch if this has never been initialized before.
-		err := updateOwnedObjects(ctx, r.ctrlClient, nn, &tf, nil, false, r.ciTimeoutFlag, r.engineMode, r.defaultK8sConnection())
+		err := updateOwnedObjects(ctx, r.ctrlClient, nn, &tf, nil, false, r.ciTimeoutFlag, r.engineMode)
 		if err != nil {
 			return ctrl.Result{}, err
 		}
@@ -304,11 +283,7 @@ func (r *Reconciler) run(ctx context.Context, nn types.NamespacedName, tf *v1alp
 		Reason:       entry.BuildReason,
 	})
 
-	buildcontrols.LogBuildEntry(ctx, buildcontrols.BuildEntry{
-		Name:         entry.Name,
-		BuildReason:  entry.BuildReason,
-		FilesChanged: entry.FilesChanged,
-	})
+	logger.Get(ctx).Infof("Loading Tiltfile")
 
 	if entry.BuildReason.Has(model.BuildReasonFlagTiltfileArgs) {
 		logger.Get(ctx).Infof("Tiltfile args changed to: %v", entry.Args)
@@ -321,22 +296,6 @@ func (r *Reconciler) run(ctx context.Context, nn types.NamespacedName, tf *v1alp
 	// system might make sense here.
 	if tlr.Error == nil && len(tlr.Manifests) == 0 && tf.Name == model.MainTiltfileManifestName.String() {
 		tlr.Error = fmt.Errorf("No resources found. Check out https://docs.tilt.dev/tutorial.html to get started!")
-	}
-
-	if tlr.HasOrchestrator(model.OrchestratorK8s) {
-		r.dockerClient.SetOrchestrator(model.OrchestratorK8s)
-	}
-
-	if requiresDocker(tlr) {
-		dockerErr := r.dockerClient.CheckConnected()
-		var serverVersion dockertypes.Version
-		if dockerErr == nil {
-			serverVersion, dockerErr = r.dockerClient.ServerVersion(ctx)
-		}
-		if tlr.Error == nil && dockerErr != nil {
-			tlr.Error = errors.Wrap(dockerErr, "Failed to connect to Docker")
-		}
-		r.reportDockerConnectionEvent(ctx, dockerErr == nil, serverVersion)
 	}
 
 	if ctx.Err() == context.Canceled {
@@ -362,8 +321,7 @@ func (r *Reconciler) handleLoaded(
 	tlr *tiltfile.TiltfileLoadResult) error {
 	// TODO(nick): Rewrite to handle multiple tiltfiles.
 	changeEnabledResources := entry.ArgsChanged && tlr != nil && tlr.Error == nil
-	err := updateOwnedObjects(ctx, r.ctrlClient, nn, tf, tlr, changeEnabledResources, r.ciTimeoutFlag, r.engineMode,
-		r.defaultK8sConnection())
+	err := updateOwnedObjects(ctx, r.ctrlClient, nn, tf, tlr, changeEnabledResources, r.ciTimeoutFlag, r.engineMode)
 	if err != nil {
 		// If updating the API server fails, just return the error, so that the
 		// reconciler will retry.
@@ -386,7 +344,6 @@ func (r *Reconciler) handleLoaded(
 		TelemetrySettings:     tlr.TelemetrySettings,
 		Secrets:               tlr.Secrets,
 		AnalyticsTiltfileOpt:  tlr.AnalyticsOpt,
-		DockerPruneSettings:   tlr.DockerPruneSettings,
 		CheckpointAtExecStart: entry.CheckpointAtExecStart,
 		VersionSettings:       tlr.VersionSettings,
 		UpdateSettings:        tlr.UpdateSettings,
@@ -447,26 +404,6 @@ func (r *Reconciler) enqueueTriggerQueue(ctx context.Context, obj client.Object)
 		}
 	}
 	return requests
-}
-
-// The kubernetes connection defined by the CLI.
-func (r *Reconciler) defaultK8sConnection() *v1alpha1.KubernetesClusterConnection {
-	return &v1alpha1.KubernetesClusterConnection{
-		Context:   string(r.k8sContextOverride),
-		Namespace: string(r.k8sNamespaceOverride),
-	}
-}
-
-func requiresDocker(tlr tiltfile.TiltfileLoadResult) bool {
-	for _, m := range tlr.Manifests {
-		for _, iTarget := range m.ImageTargets {
-			if iTarget.IsDockerBuild() {
-				return true
-			}
-		}
-	}
-
-	return false
 }
 
 // Represent the steps of Tiltfile execution.

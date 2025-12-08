@@ -10,30 +10,22 @@ import (
 	ctrlclient "sigs.k8s.io/controller-runtime/pkg/client"
 	"sigs.k8s.io/controller-runtime/pkg/reconcile"
 
-	"github.com/defn/dev/m/tilt/internal/hud/server"
 	"github.com/defn/dev/m/tilt/internal/store"
 	"github.com/defn/dev/m/tilt/internal/store/uiresources"
 	"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1"
 )
 
-// The uiresource.Reconciler is not a real reconciler because UIResource is not
-// a real API object.
-//
-// It's a fake status object that reports the Status of the legacy engine. The
-// uiresource.Reconciler wathces that status and broadcasts it to the legacy web
-// UI.
+// The uiresource.Reconciler watches UIResource objects and updates the store.
 type Reconciler struct {
 	client ctrlclient.Client
-	wsList *server.WebsocketList
 	store  store.RStore
 }
 
 var _ reconcile.Reconciler = &Reconciler{}
 
-func NewReconciler(client ctrlclient.Client, wsList *server.WebsocketList, store store.RStore) *Reconciler {
+func NewReconciler(client ctrlclient.Client, store store.RStore) *Reconciler {
 	return &Reconciler{
 		client: client,
-		wsList: wsList,
 		store:  store,
 	}
 }
@@ -46,19 +38,11 @@ func (r *Reconciler) Reconcile(ctx context.Context, req ctrl.Request) (ctrl.Resu
 	}
 
 	if apierrors.IsNotFound(err) || resource.ObjectMeta.DeletionTimestamp != nil {
-		r.wsList.ForEach(func(ws *server.WebsocketSubscriber) {
-			ws.SendUIResourceUpdate(ctx, req.NamespacedName, nil)
-		})
-
 		r.store.Dispatch(uiresources.NewUIResourceDeleteAction(req.Name))
 		return ctrl.Result{}, nil
 	}
 
 	r.store.Dispatch(uiresources.NewUIResourceUpsertAction(resource))
-
-	r.wsList.ForEach(func(ws *server.WebsocketSubscriber) {
-		ws.SendUIResourceUpdate(ctx, req.NamespacedName, resource)
-	})
 
 	return ctrl.Result{}, nil
 }

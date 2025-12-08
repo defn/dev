@@ -85,15 +85,12 @@ func (s Settings) EnabledResources(tf *v1alpha1.Tiltfile, manifests []model.Mani
 	return match(manifests, requestedManifests)
 }
 
-// add `manifestToAdd` and all of its transitive deps to `result`
+// add `manifestToAdd` to `result`
 func addManifestAndDeps(result map[model.ManifestName]bool, allManifestsByName map[model.ManifestName]model.Manifest, manifestToAdd model.ManifestName) {
 	if result[manifestToAdd] {
 		return
 	}
 	result[manifestToAdd] = true
-	for _, dep := range allManifestsByName[manifestToAdd].ResourceDependencies {
-		addManifestAndDeps(result, allManifestsByName, dep)
-	}
 }
 
 // If the user requested only a subset of manifests, get just those manifests
@@ -125,8 +122,7 @@ func match(manifests []model.Manifest, requestedManifests []model.ManifestName) 
 
 	var result []model.ManifestName
 	for _, m := range manifests {
-		// Default to including UnresourcedYAML ("Uncategorized") to match historical behavior.
-		if manifestsToRun[m.Name] || m.Name == model.UnresourcedYAMLManifestName {
+		if manifestsToRun[m.Name] {
 			result = append(result, m.Name)
 		}
 	}

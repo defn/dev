@@ -6,10 +6,8 @@ import (
 	"sync"
 
 	"github.com/defn/dev/m/tilt/internal/hud/view"
-	"github.com/defn/dev/m/tilt/internal/k8s"
 	"github.com/defn/dev/m/tilt/internal/ospath"
 	"github.com/defn/dev/m/tilt/internal/store"
-	"github.com/defn/dev/m/tilt/internal/store/k8sconv"
 	"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1"
 	"github.com/defn/dev/m/tilt/pkg/model"
 	"github.com/defn/dev/m/tilt/pkg/model/logstore"
@@ -118,28 +116,10 @@ func tiltfileResourceView(ms *store.ManifestState) view.Resource {
 func resourceInfoView(mt *store.ManifestTarget) view.ResourceInfoView {
 	runStatus := mt.RuntimeStatus()
 	switch state := mt.State.RuntimeState.(type) {
-	case store.K8sRuntimeState:
-		if mt.Manifest.PodReadinessMode() == model.PodReadinessIgnore {
-			return view.YAMLResourceInfo{
-				K8sDisplayNames: state.EntityDisplayNames(),
-			}
-		}
-		pod := state.MostRecentPod()
-		podID := k8s.PodID(pod.Name)
-		return view.K8sResourceInfo{
-			PodName:            pod.Name,
-			PodCreationTime:    pod.CreatedAt.Time,
-			PodUpdateStartTime: state.UpdateStartTime[podID],
-			PodStatus:          pod.Status,
-			PodRestarts:        int(state.VisiblePodContainerRestarts(podID)),
-			SpanID:             k8sconv.SpanIDForPod(mt.Manifest.Name, podID),
-			RunStatus:          runStatus,
-			DisplayNames:       state.EntityDisplayNames(),
-		}
 	case store.LocalRuntimeState:
 		return view.NewLocalResourceInfo(runStatus, state.PID, state.SpanID)
 	default:
-		// This is silly but it was the old behavior.
-		return view.K8sResourceInfo{}
+		// Return empty local resource info for unknown types
+		return view.LocalResourceInfo{}
 	}
 }

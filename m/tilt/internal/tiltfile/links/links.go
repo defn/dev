@@ -51,7 +51,7 @@ func strToLink(s starlark.String) (model.Link, error) {
 	if err != nil {
 		return model.Link{}, errors.Wrapf(err, "validating URL %q", string(s))
 	}
-	return model.Link{URL: withScheme}, nil
+	return model.Link{URL: withScheme.String()}, nil
 }
 
 func parseAndMaybeAddScheme(uStr string) (*url.URL, error) {
@@ -106,7 +106,7 @@ func (e Plugin) link(thread *starlark.Thread, fn *starlark.Builtin, args starlar
 			"name": starlark.String(name),
 		}),
 		Link: model.Link{
-			URL:  withScheme,
+			URL:  withScheme.String(),
 			Name: name,
 		},
 	}, nil

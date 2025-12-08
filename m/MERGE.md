@@ -130,10 +130,49 @@ local_resource(
 
 ## Build Status
 
-**Status**: Not yet compiling - imports need cleanup
+**Status**: ✅ BUILD SUCCEEDS - All K8s/Docker code removed
 
-The refactoring removed many packages, and remaining code still imports them. Next steps:
-1. Fix import errors in remaining files
-2. Update wire dependency injection
-3. Regenerate protobuf/generated files
-4. Run tests
+```bash
+$ go build ./tilt/...
+# (no output = success)
+```
+
+### Completed Work
+
+#### CLI Commands Removed
+- `apiresources`, `apply`, `create`, `delete`, `describe`, `disable`, `doctor`, `down`
+- `dump`, `edit`, `enable`, `get`, `logs`, `openapi`, `patch`, `shell`
+- `snapshot`, `trigger`, `updog`, `wait`
+
+**Remaining commands**: `up`, `ci`, `version`, `args`, `alpha tiltfile-result`, `analytics`, `lsp`
+
+#### Major Directories Removed
+- `internal/cloud/` - Cloud integration
+- `internal/engine/analytics/` - Analytics reporting
+- `internal/engine/telemetry/` - Telemetry
+- `internal/hud/server/` - HTTP/WebSocket server
+- `internal/hud/webview/` - Web UI conversion
+- `internal/testutils/servicebuilder/` - K8s test builders
+- `pkg/webview/` - Web UI protobuf definitions
+
+#### API Types Removed
+- `pkg/apis/core/v1alpha1/generated.pb.go` - K8s/Docker protobuf
+- `pkg/apis/core/v1alpha1/generated.proto`
+- `pkg/apis/core/v1alpha1/zz_generated.conversion.go`
+- `pkg/apis/core/v1alpha1/zz_generated.defaults.go`
+
+#### Key Files Rewritten
+- `internal/cli/cli.go` - Simplified to essential commands only
+- `internal/cli/wire_gen.go` - Stub implementations (wire not configured)
+- `internal/tiltfile/tiltfile_state.go` - Complete rewrite, local resources only
+- `internal/tiltfile/helpers.go` - New helper functions
+- `pkg/model/manifest.go` - Simplified manifest for local resources
+- `internal/controllers/core/tiltfile/api.go` - Removed K8s cluster handling
+- `internal/controllers/core/session/status.go` - Added tiltfileTarget()
+- `internal/engine/subscribers.go` - Removed BuildController
+
+### Files Summary
+- 131 files changed
+- ~19,800 lines deleted
+- ~700 lines added
+- Net reduction of ~19,100 lines of code

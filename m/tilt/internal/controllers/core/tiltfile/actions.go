@@ -34,7 +34,6 @@ type ConfigsReloadedAction struct {
 	TeamID               string
 	TelemetrySettings    model.TelemetrySettings
 	Secrets              model.SecretSet
-	DockerPruneSettings  model.DockerPruneSettings
 	AnalyticsTiltfileOpt analytics.Opt
 	VersionSettings      model.VersionSettings
 	UpdateSettings       model.UpdateSettings

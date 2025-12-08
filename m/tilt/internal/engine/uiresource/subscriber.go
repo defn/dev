@@ -9,7 +9,6 @@ import (
 	ctrlclient "sigs.k8s.io/controller-runtime/pkg/client"
 
 	"github.com/defn/dev/m/tilt/internal/controllers/apicmp"
-	"github.com/defn/dev/m/tilt/internal/hud/webview"
 	"github.com/defn/dev/m/tilt/internal/store"
 	"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1"
 )
@@ -27,10 +26,10 @@ func NewSubscriber(client ctrlclient.Client) *Subscriber {
 	}
 }
 
-func (s *Subscriber) currentResources(store store.RStore, disableSources map[string][]v1alpha1.DisableSource) ([]*v1alpha1.UIResource, error) {
-	state := store.RLockState()
-	defer store.RUnlockState()
-	return webview.ToUIResourceList(state, disableSources)
+func (s *Subscriber) currentResources(st store.RStore, disableSources map[string][]v1alpha1.DisableSource) ([]*v1alpha1.UIResource, error) {
+	state := st.RLockState()
+	defer st.RUnlockState()
+	return store.ToUIResourceList(state, disableSources)
 }
 
 func (s *Subscriber) OnChange(ctx context.Context, st store.RStore, summary store.ChangeSummary) error {

@@ -1,35 +1,3 @@
 package tiltfile
 
-import (
-	"context"
-
-	dockertypes "github.com/docker/docker/api/types"
-
-	"github.com/defn/dev/m/tilt/internal/analytics"
-)
-
-// reportDockerConnectionEvent records a metric about Docker connectivity.
-func (r *Reconciler) reportDockerConnectionEvent(ctx context.Context, success bool, serverVersion dockertypes.Version) {
-	r.dockerConnectMetricReporter.Do(func() {
-		var status string
-		if success {
-			status = "connected"
-		} else {
-			status = "error"
-		}
-
-		tags := map[string]string{
-			"status": status,
-		}
-
-		if serverVersion.Version != "" {
-			tags["server.version"] = serverVersion.Version
-		}
-
-		if serverVersion.Arch != "" {
-			tags["server.arch"] = serverVersion.Arch
-		}
-
-		analytics.Get(ctx).Incr("api.tiltfile.docker.connect", tags)
-	})
-}
+// This file is kept for package structure but Docker metrics have been removed.

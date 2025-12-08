@@ -10,7 +10,6 @@ import (
 	ctrlclient "sigs.k8s.io/controller-runtime/pkg/client"
 	"sigs.k8s.io/controller-runtime/pkg/reconcile"
 
-	"github.com/defn/dev/m/tilt/internal/hud/server"
 	"github.com/defn/dev/m/tilt/internal/store"
 	"github.com/defn/dev/m/tilt/internal/store/uibuttons"
 	"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1"
@@ -18,16 +17,14 @@ import (
 
 type Reconciler struct {
 	client     ctrlclient.Client
-	wsList     *server.WebsocketList
 	dispatcher store.Dispatcher
 }
 
 var _ reconcile.Reconciler = &Reconciler{}
 
-func NewReconciler(client ctrlclient.Client, wsList *server.WebsocketList, store store.RStore) *Reconciler {
+func NewReconciler(client ctrlclient.Client, store store.RStore) *Reconciler {
 	return &Reconciler{
 		client:     client,
-		wsList:     wsList,
 		dispatcher: store,
 	}
 }
@@ -40,12 +37,7 @@ func (r *Reconciler) Reconcile(ctx context.Context, req ctrl.Request) (ctrl.Resu
 	}
 
 	if apierrors.IsNotFound(err) || button.ObjectMeta.DeletionTimestamp != nil {
-		r.wsList.ForEach(func(ws *server.WebsocketSubscriber) {
-			ws.SendUIButtonUpdate(ctx, req.NamespacedName, nil)
-		})
-
 		r.dispatcher.Dispatch(uibuttons.NewUIButtonDeleteAction(req.Name))
-
 		return ctrl.Result{}, nil
 	}
 
@@ -67,10 +59,6 @@ func (r *Reconciler) Reconcile(ctx context.Context, req ctrl.Request) (ctrl.Resu
 		}
 		button = update
 	}
-
-	r.wsList.ForEach(func(ws *server.WebsocketSubscriber) {
-		ws.SendUIButtonUpdate(ctx, req.NamespacedName, button)
-	})
 
 	return ctrl.Result{}, nil
 }

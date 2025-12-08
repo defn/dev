@@ -3,10 +3,6 @@ package engine
 import (
 	"time"
 
-	"k8s.io/apimachinery/pkg/types"
-	"k8s.io/apimachinery/pkg/watch"
-
-	"github.com/defn/dev/m/tilt/internal/k8s"
 	"github.com/defn/dev/m/tilt/internal/store"
 	"github.com/defn/dev/m/tilt/internal/token"
 	"github.com/defn/dev/m/tilt/pkg/model"
@@ -50,18 +46,3 @@ func (HudStoppedAction) Action() {}
 func NewHudStoppedAction(err error) HudStoppedAction {
 	return HudStoppedAction{err}
 }
-
-type UIDUpdateAction struct {
-	UID          types.UID
-	EventType    watch.EventType
-	ManifestName model.ManifestName
-	Entity       k8s.K8sEntity
-}
-
-func (UIDUpdateAction) Action() {}
-
-type TelemetryScriptRanAction struct {
-	At time.Time
-}
-
-func (TelemetryScriptRanAction) Action() {}

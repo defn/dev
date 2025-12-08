@@ -10,7 +10,6 @@ import (
 	tiltanalytics "github.com/defn/dev/m/tilt/internal/analytics"
 	"github.com/defn/dev/m/tilt/internal/controllers/core/extension"
 	"github.com/defn/dev/m/tilt/internal/controllers/core/extensionrepo"
-	"github.com/defn/dev/m/tilt/internal/engine/analytics"
 	"github.com/defn/dev/m/tilt/internal/lsp"
 	"github.com/defn/dev/m/tilt/internal/tiltfile"
 	"github.com/defn/dev/m/tilt/pkg/logger"
@@ -19,7 +18,7 @@ import (
 )
 
 func reportLspInvocation(a *tiltanalytics.TiltAnalytics, cmdParts []string) {
-	a.Incr("cmd."+strings.Join(cmdParts, "."), make(analytics.CmdTags))
+	a.Incr("cmd."+strings.Join(cmdParts, "."), make(map[string]string))
 	a.Flush(time.Second)
 }
 

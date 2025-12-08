@@ -16,10 +16,6 @@ The APIs of these commands may change frequently.
 	}
 
 	addCommand(result, newTiltfileResultCmd(streams))
-	addCommand(result, newUpdogCmd(streams))
-	addCommand(result, newGetCmd(streams))
-	addCommand(result, newApiresourcesCmd(streams))
-	addCommand(result, newShellCmd(streams))
 
 	return result
 }

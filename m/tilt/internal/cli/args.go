@@ -16,7 +16,6 @@ import (
 	"k8s.io/kubectl/pkg/cmd/util/editor"
 
 	"github.com/defn/dev/m/tilt/internal/analytics"
-	engineanalytics "github.com/defn/dev/m/tilt/internal/engine/analytics"
 	"github.com/defn/dev/m/tilt/internal/sliceutils"
 	"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1"
 	"github.com/defn/dev/m/tilt/pkg/logger"
@@ -108,7 +107,7 @@ func (c *argsCmd) run(ctx context.Context, args []string) error {
 		return err
 	}
 
-	tags := make(engineanalytics.CmdTags)
+	tags := make(map[string]string)
 	if c.clear {
 		if len(args) != 0 {
 			return errors.New("--clear cannot be specified with other values")
@@ -133,7 +132,7 @@ func (c *argsCmd) run(ctx context.Context, args []string) error {
 	}
 
 	a := analytics.Get(ctx)
-	a.Incr("cmd.args", tags.AsMap())
+	a.Incr("cmd.args", tags)
 	defer a.Flush(time.Second)
 
 	if sliceutils.StringSliceEquals(tf.Spec.Args, args) {

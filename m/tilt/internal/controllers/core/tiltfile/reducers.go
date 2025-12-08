@@ -4,7 +4,6 @@ import (
 	"context"
 
 	"github.com/defn/dev/m/tilt/internal/store"
-	"github.com/defn/dev/m/tilt/pkg/logger"
 	"github.com/defn/dev/m/tilt/pkg/model"
 )
 
@@ -57,12 +56,8 @@ func HandleConfigsReloaded(
 
 	manifests := event.Manifests
 	loadedManifestNames := map[model.ManifestName]bool{}
-	for i, m := range manifests {
+	for _, m := range manifests {
 		loadedManifestNames[m.Name] = true
-
-		// Properly annotate the manifest with the source tiltfile.
-		m.SourceTiltfile = event.Name
-		manifests[i] = m
 	}
 
 	ms, ok := state.TiltfileStates[event.Name]
@@ -136,45 +131,30 @@ func HandleConfigsReloaded(
 
 	// Make sure all the new manifests are in the EngineState.
 	for _, m := range manifests {
-		mt, ok := state.ManifestTargets[m.ManifestName()]
-		if ok && mt.Manifest.SourceTiltfile != event.Name {
-			logger.Get(ctx).Errorf("Resource defined in two tiltfiles: %s, %s", event.Name, mt.Manifest.SourceTiltfile)
-			continue
-		}
+		mt, ok := state.ManifestTargets[m.Name]
 
-		// Create a new manifest if it changed types.
-		createNew := !ok ||
-			mt.Manifest.IsK8s() != m.IsK8s() ||
-			mt.Manifest.IsLocal() != m.IsLocal()
-		if createNew {
+		// Create a new manifest if it doesn't exist
+		if !ok {
 			mt = store.NewManifestTarget(m)
 		}
 
 		configFilesThatChanged := ms.LastBuild().Edits
-		old := mt.Manifest
 		mt.Manifest = m
 
-		if model.ChangesInvalidateBuild(old, m) {
-			// Manifest has changed such that the current build is invalid;
-			// ensure we do an image build so that we apply the changes
-			ms := mt.State
-			ms.ResetBuildStatus(m)
-			ms.PendingManifestChange = event.FinishTime
-			ms.ConfigFilesThatCausedChange = configFilesThatChanged
-		}
+		// Reset build status if manifest has changed
+		mState := mt.State
+		mState.PendingManifestChange = event.FinishTime
+		mState.ConfigFilesThatCausedChange = configFilesThatChanged
+
 		state.UpsertManifestTarget(mt)
 	}
 
-	// Go through all the existing manifest targets. If they were from this
-	// Tiltfile, but were removed from the latest Tiltfile execution, delete them.
+	// Go through all the existing manifest targets. If they were removed from
+	// the latest Tiltfile execution, delete them.
 	for _, mt := range state.Targets() {
 		m := mt.Manifest
-
-		if m.SourceTiltfile == event.Name {
-			if !loadedManifestNames[m.Name] {
-				state.RemoveManifestTarget(m.Name)
-			}
-			continue
+		if !loadedManifestNames[m.Name] {
+			state.RemoveManifestTarget(m.Name)
 		}
 	}
 
@@ -185,6 +165,5 @@ func HandleConfigsReloaded(
 		state.VersionSettings = event.VersionSettings
 		state.AnalyticsTiltfileOpt = event.AnalyticsTiltfileOpt
 		state.UpdateSettings = event.UpdateSettings
-		state.DockerPruneSettings = event.DockerPruneSettings
 	}
 }

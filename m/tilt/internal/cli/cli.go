@@ -45,48 +45,25 @@ func Execute() {
 
 	rootCmd := &cobra.Command{
 		Use:   "tilt",
-		Short: "Multi-service development with no stress",
+		Short: "Local development with file watching",
 		Long: `
-Tilt helps you develop your microservices locally.
-Run 'tilt up' to start working on your services in a complete dev environment
-configured for your team.
+Tilt helps you develop locally with file watching and automatic command execution.
+Run 'tilt up' to start working on your services.
 
-Tilt watches your files for edits, automatically builds your container images,
-and applies any changes to bring your environment
-up-to-date in real-time. Think 'docker build && kubectl apply' or 'docker-compose up'.
+Tilt watches your files for edits and automatically runs your commands
+to bring your environment up-to-date in real-time.
 `,
 	}
 	streams := genericclioptions.IOStreams{Out: os.Stdout, ErrOut: os.Stderr, In: os.Stdin}
 
 	addCommand(rootCmd, &ciCmd{})
 	addCommand(rootCmd, &upCmd{})
-	addCommand(rootCmd, &dockerCmd{})
-	addCommand(rootCmd, &doctorCmd{})
-	addCommand(rootCmd, newDownCmd())
 	addCommand(rootCmd, &versionCmd{})
-	addCommand(rootCmd, &verifyInstallCmd{})
-	addCommand(rootCmd, &dockerPruneCmd{})
 	addCommand(rootCmd, newArgsCmd(streams))
-	addCommand(rootCmd, &logsCmd{})
-	addCommand(rootCmd, newDescribeCmd(streams))
-	addCommand(rootCmd, newGetCmd(streams))
-	addCommand(rootCmd, newEditCmd(streams))
-	addCommand(rootCmd, newApiresourcesCmd(streams))
-	addCommand(rootCmd, newDeleteCmd(streams))
-	addCommand(rootCmd, newApplyCmd(streams))
-	addCommand(rootCmd, newCreateCmd(streams))
-	addCommand(rootCmd, newPatchCmd(streams))
-	addCommand(rootCmd, newWaitCmd(streams))
-	addCommand(rootCmd, &demoCmd{})
-	addCommand(rootCmd, newEnableCmd())
-	addCommand(rootCmd, newDisableCmd())
-	addCommand(rootCmd, newTriggerCmd(streams))
 
 	rootCmd.AddCommand(analytics.NewCommand())
-	rootCmd.AddCommand(newDumpCmd(rootCmd, streams))
 	rootCmd.AddCommand(newAlphaCmd(streams))
 	rootCmd.AddCommand(newLspCmd())
-	rootCmd.AddCommand(newSnapshotCmd())
 
 	globalFlags := rootCmd.PersistentFlags()
 	globalFlags.BoolVarP(&debug, "debug", "d", false, "Enable debug logging")

@@ -13,17 +13,14 @@ import (
 	"github.com/defn/dev/m/tilt/internal/analytics"
 	"github.com/defn/dev/m/tilt/internal/controllers/apiset"
 	"github.com/defn/dev/m/tilt/internal/feature"
-	"github.com/defn/dev/m/tilt/internal/k8s"
 	"github.com/defn/dev/m/tilt/internal/localexec"
 	"github.com/defn/dev/m/tilt/internal/ospath"
 	"github.com/defn/dev/m/tilt/internal/sliceutils"
 	tiltfileanalytics "github.com/defn/dev/m/tilt/internal/tiltfile/analytics"
 	"github.com/defn/dev/m/tilt/internal/tiltfile/cisettings"
 	"github.com/defn/dev/m/tilt/internal/tiltfile/config"
-	"github.com/defn/dev/m/tilt/internal/tiltfile/dockerprune"
 	"github.com/defn/dev/m/tilt/internal/tiltfile/hasher"
 	"github.com/defn/dev/m/tilt/internal/tiltfile/io"
-	"github.com/defn/dev/m/tilt/internal/tiltfile/k8scontext"
 	"github.com/defn/dev/m/tilt/internal/tiltfile/secretsettings"
 	"github.com/defn/dev/m/tilt/internal/tiltfile/starkit"
 	"github.com/defn/dev/m/tilt/internal/tiltfile/telemetry"
@@ -42,36 +39,25 @@ import (
 const FileName = "Tiltfile"
 
 type TiltfileLoadResult struct {
-	Manifests           []model.Manifest
-	EnabledManifests    []model.ManifestName
-	Tiltignore          model.Dockerignore
-	ConfigFiles         []string
-	FeatureFlags        map[string]bool
-	TeamID              string
-	TelemetrySettings   model.TelemetrySettings
-	Secrets             model.SecretSet
-	Error               error
-	DockerPruneSettings model.DockerPruneSettings
-	AnalyticsOpt        wmanalytics.Opt
-	VersionSettings     model.VersionSettings
-	UpdateSettings      model.UpdateSettings
-	WatchSettings       model.WatchSettings
-	DefaultRegistry     *corev1alpha1.RegistryHosting
-	ObjectSet           apiset.ObjectSet
-	Hashes              hasher.Hashes
-	CISettings          *corev1alpha1.SessionCISpec
+	Manifests         []model.Manifest
+	EnabledManifests  []model.ManifestName
+	Tiltignore        model.Dockerignore
+	ConfigFiles       []string
+	FeatureFlags      map[string]bool
+	TeamID            string
+	TelemetrySettings model.TelemetrySettings
+	Secrets           model.SecretSet
+	Error             error
+	AnalyticsOpt      wmanalytics.Opt
+	VersionSettings   model.VersionSettings
+	UpdateSettings    model.UpdateSettings
+	WatchSettings     model.WatchSettings
+	ObjectSet         apiset.ObjectSet
+	Hashes            hasher.Hashes
+	CISettings        *corev1alpha1.SessionCISpec
 
 	// For diagnostic purposes only
 	BuiltinCalls []starkit.BuiltinCall `json:"-"`
-}
-
-func (r TiltfileLoadResult) HasOrchestrator(orc model.Orchestrator) bool {
-	for _, manifest := range r.Manifests {
-		if manifest.IsK8s() && orc == model.OrchestratorK8s {
-			return true
-		}
-	}
-	return false
 }
 
 func (r TiltfileLoadResult) WithAllManifestsEnabled() TiltfileLoadResult {
@@ -94,7 +80,6 @@ type TiltfileLoader interface {
 
 func ProvideTiltfileLoader(
 	analytics *analytics.TiltAnalytics,
-	k8sContextPlugin k8scontext.Plugin,
 	versionPlugin version.Plugin,
 	configPlugin *config.Plugin,
 	extensionPlugin *tiltextension.Plugin,
@@ -105,7 +90,6 @@ func ProvideTiltfileLoader(
 	env clusterid.Product) TiltfileLoader {
 	return tiltfileLoader{
 		analytics:        analytics,
-		k8sContextPlugin: k8sContextPlugin,
 		versionPlugin:    versionPlugin,
 		configPlugin:     configPlugin,
 		extensionPlugin:  extensionPlugin,
@@ -122,7 +106,6 @@ type tiltfileLoader struct {
 	webHost   model.WebHost
 	execer    localexec.Execer
 
-	k8sContextPlugin k8scontext.Plugin
 	versionPlugin    version.Plugin
 	configPlugin     *config.Plugin
 	extensionPlugin  *tiltextension.Plugin
@@ -167,13 +150,12 @@ func (tfl tiltfileLoader) Load(ctx context.Context, tf *corev1alpha1.Tiltfile, p
 
 	tlr.Tiltignore = tiltignore
 
-	s := newTiltfileState(ctx, tfl.webHost, tfl.execer, tfl.k8sContextPlugin, tfl.versionPlugin,
+	s := newTiltfileState(ctx, tfl.webHost, tfl.execer, tfl.versionPlugin,
 		tfl.configPlugin, tfl.extensionPlugin, tfl.ciSettingsPlugin, feature.FromDefaults(tfl.fDefaults))
 
 	manifests, result, err := s.loadManifests(tf)
 
 	tlr.BuiltinCalls = result.BuiltinCalls
-	tlr.DefaultRegistry = s.defaultReg
 
 	// All data models are loaded with GetState. We ignore the error if the state
 	// isn't properly loaded. This is necessary for handling partial Tiltfile
@@ -191,9 +173,6 @@ func (tfl tiltfileLoader) Load(ctx context.Context, tf *corev1alpha1.Tiltfile, p
 	tlr.ConfigFiles = append(tlr.ConfigFiles, ioState.Paths...)
 	tlr.ConfigFiles = append(tlr.ConfigFiles, s.postExecReadFiles...)
 	tlr.ConfigFiles = sliceutils.DedupedAndSorted(tlr.ConfigFiles)
-
-	dps, _ := dockerprune.GetState(result)
-	tlr.DockerPruneSettings = dps
 
 	aSettings, _ := tiltfileanalytics.GetState(result)
 	tlr.AnalyticsOpt = aSettings.Opt
@@ -267,7 +246,7 @@ func (tfl *tiltfileLoader) reportTiltfileLoaded(
 
 	// env should really be a global tag, but there's a circular dependency
 	// between the global tags and env initialization, so we add it manually.
-	tags["env"] = k8s.AnalyticsEnv(tfl.env)
+	tags["env"] = string(tfl.env)
 	tags["tiltfile.changed"] = strconv.FormatBool(prevHashes.TiltfileSHA256 != "" && prevHashes.TiltfileSHA256 != currHashes.TiltfileSHA256)
 	tags["allfiles.changed"] = strconv.FormatBool(prevHashes.AllFilesSHA256 != "" && prevHashes.AllFilesSHA256 != currHashes.AllFilesSHA256)
 
@@ -283,7 +262,7 @@ func (tfl *tiltfileLoader) reportTiltfileLoaded(
 	tfl.analytics.Timer("tiltfile.load", loadDur, nil)
 	for ext := range pluginsLoaded {
 		tags := map[string]string{
-			"env":      k8s.AnalyticsEnv(tfl.env),
+			"env":      string(tfl.env),
 			"ext_name": ext,
 		}
 		tfl.analytics.Incr("tiltfile.loaded.plugin", tags)

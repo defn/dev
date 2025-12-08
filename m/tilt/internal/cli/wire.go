@@ -9,46 +9,29 @@ import (
 	"context"
 	"time"
 
-	"github.com/spf13/afero"
-
 	cliclient "github.com/defn/dev/m/tilt/internal/cli/client"
 	"github.com/defn/dev/m/tilt/internal/controllers/core/filewatch/fsevent"
-	"github.com/defn/dev/m/tilt/internal/k8s/kubeconfig"
 	"github.com/tilt-dev/clusterid"
 
 	"github.com/google/wire"
 	"github.com/jonboulle/clockwork"
 	sdktrace "go.opentelemetry.io/otel/sdk/trace"
-	"k8s.io/apimachinery/pkg/version"
-	ctrlclient "sigs.k8s.io/controller-runtime/pkg/client"
 
 	"github.com/tilt-dev/wmclient/pkg/dirs"
 
 	"github.com/defn/dev/m/tilt/internal/analytics"
 	tiltanalytics "github.com/defn/dev/m/tilt/internal/analytics"
-	"github.com/defn/dev/m/tilt/internal/build"
-	"github.com/defn/dev/m/tilt/internal/cloud"
-	"github.com/defn/dev/m/tilt/internal/cloud/cloudurl"
 	"github.com/defn/dev/m/tilt/internal/controllers"
-	"github.com/defn/dev/m/tilt/internal/controllers/core/kubernetesdiscovery"
-	"github.com/defn/dev/m/tilt/internal/docker"
 	"github.com/defn/dev/m/tilt/internal/engine"
-	engineanalytics "github.com/defn/dev/m/tilt/internal/engine/analytics"
 	"github.com/defn/dev/m/tilt/internal/engine/configs"
-	"github.com/defn/dev/m/tilt/internal/engine/dockerprune"
-	"github.com/defn/dev/m/tilt/internal/engine/k8srollout"
-	"github.com/defn/dev/m/tilt/internal/engine/k8swatch"
 	"github.com/defn/dev/m/tilt/internal/engine/local"
 	"github.com/defn/dev/m/tilt/internal/engine/session"
-	"github.com/defn/dev/m/tilt/internal/engine/telemetry"
 	"github.com/defn/dev/m/tilt/internal/engine/uiresource"
 	"github.com/defn/dev/m/tilt/internal/engine/uisession"
 	"github.com/defn/dev/m/tilt/internal/feature"
 	"github.com/defn/dev/m/tilt/internal/git"
 	"github.com/defn/dev/m/tilt/internal/hud"
 	"github.com/defn/dev/m/tilt/internal/hud/prompt"
-	"github.com/defn/dev/m/tilt/internal/hud/server"
-	"github.com/defn/dev/m/tilt/internal/k8s"
 	"github.com/defn/dev/m/tilt/internal/localexec"
 	"github.com/defn/dev/m/tilt/internal/openurl"
 	"github.com/defn/dev/m/tilt/internal/store"
@@ -60,24 +43,7 @@ import (
 	"github.com/defn/dev/m/tilt/pkg/model"
 )
 
-var K8sWireSet = wire.NewSet(
-	k8s.ProvideClusterProduct,
-	k8s.ProvideClusterName,
-	k8s.ProvideKubeContext,
-	k8s.ProvideAPIConfig,
-	k8s.ProvideClientConfig,
-	k8s.ProvideClientset,
-	k8s.ProvideRESTConfig,
-	k8s.ProvidePortForwardClient,
-	k8s.ProvideConfigNamespace,
-	k8s.ProvideServerVersion,
-	k8s.ProvideK8sClient,
-	k8s.ProvideDefaultLocalKubeconfigPath,
-	ProvideKubeContextOverride,
-	ProvideNamespaceOverride)
-
 var BaseWireSet = wire.NewSet(
-	K8sWireSet,
 	tiltfile.WireSet,
 	git.ProvideGitRemote,
 
@@ -85,27 +51,14 @@ var BaseWireSet = wire.NewSet(
 	localexec.NewProcessExecer,
 	wire.Bind(new(localexec.Execer), new(*localexec.ProcessExecer)),
 
-	docker.SwitchWireSet,
-
 	clockwork.NewRealClock,
-	engine.DeployerWireSet,
-	engine.NewBuildController,
 	local.NewServerController,
-	kubernetesdiscovery.NewContainerRestartDetector,
-	k8swatch.NewServiceWatcher,
-	k8swatch.NewEventWatchManager,
 	uisession.NewSubscriber,
 	uiresource.NewSubscriber,
 	configs.NewConfigsController,
 	configs.NewTriggerQueueSubscriber,
-	telemetry.NewController,
-	cloud.WireSet,
-	cloudurl.ProvideAddress,
-	k8srollout.NewPodMonitor,
-	telemetry.NewStartTracker,
 	session.NewController,
 
-	build.ProvideClock,
 	provideClock,
 	provideLogSource,
 	provideLogResources,
@@ -119,27 +72,14 @@ var BaseWireSet = wire.NewSet(
 	wire.Bind(new(store.RStore), new(*store.Store)),
 	wire.Bind(new(store.Dispatcher), new(*store.Store)),
 
-	dockerprune.NewDockerPruner,
-
 	provideTiltInfo,
 	engine.NewUpper,
-	engineanalytics.NewAnalyticsUpdater,
-	engineanalytics.ProvideAnalyticsReporter,
-	provideUpdateModeFlag,
 	fsevent.ProvideWatcherMaker,
 	fsevent.ProvideTimerMaker,
 
 	controllers.WireSet,
 
 	provideCITimeoutFlag,
-	provideWebVersion,
-	provideWebMode,
-	provideWebURL,
-	provideWebPort,
-	provideWebHost,
-	server.WireSet,
-	server.ProvideDefaultConnProvider,
-	provideAssetServer,
 
 	tracer.NewSpanCollector,
 	wire.Bind(new(sdktrace.SpanExporter), new(*tracer.SpanCollector)),
@@ -149,9 +89,10 @@ var BaseWireSet = wire.NewSet(
 	xdg.NewTiltDevBase,
 	token.GetOrCreateToken,
 
-	build.NewKINDLoader,
-
 	wire.Value(feature.MainDefaults),
+
+	// Provide a default env for non-K8s mode
+	wire.Value(clusterid.Product("")),
 )
 
 var CLIClientWireSet = wire.NewSet(
@@ -169,128 +110,32 @@ func wireTiltfileResult(ctx context.Context, analytics *analytics.TiltAnalytics,
 	return cmdTiltfileResultDeps{}, nil
 }
 
-func wireDockerPrune(ctx context.Context, analytics *analytics.TiltAnalytics, subcommand model.TiltSubcommand) (dpDeps, error) {
-	wire.Build(UpWireSet, newDPDeps)
-	return dpDeps{}, nil
-}
-
-func wireCmdUp(ctx context.Context, analytics *analytics.TiltAnalytics, cmdTags engineanalytics.CmdTags, subcommand model.TiltSubcommand) (CmdUpDeps, error) {
+func wireCmdUp(ctx context.Context, analytics *analytics.TiltAnalytics, subcommand model.TiltSubcommand) (CmdUpDeps, error) {
 	wire.Build(UpWireSet,
-		cloud.NewSnapshotter,
 		wire.Value(store.EngineModeUp),
 		wire.Struct(new(CmdUpDeps), "*"))
 	return CmdUpDeps{}, nil
 }
 
 type CmdUpDeps struct {
-	Upper        engine.Upper
-	TiltBuild    model.TiltBuild
-	Token        token.Token
-	CloudAddress cloudurl.Address
-	Prompt       *prompt.TerminalPrompt
-	Snapshotter  *cloud.Snapshotter
+	Upper     engine.Upper
+	TiltBuild model.TiltBuild
+	Token     token.Token
+	Prompt    *prompt.TerminalPrompt
 }
 
 func wireCmdCI(ctx context.Context, analytics *analytics.TiltAnalytics, subcommand model.TiltSubcommand) (CmdCIDeps, error) {
 	wire.Build(UpWireSet,
-		cloud.NewSnapshotter,
 		wire.Value(store.EngineModeCI),
-		wire.Value(engineanalytics.CmdTags(map[string]string{})),
 		wire.Struct(new(CmdCIDeps), "*"),
 	)
 	return CmdCIDeps{}, nil
 }
 
 type CmdCIDeps struct {
-	Upper        engine.Upper
-	TiltBuild    model.TiltBuild
-	Token        token.Token
-	CloudAddress cloudurl.Address
-	Snapshotter  *cloud.Snapshotter
-}
-
-func wireCmdUpdog(ctx context.Context,
-	analytics *analytics.TiltAnalytics,
-	cmdTags engineanalytics.CmdTags,
-	subcommand model.TiltSubcommand,
-	objects []ctrlclient.Object,
-) (CmdUpdogDeps, error) {
-	wire.Build(BaseWireSet,
-		provideUpdogSubscriber,
-		provideUpdogCmdSubscribers,
-		wire.Value(store.EngineModeCI),
-		wire.Struct(new(CmdUpdogDeps), "*"))
-	return CmdUpdogDeps{}, nil
-}
-
-type CmdUpdogDeps struct {
-	Upper        engine.Upper
-	TiltBuild    model.TiltBuild
-	Token        token.Token
-	CloudAddress cloudurl.Address
-	Store        *store.Store
-}
-
-func wireKubeContext(ctx context.Context) (k8s.KubeContext, error) {
-	wire.Build(K8sWireSet)
-	return "", nil
-}
-
-func wireEnv(ctx context.Context) (clusterid.Product, error) {
-	wire.Build(K8sWireSet)
-	return "", nil
-}
-
-func wireNamespace(ctx context.Context) (k8s.Namespace, error) {
-	wire.Build(K8sWireSet)
-	return "", nil
-}
-
-func wireClusterName(ctx context.Context) (k8s.ClusterName, error) {
-	wire.Build(K8sWireSet)
-	return "", nil
-}
-
-func wireK8sClient(ctx context.Context) (k8s.Client, error) {
-	wire.Build(
-		K8sWireSet,
-		k8s.ProvideMinikubeClient,
-	)
-	return nil, nil
-}
-
-func wireK8sVersion(ctx context.Context) (*version.Info, error) {
-	wire.Build(K8sWireSet)
-	return nil, nil
-}
-
-func wireDockerClusterClient(ctx context.Context) (docker.ClusterClient, error) {
-	wire.Build(UpWireSet)
-	return nil, nil
-}
-
-func wireDockerLocalClient(ctx context.Context) (docker.LocalClient, error) {
-	wire.Build(UpWireSet)
-	return nil, nil
-}
-
-func wireDockerCompositeClient(ctx context.Context) (docker.CompositeClient, error) {
-	wire.Build(UpWireSet)
-	return nil, nil
-}
-
-func wireDownDeps(ctx context.Context, tiltAnalytics *analytics.TiltAnalytics, subcommand model.TiltSubcommand) (DownDeps, error) {
-	wire.Build(UpWireSet,
-		wire.Struct(new(DownDeps), "*"))
-	return DownDeps{}, nil
-}
-
-type DownDeps struct {
-	tfl              tiltfile.TiltfileLoader
-	kClient          k8s.Client
-	execer           localexec.Execer
-	kubeconfigWriter *kubeconfig.Writer
-	fs               afero.Fs
+	Upper     engine.Upper
+	TiltBuild model.TiltBuild
+	Token     token.Token
 }
 
 func wireLogsDeps(ctx context.Context, tiltAnalytics *analytics.TiltAnalytics, subcommand model.TiltSubcommand) (LogsDeps, error) {
@@ -300,24 +145,12 @@ func wireLogsDeps(ctx context.Context, tiltAnalytics *analytics.TiltAnalytics, s
 }
 
 type LogsDeps struct {
-	url     model.WebURL
 	printer *hud.IncrementalPrinter
 	filter  hud.LogFilter
 }
 
 func provideClock() func() time.Time {
 	return time.Now
-}
-
-type DumpImageDeployRefDeps struct {
-	DockerBuilder *build.DockerBuilder
-	DockerClient  docker.Client
-}
-
-func wireDumpImageDeployRefDeps(ctx context.Context) (DumpImageDeployRefDeps, error) {
-	wire.Build(UpWireSet,
-		wire.Struct(new(DumpImageDeployRefDeps), "*"))
-	return DumpImageDeployRefDeps{}, nil
 }
 
 func wireAnalytics(l logger.Logger, cmdName model.TiltSubcommand) (*tiltanalytics.TiltAnalytics, error) {

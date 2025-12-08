@@ -90,34 +90,3 @@ func (g TargetGraph) DepsOf(t TargetSpec) ([]TargetSpec, error) {
 	return result, nil
 }
 
-// Is this image directly deployed a container?
-func (g TargetGraph) IsDeployedImage(iTarget ImageTarget) bool {
-	id := iTarget.ID()
-	for _, t := range g.sortedTargets {
-		switch t := t.(type) {
-		case K8sTarget:
-			// Returns true if a K8s target directly depends on this image.
-			for _, depID := range t.DependencyIDs() {
-				if depID == id {
-					return true
-				}
-			}
-		}
-	}
-	return false
-}
-
-func (g TargetGraph) Images() []ImageTarget {
-	return ExtractImageTargets(g.sortedTargets)
-}
-
-// Returns all the images in the graph that are directly deployed to a container.
-func (g TargetGraph) DeployedImages() []ImageTarget {
-	result := []ImageTarget{}
-	for _, iTarget := range g.Images() {
-		if g.IsDeployedImage(iTarget) {
-			result = append(result, iTarget)
-		}
-	}
-	return result
-}

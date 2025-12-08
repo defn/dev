@@ -16,7 +16,7 @@ import (
 	"github.com/go-logr/logr"
 	"github.com/go-logr/logr/funcr"
 
-	"github.com/defn/dev/m/tilt/internal/hud/server"
+	"github.com/defn/dev/m/tilt/internal/apiserver"
 	"github.com/defn/dev/m/tilt/internal/store"
 	"github.com/defn/dev/m/tilt/pkg/logger"
 )
@@ -41,9 +41,9 @@ var _ store.SetUpper = &TiltServerControllerManager{}
 var _ store.Subscriber = &TiltServerControllerManager{}
 var _ store.TearDowner = &TiltServerControllerManager{}
 
-func NewTiltServerControllerManager(config *server.APIServerConfig, scheme *runtime.Scheme, deferredClient *DeferredClient, uncachedObjects UncachedObjects) (*TiltServerControllerManager, error) {
+func NewTiltServerControllerManager(config *apiserver.Config, scheme *runtime.Scheme, deferredClient *DeferredClient, uncachedObjects UncachedObjects) (*TiltServerControllerManager, error) {
 	return &TiltServerControllerManager{
-		config:          config.GenericConfig.LoopbackClientConfig,
+		config:          config.LoopbackClientConfig,
 		scheme:          scheme,
 		deferredClient:  deferredClient,
 		uncachedObjects: uncachedObjects,

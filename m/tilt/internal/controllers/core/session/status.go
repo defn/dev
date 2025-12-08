@@ -8,8 +8,8 @@ import (
 
 	ctrl "sigs.k8s.io/controller-runtime"
 
-	"github.com/defn/dev/m/tilt/internal/engine/buildcontrol"
 	"github.com/defn/dev/m/tilt/internal/store"
+	"github.com/defn/dev/m/tilt/pkg/apis"
 	"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1"
 	"github.com/defn/dev/m/tilt/pkg/model"
 )
@@ -31,12 +31,8 @@ func (r *Reconciler) makeLatestStatus(session *v1alpha1.Session, result *ctrl.Re
 		status.Targets = append(status.Targets, tiltfileTarget(model.MainTiltfileManifestName, ms))
 	}
 
-	// determine the reason any resources (and thus all of their targets) are waiting (aka "holds")
-	// N.B. we don't actually care about what's "next" to build, but the info comes alongside that
-	_, holds := buildcontrol.NextTargetToBuild(state)
-
 	for _, mt := range state.ManifestTargets {
-		status.Targets = append(status.Targets, r.targetsForResource(mt, holds, session.Spec.CI, result)...)
+		status.Targets = append(status.Targets, r.targetsForResource(mt, session.Spec.CI, result)...)
 	}
 	// ensure consistent ordering to avoid unnecessary updates
 	sort.SliceStable(status.Targets, func(i, j int) bool {
@@ -191,10 +187,34 @@ func (r *Reconciler) enforceReadinessTimeout(spec v1alpha1.SessionSpec, status *
 	}
 }
 
-// errToString returns a stringified version of an error or an empty string if the error is nil.
-func errToString(err error) string {
-	if err == nil {
-		return ""
+// tiltfileTarget creates a session target for the tiltfile itself
+func tiltfileTarget(name model.ManifestName, tfs *store.ManifestState) v1alpha1.Target {
+	target := v1alpha1.Target{
+		Name:      fmt.Sprintf("%s:update", name.String()),
+		Resources: []string{name.String()},
+		Type:      v1alpha1.TargetTypeJob,
 	}
-	return err.Error()
+
+	if tfs.CurrentBuilds != nil && len(tfs.CurrentBuilds) > 0 {
+		lb := tfs.LastBuild()
+		target.State.Active = &v1alpha1.TargetStateActive{
+			StartTime: apis.NewMicroTime(lb.StartTime),
+		}
+	} else {
+		lb := tfs.LastBuild()
+		if lb.Error != nil {
+			target.State.Terminated = &v1alpha1.TargetStateTerminated{
+				StartTime:  apis.NewMicroTime(lb.StartTime),
+				FinishTime: apis.NewMicroTime(lb.FinishTime),
+				Error:      lb.Error.Error(),
+			}
+		} else if !lb.Empty() {
+			target.State.Terminated = &v1alpha1.TargetStateTerminated{
+				StartTime:  apis.NewMicroTime(lb.StartTime),
+				FinishTime: apis.NewMicroTime(lb.FinishTime),
+			}
+		}
+	}
+
+	return target
 }
