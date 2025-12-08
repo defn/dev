@@ -659,6 +659,24 @@ tilt/internal/watch/watcher_naive.go:318:12: fsw.SetRecursive undefined (type *f
 - macOS uses `watcher_darwin.go` with `fsevents` which is naturally recursive and unaffected
 - Windows would also use this file and also doesn't have native recursive watching via `fsnotify`
 
+**Test Results (Linux x86)**:
+```bash
+$ bazel build //tilt/...
+INFO: Build completed successfully, 3,004 total actions
+
+$ bazel test //tilt/...
+Executed 107 out of 107 tests: 107 tests pass.
+```
+
+**Build Verification**: The fix successfully resolved the Linux x86 build failure. All 280 targets compile and all 107 tests pass (100% pass rate).
+
+**Test Fixes**: Three tests were initially flaky due to race conditions in async tiltfile loading (see commit ed04e7de5):
+- `TestArgsChangeResetsEnabledResources`
+- `TestRunWithoutArgsChangePreservesEnabledResources`
+- `TestTiltfileFailurePreservesEnabledResources`
+
+Fixed by adding proper `popQueue()` calls to process all queued reconciliation requests.
+
 ## Commands Used
 
 ```bash
