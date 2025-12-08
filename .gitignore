@@ -231,6 +231,7 @@ bin/devcontainer
 .sommelierrc
 .minikube
 *.lock
+!m/tilt/internal/build/testdata/TestBuildkitPrinter/rust-success/Cargo.lock
 !uv.lock
 !flake.lock
 /bazel*
