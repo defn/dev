@@ -6,20 +6,56 @@ import (
 	"sort"
 	"strings"
 
+	"github.com/pkg/errors"
+	v1 "k8s.io/api/core/v1"
 	"k8s.io/apimachinery/pkg/api/meta"
+	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
+	"k8s.io/apimachinery/pkg/runtime"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 	"k8s.io/apimachinery/pkg/types"
 	"k8s.io/client-go/kubernetes/scheme"
 
-	"github.com/defn/dev/m/tilt/internal/kustomize"
-
-	"github.com/pkg/errors"
-	v1 "k8s.io/api/core/v1"
-	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
-	"k8s.io/apimachinery/pkg/runtime"
-
 	"github.com/defn/dev/m/tilt/internal/container"
 )
+
+// An attempt to order things to help k8s, e.g.
+// a Service should come before things that refer to it.
+// Namespace should be first.
+// In some cases order just specified to provide determinism.
+// Adapted from Kustomize:
+// https://github.com/kubernetes-sigs/kustomize/blob/9686cc9861f25d831e4158e928ba584f3e5feea8/api/resid/gvk.go
+var kindOrderFirst = []string{
+	"Namespace",
+	"ResourceQuota",
+	"StorageClass",
+	"CustomResourceDefinition",
+	"MutatingWebhookConfiguration",
+	"ServiceAccount",
+	"PodSecurityPolicy",
+	"Role",
+	"ClusterRole",
+	"RoleBinding",
+	"ClusterRoleBinding",
+	"PersistentVolume",
+	"PersistentVolumeClaim",
+	"ConfigMap",
+	"Secret",
+	"Service",
+	"LimitRange",
+	"PriorityClass",
+	"Deployment",
+	"StatefulSet",
+	"CronJob",
+	"PodDisruptionBudget",
+}
+
+var kindTypeOrders = func() map[string]int {
+	m := map[string]int{}
+	for i, n := range kindOrderFirst {
+		m[n] = -len(kindOrderFirst) + i
+	}
+	return m
+}()
 
 type K8sEntity struct {
 	Obj runtime.Object
@@ -34,8 +70,8 @@ type entityList []K8sEntity
 func (l entityList) Len() int { return len(l) }
 func (l entityList) Less(i, j int) bool {
 	// Sort entities by the priority of their Kind
-	indexI := kustomize.TypeOrders[l[i].GVK().Kind]
-	indexJ := kustomize.TypeOrders[l[j].GVK().Kind]
+	indexI := kindTypeOrders[l[i].GVK().Kind]
+	indexJ := kindTypeOrders[l[j].GVK().Kind]
 	if indexI != indexJ {
 		return indexI < indexJ
 	}

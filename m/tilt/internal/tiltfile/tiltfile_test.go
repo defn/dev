@@ -40,7 +40,6 @@ import (
 	"github.com/defn/dev/m/tilt/internal/tiltfile/hasher"
 	tiltfile_k8s "github.com/defn/dev/m/tilt/internal/tiltfile/k8s"
 	"github.com/defn/dev/m/tilt/internal/tiltfile/k8scontext"
-	"github.com/defn/dev/m/tilt/internal/tiltfile/testdata"
 	"github.com/defn/dev/m/tilt/internal/tiltfile/tiltextension"
 	"github.com/defn/dev/m/tilt/internal/tiltfile/version"
 	"github.com/defn/dev/m/tilt/internal/yaml"
@@ -517,9 +516,8 @@ k8s_yaml(yaml)
 	f.assertConfigFiles("Tiltfile", ".tiltignore", "foo/Dockerfile", "foo/.dockerignore", "foo.yaml")
 }
 
-// NOTE: Kustomize tests removed for Bazel sandbox compatibility.
-// The tests require the kustomize CLI which isn't available in sandboxed builds.
-// TODO(bazel): Re-add kustomize tests when we have a way to provide kustomize in the sandbox.
+// NOTE: Kustomize support has been removed from this fork.
+// Users should render kustomize YAML externally and pass it to k8s_yaml().
 
 func TestDockerBuildTarget(t *testing.T) {
 	f := newFixture(t)
@@ -6723,29 +6721,8 @@ func (f *fixture) setupExpand() {
 	f.gitInit("")
 }
 
-func (f *fixture) setupHelm() {
-	f.file("helm/Chart.yaml", chartYAML)
-	f.file("helm/values.yaml", valuesYAML)
-	f.file("dev/helm/values-dev.yaml", valuesDevYAML) // make sure we can pull in a values.yaml file from outside chart dir
-
-	f.file("helm/templates/_helpers.tpl", helpersTPL)
-	f.file("helm/templates/deployment.yaml", deploymentYAML)
-	f.file("helm/templates/ingress.yaml", ingressYAML)
-	f.file("helm/templates/service.yaml", serviceYAML)
-	f.file("helm/templates/namespace.yaml", namespaceYAML)
-}
-
-func (f *fixture) setupHelmWithRequirements() {
-	f.setupHelm()
-
-	nginxIngressChartPath := testdata.NginxIngressChartPath()
-	f.CopyFile(nginxIngressChartPath, filepath.Join("helm/charts", filepath.Base(nginxIngressChartPath)))
-}
-
-func (f *fixture) setupHelmWithTest() {
-	f.setupHelm()
-	f.file("helm/templates/tests/test-mariadb-connection.yaml", helmTestYAML)
-}
+// NOTE: Helm support has been removed from this fork.
+// Users should render helm YAML externally and pass it to k8s_yaml().
 
 func (f *fixture) setupExtraPodSelectors(s string) {
 	f.setupFoo()

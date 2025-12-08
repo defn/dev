@@ -46,7 +46,6 @@ go_library(
         "//tilt/internal/k8s/jsonpath",
         "//tilt/internal/k8s/kubeconfig",
         "//tilt/internal/k8s/portforward",
-        "//tilt/internal/kustomize",
         "//tilt/internal/localexec",
         "//tilt/internal/sliceutils",
         "//tilt/pkg/apis/core/v1alpha1",

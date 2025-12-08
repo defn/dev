@@ -379,9 +379,7 @@ const (
 	testN          = "test" // a deprecated fork of local resource
 
 	// file functions
-	localN     = "local"
-	kustomizeN = "kustomize"
-	helmN      = "helm"
+	localN = "local"
 
 	// live update functions
 	fallBackOnN       = "fall_back_on"
@@ -561,8 +559,6 @@ func (s *tiltfileState) OnStart(e *starkit.Environment) error {
 		{k8sKindN, s.k8sKind},
 		{k8sImageJSONPathN, s.k8sImageJsonPath},
 		{workloadToResourceFunctionN, s.workloadToResourceFunctionFn},
-		{kustomizeN, s.kustomize},
-		{helmN, s.helm},
 		{triggerModeN, s.triggerModeFn},
 		{fallBackOnN, s.liveUpdateFallBackOn},
 		{syncN, s.liveUpdateSync},
