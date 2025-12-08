@@ -283,6 +283,7 @@ func TestArgsChangeResetsEnabledResources(t *testing.T) {
 	f.MustReconcile(types.NamespacedName{Name: "my-tf"})
 	f.waitForRunning("my-tf")
 	f.popQueue()
+	f.popQueue() // Process the requeued reconciliation after async load completes
 	f.waitForTerminatedAfter("my-tf", ts)
 
 	f.requireEnabled(m1, false)
@@ -318,10 +319,11 @@ func TestRunWithoutArgsChangePreservesEnabledResources(t *testing.T) {
 
 	f.triggerRun("my-tf")
 
+	// The triggerRun creates a ConfigMap that enqueues a reconciliation via watch
 	ts := time.Now()
-	f.MustReconcile(types.NamespacedName{Name: "my-tf"})
+	f.popQueue() // Process the ConfigMap trigger
 	f.waitForRunning("my-tf")
-	f.popQueue()
+	f.popQueue() // Process the requeued reconciliation after async load completes
 	f.waitForTerminatedAfter("my-tf", ts)
 
 	f.requireEnabled(m1, true)
@@ -358,10 +360,11 @@ func TestTiltfileFailurePreservesEnabledResources(t *testing.T) {
 
 	f.triggerRun("my-tf")
 
+	// The triggerRun creates a ConfigMap that enqueues a reconciliation via watch
 	ts := time.Now()
-	f.MustReconcile(types.NamespacedName{Name: "my-tf"})
+	f.popQueue() // Process the ConfigMap trigger
 	f.waitForRunning("my-tf")
-	f.popQueue()
+	f.popQueue() // Process the requeued reconciliation after async load completes
 	f.waitForTerminatedAfter("my-tf", ts)
 
 	f.requireEnabled(m1, true)
