@@ -1,3 +1,0 @@
-update_settings(max_parallel_updates=100)
-include('../Tiltfile')
-k8s_yaml('deployments.yaml')

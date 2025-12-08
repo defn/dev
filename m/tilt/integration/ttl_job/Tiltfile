@@ -1,2 +1,0 @@
-k8s_yaml('job.yaml')
-local_resource('local', 'sleep 2 && echo success', resource_deps=['ttl-job'])

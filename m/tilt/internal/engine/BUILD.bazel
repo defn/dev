@@ -100,7 +100,6 @@ go_test(
         "//tilt/internal/containerupdate",
         "//tilt/internal/controllers",
         "//tilt/internal/controllers/apis/liveupdate",
-        "//tilt/internal/controllers/apis/tiltfile",
         "//tilt/internal/controllers/apis/uibutton",
         "//tilt/internal/controllers/core/cluster",
         "//tilt/internal/controllers/core/cmd",
