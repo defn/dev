@@ -19,7 +19,6 @@ import (
 	"github.com/tilt-dev/tilt-apiserver/pkg/server/apiserver"
 	"github.com/tilt-dev/tilt-apiserver/pkg/server/builder"
 	"github.com/tilt-dev/tilt-apiserver/pkg/server/options"
-	"github.com/tilt-dev/tilt-apiserver/pkg/server/testdata"
 
 	"github.com/akutz/memconn"
 
@@ -186,13 +185,24 @@ func ProvideTiltServerOptions(
 	return config, nil
 }
 
+// inMemoryCertKey returns a GeneratableKeyCert that generates certs in-memory
+// without using a fixture directory. This is needed for Bazel sandbox
+// compatibility where runtime.Caller-based paths don't work.
+//
+// TODO(bazel): The upstream tilt-apiserver testdata.CertKey() uses runtime.Caller
+// to find fixture files, which doesn't work in Bazel sandboxes. Consider fixing
+// upstream or providing a bazel-compatible alternative.
+func inMemoryCertKey() options.GeneratableKeyCert {
+	return options.GeneratableKeyCert{}
+}
+
 // Generate the server config, removing options that are not needed for testing.
 //
 // 1) Changes http -> https
 // 2) Skips OpenAPI installation
 func ProvideTiltServerOptionsForTesting(ctx context.Context) (*APIServerConfig, error) {
 	config, err := ProvideTiltServerOptions(ctx,
-		model.TiltBuild{}, ProvideMemConn(), "corgi-charge", testdata.CertKey(), 0)
+		model.TiltBuild{}, ProvideMemConn(), "corgi-charge", inMemoryCertKey(), 0)
 	if err != nil {
 		return nil, err
 	}

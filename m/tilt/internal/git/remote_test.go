@@ -22,7 +22,7 @@ func TestNormalizeGitRemoteTrailingSlash(t *testing.T) {
 }
 
 func TestNormalizedGitRemoteUsername(t *testing.T) {
-	assert.Equal(t, normalizeGitRemote("https://github.com/defn/dev/m/tilt"), normalizeGitRemote("git@github.com:tilt-dev/tilt.git"))
+	assert.Equal(t, normalizeGitRemote("https://github.com/defn/dev/m/tilt"), normalizeGitRemote("git@github.com:defn/dev/m/tilt.git"))
 }
 
 func TestGitOrigin(t *testing.T) {

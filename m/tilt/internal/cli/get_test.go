@@ -21,7 +21,6 @@ import (
 	"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1"
 	"github.com/defn/dev/m/tilt/pkg/assets"
 	"github.com/defn/dev/m/tilt/pkg/model"
-	"github.com/tilt-dev/tilt-apiserver/pkg/server/testdata"
 	"github.com/tilt-dev/wmclient/pkg/analytics"
 	"github.com/tilt-dev/wmclient/pkg/dirs"
 )
@@ -94,7 +93,7 @@ func newServerFixture(t *testing.T) *serverFixture {
 	apiPort, err := strconv.Atoi(apiPortString)
 	require.NoError(t, err)
 	cfg, err := server.ProvideTiltServerOptions(ctx, model.TiltBuild{}, apiConnProvider,
-		"corgi-charge", testdata.CertKey(), server.APIServerPort(apiPort))
+		"corgi-charge", InMemoryCertKey(), server.APIServerPort(apiPort))
 	require.NoError(t, err)
 
 	webListener, err := server.ProvideWebListener("localhost", model.WebPort(0))

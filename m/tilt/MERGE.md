@@ -397,6 +397,61 @@ $ bazel-bin/tilt/cmd/tilt/tilt_/tilt version
 v0.36.0-dev, built 2025-12-07
 ```
 
+## 9. Test Fixes for Bazel Sandbox Compatibility
+
+### Problem
+
+Several tests failed in Bazel's sandbox environment because they depended on `testdata.CertKey()` from `github.com/tilt-dev/tilt-apiserver/pkg/server/testdata`. This function uses `runtime.Caller()` to find certificate fixture files, but in Bazel sandboxes the path points to a read-only external dependency directory.
+
+Error message:
+```
+error creating self-signed certificates: unable to generate self signed cert:
+failed to write cert fixture to external/gazelle++go_deps+com_github_tilt_dev_tilt_apiserver/pkg/server/testdata/localhost_127.0.0.1-127.0.0.1_.crt:
+open external/gazelle++go_deps+com_github_tilt_dev_tilt_apiserver/pkg/server/testdata/localhost_127.0.0.1-127.0.0.1_.crt: no such file or directory
+```
+
+### Solution
+
+Replaced `testdata.CertKey()` with `inMemoryCertKey()` which returns an empty `GeneratableKeyCert{}`. When `FixtureDirectory` is empty, the apiserver generates certificates in-memory instead of trying to cache them to disk.
+
+### Files Modified
+
+1. **`tilt/internal/cli/testdata_cert.go`** (new file):
+   ```go
+   package cli
+
+   import "github.com/tilt-dev/tilt-apiserver/pkg/server/options"
+
+   // InMemoryCertKey returns a GeneratableKeyCert that generates certs in-memory
+   func InMemoryCertKey() options.GeneratableKeyCert {
+       return options.GeneratableKeyCert{}
+   }
+   ```
+
+2. **`tilt/internal/cli/get_test.go`**:
+   - Removed import of `github.com/tilt-dev/tilt-apiserver/pkg/server/testdata`
+   - Changed `testdata.CertKey()` to `InMemoryCertKey()`
+
+3. **`tilt/internal/cli/BUILD.bazel`**:
+   - Added `testdata_cert.go` to srcs
+   - Added `@com_github_tilt_dev_tilt_apiserver//pkg/server/options` to deps
+   - Removed `@com_github_tilt_dev_tilt_apiserver//pkg/server/testdata` from test deps
+
+4. **`tilt/internal/hud/server/apiserver.go`**:
+   - Removed import of `github.com/tilt-dev/tilt-apiserver/pkg/server/testdata`
+   - Added `inMemoryCertKey()` function
+   - Changed `ProvideTiltServerOptionsForTesting()` to use `inMemoryCertKey()`
+
+5. **`tilt/internal/hud/server/apiserver_test.go`**:
+   - Removed import of `github.com/tilt-dev/tilt-apiserver/pkg/server/testdata`
+   - Changed `testdata.CertKey()` to `inMemoryCertKey()`
+
+6. **`tilt/internal/hud/server/BUILD.bazel`**:
+   - Removed `@com_github_tilt_dev_tilt_apiserver//pkg/server/testdata` from both library and test deps
+
+7. **`tilt/internal/git/remote_test.go`**:
+   - Fixed test that had old `tilt-dev/tilt` git remote URL, updated to `defn/dev/m/tilt`
+
 ## Future Considerations
 
 1. **Proto generation**: Currently disabled for tilt protos. If protos need to be regenerated, the import paths in the .proto files would need to be updated to include `tilt/` prefix, or a proto strip prefix would need to be configured.
@@ -404,6 +459,8 @@ v0.36.0-dev, built 2025-12-07
 2. **Upstream sync**: This fork will diverge significantly. Syncing with upstream tilt would require re-applying these changes.
 
 3. **gazelle:ignore**: The `tilt/pkg/webview/BUILD.bazel` file has `# gazelle:ignore` to prevent gazelle from overwriting the manual proto fix. Running `bazel run //:gazelle` is safe.
+
+4. **tilt-apiserver testdata.CertKey()**: The upstream `tilt-apiserver` package's `testdata.CertKey()` uses `runtime.Caller()` to find certificate fixture files at compile time. This doesn't work in Bazel sandboxes because the path points to a read-only external dependency location. We replaced it with `inMemoryCertKey()` which returns an empty `GeneratableKeyCert{}` that generates certificates in-memory instead of using cached fixtures. This is slightly slower but works in sandboxed environments. Consider fixing upstream to support configurable fixture paths.
 
 ## Commands Used
 

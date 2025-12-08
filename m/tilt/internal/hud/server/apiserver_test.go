@@ -34,7 +34,6 @@ import (
 	"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1"
 	"github.com/defn/dev/m/tilt/pkg/assets"
 	"github.com/defn/dev/m/tilt/pkg/model"
-	"github.com/tilt-dev/tilt-apiserver/pkg/server/testdata"
 )
 
 // Ensure creating objects works with the dynamic API clients.
@@ -189,7 +188,7 @@ func newAPIServerFixture(t testing.TB) *apiserverFixture {
 
 	memconn := ProvideMemConn()
 
-	cfg, err := ProvideTiltServerOptions(ctx, model.TiltBuild{}, memconn, "corgi-charge", testdata.CertKey(), 0)
+	cfg, err := ProvideTiltServerOptions(ctx, model.TiltBuild{}, memconn, "corgi-charge", inMemoryCertKey(), 0)
 	require.NoError(t, err)
 
 	const host = "localhost"
