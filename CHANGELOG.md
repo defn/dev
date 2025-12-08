@@ -1,5 +1,54 @@
 # Changelog
 
+## [1.58.0](https://github.com/defn/dev/compare/v1.57.1...v1.58.0) (2025-12-08)
+
+
+### Features
+
+* add pepr kubernetes operator for Script CRD ([1ae5285](https://github.com/defn/dev/commit/1ae52855378ff3fbf84d533fdf6aa0bf565c864d))
+* auto-apply CRD when capabilities/crd/crd.Script.yaml changes ([79fbd46](https://github.com/defn/dev/commit/79fbd46767e6518814a2592060e83cba78ea38e8))
+* change coder service to LoadBalancer on port 9999 ([c454606](https://github.com/defn/dev/commit/c454606bd586a78b9a38c56e3dedd158e605666f))
+* configure TLS with Let's Encrypt and Cloudflare DNS ([e9f1749](https://github.com/defn/dev/commit/e9f17499cdc399d86ea07bc85a639893e8f92c3f))
+* enable DERP force websockets for coder ([22d4d92](https://github.com/defn/dev/commit/22d4d92e3ecf6229fa0f19e8b5e2c08498a7a2ee))
+* enable DERP force websockets for coder ([be957b2](https://github.com/defn/dev/commit/be957b25137c730491e1e04d62c4cfb0b6a3c942))
+* enable host networking for coder deployment ([1b8121d](https://github.com/defn/dev/commit/1b8121d9ee317642aafd431f6488457466fad1ec))
+* enable TLS for headlamp and linkerd-viz ingresses ([fc01856](https://github.com/defn/dev/commit/fc01856ec43ee2bbcc3bdf76ad405c460d0839cf))
+* enforce websecure entrypoint for www and coder ingresses ([a5f8158](https://github.com/defn/dev/commit/a5f8158afb854a277e9a6488ceffe4ffa7d6777c))
+* improve operator logging and add ConfigMap watch ([6837bcc](https://github.com/defn/dev/commit/6837bccc134a01b437925b60632a5d71050f280c))
+* make coder service headless for direct pod IP resolution ([5f4400a](https://github.com/defn/dev/commit/5f4400a2c3df61a56d8d9545fbdbed92ae7f9bd1))
+* merge tilt module into parent go.mod with bazel support ([a56c9a9](https://github.com/defn/dev/commit/a56c9a980262651870e10115aea224b033c3aef4))
+* TLS everywhere with reflector and HTTPS redirect ([8f17274](https://github.com/defn/dev/commit/8f1727491e785efa6aa9efc0e614d803074eb25b))
+
+
+### Bug Fixes
+
+* add *.coder.defn.xxx to wildcard certificate ([0513666](https://github.com/defn/dev/commit/05136667ca138d4e9d5a7fafb0b109cade4debf2))
+* also strip leading whitespace from log payloads ([24f5b1c](https://github.com/defn/dev/commit/24f5b1cded89b2d40a7af615c3f6e6e40a6b846a))
+* configure cert-manager to use external DNS for ACME ([edf67f3](https://github.com/defn/dev/commit/edf67f32b6ff7fe4fad16e6992d21fad361caa8f))
+* disable STUN and block direct P2P for coder ([716fafa](https://github.com/defn/dev/commit/716fafa2f4e016b999f9c4a2dce045faea93044a))
+* downgrade coder helm chart to 2.28.5 ([db5d14c](https://github.com/defn/dev/commit/db5d14ce8ca593a56e1cea0cf1783504ed12f503))
+* enable built-in DERP server for agent connectivity ([04dd436](https://github.com/defn/dev/commit/04dd4369e1f4859ea6abefd4a132b55379444e7e))
+* enable DERP server with external relay URL ([93c4a51](https://github.com/defn/dev/commit/93c4a519de7026b2f330dca8883f5d8627e23346))
+* enable Tilt auto-reload when pepr.yaml changes ([900005a](https://github.com/defn/dev/commit/900005a927ee8248c00bd53edba9f03a485364ff))
+* ignore nodePort diff in coder ArgoCD app ([a6d922b](https://github.com/defn/dev/commit/a6d922b702c33e278b2f24c51378108f6b258185))
+* make tilt tests compatible with bazel sandbox ([b5ac22c](https://github.com/defn/dev/commit/b5ac22c0fea344320debb4f2f5a4d54318a0c3e0))
+* remove fsnotify SetRecursive call for Linux compatibility ([dc6eab6](https://github.com/defn/dev/commit/dc6eab6c70acd31e943f6c58d46cb76e1d65e5e0))
+* remove tests requiring external CLI tools (helm, kustomize) ([6aa9b53](https://github.com/defn/dev/commit/6aa9b539f20fc816e5a8fc1cc689b0771359a0ee))
+* resolve race conditions in tiltfile controller tests ([ed04e7d](https://github.com/defn/dev/commit/ed04e7de5690230052d1bf18491fb1a270cde2ee))
+* set coder provider URL to internal cluster service ([00a0b52](https://github.com/defn/dev/commit/00a0b52bd969f56365b5b0524a0d0903d818e118))
+* set DERP relay URL to external access URL ([f66597e](https://github.com/defn/dev/commit/f66597e1f08be83a0e2a9f335379a1f2c9f16c6e))
+* strip trailing whitespace from log payloads ([31c9bd8](https://github.com/defn/dev/commit/31c9bd8b51810db16b9ed77f92fff60dcc8bf99c))
+* use app-defn.xxx naming convention ([7d49bad](https://github.com/defn/dev/commit/7d49bad3d32ba796c796d635baae30ba11c28557))
+* use kustomize patch to override DERP env vars ([4e62e05](https://github.com/defn/dev/commit/4e62e055b133f18e114a18dea0cae16b23b67be0))
+* use kustomize patch to set coder service port to 9999 ([91e85db](https://github.com/defn/dev/commit/91e85db9c6854e1f0adc45d5329fbd1a8e3e04af))
+
+
+### Reverts
+
+* remove host networking from coder deployment ([8dabb83](https://github.com/defn/dev/commit/8dabb836c7bfb94de7624236f872e7de74d17dc0))
+* restore coder helm chart to 2.29.0 ([7fa03b4](https://github.com/defn/dev/commit/7fa03b424c133aaf88891f7566afa3d7eabf46f0))
+* use standard ClusterIP service with explicit port 8080 ([2f1d6f1](https://github.com/defn/dev/commit/2f1d6f18210ce19952add3c8e3f8b3ea88ed7510))
+
 ## [1.57.1](https://github.com/defn/dev/compare/v1.57.0...v1.57.1) (2025-12-07)
 
 
