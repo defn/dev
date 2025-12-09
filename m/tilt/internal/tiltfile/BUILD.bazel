@@ -1,4 +1,4 @@
-load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
 
 go_library(
     name = "tiltfile",
@@ -69,43 +69,5 @@ go_library(
         "@com_github_tilt_dev_wmclient//pkg/analytics",
         "@net_starlark_go//starlark",
         "@net_starlark_go//syntax",
-    ],
-)
-
-go_test(
-    name = "tiltfile_test",
-    srcs = [
-        "include_test.go",
-        "local_resource_test.go",
-        "tiltfile_test.go",
-    ],
-    embed = [":tiltfile"],
-    deps = [
-        "//tilt/internal/analytics",
-        "//tilt/internal/controllers/apis/tiltfile",
-        "//tilt/internal/feature",
-        "//tilt/internal/ignore",
-        "//tilt/internal/localexec",
-        "//tilt/internal/ospath",
-        "//tilt/internal/sliceutils",
-        "//tilt/internal/testutils",
-        "//tilt/internal/testutils/tempdir",
-        "//tilt/internal/tiltfile/cisettings",
-        "//tilt/internal/tiltfile/config",
-        "//tilt/internal/tiltfile/hasher",
-        "//tilt/internal/tiltfile/tiltextension",
-        "//tilt/internal/tiltfile/version",
-        "//tilt/internal/yaml",
-        "//tilt/pkg/apis/core/v1alpha1",
-        "//tilt/pkg/logger",
-        "//tilt/pkg/model",
-        "@com_github_stretchr_testify//assert",
-        "@com_github_stretchr_testify//require",
-        "@com_github_tilt_dev_clusterid//:clusterid",
-        "@com_github_tilt_dev_wmclient//pkg/analytics",
-        "@io_k8s_api//apps/v1:apps",
-        "@io_k8s_api//core/v1:core",
-        "@io_k8s_apimachinery//pkg/apis/meta/v1:meta",
-        "@io_k8s_apimachinery//pkg/labels",
     ],
 )

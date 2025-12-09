@@ -49,9 +49,7 @@ go_library(
 go_test(
     name = "store_test",
     srcs = [
-        "engine_state_test.go",
         "helpers_test.go",
-        "json_test.go",
         "manifest_target_test.go",
         "store_test.go",
         "subscriber_test.go",

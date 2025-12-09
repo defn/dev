@@ -77,7 +77,7 @@ func TestUpdateWithCurrentBuild(t *testing.T) {
 	f.st.WithState(func(s *store.EngineState) {
 		c := model.ToHostCmd("false")
 		localTarget := model.NewLocalTarget(model.TargetName("foo"), c, c, nil)
-		s.ManifestTargets["foo"].Manifest.DeployTarget = localTarget
+		s.ManifestTargets["foo"].Manifest = s.ManifestTargets["foo"].Manifest.WithLocalTarget(localTarget)
 		s.ManifestTargets["foo"].State.CurrentBuilds["buildcontrol"] = model.BuildRecord{StartTime: f.clock.Now()}
 	})
 
@@ -1057,7 +1057,7 @@ func (f *fixture) resourceFromTarget(name string, target model.TargetSpec, lastD
 	n := model.ManifestName(name)
 	m := model.Manifest{
 		Name: n,
-	}.WithDeployTarget(target)
+	}.WithLocalTarget(target.(model.LocalTarget))
 
 	st := f.st.LockMutableStateForTesting()
 	defer f.st.UnlockMutableState()

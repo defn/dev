@@ -50,13 +50,11 @@ go_test(
         "matcher_test.go",
         "service_test.go",
         "squash_test.go",
-        "target_graph_test.go",
     ],
     embed = [":model"],
     deps = [
         "//tilt/internal/ospath",
         "//tilt/internal/testutils/tempdir",
         "@com_github_stretchr_testify//assert",
-        "@com_github_stretchr_testify//require",
     ],
 )

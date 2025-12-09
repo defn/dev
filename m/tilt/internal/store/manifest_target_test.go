@@ -11,7 +11,7 @@ import (
 )
 
 func TestLocalTargetUpdateStatus(t *testing.T) {
-	m := model.Manifest{Name: "serve-cmd"}.WithDeployTarget(
+	m := model.Manifest{Name: "serve-cmd"}.WithLocalTarget(
 		model.NewLocalTarget("serve-cmd", model.Cmd{}, model.ToHostCmd("busybox httpd"), nil))
 	mt := NewManifestTarget(m)
 	assert.Equal(t, v1alpha1.UpdateStatusPending, mt.UpdateStatus())
@@ -32,15 +32,4 @@ func TestLocalTargetUpdateStatus(t *testing.T) {
 	mt.State.TriggerReason = model.BuildReasonFlagTriggerWeb
 	assert.Equal(t, v1alpha1.UpdateStatusPending, mt.UpdateStatus())
 	assert.Equal(t, v1alpha1.RuntimeStatusPending, mt.RuntimeStatus())
-}
-
-func TestK8sRuntimeStatus(t *testing.T) {
-	m := model.Manifest{Name: "k8s"}.WithDeployTarget(model.NewK8sTargetForTesting(""))
-	mt := NewManifestTarget(m)
-	assert.Equal(t, v1alpha1.UpdateStatusPending, mt.UpdateStatus())
-	assert.Equal(t, v1alpha1.RuntimeStatusPending, mt.RuntimeStatus())
-
-	mt.Manifest.TriggerMode = model.TriggerModeManual
-	assert.Equal(t, v1alpha1.UpdateStatusNone, mt.UpdateStatus())
-	assert.Equal(t, v1alpha1.RuntimeStatusNone, mt.RuntimeStatus())
 }

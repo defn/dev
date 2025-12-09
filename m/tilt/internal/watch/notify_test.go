@@ -14,10 +14,50 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 
-	"github.com/defn/dev/m/tilt/internal/dockerignore"
 	"github.com/defn/dev/m/tilt/internal/testutils/tempdir"
 	"github.com/defn/dev/m/tilt/pkg/logger"
 )
+
+// simpleIgnoreMatcher is a simple test matcher that ignores paths containing certain patterns
+type simpleIgnoreMatcher struct {
+	basePath string
+	patterns []string
+}
+
+func newSimpleIgnoreMatcher(basePath string, patterns []string) PathMatcher {
+	return &simpleIgnoreMatcher{basePath: basePath, patterns: patterns}
+}
+
+func (m *simpleIgnoreMatcher) Matches(p string) (bool, error) {
+	relPath, err := filepath.Rel(m.basePath, p)
+	if err != nil {
+		return false, nil
+	}
+	for _, pattern := range m.patterns {
+		// Simple check: if the pattern starts with !, it's an exclusion (always allow)
+		if strings.HasPrefix(pattern, "!") {
+			continue
+		}
+		// Check if the relative path starts with or contains the pattern
+		if strings.HasPrefix(relPath, pattern) || strings.Contains(relPath, "/"+pattern) {
+			// Check for exclusions
+			for _, p2 := range m.patterns {
+				if strings.HasPrefix(p2, "!") {
+					excluded := p2[1:]
+					if strings.HasPrefix(relPath, excluded) || strings.Contains(relPath, "/"+excluded) {
+						return false, nil // Not ignored due to exclusion
+					}
+				}
+			}
+			return true, nil
+		}
+	}
+	return false, nil
+}
+
+func (m *simpleIgnoreMatcher) MatchesEntireDir(p string) (bool, error) {
+	return m.Matches(p)
+}
 
 // Each implementation of the notify interface should have the same basic
 // behavior.
@@ -514,7 +554,7 @@ func TestWatchCountInnerFileWithIgnore(t *testing.T) {
 	f := newNotifyFixture(t)
 
 	root := f.paths[0]
-	ignore, _ := dockerignore.NewDockerPatternMatcher(root, []string{
+	ignore := newSimpleIgnoreMatcher(root, []string{
 		"a",
 		"!a/b",
 	})
@@ -537,7 +577,7 @@ func TestIgnoreCreatedDir(t *testing.T) {
 	f := newNotifyFixture(t)
 
 	root := f.paths[0]
-	ignore, _ := dockerignore.NewDockerPatternMatcher(root, []string{"a/b"})
+	ignore := newSimpleIgnoreMatcher(root, []string{"a/b"})
 	f.setIgnore(ignore)
 
 	a := f.JoinPath(root, "a")
@@ -557,7 +597,7 @@ func TestIgnoreCreatedDirWithExclusions(t *testing.T) {
 	f := newNotifyFixture(t)
 
 	root := f.paths[0]
-	ignore, _ := dockerignore.NewDockerPatternMatcher(root,
+	ignore := newSimpleIgnoreMatcher(root,
 		[]string{
 			"a/b",
 			"c",
@@ -582,7 +622,7 @@ func TestIgnoreInitialDir(t *testing.T) {
 	f := newNotifyFixture(t)
 
 	root := f.TempDir("root")
-	ignore, _ := dockerignore.NewDockerPatternMatcher(root, []string{"a/b"})
+	ignore := newSimpleIgnoreMatcher(root, []string{"a/b"})
 	f.setIgnore(ignore)
 
 	a := f.JoinPath(root, "a")
