@@ -7,7 +7,6 @@ go_library(
     visibility = ["//tilt:__subpackages__"],
     deps = [
         "//tilt/internal/tiltfile/starkit",
-        "//tilt/internal/tiltfile/value",
         "//tilt/pkg/model",
         "@com_github_pkg_errors//:errors",
         "@net_starlark_go//starlark",

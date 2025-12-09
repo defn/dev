@@ -7,7 +7,6 @@ go_library(
     visibility = ["//tilt:__subpackages__"],
     deps = [
         "//tilt/internal/store",
-        "//tilt/pkg/apis/core/v1alpha1",
         "//tilt/pkg/model",
     ],
 )

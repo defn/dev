@@ -8,7 +8,6 @@ import (
 	"k8s.io/apimachinery/pkg/types"
 
 	"github.com/defn/dev/m/tilt/internal/controllers/fake"
-	"github.com/defn/dev/m/tilt/internal/hud/server"
 	"github.com/defn/dev/m/tilt/internal/store"
 	"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1"
 )
@@ -39,7 +38,7 @@ type fixture struct {
 func newFixture(t *testing.T) *fixture {
 	cfb := fake.NewControllerFixtureBuilder(t)
 	st := store.NewTestingStore()
-	r := NewReconciler(cfb.Client, server.NewWebsocketList(), st)
+	r := NewReconciler(cfb.Client, st)
 	return &fixture{
 		ControllerFixture: cfb.Build(r),
 		r:                 r,

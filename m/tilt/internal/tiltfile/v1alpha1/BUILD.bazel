@@ -25,11 +25,9 @@ go_test(
     srcs = ["plugin_test.go"],
     embed = [":v1alpha1"],
     deps = [
-        "//tilt/internal/k8s",
         "//tilt/internal/tiltfile/starkit",
         "//tilt/pkg/apis/core/v1alpha1",
         "@com_github_stretchr_testify//require",
         "@io_k8s_apimachinery//pkg/apis/meta/v1:meta",
-        "@io_k8s_apimachinery//pkg/labels",
     ],
 )

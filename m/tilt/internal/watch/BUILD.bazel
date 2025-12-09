@@ -81,7 +81,6 @@ go_test(
     ],
     embed = [":watch"],
     deps = [
-        "//tilt/internal/dockerignore",
         "//tilt/internal/testutils/tempdir",
         "//tilt/pkg/logger",
         "@com_github_stretchr_testify//assert",

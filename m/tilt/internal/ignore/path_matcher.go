@@ -2,8 +2,8 @@ package ignore
 
 import (
 	"path/filepath"
+	"strings"
 
-	"github.com/bmatcuk/doublestar/v4"
 	"github.com/pkg/errors"
 
 	"github.com/defn/dev/m/tilt/internal/ospath"
@@ -57,13 +57,30 @@ func (m *PatternMatcher) Matches(f string) (bool, error) {
 	relPath := f
 	if filepath.IsAbs(f) {
 		rel, err := filepath.Rel(m.basePath, f)
-		if err == nil && !filepath.IsAbs(rel) {
+		if err == nil && !filepath.IsAbs(rel) && !strings.HasPrefix(rel, "..") {
 			relPath = rel
 		}
 	}
 
 	for _, pattern := range m.patterns {
-		matched, err := doublestar.Match(pattern, relPath)
+		// Handle ** patterns by checking if the file is anywhere under the pattern
+		if strings.Contains(pattern, "**") {
+			// For **, just match if the relative path exists under basePath
+			if pattern == "**" {
+				return true, nil
+			}
+			// For patterns like **/*.go, check the suffix
+			if strings.HasPrefix(pattern, "**/") {
+				suffix := pattern[3:]
+				matched, _ := filepath.Match(suffix, filepath.Base(f))
+				if matched {
+					return true, nil
+				}
+			}
+			continue
+		}
+
+		matched, err := filepath.Match(pattern, relPath)
 		if err != nil {
 			continue
 		}
@@ -71,7 +88,7 @@ func (m *PatternMatcher) Matches(f string) (bool, error) {
 			return true, nil
 		}
 		// Also try matching just the base name
-		matched, err = doublestar.Match(pattern, filepath.Base(f))
+		matched, err = filepath.Match(pattern, filepath.Base(f))
 		if err != nil {
 			continue
 		}

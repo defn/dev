@@ -1,33 +1,20 @@
-load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
 
 # gazelle:proto disable_global
 
 go_library(
     name = "v1alpha1",
     srcs = [
-        "cluster_types.go",
         "cmd_types.go",
-        "cmdimage_types.go",
         "configmap_types.go",
         "disable_types.go",
         "doc.go",
-        "dockercompose_stub_types.go",
-        "dockerimage_types.go",
         "extension_types.go",
         "extensionrepo_types.go",
         "filewatch_types.go",
-        # gazelle:ignore generated.pb.go - pre-generated proto, skip embedding
-        "generated.pb.go",
-        "imagemap_types.go",
-        "kubernetesapply_types.go",
-        "kubernetesdiscovery_types.go",
-        "liveupdate_types.go",
         "objectselector.go",
-        "podlogstream_types.go",
-        "portforward_types.go",
         "probe.go",
         "register.go",
-        "registry_types.go",
         "runtimestatus_types.go",
         "session_types.go",
         "tiltfile_types.go",
@@ -37,16 +24,11 @@ go_library(
         "uiresource_types.go",
         "uisession_types.go",
         "updatestatus_types.go",
-        "zz_generated.conversion.go",
         "zz_generated.deepcopy.go",
-        "zz_generated.defaults.go",
     ],
     importpath = "github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1",
     visibility = ["//visibility:public"],
     deps = [
-        "@com_github_distribution_reference//:reference",
-        "@com_github_gogo_protobuf//proto",
-        "@com_github_gogo_protobuf//sortkeys",
         "@com_github_tilt_dev_tilt_apiserver//pkg/server/builder/resource",
         "@com_github_tilt_dev_tilt_apiserver//pkg/server/builder/resource/resourcerest",
         "@com_github_tilt_dev_tilt_apiserver//pkg/server/builder/resource/resourcestrategy",
@@ -55,15 +37,5 @@ go_library(
         "@io_k8s_apimachinery//pkg/runtime/schema",
         "@io_k8s_apimachinery//pkg/util/runtime",
         "@io_k8s_apimachinery//pkg/util/validation/field",
-    ],
-)
-
-go_test(
-    name = "v1alpha1_test",
-    srcs = ["registry_types_test.go"],
-    deps = [
-        ":v1alpha1",
-        "@com_github_stretchr_testify//assert",
-        "@com_github_stretchr_testify//require",
     ],
 )

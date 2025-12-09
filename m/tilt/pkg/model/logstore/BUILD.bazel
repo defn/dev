@@ -15,8 +15,6 @@ go_library(
     deps = [
         "//tilt/pkg/logger",
         "//tilt/pkg/model",
-        "//tilt/pkg/webview",
-        "@org_golang_google_protobuf//types/known/timestamppb",
     ],
 )
 
