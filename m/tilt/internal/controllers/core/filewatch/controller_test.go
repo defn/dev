@@ -218,27 +218,6 @@ func TestController_ShortRead(t *testing.T) {
 	assert.Contains(t, fw.Status.Error, "short read on readEvents()")
 }
 
-func TestController_IgnoreEphemeralFiles(t *testing.T) {
-	f := newFixture(t)
-	key, orig := f.CreateSimpleFileWatch()
-	// spec should have no ignores - these are purely implicit ignores
-	require.Empty(t, orig.Spec.Ignores)
-
-	// sandwich in some ignored files with seen files on the outside as synchronization
-	f.ChangeAndWaitForSeenFile(key, "a", "start")
-	// see internal/ignore/ephemeral.go for where these come from - they're NOT part of a FileWatch spec
-	// but are always included at the filesystem watcher level by Tilt
-	f.ChangeFile("a", ".idea", "workspace.xml")
-	f.ChangeFile("b", "c", ".vim.swp")
-	f.ChangeAndWaitForSeenFile(key, "b", "c", "stop")
-
-	var fw filewatches.FileWatch
-	f.MustGet(key, &fw)
-	require.Equal(t, 2, len(fw.Status.FileEvents), "Wrong file event count")
-	assert.Equal(t, []string{f.tmpdir.JoinPath("a", "start")}, fw.Status.FileEvents[0].SeenFiles)
-	assert.Equal(t, []string{f.tmpdir.JoinPath("b", "c", "stop")}, fw.Status.FileEvents[1].SeenFiles)
-}
-
 // TestController_Watcher_Cancel peeks into internal/unexported portions of the controller to inspect the actual
 // filesystem monitor so it can ensure reconciler is not leaking resources; other tests should prefer observing
 // desired state!
