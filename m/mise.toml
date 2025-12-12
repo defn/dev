@@ -10,7 +10,7 @@ b test
 raw = true
 
 [tools]
-"npm:wrangler" = "4.53.0"
+"npm:wrangler" = "4.54.0"
 "ubi:bazelbuild/buildtools" = { version = "8.2.1", exe = "buildifier" }
 "ubi:bazelbuild/bazel-watcher" = { version = "0.28.0", exe = "ibazel" }
 "ubi:open-telemetry/opentelemetry-collector-releases" = { version = "0.141.0", match = "otelcol-contrib", exe = "otelcol-contrib" }
@@ -24,7 +24,7 @@ prettier = "3.7.4"
 tilt = "0.36.0"
 aws-vault = "7.2.0"
 fx = "39.2.0"
-terraform = "1.14.1"
+terraform = "1.14.2"
 steampipe = "2.3.2"
 #"ubi:vectordotdev/vector" = "0.51.1"
 "npm:turbo" = "2.6.3"
