@@ -56,7 +56,32 @@ func (m *simpleIgnoreMatcher) Matches(p string) (bool, error) {
 }
 
 func (m *simpleIgnoreMatcher) MatchesEntireDir(p string) (bool, error) {
-	return m.Matches(p)
+	// First check if this path itself matches
+	matches, err := m.Matches(p)
+	if err != nil || !matches {
+		return matches, err
+	}
+
+	// If it matches, check if there are any exclusion patterns
+	// that are children of this directory. If so, we can't skip
+	// the entire directory because we need to watch for those children.
+	relPath, err := filepath.Rel(m.basePath, p)
+	if err != nil {
+		return false, nil
+	}
+
+	for _, pattern := range m.patterns {
+		if strings.HasPrefix(pattern, "!") {
+			excluded := pattern[1:]
+			// If the exclusion is a child of this directory,
+			// we can't skip the entire directory
+			if strings.HasPrefix(excluded, relPath+"/") {
+				return false, nil
+			}
+		}
+	}
+
+	return true, nil
 }
 
 // Each implementation of the notify interface should have the same basic
