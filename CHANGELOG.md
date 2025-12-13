@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.58.1](https://github.com/defn/dev/compare/v1.58.0...v1.58.1) (2025-12-13)
+
+
+### Bug Fixes
+
+* handle exclusion patterns in MatchesEntireDir for Linux watcher ([b0ad680](https://github.com/defn/dev/commit/b0ad6809e91b8f5727efa60e65e64f307c9795df))
+* update BUILD.bazel files to remove deleted package refs ([9bf0897](https://github.com/defn/dev/commit/9bf08977b5934e3bc2346435ea4b1ce616fef8f2))
+
 ## [1.58.0](https://github.com/defn/dev/compare/v1.57.1...v1.58.0) (2025-12-08)
 
 
