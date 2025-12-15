@@ -21,6 +21,8 @@ func run() (exitCode int) {
 	ctx, cancel := newContext()
 	defer cancel()
 
+	go handleDebugSignal(ctx)
+
 	if !buildinfo.IsDev() {
 		defer func() {
 			if r := recover(); r != nil {
