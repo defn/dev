@@ -4,16 +4,14 @@ import (
 	"context"
 	"os"
 	"os/signal"
-	"runtime"
+	"runtime/pprof"
 	"syscall"
 
 	"golang.org/x/sys/unix"
-	"runtime/pprof"
-
-	"github.com/defn/dev/m/flyctl/iostreams"
 
 	"github.com/defn/dev/m/flyctl/internal/buildinfo"
 	"github.com/defn/dev/m/flyctl/internal/cli"
+	"github.com/defn/dev/m/flyctl/iostreams"
 )
 
 // handleDebugSignal handles SIGUSR2 and dumps debug information.
@@ -55,13 +53,5 @@ func run() (exitCode int) {
 }
 
 func newContext() (context.Context, context.CancelFunc) {
-	// NOTE: when signal.Notify is called for os.Interrupt it traps both
-	// ^C (Control-C) and ^BREAK (Control-Break) on Windows.
-
-	signals := []os.Signal{os.Interrupt}
-	if runtime.GOOS != "windows" {
-		signals = append(signals, syscall.SIGTERM)
-	}
-
-	return signal.NotifyContext(context.Background(), signals...)
+	return signal.NotifyContext(context.Background(), os.Interrupt, syscall.SIGTERM)
 }

@@ -219,10 +219,6 @@ var _isUnderHomebrew memoize[bool]
 // IsUnderHomebrew reports whether the fly binary was found under the Homebrew
 // prefix.
 func IsUnderHomebrew() bool {
-	if runtime.GOOS == "windows" {
-		return false
-	}
-
 	val, err := _isUnderHomebrew.Get(func() (bool, error) {
 		flyBinary, err := os.Executable()
 		if err != nil {
@@ -247,30 +243,15 @@ func upgradeCommand(prerelease bool) string {
 		return "brew upgrade flyctl"
 	}
 
-	if runtime.GOOS == "windows" {
-		cmd := "iwr https://fly.io/install.ps1 -useb | iex"
-		if prerelease {
-			cmd = "$v=\"pre\"; " + cmd
-		}
-		return cmd
-	} else {
-		cmd := "curl -L \"https://fly.io/install.sh\" | sh"
-		if prerelease {
-			cmd = cmd + " -s pre"
-		}
-		return cmd
+	cmd := "curl -L \"https://fly.io/install.sh\" | sh"
+	if prerelease {
+		cmd = cmd + " -s pre"
 	}
+	return cmd
 }
 
 func UpgradeInPlace(ctx context.Context, io *iostreams.IOStreams, prelease, silent bool) error {
-	if runtime.GOOS == "windows" {
-		if err := renameCurrentBinaries(); err != nil {
-			return err
-		}
-	}
-
 	if IsUnderHomebrew() {
-
 		brewExe, err := safeexec.LookPath("brew")
 		if err == nil {
 			err = exec.Command(brewExe, "update").Run()
@@ -280,32 +261,13 @@ func UpgradeInPlace(ctx context.Context, io *iostreams.IOStreams, prelease, sile
 		}
 	}
 
-	var shellToUse string
-	switchToUse := "-c"
-	ok := false
-
-	if runtime.GOOS != "windows" {
-		shellToUse, ok = os.LookupEnv("SHELL")
-	}
-
+	shellToUse, ok := os.LookupEnv("SHELL")
 	if !ok {
-		if runtime.GOOS == "windows" {
-			// pwsh.exe is the name of the PowerShell executable from 6.0+
-			// powershell.exe is locked to 5.1 forever
-			if commandInPath("pwsh.exe") {
-				shellToUse = "pwsh.exe"
-				switchToUse = "-Command"
-			} else {
-				shellToUse = "powershell.exe"
-				switchToUse = "-Command"
-			}
-		} else {
-			shellToUse = "/bin/bash"
-		}
+		shellToUse = "/bin/bash"
 	}
 
 	command := upgradeCommand(prelease)
-	cmd := exec.Command(shellToUse, switchToUse, command)
+	cmd := exec.Command(shellToUse, "-c", command)
 
 	if !silent {
 		fmt.Fprintf(io.ErrOut, "Running automatic upgrade [%s]\n", command)
@@ -387,10 +349,6 @@ func Relaunch(ctx context.Context, silent bool) error {
 		fmt.Fprint(io.Out, "\n----\n\n")
 	}
 
-	// Wait a bit for the update to take effect.
-	// Windows seemed to need this for whatever reason.
-	time.Sleep(400 * time.Millisecond)
-
 	binPath, err := GetCurrentBinaryPath()
 	if err != nil {
 		return err
@@ -418,50 +376,6 @@ func Relaunch(ctx context.Context, silent bool) error {
 
 	os.Exit(0)
 	return nil
-}
-
-func commandInPath(command string) bool {
-	for _, dir := range filepath.SplitList(os.Getenv("PATH")) {
-		path := filepath.Join(dir, command)
-		if _, err := os.Stat(path); err == nil {
-			return true
-		}
-	}
-
-	return false
-}
-
-// can't replace binary on windows, need to move
-func renameCurrentBinaries() error {
-	binaries, err := currentWindowsBinaries()
-	if err != nil {
-		return err
-	}
-
-	for _, p := range binaries {
-		if err := os.Rename(p, p+".old"); err != nil {
-			return err
-		}
-	}
-
-	return nil
-}
-
-func currentWindowsBinaries() ([]string, error) {
-	execPath, err := os.Executable()
-	if err != nil {
-		return nil, err
-	}
-
-	canonicalPath, err := filepath.EvalSymlinks(execPath)
-	if err != nil {
-		return nil, err
-	}
-
-	return []string{
-		canonicalPath,
-		filepath.Join(filepath.Dir(canonicalPath), "wintun.dll"),
-	}, nil
 }
 
 // BackgroundUpdate begins an update in the background.

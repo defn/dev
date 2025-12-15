@@ -8,7 +8,6 @@ import (
 	"io/fs"
 	"os"
 	"path/filepath"
-	"runtime"
 	"strconv"
 	"time"
 
@@ -375,7 +374,7 @@ func promptAndAutoUpdate(ctx context.Context) (context.Context, error) {
 			}
 			err = update.Relaunch(ctx, silent)
 			return nil, fmt.Errorf("failed to relaunch after updating: %w", err)
-		} else if runtime.GOOS != "windows" {
+		} else {
 			if err := update.BackgroundUpdate(); err != nil {
 				fmt.Fprintf(io.ErrOut, "failed to autoupdate: %s\n", err)
 			} else {

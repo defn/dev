@@ -2,13 +2,22 @@ package config
 
 import (
 	"context"
+	"errors"
+	"fmt"
+	"maps"
+	"slices"
 	"strings"
 	"sync"
 	"time"
 
+	fly "github.com/superfly/fly-go"
+	"github.com/superfly/fly-go/tokens"
+	"github.com/superfly/macaroon"
+	"github.com/superfly/macaroon/flyio"
+
+	"github.com/defn/dev/m/flyctl/internal/flyutil"
 	"github.com/defn/dev/m/flyctl/internal/logger"
 	"github.com/defn/dev/m/flyctl/internal/task"
-	"github.com/superfly/fly-go/tokens"
 )
 
 // UserURLCallback is a function that opens a URL in the user's browser. This is
@@ -175,4 +184,129 @@ func refreshDischargeTokens(ctx context.Context, t *tokens.Tokens, uucb UserURLC
 	}
 
 	return t.Update(ctx, updateOpts...)
+}
+
+// orgFetcher allows us to stub out API calls in tests
+type orgFetcher func(context.Context, flyutil.Client) (map[uint64]string, error)
+
+// tokenMinter allows us to stub out API calls in tests
+type tokenMinter func(context.Context, flyutil.Client, string) (string, error)
+
+func doFetchOrgTokens(ctx context.Context, t *tokens.Tokens, fetchOrgs orgFetcher, mintToken tokenMinter) (bool, error) {
+	macToks := t.GetMacaroonTokens()
+
+	if len(macToks) == 0 || len(t.GetUserTokens()) == 0 {
+		return false, nil
+	}
+
+	c := flyutil.NewClientFromOptions(ctx, fly.ClientOptions{Tokens: t.UserTokenOnly()})
+
+	graphIDByNumericID, err := fetchOrgs(ctx, c)
+	if err != nil {
+		return false, err
+	}
+
+	log := logger.FromContext(ctx)
+
+	tokOIDS := make(map[uint64]bool, len(macToks))
+	macToks = slices.DeleteFunc(macToks, func(tok string) bool {
+		toks, err := macaroon.Parse(tok)
+		if err != nil {
+			log.Debugf("pruning token: failed to parse macaroon: %v", err)
+			return true
+		}
+
+		permMacs, _, _, _, err := macaroon.FindPermissionAndDischargeTokens(toks, flyio.LocationPermission)
+		if err != nil {
+			log.Debugf("pruning token: failed to find permission token: %v", err)
+			return true
+		}
+
+		// discharge token?
+		if len(permMacs) != 1 {
+			return false
+		}
+
+		oid, err := flyio.OrganizationScope(&permMacs[0].UnsafeCaveats)
+		if err != nil {
+			log.Debugf("pruning token: failed to calculate org scope: %v", err)
+			return true
+		}
+
+		if _, hasOrg := graphIDByNumericID[oid]; !hasOrg {
+			log.Debug("pruning token: not in org")
+			return true
+		}
+
+		tokOIDS[oid] = true
+		return false
+	})
+
+	// find missing orgs by deleting the ones we found
+	for oid := range tokOIDS {
+		delete(graphIDByNumericID, oid)
+	}
+
+	var (
+		wg     sync.WaitGroup
+		wgErr  error
+		wgLock sync.Mutex
+	)
+
+	addErr := func(err error) {
+		wgLock.Lock()
+		defer wgLock.Unlock()
+		wgErr = errors.Join(wgErr, err)
+	}
+	addMac := func(m string) {
+		wgLock.Lock()
+		defer wgLock.Unlock()
+		macToks = append(macToks, m)
+	}
+	for graphID := range maps.Values(graphIDByNumericID) {
+		graphID := graphID
+
+		wg.Add(1)
+		go func() {
+			defer wg.Done()
+
+			log.Debugf("fetching macaroons for org %s", graphID)
+			newToksStr, err := mintToken(ctx, c, graphID)
+			if err != nil {
+				addErr(fmt.Errorf("failed to get macaroons for org %s: %w", graphID, err))
+				return
+			}
+
+			newToks, err := macaroon.Parse(newToksStr)
+			if err != nil {
+				addErr(fmt.Errorf("bad macaroons for org %s: %w", graphID, err))
+				return
+			}
+
+			for _, newTok := range newToks {
+				m, err := macaroon.Decode(newTok)
+				if err != nil {
+					addErr(fmt.Errorf("bad macaroon for org %s: %w", graphID, err))
+					return
+				}
+
+				mStr, err := m.String()
+				if err != nil {
+					addErr(fmt.Errorf("failed encoding macaroon for org %s: %w", graphID, err))
+					return
+				}
+
+				addMac(mStr)
+			}
+		}()
+	}
+	wg.Wait()
+
+	if slices.Equal(macToks, t.GetMacaroonTokens()) {
+		return false, wgErr
+	}
+
+	t.ReplaceMacaroonTokens(macToks)
+
+	return true, wgErr
 }

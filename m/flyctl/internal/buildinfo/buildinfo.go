@@ -115,7 +115,10 @@ func BuildTime() time.Time {
 }
 
 func Commit() string {
-	info, _ := debug.ReadBuildInfo()
+	info, ok := debug.ReadBuildInfo()
+	if !ok || info == nil {
+		return "<none>"
+	}
 	var rev = "<none>"
 	var dirty = ""
 	for _, v := range info.Settings {

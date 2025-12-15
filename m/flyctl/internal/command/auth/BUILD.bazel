@@ -6,7 +6,6 @@ go_library(
         "auth.go",
         "login.go",
         "logout.go",
-        "signup.go",
         "token.go",
         "whoami.go",
     ],

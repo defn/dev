@@ -7,13 +7,10 @@ import (
 	"github.com/defn/dev/m/flyctl/internal/command"
 )
 
-// New initializes and returns a new apps Command.
+// New initializes and returns a new auth Command.
 func New() *cobra.Command {
 	const (
-		long = `Authenticate with Fly (and logout if you need to).
-If you do not have an account, start with the AUTH SIGNUP command.
-If you do have an account, begin with the AUTH LOGIN subcommand.
-`
+		long  = `Authenticate with Fly (and logout if you need to).`
 		short = "Manage authentication"
 	)
 
@@ -24,7 +21,6 @@ If you do have an account, begin with the AUTH LOGIN subcommand.
 		newToken(),
 		newLogin(),
 		newLogout(),
-		newSignup(),
 	)
 
 	return auth

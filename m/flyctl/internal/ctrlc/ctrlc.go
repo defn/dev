@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"os"
 	"os/signal"
-	"runtime"
 	"sync"
 	"syscall"
 )
@@ -15,11 +14,8 @@ type boundSignal struct {
 	once sync.Once
 }
 
-// Signals returns any signals that could correspond to Ctrl+C.
+// Signals returns signals that correspond to Ctrl+C.
 func Signals() []os.Signal {
-	if runtime.GOOS == "windows" {
-		return []os.Signal{os.Interrupt}
-	}
 	return []os.Signal{os.Interrupt, syscall.SIGTERM}
 }
 
@@ -39,10 +35,8 @@ func Hook(event func()) Handle {
 		if sig == nil {
 			return
 		}
-		if runtime.GOOS != "windows" {
-			// most terminals print ^C, this makes things easier to read.
-			fmt.Fprintf(os.Stderr, "\n")
-		}
+		// most terminals print ^C, this makes things easier to read.
+		fmt.Fprintf(os.Stderr, "\n")
 		event()
 	}()
 	return Handle{&boundSignal{sig: signalCh}}
