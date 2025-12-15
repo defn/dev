@@ -23,7 +23,6 @@ If you do have an account, begin with the AUTH LOGIN subcommand.
 		newWhoAmI(),
 		newToken(),
 		newLogin(),
-		newDocker(),
 		newLogout(),
 		newSignup(),
 	)

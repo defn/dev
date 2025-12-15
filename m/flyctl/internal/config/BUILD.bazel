@@ -32,7 +32,6 @@ go_test(
     srcs = [
         "config_test.go",
         "context_test.go",
-        "tokens_test.go",
     ],
     embed = [":config"],
     deps = [
