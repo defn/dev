@@ -36,14 +36,8 @@ go_test(
     embed = [":config"],
     deps = [
         "//flyctl/internal/flag/flagctx",
-        "//flyctl/internal/flyutil",
-        "//flyctl/internal/logger",
         "@com_github_spf13_pflag//:pflag",
         "@com_github_stretchr_testify//assert",
         "@com_github_stretchr_testify//require",
-        "@com_github_superfly_fly_go//tokens",
-        "@com_github_superfly_macaroon//:macaroon",
-        "@com_github_superfly_macaroon//flyio",
-        "@com_github_superfly_macaroon//resset",
     ],
 )

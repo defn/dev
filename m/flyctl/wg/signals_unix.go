@@ -1,5 +1,3 @@
-//go:build !windows
-
 package wg
 
 import (

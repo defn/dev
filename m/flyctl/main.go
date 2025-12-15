@@ -7,11 +7,29 @@ import (
 	"runtime"
 	"syscall"
 
+	"golang.org/x/sys/unix"
+	"runtime/pprof"
+
 	"github.com/defn/dev/m/flyctl/iostreams"
 
 	"github.com/defn/dev/m/flyctl/internal/buildinfo"
 	"github.com/defn/dev/m/flyctl/internal/cli"
 )
+
+// handleDebugSignal handles SIGUSR2 and dumps debug information.
+func handleDebugSignal(ctx context.Context) {
+	sigCh := make(chan os.Signal, 1)
+	signal.Notify(sigCh, unix.SIGUSR2)
+
+	for {
+		select {
+		case <-sigCh:
+			pprof.Lookup("goroutine").WriteTo(os.Stderr, 1)
+		case <-ctx.Done():
+			return
+		}
+	}
+}
 
 func main() {
 	os.Exit(run())
