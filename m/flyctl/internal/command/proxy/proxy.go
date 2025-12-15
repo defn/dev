@@ -9,7 +9,6 @@ import (
 
 	"github.com/spf13/cobra"
 	"github.com/superfly/flyctl/agent"
-	"github.com/superfly/flyctl/internal/appconfig"
 	"github.com/superfly/flyctl/internal/command"
 	"github.com/superfly/flyctl/internal/flag"
 	"github.com/superfly/flyctl/internal/flag/flagnames"
@@ -27,7 +26,7 @@ connects to the first Machine address returned by an internal DNS query on the a
 	)
 
 	cmd := command.New("proxy <local:remote> [remote_host]", short, long, run,
-		command.RequireSession, command.LoadAppNameIfPresent)
+		command.RequireSession)
 
 	cmd.Args = cobra.RangeArgs(1, 2)
 
@@ -64,7 +63,7 @@ connects to the first Machine address returned by an internal DNS query on the a
 
 func run(ctx context.Context) (err error) {
 	client := flyutil.ClientFromContext(ctx)
-	appName := appconfig.NameFromContext(ctx)
+	appName := flag.GetApp(ctx)
 
 	orgSlug := flag.GetOrg(ctx)
 

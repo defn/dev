@@ -6,9 +6,11 @@ import (
 	"encoding/json"
 	"fmt"
 	"os"
+	"strings"
 
 	"github.com/spf13/cobra"
 	"github.com/superfly/flyctl/internal/command"
+	"github.com/superfly/flyctl/internal/config"
 	"github.com/superfly/flyctl/internal/flag"
 	"github.com/superfly/macaroon"
 )
@@ -34,6 +36,25 @@ func newDebug() *cobra.Command {
 	)
 
 	return cmd
+}
+
+func getTokens(ctx context.Context) ([][]byte, error) {
+	cfg := config.FromContext(ctx)
+	tokStr := cfg.Tokens.All()
+	if tokStr == "" {
+		return nil, fmt.Errorf("no tokens found in config")
+	}
+
+	// Parse the token string which may contain multiple tokens
+	var tokens [][]byte
+	for _, tok := range strings.Split(tokStr, ",") {
+		tok = strings.TrimSpace(tok)
+		if tok != "" {
+			tokens = append(tokens, []byte(tok))
+		}
+	}
+
+	return tokens, nil
 }
 
 func runDebug(ctx context.Context) error {

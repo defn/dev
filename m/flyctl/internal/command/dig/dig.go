@@ -17,7 +17,6 @@ import (
 	"github.com/superfly/flyctl/agent"
 	"github.com/superfly/flyctl/iostreams"
 
-	"github.com/superfly/flyctl/internal/appconfig"
 	"github.com/superfly/flyctl/internal/command"
 	"github.com/superfly/flyctl/internal/flag"
 	"github.com/superfly/flyctl/internal/flyutil"
@@ -41,7 +40,6 @@ attached to the current app (you can pass an app in with -a <appname>).`
 
 	cmd := command.New("dig [type] <name> [flags]", short, long, run,
 		command.RequireSession,
-		command.LoadAppNameIfPresent,
 	)
 
 	cmd.Args = cobra.RangeArgs(1, 2)
@@ -72,7 +70,10 @@ func run(ctx context.Context) error {
 	orgSlug := flag.GetOrg(ctx)
 
 	if orgSlug == "" {
-		appName := appconfig.NameFromContext(ctx)
+		appName := flag.GetApp(ctx)
+		if appName == "" {
+			return fmt.Errorf("org is required: use -o <org-slug> or -a <app-name>")
+		}
 
 		app, err := client.GetAppBasic(ctx, appName)
 		if err != nil {

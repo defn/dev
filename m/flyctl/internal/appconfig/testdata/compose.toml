@@ -1,4 +1,0 @@
-app = "test-app"
-
-[build]
-compose.file = "docker-compose.yml"

@@ -1,8 +1,0 @@
-app = "foo"
-
-[[env]]
-FOO = "BAR"
-TWO = 2
-
-[[env]]
-TRUE = true

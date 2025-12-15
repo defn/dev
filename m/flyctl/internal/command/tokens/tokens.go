@@ -14,21 +14,9 @@ func New() *cobra.Command {
 
 	cmd := command.New(usage, short, long, nil)
 
-	hiddenDeploy := newDeploy()
-	hiddenDeploy.Hidden = true
-
-	hiddenOrg := newOrg()
-	hiddenOrg.Hidden = true
-
 	cmd.AddCommand(
-		newCreate(),
-		newList(),
 		newRevoke(),
-		newAttenuate(),
 		newDebug(),
-		new3P(),
-		hiddenDeploy,
-		hiddenOrg,
 	)
 
 	return cmd

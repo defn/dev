@@ -1,4 +1,0 @@
-app = "httpservice-setters"
-
-[http_service]
-  internal_port = 9999

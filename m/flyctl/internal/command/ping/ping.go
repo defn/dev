@@ -15,7 +15,6 @@ import (
 
 	"github.com/spf13/cobra"
 	"github.com/superfly/flyctl/agent"
-	"github.com/superfly/flyctl/internal/appconfig"
 	"github.com/superfly/flyctl/internal/command"
 	"github.com/superfly/flyctl/internal/command/dig"
 	"github.com/superfly/flyctl/internal/flag"
@@ -43,7 +42,7 @@ The target argument can be either a ".internal" DNS name in our network
 	)
 
 	cmd := command.New("ping [hostname] [flags]", short, long, run,
-		command.RequireSession, command.LoadAppNameIfPresent)
+		command.RequireSession)
 
 	cmd.Args = cobra.RangeArgs(0, 1)
 
@@ -99,7 +98,10 @@ func run(ctx context.Context) error {
 	orgSlug := flag.GetOrg(ctx)
 
 	if orgSlug == "" {
-		appName := appconfig.NameFromContext(ctx)
+		appName := flag.GetApp(ctx)
+		if appName == "" {
+			return fmt.Errorf("org is required: use -o <org-slug> or -a <app-name>")
+		}
 
 		app, err := client.GetAppBasic(ctx, appName)
 		if err != nil {

@@ -1,9 +1,0 @@
-# directories
-**/bin/
-**/obj/
-**/out/
-
-# files
-fly.toml
-Dockerfile*
-**/*.md

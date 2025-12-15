@@ -10,29 +10,23 @@ import (
 	"path/filepath"
 	"runtime"
 	"strconv"
-	"strings"
 	"time"
 
 	"github.com/skratchdot/open-golang/open"
 	"github.com/spf13/cobra"
 	fly "github.com/superfly/fly-go"
 	"github.com/superfly/flyctl/internal/command/auth/webauth"
-	"github.com/superfly/flyctl/internal/flapsutil"
 	"github.com/superfly/flyctl/internal/flyutil"
 	"github.com/superfly/flyctl/internal/prompt"
-	"github.com/superfly/flyctl/internal/uiexutil"
 	"github.com/superfly/flyctl/iostreams"
 
-	"github.com/superfly/flyctl/internal/appconfig"
 	"github.com/superfly/flyctl/internal/buildinfo"
 	"github.com/superfly/flyctl/internal/cache"
 	"github.com/superfly/flyctl/internal/cmdutil/preparers"
 	"github.com/superfly/flyctl/internal/config"
 	"github.com/superfly/flyctl/internal/env"
 	"github.com/superfly/flyctl/internal/flag"
-	"github.com/superfly/flyctl/internal/incidents"
 	"github.com/superfly/flyctl/internal/logger"
-	"github.com/superfly/flyctl/internal/metrics"
 	"github.com/superfly/flyctl/internal/state"
 	"github.com/superfly/flyctl/internal/task"
 	"github.com/superfly/flyctl/internal/update"
@@ -57,9 +51,7 @@ func New(usage, short, long string, fn Runner, p ...preparers.Preparer) *cobra.C
 
 // Preparers are split between here and the preparers package because
 // tab-completion needs to run *some* of them, and importing this package from there
-// would create a circular dependency. Likewise, if *all* the preparers were in the preparers module,
-// that would also create a circular dependency.
-// I don't like this, but it's shippable until someone else fixes it
+// would create a circular dependency.
 var commonPreparers = []preparers.Preparer{
 	preparers.ApplyAliases,
 	determineHostname,
@@ -71,30 +63,11 @@ var commonPreparers = []preparers.Preparer{
 	preparers.LoadConfig,
 	startQueryingForNewRelease,
 	promptAndAutoUpdate,
-	startMetrics,
-	notifyStatuspageIncidents,
 }
 
 var authPreparers = []preparers.Preparer{
 	preparers.InitClient,
 	killOldAgent,
-	notifyHostIssues,
-}
-
-func sendOsMetric(ctx context.Context, state string) {
-	// Send /runs/[os_name]/[state]
-	osName := ""
-	switch runtime.GOOS {
-	case "darwin":
-		osName = "macos"
-	case "linux":
-		osName = "linux"
-	case "windows":
-		osName = "windows"
-	default:
-		osName = "other"
-	}
-	metrics.SendNoData(ctx, fmt.Sprintf("runs/%s/%s", osName, state))
 }
 
 func newRunE(fn Runner, preparers ...preparers.Preparer) func(*cobra.Command, []string) error {
@@ -125,24 +98,6 @@ func newRunE(fn Runner, preparers ...preparers.Preparer) func(*cobra.Command, []
 		// start task manager using the prepared context
 		task.FromContext(ctx).Start(ctx)
 
-		sendOsMetric(ctx, "started")
-		task.FromContext(ctx).RunFinalizer(func(ctx context.Context) {
-			io := iostreams.FromContext(ctx)
-
-			if !metrics.IsFlushMetricsDisabled(ctx) {
-				err := metrics.FlushMetrics(ctx)
-				if err != nil {
-					fmt.Fprintln(io.ErrOut, "Error spawning metrics process: ", err)
-				}
-			}
-		})
-
-		defer func() {
-			if err == nil {
-				sendOsMetric(ctx, "successful")
-			}
-		}()
-
 		// run the command
 		if err = fn(ctx); err == nil {
 			// and finally, run the finalizer
@@ -166,7 +121,6 @@ func prepare(parent context.Context, preparers ...preparers.Preparer) (ctx conte
 }
 
 func finalize(ctx context.Context) {
-	// todo[md] move this to a background task
 	// flush the cache to disk if required
 	if c := cache.FromContext(ctx); c.Dirty() {
 		path := filepath.Join(state.ConfigDirectory(ctx), cache.FileName)
@@ -338,16 +292,12 @@ func startQueryingForNewRelease(ctx context.Context) (context.Context, error) {
 }
 
 // shouldIgnore allows a preparer to disable itself for specific commands
-// E.g. `shouldIgnore([][]string{{"version", "upgrade"}, {"machine", "status"}})`
-// would return true for "fly version upgrade" and "fly machine status"
 func shouldIgnore(ctx context.Context, cmds [][]string) bool {
 	cmd := FromContext(ctx)
 
 	for _, ignoredCmd := range cmds {
 		match := true
 		currentCmd := cmd
-		// The shape of the ignoredCmd slice is something like ["version", "upgrade"],
-		// but we're walking up the tree from the end, so we have to iterate that in reverse
 		for i := len(ignoredCmd) - 1; i >= 0; i-- {
 			if !currentCmd.HasParent() || currentCmd.Use != ignoredCmd[i] {
 				match = false
@@ -355,7 +305,6 @@ func shouldIgnore(ctx context.Context, cmds [][]string) bool {
 			}
 			currentCmd = currentCmd.Parent()
 		}
-		// Ensure that we have the root node, so that a filter on ["y"] wouldn't be tripped by "fly x y"
 		if match {
 			if !currentCmd.HasParent() {
 				return true
@@ -370,7 +319,6 @@ func promptAndAutoUpdate(ctx context.Context) (context.Context, error) {
 	if shouldIgnore(ctx, [][]string{
 		{"version"},
 		{"version", "upgrade"},
-		{"settings", "autoupdate"},
 	}) {
 		return ctx, nil
 	}
@@ -408,7 +356,6 @@ func promptAndAutoUpdate(ctx context.Context) (context.Context, error) {
 
 	if !latest.Newer(current) {
 		if versionInvalidMsg != "" && !silent {
-			// Continuing from versionInvalidMsg above
 			fmt.Fprintln(io.ErrOut, "but there is not a newer version available. Proceed with caution!")
 		}
 		return ctx, nil
@@ -416,8 +363,6 @@ func promptAndAutoUpdate(ctx context.Context) (context.Context, error) {
 
 	promptForUpdate := false
 
-	// The env.IsCI check is technically redundant (it should be done in update.Check), but
-	// it's nice to be extra cautious.
 	if cfg.AutoUpdate && !env.IsCI() && update.CanUpdateThisInstallation() {
 		if versionInvalidMsg != "" || current.SignificantlyBehind(latest) {
 			if !silent {
@@ -428,13 +373,9 @@ func promptAndAutoUpdate(ctx context.Context) (context.Context, error) {
 			if err != nil {
 				return nil, fmt.Errorf("failed to update, and the current version is severely out of date: %w", err)
 			}
-			// Does not return on success
 			err = update.Relaunch(ctx, silent)
 			return nil, fmt.Errorf("failed to relaunch after updating: %w", err)
 		} else if runtime.GOOS != "windows" {
-			// Background auto-update has terrible UX on windows,
-			// with flickery powershell progress bars and UAC prompts.
-			// For Windows, we just prompt for updates, and only auto-update when severely outdated (the before-command update)
 			if err := update.BackgroundUpdate(); err != nil {
 				fmt.Fprintf(io.ErrOut, "failed to autoupdate: %s\n", err)
 			} else {
@@ -444,7 +385,6 @@ func promptAndAutoUpdate(ctx context.Context) (context.Context, error) {
 	}
 	if !silent {
 		if !cfg.AutoUpdate && versionInvalidMsg != "" {
-			// Continuing from versionInvalidMsg above
 			fmt.Fprintln(io.ErrOut, "Proceed with caution!")
 		}
 		if promptForUpdate {
@@ -461,7 +401,7 @@ func killOldAgent(ctx context.Context) (context.Context, error) {
 
 	data, err := os.ReadFile(path)
 	if errors.Is(err, fs.ErrNotExist) {
-		return ctx, nil // no old agent running or can't access that file
+		return ctx, nil
 	} else if err != nil {
 		return nil, fmt.Errorf("failed reading old agent's PID file: %w", err)
 	}
@@ -501,58 +441,8 @@ func killOldAgent(ctx context.Context) (context.Context, error) {
 		return nil, err
 	}
 
-	time.Sleep(time.Second) // we've killed and removed the pid file
+	time.Sleep(time.Second)
 
-	return ctx, nil
-}
-
-func startMetrics(ctx context.Context) (context.Context, error) {
-	metrics.RecordCommandContext(ctx)
-
-	task.FromContext(ctx).RunFinalizer(func(ctx context.Context) {
-		metrics.FlushPending()
-	})
-
-	return ctx, nil
-}
-
-func notifyStatuspageIncidents(ctx context.Context) (context.Context, error) {
-	if shouldIgnore(ctx, [][]string{
-		{"incidents", "list"},
-	}) {
-		return ctx, nil
-	}
-
-	if !incidents.Check() {
-		return ctx, nil
-	}
-
-	incidents.QueryStatuspageIncidents(ctx)
-
-	return ctx, nil
-}
-
-func notifyHostIssues(ctx context.Context) (context.Context, error) {
-	if shouldIgnore(ctx, [][]string{
-		{"incidents", "hosts", "list"},
-	}) {
-		return ctx, nil
-	}
-
-	if !incidents.Check() {
-		return ctx, nil
-	}
-
-	appCtx, err := LoadAppNameIfPresent(ctx)
-	if err == nil {
-		incidents.QueryHostIssues(appCtx)
-	}
-
-	return ctx, nil
-}
-
-func ExcludeFromMetrics(ctx context.Context) (context.Context, error) {
-	metrics.Enabled = false
 	return ctx, nil
 }
 
@@ -561,24 +451,18 @@ func RequireSession(ctx context.Context) (context.Context, error) {
 	client := flyutil.ClientFromContext(ctx)
 	cfg := config.FromContext(ctx)
 
-	// Check if user is authenticated
 	if !client.Authenticated() {
 		return handleReLogin(ctx, "not_authenticated")
 	}
 
-	// Skip timestamp validation if token is from environment variable (CI/CD use case)
-	// This allows automated pipelines to continue working without session timeout
 	tokenFromEnv := env.First(config.AccessTokenEnvKey, config.APITokenEnvKey) != ""
 
 	if !tokenFromEnv {
-		// Check if the token has expired due to age
-		// If LastLogin is zero, it means the user has an old config without the timestamp
 		if cfg.LastLogin.IsZero() {
 			logger.FromContext(ctx).Debug("no login timestamp found, prompting for re-login")
 			return handleReLogin(ctx, "no_timestamp")
 		}
 
-		// Check if the token has expired based on the timeout
 		if time.Since(cfg.LastLogin) > TokenTimeout {
 			logger.FromContext(ctx).Debugf("token expired (%v since login, timeout is %v)", time.Since(cfg.LastLogin), TokenTimeout)
 			return handleReLogin(ctx, "expired")
@@ -590,12 +474,9 @@ func RequireSession(ctx context.Context) (context.Context, error) {
 	return ctx, nil
 }
 
-// handleReLogin prompts the user to log in and handles the re-login flow
-// reason can be: "not_authenticated", "no_timestamp", or "expired"
 func handleReLogin(ctx context.Context, reason string) (context.Context, error) {
 	io := iostreams.FromContext(ctx)
 
-	// Ensure we have a session, and that the user hasn't set any flags that would lead them to expect consistent output or a lack of prompts
 	if io.IsInteractive() &&
 		!env.IsCI() &&
 		!flag.GetBool(ctx, "now") &&
@@ -603,16 +484,13 @@ func handleReLogin(ctx context.Context, reason string) (context.Context, error) 
 		!flag.GetBool(ctx, "quiet") &&
 		!flag.GetBool(ctx, "yes") {
 
-		// Display styled message based on reason
 		colorize := io.ColorScheme()
 
 		if reason == "no_timestamp" || reason == "expired" {
-			// User has been away - show welcome back message
 			fmt.Fprintf(io.Out, "%s\n", colorize.Purple("Welcome back!"))
 			fmt.Fprintf(io.Out, "Your session has expired, please log in to continue using flyctl.\n\n")
 		}
 
-		// Ask before we start opening things
 		var promptMessage string
 		if reason == "not_authenticated" {
 			promptMessage = "You must be logged in to do this. Would you like to sign in?"
@@ -628,7 +506,6 @@ func handleReLogin(ctx context.Context, reason string) (context.Context, error) 
 			return nil, fly.ErrNoAuthToken
 		}
 
-		// Attempt to log the user in
 		token, err := webauth.RunWebLogin(ctx, false)
 		if err != nil {
 			return nil, err
@@ -637,18 +514,13 @@ func handleReLogin(ctx context.Context, reason string) (context.Context, error) 
 			return nil, err
 		}
 
-		// Reload the config
 		logger.FromContext(ctx).Debug("reloading config after login")
 		if ctx, err = prepare(ctx, preparers.LoadConfig); err != nil {
 			return nil, err
 		}
 
-		// first reset the clients
 		ctx = flyutil.NewContextWithClient(ctx, nil)
-		ctx = uiexutil.NewContextWithClient(ctx, nil)
-		ctx = flapsutil.NewContextWithClient(ctx, nil)
 
-		// Re-run the auth preparers to update the client with the new token
 		logger.FromContext(ctx).Debug("re-running auth preparers after login")
 		if ctx, err = prepare(ctx, authPreparers...); err != nil {
 			return nil, err
@@ -672,137 +544,6 @@ func tryOpenUserURL(ctx context.Context, url string) error {
 	}
 
 	return nil
-}
-
-// LoadAppConfigIfPresent is a Preparer which loads the application's
-// configuration file from the path the user has selected via command line args
-// or the current working directory.
-func LoadAppConfigIfPresent(ctx context.Context) (context.Context, error) {
-	// Shortcut to avoid unmarshaling and querying Web when
-	// LoadAppConfigIfPresent is chained with RequireAppName
-	if cfg := appconfig.ConfigFromContext(ctx); cfg != nil {
-		metrics.IsUsingGPU = cfg.IsUsingGPU()
-		return ctx, nil
-	}
-
-	logger := logger.FromContext(ctx)
-	for _, path := range appConfigFilePaths(ctx) {
-		switch cfg, err := appconfig.LoadConfig(path); {
-		case err == nil:
-			logger.Debugf("app config loaded from %s", path)
-			if err := cfg.SetMachinesPlatform(); err != nil {
-				logger.Warnf("WARNING the config file at '%s' is not valid: %s", path, err)
-			}
-			metrics.IsUsingGPU = cfg.IsUsingGPU()
-			return appconfig.WithConfig(ctx, cfg), nil // we loaded a configuration file
-		case errors.Is(err, fs.ErrNotExist):
-			logger.Debugf("no app config found at %s; skipped.", path)
-			continue
-		default:
-			return nil, fmt.Errorf("failed loading app config from %s: %w", path, err)
-		}
-	}
-
-	return ctx, nil
-}
-
-// appConfigFilePaths returns the possible paths at which we may find a fly.toml
-// in order of preference. it takes into consideration whether the user has
-// specified a command-line path to a config file.
-func appConfigFilePaths(ctx context.Context) (paths []string) {
-	if p := flag.GetAppConfigFilePath(ctx); p != "" {
-		paths = append(paths, p, filepath.Join(p, appconfig.DefaultConfigFileName))
-
-		return
-	}
-
-	wd := state.WorkingDirectory(ctx)
-	paths = append(paths,
-		filepath.Join(wd, appconfig.DefaultConfigFileName),
-		filepath.Join(wd, strings.Replace(appconfig.DefaultConfigFileName, ".toml", ".json", 1)),
-		filepath.Join(wd, strings.Replace(appconfig.DefaultConfigFileName, ".toml", ".yaml", 1)),
-	)
-
-	return
-}
-
-var ErrRequireAppName = fmt.Errorf("the config for your app is missing an app name, add an app field to the fly.toml file or specify with the -a flag")
-
-// RequireAppName is a Preparer which makes sure the user has selected an
-// application name via command line arguments, the environment or an application
-// config file (fly.toml). It embeds LoadAppConfigIfPresent.
-func RequireAppName(ctx context.Context) (context.Context, error) {
-	ctx, err := LoadAppConfigIfPresent(ctx)
-	if err != nil {
-		return nil, err
-	}
-
-	name := flag.GetApp(ctx)
-	if name == "" {
-		// if there's no flag present, first consult with the environment
-		if name = env.First("FLY_APP"); name == "" {
-			// and then with the config file (if any)
-			if cfg := appconfig.ConfigFromContext(ctx); cfg != nil {
-				name = cfg.AppName
-			}
-		}
-	}
-
-	if name == "" {
-		return nil, ErrRequireAppName
-	}
-
-	return appconfig.WithName(ctx, name), nil
-}
-
-// RequireAppNameNoFlag is a Preparer which makes sure the user has selected an
-// application name via the environment or an application
-// config file (fly.toml). It embeds LoadAppConfigIfPresent.
-//
-// Identical to RequireAppName but does not check for the --app flag.
-func RequireAppNameNoFlag(ctx context.Context) (context.Context, error) {
-	ctx, err := LoadAppConfigIfPresent(ctx)
-	if err != nil {
-		return nil, err
-	}
-
-	// First consult with the environment
-	name := env.First("FLY_APP")
-	if name == "" {
-		// and then with the config file (if any)
-		if cfg := appconfig.ConfigFromContext(ctx); cfg != nil {
-			name = cfg.AppName
-		}
-	}
-
-	if name == "" {
-		return nil, ErrRequireAppName
-	}
-
-	return appconfig.WithName(ctx, name), nil
-}
-
-// LoadAppNameIfPresent is a Preparer which adds app name if the user has used --app or there appConfig
-// but unlike RequireAppName it does not error if the user has not specified an app name.
-func LoadAppNameIfPresent(ctx context.Context) (context.Context, error) {
-	localCtx, err := RequireAppName(ctx)
-
-	if errors.Is(err, ErrRequireAppName) {
-		return appconfig.WithName(ctx, ""), nil
-	}
-
-	return localCtx, err
-}
-
-// LoadAppNameIfPresentNoFlag is like LoadAppNameIfPresent, but it does not check for the --app flag.
-func LoadAppNameIfPresentNoFlag(ctx context.Context) (context.Context, error) {
-	localCtx, err := RequireAppNameNoFlag(ctx)
-
-	if errors.Is(err, ErrRequireAppName) {
-		return appconfig.WithName(ctx, ""), nil
-	}
-
-	return localCtx, err
 }
 
 func ChangeWorkingDirectoryToFirstArgIfPresent(ctx context.Context) (context.Context, error) {

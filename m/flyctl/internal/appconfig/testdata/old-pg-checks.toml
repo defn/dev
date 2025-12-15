@@ -1,7 +1,0 @@
-app = "foo"
-
-[checks.pg]
-  type = "http"
-  port = 5500
-  path = "/flycheck/pg"
-  headers = []

@@ -26,7 +26,6 @@ instead, to create narrowly-scoped tokens with a custom expiry.`
 	)
 
 	cmd := command.New("token", short, long, runAuthToken,
-		command.ExcludeFromMetrics,
 		command.RequireSession,
 	)
 

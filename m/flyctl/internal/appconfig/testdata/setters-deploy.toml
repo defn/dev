@@ -1,5 +1,0 @@
-# Use this file to test setters.go
-app = "setters"
-
-[deploy]
-strategy = "immediate"

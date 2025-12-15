@@ -6,7 +6,7 @@ import (
 	"github.com/superfly/flyctl/internal/command"
 )
 
-// New initializes and returns a new platform Command.
+// New initializes and returns a new config Command.
 func New() (cmd *cobra.Command) {
 	const (
 		short = "Manage an app's configuration"
@@ -14,11 +14,6 @@ func New() (cmd *cobra.Command) {
 	)
 	cmd = command.New("config", short, long, nil)
 
-	cmd.AddCommand(
-		newShow(),
-		newSave(),
-		newValidate(),
-		newEnv(),
-	)
+	// Subcommands removed - config is primarily used for token management now
 	return
 }

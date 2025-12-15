@@ -10,7 +10,6 @@ import (
 	"github.com/superfly/flyctl/internal/flyutil"
 	"github.com/superfly/flyctl/internal/prompt"
 	"github.com/superfly/flyctl/iostreams"
-	"github.com/superfly/flyctl/ip"
 )
 
 type ConnectParams struct {
@@ -84,9 +83,9 @@ func NewServer(ctx context.Context, p *ConnectParams) (*Server, error) {
 
 	if remoteAddr == "" && p.RemoteHost != "" {
 
-		// If a host is specified that isn't an IpV6 address, assume it's a DNS entry and wait for that
+		// If a host is specified that isn't an IPv6 address, assume it's a DNS entry and wait for that
 		// entry to resolve
-		if !ip.IsV6(p.RemoteHost) {
+		if ip := net.ParseIP(p.RemoteHost); ip == nil || ip.To4() != nil {
 			if err := agentclient.WaitForDNS(ctx, p.Dialer, orgSlug, p.RemoteHost, p.Network); err != nil {
 				return nil, fmt.Errorf("%s: %w", p.RemoteHost, err)
 			}

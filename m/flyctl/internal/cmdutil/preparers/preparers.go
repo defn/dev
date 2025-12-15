@@ -9,25 +9,15 @@ import (
 
 	"github.com/spf13/pflag"
 	fly "github.com/superfly/fly-go"
-	"github.com/superfly/fly-go/flaps"
 	"github.com/superfly/flyctl/helpers"
 	"github.com/superfly/flyctl/internal/config"
 	"github.com/superfly/flyctl/internal/flag/flagctx"
-	"github.com/superfly/flyctl/internal/flapsutil"
 	"github.com/superfly/flyctl/internal/flyutil"
 	"github.com/superfly/flyctl/internal/instrument"
 	"github.com/superfly/flyctl/internal/logger"
 	"github.com/superfly/flyctl/internal/state"
-	"github.com/superfly/flyctl/internal/uiex"
-	"github.com/superfly/flyctl/internal/uiexutil"
 	"go.opentelemetry.io/contrib/instrumentation/net/http/otelhttp"
 )
-
-// Preparers are split between here and `command/command.go` because
-// tab-completion needs to run *some* of them, and importing the command package from there
-// would create a circular dependency. Likewise, if *all* the preparers were in this module,
-// that would also cause a circular dependency.
-// I don't like this, but it's shippable until someone else fixes it
 
 type Preparer func(context.Context) (context.Context, error)
 
@@ -48,7 +38,6 @@ func InitClient(ctx context.Context) (context.Context, error) {
 	logger := logger.FromContext(ctx)
 	cfg := config.FromContext(ctx)
 
-	// TODO: refactor so that api package does NOT depend on global state
 	fly.SetBaseURL(cfg.APIBaseURL)
 	fly.SetErrorLog(cfg.LogGQLErrors)
 	fly.SetInstrumenter(instrument.ApiAdapter)
@@ -58,25 +47,6 @@ func InitClient(ctx context.Context) (context.Context, error) {
 		client := flyutil.NewClientFromOptions(ctx, fly.ClientOptions{Tokens: cfg.Tokens})
 		logger.Debug("client initialized.")
 		ctx = flyutil.NewContextWithClient(ctx, client)
-	}
-
-	if uiexutil.ClientFromContext(ctx) == nil {
-		client, err := uiexutil.NewClientWithOptions(ctx, uiex.NewClientOpts{
-			Logger: logger,
-			Tokens: cfg.Tokens,
-		})
-		if err != nil {
-			return nil, err
-		}
-		ctx = uiexutil.NewContextWithClient(ctx, client)
-	}
-
-	if flapsutil.ClientFromContext(ctx) == nil {
-		flapsClient, err := flapsutil.NewClientWithOptions(ctx, flaps.NewClientOpts{})
-		if err != nil {
-			return nil, err
-		}
-		ctx = flapsutil.NewContextWithClient(ctx, flapsClient)
 	}
 
 	return ctx, nil
@@ -95,11 +65,6 @@ func DetermineConfigDir(ctx context.Context) (context.Context, error) {
 }
 
 // ApplyAliases consolidates flags with aliases into a single source-of-truth flag.
-// After calling this, the main flags will have their values set as follows:
-//   - If the main flag was already set, it will keep its value.
-//   - If it was not set, but an alias was, it will take the value of the first specified alias flag.
-//     This will set flag.Changed to true, as if it were specified manually.
-//   - If none of the flags were set, the main flag will remain its default value.
 func ApplyAliases(ctx context.Context) (context.Context, error) {
 	var (
 		invalidFlagNames []string
@@ -130,7 +95,7 @@ func ApplyAliases(ctx context.Context) (context.Context, error) {
 				continue
 			}
 			if origFlag == nil {
-				continue // nothing left to do here if we have no root flag
+				continue
 			}
 			if aliasFlag.Value.Type() != origFlag.Value.Type() {
 				invalidTypes = append(invalidTypes, fmt.Sprintf("%s (%s) and %s (%s)", name, origFlag.Value.Type(), alias, aliasFlag.Value.Type()))
