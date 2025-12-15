@@ -27,7 +27,6 @@ import (
 	"github.com/defn/dev/m/tilt/internal/tiltfile/include"
 	"github.com/defn/dev/m/tilt/internal/tiltfile/io"
 	"github.com/defn/dev/m/tilt/internal/tiltfile/loaddynamic"
-	"github.com/defn/dev/m/tilt/internal/tiltfile/metrics"
 	"github.com/defn/dev/m/tilt/internal/tiltfile/os"
 	"github.com/defn/dev/m/tilt/internal/tiltfile/secretsettings"
 	"github.com/defn/dev/m/tilt/internal/tiltfile/shlex"
@@ -138,7 +137,6 @@ func (s *tiltfileState) loadManifests(tf *v1alpha1.Tiltfile) ([]model.Manifest, 
 		s.versionPlugin,
 		s.configPlugin,
 		starlarkstruct.NewPlugin(),
-		metrics.NewPlugin(),
 		updatesettings.NewPlugin(),
 		s.ciSettingsPlugin,
 		secretsettings.NewPlugin(),
@@ -195,7 +193,6 @@ func (s *tiltfileState) loadManifests(tf *v1alpha1.Tiltfile) ([]model.Manifest, 
 const (
 	// local resource functions
 	localResourceN = "local_resource"
-	testN          = "test" // a deprecated fork of local resource
 
 	// file functions
 	localN = "local"
@@ -321,7 +318,6 @@ func (s *tiltfileState) OnStart(e *starkit.Environment) error {
 	}{
 		{localN, s.local},
 		{localResourceN, s.localResource},
-		{testN, s.localResource},
 		{triggerModeN, s.triggerModeFn},
 		{enableFeatureN, s.enableFeature},
 		{disableFeatureN, s.disableFeature},
