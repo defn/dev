@@ -1,9 +1,0 @@
-load("@io_bazel_rules_go//go:def.bzl", "go_library")
-
-go_library(
-    name = "bufsync",
-    srcs = ["bufsync.go"],
-    importpath = "github.com/defn/dev/m/tilt/internal/testutils/bufsync",
-    visibility = ["//tilt:__subpackages__"],
-    deps = ["@com_github_stretchr_testify//assert"],
-)

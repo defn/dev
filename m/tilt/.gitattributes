@@ -1,5 +1,0 @@
-**/testdata/* binary
-
-*.sh text eol=lf
-
-*_gen.go linguist-generated=true -diff

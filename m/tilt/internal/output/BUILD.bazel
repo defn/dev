@@ -1,8 +1,0 @@
-load("@io_bazel_rules_go//go:def.bzl", "go_library")
-
-go_library(
-    name = "output",
-    srcs = ["output.go"],
-    importpath = "github.com/defn/dev/m/tilt/internal/output",
-    visibility = ["//tilt:__subpackages__"],
-)

@@ -1,8 +1,0 @@
-load("@io_bazel_rules_go//go:def.bzl", "go_library")
-
-go_library(
-    name = "httptest",
-    srcs = ["http_client.go"],
-    importpath = "github.com/defn/dev/m/tilt/internal/testutils/httptest",
-    visibility = ["//tilt:__subpackages__"],
-)

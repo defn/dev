@@ -45,174 +45,30 @@ go_sdk.host()
 
 go_deps = use_extension("@bazel_gazelle//:extensions.bzl", "go_deps")
 go_deps.from_file(go_mod = "//:go.mod")
-
-# Override modules with proto files to not build protos (use pre-generated .pb.go files)
-go_deps.gazelle_override(
-    directives = [
-        "gazelle:proto disable",
-    ],
-    path = "github.com/moby/buildkit",
-)
-go_deps.gazelle_override(
-    directives = [
-        "gazelle:proto disable",
-    ],
-    path = "github.com/tonistiigi/fsutil",
-)
-go_deps.gazelle_override(
-    directives = [
-        "gazelle:proto disable",
-    ],
-    path = "github.com/containerd/containerd/v2",
-)
-go_deps.gazelle_override(
-    directives = [
-        "gazelle:proto disable",
-    ],
-    path = "github.com/containerd/containerd/api",
-)
-go_deps.gazelle_override(
-    directives = [
-        "gazelle:proto disable",
-    ],
-    path = "github.com/containerd/ttrpc",
-)
-go_deps.gazelle_override(
-    directives = [
-        "gazelle:proto disable",
-    ],
-    path = "go.etcd.io/etcd/api/v3",
-)
-go_deps.gazelle_override(
-    directives = [
-        "gazelle:proto disable",
-    ],
-    path = "go.etcd.io/etcd/client/v3",
-)
-go_deps.gazelle_override(
-    directives = [
-        "gazelle:proto disable",
-    ],
-    path = "go.opentelemetry.io/proto/otlp",
-)
-go_deps.gazelle_override(
-    directives = [
-        "gazelle:proto disable",
-    ],
-    path = "sigs.k8s.io/apiserver-network-proxy/konnectivity-client",
-)
-go_deps.gazelle_override(
-    directives = [
-        "gazelle:proto disable",
-        # Resolve imports for internal package
-        "gazelle:resolve go github.com/grpc-ecosystem/grpc-gateway/internal @com_github_grpc_ecosystem_grpc_gateway//internal:go_default_library",
-    ],
-    path = "github.com/grpc-ecosystem/grpc-gateway",
-)
 use_repo(
     go_deps,
-    "com_github_adrg_xdg",
-    "com_github_akutz_memconn",
     "com_github_bitfield_script",
-    "com_github_blang_semver",
     "com_github_charmbracelet_bubbles",
     "com_github_charmbracelet_bubbletea",
     "com_github_charmbracelet_lipgloss",
     "com_github_charmbracelet_log",
-    "com_github_davecgh_go_spew",
-    "com_github_distribution_reference",
-    "com_github_docker_cli",
-    "com_github_docker_docker",
-    "com_github_docker_go_connections",
-    "com_github_docker_go_units",
-    "com_github_fatih_color",
-    "com_github_fsnotify_fsevents",
-    "com_github_gdamore_tcell",
-    "com_github_go_logr_logr",
-    "com_github_gogo_protobuf",
-    "com_github_golang_protobuf",
-    "com_github_google_go_cmp",
-    "com_github_google_uuid",
-    "com_github_google_wire",
-    "com_github_gorilla_mux",
-    "com_github_gorilla_websocket",
-    "com_github_grpc_ecosystem_grpc_gateway",
     "com_github_joho_godotenv",
-    "com_github_jonboulle_clockwork",
-    "com_github_json_iterator_go",
-    "com_github_kballard_go_shellquote",
     "com_github_labstack_echo_v4",
     "com_github_lann_builder",
-    "com_github_looplab_tarjan",
     "com_github_lucasb_eyer_go_colorful",
-    "com_github_mattn_go_colorable",
-    "com_github_mattn_go_isatty",
-    "com_github_mattn_go_jsonpointer",
-    "com_github_mattn_go_tty",
-    "com_github_moby_buildkit",
-    "com_github_modern_go_reflect2",
     "com_github_muesli_gamut",
-    "com_github_opencontainers_go_digest",
-    "com_github_pkg_browser",
-    "com_github_pkg_errors",
     "com_github_riverqueue_river",
     "com_github_riverqueue_river_riverdriver_riversqlite",
-    "com_github_rivo_tview",
     "com_github_rogpeppe_go_internal",
     "com_github_samber_lo",
-    "com_github_schollz_closestmatch",
     "com_github_sourcegraph_conc",
-    "com_github_spf13_afero",
     "com_github_spf13_cobra",
-    "com_github_spf13_pflag",
     "com_github_spf13_viper",
-    "com_github_stretchr_testify",
-    "com_github_tilt_dev_clusterid",
-    "com_github_tilt_dev_dockerignore",
-    "com_github_tilt_dev_fsnotify",
-    "com_github_tilt_dev_go_get",
-    "com_github_tilt_dev_localregistry_go",
-    "com_github_tilt_dev_probe",
-    "com_github_tilt_dev_starlark_lsp",
-    "com_github_tilt_dev_tilt_apiserver",
-    "com_github_tilt_dev_wmclient",
-    "com_github_tonistiigi_fsutil",
-    "com_github_tonistiigi_units",
-    "com_github_whilp_git_urls",
-    "dev_essio_al_pkg_shellescape",
-    "dev_lsp_go_protocol",
-    "dev_lsp_go_uri",
-    "in_gopkg_d4l3k_messagediff_v1",
     "in_gopkg_yaml_v3",
-    "io_k8s_api",
-    "io_k8s_apimachinery",
-    "io_k8s_apiserver",
-    "io_k8s_cli_runtime",
-    "io_k8s_client_go",
-    "io_k8s_code_generator",
-    "io_k8s_klog_v2",
-    "io_k8s_kube_openapi",
-    "io_k8s_kubectl",
-    "io_k8s_sigs_controller_runtime",
-    "io_k8s_sigs_yaml",
-    "io_k8s_utils",
-    "io_opentelemetry_go_otel",
-    "io_opentelemetry_go_otel_sdk",
-    "io_opentelemetry_go_otel_trace",
-    "net_starlark_go",
     "org_cuelang_go",
-    "org_golang_google_genproto_googleapis_api",
-    "org_golang_google_grpc",
-    "org_golang_google_protobuf",
-    "org_golang_x_exp",
-    "org_golang_x_sync",
-    "org_golang_x_term",
-    "org_golang_x_xerrors",
     "org_modernc_sqlite",
-    "org_uber_go_atomic",
     "org_uber_go_fx",
     "org_uber_go_zap",
-    "sh_helm_helm_v3",
 )
 
 pull = use_repo_rule("@rules_img//img:pull.bzl", "pull")

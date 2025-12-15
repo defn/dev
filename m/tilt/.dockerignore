@@ -1,5 +1,0 @@
-.git
-deployments
-Tiltfile
-.dockerignore
-web/node_modules
