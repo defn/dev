@@ -10,7 +10,7 @@ go_library(
     importpath = "github.com/defn/dev/m/flyctl/internal/buildinfo",
     visibility = ["//flyctl:__subpackages__"],
     deps = [
+        "//flyctl/internal/version",
         "@com_github_pkg_errors//:errors",
-        "@com_github_superfly_flyctl//internal/version",
     ],
 )

@@ -7,8 +7,8 @@ import (
 	"time"
 
 	"github.com/spf13/cobra"
-	"github.com/superfly/flyctl/internal/flag/completion"
-	"github.com/superfly/flyctl/internal/flag/flagnames"
+	"github.com/defn/dev/m/flyctl/internal/flag/completion"
+	"github.com/defn/dev/m/flyctl/internal/flag/flagnames"
 )
 
 type extraArgsContextKey struct{}

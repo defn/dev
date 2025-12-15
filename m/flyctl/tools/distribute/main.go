@@ -8,9 +8,9 @@ import (
 	"path/filepath"
 
 	"github.com/spf13/cobra"
-	"github.com/superfly/flyctl/internal/version"
-	"github.com/superfly/flyctl/tools/distribute/bundle"
-	"github.com/superfly/flyctl/tools/distribute/flypkgs"
+	"github.com/defn/dev/m/flyctl/internal/version"
+	"github.com/defn/dev/m/flyctl/tools/distribute/bundle"
+	"github.com/defn/dev/m/flyctl/tools/distribute/flypkgs"
 )
 
 var (

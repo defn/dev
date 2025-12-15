@@ -2,7 +2,7 @@ package tokens
 
 import (
 	"github.com/spf13/cobra"
-	"github.com/superfly/flyctl/internal/command"
+	"github.com/defn/dev/m/flyctl/internal/command"
 )
 
 func New() *cobra.Command {

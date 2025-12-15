@@ -9,10 +9,10 @@ go_library(
     importpath = "github.com/defn/dev/m/flyctl/proxy",
     visibility = ["//visibility:public"],
     deps = [
-        "@com_github_superfly_flyctl//agent",
-        "@com_github_superfly_flyctl//internal/flyutil",
-        "@com_github_superfly_flyctl//internal/prompt",
-        "@com_github_superfly_flyctl//iostreams",
-        "@com_github_superfly_flyctl//terminal",
+        "//flyctl/agent",
+        "//flyctl/internal/flyutil",
+        "//flyctl/internal/prompt",
+        "//flyctl/iostreams",
+        "//flyctl/terminal",
     ],
 )

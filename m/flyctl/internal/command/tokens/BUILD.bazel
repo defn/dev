@@ -10,11 +10,11 @@ go_library(
     importpath = "github.com/defn/dev/m/flyctl/internal/command/tokens",
     visibility = ["//flyctl:__subpackages__"],
     deps = [
+        "//flyctl/internal/command",
+        "//flyctl/internal/config",
+        "//flyctl/internal/flag",
+        "//flyctl/internal/flyutil",
         "@com_github_spf13_cobra//:cobra",
-        "@com_github_superfly_flyctl//internal/command",
-        "@com_github_superfly_flyctl//internal/config",
-        "@com_github_superfly_flyctl//internal/flag",
-        "@com_github_superfly_flyctl//internal/flyutil",
         "@com_github_superfly_macaroon//:macaroon",
     ],
 )

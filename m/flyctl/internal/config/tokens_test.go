@@ -9,8 +9,8 @@ import (
 
 	"github.com/stretchr/testify/require"
 	"github.com/superfly/fly-go/tokens"
-	"github.com/superfly/flyctl/internal/flyutil"
-	"github.com/superfly/flyctl/internal/logger"
+	"github.com/defn/dev/m/flyctl/internal/flyutil"
+	"github.com/defn/dev/m/flyctl/internal/logger"
 	"github.com/superfly/macaroon"
 	"github.com/superfly/macaroon/flyio"
 	"github.com/superfly/macaroon/resset"

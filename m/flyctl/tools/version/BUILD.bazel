@@ -6,8 +6,8 @@ go_library(
     importpath = "github.com/defn/dev/m/flyctl/tools/version",
     visibility = ["//visibility:private"],
     deps = [
+        "//flyctl/tools/version/relmeta",
         "@com_github_spf13_cobra//:cobra",
-        "@com_github_superfly_flyctl//tools/version/relmeta",
     ],
 )
 

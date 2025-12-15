@@ -10,9 +10,9 @@ import (
 	"github.com/spf13/pflag"
 
 	"github.com/superfly/fly-go/tokens"
-	"github.com/superfly/flyctl/internal/env"
-	"github.com/superfly/flyctl/internal/flag/flagctx"
-	"github.com/superfly/flyctl/internal/flag/flagnames"
+	"github.com/defn/dev/m/flyctl/internal/env"
+	"github.com/defn/dev/m/flyctl/internal/flag/flagctx"
+	"github.com/defn/dev/m/flyctl/internal/flag/flagnames"
 )
 
 const (

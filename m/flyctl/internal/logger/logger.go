@@ -10,9 +10,9 @@ import (
 
 	"github.com/alecthomas/chroma/quick"
 	"github.com/logrusorgru/aurora"
-	"github.com/superfly/flyctl/internal/buildinfo"
-	"github.com/superfly/flyctl/internal/cmdutil"
-	"github.com/superfly/flyctl/iostreams"
+	"github.com/defn/dev/m/flyctl/internal/buildinfo"
+	"github.com/defn/dev/m/flyctl/internal/cmdutil"
+	"github.com/defn/dev/m/flyctl/iostreams"
 )
 
 type Level int

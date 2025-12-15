@@ -4,8 +4,8 @@ import (
 	"fmt"
 
 	"github.com/superfly/fly-go"
-	"github.com/superfly/flyctl/internal/format"
-	"github.com/superfly/flyctl/iostreams"
+	"github.com/defn/dev/m/flyctl/internal/format"
+	"github.com/defn/dev/m/flyctl/iostreams"
 )
 
 // DisplayValidationErrors shows certificate validation errors in a user-friendly format

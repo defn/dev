@@ -55,7 +55,7 @@ iwr https://fly.io/install.ps1 -useb | iex
 
 ## Downloading from GitHub
 
-Download the appropriate version from the [Releases](https://github.com/superfly/flyctl/releases) page of the `flyctl` GitHub repository.
+Download the appropriate version from the [Releases](https://github.com/defn/dev/m/flyctl/releases) page of the `flyctl` GitHub repository.
 
 ## Getting Started
 

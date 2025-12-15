@@ -8,12 +8,12 @@ import (
 
 	"github.com/spf13/cobra"
 
-	"github.com/superfly/flyctl/iostreams"
+	"github.com/defn/dev/m/flyctl/iostreams"
 
-	"github.com/superfly/flyctl/internal/buildinfo"
-	"github.com/superfly/flyctl/internal/command"
-	"github.com/superfly/flyctl/internal/config"
-	"github.com/superfly/flyctl/internal/flag"
+	"github.com/defn/dev/m/flyctl/internal/buildinfo"
+	"github.com/defn/dev/m/flyctl/internal/command"
+	"github.com/defn/dev/m/flyctl/internal/config"
+	"github.com/defn/dev/m/flyctl/internal/flag"
 )
 
 // New initializes and returns a new version Command.

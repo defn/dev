@@ -5,12 +5,12 @@ import (
 	"fmt"
 
 	"github.com/spf13/cobra"
-	"github.com/superfly/flyctl/internal/command/auth/webauth"
+	"github.com/defn/dev/m/flyctl/internal/command/auth/webauth"
 
 	fly "github.com/superfly/fly-go"
-	"github.com/superfly/flyctl/internal/command"
-	"github.com/superfly/flyctl/internal/flag"
-	"github.com/superfly/flyctl/internal/prompt"
+	"github.com/defn/dev/m/flyctl/internal/command"
+	"github.com/defn/dev/m/flyctl/internal/flag"
+	"github.com/defn/dev/m/flyctl/internal/prompt"
 )
 
 func newLogin() *cobra.Command {

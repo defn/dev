@@ -3,7 +3,7 @@ package config
 import (
 	"github.com/spf13/cobra"
 
-	"github.com/superfly/flyctl/internal/command"
+	"github.com/defn/dev/m/flyctl/internal/command"
 )
 
 // New initializes and returns a new config Command.

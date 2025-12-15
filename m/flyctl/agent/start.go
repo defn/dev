@@ -12,11 +12,11 @@ import (
 
 	"github.com/azazeal/pause"
 
-	"github.com/superfly/flyctl/flyctl"
-	"github.com/superfly/flyctl/internal/cmdutil"
-	"github.com/superfly/flyctl/internal/config"
-	"github.com/superfly/flyctl/internal/filemu"
-	"github.com/superfly/flyctl/internal/logger"
+	"github.com/defn/dev/m/flyctl/flyctl"
+	"github.com/defn/dev/m/flyctl/internal/cmdutil"
+	"github.com/defn/dev/m/flyctl/internal/config"
+	"github.com/defn/dev/m/flyctl/internal/filemu"
+	"github.com/defn/dev/m/flyctl/internal/logger"
 )
 
 type forkError struct{ error }

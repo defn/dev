@@ -11,11 +11,11 @@ import (
 
 	"github.com/olekukonko/tablewriter"
 	fly "github.com/superfly/fly-go"
-	"github.com/superfly/flyctl/internal/config"
-	"github.com/superfly/flyctl/internal/flyutil"
-	"github.com/superfly/flyctl/internal/render"
-	"github.com/superfly/flyctl/internal/wireguard"
-	"github.com/superfly/flyctl/iostreams"
+	"github.com/defn/dev/m/flyctl/internal/config"
+	"github.com/defn/dev/m/flyctl/internal/flyutil"
+	"github.com/defn/dev/m/flyctl/internal/render"
+	"github.com/defn/dev/m/flyctl/internal/wireguard"
+	"github.com/defn/dev/m/flyctl/iostreams"
 )
 
 func runWireguardTokenList(ctx context.Context) error {

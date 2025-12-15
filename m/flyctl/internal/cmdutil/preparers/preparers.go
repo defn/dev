@@ -9,13 +9,13 @@ import (
 
 	"github.com/spf13/pflag"
 	fly "github.com/superfly/fly-go"
-	"github.com/superfly/flyctl/helpers"
-	"github.com/superfly/flyctl/internal/config"
-	"github.com/superfly/flyctl/internal/flag/flagctx"
-	"github.com/superfly/flyctl/internal/flyutil"
-	"github.com/superfly/flyctl/internal/instrument"
-	"github.com/superfly/flyctl/internal/logger"
-	"github.com/superfly/flyctl/internal/state"
+	"github.com/defn/dev/m/flyctl/helpers"
+	"github.com/defn/dev/m/flyctl/internal/config"
+	"github.com/defn/dev/m/flyctl/internal/flag/flagctx"
+	"github.com/defn/dev/m/flyctl/internal/flyutil"
+	"github.com/defn/dev/m/flyctl/internal/instrument"
+	"github.com/defn/dev/m/flyctl/internal/logger"
+	"github.com/defn/dev/m/flyctl/internal/state"
 	"go.opentelemetry.io/contrib/instrumentation/net/http/otelhttp"
 )
 

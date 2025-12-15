@@ -7,8 +7,8 @@ import (
 	"sync/atomic"
 	"time"
 
-	"github.com/superfly/flyctl/internal/logger"
-	"github.com/superfly/flyctl/terminal"
+	"github.com/defn/dev/m/flyctl/internal/logger"
+	"github.com/defn/dev/m/flyctl/terminal"
 )
 
 type contextKey struct{}

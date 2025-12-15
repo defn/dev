@@ -6,8 +6,8 @@ go_library(
     importpath = "github.com/defn/dev/m/flyctl/internal/set",
     visibility = ["//flyctl:__subpackages__"],
     deps = [
+        "//flyctl/helpers",
         "@com_github_samber_lo//:lo",
-        "@com_github_superfly_flyctl//helpers",
     ],
 )
 

@@ -9,9 +9,9 @@ go_library(
     importpath = "github.com/defn/dev/m/flyctl/tools/version/relmeta",
     visibility = ["//visibility:public"],
     deps = [
+        "//flyctl/internal/release",
+        "//flyctl/internal/version",
         "@com_github_pkg_errors//:errors",
-        "@com_github_superfly_flyctl//internal/release",
-        "@com_github_superfly_flyctl//internal/version",
     ],
 )
 

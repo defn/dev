@@ -4,8 +4,8 @@ import (
 	"context"
 
 	"github.com/superfly/fly-go"
-	"github.com/superfly/flyctl/internal/buildinfo"
-	"github.com/superfly/flyctl/internal/logger"
+	"github.com/defn/dev/m/flyctl/internal/buildinfo"
+	"github.com/defn/dev/m/flyctl/internal/logger"
 )
 
 func NewClientFromOptions(ctx context.Context, opts fly.ClientOptions) *fly.Client {

@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"sync"
 
-	"github.com/superfly/flyctl/iostreams"
+	"github.com/defn/dev/m/flyctl/iostreams"
 )
 
 func Run(io *iostreams.IOStreams, msg string) (s *Spinner) {

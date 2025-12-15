@@ -6,7 +6,7 @@ go_library(
     importpath = "github.com/defn/dev/m/flyctl/internal/httptracing",
     visibility = ["//flyctl:__subpackages__"],
     deps = [
+        "//flyctl/terminal",
         "@com_github_haileys_go_harlog//:go-harlog",
-        "@com_github_superfly_flyctl//terminal",
     ],
 )

@@ -6,8 +6,8 @@ import (
 
 	"github.com/pkg/errors"
 	"github.com/superfly/fly-go"
-	"github.com/superfly/flyctl/internal/wireguard"
-	"github.com/superfly/flyctl/iostreams"
+	"github.com/defn/dev/m/flyctl/internal/wireguard"
+	"github.com/defn/dev/m/flyctl/iostreams"
 )
 
 func BringUpAgent(ctx context.Context, client wireguard.WebClient, app *fly.AppCompact, network string, quiet bool) (*Client, Dialer, error) {

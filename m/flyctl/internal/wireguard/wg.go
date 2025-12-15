@@ -13,12 +13,12 @@ import (
 	"github.com/pkg/errors"
 	"github.com/spf13/viper"
 	fly "github.com/superfly/fly-go"
-	"github.com/superfly/flyctl/flyctl"
-	"github.com/superfly/flyctl/internal/config"
-	"github.com/superfly/flyctl/internal/flyutil"
-	"github.com/superfly/flyctl/internal/state"
-	"github.com/superfly/flyctl/terminal"
-	"github.com/superfly/flyctl/wg"
+	"github.com/defn/dev/m/flyctl/flyctl"
+	"github.com/defn/dev/m/flyctl/internal/config"
+	"github.com/defn/dev/m/flyctl/internal/flyutil"
+	"github.com/defn/dev/m/flyctl/internal/state"
+	"github.com/defn/dev/m/flyctl/terminal"
+	"github.com/defn/dev/m/flyctl/wg"
 	"golang.org/x/crypto/curve25519"
 )
 

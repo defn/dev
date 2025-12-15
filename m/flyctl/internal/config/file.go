@@ -8,11 +8,11 @@ import (
 	"path/filepath"
 	"time"
 
-	"github.com/superfly/flyctl/wg"
+	"github.com/defn/dev/m/flyctl/wg"
 	"gopkg.in/yaml.v3"
 
-	"github.com/superfly/flyctl/flyctl"
-	"github.com/superfly/flyctl/internal/filemu"
+	"github.com/defn/dev/m/flyctl/flyctl"
+	"github.com/defn/dev/m/flyctl/internal/filemu"
 )
 
 func ReadAccessToken(path string) (string, error) {

@@ -8,8 +8,8 @@ import (
 	"time"
 
 	"github.com/morikuni/aec"
-	"github.com/superfly/flyctl/internal/cmdutil"
-	"github.com/superfly/flyctl/iostreams"
+	"github.com/defn/dev/m/flyctl/internal/cmdutil"
+	"github.com/defn/dev/m/flyctl/iostreams"
 	"golang.org/x/crypto/ssh/terminal"
 )
 

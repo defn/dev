@@ -1,6 +1,6 @@
 package logger
 
-import "github.com/superfly/flyctl/internal/cmdutil"
+import "github.com/defn/dev/m/flyctl/internal/cmdutil"
 
 type SplitLogger struct {
 	terminal logSink

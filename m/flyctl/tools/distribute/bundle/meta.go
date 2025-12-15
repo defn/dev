@@ -10,7 +10,7 @@ import (
 	"strings"
 
 	"github.com/pkg/errors"
-	"github.com/superfly/flyctl/internal/release"
+	"github.com/defn/dev/m/flyctl/internal/release"
 )
 
 type buildArtifact struct {

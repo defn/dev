@@ -4,7 +4,7 @@ import (
 	"context"
 	"sync"
 
-	"github.com/superfly/flyctl/iostreams"
+	"github.com/defn/dev/m/flyctl/iostreams"
 )
 
 func Create(ctx context.Context, numLines int, showStatusChar bool) StatusLogger {

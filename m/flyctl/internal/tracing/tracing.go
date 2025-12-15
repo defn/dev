@@ -19,17 +19,17 @@ import (
 	"go.opentelemetry.io/otel/trace"
 
 	"github.com/go-logr/logr"
-	"github.com/superfly/flyctl/internal/buildinfo"
-	"github.com/superfly/flyctl/internal/config"
-	"github.com/superfly/flyctl/internal/env"
-	"github.com/superfly/flyctl/internal/logger"
-	"github.com/superfly/flyctl/iostreams"
+	"github.com/defn/dev/m/flyctl/internal/buildinfo"
+	"github.com/defn/dev/m/flyctl/internal/config"
+	"github.com/defn/dev/m/flyctl/internal/env"
+	"github.com/defn/dev/m/flyctl/internal/logger"
+	"github.com/defn/dev/m/flyctl/iostreams"
 )
 
 var tp *sdktrace.TracerProvider
 
 const (
-	tracerName       = "github.com/superfly/flyctl"
+	tracerName       = "github.com/defn/dev/m/flyctl"
 	HeaderFlyTraceId = "fly-trace-id"
 	HeaderFlySpanId  = "fly-span-id"
 )

@@ -6,8 +6,8 @@ go_library(
     importpath = "github.com/defn/dev/m/flyctl/doc",
     visibility = ["//visibility:private"],
     deps = [
+        "//flyctl/internal/cli",
         "@com_github_spf13_cobra//:cobra",
-        "@com_github_superfly_flyctl//internal/cli",
     ],
 )
 

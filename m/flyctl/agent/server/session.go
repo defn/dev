@@ -21,13 +21,13 @@ import (
 
 	fly "github.com/superfly/fly-go"
 	"github.com/superfly/fly-go/tokens"
-	"github.com/superfly/flyctl/agent"
-	"github.com/superfly/flyctl/agent/internal/proto"
-	"github.com/superfly/flyctl/wg"
+	"github.com/defn/dev/m/flyctl/agent"
+	"github.com/defn/dev/m/flyctl/agent/internal/proto"
+	"github.com/defn/dev/m/flyctl/wg"
 
-	"github.com/superfly/flyctl/internal/buildinfo"
-	"github.com/superfly/flyctl/internal/config"
-	"github.com/superfly/flyctl/internal/flyutil"
+	"github.com/defn/dev/m/flyctl/internal/buildinfo"
+	"github.com/defn/dev/m/flyctl/internal/config"
+	"github.com/defn/dev/m/flyctl/internal/flyutil"
 )
 
 type id uint64

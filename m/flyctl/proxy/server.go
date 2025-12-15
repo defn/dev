@@ -8,7 +8,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/superfly/flyctl/terminal"
+	"github.com/defn/dev/m/flyctl/terminal"
 )
 
 type Server struct {

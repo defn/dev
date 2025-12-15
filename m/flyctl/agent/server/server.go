@@ -15,12 +15,12 @@ import (
 	"github.com/azazeal/pause"
 	fly "github.com/superfly/fly-go"
 	"github.com/superfly/fly-go/tokens"
-	"github.com/superfly/flyctl/agent"
-	"github.com/superfly/flyctl/internal/config"
-	"github.com/superfly/flyctl/internal/env"
-	"github.com/superfly/flyctl/internal/flyutil"
-	"github.com/superfly/flyctl/internal/wireguard"
-	"github.com/superfly/flyctl/wg"
+	"github.com/defn/dev/m/flyctl/agent"
+	"github.com/defn/dev/m/flyctl/internal/config"
+	"github.com/defn/dev/m/flyctl/internal/env"
+	"github.com/defn/dev/m/flyctl/internal/flyutil"
+	"github.com/defn/dev/m/flyctl/internal/wireguard"
+	"github.com/defn/dev/m/flyctl/wg"
 	"golang.org/x/sync/errgroup"
 )
 
@@ -325,7 +325,7 @@ func (s *server) probeTunnel(ctx context.Context, slug, network string) (err err
 	var results []net.IP
 	switch results, err = tunnel.LookupAAAA(ctx, "_api.internal"); {
 	case err != nil:
-		// anytime you change the error message here, you need to update https://github.com/superfly/flyctl/blob/df7529f6da985a662853ffc7003f57ee3c9d8e42/internal/build/imgsrc/docker.go#L370
+		// anytime you change the error message here, you need to update https://github.com/defn/dev/m/flyctl/blob/df7529f6da985a662853ffc7003f57ee3c9d8e42/internal/build/imgsrc/docker.go#L370
 		if errors.Is(err, context.DeadlineExceeded) {
 			err = fmt.Errorf("timed out (%w)", err)
 		}

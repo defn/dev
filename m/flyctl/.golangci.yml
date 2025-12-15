@@ -22,13 +22,13 @@ linters:
       settings:
         printf:
           funcs:
-            - github.com/superfly/flyctl/terminal.Debugf
-            - github.com/superfly/flyctl/terminal.Infof
-            - github.com/superfly/flyctl/terminal.Warnf
-            - github.com/superfly/flyctl/terminal.Errorf
-            - github.com/superfly/flyctl/render.Printf
-            - github.com/superfly/flyctl/render.Detailf
-            - github.com/superfly/flyctl/render.Donef
+            - github.com/defn/dev/m/flyctl/terminal.Debugf
+            - github.com/defn/dev/m/flyctl/terminal.Infof
+            - github.com/defn/dev/m/flyctl/terminal.Warnf
+            - github.com/defn/dev/m/flyctl/terminal.Errorf
+            - github.com/defn/dev/m/flyctl/render.Printf
+            - github.com/defn/dev/m/flyctl/render.Detailf
+            - github.com/defn/dev/m/flyctl/render.Donef
     staticcheck:
       checks:
         - all

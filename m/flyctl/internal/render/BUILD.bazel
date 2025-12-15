@@ -9,10 +9,10 @@ go_library(
     importpath = "github.com/defn/dev/m/flyctl/internal/render",
     visibility = ["//flyctl:__subpackages__"],
     deps = [
+        "//flyctl/iostreams",
         "@com_github_logrusorgru_aurora//:aurora",
         "@com_github_morikuni_aec//:aec",
         "@com_github_olekukonko_tablewriter//:tablewriter",
         "@com_github_superfly_fly_go//:fly-go",
-        "@com_github_superfly_flyctl//iostreams",
     ],
 )

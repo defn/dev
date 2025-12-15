@@ -8,14 +8,14 @@ import (
 	"strings"
 
 	"github.com/spf13/cobra"
-	"github.com/superfly/flyctl/agent"
-	"github.com/superfly/flyctl/internal/command"
-	"github.com/superfly/flyctl/internal/flag"
-	"github.com/superfly/flyctl/internal/flag/flagnames"
-	"github.com/superfly/flyctl/internal/flyutil"
-	"github.com/superfly/flyctl/internal/prompt"
-	"github.com/superfly/flyctl/iostreams"
-	"github.com/superfly/flyctl/proxy"
+	"github.com/defn/dev/m/flyctl/agent"
+	"github.com/defn/dev/m/flyctl/internal/command"
+	"github.com/defn/dev/m/flyctl/internal/flag"
+	"github.com/defn/dev/m/flyctl/internal/flag/flagnames"
+	"github.com/defn/dev/m/flyctl/internal/flyutil"
+	"github.com/defn/dev/m/flyctl/internal/prompt"
+	"github.com/defn/dev/m/flyctl/iostreams"
+	"github.com/defn/dev/m/flyctl/proxy"
 )
 
 func New() *cobra.Command {

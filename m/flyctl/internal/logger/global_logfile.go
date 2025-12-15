@@ -3,7 +3,7 @@ package logger
 import (
 	"bufio"
 
-	"github.com/superfly/flyctl/internal/logger/logfile"
+	"github.com/defn/dev/m/flyctl/internal/logger/logfile"
 )
 
 var globalLogFile = logFile{

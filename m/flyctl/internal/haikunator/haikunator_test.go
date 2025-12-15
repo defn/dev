@@ -3,7 +3,7 @@ package haikunator_test
 import (
 	"testing"
 
-	"github.com/superfly/flyctl/internal/haikunator"
+	"github.com/defn/dev/m/flyctl/internal/haikunator"
 )
 
 func TestHaikunator_Build(t *testing.T) {

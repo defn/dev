@@ -5,8 +5,8 @@ import (
 	"os"
 	"time"
 
-	"github.com/superfly/flyctl/internal/release"
-	"github.com/superfly/flyctl/internal/version"
+	"github.com/defn/dev/m/flyctl/internal/release"
+	"github.com/defn/dev/m/flyctl/internal/version"
 )
 
 func RefreshTags(dir string) error {

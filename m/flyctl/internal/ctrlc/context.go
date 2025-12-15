@@ -4,7 +4,7 @@ import (
 	"context"
 	"sync/atomic"
 
-	"github.com/superfly/flyctl/terminal"
+	"github.com/defn/dev/m/flyctl/terminal"
 )
 
 type customCtx struct {

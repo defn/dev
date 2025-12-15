@@ -13,12 +13,12 @@ go_library(
     importpath = "github.com/defn/dev/m/flyctl/internal/logger",
     visibility = ["//flyctl:__subpackages__"],
     deps = [
+        "//flyctl/internal/buildinfo",
+        "//flyctl/internal/cmdutil",
+        "//flyctl/internal/logger/logfile",
+        "//flyctl/iostreams",
         "@com_github_alecthomas_chroma//quick",
         "@com_github_logrusorgru_aurora//:aurora",
-        "@com_github_superfly_flyctl//internal/buildinfo",
-        "@com_github_superfly_flyctl//internal/cmdutil",
-        "@com_github_superfly_flyctl//internal/logger/logfile",
-        "@com_github_superfly_flyctl//iostreams",
     ],
 )
 

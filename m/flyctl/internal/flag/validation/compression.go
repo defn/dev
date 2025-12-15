@@ -3,7 +3,7 @@ package validation
 import (
 	"fmt"
 
-	"github.com/superfly/flyctl/internal/flyerr"
+	"github.com/defn/dev/m/flyctl/internal/flyerr"
 )
 
 // ValidateCompressionFlag checks if the --compression flag has a valid value.

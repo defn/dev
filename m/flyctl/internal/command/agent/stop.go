@@ -6,9 +6,9 @@ import (
 
 	"github.com/spf13/cobra"
 
-	"github.com/superfly/flyctl/agent"
+	"github.com/defn/dev/m/flyctl/agent"
 
-	"github.com/superfly/flyctl/internal/command"
+	"github.com/defn/dev/m/flyctl/internal/command"
 )
 
 func newStop() (cmd *cobra.Command) {

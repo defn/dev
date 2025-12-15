@@ -8,12 +8,12 @@ import (
 
 	"github.com/spf13/cobra"
 
-	"github.com/superfly/flyctl/agent"
+	"github.com/defn/dev/m/flyctl/agent"
 
-	"github.com/superfly/flyctl/internal/command"
-	"github.com/superfly/flyctl/internal/env"
-	"github.com/superfly/flyctl/internal/flyutil"
-	"github.com/superfly/flyctl/internal/state"
+	"github.com/defn/dev/m/flyctl/internal/command"
+	"github.com/defn/dev/m/flyctl/internal/env"
+	"github.com/defn/dev/m/flyctl/internal/flyutil"
+	"github.com/defn/dev/m/flyctl/internal/state"
 )
 
 // New initializes and returns a new agent Command.

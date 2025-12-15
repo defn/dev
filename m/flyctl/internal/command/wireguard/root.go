@@ -1,8 +1,8 @@
 package wireguard
 
 import (
-	"github.com/superfly/flyctl/internal/command"
-	"github.com/superfly/flyctl/internal/flag"
+	"github.com/defn/dev/m/flyctl/internal/command"
+	"github.com/defn/dev/m/flyctl/internal/flag"
 
 	"github.com/spf13/cobra"
 )

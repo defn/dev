@@ -96,7 +96,6 @@ use_repo(
     "com_github_spf13_viper",
     "com_github_stretchr_testify",
     "com_github_superfly_fly_go",
-    "com_github_superfly_flyctl",
     "com_github_superfly_graphql",
     "com_github_superfly_macaroon",
     "com_zx2c4_golang_wireguard",

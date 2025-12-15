@@ -19,16 +19,16 @@ import (
 	"github.com/fsnotify/fsnotify"
 	"golang.org/x/sync/errgroup"
 
-	"github.com/superfly/flyctl/agent/internal/proto"
-	"github.com/superfly/flyctl/internal/buildinfo"
-	"github.com/superfly/flyctl/internal/config"
-	"github.com/superfly/flyctl/internal/flag"
-	"github.com/superfly/flyctl/internal/logger"
-	"github.com/superfly/flyctl/internal/version"
-	"github.com/superfly/flyctl/internal/wireguard"
-	"github.com/superfly/flyctl/iostreams"
-	"github.com/superfly/flyctl/terminal"
-	"github.com/superfly/flyctl/wg"
+	"github.com/defn/dev/m/flyctl/agent/internal/proto"
+	"github.com/defn/dev/m/flyctl/internal/buildinfo"
+	"github.com/defn/dev/m/flyctl/internal/config"
+	"github.com/defn/dev/m/flyctl/internal/flag"
+	"github.com/defn/dev/m/flyctl/internal/logger"
+	"github.com/defn/dev/m/flyctl/internal/version"
+	"github.com/defn/dev/m/flyctl/internal/wireguard"
+	"github.com/defn/dev/m/flyctl/iostreams"
+	"github.com/defn/dev/m/flyctl/terminal"
+	"github.com/defn/dev/m/flyctl/wg"
 )
 
 // Establish starts the daemon, if necessary, and returns a client to it.

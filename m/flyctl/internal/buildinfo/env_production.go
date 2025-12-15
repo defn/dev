@@ -5,7 +5,7 @@ package buildinfo
 import (
 	"time"
 
-	"github.com/superfly/flyctl/internal/version"
+	"github.com/defn/dev/m/flyctl/internal/version"
 )
 
 var (

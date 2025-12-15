@@ -4,9 +4,9 @@ import (
 	"context"
 
 	"github.com/spf13/cobra"
-	"github.com/superfly/flyctl/internal/command/auth/webauth"
+	"github.com/defn/dev/m/flyctl/internal/command/auth/webauth"
 
-	"github.com/superfly/flyctl/internal/command"
+	"github.com/defn/dev/m/flyctl/internal/command"
 )
 
 func newSignup() *cobra.Command {

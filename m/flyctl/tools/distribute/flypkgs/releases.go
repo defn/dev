@@ -7,7 +7,7 @@ import (
 	"mime/multipart"
 	"net/http"
 
-	"github.com/superfly/flyctl/internal/version"
+	"github.com/defn/dev/m/flyctl/internal/version"
 )
 
 func (c *Client) GetReleaseByVersion(ctx context.Context, v version.Version) (*Release, error) {

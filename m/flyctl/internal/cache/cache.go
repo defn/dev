@@ -11,10 +11,10 @@ import (
 
 	"gopkg.in/yaml.v3"
 
-	"github.com/superfly/flyctl/flyctl"
-	"github.com/superfly/flyctl/internal/buildinfo"
-	"github.com/superfly/flyctl/internal/filemu"
-	"github.com/superfly/flyctl/internal/update"
+	"github.com/defn/dev/m/flyctl/flyctl"
+	"github.com/defn/dev/m/flyctl/internal/buildinfo"
+	"github.com/defn/dev/m/flyctl/internal/filemu"
+	"github.com/defn/dev/m/flyctl/internal/update"
 )
 
 // FileName denotes the name of the cache file.

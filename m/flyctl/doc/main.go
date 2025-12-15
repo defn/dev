@@ -17,7 +17,7 @@ import (
 
 	"github.com/spf13/cobra"
 
-	"github.com/superfly/flyctl/internal/cli"
+	"github.com/defn/dev/m/flyctl/internal/cli"
 )
 
 var titlePrefix = "## "

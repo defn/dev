@@ -17,12 +17,12 @@ import (
 
 	"github.com/cli/safeexec"
 	"github.com/morikuni/aec"
-	"github.com/superfly/flyctl/terminal"
+	"github.com/defn/dev/m/flyctl/terminal"
 
-	"github.com/superfly/flyctl/internal/buildinfo"
-	"github.com/superfly/flyctl/internal/cmdutil"
-	"github.com/superfly/flyctl/internal/env"
-	"github.com/superfly/flyctl/iostreams"
+	"github.com/defn/dev/m/flyctl/internal/buildinfo"
+	"github.com/defn/dev/m/flyctl/internal/cmdutil"
+	"github.com/defn/dev/m/flyctl/internal/env"
+	"github.com/defn/dev/m/flyctl/iostreams"
 )
 
 type Release struct {

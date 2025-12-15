@@ -9,12 +9,12 @@ go_library(
     importpath = "github.com/defn/dev/m/flyctl/internal/update",
     visibility = ["//flyctl:__subpackages__"],
     deps = [
+        "//flyctl/internal/buildinfo",
+        "//flyctl/internal/cmdutil",
+        "//flyctl/internal/env",
+        "//flyctl/iostreams",
+        "//flyctl/terminal",
         "@com_github_cli_safeexec//:safeexec",
         "@com_github_morikuni_aec//:aec",
-        "@com_github_superfly_flyctl//internal/buildinfo",
-        "@com_github_superfly_flyctl//internal/cmdutil",
-        "@com_github_superfly_flyctl//internal/env",
-        "@com_github_superfly_flyctl//iostreams",
-        "@com_github_superfly_flyctl//terminal",
     ],
 )

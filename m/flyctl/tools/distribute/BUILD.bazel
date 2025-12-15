@@ -6,10 +6,10 @@ go_library(
     importpath = "github.com/defn/dev/m/flyctl/tools/distribute",
     visibility = ["//visibility:private"],
     deps = [
+        "//flyctl/internal/version",
+        "//flyctl/tools/distribute/bundle",
+        "//flyctl/tools/distribute/flypkgs",
         "@com_github_spf13_cobra//:cobra",
-        "@com_github_superfly_flyctl//internal/version",
-        "@com_github_superfly_flyctl//tools/distribute/bundle",
-        "@com_github_superfly_flyctl//tools/distribute/flypkgs",
     ],
 )
 

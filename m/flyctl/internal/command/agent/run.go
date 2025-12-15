@@ -12,14 +12,14 @@ import (
 	"github.com/spf13/viper"
 
 	fly "github.com/superfly/fly-go"
-	"github.com/superfly/flyctl/agent/server"
-	"github.com/superfly/flyctl/flyctl"
+	"github.com/defn/dev/m/flyctl/agent/server"
+	"github.com/defn/dev/m/flyctl/flyctl"
 
-	"github.com/superfly/flyctl/internal/command"
-	"github.com/superfly/flyctl/internal/config"
-	"github.com/superfly/flyctl/internal/filemu"
-	"github.com/superfly/flyctl/internal/flag"
-	"github.com/superfly/flyctl/internal/state"
+	"github.com/defn/dev/m/flyctl/internal/command"
+	"github.com/defn/dev/m/flyctl/internal/config"
+	"github.com/defn/dev/m/flyctl/internal/filemu"
+	"github.com/defn/dev/m/flyctl/internal/flag"
+	"github.com/defn/dev/m/flyctl/internal/state"
 )
 
 func newRun() (cmd *cobra.Command) {

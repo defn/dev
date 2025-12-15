@@ -8,9 +8,9 @@ import (
 
 	"github.com/stretchr/testify/assert"
 
-	"github.com/superfly/flyctl/iostreams"
+	"github.com/defn/dev/m/flyctl/iostreams"
 
-	"github.com/superfly/flyctl/internal/cli"
+	"github.com/defn/dev/m/flyctl/internal/cli"
 )
 
 func TestVersion(t *testing.T) {

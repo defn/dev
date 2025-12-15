@@ -12,11 +12,11 @@ go_library(
     importpath = "github.com/defn/dev/m/flyctl/cmd/audit",
     visibility = ["//visibility:private"],
     deps = [
+        "//flyctl/internal/command",
+        "//flyctl/internal/command/root",
         "@com_github_olekukonko_tablewriter//:tablewriter",
         "@com_github_spf13_cobra//:cobra",
         "@com_github_spf13_pflag//:pflag",
-        "@com_github_superfly_flyctl//internal/command",
-        "@com_github_superfly_flyctl//internal/command/root",
     ],
 )
 

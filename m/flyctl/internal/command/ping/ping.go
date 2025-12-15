@@ -14,11 +14,11 @@ import (
 	"time"
 
 	"github.com/spf13/cobra"
-	"github.com/superfly/flyctl/agent"
-	"github.com/superfly/flyctl/internal/command"
-	"github.com/superfly/flyctl/internal/command/dig"
-	"github.com/superfly/flyctl/internal/flag"
-	"github.com/superfly/flyctl/internal/flyutil"
+	"github.com/defn/dev/m/flyctl/agent"
+	"github.com/defn/dev/m/flyctl/internal/command"
+	"github.com/defn/dev/m/flyctl/internal/command/dig"
+	"github.com/defn/dev/m/flyctl/internal/flag"
+	"github.com/defn/dev/m/flyctl/internal/flyutil"
 	"golang.org/x/net/icmp"
 	"golang.org/x/net/ipv6"
 )

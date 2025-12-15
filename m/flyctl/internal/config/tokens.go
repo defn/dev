@@ -7,8 +7,8 @@ import (
 	"time"
 
 	"github.com/superfly/fly-go/tokens"
-	"github.com/superfly/flyctl/internal/logger"
-	"github.com/superfly/flyctl/internal/task"
+	"github.com/defn/dev/m/flyctl/internal/logger"
+	"github.com/defn/dev/m/flyctl/internal/task"
 )
 
 // UserURLCallback is a function that opens a URL in the user's browser. This is

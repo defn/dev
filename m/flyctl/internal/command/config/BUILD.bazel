@@ -6,7 +6,7 @@ go_library(
     importpath = "github.com/defn/dev/m/flyctl/internal/command/config",
     visibility = ["//flyctl:__subpackages__"],
     deps = [
+        "//flyctl/internal/command",
         "@com_github_spf13_cobra//:cobra",
-        "@com_github_superfly_flyctl//internal/command",
     ],
 )
