@@ -14,7 +14,6 @@ import (
 	"github.com/defn/dev/m/flyctl/internal/command"
 	"github.com/defn/dev/m/flyctl/internal/command/agent"
 	"github.com/defn/dev/m/flyctl/internal/command/auth"
-	"github.com/defn/dev/m/flyctl/internal/command/config"
 	"github.com/defn/dev/m/flyctl/internal/command/curl"
 	"github.com/defn/dev/m/flyctl/internal/command/dig"
 	"github.com/defn/dev/m/flyctl/internal/command/ping"
@@ -60,7 +59,6 @@ func New() *cobra.Command {
 		version.New(),
 		group(auth.New(), "acl"),
 		group(tokens.New(), "acl"),
-		group(config.New(), "configuring"),
 
 		// WireGuard commands
 		agent.New(),
@@ -76,10 +74,6 @@ func New() *cobra.Command {
 	root.AddGroup(&cobra.Group{
 		ID:    "acl",
 		Title: "Access control",
-	})
-	root.AddGroup(&cobra.Group{
-		ID:    "configuring",
-		Title: "Configuration",
 	})
 	root.AddGroup(&cobra.Group{
 		ID:    "upkeep",

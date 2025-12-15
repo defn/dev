@@ -2,25 +2,15 @@ load("@io_bazel_rules_go//go:def.bzl", "go_library")
 
 go_library(
     name = "version",
-    srcs = [
-        "save_install.go",
-        "upgrade.go",
-        "version.go",
-    ],
+    srcs = ["version.go"],
     importpath = "github.com/defn/dev/m/flyctl/internal/command/version",
     visibility = ["//flyctl:__subpackages__"],
     deps = [
         "//flyctl/internal/buildinfo",
-        "//flyctl/internal/cache",
         "//flyctl/internal/command",
         "//flyctl/internal/config",
         "//flyctl/internal/flag",
-        "//flyctl/internal/state",
-        "//flyctl/internal/update",
-        "//flyctl/internal/version",
         "//flyctl/iostreams",
-        "//flyctl/terminal",
-        "@com_github_samber_lo//:lo",
         "@com_github_spf13_cobra//:cobra",
     ],
 )

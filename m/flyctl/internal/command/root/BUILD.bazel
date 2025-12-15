@@ -11,7 +11,6 @@ go_library(
         "//flyctl/internal/command",
         "//flyctl/internal/command/agent",
         "//flyctl/internal/command/auth",
-        "//flyctl/internal/command/config",
         "//flyctl/internal/command/curl",
         "//flyctl/internal/command/dig",
         "//flyctl/internal/command/ping",
