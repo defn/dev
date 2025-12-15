@@ -1,0 +1,27 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_binary", "go_library")
+
+go_library(
+    name = "audit_lib",
+    srcs = [
+        "audit.go",
+        "lint.go",
+        "list.go",
+        "output.go",
+        "stats.go",
+    ],
+    importpath = "github.com/defn/dev/m/flyctl/cmd/audit",
+    visibility = ["//visibility:private"],
+    deps = [
+        "@com_github_olekukonko_tablewriter//:tablewriter",
+        "@com_github_spf13_cobra//:cobra",
+        "@com_github_spf13_pflag//:pflag",
+        "@com_github_superfly_flyctl//internal/command",
+        "@com_github_superfly_flyctl//internal/command/root",
+    ],
+)
+
+go_binary(
+    name = "audit",
+    embed = [":audit_lib"],
+    visibility = ["//visibility:public"],
+)

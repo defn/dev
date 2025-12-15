@@ -1,0 +1,8 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "instrument",
+    srcs = ["call.go"],
+    importpath = "github.com/defn/dev/m/flyctl/internal/instrument",
+    visibility = ["//flyctl:__subpackages__"],
+)

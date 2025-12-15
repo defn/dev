@@ -17,7 +17,6 @@ import (
 	"github.com/superfly/flyctl/internal/config"
 	"github.com/superfly/flyctl/internal/filemu"
 	"github.com/superfly/flyctl/internal/logger"
-	"github.com/superfly/flyctl/internal/sentry"
 )
 
 type forkError struct{ error }
@@ -56,7 +55,7 @@ func StartDaemon(ctx context.Context) (*Client, error) {
 
 	if err := cmd.Start(); err != nil {
 		err = forkError{err}
-		sentry.CaptureException(err, sentry.WithTraceID(ctx))
+		// sentry.CaptureException(err, sentry.WithTraceID(ctx))
 
 		return nil, fmt.Errorf("failed starting agent process: %w", err)
 	}
@@ -80,9 +79,9 @@ func StartDaemon(ctx context.Context) (*Client, error) {
 		}
 
 		if log != "" {
-			sentry.CaptureException(err, sentry.WithExtra("log", log), sentry.WithTraceID(ctx))
+			// sentry.CaptureException(err, sentry.WithExtra("log", log), sentry.WithTraceID(ctx))
 		} else {
-			sentry.CaptureException(err, sentry.WithTraceID(ctx))
+			// sentry.CaptureException(err, sentry.WithTraceID(ctx))
 		}
 
 		return nil, err
@@ -110,7 +109,7 @@ func lock(ctx context.Context) (unlock filemu.UnlockFunc, err error) {
 	default:
 		err = alreadyStartingError{err}
 
-		sentry.CaptureException(err)
+		// sentry.CaptureException(err)
 	}
 
 	return

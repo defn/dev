@@ -1,0 +1,43 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
+
+go_library(
+    name = "command",
+    srcs = [
+        "command.go",
+        "context.go",
+        "options.go",
+    ],
+    importpath = "github.com/defn/dev/m/flyctl/internal/command",
+    visibility = ["//flyctl:__subpackages__"],
+    deps = [
+        "@com_github_skratchdot_open_golang//open",
+        "@com_github_spf13_cobra//:cobra",
+        "@com_github_superfly_fly_go//:fly-go",
+        "@com_github_superfly_flyctl//internal/buildinfo",
+        "@com_github_superfly_flyctl//internal/cache",
+        "@com_github_superfly_flyctl//internal/cmdutil/preparers",
+        "@com_github_superfly_flyctl//internal/command/auth/webauth",
+        "@com_github_superfly_flyctl//internal/command_context",
+        "@com_github_superfly_flyctl//internal/config",
+        "@com_github_superfly_flyctl//internal/env",
+        "@com_github_superfly_flyctl//internal/flag",
+        "@com_github_superfly_flyctl//internal/flyutil",
+        "@com_github_superfly_flyctl//internal/logger",
+        "@com_github_superfly_flyctl//internal/prompt",
+        "@com_github_superfly_flyctl//internal/state",
+        "@com_github_superfly_flyctl//internal/task",
+        "@com_github_superfly_flyctl//internal/update",
+        "@com_github_superfly_flyctl//internal/version",
+        "@com_github_superfly_flyctl//iostreams",
+    ],
+)
+
+go_test(
+    name = "command_test",
+    srcs = ["context_test.go"],
+    embed = [":command"],
+    deps = [
+        "@com_github_spf13_cobra//:cobra",
+        "@com_github_stretchr_testify//assert",
+    ],
+)

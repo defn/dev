@@ -3,11 +3,7 @@ GIT_BRANCH = $(shell git symbolic-ref --short HEAD 2>/dev/null ||:)
 
 all: build cmddocs
 
-generate:
-	@echo Running Generate for Help and GraphQL client
-	go generate ./...
-
-build: generate
+build:
 	@echo Running Build
 	CGO_ENABLED=0 go build -o bin/flyctl -ldflags="-X 'github.com/superfly/flyctl/internal/buildinfo.buildDate=$(NOW_RFC3339)' -X 'github.com/superfly/flyctl/internal/buildinfo.branchName=$(GIT_BRANCH)'" .
 
@@ -24,10 +20,6 @@ preflight-test: build
 
 ci-preflight:
 	$(MAKE) preflight-test FLY_PREFLIGHT_TEST_NO_PRINT_HISTORY_ON_FAIL=true
-
-cmddocs: generate
-	@echo Running Docs Generation
-	bash scripts/generate_docs.sh
 
 lint:
 	golangci-lint run ./...

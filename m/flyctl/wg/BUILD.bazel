@@ -1,0 +1,26 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "wg",
+    srcs = [
+        "signals_unix.go",
+        "state.go",
+        "tunnel.go",
+        "wg.go",
+        "ws.go",
+    ],
+    importpath = "github.com/defn/dev/m/flyctl/wg",
+    visibility = ["//visibility:public"],
+    deps = [
+        "@com_github_coder_websocket//:websocket",
+        "@com_github_miekg_dns//:dns",
+        "@com_github_superfly_fly_go//:fly-go",
+        "@com_github_superfly_flyctl//internal/logger",
+        "@com_github_superfly_flyctl//terminal",
+        "@com_zx2c4_golang_wireguard//conn",
+        "@com_zx2c4_golang_wireguard//device",
+        "@com_zx2c4_golang_wireguard//tun",
+        "@com_zx2c4_golang_wireguard//tun/netstack",
+        "@org_golang_x_time//rate",
+    ],
+)

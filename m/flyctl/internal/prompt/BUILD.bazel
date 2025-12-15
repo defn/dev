@@ -1,0 +1,32 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
+
+go_library(
+    name = "prompt",
+    srcs = ["prompt.go"],
+    importpath = "github.com/defn/dev/m/flyctl/internal/prompt",
+    visibility = ["//flyctl:__subpackages__"],
+    deps = [
+        "@com_github_alecaivazis_survey_v2//:survey",
+        "@com_github_alecaivazis_survey_v2//core",
+        "@com_github_alecaivazis_survey_v2//terminal",
+        "@com_github_mgutz_ansi//:ansi",
+        "@com_github_samber_lo//:lo",
+        "@com_github_superfly_fly_go//:fly-go",
+        "@com_github_superfly_flyctl//internal/config",
+        "@com_github_superfly_flyctl//internal/flag",
+        "@com_github_superfly_flyctl//internal/flyutil",
+        "@com_github_superfly_flyctl//internal/future",
+        "@com_github_superfly_flyctl//internal/sort",
+        "@com_github_superfly_flyctl//iostreams",
+    ],
+)
+
+go_test(
+    name = "prompt_test",
+    srcs = ["prompt_test.go"],
+    embed = [":prompt"],
+    deps = [
+        "@com_github_stretchr_testify//assert",
+        "@com_github_stretchr_testify//require",
+    ],
+)

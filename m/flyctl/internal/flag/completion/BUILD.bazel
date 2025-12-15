@@ -1,0 +1,23 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "completion",
+    srcs = [
+        "completion_preparers.go",
+        "completions.go",
+    ],
+    importpath = "github.com/defn/dev/m/flyctl/internal/flag/completion",
+    visibility = ["//flyctl:__subpackages__"],
+    deps = [
+        "@com_github_samber_lo//:lo",
+        "@com_github_spf13_cobra//:cobra",
+        "@com_github_superfly_fly_go//:fly-go",
+        "@com_github_superfly_flyctl//internal/cmdutil/preparers",
+        "@com_github_superfly_flyctl//internal/flag/flagctx",
+        "@com_github_superfly_flyctl//internal/flag/flagnames",
+        "@com_github_superfly_flyctl//internal/flyutil",
+        "@com_github_superfly_flyctl//internal/logger",
+        "@com_github_superfly_flyctl//iostreams",
+        "@com_github_superfly_flyctl//terminal",
+    ],
+)

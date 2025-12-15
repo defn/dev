@@ -5,7 +5,6 @@ import (
 	"reflect"
 
 	"github.com/jinzhu/copier"
-	"github.com/superfly/flyctl/internal/sentry"
 )
 
 // Clone clones *public fields* in a structure.
@@ -18,7 +17,7 @@ func Clone[T any](v T) T {
 	// https://github.com/jinzhu/copier/blob/20cee7e229707f8e3fd10f8ed21f3e6c08ca9463/errors.go
 	if err != nil {
 		typename := fmt.Sprintf("%T", v)
-		sentry.CaptureException(fmt.Errorf("failed to clone '%s': %w", typename, err))
+		// sentry.CaptureException(fmt.Errorf("failed to clone '%s': %w", typename, err))
 		panic(fmt.Sprintf("failed to deep-copy '%s'. this is a bug!\nerror: %v", typename, err))
 	}
 	return ret

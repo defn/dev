@@ -15,18 +15,17 @@ With prerel support, a new optional parameter, prerel can be used along with the
 v0.0.100 -> where the number is a release version, the (default) patch is incremented, then a -pre-1 prerelease tag is added
 
 v0.0.101-pre-1 -> if the prerel parameter is present, then the tag is incremented to -pre-2 and so on
-                    if the prerel parameter is not present, then the prerel tag is removed and the new version is v0.0.101 -> a
-                    release
-
+if the prerel parameter is not present, then the prerel tag is removed and the new version is v0.0.101 -> a
+release
 
 ## Install logic
 
 If the install.sh script is called as normal, then the latest release version is downloaded
-If the install.sh script is called with prerel as a parameter, then the latest prerelease version is installed*
+If the install.sh script is called with prerel as a parameter, then the latest prerelease version is installed\*
 
-* if there is no current prerelease version available, the latest release version is installed. This allowes prerel users to be gently ushered back to the mainline releases.
+- if there is no current prerelease version available, the latest release version is installed. This allowes prerel users to be gently ushered back to the mainline releases.
 
 ## Update logic
 
 If the version running is a release version, it will only notify of a new release release. Pre-releases will be ignored.
-If the version running is a prerelease version, it will notify on any new prerelease *or* release. If a release has happened and a subsequent prerelease has followed, the upgrade prompt will suggest the latest prerelease.
+If the version running is a prerelease version, it will notify on any new prerelease _or_ release. If a release has happened and a subsequent prerelease has followed, the upgrade prompt will suggest the latest prerelease.

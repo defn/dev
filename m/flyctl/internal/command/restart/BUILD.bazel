@@ -1,0 +1,13 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "restart",
+    srcs = ["restart.go"],
+    importpath = "github.com/defn/dev/m/flyctl/internal/command/restart",
+    visibility = ["//flyctl:__subpackages__"],
+    deps = [
+        "@com_github_spf13_cobra//:cobra",
+        "@com_github_superfly_flyctl//internal/command",
+        "@com_github_superfly_flyctl//internal/flag",
+    ],
+)

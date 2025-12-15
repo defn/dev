@@ -1,0 +1,14 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "cmdutil",
+    srcs = [
+        "cmd_unix.go",
+        "flags.go",
+        "strings.go",
+        "terminal.go",
+    ],
+    importpath = "github.com/defn/dev/m/flyctl/internal/cmdutil",
+    visibility = ["//flyctl:__subpackages__"],
+    deps = ["@com_github_mattn_go_isatty//:go-isatty"],
+)

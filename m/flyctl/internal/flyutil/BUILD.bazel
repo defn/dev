@@ -1,0 +1,18 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "flyutil",
+    srcs = [
+        "client.go",
+        "flyutil.go",
+    ],
+    importpath = "github.com/defn/dev/m/flyctl/internal/flyutil",
+    visibility = ["//flyctl:__subpackages__"],
+    deps = [
+        "@com_github_khan_genqlient//graphql",
+        "@com_github_superfly_fly_go//:fly-go",
+        "@com_github_superfly_flyctl//internal/buildinfo",
+        "@com_github_superfly_flyctl//internal/logger",
+        "@com_github_superfly_graphql//:graphql",
+    ],
+)

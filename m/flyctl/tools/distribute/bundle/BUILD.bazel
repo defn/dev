@@ -1,0 +1,16 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "bundle",
+    srcs = [
+        "archive.go",
+        "meta.go",
+    ],
+    importpath = "github.com/defn/dev/m/flyctl/tools/distribute/bundle",
+    visibility = ["//visibility:public"],
+    deps = [
+        "@com_github_hashicorp_go_multierror//:go-multierror",
+        "@com_github_pkg_errors//:errors",
+        "@com_github_superfly_flyctl//internal/release",
+    ],
+)

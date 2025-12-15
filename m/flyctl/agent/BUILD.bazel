@@ -1,0 +1,37 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "agent",
+    srcs = [
+        "agent.go",
+        "client.go",
+        "client_unix.go",
+        "context.go",
+        "errors.go",
+        "remote.go",
+        "start.go",
+    ],
+    importpath = "github.com/defn/dev/m/flyctl/agent",
+    visibility = ["//visibility:public"],
+    deps = [
+        "@com_github_azazeal_pause//:pause",
+        "@com_github_fsnotify_fsnotify//:fsnotify",
+        "@com_github_pkg_errors//:errors",
+        "@com_github_superfly_fly_go//:fly-go",
+        "@com_github_superfly_flyctl//agent/internal/proto",
+        "@com_github_superfly_flyctl//flyctl",
+        "@com_github_superfly_flyctl//helpers",
+        "@com_github_superfly_flyctl//internal/buildinfo",
+        "@com_github_superfly_flyctl//internal/cmdutil",
+        "@com_github_superfly_flyctl//internal/config",
+        "@com_github_superfly_flyctl//internal/filemu",
+        "@com_github_superfly_flyctl//internal/flag",
+        "@com_github_superfly_flyctl//internal/logger",
+        "@com_github_superfly_flyctl//internal/version",
+        "@com_github_superfly_flyctl//internal/wireguard",
+        "@com_github_superfly_flyctl//iostreams",
+        "@com_github_superfly_flyctl//terminal",
+        "@com_github_superfly_flyctl//wg",
+        "@org_golang_x_sync//errgroup",
+    ],
+)

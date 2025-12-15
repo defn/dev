@@ -1,0 +1,25 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "cli",
+    srcs = ["cli.go"],
+    importpath = "github.com/defn/dev/m/flyctl/internal/cli",
+    visibility = ["//flyctl:__subpackages__"],
+    deps = [
+        "@com_github_alecaivazis_survey_v2//terminal",
+        "@com_github_kr_text//:text",
+        "@com_github_makenowjust_heredoc_v2//:heredoc",
+        "@com_github_spf13_cobra//:cobra",
+        "@com_github_spf13_pflag//:pflag",
+        "@com_github_superfly_flyctl//internal/command/root",
+        "@com_github_superfly_flyctl//internal/env",
+        "@com_github_superfly_flyctl//internal/flag/flagnames",
+        "@com_github_superfly_flyctl//internal/flyerr",
+        "@com_github_superfly_flyctl//internal/httptracing",
+        "@com_github_superfly_flyctl//internal/logger",
+        "@com_github_superfly_flyctl//internal/task",
+        "@com_github_superfly_flyctl//iostreams",
+        "@com_github_superfly_flyctl//terminal",
+        "@org_golang_x_term//:term",
+    ],
+)

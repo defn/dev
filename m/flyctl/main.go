@@ -11,7 +11,6 @@ import (
 
 	"github.com/superfly/flyctl/internal/buildinfo"
 	"github.com/superfly/flyctl/internal/cli"
-	"github.com/superfly/flyctl/internal/sentry"
 )
 
 func main() {
@@ -19,8 +18,6 @@ func main() {
 }
 
 func run() (exitCode int) {
-	defer sentry.Flush()
-
 	ctx, cancel := newContext()
 	defer cancel()
 
@@ -29,8 +26,6 @@ func run() (exitCode int) {
 	if !buildinfo.IsDev() {
 		defer func() {
 			if r := recover(); r != nil {
-				sentry.Recover(r)
-
 				exitCode = 3
 			}
 		}()
@@ -52,4 +47,3 @@ func newContext() (context.Context, context.CancelFunc) {
 
 	return signal.NotifyContext(context.Background(), signals...)
 }
-

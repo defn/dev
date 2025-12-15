@@ -1,0 +1,8 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "format",
+    srcs = ["format.go"],
+    importpath = "github.com/defn/dev/m/flyctl/internal/format",
+    visibility = ["//flyctl:__subpackages__"],
+)

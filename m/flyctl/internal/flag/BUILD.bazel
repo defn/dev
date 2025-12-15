@@ -1,0 +1,24 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "flag",
+    srcs = [
+        "context.go",
+        "flag.go",
+        "machines.go",
+    ],
+    importpath = "github.com/defn/dev/m/flyctl/internal/flag",
+    visibility = ["//flyctl:__subpackages__"],
+    deps = [
+        "@com_github_docker_go_units//:go-units",
+        "@com_github_samber_lo//:lo",
+        "@com_github_spf13_cobra//:cobra",
+        "@com_github_spf13_pflag//:pflag",
+        "@com_github_superfly_fly_go//:fly-go",
+        "@com_github_superfly_flyctl//helpers",
+        "@com_github_superfly_flyctl//internal/env",
+        "@com_github_superfly_flyctl//internal/flag/completion",
+        "@com_github_superfly_flyctl//internal/flag/flagctx",
+        "@com_github_superfly_flyctl//internal/flag/flagnames",
+    ],
+)

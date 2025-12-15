@@ -1,0 +1,31 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
+
+go_library(
+    name = "helpers",
+    srcs = [
+        "clone.go",
+        "config.go",
+        "duration.go",
+        "fs.go",
+        "rand.go",
+        "stdin.go",
+        "tablehelper.go",
+        "units.go",
+    ],
+    importpath = "github.com/defn/dev/m/flyctl/helpers",
+    visibility = ["//visibility:public"],
+    deps = [
+        "@com_github_jinzhu_copier//:copier",
+        "@com_github_olekukonko_tablewriter//:tablewriter",
+    ],
+)
+
+go_test(
+    name = "helpers_test",
+    srcs = [
+        "clone_test.go",
+        "config_test.go",
+    ],
+    embed = [":helpers"],
+    deps = ["@com_github_stretchr_testify//assert"],
+)

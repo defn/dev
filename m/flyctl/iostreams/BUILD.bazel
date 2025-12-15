@@ -1,0 +1,34 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
+
+go_library(
+    name = "iostreams",
+    srcs = [
+        "color.go",
+        "context.go",
+        "iostreams.go",
+    ],
+    importpath = "github.com/defn/dev/m/flyctl/iostreams",
+    visibility = ["//visibility:public"],
+    deps = [
+        "@com_github_alecaivazis_survey_v2//terminal",
+        "@com_github_briandowns_spinner//:spinner",
+        "@com_github_cli_safeexec//:safeexec",
+        "@com_github_google_shlex//:shlex",
+        "@com_github_mattn_go_colorable//:go-colorable",
+        "@com_github_mattn_go_isatty//:go-isatty",
+        "@com_github_mgutz_ansi//:ansi",
+        "@com_github_muesli_termenv//:termenv",
+        "@com_github_samber_lo//:lo",
+        "@org_golang_x_term//:term",
+    ],
+)
+
+go_test(
+    name = "iostreams_test",
+    srcs = [
+        "color_test.go",
+        "context_test.go",
+    ],
+    embed = [":iostreams"],
+    deps = ["@com_github_stretchr_testify//assert"],
+)

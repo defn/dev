@@ -1,0 +1,25 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
+
+go_library(
+    name = "cache",
+    srcs = [
+        "cache.go",
+        "context.go",
+    ],
+    importpath = "github.com/defn/dev/m/flyctl/internal/cache",
+    visibility = ["//flyctl:__subpackages__"],
+    deps = [
+        "@com_github_superfly_flyctl//flyctl",
+        "@com_github_superfly_flyctl//internal/buildinfo",
+        "@com_github_superfly_flyctl//internal/filemu",
+        "@com_github_superfly_flyctl//internal/update",
+        "@in_gopkg_yaml_v3//:yaml_v3",
+    ],
+)
+
+go_test(
+    name = "cache_test",
+    srcs = ["context_test.go"],
+    embed = [":cache"],
+    deps = ["@com_github_stretchr_testify//assert"],
+)

@@ -1,0 +1,30 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
+
+go_library(
+    name = "logger",
+    srcs = [
+        "context.go",
+        "file_logger.go",
+        "global_logfile.go",
+        "logger.go",
+        "split_logger.go",
+        "writer_logger.go",
+    ],
+    importpath = "github.com/defn/dev/m/flyctl/internal/logger",
+    visibility = ["//flyctl:__subpackages__"],
+    deps = [
+        "@com_github_alecthomas_chroma//quick",
+        "@com_github_logrusorgru_aurora//:aurora",
+        "@com_github_superfly_flyctl//internal/buildinfo",
+        "@com_github_superfly_flyctl//internal/cmdutil",
+        "@com_github_superfly_flyctl//internal/logger/logfile",
+        "@com_github_superfly_flyctl//iostreams",
+    ],
+)
+
+go_test(
+    name = "logger_test",
+    srcs = ["context_test.go"],
+    embed = [":logger"],
+    deps = ["@com_github_stretchr_testify//assert"],
+)

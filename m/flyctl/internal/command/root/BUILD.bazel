@@ -1,0 +1,25 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "root",
+    srcs = ["root.go"],
+    importpath = "github.com/defn/dev/m/flyctl/internal/command/root",
+    visibility = ["//flyctl:__subpackages__"],
+    deps = [
+        "@com_github_spf13_cobra//:cobra",
+        "@com_github_superfly_flyctl//flyctl",
+        "@com_github_superfly_flyctl//internal/buildinfo",
+        "@com_github_superfly_flyctl//internal/command",
+        "@com_github_superfly_flyctl//internal/command/agent",
+        "@com_github_superfly_flyctl//internal/command/auth",
+        "@com_github_superfly_flyctl//internal/command/config",
+        "@com_github_superfly_flyctl//internal/command/curl",
+        "@com_github_superfly_flyctl//internal/command/dig",
+        "@com_github_superfly_flyctl//internal/command/ping",
+        "@com_github_superfly_flyctl//internal/command/proxy",
+        "@com_github_superfly_flyctl//internal/command/tokens",
+        "@com_github_superfly_flyctl//internal/command/version",
+        "@com_github_superfly_flyctl//internal/command/wireguard",
+        "@com_github_superfly_flyctl//internal/flag/flagnames",
+    ],
+)

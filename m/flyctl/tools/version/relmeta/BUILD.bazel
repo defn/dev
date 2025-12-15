@@ -1,0 +1,23 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
+
+go_library(
+    name = "relmeta",
+    srcs = [
+        "relmeta.go",
+        "repo.go",
+    ],
+    importpath = "github.com/defn/dev/m/flyctl/tools/version/relmeta",
+    visibility = ["//visibility:public"],
+    deps = [
+        "@com_github_pkg_errors//:errors",
+        "@com_github_superfly_flyctl//internal/release",
+        "@com_github_superfly_flyctl//internal/version",
+    ],
+)
+
+go_test(
+    name = "relmeta_test",
+    srcs = ["relmeta_test.go"],
+    embed = [":relmeta"],
+    deps = ["@com_github_stretchr_testify//assert"],
+)

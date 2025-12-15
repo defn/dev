@@ -1,0 +1,8 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "proto",
+    srcs = ["proto.go"],
+    importpath = "github.com/defn/dev/m/flyctl/agent/internal/proto",
+    visibility = ["//flyctl/agent:__subpackages__"],
+)

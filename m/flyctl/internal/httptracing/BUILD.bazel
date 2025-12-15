@@ -1,0 +1,12 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "httptracing",
+    srcs = ["har.go"],
+    importpath = "github.com/defn/dev/m/flyctl/internal/httptracing",
+    visibility = ["//flyctl:__subpackages__"],
+    deps = [
+        "@com_github_haileys_go_harlog//:go-harlog",
+        "@com_github_superfly_flyctl//terminal",
+    ],
+)

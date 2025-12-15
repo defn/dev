@@ -1,0 +1,18 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_binary", "go_library")
+
+go_library(
+    name = "version_lib",
+    srcs = ["main.go"],
+    importpath = "github.com/defn/dev/m/flyctl/tools/version",
+    visibility = ["//visibility:private"],
+    deps = [
+        "@com_github_spf13_cobra//:cobra",
+        "@com_github_superfly_flyctl//tools/version/relmeta",
+    ],
+)
+
+go_binary(
+    name = "version",
+    embed = [":version_lib"],
+    visibility = ["//visibility:public"],
+)

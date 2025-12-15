@@ -1,0 +1,20 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "update",
+    srcs = [
+        "memoize.go",
+        "update.go",
+    ],
+    importpath = "github.com/defn/dev/m/flyctl/internal/update",
+    visibility = ["//flyctl:__subpackages__"],
+    deps = [
+        "@com_github_cli_safeexec//:safeexec",
+        "@com_github_morikuni_aec//:aec",
+        "@com_github_superfly_flyctl//internal/buildinfo",
+        "@com_github_superfly_flyctl//internal/cmdutil",
+        "@com_github_superfly_flyctl//internal/env",
+        "@com_github_superfly_flyctl//iostreams",
+        "@com_github_superfly_flyctl//terminal",
+    ],
+)

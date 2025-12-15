@@ -1,0 +1,19 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
+
+go_library(
+    name = "set",
+    srcs = ["set.go"],
+    importpath = "github.com/defn/dev/m/flyctl/internal/set",
+    visibility = ["//flyctl:__subpackages__"],
+    deps = [
+        "@com_github_samber_lo//:lo",
+        "@com_github_superfly_flyctl//helpers",
+    ],
+)
+
+go_test(
+    name = "set_test",
+    srcs = ["set_test.go"],
+    embed = [":set"],
+    deps = ["@com_github_stretchr_testify//assert"],
+)

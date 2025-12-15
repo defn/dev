@@ -1,0 +1,23 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "statuslogger",
+    srcs = [
+        "context.go",
+        "create.go",
+        "interactiveline.go",
+        "interactivelogger.go",
+        "interface.go",
+        "noninteractive.go",
+        "shared.go",
+    ],
+    importpath = "github.com/defn/dev/m/flyctl/internal/statuslogger",
+    visibility = ["//flyctl:__subpackages__"],
+    deps = [
+        "@com_github_morikuni_aec//:aec",
+        "@com_github_superfly_flyctl//internal/buildinfo",
+        "@com_github_superfly_flyctl//internal/cmdutil",
+        "@com_github_superfly_flyctl//iostreams",
+        "@org_golang_x_crypto//ssh/terminal",
+    ],
+)

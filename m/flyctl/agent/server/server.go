@@ -19,7 +19,6 @@ import (
 	"github.com/superfly/flyctl/internal/config"
 	"github.com/superfly/flyctl/internal/env"
 	"github.com/superfly/flyctl/internal/flyutil"
-	"github.com/superfly/flyctl/internal/sentry"
 	"github.com/superfly/flyctl/internal/wireguard"
 	"github.com/superfly/flyctl/wg"
 	"golang.org/x/sync/errgroup"
@@ -85,7 +84,7 @@ func bindUnixSocket(socket string) (net.Listener, error) {
 func bind(socket string) (l net.Listener, err error) {
 	defer func() {
 		if err != nil {
-			sentry.CaptureException(bindError{err})
+			// sentry.CaptureException(bindError{err})
 		}
 	}()
 
@@ -188,7 +187,7 @@ func (s *server) serve(parent context.Context, l net.Listener) (err error) {
 
 	switch err = eg.Wait(); {
 	default:
-		sentry.CaptureException(terminateError{err})
+		// sentry.CaptureException(terminateError{err})
 	case errors.Is(err, errShutdown):
 		err = nil // we initiated the shutdown
 	}

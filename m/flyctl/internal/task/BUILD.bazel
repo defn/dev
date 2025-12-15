@@ -1,0 +1,19 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
+
+go_library(
+    name = "task",
+    srcs = ["task.go"],
+    importpath = "github.com/defn/dev/m/flyctl/internal/task",
+    visibility = ["//flyctl:__subpackages__"],
+    deps = [
+        "@com_github_superfly_flyctl//internal/logger",
+        "@com_github_superfly_flyctl//terminal",
+    ],
+)
+
+go_test(
+    name = "task_test",
+    srcs = ["task_test.go"],
+    embed = [":task"],
+    deps = ["@com_github_stretchr_testify//assert"],
+)

@@ -1,0 +1,26 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "server",
+    srcs = [
+        "server.go",
+        "server_unix.go",
+        "session.go",
+    ],
+    importpath = "github.com/defn/dev/m/flyctl/agent/server",
+    visibility = ["//visibility:public"],
+    deps = [
+        "@com_github_azazeal_pause//:pause",
+        "@com_github_superfly_fly_go//:fly-go",
+        "@com_github_superfly_fly_go//tokens",
+        "@com_github_superfly_flyctl//agent",
+        "@com_github_superfly_flyctl//agent/internal/proto",
+        "@com_github_superfly_flyctl//internal/buildinfo",
+        "@com_github_superfly_flyctl//internal/config",
+        "@com_github_superfly_flyctl//internal/env",
+        "@com_github_superfly_flyctl//internal/flyutil",
+        "@com_github_superfly_flyctl//internal/wireguard",
+        "@com_github_superfly_flyctl//wg",
+        "@org_golang_x_sync//errgroup",
+    ],
+)

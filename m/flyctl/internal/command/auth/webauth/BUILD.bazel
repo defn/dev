@@ -1,0 +1,20 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "webauth",
+    srcs = ["webauth.go"],
+    importpath = "github.com/defn/dev/m/flyctl/internal/command/auth/webauth",
+    visibility = ["//flyctl:__subpackages__"],
+    deps = [
+        "@com_github_azazeal_pause//:pause",
+        "@com_github_briandowns_spinner//:spinner",
+        "@com_github_skratchdot_open_golang//open",
+        "@com_github_superfly_fly_go//:fly-go",
+        "@com_github_superfly_flyctl//agent",
+        "@com_github_superfly_flyctl//internal/config",
+        "@com_github_superfly_flyctl//internal/flyutil",
+        "@com_github_superfly_flyctl//internal/logger",
+        "@com_github_superfly_flyctl//internal/state",
+        "@com_github_superfly_flyctl//iostreams",
+    ],
+)

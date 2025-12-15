@@ -1,0 +1,19 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "flyctl",
+    srcs = [
+        "config.go",
+        "flyctl.go",
+    ],
+    importpath = "github.com/defn/dev/m/flyctl/flyctl",
+    visibility = ["//visibility:public"],
+    deps = [
+        "@com_github_spf13_viper//:viper",
+        "@com_github_superfly_fly_go//:fly-go",
+        "@com_github_superfly_flyctl//helpers",
+        "@com_github_superfly_flyctl//internal/instrument",
+        "@com_github_superfly_flyctl//terminal",
+        "@in_gopkg_yaml_v3//:yaml_v3",
+    ],
+)

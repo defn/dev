@@ -1,0 +1,50 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
+
+go_library(
+    name = "config",
+    srcs = [
+        "config.go",
+        "context.go",
+        "file.go",
+        "machine.go",
+        "tokens.go",
+    ],
+    importpath = "github.com/defn/dev/m/flyctl/internal/config",
+    visibility = ["//flyctl:__subpackages__"],
+    deps = [
+        "@com_github_spf13_pflag//:pflag",
+        "@com_github_superfly_fly_go//:fly-go",
+        "@com_github_superfly_fly_go//tokens",
+        "@com_github_superfly_flyctl//flyctl",
+        "@com_github_superfly_flyctl//internal/env",
+        "@com_github_superfly_flyctl//internal/filemu",
+        "@com_github_superfly_flyctl//internal/flag/flagctx",
+        "@com_github_superfly_flyctl//internal/flag/flagnames",
+        "@com_github_superfly_flyctl//internal/logger",
+        "@com_github_superfly_flyctl//internal/task",
+        "@com_github_superfly_flyctl//wg",
+        "@in_gopkg_yaml_v3//:yaml_v3",
+    ],
+)
+
+go_test(
+    name = "config_test",
+    srcs = [
+        "config_test.go",
+        "context_test.go",
+        "tokens_test.go",
+    ],
+    embed = [":config"],
+    deps = [
+        "@com_github_spf13_pflag//:pflag",
+        "@com_github_stretchr_testify//assert",
+        "@com_github_stretchr_testify//require",
+        "@com_github_superfly_fly_go//tokens",
+        "@com_github_superfly_flyctl//internal/flag/flagctx",
+        "@com_github_superfly_flyctl//internal/flyutil",
+        "@com_github_superfly_flyctl//internal/logger",
+        "@com_github_superfly_macaroon//:macaroon",
+        "@com_github_superfly_macaroon//flyio",
+        "@com_github_superfly_macaroon//resset",
+    ],
+)

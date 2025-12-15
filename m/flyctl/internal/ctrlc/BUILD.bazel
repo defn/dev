@@ -1,0 +1,12 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "ctrlc",
+    srcs = [
+        "context.go",
+        "ctrlc.go",
+    ],
+    importpath = "github.com/defn/dev/m/flyctl/internal/ctrlc",
+    visibility = ["//flyctl:__subpackages__"],
+    deps = ["@com_github_superfly_flyctl//terminal"],
+)

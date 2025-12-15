@@ -1,0 +1,18 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "proxy",
+    srcs = [
+        "connect.go",
+        "server.go",
+    ],
+    importpath = "github.com/defn/dev/m/flyctl/proxy",
+    visibility = ["//visibility:public"],
+    deps = [
+        "@com_github_superfly_flyctl//agent",
+        "@com_github_superfly_flyctl//internal/flyutil",
+        "@com_github_superfly_flyctl//internal/prompt",
+        "@com_github_superfly_flyctl//iostreams",
+        "@com_github_superfly_flyctl//terminal",
+    ],
+)

@@ -24,7 +24,6 @@ import (
 	"github.com/superfly/flyctl/internal/config"
 	"github.com/superfly/flyctl/internal/flag"
 	"github.com/superfly/flyctl/internal/logger"
-	"github.com/superfly/flyctl/internal/sentry"
 	"github.com/superfly/flyctl/internal/version"
 	"github.com/superfly/flyctl/internal/wireguard"
 	"github.com/superfly/flyctl/iostreams"
@@ -511,18 +510,6 @@ func captureError(ctx context.Context, err error, feature, orgSlug, appName stri
 		return
 	}
 	terminal.Debugf("error: %v\n", err)
-	sentry.CaptureException(err,
-		sentry.WithTraceID(ctx),
-		sentry.WithTag("feature", feature),
-		sentry.WithContexts(map[string]sentry.Context{
-			"app": map[string]interface{}{
-				"name": appName,
-			},
-			"organization": map[string]interface{}{
-				"name": orgSlug,
-			},
-		}),
-	)
 }
 
 func unmarshal(dst interface{}, data []byte) (err error) {
