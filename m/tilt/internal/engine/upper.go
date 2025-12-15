@@ -19,8 +19,6 @@ import (
 	"github.com/defn/dev/m/tilt/internal/store/filewatches"
 	"github.com/defn/dev/m/tilt/internal/store/sessions"
 	"github.com/defn/dev/m/tilt/internal/store/tiltfiles"
-	"github.com/defn/dev/m/tilt/internal/store/uibuttons"
-	"github.com/defn/dev/m/tilt/internal/store/uiresources"
 	"github.com/defn/dev/m/tilt/pkg/logger"
 	"github.com/defn/dev/m/tilt/pkg/model"
 )
@@ -139,18 +137,10 @@ func upperReducerFn(ctx context.Context, state *store.EngineState, action store.
 		filewatches.HandleFileWatchUpsertAction(state, action)
 	case filewatches.FileWatchDeleteAction:
 		filewatches.HandleFileWatchDeleteAction(state, action)
-	case uiresources.UIResourceUpsertAction:
-		uiresources.HandleUIResourceUpsertAction(state, action)
-	case uiresources.UIResourceDeleteAction:
-		uiresources.HandleUIResourceDeleteAction(state, action)
 	case configmaps.ConfigMapUpsertAction:
 		configmaps.HandleConfigMapUpsertAction(state, action)
 	case configmaps.ConfigMapDeleteAction:
 		configmaps.HandleConfigMapDeleteAction(state, action)
-	case uibuttons.UIButtonUpsertAction:
-		uibuttons.HandleUIButtonUpsertAction(state, action)
-	case uibuttons.UIButtonDeleteAction:
-		uibuttons.HandleUIButtonDeleteAction(state, action)
 	default:
 		state.FatalError = fmt.Errorf("unrecognized action: %T", action)
 	}

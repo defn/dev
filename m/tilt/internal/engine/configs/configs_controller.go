@@ -7,9 +7,7 @@ import (
 	ctrlclient "sigs.k8s.io/controller-runtime/pkg/client"
 
 	"github.com/defn/dev/m/tilt/internal/controllers/apis/tiltfile"
-	"github.com/defn/dev/m/tilt/internal/controllers/apis/uibutton"
 	"github.com/defn/dev/m/tilt/internal/store"
-	"github.com/defn/dev/m/tilt/pkg/model"
 )
 
 type ConfigsController struct {
@@ -46,10 +44,6 @@ func (cc *ConfigsController) maybeCreateInitialTiltfile(ctx context.Context, st 
 	st.RUnlockState()
 
 	err := cc.ctrlClient.Create(ctx, tiltfile.MainTiltfile(desired, ucs.Args))
-	if err != nil && !apierrors.IsAlreadyExists(err) {
-		return err
-	}
-	err = cc.ctrlClient.Create(ctx, uibutton.StopBuildButton(model.MainTiltfileManifestName.String()))
 	if err != nil && !apierrors.IsAlreadyExists(err) {
 		return err
 	}

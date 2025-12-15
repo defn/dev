@@ -23,7 +23,6 @@ import (
 	"github.com/defn/dev/m/tilt/internal/engine/configs"
 	"github.com/defn/dev/m/tilt/internal/engine/local"
 	"github.com/defn/dev/m/tilt/internal/engine/session"
-	"github.com/defn/dev/m/tilt/internal/engine/uiresource"
 	"github.com/defn/dev/m/tilt/internal/engine/uisession"
 	"github.com/defn/dev/m/tilt/internal/feature"
 	"github.com/defn/dev/m/tilt/internal/git"
@@ -48,7 +47,6 @@ var BaseWireSet = wire.NewSet(
 	clockwork.NewRealClock,
 	local.NewServerController,
 	uisession.NewSubscriber,
-	uiresource.NewSubscriber,
 	configs.NewConfigsController,
 	configs.NewTriggerQueueSubscriber,
 	session.NewController,

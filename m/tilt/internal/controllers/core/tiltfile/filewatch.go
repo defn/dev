@@ -57,7 +57,7 @@ func addGlobalIgnoresToSpec(spec *v1alpha1.FileWatchSpec, globalIgnores []model.
 }
 
 // Create FileWatch specs from Tilt manifests in the engine state.
-func ToFileWatchObjects(watchInputs WatchInputs, disableSources map[model.ManifestName]*v1alpha1.DisableSource) apiset.TypedObjectSet {
+func ToFileWatchObjects(watchInputs WatchInputs) apiset.TypedObjectSet {
 	result := apiset.TypedObjectSet{}
 	if !watchInputs.EngineMode.WatchesFiles() {
 		return result
@@ -74,10 +74,7 @@ func ToFileWatchObjects(watchInputs WatchInputs, disableSources map[model.Manife
 				continue
 			}
 			name := apis.SanitizeName(targetID.String())
-			existing, ok := result[name]
-			if ok {
-				fw := existing.(*v1alpha1.FileWatch)
-				fw.Spec.DisableSource = mergeDisableSource(fw.Spec.DisableSource, disableSources[m.Name])
+			if _, ok := result[name]; ok {
 				continue
 			}
 
@@ -93,7 +90,6 @@ func ToFileWatchObjects(watchInputs WatchInputs, disableSources map[model.Manife
 					},
 					Spec: *spec.DeepCopy(),
 				}
-				fw.Spec.DisableSource = disableSources[m.Name]
 				result[fw.Name] = fw
 			}
 		}

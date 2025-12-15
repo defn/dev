@@ -3,7 +3,6 @@ package tiltfile
 import (
 	"context"
 	"fmt"
-	"strconv"
 	"time"
 
 	"github.com/google/go-cmp/cmp"
@@ -17,7 +16,6 @@ import (
 	"sigs.k8s.io/controller-runtime/pkg/controller/controllerutil"
 
 	"github.com/defn/dev/m/tilt/internal/controllers/apicmp"
-	"github.com/defn/dev/m/tilt/internal/controllers/apis/uibutton"
 	"github.com/defn/dev/m/tilt/internal/controllers/apiset"
 	"github.com/defn/dev/m/tilt/internal/controllers/indexer"
 	"github.com/defn/dev/m/tilt/internal/store"
@@ -32,8 +30,6 @@ var (
 	apiKind  = "Tiltfile"
 	apiType  = metav1.TypeMeta{Kind: apiKind, APIVersion: apiGVStr}
 )
-
-type disableSourceMap map[model.ManifestName]*v1alpha1.DisableSource
 
 // Update all the objects in the apiserver that are owned by the Tiltfile.
 //
@@ -52,19 +48,10 @@ func updateOwnedObjects(
 	nn types.NamespacedName,
 	tf *v1alpha1.Tiltfile,
 	tlr *tiltfile.TiltfileLoadResult,
-	changeEnabledResources bool,
 	ciTimeoutFlag model.CITimeoutFlag,
 	mode store.EngineMode,
 ) error {
-	disableSources := toDisableSources(tlr)
-
-	if tlr != nil {
-		for i, m := range tlr.Manifests {
-			tlr.Manifests[i] = m.WithDisableSource(disableSources[m.Name])
-		}
-	}
-
-	apiObjects := toAPIObjects(nn, tf, tlr, ciTimeoutFlag, mode, disableSources)
+	apiObjects := toAPIObjects(nn, tf, tlr, ciTimeoutFlag, mode)
 
 	// Propagate labels and owner references from the parent tiltfile.
 	for _, objMap := range apiObjects {
@@ -93,17 +80,6 @@ func updateOwnedObjects(
 			return err
 		}
 		break
-	}
-
-	if !changeEnabledResources {
-		// if we're not changing enabled resources, use existing values for disable configmaps
-		newConfigMaps := apiObjects.GetSetForType(&v1alpha1.ConfigMap{})
-		oldConfigMaps := existingObjects.GetSetForType(&v1alpha1.ConfigMap{})
-		for _, ds := range disableSources {
-			if old, ok := oldConfigMaps[ds.ConfigMap.Name]; ok {
-				newConfigMaps[ds.ConfigMap.Name] = old
-			}
-		}
 	}
 
 	err = updateNewObjects(ctx, client, apiObjects, existingObjects)
@@ -165,13 +141,10 @@ var typesWithTiltfileBuiltins = []apiset.Object{
 	&v1alpha1.Extension{},
 	&v1alpha1.FileWatch{},
 	&v1alpha1.Cmd{},
-	&v1alpha1.UIButton{},
 	&v1alpha1.ConfigMap{},
 }
 
 var typesToReconcile = append([]apiset.Object{
-	&v1alpha1.UIResource{},
-	&v1alpha1.ToggleButton{},
 	&v1alpha1.Session{},
 }, typesWithTiltfileBuiltins...)
 
@@ -203,7 +176,6 @@ func toAPIObjects(
 	tlr *tiltfile.TiltfileLoadResult,
 	ciTimeoutFlag model.CITimeoutFlag,
 	mode store.EngineMode,
-	disableSources disableSourceMap,
 ) apiset.ObjectSet {
 	result := apiset.ObjectSet{}
 
@@ -212,14 +184,10 @@ func toAPIObjects(
 			result.AddSetForType(obj, tlr.ObjectSet.GetSetForType(obj))
 		}
 
-		result.AddSetForType(&v1alpha1.ConfigMap{}, toDisableConfigMaps(disableSources, tlr.EnabledManifests))
-		result.AddSetForType(&v1alpha1.Cmd{}, toCmdObjects(tlr, disableSources))
-		result.AddSetForType(&v1alpha1.ToggleButton{}, toToggleButtons(disableSources))
-		result.AddSetForType(&v1alpha1.UIButton{}, toCancelButtons(tlr))
+		result.AddSetForType(&v1alpha1.Cmd{}, toCmdObjects(tlr))
 	}
 
 	result.AddSetForType(&v1alpha1.Session{}, toSessionObjects(nn, tf, tlr, ciTimeoutFlag, mode))
-	result.AddSetForType(&v1alpha1.UIResource{}, toUIResourceObjects(tf, tlr, disableSources))
 
 	watchInputs := WatchInputs{
 		TiltfileManifestName: model.ManifestName(nn.Name),
@@ -237,126 +205,8 @@ func toAPIObjects(
 		watchInputs.TiltfilePath = tf.Spec.Path
 	}
 
-	result.AddSetForType(&v1alpha1.FileWatch{}, ToFileWatchObjects(watchInputs, disableSources))
+	result.AddSetForType(&v1alpha1.FileWatch{}, ToFileWatchObjects(watchInputs))
 
-	return result
-}
-
-func disableConfigMapName(manifest model.Manifest) string {
-	return fmt.Sprintf("%s-disable", manifest.Name)
-}
-
-func toDisableSources(tlr *tiltfile.TiltfileLoadResult) disableSourceMap {
-	result := make(disableSourceMap)
-	if tlr != nil {
-		for _, m := range tlr.Manifests {
-			name := disableConfigMapName(m)
-			ds := &v1alpha1.DisableSource{
-				ConfigMap: &v1alpha1.ConfigMapDisableSource{
-					Name: name,
-					Key:  "isDisabled",
-				},
-			}
-			result[m.Name] = ds
-		}
-	}
-	return result
-}
-
-func appendCMDS(cms []v1alpha1.ConfigMapDisableSource, newCM v1alpha1.ConfigMapDisableSource) []v1alpha1.ConfigMapDisableSource {
-	for _, cm := range cms {
-		if apicmp.DeepEqual(cm, newCM) {
-			return cms
-		}
-	}
-	return append(cms, newCM)
-}
-
-func mergeDisableSource(existing *v1alpha1.DisableSource, toMerge *v1alpha1.DisableSource) *v1alpha1.DisableSource {
-	if toMerge == nil {
-		return existing
-	}
-	if apicmp.DeepEqual(existing, toMerge) {
-		return existing
-	}
-
-	cms := []v1alpha1.ConfigMapDisableSource{}
-
-	if existing.ConfigMap != nil {
-		cms = append(cms, *existing.ConfigMap)
-	}
-	cms = append(cms, existing.EveryConfigMap...)
-	if toMerge.ConfigMap != nil {
-		cms = appendCMDS(cms, *toMerge.ConfigMap)
-	}
-	for _, newCM := range toMerge.EveryConfigMap {
-		cms = appendCMDS(cms, newCM)
-	}
-	return &v1alpha1.DisableSource{EveryConfigMap: cms}
-}
-
-func toDisableConfigMaps(disableSources disableSourceMap, enabledResources []model.ManifestName) apiset.TypedObjectSet {
-	enabledResourceSet := make(map[model.ManifestName]bool)
-	for _, mn := range enabledResources {
-		enabledResourceSet[mn] = true
-	}
-	result := apiset.TypedObjectSet{}
-	for mn, ds := range disableSources {
-		isDisabled := !enabledResourceSet[mn]
-		cm := &v1alpha1.ConfigMap{
-			ObjectMeta: metav1.ObjectMeta{
-				Name: ds.ConfigMap.Name,
-			},
-			Data: map[string]string{ds.ConfigMap.Key: strconv.FormatBool(isDisabled)},
-		}
-		result[cm.Name] = cm
-	}
-	return result
-}
-
-func toToggleButtons(disableSources disableSourceMap) apiset.TypedObjectSet {
-	result := apiset.TypedObjectSet{}
-	for name, ds := range disableSources {
-		tb := &v1alpha1.ToggleButton{
-			ObjectMeta: metav1.ObjectMeta{
-				Name: fmt.Sprintf("%s-disable", name),
-				Annotations: map[string]string{
-					v1alpha1.AnnotationButtonType: v1alpha1.ButtonTypeDisableToggle,
-				},
-			},
-			Spec: v1alpha1.ToggleButtonSpec{
-				Location: v1alpha1.UIComponentLocation{
-					ComponentID:   string(name),
-					ComponentType: v1alpha1.ComponentTypeResource,
-				},
-				On: v1alpha1.ToggleButtonStateSpec{
-					Text: "Enable Resource",
-				},
-				Off: v1alpha1.ToggleButtonStateSpec{
-					Text:                 "Disable Resource",
-					RequiresConfirmation: true,
-				},
-				StateSource: v1alpha1.StateSource{
-					ConfigMap: &v1alpha1.ConfigMapStateSource{
-						Name:     ds.ConfigMap.Name,
-						Key:      ds.ConfigMap.Key,
-						OnValue:  "true",
-						OffValue: "false",
-					},
-				},
-			},
-		}
-		result[tb.Name] = tb
-	}
-	return result
-}
-
-func toCancelButtons(tlr *tiltfile.TiltfileLoadResult) apiset.TypedObjectSet {
-	result := apiset.TypedObjectSet{}
-	for _, m := range tlr.Manifests {
-		button := uibutton.StopBuildButton(m.Name.String())
-		result[button.Name] = button
-	}
 	return result
 }
 
@@ -371,7 +221,7 @@ func toSessionObjects(nn types.NamespacedName, tf *v1alpha1.Tiltfile, tlr *tiltf
 }
 
 // Pulls out all the Cmd objects generated by the Tiltfile.
-func toCmdObjects(tlr *tiltfile.TiltfileLoadResult, disableSources disableSourceMap) apiset.TypedObjectSet {
+func toCmdObjects(tlr *tiltfile.TiltfileLoadResult) apiset.TypedObjectSet {
 	result := apiset.TypedObjectSet{}
 
 	// Every local_resource's Update Cmd gets its own object.
@@ -397,51 +247,7 @@ func toCmdObjects(tlr *tiltfile.TiltfileLoadResult, disableSources disableSource
 			},
 			Spec: *cmdSpec,
 		}
-		cmd.Spec.DisableSource = disableSources[m.Name]
 		result[name] = cmd
-	}
-
-	return result
-}
-
-// Pulls out all the UIResource objects generated by the Tiltfile.
-func toUIResourceObjects(tf *v1alpha1.Tiltfile, tlr *tiltfile.TiltfileLoadResult, disableSources disableSourceMap) apiset.TypedObjectSet {
-	result := apiset.TypedObjectSet{}
-
-	if tlr != nil {
-		for _, m := range tlr.Manifests {
-			name := string(m.Name)
-
-			r := &v1alpha1.UIResource{
-				ObjectMeta: metav1.ObjectMeta{
-					Name:   name,
-					Labels: m.Labels,
-					Annotations: map[string]string{
-						v1alpha1.AnnotationManifest: m.Name.String(),
-					},
-				},
-			}
-
-			ds := disableSources[m.Name]
-			if ds != nil {
-				r.Status.DisableStatus.State = v1alpha1.DisableStatePending
-				r.Status.DisableStatus.Sources = []v1alpha1.DisableSource{*ds}
-			}
-
-			result[name] = r
-		}
-	}
-
-	if tf != nil {
-		result[tf.Name] = &v1alpha1.UIResource{
-			ObjectMeta: metav1.ObjectMeta{
-				Name:   tf.Name,
-				Labels: tf.Labels,
-				Annotations: map[string]string{
-					v1alpha1.AnnotationManifest: tf.Name,
-				},
-			},
-		}
 	}
 
 	return result

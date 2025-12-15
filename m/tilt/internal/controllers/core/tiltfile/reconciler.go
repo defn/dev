@@ -101,7 +101,7 @@ func (r *Reconciler) Reconcile(ctx context.Context, request reconcile.Request) (
 		r.deleteExistingRun(nn)
 
 		// Delete owned objects
-		err := updateOwnedObjects(ctx, r.ctrlClient, nn, nil, nil, false, r.ciTimeoutFlag, r.engineMode)
+		err := updateOwnedObjects(ctx, r.ctrlClient, nn, nil, nil, r.ciTimeoutFlag, r.engineMode)
 		if err != nil {
 			return ctrl.Result{}, err
 		}
@@ -116,7 +116,7 @@ func (r *Reconciler) Reconcile(ctx context.Context, request reconcile.Request) (
 	run := r.runs[nn]
 	if run == nil {
 		// Initialize the UISession and filewatch if this has never been initialized before.
-		err := updateOwnedObjects(ctx, r.ctrlClient, nn, &tf, nil, false, r.ciTimeoutFlag, r.engineMode)
+		err := updateOwnedObjects(ctx, r.ctrlClient, nn, &tf, nil, r.ciTimeoutFlag, r.engineMode)
 		if err != nil {
 			return ctrl.Result{}, err
 		}
@@ -319,9 +319,7 @@ func (r *Reconciler) handleLoaded(
 	tf *v1alpha1.Tiltfile,
 	entry *BuildEntry,
 	tlr *tiltfile.TiltfileLoadResult) error {
-	// TODO(nick): Rewrite to handle multiple tiltfiles.
-	changeEnabledResources := entry.ArgsChanged && tlr != nil && tlr.Error == nil
-	err := updateOwnedObjects(ctx, r.ctrlClient, nn, tf, tlr, changeEnabledResources, r.ciTimeoutFlag, r.engineMode)
+	err := updateOwnedObjects(ctx, r.ctrlClient, nn, tf, tlr, r.ciTimeoutFlag, r.engineMode)
 	if err != nil {
 		// If updating the API server fails, just return the error, so that the
 		// reconciler will retry.

@@ -9,7 +9,6 @@ import (
 	"k8s.io/apimachinery/pkg/types"
 
 	"github.com/defn/dev/m/tilt/internal/controllers/apis/tiltfile"
-	"github.com/defn/dev/m/tilt/internal/controllers/apis/uibutton"
 	"github.com/defn/dev/m/tilt/internal/controllers/fake"
 	"github.com/defn/dev/m/tilt/internal/store"
 	"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1"
@@ -35,16 +34,6 @@ func TestCreateTiltfile(t *testing.T) {
 		RestartOn: &v1alpha1.RestartOnSpec{
 			FileWatches: []string{"configs:(Tiltfile)"},
 		},
-		StopOn: &v1alpha1.StopOnSpec{
-			UIButtons: []string{uibutton.StopBuildButtonName("(Tiltfile)")},
-		},
 	}
 	assert.Equal(t, expectedTfSpec, tf.Spec)
-
-	var actualButton v1alpha1.UIButton
-	name := types.NamespacedName{Name: uibutton.StopBuildButtonName(model.MainTiltfileManifestName.String())}
-	err := client.Get(ctx, name, &actualButton)
-	require.NoError(t, err)
-	expectedButton := uibutton.StopBuildButton(model.MainTiltfileManifestName.String())
-	assert.Equal(t, expectedButton.Spec, actualButton.Spec)
 }

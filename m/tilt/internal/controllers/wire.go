@@ -11,9 +11,6 @@ import (
 	"github.com/defn/dev/m/tilt/internal/controllers/core/filewatch"
 	"github.com/defn/dev/m/tilt/internal/controllers/core/session"
 	"github.com/defn/dev/m/tilt/internal/controllers/core/tiltfile"
-	"github.com/defn/dev/m/tilt/internal/controllers/core/togglebutton"
-	"github.com/defn/dev/m/tilt/internal/controllers/core/uibutton"
-	"github.com/defn/dev/m/tilt/internal/controllers/core/uiresource"
 	"github.com/defn/dev/m/tilt/internal/controllers/core/uisession"
 )
 
@@ -27,10 +24,7 @@ func ProvideControllers(
 	fileWatch *filewatch.Controller,
 	cmds *cmd.Controller,
 	uis *uisession.Reconciler,
-	uir *uiresource.Reconciler,
-	uib *uibutton.Reconciler,
 	tfr *tiltfile.Reconciler,
-	tbr *togglebutton.Reconciler,
 	extr *extension.Reconciler,
 	extrr *extensionrepo.Reconciler,
 	cmr *configmap.Reconciler,
@@ -40,10 +34,7 @@ func ProvideControllers(
 		fileWatch,
 		cmds,
 		uis,
-		uir,
-		uib,
 		tfr,
-		tbr,
 		extr,
 		extrr,
 		cmr,
@@ -62,10 +53,7 @@ var WireSet = wire.NewSet(
 
 	cmd.WireSet,
 	controllerSet,
-	uiresource.WireSet,
 	uisession.WireSet,
-	uibutton.WireSet,
-	togglebutton.WireSet,
 	tiltfile.WireSet,
 	extensionrepo.WireSet,
 	extension.WireSet,

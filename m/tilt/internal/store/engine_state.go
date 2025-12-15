@@ -85,9 +85,7 @@ type EngineState struct {
 	Cmds        map[string]*Cmd                `json:"-"`
 	Tiltfiles   map[string]*v1alpha1.Tiltfile  `json:"-"`
 	FileWatches map[string]*v1alpha1.FileWatch `json:"-"`
-	UIResources map[string]*v1alpha1.UIResource `json:"-"`
 	ConfigMaps  map[string]*v1alpha1.ConfigMap  `json:"-"`
-	UIButtons   map[string]*v1alpha1.UIButton   `json:"-"`
 }
 
 func (e *EngineState) MainTiltfilePath() string {
@@ -522,9 +520,7 @@ func NewState() *EngineState {
 	ret.Cmds = make(map[string]*Cmd)
 	ret.Tiltfiles = make(map[string]*v1alpha1.Tiltfile)
 	ret.FileWatches = make(map[string]*v1alpha1.FileWatch)
-	ret.UIResources = make(map[string]*v1alpha1.UIResource)
 	ret.ConfigMaps = make(map[string]*v1alpha1.ConfigMap)
-	ret.UIButtons = make(map[string]*v1alpha1.UIButton)
 
 	return ret
 }

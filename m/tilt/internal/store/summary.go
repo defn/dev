@@ -57,9 +57,7 @@ type ChangeSummary struct {
 	// Cmds with their specs changed.
 	CmdSpecs ChangeSet
 
-	UISessions  ChangeSet
-	UIResources ChangeSet
-	UIButtons   ChangeSet
+	UISessions ChangeSet
 
 	Clusters ChangeSet
 
@@ -77,7 +75,6 @@ func (s *ChangeSummary) Add(other ChangeSummary) {
 	s.Log = s.Log || other.Log
 	s.CmdSpecs.AddAll(other.CmdSpecs)
 	s.UISessions.AddAll(other.UISessions)
-	s.UIResources.AddAll(other.UIResources)
 	s.Clusters.AddAll(other.Clusters)
 	if other.LastBackoff > s.LastBackoff {
 		s.LastBackoff = other.LastBackoff
