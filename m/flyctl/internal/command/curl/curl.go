@@ -19,13 +19,13 @@ import (
 	"github.com/samber/lo"
 	"github.com/spf13/cobra"
 
-	fly "github.com/superfly/fly-go"
 	"github.com/defn/dev/m/flyctl/internal/command"
 	"github.com/defn/dev/m/flyctl/internal/config"
 	"github.com/defn/dev/m/flyctl/internal/flag"
 	"github.com/defn/dev/m/flyctl/internal/flyutil"
 	"github.com/defn/dev/m/flyctl/internal/render"
 	"github.com/defn/dev/m/flyctl/iostreams"
+	fly "github.com/superfly/fly-go"
 )
 
 // New initializes and returns a new apps Command.

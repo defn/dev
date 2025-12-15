@@ -7,9 +7,9 @@ import (
 	"sync"
 	"time"
 
-	"github.com/morikuni/aec"
 	"github.com/defn/dev/m/flyctl/internal/cmdutil"
 	"github.com/defn/dev/m/flyctl/iostreams"
+	"github.com/morikuni/aec"
 	"golang.org/x/crypto/ssh/terminal"
 )
 

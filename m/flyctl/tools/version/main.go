@@ -5,8 +5,8 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/spf13/cobra"
 	"github.com/defn/dev/m/flyctl/tools/version/relmeta"
+	"github.com/spf13/cobra"
 )
 
 // TODO[md]: remove this when we're done with the semver to calver migration

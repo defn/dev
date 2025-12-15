@@ -6,11 +6,11 @@ import (
 	"slices"
 	"strings"
 
+	"github.com/defn/dev/m/flyctl/internal/flag/flagnames"
+	"github.com/defn/dev/m/flyctl/internal/flyutil"
 	"github.com/samber/lo"
 	"github.com/spf13/cobra"
 	fly "github.com/superfly/fly-go"
-	"github.com/defn/dev/m/flyctl/internal/flag/flagnames"
-	"github.com/defn/dev/m/flyctl/internal/flyutil"
 )
 
 func CompleteApps(

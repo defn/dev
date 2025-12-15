@@ -15,13 +15,13 @@ import (
 	"github.com/mgutz/ansi"
 	"github.com/samber/lo"
 
-	fly "github.com/superfly/fly-go"
 	"github.com/defn/dev/m/flyctl/internal/config"
 	"github.com/defn/dev/m/flyctl/internal/flag"
 	"github.com/defn/dev/m/flyctl/internal/flyutil"
 	"github.com/defn/dev/m/flyctl/internal/future"
 	"github.com/defn/dev/m/flyctl/internal/sort"
 	"github.com/defn/dev/m/flyctl/iostreams"
+	fly "github.com/superfly/fly-go"
 )
 
 type RegionParams struct {

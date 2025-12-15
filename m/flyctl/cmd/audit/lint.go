@@ -8,10 +8,10 @@ import (
 	"strings"
 	"unicode"
 
+	"github.com/defn/dev/m/flyctl/internal/command/root"
 	"github.com/olekukonko/tablewriter"
 	"github.com/spf13/cobra"
 	"github.com/spf13/pflag"
-	"github.com/defn/dev/m/flyctl/internal/command/root"
 )
 
 func newLintCmd() *cobra.Command {

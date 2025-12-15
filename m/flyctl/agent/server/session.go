@@ -19,11 +19,11 @@ import (
 
 	"golang.org/x/sync/errgroup"
 
-	fly "github.com/superfly/fly-go"
-	"github.com/superfly/fly-go/tokens"
 	"github.com/defn/dev/m/flyctl/agent"
 	"github.com/defn/dev/m/flyctl/agent/internal/proto"
 	"github.com/defn/dev/m/flyctl/wg"
+	fly "github.com/superfly/fly-go"
+	"github.com/superfly/fly-go/tokens"
 
 	"github.com/defn/dev/m/flyctl/internal/buildinfo"
 	"github.com/defn/dev/m/flyctl/internal/config"

@@ -8,10 +8,10 @@ import (
 	"os"
 	"strings"
 
-	"github.com/spf13/cobra"
 	"github.com/defn/dev/m/flyctl/internal/command"
 	"github.com/defn/dev/m/flyctl/internal/config"
 	"github.com/defn/dev/m/flyctl/internal/flag"
+	"github.com/spf13/cobra"
 	"github.com/superfly/macaroon"
 )
 

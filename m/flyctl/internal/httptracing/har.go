@@ -2,8 +2,8 @@ package httptracing
 
 import (
 	"encoding/json"
-	"github.com/haileys/go-harlog"
 	"github.com/defn/dev/m/flyctl/terminal"
+	"github.com/haileys/go-harlog"
 	"net/http"
 	"os"
 )

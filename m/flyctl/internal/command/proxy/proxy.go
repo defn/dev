@@ -7,7 +7,6 @@ import (
 	"io"
 	"strings"
 
-	"github.com/spf13/cobra"
 	"github.com/defn/dev/m/flyctl/agent"
 	"github.com/defn/dev/m/flyctl/internal/command"
 	"github.com/defn/dev/m/flyctl/internal/flag"
@@ -16,6 +15,7 @@ import (
 	"github.com/defn/dev/m/flyctl/internal/prompt"
 	"github.com/defn/dev/m/flyctl/iostreams"
 	"github.com/defn/dev/m/flyctl/proxy"
+	"github.com/spf13/cobra"
 )
 
 func New() *cobra.Command {

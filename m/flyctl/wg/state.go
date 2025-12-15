@@ -4,9 +4,9 @@ import (
 	"fmt"
 	"net"
 
-	fly "github.com/superfly/fly-go"
 	"github.com/defn/dev/m/flyctl/internal/logger"
 	"github.com/defn/dev/m/flyctl/terminal"
+	fly "github.com/superfly/fly-go"
 	"golang.zx2c4.com/wireguard/device"
 )
 

@@ -10,9 +10,9 @@ import (
 	"slices"
 	"strings"
 
+	"github.com/defn/dev/m/flyctl/terminal"
 	"github.com/samber/lo"
 	"github.com/spf13/cobra"
-	"github.com/defn/dev/m/flyctl/terminal"
 
 	"github.com/defn/dev/m/flyctl/internal/buildinfo"
 	"github.com/defn/dev/m/flyctl/internal/cache"

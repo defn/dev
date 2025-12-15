@@ -9,10 +9,10 @@ import (
 	"strings"
 
 	"github.com/alecthomas/chroma/quick"
-	"github.com/logrusorgru/aurora"
 	"github.com/defn/dev/m/flyctl/internal/buildinfo"
 	"github.com/defn/dev/m/flyctl/internal/cmdutil"
 	"github.com/defn/dev/m/flyctl/iostreams"
+	"github.com/logrusorgru/aurora"
 )
 
 type Level int

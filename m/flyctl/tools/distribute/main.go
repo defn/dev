@@ -7,10 +7,10 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/spf13/cobra"
 	"github.com/defn/dev/m/flyctl/internal/version"
 	"github.com/defn/dev/m/flyctl/tools/distribute/bundle"
 	"github.com/defn/dev/m/flyctl/tools/distribute/flypkgs"
+	"github.com/spf13/cobra"
 )
 
 var (

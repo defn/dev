@@ -16,8 +16,8 @@ import (
 	"time"
 
 	"github.com/cli/safeexec"
-	"github.com/morikuni/aec"
 	"github.com/defn/dev/m/flyctl/terminal"
+	"github.com/morikuni/aec"
 
 	"github.com/defn/dev/m/flyctl/internal/buildinfo"
 	"github.com/defn/dev/m/flyctl/internal/cmdutil"

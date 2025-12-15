@@ -9,16 +9,16 @@ import (
 	"regexp"
 	"strings"
 
-	"github.com/oklog/ulid/v2"
-	"github.com/pkg/errors"
-	"github.com/spf13/viper"
-	fly "github.com/superfly/fly-go"
 	"github.com/defn/dev/m/flyctl/flyctl"
 	"github.com/defn/dev/m/flyctl/internal/config"
 	"github.com/defn/dev/m/flyctl/internal/flyutil"
 	"github.com/defn/dev/m/flyctl/internal/state"
 	"github.com/defn/dev/m/flyctl/terminal"
 	"github.com/defn/dev/m/flyctl/wg"
+	"github.com/oklog/ulid/v2"
+	"github.com/pkg/errors"
+	"github.com/spf13/viper"
+	fly "github.com/superfly/fly-go"
 	"golang.org/x/crypto/curve25519"
 )
 

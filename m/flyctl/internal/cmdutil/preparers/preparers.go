@@ -7,8 +7,6 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/spf13/pflag"
-	fly "github.com/superfly/fly-go"
 	"github.com/defn/dev/m/flyctl/helpers"
 	"github.com/defn/dev/m/flyctl/internal/config"
 	"github.com/defn/dev/m/flyctl/internal/flag/flagctx"
@@ -16,6 +14,8 @@ import (
 	"github.com/defn/dev/m/flyctl/internal/instrument"
 	"github.com/defn/dev/m/flyctl/internal/logger"
 	"github.com/defn/dev/m/flyctl/internal/state"
+	"github.com/spf13/pflag"
+	fly "github.com/superfly/fly-go"
 	"go.opentelemetry.io/contrib/instrumentation/net/http/otelhttp"
 )
 

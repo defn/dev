@@ -5,10 +5,10 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/spf13/cobra"
 	"github.com/defn/dev/m/flyctl/internal/command"
 	"github.com/defn/dev/m/flyctl/internal/flag"
 	"github.com/defn/dev/m/flyctl/internal/flyutil"
+	"github.com/spf13/cobra"
 )
 
 func newRevoke() *cobra.Command {

@@ -1,8 +1,8 @@
 package tokens
 
 import (
-	"github.com/spf13/cobra"
 	"github.com/defn/dev/m/flyctl/internal/command"
+	"github.com/spf13/cobra"
 )
 
 func New() *cobra.Command {

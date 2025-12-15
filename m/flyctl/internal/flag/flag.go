@@ -6,9 +6,9 @@ import (
 	"reflect"
 	"time"
 
-	"github.com/spf13/cobra"
 	"github.com/defn/dev/m/flyctl/internal/flag/completion"
 	"github.com/defn/dev/m/flyctl/internal/flag/flagnames"
+	"github.com/spf13/cobra"
 )
 
 type extraArgsContextKey struct{}

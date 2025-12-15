@@ -3,9 +3,9 @@ package certificate
 import (
 	"fmt"
 
-	"github.com/superfly/fly-go"
 	"github.com/defn/dev/m/flyctl/internal/format"
 	"github.com/defn/dev/m/flyctl/iostreams"
+	"github.com/superfly/fly-go"
 )
 
 // DisplayValidationErrors shows certificate validation errors in a user-friendly format

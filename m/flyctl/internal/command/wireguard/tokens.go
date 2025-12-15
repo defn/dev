@@ -9,13 +9,13 @@ import (
 	"os"
 	"strings"
 
-	"github.com/olekukonko/tablewriter"
-	fly "github.com/superfly/fly-go"
 	"github.com/defn/dev/m/flyctl/internal/config"
 	"github.com/defn/dev/m/flyctl/internal/flyutil"
 	"github.com/defn/dev/m/flyctl/internal/render"
 	"github.com/defn/dev/m/flyctl/internal/wireguard"
 	"github.com/defn/dev/m/flyctl/iostreams"
+	"github.com/olekukonko/tablewriter"
+	fly "github.com/superfly/fly-go"
 )
 
 func runWireguardTokenList(ctx context.Context) error {

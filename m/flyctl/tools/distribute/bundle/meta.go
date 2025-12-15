@@ -9,8 +9,8 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/pkg/errors"
 	"github.com/defn/dev/m/flyctl/internal/release"
+	"github.com/pkg/errors"
 )
 
 type buildArtifact struct {

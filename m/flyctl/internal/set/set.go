@@ -1,8 +1,8 @@
 package set
 
 import (
-	"github.com/samber/lo"
 	"github.com/defn/dev/m/flyctl/helpers"
+	"github.com/samber/lo"
 )
 
 type Set[T comparable] struct {

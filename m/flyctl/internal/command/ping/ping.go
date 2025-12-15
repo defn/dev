@@ -13,12 +13,12 @@ import (
 	"syscall"
 	"time"
 
-	"github.com/spf13/cobra"
 	"github.com/defn/dev/m/flyctl/agent"
 	"github.com/defn/dev/m/flyctl/internal/command"
 	"github.com/defn/dev/m/flyctl/internal/command/dig"
 	"github.com/defn/dev/m/flyctl/internal/flag"
 	"github.com/defn/dev/m/flyctl/internal/flyutil"
+	"github.com/spf13/cobra"
 	"golang.org/x/net/icmp"
 	"golang.org/x/net/ipv6"
 )

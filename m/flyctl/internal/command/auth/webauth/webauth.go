@@ -10,14 +10,14 @@ import (
 
 	"github.com/azazeal/pause"
 	"github.com/briandowns/spinner"
-	"github.com/skratchdot/open-golang/open"
-	"github.com/superfly/fly-go"
 	"github.com/defn/dev/m/flyctl/agent"
 	"github.com/defn/dev/m/flyctl/internal/config"
 	"github.com/defn/dev/m/flyctl/internal/flyutil"
 	"github.com/defn/dev/m/flyctl/internal/logger"
 	"github.com/defn/dev/m/flyctl/internal/state"
 	"github.com/defn/dev/m/flyctl/iostreams"
+	"github.com/skratchdot/open-golang/open"
+	"github.com/superfly/fly-go"
 )
 
 func SaveToken(ctx context.Context, token string) error {

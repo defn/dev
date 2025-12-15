@@ -13,14 +13,14 @@ import (
 	"time"
 
 	"github.com/azazeal/pause"
-	fly "github.com/superfly/fly-go"
-	"github.com/superfly/fly-go/tokens"
 	"github.com/defn/dev/m/flyctl/agent"
 	"github.com/defn/dev/m/flyctl/internal/config"
 	"github.com/defn/dev/m/flyctl/internal/env"
 	"github.com/defn/dev/m/flyctl/internal/flyutil"
 	"github.com/defn/dev/m/flyctl/internal/wireguard"
 	"github.com/defn/dev/m/flyctl/wg"
+	fly "github.com/superfly/fly-go"
+	"github.com/superfly/fly-go/tokens"
 	"golang.org/x/sync/errgroup"
 )
 

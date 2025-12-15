@@ -3,8 +3,8 @@ package command
 import (
 	"context"
 
-	"github.com/spf13/cobra"
 	"github.com/defn/dev/m/flyctl/internal/command_context"
+	"github.com/spf13/cobra"
 )
 
 // NewContext derives a context that carries cmd from ctx.

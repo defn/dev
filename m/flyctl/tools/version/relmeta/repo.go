@@ -8,8 +8,8 @@ import (
 	"strings"
 	"time"
 
-	"github.com/pkg/errors"
 	"github.com/defn/dev/m/flyctl/internal/version"
+	"github.com/pkg/errors"
 )
 
 type gitError struct {

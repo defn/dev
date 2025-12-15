@@ -6,10 +6,10 @@ import (
 	"fmt"
 	"io"
 
+	"github.com/defn/dev/m/flyctl/iostreams"
 	"github.com/logrusorgru/aurora"
 	"github.com/morikuni/aec"
 	"github.com/olekukonko/tablewriter"
-	"github.com/defn/dev/m/flyctl/iostreams"
 )
 
 func JSON(w io.Writer, v interface{}) error {

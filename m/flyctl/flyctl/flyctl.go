@@ -5,11 +5,11 @@ import (
 	"os"
 	"path"
 
-	"github.com/spf13/viper"
-	fly "github.com/superfly/fly-go"
 	"github.com/defn/dev/m/flyctl/helpers"
 	"github.com/defn/dev/m/flyctl/internal/instrument"
 	"github.com/defn/dev/m/flyctl/terminal"
+	"github.com/spf13/viper"
+	fly "github.com/superfly/fly-go"
 	"gopkg.in/yaml.v3"
 )
 

@@ -11,9 +11,9 @@ import (
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 
-	fly "github.com/superfly/fly-go"
 	"github.com/defn/dev/m/flyctl/agent/server"
 	"github.com/defn/dev/m/flyctl/flyctl"
+	fly "github.com/superfly/fly-go"
 
 	"github.com/defn/dev/m/flyctl/internal/command"
 	"github.com/defn/dev/m/flyctl/internal/config"

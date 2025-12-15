@@ -6,9 +6,9 @@ import (
 	"strconv"
 	"strings"
 
+	"github.com/defn/dev/m/flyctl/internal/command/root"
 	"github.com/spf13/cobra"
 	"github.com/spf13/pflag"
-	"github.com/defn/dev/m/flyctl/internal/command/root"
 )
 
 func formatRawText(desc string) string {

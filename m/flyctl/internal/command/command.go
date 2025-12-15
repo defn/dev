@@ -12,13 +12,13 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/skratchdot/open-golang/open"
-	"github.com/spf13/cobra"
-	fly "github.com/superfly/fly-go"
 	"github.com/defn/dev/m/flyctl/internal/command/auth/webauth"
 	"github.com/defn/dev/m/flyctl/internal/flyutil"
 	"github.com/defn/dev/m/flyctl/internal/prompt"
 	"github.com/defn/dev/m/flyctl/iostreams"
+	"github.com/skratchdot/open-golang/open"
+	"github.com/spf13/cobra"
+	fly "github.com/superfly/fly-go"
 
 	"github.com/defn/dev/m/flyctl/internal/buildinfo"
 	"github.com/defn/dev/m/flyctl/internal/cache"

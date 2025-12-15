@@ -5,9 +5,6 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/olekukonko/tablewriter"
-	"github.com/pkg/errors"
-	"github.com/spf13/viper"
 	"github.com/defn/dev/m/flyctl/agent"
 	"github.com/defn/dev/m/flyctl/flyctl"
 	"github.com/defn/dev/m/flyctl/internal/config"
@@ -18,6 +15,9 @@ import (
 	"github.com/defn/dev/m/flyctl/internal/wireguard"
 	"github.com/defn/dev/m/flyctl/iostreams"
 	"github.com/defn/dev/m/flyctl/terminal"
+	"github.com/olekukonko/tablewriter"
+	"github.com/pkg/errors"
+	"github.com/spf13/viper"
 )
 
 func runWireguardList(ctx context.Context) error {

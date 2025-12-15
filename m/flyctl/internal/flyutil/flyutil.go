@@ -3,9 +3,9 @@ package flyutil
 import (
 	"context"
 
-	"github.com/superfly/fly-go"
 	"github.com/defn/dev/m/flyctl/internal/buildinfo"
 	"github.com/defn/dev/m/flyctl/internal/logger"
+	"github.com/superfly/fly-go"
 )
 
 func NewClientFromOptions(ctx context.Context, opts fly.ClientOptions) *fly.Client {

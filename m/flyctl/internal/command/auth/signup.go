@@ -3,8 +3,8 @@ package auth
 import (
 	"context"
 
-	"github.com/spf13/cobra"
 	"github.com/defn/dev/m/flyctl/internal/command/auth/webauth"
+	"github.com/spf13/cobra"
 
 	"github.com/defn/dev/m/flyctl/internal/command"
 )

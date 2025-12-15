@@ -4,12 +4,12 @@ import (
 	"context"
 	"time"
 
-	"github.com/spf13/cobra"
 	"github.com/defn/dev/m/flyctl/internal/cmdutil/preparers"
 	"github.com/defn/dev/m/flyctl/internal/flag/flagctx"
 	"github.com/defn/dev/m/flyctl/internal/logger"
 	"github.com/defn/dev/m/flyctl/iostreams"
 	"github.com/defn/dev/m/flyctl/terminal"
+	"github.com/spf13/cobra"
 )
 
 func prepareInitialCtx(cmd *cobra.Command) (context.Context, error) {

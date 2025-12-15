@@ -13,13 +13,13 @@ import (
 
 	"github.com/AlecAivazis/survey/v2/terminal"
 	"github.com/MakeNowJust/heredoc/v2"
-	"github.com/kr/text"
-	"github.com/spf13/cobra"
-	"github.com/spf13/pflag"
 	"github.com/defn/dev/m/flyctl/internal/env"
 	"github.com/defn/dev/m/flyctl/internal/flag/flagnames"
 	"github.com/defn/dev/m/flyctl/internal/flyerr"
 	"github.com/defn/dev/m/flyctl/internal/task"
+	"github.com/kr/text"
+	"github.com/spf13/cobra"
+	"github.com/spf13/pflag"
 	"golang.org/x/term"
 
 	"github.com/defn/dev/m/flyctl/iostreams"

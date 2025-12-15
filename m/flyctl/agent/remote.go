@@ -4,10 +4,10 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/pkg/errors"
-	"github.com/superfly/fly-go"
 	"github.com/defn/dev/m/flyctl/internal/wireguard"
 	"github.com/defn/dev/m/flyctl/iostreams"
+	"github.com/pkg/errors"
+	"github.com/superfly/fly-go"
 )
 
 func BringUpAgent(ctx context.Context, client wireguard.WebClient, app *fly.AppCompact, network string, quiet bool) (*Client, Dialer, error) {
