@@ -14,6 +14,8 @@ import (
 )
 
 func TestVersion(t *testing.T) {
+	t.Setenv("FLY_CONFIG_DIR", t.TempDir())
+
 	ctx, cancel := context.WithTimeout(context.Background(), time.Second)
 	defer cancel()
 
