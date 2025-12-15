@@ -18,17 +18,7 @@ const (
 	// After Obsolete is Error, but it's not a value we can set
 )
 
-const MultipleContainersPerPod = "multiple_containers_per_pod"
-const Events = "events"
-const Snapshots = "snapshots"
-const UpdateHistory = "update_history"
-const Facets = "facets"
-const Labels = "labels"
-const LiveUpdateV2 = "live_update_v2"
-const DisableResources = "disable_resources"
-const BulkDisableResources = "bulk_disable_resources"
 const ClusterRefresh = "cluster_refresh"
-const OfflineSnapshotCreation = "offline_snapshot_creation"
 
 // The Value a flag can have. Status should never be changed.
 type Value struct {
@@ -42,49 +32,9 @@ type Defaults map[string]Value
 
 // MainDefaults is the defaults we use in Main
 var MainDefaults = Defaults{
-	MultipleContainersPerPod: Value{
-		Enabled: true,
-		Status:  Obsolete,
-	},
-	Events: Value{
-		Enabled: true,
-		Status:  Obsolete,
-	},
-	Snapshots: Value{
-		Enabled: false,
-		Status:  Obsolete,
-	},
-	UpdateHistory: Value{
-		Enabled: false,
-		Status:  Obsolete,
-	},
-	Facets: Value{
-		Enabled: true,
-		Status:  Obsolete,
-	},
-	Labels: Value{
-		Enabled: true,
-		Status:  Obsolete,
-	},
-	LiveUpdateV2: Value{
-		Enabled: true,
-		Status:  Obsolete,
-	},
-	DisableResources: Value{
-		Enabled: true,
-		Status:  Obsolete,
-	},
-	BulkDisableResources: Value{
-		Enabled: false,
-		Status:  Obsolete,
-	},
 	ClusterRefresh: Value{
 		Enabled: false,
 		Status:  Active,
-	},
-	OfflineSnapshotCreation: Value{
-		Enabled: true,
-		Status:  Obsolete,
 	},
 }
 
