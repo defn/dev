@@ -1,0 +1,47 @@
+# Binaries for programs and plugins
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+/bin
+
+# Test binary, built with `go test -c`
+*.test
+
+# Output of the go coverage tool, specifically when used with LiteIDE
+*.out
+
+# Dependency directories (remove the comment below to include it)
+# vendor/
+
+dist/
+
+# Local environment settings
+.envrc
+
+tmp/
+
+# generated docs
+out
+#docstrings/gen.go
+/.idea/*
+/.idea/.gitignore
+/.idea/dictionaries/dj.xml
+/.idea/flyctl.iml
+/.idea/misc.xml
+/.idea/modules.xml
+/.idea/vcs.xml
+.vscode/launch.json
+.DS_Store
+
+.direnv/
+/ci-preflight-test-results.njson
+.tool-versions
+
+# generated release meta
+release.json
+
+.fly
+CLAUDE.md
+.claude/settings.local.json

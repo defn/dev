@@ -1,0 +1,6 @@
+fly.toml
+.git/
+*.sqlite3
+{{ if .venv -}}
+{{ .venvdir }}
+{{- end -}}

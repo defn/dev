@@ -1,0 +1,69 @@
+app = "foo"
+
+[env]
+  # Mixed value types
+  FOO = "STRING"
+  BAR = 123
+
+[build]
+build_target = "thalayer"
+
+[[services]]
+  # Stringified internal port
+  internal_port = "8080"
+
+  # Old concurrency format
+  concurrency = "12,23"
+
+  # Autostop specified with a boolean
+  auto_stop_machines = false
+
+  [[services.ports]]
+  # Stringified port
+  port = "80"
+  handlers = ["http"]
+
+  [[services.tcp_checks]]
+    # Parse as time.Duration in milliseconds
+    interval = 10000
+    timeout = 2000
+
+  [[services.tcp_checks]]
+    interval = "20s"
+    timeout = "3s"
+
+  [[services.http_checks]]
+    # Parse as time.Duration in milliseconds
+    interval = 30000
+    timeout = 4000
+
+    [[services.http_checks.headers]]
+      name = "origin"
+      value = "http://localhost:8000"
+
+  [[services.http_checks]]
+    # Additional check of same type to ensure it is not overriden
+    interval = "20s"
+    timeout = "3s"
+    grace_period = "" # empty duration must be ignored
+
+    [services.http_checks.headers]
+      fly-healthcheck = 1
+      metoo = true
+      astring = "string"
+
+[experimental]
+  # GQL GetConfig always returns an experimental section even if empty
+
+[[processes]]
+  # The GQL GetConfig API returns an empty array when there are no processes
+
+[mount]
+  # singular mount
+  source = "data"
+  destination = "/data"
+
+[metrics]
+  # singular metrics
+  port = 9999
+  path = "/metrics"

@@ -1,0 +1,13 @@
+fly.toml
+Dockerfile
+.dockerignore
+node_modules
+.git
+{{ if .remix -}}
+*.log
+.DS_Store
+.env
+/.cache
+/public/build
+/build
+{{ end -}}
