@@ -10,7 +10,6 @@ import (
 
 	"github.com/go-logr/logr"
 	"github.com/spf13/cobra"
-	"go.lsp.dev/protocol"
 	"k8s.io/cli-runtime/pkg/genericclioptions"
 	ctrllog "sigs.k8s.io/controller-runtime/pkg/log"
 
@@ -18,7 +17,6 @@ import (
 	"github.com/defn/dev/m/tilt/internal/output"
 	"github.com/defn/dev/m/tilt/pkg/logger"
 	"github.com/defn/dev/m/tilt/pkg/model"
-	"github.com/tilt-dev/starlark-lsp/pkg/cli"
 )
 
 var debug bool
@@ -60,7 +58,6 @@ to bring your environment up-to-date in real-time.
 	addCommand(rootCmd, newArgsCmd(streams))
 
 	rootCmd.AddCommand(newAlphaCmd(streams))
-	rootCmd.AddCommand(newLspCmd())
 
 	globalFlags := rootCmd.PersistentFlags()
 	globalFlags.BoolVarP(&debug, "debug", "d", false, "Enable debug logging")
@@ -82,8 +79,7 @@ type tiltCmd interface {
 }
 
 func createContext() (ctx context.Context, cleanup func()) {
-	l, cleanup := cli.NewLogger()
-	return protocol.WithLogger(context.Background(), l), cleanup
+	return context.Background(), func() {}
 }
 
 func preCommand(ctx context.Context, cmdName model.TiltSubcommand) context.Context {

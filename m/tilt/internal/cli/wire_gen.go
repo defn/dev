@@ -15,7 +15,6 @@ import (
 	"github.com/defn/dev/m/tilt/internal/engine"
 	"github.com/defn/dev/m/tilt/internal/hud"
 	"github.com/defn/dev/m/tilt/internal/hud/prompt"
-	"github.com/defn/dev/m/tilt/pkg/logger"
 	"github.com/defn/dev/m/tilt/pkg/model"
 )
 
@@ -42,11 +41,6 @@ func wireLogsDeps(ctx context.Context, subcommand model.TiltSubcommand) (LogsDep
 func wireClientGetter(ctx context.Context) (*cliclient.Getter, error) {
 	// TODO: Implement wire generation
 	return nil, nil
-}
-
-func wireLsp(ctx context.Context, l logger.Logger, subcommand model.TiltSubcommand) (cmdLspDeps, error) {
-	// TODO: Implement wire generation
-	return cmdLspDeps{}, nil
 }
 
 // encodeJSON encodes v to JSON and writes to w

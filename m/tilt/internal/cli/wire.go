@@ -34,7 +34,6 @@ import (
 	"github.com/defn/dev/m/tilt/internal/store"
 	"github.com/defn/dev/m/tilt/internal/tiltfile"
 	"github.com/defn/dev/m/tilt/internal/xdg"
-	"github.com/defn/dev/m/tilt/pkg/logger"
 	"github.com/defn/dev/m/tilt/pkg/model"
 )
 
@@ -144,11 +143,6 @@ func provideClock() func() time.Time {
 func wireClientGetter(ctx context.Context) (*cliclient.Getter, error) {
 	wire.Build(CLIClientWireSet)
 	return nil, nil
-}
-
-func wireLsp(ctx context.Context, l logger.Logger, subcommand model.TiltSubcommand) (cmdLspDeps, error) {
-	wire.Build(UpWireSet, newLspDeps)
-	return cmdLspDeps{}, nil
 }
 
 func provideCITimeoutFlag() model.CITimeoutFlag {
