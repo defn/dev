@@ -83,12 +83,6 @@ func NewGlobalLogAction(level logger.Level, b []byte) LogAction {
 	}
 }
 
-type TiltCloudStatusReceivedAction struct {
-	SuggestedTiltVersion string
-}
-
-func (TiltCloudStatusReceivedAction) Action() {}
-
 type PanicAction struct {
 	Err error
 }

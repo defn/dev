@@ -33,7 +33,6 @@ import (
 	"github.com/defn/dev/m/tilt/internal/openurl"
 	"github.com/defn/dev/m/tilt/internal/store"
 	"github.com/defn/dev/m/tilt/internal/tiltfile"
-	"github.com/defn/dev/m/tilt/internal/token"
 	"github.com/defn/dev/m/tilt/internal/xdg"
 	"github.com/defn/dev/m/tilt/pkg/logger"
 	"github.com/defn/dev/m/tilt/pkg/model"
@@ -79,7 +78,6 @@ var BaseWireSet = wire.NewSet(
 
 	dirs.UseTiltDevDir,
 	xdg.NewTiltDevBase,
-	token.GetOrCreateToken,
 
 	wire.Value(feature.MainDefaults),
 
@@ -112,7 +110,6 @@ func wireCmdUp(ctx context.Context, subcommand model.TiltSubcommand) (CmdUpDeps,
 type CmdUpDeps struct {
 	Upper     engine.Upper
 	TiltBuild model.TiltBuild
-	Token     token.Token
 	Prompt    *prompt.TerminalPrompt
 }
 
@@ -127,7 +124,6 @@ func wireCmdCI(ctx context.Context, subcommand model.TiltSubcommand) (CmdCIDeps,
 type CmdCIDeps struct {
 	Upper     engine.Upper
 	TiltBuild model.TiltBuild
-	Token     token.Token
 }
 
 func wireLogsDeps(ctx context.Context, subcommand model.TiltSubcommand) (LogsDeps, error) {

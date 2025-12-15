@@ -6,7 +6,6 @@ import (
 	"time"
 
 	"github.com/defn/dev/m/tilt/internal/timecmp"
-	"github.com/defn/dev/m/tilt/internal/token"
 	"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1"
 	"github.com/defn/dev/m/tilt/pkg/model"
 	"github.com/defn/dev/m/tilt/pkg/model/logstore"
@@ -71,10 +70,6 @@ type EngineState struct {
 	Features map[string]bool
 
 	Secrets model.SecretSet
-
-	CloudAddress string
-	Token        token.Token
-	TeamID       string
 
 	UserConfigState model.UserConfigState
 

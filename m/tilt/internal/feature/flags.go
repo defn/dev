@@ -51,10 +51,8 @@ var MainDefaults = Defaults{
 		Status:  Obsolete,
 	},
 	Snapshots: Value{
-		Enabled: true,
-		// Snapshots FF is used by disable_snapshots() which hides the button
-		// in the web UI
-		Status: Active,
+		Enabled: false,
+		Status:  Obsolete,
 	},
 	UpdateHistory: Value{
 		Enabled: false,

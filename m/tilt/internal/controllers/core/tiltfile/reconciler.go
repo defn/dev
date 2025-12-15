@@ -340,7 +340,6 @@ func (r *Reconciler) handleLoaded(
 		FinishTime:            time.Now(),
 		Err:                   tlr.Error,
 		Features:              tlr.FeatureFlags,
-		TeamID:                tlr.TeamID,
 		Secrets:               tlr.Secrets,
 		CheckpointAtExecStart: entry.CheckpointAtExecStart,
 		VersionSettings:       tlr.VersionSettings,

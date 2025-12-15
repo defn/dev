@@ -86,11 +86,6 @@ func HandleConfigsReloaded(
 	// Retroactively scrub secrets
 	state.LogStore.ScrubSecretsStartingAt(newSecrets, event.CheckpointAtExecStart)
 
-	// Add team id if it exists, even if execution failed.
-	if isMainTiltfile && (event.TeamID != "" || event.Err == nil) {
-		state.TeamID = event.TeamID
-	}
-
 	// if the ConfigsReloadedAction came from a unit test, there might not be a current build
 	if !b.Empty() {
 		b.FinishTime = event.FinishTime

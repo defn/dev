@@ -21,7 +21,6 @@ import (
 	"github.com/defn/dev/m/tilt/internal/store/tiltfiles"
 	"github.com/defn/dev/m/tilt/internal/store/uibuttons"
 	"github.com/defn/dev/m/tilt/internal/store/uiresources"
-	"github.com/defn/dev/m/tilt/internal/token"
 	"github.com/defn/dev/m/tilt/pkg/logger"
 	"github.com/defn/dev/m/tilt/pkg/model"
 )
@@ -60,8 +59,6 @@ func (u Upper) Start(
 	b model.TiltBuild,
 	fileName string,
 	initTerminalMode store.TerminalMode,
-	token token.Token,
-	cloudAddress string,
 ) error {
 
 	startTime := time.Now()
@@ -75,8 +72,6 @@ func (u Upper) Start(
 		UserArgs:     args,
 		TiltBuild:    b,
 		StartTime:    startTime,
-		Token:        token,
-		CloudAddress: cloudAddress,
 		TerminalMode: initTerminalMode,
 	})
 }
@@ -120,8 +115,6 @@ func upperReducerFn(ctx context.Context, state *store.EngineState, action store.
 		ctrltiltfile.HandleConfigsReloaded(ctx, state, action)
 	case hud.DumpEngineStateAction:
 		handleDumpEngineStateAction(ctx, state)
-	case store.TiltCloudStatusReceivedAction:
-		handleTiltCloudStatusReceivedAction(state, action)
 	case store.PanicAction:
 		handlePanicAction(state, action)
 	case store.LogAction:
@@ -195,8 +188,6 @@ func handleInitAction(ctx context.Context, engineState *store.EngineState, actio
 	engineState.TiltStartTime = action.StartTime
 	engineState.DesiredTiltfilePath = action.TiltfilePath
 	engineState.UserConfigState = model.NewUserConfigState(action.UserArgs)
-	engineState.CloudAddress = action.CloudAddress
-	engineState.Token = action.Token
 	engineState.TerminalMode = action.TerminalMode
 }
 
@@ -210,8 +201,4 @@ func handleHudExitAction(state *store.EngineState, action hud.ExitAction) {
 
 func handlePanicAction(state *store.EngineState, action store.PanicAction) {
 	state.PanicExited = action.Err
-}
-
-func handleTiltCloudStatusReceivedAction(state *store.EngineState, action store.TiltCloudStatusReceivedAction) {
-	state.SuggestedTiltVersion = action.SuggestedTiltVersion
 }

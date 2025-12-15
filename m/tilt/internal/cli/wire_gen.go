@@ -15,7 +15,6 @@ import (
 	"github.com/defn/dev/m/tilt/internal/engine"
 	"github.com/defn/dev/m/tilt/internal/hud"
 	"github.com/defn/dev/m/tilt/internal/hud/prompt"
-	"github.com/defn/dev/m/tilt/internal/token"
 	"github.com/defn/dev/m/tilt/pkg/logger"
 	"github.com/defn/dev/m/tilt/pkg/model"
 )
@@ -61,25 +60,15 @@ func encodeJSON(w io.Writer, v interface{}) error {
 type CmdUpDeps struct {
 	Upper     engine.Upper
 	TiltBuild model.TiltBuild
-	Token     token.Token
 	Prompt    *prompt.TerminalPrompt
 }
 
 type CmdCIDeps struct {
-	Upper        engine.Upper
-	TiltBuild    model.TiltBuild
-	Token        token.Token
-	Snapshotter  *stubSnapshotter
-	CloudAddress string
+	Upper     engine.Upper
+	TiltBuild model.TiltBuild
 }
 
 type LogsDeps struct {
 	printer *hud.IncrementalPrinter
 	filter  hud.LogFilter
-}
-
-type stubSnapshotter struct{}
-
-func (s *stubSnapshotter) WriteSnapshot(ctx context.Context, path string) error {
-	return nil
 }

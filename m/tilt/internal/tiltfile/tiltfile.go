@@ -34,20 +34,19 @@ import (
 const FileName = "Tiltfile"
 
 type TiltfileLoadResult struct {
-	Manifests         []model.Manifest
-	EnabledManifests  []model.ManifestName
-	Tiltignore        model.Dockerignore
-	ConfigFiles       []string
-	FeatureFlags map[string]bool
-	TeamID       string
-	Secrets      model.SecretSet
-	Error             error
-	VersionSettings   model.VersionSettings
-	UpdateSettings    model.UpdateSettings
-	WatchSettings     model.WatchSettings
-	ObjectSet         apiset.ObjectSet
-	Hashes            hasher.Hashes
-	CISettings        *corev1alpha1.SessionCISpec
+	Manifests        []model.Manifest
+	EnabledManifests []model.ManifestName
+	Tiltignore       model.Dockerignore
+	ConfigFiles      []string
+	FeatureFlags     map[string]bool
+	Secrets          model.SecretSet
+	Error            error
+	VersionSettings  model.VersionSettings
+	UpdateSettings   model.UpdateSettings
+	WatchSettings    model.WatchSettings
+	ObjectSet        apiset.ObjectSet
+	Hashes           hasher.Hashes
+	CISettings       *corev1alpha1.SessionCISpec
 
 	// For diagnostic purposes only
 	BuiltinCalls []starkit.BuiltinCall `json:"-"`
@@ -168,7 +167,6 @@ func (tfl tiltfileLoader) Load(ctx context.Context, tf *corev1alpha1.Tiltfile, p
 	tlr.FeatureFlags = s.features.ToEnabled()
 	tlr.Error = err
 	tlr.Manifests = manifests
-	tlr.TeamID = s.teamID
 
 	objectSet, _ := v1alpha1.GetState(result)
 	tlr.ObjectSet = objectSet

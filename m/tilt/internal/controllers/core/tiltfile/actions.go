@@ -25,12 +25,11 @@ type ConfigsReloadedAction struct {
 	Tiltignore  model.Dockerignore
 	ConfigFiles []string
 
-	FinishTime time.Time
-	Err        error
-	Warnings   []string
-	Features   map[string]bool
-	TeamID     string
-	Secrets    model.SecretSet
+	FinishTime      time.Time
+	Err             error
+	Warnings        []string
+	Features        map[string]bool
+	Secrets         model.SecretSet
 	VersionSettings model.VersionSettings
 	UpdateSettings  model.UpdateSettings
 	WatchSettings   model.WatchSettings

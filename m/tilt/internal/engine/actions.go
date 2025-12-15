@@ -4,7 +4,6 @@ import (
 	"time"
 
 	"github.com/defn/dev/m/tilt/internal/store"
-	"github.com/defn/dev/m/tilt/internal/token"
 	"github.com/defn/dev/m/tilt/pkg/model"
 )
 
@@ -19,8 +18,6 @@ type InitAction struct {
 	TiltBuild model.TiltBuild
 	StartTime time.Time
 
-	CloudAddress string
-	Token        token.Token
 	TerminalMode store.TerminalMode
 }
 

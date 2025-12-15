@@ -72,8 +72,6 @@ type tiltfileState struct {
 	// for error reporting in case it's called twice
 	triggerModeCallPosition syntax.Position
 
-	teamID string
-
 	secretSettings model.SecretSettings
 
 	apiObjects apiset.ObjectSet
@@ -213,11 +211,6 @@ const (
 	// feature flags
 	enableFeatureN  = "enable_feature"
 	disableFeatureN = "disable_feature"
-
-	disableSnapshotsN = "disable_snapshots"
-
-	// other functions
-	setTeamN = "set_team"
 )
 
 type triggerMode int
@@ -335,8 +328,6 @@ func (s *tiltfileState) OnStart(e *starkit.Environment) error {
 		{triggerModeN, s.triggerModeFn},
 		{enableFeatureN, s.enableFeature},
 		{disableFeatureN, s.disableFeature},
-		{disableSnapshotsN, s.disableSnapshots},
-		{setTeamN, s.setTeam},
 	} {
 		err := e.AddBuiltin(b.name, b.builtin)
 		if err != nil {
@@ -373,26 +364,6 @@ func (s *tiltfileState) triggerModeFn(thread *starlark.Thread, fn *starlark.Buil
 
 	s.triggerMode = triggerMode
 	s.triggerModeCallPosition = thread.CallFrame(1).Pos
-
-	return starlark.None, nil
-}
-
-func (s *tiltfileState) setTeam(thread *starlark.Thread, fn *starlark.Builtin, args starlark.Tuple, kwargs []starlark.Tuple) (starlark.Value, error) {
-	var teamID string
-	err := s.unpackArgs(fn.Name(), args, kwargs, "team_id", &teamID)
-	if err != nil {
-		return nil, err
-	}
-
-	if len(teamID) == 0 {
-		return nil, fmt.Errorf("team_id cannot be empty")
-	}
-
-	if s.teamID != "" {
-		return nil, fmt.Errorf("team_id set multiple times (to '%s' and '%s')", s.teamID, teamID)
-	}
-
-	s.teamID = teamID
 
 	return starlark.None, nil
 }

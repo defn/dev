@@ -142,14 +142,6 @@ def fall_back_on(files: Union[str, List[str]]) -> LiveUpdateStep:
     pass
 
 
-def set_team(team_id: str) -> None:
-    """Associates this Tiltfile with the `team <teams.html>`_ identified by `team_id`.
-
-    Sends usage information to Tilt Cloud periodically.
-    """
-    pass
-
-
 def sync(local_path: str, remote_path: str) -> LiveUpdateStep:
     """Specify that any changes to `localPath` should be synced to `remotePath`
 
@@ -1249,18 +1241,6 @@ def local_resource(
       serve_dir: Working directory for ``serve_cmd``. Defaults to the Tiltfile directory.
     """
     pass
-
-
-def disable_snapshots() -> None:
-    """Disables Tilt's `snapshots <snapshots.html>`_ feature, hiding it from the UI.
-
-    This is intended for use in projects where there might be some kind of
-    data policy that does not allow developers to upload snapshots to TiltCloud.
-
-    Note that this directive does not provide any real security, since a
-    developer can always simply edit it out of the Tiltfile, but it at least
-    ensures a pretty high bar of intent.
-    """
 
 
 def docker_prune_settings(

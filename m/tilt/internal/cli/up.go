@@ -129,7 +129,7 @@ func (c *upCmd) run(ctx context.Context, args []string) error {
 	ctx = redirectLogs(ctx, l)
 
 	err = upper.Start(ctx, args, cmdUpDeps.TiltBuild,
-		c.fileName, termMode, cmdUpDeps.Token, "")
+		c.fileName, termMode)
 	if err != context.Canceled {
 		return err
 	} else {
