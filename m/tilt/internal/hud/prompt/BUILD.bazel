@@ -10,7 +10,6 @@ go_library(
     importpath = "github.com/defn/dev/m/tilt/internal/hud/prompt",
     visibility = ["//tilt:__subpackages__"],
     deps = [
-        "//tilt/internal/analytics",
         "//tilt/internal/hud",
         "//tilt/internal/openurl",
         "//tilt/internal/store",

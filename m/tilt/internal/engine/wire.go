@@ -10,12 +10,10 @@ import (
 
 	"github.com/google/wire"
 	"github.com/jonboulle/clockwork"
-	sdktrace "go.opentelemetry.io/otel/sdk/trace"
 	ctrlclient "sigs.k8s.io/controller-runtime/pkg/client"
 
 	"github.com/tilt-dev/wmclient/pkg/dirs"
 
-	"github.com/defn/dev/m/tilt/internal/analytics"
 	"github.com/defn/dev/m/tilt/internal/build"
 	"github.com/defn/dev/m/tilt/internal/container"
 	"github.com/defn/dev/m/tilt/internal/controllers/core/cmd"
@@ -44,7 +42,6 @@ var DeployerBaseWireSet = wire.NewSet(
 
 var DeployerWireSetTest = wire.NewSet(
 	DeployerBaseWireSet,
-	wire.InterfaceValue(new(sdktrace.SpanExporter), (sdktrace.SpanExporter)(nil)),
 )
 
 var DeployerWireSet = wire.NewSet(
@@ -60,7 +57,6 @@ func provideFakeBuildAndDeployer(
 	updateMode liveupdates.UpdateModeFlag,
 	clock build.Clock,
 	kp build.KINDLoader,
-	analytics *analytics.TiltAnalytics,
 	ctrlClient ctrlclient.Client,
 	st store.RStore,
 	execer localexec.Execer) (buildcontrol.BuildAndDeployer, error) {

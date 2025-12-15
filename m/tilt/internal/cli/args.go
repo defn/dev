@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	"strings"
-	"time"
 
 	"github.com/kballard/go-shellquote"
 	"github.com/pkg/errors"
@@ -15,7 +14,6 @@ import (
 	"k8s.io/cli-runtime/pkg/genericclioptions"
 	"k8s.io/kubectl/pkg/cmd/util/editor"
 
-	"github.com/defn/dev/m/tilt/internal/analytics"
 	"github.com/defn/dev/m/tilt/internal/sliceutils"
 	"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1"
 	"github.com/defn/dev/m/tilt/pkg/logger"
@@ -107,13 +105,11 @@ func (c *argsCmd) run(ctx context.Context, args []string) error {
 		return err
 	}
 
-	tags := make(map[string]string)
 	if c.clear {
 		if len(args) != 0 {
 			return errors.New("--clear cannot be specified with other values")
 		}
 		args = nil
-		tags["clear"] = "true"
 	} else if len(args) == 0 {
 		input := fmt.Sprintf("# edit args for the running Tilt here\n%s\n", shellquote.Join(tf.Spec.Args...))
 		e := editor.NewDefaultEditor([]string{"TILT_EDITOR", "EDITOR"})
@@ -126,14 +122,7 @@ func (c *argsCmd) run(ctx context.Context, args []string) error {
 		if err != nil {
 			return err
 		}
-		tags["edit"] = "true"
-	} else {
-		tags["set"] = "true"
 	}
-
-	a := analytics.Get(ctx)
-	a.Incr("cmd.args", tags)
-	defer a.Flush(time.Second)
 
 	if sliceutils.StringSliceEquals(tf.Spec.Args, args) {
 		logger.Get(ctx).Infof("Tilt is already running with those args -- no action taken")

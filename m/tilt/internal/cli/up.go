@@ -6,13 +6,10 @@ import (
 	"errors"
 	"log"
 	"os"
-	"strconv"
-	"time"
 
 	"github.com/mattn/go-isatty"
 	"github.com/spf13/cobra"
 
-	"github.com/defn/dev/m/tilt/internal/analytics"
 	"github.com/defn/dev/m/tilt/internal/controllers"
 	"github.com/defn/dev/m/tilt/internal/hud/prompt"
 	"github.com/defn/dev/m/tilt/internal/store"
@@ -95,26 +92,17 @@ func (c *upCmd) run(ctx context.Context, args []string) error {
 	ctx, cancel := context.WithCancel(ctx)
 	defer cancel()
 
-	a := analytics.Get(ctx)
-	defer a.Flush(time.Second)
-
 	log.SetFlags(log.Flags() &^ (log.Ldate | log.Ltime))
 	isTTY := isatty.IsTerminal(os.Stdout.Fd())
 	termMode := c.initialTermMode(isTTY)
 
-	cmdUpTags := map[string]string{
-		"term_mode": strconv.Itoa(int(termMode)),
-	}
-
 	generateTiltfileResult, err := maybeGenerateTiltfile(c.fileName)
-	// N.B. report the command before handling the error; result enum is always valid
-	cmdUpTags["generate_tiltfile.result"] = string(generateTiltfileResult)
-	a.Incr("cmd.up", cmdUpTags)
 	if err == userExitError {
 		return nil
 	} else if err != nil {
 		return err
 	}
+	_ = generateTiltfileResult // unused now that analytics is removed
 
 	deferred := logger.NewDeferredLogger(ctx)
 	ctx = redirectLogs(ctx, deferred)
@@ -123,11 +111,7 @@ func (c *upCmd) run(ctx context.Context, args []string) error {
 	log.Print(startLine)
 	log.Print(buildStamp())
 
-	if ok, reason := analytics.IsAnalyticsDisabledFromEnv(); ok {
-		log.Printf("Tilt analytics disabled: %s", reason)
-	}
-
-	cmdUpDeps, err := wireCmdUp(ctx, a, "up")
+	cmdUpDeps, err := wireCmdUp(ctx, "up")
 	if err != nil {
 		deferred.SetOutput(deferred.Original())
 		return err
@@ -145,7 +129,7 @@ func (c *upCmd) run(ctx context.Context, args []string) error {
 	ctx = redirectLogs(ctx, l)
 
 	err = upper.Start(ctx, args, cmdUpDeps.TiltBuild,
-		c.fileName, termMode, a.UserOpt(), cmdUpDeps.Token, "")
+		c.fileName, termMode, cmdUpDeps.Token, "")
 	if err != context.Canceled {
 		return err
 	} else {

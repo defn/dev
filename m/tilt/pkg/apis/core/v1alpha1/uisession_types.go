@@ -118,11 +118,6 @@ type UISessionStatus struct {
 	// +optional
 	FeatureFlags []UIFeatureFlag `json:"featureFlags,omitempty" protobuf:"bytes,1,rep,name=featureFlags"`
 
-	// NeedsAnalyticsNudge reports whether the UI hasn't opted in or out
-	// of analytics, and the UI should nudge them to do so.
-	// +optional
-	NeedsAnalyticsNudge bool `json:"needsAnalyticsNudge,omitempty" protobuf:"varint,2,opt,name=needsAnalyticsNudge"`
-
 	// RunningTiltBuild reports the currently running version of tilt
 	// that this UI is talking to.
 	// +optional

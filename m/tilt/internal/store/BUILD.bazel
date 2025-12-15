@@ -26,7 +26,6 @@ go_library(
     importpath = "github.com/defn/dev/m/tilt/internal/store",
     visibility = ["//tilt:__subpackages__"],
     deps = [
-        "//tilt/internal/analytics",
         "//tilt/internal/timecmp",
         "//tilt/internal/token",
         "//tilt/pkg/apis/core/v1alpha1",
@@ -38,7 +37,6 @@ go_library(
         "@com_github_json_iterator_go//:go",
         "@com_github_json_iterator_go//extra",
         "@com_github_modern_go_reflect2//:reflect2",
-        "@com_github_tilt_dev_wmclient//pkg/analytics",
         "@in_gopkg_d4l3k_messagediff_v1//:messagediff_v1",
         "@io_k8s_apimachinery//pkg/api/meta",
         "@io_k8s_apimachinery//pkg/apis/meta/v1:meta",

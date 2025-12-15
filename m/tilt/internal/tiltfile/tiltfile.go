@@ -5,25 +5,21 @@ import (
 	"fmt"
 	"os"
 	"path/filepath"
-	"strconv"
 	"time"
 
 	"go.starlark.net/starlark"
 
-	"github.com/defn/dev/m/tilt/internal/analytics"
 	"github.com/defn/dev/m/tilt/internal/controllers/apiset"
 	"github.com/defn/dev/m/tilt/internal/feature"
 	"github.com/defn/dev/m/tilt/internal/localexec"
 	"github.com/defn/dev/m/tilt/internal/ospath"
 	"github.com/defn/dev/m/tilt/internal/sliceutils"
-	tiltfileanalytics "github.com/defn/dev/m/tilt/internal/tiltfile/analytics"
 	"github.com/defn/dev/m/tilt/internal/tiltfile/cisettings"
 	"github.com/defn/dev/m/tilt/internal/tiltfile/config"
 	"github.com/defn/dev/m/tilt/internal/tiltfile/hasher"
 	"github.com/defn/dev/m/tilt/internal/tiltfile/io"
 	"github.com/defn/dev/m/tilt/internal/tiltfile/secretsettings"
 	"github.com/defn/dev/m/tilt/internal/tiltfile/starkit"
-	"github.com/defn/dev/m/tilt/internal/tiltfile/telemetry"
 	"github.com/defn/dev/m/tilt/internal/tiltfile/tiltextension"
 	"github.com/defn/dev/m/tilt/internal/tiltfile/updatesettings"
 	"github.com/defn/dev/m/tilt/internal/tiltfile/v1alpha1"
@@ -33,7 +29,6 @@ import (
 	corev1alpha1 "github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1"
 	"github.com/defn/dev/m/tilt/pkg/model"
 	"github.com/tilt-dev/clusterid"
-	wmanalytics "github.com/tilt-dev/wmclient/pkg/analytics"
 )
 
 const FileName = "Tiltfile"
@@ -43,12 +38,10 @@ type TiltfileLoadResult struct {
 	EnabledManifests  []model.ManifestName
 	Tiltignore        model.Dockerignore
 	ConfigFiles       []string
-	FeatureFlags      map[string]bool
-	TeamID            string
-	TelemetrySettings model.TelemetrySettings
-	Secrets           model.SecretSet
+	FeatureFlags map[string]bool
+	TeamID       string
+	Secrets      model.SecretSet
 	Error             error
-	AnalyticsOpt      wmanalytics.Opt
 	VersionSettings   model.VersionSettings
 	UpdateSettings    model.UpdateSettings
 	WatchSettings     model.WatchSettings
@@ -79,7 +72,6 @@ type TiltfileLoader interface {
 }
 
 func ProvideTiltfileLoader(
-	analytics *analytics.TiltAnalytics,
 	versionPlugin version.Plugin,
 	configPlugin *config.Plugin,
 	extensionPlugin *tiltextension.Plugin,
@@ -89,7 +81,6 @@ func ProvideTiltfileLoader(
 	fDefaults feature.Defaults,
 	env clusterid.Product) TiltfileLoader {
 	return tiltfileLoader{
-		analytics:        analytics,
 		versionPlugin:    versionPlugin,
 		configPlugin:     configPlugin,
 		extensionPlugin:  extensionPlugin,
@@ -102,9 +93,8 @@ func ProvideTiltfileLoader(
 }
 
 type tiltfileLoader struct {
-	analytics *analytics.TiltAnalytics
-	webHost   model.WebHost
-	execer    localexec.Execer
+	webHost model.WebHost
+	execer  localexec.Execer
 
 	versionPlugin    version.Plugin
 	configPlugin     *config.Plugin
@@ -174,9 +164,6 @@ func (tfl tiltfileLoader) Load(ctx context.Context, tf *corev1alpha1.Tiltfile, p
 	tlr.ConfigFiles = append(tlr.ConfigFiles, s.postExecReadFiles...)
 	tlr.ConfigFiles = sliceutils.DedupedAndSorted(tlr.ConfigFiles)
 
-	aSettings, _ := tiltfileanalytics.GetState(result)
-	tlr.AnalyticsOpt = aSettings.Opt
-
 	tlr.Secrets = s.extractSecrets()
 	tlr.FeatureFlags = s.features.ToEnabled()
 	tlr.Error = err
@@ -188,9 +175,6 @@ func (tfl tiltfileLoader) Load(ctx context.Context, tf *corev1alpha1.Tiltfile, p
 
 	vs, _ := version.GetState(result)
 	tlr.VersionSettings = vs
-
-	telemetrySettings, _ := telemetry.GetState(result)
-	tlr.TelemetrySettings = telemetrySettings
 
 	us, _ := updatesettings.GetState(result)
 	tlr.UpdateSettings = us
@@ -207,64 +191,12 @@ func (tfl tiltfileLoader) Load(ctx context.Context, tf *corev1alpha1.Tiltfile, p
 	if tlr.Error == nil {
 		s.logger.Infof("Successfully loaded Tiltfile (%s)", duration)
 	}
-	extState, _ := tiltextension.GetState(result)
 	hashState, _ := hasher.GetState(result)
-
-	var prevHashes hasher.Hashes
-	if prevResult != nil {
-		prevHashes = prevResult.Hashes
-	}
 	tlr.Hashes = hashState.GetHashes()
-
-	tfl.reportTiltfileLoaded(s.builtinCallCounts, s.builtinArgCounts, duration,
-		extState.ExtsLoaded, prevHashes, tlr.Hashes)
-
-	if len(aSettings.CustomTagsToReport) > 0 {
-		reportCustomTags(tfl.analytics, aSettings.CustomTagsToReport)
-	}
 
 	return tlr
 }
 
 func starlarkValueOrSequenceToSlice(v starlark.Value) []starlark.Value {
 	return value.ValueOrSequenceToSlice(v)
-}
-
-func reportCustomTags(a *analytics.TiltAnalytics, tags map[string]string) {
-	a.Incr("tiltfile.custom.report", tags)
-}
-
-func (tfl *tiltfileLoader) reportTiltfileLoaded(
-	callCounts map[string]int,
-	argCounts map[string]map[string]int,
-	loadDur time.Duration,
-	pluginsLoaded map[string]bool,
-	prevHashes hasher.Hashes,
-	currHashes hasher.Hashes,
-) {
-	tags := make(map[string]string)
-
-	// env should really be a global tag, but there's a circular dependency
-	// between the global tags and env initialization, so we add it manually.
-	tags["env"] = string(tfl.env)
-	tags["tiltfile.changed"] = strconv.FormatBool(prevHashes.TiltfileSHA256 != "" && prevHashes.TiltfileSHA256 != currHashes.TiltfileSHA256)
-	tags["allfiles.changed"] = strconv.FormatBool(prevHashes.AllFilesSHA256 != "" && prevHashes.AllFilesSHA256 != currHashes.AllFilesSHA256)
-
-	for builtinName, count := range callCounts {
-		tags[fmt.Sprintf("tiltfile.invoked.%s", builtinName)] = strconv.Itoa(count)
-	}
-	for builtinName, counts := range argCounts {
-		for argName, count := range counts {
-			tags[fmt.Sprintf("tiltfile.invoked.%s.arg.%s", builtinName, argName)] = strconv.Itoa(count)
-		}
-	}
-	tfl.analytics.Incr("tiltfile.loaded", tags)
-	tfl.analytics.Timer("tiltfile.load", loadDur, nil)
-	for ext := range pluginsLoaded {
-		tags := map[string]string{
-			"env":      string(tfl.env),
-			"ext_name": ext,
-		}
-		tfl.analytics.Incr("tiltfile.loaded.plugin", tags)
-	}
 }

@@ -9,7 +9,6 @@ import (
 
 	"github.com/davecgh/go-spew/spew"
 
-	tiltanalytics "github.com/defn/dev/m/tilt/internal/analytics"
 	"github.com/defn/dev/m/tilt/internal/controllers/core/filewatch"
 	ctrltiltfile "github.com/defn/dev/m/tilt/internal/controllers/core/tiltfile"
 	"github.com/defn/dev/m/tilt/internal/engine/local"
@@ -25,7 +24,6 @@ import (
 	"github.com/defn/dev/m/tilt/internal/token"
 	"github.com/defn/dev/m/tilt/pkg/logger"
 	"github.com/defn/dev/m/tilt/pkg/model"
-	"github.com/tilt-dev/wmclient/pkg/analytics"
 )
 
 // TODO(nick): maybe this should be called 'BuildEngine' or something?
@@ -62,7 +60,6 @@ func (u Upper) Start(
 	b model.TiltBuild,
 	fileName string,
 	initTerminalMode store.TerminalMode,
-	analyticsUserOpt analytics.Opt,
 	token token.Token,
 	cloudAddress string,
 ) error {
@@ -74,14 +71,13 @@ func (u Upper) Start(
 		return err
 	}
 	return u.Init(ctx, InitAction{
-		TiltfilePath:     absTfPath,
-		UserArgs:         args,
-		TiltBuild:        b,
-		StartTime:        startTime,
-		AnalyticsUserOpt: analyticsUserOpt,
-		Token:            token,
-		CloudAddress:     cloudAddress,
-		TerminalMode:     initTerminalMode,
+		TiltfilePath: absTfPath,
+		UserArgs:     args,
+		TiltBuild:    b,
+		StartTime:    startTime,
+		Token:        token,
+		CloudAddress: cloudAddress,
+		TerminalMode: initTerminalMode,
 	})
 }
 
@@ -124,10 +120,6 @@ func upperReducerFn(ctx context.Context, state *store.EngineState, action store.
 		ctrltiltfile.HandleConfigsReloaded(ctx, state, action)
 	case hud.DumpEngineStateAction:
 		handleDumpEngineStateAction(ctx, state)
-	case store.AnalyticsUserOptAction:
-		handleAnalyticsUserOptAction(state, action)
-	case store.AnalyticsNudgeSurfacedAction:
-		handleAnalyticsNudgeSurfacedAction(ctx, state)
 	case store.TiltCloudStatusReceivedAction:
 		handleTiltCloudStatusReceivedAction(state, action)
 	case store.PanicAction:
@@ -203,7 +195,6 @@ func handleInitAction(ctx context.Context, engineState *store.EngineState, actio
 	engineState.TiltStartTime = action.StartTime
 	engineState.DesiredTiltfilePath = action.TiltfilePath
 	engineState.UserConfigState = model.NewUserConfigState(action.UserArgs)
-	engineState.AnalyticsUserOpt = action.AnalyticsUserOpt
 	engineState.CloudAddress = action.CloudAddress
 	engineState.Token = action.Token
 	engineState.TerminalMode = action.TerminalMode
@@ -219,22 +210,6 @@ func handleHudExitAction(state *store.EngineState, action hud.ExitAction) {
 
 func handlePanicAction(state *store.EngineState, action store.PanicAction) {
 	state.PanicExited = action.Err
-}
-
-func handleAnalyticsUserOptAction(state *store.EngineState, action store.AnalyticsUserOptAction) {
-	state.AnalyticsUserOpt = action.Opt
-}
-
-// The first time we hear that the analytics nudge was surfaced, record a metric.
-// We double check !state.AnalyticsNudgeSurfaced -- i.e. that the state doesn't
-// yet know that we've surfaced the nudge -- to ensure that we only record this
-// metric once (since it's an anonymous metric, we can't slice it by e.g. # unique
-// users, so the numbers need to be as accurate as possible).
-func handleAnalyticsNudgeSurfacedAction(ctx context.Context, state *store.EngineState) {
-	if !state.AnalyticsNudgeSurfaced {
-		tiltanalytics.Get(ctx).Incr("analytics.nudge.surfaced", nil)
-		state.AnalyticsNudgeSurfaced = true
-	}
 }
 
 func handleTiltCloudStatusReceivedAction(state *store.EngineState, action store.TiltCloudStatusReceivedAction) {

@@ -3,11 +3,9 @@ package cli
 import (
 	"os"
 	"strings"
-	"time"
 
 	"github.com/spf13/cobra"
 
-	tiltanalytics "github.com/defn/dev/m/tilt/internal/analytics"
 	"github.com/defn/dev/m/tilt/internal/controllers/core/extension"
 	"github.com/defn/dev/m/tilt/internal/controllers/core/extensionrepo"
 	"github.com/defn/dev/m/tilt/internal/lsp"
@@ -17,26 +15,18 @@ import (
 	"github.com/tilt-dev/starlark-lsp/pkg/cli"
 )
 
-func reportLspInvocation(a *tiltanalytics.TiltAnalytics, cmdParts []string) {
-	a.Incr("cmd."+strings.Join(cmdParts, "."), make(map[string]string))
-	a.Flush(time.Second)
-}
-
 type cmdLspDeps struct {
-	repo      *extensionrepo.Reconciler
-	ext       *extension.Reconciler
-	analytics *tiltanalytics.TiltAnalytics
+	repo *extensionrepo.Reconciler
+	ext  *extension.Reconciler
 }
 
 func newLspDeps(
 	repo *extensionrepo.Reconciler,
 	ext *extension.Reconciler,
-	analytics *tiltanalytics.TiltAnalytics,
 ) cmdLspDeps {
 	return cmdLspDeps{
-		repo:      repo,
-		ext:       ext,
-		analytics: analytics,
+		repo: repo,
+		ext:  ext,
 	}
 }
 
@@ -70,7 +60,6 @@ func newLspCmd() *cobra.Command {
 		}
 
 		extFinder.Initialize(ctx, deps.repo, deps.ext)
-		reportLspInvocation(deps.analytics, cmdParts)
 		return nil
 	}
 	return rootCmd.Command

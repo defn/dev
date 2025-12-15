@@ -10,7 +10,6 @@ import (
 	"github.com/fatih/color"
 	tty "github.com/mattn/go-tty"
 
-	"github.com/defn/dev/m/tilt/internal/analytics"
 	"github.com/defn/dev/m/tilt/internal/hud"
 	"github.com/defn/dev/m/tilt/internal/openurl"
 	"github.com/defn/dev/m/tilt/internal/store"
@@ -44,7 +43,6 @@ func TTYOpen() (TerminalInput, error) {
 }
 
 type TerminalPrompt struct {
-	a         *analytics.TiltAnalytics
 	openInput OpenInput
 	openURL   openurl.OpenURL
 	stdout    hud.Stdout
@@ -61,12 +59,11 @@ type TerminalPrompt struct {
 	initOutput *bytes.Buffer
 }
 
-func NewTerminalPrompt(a *analytics.TiltAnalytics, openInput OpenInput,
+func NewTerminalPrompt(openInput OpenInput,
 	openURL openurl.OpenURL, stdout hud.Stdout,
 	host model.WebHost, url model.WebURL) *TerminalPrompt {
 
 	return &TerminalPrompt{
-		a:         a,
 		openInput: openInput,
 		openURL:   openURL,
 		stdout:    stdout,
@@ -208,18 +205,15 @@ func (p *TerminalPrompt) OnChange(ctx context.Context, st store.RStore, _ store.
 				r := msg.rune
 				switch r {
 				case 's':
-					p.a.Incr("ui.prompt.switch", map[string]string{"type": "stream"})
 					st.Dispatch(SwitchTerminalModeAction{Mode: store.TerminalModeStream})
 					msg.stopCh <- true
 
 				case 't', 'h':
-					p.a.Incr("ui.prompt.switch", map[string]string{"type": "hud"})
 					st.Dispatch(SwitchTerminalModeAction{Mode: store.TerminalModeHUD})
 
 					msg.stopCh <- true
 
 				case ' ':
-					p.a.Incr("ui.prompt.browser", map[string]string{})
 					_, _ = fmt.Fprintf(p.stdout, "Opening browser: %s\n", p.url.String())
 					err := p.openURL(p.url.String(), p.stdout)
 					if err != nil {

@@ -14,13 +14,11 @@ import (
 	"k8s.io/cli-runtime/pkg/genericclioptions"
 	ctrllog "sigs.k8s.io/controller-runtime/pkg/log"
 
-	tiltanalytics "github.com/defn/dev/m/tilt/internal/analytics"
 	"github.com/defn/dev/m/tilt/internal/controllers"
 	"github.com/defn/dev/m/tilt/internal/output"
 	"github.com/defn/dev/m/tilt/pkg/logger"
 	"github.com/defn/dev/m/tilt/pkg/model"
 	"github.com/tilt-dev/starlark-lsp/pkg/cli"
-	"github.com/tilt-dev/wmclient/pkg/analytics"
 )
 
 var debug bool
@@ -61,7 +59,6 @@ to bring your environment up-to-date in real-time.
 	addCommand(rootCmd, &versionCmd{})
 	addCommand(rootCmd, newArgsCmd(streams))
 
-	rootCmd.AddCommand(analytics.NewCommand())
 	rootCmd.AddCommand(newAlphaCmd(streams))
 	rootCmd.AddCommand(newLspCmd())
 
@@ -90,17 +87,10 @@ func createContext() (ctx context.Context, cleanup func()) {
 }
 
 func preCommand(ctx context.Context, cmdName model.TiltSubcommand) context.Context {
+	_ = cmdName // unused now that analytics is removed
 
 	l := logger.NewLogger(logLevel(verbose, debug), os.Stdout)
 	ctx = logger.WithLogger(ctx, l)
-
-	a, err := wireAnalytics(l, cmdName)
-	if err != nil {
-		l.Errorf("Fatal error initializing analytics: %v", err)
-		os.Exit(1)
-	}
-
-	ctx = tiltanalytics.WithAnalytics(ctx, a)
 
 	// Users don't care about controller-runtime logs.
 	ctrllog.SetLogger(logr.New(ctrllog.NullLogSink{}))

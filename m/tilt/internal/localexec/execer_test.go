@@ -20,7 +20,7 @@ import (
 )
 
 func TestProcessExecer_Run(t *testing.T) {
-	ctx, _, _ := testutils.CtxAndAnalyticsForTest()
+	ctx := testutils.LoggerCtx()
 	ctx, cancel := context.WithTimeout(ctx, 500*time.Millisecond)
 	defer cancel()
 
@@ -46,7 +46,7 @@ func TestProcessExecer_Run_ProcessGroup(t *testing.T) {
 		t.Skip("test not supported on Windows")
 	}
 
-	ctx, _, _ := testutils.CtxAndAnalyticsForTest()
+	ctx := testutils.LoggerCtx()
 	ctx, cancel := context.WithTimeout(ctx, 500*time.Millisecond)
 	defer cancel()
 

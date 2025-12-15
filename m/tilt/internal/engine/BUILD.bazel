@@ -10,7 +10,6 @@ go_library(
     importpath = "github.com/defn/dev/m/tilt/internal/engine",
     visibility = ["//tilt:__subpackages__"],
     deps = [
-        "//tilt/internal/analytics",
         "//tilt/internal/controllers",
         "//tilt/internal/controllers/core/filewatch",
         "//tilt/internal/controllers/core/tiltfile",
@@ -32,6 +31,5 @@ go_library(
         "//tilt/pkg/logger",
         "//tilt/pkg/model",
         "@com_github_davecgh_go_spew//spew",
-        "@com_github_tilt_dev_wmclient//pkg/analytics",
     ],
 )

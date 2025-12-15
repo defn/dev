@@ -23,7 +23,6 @@ go_library(
     importpath = "github.com/defn/dev/m/tilt/internal/hud",
     visibility = ["//tilt:__subpackages__"],
     deps = [
-        "//tilt/internal/analytics",
         "//tilt/internal/hud/view",
         "//tilt/internal/openurl",
         "//tilt/internal/ospath",

@@ -197,7 +197,7 @@ func newProcessExecFixture(t *testing.T) *processExecFixture {
 	execer := NewProcessExecer(localexec.EmptyEnv())
 	execer.gracePeriod = time.Second
 	testWriter := bufsync.NewThreadSafeBuffer()
-	ctx, _, _ := testutils.ForkedCtxAndAnalyticsForTest(testWriter)
+	ctx := testutils.ForkedCtxForTest(testWriter)
 	ctx, cancel := context.WithCancel(ctx)
 
 	ret := &processExecFixture{

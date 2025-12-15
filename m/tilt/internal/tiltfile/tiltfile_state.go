@@ -21,7 +21,6 @@ import (
 	"github.com/defn/dev/m/tilt/internal/tiltfile/tiltextension"
 
 	"github.com/defn/dev/m/tilt/internal/feature"
-	"github.com/defn/dev/m/tilt/internal/tiltfile/analytics"
 	"github.com/defn/dev/m/tilt/internal/tiltfile/config"
 	"github.com/defn/dev/m/tilt/internal/tiltfile/encoding"
 	"github.com/defn/dev/m/tilt/internal/tiltfile/git"
@@ -34,7 +33,6 @@ import (
 	"github.com/defn/dev/m/tilt/internal/tiltfile/shlex"
 	"github.com/defn/dev/m/tilt/internal/tiltfile/starkit"
 	"github.com/defn/dev/m/tilt/internal/tiltfile/starlarkstruct"
-	"github.com/defn/dev/m/tilt/internal/tiltfile/telemetry"
 	"github.com/defn/dev/m/tilt/internal/tiltfile/updatesettings"
 	tfv1alpha1 "github.com/defn/dev/m/tilt/internal/tiltfile/v1alpha1"
 	"github.com/defn/dev/m/tilt/internal/tiltfile/version"
@@ -142,11 +140,9 @@ func (s *tiltfileState) loadManifests(tf *v1alpha1.Tiltfile) ([]model.Manifest, 
 		os.NewPlugin(),
 		sys.NewPlugin(),
 		io.NewPlugin(),
-		analytics.NewPlugin(),
 		s.versionPlugin,
 		s.configPlugin,
 		starlarkstruct.NewPlugin(),
-		telemetry.NewPlugin(),
 		metrics.NewPlugin(),
 		updatesettings.NewPlugin(),
 		s.ciSettingsPlugin,

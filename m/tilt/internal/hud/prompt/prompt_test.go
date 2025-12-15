@@ -78,7 +78,7 @@ type fixture struct {
 }
 
 func newFixture(t *testing.T) *fixture {
-	ctx, _, ta := testutils.CtxAndAnalyticsForTest()
+	ctx := testutils.LoggerCtx()
 	ctx, cancel := context.WithCancel(ctx)
 	out := bufsync.NewThreadSafeBuffer()
 	st := store.NewTestingStore()
@@ -91,7 +91,7 @@ func newFixture(t *testing.T) *fixture {
 
 	url, _ := url.Parse(FakeURL)
 
-	prompt := NewTerminalPrompt(ta, openInput, b.OpenURL, out, "localhost", model.WebURL(*url))
+	prompt := NewTerminalPrompt(openInput, b.OpenURL, out, "localhost", model.WebURL(*url))
 	ret := &fixture{
 		ctx:    ctx,
 		cancel: cancel,

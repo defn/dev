@@ -10,7 +10,6 @@ import (
 	ctrl "sigs.k8s.io/controller-runtime"
 	"sigs.k8s.io/controller-runtime/pkg/reconcile"
 
-	"github.com/defn/dev/m/tilt/internal/analytics"
 	"github.com/defn/dev/m/tilt/internal/store"
 	"github.com/defn/dev/m/tilt/pkg/logger"
 )
@@ -30,10 +29,9 @@ type ctrlWrapper struct {
 	reconcile.Reconciler
 }
 
-// Propagate the logger and analytics from setup
+// Propagate the logger from setup
 func (w ctrlWrapper) Reconcile(ctx context.Context, req reconcile.Request) (reconcile.Result, error) {
 	ctx = logger.WithLogger(ctx, logger.Get(w.ctx))
-	ctx = analytics.WithAnalytics(ctx, analytics.Get(w.ctx))
 	return w.Reconciler.Reconcile(ctx, req)
 }
 

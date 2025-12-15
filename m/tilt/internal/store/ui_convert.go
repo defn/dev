@@ -23,7 +23,6 @@ func ToUISession(s EngineState) *v1alpha1.UISession {
 	}
 
 	status := &(ret.Status)
-	status.NeedsAnalyticsNudge = false // Analytics removed
 	status.RunningTiltBuild = v1alpha1.TiltBuild{
 		Version:   s.TiltBuildInfo.Version,
 		CommitSHA: s.TiltBuildInfo.CommitSHA,

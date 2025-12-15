@@ -10,9 +10,6 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 
-	"github.com/tilt-dev/wmclient/pkg/analytics"
-
-	tiltanalytics "github.com/defn/dev/m/tilt/internal/analytics"
 	"github.com/defn/dev/m/tilt/internal/controllers/fake"
 	"github.com/defn/dev/m/tilt/internal/testutils/tempdir"
 	"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1"
@@ -20,7 +17,7 @@ import (
 
 func TestDefault(t *testing.T) {
 	f := newFixture(t)
-	repo := f.setupRepo()
+	f.setupRepo()
 
 	ext := v1alpha1.Extension{
 		ObjectMeta: metav1.ObjectMeta{
@@ -47,24 +44,12 @@ func TestDefault(t *testing.T) {
 		RestartOn: &v1alpha1.RestartOnSpec{FileWatches: []string{"configs:my-repo:my-ext"}},
 		Args:      []string{"--namespaces=foo"},
 	})
-
-	assert.Equal(t, f.ma.Counts, []analytics.CountEvent{
-		{
-			Name: "api.extension.load",
-			Tags: map[string]string{
-				"ext_path":      "my-ext",
-				"repo_type":     "file",
-				"repo_url_hash": tiltanalytics.HashSHA1(repo.Spec.URL),
-			},
-			N: 1,
-		},
-	})
 }
 
 // Assert that the repo extension path, if specified, is used for extension location
 func TestRepoSubpath(t *testing.T) {
 	f := newFixture(t)
-	repo := f.setupRepoSubpath("subpath")
+	f.setupRepoSubpath("subpath")
 
 	ext := v1alpha1.Extension{
 		ObjectMeta: metav1.ObjectMeta{
@@ -90,18 +75,6 @@ func TestRepoSubpath(t *testing.T) {
 		Labels:    map[string]string{"extension.my-repo_my-ext": "extension.my-repo_my-ext"},
 		RestartOn: &v1alpha1.RestartOnSpec{FileWatches: []string{"configs:my-repo:my-ext"}},
 		Args:      []string{"--namespaces=foo"},
-	})
-
-	assert.Equal(t, f.ma.Counts, []analytics.CountEvent{
-		{
-			Name: "api.extension.load",
-			Tags: map[string]string{
-				"ext_path":      "my-ext",
-				"repo_type":     "file",
-				"repo_url_hash": tiltanalytics.HashSHA1(repo.Spec.URL),
-			},
-			N: 1,
-		},
 	})
 }
 
@@ -212,23 +185,18 @@ func TestExtensionBeforeRepo(t *testing.T) {
 type fixture struct {
 	*fake.ControllerFixture
 	*tempdir.TempDirFixture
-	r  *Reconciler
-	ma *analytics.MemoryAnalytics
+	r *Reconciler
 }
 
 func newFixture(t *testing.T) *fixture {
 	cfb := fake.NewControllerFixtureBuilder(t)
 	tf := tempdir.NewTempDirFixture(t)
 
-	o := tiltanalytics.NewFakeOpter(analytics.OptIn)
-	ma, ta := tiltanalytics.NewMemoryTiltAnalyticsForTest(o)
-
-	r := NewReconciler(cfb.Client, v1alpha1.NewScheme(), ta)
+	r := NewReconciler(cfb.Client, v1alpha1.NewScheme())
 	return &fixture{
 		ControllerFixture: cfb.Build(r),
 		TempDirFixture:    tf,
 		r:                 r,
-		ma:                ma,
 	}
 }
 

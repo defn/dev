@@ -19,8 +19,6 @@ go_library(
         "squash.go",
         "target.go",
         "target_graph.go",
-        "telemetry_settings.go",
-        "telemetry_state.go",
         "tilt_build.go",
         "tilt_subcommand.go",
         "trigger_mode.go",

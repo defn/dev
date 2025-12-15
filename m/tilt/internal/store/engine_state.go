@@ -5,9 +5,6 @@ import (
 	"sort"
 	"time"
 
-	"github.com/tilt-dev/wmclient/pkg/analytics"
-
-	tiltanalytics "github.com/defn/dev/m/tilt/internal/analytics"
 	"github.com/defn/dev/m/tilt/internal/timecmp"
 	"github.com/defn/dev/m/tilt/internal/token"
 	"github.com/defn/dev/m/tilt/pkg/apis/core/v1alpha1"
@@ -71,12 +68,6 @@ type EngineState struct {
 	SuggestedTiltVersion string
 	VersionSettings      model.VersionSettings
 
-	// Analytics Info
-	AnalyticsEnvOpt        analytics.Opt
-	AnalyticsUserOpt       analytics.Opt // changes to this field will propagate into the TiltAnalytics subscriber + we'll record them as user choice
-	AnalyticsTiltfileOpt   analytics.Opt // Set by the Tiltfile. Overrides the UserOpt.
-	AnalyticsNudgeSurfaced bool          // this flag is set the first time we show the analytics nudge to the user.
-
 	Features map[string]bool
 
 	Secrets model.SecretSet
@@ -84,8 +75,6 @@ type EngineState struct {
 	CloudAddress string
 	Token        token.Token
 	TeamID       string
-
-	TelemetrySettings model.TelemetrySettings
 
 	UserConfigState model.UserConfigState
 
@@ -112,18 +101,6 @@ func (e *EngineState) MainTiltfilePath() string {
 		return ""
 	}
 	return tf.Spec.Path
-}
-
-// Merge analytics opt-in status from different sources.
-// The Tiltfile opt-in takes precedence over the user opt-in.
-func (e *EngineState) AnalyticsEffectiveOpt() analytics.Opt {
-	if e.AnalyticsEnvOpt != analytics.OptDefault {
-		return e.AnalyticsEnvOpt
-	}
-	if e.AnalyticsTiltfileOpt != analytics.OptDefault {
-		return e.AnalyticsTiltfileOpt
-	}
-	return e.AnalyticsUserOpt
 }
 
 func (e *EngineState) ManifestNamesForTargetID(id model.TargetID) []model.ManifestName {
@@ -545,10 +522,6 @@ func NewState() *EngineState {
 	ret.TiltfileDefinitionOrder = []model.ManifestName{model.MainTiltfileManifestName}
 	ret.TiltfileStates = map[model.ManifestName]*ManifestState{
 		model.MainTiltfileManifestName: NewTiltfileManifestState(model.MainTiltfileManifestName),
-	}
-
-	if ok, _ := tiltanalytics.IsAnalyticsDisabledFromEnv(); ok {
-		ret.AnalyticsEnvOpt = analytics.OptOut
 	}
 
 	ret.Cmds = make(map[string]*Cmd)

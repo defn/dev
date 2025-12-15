@@ -25,7 +25,6 @@ import (
 	"github.com/defn/dev/m/tilt/internal/testutils"
 	"github.com/defn/dev/m/tilt/internal/testutils/bufsync"
 	"github.com/tilt-dev/tilt-apiserver/pkg/server/builder/resource"
-	"github.com/tilt-dev/wmclient/pkg/analytics"
 )
 
 // controller just exists to prevent an import cycle for controllers.
@@ -58,7 +57,6 @@ type ControllerFixtureBuilder struct {
 	ctx                context.Context
 	cancel             context.CancelFunc
 	out                *bufsync.ThreadSafeBuffer
-	ma                 *analytics.MemoryAnalytics
 	Client             ctrlclient.Client
 	Store              *testStore
 	requeuer           source.Source
@@ -69,7 +67,7 @@ func NewControllerFixtureBuilder(t testing.TB) *ControllerFixtureBuilder {
 	outBuf := bufsync.NewThreadSafeBuffer()
 
 	out := io.MultiWriter(outBuf, os.Stdout)
-	ctx, ma, _ := testutils.ForkedCtxAndAnalyticsForTest(out)
+	ctx := testutils.ForkedCtxForTest(out)
 
 	ctx, cancel := context.WithCancel(ctx)
 	t.Cleanup(cancel)
@@ -79,7 +77,6 @@ func NewControllerFixtureBuilder(t testing.TB) *ControllerFixtureBuilder {
 		ctx:    ctx,
 		cancel: cancel,
 		out:    outBuf,
-		ma:     ma,
 		Client: NewFakeTiltClient(),
 		Store:  NewTestingStore(out),
 	}
@@ -97,10 +94,6 @@ func (b *ControllerFixtureBuilder) WithRequeuerResultChan(ch chan indexer.Requeu
 
 func (b *ControllerFixtureBuilder) Scheme() *runtime.Scheme {
 	return b.Client.Scheme()
-}
-
-func (b *ControllerFixtureBuilder) Analytics() *analytics.MemoryAnalytics {
-	return b.ma
 }
 
 func (b *ControllerFixtureBuilder) Build(c controller) *ControllerFixture {

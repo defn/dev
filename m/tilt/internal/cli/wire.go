@@ -15,12 +15,9 @@ import (
 
 	"github.com/google/wire"
 	"github.com/jonboulle/clockwork"
-	sdktrace "go.opentelemetry.io/otel/sdk/trace"
 
 	"github.com/tilt-dev/wmclient/pkg/dirs"
 
-	"github.com/defn/dev/m/tilt/internal/analytics"
-	tiltanalytics "github.com/defn/dev/m/tilt/internal/analytics"
 	"github.com/defn/dev/m/tilt/internal/controllers"
 	"github.com/defn/dev/m/tilt/internal/engine"
 	"github.com/defn/dev/m/tilt/internal/engine/configs"
@@ -37,7 +34,6 @@ import (
 	"github.com/defn/dev/m/tilt/internal/store"
 	"github.com/defn/dev/m/tilt/internal/tiltfile"
 	"github.com/defn/dev/m/tilt/internal/token"
-	"github.com/defn/dev/m/tilt/internal/tracer"
 	"github.com/defn/dev/m/tilt/internal/xdg"
 	"github.com/defn/dev/m/tilt/pkg/logger"
 	"github.com/defn/dev/m/tilt/pkg/model"
@@ -81,10 +77,6 @@ var BaseWireSet = wire.NewSet(
 
 	provideCITimeoutFlag,
 
-	tracer.NewSpanCollector,
-	wire.Bind(new(sdktrace.SpanExporter), new(*tracer.SpanCollector)),
-	wire.Bind(new(tracer.SpanSource), new(*tracer.SpanCollector)),
-
 	dirs.UseTiltDevDir,
 	xdg.NewTiltDevBase,
 	token.GetOrCreateToken,
@@ -105,12 +97,12 @@ var UpWireSet = wire.NewSet(
 	engine.ProvideSubscribers,
 )
 
-func wireTiltfileResult(ctx context.Context, analytics *analytics.TiltAnalytics, subcommand model.TiltSubcommand) (cmdTiltfileResultDeps, error) {
+func wireTiltfileResult(ctx context.Context, subcommand model.TiltSubcommand) (cmdTiltfileResultDeps, error) {
 	wire.Build(UpWireSet, newTiltfileResultDeps)
 	return cmdTiltfileResultDeps{}, nil
 }
 
-func wireCmdUp(ctx context.Context, analytics *analytics.TiltAnalytics, subcommand model.TiltSubcommand) (CmdUpDeps, error) {
+func wireCmdUp(ctx context.Context, subcommand model.TiltSubcommand) (CmdUpDeps, error) {
 	wire.Build(UpWireSet,
 		wire.Value(store.EngineModeUp),
 		wire.Struct(new(CmdUpDeps), "*"))
@@ -124,7 +116,7 @@ type CmdUpDeps struct {
 	Prompt    *prompt.TerminalPrompt
 }
 
-func wireCmdCI(ctx context.Context, analytics *analytics.TiltAnalytics, subcommand model.TiltSubcommand) (CmdCIDeps, error) {
+func wireCmdCI(ctx context.Context, subcommand model.TiltSubcommand) (CmdCIDeps, error) {
 	wire.Build(UpWireSet,
 		wire.Value(store.EngineModeCI),
 		wire.Struct(new(CmdCIDeps), "*"),
@@ -138,7 +130,7 @@ type CmdCIDeps struct {
 	Token     token.Token
 }
 
-func wireLogsDeps(ctx context.Context, tiltAnalytics *analytics.TiltAnalytics, subcommand model.TiltSubcommand) (LogsDeps, error) {
+func wireLogsDeps(ctx context.Context, subcommand model.TiltSubcommand) (LogsDeps, error) {
 	wire.Build(UpWireSet,
 		wire.Struct(new(LogsDeps), "*"))
 	return LogsDeps{}, nil
@@ -153,19 +145,13 @@ func provideClock() func() time.Time {
 	return time.Now
 }
 
-func wireAnalytics(l logger.Logger, cmdName model.TiltSubcommand) (*tiltanalytics.TiltAnalytics, error) {
-	wire.Build(UpWireSet,
-		newAnalytics)
-	return nil, nil
-}
-
 func wireClientGetter(ctx context.Context) (*cliclient.Getter, error) {
 	wire.Build(CLIClientWireSet)
 	return nil, nil
 }
 
 func wireLsp(ctx context.Context, l logger.Logger, subcommand model.TiltSubcommand) (cmdLspDeps, error) {
-	wire.Build(UpWireSet, newLspDeps, newAnalytics)
+	wire.Build(UpWireSet, newLspDeps)
 	return cmdLspDeps{}, nil
 }
 

@@ -6,7 +6,6 @@ import (
 	"github.com/defn/dev/m/tilt/internal/store"
 	"github.com/defn/dev/m/tilt/internal/token"
 	"github.com/defn/dev/m/tilt/pkg/model"
-	"github.com/tilt-dev/wmclient/pkg/analytics"
 )
 
 func NewErrorAction(err error) store.ErrorAction {
@@ -19,8 +18,6 @@ type InitAction struct {
 
 	TiltBuild model.TiltBuild
 	StartTime time.Time
-
-	AnalyticsUserOpt analytics.Opt
 
 	CloudAddress string
 	Token        token.Token

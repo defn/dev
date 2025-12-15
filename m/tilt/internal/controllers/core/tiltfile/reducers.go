@@ -161,9 +161,7 @@ func HandleConfigsReloaded(
 	// Global state that's only configurable from the main manifest.
 	if isMainTiltfile {
 		state.Features = event.Features
-		state.TelemetrySettings = event.TelemetrySettings
 		state.VersionSettings = event.VersionSettings
-		state.AnalyticsTiltfileOpt = event.AnalyticsTiltfileOpt
 		state.UpdateSettings = event.UpdateSettings
 	}
 }

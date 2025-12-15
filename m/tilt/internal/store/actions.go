@@ -7,7 +7,6 @@ import (
 	"github.com/defn/dev/m/tilt/pkg/logger"
 	"github.com/defn/dev/m/tilt/pkg/model"
 	"github.com/defn/dev/m/tilt/pkg/model/logstore"
-	"github.com/tilt-dev/wmclient/pkg/analytics"
 )
 
 type ErrorAction struct {
@@ -83,16 +82,6 @@ func NewGlobalLogAction(level logger.Level, b []byte) LogAction {
 		msg:       append([]byte{}, b...),
 	}
 }
-
-type AnalyticsUserOptAction struct {
-	Opt analytics.Opt
-}
-
-func (AnalyticsUserOptAction) Action() {}
-
-type AnalyticsNudgeSurfacedAction struct{}
-
-func (AnalyticsNudgeSurfacedAction) Action() {}
 
 type TiltCloudStatusReceivedAction struct {
 	SuggestedTiltVersion string

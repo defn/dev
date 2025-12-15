@@ -3,7 +3,6 @@ import React, { Component } from "react"
 import ReactOutlineManager from "react-outline-manager"
 import { useLocation, useNavigate, Location } from "react-router-dom"
 import { Route, Routes } from "react-router-dom"
-import AnalyticsNudge from "./AnalyticsNudge"
 import AppController from "./AppController"
 import { tiltfileKeyContext } from "./BrowserStorage"
 import ErrorModal from "./ErrorModal"
@@ -168,7 +167,6 @@ export default class HUD extends Component<HudProps, HudState> {
     let view = this.state.view
     let session = this.state.view.uiSession?.status
 
-    let needsNudge = session?.needsAnalyticsNudge ?? false
     let resources = view?.uiResources ?? []
     if (!resources?.length || !session?.tiltfileKey) {
       return (
@@ -200,7 +198,6 @@ export default class HUD extends Component<HudProps, HudState> {
               <TiltSnackbarProvider>
                 <ResourceNavProvider validateResource={validateResource}>
                   <div className={hudClasses.join(" ")}>
-                    <AnalyticsNudge needsNudge={needsNudge} />
                     <SocketBar state={this.state.socketState} />
                     {fatalErrorModal}
                     {errorModal}

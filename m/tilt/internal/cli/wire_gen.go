@@ -12,7 +12,6 @@ import (
 	"io"
 
 	cliclient "github.com/defn/dev/m/tilt/internal/cli/client"
-	"github.com/defn/dev/m/tilt/internal/analytics"
 	"github.com/defn/dev/m/tilt/internal/engine"
 	"github.com/defn/dev/m/tilt/internal/hud"
 	"github.com/defn/dev/m/tilt/internal/hud/prompt"
@@ -21,29 +20,24 @@ import (
 	"github.com/defn/dev/m/tilt/pkg/model"
 )
 
-func wireTiltfileResult(ctx context.Context, a *analytics.TiltAnalytics, subcommand model.TiltSubcommand) (cmdTiltfileResultDeps, error) {
+func wireTiltfileResult(ctx context.Context, subcommand model.TiltSubcommand) (cmdTiltfileResultDeps, error) {
 	// TODO: Implement wire generation
 	return cmdTiltfileResultDeps{}, nil
 }
 
-func wireCmdUp(ctx context.Context, a *analytics.TiltAnalytics, subcommand model.TiltSubcommand) (CmdUpDeps, error) {
+func wireCmdUp(ctx context.Context, subcommand model.TiltSubcommand) (CmdUpDeps, error) {
 	// TODO: Implement wire generation
 	return CmdUpDeps{}, nil
 }
 
-func wireCmdCI(ctx context.Context, a *analytics.TiltAnalytics, subcommand model.TiltSubcommand) (CmdCIDeps, error) {
+func wireCmdCI(ctx context.Context, subcommand model.TiltSubcommand) (CmdCIDeps, error) {
 	// TODO: Implement wire generation
 	return CmdCIDeps{}, nil
 }
 
-func wireLogsDeps(ctx context.Context, tiltAnalytics *analytics.TiltAnalytics, subcommand model.TiltSubcommand) (LogsDeps, error) {
+func wireLogsDeps(ctx context.Context, subcommand model.TiltSubcommand) (LogsDeps, error) {
 	// TODO: Implement wire generation
 	return LogsDeps{}, nil
-}
-
-func wireAnalytics(l logger.Logger, cmdName model.TiltSubcommand) (*analytics.TiltAnalytics, error) {
-	// Return a disabled analytics for now
-	return nil, nil
 }
 
 func wireClientGetter(ctx context.Context) (*cliclient.Getter, error) {

@@ -10,7 +10,6 @@ import (
 	"github.com/mattn/go-colorable"
 	"github.com/spf13/cobra"
 
-	"github.com/defn/dev/m/tilt/internal/analytics"
 	"github.com/defn/dev/m/tilt/internal/hud/prompt"
 	"github.com/defn/dev/m/tilt/internal/store"
 	"github.com/defn/dev/m/tilt/pkg/logger"
@@ -63,10 +62,6 @@ See blog post for additional information: https://blog.tilt.dev/2020/04/16/how-t
 }
 
 func (c *ciCmd) run(ctx context.Context, args []string) error {
-	a := analytics.Get(ctx)
-	a.Incr("cmd.ci", nil)
-	defer a.Flush(time.Second)
-
 	deferred := logger.NewDeferredLogger(ctx)
 	ctx = redirectLogs(ctx, deferred)
 
@@ -78,11 +73,7 @@ func (c *ciCmd) run(ctx context.Context, args []string) error {
 	log.Print(startLine)
 	log.Print(buildStamp())
 
-	if ok, reason := analytics.IsAnalyticsDisabledFromEnv(); ok {
-		log.Printf("Tilt analytics disabled: %s", reason)
-	}
-
-	cmdCIDeps, err := wireCmdCI(ctx, a, "ci")
+	cmdCIDeps, err := wireCmdCI(ctx, "ci")
 	if err != nil {
 		deferred.SetOutput(deferred.Original())
 		return err
@@ -98,7 +89,7 @@ func (c *ciCmd) run(ctx context.Context, args []string) error {
 	}
 
 	err = upper.Start(ctx, args, cmdCIDeps.TiltBuild,
-		c.fileName, store.TerminalModeStream, a.UserOpt(), cmdCIDeps.Token,
+		c.fileName, store.TerminalModeStream, cmdCIDeps.Token,
 		string(cmdCIDeps.CloudAddress))
 	if err == nil {
 		_, _ = fmt.Fprintln(colorable.NewColorableStdout(),

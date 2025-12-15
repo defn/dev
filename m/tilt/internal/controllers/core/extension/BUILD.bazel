@@ -10,7 +10,6 @@ go_library(
     importpath = "github.com/defn/dev/m/tilt/internal/controllers/core/extension",
     visibility = ["//tilt:__subpackages__"],
     deps = [
-        "//tilt/internal/analytics",
         "//tilt/internal/controllers/apicmp",
         "//tilt/internal/controllers/indexer",
         "//tilt/internal/ospath",
@@ -38,13 +37,11 @@ go_test(
     srcs = ["reconciler_test.go"],
     embed = [":extension"],
     deps = [
-        "//tilt/internal/analytics",
         "//tilt/internal/controllers/fake",
         "//tilt/internal/testutils/tempdir",
         "//tilt/pkg/apis/core/v1alpha1",
         "@com_github_stretchr_testify//assert",
         "@com_github_stretchr_testify//require",
-        "@com_github_tilt_dev_wmclient//pkg/analytics",
         "@io_k8s_apimachinery//pkg/apis/meta/v1:meta",
         "@io_k8s_apimachinery//pkg/types",
     ],

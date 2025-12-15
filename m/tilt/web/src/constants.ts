@@ -31,7 +31,6 @@ export enum TiltDocsPage {
   DebugFaq = "debug_faq.html",
   Faq = "faq.html",
   Snapshots = "snapshots.html",
-  TelemetryFaq = "telemetry_faq.html",
   TiltfileConcepts = "tiltfile_concepts.html",
   TriggerMode = "manual_update_control.html",
   Upgrade = "upgrade.html",

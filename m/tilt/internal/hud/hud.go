@@ -12,7 +12,6 @@ import (
 	"github.com/gdamore/tcell"
 	"github.com/pkg/errors"
 
-	"github.com/defn/dev/m/tilt/internal/analytics"
 	"github.com/defn/dev/m/tilt/internal/hud/view"
 	"github.com/defn/dev/m/tilt/internal/openurl"
 	"github.com/defn/dev/m/tilt/internal/output"
@@ -44,16 +43,14 @@ type Hud struct {
 	mu               sync.RWMutex
 	isStarted        bool
 	isRunning        bool
-	a                *analytics.TiltAnalytics
 }
 
 var _ HeadsUpDisplay = (*Hud)(nil)
 
-func NewHud(renderer *Renderer, webURL model.WebURL, analytics *analytics.TiltAnalytics, openurl openurl.OpenURL) HeadsUpDisplay {
+func NewHud(renderer *Renderer, webURL model.WebURL, openurl openurl.OpenURL) HeadsUpDisplay {
 	return &Hud{
 		r:       renderer,
 		webURL:  webURL,
-		a:       analytics,
 		openurl: openurl,
 	}
 }
@@ -120,10 +117,6 @@ func (h *Hud) Close() {
 	h.r.Reset()
 }
 
-func (h *Hud) recordInteraction(name string) {
-	h.a.Incr(fmt.Sprintf("ui.interactions.%s", name), map[string]string{})
-}
-
 func (h *Hud) handleScreenEvent(ctx context.Context, dispatch func(action store.Action), ev tcell.Event) (done bool) {
 	h.mu.Lock()
 	defer h.mu.Unlock()
@@ -148,7 +141,6 @@ func (h *Hud) handleScreenEvent(ctx context.Context, dispatch func(action store.
 				// open if we have multiple, or what path to default to on the opened manifest.
 				_, selected := h.selectedResource()
 				if len(selected.Endpoints) > 0 {
-					h.recordInteraction("open_preview")
 					err := h.openurl(selected.Endpoints[0], logger.Get(ctx).Writer(logger.InfoLvl))
 					if err != nil {
 						h.currentViewState.AlertMessage = fmt.Sprintf("error opening url '%s' for resource '%s': %v",
@@ -176,19 +168,14 @@ func (h *Hud) handleScreenEvent(ctx context.Context, dispatch func(action store.
 				h.r.screen.Sync()
 			case r == 't': // [T]rigger resource update
 				_, selected := h.selectedResource()
-				h.recordInteraction("trigger_resource")
 				dispatch(store.AppendToTriggerQueueAction{Name: selected.Name, Reason: model.BuildReasonFlagTriggerHUD})
 			case r == 'x':
-				h.recordInteraction("cycle_view_log_state")
 				h.currentViewState.CycleViewLogState()
 			case r == '1':
-				h.recordInteraction("tab_all_log")
 				h.currentViewState.TabState = view.TabAllLog
 			case r == '2':
-				h.recordInteraction("tab_build_log")
 				h.currentViewState.TabState = view.TabBuildLog
 			case r == '3':
-				h.recordInteraction("tab_pod_log")
 				h.currentViewState.TabState = view.TabRuntimeLog
 			}
 		case tcell.KeyUp:
@@ -223,7 +210,6 @@ func (h *Hud) handleScreenEvent(ctx context.Context, dispatch func(action store.
 				url.Path = fmt.Sprintf("/r/%s/", r.Name)
 			}
 
-			h.a.Incr("ui.interactions.open_log", nil)
 			_ = h.openurl(url.String(), logger.Get(ctx).Writer(logger.InfoLvl))
 		case tcell.KeyRight:
 			i, _ := h.selectedResource()

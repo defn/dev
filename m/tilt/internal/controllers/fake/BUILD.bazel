@@ -21,7 +21,6 @@ go_library(
         "@com_github_stretchr_testify//require",
         "@com_github_tilt_dev_tilt_apiserver//pkg/server/builder/resource",
         "@com_github_tilt_dev_tilt_apiserver//pkg/server/builder/resource/resourcestrategy",
-        "@com_github_tilt_dev_wmclient//pkg/analytics",
         "@io_k8s_apimachinery//pkg/api/errors",
         "@io_k8s_apimachinery//pkg/runtime",
         "@io_k8s_apimachinery//pkg/types",

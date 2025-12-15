@@ -3,8 +3,6 @@ package tiltfile
 import (
 	"time"
 
-	"github.com/tilt-dev/wmclient/pkg/analytics"
-
 	"github.com/defn/dev/m/tilt/pkg/model"
 	"github.com/defn/dev/m/tilt/pkg/model/logstore"
 )
@@ -27,17 +25,15 @@ type ConfigsReloadedAction struct {
 	Tiltignore  model.Dockerignore
 	ConfigFiles []string
 
-	FinishTime           time.Time
-	Err                  error
-	Warnings             []string
-	Features             map[string]bool
-	TeamID               string
-	TelemetrySettings    model.TelemetrySettings
-	Secrets              model.SecretSet
-	AnalyticsTiltfileOpt analytics.Opt
-	VersionSettings      model.VersionSettings
-	UpdateSettings       model.UpdateSettings
-	WatchSettings        model.WatchSettings
+	FinishTime time.Time
+	Err        error
+	Warnings   []string
+	Features   map[string]bool
+	TeamID     string
+	Secrets    model.SecretSet
+	VersionSettings model.VersionSettings
+	UpdateSettings  model.UpdateSettings
+	WatchSettings   model.WatchSettings
 
 	// A checkpoint into the logstore when Tiltfile execution started.
 	// Useful for knowing how far back in time we have to scrub secrets.

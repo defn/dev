@@ -18,7 +18,6 @@ import (
 	"sigs.k8s.io/controller-runtime/pkg/handler"
 	"sigs.k8s.io/controller-runtime/pkg/reconcile"
 
-	"github.com/defn/dev/m/tilt/internal/analytics"
 	"github.com/defn/dev/m/tilt/internal/controllers/apicmp"
 	"github.com/defn/dev/m/tilt/internal/controllers/indexer"
 	"github.com/defn/dev/m/tilt/internal/ospath"
@@ -30,7 +29,6 @@ type Reconciler struct {
 	ctrlClient ctrlclient.Client
 	indexer    *indexer.Indexer
 	mu         sync.Mutex
-	analytics  *analytics.TiltAnalytics
 }
 
 func (r *Reconciler) CreateBuilder(mgr ctrl.Manager) (*builder.Builder, error) {
@@ -42,11 +40,10 @@ func (r *Reconciler) CreateBuilder(mgr ctrl.Manager) (*builder.Builder, error) {
 	return b, nil
 }
 
-func NewReconciler(ctrlClient ctrlclient.Client, scheme *runtime.Scheme, analytics *analytics.TiltAnalytics) *Reconciler {
+func NewReconciler(ctrlClient ctrlclient.Client, scheme *runtime.Scheme) *Reconciler {
 	return &Reconciler{
 		ctrlClient: ctrlClient,
 		indexer:    indexer.NewIndexer(scheme, indexExtension),
-		analytics:  analytics,
 	}
 }
 
@@ -81,7 +78,7 @@ func (r *Reconciler) Reconcile(ctx context.Context, request reconcile.Request) (
 
 	newStatus := r.apply(&ext, &repo)
 
-	update, changed, err := r.maybeUpdateStatus(ctx, &ext, newStatus)
+	update, _, err := r.maybeUpdateStatus(ctx, &ext, newStatus)
 	if err != nil {
 		return ctrl.Result{}, err
 	}
@@ -91,18 +88,6 @@ func (r *Reconciler) Reconcile(ctx context.Context, request reconcile.Request) (
 	err = r.manageOwnedTiltfile(ctx, types.NamespacedName{Name: ext.Name}, update)
 	if err != nil {
 		return ctrl.Result{}, err
-	}
-
-	if changed && update.Status.Error == "" {
-		repoType := "http"
-		if strings.HasPrefix(repo.Spec.URL, "file://") {
-			repoType = "file"
-		}
-		r.analytics.Incr("api.extension.load", map[string]string{
-			"ext_path":      ext.Spec.RepoPath,
-			"repo_url_hash": analytics.HashSHA1(repo.Spec.URL),
-			"repo_type":     repoType,
-		})
 	}
 
 	return ctrl.Result{}, nil

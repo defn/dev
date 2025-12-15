@@ -12,10 +12,8 @@ go_library(
     importpath = "github.com/defn/dev/m/tilt/internal/testutils",
     visibility = ["//tilt:__subpackages__"],
     deps = [
-        "//tilt/internal/analytics",
         "//tilt/pkg/logger",
         "@com_github_stretchr_testify//assert",
         "@com_github_stretchr_testify//require",
-        "@com_github_tilt_dev_wmclient//pkg/analytics",
     ],
 )

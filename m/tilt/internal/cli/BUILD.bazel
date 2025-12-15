@@ -4,7 +4,6 @@ go_library(
     name = "cli",
     srcs = [
         "alpha.go",
-        "analytics.go",
         "api_utils.go",
         "args.go",
         "build.go",
@@ -25,7 +24,6 @@ go_library(
     importpath = "github.com/defn/dev/m/tilt/internal/cli",
     visibility = ["//tilt:__subpackages__"],
     deps = [
-        "//tilt/internal/analytics",
         "//tilt/internal/cli/client",
         "//tilt/internal/controllers",
         "//tilt/internal/controllers/apis/tiltfile",
@@ -54,7 +52,6 @@ go_library(
         "@com_github_tilt_dev_starlark_lsp//pkg/cli",
         "@com_github_tilt_dev_tilt_apiserver//pkg/server/builder/resource",
         "@com_github_tilt_dev_tilt_apiserver//pkg/server/options",
-        "@com_github_tilt_dev_wmclient//pkg/analytics",
         "@dev_lsp_go_protocol//:protocol",
         "@io_k8s_apimachinery//pkg/apis/meta/v1:meta",
         "@io_k8s_apimachinery//pkg/apis/meta/v1/unstructured",

@@ -54,7 +54,7 @@ type fixture struct {
 }
 
 func newFixture(t *testing.T) *fixture {
-	ctx, _, _ := testutils.CtxAndAnalyticsForTest()
+	ctx := testutils.LoggerCtx()
 	f := &fixture{
 		TempDirFixture: *tempdir.NewTempDirFixture(t),
 		finder:         &extensionFinder{ctx: ctx},

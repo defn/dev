@@ -13,7 +13,6 @@ import (
 
 	"github.com/defn/dev/m/tilt/pkg/logger"
 
-	"github.com/defn/dev/m/tilt/internal/analytics"
 	ctrltiltfile "github.com/defn/dev/m/tilt/internal/controllers/apis/tiltfile"
 	"github.com/defn/dev/m/tilt/internal/tiltfile"
 	"github.com/defn/dev/m/tilt/pkg/model"
@@ -95,7 +94,7 @@ func (c *tiltfileResultCmd) run(ctx context.Context, args []string) error {
 		ctx = logger.WithLogger(ctx, logger.NewLogger(logLvl, c.streams.ErrOut))
 	}
 
-	deps, err := wireTiltfileResult(ctx, analytics.Get(ctx), "alpha tiltfile-result")
+	deps, err := wireTiltfileResult(ctx, "alpha tiltfile-result")
 	if err != nil {
 		c.maybePrintDeferredLogsToStderr(ctx, showTiltfileLogs)
 		return errors.Wrap(err, "wiring dependencies")
