@@ -11,7 +11,6 @@ import (
 	tty "github.com/mattn/go-tty"
 
 	"github.com/defn/dev/m/tilt/internal/hud"
-	"github.com/defn/dev/m/tilt/internal/openurl"
 	"github.com/defn/dev/m/tilt/internal/store"
 	"github.com/defn/dev/m/tilt/pkg/model"
 )
@@ -44,10 +43,7 @@ func TTYOpen() (TerminalInput, error) {
 
 type TerminalPrompt struct {
 	openInput OpenInput
-	openURL   openurl.OpenURL
 	stdout    hud.Stdout
-	host      model.WebHost
-	url       model.WebURL
 
 	printed bool
 	term    TerminalInput
@@ -59,16 +55,10 @@ type TerminalPrompt struct {
 	initOutput *bytes.Buffer
 }
 
-func NewTerminalPrompt(openInput OpenInput,
-	openURL openurl.OpenURL, stdout hud.Stdout,
-	host model.WebHost, url model.WebURL) *TerminalPrompt {
-
+func NewTerminalPrompt(openInput OpenInput, stdout hud.Stdout) *TerminalPrompt {
 	return &TerminalPrompt{
 		openInput: openInput,
-		openURL:   openURL,
 		stdout:    stdout,
-		host:      host,
-		url:       url,
 	}
 }
 
@@ -121,7 +111,7 @@ func (p *TerminalPrompt) OnChange(ctx context.Context, st store.RStore, _ store.
 
 	build := p.tiltBuild(st)
 	buildStamp := build.HumanBuildStamp()
-	firstLine := StartStatusLine(p.url, p.host)
+	firstLine := StartStatusLine()
 	_, _ = fmt.Fprintf(p.stdout, "%s\n", firstLine)
 	_, _ = fmt.Fprintf(p.stdout, "%s\n\n", buildStamp)
 
@@ -138,11 +128,6 @@ func (p *TerminalPrompt) OnChange(ctx context.Context, st store.RStore, _ store.
 
 	if needsNewline {
 		_, _ = fmt.Fprintf(p.stdout, "\n")
-	}
-
-	hasBrowserUI := !p.url.Empty()
-	if hasBrowserUI {
-		_, _ = fmt.Fprintf(p.stdout, "(space) to open the browser\n")
 	}
 
 	_, _ = fmt.Fprintf(p.stdout, "(s) to stream logs (--stream=true)\n")
@@ -210,19 +195,10 @@ func (p *TerminalPrompt) OnChange(ctx context.Context, st store.RStore, _ store.
 
 				case 't', 'h':
 					st.Dispatch(SwitchTerminalModeAction{Mode: store.TerminalModeHUD})
-
 					msg.stopCh <- true
 
-				case ' ':
-					_, _ = fmt.Fprintf(p.stdout, "Opening browser: %s\n", p.url.String())
-					err := p.openURL(p.url.String(), p.stdout)
-					if err != nil {
-						_, _ = fmt.Fprintf(p.stdout, "Error: %v\n", err)
-					}
-					msg.stopCh <- false
 				default:
 					msg.stopCh <- false
-
 				}
 			}
 		}
@@ -242,18 +218,8 @@ type runeMessage struct {
 	stopCh chan bool
 }
 
-func StartStatusLine(url model.WebURL, host model.WebHost) string {
-	hasBrowserUI := !url.Empty()
-	serverStatus := "(without browser UI)"
-	if hasBrowserUI {
-		if host == "0.0.0.0" {
-			serverStatus = fmt.Sprintf("on %s (listening on 0.0.0.0)", url)
-		} else {
-			serverStatus = fmt.Sprintf("on %s", url)
-		}
-	}
-
-	return color.GreenString(fmt.Sprintf("Tilt started %s", serverStatus))
+func StartStatusLine() string {
+	return color.GreenString("Tilt started")
 }
 
 var _ store.Subscriber = &TerminalPrompt{}

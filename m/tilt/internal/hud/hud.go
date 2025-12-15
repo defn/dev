@@ -35,7 +35,6 @@ type HeadsUpDisplay interface {
 
 type Hud struct {
 	r       *Renderer
-	webURL  model.WebURL
 	openurl openurl.OpenURL
 
 	currentView      view.View
@@ -47,10 +46,9 @@ type Hud struct {
 
 var _ HeadsUpDisplay = (*Hud)(nil)
 
-func NewHud(renderer *Renderer, webURL model.WebURL, openurl openurl.OpenURL) HeadsUpDisplay {
+func NewHud(renderer *Renderer, openurl openurl.OpenURL) HeadsUpDisplay {
 	return &Hud{
 		r:       renderer,
-		webURL:  webURL,
 		openurl: openurl,
 	}
 }
@@ -149,13 +147,6 @@ func (h *Hud) handleScreenEvent(ctx context.Context, dispatch func(action store.
 				} else {
 					h.currentViewState.AlertMessage = fmt.Sprintf("no urls for resource '%s' ¯\\_(ツ)_/¯", selected.Name)
 				}
-			case r == 'l': // Tilt [L]og
-				if h.webURL.Empty() {
-					break
-				}
-				url := h.webURL
-				url.Path = "/"
-				_ = h.openurl(url.String(), logger.Get(ctx).Writer(logger.InfoLvl))
 			case r == 'k':
 				h.activeScroller().Up()
 				h.refreshSelectedIndex()
@@ -195,22 +186,7 @@ func (h *Hud) handleScreenEvent(ctx context.Context, dispatch func(action store.
 			}
 			h.refreshSelectedIndex()
 		case tcell.KeyEnter:
-			if len(h.currentView.Resources) == 0 {
-				break
-			}
-			_, r := h.selectedResource()
-
-			if h.webURL.Empty() {
-				break
-			}
-			url := h.webURL
-
-			// If the cursor is in the default position (Tiltfile), open the All log.
-			if r.Name != MainTiltfileManifestName {
-				url.Path = fmt.Sprintf("/r/%s/", r.Name)
-			}
-
-			_ = h.openurl(url.String(), logger.Get(ctx).Writer(logger.InfoLvl))
+			// No-op: web UI removed
 		case tcell.KeyRight:
 			i, _ := h.selectedResource()
 			h.currentViewState.Resources[i].CollapseState = view.CollapseNo

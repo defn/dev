@@ -2,7 +2,6 @@ package hud
 
 import (
 	"bytes"
-	"net/url"
 	"testing"
 	"time"
 
@@ -11,7 +10,6 @@ import (
 	"github.com/defn/dev/m/tilt/internal/openurl"
 	"github.com/defn/dev/m/tilt/internal/rty"
 	"github.com/defn/dev/m/tilt/internal/testutils"
-	"github.com/defn/dev/m/tilt/pkg/model"
 )
 
 func TestRenderInit(t *testing.T) {
@@ -21,7 +19,6 @@ func TestRenderInit(t *testing.T) {
 	clockForTest := func() time.Time { return time.Date(2017, 1, 1, 12, 0, 0, 0, time.UTC) }
 	r := NewRenderer(clockForTest)
 	r.rty = rty.NewRTY(tcell.NewSimulationScreen(""), t)
-	webURL, _ := url.Parse("http://localhost:10350")
-	hud := NewHud(r, model.WebURL(*webURL), openurl.BrowserOpen)
+	hud := NewHud(r, openurl.BrowserOpen)
 	hud.(*Hud).refresh(ctx) // Ensure we render without error
 }

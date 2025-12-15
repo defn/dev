@@ -107,7 +107,7 @@ func (c *upCmd) run(ctx context.Context, args []string) error {
 	deferred := logger.NewDeferredLogger(ctx)
 	ctx = redirectLogs(ctx, deferred)
 
-	startLine := prompt.StartStatusLine(model.WebURL{}, "")
+	startLine := prompt.StartStatusLine()
 	log.Print(startLine)
 	log.Print(buildStamp())
 

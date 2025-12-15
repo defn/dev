@@ -47,9 +47,8 @@ var pkgInitTime = time.Now()
 
 type tiltfileState struct {
 	// set at creation
-	ctx              context.Context
-	webHost          model.WebHost
-	execer           localexec.Execer
+	ctx    context.Context
+	execer localexec.Execer
 	versionPlugin    version.Plugin
 	configPlugin     *config.Plugin
 	extensionPlugin  *tiltextension.Plugin
@@ -89,7 +88,6 @@ type tiltfileState struct {
 
 func newTiltfileState(
 	ctx context.Context,
-	webHost model.WebHost,
 	execer localexec.Execer,
 	versionPlugin version.Plugin,
 	configPlugin *config.Plugin,
@@ -97,9 +95,8 @@ func newTiltfileState(
 	ciSettingsPlugin cisettings.Plugin,
 	features feature.FeatureSet) *tiltfileState {
 	return &tiltfileState{
-		ctx:               ctx,
-		webHost:           webHost,
-		execer:            execer,
+		ctx:    ctx,
+		execer: execer,
 		versionPlugin:     versionPlugin,
 		configPlugin:      configPlugin,
 		extensionPlugin:   extensionPlugin,

@@ -27,7 +27,7 @@ func (c *ciCmd) register() *cobra.Command {
 		Use:                   "ci [<tilt flags>] [-- <Tiltfile args>]",
 		DisableFlagsInUseLine: true,
 		Short:                 "Start Tilt in CI/batch mode with the given Tiltfile args",
-		Long: fmt.Sprintf(`
+		Long: `
 Starts Tilt and runs resources defined in the Tiltfile.
 
 Exits with failure if any build fails or any server crashes.
@@ -35,15 +35,10 @@ Exits with failure if any build fails or any server crashes.
 Exits with success if all tasks have completed successfully
 and all servers are healthy.
 
-While Tilt is running, you can view the UI at %s:%d
-(configurable with --host and --port).
-
 See blog post for additional information: https://blog.tilt.dev/2020/04/16/how-to-not-break-server-startup.html
-`, defaultWebHost, defaultWebPort),
+`,
 	}
 
-	addStartServerFlags(cmd)
-	addDevServerFlags(cmd)
 	addTiltfileFlag(cmd, &c.fileName)
 	addKubeContextFlag(cmd)
 	addNamespaceFlag(cmd)
@@ -64,9 +59,7 @@ func (c *ciCmd) run(ctx context.Context, args []string) error {
 
 	log.SetFlags(log.Flags() &^ (log.Ldate | log.Ltime))
 
-	webHost := provideWebHost()
-	webURL, _ := provideWebURL(webHost, provideWebPort())
-	startLine := prompt.StartStatusLine(webURL, webHost)
+	startLine := prompt.StartStatusLine()
 	log.Print(startLine)
 	log.Print(buildStamp())
 
