@@ -57,7 +57,7 @@ require (
 	go.uber.org/fx v1.24.0
 	go.uber.org/zap v1.27.1
 	golang.org/x/term v0.38.0
-	golang.zx2c4.com/wireguard v0.0.0-20231211153847-12269c276173
+	golang.zx2c4.com/wireguard v0.0.0-20250521234502-f333402bd9cb
 	gopkg.in/yaml.v3 v3.0.1
 	modernc.org/sqlite v1.40.1
 )
@@ -93,13 +93,13 @@ require (
 	go.opentelemetry.io/proto/otlp v1.9.0 // indirect
 	golang.org/x/lint v0.0.0-20241112194109-818c5a804067 // indirect
 	golang.org/x/mod v0.31.0 // indirect
-	golang.org/x/telemetry v0.0.0-20251208220230-2638a1023523 // indirect
+	golang.org/x/telemetry v0.0.0-20251215142616-e75fd47794af // indirect
 	golang.zx2c4.com/wintun v0.0.0-20230126152724-0fa3db229ce2 // indirect
 	google.golang.org/genproto/googleapis/api v0.0.0-20251213004720-97cd9d5aeac2 // indirect
 	google.golang.org/genproto/googleapis/rpc v0.0.0-20251213004720-97cd9d5aeac2 // indirect
 	google.golang.org/grpc v1.77.0 // indirect
 	gopkg.in/yaml.v2 v2.4.0 // indirect
-	gvisor.dev/gvisor v0.0.0-20230927004350-cbd86285d259 // indirect
+	gvisor.dev/gvisor v0.0.0-20250503011706-39ed1f5ac29c // indirect
 )
 
 require (
