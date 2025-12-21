@@ -40,6 +40,7 @@ package main
 import (
 	"bufio"
 	"crypto/sha256"
+	"encoding/json"
 	"flag"
 	"fmt"
 	"image"
@@ -59,11 +60,17 @@ import (
 // Command-line configuration variables
 // These control the behavior and paths used by the gallery generator
 var (
-	allInputFile string // Path to input file containing image identifiers
-	outputDir    string // Directory where HTML gallery pages will be written
-	cacheDir     string // Directory for caching blurhash and dimension data
-	imageDir     string // Source directory containing the actual image files
-	selectMode   string // Gallery interaction mode ("yes" for selection, "no" for read-only)
+	allInputFile  string // Path to input file containing image identifiers
+	outputDir     string // Directory where HTML gallery pages will be written
+	cacheDir      string // Directory for caching blurhash and dimension data
+	imageDir      string // Source directory containing the actual image files
+	selectMode    string // Gallery interaction mode ("yes" for selection, "no" for read-only)
+	scanDir       string // Directory to scan for images (gallery mode)
+	jsonFile      string // JSON file for filtering (html mode)
+	stage1Dir     string // First stage directory for filtering (html mode)
+	stage2Dir     string // Second stage directory for filtering (html mode)
+	thumbsDir     string // Thumbnails directory for filtering (html mode)
+	generateIndex string // Path to generate index file (html mode)
 )
 
 // galleryTemplate defines the HTML structure for gallery pages
@@ -153,9 +160,22 @@ func main() {
 	flag.StringVar(&selectMode, "selectmode", "", "Select mode for image interaction (default: no)")
 	flag.StringVar(&selectMode, "s", "", "Select mode for image interaction (shorthand)")
 
+	// Gallery mode specific flags
+	flag.StringVar(&scanDir, "scan-dir", "", "Directory to scan for images (gallery mode)")
+
+	// HTML mode specific flags
+	flag.StringVar(&jsonFile, "json-file", "", "JSON file containing image metadata (html mode)")
+	flag.StringVar(&jsonFile, "json", "", "JSON file containing image metadata (shorthand)")
+	flag.StringVar(&stage1Dir, "stage1", "yes", "First stage directory for filtering (html mode)")
+	flag.StringVar(&stage2Dir, "stage2", "no", "Second stage directory for filtering (html mode)")
+	flag.StringVar(&thumbsDir, "thumbs-dir", "thumbs", "Thumbnails directory for filtering (html mode)")
+	flag.StringVar(&generateIndex, "generate-index", "", "Generate index file with links to all galleries")
+
 	// Mode configuration
-	mode := flag.String("mode", "", "Operating mode: gallery, html, or batch")
-	mode = flag.String("m", "", "Operating mode (shorthand): gallery, html, or batch")
+	var modeValue string
+	flag.StringVar(&modeValue, "mode", "", "Operating mode: gallery, html, or batch")
+	flag.StringVar(&modeValue, "m", "", "Operating mode (shorthand): gallery, html, or batch")
+	mode := &modeValue
 
 	// Help flags
 	showHelp := flag.Bool("help", false, "Show help message")
@@ -184,10 +204,7 @@ func main() {
 		batchProcessAllGalleries()
 
 	case "gallery":
-		// Gallery mode: main gallery from all.input
-		if allInputFile == "" {
-			allInputFile = "all.input"
-		}
+		// Gallery mode: main gallery from directory scan or input file
 		if outputDir == "" {
 			outputDir = "g"
 		}
@@ -207,23 +224,35 @@ func main() {
 			os.Exit(1)
 		}
 
-		// Load and parse the input file containing image identifiers
-		imageInfos, err := parseInputFile(allInputFile)
-		if err != nil {
-			fmt.Fprintf(os.Stderr, "Error parsing input file: %v\n", err)
-			os.Exit(1)
+		var imageInfos []ImageInfo
+		var err error
+
+		// Either scan directory or read from input file
+		if scanDir != "" {
+			// Scan directory for images
+			fmt.Fprintf(os.Stderr, "Scanning directory: %s\n", scanDir)
+			imageInfos, err = scanDirectoryForImages(scanDir)
+			if err != nil {
+				fmt.Fprintf(os.Stderr, "Error scanning directory: %v\n", err)
+				os.Exit(1)
+			}
+		} else {
+			// Load from input file (default: all.input)
+			if allInputFile == "" {
+				allInputFile = "all.input"
+			}
+			imageInfos, err = parseInputFile(allInputFile)
+			if err != nil {
+				fmt.Fprintf(os.Stderr, "Error parsing input file: %v\n", err)
+				os.Exit(1)
+			}
 		}
 
 		fmt.Fprintf(os.Stderr, "Found %d images to process\n", len(imageInfos))
 		processSingleGallery(imageInfos)
 
 	case "html":
-		// HTML mode: per-user galleries with explicit settings
-		// All parameters must be provided explicitly
-		if allInputFile == "" {
-			fmt.Fprintf(os.Stderr, "Error: -input required for html mode\n")
-			os.Exit(1)
-		}
+		// HTML mode: per-user galleries with JSON input and filtering
 		if outputDir == "" {
 			fmt.Fprintf(os.Stderr, "Error: -output required for html mode\n")
 			os.Exit(1)
@@ -244,15 +273,41 @@ func main() {
 			os.Exit(1)
 		}
 
-		// Load and parse the input file containing image identifiers
-		imageInfos, err := parseInputFile(allInputFile)
-		if err != nil {
-			fmt.Fprintf(os.Stderr, "Error parsing input file: %v\n", err)
+		var imageInfos []ImageInfo
+		var err error
+
+		// Either process JSON file with filtering or read from input file
+		if jsonFile != "" {
+			// Process JSON file and filter images
+			fmt.Fprintf(os.Stderr, "Processing JSON file: %s\n", jsonFile)
+			imageInfos, err = processJSONWithFiltering(jsonFile, stage1Dir, stage2Dir, thumbsDir)
+			if err != nil {
+				fmt.Fprintf(os.Stderr, "Error processing JSON: %v\n", err)
+				os.Exit(1)
+			}
+		} else if allInputFile != "" {
+			// Load from input file
+			imageInfos, err = parseInputFile(allInputFile)
+			if err != nil {
+				fmt.Fprintf(os.Stderr, "Error parsing input file: %v\n", err)
+				os.Exit(1)
+			}
+		} else {
+			fmt.Fprintf(os.Stderr, "Error: -json-file or -input required for html mode\n")
 			os.Exit(1)
 		}
 
 		fmt.Fprintf(os.Stderr, "Found %d images to process\n", len(imageInfos))
 		processSingleGallery(imageInfos)
+
+		// Generate index file if requested
+		if generateIndex != "" {
+			fmt.Fprintf(os.Stderr, "Generating index file: %s\n", generateIndex)
+			if err := generateIndexFile(generateIndex); err != nil {
+				fmt.Fprintf(os.Stderr, "Error generating index: %v\n", err)
+				os.Exit(1)
+			}
+		}
 
 	default:
 		fmt.Fprintf(os.Stderr, "Error: -mode must be specified as 'gallery', 'html', or 'batch'\n")
@@ -1110,6 +1165,230 @@ func parseInputFile(filePath string) ([]ImageInfo, error) {
 	}
 
 	return imageInfos, nil
+}
+
+// scanDirectoryForImages scans a directory and returns a list of image files
+// Supports PNG and JPEG files, extracts base filename without extension
+func scanDirectoryForImages(dirPath string) ([]ImageInfo, error) {
+	var imageInfos []ImageInfo
+
+	err := filepath.Walk(dirPath, func(path string, info os.FileInfo, err error) error {
+		if err != nil {
+			return err
+		}
+
+		// Skip directories
+		if info.IsDir() {
+			return nil
+		}
+
+		// Check if file is an image (png, jpg, jpeg)
+		ext := strings.ToLower(filepath.Ext(path))
+		if ext != ".png" && ext != ".jpg" && ext != ".jpeg" {
+			return nil
+		}
+
+		// Get relative path from dirPath
+		relPath, err := filepath.Rel(dirPath, path)
+		if err != nil {
+			return err
+		}
+
+		// Extract base name without extension
+		baseName := filepath.Base(relPath)
+		baseName = strings.TrimSuffix(baseName, filepath.Ext(baseName))
+
+		imageInfo := ImageInfo{
+			Filename: baseName + ".png", // Normalize to .png extension
+			Width:    0,
+			Height:   0,
+		}
+
+		imageInfos = append(imageInfos, imageInfo)
+		return nil
+	})
+
+	if err != nil {
+		return nil, err
+	}
+
+	// Sort by filename for consistent ordering
+	sort.Slice(imageInfos, func(i, j int) bool {
+		return imageInfos[i].Filename < imageInfos[j].Filename
+	})
+
+	return imageInfos, nil
+}
+
+// processJSONWithFiltering reads a JSON file, extracts URLs, and filters images
+// based on stage directories and thumbnail existence
+func processJSONWithFiltering(jsonPath, stage1Dir, stage2Dir, thumbsDir string) ([]ImageInfo, error) {
+	// Read JSON file
+	data, err := ioutil.ReadFile(jsonPath)
+	if err != nil {
+		return nil, fmt.Errorf("failed to read JSON file: %v", err)
+	}
+
+	// Parse JSON - expecting either array of objects or single object with .url field
+	var jsonData interface{}
+	if err := json.Unmarshal(data, &jsonData); err != nil {
+		return nil, fmt.Errorf("failed to parse JSON: %v", err)
+	}
+
+	// Extract URLs from JSON
+	urls := extractURLsFromJSON(jsonData)
+	if len(urls) == 0 {
+		return nil, fmt.Errorf("no URLs found in JSON file")
+	}
+
+	fmt.Fprintf(os.Stderr, "Extracted %d URLs from JSON\n", len(urls))
+
+	// Extract image IDs from URLs (assuming format: .../image_id.ext)
+	var allIDs []string
+	for _, url := range urls {
+		// Extract filename from URL path
+		parts := strings.Split(url, "/")
+		if len(parts) < 7 {
+			continue
+		}
+		filename := parts[6] // Based on Justfile: cut -d/ -f7
+		// Remove extension
+		id := strings.TrimSuffix(filename, filepath.Ext(filename))
+		if id != "" {
+			allIDs = append(allIDs, id)
+		}
+	}
+
+	// Remove duplicates and sort
+	idMap := make(map[string]bool)
+	for _, id := range allIDs {
+		idMap[id] = true
+	}
+	allIDs = make([]string, 0, len(idMap))
+	for id := range idMap {
+		allIDs = append(allIDs, id)
+	}
+	sort.Strings(allIDs)
+
+	fmt.Fprintf(os.Stderr, "Found %d unique image IDs\n", len(allIDs))
+
+	// Filter images based on criteria:
+	// - Must have thumbnail in thumbsDir
+	// - Must NOT be in stage1Dir
+	// - Must NOT be in stage2Dir
+	var filtered []string
+	for _, id := range allIDs {
+		thumbPath := filepath.Join(thumbsDir, id+".png")
+		stage1Path := filepath.Join(stage1Dir, id+".jpeg")
+		stage2Path := filepath.Join(stage2Dir, id+".jpeg")
+
+		// Check if thumbnail exists and has content
+		if info, err := os.Stat(thumbPath); err != nil || info.Size() == 0 {
+			continue
+		}
+
+		// Check if NOT in stage1
+		if _, err := os.Stat(stage1Path); err == nil {
+			continue
+		}
+
+		// Check if NOT in stage2
+		if _, err := os.Stat(stage2Path); err == nil {
+			continue
+		}
+
+		filtered = append(filtered, id)
+	}
+
+	fmt.Fprintf(os.Stderr, "Filtered to %d images (pending review)\n", len(filtered))
+
+	// Convert to ImageInfo list
+	var imageInfos []ImageInfo
+	for _, id := range filtered {
+		imageInfos = append(imageInfos, ImageInfo{
+			Filename: id + ".png",
+			Width:    0,
+			Height:   0,
+		})
+	}
+
+	return imageInfos, nil
+}
+
+// extractURLsFromJSON recursively extracts URLs from JSON data
+func extractURLsFromJSON(data interface{}) []string {
+	var urls []string
+
+	switch v := data.(type) {
+	case map[string]interface{}:
+		// Check if this object has a "url" field
+		if url, ok := v["url"].(string); ok {
+			urls = append(urls, url)
+		}
+		// Recursively process all values
+		for _, value := range v {
+			urls = append(urls, extractURLsFromJSON(value)...)
+		}
+	case []interface{}:
+		// Process each element in array
+		for _, elem := range v {
+			urls = append(urls, extractURLsFromJSON(elem)...)
+		}
+	}
+
+	return urls
+}
+
+// generateIndexFile creates an HTML index file with links to all generated galleries
+func generateIndexFile(indexPath string) error {
+	// Find all generated gallery index.html files
+	pattern := "tmp/g/js-username-*/*/index.html"
+	matches, err := filepath.Glob(pattern)
+	if err != nil {
+		return fmt.Errorf("failed to glob galleries: %v", err)
+	}
+
+	if len(matches) == 0 {
+		fmt.Fprintf(os.Stderr, "Warning: no galleries found matching %s\n", pattern)
+		return nil
+	}
+
+	// Sort by modification time (most recent first)
+	type fileWithTime struct {
+		path    string
+		modTime time.Time
+	}
+	var files []fileWithTime
+	for _, match := range matches {
+		info, err := os.Stat(match)
+		if err != nil {
+			continue
+		}
+		files = append(files, fileWithTime{match, info.ModTime()})
+	}
+	sort.Slice(files, func(i, j int) bool {
+		return files[i].modTime.Before(files[j].modTime)
+	})
+
+	// Generate HTML content
+	var content strings.Builder
+	for _, f := range files {
+		content.WriteString(fmt.Sprintf("<a href=\"%s\">%s</a><br>\n", f.path, f.path))
+	}
+
+	// Write to temporary file first, then rename (atomic)
+	tmpPath := indexPath + ".tmp"
+	if err := ioutil.WriteFile(tmpPath, []byte(content.String()), 0644); err != nil {
+		return fmt.Errorf("failed to write index file: %v", err)
+	}
+
+	if err := os.Rename(tmpPath, indexPath); err != nil {
+		os.Remove(tmpPath)
+		return fmt.Errorf("failed to rename index file: %v", err)
+	}
+
+	fmt.Fprintf(os.Stderr, "Generated index with %d galleries\n", len(files))
+	return nil
 }
 
 // generateChunkHTMLWithPaths creates HTML with explicit imgDir parameter
