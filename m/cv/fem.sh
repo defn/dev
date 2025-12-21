@@ -97,6 +97,7 @@ function main {
 			echo "<a href=\"/pub/w/${a%.png}/\"><img style=\"vertical-align: top;\" src=\"${a%.png}/${a%.png}-00000000-0000-0000-0000-000000000000.png\"></a>"
 			echo "<a href=\"/pub/w/${a%.png}/\"><img style=\"vertical-align: top;\" src=\"${a%.png}/${a%.png}-00000000-0000-0000-0000-000000000001.png\"></a>"
 			echo "<a href=\"/pub/w/${a%.png}/\"><img style=\"vertical-align: top;\" src=\"${a%.png}/${a%.png}-00000000-0000-0000-0000-000000000002.png\"></a>"
+			echo "<a href=\"/pub/w/${a%.png}/\"><img style=\"vertical-align: top;\" src=\"${a%.png}/${a%.png}-00000000-0000-0000-0000-000000000003.png\"></a>"
 			echo "<a href=\"/pub/w/${a%.png}/\"><img style=\"vertical-align: top;\" src=\"$a\" width=300></a>"
 			echo '</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'
 		done >fm.html

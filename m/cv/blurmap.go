@@ -68,32 +68,30 @@ var (
 
 // galleryTemplate defines the HTML structure for gallery pages
 // This template is populated with image data and blurhash information
-// Includes responsive design elements and JavaScript integration
+// Uses the new modular ES6 gallery system with window.galleryConfig
 const galleryTemplate = `<!doctype html>
 <html>
   <head>
-    <link rel="stylesheet" href="/gallery.css" />
+    <link rel="stylesheet" href="/gallery/gallery.css" />
     <meta name="total-chunks" content="%d">
     <meta name="current-chunk" content="%s">
   </head>
   <body style="background-color: black">
-    <script src="/gallery.js?cache=%d"></script>
-    <table>
-      <tbody id="table-body">
-        <tr>
-          <script>
-            // INSERT
+    <script>
+      // INSERT
 
-            const basePath = "/%s";
-            const selectMode = "%s";
-
-            generateGrid();
-          </script>
-        </tr>
-      </tbody>
-    </table>
-    <div id="overlay" />
-    <br />
+      window.galleryConfig = {
+        images: { thumbPath: '/%s' },
+        click: {
+          mode: '%s',
+          navigateUrlPattern: '../../../W/{uuid}.html?page={page}#{filename}'
+        },
+        modal: { enabled: true }
+      };
+    </script>
+    <table><tbody id="table-body"></tbody></table>
+    <div id="overlay"></div>
+    <script type="module" src="/gallery/index.js"></script>
   </body>
 </html>`
 
@@ -135,28 +133,26 @@ const (
 var timestampCache int64
 
 // main orchestrates the entire gallery generation process
-// 1. Parses command-line arguments and validates configuration
-// 2. Sets up worker pool for parallel image processing  
-// 3. Processes images to generate blurhash data with caching
-// 4. Generates paginated HTML gallery files with embedded data
+// When run without arguments: processes all w-* directories (batch mode)
+// When run with arguments: processes a single directory (single mode)
 func main() {
 	// Configure command-line flags with both long and short forms
 	// Input/output configuration
-	flag.StringVar(&allInputFile, "input", "all.input", "Input file containing image identifiers")
-	flag.StringVar(&allInputFile, "i", "all.input", "Input file containing image identifiers (shorthand)")
-	flag.StringVar(&outputDir, "output", "g", "Output directory for HTML gallery pages")
-	flag.StringVar(&outputDir, "o", "g", "Output directory for HTML gallery pages (shorthand)")
-	
+	flag.StringVar(&allInputFile, "input", "", "Input file containing image identifiers")
+	flag.StringVar(&allInputFile, "i", "", "Input file containing image identifiers (shorthand)")
+	flag.StringVar(&outputDir, "output", "", "Output directory for HTML gallery pages")
+	flag.StringVar(&outputDir, "o", "", "Output directory for HTML gallery pages (shorthand)")
+
 	// Cache and source configuration
-	flag.StringVar(&cacheDir, "cache", "blur", "Cache directory for blurhash data")
-	flag.StringVar(&cacheDir, "c", "blur", "Cache directory for blurhash data (shorthand)")
-	flag.StringVar(&imageDir, "imagedir", "replicate/t2", "Source image directory")
-	flag.StringVar(&imageDir, "d", "replicate/t2", "Source image directory (shorthand)")
-	
+	flag.StringVar(&cacheDir, "cache", "", "Cache directory for blurhash data")
+	flag.StringVar(&cacheDir, "c", "", "Cache directory for blurhash data (shorthand)")
+	flag.StringVar(&imageDir, "imagedir", "", "Source image directory")
+	flag.StringVar(&imageDir, "d", "", "Source image directory (shorthand)")
+
 	// Gallery behavior configuration
-	flag.StringVar(&selectMode, "selectmode", "no", "Select mode for image interaction (default: no)")
-	flag.StringVar(&selectMode, "s", "no", "Select mode for image interaction (shorthand)")
-	
+	flag.StringVar(&selectMode, "selectmode", "", "Select mode for image interaction (default: no)")
+	flag.StringVar(&selectMode, "s", "", "Select mode for image interaction (shorthand)")
+
 	// Help flags
 	showHelp := flag.Bool("help", false, "Show help message")
 	showHelpShort := flag.Bool("h", false, "Show help message (shorthand)")
@@ -165,6 +161,8 @@ func main() {
 	// Display help information if requested
 	if *showHelp || *showHelpShort {
 		fmt.Fprintf(os.Stderr, "Usage: %s [options]\n", os.Args[0])
+		fmt.Fprintf(os.Stderr, "\nBatch mode (no arguments): Process all w-* galleries\n")
+		fmt.Fprintf(os.Stderr, "Single mode (with arguments): Process one directory\n")
 		fmt.Fprintf(os.Stderr, "\nOptions:\n")
 		flag.PrintDefaults()
 		os.Exit(0)
@@ -173,20 +171,184 @@ func main() {
 	// Initialize cache-busting timestamp (consistent across all generated pages)
 	timestampCache = time.Now().Unix()
 
-	// Ensure cache directory exists for storing blurhash and dimension data
-	if err := ensureCacheDir(); err != nil {
+	// Determine mode: batch (no arguments) or single (with arguments)
+	if allInputFile == "" && outputDir == "" && imageDir == "" {
+		// Batch mode: process all w-* directories
+		batchProcessAllGalleries()
+	} else {
+		// Single mode: process one directory
+		// Set defaults for single mode
+		if allInputFile == "" {
+			allInputFile = "all.input"
+		}
+		if outputDir == "" {
+			outputDir = "g"
+		}
+		if cacheDir == "" {
+			cacheDir = "blur"
+		}
+		if imageDir == "" {
+			imageDir = "replicate/t2"
+		}
+		if selectMode == "" {
+			selectMode = "no"
+		}
+
+		// Ensure cache directory exists for storing blurhash and dimension data
+		if err := ensureCacheDir(); err != nil {
+			fmt.Fprintf(os.Stderr, "Error creating cache directory: %v\n", err)
+			os.Exit(1)
+		}
+
+		// Load and parse the input file containing image identifiers
+		imageInfos, err := parseInputFile(allInputFile)
+		if err != nil {
+			fmt.Fprintf(os.Stderr, "Error parsing input file: %v\n", err)
+			os.Exit(1)
+		}
+
+		fmt.Fprintf(os.Stderr, "Found %d images to process\n", len(imageInfos))
+		processSingleGallery(imageInfos)
+	}
+}
+
+// batchProcessAllGalleries processes all w-* directories in pub/fm/ and generates galleries
+// This is equivalent to the 'just w-html' command
+func batchProcessAllGalleries() {
+	fmt.Fprintf(os.Stderr, "Batch mode: Processing all w-* galleries\n")
+
+	// Set defaults for batch mode
+	cacheDir = "tmp/blur"
+	selectMode = "navigate" // All galleries use navigate mode
+
+	// Ensure cache directory exists
+	if err := os.MkdirAll(cacheDir, 0755); err != nil {
 		fmt.Fprintf(os.Stderr, "Error creating cache directory: %v\n", err)
 		os.Exit(1)
 	}
 
-	// Load and parse the input file containing image identifiers
-	imageInfos, err := parseInputFile(allInputFile)
+	// Find all w-?? and w-??? directories in pub/fm/
+	sourceBase := "pub/fm"
+	entries, err := ioutil.ReadDir(sourceBase)
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error parsing input file: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Error reading %s: %v\n", sourceBase, err)
 		os.Exit(1)
 	}
 
-	fmt.Fprintf(os.Stderr, "Found %d images to process\n", len(imageInfos))
+	var wDirs []string
+	for _, entry := range entries {
+		if !entry.IsDir() {
+			continue
+		}
+		name := entry.Name()
+		// Match w-?? or w-???
+		if (len(name) == 4 && strings.HasPrefix(name, "w-")) ||
+			(len(name) == 5 && strings.HasPrefix(name, "w-")) {
+			wDirs = append(wDirs, name)
+		}
+	}
+
+	sort.Strings(wDirs)
+	fmt.Fprintf(os.Stderr, "Found %d w-* directories to process\n", len(wDirs))
+
+	// Process w-* directories in parallel with worker pool
+	numWorkers := 8
+	jobs := make(chan string, len(wDirs))
+	var wg sync.WaitGroup
+
+	// Launch master gallery processing in parallel
+	wg.Add(1)
+	go func() {
+		defer wg.Done()
+		fmt.Fprintf(os.Stderr, "\n[Master] === Generating master gallery at pub/w/g/ ===\n")
+
+		// Collect all PNG files from all w-* directories
+		var allImages []ImageInfo
+		for _, wDir := range wDirs {
+			wPath := filepath.Join(sourceBase, wDir)
+			pngFiles, err := filepath.Glob(filepath.Join(wPath, "*.png"))
+			if err != nil {
+				continue
+			}
+			for _, pngPath := range pngFiles {
+				// Store as relative path from sourceBase: w-01/filename.png
+				relPath, _ := filepath.Rel(sourceBase, pngPath)
+				allImages = append(allImages, ImageInfo{
+					Filename: relPath,
+				})
+			}
+		}
+
+		// Shuffle the images
+		for i := len(allImages) - 1; i > 0; i-- {
+			j := int(time.Now().UnixNano()) % (i + 1)
+			allImages[i], allImages[j] = allImages[j], allImages[i]
+		}
+
+		fmt.Fprintf(os.Stderr, "[Master] Found %d total images for master gallery\n", len(allImages))
+
+		if len(allImages) > 0 {
+			processGalleryWithPaths(allImages, sourceBase, "pub/w/g")
+		}
+	}()
+
+	// Launch workers for w-* directories
+	for w := 0; w < numWorkers; w++ {
+		wg.Add(1)
+		go func(workerID int) {
+			defer wg.Done()
+			for wDir := range jobs {
+				fmt.Fprintf(os.Stderr, "\n[Worker %d] === Processing %s ===\n", workerID, wDir)
+
+				imgDir := filepath.Join(sourceBase, wDir)
+				outDir := filepath.Join("pub/w", wDir)
+
+				// Get list of PNG files in this directory
+				pngFiles, err := filepath.Glob(filepath.Join(imgDir, "*.png"))
+				if err != nil {
+					fmt.Fprintf(os.Stderr, "[Worker %d] Error listing PNG files in %s: %v\n", workerID, wDir, err)
+					continue
+				}
+
+				// Extract basenames
+				var imageInfos []ImageInfo
+				for _, pngPath := range pngFiles {
+					basename := filepath.Base(pngPath)
+					imageInfos = append(imageInfos, ImageInfo{
+						Filename: basename,
+					})
+				}
+
+				// Sort by filename
+				sort.Slice(imageInfos, func(i, j int) bool {
+					return imageInfos[i].Filename < imageInfos[j].Filename
+				})
+
+				fmt.Fprintf(os.Stderr, "[Worker %d] Found %d images in %s\n", workerID, len(imageInfos), wDir)
+
+				if len(imageInfos) > 0 {
+					// Process this gallery with its own imageDir/outputDir
+					processGalleryWithPaths(imageInfos, imgDir, outDir)
+				}
+			}
+		}(w)
+	}
+
+	// Send all w-* directories to workers
+	for _, wDir := range wDirs {
+		jobs <- wDir
+	}
+	close(jobs)
+
+	// Wait for all workers (including master gallery) to finish
+	wg.Wait()
+
+	fmt.Fprintf(os.Stderr, "\n=== All galleries generated successfully! ===\n")
+}
+
+// processGalleryWithPaths processes a list of images with explicit paths (for parallel processing)
+func processGalleryWithPaths(imageInfos []ImageInfo, imgDir, outDir string) {
+	var err error
 
 	// Configure worker pool for parallel image processing
 	// Use all available CPU cores for optimal performance
@@ -194,8 +356,8 @@ func main() {
 	runtime.GOMAXPROCS(numWorkers)
 
 	// Set up channels for distributing work and collecting results
-	jobs := make(chan ImageInfo, len(imageInfos))    // Buffered channel for work distribution
-	results := make(chan Result, len(imageInfos))    // Buffered channel for result collection
+	jobs := make(chan ImageInfo, len(imageInfos))
+	results := make(chan Result, len(imageInfos))
 
 	// Synchronization primitive to wait for all workers to complete
 	var wg sync.WaitGroup
@@ -203,14 +365,95 @@ func main() {
 	// Launch worker goroutines for parallel processing
 	for w := 0; w < numWorkers; w++ {
 		wg.Add(1)
-		go worker(jobs, results, &wg)
+		go func() {
+			defer wg.Done()
+			for imageInfo := range jobs {
+				// Construct the full image path using imgDir
+				imagePath := filepath.Join(imgDir, imageInfo.Filename)
+
+				// Generate cache filenames
+				cacheFile := getHashedCacheFilename(imagePath, ".blur")
+				dimCacheFile := getHashedCacheFilename(imagePath, ".dim")
+
+				// Variables to store results
+				var blurmap string
+				var width, height int
+				var blurCached, dimCached bool
+
+				// Try to get blurhash from cache
+				blurmap, err := readFromCache(cacheFile)
+				if err == nil {
+					blurCached = true
+				} else {
+					blurCached = false
+				}
+
+				// Try to get dimensions from cache
+				dimData, err := readFromCache(dimCacheFile)
+				if err == nil {
+					_, err = fmt.Sscanf(dimData, "%d,%d", &width, &height)
+					if err == nil {
+						dimCached = true
+					}
+				}
+
+				// If either blurhash or dimensions weren't in cache, process the image
+				if !blurCached || !dimCached {
+					var processErr error
+
+					if !blurCached {
+						blurmap, width, height, processErr = generateBlurmap(imagePath)
+						if processErr != nil {
+							results <- Result{
+								Filename:  imageInfo.Filename,
+								Error:     processErr,
+								Cached:    false,
+								DimCached: false,
+							}
+							continue
+						}
+
+						if err := writeToCache(cacheFile, blurmap); err != nil {
+							fmt.Fprintf(os.Stderr, "Warning: Failed to write blurhash to cache for %s: %v\n", imageInfo.Filename, err)
+						}
+					}
+
+					if !dimCached {
+						if !blurCached {
+							dimCached = false
+						} else {
+							var dimErr error
+							width, height, dimErr = getImageDimensions(imagePath)
+							if dimErr != nil {
+								fmt.Fprintf(os.Stderr, "Warning: Failed to get dimensions for %s: %v\n", imageInfo.Filename, dimErr)
+								width, height = 0, 0
+							}
+						}
+
+						dimData := fmt.Sprintf("%d,%d", width, height)
+						if err := writeToCache(dimCacheFile, dimData); err != nil {
+							fmt.Fprintf(os.Stderr, "Warning: Failed to write dimensions to cache for %s: %v\n", imageInfo.Filename, err)
+						}
+					}
+				}
+
+				results <- Result{
+					Filename:  imageInfo.Filename,
+					Blurmap:   blurmap,
+					Width:     width,
+					Height:    height,
+					Cached:    blurCached,
+					DimCached: dimCached,
+				}
+			}
+		}()
 	}
 
 	// Distribute all image processing jobs to workers
 	for _, imageInfo := range imageInfos {
 		jobs <- imageInfo
 	}
-	close(jobs) // Signal no more jobs will be sent
+	close(jobs)
 
 	// Wait for all workers to finish and close results channel
 	go func() {
@@ -239,7 +482,6 @@ func main() {
 			continue
 		}
 
-		// Update the ImageInfo object directly
 		if info, found := imageInfoMap[result.Filename]; found {
 			info.Blurmap = result.Blurmap
 			info.Width = result.Width
@@ -254,7 +496,6 @@ func main() {
 			cachedDim++
 		}
 
-		// Output processing status every 1000 images
 		if processed%1000 == 0 {
 			fmt.Fprintf(os.Stderr, "Processed %d images, %d errors\n", processed, errors)
 		}
@@ -263,7 +504,6 @@ func main() {
 	fmt.Fprintf(os.Stderr, "Completed blur processing. Total: %d images processed, %d errors\n", processed, errors)
 	fmt.Fprintf(os.Stderr, "Cache stats: %d/%d blurhashes cached, %d/%d dimensions cached\n",
 		cachedBlur, processed, cachedDim, processed)
-	fmt.Fprintf(os.Stderr, "The blurmaps and dimensions have been saved to the %s directory\n", cacheDir)
 
 	// Create a valid list of ImageInfo - only those with blurmap
 	var validImages []ImageInfo
@@ -273,23 +513,18 @@ func main() {
 		}
 	}
 
-	// Sort images by filename
-	//sort.Slice(validImages, func(i, j int) bool {
-	//	return validImages[i].Filename < validImages[j].Filename
-	//})
-
 	// Calculate number of chunks needed
 	totalImages := len(validImages)
-	numChunks := (totalImages + chunkSize - 1) / chunkSize // Ceiling division
+	numChunks := (totalImages + chunkSize - 1) / chunkSize
 
 	fmt.Fprintf(os.Stderr, "Generating %d chunks with %d images per chunk (total: %d images)\n",
 		numChunks, chunkSize, totalImages)
 
 	// Create the output directory structure
-	err = os.MkdirAll(outputDir, 0755)
+	err = os.MkdirAll(outDir, 0755)
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error creating output directory: %v\n", err)
-		os.Exit(1)
+		return
 	}
 
 	// Generate chunked HTML files
@@ -300,30 +535,28 @@ func main() {
 			end = totalImages
 		}
 
-		// Create directory for this chunk
-		chunkDir := filepath.Join(outputDir, strconv.Itoa(chunkNum))
+		chunkDir := filepath.Join(outDir, strconv.Itoa(chunkNum))
 		err = os.MkdirAll(chunkDir, 0755)
 		if err != nil {
 			fmt.Fprintf(os.Stderr, "Error creating chunk directory %s: %v\n", chunkDir, err)
 			continue
 		}
 
-		// Generate HTML for this chunk
 		chunkImages := validImages[start:end]
 		outputPath := fmt.Sprintf("%s/index.html", chunkDir)
 
 		fmt.Fprintf(os.Stderr, "Generating chunk %d (%d images) to %s...\n",
 			chunkNum, len(chunkImages), outputPath)
 
-		err = generateChunkHTML(chunkImages, outputPath, numChunks)
+		err = generateChunkHTMLWithPaths(chunkImages, outputPath, numChunks, imgDir)
 		if err != nil {
 			fmt.Fprintf(os.Stderr, "Error generating HTML for chunk %d: %v\n", chunkNum, err)
 		}
 	}
 
-	// Create an index.html in the g directory that links to all chunks
+	// Create main index.html
 	fmt.Fprintf(os.Stderr, "Creating main index.html...\n")
-	err = generateMainIndex(numChunks, totalImages)
+	err = generateMainIndex(numChunks, totalImages, outDir)
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error generating main index: %v\n", err)
 	}
@@ -331,99 +564,9 @@ func main() {
 	fmt.Fprintf(os.Stderr, "All chunks generated successfully!\n")
 }
 
-// Removed printWithBlurhash function as per requirements
-
-// worker processes images concurrently
-func worker(jobs <-chan ImageInfo, results chan<- Result, wg *sync.WaitGroup) {
-	defer wg.Done()
-
-	for imageInfo := range jobs {
-		// Construct the full image path
-		imagePath := filepath.Join(imageDir, imageInfo.Filename)
-
-		// Generate cache filenames
-		cacheFile := getCacheFilename(imagePath)
-		dimCacheFile := getDimensionsCacheFilename(imagePath)
-
-		// Variables to store results
-		var blurmap string
-		var width, height int
-		var blurCached, dimCached bool
-
-		// Try to get blurhash from cache
-		blurmap, err := readFromCache(cacheFile)
-		if err == nil {
-			blurCached = true
-		} else {
-			blurCached = false
-		}
-
-		// Try to get dimensions from cache
-		dimData, err := readFromCache(dimCacheFile)
-		if err == nil {
-			// Parse dimensions from cache
-			_, err = fmt.Sscanf(dimData, "%d,%d", &width, &height)
-			if err == nil {
-				dimCached = true
-			}
-		}
-
-		// If either blurhash or dimensions weren't in cache, process the image
-		if !blurCached || !dimCached {
-			var processErr error
-
-			if !blurCached {
-				// Generate new blurhash and get dimensions
-				blurmap, width, height, processErr = generateBlurmap(imagePath)
-				if processErr != nil {
-					results <- Result{
-						Filename:  imageInfo.Filename,
-						Error:     processErr,
-						Cached:    false,
-						DimCached: false,
-					}
-					continue
-				}
-
-				// Save blurhash to cache
-				if err := writeToCache(cacheFile, blurmap); err != nil {
-					fmt.Fprintf(os.Stderr, "Warning: Failed to write blurhash to cache for %s: %v\n", imageInfo.Filename, err)
-				}
-			}
-
-			if !dimCached {
-				// If we didn't get dimensions from blurhash generation, read them now
-				if !blurCached {
-					// Already got dimensions from generateBlurmap
-					dimCached = false
-				} else {
-					// Need to get dimensions separately
-					var dimErr error
-					width, height, dimErr = getImageDimensions(imagePath)
-					if dimErr != nil {
-						fmt.Fprintf(os.Stderr, "Warning: Failed to get dimensions for %s: %v\n", imageInfo.Filename, dimErr)
-						width, height = 0, 0
-					}
-				}
-
-				// Save dimensions to cache
-				dimData := fmt.Sprintf("%d,%d", width, height)
-				if err := writeToCache(dimCacheFile, dimData); err != nil {
-					fmt.Fprintf(os.Stderr, "Warning: Failed to write dimensions to cache for %s: %v\n", imageInfo.Filename, err)
-				}
-			}
-		}
-
-		// Send result with all data
-		results <- Result{
-			Filename:  imageInfo.Filename,
-			Blurmap:   blurmap,
-			Width:     width,
-			Height:    height,
-			Cached:    blurCached,
-			DimCached: dimCached,
-		}
-	}
+// processSingleGallery processes a list of images and generates the gallery HTML (uses global vars)
+func processSingleGallery(imageInfos []ImageInfo) {
+	processGalleryWithPaths(imageInfos, imageDir, outputDir)
 }
 
 // parseInputFile parses the all.input file containing image identifiers
@@ -465,14 +608,21 @@ func parseInputFile(filePath string) ([]ImageInfo, error) {
 	return imageInfos, nil
 }
 
-// generateChunkHTML creates an HTML file for a chunk of images
-// It now uses the inline galleryTemplate instead of an external file
-func generateChunkHTML(imageInfos []ImageInfo, outputPath string, totalChunks int) error {
+// generateChunkHTMLWithPaths creates HTML with explicit imgDir parameter
+func generateChunkHTMLWithPaths(imageInfos []ImageInfo, outputPath string, totalChunks int, imgDir string) error {
 	// Extract chunk number from path
-	chunkNum := strings.Split(outputPath, "/")[1]
+	chunkNum := strings.Split(outputPath, "/")[len(strings.Split(outputPath, "/"))-2]
 
-	// Format the template with proper values
-	templateStr := fmt.Sprintf(galleryTemplate, totalChunks, chunkNum, timestampCache, imageDir, selectMode)
+	// Convert selectMode to click.mode for new gallery system
+	clickMode := "toggle"
+	if selectMode == "yes" {
+		clickMode = "select"
+	} else if selectMode == "W-gallery" || selectMode == "navigate" {
+		clickMode = "navigate"
+	}
+
+	// Format the template with proper values (no timestampCache)
+	templateStr := fmt.Sprintf(galleryTemplate, totalChunks, chunkNum, imgDir, clickMode)
 
 	// Generate the blurhashIndex map
 	var blurhashMap strings.Builder
@@ -510,225 +660,16 @@ func generateChunkHTML(imageInfos []ImageInfo, outputPath string, totalChunks in
 		blurhashMap.WriteString("\n")
 	}
 
-	blurhashMap.WriteString("};\n")
+	blurhashMap.WriteString("};\n\n")
 
-	// Combine the JavaScript content with global variable definitions to fix errors
-	var jsContent strings.Builder
+	// Generate window.images array from blurhashIndex
+	blurhashMap.WriteString("window.images = Object.keys(window.blurhashIndex).map(filename => ({\n")
+	blurhashMap.WriteString("  filename,\n")
+	blurhashMap.WriteString("  width: window.blurhashIndex[filename].width,\n")
+	blurhashMap.WriteString("  height: window.blurhashIndex[filename].height\n")
+	blurhashMap.WriteString("}));\n")
 
-	// Define required global variables to avoid "is not defined" errors
-	jsContent.WriteString("// Define global variables for gallery.js\n")
-	jsContent.WriteString("window.numColumns = Math.floor(window.innerWidth / 300);\n")
-	jsContent.WriteString("window.images = [];\n\n")
-
-	// Add the blurhash index
-	jsContent.WriteString(blurhashMap.String())
-
-	// Generate the images array from the blurhashIndex keys
-	jsContent.WriteString("\n// Generate images array from blurhashIndex\n")
-	jsContent.WriteString("window.images = Object.keys(window.blurhashIndex)\n")
-	jsContent.WriteString("  .map(filename => ({\n")
-	jsContent.WriteString("    filename, \n")
-	jsContent.WriteString("    width: window.blurhashIndex[filename].width,\n")
-	jsContent.WriteString("    height: window.blurhashIndex[filename].height\n")
-	jsContent.WriteString("  }));\n\n")
-
-	// Add proper Fisher-Yates shuffle for randomization
-	jsContent.WriteString("// Randomize array with Fisher-Yates shuffle\n")
-	jsContent.WriteString("for (let i = window.images.length - 1; i > 0; i--) {\n")
-	jsContent.WriteString("  const j = Math.floor(Math.random() * (i + 1));\n")
-	jsContent.WriteString("  [window.images[i], window.images[j]] = [window.images[j], window.images[i]];\n")
-	jsContent.WriteString("}\n\n")
-
-	// Parse chunk numbers
-	chunkNumInt, _ := strconv.Atoi(chunkNum)
-	prevChunk := chunkNumInt - 1
-	nextChunk := chunkNumInt + 1
-
-	// Add navigation between chunks with image position tracking
-	jsContent.WriteString("// Function to track image positions and visibility\n")
-	jsContent.WriteString("let imagePositions = [];\n")
-	jsContent.WriteString("let currentVisibleImageIndex = 0;\n")
-
-	// Track image positions
-	jsContent.WriteString("function calculateImagePositions() {\n")
-	jsContent.WriteString("  const allImages = Array.from(document.querySelectorAll('img'));\n")
-	jsContent.WriteString("  \n")
-	jsContent.WriteString("  // Sort images by their vertical position\n")
-	jsContent.WriteString("  imagePositions = allImages.map((img, originalIndex) => {\n")
-	jsContent.WriteString("    const rect = img.getBoundingClientRect();\n")
-	jsContent.WriteString("    const absoluteTop = rect.top + window.pageYOffset;\n")
-	jsContent.WriteString("    return {\n")
-	jsContent.WriteString("      element: img,\n")
-	jsContent.WriteString("      originalIndex,\n")
-	jsContent.WriteString("      top: absoluteTop,\n")
-	jsContent.WriteString("      bottom: absoluteTop + rect.height,\n")
-	jsContent.WriteString("      filename: img.dataset.filename || ''\n")
-	jsContent.WriteString("    };\n")
-	jsContent.WriteString("  });\n")
-
-	jsContent.WriteString("  // Sort by vertical position (top to bottom)\n")
-	jsContent.WriteString("  imagePositions.sort((a, b) => a.top - b.top);\n")
-
-	jsContent.WriteString("  // Assign sequential position numbers\n")
-	jsContent.WriteString("  imagePositions.forEach((img, index) => { img.positionIndex = index + 1; });\n")
-	jsContent.WriteString("  \n")
-	jsContent.WriteString("  console.log(`Calculated positions for ${imagePositions.length} images`);\n")
-	jsContent.WriteString("  return imagePositions;\n")
-	jsContent.WriteString("}\n")
-
-	// Track fully visible images
-	jsContent.WriteString("function updateVisibleImageIndex() {\n")
-	jsContent.WriteString("  if (!imagePositions.length) calculateImagePositions();\n")
-
-	jsContent.WriteString("  // Find highest number fully visible image\n")
-	jsContent.WriteString("  let highestVisibleIndex = 0;\n")
-	jsContent.WriteString("  const viewportTop = window.pageYOffset;\n")
-	jsContent.WriteString("  const viewportBottom = viewportTop + window.innerHeight;\n")
-
-	jsContent.WriteString("  // Check each image position\n")
-	jsContent.WriteString("  imagePositions.forEach(img => {\n")
-	jsContent.WriteString("    // Check if fully visible (image top and bottom are within viewport)\n")
-	jsContent.WriteString("    if (img.top >= viewportTop && img.bottom <= viewportBottom) {\n")
-	jsContent.WriteString("      highestVisibleIndex = Math.max(highestVisibleIndex, img.positionIndex);\n")
-	jsContent.WriteString("    }\n")
-	jsContent.WriteString("  });\n")
-
-	jsContent.WriteString("  // Update the current image index if changed\n")
-	jsContent.WriteString("  if (highestVisibleIndex !== currentVisibleImageIndex) {\n")
-	jsContent.WriteString("    currentVisibleImageIndex = highestVisibleIndex;\n")
-	jsContent.WriteString("    updateNavigationDisplay();\n")
-	jsContent.WriteString("  }\n")
-	jsContent.WriteString("}\n")
-
-	// Update the navigation display
-	jsContent.WriteString("function updateNavigationDisplay() {\n")
-	jsContent.WriteString("  const imageInfoDisplay = document.getElementById('current-image-info');\n")
-	jsContent.WriteString("  if (!imageInfoDisplay) return;\n")
-
-	jsContent.WriteString("  if (currentVisibleImageIndex > 0 && currentVisibleImageIndex <= imagePositions.length) {\n")
-	jsContent.WriteString("    const currentImage = imagePositions[currentVisibleImageIndex - 1];\n")
-	jsContent.WriteString("    imageInfoDisplay.textContent = `${currentVisibleImageIndex}/${imagePositions.length}`;\n")
-	jsContent.WriteString("    imageInfoDisplay.title = currentImage.filename || '';\n")
-	jsContent.WriteString("  } else {\n")
-	jsContent.WriteString("    imageInfoDisplay.textContent = `-/${imagePositions.length || 0}`;\n")
-	jsContent.WriteString("  }\n")
-	jsContent.WriteString("}\n")
-
-	// Add navigation links
-	jsContent.WriteString("document.addEventListener('DOMContentLoaded', () => {\n")
-	jsContent.WriteString("  // Create the navigation container\n")
-	jsContent.WriteString("  const nav = document.createElement('div');\n")
-	jsContent.WriteString("  nav.className = 'chunk-nav';\n")
-	jsContent.WriteString("  nav.style.cssText = 'position:fixed;bottom:10px;right:10px;background:rgba(0,0,0,0.7);color:white;padding:10px;border-radius:5px;z-index:1000;display:flex;gap:10px;align-items:center;';\n")
-
-	// Add prev link if not the first chunk
-	if chunkNumInt > 1 {
-		jsContent.WriteString("  const prevLink = document.createElement('a');\n")
-		jsContent.WriteString("  prevLink.href = '../" + strconv.Itoa(prevChunk) + "/';\n")
-		jsContent.WriteString("  prevLink.style.cssText = 'color:white;text-decoration:none;font-weight:bold;font-size:24px;';\n")
-		jsContent.WriteString("  prevLink.textContent = '<';\n")
-		jsContent.WriteString("  nav.appendChild(prevLink);\n")
-	} else {
-		// Add disabled prev link
-		jsContent.WriteString("  const prevLink = document.createElement('span');\n")
-		jsContent.WriteString("  prevLink.style.cssText = 'color:#555;font-weight:bold;font-size:24px;';\n")
-		jsContent.WriteString("  prevLink.textContent = '<';\n")
-		jsContent.WriteString("  nav.appendChild(prevLink);\n")
-	}
-
-	// Add chunk indicator - just the number
-	jsContent.WriteString("  const chunkIndicator = document.createElement('span');\n")
-	jsContent.WriteString("  chunkIndicator.textContent = '" + chunkNum + "';\n")
-	jsContent.WriteString("  chunkIndicator.style.margin = '0 5px';\n")
-	jsContent.WriteString("  nav.appendChild(chunkIndicator);\n")
-
-	// Add next link - for last chunk, it loops back to gallery 1
-	if chunkNumInt < totalChunks {
-		jsContent.WriteString("  const nextLink = document.createElement('a');\n")
-		jsContent.WriteString("  nextLink.href = '../" + strconv.Itoa(nextChunk) + "/';\n")
-		jsContent.WriteString("  nextLink.style.cssText = 'color:white;text-decoration:none;font-weight:bold;font-size:24px;';\n")
-		jsContent.WriteString("  nextLink.textContent = '>';\n")
-		jsContent.WriteString("  nav.appendChild(nextLink);\n")
-	} else {
-		// Add next link that goes back to gallery 1
-		jsContent.WriteString("  const nextLink = document.createElement('a');\n")
-		jsContent.WriteString("  nextLink.href = '../1/';\n")
-		jsContent.WriteString("  nextLink.style.cssText = 'color:white;text-decoration:none;font-weight:bold;font-size:24px;';\n")
-		jsContent.WriteString("  nextLink.textContent = '>';\n")
-		jsContent.WriteString("  nav.appendChild(nextLink);\n")
-	}
-
-	// Add current image position display
-	jsContent.WriteString("  // Add image position indicator\n")
-	jsContent.WriteString("  const imageInfoDisplay = document.createElement('span');\n")
-	jsContent.WriteString("  imageInfoDisplay.id = 'current-image-info';\n")
-	jsContent.WriteString("  imageInfoDisplay.style.cssText = 'margin-left:15px;font-size:14px;background:rgba(0,0,0,0.5);padding:2px 6px;border-radius:3px;';\n")
-	jsContent.WriteString("  imageInfoDisplay.textContent = '-/-';\n")
-	jsContent.WriteString("  nav.appendChild(imageInfoDisplay);\n")
-
-	jsContent.WriteString("  document.body.appendChild(nav);\n")
-
-	// Calculate initial positions and set up scroll listener
-	jsContent.WriteString("  // Calculate image positions after all images are loaded\n")
-	jsContent.WriteString("  window.addEventListener('load', () => {\n")
-	jsContent.WriteString("    setTimeout(() => { // Small delay to ensure all images have rendered\n")
-	jsContent.WriteString("      calculateImagePositions();\n")
-	jsContent.WriteString("      updateVisibleImageIndex();\n")
-	jsContent.WriteString("    }, 500);\n")
-	jsContent.WriteString("  });\n")
-
-	// Update position on scroll
-	jsContent.WriteString("  // Update the visible image index on scroll\n")
-	jsContent.WriteString("  window.addEventListener('scroll', () => {\n")
-	jsContent.WriteString("    requestAnimationFrame(updateVisibleImageIndex);\n")
-	jsContent.WriteString("  });\n")
-
-	// Recalculate on window resize
-	jsContent.WriteString("  // Recalculate positions on window resize\n")
-	jsContent.WriteString("  let resizeTimer;\n")
-	jsContent.WriteString("  window.addEventListener('resize', () => {\n")
-	jsContent.WriteString("    clearTimeout(resizeTimer);\n")
-	jsContent.WriteString("    resizeTimer = setTimeout(() => {\n")
-	jsContent.WriteString("      calculateImagePositions();\n")
-	jsContent.WriteString("      updateVisibleImageIndex();\n")
-	jsContent.WriteString("    }, 300);\n")
-	jsContent.WriteString("  });\n")
-
-	// Add keyboard navigation
-	jsContent.WriteString("\n  // Add keyboard navigation\n")
-	jsContent.WriteString("  document.addEventListener('keydown', (e) => {\n")
-
-	// Left arrow
-	jsContent.WriteString("    if (e.key === 'ArrowLeft' || e.key === 'a' || e.key === 'A') {\n")
-	if chunkNumInt > 1 {
-		jsContent.WriteString("      window.location.href = '../" + strconv.Itoa(prevChunk) + "/';\n")
-	} else {
-		jsContent.WriteString("      console.log('At first chunk');\n")
-	}
-	jsContent.WriteString("    }\n")
-
-	// Right arrow - for last chunk, it loops back to gallery 1
-	jsContent.WriteString("    if (e.key === 'ArrowRight' || e.key === 'd' || e.key === 'D') {\n")
-	if chunkNumInt < totalChunks {
-		jsContent.WriteString("      window.location.href = '../" + strconv.Itoa(nextChunk) + "/';\n")
-	} else {
-		jsContent.WriteString("      window.location.href = '../1/';\n")
-	}
-	jsContent.WriteString("    }\n")
-
-	jsContent.WriteString("  });\n")
-
-	// Autoscrolling functionality has been removed
-	if chunkNumInt < totalChunks {
-		jsContent.WriteString("\n  // Autoscrolling functionality has been removed\n")
-	}
-	jsContent.WriteString("});\n")
-
-	// Replace the appropriate part in the HTML template
-	var modifiedTemplate string
-
-	// Simply replace the INSERT placeholder with our JavaScript content
-	modifiedTemplate = strings.Replace(templateStr, "// INSERT", jsContent.String(), 1)
+	modifiedTemplate := strings.Replace(templateStr, "// INSERT", blurhashMap.String(), 1)
 
 	// Write the complete HTML to the output file
 	err := ioutil.WriteFile(outputPath, []byte(modifiedTemplate), 0644)
@@ -737,6 +678,11 @@ func generateChunkHTML(imageInfos []ImageInfo, outputPath string, totalChunks in
 	}
 
 	return nil
+}
+
+// generateChunkHTML creates HTML using global imageDir variable (for backward compatibility)
+func generateChunkHTML(imageInfos []ImageInfo, outputPath string, totalChunks int) error {
+	return generateChunkHTMLWithPaths(imageInfos, outputPath, totalChunks, imageDir)
 }
 
 func ensureCacheDir() error {
@@ -778,7 +724,7 @@ func writeToCache(cacheFile string, blurmap string) error {
 }
 
 // generateMainIndex creates a main index.html file that randomly redirects to one of the galleries
-func generateMainIndex(numChunks int, totalImages int) error {
+func generateMainIndex(numChunks int, totalImages int, outDir string) error {
 	// Create HTML content that randomly redirects to one of the galleries
 	var content strings.Builder
 
@@ -810,7 +756,7 @@ func generateMainIndex(numChunks int, totalImages int) error {
 	content.WriteString("</html>\n")
 
 	// Write the index file
-	indexPath := filepath.Join(outputDir, "index.html")
+	indexPath := filepath.Join(outDir, "index.html")
 	return ioutil.WriteFile(indexPath, []byte(content.String()), 0644)
 }
 
