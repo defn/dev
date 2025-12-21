@@ -120,34 +120,6 @@ download-user file n="4":
 html file="following.txt" n="40":
     cat {{ file }} | runmany {{ n }} 'just process js-username-$1.json.js.json || true; go run . -s yes -c tmp/blur -d thumbs -o tmp/g/js-username-$1.json.js.json.input -i <(cat js-username-$1.json.js.json.input | sort)'
 
-# Generate gallery HTML pages for all w-* projects
-# Run from project root: just w-html
-#
-# Architecture:
-#   Input:  pub/fm/w-*/  - Directories with merged template+input images (e.g. w-02-{uuid}.png)
-#           pub/fm/W/    - Template images (base UUIDs)
-#           pub/fm/w-*.png - Input images for each project
-#   Output: pub/w/w-*/*/index.html - NEW modular gallery pages (uses /gallery/index.js)
-#           pub/w/g/     - Master shuffled gallery of all images
-#
-# Process:
-#   1. For each w-* directory: run blurmap.go to generate blurhash data and HTML galleries
-#      - Generates paginated galleries (500 images per page)
-#      - Creates index.html with new modular gallery system
-#      - Caches blurhash data in tmp/blur/ for performance
-#   2. Generate master gallery in pub/w/g/ with shuffled images from all w-* directories
-#   3. Post-process index.html to set click.mode="navigate" (enables navigation to pub/W/ pages)
-#
-# Gallery System:
-#   New (/gallery/index.js):   Uses window.galleryConfig with modular ES6 architecture
-#                              Features: lazy loading, autoscroll, blurhash, responsive layout
-#                              Modes: toggle, select, navigate (navigate enables W-gallery linking)
-w-html:
-    for a in $(cd pub/fm && ls -d w-?? w-???); do go run . -s no -d pub/fm/$a -c tmp/blur -o pub/w/$a -i <(cd pub/fm/$a && ls -d *.png | cut -d. -f1 | sort); done
-    go run . -s no -d pub/fm -c tmp/blur -o pub/w/g -i <(cd pub/fm && find w-?? w-??? -name '*.png' | cut -d. -f1 | sort | shuf)
-    # Post-process modular gallery HTML files to change mode from "toggle" to "navigate"
-    find pub/w -name index.html -type f | runmany 8 "echo \$1; sed -i 's/mode: .toggle./mode: \"navigate\"/g' \$1"
-
 # Start backup process in screen session
 # Syncs replicate directory to remote storage with configurable transfer threads
 backup transfers="60":
