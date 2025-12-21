@@ -171,9 +171,12 @@ func main() {
 	// Initialize cache-busting timestamp (consistent across all generated pages)
 	timestampCache = time.Now().Unix()
 
-	// Determine mode: batch (no arguments) or single (with arguments)
-	if allInputFile == "" && outputDir == "" && imageDir == "" {
-		// Batch mode: process all w-* directories
+	// Determine mode: batch (no arguments and no all.input) or single (with arguments or all.input exists)
+	// Check if all.input exists for backward compatibility with 'just gallery'
+	_, allInputExists := os.Stat("all.input")
+
+	if allInputFile == "" && outputDir == "" && imageDir == "" && allInputExists != nil {
+		// Batch mode: no arguments and no all.input file
 		batchProcessAllGalleries()
 	} else {
 		// Single mode: process one directory
