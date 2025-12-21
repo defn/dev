@@ -256,6 +256,13 @@ func batchProcessAllGalleries() {
 	jobs := make(chan string, len(wDirs))
 	var wg sync.WaitGroup
 
+	// Launch per-W gallery processing in parallel
+	wg.Add(1)
+	go func() {
+		defer wg.Done()
+		generatePerWGalleries(sourceBase)
+	}()
+
 	// Launch master gallery processing in parallel
 	wg.Add(1)
 	go func() {
@@ -567,6 +574,152 @@ func processGalleryWithPaths(imageInfos []ImageInfo, imgDir, outDir string) {
 // processSingleGallery processes a list of images and generates the gallery HTML (uses global vars)
 func processSingleGallery(imageInfos []ImageInfo) {
 	processGalleryWithPaths(imageInfos, imageDir, outputDir)
+}
+
+// generatePerWGalleries creates per-template galleries (equivalent to per-W.sh)
+// For each template in pub/fm/W/, creates pub/W/UUID.html showing all variants
+// Also creates pub/W.html master index with clickable thumbnails
+func generatePerWGalleries(sourceBase string) {
+	fmt.Fprintf(os.Stderr, "\n[Per-W] === Generating per-template galleries ===\n")
+
+	// Find all template files in pub/fm/W/
+	wDir := filepath.Join(sourceBase, "W")
+	files, err := ioutil.ReadDir(wDir)
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "[Per-W] Error reading %s: %v\n", wDir, err)
+		return
+	}
+
+	var templateFiles []string
+	for _, file := range files {
+		if !file.IsDir() {
+			templateFiles = append(templateFiles, file.Name())
+		}
+	}
+
+	sort.Strings(templateFiles)
+	fmt.Fprintf(os.Stderr, "[Per-W] Found %d template files\n", len(templateFiles))
+
+	// Create output directory
+	if err := os.MkdirAll("pub/W", 0755); err != nil {
+		fmt.Fprintf(os.Stderr, "[Per-W] Error creating pub/W: %v\n", err)
+		return
+	}
+
+	// Process templates in parallel (8 workers)
+	numWorkers := 8
+	jobs := make(chan string, len(templateFiles))
+	thumbnails := make(chan string, len(templateFiles))
+	var wg sync.WaitGroup
+
+	// Launch workers
+	for w := 0; w < numWorkers; w++ {
+		wg.Add(1)
+		go func(workerID int) {
+			defer wg.Done()
+			for templateFile := range jobs {
+				thumbnail := generatePerWPage(sourceBase, templateFile)
+				thumbnails <- thumbnail
+			}
+		}(w)
+	}
+
+	// Send all template files to workers
+	for _, templateFile := range templateFiles {
+		jobs <- templateFile
+	}
+	close(jobs)
+
+	// Wait for all workers to finish
+	go func() {
+		wg.Wait()
+		close(thumbnails)
+	}()
+
+	// Collect thumbnails for master index
+	var masterIndex strings.Builder
+	for thumbnail := range thumbnails {
+		masterIndex.WriteString(thumbnail)
+		masterIndex.WriteString("\n")
+	}
+
+	// Write master index file
+	if err := ioutil.WriteFile("pub/W.html", []byte(masterIndex.String()), 0644); err != nil {
+		fmt.Fprintf(os.Stderr, "[Per-W] Error writing pub/W.html: %v\n", err)
+	}
+
+	fmt.Fprintf(os.Stderr, "[Per-W] Generated pub/W.html and %d detail pages\n", len(templateFiles))
+}
+
+// generatePerWPage creates a detail page for a single template file
+// Returns the thumbnail HTML for the master index
+func generatePerWPage(sourceBase, templateFile string) string {
+	// Find all variant images across w-* directories
+	pattern := filepath.Join(sourceBase, "w-*", "*-"+templateFile)
+	variants, err := filepath.Glob(pattern)
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "[Per-W] Error finding variants for %s: %v\n", templateFile, err)
+		return ""
+	}
+
+	sort.Strings(variants)
+
+	// Generate detail page HTML
+	var detailPage strings.Builder
+	detailPage.WriteString(`<!DOCTYPE html>
+  <html>
+  <head>
+    <title>Gallery</title>
+  </head>
+  <body>
+    <div id="gallery-container"></div>
+    <script>
+    function generateGalleryImageTag(imageSrc) {
+      try {
+        const urlObj = new URL(window.location.href);
+        const pageParam = urlObj.searchParams.get('page');
+        if (!pageParam) {
+          throw new Error('Missing page parameter');
+        }
+        const anchor = urlObj.hash.replace('#', '');
+        if (!anchor) {
+          throw new Error('Missing anchor fragment');
+        }
+        const imageSrcMatch = imageSrc.match(/\/w-(\d+)\//);
+        if (!imageSrcMatch) {
+          throw new Error('Invalid imageSrc format - missing w-NN directory');
+        }
+        const wPrefix = ` + "`w-${imageSrcMatch[1]}`" + `;
+        const uuid = anchor.replace(/^w-\d+-/, '');
+        const galleryPath = ` + "`../w/${wPrefix}/${pageParam}/#${wPrefix}-${uuid}`" + `;
+        return ` + "`<a href=\"${galleryPath}\"><img src=\"${imageSrc}\"></a>`" + `;
+      } catch (error) {
+        console.error('Error generating gallery image tag:', error.message);
+        return ` + "`<img src=\"${imageSrc}\">`" + `;
+      }
+    }
+`)
+
+	// Add JavaScript lines to populate gallery
+	for _, variant := range variants {
+		// Convert absolute path to relative path from pub/W/
+		relPath, _ := filepath.Rel("pub", variant)
+		detailPage.WriteString(fmt.Sprintf("    document.getElementById('gallery-container').innerHTML += generateGalleryImageTag('../%s');\n", relPath))
+	}
+
+	detailPage.WriteString(`    </script>
+  </body>
+  </html>
+`)
+
+	// Write detail page
+	detailPath := filepath.Join("pub/W", templateFile+".html")
+	if err := ioutil.WriteFile(detailPath, []byte(detailPage.String()), 0644); err != nil {
+		fmt.Fprintf(os.Stderr, "[Per-W] Error writing %s: %v\n", detailPath, err)
+	}
+
+	// Return thumbnail HTML for master index
+	return fmt.Sprintf("<a href=\"W/%s.html\"><img src=\"fm/W/%s\"></a>", templateFile, templateFile)
 }
 
 // parseInputFile parses the all.input file containing image identifiers
