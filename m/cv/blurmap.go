@@ -153,6 +153,10 @@ func main() {
 	flag.StringVar(&selectMode, "selectmode", "", "Select mode for image interaction (default: no)")
 	flag.StringVar(&selectMode, "s", "", "Select mode for image interaction (shorthand)")
 
+	// Mode configuration
+	mode := flag.String("mode", "", "Operating mode: gallery, html, or batch")
+	mode = flag.String("m", "", "Operating mode (shorthand): gallery, html, or batch")
+
 	// Help flags
 	showHelp := flag.Bool("help", false, "Show help message")
 	showHelpShort := flag.Bool("h", false, "Show help message (shorthand)")
@@ -160,9 +164,11 @@ func main() {
 
 	// Display help information if requested
 	if *showHelp || *showHelpShort {
-		fmt.Fprintf(os.Stderr, "Usage: %s [options]\n", os.Args[0])
-		fmt.Fprintf(os.Stderr, "\nBatch mode (no arguments): Process all w-* galleries\n")
-		fmt.Fprintf(os.Stderr, "Single mode (with arguments): Process one directory\n")
+		fmt.Fprintf(os.Stderr, "Usage: %s -mode <gallery|html|batch> [options]\n", os.Args[0])
+		fmt.Fprintf(os.Stderr, "\nModes:\n")
+		fmt.Fprintf(os.Stderr, "  gallery  - Generate main gallery from all.input (default settings)\n")
+		fmt.Fprintf(os.Stderr, "  html     - Generate per-user gallery with select mode\n")
+		fmt.Fprintf(os.Stderr, "  batch    - Process all w-* galleries in batch\n")
 		fmt.Fprintf(os.Stderr, "\nOptions:\n")
 		flag.PrintDefaults()
 		os.Exit(0)
@@ -171,16 +177,14 @@ func main() {
 	// Initialize cache-busting timestamp (consistent across all generated pages)
 	timestampCache = time.Now().Unix()
 
-	// Determine mode: batch (no arguments and no all.input) or single (with arguments or all.input exists)
-	// Check if all.input exists for backward compatibility with 'just gallery'
-	_, allInputExists := os.Stat("all.input")
-
-	if allInputFile == "" && outputDir == "" && imageDir == "" && allInputExists != nil {
-		// Batch mode: no arguments and no all.input file
+	// Process based on explicit mode
+	switch *mode {
+	case "batch":
+		// Batch mode: process all w-* galleries
 		batchProcessAllGalleries()
-	} else {
-		// Single mode: process one directory
-		// Set defaults for single mode
+
+	case "gallery":
+		// Gallery mode: main gallery from all.input
 		if allInputFile == "" {
 			allInputFile = "all.input"
 		}
@@ -212,6 +216,48 @@ func main() {
 
 		fmt.Fprintf(os.Stderr, "Found %d images to process\n", len(imageInfos))
 		processSingleGallery(imageInfos)
+
+	case "html":
+		// HTML mode: per-user galleries with explicit settings
+		// All parameters must be provided explicitly
+		if allInputFile == "" {
+			fmt.Fprintf(os.Stderr, "Error: -input required for html mode\n")
+			os.Exit(1)
+		}
+		if outputDir == "" {
+			fmt.Fprintf(os.Stderr, "Error: -output required for html mode\n")
+			os.Exit(1)
+		}
+		if cacheDir == "" {
+			cacheDir = "tmp/blur"
+		}
+		if imageDir == "" {
+			imageDir = "thumbs"
+		}
+		if selectMode == "" {
+			selectMode = "yes"
+		}
+
+		// Ensure cache directory exists for storing blurhash and dimension data
+		if err := ensureCacheDir(); err != nil {
+			fmt.Fprintf(os.Stderr, "Error creating cache directory: %v\n", err)
+			os.Exit(1)
+		}
+
+		// Load and parse the input file containing image identifiers
+		imageInfos, err := parseInputFile(allInputFile)
+		if err != nil {
+			fmt.Fprintf(os.Stderr, "Error parsing input file: %v\n", err)
+			os.Exit(1)
+		}
+
+		fmt.Fprintf(os.Stderr, "Found %d images to process\n", len(imageInfos))
+		processSingleGallery(imageInfos)
+
+	default:
+		fmt.Fprintf(os.Stderr, "Error: -mode must be specified as 'gallery', 'html', or 'batch'\n")
+		fmt.Fprintf(os.Stderr, "Run with -help for usage information\n")
+		os.Exit(1)
 	}
 }
 

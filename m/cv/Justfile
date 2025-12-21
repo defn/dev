@@ -87,13 +87,19 @@ thumbs:
 t2:
     cat <(find yes -type f | cut -d/ -f2 | cut -d. -f1) <(find yes -type f | cut -d/ -f2 | cut -d. -f1) <(find t2 -name '*.png' | cut -d/ -f2 | cut -d. -f1) | sort | uniq -c | grep ' 2 ' | awk '{print $NF}' | sort | runmany 32 1 'echo "img/$1.jpeg -> t2/$1.png"; mogrify -path t2 -resize 400x -format png img/$1.jpeg'
 
+# Generate all w-* workflow galleries in batch
+# Processes all pub/fm/w-* directories and generates chunked galleries in pub/w/
+# Uses navigate mode for clickable links to detail pages
+w-galleries:
+    go run blurmap.go -mode batch
+
 # Generate web gallery with blurhash placeholders
 # Creates responsive HTML gallery from processed images in t2 directory
 # Uses Go program to generate blurhash previews for fast loading
 gallery prefix="replicate/":
     #!/usr/bin/env bash
     find {{prefix}}t2 -type f | cut -d/ -f3 | cut -d. -f1 | sort > all.input
-    go run blurmap.go 
+    go run blurmap.go -mode gallery 
 
 index file stage1 stage2:
     cat {{ file }} | jq -r '.url' | cut -d/ -f7 | cut -d. -f1 | sort > {{ file }}.all
@@ -118,7 +124,7 @@ download-user file n="4":
     cat {{ file }} | runmany {{ n }} 'just user $1'
 
 html file="following.txt" n="40":
-    cat {{ file }} | runmany {{ n }} 'just process js-username-$1.json.js.json || true; go run . -s yes -c tmp/blur -d thumbs -o tmp/g/js-username-$1.json.js.json.input -i <(cat js-username-$1.json.js.json.input | sort)'
+    cat {{ file }} | runmany {{ n }} 'just process js-username-$1.json.js.json || true; go run blurmap.go -mode html -i <(cat js-username-$1.json.js.json.input | sort) -o tmp/g/js-username-$1.json.js.json.input'
 
 # Start backup process in screen session
 # Syncs replicate directory to remote storage with configurable transfer threads
