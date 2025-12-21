@@ -20,10 +20,9 @@ Architecture:
 - Chunked output for handling large image collections
 
 Usage:
-  go run blurmap.go -i images.input -o gallery/ -d img/ -c cache/
-
-Input Format:
-  Text file with one image identifier per line (without extension)
+  go run blurmap.go -mode gallery -scan-dir img/
+  go run blurmap.go -mode html -json users.json -o gallery/
+  go run blurmap.go -mode batch
 
 Output:
   - Paginated HTML files (1.html, 2.html, etc.)
@@ -38,7 +37,6 @@ Dependencies:
 package main
 
 import (
-	"bufio"
 	"crypto/sha256"
 	"encoding/json"
 	"flag"
@@ -60,7 +58,6 @@ import (
 // Command-line configuration variables
 // These control the behavior and paths used by the gallery generator
 var (
-	allInputFile  string // Path to input file containing image identifiers
 	outputDir     string // Directory where HTML gallery pages will be written
 	cacheDir      string // Directory for caching blurhash and dimension data
 	imageDir      string // Source directory containing the actual image files
@@ -145,8 +142,6 @@ var timestampCache int64
 func main() {
 	// Configure command-line flags with both long and short forms
 	// Input/output configuration
-	flag.StringVar(&allInputFile, "input", "", "Input file containing image identifiers")
-	flag.StringVar(&allInputFile, "i", "", "Input file containing image identifiers (shorthand)")
 	flag.StringVar(&outputDir, "output", "", "Output directory for HTML gallery pages")
 	flag.StringVar(&outputDir, "o", "", "Output directory for HTML gallery pages (shorthand)")
 
@@ -186,8 +181,8 @@ func main() {
 	if *showHelp || *showHelpShort {
 		fmt.Fprintf(os.Stderr, "Usage: %s -mode <gallery|html|batch> [options]\n", os.Args[0])
 		fmt.Fprintf(os.Stderr, "\nModes:\n")
-		fmt.Fprintf(os.Stderr, "  gallery  - Generate main gallery from all.input (default settings)\n")
-		fmt.Fprintf(os.Stderr, "  html     - Generate per-user gallery with select mode\n")
+		fmt.Fprintf(os.Stderr, "  gallery  - Scan directory and generate main gallery\n")
+		fmt.Fprintf(os.Stderr, "  html     - Process JSON file and generate per-user gallery with filtering\n")
 		fmt.Fprintf(os.Stderr, "  batch    - Process all w-* galleries in batch\n")
 		fmt.Fprintf(os.Stderr, "\nOptions:\n")
 		flag.PrintDefaults()
@@ -204,7 +199,11 @@ func main() {
 		batchProcessAllGalleries()
 
 	case "gallery":
-		// Gallery mode: main gallery from directory scan or input file
+		// Gallery mode: main gallery from directory scan
+		if scanDir == "" {
+			fmt.Fprintf(os.Stderr, "Error: -scan-dir required for gallery mode\n")
+			os.Exit(1)
+		}
 		if outputDir == "" {
 			outputDir = "g"
 		}
@@ -212,7 +211,7 @@ func main() {
 			cacheDir = "blur"
 		}
 		if imageDir == "" {
-			imageDir = "replicate/t2"
+			imageDir = scanDir // Use scan directory as image directory
 		}
 		if selectMode == "" {
 			selectMode = "no"
@@ -224,28 +223,12 @@ func main() {
 			os.Exit(1)
 		}
 
-		var imageInfos []ImageInfo
-		var err error
-
-		// Either scan directory or read from input file
-		if scanDir != "" {
-			// Scan directory for images
-			fmt.Fprintf(os.Stderr, "Scanning directory: %s\n", scanDir)
-			imageInfos, err = scanDirectoryForImages(scanDir)
-			if err != nil {
-				fmt.Fprintf(os.Stderr, "Error scanning directory: %v\n", err)
-				os.Exit(1)
-			}
-		} else {
-			// Load from input file (default: all.input)
-			if allInputFile == "" {
-				allInputFile = "all.input"
-			}
-			imageInfos, err = parseInputFile(allInputFile)
-			if err != nil {
-				fmt.Fprintf(os.Stderr, "Error parsing input file: %v\n", err)
-				os.Exit(1)
-			}
+		// Scan directory for images
+		fmt.Fprintf(os.Stderr, "Scanning directory: %s\n", scanDir)
+		imageInfos, err := scanDirectoryForImages(scanDir)
+		if err != nil {
+			fmt.Fprintf(os.Stderr, "Error scanning directory: %v\n", err)
+			os.Exit(1)
 		}
 
 		fmt.Fprintf(os.Stderr, "Found %d images to process\n", len(imageInfos))
@@ -253,6 +236,10 @@ func main() {
 
 	case "html":
 		// HTML mode: per-user galleries with JSON input and filtering
+		if jsonFile == "" {
+			fmt.Fprintf(os.Stderr, "Error: -json-file required for html mode\n")
+			os.Exit(1)
+		}
 		if outputDir == "" {
 			fmt.Fprintf(os.Stderr, "Error: -output required for html mode\n")
 			os.Exit(1)
@@ -273,27 +260,11 @@ func main() {
 			os.Exit(1)
 		}
 
-		var imageInfos []ImageInfo
-		var err error
-
-		// Either process JSON file with filtering or read from input file
-		if jsonFile != "" {
-			// Process JSON file and filter images
-			fmt.Fprintf(os.Stderr, "Processing JSON file: %s\n", jsonFile)
-			imageInfos, err = processJSONWithFiltering(jsonFile, stage1Dir, stage2Dir, thumbsDir)
-			if err != nil {
-				fmt.Fprintf(os.Stderr, "Error processing JSON: %v\n", err)
-				os.Exit(1)
-			}
-		} else if allInputFile != "" {
-			// Load from input file
-			imageInfos, err = parseInputFile(allInputFile)
-			if err != nil {
-				fmt.Fprintf(os.Stderr, "Error parsing input file: %v\n", err)
-				os.Exit(1)
-			}
-		} else {
-			fmt.Fprintf(os.Stderr, "Error: -json-file or -input required for html mode\n")
+		// Process JSON file and filter images
+		fmt.Fprintf(os.Stderr, "Processing JSON file: %s\n", jsonFile)
+		imageInfos, err := processJSONWithFiltering(jsonFile, stage1Dir, stage2Dir, thumbsDir)
+		if err != nil {
+			fmt.Fprintf(os.Stderr, "Error processing JSON: %v\n", err)
 			os.Exit(1)
 		}
 
@@ -1126,45 +1097,6 @@ func generatePerWPageWithIndex(sourceBase, templateFile string, variantIndex map
 
 	// Return thumbnail HTML for master index
 	return fmt.Sprintf("<a href=\"W/%s.html\"><img src=\"fm/W/%s\"></a>", templateFile, templateFile)
-}
-
-// parseInputFile parses the all.input file containing image identifiers
-// Each line contains an identifier that maps to a filename in the imageDir
-func parseInputFile(filePath string) ([]ImageInfo, error) {
-	file, err := os.Open(filePath)
-	if err != nil {
-		return nil, err
-	}
-	defer file.Close()
-
-	var imageInfos []ImageInfo
-	scanner := bufio.NewScanner(file)
-
-	for scanner.Scan() {
-		// Get the identifier from each line
-		identifier := strings.TrimSpace(scanner.Text())
-
-		// Skip empty lines
-		if identifier == "" {
-			continue
-		}
-
-		// Create image info object with the identifier as the base filename
-		// and construct the full filename with .png extension
-		imageInfo := ImageInfo{
-			Filename: identifier + ".png",
-			Width:    0, // We'll read these from the actual image later
-			Height:   0,
-		}
-
-		imageInfos = append(imageInfos, imageInfo)
-	}
-
-	if err := scanner.Err(); err != nil {
-		return nil, err
-	}
-
-	return imageInfos, nil
 }
 
 // scanDirectoryForImages scans a directory and returns a list of image files

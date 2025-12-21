@@ -268,23 +268,17 @@ The `blurmap.go` program generates HTML galleries with blurhash placeholders. It
 You can also run blurmap.go directly with explicit parameters:
 
 ```bash
-# Gallery mode - scan directory for images (NEW!)
+# Gallery mode - scan directory for images
 go run blurmap.go -mode gallery -scan-dir replicate/t2 -o g -c blur
 
-# Gallery mode - use input file (legacy, still supported)
-go run blurmap.go -mode gallery -i all.input -o g -c blur -d replicate/t2
-
-# HTML mode - process JSON with filtering (NEW!)
+# HTML mode - process JSON with filtering
 go run blurmap.go -mode html \
   -json js-username-user.json.js.json \
   -o tmp/g/js-username-user \
   -stage1 yes -stage2 no -thumbs-dir thumbs \
   -generate-index following.html
 
-# HTML mode - use input file (legacy, still supported)
-go run blurmap.go -mode html -i user.input -o tmp/g/user -c tmp/blur -d thumbs
-
-# Batch mode (processes all w-* directories)
+# Batch mode - process all w-* directories
 go run blurmap.go -mode batch
 ```
 
@@ -292,20 +286,18 @@ go run blurmap.go -mode batch
 - `-mode` or `-m`: Operating mode (required: `gallery`, `html`, or `batch`)
 - `-output` or `-o`: Output directory for HTML files
 - `-cache` or `-c`: Cache directory for blurhash data
-- `-imagedir` or `-d`: Source image directory
+- `-imagedir` or `-d`: Source image directory (usually auto-set)
 - `-selectmode` or `-s`: Override click mode (`no`, `yes`, `navigate`)
 
 **Gallery Mode Flags:**
-- `-scan-dir`: Scan directory for images (eliminates need for input file)
-- `-input` or `-i`: Input file containing image IDs (legacy)
+- `-scan-dir`: Directory to scan for images (required)
 
 **HTML Mode Flags:**
-- `-json-file` or `-json`: JSON file with image metadata (auto-filters)
+- `-json-file` or `-json`: JSON file with image metadata (required)
 - `-stage1`: First stage directory for filtering (default: `yes`)
 - `-stage2`: Second stage directory for filtering (default: `no`)
 - `-thumbs-dir`: Thumbnails directory (default: `thumbs`)
 - `-generate-index`: Generate index file with all gallery links
-- `-input` or `-i`: Input file containing image IDs (legacy)
 
 Run `go run blurmap.go -help` for complete usage information.
 
