@@ -338,7 +338,7 @@ func batchProcessAllGalleries() {
 		fmt.Fprintf(os.Stderr, "[Master] Found %d total images for master gallery\n", len(allImages))
 
 		if len(allImages) > 0 {
-			processGalleryWithPaths(allImages, sourceBase, "pub/w/g")
+			processGalleryWithPathsLabeled(allImages, sourceBase, "pub/w/g", "[Master]")
 		}
 	}()
 
@@ -390,14 +390,21 @@ func batchProcessAllGalleries() {
 	}
 	close(jobs)
 
-	// Wait for all workers (including master gallery) to finish
+	// Wait for all workers (including master gallery and per-W) to finish
+	fmt.Fprintf(os.Stderr, "\n=== Waiting for all workers to complete... ===\n")
 	wg.Wait()
 
 	fmt.Fprintf(os.Stderr, "\n=== All galleries generated successfully! ===\n")
+	fmt.Fprintf(os.Stderr, "Processed %d w-* directories, master gallery, and per-template galleries\n", len(wDirs))
 }
 
 // processGalleryWithPaths processes a list of images with explicit paths (for parallel processing)
 func processGalleryWithPaths(imageInfos []ImageInfo, imgDir, outDir string) {
+	processGalleryWithPathsLabeled(imageInfos, imgDir, outDir, "")
+}
+
+// processGalleryWithPathsLabeled is the internal version with optional label for logging
+func processGalleryWithPathsLabeled(imageInfos []ImageInfo, imgDir, outDir, label string) {
 	var err error
 
 	// Configure worker pool for parallel image processing
@@ -551,8 +558,13 @@ func processGalleryWithPaths(imageInfos []ImageInfo, imgDir, outDir string) {
 		}
 	}
 
-	fmt.Fprintf(os.Stderr, "Completed blur processing. Total: %d images processed, %d errors\n", processed, errors)
-	fmt.Fprintf(os.Stderr, "Cache stats: %d/%d blurhashes cached, %d/%d dimensions cached\n",
+	prefix := label
+	if prefix != "" {
+		prefix = prefix + " "
+	}
+
+	fmt.Fprintf(os.Stderr, "%sCompleted blur processing. Total: %d images processed, %d errors\n", prefix, processed, errors)
+	fmt.Fprintf(os.Stderr, "%sCache stats: %d/%d blurhashes cached, %d/%d dimensions cached\n", prefix,
 		cachedBlur, processed, cachedDim, processed)
 
 	// Create a valid list of ImageInfo - only those with blurmap
@@ -567,7 +579,7 @@ func processGalleryWithPaths(imageInfos []ImageInfo, imgDir, outDir string) {
 	totalImages := len(validImages)
 	numChunks := (totalImages + chunkSize - 1) / chunkSize
 
-	fmt.Fprintf(os.Stderr, "Generating %d chunks with %d images per chunk (total: %d images)\n",
+	fmt.Fprintf(os.Stderr, "%sGenerating %d chunks with %d images per chunk (total: %d images)\n", prefix,
 		numChunks, chunkSize, totalImages)
 
 	// Create the output directory structure
@@ -615,7 +627,7 @@ func processGalleryWithPaths(imageInfos []ImageInfo, imgDir, outDir string) {
 				chunkMutex.Lock()
 				chunkCount++
 				if chunkCount%100 == 0 || chunkCount == numChunks {
-					fmt.Fprintf(os.Stderr, "Generated %d/%d chunks\n", chunkCount, numChunks)
+					fmt.Fprintf(os.Stderr, "%sGenerated %d/%d chunks\n", prefix, chunkCount, numChunks)
 				}
 				chunkMutex.Unlock()
 			}
@@ -637,13 +649,13 @@ func processGalleryWithPaths(imageInfos []ImageInfo, imgDir, outDir string) {
 	chunkWg.Wait()
 
 	// Create main index.html
-	fmt.Fprintf(os.Stderr, "Creating main index.html...\n")
+	fmt.Fprintf(os.Stderr, "%sCreating main index.html...\n", prefix)
 	err = generateMainIndex(numChunks, totalImages, outDir)
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error generating main index: %v\n", err)
+		fmt.Fprintf(os.Stderr, "%sError generating main index: %v\n", prefix, err)
 	}
 
-	fmt.Fprintf(os.Stderr, "All chunks generated successfully!\n")
+	fmt.Fprintf(os.Stderr, "%sAll chunks generated successfully!\n", prefix)
 }
 
 // processSingleGallery processes a list of images and generates the gallery HTML (uses global vars)
@@ -722,18 +734,26 @@ func generatePerWGalleries(sourceBase string) {
 	}()
 
 	// Collect thumbnails for master index
+	fmt.Fprintf(os.Stderr, "[Per-W] Collecting thumbnails for master index...\n")
 	var masterIndex strings.Builder
+	collectedThumbnails := 0
 	for thumbnail := range thumbnails {
 		masterIndex.WriteString(thumbnail)
 		masterIndex.WriteString("\n")
+		collectedThumbnails++
+		if collectedThumbnails%1000 == 0 {
+			fmt.Fprintf(os.Stderr, "[Per-W] Collected %d/%d thumbnails\n", collectedThumbnails, len(templateFiles))
+		}
 	}
 
 	// Write master index file
+	fmt.Fprintf(os.Stderr, "[Per-W] Writing pub/W.html with %d thumbnails...\n", collectedThumbnails)
 	if err := ioutil.WriteFile("pub/W.html", []byte(masterIndex.String()), 0644); err != nil {
 		fmt.Fprintf(os.Stderr, "[Per-W] Error writing pub/W.html: %v\n", err)
+		return
 	}
 
-	fmt.Fprintf(os.Stderr, "[Per-W] Generated pub/W.html and %d detail pages\n", len(templateFiles))
+	fmt.Fprintf(os.Stderr, "[Per-W] Completed! Generated pub/W.html and %d detail pages\n", len(templateFiles))
 }
 
 // generatePerWPage creates a detail page for a single template file
