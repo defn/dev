@@ -1,0 +1,165 @@
+/**
+ * Gallery CSS - Modular Responsive Image Gallery Styles
+ * =====================================================
+ *
+ * Styles for the modular gallery system.
+ * This is a clean implementation that can be extended.
+ */
+
+/* ===== CSS CUSTOM PROPERTIES ===== */
+:root {
+  --gallery-bg: black;
+  --gallery-border: #000;
+  --gallery-fallback-color: #ff8c00;
+  --gallery-overlay-bg: rgba(0, 0, 0, 0.95);
+  --gallery-nav-bg: rgba(0, 0, 0, 0.7);
+  --gallery-nav-bg-disabled: rgba(139, 0, 0, 0.7);
+  --gallery-transition-duration: 0.3s;
+}
+
+/* ===== BODY AND SCROLLING ===== */
+body {
+  overflow-y: scroll;
+  margin: 0;
+  background-color: var(--gallery-bg);
+}
+
+body::-webkit-scrollbar {
+  width: 0;
+}
+
+/* Firefox scrollbar hiding */
+html {
+  scrollbar-width: none;
+}
+
+/* ===== IMAGE STYLES ===== */
+img {
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+/* Lazy load placeholder */
+img.lazyload {
+  opacity: 0;
+}
+
+/* Failed image indicator */
+img.load-failed {
+  opacity: 0;
+}
+
+/* ===== GRID LAYOUT ===== */
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+td {
+  border: 1px solid var(--gallery-border);
+  vertical-align: top;
+  padding: 0;
+}
+
+/* ===== IMAGE CONTAINER ===== */
+.image-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.image-container img {
+  max-width: 100%;
+  border: none;
+  outline: none;
+}
+
+/* ===== BLURHASH PLACEHOLDER ===== */
+.blurhash-canvas {
+  width: 100%;
+  height: 100%;
+  transition: opacity var(--gallery-transition-duration) ease;
+  opacity: 1;
+  z-index: 1;
+}
+
+/* Toggle blur overlay */
+canvas.toggle-blur {
+  cursor: pointer;
+}
+
+/* Failed image blur fallback */
+canvas.failed-image-blur {
+  cursor: default;
+}
+
+/* ===== OVERLAY ===== */
+#overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  background: black;
+  opacity: 0.95;
+  z-index: 1000;
+  display: block;
+}
+
+/* ===== IMAGE WRAPPER ===== */
+.image-wrapper {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  overflow: hidden;
+  padding: 0;
+  margin: 0;
+  line-height: 0;
+}
+
+/* ===== ANCHOR LINKS ===== */
+a {
+  display: inline-block;
+  width: 100%;
+  text-decoration: none;
+}
+
+/* ===== SPACERS ===== */
+.column-spacer {
+  height: 1px;
+}
+
+/* ===== RESPONSIVE BREAKPOINTS ===== */
+@media (max-width: 660px) {
+  /* Single column mode */
+  td {
+    border-width: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  /* Respect reduced motion preferences */
+  .blurhash-canvas,
+  img {
+    transition: none;
+  }
+}
+
+/* ===== PRINT STYLES ===== */
+@media print {
+  #navigation-control {
+    display: none !important;
+  }
+
+  body {
+    background-color: white;
+  }
+
+  img {
+    break-inside: avoid;
+  }
+}
