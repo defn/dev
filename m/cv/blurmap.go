@@ -269,22 +269,65 @@ func batchProcessAllGalleries() {
 		defer wg.Done()
 		fmt.Fprintf(os.Stderr, "\n[Master] === Generating master gallery at pub/w/g/ ===\n")
 
-		// Collect all PNG files from all w-* directories
-		var allImages []ImageInfo
-		for _, wDir := range wDirs {
-			wPath := filepath.Join(sourceBase, wDir)
-			pngFiles, err := filepath.Glob(filepath.Join(wPath, "*.png"))
-			if err != nil {
-				continue
-			}
-			for _, pngPath := range pngFiles {
-				// Store as relative path from sourceBase: w-01/filename.png
-				relPath, _ := filepath.Rel(sourceBase, pngPath)
-				allImages = append(allImages, ImageInfo{
-					Filename: relPath,
-				})
-			}
+		// Parallelize image collection from all w-* directories
+		collectionJobs := make(chan string, len(wDirs))
+		collectionResults := make(chan []ImageInfo, len(wDirs))
+		var collectionWg sync.WaitGroup
+
+		// Launch 8 workers to collect images in parallel
+		var collectedCount int
+		var collectedMutex sync.Mutex
+		for w := 0; w < 8; w++ {
+			collectionWg.Add(1)
+			go func(workerID int) {
+				defer collectionWg.Done()
+				for wDir := range collectionJobs {
+					wPath := filepath.Join(sourceBase, wDir)
+					pngFiles, err := filepath.Glob(filepath.Join(wPath, "*.png"))
+					if err != nil {
+						continue
+					}
+					var dirImages []ImageInfo
+					for _, pngPath := range pngFiles {
+						relPath, _ := filepath.Rel(sourceBase, pngPath)
+						dirImages = append(dirImages, ImageInfo{
+							Filename: relPath,
+						})
+					}
+					if len(dirImages) > 0 {
+						collectionResults <- dirImages
+					}
+
+					// Report progress every 100 directories
+					collectedMutex.Lock()
+					collectedCount++
+					if collectedCount%100 == 0 || collectedCount == len(wDirs) {
+						fmt.Fprintf(os.Stderr, "[Master] Collected from %d/%d directories\n", collectedCount, len(wDirs))
+					}
+					collectedMutex.Unlock()
+				}
+			}(w)
 		}
+
+		// Send all w-* directories to collection workers
+		for _, wDir := range wDirs {
+			collectionJobs <- wDir
+		}
+		close(collectionJobs)
+
+		// Wait for collection to finish and close results
+		go func() {
+			collectionWg.Wait()
+			close(collectionResults)
+		}()
+
+		// Merge all collected images
+		var allImages []ImageInfo
+		for dirImages := range collectionResults {
+			allImages = append(allImages, dirImages...)
+		}
+
+		fmt.Fprintf(os.Stderr, "[Master] Collected %d images from %d directories\n", len(allImages), len(wDirs))
 
 		// Shuffle the images
 		for i := len(allImages) - 1; i > 0; i-- {
@@ -613,6 +656,8 @@ func generatePerWGalleries(sourceBase string) {
 	var wg sync.WaitGroup
 
 	// Launch workers
+	processedCount := 0
+	var countMutex sync.Mutex
 	for w := 0; w < numWorkers; w++ {
 		wg.Add(1)
 		go func(workerID int) {
@@ -620,6 +665,14 @@ func generatePerWGalleries(sourceBase string) {
 			for templateFile := range jobs {
 				thumbnail := generatePerWPage(sourceBase, templateFile)
 				thumbnails <- thumbnail
+
+				// Report progress every 1000 files
+				countMutex.Lock()
+				processedCount++
+				if processedCount%1000 == 0 || processedCount == len(templateFiles) {
+					fmt.Fprintf(os.Stderr, "[Per-W] Processed %d/%d templates\n", processedCount, len(templateFiles))
+				}
+				countMutex.Unlock()
 			}
 		}(w)
 	}
