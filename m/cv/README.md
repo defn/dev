@@ -172,11 +172,112 @@ v/mp4/*.mp4 → v/img/{video}/*.jpeg (frame extraction)
 ## Key Commands
 
 - **`just gallery`** - Generate web gallery from replicate/t2/
+- **`just w-galleries`** - Generate all w-* workflow galleries in batch
+- **`just html`** - Generate per-user galleries with selection mode
 - **`just thumbs`** - Create thumbnails from img/ to thumbs/
 - **`just t2`** - Create web-optimized images from yes/ to t2/
 - **`just ersgan n`** - Run ESRGAN super-resolution (n parallel processes)
 - **`just user username`** - Download and process user content
 - **`just backup n`** - Sync replicate/ to remote storage (n transfer threads)
+
+## Gallery Generation with blurmap.go
+
+The `blurmap.go` program generates HTML galleries with blurhash placeholders. It operates in three explicit modes, each with different inputs, outputs, and interaction behaviors.
+
+### Mode 1: Gallery Mode (Main Gallery)
+
+**Command:** `just gallery`
+
+**Expands to:** `go run blurmap.go -mode gallery`
+
+**Purpose:** Generate the main gallery from replicate/t2 images
+
+**Inputs:**
+- Input file: `all.input` (list of image IDs, one per line)
+- Image directory: `replicate/t2/` (400px thumbnails)
+- Cache directory: `blur/`
+
+**Outputs:**
+- Gallery pages: `g/1/index.html`, `g/2/index.html`, etc.
+- Click behavior: `toggle` - Click images to toggle blurhash overlay on/off (visual-only, no server interaction)
+
+**When to use:** After updating replicate/t2 with new ESRGAN-enhanced images
+
+---
+
+### Mode 2: HTML Mode (Per-User Galleries)
+
+**Command:** `just html`
+
+**Expands to:** `go run blurmap.go -mode html -i <input> -o tmp/g/<user>.input`
+
+**Purpose:** Generate per-user galleries with selection capability for curation
+
+**Inputs:**
+- Input file: `js-username-*.json.js.json.input` (user-specific image list, via stdin)
+- Image directory: `thumbs/` (400px thumbnails)
+- Cache directory: `tmp/blur/`
+
+**Outputs:**
+- Gallery pages: `tmp/g/js-username-<user>/1/index.html`, etc.
+- Click behavior: `select` - Click images to toggle blurhash AND send selection to server for curation
+
+**When to use:** When curating images from specific users
+
+---
+
+### Mode 3: Batch Mode (W-* Workflow Galleries)
+
+**Command:** `just w-galleries`
+
+**Expands to:** `go run blurmap.go -mode batch`
+
+**Purpose:** Generate all workflow galleries with navigation to detail pages
+
+**Inputs:**
+- Source directories: `pub/fm/w-00/`, `pub/fm/w-01/`, ..., `pub/fm/w-999/`
+- Processes all w-* directories automatically
+- Cache directory: `tmp/blur/`
+
+**Outputs:**
+- Gallery pages: `pub/w/w-00/1/index.html`, `pub/w/w-01/1/index.html`, etc.
+- Master gallery: `pub/w/g/1/index.html` (aggregates all workflows)
+- Click behavior: `navigate` - Click images to open detail page at `W/{uuid}.html`
+
+**When to use:** After generating new face-manipulation results in pub/fm/w-* directories
+
+---
+
+### Click Mode Behaviors
+
+- **toggle:** Click to show/hide blurhash overlay (keyboard: `b` key). Visual feedback only, no data sent to server.
+- **select:** Click to toggle blurhash AND send selection to server endpoint for image curation workflow.
+- **navigate:** Click to navigate to detail page showing all variants of the image.
+
+### Manual Invocation
+
+You can also run blurmap.go directly with explicit parameters:
+
+```bash
+# Gallery mode with custom settings
+go run blurmap.go -mode gallery -i all.input -o g -c blur -d replicate/t2
+
+# HTML mode with explicit paths
+go run blurmap.go -mode html -i user.input -o tmp/g/user -c tmp/blur -d thumbs
+
+# Batch mode (processes all w-* directories)
+go run blurmap.go -mode batch
+```
+
+**Flags:**
+- `-mode` or `-m`: Operating mode (required: `gallery`, `html`, or `batch`)
+- `-input` or `-i`: Input file containing image IDs
+- `-output` or `-o`: Output directory for HTML files
+- `-cache` or `-c`: Cache directory for blurhash data
+- `-imagedir` or `-d`: Source image directory
+- `-selectmode` or `-s`: Override click mode (`no`, `yes`, `navigate`)
+
+Run `go run blurmap.go -help` for complete usage information.
 
 ## Processing Notes
 
