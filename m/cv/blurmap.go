@@ -81,7 +81,7 @@ const galleryTemplate = `<!doctype html>
       // INSERT
 
       window.galleryConfig = {
-        images: { thumbPath: '/%s' },
+        images: { thumbPath: '%s' },
         click: {
           mode: '%s',
           navigateUrlPattern: '../../../W/{uuid}.html?page={page}#{filename}'
@@ -1079,8 +1079,15 @@ func generateChunkHTMLWithPaths(imageInfos []ImageInfo, outputPath string, total
 		clickMode = "navigate"
 	}
 
+	// Convert imgDir to web-root-relative path (relative to /remote/cv/)
+	// Since nginx serves from /remote/cv/, paths like "pub/fm/w-00" become "/pub/fm/w-00"
+	webRootPath := imgDir
+	if !strings.HasPrefix(webRootPath, "/") {
+		webRootPath = "/" + webRootPath
+	}
+
 	// Format the template with proper values (no timestampCache)
-	templateStr := fmt.Sprintf(galleryTemplate, totalChunks, chunkNum, imgDir, clickMode)
+	templateStr := fmt.Sprintf(galleryTemplate, totalChunks, chunkNum, webRootPath, clickMode)
 
 	// Generate the blurhashIndex map
 	var blurhashMap strings.Builder
