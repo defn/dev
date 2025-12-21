@@ -577,32 +577,64 @@ func processGalleryWithPaths(imageInfos []ImageInfo, imgDir, outDir string) {
 		return
 	}
 
-	// Generate chunked HTML files
+	// Generate chunked HTML files in parallel
+	type chunkJob struct {
+		chunkNum int
+		start    int
+		end      int
+	}
+
+	chunkJobs := make(chan chunkJob, numChunks)
+	var chunkWg sync.WaitGroup
+
+	// Launch 8 workers for chunk generation
+	chunkWorkers := 8
+	var chunkCount int
+	var chunkMutex sync.Mutex
+	for w := 0; w < chunkWorkers; w++ {
+		chunkWg.Add(1)
+		go func(workerID int) {
+			defer chunkWg.Done()
+			for job := range chunkJobs {
+				chunkDir := filepath.Join(outDir, strconv.Itoa(job.chunkNum))
+				err := os.MkdirAll(chunkDir, 0755)
+				if err != nil {
+					fmt.Fprintf(os.Stderr, "Error creating chunk directory %s: %v\n", chunkDir, err)
+					continue
+				}
+
+				chunkImages := validImages[job.start:job.end]
+				outputPath := fmt.Sprintf("%s/index.html", chunkDir)
+
+				err = generateChunkHTMLWithPaths(chunkImages, outputPath, numChunks, imgDir)
+				if err != nil {
+					fmt.Fprintf(os.Stderr, "Error generating HTML for chunk %d: %v\n", job.chunkNum, err)
+				}
+
+				// Report progress every 100 chunks
+				chunkMutex.Lock()
+				chunkCount++
+				if chunkCount%100 == 0 || chunkCount == numChunks {
+					fmt.Fprintf(os.Stderr, "Generated %d/%d chunks\n", chunkCount, numChunks)
+				}
+				chunkMutex.Unlock()
+			}
+		}(w)
+	}
+
+	// Send all chunk jobs to workers
 	for chunkNum := 1; chunkNum <= numChunks; chunkNum++ {
 		start := (chunkNum - 1) * chunkSize
 		end := start + chunkSize
 		if end > totalImages {
 			end = totalImages
 		}
-
-		chunkDir := filepath.Join(outDir, strconv.Itoa(chunkNum))
-		err = os.MkdirAll(chunkDir, 0755)
-		if err != nil {
-			fmt.Fprintf(os.Stderr, "Error creating chunk directory %s: %v\n", chunkDir, err)
-			continue
-		}
-
-		chunkImages := validImages[start:end]
-		outputPath := fmt.Sprintf("%s/index.html", chunkDir)
-
-		fmt.Fprintf(os.Stderr, "Generating chunk %d (%d images) to %s...\n",
-			chunkNum, len(chunkImages), outputPath)
-
-		err = generateChunkHTMLWithPaths(chunkImages, outputPath, numChunks, imgDir)
-		if err != nil {
-			fmt.Fprintf(os.Stderr, "Error generating HTML for chunk %d: %v\n", chunkNum, err)
-		}
+		chunkJobs <- chunkJob{chunkNum: chunkNum, start: start, end: end}
 	}
+	close(chunkJobs)
+
+	// Wait for all chunks to be generated
+	chunkWg.Wait()
 
 	// Create main index.html
 	fmt.Fprintf(os.Stderr, "Creating main index.html...\n")
