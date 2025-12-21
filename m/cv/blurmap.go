@@ -256,10 +256,26 @@ func batchProcessAllGalleries() {
 	jobs := make(chan string, len(wDirs))
 	var wg sync.WaitGroup
 
+	// Track completion status for debugging
+	type WorkerStatus struct {
+		sync.Mutex
+		perWComplete    bool
+		masterComplete  bool
+		wWorkersActive  int
+		wWorkersTotal   int
+	}
+	status := &WorkerStatus{wWorkersTotal: numWorkers}
+
 	// Launch per-W gallery processing in parallel
 	wg.Add(1)
 	go func() {
 		defer wg.Done()
+		defer func() {
+			status.Lock()
+			status.perWComplete = true
+			fmt.Fprintf(os.Stderr, "[Per-W] Worker completed\n")
+			status.Unlock()
+		}()
 		generatePerWGalleries(sourceBase)
 	}()
 
@@ -267,6 +283,12 @@ func batchProcessAllGalleries() {
 	wg.Add(1)
 	go func() {
 		defer wg.Done()
+		defer func() {
+			status.Lock()
+			status.masterComplete = true
+			fmt.Fprintf(os.Stderr, "[Master] Worker completed\n")
+			status.Unlock()
+		}()
 		fmt.Fprintf(os.Stderr, "\n[Master] === Generating master gallery at pub/w/g/ ===\n")
 
 		// Parallelize image collection from all w-* directories
@@ -347,6 +369,17 @@ func batchProcessAllGalleries() {
 		wg.Add(1)
 		go func(workerID int) {
 			defer wg.Done()
+			defer func() {
+				status.Lock()
+				status.wWorkersActive--
+				fmt.Fprintf(os.Stderr, "[Worker %d] Completed all jobs\n", workerID)
+				status.Unlock()
+			}()
+
+			status.Lock()
+			status.wWorkersActive++
+			status.Unlock()
+
 			for wDir := range jobs {
 				fmt.Fprintf(os.Stderr, "\n[Worker %d] === Processing %s ===\n", workerID, wDir)
 
@@ -390,9 +423,65 @@ func batchProcessAllGalleries() {
 	}
 	close(jobs)
 
+	// Launch watchdog to monitor goroutine count
+	done := make(chan bool)
+	go func() {
+		ticker := time.NewTicker(5 * time.Second)
+		defer ticker.Stop()
+
+		lastCount := runtime.NumGoroutine()
+		sameCountIterations := 0
+
+		for {
+			select {
+			case <-done:
+				return
+			case <-ticker.C:
+				currentCount := runtime.NumGoroutine()
+
+				// Get current worker status
+				status.Lock()
+				perWDone := status.perWComplete
+				masterDone := status.masterComplete
+				wActive := status.wWorkersActive
+				wTotal := status.wWorkersTotal
+				status.Unlock()
+
+				// Print detailed status
+				fmt.Fprintf(os.Stderr, "[Watchdog] Goroutines: %d | Per-W: %v | Master: %v | W-Workers: %d/%d active\n",
+					currentCount, perWDone, masterDone, wActive, wTotal)
+
+				// If count hasn't changed, increment counter
+				if currentCount == lastCount {
+					sameCountIterations++
+				} else {
+					sameCountIterations = 0
+				}
+				lastCount = currentCount
+
+				// If only 2 goroutines remain (main + watchdog) for 10 seconds, exit
+				if currentCount <= 2 && sameCountIterations >= 2 {
+					fmt.Fprintf(os.Stderr, "[Watchdog] Only monitoring goroutine remains, exiting.\n")
+					os.Exit(0)
+				}
+
+				// If stuck at same count for 30 seconds (6 iterations), warn
+				if sameCountIterations >= 6 {
+					fmt.Fprintf(os.Stderr, "[Watchdog] WARNING: Goroutine count stuck at %d for %d seconds\n",
+						currentCount, sameCountIterations*5)
+					fmt.Fprintf(os.Stderr, "[Watchdog] Status: Per-W=%v, Master=%v, W-Workers=%d/%d\n",
+						perWDone, masterDone, wActive, wTotal)
+				}
+			}
+		}
+	}()
+
 	// Wait for all workers (including master gallery and per-W) to finish
 	fmt.Fprintf(os.Stderr, "\n=== Waiting for all workers to complete... ===\n")
 	wg.Wait()
+
+	// Signal watchdog to stop
+	close(done)
 
 	fmt.Fprintf(os.Stderr, "\n=== All galleries generated successfully! ===\n")
 	fmt.Fprintf(os.Stderr, "Processed %d w-* directories, master gallery, and per-template galleries\n", len(wDirs))
@@ -671,6 +760,7 @@ func generatePerWGalleries(sourceBase string) {
 
 	// Find all template files in pub/fm/W/
 	wDir := filepath.Join(sourceBase, "W")
+	fmt.Fprintf(os.Stderr, "[Per-W] Reading directory %s...\n", wDir)
 	files, err := ioutil.ReadDir(wDir)
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "[Per-W] Error reading %s: %v\n", wDir, err)
@@ -687,7 +777,92 @@ func generatePerWGalleries(sourceBase string) {
 	sort.Strings(templateFiles)
 	fmt.Fprintf(os.Stderr, "[Per-W] Found %d template files\n", len(templateFiles))
 
+	// Build an index of all variants to avoid expensive Glob operations
+	fmt.Fprintf(os.Stderr, "[Per-W] Building variant index from w-* directories...\n")
+
+	// Find all w-* entries and filter to only directories
+	wMatches, err := filepath.Glob(filepath.Join(sourceBase, "w-*"))
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "[Per-W] Error finding w-* entries: %v\n", err)
+		return
+	}
+
+	var wDirs []string
+	for _, match := range wMatches {
+		info, err := os.Stat(match)
+		if err == nil && info.IsDir() {
+			wDirs = append(wDirs, match)
+		}
+	}
+	fmt.Fprintf(os.Stderr, "[Per-W] Found %d w-* directories to scan\n", len(wDirs))
+
+	// Build index in parallel with 8 workers
+	type indexEntry struct {
+		template string
+		variant  string
+	}
+	indexJobs := make(chan string, len(wDirs))
+	indexResults := make(chan indexEntry, 100000) // Buffer for results
+	var indexWg sync.WaitGroup
+
+	scannedCount := 0
+	var scannedMutex sync.Mutex
+
+	// Launch workers to scan directories
+	for w := 0; w < 8; w++ {
+		indexWg.Add(1)
+		go func(workerID int) {
+			defer indexWg.Done()
+			for wDir := range indexJobs {
+				files, err := ioutil.ReadDir(wDir)
+				if err != nil {
+					continue
+				}
+				for _, file := range files {
+					if file.IsDir() {
+						continue
+					}
+					filename := file.Name()
+					lastDash := strings.LastIndex(filename, "-")
+					if lastDash > 0 && lastDash < len(filename)-1 {
+						templateName := filename[lastDash+1:]
+						variantPath := filepath.Join(wDir, filename)
+						indexResults <- indexEntry{template: templateName, variant: variantPath}
+					}
+				}
+
+				scannedMutex.Lock()
+				scannedCount++
+				if scannedCount%100 == 0 || scannedCount == len(wDirs) {
+					fmt.Fprintf(os.Stderr, "[Per-W] Scanned %d/%d directories\n", scannedCount, len(wDirs))
+				}
+				scannedMutex.Unlock()
+			}
+		}(w)
+	}
+
+	// Send directories to workers
+	for _, wDir := range wDirs {
+		indexJobs <- wDir
+	}
+	close(indexJobs)
+
+	// Close results channel when all workers are done
+	go func() {
+		indexWg.Wait()
+		close(indexResults)
+	}()
+
+	// Collect results into index
+	variantIndex := make(map[string][]string)
+	for entry := range indexResults {
+		variantIndex[entry.template] = append(variantIndex[entry.template], entry.variant)
+	}
+
+	fmt.Fprintf(os.Stderr, "[Per-W] Built index with %d templates having variants\n", len(variantIndex))
+
 	// Create output directory
+	fmt.Fprintf(os.Stderr, "[Per-W] Creating output directory pub/W...\n")
 	if err := os.MkdirAll("pub/W", 0755); err != nil {
 		fmt.Fprintf(os.Stderr, "[Per-W] Error creating pub/W: %v\n", err)
 		return
@@ -700,14 +875,21 @@ func generatePerWGalleries(sourceBase string) {
 	var wg sync.WaitGroup
 
 	// Launch workers
+	fmt.Fprintf(os.Stderr, "[Per-W] Launching %d workers...\n", numWorkers)
 	processedCount := 0
 	var countMutex sync.Mutex
 	for w := 0; w < numWorkers; w++ {
 		wg.Add(1)
 		go func(workerID int) {
 			defer wg.Done()
+			fmt.Fprintf(os.Stderr, "[Per-W Worker %d] Started\n", workerID)
+			jobCount := 0
 			for templateFile := range jobs {
-				thumbnail := generatePerWPage(sourceBase, templateFile)
+				jobCount++
+				if jobCount == 1 || jobCount%100 == 0 {
+					fmt.Fprintf(os.Stderr, "[Per-W Worker %d] Processing job %d: %s\n", workerID, jobCount, templateFile)
+				}
+				thumbnail := generatePerWPageWithIndex(sourceBase, templateFile, variantIndex)
 				thumbnails <- thumbnail
 
 				// Report progress every 1000 files
@@ -718,18 +900,27 @@ func generatePerWGalleries(sourceBase string) {
 				}
 				countMutex.Unlock()
 			}
+			fmt.Fprintf(os.Stderr, "[Per-W Worker %d] Finished processing %d jobs\n", workerID, jobCount)
 		}(w)
 	}
 
 	// Send all template files to workers
-	for _, templateFile := range templateFiles {
+	fmt.Fprintf(os.Stderr, "[Per-W] Sending %d template files to job queue...\n", len(templateFiles))
+	for i, templateFile := range templateFiles {
+		if i == 0 || i%1000 == 0 || i == len(templateFiles)-1 {
+			fmt.Fprintf(os.Stderr, "[Per-W] Queued %d/%d files\n", i+1, len(templateFiles))
+		}
 		jobs <- templateFile
 	}
 	close(jobs)
+	fmt.Fprintf(os.Stderr, "[Per-W] All template files queued, jobs channel closed\n")
 
 	// Wait for all workers to finish
+	fmt.Fprintf(os.Stderr, "[Per-W] Launching goroutine to wait for workers and close thumbnails channel...\n")
 	go func() {
+		fmt.Fprintf(os.Stderr, "[Per-W Closer] Waiting for workers to finish...\n")
 		wg.Wait()
+		fmt.Fprintf(os.Stderr, "[Per-W Closer] All workers done, closing thumbnails channel\n")
 		close(thumbnails)
 	}()
 
@@ -745,6 +936,7 @@ func generatePerWGalleries(sourceBase string) {
 			fmt.Fprintf(os.Stderr, "[Per-W] Collected %d/%d thumbnails\n", collectedThumbnails, len(templateFiles))
 		}
 	}
+	fmt.Fprintf(os.Stderr, "[Per-W] Finished collecting %d thumbnails\n", collectedThumbnails)
 
 	// Write master index file
 	fmt.Fprintf(os.Stderr, "[Per-W] Writing pub/W.html with %d thumbnails...\n", collectedThumbnails)
@@ -756,18 +948,23 @@ func generatePerWGalleries(sourceBase string) {
 	fmt.Fprintf(os.Stderr, "[Per-W] Completed! Generated pub/W.html and %d detail pages\n", len(templateFiles))
 }
 
-// generatePerWPage creates a detail page for a single template file
+// generatePerWPageWithIndex creates a detail page using pre-built variant index
 // Returns the thumbnail HTML for the master index
-func generatePerWPage(sourceBase, templateFile string) string {
-	// Find all variant images across w-* directories
-	pattern := filepath.Join(sourceBase, "w-*", "*-"+templateFile)
-	variants, err := filepath.Glob(pattern)
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "[Per-W] Error finding variants for %s: %v\n", templateFile, err)
+func generatePerWPageWithIndex(sourceBase, templateFile string, variantIndex map[string][]string) string {
+	// Look up variants from index instead of expensive Glob
+	variants, ok := variantIndex[templateFile]
+	if !ok || len(variants) == 0 {
+		// No variants found for this template
 		return ""
 	}
 
-	sort.Strings(variants)
+	// Variants are already collected, just need to sort
+	sortedVariants := make([]string, len(variants))
+	copy(sortedVariants, variants)
+	sort.Strings(sortedVariants)
+
+	// Use sorted variants
+	variants = sortedVariants
 
 	// Generate detail page HTML
 	var detailPage strings.Builder
