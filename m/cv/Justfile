@@ -132,7 +132,7 @@ download-user file n="4":
     cat {{ file }} | runmany {{ n }} 'just user $1'
 
 html file="following.txt" n="40":
-    cat {{ file }} | runmany {{ n }} 'go run blurmap.go -mode html -json js-username-$1.json.js.json -o tmp/g/js-username-$1.json.js.json.input -generate-index following.html'
+    cat {{ file }} | runmany {{ n }} 'go run blurmap.go -mode html -json js-username-$1.json.js.json -o tmp/g/js-username-$1.json.js.json.input -generate-index following.html || true'
 
 # Start backup process in screen session
 # Syncs replicate directory to remote storage with configurable transfer threads

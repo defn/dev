@@ -254,6 +254,12 @@ func main() {
 			selectMode = "yes"
 		}
 
+		// Check if JSON file exists before processing
+		if _, err := os.Stat(jsonFile); os.IsNotExist(err) {
+			// Silently skip missing files (they may not have been downloaded yet)
+			os.Exit(0)
+		}
+
 		// Ensure cache directory exists for storing blurhash and dimension data
 		if err := ensureCacheDir(); err != nil {
 			fmt.Fprintf(os.Stderr, "Error creating cache directory: %v\n", err)
