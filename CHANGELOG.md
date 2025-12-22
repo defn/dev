@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.59.2](https://github.com/defn/dev/compare/v1.59.1...v1.59.2) (2025-12-22)
+
+
+### Bug Fixes
+
+* redirect stderr to stdout for ansible-playbook in Docker builds ([40871af](https://github.com/defn/dev/commit/40871af427b348ebccbb59712c0a3ee0282851cd))
+
 ## [1.59.1](https://github.com/defn/dev/compare/v1.59.0...v1.59.1) (2025-12-22)
 
 
