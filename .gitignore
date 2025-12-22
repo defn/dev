@@ -288,3 +288,4 @@ __pycache__
 !.config/k9s/plugins.yaml
 !.config/pypoetry/config.toml
 !.config/starship.toml
+.cagent
