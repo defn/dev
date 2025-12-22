@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.59.1](https://github.com/defn/dev/compare/v1.59.0...v1.59.1) (2025-12-22)
+
+
+### Bug Fixes
+
+* redirect stdin to /dev/null for ansible-playbook to handle Docker builds ([fa33612](https://github.com/defn/dev/commit/fa336129429c1924ecc3b95b97f3986ce7d09436))
+
 ## [1.59.0](https://github.com/defn/dev/compare/v1.58.0...v1.59.0) (2025-12-22)
 
 
