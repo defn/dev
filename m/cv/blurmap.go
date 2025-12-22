@@ -351,6 +351,7 @@ func batchProcessAllGalleries() {
 		sync.Mutex
 		perWComplete    bool
 		masterComplete  bool
+		fmHtmlComplete  bool
 		wWorkersActive  int
 		wWorkersTotal   int
 	}
@@ -367,6 +368,19 @@ func batchProcessAllGalleries() {
 			status.Unlock()
 		}()
 		generatePerWGalleries(sourceBase)
+	}()
+
+	// Launch fm.html generation in parallel
+	wg.Add(1)
+	go func() {
+		defer wg.Done()
+		defer func() {
+			status.Lock()
+			status.fmHtmlComplete = true
+			fmt.Fprintf(os.Stderr, "[FM-HTML] Worker completed\n")
+			status.Unlock()
+		}()
+		generateGalleryIndex()
 	}()
 
 	// Launch master gallery processing in parallel
@@ -533,13 +547,14 @@ func batchProcessAllGalleries() {
 				status.Lock()
 				perWDone := status.perWComplete
 				masterDone := status.masterComplete
+				fmHtmlDone := status.fmHtmlComplete
 				wActive := status.wWorkersActive
 				wTotal := status.wWorkersTotal
 				status.Unlock()
 
 				// Print detailed status
-				fmt.Fprintf(os.Stderr, "[Watchdog] Goroutines: %d | Per-W: %v | Master: %v | W-Workers: %d/%d active\n",
-					currentCount, perWDone, masterDone, wActive, wTotal)
+				fmt.Fprintf(os.Stderr, "[Watchdog] Goroutines: %d | Per-W: %v | Master: %v | FM-HTML: %v | W-Workers: %d/%d active\n",
+					currentCount, perWDone, masterDone, fmHtmlDone, wActive, wTotal)
 
 				// If count hasn't changed, increment counter
 				if currentCount == lastCount {
@@ -559,8 +574,8 @@ func batchProcessAllGalleries() {
 				if sameCountIterations >= 6 {
 					fmt.Fprintf(os.Stderr, "[Watchdog] WARNING: Goroutine count stuck at %d for %d seconds\n",
 						currentCount, sameCountIterations*5)
-					fmt.Fprintf(os.Stderr, "[Watchdog] Status: Per-W=%v, Master=%v, W-Workers=%d/%d\n",
-						perWDone, masterDone, wActive, wTotal)
+					fmt.Fprintf(os.Stderr, "[Watchdog] Status: Per-W=%v, Master=%v, FM-HTML=%v, W-Workers=%d/%d\n",
+						perWDone, masterDone, fmHtmlDone, wActive, wTotal)
 				}
 			}
 		}
@@ -1648,9 +1663,6 @@ func runFemMode() {
 	femProcessedCount = 0
 	femLastBatchRun = 0
 
-	// Generate gallery index
-	generateGalleryIndex()
-
 	// Process all source images against all style directories
 	processAllImages()
 
@@ -1703,10 +1715,10 @@ func generateGalleryIndex() {
 
 		// Generate links to 4 variants
 		for i := 0; i < 4; i++ {
-			variantFile := fmt.Sprintf("%s/%s-%s-%08d-%04d-%04d-%04d-%012d.png",
-				nameWithoutExt, nameWithoutExt, "00000000", 0, 0, 0, i)
-			html.WriteString(fmt.Sprintf(`<a href="/pub/w/%s/"><img style="vertical-align: top;" src="%s/%s"></a>`,
-				nameWithoutExt, nameWithoutExt, variantFile))
+			variantFile := fmt.Sprintf("%s/%s-%08d-%04d-%04d-%04d-%012d.png",
+				nameWithoutExt, nameWithoutExt, 0, 0, 0, 0, i)
+			html.WriteString(fmt.Sprintf(`<a href="/pub/w/%s/"><img style="vertical-align: top;" src="%s"></a>`,
+				nameWithoutExt, variantFile))
 			html.WriteString("\n")
 		}
 
