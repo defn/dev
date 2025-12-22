@@ -1,5 +1,33 @@
 # Changelog
 
+## [1.59.0](https://github.com/defn/dev/compare/v1.58.0...v1.59.0) (2025-12-22)
+
+
+### Features
+
+* add detailed progress reporting for all parallel workers ([93c423c](https://github.com/defn/dev/commit/93c423c505d9d4f69a17900c8190a69e20110088))
+* add fem mode for face manipulation gallery generation ([9415c0f](https://github.com/defn/dev/commit/9415c0f312f1f7fd84db01b93213e1fa84206696))
+* add per-template gallery generation to blurmap.go ([3da27a6](https://github.com/defn/dev/commit/3da27a6ebd593fa0b71078e7bbe161ea6ab12e35))
+* consolidate gallery operations into blurmap.go ([7b89659](https://github.com/defn/dev/commit/7b8965951bc1f0892ede6a905bb79b5ce16a8bee))
+* Update gitignore and code-server settings ([c2279c5](https://github.com/defn/dev/commit/c2279c57d3e7f134ccd840629bfeba0dd0a9103c))
+* update tool versions ([c84a090](https://github.com/defn/dev/commit/c84a090872f3aa659210e9e1d530efc246a73b6d))
+
+
+### Bug Fixes
+
+* detect single vs batch mode based on all.input file existence ([fc0d3eb](https://github.com/defn/dev/commit/fc0d3ebca5b5d68ec37b86b18d5a55237746aa58))
+* handle exclusion patterns in MatchesEntireDir for Linux watcher ([b0ad680](https://github.com/defn/dev/commit/b0ad6809e91b8f5727efa60e65e64f307c9795df))
+* handle missing JSON files gracefully in html mode ([d8ec413](https://github.com/defn/dev/commit/d8ec41341e82c43db10292ca0f4be65028c5d82d))
+* set FLY_CONFIG_DIR in cli_test to avoid sandbox permission error ([69b99a7](https://github.com/defn/dev/commit/69b99a70c3ff2c701df83cbe949279349533639c))
+* update BUILD.bazel files to remove deleted package refs ([9bf0897](https://github.com/defn/dev/commit/9bf08977b5934e3bc2346435ea4b1ce616fef8f2))
+
+
+### Performance Improvements
+
+* optimize Per-W gallery generation and add watchdog monitoring ([8cf8049](https://github.com/defn/dev/commit/8cf804983c2031267b75207c9a2fb4fd06219aff))
+* parallelize chunk HTML generation with 8 workers ([84013f7](https://github.com/defn/dev/commit/84013f7c6b1ea44d6af171f9cdb86de56d53a5d6))
+* parallelize master gallery image collection and add progress reporting ([483c388](https://github.com/defn/dev/commit/483c388688968a10a4fb192a170ac94f24512a8b))
+
 ## [1.58.0](https://github.com/defn/dev/compare/v1.57.1...v1.58.0) (2025-12-08)
 
 
