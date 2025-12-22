@@ -11,4 +11,4 @@ if ! test -r "${usage_playbook}"; then
 	fi
 fi
 
-ansible-playbook "${usage_playbook}" -i localhost, -c local </dev/null
+ansible-playbook "${usage_playbook}" -i localhost, -c local </dev/null 2>&1
