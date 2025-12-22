@@ -128,5 +128,6 @@
   "workbench.layoutControl.enabled": false,
   "window.menuBarVisibility": "toggle",
   "workbench.activityBar.location": "bottom",
-  "claudeCode.preferredLocation": "panel"
+  "claudeCode.preferredLocation": "panel",
+  "http.systemCertificatesNode": true
 }
