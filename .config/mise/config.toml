@@ -6,7 +6,7 @@ compile = false
 
 [tools]
 ansible = "13.1.0"
-aws = { version = "2.32.22", symlink_bins = "true" }
+aws = { version = "2.32.23", symlink_bins = "true" }
 bat = "0.26.1"
 bazelisk = "1.27.0"
 chamber = "3.1.4"
@@ -23,7 +23,7 @@ gron = "0.7.1"
 jq = "1.8.1"
 just = "1.45.0"
 node = "25.2.1"
-"npm:@anthropic-ai/claude-code" = "2.0.75"
+"npm:@anthropic-ai/claude-code" = "2.0.76"
 pipx = "1.8.0"
 pnpm = "10.26.0"
 python = "3.14.2"
