@@ -40,17 +40,17 @@ lint:
         - m/c/docs/dist
   enabled:
     - actionlint@1.7.9
-    - black@25.11.0
+    - black@25.12.0
     - buildifier@8.2.1
     - clippy@1.65.0
     - cue-fmt
     - dotenv-linter@4.0.0
     - git-diff-check
     - gofmt@1.25.5
-    - golangci-lint2@2.6.2
+    - golangci-lint2@2.7.2
     - isort@7.0.0
-    - markdownlint@0.46.0
-    - prettier@3.7.3
+    - markdownlint@0.47.0
+    - prettier@3.7.4
     - rustfmt@1.65.0
     - shellcheck@0.11.0
     - shfmt@3.12.0

@@ -1,10 +1,1 @@
-[env]
-_.file = '.env'
 
-[tools]
-"ubi:replicate/cog" = "0.16.9"
-
-[tasks.default]
-dir = "{{cwd}}"
-run = "mise run dev -- \"$@\""
-raw = true

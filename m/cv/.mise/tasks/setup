@@ -1,0 +1,57 @@
+#!/usr/bin/env bash
+
+#MISE description="Create symlinks from target path to local directory"
+#MISE arg "target_path" help="Target directory path (e.g., /fast/cv)"
+
+set -efu -o pipefail
+
+TARGET_PATH="${1:-}"
+
+if [ -z "$TARGET_PATH" ]; then
+	echo "Error: target_path argument required"
+	echo "Usage: mise run setup /fast/cv"
+	exit 1
+fi
+
+if [ ! -d "$TARGET_PATH" ]; then
+	echo "Creating directory: $TARGET_PATH"
+	mkdir -p "$TARGET_PATH"
+fi
+
+cd "${MISE_PROJECT_ROOT}"
+
+# List of symlinks to create
+LINKS=(
+	"blur"
+	"cv.db"
+	"g"
+	"img"
+	"js"
+	"js-username"
+	"LAST"
+	"no"
+	"posts"
+	"pub"
+	"replicate"
+	"state"
+	"t2"
+	"thumbs"
+	"tmp"
+	"yes"
+	"yo"
+)
+
+for link in "${LINKS[@]}"; do
+	target="$TARGET_PATH/$link"
+
+	if [ -d "$link" ] && [ ! -L "$link" ]; then
+		echo "Warning: $link is a directory, skipping"
+	elif [ ! -e "$target" ]; then
+		echo "Warning: source does not exist: $target, skipping"
+	else
+		echo "Creating symlink: $link -> $target"
+		ln -nfs "$target" "$link"
+	fi
+done
+
+echo "Setup complete!"
