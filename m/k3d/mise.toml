@@ -5,7 +5,7 @@ AWS_CONFIG_FILE = "/home/ubuntu/m/aws/chamber/1/.aws/config"
 KUBECONFIG = "/home/ubuntu/m/k3d/.kube/config"
 
 [tools]
-argocd = "3.2.2"
+argocd = "3.2.3"
 helm = "3.19.2"
 k3d = "5.8.3"
 k9s = "0.50.16"

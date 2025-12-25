@@ -1,5 +1,5 @@
 [tools]
-atlas = "0.38.0"
+atlas = "1.0.0"
 "go:github.com/riverqueue/river/cmd/river" = "0.29.0"
 "ubi:riverqueue/riverui" = "0.13.0"
 
