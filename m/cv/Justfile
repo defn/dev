@@ -264,19 +264,51 @@ split dataset from to where="~/work/backup/zfs/cv-":
     sudo zfs send -i {{dataset}}@{{from}} {{dataset}}@{{to}} | pv | split -b 5G --numeric-suffixes=1 --suffix-length=2 - {{where}}{{to}}.zfs.
     for a in {{where}}{{to}}.zfs.??; do echo "$a"; cat "$a" | sha256sum > "$a.sha256"; done
 
-open:
-    just open-inner "${SITE}" "$(cat LAST)"
-
-open-inner site n="1" chunk="10" file="following.html":
+# Open curation galleries in browser using Tailscale IP
+# Uses LAST file to track progress through gallery list
+open chunk="10":
     #!/usr/bin/env bash
-    lines=$(wc -l < "{{file}}")
+    # Get tailscale IP
+    ts_ip=$(tailscale ip -4)
+
+    # Generate sorted list of gallery directories
+    galleries=$(ls -d tmp/g/*/ 2>/dev/null | sort -V)
+
+    if [ -z "$galleries" ]; then
+        echo "No galleries found in tmp/g/"
+        exit 0
+    fi
+
+    # Get total number of galleries
+    total=$(echo "$galleries" | wc -l)
+
+    # Get starting position from LAST (default to 1)
+    start=$(cat LAST 2>/dev/null || echo "1")
+
     chunk_size={{chunk}}
 
-    for ((i={{n}}; i<=lines; i+=chunk_size)); do
-        for u in $(sed -n "${i},$((i + chunk_size - 1))p" "{{file}}" | cut -d'"' -f2); do open "{{site}}/$u"; sleep 0.1; done
-        echo "$((i + chunk_size))" > LAST
-        read -p "Press Enter to continue at $((i + chunk_size))..."
+    echo "Found $total galleries, starting at position $start"
+
+    # Process in chunks
+    for ((i=start; i<=total; i+=chunk_size)); do
+        # Open chunk of galleries
+        echo "$galleries" | sed -n "${i},$((i + chunk_size - 1))p" | while read -r path; do
+            url="http://${ts_ip}:8111/${path}index.html"
+            echo "Opening: $url"
+            open "$url"
+            sleep 0.1
+        done
+
+        # Update LAST
+        next=$((i + chunk_size))
+        echo "$next" > LAST
+
+        if [ $next -le $total ]; then
+            read -p "Press Enter to continue at position $next..."
+        fi
     done
+
+    echo "All galleries opened"
 
 freeze from snap backups:
     #!/usr/bin/env bash
