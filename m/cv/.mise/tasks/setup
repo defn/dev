@@ -23,7 +23,6 @@ cd "${MISE_PROJECT_ROOT}"
 # List of symlinks to create
 LINKS=(
 	"blur"
-	"cv.db"
 	"g"
 	"img"
 	"js-username"
@@ -33,7 +32,6 @@ LINKS=(
 	"pub"
 	"replicate"
 	"state"
-	"t2"
 	"thumbs"
 	"tmp"
 	"yes"

@@ -1,6 +1,6 @@
 # Computer Vision Gallery Management System - Justfile
 # ================================================
-# 
+#
 # This Justfile provides a comprehensive set of tasks for managing a computer vision
 # image gallery system. It handles image processing, metadata management, web serving,
 # and integration with external services like ESRGAN and Replicate AI.
@@ -59,34 +59,13 @@ posts input file:
         cat {{ file }}.txt | awk '{print $1, $2}' | while read -r post url; do img="${url##*/}"; echo $img; done | sort | while read -r img; do if test -f yes/$img; then if ! test -f posts/${img%.jpeg}.json; then echo posts/$img; grep "/$img " {{ file }}.txt | awk '{print $3}' | base64 -d > posts/${img%.jpeg}.json; fi; fi; done
     done
     rm {{ file }}.txt
-    
+
 # Download and process content for a specific user (using blurmap.go)
 # Fetches user data, processes JSON, and downloads associated images
 user uname stage1="yes" stage2="no":
     echo "{{uname}}" | go run blurmap.go -mode user -users /dev/stdin
     go run blurmap.go -mode download
     reset
-
-# LEGACY: Process JSON file and count filtered images
-# This functionality is now built into blurmap.go (see 'html' target)
-# REMOVED: Replaced by blurmap.go -mode html
-#process file stage1="yes" stage2="no" fast="":
-#    just index {{ file }} {{ stage1 }} {{ stage2 }}
-#    cat {{ file }}.input | wc -l
-
-# LEGACY: Download images from URLs in JSON file
-# This functionality is now built into blurmap.go (see 'download' mode)
-# REMOVED: Replaced by blurmap.go -mode download
-#download file:
-#    cat {{ file }} | jq -r '.url' | sort -u | runmany 8 20 'cd img && wget -nc --no-verbose $@'
-
-# LEGACY: Generate 400px PNG thumbnails from JPEG images
-# This functionality is now built into blurmap.go (see 'download' mode)
-# REMOVED: Replaced by blurmap.go -mode download
-#thumbs:
-#    cat <(find thumbs -name '*.png' | cut -d/ -f2 | cut -d. -f1) <(find img -name '*.jpeg' | cut -d/ -f2 | cut -d. -f1) | sort | uniq -c | grep ' 1 ' | awk '{print $2}' | while read -r a; do if ! test -f "thumbs/$a.png"; then echo "$a"; fi; done | sort | runmany 32 'if ! test -f thumbs/${1}.png; then if [[ "$(identify -format "%n" img/$1.jpeg)" == 1 ]]; then echo thumbs/$1.png; mogrify -path thumbs -resize 400x -format png img/$1.jpeg || true; fi; fi'
-#    cat <(find thumbs -name '*.png' | cut -d/ -f2 | cut -d. -f1) <(find img -name '*.jpeg' | cut -d/ -f2 | cut -d. -f1) | sort | uniq -c | grep ' 1 ' | awk '{print $2}' | while read -r a; do if ! test -f "thumbs/$a.png"; then echo "img/$a.jpeg"; fi; done | xargs file | grep "image data" | grep GIF | cut -d: -f1 | cut -d/ -f2 | while read -r a; do echo "GIF img/$a"; touch no/$a thumbs/${a%%.jpeg}.png; done
-#    cat <(find thumbs -name '*.png' | cut -d/ -f2 | cut -d. -f1) <(find img -name '*.jpeg' | cut -d/ -f2 | cut -d. -f1) | sort | uniq -c | grep ' 1 ' | awk '{print $2}' | while read -r a; do if ! test -f "thumbs/$a.png"; then echo "img/$a.jpeg"; fi; done | xargs file | grep -v "image data" | cut -d: -f1 | cut -d/ -f2 | while read -r a; do echo "not image img/$a"; touch no/$a thumbs/${a%%.jpeg}.png; done
 
 t2:
     cat <(find yes -type f | cut -d/ -f2 | cut -d. -f1) <(find yes -type f | cut -d/ -f2 | cut -d. -f1) <(find t2 -name '*.png' | cut -d/ -f2 | cut -d. -f1) | sort | uniq -c | grep ' 2 ' | awk '{print $NF}' | sort | runmany 32 1 'echo "img/$1.jpeg -> t2/$1.png"; mogrify -path t2 -resize 400x -format png img/$1.jpeg'
@@ -102,21 +81,7 @@ w-galleries:
 # Uses Go program to generate blurhash previews for fast loading
 # Now scans directory directly without needing all.input file
 gallery prefix="replicate/":
-    go run blurmap.go -mode gallery -scan-dir {{prefix}}t2 
-
-# LEGACY: Extract and filter image IDs from JSON file
-# This functionality is now built into blurmap.go (see 'html' target)
-# REMOVED: Replaced by blurmap.go -mode html
-#index file stage1 stage2:
-#    cat {{ file }} | jq -r '.url' | cut -d/ -f7 | cut -d. -f1 | sort > {{ file }}.all
-#    cat {{ file }}.all | while read -r a; do if test -s thumbs/$a.png; then if ! test -f "{{ stage1 }}/$a.jpeg"; then if ! test -f "{{ stage2 }}/$a.jpeg"; then echo "$a"; fi; fi; fi; done | sort > {{ file }}.input
-
-# LEGACY: Generate HTML index of all user galleries
-# This functionality is now built into blurmap.go with -generate-index flag
-# REMOVED: Replaced by blurmap.go -mode html with -generate-index flag
-#following:
-#    ls -ltrhd tmp/g/js-username-*/*/index.html | awk '{print $NF}' | while read -r a; do echo "<a href=\"$a\">$a</a><br>"; done > following.html.1
-#    mv -f following.html.1 following.html
+    go run blurmap.go -mode gallery -scan-dir {{prefix}}t2
 
 # Generate curation gallery from uncurated images
 # Creates state/todo.txt with uncurated images and generates gallery in tmp/g
@@ -126,21 +91,10 @@ todo:
     echo 1 > LAST
 
 daily file="following.txt" n="8":
-    echo 1 > LAST
-    screen -dmS daily j daily-inner {{ file }} {{ n }}
-    screen -DRR daily
-
-daily-inner file n:
-    just download-user {{ file }} {{ n }} || true
     go run blurmap.go -mode download
-    #just html {{ file }} || true
-    #just following
 
 download-user file n="4":
     go run blurmap.go -mode user -users {{ file }}
-
-html file="following.txt" n="40":
-    cat {{ file }} | runmany {{ n }} 'go run blurmap.go -mode html -json js-username/username-$1/js-username-$1.json.js.json -o tmp/g/js-username-$1.json.js.json.input -generate-index following.html'
 
 # Start backup process in screen session
 # Syncs replicate directory to remote storage with configurable transfer threads
@@ -178,73 +132,6 @@ reset-inner:
     just eod
     rm -f js-* js.json.* js.json || true
 
-# Run ESRGAN super-resolution processing on images
-# Checks for images that need processing and runs ESRGAN if needed
-# Parameters: n = number of parallel ESRGAN processes (default: 10)
-ersgan n="10":
-    just t2 || true
-    rm -f .something
-    cat <(find t2 -name '*.png' | cut -d/ -f2 | cut -d. -f1) <(find replicate/img/ -name '*.png' | cut -d/ -f3 | cut -d. -f1) | sort | uniq -c | grep -v ' 2 ' | awk '{print $NF}' | sort | runmany 'touch .something'
-    cat <(find replicate/img -name '*.png' | cut -d/ -f3 | cut -d. -f1) <(find replicate/t2 -name '*.png' | cut -d/ -f3 | cut -d. -f1) <(find replicate/t2 -name '*.png' | cut -d/ -f3 | cut -d. -f1) | sort | uniq -c | grep ' 1 ' | awk '{print $NF}' | runmany 'touch .something'
-    if [[ -f .something ]]; then just ersgan-inner {{n}}; fi
-    for a in yes replicate/{img,t2}; do echo "$a $(find $a -type f | wc -l)"; done
-    echo "sqlite $(echo 'select count(*) from img' | sqlite3 cv.db)"
-
-ersgan-inner n:
-    sudo tailscale serve --https=443 off || true
-    sudo tailscale funnel reset
-    sudo tailscale funnel --bg --set-path /pub http://localhost:8111/pub
-    # t2 -> replicate/img
-    while true; do if curl -sSL https://pc.tail3884f.ts.net/pub/index.html | grep hello; then sleep 5; break; fi; sleep 1; done
-    mkdir -p replicate/js
-    cat <(find t2 -name '*.png' | cut -d/ -f2 | cut -d. -f1) <(find replicate/img/ -name '*.png' | cut -d/ -f3 | cut -d. -f1) | sort | uniq -c | grep -v ' 2 ' | awk '{print $NF}' | sort | runmany {{n}} './ersgan.mjs $1'
-    sleep 10
-    cat <(find t2 -name '*.png' | cut -d/ -f2 | cut -d. -f1) <(find replicate/img/ -name '*.png' | cut -d/ -f3 | cut -d. -f1) | sort | uniq -c | grep -v ' 2 ' | awk '{print $NF}' | sort | runmany {{n}} './ersgan.mjs $1'
-    # replicate/img -> replicate/t2
-    cat <(find replicate/img -name '*.png' | cut -d/ -f3 | cut -d. -f1) <(find replicate/t2 -name '*.png' | cut -d/ -f3 | cut -d. -f1) <(find replicate/t2 -name '*.png' | cut -d/ -f3 | cut -d. -f1) | sort | uniq -c | grep ' 1 ' | awk '{print $NF}' | runmany 32 'mogrify -path replicate/t2 -resize 400x -format png replicate/img/$1.png'
-    sudo tailscale funnel reset
-    sudo tailscale serve --bg 8111
-    sudo tailscale serve status
-    just db-img
-    just db-size
-
-fm-start:
-    sudo tailscale serve --https=443 off || true
-    sudo tailscale funnel reset
-    sudo tailscale funnel --bg --set-path /pub http://localhost:8111/pub
-
-fm-stop:
-    sudo tailscale funnel reset
-    sudo tailscale serve --bg 8111
-    sudo tailscale serve status
-
-users:
-    find posts -name '*.json' | xargs cat | jq -r '.username' | sort | uniq -c | sort -n > users.txt
-
-db-img *args:
-    diff <(echo 'select id from img order by id' | sqlite3 cv.db) <(find yes -type f | cut -d/ -f2 | cut -d. -f1 | sort) | grep '^>' | awk '{print $NF}' | xargs -n 100 just db-img-inner
-
-db-img-inner *args:
-    time echo {{ args }} | runmany 1 100 'echo $*; echo; j db-upsert-img $* | sqlite3 cv.db'
-
-db-size:
-    echo 'select id from img where thumb_height is null' | sqlite3 cv.db | xargs -n 100 just db-size-inner
-
-db-size-inner *args:
-    time echo {{ args }} | runmany 1 100 'echo $*; echo; j db-upsert-size $* | sqlite3 cv.db'
-
-db-upsert-img *args:
-    #!/usr/bin/env bash
-    echo "begin transaction;"
-    runmany 16 'echo "INSERT OR IGNORE INTO img (id, good) values ('"'"'$1'"'"', true);"' {{ args }}
-    echo "commit;"
-
-db-upsert-size*args:
-    #!/usr/bin/env bash
-    echo "begin transaction;"
-    runmany 16 'img=$1; set -- $(identify -format "%w %h" replicate/t2/$1.png); if [[ -n "$1" ]]; then echo "UPDATE OR IGNORE img SET good = true, thumb_height=$1, thumb_width = $2 WHERE ID = '"'"'$img'"'"';"; fi' {{ args }}
-    echo "commit;"
-
 # Quality assurance checks for data consistency
 # Identifies overlaps, missing files, and inconsistencies between directories
 qa:
@@ -266,7 +153,7 @@ split dataset from to where="~/work/backup/zfs/cv-":
 
 # Open curation galleries in browser using Tailscale IP
 # Uses LAST file to track progress through gallery list
-open chunk="10":
+open chunk="1":
     #!/usr/bin/env bash
     # Get tailscale IP
     ts_ip=$(tailscale ip -4)
@@ -303,6 +190,8 @@ open chunk="10":
         next=$((i + chunk_size))
         echo "$next" > LAST
 
+        exit
+
         if [ $next -le $total ]; then
             read -p "Press Enter to continue at position $next..."
         fi
@@ -315,17 +204,6 @@ freeze from snap backups:
     sudo zfs snapshot fast/cv@{{snap}} || true
     if test -n "{{backups}}"; then runmany 'just send fast/cv {{snap}} $1' {{backups}}; fi
     if test -z "{{backups}}"; then just split fast/cv {{from}} {{snap}} /backup/backup/zfs/cv-; fi
-
-# Configure Tailscale serving for gallery access
-# Sets up web endpoints for gallery files and directories via Tailscale
-serve:
-  sudo tailscale serve --bg --set-path=/replicate /remote/cv/replicate
-  sudo tailscale serve --bg --set-path=/all.html /remote/cv/all.html
-  sudo tailscale serve --bg --set-path=/two.html /remote/cv/two.html 
-  sudo tailscale serve --bg --set-path=/one.html /remote/cv/one.html
-  sudo tailscale serve --bg --set-path=/gallery.css /remote/cv/gallery.css
-  sudo tailscale serve --bg --set-path=/gallery.js /remote/cv/gallery.js
-  sudo tailscale serve --bg --set-path=/ https+insecure://127.0.0.1:5000
 
 link:
     ln -nvfs ~/m/cv/{Justfile,*.mjs,proxy.conf,package.json,etc,gallery.*,tutorial.html,.joyride} .
@@ -342,6 +220,3 @@ v-html vid:
 
 v-gen type="html" n="2":
     (cd v/img; ls -d */ | cut -d/ -f1) | runmany {{n}} 'just v-{{type}} $1'
-
-watch:
-    watch -n 10 'ls -ltrhd *.json.js.json | wc -l; echo; ps ax | grep [0-9][0-9].[j]ust.user'
