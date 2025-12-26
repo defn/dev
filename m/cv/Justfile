@@ -118,6 +118,13 @@ gallery prefix="replicate/":
 #    ls -ltrhd tmp/g/js-username-*/*/index.html | awk '{print $NF}' | while read -r a; do echo "<a href=\"$a\">$a</a><br>"; done > following.html.1
 #    mv -f following.html.1 following.html
 
+# Generate curation gallery from uncurated images
+# Creates state/todo.txt with uncurated images and generates gallery in tmp/g
+todo:
+    go run blurmap.go -mode todo
+    go run blurmap.go -mode gallery -file-list state/todo.txt
+    echo 1 > LAST
+
 daily file="following.txt" n="8":
     echo 1 > LAST
     screen -dmS daily j daily-inner {{ file }} {{ n }}

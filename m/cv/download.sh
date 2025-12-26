@@ -20,6 +20,14 @@ while IFS= read -r url; do
 		continue
 	fi
 
+	# Check if this is an mp4 file - just touch it instead of downloading
+	if [[ $filename == *.mp4 ]]; then
+		echo "Touching: $filename (mp4 files are zero-length)"
+		touch "img/$filename"
+		echo "Success: $filename"
+		continue
+	fi
+
 	echo "Downloading: $filename"
 
 	# Download with wget into img/ directory
