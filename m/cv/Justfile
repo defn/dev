@@ -16,9 +16,8 @@
 #
 # Usage Examples:
 #   just gallery                    # Generate image gallery
-#   just thumbs                     # Create thumbnails for all images
+#   just user username              # Download user content and generate thumbnails
 #   just ersgan 5                   # Run ESRGAN on 5 parallel processes
-#   just user username              # Download user content
 #   just backup 20                  # Backup with 20 transfer threads
 #
 # Directory Structure:
@@ -61,31 +60,33 @@ posts input file:
     done
     rm {{ file }}.txt
     
-# Download and process content for a specific user
+# Download and process content for a specific user (using blurmap.go)
 # Fetches user data, processes JSON, and downloads associated images
 user uname stage1="yes" stage2="no":
-    etc/user {{uname}} 1 100
-    cat js-username-{{ uname }}.json | jq '.[]' > js-username-{{ uname}}.json.js.json
-    just download js-username-{{ uname }}.json.js.json
+    echo "{{uname}}" | go run blurmap.go -mode user -users /dev/stdin
+    go run blurmap.go -mode download
     reset
 
 # LEGACY: Process JSON file and count filtered images
 # This functionality is now built into blurmap.go (see 'html' target)
-# Kept for backward compatibility
-process file stage1="yes" stage2="no" fast="":
-    just index {{ file }} {{ stage1 }} {{ stage2 }}
-    cat {{ file }}.input | wc -l
+# REMOVED: Replaced by blurmap.go -mode html
+#process file stage1="yes" stage2="no" fast="":
+#    just index {{ file }} {{ stage1 }} {{ stage2 }}
+#    cat {{ file }}.input | wc -l
 
-download file:
-    cat {{ file }} | jq -r '.url' | sort -u | runmany 8 20 'cd img && wget -nc --no-verbose $@'
+# LEGACY: Download images from URLs in JSON file
+# This functionality is now built into blurmap.go (see 'download' mode)
+# REMOVED: Replaced by blurmap.go -mode download
+#download file:
+#    cat {{ file }} | jq -r '.url' | sort -u | runmany 8 20 'cd img && wget -nc --no-verbose $@'
 
-# Generate 400px PNG thumbnails from JPEG images
-# Handles animated GIFs and invalid image files by marking them appropriately
-# Uses parallel processing (32 workers) for efficiency
-thumbs:
-    cat <(find thumbs -name '*.png' | cut -d/ -f2 | cut -d. -f1) <(find img -name '*.jpeg' | cut -d/ -f2 | cut -d. -f1) | sort | uniq -c | grep ' 1 ' | awk '{print $2}' | while read -r a; do if ! test -f "thumbs/$a.png"; then echo "$a"; fi; done | sort | runmany 32 'if ! test -f thumbs/${1}.png; then if [[ "$(identify -format "%n" img/$1.jpeg)" == 1 ]]; then echo thumbs/$1.png; mogrify -path thumbs -resize 400x -format png img/$1.jpeg || true; fi; fi'
-    cat <(find thumbs -name '*.png' | cut -d/ -f2 | cut -d. -f1) <(find img -name '*.jpeg' | cut -d/ -f2 | cut -d. -f1) | sort | uniq -c | grep ' 1 ' | awk '{print $2}' | while read -r a; do if ! test -f "thumbs/$a.png"; then echo "img/$a.jpeg"; fi; done | xargs file | grep "image data" | grep GIF | cut -d: -f1 | cut -d/ -f2 | while read -r a; do echo "GIF img/$a"; touch no/$a thumbs/${a%%.jpeg}.png; done
-    cat <(find thumbs -name '*.png' | cut -d/ -f2 | cut -d. -f1) <(find img -name '*.jpeg' | cut -d/ -f2 | cut -d. -f1) | sort | uniq -c | grep ' 1 ' | awk '{print $2}' | while read -r a; do if ! test -f "thumbs/$a.png"; then echo "img/$a.jpeg"; fi; done | xargs file | grep -v "image data" | cut -d: -f1 | cut -d/ -f2 | while read -r a; do echo "not image img/$a"; touch no/$a thumbs/${a%%.jpeg}.png; done
+# LEGACY: Generate 400px PNG thumbnails from JPEG images
+# This functionality is now built into blurmap.go (see 'download' mode)
+# REMOVED: Replaced by blurmap.go -mode download
+#thumbs:
+#    cat <(find thumbs -name '*.png' | cut -d/ -f2 | cut -d. -f1) <(find img -name '*.jpeg' | cut -d/ -f2 | cut -d. -f1) | sort | uniq -c | grep ' 1 ' | awk '{print $2}' | while read -r a; do if ! test -f "thumbs/$a.png"; then echo "$a"; fi; done | sort | runmany 32 'if ! test -f thumbs/${1}.png; then if [[ "$(identify -format "%n" img/$1.jpeg)" == 1 ]]; then echo thumbs/$1.png; mogrify -path thumbs -resize 400x -format png img/$1.jpeg || true; fi; fi'
+#    cat <(find thumbs -name '*.png' | cut -d/ -f2 | cut -d. -f1) <(find img -name '*.jpeg' | cut -d/ -f2 | cut -d. -f1) | sort | uniq -c | grep ' 1 ' | awk '{print $2}' | while read -r a; do if ! test -f "thumbs/$a.png"; then echo "img/$a.jpeg"; fi; done | xargs file | grep "image data" | grep GIF | cut -d: -f1 | cut -d/ -f2 | while read -r a; do echo "GIF img/$a"; touch no/$a thumbs/${a%%.jpeg}.png; done
+#    cat <(find thumbs -name '*.png' | cut -d/ -f2 | cut -d. -f1) <(find img -name '*.jpeg' | cut -d/ -f2 | cut -d. -f1) | sort | uniq -c | grep ' 1 ' | awk '{print $2}' | while read -r a; do if ! test -f "thumbs/$a.png"; then echo "img/$a.jpeg"; fi; done | xargs file | grep -v "image data" | cut -d: -f1 | cut -d/ -f2 | while read -r a; do echo "not image img/$a"; touch no/$a thumbs/${a%%.jpeg}.png; done
 
 t2:
     cat <(find yes -type f | cut -d/ -f2 | cut -d. -f1) <(find yes -type f | cut -d/ -f2 | cut -d. -f1) <(find t2 -name '*.png' | cut -d/ -f2 | cut -d. -f1) | sort | uniq -c | grep ' 2 ' | awk '{print $NF}' | sort | runmany 32 1 'echo "img/$1.jpeg -> t2/$1.png"; mogrify -path t2 -resize 400x -format png img/$1.jpeg'
@@ -105,17 +106,17 @@ gallery prefix="replicate/":
 
 # LEGACY: Extract and filter image IDs from JSON file
 # This functionality is now built into blurmap.go (see 'html' target)
-# Kept for backward compatibility with other targets that may use it
-index file stage1 stage2:
-    cat {{ file }} | jq -r '.url' | cut -d/ -f7 | cut -d. -f1 | sort > {{ file }}.all
-    cat {{ file }}.all | while read -r a; do if test -s thumbs/$a.png; then if ! test -f "{{ stage1 }}/$a.jpeg"; then if ! test -f "{{ stage2 }}/$a.jpeg"; then echo "$a"; fi; fi; fi; done | sort > {{ file }}.input
+# REMOVED: Replaced by blurmap.go -mode html
+#index file stage1 stage2:
+#    cat {{ file }} | jq -r '.url' | cut -d/ -f7 | cut -d. -f1 | sort > {{ file }}.all
+#    cat {{ file }}.all | while read -r a; do if test -s thumbs/$a.png; then if ! test -f "{{ stage1 }}/$a.jpeg"; then if ! test -f "{{ stage2 }}/$a.jpeg"; then echo "$a"; fi; fi; fi; done | sort > {{ file }}.input
 
 # LEGACY: Generate HTML index of all user galleries
 # This functionality is now built into blurmap.go with -generate-index flag
-# Kept for backward compatibility
-following:
-    ls -ltrhd tmp/g/js-username-*/*/index.html | awk '{print $NF}' | while read -r a; do echo "<a href=\"$a\">$a</a><br>"; done > following.html.1
-    mv -f following.html.1 following.html
+# REMOVED: Replaced by blurmap.go -mode html with -generate-index flag
+#following:
+#    ls -ltrhd tmp/g/js-username-*/*/index.html | awk '{print $NF}' | while read -r a; do echo "<a href=\"$a\">$a</a><br>"; done > following.html.1
+#    mv -f following.html.1 following.html
 
 daily file="following.txt" n="8":
     echo 1 > LAST
@@ -124,15 +125,15 @@ daily file="following.txt" n="8":
 
 daily-inner file n:
     just download-user {{ file }} {{ n }} || true
-    just thumbs
+    go run blurmap.go -mode download
     #just html {{ file }} || true
     #just following
 
 download-user file n="4":
-    cat {{ file }} | runmany {{ n }} 'just user $1'
+    go run blurmap.go -mode user -users {{ file }}
 
 html file="following.txt" n="40":
-    cat {{ file }} | runmany {{ n }} 'go run blurmap.go -mode html -json js-username-$1.json.js.json -o tmp/g/js-username-$1.json.js.json.input -generate-index following.html'
+    cat {{ file }} | runmany {{ n }} 'go run blurmap.go -mode html -json js-username/username-$1/js-username-$1.json.js.json -o tmp/g/js-username-$1.json.js.json.input -generate-index following.html'
 
 # Start backup process in screen session
 # Syncs replicate directory to remote storage with configurable transfer threads

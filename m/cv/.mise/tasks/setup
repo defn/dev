@@ -26,7 +26,6 @@ LINKS=(
 	"cv.db"
 	"g"
 	"img"
-	"js"
 	"js-username"
 	"LAST"
 	"no"
@@ -39,6 +38,7 @@ LINKS=(
 	"tmp"
 	"yes"
 	"yo"
+	".env"
 )
 
 for link in "${LINKS[@]}"; do

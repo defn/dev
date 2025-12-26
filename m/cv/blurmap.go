@@ -20,9 +20,10 @@ Architecture:
 - Chunked output for handling large image collections
 
 Usage:
-  go run blurmap.go -mode gallery -scan-dir img/
-  go run blurmap.go -mode html -json users.json -o gallery/
-  go run blurmap.go -mode batch
+
+	go run blurmap.go -mode gallery -scan-dir img/
+	go run blurmap.go -mode html -json users.json -o gallery/
+	go run blurmap.go -mode batch
 
 Output:
   - Paginated HTML files (1.html, 2.html, etc.)
@@ -37,6 +38,7 @@ Dependencies:
 package main
 
 import (
+	"bufio"
 	"bytes"
 	"crypto/sha256"
 	"encoding/base64"
@@ -49,28 +51,37 @@ import (
 	"io/ioutil"
 	"net/http"
 	"os"
+	"os/exec"
 	"path/filepath"
 	"runtime"
 	"sort"
 	"strconv"
 	"strings"
 	"sync"
+	"sync/atomic"
 	"time"
 )
 
 // Command-line configuration variables
 // These control the behavior and paths used by the gallery generator
 var (
-	outputDir     string // Directory where HTML gallery pages will be written
-	cacheDir      string // Directory for caching blurhash and dimension data
-	imageDir      string // Source directory containing the actual image files
-	selectMode    string // Gallery interaction mode ("yes" for selection, "no" for read-only)
-	scanDir       string // Directory to scan for images (gallery mode)
-	jsonFile      string // JSON file for filtering (html mode)
-	stage1Dir     string // First stage directory for filtering (html mode)
-	stage2Dir     string // Second stage directory for filtering (html mode)
-	thumbsDir     string // Thumbnails directory for filtering (html mode)
-	generateIndex string // Path to generate index file (html mode)
+	outputDir       string // Directory where HTML gallery pages will be written
+	cacheDir        string // Directory for caching blurhash and dimension data
+	imageDir        string // Source directory containing the actual image files
+	selectMode      string // Gallery interaction mode ("yes" for selection, "no" for read-only)
+	scanDir         string // Directory to scan for images (gallery mode)
+	jsonFile        string // JSON file for filtering (html mode)
+	stage1Dir       string // First stage directory for filtering (html mode)
+	stage2Dir       string // Second stage directory for filtering (html mode)
+	thumbsDir       string // Thumbnails directory for filtering (html mode)
+	generateIndex   string // Path to generate index file (html mode)
+	usersFile       string // File containing list of usernames (user mode)
+	apiURL          string // API base URL for downloading user data (user mode)
+	startPage       int    // Starting page number for user downloads (user mode)
+	pageLimit       int    // Maximum number of pages to download per user (user mode)
+	downloadWorkers int    // Number of parallel download workers (download mode)
+	downloadBatch   int    // URLs per batch for downloads (download mode)
+	thumbWorkers    int    // Number of parallel thumbnail workers (download mode)
 )
 
 // galleryTemplate defines the HTML structure for gallery pages
@@ -169,10 +180,22 @@ func main() {
 	flag.StringVar(&thumbsDir, "thumbs-dir", "thumbs", "Thumbnails directory for filtering (html mode)")
 	flag.StringVar(&generateIndex, "generate-index", "", "Generate index file with links to all galleries")
 
+	// User mode specific flags
+	flag.StringVar(&usersFile, "users-file", "", "File containing list of usernames to download (user mode)")
+	flag.StringVar(&usersFile, "users", "", "File containing list of usernames (shorthand)")
+	flag.StringVar(&apiURL, "api-url", "", "API base URL for downloading (user mode, defaults to .env)")
+	flag.IntVar(&startPage, "start-page", 1, "Starting page number for downloads (user mode)")
+	flag.IntVar(&pageLimit, "page-limit", 500, "Maximum pages to download per user (user mode)")
+
+	// Download mode specific flags
+	flag.IntVar(&downloadWorkers, "download-workers", 8, "Number of parallel download workers (download mode)")
+	flag.IntVar(&downloadBatch, "download-batch", 20, "URLs per batch for downloads (download mode)")
+	flag.IntVar(&thumbWorkers, "thumb-workers", 32, "Number of parallel thumbnail workers (download mode)")
+
 	// Mode configuration
 	var modeValue string
-	flag.StringVar(&modeValue, "mode", "", "Operating mode: gallery, html, batch, or fem")
-	flag.StringVar(&modeValue, "m", "", "Operating mode (shorthand): gallery, html, batch, or fem")
+	flag.StringVar(&modeValue, "mode", "", "Operating mode: gallery, html, batch, fem, user, or download")
+	flag.StringVar(&modeValue, "m", "", "Operating mode (shorthand): gallery, html, batch, fem, user, or download")
 	mode := &modeValue
 
 	// Help flags
@@ -182,12 +205,16 @@ func main() {
 
 	// Display help information if requested
 	if *showHelp || *showHelpShort {
-		fmt.Fprintf(os.Stderr, "Usage: %s -mode <gallery|html|batch|fem> [options]\n", os.Args[0])
+		fmt.Fprintf(os.Stderr, "Usage: %s -mode <gallery|html|batch|fem|user|download|todo|fixup> [options]\n", os.Args[0])
 		fmt.Fprintf(os.Stderr, "\nModes:\n")
 		fmt.Fprintf(os.Stderr, "  gallery  - Scan directory and generate main gallery\n")
 		fmt.Fprintf(os.Stderr, "  html     - Process JSON file and generate per-user gallery with filtering\n")
 		fmt.Fprintf(os.Stderr, "  batch    - Process all w-* galleries in batch\n")
 		fmt.Fprintf(os.Stderr, "  fem      - Face manipulation gallery generator using ML model server\n")
+		fmt.Fprintf(os.Stderr, "  todo     - Generate list of uncurated images (not in yes/ or no/)\n")
+		fmt.Fprintf(os.Stderr, "  fixup    - Create no/ entries for all zero-length files in img/\n")
+		fmt.Fprintf(os.Stderr, "  user     - Download user data from API (reads usernames from file)\n")
+		fmt.Fprintf(os.Stderr, "  download - Download images and generate thumbnails from user data\n")
 		fmt.Fprintf(os.Stderr, "\nOptions:\n")
 		flag.PrintDefaults()
 		os.Exit(0)
@@ -295,8 +322,24 @@ func main() {
 		fmt.Fprintf(os.Stderr, "FEM mode: Generating face-swapped galleries\n")
 		runFemMode()
 
+	case "user":
+		// User mode: download user data from API
+		downloadUsersMode()
+
+	case "download":
+		// Download mode: download images and generate thumbnails
+		downloadMode()
+
+	case "todo":
+		// Todo mode: generate list of uncurated images
+		todoMode()
+
+	case "fixup":
+		// Fixup mode: create no/ entries for zero-length files in img/
+		fixupMode()
+
 	default:
-		fmt.Fprintf(os.Stderr, "Error: -mode must be specified as 'gallery', 'html', 'batch', or 'fem'\n")
+		fmt.Fprintf(os.Stderr, "Error: -mode must be specified as 'gallery', 'html', 'batch', 'fem', 'user', 'download', 'todo', or 'fixup'\n")
 		fmt.Fprintf(os.Stderr, "Run with -help for usage information\n")
 		os.Exit(1)
 	}
@@ -349,11 +392,11 @@ func batchProcessAllGalleries() {
 	// Track completion status for debugging
 	type WorkerStatus struct {
 		sync.Mutex
-		perWComplete    bool
-		masterComplete  bool
-		fmHtmlComplete  bool
-		wWorkersActive  int
-		wWorkersTotal   int
+		perWComplete   bool
+		masterComplete bool
+		fmHtmlComplete bool
+		wWorkersActive int
+		wWorkersTotal  int
 	}
 	status := &WorkerStatus{wWorkersTotal: numWorkers}
 
@@ -1645,6 +1688,1307 @@ func getImageDimensions(imagePath string) (int, int, error) {
 	height := bounds.Max.Y - bounds.Min.Y
 
 	return width, height, nil
+}
+
+// User download mode implementation
+// ==================================
+
+// downloadUsersMode reads a list of usernames and downloads their data from the API
+func downloadUsersMode() {
+	fmt.Fprintf(os.Stderr, "User mode: Downloading user data\n")
+
+	// Load API URL from .env if not provided
+	if apiURL == "" {
+		var err error
+		apiURL, err = loadAPIURLFromEnv()
+		if err != nil {
+			fmt.Fprintf(os.Stderr, "Error loading API URL from .env: %v\n", err)
+			os.Exit(1)
+		}
+	}
+	fmt.Fprintf(os.Stderr, "Using API URL: %s\n", apiURL)
+
+	// Parse refresh users from command-line arguments
+	refreshUsers := parseRefreshUsersFromArgs(flag.Args())
+
+	var usernames []string
+	var err error
+
+	if len(refreshUsers) > 0 {
+		// If refresh directories are provided, use those usernames
+		fmt.Fprintf(os.Stderr, "Found %d users to refresh from command-line arguments\n", len(refreshUsers))
+		for username := range refreshUsers {
+			usernames = append(usernames, username)
+		}
+	} else {
+		// Otherwise, read usernames from file
+		if usersFile == "" {
+			fmt.Fprintf(os.Stderr, "Error: -users-file required when no refresh directories are provided\n")
+			os.Exit(1)
+		}
+		usernames, err = readUsernamesFromFile(usersFile)
+		if err != nil {
+			fmt.Fprintf(os.Stderr, "Error reading usernames file: %v\n", err)
+			os.Exit(1)
+		}
+	}
+
+	fmt.Fprintf(os.Stderr, "Found %d usernames to process\n", len(usernames))
+
+	// Process each username
+	skipped := 0
+	processed := 0
+	refreshed := 0
+	for i, username := range usernames {
+		// Check if user directory already exists
+		prefix := "username-" + username
+		userDir := filepath.Join("js-username", prefix)
+
+		// Check if this user should be refreshed (forced re-download)
+		// This is only true for users specified via CLI arguments, not from file
+		shouldRefresh := refreshUsers[username]
+
+		if _, err := os.Stat(userDir); err == nil && !shouldRefresh {
+			fmt.Fprintf(os.Stderr, "\n[%d/%d] Skipping user: %s (already exists in js-username)\n", i+1, len(usernames), username)
+			skipped++
+			continue
+		}
+
+		if shouldRefresh {
+			fmt.Fprintf(os.Stderr, "\n[%d/%d] Refreshing user: %s\n", i+1, len(usernames), username)
+			refreshed++
+		} else {
+			fmt.Fprintf(os.Stderr, "\n[%d/%d] Processing user: %s\n", i+1, len(usernames), username)
+		}
+
+		if err := downloadUser(username); err != nil {
+			fmt.Fprintf(os.Stderr, "Error downloading user %s: %v\n", username, err)
+			continue
+		}
+		processed++
+	}
+
+	fmt.Fprintf(os.Stderr, "\nProcessed %d users (%d refreshed), skipped %d existing users\n", processed, refreshed, skipped)
+}
+
+// loadAPIURLFromEnv reads the url variable from .env file
+func loadAPIURLFromEnv() (string, error) {
+	envPath := ".env"
+	file, err := os.Open(envPath)
+	if err != nil {
+		return "", fmt.Errorf("failed to open .env file: %w", err)
+	}
+	defer file.Close()
+
+	scanner := bufio.NewScanner(file)
+	for scanner.Scan() {
+		line := strings.TrimSpace(scanner.Text())
+		if strings.HasPrefix(line, "url=") {
+			return strings.TrimPrefix(line, "url="), nil
+		}
+	}
+
+	if err := scanner.Err(); err != nil {
+		return "", fmt.Errorf("error reading .env file: %w", err)
+	}
+
+	return "", fmt.Errorf("url not found in .env file")
+}
+
+// readUsernamesFromFile reads a list of usernames from a text file (one per line)
+func readUsernamesFromFile(filename string) ([]string, error) {
+	file, err := os.Open(filename)
+	if err != nil {
+		return nil, fmt.Errorf("failed to open usernames file: %w", err)
+	}
+	defer file.Close()
+
+	var usernames []string
+	scanner := bufio.NewScanner(file)
+	for scanner.Scan() {
+		line := strings.TrimSpace(scanner.Text())
+		if line != "" && !strings.HasPrefix(line, "#") {
+			usernames = append(usernames, line)
+		}
+	}
+
+	if err := scanner.Err(); err != nil {
+		return nil, fmt.Errorf("error reading usernames file: %w", err)
+	}
+
+	return usernames, nil
+}
+
+// parseRefreshUsersFromArgs parses command-line arguments as user directories
+// Expects paths in the form: js-username/username-{username}
+func parseRefreshUsersFromArgs(args []string) map[string]bool {
+	refreshUsers := make(map[string]bool)
+
+	for _, arg := range args {
+		// Remove trailing slash if present
+		arg = strings.TrimSuffix(arg, "/")
+
+		// Get the directory name (last part of path)
+		dirName := filepath.Base(arg)
+
+		// Extract username from "username-{username}" format
+		if strings.HasPrefix(dirName, "username-") {
+			username := strings.TrimPrefix(dirName, "username-")
+			refreshUsers[username] = true
+		}
+	}
+
+	return refreshUsers
+}
+
+// downloadUser downloads all data for a single user from the API
+func downloadUser(username string) error {
+	prefix := "username-" + username
+	userDir := filepath.Join("js-username", prefix)
+	jsDir := filepath.Join(userDir, "js")
+
+	// Create directory structure
+	if err := os.MkdirAll(jsDir, 0755); err != nil {
+		return fmt.Errorf("failed to create directory %s: %w", jsDir, err)
+	}
+
+	// Download for both NSFW true and false
+	nsfwValues := []string{"true", "false"}
+	allItems := make(map[string]interface{})
+
+	for _, nsfw := range nsfwValues {
+		fmt.Fprintf(os.Stderr, "  Downloading with nsfw=%s...\n", nsfw)
+
+		page := startPage
+		for page <= pageLimit {
+			outputFile := filepath.Join(jsDir, fmt.Sprintf("%s-%s-%d.json", prefix, nsfw, page-1))
+
+			// Check if file already exists
+			if _, err := os.Stat(outputFile); err == nil {
+				fmt.Fprintf(os.Stderr, "    Page %d already exists, loading from cache\n", page-1)
+				data, err := ioutil.ReadFile(outputFile)
+				if err != nil {
+					return fmt.Errorf("failed to read cached file: %w", err)
+				}
+
+				var pageData map[string]interface{}
+				if err := json.Unmarshal(data, &pageData); err != nil {
+					return fmt.Errorf("failed to parse cached JSON: %w", err)
+				}
+
+				// Collect items from this page
+				if items, ok := pageData["items"].([]interface{}); ok {
+					for _, item := range items {
+						if itemMap, ok := item.(map[string]interface{}); ok {
+							if id, ok := itemMap["id"]; ok {
+								allItems[fmt.Sprintf("%v", id)] = item
+							}
+						}
+					}
+				}
+
+				// Check for next page
+				metadata, ok := pageData["metadata"].(map[string]interface{})
+				if !ok {
+					break
+				}
+				nextPage, ok := metadata["nextPage"].(string)
+				if !ok || nextPage == "" || nextPage == "null" {
+					break
+				}
+
+				page++
+				continue
+			}
+
+			// Download the page
+			var url string
+			if page == startPage {
+				url = fmt.Sprintf("%s/api/v1/images?nsfw=%s&username=%s", apiURL, nsfw, username)
+			} else {
+				// Need to construct URL from previous page's nextPage
+				prevFile := filepath.Join(jsDir, fmt.Sprintf("%s-%s-%d.json", prefix, nsfw, page-2))
+				data, err := ioutil.ReadFile(prevFile)
+				if err != nil {
+					return fmt.Errorf("failed to read previous page: %w", err)
+				}
+
+				var prevData map[string]interface{}
+				if err := json.Unmarshal(data, &prevData); err != nil {
+					return fmt.Errorf("failed to parse previous JSON: %w", err)
+				}
+
+				metadata, ok := prevData["metadata"].(map[string]interface{})
+				if !ok {
+					break
+				}
+				nextPage, ok := metadata["nextPage"].(string)
+				if !ok || nextPage == "" || nextPage == "null" {
+					break
+				}
+				url = nextPage
+			}
+
+			fmt.Fprintf(os.Stderr, "    Downloading page %d...\n", page-1)
+			resp, err := http.Get(url)
+			if err != nil {
+				return fmt.Errorf("failed to download page %d: %w", page-1, err)
+			}
+			defer resp.Body.Close()
+
+			body, err := ioutil.ReadAll(resp.Body)
+			if err != nil {
+				return fmt.Errorf("failed to read response: %w", err)
+			}
+
+			// Save raw response
+			if err := ioutil.WriteFile(outputFile, body, 0644); err != nil {
+				return fmt.Errorf("failed to write output file: %w", err)
+			}
+
+			// Parse the response
+			var pageData map[string]interface{}
+			if err := json.Unmarshal(body, &pageData); err != nil {
+				return fmt.Errorf("failed to parse JSON: %w", err)
+			}
+
+			// Collect items from this page
+			if items, ok := pageData["items"].([]interface{}); ok {
+				for _, item := range items {
+					if itemMap, ok := item.(map[string]interface{}); ok {
+						if id, ok := itemMap["id"]; ok {
+							allItems[fmt.Sprintf("%v", id)] = item
+						}
+					}
+				}
+			}
+
+			// Check if there's a next page
+			metadata, ok := pageData["metadata"].(map[string]interface{})
+			if !ok {
+				break
+			}
+			nextPage, ok := metadata["nextPage"].(string)
+			if !ok || nextPage == "" || nextPage == "null" {
+				break
+			}
+
+			page++
+		}
+	}
+
+	// Create aggregated output
+	aggregatedFile := filepath.Join(userDir, fmt.Sprintf("js-%s.json", prefix))
+	aggregatedData, err := json.MarshalIndent(allItems, "", "  ")
+	if err != nil {
+		return fmt.Errorf("failed to marshal aggregated data: %w", err)
+	}
+
+	if err := ioutil.WriteFile(aggregatedFile, aggregatedData, 0644); err != nil {
+		return fmt.Errorf("failed to write aggregated file: %w", err)
+	}
+
+	// Create .js.json file (array of items)
+	jsFile := filepath.Join(userDir, fmt.Sprintf("js-%s.json.js.json", prefix))
+	var itemsArray []interface{}
+	for _, item := range allItems {
+		itemsArray = append(itemsArray, item)
+	}
+
+	jsData, err := json.MarshalIndent(itemsArray, "", "  ")
+	if err != nil {
+		return fmt.Errorf("failed to marshal js data: %w", err)
+	}
+
+	if err := ioutil.WriteFile(jsFile, jsData, 0644); err != nil {
+		return fmt.Errorf("failed to write js file: %w", err)
+	}
+
+	fmt.Fprintf(os.Stderr, "  Downloaded %d unique items for user %s\n", len(allItems), username)
+	return nil
+}
+
+// Download mode implementation
+// =============================
+
+// downloadMode downloads images and generates thumbnails from aggregated user data
+func downloadMode() {
+	fmt.Fprintf(os.Stderr, "Download mode: Downloading images and generating thumbnails\n")
+
+	// Find all aggregated user JSON files
+	pattern := "js-username/username-*/js-username-*.json.js.json"
+	matches, err := filepath.Glob(pattern)
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error finding user JSON files: %v\n", err)
+		os.Exit(1)
+	}
+
+	if len(matches) == 0 {
+		fmt.Fprintf(os.Stderr, "No user JSON files found matching pattern: %s\n", pattern)
+		os.Exit(0)
+	}
+
+	fmt.Fprintf(os.Stderr, "Found %d user JSON files to process\n", len(matches))
+
+	// Collect all URLs from all user files
+	urlSet := make(map[string]bool)
+	for _, jsonFile := range matches {
+		urls, err := extractURLsFromFile(jsonFile)
+		if err != nil {
+			fmt.Fprintf(os.Stderr, "Error extracting URLs from %s: %v\n", jsonFile, err)
+			continue
+		}
+		for _, url := range urls {
+			urlSet[url] = true
+		}
+	}
+
+	// Convert to sorted slice
+	var urls []string
+	for url := range urlSet {
+		urls = append(urls, url)
+	}
+	sort.Strings(urls)
+
+	fmt.Fprintf(os.Stderr, "Found %d unique URLs to download\n", len(urls))
+
+	// Create img directory to check for existing files
+	if err := os.MkdirAll("img", 0755); err != nil {
+		fmt.Fprintf(os.Stderr, "Error creating img directory: %v\n", err)
+		os.Exit(1)
+	}
+
+	// Filter out URLs that already have files (including 0-byte marker files)
+	var urlsToDownload []string
+	alreadyDownloaded := 0
+	for _, url := range urls {
+		// Extract filename from URL
+		parts := strings.Split(url, "/")
+		if len(parts) < 2 {
+			continue
+		}
+		filename := parts[len(parts)-1]
+		outputPath := filepath.Join("img", filename)
+
+		// Check if file exists (any size, including 0-byte markers)
+		if _, err := os.Stat(outputPath); err == nil {
+			alreadyDownloaded++
+			continue
+		}
+
+		// Need to download this URL
+		urlsToDownload = append(urlsToDownload, url)
+	}
+
+	fmt.Fprintf(os.Stderr, "Already downloaded: %d files\n", alreadyDownloaded)
+	fmt.Fprintf(os.Stderr, "Need to download: %d files\n", len(urlsToDownload))
+
+	// Create state directory
+	if err := os.MkdirAll("state", 0755); err != nil {
+		fmt.Fprintf(os.Stderr, "Error creating state directory: %v\n", err)
+		os.Exit(1)
+	}
+
+	// Write URLs to state/downloads.txt
+	outputFile := "state/downloads.txt"
+	f, err := os.Create(outputFile)
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error creating %s: %v\n", outputFile, err)
+		os.Exit(1)
+	}
+	defer f.Close()
+
+	for _, url := range urlsToDownload {
+		fmt.Fprintf(f, "%s\n", url)
+	}
+
+	fmt.Fprintf(os.Stderr, "Wrote %d URLs to %s\n", len(urlsToDownload), outputFile)
+	fmt.Fprintf(os.Stderr, "Download mode complete - URLs written, no downloads performed\n")
+}
+
+// todoMode generates a list of uncurated images (not in yes/ or no/)
+func todoMode() {
+	fmt.Fprintf(os.Stderr, "Todo mode: Finding uncurated images\n")
+
+	// Create state directory
+	if err := os.MkdirAll("state", 0755); err != nil {
+		fmt.Fprintf(os.Stderr, "Error creating state directory: %v\n", err)
+		os.Exit(1)
+	}
+
+	// Resolve symlinks for directories
+	imgDir, err := filepath.EvalSymlinks("img")
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error resolving img/ symlink: %v\n", err)
+		os.Exit(1)
+	}
+
+	yesDir, err := filepath.EvalSymlinks("yes")
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error resolving yes/ symlink: %v\n", err)
+		os.Exit(1)
+	}
+
+	noDir, err := filepath.EvalSymlinks("no")
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error resolving no/ symlink: %v\n", err)
+		os.Exit(1)
+	}
+
+	// Scan all three directories in parallel
+	fmt.Fprintf(os.Stderr, "Scanning yes/, no/, and img/ directories in parallel...\n")
+
+	yesFiles := make(map[string]bool)
+	noFiles := make(map[string]bool)
+	var imgEntries []os.DirEntry
+
+	var wg sync.WaitGroup
+	errChan := make(chan error, 3)
+
+	// Scan yes/ directory
+	wg.Add(1)
+	go func() {
+		defer wg.Done()
+		count := 0
+		entries, err := os.ReadDir(yesDir)
+		if err != nil {
+			errChan <- fmt.Errorf("yes/ directory: %w", err)
+			return
+		}
+		for _, entry := range entries {
+			if !entry.IsDir() {
+				// Extract filename without extension
+				filename := entry.Name()
+				ext := filepath.Ext(filename)
+				nameWithoutExt := strings.TrimSuffix(filename, ext)
+				yesFiles[nameWithoutExt] = true
+				count++
+			}
+		}
+		fmt.Fprintf(os.Stderr, "Found %d files in yes/\n", count)
+	}()
+
+	// Scan no/ directory
+	wg.Add(1)
+	go func() {
+		defer wg.Done()
+		count := 0
+		entries, err := os.ReadDir(noDir)
+		if err != nil {
+			errChan <- fmt.Errorf("no/ directory: %w", err)
+			return
+		}
+		for _, entry := range entries {
+			if !entry.IsDir() {
+				// Extract filename without extension
+				filename := entry.Name()
+				ext := filepath.Ext(filename)
+				nameWithoutExt := strings.TrimSuffix(filename, ext)
+				noFiles[nameWithoutExt] = true
+				count++
+			}
+		}
+		fmt.Fprintf(os.Stderr, "Found %d files in no/\n", count)
+	}()
+
+	// Scan img/ directory (just read entries, don't stat yet)
+	wg.Add(1)
+	go func() {
+		defer wg.Done()
+		entries, err := os.ReadDir(imgDir)
+		if err != nil {
+			errChan <- fmt.Errorf("img/ directory: %w", err)
+			return
+		}
+		imgEntries = entries
+		fmt.Fprintf(os.Stderr, "Found %d entries in img/\n", len(imgEntries))
+	}()
+
+	// Wait for all directories to complete
+	wg.Wait()
+	close(errChan)
+
+	// Check for errors
+	for err := range errChan {
+		fmt.Fprintf(os.Stderr, "Error scanning directory: %v\n", err)
+		os.Exit(1)
+	}
+
+	// Now filter img/ entries and stat only non-curated files
+	fmt.Fprintf(os.Stderr, "Filtering and checking img/ files...\n")
+
+	var uncurated []string
+	totalFiles := 0
+	skippedCurated := 0
+	skippedZeroBytes := 0
+
+	for _, entry := range imgEntries {
+		if !entry.IsDir() {
+			totalFiles++
+			// Extract filename without extension
+			filename := entry.Name()
+			ext := filepath.Ext(filename)
+			nameWithoutExt := strings.TrimSuffix(filename, ext)
+
+			// Skip if already in yes/ or no/
+			if yesFiles[nameWithoutExt] || noFiles[nameWithoutExt] {
+				skippedCurated++
+				continue
+			}
+
+			// Only stat files that passed the filter
+			info, err := entry.Info()
+			if err != nil {
+				continue
+			}
+
+			// Skip 0-byte files (markers for "not valuable")
+			if info.Size() == 0 {
+				skippedZeroBytes++
+				continue
+			}
+
+			// This is an uncurated file
+			uncurated = append(uncurated, nameWithoutExt)
+		}
+	}
+
+	fmt.Fprintf(os.Stderr, "Found %d total files in img/\n", totalFiles)
+	fmt.Fprintf(os.Stderr, "Skipped %d already curated files\n", skippedCurated)
+	fmt.Fprintf(os.Stderr, "Skipped %d zero-byte marker files\n", skippedZeroBytes)
+	fmt.Fprintf(os.Stderr, "Found %d uncurated files\n", len(uncurated))
+
+	// Sort the list
+	sort.Strings(uncurated)
+
+	// Write to state/todo.txt
+	outputFile := "state/todo.txt"
+	f, err := os.Create(outputFile)
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error creating %s: %v\n", outputFile, err)
+		os.Exit(1)
+	}
+	defer f.Close()
+
+	for _, name := range uncurated {
+		fmt.Fprintf(f, "%s\n", name)
+	}
+
+	fmt.Fprintf(os.Stderr, "Wrote %d filenames to %s\n", len(uncurated), outputFile)
+	fmt.Fprintf(os.Stderr, "Todo mode complete\n")
+}
+
+// fixupMode creates no/ entries for all zero-length files in img/
+func fixupMode() {
+	fmt.Fprintf(os.Stderr, "Fixup mode: Creating no/ entries for zero-length .jpeg files in img/\n")
+
+	// Resolve symlinks for directories
+	noDir, err := filepath.EvalSymlinks("no")
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error resolving no/ symlink: %v\n", err)
+		os.Exit(1)
+	}
+
+	// Run no/ directory scan and find in parallel
+	fmt.Fprintf(os.Stderr, "Scanning no/ directory and finding zero-length .jpeg files in parallel...\n")
+
+	var wg sync.WaitGroup
+	noFiles := make(map[string]bool)
+	var zeroLengthPaths []string
+	var findErr, noErr error
+
+	// Scan no/ directory in parallel
+	wg.Add(1)
+	go func() {
+		defer wg.Done()
+		noEntries, err := os.ReadDir(noDir)
+		if err != nil {
+			noErr = err
+			return
+		}
+		for _, entry := range noEntries {
+			if !entry.IsDir() {
+				// Extract filename without extension
+				filename := entry.Name()
+				ext := filepath.Ext(filename)
+				nameWithoutExt := strings.TrimSuffix(filename, ext)
+				noFiles[nameWithoutExt] = true
+			}
+		}
+		fmt.Fprintf(os.Stderr, "Found %d existing files in no/\n", len(noFiles))
+	}()
+
+	// Run find in parallel
+	wg.Add(1)
+	go func() {
+		defer wg.Done()
+		cmd := exec.Command("find", "img/", "-name", "*.jpeg", "-size", "0")
+		output, err := cmd.Output()
+		if err != nil {
+			findErr = err
+			return
+		}
+		// Parse find output
+		zeroLengthPaths = strings.Split(strings.TrimSpace(string(output)), "\n")
+		if len(zeroLengthPaths) == 1 && zeroLengthPaths[0] == "" {
+			zeroLengthPaths = nil
+		}
+		fmt.Fprintf(os.Stderr, "Found %d zero-length .jpeg files\n", len(zeroLengthPaths))
+	}()
+
+	// Wait for both operations to complete
+	wg.Wait()
+
+	// Check for errors
+	if noErr != nil {
+		fmt.Fprintf(os.Stderr, "Error scanning no/ directory: %v\n", noErr)
+		os.Exit(1)
+	}
+	if findErr != nil {
+		fmt.Fprintf(os.Stderr, "Error running find command: %v\n", findErr)
+		os.Exit(1)
+	}
+
+	alreadyExists := 0
+	created := 0
+
+	for _, path := range zeroLengthPaths {
+		if path == "" {
+			continue
+		}
+
+		// Extract filename without extension
+		filename := filepath.Base(path)
+		ext := filepath.Ext(filename)
+		nameWithoutExt := strings.TrimSuffix(filename, ext)
+
+		// Check if already exists in no/
+		if noFiles[nameWithoutExt] {
+			alreadyExists++
+			continue
+		}
+
+		// Create corresponding .png file in no/
+		noPath := filepath.Join(noDir, nameWithoutExt+".png")
+		f, err := os.Create(noPath)
+		if err != nil {
+			fmt.Fprintf(os.Stderr, "Error creating %s: %v\n", noPath, err)
+			continue
+		}
+		f.Close()
+		created++
+
+		if created%1000 == 0 {
+			fmt.Fprintf(os.Stderr, "Created %d no/ entries...\n", created)
+		}
+	}
+
+	fmt.Fprintf(os.Stderr, "Skipped %d files (already exist in no/)\n", alreadyExists)
+	fmt.Fprintf(os.Stderr, "Created %d new no/ entries\n", created)
+	fmt.Fprintf(os.Stderr, "Fixup mode complete\n")
+}
+
+// extractURLsFromFile reads a JSON file and extracts all .url fields
+func extractURLsFromFile(filename string) ([]string, error) {
+	data, err := ioutil.ReadFile(filename)
+	if err != nil {
+		return nil, fmt.Errorf("failed to read file: %w", err)
+	}
+
+	// Parse as array of objects
+	var items []map[string]interface{}
+	if err := json.Unmarshal(data, &items); err != nil {
+		return nil, fmt.Errorf("failed to parse JSON: %w", err)
+	}
+
+	var urls []string
+	for _, item := range items {
+		if url, ok := item["url"].(string); ok && url != "" {
+			urls = append(urls, url)
+		}
+	}
+
+	return urls, nil
+}
+
+// SelfRateLimiter enforces our own rate limit to avoid hitting server limits
+type SelfRateLimiter struct {
+	mu             sync.Mutex
+	downloadTimes  []time.Time
+	maxDownloads   int
+	windowDuration time.Duration
+}
+
+func newSelfRateLimiter(maxDownloads int, windowSeconds int) *SelfRateLimiter {
+	return &SelfRateLimiter{
+		downloadTimes:  make([]time.Time, 0, maxDownloads),
+		maxDownloads:   maxDownloads,
+		windowDuration: time.Duration(windowSeconds) * time.Second,
+	}
+}
+
+func (srl *SelfRateLimiter) checkAndWait() {
+	srl.mu.Lock()
+	defer srl.mu.Unlock()
+
+	now := time.Now()
+
+	// Remove download times outside the window
+	cutoff := now.Add(-srl.windowDuration)
+	validTimes := make([]time.Time, 0, srl.maxDownloads)
+	for _, t := range srl.downloadTimes {
+		if t.After(cutoff) {
+			validTimes = append(validTimes, t)
+		}
+	}
+	srl.downloadTimes = validTimes
+
+	// If we've hit the limit, wait until the oldest download falls outside the window
+	if len(srl.downloadTimes) >= srl.maxDownloads {
+		oldestTime := srl.downloadTimes[0]
+		waitUntil := oldestTime.Add(srl.windowDuration)
+		sleepDuration := time.Until(waitUntil)
+		if sleepDuration > 0 {
+			fmt.Fprintf(os.Stderr, "⏱️  Self rate limit: %d downloads in %s window. Sleeping %s\n",
+				len(srl.downloadTimes), srl.windowDuration, sleepDuration.Round(time.Millisecond))
+			srl.mu.Unlock()
+			time.Sleep(sleepDuration)
+			srl.mu.Lock()
+			// After sleeping, remove the old download time
+			srl.downloadTimes = srl.downloadTimes[1:]
+		}
+	}
+}
+
+func (srl *SelfRateLimiter) recordDownload() {
+	srl.mu.Lock()
+	defer srl.mu.Unlock()
+
+	srl.downloadTimes = append(srl.downloadTimes, time.Now())
+}
+
+// RateLimiter manages adaptive concurrency control for downloads
+type RateLimiter struct {
+	maxConcurrency   int
+	currentSemaphore chan struct{}
+	mu               sync.Mutex
+	rateLimited      bool
+	successCount     int
+	lastAdjust       time.Time
+	pauseMu          sync.Mutex // Separate mutex for pause state
+	paused           bool       // When true, all workers pause
+	pauseCond        *sync.Cond // Used to wake workers when unpause
+	globalRetries    int        // Global retry counter for exponential backoff
+}
+
+func newRateLimiter(maxConcurrency int) *RateLimiter {
+	rl := &RateLimiter{
+		maxConcurrency:   maxConcurrency,
+		currentSemaphore: make(chan struct{}, maxConcurrency),
+		lastAdjust:       time.Now(),
+		rateLimited:      true, // Start in rate-limited mode
+		successCount:     0,
+		paused:           false,
+	}
+	rl.pauseCond = sync.NewCond(&rl.pauseMu)
+	// Start with only 1 concurrent download
+	rl.currentSemaphore <- struct{}{}
+	fmt.Fprintf(os.Stderr, "Starting with 1 concurrent download (will ramp up to %d)\n", maxConcurrency)
+	return rl
+}
+
+func (rl *RateLimiter) acquire() {
+	// Check if paused (wait if so)
+	rl.pauseCond.L.Lock()
+	for rl.paused {
+		rl.pauseCond.Wait()
+	}
+	rl.pauseCond.L.Unlock()
+
+	<-rl.currentSemaphore
+}
+
+func (rl *RateLimiter) release() {
+	rl.currentSemaphore <- struct{}{}
+}
+
+func (rl *RateLimiter) pauseAll() {
+	rl.pauseCond.L.Lock()
+	rl.paused = true
+	rl.pauseCond.L.Unlock()
+}
+
+func (rl *RateLimiter) unpauseAll() {
+	rl.pauseCond.L.Lock()
+	rl.paused = false
+	rl.pauseCond.Broadcast() // Wake all waiting workers
+	rl.pauseCond.L.Unlock()
+}
+
+func (rl *RateLimiter) handleRateLimit() int {
+	rl.mu.Lock()
+
+	// Increment global retry counter
+	rl.globalRetries++
+	currentRetries := rl.globalRetries
+
+	if !rl.rateLimited {
+		rl.rateLimited = true
+		rl.successCount = 0
+
+		// Reduce to 1 concurrent download
+		currentCap := cap(rl.currentSemaphore)
+		newSemaphore := make(chan struct{}, rl.maxConcurrency)
+
+		// Transfer one token to new semaphore
+		newSemaphore <- struct{}{}
+
+		rl.currentSemaphore = newSemaphore
+		rl.lastAdjust = time.Now()
+
+		fmt.Fprintf(os.Stderr, "\n⚠️  Rate limit detected! Pausing all workers, reducing to 1 concurrent (was %d)\n", currentCap)
+	}
+
+	// Calculate exponential backoff based on global retries
+	backoffSeconds := 1 << uint(currentRetries-1)
+	if backoffSeconds > 180 {
+		backoffSeconds = 180
+	}
+
+	rl.mu.Unlock()
+
+	// Pause all other workers
+	rl.pauseAll()
+
+	// Apply backoff before resuming
+	waitTime := time.Duration(backoffSeconds) * time.Second
+	fmt.Fprintf(os.Stderr, "⏸️  Backing off for %s before retry (attempt %d)\n", waitTime, currentRetries)
+	time.Sleep(waitTime)
+
+	// Unpause workers after backoff
+	rl.unpauseAll()
+
+	return currentRetries
+}
+
+func (rl *RateLimiter) recordSuccess() {
+	rl.mu.Lock()
+	defer rl.mu.Unlock()
+
+	// Reset global retry counter on success
+	rl.globalRetries = 0
+
+	// Ensure not paused
+	rl.unpauseAll()
+
+	if !rl.rateLimited {
+		return
+	}
+
+	rl.successCount++
+
+	// After 10 successful downloads, increase concurrency by 1
+	if rl.successCount >= 10 && time.Since(rl.lastAdjust) > 5*time.Second {
+		currentCap := cap(rl.currentSemaphore)
+
+		if currentCap < rl.maxConcurrency {
+			newCap := currentCap + 1
+			newSemaphore := make(chan struct{}, rl.maxConcurrency)
+
+			// Transfer tokens to new semaphore
+			for i := 0; i < newCap; i++ {
+				select {
+				case <-rl.currentSemaphore:
+					newSemaphore <- struct{}{}
+				default:
+					newSemaphore <- struct{}{}
+				}
+			}
+
+			rl.currentSemaphore = newSemaphore
+			rl.successCount = 0
+			rl.lastAdjust = time.Now()
+
+			fmt.Fprintf(os.Stderr, "✓ Increasing concurrency to %d\n", newCap)
+
+			if newCap >= rl.maxConcurrency {
+				rl.rateLimited = false
+				fmt.Fprintf(os.Stderr, "✓ Recovered to full speed (%d concurrent)\n", newCap)
+			}
+		}
+	}
+}
+
+// URLRetry tracks retry attempts for a URL
+type URLRetry struct {
+	url     string
+	retries int
+}
+
+// downloadImages downloads images using Go HTTP client with adaptive rate limiting
+func downloadImages(urls []string) {
+	var wg sync.WaitGroup
+	urlChan := make(chan URLRetry, len(urls)*2) // Buffer for retries
+	rateLimiter := newRateLimiter(downloadWorkers)
+	selfRateLimiter := newSelfRateLimiter(10, 10) // 10 downloads per 10 seconds
+
+	fmt.Fprintf(os.Stderr, "Self-imposed rate limit: 10 downloads per 10 seconds\n")
+
+	// Track progress with detailed counters
+	var downloaded, skipped, rateLimited, errors int
+	var processed int // Total processed (not including retries)
+	var progressMutex sync.Mutex
+	startTime := time.Now()
+
+	// Track pending URLs
+	var pending int32
+	atomic.StoreInt32(&pending, int32(len(urls)))
+
+	// Create HTTP client with timeout
+	client := &http.Client{
+		Timeout: 60 * time.Second,
+		Transport: &http.Transport{
+			MaxIdleConns:        100,
+			MaxIdleConnsPerHost: 20,
+			IdleConnTimeout:     90 * time.Second,
+		},
+	}
+
+	// Launch progress reporter
+	stopReporter := make(chan bool)
+	go func() {
+		ticker := time.NewTicker(10 * time.Second)
+		defer ticker.Stop()
+		for {
+			select {
+			case <-ticker.C:
+				progressMutex.Lock()
+				elapsed := time.Since(startTime)
+				rate := float64(processed) / elapsed.Seconds()
+				fmt.Fprintf(os.Stderr, "[Progress] Total: %d | Downloaded: %d | Already on disk: %d | Rate limited (429): %d | Errors: %d | Rate: %.1f/sec\n",
+					processed, downloaded, skipped, rateLimited, errors, rate)
+				progressMutex.Unlock()
+			case <-stopReporter:
+				return
+			}
+		}
+	}()
+
+	// Launch workers
+	for w := 0; w < downloadWorkers; w++ {
+		wg.Add(1)
+		go func(workerID int) {
+			defer wg.Done()
+			for urlRetry := range urlChan {
+				// Keep retrying this URL until success or non-429 error
+				for {
+					// Acquire semaphore slot
+					rateLimiter.acquire()
+
+					// Enforce self-imposed rate limit before download
+					selfRateLimiter.checkAndWait()
+
+					// Download this URL
+					err := downloadSingleImage(client, urlRetry.url)
+
+					// Release semaphore slot
+					rateLimiter.release()
+
+					if err != nil {
+						if strings.Contains(err.Error(), "429") || strings.Contains(err.Error(), "rate limit") {
+							// Rate limited - retry the same URL with backoff
+							// Since rate limit applies to entire host, other URLs will fail too
+
+							progressMutex.Lock()
+							rateLimited++
+							progressMutex.Unlock()
+
+							// Display URL for manual testing
+							fmt.Fprintf(os.Stderr, "[Worker %d] 429 Rate limit on: %s\n", workerID, urlRetry.url)
+
+							// Use global retry counter and handle rate limit
+							rateLimiter.handleRateLimit()
+
+							// Continue inner loop to retry the SAME URL
+							continue
+						} else if strings.Contains(err.Error(), "already exists") {
+							progressMutex.Lock()
+							skipped++
+							processed++
+							progressMutex.Unlock()
+							break
+						} else {
+							progressMutex.Lock()
+							errors++
+							processed++
+							if errors <= 10 {
+								fmt.Fprintf(os.Stderr, "[Worker %d] Error downloading %s: %v\n", workerID, urlRetry.url, err)
+							}
+							progressMutex.Unlock()
+							break
+						}
+					} else {
+						// Successfully downloaded - record for self rate limiting
+						selfRateLimiter.recordDownload()
+
+						rateLimiter.recordSuccess()
+						progressMutex.Lock()
+						downloaded++
+						processed++
+						progressMutex.Unlock()
+						break
+					}
+				}
+
+				// Mark this URL as complete (decrement pending)
+				remaining := atomic.AddInt32(&pending, -1)
+				if remaining == 0 {
+					// All URLs processed, close channel
+					close(urlChan)
+					return
+				}
+			}
+		}(w)
+	}
+
+	// Send URLs to workers
+	for _, url := range urls {
+		urlChan <- URLRetry{url: url, retries: 0}
+	}
+
+	wg.Wait()
+	close(stopReporter)
+
+	elapsed := time.Since(startTime)
+	rate := float64(processed) / elapsed.Seconds()
+	fmt.Fprintf(os.Stderr, "\n=== Download Complete ===\n")
+	fmt.Fprintf(os.Stderr, "Total URLs processed: %d\n", processed)
+	fmt.Fprintf(os.Stderr, "  - Downloaded: %d\n", downloaded)
+	fmt.Fprintf(os.Stderr, "  - Already on disk: %d\n", skipped)
+	fmt.Fprintf(os.Stderr, "  - Rate limited (429): %d\n", rateLimited)
+	fmt.Fprintf(os.Stderr, "  - Errors: %d\n", errors)
+	fmt.Fprintf(os.Stderr, "Time: %s | Rate: %.1f images/sec\n", elapsed.Round(time.Second), rate)
+}
+
+// downloadSingleImage downloads a single image from URL to img/ directory using curl
+func downloadSingleImage(client *http.Client, url string) error {
+	// Extract filename from URL
+	parts := strings.Split(url, "/")
+	if len(parts) < 2 {
+		return fmt.Errorf("invalid URL format: %s", url)
+	}
+	filename := parts[len(parts)-1]
+	outputPath := filepath.Join("img", filename)
+
+	// Check if file already exists (including 0-byte marker files)
+	if _, err := os.Stat(outputPath); err == nil {
+		return fmt.Errorf("file already exists: %s", filename)
+	}
+
+	// Create temporary file path
+	tmpPath := outputPath + ".tmp"
+
+	// Use curl to download with browser-like headers
+	cmd := exec.Command("curl",
+		"-s",                 // silent
+		"-L",                 // follow redirects
+		"-w", "%{http_code}", // write HTTP status code
+		"-o", tmpPath, // output to temp file
+		"-A", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+		"-H", "Accept: image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8",
+		"-H", "Accept-Language: en-US,en;q=0.9",
+		"-H", "Referer: https://civitai.com/",
+		url,
+	)
+
+	// Capture output (will contain HTTP status code)
+	output, err := cmd.Output()
+	if err != nil {
+		os.Remove(tmpPath)
+		// If curl fails, try to get more info from the error
+		if exitErr, ok := err.(*exec.ExitError); ok {
+			return fmt.Errorf("curl failed: %w (stderr: %s)", err, string(exitErr.Stderr))
+		}
+		return fmt.Errorf("curl failed: %w", err)
+	}
+
+	// Parse HTTP status code from output
+	statusCode := strings.TrimSpace(string(output))
+
+	// Debug: log what we got
+	if statusCode != "200" {
+		fmt.Fprintf(os.Stderr, "[DEBUG] curl returned status: '%s' (len=%d) for %s\n", statusCode, len(statusCode), filename)
+	}
+
+	// Check status code
+	if statusCode != "200" {
+		os.Remove(tmpPath)
+		if statusCode == "429" {
+			return fmt.Errorf("429 rate limit exceeded")
+		}
+		return fmt.Errorf("HTTP %s", statusCode)
+	}
+
+	// Verify file was downloaded (0-byte files are acceptable markers)
+	if _, err := os.Stat(tmpPath); err != nil {
+		os.Remove(tmpPath)
+		return fmt.Errorf("download failed: file missing")
+	}
+
+	// Rename temp file to final path
+	if err := os.Rename(tmpPath, outputPath); err != nil {
+		os.Remove(tmpPath)
+		return fmt.Errorf("failed to rename file: %w", err)
+	}
+
+	return nil
+}
+
+// generateThumbnails generates thumbnails for images that don't have them
+func generateThumbnails() {
+	// Find images without thumbnails
+	imgFiles, err := filepath.Glob("img/*.jpeg")
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error finding images: %v\n", err)
+		return
+	}
+
+	thumbFiles, err := filepath.Glob("thumbs/*.png")
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error finding thumbnails: %v\n", err)
+		return
+	}
+
+	// Create sets for quick lookup
+	imgSet := make(map[string]bool)
+	for _, img := range imgFiles {
+		basename := filepath.Base(img)
+		id := strings.TrimSuffix(basename, ".jpeg")
+		imgSet[id] = true
+	}
+
+	thumbSet := make(map[string]bool)
+	for _, thumb := range thumbFiles {
+		basename := filepath.Base(thumb)
+		id := strings.TrimSuffix(basename, ".png")
+		thumbSet[id] = true
+	}
+
+	// Find images without thumbnails
+	var needThumbs []string
+	for id := range imgSet {
+		if !thumbSet[id] {
+			needThumbs = append(needThumbs, id)
+		}
+	}
+
+	sort.Strings(needThumbs)
+	fmt.Fprintf(os.Stderr, "Found %d images needing thumbnails\n", len(needThumbs))
+
+	if len(needThumbs) == 0 {
+		return
+	}
+
+	// Process thumbnails in parallel
+	var wg sync.WaitGroup
+	jobChan := make(chan string, len(needThumbs))
+
+	var processed int
+	var progressMutex sync.Mutex
+
+	// Launch workers
+	for w := 0; w < thumbWorkers; w++ {
+		wg.Add(1)
+		go func(workerID int) {
+			defer wg.Done()
+			for id := range jobChan {
+				if err := generateThumbnail(id); err != nil {
+					fmt.Fprintf(os.Stderr, "Error generating thumbnail for %s: %v\n", id, err)
+				}
+
+				progressMutex.Lock()
+				processed++
+				if processed%100 == 0 {
+					fmt.Fprintf(os.Stderr, "Generated %d/%d thumbnails\n", processed, len(needThumbs))
+				}
+				progressMutex.Unlock()
+			}
+		}(w)
+	}
+
+	// Send jobs to workers
+	for _, id := range needThumbs {
+		jobChan <- id
+	}
+	close(jobChan)
+
+	wg.Wait()
+	fmt.Fprintf(os.Stderr, "Generated %d thumbnails total\n", processed)
+}
+
+// generateThumbnail generates a thumbnail for a single image
+func generateThumbnail(id string) error {
+	imgPath := filepath.Join("img", id+".jpeg")
+	thumbPath := filepath.Join("thumbs", id+".png")
+
+	// Check if image exists
+	if _, err := os.Stat(imgPath); os.IsNotExist(err) {
+		return nil // Skip if image doesn't exist
+	}
+
+	// Check frame count using identify
+	cmd := fmt.Sprintf("identify -format \"%%n\" %s", imgPath)
+	output, err := runCommandOutput("bash", "-c", cmd)
+	if err != nil {
+		// Not a valid image, mark it
+		fmt.Fprintf(os.Stderr, "Not a valid image: %s\n", imgPath)
+		touchFile(filepath.Join("no", id+".jpeg"))
+		touchFile(thumbPath)
+		return nil
+	}
+
+	frameCount := strings.TrimSpace(string(output))
+
+	// Check if it's a GIF (multi-frame)
+	if frameCount != "1" {
+		fmt.Fprintf(os.Stderr, "GIF image: %s\n", imgPath)
+		touchFile(filepath.Join("no", id+".jpeg"))
+		touchFile(thumbPath)
+		return nil
+	}
+
+	// Generate thumbnail using mogrify
+	cmd = fmt.Sprintf("mogrify -path thumbs -resize 400x -format png %s", imgPath)
+	if err := runCommand("bash", "-c", cmd); err != nil {
+		fmt.Fprintf(os.Stderr, "Failed to generate thumbnail for %s: %v\n", id, err)
+		return err
+	}
+
+	return nil
+}
+
+// runCommand executes a command and waits for it to complete
+func runCommand(name string, args ...string) error {
+	cmd := exec.Command(name, args...)
+	if output, err := cmd.CombinedOutput(); err != nil {
+		return fmt.Errorf("%w: %s", err, string(output))
+	}
+	return nil
+}
+
+// runCommandOutput executes a command and returns its output
+func runCommandOutput(name string, args ...string) ([]byte, error) {
+	cmd := exec.Command(name, args...)
+	return cmd.Output()
+}
+
+// touchFile creates an empty file
+func touchFile(path string) error {
+	file, err := os.OpenFile(path, os.O_CREATE|os.O_WRONLY, 0644)
+	if err != nil {
+		return err
+	}
+	return file.Close()
 }
 
 // FEM mode implementation - Face/Image Manipulation Gallery Generator
