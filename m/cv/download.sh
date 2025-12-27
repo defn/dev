@@ -32,9 +32,10 @@ while IFS= read -r url; do
 
 	# Download with wget into img/ directory
 	# -nc prevents clobbering and creating .1, .2 files
-	# --timeout=10 sets 10 second timeout
+	# --timeout=20 sets 20 second network read timeout
+	# timeout 20 limits total execution time to 20 seconds
 	set +e # Temporarily disable exit on error to capture wget exit code
-	wget -nc -nv -P img --timeout=10 \
+	timeout 20 wget -nc -nv -P img --timeout=20 \
 		--user-agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36" \
 		--header="Accept: image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8" \
 		--header="Accept-Language: en-US,en;q=0.9" \
@@ -47,20 +48,23 @@ while IFS= read -r url; do
 	# Exit code 0 = success
 	# Exit code 4 = network failure (timeout)
 	# Exit code 8 = server issued error response (HTTP 404, 429, etc.)
-	if [ $wget_exit -eq 4 ]; then
-		echo "ERROR: wget timeout after 10 seconds for $url"
-		echo "Network failure or timeout"
-		echo "Stopping download process"
-		exit 1
+	# Exit code 124 = timeout command killed process
+	if [ $wget_exit -eq 124 ]; then
+		echo "ERROR: timeout killed wget after 20 seconds for $url"
+		echo "Process exceeded time limit - skipping"
+		continue
+	elif [ $wget_exit -eq 4 ]; then
+		echo "ERROR: wget timeout after 20 seconds for $url"
+		echo "Network failure or timeout - skipping"
+		continue
 	elif [ $wget_exit -eq 8 ]; then
 		echo "ERROR: wget HTTP error (exit code 8) for $url"
-		echo "This likely means HTTP error (429 rate limit, 404, etc.)"
-		echo "Stopping download process"
-		exit 1
+		echo "This likely means HTTP error (429 rate limit, 404, etc.) - skipping"
+		continue
 	elif [ $wget_exit -ne 0 ]; then
 		echo "ERROR: wget failed with exit code $wget_exit for $url"
-		echo "Stopping download process"
-		exit 1
+		echo "Skipping this download"
+		continue
 	fi
 
 	echo "Success: $filename"

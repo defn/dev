@@ -17,6 +17,7 @@ LAST
 cv.db*
 .env
 blurmap
+cv
 
 garbage
 *.log
