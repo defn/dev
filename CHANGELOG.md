@@ -1,5 +1,20 @@
 # Changelog
 
+## [1.60.0](https://github.com/defn/dev/compare/v1.59.2...v1.60.0) (2025-12-27)
+
+
+### Features
+
+* **cv:** add curation gallery support and enhance fixup mode ([d3b607a](https://github.com/defn/dev/commit/d3b607a82b99b6229a7d8444684fb42aa4711271))
+* **cv:** add report mode and fix import state management ([62ab366](https://github.com/defn/dev/commit/62ab36660a49e847a79b526cddf702cb7204f31f))
+* **cv:** add todo/fixup modes, refactor user mode, optimize scanning ([0b86e32](https://github.com/defn/dev/commit/0b86e323b6dad0156388bd7cc9819e411e81aed8))
+* **cv:** migrate image tracking from filesystem to SQLite database ([c3ce3fb](https://github.com/defn/dev/commit/c3ce3fb5cabfdeadcad95ef41d3dd44ffe803cff))
+
+
+### Bug Fixes
+
+* **cv:** clarify timeout vs wget errors in download.sh ([080dbdc](https://github.com/defn/dev/commit/080dbdc3c07df1bc5f9dad3576de06361128246a))
+
 ## [1.59.2](https://github.com/defn/dev/compare/v1.59.1...v1.59.2) (2025-12-22)
 
 
