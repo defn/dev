@@ -30,6 +30,9 @@ while IFS= read -r url; do
 
 	echo "Downloading: $filename"
 
+	# Extract domain from URL for Referer header (scheme://host/)
+	referer=$(echo "$url" | sed -E 's|(^https?://[^/]+).*|\1/|')
+
 	# Download with wget into img/ directory
 	# -nc prevents clobbering and creating .1, .2 files
 	# --timeout=20 sets 20 second network read timeout
@@ -39,7 +42,7 @@ while IFS= read -r url; do
 		--user-agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36" \
 		--header="Accept: image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8" \
 		--header="Accept-Language: en-US,en;q=0.9" \
-		--header="Referer: https://civitai.com/" \
+		--header="Referer: $referer" \
 		"$url"
 	wget_exit=$?
 	set -e # Re-enable exit on error

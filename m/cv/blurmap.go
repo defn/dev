@@ -51,6 +51,7 @@ import (
 	_ "image/png"  // Register PNG format
 	"io/ioutil"
 	"net/http"
+	urlpkg "net/url"
 	"os"
 	"os/exec"
 	"path/filepath"
@@ -3007,6 +3008,13 @@ func downloadSingleImage(client *http.Client, url string) error {
 	// Create temporary file path
 	tmpPath := outputPath + ".tmp"
 
+	// Extract domain from URL for Referer header
+	parsedURL, err := urlpkg.Parse(url)
+	referer := url // fallback to full URL
+	if err == nil && parsedURL.Scheme != "" && parsedURL.Host != "" {
+		referer = parsedURL.Scheme + "://" + parsedURL.Host + "/"
+	}
+
 	// Use curl to download with browser-like headers
 	cmd := exec.Command("curl",
 		"-s",                 // silent
@@ -3016,7 +3024,7 @@ func downloadSingleImage(client *http.Client, url string) error {
 		"-A", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
 		"-H", "Accept: image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8",
 		"-H", "Accept-Language: en-US,en;q=0.9",
-		"-H", "Referer: https://civitai.com/",
+		"-H", "Referer: "+referer,
 		url,
 	)
 
