@@ -122,7 +122,7 @@ server:
     screen -DRR server
 
 server-inner:
-    while true; do etc/static; date; sleep 10; done
+    while true; do ./server.py; date; sleep 10; done
 
 reset:
     screen -dmS reset j reset-inner
