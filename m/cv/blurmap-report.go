@@ -69,7 +69,7 @@ func reportDatabaseStats(db *sql.DB) {
 
 	var totalCount, yesCount, noCount, todoCount int
 	var imgPathCount, thumbCount, upresImgCount, upresThumbCount int
-	var urlNotDownloaded, weirdCount int
+	var urlNotDownloaded, noImgNoUrl, weirdCount int
 
 	db.QueryRow("SELECT COUNT(*) FROM images").Scan(&totalCount)
 	db.QueryRow("SELECT COUNT(*) FROM images WHERE state='yes'").Scan(&yesCount)
@@ -80,6 +80,7 @@ func reportDatabaseStats(db *sql.DB) {
 	db.QueryRow("SELECT COUNT(*) FROM images WHERE upres_img_path IS NOT NULL").Scan(&upresImgCount)
 	db.QueryRow("SELECT COUNT(*) FROM images WHERE upres_thumb_path IS NOT NULL").Scan(&upresThumbCount)
 	db.QueryRow("SELECT COUNT(*) FROM images WHERE url IS NOT NULL AND (img_path IS NULL OR img_path = '')").Scan(&urlNotDownloaded)
+	db.QueryRow("SELECT COUNT(*) FROM images WHERE (img_path IS NULL OR img_path = '') AND (url IS NULL OR url = '')").Scan(&noImgNoUrl)
 	db.QueryRow("SELECT COUNT(*) FROM images WHERE weird IS NOT NULL").Scan(&weirdCount)
 
 	fmt.Fprintf(os.Stderr, "Total records:         %7d\n", totalCount)
@@ -106,6 +107,18 @@ func reportDatabaseStats(db *sql.DB) {
 	} else {
 		fmt.Fprintf(os.Stderr, "\n✗ State verification: %d + %d + %d = %d (expected %d) - DATA CORRUPTION!\n",
 			yesCount, noCount, todoCount, stateSum, totalCount)
+	}
+
+	// Coverage verification (img_path + pending downloads + orphaned = total)
+	coverageSum := imgPathCount + urlNotDownloaded + noImgNoUrl
+	if coverageSum == totalCount {
+		fmt.Fprintf(os.Stderr, "✓ Coverage verification: %d + %d + %d = %d (OK)\n", imgPathCount, urlNotDownloaded, noImgNoUrl, totalCount)
+	} else {
+		fmt.Fprintf(os.Stderr, "✗ Coverage verification: %d + %d + %d = %d (expected %d) - DATA CORRUPTION!\n",
+			imgPathCount, urlNotDownloaded, noImgNoUrl, coverageSum, totalCount)
+	}
+	if noImgNoUrl > 0 {
+		fmt.Fprintf(os.Stderr, "  ℹ %d orphaned records (no img_path, no URL)\n", noImgNoUrl)
 	}
 }
 
