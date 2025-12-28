@@ -14,13 +14,14 @@ import (
 
 // galleryResult holds the processing results for a single gallery
 type galleryResult struct {
-	galleryNum    int
-	totalImages   int
-	yesCount      int
+	galleryNum     int
+	totalImages    int
+	yesCount       int
 	alreadyNoCount int
-	toMarkNoCount int
-	writtenCount  int
-	err           error
+	toMarkNoCount  int
+	writtenCount   int
+	deletedNoCount int
+	err            error
 }
 
 // commitMode processes curated galleries from LAST file and reports yes/no counts
@@ -128,13 +129,25 @@ func commitMode() {
 		}
 
 		if commitWrite {
-			fmt.Fprintf(os.Stderr, "Gallery %3d: %4d images | Yes: %4d (%5.1f%%) | No: %4d | Wrote: %4d\n",
-				result.galleryNum, result.totalImages, result.yesCount, yesPercentage,
-				result.alreadyNoCount, result.writtenCount)
+			if result.deletedNoCount > 0 {
+				fmt.Fprintf(os.Stderr, "Gallery %3d: %4d images | Yes: %4d (%5.1f%%) | No: %4d | Wrote: %4d | Deleted: %4d\n",
+					result.galleryNum, result.totalImages, result.yesCount, yesPercentage,
+					result.alreadyNoCount, result.writtenCount, result.deletedNoCount)
+			} else {
+				fmt.Fprintf(os.Stderr, "Gallery %3d: %4d images | Yes: %4d (%5.1f%%) | No: %4d | Wrote: %4d\n",
+					result.galleryNum, result.totalImages, result.yesCount, yesPercentage,
+					result.alreadyNoCount, result.writtenCount)
+			}
 		} else {
-			fmt.Fprintf(os.Stderr, "Gallery %3d: %4d images | Yes: %4d (%5.1f%%) | No: %4d | To mark: %4d\n",
-				result.galleryNum, result.totalImages, result.yesCount, yesPercentage,
-				result.alreadyNoCount, result.toMarkNoCount)
+			if result.deletedNoCount > 0 {
+				fmt.Fprintf(os.Stderr, "Gallery %3d: %4d images | Yes: %4d (%5.1f%%) | No: %4d | To mark: %4d | Would delete: %4d\n",
+					result.galleryNum, result.totalImages, result.yesCount, yesPercentage,
+					result.alreadyNoCount, result.toMarkNoCount, result.deletedNoCount)
+			} else {
+				fmt.Fprintf(os.Stderr, "Gallery %3d: %4d images | Yes: %4d (%5.1f%%) | No: %4d | To mark: %4d\n",
+					result.galleryNum, result.totalImages, result.yesCount, yesPercentage,
+					result.alreadyNoCount, result.toMarkNoCount)
+			}
 		}
 	}
 
@@ -143,12 +156,14 @@ func commitMode() {
 	totalAlreadyNo := 0
 	totalToMarkNo := 0
 	totalWritten := 0
+	totalDeleted := 0
 	for _, result := range allResults {
 		if result.err == nil {
 			totalYes += result.yesCount
 			totalAlreadyNo += result.alreadyNoCount
 			totalToMarkNo += result.toMarkNoCount
 			totalWritten += result.writtenCount
+			totalDeleted += result.deletedNoCount
 		}
 	}
 
@@ -165,8 +180,14 @@ func commitMode() {
 	fmt.Fprintf(os.Stderr, "Already marked no:  %d images\n", totalAlreadyNo)
 	if commitWrite {
 		fmt.Fprintf(os.Stderr, "Wrote no/ files:    %d images\n", totalWritten)
+		if totalDeleted > 0 {
+			fmt.Fprintf(os.Stderr, "Deleted no/ files:  %d images (re-curated as yes)\n", totalDeleted)
+		}
 	} else {
 		fmt.Fprintf(os.Stderr, "To mark as no:      %d images\n", totalToMarkNo)
+		if totalDeleted > 0 {
+			fmt.Fprintf(os.Stderr, "Would delete no/:   %d images (re-curated as yes)\n", totalDeleted)
+		}
 	}
 	fmt.Fprintf(os.Stderr, "Total images:       %d\n", totalImages)
 
@@ -174,7 +195,11 @@ func commitMode() {
 		fmt.Fprintf(os.Stderr, "\n⚠️  Dry-run mode: No files were written\n")
 		fmt.Fprintf(os.Stderr, "Use -commit flag to actually write no/ files\n")
 	} else {
-		fmt.Fprintf(os.Stderr, "\n✓ Commit complete: Wrote %d no/ files\n", totalWritten)
+		fmt.Fprintf(os.Stderr, "\n✓ Commit complete: Wrote %d no/ files", totalWritten)
+		if totalDeleted > 0 {
+			fmt.Fprintf(os.Stderr, ", deleted %d no/ files", totalDeleted)
+		}
+		fmt.Fprintf(os.Stderr, "\n")
 	}
 }
 
@@ -209,6 +234,18 @@ func processGallery(galleryNum int, yesDir, noDir string, commitWrite bool) gall
 		// Check if marked as yes
 		if _, err := os.Stat(yesPath); err == nil {
 			result.yesCount++
+
+			// If there's also a no/ file, delete it (gallery was re-curated)
+			if _, err := os.Stat(noPath); err == nil {
+				if commitWrite {
+					if err := os.Remove(noPath); err == nil {
+						result.deletedNoCount++
+					}
+				} else {
+					// In dry-run mode, just count what would be deleted
+					result.deletedNoCount++
+				}
+			}
 			continue
 		}
 
