@@ -55,7 +55,7 @@ func reportDatabaseStats(db *sql.DB) {
 
 	var totalCount, yesCount, noCount, todoCount int
 	var imgPathCount, thumbCount, upresImgCount, upresThumbCount int
-	var urlCount, weirdCount int
+	var urlNotDownloaded, weirdCount int
 
 	db.QueryRow("SELECT COUNT(*) FROM images").Scan(&totalCount)
 	db.QueryRow("SELECT COUNT(*) FROM images WHERE state='yes'").Scan(&yesCount)
@@ -65,7 +65,7 @@ func reportDatabaseStats(db *sql.DB) {
 	db.QueryRow("SELECT COUNT(*) FROM images WHERE thumb_path IS NOT NULL").Scan(&thumbCount)
 	db.QueryRow("SELECT COUNT(*) FROM images WHERE upres_img_path IS NOT NULL").Scan(&upresImgCount)
 	db.QueryRow("SELECT COUNT(*) FROM images WHERE upres_thumb_path IS NOT NULL").Scan(&upresThumbCount)
-	db.QueryRow("SELECT COUNT(*) FROM images WHERE url IS NOT NULL").Scan(&urlCount)
+	db.QueryRow("SELECT COUNT(*) FROM images WHERE url IS NOT NULL AND (img_path IS NULL OR img_path = '')").Scan(&urlNotDownloaded)
 	db.QueryRow("SELECT COUNT(*) FROM images WHERE weird IS NOT NULL").Scan(&weirdCount)
 
 	fmt.Fprintf(os.Stderr, "Total records:         %7d\n", totalCount)
@@ -77,9 +77,9 @@ func reportDatabaseStats(db *sql.DB) {
 	fmt.Fprintf(os.Stderr, "\nFile tracking:\n")
 	fmt.Fprintf(os.Stderr, "  With img_path:       %7d  (%.1f%%)\n", imgPathCount, percent(imgPathCount, totalCount))
 	fmt.Fprintf(os.Stderr, "  With thumb_path:     %7d  (%.1f%%)\n", thumbCount, percent(thumbCount, totalCount))
+	fmt.Fprintf(os.Stderr, "  Not downloaded:      %7d  (%.1f%%)  (have URL, no img_path)\n", urlNotDownloaded, percent(urlNotDownloaded, totalCount))
 	fmt.Fprintf(os.Stderr, "  With upres images:   %7d  (%.1f%%)\n", upresImgCount, percent(upresImgCount, totalCount))
 	fmt.Fprintf(os.Stderr, "  With upres thumbs:   %7d  (%.1f%%)\n", upresThumbCount, percent(upresThumbCount, totalCount))
-	fmt.Fprintf(os.Stderr, "  With source URL:     %7d  (%.1f%%)\n", urlCount, percent(urlCount, totalCount))
 
 	if weirdCount > 0 {
 		fmt.Fprintf(os.Stderr, "\n  ⚠ Weird/anomalous:    %7d  (query: SELECT id, weird FROM images WHERE weird IS NOT NULL)\n", weirdCount)
