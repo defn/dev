@@ -1,6 +1,7 @@
 package main
 
 import (
+	"database/sql"
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
@@ -9,15 +10,30 @@ import (
 	"os"
 	"os/exec"
 	"path/filepath"
+	"runtime"
 	"sort"
 	"strings"
 	"sync"
 	"sync/atomic"
 	"time"
+
+	_ "github.com/mattn/go-sqlite3"
 )
 
 func downloadMode() {
 	fmt.Fprintf(os.Stderr, "Download mode: Downloading images and generating thumbnails\n")
+
+	// Open database
+	dbPath := "cv.db"
+	db, err := sql.Open("sqlite3", dbPath)
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error opening database: %v\n", err)
+		os.Exit(1)
+	}
+	defer db.Close()
+
+	// Ensure url column exists (will be added by import mode, but check here too)
+	db.Exec("ALTER TABLE images ADD COLUMN url TEXT")
 
 	// Find all aggregated user JSON files
 	pattern := "js-username/username-*/js-username-*.json.js.json"
@@ -34,58 +50,171 @@ func downloadMode() {
 
 	fmt.Fprintf(os.Stderr, "Found %d user JSON files to process\n", len(matches))
 
-	// Collect all URLs from all user files
-	urlSet := make(map[string]bool)
+	// Process JSON files in parallel
+	numWorkers := runtime.NumCPU()
+	fmt.Fprintf(os.Stderr, "Processing JSON files with %d workers...\n", numWorkers)
+
+	jobs := make(chan string, len(matches))
+	type urlResult struct {
+		imageID string
+		url     string
+	}
+	results := make(chan urlResult, 1000000) // Large buffer for results
+	var wg sync.WaitGroup
+	var processedFiles atomic.Int32
+
+	// Launch workers
+	for w := 0; w < numWorkers; w++ {
+		wg.Add(1)
+		go func() {
+			defer wg.Done()
+			for jsonFile := range jobs {
+				urls, err := extractURLsFromFile(jsonFile)
+				if err != nil {
+					fmt.Fprintf(os.Stderr, "Error extracting URLs from %s: %v\n", jsonFile, err)
+					processedFiles.Add(1)
+					continue
+				}
+
+				for _, url := range urls {
+					// Extract image ID from URL filename
+					parts := strings.Split(url, "/")
+					if len(parts) < 2 {
+						continue
+					}
+					filename := parts[len(parts)-1]
+					// Remove file extension to get image ID
+					imageID := filename
+					if idx := strings.LastIndex(imageID, "."); idx != -1 {
+						imageID = imageID[:idx]
+					}
+
+					results <- urlResult{imageID: imageID, url: url}
+				}
+
+				// Report progress every 1000 files
+				processed := processedFiles.Add(1)
+				if processed%1000 == 0 {
+					fmt.Fprintf(os.Stderr, "Processed %d/%d JSON files...\n", processed, len(matches))
+				}
+			}
+		}()
+	}
+
+	// Send JSON files to workers
 	for _, jsonFile := range matches {
-		urls, err := extractURLsFromFile(jsonFile)
-		if err != nil {
-			fmt.Fprintf(os.Stderr, "Error extracting URLs from %s: %v\n", jsonFile, err)
-			continue
-		}
-		for _, url := range urls {
-			urlSet[url] = true
-		}
+		jobs <- jsonFile
 	}
+	close(jobs)
 
-	// Convert to sorted slice
-	var urls []string
-	for url := range urlSet {
-		urls = append(urls, url)
-	}
-	sort.Strings(urls)
+	// Start consuming results immediately to avoid blocking workers
+	insertedCount := 0
+	urlCount := 0
+	resultsDone := make(chan bool)
 
-	fmt.Fprintf(os.Stderr, "Found %d unique URLs to download\n", len(urls))
+	go func() {
+		batch := make([]urlResult, 0, 50000)
 
-	// Create img directory to check for existing files
-	if err := os.MkdirAll("img", 0755); err != nil {
-		fmt.Fprintf(os.Stderr, "Error creating img directory: %v\n", err)
+		for result := range results {
+			urlCount++
+
+			// Report URL processing progress
+			if urlCount%50000 == 0 {
+				fmt.Fprintf(os.Stderr, "Processed %d URLs from workers...\n", urlCount)
+			}
+
+			batch = append(batch, result)
+
+			// Insert batch when it reaches 50000
+			if len(batch) >= 50000 {
+				tx, err := db.Begin()
+				if err != nil {
+					fmt.Fprintf(os.Stderr, "Warning: Failed to begin transaction: %v\n", err)
+					continue
+				}
+
+				stmt, err := tx.Prepare(`INSERT INTO images (id, url) VALUES (?, ?) ON CONFLICT(id) DO UPDATE SET url = excluded.url`)
+				if err != nil {
+					fmt.Fprintf(os.Stderr, "Warning: Failed to prepare statement: %v\n", err)
+					tx.Rollback()
+					continue
+				}
+
+				for _, r := range batch {
+					if _, err := stmt.Exec(r.imageID, r.url); err != nil {
+						fmt.Fprintf(os.Stderr, "Warning: Failed to insert URL for %s: %v\n", r.imageID, err)
+					}
+				}
+				stmt.Close()
+
+				if err := tx.Commit(); err != nil {
+					fmt.Fprintf(os.Stderr, "Warning: Failed to commit transaction: %v\n", err)
+					tx.Rollback()
+				} else {
+					insertedCount += len(batch)
+					if insertedCount%500000 == 0 {
+						fmt.Fprintf(os.Stderr, "Inserted %d URLs...\n", insertedCount)
+					}
+				}
+
+				batch = batch[:0] // Clear batch
+			}
+		}
+
+		// Insert remaining batch
+		if len(batch) > 0 {
+			tx, err := db.Begin()
+			if err == nil {
+				stmt, err := tx.Prepare(`INSERT INTO images (id, url) VALUES (?, ?) ON CONFLICT(id) DO UPDATE SET url = excluded.url`)
+				if err == nil {
+					for _, r := range batch {
+						stmt.Exec(r.imageID, r.url)
+					}
+					stmt.Close()
+					tx.Commit()
+					insertedCount += len(batch)
+				} else {
+					tx.Rollback()
+				}
+			}
+		}
+
+		resultsDone <- true
+	}()
+
+	// Wait for workers to finish processing all JSON files
+	wg.Wait()
+	fmt.Fprintf(os.Stderr, "Processed %d/%d JSON files - Complete\n", len(matches), len(matches))
+	close(results)
+
+	// Wait for all results to be inserted
+	<-resultsDone
+	fmt.Fprintf(os.Stderr, "Processed %d total URLs, inserted/updated %d unique URLs in database\n", urlCount, insertedCount)
+
+	// Generate downloads.txt from database: images with url set but no img_path (not downloaded yet)
+	rows, err := db.Query(`
+		SELECT url FROM images
+		WHERE url IS NOT NULL
+		AND (img_path IS NULL OR img_path = '')
+		ORDER BY url
+	`)
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error querying database for downloads: %v\n", err)
 		os.Exit(1)
 	}
+	defer rows.Close()
 
-	// Filter out URLs that already have files (including 0-byte marker files)
 	var urlsToDownload []string
-	alreadyDownloaded := 0
-	for _, url := range urls {
-		// Extract filename from URL
-		parts := strings.Split(url, "/")
-		if len(parts) < 2 {
+	for rows.Next() {
+		var url string
+		if err := rows.Scan(&url); err != nil {
+			fmt.Fprintf(os.Stderr, "Error scanning row: %v\n", err)
 			continue
 		}
-		filename := parts[len(parts)-1]
-		outputPath := filepath.Join("img", filename)
-
-		// Check if file exists (any size, including 0-byte markers)
-		if _, err := os.Stat(outputPath); err == nil {
-			alreadyDownloaded++
-			continue
-		}
-
-		// Need to download this URL
 		urlsToDownload = append(urlsToDownload, url)
 	}
 
-	fmt.Fprintf(os.Stderr, "Already downloaded: %d files\n", alreadyDownloaded)
-	fmt.Fprintf(os.Stderr, "Need to download: %d files\n", len(urlsToDownload))
+	fmt.Fprintf(os.Stderr, "Found %d images to download (have URL but no img_path)\n", len(urlsToDownload))
 
 	// Create state directory
 	if err := os.MkdirAll("state", 0755); err != nil {

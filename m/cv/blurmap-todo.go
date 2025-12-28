@@ -1,16 +1,24 @@
 package main
 
 import (
+	"database/sql"
 	"fmt"
 	"os"
-	"path/filepath"
-	"sort"
-	"strings"
-	"sync"
+
+	_ "github.com/mattn/go-sqlite3"
 )
 
 func todoMode() {
-	fmt.Fprintf(os.Stderr, "Todo mode: Finding uncurated images\n")
+	fmt.Fprintf(os.Stderr, "Todo mode: Finding uncurated images from database\n")
+
+	// Open database
+	dbPath := "cv.db"
+	db, err := sql.Open("sqlite3", dbPath)
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error opening database: %v\n", err)
+		os.Exit(1)
+	}
+	defer db.Close()
 
 	// Create state directory
 	if err := os.MkdirAll("state", 0755); err != nil {
@@ -18,150 +26,39 @@ func todoMode() {
 		os.Exit(1)
 	}
 
-	// Resolve symlinks for directories
-	imgDir, err := filepath.EvalSymlinks("img")
+	// Query for uncurated images from database
+	// Images that have img_path (downloaded) but no state (not curated) and not weird (not zero-byte)
+	fmt.Fprintf(os.Stderr, "Querying database for uncurated images...\n")
+	rows, err := db.Query(`
+		SELECT id FROM images
+		WHERE img_path IS NOT NULL
+		AND img_path != ''
+		AND (state IS NULL OR state = '')
+		AND (weird IS NULL OR weird = '')
+		ORDER BY id
+	`)
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error resolving img/ symlink: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Error querying database: %v\n", err)
 		os.Exit(1)
 	}
-
-	yesDir, err := filepath.EvalSymlinks("yes")
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error resolving yes/ symlink: %v\n", err)
-		os.Exit(1)
-	}
-
-	noDir, err := filepath.EvalSymlinks("no")
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error resolving no/ symlink: %v\n", err)
-		os.Exit(1)
-	}
-
-	// Scan all three directories in parallel
-	fmt.Fprintf(os.Stderr, "Scanning yes/, no/, and img/ directories in parallel...\n")
-
-	yesFiles := make(map[string]bool)
-	noFiles := make(map[string]bool)
-	var imgEntries []os.DirEntry
-
-	var wg sync.WaitGroup
-	errChan := make(chan error, 3)
-
-	// Scan yes/ directory
-	wg.Add(1)
-	go func() {
-		defer wg.Done()
-		count := 0
-		entries, err := os.ReadDir(yesDir)
-		if err != nil {
-			errChan <- fmt.Errorf("yes/ directory: %w", err)
-			return
-		}
-		for _, entry := range entries {
-			if !entry.IsDir() {
-				// Extract filename without extension
-				filename := entry.Name()
-				ext := filepath.Ext(filename)
-				nameWithoutExt := strings.TrimSuffix(filename, ext)
-				yesFiles[nameWithoutExt] = true
-				count++
-			}
-		}
-		fmt.Fprintf(os.Stderr, "Found %d files in yes/\n", count)
-	}()
-
-	// Scan no/ directory
-	wg.Add(1)
-	go func() {
-		defer wg.Done()
-		count := 0
-		entries, err := os.ReadDir(noDir)
-		if err != nil {
-			errChan <- fmt.Errorf("no/ directory: %w", err)
-			return
-		}
-		for _, entry := range entries {
-			if !entry.IsDir() {
-				// Extract filename without extension
-				filename := entry.Name()
-				ext := filepath.Ext(filename)
-				nameWithoutExt := strings.TrimSuffix(filename, ext)
-				noFiles[nameWithoutExt] = true
-				count++
-			}
-		}
-		fmt.Fprintf(os.Stderr, "Found %d files in no/\n", count)
-	}()
-
-	// Scan img/ directory (just read entries, don't stat yet)
-	wg.Add(1)
-	go func() {
-		defer wg.Done()
-		entries, err := os.ReadDir(imgDir)
-		if err != nil {
-			errChan <- fmt.Errorf("img/ directory: %w", err)
-			return
-		}
-		imgEntries = entries
-		fmt.Fprintf(os.Stderr, "Found %d entries in img/\n", len(imgEntries))
-	}()
-
-	// Wait for all directories to complete
-	wg.Wait()
-	close(errChan)
-
-	// Check for errors
-	for err := range errChan {
-		fmt.Fprintf(os.Stderr, "Error scanning directory: %v\n", err)
-		os.Exit(1)
-	}
-
-	// Now filter img/ entries and stat only non-curated files
-	fmt.Fprintf(os.Stderr, "Filtering and checking img/ files...\n")
+	defer rows.Close()
 
 	var uncurated []string
-	totalFiles := 0
-	skippedCurated := 0
-	skippedZeroBytes := 0
-
-	for _, entry := range imgEntries {
-		if !entry.IsDir() {
-			totalFiles++
-			// Extract filename without extension
-			filename := entry.Name()
-			ext := filepath.Ext(filename)
-			nameWithoutExt := strings.TrimSuffix(filename, ext)
-
-			// Skip if already in yes/ or no/
-			if yesFiles[nameWithoutExt] || noFiles[nameWithoutExt] {
-				skippedCurated++
-				continue
-			}
-
-			// Only stat files that passed the filter
-			info, err := entry.Info()
-			if err != nil {
-				continue
-			}
-
-			// Skip 0-byte files (markers for "not valuable")
-			if info.Size() == 0 {
-				skippedZeroBytes++
-				continue
-			}
-
-			// This is an uncurated file
-			uncurated = append(uncurated, nameWithoutExt)
+	for rows.Next() {
+		var id string
+		if err := rows.Scan(&id); err != nil {
+			fmt.Fprintf(os.Stderr, "Error scanning row: %v\n", err)
+			continue
 		}
+		uncurated = append(uncurated, id)
 	}
 
-	fmt.Fprintf(os.Stderr, "Found %d total files in img/\n", totalFiles)
-	fmt.Fprintf(os.Stderr, "Skipped %d already curated files\n", skippedCurated)
-	fmt.Fprintf(os.Stderr, "Skipped %d zero-byte marker files\n", skippedZeroBytes)
-	fmt.Fprintf(os.Stderr, "Found %d uncurated files\n", len(uncurated))
+	if err := rows.Err(); err != nil {
+		fmt.Fprintf(os.Stderr, "Error iterating rows: %v\n", err)
+		os.Exit(1)
+	}
 
-	// Sort the list
-	sort.Strings(uncurated)
+	fmt.Fprintf(os.Stderr, "Found %d uncurated images\n", len(uncurated))
 
 	// Write to state/todo.txt
 	outputFile := "state/todo.txt"

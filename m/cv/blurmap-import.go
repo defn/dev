@@ -7,6 +7,7 @@ import (
 	"path/filepath"
 	"strings"
 	"sync"
+	"sync/atomic"
 
 	_ "github.com/mattn/go-sqlite3"
 )
@@ -43,6 +44,7 @@ CREATE TABLE IF NOT EXISTS images (
 	db.Exec("ALTER TABLE images ADD COLUMN width INTEGER")
 	db.Exec("ALTER TABLE images ADD COLUMN height INTEGER")
 	db.Exec("ALTER TABLE images ADD COLUMN weird TEXT")
+	db.Exec("ALTER TABLE images ADD COLUMN url TEXT")
 
 	// Create indexes after columns exist
 	indexes := `
@@ -81,172 +83,8 @@ CREATE INDEX IF NOT EXISTS idx_images_weird ON images(weird) WHERE weird IS NOT 
 		os.Exit(1)
 	}
 
-	// Report statistics
-	var yesCount, noCount, todoCount, thumbCount, upresThumbCount, upresImgCount int
-	db.QueryRow("SELECT COUNT(*) FROM images WHERE state='yes'").Scan(&yesCount)
-	db.QueryRow("SELECT COUNT(*) FROM images WHERE state='no'").Scan(&noCount)
-	db.QueryRow("SELECT COUNT(*) FROM images WHERE state IS NULL").Scan(&todoCount)
-	db.QueryRow("SELECT COUNT(*) FROM images WHERE thumb_path IS NOT NULL").Scan(&thumbCount)
-	db.QueryRow("SELECT COUNT(*) FROM images WHERE upres_thumb_path IS NOT NULL").Scan(&upresThumbCount)
-	db.QueryRow("SELECT COUNT(*) FROM images WHERE upres_img_path IS NOT NULL").Scan(&upresImgCount)
-
-	fmt.Fprintf(os.Stderr, "\nImport complete:\n")
-	fmt.Fprintf(os.Stderr, "  Approved (yes): %d\n", yesCount)
-	fmt.Fprintf(os.Stderr, "  Rejected (no): %d\n", noCount)
-	fmt.Fprintf(os.Stderr, "  Todo (null): %d\n", todoCount)
-	fmt.Fprintf(os.Stderr, "  With thumbnails: %d\n", thumbCount)
-	fmt.Fprintf(os.Stderr, "  With upres thumbnails: %d\n", upresThumbCount)
-	fmt.Fprintf(os.Stderr, "  With upres images: %d\n", upresImgCount)
-
-	// Report weird images
-	var weirdCount int
-	db.QueryRow("SELECT COUNT(*) FROM images WHERE weird IS NOT NULL").Scan(&weirdCount)
-	if weirdCount > 0 {
-		fmt.Fprintf(os.Stderr, "\nWeird images: %d (query: SELECT id, weird FROM images WHERE weird IS NOT NULL)\n", weirdCount)
-	}
-
-	// Report incomplete combinations
-	fmt.Fprintf(os.Stderr, "\nIncomplete combinations (yes/todo only):\n")
-
-	// 1. yes/todo without dimensions
-	var noDimsCount int
-	db.QueryRow(`SELECT COUNT(*) FROM images
-		WHERE (state='yes' OR state IS NULL)
-		AND (width IS NULL OR height IS NULL)`).Scan(&noDimsCount)
-	if noDimsCount > 0 {
-		fmt.Fprintf(os.Stderr, "  Yes/todo without dimensions: %d\n", noDimsCount)
-	}
-
-	// 2. yes/todo without img_path
-	var noImgCount int
-	db.QueryRow(`SELECT COUNT(*) FROM images
-		WHERE (state='yes' OR state IS NULL)
-		AND img_path IS NULL`).Scan(&noImgCount)
-	if noImgCount > 0 {
-		fmt.Fprintf(os.Stderr, "  Yes/todo without img_path: %d\n", noImgCount)
-	}
-
-	// 3. yes/todo without thumb_path
-	var noThumbCount int
-	db.QueryRow(`SELECT COUNT(*) FROM images
-		WHERE (state='yes' OR state IS NULL)
-		AND thumb_path IS NULL`).Scan(&noThumbCount)
-	if noThumbCount > 0 {
-		fmt.Fprintf(os.Stderr, "  Yes/todo without thumb_path: %d\n", noThumbCount)
-	}
-
-	// 4. yes/todo without both img and thumb
-	var noBothCount int
-	db.QueryRow(`SELECT COUNT(*) FROM images
-		WHERE (state='yes' OR state IS NULL)
-		AND img_path IS NULL AND thumb_path IS NULL`).Scan(&noBothCount)
-	if noBothCount > 0 {
-		fmt.Fprintf(os.Stderr, "  Yes/todo without img AND thumb (orphaned): %d\n", noBothCount)
-	}
-
-	// 5. upres_img_path without base img_path
-	var upresImgOrphanCount int
-	db.QueryRow(`SELECT COUNT(*) FROM images
-		WHERE upres_img_path IS NOT NULL
-		AND img_path IS NULL`).Scan(&upresImgOrphanCount)
-	if upresImgOrphanCount > 0 {
-		fmt.Fprintf(os.Stderr, "  Upres img without base img: %d\n", upresImgOrphanCount)
-	}
-
-	// 6. upres_thumb_path without base thumb_path
-	var upresThumbOrphanCount int
-	db.QueryRow(`SELECT COUNT(*) FROM images
-		WHERE upres_thumb_path IS NOT NULL
-		AND thumb_path IS NULL`).Scan(&upresThumbOrphanCount)
-	if upresThumbOrphanCount > 0 {
-		fmt.Fprintf(os.Stderr, "  Upres thumb without base thumb: %d\n", upresThumbOrphanCount)
-	}
-
-	// 7. Orphaned thumbnails (thumb only, no state, no img)
-	var orphanedThumbCount int
-	db.QueryRow(`SELECT COUNT(*) FROM images
-		WHERE thumb_path IS NOT NULL
-		AND state IS NULL
-		AND img_path IS NULL`).Scan(&orphanedThumbCount)
-	if orphanedThumbCount > 0 {
-		fmt.Fprintf(os.Stderr, "  Orphaned thumbnails (thumb only, no img, no yes/no): %d\n", orphanedThumbCount)
-	}
-
-	// Summary
-	totalIncomplete := noDimsCount + noImgCount + noThumbCount + upresImgOrphanCount + upresThumbOrphanCount
-	if totalIncomplete == 0 {
-		fmt.Fprintf(os.Stderr, "  None - all yes/todo images complete!\n")
-	}
-
-	// Validate file system consistency
-	fmt.Fprintf(os.Stderr, "\nValidating file system consistency...\n")
-	validateFileSystem(db)
-}
-
-// validateFileSystem checks for weird combinations in the database
-func validateFileSystem(db *sql.DB) {
-	// Check for zero-length img/ files without valid upres
-	rows, err := db.Query(`SELECT id, img_path, upres_img_path FROM images WHERE img_path IS NOT NULL`)
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "  ERROR: Failed to query images: %v\n", err)
-		return
-	}
-	defer rows.Close()
-
-	zeroLengthNoUpres := 0
-	zeroLengthWithUpres := 0
-	missingImgFile := 0
-	missingUpresFile := 0
-
-	for rows.Next() {
-		var id, imgPath string
-		var upresImgPath sql.NullString
-		if err := rows.Scan(&id, &imgPath, &upresImgPath); err != nil {
-			continue
-		}
-
-		// Check if img_path file exists and get size
-		imgInfo, err := os.Stat(imgPath)
-		if err != nil {
-			missingImgFile++
-			continue
-		}
-
-		// If img is zero-length, check for upres
-		if imgInfo.Size() == 0 {
-			hasValidUpres := false
-			if upresImgPath.Valid && upresImgPath.String != "" {
-				if upresInfo, err := os.Stat(upresImgPath.String); err == nil && upresInfo.Size() > 0 {
-					hasValidUpres = true
-					zeroLengthWithUpres++
-				} else {
-					missingUpresFile++
-				}
-			}
-
-			if !hasValidUpres {
-				zeroLengthNoUpres++
-			}
-		}
-	}
-
-	// Report findings
-	if zeroLengthNoUpres > 0 {
-		fmt.Fprintf(os.Stderr, "  WARNING: %d images have zero-length img_path without valid upres_img_path\n", zeroLengthNoUpres)
-	}
-	if zeroLengthWithUpres > 0 {
-		fmt.Fprintf(os.Stderr, "  INFO: %d images have zero-length img_path with valid upres_img_path (OK)\n", zeroLengthWithUpres)
-	}
-	if missingImgFile > 0 {
-		fmt.Fprintf(os.Stderr, "  WARNING: %d images have missing img_path files\n", missingImgFile)
-	}
-	if missingUpresFile > 0 {
-		fmt.Fprintf(os.Stderr, "  WARNING: %d images have missing upres_img_path files\n", missingUpresFile)
-	}
-
-	if zeroLengthNoUpres == 0 && missingImgFile == 0 && missingUpresFile == 0 {
-		fmt.Fprintf(os.Stderr, "  OK: All images have valid file backing\n")
-	}
+	// Generate report
+	generateReport(db)
 }
 
 // imageRecord represents a single image record from any import source
@@ -261,10 +99,115 @@ type imageRecord struct {
 	weird     string // anomaly description, NULL if normal
 }
 
+// inMemoryRecord represents a database record in memory with modification tracking
+type inMemoryRecord struct {
+	id             string
+	state          sql.NullString
+	imgPath        sql.NullString
+	thumbPath      sql.NullString
+	width          sql.NullInt64
+	height         sql.NullInt64
+	weird          sql.NullString
+	url            sql.NullString
+	upresImgPath   sql.NullString
+	upresThumbPath sql.NullString
+	modified       bool // Track if record needs to be written back
+}
+
+// shardedMutex provides fine-grained locking based on image ID
+type shardedMutex struct {
+	mutexes []sync.Mutex
+	count   int
+}
+
+func newShardedMutex(count int) *shardedMutex {
+	return &shardedMutex{
+		mutexes: make([]sync.Mutex, count),
+		count:   count,
+	}
+}
+
+func (sm *shardedMutex) lock(id string) {
+	idx := sm.hashID(id)
+	sm.mutexes[idx].Lock()
+}
+
+func (sm *shardedMutex) unlock(id string) {
+	idx := sm.hashID(id)
+	sm.mutexes[idx].Unlock()
+}
+
+func (sm *shardedMutex) hashID(id string) int {
+	// Simple hash function - sum of bytes modulo shard count
+	h := 0
+	for i := 0; i < len(id); i++ {
+		h = (h*31 + int(id[i])) % sm.count
+	}
+	return h
+}
+
+// importStats tracks statistics during import
+type importStats struct {
+	processed   atomic.Int64
+	yesToNo     atomic.Int64
+	noToYes     atomic.Int64
+	created     atomic.Int64
+	transitions atomic.Int64
+}
+
+// loadDatabaseIntoMemory loads all records from database into memory
+func loadDatabaseIntoMemory(db *sql.DB) (map[string]*inMemoryRecord, error) {
+	fmt.Fprintf(os.Stderr, "Loading database into memory...\n")
+
+	records := make(map[string]*inMemoryRecord)
+
+	rows, err := db.Query(`
+		SELECT id, state, img_path, thumb_path, width, height, weird, url, upres_img_path, upres_thumb_path
+		FROM images
+	`)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+
+	count := 0
+	for rows.Next() {
+		rec := &inMemoryRecord{}
+		if err := rows.Scan(&rec.id, &rec.state, &rec.imgPath, &rec.thumbPath,
+			&rec.width, &rec.height, &rec.weird, &rec.url, &rec.upresImgPath, &rec.upresThumbPath); err != nil {
+			return nil, err
+		}
+		records[rec.id] = rec
+		count++
+
+		if count%500000 == 0 {
+			fmt.Fprintf(os.Stderr, "  Loaded %d records...\n", count)
+		}
+	}
+
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+
+	fmt.Fprintf(os.Stderr, "  Loaded %d total records into memory\n", count)
+	return records, nil
+}
+
 // parallelImport imports yes/, no/, img/, thumbs/ in parallel
 func parallelImport(db *sql.DB) error {
-	// Channel for all import records
-	recordChan := make(chan imageRecord, 100000)
+	// Load database into memory
+	memDB, err := loadDatabaseIntoMemory(db)
+	if err != nil {
+		return fmt.Errorf("failed to load database into memory: %w", err)
+	}
+
+	fmt.Fprintf(os.Stderr, "Starting parallel filesystem scan with concurrent updates...\n")
+
+	// Create sharded mutex for fine-grained locking (1024 shards)
+	shardedMutex := newShardedMutex(1024)
+
+	// Import statistics
+	stats := &importStats{}
 
 	// Error channel
 	errChan := make(chan error, 4)
@@ -272,13 +215,13 @@ func parallelImport(db *sql.DB) error {
 	// WaitGroup for scanner goroutines
 	var scanWg sync.WaitGroup
 
-	// Start scanner goroutines
+	// Start scanner goroutines - they update memDB directly with sharded locking
 	scanWg.Add(4)
 
 	// yes/ scanner
 	go func() {
 		defer scanWg.Done()
-		if err := scanYesDirectory(db, recordChan); err != nil {
+		if err := scanYesDirectory(db, memDB, shardedMutex, stats); err != nil {
 			errChan <- fmt.Errorf("yes/ scanner: %w", err)
 		}
 	}()
@@ -286,7 +229,7 @@ func parallelImport(db *sql.DB) error {
 	// no/ scanner
 	go func() {
 		defer scanWg.Done()
-		if err := scanNoDirectory(recordChan); err != nil {
+		if err := scanNoDirectory(memDB, shardedMutex, stats); err != nil {
 			errChan <- fmt.Errorf("no/ scanner: %w", err)
 		}
 	}()
@@ -294,7 +237,7 @@ func parallelImport(db *sql.DB) error {
 	// img/ scanner
 	go func() {
 		defer scanWg.Done()
-		if err := scanImgDirectory(db, recordChan); err != nil {
+		if err := scanImgDirectory(db, memDB, shardedMutex, stats); err != nil {
 			errChan <- fmt.Errorf("img/ scanner: %w", err)
 		}
 	}()
@@ -302,19 +245,13 @@ func parallelImport(db *sql.DB) error {
 	// thumbs/ scanner
 	go func() {
 		defer scanWg.Done()
-		if err := scanThumbsDirectory(db, recordChan); err != nil {
+		if err := scanThumbsDirectory(db, memDB, shardedMutex, stats); err != nil {
 			errChan <- fmt.Errorf("thumbs/ scanner: %w", err)
 		}
 	}()
 
-	// Close recordChan when all scanners finish
-	go func() {
-		scanWg.Wait()
-		close(recordChan)
-	}()
-
-	// Database writer - single goroutine to avoid lock contention
-	writerErr := databaseWriter(db, recordChan)
+	// Wait for all scanners to finish
+	scanWg.Wait()
 
 	// Check for scanner errors
 	select {
@@ -323,20 +260,176 @@ func parallelImport(db *sql.DB) error {
 	default:
 	}
 
-	return writerErr
+	// Report statistics
+	fmt.Fprintf(os.Stderr, "  Total records processed: %d\n", stats.processed.Load())
+	if stats.yesToNo.Load() > 0 {
+		fmt.Fprintf(os.Stderr, "  WARNING: %d attempts to downgrade from yes to no (blocked)\n", stats.yesToNo.Load())
+	}
+	if stats.noToYes.Load() > 0 {
+		fmt.Fprintf(os.Stderr, "  INFO: %d images upgraded from no to yes\n", stats.noToYes.Load())
+	}
+	if stats.created.Load() > 0 {
+		fmt.Fprintf(os.Stderr, "  INFO: %d new records created\n", stats.created.Load())
+	}
+
+	// Flush modified records back to database
+	fmt.Fprintf(os.Stderr, "Flushing changes to database...\n")
+	if err := flushMemoryToDatabase(db, memDB); err != nil {
+		return fmt.Errorf("failed to flush memory to database: %w", err)
+	}
+
+	return nil
 }
 
-// databaseWriter processes records from channel and writes to database in batches
-func databaseWriter(db *sql.DB, recordChan <-chan imageRecord) error {
-	batch := make([]imageRecord, 0, 10000)
-	count := 0
-	yesToNoCount := 0
-	noToYesCount := 0
+// updateMemoryRecord updates an in-memory record with proper locking and validation
+func updateMemoryRecord(memDB map[string]*inMemoryRecord, shardedMutex *shardedMutex, stats *importStats, rec imageRecord) {
+	// Lock on this specific ID
+	shardedMutex.lock(rec.id)
+	defer shardedMutex.unlock(rec.id)
 
-	flushBatch := func() error {
-		if len(batch) == 0 {
-			return nil
+	// Get or create in-memory record
+	memRec, exists := memDB[rec.id]
+	if !exists {
+		memRec = &inMemoryRecord{id: rec.id}
+		memDB[rec.id] = memRec
+		stats.created.Add(1)
+	}
+
+	// Store current state for transition logging
+	var currentStateStr, newStateStr string
+	if !exists {
+		currentStateStr = "NEW"
+	} else {
+		if memRec.state.Valid {
+			currentStateStr = memRec.state.String
+		} else {
+			currentStateStr = "NULL"
 		}
+	}
+	if rec.state == "" {
+		newStateStr = "NULL"
+	} else {
+		newStateStr = rec.state
+	}
+
+	weird := rec.weird
+
+	// Prevent yes -> no transition (yes cannot be downgraded)
+	if exists && memRec.state.Valid && memRec.state.String == "yes" && rec.state == "no" {
+		stats.yesToNo.Add(1)
+		fmt.Fprintf(os.Stderr, "  WARNING: Image %s blocked downgrade %s->%s (from %s)\n", rec.id, currentStateStr, newStateStr, rec.sourceDir)
+
+		// If this conflict is from a no/ file, delete it
+		if rec.sourceDir == "no/" {
+			if removeErr := os.Remove(rec.imgPath); removeErr == nil {
+				fmt.Fprintf(os.Stderr, "  INFO: Deleted conflicting no/ file: %s\n", rec.imgPath)
+			} else {
+				fmt.Fprintf(os.Stderr, "  ERROR: Failed to delete %s: %v\n", rec.imgPath, removeErr)
+			}
+		}
+
+		return // Skip this update
+	}
+
+	// Check for no -> yes transition
+	if exists && memRec.state.Valid && memRec.state.String == "no" && rec.state == "yes" {
+		stats.noToYes.Add(1)
+		weirdMsg := fmt.Sprintf("no->yes transition from %s", rec.sourceDir)
+		fmt.Fprintf(os.Stderr, "  WARNING: Image %s transition %s->%s (from %s)\n", rec.id, currentStateStr, newStateStr, rec.sourceDir)
+		if weird != "" {
+			weird = weird + "; " + weirdMsg
+		} else {
+			weird = weirdMsg
+		}
+	}
+
+	// Log other state transitions (NULL->no, NULL->yes, yes->NULL, no->NULL)
+	if exists {
+		if !memRec.state.Valid && rec.state == "no" {
+			fmt.Fprintf(os.Stderr, "  INFO: Image %s transition %s->%s (from %s)\n", rec.id, currentStateStr, newStateStr, rec.sourceDir)
+			stats.transitions.Add(1)
+		} else if !memRec.state.Valid && rec.state == "yes" {
+			fmt.Fprintf(os.Stderr, "  INFO: Image %s transition %s->%s (from %s)\n", rec.id, currentStateStr, newStateStr, rec.sourceDir)
+			stats.transitions.Add(1)
+		} else if memRec.state.Valid && rec.state == "" {
+			fmt.Fprintf(os.Stderr, "  INFO: Image %s transition %s->%s (from %s)\n", rec.id, currentStateStr, newStateStr, rec.sourceDir)
+			stats.transitions.Add(1)
+		}
+	} else {
+		// New record
+		if rec.state != "" {
+			fmt.Fprintf(os.Stderr, "  INFO: Image %s created with state %s (from %s)\n", rec.id, newStateStr, rec.sourceDir)
+		}
+	}
+
+	// Update in-memory record using COALESCE logic
+	// state: only update if new state is 'yes' or 'no', otherwise preserve existing
+	if rec.state == "yes" || rec.state == "no" {
+		memRec.state = sql.NullString{String: rec.state, Valid: true}
+		memRec.modified = true
+	} else if rec.state == "" && !memRec.state.Valid {
+		// Only set to NULL if not already set
+		memRec.state = sql.NullString{Valid: false}
+		memRec.modified = true
+	}
+
+	// img_path: update if not empty, preserve existing otherwise
+	if rec.imgPath != "" {
+		memRec.imgPath = sql.NullString{String: rec.imgPath, Valid: true}
+		memRec.modified = true
+	}
+
+	// thumb_path: update if not empty, preserve existing otherwise
+	if rec.thumbPath != "" {
+		memRec.thumbPath = sql.NullString{String: rec.thumbPath, Valid: true}
+		memRec.modified = true
+	}
+
+	// width: update if not zero, preserve existing otherwise
+	if rec.width != 0 {
+		memRec.width = sql.NullInt64{Int64: int64(rec.width), Valid: true}
+		memRec.modified = true
+	}
+
+	// height: update if not zero, preserve existing otherwise
+	if rec.height != 0 {
+		memRec.height = sql.NullInt64{Int64: int64(rec.height), Valid: true}
+		memRec.modified = true
+	}
+
+	// weird: update if not empty, preserve existing otherwise
+	if weird != "" {
+		memRec.weird = sql.NullString{String: weird, Valid: true}
+		memRec.modified = true
+	}
+
+	stats.processed.Add(1)
+}
+
+// flushMemoryToDatabase writes all modified records back to database
+func flushMemoryToDatabase(db *sql.DB, memDB map[string]*inMemoryRecord) error {
+	// Collect modified records
+	var modified []*inMemoryRecord
+	for _, rec := range memDB {
+		if rec.modified {
+			modified = append(modified, rec)
+		}
+	}
+
+	fmt.Fprintf(os.Stderr, "  Found %d modified records to flush\n", len(modified))
+
+	if len(modified) == 0 {
+		return nil
+	}
+
+	// Flush in batches
+	batchSize := 50000
+	for i := 0; i < len(modified); i += batchSize {
+		end := i + batchSize
+		if end > len(modified) {
+			end = len(modified)
+		}
+		batch := modified[i:end]
 
 		tx, err := db.Begin()
 		if err != nil {
@@ -344,122 +437,59 @@ func databaseWriter(db *sql.DB, recordChan <-chan imageRecord) error {
 		}
 		defer tx.Rollback()
 
-		// Check current state
-		checkStmt, err := tx.Prepare("SELECT state FROM images WHERE id = ?")
-		if err != nil {
-			return err
-		}
-		defer checkStmt.Close()
-
-		// Upsert statement
-		upsertStmt, err := tx.Prepare(`
-			INSERT INTO images (id, state, img_path, thumb_path, width, height, weird)
-			VALUES (?, ?, ?, ?, ?, ?, ?)
+		stmt, err := tx.Prepare(`
+			INSERT INTO images (id, state, img_path, thumb_path, width, height, weird, url, upres_img_path, upres_thumb_path)
+			VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
 			ON CONFLICT(id) DO UPDATE SET
-				state = CASE
-					WHEN excluded.state = 'yes' THEN 'yes'
-					WHEN excluded.state = 'no' THEN 'no'
-					WHEN excluded.state IS NULL THEN COALESCE(images.state, NULL)
-					ELSE images.state
-				END,
-				img_path = COALESCE(excluded.img_path, images.img_path),
-				thumb_path = COALESCE(excluded.thumb_path, images.thumb_path),
-				width = COALESCE(NULLIF(excluded.width, 0), images.width),
-				height = COALESCE(NULLIF(excluded.height, 0), images.height),
-				weird = COALESCE(excluded.weird, images.weird)
+				state = excluded.state,
+				img_path = excluded.img_path,
+				thumb_path = excluded.thumb_path,
+				width = excluded.width,
+				height = excluded.height,
+				weird = excluded.weird,
+				url = excluded.url,
+				upres_img_path = excluded.upres_img_path,
+				upres_thumb_path = excluded.upres_thumb_path
 		`)
 		if err != nil {
 			return err
 		}
-		defer upsertStmt.Close()
+		defer stmt.Close()
 
 		for _, rec := range batch {
-			// Check current state for transition logging
-			var currentState sql.NullString
-			err := checkStmt.QueryRow(rec.id).Scan(&currentState)
+			// Convert sql.Null* to interface{} for Exec
+			var state, imgPath, thumbPath, weird, url, upresImgPath, upresThumbPath interface{}
+			var width, height interface{}
 
-			weird := rec.weird
-
-			// Log current and new state for debugging
-			var currentStateStr, newStateStr string
-			if err == sql.ErrNoRows {
-				currentStateStr = "NEW"
-			} else if err == nil {
-				if currentState.Valid {
-					currentStateStr = currentState.String
-				} else {
-					currentStateStr = "NULL"
-				}
+			if rec.state.Valid {
+				state = rec.state.String
 			}
-			if rec.state == "" {
-				newStateStr = "NULL"
-			} else {
-				newStateStr = rec.state
+			if rec.imgPath.Valid {
+				imgPath = rec.imgPath.String
 			}
-
-			// Prevent yes -> no transition (yes cannot be downgraded)
-			if err == nil && currentState.Valid && currentState.String == "yes" && rec.state == "no" {
-				yesToNoCount++
-				fmt.Fprintf(os.Stderr, "  WARNING: Image %s blocked downgrade %s->%s (from %s)\n", rec.id, currentStateStr, newStateStr, rec.sourceDir)
-
-				// If this conflict is from a no/ file, delete it
-				if rec.sourceDir == "no/" {
-					if removeErr := os.Remove(rec.imgPath); removeErr == nil {
-						fmt.Fprintf(os.Stderr, "  INFO: Deleted conflicting no/ file: %s\n", rec.imgPath)
-					} else {
-						fmt.Fprintf(os.Stderr, "  ERROR: Failed to delete %s: %v\n", rec.imgPath, removeErr)
-					}
-				}
-
-				continue // Skip this update
+			if rec.thumbPath.Valid {
+				thumbPath = rec.thumbPath.String
+			}
+			if rec.width.Valid {
+				width = rec.width.Int64
+			}
+			if rec.height.Valid {
+				height = rec.height.Int64
+			}
+			if rec.weird.Valid {
+				weird = rec.weird.String
+			}
+			if rec.url.Valid {
+				url = rec.url.String
+			}
+			if rec.upresImgPath.Valid {
+				upresImgPath = rec.upresImgPath.String
+			}
+			if rec.upresThumbPath.Valid {
+				upresThumbPath = rec.upresThumbPath.String
 			}
 
-			// Check for no -> yes transition
-			if err == nil && currentState.Valid && currentState.String == "no" && rec.state == "yes" {
-				noToYesCount++
-				weirdMsg := fmt.Sprintf("no->yes transition from %s", rec.sourceDir)
-				fmt.Fprintf(os.Stderr, "  WARNING: Image %s transition %s->%s (from %s)\n", rec.id, currentStateStr, newStateStr, rec.sourceDir)
-				if weird != "" {
-					weird = weird + "; " + weirdMsg
-				} else {
-					weird = weirdMsg
-				}
-			}
-
-			// Log other state transitions (NULL->no, NULL->yes, yes->NULL, no->NULL)
-			if err == nil {
-				if !currentState.Valid && rec.state == "no" {
-					fmt.Fprintf(os.Stderr, "  INFO: Image %s transition %s->%s (from %s)\n", rec.id, currentStateStr, newStateStr, rec.sourceDir)
-				} else if !currentState.Valid && rec.state == "yes" {
-					fmt.Fprintf(os.Stderr, "  INFO: Image %s transition %s->%s (from %s)\n", rec.id, currentStateStr, newStateStr, rec.sourceDir)
-				} else if currentState.Valid && rec.state == "" {
-					fmt.Fprintf(os.Stderr, "  INFO: Image %s transition %s->%s (from %s)\n", rec.id, currentStateStr, newStateStr, rec.sourceDir)
-				}
-			} else if err == sql.ErrNoRows {
-				// New record
-				if rec.state != "" {
-					fmt.Fprintf(os.Stderr, "  INFO: Image %s created with state %s (from %s)\n", rec.id, newStateStr, rec.sourceDir)
-				}
-			}
-
-			// Convert empty state to NULL
-			var state interface{}
-			if rec.state == "" {
-				state = nil
-			} else {
-				state = rec.state
-			}
-
-			// Convert empty weird to NULL
-			var weirdVal interface{}
-			if weird != "" {
-				weirdVal = weird
-			} else {
-				weirdVal = nil
-			}
-
-			// Execute upsert
-			if _, err := upsertStmt.Exec(rec.id, state, rec.imgPath, rec.thumbPath, rec.width, rec.height, weirdVal); err != nil {
+			if _, err := stmt.Exec(rec.id, state, imgPath, thumbPath, width, height, weird, url, upresImgPath, upresThumbPath); err != nil {
 				return err
 			}
 		}
@@ -468,183 +498,215 @@ func databaseWriter(db *sql.DB, recordChan <-chan imageRecord) error {
 			return err
 		}
 
-		count += len(batch)
-		if count%50000 == 0 {
-			fmt.Fprintf(os.Stderr, "  Processed %d records...\n", count)
-		}
-		batch = batch[:0]
-		return nil
+		fmt.Fprintf(os.Stderr, "  Flushed %d records...\n", end)
 	}
 
-	// Process records from channel
-	for rec := range recordChan {
-		batch = append(batch, rec)
-
-		if len(batch) >= 10000 {
-			if err := flushBatch(); err != nil {
-				return err
-			}
-		}
-	}
-
-	// Flush remaining
-	if err := flushBatch(); err != nil {
-		return err
-	}
-
-	fmt.Fprintf(os.Stderr, "  Total records processed: %d\n", count)
-	if yesToNoCount > 0 {
-		fmt.Fprintf(os.Stderr, "  WARNING: %d attempts to downgrade from yes to no (blocked)\n", yesToNoCount)
-	}
-	if noToYesCount > 0 {
-		fmt.Fprintf(os.Stderr, "  INFO: %d images upgraded from no to yes\n", noToYesCount)
-	}
-
+	fmt.Fprintf(os.Stderr, "  Flush complete: %d records written to database\n", len(modified))
 	return nil
 }
 
 // scanYesDirectory scans yes/ and sends records to channel
-func scanYesDirectory(db *sql.DB, recordChan chan<- imageRecord) error {
+func scanYesDirectory(db *sql.DB, memDB map[string]*inMemoryRecord, shardedMutex *shardedMutex, stats *importStats) error {
 	realDir, err := filepath.EvalSymlinks("yes")
 	if err != nil {
 		return err
 	}
 
-	count := 0
+	fmt.Fprintf(os.Stderr, "  Starting parallel scan of yes/ with 8 workers...\n")
 
-	err = filepath.Walk(realDir, func(path string, info os.FileInfo, err error) error {
-		if err != nil || info.IsDir() {
-			return err
-		}
+	// Open directory
+	dir, err := os.Open(realDir)
+	if err != nil {
+		return err
+	}
+	defer dir.Close()
 
-		// Skip temporary files starting with .
-		basename := filepath.Base(path)
-		if strings.HasPrefix(basename, ".") {
-			return nil
-		}
+	// Worker pool
+	numWorkers := 8
+	workChan := make(chan []string, 100)
+	var wg sync.WaitGroup
+	var processedCount atomic.Int64
 
-		ext := filepath.Ext(path)
-		id := strings.TrimSuffix(basename, ext)
+	// Start workers
+	for i := 0; i < numWorkers; i++ {
+		wg.Add(1)
+		go func() {
+			defer wg.Done()
+			for batch := range workChan {
+				for _, filename := range batch {
+					// Skip temporary files
+					if strings.HasPrefix(filename, ".") {
+						continue
+					}
 
-		// Check if dimensions already exist in DB
-		var width, height int
-		var existingWidth, existingHeight sql.NullInt64
-		err = db.QueryRow("SELECT width, height FROM images WHERE id = ?", id).Scan(&existingWidth, &existingHeight)
+					path := filepath.Join(realDir, filename)
+					ext := filepath.Ext(filename)
+					id := strings.TrimSuffix(filename, ext)
 
-		if err == sql.ErrNoRows || !existingWidth.Valid || !existingHeight.Valid || existingWidth.Int64 == 0 || existingHeight.Int64 == 0 {
-			// Extract dimensions - missing or zero
-			w, h, err := getImageDimensions(path)
-			if err == nil {
-				width, height = w, h
+					// Check if dimensions already exist in memory DB
+					var width, height int
+					if memRec, exists := memDB[id]; exists && memRec.width.Valid && memRec.height.Valid && memRec.width.Int64 > 0 && memRec.height.Int64 > 0 {
+						// Use existing dimensions
+						width = int(memRec.width.Int64)
+						height = int(memRec.height.Int64)
+					} else {
+						// Extract dimensions - missing or zero
+						w, h, err := getImageDimensions(path)
+						if err == nil {
+							width, height = w, h
+						}
+					}
+
+					updateMemoryRecord(memDB, shardedMutex, stats, imageRecord{
+						id:        id,
+						state:     "yes",
+						imgPath:   path,
+						width:     width,
+						height:    height,
+						sourceDir: "yes/",
+					})
+
+					count := processedCount.Add(1)
+					if count%10000 == 0 {
+						fmt.Fprintf(os.Stderr, "  Scanned %d images from yes/\n", count)
+					}
+				}
 			}
-		} else {
-			// Use existing dimensions
-			width = int(existingWidth.Int64)
-			height = int(existingHeight.Int64)
+		}()
+	}
+
+	// Read directory entries in batches
+	batchSize := 10000
+	for {
+		names, err := dir.Readdirnames(batchSize)
+		if err != nil && len(names) == 0 {
+			break
 		}
-
-		recordChan <- imageRecord{
-			id:        id,
-			state:     "yes",
-			imgPath:   path,
-			width:     width,
-			height:    height,
-			sourceDir: "yes/",
+		if len(names) > 0 {
+			workChan <- names
 		}
-
-		count++
-		if count%10000 == 0 {
-			fmt.Fprintf(os.Stderr, "  Scanned %d images from yes/\n", count)
+		if err != nil {
+			break
 		}
+	}
 
-		return nil
-	})
+	close(workChan)
+	wg.Wait()
 
-	fmt.Fprintf(os.Stderr, "  Finished scanning yes/: %d images\n", count)
-
-	return err
+	fmt.Fprintf(os.Stderr, "  Finished scanning yes/: %d images\n", processedCount.Load())
+	return nil
 }
 
-// scanNoDirectory scans no/ and sends records to channel
-func scanNoDirectory(recordChan chan<- imageRecord) error {
-	fmt.Fprintf(os.Stderr, "  Starting scan of no/ directory...\n")
+// scanNoDirectory scans no/ and updates memory database
+func scanNoDirectory(memDB map[string]*inMemoryRecord, shardedMutex *shardedMutex, stats *importStats) error {
+	fmt.Fprintf(os.Stderr, "  Starting parallel scan of no/ with 8 workers...\n")
 	realDir, err := filepath.EvalSymlinks("no")
 	if err != nil {
 		return err
 	}
 	fmt.Fprintf(os.Stderr, "  Resolved no/ symlink to: %s\n", realDir)
 
-	count := 0
-	skippedDueToYes := 0
-	checkedForYes := 0
+	// Open directory
+	dir, err := os.Open(realDir)
+	if err != nil {
+		return err
+	}
+	defer dir.Close()
 
-	err = filepath.Walk(realDir, func(path string, info os.FileInfo, err error) error {
-		if err != nil || info.IsDir() {
-			return err
-		}
+	// Worker pool
+	numWorkers := 8
+	workChan := make(chan []string, 100)
+	var wg sync.WaitGroup
+	var processedCount, skippedDueToYes, checkedForYes atomic.Int64
 
-		// Skip temporary files starting with .
-		basename := filepath.Base(path)
-		if strings.HasPrefix(basename, ".") {
-			return nil
-		}
+	// Start workers
+	for i := 0; i < numWorkers; i++ {
+		wg.Add(1)
+		go func() {
+			defer wg.Done()
+			for batch := range workChan {
+				for _, filename := range batch {
+					// Skip temporary files
+					if strings.HasPrefix(filename, ".") {
+						continue
+					}
 
-		ext := filepath.Ext(path)
-		id := strings.TrimSuffix(basename, ext)
+					path := filepath.Join(realDir, filename)
+					ext := filepath.Ext(filename)
+					id := strings.TrimSuffix(filename, ext)
 
-		// Skip if there's a yes/ file for this ID (yes takes precedence)
-		checkedForYes++
-		yesPath := filepath.Join("yes", id+".png")
-		if _, statErr := os.Stat(yesPath); statErr == nil {
-			// Delete the conflicting no/ file
-			if removeErr := os.Remove(path); removeErr == nil {
-				skippedDueToYes++
-				if skippedDueToYes == 1 || skippedDueToYes%1000 == 0 {
-					fmt.Fprintf(os.Stderr, "  INFO: Deleted %d of %d conflicting no/ files (yes/ file exists)\n", skippedDueToYes, checkedForYes)
+					// Skip if there's a yes/ file for this ID (yes takes precedence)
+					checked := checkedForYes.Add(1)
+					yesPath := filepath.Join("yes", id+".png")
+					if _, statErr := os.Stat(yesPath); statErr == nil {
+						// Delete the conflicting no/ file
+						if removeErr := os.Remove(path); removeErr == nil {
+							skipped := skippedDueToYes.Add(1)
+							if skipped == 1 || skipped%1000 == 0 {
+								fmt.Fprintf(os.Stderr, "  INFO: Deleted %d of %d conflicting no/ files (yes/ file exists)\n", skipped, checked)
+							}
+						} else {
+							fmt.Fprintf(os.Stderr, "  ERROR: Failed to delete conflicting no/ file %s: %v\n", path, removeErr)
+						}
+						continue
+					}
+
+					// Check file size for zero-length files
+					if info, err := os.Stat(path); err == nil && info.Size() == 0 {
+						// Check if replicate/img/ has a non-zero file
+						replicateImgPath := filepath.Join("replicate", "img", id+".png")
+						if fi, err := os.Stat(replicateImgPath); err == nil && fi.Size() > 0 {
+							// This is an upres'd image, skip it in no/ directory
+							continue
+						}
+					}
+
+					updateMemoryRecord(memDB, shardedMutex, stats, imageRecord{
+						id:        id,
+						state:     "no",
+						imgPath:   path,
+						sourceDir: "no/",
+					})
+
+					count := processedCount.Add(1)
+					if count%10000 == 0 {
+						fmt.Fprintf(os.Stderr, "  Scanned %d images from no/\n", count)
+					}
 				}
-			} else {
-				fmt.Fprintf(os.Stderr, "  ERROR: Failed to delete conflicting no/ file %s: %v\n", path, removeErr)
 			}
-			return nil
-		}
-
-		// If file is zero-length, check if there's a valid upres version
-		if info.Size() == 0 {
-			// Check if replicate/img/ has a non-zero file
-			replicateImgPath := filepath.Join("replicate", "img", id+".png")
-			if fi, err := os.Stat(replicateImgPath); err == nil && fi.Size() > 0 {
-				// This is an upres'd image, skip it in no/ directory
-				return nil
-			}
-		}
-
-		recordChan <- imageRecord{
-			id:        id,
-			state:     "no",
-			imgPath:   path,
-			sourceDir: "no/",
-		}
-
-		count++
-		if count%10000 == 0 {
-			fmt.Fprintf(os.Stderr, "  Scanned %d images from no/\n", count)
-		}
-
-		return nil
-	})
-
-	fmt.Fprintf(os.Stderr, "  Finished scanning no/: %d images (checked %d for yes/ conflicts)\n", count, checkedForYes)
-	if skippedDueToYes > 0 {
-		fmt.Fprintf(os.Stderr, "  INFO: Deleted %d of %d conflicting no/ files (yes/ file exists)\n", skippedDueToYes, checkedForYes)
-	} else if checkedForYes > 0 {
-		fmt.Fprintf(os.Stderr, "  INFO: No yes/ conflicts found in %d no/ files checked\n", checkedForYes)
+		}()
 	}
 
-	return err
+	// Read directory entries in batches
+	batchSize := 10000
+	for {
+		names, err := dir.Readdirnames(batchSize)
+		if err != nil && len(names) == 0 {
+			break
+		}
+		if len(names) > 0 {
+			workChan <- names
+		}
+		if err != nil {
+			break
+		}
+	}
+
+	close(workChan)
+	wg.Wait()
+
+	fmt.Fprintf(os.Stderr, "  Finished scanning no/: %d images (checked %d for yes/ conflicts)\n", processedCount.Load(), checkedForYes.Load())
+	if skippedDueToYes.Load() > 0 {
+		fmt.Fprintf(os.Stderr, "  INFO: Deleted %d of %d conflicting no/ files (yes/ file exists)\n", skippedDueToYes.Load(), checkedForYes.Load())
+	} else if checkedForYes.Load() > 0 {
+		fmt.Fprintf(os.Stderr, "  INFO: No yes/ conflicts found in %d no/ files checked\n", checkedForYes.Load())
+	}
+
+	return nil
 }
 
-// scanImgDirectory scans img/ and sends records to channel
-func scanImgDirectory(db *sql.DB, recordChan chan<- imageRecord) error {
+// scanImgDirectory scans img/ and updates memory database
+func scanImgDirectory(db *sql.DB, memDB map[string]*inMemoryRecord, shardedMutex *shardedMutex, stats *importStats) error {
 	realDir, err := filepath.EvalSymlinks("img")
 	if err != nil {
 		return err
@@ -672,38 +734,51 @@ func scanImgDirectory(db *sql.DB, recordChan chan<- imageRecord) error {
 		wg.Add(1)
 		go func(workerID int) {
 			defer wg.Done()
-			processImgChunk(db, workChan, recordChan, &mu, &count, &mp4Count, &invalidCount)
+			processImgChunk(db, workChan, memDB, shardedMutex, stats, &mu, &count, &mp4Count, &invalidCount)
 		}(i)
 	}
 
-	// Walk directory and send chunks to workers as we discover files
+	// Read directory entries in batches and send to workers
+	dir, err := os.Open(realDir)
+	if err != nil {
+		return err
+	}
+	defer dir.Close()
+
+	batchSize := 10000
 	var chunk []string
-	err = filepath.Walk(realDir, func(path string, info os.FileInfo, err error) error {
-		if err != nil || info.IsDir() {
-			return err
+	for {
+		names, err := dir.Readdirnames(batchSize)
+		if err != nil && len(names) == 0 {
+			break
 		}
 
-		// Skip temporary files starting with .
-		basename := filepath.Base(path)
-		if strings.HasPrefix(basename, ".") {
-			return nil
-		}
+		// Filter and build paths
+		for _, filename := range names {
+			// Skip temporary files
+			if strings.HasPrefix(filename, ".") {
+				continue
+			}
 
-		walkCount++
-		chunk = append(chunk, path)
+			path := filepath.Join(realDir, filename)
+			chunk = append(chunk, path)
+			walkCount++
 
-		// Send chunk when it reaches size limit
-		if len(chunk) >= chunkSize {
-			workChan <- chunk
-			chunk = make([]string, 0, chunkSize)
+			// Send chunk when it reaches size limit
+			if len(chunk) >= chunkSize {
+				workChan <- chunk
+				chunk = make([]string, 0, chunkSize)
 
-			if walkCount%10000 == 0 {
-				fmt.Fprintf(os.Stderr, "  Walked %d files in img/\n", walkCount)
+				if walkCount%10000 == 0 {
+					fmt.Fprintf(os.Stderr, "  Scanned %d files in img/\n", walkCount)
+				}
 			}
 		}
 
-		return nil
-	})
+		if err != nil {
+			break
+		}
+	}
 
 	// Send remaining files
 	if len(chunk) > 0 {
@@ -729,7 +804,7 @@ func scanImgDirectory(db *sql.DB, recordChan chan<- imageRecord) error {
 }
 
 // processImgChunk processes a chunk of img/ files
-func processImgChunk(db *sql.DB, workChan <-chan []string, recordChan chan<- imageRecord, mu *sync.Mutex, count *int, mp4Count *int, invalidCount *int) {
+func processImgChunk(db *sql.DB, workChan <-chan []string, memDB map[string]*inMemoryRecord, shardedMutex *shardedMutex, stats *importStats, mu *sync.Mutex, count *int, mp4Count *int, invalidCount *int) {
 	localCount := 0
 
 	for chunk := range workChan {
@@ -764,14 +839,14 @@ func processImgChunk(db *sql.DB, workChan <-chan []string, recordChan chan<- ima
 					height = int(existingHeight.Int64)
 				}
 
-				recordChan <- imageRecord{
+				updateMemoryRecord(memDB, shardedMutex, stats, imageRecord{
 					id:        id,
 					state:     state,
 					imgPath:   path,
 					width:     width,
 					height:    height,
 					sourceDir: "img/",
-				}
+				})
 				localCount++
 
 			case ".mp4":
@@ -780,12 +855,12 @@ func processImgChunk(db *sql.DB, workChan <-chan []string, recordChan chan<- ima
 				(*mp4Count)++
 				mu.Unlock()
 
-				recordChan <- imageRecord{
+				updateMemoryRecord(memDB, shardedMutex, stats, imageRecord{
 					id:        id,
 					state:     "no",
 					imgPath:   path,
 					sourceDir: "img/",
-				}
+				})
 				localCount++
 
 			default:
@@ -806,111 +881,139 @@ func processImgChunk(db *sql.DB, workChan <-chan []string, recordChan chan<- ima
 	mu.Unlock()
 }
 
-// scanThumbsDirectory scans thumbs/ and sends records to channel
-func scanThumbsDirectory(db *sql.DB, recordChan chan<- imageRecord) error {
+// scanThumbsDirectory scans thumbs/ and updates memory database with parallel workers
+func scanThumbsDirectory(db *sql.DB, memDB map[string]*inMemoryRecord, shardedMutex *shardedMutex, stats *importStats) error {
 	realDir, err := filepath.EvalSymlinks("thumbs")
 	if err != nil {
 		return err
 	}
 
-	count := 0
-	nonPngCount := 0
-	zeroLengthSkipped := 0
+	fmt.Fprintf(os.Stderr, "  Starting parallel scan of thumbs/ with 8 workers...\n")
 
-	err = filepath.Walk(realDir, func(path string, info os.FileInfo, err error) error {
-		if err != nil || info.IsDir() {
-			return err
-		}
+	// Open directory
+	dir, err := os.Open(realDir)
+	if err != nil {
+		return err
+	}
+	defer dir.Close()
 
-		// Skip temporary files starting with .
-		basename := filepath.Base(path)
-		if strings.HasPrefix(basename, ".") {
-			return nil
-		}
+	// Worker pool
+	numWorkers := 8
+	workChan := make(chan []string, 100)
+	var wg sync.WaitGroup
+	var processedCount, nonPngCount, zeroLengthSkipped atomic.Int64
 
-		ext := filepath.Ext(path)
-		var weird string
-		if ext != ".png" {
-			nonPngCount++
-			weird = fmt.Sprintf("non-PNG file in thumbs/: %s", ext)
-			fmt.Fprintf(os.Stderr, "  WARNING: Non-PNG file in thumbs/: %s\n", basename)
-		}
-
-		id := strings.TrimSuffix(basename, ext)
-
-		// Check for zero-length thumbnails
-		if info.Size() == 0 {
-			var state sql.NullString
-			var imgPath sql.NullString
-			err := db.QueryRow("SELECT state, img_path FROM images WHERE id = ?", id).Scan(&state, &imgPath)
-
-			if err == sql.ErrNoRows || !state.Valid {
-				// No entry or todo - check img file
-				if imgPath.Valid {
-					imgInfo, err := os.Stat(imgPath.String)
-					if err == nil && imgInfo.Size() == 0 {
-						// img is zero-length too -> mark as 'no'
-						weirdMsg := "zero-length thumbnail and img"
-						if weird != "" {
-							weird = weird + "; " + weirdMsg
-						} else {
-							weird = weirdMsg
-						}
-						recordChan <- imageRecord{
-							id:        id,
-							state:     "no",
-							thumbPath: path,
-							sourceDir: "thumbs/",
-							weird:     weird,
-						}
-						count++
-					} else {
-						// Skip - needs regeneration
-						zeroLengthSkipped++
-						fmt.Fprintf(os.Stderr, "  WARNING: Zero-length thumbnail (needs regeneration): %s\n", basename)
+	// Start workers
+	for i := 0; i < numWorkers; i++ {
+		wg.Add(1)
+		go func() {
+			defer wg.Done()
+			for batch := range workChan {
+				for _, filename := range batch {
+					// Skip temporary files
+					if strings.HasPrefix(filename, ".") {
+						continue
 					}
-				} else {
-					zeroLengthSkipped++
-					fmt.Fprintf(os.Stderr, "  WARNING: Zero-length thumbnail (no img): %s\n", basename)
+
+					path := filepath.Join(realDir, filename)
+					ext := filepath.Ext(filename)
+					id := strings.TrimSuffix(filename, ext)
+
+					var weird string
+					if ext != ".png" {
+						nonPngCount.Add(1)
+						weird = fmt.Sprintf("non-PNG file in thumbs/: %s", ext)
+						fmt.Fprintf(os.Stderr, "  WARNING: Non-PNG file in thumbs/: %s\n", filename)
+					}
+
+					// Check for zero-length thumbnails
+					if info, err := os.Stat(path); err == nil && info.Size() == 0 {
+						// Check memDB for state and img_path
+						memRec, exists := memDB[id]
+						hasState := exists && memRec.state.Valid
+
+						if !hasState {
+							// No entry or todo - check img file
+							if exists && memRec.imgPath.Valid {
+								if imgInfo, err := os.Stat(memRec.imgPath.String); err == nil && imgInfo.Size() == 0 {
+									// img is zero-length too -> mark as 'no'
+									weirdMsg := "zero-length thumbnail and img"
+									if weird != "" {
+										weird = weird + "; " + weirdMsg
+									} else {
+										weird = weirdMsg
+									}
+									updateMemoryRecord(memDB, shardedMutex, stats, imageRecord{
+										id:        id,
+										state:     "no",
+										thumbPath: path,
+										sourceDir: "thumbs/",
+										weird:     weird,
+									})
+									processedCount.Add(1)
+								} else {
+									// Skip - needs regeneration
+									zeroLengthSkipped.Add(1)
+									fmt.Fprintf(os.Stderr, "  WARNING: Zero-length thumbnail (needs regeneration): %s\n", filename)
+								}
+							} else {
+								zeroLengthSkipped.Add(1)
+								fmt.Fprintf(os.Stderr, "  WARNING: Zero-length thumbnail (no img): %s\n", filename)
+							}
+							continue
+						}
+					}
+
+					// Normal thumbnail - preserve existing yes/no state from memDB
+					state := ""
+					if memRec, exists := memDB[id]; exists && memRec.state.Valid && (memRec.state.String == "yes" || memRec.state.String == "no") {
+						state = memRec.state.String
+					}
+
+					updateMemoryRecord(memDB, shardedMutex, stats, imageRecord{
+						id:        id,
+						state:     state,
+						thumbPath: path,
+						sourceDir: "thumbs/",
+						weird:     weird,
+					})
+
+					count := processedCount.Add(1)
+					if count%10000 == 0 {
+						fmt.Fprintf(os.Stderr, "  Scanned %d thumbnails from thumbs/\n", count)
+					}
 				}
-				return nil
 			}
-		}
-
-		// Normal thumbnail - preserve existing yes/no state
-		var existingState sql.NullString
-		dbErr := db.QueryRow("SELECT state FROM images WHERE id = ?", id).Scan(&existingState)
-
-		state := ""
-		if dbErr == nil && existingState.Valid && (existingState.String == "yes" || existingState.String == "no") {
-			state = existingState.String
-		}
-
-		recordChan <- imageRecord{
-			id:        id,
-			state:     state,
-			thumbPath: path,
-			sourceDir: "thumbs/",
-			weird:     weird,
-		}
-		count++
-
-		if count%10000 == 0 {
-			fmt.Fprintf(os.Stderr, "  Scanned %d thumbnails from thumbs/\n", count)
-		}
-
-		return nil
-	})
-
-	fmt.Fprintf(os.Stderr, "  Finished scanning thumbs/: %d thumbnails\n", count)
-	if nonPngCount > 0 {
-		fmt.Fprintf(os.Stderr, "  WARNING: Found %d non-PNG files in thumbs/\n", nonPngCount)
-	}
-	if zeroLengthSkipped > 0 {
-		fmt.Fprintf(os.Stderr, "  WARNING: Skipped %d zero-length thumbnails (need regeneration)\n", zeroLengthSkipped)
+		}()
 	}
 
-	return err
+	// Read directory entries in batches
+	batchSize := 10000
+	for {
+		names, err := dir.Readdirnames(batchSize)
+		if err != nil && len(names) == 0 {
+			break
+		}
+		if len(names) > 0 {
+			workChan <- names
+		}
+		if err != nil {
+			break
+		}
+	}
+
+	close(workChan)
+	wg.Wait()
+
+	fmt.Fprintf(os.Stderr, "  Finished scanning thumbs/: %d thumbnails\n", processedCount.Load())
+	if nonPngCount.Load() > 0 {
+		fmt.Fprintf(os.Stderr, "  WARNING: Found %d non-PNG files in thumbs/\n", nonPngCount.Load())
+	}
+	if zeroLengthSkipped.Load() > 0 {
+		fmt.Fprintf(os.Stderr, "  WARNING: Skipped %d zero-length thumbnails (need regeneration)\n", zeroLengthSkipped.Load())
+	}
+
+	return nil
 }
 
 // importDirectory scans a directory and imports images with the given state
@@ -1032,149 +1135,6 @@ func importDirectory(db *sql.DB, dir string, state string) error {
 	return nil
 }
 
-// importThumbnails scans the thumbs directory and updates thumbnail paths
-func importThumbnails(db *sql.DB, dir string) error {
-	// Resolve symlinks
-	realDir, err := filepath.EvalSymlinks(dir)
-	if err != nil {
-		return fmt.Errorf("failed to resolve symlink for %s: %w", dir, err)
-	}
-
-	type thumbRecord struct {
-		id   string
-		path string
-	}
-
-	batch := make([]thumbRecord, 0, 10000)
-	count := 0
-	nonPngCount := 0
-	zeroLengthSkipped := 0
-
-	flushBatch := func() error {
-		if len(batch) == 0 {
-			return nil
-		}
-
-		tx, err := db.Begin()
-		if err != nil {
-			return err
-		}
-		defer tx.Rollback()
-
-		stmt, err := tx.Prepare(`
-			INSERT INTO images (id, thumb_path)
-			VALUES (?, ?)
-			ON CONFLICT(id) DO UPDATE SET
-				thumb_path=excluded.thumb_path
-		`)
-		if err != nil {
-			return err
-		}
-		defer stmt.Close()
-
-		for _, rec := range batch {
-			if _, err := stmt.Exec(rec.id, rec.path); err != nil {
-				return err
-			}
-		}
-
-		if err := tx.Commit(); err != nil {
-			return err
-		}
-
-		count += len(batch)
-		fmt.Fprintf(os.Stderr, "  Imported %d thumbnails from %s/\n", count, dir)
-		batch = batch[:0]
-		return nil
-	}
-
-	err = filepath.Walk(realDir, func(path string, info os.FileInfo, err error) error {
-		if err != nil {
-			return err
-		}
-		if info.IsDir() {
-			return nil
-		}
-
-		// Skip temporary files starting with .
-		basename := filepath.Base(path)
-		if strings.HasPrefix(basename, ".") {
-			return nil
-		}
-
-		// Check extension - thumbs should all be .png
-		ext := filepath.Ext(path)
-		if ext != ".png" {
-			nonPngCount++
-			fmt.Fprintf(os.Stderr, "  WARNING: Non-PNG file in %s/: %s\n", dir, basename)
-		}
-
-		// Extract ID (filename without extension)
-		id := strings.TrimSuffix(basename, ext)
-
-		// Check for zero-length thumbnails
-		if info.Size() == 0 {
-			// Query database to check if this image has a state
-			var state sql.NullString
-			var imgPath sql.NullString
-			err := db.QueryRow("SELECT state, img_path FROM images WHERE id = ?", id).Scan(&state, &imgPath)
-
-			if err == sql.ErrNoRows || !state.Valid {
-				// No entry in yes/no (state is NULL or doesn't exist)
-				// Check if img/ file is also zero-length
-				if imgPath.Valid {
-					imgInfo, err := os.Stat(imgPath.String)
-					if err == nil && imgInfo.Size() == 0 {
-						// img is zero-length too -> mark as 'no' and import thumbnail
-						db.Exec("UPDATE images SET state='no' WHERE id = ?", id)
-						batch = append(batch, thumbRecord{id: id, path: path})
-					} else {
-						// img is not zero-length or doesn't exist -> skip, needs regeneration
-						zeroLengthSkipped++
-						fmt.Fprintf(os.Stderr, "  WARNING: Zero-length thumbnail (needs regeneration): %s\n", filepath.Base(path))
-						return nil
-					}
-				} else {
-					// No img_path -> skip thumbnail
-					zeroLengthSkipped++
-					fmt.Fprintf(os.Stderr, "  WARNING: Zero-length thumbnail (no img): %s\n", filepath.Base(path))
-					return nil
-				}
-			} else {
-				// Has state from yes/no -> import normally
-				batch = append(batch, thumbRecord{id: id, path: path})
-			}
-		} else {
-			// Normal thumbnail -> import
-			batch = append(batch, thumbRecord{id: id, path: path})
-		}
-
-		if len(batch) >= 10000 {
-			return flushBatch()
-		}
-
-		return nil
-	})
-
-	if err != nil {
-		return err
-	}
-
-	// Flush remaining
-	if err := flushBatch(); err != nil {
-		return err
-	}
-
-	fmt.Fprintf(os.Stderr, "  Imported %d total thumbnails from %s/\n", count, dir)
-	if nonPngCount > 0 {
-		fmt.Fprintf(os.Stderr, "  WARNING: Found %d non-PNG files in %s/\n", nonPngCount, dir)
-	}
-	if zeroLengthSkipped > 0 {
-		fmt.Fprintf(os.Stderr, "  WARNING: Skipped %d zero-length thumbnails (need regeneration)\n", zeroLengthSkipped)
-	}
-	return nil
-}
-
 // importUpresPath scans a directory and updates the specified upres path column
 func importUpresPath(db *sql.DB, dir string, columnName string) error {
 	// Resolve symlinks
@@ -1278,145 +1238,6 @@ func importUpresPath(db *sql.DB, dir string, columnName string) error {
 	fmt.Fprintf(os.Stderr, "  Imported %d total upres from %s/\n", count, dir)
 	if nonPngCount > 0 {
 		fmt.Fprintf(os.Stderr, "  WARNING: Found %d non-PNG files in %s/\n", nonPngCount, dir)
-	}
-	return nil
-}
-
-// importImgDirectory scans img/ directory with special extension rules
-// Valid: .jpeg, .jpg, .png - import with state=NULL (todo)
-// Auto-reject: .mp4 - import with state='no'
-// Invalid: anything else - flag and skip
-func importImgDirectory(db *sql.DB, dir string) error {
-	// Resolve symlinks
-	realDir, err := filepath.EvalSymlinks(dir)
-	if err != nil {
-		return fmt.Errorf("failed to resolve symlink for %s: %w", dir, err)
-	}
-
-	type imgRecord struct {
-		id     string
-		path   string
-		state  string
-		width  int
-		height int
-	}
-
-	batch := make([]imgRecord, 0, 10000)
-	count := 0
-	mp4Count := 0
-	invalidCount := 0
-
-	flushBatch := func() error {
-		if len(batch) == 0 {
-			return nil
-		}
-
-		tx, err := db.Begin()
-		if err != nil {
-			return err
-		}
-		defer tx.Rollback()
-
-		stmt, err := tx.Prepare(`
-			INSERT INTO images (id, img_path, state, width, height)
-			VALUES (?, ?, ?, ?, ?)
-			ON CONFLICT(id) DO UPDATE SET
-				img_path=excluded.img_path,
-				state=COALESCE(images.state, excluded.state),
-				width=excluded.width,
-				height=excluded.height
-		`)
-		if err != nil {
-			return err
-		}
-		defer stmt.Close()
-
-		for _, rec := range batch {
-			var state interface{}
-			if rec.state == "no" {
-				state = "no"
-			} else {
-				state = nil // NULL for todo
-			}
-
-			if _, err := stmt.Exec(rec.id, rec.path, state, rec.width, rec.height); err != nil {
-				return err
-			}
-		}
-
-		if err := tx.Commit(); err != nil {
-			return err
-		}
-
-		count += len(batch)
-		fmt.Fprintf(os.Stderr, "  Imported %d images from %s/\n", count, dir)
-		batch = batch[:0]
-		return nil
-	}
-
-	err = filepath.Walk(realDir, func(path string, info os.FileInfo, err error) error {
-		if err != nil {
-			return err
-		}
-		if info.IsDir() {
-			return nil
-		}
-
-		// Skip temporary files starting with .
-		basename := filepath.Base(path)
-		if strings.HasPrefix(basename, ".") {
-			return nil
-		}
-
-		ext := strings.ToLower(filepath.Ext(path))
-		id := strings.TrimSuffix(basename, filepath.Ext(path))
-
-		// Check extension rules
-		switch ext {
-		case ".jpeg", ".jpg", ".png":
-			// Valid image - import as todo (state=NULL), extract dimensions
-			var width, height int
-			w, h, err := getImageDimensions(path)
-			if err == nil {
-				width, height = w, h
-			}
-			// Silently ignore dimension extraction errors
-			batch = append(batch, imgRecord{id: id, path: path, state: "todo", width: width, height: height})
-
-		case ".mp4":
-			// Auto-reject video - no dimensions needed
-			mp4Count++
-			batch = append(batch, imgRecord{id: id, path: path, state: "no", width: 0, height: 0})
-
-		default:
-			// Invalid extension - flag and skip
-			invalidCount++
-			fmt.Fprintf(os.Stderr, "  WARNING: Invalid extension in %s/: %s\n", dir, filepath.Base(path))
-			return nil
-		}
-
-		if len(batch) >= 10000 {
-			return flushBatch()
-		}
-
-		return nil
-	})
-
-	if err != nil {
-		return err
-	}
-
-	// Flush remaining
-	if err := flushBatch(); err != nil {
-		return err
-	}
-
-	fmt.Fprintf(os.Stderr, "  Imported %d total images from %s/\n", count, dir)
-	if mp4Count > 0 {
-		fmt.Fprintf(os.Stderr, "  Auto-rejected %d .mp4 files\n", mp4Count)
-	}
-	if invalidCount > 0 {
-		fmt.Fprintf(os.Stderr, "  WARNING: Skipped %d files with invalid extensions\n", invalidCount)
 	}
 	return nil
 }
