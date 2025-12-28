@@ -448,6 +448,130 @@ func reportDataQuality(db *sql.DB) {
 		issues += todoZeroThumb
 	}
 
+	// Upres file consistency checks
+	var noWithUpresImg, noWithUpresThumb, todoWithUpresImg, todoWithUpresThumb int
+	var yesMissingUpresImg, yesMissingUpresThumb int
+	var upresZeroImg, upresZeroThumb int
+	var upresWithNonZeroBaseImg, upresWithNonZeroBaseThumb int
+
+	// Check non-approved images (state='no' or NULL) - should NOT have upres files
+	db.QueryRow("SELECT COUNT(*) FROM images WHERE state='no' AND upres_img_path IS NOT NULL AND upres_img_path != ''").Scan(&noWithUpresImg)
+	db.QueryRow("SELECT COUNT(*) FROM images WHERE state='no' AND upres_thumb_path IS NOT NULL AND upres_thumb_path != ''").Scan(&noWithUpresThumb)
+	db.QueryRow("SELECT COUNT(*) FROM images WHERE state IS NULL AND upres_img_path IS NOT NULL AND upres_img_path != ''").Scan(&todoWithUpresImg)
+	db.QueryRow("SELECT COUNT(*) FROM images WHERE state IS NULL AND upres_thumb_path IS NOT NULL AND upres_thumb_path != ''").Scan(&todoWithUpresThumb)
+
+	// Check approved images - should have upres files
+	db.QueryRow("SELECT COUNT(*) FROM images WHERE state='yes' AND (upres_img_path IS NULL OR upres_img_path = '')").Scan(&yesMissingUpresImg)
+	db.QueryRow("SELECT COUNT(*) FROM images WHERE state='yes' AND (upres_thumb_path IS NULL OR upres_thumb_path = '')").Scan(&yesMissingUpresThumb)
+
+	// Check upres files that are zero-length (should be real files)
+	rows, err = db.Query("SELECT upres_img_path FROM images WHERE upres_img_path IS NOT NULL AND upres_img_path != ''")
+	if err == nil {
+		for rows.Next() {
+			var path string
+			if rows.Scan(&path) != nil {
+				continue
+			}
+			if info, err := os.Stat(path); err == nil && info.Size() == 0 {
+				upresZeroImg++
+			}
+		}
+		rows.Close()
+	}
+
+	rows, err = db.Query("SELECT upres_thumb_path FROM images WHERE upres_thumb_path IS NOT NULL AND upres_thumb_path != ''")
+	if err == nil {
+		for rows.Next() {
+			var path string
+			if rows.Scan(&path) != nil {
+				continue
+			}
+			if info, err := os.Stat(path); err == nil && info.Size() == 0 {
+				upresZeroThumb++
+			}
+		}
+		rows.Close()
+	}
+
+	// Check images with upres - base files should be zero-length
+	rows, err = db.Query("SELECT img_path, upres_img_path FROM images WHERE upres_img_path IS NOT NULL AND upres_img_path != '' AND img_path IS NOT NULL AND img_path != ''")
+	if err == nil {
+		for rows.Next() {
+			var imgPath, upresPath string
+			if rows.Scan(&imgPath, &upresPath) != nil {
+				continue
+			}
+			// Check if upres exists and is non-zero
+			if upresInfo, err := os.Stat(upresPath); err == nil && upresInfo.Size() > 0 {
+				// Base img should be zero-length
+				if imgInfo, err := os.Stat(imgPath); err == nil && imgInfo.Size() > 0 {
+					upresWithNonZeroBaseImg++
+				}
+			}
+		}
+		rows.Close()
+	}
+
+	rows, err = db.Query("SELECT thumb_path, upres_thumb_path FROM images WHERE upres_thumb_path IS NOT NULL AND upres_thumb_path != '' AND thumb_path IS NOT NULL AND thumb_path != ''")
+	if err == nil {
+		for rows.Next() {
+			var thumbPath, upresPath string
+			if rows.Scan(&thumbPath, &upresPath) != nil {
+				continue
+			}
+			// Check if upres exists and is non-zero
+			if upresInfo, err := os.Stat(upresPath); err == nil && upresInfo.Size() > 0 {
+				// Base thumb should be zero-length
+				if thumbInfo, err := os.Stat(thumbPath); err == nil && thumbInfo.Size() > 0 {
+					upresWithNonZeroBaseThumb++
+				}
+			}
+		}
+		rows.Close()
+	}
+
+	// Report upres issues
+	if noWithUpresImg > 0 {
+		fmt.Fprintf(os.Stderr, "⚠ %7d rejected images with upres_img_path (should not have upres)\n", noWithUpresImg)
+		issues += noWithUpresImg
+	}
+	if noWithUpresThumb > 0 {
+		fmt.Fprintf(os.Stderr, "⚠ %7d rejected images with upres_thumb_path (should not have upres)\n", noWithUpresThumb)
+		issues += noWithUpresThumb
+	}
+	if todoWithUpresImg > 0 {
+		fmt.Fprintf(os.Stderr, "⚠ %7d todo images with upres_img_path (should not have upres)\n", todoWithUpresImg)
+		issues += todoWithUpresImg
+	}
+	if todoWithUpresThumb > 0 {
+		fmt.Fprintf(os.Stderr, "⚠ %7d todo images with upres_thumb_path (should not have upres)\n", todoWithUpresThumb)
+		issues += todoWithUpresThumb
+	}
+	if yesMissingUpresImg > 0 {
+		fmt.Fprintf(os.Stderr, "⚠ %7d approved images missing upres_img_path (need upscaling)\n", yesMissingUpresImg)
+		issues += yesMissingUpresImg
+	}
+	if yesMissingUpresThumb > 0 {
+		fmt.Fprintf(os.Stderr, "⚠ %7d approved images missing upres_thumb_path (need upscaling)\n", yesMissingUpresThumb)
+		issues += yesMissingUpresThumb
+	}
+	if upresZeroImg > 0 {
+		fmt.Fprintf(os.Stderr, "⚠ %7d upres images are zero-length (should be real files)\n", upresZeroImg)
+		issues += upresZeroImg
+	}
+	if upresZeroThumb > 0 {
+		fmt.Fprintf(os.Stderr, "⚠ %7d upres thumbs are zero-length (should be real files)\n", upresZeroThumb)
+		issues += upresZeroThumb
+	}
+	if upresWithNonZeroBaseImg > 0 {
+		fmt.Fprintf(os.Stderr, "⚠ %7d images with upres have non-zero base img_path (base should be zero-length)\n", upresWithNonZeroBaseImg)
+		issues += upresWithNonZeroBaseImg
+	}
+	if upresWithNonZeroBaseThumb > 0 {
+		fmt.Fprintf(os.Stderr, "⚠ %7d images with upres have non-zero base thumb_path (base should be zero-length)\n", upresWithNonZeroBaseThumb)
+		issues += upresWithNonZeroBaseThumb
+	}
+
 	if issues == 0 && urlButNoImg == 0 && imgButNoUrl == 0 {
 		fmt.Fprintf(os.Stderr, "✓ No data quality issues found\n")
 	}
@@ -467,8 +591,11 @@ func reportActionRecommendations(db *sql.DB) {
 		{query: "SELECT COUNT(*) FROM images WHERE state IS NULL AND img_path IS NOT NULL AND img_path != '' AND (weird IS NULL OR weird = '')", action: "Run todo mode to generate curation list"},
 		{query: "SELECT COUNT(*) FROM images WHERE state='yes' AND (thumb_path IS NULL OR thumb_path = '')", action: "Generate thumbnails for approved images"},
 		{query: "SELECT COUNT(*) FROM images WHERE state='yes' AND (width IS NULL OR height IS NULL OR width = 0 OR height = 0)", action: "Extract dimensions for approved images"},
+		{query: "SELECT COUNT(*) FROM images WHERE state='yes' AND (upres_img_path IS NULL OR upres_img_path = '')", action: "Upscale approved images (create upres_img_path)"},
+		{query: "SELECT COUNT(*) FROM images WHERE state='yes' AND (upres_thumb_path IS NULL OR upres_thumb_path = '')", action: "Upscale approved thumbnails (create upres_thumb_path)"},
 		{query: "SELECT COUNT(*) FROM images WHERE state='no' AND img_path IS NOT NULL AND img_path LIKE 'yes/%'", action: "Clean up: move rejected images out of yes/ directory"},
 		{query: "SELECT COUNT(*) FROM images WHERE state='yes' AND img_path IS NOT NULL AND img_path LIKE 'no/%'", action: "Clean up: move approved images out of no/ directory"},
+		{query: "SELECT COUNT(*) FROM images WHERE (state='no' OR state IS NULL) AND (upres_img_path IS NOT NULL OR upres_thumb_path IS NOT NULL)", action: "Clean up: delete upres files for non-approved images"},
 	}
 
 	hasActions := false
