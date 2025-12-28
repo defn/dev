@@ -159,6 +159,70 @@ func parseRefreshUsersFromArgs(args []string) map[string]bool {
 	return refreshUsers
 }
 
+// findHighestPage finds the highest existing page number for a given nsfw value
+func findHighestPage(jsDir, prefix, nsfw string) int {
+	highestPage := -1
+
+	// Scan directory for existing pages
+	files, err := ioutil.ReadDir(jsDir)
+	if err != nil {
+		return -1
+	}
+
+	// Pattern: {prefix}-{nsfw}-{page}.json
+	for _, file := range files {
+		name := file.Name()
+		expectedPrefix := fmt.Sprintf("%s-%s-", prefix, nsfw)
+
+		if strings.HasPrefix(name, expectedPrefix) && strings.HasSuffix(name, ".json") {
+			// Extract page number
+			pageStr := strings.TrimPrefix(name, expectedPrefix)
+			pageStr = strings.TrimSuffix(pageStr, ".json")
+
+			var pageNum int
+			if _, err := fmt.Sscanf(pageStr, "%d", &pageNum); err == nil {
+				if pageNum > highestPage {
+					highestPage = pageNum
+				}
+			}
+		}
+	}
+
+	return highestPage
+}
+
+// loadCachedPages loads all cached pages into allItems map
+func loadCachedPages(jsDir, prefix, nsfw string, highestPage int, allItems map[string]interface{}) error {
+	fmt.Fprintf(os.Stderr, "    Loading %d cached pages...\n", highestPage+1)
+
+	for page := 0; page <= highestPage; page++ {
+		outputFile := filepath.Join(jsDir, fmt.Sprintf("%s-%s-%d.json", prefix, nsfw, page))
+
+		data, err := ioutil.ReadFile(outputFile)
+		if err != nil {
+			return fmt.Errorf("failed to read cached page %d: %w", page, err)
+		}
+
+		var pageData map[string]interface{}
+		if err := json.Unmarshal(data, &pageData); err != nil {
+			return fmt.Errorf("failed to parse cached page %d: %w", page, err)
+		}
+
+		// Collect items from this page
+		if items, ok := pageData["items"].([]interface{}); ok {
+			for _, item := range items {
+				if itemMap, ok := item.(map[string]interface{}); ok {
+					if id, ok := itemMap["id"]; ok {
+						allItems[fmt.Sprintf("%v", id)] = item
+					}
+				}
+			}
+		}
+	}
+
+	return nil
+}
+
 // downloadUser downloads all data for a single user from the API
 func downloadUser(username string) error {
 	prefix := "username-" + username
@@ -177,82 +241,79 @@ func downloadUser(username string) error {
 	for _, nsfw := range nsfwValues {
 		fmt.Fprintf(os.Stderr, "  Downloading with nsfw=%s...\n", nsfw)
 
-		page := startPage
-		for page <= pageLimit {
-			outputFile := filepath.Join(jsDir, fmt.Sprintf("%s-%s-%d.json", prefix, nsfw, page-1))
+		// Find highest existing page
+		highestPage := findHighestPage(jsDir, prefix, nsfw)
 
-			// Check if file already exists
-			if _, err := os.Stat(outputFile); err == nil {
-				fmt.Fprintf(os.Stderr, "    Page %d already exists, loading from cache\n", page-1)
-				data, err := ioutil.ReadFile(outputFile)
-				if err != nil {
-					return fmt.Errorf("failed to read cached file: %w", err)
-				}
+		var startURL string
+		var startPageNum int
 
-				var pageData map[string]interface{}
-				if err := json.Unmarshal(data, &pageData); err != nil {
-					return fmt.Errorf("failed to parse cached JSON: %w", err)
-				}
+		if highestPage >= 0 {
+			// Pages exist - load cached pages and continue from last page
+			fmt.Fprintf(os.Stderr, "    Found existing pages 0-%d\n", highestPage)
 
-				// Collect items from this page
-				if items, ok := pageData["items"].([]interface{}); ok {
-					for _, item := range items {
-						if itemMap, ok := item.(map[string]interface{}); ok {
-							if id, ok := itemMap["id"]; ok {
-								allItems[fmt.Sprintf("%v", id)] = item
-							}
-						}
-					}
-				}
+			// Load all cached pages into allItems
+			if err := loadCachedPages(jsDir, prefix, nsfw, highestPage, allItems); err != nil {
+				return err
+			}
 
-				// Check for next page
-				metadata, ok := pageData["metadata"].(map[string]interface{})
-				if !ok {
-					break
-				}
-				nextPage, ok := metadata["nextPage"].(string)
-				if !ok || nextPage == "" || nextPage == "null" {
-					break
-				}
+			// Read last page to get nextPage cursor
+			lastPageFile := filepath.Join(jsDir, fmt.Sprintf("%s-%s-%d.json", prefix, nsfw, highestPage))
+			data, err := ioutil.ReadFile(lastPageFile)
+			if err != nil {
+				return fmt.Errorf("failed to read last page: %w", err)
+			}
 
-				page++
+			var lastPageData map[string]interface{}
+			if err := json.Unmarshal(data, &lastPageData); err != nil {
+				return fmt.Errorf("failed to parse last page JSON: %w", err)
+			}
+
+			// Get nextPage cursor
+			metadata, ok := lastPageData["metadata"].(map[string]interface{})
+			if !ok {
+				fmt.Fprintf(os.Stderr, "    No more pages (no metadata in last page)\n")
 				continue
 			}
 
-			// Download the page
-			var url string
-			if page == startPage {
-				url = fmt.Sprintf("%s/api/v1/images?nsfw=%s&username=%s", apiURL, nsfw, username)
-			} else {
-				// Need to construct URL from previous page's nextPage
-				prevFile := filepath.Join(jsDir, fmt.Sprintf("%s-%s-%d.json", prefix, nsfw, page-2))
-				data, err := ioutil.ReadFile(prevFile)
-				if err != nil {
-					return fmt.Errorf("failed to read previous page: %w", err)
-				}
-
-				var prevData map[string]interface{}
-				if err := json.Unmarshal(data, &prevData); err != nil {
-					return fmt.Errorf("failed to parse previous JSON: %w", err)
-				}
-
-				metadata, ok := prevData["metadata"].(map[string]interface{})
-				if !ok {
-					break
-				}
-				nextPage, ok := metadata["nextPage"].(string)
-				if !ok || nextPage == "" || nextPage == "null" {
-					break
-				}
-				url = nextPage
+			nextPage, ok := metadata["nextPage"].(string)
+			if !ok || nextPage == "" || nextPage == "null" {
+				fmt.Fprintf(os.Stderr, "    No more pages (nextPage is null)\n")
+				continue
 			}
 
-			fmt.Fprintf(os.Stderr, "    Downloading page %d...\n", page-1)
-			resp, err := http.Get(url)
+			startURL = nextPage
+			startPageNum = highestPage + 1
+			fmt.Fprintf(os.Stderr, "    Continuing from page %d...\n", startPageNum)
+		} else {
+			// No pages exist - start fresh
+			fmt.Fprintf(os.Stderr, "    No existing pages, starting fresh\n")
+			startURL = fmt.Sprintf("%s/api/v1/images?nsfw=%s&username=%s", apiURL, nsfw, username)
+			startPageNum = 0
+		}
+
+		// Download new pages
+		page := startPageNum
+		currentURL := startURL
+
+		for page <= pageLimit {
+			outputFile := filepath.Join(jsDir, fmt.Sprintf("%s-%s-%d.json", prefix, nsfw, page))
+
+			fmt.Fprintf(os.Stderr, "    Downloading page %d...\n", page)
+			resp, err := http.Get(currentURL)
 			if err != nil {
-				return fmt.Errorf("failed to download page %d: %w", page-1, err)
+				// Stale/invalid cursor - treat as finished
+				fmt.Fprintf(os.Stderr, "    Failed to download page %d (stale cursor?): %v\n", page, err)
+				fmt.Fprintf(os.Stderr, "    Treating as end of pagination\n")
+				break
 			}
 			defer resp.Body.Close()
+
+			// Check for errors in response
+			if resp.StatusCode != 200 {
+				fmt.Fprintf(os.Stderr, "    Got HTTP %d for page %d (stale cursor?)\n", resp.StatusCode, page)
+				fmt.Fprintf(os.Stderr, "    Treating as end of pagination\n")
+				break
+			}
 
 			body, err := ioutil.ReadAll(resp.Body)
 			if err != nil {
@@ -291,6 +352,7 @@ func downloadUser(username string) error {
 				break
 			}
 
+			currentURL = nextPage
 			page++
 		}
 	}
