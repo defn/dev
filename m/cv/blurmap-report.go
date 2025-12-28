@@ -30,17 +30,31 @@ func generateReport(db *sql.DB) {
 	fmt.Fprintf(os.Stderr, "IMAGE DATABASE CONSISTENCY REPORT\n")
 	fmt.Fprintf(os.Stderr, "========================================\n")
 
+	// Initialize filesystem cache for fast repeated access
+	fmt.Fprintf(os.Stderr, "\nInitializing filesystem cache...\n")
+	cache := newFSCache()
+
+	// Preload common directories
+	dirs := []string{"yes", "no", "img", "thumbs", "replicate/img", "replicate/t2"}
+	for _, dir := range dirs {
+		if err := cache.loadDirectory(dir); err != nil {
+			// Directory doesn't exist, skip
+			continue
+		}
+	}
+	fmt.Fprintf(os.Stderr, "Filesystem cache ready\n")
+
 	// 1. Database Statistics
 	reportDatabaseStats(db)
 
 	// 2. Filesystem → Database Sync
-	reportFilesystemSync(db)
+	reportFilesystemSync(db, cache)
 
 	// 3. Database → Filesystem References
-	reportDatabaseReferences(db)
+	reportDatabaseReferences(db, cache)
 
 	// 4. Data Quality Issues
-	reportDataQuality(db)
+	reportDataQuality(db, cache)
 
 	// 5. Action Recommendations
 	reportActionRecommendations(db)
@@ -96,7 +110,7 @@ func reportDatabaseStats(db *sql.DB) {
 }
 
 // reportFilesystemSync checks if filesystem matches database
-func reportFilesystemSync(db *sql.DB) {
+func reportFilesystemSync(db *sql.DB, cache *fsCache) {
 	fmt.Fprintf(os.Stderr, "\n[2] FILESYSTEM → DATABASE SYNC\n")
 	fmt.Fprintf(os.Stderr, "──────────────────────────────\n")
 	fmt.Fprintf(os.Stderr, "Checking if all files in directories are tracked in database...\n\n")
@@ -122,27 +136,15 @@ func reportFilesystemSync(db *sql.DB) {
 	for i := range checks {
 		check := &checks[i]
 
-		// Count files in filesystem
-		fsIDs := make(map[string]bool)
-		realDir, err := filepath.EvalSymlinks(check.dir)
-		if err != nil {
-			fmt.Fprintf(os.Stderr, "%-18s SKIP (not found)\n", check.dir+":")
-			continue
+		// Get files from cache (fast, no Walk)
+		fsIDs := cache.getDirectoryIDs(check.dir)
+		if len(fsIDs) == 0 {
+			// Check if directory exists
+			if _, err := filepath.EvalSymlinks(check.dir); err != nil {
+				fmt.Fprintf(os.Stderr, "%-18s SKIP (not found)\n", check.dir+":")
+				continue
+			}
 		}
-
-		filepath.Walk(realDir, func(path string, info os.FileInfo, err error) error {
-			if err != nil || info.IsDir() {
-				return nil
-			}
-			basename := filepath.Base(path)
-			if strings.HasPrefix(basename, ".") {
-				return nil // Skip hidden files
-			}
-			ext := filepath.Ext(basename)
-			id := strings.TrimSuffix(basename, ext)
-			fsIDs[id] = true
-			return nil
-		})
 		check.fsCount = len(fsIDs)
 
 		// Count in database and find orphans
@@ -214,7 +216,7 @@ func reportFilesystemSync(db *sql.DB) {
 }
 
 // reportDatabaseReferences validates all database file references
-func reportDatabaseReferences(db *sql.DB) {
+func reportDatabaseReferences(db *sql.DB, cache *fsCache) {
 	fmt.Fprintf(os.Stderr, "\n[3] DATABASE → FILESYSTEM REFERENCES\n")
 	fmt.Fprintf(os.Stderr, "────────────────────────────────────\n")
 	fmt.Fprintf(os.Stderr, "Checking if all database file paths point to existing files...\n\n")
@@ -251,11 +253,12 @@ func reportDatabaseReferences(db *sql.DB) {
 			}
 			check.total++
 
-			info, err := os.Stat(path)
-			if err != nil {
+			// Use cached stat
+			info := cache.getFileStat(path)
+			if !info.exists {
 				check.missing++
 				allGood = false
-			} else if info.Size() == 0 {
+			} else if info.size == 0 {
 				check.zeroLength++
 			}
 		}
@@ -287,7 +290,7 @@ func reportDatabaseReferences(db *sql.DB) {
 }
 
 // reportDataQuality checks for data inconsistencies
-func reportDataQuality(db *sql.DB) {
+func reportDataQuality(db *sql.DB, cache *fsCache) {
 	fmt.Fprintf(os.Stderr, "\n[4] DATA QUALITY ISSUES\n")
 	fmt.Fprintf(os.Stderr, "───────────────────────\n")
 
@@ -360,13 +363,15 @@ func reportDataQuality(db *sql.DB) {
 			}
 
 			if imgPath.Valid && imgPath.String != "" {
-				if info, err := os.Stat(imgPath.String); err == nil && info.Size() > 0 {
+				info := cache.getFileStat(imgPath.String)
+				if info.exists && info.size > 0 {
 					noNonZeroImg++
 				}
 			}
 
 			if thumbPath.Valid && thumbPath.String != "" {
-				if info, err := os.Stat(thumbPath.String); err == nil && info.Size() > 0 {
+				info := cache.getFileStat(thumbPath.String)
+				if info.exists && info.size > 0 {
 					noNonZeroThumb++
 				}
 			}
@@ -384,13 +389,15 @@ func reportDataQuality(db *sql.DB) {
 			}
 
 			if imgPath.Valid && imgPath.String != "" {
-				if info, err := os.Stat(imgPath.String); err == nil && info.Size() == 0 {
+				info := cache.getFileStat(imgPath.String)
+				if info.exists && info.size == 0 {
 					yesZeroImg++
 				}
 			}
 
 			if thumbPath.Valid && thumbPath.String != "" {
-				if info, err := os.Stat(thumbPath.String); err == nil && info.Size() == 0 {
+				info := cache.getFileStat(thumbPath.String)
+				if info.exists && info.size == 0 {
 					yesZeroThumb++
 				}
 			}
@@ -408,13 +415,15 @@ func reportDataQuality(db *sql.DB) {
 			}
 
 			if imgPath.Valid && imgPath.String != "" {
-				if info, err := os.Stat(imgPath.String); err == nil && info.Size() == 0 {
+				info := cache.getFileStat(imgPath.String)
+				if info.exists && info.size == 0 {
 					todoZeroImg++
 				}
 			}
 
 			if thumbPath.Valid && thumbPath.String != "" {
-				if info, err := os.Stat(thumbPath.String); err == nil && info.Size() == 0 {
+				info := cache.getFileStat(thumbPath.String)
+				if info.exists && info.size == 0 {
 					todoZeroThumb++
 				}
 			}
@@ -472,7 +481,8 @@ func reportDataQuality(db *sql.DB) {
 			if rows.Scan(&path) != nil {
 				continue
 			}
-			if info, err := os.Stat(path); err == nil && info.Size() == 0 {
+			info := cache.getFileStat(path)
+			if info.exists && info.size == 0 {
 				upresZeroImg++
 			}
 		}
@@ -486,7 +496,8 @@ func reportDataQuality(db *sql.DB) {
 			if rows.Scan(&path) != nil {
 				continue
 			}
-			if info, err := os.Stat(path); err == nil && info.Size() == 0 {
+			info := cache.getFileStat(path)
+			if info.exists && info.size == 0 {
 				upresZeroThumb++
 			}
 		}
@@ -502,9 +513,11 @@ func reportDataQuality(db *sql.DB) {
 				continue
 			}
 			// Check if upres exists and is non-zero
-			if upresInfo, err := os.Stat(upresPath); err == nil && upresInfo.Size() > 0 {
+			upresInfo := cache.getFileStat(upresPath)
+			if upresInfo.exists && upresInfo.size > 0 {
 				// Base img should be zero-length
-				if imgInfo, err := os.Stat(imgPath); err == nil && imgInfo.Size() > 0 {
+				imgInfo := cache.getFileStat(imgPath)
+				if imgInfo.exists && imgInfo.size > 0 {
 					upresWithNonZeroBaseImg++
 				}
 			}
@@ -520,9 +533,11 @@ func reportDataQuality(db *sql.DB) {
 				continue
 			}
 			// Check if upres exists and is non-zero
-			if upresInfo, err := os.Stat(upresPath); err == nil && upresInfo.Size() > 0 {
+			upresInfo := cache.getFileStat(upresPath)
+			if upresInfo.exists && upresInfo.size > 0 {
 				// Base thumb should be zero-length
-				if thumbInfo, err := os.Stat(thumbPath); err == nil && thumbInfo.Size() > 0 {
+				thumbInfo := cache.getFileStat(thumbPath)
+				if thumbInfo.exists && thumbInfo.size > 0 {
 					upresWithNonZeroBaseThumb++
 				}
 			}
@@ -625,4 +640,101 @@ func min(a, b int) int {
 		return a
 	}
 	return b
+}
+
+// fsCache provides fast cached filesystem access
+type fsCache struct {
+	dirEntries map[string]map[string]bool // dir -> set of image IDs in that directory
+	fileStats  map[string]*fileStatInfo   // absolute path -> stat info
+}
+
+type fileStatInfo struct {
+	exists bool
+	size   int64
+	err    error
+}
+
+func newFSCache() *fsCache {
+	return &fsCache{
+		dirEntries: make(map[string]map[string]bool),
+		fileStats:  make(map[string]*fileStatInfo),
+	}
+}
+
+// loadDirectory loads all image IDs from a directory (fast, no Walk)
+func (c *fsCache) loadDirectory(dir string) error {
+	// Resolve symlinks
+	realDir, err := filepath.EvalSymlinks(dir)
+	if err != nil {
+		return err
+	}
+
+	// Open directory
+	d, err := os.Open(realDir)
+	if err != nil {
+		return err
+	}
+	defer d.Close()
+
+	// Read all entries at once (much faster than Walk)
+	entries := make(map[string]bool)
+	for {
+		names, err := d.Readdirnames(10000) // Read in large batches
+		if err != nil && len(names) == 0 {
+			break
+		}
+
+		for _, name := range names {
+			// Skip hidden files
+			if strings.HasPrefix(name, ".") {
+				continue
+			}
+
+			// Extract image ID (filename without extension)
+			ext := filepath.Ext(name)
+			id := strings.TrimSuffix(name, ext)
+			entries[id] = true
+		}
+
+		if err != nil {
+			break
+		}
+	}
+
+	c.dirEntries[dir] = entries
+	return nil
+}
+
+// getDirectoryIDs returns cached image IDs for a directory
+func (c *fsCache) getDirectoryIDs(dir string) map[string]bool {
+	if ids, ok := c.dirEntries[dir]; ok {
+		return ids
+	}
+	// Try to load if not cached
+	if err := c.loadDirectory(dir); err != nil {
+		return make(map[string]bool) // Return empty map on error
+	}
+	return c.dirEntries[dir]
+}
+
+// getFileStat returns cached file stat info
+func (c *fsCache) getFileStat(path string) *fileStatInfo {
+	// Check cache first
+	if info, ok := c.fileStats[path]; ok {
+		return info
+	}
+
+	// Stat the file and cache result
+	info := &fileStatInfo{}
+	fileInfo, err := os.Stat(path)
+	if err != nil {
+		info.exists = false
+		info.err = err
+	} else {
+		info.exists = true
+		info.size = fileInfo.Size()
+	}
+
+	c.fileStats[path] = info
+	return info
 }
