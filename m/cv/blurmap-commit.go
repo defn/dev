@@ -21,6 +21,7 @@ type galleryResult struct {
 	toMarkNoCount  int
 	writtenCount   int
 	deletedNoCount int
+	imageIDs       []string
 	err            error
 }
 
@@ -201,6 +202,32 @@ func commitMode() {
 		}
 		fmt.Fprintf(os.Stderr, "\n")
 	}
+
+	// Collect all image IDs from all galleries
+	var allImageIDs []string
+	for _, result := range allResults {
+		if result.err == nil {
+			allImageIDs = append(allImageIDs, result.imageIDs...)
+		}
+	}
+
+	// Sort image IDs
+	sort.Strings(allImageIDs)
+
+	// Write to tmp/g/index.txt
+	indexPath := "tmp/g/index.txt"
+	indexFile, err := os.Create(indexPath)
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Warning: Failed to create %s: %v\n", indexPath, err)
+		return
+	}
+	defer indexFile.Close()
+
+	for _, imageID := range allImageIDs {
+		fmt.Fprintf(indexFile, "%s\n", imageID)
+	}
+
+	fmt.Fprintf(os.Stderr, "Generated %s with %d image IDs\n", indexPath, len(allImageIDs))
 }
 
 // processGallery processes a single gallery and returns the results
@@ -225,6 +252,7 @@ func processGallery(galleryNum int, yesDir, noDir string, commitWrite bool) gall
 	}
 
 	result.totalImages = len(imageIDs)
+	result.imageIDs = imageIDs
 
 	// For each image, stat yes/ and no/ files to determine status
 	for _, imageID := range imageIDs {
