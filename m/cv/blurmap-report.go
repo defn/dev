@@ -346,6 +346,108 @@ func reportDataQuality(db *sql.DB) {
 		issues += orphanedThumbs
 	}
 
+	// Zero-length file consistency checks
+	var noNonZeroImg, noNonZeroThumb int
+	var yesZeroImg, yesZeroThumb, todoZeroImg, todoZeroThumb int
+
+	// Check rejected images (state='no') - should have zero-length files
+	rows, err := db.Query("SELECT img_path, thumb_path FROM images WHERE state='no' AND (img_path IS NOT NULL OR thumb_path IS NOT NULL)")
+	if err == nil {
+		for rows.Next() {
+			var imgPath, thumbPath sql.NullString
+			if rows.Scan(&imgPath, &thumbPath) != nil {
+				continue
+			}
+
+			if imgPath.Valid && imgPath.String != "" {
+				if info, err := os.Stat(imgPath.String); err == nil && info.Size() > 0 {
+					noNonZeroImg++
+				}
+			}
+
+			if thumbPath.Valid && thumbPath.String != "" {
+				if info, err := os.Stat(thumbPath.String); err == nil && info.Size() > 0 {
+					noNonZeroThumb++
+				}
+			}
+		}
+		rows.Close()
+	}
+
+	// Check approved images (state='yes') - should NOT have zero-length files
+	rows, err = db.Query("SELECT img_path, thumb_path FROM images WHERE state='yes' AND (img_path IS NOT NULL OR thumb_path IS NOT NULL)")
+	if err == nil {
+		for rows.Next() {
+			var imgPath, thumbPath sql.NullString
+			if rows.Scan(&imgPath, &thumbPath) != nil {
+				continue
+			}
+
+			if imgPath.Valid && imgPath.String != "" {
+				if info, err := os.Stat(imgPath.String); err == nil && info.Size() == 0 {
+					yesZeroImg++
+				}
+			}
+
+			if thumbPath.Valid && thumbPath.String != "" {
+				if info, err := os.Stat(thumbPath.String); err == nil && info.Size() == 0 {
+					yesZeroThumb++
+				}
+			}
+		}
+		rows.Close()
+	}
+
+	// Check todo images (state IS NULL) - should NOT have zero-length files
+	rows, err = db.Query("SELECT img_path, thumb_path FROM images WHERE state IS NULL AND (img_path IS NOT NULL OR thumb_path IS NOT NULL)")
+	if err == nil {
+		for rows.Next() {
+			var imgPath, thumbPath sql.NullString
+			if rows.Scan(&imgPath, &thumbPath) != nil {
+				continue
+			}
+
+			if imgPath.Valid && imgPath.String != "" {
+				if info, err := os.Stat(imgPath.String); err == nil && info.Size() == 0 {
+					todoZeroImg++
+				}
+			}
+
+			if thumbPath.Valid && thumbPath.String != "" {
+				if info, err := os.Stat(thumbPath.String); err == nil && info.Size() == 0 {
+					todoZeroThumb++
+				}
+			}
+		}
+		rows.Close()
+	}
+
+	// Report zero-length file issues
+	if noNonZeroImg > 0 {
+		fmt.Fprintf(os.Stderr, "⚠ %7d rejected images with non-zero img_path (should be zero-length markers)\n", noNonZeroImg)
+		issues += noNonZeroImg
+	}
+	if noNonZeroThumb > 0 {
+		fmt.Fprintf(os.Stderr, "⚠ %7d rejected images with non-zero thumb_path (should be zero-length markers)\n", noNonZeroThumb)
+		issues += noNonZeroThumb
+	}
+	if yesZeroImg > 0 {
+		fmt.Fprintf(os.Stderr, "⚠ %7d approved images with zero-length img_path (should have real files)\n", yesZeroImg)
+		issues += yesZeroImg
+	}
+	if yesZeroThumb > 0 {
+		fmt.Fprintf(os.Stderr, "⚠ %7d approved images with zero-length thumb_path (should have real files)\n", yesZeroThumb)
+		issues += yesZeroThumb
+	}
+	if todoZeroImg > 0 {
+		fmt.Fprintf(os.Stderr, "⚠ %7d todo images with zero-length img_path (should have real files)\n", todoZeroImg)
+		issues += todoZeroImg
+	}
+	if todoZeroThumb > 0 {
+		fmt.Fprintf(os.Stderr, "⚠ %7d todo images with zero-length thumb_path (should have real files)\n", todoZeroThumb)
+		issues += todoZeroThumb
+	}
+
 	if issues == 0 && urlButNoImg == 0 && imgButNoUrl == 0 {
 		fmt.Fprintf(os.Stderr, "✓ No data quality issues found\n")
 	}
