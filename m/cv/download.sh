@@ -8,7 +8,7 @@ cd ~/m/cv
 mkdir -p img
 
 # generate list of downloads
-go run blurmap.go -mode download
+# go run blurmap.go -mode download
 
 while IFS= read -r url; do
 	# Extract filename from URL
