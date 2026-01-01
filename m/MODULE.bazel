@@ -99,6 +99,7 @@ use_repo(
     "com_github_superfly_graphql",
     "com_github_superfly_macaroon",
     "com_zx2c4_golang_wireguard",
+    "dev_gvisor_gvisor",
     "in_gopkg_yaml_v3",
     "io_opentelemetry_go_contrib_instrumentation_net_http_otelhttp",
     "io_opentelemetry_go_otel",
