@@ -129,5 +129,16 @@
   "window.menuBarVisibility": "toggle",
   "workbench.activityBar.location": "bottom",
   "claudeCode.preferredLocation": "panel",
-  "http.systemCertificatesNode": true
+  "http.systemCertificatesNode": true,
+  "terminal.integrated.suggest.enabled": false,
+  "terminal.integrated.suggest.cdPath": "off",
+  "terminal.integrated.suggest.inlineSuggestion": "off",
+  "terminal.integrated.suggest.providers": {
+    "lsp": false,
+    "vscode.terminal-suggest": false
+  },
+  "terminal.integrated.suggest.showStatusBar": false,
+  "terminal.integrated.suggest.suggestOnTriggerCharacters": false,
+  "terminal.integrated.suggest.selectionMode": "never",
+  "terminal.integrated.suggest.upArrowNavigatesHistory": false
 }
