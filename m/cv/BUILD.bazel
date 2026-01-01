@@ -19,7 +19,7 @@ go_library(
     ],
     importpath = "github.com/defn/dev/m/cv",
     visibility = ["//visibility:private"],
-    deps = ["@com_github_mattn_go_sqlite3//:go_default_library"],
+    deps = ["@org_modernc_sqlite//:sqlite"],
 )
 
 go_binary(

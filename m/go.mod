@@ -99,7 +99,7 @@ require (
 	google.golang.org/genproto/googleapis/rpc v0.0.0-20251222181119-0a764e51fe1b // indirect
 	google.golang.org/grpc v1.78.0 // indirect
 	gopkg.in/yaml.v2 v2.4.0 // indirect
-	gvisor.dev/gvisor v0.0.0-20251230215248-c8a1af2c00ca // indirect
+	gvisor.dev/gvisor v0.0.0-20250503011706-39ed1f5ac29c // indirect // PINNED: Do not upgrade - newer versions break Bazel build (see replace directive below)
 )
 
 require (
@@ -187,3 +187,7 @@ require (
 	modernc.org/memory v1.11.0 // indirect
 	mvdan.cc/sh/v3 v3.12.0 // indirect
 )
+
+// Pin gvisor to prevent automatic upgrades that break Bazel build
+// Newer versions require grpc dependencies not available in Bazel
+replace gvisor.dev/gvisor => gvisor.dev/gvisor v0.0.0-20250503011706-39ed1f5ac29c
