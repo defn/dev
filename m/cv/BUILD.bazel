@@ -2,9 +2,24 @@ load("@io_bazel_rules_go//go:def.bzl", "go_binary", "go_library")
 
 go_library(
     name = "cv_lib",
-    srcs = ["blurmap.go"],
+    srcs = [
+        "blurmap.go",
+        "blurmap-batch.go",
+        "blurmap-commit.go",
+        "blurmap-common.go",
+        "blurmap-download.go",
+        "blurmap-fem.go",
+        "blurmap-fixup.go",
+        "blurmap-gallery.go",
+        "blurmap-html.go",
+        "blurmap-import.go",
+        "blurmap-report.go",
+        "blurmap-todo.go",
+        "blurmap-user.go",
+    ],
     importpath = "github.com/defn/dev/m/cv",
     visibility = ["//visibility:private"],
+    deps = ["@org_modernc_sqlite//:sqlite"],
 )
 
 go_binary(
