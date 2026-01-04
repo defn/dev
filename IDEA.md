@@ -1,79 +1,99 @@
-# The IDEA Cycle: 5W for DevOps
+# The IDEA Cycle: 6W for DevOps
 
 ## What Is It?
 
-The IDEA cycle implements DevOps principles through GitOps practice—and extends it with the annealing step where humans decide what to want next.
+The IDEA cycle implements DevOps principles through GitOps practice—and extends it with the reflective steps where humans analyze gaps and decide what to want next.
 
-| Layer | What it is | What it gives you |
-|-------|-----------|-------------------|
-| **DevOps** | Principles, culture | Why we integrate dev and ops |
-| **GitOps** | Practice, mechanics | Git as source of truth, reconciliation loops |
+| Layer          | What it is             | What it gives you                               |
+| -------------- | ---------------------- | ----------------------------------------------- |
+| **DevOps**     | Principles, culture    | Why we integrate dev and ops                    |
+| **GitOps**     | Practice, mechanics    | Git as source of truth, reconciliation loops    |
 | **IDEA cycle** | Implementation pattern | The rhythm of how work moves through the system |
 
-GitOps gives you the bottom half—WORK ↔ WORLD, equilibrium emerges, reconcile toward declared state. The IDEA cycle completes the loop—adds the top half where WORLD feeds back to WHAT, annealing applies, intent gets re-encoded.
+GitOps gives you the bottom half—WORK ↔ WORLD, equilibrium emerges, reconcile toward declared state. The IDEA cycle completes the loop—adds the left side where WORLD feeds through WHY and WILL back to WHAT, annealing applies, intent gets re-encoded.
 
-GitOps asks: *"Does reality match declaration?"*
-IDEA cycle adds: *"Should the declaration change?"*
+GitOps asks: _"Does reality match declaration?"_
+IDEA cycle adds: _"Why did it settle here, and what will we do about it?"_
 
-## The 5Ws
-
-**What** do you want?
-**Want** defines the objective.
-**Work** executes it.
-**World** responds.
-**Will**—what will you do next?
+## The 6Ws
 
 ```
-      WHAT ──── integrates intentions ────► WANT
-        ▲                                     │
-        │                                     │
-        │                                     │
-      apply              IDEA          delivers definitions
-    annealing                                 │
-        │                                     │
-        │                                     ▼
-      WORLD ◄──── equilibrium emerges ───── WORK
+    WHAT ──────────────────────────────► WANT
+      ▲                                    │
+      │                                    │
+    WILL                                   │
+      ▲                                    │
+      │                                    ▼
+    WHY ◄─────────────────────────────── WORK
+      ▲                                    │
+      │                                    │
+      └──────────── WORLD ◄────────────────┘
 ```
 
-## The Four Edges
+## The Six Edges
 
-Each edge is a transition where something gets written down:
-
-| Edge | Process | Artifact |
-|------|---------|----------|
-| WHAT → WANT | integrates intentions | specs, design docs, ADRs |
-| WANT → WORK | delivers definitions | manifests, schemas, configs |
-| WORK → WORLD | equilibrium emerges | events, metrics, logs |
-| WORLD → WHAT | apply annealing | decisions, changes, commits |
+| Edge                | Mode        | Continuous Practice |
+| ------------------- | ----------- | ------------------- |
+| What do you Want?   | Intent      | CI                  |
+| Want defines Work   | Definition  | CI                  |
+| Work produces World | Execution   | CD (Delivery)       |
+| World prompts Why   | Application | CD (Deployment)     |
+| Why informs Will    | Analysis    | CE                  |
+| Will shapes What    | Planning    | CA                  |
 
 IDEA is **whatever gets written at each transition**. Without artifacts, the cycle stalls in someone's head.
 
 ## CI/CD/CE/CA
 
-The IDEA cycle maps to continuous practices:
-
-- **CI** — Continuous Integration: WHAT → WANT (integrating intentions)
-- **CD** — Continuous Delivery: WANT → WORK (delivering definitions)
-- **CE** — Continuous Equilibrium: WORK → WORLD (equilibrium emerges)
-- **CA** — Continuous Annealing: WORLD → WHAT (apply annealing)
+- **CI** — Continuous Integration: WHAT → WANT (intent + definition). Lattice validation and tests confirm the change integrates with the system as intended.
+- **CD** — Continuous Delivery/Deployment: WANT → WORK → WORLD (execution + application). Build, package, deploy to production, observe response.
+- **CE** — Continuous Equilibrium: WORLD → WHY (analysis). Analyze why the system settled where it did. Is this the right equilibrium?
+- **CA** — Continuous Annealing: WHY → WILL → WHAT (planning). Plan the perturbation to anneal toward a different equilibrium.
 
 ## Two Motions
 
-**Equilibrium** runs continuously, mechanically. Work and World find balance without judgment. GitOps handles this—reconcile toward declared state.
+**Equilibrium** runs continuously, mechanically. Work and World find balance without judgment. GitOps handles this—reconcile toward declared state. CE analyzes whether the equilibrium point is correct.
 
-**Annealing** is cognitive, judgmental. Humans decide: is this the *right* equilibrium? This is where WILL lives. You observe the world, apply annealing, and choose what to want next.
+**Annealing** is cognitive, judgmental. Given CE's analysis, CA plans what to do about it. This may produce a single change or a plan spanning multiple IDEA cycles.
 
 ## The Tool/Cognition Dichotomy
 
-Tools and cognitive participants sit on different sides of the cycle:
+|                               | Tools                    | Cognitive Participants       |
+| ----------------------------- | ------------------------ | ---------------------------- |
+| **Work on**                   | Equilibrium (right side) | Annealing (left side)        |
+| **Relationship to objective** | Optimize within it       | Can change it                |
+| **Core question**             | "Are we at equilibrium?" | "Why here? What will we do?" |
 
-| | Tools | Cognitive Participants |
-|-|-------|------------------------|
-| **Work on** | Equilibrium (bottom half) | Annealing (top half) |
-| **Relationship to objective** | Optimize within it | Can change it |
-| **Core question** | "Are we at equilibrium?" | "Is this the right equilibrium?" |
+LLMs, Kubernetes operators, cloud infrastructure—all tools. They execute the right side. Humans (and future cognitive participants) own the left side: the WHY to understand gaps and the WILL to change what you want.
 
-LLMs, Kubernetes operators, cloud infrastructure—all tools. They execute the bottom half. Humans (and future cognitive participants) own the top half: the WILL to change what you want.
+## Why and Will: The Reflective Steps
+
+**WHY** is the pivot between observation and action. It asks "why did the system settle here?" regardless of trigger:
+
+- Post-mortem after incident (4 Whys technique)
+- Drift detected during normal operation
+- User feedback revealing expectation mismatch
+- Cost or performance gaps
+
+**WILL** is where plans form. A single WHY analysis may produce:
+
+- A single IDEA cycle (fix this one thing)
+- Multiple sequenced cycles (refactor, then migrate, then deprecate)
+- No action (equilibrium is acceptable, adjust expectations)
+
+```
+WHY → WILL
+        │
+        ├→ IDEA cycle 1 (refactor)
+        ├→ IDEA cycle 2 (migrate)
+        └→ IDEA cycle 3 (deprecate)
+```
+
+## 6W vs 4 Whys
+
+The 6W is what you ask during development and operation—proactive rhythm. The 4 Whys is a technique for the WHY step when triggered by incident—reactive analysis.
+
+Good 6W practice reduces 4 Whys frequency. The WHY step during normal operation catches drift before it compounds into incidents. When incidents do occur, 4 Whys output feeds back into WILL, improving what you observe next time.
 
 ## Erosion Chaos Engineering
 
@@ -89,11 +109,11 @@ Just right → continuous perturbation, continuous settling
 
 ## The Pragmatic Claim
 
-DevOps teams that can't name their cycle can't improve it systematically. They fix symptoms. The 5W gives you the anatomy so you can say "we're good at CD but bad at CA" instead of "things feel off."
+DevOps teams that can't name their cycle can't improve it systematically. They fix symptoms. The 6W gives you the anatomy so you can say "we're good at CD but bad at CE" instead of "things feel off."
 
 GitOps without the IDEA cycle: you reconcile forever toward a stale objective.
 With the IDEA cycle: the objective itself is in the loop.
 
 ---
 
-*The compound effect works both ways: small neglects accumulate into systemic rot, but small observations accumulate into systemic awareness.*
+_The compound effect works both ways: small neglects accumulate into systemic rot, but small observations accumulate into systemic awareness._
