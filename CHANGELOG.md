@@ -1,5 +1,34 @@
 # Changelog
 
+## [1.60.0](https://github.com/defn/dev/compare/v1.59.2...v1.60.0) (2026-01-04)
+
+
+### Features
+
+* **cv:** add commit mode with parallel processing and refactor blurmap ([3514e1e](https://github.com/defn/dev/commit/3514e1ec0738e5c8cd3c811ae18118da1d483f12))
+* **cv:** add comprehensive consistency checks to report mode ([e7742ad](https://github.com/defn/dev/commit/e7742ad194ef7bcc09d44739a7d08b2b47607d4b))
+* **cv:** add conflict resolution for re-curated galleries in commit mode ([012eed3](https://github.com/defn/dev/commit/012eed30d8b2bb12ac0688ef3947535316c00b5f))
+* **cv:** add coverage verification to database statistics ([fd3e009](https://github.com/defn/dev/commit/fd3e0094b0b6ae745316a5f57652b283071e3de9))
+* **cv:** add curation gallery support and enhance fixup mode ([d3b607a](https://github.com/defn/dev/commit/d3b607a82b99b6229a7d8444684fb42aa4711271))
+* **cv:** add report mode and fix import state management ([62ab366](https://github.com/defn/dev/commit/62ab36660a49e847a79b526cddf702cb7204f31f))
+* **cv:** add todo/fixup modes, refactor user mode, optimize scanning ([0b86e32](https://github.com/defn/dev/commit/0b86e323b6dad0156388bd7cc9819e411e81aed8))
+* **cv:** add upres file consistency checks to report mode ([3326f66](https://github.com/defn/dev/commit/3326f66ac2443a9730e5cf7064181b85425cad5d))
+* **cv:** add zero-length file consistency checks to report mode ([d8e0021](https://github.com/defn/dev/commit/d8e0021acb85eb68b6ef222b6cdac9105cd07c5a))
+* **cv:** generate sorted image index in commit mode ([13477ae](https://github.com/defn/dev/commit/13477ae9f616fbb0352e26de87e19ebf8a568dc6))
+* **cv:** migrate image tracking from filesystem to SQLite database ([c3ce3fb](https://github.com/defn/dev/commit/c3ce3fb5cabfdeadcad95ef41d3dd44ffe803cff))
+
+
+### Bug Fixes
+
+* **build:** use pure Go sqlite and pin gvisor version ([ba53920](https://github.com/defn/dev/commit/ba53920839e3bc5fcb61b9614158ae1b1cc07c7f))
+* **cv:** clarify timeout vs wget errors in download.sh ([080dbdc](https://github.com/defn/dev/commit/080dbdc3c07df1bc5f9dad3576de06361128246a))
+
+
+### Performance Improvements
+
+* **cv:** add in-memory filesystem cache to report mode ([17539c6](https://github.com/defn/dev/commit/17539c6db29acf8309193df708425f1d84c208fe))
+* **cv:** optimize users mode to skip cached pages and continue from last page ([a0e6c05](https://github.com/defn/dev/commit/a0e6c05045934bed0fbce45d0608b096399ef1a6))
+
 ## [1.59.2](https://github.com/defn/dev/compare/v1.59.1...v1.59.2) (2025-12-22)
 
 
