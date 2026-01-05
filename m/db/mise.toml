@@ -1,7 +1,7 @@
 [tools]
 atlas = "1.0.0"
 "go:github.com/riverqueue/river/cmd/river" = "0.29.0"
-"ubi:riverqueue/riverui" = "0.13.0"
+"ubi:riverqueue/riverui" = "0.14.0"
 
 [env]
 DATABASE_URL = "sqlite://./river.sqlite3"

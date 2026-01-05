@@ -26,7 +26,7 @@ require (
 	github.com/jinzhu/copier v0.4.0
 	github.com/joho/godotenv v1.5.1
 	github.com/kr/text v0.2.0
-	github.com/labstack/echo/v4 v4.14.0
+	github.com/labstack/echo/v4 v4.15.0
 	github.com/lann/builder v0.0.0-20180802200727-47ae307949d0
 	github.com/logrusorgru/aurora v2.0.3+incompatible
 	github.com/lucasb-eyer/go-colorful v1.3.0
@@ -35,7 +35,8 @@ require (
 	github.com/morikuni/aec v1.1.0
 	github.com/muesli/gamut v0.3.1
 	github.com/oklog/ulid/v2 v2.1.1
-	github.com/olekukonko/tablewriter v0.0.5
+	// PINNED: Do not upgrade - v0.1.0+ has breaking API changes (see replace directive below)
+	github.com/olekukonko/tablewriter v1.1.2
 	github.com/pkg/errors v0.9.1
 	github.com/riverqueue/river v0.29.0
 	github.com/riverqueue/river/riverdriver/riversqlite v0.29.0
@@ -99,8 +100,8 @@ require (
 	google.golang.org/genproto/googleapis/rpc v0.0.0-20251222181119-0a764e51fe1b // indirect
 	google.golang.org/grpc v1.78.0 // indirect
 	gopkg.in/yaml.v2 v2.4.0 // indirect
-	 // PINNED: Do not upgrade - newer versions break Bazel build (see replace directive below)
-	gvisor.dev/gvisor v0.0.0-20250503011706-39ed1f5ac29c // indirect
+	// PINNED: Do not upgrade - newer versions break Bazel build (see replace directive below)
+	gvisor.dev/gvisor v0.0.0-20260102221133-415991e5703d // indirect
 )
 
 require (
@@ -183,7 +184,7 @@ require (
 	golang.org/x/time v0.14.0
 	golang.org/x/tools v0.40.0 // indirect
 	google.golang.org/protobuf v1.36.11 // indirect
-	modernc.org/libc v1.67.3 // indirect
+	modernc.org/libc v1.67.4 // indirect
 	modernc.org/mathutil v1.7.1 // indirect
 	modernc.org/memory v1.11.0 // indirect
 	mvdan.cc/sh/v3 v3.12.0 // indirect
@@ -192,3 +193,7 @@ require (
 // Pin gvisor to prevent automatic upgrades that break Bazel build
 // Newer versions require grpc dependencies not available in Bazel
 replace gvisor.dev/gvisor => gvisor.dev/gvisor v0.0.0-20250503011706-39ed1f5ac29c
+
+// Pin tablewriter to prevent automatic upgrades that break Bazel build
+// v0.1.0+ has completely different API (removed SetHeader, SetBorder, etc.)
+replace github.com/olekukonko/tablewriter => github.com/olekukonko/tablewriter v0.0.5
