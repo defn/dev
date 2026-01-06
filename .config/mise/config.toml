@@ -6,7 +6,7 @@ compile = false
 
 [tools]
 ansible = "13.2.0"
-aws = { version = "2.32.28", symlink_bins = "true" }
+aws = { version = "2.32.29", symlink_bins = "true" }
 bat = "0.26.1"
 bazelisk = "1.27.0"
 chamber = "3.1.4"
