@@ -34,12 +34,9 @@ func scanDirectoryForImages(dirPath string) ([]ImageInfo, error) {
 			return err
 		}
 
-		// Extract base name without extension
-		baseName := filepath.Base(relPath)
-		baseName = strings.TrimSuffix(baseName, filepath.Ext(baseName))
-
+		// Preserve actual file extension and subdirectory structure
 		imageInfo := ImageInfo{
-			Filename: baseName + ".png", // Normalize to .png extension
+			Filename: relPath,
 			Width:    0,
 			Height:   0,
 		}

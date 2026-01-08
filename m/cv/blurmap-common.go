@@ -4,6 +4,8 @@ import (
 	"crypto/sha256"
 	"fmt"
 	"image"
+	_ "image/jpeg"
+	_ "image/png"
 	"io/ioutil"
 	"os"
 	"os/exec"
