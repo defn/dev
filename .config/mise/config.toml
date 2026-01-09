@@ -6,7 +6,7 @@ compile = false
 
 [tools]
 ansible = "13.2.0"
-aws = { version = "2.32.30", symlink_bins = "true" }
+aws = { version = "2.32.31", symlink_bins = "true" }
 bat = "0.26.1"
 bazelisk = "1.27.0"
 chamber = "3.1.4"
@@ -23,7 +23,7 @@ gron = "0.7.1"
 jq = "1.8.1"
 just = "1.46.0"
 node = "25.2.1"
-"npm:@anthropic-ai/claude-code" = "2.1.1"
+"npm:@anthropic-ai/claude-code" = "2.1.2"
 pipx = "1.8.0"
 pnpm = "10.27.0"
 python = "3.14.2"
@@ -31,7 +31,7 @@ uv = "0.9.22"
 shfmt = "3.12.0"
 slsa-verifier = "2.7.1"
 starship = "1.24.2"
-"ubi:buildkite/agent" = { version = "3.115.2", exe = "buildkite-agent" }
+"ubi:buildkite/agent" = { version = "3.115.3", exe = "buildkite-agent" }
 "ubi:coder/code-server" = { version = "4.107.0", bin_path = "bin", extract_all = "true" }
 "ubi:honeycombio/buildevents" = "0.18.0"
 "ubi:peak/s5cmd" = "2.3.0"
