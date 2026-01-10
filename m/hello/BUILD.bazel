@@ -17,6 +17,7 @@ go_library(
         "//cmd/runner",
         "//command/root",
         "//cue",
+        "//hello/p",
         "@com_github_bitfield_script//:script",
         "@com_github_lann_builder//:builder",
         "@com_github_samber_lo//:lo",

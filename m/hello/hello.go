@@ -22,6 +22,7 @@ import (
 	"github.com/defn/dev/m/cmd/runner"
 	"github.com/defn/dev/m/command/root"
 	"github.com/defn/dev/m/cue"
+	"github.com/defn/dev/m/hello/p"
 )
 
 //go:embed hello.cue
@@ -203,7 +204,8 @@ func (s *SubCommand) Main() error {
 
 	p2.Go(func() {
 		// Output the greeting (builder has formatted it with "Hello, " prefix)
-		script.Echo(greeting_config.FormattedGreeting).Stdout()
+		// Use p.Decorate to add decoration around the greeting
+		script.Echo(p.Decorate(greeting_config.FormattedGreeting)).Stdout()
 	})
 
 	p2.Go(func() {
