@@ -5,7 +5,7 @@
 //
 // Usage:
 //
-//	bazel run //hello:hello_mcp
+//	bazel run //hello/mcp:server_go
 package main
 
 import (

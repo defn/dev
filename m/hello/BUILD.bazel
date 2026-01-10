@@ -87,21 +87,8 @@ py_binary(
     srcs = ["hello.py"],
     main = "hello.py",
     deps = [
-        "//hello/mcp",
+        "//hello/mcp:mcp_py",
         requirement("claude-agent-sdk"),
-    ],
-)
-
-# MCP server binary (for use with Claude CLI or other MCP clients)
-py_binary(
-    name = "hello_mcp",
-    srcs = ["hello_mcp.py"],
-    main = "hello_mcp.py",
-    deps = [
-        "//hello/tools/disk",
-        "//hello/tools/time",
-        "//hello/tools/user",
-        requirement("mcp"),
     ],
 )
 
@@ -109,6 +96,6 @@ py_test(
     name = "hello_py_test",
     srcs = ["hello_py_test.py"],
     deps = [
-        "//hello/mcp",
+        "//hello/mcp:mcp_py",
     ],
 )

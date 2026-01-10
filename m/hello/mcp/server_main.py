@@ -9,14 +9,14 @@ Usage:
     python hello_mcp.py
 
     # Or via bazel
-    bazel run //hello:hello_mcp
+    bazel run //hello/mcp:server_py
 
     # Configure in Claude CLI settings as:
     {
         "mcpServers": {
             "hello": {
                 "command": "bazel",
-                "args": ["run", "//hello:hello_mcp"]
+                "args": ["run", "//hello/mcp:server_py"]
             }
         }
     }

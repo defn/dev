@@ -1,9 +1,9 @@
-load("@io_bazel_rules_go//go:def.bzl", "go_library")
+load("@io_bazel_rules_go//go:def.bzl", "go_binary", "go_library")
 load("@pip//:requirements.bzl", "requirement")
-load("@rules_python//python:defs.bzl", "py_library", "py_test")
+load("@rules_python//python:defs.bzl", "py_binary", "py_library", "py_test")
 
 py_library(
-    name = "mcp",
+    name = "mcp_py",
     srcs = [
         "__init__.py",
         "server.py",
@@ -21,7 +21,7 @@ py_library(
 py_test(
     name = "server_test",
     srcs = ["server_test.py"],
-    deps = [":mcp"],
+    deps = [":mcp_py"],
 )
 
 # Go MCP server library
@@ -36,4 +36,23 @@ go_library(
         "//hello/mcp/user",
         "@com_github_modelcontextprotocol_go_sdk//mcp",
     ],
+)
+
+# MCP server binaries
+py_binary(
+    name = "server_py",
+    srcs = ["server_main.py"],
+    main = "server_main.py",
+    deps = [
+        "//hello/tools/disk",
+        "//hello/tools/time",
+        "//hello/tools/user",
+        requirement("mcp"),
+    ],
+)
+
+go_binary(
+    name = "server_go",
+    embed = ["//hello/mcp/cmd"],
+    visibility = ["//visibility:public"],
 )
