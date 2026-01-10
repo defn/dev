@@ -1,3 +1,4 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
 load("@pip//:requirements.bzl", "requirement")
 load("@rules_python//python:defs.bzl", "py_library", "py_test")
 
@@ -21,4 +22,18 @@ py_test(
     name = "server_test",
     srcs = ["server_test.py"],
     deps = [":mcp"],
+)
+
+# Go MCP server library
+go_library(
+    name = "mcp_go",
+    srcs = ["server.go"],
+    importpath = "github.com/defn/dev/m/hello/mcp",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//hello/mcp/disk",
+        "//hello/mcp/time",
+        "//hello/mcp/user",
+        "@com_github_modelcontextprotocol_go_sdk//mcp",
+    ],
 )

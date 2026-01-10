@@ -85,6 +85,7 @@ use_repo(
     "com_github_mattn_go_isatty",
     "com_github_mgutz_ansi",
     "com_github_miekg_dns",
+    "com_github_modelcontextprotocol_go_sdk",
     "com_github_morikuni_aec",
     "com_github_muesli_gamut",
     "com_github_muesli_termenv",

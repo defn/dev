@@ -190,6 +190,13 @@ require (
 	mvdan.cc/sh/v3 v3.12.0 // indirect
 )
 
+require github.com/modelcontextprotocol/go-sdk v1.2.0
+
+require (
+	github.com/google/jsonschema-go v0.3.0 // indirect
+	github.com/yosida95/uritemplate/v3 v3.0.2 // indirect
+)
+
 // Pin gvisor to prevent automatic upgrades that break Bazel build
 // Newer versions require grpc dependencies not available in Bazel
 replace gvisor.dev/gvisor => gvisor.dev/gvisor v0.0.0-20250503011706-39ed1f5ac29c
