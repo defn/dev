@@ -1,8 +1,9 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
 load("@pip//:requirements.bzl", "requirement")
 load("@rules_python//python:defs.bzl", "py_library", "py_test")
 
 py_library(
-    name = "disk",
+    name = "disk_py",
     srcs = [
         "__init__.py",
         "tool.py",
@@ -15,7 +16,19 @@ py_library(
 )
 
 py_test(
-    name = "tool_test",
+    name = "tool_py_test",
     srcs = ["tool_test.py"],
-    deps = [":disk"],
+    main = "tool_test.py",
+    deps = [":disk_py"],
+)
+
+go_library(
+    name = "disk_go",
+    srcs = ["tool_go.go"],
+    importpath = "github.com/defn/dev/m/hello/tools/disk",
+    visibility = ["//visibility:public"],
+    deps = [
+        "@com_github_modelcontextprotocol_go_sdk//mcp",
+        "@org_golang_x_sys//unix",
+    ],
 )

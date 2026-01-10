@@ -11,9 +11,9 @@ py_library(
     imports = ["../.."],
     visibility = ["//visibility:public"],
     deps = [
-        "//hello/tools/disk",
-        "//hello/tools/time",
-        "//hello/tools/user",
+        "//hello/tools/disk:disk_py",
+        "//hello/tools/time:time_py",
+        "//hello/tools/user:user_py",
         requirement("claude-agent-sdk"),
     ],
 )
@@ -31,9 +31,9 @@ go_library(
     importpath = "github.com/defn/dev/m/hello/mcp",
     visibility = ["//visibility:public"],
     deps = [
-        "//hello/mcp/disk",
-        "//hello/mcp/time",
-        "//hello/mcp/user",
+        "//hello/tools/disk:disk_go",
+        "//hello/tools/time:time_go",
+        "//hello/tools/user:user_go",
         "@com_github_modelcontextprotocol_go_sdk//mcp",
     ],
 )
@@ -44,9 +44,9 @@ py_binary(
     srcs = ["server_main.py"],
     main = "server_main.py",
     deps = [
-        "//hello/tools/disk",
-        "//hello/tools/time",
-        "//hello/tools/user",
+        "//hello/tools/disk:disk_py",
+        "//hello/tools/time:time_py",
+        "//hello/tools/user:user_py",
         requirement("mcp"),
     ],
 )

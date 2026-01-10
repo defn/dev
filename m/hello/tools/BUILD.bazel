@@ -6,8 +6,8 @@ py_library(
     imports = ["../.."],
     visibility = ["//visibility:public"],
     deps = [
-        "//hello/tools/disk",
-        "//hello/tools/time",
-        "//hello/tools/user",
+        "//hello/tools/disk:disk_py",
+        "//hello/tools/time:time_py",
+        "//hello/tools/user:user_py",
     ],
 )

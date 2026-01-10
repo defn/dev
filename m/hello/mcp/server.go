@@ -4,9 +4,9 @@ package mcp
 import (
 	"github.com/modelcontextprotocol/go-sdk/mcp"
 
-	"github.com/defn/dev/m/hello/mcp/disk"
-	mcptime "github.com/defn/dev/m/hello/mcp/time"
-	"github.com/defn/dev/m/hello/mcp/user"
+	"github.com/defn/dev/m/hello/tools/disk"
+	toolstime "github.com/defn/dev/m/hello/tools/time"
+	"github.com/defn/dev/m/hello/tools/user"
 )
 
 // NewServer creates an MCP server with all hello tools.
@@ -17,7 +17,7 @@ func NewServer() *mcp.Server {
 	}, nil)
 
 	// Add time tool
-	mcp.AddTool(server, mcptime.Tool(), mcptime.Handler)
+	mcp.AddTool(server, toolstime.Tool(), toolstime.Handler)
 
 	// Add disk tool
 	mcp.AddTool(server, disk.Tool(), disk.Handler)

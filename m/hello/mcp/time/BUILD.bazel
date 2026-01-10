@@ -1,9 +1,0 @@
-load("@io_bazel_rules_go//go:def.bzl", "go_library")
-
-go_library(
-    name = "time",
-    srcs = ["tool.go"],
-    importpath = "github.com/defn/dev/m/hello/mcp/time",
-    visibility = ["//visibility:public"],
-    deps = ["@com_github_modelcontextprotocol_go_sdk//mcp"],
-)
