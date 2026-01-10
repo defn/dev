@@ -1,0 +1,5 @@
+#!/bin/bash
+#MISE description="Run MCP server for Claude CLI"
+
+cd /home/ubuntu/m
+exec bazel run --noshow_progress //hello:hello_mcp
