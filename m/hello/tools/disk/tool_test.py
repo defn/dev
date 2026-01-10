@@ -1,6 +1,7 @@
 """Tests for the disk tool."""
 
 import asyncio
+import json
 import shutil
 import unittest
 
@@ -10,37 +11,34 @@ from hello.tools.disk.tool import get_disk_tool
 class TestDiskTool(unittest.TestCase):
     """Test cases for the disk tool."""
 
-    def test_get_disk_returns_content(self) -> None:
-        """Test that get_disk returns proper content structure."""
+    def test_get_disk_returns_json(self) -> None:
+        """Test that get_disk returns valid JSON."""
         result = asyncio.run(get_disk_tool.handler({}))
         self.assertIn("content", result)
-        self.assertEqual(len(result["content"]), 1)
-        self.assertEqual(result["content"][0]["type"], "text")
+        data = json.loads(result["content"][0]["text"])
+        self.assertIn("total_bytes", data)
+        self.assertIn("used_bytes", data)
+        self.assertIn("free_bytes", data)
+        self.assertIn("percent_used", data)
 
     def test_get_disk_default_path(self) -> None:
         """Test disk usage for default root path."""
         result = asyncio.run(get_disk_tool.handler({}))
-        text = result["content"][0]["text"]
-        self.assertIn("Disk usage for '/'", text)
-        self.assertIn("Total:", text)
-        self.assertIn("Used:", text)
-        self.assertIn("Free:", text)
+        data = json.loads(result["content"][0]["text"])
+        self.assertEqual(data["path"], "/")
 
     def test_get_disk_custom_path(self) -> None:
         """Test disk usage for custom path."""
         result = asyncio.run(get_disk_tool.handler({"path": "/tmp"}))
-        text = result["content"][0]["text"]
-        self.assertIn("Disk usage for '/tmp'", text)
+        data = json.loads(result["content"][0]["text"])
+        self.assertEqual(data["path"], "/tmp")
 
     def test_get_disk_matches_shutil(self) -> None:
         """Test that reported values match shutil.disk_usage."""
         result = asyncio.run(get_disk_tool.handler({"path": "/"}))
-        text = result["content"][0]["text"]
-
+        data = json.loads(result["content"][0]["text"])
         actual = shutil.disk_usage("/")
-
-        # Check that the total bytes value appears in the output
-        self.assertIn(str(actual.total), text)
+        self.assertEqual(data["total_bytes"], actual.total)
 
     def test_get_disk_invalid_path(self) -> None:
         """Test error handling for invalid path."""

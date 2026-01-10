@@ -1,6 +1,7 @@
 """MCP tool that returns current user and group information."""
 
 import grp
+import json
 import os
 import pwd
 from typing import Any
@@ -8,13 +9,11 @@ from typing import Any
 from claude_agent_sdk import tool
 
 
-@tool("get_user_info", "Get current user and group ID with names", {})
+@tool("get_user_info", "Get current user and group information as JSON", {})
 async def get_user_tool(args: dict[str, Any]) -> dict[str, Any]:
-    """Return current user and group information."""
+    """Return current user and group information as JSON."""
     uid = os.getuid()
     gid = os.getgid()
-    euid = os.geteuid()
-    egid = os.getegid()
 
     try:
         user_info = pwd.getpwuid(uid)
@@ -42,23 +41,16 @@ async def get_user_tool(args: dict[str, Any]) -> dict[str, Any]:
             except KeyError:
                 group_names.append(str(g))
     except OSError:
-        groups = []
         group_names = []
 
-    return {
-        "content": [
-            {
-                "type": "text",
-                "text": (
-                    f"User information:\n"
-                    f"  UID: {uid} ({username})\n"
-                    f"  GID: {gid} ({groupname})\n"
-                    f"  EUID: {euid}\n"
-                    f"  EGID: {egid}\n"
-                    f"  Home: {home_dir}\n"
-                    f"  Shell: {shell}\n"
-                    f"  Groups: {', '.join(group_names) or 'none'}"
-                ),
-            }
-        ]
+    data = {
+        "uid": uid,
+        "gid": gid,
+        "username": username,
+        "groupname": groupname,
+        "home": home_dir,
+        "shell": shell,
+        "groups": group_names,
     }
+
+    return {"content": [{"type": "text", "text": json.dumps(data)}]}
