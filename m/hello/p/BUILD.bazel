@@ -1,7 +1,5 @@
 load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
-load("@rules_python//python:defs.bzl", "py_library", "py_test")
 
-# Go library
 go_library(
     name = "p",
     srcs = ["p.go"],
@@ -13,21 +11,4 @@ go_test(
     name = "p_test",
     srcs = ["p_test.go"],
     embed = [":p"],
-)
-
-# Python library
-py_library(
-    name = "p_py",
-    srcs = [
-        "__init__.py",
-        "greeter.py",
-    ],
-    imports = ["../.."],
-    visibility = ["//visibility:public"],
-)
-
-py_test(
-    name = "greeter_test",
-    srcs = ["greeter_test.py"],
-    deps = [":p_py"],
 )

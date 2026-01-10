@@ -15,11 +15,8 @@ bazel test //hello/...
 # Go hello
 bazel run //hello:hello_go
 
-# Python hello
+# Python agent (uses Claude SDK with MCP tools)
 bazel run //hello:hello_py
-
-# Python hello with MCP demo
-bazel run //hello:hello_py -- --mcp-demo
 ```
 
 ## MCP Server

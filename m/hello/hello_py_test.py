@@ -1,33 +1,26 @@
-"""Tests for the hello.py script functionality."""
+"""Tests for the hello.py agent script."""
 
 import unittest
 
-from hello.p import decorate, greet, uppercase
+from hello.mcp.server import create_hello_server, get_all_tools
 
 
 class TestHelloPy(unittest.TestCase):
-    """Test cases for hello.py using the p package."""
+    """Test cases for hello.py agent."""
 
-    def test_greet(self) -> None:
-        """Test the greet function from p package."""
-        self.assertEqual(greet("World"), "Hello, World")
-        self.assertEqual(greet("Python"), "Hello, Python")
+    def test_mcp_server_creation(self) -> None:
+        """Test that MCP server can be created."""
+        server = create_hello_server()
+        self.assertIsNotNone(server)
 
-    def test_uppercase(self) -> None:
-        """Test the uppercase function from p package."""
-        self.assertEqual(uppercase("hello"), "HELLO")
-        self.assertEqual(uppercase("Hello, World"), "HELLO, WORLD")
-
-    def test_decorate(self) -> None:
-        """Test the decorate function from p package."""
-        self.assertEqual(decorate("Hello"), "*** Hello ***")
-
-    def test_combined(self) -> None:
-        """Test combining greet, uppercase, and decorate."""
-        greeting = greet("Bazel")
-        greeting = uppercase(greeting)
-        greeting = decorate(greeting)
-        self.assertEqual(greeting, "*** HELLO, BAZEL ***")
+    def test_tools_available(self) -> None:
+        """Test that all tools are available."""
+        tools = get_all_tools()
+        self.assertEqual(len(tools), 3)
+        tool_names = [t.name for t in tools]
+        self.assertIn("get_time", tool_names)
+        self.assertIn("get_disk_usage", tool_names)
+        self.assertIn("get_user_info", tool_names)
 
 
 if __name__ == "__main__":

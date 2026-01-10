@@ -81,14 +81,13 @@ image_push(
     tag = "bazel",
 )
 
-# Python binary
+# Python agent example using Claude SDK with MCP tools
 py_binary(
     name = "hello_py",
     srcs = ["hello.py"],
     main = "hello.py",
     deps = [
         "//hello/mcp",
-        "//hello/p:p_py",
         requirement("claude-agent-sdk"),
     ],
 )
@@ -110,6 +109,6 @@ py_test(
     name = "hello_py_test",
     srcs = ["hello_py_test.py"],
     deps = [
-        "//hello/p:p_py",
+        "//hello/mcp",
     ],
 )
