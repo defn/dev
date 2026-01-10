@@ -19,8 +19,8 @@ py_library(
 )
 
 py_test(
-    name = "server_test",
-    srcs = ["server_test.py"],
+    name = "server_py_test",
+    srcs = ["server_py_test.py"],
     deps = [":mcp_py"],
 )
 
