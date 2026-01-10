@@ -13,7 +13,7 @@ bazel test //hello/...
 
 ```bash
 # Go hello
-bazel run //hello
+bazel run //hello:hello_go
 
 # Python hello
 bazel run //hello:hello_py

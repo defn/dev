@@ -44,7 +44,7 @@ go_library(
 )
 
 go_binary(
-    name = "hello",
+    name = "hello_go",
     embed = [":hello_lib"],
     pure = "on",
     visibility = ["//visibility:public"],
@@ -61,7 +61,7 @@ go_test(
 image_layer(
     name = "hello_layer",
     srcs = {
-        "/hello": "//hello:hello",
+        "/hello": "//hello:hello_go",
     },
 )
 
