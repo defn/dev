@@ -39,6 +39,12 @@ bazel_dep(name = "rules_go", version = "0.59.0", repo_name = "io_bazel_rules_go"
 # https://registry.bazel.build/modules/gazelle
 bazel_dep(name = "gazelle", version = "0.47.0", repo_name = "bazel_gazelle")
 
+# https://registry.bazel.build/modules/rules_python
+bazel_dep(name = "rules_python", version = "1.7.0")
+
+# https://registry.bazel.build/modules/rules_uv
+bazel_dep(name = "rules_uv", version = "0.89.2")
+
 go_sdk = use_extension("@io_bazel_rules_go//go:extensions.bzl", "go_sdk")
 go_sdk.download(version = "1.25.5")
 go_sdk.host()
@@ -117,6 +123,22 @@ use_repo(
     "org_uber_go_fx",
     "org_uber_go_zap",
 )
+
+# Python toolchain
+python = use_extension("@rules_python//python/extensions:python.bzl", "python")
+python.toolchain(
+    is_default = True,
+    python_version = "3.13.9",
+)
+
+# Python pip dependencies
+pip = use_extension("@rules_python//python/extensions:pip.bzl", "pip")
+pip.parse(
+    hub_name = "pip",
+    python_version = "3.13.9",
+    requirements_lock = "//hello:requirements_lock.txt",
+)
+use_repo(pip, "pip")
 
 pull = use_repo_rule("@rules_img//img:pull.bzl", "pull")
 

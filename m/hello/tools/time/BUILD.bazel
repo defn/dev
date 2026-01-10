@@ -1,0 +1,21 @@
+load("@pip//:requirements.bzl", "requirement")
+load("@rules_python//python:defs.bzl", "py_library", "py_test")
+
+py_library(
+    name = "time",
+    srcs = [
+        "__init__.py",
+        "tool.py",
+    ],
+    imports = ["../../.."],
+    visibility = ["//visibility:public"],
+    deps = [
+        requirement("claude-agent-sdk"),
+    ],
+)
+
+py_test(
+    name = "tool_test",
+    srcs = ["tool_test.py"],
+    deps = [":time"],
+)

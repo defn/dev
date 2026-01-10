@@ -1,9 +1,22 @@
 load("@io_bazel_rules_go//go:def.bzl", "go_binary", "go_library", "go_test")
+load("@pip//:requirements.bzl", "requirement")
 load("@rules_img//img:image.bzl", "image_manifest")
 load("@rules_img//img:layer.bzl", "image_layer")
 load("@rules_img//img:push.bzl", "image_push")
+load("@rules_python//python:defs.bzl", "py_binary", "py_test")
+load("@rules_uv//uv:pip.bzl", "pip_compile")
 
-exports_files(["hello.cue"])
+exports_files([
+    "hello.cue",
+    "requirements_lock.txt",
+])
+
+# Generate requirements_lock.txt from requirements.in using uv
+pip_compile(
+    name = "generate_requirements_lock",
+    requirements_in = "requirements.in",
+    requirements_txt = "requirements_lock.txt",
+)
 
 go_library(
     name = "hello_lib",
@@ -66,4 +79,37 @@ image_push(
     registry = "ghcr.io",
     repository = "defn/dev",
     tag = "bazel",
+)
+
+# Python binary
+py_binary(
+    name = "hello_py",
+    srcs = ["hello.py"],
+    main = "hello.py",
+    deps = [
+        "//hello/mcp",
+        "//hello/p:p_py",
+        requirement("claude-agent-sdk"),
+    ],
+)
+
+# MCP server binary (for use with Claude CLI or other MCP clients)
+py_binary(
+    name = "hello_mcp",
+    srcs = ["hello_mcp.py"],
+    main = "hello_mcp.py",
+    deps = [
+        "//hello/tools/disk",
+        "//hello/tools/time",
+        "//hello/tools/user",
+        requirement("mcp"),
+    ],
+)
+
+py_test(
+    name = "hello_py_test",
+    srcs = ["hello_py_test.py"],
+    deps = [
+        "//hello/p:p_py",
+    ],
 )
