@@ -351,4 +351,4 @@ unset MAKEFLAGS
 
 if test -r ~/.ssh-agent-rc; then source ~/.ssh-agent-rc >/dev/null; fi
 
-export PATH=/home/ubuntu/.bin:${PATH}
+export PATH=$HOME/.bun/bin:$HOME/.bin:${PATH}

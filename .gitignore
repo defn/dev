@@ -289,3 +289,4 @@ __pycache__
 !.config/pypoetry/config.toml
 !.config/starship.toml
 .cagent
+.bun
