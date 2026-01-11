@@ -28,9 +28,9 @@ node = "25.2.1"
 pipx = "1.8.0"
 pnpm = "10.28.0"
 # NOTE: must sync with python.toolchain(python_version) in MODULE.bazel (rules_python)
-python = "3.14.2"
+python = "3.13.9"
 # NOTE: must sync with uv version bundled in rules_uv (check uv/private/uv.lock.json)
-uv = "0.9.24"
+uv = "0.8.12"
 shfmt = "3.12.0"
 slsa-verifier = "2.7.1"
 starship = "1.24.2"
