@@ -37,8 +37,8 @@
     "keybindings": [
       {
         "command": "idiogloss.openPanel",
-        "key": "meta+backspace",
-        "mac": "cmd+backspace",
+        "key": "ctrl+meta+backspace",
+        "mac": "ctrl+cmd+backspace",
         "when": "editorFocus"
       }
     ]

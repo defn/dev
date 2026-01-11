@@ -1,6 +1,6 @@
 # idiogloss
 
-A VS Code extension that opens a webview panel paired to your current editor, showing file contents with live stats.
+A VS Code extension that opens a global webview panel that tracks your current editor, showing file contents with live stats.
 
 ## Quick Start
 
@@ -17,19 +17,21 @@ Then reload VS Code (Ctrl+Shift+P → "Developer: Reload Window").
 ## Usage
 
 1. Open any file in the editor
-2. Click the pig snout icon in the editor title bar (top right)
-   - Or use keyboard shortcut (see below)
-3. A panel opens beside your editor showing file contents and stats
-4. Edit the file — the panel updates in real-time
+2. Open the idiogloss panel using either:
+   - Click the pig snout icon in the editor title bar (top right)
+   - Keyboard shortcut (see below)
+3. A **global panel** opens beside your editor
+4. Switch between files — the panel automatically tracks the active editor
+5. Edit any file — stats update in real-time
 
 ### Keyboard Shortcuts
 
-| Platform   | Shortcut             |
-| ---------- | -------------------- |
-| macOS      | `Cmd + Delete`       |
-| Windows    | `Win + Backspace`    |
-| Linux      | `Meta + Backspace`   |
-| Chromebook | `Search + Backspace` |
+| Platform   | Shortcut                    |
+| ---------- | --------------------------- |
+| macOS      | `Ctrl + Cmd + Delete`       |
+| Windows    | `Ctrl + Win + Backspace`    |
+| Linux      | `Ctrl + Meta + Backspace`   |
+| Chromebook | `Ctrl + Search + Backspace` |
 
 The Search key on Chromebook (where Caps Lock usually is) maps to `meta`. On macOS, `cmd` is used since there's no `meta` key.
 
@@ -68,10 +70,11 @@ This extension has two separate codebases that communicate via message passing:
 
 ### Data Flow
 
-1. User clicks icon → Extension creates webview panel
-2. Extension reads editor content → sends `postMessage` to webview
-3. User edits file → `onDidChangeTextDocument` fires → Extension sends updated content
-4. Webview receives message → Svelte reactivity updates UI
+1. User clicks icon → Extension creates/reveals global webview panel
+2. Extension reads active editor content → sends `postMessage` to webview
+3. User switches files → `onDidChangeActiveTextEditor` fires → Extension sends new file content
+4. User edits file → `onDidChangeTextDocument` fires → Extension sends updated content
+5. Webview receives message → Svelte reactivity updates UI
 
 ---
 
@@ -114,23 +117,37 @@ idiogloss/
 The extension runs in VS Code's Extension Host (Node.js process, separate from the UI).
 
 ```typescript
-export function activate(context: vscode.ExtensionContext) {
-  // Register command that creates a webview panel
-  const openPanelCmd = vscode.commands.registerCommand("idiogloss.openPanel", () => {
-    // Get current editor content
-    const editor = vscode.window.activeTextEditor;
-    const document = editor?.document;
+// Global panel instance (singleton)
+let globalPanel: vscode.WebviewPanel | undefined;
 
-    // Create webview panel
-    const panel = vscode.window.createWebviewPanel(
+export function activate(context: vscode.ExtensionContext) {
+  const openPanelCmd = vscode.commands.registerCommand("idiogloss.openPanel", () => {
+    // If panel already exists, reveal it and update
+    if (globalPanel) {
+      globalPanel.reveal(vscode.ViewColumn.Beside);
+      sendUpdate();
+      return;
+    }
+
+    // Create global webview panel
+    globalPanel = vscode.window.createWebviewPanel(
       "idiogloss",                    // Panel type ID
-      `idiogloss: ${fileName}`,       // Panel title
+      "idiogloss",                    // Panel title (not file-specific)
       vscode.ViewColumn.Beside,       // Open beside current editor
       { enableScripts: true, ... }    // Options
     );
 
-    // Send initial content to webview
-    panel.webview.postMessage({ type: "update", fileName, content });
+    // Listen for active editor changes
+    vscode.window.onDidChangeActiveTextEditor((editor) => {
+      if (editor) sendUpdate();
+    });
+
+    // Listen for document content changes
+    vscode.workspace.onDidChangeTextDocument((e) => {
+      if (e.document === vscode.window.activeTextEditor?.document) {
+        sendUpdate();
+      }
+    });
   });
 }
 ```
@@ -140,6 +157,7 @@ export function activate(context: vscode.ExtensionContext) {
 - `vscode.commands.registerCommand` — Register the command
 - `vscode.window.createWebviewPanel` — Create the panel
 - `panel.webview.postMessage` — Send data to webview
+- `vscode.window.onDidChangeActiveTextEditor` — Track file switches
 - `vscode.workspace.onDidChangeTextDocument` — Listen for edits
 
 ### Webview Panel Options
@@ -162,25 +180,36 @@ With this option, the webview stays in memory. The Svelte app keeps its state (f
 
 **Trade-off:** Uses more memory. Acceptable for simple webviews like this.
 
-### Live Sync: Document Change Listener
+### Global Panel: Active Editor Tracking
+
+The panel is a singleton that tracks whatever editor is currently active:
 
 ```typescript
-const changeListener = vscode.workspace.onDidChangeTextDocument((e) => {
-  if (document && e.document.uri.toString() === document.uri.toString()) {
-    panel.webview.postMessage({
-      type: "update",
-      fileName,
-      content: e.document.getText(),
-    });
+// Listen for active editor changes
+const editorChangeListener = vscode.window.onDidChangeActiveTextEditor(
+  (editor) => {
+    if (editor) {
+      sendUpdate(); // Send new file's content to webview
+    }
+  },
+);
+
+// Listen for document content changes
+const contentChangeListener = vscode.workspace.onDidChangeTextDocument((e) => {
+  const activeDoc = vscode.window.activeTextEditor?.document;
+  if (activeDoc && e.document.uri.toString() === activeDoc.uri.toString()) {
+    sendUpdate();
   }
 });
 
 panel.onDidDispose(() => {
-  changeListener.dispose(); // Clean up when panel closes
+  editorChangeListener.dispose();
+  contentChangeListener.dispose();
+  globalPanel = undefined; // Clear singleton reference
 });
 ```
 
-This sends the full document content on every keystroke. For large files, this could be optimized to send only changed ranges — but for typical use, full content is fast enough.
+This sends the full document content on every keystroke and file switch. For large files, this could be optimized to send only changed ranges — but for typical use, full content is fast enough.
 
 ### Webview HTML Generation
 
@@ -370,13 +399,13 @@ Places the icon in the editor title bar. `group: "navigation"` puts it with othe
 ```json
 "keybindings": [{
   "command": "idiogloss.openPanel",
-  "key": "meta+backspace",
-  "mac": "cmd+backspace",
+  "key": "ctrl+meta+backspace",
+  "mac": "ctrl+cmd+backspace",
   "when": "editorFocus"
 }]
 ```
 
-**Platform handling:** `key` is the default; `mac` overrides for macOS. On macOS, there's no `meta` key, so `cmd` is used.
+**Platform handling:** `key` is the default; `mac` overrides for macOS. On macOS, there's no `meta` key, so `cmd` is used. The `ctrl` modifier is added to avoid conflicts with system shortcuts.
 
 ### Icons: PNG vs SVG
 

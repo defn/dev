@@ -1,6 +1,4 @@
 import * as vscode from "vscode";
-import * as fs from "fs";
-import * as path from "path";
 
 const outputChannel = vscode.window.createOutputChannel("idiogloss");
 
@@ -9,6 +7,9 @@ function log(message: string) {
   outputChannel.appendLine(`[${timestamp}] ${message}`);
 }
 
+// Global panel instance (singleton)
+let globalPanel: vscode.WebviewPanel | undefined;
+
 export function activate(context: vscode.ExtensionContext) {
   context.subscriptions.push(outputChannel);
   // Note: outputChannel.show() is intentionally NOT called here.
@@ -16,19 +17,43 @@ export function activate(context: vscode.ExtensionContext) {
   // Users can manually view logs via Output panel > "idiogloss" dropdown.
   log("Extension activating...");
 
+  // Helper to get current editor info
+  function getEditorInfo() {
+    const editor = vscode.window.activeTextEditor;
+    const document = editor?.document;
+    const fileName = document?.fileName.split("/").pop() ?? "No file";
+    const content = document?.getText() ?? "";
+    return { editor, document, fileName, content };
+  }
+
+  // Helper to send update to panel
+  function sendUpdate() {
+    if (!globalPanel) return;
+    const { fileName, content } = getEditorInfo();
+    globalPanel.webview.postMessage({
+      type: "update",
+      fileName,
+      content,
+    });
+  }
+
   const openPanelCmd = vscode.commands.registerCommand(
     "idiogloss.openPanel",
     () => {
-      const editor = vscode.window.activeTextEditor;
-      const document = editor?.document;
-      const fileName = document?.fileName.split("/").pop() ?? "Unknown";
-      const content = document?.getText() ?? "";
+      // If panel already exists, reveal it and update
+      if (globalPanel) {
+        globalPanel.reveal(vscode.ViewColumn.Beside);
+        sendUpdate();
+        log("Panel revealed");
+        return;
+      }
 
-      log(`Creating panel for: ${fileName}`);
+      const { fileName } = getEditorInfo();
+      log(`Creating global panel`);
 
-      const panel = vscode.window.createWebviewPanel(
+      globalPanel = vscode.window.createWebviewPanel(
         "idiogloss",
-        `idiogloss: ${fileName}`,
+        "idiogloss",
         vscode.ViewColumn.Beside,
         {
           enableScripts: true,
@@ -39,40 +64,52 @@ export function activate(context: vscode.ExtensionContext) {
         },
       );
 
-      log(`Panel created: ${fileName}`);
+      log(`Panel created`);
 
-      // Send updates when document changes
-      const changeListener = vscode.workspace.onDidChangeTextDocument((e) => {
-        if (document && e.document.uri.toString() === document.uri.toString()) {
-          panel.webview.postMessage({
-            type: "update",
-            fileName,
-            content: e.document.getText(),
-          });
-        }
-      });
+      // Listen for active editor changes
+      const editorChangeListener = vscode.window.onDidChangeActiveTextEditor(
+        (editor) => {
+          if (editor) {
+            const fileName =
+              editor.document.fileName.split("/").pop() ?? "Unknown";
+            log(`Active editor changed: ${fileName}`);
+            sendUpdate();
+          }
+        },
+      );
 
-      panel.onDidChangeViewState((e) => {
+      // Listen for document content changes
+      const contentChangeListener = vscode.workspace.onDidChangeTextDocument(
+        (e) => {
+          const activeDoc = vscode.window.activeTextEditor?.document;
+          if (
+            activeDoc &&
+            e.document.uri.toString() === activeDoc.uri.toString()
+          ) {
+            sendUpdate();
+          }
+        },
+      );
+
+      globalPanel.onDidChangeViewState((e) => {
         const state = e.webviewPanel.visible ? "visible" : "hidden";
-        log(`Panel ${fileName} is now ${state}`);
+        log(`Panel is now ${state}`);
       });
 
-      panel.onDidDispose(() => {
-        changeListener.dispose();
-        log(`Panel disposed: ${fileName}`);
+      globalPanel.onDidDispose(() => {
+        editorChangeListener.dispose();
+        contentChangeListener.dispose();
+        globalPanel = undefined;
+        log(`Panel disposed`);
       });
 
-      panel.webview.html = getWebviewContent(
-        panel.webview,
+      globalPanel.webview.html = getWebviewContent(
+        globalPanel.webview,
         context.extensionUri,
       );
 
-      // Send initial data to webview
-      panel.webview.postMessage({
-        type: "update",
-        fileName,
-        content,
-      });
+      // Send initial data
+      sendUpdate();
     },
   );
 
