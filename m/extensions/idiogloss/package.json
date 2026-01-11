@@ -64,7 +64,7 @@
   "packageManager": "pnpm@10.28.0",
   "devDependencies": {
     "@sveltejs/vite-plugin-svelte": "^6.2.4",
-    "@types/node": "^20.19.28",
+    "@types/node": "^25.0.6",
     "@types/vscode": "^1.107.0",
     "@vscode/vsce": "^3.7.1",
     "svelte": "^5.46.1",

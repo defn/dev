@@ -23,10 +23,10 @@ importers:
     devDependencies:
       '@sveltejs/vite-plugin-svelte':
         specifier: ^6.2.4
-        version: 6.2.4(svelte@5.46.1)(vite@7.3.1(@types/node@20.19.28)(jiti@2.6.1)(yaml@2.8.2))
+        version: 6.2.4(svelte@5.46.1)(vite@7.3.1(@types/node@25.0.6)(jiti@2.6.1)(yaml@2.8.2))
       '@types/node':
-        specifier: ^20.19.28
-        version: 20.19.28
+        specifier: ^25.0.6
+        version: 25.0.6
       '@types/vscode':
         specifier: ^1.107.0
         version: 1.107.0
@@ -41,7 +41,7 @@ importers:
         version: 5.9.3
       vite:
         specifier: ^7.3.1
-        version: 7.3.1(@types/node@20.19.28)(jiti@2.6.1)(yaml@2.8.2)
+        version: 7.3.1(@types/node@25.0.6)(jiti@2.6.1)(yaml@2.8.2)
 
   k3d/pepr:
     dependencies:
@@ -78,7 +78,7 @@ importers:
     dependencies:
       '@slidev/cli':
         specifier: ^52.10.0
-        version: 52.10.0(@babel/parser@7.28.5)(@nuxt/kit@3.20.1(magicast@0.5.1))(@types/markdown-it@14.1.2)(@types/node@25.0.5)(@vue/compiler-sfc@3.5.25)(magicast@0.5.1)(markdown-it-async@2.2.0)(postcss@8.5.6)(react@19.2.3)(svelte@5.46.1)
+        version: 52.10.0(@babel/parser@7.28.5)(@nuxt/kit@3.20.1(magicast@0.5.1))(@types/markdown-it@14.1.2)(@types/node@25.0.6)(@vue/compiler-sfc@3.5.25)(magicast@0.5.1)(markdown-it-async@2.2.0)(postcss@8.5.6)(react@19.2.3)(svelte@5.46.1)
       '@slidev/theme-default':
         specifier: ^0.25.0
         version: 0.25.0
@@ -96,13 +96,13 @@ importers:
         version: 0.9.6(prettier@3.7.3)(typescript@5.9.3)
       '@astrojs/cloudflare':
         specifier: ^12.6.12
-        version: 12.6.12(@types/node@25.0.5)(astro@5.16.8(@azure/identity@4.13.0)(@types/node@25.0.5)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2))(jiti@2.6.1)(yaml@2.8.2)
+        version: 12.6.12(@types/node@25.0.6)(astro@5.16.8(@azure/identity@4.13.0)(@types/node@25.0.6)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2))(jiti@2.6.1)(yaml@2.8.2)
       '@astrojs/sitemap':
         specifier: ^3.6.1
         version: 3.6.1
       astro:
         specifier: ^5.16.8
-        version: 5.16.8(@azure/identity@4.13.0)(@types/node@25.0.5)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2)
+        version: 5.16.8(@azure/identity@4.13.0)(@types/node@25.0.6)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2)
       sharp:
         specifier: ^0.34.5
         version: 0.34.5
@@ -120,19 +120,19 @@ importers:
         version: 0.9.6(prettier@3.7.3)(typescript@5.9.3)
       '@astrojs/cloudflare':
         specifier: ^12.6.12
-        version: 12.6.12(@types/node@25.0.5)(astro@5.16.8(@azure/identity@4.13.0)(@types/node@25.0.5)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2))(jiti@2.6.1)(yaml@2.8.2)
+        version: 12.6.12(@types/node@25.0.6)(astro@5.16.8(@azure/identity@4.13.0)(@types/node@25.0.6)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2))(jiti@2.6.1)(yaml@2.8.2)
       '@astrojs/sitemap':
         specifier: ^3.6.1
         version: 3.6.1
       '@astrojs/starlight':
         specifier: ^0.37.2
-        version: 0.37.2(astro@5.16.8(@azure/identity@4.13.0)(@types/node@25.0.5)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2))
+        version: 0.37.2(astro@5.16.8(@azure/identity@4.13.0)(@types/node@25.0.6)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2))
       '@astrojs/starlight-tailwind':
         specifier: ^4.0.2
-        version: 4.0.2(@astrojs/starlight@0.37.2(astro@5.16.8(@azure/identity@4.13.0)(@types/node@25.0.5)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2)))(tailwindcss@4.1.18)
+        version: 4.0.2(@astrojs/starlight@0.37.2(astro@5.16.8(@azure/identity@4.13.0)(@types/node@25.0.6)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2)))(tailwindcss@4.1.18)
       astro:
         specifier: ^5.16.8
-        version: 5.16.8(@azure/identity@4.13.0)(@types/node@25.0.5)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2)
+        version: 5.16.8(@azure/identity@4.13.0)(@types/node@25.0.6)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2)
       sharp:
         specifier: ^0.34.5
         version: 0.34.5
@@ -153,19 +153,19 @@ importers:
         version: 0.9.6(prettier@3.7.3)(typescript@5.9.3)
       '@astrojs/cloudflare':
         specifier: ^12.6.12
-        version: 12.6.12(@types/node@25.0.5)(astro@5.16.8(@azure/identity@4.13.0)(@types/node@25.0.5)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2))(jiti@2.6.1)(yaml@2.8.2)
+        version: 12.6.12(@types/node@25.0.6)(astro@5.16.8(@azure/identity@4.13.0)(@types/node@25.0.6)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2))(jiti@2.6.1)(yaml@2.8.2)
       '@astrojs/sitemap':
         specifier: ^3.6.1
         version: 3.6.1
       '@astrojs/starlight':
         specifier: ^0.37.2
-        version: 0.37.2(astro@5.16.8(@azure/identity@4.13.0)(@types/node@25.0.5)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2))
+        version: 0.37.2(astro@5.16.8(@azure/identity@4.13.0)(@types/node@25.0.6)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2))
       '@astrojs/starlight-tailwind':
         specifier: ^4.0.2
-        version: 4.0.2(@astrojs/starlight@0.37.2(astro@5.16.8(@azure/identity@4.13.0)(@types/node@25.0.5)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2)))(tailwindcss@4.1.18)
+        version: 4.0.2(@astrojs/starlight@0.37.2(astro@5.16.8(@azure/identity@4.13.0)(@types/node@25.0.6)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2)))(tailwindcss@4.1.18)
       astro:
         specifier: ^5.16.8
-        version: 5.16.8(@azure/identity@4.13.0)(@types/node@25.0.5)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2)
+        version: 5.16.8(@azure/identity@4.13.0)(@types/node@25.0.6)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2)
       sharp:
         specifier: ^0.34.5
         version: 0.34.5
@@ -186,19 +186,19 @@ importers:
         version: 0.9.6(prettier@3.7.3)(typescript@5.9.3)
       '@astrojs/cloudflare':
         specifier: ^12.6.12
-        version: 12.6.12(@types/node@25.0.5)(astro@5.16.8(@azure/identity@4.13.0)(@types/node@25.0.5)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2))(jiti@2.6.1)(yaml@2.8.2)
+        version: 12.6.12(@types/node@25.0.6)(astro@5.16.8(@azure/identity@4.13.0)(@types/node@25.0.6)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2))(jiti@2.6.1)(yaml@2.8.2)
       '@astrojs/sitemap':
         specifier: ^3.6.1
         version: 3.6.1
       '@astrojs/starlight':
         specifier: ^0.37.2
-        version: 0.37.2(astro@5.16.8(@azure/identity@4.13.0)(@types/node@25.0.5)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2))
+        version: 0.37.2(astro@5.16.8(@azure/identity@4.13.0)(@types/node@25.0.6)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2))
       '@astrojs/starlight-tailwind':
         specifier: ^4.0.2
-        version: 4.0.2(@astrojs/starlight@0.37.2(astro@5.16.8(@azure/identity@4.13.0)(@types/node@25.0.5)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2)))(tailwindcss@4.1.18)
+        version: 4.0.2(@astrojs/starlight@0.37.2(astro@5.16.8(@azure/identity@4.13.0)(@types/node@25.0.6)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2)))(tailwindcss@4.1.18)
       astro:
         specifier: ^5.16.8
-        version: 5.16.8(@azure/identity@4.13.0)(@types/node@25.0.5)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2)
+        version: 5.16.8(@azure/identity@4.13.0)(@types/node@25.0.6)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2)
       sharp:
         specifier: ^0.34.5
         version: 0.34.5
@@ -219,19 +219,19 @@ importers:
         version: 0.9.6(prettier@3.7.3)(typescript@5.9.3)
       '@astrojs/cloudflare':
         specifier: ^12.6.12
-        version: 12.6.12(@types/node@25.0.5)(astro@5.16.8(@azure/identity@4.13.0)(@types/node@25.0.5)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2))(jiti@2.6.1)(yaml@2.8.2)
+        version: 12.6.12(@types/node@25.0.6)(astro@5.16.8(@azure/identity@4.13.0)(@types/node@25.0.6)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2))(jiti@2.6.1)(yaml@2.8.2)
       '@astrojs/sitemap':
         specifier: ^3.6.1
         version: 3.6.1
       '@astrojs/starlight':
         specifier: ^0.37.2
-        version: 0.37.2(astro@5.16.8(@azure/identity@4.13.0)(@types/node@25.0.5)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2))
+        version: 0.37.2(astro@5.16.8(@azure/identity@4.13.0)(@types/node@25.0.6)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2))
       '@astrojs/starlight-tailwind':
         specifier: ^4.0.2
-        version: 4.0.2(@astrojs/starlight@0.37.2(astro@5.16.8(@azure/identity@4.13.0)(@types/node@25.0.5)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2)))(tailwindcss@4.1.18)
+        version: 4.0.2(@astrojs/starlight@0.37.2(astro@5.16.8(@azure/identity@4.13.0)(@types/node@25.0.6)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2)))(tailwindcss@4.1.18)
       astro:
         specifier: ^5.16.8
-        version: 5.16.8(@azure/identity@4.13.0)(@types/node@25.0.5)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2)
+        version: 5.16.8(@azure/identity@4.13.0)(@types/node@25.0.6)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2)
       sharp:
         specifier: ^0.34.5
         version: 0.34.5
@@ -252,19 +252,19 @@ importers:
         version: 0.9.6(prettier@3.7.3)(typescript@5.9.3)
       '@astrojs/cloudflare':
         specifier: ^12.6.12
-        version: 12.6.12(@types/node@25.0.5)(astro@5.16.8(@azure/identity@4.13.0)(@types/node@25.0.5)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2))(jiti@2.6.1)(yaml@2.8.2)
+        version: 12.6.12(@types/node@25.0.6)(astro@5.16.8(@azure/identity@4.13.0)(@types/node@25.0.6)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2))(jiti@2.6.1)(yaml@2.8.2)
       '@astrojs/sitemap':
         specifier: ^3.6.1
         version: 3.6.1
       '@astrojs/starlight':
         specifier: ^0.37.2
-        version: 0.37.2(astro@5.16.8(@azure/identity@4.13.0)(@types/node@25.0.5)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2))
+        version: 0.37.2(astro@5.16.8(@azure/identity@4.13.0)(@types/node@25.0.6)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2))
       '@astrojs/starlight-tailwind':
         specifier: ^4.0.2
-        version: 4.0.2(@astrojs/starlight@0.37.2(astro@5.16.8(@azure/identity@4.13.0)(@types/node@25.0.5)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2)))(tailwindcss@4.1.18)
+        version: 4.0.2(@astrojs/starlight@0.37.2(astro@5.16.8(@azure/identity@4.13.0)(@types/node@25.0.6)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2)))(tailwindcss@4.1.18)
       astro:
         specifier: ^5.16.8
-        version: 5.16.8(@azure/identity@4.13.0)(@types/node@25.0.5)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2)
+        version: 5.16.8(@azure/identity@4.13.0)(@types/node@25.0.6)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2)
       sharp:
         specifier: ^0.34.5
         version: 0.34.5
@@ -285,19 +285,19 @@ importers:
         version: 0.9.6(prettier@3.7.3)(typescript@5.9.3)
       '@astrojs/cloudflare':
         specifier: ^12.6.12
-        version: 12.6.12(@types/node@25.0.5)(astro@5.16.8(@azure/identity@4.13.0)(@types/node@25.0.5)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2))(jiti@2.6.1)(yaml@2.8.2)
+        version: 12.6.12(@types/node@25.0.6)(astro@5.16.8(@azure/identity@4.13.0)(@types/node@25.0.6)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2))(jiti@2.6.1)(yaml@2.8.2)
       '@astrojs/sitemap':
         specifier: ^3.6.1
         version: 3.6.1
       '@astrojs/starlight':
         specifier: ^0.37.2
-        version: 0.37.2(astro@5.16.8(@azure/identity@4.13.0)(@types/node@25.0.5)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2))
+        version: 0.37.2(astro@5.16.8(@azure/identity@4.13.0)(@types/node@25.0.6)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2))
       '@astrojs/starlight-tailwind':
         specifier: ^4.0.2
-        version: 4.0.2(@astrojs/starlight@0.37.2(astro@5.16.8(@azure/identity@4.13.0)(@types/node@25.0.5)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2)))(tailwindcss@4.1.18)
+        version: 4.0.2(@astrojs/starlight@0.37.2(astro@5.16.8(@azure/identity@4.13.0)(@types/node@25.0.6)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2)))(tailwindcss@4.1.18)
       astro:
         specifier: ^5.16.8
-        version: 5.16.8(@azure/identity@4.13.0)(@types/node@25.0.5)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2)
+        version: 5.16.8(@azure/identity@4.13.0)(@types/node@25.0.6)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2)
       sharp:
         specifier: ^0.34.5
         version: 0.34.5
@@ -318,19 +318,19 @@ importers:
         version: 0.9.6(prettier@3.7.3)(typescript@5.9.3)
       '@astrojs/cloudflare':
         specifier: ^12.6.12
-        version: 12.6.12(@types/node@25.0.5)(astro@5.16.8(@azure/identity@4.13.0)(@types/node@25.0.5)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2))(jiti@2.6.1)(yaml@2.8.2)
+        version: 12.6.12(@types/node@25.0.6)(astro@5.16.8(@azure/identity@4.13.0)(@types/node@25.0.6)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2))(jiti@2.6.1)(yaml@2.8.2)
       '@astrojs/sitemap':
         specifier: ^3.6.1
         version: 3.6.1
       '@astrojs/starlight':
         specifier: ^0.37.2
-        version: 0.37.2(astro@5.16.8(@azure/identity@4.13.0)(@types/node@25.0.5)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2))
+        version: 0.37.2(astro@5.16.8(@azure/identity@4.13.0)(@types/node@25.0.6)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2))
       '@astrojs/starlight-tailwind':
         specifier: ^4.0.2
-        version: 4.0.2(@astrojs/starlight@0.37.2(astro@5.16.8(@azure/identity@4.13.0)(@types/node@25.0.5)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2)))(tailwindcss@4.1.18)
+        version: 4.0.2(@astrojs/starlight@0.37.2(astro@5.16.8(@azure/identity@4.13.0)(@types/node@25.0.6)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2)))(tailwindcss@4.1.18)
       astro:
         specifier: ^5.16.8
-        version: 5.16.8(@azure/identity@4.13.0)(@types/node@25.0.5)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2)
+        version: 5.16.8(@azure/identity@4.13.0)(@types/node@25.0.6)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2)
       sharp:
         specifier: ^0.34.5
         version: 0.34.5
@@ -351,19 +351,19 @@ importers:
         version: 0.9.6(prettier@3.7.3)(typescript@5.9.3)
       '@astrojs/cloudflare':
         specifier: ^12.6.12
-        version: 12.6.12(@types/node@25.0.5)(astro@5.16.8(@azure/identity@4.13.0)(@types/node@25.0.5)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2))(jiti@2.6.1)(yaml@2.8.2)
+        version: 12.6.12(@types/node@25.0.6)(astro@5.16.8(@azure/identity@4.13.0)(@types/node@25.0.6)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2))(jiti@2.6.1)(yaml@2.8.2)
       '@astrojs/sitemap':
         specifier: ^3.6.1
         version: 3.6.1
       '@astrojs/starlight':
         specifier: ^0.37.2
-        version: 0.37.2(astro@5.16.8(@azure/identity@4.13.0)(@types/node@25.0.5)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2))
+        version: 0.37.2(astro@5.16.8(@azure/identity@4.13.0)(@types/node@25.0.6)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2))
       '@astrojs/starlight-tailwind':
         specifier: ^4.0.2
-        version: 4.0.2(@astrojs/starlight@0.37.2(astro@5.16.8(@azure/identity@4.13.0)(@types/node@25.0.5)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2)))(tailwindcss@4.1.18)
+        version: 4.0.2(@astrojs/starlight@0.37.2(astro@5.16.8(@azure/identity@4.13.0)(@types/node@25.0.6)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2)))(tailwindcss@4.1.18)
       astro:
         specifier: ^5.16.8
-        version: 5.16.8(@azure/identity@4.13.0)(@types/node@25.0.5)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2)
+        version: 5.16.8(@azure/identity@4.13.0)(@types/node@25.0.6)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2)
       sharp:
         specifier: ^0.34.5
         version: 0.34.5
@@ -384,19 +384,19 @@ importers:
         version: 0.9.6(prettier@3.7.3)(typescript@5.9.3)
       '@astrojs/cloudflare':
         specifier: ^12.6.12
-        version: 12.6.12(@types/node@25.0.5)(astro@5.16.8(@azure/identity@4.13.0)(@types/node@25.0.5)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2))(jiti@2.6.1)(yaml@2.8.2)
+        version: 12.6.12(@types/node@25.0.6)(astro@5.16.8(@azure/identity@4.13.0)(@types/node@25.0.6)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2))(jiti@2.6.1)(yaml@2.8.2)
       '@astrojs/sitemap':
         specifier: ^3.6.1
         version: 3.6.1
       '@astrojs/starlight':
         specifier: ^0.37.2
-        version: 0.37.2(astro@5.16.8(@azure/identity@4.13.0)(@types/node@25.0.5)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2))
+        version: 0.37.2(astro@5.16.8(@azure/identity@4.13.0)(@types/node@25.0.6)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2))
       '@astrojs/starlight-tailwind':
         specifier: ^4.0.2
-        version: 4.0.2(@astrojs/starlight@0.37.2(astro@5.16.8(@azure/identity@4.13.0)(@types/node@25.0.5)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2)))(tailwindcss@4.1.18)
+        version: 4.0.2(@astrojs/starlight@0.37.2(astro@5.16.8(@azure/identity@4.13.0)(@types/node@25.0.6)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2)))(tailwindcss@4.1.18)
       astro:
         specifier: ^5.16.8
-        version: 5.16.8(@azure/identity@4.13.0)(@types/node@25.0.5)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2)
+        version: 5.16.8(@azure/identity@4.13.0)(@types/node@25.0.6)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2)
       sharp:
         specifier: ^0.34.5
         version: 0.34.5
@@ -417,19 +417,19 @@ importers:
         version: 0.9.6(prettier@3.7.3)(typescript@5.9.3)
       '@astrojs/cloudflare':
         specifier: ^12.6.12
-        version: 12.6.12(@types/node@25.0.5)(astro@5.16.8(@azure/identity@4.13.0)(@types/node@25.0.5)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2))(jiti@2.6.1)(yaml@2.8.2)
+        version: 12.6.12(@types/node@25.0.6)(astro@5.16.8(@azure/identity@4.13.0)(@types/node@25.0.6)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2))(jiti@2.6.1)(yaml@2.8.2)
       '@astrojs/sitemap':
         specifier: ^3.6.1
         version: 3.6.1
       '@astrojs/starlight':
         specifier: ^0.37.2
-        version: 0.37.2(astro@5.16.8(@azure/identity@4.13.0)(@types/node@25.0.5)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2))
+        version: 0.37.2(astro@5.16.8(@azure/identity@4.13.0)(@types/node@25.0.6)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2))
       '@astrojs/starlight-tailwind':
         specifier: ^4.0.2
-        version: 4.0.2(@astrojs/starlight@0.37.2(astro@5.16.8(@azure/identity@4.13.0)(@types/node@25.0.5)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2)))(tailwindcss@4.1.18)
+        version: 4.0.2(@astrojs/starlight@0.37.2(astro@5.16.8(@azure/identity@4.13.0)(@types/node@25.0.6)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2)))(tailwindcss@4.1.18)
       astro:
         specifier: ^5.16.8
-        version: 5.16.8(@azure/identity@4.13.0)(@types/node@25.0.5)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2)
+        version: 5.16.8(@azure/identity@4.13.0)(@types/node@25.0.6)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2)
       sharp:
         specifier: ^0.34.5
         version: 0.34.5
@@ -450,19 +450,19 @@ importers:
         version: 0.9.6(prettier@3.7.3)(typescript@5.9.3)
       '@astrojs/cloudflare':
         specifier: ^12.6.12
-        version: 12.6.12(@types/node@25.0.5)(astro@5.16.8(@azure/identity@4.13.0)(@types/node@25.0.5)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2))(jiti@2.6.1)(yaml@2.8.2)
+        version: 12.6.12(@types/node@25.0.6)(astro@5.16.8(@azure/identity@4.13.0)(@types/node@25.0.6)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2))(jiti@2.6.1)(yaml@2.8.2)
       '@astrojs/sitemap':
         specifier: ^3.6.1
         version: 3.6.1
       '@astrojs/starlight':
         specifier: ^0.37.2
-        version: 0.37.2(astro@5.16.8(@azure/identity@4.13.0)(@types/node@25.0.5)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2))
+        version: 0.37.2(astro@5.16.8(@azure/identity@4.13.0)(@types/node@25.0.6)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2))
       '@astrojs/starlight-tailwind':
         specifier: ^4.0.2
-        version: 4.0.2(@astrojs/starlight@0.37.2(astro@5.16.8(@azure/identity@4.13.0)(@types/node@25.0.5)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2)))(tailwindcss@4.1.18)
+        version: 4.0.2(@astrojs/starlight@0.37.2(astro@5.16.8(@azure/identity@4.13.0)(@types/node@25.0.6)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2)))(tailwindcss@4.1.18)
       astro:
         specifier: ^5.16.8
-        version: 5.16.8(@azure/identity@4.13.0)(@types/node@25.0.5)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2)
+        version: 5.16.8(@azure/identity@4.13.0)(@types/node@25.0.6)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2)
       sharp:
         specifier: ^0.34.5
         version: 0.34.5
@@ -483,19 +483,19 @@ importers:
         version: 0.9.6(prettier@3.7.3)(typescript@5.9.3)
       '@astrojs/cloudflare':
         specifier: ^12.6.12
-        version: 12.6.12(@types/node@25.0.5)(astro@5.16.8(@azure/identity@4.13.0)(@types/node@25.0.5)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2))(jiti@2.6.1)(yaml@2.8.2)
+        version: 12.6.12(@types/node@25.0.6)(astro@5.16.8(@azure/identity@4.13.0)(@types/node@25.0.6)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2))(jiti@2.6.1)(yaml@2.8.2)
       '@astrojs/sitemap':
         specifier: ^3.6.1
         version: 3.6.1
       '@astrojs/starlight':
         specifier: ^0.37.2
-        version: 0.37.2(astro@5.16.8(@azure/identity@4.13.0)(@types/node@25.0.5)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2))
+        version: 0.37.2(astro@5.16.8(@azure/identity@4.13.0)(@types/node@25.0.6)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2))
       '@astrojs/starlight-tailwind':
         specifier: ^4.0.2
-        version: 4.0.2(@astrojs/starlight@0.37.2(astro@5.16.8(@azure/identity@4.13.0)(@types/node@25.0.5)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2)))(tailwindcss@4.1.18)
+        version: 4.0.2(@astrojs/starlight@0.37.2(astro@5.16.8(@azure/identity@4.13.0)(@types/node@25.0.6)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2)))(tailwindcss@4.1.18)
       astro:
         specifier: ^5.16.8
-        version: 5.16.8(@azure/identity@4.13.0)(@types/node@25.0.5)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2)
+        version: 5.16.8(@azure/identity@4.13.0)(@types/node@25.0.6)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2)
       sharp:
         specifier: ^0.34.5
         version: 0.34.5
@@ -516,19 +516,19 @@ importers:
         version: 0.9.6(prettier@3.7.3)(typescript@5.9.3)
       '@astrojs/cloudflare':
         specifier: ^12.6.12
-        version: 12.6.12(@types/node@25.0.5)(astro@5.16.8(@azure/identity@4.13.0)(@types/node@25.0.5)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2))(jiti@2.6.1)(yaml@2.8.2)
+        version: 12.6.12(@types/node@25.0.6)(astro@5.16.8(@azure/identity@4.13.0)(@types/node@25.0.6)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2))(jiti@2.6.1)(yaml@2.8.2)
       '@astrojs/sitemap':
         specifier: ^3.6.1
         version: 3.6.1
       '@astrojs/starlight':
         specifier: ^0.37.2
-        version: 0.37.2(astro@5.16.8(@azure/identity@4.13.0)(@types/node@25.0.5)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2))
+        version: 0.37.2(astro@5.16.8(@azure/identity@4.13.0)(@types/node@25.0.6)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2))
       '@astrojs/starlight-tailwind':
         specifier: ^4.0.2
-        version: 4.0.2(@astrojs/starlight@0.37.2(astro@5.16.8(@azure/identity@4.13.0)(@types/node@25.0.5)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2)))(tailwindcss@4.1.18)
+        version: 4.0.2(@astrojs/starlight@0.37.2(astro@5.16.8(@azure/identity@4.13.0)(@types/node@25.0.6)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2)))(tailwindcss@4.1.18)
       astro:
         specifier: ^5.16.8
-        version: 5.16.8(@azure/identity@4.13.0)(@types/node@25.0.5)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2)
+        version: 5.16.8(@azure/identity@4.13.0)(@types/node@25.0.6)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2)
       sharp:
         specifier: ^0.34.5
         version: 0.34.5
@@ -549,19 +549,19 @@ importers:
         version: 0.9.6(prettier@3.7.3)(typescript@5.9.3)
       '@astrojs/cloudflare':
         specifier: ^12.6.12
-        version: 12.6.12(@types/node@25.0.5)(astro@5.16.8(@azure/identity@4.13.0)(@types/node@25.0.5)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2))(jiti@2.6.1)(yaml@2.8.2)
+        version: 12.6.12(@types/node@25.0.6)(astro@5.16.8(@azure/identity@4.13.0)(@types/node@25.0.6)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2))(jiti@2.6.1)(yaml@2.8.2)
       '@astrojs/sitemap':
         specifier: ^3.6.1
         version: 3.6.1
       '@astrojs/starlight':
         specifier: ^0.37.2
-        version: 0.37.2(astro@5.16.8(@azure/identity@4.13.0)(@types/node@25.0.5)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2))
+        version: 0.37.2(astro@5.16.8(@azure/identity@4.13.0)(@types/node@25.0.6)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2))
       '@astrojs/starlight-tailwind':
         specifier: ^4.0.2
-        version: 4.0.2(@astrojs/starlight@0.37.2(astro@5.16.8(@azure/identity@4.13.0)(@types/node@25.0.5)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2)))(tailwindcss@4.1.18)
+        version: 4.0.2(@astrojs/starlight@0.37.2(astro@5.16.8(@azure/identity@4.13.0)(@types/node@25.0.6)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2)))(tailwindcss@4.1.18)
       astro:
         specifier: ^5.16.8
-        version: 5.16.8(@azure/identity@4.13.0)(@types/node@25.0.5)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2)
+        version: 5.16.8(@azure/identity@4.13.0)(@types/node@25.0.6)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2)
       sharp:
         specifier: ^0.34.5
         version: 0.34.5
@@ -582,19 +582,19 @@ importers:
         version: 0.9.6(prettier@3.7.3)(typescript@5.9.3)
       '@astrojs/cloudflare':
         specifier: ^12.6.12
-        version: 12.6.12(@types/node@25.0.5)(astro@5.16.8(@azure/identity@4.13.0)(@types/node@25.0.5)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2))(jiti@2.6.1)(yaml@2.8.2)
+        version: 12.6.12(@types/node@25.0.6)(astro@5.16.8(@azure/identity@4.13.0)(@types/node@25.0.6)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2))(jiti@2.6.1)(yaml@2.8.2)
       '@astrojs/sitemap':
         specifier: ^3.6.1
         version: 3.6.1
       '@astrojs/starlight':
         specifier: ^0.37.2
-        version: 0.37.2(astro@5.16.8(@azure/identity@4.13.0)(@types/node@25.0.5)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2))
+        version: 0.37.2(astro@5.16.8(@azure/identity@4.13.0)(@types/node@25.0.6)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2))
       '@astrojs/starlight-tailwind':
         specifier: ^4.0.2
-        version: 4.0.2(@astrojs/starlight@0.37.2(astro@5.16.8(@azure/identity@4.13.0)(@types/node@25.0.5)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2)))(tailwindcss@4.1.18)
+        version: 4.0.2(@astrojs/starlight@0.37.2(astro@5.16.8(@azure/identity@4.13.0)(@types/node@25.0.6)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2)))(tailwindcss@4.1.18)
       astro:
         specifier: ^5.16.8
-        version: 5.16.8(@azure/identity@4.13.0)(@types/node@25.0.5)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2)
+        version: 5.16.8(@azure/identity@4.13.0)(@types/node@25.0.6)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2)
       sharp:
         specifier: ^0.34.5
         version: 0.34.5
@@ -615,19 +615,19 @@ importers:
         version: 0.9.6(prettier@3.7.3)(typescript@5.9.3)
       '@astrojs/cloudflare':
         specifier: ^12.6.12
-        version: 12.6.12(@types/node@25.0.5)(astro@5.16.8(@azure/identity@4.13.0)(@types/node@25.0.5)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2))(jiti@2.6.1)(yaml@2.8.2)
+        version: 12.6.12(@types/node@25.0.6)(astro@5.16.8(@azure/identity@4.13.0)(@types/node@25.0.6)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2))(jiti@2.6.1)(yaml@2.8.2)
       '@astrojs/sitemap':
         specifier: ^3.6.1
         version: 3.6.1
       '@astrojs/starlight':
         specifier: ^0.37.2
-        version: 0.37.2(astro@5.16.8(@azure/identity@4.13.0)(@types/node@25.0.5)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2))
+        version: 0.37.2(astro@5.16.8(@azure/identity@4.13.0)(@types/node@25.0.6)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2))
       '@astrojs/starlight-tailwind':
         specifier: ^4.0.2
-        version: 4.0.2(@astrojs/starlight@0.37.2(astro@5.16.8(@azure/identity@4.13.0)(@types/node@25.0.5)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2)))(tailwindcss@4.1.18)
+        version: 4.0.2(@astrojs/starlight@0.37.2(astro@5.16.8(@azure/identity@4.13.0)(@types/node@25.0.6)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2)))(tailwindcss@4.1.18)
       astro:
         specifier: ^5.16.8
-        version: 5.16.8(@azure/identity@4.13.0)(@types/node@25.0.5)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2)
+        version: 5.16.8(@azure/identity@4.13.0)(@types/node@25.0.6)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2)
       sharp:
         specifier: ^0.34.5
         version: 0.34.5
@@ -648,19 +648,19 @@ importers:
         version: 0.9.6(prettier@3.7.3)(typescript@5.9.3)
       '@astrojs/cloudflare':
         specifier: ^12.6.12
-        version: 12.6.12(@types/node@25.0.5)(astro@5.16.8(@azure/identity@4.13.0)(@types/node@25.0.5)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2))(jiti@2.6.1)(yaml@2.8.2)
+        version: 12.6.12(@types/node@25.0.6)(astro@5.16.8(@azure/identity@4.13.0)(@types/node@25.0.6)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2))(jiti@2.6.1)(yaml@2.8.2)
       '@astrojs/sitemap':
         specifier: ^3.6.1
         version: 3.6.1
       '@astrojs/starlight':
         specifier: ^0.37.2
-        version: 0.37.2(astro@5.16.8(@azure/identity@4.13.0)(@types/node@25.0.5)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2))
+        version: 0.37.2(astro@5.16.8(@azure/identity@4.13.0)(@types/node@25.0.6)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2))
       '@astrojs/starlight-tailwind':
         specifier: ^4.0.2
-        version: 4.0.2(@astrojs/starlight@0.37.2(astro@5.16.8(@azure/identity@4.13.0)(@types/node@25.0.5)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2)))(tailwindcss@4.1.18)
+        version: 4.0.2(@astrojs/starlight@0.37.2(astro@5.16.8(@azure/identity@4.13.0)(@types/node@25.0.6)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2)))(tailwindcss@4.1.18)
       astro:
         specifier: ^5.16.8
-        version: 5.16.8(@azure/identity@4.13.0)(@types/node@25.0.5)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2)
+        version: 5.16.8(@azure/identity@4.13.0)(@types/node@25.0.6)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2)
       sharp:
         specifier: ^0.34.5
         version: 0.34.5
@@ -681,19 +681,19 @@ importers:
         version: 0.9.6(prettier@3.7.3)(typescript@5.9.3)
       '@astrojs/cloudflare':
         specifier: ^12.6.12
-        version: 12.6.12(@types/node@25.0.5)(astro@5.16.8(@azure/identity@4.13.0)(@types/node@25.0.5)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2))(jiti@2.6.1)(yaml@2.8.2)
+        version: 12.6.12(@types/node@25.0.6)(astro@5.16.8(@azure/identity@4.13.0)(@types/node@25.0.6)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2))(jiti@2.6.1)(yaml@2.8.2)
       '@astrojs/sitemap':
         specifier: ^3.6.1
         version: 3.6.1
       '@astrojs/starlight':
         specifier: ^0.37.2
-        version: 0.37.2(astro@5.16.8(@azure/identity@4.13.0)(@types/node@25.0.5)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2))
+        version: 0.37.2(astro@5.16.8(@azure/identity@4.13.0)(@types/node@25.0.6)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2))
       '@astrojs/starlight-tailwind':
         specifier: ^4.0.2
-        version: 4.0.2(@astrojs/starlight@0.37.2(astro@5.16.8(@azure/identity@4.13.0)(@types/node@25.0.5)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2)))(tailwindcss@4.1.18)
+        version: 4.0.2(@astrojs/starlight@0.37.2(astro@5.16.8(@azure/identity@4.13.0)(@types/node@25.0.6)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2)))(tailwindcss@4.1.18)
       astro:
         specifier: ^5.16.8
-        version: 5.16.8(@azure/identity@4.13.0)(@types/node@25.0.5)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2)
+        version: 5.16.8(@azure/identity@4.13.0)(@types/node@25.0.6)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2)
       sharp:
         specifier: ^0.34.5
         version: 0.34.5
@@ -714,19 +714,19 @@ importers:
         version: 0.9.6(prettier@3.7.3)(typescript@5.9.3)
       '@astrojs/cloudflare':
         specifier: ^12.6.12
-        version: 12.6.12(@types/node@25.0.5)(astro@5.16.8(@azure/identity@4.13.0)(@types/node@25.0.5)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2))(jiti@2.6.1)(yaml@2.8.2)
+        version: 12.6.12(@types/node@25.0.6)(astro@5.16.8(@azure/identity@4.13.0)(@types/node@25.0.6)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2))(jiti@2.6.1)(yaml@2.8.2)
       '@astrojs/sitemap':
         specifier: ^3.6.1
         version: 3.6.1
       '@astrojs/starlight':
         specifier: ^0.37.2
-        version: 0.37.2(astro@5.16.8(@azure/identity@4.13.0)(@types/node@25.0.5)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2))
+        version: 0.37.2(astro@5.16.8(@azure/identity@4.13.0)(@types/node@25.0.6)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2))
       '@astrojs/starlight-tailwind':
         specifier: ^4.0.2
-        version: 4.0.2(@astrojs/starlight@0.37.2(astro@5.16.8(@azure/identity@4.13.0)(@types/node@25.0.5)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2)))(tailwindcss@4.1.18)
+        version: 4.0.2(@astrojs/starlight@0.37.2(astro@5.16.8(@azure/identity@4.13.0)(@types/node@25.0.6)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2)))(tailwindcss@4.1.18)
       astro:
         specifier: ^5.16.8
-        version: 5.16.8(@azure/identity@4.13.0)(@types/node@25.0.5)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2)
+        version: 5.16.8(@azure/identity@4.13.0)(@types/node@25.0.6)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2)
       sharp:
         specifier: ^0.34.5
         version: 0.34.5
@@ -747,19 +747,19 @@ importers:
         version: 0.9.6(prettier@3.7.3)(typescript@5.9.3)
       '@astrojs/cloudflare':
         specifier: ^12.6.12
-        version: 12.6.12(@types/node@25.0.5)(astro@5.16.8(@azure/identity@4.13.0)(@types/node@25.0.5)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2))(jiti@2.6.1)(yaml@2.8.2)
+        version: 12.6.12(@types/node@25.0.6)(astro@5.16.8(@azure/identity@4.13.0)(@types/node@25.0.6)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2))(jiti@2.6.1)(yaml@2.8.2)
       '@astrojs/sitemap':
         specifier: ^3.6.1
         version: 3.6.1
       '@astrojs/starlight':
         specifier: ^0.37.2
-        version: 0.37.2(astro@5.16.8(@azure/identity@4.13.0)(@types/node@25.0.5)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2))
+        version: 0.37.2(astro@5.16.8(@azure/identity@4.13.0)(@types/node@25.0.6)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2))
       '@astrojs/starlight-tailwind':
         specifier: ^4.0.2
-        version: 4.0.2(@astrojs/starlight@0.37.2(astro@5.16.8(@azure/identity@4.13.0)(@types/node@25.0.5)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2)))(tailwindcss@4.1.18)
+        version: 4.0.2(@astrojs/starlight@0.37.2(astro@5.16.8(@azure/identity@4.13.0)(@types/node@25.0.6)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2)))(tailwindcss@4.1.18)
       astro:
         specifier: ^5.16.8
-        version: 5.16.8(@azure/identity@4.13.0)(@types/node@25.0.5)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2)
+        version: 5.16.8(@azure/identity@4.13.0)(@types/node@25.0.6)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2)
       sharp:
         specifier: ^0.34.5
         version: 0.34.5
@@ -780,19 +780,19 @@ importers:
         version: 0.9.6(prettier@3.7.3)(typescript@5.9.3)
       '@astrojs/cloudflare':
         specifier: ^12.6.12
-        version: 12.6.12(@types/node@25.0.5)(astro@5.16.8(@azure/identity@4.13.0)(@types/node@25.0.5)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2))(jiti@2.6.1)(yaml@2.8.2)
+        version: 12.6.12(@types/node@25.0.6)(astro@5.16.8(@azure/identity@4.13.0)(@types/node@25.0.6)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2))(jiti@2.6.1)(yaml@2.8.2)
       '@astrojs/sitemap':
         specifier: ^3.6.1
         version: 3.6.1
       '@astrojs/starlight':
         specifier: ^0.37.2
-        version: 0.37.2(astro@5.16.8(@azure/identity@4.13.0)(@types/node@25.0.5)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2))
+        version: 0.37.2(astro@5.16.8(@azure/identity@4.13.0)(@types/node@25.0.6)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2))
       '@astrojs/starlight-tailwind':
         specifier: ^4.0.2
-        version: 4.0.2(@astrojs/starlight@0.37.2(astro@5.16.8(@azure/identity@4.13.0)(@types/node@25.0.5)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2)))(tailwindcss@4.1.18)
+        version: 4.0.2(@astrojs/starlight@0.37.2(astro@5.16.8(@azure/identity@4.13.0)(@types/node@25.0.6)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2)))(tailwindcss@4.1.18)
       astro:
         specifier: ^5.16.8
-        version: 5.16.8(@azure/identity@4.13.0)(@types/node@25.0.5)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2)
+        version: 5.16.8(@azure/identity@4.13.0)(@types/node@25.0.6)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2)
       sharp:
         specifier: ^0.34.5
         version: 0.34.5
@@ -813,19 +813,19 @@ importers:
         version: 0.9.6(prettier@3.7.3)(typescript@5.9.3)
       '@astrojs/cloudflare':
         specifier: ^12.6.12
-        version: 12.6.12(@types/node@25.0.5)(astro@5.16.8(@azure/identity@4.13.0)(@types/node@25.0.5)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2))(jiti@2.6.1)(yaml@2.8.2)
+        version: 12.6.12(@types/node@25.0.6)(astro@5.16.8(@azure/identity@4.13.0)(@types/node@25.0.6)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2))(jiti@2.6.1)(yaml@2.8.2)
       '@astrojs/sitemap':
         specifier: ^3.6.1
         version: 3.6.1
       '@astrojs/starlight':
         specifier: ^0.37.2
-        version: 0.37.2(astro@5.16.8(@azure/identity@4.13.0)(@types/node@25.0.5)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2))
+        version: 0.37.2(astro@5.16.8(@azure/identity@4.13.0)(@types/node@25.0.6)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2))
       '@astrojs/starlight-tailwind':
         specifier: ^4.0.2
-        version: 4.0.2(@astrojs/starlight@0.37.2(astro@5.16.8(@azure/identity@4.13.0)(@types/node@25.0.5)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2)))(tailwindcss@4.1.18)
+        version: 4.0.2(@astrojs/starlight@0.37.2(astro@5.16.8(@azure/identity@4.13.0)(@types/node@25.0.6)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2)))(tailwindcss@4.1.18)
       astro:
         specifier: ^5.16.8
-        version: 5.16.8(@azure/identity@4.13.0)(@types/node@25.0.5)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2)
+        version: 5.16.8(@azure/identity@4.13.0)(@types/node@25.0.6)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2)
       sharp:
         specifier: ^0.34.5
         version: 0.34.5
@@ -846,19 +846,19 @@ importers:
         version: 0.9.6(prettier@3.7.3)(typescript@5.9.3)
       '@astrojs/cloudflare':
         specifier: ^12.6.12
-        version: 12.6.12(@types/node@25.0.5)(astro@5.16.8(@azure/identity@4.13.0)(@types/node@25.0.5)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2))(jiti@2.6.1)(yaml@2.8.2)
+        version: 12.6.12(@types/node@25.0.6)(astro@5.16.8(@azure/identity@4.13.0)(@types/node@25.0.6)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2))(jiti@2.6.1)(yaml@2.8.2)
       '@astrojs/sitemap':
         specifier: ^3.6.1
         version: 3.6.1
       '@astrojs/starlight':
         specifier: ^0.37.2
-        version: 0.37.2(astro@5.16.8(@azure/identity@4.13.0)(@types/node@25.0.5)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2))
+        version: 0.37.2(astro@5.16.8(@azure/identity@4.13.0)(@types/node@25.0.6)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2))
       '@astrojs/starlight-tailwind':
         specifier: ^4.0.2
-        version: 4.0.2(@astrojs/starlight@0.37.2(astro@5.16.8(@azure/identity@4.13.0)(@types/node@25.0.5)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2)))(tailwindcss@4.1.18)
+        version: 4.0.2(@astrojs/starlight@0.37.2(astro@5.16.8(@azure/identity@4.13.0)(@types/node@25.0.6)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2)))(tailwindcss@4.1.18)
       astro:
         specifier: ^5.16.8
-        version: 5.16.8(@azure/identity@4.13.0)(@types/node@25.0.5)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2)
+        version: 5.16.8(@azure/identity@4.13.0)(@types/node@25.0.6)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2)
       sharp:
         specifier: ^0.34.5
         version: 0.34.5
@@ -879,19 +879,19 @@ importers:
         version: 0.9.6(prettier@3.7.3)(typescript@5.9.3)
       '@astrojs/cloudflare':
         specifier: ^12.6.12
-        version: 12.6.12(@types/node@25.0.5)(astro@5.16.8(@azure/identity@4.13.0)(@types/node@25.0.5)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2))(jiti@2.6.1)(yaml@2.8.2)
+        version: 12.6.12(@types/node@25.0.6)(astro@5.16.8(@azure/identity@4.13.0)(@types/node@25.0.6)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2))(jiti@2.6.1)(yaml@2.8.2)
       '@astrojs/sitemap':
         specifier: ^3.6.1
         version: 3.6.1
       '@astrojs/starlight':
         specifier: ^0.37.2
-        version: 0.37.2(astro@5.16.8(@azure/identity@4.13.0)(@types/node@25.0.5)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2))
+        version: 0.37.2(astro@5.16.8(@azure/identity@4.13.0)(@types/node@25.0.6)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2))
       '@astrojs/starlight-tailwind':
         specifier: ^4.0.2
-        version: 4.0.2(@astrojs/starlight@0.37.2(astro@5.16.8(@azure/identity@4.13.0)(@types/node@25.0.5)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2)))(tailwindcss@4.1.18)
+        version: 4.0.2(@astrojs/starlight@0.37.2(astro@5.16.8(@azure/identity@4.13.0)(@types/node@25.0.6)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2)))(tailwindcss@4.1.18)
       astro:
         specifier: ^5.16.8
-        version: 5.16.8(@azure/identity@4.13.0)(@types/node@25.0.5)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2)
+        version: 5.16.8(@azure/identity@4.13.0)(@types/node@25.0.6)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2)
       sharp:
         specifier: ^0.34.5
         version: 0.34.5
@@ -912,19 +912,19 @@ importers:
         version: 0.9.6(prettier@3.7.3)(typescript@5.9.3)
       '@astrojs/cloudflare':
         specifier: ^12.6.12
-        version: 12.6.12(@types/node@25.0.5)(astro@5.16.8(@azure/identity@4.13.0)(@types/node@25.0.5)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2))(jiti@2.6.1)(yaml@2.8.2)
+        version: 12.6.12(@types/node@25.0.6)(astro@5.16.8(@azure/identity@4.13.0)(@types/node@25.0.6)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2))(jiti@2.6.1)(yaml@2.8.2)
       '@astrojs/sitemap':
         specifier: ^3.6.1
         version: 3.6.1
       '@astrojs/starlight':
         specifier: ^0.37.2
-        version: 0.37.2(astro@5.16.8(@azure/identity@4.13.0)(@types/node@25.0.5)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2))
+        version: 0.37.2(astro@5.16.8(@azure/identity@4.13.0)(@types/node@25.0.6)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2))
       '@astrojs/starlight-tailwind':
         specifier: ^4.0.2
-        version: 4.0.2(@astrojs/starlight@0.37.2(astro@5.16.8(@azure/identity@4.13.0)(@types/node@25.0.5)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2)))(tailwindcss@4.1.18)
+        version: 4.0.2(@astrojs/starlight@0.37.2(astro@5.16.8(@azure/identity@4.13.0)(@types/node@25.0.6)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2)))(tailwindcss@4.1.18)
       astro:
         specifier: ^5.16.8
-        version: 5.16.8(@azure/identity@4.13.0)(@types/node@25.0.5)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2)
+        version: 5.16.8(@azure/identity@4.13.0)(@types/node@25.0.6)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2)
       sharp:
         specifier: ^0.34.5
         version: 0.34.5
@@ -945,19 +945,19 @@ importers:
         version: 0.9.6(prettier@3.7.3)(typescript@5.9.3)
       '@astrojs/cloudflare':
         specifier: ^12.6.12
-        version: 12.6.12(@types/node@25.0.5)(astro@5.16.8(@azure/identity@4.13.0)(@types/node@25.0.5)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2))(jiti@2.6.1)(yaml@2.8.2)
+        version: 12.6.12(@types/node@25.0.6)(astro@5.16.8(@azure/identity@4.13.0)(@types/node@25.0.6)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2))(jiti@2.6.1)(yaml@2.8.2)
       '@astrojs/sitemap':
         specifier: ^3.6.1
         version: 3.6.1
       '@astrojs/starlight':
         specifier: ^0.37.2
-        version: 0.37.2(astro@5.16.8(@azure/identity@4.13.0)(@types/node@25.0.5)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2))
+        version: 0.37.2(astro@5.16.8(@azure/identity@4.13.0)(@types/node@25.0.6)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2))
       '@astrojs/starlight-tailwind':
         specifier: ^4.0.2
-        version: 4.0.2(@astrojs/starlight@0.37.2(astro@5.16.8(@azure/identity@4.13.0)(@types/node@25.0.5)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2)))(tailwindcss@4.1.18)
+        version: 4.0.2(@astrojs/starlight@0.37.2(astro@5.16.8(@azure/identity@4.13.0)(@types/node@25.0.6)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2)))(tailwindcss@4.1.18)
       astro:
         specifier: ^5.16.8
-        version: 5.16.8(@azure/identity@4.13.0)(@types/node@25.0.5)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2)
+        version: 5.16.8(@azure/identity@4.13.0)(@types/node@25.0.6)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2)
       sharp:
         specifier: ^0.34.5
         version: 0.34.5
@@ -978,19 +978,19 @@ importers:
         version: 0.9.6(prettier@3.7.3)(typescript@5.9.3)
       '@astrojs/cloudflare':
         specifier: ^12.6.12
-        version: 12.6.12(@types/node@25.0.5)(astro@5.16.8(@azure/identity@4.13.0)(@types/node@25.0.5)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2))(jiti@2.6.1)(yaml@2.8.2)
+        version: 12.6.12(@types/node@25.0.6)(astro@5.16.8(@azure/identity@4.13.0)(@types/node@25.0.6)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2))(jiti@2.6.1)(yaml@2.8.2)
       '@astrojs/sitemap':
         specifier: ^3.6.1
         version: 3.6.1
       '@astrojs/starlight':
         specifier: ^0.37.2
-        version: 0.37.2(astro@5.16.8(@azure/identity@4.13.0)(@types/node@25.0.5)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2))
+        version: 0.37.2(astro@5.16.8(@azure/identity@4.13.0)(@types/node@25.0.6)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2))
       '@astrojs/starlight-tailwind':
         specifier: ^4.0.2
-        version: 4.0.2(@astrojs/starlight@0.37.2(astro@5.16.8(@azure/identity@4.13.0)(@types/node@25.0.5)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2)))(tailwindcss@4.1.18)
+        version: 4.0.2(@astrojs/starlight@0.37.2(astro@5.16.8(@azure/identity@4.13.0)(@types/node@25.0.6)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2)))(tailwindcss@4.1.18)
       astro:
         specifier: ^5.16.8
-        version: 5.16.8(@azure/identity@4.13.0)(@types/node@25.0.5)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2)
+        version: 5.16.8(@azure/identity@4.13.0)(@types/node@25.0.6)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2)
       sharp:
         specifier: ^0.34.5
         version: 0.34.5
@@ -3287,23 +3287,17 @@ packages:
   '@types/node@17.0.45':
     resolution: {integrity: sha512-w+tIMs3rq2afQdsPJlODhoUEKzFP1ayaoyl1CcnwtIlsVe7K7bA1NGm4s3PraqTLlXnbIN84zuBlxBWo1u9BLw==}
 
-  '@types/node@20.19.28':
-    resolution: {integrity: sha512-VyKBr25BuFDzBFCK5sUM6ZXiWfqgCTwTAOK8qzGV/m9FCirXYDlmczJ+d5dXBAQALGCdRRdbteKYfJ84NGEusw==}
-
   '@types/node@22.19.1':
     resolution: {integrity: sha512-LCCV0HdSZZZb34qifBsyWlUmok6W7ouER+oQIGBScS8EsZsQbrtFTUrDX4hOl+CS6p7cnNC4td+qrSVGSCTUfQ==}
 
   '@types/node@24.10.1':
     resolution: {integrity: sha512-GNWcUTRBgIRJD5zj+Tq0fKOJ5XZajIiBroOF0yvj2bSU1WvNdYS/dn9UxwsujGW4JX06dnHyjV2y9rRaybH0iQ==}
 
-  '@types/node@24.10.6':
-    resolution: {integrity: sha512-B8h60xgJMR/xmgyX9fncRzEW9gCxoJjdenUhke2v1JGOd/V66KopmWrLPXi5oUI4VuiGK+d+HlXJjDRZMj21EQ==}
-
   '@types/node@24.10.7':
     resolution: {integrity: sha512-+054pVMzVTmRQV8BhpGv3UyfZ2Llgl8rdpDTon+cUH9+na0ncBVXj3wTUKh14+Kiz18ziM3b4ikpP5/Pc0rQEQ==}
 
-  '@types/node@25.0.5':
-    resolution: {integrity: sha512-FuLxeLuSVOqHPxSN1fkcD8DLU21gAP7nCKqGRJ/FglbCUBs0NYN6TpHcdmyLeh8C0KwGIaZQJSv+OYG+KZz+Gw==}
+  '@types/node@25.0.6':
+    resolution: {integrity: sha512-NNu0sjyNxpoiW3YuVFfNz7mxSQ+S4X2G28uqg2s+CzoqoQjLPsWSbsFFyztIAqt2vb8kfEAsJNepMGPTxFDx3Q==}
 
   '@types/normalize-package-data@2.4.4':
     resolution: {integrity: sha512-37i+OaWTh9qeK4LSHPsyRC7NahnGotNuZvjLSgcPzblpHB3rrCJxAOgI5gCdKm7coonsaX1Of0ILiTcnZjbfxA==}
@@ -8430,14 +8424,14 @@ snapshots:
       - prettier
       - prettier-plugin-astro
 
-  '@astrojs/cloudflare@12.6.12(@types/node@25.0.5)(astro@5.16.8(@azure/identity@4.13.0)(@types/node@25.0.5)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2))(jiti@2.6.1)(yaml@2.8.2)':
+  '@astrojs/cloudflare@12.6.12(@types/node@25.0.6)(astro@5.16.8(@azure/identity@4.13.0)(@types/node@25.0.6)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2))(jiti@2.6.1)(yaml@2.8.2)':
     dependencies:
       '@astrojs/internal-helpers': 0.7.5
       '@astrojs/underscore-redirects': 1.0.0
       '@cloudflare/workers-types': 4.20251128.0
-      astro: 5.16.8(@azure/identity@4.13.0)(@types/node@25.0.5)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2)
+      astro: 5.16.8(@azure/identity@4.13.0)(@types/node@25.0.6)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2)
       tinyglobby: 0.2.15
-      vite: 6.4.1(@types/node@25.0.5)(jiti@2.6.1)(yaml@2.8.2)
+      vite: 6.4.1(@types/node@25.0.6)(jiti@2.6.1)(yaml@2.8.2)
       wrangler: 4.50.0(@cloudflare/workers-types@4.20251128.0)
     transitivePeerDependencies:
       - '@types/node'
@@ -8509,12 +8503,12 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@astrojs/mdx@4.3.13(astro@5.16.8(@azure/identity@4.13.0)(@types/node@25.0.5)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2))':
+  '@astrojs/mdx@4.3.13(astro@5.16.8(@azure/identity@4.13.0)(@types/node@25.0.6)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2))':
     dependencies:
       '@astrojs/markdown-remark': 6.3.10
       '@mdx-js/mdx': 3.1.1
       acorn: 8.15.0
-      astro: 5.16.8(@azure/identity@4.13.0)(@types/node@25.0.5)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2)
+      astro: 5.16.8(@azure/identity@4.13.0)(@types/node@25.0.6)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2)
       es-module-lexer: 1.7.0
       estree-util-visit: 2.0.0
       hast-util-to-html: 9.0.5
@@ -8538,22 +8532,22 @@ snapshots:
       stream-replace-string: 2.0.0
       zod: 3.25.76
 
-  '@astrojs/starlight-tailwind@4.0.2(@astrojs/starlight@0.37.2(astro@5.16.8(@azure/identity@4.13.0)(@types/node@25.0.5)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2)))(tailwindcss@4.1.18)':
+  '@astrojs/starlight-tailwind@4.0.2(@astrojs/starlight@0.37.2(astro@5.16.8(@azure/identity@4.13.0)(@types/node@25.0.6)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2)))(tailwindcss@4.1.18)':
     dependencies:
-      '@astrojs/starlight': 0.37.2(astro@5.16.8(@azure/identity@4.13.0)(@types/node@25.0.5)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2))
+      '@astrojs/starlight': 0.37.2(astro@5.16.8(@azure/identity@4.13.0)(@types/node@25.0.6)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2))
       tailwindcss: 4.1.18
 
-  '@astrojs/starlight@0.37.2(astro@5.16.8(@azure/identity@4.13.0)(@types/node@25.0.5)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2))':
+  '@astrojs/starlight@0.37.2(astro@5.16.8(@azure/identity@4.13.0)(@types/node@25.0.6)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2))':
     dependencies:
       '@astrojs/markdown-remark': 6.3.10
-      '@astrojs/mdx': 4.3.13(astro@5.16.8(@azure/identity@4.13.0)(@types/node@25.0.5)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2))
+      '@astrojs/mdx': 4.3.13(astro@5.16.8(@azure/identity@4.13.0)(@types/node@25.0.6)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2))
       '@astrojs/sitemap': 3.6.1
       '@pagefind/default-ui': 1.4.0
       '@types/hast': 3.0.4
       '@types/js-yaml': 4.0.9
       '@types/mdast': 4.0.4
-      astro: 5.16.8(@azure/identity@4.13.0)(@types/node@25.0.5)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2)
-      astro-expressive-code: 0.41.5(astro@5.16.8(@azure/identity@4.13.0)(@types/node@25.0.5)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2))
+      astro: 5.16.8(@azure/identity@4.13.0)(@types/node@25.0.6)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2)
+      astro-expressive-code: 0.41.5(astro@5.16.8(@azure/identity@4.13.0)(@types/node@25.0.6)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2))
       bcp-47: 2.1.0
       hast-util-from-html: 2.0.3
       hast-util-select: 6.0.4
@@ -9697,7 +9691,7 @@ snapshots:
   '@kubernetes/client-node@1.4.0':
     dependencies:
       '@types/js-yaml': 4.0.9
-      '@types/node': 24.10.6
+      '@types/node': 24.10.7
       '@types/node-fetch': 2.6.13
       '@types/stream-buffers': 3.0.8
       form-data: 4.0.5
@@ -10380,7 +10374,7 @@ snapshots:
 
   '@sindresorhus/merge-streams@2.3.0': {}
 
-  '@slidev/cli@52.10.0(@babel/parser@7.28.5)(@nuxt/kit@3.20.1(magicast@0.5.1))(@types/markdown-it@14.1.2)(@types/node@25.0.5)(@vue/compiler-sfc@3.5.25)(magicast@0.5.1)(markdown-it-async@2.2.0)(postcss@8.5.6)(react@19.2.3)(svelte@5.46.1)':
+  '@slidev/cli@52.10.0(@babel/parser@7.28.5)(@nuxt/kit@3.20.1(magicast@0.5.1))(@types/markdown-it@14.1.2)(@types/node@25.0.6)(@vue/compiler-sfc@3.5.25)(magicast@0.5.1)(markdown-it-async@2.2.0)(postcss@8.5.6)(react@19.2.3)(svelte@5.46.1)':
     dependencies:
       '@antfu/ni': 27.0.1
       '@antfu/utils': 9.3.0
@@ -10391,13 +10385,13 @@ snapshots:
       '@shikijs/markdown-it': 3.17.0(markdown-it-async@2.2.0)
       '@shikijs/twoslash': 3.17.0(typescript@5.9.3)
       '@shikijs/vitepress-twoslash': 3.17.0(@nuxt/kit@3.20.1(magicast@0.5.1))(typescript@5.9.3)
-      '@slidev/client': 52.10.0(@nuxt/kit@3.20.1(magicast@0.5.1))(@vue/compiler-sfc@3.5.25)(magicast@0.5.1)(markdown-it-async@2.2.0)(postcss@8.5.6)(react@19.2.3)(svelte@5.46.1)(vite@7.2.4(@types/node@25.0.5)(jiti@2.6.1)(yaml@2.8.1))
-      '@slidev/parser': 52.10.0(@nuxt/kit@3.20.1(magicast@0.5.1))(@vue/compiler-sfc@3.5.25)(markdown-it-async@2.2.0)(postcss@8.5.6)(svelte@5.46.1)(typescript@5.9.3)(vite@7.2.4(@types/node@25.0.5)(jiti@2.6.1)(yaml@2.8.1))
-      '@slidev/types': 52.10.0(@nuxt/kit@3.20.1(magicast@0.5.1))(@vue/compiler-sfc@3.5.25)(markdown-it-async@2.2.0)(postcss@8.5.6)(svelte@5.46.1)(typescript@5.9.3)(vite@7.2.4(@types/node@25.0.5)(jiti@2.6.1)(yaml@2.8.1))
+      '@slidev/client': 52.10.0(@nuxt/kit@3.20.1(magicast@0.5.1))(@vue/compiler-sfc@3.5.25)(magicast@0.5.1)(markdown-it-async@2.2.0)(postcss@8.5.6)(react@19.2.3)(svelte@5.46.1)(vite@7.2.4(@types/node@25.0.6)(jiti@2.6.1)(yaml@2.8.1))
+      '@slidev/parser': 52.10.0(@nuxt/kit@3.20.1(magicast@0.5.1))(@vue/compiler-sfc@3.5.25)(markdown-it-async@2.2.0)(postcss@8.5.6)(svelte@5.46.1)(typescript@5.9.3)(vite@7.2.4(@types/node@25.0.6)(jiti@2.6.1)(yaml@2.8.1))
+      '@slidev/types': 52.10.0(@nuxt/kit@3.20.1(magicast@0.5.1))(@vue/compiler-sfc@3.5.25)(markdown-it-async@2.2.0)(postcss@8.5.6)(svelte@5.46.1)(typescript@5.9.3)(vite@7.2.4(@types/node@25.0.6)(jiti@2.6.1)(yaml@2.8.1))
       '@unocss/extractor-mdc': 66.5.9
       '@unocss/reset': 66.5.9
-      '@vitejs/plugin-vue': 6.0.2(vite@7.2.4(@types/node@25.0.5)(jiti@2.6.1)(yaml@2.8.1))(vue@3.5.25(typescript@5.9.3))
-      '@vitejs/plugin-vue-jsx': 5.1.2(vite@7.2.4(@types/node@25.0.5)(jiti@2.6.1)(yaml@2.8.1))(vue@3.5.25(typescript@5.9.3))
+      '@vitejs/plugin-vue': 6.0.2(vite@7.2.4(@types/node@25.0.6)(jiti@2.6.1)(yaml@2.8.1))(vue@3.5.25(typescript@5.9.3))
+      '@vitejs/plugin-vue-jsx': 5.1.2(vite@7.2.4(@types/node@25.0.6)(jiti@2.6.1)(yaml@2.8.1))(vue@3.5.25(typescript@5.9.3))
       ansis: 4.2.0
       chokidar: 4.0.3
       cli-progress: 3.12.0
@@ -10437,18 +10431,18 @@ snapshots:
       source-map-js: 1.2.1
       typescript: 5.9.3
       unhead: 2.0.19
-      unocss: 66.5.9(postcss@8.5.6)(vite@7.2.4(@types/node@25.0.5)(jiti@2.6.1)(yaml@2.8.1))
+      unocss: 66.5.9(postcss@8.5.6)(vite@7.2.4(@types/node@25.0.6)(jiti@2.6.1)(yaml@2.8.1))
       unplugin-icons: 22.5.0(@vue/compiler-sfc@3.5.25)(svelte@5.46.1)
       unplugin-vue-components: 30.0.0(@babel/parser@7.28.5)(@nuxt/kit@3.20.1(magicast@0.5.1))(vue@3.5.25(typescript@5.9.3))
-      unplugin-vue-markdown: 29.2.0(vite@7.2.4(@types/node@25.0.5)(jiti@2.6.1)(yaml@2.8.1))
+      unplugin-vue-markdown: 29.2.0(vite@7.2.4(@types/node@25.0.6)(jiti@2.6.1)(yaml@2.8.1))
       untun: 0.1.3
       uqr: 0.1.2
-      vite: 7.2.4(@types/node@25.0.5)(jiti@2.6.1)(yaml@2.8.1)
-      vite-plugin-inspect: 11.3.3(@nuxt/kit@3.20.1(magicast@0.5.1))(vite@7.2.4(@types/node@25.0.5)(jiti@2.6.1)(yaml@2.8.1))
-      vite-plugin-remote-assets: 2.1.0(vite@7.2.4(@types/node@25.0.5)(jiti@2.6.1)(yaml@2.8.1))
-      vite-plugin-static-copy: 3.1.4(vite@7.2.4(@types/node@25.0.5)(jiti@2.6.1)(yaml@2.8.1))
-      vite-plugin-vue-server-ref: 1.0.0(vite@7.2.4(@types/node@25.0.5)(jiti@2.6.1)(yaml@2.8.1))(vue@3.5.25(typescript@5.9.3))
-      vitefu: 1.1.1(vite@7.2.4(@types/node@25.0.5)(jiti@2.6.1)(yaml@2.8.1))
+      vite: 7.2.4(@types/node@25.0.6)(jiti@2.6.1)(yaml@2.8.1)
+      vite-plugin-inspect: 11.3.3(@nuxt/kit@3.20.1(magicast@0.5.1))(vite@7.2.4(@types/node@25.0.6)(jiti@2.6.1)(yaml@2.8.1))
+      vite-plugin-remote-assets: 2.1.0(vite@7.2.4(@types/node@25.0.6)(jiti@2.6.1)(yaml@2.8.1))
+      vite-plugin-static-copy: 3.1.4(vite@7.2.4(@types/node@25.0.6)(jiti@2.6.1)(yaml@2.8.1))
+      vite-plugin-vue-server-ref: 1.0.0(vite@7.2.4(@types/node@25.0.6)(jiti@2.6.1)(yaml@2.8.1))(vue@3.5.25(typescript@5.9.3))
+      vitefu: 1.1.1(vite@7.2.4(@types/node@25.0.6)(jiti@2.6.1)(yaml@2.8.1))
       vue: 3.5.25(typescript@5.9.3)
       yaml: 2.8.1
       yargs: 18.0.0
@@ -10479,7 +10473,7 @@ snapshots:
       - vue-template-compiler
       - vue-template-es2015-compiler
 
-  '@slidev/client@52.10.0(@nuxt/kit@3.20.1(magicast@0.5.1))(@vue/compiler-sfc@3.5.25)(magicast@0.5.1)(markdown-it-async@2.2.0)(postcss@8.5.6)(react@19.2.3)(svelte@5.46.1)(vite@7.2.4(@types/node@25.0.5)(jiti@2.6.1)(yaml@2.8.1))':
+  '@slidev/client@52.10.0(@nuxt/kit@3.20.1(magicast@0.5.1))(@vue/compiler-sfc@3.5.25)(magicast@0.5.1)(markdown-it-async@2.2.0)(postcss@8.5.6)(react@19.2.3)(svelte@5.46.1)(vite@7.2.4(@types/node@25.0.6)(jiti@2.6.1)(yaml@2.8.1))':
     dependencies:
       '@antfu/utils': 9.3.0
       '@iconify-json/carbon': 1.2.14
@@ -10488,9 +10482,9 @@ snapshots:
       '@shikijs/engine-javascript': 3.17.0
       '@shikijs/monaco': 3.17.0
       '@shikijs/vitepress-twoslash': 3.17.0(@nuxt/kit@3.20.1(magicast@0.5.1))(typescript@5.9.3)
-      '@slidev/parser': 52.10.0(@nuxt/kit@3.20.1(magicast@0.5.1))(@vue/compiler-sfc@3.5.25)(markdown-it-async@2.2.0)(postcss@8.5.6)(svelte@5.46.1)(typescript@5.9.3)(vite@7.2.4(@types/node@25.0.5)(jiti@2.6.1)(yaml@2.8.1))
+      '@slidev/parser': 52.10.0(@nuxt/kit@3.20.1(magicast@0.5.1))(@vue/compiler-sfc@3.5.25)(markdown-it-async@2.2.0)(postcss@8.5.6)(svelte@5.46.1)(typescript@5.9.3)(vite@7.2.4(@types/node@25.0.6)(jiti@2.6.1)(yaml@2.8.1))
       '@slidev/rough-notation': 0.1.0
-      '@slidev/types': 52.10.0(@nuxt/kit@3.20.1(magicast@0.5.1))(@vue/compiler-sfc@3.5.25)(markdown-it-async@2.2.0)(postcss@8.5.6)(svelte@5.46.1)(typescript@5.9.3)(vite@7.2.4(@types/node@25.0.5)(jiti@2.6.1)(yaml@2.8.1))
+      '@slidev/types': 52.10.0(@nuxt/kit@3.20.1(magicast@0.5.1))(@vue/compiler-sfc@3.5.25)(markdown-it-async@2.2.0)(postcss@8.5.6)(svelte@5.46.1)(typescript@5.9.3)(vite@7.2.4(@types/node@25.0.6)(jiti@2.6.1)(yaml@2.8.1))
       '@typescript/ata': 0.9.8(typescript@5.9.3)
       '@unhead/vue': 2.0.19(vue@3.5.25(typescript@5.9.3))
       '@unocss/reset': 66.5.9
@@ -10512,7 +10506,7 @@ snapshots:
       shiki: 3.17.0
       shiki-magic-move: 1.2.1(react@19.2.3)(shiki@3.17.0)(svelte@5.46.1)(vue@3.5.25(typescript@5.9.3))
       typescript: 5.9.3
-      unocss: 66.5.9(postcss@8.5.6)(vite@7.2.4(@types/node@25.0.5)(jiti@2.6.1)(yaml@2.8.1))
+      unocss: 66.5.9(postcss@8.5.6)(vite@7.2.4(@types/node@25.0.6)(jiti@2.6.1)(yaml@2.8.1))
       vue: 3.5.25(typescript@5.9.3)
       vue-router: 4.6.3(vue@3.5.25(typescript@5.9.3))
       yaml: 2.8.1
@@ -10533,10 +10527,10 @@ snapshots:
       - vue-template-compiler
       - vue-template-es2015-compiler
 
-  '@slidev/parser@52.10.0(@nuxt/kit@3.20.1(magicast@0.5.1))(@vue/compiler-sfc@3.5.25)(markdown-it-async@2.2.0)(postcss@8.5.6)(svelte@5.46.1)(typescript@5.9.3)(vite@7.2.4(@types/node@25.0.5)(jiti@2.6.1)(yaml@2.8.1))':
+  '@slidev/parser@52.10.0(@nuxt/kit@3.20.1(magicast@0.5.1))(@vue/compiler-sfc@3.5.25)(markdown-it-async@2.2.0)(postcss@8.5.6)(svelte@5.46.1)(typescript@5.9.3)(vite@7.2.4(@types/node@25.0.6)(jiti@2.6.1)(yaml@2.8.1))':
     dependencies:
       '@antfu/utils': 9.3.0
-      '@slidev/types': 52.10.0(@nuxt/kit@3.20.1(magicast@0.5.1))(@vue/compiler-sfc@3.5.25)(markdown-it-async@2.2.0)(postcss@8.5.6)(svelte@5.46.1)(typescript@5.9.3)(vite@7.2.4(@types/node@25.0.5)(jiti@2.6.1)(yaml@2.8.1))
+      '@slidev/types': 52.10.0(@nuxt/kit@3.20.1(magicast@0.5.1))(@vue/compiler-sfc@3.5.25)(markdown-it-async@2.2.0)(postcss@8.5.6)(svelte@5.46.1)(typescript@5.9.3)(vite@7.2.4(@types/node@25.0.6)(jiti@2.6.1)(yaml@2.8.1))
       yaml: 2.8.1
     transitivePeerDependencies:
       - '@nuxt/kit'
@@ -10571,23 +10565,23 @@ snapshots:
 
   '@slidev/types@0.47.5': {}
 
-  '@slidev/types@52.10.0(@nuxt/kit@3.20.1(magicast@0.5.1))(@vue/compiler-sfc@3.5.25)(markdown-it-async@2.2.0)(postcss@8.5.6)(svelte@5.46.1)(typescript@5.9.3)(vite@7.2.4(@types/node@25.0.5)(jiti@2.6.1)(yaml@2.8.1))':
+  '@slidev/types@52.10.0(@nuxt/kit@3.20.1(magicast@0.5.1))(@vue/compiler-sfc@3.5.25)(markdown-it-async@2.2.0)(postcss@8.5.6)(svelte@5.46.1)(typescript@5.9.3)(vite@7.2.4(@types/node@25.0.6)(jiti@2.6.1)(yaml@2.8.1))':
     dependencies:
       '@antfu/utils': 9.3.0
       '@shikijs/markdown-it': 3.17.0(markdown-it-async@2.2.0)
-      '@vitejs/plugin-vue': 6.0.2(vite@7.2.4(@types/node@25.0.5)(jiti@2.6.1)(yaml@2.8.1))(vue@3.5.25(typescript@5.9.3))
-      '@vitejs/plugin-vue-jsx': 5.1.2(vite@7.2.4(@types/node@25.0.5)(jiti@2.6.1)(yaml@2.8.1))(vue@3.5.25(typescript@5.9.3))
+      '@vitejs/plugin-vue': 6.0.2(vite@7.2.4(@types/node@25.0.6)(jiti@2.6.1)(yaml@2.8.1))(vue@3.5.25(typescript@5.9.3))
+      '@vitejs/plugin-vue-jsx': 5.1.2(vite@7.2.4(@types/node@25.0.6)(jiti@2.6.1)(yaml@2.8.1))(vue@3.5.25(typescript@5.9.3))
       katex: 0.16.25
       mermaid: 11.12.1
       monaco-editor: 0.55.1
       shiki: 3.17.0
-      unocss: 66.5.9(postcss@8.5.6)(vite@7.2.4(@types/node@25.0.5)(jiti@2.6.1)(yaml@2.8.1))
+      unocss: 66.5.9(postcss@8.5.6)(vite@7.2.4(@types/node@25.0.6)(jiti@2.6.1)(yaml@2.8.1))
       unplugin-icons: 22.5.0(@vue/compiler-sfc@3.5.25)(svelte@5.46.1)
-      unplugin-vue-markdown: 29.2.0(vite@7.2.4(@types/node@25.0.5)(jiti@2.6.1)(yaml@2.8.1))
-      vite-plugin-inspect: 11.3.3(@nuxt/kit@3.20.1(magicast@0.5.1))(vite@7.2.4(@types/node@25.0.5)(jiti@2.6.1)(yaml@2.8.1))
-      vite-plugin-remote-assets: 2.1.0(vite@7.2.4(@types/node@25.0.5)(jiti@2.6.1)(yaml@2.8.1))
-      vite-plugin-static-copy: 3.1.4(vite@7.2.4(@types/node@25.0.5)(jiti@2.6.1)(yaml@2.8.1))
-      vite-plugin-vue-server-ref: 1.0.0(vite@7.2.4(@types/node@25.0.5)(jiti@2.6.1)(yaml@2.8.1))(vue@3.5.25(typescript@5.9.3))
+      unplugin-vue-markdown: 29.2.0(vite@7.2.4(@types/node@25.0.6)(jiti@2.6.1)(yaml@2.8.1))
+      vite-plugin-inspect: 11.3.3(@nuxt/kit@3.20.1(magicast@0.5.1))(vite@7.2.4(@types/node@25.0.6)(jiti@2.6.1)(yaml@2.8.1))
+      vite-plugin-remote-assets: 2.1.0(vite@7.2.4(@types/node@25.0.6)(jiti@2.6.1)(yaml@2.8.1))
+      vite-plugin-static-copy: 3.1.4(vite@7.2.4(@types/node@25.0.6)(jiti@2.6.1)(yaml@2.8.1))
+      vite-plugin-vue-server-ref: 1.0.0(vite@7.2.4(@types/node@25.0.6)(jiti@2.6.1)(yaml@2.8.1))(vue@3.5.25(typescript@5.9.3))
       vue: 3.5.25(typescript@5.9.3)
       vue-router: 4.6.3(vue@3.5.25(typescript@5.9.3))
     transitivePeerDependencies:
@@ -10611,22 +10605,22 @@ snapshots:
     dependencies:
       acorn: 8.15.0
 
-  '@sveltejs/vite-plugin-svelte-inspector@5.0.2(@sveltejs/vite-plugin-svelte@6.2.4(svelte@5.46.1)(vite@7.3.1(@types/node@20.19.28)(jiti@2.6.1)(yaml@2.8.2)))(svelte@5.46.1)(vite@7.3.1(@types/node@20.19.28)(jiti@2.6.1)(yaml@2.8.2))':
+  '@sveltejs/vite-plugin-svelte-inspector@5.0.2(@sveltejs/vite-plugin-svelte@6.2.4(svelte@5.46.1)(vite@7.3.1(@types/node@25.0.6)(jiti@2.6.1)(yaml@2.8.2)))(svelte@5.46.1)(vite@7.3.1(@types/node@25.0.6)(jiti@2.6.1)(yaml@2.8.2))':
     dependencies:
-      '@sveltejs/vite-plugin-svelte': 6.2.4(svelte@5.46.1)(vite@7.3.1(@types/node@20.19.28)(jiti@2.6.1)(yaml@2.8.2))
+      '@sveltejs/vite-plugin-svelte': 6.2.4(svelte@5.46.1)(vite@7.3.1(@types/node@25.0.6)(jiti@2.6.1)(yaml@2.8.2))
       obug: 2.1.1
       svelte: 5.46.1
-      vite: 7.3.1(@types/node@20.19.28)(jiti@2.6.1)(yaml@2.8.2)
+      vite: 7.3.1(@types/node@25.0.6)(jiti@2.6.1)(yaml@2.8.2)
 
-  '@sveltejs/vite-plugin-svelte@6.2.4(svelte@5.46.1)(vite@7.3.1(@types/node@20.19.28)(jiti@2.6.1)(yaml@2.8.2))':
+  '@sveltejs/vite-plugin-svelte@6.2.4(svelte@5.46.1)(vite@7.3.1(@types/node@25.0.6)(jiti@2.6.1)(yaml@2.8.2))':
     dependencies:
-      '@sveltejs/vite-plugin-svelte-inspector': 5.0.2(@sveltejs/vite-plugin-svelte@6.2.4(svelte@5.46.1)(vite@7.3.1(@types/node@20.19.28)(jiti@2.6.1)(yaml@2.8.2)))(svelte@5.46.1)(vite@7.3.1(@types/node@20.19.28)(jiti@2.6.1)(yaml@2.8.2))
+      '@sveltejs/vite-plugin-svelte-inspector': 5.0.2(@sveltejs/vite-plugin-svelte@6.2.4(svelte@5.46.1)(vite@7.3.1(@types/node@25.0.6)(jiti@2.6.1)(yaml@2.8.2)))(svelte@5.46.1)(vite@7.3.1(@types/node@25.0.6)(jiti@2.6.1)(yaml@2.8.2))
       deepmerge: 4.3.1
       magic-string: 0.30.21
       obug: 2.1.1
       svelte: 5.46.1
-      vite: 7.3.1(@types/node@20.19.28)(jiti@2.6.1)(yaml@2.8.2)
-      vitefu: 1.1.1(vite@7.3.1(@types/node@20.19.28)(jiti@2.6.1)(yaml@2.8.2))
+      vite: 7.3.1(@types/node@25.0.6)(jiti@2.6.1)(yaml@2.8.2)
+      vitefu: 1.1.1(vite@7.3.1(@types/node@25.0.6)(jiti@2.6.1)(yaml@2.8.2))
 
   '@swc/helpers@0.5.18':
     dependencies:
@@ -10849,14 +10843,10 @@ snapshots:
 
   '@types/node-fetch@2.6.13':
     dependencies:
-      '@types/node': 24.10.6
+      '@types/node': 24.10.7
       form-data: 4.0.5
 
   '@types/node@17.0.45': {}
-
-  '@types/node@20.19.28':
-    dependencies:
-      undici-types: 6.21.0
 
   '@types/node@22.19.1':
     dependencies:
@@ -10866,18 +10856,13 @@ snapshots:
     dependencies:
       undici-types: 7.16.0
 
-  '@types/node@24.10.6':
-    dependencies:
-      undici-types: 7.16.0
-
   '@types/node@24.10.7':
     dependencies:
       undici-types: 7.16.0
 
-  '@types/node@25.0.5':
+  '@types/node@25.0.6':
     dependencies:
       undici-types: 7.16.0
-    optional: true
 
   '@types/normalize-package-data@2.4.4': {}
 
@@ -10894,11 +10879,11 @@ snapshots:
 
   '@types/sax@1.2.7':
     dependencies:
-      '@types/node': 24.10.6
+      '@types/node': 24.10.7
 
   '@types/stream-buffers@3.0.8':
     dependencies:
-      '@types/node': 24.10.6
+      '@types/node': 24.10.7
 
   '@types/trusted-types@2.0.7':
     optional: true
@@ -10913,7 +10898,7 @@ snapshots:
 
   '@types/yauzl@2.10.3':
     dependencies:
-      '@types/node': 24.10.6
+      '@types/node': 24.10.7
     optional: true
 
   '@typescript-eslint/eslint-plugin@8.48.1(@typescript-eslint/parser@8.48.1(eslint@9.36.0(jiti@2.6.1))(typescript@5.8.3))(eslint@9.36.0(jiti@2.6.1))(typescript@5.8.3)':
@@ -11035,13 +11020,13 @@ snapshots:
       unhead: 2.0.19
       vue: 3.5.25(typescript@5.9.3)
 
-  '@unocss/astro@66.5.9(vite@7.2.4(@types/node@25.0.5)(jiti@2.6.1)(yaml@2.8.1))':
+  '@unocss/astro@66.5.9(vite@7.2.4(@types/node@25.0.6)(jiti@2.6.1)(yaml@2.8.1))':
     dependencies:
       '@unocss/core': 66.5.9
       '@unocss/reset': 66.5.9
-      '@unocss/vite': 66.5.9(vite@7.2.4(@types/node@25.0.5)(jiti@2.6.1)(yaml@2.8.1))
+      '@unocss/vite': 66.5.9(vite@7.2.4(@types/node@25.0.6)(jiti@2.6.1)(yaml@2.8.1))
     optionalDependencies:
-      vite: 7.2.4(@types/node@25.0.5)(jiti@2.6.1)(yaml@2.8.1)
+      vite: 7.2.4(@types/node@25.0.6)(jiti@2.6.1)(yaml@2.8.1)
 
   '@unocss/cli@66.5.9':
     dependencies:
@@ -11173,7 +11158,7 @@ snapshots:
     dependencies:
       '@unocss/core': 66.5.9
 
-  '@unocss/vite@66.5.9(vite@7.2.4(@types/node@25.0.5)(jiti@2.6.1)(yaml@2.8.1))':
+  '@unocss/vite@66.5.9(vite@7.2.4(@types/node@25.0.6)(jiti@2.6.1)(yaml@2.8.1))':
     dependencies:
       '@jridgewell/remapping': 2.3.5
       '@unocss/config': 66.5.9
@@ -11184,24 +11169,24 @@ snapshots:
       pathe: 2.0.3
       tinyglobby: 0.2.15
       unplugin-utils: 0.3.1
-      vite: 7.2.4(@types/node@25.0.5)(jiti@2.6.1)(yaml@2.8.1)
+      vite: 7.2.4(@types/node@25.0.6)(jiti@2.6.1)(yaml@2.8.1)
 
-  '@vitejs/plugin-vue-jsx@5.1.2(vite@7.2.4(@types/node@25.0.5)(jiti@2.6.1)(yaml@2.8.1))(vue@3.5.25(typescript@5.9.3))':
+  '@vitejs/plugin-vue-jsx@5.1.2(vite@7.2.4(@types/node@25.0.6)(jiti@2.6.1)(yaml@2.8.1))(vue@3.5.25(typescript@5.9.3))':
     dependencies:
       '@babel/core': 7.28.5
       '@babel/plugin-syntax-typescript': 7.27.1(@babel/core@7.28.5)
       '@babel/plugin-transform-typescript': 7.28.5(@babel/core@7.28.5)
       '@rolldown/pluginutils': 1.0.0-beta.52
       '@vue/babel-plugin-jsx': 2.0.1(@babel/core@7.28.5)
-      vite: 7.2.4(@types/node@25.0.5)(jiti@2.6.1)(yaml@2.8.1)
+      vite: 7.2.4(@types/node@25.0.6)(jiti@2.6.1)(yaml@2.8.1)
       vue: 3.5.25(typescript@5.9.3)
     transitivePeerDependencies:
       - supports-color
 
-  '@vitejs/plugin-vue@6.0.2(vite@7.2.4(@types/node@25.0.5)(jiti@2.6.1)(yaml@2.8.1))(vue@3.5.25(typescript@5.9.3))':
+  '@vitejs/plugin-vue@6.0.2(vite@7.2.4(@types/node@25.0.6)(jiti@2.6.1)(yaml@2.8.1))(vue@3.5.25(typescript@5.9.3))':
     dependencies:
       '@rolldown/pluginutils': 1.0.0-beta.50
-      vite: 7.2.4(@types/node@25.0.5)(jiti@2.6.1)(yaml@2.8.1)
+      vite: 7.2.4(@types/node@25.0.6)(jiti@2.6.1)(yaml@2.8.1)
       vue: 3.5.25(typescript@5.9.3)
 
   '@volar/kit@2.4.26(typescript@5.9.3)':
@@ -11615,12 +11600,12 @@ snapshots:
 
   astring@1.9.0: {}
 
-  astro-expressive-code@0.41.5(astro@5.16.8(@azure/identity@4.13.0)(@types/node@25.0.5)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2)):
+  astro-expressive-code@0.41.5(astro@5.16.8(@azure/identity@4.13.0)(@types/node@25.0.6)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2)):
     dependencies:
-      astro: 5.16.8(@azure/identity@4.13.0)(@types/node@25.0.5)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2)
+      astro: 5.16.8(@azure/identity@4.13.0)(@types/node@25.0.6)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2)
       rehype-expressive-code: 0.41.5
 
-  astro@5.16.8(@azure/identity@4.13.0)(@types/node@25.0.5)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2):
+  astro@5.16.8(@azure/identity@4.13.0)(@types/node@25.0.6)(jiti@2.6.1)(rollup@4.55.1)(typescript@5.9.3)(yaml@2.8.2):
     dependencies:
       '@astrojs/compiler': 2.13.0
       '@astrojs/internal-helpers': 0.7.5
@@ -11677,8 +11662,8 @@ snapshots:
       unist-util-visit: 5.0.0
       unstorage: 1.17.3(@azure/identity@4.13.0)
       vfile: 6.0.3
-      vite: 6.4.1(@types/node@25.0.5)(jiti@2.6.1)(yaml@2.8.2)
-      vitefu: 1.1.1(vite@6.4.1(@types/node@25.0.5)(jiti@2.6.1)(yaml@2.8.2))
+      vite: 6.4.1(@types/node@25.0.6)(jiti@2.6.1)(yaml@2.8.2)
+      vitefu: 1.1.1(vite@6.4.1(@types/node@25.0.6)(jiti@2.6.1)(yaml@2.8.2))
       xxhash-wasm: 1.1.0
       yargs-parser: 21.1.1
       yocto-spinner: 0.2.3
@@ -16526,9 +16511,9 @@ snapshots:
 
   universalify@2.0.1: {}
 
-  unocss@66.5.9(postcss@8.5.6)(vite@7.2.4(@types/node@25.0.5)(jiti@2.6.1)(yaml@2.8.1)):
+  unocss@66.5.9(postcss@8.5.6)(vite@7.2.4(@types/node@25.0.6)(jiti@2.6.1)(yaml@2.8.1)):
     dependencies:
-      '@unocss/astro': 66.5.9(vite@7.2.4(@types/node@25.0.5)(jiti@2.6.1)(yaml@2.8.1))
+      '@unocss/astro': 66.5.9(vite@7.2.4(@types/node@25.0.6)(jiti@2.6.1)(yaml@2.8.1))
       '@unocss/cli': 66.5.9
       '@unocss/core': 66.5.9
       '@unocss/postcss': 66.5.9(postcss@8.5.6)
@@ -16546,9 +16531,9 @@ snapshots:
       '@unocss/transformer-compile-class': 66.5.9
       '@unocss/transformer-directives': 66.5.9
       '@unocss/transformer-variant-group': 66.5.9
-      '@unocss/vite': 66.5.9(vite@7.2.4(@types/node@25.0.5)(jiti@2.6.1)(yaml@2.8.1))
+      '@unocss/vite': 66.5.9(vite@7.2.4(@types/node@25.0.6)(jiti@2.6.1)(yaml@2.8.1))
     optionalDependencies:
-      vite: 7.2.4(@types/node@25.0.5)(jiti@2.6.1)(yaml@2.8.1)
+      vite: 7.2.4(@types/node@25.0.6)(jiti@2.6.1)(yaml@2.8.1)
     transitivePeerDependencies:
       - postcss
       - supports-color
@@ -16590,7 +16575,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  unplugin-vue-markdown@29.2.0(vite@7.2.4(@types/node@25.0.5)(jiti@2.6.1)(yaml@2.8.1)):
+  unplugin-vue-markdown@29.2.0(vite@7.2.4(@types/node@25.0.6)(jiti@2.6.1)(yaml@2.8.1)):
     dependencies:
       '@mdit-vue/plugin-component': 3.0.2
       '@mdit-vue/plugin-frontmatter': 3.0.2
@@ -16600,7 +16585,7 @@ snapshots:
       markdown-it-async: 2.2.0
       unplugin: 2.3.11
       unplugin-utils: 0.3.1
-      vite: 7.2.4(@types/node@25.0.5)(jiti@2.6.1)(yaml@2.8.1)
+      vite: 7.2.4(@types/node@25.0.6)(jiti@2.6.1)(yaml@2.8.1)
 
   unplugin@2.3.11:
     dependencies:
@@ -16691,17 +16676,17 @@ snapshots:
       '@types/unist': 3.0.3
       vfile-message: 4.0.3
 
-  vite-dev-rpc@1.1.0(vite@7.2.4(@types/node@25.0.5)(jiti@2.6.1)(yaml@2.8.1)):
+  vite-dev-rpc@1.1.0(vite@7.2.4(@types/node@25.0.6)(jiti@2.6.1)(yaml@2.8.1)):
     dependencies:
       birpc: 2.8.0
-      vite: 7.2.4(@types/node@25.0.5)(jiti@2.6.1)(yaml@2.8.1)
-      vite-hot-client: 2.1.0(vite@7.2.4(@types/node@25.0.5)(jiti@2.6.1)(yaml@2.8.1))
+      vite: 7.2.4(@types/node@25.0.6)(jiti@2.6.1)(yaml@2.8.1)
+      vite-hot-client: 2.1.0(vite@7.2.4(@types/node@25.0.6)(jiti@2.6.1)(yaml@2.8.1))
 
-  vite-hot-client@2.1.0(vite@7.2.4(@types/node@25.0.5)(jiti@2.6.1)(yaml@2.8.1)):
+  vite-hot-client@2.1.0(vite@7.2.4(@types/node@25.0.6)(jiti@2.6.1)(yaml@2.8.1)):
     dependencies:
-      vite: 7.2.4(@types/node@25.0.5)(jiti@2.6.1)(yaml@2.8.1)
+      vite: 7.2.4(@types/node@25.0.6)(jiti@2.6.1)(yaml@2.8.1)
 
-  vite-plugin-inspect@11.3.3(@nuxt/kit@3.20.1(magicast@0.5.1))(vite@7.2.4(@types/node@25.0.5)(jiti@2.6.1)(yaml@2.8.1)):
+  vite-plugin-inspect@11.3.3(@nuxt/kit@3.20.1(magicast@0.5.1))(vite@7.2.4(@types/node@25.0.6)(jiti@2.6.1)(yaml@2.8.1)):
     dependencies:
       ansis: 4.2.0
       debug: 4.4.3(supports-color@10.2.2)
@@ -16711,38 +16696,38 @@ snapshots:
       perfect-debounce: 2.0.0
       sirv: 3.0.2
       unplugin-utils: 0.3.1
-      vite: 7.2.4(@types/node@25.0.5)(jiti@2.6.1)(yaml@2.8.1)
-      vite-dev-rpc: 1.1.0(vite@7.2.4(@types/node@25.0.5)(jiti@2.6.1)(yaml@2.8.1))
+      vite: 7.2.4(@types/node@25.0.6)(jiti@2.6.1)(yaml@2.8.1)
+      vite-dev-rpc: 1.1.0(vite@7.2.4(@types/node@25.0.6)(jiti@2.6.1)(yaml@2.8.1))
     optionalDependencies:
       '@nuxt/kit': 3.20.1(magicast@0.5.1)
     transitivePeerDependencies:
       - supports-color
 
-  vite-plugin-remote-assets@2.1.0(vite@7.2.4(@types/node@25.0.5)(jiti@2.6.1)(yaml@2.8.1)):
+  vite-plugin-remote-assets@2.1.0(vite@7.2.4(@types/node@25.0.6)(jiti@2.6.1)(yaml@2.8.1)):
     dependencies:
       debug: 4.4.3(supports-color@10.2.2)
       magic-string: 0.30.21
       node-fetch-native: 1.6.7
       ohash: 2.0.11
-      vite: 7.2.4(@types/node@25.0.5)(jiti@2.6.1)(yaml@2.8.1)
+      vite: 7.2.4(@types/node@25.0.6)(jiti@2.6.1)(yaml@2.8.1)
     transitivePeerDependencies:
       - supports-color
 
-  vite-plugin-static-copy@3.1.4(vite@7.2.4(@types/node@25.0.5)(jiti@2.6.1)(yaml@2.8.1)):
+  vite-plugin-static-copy@3.1.4(vite@7.2.4(@types/node@25.0.6)(jiti@2.6.1)(yaml@2.8.1)):
     dependencies:
       chokidar: 3.6.0
       p-map: 7.0.4
       picocolors: 1.1.1
       tinyglobby: 0.2.15
-      vite: 7.2.4(@types/node@25.0.5)(jiti@2.6.1)(yaml@2.8.1)
+      vite: 7.2.4(@types/node@25.0.6)(jiti@2.6.1)(yaml@2.8.1)
 
-  vite-plugin-vue-server-ref@1.0.0(vite@7.2.4(@types/node@25.0.5)(jiti@2.6.1)(yaml@2.8.1))(vue@3.5.25(typescript@5.9.3)):
+  vite-plugin-vue-server-ref@1.0.0(vite@7.2.4(@types/node@25.0.6)(jiti@2.6.1)(yaml@2.8.1))(vue@3.5.25(typescript@5.9.3)):
     dependencies:
       debug: 4.4.3(supports-color@10.2.2)
       klona: 2.0.6
       mlly: 1.8.0
       ufo: 1.6.1
-      vite: 7.2.4(@types/node@25.0.5)(jiti@2.6.1)(yaml@2.8.1)
+      vite: 7.2.4(@types/node@25.0.6)(jiti@2.6.1)(yaml@2.8.1)
       vue: 3.5.25(typescript@5.9.3)
     transitivePeerDependencies:
       - supports-color
@@ -16752,7 +16737,7 @@ snapshots:
       svgo: 3.3.2
       vue: 3.5.25(typescript@5.9.3)
 
-  vite@6.4.1(@types/node@25.0.5)(jiti@2.6.1)(yaml@2.8.2):
+  vite@6.4.1(@types/node@25.0.6)(jiti@2.6.1)(yaml@2.8.2):
     dependencies:
       esbuild: 0.25.12
       fdir: 6.5.0(picomatch@4.0.3)
@@ -16761,12 +16746,12 @@ snapshots:
       rollup: 4.53.3
       tinyglobby: 0.2.15
     optionalDependencies:
-      '@types/node': 25.0.5
+      '@types/node': 25.0.6
       fsevents: 2.3.3
       jiti: 2.6.1
       yaml: 2.8.2
 
-  vite@7.2.4(@types/node@25.0.5)(jiti@2.6.1)(yaml@2.8.1):
+  vite@7.2.4(@types/node@25.0.6)(jiti@2.6.1)(yaml@2.8.1):
     dependencies:
       esbuild: 0.25.12
       fdir: 6.5.0(picomatch@4.0.3)
@@ -16775,12 +16760,12 @@ snapshots:
       rollup: 4.53.3
       tinyglobby: 0.2.15
     optionalDependencies:
-      '@types/node': 25.0.5
+      '@types/node': 25.0.6
       fsevents: 2.3.3
       jiti: 2.6.1
       yaml: 2.8.1
 
-  vite@7.3.1(@types/node@20.19.28)(jiti@2.6.1)(yaml@2.8.2):
+  vite@7.3.1(@types/node@25.0.6)(jiti@2.6.1)(yaml@2.8.2):
     dependencies:
       esbuild: 0.27.2
       fdir: 6.5.0(picomatch@4.0.3)
@@ -16789,22 +16774,22 @@ snapshots:
       rollup: 4.55.1
       tinyglobby: 0.2.15
     optionalDependencies:
-      '@types/node': 20.19.28
+      '@types/node': 25.0.6
       fsevents: 2.3.3
       jiti: 2.6.1
       yaml: 2.8.2
 
-  vitefu@1.1.1(vite@6.4.1(@types/node@25.0.5)(jiti@2.6.1)(yaml@2.8.2)):
+  vitefu@1.1.1(vite@6.4.1(@types/node@25.0.6)(jiti@2.6.1)(yaml@2.8.2)):
     optionalDependencies:
-      vite: 6.4.1(@types/node@25.0.5)(jiti@2.6.1)(yaml@2.8.2)
+      vite: 6.4.1(@types/node@25.0.6)(jiti@2.6.1)(yaml@2.8.2)
 
-  vitefu@1.1.1(vite@7.2.4(@types/node@25.0.5)(jiti@2.6.1)(yaml@2.8.1)):
+  vitefu@1.1.1(vite@7.2.4(@types/node@25.0.6)(jiti@2.6.1)(yaml@2.8.1)):
     optionalDependencies:
-      vite: 7.2.4(@types/node@25.0.5)(jiti@2.6.1)(yaml@2.8.1)
+      vite: 7.2.4(@types/node@25.0.6)(jiti@2.6.1)(yaml@2.8.1)
 
-  vitefu@1.1.1(vite@7.3.1(@types/node@20.19.28)(jiti@2.6.1)(yaml@2.8.2)):
+  vitefu@1.1.1(vite@7.3.1(@types/node@25.0.6)(jiti@2.6.1)(yaml@2.8.2)):
     optionalDependencies:
-      vite: 7.3.1(@types/node@20.19.28)(jiti@2.6.1)(yaml@2.8.2)
+      vite: 7.3.1(@types/node@25.0.6)(jiti@2.6.1)(yaml@2.8.2)
 
   volar-service-css@0.0.66(@volar/language-service@2.4.26):
     dependencies:
