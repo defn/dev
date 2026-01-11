@@ -35,7 +35,7 @@ shfmt = "3.12.0"
 slsa-verifier = "2.7.1"
 starship = "1.24.2"
 "github:buildkite/agent" = { version = "3.115.3", exe = "buildkite-agent" }
-"github:coder/code-server" = { version = "4.107.1", bin_path = "bin", extract_all = "true" }
+"github:coder/code-server" = { version = "4.107.1", bin_path = "code-server-4.107.1-linux-amd64/bin", extract_all = "true" }
 "github:honeycombio/buildevents" = "0.18.0"
 "github:peak/s5cmd" = "2.3.0"
 watchexec = "2.3.2"
