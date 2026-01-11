@@ -1,15 +1,38 @@
 {
+  // TypeScript Configuration for VS Code Extension
+  //
+  // This config is for the extension host code (src/).
+  // The webview (webview/) has its own build via Vite.
+
   "compilerOptions": {
+    // VS Code Extension Host requires CommonJS modules
+    // ES modules (import/export) are transpiled to require/module.exports
     "module": "commonjs",
+
+    // Modern JavaScript features, supported by VS Code's Node.js runtime
     "target": "ES2020",
-    "outDir": "out",
     "lib": ["ES2020"],
-    "sourceMap": true,
-    "strict": true,
+
+    // Output directory - separate from webview's dist/
+    "outDir": "out",
     "rootDir": "src",
+
+    // Enable source maps for debugging in VS Code
+    "sourceMap": true,
+
+    // Type safety
+    "strict": true,
+
+    // Allow default imports from modules without default export
+    // Required for: import vscode from 'vscode'
     "esModuleInterop": true,
+
+    // Skip type checking of declaration files for faster builds
+    // Trade-off: may miss type errors in dependencies
     "skipLibCheck": true
   },
+
+  // Only compile src/ directory
   "include": ["src"],
   "exclude": ["node_modules"]
 }

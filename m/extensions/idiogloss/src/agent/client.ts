@@ -1,3 +1,38 @@
+/**
+ * Agent Client - Unix Socket IPC with Python Backend
+ *
+ * This module provides a TypeScript client for communicating with the Python
+ * agent server via Unix domain sockets.
+ *
+ * ## Protocol
+ *
+ * - Newline-delimited JSON messages over Unix socket
+ * - Request: `{"action": "...", ...}\n`
+ * - Response: `{"success": true, ...}\n`
+ * - Streaming: Multiple responses for progress updates, final has `success` field
+ *
+ * ## Callback Queue Design
+ *
+ * The client uses a callback queue (`pendingCallbacks`) to match responses to
+ * requests. This is necessary because:
+ *
+ * 1. Multiple requests can be in-flight (stats, ping, alucard)
+ * 2. Streaming responses send multiple messages before final response
+ *
+ * **Critical**: For streaming handlers that re-queue themselves, use `unshift()`
+ * not `push()` to stay at the front of the queue. Otherwise, other callbacks
+ * (like heartbeat pings) can intercept streaming responses.
+ *
+ * ## Server Lifecycle
+ *
+ * The client can spawn and manage the Python server process:
+ *
+ * 1. `startServer()` - Spawns `bazel run //agents/idiogloss:server_py`
+ * 2. `waitForSocket()` - Polls for socket file (bazel takes 10-15s)
+ * 3. `connect()` - Establishes socket connection
+ * 4. `stopServer()` - Graceful shutdown via `shutdown` action
+ */
+
 import * as net from "net";
 import { spawn, ChildProcess } from "child_process";
 import { log } from "../utils/logger";
@@ -9,7 +44,10 @@ import type {
   ResponseCallback,
 } from "./types";
 
+// Socket path shared between client and server
 const DEFAULT_SOCKET_PATH = "/tmp/idiogloss.sock";
+
+// Hardcoded paths - could be made configurable via settings
 const WORKSPACE_DIR = "/home/ubuntu/m";
 const MISE_PATH = "/home/ubuntu/.local/bin/mise";
 

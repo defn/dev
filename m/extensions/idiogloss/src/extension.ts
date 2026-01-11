@@ -3,6 +3,30 @@
  *
  * Main entry point for the extension. Handles lifecycle management,
  * command registration, and agent server coordination.
+ *
+ * ## Architecture
+ *
+ * The extension runs in VS Code's Extension Host (Node.js process, separate
+ * from the UI). It communicates with:
+ *
+ * 1. **Webview Panels** - via postMessage (see src/panels/)
+ * 2. **Python Agent** - via Unix socket at /tmp/idiogloss.sock (see src/agent/)
+ *
+ * ## Lifecycle
+ *
+ * - `activate()` - Called once when extension first loads (onStartupFinished)
+ * - `deactivate()` - Called when VS Code shuts down or extension is disabled
+ *
+ * The agent server auto-starts on activation and is monitored by a heartbeat.
+ * If the server becomes unresponsive, it's automatically restarted with
+ * exponential backoff (10s → 10min max).
+ *
+ * ## Key VS Code APIs
+ *
+ * - `vscode.commands.registerCommand` - Register command handlers
+ * - `vscode.window.createStatusBarItem` - Status bar integration
+ * - `vscode.workspace.workspaceFolders` - Get workspace root for bazel
+ * - `context.subscriptions` - Disposables cleaned up on deactivate
  */
 
 import * as vscode from "vscode";

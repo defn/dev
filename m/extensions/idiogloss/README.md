@@ -157,3 +157,19 @@ Or: Command Palette → "Developer: Open Webview Developer Tools"
 ### Agent Logs
 
 Python agent logs to stdout/stderr, visible in the "idiogloss" output channel.
+
+## Publishing
+
+To publish to the VS Code Marketplace:
+
+1. Create a publisher at https://marketplace.visualstudio.com/manage
+2. Get a Personal Access Token from https://dev.azure.com (Scopes: Marketplace > Manage)
+3. Login: `pnpm vsce login <publisher>`
+4. Publish: `pnpm vsce publish`
+
+Or publish manually:
+
+```bash
+pnpm package                    # Creates idiogloss-0.0.1.vsix
+pnpm vsce publish --packagePath idiogloss-0.0.1.vsix
+```

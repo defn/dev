@@ -1,5 +1,36 @@
 /**
- * Timer utilities for debouncing and heartbeat monitoring.
+ * Timer Utilities - Debouncing and Heartbeat Patterns
+ *
+ * ## Debouncer
+ *
+ * Used to delay server requests until user stops typing. Without debouncing,
+ * every keystroke would trigger a stats + alucard request, overwhelming the
+ * server and wasting API calls.
+ *
+ * Current delay: 2 seconds idle before firing.
+ *
+ * The debouncer also supports:
+ * - `flush()` - Execute immediately (used when server connects)
+ * - `hasPending()` - Check if there's a queued update
+ *
+ * ## Heartbeat
+ *
+ * Monitors server health with periodic pings. If ping fails:
+ *
+ * 1. Triggers `onFailure` callback (restarts server)
+ * 2. Doubles the interval (exponential backoff)
+ * 3. Caps at maxInterval (prevents runaway retries)
+ *
+ * After successful check, interval resets to base value.
+ *
+ * Current config: 10s base, 10 minute max.
+ *
+ * ## Why Not setInterval?
+ *
+ * Using setTimeout with rescheduling instead of setInterval because:
+ * - Can adjust interval dynamically (backoff)
+ * - Prevents overlapping checks if onCheck/onFailure takes long
+ * - Easier to stop cleanly without timer drift
  */
 
 import { log } from "./logger";

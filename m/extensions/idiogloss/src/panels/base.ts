@@ -1,8 +1,41 @@
 /**
- * Base panel module for idiogloss webview panels.
+ * Base Panel - Abstract Webview Panel with Agent Integration
  *
- * Provides abstract BasePanel class with shared functionality for
- * creating webview panels, handling messages, and managing lifecycle.
+ * Provides shared functionality for webview panels:
+ * - Panel creation with security options
+ * - Message passing to webview via postMessage
+ * - Agent server communication (stats, alucard)
+ * - Debounced content updates (2s idle before server request)
+ * - Lifecycle management with proper disposal
+ *
+ * ## Webview Security
+ *
+ * Webviews run in an isolated iframe with restricted capabilities:
+ * - `enableScripts: true` - Required for Svelte app to run
+ * - `localResourceRoots` - Limits file access to dist/ folder only
+ * - `retainContextWhenHidden: true` - Keeps state when panel hidden
+ *
+ * ## Why retainContextWhenHidden?
+ *
+ * Without this, VS Code destroys the webview's JavaScript context when
+ * the panel is hidden (switching tabs, toggling terminal). When shown
+ * again, it recreates from scratch - losing all state.
+ *
+ * Trade-off: Uses more memory. Acceptable for simple webviews.
+ *
+ * ## Panel Registry
+ *
+ * Active panels are tracked in `activePanels` Set for broadcasting
+ * server status changes. When server connects/disconnects, all panels
+ * are notified to update their UI.
+ *
+ * ## Content Update Flow
+ *
+ * 1. Editor content changes
+ * 2. Subclass calls `onContentUpdate(fileName, content)`
+ * 3. Debouncer waits 2s for idle
+ * 4. `sendContentUpdate()` fires - requests stats + alucard
+ * 5. Responses sent to webview via `sendMessage()`
  */
 
 import * as vscode from "vscode";
