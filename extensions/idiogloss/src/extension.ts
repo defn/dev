@@ -1,7 +1,18 @@
 import * as vscode from "vscode";
 
+const outputChannel = vscode.window.createOutputChannel("idiogloss");
+
+function log(message: string) {
+  const timestamp = new Date().toISOString();
+  outputChannel.appendLine(`[${timestamp}] ${message}`);
+}
+
 export function activate(context: vscode.ExtensionContext) {
-  console.log("Idiogloss extension is now active");
+  context.subscriptions.push(outputChannel);
+  // Note: outputChannel.show() is intentionally NOT called here.
+  // Auto-showing the Output panel is disruptive to the user's workflow.
+  // Users can manually view logs via Output panel > "idiogloss" dropdown.
+  log("Extension activating...");
 
   const openPanelCmd = vscode.commands.registerCommand(
     "idiogloss.openPanel",
@@ -10,20 +21,35 @@ export function activate(context: vscode.ExtensionContext) {
       const fileName = editor?.document.fileName.split("/").pop() ?? "Unknown";
       const content = editor?.document.getText() ?? "";
 
+      log(`Creating panel for: ${fileName}`);
+
       const panel = vscode.window.createWebviewPanel(
         "idiogloss",
-        `Idiogloss: ${fileName}`,
+        `idiogloss: ${fileName}`,
         vscode.ViewColumn.Beside,
         {
           enableScripts: true,
         },
       );
 
+      log(`Panel created: ${fileName}`);
+
+      panel.onDidChangeViewState((e) => {
+        const state = e.webviewPanel.visible ? "visible" : "hidden";
+        log(`Panel ${fileName} is now ${state}`);
+      });
+
+      panel.onDidDispose(() => {
+        log(`Panel disposed: ${fileName}`);
+      });
+
       panel.webview.html = getWebviewContent(fileName, content);
     },
   );
 
   context.subscriptions.push(openPanelCmd);
+
+  log("Extension activated");
 }
 
 function escapeHtml(text: string): string {
@@ -71,4 +97,6 @@ function getWebviewContent(fileName: string, content: string): string {
 </html>`;
 }
 
-export function deactivate() {}
+export function deactivate() {
+  log("Extension deactivated");
+}

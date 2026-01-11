@@ -1,6 +1,6 @@
 {
   "name": "idiogloss",
-  "displayName": "Idiogloss",
+  "displayName": "idiogloss",
   "description": "AI-powered code assistant for your IDE",
   "version": "0.0.1",
   "publisher": "defn",
@@ -18,7 +18,7 @@
     "commands": [
       {
         "command": "idiogloss.openPanel",
-        "title": "Idiogloss: Open Panel",
+        "title": "idiogloss: Open Panel",
         "icon": {
           "light": "media/icon-light.png",
           "dark": "media/icon-dark.png"

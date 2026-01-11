@@ -1,11 +1,11 @@
-# Idiogloss
+# idiogloss
 
 A VS Code extension that opens a webview panel paired to your current editor.
 
 ## Usage
 
 1. Open any file in the editor
-2. Open the Idiogloss panel using either:
+2. Open the idiogloss panel using either:
    - Click the pig snout icon in the editor title bar (top right, near split/more buttons)
    - Keyboard shortcut (see below)
 3. A panel opens beside your editor showing the file contents
@@ -87,6 +87,23 @@ pnpm use
 2. Run `pnpm use` to compile and install
 3. Reload VS Code window (Ctrl+Shift+P → "Developer: Reload Window")
 4. Test your changes
+
+### Debugging
+
+View extension logs in the Output panel:
+
+1. Open Output panel (View → Output, or `Ctrl+Shift+U`)
+2. Select "idiogloss" from the dropdown
+
+Logs include timestamps:
+```
+[2025-01-11T02:00:00.000Z] Extension activating...
+[2025-01-11T02:00:00.001Z] Extension activated
+[2025-01-11T02:00:05.000Z] Creating panel for: example.ts
+[2025-01-11T02:00:05.001Z] Panel created: example.ts
+```
+
+**Note**: The Output panel does NOT auto-show on activation. This is intentional—auto-showing panels is disruptive to workflow. The `outputChannel.show()` API exists but we don't use it.
 
 ### Updating Icons
 
