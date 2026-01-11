@@ -16,6 +16,7 @@ bazel run //agents/hello:hello_py
 ```
 
 The agent uses MCP tools from `//servers/hello` for:
+
 - `get_time` - Current date/time
 - `get_disk_usage` - Disk usage statistics
 - `get_user_info` - Current user info

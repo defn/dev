@@ -43,7 +43,15 @@ export class AgentClient {
     // Start the server via mise exec to load environment configs
     this.serverProcess = spawn(
       MISE_PATH,
-      ["exec", "--", "bazel", "run", "//agents/idiogloss:server_py", "--", this.socketPath],
+      [
+        "exec",
+        "--",
+        "bazel",
+        "run",
+        "//agents/idiogloss:server_py",
+        "--",
+        this.socketPath,
+      ],
       {
         cwd: WORKSPACE_DIR,
         stdio: ["ignore", "pipe", "pipe"],
