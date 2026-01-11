@@ -20,8 +20,9 @@ export function activate(context: vscode.ExtensionContext) {
     "idiogloss.openPanel",
     () => {
       const editor = vscode.window.activeTextEditor;
-      const fileName = editor?.document.fileName.split("/").pop() ?? "Unknown";
-      const content = editor?.document.getText() ?? "";
+      const document = editor?.document;
+      const fileName = document?.fileName.split("/").pop() ?? "Unknown";
+      const content = document?.getText() ?? "";
 
       log(`Creating panel for: ${fileName}`);
 
@@ -31,6 +32,7 @@ export function activate(context: vscode.ExtensionContext) {
         vscode.ViewColumn.Beside,
         {
           enableScripts: true,
+          retainContextWhenHidden: true,
           localResourceRoots: [
             vscode.Uri.joinPath(context.extensionUri, "dist"),
           ],
@@ -39,12 +41,24 @@ export function activate(context: vscode.ExtensionContext) {
 
       log(`Panel created: ${fileName}`);
 
+      // Send updates when document changes
+      const changeListener = vscode.workspace.onDidChangeTextDocument((e) => {
+        if (document && e.document.uri.toString() === document.uri.toString()) {
+          panel.webview.postMessage({
+            type: "update",
+            fileName,
+            content: e.document.getText(),
+          });
+        }
+      });
+
       panel.onDidChangeViewState((e) => {
         const state = e.webviewPanel.visible ? "visible" : "hidden";
         log(`Panel ${fileName} is now ${state}`);
       });
 
       panel.onDidDispose(() => {
+        changeListener.dispose();
         log(`Panel disposed: ${fileName}`);
       });
 

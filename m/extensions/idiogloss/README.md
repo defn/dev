@@ -35,12 +35,20 @@ The Search key on Chromebook (where Caps Lock usually is) maps to `meta`. On mac
 idiogloss/
 ├── src/
 │   └── extension.ts      # Main extension code
+├── webview/
+│   ├── src/
+│   │   ├── App.svelte    # Svelte UI component
+│   │   └── main.ts       # Webview entry point
+│   ├── index.html
+│   ├── vite.config.ts
+│   └── svelte.config.mjs
+├── dist/                  # Compiled webview (git-ignored)
+├── out/                   # Compiled extension JS (git-ignored)
 ├── media/
 │   ├── icon-dark.svg     # Source icon for dark themes
 │   ├── icon-light.svg    # Source icon for light themes
 │   ├── icon-dark.png     # Compiled icon (used by VS Code)
 │   └── icon-light.png    # Compiled icon (used by VS Code)
-├── out/                   # Compiled JavaScript (git-ignored)
 ├── package.json           # Extension manifest
 ├── tsconfig.json          # TypeScript config
 ├── .vscodeignore          # Files to exclude from .vsix package
@@ -58,6 +66,11 @@ idiogloss/
   - Registers the command handler
   - Creates a webview panel when the icon is clicked
   - Passes the current filename to the webview
+
+- **webview/**: Svelte 5 app for the webview UI:
+  - Uses Vite for building
+  - Compiled output goes to `dist/`
+  - Communicates with extension via `postMessage`
 
 - **media/\*.svg**: Source icons (not packaged). Edit these to change the icon appearance.
 - **media/\*.png**: Compiled icons that VS Code actually uses. VS Code forces colors on SVG icons in the editor title bar, so we use PNGs to preserve colors.
@@ -104,6 +117,27 @@ Logs include timestamps:
 ```
 
 **Note**: The Output panel does NOT auto-show on activation. This is intentional—auto-showing panels is disruptive to workflow. The `outputChannel.show()` API exists but we don't use it.
+
+### Webview State Persistence
+
+The webview uses `retainContextWhenHidden: true` to preserve its state when hidden (e.g., when switching tabs or showing/hiding the terminal).
+
+```typescript
+const panel = vscode.window.createWebviewPanel(
+  "idiogloss",
+  `idiogloss: ${fileName}`,
+  vscode.ViewColumn.Beside,
+  {
+    enableScripts: true,
+    retainContextWhenHidden: true,  // Keeps state when panel is hidden
+    localResourceRoots: [...],
+  },
+);
+```
+
+**Why this matters**: Without this option, the webview's JavaScript context is destroyed when hidden and recreated when shown again. This causes the Svelte app to lose all its state (file contents, line counts, etc.).
+
+**Trade-off**: `retainContextWhenHidden` uses more memory since the webview stays in memory even when not visible. For simple webviews like idiogloss, this is acceptable.
 
 ### Updating Icons
 
