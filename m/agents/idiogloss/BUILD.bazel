@@ -1,0 +1,60 @@
+load("@pip//:requirements.bzl", "requirement")
+load("@rules_python//python:defs.bzl", "py_binary", "py_library", "py_test")
+load("@rules_uv//uv:pip.bzl", "pip_compile")
+
+exports_files([
+    "requirements_lock.txt",
+])
+
+# Generate requirements_lock.txt from requirements.in using uv
+pip_compile(
+    name = "generate_requirements_lock",
+    requirements_in = "requirements.in",
+    requirements_txt = "requirements_lock.txt",
+)
+
+# Shared library for idiogloss modules
+py_library(
+    name = "idiogloss_lib",
+    srcs = [
+        "__init__.py",
+        "agent.py",
+        "handlers.py",
+        "logging_config.py",
+        "stats.py",
+    ],
+    deps = [
+        "//servers/hello:mcp_py",
+        requirement("claude-agent-sdk"),
+    ],
+)
+
+# Idiogloss agent using Claude SDK with MCP tools
+py_binary(
+    name = "agent_py",
+    srcs = ["agent.py"],
+    main = "agent.py",
+    deps = [
+        "//servers/hello:mcp_py",
+        requirement("claude-agent-sdk"),
+    ],
+)
+
+# Unix socket server for VS Code extension communication
+py_binary(
+    name = "server_py",
+    srcs = ["server.py"],
+    main = "server.py",
+    deps = [
+        ":idiogloss_lib",
+    ],
+)
+
+py_test(
+    name = "agent_py_test",
+    srcs = ["agent_test.py"],
+    main = "agent_test.py",
+    deps = [
+        "//servers/hello:mcp_py",
+    ],
+)

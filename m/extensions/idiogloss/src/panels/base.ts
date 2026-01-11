@@ -1,11 +1,16 @@
 import * as vscode from "vscode";
 import { log } from "../utils/logger";
 import { generateWebviewHtml } from "../webview/content";
+import { getAgentClient, ContentStats } from "../agent";
 
 export interface PanelMessage {
   type: string;
-  fileName: string;
-  content: string;
+  fileName?: string;
+  content?: string;
+  stats?: ContentStats;
+  connected?: boolean;
+  server_start_time?: number;
+  server_pid?: number;
 }
 
 export interface PanelOptions {
@@ -64,6 +69,75 @@ export abstract class BasePanel {
 
   protected sendMessage(message: PanelMessage): void {
     this.panel.webview.postMessage(message);
+  }
+
+  /**
+   * Request stats from the server and send to webview.
+   */
+  protected async requestStats(
+    fileName: string,
+    content: string,
+  ): Promise<void> {
+    const client = getAgentClient();
+    const isConnected = client.isConnected();
+    log(`[panel] requestStats: isConnected=${isConnected}, file=${fileName}`);
+
+    if (!isConnected) {
+      log("[panel] Server not connected, using local stats");
+      this.sendMessage({ type: "serverStatus", connected: false });
+      return;
+    }
+
+    try {
+      log("[panel] Sending stats request to server...");
+      const response = await client.getStats(fileName, content);
+      log(`[panel] Stats response: success=${response.success}`);
+      if (response.success && response.stats) {
+        this.sendMessage({
+          type: "stats",
+          stats: response.stats,
+        });
+      }
+    } catch (err) {
+      const msg = err instanceof Error ? err.message : String(err);
+      log(`[panel] Failed to get stats: ${msg}`);
+      this.sendMessage({ type: "serverStatus", connected: false });
+    }
+  }
+
+  /**
+   * Request server info via ping and send to webview.
+   */
+  protected async requestServerInfo(): Promise<void> {
+    const client = getAgentClient();
+    const isConnected = client.isConnected();
+    log(`[panel] requestServerInfo: isConnected=${isConnected}`);
+
+    if (!isConnected) {
+      log("[panel] Server not connected, sending serverStatus=false");
+      this.sendMessage({ type: "serverStatus", connected: false });
+      return;
+    }
+
+    try {
+      log("[panel] Sending ping to server...");
+      const response = await client.send({ action: "ping" });
+      log(
+        `[panel] Ping response: pong=${response.pong}, pid=${response.server_pid}`,
+      );
+      if (response.pong) {
+        this.sendMessage({
+          type: "serverInfo",
+          connected: true,
+          server_start_time: response.server_start_time,
+          server_pid: response.server_pid,
+        } as PanelMessage);
+      }
+    } catch (err) {
+      const msg = err instanceof Error ? err.message : String(err);
+      log(`[panel] Ping failed: ${msg}`);
+      this.sendMessage({ type: "serverStatus", connected: false });
+    }
   }
 
   public reveal(): void {

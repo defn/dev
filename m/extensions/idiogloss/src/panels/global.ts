@@ -23,12 +23,14 @@ export class GlobalPanel extends BasePanel {
     if (instance) {
       instance.reveal();
       instance.sendUpdate();
+      instance.requestServerInfo();
       log("Global panel revealed");
       return instance;
     }
 
     instance = new GlobalPanel(extensionUri);
     instance.sendUpdate();
+    instance.requestServerInfo();
     return instance;
   }
 
@@ -74,12 +76,14 @@ export class GlobalPanel extends BasePanel {
     log("Global panel disposed");
   }
 
-  public sendUpdate(): void {
+  public async sendUpdate(): Promise<void> {
     const { fileName, content } = getActiveEditorInfo();
     this.sendMessage({
       type: "update",
       fileName,
       content,
     });
+    // Request stats from server (async, don't block)
+    this.requestStats(fileName, content);
   }
 }

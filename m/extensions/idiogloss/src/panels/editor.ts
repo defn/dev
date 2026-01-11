@@ -24,6 +24,7 @@ export class EditorPanel extends BasePanel {
 
     log(`Editor panel created: ${fileName}`);
     this.sendUpdate();
+    this.requestServerInfo();
   }
 
   protected setupListeners(): void {
@@ -49,12 +50,14 @@ export class EditorPanel extends BasePanel {
     log(`Editor panel disposed: ${this.fileName}`);
   }
 
-  private sendUpdate(): void {
+  private async sendUpdate(): Promise<void> {
     const content = this.document?.getText() ?? "";
     this.sendMessage({
       type: "update",
       fileName: this.fileName,
       content,
     });
+    // Request stats from server (async, don't block)
+    this.requestStats(this.fileName, content);
   }
 }

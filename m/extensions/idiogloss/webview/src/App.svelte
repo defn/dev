@@ -1,9 +1,30 @@
 <script lang="ts">
   let fileName = $state("");
   let content = $state("");
-  let lineCount = $derived(content.split("\n").length);
-  let charCount = $derived(content.length);
-  let wordCount = $derived(content.trim() ? content.trim().split(/\s+/).length : 0);
+  let lineCount = $state(0);
+  let wordCount = $state(0);
+  let charCount = $state(0);
+  let serverConnected = $state(false);
+  let serverStartTime = $state(0);
+  let serverPid = $state(0);
+  let uptimeSeconds = $state(0);
+
+  // Update uptime every second
+  setInterval(() => {
+    if (serverStartTime > 0) {
+      uptimeSeconds = Math.floor(Date.now() / 1000 - serverStartTime);
+    }
+  }, 1000);
+
+  function formatUptime(seconds: number): string {
+    if (seconds < 60) return `${seconds}s`;
+    const mins = Math.floor(seconds / 60);
+    const secs = seconds % 60;
+    if (mins < 60) return `${mins}m ${secs}s`;
+    const hours = Math.floor(mins / 60);
+    const remainingMins = mins % 60;
+    return `${hours}h ${remainingMins}m`;
+  }
 
   // Listen for messages from the extension
   window.addEventListener("message", (event) => {
@@ -11,6 +32,31 @@
     if (message.type === "update") {
       fileName = message.fileName;
       content = message.content;
+      // Fallback to local calculation if no stats from server
+      if (!message.stats) {
+        lineCount = content.split("\n").length;
+        wordCount = content.trim() ? content.trim().split(/\s+/).length : 0;
+        charCount = content.length;
+      }
+    } else if (message.type === "stats") {
+      serverConnected = true;
+      if (message.stats) {
+        lineCount = message.stats.lines;
+        wordCount = message.stats.words;
+        charCount = message.stats.characters;
+      }
+    } else if (message.type === "serverInfo") {
+      serverConnected = true;
+      serverStartTime = message.server_start_time || 0;
+      serverPid = message.server_pid || 0;
+      uptimeSeconds = Math.floor(Date.now() / 1000 - serverStartTime);
+    } else if (message.type === "serverStatus") {
+      serverConnected = message.connected;
+      if (!message.connected) {
+        serverStartTime = 0;
+        serverPid = 0;
+        uptimeSeconds = 0;
+      }
     }
   });
 </script>
@@ -27,6 +73,13 @@
     </span>
     <span class="stat">
       <strong>{charCount}</strong> chars
+    </span>
+    <span class="status" class:connected={serverConnected}>
+      {#if serverConnected}
+        server (pid:{serverPid}, up:{formatUptime(uptimeSeconds)})
+      {:else}
+        local
+      {/if}
     </span>
   </div>
 
@@ -57,6 +110,20 @@
 
   .stat strong {
     color: var(--vscode-foreground);
+  }
+
+  .status {
+    margin-left: auto;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 0.8em;
+    background-color: var(--vscode-badge-background);
+    color: var(--vscode-badge-foreground);
+  }
+
+  .status.connected {
+    background-color: var(--vscode-testing-iconPassed);
+    color: var(--vscode-editor-background);
   }
 
   pre {

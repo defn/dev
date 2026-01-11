@@ -27,6 +27,18 @@
           "light": "media/icon-light.png",
           "dark": "media/icon-dark.png"
         }
+      },
+      {
+        "command": "idiogloss.startAgent",
+        "title": "idiogloss: Start Agent Server"
+      },
+      {
+        "command": "idiogloss.stopAgent",
+        "title": "idiogloss: Stop Agent Server"
+      },
+      {
+        "command": "idiogloss.queryAgent",
+        "title": "idiogloss: Query Agent"
       }
     ],
     "menus": {
