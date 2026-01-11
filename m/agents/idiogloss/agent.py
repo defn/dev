@@ -13,13 +13,23 @@ from typing import Any
 from claude_agent_sdk import ClaudeAgentOptions, ClaudeSDKClient
 from servers.hello.server import create_hello_server
 
+# Type alias for update callback
+UpdateCallback = Any  # Callable[[dict[str, Any]], Awaitable[None]] | None
 
-async def run_agent(prompt: str, max_turns: int = 5) -> dict[str, Any]:
+
+async def run_agent(
+    prompt: str,
+    max_turns: int = 5,
+    on_update: UpdateCallback = None,
+) -> dict[str, Any]:
     """Run the idiogloss agent with a given prompt.
 
     Args:
         prompt: The user prompt to process.
         max_turns: Maximum number of agent turns.
+        on_update: Optional async callback for streaming updates.
+            Called with {"type": "tool_call", "name": "...", "input": {...}}
+            or {"type": "text", "text": "..."} as the agent works.
 
     Returns:
         A dict with the agent response and metadata.
@@ -47,25 +57,50 @@ async def run_agent(prompt: str, max_turns: int = 5) -> dict[str, Any]:
         async with ClaudeSDKClient(options=options) as client:
             await client.query(prompt)
             async for msg in client.receive_response():
+                msg_type = type(msg).__name__
+                print(f"[agent] msg type: {msg_type}", flush=True)
+
                 # Extract text from ResultMessage (final response)
                 if hasattr(msg, "result") and msg.result:
+                    print(
+                        f"[agent] ResultMessage.result: {msg.result[:100]}...",
+                        flush=True,
+                    )
                     result["response"] = msg.result
                 # Or from AssistantMessage content blocks
                 elif hasattr(msg, "content"):
                     for block in msg.content:
+                        block_type = type(block).__name__
                         if hasattr(block, "text"):
+                            print(
+                                f"[agent] {block_type} text: {block.text[:50]}...",
+                                flush=True,
+                            )
                             result["response"] += block.text
+                            # Send text update
+                            if on_update:
+                                await on_update({"type": "text", "text": block.text})
                         elif hasattr(block, "name"):
                             # Tool use block
-                            result["tool_calls"].append(
-                                {
-                                    "name": block.name,
-                                    "input": getattr(block, "input", {}),
-                                }
+                            print(
+                                f"[agent] {block_type} tool: {block.name}", flush=True
                             )
+                            tool_call = {
+                                "name": block.name,
+                                "input": getattr(block, "input", {}),
+                            }
+                            result["tool_calls"].append(tool_call)
+                            # Send tool call update
+                            if on_update:
+                                await on_update({"type": "tool_call", **tool_call})
+
+            print(
+                f"[agent] final response length: {len(result['response'])}", flush=True
+            )
     except Exception as e:
         result["success"] = False
         result["error"] = str(e)
+        print(f"[agent] error: {e}", flush=True)
 
     return result
 

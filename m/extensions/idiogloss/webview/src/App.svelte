@@ -1,4 +1,10 @@
 <script lang="ts">
+  interface ProgressUpdate {
+    type: "tool_call" | "text";
+    name?: string;
+    text?: string;
+  }
+
   let fileName = $state("");
   let content = $state("");
   let lineCount = $state(0);
@@ -13,6 +19,7 @@
   let alucardLoading = $state(false);
   let alucardSummoned = $state(false); // Track if we've ever summoned Alucard
   let currentIncantation = $state(""); // The incantation being sent
+  let progressUpdates = $state<ProgressUpdate[]>([]); // Progress updates during loading
 
   // Update uptime every second
   setInterval(() => {
@@ -67,9 +74,16 @@
       currentIncantation = message.incantation || "";
       alucardLoading = true;
       alucardSummoned = true;
+      progressUpdates = []; // Clear previous progress
+    } else if (message.type === "progress") {
+      // Agent progress update
+      if (message.progress) {
+        progressUpdates = [...progressUpdates, message.progress];
+      }
     } else if (message.type === "alucard") {
       alucardResponse = message.alucard_response || "";
       alucardLoading = false;
+      progressUpdates = []; // Clear progress on completion
     }
   });
 </script>
@@ -160,6 +174,23 @@
             <div class="text-sm text-abyss-500 pl-6 border-l-2 border-abyss-700">
               Incantation: <span class="text-abyss-300 font-mono">"{currentIncantation}"</span>
             </div>
+            {#if progressUpdates.length > 0}
+              <div class="mt-2 space-y-1 pl-6 border-l-2 border-blood-800">
+                {#each progressUpdates as update}
+                  {#if update.type === "tool_call"}
+                    <div class="text-xs flex items-center gap-2">
+                      <span class="text-blood-500">⚡</span>
+                      <span class="text-abyss-400">Invoking dark power:</span>
+                      <span class="text-blood-400 font-mono">{update.name}</span>
+                    </div>
+                  {:else if update.type === "text"}
+                    <div class="text-xs text-abyss-300 italic">
+                      {update.text?.slice(0, 100)}{update.text && update.text.length > 100 ? "..." : ""}
+                    </div>
+                  {/if}
+                {/each}
+              </div>
+            {/if}
           </div>
         {:else if alucardResponse}
           <blockquote class="relative pl-6 border-l-4 border-blood-600">

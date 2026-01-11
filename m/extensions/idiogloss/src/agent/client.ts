@@ -2,7 +2,12 @@ import * as net from "net";
 import { spawn, ChildProcess } from "child_process";
 import { log } from "../utils/logger";
 import { truncate } from "./utils";
-import type { AgentRequest, AgentResponse, ResponseCallback } from "./types";
+import type {
+  AgentRequest,
+  AgentResponse,
+  AgentProgressUpdate,
+  ResponseCallback,
+} from "./types";
 
 const DEFAULT_SOCKET_PATH = "/tmp/idiogloss.sock";
 const WORKSPACE_DIR = "/home/ubuntu/m";
@@ -12,6 +17,7 @@ const MISE_PATH = "/home/ubuntu/.local/bin/mise";
 export type {
   AgentRequest,
   AgentResponse,
+  AgentProgressUpdate,
   ContentStats,
   ServerInfo,
 } from "./types";
@@ -307,9 +313,60 @@ export class AgentClient {
    * Transform text with Alucard's voice, including time and disk info.
    */
   async alucard(text: string): Promise<AgentResponse> {
-    return this.send({
-      action: "alucard",
-      text,
+    return this.alucardWithProgress(text);
+  }
+
+  /**
+   * Transform text with Alucard's voice, with progress updates.
+   * @param text The text to transform
+   * @param onProgress Optional callback for progress updates
+   */
+  async alucardWithProgress(
+    text: string,
+    onProgress?: (update: AgentProgressUpdate) => void,
+  ): Promise<AgentResponse> {
+    if (!this.connected || !this.socket) {
+      throw new Error("Not connected to agent server");
+    }
+
+    const request = { action: "alucard", text };
+    log(`[agent] -> ${JSON.stringify(request)}`);
+
+    return new Promise((resolve, reject) => {
+      const timeout = setTimeout(() => {
+        reject(new Error("Request timeout"));
+      }, 60000);
+
+      // Handler for responses - processes progress updates until final response
+      const handleResponse = (response: AgentResponse) => {
+        log(`[agent] <- raw: ${JSON.stringify(response).slice(0, 200)}`);
+
+        // Check if this is a progress update (has type: "progress" explicitly)
+        // Final response will have "success" field and no "type" field
+        const isProgress = response.type === "progress";
+
+        if (isProgress && response.update) {
+          log(`[agent] <- progress: ${response.update.type}`);
+          if (onProgress) {
+            onProgress(response.update as AgentProgressUpdate);
+          }
+          // Keep listening - use unshift to stay at front of queue
+          this.pendingCallbacks.unshift(handleResponse);
+        } else {
+          // Final response - has success field or is not a progress update
+          clearTimeout(timeout);
+          const logResp = { ...response };
+          if (logResp.alucard_response) {
+            logResp.alucard_response = truncate(logResp.alucard_response);
+          }
+          log(`[agent] <- final: ${JSON.stringify(logResp)}`);
+          resolve(response);
+        }
+      };
+
+      this.pendingCallbacks.push(handleResponse);
+      const line = JSON.stringify(request) + "\n";
+      this.socket!.write(line);
     });
   }
 

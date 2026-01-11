@@ -8,7 +8,7 @@
 import * as vscode from "vscode";
 import { log, Debouncer } from "../utils";
 import { generateWebviewHtml } from "../webview/content";
-import { getAgentClient, ContentStats } from "../agent";
+import { getAgentClient, ContentStats, AgentProgressUpdate } from "../agent";
 
 /** Debounce delay for content updates (milliseconds) */
 const CONTENT_DEBOUNCE_DELAY = 2000;
@@ -49,6 +49,8 @@ export interface PanelMessage {
   server_pid?: number;
   alucard_response?: string;
   incantation?: string;
+  /** Progress update from agent */
+  progress?: AgentProgressUpdate;
 }
 
 export interface PanelOptions {
@@ -214,19 +216,36 @@ export abstract class BasePanel {
 
     try {
       log("[panel] Sending alucard request to server...");
-      const response = await client.alucard(text);
-      log(`[panel] Alucard response: success=${response.success}`);
-      if (response.success && response.alucard_response) {
-        this.sendMessage({
-          type: "alucard",
-          alucard_response: response.alucard_response,
-        });
-      } else if (response.error) {
-        log(`[panel] Alucard error: ${response.error}`);
-      }
+      const response = await client.alucardWithProgress(
+        text,
+        (progress: AgentProgressUpdate) => {
+          // Send progress update to webview
+          log(`[panel] Progress: ${progress.type}`);
+          this.sendMessage({
+            type: "progress",
+            progress,
+          });
+        },
+      );
+      log(
+        `[panel] Alucard response: success=${response.success}, hasResponse=${!!response.alucard_response}`,
+      );
+      // Always send alucard message to clear loading state
+      this.sendMessage({
+        type: "alucard",
+        alucard_response:
+          response.alucard_response ||
+          response.error ||
+          "The vampire remains silent...",
+      });
     } catch (err) {
       const msg = err instanceof Error ? err.message : String(err);
       log(`[panel] Failed to get alucard response: ${msg}`);
+      // Clear loading state on error
+      this.sendMessage({
+        type: "alucard",
+        alucard_response: `The summoning failed: ${msg}`,
+      });
     }
   }
 

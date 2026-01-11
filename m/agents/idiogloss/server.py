@@ -49,9 +49,18 @@ class IdioglossServer:
                     request = json.loads(line.decode().strip())
                     action = request.get("action", "unknown")
                     log.debug(f"Received request: action={action}")
+
+                    # Create callback to send progress updates
+                    async def send_update(update: dict) -> None:
+                        update_line = json.dumps(update) + "\n"
+                        writer.write(update_line.encode())
+                        await writer.drain()
+                        log.debug(f"Update sent: {update.get('type')}")
+
                     response = await dispatch_request(
                         request,
                         shutdown_callback=self._trigger_shutdown,
+                        on_update=send_update,
                     )
                     log.debug(f"Response: success={response.get('success')}")
                 except json.JSONDecodeError as e:

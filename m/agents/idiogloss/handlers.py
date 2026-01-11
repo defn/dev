@@ -2,10 +2,13 @@
 
 import os
 import time
-from typing import Any
+from typing import Any, Awaitable, Callable
 
 from agents.idiogloss.agent import run_agent
 from agents.idiogloss.stats import compute_stats
+
+# Type for async write callback
+WriteCallback = Callable[[dict[str, Any]], Awaitable[None]] | None
 
 # Alucard prompt template
 ALUCARD_PROMPT = """You are Alucard, the powerful vampire from Hellsing. Respond in your characteristic tone - dark, theatrical, amused by mortals, with occasional references to blood, darkness, and your immortal nature. Be dramatic but keep it concise (3-4 sentences).
@@ -58,7 +61,10 @@ async def handle_query(request: dict[str, Any]) -> dict[str, Any]:
     return result
 
 
-async def handle_alucard(request: dict[str, Any]) -> dict[str, Any]:
+async def handle_alucard(
+    request: dict[str, Any],
+    on_update: WriteCallback = None,
+) -> dict[str, Any]:
     """Handle alucard request - transform incantation with Alucard's voice."""
     incantation = request.get("text", "")
 
@@ -66,11 +72,22 @@ async def handle_alucard(request: dict[str, Any]) -> dict[str, Any]:
         return {"success": False, "error": "No incantation provided"}
 
     prompt = ALUCARD_PROMPT.format(incantation=incantation)
-    result = await run_agent(prompt, max_turns=5)
+
+    # Create update callback to send progress
+    async def send_update(update: dict[str, Any]) -> None:
+        if on_update:
+            await on_update({"type": "progress", "update": update})
+
+    result = await run_agent(prompt, max_turns=5, on_update=send_update)
+
+    response_text = result.get("response", "")
+    print(f"[handler] result.response length: {len(response_text)}", flush=True)
+    print(f"[handler] result.success: {result.get('success')}", flush=True)
+    print(f"[handler] result.error: {result.get('error')}", flush=True)
 
     return {
         "success": result.get("success", False),
-        "alucard_response": result.get("response", ""),
+        "alucard_response": response_text,
         "error": result.get("error"),
     }
 
@@ -83,6 +100,7 @@ async def handle_shutdown() -> dict[str, Any]:
 async def dispatch_request(
     request: dict[str, Any],
     shutdown_callback: callable,
+    on_update: WriteCallback = None,
 ) -> dict[str, Any]:
     """Dispatch request to appropriate handler."""
     action = request.get("action", "query")
@@ -94,7 +112,7 @@ async def dispatch_request(
     elif action == "query":
         return await handle_query(request)
     elif action == "alucard":
-        return await handle_alucard(request)
+        return await handle_alucard(request, on_update=on_update)
     elif action == "shutdown":
         shutdown_callback()
         return await handle_shutdown()

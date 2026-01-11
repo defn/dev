@@ -23,6 +23,14 @@ export interface ServerInfo {
   server_pid: number;
 }
 
+/** Progress update from agent during streaming */
+export interface AgentProgressUpdate {
+  type: "tool_call" | "text";
+  name?: string;
+  input?: Record<string, unknown>;
+  text?: string;
+}
+
 export interface AgentResponse {
   success: boolean;
   response?: string;
@@ -35,6 +43,9 @@ export interface AgentResponse {
   server_start_time?: number;
   server_pid?: number;
   alucard_response?: string;
+  /** For progress updates */
+  type?: "progress";
+  update?: AgentProgressUpdate;
 }
 
 export type ResponseCallback = (response: AgentResponse) => void;
