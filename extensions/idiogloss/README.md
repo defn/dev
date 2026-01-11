@@ -5,8 +5,21 @@ A VS Code extension that opens a webview panel paired to your current editor.
 ## Usage
 
 1. Open any file in the editor
-2. Click the pig snout icon in the editor title bar (top right, near split/more buttons)
-3. A panel opens beside your editor showing the filename
+2. Open the Idiogloss panel using either:
+   - Click the pig snout icon in the editor title bar (top right, near split/more buttons)
+   - Keyboard shortcut (see below)
+3. A panel opens beside your editor showing the file contents
+
+### Keyboard Shortcuts
+
+| Platform | Shortcut |
+|----------|----------|
+| macOS | `Cmd + Delete` |
+| Chromebook | `Search + Backspace` |
+| Windows | `Win + Backspace` |
+| Linux | `Meta + Backspace` |
+
+The Search key on Chromebook (where Caps Lock usually is) maps to `meta`. On macOS, `cmd` is used instead since there's no `meta` key.
 
 ## Development
 
@@ -36,9 +49,10 @@ idiogloss/
 
 ### Key Files Explained
 
-- **package.json**: Defines the extension metadata, commands, menus, and icons. The `contributes` section registers:
+- **package.json**: Defines the extension metadata, commands, menus, icons, and keybindings. The `contributes` section registers:
   - `commands`: The "Open Panel" command with its icon
   - `menus.editor/title`: Places the icon in the editor title bar
+  - `keybindings`: Keyboard shortcuts (uses `key` for default, `mac` for macOS override)
 
 - **src/extension.ts**: The main code that:
   - Registers the command handler

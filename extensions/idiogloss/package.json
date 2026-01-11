@@ -33,7 +33,15 @@
           "when": "editorFocus"
         }
       ]
-    }
+    },
+    "keybindings": [
+      {
+        "command": "idiogloss.openPanel",
+        "key": "meta+backspace",
+        "mac": "cmd+backspace",
+        "when": "editorFocus"
+      }
+    ]
   },
   "scripts": {
     "compile": "tsc",
