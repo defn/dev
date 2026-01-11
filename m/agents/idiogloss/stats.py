@@ -1,4 +1,23 @@
-"""Content statistics computation."""
+"""Content Statistics Computation.
+
+Simple text analysis for displaying file metrics in the webview.
+
+## Why Server-Side?
+
+Stats could be computed in the webview (JavaScript), but doing it
+server-side means:
+
+1. Consistent implementation (Python vs JS edge cases)
+2. Easy to extend with more complex analysis
+3. Webview stays thin - just displays what server sends
+
+## Metrics
+
+- lines: Number of newline-separated lines
+- words: Whitespace-separated tokens
+- characters: Total character count
+- characters_no_spaces: Characters excluding spaces and newlines
+"""
 
 from typing import Any
 

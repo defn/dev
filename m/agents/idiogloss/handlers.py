@@ -1,4 +1,43 @@
-"""Request handlers for idiogloss server."""
+"""Request Handlers for Idiogloss Server.
+
+This module dispatches incoming requests to appropriate handlers.
+
+## Supported Actions
+
+| Action     | Handler           | Description                          |
+|------------|-------------------|--------------------------------------|
+| ping       | handle_ping       | Health check, returns uptime/PID     |
+| stats      | handle_stats      | Compute line/word/char counts        |
+| query      | handle_query      | Run agent with arbitrary prompt      |
+| alucard    | handle_alucard    | Theatrical vampire response mode     |
+| shutdown   | handle_shutdown   | Graceful server stop                 |
+
+## Alucard Mode
+
+The "alucard" action is a themed wrapper around the agent. It:
+
+1. Wraps user text in a vampire-themed prompt
+2. Instructs Claude to respond as Alucard from Hellsing
+3. Uses MCP tools (get_time, etc.) for context
+4. Streams progress updates back to client
+
+This demonstrates agent customization via prompt engineering.
+
+## Progress Updates
+
+Long-running handlers (alucard, query) accept an `on_update` callback.
+This enables streaming partial results back to the client:
+
+    async def send_update(update: dict) -> None:
+        await on_update({"type": "progress", "update": update})
+
+The client receives these as intermediate responses before the final one.
+
+## Server Metadata
+
+SERVER_START_TIME and SERVER_PID are captured at module load for
+uptime tracking in ping responses.
+"""
 
 import os
 import time

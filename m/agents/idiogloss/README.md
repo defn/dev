@@ -24,12 +24,13 @@ The server communicates with the VS Code extension via Unix socket (`/tmp/idiogl
 
 ### Actions
 
-| Action     | Description                         |
-| ---------- | ----------------------------------- |
-| `ping`     | Health check, returns server uptime |
-| `stats`    | Compute line/word/char counts       |
-| `query`    | Run agent with prompt               |
-| `shutdown` | Stop the server                     |
+| Action     | Description                              |
+| ---------- | ---------------------------------------- |
+| `ping`     | Health check, returns server uptime/PID  |
+| `stats`    | Compute line/word/char counts            |
+| `query`    | Run agent with arbitrary prompt          |
+| `alucard`  | Theatrical vampire response (streaming)  |
+| `shutdown` | Stop the server                          |
 
 ### Logging
 

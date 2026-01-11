@@ -1,8 +1,47 @@
 #!/usr/bin/env python3
-"""Idiogloss agent using Claude Agent SDK with MCP tools.
+"""Idiogloss Agent - Claude SDK with In-Process MCP Tools.
 
-This agent provides a backend for the idiogloss VS Code extension,
-running an in-process MCP server with system information tools.
+This module provides the AI agent that powers idiogloss responses.
+
+## Claude Agent SDK
+
+The agent uses `claude_agent_sdk` to interact with Claude API:
+
+1. `ClaudeAgentOptions` - Configure max_turns, tools, MCP servers
+2. `ClaudeSDKClient` - Async context manager for agent sessions
+3. `client.query()` - Send initial prompt
+4. `client.receive_response()` - Async iterator for responses
+
+## MCP (Model Context Protocol)
+
+MCP allows Claude to call external tools. This agent uses an in-process
+MCP server (no separate process needed):
+
+    mcp_server = create_hello_server(name="idiogloss_tools")
+    options = ClaudeAgentOptions(mcp_servers={"idiogloss": mcp_server})
+
+Available tools:
+- `mcp__idiogloss__get_time` - Current date/time
+- `mcp__idiogloss__get_disk_usage` - Disk statistics
+- `mcp__idiogloss__get_user_info` - User/group info
+
+## Response Streaming
+
+The agent yields multiple message types during execution:
+
+1. `AssistantMessage` with content blocks:
+   - `TextBlock` - Partial text responses
+   - `ToolUseBlock` - Tool invocations (name, input)
+2. `ResultMessage` - Final aggregated response
+
+The `on_update` callback streams these to the client for liveness.
+
+## Entry Points
+
+- `run_agent(prompt)` - Programmatic API for server
+- `interactive_mode()` - REPL for testing
+- `json_mode()` - Stdin/stdout JSON for scripting
+- CLI with prompt argument - One-shot execution
 """
 
 import asyncio

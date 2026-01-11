@@ -1,7 +1,46 @@
 #!/usr/bin/env python3
-"""Unix socket server for idiogloss agent.
+"""Unix Socket Server for Idiogloss Agent.
 
-Listens on a Unix socket and handles JSON requests from the VS Code extension.
+This server handles IPC between the VS Code extension and the Python agent.
+
+## Protocol
+
+- Transport: Unix domain socket at /tmp/idiogloss.sock
+- Format: Newline-delimited JSON (NDJSON)
+- Request: {"action": "...", ...}\n
+- Response: {"success": true, ...}\n
+
+## Why Unix Sockets?
+
+1. No network overhead - direct kernel IPC
+2. File-based permissions (chmod 0o600)
+3. No port conflicts on multi-user systems
+4. Natural fit for local extension ↔ agent communication
+
+## Connection Flow
+
+1. Client (TypeScript) connects to socket
+2. Server spawns async handler per connection
+3. Handler reads line, dispatches to handlers.py
+4. Response sent back, connection stays open for more requests
+5. Empty line or disconnect closes connection
+
+## Streaming Responses
+
+For long-running requests (like alucard), the server can send multiple
+responses before the final one:
+
+1. Progress updates: {"type": "progress", "update": {...}}
+2. Final response: {"success": true, "alucard_response": "..."}
+
+The `send_update` callback passed to handlers enables this.
+
+## Graceful Shutdown
+
+- SIGINT/SIGTERM trigger shutdown_handler
+- Server stops accepting new connections
+- Existing handlers complete or are cancelled
+- Socket file is cleaned up
 """
 
 import asyncio

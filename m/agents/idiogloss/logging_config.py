@@ -1,4 +1,33 @@
-"""Logging configuration for idiogloss server."""
+"""Logging Configuration for Idiogloss Server.
+
+Dual-output logging: detailed file logs + concise stderr.
+
+## Why Two Handlers?
+
+1. **File handler** (DEBUG level): Full history for debugging
+   - Location: /tmp/idiogloss-server.log
+   - Format: timestamps, log levels, full messages
+   - Persists across sessions
+
+2. **Stderr handler** (INFO level): VS Code Output channel
+   - Format: [server] prefix for easy filtering
+   - Shows in extension's output panel
+   - Avoids debug spam in normal operation
+
+## Log Levels
+
+- DEBUG: Connection details, request/response payloads
+- INFO: Startup, shutdown, client connect/disconnect
+- ERROR: Exceptions, JSON parse failures
+
+## Usage
+
+    from agents.idiogloss.logging_config import log
+
+    log.info("Server started")
+    log.debug(f"Request: {request}")
+    log.error(f"Failed: {e}")
+"""
 
 import logging
 import sys
