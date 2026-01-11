@@ -1,0 +1,1 @@
+export { generateWebviewHtml } from "./content";
