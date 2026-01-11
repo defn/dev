@@ -1,13 +1,8 @@
-load("@io_bazel_rules_go//go:def.bzl", "go_binary", "go_library", "go_test")
 load("@pip//:requirements.bzl", "requirement")
-load("@rules_img//img:image.bzl", "image_manifest")
-load("@rules_img//img:layer.bzl", "image_layer")
-load("@rules_img//img:push.bzl", "image_push")
 load("@rules_python//python:defs.bzl", "py_binary", "py_test")
 load("@rules_uv//uv:pip.bzl", "pip_compile")
 
 exports_files([
-    "hello.cue",
     "requirements_lock.txt",
 ])
 
@@ -16,69 +11,6 @@ pip_compile(
     name = "generate_requirements_lock",
     requirements_in = "requirements.in",
     requirements_txt = "requirements_lock.txt",
-)
-
-go_library(
-    name = "hello_lib",
-    srcs = ["hello.go"],
-    embedsrcs = ["hello.cue"],
-    importpath = "github.com/defn/dev/m/hello",
-    visibility = ["//visibility:private"],
-    deps = [
-        "//:m",
-        "//cmd/base",
-        "//cmd/runner",
-        "//command/root",
-        "//cue",
-        "//hello/p",
-        "@com_github_bitfield_script//:script",
-        "@com_github_lann_builder//:builder",
-        "@com_github_samber_lo//:lo",
-        "@com_github_sourcegraph_conc//pool",
-        "@com_github_spf13_cobra//:cobra",
-        "@com_github_spf13_viper//:viper",
-        "@in_gopkg_yaml_v3//:yaml_v3",
-        "@org_uber_go_fx//:fx",
-        "@org_uber_go_zap//:zap",
-    ],
-)
-
-go_binary(
-    name = "hello_go",
-    embed = [":hello_lib"],
-    pure = "on",
-    visibility = ["//visibility:public"],
-)
-
-go_test(
-    name = "hello_test",
-    srcs = ["hello_test.go"],
-    data = glob(["testdata/**"]),
-    embed = [":hello_lib"],
-    deps = ["@com_github_rogpeppe_go_internal//testscript"],
-)
-
-image_layer(
-    name = "hello_layer",
-    srcs = {
-        "/hello": "//hello:hello_go",
-    },
-)
-
-image_manifest(
-    name = "hello_manifest",
-    base = "@defn_dev_image",
-    layers = [
-        ":hello_layer",
-    ],
-)
-
-image_push(
-    name = "push",
-    image = ":hello_manifest",
-    registry = "ghcr.io",
-    repository = "defn/dev",
-    tag = "bazel",
 )
 
 # Python agent example using Claude SDK with MCP tools

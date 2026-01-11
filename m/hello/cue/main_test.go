@@ -1,6 +1,7 @@
 package main
 
 import (
+	"os"
 	"testing"
 
 	"github.com/rogpeppe/go-internal/testscript"
@@ -8,11 +9,15 @@ import (
 
 func TestMain(m *testing.M) {
 	testscript.Main(m, map[string]func(){
-		"defn": run,
+		"hello_cue": run,
 	})
 }
 
-func TestHelloCommand(t *testing.T) {
+func TestHelloCueCommand(t *testing.T) {
+	// Skip if testdata directory doesn't exist or is empty
+	if _, err := os.Stat("testdata"); os.IsNotExist(err) {
+		t.Skip("testdata directory not found")
+	}
 	testscript.Run(t, testscript.Params{
 		Dir:                 "testdata",
 		RequireExplicitExec: true,

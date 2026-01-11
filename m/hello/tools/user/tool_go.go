@@ -92,4 +92,3 @@ func Tool() *mcp.Tool {
 		Description: "Get current user and group information as JSON",
 	}
 }
-

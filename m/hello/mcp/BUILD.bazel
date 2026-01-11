@@ -1,4 +1,4 @@
-load("@io_bazel_rules_go//go:def.bzl", "go_binary", "go_library")
+load("@io_bazel_rules_go//go:def.bzl", "go_binary", "go_library", "go_test")
 load("@pip//:requirements.bzl", "requirement")
 load("@rules_python//python:defs.bzl", "py_binary", "py_library", "py_test")
 
@@ -22,6 +22,12 @@ py_test(
     name = "server_py_test",
     srcs = ["server_py_test.py"],
     deps = [":mcp_py"],
+)
+
+go_test(
+    name = "server_go_test",
+    srcs = ["server_go_test.go"],
+    embed = [":mcp_go"],
 )
 
 # Go MCP server library

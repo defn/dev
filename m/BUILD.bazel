@@ -9,7 +9,7 @@ go_library(
     embedsrcs = [
         # keep
         "//cue.mod:module.cue",  # keep
-        "//hello:hello.cue",  # keep
+        "//hello/cue:hello.cue",  # keep
     ],
     importpath = "github.com/defn/dev/m",
     visibility = ["//visibility:public"],
