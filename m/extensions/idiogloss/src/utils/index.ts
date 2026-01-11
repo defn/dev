@@ -3,4 +3,4 @@ export {
   getActiveEditorInfo,
   getDocumentInfo,
   type EditorInfo,
-} from "./editor";
+} from "./activeEditor";

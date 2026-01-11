@@ -1,10 +1,24 @@
+/**
+ * Global panel module - singleton panel that tracks the active editor.
+ */
+
 import * as vscode from "vscode";
 import { BasePanel, PanelOptions } from "./base";
 import { log } from "../utils/logger";
-import { getActiveEditorInfo } from "../utils/editor";
+import { getActiveEditorInfo } from "../utils/activeEditor";
 
+/** Singleton instance */
 let instance: GlobalPanel | undefined;
 
+/**
+ * Singleton webview panel that tracks the currently active editor.
+ *
+ * Automatically updates when:
+ * - User switches to a different file (onDidChangeActiveTextEditor)
+ * - Current file content changes (onDidChangeTextDocument)
+ *
+ * Use GlobalPanel.create() to get or create the singleton instance.
+ */
 export class GlobalPanel extends BasePanel {
   private editorChangeListener: vscode.Disposable | undefined;
   private contentChangeListener: vscode.Disposable | undefined;

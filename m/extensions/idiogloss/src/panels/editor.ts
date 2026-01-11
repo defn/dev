@@ -1,7 +1,21 @@
+/**
+ * Editor panel module - per-file panel tied to a specific document.
+ */
+
 import * as vscode from "vscode";
 import { BasePanel, PanelOptions } from "./base";
 import { log } from "../utils/logger";
 
+/**
+ * Webview panel tied to a specific file/document.
+ *
+ * Unlike GlobalPanel (singleton tracking active editor), EditorPanel:
+ * - Creates a new instance for each file
+ * - Only updates when its specific document changes
+ * - Panel title shows the filename
+ *
+ * Multiple EditorPanels can exist simultaneously for different files.
+ */
 export class EditorPanel extends BasePanel {
   private readonly document: vscode.TextDocument | undefined;
   private readonly fileName: string;

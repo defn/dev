@@ -1,5 +1,10 @@
+/**
+ * Utilities for accessing VS Code active editor information.
+ */
+
 import * as vscode from "vscode";
 
+/** Information about an editor and its document */
 export interface EditorInfo {
   editor: vscode.TextEditor | undefined;
   document: vscode.TextDocument | undefined;
@@ -7,6 +12,10 @@ export interface EditorInfo {
   content: string;
 }
 
+/**
+ * Get information about the currently active text editor.
+ * @returns EditorInfo with editor, document, fileName, and content
+ */
 export function getActiveEditorInfo(): EditorInfo {
   const editor = vscode.window.activeTextEditor;
   const document = editor?.document;
@@ -15,6 +24,11 @@ export function getActiveEditorInfo(): EditorInfo {
   return { editor, document, fileName, content };
 }
 
+/**
+ * Get information about a specific document.
+ * @param document - The VS Code TextDocument to get info for
+ * @returns EditorInfo with document details (editor will be undefined)
+ */
 export function getDocumentInfo(
   document: vscode.TextDocument | undefined,
 ): EditorInfo {

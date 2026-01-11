@@ -1,8 +1,21 @@
+/**
+ * idiogloss VS Code Extension
+ *
+ * Main entry point for the extension. Handles lifecycle management,
+ * command registration, and agent server coordination.
+ */
+
 import * as vscode from "vscode";
 import { initLogger, log } from "./utils";
 import { GlobalPanel, EditorPanel } from "./panels";
 import { getAgentClient, disposeAgentClient } from "./agent";
 
+/**
+ * Starts the Python agent server and establishes a connection.
+ * The server communicates via Unix socket at /tmp/idiogloss-agent.sock.
+ *
+ * @returns Promise resolving to true if server started and connected successfully
+ */
 async function startAgentServer(): Promise<boolean> {
   const workspaceFolders = vscode.workspace.workspaceFolders;
   if (!workspaceFolders) {
@@ -34,6 +47,19 @@ async function startAgentServer(): Promise<boolean> {
   }
 }
 
+/**
+ * Extension activation entry point.
+ * Called by VS Code when the extension is first activated.
+ *
+ * Registers commands:
+ * - idiogloss.openPanel: Open global tracking panel
+ * - idiogloss.openEditorPanel: Open per-file panel
+ * - idiogloss.queryAgent: Send prompt to agent
+ * - idiogloss.startAgent: Manually start agent server
+ * - idiogloss.stopAgent: Stop agent server
+ *
+ * @param context - VS Code extension context for managing subscriptions
+ */
 export async function activate(context: vscode.ExtensionContext) {
   const outputChannel = initLogger();
   context.subscriptions.push(outputChannel);
@@ -137,6 +163,11 @@ export async function activate(context: vscode.ExtensionContext) {
   log("Extension activated");
 }
 
+/**
+ * Extension deactivation handler.
+ * Called by VS Code when the extension is being unloaded.
+ * Cleans up agent client connection and server process.
+ */
 export async function deactivate() {
   log("Extension deactivating...");
   disposeAgentClient();

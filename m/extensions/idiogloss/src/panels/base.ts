@@ -1,8 +1,16 @@
+/**
+ * Base panel module for idiogloss webview panels.
+ *
+ * Provides abstract BasePanel class with shared functionality for
+ * creating webview panels, handling messages, and managing lifecycle.
+ */
+
 import * as vscode from "vscode";
 import { log } from "../utils/logger";
 import { generateWebviewHtml } from "../webview/content";
 import { getAgentClient, ContentStats } from "../agent";
 
+/** Message sent from extension to webview via postMessage */
 export interface PanelMessage {
   type: string;
   fileName?: string;
@@ -20,6 +28,20 @@ export interface PanelOptions {
   retainContextWhenHidden?: boolean;
 }
 
+/**
+ * Abstract base class for webview panels.
+ *
+ * Provides common functionality:
+ * - Webview panel creation with security options
+ * - Message passing to webview via postMessage()
+ * - Lifecycle management (dispose pattern)
+ * - Agent server communication (stats, ping)
+ *
+ * Subclasses must implement:
+ * - setupListeners(): Configure VS Code event listeners
+ * - onViewStateChanged(): Handle panel visibility changes
+ * - onDispose(): Cleanup when panel is closed
+ */
 export abstract class BasePanel {
   protected panel: vscode.WebviewPanel;
   protected disposables: vscode.Disposable[] = [];
