@@ -6,9 +6,18 @@
  */
 
 import * as vscode from "vscode";
-import { log } from "../utils/logger";
+import { log, Debouncer } from "../utils";
 import { generateWebviewHtml } from "../webview/content";
 import { getAgentClient, ContentStats } from "../agent";
+
+/** Debounce delay for content updates (milliseconds) */
+const CONTENT_DEBOUNCE_DELAY = 2000;
+
+/** Content update payload */
+interface ContentUpdate {
+  fileName: string;
+  content: string;
+}
 
 /** Track all active panels for server status updates */
 const activePanels: Set<BasePanel> = new Set();
@@ -68,15 +77,18 @@ export abstract class BasePanel {
   protected disposables: vscode.Disposable[] = [];
   protected readonly extensionUri: vscode.Uri;
 
-  /** Pending content update to send after debounce */
-  private pendingUpdate: { fileName: string; content: string } | null = null;
-  /** Debounce timer for content updates */
-  private debounceTimer: NodeJS.Timeout | null = null;
-  /** Debounce delay in milliseconds */
-  private static readonly DEBOUNCE_DELAY = 3000;
+  /** Debouncer for content updates */
+  private contentDebouncer: Debouncer<ContentUpdate>;
 
   constructor(options: PanelOptions) {
     this.extensionUri = options.extensionUri;
+
+    // Initialize content debouncer
+    this.contentDebouncer = new Debouncer<ContentUpdate>(
+      CONTENT_DEBOUNCE_DELAY,
+      (update) => this.sendContentUpdate(update),
+      "panel",
+    );
 
     // Track this panel for server status updates
     activePanels.add(this);
@@ -126,37 +138,17 @@ export abstract class BasePanel {
 
   /**
    * Called after content is sent to webview. Debounces server requests.
-   * Waits 3 seconds of idle before sending to server.
    */
   protected onContentUpdate(fileName: string, content: string): void {
-    // Store pending update
-    this.pendingUpdate = { fileName, content };
-
-    // Clear existing timer
-    if (this.debounceTimer) {
-      clearTimeout(this.debounceTimer);
-    }
-
-    // Set new debounce timer
-    this.debounceTimer = setTimeout(() => {
-      this.sendPendingUpdate();
-    }, BasePanel.DEBOUNCE_DELAY);
-
-    log(
-      `[panel] Content update queued, waiting ${BasePanel.DEBOUNCE_DELAY}ms for idle`,
-    );
+    this.contentDebouncer.call({ fileName, content });
   }
 
   /**
-   * Send pending update to server (stats and alucard).
+   * Send content update to server (stats and alucard).
    */
-  private async sendPendingUpdate(): Promise<void> {
-    if (!this.pendingUpdate) {
-      return;
-    }
-
-    const { fileName, content } = this.pendingUpdate;
-    log(`[panel] Sending pending update for ${fileName}`);
+  private async sendContentUpdate(update: ContentUpdate): Promise<void> {
+    const { fileName, content } = update;
+    log(`[panel] Sending content update for ${fileName}`);
 
     // Request stats from server
     this.requestStats(fileName, content);
@@ -281,6 +273,9 @@ export abstract class BasePanel {
     // Remove from active panels tracking
     activePanels.delete(this);
 
+    // Cancel any pending debounced updates
+    this.contentDebouncer.cancel();
+
     for (const disposable of this.disposables) {
       disposable.dispose();
     }
@@ -297,9 +292,9 @@ export abstract class BasePanel {
     this.requestServerInfo();
 
     // Send any pending update that was queued while server was starting
-    if (this.pendingUpdate) {
-      log("[panel] Sending queued update after server connection");
-      this.sendPendingUpdate();
+    if (this.contentDebouncer.hasPending()) {
+      log("[panel] Flushing queued update after server connection");
+      this.contentDebouncer.flush();
     }
   }
 

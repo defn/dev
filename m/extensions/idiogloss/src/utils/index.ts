@@ -4,3 +4,4 @@ export {
   getDocumentInfo,
   type EditorInfo,
 } from "./activeEditor";
+export { Debouncer, Heartbeat, type HeartbeatOptions } from "./timers";

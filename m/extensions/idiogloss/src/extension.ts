@@ -6,7 +6,7 @@
  */
 
 import * as vscode from "vscode";
-import { initLogger, log } from "./utils";
+import { initLogger, log, Heartbeat } from "./utils";
 import {
   GlobalPanel,
   EditorPanel,
@@ -17,6 +17,12 @@ import { getAgentClient, disposeAgentClient } from "./agent";
 
 /** Status bar item for showing server state */
 let statusBarItem: vscode.StatusBarItem | undefined;
+
+/** Flag to prevent concurrent restart attempts */
+let isRestarting = false;
+
+/** Server health monitor */
+let serverHeartbeat: Heartbeat | undefined;
 
 function updateStatusBar(state: "starting" | "connected" | "disconnected") {
   if (!statusBarItem) {
@@ -47,6 +53,72 @@ function updateStatusBar(state: "starting" | "connected" | "disconnected") {
       break;
   }
   statusBarItem.show();
+}
+
+/**
+ * Initialize and start the heartbeat monitor.
+ */
+function startHeartbeat(): void {
+  if (!serverHeartbeat) {
+    serverHeartbeat = new Heartbeat({
+      baseInterval: 10000, // 10 seconds
+      maxInterval: 10 * 60 * 1000, // 10 minutes
+      label: "server",
+      onCheck: async () => {
+        if (isRestarting) {
+          return true; // Skip check during restart
+        }
+        const client = getAgentClient();
+        if (!client.isConnected()) {
+          return true; // Skip if not connected
+        }
+        return client.ping();
+      },
+      onFailure: async () => {
+        await restartServer();
+      },
+    });
+  }
+  serverHeartbeat.start();
+}
+
+/**
+ * Stop the heartbeat monitor.
+ */
+function stopHeartbeat(): void {
+  serverHeartbeat?.stop();
+}
+
+/**
+ * Restart the server after a heartbeat failure.
+ */
+async function restartServer(): Promise<void> {
+  if (isRestarting) {
+    log("[restart] Already restarting, skipping");
+    return;
+  }
+
+  isRestarting = true;
+  stopHeartbeat();
+
+  const client = getAgentClient();
+  updateStatusBar("starting");
+  notifyPanelsServerDisconnected();
+
+  try {
+    // Stop existing server
+    log("[restart] Stopping existing server...");
+    await client.stopServer();
+
+    // Start fresh
+    log("[restart] Starting new server...");
+    const success = await startAgentServer();
+    if (!success) {
+      log("[restart] Failed to restart server");
+    }
+  } finally {
+    isRestarting = false;
+  }
 }
 
 /**
@@ -81,6 +153,8 @@ async function startAgentServer(): Promise<boolean> {
       updateStatusBar("connected");
       // Notify any panels that were created before server was ready
       notifyPanelsServerConnected();
+      // Start heartbeat monitoring
+      startHeartbeat();
       return true;
     } else {
       log("[startup] Agent server started but ping failed");
@@ -194,6 +268,7 @@ export async function activate(context: vscode.ExtensionContext) {
   const stopAgentCmd = vscode.commands.registerCommand(
     "idiogloss.stopAgent",
     async () => {
+      stopHeartbeat();
       const client = getAgentClient();
       await client.stopServer();
       updateStatusBar("disconnected");
@@ -225,6 +300,7 @@ export async function activate(context: vscode.ExtensionContext) {
  */
 export async function deactivate() {
   log("Extension deactivating...");
+  stopHeartbeat();
   disposeAgentClient();
   log("Extension deactivated");
 }
