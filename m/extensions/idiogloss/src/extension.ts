@@ -194,6 +194,40 @@ async function startAgentServer(): Promise<boolean> {
 }
 
 /**
+ * Apply VS Code configuration overrides.
+ *
+ * Some settings can't be configured via JSON (e.g., they're ignored or
+ * overwritten). This function sets them programmatically on activation.
+ *
+ * Current overrides:
+ * - Disable automatic port forwarding notifications (noisy in remote dev)
+ */
+async function applyConfigOverrides(): Promise<void> {
+  const config = vscode.workspace.getConfiguration();
+
+  // Disable automatic port forwarding - very noisy in remote development
+  // See: https://github.com/microsoft/vscode/issues/221888
+  const overrides: Record<string, unknown> = {
+    "remote.autoForwardPorts": false,
+    "remote.restoreForwardedPorts": false,
+    "remote.autoForwardPortsSource": "output",
+  };
+
+  for (const [key, value] of Object.entries(overrides)) {
+    const current = config.get(key);
+    if (current !== value) {
+      try {
+        await config.update(key, value, vscode.ConfigurationTarget.Global);
+        log(`[config] Set ${key} = ${value}`);
+      } catch (err) {
+        // Some settings may not be writable, that's OK
+        log(`[config] Could not set ${key}: ${err}`);
+      }
+    }
+  }
+}
+
+/**
  * Extension activation entry point.
  * Called by VS Code when the extension is first activated.
  *
@@ -210,6 +244,9 @@ export async function activate(context: vscode.ExtensionContext) {
   const outputChannel = initLogger();
   context.subscriptions.push(outputChannel);
   log("Extension activating...");
+
+  // Apply VS Code configuration overrides
+  await applyConfigOverrides();
 
   // Auto-start the agent server
   startAgentServer();
