@@ -17,10 +17,23 @@
   "contributes": {
     "commands": [
       {
-        "command": "idiogloss.hello",
-        "title": "Idiogloss: Hello"
+        "command": "idiogloss.openPanel",
+        "title": "Idiogloss: Open Panel",
+        "icon": {
+          "light": "media/icon-light.png",
+          "dark": "media/icon-dark.png"
+        }
       }
-    ]
+    ],
+    "menus": {
+      "editor/title": [
+        {
+          "command": "idiogloss.openPanel",
+          "group": "navigation",
+          "when": "editorFocus"
+        }
+      ]
+    }
   },
   "scripts": {
     "compile": "tsc",
