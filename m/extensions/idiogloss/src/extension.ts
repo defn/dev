@@ -12,9 +12,6 @@ let globalPanel: vscode.WebviewPanel | undefined;
 
 export function activate(context: vscode.ExtensionContext) {
   context.subscriptions.push(outputChannel);
-  // Note: outputChannel.show() is intentionally NOT called here.
-  // Auto-showing the Output panel is disruptive to the user's workflow.
-  // Users can manually view logs via Output panel > "idiogloss" dropdown.
   log("Extension activating...");
 
   // Helper to get current editor info
@@ -26,8 +23,8 @@ export function activate(context: vscode.ExtensionContext) {
     return { editor, document, fileName, content };
   }
 
-  // Helper to send update to panel
-  function sendUpdate() {
+  // Helper to send update to global panel
+  function sendGlobalUpdate() {
     if (!globalPanel) return;
     const { fileName, content } = getEditorInfo();
     globalPanel.webview.postMessage({
@@ -37,18 +34,21 @@ export function activate(context: vscode.ExtensionContext) {
     });
   }
 
-  const openPanelCmd = vscode.commands.registerCommand(
+  // ===========================================
+  // Command 1: Global panel (tracks active editor)
+  // Keybinding: Ctrl+Cmd+Delete / Ctrl+Meta+Backspace
+  // ===========================================
+  const openGlobalPanelCmd = vscode.commands.registerCommand(
     "idiogloss.openPanel",
     () => {
       // If panel already exists, reveal it and update
       if (globalPanel) {
         globalPanel.reveal(vscode.ViewColumn.Beside);
-        sendUpdate();
-        log("Panel revealed");
+        sendGlobalUpdate();
+        log("Global panel revealed");
         return;
       }
 
-      const { fileName } = getEditorInfo();
       log(`Creating global panel`);
 
       globalPanel = vscode.window.createWebviewPanel(
@@ -64,7 +64,7 @@ export function activate(context: vscode.ExtensionContext) {
         },
       );
 
-      log(`Panel created`);
+      log(`Global panel created`);
 
       // Listen for active editor changes
       const editorChangeListener = vscode.window.onDidChangeActiveTextEditor(
@@ -73,7 +73,7 @@ export function activate(context: vscode.ExtensionContext) {
             const fileName =
               editor.document.fileName.split("/").pop() ?? "Unknown";
             log(`Active editor changed: ${fileName}`);
-            sendUpdate();
+            sendGlobalUpdate();
           }
         },
       );
@@ -86,21 +86,21 @@ export function activate(context: vscode.ExtensionContext) {
             activeDoc &&
             e.document.uri.toString() === activeDoc.uri.toString()
           ) {
-            sendUpdate();
+            sendGlobalUpdate();
           }
         },
       );
 
       globalPanel.onDidChangeViewState((e) => {
         const state = e.webviewPanel.visible ? "visible" : "hidden";
-        log(`Panel is now ${state}`);
+        log(`Global panel is now ${state}`);
       });
 
       globalPanel.onDidDispose(() => {
         editorChangeListener.dispose();
         contentChangeListener.dispose();
         globalPanel = undefined;
-        log(`Panel disposed`);
+        log(`Global panel disposed`);
       });
 
       globalPanel.webview.html = getWebviewContent(
@@ -108,12 +108,75 @@ export function activate(context: vscode.ExtensionContext) {
         context.extensionUri,
       );
 
-      // Send initial data
-      sendUpdate();
+      sendGlobalUpdate();
     },
   );
 
-  context.subscriptions.push(openPanelCmd);
+  // ===========================================
+  // Command 2: Per-editor panel (tied to specific file)
+  // Keybinding: Cmd+Delete / Meta+Backspace
+  // ===========================================
+  const openEditorPanelCmd = vscode.commands.registerCommand(
+    "idiogloss.openEditorPanel",
+    () => {
+      const editor = vscode.window.activeTextEditor;
+      const document = editor?.document;
+      const fileName = document?.fileName.split("/").pop() ?? "Unknown";
+      const content = document?.getText() ?? "";
+
+      log(`Creating editor panel for: ${fileName}`);
+
+      const panel = vscode.window.createWebviewPanel(
+        "idiogloss-editor",
+        `idiogloss: ${fileName}`,
+        vscode.ViewColumn.Beside,
+        {
+          enableScripts: true,
+          retainContextWhenHidden: true,
+          localResourceRoots: [
+            vscode.Uri.joinPath(context.extensionUri, "dist"),
+          ],
+        },
+      );
+
+      log(`Editor panel created: ${fileName}`);
+
+      // Send updates when THIS document changes
+      const changeListener = vscode.workspace.onDidChangeTextDocument((e) => {
+        if (document && e.document.uri.toString() === document.uri.toString()) {
+          panel.webview.postMessage({
+            type: "update",
+            fileName,
+            content: e.document.getText(),
+          });
+        }
+      });
+
+      panel.onDidChangeViewState((e) => {
+        const state = e.webviewPanel.visible ? "visible" : "hidden";
+        log(`Editor panel ${fileName} is now ${state}`);
+      });
+
+      panel.onDidDispose(() => {
+        changeListener.dispose();
+        log(`Editor panel disposed: ${fileName}`);
+      });
+
+      panel.webview.html = getWebviewContent(
+        panel.webview,
+        context.extensionUri,
+      );
+
+      // Send initial data
+      panel.webview.postMessage({
+        type: "update",
+        fileName,
+        content,
+      });
+    },
+  );
+
+  context.subscriptions.push(openGlobalPanelCmd, openEditorPanelCmd);
 
   log("Extension activated");
 }

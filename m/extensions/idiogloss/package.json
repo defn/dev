@@ -18,7 +18,11 @@
     "commands": [
       {
         "command": "idiogloss.openPanel",
-        "title": "idiogloss: Open Panel",
+        "title": "idiogloss: Open Global Panel"
+      },
+      {
+        "command": "idiogloss.openEditorPanel",
+        "title": "idiogloss: Open Editor Panel",
         "icon": {
           "light": "media/icon-light.png",
           "dark": "media/icon-dark.png"
@@ -28,7 +32,7 @@
     "menus": {
       "editor/title": [
         {
-          "command": "idiogloss.openPanel",
+          "command": "idiogloss.openEditorPanel",
           "group": "navigation",
           "when": "editorFocus"
         }
@@ -39,6 +43,12 @@
         "command": "idiogloss.openPanel",
         "key": "ctrl+meta+backspace",
         "mac": "ctrl+cmd+backspace",
+        "when": "editorFocus"
+      },
+      {
+        "command": "idiogloss.openEditorPanel",
+        "key": "meta+backspace",
+        "mac": "cmd+backspace",
         "when": "editorFocus"
       }
     ]
