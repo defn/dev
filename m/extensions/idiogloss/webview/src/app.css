@@ -1,0 +1,75 @@
+/* Import fonts first */
+@import url("https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&display=swap");
+
+@import "tailwindcss";
+
+/* Hellsing Sinister Theme */
+@theme {
+  /* Blood reds */
+  --color-blood-900: #1a0000;
+  --color-blood-800: #2d0a0a;
+  --color-blood-700: #4a1010;
+  --color-blood-600: #6b1515;
+  --color-blood-500: #8b0000;
+  --color-blood-400: #b01c1c;
+  --color-blood-300: #cc3333;
+  --color-blood-200: #e05555;
+  --color-blood-100: #f0a0a0;
+
+  /* Hellsing dark grays */
+  --color-abyss-950: #0a0a0c;
+  --color-abyss-900: #0f0f12;
+  --color-abyss-800: #18181c;
+  --color-abyss-700: #222228;
+  --color-abyss-600: #2d2d35;
+  --color-abyss-500: #3a3a44;
+  --color-abyss-400: #52525e;
+  --color-abyss-300: #71717a;
+  --color-abyss-200: #a1a1aa;
+  --color-abyss-100: #d4d4d8;
+
+  /* Accent gold (for Hellsing organization emblems) */
+  --color-gold-500: #c9a227;
+  --color-gold-400: #d4b342;
+  --color-gold-300: #e0c55d;
+
+  /* Shadows and glows */
+  --shadow-blood: 0 0 20px rgba(139, 0, 0, 0.5);
+  --shadow-abyss: 0 4px 20px rgba(0, 0, 0, 0.8);
+
+  /* Fonts */
+  --font-hellsing: "Cinzel", "Times New Roman", serif;
+  --font-mono: "JetBrains Mono", "Fira Code", monospace;
+}
+
+/* Base styles */
+body {
+  @apply bg-abyss-950 text-abyss-100 font-sans;
+  background-image:
+    radial-gradient(ellipse at top, rgba(139, 0, 0, 0.1) 0%, transparent 50%),
+    radial-gradient(ellipse at bottom, rgba(0, 0, 0, 0.8) 0%, transparent 50%);
+  min-height: 100vh;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-abyss-900;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-blood-700 rounded;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-blood-600;
+}
+
+/* Selection */
+::selection {
+  @apply bg-blood-700 text-white;
+}

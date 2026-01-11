@@ -29,13 +29,82 @@ export class AgentClient {
   }
 
   /**
+   * Kill any existing server by connecting to the socket and sending shutdown.
+   * Also removes stale socket files.
+   */
+  private async killExistingServer(): Promise<void> {
+    const fs = await import("fs");
+
+    if (!fs.existsSync(this.socketPath)) {
+      log("[cleanup] No existing socket file found");
+      return;
+    }
+
+    log("[cleanup] Found existing socket, attempting to stop old server...");
+
+    // Try to connect and send shutdown
+    return new Promise((resolve) => {
+      const socket = net.createConnection(this.socketPath);
+      const timeout = setTimeout(() => {
+        log("[cleanup] Connection timeout, removing stale socket");
+        socket.destroy();
+        try {
+          fs.unlinkSync(this.socketPath);
+        } catch {
+          // Ignore
+        }
+        resolve();
+      }, 2000);
+
+      socket.on("connect", () => {
+        log("[cleanup] Connected to existing server, sending shutdown...");
+        socket.write(JSON.stringify({ action: "shutdown" }) + "\n");
+        // Give it a moment to process
+        setTimeout(() => {
+          clearTimeout(timeout);
+          socket.destroy();
+          // Wait a bit for server to actually stop
+          setTimeout(() => {
+            try {
+              if (fs.existsSync(this.socketPath)) {
+                fs.unlinkSync(this.socketPath);
+              }
+            } catch {
+              // Ignore
+            }
+            log("[cleanup] Old server shutdown complete");
+            resolve();
+          }, 500);
+        }, 500);
+      });
+
+      socket.on("error", (err) => {
+        clearTimeout(timeout);
+        log(`[cleanup] Could not connect to existing server: ${err.message}`);
+        // Socket file exists but nothing listening - remove it
+        try {
+          fs.unlinkSync(this.socketPath);
+          log("[cleanup] Removed stale socket file");
+        } catch {
+          // Ignore
+        }
+        resolve();
+      });
+    });
+  }
+
+  /**
    * Start the agent server process.
+   * Kills any existing server first to ensure clean state.
    */
   async startServer(_bazelWorkspace?: string): Promise<void> {
     if (this.serverProcess) {
-      log("Agent server already running");
+      log("Agent server already running (this instance)");
       return;
     }
+
+    // Kill any existing server from a previous extension instance
+    await this.killExistingServer();
 
     log(`Starting agent server at ${this.socketPath}`);
     log(`[server] Working directory: ${WORKSPACE_DIR}`);
@@ -72,8 +141,8 @@ export class AgentClient {
       this.connected = false;
     });
 
-    // Wait for server to start
-    await this.waitForSocket(5000);
+    // Wait for server to start (bazel run can take 10-15 seconds)
+    await this.waitForSocket(20000);
   }
 
   /**
@@ -82,13 +151,23 @@ export class AgentClient {
   private async waitForSocket(timeoutMs: number): Promise<void> {
     const start = Date.now();
     const fs = await import("fs");
+    let lastLog = 0;
 
     log(`[connect] Waiting for socket file: ${this.socketPath}`);
+    log(`[connect] Timeout: ${timeoutMs / 1000}s (bazel run takes ~10-15s)`);
 
     while (Date.now() - start < timeoutMs) {
       if (fs.existsSync(this.socketPath)) {
         log(`[connect] Socket file found after ${Date.now() - start}ms`);
         return;
+      }
+      // Log progress every 2 seconds
+      const elapsed = Date.now() - start;
+      if (elapsed - lastLog >= 2000) {
+        log(
+          `[connect] Still waiting... ${Math.round(elapsed / 1000)}s elapsed`,
+        );
+        lastLog = elapsed;
       }
       await new Promise((resolve) => setTimeout(resolve, 100));
     }
@@ -221,6 +300,16 @@ export class AgentClient {
       action: "stats",
       file_name: fileName,
       content,
+    });
+  }
+
+  /**
+   * Transform text with Alucard's voice, including time and disk info.
+   */
+  async alucard(text: string): Promise<AgentResponse> {
+    return this.send({
+      action: "alucard",
+      text,
     });
   }
 

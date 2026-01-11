@@ -97,7 +97,7 @@ export class GlobalPanel extends BasePanel {
       fileName,
       content,
     });
-    // Request stats from server (async, don't block)
-    this.requestStats(fileName, content);
+    // Request stats and alucard from server
+    this.onContentUpdate(fileName, content);
   }
 }

@@ -3,11 +3,12 @@
  */
 
 export interface AgentRequest {
-  action: "ping" | "query" | "shutdown" | "stats";
+  action: "ping" | "query" | "shutdown" | "stats" | "alucard";
   prompt?: string;
   max_turns?: number;
   content?: string;
   file_name?: string;
+  text?: string;
 }
 
 export interface ContentStats {
@@ -33,6 +34,7 @@ export interface AgentResponse {
   stats?: ContentStats;
   server_start_time?: number;
   server_pid?: number;
+  alucard_response?: string;
 }
 
 export type ResponseCallback = (response: AgentResponse) => void;

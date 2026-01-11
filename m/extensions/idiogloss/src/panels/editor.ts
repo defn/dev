@@ -71,7 +71,7 @@ export class EditorPanel extends BasePanel {
       fileName: this.fileName,
       content,
     });
-    // Request stats from server (async, don't block)
-    this.requestStats(this.fileName, content);
+    // Request stats and alucard from server
+    this.onContentUpdate(this.fileName, content);
   }
 }

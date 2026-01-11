@@ -7,12 +7,51 @@
 
 import * as vscode from "vscode";
 import { initLogger, log } from "./utils";
-import { GlobalPanel, EditorPanel } from "./panels";
+import {
+  GlobalPanel,
+  EditorPanel,
+  notifyPanelsServerConnected,
+  notifyPanelsServerDisconnected,
+} from "./panels";
 import { getAgentClient, disposeAgentClient } from "./agent";
+
+/** Status bar item for showing server state */
+let statusBarItem: vscode.StatusBarItem | undefined;
+
+function updateStatusBar(state: "starting" | "connected" | "disconnected") {
+  if (!statusBarItem) {
+    statusBarItem = vscode.window.createStatusBarItem(
+      vscode.StatusBarAlignment.Right,
+      100,
+    );
+    statusBarItem.command = "idiogloss.startAgent";
+  }
+
+  switch (state) {
+    case "starting":
+      statusBarItem.text = "$(sync~spin) Alucard awakening...";
+      statusBarItem.tooltip = "Agent server starting (bazel run)";
+      statusBarItem.backgroundColor = undefined;
+      break;
+    case "connected":
+      statusBarItem.text = "$(flame) Alucard";
+      statusBarItem.tooltip = "Agent server connected";
+      statusBarItem.backgroundColor = undefined;
+      break;
+    case "disconnected":
+      statusBarItem.text = "$(circle-slash) Alucard";
+      statusBarItem.tooltip = "Agent server disconnected - click to start";
+      statusBarItem.backgroundColor = new vscode.ThemeColor(
+        "statusBarItem.warningBackground",
+      );
+      break;
+  }
+  statusBarItem.show();
+}
 
 /**
  * Starts the Python agent server and establishes a connection.
- * The server communicates via Unix socket at /tmp/idiogloss-agent.sock.
+ * The server communicates via Unix socket at /tmp/idiogloss.sock.
  *
  * @returns Promise resolving to true if server started and connected successfully
  */
@@ -20,29 +59,38 @@ async function startAgentServer(): Promise<boolean> {
   const workspaceFolders = vscode.workspace.workspaceFolders;
   if (!workspaceFolders) {
     log("[startup] No workspace folder open, cannot start agent server");
+    updateStatusBar("disconnected");
     return false;
   }
 
   const bazelWorkspace = workspaceFolders[0].uri.fsPath;
   const client = getAgentClient();
 
+  updateStatusBar("starting");
+
   try {
     log(`[startup] Starting agent server in ${bazelWorkspace}`);
+    log("[startup] This may take 10-20 seconds (bazel run)...");
     await client.startServer(bazelWorkspace);
-    log("[startup] Server started, connecting...");
+    log("[startup] Server process started, connecting to socket...");
     await client.connect();
-    log("[startup] Connected, sending ping...");
+    log("[startup] Socket connected, sending ping...");
     const pong = await client.ping();
     if (pong) {
       log("[startup] Agent server started and connected successfully");
+      updateStatusBar("connected");
+      // Notify any panels that were created before server was ready
+      notifyPanelsServerConnected();
       return true;
     } else {
       log("[startup] Agent server started but ping failed");
+      updateStatusBar("disconnected");
       return false;
     }
   } catch (error) {
     const message = error instanceof Error ? error.message : String(error);
     log(`[startup] Failed to start agent server: ${message}`);
+    updateStatusBar("disconnected");
     return false;
   }
 }
@@ -148,6 +196,8 @@ export async function activate(context: vscode.ExtensionContext) {
     async () => {
       const client = getAgentClient();
       await client.stopServer();
+      updateStatusBar("disconnected");
+      notifyPanelsServerDisconnected();
       vscode.window.showInformationMessage("Agent server stopped");
     },
   );
@@ -159,6 +209,11 @@ export async function activate(context: vscode.ExtensionContext) {
     startAgentCmd,
     stopAgentCmd,
   );
+
+  // Add status bar to subscriptions for cleanup
+  if (statusBarItem) {
+    context.subscriptions.push(statusBarItem);
+  }
 
   log("Extension activated");
 }
