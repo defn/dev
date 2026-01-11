@@ -26,19 +26,19 @@ Then reload VS Code (`Ctrl+Shift+P` → "Developer: Reload Window").
 
 ## Commands
 
-| Command | Description |
-|---------|-------------|
-| `idiogloss: Open Global Panel` | Opens singleton panel tracking active editor |
-| `idiogloss: Open Editor Panel` | Opens panel for current file |
-| `idiogloss: Start Agent Server` | Manually start the Python agent |
-| `idiogloss: Stop Agent Server` | Stop the agent server |
-| `idiogloss: Query Agent` | Send a query to the agent |
+| Command                         | Description                                  |
+| ------------------------------- | -------------------------------------------- |
+| `idiogloss: Open Global Panel`  | Opens singleton panel tracking active editor |
+| `idiogloss: Open Editor Panel`  | Opens panel for current file                 |
+| `idiogloss: Start Agent Server` | Manually start the Python agent              |
+| `idiogloss: Stop Agent Server`  | Stop the agent server                        |
+| `idiogloss: Query Agent`        | Send a query to the agent                    |
 
 ## Keyboard Shortcuts
 
-| Platform | Global Panel | Editor Panel |
-|----------|--------------|--------------|
-| macOS | `Ctrl+Cmd+Backspace` | `Cmd+Backspace` |
+| Platform      | Global Panel          | Editor Panel     |
+| ------------- | --------------------- | ---------------- |
+| macOS         | `Ctrl+Cmd+Backspace`  | `Cmd+Backspace`  |
 | Windows/Linux | `Ctrl+Meta+Backspace` | `Meta+Backspace` |
 
 ## Architecture

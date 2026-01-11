@@ -4,11 +4,11 @@ Reusable tool implementations for MCP (Model Context Protocol) servers.
 
 ## Available Tools
 
-| Tool | Module | Description |
-|------|--------|-------------|
-| `get_time` | `tools.time` | Current date/time in multiple formats |
-| `get_disk_usage` | `tools.disk` | Filesystem space statistics |
-| `get_user_info` | `tools.user` | Current user/group information |
+| Tool             | Module       | Description                           |
+| ---------------- | ------------ | ------------------------------------- |
+| `get_time`       | `tools.time` | Current date/time in multiple formats |
+| `get_disk_usage` | `tools.disk` | Filesystem space statistics           |
+| `get_user_info`  | `tools.user` | Current user/group information        |
 
 ## Usage
 
