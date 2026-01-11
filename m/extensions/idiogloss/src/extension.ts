@@ -6,7 +6,7 @@
  */
 
 import * as vscode from "vscode";
-import { initLogger, log, Heartbeat } from "./utils";
+import { initLogger, log, Heartbeat, showAutoMessage } from "./utils";
 import {
   GlobalPanel,
   EditorPanel,
@@ -250,16 +250,12 @@ export async function activate(context: vscode.ExtensionContext) {
   const startAgentCmd = vscode.commands.registerCommand(
     "idiogloss.startAgent",
     async () => {
-      vscode.window.showInformationMessage("Starting agent server...");
+      showAutoMessage("Starting agent server...");
       const success = await startAgentServer();
       if (success) {
-        vscode.window.showInformationMessage(
-          "Agent server started and connected",
-        );
+        showAutoMessage("Agent server started and connected");
       } else {
-        vscode.window.showErrorMessage(
-          "Failed to start agent server (check logs)",
-        );
+        showAutoMessage("Failed to start agent server (check logs)");
       }
     },
   );
@@ -273,7 +269,7 @@ export async function activate(context: vscode.ExtensionContext) {
       await client.stopServer();
       updateStatusBar("disconnected");
       notifyPanelsServerDisconnected();
-      vscode.window.showInformationMessage("Agent server stopped");
+      showAutoMessage("Agent server stopped");
     },
   );
 

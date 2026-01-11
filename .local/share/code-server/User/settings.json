@@ -3,7 +3,7 @@
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "[jsonc]": {
-    "editor.defaultFormatter": "vscode.json-language-features"
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "[python]": {
     "diffEditor.ignoreTrimWhitespace": false
@@ -12,10 +12,10 @@
   "breadcrumbs.enabled": false,
   "calva.paredit.defaultKeyMap": "strict",
   "calva.prettyPrintingOptions": {
-    "enabled": true,
-    "maxLength": 50,
     "printEngine": "pprint",
-    "width": 120
+    "enabled": false,
+    "width": 120,
+    "maxLength": 50
   },
   "cue.formatTool": "cue fmt",
   "dev.containers.copyGitConfig": true,

@@ -5,3 +5,4 @@ export {
   type EditorInfo,
 } from "./activeEditor";
 export { Debouncer, Heartbeat, type HeartbeatOptions } from "./timers";
+export { showAutoMessage } from "./notifications";
