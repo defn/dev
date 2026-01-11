@@ -1,114 +1,492 @@
 # idiogloss
 
-A VS Code extension that opens a webview panel paired to your current editor.
+A VS Code extension that opens a webview panel paired to your current editor, showing file contents with live stats.
 
-## Usage
-
-1. Open any file in the editor
-2. Open the idiogloss panel using either:
-   - Click the pig snout icon in the editor title bar (top right, near split/more buttons)
-   - Keyboard shortcut (see below)
-3. A panel opens beside your editor showing the file contents
-
-### Keyboard Shortcuts
-
-| Platform | Shortcut |
-|----------|----------|
-| macOS | `Cmd + Delete` |
-| Chromebook | `Search + Backspace` |
-| Windows | `Win + Backspace` |
-| Linux | `Meta + Backspace` |
-
-The Search key on Chromebook (where Caps Lock usually is) maps to `meta`. On macOS, `cmd` is used instead since there's no `meta` key.
-
-## Development
-
-### Prerequisites
-
-- Node.js
-- pnpm
-- ImageMagick (for icon conversion)
-
-### Project Structure
-
-```
-idiogloss/
-├── src/
-│   └── extension.ts      # Main extension code
-├── webview/
-│   ├── src/
-│   │   ├── App.svelte    # Svelte UI component
-│   │   └── main.ts       # Webview entry point
-│   ├── index.html
-│   ├── vite.config.ts
-│   └── svelte.config.mjs
-├── dist/                  # Compiled webview (git-ignored)
-├── out/                   # Compiled extension JS (git-ignored)
-├── media/
-│   ├── icon-dark.svg     # Source icon for dark themes
-│   ├── icon-light.svg    # Source icon for light themes
-│   ├── icon-dark.png     # Compiled icon (used by VS Code)
-│   └── icon-light.png    # Compiled icon (used by VS Code)
-├── package.json           # Extension manifest
-├── tsconfig.json          # TypeScript config
-├── .vscodeignore          # Files to exclude from .vsix package
-└── .npmrc                 # pnpm config
-```
-
-### Key Files Explained
-
-- **package.json**: Defines the extension metadata, commands, menus, icons, and keybindings. The `contributes` section registers:
-  - `commands`: The "Open Panel" command with its icon
-  - `menus.editor/title`: Places the icon in the editor title bar
-  - `keybindings`: Keyboard shortcuts (uses `key` for default, `mac` for macOS override)
-
-- **src/extension.ts**: The main code that:
-  - Registers the command handler
-  - Creates a webview panel when the icon is clicked
-  - Passes the current filename to the webview
-
-- **webview/**: Svelte 5 app for the webview UI:
-  - Uses Vite for building
-  - Compiled output goes to `dist/`
-  - Communicates with extension via `postMessage`
-
-- **media/\*.svg**: Source icons (not packaged). Edit these to change the icon appearance.
-- **media/\*.png**: Compiled icons that VS Code actually uses. VS Code forces colors on SVG icons in the editor title bar, so we use PNGs to preserve colors.
-
-### Commands
+## Quick Start
 
 ```bash
 # Install dependencies
 pnpm install
 
-# Compile TypeScript
-pnpm compile
-
-# Watch mode (auto-recompile on changes)
-pnpm watch
-
-# Package as .vsix
-pnpm package
-
-# Build, package, and install in one step
+# Build and install the extension
 pnpm use
 ```
 
-### Development Workflow
+Then reload VS Code (Ctrl+Shift+P → "Developer: Reload Window").
 
-1. Edit `src/extension.ts`
-2. Run `pnpm use` to compile and install
-3. Reload VS Code window (Ctrl+Shift+P → "Developer: Reload Window")
-4. Test your changes
+## Usage
 
-### Debugging
+1. Open any file in the editor
+2. Click the pig snout icon in the editor title bar (top right)
+   - Or use keyboard shortcut (see below)
+3. A panel opens beside your editor showing file contents and stats
+4. Edit the file — the panel updates in real-time
 
-View extension logs in the Output panel:
+### Keyboard Shortcuts
+
+| Platform   | Shortcut             |
+| ---------- | -------------------- |
+| macOS      | `Cmd + Delete`       |
+| Windows    | `Win + Backspace`    |
+| Linux      | `Meta + Backspace`   |
+| Chromebook | `Search + Backspace` |
+
+The Search key on Chromebook (where Caps Lock usually is) maps to `meta`. On macOS, `cmd` is used since there's no `meta` key.
+
+---
+
+## Tech Stack
+
+This extension has two separate codebases that communicate via message passing:
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│                         VS Code                                  │
+│  ┌─────────────────────┐       ┌─────────────────────────────┐  │
+│  │   Extension Host    │       │         Webview             │  │
+│  │   (Node.js)         │       │         (Browser)           │  │
+│  │                     │       │                             │  │
+│  │  src/extension.ts   │──────▶│  webview/src/App.svelte    │  │
+│  │  - TypeScript       │ post  │  - Svelte 5                │  │
+│  │  - VS Code API      │ Msg   │  - Vite bundler            │  │
+│  │  - Compiled by tsc  │       │  - CSS variables           │  │
+│  └─────────────────────┘       └─────────────────────────────┘  │
+│           │                                │                     │
+│           ▼                                ▼                     │
+│       out/extension.js               dist/webview.js             │
+└─────────────────────────────────────────────────────────────────┘
+```
+
+### Component Relationships
+
+| Component                | Role                                                                 | Build Tool         | Output                 |
+| ------------------------ | -------------------------------------------------------------------- | ------------------ | ---------------------- |
+| **Extension** (`src/`)   | Registers commands, creates webview panels, listens to editor events | `tsc` (TypeScript) | `out/extension.js`     |
+| **Webview** (`webview/`) | Renders UI, displays file contents, calculates stats                 | Vite + Svelte      | `dist/webview.js`      |
+| **Turbo**                | Caches builds across the monorepo                                    | turborepo          | ~10x faster rebuilds   |
+| **vsce**                 | Packages everything into `.vsix`                                     | @vscode/vsce       | `idiogloss-0.0.1.vsix` |
+
+### Data Flow
+
+1. User clicks icon → Extension creates webview panel
+2. Extension reads editor content → sends `postMessage` to webview
+3. User edits file → `onDidChangeTextDocument` fires → Extension sends updated content
+4. Webview receives message → Svelte reactivity updates UI
+
+---
+
+## Project Structure
+
+```
+idiogloss/
+├── src/
+│   └── extension.ts        # Extension entry point (Node.js)
+├── webview/
+│   ├── src/
+│   │   ├── App.svelte      # UI component (Svelte 5)
+│   │   └── main.ts         # Webview entry point
+│   ├── index.html          # Dev server HTML (not packaged)
+│   ├── vite.config.ts      # Vite build configuration
+│   └── svelte.config.mjs   # Svelte preprocessor config
+├── dist/                   # Compiled webview (git-ignored)
+│   ├── webview.js          # Bundled Svelte app
+│   └── webview.css         # Extracted styles
+├── out/                    # Compiled extension (git-ignored)
+│   └── extension.js        # Compiled TypeScript
+├── media/
+│   ├── icon-dark.svg       # Source icon (editable)
+│   ├── icon-light.svg      # Source icon (editable)
+│   ├── icon-dark.png       # Compiled icon for dark themes
+│   └── icon-light.png      # Compiled icon for light themes
+├── package.json            # Extension manifest + npm scripts
+├── tsconfig.json           # TypeScript config for extension
+├── .vscodeignore           # Files excluded from .vsix
+├── .npmrc                  # pnpm configuration
+└── .gitignore              # Git ignores
+```
+
+---
+
+## Deep Dive: Implementation Details
+
+### Extension Entry Point (`src/extension.ts`)
+
+The extension runs in VS Code's Extension Host (Node.js process, separate from the UI).
+
+```typescript
+export function activate(context: vscode.ExtensionContext) {
+  // Register command that creates a webview panel
+  const openPanelCmd = vscode.commands.registerCommand("idiogloss.openPanel", () => {
+    // Get current editor content
+    const editor = vscode.window.activeTextEditor;
+    const document = editor?.document;
+
+    // Create webview panel
+    const panel = vscode.window.createWebviewPanel(
+      "idiogloss",                    // Panel type ID
+      `idiogloss: ${fileName}`,       // Panel title
+      vscode.ViewColumn.Beside,       // Open beside current editor
+      { enableScripts: true, ... }    // Options
+    );
+
+    // Send initial content to webview
+    panel.webview.postMessage({ type: "update", fileName, content });
+  });
+}
+```
+
+**Key APIs used:**
+
+- `vscode.commands.registerCommand` — Register the command
+- `vscode.window.createWebviewPanel` — Create the panel
+- `panel.webview.postMessage` — Send data to webview
+- `vscode.workspace.onDidChangeTextDocument` — Listen for edits
+
+### Webview Panel Options
+
+```typescript
+{
+  enableScripts: true,           // Allow JavaScript in webview
+  retainContextWhenHidden: true, // Keep state when panel hidden
+  localResourceRoots: [          // Security: limit file access
+    vscode.Uri.joinPath(context.extensionUri, "dist"),
+  ],
+}
+```
+
+**Why `retainContextWhenHidden: true`?**
+
+Without this, VS Code destroys the webview's JavaScript context when the panel is hidden (e.g., switching tabs, toggling terminal). When shown again, it recreates from scratch — losing all state.
+
+With this option, the webview stays in memory. The Svelte app keeps its state (file contents, calculated stats).
+
+**Trade-off:** Uses more memory. Acceptable for simple webviews like this.
+
+### Live Sync: Document Change Listener
+
+```typescript
+const changeListener = vscode.workspace.onDidChangeTextDocument((e) => {
+  if (document && e.document.uri.toString() === document.uri.toString()) {
+    panel.webview.postMessage({
+      type: "update",
+      fileName,
+      content: e.document.getText(),
+    });
+  }
+});
+
+panel.onDidDispose(() => {
+  changeListener.dispose(); // Clean up when panel closes
+});
+```
+
+This sends the full document content on every keystroke. For large files, this could be optimized to send only changed ranges — but for typical use, full content is fast enough.
+
+### Webview HTML Generation
+
+The extension generates HTML that loads the compiled Svelte bundle:
+
+```typescript
+function getWebviewContent(webview, extensionUri) {
+  const scriptUri = webview.asWebviewUri(
+    vscode.Uri.joinPath(extensionUri, "dist", "webview.js"),
+  );
+  const styleUri = webview.asWebviewUri(
+    vscode.Uri.joinPath(extensionUri, "dist", "webview.css"),
+  );
+
+  return `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="stylesheet" href="${styleUri}">
+</head>
+<body>
+  <div id="app"></div>
+  <script type="module" src="${scriptUri}"></script>
+</body>
+</html>`;
+}
+```
+
+**Why `asWebviewUri`?** Webviews run in an isolated context with a special `vscode-webview://` protocol. This method converts file paths to URIs the webview can access.
+
+### Svelte 5 Reactive State (`webview/src/App.svelte`)
+
+```svelte
+<script lang="ts">
+  let fileName = $state("");
+  let content = $state("");
+  let lineCount = $derived(content.split("\n").length);
+  let charCount = $derived(content.length);
+  let wordCount = $derived(content.trim() ? content.trim().split(/\s+/).length : 0);
+
+  window.addEventListener("message", (event) => {
+    const message = event.data;
+    if (message.type === "update") {
+      fileName = message.fileName;
+      content = message.content;
+    }
+  });
+</script>
+```
+
+**Svelte 5 Runes:**
+
+- `$state()` — Reactive variable (replaces `let x = ...` from Svelte 4)
+- `$derived()` — Computed value that auto-updates when dependencies change
+
+When `content` changes, `lineCount`, `charCount`, and `wordCount` automatically recalculate.
+
+### VS Code Theme Integration
+
+The webview CSS uses VS Code's CSS custom properties for theme matching:
+
+```css
+main {
+  font-family: var(--vscode-font-family);
+  color: var(--vscode-foreground);
+  background-color: var(--vscode-editor-background);
+}
+
+pre {
+  background-color: var(--vscode-textBlockQuote-background);
+}
+
+code {
+  font-family: var(--vscode-editor-font-family), monospace;
+  font-size: var(--vscode-editor-font-size);
+}
+```
+
+VS Code injects these variables into webviews automatically. The panel adapts to light/dark themes without extra code.
+
+### Vite Configuration (`webview/vite.config.ts`)
+
+```typescript
+export default defineConfig({
+  plugins: [svelte()],
+  build: {
+    outDir: "../dist", // Output to extension's dist/
+    emptyOutDir: true, // Clean before build
+    rollupOptions: {
+      output: {
+        entryFileNames: "webview.js", // Predictable filename
+        assetFileNames: "webview.[ext]", // webview.css
+      },
+    },
+  },
+});
+```
+
+**Why predictable filenames?** The extension hardcodes `dist/webview.js` and `dist/webview.css`. Without this config, Vite would generate hashed names like `webview-abc123.js`.
+
+### Svelte Config (`webview/svelte.config.mjs`)
+
+```javascript
+import { vitePreprocess } from "@sveltejs/vite-plugin-svelte";
+
+export default {
+  preprocess: vitePreprocess(),
+};
+```
+
+Enables `<script lang="ts">` in Svelte files. The `.mjs` extension avoids "module type" warnings in a CommonJS project.
+
+### TypeScript Configuration (`tsconfig.json`)
+
+```json
+{
+  "compilerOptions": {
+    "module": "commonjs", // VS Code extensions use CommonJS
+    "target": "ES2020", // Modern JavaScript features
+    "outDir": "out", // Compile to out/
+    "rootDir": "src", // Only compile src/
+    "strict": true, // Type safety
+    "esModuleInterop": true, // Import compatibility
+    "skipLibCheck": true // Faster compilation
+  }
+}
+```
+
+**Why CommonJS?** VS Code's extension host expects CommonJS modules (`require`/`module.exports`), not ES modules.
+
+---
+
+## Deep Dive: Package Configuration
+
+### package.json Manifest
+
+```json
+{
+  "name": "idiogloss",
+  "engines": { "vscode": "^1.107.0" },
+  "main": "./out/extension.js",
+  "activationEvents": ["onStartupFinished"],
+  "contributes": {
+    "commands": [...],
+    "menus": {...},
+    "keybindings": [...]
+  }
+}
+```
+
+**`engines.vscode: "^1.107.0"`** — Minimum VS Code version. Set to 1.107.0 for code-server compatibility.
+
+**`activationEvents: ["onStartupFinished"]`** — Extension loads after VS Code fully starts (lazy loading). Could be more specific (e.g., `onCommand:idiogloss.openPanel`) but startup-finished is simpler.
+
+### Command Registration
+
+```json
+"contributes": {
+  "commands": [{
+    "command": "idiogloss.openPanel",
+    "title": "idiogloss: Open Panel",
+    "icon": {
+      "light": "media/icon-light.png",
+      "dark": "media/icon-dark.png"
+    }
+  }]
+}
+```
+
+VS Code automatically picks light/dark icon based on theme.
+
+### Menu Placement
+
+```json
+"menus": {
+  "editor/title": [{
+    "command": "idiogloss.openPanel",
+    "group": "navigation",
+    "when": "editorFocus"
+  }]
+}
+```
+
+Places the icon in the editor title bar. `group: "navigation"` puts it with other nav icons. `when: "editorFocus"` shows it only when an editor is focused.
+
+### Keybindings
+
+```json
+"keybindings": [{
+  "command": "idiogloss.openPanel",
+  "key": "meta+backspace",
+  "mac": "cmd+backspace",
+  "when": "editorFocus"
+}]
+```
+
+**Platform handling:** `key` is the default; `mac` overrides for macOS. On macOS, there's no `meta` key, so `cmd` is used.
+
+### Icons: PNG vs SVG
+
+VS Code forces SVG colors to match the theme in the editor title bar. To preserve our custom pink pig snout, we use PNG icons instead.
+
+**Workflow:**
+
+1. Edit SVG source files in `media/`
+2. Convert to PNG:
+   ```bash
+   cd media
+   convert -background none icon-dark.svg icon-dark.png
+   convert -background none icon-light.svg icon-light.png
+   ```
+3. Rebuild extension
+
+### .vscodeignore
+
+```
+.gitignore
+src/
+tsconfig.json
+node_modules/
+pnpm-lock.yaml
+**/*.svg
+webview/
+.turbo/
+```
+
+Excludes development files from the packaged `.vsix`. Only includes:
+
+- `out/` — Compiled extension
+- `dist/` — Compiled webview
+- `media/*.png` — Icons
+- `package.json` — Manifest
+- `README.md` — Shown in marketplace
+
+### .npmrc
+
+```
+ignore-scripts=true
+loglevel=error
+```
+
+- `ignore-scripts=true` — Suppresses warnings about missing build scripts during `pnpm install`
+- `loglevel=error` — Reduces noise from deprecated dependency warnings
+
+---
+
+## Deep Dive: Build System
+
+### Build Scripts
+
+```json
+"scripts": {
+  "compile": "tsc",
+  "compile:webview": "vite build webview",
+  "build": "pnpm compile && pnpm compile:webview",
+  "watch": "tsc -w",
+  "package": "vsce package --no-dependencies --allow-missing-repository",
+  "use": "turbo run build --filter=idiogloss && pnpm package && code --install-extension idiogloss-*.vsix"
+}
+```
+
+| Script            | What it does                                   |
+| ----------------- | ---------------------------------------------- |
+| `compile`         | Compiles `src/` TypeScript → `out/` JavaScript |
+| `compile:webview` | Builds Svelte app → `dist/`                    |
+| `build`           | Runs both compiles                             |
+| `watch`           | Auto-recompile extension on changes            |
+| `package`         | Creates `.vsix` installer package              |
+| `use`             | Full pipeline: build → package → install       |
+
+### Turbo Integration
+
+In the monorepo's `turbo.json`:
+
+```json
+{
+  "idiogloss#build": {
+    "outputs": ["out/**", "dist/**"],
+    "inputs": ["src/**", "webview/**", "package.json", "tsconfig.json"]
+  }
+}
+```
+
+Turbo caches build outputs. If inputs haven't changed, it replays cached output (~10x faster).
+
+**Why filter?** `--filter=idiogloss` ensures only this package builds, not the entire monorepo.
+
+### vsce Flags
+
+```bash
+vsce package --no-dependencies --allow-missing-repository
+```
+
+- `--no-dependencies` — Don't bundle `node_modules` (extension has no runtime deps)
+- `--allow-missing-repository` — Skip repo field validation in package.json
+
+---
+
+## Debugging
+
+### View Extension Logs
 
 1. Open Output panel (View → Output, or `Ctrl+Shift+U`)
 2. Select "idiogloss" from the dropdown
 
 Logs include timestamps:
+
 ```
 [2025-01-11T02:00:00.000Z] Extension activating...
 [2025-01-11T02:00:00.001Z] Extension activated
@@ -116,59 +494,18 @@ Logs include timestamps:
 [2025-01-11T02:00:05.001Z] Panel created: example.ts
 ```
 
-**Note**: The Output panel does NOT auto-show on activation. This is intentional—auto-showing panels is disruptive to workflow. The `outputChannel.show()` API exists but we don't use it.
+The Output panel does NOT auto-show. This is intentional — auto-showing panels disrupts workflow.
 
-### Webview State Persistence
+### Debug Webview
 
-The webview uses `retainContextWhenHidden: true` to preserve its state when hidden (e.g., when switching tabs or showing/hiding the terminal).
+Open DevTools for the webview:
 
-```typescript
-const panel = vscode.window.createWebviewPanel(
-  "idiogloss",
-  `idiogloss: ${fileName}`,
-  vscode.ViewColumn.Beside,
-  {
-    enableScripts: true,
-    retainContextWhenHidden: true,  // Keeps state when panel is hidden
-    localResourceRoots: [...],
-  },
-);
-```
+- macOS: `Opt + Cmd + I`
+- Other: `Ctrl + Shift + I`
 
-**Why this matters**: Without this option, the webview's JavaScript context is destroyed when hidden and recreated when shown again. This causes the Svelte app to lose all its state (file contents, line counts, etc.).
+Or: Command Palette → "Developer: Open Webview Developer Tools"
 
-**Trade-off**: `retainContextWhenHidden` uses more memory since the webview stays in memory even when not visible. For simple webviews like idiogloss, this is acceptable.
-
-### Updating Icons
-
-1. Edit the SVG source files in `media/`
-2. Convert to PNG:
-   ```bash
-   cd media
-   convert -background none icon-dark.svg icon-dark.png
-   convert -background none icon-light.svg icon-light.png
-   ```
-3. Run `pnpm use` to rebuild
-
-### Why PNG Instead of SVG?
-
-VS Code overrides SVG colors in the editor title bar to match the theme. To preserve our custom pink pig snout colors, we use PNG icons instead. The SVGs are kept as editable source files but excluded from the final package via `.vscodeignore`.
-
-### Light vs Dark Icons
-
-VS Code automatically picks the right icon based on theme:
-
-- `icon-dark.png`: Shown in dark themes (lighter pink)
-- `icon-light.png`: Shown in light themes (darker pink for contrast)
-
-This is configured in `package.json`:
-
-```json
-"icon": {
-  "light": "media/icon-light.png",
-  "dark": "media/icon-dark.png"
-}
-```
+---
 
 ## Publishing
 
