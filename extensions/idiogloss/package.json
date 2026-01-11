@@ -1,0 +1,38 @@
+{
+  "name": "idiogloss",
+  "displayName": "Idiogloss",
+  "description": "AI-powered code assistant for your IDE",
+  "version": "0.0.1",
+  "publisher": "defn",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "idiogloss.hello",
+        "title": "Idiogloss: Hello"
+      }
+    ]
+  },
+  "scripts": {
+    "compile": "tsc",
+    "watch": "tsc -w",
+    "package": "vsce package --no-dependencies --allow-missing-repository",
+    "use": "pnpm compile && pnpm package && code --install-extension idiogloss-*.vsix"
+  },
+  "packageManager": "pnpm@10.28.0",
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "@types/vscode": "^1.85.0",
+    "@vscode/vsce": "^3.7.1",
+    "typescript": "^5.0.0"
+  }
+}
