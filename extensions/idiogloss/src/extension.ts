@@ -8,6 +8,7 @@ export function activate(context: vscode.ExtensionContext) {
     () => {
       const editor = vscode.window.activeTextEditor;
       const fileName = editor?.document.fileName.split("/").pop() ?? "Unknown";
+      const content = editor?.document.getText() ?? "";
 
       const panel = vscode.window.createWebviewPanel(
         "idiogloss",
@@ -15,17 +16,26 @@ export function activate(context: vscode.ExtensionContext) {
         vscode.ViewColumn.Beside,
         {
           enableScripts: true,
-        }
+        },
       );
 
-      panel.webview.html = getWebviewContent(fileName);
-    }
+      panel.webview.html = getWebviewContent(fileName, content);
+    },
   );
 
   context.subscriptions.push(openPanelCmd);
 }
 
-function getWebviewContent(fileName: string): string {
+function escapeHtml(text: string): string {
+  return text
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+}
+
+function getWebviewContent(fileName: string, content: string): string {
   return `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -42,10 +52,21 @@ function getWebviewContent(fileName: string): string {
       border-bottom: 1px solid var(--vscode-panel-border);
       padding-bottom: 10px;
     }
+    pre {
+      background-color: var(--vscode-textBlockQuote-background);
+      padding: 16px;
+      overflow: auto;
+      border-radius: 4px;
+    }
+    code {
+      font-family: var(--vscode-editor-font-family), monospace;
+      font-size: var(--vscode-editor-font-size);
+    }
   </style>
 </head>
 <body>
-  <h1>${fileName}</h1>
+  <h1>${escapeHtml(fileName)}</h1>
+  <pre><code>${escapeHtml(content)}</code></pre>
 </body>
 </html>`;
 }
