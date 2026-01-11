@@ -1,10 +1,49 @@
 #!/usr/bin/env python3
-"""Agentic example using Claude Agent SDK with MCP tools.
+"""Hello Agent - Example Claude SDK Integration with Verification.
 
-This script demonstrates:
-1. Creating an MCP server with custom tools
-2. Using ClaudeSDKClient to run an agent with tool access
-3. Verifying tool results match actual system state
+This agent demonstrates end-to-end tool usage with result verification.
+It's useful for testing that MCP tools return accurate data.
+
+## Purpose
+
+Unlike idiogloss (which provides a service), this agent is a test harness:
+
+1. Prompt Claude to use all three tools
+2. Parse structured response (TIME:, DISK_TOTAL:, etc.)
+3. Compare against actual system state
+4. Report PASS/FAIL for each check
+
+## Verification Strategy
+
+The agent asks Claude to return data in a parseable format:
+
+    TIME: <unix timestamp>
+    DISK_TOTAL: <bytes>
+    USER_UID: <uid>
+    ...
+
+Then `verify_results()` compares these against:
+- `datetime.now()` - Is time within 60 seconds?
+- `shutil.disk_usage("/")` - Do bytes match within 1%?
+- `os.getuid()/os.getgid()` - Exact match required
+
+## Why Verification Matters
+
+Tool results pass through multiple layers:
+1. Tool function executes
+2. Result serialized to JSON
+3. Sent to Claude API
+4. Claude interprets and reformats
+5. Response parsed by agent
+
+Any layer could introduce errors. This agent validates the full pipeline.
+
+## Usage
+
+    # Run with bazel
+    bazel run //agents/hello:hello_py
+
+    # Exit code: 0 = all checks passed, 1 = some failed
 """
 
 import asyncio

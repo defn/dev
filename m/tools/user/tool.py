@@ -1,4 +1,41 @@
-"""MCP tool that returns current user and group information."""
+"""User Info Tool - Current User/Group Details for MCP.
+
+Returns information about the user running the agent process.
+
+## Response Format
+
+    {
+        "uid": 1000,
+        "gid": 1000,
+        "username": "ubuntu",
+        "groupname": "ubuntu",
+        "home": "/home/ubuntu",
+        "shell": "/bin/bash",
+        "groups": ["ubuntu", "sudo", "docker"]
+    }
+
+## Why This Tool?
+
+Useful for:
+- Verifying agent runs as expected user
+- Debugging permission issues
+- Context for file path suggestions
+- Security auditing
+
+## Unix Concepts
+
+- `uid` - User ID (numeric identifier)
+- `gid` - Primary group ID
+- `groups` - Supplementary groups (sudo, docker, etc.)
+- `home` - Home directory path
+- `shell` - Default login shell
+
+## Error Handling
+
+If user/group lookup fails (e.g., running in container with
+minimal /etc/passwd), fields default to "unknown" rather than
+raising an exception.
+"""
 
 import grp
 import json
