@@ -1,4 +1,4 @@
 # Test root command shows hello subcommand
 exec defn --help
 stdout 'Available Commands:'
-stdout 'hello.*Hello World command using script pipeline'
+stdout 'hello.*Hello World command with CUE validation'

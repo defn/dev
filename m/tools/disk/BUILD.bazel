@@ -1,0 +1,41 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
+load("@pip//:requirements.bzl", "requirement")
+load("@rules_python//python:defs.bzl", "py_library", "py_test")
+
+py_library(
+    name = "disk_py",
+    srcs = [
+        "__init__.py",
+        "tool.py",
+    ],
+    imports = ["../.."],
+    visibility = ["//visibility:public"],
+    deps = [
+        requirement("claude-agent-sdk"),
+    ],
+)
+
+py_test(
+    name = "tool_py_test",
+    srcs = ["tool_test.py"],
+    main = "tool_test.py",
+    deps = [":disk_py"],
+)
+
+go_library(
+    name = "disk_go",
+    srcs = ["tool_go.go"],
+    importpath = "github.com/defn/dev/m/tools/disk",
+    visibility = ["//visibility:public"],
+    deps = [
+        "@com_github_modelcontextprotocol_go_sdk//mcp",
+        "@org_golang_x_sys//unix",
+    ],
+)
+
+go_test(
+    name = "tool_go_test",
+    srcs = ["tool_go_test.go"],
+    embed = [":disk_go"],
+    deps = ["@org_golang_x_sys//unix"],
+)

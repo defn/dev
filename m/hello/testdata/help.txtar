@@ -1,4 +1,4 @@
 # Test hello command help
 exec defn hello --help
-stdout 'Hello World command - demonstrates script-based greeting'
+stdout 'Hello World command - demonstrates CUE schema validation'
 stdout 'Usage:'

@@ -1,0 +1,64 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_binary", "go_library", "go_test")
+load("@pip//:requirements.bzl", "requirement")
+load("@rules_python//python:defs.bzl", "py_binary", "py_library", "py_test")
+
+py_library(
+    name = "mcp_py",
+    srcs = [
+        "__init__.py",
+        "server.py",
+    ],
+    imports = ["../.."],
+    visibility = ["//visibility:public"],
+    deps = [
+        "//tools/disk:disk_py",
+        "//tools/time:time_py",
+        "//tools/user:user_py",
+        requirement("claude-agent-sdk"),
+    ],
+)
+
+py_test(
+    name = "server_py_test",
+    srcs = ["server_py_test.py"],
+    deps = [":mcp_py"],
+)
+
+go_test(
+    name = "server_go_test",
+    srcs = ["server_go_test.go"],
+    embed = [":mcp_go"],
+)
+
+# Go MCP server library
+go_library(
+    name = "mcp_go",
+    srcs = ["server.go"],
+    importpath = "github.com/defn/dev/m/servers/hello",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//tools/disk:disk_go",
+        "//tools/time:time_go",
+        "//tools/user:user_go",
+        "@com_github_modelcontextprotocol_go_sdk//mcp",
+    ],
+)
+
+# MCP server binaries
+py_binary(
+    name = "server_py",
+    srcs = ["server_main.py"],
+    main = "server_main.py",
+    deps = [
+        "//tools/disk:disk_py",
+        "//tools/time:time_py",
+        "//tools/user:user_py",
+        requirement("mcp"),
+    ],
+)
+
+go_binary(
+    name = "server_go",
+    embed = ["//servers/hello/cmd"],
+    visibility = ["//visibility:public"],
+)

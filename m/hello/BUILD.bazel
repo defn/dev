@@ -1,33 +1,55 @@
-load("@pip//:requirements.bzl", "requirement")
-load("@rules_python//python:defs.bzl", "py_binary", "py_test")
-load("@rules_uv//uv:pip.bzl", "pip_compile")
+load("@io_bazel_rules_go//go:def.bzl", "go_binary", "go_library", "go_test")
 
 exports_files([
-    "requirements_lock.txt",
+    "hello.cue",
 ])
 
-# Generate requirements_lock.txt from requirements.in using uv
-pip_compile(
-    name = "generate_requirements_lock",
-    requirements_in = "requirements.in",
-    requirements_txt = "requirements_lock.txt",
-)
-
-# Python agent example using Claude SDK with MCP tools
-py_binary(
-    name = "hello_py",
-    srcs = ["hello.py"],
-    main = "hello.py",
+go_library(
+    name = "hello_lib",
+    srcs = [
+        "greeting.go",
+        "main.go",
+    ],
+    embedsrcs = ["hello.cue"],
+    importpath = "github.com/defn/dev/m/hello",
+    visibility = ["//visibility:private"],
     deps = [
-        "//hello/mcp:mcp_py",
-        requirement("claude-agent-sdk"),
+        "//:m",
+        "//cmd/base",
+        "//cmd/runner",
+        "//command/root",
+        "//cue",
+        "@com_github_bitfield_script//:script",
+        "@com_github_samber_lo//:lo",
+        "@com_github_sourcegraph_conc//pool",
+        "@com_github_spf13_cobra//:cobra",
+        "@com_github_spf13_viper//:viper",
+        "@in_gopkg_yaml_v3//:yaml_v3",
+        "@org_uber_go_fx//:fx",
+        "@org_uber_go_zap//:zap",
     ],
 )
 
-py_test(
-    name = "hello_py_test",
-    srcs = ["hello_py_test.py"],
-    deps = [
-        "//hello/mcp:mcp_py",
-    ],
+go_binary(
+    name = "hello_go",
+    embed = [":hello_lib"],
+    pure = "on",
+    visibility = ["//visibility:public"],
+)
+
+go_test(
+    name = "greeting_test",
+    srcs = ["greeting_test.go"],
+    embed = [":hello_lib"],
+)
+
+go_test(
+    name = "hello_test",
+    srcs = ["main_test.go"],
+    data = glob(
+        ["testdata/**"],
+        allow_empty = True,
+    ),
+    embed = [":hello_lib"],
+    deps = ["@com_github_rogpeppe_go_internal//testscript"],
 )

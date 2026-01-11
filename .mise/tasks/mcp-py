@@ -1,5 +1,0 @@
-#!/bin/bash
-#MISE description="Run Python MCP server for Claude CLI"
-
-cd /home/ubuntu/m
-exec bazel run --noshow_progress //hello/mcp:server_py

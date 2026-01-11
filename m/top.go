@@ -7,5 +7,5 @@ import (
 //go:embed cue.mod/module.cue
 var CueModule string
 
-//go:embed hello/cue/hello.cue
+//go:embed hello/hello.cue
 var Schema embed.FS

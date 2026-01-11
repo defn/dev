@@ -1,0 +1,12 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "cmd",
+    srcs = ["server_main.go"],
+    importpath = "github.com/defn/dev/m/servers/hello/cmd",
+    visibility = ["//servers/hello:__pkg__"],
+    deps = [
+        "//servers/hello:mcp_go",
+        "@com_github_modelcontextprotocol_go_sdk//mcp",
+    ],
+)

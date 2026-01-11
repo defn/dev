@@ -137,7 +137,7 @@ pip = use_extension("@rules_python//python/extensions:pip.bzl", "pip")
 pip.parse(
     hub_name = "pip",
     python_version = "3.13.9",
-    requirements_lock = "//hello:requirements_lock.txt",
+    requirements_lock = "//agents/hello:requirements_lock.txt",
 )
 use_repo(pip, "pip")
 

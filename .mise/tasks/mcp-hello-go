@@ -1,0 +1,5 @@
+#!/bin/bash
+#MISE description="Run Go MCP server for Claude CLI"
+
+cd /home/ubuntu/m
+exec bazel run --noshow_progress //servers/hello:server_go
