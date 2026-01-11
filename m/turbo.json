@@ -8,6 +8,10 @@
     "@defn/demo#build": {
       "outputs": ["dist/**"],
       "inputs": ["pepr.ts", "capabilities/**", "package.json", "tsconfig.json"]
+    },
+    "idiogloss#build": {
+      "outputs": ["out/**", "dist/**"],
+      "inputs": ["src/**", "webview/**", "package.json", "tsconfig.json"]
     }
   }
 }

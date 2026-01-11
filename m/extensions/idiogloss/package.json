@@ -5,7 +5,7 @@
   "version": "0.0.1",
   "publisher": "defn",
   "engines": {
-    "vscode": "^1.85.0"
+    "vscode": "^1.107.0"
   },
   "categories": [
     "Other"
@@ -45,15 +45,20 @@
   },
   "scripts": {
     "compile": "tsc",
+    "compile:webview": "vite build webview",
+    "build": "pnpm compile && pnpm compile:webview",
     "watch": "tsc -w",
     "package": "vsce package --no-dependencies --allow-missing-repository",
-    "use": "pnpm compile && pnpm package && code --install-extension idiogloss-*.vsix"
+    "use": "turbo run build --filter=idiogloss && pnpm package && code --install-extension idiogloss-*.vsix"
   },
   "packageManager": "pnpm@10.28.0",
   "devDependencies": {
-    "@types/node": "^20.0.0",
-    "@types/vscode": "^1.85.0",
+    "@sveltejs/vite-plugin-svelte": "^6.2.4",
+    "@types/node": "^20.19.28",
+    "@types/vscode": "^1.107.0",
     "@vscode/vsce": "^3.7.1",
-    "typescript": "^5.0.0"
+    "svelte": "^5.46.1",
+    "typescript": "^5.9.3",
+    "vite": "^7.3.1"
   }
 }

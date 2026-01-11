@@ -3,3 +3,4 @@ packages:
   - "s"
   - "site/*"
   - "k3d/pepr"
+  - "extensions/*"

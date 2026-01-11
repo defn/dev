@@ -1,4 +1,6 @@
 import * as vscode from "vscode";
+import * as fs from "fs";
+import * as path from "path";
 
 const outputChannel = vscode.window.createOutputChannel("idiogloss");
 
@@ -29,6 +31,9 @@ export function activate(context: vscode.ExtensionContext) {
         vscode.ViewColumn.Beside,
         {
           enableScripts: true,
+          localResourceRoots: [
+            vscode.Uri.joinPath(context.extensionUri, "dist"),
+          ],
         },
       );
 
@@ -43,7 +48,17 @@ export function activate(context: vscode.ExtensionContext) {
         log(`Panel disposed: ${fileName}`);
       });
 
-      panel.webview.html = getWebviewContent(fileName, content);
+      panel.webview.html = getWebviewContent(
+        panel.webview,
+        context.extensionUri,
+      );
+
+      // Send initial data to webview
+      panel.webview.postMessage({
+        type: "update",
+        fileName,
+        content,
+      });
     },
   );
 
@@ -52,47 +67,27 @@ export function activate(context: vscode.ExtensionContext) {
   log("Extension activated");
 }
 
-function escapeHtml(text: string): string {
-  return text
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;")
-    .replace(/'/g, "&#039;");
-}
+function getWebviewContent(
+  webview: vscode.Webview,
+  extensionUri: vscode.Uri,
+): string {
+  const scriptUri = webview.asWebviewUri(
+    vscode.Uri.joinPath(extensionUri, "dist", "webview.js"),
+  );
+  const styleUri = webview.asWebviewUri(
+    vscode.Uri.joinPath(extensionUri, "dist", "webview.css"),
+  );
 
-function getWebviewContent(fileName: string, content: string): string {
   return `<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <style>
-    body {
-      font-family: var(--vscode-font-family);
-      padding: 20px;
-      color: var(--vscode-foreground);
-      background-color: var(--vscode-editor-background);
-    }
-    h1 {
-      border-bottom: 1px solid var(--vscode-panel-border);
-      padding-bottom: 10px;
-    }
-    pre {
-      background-color: var(--vscode-textBlockQuote-background);
-      padding: 16px;
-      overflow: auto;
-      border-radius: 4px;
-    }
-    code {
-      font-family: var(--vscode-editor-font-family), monospace;
-      font-size: var(--vscode-editor-font-size);
-    }
-  </style>
+  <link rel="stylesheet" href="${styleUri}">
 </head>
 <body>
-  <h1>${escapeHtml(fileName)}</h1>
-  <pre><code>${escapeHtml(content)}</code></pre>
+  <div id="app"></div>
+  <script type="module" src="${scriptUri}"></script>
 </body>
 </html>`;
 }
