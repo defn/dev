@@ -25,7 +25,7 @@ func batchProcessAllGalleries() {
 		os.Exit(1)
 	}
 
-	// Find all w-?? and w-??? directories in pub/fm/
+	// Find all w-??, w-???, and w-???? directories in pub/fm/
 	sourceBase := "pub/fm"
 	entries, err := ioutil.ReadDir(sourceBase)
 	if err != nil {
@@ -39,9 +39,10 @@ func batchProcessAllGalleries() {
 			continue
 		}
 		name := entry.Name()
-		// Match w-?? or w-???
+		// Match w-??, w-???, or w-????
 		if (len(name) == 4 && strings.HasPrefix(name, "w-")) ||
-			(len(name) == 5 && strings.HasPrefix(name, "w-")) {
+			(len(name) == 5 && strings.HasPrefix(name, "w-")) ||
+			(len(name) == 6 && strings.HasPrefix(name, "w-")) {
 			wDirs = append(wDirs, name)
 		}
 	}
@@ -570,14 +571,17 @@ func generatePerWPageWithIndex(sourceBase, templateFile string, variantIndex map
 func generateGalleryIndex() {
 	fmt.Fprintf(os.Stderr, "Generating gallery index...\n")
 
-	// Read w-??.png and w-???.png files from pub/fm directory
+	// Read w-??.png, w-???.png, and w-????.png files from pub/fm directory
 	pattern1 := filepath.Join("pub/fm", "w-??.png")
 	pattern2 := filepath.Join("pub/fm", "w-???.png")
+	pattern3 := filepath.Join("pub/fm", "w-????.png")
 
 	matches1, _ := filepath.Glob(pattern1)
 	matches2, _ := filepath.Glob(pattern2)
+	matches3, _ := filepath.Glob(pattern3)
 
 	allMatches := append(matches1, matches2...)
+	allMatches = append(allMatches, matches3...)
 
 	// Sort by modification time
 	type fileWithTime struct {
