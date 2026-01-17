@@ -45,7 +45,10 @@ go_test(
 
 go_test(
     name = "hello_test",
-    srcs = ["main_test.go"],
+    srcs = [
+        "greeting_test.go",
+        "main_test.go",
+    ],
     data = glob(
         ["testdata/**"],
         allow_empty = True,

@@ -46,7 +46,7 @@ bazel_dep(name = "rules_python", version = "1.7.0")
 bazel_dep(name = "rules_uv", version = "0.89.2")
 
 go_sdk = use_extension("@io_bazel_rules_go//go:extensions.bzl", "go_sdk")
-go_sdk.download(version = "1.25.5")
+go_sdk.download(version = "1.25.6")
 go_sdk.host()
 
 go_deps = use_extension("@bazel_gazelle//:extensions.bzl", "go_deps")
@@ -77,7 +77,6 @@ use_repo(
     "com_github_khan_genqlient",
     "com_github_kr_text",
     "com_github_labstack_echo_v4",
-    "com_github_lann_builder",
     "com_github_logrusorgru_aurora",
     "com_github_lucasb_eyer_go_colorful",
     "com_github_makenowjust_heredoc_v2",

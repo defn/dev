@@ -37,3 +37,4 @@ go_test(
     srcs = ["tool_go_test.go"],
     embed = [":user_go"],
 )
+
