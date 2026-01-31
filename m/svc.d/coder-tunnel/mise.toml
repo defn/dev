@@ -1,5 +1,5 @@
 [tools]
-cloudflared = "2025.11.1"
+cloudflared = "2026.1.2"
 
 [tasks.default]
 dir = "{{cwd}}"
