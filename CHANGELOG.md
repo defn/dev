@@ -1,5 +1,57 @@
 # Changelog
 
+## [1.60.0](https://github.com/defn/dev/compare/v1.59.2...v1.60.0) (2026-02-07)
+
+
+### Features
+
+* add Go MCP server with time, disk, and user tools ([9889387](https://github.com/defn/dev/commit/9889387ea9ea2f86836580c72ebcef51649633d9))
+* add idiogloss VS Code extension scaffold ([87314cf](https://github.com/defn/dev/commit/87314cfc8810ba2a203371c25c18fa944a54d045))
+* **cv:** add commit mode with parallel processing and refactor blurmap ([3514e1e](https://github.com/defn/dev/commit/3514e1ec0738e5c8cd3c811ae18118da1d483f12))
+* **cv:** add comprehensive consistency checks to report mode ([e7742ad](https://github.com/defn/dev/commit/e7742ad194ef7bcc09d44739a7d08b2b47607d4b))
+* **cv:** add conflict resolution for re-curated galleries in commit mode ([012eed3](https://github.com/defn/dev/commit/012eed30d8b2bb12ac0688ef3947535316c00b5f))
+* **cv:** add coverage verification to database statistics ([fd3e009](https://github.com/defn/dev/commit/fd3e0094b0b6ae745316a5f57652b283071e3de9))
+* **cv:** add curation gallery support and enhance fixup mode ([d3b607a](https://github.com/defn/dev/commit/d3b607a82b99b6229a7d8444684fb42aa4711271))
+* **cv:** add report mode and fix import state management ([62ab366](https://github.com/defn/dev/commit/62ab36660a49e847a79b526cddf702cb7204f31f))
+* **cv:** add support for w-???? (4-digit) image gallery patterns ([c639ff8](https://github.com/defn/dev/commit/c639ff895796c25931bb176ad4f33e4fb9594ad1))
+* **cv:** add todo/fixup modes, refactor user mode, optimize scanning ([0b86e32](https://github.com/defn/dev/commit/0b86e323b6dad0156388bd7cc9819e411e81aed8))
+* **cv:** add upres file consistency checks to report mode ([3326f66](https://github.com/defn/dev/commit/3326f66ac2443a9730e5cf7064181b85425cad5d))
+* **cv:** add zero-length file consistency checks to report mode ([d8e0021](https://github.com/defn/dev/commit/d8e0021acb85eb68b6ef222b6cdac9105cd07c5a))
+* **cv:** generate sorted image index in commit mode ([13477ae](https://github.com/defn/dev/commit/13477ae9f616fbb0352e26de87e19ebf8a568dc6))
+* **cv:** migrate image tracking from filesystem to SQLite database ([c3ce3fb](https://github.com/defn/dev/commit/c3ce3fb5cabfdeadcad95ef41d3dd44ffe803cff))
+* **hello:** add p subpackage for greeting utilities ([4943e83](https://github.com/defn/dev/commit/4943e83864436a5ee7f860dab20546dd3364acd6))
+* **hello:** add Python support with MCP tools and server ([2c27796](https://github.com/defn/dev/commit/2c2779635da110553d853e92f5222a3f28717f40))
+* **idiogloss:** add Android companion app with Capacitor ([186ef06](https://github.com/defn/dev/commit/186ef064e66c8659855e55df788b9197e69b7070))
+* **idiogloss:** add both global and per-editor panel commands ([f2768ea](https://github.com/defn/dev/commit/f2768ea485de119938c3dd4aabd29a29da485a7c))
+* **idiogloss:** add debouncing, status bar, and server sync improvements ([369ad3c](https://github.com/defn/dev/commit/369ad3ccf80b3a6b0640b39e362832e1cf43d445))
+* **idiogloss:** add keyboard shortcut Cmd+Delete ([cd703ab](https://github.com/defn/dev/commit/cd703ab64b22b520b02b74ea6d258c6bc9585745))
+* **idiogloss:** add live sync of editor content to webview ([59215d1](https://github.com/defn/dev/commit/59215d1b21330e0534c0424d7545b49a83f6fe55))
+* **idiogloss:** add output channel logging ([3bf944e](https://github.com/defn/dev/commit/3bf944e435e5033dd1f7b373267621f29fa4e464))
+* **idiogloss:** add Python backend agent with Unix socket IPC ([098fb82](https://github.com/defn/dev/commit/098fb8284b99df6b78abc2e864673765abbb8a21))
+* **idiogloss:** add Svelte webview and turbo build ([4bdbc5e](https://github.com/defn/dev/commit/4bdbc5e59292c9ae496955af4d9b3f7f8189ba6a))
+* **idiogloss:** add webview panel with pig snout icon ([01a94e6](https://github.com/defn/dev/commit/01a94e61cea51b49bff3541c2d490f6d6b406878))
+* **idiogloss:** auto-dismiss notification popups after 500ms ([030606b](https://github.com/defn/dev/commit/030606b9b60fc77bc306e5fde41016c9b5bb7e0e))
+* **idiogloss:** disable port forwarding notifications on activation ([c9cf76e](https://github.com/defn/dev/commit/c9cf76ef1fefeb3d6487e9f4ea85f96d5c990984))
+* **idiogloss:** display editor content in webview panel ([30309ab](https://github.com/defn/dev/commit/30309aba201c00b6258fb21ec26ebbfd846ba9fd))
+* **idiogloss:** global panel that tracks active editor ([508417b](https://github.com/defn/dev/commit/508417bcde8abb866e3990e79a1d71504a9b221a))
+* **idiogloss:** stream agent progress updates to panel ([005a50e](https://github.com/defn/dev/commit/005a50e19dd59e96414c930d722f210ef6b4e047))
+* **mise:** add mcp task for Claude CLI integration ([673baf8](https://github.com/defn/dev/commit/673baf8c5a263d27ff5fbfe5a7ba408a291d7794))
+
+
+### Bug Fixes
+
+* **build:** use pure Go sqlite and pin gvisor version ([ba53920](https://github.com/defn/dev/commit/ba53920839e3bc5fcb61b9614158ae1b1cc07c7f))
+* **cv:** clarify timeout vs wget errors in download.sh ([080dbdc](https://github.com/defn/dev/commit/080dbdc3c07df1bc5f9dad3576de06361128246a))
+* **idiogloss:** regenerate requirements lock file ([fa60de8](https://github.com/defn/dev/commit/fa60de89b22090522e0bed1f950f136d48563328))
+* pin tablewriter to v0.0.5 to fix Bazel build ([6d3c0ed](https://github.com/defn/dev/commit/6d3c0ed90d2570b49f8a65a1f8faf2ecb1328e34))
+* preserve image file extensions and add JPEG/PNG support ([e6e4a4d](https://github.com/defn/dev/commit/e6e4a4d52fc8d1d705db1cc54aa23a702086c50e))
+
+
+### Performance Improvements
+
+* **cv:** add in-memory filesystem cache to report mode ([17539c6](https://github.com/defn/dev/commit/17539c6db29acf8309193df708425f1d84c208fe))
+* **cv:** optimize users mode to skip cached pages and continue from last page ([a0e6c05](https://github.com/defn/dev/commit/a0e6c05045934bed0fbce45d0608b096399ef1a6))
+
 ## [1.59.2](https://github.com/defn/dev/compare/v1.59.1...v1.59.2) (2025-12-22)
 
 
