@@ -290,3 +290,4 @@ __pycache__
 !.config/starship.toml
 .cagent
 .bun
+.ollama
